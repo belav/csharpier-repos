@@ -9,18 +9,12 @@ namespace Internal.IL.Stubs
     {
         TypeDesc IPrefixMangledType.BaseType
         {
-            get
-            {
-                return ManagedType;
-            }
+            get { return ManagedType; }
         }
 
         string IPrefixMangledType.Prefix
         {
-            get
-            {
-                return NamePrefix;
-            }
+            get { return NamePrefix; }
         }
     }
 }

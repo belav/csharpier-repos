@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ChangeTracking.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class NullableStringDictionaryComparer<TElement, TCollection> : ValueComparer<TCollection>
+public sealed class NullableStringDictionaryComparer<TElement, TCollection>
+    : ValueComparer<TCollection>
     where TCollection : class, IEnumerable<KeyValuePair<string, TElement?>>
     where TElement : struct
 {
@@ -23,9 +24,8 @@ public sealed class NullableStringDictionaryComparer<TElement, TCollection> : Va
         : base(
             (a, b) => Compare(a, b, (ValueComparer<TElement>)elementComparer),
             o => GetHashCode(o, (ValueComparer<TElement>)elementComparer),
-            source => Snapshot(source, (ValueComparer<TElement>)elementComparer, readOnly))
-    {
-    }
+            source => Snapshot(source, (ValueComparer<TElement>)elementComparer, readOnly)
+        ) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,10 +33,13 @@ public sealed class NullableStringDictionaryComparer<TElement, TCollection> : Va
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override Type Type
-        => typeof(TCollection);
+    public override Type Type => typeof(TCollection);
 
-    private static bool Compare(TCollection? a, TCollection? b, ValueComparer<TElement> elementComparer)
+    private static bool Compare(
+        TCollection? a,
+        TCollection? b,
+        ValueComparer<TElement> elementComparer
+    )
     {
         if (a is not IReadOnlyDictionary<string, TElement?> aDict)
         {
@@ -92,14 +95,20 @@ public sealed class NullableStringDictionaryComparer<TElement, TCollection> : Va
         return hash.ToHashCode();
     }
 
-    private static TCollection Snapshot(TCollection source, ValueComparer<TElement> elementComparer, bool readOnly)
+    private static TCollection Snapshot(
+        TCollection source,
+        ValueComparer<TElement> elementComparer,
+        bool readOnly
+    )
     {
         if (readOnly)
         {
             return source;
         }
 
-        var snapshot = new Dictionary<string, TElement?>(((IReadOnlyDictionary<string, TElement?>)source).Count);
+        var snapshot = new Dictionary<string, TElement?>(
+            ((IReadOnlyDictionary<string, TElement?>)source).Count
+        );
         foreach (var (key, element) in source)
         {
             snapshot.Add(key, element is null ? null : elementComparer.Snapshot(element.Value));

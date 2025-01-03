@@ -12,7 +12,7 @@ namespace System.Web.Http
         {
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent("Default User")
+                Content = new StringContent("Default User"),
             };
         }
 
@@ -20,7 +20,7 @@ namespace System.Web.Http
         {
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent("User Posted")
+                Content = new StringContent("User Posted"),
             };
         }
 
@@ -28,7 +28,7 @@ namespace System.Web.Http
         {
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent("User Updated")
+                Content = new StringContent("User Updated"),
             };
         }
 
@@ -36,7 +36,7 @@ namespace System.Web.Http
         {
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent("User Deleted")
+                Content = new StringContent("User Deleted"),
             };
         }
     }

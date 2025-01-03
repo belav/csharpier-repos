@@ -3,7 +3,6 @@
 
 using System;
 using System.Linq.Expressions;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -24,7 +23,11 @@ namespace Moq.Tests
             {
                 var first = GetMatch(() => Order.IsSmallRE());
                 var second = GetMatch(() => Order.IsSmallRE());
-                Assert.Equal(first.RenderExpression, second.RenderExpression, ExpressionComparer.Default);
+                Assert.Equal(
+                    first.RenderExpression,
+                    second.RenderExpression,
+                    ExpressionComparer.Default
+                );
             }
 
             [Fact]
@@ -32,7 +35,11 @@ namespace Moq.Tests
             {
                 var first = GetMatch(() => Order.IsSmallerThanRE(123M));
                 var second = GetMatch(() => Order.IsSmallerThanRE(123M));
-                Assert.Equal(first.RenderExpression, second.RenderExpression, ExpressionComparer.Default);
+                Assert.Equal(
+                    first.RenderExpression,
+                    second.RenderExpression,
+                    ExpressionComparer.Default
+                );
             }
         }
 
@@ -227,7 +234,10 @@ namespace Moq.Tests
 
             public static Order IsSmallRE()
             {
-                return Match.Create<Order>(order => order.MetricTons < 1000M, () => Order.IsSmallRE());
+                return Match.Create<Order>(
+                    order => order.MetricTons < 1000M,
+                    () => Order.IsSmallRE()
+                );
             }
 
             public static Order IsLarge()
@@ -237,7 +247,10 @@ namespace Moq.Tests
 
             public static Order IsLargeRE()
             {
-                return Match.Create<Order>(order => order.MetricTons >= 1000M, () => Order.IsLargeRE());
+                return Match.Create<Order>(
+                    order => order.MetricTons >= 1000M,
+                    () => Order.IsLargeRE()
+                );
             }
 
             public static Order IsSmallerThan(decimal threshold)
@@ -247,7 +260,10 @@ namespace Moq.Tests
 
             public static Order IsSmallerThanRE(decimal threshold)
             {
-                return Match.Create<Order>(order => order.MetricTons < threshold, () => Order.IsSmallerThanRE(threshold));
+                return Match.Create<Order>(
+                    order => order.MetricTons < threshold,
+                    () => Order.IsSmallerThanRE(threshold)
+                );
             }
 
             public static Order IsLargerThan(decimal threshold)
@@ -257,7 +273,10 @@ namespace Moq.Tests
 
             public static Order IsLargerThanRE(decimal threshold)
             {
-                return Match.Create<Order>(order => order.MetricTons < threshold, () => Order.IsLargerThanRE(threshold));
+                return Match.Create<Order>(
+                    order => order.MetricTons < threshold,
+                    () => Order.IsLargerThanRE(threshold)
+                );
             }
 
             public static Order PretendIsAny()

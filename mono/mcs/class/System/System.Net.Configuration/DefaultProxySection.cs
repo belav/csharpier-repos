@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,94 +34,102 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
-	public sealed class DefaultProxySection : ConfigurationSection
-	{
-		#region Fields
+    public sealed class DefaultProxySection : ConfigurationSection
+    {
+        #region Fields
 
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty bypassListProp;
-		static ConfigurationProperty enabledProp;
-		static ConfigurationProperty moduleProp;
-		static ConfigurationProperty proxyProp;
-		static ConfigurationProperty useDefaultCredentialsProp;
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty bypassListProp;
+        static ConfigurationProperty enabledProp;
+        static ConfigurationProperty moduleProp;
+        static ConfigurationProperty proxyProp;
+        static ConfigurationProperty useDefaultCredentialsProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		static DefaultProxySection ()
-		{
-			bypassListProp = new ConfigurationProperty ("bypasslist", typeof (BypassElementCollection), null);
-			enabledProp = new ConfigurationProperty ("enabled", typeof (bool), true);
-			moduleProp = new ConfigurationProperty ("module", typeof (ModuleElement), null);
-			proxyProp = new ConfigurationProperty ("proxy", typeof (ProxyElement), null);
-			useDefaultCredentialsProp = new ConfigurationProperty ("useDefaultCredentials", typeof (bool), false);
-			properties = new ConfigurationPropertyCollection ();
+        static DefaultProxySection()
+        {
+            bypassListProp = new ConfigurationProperty(
+                "bypasslist",
+                typeof(BypassElementCollection),
+                null
+            );
+            enabledProp = new ConfigurationProperty("enabled", typeof(bool), true);
+            moduleProp = new ConfigurationProperty("module", typeof(ModuleElement), null);
+            proxyProp = new ConfigurationProperty("proxy", typeof(ProxyElement), null);
+            useDefaultCredentialsProp = new ConfigurationProperty(
+                "useDefaultCredentials",
+                typeof(bool),
+                false
+            );
+            properties = new ConfigurationPropertyCollection();
 
-			properties.Add (bypassListProp);
-			properties.Add (enabledProp);
-			properties.Add (moduleProp);
-			properties.Add (proxyProp);
-			properties.Add (useDefaultCredentialsProp);
-		}
+            properties.Add(bypassListProp);
+            properties.Add(enabledProp);
+            properties.Add(moduleProp);
+            properties.Add(proxyProp);
+            properties.Add(useDefaultCredentialsProp);
+        }
 
-		public DefaultProxySection ()
-		{
-		}
+        public DefaultProxySection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[ConfigurationProperty ("bypasslist")]
-		public BypassElementCollection BypassList {
-			get { return (BypassElementCollection) base [bypassListProp]; }
-		}
+        [ConfigurationProperty("bypasslist")]
+        public BypassElementCollection BypassList
+        {
+            get { return (BypassElementCollection)base[bypassListProp]; }
+        }
 
-		[ConfigurationProperty ("enabled", DefaultValue = "True")]
-		public bool Enabled {
-			get { return (bool) base [enabledProp]; }
-			set { base [enabledProp] = value; }
-		}
+        [ConfigurationProperty("enabled", DefaultValue = "True")]
+        public bool Enabled
+        {
+            get { return (bool)base[enabledProp]; }
+            set { base[enabledProp] = value; }
+        }
 
-		[ConfigurationProperty ("module")]
-		public ModuleElement Module {
-			get { return (ModuleElement) base [moduleProp]; }
-		}
+        [ConfigurationProperty("module")]
+        public ModuleElement Module
+        {
+            get { return (ModuleElement)base[moduleProp]; }
+        }
 
-		[ConfigurationProperty ("proxy")]
-		public ProxyElement Proxy {
-			get { return (ProxyElement) base [proxyProp]; }
-		}
+        [ConfigurationProperty("proxy")]
+        public ProxyElement Proxy
+        {
+            get { return (ProxyElement)base[proxyProp]; }
+        }
 
-		[ConfigurationProperty ("useDefaultCredentials", DefaultValue = "False")]
-		public bool UseDefaultCredentials {
-			get { return (bool) base [useDefaultCredentialsProp]; }
-			set { base [useDefaultCredentialsProp] = value; }
-		}
+        [ConfigurationProperty("useDefaultCredentials", DefaultValue = "False")]
+        public bool UseDefaultCredentials
+        {
+            get { return (bool)base[useDefaultCredentialsProp]; }
+            set { base[useDefaultCredentialsProp] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		[MonoTODO]
-		protected override void PostDeserialize ()
-		{
-		}
+        [MonoTODO]
+        protected override void PostDeserialize() { }
 
-		[MonoTODO]
-		protected override void Reset (ConfigurationElement parentElement)
-		{
-		}
+        [MonoTODO]
+        protected override void Reset(ConfigurationElement parentElement) { }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }
 
 #endif

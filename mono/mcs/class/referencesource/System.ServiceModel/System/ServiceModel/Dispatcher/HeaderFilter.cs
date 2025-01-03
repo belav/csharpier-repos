@@ -4,20 +4,18 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
 
     abstract class HeaderFilter : MessageFilter
     {
         protected HeaderFilter()
-            : base()
-        {
-        }
+            : base() { }
 
         public override bool Match(MessageBuffer buffer)
         {

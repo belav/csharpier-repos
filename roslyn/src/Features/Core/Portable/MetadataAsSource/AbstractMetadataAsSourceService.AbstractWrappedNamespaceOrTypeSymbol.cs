@@ -11,11 +11,17 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 {
     internal partial class AbstractMetadataAsSourceService
     {
-        private abstract class AbstractWrappedNamespaceOrTypeSymbol : AbstractWrappedSymbol, INamespaceOrTypeSymbol
+        private abstract class AbstractWrappedNamespaceOrTypeSymbol
+            : AbstractWrappedSymbol,
+                INamespaceOrTypeSymbol
         {
             private readonly INamespaceOrTypeSymbol _symbol;
 
-            protected AbstractWrappedNamespaceOrTypeSymbol(INamespaceOrTypeSymbol symbol, bool canImplementImplicitly, IDocumentationCommentFormattingService docCommentFormattingService)
+            protected AbstractWrappedNamespaceOrTypeSymbol(
+                INamespaceOrTypeSymbol symbol,
+                bool canImplementImplicitly,
+                IDocumentationCommentFormattingService docCommentFormattingService
+            )
                 : base(symbol, canImplementImplicitly, docCommentFormattingService)
             {
                 _symbol = symbol;

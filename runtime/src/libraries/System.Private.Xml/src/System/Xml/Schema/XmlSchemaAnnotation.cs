@@ -19,8 +19,10 @@ namespace System.Xml.Schema
             set { _id = value; }
         }
 
-        [XmlElement("documentation", typeof(XmlSchemaDocumentation)),
-         XmlElement("appinfo", typeof(XmlSchemaAppInfo))]
+        [
+            XmlElement("documentation", typeof(XmlSchemaDocumentation)),
+            XmlElement("appinfo", typeof(XmlSchemaAppInfo))
+        ]
         public XmlSchemaObjectCollection Items
         {
             get { return _items; }

@@ -39,7 +39,8 @@ public abstract class RelationalConventionSetBuilder : ProviderConventionSetBuil
     /// <param name="relationalDependencies">Parameter object containing relational dependencies for this service.</param>
     protected RelationalConventionSetBuilder(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
         : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
@@ -58,32 +59,64 @@ public abstract class RelationalConventionSetBuilder : ProviderConventionSetBuil
     {
         var conventionSet = base.CreateConventionSet();
 
-        conventionSet.Add(new RelationalColumnAttributeConvention(Dependencies, RelationalDependencies));
-        conventionSet.Add(new RelationalColumnCommentAttributeConvention(Dependencies, RelationalDependencies));
-        conventionSet.Add(new RelationalTableAttributeConvention(Dependencies, RelationalDependencies));
-        conventionSet.Add(new RelationalTableCommentAttributeConvention(Dependencies, RelationalDependencies));
-        conventionSet.Add(new RelationalDbFunctionAttributeConvention(Dependencies, RelationalDependencies));
-        conventionSet.Add(new RelationalPropertyJsonPropertyNameAttributeConvention(Dependencies, RelationalDependencies));
-        conventionSet.Add(new RelationalNavigationJsonPropertyNameAttributeConvention(Dependencies, RelationalDependencies));
-        conventionSet.Add(new TableSharingConcurrencyTokenConvention(Dependencies, RelationalDependencies));
+        conventionSet.Add(
+            new RelationalColumnAttributeConvention(Dependencies, RelationalDependencies)
+        );
+        conventionSet.Add(
+            new RelationalColumnCommentAttributeConvention(Dependencies, RelationalDependencies)
+        );
+        conventionSet.Add(
+            new RelationalTableAttributeConvention(Dependencies, RelationalDependencies)
+        );
+        conventionSet.Add(
+            new RelationalTableCommentAttributeConvention(Dependencies, RelationalDependencies)
+        );
+        conventionSet.Add(
+            new RelationalDbFunctionAttributeConvention(Dependencies, RelationalDependencies)
+        );
+        conventionSet.Add(
+            new RelationalPropertyJsonPropertyNameAttributeConvention(
+                Dependencies,
+                RelationalDependencies
+            )
+        );
+        conventionSet.Add(
+            new RelationalNavigationJsonPropertyNameAttributeConvention(
+                Dependencies,
+                RelationalDependencies
+            )
+        );
+        conventionSet.Add(
+            new TableSharingConcurrencyTokenConvention(Dependencies, RelationalDependencies)
+        );
         conventionSet.Add(new TableNameFromDbSetConvention(Dependencies, RelationalDependencies));
         conventionSet.Add(new PropertyOverridesConvention(Dependencies, RelationalDependencies));
         conventionSet.Add(new CheckConstraintConvention(Dependencies, RelationalDependencies));
         conventionSet.Add(new StoredProcedureConvention(Dependencies, RelationalDependencies));
-        conventionSet.Add(new TableValuedDbFunctionConvention(Dependencies, RelationalDependencies));
+        conventionSet.Add(
+            new TableValuedDbFunctionConvention(Dependencies, RelationalDependencies)
+        );
         conventionSet.Add(new StoreGenerationConvention(Dependencies, RelationalDependencies));
         conventionSet.Add(new EntitySplittingConvention(Dependencies, RelationalDependencies));
         conventionSet.Add(new DiscriminatorLengthConvention(Dependencies, RelationalDependencies));
-        conventionSet.Add(new EntityTypeHierarchyMappingConvention(Dependencies, RelationalDependencies));
-        conventionSet.Add(new SequenceUniquificationConvention(Dependencies, RelationalDependencies));
+        conventionSet.Add(
+            new EntityTypeHierarchyMappingConvention(Dependencies, RelationalDependencies)
+        );
+        conventionSet.Add(
+            new SequenceUniquificationConvention(Dependencies, RelationalDependencies)
+        );
         conventionSet.Add(new SharedTableConvention(Dependencies, RelationalDependencies));
         conventionSet.Add(new RelationalMapToJsonConvention(Dependencies, RelationalDependencies));
 
         conventionSet.Replace<ValueGenerationConvention>(
-            new RelationalValueGenerationConvention(Dependencies, RelationalDependencies));
+            new RelationalValueGenerationConvention(Dependencies, RelationalDependencies)
+        );
         conventionSet.Replace<QueryFilterRewritingConvention>(
-            new RelationalQueryFilterRewritingConvention(Dependencies, RelationalDependencies));
-        conventionSet.Replace<RuntimeModelConvention>(new RelationalRuntimeModelConvention(Dependencies, RelationalDependencies));
+            new RelationalQueryFilterRewritingConvention(Dependencies, RelationalDependencies)
+        );
+        conventionSet.Replace<RuntimeModelConvention>(
+            new RelationalRuntimeModelConvention(Dependencies, RelationalDependencies)
+        );
 
         return conventionSet;
     }

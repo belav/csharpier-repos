@@ -19,43 +19,68 @@ public class HelixTestRunnerOptions
         {
             new Option(
                 aliases: new string[] { "--target", "-t" },
-                description: "The test dll to run")
-                { Argument = new Argument<string>(), Required = true },
-
+                description: "The test dll to run"
+            )
+            {
+                Argument = new Argument<string>(),
+                Required = true,
+            },
             new Option(
                 aliases: new string[] { "--runtime" },
-                description: "The version of the ASP.NET runtime being installed and used")
-            { Argument = new Argument<string>(), Required = true },
-
+                description: "The version of the ASP.NET runtime being installed and used"
+            )
+            {
+                Argument = new Argument<string>(),
+                Required = true,
+            },
             new Option(
                 aliases: new string[] { "--queue" },
-                description: "The name of the Helix queue being run on")
-            { Argument = new Argument<string>(), Required = true },
-
+                description: "The name of the Helix queue being run on"
+            )
+            {
+                Argument = new Argument<string>(),
+                Required = true,
+            },
             new Option(
                 aliases: new string[] { "--arch" },
-                description: "The architecture being run on")
-            { Argument = new Argument<string>(), Required = true },
-
+                description: "The architecture being run on"
+            )
+            {
+                Argument = new Argument<string>(),
+                Required = true,
+            },
             new Option(
                 aliases: new string[] { "--playwright" },
-                description: "Whether to install Microsoft.Playwright browsers or not")
-            { Argument = new Argument<bool>(), Required = true },
-
+                description: "Whether to install Microsoft.Playwright browsers or not"
+            )
+            {
+                Argument = new Argument<bool>(),
+                Required = true,
+            },
             new Option(
                 aliases: new string[] { "--quarantined" },
-                description: "Whether quarantined tests should run or not")
-            { Argument = new Argument<bool>(), Required = true },
-
+                description: "Whether quarantined tests should run or not"
+            )
+            {
+                Argument = new Argument<bool>(),
+                Required = true,
+            },
             new Option(
                 aliases: new string[] { "--helixTimeout" },
-                description: "The timeout duration of the Helix job")
-            { Argument = new Argument<string>(), Required = true },
-
+                description: "The timeout duration of the Helix job"
+            )
+            {
+                Argument = new Argument<string>(),
+                Required = true,
+            },
             new Option(
                 aliases: new string[] { "--source" },
-                description: "The restore sources to use during testing")
-            { Argument = new Argument<string>() { Arity = ArgumentArity.ZeroOrMore }, Required = true }
+                description: "The restore sources to use during testing"
+            )
+            {
+                Argument = new Argument<string>() { Arity = ArgumentArity.ZeroOrMore },
+                Required = true,
+            },
         };
 
         var parseResult = command.Parse(args);
@@ -68,7 +93,10 @@ public class HelixTestRunnerOptions
             Quarantined = parseResult.ValueForOption<bool>("--quarantined"),
             RuntimeVersion = sharedFxVersion,
             Target = parseResult.ValueForOption<string>("--target"),
-            Timeout = TimeSpan.Parse(parseResult.ValueForOption<string>("--helixTimeout"), CultureInfo.InvariantCulture),
+            Timeout = TimeSpan.Parse(
+                parseResult.ValueForOption<string>("--helixTimeout"),
+                CultureInfo.InvariantCulture
+            ),
 
             // When targeting pack builds, it has exactly the same version as the shared framework.
             AspNetRef = $"Microsoft.AspNetCore.App.Ref.{sharedFxVersion}.nupkg",

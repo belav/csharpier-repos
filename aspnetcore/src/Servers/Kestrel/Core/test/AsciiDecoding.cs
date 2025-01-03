@@ -4,8 +4,8 @@
 using System;
 using System.Linq;
 using System.Numerics;
-using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
@@ -62,7 +62,9 @@ public class AsciiDecodingTests
                 var byteRange = Enumerable.Range(1, length).Select(x => (byte)x).ToArray();
                 byteRange[position] = b;
 
-                Assert.Throws<InvalidOperationException>(() => new Span<byte>(byteRange).GetAsciiStringNonNullCharacters());
+                Assert.Throws<InvalidOperationException>(
+                    () => new Span<byte>(byteRange).GetAsciiStringNonNullCharacters()
+                );
             }
         }
     }
@@ -70,7 +72,10 @@ public class AsciiDecodingTests
     [Fact]
     private void LargeAllocationProducesCorrectResults()
     {
-        var byteRange = Enumerable.Range(0, 16384 + 64).Select(x => (byte)((x & 0x7f) | 0x01)).ToArray();
+        var byteRange = Enumerable
+            .Range(0, 16384 + 64)
+            .Select(x => (byte)((x & 0x7f) | 0x01))
+            .ToArray();
         var expectedByteRange = byteRange.Concat(byteRange).ToArray();
 
         var span = new Span<byte>(expectedByteRange);
@@ -101,12 +106,20 @@ public class AsciiDecodingTests
             Assert.True(StringUtilities.BytesOrdinalEqualsStringAndAscii(s, span));
 
             // One off end
-            Assert.False(StringUtilities.BytesOrdinalEqualsStringAndAscii(s, span.Slice(0, span.Length - 1)));
-            Assert.False(StringUtilities.BytesOrdinalEqualsStringAndAscii(s.Substring(0, s.Length - 1), span));
+            Assert.False(
+                StringUtilities.BytesOrdinalEqualsStringAndAscii(s, span.Slice(0, span.Length - 1))
+            );
+            Assert.False(
+                StringUtilities.BytesOrdinalEqualsStringAndAscii(s.Substring(0, s.Length - 1), span)
+            );
 
             // One off start
-            Assert.False(StringUtilities.BytesOrdinalEqualsStringAndAscii(s, span.Slice(1, span.Length - 1)));
-            Assert.False(StringUtilities.BytesOrdinalEqualsStringAndAscii(s.Substring(1, s.Length - 1), span));
+            Assert.False(
+                StringUtilities.BytesOrdinalEqualsStringAndAscii(s, span.Slice(1, span.Length - 1))
+            );
+            Assert.False(
+                StringUtilities.BytesOrdinalEqualsStringAndAscii(s.Substring(1, s.Length - 1), span)
+            );
         }
     }
 

@@ -18,31 +18,66 @@ internal sealed class PredicatePolicy : IOutputCachePolicy
     /// </summary>
     /// <param name="asyncPredicate">The predicate.</param>
     /// <param name="policy">The policy.</param>
-    public PredicatePolicy(Func<OutputCacheContext, ValueTask<bool>> asyncPredicate, IOutputCachePolicy policy)
+    public PredicatePolicy(
+        Func<OutputCacheContext, ValueTask<bool>> asyncPredicate,
+        IOutputCachePolicy policy
+    )
     {
         _predicate = asyncPredicate;
         _policy = policy;
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.CacheRequestAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.CacheRequestAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
-        return ExecuteAwaited(static (policy, context, cancellationToken) => policy.CacheRequestAsync(context, cancellationToken), _policy, context, cancellationToken);
+        return ExecuteAwaited(
+            static (policy, context, cancellationToken) =>
+                policy.CacheRequestAsync(context, cancellationToken),
+            _policy,
+            context,
+            cancellationToken
+        );
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.ServeFromCacheAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeFromCacheAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
-        return ExecuteAwaited(static (policy, context, cancellationToken) => policy.ServeFromCacheAsync(context, cancellationToken), _policy, context, cancellationToken);
+        return ExecuteAwaited(
+            static (policy, context, cancellationToken) =>
+                policy.ServeFromCacheAsync(context, cancellationToken),
+            _policy,
+            context,
+            cancellationToken
+        );
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.ServeResponseAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeResponseAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
-        return ExecuteAwaited(static (policy, context, cancellationToken) => policy.ServeResponseAsync(context, cancellationToken), _policy, context, cancellationToken);
+        return ExecuteAwaited(
+            static (policy, context, cancellationToken) =>
+                policy.ServeResponseAsync(context, cancellationToken),
+            _policy,
+            context,
+            cancellationToken
+        );
     }
 
-    private ValueTask ExecuteAwaited(Func<IOutputCachePolicy, OutputCacheContext, CancellationToken, ValueTask> action, IOutputCachePolicy policy, OutputCacheContext context, CancellationToken cancellationToken)
+    private ValueTask ExecuteAwaited(
+        Func<IOutputCachePolicy, OutputCacheContext, CancellationToken, ValueTask> action,
+        IOutputCachePolicy policy,
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         ArgumentNullException.ThrowIfNull(action);
 

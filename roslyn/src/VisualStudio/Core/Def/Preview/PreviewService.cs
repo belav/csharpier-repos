@@ -18,7 +18,10 @@ using Microsoft.VisualStudio.Shell.Interop;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 {
     [ExportWorkspaceServiceFactory(typeof(IPreviewDialogService), ServiceLayer.Host), Shared]
-    internal class PreviewDialogService : ForegroundThreadAffinitizedObject, IPreviewDialogService, IWorkspaceServiceFactory
+    internal class PreviewDialogService
+        : ForegroundThreadAffinitizedObject,
+            IPreviewDialogService,
+            IWorkspaceServiceFactory
     {
         private readonly IVsPreviewChangesService _previewChanges;
         private readonly IComponentModel _componentModel;
@@ -26,16 +29,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PreviewDialogService(IThreadingContext threadingContext, SVsServiceProvider serviceProvider)
+        public PreviewDialogService(
+            IThreadingContext threadingContext,
+            SVsServiceProvider serviceProvider
+        )
             : base(threadingContext)
         {
-            _previewChanges = (IVsPreviewChangesService)serviceProvider.GetService(typeof(SVsPreviewChangesService));
+            _previewChanges = (IVsPreviewChangesService)
+                serviceProvider.GetService(typeof(SVsPreviewChangesService));
             _componentModel = (IComponentModel)serviceProvider.GetService(typeof(SComponentModel));
             _imageService = (IVsImageService2)serviceProvider.GetService(typeof(SVsImageService));
         }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => this;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) => this;
 
         public Solution PreviewChanges(
             string title,
@@ -45,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             Glyph topLevelGlyph,
             Solution newSolution,
             Solution oldSolution,
-            bool showCheckBoxes = true)
+            bool showCheckBoxes = true
+        )
         {
             var engine = new PreviewEngine(
                 ThreadingContext,
@@ -58,7 +65,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 oldSolution,
                 _componentModel,
                 _imageService,
-                showCheckBoxes);
+                showCheckBoxes
+            );
             _previewChanges.PreviewChanges(engine);
             engine.CloseWorkspace();
             return engine.FinalSolution;

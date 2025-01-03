@@ -15,14 +15,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         private class SignatureHelpSource : ForegroundThreadAffinitizedObject, ISignatureHelpSource
         {
             public SignatureHelpSource(IThreadingContext threadingContext)
-                : base(threadingContext)
-            {
-            }
+                : base(threadingContext) { }
 
-            public void AugmentSignatureHelpSession(ISignatureHelpSession session, IList<ISignature> signatures)
+            public void AugmentSignatureHelpSession(
+                ISignatureHelpSession session,
+                IList<ISignature> signatures
+            )
             {
                 AssertIsForeground();
-                if (!session.Properties.TryGetProperty<SignatureHelpPresenterSession>(s_augmentSessionKey, out var presenterSession))
+                if (
+                    !session.Properties.TryGetProperty<SignatureHelpPresenterSession>(
+                        s_augmentSessionKey,
+                        out var presenterSession
+                    )
+                )
                 {
                     return;
                 }
@@ -37,9 +43,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 return session.SelectedSignature;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

@@ -10,7 +10,12 @@ namespace System.Xml.Schema
 
     internal sealed class AutoValidator : BaseValidator
     {
-        public AutoValidator(XmlValidatingReaderImpl reader, XmlSchemaCollection schemaCollection, IValidationEventHandling eventHandling) : base(reader, schemaCollection, eventHandling)
+        public AutoValidator(
+            XmlValidatingReaderImpl reader,
+            XmlSchemaCollection schemaCollection,
+            IValidationEventHandling eventHandling
+        )
+            : base(reader, schemaCollection, eventHandling)
         {
             schemaInfo = new SchemaInfo();
         }
@@ -66,7 +71,10 @@ namespace System.Xml.Schema
 
             if (reader.NodeType == XmlNodeType.Element)
             {
-                SchemaType schemaType = SchemaNames.SchemaTypeFromRoot(reader.LocalName, reader.NamespaceURI);
+                SchemaType schemaType = SchemaNames.SchemaTypeFromRoot(
+                    reader.LocalName,
+                    reader.NamespaceURI
+                );
                 if (schemaType == SchemaType.XSD)
                 {
                     return ValidationType.Schema;
@@ -96,7 +104,10 @@ namespace System.Xml.Schema
                             reader.MoveToElement();
                             return ValidationType.Schema;
                         }
-                        else if (Ref.Equal(objectNs, SchemaNames.QnDtDt.Namespace) && Ref.Equal(objectName, SchemaNames.QnDtDt.Name))
+                        else if (
+                            Ref.Equal(objectNs, SchemaNames.QnDtDt.Namespace)
+                            && Ref.Equal(objectName, SchemaNames.QnDtDt.Name)
+                        )
                         {
                             reader.SchemaTypeObject = XmlSchemaDatatype.FromXdrName(reader.Value);
                             reader.MoveToElement();

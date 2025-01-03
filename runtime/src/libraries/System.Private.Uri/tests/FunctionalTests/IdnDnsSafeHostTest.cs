@@ -82,7 +82,12 @@ namespace System.PrivateUri.Tests
         [InlineData("BAR", "bar", "bar", "bar")]
         [InlineData("\u00FC", "\u00FC", "\u00FC", "xn--tda")]
         [InlineData("\u00FC.\u00FC", "\u00FC.\u00FC", "\u00FC.\u00FC", "xn--tda.xn--tda")]
-        [InlineData("\u00FC.foo.\u00FC", "\u00FC.foo.\u00FC", "\u00FC.foo.\u00FC", "xn--tda.foo.xn--tda")]
+        [InlineData(
+            "\u00FC.foo.\u00FC",
+            "\u00FC.foo.\u00FC",
+            "\u00FC.foo.\u00FC",
+            "xn--tda.foo.xn--tda"
+        )]
         [InlineData("xn--tda", "xn--tda", "xn--tda", "xn--tda")]
         [InlineData("xn--tda.xn--tda", "xn--tda.xn--tda", "xn--tda.xn--tda", "xn--tda.xn--tda")]
         [InlineData("127.0.0.1", "127.0.0.1", "127.0.0.1", "127.0.0.1")]
@@ -93,8 +98,18 @@ namespace System.PrivateUri.Tests
         [InlineData("[123:123::]", "[123:123::]", "123:123::", "123:123::")]
         [InlineData("[123:123::%]", "[123:123::]", "123:123::%", "123:123::%")]
         [InlineData("[123:123::%foo]", "[123:123::]", "123:123::%foo", "123:123::%foo")]
-        [InlineData("[123:123::%foo%20bar]", "[123:123::]", "123:123::%foo%20bar", "123:123::%foo%20bar")]
-        public void Host_DnsSafeHost_IdnHost_ProcessedCorrectly(string hostString, string host, string dnsSafeHost, string idnHost)
+        [InlineData(
+            "[123:123::%foo%20bar]",
+            "[123:123::]",
+            "123:123::%foo%20bar",
+            "123:123::%foo%20bar"
+        )]
+        public void Host_DnsSafeHost_IdnHost_ProcessedCorrectly(
+            string hostString,
+            string host,
+            string dnsSafeHost,
+            string idnHost
+        )
         {
             Asserts($"wss://{hostString}", host, dnsSafeHost, idnHost);
             Asserts($"wss://{hostString}:1", host, dnsSafeHost, idnHost);

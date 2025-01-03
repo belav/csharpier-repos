@@ -28,30 +28,21 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Microsoft.Build.BuildEngine {
-	[Serializable]
-	internal class ExpressionEvaluationException : Exception {
+namespace Microsoft.Build.BuildEngine
+{
+    [Serializable]
+    internal class ExpressionEvaluationException : Exception
+    {
+        public ExpressionEvaluationException()
+            : base("Exception occured when evaluating the expression.") { }
 
-		public ExpressionEvaluationException ()
-			: base ("Exception occured when evaluating the expression.")
-		{
-		}
+        public ExpressionEvaluationException(string message)
+            : base(message) { }
 
-		public ExpressionEvaluationException (string message)
-			: base (message)
-		{
-		}
+        public ExpressionEvaluationException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-		public ExpressionEvaluationException (string message,
-					Exception innerException)
-			: base (message, innerException)
-		{
-		}
-
-		protected ExpressionEvaluationException (SerializationInfo info,
-					   StreamingContext context)
-			: base (info, context)
-		{
-		}
-	}
+        protected ExpressionEvaluationException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
+    }
 }

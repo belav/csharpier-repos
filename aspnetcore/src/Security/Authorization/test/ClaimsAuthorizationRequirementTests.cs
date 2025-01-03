@@ -7,7 +7,10 @@ namespace Microsoft.AspNetCore.Authorization.Test;
 
 public class ClaimsAuthorizationRequirementTests
 {
-    public ClaimsAuthorizationRequirement CreateRequirement(string claimType, params string[] allowedValues)
+    public ClaimsAuthorizationRequirement CreateRequirement(
+        string claimType,
+        params string[] allowedValues
+    )
     {
         return new ClaimsAuthorizationRequirement(claimType, allowedValues);
     }
@@ -22,7 +25,10 @@ public class ClaimsAuthorizationRequirementTests
         var formattedValue = requirement.ToString();
 
         // Assert
-        Assert.Equal("ClaimsAuthorizationRequirement:Claim.Type=Custom and Claim.Value is one of the following values: (CustomValue1|CustomValue2)", formattedValue);
+        Assert.Equal(
+            "ClaimsAuthorizationRequirement:Claim.Type=Custom and Claim.Value is one of the following values: (CustomValue1|CustomValue2)",
+            formattedValue
+        );
     }
 
     [Fact]

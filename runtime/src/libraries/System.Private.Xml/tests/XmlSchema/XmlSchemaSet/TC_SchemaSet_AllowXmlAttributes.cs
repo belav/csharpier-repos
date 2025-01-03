@@ -55,7 +55,6 @@ namespace System.Xml.XmlSchemaTests
                 _output.WriteLine("InnerException Message:" + se.InnerException.Message + "\n");
             }
             else
-
                 _output.WriteLine("Inner Exception is NULL\n");
         }
 
@@ -65,18 +64,22 @@ namespace System.Xml.XmlSchemaTests
             settings.XmlResolver = new XmlUrlResolver();
 
             settings.Schemas = new XmlSchemaSet();
-            settings.Schemas.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
+            settings.Schemas.ValidationEventHandler += new ValidationEventHandler(
+                ValidationCallback
+            );
             settings.Schemas.Add(ss);
             settings.ValidationType = ValidationType.Schema;
             if (allowXml == true)
-                settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation |
-                                            XmlSchemaValidationFlags.ProcessInlineSchema |
-                                            XmlSchemaValidationFlags.ReportValidationWarnings;
+                settings.ValidationFlags |=
+                    XmlSchemaValidationFlags.ProcessSchemaLocation
+                    | XmlSchemaValidationFlags.ProcessInlineSchema
+                    | XmlSchemaValidationFlags.ReportValidationWarnings;
             else
-                settings.ValidationFlags = XmlSchemaValidationFlags.ProcessSchemaLocation |
-                                        XmlSchemaValidationFlags.ProcessInlineSchema |
-                                        XmlSchemaValidationFlags.ReportValidationWarnings |
-                                        XmlSchemaValidationFlags.ProcessIdentityConstraints;
+                settings.ValidationFlags =
+                    XmlSchemaValidationFlags.ProcessSchemaLocation
+                    | XmlSchemaValidationFlags.ProcessInlineSchema
+                    | XmlSchemaValidationFlags.ReportValidationWarnings
+                    | XmlSchemaValidationFlags.ProcessIdentityConstraints;
 
             settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
             XmlReader vr = XmlReader.Create(xmlFile, settings);
@@ -264,7 +267,14 @@ namespace System.Xml.XmlSchemaTests
         [InlineData("v1-1.xml", "v1.xsd", true, 0, 0, 2)]
         //[Variation(Desc = "v1.1.1- Custom XML namespace System.Xml.XmlSchemaTests in the set, particle has reference to custom attribute, allowXmlAttribute=false", Priority = 1, id = 1, Params = new object[] { "v1-1.xml", "v1.xsd", false, 0, 1, 2 })]
         [InlineData("v1-1.xml", "v1.xsd", false, 0, 1, 2)]
-        public void v1(string xmlFile, string xsdFile, bool allowXmlAttributes, int expectedWarningCount, int expectedErrorCount, int expectedSchemaSetCount)
+        public void v1(
+            string xmlFile,
+            string xsdFile,
+            bool allowXmlAttributes,
+            int expectedWarningCount,
+            int expectedErrorCount,
+            int expectedSchemaSetCount
+        )
         {
             Initialize();
             XmlSchemaSet xss = new XmlSchemaSet();
@@ -274,7 +284,8 @@ namespace System.Xml.XmlSchemaTests
                 xss.Add(null, Path.Combine(testData, xsdFile));
 
             XmlReader vr = CreateReader(Path.Combine(testData, xmlFile), xss, allowXmlAttributes);
-            while (vr.Read()) ;
+            while (vr.Read())
+                ;
 
             Assert.Equal(warningCount, expectedWarningCount);
             Assert.Equal(errorCount, expectedErrorCount);

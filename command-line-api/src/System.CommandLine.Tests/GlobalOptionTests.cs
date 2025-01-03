@@ -29,35 +29,37 @@ namespace System.CommandLine.Tests
             var requiredOption = new CliOption<bool>("--i-must-be-set")
             {
                 Required = true,
-                Recursive = true
+                Recursive = true,
             };
             rootCommand.Options.Add(requiredOption);
 
             var result = rootCommand.Parse("child");
 
-            result.Errors
-                  .Should()
-                  .ContainSingle()
-                  .Which.Message.Should().Be("Option '--i-must-be-set' is required.");
+            result
+                .Errors.Should()
+                .ContainSingle()
+                .Which.Message.Should()
+                .Be("Option '--i-must-be-set' is required.");
         }
 
-        [Fact] 
+        [Fact]
         public void When_a_required_global_option_has_multiple_aliases_the_error_message_uses_the_name()
         {
             var rootCommand = new CliRootCommand();
             var requiredOption = new CliOption<bool>("-i", "--i-must-be-set")
             {
                 Required = true,
-                Recursive = true
+                Recursive = true,
             };
             rootCommand.Options.Add(requiredOption);
 
             var result = rootCommand.Parse("");
 
-            result.Errors
-                  .Should()
-                  .ContainSingle()
-                  .Which.Message.Should().Be("Option '-i' is required.");
+            result
+                .Errors.Should()
+                .ContainSingle()
+                .Which.Message.Should()
+                .Be("Option '-i' is required.");
         }
 
         [Fact]
@@ -69,7 +71,7 @@ namespace System.CommandLine.Tests
             var requiredOption = new CliOption<bool>("--i-must-be-set")
             {
                 Required = true,
-                Recursive = true
+                Recursive = true,
             };
             rootCommand.Options.Add(requiredOption);
 
@@ -100,23 +102,23 @@ namespace System.CommandLine.Tests
         public void Subcommands_with_global_option_should_propagate_option_to_children()
         {
             var root = new CliCommand("parent");
-            
+
             var firstChild = new CliCommand("first");
-            
+
             root.Subcommands.Add(firstChild);
-            
+
             var option = new CliOption<int>("--global") { Recursive = true };
-            
+
             firstChild.Options.Add(option);
-            
+
             var secondChild = new CliCommand("second");
-            
+
             firstChild.Subcommands.Add(secondChild);
-            
+
             root.Parse("first second --global 123").GetValue(option).Should().Be(123);
-            
+
             firstChild.Parse("second --global 123").GetValue(option).Should().Be(123);
-            
+
             secondChild.Parse("--global 123").GetValue(option).Should().Be(123);
         }
     }

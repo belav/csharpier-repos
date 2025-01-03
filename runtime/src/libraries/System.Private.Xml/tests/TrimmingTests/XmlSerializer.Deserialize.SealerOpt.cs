@@ -20,12 +20,15 @@ namespace System.Xml.Serialization.TrimmingTests
         {
             // simulate IsDynamicCodeSupported==false by setting the SerializationMode to ReflectionOnly
             const int ReflectionOnly = 1;
-            typeof(XmlSerializer).GetField("s_mode", BindingFlags.NonPublic | BindingFlags.Static)
+            typeof(XmlSerializer)
+                .GetField("s_mode", BindingFlags.NonPublic | BindingFlags.Static)
                 .SetValue(null, ReflectionOnly);
 
-            using StringReader stringReader = new StringReader(@"<?xml version=""1.0"" encoding=""UTF-8""?>
+            using StringReader stringReader = new StringReader(
+                @"<?xml version=""1.0"" encoding=""UTF-8""?>
 				<Response DataType=""Data"">
-				</Response>");
+				</Response>"
+            );
 
             Response obj = (Response)new XmlSerializer(typeof(Response)).Deserialize(stringReader);
             if (obj.DataType == "Data")

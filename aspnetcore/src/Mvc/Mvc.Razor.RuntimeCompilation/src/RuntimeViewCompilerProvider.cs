@@ -26,7 +26,8 @@ internal sealed class RuntimeViewCompilerProvider : IViewCompilerProvider
         RazorProjectEngine razorProjectEngine,
         RuntimeCompilationFileProvider fileProvider,
         CSharpCompiler csharpCompiler,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         _applicationPartManager = applicationPartManager;
         _razorProjectEngine = razorProjectEngine;
@@ -43,7 +44,8 @@ internal sealed class RuntimeViewCompilerProvider : IViewCompilerProvider
             ref _compiler,
             ref _initialized,
             ref _initializeLock,
-            _createCompiler)!;
+            _createCompiler
+        )!;
     }
 
     private IViewCompiler CreateCompiler()
@@ -56,6 +58,7 @@ internal sealed class RuntimeViewCompilerProvider : IViewCompilerProvider
             _razorProjectEngine,
             _csharpCompiler,
             feature.ViewDescriptors,
-            _logger);
+            _logger
+        );
     }
 }

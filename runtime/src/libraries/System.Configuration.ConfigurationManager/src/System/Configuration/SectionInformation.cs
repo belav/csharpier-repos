@@ -64,8 +64,7 @@ namespace System.Configuration
             _modifiedFlags = default;
         }
 
-        private bool IsRuntime => _flags[FlagAttached] &&
-            (_configRecord == null);
+        private bool IsRuntime => _flags[FlagAttached] && (_configRecord == null);
 
         internal bool Attached => _flags[FlagAttached];
 
@@ -93,7 +92,9 @@ namespace System.Configuration
                 // so long as it doesn't conflict with a type already defined
                 FactoryRecord factoryRecord = FindParentFactoryRecord(false);
                 if ((factoryRecord != null) && (factoryRecord.AllowDefinition != value))
-                    throw new ConfigurationErrorsException(SR.Format(SR.Config_tag_name_already_defined, ConfigKey));
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Config_tag_name_already_defined, ConfigKey)
+                    );
 
                 _allowDefinition = value;
                 _modifiedFlags[FlagAllowDefinitionModified] = true;
@@ -114,7 +115,9 @@ namespace System.Configuration
                 // so long as it doesn't conflict with a type already defined
                 FactoryRecord factoryRecord = FindParentFactoryRecord(false);
                 if ((factoryRecord != null) && (factoryRecord.AllowExeDefinition != value))
-                    throw new ConfigurationErrorsException(SR.Format(SR.Config_tag_name_already_defined, ConfigKey));
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Config_tag_name_already_defined, ConfigKey)
+                    );
 
                 _allowExeDefinition = value;
                 _modifiedFlags[FlagAllowExeDefinitionModified] = true;
@@ -134,11 +137,17 @@ namespace System.Configuration
                 // allow OverrideModeDefault to be different from current value,
                 // so long as it doesn't conflict with a type already defined
                 FactoryRecord factoryRecord = FindParentFactoryRecord(false);
-                if ((factoryRecord != null) && (factoryRecord.OverrideModeDefault.OverrideMode != value))
-                    throw new ConfigurationErrorsException(SR.Format(SR.Config_tag_name_already_defined, ConfigKey));
+                if (
+                    (factoryRecord != null)
+                    && (factoryRecord.OverrideModeDefault.OverrideMode != value)
+                )
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Config_tag_name_already_defined, ConfigKey)
+                    );
 
                 // Threat "Inherit" as "Allow" as "Inherit" does not make sense as a default
-                if (value == OverrideMode.Inherit) value = OverrideMode.Allow;
+                if (value == OverrideMode.Inherit)
+                    value = OverrideMode.Allow;
 
                 _overrideModeDefault.OverrideMode = value;
                 _modifiedFlags[FlagOverrideModeDefaultModified] = true;
@@ -147,7 +156,8 @@ namespace System.Configuration
 
         internal OverrideModeSetting OverrideModeDefaultSetting => _overrideModeDefault;
 
-        internal bool OverrideModeDefaultModified => _modifiedFlags[FlagOverrideModeDefaultModified];
+        internal bool OverrideModeDefaultModified =>
+            _modifiedFlags[FlagOverrideModeDefaultModified];
 
         public bool AllowLocation
         {
@@ -161,7 +171,9 @@ namespace System.Configuration
                 // so long as it doesn't conflict with a type already defined
                 FactoryRecord factoryRecord = FindParentFactoryRecord(false);
                 if ((factoryRecord != null) && (factoryRecord.AllowLocation != value))
-                    throw new ConfigurationErrorsException(SR.Format(SR.Config_tag_name_already_defined, ConfigKey));
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Config_tag_name_already_defined, ConfigKey)
+                    );
 
                 _flags[FlagAllowLocation] = value;
                 _modifiedFlags[FlagAllowLocation] = true;
@@ -213,18 +225,17 @@ namespace System.Configuration
             }
         }
 
-        public OverrideMode OverrideModeEffective => _flags[FlagChildrenLocked] ? OverrideMode.Deny : OverrideMode.Allow
-            ;
+        public OverrideMode OverrideModeEffective =>
+            _flags[FlagChildrenLocked] ? OverrideMode.Deny : OverrideMode.Allow;
 
         internal OverrideModeSetting OverrideModeSetting => _overrideMode;
-
 
         // LocationAttributesAreDefault
         //
         // Are the location attributes for this section set to the
         // default settings?
-        internal bool LocationAttributesAreDefault => _overrideMode.IsDefaultForLocationTag &&
-            _flags[FlagInheritInChildApps];
+        internal bool LocationAttributesAreDefault =>
+            _overrideMode.IsDefaultForLocationTag && _flags[FlagInheritInChildApps];
 
         public string ConfigSource
         {
@@ -241,7 +252,12 @@ namespace System.Configuration
                 if (configSource == _configSource)
                     return;
 
-                _configRecord?.ChangeConfigSource(this, _configSource, ConfigSourceStreamName, configSource);
+                _configRecord?.ChangeConfigSource(
+                    this,
+                    _configSource,
+                    ConfigSourceStreamName,
+                    configSource
+                );
 
                 _configSource = configSource;
                 _modifiedFlags[FlagConfigSourceModified] = true;
@@ -289,11 +305,14 @@ namespace System.Configuration
         // Is the Definition Allowed at this point.  This is all depending
         // on the Definition that is allowed, and what context we are
         // writing the file
-        private bool IsDefinitionAllowed
-            => (_configRecord == null) || _configRecord.IsDefinitionAllowed(_allowDefinition, _allowExeDefinition);
+        private bool IsDefinitionAllowed =>
+            (_configRecord == null)
+            || _configRecord.IsDefinitionAllowed(_allowDefinition, _allowExeDefinition);
 
-        public bool IsLocked => _flags[FlagLocationLocked] || !IsDefinitionAllowed ||
-            _configurationSection.ElementInformation.IsLocked;
+        public bool IsLocked =>
+            _flags[FlagLocationLocked]
+            || !IsDefinitionAllowed
+            || _configurationSection.ElementInformation.IsLocked;
 
         public bool IsProtected => ProtectionProvider != null;
 
@@ -303,7 +322,10 @@ namespace System.Configuration
             {
                 if (!_flags[FlagProtectionProviderDetermined] && (_configRecord != null))
                 {
-                    _protectionProvider = _configRecord.GetProtectionProviderFromName(ProtectionProviderName, false);
+                    _protectionProvider = _configRecord.GetProtectionProviderFromName(
+                        ProtectionProviderName,
+                        false
+                    );
                     _flags[FlagProtectionProviderDetermined] = true;
                 }
 
@@ -325,14 +347,17 @@ namespace System.Configuration
                 // so long as it doesn't conflict with a type already defined
                 FactoryRecord factoryRecord = FindParentFactoryRecord(false);
                 if ((factoryRecord != null) && (factoryRecord.RestartOnExternalChanges != value))
-                    throw new ConfigurationErrorsException(SR.Format(SR.Config_tag_name_already_defined, ConfigKey));
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Config_tag_name_already_defined, ConfigKey)
+                    );
 
                 _flags[FlagRestartOnExternalChanges] = value;
                 _modifiedFlags[FlagRestartOnExternalChanges] = true;
             }
         }
 
-        internal bool RestartOnExternalChangesModified => _modifiedFlags[FlagRestartOnExternalChanges];
+        internal bool RestartOnExternalChangesModified =>
+            _modifiedFlags[FlagRestartOnExternalChanges];
 
         public bool RequirePermission
         {
@@ -346,7 +371,9 @@ namespace System.Configuration
                 // so long as it doesn't conflict with a type already defined
                 FactoryRecord factoryRecord = FindParentFactoryRecord(false);
                 if ((factoryRecord != null) && (factoryRecord.RequirePermission != value))
-                    throw new ConfigurationErrorsException(SR.Format(SR.Config_tag_name_already_defined, ConfigKey));
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Config_tag_name_already_defined, ConfigKey)
+                    );
 
                 _flags[FlagRequirePermission] = value;
                 _modifiedFlags[FlagRequirePermission] = true;
@@ -355,13 +382,13 @@ namespace System.Configuration
 
         internal bool RequirePermissionModified => _modifiedFlags[FlagRequirePermission];
 
-
         public string Type
         {
             get { return _typeName; }
             set
             {
-                if (string.IsNullOrEmpty(value)) throw ExceptionUtil.PropertyNullOrEmpty(nameof(Type));
+                if (string.IsNullOrEmpty(value))
+                    throw ExceptionUtil.PropertyNullOrEmpty(nameof(Type));
 
                 VerifyIsEditable();
                 VerifyIsEditableFactory();
@@ -372,12 +399,14 @@ namespace System.Configuration
                 if (factoryRecord != null)
                 {
                     IInternalConfigHost host = null;
-                    if (_configRecord != null) host = _configRecord.Host;
+                    if (_configRecord != null)
+                        host = _configRecord.Host;
 
                     if (!factoryRecord.IsEquivalentType(host, value))
                     {
-                        throw new ConfigurationErrorsException(SR.Format(SR.Config_tag_name_already_defined,
-                            ConfigKey));
+                        throw new ConfigurationErrorsException(
+                            SR.Format(SR.Config_tag_name_already_defined, ConfigKey)
+                        );
                     }
                 }
 
@@ -411,15 +440,21 @@ namespace System.Configuration
         }
 
         // for instantiation of a ConfigurationSection from GetConfig
-        internal void AttachToConfigurationRecord(MgmtConfigurationRecord configRecord, FactoryRecord factoryRecord,
-            SectionRecord sectionRecord)
+        internal void AttachToConfigurationRecord(
+            MgmtConfigurationRecord configRecord,
+            FactoryRecord factoryRecord,
+            SectionRecord sectionRecord
+        )
         {
             SetRuntimeConfigurationInformation(configRecord, factoryRecord, sectionRecord);
             _configRecord = configRecord;
         }
 
-        internal void SetRuntimeConfigurationInformation(BaseConfigurationRecord configRecord,
-            FactoryRecord factoryRecord, SectionRecord sectionRecord)
+        internal void SetRuntimeConfigurationInformation(
+            BaseConfigurationRecord configRecord,
+            FactoryRecord factoryRecord,
+            SectionRecord sectionRecord
+        )
         {
             _flags[FlagAttached] = true;
 
@@ -443,8 +478,12 @@ namespace System.Configuration
             else
             {
                 _flags[FlagIsUndeclared] = false;
-                _flags[FlagDeclared] = configRecord.GetFactoryRecord(factoryRecord.ConfigKey, false) != null;
-                _flags[FlagDeclarationRequired] = configRecord.IsRootDeclaration(factoryRecord.ConfigKey, false);
+                _flags[FlagDeclared] =
+                    configRecord.GetFactoryRecord(factoryRecord.ConfigKey, false) != null;
+                _flags[FlagDeclarationRequired] = configRecord.IsRootDeclaration(
+                    factoryRecord.ConfigKey,
+                    false
+                );
             }
 
             // section info
@@ -486,13 +525,16 @@ namespace System.Configuration
 
         private void VerifyDesigntime()
         {
-            if (IsRuntime) throw new InvalidOperationException(SR.Config_operation_not_runtime);
+            if (IsRuntime)
+                throw new InvalidOperationException(SR.Config_operation_not_runtime);
         }
 
         private void VerifyIsAttachedToConfigRecord()
         {
             if (_configRecord == null)
-                throw new InvalidOperationException(SR.Config_cannot_edit_configurationsection_when_not_attached);
+                throw new InvalidOperationException(
+                    SR.Config_cannot_edit_configurationsection_when_not_attached
+                );
         }
 
         // VerifyIsEditable
@@ -509,15 +551,23 @@ namespace System.Configuration
             VerifyDesigntime();
 
             if (IsLocked)
-                throw new InvalidOperationException(SR.Config_cannot_edit_configurationsection_when_locked);
+                throw new InvalidOperationException(
+                    SR.Config_cannot_edit_configurationsection_when_locked
+                );
 
             if (_flags[FlagIsParentSection])
-                throw new InvalidOperationException(SR.Config_cannot_edit_configurationsection_parentsection);
+                throw new InvalidOperationException(
+                    SR.Config_cannot_edit_configurationsection_parentsection
+                );
 
-            if (!_flags[FlagAllowLocation] &&
-                (_configRecord != null) &&
-                _configRecord.IsLocationConfig)
-                throw new InvalidOperationException(SR.Config_cannot_edit_configurationsection_when_location_locked);
+            if (
+                !_flags[FlagAllowLocation]
+                && (_configRecord != null)
+                && _configRecord.IsLocationConfig
+            )
+                throw new InvalidOperationException(
+                    SR.Config_cannot_edit_configurationsection_when_location_locked
+                );
         }
 
         private void VerifyNotParentSection()
@@ -530,23 +580,28 @@ namespace System.Configuration
         // in machine.config, or in any place for the web config system
         private void VerifySupportsLocation()
         {
-            if ((_configRecord != null) &&
-                !_configRecord.RecordSupportsLocation)
+            if ((_configRecord != null) && !_configRecord.RecordSupportsLocation)
                 throw new InvalidOperationException(SR.Config_cannot_edit_locationattriubtes);
         }
 
         internal void VerifyIsEditableFactory()
         {
             if ((_configRecord != null) && _configRecord.IsLocationConfig)
-                throw new InvalidOperationException(SR.Config_cannot_edit_configurationsection_in_location_config);
+                throw new InvalidOperationException(
+                    SR.Config_cannot_edit_configurationsection_in_location_config
+                );
 
             // Can't edit factory if the section is built-in
             if (BaseConfigurationRecord.IsImplicitSection(ConfigKey))
-                throw new InvalidOperationException(SR.Config_cannot_edit_configurationsection_when_it_is_implicit);
+                throw new InvalidOperationException(
+                    SR.Config_cannot_edit_configurationsection_when_it_is_implicit
+                );
 
             // Can't edit undeclared section
             if (_flags[FlagIsUndeclared])
-                throw new InvalidOperationException(SR.Config_cannot_edit_configurationsection_when_it_is_undeclared);
+                throw new InvalidOperationException(
+                    SR.Config_cannot_edit_configurationsection_when_it_is_undeclared
+                );
         }
 
         private FactoryRecord FindParentFactoryRecord(bool permitErrors)
@@ -571,8 +626,7 @@ namespace System.Configuration
         {
             VerifyIsEditable();
 
-            if ((force == false) &&
-                _flags[FlagDeclarationRequired])
+            if ((force == false) && _flags[FlagDeclarationRequired])
             {
                 // Since it is required, we can not remove it
             }
@@ -583,12 +637,15 @@ namespace System.Configuration
                 // fail silently so that app code can easily loop through sections
                 // and declare all of them?
                 if (force && BaseConfigurationRecord.IsImplicitSection(SectionName))
-                    throw new ConfigurationErrorsException(SR.Format(SR.Cannot_declare_or_remove_implicit_section, SectionName));
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Cannot_declare_or_remove_implicit_section, SectionName)
+                    );
 
                 if (force && _flags[FlagIsUndeclared])
                 {
                     throw new ConfigurationErrorsException(
-                        SR.Config_cannot_edit_configurationsection_when_it_is_undeclared);
+                        SR.Config_cannot_edit_configurationsection_when_it_is_undeclared
+                    );
                 }
 
                 _flags[FlagDeclared] = force;
@@ -605,16 +662,24 @@ namespace System.Configuration
             // Do not encrypt sections that will be read by a native reader.
             // These sections are be marked with allowLocation=false.
             // Also, the configProtectedData section cannot be encrypted!
-            if (!AllowLocation || (ConfigKey == BaseConfigurationRecord.ReservedSectionProtectedConfiguration))
+            if (
+                !AllowLocation
+                || (ConfigKey == BaseConfigurationRecord.ReservedSectionProtectedConfiguration)
+            )
                 throw new InvalidOperationException(SR.Config_not_allowed_to_encrypt_this_section);
 
             if (_configRecord != null)
             {
-                if (string.IsNullOrEmpty(protectionProvider)) protectionProvider = _configRecord.DefaultProviderName;
+                if (string.IsNullOrEmpty(protectionProvider))
+                    protectionProvider = _configRecord.DefaultProviderName;
 
-                protectedConfigurationProvider = _configRecord.GetProtectionProviderFromName(protectionProvider, true);
+                protectedConfigurationProvider = _configRecord.GetProtectionProviderFromName(
+                    protectionProvider,
+                    true
+                );
             }
-            else throw new InvalidOperationException(SR.Must_add_to_config_before_protecting_it);
+            else
+                throw new InvalidOperationException(SR.Must_add_to_config_before_protecting_it);
 
             ProtectionProviderName = protectionProvider;
             _protectionProvider = protectedConfigurationProvider;
@@ -638,7 +703,9 @@ namespace System.Configuration
             VerifyDesigntime();
 
             if (_flags[FlagIsParentSection])
-                throw new InvalidOperationException(SR.Config_getparentconfigurationsection_first_instance);
+                throw new InvalidOperationException(
+                    SR.Config_getparentconfigurationsection_first_instance
+                );
 
             // if a users create a configsection with : sectionType sec  = new sectionType();
             // the config record will be null.  Return null for the parent in this case.
@@ -668,8 +735,10 @@ namespace System.Configuration
         {
             VerifyIsEditable();
 
-            if (_configRecord != null) _configRecord.SetRawXml(_configurationSection, rawXml);
-            else RawXml = string.IsNullOrEmpty(rawXml) ? null : rawXml;
+            if (_configRecord != null)
+                _configRecord.SetRawXml(_configurationSection, rawXml);
+            else
+                RawXml = string.IsNullOrEmpty(rawXml) ? null : rawXml;
         }
 
         public void RevertToParent()

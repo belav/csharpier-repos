@@ -7,7 +7,6 @@ using System.Linq.Expressions;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class SequenceSetup : SetupWithOutParameterSupport
@@ -32,7 +31,6 @@ namespace Moq
     ///   Programmable setup used by <see cref="Mock.SetupSequence(Mock, LambdaExpression)"/>.
     /// </summary>
     sealed class SequenceSetup : SetupWithOutParameterSupport
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private ConcurrentQueue<Behavior> behaviors;
@@ -57,7 +55,11 @@ namespace Moq
         // contains the behaviors set up with the `CallBase`, `Pass`, `Returns`, and `Throws` verbs
         ConcurrentQueue<Behavior> behaviors;
 
-        public SequenceSetup(Expression originalExpression, Mock mock, MethodExpectation expectation)
+        public SequenceSetup(
+            Expression originalExpression,
+            Mock mock,
+            MethodExpectation expectation
+        )
             : base(originalExpression, mock, expectation)
         {
             this.behaviors = new ConcurrentQueue<Behavior>();

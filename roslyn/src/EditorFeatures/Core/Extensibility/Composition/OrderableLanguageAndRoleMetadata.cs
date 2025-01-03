@@ -11,8 +11,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor
 {
-    internal class OrderableLanguageAndRoleMetadata(IDictionary<string, object> data) : OrderableLanguageMetadata(data)
+    internal class OrderableLanguageAndRoleMetadata(IDictionary<string, object> data)
+        : OrderableLanguageMetadata(data)
     {
-        public IEnumerable<string> Roles { get; } = (IEnumerable<string>)data.GetValueOrDefault("TextViewRoles");
+        public IEnumerable<string> Roles { get; } =
+            (IEnumerable<string>)data.GetValueOrDefault("TextViewRoles");
     }
 }

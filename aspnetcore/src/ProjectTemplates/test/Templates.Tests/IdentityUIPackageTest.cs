@@ -34,8 +34,9 @@ public class IdentityUIPackageTest : LoggedTest
         }
     }
 
-    public static string[] Bootstrap5ContentFiles { get; } = new []
-    {
+    public static string[] Bootstrap5ContentFiles { get; } =
+        new[]
+        {
             "Identity/favicon.ico",
             "Identity/css/site.css",
             "Identity/js/site.js",
@@ -95,19 +96,30 @@ public class IdentityUIPackageTest : LoggedTest
             "Identity/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
             "Identity/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
             "Identity/lib/jquery-validation-unobtrusive/LICENSE.txt",
-    };
+        };
 
     [ConditionalFact]
-    [SkipOnHelix("Cert failure, https://github.com/dotnet/aspnetcore/issues/28090", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
+    [SkipOnHelix(
+        "Cert failure, https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64
+    )]
     public async Task IdentityUIPackage_WorksWithDifferentOptions()
     {
         var packageOptions = new Dictionary<string, string>();
         var project = await ProjectFactory.CreateProject(Output);
         var useLocalDB = false;
 
-        await project.RunDotNetNewAsync("razor", auth: "Individual", useLocalDB: useLocalDB, environmentVariables: packageOptions);
+        await project.RunDotNetNewAsync(
+            "razor",
+            auth: "Individual",
+            useLocalDB: useLocalDB,
+            environmentVariables: packageOptions
+        );
 
-        var projectFileContents = ReadFile(project.TemplateOutputDir, $"{project.ProjectName}.csproj");
+        var projectFileContents = ReadFile(
+            project.TemplateOutputDir,
+            $"{project.ProjectName}.csproj"
+        );
         Assert.Contains(".db", projectFileContents);
 
         await project.RunDotNetPublishAsync(packageOptions: packageOptions);
@@ -126,9 +138,16 @@ public class IdentityUIPackageTest : LoggedTest
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run built project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
-            var response = await aspNetProcess.SendRequest("/Identity/lib/bootstrap/dist/css/bootstrap.css");
+            var response = await aspNetProcess.SendRequest(
+                "/Identity/lib/bootstrap/dist/css/bootstrap.css"
+            );
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Contains(versionValidator, await response.Content.ReadAsStringAsync());
             await ValidatePublishedFiles(aspNetProcess, Bootstrap5ContentFiles);
@@ -138,16 +157,26 @@ public class IdentityUIPackageTest : LoggedTest
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run built project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
-            var response = await aspNetProcess.SendRequest("/Identity/lib/bootstrap/dist/css/bootstrap.css");
+            var response = await aspNetProcess.SendRequest(
+                "/Identity/lib/bootstrap/dist/css/bootstrap.css"
+            );
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Contains(versionValidator, await response.Content.ReadAsStringAsync());
             await ValidatePublishedFiles(aspNetProcess, Bootstrap5ContentFiles);
         }
     }
 
-    private async Task ValidatePublishedFiles(AspNetProcess aspNetProcess, string[] expectedContentFiles)
+    private async Task ValidatePublishedFiles(
+        AspNetProcess aspNetProcess,
+        string[] expectedContentFiles
+    )
     {
         foreach (var file in expectedContentFiles)
         {

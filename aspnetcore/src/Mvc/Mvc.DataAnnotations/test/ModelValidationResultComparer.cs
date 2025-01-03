@@ -7,11 +7,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 public class ModelValidationResultComparer : IEqualityComparer<ModelValidationResult>
 {
-    public static readonly ModelValidationResultComparer Instance = new ModelValidationResultComparer();
+    public static readonly ModelValidationResultComparer Instance =
+        new ModelValidationResultComparer();
 
-    private ModelValidationResultComparer()
-    {
-    }
+    private ModelValidationResultComparer() { }
 
     public bool Equals(ModelValidationResult x, ModelValidationResult y)
     {
@@ -20,8 +19,8 @@ public class ModelValidationResultComparer : IEqualityComparer<ModelValidationRe
             return x == null && y == null;
         }
 
-        return string.Equals(x.MemberName, y.MemberName, StringComparison.Ordinal) &&
-            string.Equals(x.Message, y.Message, StringComparison.Ordinal);
+        return string.Equals(x.MemberName, y.MemberName, StringComparison.Ordinal)
+            && string.Equals(x.Message, y.Message, StringComparison.Ordinal);
     }
 
     public int GetHashCode(ModelValidationResult obj)

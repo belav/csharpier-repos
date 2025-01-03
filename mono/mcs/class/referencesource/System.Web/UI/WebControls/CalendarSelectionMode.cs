@@ -1,17 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="CalendarSelectionMode.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-    
-
+namespace System.Web.UI.WebControls
+{
     /// <devdoc>
     /// <para>Specifies the selection method for dates on the System.Web.UI.WebControls.Calender.</para>
     /// </devdoc>
-    public enum CalendarSelectionMode {
-
+    public enum CalendarSelectionMode
+    {
         /// <devdoc>
         ///    <para>
         ///       No
@@ -44,7 +43,6 @@ namespace System.Web.UI.WebControls {
         ///       weeks, or entire months.
         ///    </para>
         /// </devdoc>
-        DayWeekMonth = 3
+        DayWeekMonth = 3,
     }
-
 }

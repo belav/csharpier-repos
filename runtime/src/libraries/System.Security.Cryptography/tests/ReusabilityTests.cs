@@ -14,7 +14,7 @@ namespace System.Security.Cryptography.Tests
         {
             using (hashAlgorithm)
             {
-                byte[] input = { 8, 6, 7, 5, 3, 0, 9, };
+                byte[] input = { 8, 6, 7, 5, 3, 0, 9 };
                 byte[] hash1 = hashAlgorithm.ComputeHash(input);
                 byte[] hash2 = hashAlgorithm.ComputeHash(input);
 
@@ -26,17 +26,17 @@ namespace System.Security.Cryptography.Tests
         {
             if (!PlatformDetection.IsBrowser)
             {
-                yield return new object[] { MD5.Create(), };
+                yield return new object[] { MD5.Create() };
             }
 
-            yield return new object[] { SHA1.Create(), };
-            yield return new object[] { SHA256.Create(), };
-            yield return new object[] { SHA384.Create(), };
-            yield return new object[] { SHA512.Create(), };
-            yield return new object[] { new HMACSHA1(), };
-            yield return new object[] { new HMACSHA256(), };
-            yield return new object[] { new HMACSHA384(), };
-            yield return new object[] { new HMACSHA512(), };
+            yield return new object[] { SHA1.Create() };
+            yield return new object[] { SHA256.Create() };
+            yield return new object[] { SHA384.Create() };
+            yield return new object[] { SHA512.Create() };
+            yield return new object[] { new HMACSHA1() };
+            yield return new object[] { new HMACSHA256() };
+            yield return new object[] { new HMACSHA384() };
+            yield return new object[] { new HMACSHA512() };
 
             if (PlatformDetection.SupportsSha3)
             {

@@ -16,5 +16,6 @@ namespace Microsoft.Extensions.Options.Generators
         bool IsValueType,
         bool EnumeratedIsNullable,
         bool EnumeratedIsValueType,
-        bool EnumeratedMayBeNull);
+        bool EnumeratedMayBeNull
+    );
 }

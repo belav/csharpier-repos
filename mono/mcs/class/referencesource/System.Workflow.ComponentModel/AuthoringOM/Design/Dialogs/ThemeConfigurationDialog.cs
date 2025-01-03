@@ -1,28 +1,30 @@
 using System;
-using System.IO;
-using System.Drawing;
-using System.Reflection;
-using System.Collections;
-using System.Diagnostics;
-using System.Globalization;
 using System.CodeDom.Compiler;
-using System.Windows.Forms;
-using System.ComponentModel;
-using System.Drawing.Design;
-using System.Drawing.Drawing2D;
+using System.Collections;
 using System.Collections.Generic;
-using System.Windows.Forms.Design;
+using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
-using Microsoft.Win32;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Design;
+using System.Drawing.Drawing2D;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
+using System.Windows.Forms.Design;
 using System.Workflow.ComponentModel.Compiler;
+using Microsoft.Win32;
 
 namespace System.Workflow.ComponentModel.Design
 {
     /// <summary>
     /// Summary description for ThemeConfigurationDialog.
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ThemeConfigurationDialog : System.Windows.Forms.Form
     {
         #region Microsoft Generated Members
@@ -59,9 +61,7 @@ namespace System.Workflow.ComponentModel.Design
 
         #region Constructor/Destructor
         public ThemeConfigurationDialog(IServiceProvider serviceProvider)
-            : this(serviceProvider, null)
-        {
-        }
+            : this(serviceProvider, null) { }
 
         public ThemeConfigurationDialog(IServiceProvider serviceProvider, WorkflowTheme theme)
         {
@@ -88,7 +88,9 @@ namespace System.Workflow.ComponentModel.Design
 
             //Set dialog fonts
             Font = StandardFont;
-            SystemEvents.UserPreferenceChanged += new UserPreferenceChangedEventHandler(OnOperatingSystemSettingsChanged);
+            SystemEvents.UserPreferenceChanged += new UserPreferenceChangedEventHandler(
+                OnOperatingSystemSettingsChanged
+            );
         }
 
         /// <summary>
@@ -101,7 +103,9 @@ namespace System.Workflow.ComponentModel.Design
                 if (components != null)
                     components.Dispose();
 
-                SystemEvents.UserPreferenceChanged -= new UserPreferenceChangedEventHandler(OnOperatingSystemSettingsChanged);
+                SystemEvents.UserPreferenceChanged -= new UserPreferenceChangedEventHandler(
+                    OnOperatingSystemSettingsChanged
+                );
 
                 if (this.designerPreview != null)
                 {
@@ -126,7 +130,10 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThemeConfigurationDialog));
+            System.ComponentModel.ComponentResourceManager resources =
+                new System.ComponentModel.ComponentResourceManager(
+                    typeof(ThemeConfigurationDialog)
+                );
             this.designerTreeView = new System.Windows.Forms.TreeView();
             this.themeNameLabel = new System.Windows.Forms.Label();
             this.themeLocationLabel = new System.Windows.Forms.Label();
@@ -150,79 +157,92 @@ namespace System.Workflow.ComponentModel.Design
             this.themeConfigPanel.SuspendLayout();
             this.okCancelTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // designerTreeView
-            // 
+            //
             resources.ApplyResources(this.designerTreeView, "designerTreeView");
             this.designerTreeView.Name = "designerTreeView";
-            // 
+            //
             // themeNameLabel
-            // 
+            //
             resources.ApplyResources(this.themeNameLabel, "themeNameLabel");
             this.themeNameLabel.Margin = new System.Windows.Forms.Padding(0, 0, 3, 3);
             this.themeNameLabel.Name = "themeNameLabel";
-            // 
+            //
             // themeLocationLabel
-            // 
+            //
             resources.ApplyResources(this.themeLocationLabel, "themeLocationLabel");
             this.themeLocationLabel.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
             this.themeLocationLabel.Name = "themeLocationLabel";
-            // 
+            //
             // themeNameTextBox
-            // 
+            //
             resources.ApplyResources(this.themeNameTextBox, "themeNameTextBox");
             this.nameLocationTableLayoutPanel.SetColumnSpan(this.themeNameTextBox, 2);
             this.themeNameTextBox.Margin = new System.Windows.Forms.Padding(3, 0, 0, 3);
             this.themeNameTextBox.Name = "themeNameTextBox";
-            // 
+            //
             // nameLocationTableLayoutPanel
-            // 
-            resources.ApplyResources(this.nameLocationTableLayoutPanel, "nameLocationTableLayoutPanel");
-            this.nameLocationTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.nameLocationTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.nameLocationTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            //
+            resources.ApplyResources(
+                this.nameLocationTableLayoutPanel,
+                "nameLocationTableLayoutPanel"
+            );
+            this.nameLocationTableLayoutPanel.ColumnStyles.Add(
+                new System.Windows.Forms.ColumnStyle()
+            );
+            this.nameLocationTableLayoutPanel.ColumnStyles.Add(
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F)
+            );
+            this.nameLocationTableLayoutPanel.ColumnStyles.Add(
+                new System.Windows.Forms.ColumnStyle()
+            );
             this.nameLocationTableLayoutPanel.Controls.Add(this.themeNameLabel, 0, 0);
             this.nameLocationTableLayoutPanel.Controls.Add(this.themeNameTextBox, 1, 0);
             this.nameLocationTableLayoutPanel.Controls.Add(this.themeLocationButton, 2, 1);
             this.nameLocationTableLayoutPanel.Controls.Add(this.themeLocationLabel, 0, 1);
             this.nameLocationTableLayoutPanel.Controls.Add(this.themeLocationTextBox, 1, 1);
             this.nameLocationTableLayoutPanel.Name = "nameLocationTableLayoutPanel";
-            this.nameLocationTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.nameLocationTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            // 
+            this.nameLocationTableLayoutPanel.RowStyles.Add(
+                new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F)
+            );
+            this.nameLocationTableLayoutPanel.RowStyles.Add(
+                new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F)
+            );
+            //
             // themeLocationButton
-            // 
+            //
             resources.ApplyResources(this.themeLocationButton, "themeLocationButton");
             this.themeLocationButton.Margin = new System.Windows.Forms.Padding(3, 3, 0, 0);
             this.themeLocationButton.Name = "themeLocationButton";
-            // 
+            //
             // themeLocationTextBox
-            // 
+            //
             resources.ApplyResources(this.themeLocationTextBox, "themeLocationTextBox");
             this.themeLocationTextBox.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.themeLocationTextBox.Name = "themeLocationTextBox";
-            // 
+            //
             // button3
-            // 
+            //
             resources.ApplyResources(this.button3, "button3");
             this.button3.Name = "button3";
-            // 
+            //
             // okButton
-            // 
+            //
             resources.ApplyResources(this.okButton, "okButton");
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.okButton.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.okButton.Name = "okButton";
-            // 
+            //
             // cancelButton
-            // 
+            //
             resources.ApplyResources(this.cancelButton, "cancelButton");
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.cancelButton.Name = "cancelButton";
-            // 
+            //
             // themePanel
-            // 
+            //
             this.themePanel.Controls.Add(this.themeConfigPanel);
             this.themePanel.Controls.Add(this.previewLabel);
             this.themePanel.Controls.Add(this.selectDesignerLabel);
@@ -230,56 +250,64 @@ namespace System.Workflow.ComponentModel.Design
             resources.ApplyResources(this.themePanel, "themePanel");
             this.themePanel.Margin = new System.Windows.Forms.Padding(4);
             this.themePanel.Name = "themePanel";
-            // 
+            //
             // themeConfigPanel
-            // 
+            //
             this.themeConfigPanel.Controls.Add(this.designerTreeView);
             this.themeConfigPanel.Controls.Add(this.propertiesGrid);
             resources.ApplyResources(this.themeConfigPanel, "themeConfigPanel");
             this.themeConfigPanel.Name = "themeConfigPanel";
-            // 
+            //
             // propertiesGrid
-            // 
+            //
             this.propertiesGrid.CommandsVisibleIfAvailable = true;
             resources.ApplyResources(this.propertiesGrid, "propertiesGrid");
             this.propertiesGrid.Name = "propertiesGrid";
             this.propertiesGrid.ToolbarVisible = false;
-            // 
+            //
             // previewLabel
-            // 
+            //
             resources.ApplyResources(this.previewLabel, "previewLabel");
             this.previewLabel.Name = "previewLabel";
-            // 
+            //
             // selectDesignerLabel
-            // 
+            //
             resources.ApplyResources(this.selectDesignerLabel, "selectDesignerLabel");
             this.selectDesignerLabel.Name = "selectDesignerLabel";
-            // 
+            //
             // dummyPreviewPanel
-            // 
+            //
             resources.ApplyResources(this.dummyPreviewPanel, "dummyPreviewPanel");
             this.dummyPreviewPanel.Name = "dummyPreviewPanel";
-            // 
+            //
             // previewButton
-            // 
+            //
             resources.ApplyResources(this.previewButton, "previewButton");
             this.previewButton.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.previewButton.Name = "previewButton";
-            // 
+            //
             // okCancelTableLayoutPanel
-            // 
+            //
             resources.ApplyResources(this.okCancelTableLayoutPanel, "okCancelTableLayoutPanel");
-            this.okCancelTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            this.okCancelTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            this.okCancelTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
+            this.okCancelTableLayoutPanel.ColumnStyles.Add(
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F)
+            );
+            this.okCancelTableLayoutPanel.ColumnStyles.Add(
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F)
+            );
+            this.okCancelTableLayoutPanel.ColumnStyles.Add(
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F)
+            );
             this.okCancelTableLayoutPanel.Controls.Add(this.okButton, 0, 0);
             this.okCancelTableLayoutPanel.Controls.Add(this.cancelButton, 1, 0);
             this.okCancelTableLayoutPanel.Controls.Add(this.previewButton, 2, 0);
             this.okCancelTableLayoutPanel.Name = "okCancelTableLayoutPanel";
-            this.okCancelTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            // 
+            this.okCancelTableLayoutPanel.RowStyles.Add(
+                new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F)
+            );
+            //
             // ThemeConfigurationDialog
-            // 
+            //
             this.AcceptButton = this.okButton;
             this.CancelButton = this.cancelButton;
             resources.ApplyResources(this, "$this");
@@ -302,17 +330,13 @@ namespace System.Workflow.ComponentModel.Design
             this.okCancelTableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
         #endregion
 
         #region Properties and Methods
         public WorkflowTheme ComposedTheme
         {
-            get
-            {
-                return this.bufferedTheme;
-            }
+            get { return this.bufferedTheme; }
         }
 
         protected override void OnLoad(EventArgs e)
@@ -346,7 +370,8 @@ namespace System.Workflow.ComponentModel.Design
                 Font font = SystemInformation.MenuFont;
                 if (this.serviceProvider != null)
                 {
-                    IUIService uisvc = (IUIService)this.serviceProvider.GetService(typeof(IUIService));
+                    IUIService uisvc = (IUIService)
+                        this.serviceProvider.GetService(typeof(IUIService));
                     if (uisvc != null)
                         font = (Font)uisvc.Styles["DialogFont"];
                 }
@@ -387,18 +412,25 @@ namespace System.Workflow.ComponentModel.Design
             this.splitter = new Splitter();
             this.splitter.Dock = DockStyle.Left;
             this.propertiesGrid.Dock = DockStyle.Fill;
-            this.themeConfigPanel.Controls.AddRange(new Control[] { this.propertiesGrid, this.splitter, this.designerTreeView });
+            this.themeConfigPanel.Controls.AddRange(
+                new Control[] { this.propertiesGrid, this.splitter, this.designerTreeView }
+            );
 
             this.themePanel.Paint += new PaintEventHandler(OnThemePanelPaint);
             this.previewButton.Click += new EventHandler(OnPreviewClicked);
-            this.designerTreeView.AfterSelect += new TreeViewEventHandler(OnDesignerSelectionChanged);
+            this.designerTreeView.AfterSelect += new TreeViewEventHandler(
+                OnDesignerSelectionChanged
+            );
             this.themeLocationButton.Click += new EventHandler(OnThemeLocationClicked);
             this.okButton.Click += new EventHandler(OnOk);
-            this.propertiesGrid.PropertyValueChanged += new PropertyValueChangedEventHandler(OnThemePropertyChanged);
+            this.propertiesGrid.PropertyValueChanged += new PropertyValueChangedEventHandler(
+                OnThemePropertyChanged
+            );
             this.themeNameTextBox.TextChanged += new EventHandler(OnThemeChanged);
             this.themeLocationTextBox.TextChanged += new EventHandler(OnThemeChanged);
 
-            this.designerTreeView.SelectedNode = (this.designerTreeView.Nodes.Count > 0) ? this.designerTreeView.Nodes[0] : null;
+            this.designerTreeView.SelectedNode =
+                (this.designerTreeView.Nodes.Count > 0) ? this.designerTreeView.Nodes[0] : null;
             this.designerTreeView.SelectedNode.EnsureVisible();
 
             ShowPreview = true;
@@ -434,9 +466,11 @@ namespace System.Workflow.ComponentModel.Design
             }
 
             string path = this.themeLocationTextBox.Text.Trim();
-            if (path.IndexOfAny(Path.GetInvalidPathChars()) >= 0 ||
-                !Path.IsPathRooted(path) ||
-                !Path.HasExtension(path))
+            if (
+                path.IndexOfAny(Path.GetInvalidPathChars()) >= 0
+                || !Path.IsPathRooted(path)
+                || !Path.HasExtension(path)
+            )
             {
                 error = DR.GetString(DR.ThemePathNotValid);
                 control = this.themeLocationTextBox;
@@ -445,15 +479,24 @@ namespace System.Workflow.ComponentModel.Design
 
             string fileName = Path.GetFileNameWithoutExtension(path);
             string extension = Path.GetExtension(path);
-            if (fileName == null || fileName.Trim().Length == 0 ||
-                extension == null || extension.Trim().Length == 0)
+            if (
+                fileName == null
+                || fileName.Trim().Length == 0
+                || extension == null
+                || extension.Trim().Length == 0
+            )
             {
                 error = DR.GetString(DR.ThemePathNotValid);
                 control = this.themeLocationTextBox;
                 return false;
             }
 
-            if (!extension.Equals(WorkflowTheme.DefaultThemeFileExtension.Replace("*", ""), StringComparison.Ordinal))
+            if (
+                !extension.Equals(
+                    WorkflowTheme.DefaultThemeFileExtension.Replace("*", ""),
+                    StringComparison.Ordinal
+                )
+            )
             {
                 error = DR.GetString(DR.ThemeFileNotXml);
                 control = this.themeLocationTextBox;
@@ -485,9 +528,24 @@ namespace System.Workflow.ComponentModel.Design
             }
 
             //Before we try saving show the warning if the user has changed the theme path
-            if (!this.bufferedTheme.FilePath.Equals(this.themeLocationTextBox.Text.Trim(), StringComparison.OrdinalIgnoreCase))
+            if (
+                !this.bufferedTheme.FilePath.Equals(
+                    this.themeLocationTextBox.Text.Trim(),
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                if (DialogResult.No == DesignerHelpers.ShowMessage(this.serviceProvider, DR.GetString(DR.UpdateRelativePaths), DR.GetString(DR.WorkflowDesignerTitle), MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1))
+                if (
+                    DialogResult.No
+                    == DesignerHelpers.ShowMessage(
+                        this.serviceProvider,
+                        DR.GetString(DR.UpdateRelativePaths),
+                        DR.GetString(DR.WorkflowDesignerTitle),
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question,
+                        MessageBoxDefaultButton.Button1
+                    )
+                )
                 {
                     DialogResult = DialogResult.None;
                     return;
@@ -500,7 +558,11 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     Cursor.Current = Cursors.WaitCursor;
 
-                    ThemeConfigHelpers.EnsureDesignerThemes(this.serviceProvider, this.bufferedTheme, ThemeConfigHelpers.GetAllTreeNodes(this.designerTreeView));
+                    ThemeConfigHelpers.EnsureDesignerThemes(
+                        this.serviceProvider,
+                        this.bufferedTheme,
+                        ThemeConfigHelpers.GetAllTreeNodes(this.designerTreeView)
+                    );
                     this.bufferedTheme.ReadOnly = false;
                     this.bufferedTheme.Name = this.themeNameTextBox.Text.Trim();
                     this.bufferedTheme.Description = DR.GetString(DR.ThemeDescription);
@@ -510,9 +572,15 @@ namespace System.Workflow.ComponentModel.Design
                 }
                 catch
                 {
-                    DesignerHelpers.ShowError(this.serviceProvider, DR.GetString(DR.ThemeFileCreationError));
+                    DesignerHelpers.ShowError(
+                        this.serviceProvider,
+                        DR.GetString(DR.ThemeFileCreationError)
+                    );
                     this.themeLocationTextBox.SelectionStart = 0;
-                    this.themeLocationTextBox.SelectionLength = (this.themeLocationTextBox.Text != null) ? this.themeLocationTextBox.Text.Length : 0;
+                    this.themeLocationTextBox.SelectionLength =
+                        (this.themeLocationTextBox.Text != null)
+                            ? this.themeLocationTextBox.Text.Length
+                            : 0;
                     this.themeLocationTextBox.Focus();
                     DialogResult = DialogResult.None;
                 }
@@ -537,17 +605,33 @@ namespace System.Workflow.ComponentModel.Design
 
         private void ShowHelp()
         {
-            DesignerHelpers.ShowHelpFromKeyword(this.serviceProvider, typeof(ThemeConfigurationDialog).FullName + ".UI");
+            DesignerHelpers.ShowHelpFromKeyword(
+                this.serviceProvider,
+                typeof(ThemeConfigurationDialog).FullName + ".UI"
+            );
         }
 
         private void OnThemePanelPaint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawRectangle(SystemPens.ControlDark, 0, 0, this.themePanel.ClientSize.Width - 1, this.themePanel.ClientSize.Height - 2);
+            e.Graphics.DrawRectangle(
+                SystemPens.ControlDark,
+                0,
+                0,
+                this.themePanel.ClientSize.Width - 1,
+                this.themePanel.ClientSize.Height - 2
+            );
 
             if (this.previewShown)
             {
-                Point top = new Point(this.propertiesGrid.Right + (this.dummyPreviewPanel.Left - this.propertiesGrid.Right) / 2, this.themePanel.Margin.Top);
-                Point bottom = new Point(top.X, this.themePanel.Height - this.themePanel.Margin.Bottom);
+                Point top = new Point(
+                    this.propertiesGrid.Right
+                        + (this.dummyPreviewPanel.Left - this.propertiesGrid.Right) / 2,
+                    this.themePanel.Margin.Top
+                );
+                Point bottom = new Point(
+                    top.X,
+                    this.themePanel.Height - this.themePanel.Margin.Bottom
+                );
                 e.Graphics.DrawLine(SystemPens.ControlDark, top, bottom);
             }
 
@@ -555,28 +639,73 @@ namespace System.Workflow.ComponentModel.Design
             using (Pen framePen = new Pen(Color.Black, 1))
             {
                 framePen.DashStyle = DashStyle.Dot;
-                e.Graphics.DrawLine(framePen, this.designerPreview.Left - margin.Width, this.designerPreview.Top - 1, this.designerPreview.Right + margin.Width, this.designerPreview.Top - 1);
-                e.Graphics.DrawLine(framePen, this.designerPreview.Left - margin.Width, this.designerPreview.Bottom + 1, this.designerPreview.Right + margin.Width, this.designerPreview.Bottom + 1);
-                e.Graphics.DrawLine(framePen, this.designerPreview.Left - 1, this.designerPreview.Top - margin.Height, this.designerPreview.Left - 1, this.designerPreview.Bottom + margin.Height);
-                e.Graphics.DrawLine(framePen, this.designerPreview.Right + 1, this.designerPreview.Top - margin.Height, this.designerPreview.Right + 1, this.designerPreview.Bottom + margin.Height);
+                e.Graphics.DrawLine(
+                    framePen,
+                    this.designerPreview.Left - margin.Width,
+                    this.designerPreview.Top - 1,
+                    this.designerPreview.Right + margin.Width,
+                    this.designerPreview.Top - 1
+                );
+                e.Graphics.DrawLine(
+                    framePen,
+                    this.designerPreview.Left - margin.Width,
+                    this.designerPreview.Bottom + 1,
+                    this.designerPreview.Right + margin.Width,
+                    this.designerPreview.Bottom + 1
+                );
+                e.Graphics.DrawLine(
+                    framePen,
+                    this.designerPreview.Left - 1,
+                    this.designerPreview.Top - margin.Height,
+                    this.designerPreview.Left - 1,
+                    this.designerPreview.Bottom + margin.Height
+                );
+                e.Graphics.DrawLine(
+                    framePen,
+                    this.designerPreview.Right + 1,
+                    this.designerPreview.Top - margin.Height,
+                    this.designerPreview.Right + 1,
+                    this.designerPreview.Bottom + margin.Height
+                );
             }
         }
 
         private void OnDesignerSelectionChanged(object sender, TreeViewEventArgs eventArgs)
         {
             //We need to select the theme of the selected designer
-            Type activityType = (eventArgs.Node != null && typeof(Activity).IsAssignableFrom(eventArgs.Node.Tag as System.Type)) ? eventArgs.Node.Tag as System.Type : null;
+            Type activityType =
+                (
+                    eventArgs.Node != null
+                    && typeof(Activity).IsAssignableFrom(eventArgs.Node.Tag as System.Type)
+                )
+                    ? eventArgs.Node.Tag as System.Type
+                    : null;
             IDesigner previewedDesigner = this.designerPreview.UpdatePreview(activityType);
 
             object[] selectedObjects = null;
             if (activityType == null)
             {
                 if (eventArgs.Node != null)
-                    selectedObjects = (eventArgs.Node.Parent == null) ? new object[] { this.bufferedTheme.AmbientTheme } : ThemeConfigHelpers.GetDesignerThemes(this.serviceProvider, this.bufferedTheme, eventArgs.Node);
+                    selectedObjects =
+                        (eventArgs.Node.Parent == null)
+                            ? new object[] { this.bufferedTheme.AmbientTheme }
+                            : ThemeConfigHelpers.GetDesignerThemes(
+                                this.serviceProvider,
+                                this.bufferedTheme,
+                                eventArgs.Node
+                            );
             }
             else
             {
-                selectedObjects = (previewedDesigner != null) ? new object[] { this.bufferedTheme.GetDesignerTheme(previewedDesigner as ActivityDesigner) } : null;
+                selectedObjects =
+                    (previewedDesigner != null)
+                        ? new object[]
+                        {
+                            this.bufferedTheme.GetDesignerTheme(
+                                previewedDesigner as ActivityDesigner
+                            ),
+                        }
+                        : null;
             }
 
             this.propertiesGrid.SelectedObjects = selectedObjects;
@@ -602,11 +731,7 @@ namespace System.Workflow.ComponentModel.Design
 
         private bool ShowPreview
         {
-            get
-            {
-                return this.previewShown;
-            }
-
+            get { return this.previewShown; }
             set
             {
                 this.previewShown = value;
@@ -615,12 +740,15 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (this.previewShown)
                 {
-                    this.themePanel.Width = this.designerPreview.Right + ((this.designerPreview.Left - this.propertiesGrid.Right) / 2);
+                    this.themePanel.Width =
+                        this.designerPreview.Right
+                        + ((this.designerPreview.Left - this.propertiesGrid.Right) / 2);
                     this.previewButton.Text = DR.GetString(DR.Preview) + " <<";
                 }
                 else
                 {
-                    this.themePanel.Width = this.themeConfigPanel.Right + this.themeConfigPanel.Left;
+                    this.themePanel.Width =
+                        this.themeConfigPanel.Right + this.themeConfigPanel.Left;
                     this.previewButton.Text = DR.GetString(DR.Preview) + " >>";
                 }
                 Width = this.themePanel.Right + this.themePanel.Left + Margin.Left + Margin.Right;
@@ -628,11 +756,17 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-        private void OnOperatingSystemSettingsChanged(object sender, UserPreferenceChangedEventArgs e)
+        private void OnOperatingSystemSettingsChanged(
+            object sender,
+            UserPreferenceChangedEventArgs e
+        )
         {
             //
 
-            if (e.Category == UserPreferenceCategory.Color || e.Category == UserPreferenceCategory.VisualStyle)
+            if (
+                e.Category == UserPreferenceCategory.Color
+                || e.Category == UserPreferenceCategory.VisualStyle
+            )
                 Font = StandardFont;
         }
         #endregion
@@ -640,7 +774,10 @@ namespace System.Workflow.ComponentModel.Design
         #region Class ThemeHelpers
         private static class ThemeConfigHelpers
         {
-            internal static void PopulateActivities(IServiceProvider serviceProvider, TreeView treeView)
+            internal static void PopulateActivities(
+                IServiceProvider serviceProvider,
+                TreeView treeView
+            )
             {
                 List<Type> activityTypes = new List<Type>();
 
@@ -651,14 +788,25 @@ namespace System.Workflow.ComponentModel.Design
                 stockActivityTypeNames.Add(DesignerHelpers.IfElseBranchTypeRef);
                 stockActivityTypeNames.Add(typeof(FaultHandlersActivity).AssemblyQualifiedName);
                 stockActivityTypeNames.Add(DesignerHelpers.EventHandlersTypeRef);
-                stockActivityTypeNames.Add(typeof(CompensationHandlerActivity).AssemblyQualifiedName);
-                stockActivityTypeNames.Add(typeof(CancellationHandlerActivity).AssemblyQualifiedName);
+                stockActivityTypeNames.Add(
+                    typeof(CompensationHandlerActivity).AssemblyQualifiedName
+                );
+                stockActivityTypeNames.Add(
+                    typeof(CancellationHandlerActivity).AssemblyQualifiedName
+                );
 
                 foreach (string stockTypeName in stockActivityTypeNames)
                 {
                     Type stockType = Type.GetType(stockTypeName, false);
                     if (stockType == null)
-                        Debug.Assert(false, string.Format(CultureInfo.CurrentCulture, "Could not load type '{0}'", stockTypeName));
+                        Debug.Assert(
+                            false,
+                            string.Format(
+                                CultureInfo.CurrentCulture,
+                                "Could not load type '{0}'",
+                                stockTypeName
+                            )
+                        );
                     else
                         activityTypes.Add(stockType);
                 }
@@ -679,8 +827,11 @@ namespace System.Workflow.ComponentModel.Design
                 treeView.Nodes.Add(workflowNode);
 
                 //Now we go thru the toolbox items and get all the items which are not in our assembly
-                IToolboxService toolboxService = serviceProvider.GetService(typeof(IToolboxService)) as IToolboxService;
-                ITypeProviderCreator typeProviderCreator = serviceProvider.GetService(typeof(ITypeProviderCreator)) as ITypeProviderCreator;
+                IToolboxService toolboxService =
+                    serviceProvider.GetService(typeof(IToolboxService)) as IToolboxService;
+                ITypeProviderCreator typeProviderCreator =
+                    serviceProvider.GetService(typeof(ITypeProviderCreator))
+                    as ITypeProviderCreator;
                 if (toolboxService != null && typeProviderCreator != null)
                 {
                     ToolboxItemCollection toolboxItems = toolboxService.GetToolboxItems();
@@ -691,8 +842,16 @@ namespace System.Workflow.ComponentModel.Design
                         {
                             foreach (ToolboxItemFilterAttribute filter in toolboxItem.Filter)
                             {
-                                if (filter.FilterString.StartsWith("Microsoft.Workflow.VSDesigner", StringComparison.OrdinalIgnoreCase) ||
-                                    filter.FilterString.StartsWith("System.Workflow.ComponentModel", StringComparison.OrdinalIgnoreCase))
+                                if (
+                                    filter.FilterString.StartsWith(
+                                        "Microsoft.Workflow.VSDesigner",
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                    || filter.FilterString.StartsWith(
+                                        "System.Workflow.ComponentModel",
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                )
                                 {
                                     customWinOEActivityType = true;
                                     break;
@@ -703,7 +862,9 @@ namespace System.Workflow.ComponentModel.Design
                         if (customWinOEActivityType)
                         {
                             Type type = null;
-                            Assembly assembly = typeProviderCreator.GetTransientAssembly(toolboxItem.AssemblyName);
+                            Assembly assembly = typeProviderCreator.GetTransientAssembly(
+                                toolboxItem.AssemblyName
+                            );
                             if (assembly != null)
                                 type = assembly.GetType(toolboxItem.TypeName);
                             if (type != null)
@@ -711,7 +872,10 @@ namespace System.Workflow.ComponentModel.Design
                                 ConstructorInfo[] constructors = type.GetConstructors();
                                 foreach (ConstructorInfo constructor in constructors)
                                 {
-                                    if (constructor.IsPublic && constructor.GetParameters().GetLength(0) == 0)
+                                    if (
+                                        constructor.IsPublic
+                                        && constructor.GetParameters().GetLength(0) == 0
+                                    )
                                         activityTypes.Add(type);
                                 }
                             }
@@ -721,12 +885,30 @@ namespace System.Workflow.ComponentModel.Design
 
                 foreach (Type type in activityTypes)
                 {
-                    Type designerBaseType = (type.FullName.Equals(DesignerHelpers.SequentialWorkflowTypeRef, StringComparison.OrdinalIgnoreCase)) ? typeof(IRootDesigner) : typeof(IDesigner);
-                    Type designerType = ActivityDesigner.GetDesignerType(serviceProvider, type, designerBaseType);
+                    Type designerBaseType =
+                        (
+                            type.FullName.Equals(
+                                DesignerHelpers.SequentialWorkflowTypeRef,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                            ? typeof(IRootDesigner)
+                            : typeof(IDesigner);
+                    Type designerType = ActivityDesigner.GetDesignerType(
+                        serviceProvider,
+                        type,
+                        designerBaseType
+                    );
                     if (designerType != null && !nonpreviewableDesignerTypes.Contains(designerType))
                     {
-                        object[] attribs = designerType.GetCustomAttributes(typeof(ActivityDesignerThemeAttribute), true);
-                        ActivityDesignerThemeAttribute themeAttrib = (attribs != null && attribs.GetLength(0) > 0) ? attribs[0] as ActivityDesignerThemeAttribute : null;
+                        object[] attribs = designerType.GetCustomAttributes(
+                            typeof(ActivityDesignerThemeAttribute),
+                            true
+                        );
+                        ActivityDesignerThemeAttribute themeAttrib =
+                            (attribs != null && attribs.GetLength(0) > 0)
+                                ? attribs[0] as ActivityDesignerThemeAttribute
+                                : null;
                         if (themeAttrib != null)
                         {
                             Image image = ActivityToolboxItem.GetToolboxImage(type);
@@ -735,14 +917,35 @@ namespace System.Workflow.ComponentModel.Design
                                 treeView.ImageList = new ImageList();
                                 treeView.ImageList.ColorDepth = ColorDepth.Depth32Bit;
                                 Image standardImage = DR.GetImage(DR.Activity) as Image;
-                                treeView.ImageList.Images.Add(standardImage, AmbientTheme.TransparentColor);
+                                treeView.ImageList.Images.Add(
+                                    standardImage,
+                                    AmbientTheme.TransparentColor
+                                );
                             }
 
-                            TreeNode parentNode = ThemeConfigHelpers.GetCatagoryNodeForDesigner(designerType, ThemeConfigHelpers.GetAllTreeNodes(treeView));
+                            TreeNode parentNode = ThemeConfigHelpers.GetCatagoryNodeForDesigner(
+                                designerType,
+                                ThemeConfigHelpers.GetAllTreeNodes(treeView)
+                            );
                             if (parentNode != null)
                             {
-                                int imageIndex = (image != null) ? treeView.ImageList.Images.Add(image, AmbientTheme.TransparentColor) : 0;
-                                TreeNode nodeToInsert = (imageIndex >= 0) ? new TreeNode(ActivityToolboxItem.GetToolboxDisplayName(type), imageIndex, imageIndex) : new TreeNode(ActivityToolboxItem.GetToolboxDisplayName(type));
+                                int imageIndex =
+                                    (image != null)
+                                        ? treeView.ImageList.Images.Add(
+                                            image,
+                                            AmbientTheme.TransparentColor
+                                        )
+                                        : 0;
+                                TreeNode nodeToInsert =
+                                    (imageIndex >= 0)
+                                        ? new TreeNode(
+                                            ActivityToolboxItem.GetToolboxDisplayName(type),
+                                            imageIndex,
+                                            imageIndex
+                                        )
+                                        : new TreeNode(
+                                            ActivityToolboxItem.GetToolboxDisplayName(type)
+                                        );
                                 nodeToInsert.Tag = type;
 
                                 //We always make sure that cata----es are at the end
@@ -761,21 +964,30 @@ namespace System.Workflow.ComponentModel.Design
                 treeView.EndUpdate();
             }
 
-            internal static TreeNode GetCatagoryNodeForDesigner(Type designerType, TreeNode[] treeNodes)
+            internal static TreeNode GetCatagoryNodeForDesigner(
+                Type designerType,
+                TreeNode[] treeNodes
+            )
             {
                 if (designerType == null)
                     throw new ArgumentNullException("designerType");
                 if (treeNodes == null)
                     throw new ArgumentNullException("treeNodes");
                 if (treeNodes.Length == 0)
-                    throw new ArgumentException(SR.GetString(SR.Error_InvalidArgumentValue), "treeNodes");
+                    throw new ArgumentException(
+                        SR.GetString(SR.Error_InvalidArgumentValue),
+                        "treeNodes"
+                    );
 
                 CategoryAttribute parentCatagoryAttribute = null;
                 CategoryAttribute designerCatagoryAttribute = null;
                 Type baseType = designerType;
                 while (baseType != typeof(object) && parentCatagoryAttribute == null)
                 {
-                    object[] attribs = baseType.GetCustomAttributes(typeof(CategoryAttribute), false);
+                    object[] attribs = baseType.GetCustomAttributes(
+                        typeof(CategoryAttribute),
+                        false
+                    );
                     if (attribs != null && attribs.GetLength(0) > 0)
                     {
                         if (designerCatagoryAttribute == null)
@@ -795,11 +1007,24 @@ namespace System.Workflow.ComponentModel.Design
 
                 foreach (TreeNode item in treeNodes)
                 {
-                    if (parentCatagoryAttribute != null && parentCatagoryAttribute.Category == item.Text && (item.Tag == null || !typeof(Activity).IsAssignableFrom(item.Tag.GetType())))
+                    if (
+                        parentCatagoryAttribute != null
+                        && parentCatagoryAttribute.Category == item.Text
+                        && (
+                            item.Tag == null
+                            || !typeof(Activity).IsAssignableFrom(item.Tag.GetType())
+                        )
+                    )
                         parentCatagoryTreeNode = item;
 
                     //We found the catagory
-                    if (designerCatagoryAttribute.Category == item.Text && (item.Tag == null || !typeof(Activity).IsAssignableFrom(item.Tag.GetType())))
+                    if (
+                        designerCatagoryAttribute.Category == item.Text
+                        && (
+                            item.Tag == null
+                            || !typeof(Activity).IsAssignableFrom(item.Tag.GetType())
+                        )
+                    )
                     {
                         catagoryNode = item;
                         break;
@@ -822,7 +1047,11 @@ namespace System.Workflow.ComponentModel.Design
                 return catagoryNode;
             }
 
-            internal static DesignerTheme[] GetDesignerThemes(IServiceProvider serviceProvider, WorkflowTheme workflowTheme, TreeNode selectedNode)
+            internal static DesignerTheme[] GetDesignerThemes(
+                IServiceProvider serviceProvider,
+                WorkflowTheme workflowTheme,
+                TreeNode selectedNode
+            )
             {
                 ArrayList designerThemes = new ArrayList();
                 Queue<TreeNode> nodes = new Queue<TreeNode>();
@@ -833,8 +1062,20 @@ namespace System.Workflow.ComponentModel.Design
                     Type activityType = treeNode.Tag as System.Type;
                     if (activityType != null)
                     {
-                        Type designerBaseType = (activityType.FullName.Equals(DesignerHelpers.SequentialWorkflowTypeRef, StringComparison.OrdinalIgnoreCase)) ? typeof(IRootDesigner) : typeof(IDesigner);
-                        Type designerType = ActivityDesigner.GetDesignerType(serviceProvider, activityType, designerBaseType);
+                        Type designerBaseType =
+                            (
+                                activityType.FullName.Equals(
+                                    DesignerHelpers.SequentialWorkflowTypeRef,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
+                                ? typeof(IRootDesigner)
+                                : typeof(IDesigner);
+                        Type designerType = ActivityDesigner.GetDesignerType(
+                            serviceProvider,
+                            activityType,
+                            designerBaseType
+                        );
                         if (designerType != null)
                         {
                             DesignerTheme designerTheme = workflowTheme.GetTheme(designerType);
@@ -871,7 +1112,11 @@ namespace System.Workflow.ComponentModel.Design
                 return items.ToArray();
             }
 
-            internal static void EnsureDesignerThemes(IServiceProvider serviceProvider, WorkflowTheme workflowTheme, TreeNode[] items)
+            internal static void EnsureDesignerThemes(
+                IServiceProvider serviceProvider,
+                WorkflowTheme workflowTheme,
+                TreeNode[] items
+            )
             {
                 //We need to recurse thru the themes and make sure that we have all the designer themes created
                 foreach (TreeNode item in items)
@@ -880,8 +1125,20 @@ namespace System.Workflow.ComponentModel.Design
                     Type activityType = item.Tag as Type;
                     if (activityType != null)
                     {
-                        Type designerBaseType = (activityType.FullName.Equals(DesignerHelpers.SequentialWorkflowTypeRef, StringComparison.OrdinalIgnoreCase)) ? typeof(IRootDesigner) : typeof(IDesigner);
-                        Type designerType = ActivityDesigner.GetDesignerType(serviceProvider, activityType, designerBaseType);
+                        Type designerBaseType =
+                            (
+                                activityType.FullName.Equals(
+                                    DesignerHelpers.SequentialWorkflowTypeRef,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
+                                ? typeof(IRootDesigner)
+                                : typeof(IDesigner);
+                        Type designerType = ActivityDesigner.GetDesignerType(
+                            serviceProvider,
+                            activityType,
+                            designerBaseType
+                        );
                         if (designerType != null)
                             designerTheme = workflowTheme.GetTheme(designerType);
                     }
@@ -902,7 +1159,11 @@ namespace System.Workflow.ComponentModel.Design
                 if (treeNode1.Nodes.Count > treeNode2.Nodes.Count)
                     return 1;
                 else
-                    return String.Compare(treeNode1.Text, treeNode2.Text, StringComparison.CurrentCulture);
+                    return String.Compare(
+                        treeNode1.Text,
+                        treeNode2.Text,
+                        StringComparison.CurrentCulture
+                    );
             }
             #endregion
         }
@@ -931,16 +1192,22 @@ namespace System.Workflow.ComponentModel.Design
                 this.surface.BeginLoad(loader);
 
                 //Add the root activity
-                IDesignerHost host = this.surface.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                IDesignerHost host =
+                    this.surface.GetService(typeof(IDesignerHost)) as IDesignerHost;
                 Debug.Assert(host != null);
 
                 //
-                Activity rootDecl = host.CreateComponent(Type.GetType(DesignerHelpers.SequentialWorkflowTypeRef)) as Activity;
+                Activity rootDecl =
+                    host.CreateComponent(Type.GetType(DesignerHelpers.SequentialWorkflowTypeRef))
+                    as Activity;
                 rootDecl.Name = "ThemeSequentialWorkflow";
                 WorkflowDesignerLoader.AddActivityToDesigner(this.surface, rootDecl as Activity);
 
                 //Create the readonly workflow
-                ReadonlyWorkflow workflowView = new ReadonlyWorkflow(this.parent, this.surface as IServiceProvider);
+                ReadonlyWorkflow workflowView = new ReadonlyWorkflow(
+                    this.parent,
+                    this.surface as IServiceProvider
+                );
                 workflowView.TabStop = false;
                 workflowView.Dock = DockStyle.Fill;
                 Controls.Add(workflowView);
@@ -956,9 +1223,13 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     IDesignerHost host = GetService(typeof(IDesignerHost)) as IDesignerHost;
                     if (host != null && host.RootComponent != null)
-                        WorkflowDesignerLoader.RemoveActivityFromDesigner(this.surface, host.RootComponent as Activity);
+                        WorkflowDesignerLoader.RemoveActivityFromDesigner(
+                            this.surface,
+                            host.RootComponent as Activity
+                        );
 
-                    ReadonlyWorkflow workflowView = (Controls.Count > 0) ? Controls[0] as ReadonlyWorkflow : null;
+                    ReadonlyWorkflow workflowView =
+                        (Controls.Count > 0) ? Controls[0] as ReadonlyWorkflow : null;
                     Controls.Clear();
                     if (workflowView != null)
                     {
@@ -976,7 +1247,8 @@ namespace System.Workflow.ComponentModel.Design
             internal IDesigner UpdatePreview(Type activityType)
             {
                 bool dummyPreview = false; //if we have a dummy preview activity
-                IDesignerHost host = this.surface.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                IDesignerHost host =
+                    this.surface.GetService(typeof(IDesignerHost)) as IDesignerHost;
                 Debug.Assert(host != null);
 
                 CompositeActivity rootDecl = host.RootComponent as CompositeActivity;
@@ -992,38 +1264,74 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         Activity declToDelete = rootDecl.Activities[0];
                         rootDecl.Activities.Remove(declToDelete);
-                        WorkflowDesignerLoader.RemoveActivityFromDesigner(this.surface, declToDelete);
+                        WorkflowDesignerLoader.RemoveActivityFromDesigner(
+                            this.surface,
+                            declToDelete
+                        );
                     }
 
                     //Add new activities to preview
-                    if (activityType == null || activityType.FullName.Equals(DesignerHelpers.SequentialWorkflowTypeRef, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        activityType == null
+                        || activityType.FullName.Equals(
+                            DesignerHelpers.SequentialWorkflowTypeRef,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
-                        AddDummyActivity(rootDecl as CompositeActivity, Type.GetType(DesignerHelpers.CodeActivityTypeRef));
+                        AddDummyActivity(
+                            rootDecl as CompositeActivity,
+                            Type.GetType(DesignerHelpers.CodeActivityTypeRef)
+                        );
                         dummyPreview = true;
                     }
                     else
                     {
                         IComponent[] components = null;
-                        object[] attribs = activityType.GetCustomAttributes(typeof(ToolboxItemAttribute), false);
-                        ToolboxItemAttribute toolboxItemAttrib = (attribs != null && attribs.GetLength(0) > 0) ? attribs[0] as ToolboxItemAttribute : null;
-                        if (toolboxItemAttrib != null && toolboxItemAttrib.ToolboxItemType != null && typeof(ActivityToolboxItem).IsAssignableFrom(toolboxItemAttrib.ToolboxItemType))
+                        object[] attribs = activityType.GetCustomAttributes(
+                            typeof(ToolboxItemAttribute),
+                            false
+                        );
+                        ToolboxItemAttribute toolboxItemAttrib =
+                            (attribs != null && attribs.GetLength(0) > 0)
+                                ? attribs[0] as ToolboxItemAttribute
+                                : null;
+                        if (
+                            toolboxItemAttrib != null
+                            && toolboxItemAttrib.ToolboxItemType != null
+                            && typeof(ActivityToolboxItem).IsAssignableFrom(
+                                toolboxItemAttrib.ToolboxItemType
+                            )
+                        )
                         {
-                            ActivityToolboxItem item = Activator.CreateInstance(toolboxItemAttrib.ToolboxItemType, new object[] { activityType }) as ActivityToolboxItem;
+                            ActivityToolboxItem item =
+                                Activator.CreateInstance(
+                                    toolboxItemAttrib.ToolboxItemType,
+                                    new object[] { activityType }
+                                ) as ActivityToolboxItem;
                             components = item.CreateComponents(host);
                         }
 
                         if (components == null)
-                            components = new IComponent[] { Activator.CreateInstance(activityType) as IComponent };
+                            components = new IComponent[]
+                            {
+                                Activator.CreateInstance(activityType) as IComponent,
+                            };
 
-                        Activity activity = (components != null && components.Length > 0) ? components[0] as Activity : null;
+                        Activity activity =
+                            (components != null && components.Length > 0)
+                                ? components[0] as Activity
+                                : null;
                         if (activity != null)
                         {
                             rootDecl.Activities.Add(activity);
                             EnsureUniqueId(activity);
 
                             WorkflowDesignerLoader.AddActivityToDesigner(this.surface, activity);
-                            CompositeActivityDesigner compositeDesigner = host.GetDesigner(rootDecl) as CompositeActivityDesigner;
-                            ActivityDesigner activityDesigner = host.GetDesigner(activity) as ActivityDesigner;
+                            CompositeActivityDesigner compositeDesigner =
+                                host.GetDesigner(rootDecl) as CompositeActivityDesigner;
+                            ActivityDesigner activityDesigner =
+                                host.GetDesigner(activity) as ActivityDesigner;
                             if (compositeDesigner != null && activityDesigner != null)
                                 compositeDesigner.EnsureVisibleContainedDesigner(activityDesigner);
                             /*
@@ -1038,27 +1346,30 @@ namespace System.Workflow.ComponentModel.Design
                         }
                     }
 
-
-                    ISelectionService selectionService = host.GetService(typeof(ISelectionService)) as ISelectionService;
+                    ISelectionService selectionService =
+                        host.GetService(typeof(ISelectionService)) as ISelectionService;
                     if (selectionService != null)
                         selectionService.SetSelectedComponents(new IComponent[] { rootDecl });
 
-                    ReadonlyWorkflow workflowView = (Controls.Count > 0) ? Controls[0] as ReadonlyWorkflow : null;
+                    ReadonlyWorkflow workflowView =
+                        (Controls.Count > 0) ? Controls[0] as ReadonlyWorkflow : null;
                     if (workflowView != null)
                         workflowView.PerformLayout();
 
-                    previewActivity = (rootDecl.Activities.Count > 0 && !dummyPreview) ? rootDecl.Activities[0] : rootDecl;
+                    previewActivity =
+                        (rootDecl.Activities.Count > 0 && !dummyPreview)
+                            ? rootDecl.Activities[0]
+                            : rootDecl;
                 }
-                catch
-                {
-                }
+                catch { }
 
                 return (previewActivity != null) ? host.GetDesigner(previewActivity) : null;
             }
 
             private void AddDummyActivity(CompositeActivity parentActivity, Type activityType)
             {
-                IDesignerHost host = this.surface.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                IDesignerHost host =
+                    this.surface.GetService(typeof(IDesignerHost)) as IDesignerHost;
                 Debug.Assert(host != null);
                 if (host == null)
                     return;
@@ -1083,8 +1394,10 @@ namespace System.Workflow.ComponentModel.Design
                     Activity Activity = Activities.Dequeue();
                     string fullTypeName = Activity.GetType().FullName;
 
-                    int id = (identifiers.ContainsKey(fullTypeName)) ? identifiers[fullTypeName] : 1;
-                    Activity.Name = Activity.GetType().Name + id.ToString(CultureInfo.InvariantCulture);
+                    int id =
+                        (identifiers.ContainsKey(fullTypeName)) ? identifiers[fullTypeName] : 1;
+                    Activity.Name =
+                        Activity.GetType().Name + id.ToString(CultureInfo.InvariantCulture);
                     id += 1;
 
                     if (identifiers.ContainsKey(fullTypeName))
@@ -1163,10 +1476,7 @@ namespace System.Workflow.ComponentModel.Design
 
                 public override string FileName
                 {
-                    get
-                    {
-                        return String.Empty;
-                    }
+                    get { return String.Empty; }
                 }
             }
             #endregion
@@ -1176,11 +1486,15 @@ namespace System.Workflow.ComponentModel.Design
             {
                 private ThemeConfigurationDialog themeConfigDialog = null;
 
-                internal ReadonlyWorkflow(ThemeConfigurationDialog themeConfigDialog, IServiceProvider serviceProvider)
+                internal ReadonlyWorkflow(
+                    ThemeConfigurationDialog themeConfigDialog,
+                    IServiceProvider serviceProvider
+                )
                     : base(serviceProvider)
                 {
                     this.themeConfigDialog = themeConfigDialog;
-                    this.themeConfigDialog.propertiesGrid.PropertyValueChanged += new PropertyValueChangedEventHandler(OnThemePropertyChanged);
+                    this.themeConfigDialog.propertiesGrid.PropertyValueChanged +=
+                        new PropertyValueChangedEventHandler(OnThemePropertyChanged);
                     this.EnableFitToScreen = false;
 
                     AddDesignerMessageFilter(new ReadonlyMessageFilter());
@@ -1190,8 +1504,12 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     base.Dispose(disposing);
 
-                    if (this.themeConfigDialog != null && this.themeConfigDialog.propertiesGrid != null)
-                        this.themeConfigDialog.propertiesGrid.PropertyValueChanged -= new PropertyValueChangedEventHandler(OnThemePropertyChanged);
+                    if (
+                        this.themeConfigDialog != null
+                        && this.themeConfigDialog.propertiesGrid != null
+                    )
+                        this.themeConfigDialog.propertiesGrid.PropertyValueChanged -=
+                            new PropertyValueChangedEventHandler(OnThemePropertyChanged);
                 }
 
                 protected override void OnPaint(PaintEventArgs e)
@@ -1202,7 +1520,11 @@ namespace System.Workflow.ComponentModel.Design
                         return;
                     }
 
-                    using (BufferedTheme bufferedTheme = new BufferedTheme(this.themeConfigDialog.bufferedTheme))
+                    using (
+                        BufferedTheme bufferedTheme = new BufferedTheme(
+                            this.themeConfigDialog.bufferedTheme
+                        )
+                    )
                         base.OnPaint(e);
                 }
 
@@ -1210,12 +1532,19 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     if (this.themeConfigDialog != null)
                     {
-                        using (BufferedTheme bufferedTheme = new BufferedTheme(this.themeConfigDialog.bufferedTheme))
+                        using (
+                            BufferedTheme bufferedTheme = new BufferedTheme(
+                                this.themeConfigDialog.bufferedTheme
+                            )
+                        )
                             base.OnLayout(levent);
 
                         Size maxExtent = ActiveLayout.Extent;
                         Size size = Size;
-                        PointF zoom = new PointF((float)size.Width / (float)maxExtent.Width, (float)size.Height / (float)maxExtent.Height);
+                        PointF zoom = new PointF(
+                            (float)size.Width / (float)maxExtent.Width,
+                            (float)size.Height / (float)maxExtent.Height
+                        );
                         Zoom = Convert.ToInt32((Math.Min(zoom.X, zoom.Y) * 100));
                     }
                 }
@@ -1224,7 +1553,11 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     if (this.themeConfigDialog != null)
                     {
-                        using (BufferedTheme bufferedTheme = new BufferedTheme(this.themeConfigDialog.bufferedTheme))
+                        using (
+                            BufferedTheme bufferedTheme = new BufferedTheme(
+                                this.themeConfigDialog.bufferedTheme
+                            )
+                        )
                             base.OnThemeChange(WorkflowTheme.CurrentTheme, EventArgs.Empty);
                     }
                 }

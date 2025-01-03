@@ -31,38 +31,42 @@ namespace System.IO.Tests
         [OuterLoop]
         public void FileSystemWatcher_File_Create_EnablingDisablingNotAffectRaisingEvent()
         {
-            FileSystemWatcherTest.Execute(() =>
-            {
-                using (var watcher = new FileSystemWatcher(TestDirectory))
+            FileSystemWatcherTest.Execute(
+                () =>
                 {
-                    string fileName = Path.Combine(TestDirectory, "file");
-                    watcher.Filter = Path.GetFileName(fileName);
-
-                    int numberOfRaisedEvents = 0;
-                    AutoResetEvent autoResetEvent = new AutoResetEvent(false);
-                    FileSystemEventHandler handler = (o, e) =>
+                    using (var watcher = new FileSystemWatcher(TestDirectory))
                     {
-                        Interlocked.Increment(ref numberOfRaisedEvents);
-                        autoResetEvent.Set();
-                    };
+                        string fileName = Path.Combine(TestDirectory, "file");
+                        watcher.Filter = Path.GetFileName(fileName);
 
-                    watcher.Created += handler;
+                        int numberOfRaisedEvents = 0;
+                        AutoResetEvent autoResetEvent = new AutoResetEvent(false);
+                        FileSystemEventHandler handler = (o, e) =>
+                        {
+                            Interlocked.Increment(ref numberOfRaisedEvents);
+                            autoResetEvent.Set();
+                        };
 
-                    for (int i = 0; i < 100; i++)
-                    {
+                        watcher.Created += handler;
+
+                        for (int i = 0; i < 100; i++)
+                        {
+                            watcher.EnableRaisingEvents = true;
+                            watcher.EnableRaisingEvents = false;
+                        }
+
                         watcher.EnableRaisingEvents = true;
-                        watcher.EnableRaisingEvents = false;
+
+                        // this should raise one and only one event
+                        File.Create(fileName).Dispose();
+                        Assert.True(autoResetEvent.WaitOne(WaitForExpectedEventTimeout_NoRetry));
+                        Assert.False(autoResetEvent.WaitOne(SubsequentExpectedWait));
+                        Assert.True(numberOfRaisedEvents == 1);
                     }
-
-                    watcher.EnableRaisingEvents = true;
-
-                    // this should raise one and only one event
-                    File.Create(fileName).Dispose();
-                    Assert.True(autoResetEvent.WaitOne(WaitForExpectedEventTimeout_NoRetry));
-                    Assert.False(autoResetEvent.WaitOne(SubsequentExpectedWait));
-                    Assert.True(numberOfRaisedEvents == 1);
-                }
-            }, DefaultAttemptsForExpectedEvent, (iteration) => RetryDelayMilliseconds);
+                },
+                DefaultAttemptsForExpectedEvent,
+                (iteration) => RetryDelayMilliseconds
+            );
         }
 
         [Fact]
@@ -105,7 +109,16 @@ namespace System.IO.Tests
         [OuterLoop("This test has a longer than average timeout and may fail intermittently")]
         public void FileSystemWatcher_File_Create_DeepDirectoryStructure()
         {
-            string deepDir = CreateTestDirectory(TestDirectory, "dir", "dir", "dir", "dir", "dir", "dir", "dir");
+            string deepDir = CreateTestDirectory(
+                TestDirectory,
+                "dir",
+                "dir",
+                "dir",
+                "dir",
+                "dir",
+                "dir",
+                "dir"
+            );
             using (var watcher = new FileSystemWatcher(TestDirectory, "*"))
             {
                 watcher.IncludeSubdirectories = true;
@@ -116,7 +129,14 @@ namespace System.IO.Tests
                 Action action = () => File.Create(fileName).Dispose();
                 Action cleanup = () => File.Delete(fileName);
 
-                ExpectEvent(watcher, WatcherChangeTypes.Created, action, cleanup, fileName, LongWaitTimeout);
+                ExpectEvent(
+                    watcher,
+                    WatcherChangeTypes.Created,
+                    action,
+                    cleanup,
+                    fileName,
+                    LongWaitTimeout
+                );
             }
         }
 
@@ -129,7 +149,8 @@ namespace System.IO.Tests
             {
                 // Make the symlink in our path (to the temp file) and make sure an event is raised
                 string symLinkPath = Path.Combine(dir, GetRandomLinkName());
-                Action action = () => Assert.True(MountHelper.CreateSymbolicLink(symLinkPath, temp, false));
+                Action action = () =>
+                    Assert.True(MountHelper.CreateSymbolicLink(symLinkPath, temp, false));
                 Action cleanup = () => File.Delete(symLinkPath);
 
                 ExpectEvent(watcher, WatcherChangeTypes.Created, action, cleanup, symLinkPath);
@@ -139,23 +160,28 @@ namespace System.IO.Tests
         [Fact]
         public void FileSystemWatcher_File_Create_SynchronizingObject()
         {
-            FileSystemWatcherTest.Execute(() =>
-            {
-                using (var watcher = new FileSystemWatcher(TestDirectory))
+            FileSystemWatcherTest.Execute(
+                () =>
                 {
-                    TestISynchronizeInvoke invoker = new TestISynchronizeInvoke();
-                    watcher.SynchronizingObject = invoker;
+                    using (var watcher = new FileSystemWatcher(TestDirectory))
+                    {
+                        TestISynchronizeInvoke invoker = new TestISynchronizeInvoke();
+                        watcher.SynchronizingObject = invoker;
 
-                    string fileName = Path.Combine(TestDirectory, "file");
-                    watcher.Filter = Path.GetFileName(fileName);
+                        string fileName = Path.Combine(TestDirectory, "file");
+                        watcher.Filter = Path.GetFileName(fileName);
 
-                    Action action = () => File.Create(fileName).Dispose();
-                    Action cleanup = () => File.Delete(fileName);
+                        Action action = () => File.Create(fileName).Dispose();
+                        Action cleanup = () => File.Delete(fileName);
 
-                    ExpectEvent(watcher, WatcherChangeTypes.Created, action, cleanup, fileName);
-                    Assert.True(invoker.BeginInvoke_Called);
-                }
-            }, maxAttempts: DefaultAttemptsForExpectedEvent, backoffFunc: (iteration) => RetryDelayMilliseconds, retryWhen: e => e is XunitException);
+                        ExpectEvent(watcher, WatcherChangeTypes.Created, action, cleanup, fileName);
+                        Assert.True(invoker.BeginInvoke_Called);
+                    }
+                },
+                maxAttempts: DefaultAttemptsForExpectedEvent,
+                backoffFunc: (iteration) => RetryDelayMilliseconds,
+                retryWhen: e => e is XunitException
+            );
         }
     }
 }

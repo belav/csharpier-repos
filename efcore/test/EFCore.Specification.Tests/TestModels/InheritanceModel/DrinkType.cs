@@ -8,5 +8,5 @@ public enum DrinkType
     Drink,
     Coke,
     Lilt,
-    Tea
+    Tea,
 }

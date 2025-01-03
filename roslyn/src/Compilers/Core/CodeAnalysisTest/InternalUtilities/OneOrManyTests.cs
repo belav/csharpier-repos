@@ -64,10 +64,22 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
         {
             Verify(OneOrMany.Create(ImmutableArray.Create(1, 2, 3)).Add(4), 1, 2, 3, 4);
             Verify(OneOrMany.Create(ImmutableArray.Create(1, 2, 3, 4)), 1, 2, 3, 4);
-            Verify(OneOrMany.Create(ImmutableArray<int>.Empty).Add(1).Add(2).Add(3).Add(4), 1, 2, 3, 4);
+            Verify(
+                OneOrMany.Create(ImmutableArray<int>.Empty).Add(1).Add(2).Add(3).Add(4),
+                1,
+                2,
+                3,
+                4
+            );
             Verify(new OneOrMany<int>(ImmutableArray.Create(1, 2, 3)).Add(4), 1, 2, 3, 4);
             Verify(new OneOrMany<int>(ImmutableArray.Create(1, 2, 3, 4)), 1, 2, 3, 4);
-            Verify(new OneOrMany<int>(ImmutableArray<int>.Empty).Add(1).Add(2).Add(3).Add(4), 1, 2, 3, 4);
+            Verify(
+                new OneOrMany<int>(ImmutableArray<int>.Empty).Add(1).Add(2).Add(3).Add(4),
+                1,
+                2,
+                3,
+                4
+            );
             Verify(OneOrMany.Create(ImmutableArray.Create(1)).Add(4), 1, 4);
             Verify(OneOrMany.Create(ImmutableArray.Create(1)), 1);
 
@@ -128,8 +140,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
             Assert.Equal(0, OneOrMany.Create(ImmutableArray<int>.Empty).FirstOrDefault(i => i > 2));
             Assert.Equal(1, OneOrMany.Create(ImmutableArray.Create(1)).FirstOrDefault(i => i < 2));
             Assert.Equal(0, OneOrMany.Create(ImmutableArray.Create(1)).FirstOrDefault(i => i > 2));
-            Assert.Equal(1, OneOrMany.Create(ImmutableArray.Create(1, 3)).FirstOrDefault(i => i < 2));
-            Assert.Equal(3, OneOrMany.Create(ImmutableArray.Create(1, 3)).FirstOrDefault(i => i > 2));
+            Assert.Equal(
+                1,
+                OneOrMany.Create(ImmutableArray.Create(1, 3)).FirstOrDefault(i => i < 2)
+            );
+            Assert.Equal(
+                3,
+                OneOrMany.Create(ImmutableArray.Create(1, 3)).FirstOrDefault(i => i > 2)
+            );
         }
 
         [Fact]
@@ -137,11 +155,26 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
         {
             Assert.Equal(1, OneOrMany.Create(1).FirstOrDefault((i, a) => i < a, 2));
             Assert.Equal(0, OneOrMany.Create(1).FirstOrDefault((i, a) => i > a, 2));
-            Assert.Equal(0, OneOrMany.Create(ImmutableArray<int>.Empty).FirstOrDefault((i, a) => i > a, 2));
-            Assert.Equal(1, OneOrMany.Create(ImmutableArray.Create(1)).FirstOrDefault((i, a) => i < a, 2));
-            Assert.Equal(0, OneOrMany.Create(ImmutableArray.Create(1)).FirstOrDefault((i, a) => i > a, 2));
-            Assert.Equal(1, OneOrMany.Create(ImmutableArray.Create(1, 3)).FirstOrDefault((i, a) => i < a, 2));
-            Assert.Equal(3, OneOrMany.Create(ImmutableArray.Create(1, 3)).FirstOrDefault((i, a) => i > a, 2));
+            Assert.Equal(
+                0,
+                OneOrMany.Create(ImmutableArray<int>.Empty).FirstOrDefault((i, a) => i > a, 2)
+            );
+            Assert.Equal(
+                1,
+                OneOrMany.Create(ImmutableArray.Create(1)).FirstOrDefault((i, a) => i < a, 2)
+            );
+            Assert.Equal(
+                0,
+                OneOrMany.Create(ImmutableArray.Create(1)).FirstOrDefault((i, a) => i > a, 2)
+            );
+            Assert.Equal(
+                1,
+                OneOrMany.Create(ImmutableArray.Create(1, 3)).FirstOrDefault((i, a) => i < a, 2)
+            );
+            Assert.Equal(
+                3,
+                OneOrMany.Create(ImmutableArray.Create(1, 3)).FirstOrDefault((i, a) => i > a, 2)
+            );
         }
 
         [Fact]
@@ -214,7 +247,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
             Assert.Throws<IndexOutOfRangeException>(() => single[-1]);
             Assert.Throws<IndexOutOfRangeException>(() => quad[5]);
             Assert.Throws<IndexOutOfRangeException>(() => quad[-1]);
-            Assert.Throws<ArgumentNullException>(() => OneOrMany.Create(default(ImmutableArray<int>)));
+            Assert.Throws<ArgumentNullException>(
+                () => OneOrMany.Create(default(ImmutableArray<int>))
+            );
         }
 
         [Fact]
@@ -230,8 +265,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
             Assert.True(OneOrMany.Create(1, 2).SequenceEqual(OneOrMany.Create(1, 2)));
             Assert.False(OneOrMany.Create(1, 2).SequenceEqual(OneOrMany.Create(1, 0)));
 
-            Assert.False(OneOrMany.Create(1, 2).SequenceEqual(OneOrMany.Create(ImmutableArray.Create(1, 2, 3))));
-            Assert.True(OneOrMany.Create(1).SequenceEqual(OneOrMany.Create(ImmutableArray.Create(1))));
+            Assert.False(
+                OneOrMany
+                    .Create(1, 2)
+                    .SequenceEqual(OneOrMany.Create(ImmutableArray.Create(1, 2, 3)))
+            );
+            Assert.True(
+                OneOrMany.Create(1).SequenceEqual(OneOrMany.Create(ImmutableArray.Create(1)))
+            );
 
             Assert.True(OneOrMany<int>.Empty.SequenceEqual(new int[0]));
             Assert.False(OneOrMany<int>.Empty.SequenceEqual(new[] { 1 }));
@@ -249,7 +290,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
             Assert.False(new[] { 1 }.SequenceEqual(OneOrMany.Create(2)));
             Assert.True(new[] { 1, 2 }.SequenceEqual(OneOrMany.Create(1, 2)));
             Assert.False(new[] { 1, 2 }.SequenceEqual(OneOrMany.Create(1, 0)));
-            Assert.False(new[] { 1, 2 }.SequenceEqual(OneOrMany.Create(ImmutableArray.Create(1, 2, 3))));
+            Assert.False(
+                new[] { 1, 2 }.SequenceEqual(OneOrMany.Create(ImmutableArray.Create(1, 2, 3)))
+            );
 
             Assert.True(ImmutableArray<int>.Empty.SequenceEqual(OneOrMany<int>.Empty));
             Assert.False(ImmutableArray.Create(1).SequenceEqual(OneOrMany<int>.Empty));
@@ -258,7 +301,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
             Assert.False(ImmutableArray.Create(1).SequenceEqual(OneOrMany.Create(2)));
             Assert.True(ImmutableArray.Create(1, 2).SequenceEqual(OneOrMany.Create(1, 2)));
             Assert.False(ImmutableArray.Create(1, 2).SequenceEqual(OneOrMany.Create(1, 0)));
-            Assert.False(ImmutableArray.Create(1, 2).SequenceEqual(OneOrMany.Create(ImmutableArray.Create(1, 2, 3))));
+            Assert.False(
+                ImmutableArray
+                    .Create(1, 2)
+                    .SequenceEqual(OneOrMany.Create(ImmutableArray.Create(1, 2, 3)))
+            );
         }
 
         [Fact]

@@ -28,26 +28,17 @@ namespace System.Reflection.Metadata
 
         public TypeDefinitionHandle Type
         {
-            get
-            {
-                return _reader.MethodImplTable.GetClass(Handle);
-            }
+            get { return _reader.MethodImplTable.GetClass(Handle); }
         }
 
         public EntityHandle MethodBody
         {
-            get
-            {
-                return _reader.MethodImplTable.GetMethodBody(Handle);
-            }
+            get { return _reader.MethodImplTable.GetMethodBody(Handle); }
         }
 
         public EntityHandle MethodDeclaration
         {
-            get
-            {
-                return _reader.MethodImplTable.GetMethodDeclaration(Handle);
-            }
+            get { return _reader.MethodImplTable.GetMethodDeclaration(Handle); }
         }
 
         public CustomAttributeHandleCollection GetCustomAttributes()

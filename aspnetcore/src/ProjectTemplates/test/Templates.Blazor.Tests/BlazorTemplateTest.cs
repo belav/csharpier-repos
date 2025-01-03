@@ -25,7 +25,13 @@ public abstract class BlazorTemplateTest : BrowserTestBase
 
     public abstract string ProjectType { get; }
 
-    protected async Task<Project> CreateBuildPublishAsync(string auth = null, string[] args = null, string targetFramework = null, bool serverProject = false, bool onlyCreate = false)
+    protected async Task<Project> CreateBuildPublishAsync(
+        string auth = null,
+        string[] args = null,
+        string targetFramework = null,
+        bool serverProject = false,
+        bool onlyCreate = false
+    )
     {
         // Additional arguments are needed. See: https://github.com/dotnet/aspnetcore/issues/24278
         Environment.SetEnvironmentVariable("EnableDefaultScopedCssItems", "true");
@@ -58,7 +64,11 @@ public abstract class BlazorTemplateTest : BrowserTestBase
         return project;
     }
 
-    protected static Project GetSubProject(Project project, string projectDirectory, string projectName)
+    protected static Project GetSubProject(
+        Project project,
+        string projectDirectory,
+        string projectName
+    )
     {
         var subProjectDirectory = Path.Combine(project.TemplateOutputDir, projectDirectory);
         if (!Directory.Exists(subProjectDirectory))
@@ -77,9 +87,15 @@ public abstract class BlazorTemplateTest : BrowserTestBase
         return subProject;
     }
 
-    public static bool TryValidateBrowserRequired(BrowserKind browserKind, bool isRequired, out string error)
+    public static bool TryValidateBrowserRequired(
+        BrowserKind browserKind,
+        bool isRequired,
+        out string error
+    )
     {
-        error = !isRequired ? null : $"Browser '{browserKind}' is required but not configured on '{RuntimeInformation.OSDescription}'";
+        error = !isRequired
+            ? null
+            : $"Browser '{browserKind}' is required but not configured on '{RuntimeInformation.OSDescription}'";
         return isRequired;
     }
 
@@ -89,7 +105,9 @@ public abstract class BlazorTemplateTest : BrowserTestBase
             TryValidateBrowserRequired(
                 browserKind,
                 isRequired: !BrowserManager.IsExplicitlyDisabled(browserKind),
-                out var errorMessage),
-            errorMessage);
+                out var errorMessage
+            ),
+            errorMessage
+        );
     }
 }

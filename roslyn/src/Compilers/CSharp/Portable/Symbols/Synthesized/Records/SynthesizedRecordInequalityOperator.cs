@@ -24,22 +24,53 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     ///The 'Equals' method called by the '==' operator is the 'Equals(R? other)' (<see cref="SynthesizedRecordEquals"/>).
     ///The '!=' operator delegates to the '==' operator. It is an error if the operators are declared explicitly.
     /// </summary>
-    internal sealed class SynthesizedRecordInequalityOperator : SynthesizedRecordEqualityOperatorBase
+    internal sealed class SynthesizedRecordInequalityOperator
+        : SynthesizedRecordEqualityOperatorBase
     {
-        public SynthesizedRecordInequalityOperator(SourceMemberContainerTypeSymbol containingType, int memberOffset, BindingDiagnosticBag diagnostics)
-            : base(containingType, WellKnownMemberNames.InequalityOperatorName, memberOffset, diagnostics)
-        {
-        }
+        public SynthesizedRecordInequalityOperator(
+            SourceMemberContainerTypeSymbol containingType,
+            int memberOffset,
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.InequalityOperatorName,
+                memberOffset,
+                diagnostics
+            ) { }
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            var F = new SyntheticBoundNodeFactory(this, ContainingType.GetNonNullSyntaxNode(), compilationState, diagnostics);
+            var F = new SyntheticBoundNodeFactory(
+                this,
+                ContainingType.GetNonNullSyntaxNode(),
+                compilationState,
+                diagnostics
+            );
 
             try
             {
                 // => !(left == right);
-                F.CloseMethod(F.Block(F.Return(F.Not(F.Call(receiver: null, ContainingType.GetMembers(WellKnownMemberNames.EqualityOperatorName).OfType<SynthesizedRecordEqualityOperator>().Single(),
-                                                            F.Parameter(Parameters[0]), F.Parameter(Parameters[1]))))));
+                F.CloseMethod(
+                    F.Block(
+                        F.Return(
+                            F.Not(
+                                F.Call(
+                                    receiver: null,
+                                    ContainingType
+                                        .GetMembers(WellKnownMemberNames.EqualityOperatorName)
+                                        .OfType<SynthesizedRecordEqualityOperator>()
+                                        .Single(),
+                                    F.Parameter(Parameters[0]),
+                                    F.Parameter(Parameters[1])
+                                )
+                            )
+                        )
+                    )
+                );
             }
             catch (SyntheticBoundNodeFactory.MissingPredefinedMember ex)
             {

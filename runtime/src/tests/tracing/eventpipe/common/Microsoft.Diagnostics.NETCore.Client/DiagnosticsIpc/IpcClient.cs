@@ -32,7 +32,10 @@ namespace Microsoft.Diagnostics.NETCore.Client
         /// <param name="endpoint">An endpoint that provides a diagnostics connection to a runtime instance.</param>
         /// <param name="message">The DiagnosticsIpc Message to be sent</param>
         /// <returns>An <see cref="IpcResponse"/> containing the response message and continuation stream.</returns>
-        public static IpcResponse SendMessageGetContinuation(IpcEndpoint endpoint, IpcMessage message)
+        public static IpcResponse SendMessageGetContinuation(
+            IpcEndpoint endpoint,
+            IpcMessage message
+        )
         {
             Stream stream = null;
             try
@@ -58,9 +61,18 @@ namespace Microsoft.Diagnostics.NETCore.Client
         /// <param name="message">The DiagnosticsIpc Message to be sent</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>An <see cref="IpcMessage"/> that is the response message.</returns>
-        public static async Task<IpcMessage> SendMessageAsync(IpcEndpoint endpoint, IpcMessage message, CancellationToken cancellationToken)
+        public static async Task<IpcMessage> SendMessageAsync(
+            IpcEndpoint endpoint,
+            IpcMessage message,
+            CancellationToken cancellationToken
+        )
         {
-            using IpcResponse response = await SendMessageGetContinuationAsync(endpoint, message, cancellationToken).ConfigureAwait(false);
+            using IpcResponse response = await SendMessageGetContinuationAsync(
+                    endpoint,
+                    message,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return response.Message;
         }
 
@@ -71,7 +83,11 @@ namespace Microsoft.Diagnostics.NETCore.Client
         /// <param name="message">The DiagnosticsIpc Message to be sent</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>An <see cref="IpcResponse"/> containing the response message and continuation stream.</returns>
-        public static async Task<IpcResponse> SendMessageGetContinuationAsync(IpcEndpoint endpoint, IpcMessage message, CancellationToken cancellationToken)
+        public static async Task<IpcResponse> SendMessageGetContinuationAsync(
+            IpcEndpoint endpoint,
+            IpcMessage message,
+            CancellationToken cancellationToken
+        )
         {
             Stream stream = null;
             try
@@ -80,7 +96,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
                 await WriteAsync(stream, message, cancellationToken).ConfigureAwait(false);
 
-                IpcMessage response = await ReadAsync(stream, cancellationToken).ConfigureAwait(false);
+                IpcMessage response = await ReadAsync(stream, cancellationToken)
+                    .ConfigureAwait(false);
 
                 return new IpcResponse(response, Release(ref stream));
             }
@@ -96,7 +113,11 @@ namespace Microsoft.Diagnostics.NETCore.Client
             stream.Write(buffer, 0, buffer.Length);
         }
 
-        private static Task WriteAsync(Stream stream, IpcMessage message, CancellationToken cancellationToken)
+        private static Task WriteAsync(
+            Stream stream,
+            IpcMessage message,
+            CancellationToken cancellationToken
+        )
         {
             byte[] buffer = message.Serialize();
             return stream.WriteAsync(buffer, 0, buffer.Length, cancellationToken);
@@ -107,7 +128,10 @@ namespace Microsoft.Diagnostics.NETCore.Client
             return IpcMessage.Parse(stream);
         }
 
-        private static Task<IpcMessage> ReadAsync(Stream stream, CancellationToken cancellationToken)
+        private static Task<IpcMessage> ReadAsync(
+            Stream stream,
+            CancellationToken cancellationToken
+        )
         {
             return IpcMessage.ParseAsync(stream, cancellationToken);
         }

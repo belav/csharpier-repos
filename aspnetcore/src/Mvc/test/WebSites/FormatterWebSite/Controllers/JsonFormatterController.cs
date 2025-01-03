@@ -24,7 +24,12 @@ public class JsonFormatterController : Controller
 
     public JsonFormatterController(ArrayPool<char> charPool)
     {
-        _indentingFormatter = new NewtonsoftJsonOutputFormatter(_indentedSettings, charPool, new MvcOptions(), new MvcNewtonsoftJsonOptions());
+        _indentingFormatter = new NewtonsoftJsonOutputFormatter(
+            _indentedSettings,
+            charPool,
+            new MvcOptions(),
+            new MvcNewtonsoftJsonOptions()
+        );
     }
 
     public IActionResult ReturnsIndentedJson()
@@ -35,7 +40,7 @@ public class JsonFormatterController : Controller
             Alias = "john",
             description = "This is long so we can test large objects " + new string('a', 1024 * 65),
             Designation = "Administrator",
-            Name = "John Williams"
+            Name = "John Williams",
         };
 
         var objectResult = new ObjectResult(user);
@@ -55,6 +60,7 @@ public class JsonFormatterController : Controller
 
         return Content(dummyObject.SampleInt.ToString(CultureInfo.InvariantCulture));
     }
+
 #nullable restore
 
     [HttpPost]
@@ -86,7 +92,9 @@ public class JsonFormatterController : Controller
     }
 
     [HttpPost]
-    public ActionResult<SimpleRecordModel> RoundtripRecordType([FromBody] SimpleRecordModel model) => model;
+    public ActionResult<SimpleRecordModel> RoundtripRecordType(
+        [FromBody] SimpleRecordModel model
+    ) => model;
 
     public class SimpleModel
     {
@@ -100,18 +108,15 @@ public class JsonFormatterController : Controller
     public record SimpleRecordModel(int Id, string Name, string StreetName);
 
     public record SimpleModelWithValidation(
-        [Range(1, 100)]
-            int Id,
-
-        [Required]
-            [StringLength(8, MinimumLength = 2)]
-            string Name,
-
-        [Required]
-            string StreetName);
+        [Range(1, 100)] int Id,
+        [Required] [StringLength(8, MinimumLength = 2)] string Name,
+        [Required] string StreetName
+    );
 
     [HttpPost]
-    public ActionResult<SimpleModelWithValidation> RoundtripModelWithValidation([FromBody] SimpleModelWithValidation model)
+    public ActionResult<SimpleModelWithValidation> RoundtripModelWithValidation(
+        [FromBody] SimpleModelWithValidation model
+    )
     {
         if (!ModelState.IsValid)
         {

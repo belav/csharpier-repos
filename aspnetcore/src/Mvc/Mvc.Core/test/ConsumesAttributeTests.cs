@@ -43,16 +43,20 @@ public class ConsumesAttributeTests
 
         // Assert
         var ex = Assert.Throws<FormatException>(
-                   () => new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray()));
-        Assert.Equal("The header contains invalid values at index 0: '" + (invalidContentType ?? "<null>") + "'",
-                     ex.Message);
+            () => new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray())
+        );
+        Assert.Equal(
+            "The header contains invalid values at index 0: '"
+                + (invalidContentType ?? "<null>")
+                + "'",
+            ex.Message
+        );
     }
 
     [Theory]
     [InlineData("application/*", "application/*")]
     [InlineData("application/xml, application/*, application/json", "application/*")]
     [InlineData("application/*, application/json", "application/*")]
-
     [InlineData("*/*", "*/*")]
     [InlineData("application/xml, */*, application/json", "*/*")]
     [InlineData("*/*, application/json", "*/*")]
@@ -63,15 +67,18 @@ public class ConsumesAttributeTests
 
         // Assert
         var ex = Assert.Throws<InvalidOperationException>(
-                   () => new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray()));
+            () => new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray())
+        );
 
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,
-                "The argument '{0}' is invalid. " +
-                "Media types which match all types or match all subtypes are not supported.",
-                invalidContentType),
-            ex.Message);
+                "The argument '{0}' is invalid. "
+                    + "Media types which match all types or match all subtypes are not supported.",
+                invalidContentType
+            ),
+            ex.Message
+        );
     }
 
     [Theory]
@@ -84,15 +91,17 @@ public class ConsumesAttributeTests
         var constraint = new ConsumesAttribute("application/json", "text/xml");
         var action = new ActionDescriptor()
         {
-            FilterDescriptors =
-                new List<FilterDescriptor>() { new FilterDescriptor(constraint, FilterScope.Action) }
+            FilterDescriptors = new List<FilterDescriptor>()
+            {
+                new FilterDescriptor(constraint, FilterScope.Action),
+            },
         };
 
         var context = new ActionConstraintContext();
         context.Candidates = new List<ActionSelectorCandidate>()
-            {
-                new ActionSelectorCandidate(action, new [] { constraint }),
-            };
+        {
+            new ActionSelectorCandidate(action, new[] { constraint }),
+        };
 
         context.CurrentCandidate = context.Candidates[0];
         context.RouteContext = CreateRouteContext(contentType: contentType);
@@ -108,26 +117,29 @@ public class ConsumesAttributeTests
         var constraint1 = new ConsumesAttribute("application/json", "text/xml");
         var action1 = new ActionDescriptor()
         {
-            FilterDescriptors =
-                new List<FilterDescriptor>() { new FilterDescriptor(constraint1, FilterScope.Action) }
+            FilterDescriptors = new List<FilterDescriptor>()
+            {
+                new FilterDescriptor(constraint1, FilterScope.Action),
+            },
         };
 
         var constraint2 = new Mock<ITestActionConsumeConstraint>();
         var action2 = new ActionDescriptor()
         {
-            FilterDescriptors =
-                new List<FilterDescriptor>() { new FilterDescriptor(constraint2.Object, FilterScope.Action) }
+            FilterDescriptors = new List<FilterDescriptor>()
+            {
+                new FilterDescriptor(constraint2.Object, FilterScope.Action),
+            },
         };
 
-        constraint2.Setup(o => o.Accept(It.IsAny<ActionConstraintContext>()))
-                   .Returns(true);
+        constraint2.Setup(o => o.Accept(It.IsAny<ActionConstraintContext>())).Returns(true);
 
         var context = new ActionConstraintContext();
         context.Candidates = new List<ActionSelectorCandidate>()
-            {
-                new ActionSelectorCandidate(action1, new [] { constraint1 }),
-                new ActionSelectorCandidate(action2, new [] { constraint2.Object }),
-            };
+        {
+            new ActionSelectorCandidate(action1, new[] { constraint1 }),
+            new ActionSelectorCandidate(action2, new[] { constraint2.Object }),
+        };
 
         context.CurrentCandidate = context.Candidates[0];
         context.RouteContext = CreateRouteContext(contentType: "application/custom");
@@ -140,32 +152,37 @@ public class ConsumesAttributeTests
     [InlineData("application/custom")]
     [InlineData("")]
     [InlineData(null)]
-    public void ActionConstraint_Accept_ForNoMatchingCandidates_SelectsTheFirstCandidate(string contentType)
+    public void ActionConstraint_Accept_ForNoMatchingCandidates_SelectsTheFirstCandidate(
+        string contentType
+    )
     {
         // Arrange
         var constraint1 = new ConsumesAttribute("application/json", "text/xml");
         var action1 = new ActionDescriptor()
         {
-            FilterDescriptors =
-                new List<FilterDescriptor>() { new FilterDescriptor(constraint1, FilterScope.Action) }
+            FilterDescriptors = new List<FilterDescriptor>()
+            {
+                new FilterDescriptor(constraint1, FilterScope.Action),
+            },
         };
 
         var constraint2 = new Mock<ITestActionConsumeConstraint>();
         var action2 = new ActionDescriptor()
         {
-            FilterDescriptors =
-                new List<FilterDescriptor>() { new FilterDescriptor(constraint2.Object, FilterScope.Action) }
+            FilterDescriptors = new List<FilterDescriptor>()
+            {
+                new FilterDescriptor(constraint2.Object, FilterScope.Action),
+            },
         };
 
-        constraint2.Setup(o => o.Accept(It.IsAny<ActionConstraintContext>()))
-                   .Returns(false);
+        constraint2.Setup(o => o.Accept(It.IsAny<ActionConstraintContext>())).Returns(false);
 
         var context = new ActionConstraintContext();
         context.Candidates = new List<ActionSelectorCandidate>()
-            {
-                new ActionSelectorCandidate(action1, new [] { constraint1 }),
-                new ActionSelectorCandidate(action2, new [] { constraint2.Object }),
-            };
+        {
+            new ActionSelectorCandidate(action1, new[] { constraint1 }),
+            new ActionSelectorCandidate(action2, new[] { constraint2.Object }),
+        };
 
         context.CurrentCandidate = context.Candidates[0];
         context.RouteContext = CreateRouteContext(contentType: contentType);
@@ -177,32 +194,38 @@ public class ConsumesAttributeTests
     [Theory]
     [InlineData("")]
     [InlineData(null)]
-    public void ActionConstraint_Accept_ForNoRequestType_SelectsTheCandidateWithoutConstraintIfPresent(string contentType)
+    public void ActionConstraint_Accept_ForNoRequestType_SelectsTheCandidateWithoutConstraintIfPresent(
+        string contentType
+    )
     {
         // Arrange
         var constraint1 = new ConsumesAttribute("application/json");
         var actionWithConstraint = new ActionDescriptor()
         {
-            FilterDescriptors =
-                new List<FilterDescriptor>() { new FilterDescriptor(constraint1, FilterScope.Action) }
+            FilterDescriptors = new List<FilterDescriptor>()
+            {
+                new FilterDescriptor(constraint1, FilterScope.Action),
+            },
         };
 
         var constraint2 = new ConsumesAttribute("text/xml");
         var actionWithConstraint2 = new ActionDescriptor()
         {
-            FilterDescriptors =
-                new List<FilterDescriptor>() { new FilterDescriptor(constraint2, FilterScope.Action) }
+            FilterDescriptors = new List<FilterDescriptor>()
+            {
+                new FilterDescriptor(constraint2, FilterScope.Action),
+            },
         };
 
         var actionWithoutConstraint = new ActionDescriptor();
 
         var context = new ActionConstraintContext();
         context.Candidates = new List<ActionSelectorCandidate>()
-            {
-                new ActionSelectorCandidate(actionWithConstraint, new [] { constraint1 }),
-                new ActionSelectorCandidate(actionWithConstraint2, new [] { constraint2 }),
-                new ActionSelectorCandidate(actionWithoutConstraint, new List<IActionConstraint>()),
-            };
+        {
+            new ActionSelectorCandidate(actionWithConstraint, new[] { constraint1 }),
+            new ActionSelectorCandidate(actionWithConstraint2, new[] { constraint2 }),
+            new ActionSelectorCandidate(actionWithoutConstraint, new List<IActionConstraint>()),
+        };
 
         context.RouteContext = CreateRouteContext(contentType: contentType);
 
@@ -217,31 +240,37 @@ public class ConsumesAttributeTests
     [InlineData("application/xml")]
     [InlineData("application/custom")]
     [InlineData("invalid/invalid")]
-    public void ActionConstraint_Accept_UnrecognizedMediaType_SelectsTheCandidateWithoutConstraintIfPresent(string contentType)
+    public void ActionConstraint_Accept_UnrecognizedMediaType_SelectsTheCandidateWithoutConstraintIfPresent(
+        string contentType
+    )
     {
         // Arrange
         var actionWithoutConstraint = new ActionDescriptor();
         var constraint1 = new ConsumesAttribute("application/json");
         var actionWithConstraint = new ActionDescriptor()
         {
-            FilterDescriptors =
-                new List<FilterDescriptor>() { new FilterDescriptor(constraint1, FilterScope.Action) }
+            FilterDescriptors = new List<FilterDescriptor>()
+            {
+                new FilterDescriptor(constraint1, FilterScope.Action),
+            },
         };
 
         var constraint2 = new ConsumesAttribute("text/xml");
         var actionWithConstraint2 = new ActionDescriptor()
         {
-            FilterDescriptors =
-                new List<FilterDescriptor>() { new FilterDescriptor(constraint2, FilterScope.Action) }
+            FilterDescriptors = new List<FilterDescriptor>()
+            {
+                new FilterDescriptor(constraint2, FilterScope.Action),
+            },
         };
 
         var context = new ActionConstraintContext();
         context.Candidates = new List<ActionSelectorCandidate>()
-            {
-                new ActionSelectorCandidate(actionWithConstraint, new [] { constraint1 }),
-                new ActionSelectorCandidate(actionWithConstraint2, new [] { constraint2 }),
-                new ActionSelectorCandidate(actionWithoutConstraint, new List<IActionConstraint>()),
-            };
+        {
+            new ActionSelectorCandidate(actionWithConstraint, new[] { constraint1 }),
+            new ActionSelectorCandidate(actionWithConstraint2, new[] { constraint2 }),
+            new ActionSelectorCandidate(actionWithoutConstraint, new List<IActionConstraint>()),
+        };
 
         context.RouteContext = CreateRouteContext(contentType: contentType);
 
@@ -256,31 +285,37 @@ public class ConsumesAttributeTests
     [Theory]
     [InlineData("")]
     [InlineData(null)]
-    public void ActionConstraint_Accept_ForNoRequestType_ReturnsTrueForAllConstraints(string contentType)
+    public void ActionConstraint_Accept_ForNoRequestType_ReturnsTrueForAllConstraints(
+        string contentType
+    )
     {
         // Arrange
         var constraint1 = new ConsumesAttribute("application/json");
         var actionWithConstraint = new ActionDescriptor()
         {
-            FilterDescriptors =
-                new List<FilterDescriptor>() { new FilterDescriptor(constraint1, FilterScope.Action) }
+            FilterDescriptors = new List<FilterDescriptor>()
+            {
+                new FilterDescriptor(constraint1, FilterScope.Action),
+            },
         };
 
         var constraint2 = new ConsumesAttribute("text/xml");
         var actionWithConstraint2 = new ActionDescriptor()
         {
-            FilterDescriptors =
-                new List<FilterDescriptor>() { new FilterDescriptor(constraint2, FilterScope.Action) }
+            FilterDescriptors = new List<FilterDescriptor>()
+            {
+                new FilterDescriptor(constraint2, FilterScope.Action),
+            },
         };
 
         var actionWithoutConstraint = new ActionDescriptor();
 
         var context = new ActionConstraintContext();
         context.Candidates = new List<ActionSelectorCandidate>()
-            {
-                new ActionSelectorCandidate(actionWithConstraint, new [] { constraint1 }),
-                new ActionSelectorCandidate(actionWithConstraint2, new [] { constraint2 }),
-            };
+        {
+            new ActionSelectorCandidate(actionWithConstraint, new[] { constraint1 }),
+            new ActionSelectorCandidate(actionWithConstraint2, new[] { constraint2 }),
+        };
 
         context.RouteContext = CreateRouteContext(contentType: contentType);
 
@@ -294,7 +329,9 @@ public class ConsumesAttributeTests
     [Theory]
     [InlineData("application/xml")]
     [InlineData("application/custom")]
-    public void OnResourceExecuting_ForNoContentTypeMatch_SetsUnsupportedMediaTypeResult(string contentType)
+    public void OnResourceExecuting_ForNoContentTypeMatch_SetsUnsupportedMediaTypeResult(
+        string contentType
+    )
     {
         // Arrange
         var httpContext = new DefaultHttpContext();
@@ -303,15 +340,18 @@ public class ConsumesAttributeTests
         var actionWithConstraint = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>() { consumesFilter },
-            FilterDescriptors =
-                new List<FilterDescriptor>() { new FilterDescriptor(consumesFilter, FilterScope.Action) }
+            FilterDescriptors = new List<FilterDescriptor>()
+            {
+                new FilterDescriptor(consumesFilter, FilterScope.Action),
+            },
         };
         var actionContext = new ActionContext(httpContext, new RouteData(), actionWithConstraint);
 
         var resourceExecutingContext = new ResourceExecutingContext(
             actionContext,
             new[] { consumesFilter },
-            new List<IValueProviderFactory>());
+            new List<IValueProviderFactory>()
+        );
 
         // Act
         consumesFilter.OnResourceExecuting(resourceExecutingContext);
@@ -333,15 +373,18 @@ public class ConsumesAttributeTests
         var actionWithConstraint = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>() { consumesFilter },
-            FilterDescriptors =
-                new List<FilterDescriptor>() { new FilterDescriptor(consumesFilter, FilterScope.Action) }
+            FilterDescriptors = new List<FilterDescriptor>()
+            {
+                new FilterDescriptor(consumesFilter, FilterScope.Action),
+            },
         };
         var actionContext = new ActionContext(httpContext, new RouteData(), actionWithConstraint);
 
         var resourceExecutingContext = new ResourceExecutingContext(
             actionContext,
             new[] { consumesFilter },
-            new List<IValueProviderFactory>());
+            new List<IValueProviderFactory>()
+        );
 
         // Act
         consumesFilter.OnResourceExecuting(resourceExecutingContext);
@@ -362,14 +405,17 @@ public class ConsumesAttributeTests
         var actionWithConstraint = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>() { consumesFilter },
-            FilterDescriptors =
-                new List<FilterDescriptor>() { new FilterDescriptor(consumesFilter, FilterScope.Action) }
+            FilterDescriptors = new List<FilterDescriptor>()
+            {
+                new FilterDescriptor(consumesFilter, FilterScope.Action),
+            },
         };
         var actionContext = new ActionContext(httpContext, new RouteData(), actionWithConstraint);
         var resourceExecutingContext = new ResourceExecutingContext(
             actionContext,
             new[] { consumesFilter },
-            new List<IValueProviderFactory>());
+            new List<IValueProviderFactory>()
+        );
 
         // Act
         consumesFilter.OnResourceExecuting(resourceExecutingContext);
@@ -385,10 +431,10 @@ public class ConsumesAttributeTests
         var attribute = new ConsumesAttribute("application/json", "text/json");
 
         var contentTypes = new MediaTypeCollection()
-            {
-                MediaTypeHeaderValue.Parse("application/xml"),
-                MediaTypeHeaderValue.Parse("text/xml"),
-            };
+        {
+            MediaTypeHeaderValue.Parse("application/xml"),
+            MediaTypeHeaderValue.Parse("text/xml"),
+        };
 
         // Act
         attribute.SetContentTypes(contentTypes);
@@ -397,10 +443,14 @@ public class ConsumesAttributeTests
         Assert.Collection(
             contentTypes.OrderBy(t => t),
             t => Assert.Equal("application/json", t),
-            t => Assert.Equal("text/json", t));
+            t => Assert.Equal("text/json", t)
+        );
     }
 
-    private static RouteContext CreateRouteContext(string contentType = null, object routeValues = null)
+    private static RouteContext CreateRouteContext(
+        string contentType = null,
+        object routeValues = null
+    )
     {
         var httpContext = CreateHttpContext(contentType);
 
@@ -415,7 +465,10 @@ public class ConsumesAttributeTests
         return routeContext;
     }
 
-    private static HttpContext CreateHttpContext(string contentType = null, object routeValues = null)
+    private static HttpContext CreateHttpContext(
+        string contentType = null,
+        object routeValues = null
+    )
     {
         var httpContext = new DefaultHttpContext();
         if (contentType != null)
@@ -426,7 +479,5 @@ public class ConsumesAttributeTests
         return httpContext;
     }
 
-    internal interface ITestActionConsumeConstraint : IConsumesActionConstraint, IResourceFilter
-    {
-    }
+    internal interface ITestActionConsumeConstraint : IConsumesActionConstraint, IResourceFilter { }
 }

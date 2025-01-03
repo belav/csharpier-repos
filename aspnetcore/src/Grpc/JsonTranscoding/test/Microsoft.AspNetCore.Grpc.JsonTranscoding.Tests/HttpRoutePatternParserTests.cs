@@ -23,7 +23,8 @@ public class HttpRoutePatternParserTests
             s => Assert.Equal("shelves", s),
             s => Assert.Equal("*", s),
             s => Assert.Equal("books", s),
-            s => Assert.Equal("*", s));
+            s => Assert.Equal("*", s)
+        );
         Assert.Collection(
             pattern.Variables,
             v =>
@@ -39,7 +40,8 @@ public class HttpRoutePatternParserTests
                 Assert.Equal(4, v.EndSegment);
                 Assert.Equal("book", string.Join(".", v.FieldPath));
                 Assert.False(v.HasCatchAllPath);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -53,7 +55,8 @@ public class HttpRoutePatternParserTests
             s => Assert.Equal("shelves", s),
             s => Assert.Equal("*", s),
             s => Assert.Equal("books", s),
-            s => Assert.Equal("*", s));
+            s => Assert.Equal("*", s)
+        );
         Assert.Collection(
             pattern.Variables,
             v =>
@@ -62,7 +65,8 @@ public class HttpRoutePatternParserTests
                 Assert.Equal(5, v.EndSegment);
                 Assert.Equal("book.name", string.Join(".", v.FieldPath));
                 Assert.False(v.HasCatchAllPath);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -72,7 +76,8 @@ public class HttpRoutePatternParserTests
         Assert.Collection(
             pattern.Segments,
             s => Assert.Equal("shelves", s),
-            s => Assert.Equal("**", s));
+            s => Assert.Equal("**", s)
+        );
         Assert.Empty(pattern.Variables);
     }
 
@@ -80,9 +85,7 @@ public class HttpRoutePatternParserTests
     public void ParseCatchAllSegment2()
     {
         var pattern = HttpRoutePattern.Parse("/**");
-        Assert.Collection(
-            pattern.Segments,
-            s => Assert.Equal("**", s));
+        Assert.Collection(pattern.Segments, s => Assert.Equal("**", s));
         Assert.Empty(pattern.Variables);
     }
 
@@ -90,9 +93,7 @@ public class HttpRoutePatternParserTests
     public void ParseAnySegment()
     {
         var pattern = HttpRoutePattern.Parse("/*");
-        Assert.Collection(
-            pattern.Segments,
-            s => Assert.Equal("*", s));
+        Assert.Collection(pattern.Segments, s => Assert.Equal("*", s));
         Assert.Empty(pattern.Variables);
     }
 
@@ -109,9 +110,7 @@ public class HttpRoutePatternParserTests
     {
         var pattern = HttpRoutePattern.Parse("/a:foo");
         Assert.Equal("foo", pattern.Verb);
-        Assert.Collection(
-            pattern.Segments,
-            s => Assert.Equal("a", s));
+        Assert.Collection(pattern.Segments, s => Assert.Equal("a", s));
         Assert.Empty(pattern.Variables);
     }
 
@@ -119,10 +118,7 @@ public class HttpRoutePatternParserTests
     public void ParseAnyAndCatchAllSegment()
     {
         var pattern = HttpRoutePattern.Parse("/*/**");
-        Assert.Collection(
-            pattern.Segments,
-            s => Assert.Equal("*", s),
-            s => Assert.Equal("**", s));
+        Assert.Collection(pattern.Segments, s => Assert.Equal("*", s), s => Assert.Equal("**", s));
         Assert.Empty(pattern.Variables);
     }
 
@@ -134,7 +130,8 @@ public class HttpRoutePatternParserTests
             pattern.Segments,
             s => Assert.Equal("*", s),
             s => Assert.Equal("a", s),
-            s => Assert.Equal("**", s));
+            s => Assert.Equal("**", s)
+        );
         Assert.Empty(pattern.Variables);
     }
 
@@ -142,10 +139,7 @@ public class HttpRoutePatternParserTests
     public void ParseNestedFieldPath()
     {
         var pattern = HttpRoutePattern.Parse("/a/{a.b.c}");
-        Assert.Collection(
-            pattern.Segments,
-            s => Assert.Equal("a", s),
-            s => Assert.Equal("*", s));
+        Assert.Collection(pattern.Segments, s => Assert.Equal("a", s), s => Assert.Equal("*", s));
         Assert.Collection(
             pattern.Variables,
             v =>
@@ -154,17 +148,15 @@ public class HttpRoutePatternParserTests
                 Assert.Equal(2, v.EndSegment);
                 Assert.Equal("a.b.c", string.Join(".", v.FieldPath));
                 Assert.False(v.HasCatchAllPath);
-            });
+            }
+        );
     }
 
     [Fact]
     public void ParseComplexNestedFieldPath()
     {
         var pattern = HttpRoutePattern.Parse("/a/{a.b.c=*}");
-        Assert.Collection(
-            pattern.Segments,
-            s => Assert.Equal("a", s),
-            s => Assert.Equal("*", s));
+        Assert.Collection(pattern.Segments, s => Assert.Equal("a", s), s => Assert.Equal("*", s));
         Assert.Collection(
             pattern.Variables,
             v =>
@@ -173,17 +165,15 @@ public class HttpRoutePatternParserTests
                 Assert.Equal(2, v.EndSegment);
                 Assert.Equal("a.b.c", string.Join(".", v.FieldPath));
                 Assert.False(v.HasCatchAllPath);
-            });
+            }
+        );
     }
 
     [Fact]
     public void ParseComplexCatchAll()
     {
         var pattern = HttpRoutePattern.Parse("/a/{b=**}");
-        Assert.Collection(
-            pattern.Segments,
-            s => Assert.Equal("a", s),
-            s => Assert.Equal("**", s));
+        Assert.Collection(pattern.Segments, s => Assert.Equal("a", s), s => Assert.Equal("**", s));
         Assert.Collection(
             pattern.Variables,
             v =>
@@ -192,7 +182,8 @@ public class HttpRoutePatternParserTests
                 Assert.Equal(2, v.EndSegment);
                 Assert.Equal("b", string.Join(".", v.FieldPath));
                 Assert.True(v.HasCatchAllPath);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -203,7 +194,8 @@ public class HttpRoutePatternParserTests
             pattern.Segments,
             s => Assert.Equal("a", s),
             s => Assert.Equal("c", s),
-            s => Assert.Equal("*", s));
+            s => Assert.Equal("*", s)
+        );
         Assert.Collection(
             pattern.Variables,
             v =>
@@ -212,7 +204,8 @@ public class HttpRoutePatternParserTests
                 Assert.Equal(3, v.EndSegment);
                 Assert.Equal("b", string.Join(".", v.FieldPath));
                 Assert.False(v.HasCatchAllPath);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -224,7 +217,8 @@ public class HttpRoutePatternParserTests
             s => Assert.Equal("a", s),
             s => Assert.Equal("c", s),
             s => Assert.Equal("*", s),
-            s => Assert.Equal("d", s));
+            s => Assert.Equal("d", s)
+        );
         Assert.Collection(
             pattern.Variables,
             v =>
@@ -233,7 +227,8 @@ public class HttpRoutePatternParserTests
                 Assert.Equal(4, v.EndSegment);
                 Assert.Equal("b", string.Join(".", v.FieldPath));
                 Assert.False(v.HasCatchAllPath);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -244,7 +239,8 @@ public class HttpRoutePatternParserTests
             pattern.Segments,
             s => Assert.Equal("a", s),
             s => Assert.Equal("c", s),
-            s => Assert.Equal("**", s));
+            s => Assert.Equal("**", s)
+        );
         Assert.Collection(
             pattern.Variables,
             v =>
@@ -253,7 +249,8 @@ public class HttpRoutePatternParserTests
                 Assert.Equal(3, v.EndSegment);
                 Assert.Equal("b", string.Join(".", v.FieldPath));
                 Assert.True(v.HasCatchAllPath);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -266,7 +263,8 @@ public class HttpRoutePatternParserTests
             s => Assert.Equal("**", s),
             s => Assert.Equal("b", s),
             s => Assert.Equal("c", s),
-            s => Assert.Equal("d", s));
+            s => Assert.Equal("d", s)
+        );
         Assert.Collection(
             pattern.Variables,
             v =>
@@ -275,7 +273,8 @@ public class HttpRoutePatternParserTests
                 Assert.Equal(3, v.EndSegment);
                 Assert.Equal("x.y.z", string.Join(".", v.FieldPath));
                 Assert.True(v.HasCatchAllPath);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -287,7 +286,8 @@ public class HttpRoutePatternParserTests
             pattern.Segments,
             s => Assert.Equal("a", s),
             s => Assert.Equal("*", s),
-            s => Assert.Equal("**", s));
+            s => Assert.Equal("**", s)
+        );
         Assert.Collection(
             pattern.Variables,
             v =>
@@ -296,7 +296,8 @@ public class HttpRoutePatternParserTests
                 Assert.Equal(2, v.EndSegment);
                 Assert.Equal("b", string.Join(".", v.FieldPath));
                 Assert.False(v.HasCatchAllPath);
-            });
+            }
+        );
     }
 
     [Theory]

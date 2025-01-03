@@ -1,20 +1,19 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.IO;
-using System.Linq;
-using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
+using System.Security.Cryptography;
 using System.Security.Cryptography.Pkcs;
-using System.Security.Cryptography.Xml;
 using System.Security.Cryptography.X509Certificates;
-using Xunit;
-
+using System.Security.Cryptography.Xml;
+using System.Text;
 using Test.Cryptography;
+using Xunit;
 
 namespace System.Security.Cryptography.Pkcs.Tests
 {
@@ -31,7 +30,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void Oneary()
         {
             CryptographicAttributeObject a0 = s_ca0;
-            CryptographicAttributeObjectCollection c = new CryptographicAttributeObjectCollection(a0);
+            CryptographicAttributeObjectCollection c = new CryptographicAttributeObjectCollection(
+                a0
+            );
             AssertEquals(c, new CryptographicAttributeObject[] { a0 });
         }
 
@@ -70,7 +71,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             AsnEncodedDataCollection expectedValues = new AsnEncodedDataCollection();
             expectedValues.Add(dd1);
             expectedValues.Add(dd2);
-            CryptographicAttributeObject expected = new CryptographicAttributeObject(dd1.Oid, expectedValues);
+            CryptographicAttributeObject expected = new CryptographicAttributeObject(
+                dd1.Oid,
+                expectedValues
+            );
             AssertEquals(c, new CryptographicAttributeObject[] { expected });
         }
 
@@ -115,7 +119,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             CryptographicAttributeObjectCollection c = new CryptographicAttributeObjectCollection();
             CryptographicAttributeObject a0 = s_ca0;
-            c.Remove(a0);  // You can "remove" items that aren't in the collection - this is defined as a NOP.
+            c.Remove(a0); // You can "remove" items that aren't in the collection - this is defined as a NOP.
         }
 
         [Fact]
@@ -158,18 +162,28 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => ic.CopyTo(a, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => ic.CopyTo(a, 3));
             AssertExtensions.Throws<ArgumentException>(null, () => ic.CopyTo(a, 1));
-            AssertExtensions.Throws<ArgumentException>(null, () => ic.CopyTo(new CryptographicAttributeObject[2, 2], 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => ic.CopyTo(new CryptographicAttributeObject[2, 2], 0)
+            );
             Assert.Throws<InvalidCastException>(() => ic.CopyTo(new int[10], 0));
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
                 // Array has non-zero lower bound
-                Array array = Array.CreateInstance(typeof(object), new int[] { 10 }, new int[] { 10 });
+                Array array = Array.CreateInstance(
+                    typeof(object),
+                    new int[] { 10 },
+                    new int[] { 10 }
+                );
                 Assert.Throws<IndexOutOfRangeException>(() => ic.CopyTo(array, 0));
             }
         }
 
-        private static void AssertEquals(CryptographicAttributeObjectCollection c, IList<CryptographicAttributeObject> expected)
+        private static void AssertEquals(
+            CryptographicAttributeObjectCollection c,
+            IList<CryptographicAttributeObject> expected
+        )
         {
             Assert.Equal(expected.Count, c.Count);
 
@@ -189,41 +203,59 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ValidateEnumerator(((ICollection)c).GetEnumerator(), expected);
 
             {
-                CryptographicAttributeObject[] dumped = new CryptographicAttributeObject[c.Count + 3];
+                CryptographicAttributeObject[] dumped = new CryptographicAttributeObject[
+                    c.Count + 3
+                ];
                 c.CopyTo(dumped, 2);
                 Assert.Null(dumped[0]);
                 Assert.Null(dumped[1]);
                 Assert.Null(dumped[dumped.Length - 1]);
                 for (int i = 0; i < expected.Count; i++)
                 {
-                    Assert.Equal(expected[i], dumped[i + 2], s_CryptographicAttributeObjectComparer);
+                    Assert.Equal(
+                        expected[i],
+                        dumped[i + 2],
+                        s_CryptographicAttributeObjectComparer
+                    );
                 }
             }
             {
-                CryptographicAttributeObject[] dumped = new CryptographicAttributeObject[c.Count + 3];
+                CryptographicAttributeObject[] dumped = new CryptographicAttributeObject[
+                    c.Count + 3
+                ];
                 ((ICollection)c).CopyTo(dumped, 2);
                 Assert.Null(dumped[0]);
                 Assert.Null(dumped[1]);
                 Assert.Null(dumped[dumped.Length - 1]);
                 for (int i = 0; i < expected.Count; i++)
                 {
-                    Assert.Equal(expected[i], dumped[i + 2], s_CryptographicAttributeObjectComparer);
+                    Assert.Equal(
+                        expected[i],
+                        dumped[i + 2],
+                        s_CryptographicAttributeObjectComparer
+                    );
                 }
             }
         }
 
-        private static void ValidateEnumerator(IEnumerator enumerator, IList<CryptographicAttributeObject> expected)
+        private static void ValidateEnumerator(
+            IEnumerator enumerator,
+            IList<CryptographicAttributeObject> expected
+        )
         {
             foreach (CryptographicAttributeObject e in expected)
             {
                 Assert.True(enumerator.MoveNext());
-                CryptographicAttributeObject actual = (CryptographicAttributeObject)(enumerator.Current);
+                CryptographicAttributeObject actual = (CryptographicAttributeObject)(
+                    enumerator.Current
+                );
                 Assert.Equal(e, actual, s_CryptographicAttributeObjectComparer);
             }
             Assert.False(enumerator.MoveNext());
         }
 
-        private sealed class CryptographicEqualityComparer : IEqualityComparer<CryptographicAttributeObject>
+        private sealed class CryptographicEqualityComparer
+            : IEqualityComparer<CryptographicAttributeObject>
         {
             public bool Equals(CryptographicAttributeObject x, CryptographicAttributeObject y)
             {
@@ -254,10 +286,25 @@ namespace System.Security.Cryptography.Pkcs.Tests
             }
         }
 
-        private static readonly CryptographicAttributeObject s_ca0 = new CryptographicAttributeObject(new Oid(Oids.DocumentName), new AsnEncodedDataCollection(new Pkcs9DocumentName("My Name")));
-        private static readonly CryptographicAttributeObject s_ca1 = new CryptographicAttributeObject(new Oid(Oids.DocumentDescription), new AsnEncodedDataCollection(new Pkcs9DocumentDescription("My Description")));
-        private static readonly CryptographicAttributeObject s_ca2 = new CryptographicAttributeObject(new Oid(Oids.SigningTime), new AsnEncodedDataCollection(new Pkcs9SigningTime(new DateTime(2015, 4, 1, 12, 30, 20))));
+        private static readonly CryptographicAttributeObject s_ca0 =
+            new CryptographicAttributeObject(
+                new Oid(Oids.DocumentName),
+                new AsnEncodedDataCollection(new Pkcs9DocumentName("My Name"))
+            );
+        private static readonly CryptographicAttributeObject s_ca1 =
+            new CryptographicAttributeObject(
+                new Oid(Oids.DocumentDescription),
+                new AsnEncodedDataCollection(new Pkcs9DocumentDescription("My Description"))
+            );
+        private static readonly CryptographicAttributeObject s_ca2 =
+            new CryptographicAttributeObject(
+                new Oid(Oids.SigningTime),
+                new AsnEncodedDataCollection(
+                    new Pkcs9SigningTime(new DateTime(2015, 4, 1, 12, 30, 20))
+                )
+            );
 
-        private static readonly CryptographicEqualityComparer s_CryptographicAttributeObjectComparer = new CryptographicEqualityComparer();
+        private static readonly CryptographicEqualityComparer s_CryptographicAttributeObjectComparer =
+            new CryptographicEqualityComparer();
     }
 }

@@ -13,7 +13,7 @@ public class Runtime_83167
     [Fact]
     public static int Problem()
     {
-        Plane p = new Plane (new Vector3(2.0f, 3.0f, 4.0f), 1.0f);
+        Plane p = new Plane(new Vector3(2.0f, 3.0f, 4.0f), 1.0f);
         int pH = p.GetHashCode();
         EqualityComparer<Plane> c = EqualityComparer<Plane>.Default;
         int cH = c.GetHashCode(p);

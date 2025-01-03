@@ -7,8 +7,7 @@ using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
 
 namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
 {
-    public abstract class PatternContextLinear
-        : PatternContext<PatternContextLinear.FrameData>
+    public abstract class PatternContextLinear : PatternContext<PatternContextLinear.FrameData>
     {
         public PatternContextLinear(ILinearPattern pattern)
         {

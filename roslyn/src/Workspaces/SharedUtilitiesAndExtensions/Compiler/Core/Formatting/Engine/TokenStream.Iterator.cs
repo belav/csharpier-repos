@@ -12,8 +12,7 @@ namespace Microsoft.CodeAnalysis.Formatting
         // not sure whether it is worth it. but I already wrote it to test, so going to just keep it.
         public readonly struct Iterator(SegmentedList<SyntaxToken> tokensIncludingZeroWidth)
         {
-            public Enumerator GetEnumerator()
-                => new(tokensIncludingZeroWidth);
+            public Enumerator GetEnumerator() => new(tokensIncludingZeroWidth);
 
             public struct Enumerator
             {
@@ -36,7 +35,11 @@ namespace Microsoft.CodeAnalysis.Formatting
                 {
                     if (_index < _maxCount)
                     {
-                        _current = (_index, _tokensIncludingZeroWidth[_index], _tokensIncludingZeroWidth[_index + 1]);
+                        _current = (
+                            _index,
+                            _tokensIncludingZeroWidth[_index],
+                            _tokensIncludingZeroWidth[_index + 1]
+                        );
                         _index++;
                         return true;
                     }
@@ -51,7 +54,11 @@ namespace Microsoft.CodeAnalysis.Formatting
                     return false;
                 }
 
-                public readonly (int index, SyntaxToken currentToken, SyntaxToken nextToken) Current => _current;
+                public readonly (
+                    int index,
+                    SyntaxToken currentToken,
+                    SyntaxToken nextToken
+                ) Current => _current;
             }
         }
     }

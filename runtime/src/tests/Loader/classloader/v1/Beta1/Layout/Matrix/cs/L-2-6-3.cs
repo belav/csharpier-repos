@@ -14,72 +14,76 @@
 using System;
 using Xunit;
 
-public class Test_L_2_6_3{
-	[Fact]
-	public static int TestEntryPoint(){
-		int mi_RetCode;
-		mi_RetCode = B.Test();
-		
-		if(mi_RetCode == 100)
-			Console.WriteLine("Pass");
-		else
-			Console.WriteLine("FAIL");
-		
-		return mi_RetCode;
-	}
+public class Test_L_2_6_3
+{
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        int mi_RetCode;
+        mi_RetCode = B.Test();
+
+        if (mi_RetCode == 100)
+            Console.WriteLine("Pass");
+        else
+            Console.WriteLine("FAIL");
+
+        return mi_RetCode;
+    }
 }
 
-struct B{
-	public static int Test(){
-		A a = new A();
+struct B
+{
+    public static int Test()
+    {
+        A a = new A();
 
-		int mi_RetCode = 100;
-		
-		/////////////////////////////////
-		// Test nested class access
-		if(Test_Nested(a.ClsPubInst.Cls2PubInst) != 100)
-			mi_RetCode = 0;
-		
-		return mi_RetCode;
-	}
-	
-	public static int Test_Nested(A.Cls.Cls2 Nested_Cls){
-		int mi_RetCode = 100;
-		
-		/////////////////////////////////////////////////////////////////////////
-		/////////////////////////////////////////////////////////////////////////
-		// ACCESS NESTED FIELDS/MEMBERS
-		/////////////////////////////////////////////////////////////////////////
-		/////////////////////////////////////////////////////////////////////////
-		
-		/////////////////////////////////
-		// Test instance field access
-		Nested_Cls.Nest2FldPubInst = 100;
-		if(Nested_Cls.Nest2FldPubInst != 100)
-			mi_RetCode = 0;
-		
-		/////////////////////////////////
-		// Test static field access
-		A.Cls.Cls2.Nest2FldPubStat = 100;
-		if(A.Cls.Cls2.Nest2FldPubStat != 100)
-			mi_RetCode = 0;
-		
-		/////////////////////////////////
-		// Test instance method access  
-		if(Nested_Cls.Nest2MethPubInst() != 100)
-			mi_RetCode = 0;
-		
-		/////////////////////////////////
-		// Test static method access
-		if(A.Cls.Cls2.Nest2MethPubStat() != 100)
-			mi_RetCode = 0;
-		
-		////////////////////////////////////////////
-		// Test access from within the nested class
-		if(Nested_Cls.Test() != 100)
-			mi_RetCode = 0;
+        int mi_RetCode = 100;
 
-		return mi_RetCode;
-	}
+        /////////////////////////////////
+        // Test nested class access
+        if (Test_Nested(a.ClsPubInst.Cls2PubInst) != 100)
+            mi_RetCode = 0;
+
+        return mi_RetCode;
+    }
+
+    public static int Test_Nested(A.Cls.Cls2 Nested_Cls)
+    {
+        int mi_RetCode = 100;
+
+        /////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////
+        // ACCESS NESTED FIELDS/MEMBERS
+        /////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////
+
+        /////////////////////////////////
+        // Test instance field access
+        Nested_Cls.Nest2FldPubInst = 100;
+        if (Nested_Cls.Nest2FldPubInst != 100)
+            mi_RetCode = 0;
+
+        /////////////////////////////////
+        // Test static field access
+        A.Cls.Cls2.Nest2FldPubStat = 100;
+        if (A.Cls.Cls2.Nest2FldPubStat != 100)
+            mi_RetCode = 0;
+
+        /////////////////////////////////
+        // Test instance method access
+        if (Nested_Cls.Nest2MethPubInst() != 100)
+            mi_RetCode = 0;
+
+        /////////////////////////////////
+        // Test static method access
+        if (A.Cls.Cls2.Nest2MethPubStat() != 100)
+            mi_RetCode = 0;
+
+        ////////////////////////////////////////////
+        // Test access from within the nested class
+        if (Nested_Cls.Test() != 100)
+            mi_RetCode = 0;
+
+        return mi_RetCode;
+    }
 }
-

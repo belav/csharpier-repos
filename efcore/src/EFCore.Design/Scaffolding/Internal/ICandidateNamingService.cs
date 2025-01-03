@@ -53,5 +53,6 @@ public interface ICandidateNamingService
     /// </summary>
     string GetPrincipalEndCandidateNavigationPropertyName(
         IReadOnlyForeignKey foreignKey,
-        string dependentEndNavigationPropertyName);
+        string dependentEndNavigationPropertyName
+    );
 }

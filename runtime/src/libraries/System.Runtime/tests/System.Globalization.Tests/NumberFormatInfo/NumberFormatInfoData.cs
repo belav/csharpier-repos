@@ -7,7 +7,11 @@ namespace System.Globalization.Tests
     {
         public static int[] UrINNumberGroupSizes()
         {
-            if (PlatformDetection.WindowsVersion >= 10 || PlatformDetection.ICUVersion.Major >= 55 || PlatformDetection.IsHybridGlobalizationOnOSX)
+            if (
+                PlatformDetection.WindowsVersion >= 10
+                || PlatformDetection.ICUVersion.Major >= 55
+                || PlatformDetection.IsHybridGlobalizationOnOSX
+            )
             {
                 return new int[] { 3 };
             }
@@ -28,17 +32,26 @@ namespace System.Globalization.Tests
             switch (localeName)
             {
                 case "en-US":
-                    return PlatformDetection.IsNlsGlobalization ? new int[] { 0 } : new int[] { 1, 0 };
+                    return PlatformDetection.IsNlsGlobalization
+                        ? new int[] { 0 }
+                        : new int[] { 1, 0 };
 
                 case "en-CA":
-                    return PlatformDetection.IsNlsGlobalization ? new int[] { 1 } : new int[] { 1, 0 };
+                    return PlatformDetection.IsNlsGlobalization
+                        ? new int[] { 1 }
+                        : new int[] { 1, 0 };
 
                 case "fa-IR":
                     if (PlatformDetection.IsNlsGlobalization)
                     {
-                        return (PlatformDetection.WindowsVersion < 10) ? new int[] { 3 } : new int[] { 6, 3 };
+                        return (PlatformDetection.WindowsVersion < 10)
+                            ? new int[] { 3 }
+                            : new int[] { 6, 3 };
                     }
-                    if (PlatformDetection.ICUVersion.Major == 59 || PlatformDetection.ICUVersion.Major == 58)
+                    if (
+                        PlatformDetection.ICUVersion.Major == 59
+                        || PlatformDetection.ICUVersion.Major == 58
+                    )
                     {
                         return new int[] { 8 };
                     }
@@ -54,7 +67,9 @@ namespace System.Globalization.Tests
                 case "fr-CD":
                     if (PlatformDetection.IsNlsGlobalization)
                     {
-                        return (PlatformDetection.WindowsVersion < 10) ? new int[] { 4 } : new int[] { 8 };
+                        return (PlatformDetection.WindowsVersion < 10)
+                            ? new int[] { 4 }
+                            : new int[] { 8 };
                     }
                     else
                     {
@@ -62,20 +77,32 @@ namespace System.Globalization.Tests
                     }
 
                 case "as":
-                    return PlatformDetection.IsNlsGlobalization ? new int[] { 12 } : new int[] { 9 };
+                    return PlatformDetection.IsNlsGlobalization
+                        ? new int[] { 12 }
+                        : new int[] { 9 };
 
                 case "es-BO":
-                    return (PlatformDetection.IsNlsGlobalization && PlatformDetection.WindowsVersion < 10) ? 
-                                new int[] { 14 } : 
-                                // Mac OSX used to return 1 which is the format "-$n". OSX Version 12 (Monterey) started
-                                // to return a different value 12 "$ -n". 
-                                PlatformDetection.IsOSX ? new int[] { 1, 12 } : new int[] { 1 };
+                    return (
+                            PlatformDetection.IsNlsGlobalization
+                            && PlatformDetection.WindowsVersion < 10
+                        )
+                            ? new int[] { 14 }
+                        :
+                        // Mac OSX used to return 1 which is the format "-$n". OSX Version 12 (Monterey) started
+                        // to return a different value 12 "$ -n".
+                        PlatformDetection.IsOSX
+                            ? new int[] { 1, 12 }
+                        : new int[] { 1 };
 
                 case "fr-CA":
-                    return PlatformDetection.IsNlsGlobalization ? new int[] { 15 } : new int[] { 8, 15 };
+                    return PlatformDetection.IsNlsGlobalization
+                        ? new int[] { 15 }
+                        : new int[] { 8, 15 };
             }
 
-            throw DateTimeFormatInfoData.GetCultureNotSupportedException(CultureInfo.GetCultureInfo(localeName));
+            throw DateTimeFormatInfoData.GetCultureNotSupportedException(
+                CultureInfo.GetCultureInfo(localeName)
+            );
         }
     }
 }

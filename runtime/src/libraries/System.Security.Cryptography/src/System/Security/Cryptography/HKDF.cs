@@ -25,7 +25,11 @@ namespace System.Security.Cryptography
         /// <param name="ikm">The input keying material.</param>
         /// <param name="salt">The optional salt value (a non-secret random value). If not provided it defaults to a byte array of <see cref="HashLength"/> zeros.</param>
         /// <returns>The pseudo random key (prk).</returns>
-        public static byte[] Extract(HashAlgorithmName hashAlgorithmName, byte[] ikm, byte[]? salt = null)
+        public static byte[] Extract(
+            HashAlgorithmName hashAlgorithmName,
+            byte[] ikm,
+            byte[]? salt = null
+        )
         {
             ArgumentNullException.ThrowIfNull(ikm);
 
@@ -45,13 +49,21 @@ namespace System.Security.Cryptography
         /// <param name="salt">The salt value (a non-secret random value).</param>
         /// <param name="prk">The destination buffer to receive the pseudo-random key (prk).</param>
         /// <returns>The number of bytes written to the <paramref name="prk"/> buffer.</returns>
-        public static int Extract(HashAlgorithmName hashAlgorithmName, ReadOnlySpan<byte> ikm, ReadOnlySpan<byte> salt, Span<byte> prk)
+        public static int Extract(
+            HashAlgorithmName hashAlgorithmName,
+            ReadOnlySpan<byte> ikm,
+            ReadOnlySpan<byte> salt,
+            Span<byte> prk
+        )
         {
             int hashLength = HashLength(hashAlgorithmName);
 
             if (prk.Length < hashLength)
             {
-                throw new ArgumentException(SR.Format(SR.Cryptography_Prk_TooSmall, hashLength), nameof(prk));
+                throw new ArgumentException(
+                    SR.Format(SR.Cryptography_Prk_TooSmall, hashLength),
+                    nameof(prk)
+                );
             }
 
             if (prk.Length > hashLength)
@@ -63,11 +75,20 @@ namespace System.Security.Cryptography
             return hashLength;
         }
 
-        private static void Extract(HashAlgorithmName hashAlgorithmName, int hashLength, ReadOnlySpan<byte> ikm, ReadOnlySpan<byte> salt, Span<byte> prk)
+        private static void Extract(
+            HashAlgorithmName hashAlgorithmName,
+            int hashLength,
+            ReadOnlySpan<byte> ikm,
+            ReadOnlySpan<byte> salt,
+            Span<byte> prk
+        )
         {
             Debug.Assert(HashLength(hashAlgorithmName) == hashLength);
             int written = CryptographicOperations.HmacData(hashAlgorithmName, salt, ikm, prk);
-            Debug.Assert(written == prk.Length, $"Bytes written is {written} bytes which does not match output length ({prk.Length} bytes)");
+            Debug.Assert(
+                written == prk.Length,
+                $"Bytes written is {written} bytes which does not match output length ({prk.Length} bytes)"
+            );
         }
 
         /// <summary>
@@ -81,7 +102,12 @@ namespace System.Security.Cryptography
         /// <returns>The output keying material.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="prk"/>is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="outputLength"/> is less than 1.</exception>
-        public static byte[] Expand(HashAlgorithmName hashAlgorithmName, byte[] prk, int outputLength, byte[]? info = null)
+        public static byte[] Expand(
+            HashAlgorithmName hashAlgorithmName,
+            byte[] prk,
+            int outputLength,
+            byte[]? info = null
+        )
         {
             ArgumentNullException.ThrowIfNull(prk);
 
@@ -92,7 +118,10 @@ namespace System.Security.Cryptography
             // Constant comes from section 2.3 (the constraint on L in the Inputs section)
             int maxOkmLength = 255 * hashLength;
             if (outputLength <= 0 || outputLength > maxOkmLength)
-                throw new ArgumentOutOfRangeException(nameof(outputLength), SR.Format(SR.Cryptography_Okm_TooLarge, maxOkmLength));
+                throw new ArgumentOutOfRangeException(
+                    nameof(outputLength),
+                    SR.Format(SR.Cryptography_Okm_TooLarge, maxOkmLength)
+                );
 
             byte[] result = new byte[outputLength];
             Expand(hashAlgorithmName, hashLength, prk, result, info);
@@ -109,7 +138,12 @@ namespace System.Security.Cryptography
         /// <param name="output">The destination buffer to receive the output keying material.</param>
         /// <param name="info">The context and application specific information (can be an empty span).</param>
         /// <exception cref="ArgumentException"><paramref name="output"/> is empty, or is larger than the maximum allowed length.</exception>
-        public static void Expand(HashAlgorithmName hashAlgorithmName, ReadOnlySpan<byte> prk, Span<byte> output, ReadOnlySpan<byte> info)
+        public static void Expand(
+            HashAlgorithmName hashAlgorithmName,
+            ReadOnlySpan<byte> prk,
+            Span<byte> output,
+            ReadOnlySpan<byte> info
+        )
         {
             int hashLength = HashLength(hashAlgorithmName);
 
@@ -119,17 +153,29 @@ namespace System.Security.Cryptography
             // Constant comes from section 2.3 (the constraint on L in the Inputs section)
             int maxOkmLength = 255 * hashLength;
             if (output.Length > maxOkmLength)
-                throw new ArgumentException(SR.Format(SR.Cryptography_Okm_TooLarge, maxOkmLength), nameof(output));
+                throw new ArgumentException(
+                    SR.Format(SR.Cryptography_Okm_TooLarge, maxOkmLength),
+                    nameof(output)
+                );
 
             Expand(hashAlgorithmName, hashLength, prk, output, info);
         }
 
-        private static void Expand(HashAlgorithmName hashAlgorithmName, int hashLength, ReadOnlySpan<byte> prk, Span<byte> output, ReadOnlySpan<byte> info)
+        private static void Expand(
+            HashAlgorithmName hashAlgorithmName,
+            int hashLength,
+            ReadOnlySpan<byte> prk,
+            Span<byte> output,
+            ReadOnlySpan<byte> info
+        )
         {
             Debug.Assert(HashLength(hashAlgorithmName) == hashLength);
 
             if (prk.Length < hashLength)
-                throw new ArgumentException(SR.Format(SR.Cryptography_Prk_TooSmall, hashLength), nameof(prk));
+                throw new ArgumentException(
+                    SR.Format(SR.Cryptography_Prk_TooSmall, hashLength),
+                    nameof(prk)
+                );
 
             byte counter = 0;
             var counterSpan = new Span<byte>(ref counter);
@@ -177,7 +223,10 @@ namespace System.Security.Cryptography
                     {
                         if (remainingOutput.Length > 0)
                         {
-                            Debug.Assert(hashLength <= 512 / 8, "hashLength is larger than expected, consider increasing this value or using regular allocation");
+                            Debug.Assert(
+                                hashLength <= 512 / 8,
+                                "hashLength is larger than expected, consider increasing this value or using regular allocation"
+                            );
                             Span<byte> lastChunk = stackalloc byte[hashLength];
                             GetHashAndReset(hmac, lastChunk);
                             lastChunk.Slice(0, remainingOutput.Length).CopyTo(remainingOutput);
@@ -205,19 +254,31 @@ namespace System.Security.Cryptography
         /// <returns>The output keying material.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="ikm"/>is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="outputLength"/> is less than 1.</exception>
-        public static byte[] DeriveKey(HashAlgorithmName hashAlgorithmName, byte[] ikm, int outputLength, byte[]? salt = null, byte[]? info = null)
+        public static byte[] DeriveKey(
+            HashAlgorithmName hashAlgorithmName,
+            byte[] ikm,
+            int outputLength,
+            byte[]? salt = null,
+            byte[]? info = null
+        )
         {
             ArgumentNullException.ThrowIfNull(ikm);
 
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(outputLength);
 
             int hashLength = HashLength(hashAlgorithmName);
-            Debug.Assert(hashLength <= 512 / 8, "hashLength is larger than expected, consider increasing this value or using regular allocation");
+            Debug.Assert(
+                hashLength <= 512 / 8,
+                "hashLength is larger than expected, consider increasing this value or using regular allocation"
+            );
 
             // Constant comes from section 2.3 (the constraint on L in the Inputs section)
             int maxOkmLength = 255 * hashLength;
             if (outputLength > maxOkmLength)
-                throw new ArgumentOutOfRangeException(nameof(outputLength), SR.Format(SR.Cryptography_Okm_TooLarge, maxOkmLength));
+                throw new ArgumentOutOfRangeException(
+                    nameof(outputLength),
+                    SR.Format(SR.Cryptography_Okm_TooLarge, maxOkmLength)
+                );
 
             Span<byte> prk = stackalloc byte[hashLength];
 
@@ -238,7 +299,13 @@ namespace System.Security.Cryptography
         /// <param name="salt">The salt value (a non-secret random value).</param>
         /// <param name="info">The context and application specific information (can be an empty span).</param>
         /// <exception cref="ArgumentException"><paramref name="ikm"/> is empty, or is larger than the maximum allowed length.</exception>
-        public static void DeriveKey(HashAlgorithmName hashAlgorithmName, ReadOnlySpan<byte> ikm, Span<byte> output, ReadOnlySpan<byte> salt, ReadOnlySpan<byte> info)
+        public static void DeriveKey(
+            HashAlgorithmName hashAlgorithmName,
+            ReadOnlySpan<byte> ikm,
+            Span<byte> output,
+            ReadOnlySpan<byte> salt,
+            ReadOnlySpan<byte> info
+        )
         {
             int hashLength = HashLength(hashAlgorithmName);
 
@@ -248,9 +315,15 @@ namespace System.Security.Cryptography
             // Constant comes from section 2.3 (the constraint on L in the Inputs section)
             int maxOkmLength = 255 * hashLength;
             if (output.Length > maxOkmLength)
-                throw new ArgumentException(SR.Format(SR.Cryptography_Okm_TooLarge, maxOkmLength), nameof(output));
+                throw new ArgumentException(
+                    SR.Format(SR.Cryptography_Okm_TooLarge, maxOkmLength),
+                    nameof(output)
+                );
 
-            Debug.Assert(hashLength <= 512 / 8, "hashLength is larger than expected, consider increasing this value or using regular allocation");
+            Debug.Assert(
+                hashLength <= 512 / 8,
+                "hashLength is larger than expected, consider increasing this value or using regular allocation"
+            );
             Span<byte> prk = stackalloc byte[hashLength];
 
             Extract(hashAlgorithmName, hashLength, ikm, salt, prk);
@@ -265,7 +338,10 @@ namespace System.Security.Cryptography
                 throw new CryptographicException(SR.Arg_CryptographyException);
             }
 
-            Debug.Assert(bytesWritten == output.Length, $"Bytes written is {bytesWritten} bytes which does not match output length ({output.Length} bytes)");
+            Debug.Assert(
+                bytesWritten == output.Length,
+                $"Bytes written is {bytesWritten} bytes which does not match output length ({output.Length} bytes)"
+            );
         }
 
         private static int HashLength(HashAlgorithmName hashAlgorithmName)

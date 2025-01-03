@@ -27,7 +27,11 @@ namespace System.Net.Test.Common
 
     internal static class RemoteServerQuery
     {
-        internal static async Task<TResult> Run<TResult>(Func<Task<TResult>> testCode, Func<Exception, bool> remoteExceptionWrapper, string serverName)
+        internal static async Task<TResult> Run<TResult>(
+            Func<Task<TResult>> testCode,
+            Func<Exception, bool> remoteExceptionWrapper,
+            string serverName
+        )
         {
             try
             {
@@ -44,7 +48,11 @@ namespace System.Net.Test.Common
             }
         }
 
-        internal static async Task Run(Func<Task> testCode, Func<Exception, bool> remoteExceptionWrapper, string serverName)
+        internal static async Task Run(
+            Func<Task> testCode,
+            Func<Exception, bool> remoteExceptionWrapper,
+            string serverName
+        )
         {
             try
             {

@@ -19,7 +19,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
             {
                 Assert.Throws<ArgumentNullException>(
-                    () => ecdh.DeriveKeyFromHmac(null, HashAlgorithmName.SHA512, null));
+                    () => ecdh.DeriveKeyFromHmac(null, HashAlgorithmName.SHA512, null)
+                );
             }
         }
 
@@ -32,7 +33,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
                 Assert.ThrowsAny<ArgumentException>(
-                    () => alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, null));
+                    () => alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, null)
+                );
             }
         }
 
@@ -45,8 +47,16 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey alicePublic = alice.PublicKey)
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, s_sampleHmacKey);
-                byte[] bobDerived = bob.DeriveKeyFromHmac(alicePublic, HashAlgorithmName.SHA512, s_sampleHmacKey);
+                byte[] aliceDerived = alice.DeriveKeyFromHmac(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey
+                );
+                byte[] bobDerived = bob.DeriveKeyFromHmac(
+                    alicePublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey
+                );
 
                 Assert.Equal(aliceDerived, bobDerived);
             }
@@ -60,8 +70,16 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey alicePublic = alice.PublicKey)
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, s_sampleHmacKey);
-                byte[] aliceSelfDerived = alice.DeriveKeyFromHmac(alicePublic, HashAlgorithmName.SHA512, s_sampleHmacKey);
+                byte[] aliceDerived = alice.DeriveKeyFromHmac(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey
+                );
+                byte[] aliceSelfDerived = alice.DeriveKeyFromHmac(
+                    alicePublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey
+                );
 
                 // Alice and Alice is HASH(aaG) != HASH(abG)
                 // (Except for the fantastically small chance that Alice == Bob)
@@ -77,8 +95,16 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey alicePublic = alice.PublicKey)
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, s_sampleHmacKey);
-                byte[] bobDerived = bob.DeriveKeyFromHmac(alicePublic, HashAlgorithmName.SHA384, s_sampleHmacKey);
+                byte[] aliceDerived = alice.DeriveKeyFromHmac(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey
+                );
+                byte[] bobDerived = bob.DeriveKeyFromHmac(
+                    alicePublic,
+                    HashAlgorithmName.SHA384,
+                    s_sampleHmacKey
+                );
 
                 Assert.NotEqual(aliceDerived, bobDerived);
             }
@@ -95,8 +121,16 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey alicePublic = alice.PublicKey)
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, hmacKeyAlice);
-                byte[] bobDerived = bob.DeriveKeyFromHmac(alicePublic, HashAlgorithmName.SHA512, hmacKeyBob);
+                byte[] aliceDerived = alice.DeriveKeyFromHmac(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    hmacKeyAlice
+                );
+                byte[] bobDerived = bob.DeriveKeyFromHmac(
+                    alicePublic,
+                    HashAlgorithmName.SHA512,
+                    hmacKeyBob
+                );
 
                 Assert.NotEqual(aliceDerived, bobDerived);
             }
@@ -113,8 +147,20 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey alicePublic = alice.PublicKey)
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, s_sampleHmacKey, prefix, null);
-                byte[] bobDerived = bob.DeriveKeyFromHmac(alicePublic, HashAlgorithmName.SHA512, s_sampleHmacKey, prefix, null);
+                byte[] aliceDerived = alice.DeriveKeyFromHmac(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey,
+                    prefix,
+                    null
+                );
+                byte[] bobDerived = bob.DeriveKeyFromHmac(
+                    alicePublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey,
+                    prefix,
+                    null
+                );
 
                 Assert.Equal(aliceDerived, bobDerived);
             }
@@ -132,8 +178,20 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey alicePublic = alice.PublicKey)
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, s_sampleHmacKey, alicePrefix, null);
-                byte[] bobDerived = bob.DeriveKeyFromHmac(alicePublic, HashAlgorithmName.SHA512, s_sampleHmacKey, bobPrefix, null);
+                byte[] aliceDerived = alice.DeriveKeyFromHmac(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey,
+                    alicePrefix,
+                    null
+                );
+                byte[] bobDerived = bob.DeriveKeyFromHmac(
+                    alicePublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey,
+                    bobPrefix,
+                    null
+                );
 
                 Assert.NotEqual(aliceDerived, bobDerived);
             }
@@ -150,8 +208,20 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey alicePublic = alice.PublicKey)
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, s_sampleHmacKey, null, suffix);
-                byte[] bobDerived = bob.DeriveKeyFromHmac(alicePublic, HashAlgorithmName.SHA512, s_sampleHmacKey, null, suffix);
+                byte[] aliceDerived = alice.DeriveKeyFromHmac(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey,
+                    null,
+                    suffix
+                );
+                byte[] bobDerived = bob.DeriveKeyFromHmac(
+                    alicePublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey,
+                    null,
+                    suffix
+                );
 
                 Assert.Equal(aliceDerived, bobDerived);
             }
@@ -169,8 +239,20 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey alicePublic = alice.PublicKey)
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, s_sampleHmacKey, null, aliceSuffix);
-                byte[] bobDerived = bob.DeriveKeyFromHmac(alicePublic, HashAlgorithmName.SHA512, s_sampleHmacKey, null, bobSuffix);
+                byte[] aliceDerived = alice.DeriveKeyFromHmac(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey,
+                    null,
+                    aliceSuffix
+                );
+                byte[] bobDerived = bob.DeriveKeyFromHmac(
+                    alicePublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey,
+                    null,
+                    bobSuffix
+                );
 
                 Assert.NotEqual(aliceDerived, bobDerived);
             }
@@ -183,8 +265,16 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellman bob = ECDiffieHellmanFactory.Create())
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, s_sampleHmacKey);
-                byte[] aliceDerivedAgain = alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, s_sampleHmacKey);
+                byte[] aliceDerived = alice.DeriveKeyFromHmac(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey
+                );
+                byte[] aliceDerivedAgain = alice.DeriveKeyFromHmac(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey
+                );
 
                 Assert.Equal(aliceDerived, aliceDerivedAgain);
             }
@@ -199,8 +289,16 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey alicePublic = alice.PublicKey)
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, null);
-                byte[] bobDerived = bob.DeriveKeyFromHmac(alicePublic, HashAlgorithmName.SHA512, null);
+                byte[] aliceDerived = alice.DeriveKeyFromHmac(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    null
+                );
+                byte[] bobDerived = bob.DeriveKeyFromHmac(
+                    alicePublic,
+                    HashAlgorithmName.SHA512,
+                    null
+                );
 
                 Assert.Equal(aliceDerived, bobDerived);
             }
@@ -213,8 +311,16 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellman bob = ECDiffieHellmanFactory.Create())
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, null);
-                byte[] aliceDerivedAgain = alice.DeriveKeyFromHmac(bobPublic, HashAlgorithmName.SHA512, null);
+                byte[] aliceDerived = alice.DeriveKeyFromHmac(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    null
+                );
+                byte[] aliceDerivedAgain = alice.DeriveKeyFromHmac(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    null
+                );
 
                 Assert.Equal(aliceDerived, aliceDerivedAgain);
             }
@@ -226,8 +332,18 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
             {
-                byte[] simple = ecdh.DeriveKeyFromHmac(publicKey, HashAlgorithmName.SHA512, s_sampleHmacKey);
-                byte[] nulls = ecdh.DeriveKeyFromHmac(publicKey, HashAlgorithmName.SHA512, s_sampleHmacKey, null, null);
+                byte[] simple = ecdh.DeriveKeyFromHmac(
+                    publicKey,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey
+                );
+                byte[] nulls = ecdh.DeriveKeyFromHmac(
+                    publicKey,
+                    HashAlgorithmName.SHA512,
+                    s_sampleHmacKey,
+                    null,
+                    null
+                );
 
                 Assert.Equal(simple, nulls);
             }
@@ -240,7 +356,13 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
             {
                 byte[] simple = ecdh.DeriveKeyFromHmac(publicKey, HashAlgorithmName.SHA512, null);
-                byte[] nulls = ecdh.DeriveKeyFromHmac(publicKey, HashAlgorithmName.SHA512, null, null, null);
+                byte[] nulls = ecdh.DeriveKeyFromHmac(
+                    publicKey,
+                    HashAlgorithmName.SHA512,
+                    null,
+                    null,
+                    null
+                );
 
                 Assert.Equal(simple, nulls);
             }
@@ -343,8 +465,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                     "030609",
                     "010305",
                     "02040608",
-                    "2C32BBFBF8A41118AAD3BAA94C8995B5B027246EA3D972937C1BFD9F460C6492" +
-                        "44EEC68EF570B4BB74B0D3BBD463F18526400A77211B5CB39311CDE21104E209",
+                    "2C32BBFBF8A41118AAD3BAA94C8995B5B027246EA3D972937C1BFD9F460C6492"
+                        + "44EEC68EF570B4BB74B0D3BBD463F18526400A77211B5CB39311CDE21104E209",
                 };
             }
         }
@@ -357,7 +479,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             string hmacKeyBytes,
             string prependBytes,
             string appendBytes,
-            string answerBytes)
+            string answerBytes
+        )
         {
             byte[] hmacKey = hmacKeyBytes?.HexToByteArray();
             byte[] prepend = prependBytes?.HexToByteArray();

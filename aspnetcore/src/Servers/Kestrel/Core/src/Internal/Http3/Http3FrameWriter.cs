@@ -56,7 +56,16 @@ internal sealed class Http3FrameWriter
     private bool _completed;
     private bool _aborted;
 
-    public Http3FrameWriter(ConnectionContext connectionContext, ITimeoutControl timeoutControl, MinDataRate? minResponseDataRate, MemoryPool<byte> memoryPool, KestrelTrace log, IStreamIdFeature streamIdFeature, Http3PeerSettings clientPeerSettings, IHttp3Stream http3Stream)
+    public Http3FrameWriter(
+        ConnectionContext connectionContext,
+        ITimeoutControl timeoutControl,
+        MinDataRate? minResponseDataRate,
+        MemoryPool<byte> memoryPool,
+        KestrelTrace log,
+        IStreamIdFeature streamIdFeature,
+        Http3PeerSettings clientPeerSettings,
+        IHttp3Stream http3Stream
+    )
     {
         _connectionContext = connectionContext;
         _timeoutControl = timeoutControl;
@@ -73,9 +82,10 @@ internal sealed class Http3FrameWriter
         // Unlikely to be a problem in practice:
         // - Settings rarely change after the start of a connection.
         // - Response header size limits are a best-effort requirement in the spec.
-        _maxTotalHeaderSize = clientPeerSettings.MaxRequestHeaderFieldSectionSize > int.MaxValue
-            ? int.MaxValue
-            : (int)clientPeerSettings.MaxRequestHeaderFieldSectionSize;
+        _maxTotalHeaderSize =
+            clientPeerSettings.MaxRequestHeaderFieldSectionSize > int.MaxValue
+                ? int.MaxValue
+                : (int)clientPeerSettings.MaxRequestHeaderFieldSectionSize;
     }
 
     public void Reset(PipeWriter output, string connectionId)
@@ -103,7 +113,9 @@ internal sealed class Http3FrameWriter
         // - One encoded length int for setting size
         // - 1 byte for setting type
         // - settings length
-        var buffer = _outputWriter.GetSpan(settingsLength + VariableLengthIntegerHelper.MaximumEncodedLength + 1);
+        var buffer = _outputWriter.GetSpan(
+            settingsLength + VariableLengthIntegerHelper.MaximumEncodedLength + 1
+        );
 
         // Length start at 1 for type
         var totalLength = 1;
@@ -142,10 +154,16 @@ internal sealed class Http3FrameWriter
     {
         foreach (var setting in settings)
         {
-            var parameterLength = VariableLengthIntegerHelper.WriteInteger(destination, (long)setting.Parameter);
+            var parameterLength = VariableLengthIntegerHelper.WriteInteger(
+                destination,
+                (long)setting.Parameter
+            );
             destination = destination.Slice(parameterLength);
 
-            var valueLength = VariableLengthIntegerHelper.WriteInteger(destination, (long)setting.Value);
+            var valueLength = VariableLengthIntegerHelper.WriteInteger(
+                destination,
+                (long)setting.Value
+            );
             destination = destination.Slice(valueLength);
         }
     }
@@ -220,7 +238,6 @@ internal sealed class Http3FrameWriter
 
                 dataLength -= dataPayloadLength;
                 remainingData = remainingData.Slice(dataPayloadLength);
-
             } while (dataLength > dataPayloadLength);
 
             _outgoingFrame.Length = (int)dataLength;
@@ -293,7 +310,10 @@ internal sealed class Http3FrameWriter
         return totalLength;
     }
 
-    public ValueTask<FlushResult> WriteResponseTrailersAsync(long streamId, HttpResponseTrailers headers)
+    public ValueTask<FlushResult> WriteResponseTrailersAsync(
+        long streamId,
+        HttpResponseTrailers headers
+    )
     {
         lock (_writeLock)
         {
@@ -310,7 +330,12 @@ internal sealed class Http3FrameWriter
 
                 _outgoingFrame.PrepareHeaders();
                 var buffer = _headerEncodingBuffer.GetSpan(HeaderBufferSize);
-                var done = QPackHeaderWriter.BeginEncodeHeaders(_headersEnumerator, buffer, ref _headersTotalSize, out var payloadLength);
+                var done = QPackHeaderWriter.BeginEncodeHeaders(
+                    _headersEnumerator,
+                    buffer,
+                    ref _headersTotalSize,
+                    out var payloadLength
+                );
                 FinishWritingHeaders(payloadLength, done);
             }
             // Any exception from the QPack encoder can leave the dynamic table in a corrupt state.
@@ -319,7 +344,10 @@ internal sealed class Http3FrameWriter
             {
                 _log.QPackEncodingError(_connectionId, streamId, ex);
                 _connectionContext.Abort(new ConnectionAbortedException(ex.Message, ex));
-                _http3Stream.Abort(new ConnectionAbortedException(ex.Message, ex), Http3ErrorCode.InternalError);
+                _http3Stream.Abort(
+                    new ConnectionAbortedException(ex.Message, ex),
+                    Http3ErrorCode.InternalError
+                );
             }
 
             return TimeFlushUnsynchronizedAsync();
@@ -334,7 +362,10 @@ internal sealed class Http3FrameWriter
         return _flusher.FlushAsync(_minResponseDataRate, bytesWritten);
     }
 
-    public ValueTask<FlushResult> FlushAsync(IHttpOutputAborter? outputAborter, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> FlushAsync(
+        IHttpOutputAborter? outputAborter,
+        CancellationToken cancellationToken
+    )
     {
         lock (_writeLock)
         {
@@ -346,7 +377,12 @@ internal sealed class Http3FrameWriter
             var bytesWritten = _unflushedBytes;
             _unflushedBytes = 0;
 
-            return _flusher.FlushAsync(_minResponseDataRate, bytesWritten, outputAborter, cancellationToken);
+            return _flusher.FlushAsync(
+                _minResponseDataRate,
+                bytesWritten,
+                outputAborter,
+                cancellationToken
+            );
         }
     }
 
@@ -365,7 +401,13 @@ internal sealed class Http3FrameWriter
 
                 _outgoingFrame.PrepareHeaders();
                 var buffer = _headerEncodingBuffer.GetSpan(HeaderBufferSize);
-                var done = QPackHeaderWriter.BeginEncodeHeaders(statusCode, _headersEnumerator, buffer, ref _headersTotalSize, out var payloadLength);
+                var done = QPackHeaderWriter.BeginEncodeHeaders(
+                    statusCode,
+                    _headersEnumerator,
+                    buffer,
+                    ref _headersTotalSize,
+                    out var payloadLength
+                );
                 FinishWritingHeaders(payloadLength, done);
             }
             // Any exception from the QPack encoder can leave the dynamic table in a corrupt state.
@@ -374,7 +416,10 @@ internal sealed class Http3FrameWriter
             {
                 _log.QPackEncodingError(_connectionId, _http3Stream.StreamId, ex);
                 _connectionContext.Abort(new ConnectionAbortedException(ex.Message, ex));
-                _http3Stream.Abort(new ConnectionAbortedException(ex.Message, ex), Http3ErrorCode.InternalError);
+                _http3Stream.Abort(
+                    new ConnectionAbortedException(ex.Message, ex),
+                    Http3ErrorCode.InternalError
+                );
                 throw new InvalidOperationException(ex.Message, ex); // Report the error to the user if this was the first write.
             }
         }
@@ -388,7 +433,12 @@ internal sealed class Http3FrameWriter
         {
             ValidateHeadersTotalSize();
             var buffer = _headerEncodingBuffer.GetSpan(HeaderBufferSize);
-            done = QPackHeaderWriter.Encode(_headersEnumerator!, buffer, ref _headersTotalSize, out payloadLength);
+            done = QPackHeaderWriter.Encode(
+                _headersEnumerator!,
+                buffer,
+                ref _headersTotalSize,
+                out payloadLength
+            );
             _headerEncodingBuffer.Advance(payloadLength);
         }
 
@@ -403,7 +453,9 @@ internal sealed class Http3FrameWriter
             // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-4.1.1.3
             if (_headersTotalSize > _maxTotalHeaderSize)
             {
-                throw new QPackEncodingException($"The encoded HTTP headers length exceeds the limit specified by the peer of {_maxTotalHeaderSize} bytes.");
+                throw new QPackEncodingException(
+                    $"The encoded HTTP headers length exceeds the limit specified by the peer of {_maxTotalHeaderSize} bytes."
+                );
             }
         }
     }

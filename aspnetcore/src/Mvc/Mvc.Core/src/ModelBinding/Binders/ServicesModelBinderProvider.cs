@@ -20,16 +20,21 @@ public class ServicesModelBinderProvider : IModelBinderProvider
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        if (context.BindingInfo.BindingSource != null &&
-            context.BindingInfo.BindingSource.CanAcceptDataFrom(BindingSource.Services))
+        if (
+            context.BindingInfo.BindingSource != null
+            && context.BindingInfo.BindingSource.CanAcceptDataFrom(BindingSource.Services)
+        )
         {
             // IsRequired will be false for a Reference Type
             // without a default value in a oblivious nullability context
             // however, for services we should treat them as required
-            var isRequired = context.Metadata.IsRequired ||
-                    (context.Metadata.Identity.ParameterInfo?.HasDefaultValue != true &&
-                        !context.Metadata.ModelType.IsValueType &&
-                        context.Metadata.NullabilityState == NullabilityState.Unknown);
+            var isRequired =
+                context.Metadata.IsRequired
+                || (
+                    context.Metadata.Identity.ParameterInfo?.HasDefaultValue != true
+                    && !context.Metadata.ModelType.IsValueType
+                    && context.Metadata.NullabilityState == NullabilityState.Unknown
+                );
 
             if (context.BindingInfo.ServiceKey != null)
             {

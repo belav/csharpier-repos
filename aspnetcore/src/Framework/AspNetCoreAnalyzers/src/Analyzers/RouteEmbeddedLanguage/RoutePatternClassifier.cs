@@ -156,6 +156,7 @@ internal sealed class RoutePatternClassifier : IAspNetCoreEmbeddedLanguageClassi
     // Just for unit tests. Don't use in production code.
     internal static class TestAccessor
     {
-        public static Assembly ExternalAccessAssembly => typeof(IAspNetCoreEmbeddedLanguageClassifier).Assembly;
+        public static Assembly ExternalAccessAssembly =>
+            typeof(IAspNetCoreEmbeddedLanguageClassifier).Assembly;
     }
 }

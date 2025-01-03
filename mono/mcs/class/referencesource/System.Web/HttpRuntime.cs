@@ -10,7 +10,8 @@
  * Copyright (c) 1998 Microsoft Corporation
  */
 
-namespace System.Web {
+namespace System.Web
+{
     using System;
     using System.Collections;
     using System.Configuration;
@@ -47,12 +48,12 @@ namespace System.Web {
     /// <devdoc>
     ///    <para>Provides a set of ASP.NET runtime services.</para>
     /// </devdoc>
-    public sealed class HttpRuntime {
-
+    public sealed class HttpRuntime
+    {
         internal const string codegenDirName = "Temporary ASP.NET Files";
         internal const string profileFileName = "profileoptimization.prof";
 
-        private static HttpRuntime _theRuntime;   // single instance of the class
+        private static HttpRuntime _theRuntime; // single instance of the class
         internal static byte[] s_autogenKeys = new byte[1024];
 
         //
@@ -70,33 +71,37 @@ namespace System.Web {
         internal const string BrowsersDirectoryName = "App_Browsers";
 
         private static string DirectorySeparatorString = new string(Path.DirectorySeparatorChar, 1);
-        private static string DoubleDirectorySeparatorString = new string(Path.DirectorySeparatorChar, 2);
+        private static string DoubleDirectorySeparatorString = new string(
+            Path.DirectorySeparatorChar,
+            2
+        );
         private static char[] s_InvalidPhysicalPathChars = { '/', '?', '*', '<', '>', '|', '"' };
-
-
 
 #if OLD
         // For s_forbiddenDirs and s_forbiddenDirsConstant, see
         // ndll.h, and RestrictIISFolders in regiis.cxx
 
-        internal static string[]    s_forbiddenDirs =   {
-                                        BinDirectoryName,
-                                        CodeDirectoryName,
-                                        DataDirectoryName,
-                                        ResourcesDirectoryName,
-                                        WebRefDirectoryName,
-                                    };
+        internal static string[] s_forbiddenDirs =
+        {
+            BinDirectoryName,
+            CodeDirectoryName,
+            DataDirectoryName,
+            ResourcesDirectoryName,
+            WebRefDirectoryName,
+        };
 
-        internal static Int32[]     s_forbiddenDirsConstant = {
-                                        UnsafeNativeMethods.RESTRICT_BIN,
-                                        UnsafeNativeMethods.RESTRICT_CODE,
-                                        UnsafeNativeMethods.RESTRICT_DATA,
-                                        UnsafeNativeMethods.RESTRICT_RESOURCES,
-                                        UnsafeNativeMethods.RESTRICT_WEBREFERENCES,
-                                    };
+        internal static Int32[] s_forbiddenDirsConstant =
+        {
+            UnsafeNativeMethods.RESTRICT_BIN,
+            UnsafeNativeMethods.RESTRICT_CODE,
+            UnsafeNativeMethods.RESTRICT_DATA,
+            UnsafeNativeMethods.RESTRICT_RESOURCES,
+            UnsafeNativeMethods.RESTRICT_WEBREFERENCES,
+        };
 #endif
 
-        static HttpRuntime() {
+        static HttpRuntime()
+        {
             AddAppDomainTraceMessage("*HttpRuntime::cctor");
 
             StaticInit();
@@ -109,8 +114,7 @@ namespace System.Web {
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-        public HttpRuntime() {
-        }
+        public HttpRuntime() { }
 
         //
         // static initialization to get hooked up to the unmanaged code
@@ -124,8 +128,10 @@ namespace System.Web {
         // Force the static initialization of this class.
         internal static void ForceStaticInit() { }
 
-        private static void StaticInit() {
-            if (s_initialized) {
+        private static void StaticInit()
+        {
+            if (s_initialized)
+            {
                 // already initialized
                 return;
             }
@@ -140,25 +146,31 @@ namespace System.Web {
 
             installDir = RuntimeEnvironment.GetRuntimeDirectory();
 
-            if (UnsafeNativeMethods.GetModuleHandle(ModName.ENGINE_FULL_NAME) != IntPtr.Zero) {
+            if (UnsafeNativeMethods.GetModuleHandle(ModName.ENGINE_FULL_NAME) != IntPtr.Zero)
+            {
                 isEngineLoaded = true;
             }
 
             // Load webengine.dll if not loaded already
 
-            if (!isEngineLoaded) {
-                String fullPath = installDir + Path.DirectorySeparatorChar + ModName.ENGINE_FULL_NAME;
+            if (!isEngineLoaded)
+            {
+                String fullPath =
+                    installDir + Path.DirectorySeparatorChar + ModName.ENGINE_FULL_NAME;
 
-                if (UnsafeNativeMethods.LoadLibrary(fullPath) != IntPtr.Zero) {
+                if (UnsafeNativeMethods.LoadLibrary(fullPath) != IntPtr.Zero)
+                {
                     isEngineLoaded = true;
                     wasEngineLoadedHere = true;
                 }
             }
 
-            if (isEngineLoaded) {
+            if (isEngineLoaded)
+            {
                 UnsafeNativeMethods.InitializeLibrary(false);
 
-                if (wasEngineLoadedHere) {
+                if (wasEngineLoadedHere)
+                {
                     UnsafeNativeMethods.PerfCounterInitialize();
                 }
             }
@@ -195,6 +207,7 @@ namespace System.Web {
         private bool _processRequestInApplicationTrust;
         private bool _disableProcessRequestInApplicationTrust;
         private bool _isLegacyCas;
+
         //
         // Counters
         //
@@ -237,7 +250,6 @@ namespace System.Web {
         private Exception _initializationError;
         private bool _hostingInitFailed; // make such errors non-sticky
         private Timer _appDomainShutdownTimer = null;
-
 
         //
         // App domain related
@@ -294,8 +306,10 @@ namespace System.Web {
         /*
          * Context-less initialization (on app domain creation)
          */
-        private void Init() {
-            try {
+        private void Init()
+        {
+            try
+            {
 #if !FEATURE_PAL
                 if (Environment.OSVersion.Platform != PlatformID.Win32NT)
                     throw new PlatformNotSupportedException(SR.GetString(SR.RequiresNT));
@@ -308,20 +322,25 @@ namespace System.Web {
                 _timeoutManager = new RequestTimeoutManager();
                 _wpUserId = GetCurrentUserName();
 
-                _requestNotificationCompletionCallback = new AsyncCallback(this.OnRequestNotificationCompletion);
+                _requestNotificationCompletionCallback = new AsyncCallback(
+                    this.OnRequestNotificationCompletion
+                );
                 _handlerCompletionCallback = new AsyncCallback(this.OnHandlerCompletion);
-                _asyncEndOfSendCallback = new HttpWorkerRequest.EndOfSendNotification(this.EndOfSendCallback);
+                _asyncEndOfSendCallback = new HttpWorkerRequest.EndOfSendNotification(
+                    this.EndOfSendCallback
+                );
                 _appDomainUnloadallback = new WaitCallback(this.ReleaseResourcesAndUnloadAppDomain);
 
-
                 // appdomain values
-                if (GetAppDomainString(".appDomain") != null) {
-
+                if (GetAppDomainString(".appDomain") != null)
+                {
                     Debug.Assert(HostingEnvironment.IsHosted);
 
                     _appDomainAppId = GetAppDomainString(".appId");
                     _appDomainAppPath = GetAppDomainString(".appPath");
-                    _appDomainAppVPath = VirtualPath.CreateNonRelativeTrailingSlash(GetAppDomainString(".appVPath"));
+                    _appDomainAppVPath = VirtualPath.CreateNonRelativeTrailingSlash(
+                        GetAppDomainString(".appVPath")
+                    );
                     _appDomainId = GetAppDomainString(".domainId");
 
                     _isOnUNCShare = StringUtil.StringStartsWith(_appDomainAppPath, "\\\\");
@@ -329,7 +348,8 @@ namespace System.Web {
                     // init perf counters for this appdomain
                     PerfCounters.Open(_appDomainAppId);
                 }
-                else {
+                else
+                {
                     Debug.Assert(!HostingEnvironment.IsHosted);
                 }
 
@@ -337,31 +357,45 @@ namespace System.Web {
                 // DevDiv 248126: Check httpRuntime fcnMode first before we use the registry key
                 _fcm = new FileChangesMonitor(HostingEnvironment.FcnMode);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 // remember static initalization error
                 InitializationException = e;
             }
         }
 
-        private void SetUpDataDirectory() {
-
+        private void SetUpDataDirectory()
+        {
             // Set the DataDirectory (see VSWhidbey 226834) with permission (DevDiv 29614)
             string dataDirectory = Path.Combine(_appDomainAppPath, DataDirectoryName);
-            AppDomain.CurrentDomain.SetData("DataDirectory", dataDirectory,
-                    new FileIOPermission(FileIOPermissionAccess.PathDiscovery, dataDirectory));
+            AppDomain.CurrentDomain.SetData(
+                "DataDirectory",
+                dataDirectory,
+                new FileIOPermission(FileIOPermissionAccess.PathDiscovery, dataDirectory)
+            );
         }
 
-        private void DisposeAppDomainShutdownTimer() {
+        private void DisposeAppDomainShutdownTimer()
+        {
             Timer timer = _appDomainShutdownTimer;
-            if (timer != null && Interlocked.CompareExchange(ref _appDomainShutdownTimer, null, timer) == timer) {
+            if (
+                timer != null
+                && Interlocked.CompareExchange(ref _appDomainShutdownTimer, null, timer) == timer
+            )
+            {
                 timer.Dispose();
             }
         }
 
-        private void AppDomainShutdownTimerCallback(Object state) {
-            try {
+        private void AppDomainShutdownTimerCallback(Object state)
+        {
+            try
+            {
                 DisposeAppDomainShutdownTimer();
-                ShutdownAppDomain(ApplicationShutdownReason.InitializationError, "Initialization Error");
+                ShutdownAppDomain(
+                    ApplicationShutdownReason.InitializationError,
+                    "Initialization Error"
+                );
             }
             catch { } // ignore exceptions
         }
@@ -369,27 +403,38 @@ namespace System.Web {
         /*
          * Restart the AppDomain in 10 seconds
          */
-        private void StartAppDomainShutdownTimer() {
-            if (_appDomainShutdownTimer == null && !_shutdownInProgress) {
-                lock (this) {
-                    if (_appDomainShutdownTimer == null && !_shutdownInProgress) {
+        private void StartAppDomainShutdownTimer()
+        {
+            if (_appDomainShutdownTimer == null && !_shutdownInProgress)
+            {
+                lock (this)
+                {
+                    if (_appDomainShutdownTimer == null && !_shutdownInProgress)
+                    {
                         _appDomainShutdownTimer = new Timer(
                             new TimerCallback(this.AppDomainShutdownTimerCallback),
                             null,
                             10 * 1000,
-                            0);
+                            0
+                        );
                     }
                 }
             }
         }
 
-
         /*
          * Initialization from HostingEnvironment of HTTP independent features
          */
-        private void HostingInit(HostingEnvironmentFlags hostingFlags, PolicyLevel policyLevel, Exception appDomainCreationException) {
-            using (new ApplicationImpersonationContext()) {
-                try {
+        private void HostingInit(
+            HostingEnvironmentFlags hostingFlags,
+            PolicyLevel policyLevel,
+            Exception appDomainCreationException
+        )
+        {
+            using (new ApplicationImpersonationContext())
+            {
+                try
+                {
                     // To ignore FCN during initialization
                     _firstRequestStartTime = DateTime.UtcNow;
 
@@ -409,7 +454,8 @@ namespace System.Web {
                     StartMonitoringDirectoryRenamesAndBinDirectory();
 
                     // Initialize ObjectCacheHost before config is read, since config relies on the cache
-                    if (InitializationException == null) {
+                    if (InitializationException == null)
+                    {
                         HostingEnvironment.InitializeObjectCacheHost();
                     }
 
@@ -430,12 +476,13 @@ namespace System.Web {
                     Exception configInitException;
 
                     GetInitConfigSections(
-                            out cacheSection,
-                            out trustSection,
-                            out securityPolicySection,
-                            out compilationSection,
-                            out hostingEnvironmentSection,
-                            out configInitException);
+                        out cacheSection,
+                        out trustSection,
+                        out securityPolicySection,
+                        out compilationSection,
+                        out hostingEnvironmentSection,
+                        out configInitException
+                    );
 
                     // Once the configuration system is initialized, we can read
                     // the cache configuration settings.
@@ -448,10 +495,14 @@ namespace System.Web {
                     // the policy file, because it needs to replace the $CodeGen$ token.
                     SetUpCodegenDirectory(compilationSection);
 
-                    if(compilationSection != null) {
+                    if (compilationSection != null)
+                    {
                         _enablePrefetchOptimization = compilationSection.EnablePrefetchOptimization;
-                        if(_enablePrefetchOptimization) {
-                            UnsafeNativeMethods.StartPrefetchActivity((uint)StringUtil.GetStringHashCode(_appDomainAppId));
+                        if (_enablePrefetchOptimization)
+                        {
+                            UnsafeNativeMethods.StartPrefetchActivity(
+                                (uint)StringUtil.GetStringHashCode(_appDomainAppId)
+                            );
                         }
                     }
 
@@ -461,32 +512,41 @@ namespace System.Web {
                     // to true in <trust> section.
 
                     // Throw the original configuration exception from ApplicationManager if configuration is broken.
-                    if (appDomainCreationException != null) {
+                    if (appDomainCreationException != null)
+                    {
                         throw appDomainCreationException;
                     }
 
-                    if (trustSection == null || String.IsNullOrEmpty(trustSection.Level)) {
-                        throw new ConfigurationErrorsException(SR.GetString(SR.Config_section_not_present, "trust"));
+                    if (trustSection == null || String.IsNullOrEmpty(trustSection.Level))
+                    {
+                        throw new ConfigurationErrorsException(
+                            SR.GetString(SR.Config_section_not_present, "trust")
+                        );
                     }
 
-                    if (trustSection.LegacyCasModel) {
-                        try {
+                    if (trustSection.LegacyCasModel)
+                    {
+                        try
+                        {
                             _disableProcessRequestInApplicationTrust = false;
                             _isLegacyCas = true;
                             // Set code access policy on the app domain
                             SetTrustLevel(trustSection, securityPolicySection);
                         }
-                        catch {
+                        catch
+                        {
                             // throw the original config exception if it exists
                             if (configInitException != null)
                                 throw configInitException;
                             throw;
                         }
                     }
-                    else if ((hostingFlags & HostingEnvironmentFlags.ClientBuildManager) != 0) {
+                    else if ((hostingFlags & HostingEnvironmentFlags.ClientBuildManager) != 0)
+                    {
                         _trustLevel = "Full";
                     }
-                    else {
+                    else
+                    {
                         _disableProcessRequestInApplicationTrust = true;
                         // Set code access policy properties of the runtime object
                         SetTrustParameters(trustSection, securityPolicySection, policyLevel);
@@ -496,7 +556,9 @@ namespace System.Web {
                     InitFusion(hostingEnvironmentSection);
 
                     // set the sliding expiration for URL metadata
-                    CachedPathData.InitializeUrlMetadataSlidingExpiration(hostingEnvironmentSection);
+                    CachedPathData.InitializeUrlMetadataSlidingExpiration(
+                        hostingEnvironmentSection
+                    );
 
                     // Complete initialization of configuration.
                     // Note that this needs to be called after SetTrustLevel,
@@ -513,7 +575,8 @@ namespace System.Web {
                     // we are now ready to handle exception processing
                     // with the correct trust level set.
                     //
-                    if (configInitException != null) {
+                    if (configInitException != null)
+                    {
                         throw configInitException;
                     }
 
@@ -524,7 +587,12 @@ namespace System.Web {
                     // Initialize the build manager
                     BuildManager.InitializeBuildManager();
 
-                    if(compilationSection != null && compilationSection.ProfileGuidedOptimizations == ProfileGuidedOptimizationsFlags.All) {
+                    if (
+                        compilationSection != null
+                        && compilationSection.ProfileGuidedOptimizations
+                            == ProfileGuidedOptimizationsFlags.All
+                    )
+                    {
                         ProfileOptimization.SetProfileRoot(_codegenDir);
                         ProfileOptimization.StartProfile(profileFileName);
                     }
@@ -535,15 +603,16 @@ namespace System.Web {
                     // Init debugging
                     InitDebuggingSupport();
 
-                    _processRequestInApplicationTrust = trustSection.ProcessRequestInApplicationTrust;
+                    _processRequestInApplicationTrust =
+                        trustSection.ProcessRequestInApplicationTrust;
 
                     // Init AppDomain Resource Perf Counters
                     AppDomainResourcePerfCounters.Init();
 
-
                     RelaxMapPathIfRequired();
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     _hostingInitFailed = true;
                     InitializationException = e;
 
@@ -555,78 +624,82 @@ namespace System.Web {
             }
         }
 
-        internal static Exception InitializationException {
-            get {
-                return _theRuntime._initializationError;
-            }
-
+        internal static Exception InitializationException
+        {
+            get { return _theRuntime._initializationError; }
             // The exception is "cached" for 10 seconds, then the AppDomain is restarted.
-            set {
+            set
+            {
                 _theRuntime._initializationError = value;
                 // In v2.0, we shutdown immediately if hostingInitFailed...so we don't need the timer
-                if (!HostingInitFailed) {
+                if (!HostingInitFailed)
+                {
                     _theRuntime.StartAppDomainShutdownTimer();
                 }
             }
         }
 
-        internal static bool HostingInitFailed {
-            get {
-                return _theRuntime._hostingInitFailed;
-            }
+        internal static bool HostingInitFailed
+        {
+            get { return _theRuntime._hostingInitFailed; }
         }
 
-        internal static void InitializeHostingFeatures(HostingEnvironmentFlags hostingFlags, PolicyLevel policyLevel, Exception appDomainCreationException) {
+        internal static void InitializeHostingFeatures(
+            HostingEnvironmentFlags hostingFlags,
+            PolicyLevel policyLevel,
+            Exception appDomainCreationException
+        )
+        {
             _theRuntime.HostingInit(hostingFlags, policyLevel, appDomainCreationException);
         }
 
-        internal static bool EnableHeaderChecking {
-            get {
-                return _theRuntime._enableHeaderChecking;
-            }
+        internal static bool EnableHeaderChecking
+        {
+            get { return _theRuntime._enableHeaderChecking; }
         }
 
-        internal static bool ProcessRequestInApplicationTrust {
-            get {
-                return _theRuntime._processRequestInApplicationTrust;
-            }
+        internal static bool ProcessRequestInApplicationTrust
+        {
+            get { return _theRuntime._processRequestInApplicationTrust; }
         }
 
-        internal static bool DisableProcessRequestInApplicationTrust {
-            get {
-                return _theRuntime._disableProcessRequestInApplicationTrust;
-            }
+        internal static bool DisableProcessRequestInApplicationTrust
+        {
+            get { return _theRuntime._disableProcessRequestInApplicationTrust; }
         }
 
-        internal static bool IsLegacyCas {
-            get {
-                return _theRuntime._isLegacyCas;
-            }
+        internal static bool IsLegacyCas
+        {
+            get { return _theRuntime._isLegacyCas; }
         }
 
-        internal static byte[] AppOfflineMessage {
-            get {
-                return _theRuntime._appOfflineMessage;
-            }
+        internal static byte[] AppOfflineMessage
+        {
+            get { return _theRuntime._appOfflineMessage; }
         }
 
         /*
          * Initialization on first request (context available)
          */
-        private void FirstRequestInit(HttpContext context) {
+        private void FirstRequestInit(HttpContext context)
+        {
             Exception error = null;
 
-            if (InitializationException == null && _appDomainId != null) {
+            if (InitializationException == null && _appDomainId != null)
+            {
 #if DBG
                 HttpContext.SetDebugAssertOnAccessToCurrent(true);
 #endif
-                try {
-                    using (new ApplicationImpersonationContext()) {
+                try
+                {
+                    using (new ApplicationImpersonationContext())
+                    {
                         // Is this necessary?  See InitHttpConfiguration
                         CultureInfo savedCulture = Thread.CurrentThread.CurrentCulture;
                         CultureInfo savedUICulture = Thread.CurrentThread.CurrentUICulture;
 
-                        try {
+                        try
+                        {
                             // Ensure config system is initialized
                             InitHttpConfiguration(); // be sure config system is set
 
@@ -662,37 +735,46 @@ namespace System.Web {
                             HttpEncoder.InitializeOnFirstRequest();
                             RequestValidator.InitializeOnFirstRequest();
 
-                            if (context.WorkerRequest is ISAPIWorkerRequestOutOfProc) {
+                            if (context.WorkerRequest is ISAPIWorkerRequestOutOfProc)
+                            {
                                 // Make sure that the <processModel> section has no errors
-                                ProcessModelSection processModel = RuntimeConfig.GetMachineConfig().ProcessModel;
+                                ProcessModelSection processModel = RuntimeConfig
+                                    .GetMachineConfig()
+                                    .ProcessModel;
                             }
                         }
-                        finally {
+                        finally
+                        {
                             Thread.CurrentThread.CurrentUICulture = savedUICulture;
                             SetCurrentThreadCultureWithAssert(savedCulture);
                         }
                     }
                 }
-                catch (ConfigurationException e) {
+                catch (ConfigurationException e)
+                {
                     error = e;
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     // remember second-phase initialization error
                     error = new HttpException(SR.GetString(SR.XSP_init_error, e.Message), e);
                 }
-                finally {
+                finally
+                {
 #if DBG
                     HttpContext.SetDebugAssertOnAccessToCurrent(false);
 #endif
                 }
             }
 
-            if (InitializationException != null) {
+            if (InitializationException != null)
+            {
                 // throw cached exception.  We need to wrap it in a new exception, otherwise
                 // we lose the original stack.
                 throw new HttpException(InitializationException.Message, InitializationException);
             }
-            else if (error != null) {
+            else if (error != null)
+            {
                 InitializationException = error;
                 // throw new exception
                 throw error;
@@ -702,14 +784,19 @@ namespace System.Web {
         }
 
         [SecurityPermission(SecurityAction.Assert, ControlThread = true)]
-        internal static void SetCurrentThreadCultureWithAssert(CultureInfo cultureInfo) {
+        internal static void SetCurrentThreadCultureWithAssert(CultureInfo cultureInfo)
+        {
             Thread.CurrentThread.CurrentCulture = cultureInfo;
         }
 
-        private void EnsureFirstRequestInit(HttpContext context) {
-            if (_beforeFirstRequest) {
-                lock (this) {
-                    if (_beforeFirstRequest) {
+        private void EnsureFirstRequestInit(HttpContext context)
+        {
+            if (_beforeFirstRequest)
+            {
+                lock (this)
+                {
+                    if (_beforeFirstRequest)
+                    {
                         _firstRequestStartTime = DateTime.UtcNow;
                         FirstRequestInit(context);
                         _beforeFirstRequest = false;
@@ -719,27 +806,40 @@ namespace System.Web {
             }
         }
 
-        private void EnsureAccessToApplicationDirectory() {
-            if (!FileUtil.DirectoryAccessible(_appDomainAppPath)) {
-                // 
-                if (_appDomainAppPath.IndexOf('?') >= 0) {
+        private void EnsureAccessToApplicationDirectory()
+        {
+            if (!FileUtil.DirectoryAccessible(_appDomainAppPath))
+            {
+                //
+                if (_appDomainAppPath.IndexOf('?') >= 0)
+                {
                     // Possible Unicode when not supported
-                    throw new HttpException(SR.GetString(SR.Access_denied_to_unicode_app_dir, _appDomainAppPath));
+                    throw new HttpException(
+                        SR.GetString(SR.Access_denied_to_unicode_app_dir, _appDomainAppPath)
+                    );
                 }
-                else {
-                    throw new HttpException(SR.GetString(SR.Access_denied_to_app_dir, _appDomainAppPath));
+                else
+                {
+                    throw new HttpException(
+                        SR.GetString(SR.Access_denied_to_app_dir, _appDomainAppPath)
+                    );
                 }
             }
         }
 
-        private void StartMonitoringDirectoryRenamesAndBinDirectory() {
-            _fcm.StartMonitoringDirectoryRenamesAndBinDirectory(AppDomainAppPathInternal, new FileChangeEventHandler(this.OnCriticalDirectoryChange));
+        private void StartMonitoringDirectoryRenamesAndBinDirectory()
+        {
+            _fcm.StartMonitoringDirectoryRenamesAndBinDirectory(
+                AppDomainAppPathInternal,
+                new FileChangeEventHandler(this.OnCriticalDirectoryChange)
+            );
         }
 
         //
         // Monitor a local resources subdirectory and unload appdomain when it changes
         //
-        internal static void StartListeningToLocalResourcesDirectory(VirtualPath virtualDir) {
+        internal static void StartListeningToLocalResourcesDirectory(VirtualPath virtualDir)
+        {
 #if !FEATURE_PAL // FEATURE_PAL does not enable file change notification
             _theRuntime._fcm.StartListeningToLocalResourcesDirectory(virtualDir);
 #endif // !FEATURE_PAL
@@ -758,13 +858,14 @@ namespace System.Web {
         // has errors.
         //
         private void GetInitConfigSections(
-                out CacheSection cacheSection,
-                out TrustSection trustSection,
-                out SecurityPolicySection securityPolicySection,
-                out CompilationSection compilationSection,
-                out HostingEnvironmentSection hostingEnvironmentSection,
-                out Exception initException) {
-
+            out CacheSection cacheSection,
+            out TrustSection trustSection,
+            out SecurityPolicySection securityPolicySection,
+            out CompilationSection compilationSection,
+            out HostingEnvironmentSection hostingEnvironmentSection,
+            out Exception initException
+        )
+        {
             cacheSection = null;
             trustSection = null;
             securityPolicySection = null;
@@ -777,104 +878,139 @@ namespace System.Web {
 
             // AppConfig may throw an exception.
             RuntimeConfig appConfig = null;
-            try {
+            try
+            {
                 appConfig = RuntimeConfig.GetAppConfig();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 initException = e;
             }
 
             // Cache section
-            if (appConfig != null) {
-                try {
+            if (appConfig != null)
+            {
+                try
+                {
                     cacheSection = appConfig.Cache;
                 }
-                catch (Exception e) {
-                    if (initException == null) {
+                catch (Exception e)
+                {
+                    if (initException == null)
+                    {
                         initException = e;
                     }
                 }
             }
 
-            if (cacheSection == null) {
+            if (cacheSection == null)
+            {
                 cacheSection = appLKGConfig.Cache;
             }
 
             // Trust section
-            if (appConfig != null) {
-                try {
+            if (appConfig != null)
+            {
+                try
+                {
                     trustSection = appConfig.Trust;
                 }
-                catch (Exception e) {
-                    if (initException == null) {
+                catch (Exception e)
+                {
+                    if (initException == null)
+                    {
                         initException = e;
                     }
                 }
             }
 
-            if (trustSection == null) {
+            if (trustSection == null)
+            {
                 trustSection = appLKGConfig.Trust;
             }
 
             // SecurityPolicy section
-            if (appConfig != null) {
-                try {
+            if (appConfig != null)
+            {
+                try
+                {
                     securityPolicySection = appConfig.SecurityPolicy;
                 }
-                catch (Exception e) {
-                    if (initException == null) {
+                catch (Exception e)
+                {
+                    if (initException == null)
+                    {
                         initException = e;
                     }
                 }
             }
 
-            if (securityPolicySection == null) {
+            if (securityPolicySection == null)
+            {
                 securityPolicySection = appLKGConfig.SecurityPolicy;
             }
 
             // Compilation section
-            if (appConfig != null) {
-                try {
+            if (appConfig != null)
+            {
+                try
+                {
                     compilationSection = appConfig.Compilation;
                 }
-                catch (Exception e) {
-                    if (initException == null) {
+                catch (Exception e)
+                {
+                    if (initException == null)
+                    {
                         initException = e;
                     }
                 }
             }
 
-            if (compilationSection == null) {
+            if (compilationSection == null)
+            {
                 compilationSection = appLKGConfig.Compilation;
             }
 
             // HostingEnvironment section
-            if (appConfig != null) {
-                try {
+            if (appConfig != null)
+            {
+                try
+                {
                     hostingEnvironmentSection = appConfig.HostingEnvironment;
                 }
-                catch (Exception e) {
-                    if (initException == null) {
+                catch (Exception e)
+                {
+                    if (initException == null)
+                    {
                         initException = e;
                     }
                 }
             }
 
-            if (hostingEnvironmentSection == null) {
+            if (hostingEnvironmentSection == null)
+            {
                 hostingEnvironmentSection = appLKGConfig.HostingEnvironment;
             }
         }
 
         // Set up the codegen directory for the app
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "This call site is trusted.")]
-        private void SetUpCodegenDirectory(CompilationSection compilationSection) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
+            Justification = "This call site is trusted."
+        )]
+        private void SetUpCodegenDirectory(CompilationSection compilationSection)
+        {
             AppDomain appDomain = Thread.GetDomain();
 
             string codegenBase;
-            
+
             // devdiv 1038337. Passing the corresponding IsDevelopmentEnvironment flag to ConstructSimpleAppName
-            string simpleAppName = System.Web.Hosting.AppManagerAppDomainFactory.ConstructSimpleAppName(
-                AppDomainAppVirtualPath, HostingEnvironment.IsDevelopmentEnvironment);
+            string simpleAppName =
+                System.Web.Hosting.AppManagerAppDomainFactory.ConstructSimpleAppName(
+                    AppDomainAppVirtualPath,
+                    HostingEnvironment.IsDevelopmentEnvironment
+                );
 
             string tempDirectory = null;
 
@@ -883,59 +1019,88 @@ namespace System.Web {
             string configFileName = null;
             int configLineNumber = 0;
 
-            if (compilationSection != null && !String.IsNullOrEmpty(compilationSection.TempDirectory)) {
+            if (
+                compilationSection != null
+                && !String.IsNullOrEmpty(compilationSection.TempDirectory)
+            )
+            {
                 tempDirectory = compilationSection.TempDirectory;
 
-                compilationSection.GetTempDirectoryErrorInfo(out tempDirAttribName,
-                    out configFileName, out configLineNumber);
+                compilationSection.GetTempDirectoryErrorInfo(
+                    out tempDirAttribName,
+                    out configFileName,
+                    out configLineNumber
+                );
             }
 
-            if (tempDirectory != null) {
+            if (tempDirectory != null)
+            {
                 tempDirectory = tempDirectory.Trim();
 
-                if (!Path.IsPathRooted(tempDirectory)) {
+                if (!Path.IsPathRooted(tempDirectory))
+                {
                     // Make sure the path is not relative (VSWhidbey 260075)
                     tempDirectory = null;
                 }
-                else {
-                    try {
+                else
+                {
+                    try
+                    {
                         // Canonicalize it to avoid problems with spaces (VSWhidbey 229873)
                         tempDirectory = new DirectoryInfo(tempDirectory).FullName;
                     }
-                    catch {
+                    catch
+                    {
                         tempDirectory = null;
                     }
                 }
 
-                if (tempDirectory == null) {
+                if (tempDirectory == null)
+                {
                     throw new ConfigurationErrorsException(
                         SR.GetString(SR.Invalid_temp_directory, tempDirAttribName),
-                        configFileName, configLineNumber);
+                        configFileName,
+                        configLineNumber
+                    );
                 }
 #if FEATURE_PAL
-            } else {
+            }
+            else
+            {
                 System.UInt32 length = 0;
                 StringBuilder sb = null;
                 bool bRet;
 
                 // Get the required length
                 bRet = UnsafeNativeMethods.GetUserTempDirectory(
-                                    UnsafeNativeMethods.DeploymentDirectoryType.ddtInstallationDependentDirectory,
-                                    null, ref length);
+                    UnsafeNativeMethods.DeploymentDirectoryType.ddtInstallationDependentDirectory,
+                    null,
+                    ref length
+                );
 
-                if (true == bRet) {
+                if (true == bRet)
+                {
                     // now, allocate the string
-                    sb = new StringBuilder ((int)length);
+                    sb = new StringBuilder((int)length);
 
                     // call again to get the value
                     bRet = UnsafeNativeMethods.GetUserTempDirectory(
-                                    UnsafeNativeMethods.DeploymentDirectoryType.ddtInstallationDependentDirectory,
-                                    sb, ref length);
+                        UnsafeNativeMethods
+                            .DeploymentDirectoryType
+                            .ddtInstallationDependentDirectory,
+                        sb,
+                        ref length
+                    );
                 }
 
-                if (false == bRet) {
+                if (false == bRet)
+                {
                     throw new ConfigurationException(
-                        HttpRuntime.FormatResourceString(SR.Invalid_temp_directory, tempDirAttribName));
+                        HttpRuntime.FormatResourceString(
+                            SR.Invalid_temp_directory,
+                            tempDirAttribName
+                        )
+                    );
                 }
 
                 tempDirectory = Path.Combine(sb.ToString(), codegenDirName);
@@ -945,35 +1110,45 @@ namespace System.Web {
 #endif // FEATURE_PAL
 
                 // Create the config-specified directory if needed
-                try {
+                try
+                {
                     Directory.CreateDirectory(tempDirectory);
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     throw new ConfigurationErrorsException(
                         SR.GetString(SR.Invalid_temp_directory, tempDirAttribName),
                         e,
-                        configFileName, configLineNumber);
+                        configFileName,
+                        configLineNumber
+                    );
                 }
 #if !FEATURE_PAL
             }
-            else {
+            else
+            {
                 tempDirectory = Path.Combine(s_installDirectory, codegenDirName);
             }
 #endif // !FEATURE_PAL
 
             // If we don't have write access to the codegen dir, use the TEMP dir instead.
             // This will allow non-admin users to work in hosting scenarios (e.g. Venus, aspnet_compiler)
-            if (!System.Web.UI.Util.HasWriteAccessToDirectory(tempDirectory)) {
-
-                // Don't do this if we are not in a CBM scenario and we're in a service (!UserInteractive), 
+            if (!System.Web.UI.Util.HasWriteAccessToDirectory(tempDirectory))
+            {
+                // Don't do this if we are not in a CBM scenario and we're in a service (!UserInteractive),
                 // as TEMP could point to unwanted places.
 
 #if !FEATURE_PAL // always fail here
                 if ((!BuildManagerHost.InClientBuildManager) && (!Environment.UserInteractive))
 #endif // !FEATURE_PAL
                 {
-                    throw new HttpException(SR.GetString(SR.No_codegen_access,
-                        System.Web.UI.Util.GetCurrentAccountName(), tempDirectory));
+                    throw new HttpException(
+                        SR.GetString(
+                            SR.No_codegen_access,
+                            System.Web.UI.Util.GetCurrentAccountName(),
+                            tempDirectory
+                        )
+                    );
                 }
 
                 tempDirectory = Path.GetTempPath();
@@ -995,16 +1170,26 @@ namespace System.Web {
             Directory.CreateDirectory(_codegenDir);
         }
 
-        private void InitFusion(HostingEnvironmentSection hostingEnvironmentSection) {
-
+        private void InitFusion(HostingEnvironmentSection hostingEnvironmentSection)
+        {
             AppDomain appDomain = Thread.GetDomain();
 
             // If there is a double backslash in the string, get rid of it (ASURT 122191)
             // Make sure to skip the first char, to avoid breaking the UNC case
             string appDomainAppPath = _appDomainAppPath;
-            if (appDomainAppPath.IndexOf(DoubleDirectorySeparatorString, 1, StringComparison.Ordinal) >= 1) {
-                appDomainAppPath = appDomainAppPath[0] + appDomainAppPath.Substring(1).Replace(DoubleDirectorySeparatorString,
-                    DirectorySeparatorString);
+            if (
+                appDomainAppPath.IndexOf(
+                    DoubleDirectorySeparatorString,
+                    1,
+                    StringComparison.Ordinal
+                ) >= 1
+            )
+            {
+                appDomainAppPath =
+                    appDomainAppPath[0]
+                    + appDomainAppPath
+                        .Substring(1)
+                        .Replace(DoubleDirectorySeparatorString, DirectorySeparatorString);
             }
 
 #pragma warning disable 0618    // To avoid deprecation warning
@@ -1013,12 +1198,17 @@ namespace System.Web {
 #pragma warning restore 0618
 
             // If shadow copying was disabled via config, turn it off (DevDiv 30864)
-            if (hostingEnvironmentSection != null && !hostingEnvironmentSection.ShadowCopyBinAssemblies) {
+            if (
+                hostingEnvironmentSection != null
+                && !hostingEnvironmentSection.ShadowCopyBinAssemblies
+            )
+            {
 #pragma warning disable 0618    // To avoid deprecation warning
                 appDomain.ClearShadowCopyPath();
 #pragma warning restore 0618
             }
-            else {
+            else
+            {
                 // enable shadow-copying from bin
 #pragma warning disable 0618    // To avoid deprecation warning
                 appDomain.SetShadowCopyPath(appDomainAppPath + BinDirectoryName);
@@ -1035,55 +1225,123 @@ namespace System.Web {
             _fusionInited = true;
         }
 
-        private void InitRequestQueue() {
+        private void InitRequestQueue()
+        {
             RuntimeConfig config = RuntimeConfig.GetAppConfig();
             HttpRuntimeSection runtimeConfig = config.HttpRuntime;
             ProcessModelSection processConfig = config.ProcessModel;
 
-            if (processConfig.AutoConfig) {
+            if (processConfig.AutoConfig)
+            {
                 _requestQueue = new RequestQueue(
                     88 * processConfig.CpuCount,
                     76 * processConfig.CpuCount,
                     runtimeConfig.AppRequestQueueLimit,
-                    processConfig.ClientConnectedCheck);
+                    processConfig.ClientConnectedCheck
+                );
             }
-            else {
-
+            else
+            {
                 // Configuration section handlers cannot validate values based on values
                 // in other configuration sections, so we validate minFreeThreads and
                 // minLocalRequestFreeThreads here.
-                int maxThreads = (processConfig.MaxWorkerThreadsTimesCpuCount < processConfig.MaxIoThreadsTimesCpuCount) ? processConfig.MaxWorkerThreadsTimesCpuCount : processConfig.MaxIoThreadsTimesCpuCount;
+                int maxThreads =
+                    (
+                        processConfig.MaxWorkerThreadsTimesCpuCount
+                        < processConfig.MaxIoThreadsTimesCpuCount
+                    )
+                        ? processConfig.MaxWorkerThreadsTimesCpuCount
+                        : processConfig.MaxIoThreadsTimesCpuCount;
                 // validate minFreeThreads
-                if (runtimeConfig.MinFreeThreads >= maxThreads) {
-                    if (runtimeConfig.ElementInformation.Properties["minFreeThreads"].LineNumber == 0) {
-                        if (processConfig.ElementInformation.Properties["maxWorkerThreads"].LineNumber != 0) {
-                            throw new ConfigurationErrorsException(SR.GetString(SR.Thread_pool_limit_must_be_greater_than_minFreeThreads, runtimeConfig.MinFreeThreads.ToString(CultureInfo.InvariantCulture)),
-                                                                   processConfig.ElementInformation.Properties["maxWorkerThreads"].Source,
-                                                                   processConfig.ElementInformation.Properties["maxWorkerThreads"].LineNumber);
+                if (runtimeConfig.MinFreeThreads >= maxThreads)
+                {
+                    if (
+                        runtimeConfig.ElementInformation.Properties["minFreeThreads"].LineNumber
+                        == 0
+                    )
+                    {
+                        if (
+                            processConfig
+                                .ElementInformation
+                                .Properties["maxWorkerThreads"]
+                                .LineNumber != 0
+                        )
+                        {
+                            throw new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.Thread_pool_limit_must_be_greater_than_minFreeThreads,
+                                    runtimeConfig.MinFreeThreads.ToString(
+                                        CultureInfo.InvariantCulture
+                                    )
+                                ),
+                                processConfig
+                                    .ElementInformation
+                                    .Properties["maxWorkerThreads"]
+                                    .Source,
+                                processConfig
+                                    .ElementInformation
+                                    .Properties["maxWorkerThreads"]
+                                    .LineNumber
+                            );
                         }
-                        else {
-                            throw new ConfigurationErrorsException(SR.GetString(SR.Thread_pool_limit_must_be_greater_than_minFreeThreads, runtimeConfig.MinFreeThreads.ToString(CultureInfo.InvariantCulture)),
-                                                                   processConfig.ElementInformation.Properties["maxIoThreads"].Source,
-                                                                   processConfig.ElementInformation.Properties["maxIoThreads"].LineNumber);
+                        else
+                        {
+                            throw new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.Thread_pool_limit_must_be_greater_than_minFreeThreads,
+                                    runtimeConfig.MinFreeThreads.ToString(
+                                        CultureInfo.InvariantCulture
+                                    )
+                                ),
+                                processConfig.ElementInformation.Properties["maxIoThreads"].Source,
+                                processConfig
+                                    .ElementInformation
+                                    .Properties["maxIoThreads"]
+                                    .LineNumber
+                            );
                         }
                     }
-                    else {
-                        throw new ConfigurationErrorsException(SR.GetString(SR.Min_free_threads_must_be_under_thread_pool_limits, maxThreads.ToString(CultureInfo.InvariantCulture)),
-                                                               runtimeConfig.ElementInformation.Properties["minFreeThreads"].Source,
-                                                               runtimeConfig.ElementInformation.Properties["minFreeThreads"].LineNumber);
+                    else
+                    {
+                        throw new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.Min_free_threads_must_be_under_thread_pool_limits,
+                                maxThreads.ToString(CultureInfo.InvariantCulture)
+                            ),
+                            runtimeConfig.ElementInformation.Properties["minFreeThreads"].Source,
+                            runtimeConfig.ElementInformation.Properties["minFreeThreads"].LineNumber
+                        );
                     }
                 }
                 // validate minLocalRequestFreeThreads
-                if (runtimeConfig.MinLocalRequestFreeThreads > runtimeConfig.MinFreeThreads) {
-                    if (runtimeConfig.ElementInformation.Properties["minLocalRequestFreeThreads"].LineNumber == 0) {
-                        throw new ConfigurationErrorsException(SR.GetString(SR.Local_free_threads_cannot_exceed_free_threads),
-                                                               processConfig.ElementInformation.Properties["minFreeThreads"].Source,
-                                                               processConfig.ElementInformation.Properties["minFreeThreads"].LineNumber);
+                if (runtimeConfig.MinLocalRequestFreeThreads > runtimeConfig.MinFreeThreads)
+                {
+                    if (
+                        runtimeConfig
+                            .ElementInformation
+                            .Properties["minLocalRequestFreeThreads"]
+                            .LineNumber == 0
+                    )
+                    {
+                        throw new ConfigurationErrorsException(
+                            SR.GetString(SR.Local_free_threads_cannot_exceed_free_threads),
+                            processConfig.ElementInformation.Properties["minFreeThreads"].Source,
+                            processConfig.ElementInformation.Properties["minFreeThreads"].LineNumber
+                        );
                     }
-                    else {
-                        throw new ConfigurationErrorsException(SR.GetString(SR.Local_free_threads_cannot_exceed_free_threads),
-                                                               runtimeConfig.ElementInformation.Properties["minLocalRequestFreeThreads"].Source,
-                                                               runtimeConfig.ElementInformation.Properties["minLocalRequestFreeThreads"].LineNumber);
+                    else
+                    {
+                        throw new ConfigurationErrorsException(
+                            SR.GetString(SR.Local_free_threads_cannot_exceed_free_threads),
+                            runtimeConfig
+                                .ElementInformation
+                                .Properties["minLocalRequestFreeThreads"]
+                                .Source,
+                            runtimeConfig
+                                .ElementInformation
+                                .Properties["minLocalRequestFreeThreads"]
+                                .LineNumber
+                        );
                     }
                 }
 
@@ -1091,22 +1349,27 @@ namespace System.Web {
                     runtimeConfig.MinFreeThreads,
                     runtimeConfig.MinLocalRequestFreeThreads,
                     runtimeConfig.AppRequestQueueLimit,
-                    processConfig.ClientConnectedCheck);
+                    processConfig.ClientConnectedCheck
+                );
             }
         }
 
-        private void InitApartmentThreading() {
+        private void InitApartmentThreading()
+        {
             HttpRuntimeSection runtimeConfig = RuntimeConfig.GetAppConfig().HttpRuntime;
 
-            if (runtimeConfig != null) {
+            if (runtimeConfig != null)
+            {
                 _apartmentThreading = runtimeConfig.ApartmentThreading;
             }
-            else {
+            else
+            {
                 _apartmentThreading = false;
             }
         }
 
-        private void InitTrace(HttpContext context) {
+        private void InitTrace(HttpContext context)
+        {
             TraceSection traceConfig = RuntimeConfig.GetAppConfig().Trace;
 
             Profile.RequestsToProfile = traceConfig.RequestLimit;
@@ -1126,7 +1389,8 @@ namespace System.Web {
             TraceContext.SetWriteToDiagnosticsTrace(traceConfig.WriteToDiagnosticsTrace);
         }
 
-        private void InitDebuggingSupport() {
+        private void InitDebuggingSupport()
+        {
             CompilationSection compConfig = RuntimeConfig.GetAppConfig().Compilation;
             _debuggingEnabled = compConfig.Debug;
         }
@@ -1137,10 +1401,12 @@ namespace System.Web {
          * we won't fail due to lack of permissions on the codegen dir (see ASURT 114486)
          */
         [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
-        private void PreloadAssembliesFromBin() {
+        private void PreloadAssembliesFromBin()
+        {
             bool appClientImpersonationEnabled = false;
 
-            if (!_isOnUNCShare) {
+            if (!_isOnUNCShare)
+            {
                 // if not on UNC share check if config has impersonation enabled (without userName)
                 IdentitySection c = RuntimeConfig.GetAppConfig().Identity;
                 if (c.Impersonate && c.ImpersonateToken == IntPtr.Zero)
@@ -1161,16 +1427,24 @@ namespace System.Web {
             PreloadAssembliesFromBinRecursive(binPathDirectory);
         }
 
-        private void PreloadAssembliesFromBinRecursive(DirectoryInfo dirInfo) {
-
+        private void PreloadAssembliesFromBinRecursive(DirectoryInfo dirInfo)
+        {
             FileInfo[] binDlls = dirInfo.GetFiles("*.dll");
 
             // Pre-load all the assemblies, ignoring all exceptions
-            foreach (FileInfo fi in binDlls) {
-                try { Assembly.Load(System.Web.UI.Util.GetAssemblyNameFromFileName(fi.Name)); }
-                catch (FileNotFoundException) {
+            foreach (FileInfo fi in binDlls)
+            {
+                try
+                {
+                    Assembly.Load(System.Web.UI.Util.GetAssemblyNameFromFileName(fi.Name));
+                }
+                catch (FileNotFoundException)
+                {
                     // If Load failed, try LoadFrom (VSWhidbey 493725)
-                    try { Assembly.LoadFrom(fi.FullName); }
+                    try
+                    {
+                        Assembly.LoadFrom(fi.FullName);
+                    }
                     catch { }
                 }
                 catch { }
@@ -1178,20 +1452,41 @@ namespace System.Web {
 
             // Recurse on the subdirectories
             DirectoryInfo[] subDirs = dirInfo.GetDirectories();
-            foreach (DirectoryInfo di in subDirs) {
+            foreach (DirectoryInfo di in subDirs)
+            {
                 PreloadAssembliesFromBinRecursive(di);
             }
         }
 
-        private void SetAutoConfigLimits(ProcessModelSection pmConfig) {
+        private void SetAutoConfigLimits(ProcessModelSection pmConfig)
+        {
             // check if the current limits are ok
-            int workerMax, ioMax;
+            int workerMax,
+                ioMax;
             ThreadPool.GetMaxThreads(out workerMax, out ioMax);
 
             // only set if different
-            if (pmConfig.DefaultMaxWorkerThreadsForAutoConfig != workerMax || pmConfig.DefaultMaxIoThreadsForAutoConfig != ioMax) {
-                Debug.Trace("ThreadPool", "SetThreadLimit: from " + workerMax + "," + ioMax + " to " + pmConfig.DefaultMaxWorkerThreadsForAutoConfig + "," + pmConfig.DefaultMaxIoThreadsForAutoConfig);
-                UnsafeNativeMethods.SetClrThreadPoolLimits(pmConfig.DefaultMaxWorkerThreadsForAutoConfig, pmConfig.DefaultMaxIoThreadsForAutoConfig, true);
+            if (
+                pmConfig.DefaultMaxWorkerThreadsForAutoConfig != workerMax
+                || pmConfig.DefaultMaxIoThreadsForAutoConfig != ioMax
+            )
+            {
+                Debug.Trace(
+                    "ThreadPool",
+                    "SetThreadLimit: from "
+                        + workerMax
+                        + ","
+                        + ioMax
+                        + " to "
+                        + pmConfig.DefaultMaxWorkerThreadsForAutoConfig
+                        + ","
+                        + pmConfig.DefaultMaxIoThreadsForAutoConfig
+                );
+                UnsafeNativeMethods.SetClrThreadPoolLimits(
+                    pmConfig.DefaultMaxWorkerThreadsForAutoConfig,
+                    pmConfig.DefaultMaxIoThreadsForAutoConfig,
+                    true
+                );
             }
 
             // this is the code equivalent of setting maxconnection
@@ -1202,69 +1497,129 @@ namespace System.Web {
             // we call InitRequestQueue later, from FirstRequestInit, and set minFreeThreads and minLocalRequestFreeThreads
         }
 
-        private void SetThreadPoolLimits() {
-            try {
+        private void SetThreadPoolLimits()
+        {
+            try
+            {
                 ProcessModelSection pmConfig = RuntimeConfig.GetMachineConfig().ProcessModel;
 
-                if (pmConfig.AutoConfig) {
+                if (pmConfig.AutoConfig)
+                {
                     // use recommendation in http://support.microsoft.com/?id=821268
                     SetAutoConfigLimits(pmConfig);
                 }
-                else if (pmConfig.MaxWorkerThreadsTimesCpuCount > 0 && pmConfig.MaxIoThreadsTimesCpuCount > 0) {
+                else if (
+                    pmConfig.MaxWorkerThreadsTimesCpuCount > 0
+                    && pmConfig.MaxIoThreadsTimesCpuCount > 0
+                )
+                {
                     // check if the current limits are ok
-                    int workerMax, ioMax;
+                    int workerMax,
+                        ioMax;
                     ThreadPool.GetMaxThreads(out workerMax, out ioMax);
 
                     // only set if different
-                    if (pmConfig.MaxWorkerThreadsTimesCpuCount != workerMax || pmConfig.MaxIoThreadsTimesCpuCount != ioMax) {
-                        Debug.Trace("ThreadPool", "SetThreadLimit: from " + workerMax + "," + ioMax + " to " + pmConfig.MaxWorkerThreadsTimesCpuCount + "," + pmConfig.MaxIoThreadsTimesCpuCount);
-                        UnsafeNativeMethods.SetClrThreadPoolLimits(pmConfig.MaxWorkerThreadsTimesCpuCount, pmConfig.MaxIoThreadsTimesCpuCount, false);
+                    if (
+                        pmConfig.MaxWorkerThreadsTimesCpuCount != workerMax
+                        || pmConfig.MaxIoThreadsTimesCpuCount != ioMax
+                    )
+                    {
+                        Debug.Trace(
+                            "ThreadPool",
+                            "SetThreadLimit: from "
+                                + workerMax
+                                + ","
+                                + ioMax
+                                + " to "
+                                + pmConfig.MaxWorkerThreadsTimesCpuCount
+                                + ","
+                                + pmConfig.MaxIoThreadsTimesCpuCount
+                        );
+                        UnsafeNativeMethods.SetClrThreadPoolLimits(
+                            pmConfig.MaxWorkerThreadsTimesCpuCount,
+                            pmConfig.MaxIoThreadsTimesCpuCount,
+                            false
+                        );
                     }
                 }
 
-                if (pmConfig.MinWorkerThreadsTimesCpuCount > 0 || pmConfig.MinIoThreadsTimesCpuCount > 0) {
-                    int currentMinWorkerThreads, currentMinIoThreads;
+                if (
+                    pmConfig.MinWorkerThreadsTimesCpuCount > 0
+                    || pmConfig.MinIoThreadsTimesCpuCount > 0
+                )
+                {
+                    int currentMinWorkerThreads,
+                        currentMinIoThreads;
                     ThreadPool.GetMinThreads(out currentMinWorkerThreads, out currentMinIoThreads);
 
-                    int newMinWorkerThreads = pmConfig.MinWorkerThreadsTimesCpuCount > 0 ? pmConfig.MinWorkerThreadsTimesCpuCount : currentMinWorkerThreads;
-                    int newMinIoThreads = pmConfig.MinIoThreadsTimesCpuCount > 0 ? pmConfig.MinIoThreadsTimesCpuCount : currentMinIoThreads;
+                    int newMinWorkerThreads =
+                        pmConfig.MinWorkerThreadsTimesCpuCount > 0
+                            ? pmConfig.MinWorkerThreadsTimesCpuCount
+                            : currentMinWorkerThreads;
+                    int newMinIoThreads =
+                        pmConfig.MinIoThreadsTimesCpuCount > 0
+                            ? pmConfig.MinIoThreadsTimesCpuCount
+                            : currentMinIoThreads;
 
-                    if (newMinWorkerThreads > 0 && newMinIoThreads > 0
-                        && (newMinWorkerThreads != currentMinWorkerThreads || newMinIoThreads != currentMinIoThreads))
+                    if (
+                        newMinWorkerThreads > 0
+                        && newMinIoThreads > 0
+                        && (
+                            newMinWorkerThreads != currentMinWorkerThreads
+                            || newMinIoThreads != currentMinIoThreads
+                        )
+                    )
                         ThreadPool.SetMinThreads(newMinWorkerThreads, newMinIoThreads);
                 }
             }
-            catch {
-            }
+            catch { }
         }
 
-        internal static void CheckApplicationEnabled() {
+        internal static void CheckApplicationEnabled()
+        {
             // process App_Offline.htm file
             string appOfflineFile = Path.Combine(_theRuntime._appDomainAppPath, AppOfflineFileName);
             bool appOfflineFileFound = false;
 
             // monitor even if doesn't exist
-            _theRuntime._fcm.StartMonitoringFile(appOfflineFile, new FileChangeEventHandler(_theRuntime.OnAppOfflineFileChange));
+            _theRuntime._fcm.StartMonitoringFile(
+                appOfflineFile,
+                new FileChangeEventHandler(_theRuntime.OnAppOfflineFileChange)
+            );
 
             // read the file into memory
-            try {
-                if (File.Exists(appOfflineFile)) {
+            try
+            {
+                if (File.Exists(appOfflineFile))
+                {
                     Debug.Trace("AppOffline", "File " + appOfflineFile + " exists. Using it.");
 
-                    using (FileStream fs = new FileStream(appOfflineFile, FileMode.Open, FileAccess.Read, FileShare.Read)) {
-                        if (fs.Length <= MaxAppOfflineFileLength) {
+                    using (
+                        FileStream fs = new FileStream(
+                            appOfflineFile,
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.Read
+                        )
+                    )
+                    {
+                        if (fs.Length <= MaxAppOfflineFileLength)
+                        {
                             int length = (int)fs.Length;
 
-                            if (length > 0) {
+                            if (length > 0)
+                            {
                                 byte[] message = new byte[length];
 
-                                if (fs.Read(message, 0, length) == length) {
+                                if (fs.Read(message, 0, length) == length)
+                                {
                                     // remember the message
                                     _theRuntime._appOfflineMessage = message;
                                     appOfflineFileFound = true;
                                 }
                             }
-                            else {
+                            else
+                            {
                                 // empty file
                                 appOfflineFileFound = true;
                                 _theRuntime._appOfflineMessage = new byte[0];
@@ -1273,49 +1628,67 @@ namespace System.Web {
                     }
                 }
             }
-            catch {
+            catch
+            {
                 // ignore any IO errors reading the file
             }
 
             // throw if there is a valid App_Offline file
-            if (appOfflineFileFound) {
+            if (appOfflineFileFound)
+            {
                 throw new HttpException(503, String.Empty);
             }
 
             // process the config setting
             HttpRuntimeSection runtimeConfig = RuntimeConfig.GetAppConfig().HttpRuntime;
-            if (!runtimeConfig.Enable) {
+            if (!runtimeConfig.Enable)
+            {
                 // throw 404 on first request init -- this will get cached until config changes
                 throw new HttpException(404, String.Empty);
             }
         }
 
         [FileIOPermission(SecurityAction.Assert, Unrestricted = true)]
-        private void CheckAccessToTempDirectory() {
+        private void CheckAccessToTempDirectory()
+        {
             // The original check (in HostingInit) was done under process identity
             // this time we do it under hosting identity
-            if (HostingEnvironment.HasHostingIdentity) {
-                using (new ApplicationImpersonationContext()) {
-                    if (!System.Web.UI.Util.HasWriteAccessToDirectory(_tempDir)) {
-                        throw new HttpException(SR.GetString(SR.No_codegen_access,
-                            System.Web.UI.Util.GetCurrentAccountName(), _tempDir));
+            if (HostingEnvironment.HasHostingIdentity)
+            {
+                using (new ApplicationImpersonationContext())
+                {
+                    if (!System.Web.UI.Util.HasWriteAccessToDirectory(_tempDir))
+                    {
+                        throw new HttpException(
+                            SR.GetString(
+                                SR.No_codegen_access,
+                                System.Web.UI.Util.GetCurrentAccountName(),
+                                _tempDir
+                            )
+                        );
                     }
                 }
             }
         }
 
-        private void InitializeHealthMonitoring() {
+        private void InitializeHealthMonitoring()
+        {
 #if !FEATURE_PAL // FEATURE_PAL does not enable IIS-based hosting features
             ProcessModelSection pmConfig = RuntimeConfig.GetMachineConfig().ProcessModel;
             int deadLockInterval = (int)pmConfig.ResponseDeadlockInterval.TotalSeconds;
             int requestQueueLimit = pmConfig.RequestQueueLimit;
-            Debug.Trace("HealthMonitor", "Initalizing: ResponseDeadlockInterval=" + deadLockInterval);
+            Debug.Trace(
+                "HealthMonitor",
+                "Initalizing: ResponseDeadlockInterval=" + deadLockInterval
+            );
             UnsafeNativeMethods.InitializeHealthMonitor(deadLockInterval, requestQueueLimit);
 #endif // !FEATURE_PAL
         }
 
-        private static void InitHttpConfiguration() {
-            if (!_theRuntime._configInited) {
+        private static void InitHttpConfiguration()
+        {
+            if (!_theRuntime._configInited)
+            {
                 _theRuntime._configInited = true;
 
                 HttpConfigurationSystem.EnsureInit(null, true, true);
@@ -1325,14 +1698,22 @@ namespace System.Web {
                 // see ASURT 81655
 
                 GlobalizationSection globConfig = RuntimeConfig.GetAppLKGConfig().Globalization;
-                if (globConfig != null) {
-                    if (!String.IsNullOrEmpty(globConfig.Culture) &&
-                        !StringUtil.StringStartsWithIgnoreCase(globConfig.Culture, "auto"))
-                        SetCurrentThreadCultureWithAssert(HttpServerUtility.CreateReadOnlyCultureInfo(globConfig.Culture));
+                if (globConfig != null)
+                {
+                    if (
+                        !String.IsNullOrEmpty(globConfig.Culture)
+                        && !StringUtil.StringStartsWithIgnoreCase(globConfig.Culture, "auto")
+                    )
+                        SetCurrentThreadCultureWithAssert(
+                            HttpServerUtility.CreateReadOnlyCultureInfo(globConfig.Culture)
+                        );
 
-                    if (!String.IsNullOrEmpty(globConfig.UICulture) &&
-                        !StringUtil.StringStartsWithIgnoreCase(globConfig.UICulture, "auto"))
-                        Thread.CurrentThread.CurrentUICulture = HttpServerUtility.CreateReadOnlyCultureInfo(globConfig.UICulture);
+                    if (
+                        !String.IsNullOrEmpty(globConfig.UICulture)
+                        && !StringUtil.StringStartsWithIgnoreCase(globConfig.UICulture, "auto")
+                    )
+                        Thread.CurrentThread.CurrentUICulture =
+                            HttpServerUtility.CreateReadOnlyCultureInfo(globConfig.UICulture);
                 }
 
                 // check for errors in <processModel> section
@@ -1343,12 +1724,14 @@ namespace System.Web {
             }
         }
 
-        private void InitHeaderEncoding() {
+        private void InitHeaderEncoding()
+        {
             HttpRuntimeSection runtimeConfig = RuntimeConfig.GetAppConfig().HttpRuntime;
             _enableHeaderChecking = runtimeConfig.EnableHeaderChecking;
         }
 
-        private static void SetAutogenKeys() {
+        private static void SetAutogenKeys()
+        {
 #if !FEATURE_PAL // FEATURE_PAL does not enable cryptography
             byte[] bKeysRandom = new byte[s_autogenKeys.Length];
             byte[] bKeysStored = new byte[s_autogenKeys.Length];
@@ -1360,8 +1743,16 @@ namespace System.Web {
 
             // If getting stored keys via WorkerRequest object failed, get it directly
             if (!fGetStoredKeys)
-                fGetStoredKeys = (UnsafeNativeMethods.EcbCallISAPI(IntPtr.Zero, UnsafeNativeMethods.CallISAPIFunc.GetAutogenKeys,
-                                                                   bKeysRandom, bKeysRandom.Length, bKeysStored, bKeysStored.Length) == 1);
+                fGetStoredKeys = (
+                    UnsafeNativeMethods.EcbCallISAPI(
+                        IntPtr.Zero,
+                        UnsafeNativeMethods.CallISAPIFunc.GetAutogenKeys,
+                        bKeysRandom,
+                        bKeysRandom.Length,
+                        bKeysStored,
+                        bKeysStored.Length
+                    ) == 1
+                );
 
             // If we managed to get stored keys, copy them in; else use random keys
             if (fGetStoredKeys)
@@ -1371,23 +1762,28 @@ namespace System.Web {
 #endif // !FEATURE_PAL
         }
 
-        internal static void IncrementActivePipelineCount() {
+        internal static void IncrementActivePipelineCount()
+        {
             Interlocked.Increment(ref _theRuntime._activeRequestCount);
             HostingEnvironment.IncrementBusyCount();
         }
 
-        internal static void DecrementActivePipelineCount() {
+        internal static void DecrementActivePipelineCount()
+        {
             HostingEnvironment.DecrementBusyCount();
             Interlocked.Decrement(ref _theRuntime._activeRequestCount);
         }
 
-        internal static void PopulateIISVersionInformation() {
-            if (IsEngineLoaded) {
+        internal static void PopulateIISVersionInformation()
+        {
+            if (IsEngineLoaded)
+            {
                 uint dwVersion;
                 bool fIsIntegratedMode;
                 UnsafeIISMethods.MgdGetIISVersionInformation(out dwVersion, out fIsIntegratedMode);
 
-                if (dwVersion != 0) {
+                if (dwVersion != 0)
+                {
                     // High word is the major version; low word is the minor version (this is MAKELONG format)
                     _iisVersion = new Version((int)(dwVersion >> 16), (int)(dwVersion & 0xffff));
                     _useIntegratedPipeline = fIsIntegratedMode;
@@ -1397,29 +1793,25 @@ namespace System.Web {
 
         // Gets the version of IIS (7.0, 7.5, 8.0, etc.) that is hosting this application, or null if this application isn't IIS-hosted.
         // Should also return the correct version for IIS Express.
-        public static Version IISVersion {
-            get {
-                return _iisVersion;
-            }
+        public static Version IISVersion
+        {
+            get { return _iisVersion; }
         }
 
         // DevDivBugs 190952: public method for querying runtime pipeline mode
-        public static bool UsingIntegratedPipeline {
-            get {
-                return UseIntegratedPipeline;
-            }
+        public static bool UsingIntegratedPipeline
+        {
+            get { return UseIntegratedPipeline; }
         }
 
-        internal static bool UseIntegratedPipeline {
-            get {
-                return _useIntegratedPipeline;
-            }
+        internal static bool UseIntegratedPipeline
+        {
+            get { return _useIntegratedPipeline; }
         }
 
-        internal static bool EnablePrefetchOptimization {
-            get {
-                return _enablePrefetchOptimization;
-            }
+        internal static bool EnablePrefetchOptimization
+        {
+            get { return _enablePrefetchOptimization; }
         }
 
         /*
@@ -1427,46 +1819,73 @@ namespace System.Web {
          *
          */
 
-        internal static RequestNotificationStatus ProcessRequestNotification(IIS7WorkerRequest wr, HttpContext context)
+        internal static RequestNotificationStatus ProcessRequestNotification(
+            IIS7WorkerRequest wr,
+            HttpContext context
+        )
         {
             return _theRuntime.ProcessRequestNotificationPrivate(wr, context);
         }
 
-        private RequestNotificationStatus ProcessRequestNotificationPrivate(IIS7WorkerRequest wr, HttpContext context) {
+        private RequestNotificationStatus ProcessRequestNotificationPrivate(
+            IIS7WorkerRequest wr,
+            HttpContext context
+        )
+        {
             RequestNotificationStatus status = RequestNotificationStatus.Pending;
-            try {
+            try
+            {
                 int currentModuleIndex;
                 bool isPostNotification;
                 int currentNotification;
 
                 // setup the HttpContext for this event/module combo
-                UnsafeIISMethods.MgdGetCurrentNotificationInfo(wr.RequestContext, out currentModuleIndex, out isPostNotification, out currentNotification);
+                UnsafeIISMethods.MgdGetCurrentNotificationInfo(
+                    wr.RequestContext,
+                    out currentModuleIndex,
+                    out isPostNotification,
+                    out currentNotification
+                );
 
                 context.CurrentModuleIndex = currentModuleIndex;
                 context.IsPostNotification = isPostNotification;
-                context.CurrentNotification = (RequestNotification) currentNotification;
+                context.CurrentNotification = (RequestNotification)currentNotification;
 #if DBG
-                Debug.Trace("PipelineRuntime", "HttpRuntime::ProcessRequestNotificationPrivate: notification=" + context.CurrentNotification.ToString()
-                            + ", isPost=" + context.IsPostNotification
-                            + ", moduleIndex=" + context.CurrentModuleIndex);
+                Debug.Trace(
+                    "PipelineRuntime",
+                    "HttpRuntime::ProcessRequestNotificationPrivate: notification="
+                        + context.CurrentNotification.ToString()
+                        + ", isPost="
+                        + context.IsPostNotification
+                        + ", moduleIndex="
+                        + context.CurrentModuleIndex
+                );
 #endif
 
                 IHttpHandler handler = null;
-                if (context.NeedToInitializeApp()) {
+                if (context.NeedToInitializeApp())
+                {
 #if DBG
-                    Debug.Trace("FileChangesMonitorIgnoreSubdirChange",
-                                "*** FirstNotification " + DateTime.Now.ToString("hh:mm:ss.fff", CultureInfo.InvariantCulture)
-                                + ": _appDomainAppId=" + _appDomainAppId);
+                    Debug.Trace(
+                        "FileChangesMonitorIgnoreSubdirChange",
+                        "*** FirstNotification "
+                            + DateTime.Now.ToString("hh:mm:ss.fff", CultureInfo.InvariantCulture)
+                            + ": _appDomainAppId="
+                            + _appDomainAppId
+                    );
 #endif
                     // First request initialization
-                    try {
+                    try
+                    {
                         EnsureFirstRequestInit(context);
                     }
-                    catch {
+                    catch
+                    {
                         // If we are handling a DEBUG request, ignore the FirstRequestInit exception.
                         // This allows the HttpDebugHandler to execute, and lets the debugger attach to
                         // the process (VSWhidbey 358135)
-                        if (!context.Request.IsDebuggingRequest) {
+                        if (!context.Request.IsDebuggingRequest)
+                        {
                             throw;
                         }
                     }
@@ -1476,10 +1895,19 @@ namespace System.Web {
                     if (handler == null)
                         throw new HttpException(SR.GetString(SR.Unable_create_app_object));
 
-                    if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_START_HANDLER, context.WorkerRequest, handler.GetType().FullName, "Start");
+                    if (
+                        EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure)
+                    )
+                        EtwTrace.Trace(
+                            EtwTraceType.ETW_TYPE_START_HANDLER,
+                            context.WorkerRequest,
+                            handler.GetType().FullName,
+                            "Start"
+                        );
 
                     HttpApplication app = handler as HttpApplication;
-                    if (app != null) {
+                    if (app != null)
+                    {
                         // associate the context with an application instance
                         app.AssignContext(context);
                     }
@@ -1488,49 +1916,69 @@ namespace System.Web {
                 // this may throw, and should be called after app initialization
                 wr.SynchronizeVariables(context);
 
-                if (context.ApplicationInstance != null) {
+                if (context.ApplicationInstance != null)
+                {
                     // process request
-                    IAsyncResult ar = context.ApplicationInstance.BeginProcessRequestNotification(context, _requestNotificationCompletionCallback);
+                    IAsyncResult ar = context.ApplicationInstance.BeginProcessRequestNotification(
+                        context,
+                        _requestNotificationCompletionCallback
+                    );
 
-                    if (ar.CompletedSynchronously) {
+                    if (ar.CompletedSynchronously)
+                    {
                         status = RequestNotificationStatus.Continue;
                     }
                 }
-                else if (handler != null) {
+                else if (handler != null)
+                {
                     // HttpDebugHandler is processed here
                     handler.ProcessRequest(context);
                     status = RequestNotificationStatus.FinishRequest;
                 }
-                else {
+                else
+                {
                     status = RequestNotificationStatus.Continue;
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 status = RequestNotificationStatus.FinishRequest;
                 context.Response.InitResponseWriter();
                 // errors are handled in HttpRuntime::FinishRequestNotification
                 context.AddError(e);
             }
 
-            if (status != RequestNotificationStatus.Pending) {
+            if (status != RequestNotificationStatus.Pending)
+            {
                 // we completed synchronously
                 FinishRequestNotification(wr, context, ref status);
             }
 
 #if DBG
-            Debug.Trace("PipelineRuntime", "HttpRuntime::ProcessRequestNotificationPrivate: status=" + status.ToString());
+            Debug.Trace(
+                "PipelineRuntime",
+                "HttpRuntime::ProcessRequestNotificationPrivate: status=" + status.ToString()
+            );
 #endif
 
             return status;
         }
 
-        private void FinishRequestNotification(IIS7WorkerRequest wr, HttpContext context, ref RequestNotificationStatus status) {
-
-            Debug.Assert(status != RequestNotificationStatus.Pending, "status != RequestNotificationStatus.Pending");
+        private void FinishRequestNotification(
+            IIS7WorkerRequest wr,
+            HttpContext context,
+            ref RequestNotificationStatus status
+        )
+        {
+            Debug.Assert(
+                status != RequestNotificationStatus.Pending,
+                "status != RequestNotificationStatus.Pending"
+            );
 
             HttpApplication app = context.ApplicationInstance;
 
-            if (context.NotificationContext.RequestCompleted) {
+            if (context.NotificationContext.RequestCompleted)
+            {
                 status = RequestNotificationStatus.FinishRequest;
             }
 
@@ -1538,18 +1986,25 @@ namespace System.Web {
             context.ReportRuntimeErrorIfExists(ref status);
 
             // we do not return FinishRequest for LogRequest or EndRequest
-            if (status == RequestNotificationStatus.FinishRequest
-                && (context.CurrentNotification == RequestNotification.LogRequest
-                    || context.CurrentNotification == RequestNotification.EndRequest)) {
+            if (
+                status == RequestNotificationStatus.FinishRequest
+                && (
+                    context.CurrentNotification == RequestNotification.LogRequest
+                    || context.CurrentNotification == RequestNotification.EndRequest
+                )
+            )
+            {
                 status = RequestNotificationStatus.Continue;
             }
 
             IntPtr requestContext = wr.RequestContext;
             bool sendHeaders = UnsafeIISMethods.MgdIsLastNotification(requestContext, status);
-            try {
+            try
+            {
                 context.Response.UpdateNativeResponse(sendHeaders);
             }
-            catch(Exception e) {
+            catch (Exception e)
+            {
                 // if we catch an exception here then
                 // i) clear cached response body bytes on the worker request
                 // ii) clear the managed headers, the IIS native headers, the mangaged httpwriter response buffers, and the native IIS response buffers
@@ -1557,24 +2012,27 @@ namespace System.Web {
                 wr.UnlockCachedResponseBytes();
                 context.AddError(e);
                 context.ReportRuntimeErrorIfExists(ref status);
-                try {
+                try
+                {
                     context.Response.UpdateNativeResponse(sendHeaders);
                 }
-                catch {
-                }
+                catch { }
             }
 
-            if (sendHeaders) {
+            if (sendHeaders)
+            {
                 context.FinishPipelineRequest();
             }
 
             // Perf optimization: dispose managed context if possible (no need to try if status is pending)
-            if (status != RequestNotificationStatus.Pending) {
+            if (status != RequestNotificationStatus.Pending)
+            {
                 PipelineRuntime.DisposeHandler(context, requestContext, status);
             }
         }
 
-        internal static void FinishPipelineRequest(HttpContext context) {
+        internal static void FinishPipelineRequest(HttpContext context)
+        {
             // Remember that first request is done
             _theRuntime._firstRequestCompleted = true;
 
@@ -1584,12 +2042,17 @@ namespace System.Web {
             context.Request.Dispose();
             context.Response.Dispose();
             HttpApplication app = context.ApplicationInstance;
-            if(null != app) {
+            if (null != app)
+            {
                 ThreadContext threadContext = context.IndicateCompletionContext;
-                if (threadContext != null) {
-                    if (!threadContext.HasBeenDisassociatedFromThread) {
-                        lock (threadContext) {
-                            if (!threadContext.HasBeenDisassociatedFromThread) {
+                if (threadContext != null)
+                {
+                    if (!threadContext.HasBeenDisassociatedFromThread)
+                    {
+                        lock (threadContext)
+                        {
+                            if (!threadContext.HasBeenDisassociatedFromThread)
+                            {
                                 threadContext.DisassociateFromCurrentThread();
                                 context.IndicateCompletionContext = null;
                                 context.InIndicateCompletion = false;
@@ -1602,37 +2065,54 @@ namespace System.Web {
 
             SetExecutionTimePerformanceCounter(context);
             UpdatePerfCounters(context.Response.StatusCode);
-            if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_END_HANDLER, context.WorkerRequest);
+            if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure))
+                EtwTrace.Trace(EtwTraceType.ETW_TYPE_END_HANDLER, context.WorkerRequest);
 
             // In case of a HostingInit() error, app domain should not stick around
-            if (HostingInitFailed) {
-                Debug.Trace("AppDomainFactory", "Shutting down appdomain because of HostingInit error");
-                ShutdownAppDomain(ApplicationShutdownReason.HostingEnvironment, "HostingInit error");
+            if (HostingInitFailed)
+            {
+                Debug.Trace(
+                    "AppDomainFactory",
+                    "Shutting down appdomain because of HostingInit error"
+                );
+                ShutdownAppDomain(
+                    ApplicationShutdownReason.HostingEnvironment,
+                    "HostingInit error"
+                );
             }
         }
-
 
         /*
          * Process one request
          */
-        private void ProcessRequestInternal(HttpWorkerRequest wr) {
+        private void ProcessRequestInternal(HttpWorkerRequest wr)
+        {
             // Count active requests
             Interlocked.Increment(ref _activeRequestCount);
 
-            if (_disposingHttpRuntime) {
+            if (_disposingHttpRuntime)
+            {
                 // Dev11 333176: An appdomain is unloaded before all requests are served, resulting in System.AppDomainUnloadedException during isapi completion callback
                 //
                 // HttpRuntim.Dispose could have already finished on a different thread when we had no active requests
                 // In this case we are about to start or already started unloading the appdomain so we will reject the request the safest way possible
-                try {
+                try
+                {
                     wr.SendStatus(503, "Server Too Busy");
-                    wr.SendKnownResponseHeader(HttpWorkerRequest.HeaderContentType, "text/html; charset=utf-8");
-                    byte[] body = Encoding.ASCII.GetBytes("<html><body>Server Too Busy</body></html>");
+                    wr.SendKnownResponseHeader(
+                        HttpWorkerRequest.HeaderContentType,
+                        "text/html; charset=utf-8"
+                    );
+                    byte[] body = Encoding.ASCII.GetBytes(
+                        "<html><body>Server Too Busy</body></html>"
+                    );
                     wr.SendResponseFromMemory(body, body.Length);
                     // this will flush synchronously because of HttpRuntime.ShutdownInProgress
                     wr.FlushResponse(true);
                     wr.EndOfRequest();
-                } finally {
+                }
+                finally
+                {
                     Interlocked.Decrement(ref _activeRequestCount);
                 }
                 return;
@@ -1641,21 +2121,32 @@ namespace System.Web {
             // Construct the Context on HttpWorkerRequest, hook everything together
             HttpContext context;
 
-            try {
-                context = new HttpContext(wr, false /* initResponseWriter */);
-            } 
-            catch {
-                try {
+            try
+            {
+                context = new HttpContext(
+                    wr,
+                    false /* initResponseWriter */
+                );
+            }
+            catch
+            {
+                try
+                {
                     // If we fail to create the context for any reason, send back a 400 to make sure
                     // the request is correctly closed (relates to VSUQFE3962)
                     wr.SendStatus(400, "Bad Request");
-                    wr.SendKnownResponseHeader(HttpWorkerRequest.HeaderContentType, "text/html; charset=utf-8");
+                    wr.SendKnownResponseHeader(
+                        HttpWorkerRequest.HeaderContentType,
+                        "text/html; charset=utf-8"
+                    );
                     byte[] body = Encoding.ASCII.GetBytes("<html><body>Bad Request</body></html>");
                     wr.SendResponseFromMemory(body, body.Length);
                     wr.FlushResponse(true);
                     wr.EndOfRequest();
                     return;
-                } finally {
+                }
+                finally
+                {
                     Interlocked.Decrement(ref _activeRequestCount);
                 }
             }
@@ -1664,16 +2155,20 @@ namespace System.Web {
 
             HostingEnvironment.IncrementBusyCount();
 
-            try {
+            try
+            {
                 // First request initialization
-                try {
+                try
+                {
                     EnsureFirstRequestInit(context);
                 }
-                catch {
+                catch
+                {
                     // If we are handling a DEBUG request, ignore the FirstRequestInit exception.
                     // This allows the HttpDebugHandler to execute, and lets the debugger attach to
                     // the process (VSWhidbey 358135)
-                    if (!context.Request.IsDebuggingRequest) {
+                    if (!context.Request.IsDebuggingRequest)
+                    {
                         throw;
                     }
                 }
@@ -1688,53 +2183,74 @@ namespace System.Web {
                 if (app == null)
                     throw new HttpException(SR.GetString(SR.Unable_create_app_object));
 
-                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_START_HANDLER, context.WorkerRequest, app.GetType().FullName, "Start");
+                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure))
+                    EtwTrace.Trace(
+                        EtwTraceType.ETW_TYPE_START_HANDLER,
+                        context.WorkerRequest,
+                        app.GetType().FullName,
+                        "Start"
+                    );
 
-                if (app is IHttpAsyncHandler) {
+                if (app is IHttpAsyncHandler)
+                {
                     // asynchronous handler
                     IHttpAsyncHandler asyncHandler = (IHttpAsyncHandler)app;
                     context.AsyncAppHandler = asyncHandler;
                     asyncHandler.BeginProcessRequest(context, _handlerCompletionCallback, context);
                 }
-                else {
+                else
+                {
                     // synchronous handler
                     app.ProcessRequest(context);
                     FinishRequest(context.WorkerRequest, context, null);
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 context.Response.InitResponseWriter();
                 FinishRequest(wr, context, e);
             }
         }
 
-        private void RejectRequestInternal(HttpWorkerRequest wr, bool silent) {
+        private void RejectRequestInternal(HttpWorkerRequest wr, bool silent)
+        {
             // Construct the Context on HttpWorkerRequest, hook everything together
-            HttpContext context = new HttpContext(wr, false /* initResponseWriter */);
+            HttpContext context = new HttpContext(
+                wr,
+                false /* initResponseWriter */
+            );
             wr.SetEndOfSendNotification(_asyncEndOfSendCallback, context);
 
             // Count active requests
             Interlocked.Increment(ref _activeRequestCount);
             HostingEnvironment.IncrementBusyCount();
 
-            if (silent) {
+            if (silent)
+            {
                 context.Response.InitResponseWriter();
                 FinishRequest(wr, context, null);
             }
-            else {
+            else
+            {
                 PerfCounters.IncrementGlobalCounter(GlobalPerfCounter.REQUESTS_REJECTED);
                 PerfCounters.IncrementCounter(AppPerfCounter.APP_REQUESTS_REJECTED);
-                try {
+                try
+                {
                     throw new HttpException(503, SR.GetString(SR.Server_too_busy));
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     context.Response.InitResponseWriter();
                     FinishRequest(wr, context, e);
                 }
             }
         }
 
-        internal static void ReportAppOfflineErrorMessage(HttpResponse response, byte[] appOfflineMessage) {
+        internal static void ReportAppOfflineErrorMessage(
+            HttpResponse response,
+            byte[] appOfflineMessage
+        )
+        {
             response.StatusCode = 503;
             response.ContentType = "text/html";
             response.AddHeader("Retry-After", "3600");
@@ -1744,61 +2260,83 @@ namespace System.Web {
         /*
          * Finish processing request, sync or async
          */
-        private void FinishRequest(HttpWorkerRequest wr, HttpContext context, Exception e) {
+        private void FinishRequest(HttpWorkerRequest wr, HttpContext context, Exception e)
+        {
             HttpResponse response = context.Response;
 
-            if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_END_HANDLER, context.WorkerRequest);
+            if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure))
+                EtwTrace.Trace(EtwTraceType.ETW_TYPE_END_HANDLER, context.WorkerRequest);
 
             SetExecutionTimePerformanceCounter(context);
 
             // Flush in case of no error
-            if (e == null) {
+            if (e == null)
+            {
                 // impersonate around PreSendHeaders / PreSendContent
-                using (new ClientImpersonationContext(context, false)) {
-                    try {
+                using (new ClientImpersonationContext(context, false))
+                {
+                    try
+                    {
                         // this sends the actual content in most cases
                         response.FinalFlushAtTheEndOfRequestProcessing();
                     }
-                    catch (Exception eFlush) {
+                    catch (Exception eFlush)
+                    {
                         e = eFlush;
                     }
                 }
             }
 
             // Report error if any
-            if (e != null) {
-                using (new DisposableHttpContextWrapper(context)) {
-
+            if (e != null)
+            {
+                using (new DisposableHttpContextWrapper(context))
+                {
                     // if the custom encoder throws, it might interfere with returning error information
                     // to the client, so we force use of the default encoder
                     context.DisableCustomHttpEncoder = true;
 
-                    if (_appOfflineMessage != null) {
-                        try {
+                    if (_appOfflineMessage != null)
+                    {
+                        try
+                        {
                             ReportAppOfflineErrorMessage(response, _appOfflineMessage);
                             response.FinalFlushAtTheEndOfRequestProcessing();
                         }
-                        catch {
-                        }
+                        catch { }
                     }
-                    else {
+                    else
+                    {
                         // when application is on UNC share the code below must
                         // be run while impersonating the token given by IIS
-                        using (new ApplicationImpersonationContext()) {
-                            try {
-                                try {
+                        using (new ApplicationImpersonationContext())
+                        {
+                            try
+                            {
+                                try
+                                {
                                     // try to report error in a way that could possibly throw (a config exception)
-                                    response.ReportRuntimeError(e, true /*canThrow*/, false);
+                                    response.ReportRuntimeError(
+                                        e,
+                                        true /*canThrow*/
+                                        ,
+                                        false
+                                    );
                                 }
-                                catch (Exception eReport) {
+                                catch (Exception eReport)
+                                {
                                     // report the config error in a way that would not throw
-                                    response.ReportRuntimeError(eReport, false /*canThrow*/, false);
+                                    response.ReportRuntimeError(
+                                        eReport,
+                                        false /*canThrow*/
+                                        ,
+                                        false
+                                    );
                                 }
 
                                 response.FinalFlushAtTheEndOfRequestProcessing();
                             }
-                            catch {
-                            }
+                            catch { }
                         }
                     }
                 }
@@ -1807,11 +2345,17 @@ namespace System.Web {
             // Remember that first request is done
             _firstRequestCompleted = true;
 
-
             // In case we reporting HostingInit() error, app domain should not stick around
-            if (_hostingInitFailed) {
-                Debug.Trace("AppDomainFactory", "Shutting down appdomain because of HostingInit error");
-                ShutdownAppDomain(ApplicationShutdownReason.HostingEnvironment, "HostingInit error");
+            if (_hostingInitFailed)
+            {
+                Debug.Trace(
+                    "AppDomainFactory",
+                    "Shutting down appdomain because of HostingInit error"
+                );
+                ShutdownAppDomain(
+                    ApplicationShutdownReason.HostingEnvironment,
+                    "HostingInit error"
+                );
             }
 
             // Check status code and increment proper counter
@@ -1823,10 +2367,12 @@ namespace System.Web {
 
             // ---- exceptions from EndOfRequest as they will prevent proper request cleanup
             // Since the exceptions are not expected here we want to log them
-            try {
+            try
+            {
                 wr.EndOfRequest();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 WebBaseEvent.RaiseRuntimeError(ex, this);
             }
 
@@ -1843,11 +2389,13 @@ namespace System.Web {
         // Make sure shutdown happens only once
         //
 
-        private bool InitiateShutdownOnce() {
+        private bool InitiateShutdownOnce()
+        {
             if (_shutdownInProgress)
                 return false;
 
-            lock (this) {
+            lock (this)
+            {
                 if (_shutdownInProgress)
                     return false;
                 _shutdownInProgress = true;
@@ -1860,43 +2408,64 @@ namespace System.Web {
         // Shutdown this and restart new app domain
         //
         [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
-        private void ReleaseResourcesAndUnloadAppDomain(Object state /*not used*/) {
+        private void ReleaseResourcesAndUnloadAppDomain(
+            Object state /*not used*/
+        )
+        {
 #if DBG
-            Debug.Trace("FileChangesMonitorIgnoreSubdirChange",
-                        "*** ReleaseResourcesAndUnloadAppDomain " + DateTime.Now.ToString("hh:mm:ss.fff", CultureInfo.InvariantCulture)
-                        + ": _appDomainAppId=" + _appDomainAppId);
+            Debug.Trace(
+                "FileChangesMonitorIgnoreSubdirChange",
+                "*** ReleaseResourcesAndUnloadAppDomain "
+                    + DateTime.Now.ToString("hh:mm:ss.fff", CultureInfo.InvariantCulture)
+                    + ": _appDomainAppId="
+                    + _appDomainAppId
+            );
 #endif
-            Debug.Trace("AppDomainFactory", "ReleaseResourcesAndUnloadAppDomain, Id=" + _appDomainAppId
-                        + " DomainId = " + _appDomainId
-                        + " Stack = " + Environment.StackTrace );
+            Debug.Trace(
+                "AppDomainFactory",
+                "ReleaseResourcesAndUnloadAppDomain, Id="
+                    + _appDomainAppId
+                    + " DomainId = "
+                    + _appDomainId
+                    + " Stack = "
+                    + Environment.StackTrace
+            );
 
-            try {
+            try
+            {
                 PerfCounters.IncrementGlobalCounter(GlobalPerfCounter.APPLICATION_RESTARTS);
             }
-            catch {
-            }
+            catch { }
 
             // Release all resources
-            try {
+            try
+            {
                 Dispose();
             }
-            catch {
-            }
+            catch { }
 
             Thread.Sleep(250);
 
             AddAppDomainTraceMessage("before Unload");
 
-            for (; ; ) {
-                try {
+            for (; ; )
+            {
+                try
+                {
                     AppDomain.Unload(Thread.GetDomain());
                 }
-                catch (CannotUnloadAppDomainException) {
+                catch (CannotUnloadAppDomainException)
+                {
                     Debug.Assert(false);
                 }
-                catch (Exception e) {
-                    Debug.Trace("AppDomainFactory", "AppDomain.Unload exception: " + e + "; Id=" + _appDomainAppId);
-                    if (!BuildManagerHost.InClientBuildManager) {
+                catch (Exception e)
+                {
+                    Debug.Trace(
+                        "AppDomainFactory",
+                        "AppDomain.Unload exception: " + e + "; Id=" + _appDomainAppId
+                    );
+                    if (!BuildManagerHost.InClientBuildManager)
+                    {
                         // Avoid calling Exception.ToString if we are in the ClientBuildManager (Dev10 bug 824659)
                         AddAppDomainTraceMessage("Unload Exception: " + e);
                     }
@@ -1905,7 +2474,8 @@ namespace System.Web {
             }
         }
 
-        private static void SetExecutionTimePerformanceCounter(HttpContext context) {
+        private static void SetExecutionTimePerformanceCounter(HttpContext context)
+        {
             // Set the Request Execution time perf counter
             TimeSpan elapsed = DateTime.UtcNow.Subtract(context.WorkerRequest.GetStartTime());
             long milli = elapsed.Ticks / TimeSpan.TicksPerMillisecond;
@@ -1917,10 +2487,13 @@ namespace System.Web {
             PerfCounters.SetCounter(AppPerfCounter.APP_REQUEST_EXEC_TIME, (int)milli);
         }
 
-        private static void UpdatePerfCounters(int statusCode) {
-            if (400 <= statusCode) {
+        private static void UpdatePerfCounters(int statusCode)
+        {
+            if (400 <= statusCode)
+            {
                 PerfCounters.IncrementCounter(AppPerfCounter.REQUESTS_FAILED);
-                switch (statusCode) {
+                switch (statusCode)
+                {
                     case 401: // Not authorized
                         PerfCounters.IncrementCounter(AppPerfCounter.REQUESTS_NOT_AUTHORIZED);
                         break;
@@ -1930,24 +2503,28 @@ namespace System.Web {
                         break;
                 }
             }
-            else {
+            else
+            {
                 // If status code is not in the 400-599 range (i.e. 200-299 success or 300-399 redirection),
                 // count it as a successful request.
                 PerfCounters.IncrementCounter(AppPerfCounter.REQUESTS_SUCCEDED);
             }
         }
 
-        private void WaitForRequestsToFinish(int waitTimeoutMs) {
+        private void WaitForRequestsToFinish(int waitTimeoutMs)
+        {
             DateTime waitLimit = DateTime.UtcNow.AddMilliseconds(waitTimeoutMs);
 
-            for (; ; ) {
+            for (; ; )
+            {
                 if (_activeRequestCount == 0 && (_requestQueue == null || _requestQueue.IsEmpty))
                     break;
 
                 Thread.Sleep(250);
 
                 // only apply timeout if a managed debugger is not attached
-                if (!System.Diagnostics.Debugger.IsAttached && DateTime.UtcNow > waitLimit) {
+                if (!System.Diagnostics.Debugger.IsAttached && DateTime.UtcNow > waitLimit)
+                {
                     break; // give it up
                 }
             }
@@ -1956,12 +2533,15 @@ namespace System.Web {
         /*
          * Cleanup of all unmananged state
          */
-        private void Dispose() {
+        private void Dispose()
+        {
             // get shutdown timeout from config
             int drainTimeoutSec = HttpRuntimeSection.DefaultShutdownTimeout;
-            try {
+            try
+            {
                 HttpRuntimeSection runtimeConfig = RuntimeConfig.GetAppLKGConfig().HttpRuntime;
-                if (runtimeConfig != null) {
+                if (runtimeConfig != null)
+                {
                     drainTimeoutSec = (int)runtimeConfig.ShutdownTimeout.TotalSeconds;
                 }
 
@@ -1971,7 +2551,9 @@ namespace System.Web {
                 // reject remaining queued requests
                 if (_requestQueue != null)
                     _requestQueue.Drain();
-            } finally {
+            }
+            finally
+            {
                 // By this time all new requests should be directed to a newly created app domain
                 // But there might be requests that got dispatched to this old app domain but have not reached ProcessRequestInternal yet
                 // Signal ProcessRequestInternal to reject them immediately without initiating async operations
@@ -1981,7 +2563,6 @@ namespace System.Web {
             // give it a little more time to drain
             WaitForRequestsToFinish((drainTimeoutSec * 1000) / 6);
 
-
             // wait for pending async io to complete,  prior to aborting requests
             // this isn't necessary for IIS 7, where the async sends are always done
             // from native code with native buffers
@@ -1989,23 +2570,25 @@ namespace System.Web {
 
             // For IIS7 integrated pipeline, wait until GL_APPLICATION_STOP fires and
             // there are no active calls to IndicateCompletion before unloading the AppDomain
-            if (HttpRuntime.UseIntegratedPipeline) {
+            if (HttpRuntime.UseIntegratedPipeline)
+            {
                 PipelineRuntime.WaitForRequestsToDrain();
             }
-            else {
+            else
+            {
                 // wait for all active requests to complete
-                while (_activeRequestCount != 0) {
+                while (_activeRequestCount != 0)
+                {
                     Thread.Sleep(250);
                 }
             }
-
 
             // Dispose AppDomainShutdownTimer
             DisposeAppDomainShutdownTimer();
 
             // kill all remaining requests (and the timeout timer)
             _timeoutManager.Stop();
-            AppDomainResourcePerfCounters.Stop();                 
+            AppDomainResourcePerfCounters.Stop();
 
 #if !FEATURE_PAL // FEATURE_PAL does not enable IIS-based hosting features
             // double check for pending async io
@@ -2016,19 +2599,22 @@ namespace System.Web {
 #endif // !FEATURE_PAL
             // cleanup cache (this ends all sessions)
             HealthMonitoringManager.IsCacheDisposed = true; // HMM is the only place internally where we care if the Cache is disposed or not.
-            if (_cachePublic != null) {
+            if (_cachePublic != null)
+            {
                 var oCache = HttpRuntime.Cache.GetObjectCache(createIfDoesNotExist: false);
                 var iCache = HttpRuntime.Cache.GetInternalCache(createIfDoesNotExist: false);
-                if (oCache != null) {
+                if (oCache != null)
+                {
                     oCache.Dispose();
                 }
-                if (iCache != null) {
+                if (iCache != null)
+                {
                     iCache.Dispose();
                 }
             }
 
             // app on end, cleanup app instances
-            HttpApplicationFactory.EndApplication();  // call app_onEnd
+            HttpApplicationFactory.EndApplication(); // call app_onEnd
 
             // stop file changes monitor
             _fcm.Stop();
@@ -2040,32 +2626,45 @@ namespace System.Web {
         /*
          * Async completion of IIS7 pipeline (unlike OnHandlerCompletion, this may fire more than once).
          */
-        private void OnRequestNotificationCompletion(IAsyncResult ar) {
-            try {
+        private void OnRequestNotificationCompletion(IAsyncResult ar)
+        {
+            try
+            {
                 OnRequestNotificationCompletionHelper(ar);
             }
-            catch(Exception e) {
+            catch (Exception e)
+            {
                 ApplicationManager.RecordFatalException(e);
                 throw;
             }
         }
 
-        private void OnRequestNotificationCompletionHelper(IAsyncResult ar) {
-            if (ar.CompletedSynchronously) {
-                Debug.Trace("PipelineRuntime", "OnRequestNotificationCompletion: completed synchronously");
+        private void OnRequestNotificationCompletionHelper(IAsyncResult ar)
+        {
+            if (ar.CompletedSynchronously)
+            {
+                Debug.Trace(
+                    "PipelineRuntime",
+                    "OnRequestNotificationCompletion: completed synchronously"
+                );
                 return;
             }
 
-            Debug.Trace("PipelineRuntime", "OnRequestNotificationCompletion: completed asynchronously");
+            Debug.Trace(
+                "PipelineRuntime",
+                "OnRequestNotificationCompletion: completed asynchronously"
+            );
 
             RequestNotificationStatus status = RequestNotificationStatus.Continue;
-            HttpContext context = (HttpContext) ar.AsyncState;
+            HttpContext context = (HttpContext)ar.AsyncState;
             IIS7WorkerRequest wr = context.WorkerRequest as IIS7WorkerRequest;
 
-            try {
+            try
+            {
                 context.ApplicationInstance.EndProcessRequestNotification(ar);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 status = RequestNotificationStatus.FinishRequest;
                 context.AddError(e);
             }
@@ -2089,16 +2688,20 @@ namespace System.Web {
         /*
          * Async completion of managed pipeline (called at most one time).
          */
-        private void OnHandlerCompletion(IAsyncResult ar) {
+        private void OnHandlerCompletion(IAsyncResult ar)
+        {
             HttpContext context = (HttpContext)ar.AsyncState;
 
-            try {
+            try
+            {
                 context.AsyncAppHandler.EndProcessRequest(ar);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 context.AddError(e);
             }
-            finally {
+            finally
+            {
                 // no longer keep AsyncAppHandler poiting to the application
                 // is only needed to call EndProcessRequest
                 context.AsyncAppHandler = null;
@@ -2111,7 +2714,8 @@ namespace System.Web {
          * Notification from worker request that it is done writing from buffer
          * so that the buffers can be recycled
          */
-        private void EndOfSendCallback(HttpWorkerRequest wr, Object arg) {
+        private void EndOfSendCallback(HttpWorkerRequest wr, Object arg)
+        {
             Debug.Trace("PipelineRuntime", "HttpRuntime.EndOfSendCallback");
             HttpContext context = (HttpContext)arg;
             context.Request.Dispose();
@@ -2121,35 +2725,53 @@ namespace System.Web {
         /*
          * Notification when something in the bin directory changed
          */
-        private void OnCriticalDirectoryChange(Object sender, FileChangeEvent e) {
+        private void OnCriticalDirectoryChange(Object sender, FileChangeEvent e)
+        {
             // shutdown the app domain
-            Debug.Trace("AppDomainFactory", "Shutting down appdomain because of bin dir change or directory rename." +
-                " FileName=" + e.FileName + " Action=" + e.Action);
+            Debug.Trace(
+                "AppDomainFactory",
+                "Shutting down appdomain because of bin dir change or directory rename."
+                    + " FileName="
+                    + e.FileName
+                    + " Action="
+                    + e.Action
+            );
 
             ApplicationShutdownReason reason = ApplicationShutdownReason.None;
             string directoryName = new DirectoryInfo(e.FileName).Name;
 
             string message = FileChangesMonitor.GenerateErrorMessage(e.Action);
-            message = (message != null) ? message + directoryName : directoryName + " dir change or directory rename";
+            message =
+                (message != null)
+                    ? message + directoryName
+                    : directoryName + " dir change or directory rename";
 
-            if (StringUtil.EqualsIgnoreCase(directoryName, CodeDirectoryName)) {
+            if (StringUtil.EqualsIgnoreCase(directoryName, CodeDirectoryName))
+            {
                 reason = ApplicationShutdownReason.CodeDirChangeOrDirectoryRename;
             }
-            else if (StringUtil.EqualsIgnoreCase(directoryName, ResourcesDirectoryName)) {
+            else if (StringUtil.EqualsIgnoreCase(directoryName, ResourcesDirectoryName))
+            {
                 reason = ApplicationShutdownReason.ResourcesDirChangeOrDirectoryRename;
             }
-            else if (StringUtil.EqualsIgnoreCase(directoryName, BrowsersDirectoryName)) {
+            else if (StringUtil.EqualsIgnoreCase(directoryName, BrowsersDirectoryName))
+            {
                 reason = ApplicationShutdownReason.BrowsersDirChangeOrDirectoryRename;
             }
-            else if (StringUtil.EqualsIgnoreCase(directoryName, BinDirectoryName)) {
+            else if (StringUtil.EqualsIgnoreCase(directoryName, BinDirectoryName))
+            {
                 reason = ApplicationShutdownReason.BinDirChangeOrDirectoryRename;
             }
 
-            if (e.Action == FileAction.Added) {
+            if (e.Action == FileAction.Added)
+            {
                 // Make sure HttpRuntime does not ignore the appdomain shutdown if a file is added (VSWhidbey 363481)
                 HttpRuntime.SetUserForcedShutdown();
 
-                Debug.Trace("AppDomainFactorySpecial", "Call SetUserForcedShutdown: FileName=" + e.FileName + "; now=" + DateTime.Now);
+                Debug.Trace(
+                    "AppDomainFactorySpecial",
+                    "Call SetUserForcedShutdown: FileName=" + e.FileName + "; now=" + DateTime.Now
+                );
             }
 
             ShutdownAppDomain(reason, message);
@@ -2158,113 +2780,157 @@ namespace System.Web {
         /**
          * Coalesce file change notifications to minimize sharing violations and AppDomain restarts (ASURT 147492)
          */
-        internal static void CoalesceNotifications() {
+        internal static void CoalesceNotifications()
+        {
             int waitChangeNotification = HttpRuntimeSection.DefaultWaitChangeNotification;
             int maxWaitChangeNotification = HttpRuntimeSection.DefaultMaxWaitChangeNotification;
-            try {
+            try
+            {
                 HttpRuntimeSection config = RuntimeConfig.GetAppLKGConfig().HttpRuntime;
-                if (config != null) {
+                if (config != null)
+                {
                     waitChangeNotification = config.WaitChangeNotification;
                     maxWaitChangeNotification = config.MaxWaitChangeNotification;
                 }
             }
-            catch {
-            }
+            catch { }
 
             if (waitChangeNotification == 0 || maxWaitChangeNotification == 0)
                 return;
 
             DateTime maxWait = DateTime.UtcNow.AddSeconds(maxWaitChangeNotification);
             // Coalesce file change notifications
-            try {
-                while (DateTime.UtcNow < maxWait) {
-                    if (DateTime.UtcNow > _theRuntime.LastShutdownAttemptTime.AddSeconds(waitChangeNotification))
+            try
+            {
+                while (DateTime.UtcNow < maxWait)
+                {
+                    if (
+                        DateTime.UtcNow
+                        > _theRuntime.LastShutdownAttemptTime.AddSeconds(waitChangeNotification)
+                    )
                         break;
 
                     Thread.Sleep(250);
                 }
             }
-            catch {
-            }
+            catch { }
         }
 
         // appdomain shutdown eventhandler
         internal static event BuildManagerHostUnloadEventHandler AppDomainShutdown;
 
-        internal static void OnAppDomainShutdown(BuildManagerHostUnloadEventArgs e) {
-            if (AppDomainShutdown != null) {
+        internal static void OnAppDomainShutdown(BuildManagerHostUnloadEventArgs e)
+        {
+            if (AppDomainShutdown != null)
+            {
                 AppDomainShutdown(_theRuntime, e);
             }
         }
 
-        internal static void SetUserForcedShutdown() {
+        internal static void SetUserForcedShutdown()
+        {
             _theRuntime._userForcedShutdown = true;
         }
 
         /*
          * Shutdown the current app domain
          */
-        internal static bool ShutdownAppDomain(ApplicationShutdownReason reason, string message) {
-            return ShutdownAppDomainWithStackTrace(reason, message, null /*stackTrace*/);
+        internal static bool ShutdownAppDomain(ApplicationShutdownReason reason, string message)
+        {
+            return ShutdownAppDomainWithStackTrace(
+                reason,
+                message,
+                null /*stackTrace*/
+            );
         }
 
         /*
          * Shutdown the current app domain with a stack trace.  This is useful for callers that are running
          * on a QUWI callback, and wouldn't provide a meaningful stack trace by default.
          */
-        internal static bool ShutdownAppDomainWithStackTrace(ApplicationShutdownReason reason, string message, string stackTrace) {
+        internal static bool ShutdownAppDomainWithStackTrace(
+            ApplicationShutdownReason reason,
+            string message,
+            string stackTrace
+        )
+        {
             SetShutdownReason(reason, message);
             return ShutdownAppDomain(stackTrace);
         }
 
-        private static bool ShutdownAppDomain(string stackTrace) {
+        private static bool ShutdownAppDomain(string stackTrace)
+        {
 #if DBG
-            Debug.Trace("FileChangesMonitorIgnoreSubdirChange",
-                        "*** ShutdownAppDomain " + DateTime.Now.ToString("hh:mm:ss.fff", CultureInfo.InvariantCulture)
-                        + ": _appDomainAppId=" + HttpRuntime.AppDomainAppId);
+            Debug.Trace(
+                "FileChangesMonitorIgnoreSubdirChange",
+                "*** ShutdownAppDomain "
+                    + DateTime.Now.ToString("hh:mm:ss.fff", CultureInfo.InvariantCulture)
+                    + ": _appDomainAppId="
+                    + HttpRuntime.AppDomainAppId
+            );
 #endif
             // Ignore notifications during the processing of the first request (ASURT 100335)
             // skip this if LastShutdownAttemptTime has been set
-            if (_theRuntime.LastShutdownAttemptTime == DateTime.MinValue && !_theRuntime._firstRequestCompleted && !_theRuntime._userForcedShutdown) {
+            if (
+                _theRuntime.LastShutdownAttemptTime == DateTime.MinValue
+                && !_theRuntime._firstRequestCompleted
+                && !_theRuntime._userForcedShutdown
+            )
+            {
                 // check the timeout (don't disable notifications forever
                 int delayTimeoutSec = HttpRuntimeSection.DefaultDelayNotificationTimeout;
 
-                try {
+                try
+                {
                     RuntimeConfig runtimeConfig = RuntimeConfig.GetAppLKGConfig();
-                    if (runtimeConfig != null) {
+                    if (runtimeConfig != null)
+                    {
                         HttpRuntimeSection runtimeSection = runtimeConfig.HttpRuntime;
-                        if (runtimeSection != null) {
-                            delayTimeoutSec = (int)runtimeSection.DelayNotificationTimeout.TotalSeconds;
+                        if (runtimeSection != null)
+                        {
+                            delayTimeoutSec = (int)
+                                runtimeSection.DelayNotificationTimeout.TotalSeconds;
 
-                            if (DateTime.UtcNow < _theRuntime._firstRequestStartTime.AddSeconds(delayTimeoutSec)) {
-                                Debug.Trace("AppDomainFactory", "ShutdownAppDomain IGNORED (1st request is not done yet), Id = " + AppDomainAppId);
+                            if (
+                                DateTime.UtcNow
+                                < _theRuntime._firstRequestStartTime.AddSeconds(delayTimeoutSec)
+                            )
+                            {
+                                Debug.Trace(
+                                    "AppDomainFactory",
+                                    "ShutdownAppDomain IGNORED (1st request is not done yet), Id = "
+                                        + AppDomainAppId
+                                );
                                 return false;
                             }
                         }
                     }
                 }
-                catch {
-                }
+                catch { }
             }
 
-            try {
+            try
+            {
                 _theRuntime.RaiseShutdownWebEventOnce();
             }
-            catch {
+            catch
+            {
                 // VSWhidbey 444472: if an exception is thrown, we consume it and continue executing the following code.
             }
 
             // Update last time ShutdownAppDomain was called
             _theRuntime.LastShutdownAttemptTime = DateTime.UtcNow;
 
-            if (!HostingEnvironment.ShutdownInitiated) {
+            if (!HostingEnvironment.ShutdownInitiated)
+            {
                 // This shutdown is not triggered by hosting environment - let it do the job
                 HostingEnvironment.InitiateShutdownWithoutDemand();
                 return true;
             }
 
             //WOS 1400290: CantUnloadAppDomainException in ISAPI mode, wait until HostingEnvironment.ShutdownThisAppDomainOnce completes
-            if (HostingEnvironment.ShutdownInProgress) {
+            if (HostingEnvironment.ShutdownInProgress)
+            {
                 return false;
             }
 
@@ -2272,22 +2938,33 @@ namespace System.Web {
             if (!_theRuntime.InitiateShutdownOnce())
                 return false;
 
-            Debug.Trace("AppDomainFactory", "ShutdownAppDomain, Id = " + AppDomainAppId + ", ShutdownInProgress=" + ShutdownInProgress
-                        + ", ShutdownMessage=" + _theRuntime._shutDownMessage);
+            Debug.Trace(
+                "AppDomainFactory",
+                "ShutdownAppDomain, Id = "
+                    + AppDomainAppId
+                    + ", ShutdownInProgress="
+                    + ShutdownInProgress
+                    + ", ShutdownMessage="
+                    + _theRuntime._shutDownMessage
+            );
 
-            if (String.IsNullOrEmpty(stackTrace) && !BuildManagerHost.InClientBuildManager) {
+            if (String.IsNullOrEmpty(stackTrace) && !BuildManagerHost.InClientBuildManager)
+            {
                 // Avoid calling Environment.StackTrace if we are in the ClientBuildManager (Dev10 bug 824659)
 
                 // Instrument to be able to see what's causing a shutdown
                 new EnvironmentPermission(PermissionState.Unrestricted).Assert();
-                try {
+                try
+                {
                     _theRuntime._shutDownStack = Environment.StackTrace;
                 }
-                finally {
+                finally
+                {
                     CodeAccessPermission.RevertAssert();
                 }
             }
-            else {
+            else
+            {
                 _theRuntime._shutDownStack = stackTrace;
             }
 
@@ -2300,7 +2977,8 @@ namespace System.Web {
             return true;
         }
 
-        internal static void RecoverFromUnexceptedAppDomainUnload() {
+        internal static void RecoverFromUnexceptedAppDomainUnload()
+        {
             if (_theRuntime._shutdownInProgress)
                 return;
 
@@ -2309,12 +2987,14 @@ namespace System.Web {
             _theRuntime._shutdownInProgress = true;
 
             // tell unmanaged code not to dispatch requests to this app domain
-            try {
+            try
+            {
                 ISAPIRuntime.RemoveThisAppDomainFromUnmanagedTable();
                 PipelineRuntime.RemoveThisAppDomainFromUnmanagedTable();
                 AddAppDomainTraceMessage("AppDomainRestart");
             }
-            finally {
+            finally
+            {
                 // release all resources
                 _theRuntime.Dispose();
             }
@@ -2323,22 +3003,30 @@ namespace System.Web {
         /*
          * Notification when app-level Config changed
          */
-         internal static void OnConfigChange(String message) {
+        internal static void OnConfigChange(String message)
+        {
             Debug.Trace("AppDomainFactory", "Shutting down appdomain because of config change");
-            ShutdownAppDomain(ApplicationShutdownReason.ConfigurationChange, (message != null) ? message : "CONFIG change");
+            ShutdownAppDomain(
+                ApplicationShutdownReason.ConfigurationChange,
+                (message != null) ? message : "CONFIG change"
+            );
         }
 
         // Intrumentation to remember the overwhelming file change
-        internal static void SetShutdownReason(ApplicationShutdownReason reason, String message) {
-            if (_theRuntime._shutdownReason == ApplicationShutdownReason.None) {
+        internal static void SetShutdownReason(ApplicationShutdownReason reason, String message)
+        {
+            if (_theRuntime._shutdownReason == ApplicationShutdownReason.None)
+            {
                 _theRuntime._shutdownReason = reason;
             }
 
             SetShutdownMessage(message);
         }
 
-        internal static void SetShutdownMessage(String message) {
-            if (message != null) {
+        internal static void SetShutdownMessage(String message)
+        {
+            if (message != null)
+            {
                 if (_theRuntime._shutDownMessage == null)
                     _theRuntime._shutDownMessage = message;
                 else
@@ -2346,9 +3034,9 @@ namespace System.Web {
             }
         }
 
-
         // public method is on HostingEnvironment
-        internal static ApplicationShutdownReason ShutdownReason {
+        internal static ApplicationShutdownReason ShutdownReason
+        {
             get { return _theRuntime._shutdownReason; }
         }
 
@@ -2364,36 +3052,47 @@ namespace System.Web {
         ///    <para><SPAN>The method that drives
         ///       all ASP.NET web processing execution.</SPAN></para>
         /// </devdoc>
-        [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Medium)]
-        public static void ProcessRequest(HttpWorkerRequest wr) {
+        [AspNetHostingPermission(
+            SecurityAction.Demand,
+            Level = AspNetHostingPermissionLevel.Medium
+        )]
+        public static void ProcessRequest(HttpWorkerRequest wr)
+        {
             if (wr == null)
                 throw new ArgumentNullException("wr");
 
-            if (HttpRuntime.UseIntegratedPipeline) {
-                throw new PlatformNotSupportedException(SR.GetString(SR.Method_Not_Supported_By_Iis_Integrated_Mode, "HttpRuntime.ProcessRequest"));
+            if (HttpRuntime.UseIntegratedPipeline)
+            {
+                throw new PlatformNotSupportedException(
+                    SR.GetString(
+                        SR.Method_Not_Supported_By_Iis_Integrated_Mode,
+                        "HttpRuntime.ProcessRequest"
+                    )
+                );
             }
 
             ProcessRequestNoDemand(wr);
         }
 
-
-        internal static void ProcessRequestNoDemand(HttpWorkerRequest wr) {
+        internal static void ProcessRequestNoDemand(HttpWorkerRequest wr)
+        {
             RequestQueue rq = _theRuntime._requestQueue;
 
             wr.UpdateInitialCounters();
 
-            if (rq != null)  // could be null before first request
+            if (rq != null) // could be null before first request
                 wr = rq.GetRequestToExecute(wr);
 
-            if (wr != null) {
+            if (wr != null)
+            {
                 CalculateWaitTimeAndUpdatePerfCounter(wr);
                 wr.ResetStartTime();
                 ProcessRequestNow(wr);
             }
         }
 
-
-        private static void CalculateWaitTimeAndUpdatePerfCounter(HttpWorkerRequest wr) {
+        private static void CalculateWaitTimeAndUpdatePerfCounter(HttpWorkerRequest wr)
+        {
             DateTime begin = wr.GetStartTime();
 
             TimeSpan elapsed = DateTime.UtcNow.Subtract(begin);
@@ -2406,105 +3105,130 @@ namespace System.Web {
             PerfCounters.SetCounter(AppPerfCounter.APP_REQUEST_WAIT_TIME, (int)milli);
         }
 
-        internal static void ProcessRequestNow(HttpWorkerRequest wr) {
+        internal static void ProcessRequestNow(HttpWorkerRequest wr)
+        {
             _theRuntime.ProcessRequestInternal(wr);
         }
 
-        internal static void RejectRequestNow(HttpWorkerRequest wr, bool silent) {
+        internal static void RejectRequestNow(HttpWorkerRequest wr, bool silent)
+        {
             _theRuntime.RejectRequestInternal(wr, silent);
         }
-
 
         /// <devdoc>
         ///       <para>Removes all items from the cache and shuts down the runtime.</para>
         ///    </devdoc>
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
-        public static void Close() {
-            Debug.Trace("AppDomainFactory", "HttpRuntime.Close, ShutdownInProgress=" + ShutdownInProgress);
-            if (_theRuntime.InitiateShutdownOnce()) {
-                SetShutdownReason(ApplicationShutdownReason.HttpRuntimeClose, "HttpRuntime.Close is called");
+        public static void Close()
+        {
+            Debug.Trace(
+                "AppDomainFactory",
+                "HttpRuntime.Close, ShutdownInProgress=" + ShutdownInProgress
+            );
+            if (_theRuntime.InitiateShutdownOnce())
+            {
+                SetShutdownReason(
+                    ApplicationShutdownReason.HttpRuntimeClose,
+                    "HttpRuntime.Close is called"
+                );
 
-                if (HostingEnvironment.IsHosted) {
+                if (HostingEnvironment.IsHosted)
+                {
                     // go throw initiate shutdown for hosted scenarios
                     HostingEnvironment.InitiateShutdownWithoutDemand();
                 }
-                else {
+                else
+                {
                     _theRuntime.Dispose();
                 }
             }
         }
 
-
         /// <devdoc>
         ///       <para>Unloads the current app domain.</para>
         ///    </devdoc>
-        public static void UnloadAppDomain() {
+        public static void UnloadAppDomain()
+        {
             _theRuntime._userForcedShutdown = true;
-            ShutdownAppDomain(ApplicationShutdownReason.UnloadAppDomainCalled, "User code called UnloadAppDomain");
+            ShutdownAppDomain(
+                ApplicationShutdownReason.UnloadAppDomainCalled,
+                "User code called UnloadAppDomain"
+            );
         }
 
-        private DateTime LastShutdownAttemptTime {
-            get {
+        private DateTime LastShutdownAttemptTime
+        {
+            get
+            {
                 DateTime dt;
-                lock (this) {
+                lock (this)
+                {
                     dt = _lastShutdownAttemptTime;
                 }
                 return dt;
             }
-            set {
-                lock (this) {
+            set
+            {
+                lock (this)
+                {
                     _lastShutdownAttemptTime = value;
                 }
             }
         }
 
-        internal static Profiler Profile {
-            get {
-                return _theRuntime._profiler;
-            }
+        internal static Profiler Profile
+        {
+            get { return _theRuntime._profiler; }
         }
 
-        internal static bool IsTrustLevelInitialized {
-            get {
-                return !HostingEnvironment.IsHosted || TrustLevel != null;
-            }
+        internal static bool IsTrustLevelInitialized
+        {
+            get { return !HostingEnvironment.IsHosted || TrustLevel != null; }
         }
 
-        internal static NamedPermissionSet NamedPermissionSet {
-            get {
+        internal static NamedPermissionSet NamedPermissionSet
+        {
+            get
+            {
                 // Make sure we have already initialized the trust level
-                // 
+                //
 
 
                 return _theRuntime._namedPermissionSet;
             }
         }
 
-        internal static PolicyLevel PolicyLevel {
-            get {
-                return _theRuntime._policyLevel;
-            }
+        internal static PolicyLevel PolicyLevel
+        {
+            get { return _theRuntime._policyLevel; }
         }
 
-        internal static string HostSecurityPolicyResolverType {
-            get {
-                return _theRuntime._hostSecurityPolicyResolverType;
-            }
+        internal static string HostSecurityPolicyResolverType
+        {
+            get { return _theRuntime._hostSecurityPolicyResolverType; }
         }
 
-        [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Unrestricted)]
-        public static NamedPermissionSet GetNamedPermissionSet() {
+        [AspNetHostingPermission(
+            SecurityAction.Demand,
+            Level = AspNetHostingPermissionLevel.Unrestricted
+        )]
+        public static NamedPermissionSet GetNamedPermissionSet()
+        {
             NamedPermissionSet namedPermissionSet = _theRuntime._namedPermissionSet;
-            if (namedPermissionSet == null) {
+            if (namedPermissionSet == null)
+            {
                 return null;
             }
-            else {
+            else
+            {
                 return new NamedPermissionSet(namedPermissionSet);
             }
         }
 
-        internal static bool IsFullTrust {
-            get {
+        internal static bool IsFullTrust
+        {
+            get
+            {
                 // Make sure we have already initialized the trust level
                 Debug.Assert(IsTrustLevelInitialized);
 
@@ -2515,7 +3239,8 @@ namespace System.Web {
         /*
          * Check that the current trust level allows access to a virtual path.  Throw if it doesn't,
          */
-        internal static void CheckVirtualFilePermission(string virtualPath) {
+        internal static void CheckVirtualFilePermission(string virtualPath)
+        {
             string physicalPath = HostingEnvironment.MapPath(virtualPath);
             CheckFilePermission(physicalPath);
         }
@@ -2523,30 +3248,39 @@ namespace System.Web {
         /*
          * Check that the current trust level allows access to a path.  Throw if it doesn't,
          */
-        internal static void CheckFilePermission(string path) {
+        internal static void CheckFilePermission(string path)
+        {
             CheckFilePermission(path, false);
         }
 
-        internal static void CheckFilePermission(string path, bool writePermissions) {
-            if (!HasFilePermission(path, writePermissions)) {
+        internal static void CheckFilePermission(string path, bool writePermissions)
+        {
+            if (!HasFilePermission(path, writePermissions))
+            {
                 throw new HttpException(SR.GetString(SR.Access_denied_to_path, GetSafePath(path)));
             }
         }
 
-        internal static bool HasFilePermission(string path) {
+        internal static bool HasFilePermission(string path)
+        {
             return HasFilePermission(path, false);
         }
 
-        internal static bool HasFilePermission(string path, bool writePermissions) {
+        internal static bool HasFilePermission(string path, bool writePermissions)
+        {
             // WOS #1523618: need to skip this check for HttpResponse.ReportRuntimeError when reporting an
             // InitializationException (e.g., necessary to display line info for ConfigurationException).
 
-            if (TrustLevel == null && InitializationException != null) {
+            if (TrustLevel == null && InitializationException != null)
+            {
                 return true;
             }
 
             // Make sure we have already initialized the trust level
-            Debug.Assert(TrustLevel != null || !HostingEnvironment.IsHosted, "TrustLevel != null || !HostingEnvironment.IsHosted");
+            Debug.Assert(
+                TrustLevel != null || !HostingEnvironment.IsHosted,
+                "TrustLevel != null || !HostingEnvironment.IsHosted"
+            );
 
             // If we don't have a NamedPermissionSet, we're in full trust
             if (NamedPermissionSet == null)
@@ -2555,16 +3289,24 @@ namespace System.Web {
             bool fAccess = false;
 
             // Check that the user has permission to the path
-            IPermission allowedPermission = NamedPermissionSet.GetPermission(typeof(FileIOPermission));
-            if (allowedPermission != null) {
+            IPermission allowedPermission = NamedPermissionSet.GetPermission(
+                typeof(FileIOPermission)
+            );
+            if (allowedPermission != null)
+            {
                 IPermission askedPermission = null;
-                try {
+                try
+                {
                     if (!writePermissions)
                         askedPermission = new FileIOPermission(FileIOPermissionAccess.Read, path);
                     else
-                        askedPermission = new FileIOPermission(FileIOPermissionAccess.AllAccess, path);
+                        askedPermission = new FileIOPermission(
+                            FileIOPermissionAccess.AllAccess,
+                            path
+                        );
                 }
-                catch {
+                catch
+                {
                     // This could happen if the path is not absolute
                     return false;
                 }
@@ -2574,8 +3316,8 @@ namespace System.Web {
             return fAccess;
         }
 
-        internal static bool HasWebPermission(Uri uri) {
-
+        internal static bool HasWebPermission(Uri uri)
+        {
             // Make sure we have already initialized the trust level
             Debug.Assert(TrustLevel != null || !HostingEnvironment.IsHosted);
 
@@ -2587,12 +3329,15 @@ namespace System.Web {
 
             // Check that the user has permission to the URI
             IPermission allowedPermission = NamedPermissionSet.GetPermission(typeof(WebPermission));
-            if (allowedPermission != null) {
+            if (allowedPermission != null)
+            {
                 IPermission askedPermission = null;
-                try {
+                try
+                {
                     askedPermission = new WebPermission(NetworkAccess.Connect, uri.ToString());
                 }
-                catch {
+                catch
+                {
                     return false;
                 }
                 fAccess = askedPermission.IsSubsetOf(allowedPermission);
@@ -2601,8 +3346,8 @@ namespace System.Web {
             return fAccess;
         }
 
-        internal static bool HasDbPermission(DbProviderFactory factory) {
-
+        internal static bool HasDbPermission(DbProviderFactory factory)
+        {
             // Make sure we have already initialized the trust level
             Debug.Assert(TrustLevel != null || !HostingEnvironment.IsHosted);
 
@@ -2613,10 +3358,16 @@ namespace System.Web {
             bool fAccess = false;
 
             // Check that the user has permission to the provider
-            CodeAccessPermission askedPermission = factory.CreatePermission(PermissionState.Unrestricted);
-            if (askedPermission != null) {
-                IPermission allowedPermission = NamedPermissionSet.GetPermission(askedPermission.GetType());
-                if (allowedPermission != null) {
+            CodeAccessPermission askedPermission = factory.CreatePermission(
+                PermissionState.Unrestricted
+            );
+            if (askedPermission != null)
+            {
+                IPermission allowedPermission = NamedPermissionSet.GetPermission(
+                    askedPermission.GetType()
+                );
+                if (allowedPermission != null)
+                {
                     fAccess = askedPermission.IsSubsetOf(allowedPermission);
                 }
             }
@@ -2624,11 +3375,13 @@ namespace System.Web {
             return fAccess;
         }
 
-        internal static bool HasPathDiscoveryPermission(string path) {
+        internal static bool HasPathDiscoveryPermission(string path)
+        {
             // WOS #1523618: need to skip this check for HttpResponse.ReportRuntimeError when reporting an
             // InitializationException (e.g., necessary to display line info for ConfigurationException).
 
-            if (TrustLevel == null && InitializationException != null) {
+            if (TrustLevel == null && InitializationException != null)
+            {
                 return true;
             }
 
@@ -2642,30 +3395,37 @@ namespace System.Web {
             bool fAccess = false;
 
             // Check that the user has permission to the path
-            IPermission allowedPermission = NamedPermissionSet.GetPermission(typeof(FileIOPermission));
-            if (allowedPermission != null) {
-                IPermission askedPermission = new FileIOPermission(FileIOPermissionAccess.PathDiscovery, path);
+            IPermission allowedPermission = NamedPermissionSet.GetPermission(
+                typeof(FileIOPermission)
+            );
+            if (allowedPermission != null)
+            {
+                IPermission askedPermission = new FileIOPermission(
+                    FileIOPermissionAccess.PathDiscovery,
+                    path
+                );
                 fAccess = askedPermission.IsSubsetOf(allowedPermission);
             }
 
             return fAccess;
-
         }
 
-        internal static bool HasAppPathDiscoveryPermission() {
+        internal static bool HasAppPathDiscoveryPermission()
+        {
             return HasPathDiscoveryPermission(HttpRuntime.AppDomainAppPathInternal);
         }
 
-        internal static string GetSafePath(string path) {
+        internal static string GetSafePath(string path)
+        {
             if (String.IsNullOrEmpty(path))
                 return path;
 
-            try {
+            try
+            {
                 if (HasPathDiscoveryPermission(path)) // could throw on bad filenames
                     return path;
             }
-            catch {
-            }
+            catch { }
 
             return Path.GetFileName(path);
         }
@@ -2673,8 +3433,8 @@ namespace System.Web {
         /*
          * Check that the current trust level allows Unmanaged access
          */
-        internal static bool HasUnmanagedPermission() {
-
+        internal static bool HasUnmanagedPermission()
+        {
             // Make sure we have already initialized the trust level
             Debug.Assert(TrustLevel != null || !HostingEnvironment.IsHosted);
 
@@ -2682,18 +3442,18 @@ namespace System.Web {
             if (NamedPermissionSet == null)
                 return true;
 
-            SecurityPermission securityPermission = (SecurityPermission)NamedPermissionSet.GetPermission(
-                typeof(SecurityPermission));
+            SecurityPermission securityPermission = (SecurityPermission)
+                NamedPermissionSet.GetPermission(typeof(SecurityPermission));
             if (securityPermission == null)
                 return false;
 
             return (securityPermission.Flags & SecurityPermissionFlag.UnmanagedCode) != 0;
         }
 
-        internal static bool HasAspNetHostingPermission(AspNetHostingPermissionLevel level) {
-
+        internal static bool HasAspNetHostingPermission(AspNetHostingPermissionLevel level)
+        {
             // Make sure we have already initialized the trust level
-            // 
+            //
 
 
 
@@ -2701,52 +3461,76 @@ namespace System.Web {
             if (NamedPermissionSet == null)
                 return true;
 
-            AspNetHostingPermission permission = (AspNetHostingPermission)NamedPermissionSet.GetPermission(
-                typeof(AspNetHostingPermission));
+            AspNetHostingPermission permission = (AspNetHostingPermission)
+                NamedPermissionSet.GetPermission(typeof(AspNetHostingPermission));
             if (permission == null)
                 return false;
 
             return (permission.Level >= level);
         }
 
-        internal static void CheckAspNetHostingPermission(AspNetHostingPermissionLevel level, String errorMessageId) {
-            if (!HasAspNetHostingPermission(level)) {
+        internal static void CheckAspNetHostingPermission(
+            AspNetHostingPermissionLevel level,
+            String errorMessageId
+        )
+        {
+            if (!HasAspNetHostingPermission(level))
+            {
                 throw new HttpException(SR.GetString(errorMessageId));
             }
         }
 
         // If we're not in full trust, fail if the passed in type doesn't have the APTCA bit
-        internal static void FailIfNoAPTCABit(Type t, ElementInformation elemInfo, string propertyName) {
-
-            if (!IsTypeAllowedInConfig(t)) {
-                if (null != elemInfo) {
+        internal static void FailIfNoAPTCABit(
+            Type t,
+            ElementInformation elemInfo,
+            string propertyName
+        )
+        {
+            if (!IsTypeAllowedInConfig(t))
+            {
+                if (null != elemInfo)
+                {
                     PropertyInformation propInfo = elemInfo.Properties[propertyName];
 
-                    throw new ConfigurationErrorsException(SR.GetString(SR.Type_from_untrusted_assembly, t.FullName),
-                    propInfo.Source, propInfo.LineNumber);
+                    throw new ConfigurationErrorsException(
+                        SR.GetString(SR.Type_from_untrusted_assembly, t.FullName),
+                        propInfo.Source,
+                        propInfo.LineNumber
+                    );
                 }
-                else {
-                    throw new ConfigurationErrorsException(SR.GetString(SR.Type_from_untrusted_assembly, t.FullName));
+                else
+                {
+                    throw new ConfigurationErrorsException(
+                        SR.GetString(SR.Type_from_untrusted_assembly, t.FullName)
+                    );
                 }
             }
         }
 
         // If we're not in full trust, fail if the passed in type doesn't have the APTCA bit
-        internal static void FailIfNoAPTCABit(Type t, XmlNode node) {
-
-            if (!IsTypeAllowedInConfig(t)) {
-                throw new ConfigurationErrorsException(SR.GetString(SR.Type_from_untrusted_assembly, t.FullName),
-                    node);
+        internal static void FailIfNoAPTCABit(Type t, XmlNode node)
+        {
+            if (!IsTypeAllowedInConfig(t))
+            {
+                throw new ConfigurationErrorsException(
+                    SR.GetString(SR.Type_from_untrusted_assembly, t.FullName),
+                    node
+                );
             }
         }
 
-        private static bool HasAPTCABit(Assembly assembly) {
-            return assembly.IsDefined(typeof(AllowPartiallyTrustedCallersAttribute), inherit: false);
+        private static bool HasAPTCABit(Assembly assembly)
+        {
+            return assembly.IsDefined(
+                typeof(AllowPartiallyTrustedCallersAttribute),
+                inherit: false
+            );
         }
 
         // Check if the type is allowed to be used in config by checking the APTCA bit
-        internal static bool IsTypeAllowedInConfig(Type t) {
-
+        internal static bool IsTypeAllowedInConfig(Type t)
+        {
             // Allow everything in full trust
             if (HttpRuntime.HasAspNetHostingPermission(AspNetHostingPermissionLevel.Unrestricted))
                 return true;
@@ -2754,21 +3538,25 @@ namespace System.Web {
             return IsTypeAccessibleFromPartialTrust(t);
         }
 
-        internal static bool IsTypeAccessibleFromPartialTrust(Type t) {
+        internal static bool IsTypeAccessibleFromPartialTrust(Type t)
+        {
             Assembly assembly = t.Assembly;
-            
-            if (assembly.SecurityRuleSet == SecurityRuleSet.Level1) {
+
+            if (assembly.SecurityRuleSet == SecurityRuleSet.Level1)
+            {
                 // Level 1 CAS uses transparency as an auditing mechanism rather than an enforcement mechanism, so we can't
                 // perform a transparency check. Instead, allow the call to go through if:
                 // (a) the referenced assembly is partially trusted, hence it cannot do anything dangerous; or
                 // (b) the assembly is fully trusted and has APTCA.
                 return (!assembly.IsFullyTrusted || HasAPTCABit(assembly));
             }
-            else {
+            else
+            {
                 // ** TEMPORARY **
                 // Some GACed assemblies register critical modules / handlers. We can't break these scenarios for .NET 4.5, but we should
                 // remove this APTCA check when we fix DevDiv #85358 and use only the transparency check defined below.
-                if (HasAPTCABit(assembly)) {
+                if (HasAPTCABit(assembly))
+                {
                     return true;
                 }
                 // ** END TEMPORARY **
@@ -2779,30 +3567,38 @@ namespace System.Web {
             }
         }
 
-        internal static FileChangesMonitor FileChangesMonitor {
+        internal static FileChangesMonitor FileChangesMonitor
+        {
             get { return _theRuntime._fcm; }
         }
 
-        internal static RequestTimeoutManager RequestTimeoutManager {
+        internal static RequestTimeoutManager RequestTimeoutManager
+        {
             get { return _theRuntime._timeoutManager; }
         }
-
 
         /// <devdoc>
         ///    <para>Provides access to the cache.</para>
         /// </devdoc>
-        public static Cache Cache {
-            get {
-
-                if (HttpRuntime.AspInstallDirectoryInternal == null) {
-                    throw new HttpException(SR.GetString(SR.Aspnet_not_installed, VersionInfo.SystemWebVersion));
+        public static Cache Cache
+        {
+            get
+            {
+                if (HttpRuntime.AspInstallDirectoryInternal == null)
+                {
+                    throw new HttpException(
+                        SR.GetString(SR.Aspnet_not_installed, VersionInfo.SystemWebVersion)
+                    );
                 }
 
                 Cache cachePublic = _theRuntime._cachePublic;
-                if (cachePublic == null) {
-                    lock (_theRuntime) {
+                if (cachePublic == null)
+                {
+                    lock (_theRuntime)
+                    {
                         cachePublic = _theRuntime._cachePublic;
-                        if (cachePublic == null) {
+                        if (cachePublic == null)
+                        {
                             // Create the CACHE object
                             cachePublic = new Caching.Cache(0);
                             _theRuntime._cachePublic = cachePublic;
@@ -2817,12 +3613,17 @@ namespace System.Web {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static string AspInstallDirectory {
-            get {
+        public static string AspInstallDirectory
+        {
+            get
+            {
                 String path = AspInstallDirectoryInternal;
 
-                if (path == null) {
-                    throw new HttpException(SR.GetString(SR.Aspnet_not_installed, VersionInfo.SystemWebVersion));
+                if (path == null)
+                {
+                    throw new HttpException(
+                        SR.GetString(SR.Aspnet_not_installed, VersionInfo.SystemWebVersion)
+                    );
                 }
 
                 InternalSecurityPermissions.PathDiscovery(path).Demand();
@@ -2830,18 +3631,26 @@ namespace System.Web {
             }
         }
 
-        internal static string AspInstallDirectoryInternal {
+        internal static string AspInstallDirectoryInternal
+        {
             get { return s_installDirectory; }
         }
 
         //
         // Return the client script virtual path, e.g. "/aspnet_client/system_web/2_0_50217"
         //
-        public static string AspClientScriptVirtualPath {
-            get {
-                if (_theRuntime._clientScriptVirtualPath == null) {
+        public static string AspClientScriptVirtualPath
+        {
+            get
+            {
+                if (_theRuntime._clientScriptVirtualPath == null)
+                {
                     string aspNetVersion = VersionInfo.SystemWebVersion;
-                    string clientScriptVirtualPath = AspNetClientFilesParentVirtualPath + aspNetVersion.Substring(0, aspNetVersion.LastIndexOf('.')).Replace('.', '_');
+                    string clientScriptVirtualPath =
+                        AspNetClientFilesParentVirtualPath
+                        + aspNetVersion
+                            .Substring(0, aspNetVersion.LastIndexOf('.'))
+                            .Replace('.', '_');
 
                     _theRuntime._clientScriptVirtualPath = clientScriptVirtualPath;
                 }
@@ -2850,12 +3659,17 @@ namespace System.Web {
             }
         }
 
-        public static string AspClientScriptPhysicalPath {
-            get {
+        public static string AspClientScriptPhysicalPath
+        {
+            get
+            {
                 String path = AspClientScriptPhysicalPathInternal;
 
-                if (path == null) {
-                    throw new HttpException(SR.GetString(SR.Aspnet_not_installed, VersionInfo.SystemWebVersion));
+                if (path == null)
+                {
+                    throw new HttpException(
+                        SR.GetString(SR.Aspnet_not_installed, VersionInfo.SystemWebVersion)
+                    );
                 }
 
                 return path;
@@ -2865,10 +3679,16 @@ namespace System.Web {
         //
         // Return the client script physical path, e.g. @"c:\windows\microsoft.net\framework\v2.0.50217.0\asp.netclientfiles"
         //
-        internal static string AspClientScriptPhysicalPathInternal {
-            get {
-                if (_theRuntime._clientScriptPhysicalPath == null) {
-                    string clientScriptPhysicalPath = System.IO.Path.Combine(AspInstallDirectoryInternal, AspNetClientFilesSubDirectory);
+        internal static string AspClientScriptPhysicalPathInternal
+        {
+            get
+            {
+                if (_theRuntime._clientScriptPhysicalPath == null)
+                {
+                    string clientScriptPhysicalPath = System.IO.Path.Combine(
+                        AspInstallDirectoryInternal,
+                        AspNetClientFilesSubDirectory
+                    );
 
                     _theRuntime._clientScriptPhysicalPath = clientScriptPhysicalPath;
                 }
@@ -2877,43 +3697,46 @@ namespace System.Web {
             }
         }
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static string ClrInstallDirectory {
-            get {
+        public static string ClrInstallDirectory
+        {
+            get
+            {
                 String path = ClrInstallDirectoryInternal;
                 InternalSecurityPermissions.PathDiscovery(path).Demand();
                 return path;
             }
         }
 
-        internal static string ClrInstallDirectoryInternal {
+        internal static string ClrInstallDirectoryInternal
+        {
             get { return HttpConfigurationSystem.MsCorLibDirectory; }
         }
-
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static string MachineConfigurationDirectory {
-            get {
+        public static string MachineConfigurationDirectory
+        {
+            get
+            {
                 String path = MachineConfigurationDirectoryInternal;
                 InternalSecurityPermissions.PathDiscovery(path).Demand();
                 return path;
             }
         }
 
-        internal static string MachineConfigurationDirectoryInternal {
+        internal static string MachineConfigurationDirectoryInternal
+        {
             get { return HttpConfigurationSystem.MachineConfigurationDirectory; }
         }
 
-        internal static bool IsEngineLoaded {
+        internal static bool IsEngineLoaded
+        {
             get { return s_isEngineLoaded; }
         }
-
 
         //
         //  Static app domain related properties
@@ -2923,155 +3746,176 @@ namespace System.Web {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static String CodegenDir {
-            get {
+        public static String CodegenDir
+        {
+            get
+            {
                 String path = CodegenDirInternal;
                 InternalSecurityPermissions.PathDiscovery(path).Demand();
                 return path;
             }
         }
 
-        internal static string CodegenDirInternal {
+        internal static string CodegenDirInternal
+        {
             get { return _theRuntime._codegenDir; }
         }
 
-        internal static string TempDirInternal {
+        internal static string TempDirInternal
+        {
             get { return _theRuntime._tempDir; }
         }
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static String AppDomainAppId {
-            get {
-                return _theRuntime._appDomainAppId;
-            }
+        public static String AppDomainAppId
+        {
+            get { return _theRuntime._appDomainAppId; }
         }
 
-        internal static bool IsAspNetAppDomain {
+        internal static bool IsAspNetAppDomain
+        {
             get { return AppDomainAppId != null; }
         }
 
-
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static String AppDomainAppPath {
-            get {
+        public static String AppDomainAppPath
+        {
+            get
+            {
                 InternalSecurityPermissions.AppPathDiscovery.Demand();
                 return AppDomainAppPathInternal;
             }
         }
 
-        internal static string AppDomainAppPathInternal {
+        internal static string AppDomainAppPathInternal
+        {
             get { return _theRuntime._appDomainAppPath; }
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static String AppDomainAppVirtualPath {
-            get {
-                return VirtualPath.GetVirtualPathStringNoTrailingSlash(_theRuntime._appDomainAppVPath);
+        public static String AppDomainAppVirtualPath
+        {
+            get
+            {
+                return VirtualPath.GetVirtualPathStringNoTrailingSlash(
+                    _theRuntime._appDomainAppVPath
+                );
             }
         }
 
         // Save as AppDomainAppVirtualPath, but includes the trailng slash.  We can't change
         // AppDomainAppVirtualPath since it's public.
-        internal static String AppDomainAppVirtualPathString {
-            get {
-                return VirtualPath.GetVirtualPathString(_theRuntime._appDomainAppVPath);
-            }
+        internal static String AppDomainAppVirtualPathString
+        {
+            get { return VirtualPath.GetVirtualPathString(_theRuntime._appDomainAppVPath); }
         }
 
-        internal static VirtualPath AppDomainAppVirtualPathObject {
-            get {
-                return _theRuntime._appDomainAppVPath;
-            }
+        internal static VirtualPath AppDomainAppVirtualPathObject
+        {
+            get { return _theRuntime._appDomainAppVPath; }
         }
 
-        internal static bool IsPathWithinAppRoot(String path) {
+        internal static bool IsPathWithinAppRoot(String path)
+        {
             if (AppDomainIdInternal == null)
-                return true;    // app domain not initialized
+                return true; // app domain not initialized
 
             return UrlPath.IsEqualOrSubpath(AppDomainAppVirtualPathString, path);
         }
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static String AppDomainId {
-            [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.High)]
-            get {
-                return AppDomainIdInternal;
-            }
+        public static String AppDomainId
+        {
+            [AspNetHostingPermission(
+                SecurityAction.Demand,
+                Level = AspNetHostingPermissionLevel.High
+            )]
+            get { return AppDomainIdInternal; }
         }
 
-        internal static string AppDomainIdInternal {
+        internal static string AppDomainIdInternal
+        {
             get { return _theRuntime._appDomainId; }
         }
 
-
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static String BinDirectory {
-            get {
+        public static String BinDirectory
+        {
+            get
+            {
                 String path = BinDirectoryInternal;
                 InternalSecurityPermissions.PathDiscovery(path).Demand();
                 return path;
             }
         }
 
-        internal static string BinDirectoryInternal {
-            get { return Path.Combine(_theRuntime._appDomainAppPath, BinDirectoryName) + Path.DirectorySeparatorChar; }
-
+        internal static string BinDirectoryInternal
+        {
+            get
+            {
+                return Path.Combine(_theRuntime._appDomainAppPath, BinDirectoryName)
+                    + Path.DirectorySeparatorChar;
+            }
         }
 
-        internal static VirtualPath CodeDirectoryVirtualPath {
+        internal static VirtualPath CodeDirectoryVirtualPath
+        {
             get { return _theRuntime._appDomainAppVPath.SimpleCombineWithDir(CodeDirectoryName); }
         }
 
-        internal static VirtualPath ResourcesDirectoryVirtualPath {
-            get { return _theRuntime._appDomainAppVPath.SimpleCombineWithDir(ResourcesDirectoryName); }
+        internal static VirtualPath ResourcesDirectoryVirtualPath
+        {
+            get
+            {
+                return _theRuntime._appDomainAppVPath.SimpleCombineWithDir(ResourcesDirectoryName);
+            }
         }
 
-        internal static VirtualPath WebRefDirectoryVirtualPath {
+        internal static VirtualPath WebRefDirectoryVirtualPath
+        {
             get { return _theRuntime._appDomainAppVPath.SimpleCombineWithDir(WebRefDirectoryName); }
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static bool IsOnUNCShare {
-            [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Low)]
-            get {
-                return IsOnUNCShareInternal;
-            }
+        public static bool IsOnUNCShare
+        {
+            [AspNetHostingPermission(
+                SecurityAction.Demand,
+                Level = AspNetHostingPermissionLevel.Low
+            )]
+            get { return IsOnUNCShareInternal; }
         }
 
-        internal static bool IsOnUNCShareInternal {
+        internal static bool IsOnUNCShareInternal
+        {
             get { return _theRuntime._isOnUNCShare; }
         }
-
 
         //
         //  Static helper to retrieve app domain values
         //
 
-        private static String GetAppDomainString(String key) {
+        private static String GetAppDomainString(String key)
+        {
             Object x = Thread.GetDomain().GetData(key);
 
             return x as String;
         }
 
-        internal static void AddAppDomainTraceMessage(String message) {
+        internal static void AddAppDomainTraceMessage(String message)
+        {
             const String appDomainTraceKey = "ASP.NET Domain Trace";
             AppDomain d = Thread.GetDomain();
             String m = d.GetData(appDomainTraceKey) as String;
@@ -3082,58 +3926,75 @@ namespace System.Web {
         // This property is normally set via the <httpRuntime> element's "targetFramework"
         // attribute. The property is not guaranteed to return a correct value if the current
         // AppDomain is not an ASP.NET web application AppDomain.
-        public static Version TargetFramework {
-            get {
-                return BinaryCompatibility.Current.TargetFramework;
-            }
+        public static Version TargetFramework
+        {
+            get { return BinaryCompatibility.Current.TargetFramework; }
         }
-
 
         //
         //  Flags
         //
 
-        internal static bool DebuggingEnabled {
+        internal static bool DebuggingEnabled
+        {
             get { return _theRuntime._debuggingEnabled; }
         }
 
-        internal static bool ConfigInited {
+        internal static bool ConfigInited
+        {
             get { return _theRuntime._configInited; }
         }
 
-        internal static bool FusionInited {
+        internal static bool FusionInited
+        {
             get { return _theRuntime._fusionInited; }
         }
 
-        internal static bool ApartmentThreading {
+        internal static bool ApartmentThreading
+        {
             get { return _theRuntime._apartmentThreading; }
         }
 
-        internal static bool ShutdownInProgress {
+        internal static bool ShutdownInProgress
+        {
             get { return _theRuntime._shutdownInProgress; }
         }
 
-        internal static string TrustLevel {
+        internal static string TrustLevel
+        {
             get { return _theRuntime._trustLevel; }
         }
 
-        internal static string WpUserId {
+        internal static string WpUserId
+        {
             get { return _theRuntime._wpUserId; }
         }
 
-
-        private void SetTrustLevel(TrustSection trustSection, SecurityPolicySection securityPolicySection) {
+        private void SetTrustLevel(
+            TrustSection trustSection,
+            SecurityPolicySection securityPolicySection
+        )
+        {
             // Use a temporary variable, since we use the field as a signal that the trust has really
             // been set, which is not the case until later in this method.
             string trustLevel = trustSection.Level;
 
-            if (trustSection.Level == "Full") {
+            if (trustSection.Level == "Full")
+            {
                 _trustLevel = trustLevel;
                 return;
             }
 
-            if (securityPolicySection == null || securityPolicySection.TrustLevels[trustSection.Level] == null) {
-                throw new ConfigurationErrorsException(SR.GetString(SR.Unable_to_get_policy_file, trustSection.Level), String.Empty, 0);
+            if (
+                securityPolicySection == null
+                || securityPolicySection.TrustLevels[trustSection.Level] == null
+            )
+            {
+                throw new ConfigurationErrorsException(
+                    SR.GetString(SR.Unable_to_get_policy_file, trustSection.Level),
+                    String.Empty,
+                    0
+                );
                 //             Do not give out configuration information since we don't know what trust level we are
                 //             supposed to be running at.  If the information below is added to the error it might expose
                 //             part of the config file that the users does not have permissions to see. VS261145
@@ -3141,16 +4002,27 @@ namespace System.Web {
                 //            trustSection.ElementInformation.Properties["level"].LineNumber);
             }
             String file = null;
-            if (trustSection.Level == "Minimal" || trustSection.Level == "Low" ||
-                trustSection.Level == "Medium" || trustSection.Level == "High") {
-                file = (String)securityPolicySection.TrustLevels[trustSection.Level].LegacyPolicyFileExpanded;
+            if (
+                trustSection.Level == "Minimal"
+                || trustSection.Level == "Low"
+                || trustSection.Level == "Medium"
+                || trustSection.Level == "High"
+            )
+            {
+                file = (String)
+                    securityPolicySection.TrustLevels[trustSection.Level].LegacyPolicyFileExpanded;
             }
-            else {
-                file = (String)securityPolicySection.TrustLevels[trustSection.Level].PolicyFileExpanded;
+            else
+            {
+                file = (String)
+                    securityPolicySection.TrustLevels[trustSection.Level].PolicyFileExpanded;
             }
-            if (file == null || !FileUtil.FileExists(file)) {
+            if (file == null || !FileUtil.FileExists(file))
+            {
                 //if HttpContext.Current.IsCustomErrorEnabled
-                throw new HttpException(SR.GetString(SR.Unable_to_get_policy_file, trustSection.Level));
+                throw new HttpException(
+                    SR.GetString(SR.Unable_to_get_policy_file, trustSection.Level)
+                );
                 //else
                 //    throw new ConfigurationErrorsException(SR.GetString(SR.Unable_to_get_policy_file, trustSection.Level),
                 //        trustSection.Filename, trustSection.LineNumber);
@@ -3158,18 +4030,27 @@ namespace System.Web {
 
             bool foundGacToken = false;
 #pragma warning disable 618
-            PolicyLevel policyLevel = CreatePolicyLevel(file, AppDomainAppPathInternal, CodegenDirInternal, trustSection.OriginUrl, out foundGacToken);
+            PolicyLevel policyLevel = CreatePolicyLevel(
+                file,
+                AppDomainAppPathInternal,
+                CodegenDirInternal,
+                trustSection.OriginUrl,
+                out foundGacToken
+            );
 
             // see if the policy file contained a v1.x UrlMembershipCondition containing
             // a GAC token.  If so, let's upgrade it by adding a code group granting
             // full trust to code from the GAC
-            if (foundGacToken) {
+            if (foundGacToken)
+            {
                 // walk the code groups at the app domain level and look for one that grants
                 // access to the GAC with an UrlMembershipCondition.
                 CodeGroup rootGroup = policyLevel.RootCodeGroup;
                 bool foundGacCondition = false;
-                foreach (CodeGroup childGroup in rootGroup.Children) {
-                    if (childGroup.MembershipCondition is GacMembershipCondition) {
+                foreach (CodeGroup childGroup in rootGroup.Children)
+                {
+                    if (childGroup.MembershipCondition is GacMembershipCondition)
+                    {
                         foundGacCondition = true;
 
                         // if we found the GAC token and also have the GacMembershipCondition
@@ -3183,30 +4064,45 @@ namespace System.Web {
                 // some sanity checking to make sure it's an ASP.NET policy file
                 // which always begins with a FirstMatchCodeGroup granting nothing
                 // this might not upgrade some custom policy files
-                if (!foundGacCondition) {
-                    if (rootGroup is FirstMatchCodeGroup) {
+                if (!foundGacCondition)
+                {
+                    if (rootGroup is FirstMatchCodeGroup)
+                    {
                         FirstMatchCodeGroup firstMatch = (FirstMatchCodeGroup)rootGroup;
-                        if (firstMatch.MembershipCondition is AllMembershipCondition &&
-                           firstMatch.PermissionSetName == "Nothing") {
-                            PermissionSet fullTrust = new PermissionSet(PermissionState.Unrestricted);
+                        if (
+                            firstMatch.MembershipCondition is AllMembershipCondition
+                            && firstMatch.PermissionSetName == "Nothing"
+                        )
+                        {
+                            PermissionSet fullTrust = new PermissionSet(
+                                PermissionState.Unrestricted
+                            );
 
-                            CodeGroup gacGroup = new UnionCodeGroup(new GacMembershipCondition(),
-                                                                    new PolicyStatement(fullTrust));
-
+                            CodeGroup gacGroup = new UnionCodeGroup(
+                                new GacMembershipCondition(),
+                                new PolicyStatement(fullTrust)
+                            );
 
                             // now, walk the current groups and insert our new group
                             // immediately before the old Gac group
                             // we'll need to use heuristics for this:
                             // it will be an UrlMembershipCondition group with full trust
-                            CodeGroup newRoot = new FirstMatchCodeGroup(rootGroup.MembershipCondition, rootGroup.PolicyStatement);
-                            foreach (CodeGroup childGroup in rootGroup.Children) {
-
+                            CodeGroup newRoot = new FirstMatchCodeGroup(
+                                rootGroup.MembershipCondition,
+                                rootGroup.PolicyStatement
+                            );
+                            foreach (CodeGroup childGroup in rootGroup.Children)
+                            {
                                 // is this the target old $Gac$ group?
                                 // insert our new GacMembershipCondition group ahead of it
-                                if ((childGroup is UnionCodeGroup) &&
-                                   (childGroup.MembershipCondition is UrlMembershipCondition) &&
-                                   childGroup.PolicyStatement.PermissionSet.IsUnrestricted()) {
-                                    if (null != gacGroup) {
+                                if (
+                                    (childGroup is UnionCodeGroup)
+                                    && (childGroup.MembershipCondition is UrlMembershipCondition)
+                                    && childGroup.PolicyStatement.PermissionSet.IsUnrestricted()
+                                )
+                                {
+                                    if (null != gacGroup)
+                                    {
                                         newRoot.AddChild(gacGroup);
                                         gacGroup = null;
                                     }
@@ -3226,7 +4122,6 @@ namespace System.Web {
 #pragma warning restore 618
             }
 
-
 #pragma warning disable 618
             AppDomain.CurrentDomain.SetAppDomainPolicy(policyLevel);
             _namedPermissionSet = policyLevel.GetNamedPermissionSet(trustSection.PermissionSetName);
@@ -3234,11 +4129,21 @@ namespace System.Web {
 
             _trustLevel = trustLevel;
 
-            _fcm.StartMonitoringFile(file, new FileChangeEventHandler(this.OnSecurityPolicyFileChange));
+            _fcm.StartMonitoringFile(
+                file,
+                new FileChangeEventHandler(this.OnSecurityPolicyFileChange)
+            );
         }
 
 #pragma warning disable 618
-        private static PolicyLevel CreatePolicyLevel(String configFile, String appDir, String binDir, String strOriginUrl, out bool foundGacToken) {
+        private static PolicyLevel CreatePolicyLevel(
+            String configFile,
+            String appDir,
+            String binDir,
+            String strOriginUrl,
+            out bool foundGacToken
+        )
+        {
             // Read in the config file to a string.
             FileStream file = new FileStream(configFile, FileMode.Open, FileAccess.Read);
             StreamReader reader = new StreamReader(file, Encoding.UTF8);
@@ -3261,7 +4166,8 @@ namespace System.Web {
             // fact so that we later add a GacMembershipCondition
             // codegroup to the PolicyLevel
             int ndx = strFileData.IndexOf("$Gac$", StringComparison.Ordinal);
-            if (ndx != -1) {
+            if (ndx != -1)
+            {
                 string gacLocation = GetGacLocation();
                 if (gacLocation != null)
                     gacLocation = MakeFileUrl(gacLocation);
@@ -3271,80 +4177,108 @@ namespace System.Web {
                 strFileData = strFileData.Replace("$Gac$", gacLocation);
                 foundGacToken = true;
             }
-            else {
+            else
+            {
                 foundGacToken = false;
             }
 
-            return SecurityManager.LoadPolicyLevelFromString(strFileData, PolicyLevelType.AppDomain);
+            return SecurityManager.LoadPolicyLevelFromString(
+                strFileData,
+                PolicyLevelType.AppDomain
+            );
         }
 #pragma warning restore 618
 
-        private void SetTrustParameters(TrustSection trustSection, SecurityPolicySection securityPolicySection, PolicyLevel policyLevel) {
+        private void SetTrustParameters(
+            TrustSection trustSection,
+            SecurityPolicySection securityPolicySection,
+            PolicyLevel policyLevel
+        )
+        {
             _trustLevel = trustSection.Level;
-            if (_trustLevel != "Full") {
+            if (_trustLevel != "Full")
+            {
                 // if we are in partial trust, HostingEnvironment should init HttpRuntime with a non-null PolicyLevel object
                 Debug.Assert(policyLevel != null);
 
-                _namedPermissionSet = policyLevel.GetNamedPermissionSet(trustSection.PermissionSetName);
+                _namedPermissionSet = policyLevel.GetNamedPermissionSet(
+                    trustSection.PermissionSetName
+                );
                 _policyLevel = policyLevel;
                 _hostSecurityPolicyResolverType = trustSection.HostSecurityPolicyResolverType;
-                String file = (String)securityPolicySection.TrustLevels[trustSection.Level].PolicyFileExpanded;
-                _fcm.StartMonitoringFile(file, new FileChangeEventHandler(this.OnSecurityPolicyFileChange));
+                String file = (String)
+                    securityPolicySection.TrustLevels[trustSection.Level].PolicyFileExpanded;
+                _fcm.StartMonitoringFile(
+                    file,
+                    new FileChangeEventHandler(this.OnSecurityPolicyFileChange)
+                );
             }
         }
 
         /*
          * Notification when something in the code-access security policy file changed
          */
-        private void OnSecurityPolicyFileChange(Object sender, FileChangeEvent e) {
+        private void OnSecurityPolicyFileChange(Object sender, FileChangeEvent e)
+        {
             // shutdown the app domain
-            Debug.Trace("AppDomainFactory", "Shutting down appdomain because code-access security policy file changed");
+            Debug.Trace(
+                "AppDomainFactory",
+                "Shutting down appdomain because code-access security policy file changed"
+            );
             string message = FileChangesMonitor.GenerateErrorMessage(e.Action, e.FileName);
-            if (message == null) {
+            if (message == null)
+            {
                 message = "Change in code-access security policy file";
             }
-            ShutdownAppDomain(ApplicationShutdownReason.ChangeInSecurityPolicyFile,
-                              message);
+            ShutdownAppDomain(ApplicationShutdownReason.ChangeInSecurityPolicyFile, message);
         }
 
-
         // notification when app_offline.htm file changed or created
-        private void OnAppOfflineFileChange(Object sender, FileChangeEvent e) {
+        private void OnAppOfflineFileChange(Object sender, FileChangeEvent e)
+        {
             // shutdown the app domain
-            Debug.Trace("AppOffline", AppOfflineFileName + " changed - shutting down the app domain");
-            Debug.Trace("AppDomainFactory", "Shutting down appdomain because " + AppOfflineFileName + " file changed");
+            Debug.Trace(
+                "AppOffline",
+                AppOfflineFileName + " changed - shutting down the app domain"
+            );
+            Debug.Trace(
+                "AppDomainFactory",
+                "Shutting down appdomain because " + AppOfflineFileName + " file changed"
+            );
             // WOS 1948399: set _userForcedShutdown to avoid DelayNotificationTimeout, since first request has not completed yet in integrated mode;
             SetUserForcedShutdown();
             string message = FileChangesMonitor.GenerateErrorMessage(e.Action, AppOfflineFileName);
-            if (message == null) {
+            if (message == null)
+            {
                 message = "Change in " + AppOfflineFileName;
             }
             ShutdownAppDomain(ApplicationShutdownReason.ConfigurationChange, message);
         }
 
-        internal static String MakeFileUrl(String path) {
+        internal static String MakeFileUrl(String path)
+        {
             Uri uri = new Uri(path);
             return uri.ToString();
         }
 
-        internal static String GetGacLocation() {
-
+        internal static String GetGacLocation()
+        {
             StringBuilder buf = new StringBuilder(262);
             int iSize = 260;
 
-            // 
+            //
 
             if (UnsafeNativeMethods.GetCachePath(2, buf, ref iSize) >= 0)
                 return buf.ToString();
             throw new HttpException(SR.GetString(SR.GetGacLocaltion_failed));
         }
 
-
         /*
          * Remove from metabase all read/write/browse permission from certain subdirs
          *
          */
-        internal static void RestrictIISFolders(HttpContext context) {
+        internal static void RestrictIISFolders(HttpContext context)
+        {
             int ret;
 
             HttpWorkerRequest wr = context.WorkerRequest;
@@ -3352,7 +4286,8 @@ namespace System.Web {
             Debug.Assert(AppDomainAppId != null);
 
             // Don't do it if we are not running on IIS
-            if (wr == null || !(wr is System.Web.Hosting.ISAPIWorkerRequest)) {
+            if (wr == null || !(wr is System.Web.Hosting.ISAPIWorkerRequest))
+            {
                 return;
             }
 
@@ -3360,16 +4295,24 @@ namespace System.Web {
 #if !FEATURE_PAL // FEATURE_PAL does not enable IIS-based hosting features
             if (!(wr is System.Web.Hosting.ISAPIWorkerRequestInProcForIIS6))
 #endif // !FEATURE_PAL
- {
+            {
                 byte[] bufin;
-                byte[] bufout = new byte[1];   // Just to keep EcbCallISAPI happy
+                byte[] bufout = new byte[1]; // Just to keep EcbCallISAPI happy
 
                 bufin = BitConverter.GetBytes(UnsafeNativeMethods.RESTRICT_BIN);
-                ret = context.CallISAPI(UnsafeNativeMethods.CallISAPIFunc.RestrictIISFolders, bufin, bufout);
-                if (ret != 1) {
+                ret = context.CallISAPI(
+                    UnsafeNativeMethods.CallISAPIFunc.RestrictIISFolders,
+                    bufin,
+                    bufout
+                );
+                if (ret != 1)
+                {
                     // Cannot pass back any HR from inetinfo.exe because CSyncPipeManager::GetDataFromIIS
                     // does not support passing back any value when there is an error.
-                    Debug.Trace("RestrictIISFolders", "Cannot restrict folder access for '" + AppDomainAppId + "'.");
+                    Debug.Trace(
+                        "RestrictIISFolders",
+                        "Cannot restrict folder access for '" + AppDomainAppId + "'."
+                    );
                 }
             }
         }
@@ -3378,21 +4321,28 @@ namespace System.Web {
         // Helper to create instances (public vs. internal/private ctors, see 89781)
         //
 
-        internal static Object CreateNonPublicInstance(Type type) {
+        internal static Object CreateNonPublicInstance(Type type)
+        {
             return CreateNonPublicInstance(type, null);
         }
 
         [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
-        internal static Object CreateNonPublicInstance(Type type, Object[] args) {
+        internal static Object CreateNonPublicInstance(Type type, Object[] args)
+        {
             return Activator.CreateInstance(
                 type,
-                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.CreateInstance,
+                BindingFlags.Instance
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Public
+                    | BindingFlags.CreateInstance,
                 null,
                 args,
-                null);
+                null
+            );
         }
 
-        internal static Object CreatePublicInstance(Type type) {
+        internal static Object CreatePublicInstance(Type type)
+        {
             return Activator.CreateInstance(type);
         }
 
@@ -3404,7 +4354,6 @@ namespace System.Web {
         private static Hashtable s_factoryCache;
         private static bool s_initializedFactory;
         private static object s_factoryLock = new Object();
-
 #endif // DONTUSEFACTORYGENERATOR
 
         /*
@@ -3413,24 +4362,27 @@ namespace System.Web {
          * in cases where the number of different types to be created is well bounded.
          * Otherwise, we would create too much IL, which can bloat the process.
          */
-        internal static Object FastCreatePublicInstance(Type type) {
-
+        internal static Object FastCreatePublicInstance(Type type)
+        {
 #if DONTUSEFACTORYGENERATOR
             return CreatePublicInstance(type);
 #else
 
             // Only use the factory logic if the assembly is in the GAC, to avoid getting
             // assembly conflicts (VSWhidbey 405086)
-            if (!type.Assembly.GlobalAssemblyCache) {
+            if (!type.Assembly.GlobalAssemblyCache)
+            {
                 return CreatePublicInstance(type);
             }
 
             // Create the factory generator on demand
-            if (!s_initializedFactory) {
-
+            if (!s_initializedFactory)
+            {
                 // Devdiv 90810 - Synchronize to avoid race condition
-                lock (s_factoryLock) {
-                    if (!s_initializedFactory) {
+                lock (s_factoryLock)
+                {
+                    if (!s_initializedFactory)
+                    {
                         s_factoryGenerator = new FactoryGenerator();
 
                         // Create the factory cache
@@ -3444,9 +4396,12 @@ namespace System.Web {
             // First, check if it's cached
             IWebObjectFactory factory = (IWebObjectFactory)s_factoryCache[type];
 
-            if (factory == null) {
-
-                Debug.Trace("FastCreatePublicInstance", "Creating generator for type " + type.FullName);
+            if (factory == null)
+            {
+                Debug.Trace(
+                    "FastCreatePublicInstance",
+                    "Creating generator for type " + type.FullName
+                );
 
                 // Create the object factory
                 factory = s_factoryGenerator.CreateFactory(type);
@@ -3459,29 +4414,40 @@ namespace System.Web {
 #endif // DONTUSEFACTORYGENERATOR
         }
 
-        internal static Object CreatePublicInstance(Type type, Object[] args) {
+        internal static Object CreatePublicInstance(Type type, Object[] args)
+        {
             if (args == null)
                 return Activator.CreateInstance(type);
 
             return Activator.CreateInstance(type, args);
         }
 
-        static string GetCurrentUserName() {
-            try {
+        static string GetCurrentUserName()
+        {
+            try
+            {
                 return WindowsIdentity.GetCurrent().Name;
             }
-            catch {
+            catch
+            {
                 return null;
             }
         }
 
-        void RaiseShutdownWebEventOnce() {
-            if (!_shutdownWebEventRaised) {
-                lock (this) {
-                    if (!_shutdownWebEventRaised) {
+        void RaiseShutdownWebEventOnce()
+        {
+            if (!_shutdownWebEventRaised)
+            {
+                lock (this)
+                {
+                    if (!_shutdownWebEventRaised)
+                    {
                         // Raise Web Event
-                        WebBaseEvent.RaiseSystemEvent(this, WebEventCodes.ApplicationShutdown,
-                                WebApplicationLifetimeEvent.DetailCodeFromShutdownReason(ShutdownReason));
+                        WebBaseEvent.RaiseSystemEvent(
+                            this,
+                            WebEventCodes.ApplicationShutdown,
+                            WebApplicationLifetimeEvent.DetailCodeFromShutdownReason(ShutdownReason)
+                        );
 
                         _shutdownWebEventRaised = true;
                     }
@@ -3490,20 +4456,34 @@ namespace System.Web {
         }
 
         private static string _DefaultPhysicalPathOnMapPathFailure;
-        private void RelaxMapPathIfRequired() {
-            try {
+
+        private void RelaxMapPathIfRequired()
+        {
+            try
+            {
                 RuntimeConfig config = RuntimeConfig.GetAppConfig();
-                if (config != null && config.HttpRuntime != null && config.HttpRuntime.RelaxedUrlToFileSystemMapping) {
-                    _DefaultPhysicalPathOnMapPathFailure = Path.Combine(_appDomainAppPath, "NOT_A_VALID_FILESYSTEM_PATH");
+                if (
+                    config != null
+                    && config.HttpRuntime != null
+                    && config.HttpRuntime.RelaxedUrlToFileSystemMapping
+                )
+                {
+                    _DefaultPhysicalPathOnMapPathFailure = Path.Combine(
+                        _appDomainAppPath,
+                        "NOT_A_VALID_FILESYSTEM_PATH"
+                    );
                 }
-            } catch {}
-        }
-        internal static bool IsMapPathRelaxed {
-            get {
-                return _DefaultPhysicalPathOnMapPathFailure != null;
             }
+            catch { }
         }
-        internal static string GetRelaxedMapPathResult(string originalResult) {
+
+        internal static bool IsMapPathRelaxed
+        {
+            get { return _DefaultPhysicalPathOnMapPathFailure != null; }
+        }
+
+        internal static string GetRelaxedMapPathResult(string originalResult)
+        {
             if (!IsMapPathRelaxed) // Feature not enabled?
                 return originalResult;
 
@@ -3515,11 +4495,17 @@ namespace System.Web {
                 return _DefaultPhysicalPathOnMapPathFailure;
 
             // Final check: do the full check to ensure it is valid
-            try {
+            try
+            {
                 bool pathTooLong;
-                if (FileUtil.IsSuspiciousPhysicalPath(originalResult, out pathTooLong) || pathTooLong)
+                if (
+                    FileUtil.IsSuspiciousPhysicalPath(originalResult, out pathTooLong)
+                    || pathTooLong
+                )
                     return _DefaultPhysicalPathOnMapPathFailure;
-            } catch {
+            }
+            catch
+            {
                 return _DefaultPhysicalPathOnMapPathFailure;
             }
 
@@ -3528,9 +4514,8 @@ namespace System.Web {
         }
     }
 
-
-    public enum ApplicationShutdownReason {
-
+    public enum ApplicationShutdownReason
+    {
         None = 0,
 
         HostingEnvironment = 1,
@@ -3563,6 +4548,4 @@ namespace System.Web {
 
         BuildManagerChange = 15,
     };
-
-
 }

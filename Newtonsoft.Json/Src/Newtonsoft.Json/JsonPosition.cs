@@ -37,12 +37,32 @@ namespace Newtonsoft.Json
         None = 0,
         Object = 1,
         Array = 2,
-        Constructor = 3
+        Constructor = 3,
     }
 
     internal struct JsonPosition
     {
-        private static readonly char[] SpecialCharacters = { '.', ' ', '\'', '/', '"', '[', ']', '(', ')', '\t', '\n', '\r', '\f', '\b', '\\', '\u0085', '\u2028', '\u2029' };
+        private static readonly char[] SpecialCharacters =
+        {
+            '.',
+            ' ',
+            '\'',
+            '/',
+            '"',
+            '[',
+            ']',
+            '(',
+            ')',
+            '\t',
+            '\n',
+            '\r',
+            '\f',
+            '\b',
+            '\\',
+            '\u0085',
+            '\u2028',
+            '\u2029',
+        };
 
         internal JsonContainerType Type;
         internal int Position;
@@ -86,7 +106,16 @@ namespace Newtonsoft.Json
                             writer = new StringWriter(sb);
                         }
 
-                        JavaScriptUtils.WriteEscapedJavaScriptString(writer, propertyName, '\'', false, JavaScriptUtils.SingleQuoteCharEscapeFlags, StringEscapeHandling.Default, null, ref buffer);
+                        JavaScriptUtils.WriteEscapedJavaScriptString(
+                            writer,
+                            propertyName,
+                            '\'',
+                            false,
+                            JavaScriptUtils.SingleQuoteCharEscapeFlags,
+                            StringEscapeHandling.Default,
+                            null,
+                            ref buffer
+                        );
 
                         sb.Append(@"']");
                     }
@@ -114,7 +143,10 @@ namespace Newtonsoft.Json
             return (type == JsonContainerType.Array || type == JsonContainerType.Constructor);
         }
 
-        internal static string BuildPath(List<JsonPosition> positions, JsonPosition? currentPosition)
+        internal static string BuildPath(
+            List<JsonPosition> positions,
+            JsonPosition? currentPosition
+        )
         {
             int capacity = 0;
             if (positions != null)
@@ -166,7 +198,11 @@ namespace Newtonsoft.Json
 
             if (lineInfo != null && lineInfo.HasLineInfo())
             {
-                message += ", line {0}, position {1}".FormatWith(CultureInfo.InvariantCulture, lineInfo.LineNumber, lineInfo.LinePosition);
+                message += ", line {0}, position {1}".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    lineInfo.LineNumber,
+                    lineInfo.LinePosition
+                );
             }
 
             message += ".";

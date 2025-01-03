@@ -20,9 +20,9 @@ namespace System.Data.Metadata.Edm
 {
     internal interface IBaseList<T> : IList
     {
-        T this[string identity] { get;}
+        T this[string identity] { get; }
 
-        new T this[int index] { get;}
+        new T this[int index] { get; }
 
         int IndexOf(T item);
     }
@@ -31,13 +31,15 @@ namespace System.Data.Metadata.Edm
     /// <summary>
     /// Class to filter stuff out from a metadata collection
     /// </summary>
-    /* 
+    /*
 
 
 */
-    internal class FilteredReadOnlyMetadataCollection<TDerived, TBase> : ReadOnlyMetadataCollection<TDerived>, IBaseList<TBase>
-                where TDerived : TBase 
-                where TBase : MetadataItem
+    internal class FilteredReadOnlyMetadataCollection<TDerived, TBase>
+        : ReadOnlyMetadataCollection<TDerived>,
+            IBaseList<TBase>
+        where TDerived : TBase
+        where TBase : MetadataItem
     {
         #region Constructors
         /// <summary>
@@ -46,13 +48,19 @@ namespace System.Data.Metadata.Edm
         /// <param name="collection">The metadata collection to wrap</param>
         /// <exception cref="System.ArgumentNullException">Thrown if collection argument is null</exception>
         /// <param name="predicate">Predicate method which determines membership</param>
-        internal FilteredReadOnlyMetadataCollection(ReadOnlyMetadataCollection<TBase> collection, Predicate<TBase> predicate) : base(FilterCollection(collection, predicate))
+        internal FilteredReadOnlyMetadataCollection(
+            ReadOnlyMetadataCollection<TBase> collection,
+            Predicate<TBase> predicate
+        )
+            : base(FilterCollection(collection, predicate))
         {
             Debug.Assert(collection != null);
-            Debug.Assert(collection.IsReadOnly, "wrappers should only be created once loading is over, and this collection is still loading");
+            Debug.Assert(
+                collection.IsReadOnly,
+                "wrappers should only be created once loading is over, and this collection is still loading"
+            );
             _source = collection;
             _predicate = predicate;
-
         }
         #endregion
 
@@ -78,7 +86,7 @@ namespace System.Data.Metadata.Edm
                 TBase item = _source[identity];
                 if (_predicate(item))
                 {
-                    return (TDerived)item; 
+                    return (TDerived)item;
                 }
                 throw EntityUtil.ItemInvalidIdentity(identity, "identity");
             }
@@ -116,7 +124,14 @@ namespace System.Data.Metadata.Edm
         public override bool Contains(string identity)
         {
             TBase item;
-            if (_source.TryGetValue(identity, false/*ignoreCase*/, out item))
+            if (
+                _source.TryGetValue(
+                    identity,
+                    false /*ignoreCase*/
+                    ,
+                    out item
+                )
+            )
             {
                 return (_predicate(item));
             }
@@ -133,7 +148,7 @@ namespace System.Data.Metadata.Edm
         /// <exception cref="System.ArgumentNullException">if identity argument is null</exception>
         public override bool TryGetValue(string identity, bool ignoreCase, out TDerived item)
         {
-            item = null; 
+            item = null;
             TBase baseTypeItem;
             if (_source.TryGetValue(identity, ignoreCase, out baseTypeItem))
             {
@@ -146,7 +161,10 @@ namespace System.Data.Metadata.Edm
             return false;
         }
 
-        internal static List<TDerived> FilterCollection(ReadOnlyMetadataCollection<TBase> collection, Predicate<TBase> predicate)
+        internal static List<TDerived> FilterCollection(
+            ReadOnlyMetadataCollection<TBase> collection,
+            Predicate<TBase> predicate
+        )
         {
             List<TDerived> list = new List<TDerived>(collection.Count);
             foreach (TBase item in collection)
@@ -168,7 +186,14 @@ namespace System.Data.Metadata.Edm
         public override int IndexOf(TDerived value)
         {
             TBase item;
-            if (_source.TryGetValue(value.Identity, false /*ignoreCase*/, out item))
+            if (
+                _source.TryGetValue(
+                    value.Identity,
+                    false /*ignoreCase*/
+                    ,
+                    out item
+                )
+            )
             {
                 if (_predicate(item))
                 {
@@ -190,10 +215,7 @@ namespace System.Data.Metadata.Edm
 
         TBase IBaseList<TBase>.this[int index]
         {
-            get
-            {
-                return this[index];
-            }
+            get { return this[index]; }
         }
 
         /// <summary>

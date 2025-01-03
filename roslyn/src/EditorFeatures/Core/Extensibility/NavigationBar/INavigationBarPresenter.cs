@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor
             NavigationBarProjectItem? selectedProject,
             ImmutableArray<NavigationBarItem> typesWithMembers,
             NavigationBarItem? selectedType,
-            NavigationBarItem? selectedMember);
+            NavigationBarItem? selectedMember
+        );
 
         ITextView TryGetCurrentView();
 

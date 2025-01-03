@@ -8,9 +8,13 @@ public class ConstructorMapperTests : AutoMapperSpecBase
         {
             Value = value;
         }
+
         public string Value { get; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(_=> { });
+
+    protected override MapperConfiguration CreateConfiguration() => new(_ => { });
+
     [Fact]
-    public void Should_use_constructor() => Mapper.Map<Destination>("value").Value.ShouldBe("value");
+    public void Should_use_constructor() =>
+        Mapper.Map<Destination>("value").Value.ShouldBe("value");
 }

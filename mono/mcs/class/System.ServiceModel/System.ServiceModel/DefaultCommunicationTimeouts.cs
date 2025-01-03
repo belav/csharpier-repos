@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,31 +28,36 @@ using System;
 
 namespace System.ServiceModel
 {
-	internal class DefaultCommunicationTimeouts
-		: IDefaultCommunicationTimeouts
-	{
-		public static DefaultCommunicationTimeouts Instance =
-			new DefaultCommunicationTimeouts ();
+    internal class DefaultCommunicationTimeouts : IDefaultCommunicationTimeouts
+    {
+        public static DefaultCommunicationTimeouts Instance = new DefaultCommunicationTimeouts();
 
-		private DefaultCommunicationTimeouts ()
-		{
-			close = open = send = TimeSpan.FromMinutes (1);
-			receive = TimeSpan.FromMinutes (10);
-		}
+        private DefaultCommunicationTimeouts()
+        {
+            close = open = send = TimeSpan.FromMinutes(1);
+            receive = TimeSpan.FromMinutes(10);
+        }
 
-		readonly TimeSpan close, open, receive, send;
+        readonly TimeSpan close,
+            open,
+            receive,
+            send;
 
-		public TimeSpan CloseTimeout {
-			get { return close; }
-		}
-		public TimeSpan OpenTimeout {
-			get { return open; }
-		}
-		public TimeSpan ReceiveTimeout {
-			get { return receive; }
-		}
-		public TimeSpan SendTimeout {
-			get { return send; }
-		}
-	}
+        public TimeSpan CloseTimeout
+        {
+            get { return close; }
+        }
+        public TimeSpan OpenTimeout
+        {
+            get { return open; }
+        }
+        public TimeSpan ReceiveTimeout
+        {
+            get { return receive; }
+        }
+        public TimeSpan SendTimeout
+        {
+            get { return send; }
+        }
+    }
 }

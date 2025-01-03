@@ -8,9 +8,9 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
 using System.Data.Entity.Design.Common;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Entity.Design
 {
@@ -33,7 +33,13 @@ namespace System.Data.Entity.Design
         /// <param name="name">The pattern to use to select the appropriate name or null to not limit by name.</param>
         /// <param name="types">The type of objects to apply this filter to.</param>
         /// <param name="effect">The effect that this filter should have on the results.</param>
-        public EntityStoreSchemaFilterEntry(string catalog, string schema, string name, EntityStoreSchemaFilterObjectTypes types, EntityStoreSchemaFilterEffect effect)
+        public EntityStoreSchemaFilterEntry(
+            string catalog,
+            string schema,
+            string name,
+            EntityStoreSchemaFilterObjectTypes types,
+            EntityStoreSchemaFilterEffect effect
+        )
         {
             if (types == EntityStoreSchemaFilterObjectTypes.None)
             {
@@ -53,9 +59,13 @@ namespace System.Data.Entity.Design
         /// <param name="schema">The pattern to use to select the appropriate schema or null to not limit by schema.</param>
         /// <param name="name">The pattern to use to select the appropriate name or null to not limit by name.</param>
         public EntityStoreSchemaFilterEntry(string catalog, string schema, string name)
-            :this(catalog, schema, name, EntityStoreSchemaFilterObjectTypes.All, EntityStoreSchemaFilterEffect.Allow)
-        {
-        }
+            : this(
+                catalog,
+                schema,
+                name,
+                EntityStoreSchemaFilterObjectTypes.All,
+                EntityStoreSchemaFilterEffect.Allow
+            ) { }
 
         /// <summary>
         /// Gets the pattern that will be used to select the appropriate catalog.

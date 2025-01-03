@@ -9,7 +9,7 @@ namespace System.ServiceModel.Activities.Dispatcher
 
     //1) On Tx.Prepare
     //    Persist the instance.
-    //          When Persist completes Tx.Prepared called.  
+    //          When Persist completes Tx.Prepared called.
     //          When Persist fails Tx.ForceRollback called.
     //2) On Tx.Commit
     //     DurableInstance.OnTransactionCompleted().
@@ -17,26 +17,34 @@ namespace System.ServiceModel.Activities.Dispatcher
     //     DurableInstance.OnTransactionAborted()
     class TransactionContext : IEnlistmentNotification
     {
-        static AsyncCallback handleEndPrepare = Fx.ThunkCallback(new AsyncCallback(HandleEndPrepare));
+        static AsyncCallback handleEndPrepare = Fx.ThunkCallback(
+            new AsyncCallback(HandleEndPrepare)
+        );
         Transaction currentTransaction;
         WorkflowServiceInstance durableInstance;
 
-        public TransactionContext(WorkflowServiceInstance durableInstance, Transaction currentTransaction)
+        public TransactionContext(
+            WorkflowServiceInstance durableInstance,
+            Transaction currentTransaction
+        )
         {
-            Fx.Assert(durableInstance != null, "Null DurableInstance passed to TransactionContext.");
+            Fx.Assert(
+                durableInstance != null,
+                "Null DurableInstance passed to TransactionContext."
+            );
             Fx.Assert(currentTransaction != null, "Null Transaction passed to TransactionContext.");
 
             this.currentTransaction = currentTransaction.Clone();
             this.durableInstance = durableInstance;
-            this.currentTransaction.EnlistVolatile(this, EnlistmentOptions.EnlistDuringPrepareRequired);
+            this.currentTransaction.EnlistVolatile(
+                this,
+                EnlistmentOptions.EnlistDuringPrepareRequired
+            );
         }
 
         public Transaction CurrentTransaction
         {
-            get
-            {
-                return this.currentTransaction;
-            }
+            get { return this.currentTransaction; }
         }
 
         void IEnlistmentNotification.Commit(Enlistment enlistment)
@@ -48,7 +56,10 @@ namespace System.ServiceModel.Activities.Dispatcher
         void IEnlistmentNotification.InDoubt(Enlistment enlistment)
         {
             enlistment.Done();
-            Fx.Assert(this.currentTransaction.TransactionInformation.Status == TransactionStatus.InDoubt, "Transaction state should be InDoubt at this point");
+            Fx.Assert(
+                this.currentTransaction.TransactionInformation.Status == TransactionStatus.InDoubt,
+                "Transaction state should be InDoubt at this point"
+            );
             TransactionException exception = this.GetAbortedOrInDoubtTransactionException();
 
             Fx.Assert(exception != null, "Need a valid TransactionException at this point");
@@ -60,7 +71,11 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool success = false;
             try
             {
-                IAsyncResult result = new PrepareAsyncResult(this, TransactionContext.handleEndPrepare, preparingEnlistment);
+                IAsyncResult result = new PrepareAsyncResult(
+                    this,
+                    TransactionContext.handleEndPrepare,
+                    preparingEnlistment
+                );
                 if (result.CompletedSynchronously)
                 {
                     PrepareAsyncResult.End(result);
@@ -69,9 +84,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 success = true;
             }
             //we need to swollow the TransactionException as it could because another party aborting it
-            catch (TransactionException) 
-            {
-            }
+            catch (TransactionException) { }
             finally
             {
                 if (!success)
@@ -84,7 +97,10 @@ namespace System.ServiceModel.Activities.Dispatcher
         void IEnlistmentNotification.Rollback(Enlistment enlistment)
         {
             enlistment.Done();
-            Fx.Assert(this.currentTransaction.TransactionInformation.Status == TransactionStatus.Aborted, "Transaction state should be Aborted at this point");
+            Fx.Assert(
+                this.currentTransaction.TransactionInformation.Status == TransactionStatus.Aborted,
+                "Transaction state should be Aborted at this point"
+            );
             TransactionException exception = this.GetAbortedOrInDoubtTransactionException();
 
             Fx.Assert(exception != null, "Need a valid TransactionException at this point");
@@ -118,9 +134,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 success = true;
             }
             //we need to swollow the TransactionException as it could because another party aborting it
-            catch (TransactionException) 
-            {
-            }
+            catch (TransactionException) { }
             finally
             {
                 if (!success)
@@ -136,7 +150,11 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             readonly TransactionContext context;
 
-            public PrepareAsyncResult(TransactionContext context, AsyncCallback callback, object state)
+            public PrepareAsyncResult(
+                TransactionContext context,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.context = context;
@@ -144,7 +162,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                 IAsyncResult result = null;
                 using (PrepareTransactionalCall(this.context.currentTransaction))
                 {
-                    result = this.context.durableInstance.BeginPersist(TimeSpan.MaxValue, PrepareAsyncCompletion(PrepareAsyncResult.onEndPersist), this);
+                    result = this.context.durableInstance.BeginPersist(
+                        TimeSpan.MaxValue,
+                        PrepareAsyncCompletion(PrepareAsyncResult.onEndPersist),
+                        this
+                    );
                 }
                 if (SyncContinue(result))
                 {

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,34 +27,32 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms {
-	public class ConvertEventArgs : EventArgs {
-		private object	object_value;
-		private Type	desired_type;
+namespace System.Windows.Forms
+{
+    public class ConvertEventArgs : EventArgs
+    {
+        private object object_value;
+        private Type desired_type;
 
-		#region Public Constructors
-		public ConvertEventArgs(object value, Type desiredType) {
-			this.object_value=value;
-			this.desired_type=desiredType;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public ConvertEventArgs(object value, Type desiredType)
+        {
+            this.object_value = value;
+            this.desired_type = desiredType;
+        }
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
-		public Type DesiredType {
-			get {
-				return this.desired_type;
-			}
-		}
+        #region Public Instance Properties
+        public Type DesiredType
+        {
+            get { return this.desired_type; }
+        }
 
-		public object Value {
-			get {
-				return this.object_value;
-			}
-
-			set {
-				this.object_value=value;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        public object Value
+        {
+            get { return this.object_value; }
+            set { this.object_value = value; }
+        }
+        #endregion	// Public Instance Properties
+    }
 }

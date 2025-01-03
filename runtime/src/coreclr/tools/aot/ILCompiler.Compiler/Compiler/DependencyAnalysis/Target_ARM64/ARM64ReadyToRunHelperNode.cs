@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using ILCompiler.DependencyAnalysis.ARM64;
 using Internal.TypeSystem;
 
@@ -14,7 +13,11 @@ namespace ILCompiler.DependencyAnalysis
     /// </summary>
     public partial class ReadyToRunHelperNode
     {
-        protected override void EmitCode(NodeFactory factory, ref ARM64Emitter encoder, bool relocsOnly)
+        protected override void EmitCode(
+            NodeFactory factory,
+            ref ARM64Emitter encoder,
+            bool relocsOnly
+        )
         {
             switch (Id)
             {
@@ -30,13 +33,24 @@ namespace ILCompiler.DependencyAnalysis
                         int slot = 0;
                         if (!relocsOnly)
                         {
-                            slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, targetMethod, targetMethod.OwningType);
+                            slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(
+                                factory,
+                                targetMethod,
+                                targetMethod.OwningType
+                            );
                             Debug.Assert(slot != -1);
                         }
 
-                        encoder.EmitLDR(encoder.TargetRegister.IntraProcedureCallScratch1, encoder.TargetRegister.Arg0, 0);
-                        encoder.EmitLDR(encoder.TargetRegister.IntraProcedureCallScratch1, encoder.TargetRegister.IntraProcedureCallScratch1,
-                                        EETypeNode.GetVTableOffset(pointerSize) + (slot * pointerSize));
+                        encoder.EmitLDR(
+                            encoder.TargetRegister.IntraProcedureCallScratch1,
+                            encoder.TargetRegister.Arg0,
+                            0
+                        );
+                        encoder.EmitLDR(
+                            encoder.TargetRegister.IntraProcedureCallScratch1,
+                            encoder.TargetRegister.IntraProcedureCallScratch1,
+                            EETypeNode.GetVTableOffset(pointerSize) + (slot * pointerSize)
+                        );
                         encoder.EmitJMP(encoder.TargetRegister.IntraProcedureCallScratch1);
                     }
                     break;
@@ -45,8 +59,12 @@ namespace ILCompiler.DependencyAnalysis
                     {
                         MetadataType target = (MetadataType)Target;
 
-                        bool hasLazyStaticConstructor = factory.PreinitializationManager.HasLazyStaticConstructor(target);
-                        encoder.EmitMOV(encoder.TargetRegister.Result, factory.TypeNonGCStaticsSymbol(target));
+                        bool hasLazyStaticConstructor =
+                            factory.PreinitializationManager.HasLazyStaticConstructor(target);
+                        encoder.EmitMOV(
+                            encoder.TargetRegister.Result,
+                            factory.TypeNonGCStaticsSymbol(target)
+                        );
 
                         if (!hasLazyStaticConstructor)
                         {
@@ -55,15 +73,32 @@ namespace ILCompiler.DependencyAnalysis
                         else
                         {
                             // We need to trigger the cctor before returning the base. It is stored at the beginning of the non-GC statics region.
-                            encoder.EmitSUB(encoder.TargetRegister.Arg3, encoder.TargetRegister.Result, NonGCStaticsNode.GetClassConstructorContextSize(factory.Target));
-                            encoder.EmitLDR(encoder.TargetRegister.Arg2, encoder.TargetRegister.Arg3);
+                            encoder.EmitSUB(
+                                encoder.TargetRegister.Arg3,
+                                encoder.TargetRegister.Result,
+                                NonGCStaticsNode.GetClassConstructorContextSize(factory.Target)
+                            );
+                            encoder.EmitLDR(
+                                encoder.TargetRegister.Arg2,
+                                encoder.TargetRegister.Arg3
+                            );
                             encoder.EmitCMP(encoder.TargetRegister.Arg2, 0);
                             encoder.EmitRETIfEqual();
 
-                            encoder.EmitMOV(encoder.TargetRegister.Arg1, encoder.TargetRegister.Result);
-                            encoder.EmitMOV(encoder.TargetRegister.Arg0, encoder.TargetRegister.Arg3);
+                            encoder.EmitMOV(
+                                encoder.TargetRegister.Arg1,
+                                encoder.TargetRegister.Result
+                            );
+                            encoder.EmitMOV(
+                                encoder.TargetRegister.Arg0,
+                                encoder.TargetRegister.Arg3
+                            );
 
-                            encoder.EmitJMP(factory.HelperEntrypoint(HelperEntrypoint.EnsureClassConstructorRunAndReturnNonGCStaticBase));
+                            encoder.EmitJMP(
+                                factory.HelperEntrypoint(
+                                    HelperEntrypoint.EnsureClassConstructorRunAndReturnNonGCStaticBase
+                                )
+                            );
                         }
                     }
                     break;
@@ -86,12 +121,25 @@ namespace ILCompiler.DependencyAnalysis
                                 // Second arg: ~0 (index of inlined storage)
                                 encoder.EmitMVN(encoder.TargetRegister.Arg1, 0);
 
-                                encoder.EmitMOV(encoder.TargetRegister.Arg2, factory.TypeNonGCStaticsSymbol(target));
-                                encoder.EmitSUB(encoder.TargetRegister.Arg2, NonGCStaticsNode.GetClassConstructorContextSize(factory.Target));
-                                encoder.EmitLDR(encoder.TargetRegister.Arg3, encoder.TargetRegister.Arg2);
+                                encoder.EmitMOV(
+                                    encoder.TargetRegister.Arg2,
+                                    factory.TypeNonGCStaticsSymbol(target)
+                                );
+                                encoder.EmitSUB(
+                                    encoder.TargetRegister.Arg2,
+                                    NonGCStaticsNode.GetClassConstructorContextSize(factory.Target)
+                                );
+                                encoder.EmitLDR(
+                                    encoder.TargetRegister.Arg3,
+                                    encoder.TargetRegister.Arg2
+                                );
                                 encoder.EmitCMP(encoder.TargetRegister.Arg3, 0);
 
-                                encoder.EmitJNE(factory.HelperEntrypoint(HelperEntrypoint.EnsureClassConstructorRunAndReturnThreadStaticBase));
+                                encoder.EmitJNE(
+                                    factory.HelperEntrypoint(
+                                        HelperEntrypoint.EnsureClassConstructorRunAndReturnThreadStaticBase
+                                    )
+                                );
                                 EmitInlineTLSAccess(factory, ref encoder);
                             }
                         }
@@ -102,26 +150,48 @@ namespace ILCompiler.DependencyAnalysis
                             // First arg: address of the TypeManager slot that provides the helper with
                             // information about module index and the type manager instance (which is used
                             // for initialization on first access).
-                            encoder.EmitLDR(encoder.TargetRegister.Arg0, encoder.TargetRegister.Arg2);
+                            encoder.EmitLDR(
+                                encoder.TargetRegister.Arg0,
+                                encoder.TargetRegister.Arg2
+                            );
 
                             // Second arg: index of the type in the ThreadStatic section of the modules
-                            encoder.EmitLDR(encoder.TargetRegister.Arg1, encoder.TargetRegister.Arg2, factory.Target.PointerSize);
+                            encoder.EmitLDR(
+                                encoder.TargetRegister.Arg1,
+                                encoder.TargetRegister.Arg2,
+                                factory.Target.PointerSize
+                            );
 
-                            ISymbolNode helper = factory.HelperEntrypoint(HelperEntrypoint.GetThreadStaticBaseForType);
+                            ISymbolNode helper = factory.HelperEntrypoint(
+                                HelperEntrypoint.GetThreadStaticBaseForType
+                            );
                             if (!factory.PreinitializationManager.HasLazyStaticConstructor(target))
                             {
                                 encoder.EmitJMP(helper);
                             }
                             else
                             {
-                                encoder.EmitMOV(encoder.TargetRegister.Arg2, factory.TypeNonGCStaticsSymbol(target));
-                                encoder.EmitSUB(encoder.TargetRegister.Arg2, NonGCStaticsNode.GetClassConstructorContextSize(factory.Target));
+                                encoder.EmitMOV(
+                                    encoder.TargetRegister.Arg2,
+                                    factory.TypeNonGCStaticsSymbol(target)
+                                );
+                                encoder.EmitSUB(
+                                    encoder.TargetRegister.Arg2,
+                                    NonGCStaticsNode.GetClassConstructorContextSize(factory.Target)
+                                );
 
-                                encoder.EmitLDR(encoder.TargetRegister.Arg3, encoder.TargetRegister.Arg2);
+                                encoder.EmitLDR(
+                                    encoder.TargetRegister.Arg3,
+                                    encoder.TargetRegister.Arg2
+                                );
                                 encoder.EmitCMP(encoder.TargetRegister.Arg3, 0);
                                 encoder.EmitJE(helper);
 
-                                encoder.EmitJMP(factory.HelperEntrypoint(HelperEntrypoint.EnsureClassConstructorRunAndReturnThreadStaticBase));
+                                encoder.EmitJMP(
+                                    factory.HelperEntrypoint(
+                                        HelperEntrypoint.EnsureClassConstructorRunAndReturnThreadStaticBase
+                                    )
+                                );
                             }
                         }
                     }
@@ -131,8 +201,14 @@ namespace ILCompiler.DependencyAnalysis
                     {
                         MetadataType target = (MetadataType)Target;
 
-                        encoder.EmitMOV(encoder.TargetRegister.Result, factory.TypeGCStaticsSymbol(target));
-                        encoder.EmitLDR(encoder.TargetRegister.Result, encoder.TargetRegister.Result);
+                        encoder.EmitMOV(
+                            encoder.TargetRegister.Result,
+                            factory.TypeGCStaticsSymbol(target)
+                        );
+                        encoder.EmitLDR(
+                            encoder.TargetRegister.Result,
+                            encoder.TargetRegister.Result
+                        );
 
                         if (!factory.PreinitializationManager.HasLazyStaticConstructor(target))
                         {
@@ -141,16 +217,35 @@ namespace ILCompiler.DependencyAnalysis
                         else
                         {
                             // We need to trigger the cctor before returning the base. It is stored at the beginning of the non-GC statics region.
-                            encoder.EmitMOV(encoder.TargetRegister.Arg2, factory.TypeNonGCStaticsSymbol(target));
-                            encoder.EmitSUB(encoder.TargetRegister.Arg2, NonGCStaticsNode.GetClassConstructorContextSize(factory.Target));
-                            encoder.EmitLDR(encoder.TargetRegister.Arg3, encoder.TargetRegister.Arg2);
+                            encoder.EmitMOV(
+                                encoder.TargetRegister.Arg2,
+                                factory.TypeNonGCStaticsSymbol(target)
+                            );
+                            encoder.EmitSUB(
+                                encoder.TargetRegister.Arg2,
+                                NonGCStaticsNode.GetClassConstructorContextSize(factory.Target)
+                            );
+                            encoder.EmitLDR(
+                                encoder.TargetRegister.Arg3,
+                                encoder.TargetRegister.Arg2
+                            );
                             encoder.EmitCMP(encoder.TargetRegister.Arg3, 0);
                             encoder.EmitRETIfEqual();
 
-                            encoder.EmitMOV(encoder.TargetRegister.Arg1, encoder.TargetRegister.Result);
-                            encoder.EmitMOV(encoder.TargetRegister.Arg0, encoder.TargetRegister.Arg2);
+                            encoder.EmitMOV(
+                                encoder.TargetRegister.Arg1,
+                                encoder.TargetRegister.Result
+                            );
+                            encoder.EmitMOV(
+                                encoder.TargetRegister.Arg0,
+                                encoder.TargetRegister.Arg2
+                            );
 
-                            encoder.EmitJMP(factory.HelperEntrypoint(HelperEntrypoint.EnsureClassConstructorRunAndReturnGCStaticBase));
+                            encoder.EmitJMP(
+                                factory.HelperEntrypoint(
+                                    HelperEntrypoint.EnsureClassConstructorRunAndReturnGCStaticBase
+                                )
+                            );
                         }
                     }
                     break;
@@ -163,19 +258,33 @@ namespace ILCompiler.DependencyAnalysis
                         {
                             Debug.Assert(!target.TargetMethod.CanMethodBeInSealedVTable());
 
-                            encoder.EmitLDR(encoder.TargetRegister.Arg2, encoder.TargetRegister.Arg1);
+                            encoder.EmitLDR(
+                                encoder.TargetRegister.Arg2,
+                                encoder.TargetRegister.Arg1
+                            );
 
                             int slot = 0;
                             if (!relocsOnly)
-                                slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, target.TargetMethod, target.TargetMethod.OwningType);
+                                slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(
+                                    factory,
+                                    target.TargetMethod,
+                                    target.TargetMethod.OwningType
+                                );
 
                             Debug.Assert(slot != -1);
-                            encoder.EmitLDR(encoder.TargetRegister.Arg2, encoder.TargetRegister.Arg2,
-                                            EETypeNode.GetVTableOffset(factory.Target.PointerSize) + (slot * factory.Target.PointerSize));
+                            encoder.EmitLDR(
+                                encoder.TargetRegister.Arg2,
+                                encoder.TargetRegister.Arg2,
+                                EETypeNode.GetVTableOffset(factory.Target.PointerSize)
+                                    + (slot * factory.Target.PointerSize)
+                            );
                         }
                         else
                         {
-                            encoder.EmitMOV(encoder.TargetRegister.Arg2, target.GetTargetNode(factory));
+                            encoder.EmitMOV(
+                                encoder.TargetRegister.Arg2,
+                                target.GetTargetNode(factory)
+                            );
                         }
 
                         if (target.Thunk != null)
@@ -200,7 +309,10 @@ namespace ILCompiler.DependencyAnalysis
                             // Not tested
                             encoder.EmitINT3();
 
-                            encoder.EmitMOV(encoder.TargetRegister.Arg1, factory.InterfaceDispatchCell(targetMethod));
+                            encoder.EmitMOV(
+                                encoder.TargetRegister.Arg1,
+                                factory.InterfaceDispatchCell(targetMethod)
+                            );
                             encoder.EmitJMP(factory.ExternSymbol("RhpResolveInterfaceMethod"));
                         }
                         else
@@ -208,19 +320,33 @@ namespace ILCompiler.DependencyAnalysis
                             if (relocsOnly)
                                 break;
 
-                            encoder.EmitLDR(encoder.TargetRegister.Result, encoder.TargetRegister.Arg0);
+                            encoder.EmitLDR(
+                                encoder.TargetRegister.Result,
+                                encoder.TargetRegister.Arg0
+                            );
 
                             Debug.Assert(!targetMethod.CanMethodBeInSealedVTable());
 
-                            int slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, targetMethod, targetMethod.OwningType);
+                            int slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(
+                                factory,
+                                targetMethod,
+                                targetMethod.OwningType
+                            );
                             Debug.Assert(slot != -1);
-                            encoder.EmitLDR(encoder.TargetRegister.Result, encoder.TargetRegister.Result,
-                                            ((short)(EETypeNode.GetVTableOffset(factory.Target.PointerSize) + (slot * factory.Target.PointerSize))));
+                            encoder.EmitLDR(
+                                encoder.TargetRegister.Result,
+                                encoder.TargetRegister.Result,
+                                (
+                                    (short)(
+                                        EETypeNode.GetVTableOffset(factory.Target.PointerSize)
+                                        + (slot * factory.Target.PointerSize)
+                                    )
+                                )
+                            );
                             encoder.EmitRET();
                         }
                     }
                     break;
-
 
                 default:
                     throw new NotImplementedException();
@@ -231,7 +357,9 @@ namespace ILCompiler.DependencyAnalysis
         // may trash volatile registers. (there are calls to the slow helper and possibly to the platform's TLS support)
         private static void EmitInlineTLSAccess(NodeFactory factory, ref ARM64Emitter encoder)
         {
-            ISymbolNode getInlinedThreadStaticBaseSlow = factory.HelperEntrypoint(HelperEntrypoint.GetInlinedThreadStaticBaseSlow);
+            ISymbolNode getInlinedThreadStaticBaseSlow = factory.HelperEntrypoint(
+                HelperEntrypoint.GetInlinedThreadStaticBaseSlow
+            );
             ISymbolNode tlsRoot = factory.TlsRoot;
             // IsSingleFileCompilation is not enough to guarantee that we can use "Initial Executable" optimizations.
             // we need a special compiler flag analogous to /GA. Just assume "false" for now.
@@ -246,11 +374,17 @@ namespace ILCompiler.DependencyAnalysis
                     encoder.Builder.EmitUInt(0xd53bd040);
 
                     // add  x0, x0, #:tprel_hi12:tlsRoot, lsl #12
-                    encoder.Builder.EmitReloc(tlsRoot, RelocType.IMAGE_REL_AARCH64_TLSLE_ADD_TPREL_HI12);
+                    encoder.Builder.EmitReloc(
+                        tlsRoot,
+                        RelocType.IMAGE_REL_AARCH64_TLSLE_ADD_TPREL_HI12
+                    );
                     encoder.Builder.EmitUInt(0x91400000);
 
                     // add  x1, x0, #:tprel_lo12_nc:tlsRoot, lsl #0
-                    encoder.Builder.EmitReloc(tlsRoot, RelocType.IMAGE_REL_AARCH64_TLSLE_ADD_TPREL_LO12_NC);
+                    encoder.Builder.EmitReloc(
+                        tlsRoot,
+                        RelocType.IMAGE_REL_AARCH64_TLSLE_ADD_TPREL_LO12_NC
+                    );
                     encoder.Builder.EmitUInt(0x91000001);
                 }
                 else
@@ -264,15 +398,24 @@ namespace ILCompiler.DependencyAnalysis
                     encoder.Builder.EmitUInt(0xd53bd041);
 
                     // adrp    x0, :tlsdesc:tlsRoot
-                    encoder.Builder.EmitReloc(tlsRoot, RelocType.IMAGE_REL_AARCH64_TLSDESC_ADR_PAGE21);
+                    encoder.Builder.EmitReloc(
+                        tlsRoot,
+                        RelocType.IMAGE_REL_AARCH64_TLSDESC_ADR_PAGE21
+                    );
                     encoder.Builder.EmitUInt(0x90000000);
 
                     // ldr     x2, [x0, #:tlsdesc_lo12:tlsRoot]
-                    encoder.Builder.EmitReloc(tlsRoot, RelocType.IMAGE_REL_AARCH64_TLSDESC_LD64_LO12);
+                    encoder.Builder.EmitReloc(
+                        tlsRoot,
+                        RelocType.IMAGE_REL_AARCH64_TLSDESC_LD64_LO12
+                    );
                     encoder.Builder.EmitUInt(0xf9400002);
 
                     // add     x0, x0, :tlsdesc_lo12:tlsRoot
-                    encoder.Builder.EmitReloc(tlsRoot, RelocType.IMAGE_REL_AARCH64_TLSDESC_ADD_LO12);
+                    encoder.Builder.EmitReloc(
+                        tlsRoot,
+                        RelocType.IMAGE_REL_AARCH64_TLSDESC_ADD_LO12
+                    );
                     encoder.Builder.EmitUInt(0x91000000);
 
                     // blr     :tlsdesc_call:tlsRoot:x2

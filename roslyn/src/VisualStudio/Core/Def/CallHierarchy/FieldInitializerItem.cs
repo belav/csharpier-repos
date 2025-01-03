@@ -17,7 +17,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
         private readonly string _name;
         private readonly string _sortText;
 
-        public FieldInitializerItem(string name, string sortText, ImageSource displayGlyph, IEnumerable<CallHierarchyDetail> details)
+        public FieldInitializerItem(
+            string name,
+            string sortText,
+            ImageSource displayGlyph,
+            IEnumerable<CallHierarchyDetail> details
+        )
         {
             _name = name;
             _sortText = sortText;

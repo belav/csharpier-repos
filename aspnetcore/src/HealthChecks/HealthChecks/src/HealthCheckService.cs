@@ -39,7 +39,11 @@ public abstract class HealthCheckService
     /// A <see cref="Task{T}"/> which will complete when all the health checks have been run,
     /// yielding a <see cref="HealthReport"/> containing the results.
     /// </returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public Task<HealthReport> CheckHealthAsync(CancellationToken cancellationToken = default)
     {
         return CheckHealthAsync(predicate: null, cancellationToken);
@@ -56,8 +60,13 @@ public abstract class HealthCheckService
     /// A <see cref="Task{T}"/> which will complete when all the health checks have been run,
     /// yielding a <see cref="HealthReport"/> containing the results.
     /// </returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public abstract Task<HealthReport> CheckHealthAsync(
         Func<HealthCheckRegistration, bool>? predicate,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 }

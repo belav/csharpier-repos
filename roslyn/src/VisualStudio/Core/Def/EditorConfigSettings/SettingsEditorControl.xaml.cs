@@ -37,15 +37,17 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
         public static string AnalyzersTabTitle => ServicesVSResources.Analyzers;
         public UserControl AnalyzersControl { get; }
 
-        public SettingsEditorControl(ISettingsEditorView whitespaceView,
-                                     ISettingsEditorView codeStyleView,
-                                     ISettingsEditorView namingStyleView,
-                                     ISettingsEditorView analyzerView,
-                                     Workspace workspace,
-                                     string filepath,
-                                     IThreadingContext threadingContext,
-                                     IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
-                                     IVsTextLines textLines)
+        public SettingsEditorControl(
+            ISettingsEditorView whitespaceView,
+            ISettingsEditorView codeStyleView,
+            ISettingsEditorView namingStyleView,
+            ISettingsEditorView analyzerView,
+            Workspace workspace,
+            string filepath,
+            IThreadingContext threadingContext,
+            IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
+            IVsTextLines textLines
+        )
         {
             DataContext = this;
             _workspace = workspace;
@@ -58,13 +60,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             NamingStyleControl = namingStyleView.SettingControl;
             AnalyzersControl = analyzerView.SettingControl;
 
-            _views =
-            [
-                whitespaceView,
-                codeStyleView,
-                namingStyleView,
-                analyzerView
-            ];
+            _views = [whitespaceView, codeStyleView, namingStyleView, analyzerView];
 
             _tableControls = _views.SelectAsArray(view => view.TableControl).ToArray();
 
@@ -81,8 +77,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             }
 
             var solution = _workspace.CurrentSolution;
-            var analyzerConfigDocument = solution.Projects
-                .Select(p => p.TryGetExistingAnalyzerConfigDocumentAtPath(_filepath)).FirstOrDefault();
+            var analyzerConfigDocument = solution
+                .Projects.Select(p => p.TryGetExistingAnalyzerConfigDocumentAtPath(_filepath))
+                .FirstOrDefault();
             if (analyzerConfigDocument is null)
             {
                 return;
@@ -90,12 +87,15 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 
             _threadingContext.JoinableTaskFactory.Run(async () =>
             {
-                var originalText = await analyzerConfigDocument.GetValueTextAsync(default).ConfigureAwait(false);
+                var originalText = await analyzerConfigDocument
+                    .GetValueTextAsync(default)
+                    .ConfigureAwait(false);
                 var updatedText = originalText;
                 foreach (var view in _views)
                 {
                     // Get any changes for the editors. This will return the source text if there are no changes.
-                    updatedText = await view.UpdateEditorConfigAsync(updatedText).ConfigureAwait(false);
+                    updatedText = await view.UpdateEditorConfigAsync(updatedText)
+                        .ConfigureAwait(false);
                 }
 
                 // Save the updates if they are different from what is currently saved
@@ -128,8 +128,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                     return;
                 }
 
-                if (GetTabItem(previousTabItem.Tag) is ContentPresenter prevFrame &&
-                    GetTabItem(selectedTabItem.Tag) is ContentPresenter currentFrame)
+                if (
+                    GetTabItem(previousTabItem.Tag) is ContentPresenter prevFrame
+                    && GetTabItem(selectedTabItem.Tag) is ContentPresenter currentFrame
+                )
                 {
                     prevFrame.Visibility = Visibility.Hidden;
                     currentFrame.Visibility = Visibility.Visible;

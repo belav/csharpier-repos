@@ -30,7 +30,8 @@ namespace System.Formats.Asn1
 
             return PushTag(
                 tag?.AsConstructed() ?? Asn1Tag.ConstructedOctetString,
-                UniversalTagNumber.OctetString);
+                UniversalTagNumber.OctetString
+            );
         }
 
         /// <summary>
@@ -56,7 +57,10 @@ namespace System.Formats.Asn1
         public void PopOctetString(Asn1Tag? tag = default)
         {
             CheckUniversalTag(tag, UniversalTagNumber.OctetString);
-            PopTag(tag?.AsConstructed() ?? Asn1Tag.ConstructedOctetString, UniversalTagNumber.OctetString);
+            PopTag(
+                tag?.AsConstructed() ?? Asn1Tag.ConstructedOctetString,
+                UniversalTagNumber.OctetString
+            );
         }
 
         /// <summary>
@@ -108,14 +112,23 @@ namespace System.Formats.Asn1
             WriteTag(tag.AsConstructed());
             WriteLength(-1);
 
-            int fullSegments = Math.DivRem(payload.Length, MaxCERSegmentSize, out int lastSegmentSize);
+            int fullSegments = Math.DivRem(
+                payload.Length,
+                MaxCERSegmentSize,
+                out int lastSegmentSize
+            );
 
             // The tag size is 1 byte.
             // The length will always be encoded as 82 03 E8 (3 bytes)
             // And 1000 content octets (by T-REC-X.690-201508 sec 9.2)
             const int FullSegmentEncodedSize = 1004;
             Debug.Assert(
-                FullSegmentEncodedSize == 1 + 1 + MaxCERSegmentSize + GetEncodedLengthSubsequentByteCount(MaxCERSegmentSize));
+                FullSegmentEncodedSize
+                    == 1
+                        + 1
+                        + MaxCERSegmentSize
+                        + GetEncodedLengthSubsequentByteCount(MaxCERSegmentSize)
+            );
 
             int remainingEncodedSize;
 
@@ -126,7 +139,8 @@ namespace System.Formats.Asn1
             else
             {
                 // One byte of tag, and minimum one byte of length.
-                remainingEncodedSize = 2 + lastSegmentSize + GetEncodedLengthSubsequentByteCount(lastSegmentSize);
+                remainingEncodedSize =
+                    2 + lastSegmentSize + GetEncodedLengthSubsequentByteCount(lastSegmentSize);
             }
 
             // Reduce the number of copies by pre-calculating the size.
@@ -162,8 +176,14 @@ namespace System.Formats.Asn1
 
             WriteEndOfContents();
 
-            Debug.Assert(_offset - savedOffset == expectedSize, $"expected size was {expectedSize}, actual was {_offset - savedOffset}");
-            Debug.Assert(_buffer == ensureNoExtraCopy, $"_buffer was replaced during {nameof(WriteConstructedCerOctetString)}");
+            Debug.Assert(
+                _offset - savedOffset == expectedSize,
+                $"expected size was {expectedSize}, actual was {_offset - savedOffset}"
+            );
+            Debug.Assert(
+                _buffer == ensureNoExtraCopy,
+                $"_buffer was replaced during {nameof(WriteConstructedCerOctetString)}"
+            );
         }
     }
 }

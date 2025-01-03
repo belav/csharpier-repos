@@ -17,8 +17,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 public class GlobbingUrlBuilder
 {
     // Valid whitespace characters defined by the HTML5 spec.
-    private static readonly char[] ValidAttributeWhitespaceChars =
-        new[] { '\t', '\n', '\u000C', '\r', ' ' };
+    private static readonly char[] ValidAttributeWhitespaceChars = new[]
+    {
+        '\t',
+        '\n',
+        '\u000C',
+        '\r',
+        ' ',
+    };
     private static readonly PathComparer DefaultPathComparer = new PathComparer();
     private static readonly char[] PatternSeparator = new[] { ',' };
     private static readonly char[] PathSeparator = new[] { '/' };
@@ -30,7 +36,11 @@ public class GlobbingUrlBuilder
     /// <param name="fileProvider">The file provider.</param>
     /// <param name="cache">The cache.</param>
     /// <param name="requestPathBase">The request path base.</param>
-    public GlobbingUrlBuilder(IFileProvider fileProvider, IMemoryCache cache, PathString requestPathBase)
+    public GlobbingUrlBuilder(
+        IFileProvider fileProvider,
+        IMemoryCache cache,
+        PathString requestPathBase
+    )
     {
         ArgumentNullException.ThrowIfNull(fileProvider);
         ArgumentNullException.ThrowIfNull(cache);
@@ -38,7 +48,11 @@ public class GlobbingUrlBuilder
         FileProvider = fileProvider;
         Cache = cache;
         RequestPathBase = requestPathBase;
-        _baseGlobbingDirectory = new FileProviderGlobbingDirectory(fileProvider, fileInfo: null, parent: null);
+        _baseGlobbingDirectory = new FileProviderGlobbingDirectory(
+            fileProvider,
+            fileInfo: null,
+            parent: null
+        );
     }
 
     /// <summary>
@@ -69,7 +83,8 @@ public class GlobbingUrlBuilder
     public virtual IReadOnlyList<string> BuildUrlList(
         [StringSyntax(StringSyntaxAttribute.Uri)] string staticUrl,
         string includePattern,
-        string excludePattern)
+        string excludePattern
+    )
     {
         // Get urls that match the globbing patterns specified
         var globbedUrls = ExpandGlobbedUrl(includePattern, excludePattern);
@@ -80,10 +95,7 @@ public class GlobbingUrlBuilder
         }
 
         // The staticUrl always appears first in the sequence.
-        var urls = new List<string>(1 + globbedUrls.Count)
-            {
-                staticUrl
-            };
+        var urls = new List<string>(1 + globbedUrls.Count) { staticUrl };
 
         for (var i = 0; i < globbedUrls.Count; i++)
         {
@@ -141,10 +153,7 @@ public class GlobbingUrlBuilder
         var (matchedUrls, sizeInBytes) = FindFiles(matcher);
         options.SetSize(sizeInBytes);
 
-        return Cache.Set(
-            cacheKey,
-            matchedUrls,
-            options);
+        return Cache.Set(cacheKey, matchedUrls, options);
     }
 
     private (List<string> matchedUrls, long sizeInBytes) FindFiles(Matcher matcher)
@@ -215,7 +224,14 @@ public class GlobbingUrlBuilder
                 if (xExtIndex >= 0 && yExtIndex >= 0)
                 {
                     var length = x.Length - xExtIndex;
-                    return string.Compare(x, xExtIndex, y, yExtIndex, length, StringComparison.Ordinal);
+                    return string.Compare(
+                        x,
+                        xExtIndex,
+                        y,
+                        yExtIndex,
+                        length,
+                        StringComparison.Ordinal
+                    );
                 }
 
                 return xExtIndex - yExtIndex;
@@ -249,7 +265,8 @@ public class GlobbingUrlBuilder
                     ySegment.Buffer,
                     ySegment.Offset,
                     length,
-                    StringComparison.Ordinal);
+                    StringComparison.Ordinal
+                );
             }
 
             if (TryGetNextSegment(ref yEnumerator, out _))
@@ -264,7 +281,10 @@ public class GlobbingUrlBuilder
             }
         }
 
-        private static bool TryGetNextSegment(ref StringTokenizer.Enumerator enumerator, out StringSegment segment)
+        private static bool TryGetNextSegment(
+            ref StringTokenizer.Enumerator enumerator,
+            out StringSegment segment
+        )
         {
             while (enumerator.MoveNext())
             {
@@ -292,8 +312,10 @@ public class GlobbingUrlBuilder
         {
             value = new StringSegment(value.Buffer, value.Offset + 2, value.Length - 2);
         }
-        else if (value.StartsWith("/", StringComparison.Ordinal) ||
-            value.StartsWith("\\", StringComparison.Ordinal))
+        else if (
+            value.StartsWith("/", StringComparison.Ordinal)
+            || value.StartsWith("\\", StringComparison.Ordinal)
+        )
         {
             // Trim the leading slash as the matcher runs from the provided root only anyway
             value = new StringSegment(value.Buffer, value.Offset + 1, value.Length - 1);
@@ -349,8 +371,8 @@ public class GlobbingUrlBuilder
 
         public bool Equals(GlobbingUrlKey other)
         {
-            return string.Equals(Include, other.Include, StringComparison.Ordinal) &&
-                string.Equals(Exclude, other.Exclude, StringComparison.Ordinal);
+            return string.Equals(Include, other.Include, StringComparison.Ordinal)
+                && string.Equals(Exclude, other.Exclude, StringComparison.Ordinal);
         }
 
         public override int GetHashCode()

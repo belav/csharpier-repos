@@ -18,8 +18,8 @@ namespace System.Linq.Parallel
     /// Operator that yields the union of two data sources.
     /// </summary>
     /// <typeparam name="TInputOutput"></typeparam>
-    internal sealed class UnionQueryOperator<TInputOutput> :
-        BinaryQueryOperator<TInputOutput, TInputOutput, TInputOutput>
+    internal sealed class UnionQueryOperator<TInputOutput>
+        : BinaryQueryOperator<TInputOutput, TInputOutput, TInputOutput>
     {
         private readonly IEqualityComparer<TInputOutput>? _comparer; // An equality comparer.
 
@@ -27,7 +27,11 @@ namespace System.Linq.Parallel
         // Constructs a new union operator.
         //
 
-        internal UnionQueryOperator(ParallelQuery<TInputOutput> left, ParallelQuery<TInputOutput> right, IEqualityComparer<TInputOutput>? comparer)
+        internal UnionQueryOperator(
+            ParallelQuery<TInputOutput> left,
+            ParallelQuery<TInputOutput> right,
+            IEqualityComparer<TInputOutput>? comparer
+        )
             : base(left, right)
         {
             Debug.Assert(left != null && right != null, "child data sources cannot be null");
@@ -42,7 +46,9 @@ namespace System.Linq.Parallel
         //
 
         internal override QueryResults<TInputOutput> Open(
-            QuerySettings settings, bool preferStriping)
+            QuerySettings settings,
+            bool preferStriping
+        )
         {
             // We just open our child operators, left and then right.  Do not propagate the preferStriping value, but
             // instead explicitly set it to false. Regardless of whether the parent prefers striping or range
@@ -50,12 +56,22 @@ namespace System.Linq.Parallel
             QueryResults<TInputOutput> leftChildResults = LeftChild.Open(settings, false);
             QueryResults<TInputOutput> rightChildResults = RightChild.Open(settings, false);
 
-            return new BinaryQueryOperatorResults(leftChildResults, rightChildResults, this, settings, false);
+            return new BinaryQueryOperatorResults(
+                leftChildResults,
+                rightChildResults,
+                this,
+                settings,
+                false
+            );
         }
 
         public override void WrapPartitionedStream<TLeftKey, TRightKey>(
-            PartitionedStream<TInputOutput, TLeftKey> leftStream, PartitionedStream<TInputOutput, TRightKey> rightStream,
-            IPartitionedStreamRecipient<TInputOutput> outputRecipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TInputOutput, TLeftKey> leftStream,
+            PartitionedStream<TInputOutput, TRightKey> rightStream,
+            IPartitionedStreamRecipient<TInputOutput> outputRecipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             Debug.Assert(leftStream.PartitionCount == rightStream.PartitionCount);
             int partitionCount = leftStream.PartitionCount;
@@ -64,21 +80,53 @@ namespace System.Linq.Parallel
 
             if (LeftChild.OutputOrdered)
             {
-                PartitionedStream<Pair<TInputOutput, NoKeyMemoizationRequired>, TLeftKey> leftHashStream =
-                    ExchangeUtilities.HashRepartitionOrdered<TInputOutput, NoKeyMemoizationRequired, TLeftKey>(
-                        leftStream, null, null, _comparer, settings.CancellationState.MergedCancellationToken);
+                PartitionedStream<
+                    Pair<TInputOutput, NoKeyMemoizationRequired>,
+                    TLeftKey
+                > leftHashStream = ExchangeUtilities.HashRepartitionOrdered<
+                    TInputOutput,
+                    NoKeyMemoizationRequired,
+                    TLeftKey
+                >(
+                    leftStream,
+                    null,
+                    null,
+                    _comparer,
+                    settings.CancellationState.MergedCancellationToken
+                );
 
                 WrapPartitionedStreamFixedLeftType<TLeftKey, TRightKey>(
-                    leftHashStream, rightStream, outputRecipient, partitionCount, settings.CancellationState.MergedCancellationToken);
+                    leftHashStream,
+                    rightStream,
+                    outputRecipient,
+                    partitionCount,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
             else
             {
-                PartitionedStream<Pair<TInputOutput, NoKeyMemoizationRequired>, int> leftHashStream =
-                    ExchangeUtilities.HashRepartition<TInputOutput, NoKeyMemoizationRequired, TLeftKey>(
-                        leftStream, null, null, _comparer, settings.CancellationState.MergedCancellationToken);
+                PartitionedStream<
+                    Pair<TInputOutput, NoKeyMemoizationRequired>,
+                    int
+                > leftHashStream = ExchangeUtilities.HashRepartition<
+                    TInputOutput,
+                    NoKeyMemoizationRequired,
+                    TLeftKey
+                >(
+                    leftStream,
+                    null,
+                    null,
+                    _comparer,
+                    settings.CancellationState.MergedCancellationToken
+                );
 
                 WrapPartitionedStreamFixedLeftType<int, TRightKey>(
-                    leftHashStream, rightStream, outputRecipient, partitionCount, settings.CancellationState.MergedCancellationToken);
+                    leftHashStream,
+                    rightStream,
+                    outputRecipient,
+                    partitionCount,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
         }
 
@@ -87,26 +135,53 @@ namespace System.Linq.Parallel
         //
 
         private void WrapPartitionedStreamFixedLeftType<TLeftKey, TRightKey>(
-            PartitionedStream<Pair<TInputOutput, NoKeyMemoizationRequired>, TLeftKey> leftHashStream, PartitionedStream<TInputOutput, TRightKey> rightStream,
-            IPartitionedStreamRecipient<TInputOutput> outputRecipient, int partitionCount, CancellationToken cancellationToken)
+            PartitionedStream<
+                Pair<TInputOutput, NoKeyMemoizationRequired>,
+                TLeftKey
+            > leftHashStream,
+            PartitionedStream<TInputOutput, TRightKey> rightStream,
+            IPartitionedStreamRecipient<TInputOutput> outputRecipient,
+            int partitionCount,
+            CancellationToken cancellationToken
+        )
         {
             if (RightChild.OutputOrdered)
             {
-                PartitionedStream<Pair<TInputOutput, NoKeyMemoizationRequired>, TRightKey> rightHashStream =
-                    ExchangeUtilities.HashRepartitionOrdered<TInputOutput, NoKeyMemoizationRequired, TRightKey>(
-                        rightStream, null, null, _comparer, cancellationToken);
+                PartitionedStream<
+                    Pair<TInputOutput, NoKeyMemoizationRequired>,
+                    TRightKey
+                > rightHashStream = ExchangeUtilities.HashRepartitionOrdered<
+                    TInputOutput,
+                    NoKeyMemoizationRequired,
+                    TRightKey
+                >(rightStream, null, null, _comparer, cancellationToken);
 
                 WrapPartitionedStreamFixedBothTypes<TLeftKey, TRightKey>(
-                    leftHashStream, rightHashStream, outputRecipient, partitionCount, cancellationToken);
+                    leftHashStream,
+                    rightHashStream,
+                    outputRecipient,
+                    partitionCount,
+                    cancellationToken
+                );
             }
             else
             {
-                PartitionedStream<Pair<TInputOutput, NoKeyMemoizationRequired>, int> rightHashStream =
-                    ExchangeUtilities.HashRepartition<TInputOutput, NoKeyMemoizationRequired, TRightKey>(
-                        rightStream, null, null, _comparer, cancellationToken);
+                PartitionedStream<
+                    Pair<TInputOutput, NoKeyMemoizationRequired>,
+                    int
+                > rightHashStream = ExchangeUtilities.HashRepartition<
+                    TInputOutput,
+                    NoKeyMemoizationRequired,
+                    TRightKey
+                >(rightStream, null, null, _comparer, cancellationToken);
 
                 WrapPartitionedStreamFixedBothTypes<TLeftKey, int>(
-                    leftHashStream, rightHashStream, outputRecipient, partitionCount, cancellationToken);
+                    leftHashStream,
+                    rightHashStream,
+                    outputRecipient,
+                    partitionCount,
+                    cancellationToken
+                );
             }
         }
 
@@ -115,43 +190,68 @@ namespace System.Linq.Parallel
         //
 
         private void WrapPartitionedStreamFixedBothTypes<TLeftKey, TRightKey>(
-            PartitionedStream<Pair<TInputOutput, NoKeyMemoizationRequired>, TLeftKey> leftHashStream,
-            PartitionedStream<Pair<TInputOutput, NoKeyMemoizationRequired>, TRightKey> rightHashStream,
-            IPartitionedStreamRecipient<TInputOutput> outputRecipient, int partitionCount,
-            CancellationToken cancellationToken)
+            PartitionedStream<
+                Pair<TInputOutput, NoKeyMemoizationRequired>,
+                TLeftKey
+            > leftHashStream,
+            PartitionedStream<
+                Pair<TInputOutput, NoKeyMemoizationRequired>,
+                TRightKey
+            > rightHashStream,
+            IPartitionedStreamRecipient<TInputOutput> outputRecipient,
+            int partitionCount,
+            CancellationToken cancellationToken
+        )
         {
             if (LeftChild.OutputOrdered || RightChild.OutputOrdered)
             {
-                IComparer<ConcatKey<TLeftKey, TRightKey>> compoundKeyComparer =
-                    ConcatKey<TLeftKey, TRightKey>.MakeComparer(leftHashStream.KeyComparer, rightHashStream.KeyComparer);
+                IComparer<ConcatKey<TLeftKey, TRightKey>> compoundKeyComparer = ConcatKey<
+                    TLeftKey,
+                    TRightKey
+                >.MakeComparer(leftHashStream.KeyComparer, rightHashStream.KeyComparer);
 
                 PartitionedStream<TInputOutput, ConcatKey<TLeftKey, TRightKey>> outputStream =
-                    new PartitionedStream<TInputOutput, ConcatKey<TLeftKey, TRightKey>>(partitionCount, compoundKeyComparer, OrdinalIndexState.Shuffled);
+                    new PartitionedStream<TInputOutput, ConcatKey<TLeftKey, TRightKey>>(
+                        partitionCount,
+                        compoundKeyComparer,
+                        OrdinalIndexState.Shuffled
+                    );
 
                 for (int i = 0; i < partitionCount; i++)
                 {
                     outputStream[i] = new OrderedUnionQueryOperatorEnumerator<TLeftKey, TRightKey>(
-                        leftHashStream[i], rightHashStream[i], LeftChild.OutputOrdered, RightChild.OutputOrdered,
-                        _comparer, compoundKeyComparer, cancellationToken);
+                        leftHashStream[i],
+                        rightHashStream[i],
+                        LeftChild.OutputOrdered,
+                        RightChild.OutputOrdered,
+                        _comparer,
+                        compoundKeyComparer,
+                        cancellationToken
+                    );
                 }
 
                 outputRecipient.Receive(outputStream);
             }
             else
             {
-                PartitionedStream<TInputOutput, int> outputStream =
-                    new PartitionedStream<TInputOutput, int>(partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Shuffled);
+                PartitionedStream<TInputOutput, int> outputStream = new PartitionedStream<
+                    TInputOutput,
+                    int
+                >(partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Shuffled);
 
                 for (int i = 0; i < partitionCount; i++)
                 {
                     outputStream[i] = new UnionQueryOperatorEnumerator<TLeftKey, TRightKey>(
-                        leftHashStream[i], rightHashStream[i], _comparer, cancellationToken);
+                        leftHashStream[i],
+                        rightHashStream[i],
+                        _comparer,
+                        cancellationToken
+                    );
                 }
 
                 outputRecipient.Receive(outputStream);
             }
         }
-
 
         //---------------------------------------------------------------------------------------
         // Returns an enumerable that represents the query executing sequentially.
@@ -159,8 +259,14 @@ namespace System.Linq.Parallel
 
         internal override IEnumerable<TInputOutput> AsSequentialQuery(CancellationToken token)
         {
-            IEnumerable<TInputOutput> wrappedLeftChild = CancellableEnumerable.Wrap(LeftChild.AsSequentialQuery(token), token);
-            IEnumerable<TInputOutput> wrappedRightChild = CancellableEnumerable.Wrap(RightChild.AsSequentialQuery(token), token);
+            IEnumerable<TInputOutput> wrappedLeftChild = CancellableEnumerable.Wrap(
+                LeftChild.AsSequentialQuery(token),
+                token
+            );
+            IEnumerable<TInputOutput> wrappedRightChild = CancellableEnumerable.Wrap(
+                RightChild.AsSequentialQuery(token),
+                token
+            );
             return wrappedLeftChild.Union(wrappedRightChild, _comparer);
         }
 
@@ -180,10 +286,17 @@ namespace System.Linq.Parallel
         // return any duplicates.
         //
 
-        private sealed class UnionQueryOperatorEnumerator<TLeftKey, TRightKey> : QueryOperatorEnumerator<TInputOutput, int>
+        private sealed class UnionQueryOperatorEnumerator<TLeftKey, TRightKey>
+            : QueryOperatorEnumerator<TInputOutput, int>
         {
-            private QueryOperatorEnumerator<Pair<TInputOutput, NoKeyMemoizationRequired>, TLeftKey>? _leftSource; // Left data source.
-            private QueryOperatorEnumerator<Pair<TInputOutput, NoKeyMemoizationRequired>, TRightKey>? _rightSource; // Right data source.
+            private QueryOperatorEnumerator<
+                Pair<TInputOutput, NoKeyMemoizationRequired>,
+                TLeftKey
+            >? _leftSource; // Left data source.
+            private QueryOperatorEnumerator<
+                Pair<TInputOutput, NoKeyMemoizationRequired>,
+                TRightKey
+            >? _rightSource; // Right data source.
             private HashSet<TInputOutput>? _hashLookup; // The hash lookup, used to produce the union.
             private readonly CancellationToken _cancellationToken;
             private Shared<int>? _outputLoopCount;
@@ -194,10 +307,17 @@ namespace System.Linq.Parallel
             //
 
             internal UnionQueryOperatorEnumerator(
-                QueryOperatorEnumerator<Pair<TInputOutput, NoKeyMemoizationRequired>, TLeftKey> leftSource,
-                QueryOperatorEnumerator<Pair<TInputOutput, NoKeyMemoizationRequired>, TRightKey> rightSource,
+                QueryOperatorEnumerator<
+                    Pair<TInputOutput, NoKeyMemoizationRequired>,
+                    TLeftKey
+                > leftSource,
+                QueryOperatorEnumerator<
+                    Pair<TInputOutput, NoKeyMemoizationRequired>,
+                    TRightKey
+                > rightSource,
                 IEqualityComparer<TInputOutput>? comparer,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(leftSource != null);
                 Debug.Assert(rightSource != null);
@@ -212,7 +332,10 @@ namespace System.Linq.Parallel
             // Walks the two data sources, left and then right, to produce the union.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement,
+                ref int currentKey
+            )
             {
                 if (_hashLookup == null)
                 {
@@ -228,7 +351,10 @@ namespace System.Linq.Parallel
                 {
                     // Iterate over this set's elements until we find a unique element.
                     TLeftKey keyUnused = default(TLeftKey)!;
-                    Pair<TInputOutput, NoKeyMemoizationRequired> currentLeftElement = default(Pair<TInputOutput, NoKeyMemoizationRequired>);
+                    Pair<TInputOutput, NoKeyMemoizationRequired> currentLeftElement = default(Pair<
+                        TInputOutput,
+                        NoKeyMemoizationRequired
+                    >);
 
                     int i = 0;
                     while (_leftSource.MoveNext(ref currentLeftElement, ref keyUnused))
@@ -251,12 +377,14 @@ namespace System.Linq.Parallel
                     _leftSource = null;
                 }
 
-
                 if (_rightSource != null)
                 {
                     // Iterate over this set's elements until we find a unique element.
                     TRightKey keyUnused = default(TRightKey)!;
-                    Pair<TInputOutput, NoKeyMemoizationRequired> currentRightElement = default(Pair<TInputOutput, NoKeyMemoizationRequired>);
+                    Pair<TInputOutput, NoKeyMemoizationRequired> currentRightElement = default(Pair<
+                        TInputOutput,
+                        NoKeyMemoizationRequired
+                    >);
 
                     while (_rightSource.MoveNext(ref currentRightElement, ref keyUnused))
                     {
@@ -289,12 +417,24 @@ namespace System.Linq.Parallel
             }
         }
 
-        private sealed class OrderedUnionQueryOperatorEnumerator<TLeftKey, TRightKey> : QueryOperatorEnumerator<TInputOutput, ConcatKey<TLeftKey, TRightKey>>
+        private sealed class OrderedUnionQueryOperatorEnumerator<TLeftKey, TRightKey>
+            : QueryOperatorEnumerator<TInputOutput, ConcatKey<TLeftKey, TRightKey>>
         {
-            private readonly QueryOperatorEnumerator<Pair<TInputOutput, NoKeyMemoizationRequired>, TLeftKey> _leftSource; // Left data source.
-            private readonly QueryOperatorEnumerator<Pair<TInputOutput, NoKeyMemoizationRequired>, TRightKey> _rightSource; // Right data source.
+            private readonly QueryOperatorEnumerator<
+                Pair<TInputOutput, NoKeyMemoizationRequired>,
+                TLeftKey
+            > _leftSource; // Left data source.
+            private readonly QueryOperatorEnumerator<
+                Pair<TInputOutput, NoKeyMemoizationRequired>,
+                TRightKey
+            > _rightSource; // Right data source.
             private readonly IComparer<ConcatKey<TLeftKey, TRightKey>> _keyComparer; // Comparer for compound order keys.
-            private IEnumerator<KeyValuePair<Wrapper<TInputOutput>, Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>>>>? _outputEnumerator; // Enumerator over the output of the union.
+            private IEnumerator<
+                KeyValuePair<
+                    Wrapper<TInputOutput>,
+                    Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>>
+                >
+            >? _outputEnumerator; // Enumerator over the output of the union.
             private readonly bool _leftOrdered; // Whether the left data source is ordered.
             private readonly bool _rightOrdered; // Whether the right data source is ordered.
             private readonly IEqualityComparer<TInputOutput>? _comparer; // Comparer for the elements.
@@ -305,10 +445,20 @@ namespace System.Linq.Parallel
             //
 
             internal OrderedUnionQueryOperatorEnumerator(
-                QueryOperatorEnumerator<Pair<TInputOutput, NoKeyMemoizationRequired>, TLeftKey> leftSource,
-                QueryOperatorEnumerator<Pair<TInputOutput, NoKeyMemoizationRequired>, TRightKey> rightSource,
-                bool leftOrdered, bool rightOrdered, IEqualityComparer<TInputOutput>? comparer, IComparer<ConcatKey<TLeftKey, TRightKey>> keyComparer,
-                CancellationToken cancellationToken)
+                QueryOperatorEnumerator<
+                    Pair<TInputOutput, NoKeyMemoizationRequired>,
+                    TLeftKey
+                > leftSource,
+                QueryOperatorEnumerator<
+                    Pair<TInputOutput, NoKeyMemoizationRequired>,
+                    TRightKey
+                > rightSource,
+                bool leftOrdered,
+                bool rightOrdered,
+                IEqualityComparer<TInputOutput>? comparer,
+                IComparer<ConcatKey<TLeftKey, TRightKey>> keyComparer,
+                CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(leftSource != null);
                 Debug.Assert(rightSource != null);
@@ -328,18 +478,30 @@ namespace System.Linq.Parallel
             // Walks the two data sources, left and then right, to produce the union.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement, ref ConcatKey<TLeftKey, TRightKey> currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement,
+                ref ConcatKey<TLeftKey, TRightKey> currentKey
+            )
             {
                 Debug.Assert(_leftSource != null);
                 Debug.Assert(_rightSource != null);
 
                 if (_outputEnumerator == null)
                 {
-                    IEqualityComparer<Wrapper<TInputOutput>> wrapperComparer = new WrapperEqualityComparer<TInputOutput>(_comparer);
-                    Dictionary<Wrapper<TInputOutput>, Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>>> union =
-                        new Dictionary<Wrapper<TInputOutput>, Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>>>(wrapperComparer);
+                    IEqualityComparer<Wrapper<TInputOutput>> wrapperComparer =
+                        new WrapperEqualityComparer<TInputOutput>(_comparer);
+                    Dictionary<
+                        Wrapper<TInputOutput>,
+                        Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>>
+                    > union = new Dictionary<
+                        Wrapper<TInputOutput>,
+                        Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>>
+                    >(wrapperComparer);
 
-                    Pair<TInputOutput, NoKeyMemoizationRequired> elem = default(Pair<TInputOutput, NoKeyMemoizationRequired>);
+                    Pair<TInputOutput, NoKeyMemoizationRequired> elem = default(Pair<
+                        TInputOutput,
+                        NoKeyMemoizationRequired
+                    >);
                     TLeftKey leftKey = default(TLeftKey)!;
 
                     int i = 0;
@@ -348,14 +510,22 @@ namespace System.Linq.Parallel
                         if ((i++ & CancellationState.POLL_INTERVAL) == 0)
                             _cancellationToken.ThrowIfCancellationRequested();
 
-                        ConcatKey<TLeftKey, TRightKey> key =
-                            ConcatKey<TLeftKey, TRightKey>.MakeLeft(_leftOrdered ? leftKey : default);
+                        ConcatKey<TLeftKey, TRightKey> key = ConcatKey<
+                            TLeftKey,
+                            TRightKey
+                        >.MakeLeft(_leftOrdered ? leftKey : default);
                         Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>> oldEntry;
                         Wrapper<TInputOutput> wrappedElem = new Wrapper<TInputOutput>(elem.First);
 
-                        if (!union.TryGetValue(wrappedElem, out oldEntry) || _keyComparer.Compare(key, oldEntry.Second) < 0)
+                        if (
+                            !union.TryGetValue(wrappedElem, out oldEntry)
+                            || _keyComparer.Compare(key, oldEntry.Second) < 0
+                        )
                         {
-                            union[wrappedElem] = new Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>>(elem.First, key);
+                            union[wrappedElem] = new Pair<
+                                TInputOutput,
+                                ConcatKey<TLeftKey, TRightKey>
+                            >(elem.First, key);
                         }
                     }
 
@@ -365,14 +535,22 @@ namespace System.Linq.Parallel
                         if ((i++ & CancellationState.POLL_INTERVAL) == 0)
                             _cancellationToken.ThrowIfCancellationRequested();
 
-                        ConcatKey<TLeftKey, TRightKey> key =
-                            ConcatKey<TLeftKey, TRightKey>.MakeRight(_rightOrdered ? rightKey : default);
+                        ConcatKey<TLeftKey, TRightKey> key = ConcatKey<
+                            TLeftKey,
+                            TRightKey
+                        >.MakeRight(_rightOrdered ? rightKey : default);
                         Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>> oldEntry;
                         Wrapper<TInputOutput> wrappedElem = new Wrapper<TInputOutput>(elem.First);
 
-                        if (!union.TryGetValue(wrappedElem, out oldEntry) || _keyComparer.Compare(key, oldEntry.Second) < 0)
+                        if (
+                            !union.TryGetValue(wrappedElem, out oldEntry)
+                            || _keyComparer.Compare(key, oldEntry.Second) < 0
+                        )
                         {
-                            union[wrappedElem] = new Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>>(elem.First, key);
+                            union[wrappedElem] = new Pair<
+                                TInputOutput,
+                                ConcatKey<TLeftKey, TRightKey>
+                            >(elem.First, key);
                         }
                     }
 
@@ -381,7 +559,9 @@ namespace System.Linq.Parallel
 
                 if (_outputEnumerator.MoveNext())
                 {
-                    Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>> current = _outputEnumerator.Current.Value;
+                    Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>> current = _outputEnumerator
+                        .Current
+                        .Value;
                     currentElement = current.First;
                     currentKey = current.Second;
                     return true;

@@ -37,6 +37,7 @@ internal static class LoggingServiceProviderExtensions
     {
         // Compiler won't allow us to use static types as the type parameter
         // for the call to CreateLogger<T>, so we'll duplicate its logic here.
-        return services?.GetService<ILoggerFactory>()?.CreateLogger(type.FullName!) ?? NullLogger.Instance;
+        return services?.GetService<ILoggerFactory>()?.CreateLogger(type.FullName!)
+            ?? NullLogger.Instance;
     }
 }

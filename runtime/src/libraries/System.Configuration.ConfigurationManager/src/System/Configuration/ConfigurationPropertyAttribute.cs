@@ -17,14 +17,16 @@ namespace System.Configuration
 
         public object DefaultValue { get; set; } = ConfigurationElement.s_nullPropertyValue;
 
-        public ConfigurationPropertyOptions Options { get; set; } = ConfigurationPropertyOptions.None;
+        public ConfigurationPropertyOptions Options { get; set; } =
+            ConfigurationPropertyOptions.None;
 
         public bool IsDefaultCollection
         {
             get { return (Options & ConfigurationPropertyOptions.IsDefaultCollection) != 0; }
             set
             {
-                if (value) Options |= ConfigurationPropertyOptions.IsDefaultCollection;
+                if (value)
+                    Options |= ConfigurationPropertyOptions.IsDefaultCollection;
                 else
                     Options &= ~ConfigurationPropertyOptions.IsDefaultCollection;
             }
@@ -35,8 +37,10 @@ namespace System.Configuration
             get { return (Options & ConfigurationPropertyOptions.IsRequired) != 0; }
             set
             {
-                if (value) Options |= ConfigurationPropertyOptions.IsRequired;
-                else Options &= ~ConfigurationPropertyOptions.IsRequired;
+                if (value)
+                    Options |= ConfigurationPropertyOptions.IsRequired;
+                else
+                    Options &= ~ConfigurationPropertyOptions.IsRequired;
             }
         }
 
@@ -45,8 +49,10 @@ namespace System.Configuration
             get { return (Options & ConfigurationPropertyOptions.IsKey) != 0; }
             set
             {
-                if (value) Options |= ConfigurationPropertyOptions.IsKey;
-                else Options &= ~ConfigurationPropertyOptions.IsKey;
+                if (value)
+                    Options |= ConfigurationPropertyOptions.IsKey;
+                else
+                    Options &= ~ConfigurationPropertyOptions.IsKey;
             }
         }
     }

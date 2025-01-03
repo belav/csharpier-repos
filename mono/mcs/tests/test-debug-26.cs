@@ -1,15 +1,11 @@
 partial class P
 {
-	partial void Foo ();
+    partial void Foo();
 }
 
 partial class P
 {
-	partial void Foo ()
-	{
-	}
-	
-	public static void Main ()
-	{
-	}
+    partial void Foo() { }
+
+    public static void Main() { }
 }

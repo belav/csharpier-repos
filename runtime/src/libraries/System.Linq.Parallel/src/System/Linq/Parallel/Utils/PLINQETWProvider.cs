@@ -21,7 +21,8 @@ namespace System.Linq.Parallel
     /// <summary>Provides an event source for tracing PLINQ information.</summary>
     [EventSource(
         Name = "System.Linq.Parallel.PlinqEventSource",
-        Guid = "159eeeec-4a14-4418-a8fe-faabcd987887")]
+        Guid = "159eeeec-4a14-4418-a8fe-faabcd987887"
+    )]
     internal sealed class PlinqEtwProvider : EventSource
     {
         /// <summary>
@@ -29,12 +30,14 @@ namespace System.Linq.Parallel
         /// The PLINQ Event provider GUID is {159eeeec-4a14-4418-a8fe-faabcd987887}.
         /// </summary>
         internal static PlinqEtwProvider Log = new PlinqEtwProvider();
+
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
         private PlinqEtwProvider() { }
 
         /// <summary>Cached id for the default scheduler.</summary>
         /// <remarks>If PLINQ ever supports other schedulers, that information will need to be passed into the query events.</remarks>
         private static readonly int s_defaultSchedulerId = TaskScheduler.Default.Id;
+
         /// <summary>Static counter used to generate unique IDs</summary>
         private static int s_queryId;
 
@@ -53,6 +56,7 @@ namespace System.Linq.Parallel
         {
             /// <summary>A parallel query.</summary>
             public const EventTask Query = (EventTask)1;
+
             /// <summary>A fork/join task within a query.</summary>
             public const EventTask ForkJoin = (EventTask)2;
         }
@@ -64,10 +68,13 @@ namespace System.Linq.Parallel
 
         /// <summary>The ID of a parallel query begin event.</summary>
         private const int PARALLELQUERYBEGIN_EVENTID = 1;
+
         /// <summary>The ID of a parallel query end event.</summary>
         private const int PARALLELQUERYEND_EVENTID = 2;
+
         /// <summary>The ID of a parallel query fork event.</summary>
         private const int PARALLELQUERYFORK_EVENTID = 3;
+
         /// <summary>The ID of a parallel query join event.</summary>
         private const int PARALLELQUERYJOIN_EVENTID = 4;
 
@@ -99,7 +106,12 @@ namespace System.Linq.Parallel
         /// <param name="taskSchedulerId">The ID of the task scheduler to which the query is scheduled.</param>
         /// <param name="taskId">The ID of the task starting the query; 0 if there is no task.</param>
         /// <param name="queryId">The ID of the query.</param>
-        [Event(PARALLELQUERYBEGIN_EVENTID, Level = EventLevel.Informational, Task = PlinqEtwProvider.Tasks.Query, Opcode = EventOpcode.Start)]
+        [Event(
+            PARALLELQUERYBEGIN_EVENTID,
+            Level = EventLevel.Informational,
+            Task = PlinqEtwProvider.Tasks.Query,
+            Opcode = EventOpcode.Start
+        )]
         private void ParallelQueryBegin(int taskSchedulerId, int taskId, int queryId)
         {
             WriteEvent(PARALLELQUERYBEGIN_EVENTID, taskSchedulerId, taskId, queryId);
@@ -127,7 +139,12 @@ namespace System.Linq.Parallel
         /// <param name="taskSchedulerId">The ID of the task scheduler to which the query was scheduled.</param>
         /// <param name="taskId">The ID of the task ending the query; 0 if there is no task.</param>
         /// <param name="queryId">The ID of the query.</param>
-        [Event(PARALLELQUERYEND_EVENTID, Level = EventLevel.Informational, Task = PlinqEtwProvider.Tasks.Query, Opcode = EventOpcode.Stop)]
+        [Event(
+            PARALLELQUERYEND_EVENTID,
+            Level = EventLevel.Informational,
+            Task = PlinqEtwProvider.Tasks.Query,
+            Opcode = EventOpcode.Stop
+        )]
         private void ParallelQueryEnd(int taskSchedulerId, int taskId, int queryId)
         {
             WriteEvent(PARALLELQUERYEND_EVENTID, taskSchedulerId, taskId, queryId);
@@ -159,7 +176,12 @@ namespace System.Linq.Parallel
         /// <param name="taskSchedulerId">The ID of the task scheduler to which the task was scheduled.</param>
         /// <param name="taskId">The ID of the task joining the query.</param>
         /// <param name="queryId">The ID of the query.</param>
-        [Event(PARALLELQUERYFORK_EVENTID, Level = EventLevel.Verbose, Task = PlinqEtwProvider.Tasks.ForkJoin, Opcode = EventOpcode.Start)]
+        [Event(
+            PARALLELQUERYFORK_EVENTID,
+            Level = EventLevel.Verbose,
+            Task = PlinqEtwProvider.Tasks.ForkJoin,
+            Opcode = EventOpcode.Start
+        )]
         private void ParallelQueryFork(int taskSchedulerId, int taskId, int queryId)
         {
             WriteEvent(PARALLELQUERYFORK_EVENTID, taskSchedulerId, taskId, queryId);
@@ -189,12 +211,16 @@ namespace System.Linq.Parallel
         /// <param name="taskSchedulerId">The ID of the task scheduler to which the task was scheduled.</param>
         /// <param name="taskId">The ID of the task joining the query.</param>
         /// <param name="queryId">The ID of the query.</param>
-        [Event(PARALLELQUERYJOIN_EVENTID, Level = EventLevel.Verbose, Task = PlinqEtwProvider.Tasks.ForkJoin, Opcode = EventOpcode.Stop)]
+        [Event(
+            PARALLELQUERYJOIN_EVENTID,
+            Level = EventLevel.Verbose,
+            Task = PlinqEtwProvider.Tasks.ForkJoin,
+            Opcode = EventOpcode.Stop
+        )]
         private void ParallelQueryJoin(int taskSchedulerId, int taskId, int queryId)
         {
             WriteEvent(PARALLELQUERYJOIN_EVENTID, taskSchedulerId, taskId, queryId);
         }
         #endregion
-
     }
 }

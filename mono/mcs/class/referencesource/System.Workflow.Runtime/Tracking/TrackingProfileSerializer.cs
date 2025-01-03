@@ -2,49 +2,51 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Xml;
-using System.Xml.Schema;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
-using System.Globalization;
-
+using System.Text;
 //using System.Workflow.Activities;
 using System.Workflow.ComponentModel;
 using System.Workflow.Runtime;
 using System.Workflow.Runtime.Hosting;
+using System.Xml;
+using System.Xml.Schema;
 using Hosting = System.Workflow.Runtime.Hosting;
 
 namespace System.Workflow.Runtime.Tracking
 {
     /// <summary>
     /// Used for xml serializing a TrackProfile.
-    /// </summary>    
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    /// </summary>
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class TrackingProfileSerializer
     {
         public TrackingProfileSerializer()
         {
             StringReader reader = new StringReader(_xsd);
-            _schema = XmlSchema.Read(new XmlTextReader(reader) { DtdProcessing = DtdProcessing.Prohibit }, null);
+            _schema = XmlSchema.Read(
+                new XmlTextReader(reader) { DtdProcessing = DtdProcessing.Prohibit },
+                null
+            );
             _schema.Namespaces.Add("", _ns);
         }
 
         public XmlSchema Schema
         {
-            get
-            {
-                return _schema;
-            }
+            get { return _schema; }
         }
 
         #region Deserialization
 
         List<ValidationEventArgs> _vArgs = new List<ValidationEventArgs>();
         bool _vex = false;
+
         /// <summary>
         /// Deserialize TrackingProfile in xml form to a TrackingProfile object.
         /// </summary>
@@ -91,7 +93,9 @@ namespace System.Workflow.Runtime.Tracking
 
                 string version = pReader.GetAttribute("version");
                 if ((null == version) || (0 == version.Trim().Length))
-                    throw new TrackingProfileDeserializationException(ExecutionStringManager.InvalidProfileVersion);
+                    throw new TrackingProfileDeserializationException(
+                        ExecutionStringManager.InvalidProfileVersion
+                    );
 
                 profile.Version = new Version(version);
 
@@ -126,11 +130,14 @@ namespace System.Workflow.Runtime.Tracking
         {
             //
             // If the parsing hit an error->throw
-            // Clients can check ValidationEventArgs to get 
+            // Clients can check ValidationEventArgs to get
             // all errors & warnings that were caught.
             if (_vex)
             {
-                TrackingProfileDeserializationException tpde = new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationSchemaError);
+                TrackingProfileDeserializationException tpde =
+                    new TrackingProfileDeserializationException(
+                        ExecutionStringManager.TrackingDeserializationSchemaError
+                    );
                 if (null != _vArgs)
                 {
                     foreach (ValidationEventArgs arg in _vArgs)
@@ -149,7 +156,9 @@ namespace System.Workflow.Runtime.Tracking
                 throw new ArgumentNullException("profile");
 
             if (0 != string.Compare(reader.Name, "TrackPoints", StringComparison.Ordinal))
-                throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationInvalidPosition + "TrackPoints.");
+                throw new TrackingProfileDeserializationException(
+                    ExecutionStringManager.TrackingDeserializationInvalidPosition + "TrackPoints."
+                );
 
             if (reader.IsEmptyElement)
                 return;
@@ -159,22 +168,48 @@ namespace System.Workflow.Runtime.Tracking
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        if (0 == string.Compare(reader.Name, "ActivityTrackPoint", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "ActivityTrackPoint",
+                                StringComparison.Ordinal
+                            )
+                        )
                             CreateActivityTrackPoint(reader, profile);
-                        else if (0 == string.Compare(reader.Name, "UserTrackPoint", StringComparison.Ordinal))
+                        else if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "UserTrackPoint",
+                                StringComparison.Ordinal
+                            )
+                        )
                             CreateUserTrackPoint(reader, profile);
-                        else if (0 == string.Compare(reader.Name, "WorkflowTrackPoint", StringComparison.Ordinal))
+                        else if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "WorkflowTrackPoint",
+                                StringComparison.Ordinal
+                            )
+                        )
                             CreateWorkflowTrackPoint(reader, profile);
                         break;
                     case XmlNodeType.EndElement:
-                        if (0 == string.Compare(reader.Name, "TrackPoints", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(reader.Name, "TrackPoints", StringComparison.Ordinal)
+                        )
                             return;
                         break;
                 }
             }
             //
             // Only valid exit is on an EndElement that matches the element that is passed in.
-            throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationCloseElementNotFound + "TrackPoints.");
+            throw new TrackingProfileDeserializationException(
+                ExecutionStringManager.TrackingDeserializationCloseElementNotFound + "TrackPoints."
+            );
         }
 
         private void CreateActivityTrackPoint(XmlReader reader, TrackingProfile profile)
@@ -186,7 +221,10 @@ namespace System.Workflow.Runtime.Tracking
                 throw new ArgumentNullException("profile");
 
             if (0 != string.Compare(reader.Name, "ActivityTrackPoint", StringComparison.Ordinal))
-                throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationInvalidPosition + "ActivityTrackPoint.");
+                throw new TrackingProfileDeserializationException(
+                    ExecutionStringManager.TrackingDeserializationInvalidPosition
+                        + "ActivityTrackPoint."
+                );
 
             if (reader.IsEmptyElement)
                 return;
@@ -198,20 +236,46 @@ namespace System.Workflow.Runtime.Tracking
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        if (0 == string.Compare(reader.Name, "Annotations", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(reader.Name, "Annotations", StringComparison.Ordinal)
+                        )
                             CreateAnnotations(reader, point.Annotations);
-                        else if (0 == string.Compare(reader.Name, "MatchingLocations", StringComparison.Ordinal))
+                        else if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "MatchingLocations",
+                                StringComparison.Ordinal
+                            )
+                        )
                             CreateActivityTrackingLocations(reader, point.MatchingLocations);
-                        else if (0 == string.Compare(reader.Name, "ExcludedLocations", StringComparison.Ordinal))
+                        else if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "ExcludedLocations",
+                                StringComparison.Ordinal
+                            )
+                        )
                             CreateActivityTrackingLocations(reader, point.ExcludedLocations);
-                        else if (0 == string.Compare(reader.Name, "Extracts", StringComparison.Ordinal))
+                        else if (
+                            0 == string.Compare(reader.Name, "Extracts", StringComparison.Ordinal)
+                        )
                             CreateExtracts(reader, point.Extracts);
                         //
                         // Xsd validation will catch unknown elements
 
                         break;
                     case XmlNodeType.EndElement:
-                        if (0 == string.Compare(reader.Name, "ActivityTrackPoint", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "ActivityTrackPoint",
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             profile.ActivityTrackPoints.Add(point);
                             return;
@@ -221,10 +285,16 @@ namespace System.Workflow.Runtime.Tracking
             }
             //
             // Only valid exit is on an EndElement that matches the element that is passed in.
-            throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationCloseElementNotFound + "ActivityTrackPoint.");
+            throw new TrackingProfileDeserializationException(
+                ExecutionStringManager.TrackingDeserializationCloseElementNotFound
+                    + "ActivityTrackPoint."
+            );
         }
 
-        private void CreateActivityTrackingLocation(XmlReader reader, ActivityTrackingLocation location)
+        private void CreateActivityTrackingLocation(
+            XmlReader reader,
+            ActivityTrackingLocation location
+        )
         {
             if (null == reader)
                 throw new ArgumentNullException("reader");
@@ -232,8 +302,14 @@ namespace System.Workflow.Runtime.Tracking
             if (null == location)
                 throw new ArgumentNullException("location");
 
-            if (0 != string.Compare(reader.Name, "ActivityTrackingLocation", StringComparison.Ordinal))
-                throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationInvalidPosition + "ActivityTrackingLocation.");
+            if (
+                0
+                != string.Compare(reader.Name, "ActivityTrackingLocation", StringComparison.Ordinal)
+            )
+                throw new TrackingProfileDeserializationException(
+                    ExecutionStringManager.TrackingDeserializationInvalidPosition
+                        + "ActivityTrackingLocation."
+                );
 
             if (reader.IsEmptyElement)
                 return;
@@ -246,14 +322,18 @@ namespace System.Workflow.Runtime.Tracking
                         if (0 == string.Compare(reader.Name, "TypeName", StringComparison.Ordinal))
                         {
                             if (null != location.ActivityType)
-                                throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationInvalidType);
+                                throw new TrackingProfileDeserializationException(
+                                    ExecutionStringManager.TrackingDeserializationInvalidType
+                                );
 
                             location.ActivityTypeName = reader.ReadString();
                         }
                         else if (0 == string.Compare(reader.Name, "Type", StringComparison.Ordinal))
                         {
                             if (null != location.ActivityTypeName)
-                                throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationInvalidType);
+                                throw new TrackingProfileDeserializationException(
+                                    ExecutionStringManager.TrackingDeserializationInvalidType
+                                );
 
                             if (!reader.IsEmptyElement)
                             {
@@ -265,19 +345,45 @@ namespace System.Workflow.Runtime.Tracking
                                     location.ActivityType = Type.GetType(type, true);
                             }
                         }
-                        else if (0 == string.Compare(reader.Name, "MatchDerivedTypes", StringComparison.Ordinal))
+                        else if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "MatchDerivedTypes",
+                                StringComparison.Ordinal
+                            )
+                        )
                             location.MatchDerivedTypes = reader.ReadElementContentAsBoolean();
-                        else if (0 == string.Compare(reader.Name, "ExecutionStatusEvents", StringComparison.Ordinal))
+                        else if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "ExecutionStatusEvents",
+                                StringComparison.Ordinal
+                            )
+                        )
                             CreateStatusEvents(reader, location.ExecutionStatusEvents);
-                        else if (0 == string.Compare(reader.Name, "Conditions", StringComparison.Ordinal))
+                        else if (
+                            0 == string.Compare(reader.Name, "Conditions", StringComparison.Ordinal)
+                        )
                             CreateConditions(reader, location.Conditions);
                         break;
                     case XmlNodeType.EndElement:
-                        if (0 == string.Compare(reader.Name, "ActivityTrackingLocation", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "ActivityTrackingLocation",
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             //
                             // If we don't have a type or name create the Activity type to track all activities
-                            if ((null == location.ActivityType) && (null == location.ActivityTypeName))
+                            if (
+                                (null == location.ActivityType)
+                                && (null == location.ActivityTypeName)
+                            )
                             {
                                 location.ActivityType = typeof(Activity);
                                 location.MatchDerivedTypes = true;
@@ -290,7 +396,10 @@ namespace System.Workflow.Runtime.Tracking
             }
             //
             // Something bad happened
-            throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationCloseElementNotFound + "ActivityTrackingLocation.");
+            throw new TrackingProfileDeserializationException(
+                ExecutionStringManager.TrackingDeserializationCloseElementNotFound
+                    + "ActivityTrackingLocation."
+            );
         }
 
         private void CreateUserTrackPoint(XmlReader reader, TrackingProfile profile)
@@ -302,7 +411,10 @@ namespace System.Workflow.Runtime.Tracking
                 throw new ArgumentNullException("profile");
 
             if (0 != string.Compare(reader.Name, "UserTrackPoint", StringComparison.Ordinal))
-                throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationInvalidPosition + "UserTrackPoint.");
+                throw new TrackingProfileDeserializationException(
+                    ExecutionStringManager.TrackingDeserializationInvalidPosition
+                        + "UserTrackPoint."
+                );
 
             if (reader.IsEmptyElement)
                 return;
@@ -314,20 +426,46 @@ namespace System.Workflow.Runtime.Tracking
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        if (0 == string.Compare(reader.Name, "Annotations", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(reader.Name, "Annotations", StringComparison.Ordinal)
+                        )
                             CreateAnnotations(reader, point.Annotations);
-                        else if (0 == string.Compare(reader.Name, "MatchingLocations", StringComparison.Ordinal))
+                        else if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "MatchingLocations",
+                                StringComparison.Ordinal
+                            )
+                        )
                             CreateUserTrackingLocations(reader, point.MatchingLocations);
-                        else if (0 == string.Compare(reader.Name, "ExcludedLocations", StringComparison.Ordinal))
+                        else if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "ExcludedLocations",
+                                StringComparison.Ordinal
+                            )
+                        )
                             CreateUserTrackingLocations(reader, point.ExcludedLocations);
-                        else if (0 == string.Compare(reader.Name, "Extracts", StringComparison.Ordinal))
+                        else if (
+                            0 == string.Compare(reader.Name, "Extracts", StringComparison.Ordinal)
+                        )
                             CreateExtracts(reader, point.Extracts);
                         //
                         // Xsd validation will catch unknown elements
 
                         break;
                     case XmlNodeType.EndElement:
-                        if (0 == string.Compare(reader.Name, "UserTrackPoint", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "UserTrackPoint",
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             profile.UserTrackPoints.Add(point);
                             return;
@@ -337,7 +475,10 @@ namespace System.Workflow.Runtime.Tracking
             }
             //
             // Only valid exit is on an EndElement that matches the element that is passed in.
-            throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationCloseElementNotFound + "UserTrackPoint.");
+            throw new TrackingProfileDeserializationException(
+                ExecutionStringManager.TrackingDeserializationCloseElementNotFound
+                    + "UserTrackPoint."
+            );
         }
 
         private void CreateUserTrackingLocation(XmlReader reader, UserTrackingLocation location)
@@ -349,13 +490,19 @@ namespace System.Workflow.Runtime.Tracking
                 throw new ArgumentNullException("location");
 
             if (0 != string.Compare(reader.Name, "UserTrackingLocation", StringComparison.Ordinal))
-                throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationInvalidPosition + "UserTrackingLocation.");
+                throw new TrackingProfileDeserializationException(
+                    ExecutionStringManager.TrackingDeserializationInvalidPosition
+                        + "UserTrackingLocation."
+                );
 
             if (reader.IsEmptyElement)
                 return;
 
-            string name = null, type = null;
-            bool derived = false, seenAct = false, seenArg = false;
+            string name = null,
+                type = null;
+            bool derived = false,
+                seenAct = false,
+                seenArg = false;
 
             while (reader.Read())
             {
@@ -364,21 +511,43 @@ namespace System.Workflow.Runtime.Tracking
                     case XmlNodeType.Element:
                         if (0 == string.Compare(reader.Name, "Activity", StringComparison.Ordinal))
                             seenAct = true;
-                        else if (0 == string.Compare(reader.Name, "KeyName", StringComparison.Ordinal))
+                        else if (
+                            0 == string.Compare(reader.Name, "KeyName", StringComparison.Ordinal)
+                        )
                             location.KeyName = reader.ReadString();
-                        else if (0 == string.Compare(reader.Name, "Argument", StringComparison.Ordinal))
+                        else if (
+                            0 == string.Compare(reader.Name, "Argument", StringComparison.Ordinal)
+                        )
                             seenArg = true;
-                        else if (0 == string.Compare(reader.Name, "TypeName", StringComparison.Ordinal))
+                        else if (
+                            0 == string.Compare(reader.Name, "TypeName", StringComparison.Ordinal)
+                        )
                             name = reader.ReadString();
                         else if (0 == string.Compare(reader.Name, "Type", StringComparison.Ordinal))
                             type = reader.ReadString();
-                        else if (0 == string.Compare(reader.Name, "MatchDerivedTypes", StringComparison.Ordinal))
+                        else if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "MatchDerivedTypes",
+                                StringComparison.Ordinal
+                            )
+                        )
                             derived = reader.ReadElementContentAsBoolean();
-                        else if (0 == string.Compare(reader.Name, "Conditions", StringComparison.Ordinal))
+                        else if (
+                            0 == string.Compare(reader.Name, "Conditions", StringComparison.Ordinal)
+                        )
                             CreateConditions(reader, location.Conditions);
                         break;
                     case XmlNodeType.EndElement:
-                        if (0 == string.Compare(reader.Name, "UserTrackingLocation", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "UserTrackingLocation",
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             if (!seenAct)
                             {
@@ -392,12 +561,27 @@ namespace System.Workflow.Runtime.Tracking
                                 location.MatchDerivedArgumentTypes = true;
                             }
 
-                            if ((null == location.ActivityType) && ((null == location.ActivityTypeName) || (0 == location.ActivityTypeName.Trim().Length)) && (null == location.ArgumentType) && ((null == location.ArgumentTypeName) || (0 == location.ArgumentTypeName.Trim().Length)))
-                                throw new TrackingProfileDeserializationException(ExecutionStringManager.MissingActivityType);
+                            if (
+                                (null == location.ActivityType)
+                                && (
+                                    (null == location.ActivityTypeName)
+                                    || (0 == location.ActivityTypeName.Trim().Length)
+                                )
+                                && (null == location.ArgumentType)
+                                && (
+                                    (null == location.ArgumentTypeName)
+                                    || (0 == location.ArgumentTypeName.Trim().Length)
+                                )
+                            )
+                                throw new TrackingProfileDeserializationException(
+                                    ExecutionStringManager.MissingActivityType
+                                );
 
                             return;
                         }
-                        else if (0 == string.Compare(reader.Name, "Activity", StringComparison.Ordinal))
+                        else if (
+                            0 == string.Compare(reader.Name, "Activity", StringComparison.Ordinal)
+                        )
                         {
                             if (!seenAct)
                             {
@@ -418,7 +602,9 @@ namespace System.Workflow.Runtime.Tracking
                             type = null;
                             derived = false;
                         }
-                        else if (0 == string.Compare(reader.Name, "Argument", StringComparison.Ordinal))
+                        else if (
+                            0 == string.Compare(reader.Name, "Argument", StringComparison.Ordinal)
+                        )
                         {
                             if (!seenArg)
                             {
@@ -445,7 +631,10 @@ namespace System.Workflow.Runtime.Tracking
             }
             //
             // Something bad happened
-            throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationCloseElementNotFound + "UserTrackingLocation.");
+            throw new TrackingProfileDeserializationException(
+                ExecutionStringManager.TrackingDeserializationCloseElementNotFound
+                    + "UserTrackingLocation."
+            );
         }
 
         private void CreateWorkflowTrackPoint(XmlReader reader, TrackingProfile profile)
@@ -457,7 +646,10 @@ namespace System.Workflow.Runtime.Tracking
                 throw new ArgumentNullException("profile");
 
             if (0 != string.Compare(reader.Name, "WorkflowTrackPoint", StringComparison.Ordinal))
-                throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationInvalidPosition + "WorkflowTrackPoint.");
+                throw new TrackingProfileDeserializationException(
+                    ExecutionStringManager.TrackingDeserializationInvalidPosition
+                        + "WorkflowTrackPoint."
+                );
 
             if (reader.IsEmptyElement)
                 return;
@@ -470,15 +662,35 @@ namespace System.Workflow.Runtime.Tracking
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        if (0 == string.Compare(reader.Name, "Annotations", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(reader.Name, "Annotations", StringComparison.Ordinal)
+                        )
                             CreateAnnotations(reader, point.Annotations);
-                        else if (0 == string.Compare(reader.Name, "TrackingWorkflowEvent", StringComparison.Ordinal))
-                            point.MatchingLocation.Events.Add((TrackingWorkflowEvent)Enum.Parse(typeof(TrackingWorkflowEvent), reader.ReadString()));
+                        else if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "TrackingWorkflowEvent",
+                                StringComparison.Ordinal
+                            )
+                        )
+                            point.MatchingLocation.Events.Add(
+                                (TrackingWorkflowEvent)
+                                    Enum.Parse(typeof(TrackingWorkflowEvent), reader.ReadString())
+                            );
                         //
                         // Xsd validation will catch unknown elements
                         break;
                     case XmlNodeType.EndElement:
-                        if (0 == string.Compare(reader.Name, "WorkflowTrackPoint", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "WorkflowTrackPoint",
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             profile.WorkflowTrackPoints.Add(point);
                             return;
@@ -488,7 +700,10 @@ namespace System.Workflow.Runtime.Tracking
             }
             //
             // Only valid exit is on an EndElement that matches the element that is passed in.
-            throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationCloseElementNotFound + "WorkflowTrackPoint.");
+            throw new TrackingProfileDeserializationException(
+                ExecutionStringManager.TrackingDeserializationCloseElementNotFound
+                    + "WorkflowTrackPoint."
+            );
         }
 
         private void CreateStatusEvents(XmlReader reader, IList<ActivityExecutionStatus> events)
@@ -500,7 +715,10 @@ namespace System.Workflow.Runtime.Tracking
                 throw new ArgumentNullException("events");
 
             if (0 != string.Compare("ExecutionStatusEvents", reader.Name, StringComparison.Ordinal))
-                throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationInvalidPosition + "ExecutionStatusEvents.");
+                throw new TrackingProfileDeserializationException(
+                    ExecutionStringManager.TrackingDeserializationInvalidPosition
+                        + "ExecutionStatusEvents."
+                );
 
             if (reader.IsEmptyElement)
                 return;
@@ -510,7 +728,14 @@ namespace System.Workflow.Runtime.Tracking
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        if (0 == string.Compare(reader.Name, "ExecutionStatus", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "ExecutionStatus",
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             string status = reader.ReadString();
                             if ((null != status) && (status.Trim().Length > 0))
@@ -519,7 +744,10 @@ namespace System.Workflow.Runtime.Tracking
                                 foreach (string s in names)
                                 {
                                     if (0 == string.Compare(s, status, StringComparison.Ordinal))
-                                        events.Add((ActivityExecutionStatus)Enum.Parse(typeof(ActivityExecutionStatus), status));
+                                        events.Add(
+                                            (ActivityExecutionStatus)
+                                                Enum.Parse(typeof(ActivityExecutionStatus), status)
+                                        );
                                 }
                             }
                         }
@@ -528,14 +756,24 @@ namespace System.Workflow.Runtime.Tracking
 
                         break;
                     case XmlNodeType.EndElement:
-                        if (0 == string.Compare(reader.Name, "ExecutionStatusEvents", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "ExecutionStatusEvents",
+                                StringComparison.Ordinal
+                            )
+                        )
                             return;
                         break;
                 }
             }
             //
             // Something is funky
-            throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationCloseElementNotFound + "ExecutionStatusEvents.");
+            throw new TrackingProfileDeserializationException(
+                ExecutionStringManager.TrackingDeserializationCloseElementNotFound
+                    + "ExecutionStatusEvents."
+            );
         }
 
         private void CreateConditions(XmlReader reader, TrackingConditionCollection conditions)
@@ -547,7 +785,9 @@ namespace System.Workflow.Runtime.Tracking
                 throw new ArgumentNullException("conditions");
 
             if (0 != string.Compare("Conditions", reader.Name, StringComparison.Ordinal))
-                throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationInvalidPosition + "Conditions.");
+                throw new TrackingProfileDeserializationException(
+                    ExecutionStringManager.TrackingDeserializationInvalidPosition + "Conditions."
+                );
 
             if (reader.IsEmptyElement)
                 return;
@@ -557,7 +797,14 @@ namespace System.Workflow.Runtime.Tracking
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        if (0 == string.Compare(reader.Name, "ActivityTrackingCondition", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "ActivityTrackingCondition",
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             ActivityTrackingCondition condition = new ActivityTrackingCondition();
                             CreateCondition(reader, condition);
@@ -568,14 +815,18 @@ namespace System.Workflow.Runtime.Tracking
 
                         break;
                     case XmlNodeType.EndElement:
-                        if (0 == string.Compare(reader.Name, "Conditions", StringComparison.Ordinal))
+                        if (
+                            0 == string.Compare(reader.Name, "Conditions", StringComparison.Ordinal)
+                        )
                             return;
                         break;
                 }
             }
             //
             // Only valid exit is on an EndElement that matches the element that is passed in.
-            throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationCloseElementNotFound + "Conditions.");
+            throw new TrackingProfileDeserializationException(
+                ExecutionStringManager.TrackingDeserializationCloseElementNotFound + "Conditions."
+            );
         }
 
         private void CreateCondition(XmlReader reader, TrackingCondition condition)
@@ -586,8 +837,13 @@ namespace System.Workflow.Runtime.Tracking
             if (null == condition)
                 throw new ArgumentNullException("condition");
 
-            if (0 != string.Compare(condition.GetType().Name, reader.Name, StringComparison.Ordinal))
-                throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationInvalidPosition + condition.GetType().Name);
+            if (
+                0 != string.Compare(condition.GetType().Name, reader.Name, StringComparison.Ordinal)
+            )
+                throw new TrackingProfileDeserializationException(
+                    ExecutionStringManager.TrackingDeserializationInvalidPosition
+                        + condition.GetType().Name
+                );
 
             if (reader.IsEmptyElement)
                 return;
@@ -601,7 +857,9 @@ namespace System.Workflow.Runtime.Tracking
                         {
                             condition.Member = reader.ReadString();
                         }
-                        else if (0 == string.Compare(reader.Name, "Operator", StringComparison.Ordinal))
+                        else if (
+                            0 == string.Compare(reader.Name, "Operator", StringComparison.Ordinal)
+                        )
                         {
                             string op = reader.ReadString();
                             if ((null != op) && (op.Trim().Length > 0))
@@ -610,11 +868,14 @@ namespace System.Workflow.Runtime.Tracking
                                 foreach (string s in names)
                                 {
                                     if (0 == string.Compare(s, op, StringComparison.Ordinal))
-                                        condition.Operator = (ComparisonOperator)Enum.Parse(typeof(ComparisonOperator), op);
+                                        condition.Operator = (ComparisonOperator)
+                                            Enum.Parse(typeof(ComparisonOperator), op);
                                 }
                             }
                         }
-                        else if (0 == string.Compare(reader.Name, "Value", StringComparison.Ordinal))
+                        else if (
+                            0 == string.Compare(reader.Name, "Value", StringComparison.Ordinal)
+                        )
                         {
                             if (!reader.IsEmptyElement)
                                 condition.Value = reader.ReadString();
@@ -624,14 +885,24 @@ namespace System.Workflow.Runtime.Tracking
 
                         break;
                     case XmlNodeType.EndElement:
-                        if (0 == string.Compare(reader.Name, condition.GetType().Name, StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                condition.GetType().Name,
+                                StringComparison.Ordinal
+                            )
+                        )
                             return;
                         break;
                 }
             }
             //
             // Only valid exit is on an EndElement that matches the element that is passed in.
-            throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationCloseElementNotFound + condition.GetType().Name);
+            throw new TrackingProfileDeserializationException(
+                ExecutionStringManager.TrackingDeserializationCloseElementNotFound
+                    + condition.GetType().Name
+            );
         }
 
         private void CreateExtracts(XmlReader reader, ExtractCollection extracts)
@@ -643,7 +914,9 @@ namespace System.Workflow.Runtime.Tracking
                 throw new ArgumentNullException("extracts");
 
             if (0 != string.Compare("Extracts", reader.Name, StringComparison.Ordinal))
-                throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationInvalidPosition + "Extracts");
+                throw new TrackingProfileDeserializationException(
+                    ExecutionStringManager.TrackingDeserializationInvalidPosition + "Extracts"
+                );
 
             if (reader.IsEmptyElement)
                 return;
@@ -653,13 +926,27 @@ namespace System.Workflow.Runtime.Tracking
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        if (0 == string.Compare(reader.Name, "ActivityDataTrackingExtract", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "ActivityDataTrackingExtract",
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             ActivityDataTrackingExtract e = new ActivityDataTrackingExtract();
                             CreateExtract(reader, e);
                             extracts.Add(e);
                         }
-                        else if (0 == string.Compare(reader.Name, "WorkflowDataTrackingExtract", StringComparison.Ordinal))
+                        else if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "WorkflowDataTrackingExtract",
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             WorkflowDataTrackingExtract e = new WorkflowDataTrackingExtract();
                             CreateExtract(reader, e);
@@ -677,7 +964,9 @@ namespace System.Workflow.Runtime.Tracking
             }
             //
             // Only valid exit is on an EndElement that matches the element that is passed in.
-            throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationCloseElementNotFound + "Extracts.");
+            throw new TrackingProfileDeserializationException(
+                ExecutionStringManager.TrackingDeserializationCloseElementNotFound + "Extracts."
+            );
         }
 
         private void CreateExtract(XmlReader reader, TrackingExtract extract)
@@ -698,21 +987,34 @@ namespace System.Workflow.Runtime.Tracking
                     case XmlNodeType.Element:
                         if (0 == string.Compare(reader.Name, "Member", StringComparison.Ordinal))
                             extract.Member = reader.ReadString();
-                        else if (0 == string.Compare(reader.Name, "Annotations", StringComparison.Ordinal))
+                        else if (
+                            0
+                            == string.Compare(reader.Name, "Annotations", StringComparison.Ordinal)
+                        )
                             CreateAnnotations(reader, extract.Annotations);
                         //
                         // Xsd validation will catch unknown elements
 
                         break;
                     case XmlNodeType.EndElement:
-                        if (0 == string.Compare(reader.Name, extract.GetType().Name, StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                extract.GetType().Name,
+                                StringComparison.Ordinal
+                            )
+                        )
                             return;
                         break;
                 }
             }
             //
             // Only valid exit is on an EndElement that matches the element that is passed in.
-            throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationCloseElementNotFound + extract.GetType().Name);
+            throw new TrackingProfileDeserializationException(
+                ExecutionStringManager.TrackingDeserializationCloseElementNotFound
+                    + extract.GetType().Name
+            );
         }
 
         private void CreateAnnotations(XmlReader reader, TrackingAnnotationCollection annotations)
@@ -724,7 +1026,9 @@ namespace System.Workflow.Runtime.Tracking
                 throw new ArgumentNullException("annotations");
 
             if (0 != string.Compare(reader.Name, "Annotations", StringComparison.Ordinal))
-                throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationInvalidPosition + "Annotations.");
+                throw new TrackingProfileDeserializationException(
+                    ExecutionStringManager.TrackingDeserializationInvalidPosition + "Annotations."
+                );
 
             if (reader.IsEmptyElement)
                 return;
@@ -734,7 +1038,9 @@ namespace System.Workflow.Runtime.Tracking
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        if (0 == string.Compare(reader.Name, "Annotation", StringComparison.Ordinal))
+                        if (
+                            0 == string.Compare(reader.Name, "Annotation", StringComparison.Ordinal)
+                        )
                         {
                             //
                             // Preserve null and empty as distinct values
@@ -746,17 +1052,25 @@ namespace System.Workflow.Runtime.Tracking
                         }
                         break;
                     case XmlNodeType.EndElement:
-                        if (0 == string.Compare(reader.Name, "Annotations", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(reader.Name, "Annotations", StringComparison.Ordinal)
+                        )
                             return;
                         break;
                 }
             }
             //
             // Only valid exit is on an EndElement that matches the element that is passed in.
-            throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationCloseElementNotFound + "Annotations.");
+            throw new TrackingProfileDeserializationException(
+                ExecutionStringManager.TrackingDeserializationCloseElementNotFound + "Annotations."
+            );
         }
 
-        private void CreateActivityTrackingLocations(XmlReader reader, ActivityTrackingLocationCollection activities)
+        private void CreateActivityTrackingLocations(
+            XmlReader reader,
+            ActivityTrackingLocationCollection activities
+        )
         {
             if (null == reader)
                 throw new ArgumentNullException("reader");
@@ -774,7 +1088,14 @@ namespace System.Workflow.Runtime.Tracking
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        if (0 == string.Compare(reader.Name, "ActivityTrackingLocation", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "ActivityTrackingLocation",
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             ActivityTrackingLocation location = new ActivityTrackingLocation();
                             CreateActivityTrackingLocation(reader, location);
@@ -789,10 +1110,15 @@ namespace System.Workflow.Runtime.Tracking
             }
             //
             // Only valid exit is on an EndElement that matches the element that is passed in.
-            throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationCloseElementNotFound + startName + ".");
+            throw new TrackingProfileDeserializationException(
+                ExecutionStringManager.TrackingDeserializationCloseElementNotFound + startName + "."
+            );
         }
 
-        private void CreateUserTrackingLocations(XmlReader reader, UserTrackingLocationCollection user)
+        private void CreateUserTrackingLocations(
+            XmlReader reader,
+            UserTrackingLocationCollection user
+        )
         {
             if (null == reader)
                 throw new ArgumentNullException("reader");
@@ -810,7 +1136,14 @@ namespace System.Workflow.Runtime.Tracking
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        if (0 == string.Compare(reader.Name, "UserTrackingLocation", StringComparison.Ordinal))
+                        if (
+                            0
+                            == string.Compare(
+                                reader.Name,
+                                "UserTrackingLocation",
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             UserTrackingLocation location = new UserTrackingLocation();
                             CreateUserTrackingLocation(reader, location);
@@ -825,7 +1158,9 @@ namespace System.Workflow.Runtime.Tracking
             }
             //
             // Only valid exit is on an EndElement that matches the element that is passed in.
-            throw new TrackingProfileDeserializationException(ExecutionStringManager.TrackingDeserializationCloseElementNotFound + startName + ".");
+            throw new TrackingProfileDeserializationException(
+                ExecutionStringManager.TrackingDeserializationCloseElementNotFound + startName + "."
+            );
         }
 
         private XmlReaderSettings GetSchemaReaderSettings()
@@ -839,7 +1174,9 @@ namespace System.Workflow.Runtime.Tracking
             profileSettings.IgnoreComments = true;
             profileSettings.IgnoreProcessingInstructions = true;
             profileSettings.DtdProcessing = DtdProcessing.Prohibit;
-            profileSettings.ValidationEventHandler += new ValidationEventHandler(ValidationCallBack);
+            profileSettings.ValidationEventHandler += new ValidationEventHandler(
+                ValidationCallBack
+            );
 
             return profileSettings;
         }
@@ -884,7 +1221,7 @@ namespace System.Workflow.Runtime.Tracking
             writer.WriteStartDocument(true);
 
             writer.WriteStartElement("TrackingProfile");
-            // Write the namespace declaration.    
+            // Write the namespace declaration.
             writer.WriteAttributeString("xmlns", _ns);
 
             if (null == profile.Version)
@@ -892,11 +1229,29 @@ namespace System.Workflow.Runtime.Tracking
 
             string version = null;
             if (profile.Version.Revision >= 0)
-                version = string.Format(NumberFormatInfo.InvariantInfo, "{0}.{1}.{2}.{3}", profile.Version.Major, profile.Version.Minor, profile.Version.Build, profile.Version.Revision);
+                version = string.Format(
+                    NumberFormatInfo.InvariantInfo,
+                    "{0}.{1}.{2}.{3}",
+                    profile.Version.Major,
+                    profile.Version.Minor,
+                    profile.Version.Build,
+                    profile.Version.Revision
+                );
             else if (profile.Version.Build >= 0)
-                version = string.Format(NumberFormatInfo.InvariantInfo, "{0}.{1}.{2}", profile.Version.Major, profile.Version.Minor, profile.Version.Build);
+                version = string.Format(
+                    NumberFormatInfo.InvariantInfo,
+                    "{0}.{1}.{2}",
+                    profile.Version.Major,
+                    profile.Version.Minor,
+                    profile.Version.Build
+                );
             else if (profile.Version.Minor >= 0)
-                version = string.Format(NumberFormatInfo.InvariantInfo, "{0}.{1}", profile.Version.Major, profile.Version.Minor);
+                version = string.Format(
+                    NumberFormatInfo.InvariantInfo,
+                    "{0}.{1}",
+                    profile.Version.Major,
+                    profile.Version.Minor
+                );
 
             writer.WriteAttributeString("version", version);
             WriteTrackPoints(profile, writer);
@@ -911,10 +1266,17 @@ namespace System.Workflow.Runtime.Tracking
         {
             //
             // We must have at least 1 trackpoint or the profile won't be valid
-            if (((null == profile.WorkflowTrackPoints) || (0 == profile.WorkflowTrackPoints.Count))
-                && ((null == profile.ActivityTrackPoints) || (0 == profile.ActivityTrackPoints.Count))
-                && ((null == profile.UserTrackPoints) || (0 == profile.UserTrackPoints.Count)))
-                throw new ArgumentException(ExecutionStringManager.TrackingSerializationNoTrackPoints);
+            if (
+                ((null == profile.WorkflowTrackPoints) || (0 == profile.WorkflowTrackPoints.Count))
+                && (
+                    (null == profile.ActivityTrackPoints)
+                    || (0 == profile.ActivityTrackPoints.Count)
+                )
+                && ((null == profile.UserTrackPoints) || (0 == profile.UserTrackPoints.Count))
+            )
+                throw new ArgumentException(
+                    ExecutionStringManager.TrackingSerializationNoTrackPoints
+                );
 
             int count = 0;
 
@@ -950,7 +1312,9 @@ namespace System.Workflow.Runtime.Tracking
             //
             // We must have at least 1 trackpoint or the profile isn't valid
             if (0 == count)
-                throw new ArgumentException(ExecutionStringManager.TrackingSerializationNoTrackPoints);
+                throw new ArgumentException(
+                    ExecutionStringManager.TrackingSerializationNoTrackPoints
+                );
 
             writer.WriteEndElement();
         }
@@ -1085,11 +1449,17 @@ namespace System.Workflow.Runtime.Tracking
 
         #region Location
 
-        private void WriteActivityTrackingLocation(ActivityTrackingLocation loc, XmlTextWriter writer)
+        private void WriteActivityTrackingLocation(
+            ActivityTrackingLocation loc,
+            XmlTextWriter writer
+        )
         {
             //
             // Validate this element's required fields
-            if ((null == loc.ActivityType) && ((null == loc.ActivityTypeName) || (0 == loc.ActivityTypeName.Trim().Length)))
+            if (
+                (null == loc.ActivityType)
+                && ((null == loc.ActivityTypeName) || (0 == loc.ActivityTypeName.Trim().Length))
+            )
                 throw new ArgumentException(ExecutionStringManager.MissingActivityType);
 
             writer.WriteStartElement("ActivityTrackingLocation");
@@ -1101,14 +1471,16 @@ namespace System.Workflow.Runtime.Tracking
             else
                 writer.WriteElementString("TypeName", loc.ActivityTypeName);
 
-            writer.WriteElementString("MatchDerivedTypes", loc.MatchDerivedTypes.ToString().ToLower(CultureInfo.InvariantCulture));
+            writer.WriteElementString(
+                "MatchDerivedTypes",
+                loc.MatchDerivedTypes.ToString().ToLower(CultureInfo.InvariantCulture)
+            );
             writer.WriteEndElement();
 
             WriteEvents(loc.ExecutionStatusEvents, writer);
 
             if ((null != loc.Conditions) && (loc.Conditions.Count > 0))
                 WriteConditions(loc.Conditions, writer);
-
 
             writer.WriteEndElement();
         }
@@ -1117,10 +1489,16 @@ namespace System.Workflow.Runtime.Tracking
         {
             //
             // Validate this element's required fields
-            if ((null == loc.ActivityType) && ((null == loc.ActivityTypeName) || (0 == loc.ActivityTypeName.Trim().Length)))
+            if (
+                (null == loc.ActivityType)
+                && ((null == loc.ActivityTypeName) || (0 == loc.ActivityTypeName.Trim().Length))
+            )
                 throw new ArgumentException(ExecutionStringManager.MissingActivityType);
 
-            if ((null == loc.ArgumentType) && ((null == loc.ArgumentTypeName) || (0 == loc.ArgumentTypeName.Trim().Length)))
+            if (
+                (null == loc.ArgumentType)
+                && ((null == loc.ArgumentTypeName) || (0 == loc.ArgumentTypeName.Trim().Length))
+            )
                 throw new ArgumentException(ExecutionStringManager.MissingArgumentType);
 
             writer.WriteStartElement("UserTrackingLocation");
@@ -1133,7 +1511,10 @@ namespace System.Workflow.Runtime.Tracking
             else
                 writer.WriteElementString("TypeName", loc.ActivityTypeName);
 
-            writer.WriteElementString("MatchDerivedTypes", loc.MatchDerivedActivityTypes.ToString().ToLower(CultureInfo.InvariantCulture));
+            writer.WriteElementString(
+                "MatchDerivedTypes",
+                loc.MatchDerivedActivityTypes.ToString().ToLower(CultureInfo.InvariantCulture)
+            );
             writer.WriteEndElement();
             //
             // Write the key name node if it is non null
@@ -1148,7 +1529,10 @@ namespace System.Workflow.Runtime.Tracking
             else
                 writer.WriteElementString("TypeName", loc.ArgumentTypeName);
 
-            writer.WriteElementString("MatchDerivedTypes", loc.MatchDerivedArgumentTypes.ToString().ToLower(CultureInfo.InvariantCulture));
+            writer.WriteElementString(
+                "MatchDerivedTypes",
+                loc.MatchDerivedArgumentTypes.ToString().ToLower(CultureInfo.InvariantCulture)
+            );
             writer.WriteEndElement();
 
             if ((null != loc.Conditions) && (loc.Conditions.Count > 0))
@@ -1157,7 +1541,10 @@ namespace System.Workflow.Runtime.Tracking
             writer.WriteEndElement();
         }
 
-        private void WriteWorkflowTrackingLocation(WorkflowTrackingLocation loc, XmlTextWriter writer)
+        private void WriteWorkflowTrackingLocation(
+            WorkflowTrackingLocation loc,
+            XmlTextWriter writer
+        )
         {
             if ((null == loc.Events) || (0 == loc.Events.Count))
                 throw new ArgumentException(ExecutionStringManager.MissingWorkflowEvents);
@@ -1197,17 +1584,24 @@ namespace System.Workflow.Runtime.Tracking
         {
             Type t = extract.GetType();
 
-            if ((extract is ActivityDataTrackingExtract) || (extract is WorkflowDataTrackingExtract))
+            if (
+                (extract is ActivityDataTrackingExtract) || (extract is WorkflowDataTrackingExtract)
+            )
             {
                 writer.WriteStartElement(extract.GetType().Name);
-                writer.WriteElementString("Member", (null == extract.Member ? string.Empty : extract.Member));
+                writer.WriteElementString(
+                    "Member",
+                    (null == extract.Member ? string.Empty : extract.Member)
+                );
 
                 WriteAnnotations(extract.Annotations, writer);
 
                 writer.WriteEndElement();
             }
             else
-                throw new ArgumentException(ExecutionStringManager.TrackingSerializationInvalidExtract);
+                throw new ArgumentException(
+                    ExecutionStringManager.TrackingSerializationInvalidExtract
+                );
         }
 
         #endregion
@@ -1259,7 +1653,10 @@ namespace System.Workflow.Runtime.Tracking
             writer.WriteEndElement();
         }
 
-        private void WriteAnnotations(TrackingAnnotationCollection annotations, XmlTextWriter writer)
+        private void WriteAnnotations(
+            TrackingAnnotationCollection annotations,
+            XmlTextWriter writer
+        )
         {
             if ((null == annotations) || (0 == annotations.Count))
                 return;
@@ -1354,10 +1751,12 @@ namespace System.Workflow.Runtime.Tracking
 
         #region Schema
 
-        private const string _ns = "http://schemas.microsoft.com/winfx/2006/workflow/trackingprofile";
+        private const string _ns =
+            "http://schemas.microsoft.com/winfx/2006/workflow/trackingprofile";
         private XmlSchema _schema = null;
 
-        internal const string _xsd = @"<?xml version=""1.0"" encoding=""utf-8""?>
+        internal const string _xsd =
+            @"<?xml version=""1.0"" encoding=""utf-8""?>
 <xs:schema id=""WFTrackingProfile"" targetNamespace=""http://schemas.microsoft.com/winfx/2006/workflow/trackingprofile"" elementFormDefault=""qualified"" xmlns=""http://schemas.microsoft.com/winfx/2006/workflow/trackingprofile"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">
     <xs:element name=""TrackingProfile"" type=""TrackingProfileType"" />
 

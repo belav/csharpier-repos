@@ -32,89 +32,97 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Utilities
 {
-	public abstract class Logger : ILogger
-	{
-		string		parameters;
-		LoggerVerbosity	verbosity;
-	
-		protected Logger ()
-		{
-		}
+    public abstract class Logger : ILogger
+    {
+        string parameters;
+        LoggerVerbosity verbosity;
 
-		public virtual string Parameters {
-			get {
-				return parameters;
-			}
-			set {
-				parameters = value;
-			}
-		}
+        protected Logger() { }
 
-		public virtual LoggerVerbosity Verbosity {
-			get {
-				return verbosity;
-			}
-			set {
-				verbosity = value;
-			}
-		}
+        public virtual string Parameters
+        {
+            get { return parameters; }
+            set { parameters = value; }
+        }
 
-		public virtual string FormatErrorEvent (BuildErrorEventArgs args)
-		{
-			StringBuilder sb = new StringBuilder ();
+        public virtual LoggerVerbosity Verbosity
+        {
+            get { return verbosity; }
+            set { verbosity = value; }
+        }
 
-			sb.Append (args.File);
-			AppendLineNumbers (sb, args.LineNumber, args.ColumnNumber, args.EndLineNumber, args.EndColumnNumber);
-			sb.Append (": ");
-			sb.Append (args.Subcategory);
-			sb.Append (" error ");
-			sb.Append (args.Code);
-			sb.Append (": ");
-			sb.Append (args.Message);
+        public virtual string FormatErrorEvent(BuildErrorEventArgs args)
+        {
+            StringBuilder sb = new StringBuilder();
 
-			return sb.ToString ();
-		}
+            sb.Append(args.File);
+            AppendLineNumbers(
+                sb,
+                args.LineNumber,
+                args.ColumnNumber,
+                args.EndLineNumber,
+                args.EndColumnNumber
+            );
+            sb.Append(": ");
+            sb.Append(args.Subcategory);
+            sb.Append(" error ");
+            sb.Append(args.Code);
+            sb.Append(": ");
+            sb.Append(args.Message);
 
-		public virtual string FormatWarningEvent (BuildWarningEventArgs args)
-		{
-			StringBuilder sb = new StringBuilder ();
+            return sb.ToString();
+        }
 
-			sb.Append (args.File);
-			AppendLineNumbers (sb, args.LineNumber, args.ColumnNumber, args.EndLineNumber, args.EndColumnNumber);
-			sb.Append (": ");
-			sb.Append (args.Subcategory);
-			sb.Append (" warning ");
-			sb.Append (args.Code);
-			sb.Append (": ");
-			sb.Append (args.Message);
+        public virtual string FormatWarningEvent(BuildWarningEventArgs args)
+        {
+            StringBuilder sb = new StringBuilder();
 
-			return sb.ToString ();
-		}
+            sb.Append(args.File);
+            AppendLineNumbers(
+                sb,
+                args.LineNumber,
+                args.ColumnNumber,
+                args.EndLineNumber,
+                args.EndColumnNumber
+            );
+            sb.Append(": ");
+            sb.Append(args.Subcategory);
+            sb.Append(" warning ");
+            sb.Append(args.Code);
+            sb.Append(": ");
+            sb.Append(args.Message);
 
-		void AppendLineNumbers (StringBuilder sb, int line, int column, int endLine, int endColumn)
-		{
-			if (line != 0 && column != 0 && endLine != 0 && endColumn != 0) {
-				sb.AppendFormat ("({0},{1},{2},{3})", line, column, endLine, endColumn);
-			} else if (line != 0 && column != 0) {
-				sb.AppendFormat ("({0},{1})", line, column);
-			} else if (line != 0) {
-				sb.AppendFormat ("({0})", line);
-			} else {
-				sb.Append (" ");
-			}
-		}
+            return sb.ToString();
+        }
 
-		public abstract void Initialize (IEventSource eventSource);
+        void AppendLineNumbers(StringBuilder sb, int line, int column, int endLine, int endColumn)
+        {
+            if (line != 0 && column != 0 && endLine != 0 && endColumn != 0)
+            {
+                sb.AppendFormat("({0},{1},{2},{3})", line, column, endLine, endColumn);
+            }
+            else if (line != 0 && column != 0)
+            {
+                sb.AppendFormat("({0},{1})", line, column);
+            }
+            else if (line != 0)
+            {
+                sb.AppendFormat("({0})", line);
+            }
+            else
+            {
+                sb.Append(" ");
+            }
+        }
 
-		public virtual void Shutdown ()
-		{
-		}
-		
-		[MonoTODO]
-		public bool IsVerbosityAtLeast (LoggerVerbosity checkVerbosity)
-		{
-			return this.verbosity >= checkVerbosity;
-		}
-	}
+        public abstract void Initialize(IEventSource eventSource);
+
+        public virtual void Shutdown() { }
+
+        [MonoTODO]
+        public bool IsVerbosityAtLeast(LoggerVerbosity checkVerbosity)
+        {
+            return this.verbosity >= checkVerbosity;
+        }
+    }
 }
-

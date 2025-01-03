@@ -55,13 +55,12 @@
 //
 //---------------------------------------------------------------------------
 using System;
+using System.Collections;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Collections;
-
-using RabbitMQ.Client.Impl;
 using RabbitMQ.Client.Exceptions;
+using RabbitMQ.Client.Impl;
 
 namespace RabbitMQ.Client
 {
@@ -154,7 +153,7 @@ namespace RabbitMQ.Client
         ///<summary>The host to connect to</summary>
         public String HostName = "localhost";
 
-        ///<summary>The port to connect on. AmqpTcpEndpoint.UseDefaultPort indicates the 
+        ///<summary>The port to connect on. AmqpTcpEndpoint.UseDefaultPort indicates the
         /// default for the protocol should be used.</summary>
         public int Port = AmqpTcpEndpoint.UseDefaultPort;
 
@@ -162,58 +161,55 @@ namespace RabbitMQ.Client
         public IProtocol Protocol = Protocols.FromEnvironment();
 
         public AmqpTcpEndpoint Endpoint
-        { 
-          get
-          { 
-              return new AmqpTcpEndpoint(Protocol, HostName, Port); 
-          }
-          set
-          {
-              Protocol = value.Protocol;
-              Port = value.Port;
-              HostName = value.HostName;
-          }
+        {
+            get { return new AmqpTcpEndpoint(Protocol, HostName, Port); }
+            set
+            {
+                Protocol = value.Protocol;
+                Port = value.Port;
+                HostName = value.HostName;
+            }
         }
 
         public String Address
         {
-          get
-          { 
-              String result = HostName;
-              if(Port != AmqpTcpEndpoint.UseDefaultPort)
-              {
-                  result += (":" + Port);
-              }
-              return result;
-          }
-          set
-          {
-              Endpoint = AmqpTcpEndpoint.Parse(Protocol, value);
-          }      
+            get
+            {
+                String result = HostName;
+                if (Port != AmqpTcpEndpoint.UseDefaultPort)
+                {
+                    result += (":" + Port);
+                }
+                return result;
+            }
+            set { Endpoint = AmqpTcpEndpoint.Parse(Protocol, value); }
         }
 
         ///<summary>Construct a fresh instance, with all fields set to
         ///their respective defaults.</summary>
         public ConnectionFactory() { }
 
-        protected virtual IConnection FollowRedirectChain
-            (int maxRedirects,
-             IDictionary connectionAttempts,
-             IDictionary connectionErrors,
-             ref AmqpTcpEndpoint[] mostRecentKnownHosts,
-             AmqpTcpEndpoint endpoint)
+        protected virtual IConnection FollowRedirectChain(
+            int maxRedirects,
+            IDictionary connectionAttempts,
+            IDictionary connectionErrors,
+            ref AmqpTcpEndpoint[] mostRecentKnownHosts,
+            AmqpTcpEndpoint endpoint
+        )
         {
             AmqpTcpEndpoint candidate = endpoint;
-            try {
-                while (true) {
-                    int attemptCount =
-                        connectionAttempts.Contains(candidate)
-                        ? (int) connectionAttempts[candidate]
+            try
+            {
+                while (true)
+                {
+                    int attemptCount = connectionAttempts.Contains(candidate)
+                        ? (int)connectionAttempts[candidate]
                         : 0;
                     connectionAttempts[candidate] = attemptCount + 1;
                     bool insist = attemptCount >= maxRedirects;
 
-                    try {
+                    try
+                    {
                         IProtocol p = candidate.Protocol;
                         IFrameHandler fh = p.CreateFrameHandler(candidate);
                         // At this point, we may be able to create
@@ -221,16 +217,23 @@ namespace RabbitMQ.Client
                         // in which case we're done, and the
                         // connection should be returned.
                         return p.CreateConnection(this, insist, fh);
-                    } catch (RedirectException re) {
-                        if (insist) {
+                    }
+                    catch (RedirectException re)
+                    {
+                        if (insist)
+                        {
                             // We've been redirected, but we insisted that
                             // we shouldn't be redirected! Well-behaved
                             // brokers should never do this.
-                            string message = string.Format("Server {0} ignored 'insist' flag, redirecting us to {1}",
-                                                           candidate,
-                                                           re.Host);
+                            string message = string.Format(
+                                "Server {0} ignored 'insist' flag, redirecting us to {1}",
+                                candidate,
+                                re.Host
+                            );
                             throw new ProtocolViolationException(message);
-                        } else {
+                        }
+                        else
+                        {
                             // We've been redirected. Follow this new link
                             // in the chain, by setting
                             // mostRecentKnownHosts (in case the chain
@@ -242,16 +245,20 @@ namespace RabbitMQ.Client
                         }
                     }
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 connectionErrors[candidate] = e;
                 return null;
             }
         }
 
-        protected virtual IConnection CreateConnection(int maxRedirects,
-                                                       IDictionary connectionAttempts,
-                                                       IDictionary connectionErrors,
-                                                       params AmqpTcpEndpoint[] endpoints)
+        protected virtual IConnection CreateConnection(
+            int maxRedirects,
+            IDictionary connectionAttempts,
+            IDictionary connectionErrors,
+            params AmqpTcpEndpoint[] endpoints
+        )
         {
             foreach (AmqpTcpEndpoint endpoint in endpoints)
             {
@@ -268,12 +275,15 @@ namespace RabbitMQ.Client
                 // we give up on this particular endpoint, and
                 // continue with the foreach loop, trying the
                 // remainder of the array we were given.
-                IConnection conn = FollowRedirectChain(maxRedirects,
-                                                       connectionAttempts,
-                                                       connectionErrors,
-                                                       ref mostRecentKnownHosts,
-                                                       endpoint);
-                if (conn != null) {
+                IConnection conn = FollowRedirectChain(
+                    maxRedirects,
+                    connectionAttempts,
+                    connectionErrors,
+                    ref mostRecentKnownHosts,
+                    endpoint
+                );
+                if (conn != null)
+                {
                     return conn;
                 }
 
@@ -283,18 +293,22 @@ namespace RabbitMQ.Client
                 // RedirectExceptions. We recurse into
                 // mostRecentKnownHosts, to see if one of those is
                 // suitable.
-                if (mostRecentKnownHosts.Length > 0) {
+                if (mostRecentKnownHosts.Length > 0)
+                {
                     // Only bother recursing if we know of some
                     // hosts. If we were to recurse with no endpoints
                     // in the array, we'd stomp on
                     // mostRecentException, which makes debugging
                     // connectivity problems needlessly more
                     // difficult.
-                    conn = CreateConnection(maxRedirects,
-                                            connectionAttempts,
-                                            connectionErrors,
-                                            mostRecentKnownHosts);
-                    if (conn != null) {
+                    conn = CreateConnection(
+                        maxRedirects,
+                        connectionAttempts,
+                        connectionErrors,
+                        mostRecentKnownHosts
+                    );
+                    if (conn != null)
+                    {
                         return conn;
                     }
                 }
@@ -310,11 +324,14 @@ namespace RabbitMQ.Client
         {
             IDictionary connectionAttempts = new Hashtable();
             IDictionary connectionErrors = new Hashtable();
-            IConnection conn = CreateConnection(maxRedirects,
-                                                connectionAttempts,
-                                                connectionErrors,
-                                                new AmqpTcpEndpoint[]{Endpoint});
-            if (conn != null) {
+            IConnection conn = CreateConnection(
+                maxRedirects,
+                connectionAttempts,
+                connectionErrors,
+                new AmqpTcpEndpoint[] { Endpoint }
+            );
+            if (conn != null)
+            {
                 return conn;
             }
             throw new BrokerUnreachableException(connectionAttempts, connectionErrors);

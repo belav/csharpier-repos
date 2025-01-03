@@ -44,9 +44,7 @@ namespace System.Net.Http.Headers
         /// <summary>
         /// Constructor to be used by parser to create a new instance of this type.
         /// </summary>
-        protected CookieHeaderValue()
-        {
-        }
+        protected CookieHeaderValue() { }
 
         private CookieHeaderValue(CookieHeaderValue source)
         {
@@ -101,7 +99,9 @@ namespace System.Net.Http.Headers
                     return null;
                 }
 
-                CookieState cookie = Cookies.FirstOrDefault(c => String.Equals(c.Name, name, StringComparison.OrdinalIgnoreCase));
+                CookieState cookie = Cookies.FirstOrDefault(c =>
+                    String.Equals(c.Name, name, StringComparison.OrdinalIgnoreCase)
+                );
                 if (cookie == null)
                 {
                     cookie = new CookieState(name, String.Empty);
@@ -123,12 +123,22 @@ namespace System.Net.Http.Headers
 
             if (Expires.HasValue)
             {
-                first = AppendSegment(header, first, ExpiresToken, FormattingUtilities.DateToString(Expires.Value));
+                first = AppendSegment(
+                    header,
+                    first,
+                    ExpiresToken,
+                    FormattingUtilities.DateToString(Expires.Value)
+                );
             }
 
             if (MaxAge.HasValue)
             {
-                first = AppendSegment(header, first, MaxAgeToken, ((int)MaxAge.Value.TotalSeconds).ToString(NumberFormatInfo.InvariantInfo));
+                first = AppendSegment(
+                    header,
+                    first,
+                    MaxAgeToken,
+                    ((int)MaxAge.Value.TotalSeconds).ToString(NumberFormatInfo.InvariantInfo)
+                );
             }
 
             if (Domain != null)
@@ -187,7 +197,12 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-        private static bool AppendSegment(StringBuilder builder, bool first, string name, string value)
+        private static bool AppendSegment(
+            StringBuilder builder,
+            bool first,
+            string name,
+            string value
+        )
         {
             if (first)
             {
@@ -207,7 +222,11 @@ namespace System.Net.Http.Headers
             return first;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is a try method where we do want to ignore errors.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "This is a try method where we do want to ignore errors."
+        )]
         private static bool ParseCookieSegment(CookieHeaderValue instance, string segment)
         {
             if (String.IsNullOrWhiteSpace(segment))
@@ -297,7 +316,9 @@ namespace System.Net.Http.Headers
         private static string GetSegmentValue(string[] nameValuePair, string defaultValue)
         {
             Contract.Assert(nameValuePair != null);
-            return nameValuePair.Length > 1 ? FormattingUtilities.UnquoteToken(nameValuePair[1]) : defaultValue;
+            return nameValuePair.Length > 1
+                ? FormattingUtilities.UnquoteToken(nameValuePair[1])
+                : defaultValue;
         }
     }
 }

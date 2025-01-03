@@ -55,11 +55,7 @@ namespace System.ServiceModel.Activities
                     return new Sequence
                     {
                         Variables = { response },
-                        Activities = 
-                        { 
-                            this.responseFormatter,
-                            this.internalSend
-                        }
+                        Activities = { this.responseFormatter, this.internalSend },
                     };
                 }
             };
@@ -67,37 +63,21 @@ namespace System.ServiceModel.Activities
 
         // the content to send (either message or parameters-based) declared by the user
         [DefaultValue(null)]
-        public SendContent Content
-        {
-            get;
-            set;
-        }
+        public SendContent Content { get; set; }
 
         // Internally, we should always use InternalContent since this property may have default content that we added
         internal SendContent InternalContent
         {
-            get
-            {
-                return this.Content ?? SendContent.DefaultSendContent;
-            }
+            get { return this.Content ?? SendContent.DefaultSendContent; }
         }
 
         // Reference to the Receive activity that is responsible for receiving the Request part of the
         // request/reply pattern. This cannot be null.
         [DefaultValue(null)]
-        public Receive Request
-        {
-            get;
-            set;
-        }
+        public Receive Request { get; set; }
 
         [DefaultValue(null)]
-        public string Action
-        {
-            get;
-            set;
-        }
-
+        public string Action { get; set; }
 
         // Additional correlations allow situations where a "session" involves multiple
         // messages between two workflow instances.
@@ -116,11 +96,7 @@ namespace System.ServiceModel.Activities
 
         // used to ensure that the other side gets ALO behavior
         [DefaultValue(false)]
-        public bool PersistBeforeSend
-        {
-            get;
-            set;
-        }
+        public bool PersistBeforeSend { get; set; }
 
         protected override void CacheMetadata(ActivityMetadata metadata)
         {
@@ -130,7 +106,13 @@ namespace System.ServiceModel.Activities
             }
 
             // validate Correlation Initializers
-            MessagingActivityHelper.ValidateCorrelationInitializer(metadata, this.correlationInitializers, true, this.DisplayName, (this.Request != null ? this.Request.OperationName : String.Empty));
+            MessagingActivityHelper.ValidateCorrelationInitializer(
+                metadata,
+                this.correlationInitializers,
+                true,
+                this.DisplayName,
+                (this.Request != null ? this.Request.OperationName : String.Empty)
+            );
 
             // Validate Content
             string operationName = this.Request != null ? this.Request.OperationName : null;
@@ -142,7 +124,11 @@ namespace System.ServiceModel.Activities
                 {
                     CorrelationInitializer initializer = this.correlationInitializers[i];
                     initializer.ArgumentName = Constants.Parameter + i;
-                    RuntimeArgument initializerArgument = new RuntimeArgument(initializer.ArgumentName, Constants.CorrelationHandleType, ArgumentDirection.In);
+                    RuntimeArgument initializerArgument = new RuntimeArgument(
+                        initializer.ArgumentName,
+                        Constants.CorrelationHandleType,
+                        ArgumentDirection.In
+                    );
                     metadata.Bind(initializer.CorrelationHandle, initializerArgument);
                     metadata.AddArgument(initializerArgument);
                 }
@@ -151,28 +137,60 @@ namespace System.ServiceModel.Activities
             if (!metadata.HasViolations)
             {
                 this.internalSend = CreateInternalSend();
-                this.InternalContent.ConfigureInternalSendReply(this.internalSend, out this.responseFormatter);
+                this.InternalContent.ConfigureInternalSendReply(
+                    this.internalSend,
+                    out this.responseFormatter
+                );
 
-                InArgument<CorrelationHandle> requestReplyHandleFromReceive = GetReplyHandleFromReceive();
+                InArgument<CorrelationHandle> requestReplyHandleFromReceive =
+                    GetReplyHandleFromReceive();
                 if (requestReplyHandleFromReceive != null)
                 {
-                    InArgument<CorrelationHandle> internalSendCorrelatesWith = MessagingActivityHelper.CreateReplyCorrelatesWith(requestReplyHandleFromReceive);
-                    
-                    RuntimeArgument internalSendCorrelatesWithArgument = new RuntimeArgument("InternalSendCorrelatesWith", Constants.CorrelationHandleType, ArgumentDirection.In);
+                    InArgument<CorrelationHandle> internalSendCorrelatesWith =
+                        MessagingActivityHelper.CreateReplyCorrelatesWith(
+                            requestReplyHandleFromReceive
+                        );
+
+                    RuntimeArgument internalSendCorrelatesWithArgument = new RuntimeArgument(
+                        "InternalSendCorrelatesWith",
+                        Constants.CorrelationHandleType,
+                        ArgumentDirection.In
+                    );
                     metadata.Bind(internalSendCorrelatesWith, internalSendCorrelatesWithArgument);
                     metadata.AddArgument(internalSendCorrelatesWithArgument);
 
-                    this.internalSend.CorrelatesWith = (InArgument<CorrelationHandle>)InArgument.CreateReference(internalSendCorrelatesWith, "InternalSendCorrelatesWith");
+                    this.internalSend.CorrelatesWith =
+                        (InArgument<CorrelationHandle>)
+                            InArgument.CreateReference(
+                                internalSendCorrelatesWith,
+                                "InternalSendCorrelatesWith"
+                            );
 
                     if (this.responseFormatter != null)
                     {
-                        InArgument<CorrelationHandle> responseFormatterCorrelatesWith = MessagingActivityHelper.CreateReplyCorrelatesWith(requestReplyHandleFromReceive);
+                        InArgument<CorrelationHandle> responseFormatterCorrelatesWith =
+                            MessagingActivityHelper.CreateReplyCorrelatesWith(
+                                requestReplyHandleFromReceive
+                            );
 
-                        RuntimeArgument responseFormatterCorrelatesWithArgument = new RuntimeArgument("ResponseFormatterCorrelatesWith", Constants.CorrelationHandleType, ArgumentDirection.In);
-                        metadata.Bind(responseFormatterCorrelatesWith, responseFormatterCorrelatesWithArgument);
+                        RuntimeArgument responseFormatterCorrelatesWithArgument =
+                            new RuntimeArgument(
+                                "ResponseFormatterCorrelatesWith",
+                                Constants.CorrelationHandleType,
+                                ArgumentDirection.In
+                            );
+                        metadata.Bind(
+                            responseFormatterCorrelatesWith,
+                            responseFormatterCorrelatesWithArgument
+                        );
                         metadata.AddArgument(responseFormatterCorrelatesWithArgument);
 
-                        responseFormatter.CorrelatesWith = (InArgument<CorrelationHandle>)InArgument.CreateReference(responseFormatterCorrelatesWith, "ResponseFormatterCorrelatesWith");
+                        responseFormatter.CorrelatesWith =
+                            (InArgument<CorrelationHandle>)
+                                InArgument.CreateReference(
+                                    responseFormatterCorrelatesWith,
+                                    "ResponseFormatterCorrelatesWith"
+                                );
                     }
                 }
             }
@@ -194,7 +212,7 @@ namespace System.ServiceModel.Activities
                 IsSendReply = true, //indicates that we are sending a reply(server-side)
                 ShouldPersistBeforeSend = this.PersistBeforeSend,
                 OperationName = this.Request.OperationName, //need this for displaying error messages
-                OwnerDisplayName = this.DisplayName
+                OwnerDisplayName = this.DisplayName,
             };
 
             if (this.correlationInitializers != null)
@@ -216,7 +234,10 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        internal void SetFaultFormatter(IDispatchFaultFormatter faultFormatter, bool includeExceptionDetailInFaults)
+        internal void SetFaultFormatter(
+            IDispatchFaultFormatter faultFormatter,
+            bool includeExceptionDetailInFaults
+        )
         {
             Fx.Assert(this.responseFormatter != null, "ToReply cannot be null!");
 
@@ -238,9 +259,13 @@ namespace System.ServiceModel.Activities
                 //if the user has set AdditionalCorrelations, then we need to first look for requestReply Handle there
                 foreach (CorrelationInitializer correlation in this.Request.CorrelationInitializers)
                 {
-                    RequestReplyCorrelationInitializer requestReplyCorrelation = correlation as RequestReplyCorrelationInitializer;
+                    RequestReplyCorrelationInitializer requestReplyCorrelation =
+                        correlation as RequestReplyCorrelationInitializer;
 
-                    if (requestReplyCorrelation != null && requestReplyCorrelation.CorrelationHandle != null)
+                    if (
+                        requestReplyCorrelation != null
+                        && requestReplyCorrelation.CorrelationHandle != null
+                    )
                     {
                         return requestReplyCorrelation.CorrelationHandle;
                     }
@@ -249,25 +274,34 @@ namespace System.ServiceModel.Activities
             return null;
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters,
-            Justification = "This is the design for this public interface, we want to distinguish between SendReply for faults and SendReply for Return parameter therefore need the second output")]
-        public static SendReply FromOperationDescription(OperationDescription operation, out IEnumerable<SendReply> faultReplies)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "This is the design for this public interface, we want to distinguish between SendReply for faults and SendReply for Return parameter therefore need the second output"
+        )]
+        public static SendReply FromOperationDescription(
+            OperationDescription operation,
+            out IEnumerable<SendReply> faultReplies
+        )
         {
             if (operation == null)
             {
-                throw FxTrace.Exception.ArgumentNull("operation", "OperationDescription cannot be null");
+                throw FxTrace.Exception.ArgumentNull(
+                    "operation",
+                    "OperationDescription cannot be null"
+                );
             }
 
             bool contentIsParameter = false;
-            bool contentIsMessage = false; 
+            bool contentIsMessage = false;
             bool isSendContentEmpty = false;
-            
+
             MessageDescription message;
 
-            faultReplies = null; 
+            faultReplies = null;
             List<SendReply> faultRepliesList = new List<SendReply>();
             SendReply reply = null;
-            
+
             if (operation.IsOneWay)
             {
                 return null;
@@ -285,9 +319,16 @@ namespace System.ServiceModel.Activities
 
                 if (message.MessageType == null)
                 {
-                    if (message.Body.ReturnValue != null && message.Body.ReturnValue.Type != typeof(void))
+                    if (
+                        message.Body.ReturnValue != null
+                        && message.Body.ReturnValue.Type != typeof(void)
+                    )
                     {
-                        if (!message.Body.ReturnValue.Type.IsAssignableFrom(typeof(System.ServiceModel.Channels.Message)))
+                        if (
+                            !message.Body.ReturnValue.Type.IsAssignableFrom(
+                                typeof(System.ServiceModel.Channels.Message)
+                            )
+                        )
                         {
                             contentIsParameter = true;
                         }
@@ -310,7 +351,11 @@ namespace System.ServiceModel.Activities
                                     contentIsParameter = true;
                                     break;
                                 }
-                                if (!messagePart.Type.IsAssignableFrom(typeof(System.ServiceModel.Channels.Message)))
+                                if (
+                                    !messagePart.Type.IsAssignableFrom(
+                                        typeof(System.ServiceModel.Channels.Message)
+                                    )
+                                )
                                 {
                                     contentIsParameter = true;
                                 }
@@ -325,19 +370,33 @@ namespace System.ServiceModel.Activities
                     if (contentIsParameter)
                     {
                         SendParametersContent content = new SendParametersContent();
-                        if (message.Direction == MessageDirection.Output
+                        if (
+                            message.Direction == MessageDirection.Output
                             && message.Body.ReturnValue != null
-                            && message.Body.ReturnValue.Type != typeof(void))
+                            && message.Body.ReturnValue.Type != typeof(void)
+                        )
                         {
-                            Argument returnArgument = InArgument.Create(message.Body.ReturnValue.Type, ArgumentDirection.In);
-                            content.Parameters.Add(message.Body.ReturnValue.Name, (InArgument)returnArgument);
+                            Argument returnArgument = InArgument.Create(
+                                message.Body.ReturnValue.Type,
+                                ArgumentDirection.In
+                            );
+                            content.Parameters.Add(
+                                message.Body.ReturnValue.Name,
+                                (InArgument)returnArgument
+                            );
                         }
 
-                        if (message.Direction == MessageDirection.Output && message.Body.Parts != null)
+                        if (
+                            message.Direction == MessageDirection.Output
+                            && message.Body.Parts != null
+                        )
                         {
                             foreach (MessagePartDescription messagePart in message.Body.Parts)
                             {
-                                Argument inArgument = InArgument.Create(messagePart.Type, ArgumentDirection.In);
+                                Argument inArgument = InArgument.Create(
+                                    messagePart.Type,
+                                    ArgumentDirection.In
+                                );
                                 content.Parameters.Add(messagePart.Name, (InArgument)(inArgument));
                             }
                         }
@@ -347,46 +406,60 @@ namespace System.ServiceModel.Activities
                     else
                     {
                         // We must have an untyped message contract
-                        // 
+                        //
                         SendMessageContent content = new SendMessageContent();
                         if (message.Direction == MessageDirection.Output)
                         {
                             content.DeclaredMessageType = message.Body.ReturnValue.Type;
-                            Argument inArgument = InArgument.Create(content.DeclaredMessageType, ArgumentDirection.In);
+                            Argument inArgument = InArgument.Create(
+                                content.DeclaredMessageType,
+                                ArgumentDirection.In
+                            );
                             content.Message = (InArgument)(inArgument);
                         }
-                        contentIsMessage = true; 
+                        contentIsMessage = true;
                         reply.Content = content;
                     }
                 }
                 else
                 {
-                    if (message.MessageType != null && message.MessageType.IsDefined(typeof(MessageContractAttribute), false))
+                    if (
+                        message.MessageType != null
+                        && message.MessageType.IsDefined(typeof(MessageContractAttribute), false)
+                    )
                     {
                         SendMessageContent sendMessageContent;
                         sendMessageContent = new SendMessageContent();
                         sendMessageContent.DeclaredMessageType = message.MessageType;
-                        Argument inArgument = InArgument.Create(sendMessageContent.DeclaredMessageType, ArgumentDirection.In);
+                        Argument inArgument = InArgument.Create(
+                            sendMessageContent.DeclaredMessageType,
+                            ArgumentDirection.In
+                        );
                         sendMessageContent.Message = (InArgument)(inArgument);
                         reply.Content = sendMessageContent;
-                        contentIsMessage = true; 
+                        contentIsMessage = true;
                     }
                     else if (operation.Messages[0].MessageType != null)
                     {
                         reply.Content = new SendMessageContent();
-                        contentIsMessage = true; 
+                        contentIsMessage = true;
                     }
-                    else if (operation.Messages[0].Body.Parts != null
+                    else if (
+                        operation.Messages[0].Body.Parts != null
                         && operation.Messages[0].Body.Parts.Count == 1
-                        && operation.Messages[0].Body.Parts[0].Type.IsAssignableFrom(typeof(System.ServiceModel.Channels.Message)))
+                        && operation
+                            .Messages[0]
+                            .Body.Parts[0]
+                            .Type.IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
+                    )
                     {
                         reply.Content = new SendMessageContent();
-                        contentIsMessage = true; 
+                        contentIsMessage = true;
                     }
                     else
                     {
                         reply.Content = new SendParametersContent();
-                        contentIsMessage = false; 
+                        contentIsMessage = false;
                     }
                 }
             }
@@ -404,10 +477,16 @@ namespace System.ServiceModel.Activities
             return reply;
         }
 
-        static SendReply BuildFaultReplies(FaultDescription faultDescription, bool isMessageContract)
+        static SendReply BuildFaultReplies(
+            FaultDescription faultDescription,
+            bool isMessageContract
+        )
         {
             Fx.Assert(faultDescription != null, "fault Description cannot be null");
-            if (faultDescription.DetailType == TypeHelper.VoidType || faultDescription.DetailType == null)
+            if (
+                faultDescription.DetailType == TypeHelper.VoidType
+                || faultDescription.DetailType == null
+            )
             {
                 throw FxTrace.Exception.ArgumentNullOrEmpty("FaultDescription.DetailType");
             }
@@ -429,7 +508,9 @@ namespace System.ServiceModel.Activities
             }
             else
             {
-                InArgument argument = (InArgument)(InArgument.Create(faultType, ArgumentDirection.In));
+                InArgument argument = (InArgument)(
+                    InArgument.Create(faultType, ArgumentDirection.In)
+                );
                 SendParametersContent faultReplyParameterContent = new SendParametersContent();
                 faultReplyParameterContent.Parameters.Add(faultDescription.Name, argument);
                 faultReply.Content = faultReplyParameterContent;

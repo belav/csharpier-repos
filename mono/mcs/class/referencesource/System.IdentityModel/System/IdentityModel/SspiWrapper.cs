@@ -4,15 +4,14 @@
 
 namespace System.IdentityModel
 {
-    using System.Runtime.InteropServices;
-    using System.Diagnostics;
     using System.ComponentModel;
-    using System.Security.Permissions;
+    using System.Diagnostics;
     using System.Globalization;
-    using System.Security.Authentication.ExtendedProtection;
     using System.Net;
     using System.Runtime.CompilerServices;
-
+    using System.Runtime.InteropServices;
+    using System.Security.Authentication.ExtendedProtection;
+    using System.Security.Permissions;
 
     //From Schannel.h
     internal enum SchProtocols
@@ -40,8 +39,26 @@ namespace System.IdentityModel
         UniClient = unchecked((int)0x80000000),
         UniServer = 0x40000000,
         Unified = (UniClient | UniServer),
-        ClientMask = (PctClient | Ssl2Client | Ssl3Client | TlsClient | Tls11Client | Tls12Client | UniClient),
-        ServerMask = (PctServer | Ssl2Server | Ssl3Server | TlsServer | Tls11Server | Tls12Server | UniServer)
+        ClientMask =
+            (
+                PctClient
+                | Ssl2Client
+                | Ssl3Client
+                | TlsClient
+                | Tls11Client
+                | Tls12Client
+                | UniClient
+            ),
+        ServerMask =
+            (
+                PctServer
+                | Ssl2Server
+                | Ssl3Server
+                | TlsServer
+                | Tls11Server
+                | Tls12Server
+                | UniServer
+            ),
     };
 
     //From WinCrypt.h
@@ -67,7 +84,7 @@ namespace System.IdentityModel
         NameSHA = 4,
 
         NameDH_Ephem = 2,
-        Fortezza = 4
+        Fortezza = 4,
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -82,7 +99,8 @@ namespace System.IdentityModel
         internal IntPtr Comment;
 
         internal static readonly int Size = Marshal.SizeOf(typeof(SecurityPackageInfo));
-        internal static readonly int NameOffest = (int)Marshal.OffsetOf(typeof(SecurityPackageInfo), "Name");
+        internal static readonly int NameOffest = (int)
+            Marshal.OffsetOf(typeof(SecurityPackageInfo), "Name");
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -103,7 +121,8 @@ namespace System.IdentityModel
         internal IntPtr PackageInfo;
         internal uint NegotiationState;
         internal static readonly int Size = Marshal.SizeOf(typeof(NegotiationInfo));
-        internal static readonly int NegotiationStateOffset = (int)Marshal.OffsetOf(typeof(NegotiationInfo), "NegotiationState");
+        internal static readonly int NegotiationStateOffset = (int)
+            Marshal.OffsetOf(typeof(NegotiationInfo), "NegotiationState");
     }
 
     // Note: pack=0 since the first member (SessionKeyLength) is C's long (platform dependent).
@@ -114,7 +133,8 @@ namespace System.IdentityModel
         internal uint SessionKeyLength;
         internal IntPtr Sessionkey;
         internal static readonly int Size = Marshal.SizeOf(typeof(SecPkgContext_SessionKey));
-        internal static readonly int SessionkeyOffset = (int)Marshal.OffsetOf(typeof(SecPkgContext_SessionKey), "Sessionkey");
+        internal static readonly int SessionkeyOffset = (int)
+            Marshal.OffsetOf(typeof(SecPkgContext_SessionKey), "Sessionkey");
     }
 
     internal class LifeSpan
@@ -124,18 +144,12 @@ namespace System.IdentityModel
 
         internal DateTime EffectiveTimeUtc
         {
-            get
-            {
-                return this.effectiveTimeUtc;
-            }
+            get { return this.effectiveTimeUtc; }
         }
 
         internal DateTime ExpiryTimeUtc
         {
-            get
-            {
-                return this.expiryTimeUtc;
-            }
+            get { return this.expiryTimeUtc; }
         }
 
         internal unsafe LifeSpan(byte[] buffer)
@@ -143,12 +157,15 @@ namespace System.IdentityModel
             fixed (byte* pbuffer = &buffer[0])
             {
                 IntPtr ptr = new IntPtr(pbuffer);
-                LifeSpan_Struct lifeSpan = (LifeSpan_Struct)Marshal.PtrToStructure(ptr, typeof(LifeSpan_Struct));
+                LifeSpan_Struct lifeSpan = (LifeSpan_Struct)
+                    Marshal.PtrToStructure(ptr, typeof(LifeSpan_Struct));
                 // start and end times are expressed as local file times.
                 // however dateTime.FromFileTime* expects the file time to be in UTC.
-                // so we need to add the difference to the DateTime 
-                this.effectiveTimeUtc = DateTime.FromFileTimeUtc(lifeSpan.start) + (DateTime.UtcNow - DateTime.Now);
-                this.expiryTimeUtc = DateTime.FromFileTimeUtc(lifeSpan.end) + (DateTime.UtcNow - DateTime.Now);
+                // so we need to add the difference to the DateTime
+                this.effectiveTimeUtc =
+                    DateTime.FromFileTimeUtc(lifeSpan.start) + (DateTime.UtcNow - DateTime.Now);
+                this.expiryTimeUtc =
+                    DateTime.FromFileTimeUtc(lifeSpan.end) + (DateTime.UtcNow - DateTime.Now);
             }
         }
     }
@@ -168,29 +185,47 @@ namespace System.IdentityModel
             {
                 return;
             }
-            IntPtr unmanagedAddress = IntPtrHelper.Add(safeHandle.DangerousGetHandle(), SecurityPackageInfo.Size * index);
-            Capabilities = Marshal.ReadInt32(unmanagedAddress, (int)Marshal.OffsetOf(typeof(SecurityPackageInfo), "Capabilities"));
-            Version = Marshal.ReadInt16(unmanagedAddress, (int)Marshal.OffsetOf(typeof(SecurityPackageInfo), "Version"));
-            RPCID = Marshal.ReadInt16(unmanagedAddress, (int)Marshal.OffsetOf(typeof(SecurityPackageInfo), "RPCID"));
-            MaxToken = Marshal.ReadInt32(unmanagedAddress, (int)Marshal.OffsetOf(typeof(SecurityPackageInfo), "MaxToken"));
+            IntPtr unmanagedAddress = IntPtrHelper.Add(
+                safeHandle.DangerousGetHandle(),
+                SecurityPackageInfo.Size * index
+            );
+            Capabilities = Marshal.ReadInt32(
+                unmanagedAddress,
+                (int)Marshal.OffsetOf(typeof(SecurityPackageInfo), "Capabilities")
+            );
+            Version = Marshal.ReadInt16(
+                unmanagedAddress,
+                (int)Marshal.OffsetOf(typeof(SecurityPackageInfo), "Version")
+            );
+            RPCID = Marshal.ReadInt16(
+                unmanagedAddress,
+                (int)Marshal.OffsetOf(typeof(SecurityPackageInfo), "RPCID")
+            );
+            MaxToken = Marshal.ReadInt32(
+                unmanagedAddress,
+                (int)Marshal.OffsetOf(typeof(SecurityPackageInfo), "MaxToken")
+            );
 
             IntPtr unmanagedString;
-            unmanagedString = Marshal.ReadIntPtr(unmanagedAddress, (int)Marshal.OffsetOf(typeof(SecurityPackageInfo), "Name"));
+            unmanagedString = Marshal.ReadIntPtr(
+                unmanagedAddress,
+                (int)Marshal.OffsetOf(typeof(SecurityPackageInfo), "Name")
+            );
             if (unmanagedString != IntPtr.Zero)
             {
                 Name = Marshal.PtrToStringUni(unmanagedString);
             }
 
-            unmanagedString = Marshal.ReadIntPtr(unmanagedAddress, (int)Marshal.OffsetOf(typeof(SecurityPackageInfo), "Comment"));
+            unmanagedString = Marshal.ReadIntPtr(
+                unmanagedAddress,
+                (int)Marshal.OffsetOf(typeof(SecurityPackageInfo), "Comment")
+            );
             if (unmanagedString != IntPtr.Zero)
             {
-
                 Comment = Marshal.PtrToStringUni(unmanagedString);
             }
         }
-
     }
-
 
     // we keep it simple since we use this only to know if NTLM or
     // Kerberos are used in the context of a Negotiate handshake
@@ -214,9 +249,15 @@ namespace System.IdentityModel
             // const int SECPKG_NEGOTIATION_DIRECT          = 3;
             // const int SECPKG_NEGOTIATION_TRY_MULTICRED   = 4;
 
-            if (negotiationState == SECPKG_NEGOTIATION_COMPLETE || negotiationState == SECPKG_NEGOTIATION_OPTIMISTIC)
+            if (
+                negotiationState == SECPKG_NEGOTIATION_COMPLETE
+                || negotiationState == SECPKG_NEGOTIATION_OPTIMISTIC
+            )
             {
-                IntPtr unmanagedString = Marshal.ReadIntPtr(packageInfo, SecurityPackageInfo.NameOffest);
+                IntPtr unmanagedString = Marshal.ReadIntPtr(
+                    packageInfo,
+                    SecurityPackageInfo.NameOffest
+                );
                 string name = null;
                 if (unmanagedString != IntPtr.Zero)
                 {
@@ -277,6 +318,7 @@ namespace System.IdentityModel
                 blockSize = Marshal.ReadInt32(unmanagedAddress, 16);
             }
         }
+
         public static readonly int SizeOf = Marshal.SizeOf(typeof(StreamSizes));
     }
 
@@ -288,14 +330,8 @@ namespace System.IdentityModel
 
         public static SecurityPackageInfoClass[] SecurityPackages
         {
-            get
-            {
-                return securityPackages;
-            }
-            set
-            {
-                securityPackages = value;
-            }
+            get { return securityPackages; }
+            set { securityPackages = value; }
         }
 
         static SecurityPackageInfoClass[] EnumerateSecurityPackages()
@@ -309,13 +345,20 @@ namespace System.IdentityModel
             SafeFreeContextBuffer arrayBaseHandle = null;
             try
             {
-                int errorCode = SafeFreeContextBuffer.EnumeratePackages(out moduleCount, out arrayBaseHandle);
+                int errorCode = SafeFreeContextBuffer.EnumeratePackages(
+                    out moduleCount,
+                    out arrayBaseHandle
+                );
                 if (errorCode != 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(errorCode));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(errorCode)
+                    );
                 }
 
-                SecurityPackageInfoClass[] securityPackages = new SecurityPackageInfoClass[moduleCount];
+                SecurityPackageInfoClass[] securityPackages = new SecurityPackageInfoClass[
+                    moduleCount
+                ];
                 for (int i = 0; i < moduleCount; i++)
                 {
                     securityPackages[i] = new SecurityPackageInfoClass(arrayBaseHandle, i);
@@ -340,14 +383,22 @@ namespace System.IdentityModel
             {
                 for (int i = 0; i < supportedSecurityPackages.Length; i++)
                 {
-                    if (String.Compare(supportedSecurityPackages[i].Name, packageName, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (
+                        String.Compare(
+                            supportedSecurityPackages[i].Name,
+                            packageName,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                     {
                         return supportedSecurityPackages[i];
                     }
                 }
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SSPIPackageNotSupported, packageName)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.SSPIPackageNotSupported, packageName))
+            );
         }
 
         public static bool IsNegotiateExPackagePresent()
@@ -374,14 +425,22 @@ namespace System.IdentityModel
         public static SafeFreeCredentials AcquireDefaultCredential(
             string package,
             CredentialUse intent,
-            params string[] additionalPackages)
+            params string[] additionalPackages
+        )
         {
             SafeFreeCredentials outCredential = null;
             AuthIdentityEx authIdentity = new AuthIdentityEx(null, null, null, additionalPackages);
-            int errorCode = SafeFreeCredentials.AcquireDefaultCredential(package, intent, ref authIdentity, out outCredential);
+            int errorCode = SafeFreeCredentials.AcquireDefaultCredential(
+                package,
+                intent,
+                ref authIdentity,
+                out outCredential
+            );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(errorCode));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(errorCode)
+                );
             }
             return outCredential;
         }
@@ -389,17 +448,21 @@ namespace System.IdentityModel
         public static SafeFreeCredentials AcquireCredentialsHandle(
             string package,
             CredentialUse intent,
-            ref AuthIdentityEx authdata)
+            ref AuthIdentityEx authdata
+        )
         {
             SafeFreeCredentials credentialsHandle = null;
-            int errorCode = SafeFreeCredentials.AcquireCredentialsHandle(package,
+            int errorCode = SafeFreeCredentials.AcquireCredentialsHandle(
+                package,
                 intent,
                 ref authdata,
                 out credentialsHandle
-                );
+            );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(errorCode));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(errorCode)
+                );
             }
             return credentialsHandle;
         }
@@ -407,7 +470,8 @@ namespace System.IdentityModel
         public static SafeFreeCredentials AcquireCredentialsHandle(
             string package,
             CredentialUse intent,
-            SecureCredential scc)
+            SecureCredential scc
+        )
         {
             SafeFreeCredentials outCredential = null;
             int errorCode = SafeFreeCredentials.AcquireCredentialsHandle(
@@ -415,18 +479,21 @@ namespace System.IdentityModel
                 intent,
                 ref scc,
                 out outCredential
-                );
+            );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(errorCode));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(errorCode)
+                );
             }
             return outCredential;
         }
 
         public static SafeFreeCredentials AcquireCredentialsHandle(
-        string package,
-        CredentialUse intent,
-        ref IntPtr ppAuthIdentity)
+            string package,
+            CredentialUse intent,
+            ref IntPtr ppAuthIdentity
+        )
         {
             SafeFreeCredentials outCredential = null;
             int errorCode = SafeFreeCredentials.AcquireCredentialsHandle(
@@ -434,10 +501,12 @@ namespace System.IdentityModel
                 intent,
                 ref ppAuthIdentity,
                 out outCredential
-                );
+            );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(errorCode));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(errorCode)
+                );
             }
             return outCredential;
         }
@@ -450,9 +519,20 @@ namespace System.IdentityModel
             Endianness datarep,
             SecurityBuffer inputBuffer,
             SecurityBuffer outputBuffer,
-            ref SspiContextFlags outFlags)
+            ref SspiContextFlags outFlags
+        )
         {
-            return SafeDeleteContext.InitializeSecurityContext(credential, ref context, targetName, inFlags, datarep, inputBuffer, null, outputBuffer, ref outFlags);
+            return SafeDeleteContext.InitializeSecurityContext(
+                credential,
+                ref context,
+                targetName,
+                inFlags,
+                datarep,
+                inputBuffer,
+                null,
+                outputBuffer,
+                ref outFlags
+            );
         }
 
         internal static int InitializeSecurityContext(
@@ -463,9 +543,20 @@ namespace System.IdentityModel
             Endianness datarep,
             SecurityBuffer[] inputBuffers,
             SecurityBuffer outputBuffer,
-            ref SspiContextFlags outFlags)
+            ref SspiContextFlags outFlags
+        )
         {
-            return SafeDeleteContext.InitializeSecurityContext(credential, ref context, targetName, inFlags, datarep, null, inputBuffers, outputBuffer, ref outFlags);
+            return SafeDeleteContext.InitializeSecurityContext(
+                credential,
+                ref context,
+                targetName,
+                inFlags,
+                datarep,
+                null,
+                inputBuffers,
+                outputBuffer,
+                ref outFlags
+            );
         }
 
         internal static int AcceptSecurityContext(
@@ -475,9 +566,19 @@ namespace System.IdentityModel
             Endianness datarep,
             SecurityBuffer inputBuffer,
             SecurityBuffer outputBuffer,
-            ref SspiContextFlags outFlags)
+            ref SspiContextFlags outFlags
+        )
         {
-            return SafeDeleteContext.AcceptSecurityContext(credential, ref refContext, inFlags, datarep, inputBuffer, null, outputBuffer, ref outFlags);
+            return SafeDeleteContext.AcceptSecurityContext(
+                credential,
+                ref refContext,
+                inFlags,
+                datarep,
+                inputBuffer,
+                null,
+                outputBuffer,
+                ref outFlags
+            );
         }
 
         internal static int AcceptSecurityContext(
@@ -487,19 +588,36 @@ namespace System.IdentityModel
             Endianness datarep,
             SecurityBuffer[] inputBuffers,
             SecurityBuffer outputBuffer,
-            ref SspiContextFlags outFlags)
+            ref SspiContextFlags outFlags
+        )
         {
-            return SafeDeleteContext.AcceptSecurityContext(credential, ref refContext, inFlags, datarep, null, inputBuffers, outputBuffer, ref outFlags);
+            return SafeDeleteContext.AcceptSecurityContext(
+                credential,
+                ref refContext,
+                inFlags,
+                datarep,
+                null,
+                inputBuffers,
+                outputBuffer,
+                ref outFlags
+            );
         }
 
         public static int QuerySecurityContextToken(
             SafeDeleteContext context,
-            out SafeCloseHandle token)
+            out SafeCloseHandle token
+        )
         {
             return context.GetSecurityContextToken(out token);
         }
 
-        static unsafe int QueryContextAttributes(SafeDeleteContext phContext, ContextAttribute attribute, byte[] buffer, Type handleType, out SafeHandle refHandle)
+        static unsafe int QueryContextAttributes(
+            SafeDeleteContext phContext,
+            ContextAttribute attribute,
+            byte[] buffer,
+            Type handleType,
+            out SafeHandle refHandle
+        )
         {
             refHandle = null;
             if (handleType != null)
@@ -514,18 +632,33 @@ namespace System.IdentityModel
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("handleType", SR.GetString(SR.ValueMustBeOf2Types, typeof(SafeFreeContextBuffer).ToString(), typeof(SafeFreeCertContext).ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "handleType",
+                            SR.GetString(
+                                SR.ValueMustBeOf2Types,
+                                typeof(SafeFreeContextBuffer).ToString(),
+                                typeof(SafeFreeCertContext).ToString()
+                            )
+                        )
+                    );
                 }
             }
             fixed (byte* bufferPtr = buffer)
             {
-                return SafeFreeContextBuffer.QueryContextAttributes(phContext, attribute, bufferPtr, refHandle);
+                return SafeFreeContextBuffer.QueryContextAttributes(
+                    phContext,
+                    attribute,
+                    bufferPtr,
+                    refHandle
+                );
             }
         }
 
         public static unsafe object QueryContextAttributes(
             SafeDeleteContext securityContext,
-            ContextAttribute contextAttribute)
+            ContextAttribute contextAttribute
+        )
         {
             int nativeBlockSize = IntPtr.Size;
             Type handleType = null;
@@ -567,8 +700,13 @@ namespace System.IdentityModel
                     nativeBlockSize = SecPkgContext_SessionKey.Size;
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("contextAttribute", (int)contextAttribute,
-                    typeof(ContextAttribute)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "contextAttribute",
+                            (int)contextAttribute,
+                            typeof(ContextAttribute)
+                        )
+                    );
             }
 
             SafeHandle sspiHandle = null;
@@ -576,10 +714,18 @@ namespace System.IdentityModel
             try
             {
                 byte[] nativeBuffer = new byte[nativeBlockSize];
-                int errorCode = QueryContextAttributes(securityContext, contextAttribute, nativeBuffer, handleType, out sspiHandle);
+                int errorCode = QueryContextAttributes(
+                    securityContext,
+                    contextAttribute,
+                    nativeBuffer,
+                    handleType,
+                    out sspiHandle
+                );
                 if (errorCode != 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(errorCode));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(errorCode)
+                    );
                 }
 
                 switch (contextAttribute)
@@ -607,7 +753,13 @@ namespace System.IdentityModel
                         {
                             fixed (void* ptr = nativeBuffer)
                             {
-                                attribute = new NegotiationInfoClass(sspiHandle, Marshal.ReadInt32(new IntPtr(ptr), NegotiationInfo.NegotiationStateOffset));
+                                attribute = new NegotiationInfoClass(
+                                    sspiHandle,
+                                    Marshal.ReadInt32(
+                                        new IntPtr(ptr),
+                                        NegotiationInfo.NegotiationStateOffset
+                                    )
+                                );
                             }
                         }
                         break;
@@ -628,7 +780,10 @@ namespace System.IdentityModel
                         {
                             fixed (void* ptr = nativeBuffer)
                             {
-                                attribute = new SecuritySessionKeyClass(sspiHandle, Marshal.ReadInt32(new IntPtr(ptr)));
+                                attribute = new SecuritySessionKeyClass(
+                                    sspiHandle,
+                                    Marshal.ReadInt32(new IntPtr(ptr))
+                                );
                             }
                         }
                         break;
@@ -653,7 +808,10 @@ namespace System.IdentityModel
         /// <param name="securityContext">security context to query</param>
         /// <param name="specifiedTarget">output parameter for the name</param>
         /// <returns>the status code returned from querying the context</returns>
-        public static unsafe int QuerySpecifiedTarget(SafeDeleteContext securityContext, out string specifiedTarget)
+        public static unsafe int QuerySpecifiedTarget(
+            SafeDeleteContext securityContext,
+            out string specifiedTarget
+        )
         {
             int nativeBlockSize = IntPtr.Size;
             Type handleType = typeof(SafeFreeContextBuffer);
@@ -664,7 +822,13 @@ namespace System.IdentityModel
             try
             {
                 byte[] nativeBuffer = new byte[nativeBlockSize];
-                errorCode = QueryContextAttributes(securityContext, ContextAttribute.SpecifiedTarget, nativeBuffer, handleType, out sspiHandle);
+                errorCode = QueryContextAttributes(
+                    securityContext,
+                    ContextAttribute.SpecifiedTarget,
+                    nativeBuffer,
+                    handleType,
+                    out sspiHandle
+                );
                 if (errorCode != (int)SecurityStatus.OK)
                 {
                     return errorCode;
@@ -682,17 +846,24 @@ namespace System.IdentityModel
             return errorCode;
         }
 
-        public static void ImpersonateSecurityContext(
-            SafeDeleteContext context)
+        public static void ImpersonateSecurityContext(SafeDeleteContext context)
         {
             int errorCode = SafeDeleteContext.ImpersonateSecurityContext(context);
             if (errorCode != (int)SecurityStatus.OK)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(errorCode));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(errorCode)
+                );
             }
         }
 
-        public static unsafe int EncryptDecryptHelper(SafeDeleteContext context, SecurityBuffer[] input, uint sequenceNumber, bool encrypt, bool isGssBlob)
+        public static unsafe int EncryptDecryptHelper(
+            SafeDeleteContext context,
+            SecurityBuffer[] input,
+            uint sequenceNumber,
+            bool encrypt,
+            bool isGssBlob
+        )
         {
             SecurityBufferDescriptor sdcInOut = new SecurityBufferDescriptor(input.Length);
             SecurityBufferStruct[] unmanagedBuffer = new SecurityBufferStruct[input.Length];
@@ -715,18 +886,29 @@ namespace System.IdentityModel
                         else
                         {
                             pinnedBuffers[i] = GCHandle.Alloc(iBuffer.token, GCHandleType.Pinned);
-                            unmanagedBuffer[i].token = Marshal.UnsafeAddrOfPinnedArrayElement(iBuffer.token, iBuffer.offset);
+                            unmanagedBuffer[i].token = Marshal.UnsafeAddrOfPinnedArrayElement(
+                                iBuffer.token,
+                                iBuffer.offset
+                            );
                             buffers[i] = iBuffer.token;
                         }
                     }
                     int errorCode;
                     if (encrypt)
                     {
-                        errorCode = SafeDeleteContext.EncryptMessage(context, sdcInOut, sequenceNumber);
+                        errorCode = SafeDeleteContext.EncryptMessage(
+                            context,
+                            sdcInOut,
+                            sequenceNumber
+                        );
                     }
                     else
                     {
-                        errorCode = SafeDeleteContext.DecryptMessage(context, sdcInOut, sequenceNumber);
+                        errorCode = SafeDeleteContext.DecryptMessage(
+                            context,
+                            sdcInOut,
+                            sequenceNumber
+                        );
                     }
                     // Marshalling back returned sizes (do not marshal the "token" field)
                     for (int i = 0; i < input.Length; ++i)
@@ -741,10 +923,13 @@ namespace System.IdentityModel
                         }
                         else if (isGssBlob && !encrypt && iBuffer.type == BufferType.Data)
                         {
-                            iBuffer.token = DiagnosticUtility.Utility.AllocateByteArray(iBuffer.size);
+                            iBuffer.token = DiagnosticUtility.Utility.AllocateByteArray(
+                                iBuffer.size
+                            );
                             Marshal.Copy(unmanagedBuffer[i].token, iBuffer.token, 0, iBuffer.size);
                         }
-                        else checked
+                        else
+                            checked
                             {
                                 // Find the buffer this is inside of.  Usually they all point inside buffer 0.
                                 int j;
@@ -755,11 +940,17 @@ namespace System.IdentityModel
                                         continue;
                                     }
 
-                                    byte* bufferAddress = (byte*)Marshal.UnsafeAddrOfPinnedArrayElement(buffers[j], 0);
-                                    if ((byte*)unmanagedBuffer[i].token >= bufferAddress &&
-                                        (byte*)unmanagedBuffer[i].token + iBuffer.size <= bufferAddress + buffers[j].Length)
+                                    byte* bufferAddress = (byte*)
+                                        Marshal.UnsafeAddrOfPinnedArrayElement(buffers[j], 0);
+                                    if (
+                                        (byte*)unmanagedBuffer[i].token >= bufferAddress
+                                        && (byte*)unmanagedBuffer[i].token + iBuffer.size
+                                            <= bufferAddress + buffers[j].Length
+                                    )
                                     {
-                                        iBuffer.offset = (int)((byte*)unmanagedBuffer[i].token - bufferAddress);
+                                        iBuffer.offset = (int)(
+                                            (byte*)unmanagedBuffer[i].token - bufferAddress
+                                        );
                                         iBuffer.token = buffers[j];
                                         break;
                                     }
@@ -771,16 +962,55 @@ namespace System.IdentityModel
                                     iBuffer.offset = 0;
                                     iBuffer.token = null;
                                 }
-                                if (!(iBuffer.offset >= 0 && iBuffer.offset <= (iBuffer.token == null ? 0 : iBuffer.token.Length)))
+                                if (
+                                    !(
+                                        iBuffer.offset >= 0
+                                        && iBuffer.offset
+                                            <= (iBuffer.token == null ? 0 : iBuffer.token.Length)
+                                    )
+                                )
                                 {
-                                    DiagnosticUtility.DebugAssert(SR.GetString(SR.SspiWrapperEncryptDecryptAssert1, iBuffer.offset));
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SspiWrapperEncryptDecryptAssert1, iBuffer.offset)));
-
+                                    DiagnosticUtility.DebugAssert(
+                                        SR.GetString(
+                                            SR.SspiWrapperEncryptDecryptAssert1,
+                                            iBuffer.offset
+                                        )
+                                    );
+                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                        new InvalidOperationException(
+                                            SR.GetString(
+                                                SR.SspiWrapperEncryptDecryptAssert1,
+                                                iBuffer.offset
+                                            )
+                                        )
+                                    );
                                 }
-                                if (!(iBuffer.size >= 0 && iBuffer.size <= (iBuffer.token == null ? 0 : iBuffer.token.Length - iBuffer.offset)))
+                                if (
+                                    !(
+                                        iBuffer.size >= 0
+                                        && iBuffer.size
+                                            <= (
+                                                iBuffer.token == null
+                                                    ? 0
+                                                    : iBuffer.token.Length - iBuffer.offset
+                                            )
+                                    )
+                                )
                                 {
-                                    DiagnosticUtility.DebugAssert(SR.GetString(SR.SspiWrapperEncryptDecryptAssert2, iBuffer.size));
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SspiWrapperEncryptDecryptAssert2, iBuffer.size)));
+                                    DiagnosticUtility.DebugAssert(
+                                        SR.GetString(
+                                            SR.SspiWrapperEncryptDecryptAssert2,
+                                            iBuffer.size
+                                        )
+                                    );
+                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                        new InvalidOperationException(
+                                            SR.GetString(
+                                                SR.SspiWrapperEncryptDecryptAssert2,
+                                                iBuffer.size
+                                            )
+                                        )
+                                    );
                                 }
                             }
                     }
@@ -799,17 +1029,31 @@ namespace System.IdentityModel
             }
         }
 
-        public static unsafe int EncryptMessage(SafeDeleteContext context, SecurityBuffer[] input, uint sequenceNumber)
+        public static unsafe int EncryptMessage(
+            SafeDeleteContext context,
+            SecurityBuffer[] input,
+            uint sequenceNumber
+        )
         {
             return EncryptDecryptHelper(context, input, sequenceNumber, true, false);
         }
 
-        public static unsafe int DecryptMessage(SafeDeleteContext context, SecurityBuffer[] input, uint sequenceNumber, bool isGssBlob)
+        public static unsafe int DecryptMessage(
+            SafeDeleteContext context,
+            SecurityBuffer[] input,
+            uint sequenceNumber,
+            bool isGssBlob
+        )
         {
             return EncryptDecryptHelper(context, input, sequenceNumber, false, isGssBlob);
         }
 
-        public static unsafe uint SspiPromptForCredential(string targetName, string packageName, out IntPtr ppAuthIdentity, ref bool saveCredentials)
+        public static unsafe uint SspiPromptForCredential(
+            string targetName,
+            string packageName,
+            out IntPtr ppAuthIdentity,
+            ref bool saveCredentials
+        )
         {
             CREDUI_INFO credui_Info = new CREDUI_INFO();
             credui_Info.cbSize = Marshal.SizeOf(typeof(CREDUI_INFO));
@@ -817,7 +1061,16 @@ namespace System.IdentityModel
             credui_Info.pszCaptionText = SR.GetString(SR.SspiLoginPromptHeaderMessage); // Login
             credui_Info.pszMessageText = "";
             uint retCode = uint.MaxValue;
-            retCode = NativeMethods.SspiPromptForCredentials(targetName, ref credui_Info, 0, packageName, IntPtr.Zero, out ppAuthIdentity, ref saveCredentials, 0);
+            retCode = NativeMethods.SspiPromptForCredentials(
+                targetName,
+                ref credui_Info,
+                0,
+                packageName,
+                IntPtr.Zero,
+                out ppAuthIdentity,
+                ref saveCredentials,
+                0
+            );
             return retCode;
         }
 
@@ -826,13 +1079,13 @@ namespace System.IdentityModel
             return NativeMethods.SspiIsPromptingNeeded(ErrorOrNtStatus);
         }
 
-        //public static string ErrorDescription(int errorCode) 
+        //public static string ErrorDescription(int errorCode)
         //{
-        //    if (errorCode == -1) 
+        //    if (errorCode == -1)
         //    {
         //        return "An exception when invoking Win32 API";
         //    }
-        //    switch ((SecurityStatus) errorCode) 
+        //    switch ((SecurityStatus) errorCode)
         //    {
         //        case SecurityStatus.InvalidHandle:
         //            return "Invalid handle";
@@ -907,6 +1160,7 @@ namespace System.IdentityModel
                 SecurityTrailer = Marshal.ReadInt32(unmanagedAddress, 12);
             }
         }
+
         public static readonly int SizeOf = Marshal.SizeOf(typeof(SecSizes));
     }
 

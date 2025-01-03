@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,29 +28,27 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Messaging {
+namespace Mono.Messaging
+{
+    /// <summary>
+    /// Provides access to the core implementation classes.  A single instance of
+    /// this class will be maintained by the MessagingProviderLocator, therefore
+    /// any implementations of this class must be thread safe.
+    /// </summary>
+    public interface IMessagingProvider
+    {
+        bool Exists(QueueReference qRef);
 
-	/// <summary>
-	/// Provides access to the core implementation classes.  A single instance of
-	/// this class will be maintained by the MessagingProviderLocator, therefore
-	/// any implementations of this class must be thread safe.
-	/// </summary>
-	public interface IMessagingProvider {
-		
-		bool Exists (QueueReference qRef);
-		
-		IMessageQueue CreateMessageQueue (QueueReference qRef,
-		                                  bool transactional);
-		
-		IMessageQueue GetMessageQueue (QueueReference qRef);
+        IMessageQueue CreateMessageQueue(QueueReference qRef, bool transactional);
 
-		IMessage CreateMessage ();
-		
-		IMessageQueueTransaction CreateMessageQueueTransaction ();
+        IMessageQueue GetMessageQueue(QueueReference qRef);
 
-		void DeleteQueue (QueueReference qRef);
-		
-		IMessageQueue[] GetPublicQueues ();
-	}
+        IMessage CreateMessage();
 
+        IMessageQueueTransaction CreateMessageQueueTransaction();
+
+        void DeleteQueue(QueueReference qRef);
+
+        IMessageQueue[] GetPublicQueues();
+    }
 }

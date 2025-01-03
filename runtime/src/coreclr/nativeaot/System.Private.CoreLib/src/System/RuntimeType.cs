@@ -10,11 +10,9 @@ using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
-
 using Internal.Reflection.Augments;
 using Internal.Reflection.Core.Execution;
 using Internal.Runtime;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace System
@@ -32,7 +30,10 @@ namespace System
         internal RuntimeType(RuntimeTypeInfo runtimeTypeInfo)
         {
             // This needs to be a strong handle to prevent the type from being collected and re-created that would end up leaking the handle.
-            _runtimeTypeInfoHandle = RuntimeImports.RhHandleAlloc(runtimeTypeInfo, GCHandleType.Normal);
+            _runtimeTypeInfoHandle = RuntimeImports.RhHandleAlloc(
+                runtimeTypeInfo,
+                GCHandleType.Normal
+            );
         }
 
         internal void DangerousSetUnderlyingEEType(MethodTable* pEEType)
@@ -48,9 +49,21 @@ namespace System
 
         private static bool IsReflectionDisabled => false;
 
-        private static bool DoNotThrowForNames => AppContext.TryGetSwitch("Switch.System.Reflection.Disabled.DoNotThrowForNames", out bool doNotThrow) && doNotThrow;
-        private static bool DoNotThrowForAssembly => AppContext.TryGetSwitch("Switch.System.Reflection.Disabled.DoNotThrowForAssembly", out bool doNotThrow) && doNotThrow;
-        private static bool DoNotThrowForAttributes => AppContext.TryGetSwitch("Switch.System.Reflection.Disabled.DoNotThrowForAttributes", out bool doNotThrow) && doNotThrow;
+        private static bool DoNotThrowForNames =>
+            AppContext.TryGetSwitch(
+                "Switch.System.Reflection.Disabled.DoNotThrowForNames",
+                out bool doNotThrow
+            ) && doNotThrow;
+        private static bool DoNotThrowForAssembly =>
+            AppContext.TryGetSwitch(
+                "Switch.System.Reflection.Disabled.DoNotThrowForAssembly",
+                out bool doNotThrow
+            ) && doNotThrow;
+        private static bool DoNotThrowForAttributes =>
+            AppContext.TryGetSwitch(
+                "Switch.System.Reflection.Disabled.DoNotThrowForAttributes",
+                out bool doNotThrow
+            ) && doNotThrow;
 
         internal EETypePtr ToEETypePtrMayBeNull() => new EETypePtr(_pUnderlyingEEType);
 
@@ -75,7 +88,9 @@ namespace System
             if (IsReflectionDisabled)
                 throw new NotSupportedException(SR.Reflection_Disabled);
 
-            RuntimeTypeInfo runtimeTypeInfo = ExecutionDomain.GetRuntimeTypeInfo(_pUnderlyingEEType);
+            RuntimeTypeInfo runtimeTypeInfo = ExecutionDomain.GetRuntimeTypeInfo(
+                _pUnderlyingEEType
+            );
 
             // We assume that the RuntimeTypeInfo unifiers pick a winner when multiple threads
             // race to create RuntimeTypeInfo.
@@ -83,8 +98,14 @@ namespace System
             IntPtr handle = _runtimeTypeInfoHandle;
             if (handle == default)
             {
-                IntPtr tempHandle = RuntimeImports.RhHandleAlloc(runtimeTypeInfo, GCHandleType.Weak);
-                if (Interlocked.CompareExchange(ref _runtimeTypeInfoHandle, tempHandle, default) != default)
+                IntPtr tempHandle = RuntimeImports.RhHandleAlloc(
+                    runtimeTypeInfo,
+                    GCHandleType.Weak
+                );
+                if (
+                    Interlocked.CompareExchange(ref _runtimeTypeInfoHandle, tempHandle, default)
+                    != default
+                )
                     RuntimeImports.RhHandleFree(tempHandle);
             }
             else
@@ -154,7 +175,13 @@ namespace System
                 if (!Enum.TryGetUnboxedValueOfEnumOrInteger(value, out rawValue))
                 {
                     if (Type.IsIntegerType(value.GetType()))
-                        throw new ArgumentException(SR.Format(SR.Arg_EnumUnderlyingTypeAndObjectMustBeSameType, value.GetType(), Enum.InternalGetUnderlyingType(this)));
+                        throw new ArgumentException(
+                            SR.Format(
+                                SR.Arg_EnumUnderlyingTypeAndObjectMustBeSameType,
+                                value.GetType(),
+                                Enum.InternalGetUnderlyingType(this)
+                            )
+                        );
                     else
                         throw new InvalidOperationException(SR.InvalidOperation_UnknownEnumType);
                 }
@@ -162,20 +189,30 @@ namespace System
                 if (value is Enum)
                 {
                     if (value.GetEETypePtr() != this.ToEETypePtrMayBeNull())
-                        throw new ArgumentException(SR.Format(SR.Arg_EnumAndObjectMustBeSameType, value.GetType(), this));
+                        throw new ArgumentException(
+                            SR.Format(SR.Arg_EnumAndObjectMustBeSameType, value.GetType(), this)
+                        );
                 }
                 else
                 {
                     Type underlyingType = Enum.InternalGetUnderlyingType(this);
                     if (!(underlyingType.TypeHandle.ToEETypePtr() == value.GetEETypePtr()))
-                        throw new ArgumentException(SR.Format(SR.Arg_EnumUnderlyingTypeAndObjectMustBeSameType, value.GetType(), underlyingType));
+                        throw new ArgumentException(
+                            SR.Format(
+                                SR.Arg_EnumUnderlyingTypeAndObjectMustBeSameType,
+                                value.GetType(),
+                                underlyingType
+                            )
+                        );
                 }
 
                 return Enum.GetName(this, rawValue) != null;
             }
         }
 
-        [RequiresDynamicCode("It might not be possible to create an array of the enum type at runtime. Use the GetValues<TEnum> overload instead.")]
+        [RequiresDynamicCode(
+            "It might not be possible to create an array of the enum type at runtime. Use the GetValues<TEnum> overload instead."
+        )]
         public override Array GetEnumValues()
         {
             if (!IsActualEnum)
@@ -187,9 +224,11 @@ namespace System
             // Without universal shared generics, chances are slim that we'll have the appropriate
             // array type available. Offer an escape hatch that avoids a missing metadata exception
             // at the cost of a small appcompat risk.
-            Array result = AppContext.TryGetSwitch("Switch.System.Enum.RelaxedGetValues", out bool isRelaxed) && isRelaxed ?
-                Array.CreateInstance(Enum.InternalGetUnderlyingType(this), count) :
-                Array.CreateInstance(this, count);
+            Array result =
+                AppContext.TryGetSwitch("Switch.System.Enum.RelaxedGetValues", out bool isRelaxed)
+                && isRelaxed
+                    ? Array.CreateInstance(Enum.InternalGetUnderlyingType(this), count)
+                    : Array.CreateInstance(this, count);
 
             Array.Copy(values, result, values.Length);
             return result;
@@ -203,8 +242,7 @@ namespace System
             return Enum.GetValuesAsUnderlyingType(this);
         }
 
-        public override int GetHashCode()
-            => ((nuint)_pUnderlyingEEType).GetHashCode();
+        public override int GetHashCode() => ((nuint)_pUnderlyingEEType).GetHashCode();
 
         public override RuntimeTypeHandle TypeHandle
         {
@@ -305,7 +343,9 @@ namespace System
         {
             MethodTable* pEEType = _pUnderlyingEEType;
             if (pEEType != null)
-                return pEEType->IsParameterizedType ? GetTypeFromMethodTable(pEEType->RelatedParameterType) : null;
+                return pEEType->IsParameterizedType
+                    ? GetTypeFromMethodTable(pEEType->RelatedParameterType)
+                    : null;
             return GetRuntimeTypeInfo().GetElementType();
         }
 
@@ -313,7 +353,9 @@ namespace System
         {
             MethodTable* pEEType = _pUnderlyingEEType;
             if (pEEType != null)
-                return pEEType->IsArray ? pEEType->ArrayRank : throw new ArgumentException(SR.Argument_HasToBeArrayClass);
+                return pEEType->IsArray
+                    ? pEEType->ArrayRank
+                    : throw new ArgumentException(SR.Argument_HasToBeArrayClass);
             return GetRuntimeTypeInfo().GetArrayRank();
         }
 
@@ -372,7 +414,8 @@ namespace System
             {
                 MethodTable* pEEType = _pUnderlyingEEType;
                 if (pEEType != null)
-                    return (pEEType->IsCanonical && !pEEType->IsGeneric) || pEEType->IsGenericTypeDefinition;
+                    return (pEEType->IsCanonical && !pEEType->IsGeneric)
+                        || pEEType->IsGenericTypeDefinition;
                 return GetRuntimeTypeInfo().IsTypeDefinition;
             }
         }
@@ -415,9 +458,9 @@ namespace System
             MethodTable* pEEType = _pUnderlyingEEType;
             if (pEEType != null)
             {
-                return pEEType->IsGeneric ? GetTypeFromMethodTable(pEEType->GenericDefinition) :
-                    pEEType->IsGenericTypeDefinition ? this :
-                        throw new InvalidOperationException(SR.InvalidOperation_NotGenericType);
+                return pEEType->IsGeneric ? GetTypeFromMethodTable(pEEType->GenericDefinition)
+                    : pEEType->IsGenericTypeDefinition ? this
+                    : throw new InvalidOperationException(SR.InvalidOperation_NotGenericType);
             }
             return GetRuntimeTypeInfo().GetGenericTypeDefinition();
         }
@@ -607,19 +650,27 @@ namespace System
                 return true;
 
             if (c.UnderlyingSystemType is not RuntimeType fromRuntimeType)
-                return false;  // Desktop compat: If typeInfo is null, or implemented by a different Reflection implementation, return "false."
+                return false; // Desktop compat: If typeInfo is null, or implemented by a different Reflection implementation, return "false."
 
             if (fromRuntimeType._pUnderlyingEEType != null && _pUnderlyingEEType != null)
             {
                 // If both types have type handles, let MRT handle this. It's not dependent on metadata.
-                if (RuntimeImports.AreTypesAssignable(fromRuntimeType._pUnderlyingEEType, _pUnderlyingEEType))
+                if (
+                    RuntimeImports.AreTypesAssignable(
+                        fromRuntimeType._pUnderlyingEEType,
+                        _pUnderlyingEEType
+                    )
+                )
                     return true;
 
                 // Runtime IsAssignableFrom does not handle casts from generic type definitions: always returns false. For those, we fall through to the
                 // managed implementation. For everyone else, return "false".
                 //
                 // Runtime IsAssignableFrom does not handle pointer -> UIntPtr cast.
-                if (!fromRuntimeType._pUnderlyingEEType->IsGenericTypeDefinition || fromRuntimeType._pUnderlyingEEType->IsPointer)
+                if (
+                    !fromRuntimeType._pUnderlyingEEType->IsGenericTypeDefinition
+                    || fromRuntimeType._pUnderlyingEEType->IsPointer
+                )
                     return false;
             }
 
@@ -653,8 +704,8 @@ namespace System
 
         object ICloneable.Clone() => this;
 
-        public override bool IsAssignableFrom([NotNullWhen(true)] TypeInfo? typeInfo)
-            => typeInfo != null && IsAssignableFrom(typeInfo.AsType());
+        public override bool IsAssignableFrom([NotNullWhen(true)] TypeInfo? typeInfo) =>
+            typeInfo != null && IsAssignableFrom(typeInfo.AsType());
 
         public override bool IsSecurityCritical => true;
         public override bool IsSecuritySafeCritical => false;
@@ -673,23 +724,26 @@ namespace System
 
         public override MethodBase? DeclaringMethod => GetRuntimeTypeInfo().DeclaringMethod;
 
-        public override StructLayoutAttribute StructLayoutAttribute => GetRuntimeTypeInfo().StructLayoutAttribute;
+        public override StructLayoutAttribute StructLayoutAttribute =>
+            GetRuntimeTypeInfo().StructLayoutAttribute;
 
         protected override bool IsCOMObjectImpl() => false;
 
-        protected override TypeCode GetTypeCodeImpl() => ReflectionAugments.GetRuntimeTypeCode(this);
+        protected override TypeCode GetTypeCodeImpl() =>
+            ReflectionAugments.GetRuntimeTypeCode(this);
 
-        protected override TypeAttributes GetAttributeFlagsImpl() => GetRuntimeTypeInfo().Attributes;
+        protected override TypeAttributes GetAttributeFlagsImpl() =>
+            GetRuntimeTypeInfo().Attributes;
 
-        public override Type[] GenericTypeParameters
-            => GetRuntimeTypeInfo().GenericTypeParameters;
+        public override Type[] GenericTypeParameters => GetRuntimeTypeInfo().GenericTypeParameters;
 
-        public override int GenericParameterPosition
-            => GetRuntimeTypeInfo().GenericParameterPosition;
-        public override GenericParameterAttributes GenericParameterAttributes
-            => GetRuntimeTypeInfo().GenericParameterAttributes;
-        public override Type[] GetGenericParameterConstraints()
-            => GetRuntimeTypeInfo().GetGenericParameterConstraints();
+        public override int GenericParameterPosition =>
+            GetRuntimeTypeInfo().GenericParameterPosition;
+        public override GenericParameterAttributes GenericParameterAttributes =>
+            GetRuntimeTypeInfo().GenericParameterAttributes;
+
+        public override Type[] GetGenericParameterConstraints() =>
+            GetRuntimeTypeInfo().GetGenericParameterConstraints();
 
         public override Type[] GetFunctionPointerCallingConventions()
         {
@@ -700,97 +754,212 @@ namespace System
             return EmptyTypes;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-        protected override ConstructorInfo? GetConstructorImpl(BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention, Type[] types, ParameterModifier[]? modifiers)
-            => GetRuntimeTypeInfo().GetConstructorImpl(bindingAttr, binder, callConvention, types, modifiers);
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
+        protected override ConstructorInfo? GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[]? modifiers
+        ) =>
+            GetRuntimeTypeInfo()
+                .GetConstructorImpl(bindingAttr, binder, callConvention, types, modifiers);
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-        public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr)
-            => GetRuntimeTypeInfo().GetConstructors(bindingAttr);
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
+        public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr) =>
+            GetRuntimeTypeInfo().GetConstructors(bindingAttr);
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
-        public override EventInfo? GetEvent(string name, BindingFlags bindingAttr)
-            => GetRuntimeTypeInfo().GetEvent(name, bindingAttr);
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
+        public override EventInfo? GetEvent(string name, BindingFlags bindingAttr) =>
+            GetRuntimeTypeInfo().GetEvent(name, bindingAttr);
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
-        public override EventInfo[] GetEvents(BindingFlags bindingAttr)
-            => GetRuntimeTypeInfo().GetEvents(bindingAttr);
-
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
-        public override FieldInfo? GetField(string name, BindingFlags bindingAttr)
-            => GetRuntimeTypeInfo().GetField(name, bindingAttr);
-
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
-        public override FieldInfo[] GetFields(BindingFlags bindingAttr)
-            => GetRuntimeTypeInfo().GetFields(bindingAttr);
-
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-        protected override MethodInfo? GetMethodImpl(string name, BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers)
-            => GetRuntimeTypeInfo().GetMethodImpl(name, RuntimeTypeInfo.GenericParameterCountAny, bindingAttr, binder, callConvention, types, modifiers);
-
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-        protected override MethodInfo? GetMethodImpl(string name, int genericParameterCount, BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers)
-            => GetRuntimeTypeInfo().GetMethodImpl(name, genericParameterCount, bindingAttr, binder, callConvention, types, modifiers);
-
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-        public override MethodInfo[] GetMethods(BindingFlags bindingAttr)
-            => GetRuntimeTypeInfo().GetMethods(bindingAttr);
-
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
-        public override Type? GetNestedType(string name, BindingFlags bindingAttr)
-            => GetRuntimeTypeInfo().GetNestedType(name, bindingAttr);
-
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
-        public override Type[] GetNestedTypes(BindingFlags bindingAttr)
-            => GetRuntimeTypeInfo().GetNestedTypes(bindingAttr);
-
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
-        protected override PropertyInfo? GetPropertyImpl(string name, BindingFlags bindingAttr, Binder? binder, Type? returnType, Type[]? types, ParameterModifier[]? modifiers)
-            => GetRuntimeTypeInfo().GetPropertyImpl(name, bindingAttr, binder, returnType, types, modifiers);
-
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
-        public override PropertyInfo[] GetProperties(BindingFlags bindingAttr)
-            => GetRuntimeTypeInfo().GetProperties(bindingAttr);
-
-        [DynamicallyAccessedMembers(GetAllMembers)]
-        public override MemberInfo[] GetMember(string name, BindingFlags bindingAttr)
-            => GetRuntimeTypeInfo().GetMember(name, bindingAttr);
-
-        [DynamicallyAccessedMembers(GetAllMembers)]
-        public override MemberInfo[] GetMember(string name, MemberTypes type, BindingFlags bindingAttr)
-            => GetRuntimeTypeInfo().GetMember(name, type, bindingAttr);
-
-        [DynamicallyAccessedMembers(GetAllMembers)]
-        public override MemberInfo[] GetMembers(BindingFlags bindingAttr)
-            => GetRuntimeTypeInfo().GetMembers(bindingAttr);
-
-        public override MemberInfo GetMemberWithSameMetadataDefinitionAs(MemberInfo member)
-            => GetRuntimeTypeInfo().GetMemberWithSameMetadataDefinitionAs(member);
-
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-        public override object? InvokeMember(string name, BindingFlags invokeAttr, Binder? binder, object? target, object?[]? args, ParameterModifier[]? modifiers, CultureInfo? culture, string[]? namedParameters)
-            => GetRuntimeTypeInfo().InvokeMember(name, invokeAttr, binder, target, args, modifiers, culture, namedParameters);
-
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
-        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
-        public override Type? GetInterface(string name, bool ignoreCase)
-            => GetRuntimeTypeInfo().GetInterface(name, ignoreCase);
-
-        public override InterfaceMapping GetInterfaceMap([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] Type interfaceType)
-            => GetRuntimeTypeInfo().GetInterfaceMap(interfaceType);
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
+        public override EventInfo[] GetEvents(BindingFlags bindingAttr) =>
+            GetRuntimeTypeInfo().GetEvents(bindingAttr);
 
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicFields
-            | DynamicallyAccessedMemberTypes.PublicMethods
-            | DynamicallyAccessedMemberTypes.PublicEvents
-            | DynamicallyAccessedMemberTypes.PublicProperties
-            | DynamicallyAccessedMemberTypes.PublicConstructors
-            | DynamicallyAccessedMemberTypes.PublicNestedTypes)]
-        public override MemberInfo[] GetDefaultMembers()
-            => GetRuntimeTypeInfo().GetDefaultMembers();
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
+        public override FieldInfo? GetField(string name, BindingFlags bindingAttr) =>
+            GetRuntimeTypeInfo().GetField(name, bindingAttr);
 
-        public override bool IsDefined(Type attributeType, bool inherit)
-            => GetRuntimeTypeInfo().IsDefined(attributeType, inherit);
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
+        public override FieldInfo[] GetFields(BindingFlags bindingAttr) =>
+            GetRuntimeTypeInfo().GetFields(bindingAttr);
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
+        protected override MethodInfo? GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        ) =>
+            GetRuntimeTypeInfo()
+                .GetMethodImpl(
+                    name,
+                    RuntimeTypeInfo.GenericParameterCountAny,
+                    bindingAttr,
+                    binder,
+                    callConvention,
+                    types,
+                    modifiers
+                );
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
+        protected override MethodInfo? GetMethodImpl(
+            string name,
+            int genericParameterCount,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        ) =>
+            GetRuntimeTypeInfo()
+                .GetMethodImpl(
+                    name,
+                    genericParameterCount,
+                    bindingAttr,
+                    binder,
+                    callConvention,
+                    types,
+                    modifiers
+                );
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
+        public override MethodInfo[] GetMethods(BindingFlags bindingAttr) =>
+            GetRuntimeTypeInfo().GetMethods(bindingAttr);
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
+        public override Type? GetNestedType(string name, BindingFlags bindingAttr) =>
+            GetRuntimeTypeInfo().GetNestedType(name, bindingAttr);
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
+        public override Type[] GetNestedTypes(BindingFlags bindingAttr) =>
+            GetRuntimeTypeInfo().GetNestedTypes(bindingAttr);
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
+        protected override PropertyInfo? GetPropertyImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            Type? returnType,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        ) =>
+            GetRuntimeTypeInfo()
+                .GetPropertyImpl(name, bindingAttr, binder, returnType, types, modifiers);
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
+        public override PropertyInfo[] GetProperties(BindingFlags bindingAttr) =>
+            GetRuntimeTypeInfo().GetProperties(bindingAttr);
+
+        [DynamicallyAccessedMembers(GetAllMembers)]
+        public override MemberInfo[] GetMember(string name, BindingFlags bindingAttr) =>
+            GetRuntimeTypeInfo().GetMember(name, bindingAttr);
+
+        [DynamicallyAccessedMembers(GetAllMembers)]
+        public override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        ) => GetRuntimeTypeInfo().GetMember(name, type, bindingAttr);
+
+        [DynamicallyAccessedMembers(GetAllMembers)]
+        public override MemberInfo[] GetMembers(BindingFlags bindingAttr) =>
+            GetRuntimeTypeInfo().GetMembers(bindingAttr);
+
+        public override MemberInfo GetMemberWithSameMetadataDefinitionAs(MemberInfo member) =>
+            GetRuntimeTypeInfo().GetMemberWithSameMetadataDefinitionAs(member);
+
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+        public override object? InvokeMember(
+            string name,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object? target,
+            object?[]? args,
+            ParameterModifier[]? modifiers,
+            CultureInfo? culture,
+            string[]? namedParameters
+        ) =>
+            GetRuntimeTypeInfo()
+                .InvokeMember(
+                    name,
+                    invokeAttr,
+                    binder,
+                    target,
+                    args,
+                    modifiers,
+                    culture,
+                    namedParameters
+                );
+
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
+        public override Type? GetInterface(string name, bool ignoreCase) =>
+            GetRuntimeTypeInfo().GetInterface(name, ignoreCase);
+
+        public override InterfaceMapping GetInterfaceMap(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                Type interfaceType
+        ) => GetRuntimeTypeInfo().GetInterfaceMap(interfaceType);
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.PublicNestedTypes
+        )]
+        public override MemberInfo[] GetDefaultMembers() =>
+            GetRuntimeTypeInfo().GetDefaultMembers();
+
+        public override bool IsDefined(Type attributeType, bool inherit) =>
+            GetRuntimeTypeInfo().IsDefined(attributeType, inherit);
 
         public override object[] GetCustomAttributes(bool inherit)
         {
@@ -868,25 +1037,26 @@ namespace System
 
         public override Guid GUID => GetRuntimeTypeInfo().GUID;
 
-        public override bool HasSameMetadataDefinitionAs(MemberInfo other) => GetRuntimeTypeInfo().HasSameMetadataDefinitionAs(other);
+        public override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            GetRuntimeTypeInfo().HasSameMetadataDefinitionAs(other);
 
-        public override Type MakePointerType()
-            => GetRuntimeTypeInfo().MakePointerType();
+        public override Type MakePointerType() => GetRuntimeTypeInfo().MakePointerType();
 
-        public override Type MakeByRefType()
-            => GetRuntimeTypeInfo().MakeByRefType();
-
-        [RequiresDynamicCode("The code for an array of the specified type might not be available.")]
-        public override Type MakeArrayType()
-            => GetRuntimeTypeInfo().MakeArrayType();
+        public override Type MakeByRefType() => GetRuntimeTypeInfo().MakeByRefType();
 
         [RequiresDynamicCode("The code for an array of the specified type might not be available.")]
-        public override Type MakeArrayType(int rank)
-            => GetRuntimeTypeInfo().MakeArrayType(rank);
+        public override Type MakeArrayType() => GetRuntimeTypeInfo().MakeArrayType();
 
-        [RequiresDynamicCode("The native code for this instantiation might not be available at runtime.")]
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
-        public override Type MakeGenericType(params Type[] instantiation)
-            => GetRuntimeTypeInfo().MakeGenericType(instantiation);
+        [RequiresDynamicCode("The code for an array of the specified type might not be available.")]
+        public override Type MakeArrayType(int rank) => GetRuntimeTypeInfo().MakeArrayType(rank);
+
+        [RequiresDynamicCode(
+            "The native code for this instantiation might not be available at runtime."
+        )]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
+        public override Type MakeGenericType(params Type[] instantiation) =>
+            GetRuntimeTypeInfo().MakeGenericType(instantiation);
     }
 }

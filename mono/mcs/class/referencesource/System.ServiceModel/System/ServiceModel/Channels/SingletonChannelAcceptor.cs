@@ -10,7 +10,8 @@ namespace System.ServiceModel.Channels
     abstract class SingletonChannelAcceptor<ChannelInterfaceType, TChannel, QueueItemType>
         : InputQueueChannelAcceptor<ChannelInterfaceType>
         where ChannelInterfaceType : class, IChannel
-        where TChannel : /*ChannelInterfaceType,*/ InputQueueChannel<QueueItemType>
+        where TChannel : /*ChannelInterfaceType,*/
+            InputQueueChannel<QueueItemType>
         where QueueItemType : class, IDisposable
     {
         TChannel currentChannel;
@@ -18,9 +19,7 @@ namespace System.ServiceModel.Channels
         static Action<object> onInvokeDequeuedCallback;
 
         public SingletonChannelAcceptor(ChannelManagerBase channelManager)
-            : base(channelManager)
-        {
-        }
+            : base(channelManager) { }
 
         public override ChannelInterfaceType AcceptChannel(TimeSpan timeout)
         {
@@ -28,7 +27,11 @@ namespace System.ServiceModel.Channels
             return base.AcceptChannel(timeout);
         }
 
-        public override IAsyncResult BeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             EnsureChannelAvailable();
             return base.BeginAcceptChannel(timeout, callback, state);
@@ -93,7 +96,11 @@ namespace System.ServiceModel.Channels
             Enqueue(item, dequeuedCallback, true);
         }
 
-        public void Enqueue(QueueItemType item, Action dequeuedCallback, bool canDispatchOnThisThread)
+        public void Enqueue(
+            QueueItemType item,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
             TChannel channel = EnsureChannelAvailable();
 
@@ -118,7 +125,11 @@ namespace System.ServiceModel.Channels
             Enqueue(exception, dequeuedCallback, true);
         }
 
-        public void Enqueue(Exception exception, Action dequeuedCallback, bool canDispatchOnThisThread)
+        public void Enqueue(
+            Exception exception,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
             TChannel channel = EnsureChannelAvailable();
 
@@ -168,7 +179,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public void EnqueueAndDispatch(QueueItemType item, Action dequeuedCallback, bool canDispatchOnThisThread)
+        public void EnqueueAndDispatch(
+            QueueItemType item,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
             TChannel channel = EnsureChannelAvailable();
 
@@ -188,7 +203,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public override void EnqueueAndDispatch(Exception exception, Action dequeuedCallback, bool canDispatchOnThisThread)
+        public override void EnqueueAndDispatch(
+            Exception exception,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
             TChannel channel = EnsureChannelAvailable();
 
@@ -235,7 +254,10 @@ namespace System.ServiceModel.Channels
 
         static void OnInvokeDequeuedCallback(object state)
         {
-            Fx.Assert(state != null, "SingletonChannelAcceptor.OnInvokeDequeuedCallback: (state != null)");
+            Fx.Assert(
+                state != null,
+                "SingletonChannelAcceptor.OnInvokeDequeuedCallback: (state != null)"
+            );
 
             Action dequeuedCallback = (Action)state;
             dequeuedCallback();

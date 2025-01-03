@@ -23,12 +23,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
     /// </remarks>
     public class SQLiteV2PersistentStorageTests : AbstractPersistentStorageTests
     {
-        internal override AbstractPersistentStorageService GetStorageService(IMefHostExportProvider exportProvider, IPersistentStorageConfiguration configuration, IPersistentStorageFaultInjector? faultInjector, string relativePathBase)
-            => new SQLitePersistentStorageService(
+        internal override AbstractPersistentStorageService GetStorageService(
+            IMefHostExportProvider exportProvider,
+            IPersistentStorageConfiguration configuration,
+            IPersistentStorageFaultInjector? faultInjector,
+            string relativePathBase
+        ) =>
+            new SQLitePersistentStorageService(
                 exportProvider.GetExports<SQLiteConnectionPoolService>().Single().Value,
                 configuration,
-                exportProvider.GetExports<IAsynchronousOperationListenerProvider>().Single().Value.GetListener(FeatureAttribute.PersistentStorage),
-                faultInjector);
+                exportProvider
+                    .GetExports<IAsynchronousOperationListenerProvider>()
+                    .Single()
+                    .Value.GetListener(FeatureAttribute.PersistentStorage),
+                faultInjector
+            );
 
         [Fact]
         public async Task TestCrashInNewConnection()
@@ -42,11 +51,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     hitInjector = true;
                     throw new Exception();
                 },
-                onFatalError: e => throw e);
+                onFatalError: e => throw e
+            );
 
             // Because instantiating the connection will fail, we will not get back
             // a working persistent storage. We are testing a fault recovery code path.
-            await using (var storage = await GetStorageAsync(solution, faultInjector: faultInjector, throwOnFailure: false))
+            await using (
+                var storage = await GetStorageAsync(
+                    solution,
+                    faultInjector: faultInjector,
+                    throwOnFailure: false
+                )
+            )
             using (var memStream = new MemoryStream())
             using (var streamWriter = new StreamWriter(memStream))
             {
@@ -79,17 +95,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
 
             public PersistentStorageFaultInjector(
                 Action? onNewConnection = null,
-                Action<Exception>? onFatalError = null)
+                Action<Exception>? onFatalError = null
+            )
             {
                 _onNewConnection = onNewConnection;
                 _onFatalError = onFatalError;
             }
 
-            public void OnNewConnection()
-                => _onNewConnection?.Invoke();
+            public void OnNewConnection() => _onNewConnection?.Invoke();
 
-            public void OnFatalError(Exception ex)
-                => _onFatalError?.Invoke(ex);
+            public void OnFatalError(Exception ex) => _onFatalError?.Invoke(ex);
         }
     }
 }

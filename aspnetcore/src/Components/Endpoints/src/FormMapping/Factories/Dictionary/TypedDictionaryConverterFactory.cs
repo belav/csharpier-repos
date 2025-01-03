@@ -8,7 +8,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
-internal sealed class TypedDictionaryConverterFactory<TDictionaryType, TKey, TValue> : IFormDataConverterFactory
+internal sealed class TypedDictionaryConverterFactory<TDictionaryType, TKey, TValue>
+    : IFormDataConverterFactory
     where TKey : ISpanParsable<TKey>
 {
     [RequiresDynamicCode(FormMappingHelpers.RequiresDynamicCodeMessage)]
@@ -34,7 +35,9 @@ internal sealed class TypedDictionaryConverterFactory<TDictionaryType, TKey, TVa
                 var _ when type == (typeof(IReadOnlyDictionary<TKey, TValue>)) => true,
                 var _ when type == (typeof(IDictionary<TKey, TValue>)) => true,
 
-                _ => throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'."),
+                _ => throw new InvalidOperationException(
+                    $"Unable to create converter for '{type.FullName}'."
+                ),
             };
         }
 
@@ -58,8 +61,10 @@ internal sealed class TypedDictionaryConverterFactory<TDictionaryType, TKey, TVa
 
                 // Some of the types above implement IDictionary<TKey, TValue>, but do so in a very inneficient way, so we want to
                 // use special converters for them.
-                var _ when type.IsAssignableTo(typeof(IDictionary<TKey, TValue>)) && type.GetConstructor(Type.EmptyTypes) != null => true,
-                _ => false
+                var _
+                    when type.IsAssignableTo(typeof(IDictionary<TKey, TValue>))
+                        && type.GetConstructor(Type.EmptyTypes) != null => true,
+                _ => false,
             };
         }
 
@@ -74,7 +79,9 @@ internal sealed class TypedDictionaryConverterFactory<TDictionaryType, TKey, TVa
         var valueTypeConverter = options.ResolveConverter<TValue>();
         if (valueTypeConverter == null)
         {
-            throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'.");
+            throw new InvalidOperationException(
+                $"Unable to create converter for '{type.FullName}'."
+            );
         }
 
         if (type.IsInterface)
@@ -85,22 +92,32 @@ internal sealed class TypedDictionaryConverterFactory<TDictionaryType, TKey, TVa
             {
                 // System.Collections.Immutable
                 var _ when type == (typeof(IImmutableDictionary<TKey, TValue>)) =>
-                    ImmutableDictionaryBufferAdapter<TKey, TValue>.CreateInterfaceConverter(valueTypeConverter),
+                    ImmutableDictionaryBufferAdapter<TKey, TValue>.CreateInterfaceConverter(
+                        valueTypeConverter
+                    ),
                 // System.Collections.Generics
                 var _ when type == (typeof(IReadOnlyDictionary<TKey, TValue>)) =>
-                    ReadOnlyDictionaryBufferAdapter<TKey, TValue>.CreateInterfaceConverter(valueTypeConverter),
-                var _ when type == (typeof(IDictionary<TKey, TValue>)) =>
-                    new DictionaryConverter<IDictionary<TKey, TValue>,
-                        DictionaryStaticCastAdapter<
-                            IDictionary<TKey, TValue>,
-                            Dictionary<TKey, TValue>,
-                            DictionaryBufferAdapter<Dictionary<TKey, TValue>, TKey, TValue>,
-                            Dictionary<TKey, TValue>,
-                            TKey,
-                            TValue>,
-                        Dictionary<TKey, TValue>, TKey, TValue>(valueTypeConverter),
+                    ReadOnlyDictionaryBufferAdapter<TKey, TValue>.CreateInterfaceConverter(
+                        valueTypeConverter
+                    ),
+                var _ when type == (typeof(IDictionary<TKey, TValue>)) => new DictionaryConverter<
+                    IDictionary<TKey, TValue>,
+                    DictionaryStaticCastAdapter<
+                        IDictionary<TKey, TValue>,
+                        Dictionary<TKey, TValue>,
+                        DictionaryBufferAdapter<Dictionary<TKey, TValue>, TKey, TValue>,
+                        Dictionary<TKey, TValue>,
+                        TKey,
+                        TValue
+                    >,
+                    Dictionary<TKey, TValue>,
+                    TKey,
+                    TValue
+                >(valueTypeConverter),
 
-                _ => throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'."),
+                _ => throw new InvalidOperationException(
+                    $"Unable to create converter for '{type.FullName}'."
+                ),
             };
         }
 
@@ -109,7 +126,9 @@ internal sealed class TypedDictionaryConverterFactory<TDictionaryType, TKey, TVa
             return type switch
             {
                 var _ when type == (typeof(ReadOnlyDictionary<TKey, TValue>)) =>
-                    ReadOnlyDictionaryBufferAdapter<TKey, TValue>.CreateConverter(valueTypeConverter),
+                    ReadOnlyDictionaryBufferAdapter<TKey, TValue>.CreateConverter(
+                        valueTypeConverter
+                    ),
                 // Immutable collections
                 var _ when type == (typeof(ImmutableDictionary<TKey, TValue>)) =>
                     new DictionaryConverter<
@@ -117,32 +136,58 @@ internal sealed class TypedDictionaryConverterFactory<TDictionaryType, TKey, TVa
                         ImmutableDictionaryBufferAdapter<TKey, TValue>,
                         ImmutableDictionary<TKey, TValue>.Builder,
                         TKey,
-                        TValue>(valueTypeConverter),
+                        TValue
+                    >(valueTypeConverter),
                 var _ when type == (typeof(ImmutableSortedDictionary<TKey, TValue>)) =>
                     new DictionaryConverter<
                         ImmutableSortedDictionary<TKey, TValue>,
                         ImmutableSortedDictionaryBufferAdapter<TKey, TValue>,
                         ImmutableSortedDictionary<TKey, TValue>.Builder,
                         TKey,
-                        TValue>(valueTypeConverter),
+                        TValue
+                    >(valueTypeConverter),
 
                 // Concurrent collections
                 var _ when type == (typeof(ConcurrentDictionary<TKey, TValue>)) =>
-                    ConcreteTypeDictionaryConverterFactory<ConcurrentDictionary<TKey, TValue>, TKey, TValue>.Instance.CreateConverter(type, options),
+                    ConcreteTypeDictionaryConverterFactory<
+                        ConcurrentDictionary<TKey, TValue>,
+                        TKey,
+                        TValue
+                    >.Instance.CreateConverter(type, options),
 
                 // Generic collections
                 var _ when type == (typeof(SortedList<TKey, TValue>)) =>
-                    ConcreteTypeDictionaryConverterFactory<SortedList<TKey, TValue>, TKey, TValue>.Instance.CreateConverter(type, options),
+                    ConcreteTypeDictionaryConverterFactory<
+                        SortedList<TKey, TValue>,
+                        TKey,
+                        TValue
+                    >.Instance.CreateConverter(type, options),
                 var _ when type == (typeof(SortedDictionary<TKey, TValue>)) =>
-                    ConcreteTypeDictionaryConverterFactory<SortedDictionary<TKey, TValue>, TKey, TValue>.Instance.CreateConverter(type, options),
+                    ConcreteTypeDictionaryConverterFactory<
+                        SortedDictionary<TKey, TValue>,
+                        TKey,
+                        TValue
+                    >.Instance.CreateConverter(type, options),
                 var _ when type == (typeof(Dictionary<TKey, TValue>)) =>
-                    ConcreteTypeDictionaryConverterFactory<Dictionary<TKey, TValue>, TKey, TValue>.Instance.CreateConverter(type, options),
+                    ConcreteTypeDictionaryConverterFactory<
+                        Dictionary<TKey, TValue>,
+                        TKey,
+                        TValue
+                    >.Instance.CreateConverter(type, options),
 
                 // Some of the types above implement IDictionary<TKey, TValue>, but do so in a very inneficient way, so we want to
                 // use special converters for them.
-                var _ when type.IsAssignableTo(typeof(IDictionary<TKey, TValue>)) && type.GetConstructor(Type.EmptyTypes) != null =>
-                    ConcreteTypeDictionaryConverterFactory<TDictionaryType, TKey, TValue>.Instance.CreateConverter(type, options),
-                _ => throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'."),
+                var _
+                    when type.IsAssignableTo(typeof(IDictionary<TKey, TValue>))
+                        && type.GetConstructor(Type.EmptyTypes) != null =>
+                    ConcreteTypeDictionaryConverterFactory<
+                        TDictionaryType,
+                        TKey,
+                        TValue
+                    >.Instance.CreateConverter(type, options),
+                _ => throw new InvalidOperationException(
+                    $"Unable to create converter for '{type.FullName}'."
+                ),
             };
         }
 

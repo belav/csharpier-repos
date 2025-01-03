@@ -35,10 +35,18 @@ namespace System.Web.Http.Controllers
             IActionFilter expectedGlobalFilter = CreateDummyActionFilter();
             FilterInfo globalFilter = new FilterInfo(expectedGlobalFilter, FilterScope.Global);
             IActionFilter expectedControllerFilter = CreateDummyActionFilter();
-            FilterInfo controllerFilter = new FilterInfo(expectedControllerFilter, FilterScope.Controller);
+            FilterInfo controllerFilter = new FilterInfo(
+                expectedControllerFilter,
+                FilterScope.Controller
+            );
             IActionFilter expectedActionFilter = CreateDummyActionFilter();
             FilterInfo actionFilter = new FilterInfo(expectedActionFilter, FilterScope.Action);
-            IEnumerable<FilterInfo> filters = new FilterInfo[] { globalFilter, controllerFilter, actionFilter };
+            IEnumerable<FilterInfo> filters = new FilterInfo[]
+            {
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+            };
             FilterGrouping product = CreateProductUnderTest(filters);
 
             // Act
@@ -59,11 +67,23 @@ namespace System.Web.Http.Controllers
             IActionFilter expectedGlobalFilter = CreateDummyActionFilter();
             FilterInfo globalFilter = new FilterInfo(expectedGlobalFilter, FilterScope.Global);
             IActionFilter expectedControllerFilter = CreateDummyActionFilter();
-            FilterInfo controllerFilter = new FilterInfo(expectedControllerFilter, FilterScope.Controller);
+            FilterInfo controllerFilter = new FilterInfo(
+                expectedControllerFilter,
+                FilterScope.Controller
+            );
             IActionFilter expectedActionFilter = CreateDummyActionFilter();
             FilterInfo actionFilter = new FilterInfo(expectedActionFilter, FilterScope.Action);
-            FilterInfo overrideFilter = new FilterInfo(CreateOverride(typeof(IActionFilter)), FilterScope.Global);
-            IEnumerable<FilterInfo> filters = new FilterInfo[] { globalFilter, controllerFilter, actionFilter, overrideFilter };
+            FilterInfo overrideFilter = new FilterInfo(
+                CreateOverride(typeof(IActionFilter)),
+                FilterScope.Global
+            );
+            IEnumerable<FilterInfo> filters = new FilterInfo[]
+            {
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                overrideFilter,
+            };
             FilterGrouping product = CreateProductUnderTest(filters);
 
             // Act
@@ -84,11 +104,23 @@ namespace System.Web.Http.Controllers
             IActionFilter expectedGlobalFilter = CreateDummyActionFilter();
             FilterInfo globalFilter = new FilterInfo(expectedGlobalFilter, FilterScope.Global);
             IActionFilter expectedControllerFilter = CreateDummyActionFilter();
-            FilterInfo controllerFilter = new FilterInfo(expectedControllerFilter, FilterScope.Controller);
+            FilterInfo controllerFilter = new FilterInfo(
+                expectedControllerFilter,
+                FilterScope.Controller
+            );
             IActionFilter expectedActionFilter = CreateDummyActionFilter();
             FilterInfo actionFilter = new FilterInfo(expectedActionFilter, FilterScope.Action);
-            FilterInfo overrideFilter = new FilterInfo(CreateOverride(typeof(IActionFilter)), FilterScope.Controller);
-            IEnumerable<FilterInfo> filters = new FilterInfo[] { globalFilter, controllerFilter, actionFilter, overrideFilter };
+            FilterInfo overrideFilter = new FilterInfo(
+                CreateOverride(typeof(IActionFilter)),
+                FilterScope.Controller
+            );
+            IEnumerable<FilterInfo> filters = new FilterInfo[]
+            {
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                overrideFilter,
+            };
             FilterGrouping product = CreateProductUnderTest(filters);
 
             // Act
@@ -108,11 +140,23 @@ namespace System.Web.Http.Controllers
             IActionFilter expectedGlobalFilter = CreateDummyActionFilter();
             FilterInfo globalFilter = new FilterInfo(expectedGlobalFilter, FilterScope.Global);
             IActionFilter expectedControllerFilter = CreateDummyActionFilter();
-            FilterInfo controllerFilter = new FilterInfo(expectedControllerFilter, FilterScope.Controller);
+            FilterInfo controllerFilter = new FilterInfo(
+                expectedControllerFilter,
+                FilterScope.Controller
+            );
             IActionFilter expectedActionFilter = CreateDummyActionFilter();
             FilterInfo actionFilter = new FilterInfo(expectedActionFilter, FilterScope.Action);
-            FilterInfo overrideFilter = new FilterInfo(CreateOverride(typeof(IActionFilter)), FilterScope.Action);
-            IEnumerable<FilterInfo> filters = new FilterInfo[] { globalFilter, controllerFilter, actionFilter, overrideFilter };
+            FilterInfo overrideFilter = new FilterInfo(
+                CreateOverride(typeof(IActionFilter)),
+                FilterScope.Action
+            );
+            IEnumerable<FilterInfo> filters = new FilterInfo[]
+            {
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                overrideFilter,
+            };
             FilterGrouping product = CreateProductUnderTest(filters);
 
             // Act
@@ -131,11 +175,23 @@ namespace System.Web.Http.Controllers
             IActionFilter expectedGlobalFilter = CreateDummyActionFilter();
             FilterInfo globalFilter = new FilterInfo(expectedGlobalFilter, FilterScope.Global);
             IActionFilter expectedControllerFilter = CreateDummyActionFilter();
-            FilterInfo controllerFilter = new FilterInfo(expectedControllerFilter, FilterScope.Controller);
+            FilterInfo controllerFilter = new FilterInfo(
+                expectedControllerFilter,
+                FilterScope.Controller
+            );
             IActionFilter expectedActionFilter = CreateDummyActionFilter();
             FilterInfo actionFilter = new FilterInfo(expectedActionFilter, FilterScope.Action);
-            FilterInfo overrideFilter = new FilterInfo(CreateOverride(typeof(object)), FilterScope.Action);
-            IEnumerable<FilterInfo> filters = new FilterInfo[] { globalFilter, controllerFilter, actionFilter, overrideFilter };
+            FilterInfo overrideFilter = new FilterInfo(
+                CreateOverride(typeof(object)),
+                FilterScope.Action
+            );
+            IEnumerable<FilterInfo> filters = new FilterInfo[]
+            {
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                overrideFilter,
+            };
             FilterGrouping product = CreateProductUnderTest(filters);
 
             // Act
@@ -156,12 +212,23 @@ namespace System.Web.Http.Controllers
             IAuthorizationFilter expectedGlobalFilter = CreateDummyAuthorizationFilter();
             FilterInfo globalFilter = new FilterInfo(expectedGlobalFilter, FilterScope.Global);
             IAuthorizationFilter expectedControllerFilter = CreateDummyAuthorizationFilter();
-            FilterInfo controllerFilter = new FilterInfo(expectedControllerFilter, FilterScope.Controller);
+            FilterInfo controllerFilter = new FilterInfo(
+                expectedControllerFilter,
+                FilterScope.Controller
+            );
             IAuthorizationFilter expectedActionFilter = CreateDummyAuthorizationFilter();
             FilterInfo actionFilter = new FilterInfo(expectedActionFilter, FilterScope.Action);
-            FilterInfo overrideFilter = new FilterInfo(CreateOverride(typeof(IAuthorizationFilter)),
-                FilterScope.Action);
-            IEnumerable<FilterInfo> filters = new FilterInfo[] { globalFilter, controllerFilter, actionFilter, overrideFilter };
+            FilterInfo overrideFilter = new FilterInfo(
+                CreateOverride(typeof(IAuthorizationFilter)),
+                FilterScope.Action
+            );
+            IEnumerable<FilterInfo> filters = new FilterInfo[]
+            {
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                overrideFilter,
+            };
             FilterGrouping product = CreateProductUnderTest(filters);
 
             // Act
@@ -180,12 +247,23 @@ namespace System.Web.Http.Controllers
             IAuthenticationFilter expectedGlobalFilter = CreateDummyAuthenticationFilter();
             FilterInfo globalFilter = new FilterInfo(expectedGlobalFilter, FilterScope.Global);
             IAuthenticationFilter expectedControllerFilter = CreateDummyAuthenticationFilter();
-            FilterInfo controllerFilter = new FilterInfo(expectedControllerFilter, FilterScope.Controller);
+            FilterInfo controllerFilter = new FilterInfo(
+                expectedControllerFilter,
+                FilterScope.Controller
+            );
             IAuthenticationFilter expectedActionFilter = CreateDummyAuthenticationFilter();
             FilterInfo actionFilter = new FilterInfo(expectedActionFilter, FilterScope.Action);
-            FilterInfo overrideFilter = new FilterInfo(CreateOverride(typeof(IAuthenticationFilter)),
-                FilterScope.Action);
-            IEnumerable<FilterInfo> filters = new FilterInfo[] { globalFilter, controllerFilter, actionFilter, overrideFilter };
+            FilterInfo overrideFilter = new FilterInfo(
+                CreateOverride(typeof(IAuthenticationFilter)),
+                FilterScope.Action
+            );
+            IEnumerable<FilterInfo> filters = new FilterInfo[]
+            {
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                overrideFilter,
+            };
             FilterGrouping product = CreateProductUnderTest(filters);
 
             // Act
@@ -204,11 +282,23 @@ namespace System.Web.Http.Controllers
             IExceptionFilter expectedGlobalFilter = CreateDummyExceptionFilter();
             FilterInfo globalFilter = new FilterInfo(expectedGlobalFilter, FilterScope.Global);
             IExceptionFilter expectedControllerFilter = CreateDummyExceptionFilter();
-            FilterInfo controllerFilter = new FilterInfo(expectedControllerFilter, FilterScope.Controller);
+            FilterInfo controllerFilter = new FilterInfo(
+                expectedControllerFilter,
+                FilterScope.Controller
+            );
             IExceptionFilter expectedActionFilter = CreateDummyExceptionFilter();
             FilterInfo actionFilter = new FilterInfo(expectedActionFilter, FilterScope.Action);
-            FilterInfo overrideFilter = new FilterInfo(CreateOverride(typeof(IExceptionFilter)), FilterScope.Action);
-            IEnumerable<FilterInfo> filters = new FilterInfo[] { globalFilter, controllerFilter, actionFilter, overrideFilter };
+            FilterInfo overrideFilter = new FilterInfo(
+                CreateOverride(typeof(IExceptionFilter)),
+                FilterScope.Action
+            );
+            IEnumerable<FilterInfo> filters = new FilterInfo[]
+            {
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                overrideFilter,
+            };
             FilterGrouping product = CreateProductUnderTest(filters);
 
             // Act
@@ -225,10 +315,19 @@ namespace System.Web.Http.Controllers
         {
             // Arrange
             IFilter expectedInstance = new ActionAndExceptionFilter();
-            FilterInfo actionAndExceptionFilter = new FilterInfo(expectedInstance, FilterScope.Global);
-            FilterInfo overrideExceptionFilter = new FilterInfo(CreateOverride(typeof(IExceptionFilter)),
-                FilterScope.Action);
-            IEnumerable<FilterInfo> filters = new FilterInfo[] { actionAndExceptionFilter, overrideExceptionFilter };
+            FilterInfo actionAndExceptionFilter = new FilterInfo(
+                expectedInstance,
+                FilterScope.Global
+            );
+            FilterInfo overrideExceptionFilter = new FilterInfo(
+                CreateOverride(typeof(IExceptionFilter)),
+                FilterScope.Action
+            );
+            IEnumerable<FilterInfo> filters = new FilterInfo[]
+            {
+                actionAndExceptionFilter,
+                overrideExceptionFilter,
+            };
             FilterGrouping product = CreateProductUnderTest(filters);
 
             // Act
@@ -287,14 +386,19 @@ namespace System.Web.Http.Controllers
                 get { throw new NotImplementedException(); }
             }
 
-            public Task<HttpResponseMessage> ExecuteActionFilterAsync(HttpActionContext actionContext,
-                CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
+            public Task<HttpResponseMessage> ExecuteActionFilterAsync(
+                HttpActionContext actionContext,
+                CancellationToken cancellationToken,
+                Func<Task<HttpResponseMessage>> continuation
+            )
             {
                 throw new NotImplementedException();
             }
 
-            public Task ExecuteExceptionFilterAsync(HttpActionExecutedContext actionExecutedContext,
-                CancellationToken cancellationToken)
+            public Task ExecuteExceptionFilterAsync(
+                HttpActionExecutedContext actionExecutedContext,
+                CancellationToken cancellationToken
+            )
             {
                 throw new NotImplementedException();
             }

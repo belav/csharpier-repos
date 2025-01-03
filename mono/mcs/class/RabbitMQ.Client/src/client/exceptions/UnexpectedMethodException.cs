@@ -66,7 +66,10 @@ namespace RabbitMQ.Client.Exceptions
         private IMethod m_method;
 
         ///<summary>The unexpected reply method.</summary>
-        public IMethod Method { get { return m_method; } }
+        public IMethod Method
+        {
+            get { return m_method; }
+        }
 
         public UnexpectedMethodException(IMethod method)
         {

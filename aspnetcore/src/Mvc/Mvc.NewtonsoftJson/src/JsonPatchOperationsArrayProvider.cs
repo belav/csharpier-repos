@@ -41,17 +41,21 @@ internal sealed class JsonPatchOperationsArrayProvider : IApiDescriptionProvider
         {
             foreach (var parameterDescription in result.ParameterDescriptions)
             {
-                if (typeof(IJsonPatchDocument).GetTypeInfo().IsAssignableFrom(parameterDescription.Type))
+                if (
+                    typeof(IJsonPatchDocument)
+                        .GetTypeInfo()
+                        .IsAssignableFrom(parameterDescription.Type)
+                )
                 {
                     parameterDescription.Type = typeof(Operation[]);
-                    parameterDescription.ModelMetadata = _modelMetadataProvider.GetMetadataForType(typeof(Operation[]));
+                    parameterDescription.ModelMetadata = _modelMetadataProvider.GetMetadataForType(
+                        typeof(Operation[])
+                    );
                 }
             }
         }
     }
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(ApiDescriptionProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(ApiDescriptionProviderContext context) { }
 }

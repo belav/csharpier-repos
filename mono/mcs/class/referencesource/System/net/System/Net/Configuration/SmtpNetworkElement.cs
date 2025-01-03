@@ -34,28 +34,32 @@ namespace System.Net.Configuration
             if (EvaluationContext.IsMachineLevel)
                 return;
 
-            PropertyInformation portPropertyInfo = ElementInformation.Properties[ConfigurationStrings.Port];
+            PropertyInformation portPropertyInfo = ElementInformation.Properties[
+                ConfigurationStrings.Port
+            ];
 
-            if (portPropertyInfo.ValueOrigin == PropertyValueOrigin.SetHere &&
-                (int)portPropertyInfo.Value != (int)portPropertyInfo.DefaultValue)
+            if (
+                portPropertyInfo.ValueOrigin == PropertyValueOrigin.SetHere
+                && (int)portPropertyInfo.Value != (int)portPropertyInfo.DefaultValue
+            )
             {
-                try {
+                try
+                {
                     (new SmtpPermission(SmtpAccess.ConnectToUnrestrictedPort)).Demand();
-                } catch (Exception exception) {
+                }
+                catch (Exception exception)
+                {
                     throw new ConfigurationErrorsException(
-                                  SR.GetString(SR.net_config_property_permission, 
-                                               portPropertyInfo.Name),
-                                  exception);
+                        SR.GetString(SR.net_config_property_permission, portPropertyInfo.Name),
+                        exception
+                    );
                 }
             }
         }
 
-        protected override ConfigurationPropertyCollection Properties 
+        protected override ConfigurationPropertyCollection Properties
         {
-            get 
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.DefaultCredentials, DefaultValue = false)]
@@ -97,10 +101,10 @@ namespace System.Net.Configuration
         public int Port
         {
             get { return (int)this[this.port]; }
-            set 
-            { 
-                // 
-                this[this.port] = value; 
+            set
+            {
+                //
+                this[this.port] = value;
             }
         }
 
@@ -118,44 +122,69 @@ namespace System.Net.Configuration
             set { this[this.enableSsl] = value; }
         }
 
-	        
-        // 
+        //
 
 
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty defaultCredentials =
-            new ConfigurationProperty(ConfigurationStrings.DefaultCredentials, typeof(bool), false,
-                    ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty defaultCredentials = new ConfigurationProperty(
+            ConfigurationStrings.DefaultCredentials,
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty host =
-            new ConfigurationProperty(ConfigurationStrings.Host, typeof(string), null,
-                    ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty host = new ConfigurationProperty(
+            ConfigurationStrings.Host,
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty clientDomain =
-            new ConfigurationProperty(ConfigurationStrings.ClientDomain, typeof(string), null,
-                    ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty clientDomain = new ConfigurationProperty(
+            ConfigurationStrings.ClientDomain,
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty password =
-            new ConfigurationProperty(ConfigurationStrings.Password, typeof(string), null,
-                    ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty password = new ConfigurationProperty(
+            ConfigurationStrings.Password,
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty port =
-            new ConfigurationProperty(ConfigurationStrings.Port, typeof(int), 25,
-                    null, new IntegerValidator(IPEndPoint.MinPort+1, IPEndPoint.MaxPort), ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty port = new ConfigurationProperty(
+            ConfigurationStrings.Port,
+            typeof(int),
+            25,
+            null,
+            new IntegerValidator(IPEndPoint.MinPort + 1, IPEndPoint.MaxPort),
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty userName =
-            new ConfigurationProperty(ConfigurationStrings.UserName, typeof(string), null,
-                    ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty userName = new ConfigurationProperty(
+            ConfigurationStrings.UserName,
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty targetName =
-            new ConfigurationProperty(ConfigurationStrings.TargetName, typeof(string), null, ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty targetName = new ConfigurationProperty(
+            ConfigurationStrings.TargetName,
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty enableSsl =
-            new ConfigurationProperty(ConfigurationStrings.EnableSsl, typeof(bool), false,
-                    ConfigurationPropertyOptions.None);
-
+        readonly ConfigurationProperty enableSsl = new ConfigurationProperty(
+            ConfigurationStrings.EnableSsl,
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
     }
 
     internal sealed class SmtpNetworkElementInternal
@@ -176,7 +205,6 @@ namespace System.Net.Configuration
             {
                 this.credential = new NetworkCredential(element.UserName, element.Password);
             }
-
         }
 
         internal NetworkCredential Credential
@@ -208,7 +236,7 @@ namespace System.Net.Configuration
         {
             get { return this.enableSsl; }
         }
-        
+
         string targetname;
         string host;
         string clientDomain;
@@ -217,4 +245,3 @@ namespace System.Net.Configuration
         bool enableSsl;
     }
 }
-

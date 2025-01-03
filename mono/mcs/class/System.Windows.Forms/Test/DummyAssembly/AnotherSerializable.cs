@@ -4,7 +4,7 @@
 //
 // Author:
 //	Gary Barnett (gary.barnett.mono@gmail.com)
-// 
+//
 // Copyright (C) Gary Barnett (2012)
 //
 //
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,60 +29,59 @@
 //
 
 using System;
-using System.Runtime.Serialization;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace DummyAssembly {
-	[SerializableAttribute]
-	public class AnotherSerializable : ISerializable {
-		public string name;
-		public string value;
+namespace DummyAssembly
+{
+    [SerializableAttribute]
+    public class AnotherSerializable : ISerializable
+    {
+        public string name;
+        public string value;
 
-		public AnotherSerializable ()
-		{
-		}
+        public AnotherSerializable() { }
 
-		public AnotherSerializable (string name, string value)
-		{
-			this.name = name;
-			this.value = value;
-		}
+        public AnotherSerializable(string name, string value)
+        {
+            this.name = name;
+            this.value = value;
+        }
 
-		public AnotherSerializable (SerializationInfo info, StreamingContext ctxt)
-		{
-			name = (string) info.GetValue ("sername", typeof (string));
-			value = (String) info.GetValue ("servalue", typeof (string));
-		}
+        public AnotherSerializable(SerializationInfo info, StreamingContext ctxt)
+        {
+            name = (string)info.GetValue("sername", typeof(string));
+            value = (String)info.GetValue("servalue", typeof(string));
+        }
 
-		public AnotherSerializable (Stream stream)
-		{
-			BinaryFormatter bFormatter = new BinaryFormatter ();
-			AnotherSerializable deser = (AnotherSerializable) bFormatter.Deserialize (stream);
-			stream.Close ();
+        public AnotherSerializable(Stream stream)
+        {
+            BinaryFormatter bFormatter = new BinaryFormatter();
+            AnotherSerializable deser = (AnotherSerializable)bFormatter.Deserialize(stream);
+            stream.Close();
 
-			name = deser.name;
-			value = deser.value;
-		}
+            name = deser.name;
+            value = deser.value;
+        }
 
-		public void GetObjectData (SerializationInfo info, StreamingContext ctxt)
-		{
-			info.AddValue ("sername", name);
-			info.AddValue ("servalue", value);
-		}
+        public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+        {
+            info.AddValue("sername", name);
+            info.AddValue("servalue", value);
+        }
 
-		public override string ToString ()
-		{
-			return String.Format ("name={0};value={1}", this.name, this.value);
-		}
+        public override string ToString()
+        {
+            return String.Format("name={0};value={1}", this.name, this.value);
+        }
 
-		public override bool Equals (object obj)
-		{
-			AnotherSerializable o = obj as AnotherSerializable;
-			if (o == null)
-				return false;
-			return this.name.Equals (o.name) && this.value.Equals (o.value);
-		}
-	}
+        public override bool Equals(object obj)
+        {
+            AnotherSerializable o = obj as AnotherSerializable;
+            if (o == null)
+                return false;
+            return this.name.Equals(o.name) && this.value.Equals(o.value);
+        }
+    }
 }
-

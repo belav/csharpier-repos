@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.IL;
 
 namespace Internal.TypeSystem.Ecma
@@ -14,7 +13,9 @@ namespace Internal.TypeSystem.Ecma
     public abstract class PdbSymbolReader : IDisposable
     {
         public abstract IEnumerable<ILSequencePoint> GetSequencePointsForMethod(int methodToken);
-        public abstract IEnumerable<ILLocalVariable> GetLocalVariableNamesForMethod(int methodToken);
+        public abstract IEnumerable<ILLocalVariable> GetLocalVariableNamesForMethod(
+            int methodToken
+        );
         public abstract int GetStateMachineKickoffMethod(int methodToken);
         public abstract void Dispose();
     }

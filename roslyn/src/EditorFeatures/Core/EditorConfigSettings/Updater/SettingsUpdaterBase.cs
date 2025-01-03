@@ -21,12 +21,18 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
         protected readonly Workspace Workspace;
         protected readonly string EditorconfigPath;
 
-        protected abstract SourceText? GetNewText(SourceText analyzerConfigDocument, IReadOnlyList<(TOption option, TValue value)> settingsToUpdate, CancellationToken token);
+        protected abstract SourceText? GetNewText(
+            SourceText analyzerConfigDocument,
+            IReadOnlyList<(TOption option, TValue value)> settingsToUpdate,
+            CancellationToken token
+        );
 
         protected SettingsUpdaterBase(Workspace workspace, string editorconfigPath)
         {
             Workspace = workspace;
-            _listener = workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>().GetListener();
+            _listener = workspace
+                .Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>()
+                .GetListener();
             EditorconfigPath = editorconfigPath;
         }
 
@@ -47,12 +53,17 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             }
         }
 
-        public async Task<SourceText?> GetChangedEditorConfigAsync(AnalyzerConfigDocument? analyzerConfigDocument, CancellationToken token)
+        public async Task<SourceText?> GetChangedEditorConfigAsync(
+            AnalyzerConfigDocument? analyzerConfigDocument,
+            CancellationToken token
+        )
         {
             if (analyzerConfigDocument is null)
                 return null;
 
-            var originalText = await analyzerConfigDocument.GetValueTextAsync(token).ConfigureAwait(false);
+            var originalText = await analyzerConfigDocument
+                .GetValueTextAsync(token)
+                .ConfigureAwait(false);
             using (await _guard.DisposableWaitAsync(token).ConfigureAwait(false))
             {
                 var newText = GetNewText(originalText, _queue, token);
@@ -69,23 +80,31 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             }
         }
 
-        public async Task<IReadOnlyList<TextChange>?> GetChangedEditorConfigAsync(CancellationToken token)
+        public async Task<IReadOnlyList<TextChange>?> GetChangedEditorConfigAsync(
+            CancellationToken token
+        )
         {
             var solution = Workspace.CurrentSolution;
-            var analyzerConfigDocument = solution.Projects
-                .SelectMany(p => p.AnalyzerConfigDocuments)
+            var analyzerConfigDocument = solution
+                .Projects.SelectMany(p => p.AnalyzerConfigDocuments)
                 .FirstOrDefault(d => d.FilePath == EditorconfigPath);
-            var newText = await GetChangedEditorConfigAsync(analyzerConfigDocument, token).ConfigureAwait(false);
+            var newText = await GetChangedEditorConfigAsync(analyzerConfigDocument, token)
+                .ConfigureAwait(false);
             if (newText is null)
             {
                 return null;
             }
 
-            var originalText = await analyzerConfigDocument!.GetValueTextAsync(token).ConfigureAwait(false);
+            var originalText = await analyzerConfigDocument!
+                .GetValueTextAsync(token)
+                .ConfigureAwait(false);
             return newText.GetTextChanges(originalText);
         }
 
-        public async Task<SourceText?> GetChangedEditorConfigAsync(SourceText originalText, CancellationToken token)
+        public async Task<SourceText?> GetChangedEditorConfigAsync(
+            SourceText originalText,
+            CancellationToken token
+        )
         {
             using (await _guard.DisposableWaitAsync(token).ConfigureAwait(false))
             {

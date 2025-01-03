@@ -15,7 +15,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 /// </summary>
 /// <typeparam name="TKey">Type of keys in the dictionary.</typeparam>
 /// <typeparam name="TValue">Type of values in the dictionary.</typeparam>
-public partial class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder<KeyValuePair<TKey, TValue?>> where TKey : notnull
+public partial class DictionaryModelBinder<TKey, TValue>
+    : CollectionModelBinder<KeyValuePair<TKey, TValue?>>
+    where TKey : notnull
 {
     private readonly IModelBinder _valueBinder;
 
@@ -25,8 +27,15 @@ public partial class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder
     /// <param name="keyBinder">The <see cref="IModelBinder"/> for <typeparamref name="TKey"/>.</param>
     /// <param name="valueBinder">The <see cref="IModelBinder"/> for <typeparamref name="TValue"/>.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
-    public DictionaryModelBinder(IModelBinder keyBinder, IModelBinder valueBinder, ILoggerFactory loggerFactory)
-        : base(new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory), loggerFactory)
+    public DictionaryModelBinder(
+        IModelBinder keyBinder,
+        IModelBinder valueBinder,
+        ILoggerFactory loggerFactory
+    )
+        : base(
+            new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
+            loggerFactory
+        )
     {
         ArgumentNullException.ThrowIfNull(valueBinder);
 
@@ -55,12 +64,14 @@ public partial class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder
         IModelBinder keyBinder,
         IModelBinder valueBinder,
         ILoggerFactory loggerFactory,
-        bool allowValidatingTopLevelNodes)
+        bool allowValidatingTopLevelNodes
+    )
         : base(
             new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
             loggerFactory,
             // CollectionModelBinder should not check IsRequired, done in this model binder.
-            allowValidatingTopLevelNodes: false)
+            allowValidatingTopLevelNodes: false
+        )
     {
         ArgumentNullException.ThrowIfNull(valueBinder);
 
@@ -94,12 +105,14 @@ public partial class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder
         IModelBinder valueBinder,
         ILoggerFactory loggerFactory,
         bool allowValidatingTopLevelNodes,
-        MvcOptions mvcOptions)
+        MvcOptions mvcOptions
+    )
         : base(
-              new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
-              loggerFactory,
-              allowValidatingTopLevelNodes: false,
-              mvcOptions)
+            new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
+            loggerFactory,
+            allowValidatingTopLevelNodes: false,
+            mvcOptions
+        )
     {
         ArgumentNullException.ThrowIfNull(valueBinder);
 
@@ -154,7 +167,10 @@ public partial class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder
         }
 
         // Update the existing successful but empty ModelBindingResult.
-        var model = (IDictionary<TKey, TValue?>)(result.Model ?? CreateEmptyCollection(bindingContext.ModelType));
+        var model =
+            (IDictionary<TKey, TValue?>)(
+                result.Model ?? CreateEmptyCollection(bindingContext.ModelType)
+            );
         var elementMetadata = bindingContext.ModelMetadata.ElementMetadata!;
         var valueMetadata = elementMetadata.Properties[nameof(KeyValuePair<TKey, TValue>.Value)]!;
 
@@ -175,11 +191,14 @@ public partial class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder
                 return;
             }
 
-            using (bindingContext.EnterNestedScope(
-                modelMetadata: valueMetadata,
-                fieldName: bindingContext.FieldName,
-                modelName: kvp.Value,
-                model: null))
+            using (
+                bindingContext.EnterNestedScope(
+                    modelMetadata: valueMetadata,
+                    fieldName: bindingContext.FieldName,
+                    modelName: kvp.Value,
+                    model: null
+                )
+            )
             {
                 await _valueBinder.BindModelAsync(bindingContext);
 
@@ -193,7 +212,10 @@ public partial class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder
                     // IKeyRewriterValueProvider implementation was first (hiding the original "[key][next key]").
                     if (kvp.Value.EndsWith(']'))
                     {
-                        bindingContext.ModelName = ModelNames.CreatePropertyModelName(prefix, kvp.Key);
+                        bindingContext.ModelName = ModelNames.CreatePropertyModelName(
+                            prefix,
+                            kvp.Key
+                        );
                     }
                     else
                     {
@@ -211,16 +233,23 @@ public partial class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder
         }
 
         bindingContext.Result = ModelBindingResult.Success(model);
-        bindingContext.ValidationState.Add(model, new ValidationStateEntry()
-        {
-            Strategy = new ShortFormDictionaryValidationStrategy<TKey, TValue?>(keyMappings, valueMetadata),
-        });
+        bindingContext.ValidationState.Add(
+            model,
+            new ValidationStateEntry()
+            {
+                Strategy = new ShortFormDictionaryValidationStrategy<TKey, TValue?>(
+                    keyMappings,
+                    valueMetadata
+                ),
+            }
+        );
     }
 
     /// <inheritdoc />
     protected override object? ConvertToCollectionType(
         Type targetType,
-        IEnumerable<KeyValuePair<TKey, TValue?>> collection)
+        IEnumerable<KeyValuePair<TKey, TValue?>> collection
+    )
     {
         if (collection == null)
         {
@@ -262,10 +291,20 @@ public partial class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder
 
     private static partial class Log
     {
-        public static void NoKeyValueFormatForDictionaryModelBinder(ILogger logger, ModelBindingContext bindingContext)
-            => NoKeyValueFormatForDictionaryModelBinder(logger, bindingContext.ModelName);
+        public static void NoKeyValueFormatForDictionaryModelBinder(
+            ILogger logger,
+            ModelBindingContext bindingContext
+        ) => NoKeyValueFormatForDictionaryModelBinder(logger, bindingContext.ModelName);
 
-        [LoggerMessage(33, LogLevel.Debug, "Attempting to bind model with name '{ModelName}' using the format {ModelName}[key1]=value1&{ModelName}[key2]=value2", EventName = "NoKeyValueFormatForDictionaryModelBinder")]
-        private static partial void NoKeyValueFormatForDictionaryModelBinder(ILogger logger, string modelName);
+        [LoggerMessage(
+            33,
+            LogLevel.Debug,
+            "Attempting to bind model with name '{ModelName}' using the format {ModelName}[key1]=value1&{ModelName}[key2]=value2",
+            EventName = "NoKeyValueFormatForDictionaryModelBinder"
+        )]
+        private static partial void NoKeyValueFormatForDictionaryModelBinder(
+            ILogger logger,
+            string modelName
+        );
     }
 }

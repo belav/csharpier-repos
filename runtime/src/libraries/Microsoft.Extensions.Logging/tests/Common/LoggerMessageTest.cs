@@ -28,14 +28,21 @@ namespace Microsoft.Extensions.Logging.Test
             // Assert
             Assert.Single(testSink.Writes);
             var writeContext = testSink.Writes.First();
-            var actualLogValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(writeContext.State);
+            var actualLogValues = Assert.IsAssignableFrom<
+                IReadOnlyList<KeyValuePair<string, object>>
+            >(writeContext.State);
             AssertLogValues(
-                new[] {
-                    new KeyValuePair<string, object>("{OriginalFormat}", TestLoggerExtensions.ActionMatchedInfo.NamedStringFormat),
+                new[]
+                {
+                    new KeyValuePair<string, object>(
+                        "{OriginalFormat}",
+                        TestLoggerExtensions.ActionMatchedInfo.NamedStringFormat
+                    ),
                     new KeyValuePair<string, object>("controller", controller),
-                    new KeyValuePair<string, object>("action", action)
+                    new KeyValuePair<string, object>("action", action),
                 },
-                actualLogValues.ToArray());
+                actualLogValues.ToArray()
+            );
             Assert.Equal(LogLevel.Information, writeContext.LogLevel);
             Assert.Equal(1, writeContext.EventId);
             Assert.Null(writeContext.Exception);
@@ -43,8 +50,10 @@ namespace Microsoft.Extensions.Logging.Test
                 string.Format(
                     TestLoggerExtensions.ActionMatchedInfo.FormatString,
                     controller,
-                    action),
-                actualLogValues.ToString());
+                    action
+                ),
+                actualLogValues.ToString()
+            );
         }
 
         [Fact]
@@ -62,15 +71,23 @@ namespace Microsoft.Extensions.Logging.Test
             Assert.Empty(testSink.Writes);
             Assert.Single(testSink.Scopes);
             var scopeContext = testSink.Scopes.First();
-            var actualLogValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(scopeContext.Scope);
-            AssertLogValues(new[]
-            {
-                new KeyValuePair<string, object>("{OriginalFormat}", TestLoggerExtensions.ScopeWithoutAnyParameters.Message)
-            },
-            actualLogValues.ToArray());
+            var actualLogValues = Assert.IsAssignableFrom<
+                IReadOnlyList<KeyValuePair<string, object>>
+            >(scopeContext.Scope);
+            AssertLogValues(
+                new[]
+                {
+                    new KeyValuePair<string, object>(
+                        "{OriginalFormat}",
+                        TestLoggerExtensions.ScopeWithoutAnyParameters.Message
+                    ),
+                },
+                actualLogValues.ToArray()
+            );
             Assert.Equal(
                 TestLoggerExtensions.ScopeWithoutAnyParameters.Message,
-                actualLogValues.ToString());
+                actualLogValues.ToString()
+            );
         }
 
         [Fact]
@@ -89,16 +106,24 @@ namespace Microsoft.Extensions.Logging.Test
             Assert.Empty(testSink.Writes);
             Assert.Single(testSink.Scopes);
             var scopeContext = testSink.Scopes.First();
-            var actualLogValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(scopeContext.Scope);
-            AssertLogValues(new[]
-            {
-                new KeyValuePair<string, object>("RequestId", param1),
-                new KeyValuePair<string, object>("{OriginalFormat}", TestLoggerExtensions.ScopeWithOneParameter.NamedStringFormat)
-            },
-            actualLogValues.ToArray());
+            var actualLogValues = Assert.IsAssignableFrom<
+                IReadOnlyList<KeyValuePair<string, object>>
+            >(scopeContext.Scope);
+            AssertLogValues(
+                new[]
+                {
+                    new KeyValuePair<string, object>("RequestId", param1),
+                    new KeyValuePair<string, object>(
+                        "{OriginalFormat}",
+                        TestLoggerExtensions.ScopeWithOneParameter.NamedStringFormat
+                    ),
+                },
+                actualLogValues.ToArray()
+            );
             Assert.Equal(
                 string.Format(TestLoggerExtensions.ScopeWithOneParameter.FormatString, param1),
-                actualLogValues.ToString());
+                actualLogValues.ToString()
+            );
         }
 
         [Fact]
@@ -118,17 +143,29 @@ namespace Microsoft.Extensions.Logging.Test
             Assert.Empty(testSink.Writes);
             Assert.Single(testSink.Scopes);
             var scopeContext = testSink.Scopes.First();
-            var actualLogValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(scopeContext.Scope);
-            AssertLogValues(new[]
-            {
-                new KeyValuePair<string, object>("param1", param1),
-                new KeyValuePair<string, object>("param2", param2),
-                new KeyValuePair<string, object>("{OriginalFormat}", TestLoggerExtensions.ScopeInfoWithTwoParameters.NamedStringFormat)
-            },
-            actualLogValues.ToArray());
+            var actualLogValues = Assert.IsAssignableFrom<
+                IReadOnlyList<KeyValuePair<string, object>>
+            >(scopeContext.Scope);
+            AssertLogValues(
+                new[]
+                {
+                    new KeyValuePair<string, object>("param1", param1),
+                    new KeyValuePair<string, object>("param2", param2),
+                    new KeyValuePair<string, object>(
+                        "{OriginalFormat}",
+                        TestLoggerExtensions.ScopeInfoWithTwoParameters.NamedStringFormat
+                    ),
+                },
+                actualLogValues.ToArray()
+            );
             Assert.Equal(
-                string.Format(TestLoggerExtensions.ScopeInfoWithTwoParameters.FormatString, param1, param2),
-                actualLogValues.ToString());
+                string.Format(
+                    TestLoggerExtensions.ScopeInfoWithTwoParameters.FormatString,
+                    param1,
+                    param2
+                ),
+                actualLogValues.ToString()
+            );
         }
 
         [Fact]
@@ -149,18 +186,31 @@ namespace Microsoft.Extensions.Logging.Test
             Assert.Empty(testSink.Writes);
             Assert.Single(testSink.Scopes);
             var scopeContext = testSink.Scopes.First();
-            var actualLogValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(scopeContext.Scope);
-            AssertLogValues(new[]
-            {
-                new KeyValuePair<string, object>("param1", param1),
-                new KeyValuePair<string, object>("param2", param2),
-                new KeyValuePair<string, object>("param3", param3),
-                new KeyValuePair<string, object>("{OriginalFormat}", TestLoggerExtensions.ScopeInfoWithThreeParameters.NamedStringFormat)
-            },
-            actualLogValues.ToArray());
+            var actualLogValues = Assert.IsAssignableFrom<
+                IReadOnlyList<KeyValuePair<string, object>>
+            >(scopeContext.Scope);
+            AssertLogValues(
+                new[]
+                {
+                    new KeyValuePair<string, object>("param1", param1),
+                    new KeyValuePair<string, object>("param2", param2),
+                    new KeyValuePair<string, object>("param3", param3),
+                    new KeyValuePair<string, object>(
+                        "{OriginalFormat}",
+                        TestLoggerExtensions.ScopeInfoWithThreeParameters.NamedStringFormat
+                    ),
+                },
+                actualLogValues.ToArray()
+            );
             Assert.Equal(
-                string.Format(TestLoggerExtensions.ScopeInfoWithThreeParameters.FormatString, param1, param2, param3),
-                actualLogValues.ToString());
+                string.Format(
+                    TestLoggerExtensions.ScopeInfoWithThreeParameters.FormatString,
+                    param1,
+                    param2,
+                    param3
+                ),
+                actualLogValues.ToString()
+            );
         }
 
         [Theory]
@@ -177,10 +227,15 @@ namespace Microsoft.Extensions.Logging.Test
             parameters.AddRange(parameterNames);
             parameters.Add(exception);
 
-            var expectedFormat = "Log " + string.Join(" ", parameterNames.Select(p => "{" + p + "}"));
+            var expectedFormat =
+                "Log " + string.Join(" ", parameterNames.Select(p => "{" + p + "}"));
             var expectedToString = "Log " + string.Join(" ", parameterNames);
-            var expectedValues = parameterNames.Select(p => new KeyValuePair<string, object>(p, p)).ToList();
-            expectedValues.Add(new KeyValuePair<string, object>("{OriginalFormat}", expectedFormat));
+            var expectedValues = parameterNames
+                .Select(p => new KeyValuePair<string, object>(p, p))
+                .ToList();
+            expectedValues.Add(
+                new KeyValuePair<string, object>("{OriginalFormat}", expectedFormat)
+            );
 
             // Act
             messageDelegate.DynamicInvoke(parameters.ToArray());
@@ -188,7 +243,9 @@ namespace Microsoft.Extensions.Logging.Test
             // Assert
             Assert.Single(testSink.Writes);
             var write = testSink.Writes.First();
-            var actualLogValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(write.State);
+            var actualLogValues = Assert.IsAssignableFrom<
+                IReadOnlyList<KeyValuePair<string, object>>
+            >(write.State);
             AssertLogValues(expectedValues, actualLogValues.ToList());
             Assert.Equal(expectedToString, actualLogValues.ToString());
             Assert.Equal(2, testLogger.IsEnabledCallCount);
@@ -208,10 +265,15 @@ namespace Microsoft.Extensions.Logging.Test
             parameters.AddRange(parameterNames);
             parameters.Add(exception);
 
-            var expectedFormat = "Log " + string.Join(" ", parameterNames.Select(p => "{" + p + "}"));
+            var expectedFormat =
+                "Log " + string.Join(" ", parameterNames.Select(p => "{" + p + "}"));
             var expectedToString = "Log " + string.Join(" ", parameterNames);
-            var expectedValues = parameterNames.Select(p => new KeyValuePair<string, object>(p, p)).ToList();
-            expectedValues.Add(new KeyValuePair<string, object>("{OriginalFormat}", expectedFormat));
+            var expectedValues = parameterNames
+                .Select(p => new KeyValuePair<string, object>(p, p))
+                .ToList();
+            expectedValues.Add(
+                new KeyValuePair<string, object>("{OriginalFormat}", expectedFormat)
+            );
 
             // Act
             messageDelegate.DynamicInvoke(parameters.ToArray());
@@ -219,7 +281,9 @@ namespace Microsoft.Extensions.Logging.Test
             // Assert
             Assert.Single(testSink.Writes);
             var write = testSink.Writes.First();
-            var actualLogValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(write.State);
+            var actualLogValues = Assert.IsAssignableFrom<
+                IReadOnlyList<KeyValuePair<string, object>>
+            >(write.State);
             AssertLogValues(expectedValues, actualLogValues.ToList());
             Assert.Equal(expectedToString, actualLogValues.ToString());
             Assert.Equal(1, testLogger.IsEnabledCallCount);
@@ -242,15 +306,19 @@ namespace Microsoft.Extensions.Logging.Test
             // Assert
             Assert.Single(testSink.Writes);
             var write = testSink.Writes.First();
-            var actualLogValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(write.State);
-            AssertLogValues(new[]
-            {
-                new KeyValuePair<string, object>("param1", param1),
-                new KeyValuePair<string, object>("param2", param2),
-                new KeyValuePair<string, object>("param3", param3),
-                new KeyValuePair<string, object>("{OriginalFormat}", format)
-            },
-            actualLogValues.ToArray());
+            var actualLogValues = Assert.IsAssignableFrom<
+                IReadOnlyList<KeyValuePair<string, object>>
+            >(write.State);
+            AssertLogValues(
+                new[]
+                {
+                    new KeyValuePair<string, object>("param1", param1),
+                    new KeyValuePair<string, object>("param2", param2),
+                    new KeyValuePair<string, object>("param3", param3),
+                    new KeyValuePair<string, object>("{OriginalFormat}", format),
+                },
+                actualLogValues.ToArray()
+            );
         }
 
         [Fact]
@@ -259,11 +327,14 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Arrange
             var formatString = "Action with name {ActionName} not found.";
-            var expectedMessage = $"The format string '{formatString}' does not have the expected number " +
-                    $"of named parameters. Expected 0 parameter(s) but found 1 parameter(s).";
+            var expectedMessage =
+                $"The format string '{formatString}' does not have the expected number "
+                + $"of named parameters. Expected 0 parameter(s) but found 1 parameter(s).";
 
             // Act
-            var exception = Assert.Throws<ArgumentException>(() => LoggerMessage.Define(LogLevel.Error, 0, formatString));
+            var exception = Assert.Throws<ArgumentException>(
+                () => LoggerMessage.Define(LogLevel.Error, 0, formatString)
+            );
 
             // Assert
             Assert.Equal(expectedMessage, exception.Message);
@@ -278,12 +349,14 @@ namespace Microsoft.Extensions.Logging.Test
         [InlineData(6)]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50875", TestPlatforms.Android)]
         public void DefineMessage_ThrowsException_WhenExpectedFormatStringParameterCount_NotFound(
-            int expectedNamedParameterCount)
+            int expectedNamedParameterCount
+        )
         {
             // Arrange
             var formatString = "Action with name ActionName not found.";
-            var expectedMessage = $"The format string '{formatString}' does not have the expected number " +
-                    $"of named parameters. Expected {expectedNamedParameterCount} parameter(s) but found 0 parameter(s).";
+            var expectedMessage =
+                $"The format string '{formatString}' does not have the expected number "
+                + $"of named parameters. Expected {expectedNamedParameterCount} parameter(s) but found 0 parameter(s).";
 
             // Act
             Exception exception = null;
@@ -291,30 +364,58 @@ namespace Microsoft.Extensions.Logging.Test
             {
                 case 1:
                     exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.Define<string>(LogLevel.Error, 0, formatString));
+                        () => LoggerMessage.Define<string>(LogLevel.Error, 0, formatString)
+                    );
                     break;
                 case 2:
                     exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.Define<string, string>(LogLevel.Error, 0, formatString));
+                        () => LoggerMessage.Define<string, string>(LogLevel.Error, 0, formatString)
+                    );
                     break;
                 case 3:
                     exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.Define<string, string, string>(LogLevel.Error, 0, formatString));
+                        () =>
+                            LoggerMessage.Define<string, string, string>(
+                                LogLevel.Error,
+                                0,
+                                formatString
+                            )
+                    );
                     break;
                 case 4:
                     exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.Define<string, string, string, string>(LogLevel.Error, 0, formatString));
+                        () =>
+                            LoggerMessage.Define<string, string, string, string>(
+                                LogLevel.Error,
+                                0,
+                                formatString
+                            )
+                    );
                     break;
                 case 5:
                     exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.Define<string, string, string, string, string>(LogLevel.Error, 0, formatString));
+                        () =>
+                            LoggerMessage.Define<string, string, string, string, string>(
+                                LogLevel.Error,
+                                0,
+                                formatString
+                            )
+                    );
                     break;
                 case 6:
                     exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.Define<string, string, string, string, string, string>(LogLevel.Error, 0, formatString));
+                        () =>
+                            LoggerMessage.Define<string, string, string, string, string, string>(
+                                LogLevel.Error,
+                                0,
+                                formatString
+                            )
+                    );
                     break;
                 default:
-                    throw new ArgumentException($"Invalid value for '{nameof(expectedNamedParameterCount)}'");
+                    throw new ArgumentException(
+                        $"Invalid value for '{nameof(expectedNamedParameterCount)}'"
+                    );
             }
 
             Assert.Equal(expectedMessage, exception.Message);
@@ -326,11 +427,14 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Arrange
             var formatString = "Starting request scope for request id {RequestId}";
-            var expectedMessage = $"The format string '{formatString}' does not have the expected number " +
-                    $"of named parameters. Expected 0 parameter(s) but found 1 parameter(s).";
+            var expectedMessage =
+                $"The format string '{formatString}' does not have the expected number "
+                + $"of named parameters. Expected 0 parameter(s) but found 1 parameter(s).";
 
             // Act
-            var exception = Assert.Throws<ArgumentException>(() => LoggerMessage.DefineScope(formatString));
+            var exception = Assert.Throws<ArgumentException>(
+                () => LoggerMessage.DefineScope(formatString)
+            );
 
             // Assert
             Assert.Equal(expectedMessage, exception.Message);
@@ -345,12 +449,14 @@ namespace Microsoft.Extensions.Logging.Test
         [InlineData(6)]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50875", TestPlatforms.Android)]
         public void DefineScope_ThrowsException_WhenExpectedFormatStringParameterCount_NotFound(
-            int expectedNamedParameterCount)
+            int expectedNamedParameterCount
+        )
         {
             // Arrange
             var formatString = "Starting request scope for request id RequestId";
-            var expectedMessage = $"The format string '{formatString}' does not have the expected number " +
-                    $"of named parameters. Expected {expectedNamedParameterCount} parameter(s) but found 0 parameter(s).";
+            var expectedMessage =
+                $"The format string '{formatString}' does not have the expected number "
+                + $"of named parameters. Expected {expectedNamedParameterCount} parameter(s) but found 0 parameter(s).";
 
             // Act
             Exception exception = null;
@@ -358,30 +464,50 @@ namespace Microsoft.Extensions.Logging.Test
             {
                 case 1:
                     exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.DefineScope<string>(formatString));
+                        () => LoggerMessage.DefineScope<string>(formatString)
+                    );
                     break;
                 case 2:
                     exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.DefineScope<string, string>(formatString));
+                        () => LoggerMessage.DefineScope<string, string>(formatString)
+                    );
                     break;
                 case 3:
                     exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.DefineScope<string, string, string>(formatString));
+                        () => LoggerMessage.DefineScope<string, string, string>(formatString)
+                    );
                     break;
                 case 4:
                     exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.DefineScope<string, string, string, string>(formatString));
+                        () =>
+                            LoggerMessage.DefineScope<string, string, string, string>(formatString)
+                    );
                     break;
                 case 5:
                     exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.DefineScope<string, string, string, string, string>(formatString));
+                        () =>
+                            LoggerMessage.DefineScope<string, string, string, string, string>(
+                                formatString
+                            )
+                    );
                     break;
                 case 6:
                     exception = Assert.Throws<ArgumentException>(
-                        () => LoggerMessage.DefineScope<string, string, string, string, string, string>(formatString));
+                        () =>
+                            LoggerMessage.DefineScope<
+                                string,
+                                string,
+                                string,
+                                string,
+                                string,
+                                string
+                            >(formatString)
+                    );
                     break;
                 default:
-                    throw new ArgumentException($"Invalid value for '{nameof(expectedNamedParameterCount)}'");
+                    throw new ArgumentException(
+                        $"Invalid value for '{nameof(expectedNamedParameterCount)}'"
+                    );
             }
 
             Assert.Equal(expectedMessage, exception.Message);
@@ -389,64 +515,221 @@ namespace Microsoft.Extensions.Logging.Test
 
         [Theory]
         [MemberData(nameof(DefineMethodsWithInvalidParametersData))]
-        public void DefineAndDefineScope_ThrowsException_WhenFormatString_IsNull(Delegate method, object[] parameters)
+        public void DefineAndDefineScope_ThrowsException_WhenFormatString_IsNull(
+            Delegate method,
+            object[] parameters
+        )
         {
             // Act
             var exception = Assert.Throws<TargetInvocationException>(
-                () => method.DynamicInvoke(parameters));
+                () => method.DynamicInvoke(parameters)
+            );
 
             // Assert
             Assert.IsType<ArgumentNullException>(exception.InnerException);
         }
 
-        public static IEnumerable<object[]> DefineMethodsWithInvalidParametersData => new[]
-        {
-            new object[] { (Define)LoggerMessage.Define, DefineInvalidParameters },
-            new object[] { (Define)LoggerMessage.Define<string>, DefineInvalidParameters },
-            new object[] { (Define)LoggerMessage.Define<string, string>, DefineInvalidParameters },
-            new object[] { (Define)LoggerMessage.Define<string, string, string>, DefineInvalidParameters },
-            new object[] { (Define)LoggerMessage.Define<string, string, string, string>, DefineInvalidParameters },
-            new object[] { (Define)LoggerMessage.Define<string, string, string, string, string>, DefineInvalidParameters },
-            new object[] { (Define)LoggerMessage.Define<string, string, string, string, string, string>, DefineInvalidParameters },
-            new object[] { (DefineScope)LoggerMessage.DefineScope, DefineScopeInvalidParameters },
-            new object[] { (DefineScope)LoggerMessage.DefineScope<string>, DefineScopeInvalidParameters },
-            new object[] { (DefineScope)LoggerMessage.DefineScope<string, string>, DefineScopeInvalidParameters },
-            new object[] { (DefineScope)LoggerMessage.DefineScope<string, string, string>, DefineScopeInvalidParameters },
-            new object[] { (DefineScope)LoggerMessage.DefineScope<string, string, string, string>, DefineScopeInvalidParameters },
-            new object[] { (DefineScope)LoggerMessage.DefineScope<string, string, string, string, string>, DefineScopeInvalidParameters },
-            new object[] { (DefineScope)LoggerMessage.DefineScope<string, string, string, string, string, string>, DefineScopeInvalidParameters }
-        };
+        public static IEnumerable<object[]> DefineMethodsWithInvalidParametersData =>
+            new[]
+            {
+                new object[] { (Define)LoggerMessage.Define, DefineInvalidParameters },
+                new object[] { (Define)LoggerMessage.Define<string>, DefineInvalidParameters },
+                new object[]
+                {
+                    (Define)LoggerMessage.Define<string, string>,
+                    DefineInvalidParameters,
+                },
+                new object[]
+                {
+                    (Define)LoggerMessage.Define<string, string, string>,
+                    DefineInvalidParameters,
+                },
+                new object[]
+                {
+                    (Define)LoggerMessage.Define<string, string, string, string>,
+                    DefineInvalidParameters,
+                },
+                new object[]
+                {
+                    (Define)LoggerMessage.Define<string, string, string, string, string>,
+                    DefineInvalidParameters,
+                },
+                new object[]
+                {
+                    (Define)LoggerMessage.Define<string, string, string, string, string, string>,
+                    DefineInvalidParameters,
+                },
+                new object[]
+                {
+                    (DefineScope)LoggerMessage.DefineScope,
+                    DefineScopeInvalidParameters,
+                },
+                new object[]
+                {
+                    (DefineScope)LoggerMessage.DefineScope<string>,
+                    DefineScopeInvalidParameters,
+                },
+                new object[]
+                {
+                    (DefineScope)LoggerMessage.DefineScope<string, string>,
+                    DefineScopeInvalidParameters,
+                },
+                new object[]
+                {
+                    (DefineScope)LoggerMessage.DefineScope<string, string, string>,
+                    DefineScopeInvalidParameters,
+                },
+                new object[]
+                {
+                    (DefineScope)LoggerMessage.DefineScope<string, string, string, string>,
+                    DefineScopeInvalidParameters,
+                },
+                new object[]
+                {
+                    (DefineScope)LoggerMessage.DefineScope<string, string, string, string, string>,
+                    DefineScopeInvalidParameters,
+                },
+                new object[]
+                {
+                    (DefineScope)
+                        LoggerMessage.DefineScope<string, string, string, string, string, string>,
+                    DefineScopeInvalidParameters,
+                },
+            };
 
-        public static IEnumerable<object[]> LogMessagesData => new[]
-        {
-            new object[] { LoggerMessage.Define(LogLevel.Error, 0, "Log "), 0 },
-            new object[] { LoggerMessage.Define<string>(LogLevel.Error, 1, "Log {P0}"), 1 },
-            new object[] { LoggerMessage.Define<string, string>(LogLevel.Error, 2, "Log {P0} {P1}"), 2 },
-            new object[] { LoggerMessage.Define<string, string, string>(LogLevel.Error, 3, "Log {P0} {P1} {P2}"), 3 },
-            new object[] { LoggerMessage.Define<string, string, string, string>(LogLevel.Error, 4, "Log {P0} {P1} {P2} {P3}"), 4 },
-            new object[] { LoggerMessage.Define<string, string, string, string, string>(LogLevel.Error, 5, "Log {P0} {P1} {P2} {P3} {P4}"), 5 },
-            new object[] { LoggerMessage.Define<string, string, string, string, string, string>(LogLevel.Error, 6, "Log {P0} {P1} {P2} {P3} {P4} {P5}"), 6 },
-        };
+        public static IEnumerable<object[]> LogMessagesData =>
+            new[]
+            {
+                new object[] { LoggerMessage.Define(LogLevel.Error, 0, "Log "), 0 },
+                new object[] { LoggerMessage.Define<string>(LogLevel.Error, 1, "Log {P0}"), 1 },
+                new object[]
+                {
+                    LoggerMessage.Define<string, string>(LogLevel.Error, 2, "Log {P0} {P1}"),
+                    2,
+                },
+                new object[]
+                {
+                    LoggerMessage.Define<string, string, string>(
+                        LogLevel.Error,
+                        3,
+                        "Log {P0} {P1} {P2}"
+                    ),
+                    3,
+                },
+                new object[]
+                {
+                    LoggerMessage.Define<string, string, string, string>(
+                        LogLevel.Error,
+                        4,
+                        "Log {P0} {P1} {P2} {P3}"
+                    ),
+                    4,
+                },
+                new object[]
+                {
+                    LoggerMessage.Define<string, string, string, string, string>(
+                        LogLevel.Error,
+                        5,
+                        "Log {P0} {P1} {P2} {P3} {P4}"
+                    ),
+                    5,
+                },
+                new object[]
+                {
+                    LoggerMessage.Define<string, string, string, string, string, string>(
+                        LogLevel.Error,
+                        6,
+                        "Log {P0} {P1} {P2} {P3} {P4} {P5}"
+                    ),
+                    6,
+                },
+            };
 
-        public static IEnumerable<object[]> LogMessagesDataSkipEnabledCheck => new[]
-        {
-            new object[] { LoggerMessage.Define(LogLevel.Error, 0, "Log ", options: new LogDefineOptions() { SkipEnabledCheck = true }), 0 },
-            new object[] { LoggerMessage.Define<string>(LogLevel.Error, 1, "Log {P0}", options: new LogDefineOptions() { SkipEnabledCheck = true }), 1 },
-            new object[] { LoggerMessage.Define<string, string>(LogLevel.Error, 2, "Log {P0} {P1}", options: new LogDefineOptions() { SkipEnabledCheck = true }), 2 },
-            new object[] { LoggerMessage.Define<string, string, string>(LogLevel.Error, 3, "Log {P0} {P1} {P2}", options: new LogDefineOptions() { SkipEnabledCheck = true }), 3 },
-            new object[] { LoggerMessage.Define<string, string, string, string>(LogLevel.Error, 4, "Log {P0} {P1} {P2} {P3}", options: new LogDefineOptions() { SkipEnabledCheck = true }), 4 },
-            new object[] { LoggerMessage.Define<string, string, string, string, string>(LogLevel.Error, 5, "Log {P0} {P1} {P2} {P3} {P4}", options: new LogDefineOptions() { SkipEnabledCheck = true }), 5 },
-            new object[] { LoggerMessage.Define<string, string, string, string, string, string>(LogLevel.Error, 6, "Log {P0} {P1} {P2} {P3} {P4} {P5}", options: new LogDefineOptions() { SkipEnabledCheck = true }), 6 },
-        };
+        public static IEnumerable<object[]> LogMessagesDataSkipEnabledCheck =>
+            new[]
+            {
+                new object[]
+                {
+                    LoggerMessage.Define(
+                        LogLevel.Error,
+                        0,
+                        "Log ",
+                        options: new LogDefineOptions() { SkipEnabledCheck = true }
+                    ),
+                    0,
+                },
+                new object[]
+                {
+                    LoggerMessage.Define<string>(
+                        LogLevel.Error,
+                        1,
+                        "Log {P0}",
+                        options: new LogDefineOptions() { SkipEnabledCheck = true }
+                    ),
+                    1,
+                },
+                new object[]
+                {
+                    LoggerMessage.Define<string, string>(
+                        LogLevel.Error,
+                        2,
+                        "Log {P0} {P1}",
+                        options: new LogDefineOptions() { SkipEnabledCheck = true }
+                    ),
+                    2,
+                },
+                new object[]
+                {
+                    LoggerMessage.Define<string, string, string>(
+                        LogLevel.Error,
+                        3,
+                        "Log {P0} {P1} {P2}",
+                        options: new LogDefineOptions() { SkipEnabledCheck = true }
+                    ),
+                    3,
+                },
+                new object[]
+                {
+                    LoggerMessage.Define<string, string, string, string>(
+                        LogLevel.Error,
+                        4,
+                        "Log {P0} {P1} {P2} {P3}",
+                        options: new LogDefineOptions() { SkipEnabledCheck = true }
+                    ),
+                    4,
+                },
+                new object[]
+                {
+                    LoggerMessage.Define<string, string, string, string, string>(
+                        LogLevel.Error,
+                        5,
+                        "Log {P0} {P1} {P2} {P3} {P4}",
+                        options: new LogDefineOptions() { SkipEnabledCheck = true }
+                    ),
+                    5,
+                },
+                new object[]
+                {
+                    LoggerMessage.Define<string, string, string, string, string, string>(
+                        LogLevel.Error,
+                        6,
+                        "Log {P0} {P1} {P2} {P3} {P4} {P5}",
+                        options: new LogDefineOptions() { SkipEnabledCheck = true }
+                    ),
+                    6,
+                },
+            };
 
         private delegate Delegate Define(LogLevel logLevel, EventId eventId, string formatString);
         private delegate Delegate DefineScope(string formatString);
-        private static object[] DefineInvalidParameters => new object[] { LogLevel.Error, new EventId(0), null };
+        private static object[] DefineInvalidParameters =>
+            new object[] { LogLevel.Error, new EventId(0), null };
         private static object[] DefineScopeInvalidParameters => new object[] { null };
 
         private void AssertLogValues(
             IEnumerable<KeyValuePair<string, object>> expected,
-            IEnumerable<KeyValuePair<string, object>> actual)
+            IEnumerable<KeyValuePair<string, object>> actual
+        )
         {
             if (expected == null && actual == null)
             {

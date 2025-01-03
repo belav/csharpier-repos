@@ -27,9 +27,7 @@ namespace System.Activities.Runtime
         int poolSize;
 
         public Pool()
-            : this(DefaultPoolSize)
-        {
-        }
+            : this(DefaultPoolSize) { }
 
         public Pool(int poolSize)
         {

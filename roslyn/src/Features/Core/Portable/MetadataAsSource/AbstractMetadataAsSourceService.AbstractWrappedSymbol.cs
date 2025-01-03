@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             protected readonly bool CanImplementImplicitly;
             protected readonly IDocumentationCommentFormattingService DocCommentFormattingService;
 
-            protected AbstractWrappedSymbol(ISymbol symbol, bool canImplementImplicitly, IDocumentationCommentFormattingService docCommentFormattingService)
+            protected AbstractWrappedSymbol(
+                ISymbol symbol,
+                bool canImplementImplicitly,
+                IDocumentationCommentFormattingService docCommentFormattingService
+            )
             {
                 _symbol = symbol;
                 CanImplementImplicitly = canImplementImplicitly;
@@ -40,7 +44,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
             public Accessibility DeclaredAccessibility => _symbol.DeclaredAccessibility;
 
-            public ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => _symbol.DeclaringSyntaxReferences;
+            public ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+                _symbol.DeclaringSyntaxReferences;
 
             public bool IsAbstract => _symbol.IsAbstract;
 
@@ -74,41 +79,54 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
             public bool HasUnsupportedMetadata => _symbol.HasUnsupportedMetadata;
 
-            public void Accept(SymbolVisitor visitor)
-                => _symbol.Accept(visitor);
+            public void Accept(SymbolVisitor visitor) => _symbol.Accept(visitor);
 
-            public TResult Accept<TResult>(SymbolVisitor<TResult> visitor)
-                => _symbol.Accept(visitor);
+            public TResult Accept<TResult>(SymbolVisitor<TResult> visitor) =>
+                _symbol.Accept(visitor);
 
-            public TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
-                => _symbol.Accept(visitor, argument);
+            public TResult Accept<TArgument, TResult>(
+                SymbolVisitor<TArgument, TResult> visitor,
+                TArgument argument
+            ) => _symbol.Accept(visitor, argument);
 
-            public ImmutableArray<AttributeData> GetAttributes()
-                => _symbol.GetAttributes();
+            public ImmutableArray<AttributeData> GetAttributes() => _symbol.GetAttributes();
 
-            public string GetDocumentationCommentId()
-                => _symbol.GetDocumentationCommentId();
+            public string GetDocumentationCommentId() => _symbol.GetDocumentationCommentId();
 
-            public string GetDocumentationCommentXml(CultureInfo preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default)
-                => _symbol.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
+            public string GetDocumentationCommentXml(
+                CultureInfo preferredCulture = null,
+                bool expandIncludes = false,
+                CancellationToken cancellationToken = default
+            ) =>
+                _symbol.GetDocumentationCommentXml(
+                    preferredCulture,
+                    expandIncludes,
+                    cancellationToken
+                );
 
-            public ImmutableArray<SymbolDisplayPart> ToDisplayParts(SymbolDisplayFormat format = null)
-                => _symbol.ToDisplayParts(format);
+            public ImmutableArray<SymbolDisplayPart> ToDisplayParts(
+                SymbolDisplayFormat format = null
+            ) => _symbol.ToDisplayParts(format);
 
-            public string ToDisplayString(SymbolDisplayFormat format = null)
-                => _symbol.ToDisplayString(format);
+            public string ToDisplayString(SymbolDisplayFormat format = null) =>
+                _symbol.ToDisplayString(format);
 
-            public string ToMinimalDisplayString(SemanticModel semanticModel, int position, SymbolDisplayFormat format = null)
-                => _symbol.ToMinimalDisplayString(semanticModel, position, format);
+            public string ToMinimalDisplayString(
+                SemanticModel semanticModel,
+                int position,
+                SymbolDisplayFormat format = null
+            ) => _symbol.ToMinimalDisplayString(semanticModel, position, format);
 
-            public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, int position, SymbolDisplayFormat format = null)
-                => _symbol.ToMinimalDisplayParts(semanticModel, position, format);
+            public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(
+                SemanticModel semanticModel,
+                int position,
+                SymbolDisplayFormat format = null
+            ) => _symbol.ToMinimalDisplayParts(semanticModel, position, format);
 
-            public bool Equals(ISymbol other)
-                => Equals((object)other);
+            public bool Equals(ISymbol other) => Equals((object)other);
 
-            public bool Equals(ISymbol other, SymbolEqualityComparer equalityComparer)
-                => Equals(other);
+            public bool Equals(ISymbol other, SymbolEqualityComparer equalityComparer) =>
+                Equals(other);
         }
     }
 }

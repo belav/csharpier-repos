@@ -39,16 +39,14 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <summary>
     ///     The internal builder being used to configure the property.
     /// </summary>
-    IConventionPropertyBuilder IInfrastructure<IConventionPropertyBuilder>.Instance
-        => Builder;
+    IConventionPropertyBuilder IInfrastructure<IConventionPropertyBuilder>.Instance => Builder;
 
     private InternalPropertyBuilder Builder { get; }
 
     /// <summary>
     ///     The property being configured.
     /// </summary>
-    public virtual IMutableProperty Metadata
-        => Builder.Metadata;
+    public virtual IMutableProperty Metadata => Builder.Metadata;
 
     /// <summary>
     ///     Adds or updates an annotation on the property. If an annotation with the key specified in
@@ -186,8 +184,10 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// </remarks>
     /// <typeparam name="TGenerator">A type that inherits from <see cref="ValueGenerator" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual ComplexTypePropertyBuilder HasValueGenerator
-        <[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TGenerator>()
+    public virtual ComplexTypePropertyBuilder HasValueGenerator<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            TGenerator
+    >()
         where TGenerator : ValueGenerator
     {
         Builder.HasValueGenerator(typeof(TGenerator), ConfigurationSource.Explicit);
@@ -222,7 +222,8 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ComplexTypePropertyBuilder HasValueGenerator(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? valueGeneratorType)
+            Type? valueGeneratorType
+    )
     {
         Builder.HasValueGenerator(valueGeneratorType, ConfigurationSource.Explicit);
 
@@ -255,10 +256,10 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// </remarks>
     /// <typeparam name="TFactory">A type that inherits from <see cref="ValueGeneratorFactory" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual ComplexTypePropertyBuilder HasValueGeneratorFactory
-        <[DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)] TFactory>()
-        where TFactory : ValueGeneratorFactory
-        => HasValueGeneratorFactory(typeof(TFactory));
+    public virtual ComplexTypePropertyBuilder HasValueGeneratorFactory<
+        [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)] TFactory
+    >()
+        where TFactory : ValueGeneratorFactory => HasValueGeneratorFactory(typeof(TFactory));
 
     /// <summary>
     ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see cref="ValueGenerator" />
@@ -288,7 +289,8 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ComplexTypePropertyBuilder HasValueGeneratorFactory(
         [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
-        Type? valueGeneratorFactoryType)
+            Type? valueGeneratorFactoryType
+    )
     {
         Builder.HasValueGeneratorFactory(valueGeneratorFactoryType, ConfigurationSource.Explicit);
 
@@ -420,7 +422,9 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// </remarks>
     /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for this property.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual ComplexTypePropertyBuilder UsePropertyAccessMode(PropertyAccessMode propertyAccessMode)
+    public virtual ComplexTypePropertyBuilder UsePropertyAccessMode(
+        PropertyAccessMode propertyAccessMode
+    )
     {
         Builder.UsePropertyAccessMode(propertyAccessMode, ConfigurationSource.Explicit);
 
@@ -435,8 +439,8 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ComplexTypePropertyBuilder HasConversion<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        TConversion>()
-        => HasConversion(typeof(TConversion));
+            TConversion
+    >() => HasConversion(typeof(TConversion));
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -446,7 +450,8 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ComplexTypePropertyBuilder HasConversion(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? conversionType)
+            Type? conversionType
+    )
     {
         if (typeof(ValueConverter).IsAssignableFrom(conversionType))
         {
@@ -466,8 +471,8 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// </summary>
     /// <param name="converter">The converter to use.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual ComplexTypePropertyBuilder HasConversion(ValueConverter? converter)
-        => HasConversion(converter, null, null);
+    public virtual ComplexTypePropertyBuilder HasConversion(ValueConverter? converter) =>
+        HasConversion(converter, null, null);
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -478,9 +483,8 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ComplexTypePropertyBuilder HasConversion<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        TConversion>(
-        ValueComparer? valueComparer)
-        => HasConversion(typeof(TConversion), valueComparer);
+            TConversion
+    >(ValueComparer? valueComparer) => HasConversion(typeof(TConversion), valueComparer);
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -490,11 +494,11 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <param name="providerComparer">The comparer to use for the provider values.</param>
     /// <typeparam name="TConversion">The type to convert to and from or a type that inherits from <see cref="ValueConverter" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual ComplexTypePropertyBuilder HasConversion
-        <[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TConversion>(
-            ValueComparer? valueComparer,
-            ValueComparer? providerComparer)
-        => HasConversion(typeof(TConversion), valueComparer, providerComparer);
+    public virtual ComplexTypePropertyBuilder HasConversion<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            TConversion
+    >(ValueComparer? valueComparer, ValueComparer? providerComparer) =>
+        HasConversion(typeof(TConversion), valueComparer, providerComparer);
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -505,9 +509,9 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ComplexTypePropertyBuilder HasConversion(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type conversionType,
-        ValueComparer? valueComparer)
-        => HasConversion(conversionType, valueComparer, null);
+            Type conversionType,
+        ValueComparer? valueComparer
+    ) => HasConversion(conversionType, valueComparer, null);
 
     // DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
     /// <summary>
@@ -520,9 +524,10 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ComplexTypePropertyBuilder HasConversion(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type conversionType,
+            Type conversionType,
         ValueComparer? valueComparer,
-        ValueComparer? providerComparer)
+        ValueComparer? providerComparer
+    )
     {
         Check.NotNull(conversionType, nameof(conversionType));
 
@@ -548,8 +553,10 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <param name="converter">The converter to use.</param>
     /// <param name="valueComparer">The comparer to use for values before conversion.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual ComplexTypePropertyBuilder HasConversion(ValueConverter? converter, ValueComparer? valueComparer)
-        => HasConversion(converter, valueComparer, null);
+    public virtual ComplexTypePropertyBuilder HasConversion(
+        ValueConverter? converter,
+        ValueComparer? valueComparer
+    ) => HasConversion(converter, valueComparer, null);
 
     /// <summary>
     ///     Configures the property so that the property value is converted to and from the database
@@ -562,7 +569,8 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     public virtual ComplexTypePropertyBuilder HasConversion(
         ValueConverter? converter,
         ValueComparer? valueComparer,
-        ValueComparer? providerComparer)
+        ValueComparer? providerComparer
+    )
     {
         Builder.HasConversion(converter, ConfigurationSource.Explicit);
         Builder.HasValueComparer(valueComparer, ConfigurationSource.Explicit);
@@ -580,11 +588,11 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ComplexTypePropertyBuilder HasConversion<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        TConversion,
+            TConversion,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        TComparer>()
-        where TComparer : ValueComparer
-        => HasConversion(typeof(TConversion), typeof(TComparer));
+            TComparer
+    >()
+        where TComparer : ValueComparer => HasConversion(typeof(TConversion), typeof(TComparer));
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -596,14 +604,15 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ComplexTypePropertyBuilder HasConversion<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        TConversion,
+            TConversion,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        TComparer,
+            TComparer,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        TProviderComparer>()
+            TProviderComparer
+    >()
         where TComparer : ValueComparer
-        where TProviderComparer : ValueComparer
-        => HasConversion(typeof(TConversion), typeof(TComparer), typeof(TProviderComparer));
+        where TProviderComparer : ValueComparer =>
+        HasConversion(typeof(TConversion), typeof(TComparer), typeof(TProviderComparer));
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -614,10 +623,10 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ComplexTypePropertyBuilder HasConversion(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type conversionType,
+            Type conversionType,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType)
-        => HasConversion(conversionType, comparerType, null);
+            Type? comparerType
+    ) => HasConversion(conversionType, comparerType, null);
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -629,11 +638,12 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ComplexTypePropertyBuilder HasConversion(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type conversionType,
+            Type conversionType,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType,
+            Type? comparerType,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? providerComparerType)
+            Type? providerComparerType
+    )
     {
         Check.NotNull(conversionType, nameof(conversionType));
 
@@ -659,8 +669,7 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -669,8 +678,7 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -678,8 +686,7 @@ public class ComplexTypePropertyBuilder : IInfrastructure<IConventionPropertyBui
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

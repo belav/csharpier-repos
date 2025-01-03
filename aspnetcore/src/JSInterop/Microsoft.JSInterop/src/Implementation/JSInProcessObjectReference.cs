@@ -19,14 +19,20 @@ public partial class JSInProcessObjectReference : JSObjectReference, IJSInProces
     /// </summary>
     /// <param name="jsRuntime">The <see cref="JSInProcessRuntime"/> used for invoking JS interop calls.</param>
     /// <param name="id">The unique identifier.</param>
-    protected internal JSInProcessObjectReference(JSInProcessRuntime jsRuntime, long id) : base(jsRuntime, id)
+    protected internal JSInProcessObjectReference(JSInProcessRuntime jsRuntime, long id)
+        : base(jsRuntime, id)
     {
         _jsRuntime = jsRuntime;
     }
 
     /// <inheritdoc />
-    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
-    public TValue Invoke<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(string identifier, params object?[]? args)
+    [RequiresUnreferencedCode(
+        "JSON serialization and deserialization might require types that cannot be statically analyzed."
+    )]
+    public TValue Invoke<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
+        string identifier,
+        params object?[]? args
+    )
     {
         ThrowIfDisposed();
 

@@ -10,15 +10,13 @@ namespace System.Security.Cryptography
 {
     internal static class DSAKeyFormatHelper
     {
-        private static readonly string[] s_validOids =
-        {
-            Oids.Dsa,
-        };
+        private static readonly string[] s_validOids = { Oids.Dsa };
 
         internal static void ReadDsaPrivateKey(
             ReadOnlyMemory<byte> xBytes,
             in AlgorithmIdentifierAsn algId,
-            out DSAParameters ret)
+            out DSAParameters ret
+        )
         {
             if (!algId.Parameters.HasValue)
             {
@@ -42,7 +40,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> xSpan = AsnDecoder.ReadIntegerBytes(
                     xBytes.Span,
                     AsnEncodingRules.DER,
-                    out int consumed);
+                    out int consumed
+                );
 
                 if (consumed != xBytes.Length)
                 {
@@ -67,16 +66,14 @@ namespace System.Security.Cryptography
         internal static void ReadDsaPublicKey(
             ReadOnlyMemory<byte> yBytes,
             in AlgorithmIdentifierAsn algId,
-            out DSAParameters ret)
+            out DSAParameters ret
+        )
         {
             BigInteger y;
 
             try
             {
-                y = AsnDecoder.ReadInteger(
-                    yBytes.Span,
-                    AsnEncodingRules.DER,
-                    out int consumed);
+                y = AsnDecoder.ReadInteger(yBytes.Span, AsnEncodingRules.DER, out int consumed);
 
                 if (consumed != yBytes.Length)
                 {
@@ -108,44 +105,47 @@ namespace System.Security.Cryptography
         internal static void ReadSubjectPublicKeyInfo(
             ReadOnlySpan<byte> source,
             out int bytesRead,
-            out DSAParameters key)
+            out DSAParameters key
+        )
         {
             KeyFormatHelper.ReadSubjectPublicKeyInfo<DSAParameters>(
                 s_validOids,
                 source,
                 ReadDsaPublicKey,
                 out bytesRead,
-                out key);
+                out key
+            );
         }
 
         internal static ReadOnlyMemory<byte> ReadSubjectPublicKeyInfo(
-             ReadOnlyMemory<byte> source,
-             out int bytesRead)
+            ReadOnlyMemory<byte> source,
+            out int bytesRead
+        )
         {
-            return KeyFormatHelper.ReadSubjectPublicKeyInfo(
-                s_validOids,
-                source,
-                out bytesRead);
+            return KeyFormatHelper.ReadSubjectPublicKeyInfo(s_validOids, source, out bytesRead);
         }
 
         internal static void ReadPkcs8(
             ReadOnlySpan<byte> source,
             out int bytesRead,
-            out DSAParameters key)
+            out DSAParameters key
+        )
         {
             KeyFormatHelper.ReadPkcs8<DSAParameters>(
                 s_validOids,
                 source,
                 ReadDsaPrivateKey,
                 out bytesRead,
-                out key);
+                out key
+            );
         }
 
         internal static void ReadEncryptedPkcs8(
             ReadOnlySpan<byte> source,
             ReadOnlySpan<char> password,
             out int bytesRead,
-            out DSAParameters key)
+            out DSAParameters key
+        )
         {
             KeyFormatHelper.ReadEncryptedPkcs8<DSAParameters>(
                 s_validOids,
@@ -153,14 +153,16 @@ namespace System.Security.Cryptography
                 password,
                 ReadDsaPrivateKey,
                 out bytesRead,
-                out key);
+                out key
+            );
         }
 
         internal static void ReadEncryptedPkcs8(
             ReadOnlySpan<byte> source,
             ReadOnlySpan<byte> passwordBytes,
             out int bytesRead,
-            out DSAParameters key)
+            out DSAParameters key
+        )
         {
             KeyFormatHelper.ReadEncryptedPkcs8<DSAParameters>(
                 s_validOids,
@@ -168,7 +170,8 @@ namespace System.Security.Cryptography
                 passwordBytes,
                 ReadDsaPrivateKey,
                 out bytesRead,
-                out key);
+                out key
+            );
         }
 
         internal static AsnWriter WriteSubjectPublicKeyInfo(in DSAParameters dsaParameters)

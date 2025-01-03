@@ -16,11 +16,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
     [Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceUsingStatement)]
     public sealed class IntroduceUsingStatementTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpIntroduceUsingStatementCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpIntroduceUsingStatementCodeRefactoringProvider();
 
-        private Task TestAsync(string initialMarkup, string expectedMarkup, LanguageVersion languageVersion = LanguageVersion.CSharp7)
-            => TestInRegularAndScriptAsync(initialMarkup, expectedMarkup, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion));
+        private Task TestAsync(
+            string initialMarkup,
+            string expectedMarkup,
+            LanguageVersion languageVersion = LanguageVersion.CSharp7
+        ) =>
+            TestInRegularAndScriptAsync(
+                initialMarkup,
+                expectedMarkup,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)
+            );
 
         [Theory]
         [InlineData("v[||]ar name = disposable;")]
@@ -43,10 +53,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                 {
                     void M(System.IDisposable disposable)
                     {
-                """ + declaration + """
+                """
+                    + declaration
+                    + """
+                        }
                     }
-                }
-                """,
+                    """,
                 """
                 class C
                 {
@@ -57,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -69,11 +82,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                 {
                     void M(System.IDisposable disposable)
                     {                             [|
-                """ + """
-                        var name = disposable;    |]
+                """
+                    + """
+                            var name = disposable;    |]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
                 class C
                 {
@@ -84,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -112,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -140,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -169,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         var ignore = disposable;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -198,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         var ignore = disposable;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -213,10 +232,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                 {
                     void M(System.IDisposable disposable)
                     {
-                """ + declaration + """
+                """
+                    + declaration
+                    + """
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -231,7 +253,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         System.IDisposable name =[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -248,7 +271,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -264,10 +288,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                 {
                     void M(System.IDisposable disposable)
                     {
-                """ + declaration + """
+                """
+                    + declaration
+                    + """
+                        }
                     }
-                }
-                """);
+                    """
+            );
         }
 
         [Fact]
@@ -293,7 +320,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -308,7 +336,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         var x = disposable;[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -336,7 +365,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -362,7 +392,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -390,7 +421,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         // Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -420,7 +452,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                 #endif
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -452,7 +485,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -482,7 +516,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         _ = x;
                     }
                 }
-                """, LanguageVersion.CSharp8);
+                """,
+                LanguageVersion.CSharp8
+            );
         }
 
         [Fact]
@@ -517,7 +553,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         M(null);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -549,7 +586,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         // C
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -588,7 +626,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -616,7 +655,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                             }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -631,7 +671,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         new Action(() => var x = disposable[||]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35237")]
@@ -668,7 +709,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         var a = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35237")]
@@ -715,7 +757,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         var c = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35237")]
@@ -762,7 +805,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         var c = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35237")]
@@ -801,7 +845,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         var d = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43001")]
@@ -846,7 +891,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43001")]
@@ -906,7 +952,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43001")]
@@ -958,7 +1005,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43001")]
@@ -1012,7 +1060,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43001")]
@@ -1066,7 +1115,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43001")]
@@ -1120,7 +1170,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43001")]
@@ -1174,7 +1225,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43001")]
@@ -1228,7 +1280,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33699")]
@@ -1263,7 +1316,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         M(null);
                     }
                 }
-                """, LanguageVersion.CSharp8);
+                """,
+                LanguageVersion.CSharp8
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33699")]
@@ -1293,7 +1348,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         M(x);
                     }
                 }
-                """, LanguageVersion.CSharp8);
+                """,
+                LanguageVersion.CSharp8
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33699")]
@@ -1325,7 +1382,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         M(x);
                     }
                 }
-                """, LanguageVersion.CSharp8);
+                """,
+                LanguageVersion.CSharp8
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33699")]
@@ -1369,7 +1428,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """, LanguageVersion.CSharp8);
+                """,
+                LanguageVersion.CSharp8
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33699")]
@@ -1415,7 +1476,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                         }
                     }
                 }
-                """, LanguageVersion.CSharp8);
+                """,
+                LanguageVersion.CSharp8
+            );
         }
     }
 }

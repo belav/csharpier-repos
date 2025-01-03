@@ -11,16 +11,25 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
     internal sealed class EEMetadataReferenceResolver : MetadataReferenceResolver
     {
         private readonly AssemblyIdentityComparer _identityComparer;
-        private readonly IReadOnlyDictionary<string, ImmutableArray<(AssemblyIdentity Identity, MetadataReference Reference)>> _referencesBySimpleName;
+        private readonly IReadOnlyDictionary<
+            string,
+            ImmutableArray<(AssemblyIdentity Identity, MetadataReference Reference)>
+        > _referencesBySimpleName;
 
 #if DEBUG
-        internal readonly Dictionary<AssemblyIdentity, (AssemblyIdentity? Identity, int Count)> Requests =
-            new Dictionary<AssemblyIdentity, (AssemblyIdentity? Identity, int Count)>();
+        internal readonly Dictionary<
+            AssemblyIdentity,
+            (AssemblyIdentity? Identity, int Count)
+        > Requests = new Dictionary<AssemblyIdentity, (AssemblyIdentity? Identity, int Count)>();
 #endif
 
         internal EEMetadataReferenceResolver(
             AssemblyIdentityComparer identityComparer,
-            IReadOnlyDictionary<string, ImmutableArray<(AssemblyIdentity Identity, MetadataReference Reference)>> referencesBySimpleName)
+            IReadOnlyDictionary<
+                string,
+                ImmutableArray<(AssemblyIdentity Identity, MetadataReference Reference)>
+            > referencesBySimpleName
+        )
         {
             _identityComparer = identityComparer;
             _referencesBySimpleName = referencesBySimpleName;
@@ -28,7 +37,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override bool ResolveMissingAssemblies => true;
 
-        public override PortableExecutableReference? ResolveMissingAssembly(MetadataReference definition, AssemblyIdentity referenceIdentity)
+        public override PortableExecutableReference? ResolveMissingAssembly(
+            MetadataReference definition,
+            AssemblyIdentity referenceIdentity
+        )
         {
             (AssemblyIdentity? Identity, MetadataReference? Reference) result = default;
             if (_referencesBySimpleName.TryGetValue(referenceIdentity.Name, out var references))
@@ -45,18 +57,20 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return (PortableExecutableReference?)result.Reference;
         }
 
-        public override ImmutableArray<PortableExecutableReference> ResolveReference(string reference, string? baseFilePath, MetadataReferenceProperties properties)
-            => throw ExceptionUtilities.Unreachable();
+        public override ImmutableArray<PortableExecutableReference> ResolveReference(
+            string reference,
+            string? baseFilePath,
+            MetadataReferenceProperties properties
+        ) => throw ExceptionUtilities.Unreachable();
 
-        public override bool Equals(object? other)
-            => throw ExceptionUtilities.Unreachable();
+        public override bool Equals(object? other) => throw ExceptionUtilities.Unreachable();
 
-        public override int GetHashCode()
-            => throw ExceptionUtilities.Unreachable();
+        public override int GetHashCode() => throw ExceptionUtilities.Unreachable();
 
         private (AssemblyIdentity? Identity, MetadataReference? Reference) GetBestMatch(
             ImmutableArray<(AssemblyIdentity Identity, MetadataReference Reference)> references,
-            AssemblyIdentity referenceIdentity)
+            AssemblyIdentity referenceIdentity
+        )
         {
             (AssemblyIdentity? Identity, MetadataReference? Reference) best = default;
             foreach (var pair in references)

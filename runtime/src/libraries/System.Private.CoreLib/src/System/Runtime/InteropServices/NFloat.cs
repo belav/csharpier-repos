@@ -7,7 +7,6 @@ using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
-
 #pragma warning disable SA1121 // We use our own aliases since they differ per platform
 #if TARGET_32BIT
 using NativeExponentType = System.SByte;
@@ -27,10 +26,11 @@ namespace System.Runtime.InteropServices
     [NonVersionable] // This only applies to field layout
     public readonly struct NFloat
         : IBinaryFloatingPointIeee754<NFloat>,
-          IMinMaxValue<NFloat>,
-          IUtf8SpanFormattable
+            IMinMaxValue<NFloat>,
+            IUtf8SpanFormattable
     {
-        private const NumberStyles DefaultNumberStyles = NumberStyles.Float | NumberStyles.AllowThousands;
+        private const NumberStyles DefaultNumberStyles =
+            NumberStyles.Float | NumberStyles.AllowThousands;
 
         private readonly NativeType _value;
 
@@ -153,35 +153,40 @@ namespace System.Runtime.InteropServices
         /// <param name="right">The value which is added to <paramref name="left" />.</param>
         /// <returns>The sum of <paramref name="left" /> and <paramref name="right" />.</returns>
         [NonVersionable]
-        public static NFloat operator +(NFloat left, NFloat right) => new NFloat(left._value + right._value);
+        public static NFloat operator +(NFloat left, NFloat right) =>
+            new NFloat(left._value + right._value);
 
         /// <summary>Subtracts two values to compute their difference.</summary>
         /// <param name="left">The value from which <paramref name="right" /> is subtracted.</param>
         /// <param name="right">The value which is subtracted from <paramref name="left" />.</param>
         /// <returns>The difference of <paramref name="right" /> subtracted from <paramref name="left" />.</returns>
         [NonVersionable]
-        public static NFloat operator -(NFloat left, NFloat right) => new NFloat(left._value - right._value);
+        public static NFloat operator -(NFloat left, NFloat right) =>
+            new NFloat(left._value - right._value);
 
         /// <summary>Multiplies two values together to compute their product.</summary>
         /// <param name="left">The value which <paramref name="right" /> multiplies.</param>
         /// <param name="right">The value which multiplies <paramref name="left" />.</param>
         /// <returns>The product of <paramref name="left" /> multiplied-by <paramref name="right" />.</returns>
         [NonVersionable]
-        public static NFloat operator *(NFloat left, NFloat right) => new NFloat(left._value * right._value);
+        public static NFloat operator *(NFloat left, NFloat right) =>
+            new NFloat(left._value * right._value);
 
         /// <summary>Divides two values together to compute their quotient.</summary>
         /// <param name="left">The value which <paramref name="right" /> divides.</param>
         /// <param name="right">The value which divides <paramref name="left" />.</param>
         /// <returns>The quotient of <paramref name="left" /> divided-by <paramref name="right" />.</returns>
         [NonVersionable]
-        public static NFloat operator /(NFloat left, NFloat right) => new NFloat(left._value / right._value);
+        public static NFloat operator /(NFloat left, NFloat right) =>
+            new NFloat(left._value / right._value);
 
         /// <summary>Divides two values together to compute their remainder.</summary>
         /// <param name="left">The value which <paramref name="right" /> divides.</param>
         /// <param name="right">The value which divides <paramref name="left" />.</param>
         /// <returns>The remainder of <paramref name="left" /> divided-by <paramref name="right" />.</returns>
         [NonVersionable]
-        public static NFloat operator %(NFloat left, NFloat right) => new NFloat(left._value % right._value);
+        public static NFloat operator %(NFloat left, NFloat right) =>
+            new NFloat(left._value % right._value);
 
         //
         // Comparisons
@@ -298,7 +303,8 @@ namespace System.Runtime.InteropServices
         /// <returns><paramref name="value" /> converted to its nearest representable <see cref="short" /> value.</returns>
         /// <exception cref="OverflowException"><paramref name="value" /> is not representable by <see cref="short" />.</exception>
         [NonVersionable]
-        public static explicit operator checked short(NFloat value) => checked((short)(value._value));
+        public static explicit operator checked short(NFloat value) =>
+            checked((short)(value._value));
 
         /// <summary>Explicitly converts a native-sized floating-point value to its nearest representable <see cref="int" /> value.</summary>
         /// <param name="value">The value to convert.</param>
@@ -337,7 +343,8 @@ namespace System.Runtime.InteropServices
         /// <returns><paramref name="value" /> converted to its nearest representable <see cref="Int128" /> value.</returns>
         /// <exception cref="OverflowException"><paramref name="value" /> is not representable by <see cref="Int128" />.</exception>
         [NonVersionable]
-        public static explicit operator checked Int128(NFloat value) => checked((Int128)(value._value));
+        public static explicit operator checked Int128(NFloat value) =>
+            checked((Int128)(value._value));
 
         /// <summary>Explicitly converts a native-sized floating-point value to its nearest representable <see cref="IntPtr" /> value.</summary>
         /// <param name="value">The value to convert.</param>
@@ -365,7 +372,8 @@ namespace System.Runtime.InteropServices
         /// <exception cref="OverflowException"><paramref name="value" /> is not representable by <see cref="sbyte" />.</exception>
         [NonVersionable]
         [CLSCompliant(false)]
-        public static explicit operator checked sbyte(NFloat value) => checked((sbyte)(value._value));
+        public static explicit operator checked sbyte(NFloat value) =>
+            checked((sbyte)(value._value));
 
         /// <summary>Explicitly converts a native-sized floating-point value to its nearest representable <see cref="float" /> value.</summary>
         /// <param name="value">The value to convert.</param>
@@ -386,7 +394,8 @@ namespace System.Runtime.InteropServices
         /// <exception cref="OverflowException"><paramref name="value" /> is not representable by <see cref="ushort" />.</exception>
         [NonVersionable]
         [CLSCompliant(false)]
-        public static explicit operator checked ushort(NFloat value) => checked((ushort)(value._value));
+        public static explicit operator checked ushort(NFloat value) =>
+            checked((ushort)(value._value));
 
         /// <summary>Explicitly converts a native-sized floating-point value to its nearest representable <see cref="uint" /> value.</summary>
         /// <param name="value">The value to convert.</param>
@@ -416,7 +425,8 @@ namespace System.Runtime.InteropServices
         /// <exception cref="OverflowException"><paramref name="value" /> is not representable by <see cref="ulong" />.</exception>
         [NonVersionable]
         [CLSCompliant(false)]
-        public static explicit operator checked ulong(NFloat value) => checked((ulong)(value._value));
+        public static explicit operator checked ulong(NFloat value) =>
+            checked((ulong)(value._value));
 
         /// <summary>Explicitly converts a native-sized floating-point value to its nearest representable <see cref="UInt128" /> value.</summary>
         /// <param name="value">The value to convert.</param>
@@ -431,7 +441,8 @@ namespace System.Runtime.InteropServices
         /// <exception cref="OverflowException"><paramref name="value" /> is not representable by <see cref="UInt128" />.</exception>
         [NonVersionable]
         [CLSCompliant(false)]
-        public static explicit operator checked UInt128(NFloat value) => checked((UInt128)(value._value));
+        public static explicit operator checked UInt128(NFloat value) =>
+            checked((UInt128)(value._value));
 
         /// <summary>Explicitly converts a native-sized floating-point value to its nearest representable <see cref="UIntPtr" /> value.</summary>
         /// <param name="value">The value to convert.</param>
@@ -446,7 +457,8 @@ namespace System.Runtime.InteropServices
         /// <exception cref="OverflowException"><paramref name="value" /> is not representable by <see cref="UIntPtr" />.</exception>
         [NonVersionable]
         [CLSCompliant(false)]
-        public static explicit operator checked nuint(NFloat value) => checked((nuint)(value._value));
+        public static explicit operator checked nuint(NFloat value) =>
+            checked((nuint)(value._value));
 
         //
         // Implicit Convert To NFloat
@@ -593,7 +605,8 @@ namespace System.Runtime.InteropServices
         /// <param name="value">The floating-point value.</param>
         /// <returns><c>true</c> if the value is negative infinity; <c>false</c> otherwise.</returns>
         [NonVersionable]
-        public static bool IsNegativeInfinity(NFloat value) => NativeType.IsNegativeInfinity(value._value);
+        public static bool IsNegativeInfinity(NFloat value) =>
+            NativeType.IsNegativeInfinity(value._value);
 
         /// <summary>Determines whether the specified value is normal.</summary>
         /// <param name="value">The floating-point value.</param>
@@ -605,7 +618,8 @@ namespace System.Runtime.InteropServices
         /// <param name="value">The floating-point value.</param>
         /// <returns><c>true</c> if the value is positive infinity; <c>false</c> otherwise.</returns>
         [NonVersionable]
-        public static bool IsPositiveInfinity(NFloat value) => NativeType.IsPositiveInfinity(value._value);
+        public static bool IsPositiveInfinity(NFloat value) =>
+            NativeType.IsPositiveInfinity(value._value);
 
         /// <summary>Determines whether the specified value is subnormal.</summary>
         /// <param name="value">The floating-point value.</param>
@@ -682,7 +696,11 @@ namespace System.Runtime.InteropServices
         ///    <para><paramref name="style" /> includes the <see cref="NumberStyles.AllowHexSpecifier" /> or <see cref="NumberStyles.AllowBinarySpecifier" /> value.</para>
         /// </exception>
         /// <exception cref="FormatException"><paramref name="s" /> does not represent a number in a valid format.</exception>
-        public static NFloat Parse(ReadOnlySpan<char> s, NumberStyles style = DefaultNumberStyles, IFormatProvider? provider = null)
+        public static NFloat Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = DefaultNumberStyles,
+            IFormatProvider? provider = null
+        )
         {
             var result = NativeType.Parse(s, style, provider);
             return new NFloat(result);
@@ -729,10 +747,20 @@ namespace System.Runtime.InteropServices
         ///    <para>-or-</para>
         ///    <para><paramref name="style" /> includes the <see cref="NumberStyles.AllowHexSpecifier" /> or <see cref="NumberStyles.AllowBinarySpecifier" /> value.</para>
         /// </exception>
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out NFloat result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out NFloat result
+        )
         {
             Unsafe.SkipInit(out result);
-            return NativeType.TryParse(s, style, provider, out Unsafe.As<NFloat, NativeType>(ref result));
+            return NativeType.TryParse(
+                s,
+                style,
+                provider,
+                out Unsafe.As<NFloat, NativeType>(ref result)
+            );
         }
 
         /// <summary>Tries to convert a character span containing the string representation of a number in a specified style and culture-specific format to its floating-point number equivalent.</summary>
@@ -746,10 +774,20 @@ namespace System.Runtime.InteropServices
         ///    <para>-or-</para>
         ///    <para><paramref name="style" /> includes the <see cref="NumberStyles.AllowHexSpecifier" /> or <see cref="NumberStyles.AllowBinarySpecifier" /> value.</para>
         /// </exception>
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out NFloat result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out NFloat result
+        )
         {
             Unsafe.SkipInit(out result);
-            return NativeType.TryParse(s, style, provider, out Unsafe.As<NFloat, NativeType>(ref result));
+            return NativeType.TryParse(
+                s,
+                style,
+                provider,
+                out Unsafe.As<NFloat, NativeType>(ref result)
+            );
         }
 
         /// <summary>Compares this instance to a specified object and returns an integer that indicates whether the value of this instance is less than, equal to, or greater than the value of the specified object.</summary>
@@ -780,9 +818,12 @@ namespace System.Runtime.InteropServices
         {
             if (obj is NFloat other)
             {
-                if (_value < other._value) return -1;
-                if (_value > other._value) return 1;
-                if (_value == other._value) return 0;
+                if (_value < other._value)
+                    return -1;
+                if (_value > other._value)
+                    return 1;
+                if (_value == other._value)
+                    return 0;
 
                 // At least one of the values is NaN.
                 if (NativeType.IsNaN(_value))
@@ -830,7 +871,8 @@ namespace System.Runtime.InteropServices
         /// <summary>Returns a value indicating whether this instance is equal to a specified object.</summary>
         /// <param name="obj">An object to compare with this instance.</param>
         /// <returns><c>true</c> if <paramref name="obj"/> is an instance of <see cref="NFloat"/> and equals the value of this instance; otherwise, <c>false</c>.</returns>
-        public override bool Equals([NotNullWhen(true)] object? obj) => (obj is NFloat other) && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            (obj is NFloat other) && Equals(other);
 
         /// <summary>Returns a value indicating whether this instance is equal to a specified <see cref="NFloat" /> value.</summary>
         /// <param name="other">An <see cref="NFloat"/> value to compare to this instance.</param>
@@ -849,19 +891,24 @@ namespace System.Runtime.InteropServices
         /// <param name="format">A numeric format string.</param>
         /// <returns>The string representation of the value of this instance as specified by <paramref name="format" />.</returns>
         /// <exception cref="FormatException"><paramref name="format" /> is invalid.</exception>
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format) => _value.ToString(format);
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format
+        ) => _value.ToString(format);
 
         /// <summary>Converts the numeric value of this instance to its equivalent string representation using the specified culture-specific format information.</summary>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <returns>The string representation of the value of this instance as specified by <paramref name="provider" />.</returns>
-        public string ToString(IFormatProvider? provider)=> _value.ToString(provider);
+        public string ToString(IFormatProvider? provider) => _value.ToString(provider);
 
         /// <summary>Converts the numeric value of this instance to its equivalent string representation using the specified format and culture-specific format information.</summary>
         /// <param name="format">A numeric format string.</param>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <returns>The string representation of the value of this instance as specified by <paramref name="format" /> and <paramref name="provider" />.</returns>
         /// <exception cref="FormatException"><paramref name="format" /> is invalid.</exception>
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider) => _value.ToString(format, provider);
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? provider
+        ) => _value.ToString(format, provider);
 
         /// <summary>Tries to format the value of the current instance into the provided span of characters.</summary>
         /// <param name="destination">The span in which to write this instance's value formatted as a span of characters.</param>
@@ -869,17 +916,28 @@ namespace System.Runtime.InteropServices
         /// <param name="format">A span containing the characters that represent a standard or custom format string that defines the acceptable format for <paramref name="destination" />.</param>
         /// <param name="provider">An optional object that supplies culture-specific formatting information for <paramref name="destination" />.</param>
         /// <returns><c>true</c> if the formatting was successful; otherwise, <c>false</c>.</returns>
-        public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null) => _value.TryFormat(destination, out charsWritten, format, provider);
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        ) => _value.TryFormat(destination, out charsWritten, format, provider);
 
         /// <inheritdoc cref="IUtf8SpanFormattable.TryFormat" />
-        public bool TryFormat(Span<byte> utf8Destination, out int bytesWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null) => _value.TryFormat(utf8Destination, out bytesWritten, format, provider);
+        public bool TryFormat(
+            Span<byte> utf8Destination,
+            out int bytesWritten,
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        ) => _value.TryFormat(utf8Destination, out bytesWritten, format, provider);
 
         //
         // IAdditiveIdentity
         //
 
         /// <inheritdoc cref="IAdditiveIdentity{TSelf, TResult}.AdditiveIdentity" />
-        static NFloat IAdditiveIdentity<NFloat, NFloat>.AdditiveIdentity => new NFloat(NativeType.AdditiveIdentity);
+        static NFloat IAdditiveIdentity<NFloat, NFloat>.AdditiveIdentity =>
+            new NFloat(NativeType.AdditiveIdentity);
 
         //
         // IBinaryNumber
@@ -908,42 +966,63 @@ namespace System.Runtime.InteropServices
         //
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseAnd(TSelf, TOther)" />
-        static NFloat IBitwiseOperators<NFloat, NFloat, NFloat>.operator &(NFloat left, NFloat right)
+        static NFloat IBitwiseOperators<NFloat, NFloat, NFloat>.operator &(
+            NFloat left,
+            NFloat right
+        )
         {
 #if TARGET_32BIT
-            uint bits = BitConverter.SingleToUInt32Bits(left._value) & BitConverter.SingleToUInt32Bits(right._value);
+            uint bits =
+                BitConverter.SingleToUInt32Bits(left._value)
+                & BitConverter.SingleToUInt32Bits(right._value);
             NativeType result = BitConverter.UInt32BitsToSingle(bits);
             return new NFloat(result);
 #else
-            ulong bits = BitConverter.DoubleToUInt64Bits(left._value) & BitConverter.DoubleToUInt64Bits(right._value);
+            ulong bits =
+                BitConverter.DoubleToUInt64Bits(left._value)
+                & BitConverter.DoubleToUInt64Bits(right._value);
             NativeType result = BitConverter.UInt64BitsToDouble(bits);
             return new NFloat(result);
 #endif
         }
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseOr(TSelf, TOther)" />
-        static NFloat IBitwiseOperators<NFloat, NFloat, NFloat>.operator |(NFloat left, NFloat right)
+        static NFloat IBitwiseOperators<NFloat, NFloat, NFloat>.operator |(
+            NFloat left,
+            NFloat right
+        )
         {
 #if TARGET_32BIT
-            uint bits = BitConverter.SingleToUInt32Bits(left._value) | BitConverter.SingleToUInt32Bits(right._value);
+            uint bits =
+                BitConverter.SingleToUInt32Bits(left._value)
+                | BitConverter.SingleToUInt32Bits(right._value);
             NativeType result = BitConverter.UInt32BitsToSingle(bits);
             return new NFloat(result);
 #else
-            ulong bits = BitConverter.DoubleToUInt64Bits(left._value) | BitConverter.DoubleToUInt64Bits(right._value);
+            ulong bits =
+                BitConverter.DoubleToUInt64Bits(left._value)
+                | BitConverter.DoubleToUInt64Bits(right._value);
             NativeType result = BitConverter.UInt64BitsToDouble(bits);
             return new NFloat(result);
 #endif
         }
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_ExclusiveOr(TSelf, TOther)" />
-        static NFloat IBitwiseOperators<NFloat, NFloat, NFloat>.operator ^(NFloat left, NFloat right)
+        static NFloat IBitwiseOperators<NFloat, NFloat, NFloat>.operator ^(
+            NFloat left,
+            NFloat right
+        )
         {
 #if TARGET_32BIT
-            uint bits = BitConverter.SingleToUInt32Bits(left._value) ^ BitConverter.SingleToUInt32Bits(right._value);
+            uint bits =
+                BitConverter.SingleToUInt32Bits(left._value)
+                ^ BitConverter.SingleToUInt32Bits(right._value);
             NativeType result = BitConverter.UInt32BitsToSingle(bits);
             return new NFloat(result);
 #else
-            ulong bits = BitConverter.DoubleToUInt64Bits(left._value) ^ BitConverter.DoubleToUInt64Bits(right._value);
+            ulong bits =
+                BitConverter.DoubleToUInt64Bits(left._value)
+                ^ BitConverter.DoubleToUInt64Bits(right._value);
             NativeType result = BitConverter.UInt64BitsToDouble(bits);
             return new NFloat(result);
 #endif
@@ -999,13 +1078,16 @@ namespace System.Runtime.InteropServices
         public static NFloat Round(NFloat x) => new NFloat(NativeType.Round(x._value));
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.Round(TSelf, int)" />
-        public static NFloat Round(NFloat x, int digits) => new NFloat(NativeType.Round(x._value, digits));
+        public static NFloat Round(NFloat x, int digits) =>
+            new NFloat(NativeType.Round(x._value, digits));
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.Round(TSelf, MidpointRounding)" />
-        public static NFloat Round(NFloat x, MidpointRounding mode) => new NFloat(NativeType.Round(x._value, mode));
+        public static NFloat Round(NFloat x, MidpointRounding mode) =>
+            new NFloat(NativeType.Round(x._value, mode));
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.Round(TSelf, int, MidpointRounding)" />
-        public static NFloat Round(NFloat x, int digits, MidpointRounding mode) => new NFloat(NativeType.Round(x._value, digits, mode));
+        public static NFloat Round(NFloat x, int digits, MidpointRounding mode) =>
+            new NFloat(NativeType.Round(x._value, digits, mode));
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.Truncate(TSelf)" />
         public static NFloat Truncate(NFloat x) => new NFloat(NativeType.Truncate(x._value));
@@ -1020,11 +1102,14 @@ namespace System.Runtime.InteropServices
 
             if (exponent >= 0)
             {
-                return (sizeof(NativeExponentType) * 8) - NativeExponentType.LeadingZeroCount(exponent);
+                return (sizeof(NativeExponentType) * 8)
+                    - NativeExponentType.LeadingZeroCount(exponent);
             }
             else
             {
-                return (sizeof(NativeExponentType) * 8) + 1 - NativeExponentType.LeadingZeroCount((NativeExponentType)(~exponent));
+                return (sizeof(NativeExponentType) * 8)
+                    + 1
+                    - NativeExponentType.LeadingZeroCount((NativeExponentType)(~exponent));
             }
         }
 
@@ -1042,7 +1127,10 @@ namespace System.Runtime.InteropServices
         }
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.TryWriteExponentBigEndian(Span{byte}, out int)" />
-        bool IFloatingPoint<NFloat>.TryWriteExponentBigEndian(Span<byte> destination, out int bytesWritten)
+        bool IFloatingPoint<NFloat>.TryWriteExponentBigEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= sizeof(NativeExponentType))
             {
@@ -1066,7 +1154,10 @@ namespace System.Runtime.InteropServices
         }
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.TryWriteExponentLittleEndian(Span{byte}, out int)" />
-        bool IFloatingPoint<NFloat>.TryWriteExponentLittleEndian(Span<byte> destination, out int bytesWritten)
+        bool IFloatingPoint<NFloat>.TryWriteExponentLittleEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= sizeof(NativeExponentType))
             {
@@ -1090,7 +1181,10 @@ namespace System.Runtime.InteropServices
         }
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.TryWriteSignificandBigEndian(Span{byte}, out int)" />
-        bool IFloatingPoint<NFloat>.TryWriteSignificandBigEndian(Span<byte> destination, out int bytesWritten)
+        bool IFloatingPoint<NFloat>.TryWriteSignificandBigEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= sizeof(NativeSignificandType))
             {
@@ -1114,7 +1208,10 @@ namespace System.Runtime.InteropServices
         }
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.TryWriteSignificandLittleEndian(Span{byte}, out int)" />
-        bool IFloatingPoint<NFloat>.TryWriteSignificandLittleEndian(Span<byte> destination, out int bytesWritten)
+        bool IFloatingPoint<NFloat>.TryWriteSignificandLittleEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= sizeof(NativeSignificandType))
             {
@@ -1158,34 +1255,43 @@ namespace System.Runtime.InteropServices
         public static NFloat NegativeZero => new NFloat(NativeType.NegativeZero);
 
         /// <inheritdoc cref="IFloatingPointIeee754{TSelf}.Atan2(TSelf, TSelf)" />
-        public static NFloat Atan2(NFloat y, NFloat x) => new NFloat(NativeType.Atan2(y._value, x._value));
+        public static NFloat Atan2(NFloat y, NFloat x) =>
+            new NFloat(NativeType.Atan2(y._value, x._value));
 
         /// <inheritdoc cref="IFloatingPointIeee754{TSelf}.Atan2Pi(TSelf, TSelf)" />
-        public static NFloat Atan2Pi(NFloat y, NFloat x) => new NFloat(NativeType.Atan2Pi(y._value, x._value));
+        public static NFloat Atan2Pi(NFloat y, NFloat x) =>
+            new NFloat(NativeType.Atan2Pi(y._value, x._value));
 
         /// <inheritdoc cref="IFloatingPointIeee754{TSelf}.BitDecrement(TSelf)" />
-        public static NFloat BitDecrement(NFloat x) => new NFloat(NativeType.BitDecrement(x._value));
+        public static NFloat BitDecrement(NFloat x) =>
+            new NFloat(NativeType.BitDecrement(x._value));
 
         /// <inheritdoc cref="IFloatingPointIeee754{TSelf}.BitIncrement(TSelf)" />
-        public static NFloat BitIncrement(NFloat x) => new NFloat(NativeType.BitIncrement(x._value));
+        public static NFloat BitIncrement(NFloat x) =>
+            new NFloat(NativeType.BitIncrement(x._value));
 
         /// <inheritdoc cref="IFloatingPointIeee754{TSelf}.FusedMultiplyAdd(TSelf, TSelf, TSelf)" />
-        public static NFloat FusedMultiplyAdd(NFloat left, NFloat right, NFloat addend) => new NFloat(NativeType.FusedMultiplyAdd(left._value, right._value, addend._value));
+        public static NFloat FusedMultiplyAdd(NFloat left, NFloat right, NFloat addend) =>
+            new NFloat(NativeType.FusedMultiplyAdd(left._value, right._value, addend._value));
 
         /// <inheritdoc cref="IFloatingPointIeee754{TSelf}.Ieee754Remainder(TSelf, TSelf)" />
-        public static NFloat Ieee754Remainder(NFloat left, NFloat right) => new NFloat(NativeType.Ieee754Remainder(left._value, right._value));
+        public static NFloat Ieee754Remainder(NFloat left, NFloat right) =>
+            new NFloat(NativeType.Ieee754Remainder(left._value, right._value));
 
         /// <inheritdoc cref="IFloatingPointIeee754{TSelf}.ILogB(TSelf)" />
         public static int ILogB(NFloat x) => NativeType.ILogB(x._value);
 
         /// <inheritdoc cref="IFloatingPointIeee754{TSelf}.Lerp(TSelf, TSelf, TSelf)" />
-        public static NFloat Lerp(NFloat value1, NFloat value2, NFloat amount) => new NFloat(NativeType.Lerp(value1._value, value2._value, amount._value));
+        public static NFloat Lerp(NFloat value1, NFloat value2, NFloat amount) =>
+            new NFloat(NativeType.Lerp(value1._value, value2._value, amount._value));
 
         /// <inheritdoc cref="IFloatingPointIeee754{TSelf}.ReciprocalEstimate(TSelf)" />
-        public static NFloat ReciprocalEstimate(NFloat x) => new NFloat(NativeType.ReciprocalEstimate(x._value));
+        public static NFloat ReciprocalEstimate(NFloat x) =>
+            new NFloat(NativeType.ReciprocalEstimate(x._value));
 
         /// <inheritdoc cref="IFloatingPointIeee754{TSelf}.ReciprocalSqrtEstimate(TSelf)" />
-        public static NFloat ReciprocalSqrtEstimate(NFloat x) => new NFloat(NativeType.ReciprocalSqrtEstimate(x._value));
+        public static NFloat ReciprocalSqrtEstimate(NFloat x) =>
+            new NFloat(NativeType.ReciprocalSqrtEstimate(x._value));
 
         /// <inheritdoc cref="IFloatingPointIeee754{TSelf}.ScaleB(TSelf, int)" />
         public static NFloat ScaleB(NFloat x, int n) => new NFloat(NativeType.ScaleB(x._value, n));
@@ -1223,7 +1329,8 @@ namespace System.Runtime.InteropServices
         public static NFloat Log(NFloat x) => new NFloat(NativeType.Log(x._value));
 
         /// <inheritdoc cref="ILogarithmicFunctions{TSelf}.Log(TSelf, TSelf)" />
-        public static NFloat Log(NFloat x, NFloat newBase) => new NFloat(NativeType.Log(x._value, newBase._value));
+        public static NFloat Log(NFloat x, NFloat newBase) =>
+            new NFloat(NativeType.Log(x._value, newBase._value));
 
         /// <inheritdoc cref="ILogarithmicFunctions{TSelf}.LogP1(TSelf)" />
         public static NFloat LogP1(NFloat x) => new NFloat(NativeType.LogP1(x._value));
@@ -1242,29 +1349,36 @@ namespace System.Runtime.InteropServices
         //
 
         /// <inheritdoc cref="IMultiplicativeIdentity{TSelf, TResult}.MultiplicativeIdentity" />
-        static NFloat IMultiplicativeIdentity<NFloat, NFloat>.MultiplicativeIdentity => new NFloat(NativeType.MultiplicativeIdentity);
+        static NFloat IMultiplicativeIdentity<NFloat, NFloat>.MultiplicativeIdentity =>
+            new NFloat(NativeType.MultiplicativeIdentity);
 
         //
         // INumber
         //
 
         /// <inheritdoc cref="INumber{TSelf}.Clamp(TSelf, TSelf, TSelf)" />
-        public static NFloat Clamp(NFloat value, NFloat min, NFloat max) => new NFloat(NativeType.Clamp(value._value, min._value, max._value));
+        public static NFloat Clamp(NFloat value, NFloat min, NFloat max) =>
+            new NFloat(NativeType.Clamp(value._value, min._value, max._value));
 
         /// <inheritdoc cref="INumber{TSelf}.CopySign(TSelf, TSelf)" />
-        public static NFloat CopySign(NFloat value, NFloat sign) => new NFloat(NativeType.CopySign(value._value, sign._value));
+        public static NFloat CopySign(NFloat value, NFloat sign) =>
+            new NFloat(NativeType.CopySign(value._value, sign._value));
 
         /// <inheritdoc cref="INumber{TSelf}.Max(TSelf, TSelf)" />
-        public static NFloat Max(NFloat x, NFloat y) => new NFloat(NativeType.Max(x._value, y._value));
+        public static NFloat Max(NFloat x, NFloat y) =>
+            new NFloat(NativeType.Max(x._value, y._value));
 
         /// <inheritdoc cref="INumber{TSelf}.MaxNumber(TSelf, TSelf)" />
-        public static NFloat MaxNumber(NFloat x, NFloat y) => new NFloat(NativeType.MaxNumber(x._value, y._value));
+        public static NFloat MaxNumber(NFloat x, NFloat y) =>
+            new NFloat(NativeType.MaxNumber(x._value, y._value));
 
         /// <inheritdoc cref="INumber{TSelf}.Min(TSelf, TSelf)" />
-        public static NFloat Min(NFloat x, NFloat y) => new NFloat(NativeType.Min(x._value, y._value));
+        public static NFloat Min(NFloat x, NFloat y) =>
+            new NFloat(NativeType.Min(x._value, y._value));
 
         /// <inheritdoc cref="INumber{TSelf}.MinNumber(TSelf, TSelf)" />
-        public static NFloat MinNumber(NFloat x, NFloat y) => new NFloat(NativeType.MinNumber(x._value, y._value));
+        public static NFloat MinNumber(NFloat x, NFloat y) =>
+            new NFloat(NativeType.MinNumber(x._value, y._value));
 
         /// <inheritdoc cref="INumber{TSelf}.Sign(TSelf)" />
         public static int Sign(NFloat value) => NativeType.Sign(value._value);
@@ -1296,7 +1410,9 @@ namespace System.Runtime.InteropServices
             {
                 result = (NFloat)(object)value;
             }
-            else if (!TryConvertFrom(value, out result) && !TOther.TryConvertToChecked(value, out result))
+            else if (
+                !TryConvertFrom(value, out result) && !TOther.TryConvertToChecked(value, out result)
+            )
             {
                 ThrowHelper.ThrowNotSupportedException();
             }
@@ -1315,7 +1431,10 @@ namespace System.Runtime.InteropServices
             {
                 result = (NFloat)(object)value;
             }
-            else if (!TryConvertFrom(value, out result) && !TOther.TryConvertToSaturating(value, out result))
+            else if (
+                !TryConvertFrom(value, out result)
+                && !TOther.TryConvertToSaturating(value, out result)
+            )
             {
                 ThrowHelper.ThrowNotSupportedException();
             }
@@ -1334,7 +1453,10 @@ namespace System.Runtime.InteropServices
             {
                 result = (NFloat)(object)value;
             }
-            else if (!TryConvertFrom(value, out result) && !TOther.TryConvertToTruncating(value, out result))
+            else if (
+                !TryConvertFrom(value, out result)
+                && !TOther.TryConvertToTruncating(value, out result)
+            )
             {
                 ThrowHelper.ThrowNotSupportedException();
             }
@@ -1370,34 +1492,47 @@ namespace System.Runtime.InteropServices
         static bool INumberBase<NFloat>.IsZero(NFloat value) => (value == 0);
 
         /// <inheritdoc cref="INumberBase{TSelf}.MaxMagnitude(TSelf, TSelf)" />
-        public static NFloat MaxMagnitude(NFloat x, NFloat y) => new NFloat(NativeType.MaxMagnitude(x._value, y._value));
+        public static NFloat MaxMagnitude(NFloat x, NFloat y) =>
+            new NFloat(NativeType.MaxMagnitude(x._value, y._value));
 
         /// <inheritdoc cref="INumberBase{TSelf}.MaxMagnitudeNumber(TSelf, TSelf)" />
-        public static NFloat MaxMagnitudeNumber(NFloat x, NFloat y) => new NFloat(NativeType.MaxMagnitudeNumber(x._value, y._value));
+        public static NFloat MaxMagnitudeNumber(NFloat x, NFloat y) =>
+            new NFloat(NativeType.MaxMagnitudeNumber(x._value, y._value));
 
         /// <inheritdoc cref="INumberBase{TSelf}.MinMagnitude(TSelf, TSelf)" />
-        public static NFloat MinMagnitude(NFloat x, NFloat y) => new NFloat(NativeType.MinMagnitude(x._value, y._value));
+        public static NFloat MinMagnitude(NFloat x, NFloat y) =>
+            new NFloat(NativeType.MinMagnitude(x._value, y._value));
 
         /// <inheritdoc cref="INumberBase{TSelf}.MinMagnitudeNumber(TSelf, TSelf)" />
-        public static NFloat MinMagnitudeNumber(NFloat x, NFloat y) => new NFloat(NativeType.MinMagnitudeNumber(x._value, y._value));
+        public static NFloat MinMagnitudeNumber(NFloat x, NFloat y) =>
+            new NFloat(NativeType.MinMagnitudeNumber(x._value, y._value));
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromChecked{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<NFloat>.TryConvertFromChecked<TOther>(TOther value, out NFloat result)
+        static bool INumberBase<NFloat>.TryConvertFromChecked<TOther>(
+            TOther value,
+            out NFloat result
+        )
         {
             return TryConvertFrom(value, out result);
         }
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromSaturating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<NFloat>.TryConvertFromSaturating<TOther>(TOther value, out NFloat result)
+        static bool INumberBase<NFloat>.TryConvertFromSaturating<TOther>(
+            TOther value,
+            out NFloat result
+        )
         {
             return TryConvertFrom(value, out result);
         }
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromTruncating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<NFloat>.TryConvertFromTruncating<TOther>(TOther value, out NFloat result)
+        static bool INumberBase<NFloat>.TryConvertFromTruncating<TOther>(
+            TOther value,
+            out NFloat result
+        )
         {
             return TryConvertFrom(value, out result);
         }
@@ -1516,7 +1651,10 @@ namespace System.Runtime.InteropServices
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToChecked{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<NFloat>.TryConvertToChecked<TOther>(NFloat value, [MaybeNullWhen(false)] out TOther result)
+        static bool INumberBase<NFloat>.TryConvertToChecked<TOther>(
+            NFloat value,
+            [MaybeNullWhen(false)] out TOther result
+        )
         {
             if (typeof(TOther) == typeof(byte))
             {
@@ -1629,40 +1767,55 @@ namespace System.Runtime.InteropServices
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToSaturating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<NFloat>.TryConvertToSaturating<TOther>(NFloat value, [MaybeNullWhen(false)] out TOther result)
+        static bool INumberBase<NFloat>.TryConvertToSaturating<TOther>(
+            NFloat value,
+            [MaybeNullWhen(false)] out TOther result
+        )
         {
             return TryConvertTo(value, out result);
         }
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToTruncating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<NFloat>.TryConvertToTruncating<TOther>(NFloat value, [MaybeNullWhen(false)] out TOther result)
+        static bool INumberBase<NFloat>.TryConvertToTruncating<TOther>(
+            NFloat value,
+            [MaybeNullWhen(false)] out TOther result
+        )
         {
             return TryConvertTo(value, out result);
         }
 
-        private static bool TryConvertTo<TOther>(NFloat value, [MaybeNullWhen(false)] out TOther result)
+        private static bool TryConvertTo<TOther>(
+            NFloat value,
+            [MaybeNullWhen(false)] out TOther result
+        )
             where TOther : INumberBase<TOther>
         {
             if (typeof(TOther) == typeof(byte))
             {
-                byte actualResult = (value >= byte.MaxValue) ? byte.MaxValue :
-                                    (value <= byte.MinValue) ? byte.MinValue : (byte)value;
+                byte actualResult =
+                    (value >= byte.MaxValue) ? byte.MaxValue
+                    : (value <= byte.MinValue) ? byte.MinValue
+                    : (byte)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(char))
             {
-                char actualResult = (value >= char.MaxValue) ? char.MaxValue :
-                                    (value <= char.MinValue) ? char.MinValue : (char)value;
+                char actualResult =
+                    (value >= char.MaxValue) ? char.MaxValue
+                    : (value <= char.MinValue) ? char.MinValue
+                    : (char)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(decimal))
             {
-                decimal actualResult = (value >= +79228162514264337593543950336.0f) ? decimal.MaxValue :
-                                       (value <= -79228162514264337593543950336.0f) ? decimal.MinValue :
-                                       IsNaN(value) ? 0.0m : (decimal)value;
+                decimal actualResult =
+                    (value >= +79228162514264337593543950336.0f) ? decimal.MaxValue
+                    : (value <= -79228162514264337593543950336.0f) ? decimal.MinValue
+                    : IsNaN(value) ? 0.0m
+                    : (decimal)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -1680,43 +1833,55 @@ namespace System.Runtime.InteropServices
             }
             else if (typeof(TOther) == typeof(short))
             {
-                short actualResult = (value >= short.MaxValue) ? short.MaxValue :
-                                     (value <= short.MinValue) ? short.MinValue : (short)value;
+                short actualResult =
+                    (value >= short.MaxValue) ? short.MaxValue
+                    : (value <= short.MinValue) ? short.MinValue
+                    : (short)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(int))
             {
-                int actualResult = (value >= int.MaxValue) ? int.MaxValue :
-                                   (value <= int.MinValue) ? int.MinValue : (int)value;
+                int actualResult =
+                    (value >= int.MaxValue) ? int.MaxValue
+                    : (value <= int.MinValue) ? int.MinValue
+                    : (int)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(long))
             {
-                long actualResult = (value >= long.MaxValue) ? long.MaxValue :
-                                    (value <= long.MinValue) ? long.MinValue : (long)value;
+                long actualResult =
+                    (value >= long.MaxValue) ? long.MaxValue
+                    : (value <= long.MinValue) ? long.MinValue
+                    : (long)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(Int128))
             {
-                Int128 actualResult = (value >= +170141183460469231731687303715884105727.0) ? Int128.MaxValue :
-                                      (value <= -170141183460469231731687303715884105728.0) ? Int128.MinValue : (Int128)value;
+                Int128 actualResult =
+                    (value >= +170141183460469231731687303715884105727.0) ? Int128.MaxValue
+                    : (value <= -170141183460469231731687303715884105728.0) ? Int128.MinValue
+                    : (Int128)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(nint))
             {
-                nint actualResult = (value >= nint.MaxValue) ? nint.MaxValue :
-                                    (value <= nint.MinValue) ? nint.MinValue : (nint)value;
+                nint actualResult =
+                    (value >= nint.MaxValue) ? nint.MaxValue
+                    : (value <= nint.MinValue) ? nint.MinValue
+                    : (nint)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(sbyte))
             {
-                sbyte actualResult = (value >= sbyte.MaxValue) ? sbyte.MaxValue :
-                                     (value <= sbyte.MinValue) ? sbyte.MinValue : (sbyte)value;
+                sbyte actualResult =
+                    (value >= sbyte.MaxValue) ? sbyte.MaxValue
+                    : (value <= sbyte.MinValue) ? sbyte.MinValue
+                    : (sbyte)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -1728,43 +1893,55 @@ namespace System.Runtime.InteropServices
             }
             else if (typeof(TOther) == typeof(ushort))
             {
-                ushort actualResult = (value >= ushort.MaxValue) ? ushort.MaxValue :
-                                      (value <= ushort.MinValue) ? ushort.MinValue : (ushort)value;
+                ushort actualResult =
+                    (value >= ushort.MaxValue) ? ushort.MaxValue
+                    : (value <= ushort.MinValue) ? ushort.MinValue
+                    : (ushort)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(uint))
             {
-                uint actualResult = (value >= uint.MaxValue) ? uint.MaxValue :
-                                    (value <= uint.MinValue) ? uint.MinValue : (uint)value;
+                uint actualResult =
+                    (value >= uint.MaxValue) ? uint.MaxValue
+                    : (value <= uint.MinValue) ? uint.MinValue
+                    : (uint)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(ulong))
             {
-                ulong actualResult = (value >= ulong.MaxValue) ? ulong.MaxValue :
-                                     (value <= ulong.MinValue) ? ulong.MinValue :
-                                     IsNaN(value) ? 0 : (ulong)value;
+                ulong actualResult =
+                    (value >= ulong.MaxValue) ? ulong.MaxValue
+                    : (value <= ulong.MinValue) ? ulong.MinValue
+                    : IsNaN(value) ? 0
+                    : (ulong)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(UInt128))
             {
-                UInt128 actualResult = (value >= 340282366920938463463374607431768211455.0) ? UInt128.MaxValue :
-                                       (value <= 0.0) ? UInt128.MinValue : (UInt128)value;
+                UInt128 actualResult =
+                    (value >= 340282366920938463463374607431768211455.0) ? UInt128.MaxValue
+                    : (value <= 0.0) ? UInt128.MinValue
+                    : (UInt128)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(nuint))
             {
 #if TARGET_32BIT
-                nuint actualResult = (value >= uint.MaxValue) ? unchecked((nuint)uint.MaxValue) :
-                                     (value <= uint.MinValue) ? unchecked((nuint)uint.MinValue) : (nuint)value;
+                nuint actualResult =
+                    (value >= uint.MaxValue) ? unchecked((nuint)uint.MaxValue)
+                    : (value <= uint.MinValue) ? unchecked((nuint)uint.MinValue)
+                    : (nuint)value;
                 result = (TOther)(object)actualResult;
                 return true;
 #else
-                nuint actualResult = (value >= ulong.MaxValue) ? unchecked((nuint)ulong.MaxValue) :
-                                     (value <= ulong.MinValue) ? unchecked((nuint)ulong.MinValue) : (nuint)value;
+                nuint actualResult =
+                    (value >= ulong.MaxValue) ? unchecked((nuint)ulong.MaxValue)
+                    : (value <= ulong.MinValue) ? unchecked((nuint)ulong.MinValue)
+                    : (nuint)value;
                 result = (TOther)(object)actualResult;
                 return true;
 #endif
@@ -1781,14 +1958,19 @@ namespace System.Runtime.InteropServices
         //
 
         /// <inheritdoc cref="IParsable{TSelf}.TryParse(string?, IFormatProvider?, out TSelf)" />
-        public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out NFloat result) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            IFormatProvider? provider,
+            out NFloat result
+        ) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
 
         //
         // IPowerFunctions
         //
 
         /// <inheritdoc cref="IPowerFunctions{TSelf}.Pow(TSelf, TSelf)" />
-        public static NFloat Pow(NFloat x, NFloat y) => new NFloat(NativeType.Pow(x._value, y._value));
+        public static NFloat Pow(NFloat x, NFloat y) =>
+            new NFloat(NativeType.Pow(x._value, y._value));
 
         //
         // IRootFunctions
@@ -1798,7 +1980,8 @@ namespace System.Runtime.InteropServices
         public static NFloat Cbrt(NFloat x) => new NFloat(NativeType.Cbrt(x._value));
 
         /// <inheritdoc cref="IRootFunctions{TSelf}.Hypot(TSelf, TSelf)" />
-        public static NFloat Hypot(NFloat x, NFloat y) => new NFloat(NativeType.Hypot(x._value, y._value));
+        public static NFloat Hypot(NFloat x, NFloat y) =>
+            new NFloat(NativeType.Hypot(x._value, y._value));
 
         /// <inheritdoc cref="IRootFunctions{TSelf}.RootN(TSelf, int)" />
         public static NFloat RootN(NFloat x, int n) => new NFloat(NativeType.RootN(x._value, n));
@@ -1818,10 +2001,15 @@ namespace System.Runtime.InteropServices
         //
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.Parse(ReadOnlySpan{char}, IFormatProvider?)" />
-        public static NFloat Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider);
+        public static NFloat Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
+            Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider);
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
-        public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out NFloat result) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out NFloat result
+        ) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
 
         //
         // ITrigonometricFunctions
@@ -1900,23 +2088,48 @@ namespace System.Runtime.InteropServices
         //
 
         /// <inheritdoc cref="INumberBase{TSelf}.Parse(ReadOnlySpan{byte}, NumberStyles, IFormatProvider?)" />
-        public static NFloat Parse(ReadOnlySpan<byte> utf8Text, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands, IFormatProvider? provider = null)
+        public static NFloat Parse(
+            ReadOnlySpan<byte> utf8Text,
+            NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands,
+            IFormatProvider? provider = null
+        )
         {
             var result = NativeType.Parse(utf8Text, style, provider);
             return new NFloat(result);
         }
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryParse(ReadOnlySpan{byte}, NumberStyles, IFormatProvider?, out TSelf)" />
-        public static bool TryParse(ReadOnlySpan<byte> utf8Text, NumberStyles style, IFormatProvider? provider, out NFloat result)
+        public static bool TryParse(
+            ReadOnlySpan<byte> utf8Text,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out NFloat result
+        )
         {
             Unsafe.SkipInit(out result);
-            return NativeType.TryParse(utf8Text, style, provider, out Unsafe.As<NFloat, NativeType>(ref result));
+            return NativeType.TryParse(
+                utf8Text,
+                style,
+                provider,
+                out Unsafe.As<NFloat, NativeType>(ref result)
+            );
         }
 
         /// <inheritdoc cref="IUtf8SpanParsable{TSelf}.Parse(ReadOnlySpan{byte}, IFormatProvider?)" />
-        public static NFloat Parse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider) => Parse(utf8Text, NumberStyles.Float | NumberStyles.AllowThousands, provider);
+        public static NFloat Parse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider) =>
+            Parse(utf8Text, NumberStyles.Float | NumberStyles.AllowThousands, provider);
 
         /// <inheritdoc cref="IUtf8SpanParsable{TSelf}.TryParse(ReadOnlySpan{byte}, IFormatProvider?, out TSelf)" />
-        public static bool TryParse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider, out NFloat result) => TryParse(utf8Text, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
+        public static bool TryParse(
+            ReadOnlySpan<byte> utf8Text,
+            IFormatProvider? provider,
+            out NFloat result
+        ) =>
+            TryParse(
+                utf8Text,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                provider,
+                out result
+            );
     }
 }

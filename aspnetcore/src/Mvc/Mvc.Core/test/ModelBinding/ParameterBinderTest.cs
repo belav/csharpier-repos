@@ -4,6 +4,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -11,7 +12,6 @@ using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -23,7 +23,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
 public class ParameterBinderTest
 {
-    private static readonly IOptions<MvcOptions> _optionsAccessor = Options.Create(new MvcOptions());
+    private static readonly IOptions<MvcOptions> _optionsAccessor = Options.Create(
+        new MvcOptions()
+    );
 
     public static TheoryData BindModelAsyncData
     {
@@ -38,17 +40,17 @@ public class ParameterBinderTest
 
             // parameterBindingInfo, metadataBinderModelName, parameterName, expectedBinderModelName
             return new TheoryData<BindingInfo, string, string, string>
-                {
-                    // If the parameter name is not a prefix match, it is ignored. But name is required to create a
-                    // ModelBindingContext.
-                    { null, null, "parameterName", string.Empty },
-                    { emptyBindingInfo, null, "parameterName", string.Empty },
-                    { bindingInfoWithName, null, "parameterName", "bindingInfoName" },
-                    { null, "modelBinderName", "parameterName", "modelBinderName" },
-                    { null, null, "parameterName", string.Empty },
-                    // Parameter's BindingInfo has highest precedence
-                    { bindingInfoWithName, "modelBinderName", "parameterName", "bindingInfoName" },
-                };
+            {
+                // If the parameter name is not a prefix match, it is ignored. But name is required to create a
+                // ModelBindingContext.
+                { null, null, "parameterName", string.Empty },
+                { emptyBindingInfo, null, "parameterName", string.Empty },
+                { bindingInfoWithName, null, "parameterName", "bindingInfoName" },
+                { null, "modelBinderName", "parameterName", "modelBinderName" },
+                { null, null, "parameterName", string.Empty },
+                // Parameter's BindingInfo has highest precedence
+                { bindingInfoWithName, "modelBinderName", "parameterName", "bindingInfoName" },
+            };
         }
     }
 
@@ -72,14 +74,16 @@ public class ParameterBinderTest
             CreateMockValueProvider(),
             new ParameterDescriptor { Name = "myParam", ParameterType = typeof(Person) },
             mockModelMetadata.Object,
-            "ignoredvalue");
+            "ignoredvalue"
+        );
 
         // Assert
         Assert.False(actionContext.ModelState.IsValid);
         Assert.Equal("myParam", actionContext.ModelState.Single().Key);
         Assert.Equal(
             new DefaultModelBindingMessageProvider().MissingBindRequiredValueAccessor("myParam"),
-            actionContext.ModelState.Single().Value.Errors.Single().ErrorMessage);
+            actionContext.ModelState.Single().Value.Errors.Single().ErrorMessage
+        );
     }
 
     [Fact]
@@ -90,15 +94,15 @@ public class ParameterBinderTest
         var mockModelMetadata = CreateMockModelMetadata();
         mockModelMetadata.Setup(o => o.IsRequired).Returns(true);
         mockModelMetadata.Setup(o => o.DisplayName).Returns("My Display Name");
-        mockModelMetadata.Setup(o => o.ValidatorMetadata).Returns(new[]
-        {
-                new RequiredAttribute()
-            });
+        mockModelMetadata
+            .Setup(o => o.ValidatorMetadata)
+            .Returns(new[] { new RequiredAttribute() });
 
         var validator = new DataAnnotationsModelValidator(
             new ValidationAttributeAdapterProvider(),
             new RequiredAttribute(),
-            stringLocalizer: null);
+            stringLocalizer: null
+        );
 
         var parameterBinder = CreateParameterBinder(mockModelMetadata.Object, validator);
         var modelBindingResult = ModelBindingResult.Success(null);
@@ -110,25 +114,28 @@ public class ParameterBinderTest
             CreateMockValueProvider(),
             new ParameterDescriptor { Name = "myParam", ParameterType = typeof(Person) },
             mockModelMetadata.Object,
-            "ignoredvalue");
+            "ignoredvalue"
+        );
 
         // Assert
         Assert.False(actionContext.ModelState.IsValid);
         Assert.Equal("myParam", actionContext.ModelState.Single().Key);
         Assert.Equal(
             new RequiredAttribute().FormatErrorMessage("My Display Name"),
-            actionContext.ModelState.Single().Value.Errors.Single().ErrorMessage);
+            actionContext.ModelState.Single().Value.Errors.Single().ErrorMessage
+        );
     }
 
-    public static TheoryData<RequiredAttribute, ParameterDescriptor, ModelMetadata> EnforcesTopLevelRequiredDataSet
+    public static TheoryData<
+        RequiredAttribute,
+        ParameterDescriptor,
+        ModelMetadata
+    > EnforcesTopLevelRequiredDataSet
     {
         get
         {
             var attribute = new RequiredAttribute();
-            var bindingInfo = new BindingInfo
-            {
-                BinderModelName = string.Empty,
-            };
+            var bindingInfo = new BindingInfo { BinderModelName = string.Empty };
             var parameterDescriptor = new ParameterDescriptor
             {
                 Name = string.Empty,
@@ -172,12 +179,20 @@ public class ParameterBinderTest
                 });
 
             return new TheoryData<RequiredAttribute, ParameterDescriptor, ModelMetadata>
+            {
+                { attribute, parameterDescriptor, provider1.GetMetadataForParameter(parameter) },
                 {
-                    { attribute, parameterDescriptor, provider1.GetMetadataForParameter(parameter) },
-                    { attribute, parameterDescriptor, provider1.GetMetadataForProperty(typeof(Family), nameof(Family.Mom)) },
-                    { attribute, parameterDescriptor, provider2.GetMetadataForType(typeof(Person)) },
-                    { attribute, controllerParameterDescriptor, provider2.GetMetadataForType(typeof(Person)) },
-                };
+                    attribute,
+                    parameterDescriptor,
+                    provider1.GetMetadataForProperty(typeof(Family), nameof(Family.Mom))
+                },
+                { attribute, parameterDescriptor, provider2.GetMetadataForType(typeof(Person)) },
+                {
+                    attribute,
+                    controllerParameterDescriptor,
+                    provider2.GetMetadataForType(typeof(Person))
+                },
+            };
         }
     }
 
@@ -186,7 +201,8 @@ public class ParameterBinderTest
     public async Task BindModelAsync_EnforcesTopLevelRequiredAndLogsSuccessfully_WithEmptyPrefix(
         RequiredAttribute attribute,
         ParameterDescriptor parameterDescriptor,
-        ModelMetadata metadata)
+        ModelMetadata metadata
+    )
     {
         // Arrange
         var expectedKey = string.Empty;
@@ -196,11 +212,16 @@ public class ParameterBinderTest
         var validator = new DataAnnotationsModelValidator(
             new ValidationAttributeAdapterProvider(),
             attribute,
-            stringLocalizer: null);
+            stringLocalizer: null
+        );
 
         var sink = new TestSink();
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
-        var parameterBinder = CreateParameterBinder(metadata, validator, loggerFactory: loggerFactory);
+        var parameterBinder = CreateParameterBinder(
+            metadata,
+            validator,
+            loggerFactory: loggerFactory
+        );
         var modelBindingResult = ModelBindingResult.Success(null);
 
         // Act
@@ -210,7 +231,8 @@ public class ParameterBinderTest
             CreateMockValueProvider(),
             parameterDescriptor,
             metadata,
-            "ignoredvalue");
+            "ignoredvalue"
+        );
 
         // Assert
         Assert.False(actionContext.ModelState.IsValid);
@@ -229,14 +251,13 @@ public class ParameterBinderTest
         var mockModelMetadata = CreateMockModelMetadata();
         var validationAttribute = new RangeAttribute(1, 100);
         mockModelMetadata.Setup(o => o.DisplayName).Returns("My Display Name");
-        mockModelMetadata.Setup(o => o.ValidatorMetadata).Returns(new[] {
-                validationAttribute
-            });
+        mockModelMetadata.Setup(o => o.ValidatorMetadata).Returns(new[] { validationAttribute });
 
         var validator = new DataAnnotationsModelValidator(
             new ValidationAttributeAdapterProvider(),
             validationAttribute,
-            stringLocalizer: null);
+            stringLocalizer: null
+        );
 
         var parameterBinder = CreateParameterBinder(mockModelMetadata.Object, validator);
         var modelBindingResult = ModelBindingResult.Success(123);
@@ -248,14 +269,16 @@ public class ParameterBinderTest
             CreateMockValueProvider(),
             new ParameterDescriptor { Name = "myParam", ParameterType = typeof(Person) },
             mockModelMetadata.Object,
-            50); // This value is ignored, because test explicitly set the ModelBindingResult
+            50
+        ); // This value is ignored, because test explicitly set the ModelBindingResult
 
         // Assert
         Assert.False(actionContext.ModelState.IsValid);
         Assert.Equal("myParam", actionContext.ModelState.Single().Key);
         Assert.Equal(
             validationAttribute.FormatErrorMessage("My Display Name"),
-            actionContext.ModelState.Single().Value.Errors.Single().ErrorMessage);
+            actionContext.ModelState.Single().Value.Errors.Single().ErrorMessage
+        );
     }
 
     [Fact]
@@ -266,20 +289,28 @@ public class ParameterBinderTest
 
         var mockValidator = new Mock<IObjectModelValidator>(MockBehavior.Strict);
         mockValidator
-            .Setup(o => o.Validate(
-                It.IsAny<ActionContext>(),
-                It.IsAny<ValidationStateDictionary>(),
-                It.IsAny<string>(),
-                It.IsAny<object>()))
-            .Callback((ActionContext context, ValidationStateDictionary validationState, string prefix, object model) =>
-            {
-                context.ModelState.AddModelError(prefix, "Test validation message");
-            });
+            .Setup(o =>
+                o.Validate(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<ValidationStateDictionary>(),
+                    It.IsAny<string>(),
+                    It.IsAny<object>()
+                )
+            )
+            .Callback(
+                (
+                    ActionContext context,
+                    ValidationStateDictionary validationState,
+                    string prefix,
+                    object model
+                ) =>
+                {
+                    context.ModelState.AddModelError(prefix, "Test validation message");
+                }
+            );
 
         var modelMetadata = CreateMockModelMetadata().Object;
-        var parameterBinder = CreateBackCompatParameterBinder(
-            modelMetadata,
-            mockValidator.Object);
+        var parameterBinder = CreateBackCompatParameterBinder(modelMetadata, mockValidator.Object);
         var modelBindingResult = ModelBindingResult.Success(123);
 
         // Act
@@ -289,14 +320,16 @@ public class ParameterBinderTest
             CreateMockValueProvider(),
             new ParameterDescriptor { Name = "myParam", ParameterType = typeof(Person) },
             modelMetadata,
-            "ignored");
+            "ignored"
+        );
 
         // Assert
         Assert.False(actionContext.ModelState.IsValid);
         Assert.Equal("myParam", actionContext.ModelState.Single().Key);
         Assert.Equal(
             "Test validation message",
-            actionContext.ModelState.Single().Value.Errors.Single().ErrorMessage);
+            actionContext.ModelState.Single().Value.Errors.Single().ErrorMessage
+        );
     }
 
     [Fact]
@@ -304,7 +337,11 @@ public class ParameterBinderTest
     public async Task BindModelAsync_ForParameter_UsesValidationFromActualModel_WhenDerivedModelIsSet()
     {
         // Arrange
-        var method = GetType().GetMethod(nameof(TestMethodWithoutAttributes), BindingFlags.NonPublic | BindingFlags.Instance);
+        var method = GetType()
+            .GetMethod(
+                nameof(TestMethodWithoutAttributes),
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
         var parameter = method.GetParameters()[0];
         var parameterDescriptor = new ControllerParameterDescriptor
         {
@@ -324,9 +361,11 @@ public class ParameterBinderTest
             new DefaultObjectValidator(
                 modelMetadataProvider,
                 new[] { TestModelValidatorProvider.CreateDefaultProvider() },
-                new MvcOptions()),
+                new MvcOptions()
+            ),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         var modelMetadata = modelMetadataProvider.GetMetadataForParameter(parameter);
         var modelBinder = CreateMockModelBinder(modelBindingResult);
@@ -338,7 +377,8 @@ public class ParameterBinderTest
             CreateMockValueProvider(),
             parameterDescriptor,
             modelMetadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(result.IsModelSet);
@@ -352,14 +392,19 @@ public class ParameterBinderTest
                 Assert.Equal($"{parameter.Name}.{nameof(DerivedPerson.DerivedProperty)}", kvp.Key);
                 var error = Assert.Single(kvp.Value.Errors);
                 Assert.Equal("The DerivedProperty field is required.", error.ErrorMessage);
-            });
+            }
+        );
     }
 
     [Fact]
     public async Task BindModelAsync_ForParameter_UsesValidationFromParameter_WhenDerivedModelIsSet()
     {
         // Arrange
-        var method = GetType().GetMethod(nameof(TestMethodWithAttributes), BindingFlags.NonPublic | BindingFlags.Instance);
+        var method = GetType()
+            .GetMethod(
+                nameof(TestMethodWithAttributes),
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
         var parameter = method.GetParameters()[0];
         var parameterDescriptor = new ControllerParameterDescriptor
         {
@@ -379,9 +424,11 @@ public class ParameterBinderTest
             new DefaultObjectValidator(
                 modelMetadataProvider,
                 new[] { TestModelValidatorProvider.CreateDefaultProvider() },
-                new MvcOptions()),
+                new MvcOptions()
+            ),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         var modelMetadata = modelMetadataProvider.GetMetadataForParameter(parameter);
         var modelBinder = CreateMockModelBinder(modelBindingResult);
@@ -393,7 +440,8 @@ public class ParameterBinderTest
             CreateMockValueProvider(),
             parameterDescriptor,
             modelMetadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(result.IsModelSet);
@@ -407,7 +455,8 @@ public class ParameterBinderTest
                 Assert.Equal(parameter.Name, kvp.Key);
                 var error = Assert.Single(kvp.Value.Errors);
                 Assert.Equal("Always Invalid", error.ErrorMessage);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -434,11 +483,16 @@ public class ParameterBinderTest
             new DefaultObjectValidator(
                 modelMetadataProvider,
                 new[] { TestModelValidatorProvider.CreateDefaultProvider() },
-                new MvcOptions()),
+                new MvcOptions()
+            ),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
-        var modelMetadata = modelMetadataProvider.GetMetadataForProperty(property.DeclaringType, property.Name);
+        var modelMetadata = modelMetadataProvider.GetMetadataForProperty(
+            property.DeclaringType,
+            property.Name
+        );
         var modelBinder = CreateMockModelBinder(modelBindingResult);
 
         // Act
@@ -448,7 +502,8 @@ public class ParameterBinderTest
             CreateMockValueProvider(),
             parameterDescriptor,
             modelMetadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(result.IsModelSet);
@@ -462,14 +517,17 @@ public class ParameterBinderTest
                 Assert.Equal($"{property.Name}.{nameof(DerivedPerson.DerivedProperty)}", kvp.Key);
                 var error = Assert.Single(kvp.Value.Errors);
                 Assert.Equal("The DerivedProperty field is required.", error.ErrorMessage);
-            });
+            }
+        );
     }
 
     [Fact]
     public async Task BindModelAsync_ForProperty_UsesValidationOnProperty_WhenDerivedModelIsSet()
     {
         // Arrange
-        var property = typeof(TestControllerWithValidatedProperties).GetProperty(nameof(TestControllerWithValidatedProperties.Model));
+        var property = typeof(TestControllerWithValidatedProperties).GetProperty(
+            nameof(TestControllerWithValidatedProperties.Model)
+        );
         var parameterDescriptor = new ControllerBoundPropertyDescriptor
         {
             PropertyInfo = property,
@@ -488,11 +546,16 @@ public class ParameterBinderTest
             new DefaultObjectValidator(
                 modelMetadataProvider,
                 new[] { TestModelValidatorProvider.CreateDefaultProvider() },
-                new MvcOptions()),
+                new MvcOptions()
+            ),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
-        var modelMetadata = modelMetadataProvider.GetMetadataForProperty(property.DeclaringType, property.Name);
+        var modelMetadata = modelMetadataProvider.GetMetadataForProperty(
+            property.DeclaringType,
+            property.Name
+        );
         var modelBinder = CreateMockModelBinder(modelBindingResult);
 
         // Act
@@ -502,7 +565,8 @@ public class ParameterBinderTest
             CreateMockValueProvider(),
             parameterDescriptor,
             modelMetadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(result.IsModelSet);
@@ -516,7 +580,8 @@ public class ParameterBinderTest
                 Assert.Equal($"{property.Name}", kvp.Key);
                 var error = Assert.Single(kvp.Value.Errors);
                 Assert.Equal("Always Invalid", error.ErrorMessage);
-            });
+            }
+        );
     }
 
     // Regression test 1 for aspnet/Mvc#7963. ModelState should never be valid.
@@ -538,7 +603,9 @@ public class ParameterBinderTest
         modelState.AddModelError("id", "This is not valid.");
 
         var modelMetadataProvider = new TestModelMetadataProvider();
-        modelMetadataProvider.ForType<IJsonPatchDocument>().ValidationDetails(v => v.ValidateChildren = false);
+        modelMetadataProvider
+            .ForType<IJsonPatchDocument>()
+            .ValidationDetails(v => v.ValidateChildren = false);
         var modelMetadata = modelMetadataProvider.GetMetadataForType(typeof(IJsonPatchDocument));
 
         var parameterBinder = new ParameterBinder(
@@ -547,9 +614,11 @@ public class ParameterBinderTest
             new DefaultObjectValidator(
                 modelMetadataProvider,
                 new[] { TestModelValidatorProvider.CreateDefaultProvider() },
-                new MvcOptions()),
+                new MvcOptions()
+            ),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // BodyModelBinder does not update ModelState in success case.
         var modelBindingResult = ModelBindingResult.Success(new JsonPatchDocument());
@@ -562,7 +631,8 @@ public class ParameterBinderTest
             new SimpleValueProvider(),
             parameterDescriptor,
             modelMetadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(result.IsModelSet);
@@ -575,7 +645,8 @@ public class ParameterBinderTest
                 Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
                 var error = Assert.Single(kvp.Value.Errors);
                 Assert.Equal("This is not valid.", error.ErrorMessage);
-            });
+            }
+        );
     }
 
     // Regression test 2 for aspnet/Mvc#7963. ModelState should never be valid.
@@ -600,7 +671,9 @@ public class ParameterBinderTest
         modelState.AddModelError(string.Empty, "This is also not valid.");
 
         var modelMetadataProvider = new TestModelMetadataProvider();
-        modelMetadataProvider.ForType<IJsonPatchDocument>().ValidationDetails(v => v.ValidateChildren = false);
+        modelMetadataProvider
+            .ForType<IJsonPatchDocument>()
+            .ValidationDetails(v => v.ValidateChildren = false);
         var modelMetadata = modelMetadataProvider.GetMetadataForType(typeof(IJsonPatchDocument));
 
         var parameterBinder = new ParameterBinder(
@@ -609,9 +682,11 @@ public class ParameterBinderTest
             new DefaultObjectValidator(
                 modelMetadataProvider,
                 new[] { TestModelValidatorProvider.CreateDefaultProvider() },
-                new MvcOptions()),
+                new MvcOptions()
+            ),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         var modelBindingResult = ModelBindingResult.Failed();
         var modelBinder = CreateMockModelBinder(modelBindingResult);
@@ -623,7 +698,8 @@ public class ParameterBinderTest
             new SimpleValueProvider(),
             parameterDescriptor,
             modelMetadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.False(result.IsModelSet);
@@ -643,7 +719,8 @@ public class ParameterBinderTest
                 Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
                 var error = Assert.Single(kvp.Value.Errors);
                 Assert.Equal("This is not valid.", error.ErrorMessage);
-            });
+            }
+        );
     }
 
     // Regression test for aspnet/Mvc#8078. Later parameter should not mark entry as valid.
@@ -653,10 +730,7 @@ public class ParameterBinderTest
         // Arrange
         var parameterDescriptor = new ParameterDescriptor
         {
-            BindingInfo = new BindingInfo
-            {
-                BinderModelName = "id",
-            },
+            BindingInfo = new BindingInfo { BinderModelName = "id" },
             Name = "identifier",
             ParameterType = typeof(string),
         };
@@ -676,9 +750,11 @@ public class ParameterBinderTest
             new DefaultObjectValidator(
                 modelMetadataProvider,
                 new[] { TestModelValidatorProvider.CreateDefaultProvider() },
-                new MvcOptions()),
+                new MvcOptions()
+            ),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // Mimic result when second parameter is [FromQuery(Name = "id")] string identifier and query is ?id
         var modelBindingResult = ModelBindingResult.Success(null);
@@ -691,7 +767,8 @@ public class ParameterBinderTest
             new SimpleValueProvider(),
             parameterDescriptor,
             modelMetadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(result.IsModelSet);
@@ -710,8 +787,8 @@ public class ParameterBinderTest
         {
             HttpContext = new DefaultHttpContext()
             {
-                RequestServices = services.BuildServiceProvider()
-            }
+                RequestServices = services.BuildServiceProvider(),
+            },
         };
     }
 
@@ -741,7 +818,8 @@ public class ParameterBinderTest
         ModelMetadata modelMetadata,
         IModelValidator validator = null,
         IOptions<MvcOptions> optionsAccessor = null,
-        ILoggerFactory loggerFactory = null)
+        ILoggerFactory loggerFactory = null
+    )
     {
         var mockModelMetadataProvider = new Mock<IModelMetadataProvider>(MockBehavior.Strict);
         mockModelMetadataProvider
@@ -756,12 +834,16 @@ public class ParameterBinderTest
             new DefaultObjectValidator(
                 mockModelMetadataProvider.Object,
                 new[] { GetModelValidatorProvider(validator) },
-                new MvcOptions()),
+                new MvcOptions()
+            ),
             optionsAccessor,
-            loggerFactory ?? NullLoggerFactory.Instance);
+            loggerFactory ?? NullLoggerFactory.Instance
+        );
     }
 
-    private static IModelValidatorProvider GetModelValidatorProvider(IModelValidator validator = null)
+    private static IModelValidatorProvider GetModelValidatorProvider(
+        IModelValidator validator = null
+    )
     {
         if (validator == null)
         {
@@ -784,7 +866,8 @@ public class ParameterBinderTest
 
     private static ParameterBinder CreateBackCompatParameterBinder(
         ModelMetadata modelMetadata,
-        IObjectModelValidator validator)
+        IObjectModelValidator validator
+    )
     {
         var mockModelMetadataProvider = new Mock<IModelMetadataProvider>(MockBehavior.Strict);
         mockModelMetadataProvider
@@ -797,15 +880,14 @@ public class ParameterBinderTest
             mockModelBinderFactory.Object,
             validator,
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
     }
 
     private static IValueProvider CreateMockValueProvider()
     {
         var mockValueProvider = new Mock<IValueProvider>(MockBehavior.Strict);
-        mockValueProvider
-            .Setup(o => o.ContainsPrefix(It.IsAny<string>()))
-            .Returns(true);
+        mockValueProvider.Setup(o => o.ContainsPrefix(It.IsAny<string>())).Returns(true);
         return mockValueProvider.Object;
     }
 
@@ -842,14 +924,12 @@ public class ParameterBinderTest
     public abstract class FakeModelMetadata : ModelMetadata
     {
         public FakeModelMetadata()
-            : base(ModelMetadataIdentity.ForType(typeof(string)))
-        {
-        }
+            : base(ModelMetadataIdentity.ForType(typeof(string))) { }
     }
 
     private void TestMethodWithoutAttributes(Person person) { }
 
-    private void TestMethodWithAttributes([Required][AlwaysInvalid] Person person) { }
+    private void TestMethodWithAttributes([Required] [AlwaysInvalid] Person person) { }
 
     private class TestController
     {
@@ -863,9 +943,7 @@ public class ParameterBinderTest
         public BaseModel Model { get; set; }
     }
 
-    private class BaseModel
-    {
-    }
+    private class BaseModel { }
 
     private class DerivedModel
     {

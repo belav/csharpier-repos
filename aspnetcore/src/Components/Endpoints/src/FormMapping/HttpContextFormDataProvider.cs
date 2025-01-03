@@ -16,11 +16,16 @@ internal sealed class HttpContextFormDataProvider
 
     public string? IncomingHandlerName => _incomingHandlerName;
 
-    public IReadOnlyDictionary<string, StringValues> Entries => _entries ?? ReadOnlyDictionary<string, StringValues>.Empty;
+    public IReadOnlyDictionary<string, StringValues> Entries =>
+        _entries ?? ReadOnlyDictionary<string, StringValues>.Empty;
 
     public IFormFileCollection FormFiles => _formFiles ?? (IFormFileCollection)FormCollection.Empty;
 
-    public void SetFormData(string incomingHandlerName, IReadOnlyDictionary<string, StringValues> form, IFormFileCollection formFiles)
+    public void SetFormData(
+        string incomingHandlerName,
+        IReadOnlyDictionary<string, StringValues> form,
+        IFormFileCollection formFiles
+    )
     {
         _incomingHandlerName = incomingHandlerName;
         _entries = form;

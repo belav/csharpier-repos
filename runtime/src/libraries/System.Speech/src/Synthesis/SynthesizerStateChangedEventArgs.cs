@@ -19,17 +19,11 @@ namespace System.Speech.Synthesis
         // Use Add* naming convention.
         public SynthesizerState State
         {
-            get
-            {
-                return _state;
-            }
+            get { return _state; }
         }
         public SynthesizerState PreviousState
         {
-            get
-            {
-                return _previousState;
-            }
+            get { return _previousState; }
         }
 
         #endregion

@@ -10,7 +10,8 @@ namespace System.Net.Http.Functional.Tests
     {
         Stream _content;
 
-        public MultiInterfaceStreamContent(Stream content) : base(content)
+        public MultiInterfaceStreamContent(Stream content)
+            : base(content)
         {
             _content = content;
         }

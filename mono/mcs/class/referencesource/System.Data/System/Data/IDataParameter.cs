@@ -6,43 +6,24 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
 
-    public interface IDataParameter {
+    public interface IDataParameter
+    {
+        DbType DbType { get; set; }
 
-        DbType DbType {
-            get;
-            set;
-        }
+        ParameterDirection Direction { get; set; }
 
-        ParameterDirection Direction {
-            get;
-            set;
-        }
+        Boolean IsNullable { get; }
 
-         Boolean IsNullable {
-            get;
-        }
+        String ParameterName { get; set; }
 
-        String ParameterName {
-            get;
-            set;
-        }
+        String SourceColumn { get; set; }
 
-        String SourceColumn {
-            get;
-            set;
-        }
+        DataRowVersion SourceVersion { get; set; }
 
-        DataRowVersion SourceVersion {
-            get;
-            set;
-        }
-
-        object Value {
-            get;
-            set;
-        }
+        object Value { get; set; }
     }
 }

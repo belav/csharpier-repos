@@ -9,9 +9,13 @@ using Microsoft.CodeAnalysis.Features.RQName.SimpleTree;
 
 namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
 {
-    internal class RQUnconstructedType(IList<string> namespaceNames, IList<RQUnconstructedTypeInfo> typeInfos) : RQTypeOrNamespace(namespaceNames)
+    internal class RQUnconstructedType(
+        IList<string> namespaceNames,
+        IList<RQUnconstructedTypeInfo> typeInfos
+    ) : RQTypeOrNamespace(namespaceNames)
     {
-        public readonly ReadOnlyCollection<RQUnconstructedTypeInfo> TypeInfos = new ReadOnlyCollection<RQUnconstructedTypeInfo>(typeInfos);
+        public readonly ReadOnlyCollection<RQUnconstructedTypeInfo> TypeInfos =
+            new ReadOnlyCollection<RQUnconstructedTypeInfo>(typeInfos);
 
         protected override string RQKeyword
         {
@@ -22,10 +26,15 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
         {
             base.AppendChildren(childList);
 
-            var typeNodes = from typeInfo in TypeInfos
-                            let typeParamCountNode = new SimpleGroupNode(RQNameStrings.TypeVarCnt, typeInfo.TypeVariableCount.ToString())
-                            let nameLeaf = new SimpleLeafNode(typeInfo.TypeName)
-                            select (SimpleTreeNode)new SimpleGroupNode(RQNameStrings.AggName, nameLeaf, typeParamCountNode);
+            var typeNodes =
+                from typeInfo in TypeInfos
+                let typeParamCountNode = new SimpleGroupNode(
+                    RQNameStrings.TypeVarCnt,
+                    typeInfo.TypeVariableCount.ToString()
+                )
+                let nameLeaf = new SimpleLeafNode(typeInfo.TypeName)
+                select (SimpleTreeNode)
+                    new SimpleGroupNode(RQNameStrings.AggName, nameLeaf, typeParamCountNode);
             childList.AddRange(typeNodes);
         }
     }

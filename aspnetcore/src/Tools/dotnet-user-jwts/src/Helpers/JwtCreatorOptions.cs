@@ -12,4 +12,5 @@ internal sealed record JwtCreatorOptions(
     DateTime ExpiresOn,
     List<string> Roles,
     List<string> Scopes,
-    Dictionary<string, string> Claims);
+    Dictionary<string, string> Claims
+);

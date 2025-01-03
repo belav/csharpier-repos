@@ -16,26 +16,23 @@ public class BodyValidationIntegrationTests
     public async Task ModelMetadataTypeAttribute_ValidBaseClass_NoModelStateErrors()
     {
         // Arrange
-        var input = "{ \"Name\": \"MVC\", \"Contact\":\"4258959019\", \"Category\":\"Technology\"," +
-            "\"CompanyName\":\"Microsoft\", \"Country\":\"USA\",\"Price\": 21, " +
-            "\"ProductDetails\": {\"Detail1\": \"d1\", \"Detail2\": \"d2\", \"Detail3\": \"d3\"}}";
+        var input =
+            "{ \"Name\": \"MVC\", \"Contact\":\"4258959019\", \"Category\":\"Technology\","
+            + "\"CompanyName\":\"Microsoft\", \"Country\":\"USA\",\"Price\": 21, "
+            + "\"ProductDetails\": {\"Detail1\": \"d1\", \"Detail2\": \"d2\", \"Detail3\": \"d3\"}}";
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
             ParameterType = typeof(ProductViewModel),
-            BindingInfo = new BindingInfo()
-            {
-                BindingSource = BindingSource.Body
-            }
+            BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body },
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-          request =>
-          {
-              request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-              request.ContentType = "application/json;charset=utf-8";
-          });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json;charset=utf-8";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -53,23 +50,21 @@ public class BodyValidationIntegrationTests
     public async Task ModelMetadataType_ValidArray_NoModelStateErrors()
     {
         // Arrange
-        var input = "[" +
-            "{ \"Name\": \"MVC\", \"Contact\":\"4258959019\", \"Category\":\"Technology\"," +
-            "\"CompanyName\":\"Microsoft\", \"Country\":\"USA\",\"Price\": 21, " +
-            "\"ProductDetails\": {\"Detail1\": \"d1\", \"Detail2\": \"d2\", \"Detail3\": \"d3\"}}," +
-            "{ \"Name\": \"MVC too\", \"Contact\":\"4258959020\", \"Category\":\"Technology\"," +
-            "\"CompanyName\":\"Microsoft\", \"Country\":\"USA\",\"Price\": 22, " +
-            "\"ProductDetails\": {\"Detail1\": \"d2\", \"Detail2\": \"d3\", \"Detail3\": \"d4\"}}" +
-            "]";
+        var input =
+            "["
+            + "{ \"Name\": \"MVC\", \"Contact\":\"4258959019\", \"Category\":\"Technology\","
+            + "\"CompanyName\":\"Microsoft\", \"Country\":\"USA\",\"Price\": 21, "
+            + "\"ProductDetails\": {\"Detail1\": \"d1\", \"Detail2\": \"d2\", \"Detail3\": \"d3\"}},"
+            + "{ \"Name\": \"MVC too\", \"Contact\":\"4258959020\", \"Category\":\"Technology\","
+            + "\"CompanyName\":\"Microsoft\", \"Country\":\"USA\",\"Price\": 22, "
+            + "\"ProductDetails\": {\"Detail1\": \"d2\", \"Detail2\": \"d3\", \"Detail3\": \"d4\"}}"
+            + "]";
         var argumentBinding = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor
         {
             Name = "Parameter1",
             ParameterType = typeof(IEnumerable<ProductViewModel>),
-            BindingInfo = new BindingInfo
-            {
-                BindingSource = BindingSource.Body,
-            },
+            BindingInfo = new BindingInfo { BindingSource = BindingSource.Body },
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -98,19 +93,15 @@ public class BodyValidationIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BindingSource = BindingSource.Body
-            },
-            ParameterType = typeof(ProductViewModel)
+            BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body },
+            ParameterType = typeof(ProductViewModel),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-          request =>
-          {
-              request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-              request.ContentType = "application/json";
-          });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -142,29 +133,28 @@ public class BodyValidationIntegrationTests
     public async Task ModelMetadataTypeAttribute_InvalidComplexTypePropertyOnBaseClass_HasModelStateErrors()
     {
         // Arrange
-        var input = "{ \"Contact\":\"4255678765\", \"Category\":\"Technology\"," +
-            "\"CompanyName\":\"Microsoft\", \"Country\":\"USA\",\"Price\": 21 }";
+        var input =
+            "{ \"Contact\":\"4255678765\", \"Category\":\"Technology\","
+            + "\"CompanyName\":\"Microsoft\", \"Country\":\"USA\",\"Price\": 21 }";
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BindingSource = BindingSource.Body
-            },
-            ParameterType = typeof(ProductViewModel)
+            BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body },
+            ParameterType = typeof(ProductViewModel),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-          request =>
-          {
-              request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-              request.ContentType = "application/json";
-          });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
-        var productDetailsRequired = ValidationAttributeUtil.GetRequiredErrorMessage("ProductDetails");
+        var productDetailsRequired = ValidationAttributeUtil.GetRequiredErrorMessage(
+            "ProductDetails"
+        );
 
         // Act
         var modelBindingResult = await parameterBinder.BindModelAsync(parameter, testContext);
@@ -182,26 +172,23 @@ public class BodyValidationIntegrationTests
     public async Task ModelMetadataTypeAttribute_InvalidClassAttributeOnBaseClass_HasModelStateErrors()
     {
         // Arrange
-        var input = "{ \"Contact\":\"4258959019\", \"Category\":\"Technology\"," +
-            "\"CompanyName\":\"Microsoft\", \"Country\":\"UK\",\"Price\": 21, \"ProductDetails\": {\"Detail1\": \"d1\"," +
-            " \"Detail2\": \"d2\", \"Detail3\": \"d3\"}}";
+        var input =
+            "{ \"Contact\":\"4258959019\", \"Category\":\"Technology\","
+            + "\"CompanyName\":\"Microsoft\", \"Country\":\"UK\",\"Price\": 21, \"ProductDetails\": {\"Detail1\": \"d1\","
+            + " \"Detail2\": \"d2\", \"Detail3\": \"d3\"}}";
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BindingSource = BindingSource.Body
-            },
-            ParameterType = typeof(ProductViewModel)
+            BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body },
+            ParameterType = typeof(ProductViewModel),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-          request =>
-          {
-              request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-              request.ContentType = "application/json";
-          });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -222,26 +209,23 @@ public class BodyValidationIntegrationTests
     public async Task ModelMetadataTypeAttribute_ValidDerivedClass_NoModelStateErrors()
     {
         // Arrange
-        var input = "{ \"Name\": \"MVC\", \"Contact\":\"4258959019\", \"Category\":\"Technology\"," +
-            "\"CompanyName\":\"Microsoft\", \"Country\":\"USA\", \"Version\":\"2\"," +
-            "\"DatePurchased\": \"/Date(1297246301973)/\", \"Price\" : \"110\" }";
+        var input =
+            "{ \"Name\": \"MVC\", \"Contact\":\"4258959019\", \"Category\":\"Technology\","
+            + "\"CompanyName\":\"Microsoft\", \"Country\":\"USA\", \"Version\":\"2\","
+            + "\"DatePurchased\": \"/Date(1297246301973)/\", \"Price\" : \"110\" }";
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BindingSource = BindingSource.Body
-            },
-            ParameterType = typeof(SoftwareViewModel)
+            BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body },
+            ParameterType = typeof(SoftwareViewModel),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-          request =>
-          {
-              request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-              request.ContentType = "application/json";
-          });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -259,30 +243,31 @@ public class BodyValidationIntegrationTests
     public async Task ModelMetadataTypeAttribute_InvalidPropertiesOnDerivedClass_HasModelStateErrors()
     {
         // Arrange
-        var input = "{ \"Name\": \"MVC\", \"Contact\":\"425-895-9019\", \"Category\":\"Technology\"," +
-            "\"CompanyName\":\"Microsoft\", \"Country\":\"USA\",\"Price\": 2}";
+        var input =
+            "{ \"Name\": \"MVC\", \"Contact\":\"425-895-9019\", \"Category\":\"Technology\","
+            + "\"CompanyName\":\"Microsoft\", \"Country\":\"USA\",\"Price\": 2}";
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BindingSource = BindingSource.Body
-            },
-            ParameterType = typeof(SoftwareViewModel)
+            BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body },
+            ParameterType = typeof(SoftwareViewModel),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-          request =>
-          {
-              request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-              request.ContentType = "application/json";
-          });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
         var priceRange = ValidationAttributeUtil.GetRangeErrorMessage(100, 200, "Price");
-        var contactLength = ValidationAttributeUtil.GetStringLengthErrorMessage(null, 10, "Contact");
+        var contactLength = ValidationAttributeUtil.GetStringLengthErrorMessage(
+            null,
+            10,
+            "Contact"
+        );
 
         // Act
         var modelBindingResult = await parameterBinder.BindModelAsync(parameter, testContext);
@@ -303,26 +288,23 @@ public class BodyValidationIntegrationTests
     public async Task ModelMetadataTypeAttribute_InvalidClassAttributeOnBaseClassProduct_HasModelStateErrors()
     {
         // Arrange
-        var input = "{ \"Contact\":\"4258959019\", \"Category\":\"Technology\"," +
-            "\"CompanyName\":\"Microsoft\", \"Country\":\"UK\",\"Version\":\"2\"," +
-            "\"DatePurchased\": \"/Date(1297246301973)/\", \"Price\" : \"110\" }";
+        var input =
+            "{ \"Contact\":\"4258959019\", \"Category\":\"Technology\","
+            + "\"CompanyName\":\"Microsoft\", \"Country\":\"UK\",\"Version\":\"2\","
+            + "\"DatePurchased\": \"/Date(1297246301973)/\", \"Price\" : \"110\" }";
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BindingSource = BindingSource.Body
-            },
-            ParameterType = typeof(SoftwareViewModel)
+            BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body },
+            ParameterType = typeof(SoftwareViewModel),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-          request =>
-          {
-              request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-              request.ContentType = "application/json";
-          });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -358,25 +340,23 @@ public class BodyValidationIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "CustomParameter",
-            },
-            ParameterType = typeof(Person)
+            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter" },
+            ParameterType = typeof(Person),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-          request =>
-          {
-              request.Body = new MemoryStream(Encoding.UTF8.GetBytes(string.Empty));
-              request.ContentType = "application/json";
-              request.ContentLength = 0;
-          });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(string.Empty));
+            request.ContentType = "application/json";
+            request.ContentLength = 0;
+        });
         testContext.MvcOptions.AllowEmptyInputInBodyModelBinding = true;
 
         var modelState = testContext.ModelState;
         var addressRequired = ValidationAttributeUtil.GetRequiredErrorMessage("Address");
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
 
         // Act
         var modelBindingResult = await parameterBinder.BindModelAsync(parameter, testContext);
@@ -402,22 +382,23 @@ public class BodyValidationIntegrationTests
             BindingInfo = new BindingInfo
             {
                 BinderModelName = "CustomParameter",
-                BindingSource = BindingSource.Body
+                BindingSource = BindingSource.Body,
             },
-            ParameterType = typeof(Person)
+            ParameterType = typeof(Person),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(string.Empty));
-                request.ContentType = "application/json";
-                request.ContentLength = 0;
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(string.Empty));
+            request.ContentType = "application/json";
+            request.ContentLength = 0;
+        });
         testContext.MvcOptions.AllowEmptyInputInBodyModelBinding = true;
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
 
         // Act
         var modelBindingResult = await parameterBinder.BindModelAsync(parameter, testContext);
@@ -441,27 +422,25 @@ public class BodyValidationIntegrationTests
     public async Task FromBodyAndRequiredOnValueTypeProperty_EmptyBody_AddsModelStateError()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(string.Empty));
-                request.ContentType = "application/json";
-                request.ContentLength = 0;
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(string.Empty));
+            request.ContentType = "application/json";
+            request.ContentLength = 0;
+        });
 
         // Override the AllowInputFormatterExceptionMessages setting ModelBindingTestHelper chooses.
         var options = testContext.GetService<IOptions<MvcNewtonsoftJsonOptions>>().Value;
         options.AllowInputFormatterExceptionMessages = false;
 
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo
-            {
-                BinderModelName = "CustomParameter",
-            },
-            ParameterType = typeof(Person4)
+            BindingInfo = new BindingInfo { BinderModelName = "CustomParameter" },
+            ParameterType = typeof(Person4),
         };
 
         var modelState = testContext.ModelState;
@@ -495,6 +474,7 @@ public class BodyValidationIntegrationTests
         [FromBody]
         public Address5 Address { get; set; } = default!;
     }
+
 #nullable restore
 
     private class Address5
@@ -514,19 +494,15 @@ public class BodyValidationIntegrationTests
         var parameter = new ParameterDescriptor
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo
-            {
-                BinderModelName = "CustomParameter",
-            },
-            ParameterType = typeof(Person5)
+            BindingInfo = new BindingInfo { BinderModelName = "CustomParameter" },
+            ParameterType = typeof(Person5),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{ \"Number\": 5 }"));
-                request.ContentType = "application/json";
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{ \"Number\": 5 }"));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -548,26 +524,26 @@ public class BodyValidationIntegrationTests
     public async Task FromBodyWithInvalidPropertyData_JsonFormatterAddsModelError()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{ \"Number\": \"not a number\" }"));
-                request.ContentType = "application/json";
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(
+                Encoding.UTF8.GetBytes("{ \"Number\": \"not a number\" }")
+            );
+            request.ContentType = "application/json";
+        });
 
         // Override the AllowInputFormatterExceptionMessages setting ModelBindingTestHelper chooses.
         var options = testContext.GetService<IOptions<MvcNewtonsoftJsonOptions>>().Value;
         options.AllowInputFormatterExceptionMessages = false;
 
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo
-            {
-                BinderModelName = "CustomParameter",
-            },
-            ParameterType = typeof(Person5)
+            BindingInfo = new BindingInfo { BinderModelName = "CustomParameter" },
+            ParameterType = typeof(Person5),
         };
 
         var modelState = testContext.ModelState;
@@ -601,17 +577,15 @@ public class BodyValidationIntegrationTests
     [InlineData(typeof(Person5WithNullableContext), false)]
     public async Task FromBodyWithEmptyBody_ModelStateIsInvalid_HasModelErrors(
         Type modelType,
-        bool allowEmptyInputInBodyModelBindingSetting)
+        bool allowEmptyInputInBodyModelBindingSetting
+    )
     {
         // Arrange
         var parameter = new ParameterDescriptor
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo
-            {
-                BinderModelName = "CustomParameter",
-            },
-            ParameterType = modelType
+            BindingInfo = new BindingInfo { BinderModelName = "CustomParameter" },
+            ParameterType = modelType,
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(
@@ -621,10 +595,14 @@ public class BodyValidationIntegrationTests
                 request.ContentType = "application/json";
                 request.ContentLength = 0;
             },
-            options => options.AllowEmptyInputInBodyModelBinding = allowEmptyInputInBodyModelBindingSetting);
+            options =>
+                options.AllowEmptyInputInBodyModelBinding = allowEmptyInputInBodyModelBindingSetting
+        );
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
 
         // Act
         var modelBindingResult = await parameterBinder.BindModelAsync(parameter, testContext);
@@ -652,11 +630,8 @@ public class BodyValidationIntegrationTests
         var parameter = new ParameterDescriptor
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo
-            {
-                BinderModelName = "CustomParameter",
-            },
-            ParameterType = typeof(Person5)
+            BindingInfo = new BindingInfo { BinderModelName = "CustomParameter" },
+            ParameterType = typeof(Person5),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(
@@ -666,10 +641,13 @@ public class BodyValidationIntegrationTests
                 request.ContentType = "application/json";
                 request.ContentLength = 0;
             },
-            options => options.AllowEmptyInputInBodyModelBinding = true);
+            options => options.AllowEmptyInputInBodyModelBinding = true
+        );
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
 
         // Act
         var modelBindingResult = await parameterBinder.BindModelAsync(parameter, testContext);
@@ -697,26 +675,24 @@ public class BodyValidationIntegrationTests
     [Theory]
     [InlineData("{ \"Zip\" : 123 }")]
     [InlineData("{}")]
-    public async Task FromBodyOnTopLevelProperty_RequiredOnSubProperty_AddsModelStateError(string inputText)
+    public async Task FromBodyOnTopLevelProperty_RequiredOnSubProperty_AddsModelStateError(
+        string inputText
+    )
     {
         // Arrange
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor
         {
-            BindingInfo = new BindingInfo
-            {
-                BinderModelName = "CustomParameter",
-            },
+            BindingInfo = new BindingInfo { BinderModelName = "CustomParameter" },
             ParameterType = typeof(Person2),
             Name = "param-name",
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(inputText));
-                request.ContentType = "application/json";
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(inputText));
+            request.ContentType = "application/json";
+        });
         var httpContext = testContext.HttpContext;
         var modelState = testContext.ModelState;
 
@@ -756,26 +732,24 @@ public class BodyValidationIntegrationTests
     [Theory]
     [InlineData("{ \"Street\" : \"someStreet\" }")]
     [InlineData("{}")]
-    public async Task FromBodyOnProperty_Succeeds_IgnoresRequiredOnValueTypeSubProperty(string inputText)
+    public async Task FromBodyOnProperty_Succeeds_IgnoresRequiredOnValueTypeSubProperty(
+        string inputText
+    )
     {
         // Arrange
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor
         {
-            BindingInfo = new BindingInfo
-            {
-                BinderModelName = "CustomParameter",
-            },
+            BindingInfo = new BindingInfo { BinderModelName = "CustomParameter" },
             ParameterType = typeof(Person3),
             Name = "param-name",
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(inputText));
-                request.ContentType = "application/json";
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(inputText));
+            request.ContentType = "application/json";
+        });
         var modelState = testContext.ModelState;
 
         // Act
@@ -805,7 +779,8 @@ public class BodyValidationIntegrationTests
     [Theory]
     [MemberData(
         nameof(BinderTypeBasedModelBinderIntegrationTest.NullAndEmptyBindingInfo),
-        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest))]
+        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest)
+    )]
     public async Task FromBodyOnPropertyType_WithData_Succeeds(BindingInfo bindingInfo)
     {
         // Arrange
@@ -821,10 +796,13 @@ public class BodyValidationIntegrationTests
                 request.Body = new MemoryStream(Encoding.UTF8.GetBytes(inputText));
                 request.ContentType = "application/json";
             },
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor
         {
             Name = "parameter-name",
@@ -851,7 +829,8 @@ public class BodyValidationIntegrationTests
     [Theory]
     [MemberData(
         nameof(BinderTypeBasedModelBinderIntegrationTest.NullAndEmptyBindingInfo),
-        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest))]
+        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest)
+    )]
     public async Task FromBodyOnParameterType_WithData_Succeeds(BindingInfo bindingInfo)
     {
         // Arrange
@@ -867,10 +846,13 @@ public class BodyValidationIntegrationTests
                 request.Body = new MemoryStream(Encoding.UTF8.GetBytes(inputText));
                 request.ContentType = "application/json";
             },
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor
         {
             Name = "parameter-name",

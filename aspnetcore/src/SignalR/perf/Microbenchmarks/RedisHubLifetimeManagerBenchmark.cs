@@ -37,18 +37,31 @@ public class RedisHubLifetimeManagerBenchmark
         var server = new TestRedisServer();
         var logger = NullLogger<RedisHubLifetimeManager<TestHub>>.Instance;
         var protocols = GenerateProtocols(ProtocolCount).ToArray();
-        var options = Options.Create(new RedisOptions()
-        {
-            ConnectionFactory = _ => Task.FromResult<IConnectionMultiplexer>(new TestConnectionMultiplexer(server))
-        });
-        var resolver = new DefaultHubProtocolResolver(protocols, NullLogger<DefaultHubProtocolResolver>.Instance);
+        var options = Options.Create(
+            new RedisOptions()
+            {
+                ConnectionFactory = _ =>
+                    Task.FromResult<IConnectionMultiplexer>(new TestConnectionMultiplexer(server)),
+            }
+        );
+        var resolver = new DefaultHubProtocolResolver(
+            protocols,
+            NullLogger<DefaultHubProtocolResolver>.Instance
+        );
 
         _manager1 = new RedisHubLifetimeManager<TestHub>(logger, options, resolver);
         _manager2 = new RedisHubLifetimeManager<TestHub>(logger, options, resolver);
 
-        async Task ConnectClient(TestClient client, IHubProtocol protocol, string userId, string groupName)
+        async Task ConnectClient(
+            TestClient client,
+            IHubProtocol protocol,
+            string userId,
+            string groupName
+        )
         {
-            await _manager2.OnConnectedAsync(HubConnectionContextUtils.Create(client.Connection, protocol, userId));
+            await _manager2.OnConnectedAsync(
+                HubConnectionContextUtils.Create(client.Connection, protocol, userId)
+            );
             await _manager2.AddToGroupAsync(client.Connection.ConnectionId, "Everyone");
             await _manager2.AddToGroupAsync(client.Connection.ConnectionId, groupName);
         }
@@ -162,9 +175,7 @@ public class RedisHubLifetimeManagerBenchmark
         await _manager1.SendUsersAsync(_users, "Test", _args);
     }
 
-    public class TestHub : Hub
-    {
-    }
+    public class TestHub : Hub { }
 
     private sealed class WrappedHubProtocol : IHubProtocol
     {
@@ -183,7 +194,11 @@ public class RedisHubLifetimeManagerBenchmark
             _innerProtocol = innerProtocol;
         }
 
-        public bool TryParseMessage(ref ReadOnlySequence<byte> input, IInvocationBinder binder, out HubMessage message)
+        public bool TryParseMessage(
+            ref ReadOnlySequence<byte> input,
+            IInvocationBinder binder,
+            out HubMessage message
+        )
         {
             return _innerProtocol.TryParseMessage(ref input, binder, out message);
         }

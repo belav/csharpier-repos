@@ -23,9 +23,10 @@ public static class SqlServerMigrationBuilderExtensions
     ///     <see cref="Migration.Down(MigrationBuilder)" />.
     /// </param>
     /// <returns><see langword="true" /> if SQL Server is being used; <see langword="false" /> otherwise.</returns>
-    public static bool IsSqlServer(this MigrationBuilder migrationBuilder)
-        => string.Equals(
+    public static bool IsSqlServer(this MigrationBuilder migrationBuilder) =>
+        string.Equals(
             migrationBuilder.ActiveProvider,
             typeof(SqlServerOptionsExtension).Assembly.GetName().Name,
-            StringComparison.Ordinal);
+            StringComparison.Ordinal
+        );
 }

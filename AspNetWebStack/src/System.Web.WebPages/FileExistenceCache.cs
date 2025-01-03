@@ -12,10 +12,10 @@ namespace System.Web.WebPages
     /// <summary>
     /// This class caches the result of VirtualPathProvider.FileExists for a short
     /// period of time, and recomputes it if necessary.
-    /// 
+    ///
     /// The default VPP MapPathBasedVirtualPathProvider caches the result of
     /// the FileExists call with the appropriate dependencies, so it is less
-    /// expensive on subsequent calls, but it still needs to do MapPath which can 
+    /// expensive on subsequent calls, but it still needs to do MapPath which can
     /// take quite some time.
     /// </summary>
     internal class FileExistenceCache
@@ -28,13 +28,19 @@ namespace System.Web.WebPages
         private int _ticksBeforeReset;
 
         // Overload used mainly for testing
-        public FileExistenceCache(VirtualPathProvider virtualPathProvider, int milliSecondsBeforeReset = 1000)
+        public FileExistenceCache(
+            VirtualPathProvider virtualPathProvider,
+            int milliSecondsBeforeReset = 1000
+        )
             : this(() => virtualPathProvider, milliSecondsBeforeReset)
         {
             Contract.Assert(virtualPathProvider != null);
         }
 
-        public FileExistenceCache(Func<VirtualPathProvider> virtualPathProviderFunc, int milliSecondsBeforeReset = 1000)
+        public FileExistenceCache(
+            Func<VirtualPathProvider> virtualPathProviderFunc,
+            int milliSecondsBeforeReset = 1000
+        )
         {
             Contract.Assert(virtualPathProviderFunc != null);
 
@@ -63,7 +69,11 @@ namespace System.Web.WebPages
 
         public bool TimeExceeded
         {
-            get { return (DateTime.UtcNow.Ticks - Interlocked.Read(ref _creationTick)) > _ticksBeforeReset; }
+            get
+            {
+                return (DateTime.UtcNow.Ticks - Interlocked.Read(ref _creationTick))
+                    > _ticksBeforeReset;
+            }
         }
 
         public void Reset()

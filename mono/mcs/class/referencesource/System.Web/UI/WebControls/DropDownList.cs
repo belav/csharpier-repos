@@ -4,12 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.Collections;
-    using System.ComponentModel;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Drawing;
     using System.Web;
     using System.Web.UI;
@@ -19,71 +19,47 @@ namespace System.Web.UI.WebControls {
     ///    <para>Creates a control that allows the user to select a single item from a
     ///       drop-down list.</para>
     /// </devdoc>
-    [
-    SupportsEventValidation,
-    ValidationProperty("SelectedItem")
-    ]
-    public class DropDownList : ListControl, IPostBackDataHandler {
-
-
+    [SupportsEventValidation, ValidationProperty("SelectedItem")]
+    public class DropDownList : ListControl, IPostBackDataHandler
+    {
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.DropDownList'/> class.</para>
         /// </devdoc>
-        public DropDownList() {
-        }
-
+        public DropDownList() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [
-        Browsable(false)
-        ]
-        public override Color BorderColor {
-            get {
-                return base.BorderColor;
-            }
-            set {
-                base.BorderColor = value;
-            }
+        [Browsable(false)]
+        public override Color BorderColor
+        {
+            get { return base.BorderColor; }
+            set { base.BorderColor = value; }
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [
-        Browsable(false)
-        ]
-        public override BorderStyle BorderStyle {
-            get {
-                return base.BorderStyle;
-            }
-            set {
-                base.BorderStyle = value;
-            }
+        [Browsable(false)]
+        public override BorderStyle BorderStyle
+        {
+            get { return base.BorderStyle; }
+            set { base.BorderStyle = value; }
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [
-        Browsable(false)
-        ]
-        public override Unit BorderWidth {
-            get {
-                return base.BorderWidth;
-            }
-            set {
-                base.BorderWidth = value;
-            }
+        [Browsable(false)]
+        public override Unit BorderWidth
+        {
+            get { return base.BorderWidth; }
+            set { base.BorderWidth = value; }
         }
 
-        public override bool SupportsDisabledAttribute {
-            get {
-                return true;
-            }
+        public override bool SupportsDisabledAttribute
+        {
+            get { return true; }
         }
 
         /// <devdoc>
@@ -92,44 +68,48 @@ namespace System.Web.UI.WebControls {
         ///       control.</para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(0),
-        WebSysDescription(SR.WebControl_SelectedIndex),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Behavior"),
+            DefaultValue(0),
+            WebSysDescription(SR.WebControl_SelectedIndex),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public override int SelectedIndex {
-            get {
+        public override int SelectedIndex
+        {
+            get
+            {
                 int selectedIndex = base.SelectedIndex;
-                if (selectedIndex < 0 && Items.Count > 0) {
+                if (selectedIndex < 0 && Items.Count > 0)
+                {
                     Items[0].Selected = true;
                     selectedIndex = 0;
                 }
                 return selectedIndex;
             }
-            set {
-                base.SelectedIndex = value;
-            }
+            set { base.SelectedIndex = value; }
         }
 
-        internal override ArrayList SelectedIndicesInternal {
-            get {
+        internal override ArrayList SelectedIndicesInternal
+        {
+            get
+            {
                 int sideEffect = SelectedIndex;
                 return base.SelectedIndicesInternal;
             }
         }
 
-
-        protected override void AddAttributesToRender(HtmlTextWriter writer) {
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
+        {
             string uniqueID = UniqueID;
-            if (uniqueID != null) {
+            if (uniqueID != null)
+            {
                 writer.AddAttribute(HtmlTextWriterAttribute.Name, uniqueID);
             }
 
             base.AddAttributesToRender(writer);
         }
 
-
-        protected override ControlCollection CreateControlCollection() {
+        protected override ControlCollection CreateControlCollection()
+        {
             return new EmptyControlCollection(this);
         }
 
@@ -137,31 +117,35 @@ namespace System.Web.UI.WebControls {
         /// <devdoc>
         /// <para>Process posted data for the <see cref='System.Web.UI.WebControls.DropDownList'/> control.</para>
         /// </devdoc>
-        bool IPostBackDataHandler.LoadPostData(String postDataKey, NameValueCollection postCollection) {
+        bool IPostBackDataHandler.LoadPostData(
+            String postDataKey,
+            NameValueCollection postCollection
+        )
+        {
             return LoadPostData(postDataKey, postCollection);
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         /// <para>Process posted data for the <see cref='System.Web.UI.WebControls.DropDownList'/> control.</para>
         /// </devdoc>
-        protected virtual bool LoadPostData(String postDataKey, NameValueCollection postCollection) {
-
+        protected virtual bool LoadPostData(String postDataKey, NameValueCollection postCollection)
+        {
             // When a DropDownList is disabled, then there is no postback data for it.
             // Since DropDownList doesn't call RegisterRequiresPostBack, this method will
             // never be called, so we don't need to worry about ignoring empty postback data.
 
-            string [] selectedItems = postCollection.GetValues(postDataKey);
+            string[] selectedItems = postCollection.GetValues(postDataKey);
 
             EnsureDataBoundInLoadPostData();
-            if (selectedItems != null) {
-
+            if (selectedItems != null)
+            {
                 ValidateEvent(postDataKey, selectedItems[0]);
 
                 int n = Items.FindByValueInternal(selectedItems[0], false);
 
-                if (SelectedIndex != n) {
+                if (SelectedIndex != n)
+                {
                     SetPostDataSelection(n);
                     return true;
                 }
@@ -170,33 +154,36 @@ namespace System.Web.UI.WebControls {
             return false;
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         /// <para>Raises events for the <see cref='System.Web.UI.WebControls.DropDownList'/> control on post back.</para>
         /// </devdoc>
-        void IPostBackDataHandler.RaisePostDataChangedEvent() {
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
+        {
             RaisePostDataChangedEvent();
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         /// <para>Raises events for the <see cref='System.Web.UI.WebControls.DropDownList'/> control on post back.</para>
         /// </devdoc>
-        protected virtual void RaisePostDataChangedEvent() {
-            if (AutoPostBack && !Page.IsPostBackEventControlRegistered) {
+        protected virtual void RaisePostDataChangedEvent()
+        {
+            if (AutoPostBack && !Page.IsPostBackEventControlRegistered)
+            {
                 // VSWhidbey 204824
                 Page.AutoPostBackControl = this;
 
-                if (CausesValidation) {
+                if (CausesValidation)
+                {
                     Page.Validate(ValidationGroup);
                 }
             }
             OnSelectedIndexChanged(EventArgs.Empty);
         }
 
-        protected internal override void VerifyMultiSelect() {
+        protected internal override void VerifyMultiSelect()
+        {
             throw new HttpException(SR.GetString(SR.Cant_Multiselect, "DropDownList"));
         }
     }

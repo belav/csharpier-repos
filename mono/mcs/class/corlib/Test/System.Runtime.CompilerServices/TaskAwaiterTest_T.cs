@@ -28,148 +28,162 @@
 
 
 using System;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using System.Runtime.CompilerServices;
 
 namespace MonoTests.System.Runtime.CompilerServices
 {
-	[TestFixture]
-	public class TaskAwaiterTest_T
-	{
-		class MyContext : SynchronizationContext
-		{
-			public int PostCounter;
-			public ManualResetEvent mre = new ManualResetEvent (false);
+    [TestFixture]
+    public class TaskAwaiterTest_T
+    {
+        class MyContext : SynchronizationContext
+        {
+            public int PostCounter;
+            public ManualResetEvent mre = new ManualResetEvent(false);
 
-			public override void OperationStarted ()
-			{
-				base.OperationStarted ();
-			}
+            public override void OperationStarted()
+            {
+                base.OperationStarted();
+            }
 
-			public override void OperationCompleted ()
-			{
-				base.OperationCompleted ();
-			}
+            public override void OperationCompleted()
+            {
+                base.OperationCompleted();
+            }
 
-			public override void Post (SendOrPostCallback d, object state)
-			{
-				++PostCounter;
-				mre.Set ();
-				base.Post (d, state);
-			}
+            public override void Post(SendOrPostCallback d, object state)
+            {
+                ++PostCounter;
+                mre.Set();
+                base.Post(d, state);
+            }
 
-			public override void Send (SendOrPostCallback d, object state)
-			{
-				base.Send (d, state);
-			}
-		}
+            public override void Send(SendOrPostCallback d, object state)
+            {
+                base.Send(d, state);
+            }
+        }
 
-		Task<int> task;
+        Task<int> task;
 
-		[Test]
-		public void GetResultFaulted ()
-		{
-			TaskAwaiter<int> awaiter;
+        [Test]
+        public void GetResultFaulted()
+        {
+            TaskAwaiter<int> awaiter;
 
-			task = new Task<int> (() => { throw new ApplicationException (); });
-			awaiter = task.GetAwaiter ();
-			task.RunSynchronously (TaskScheduler.Current);
+            task = new Task<int>(() =>
+            {
+                throw new ApplicationException();
+            });
+            awaiter = task.GetAwaiter();
+            task.RunSynchronously(TaskScheduler.Current);
 
+            Assert.IsTrue(awaiter.IsCompleted);
 
-			Assert.IsTrue (awaiter.IsCompleted);
+            try
+            {
+                awaiter.GetResult();
+                Assert.Fail();
+            }
+            catch (ApplicationException) { }
+        }
 
-			try {
-				awaiter.GetResult ();
-				Assert.Fail ();
-			} catch (ApplicationException) {
-			}
-		}
+        [Category("NotWorking")] // Bug #18629
+        [Test]
+        public void GetResultAfterMultipleExceptions()
+        {
+            TaskAwaiter<object> awaiter;
+            CreateFaultedAwaiter(out awaiter);
+            try
+            {
+                awaiter.GetResult();
+                Assert.Fail();
+            }
+            catch (AggregateException ae)
+            {
+                Assert.IsFalse(ae.StackTrace.Contains("--- End"), "#1");
+                Assert.IsTrue(ae.StackTrace.Contains("CreateFaultedAwaiter"), "#2");
+            }
+        }
 
-		[Category ("NotWorking")] // Bug #18629
-		[Test]
-		public void GetResultAfterMultipleExceptions ()
-		{
-			TaskAwaiter<object> awaiter;
-			CreateFaultedAwaiter (out awaiter);
-			try {
-				awaiter.GetResult ();
-				Assert.Fail ();
-			} catch (AggregateException ae) {
-				Assert.IsFalse (ae.StackTrace.Contains ("--- End"), "#1");
-				Assert.IsTrue (ae.StackTrace.Contains ("CreateFaultedAwaiter"), "#2");
-			}
-		}
+        static void CreateFaultedAwaiter(out TaskAwaiter<object> awaiter)
+        {
+            var faultedSource = new TaskCompletionSource<object>();
+            faultedSource.SetException(new Exception());
+            awaiter = faultedSource.Task.GetAwaiter();
+            try
+            {
+                awaiter.GetResult();
+            }
+            catch { }
 
-		static void CreateFaultedAwaiter (out TaskAwaiter<object> awaiter)
-		{
-			var faultedSource = new TaskCompletionSource<object>();
-			faultedSource.SetException(new Exception());
-			awaiter = faultedSource.Task.GetAwaiter ();
-			try {
-				awaiter.GetResult ();
-			} catch {
-			}
+            try
+            {
+                awaiter.GetResult();
+            }
+            catch { }
+        }
 
-			try {
-				awaiter.GetResult ();
-			} catch {
-			}
-		}
+        [Test]
+        public void GetResultCanceled()
+        {
+            TaskAwaiter<int> awaiter;
 
-		[Test]
-		public void GetResultCanceled ()
-		{
-			TaskAwaiter<int> awaiter;
+            var token = new CancellationToken(true);
+            task = new Task<int>(() => 2, token);
+            awaiter = task.GetAwaiter();
 
-			var token = new CancellationToken (true);
-			task = new Task<int> (() => 2, token);
-			awaiter = task.GetAwaiter ();
+            try
+            {
+                awaiter.GetResult();
+                Assert.Fail();
+            }
+            catch (TaskCanceledException) { }
+        }
 
-			try {
-				awaiter.GetResult ();
-				Assert.Fail ();
-			} catch (TaskCanceledException) {
-			}
-		}
+        [Test]
+        [Category("MultiThreaded")]
+        public void ContextTest()
+        {
+            TaskAwaiter awaiter;
 
-		[Test]
-		[Category ("MultiThreaded")]
-		public void ContextTest ()
-		{
-			TaskAwaiter awaiter;
+            var task = new Task(() =>
+            {
+                throw new ApplicationException();
+            });
+            awaiter = task.GetAwaiter();
+            task.RunSynchronously(TaskScheduler.Current);
 
-			var task = new Task (() => { throw new ApplicationException (); });
-			awaiter = task.GetAwaiter ();
-			task.RunSynchronously (TaskScheduler.Current);
+            Assert.IsTrue(awaiter.IsCompleted);
 
+            try
+            {
+                awaiter.GetResult();
+                Assert.Fail();
+            }
+            catch (ApplicationException) { }
 
-			Assert.IsTrue (awaiter.IsCompleted);
+            var context = new MyContext();
 
-			try {
-				awaiter.GetResult ();
-				Assert.Fail ();
-			} catch (ApplicationException) {
-			}
+            var old = SynchronizationContext.Current;
+            SynchronizationContext.SetSynchronizationContext(context);
+            try
+            {
+                var t = new Task(delegate { });
+                var a = t.GetAwaiter();
+                a.OnCompleted(delegate { });
+                t.Start();
+                Assert.IsTrue(t.Wait(5000), "#1");
+            }
+            finally
+            {
+                SynchronizationContext.SetSynchronizationContext(old);
+            }
 
-			var context = new MyContext ();
-
-			var old = SynchronizationContext.Current;
-			SynchronizationContext.SetSynchronizationContext (context);
-			try {
-				var t = new Task (delegate { });
-				var a = t.GetAwaiter ();
-				a.OnCompleted (delegate { });
-				t.Start ();
-				Assert.IsTrue (t.Wait (5000), "#1");
-			} finally {
-				SynchronizationContext.SetSynchronizationContext (old);
-			}
-
-			Assert.IsTrue (context.mre.WaitOne (5000), "#2");
-			Assert.AreEqual (1, context.PostCounter, "#3");
-		}
-	}
+            Assert.IsTrue(context.mre.WaitOne(5000), "#2");
+            Assert.AreEqual(1, context.PostCounter, "#3");
+        }
+    }
 }
-

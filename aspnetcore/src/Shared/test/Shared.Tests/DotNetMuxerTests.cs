@@ -14,7 +14,6 @@ public class DotNetMuxerTests
     [Fact]
     public void FindsTheMuxer()
     {
-
         var muxerPath = DotNetMuxer.TryFindMuxerPath(GetDotnetPath());
         Assert.NotNull(muxerPath);
         Assert.True(File.Exists(muxerPath), "The file did not exist");
@@ -27,7 +26,15 @@ public class DotNetMuxerTests
             // by looking at the shared fx directory instead.
             // depsFile = /dotnet/shared/Microsoft.NETCore.App/6.0-preview2/Microsoft.NETCore.App.deps.json
             var depsFile = (string)AppContext.GetData("FX_DEPS_FILE");
-            return Path.GetFullPath(Path.Combine(Path.GetDirectoryName(depsFile), "..", "..", "..", "dotnet" + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".exe" : "")));
+            return Path.GetFullPath(
+                Path.Combine(
+                    Path.GetDirectoryName(depsFile),
+                    "..",
+                    "..",
+                    "..",
+                    "dotnet" + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".exe" : "")
+                )
+            );
         }
     }
 

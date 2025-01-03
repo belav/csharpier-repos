@@ -1,5 +1,5 @@
 //
-// VBCodeProviderCas.cs 
+// VBCodeProviderCas.cs
 //	- CAS unit tests for Microsoft.VisualBasic.VBCodeProvider
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,8 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
@@ -37,81 +35,90 @@ using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using Microsoft.VisualBasic;
+using NUnit.Framework;
 
-namespace MonoCasTests.Microsoft.VisualBasic {
+namespace MonoCasTests.Microsoft.VisualBasic
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class VBCodeProviderCas
+    {
+        [SetUp]
+        public virtual void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class VBCodeProviderCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            VBCodeProvider vbprov = new VBCodeProvider();
+            Assert.AreEqual("vb", vbprov.FileExtension, "FileExtension");
+            Assert.AreEqual(
+                LanguageOptions.CaseInsensitive,
+                vbprov.LanguageOptions,
+                "LanguageOptions"
+            );
+            Assert.IsNotNull(vbprov.CreateCompiler(), "CreateCompiler");
+            Assert.IsNotNull(vbprov.CreateGenerator(), "CreateGenerator");
+            try
+            {
+                Assert.IsNotNull(vbprov.GetConverter(typeof(string)), "GetConverter");
+            }
+            catch (NotImplementedException)
+            {
+                // mono
+            }
+            CodeTypeMember ctm = new CodeTypeMember();
+            StringWriter sw = new StringWriter();
+            CodeGeneratorOptions cgo = new CodeGeneratorOptions();
+            try
+            {
+                vbprov.GenerateCodeFromMember(ctm, sw, cgo);
+            }
+            catch (NotImplementedException)
+            {
+                // mono
+            }
+        }
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			VBCodeProvider vbprov = new VBCodeProvider ();
-			Assert.AreEqual ("vb", vbprov.FileExtension, "FileExtension");
-			Assert.AreEqual (LanguageOptions.CaseInsensitive, vbprov.LanguageOptions, "LanguageOptions");
-			Assert.IsNotNull (vbprov.CreateCompiler (), "CreateCompiler");
-			Assert.IsNotNull (vbprov.CreateGenerator (), "CreateGenerator");
-			try {
-				Assert.IsNotNull (vbprov.GetConverter (typeof (string)), "GetConverter");
-			}
-			catch (NotImplementedException) {
-				// mono
-			}
-			CodeTypeMember ctm = new CodeTypeMember ();
-			StringWriter sw = new StringWriter ();
-			CodeGeneratorOptions cgo = new CodeGeneratorOptions ();
-			try {
-				vbprov.GenerateCodeFromMember (ctm, sw, cgo);
-			}
-			catch (NotImplementedException) {
-				// mono
-			}
-		}
+        // we use reflection to call this class as it is protected by a LinkDemand
+        // (which will be converted into full demand, i.e. a stack walk) when
+        // reflection is used (i.e. it gets testable).
 
-		// LinkDemand
+        public virtual object Create()
+        {
+            ConstructorInfo ci = typeof(VBCodeProvider).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            return ci.Invoke(null);
+        }
 
-		// we use reflection to call this class as it is protected by a LinkDemand 
-		// (which will be converted into full demand, i.e. a stack walk) when 
-		// reflection is used (i.e. it gets testable).
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            Assert.IsNotNull(Create());
+        }
 
-		public virtual object Create ()
-		{
-			ConstructorInfo ci = typeof (VBCodeProvider).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			return ci.Invoke (null);
-		}
+        [Test]
+        [EnvironmentPermission(SecurityAction.Deny, Read = "MONO")]
+        [ExpectedException(typeof(SecurityException))]
+        public void LinkDemand_Deny_Anything()
+        {
+            // denying any permissions -> not full trust!
+            Assert.IsNotNull(Create());
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Assert.IsNotNull (Create ());
-		}
-
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_Deny_Anything ()
-		{
-			// denying any permissions -> not full trust!
-			Assert.IsNotNull (Create ());
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void LinkDemand_PermitOnly_Unrestricted ()
-		{
-			Assert.IsNotNull (Create ());
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void LinkDemand_PermitOnly_Unrestricted()
+        {
+            Assert.IsNotNull(Create());
+        }
+    }
 }

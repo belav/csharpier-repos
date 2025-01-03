@@ -15,8 +15,10 @@ namespace Microsoft.JSInterop;
 /// To avoid leaking memory, the reference must later be disposed by JS code or by .NET code.
 /// </summary>
 /// <typeparam name="TValue">The type of the value to wrap.</typeparam>
-public sealed class DotNetObjectReference<[DynamicallyAccessedMembers(JSInvokable)] TValue> :
-    IDotNetObjectReference, IDisposable where TValue : class
+public sealed class DotNetObjectReference<[DynamicallyAccessedMembers(JSInvokable)] TValue>
+    : IDotNetObjectReference,
+        IDisposable
+    where TValue : class
 {
     private readonly TValue _value;
     private long _objectId;
@@ -48,7 +50,10 @@ public sealed class DotNetObjectReference<[DynamicallyAccessedMembers(JSInvokabl
         get
         {
             ThrowIfDisposed();
-            Debug.Assert(_objectId != 0, "Accessing ObjectId without tracking is always incorrect.");
+            Debug.Assert(
+                _objectId != 0,
+                "Accessing ObjectId without tracking is always incorrect."
+            );
 
             return _objectId;
         }

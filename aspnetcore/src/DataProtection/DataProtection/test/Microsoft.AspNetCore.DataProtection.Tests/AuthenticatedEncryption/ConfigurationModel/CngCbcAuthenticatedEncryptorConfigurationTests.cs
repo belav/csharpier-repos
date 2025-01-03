@@ -12,13 +12,25 @@ public class CngCbcAuthenticatedEncryptorConfigurationTests
         var configuration = new CngCbcAuthenticatedEncryptorConfiguration();
 
         // Act
-        var masterKey1 = ((CngCbcAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()).MasterKey;
-        var masterKey2 = ((CngCbcAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()).MasterKey;
+        var masterKey1 = (
+            (CngCbcAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()
+        ).MasterKey;
+        var masterKey2 = (
+            (CngCbcAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()
+        ).MasterKey;
 
         // Assert
         SecretAssert.NotEqual(masterKey1, masterKey2);
-        SecretAssert.LengthIs(512 /* bits */, masterKey1);
-        SecretAssert.LengthIs(512 /* bits */, masterKey2);
+        SecretAssert.LengthIs(
+            512 /* bits */
+            ,
+            masterKey1
+        );
+        SecretAssert.LengthIs(
+            512 /* bits */
+            ,
+            masterKey2
+        );
     }
 
     [Fact]
@@ -28,7 +40,8 @@ public class CngCbcAuthenticatedEncryptorConfigurationTests
         var configuration = new CngCbcAuthenticatedEncryptorConfiguration();
 
         // Act
-        var descriptor = (CngCbcAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor();
+        var descriptor = (CngCbcAuthenticatedEncryptorDescriptor)
+            configuration.CreateNewDescriptor();
 
         // Assert
         Assert.Equal(configuration, descriptor.Configuration);

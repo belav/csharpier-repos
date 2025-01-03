@@ -5,9 +5,9 @@
 namespace System.Activities.Runtime
 {
     using System;
+    using System.Collections.Generic;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
 
     [DataContract]
     class FaultBookmark
@@ -26,9 +26,17 @@ namespace System.Activities.Runtime
             set { this.callbackWrapper = value; }
         }
 
-        public WorkItem GenerateWorkItem(Exception propagatedException, ActivityInstance propagatedFrom, ActivityInstanceReference originalExceptionSource)
+        public WorkItem GenerateWorkItem(
+            Exception propagatedException,
+            ActivityInstance propagatedFrom,
+            ActivityInstanceReference originalExceptionSource
+        )
         {
-            return this.callbackWrapper.CreateWorkItem(propagatedException, propagatedFrom, originalExceptionSource);
+            return this.callbackWrapper.CreateWorkItem(
+                propagatedException,
+                propagatedFrom,
+                originalExceptionSource
+            );
         }
     }
 }

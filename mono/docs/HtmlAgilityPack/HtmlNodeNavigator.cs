@@ -100,7 +100,11 @@ namespace HtmlAgilityPack
         /// <param name="stream">The input stream.</param>
         /// <param name="encoding">The character encoding to use.</param>
         /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the stream.</param>
-        public HtmlNodeNavigator(Stream stream, Encoding encoding, bool detectEncodingFromByteOrderMarks)
+        public HtmlNodeNavigator(
+            Stream stream,
+            Encoding encoding,
+            bool detectEncodingFromByteOrderMarks
+        )
         {
             _doc.Load(stream, encoding, detectEncodingFromByteOrderMarks);
             Reset();
@@ -113,7 +117,12 @@ namespace HtmlAgilityPack
         /// <param name="encoding">The character encoding to use.</param>
         /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the stream.</param>
         /// <param name="buffersize">The minimum buffer size.</param>
-        public HtmlNodeNavigator(Stream stream, Encoding encoding, bool detectEncodingFromByteOrderMarks, int buffersize)
+        public HtmlNodeNavigator(
+            Stream stream,
+            Encoding encoding,
+            bool detectEncodingFromByteOrderMarks,
+            int buffersize
+        )
         {
             _doc.Load(stream, encoding, detectEncodingFromByteOrderMarks, buffersize);
             Reset();
@@ -167,7 +176,11 @@ namespace HtmlAgilityPack
         /// <param name="path">The complete file path to be read.</param>
         /// <param name="encoding">The character encoding to use.</param>
         /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
-        public HtmlNodeNavigator(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks)
+        public HtmlNodeNavigator(
+            string path,
+            Encoding encoding,
+            bool detectEncodingFromByteOrderMarks
+        )
         {
             _doc.Load(path, encoding, detectEncodingFromByteOrderMarks);
             Reset();
@@ -180,7 +193,12 @@ namespace HtmlAgilityPack
         /// <param name="encoding">The character encoding to use.</param>
         /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
         /// <param name="buffersize">The minimum buffer size.</param>
-        public HtmlNodeNavigator(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks, int buffersize)
+        public HtmlNodeNavigator(
+            string path,
+            Encoding encoding,
+            bool detectEncodingFromByteOrderMarks,
+            int buffersize
+        )
         {
             _doc.Load(path, encoding, detectEncodingFromByteOrderMarks, buffersize);
             Reset();
@@ -332,19 +350,20 @@ namespace HtmlAgilityPack
                         return XPathNodeType.Text;
 
                     case HtmlNodeType.Element:
+                    {
+                        if (_attindex != -1)
                         {
-                            if (_attindex != -1)
-                            {
-                                InternalTrace(">" + XPathNodeType.Attribute);
-                                return XPathNodeType.Attribute;
-                            }
-                            InternalTrace(">" + XPathNodeType.Element);
-                            return XPathNodeType.Element;
+                            InternalTrace(">" + XPathNodeType.Attribute);
+                            return XPathNodeType.Attribute;
                         }
+                        InternalTrace(">" + XPathNodeType.Element);
+                        return XPathNodeType.Element;
+                    }
 
                     default:
-                        throw new NotImplementedException("Internal error: Unhandled HtmlNodeType: " +
-                                                          _currentnode.NodeType);
+                        throw new NotImplementedException(
+                            "Internal error: Unhandled HtmlNodeType: " + _currentnode.NodeType
+                        );
                 }
             }
         }
@@ -373,30 +392,31 @@ namespace HtmlAgilityPack
                 switch (_currentnode.NodeType)
                 {
                     case HtmlNodeType.Comment:
-                        InternalTrace(">" + ((HtmlCommentNode) _currentnode).Comment);
-                        return ((HtmlCommentNode) _currentnode).Comment;
+                        InternalTrace(">" + ((HtmlCommentNode)_currentnode).Comment);
+                        return ((HtmlCommentNode)_currentnode).Comment;
 
                     case HtmlNodeType.Document:
                         InternalTrace(">");
                         return "";
 
                     case HtmlNodeType.Text:
-                        InternalTrace(">" + ((HtmlTextNode) _currentnode).Text);
-                        return ((HtmlTextNode) _currentnode).Text;
+                        InternalTrace(">" + ((HtmlTextNode)_currentnode).Text);
+                        return ((HtmlTextNode)_currentnode).Text;
 
                     case HtmlNodeType.Element:
+                    {
+                        if (_attindex != -1)
                         {
-                            if (_attindex != -1)
-                            {
-                                InternalTrace(">" + _currentnode.Attributes[_attindex].Value);
-                                return _currentnode.Attributes[_attindex].Value;
-                            }
-                            return _currentnode.InnerText;
+                            InternalTrace(">" + _currentnode.Attributes[_attindex].Value);
+                            return _currentnode.Attributes[_attindex].Value;
                         }
+                        return _currentnode.InnerText;
+                    }
 
                     default:
-                        throw new NotImplementedException("Internal error: Unhandled HtmlNodeType: " +
-                                                          _currentnode.NodeType);
+                        throw new NotImplementedException(
+                            "Internal error: Unhandled HtmlNodeType: " + _currentnode.NodeType
+                        );
                 }
             }
         }
@@ -489,9 +509,14 @@ namespace HtmlAgilityPack
                 InternalTrace(">false (nav is not an HtmlNodeNavigator)");
                 return false;
             }
-            InternalTrace("moveto oid=" + nav.GetHashCode()
-                          + ", n:" + nav._currentnode.Name
-                          + ", a:" + nav._attindex);
+            InternalTrace(
+                "moveto oid="
+                    + nav.GetHashCode()
+                    + ", n:"
+                    + nav._currentnode.Name
+                    + ", a:"
+                    + nav._attindex
+            );
 
             if (nav._doc == _doc)
             {
@@ -610,7 +635,7 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Moves the XPathNavigator to the namespace node with the specified local name. 
+        /// Moves the XPathNavigator to the namespace node with the specified local name.
         /// Always returns false for the HtmlNavigator implementation.
         /// </summary>
         /// <param name="name">The local name of the namespace node.</param>
@@ -733,7 +758,7 @@ namespace HtmlAgilityPack
                 switch (_currentnode.NodeType)
                 {
                     case HtmlNodeType.Comment:
-                        nodevalue = ((HtmlCommentNode) _currentnode).Comment;
+                        nodevalue = ((HtmlCommentNode)_currentnode).Comment;
                         break;
 
                     case HtmlNodeType.Document:
@@ -741,7 +766,7 @@ namespace HtmlAgilityPack
                         break;
 
                     case HtmlNodeType.Text:
-                        nodevalue = ((HtmlTextNode) _currentnode).Text;
+                        nodevalue = ((HtmlTextNode)_currentnode).Text;
                         break;
 
                     default:
@@ -749,7 +774,17 @@ namespace HtmlAgilityPack
                         break;
                 }
             }
-            System.Diagnostics.Trace.WriteLine(string.Format("oid={0},n={1},a={2},v={3},{4}", GetHashCode(), nodename, _attindex, nodevalue, traceValue), "N!" + name);
+            System.Diagnostics.Trace.WriteLine(
+                string.Format(
+                    "oid={0},n={1},a={2},v={3},{4}",
+                    GetHashCode(),
+                    nodename,
+                    _attindex,
+                    nodevalue,
+                    traceValue
+                ),
+                "N!" + name
+            );
         }
 
         #endregion

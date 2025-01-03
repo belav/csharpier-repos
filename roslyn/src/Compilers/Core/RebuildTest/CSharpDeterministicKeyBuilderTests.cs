@@ -2,44 +2,62 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
+using Microsoft.CodeAnalysis.Test.Utilities;
+using Microsoft.CodeAnalysis.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Roslyn.Test.Utilities;
 using Xunit;
-using Newtonsoft.Json.Linq;
-using System.Linq;
-using Newtonsoft.Json;
-using Microsoft.CodeAnalysis.Text;
-using System.Collections.Immutable;
-using System;
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis.Test.Utilities;
 
 namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 {
-    public sealed class CSharpDeterministicKeyBuilderTests : DeterministicKeyBuilderTests<CSharpCompilation, CSharpCompilationOptions, CSharpParseOptions>
+    public sealed class CSharpDeterministicKeyBuilderTests
+        : DeterministicKeyBuilderTests<
+            CSharpCompilation,
+            CSharpCompilationOptions,
+            CSharpParseOptions
+        >
     {
-        public static CSharpCompilationOptions Options { get; } = new CSharpCompilationOptions(OutputKind.ConsoleApplication, deterministic: true);
+        public static CSharpCompilationOptions Options { get; } =
+            new CSharpCompilationOptions(OutputKind.ConsoleApplication, deterministic: true);
 
-        protected override SyntaxTree ParseSyntaxTree(string content, string fileName, SourceHashAlgorithm hashAlgorithm, CSharpParseOptions? parseOptions) =>
+        protected override SyntaxTree ParseSyntaxTree(
+            string content,
+            string fileName,
+            SourceHashAlgorithm hashAlgorithm,
+            CSharpParseOptions? parseOptions
+        ) =>
             CSharpTestBase.Parse(
                 content,
                 filename: fileName,
                 checksumAlgorithm: hashAlgorithm,
                 encoding: Encoding.UTF8,
-                options: parseOptions);
+                options: parseOptions
+            );
 
-        protected override CSharpCompilation CreateCompilation(SyntaxTree[] syntaxTrees, MetadataReference[]? references = null, CSharpCompilationOptions? options = null) =>
+        protected override CSharpCompilation CreateCompilation(
+            SyntaxTree[] syntaxTrees,
+            MetadataReference[]? references = null,
+            CSharpCompilationOptions? options = null
+        ) =>
             CSharpCompilation.Create(
                 "test",
                 syntaxTrees,
                 references ?? NetCoreApp.References.ToArray(),
-                options ?? Options);
+                options ?? Options
+            );
 
-        private protected override DeterministicKeyBuilder GetDeterministicKeyBuilder() => CSharpDeterministicKeyBuilder.Instance;
+        private protected override DeterministicKeyBuilder GetDeterministicKeyBuilder() =>
+            CSharpDeterministicKeyBuilder.Instance;
 
         protected override CSharpCompilationOptions GetCompilationOptions() => Options;
 
@@ -62,7 +80,11 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             static void verifyCount<T>(int expected)
             {
                 var type = typeof(T);
-                var flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly | BindingFlags.Instance;
+                var flags =
+                    BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance;
                 var fields = type.GetFields(flags);
                 var properties = type.GetProperties(flags);
                 var count = fields.Length + properties.Length;
@@ -74,12 +96,19 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         public void Simple()
         {
             var compilation = CSharpTestBase.CreateCompilation(
-                CSharpTestSource.Parse(@"System.Console.WriteLine(""Hello World"");", checksumAlgorithm: SourceHashAlgorithm.Sha1),
+                CSharpTestSource.Parse(
+                    @"System.Console.WriteLine(""Hello World"");",
+                    checksumAlgorithm: SourceHashAlgorithm.Sha1
+                ),
                 targetFramework: TargetFramework.NetCoreApp,
-                options: Options);
+                options: Options
+            );
 
-            var key = compilation.GetDeterministicKey(options: DeterministicKeyOptions.IgnoreToolVersions);
-            AssertJson(@"
+            var key = compilation.GetDeterministicKey(
+                options: DeterministicKeyOptions.IgnoreToolVersions
+            );
+            AssertJson(
+                @"
 {
   ""compilation"": {
     ""toolsVersions"": {},
@@ -135,7 +164,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
   ""generators"": [],
   ""emitOptions"": null
 }
-", key);
+",
+                key
+            );
         }
 
         [Theory]
@@ -152,10 +183,12 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var source = CSharpTestBase.Parse(
                 @"System.Console.WriteLine(""Hello World"");",
                 filename: path,
-                checksumAlgorithm: SourceHashAlgorithm.Sha1);
+                checksumAlgorithm: SourceHashAlgorithm.Sha1
+            );
             var compilation = CSharpTestBase.CreateCompilation(source);
             var key = compilation.GetDeterministicKey(options: options);
-            var expected = @$"
+            var expected =
+                @$"
 ""syntaxTrees"": [
   {{
     ""fileName"": ""{Roslyn.Utilities.JsonWriter.EscapeString(expectedPath)}"",
@@ -188,13 +221,22 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var syntaxTree = CSharpTestBase.Parse(
                 "",
                 filename: "file.cs",
-                checksumAlgorithm: HashAlgorithm);
-            var additionalText = new TestAdditionalText(content, Encoding.UTF8, path: "file.txt", HashAlgorithm);
+                checksumAlgorithm: HashAlgorithm
+            );
+            var additionalText = new TestAdditionalText(
+                content,
+                Encoding.UTF8,
+                path: "file.txt",
+                HashAlgorithm
+            );
             var contentChecksum = GetChecksum(additionalText.GetText()!);
 
             var compilation = CSharpTestBase.CreateCompilation(syntaxTree);
-            var key = compilation.GetDeterministicKey(additionalTexts: ImmutableArray.Create<AdditionalText>(additionalText));
-            var expected = @$"
+            var key = compilation.GetDeterministicKey(
+                additionalTexts: ImmutableArray.Create<AdditionalText>(additionalText)
+            );
+            var expected =
+                @$"
 ""additionalTexts"": [
   {{
     ""fileName"": ""file.txt"",
@@ -209,7 +251,7 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         }
 
         /// <summary>
-        /// Generally tests omit the tools versions in the Json output for simplicity but need at least 
+        /// Generally tests omit the tools versions in the Json output for simplicity but need at least
         /// one test that verifies we're actually encoding them.
         /// </summary>
         [Fact]
@@ -218,14 +260,20 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var compilation = CSharpTestBase.CreateCompilation(
                 @"System.Console.WriteLine(""Hello World"");",
                 targetFramework: TargetFramework.NetCoreApp,
-                options: Options);
+                options: Options
+            );
 
             var key = compilation.GetDeterministicKey(options: DeterministicKeyOptions.Default);
 
-            var compilerVersion = typeof(Compilation).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
-            var runtimeVersion = typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+            var compilerVersion = typeof(Compilation)
+                .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion;
+            var runtimeVersion = typeof(object)
+                .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion;
 
-            AssertJson($@"
+            AssertJson(
+                $@"
 {{
   ""compilation"": {{
     ""toolsVersions"": {{
@@ -266,12 +314,20 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
   ""generators"": [],
   ""emitOptions"": null
 }}
-", key, "references", "syntaxTrees", "extensions");
+",
+                key,
+                "references",
+                "syntaxTrees",
+                "extensions"
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public void CSharpCompilationOptionsCombination(bool @unsafe, NullableContextOptions nullableContextOptions)
+        public void CSharpCompilationOptionsCombination(
+            bool @unsafe,
+            NullableContextOptions nullableContextOptions
+        )
         {
             foreach (BinderFlags binderFlags in Enum.GetValues(typeof(BinderFlags)))
             {
@@ -283,32 +339,46 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 var value = GetCompilationOptionsValue(options);
                 Assert.Equal(@unsafe, value.Value<bool>("unsafe"));
                 Assert.Equal(binderFlags.ToString(), value.Value<string>("topLevelBinderFlags"));
-                Assert.Equal(nullableContextOptions.ToString(), value.Value<string>("nullableContextOptions"));
+                Assert.Equal(
+                    nullableContextOptions.ToString(),
+                    value.Value<string>("nullableContextOptions")
+                );
             }
         }
 
         [Fact]
         public void CSharpCompilationOptionsGlobalUsings()
         {
-            assert(@"
+            assert(
+                @"
 [
   ""System"",
   ""System.Xml""
 ]
-", "System", "System.Xml");
+",
+                "System",
+                "System.Xml"
+            );
 
-            assert(@"
+            assert(
+                @"
 [
   ""System.Xml"",
   ""System""
 ]
-", "System.Xml", "System");
+",
+                "System.Xml",
+                "System"
+            );
 
-            assert(@"
+            assert(
+                @"
 [
   ""System.Xml""
 ]
-", "System.Xml");
+",
+                "System.Xml"
+            );
 
             void assert(string expected, params string[] usings)
             {
@@ -336,38 +406,58 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         {
             assert(@"[]");
 
-            assert(@"
+            assert(
+                @"
 [
   ""DEBUG""
-]", "DEBUG");
+]",
+                "DEBUG"
+            );
 
-            assert(@"
+            assert(
+                @"
 [
   ""DEBUG"",
   ""TRACE""
-]", "DEBUG", "TRACE");
+]",
+                "DEBUG",
+                "TRACE"
+            );
 
-            assert(@"
+            assert(
+                @"
 [
   ""DEBUG"",
   ""TRACE""
-]", "TRACE", "DEBUG");
+]",
+                "TRACE",
+                "DEBUG"
+            );
 
             void assert(string expected, params string[] values)
             {
                 var parseOptions = CSharpParseOptions.Default.WithPreprocessorSymbols(values);
                 var obj = GetParseOptionsValue(parseOptions);
-                AssertJsonCore(expected, obj.Value<JArray>("preprocessorSymbols")?.ToString(Formatting.Indented));
+                AssertJsonCore(
+                    expected,
+                    obj.Value<JArray>("preprocessorSymbols")?.ToString(Formatting.Indented)
+                );
             }
         }
 
         [ConditionalTheory(typeof(WindowsOnly))]
         [InlineData(@"c:\src\code.cs", @"c:\src", null)]
         [InlineData(@"d:\src\code.cs", @"d:\src\", @"/pathmap:d:\=c:\")]
-        [InlineData(@"e:\long\path\src\code.cs", @"e:\long\path\src\", @"/pathmap:e:\long\path\=c:\")]
+        [InlineData(
+            @"e:\long\path\src\code.cs",
+            @"e:\long\path\src\",
+            @"/pathmap:e:\long\path\=c:\"
+        )]
         public void CSharpPathMapWindows(string filePath, string workingDirectory, string? pathMap)
         {
-            var args = new List<string>(new[] { filePath, "/nostdlib", "/langversion:9", "/checksumalgorithm:sha256" });
+            var args = new List<string>(
+                new[] { filePath, "/nostdlib", "/langversion:9", "/checksumalgorithm:sha256" }
+            );
             if (pathMap is not null)
             {
                 args.Add(pathMap);
@@ -376,9 +466,13 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var compiler = new MockCSharpCompiler(
                 null,
                 workingDirectory: workingDirectory,
-                args.ToArray());
-            compiler.FileSystem = TestableFileSystem.CreateForFiles((filePath, new TestableFile("hello")));
-            AssertSyntaxTreePathMap(@"
+                args.ToArray()
+            );
+            compiler.FileSystem = TestableFileSystem.CreateForFiles(
+                (filePath, new TestableFile("hello"))
+            );
+            AssertSyntaxTreePathMap(
+                @"
 [
   {
     ""fileName"": ""c:\\src\\code.cs"",
@@ -399,7 +493,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
     }
   }
 ]
-", compiler);
+",
+                compiler
+            );
         }
 
         [ConditionalFact(typeof(WindowsOnly))]
@@ -424,14 +520,28 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         {
             var utilCompilation = CSharpCompilation.Create(
                 assemblyName: "util",
-                syntaxTrees: new[] { CSharpSyntaxTree.ParseText(@"// this is a comment", CSharpParseOptions.Default.WithLanguageVersion(CSharp.LanguageVersion.CSharp10)) },
-                options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, deterministic: true));
+                syntaxTrees: new[]
+                {
+                    CSharpSyntaxTree.ParseText(
+                        @"// this is a comment",
+                        CSharpParseOptions.Default.WithLanguageVersion(
+                            CSharp.LanguageVersion.CSharp10
+                        )
+                    ),
+                },
+                options: new CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary,
+                    deterministic: true
+                )
+            );
             var compilation = CreateCompilation(
                 Array.Empty<SyntaxTree>(),
-                references: new[] { utilCompilation.ToMetadataReference() });
+                references: new[] { utilCompilation.ToMetadataReference() }
+            );
             var references = GetReferenceValues(compilation);
             var compilationValue = references.Values<JObject>().Single()!;
-            var expected = @"
+            var expected =
+                @"
 {
   ""compilation"": {
     ""publicKey"": """",
@@ -484,13 +594,27 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 }
 ";
 
-            AssertJson(expected, compilationValue.ToString(Formatting.Indented), "toolsVersions", "references", "extensions");
+            AssertJson(
+                expected,
+                compilationValue.ToString(Formatting.Indented),
+                "toolsVersions",
+                "references",
+                "extensions"
+            );
         }
 
         [Fact]
         public void FeatureFlag()
         {
-            var compiler = TestableCompiler.CreateCSharpNetCoreApp("test.cs", @"-t:library", "-nologo", "-features:debug-determinism", "-deterministic", "-debug:portable", "-checksumalgorithm:sha256");
+            var compiler = TestableCompiler.CreateCSharpNetCoreApp(
+                "test.cs",
+                @"-t:library",
+                "-nologo",
+                "-features:debug-determinism",
+                "-deterministic",
+                "-debug:portable",
+                "-checksumalgorithm:sha256"
+            );
             var sourceFile = compiler.AddSourceFile("test.cs", @"// this is a test file");
             compiler.AddOutputFile("test.dll");
             var pdbFile = compiler.AddOutputFile("test.pdb");
@@ -500,7 +624,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             Assert.Equal(0, result);
 
             var json = Encoding.UTF8.GetString(keyFile.Contents.ToArray());
-            var expected = @$"
+            var expected =
+                @$"
 {{
   ""compilation"": {{
     ""publicKey"": """",

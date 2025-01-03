@@ -23,7 +23,11 @@ public class GlobbingUrlBuilderTest
         var globbingUrlBuilder = new GlobbingUrlBuilder(fileProvider, cache, requestPathBase);
 
         // Act
-        var urlList = globbingUrlBuilder.BuildUrlList("/site.css", "**/*.css", excludePattern: null);
+        var urlList = globbingUrlBuilder.BuildUrlList(
+            "/site.css",
+            "**/*.css",
+            excludePattern: null
+        );
 
         // Assert
         Assert.Collection(urlList, url => Assert.Equal("/site.css", url));
@@ -39,12 +43,18 @@ public class GlobbingUrlBuilderTest
         var globbingUrlBuilder = new GlobbingUrlBuilder(fileProvider, cache, requestPathBase);
 
         // Act
-        var urlList = globbingUrlBuilder.BuildUrlList("/site.css", "**/*.css", excludePattern: null);
+        var urlList = globbingUrlBuilder.BuildUrlList(
+            "/site.css",
+            "**/*.css",
+            excludePattern: null
+        );
 
         // Assert
-        Assert.Collection(urlList,
+        Assert.Collection(
+            urlList,
             url => Assert.Equal("/site.css", url),
-            url => Assert.Equal("/blank.css", url));
+            url => Assert.Equal("/blank.css", url)
+        );
     }
 
     public static TheoryData OrdersGlobbedMatchResultsCorrectly_Data
@@ -52,157 +62,199 @@ public class GlobbingUrlBuilderTest
         get
         {
             return new TheoryData<string, FileNode, string[]>
+            {
                 {
-                    {
-                        /* staticUrl */ "/site.css",
-                        /* dirStructure */ new FileNode(null, new [] {
-                            new FileNode("B", new [] {
-                                new FileNode("a.css"),
-                                new FileNode("b.css"),
-                                new FileNode("ba.css"),
-                                new FileNode("b", new [] {
-                                    new FileNode("a.css")
-                                })
-                            }),
-                            new FileNode("A", new [] {
-                                new FileNode("c.css"),
-                                new FileNode("d.css")
-                            }),
-                            new FileNode("a.css")
-                        }),
-                        /* expectedPaths */ new []
+                    /* staticUrl */"/site.css",
+                    /* dirStructure */new FileNode(
+                        null,
+                        new[]
                         {
-                            "/site.css",
-                            "/a.css",
-                            "/A/c.css", "/A/d.css",
-                            "/B/a.css", "/B/b.css", "/B/ba.css",
-                            "/B/b/a.css"
+                            new FileNode(
+                                "B",
+                                new[]
+                                {
+                                    new FileNode("a.css"),
+                                    new FileNode("b.css"),
+                                    new FileNode("ba.css"),
+                                    new FileNode("b", new[] { new FileNode("a.css") }),
+                                }
+                            ),
+                            new FileNode(
+                                "A",
+                                new[] { new FileNode("c.css"), new FileNode("d.css") }
+                            ),
+                            new FileNode("a.css"),
                         }
-                    },
+                    ),
+                    /* expectedPaths */new[]
                     {
-                        /* staticUrl */ "/site.css",
-                        /* dirStructure */ new FileNode(null, new [] {
-                            new FileNode("A", new [] {
-                                new FileNode("c.css"),
-                                new FileNode("d.css")
-                            }),
-                            new FileNode("_A", new [] {
-                                new FileNode("1.css"),
-                                new FileNode("2.css")
-                            }),
-                            new FileNode("__A", new [] {
-                                new FileNode("1.css"),
-                                new FileNode("_1.css")
-                            })
-                        }),
-                        /* expectedPaths */ new []
-                        {
-                            "/site.css",
-                            "/A/c.css", "/A/d.css",
-                            "/_A/1.css", "/_A/2.css",
-                            "/__A/1.css", "/__A/_1.css"
-                        }
-                    },
-                    {
-                        /* staticUrl */ "/site.css",
-                        /* dirStructure */ new FileNode(null, new [] {
-                            new FileNode("A", new [] {
-                                new FileNode("a.b.css"),
-                                new FileNode("a-b.css"),
-                                new FileNode("a_b.css"),
-                                new FileNode("a.css"),
-                                new FileNode("a.c.css")
-                            })
-                        }),
-                        /* expectedPaths */ new []
-                        {
-                            "/site.css",
-                            "/A/a.css", "/A/a-b.css", "/A/a.b.css", "/A/a.c.css", "/A/a_b.css"
-                        }
-                    },
-                    {
-                        /* staticUrl */ "/site.css",
-                        /* dirStructure */ new FileNode(null, new [] {
-                            new FileNode("B", new [] {
-                                new FileNode("a.bss"),
-                                new FileNode("a.css")
-                            }),
-                            new FileNode("A", new [] {
-                                new FileNode("a.css"),
-                                new FileNode("a.bss")
-                            })
-                        }),
-                        /* expectedPaths */ new []
-                        {
-                            "/site.css",
-                            "/A/a.bss", "/A/a.css",
-                            "/B/a.bss", "/B/a.css"
-                        }
-                    },
-                    {
-                        /* staticUrl */ "/site.css",
-                        /* dirStructure */ new FileNode(null, new [] {
-                            new FileNode("B", new [] {
-                                new FileNode("site2.css"),
-                                new FileNode("site11.css")
-                            }),
-                            new FileNode("A", new [] {
-                                new FileNode("site2.css"),
-                                new FileNode("site11.css")
-                            })
-                        }),
-                        /* expectedPaths */ new []
-                        {
-                            "/site.css",
-                            "/A/site11.css", "/A/site2.css",
-                            "/B/site11.css", "/B/site2.css"
-                        }
-                    },
-                    {
-                        /* staticUrl */ "/site.css",
-                        /* dirStructure */ new FileNode(null, new [] {
-                            new FileNode("B", new [] {
-                                new FileNode("site"),
-                                new FileNode("site.css")
-                            }),
-                            new FileNode("A", new [] {
-                                new FileNode("site.css"),
-                                new FileNode("site")
-                            })
-                        }),
-                        /* expectedPaths */ new []
-                        {
-                            "/site.css",
-                            "/A/site", "/A/site.css",
-                            "/B/site", "/B/site.css"
-                        }
-                    },
-                    {
-                        /* staticUrl */ "/site.css",
-                        /* dirStructure */ new FileNode(null, new [] {
-                            new FileNode("B.B", new [] {
-                                new FileNode("site"),
-                                new FileNode("site.css")
-                            }),
-                            new FileNode("A.A", new [] {
-                                new FileNode("site.css"),
-                                new FileNode("site")
-                            })
-                        }),
-                        /* expectedPaths */ new []
-                        {
-                            "/site.css",
-                            "/A.A/site", "/A.A/site.css",
-                            "/B.B/site", "/B.B/site.css"
-                        }
+                        "/site.css",
+                        "/a.css",
+                        "/A/c.css",
+                        "/A/d.css",
+                        "/B/a.css",
+                        "/B/b.css",
+                        "/B/ba.css",
+                        "/B/b/a.css",
                     }
-                };
+                },
+                {
+                    /* staticUrl */"/site.css",
+                    /* dirStructure */new FileNode(
+                        null,
+                        new[]
+                        {
+                            new FileNode(
+                                "A",
+                                new[] { new FileNode("c.css"), new FileNode("d.css") }
+                            ),
+                            new FileNode(
+                                "_A",
+                                new[] { new FileNode("1.css"), new FileNode("2.css") }
+                            ),
+                            new FileNode(
+                                "__A",
+                                new[] { new FileNode("1.css"), new FileNode("_1.css") }
+                            ),
+                        }
+                    ),
+                    /* expectedPaths */new[]
+                    {
+                        "/site.css",
+                        "/A/c.css",
+                        "/A/d.css",
+                        "/_A/1.css",
+                        "/_A/2.css",
+                        "/__A/1.css",
+                        "/__A/_1.css",
+                    }
+                },
+                {
+                    /* staticUrl */"/site.css",
+                    /* dirStructure */new FileNode(
+                        null,
+                        new[]
+                        {
+                            new FileNode(
+                                "A",
+                                new[]
+                                {
+                                    new FileNode("a.b.css"),
+                                    new FileNode("a-b.css"),
+                                    new FileNode("a_b.css"),
+                                    new FileNode("a.css"),
+                                    new FileNode("a.c.css"),
+                                }
+                            ),
+                        }
+                    ),
+                    /* expectedPaths */new[]
+                    {
+                        "/site.css",
+                        "/A/a.css",
+                        "/A/a-b.css",
+                        "/A/a.b.css",
+                        "/A/a.c.css",
+                        "/A/a_b.css",
+                    }
+                },
+                {
+                    /* staticUrl */"/site.css",
+                    /* dirStructure */new FileNode(
+                        null,
+                        new[]
+                        {
+                            new FileNode(
+                                "B",
+                                new[] { new FileNode("a.bss"), new FileNode("a.css") }
+                            ),
+                            new FileNode(
+                                "A",
+                                new[] { new FileNode("a.css"), new FileNode("a.bss") }
+                            ),
+                        }
+                    ),
+                    /* expectedPaths */new[] { "/site.css", "/A/a.bss", "/A/a.css", "/B/a.bss", "/B/a.css" }
+                },
+                {
+                    /* staticUrl */"/site.css",
+                    /* dirStructure */new FileNode(
+                        null,
+                        new[]
+                        {
+                            new FileNode(
+                                "B",
+                                new[] { new FileNode("site2.css"), new FileNode("site11.css") }
+                            ),
+                            new FileNode(
+                                "A",
+                                new[] { new FileNode("site2.css"), new FileNode("site11.css") }
+                            ),
+                        }
+                    ),
+                    /* expectedPaths */new[]
+                    {
+                        "/site.css",
+                        "/A/site11.css",
+                        "/A/site2.css",
+                        "/B/site11.css",
+                        "/B/site2.css",
+                    }
+                },
+                {
+                    /* staticUrl */"/site.css",
+                    /* dirStructure */new FileNode(
+                        null,
+                        new[]
+                        {
+                            new FileNode(
+                                "B",
+                                new[] { new FileNode("site"), new FileNode("site.css") }
+                            ),
+                            new FileNode(
+                                "A",
+                                new[] { new FileNode("site.css"), new FileNode("site") }
+                            ),
+                        }
+                    ),
+                    /* expectedPaths */new[] { "/site.css", "/A/site", "/A/site.css", "/B/site", "/B/site.css" }
+                },
+                {
+                    /* staticUrl */"/site.css",
+                    /* dirStructure */new FileNode(
+                        null,
+                        new[]
+                        {
+                            new FileNode(
+                                "B.B",
+                                new[] { new FileNode("site"), new FileNode("site.css") }
+                            ),
+                            new FileNode(
+                                "A.A",
+                                new[] { new FileNode("site.css"), new FileNode("site") }
+                            ),
+                        }
+                    ),
+                    /* expectedPaths */new[]
+                    {
+                        "/site.css",
+                        "/A.A/site",
+                        "/A.A/site.css",
+                        "/B.B/site",
+                        "/B.B/site.css",
+                    }
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(OrdersGlobbedMatchResultsCorrectly_Data))]
-    public void OrdersGlobbedMatchResultsCorrectly(string staticUrl, FileNode dirStructure, string[] expectedPaths)
+    public void OrdersGlobbedMatchResultsCorrectly(
+        string staticUrl,
+        FileNode dirStructure,
+        string[] expectedPaths
+    )
     {
         // Arrange
         var fileProvider = MakeFileProvider(dirStructure);
@@ -215,7 +267,8 @@ public class GlobbingUrlBuilderTest
 
         // Assert
         var collectionAssertions = expectedPaths.Select<string, Action<string>>(expected =>
-            actual => Assert.Equal(expected, actual));
+            actual => Assert.Equal(expected, actual)
+        );
         Assert.Collection(urlList, collectionAssertions.ToArray());
     }
 
@@ -234,12 +287,15 @@ public class GlobbingUrlBuilderTest
         var urlList = globbingUrlBuilder.BuildUrlList(
             staticUrl: null,
             includePattern: "**/*.css",
-            excludePattern: null);
+            excludePattern: null
+        );
 
         // Assert
-        Assert.Collection(urlList,
+        Assert.Collection(
+            urlList,
             url => Assert.Equal($"{pathBase}/blank.css", url),
-            url => Assert.Equal($"{pathBase}/site.css", url));
+            url => Assert.Equal($"{pathBase}/site.css", url)
+        );
     }
 
     [Fact]
@@ -256,12 +312,15 @@ public class GlobbingUrlBuilderTest
         var actual = globbingUrlBuilder.BuildUrlList(
             staticUrl: null,
             includePattern: "**/*.css",
-            excludePattern: null);
+            excludePattern: null
+        );
 
         // Assert
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             url => Assert.Equal("/blank.css", url),
-            url => Assert.Equal("/site.css", url));
+            url => Assert.Equal("/site.css", url)
+        );
     }
 
     [Fact]
@@ -275,8 +334,12 @@ public class GlobbingUrlBuilderTest
         value.Setup(c => c.Value).Returns(null);
         value.Setup(c => c.ExpirationTokens).Returns(new List<IChangeToken>());
         var cache = MakeCache();
-        Mock.Get(cache).Setup(c => c.CreateEntry(
-            /*key*/ It.IsAny<object>()))
+        Mock.Get(cache)
+            .Setup(c =>
+                c.CreateEntry(
+                    /*key*/It.IsAny<object>()
+                )
+            )
             .Returns((object key) => value.Object)
             .Verifiable();
         var requestPathBase = PathString.Empty;
@@ -286,12 +349,15 @@ public class GlobbingUrlBuilderTest
         var urlList = globbingUrlBuilder.BuildUrlList(
             staticUrl: null,
             includePattern: "**/*.css",
-            excludePattern: null);
+            excludePattern: null
+        );
 
         // Assert
-        Assert.Collection(urlList,
+        Assert.Collection(
+            urlList,
             url => Assert.Equal("/blank.css", url),
-            url => Assert.Equal("/site.css", url));
+            url => Assert.Equal("/site.css", url)
+        );
         Mock.Get(cache).VerifyAll();
     }
 
@@ -301,32 +367,17 @@ public class GlobbingUrlBuilderTest
         {
             // Include pattern, expected output
             return new TheoryData<string, string[]>
+            {
+                { "~/*.css, ~/*.txt", new[] { "/site.css", "/site2.txt" } },
+                { "*.css, /*.txt", new[] { "/site.css", "/site2.txt" } },
+                { "\\*.css,~/*.txt", new[] { "/site.css", "/site2.txt" } },
+                { "~/*.js, *.txt", new[] { "/blank.js", "/site.js", "/site2.txt" } },
                 {
-                    {
-                        "~/*.css, ~/*.txt",
-                        new[] { "/site.css", "/site2.txt" }
-                    },
-                    {
-                        "*.css, /*.txt",
-                        new[] { "/site.css", "/site2.txt" }
-                    },
-                    {
-                        "\\*.css,~/*.txt",
-                        new[] { "/site.css", "/site2.txt" }
-                    },
-                    {
-                        "~/*.js, *.txt",
-                        new[] { "/blank.js", "/site.js", "/site2.txt" }
-                    },
-                    {
-                        " ~/*.js,*.txt, /*.css",
-                        new[] { "/blank.js", "/site.css", "/site.js", "/site2.txt" }
-                    },
-                    {
-                        "~/blank.js, blank.js,/blank.js, \\blank.js",
-                        new[] { "/blank.js" }
-                    },
-                };
+                    " ~/*.js,*.txt, /*.css",
+                    new[] { "/blank.js", "/site.css", "/site.js", "/site2.txt" }
+                },
+                { "~/blank.js, blank.js,/blank.js, \\blank.js", new[] { "/blank.js" } },
+            };
         }
     }
 
@@ -335,7 +386,9 @@ public class GlobbingUrlBuilderTest
     public void HandlesCommaSeparatedPatterns(string includePattern, string[] expectedOutput)
     {
         // Arrange
-        var fileProvider = MakeFileProvider(MakeDirectoryContents("site.css", "blank.js", "site2.txt", "site.js"));
+        var fileProvider = MakeFileProvider(
+            MakeDirectoryContents("site.css", "blank.js", "site2.txt", "site.js")
+        );
         var cache = new MemoryCache(new MemoryCacheOptions());
         var requestPathBase = PathString.Empty;
         var globbingUrlBuilder = new GlobbingUrlBuilder(fileProvider, cache, requestPathBase);
@@ -344,7 +397,8 @@ public class GlobbingUrlBuilderTest
         var urlList = globbingUrlBuilder.BuildUrlList(
             staticUrl: null,
             includePattern: includePattern,
-            excludePattern: null);
+            excludePattern: null
+        );
 
         // Assert
         Assert.Equal(expectedOutput, urlList, StringComparer.Ordinal);
@@ -372,7 +426,8 @@ public class GlobbingUrlBuilderTest
         var urlList = globbingUrlBuilder.BuildUrlList(
             staticUrl: null,
             includePattern: $"{prefix}**/*.css",
-            excludePattern: $"{prefix}**/*.min.css");
+            excludePattern: $"{prefix}**/*.min.css"
+        );
 
         // Assert
         Assert.Collection(includePatterns, pattern => Assert.Equal("**/*.css", pattern));
@@ -400,11 +455,15 @@ public class GlobbingUrlBuilderTest
         var urlList = globbingUrlBuilder.BuildUrlList(
             staticUrl: null,
             includePattern: $"{leadingSlashes}**/*.css",
-            excludePattern: $"{leadingSlashes}**/*.min.css");
+            excludePattern: $"{leadingSlashes}**/*.min.css"
+        );
 
         // Assert
         Assert.Collection(includePatterns, pattern => Assert.Equal($"{prefix}**/*.css", pattern));
-        Assert.Collection(excludePatterns, pattern => Assert.Equal($"{prefix}**/*.min.css", pattern));
+        Assert.Collection(
+            excludePatterns,
+            pattern => Assert.Equal($"{prefix}**/*.min.css", pattern)
+        );
     }
 
     [Fact]
@@ -419,7 +478,11 @@ public class GlobbingUrlBuilderTest
         var globbingUrlBuilder = new GlobbingUrlBuilder(fileProvider, cache, requestPathBase);
 
         // Act
-        var urlList = globbingUrlBuilder.BuildUrlList("/site.css", "**/*.css", excludePattern: null);
+        var urlList = globbingUrlBuilder.BuildUrlList(
+            "/site.css",
+            "**/*.css",
+            excludePattern: null
+        );
 
         // Assert
         Assert.Equal(38, cacheEntry.Size);
@@ -457,19 +520,25 @@ public class GlobbingUrlBuilderTest
     {
         if (rootNode.Children == null || !rootNode.Children.Any())
         {
-            throw new ArgumentException($"{nameof(rootNode)} must have children.", nameof(rootNode));
+            throw new ArgumentException(
+                $"{nameof(rootNode)} must have children.",
+                nameof(rootNode)
+            );
         }
 
         var fileProvider = new Mock<IFileProvider>(MockBehavior.Strict);
-        fileProvider.Setup(fp => fp.GetDirectoryContents(string.Empty))
+        fileProvider
+            .Setup(fp => fp.GetDirectoryContents(string.Empty))
             .Returns(MakeDirectoryContents(rootNode, fileProvider));
-        fileProvider.Setup(fp => fp.Watch(It.IsAny<string>()))
-            .Returns(new TestFileChangeToken());
+        fileProvider.Setup(fp => fp.Watch(It.IsAny<string>())).Returns(new TestFileChangeToken());
 
         return fileProvider.Object;
     }
 
-    private static IDirectoryContents MakeDirectoryContents(FileNode fileNode, Mock<IFileProvider> fileProviderMock)
+    private static IDirectoryContents MakeDirectoryContents(
+        FileNode fileNode,
+        Mock<IFileProvider> fileProviderMock
+    )
     {
         var children = new List<IFileInfo>();
 
@@ -478,10 +547,9 @@ public class GlobbingUrlBuilderTest
             children.Add(MakeFileInfo(node.Name, node.IsDirectory));
             if (node.IsDirectory)
             {
-                var subPath = fileNode.Name != null
-                    ? (fileNode.Name + "/" + node.Name)
-                    : node.Name;
-                fileProviderMock.Setup(fp => fp.GetDirectoryContents(subPath))
+                var subPath = fileNode.Name != null ? (fileNode.Name + "/" + node.Name) : node.Name;
+                fileProviderMock
+                    .Setup(fp => fp.GetDirectoryContents(subPath))
                     .Returns(MakeDirectoryContents(node, fileProviderMock));
             }
         }
@@ -509,31 +577,32 @@ public class GlobbingUrlBuilderTest
         }
 
         var fileProvider = new Mock<IFileProvider>();
-        fileProvider.Setup(fp => fp.GetDirectoryContents(It.IsAny<string>()))
+        fileProvider
+            .Setup(fp => fp.GetDirectoryContents(It.IsAny<string>()))
             .Returns(directoryContents);
-        fileProvider.Setup(fp => fp.Watch(It.IsAny<string>()))
-            .Returns(new TestFileChangeToken());
+        fileProvider.Setup(fp => fp.Watch(It.IsAny<string>())).Returns(new TestFileChangeToken());
         return fileProvider.Object;
     }
 
     private static IMemoryCache MakeCache(object result = null)
     {
         var cache = new Mock<IMemoryCache>();
-        cache.Setup(c => c.TryGetValue(It.IsAny<object>(), out result))
-            .Returns(result != null);
+        cache.Setup(c => c.TryGetValue(It.IsAny<object>(), out result)).Returns(result != null);
         return cache.Object;
     }
 
     private static Matcher MakeMatcher(List<string> includePatterns, List<string> excludePatterns)
     {
         var matcher = new Mock<Matcher>();
-        matcher.Setup(m => m.AddInclude(It.IsAny<string>()))
+        matcher
+            .Setup(m => m.AddInclude(It.IsAny<string>()))
             .Returns<string>(pattern =>
             {
                 includePatterns.Add(pattern);
                 return matcher.Object;
             });
-        matcher.Setup(m => m.AddExclude(It.IsAny<string>()))
+        matcher
+            .Setup(m => m.AddExclude(It.IsAny<string>()))
             .Returns<string>(pattern =>
             {
                 excludePatterns.Add(pattern);

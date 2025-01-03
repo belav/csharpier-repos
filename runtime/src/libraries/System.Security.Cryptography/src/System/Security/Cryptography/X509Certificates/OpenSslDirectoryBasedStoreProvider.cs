@@ -17,8 +17,10 @@ namespace System.Security.Cryptography.X509Certificates
         // {thumbprint}.1.pfx to {thumbprint}.9.pfx
         private const int MaxSaveAttempts = 9;
         private const string PfxExtension = ".pfx";
+
         // *.pfx ({thumbprint}.pfx or {thumbprint}.{ordinal}.pfx)
         private const string PfxWildcard = "*" + PfxExtension;
+
         // .*.pfx ({thumbprint}.{ordinal}.pfx)
         private const string PfxOrdinalWildcard = "." + PfxWildcard;
 
@@ -33,7 +35,8 @@ namespace System.Security.Cryptography.X509Certificates
         {
             Debug.Assert(
                 0 == OpenFlags.ReadOnly,
-                "OpenFlags.ReadOnly is not zero, read-only detection will not work");
+                "OpenFlags.ReadOnly is not zero, read-only detection will not work"
+            );
         }
 #endif
 
@@ -44,7 +47,9 @@ namespace System.Security.Cryptography.X509Certificates
                 throw new CryptographicException(SR.Arg_EmptyOrNullString);
             }
 
-            Debug.Assert(!X509Store.DisallowedStoreName.Equals(storeName, StringComparison.OrdinalIgnoreCase));
+            Debug.Assert(
+                !X509Store.DisallowedStoreName.Equals(storeName, StringComparison.OrdinalIgnoreCase)
+            );
 
             _storePath = GetStorePath(storeName);
 
@@ -66,9 +71,7 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public void CloneTo(X509Certificate2Collection collection)
         {
@@ -177,7 +180,7 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     Mode = FileMode.CreateNew,
                     UnixCreateMode = UserReadWrite,
-                    Access = FileAccess.Write
+                    Access = FileAccess.Write,
                 };
 
                 if (existingFilename != null)
@@ -209,7 +212,9 @@ namespace System.Security.Cryptography.X509Certificates
                     UnixFileMode actualMode = File.GetUnixFileMode(stream.SafeFileHandle);
                     if (actualMode != UserReadWrite)
                     {
-                        throw new CryptographicException(SR.Format(SR.Cryptography_InvalidFilePermissions, stream.Name));
+                        throw new CryptographicException(
+                            SR.Format(SR.Cryptography_InvalidFilePermissions, stream.Name)
+                        );
                     }
 
                     byte[] pkcs12 = copy.Export(X509ContentType.Pkcs12)!;
@@ -254,11 +259,20 @@ namespace System.Security.Cryptography.X509Certificates
             get { return null; }
         }
 
-        private static string? FindExistingFilename(X509Certificate2 cert, string storePath, out bool hadCandidates)
+        private static string? FindExistingFilename(
+            X509Certificate2 cert,
+            string storePath,
+            out bool hadCandidates
+        )
         {
             hadCandidates = false;
 
-            foreach (string maybeMatch in Directory.EnumerateFiles(storePath, cert.Thumbprint + PfxWildcard))
+            foreach (
+                string maybeMatch in Directory.EnumerateFiles(
+                    storePath,
+                    cert.Thumbprint + PfxWildcard
+                )
+            )
             {
                 hadCandidates = true;
 
@@ -288,7 +302,9 @@ namespace System.Security.Cryptography.X509Certificates
             // We need space for {thumbprint} (thumbprint.Length)
             // And ".0.pfx" (6)
             // If MaxSaveAttempts is big enough to use more than one digit, we need that space, too (MaxSaveAttempts / 10)
-            StringBuilder pathBuilder = new StringBuilder(thumbprint.Length + PfxOrdinalWildcard.Length + (MaxSaveAttempts / 10));
+            StringBuilder pathBuilder = new StringBuilder(
+                thumbprint.Length + PfxOrdinalWildcard.Length + (MaxSaveAttempts / 10)
+            );
 
             pathBuilder.Append(thumbprint);
             pathBuilder.Append('.');
@@ -321,7 +337,8 @@ namespace System.Security.Cryptography.X509Certificates
             // exception.
             s_userStoreRoot ??= PersistedFiles.GetUserFeatureDirectory(
                 X509Persistence.CryptographyFeatureName,
-                X509Persistence.X509StoresSubFeatureName);
+                X509Persistence.X509StoresSubFeatureName
+            );
 
             return Path.Combine(s_userStoreRoot, directoryName);
         }
@@ -336,7 +353,9 @@ namespace System.Security.Cryptography.X509Certificates
 
                 if (!StringComparer.Ordinal.Equals(storeName, fileName))
                 {
-                    throw new CryptographicException(SR.Format(SR.Security_InvalidValue, nameof(storeName)));
+                    throw new CryptographicException(
+                        SR.Format(SR.Security_InvalidValue, nameof(storeName))
+                    );
                 }
             }
             catch (IOException e)
@@ -364,19 +383,25 @@ namespace System.Security.Cryptography.X509Certificates
                 Interop.ErrorInfo error = Interop.Sys.GetLastErrorInfo();
                 throw new CryptographicException(
                     SR.Cryptography_FileStatusError,
-                    new IOException(error.GetErrorMessage(), error.RawErrno));
+                    new IOException(error.GetErrorMessage(), error.RawErrno)
+                );
             }
 
             if (dirStat.Uid != userId)
             {
-                throw new CryptographicException(SR.Format(SR.Cryptography_OwnerNotCurrentUser, path));
+                throw new CryptographicException(
+                    SR.Format(SR.Cryptography_OwnerNotCurrentUser, path)
+                );
             }
 
-            const UnixFileMode UserReadWriteExecute = UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute;
+            const UnixFileMode UserReadWriteExecute =
+                UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute;
             UnixFileMode permissions = File.GetUnixFileMode(path);
             if ((permissions & UserReadWriteExecute) != UserReadWriteExecute)
             {
-                throw new CryptographicException(SR.Format(SR.Cryptography_InvalidDirectoryPermissions, path));
+                throw new CryptographicException(
+                    SR.Format(SR.Cryptography_InvalidDirectoryPermissions, path)
+                );
             }
         }
 
@@ -390,8 +415,14 @@ namespace System.Security.Cryptography.X509Certificates
                     // If it has no files, leave it alone.
                     foreach (string filePath in Directory.EnumerateFiles(storePath))
                     {
-                        string msg = SR.Format(SR.Cryptography_Unix_X509_DisallowedStoreNotEmpty, storePath);
-                        throw new CryptographicException(msg, new PlatformNotSupportedException(msg));
+                        string msg = SR.Format(
+                            SR.Cryptography_Unix_X509_DisallowedStoreNotEmpty,
+                            storePath
+                        );
+                        throw new CryptographicException(
+                            msg,
+                            new PlatformNotSupportedException(msg)
+                        );
                     }
                 }
             }

@@ -8,9 +8,14 @@ namespace JitTest_superlong_cs
 {
     public struct superlong
     {
-        private ulong _lo,_hi;
+        private ulong _lo,
+            _hi;
 
-        private void Assign(superlong v) { _hi = v._hi; _lo = v._lo; }
+        private void Assign(superlong v)
+        {
+            _hi = v._hi;
+            _lo = v._lo;
+        }
 
         private static superlong add(superlong op1, superlong op2)
         {

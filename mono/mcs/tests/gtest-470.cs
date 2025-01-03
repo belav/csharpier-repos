@@ -2,9 +2,9 @@
 
 class C
 {
-	public static void Main ()
-	{
-		var x = new B ();
-		x.Foo<C> ();
-	}
+    public static void Main()
+    {
+        var x = new B();
+        x.Foo<C>();
+    }
 }

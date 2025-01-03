@@ -10,6 +10,6 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
     {
         Member,
         ImplicitConversion,
-        ExplicitConversion
+        ExplicitConversion,
     }
 }

@@ -24,8 +24,14 @@ public class PasswordValidatorTest
 
         // Act
         // Assert
-        await Assert.ThrowsAsync<ArgumentNullException>("password", () => validator.ValidateAsync(null, null, null));
-        await Assert.ThrowsAsync<ArgumentNullException>("manager", () => validator.ValidateAsync(null, null, "foo"));
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "password",
+            () => validator.ValidateAsync(null, null, null)
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "manager",
+            () => validator.ValidateAsync(null, null, "foo")
+        );
     }
 
     [Theory]
@@ -70,8 +76,10 @@ public class PasswordValidatorTest
         manager.Options.Password.RequireLowercase = false;
         manager.Options.Password.RequireDigit = false;
         manager.Options.Password.RequiredLength = 0;
-        IdentityResultAssert.IsFailure(await valid.ValidateAsync(manager, null, input),
-            "Passwords must have at least one non alphanumeric character.");
+        IdentityResultAssert.IsFailure(
+            await valid.ValidateAsync(manager, null, input),
+            "Passwords must have at least one non alphanumeric character."
+        );
     }
 
     [Theory]
@@ -104,8 +112,10 @@ public class PasswordValidatorTest
         manager.Options.Password.RequireDigit = false;
         manager.Options.Password.RequiredLength = 0;
         manager.Options.Password.RequiredUniqueChars = uniqueChars;
-        IdentityResultAssert.IsFailure(await valid.ValidateAsync(manager, null, input),
-            $"Passwords must use at least {uniqueChars} different characters.");
+        IdentityResultAssert.IsFailure(
+            await valid.ValidateAsync(manager, null, input),
+            $"Passwords must use at least {uniqueChars} different characters."
+        );
     }
 
     [Theory]

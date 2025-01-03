@@ -4,6 +4,7 @@
 using System.Linq.Expressions;
 
 namespace Microsoft.AspNetCore.Components.Forms;
+
 public class HtmlFieldPrefixTest
 {
     [Fact]
@@ -19,7 +20,10 @@ public class HtmlFieldPrefixTest
         var prefix = new HtmlFieldPrefix(parent);
 
         // Assert
-        Assert.Equal("person.Children[0].BillingAddress.City", prefix.GetFieldName(valueExpression));
+        Assert.Equal(
+            "person.Children[0].BillingAddress.City",
+            prefix.GetFieldName(valueExpression)
+        );
     }
 
     [Fact]
@@ -37,7 +41,10 @@ public class HtmlFieldPrefixTest
         var prefix = new HtmlFieldPrefix(parent).Combine(child);
 
         // Assert
-        Assert.Equal("person.Children[0].Children[1].BillingAddress.City", prefix.GetFieldName(valueExpression));
+        Assert.Equal(
+            "person.Children[0].Children[1].BillingAddress.City",
+            prefix.GetFieldName(valueExpression)
+        );
     }
 
     [Fact]

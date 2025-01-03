@@ -23,8 +23,14 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             var cacheEntryOptions = new MemoryCacheEntryOptions();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => { cacheEntryOptions.Size = -1; });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { cacheEntryOptions.SetSize(-1); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                cacheEntryOptions.Size = -1;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                cacheEntryOptions.SetSize(-1);
+            });
         }
 
         [Fact]
@@ -34,18 +40,21 @@ namespace Microsoft.Extensions.Caching.Memory
 
             using (var cacheEntry = cache.CreateEntry(new object()))
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() => { cacheEntry.Size = -1; });
-                Assert.Throws<ArgumentOutOfRangeException>(() => { cacheEntry.SetSize(-1); });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    cacheEntry.Size = -1;
+                });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    cacheEntry.SetSize(-1);
+                });
             }
         }
 
         [Fact]
         public void CacheWithSizeLimitAddingEntryWithoutSizeThrows()
         {
-            var cache = new MemoryCache(new MemoryCacheOptions
-            {
-                SizeLimit = 10
-            });
+            var cache = new MemoryCache(new MemoryCacheOptions { SizeLimit = 10 });
 
             Assert.Throws<InvalidOperationException>(() => cache.Set(new object(), new object()));
         }
@@ -117,11 +126,13 @@ namespace Microsoft.Extensions.Caching.Memory
 
             var entryOptions = new MemoryCacheEntryOptions { Size = long.MaxValue };
             var sem = new SemaphoreSlim(0, 1);
-            entryOptions.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration
-            {
-                EvictionCallback = (k, v, r, s) => sem.Release(),
-                State = null
-            });
+            entryOptions.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration
+                {
+                    EvictionCallback = (k, v, r, s) => sem.Release(),
+                    State = null,
+                }
+            );
 
             AssertCacheSize(0, cache);
 
@@ -146,20 +157,24 @@ namespace Microsoft.Extensions.Caching.Memory
         [ActiveIssue("https://github.com/dotnet/runtime/issues/72912")]
         public async Task ExceedsCapacityCompacts()
         {
-            var cache = new MemoryCache(new MemoryCacheOptions
-            {
-                ExpirationScanFrequency = TimeSpan.Zero,
-                SizeLimit = 10,
-                CompactionPercentage = 0.5
-            });
+            var cache = new MemoryCache(
+                new MemoryCacheOptions
+                {
+                    ExpirationScanFrequency = TimeSpan.Zero,
+                    SizeLimit = 10,
+                    CompactionPercentage = 0.5,
+                }
+            );
 
             var entryOptions = new MemoryCacheEntryOptions { Size = 6 };
             var sem = new SemaphoreSlim(0, 1);
-            entryOptions.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration
-            {
-                EvictionCallback = (k, v, r, s) => sem.Release(),
-                State = null
-            });
+            entryOptions.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration
+                {
+                    EvictionCallback = (k, v, r, s) => sem.Release(),
+                    State = null,
+                }
+            );
 
             AssertCacheSize(0, cache);
 
@@ -217,11 +232,9 @@ namespace Microsoft.Extensions.Caching.Memory
         [Fact]
         public void AddingReplacementWhenTotalSizeExceedsCapacityDoesNotUpdateAndRemovesOldEntry()
         {
-            var cache = new MemoryCache(new MemoryCacheOptions
-            {
-                SizeLimit = 10,
-                CompactionPercentage = 0.5
-            });
+            var cache = new MemoryCache(
+                new MemoryCacheOptions { SizeLimit = 10, CompactionPercentage = 0.5 }
+            );
 
             AssertCacheSize(0, cache);
 
@@ -240,19 +253,19 @@ namespace Microsoft.Extensions.Caching.Memory
         [ActiveIssue("https://github.com/dotnet/runtime/issues/72912")]
         public async Task AddingReplacementWhenTotalSizeExceedsCapacityDoesNotUpdateRemovesOldEntryAndTriggersCompaction()
         {
-            var cache = new MemoryCache(new MemoryCacheOptions
-            {
-                SizeLimit = 10,
-                CompactionPercentage = 0.5
-            });
+            var cache = new MemoryCache(
+                new MemoryCacheOptions { SizeLimit = 10, CompactionPercentage = 0.5 }
+            );
 
             var entryOptions = new MemoryCacheEntryOptions { Size = 6 };
             var sem = new SemaphoreSlim(0, 1);
-            entryOptions.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration
-            {
-                EvictionCallback = (k, v, r, s) => sem.Release(),
-                State = null
-            });
+            entryOptions.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration
+                {
+                    EvictionCallback = (k, v, r, s) => sem.Release(),
+                    State = null,
+                }
+            );
 
             AssertCacheSize(0, cache);
 
@@ -273,11 +286,9 @@ namespace Microsoft.Extensions.Caching.Memory
         [Fact]
         public void AddingReplacementExceedsCapacityRemovesOldEntry()
         {
-            var cache = new MemoryCache(new MemoryCacheOptions
-            {
-                SizeLimit = 10,
-                CompactionPercentage = 0.5
-            });
+            var cache = new MemoryCache(
+                new MemoryCacheOptions { SizeLimit = 10, CompactionPercentage = 0.5 }
+            );
 
             AssertCacheSize(0, cache);
 
@@ -311,21 +322,21 @@ namespace Microsoft.Extensions.Caching.Memory
         [ActiveIssue("https://github.com/dotnet/runtime/issues/72912")]
         public async Task ExpiringEntryDecreasesCacheSize()
         {
-            var cache = new MemoryCache(new MemoryCacheOptions
-            {
-                ExpirationScanFrequency = TimeSpan.Zero,
-                SizeLimit = 10
-            });
+            var cache = new MemoryCache(
+                new MemoryCacheOptions { ExpirationScanFrequency = TimeSpan.Zero, SizeLimit = 10 }
+            );
 
             var entryOptions = new MemoryCacheEntryOptions { Size = 5 };
             var changeToken = new TestExpirationToken();
             var sem = new SemaphoreSlim(0, 1);
             entryOptions.ExpirationTokens.Add(changeToken);
-            entryOptions.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration
-            {
-                EvictionCallback = (k, v, r, s) => sem.Release(),
-                State = null
-            });
+            entryOptions.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration
+                {
+                    EvictionCallback = (k, v, r, s) => sem.Release(),
+                    State = null,
+                }
+            );
 
             cache.Set("key", "value", entryOptions);
 
@@ -347,12 +358,14 @@ namespace Microsoft.Extensions.Caching.Memory
         public void TryingToAddExpiredEntryDoesNotIncreaseCacheSize()
         {
             var testClock = new TestClock();
-            var cache = new MemoryCache(new MemoryCacheOptions { Clock = testClock, SizeLimit = 10 });
+            var cache = new MemoryCache(
+                new MemoryCacheOptions { Clock = testClock, SizeLimit = 10 }
+            );
 
             var entryOptions = new MemoryCacheEntryOptions
             {
                 Size = 5,
-                AbsoluteExpiration = testClock.UtcNow.Add(TimeSpan.FromMinutes(-1))
+                AbsoluteExpiration = testClock.UtcNow.Add(TimeSpan.FromMinutes(-1)),
             };
 
             cache.Set("key", "value", entryOptions);
@@ -369,7 +382,7 @@ namespace Microsoft.Extensions.Caching.Memory
             var entryOptions = new MemoryCacheEntryOptions
             {
                 Size = 5,
-                ExpirationTokens = { testExpirationToken }
+                ExpirationTokens = { testExpirationToken },
             };
 
             cache.Set("key", "value", entryOptions);
@@ -383,12 +396,14 @@ namespace Microsoft.Extensions.Caching.Memory
         public async Task CompactsToLessThanLowWatermarkUsingLRUWhenHighWatermarkExceeded()
         {
             var testClock = new TestClock();
-            var cache = new MemoryCache(new MemoryCacheOptions
-            {
-                Clock = testClock,
-                SizeLimit = 10,
-                CompactionPercentage = 0.3
-            });
+            var cache = new MemoryCache(
+                new MemoryCacheOptions
+                {
+                    Clock = testClock,
+                    SizeLimit = 10,
+                    CompactionPercentage = 0.3,
+                }
+            );
 
             var numEntries = 5;
             var sem = new SemaphoreSlim(0, numEntries);
@@ -396,11 +411,13 @@ namespace Microsoft.Extensions.Caching.Memory
             for (var i = 0; i < numEntries; i++)
             {
                 var entryOptions = new MemoryCacheEntryOptions { Size = i };
-                entryOptions.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration
-                {
-                    EvictionCallback = (k, v, r, s) => sem.Release(),
-                    State = null
-                });
+                entryOptions.PostEvictionCallbacks.Add(
+                    new PostEvictionCallbackRegistration
+                    {
+                        EvictionCallback = (k, v, r, s) => sem.Release(),
+                        State = null,
+                    }
+                );
                 cache.Set($"key{i}", $"value{i}", entryOptions);
                 testClock.Add(TimeSpan.FromSeconds(1));
             }
@@ -408,7 +425,11 @@ namespace Microsoft.Extensions.Caching.Memory
             // There should be 5 items in the cache
             Assert.Equal(numEntries, cache.Count);
 
-            cache.Set($"key{numEntries}", $"value{numEntries}", new MemoryCacheEntryOptions { Size = 1 });
+            cache.Set(
+                $"key{numEntries}",
+                $"value{numEntries}",
+                new MemoryCacheEntryOptions { Size = 1 }
+            );
             testClock.Add(TimeSpan.FromSeconds(10));
 
             // Wait for compaction to complete
@@ -463,10 +484,14 @@ namespace Microsoft.Extensions.Caching.Memory
         internal static void AssertCacheSize(long size, MemoryCache cache)
         {
             // Size is only eventually consistent, so retry a few times
-            RetryHelper.Execute(() =>
-            {
-                Assert.Equal(size, cache.Size);
-            }, maxAttempts: 12, (iteration) => (int)Math.Pow(2, iteration)); // 2ms, 4ms.. 4096 ms. In practice, retries are rarely needed.
+            RetryHelper.Execute(
+                () =>
+                {
+                    Assert.Equal(size, cache.Size);
+                },
+                maxAttempts: 12,
+                (iteration) => (int)Math.Pow(2, iteration)
+            ); // 2ms, 4ms.. 4096 ms. In practice, retries are rarely needed.
         }
     }
 }

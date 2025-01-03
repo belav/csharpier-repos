@@ -20,7 +20,10 @@ namespace System.Security.Cryptography.Encryption.MD5.Tests
         [Fact]
         public void MD5_Rfc1321_7()
         {
-            Verify("12345678901234567890123456789012345678901234567890123456789012345678901234567890", "57edf4a22be3c955ac49da2e2107b67a");
+            Verify(
+                "12345678901234567890123456789012345678901234567890123456789012345678901234567890",
+                "57edf4a22be3c955ac49da2e2107b67a"
+            );
         }
 
         private void Verify(string rawText, string expected)

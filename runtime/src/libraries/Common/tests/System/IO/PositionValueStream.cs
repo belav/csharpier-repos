@@ -43,7 +43,6 @@ namespace Test.IO.Streams
             for (int i = 0; i < localLimit; i++)
             {
                 buffer[offset + i] = _written;
-
                 unchecked
                 {
                     _written++;
@@ -59,9 +58,7 @@ namespace Test.IO.Streams
             _remaining = -1;
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override long Seek(long offset, SeekOrigin origin)
         {
@@ -78,10 +75,22 @@ namespace Test.IO.Streams
             throw new NotSupportedException();
         }
 
-        public override bool CanRead { get { return true; } }
-        public override bool CanSeek { get { return false; } }
-        public override bool CanWrite { get { return false; } }
-        public override long Length { get { throw new NotSupportedException(); } }
+        public override bool CanRead
+        {
+            get { return true; }
+        }
+        public override bool CanSeek
+        {
+            get { return false; }
+        }
+        public override bool CanWrite
+        {
+            get { return false; }
+        }
+        public override long Length
+        {
+            get { throw new NotSupportedException(); }
+        }
 
         public override long Position
         {

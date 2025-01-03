@@ -6,8 +6,8 @@ namespace System.Activities.Statements
 {
     using System;
     using System.Activities;
-    using System.ComponentModel;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
 
     public sealed class TerminateWorkflow : NativeActivity
     {
@@ -23,10 +23,20 @@ namespace System.Activities.Statements
         {
             Collection<RuntimeArgument> arguments = new Collection<RuntimeArgument>();
 
-            RuntimeArgument reasonArgument = new RuntimeArgument("Reason", typeof(string), ArgumentDirection.In, false);
+            RuntimeArgument reasonArgument = new RuntimeArgument(
+                "Reason",
+                typeof(string),
+                ArgumentDirection.In,
+                false
+            );
             metadata.Bind(this.Reason, reasonArgument);
 
-            RuntimeArgument exceptionArgument = new RuntimeArgument("Exception", typeof(Exception), ArgumentDirection.In, false);
+            RuntimeArgument exceptionArgument = new RuntimeArgument(
+                "Exception",
+                typeof(Exception),
+                ArgumentDirection.In,
+                false
+            );
             metadata.Bind(this.Exception, exceptionArgument);
 
             arguments.Add(reasonArgument);
@@ -34,10 +44,19 @@ namespace System.Activities.Statements
 
             metadata.SetArgumentsCollection(arguments);
 
-            if ((this.Reason == null || this.Reason.IsEmpty) &&
-                (this.Exception == null || this.Exception.IsEmpty))
+            if (
+                (this.Reason == null || this.Reason.IsEmpty)
+                && (this.Exception == null || this.Exception.IsEmpty)
+            )
             {
-                metadata.AddValidationError(SR.OneOfTwoPropertiesMustBeSet("Reason", "Exception", "TerminateWorkflow", this.DisplayName));
+                metadata.AddValidationError(
+                    SR.OneOfTwoPropertiesMustBeSet(
+                        "Reason",
+                        "Exception",
+                        "TerminateWorkflow",
+                        this.DisplayName
+                    )
+                );
             }
         }
 

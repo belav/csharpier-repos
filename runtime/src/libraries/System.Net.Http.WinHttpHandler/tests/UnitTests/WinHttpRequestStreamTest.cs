@@ -6,9 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Xunit;
-
 using SafeWinHttpHandle = Interop.WinHttp.SafeWinHttpHandle;
 
 namespace System.Net.Http.WinHttpHandlerUnitTests
@@ -192,7 +190,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             Stream stream = MakeRequestStream();
 
-            AssertExtensions.Throws<ArgumentException>("buffer", () => stream.Write(new byte[1], 0, 3));
+            AssertExtensions.Throws<ArgumentException>(
+                "buffer",
+                () => stream.Write(new byte[1], 0, 3)
+            );
         }
 
         [Fact]
@@ -200,7 +201,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             Stream stream = MakeRequestStream();
 
-            AssertExtensions.Throws<ArgumentException>("buffer", () => stream.Write(new byte[1], int.MaxValue, int.MaxValue));
+            AssertExtensions.Throws<ArgumentException>(
+                "buffer",
+                () => stream.Write(new byte[1], int.MaxValue, int.MaxValue)
+            );
         }
 
         [Fact]
@@ -248,7 +252,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             byte[] serverBytes = TestServer.RequestBody;
             Assert.Equal(
                 new ArraySegment<byte>(buffer, offset, buffer.Length - offset),
-                new ArraySegment<byte>(serverBytes, 0, serverBytes.Length));
+                new ArraySegment<byte>(serverBytes, 0, serverBytes.Length)
+            );
         }
 
         [Fact]
@@ -256,7 +261,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             Stream stream = MakeRequestStream();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Task t = stream.WriteAsync(new byte[1], -1, 1); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Task t = stream.WriteAsync(new byte[1], -1, 1);
+            });
         }
 
         [Fact]
@@ -286,7 +294,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             Stream stream = MakeRequestStream();
             stream.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() => { Task t = stream.WriteAsync(new byte[1], 0, 1); });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                Task t = stream.WriteAsync(new byte[1], 0, 1);
+            });
         }
 
         [Fact]
@@ -297,7 +308,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             TestControl.WinHttpWriteData.Pause();
             Task t1 = stream.WriteAsync(new byte[1], 0, 1);
 
-            Assert.Throws<InvalidOperationException>(() => { Task t2 = stream.WriteAsync(new byte[1], 0, 1); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                Task t2 = stream.WriteAsync(new byte[1], 0, 1);
+            });
 
             TestControl.WinHttpWriteData.Resume();
             t1.Wait();

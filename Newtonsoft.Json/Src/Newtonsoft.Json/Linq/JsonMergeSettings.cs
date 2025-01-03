@@ -91,7 +91,10 @@ namespace Newtonsoft.Json.Linq
             get => _propertyNameComparison;
             set
             {
-                if (value < StringComparison.CurrentCulture || value > StringComparison.OrdinalIgnoreCase)
+                if (
+                    value < StringComparison.CurrentCulture
+                    || value > StringComparison.OrdinalIgnoreCase
+                )
                 {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }

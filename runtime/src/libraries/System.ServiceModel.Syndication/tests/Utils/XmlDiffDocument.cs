@@ -15,7 +15,7 @@ namespace System.ServiceModel.Syndication.Tests
     {
         Before = 0,
         After = 1,
-        Unknown = 2
+        Unknown = 2,
     }
 
     public enum XmlDiffNodeType
@@ -28,12 +28,13 @@ namespace System.ServiceModel.Syndication.Tests
         Comment = 5,
         PI = 6,
         WS = 7,
-        Document = 8
+        Document = 8,
     }
 
     internal class PositionInfo : IXmlLineInfo
     {
         public virtual bool HasLineInfo() => false;
+
         public virtual int LineNumber => 0;
         public virtual int LinePosition => 0;
 
@@ -60,21 +61,21 @@ namespace System.ServiceModel.Syndication.Tests
         }
 
         public override bool HasLineInfo() => true;
+
         public override int LineNumber => _mlineInfo.LineNumber;
         public override int LinePosition => _mlineInfo.LinePosition;
     }
 
     //nametable could be added for next "release"
-    public class XmlDiffNameTable
-    {
-    }
+    public class XmlDiffNameTable { }
 
     public class XmlDiffDocument : XmlDiffNode, IXPathNavigable
     {
         private bool _bLoaded;
         public XmlNameTable nameTable;
 
-        public XmlDiffDocument() : base()
+        public XmlDiffDocument()
+            : base()
         {
             _bLoaded = false;
             IgnoreAttributeOrder = false;
@@ -90,7 +91,9 @@ namespace System.ServiceModel.Syndication.Tests
         {
             set
             {
-                IgnoreAttributeOrder = (((int)value & (int)(XmlDiffOption.IgnoreAttributeOrder)) > 0);
+                IgnoreAttributeOrder = (
+                    ((int)value & (int)(XmlDiffOption.IgnoreAttributeOrder)) > 0
+                );
                 IgnoreChildOrder = (((int)value & (int)(XmlDiffOption.IgnoreChildOrder)) > 0);
                 IgnoreComments = (((int)value & (int)(XmlDiffOption.IgnoreComments)) > 0);
                 IgnoreWhitespace = (((int)value & (int)(XmlDiffOption.IgnoreWhitespace)) > 0);
@@ -99,8 +102,12 @@ namespace System.ServiceModel.Syndication.Tests
                 IgnorePrefix = (((int)value & (int)(XmlDiffOption.IgnorePrefix)) > 0);
                 CDataAsText = (((int)value & (int)(XmlDiffOption.CDataAsText)) > 0);
                 NormalizeNewline = (((int)value & (int)(XmlDiffOption.NormalizeNewline)) > 0);
-                TreatWhitespaceTextAsWSNode = (((int)value & (int)(XmlDiffOption.TreatWhitespaceTextAsWSNode)) > 0);
-                IgnoreEmptyTextNodes = (((int)value & (int)(XmlDiffOption.IgnoreEmptyTextNodes)) > 0);
+                TreatWhitespaceTextAsWSNode = (
+                    ((int)value & (int)(XmlDiffOption.TreatWhitespaceTextAsWSNode)) > 0
+                );
+                IgnoreEmptyTextNodes = (
+                    ((int)value & (int)(XmlDiffOption.IgnoreEmptyTextNodes)) > 0
+                );
                 WhitespaceAsText = (((int)value & (int)(XmlDiffOption.WhitespaceAsText)) > 0);
             }
         }
@@ -155,11 +162,17 @@ namespace System.ServiceModel.Syndication.Tests
             }
             else if (nt1 == (int)XmlDiffNodeType.PI)
             {
-                return ComparePIs(node1 as XmlDiffProcessingInstruction, node2 as XmlDiffProcessingInstruction);
+                return ComparePIs(
+                    node1 as XmlDiffProcessingInstruction,
+                    node2 as XmlDiffProcessingInstruction
+                );
             }
             else if (node1 is XmlDiffCharacterData)
             {
-                return CompareTextLikeNodes(node1 as XmlDiffCharacterData, node2 as XmlDiffCharacterData);
+                return CompareTextLikeNodes(
+                    node1 as XmlDiffCharacterData,
+                    node2 as XmlDiffCharacterData
+                );
             }
             else
             {
@@ -176,7 +189,10 @@ namespace System.ServiceModel.Syndication.Tests
             int nCompare = 0;
             if ((nCompare = CompareText(elem2.LocalName, elem1.LocalName)) == 0)
             {
-                if (IgnoreNS || (nCompare = CompareText(elem2.NamespaceURI, elem1.NamespaceURI)) == 0)
+                if (
+                    IgnoreNS
+                    || (nCompare = CompareText(elem2.NamespaceURI, elem1.NamespaceURI)) == 0
+                )
                 {
                     if (IgnorePrefix || (nCompare = CompareText(elem2.Prefix, elem1.Prefix)) == 0)
                     {
@@ -216,9 +232,17 @@ namespace System.ServiceModel.Syndication.Tests
                 {
                     if ((nCompare = CompareText(current2.LocalName, current1.LocalName)) == 0)
                     {
-                        if (IgnoreNS || (nCompare = CompareText(current2.NamespaceURI, current1.NamespaceURI)) == 0)
+                        if (
+                            IgnoreNS
+                            || (
+                                nCompare = CompareText(current2.NamespaceURI, current1.NamespaceURI)
+                            ) == 0
+                        )
                         {
-                            if (IgnorePrefix || (nCompare = CompareText(current2.Prefix, current1.Prefix)) == 0)
+                            if (
+                                IgnorePrefix
+                                || (nCompare = CompareText(current2.Prefix, current1.Prefix)) == 0
+                            )
                             {
                                 if ((nCompare = CompareText(current2.Value, current1.Value)) == 0)
                                 {
@@ -247,7 +271,10 @@ namespace System.ServiceModel.Syndication.Tests
             int nCompare = 0;
             if ((nCompare = CompareText(attr2.LocalName, attr1.LocalName)) == 0)
             {
-                if (IgnoreNS || (nCompare = CompareText(attr2.NamespaceURI, attr1.NamespaceURI)) == 0)
+                if (
+                    IgnoreNS
+                    || (nCompare = CompareText(attr2.NamespaceURI, attr1.NamespaceURI)) == 0
+                )
                 {
                     if (IgnorePrefix || (nCompare = CompareText(attr2.Prefix, attr1.Prefix)) == 0)
                     {
@@ -278,7 +305,10 @@ namespace System.ServiceModel.Syndication.Tests
                 return NodePosition.Before;
         }
 
-        private NodePosition ComparePIs(XmlDiffProcessingInstruction pi1, XmlDiffProcessingInstruction pi2)
+        private NodePosition ComparePIs(
+            XmlDiffProcessingInstruction pi1,
+            XmlDiffProcessingInstruction pi2
+        )
         {
             Debug.Assert(pi1 != null);
             Debug.Assert(pi2 != null);
@@ -316,7 +346,8 @@ namespace System.ServiceModel.Syndication.Tests
         }
 
         //returns 0 if the same string; 1 if s1 > s1 and -1 if s1 < s2
-        private int CompareText(string s1, string s2) => Math.Sign(string.Compare(s1, s2, StringComparison.Ordinal));
+        private int CompareText(string s1, string s2) =>
+            Math.Sign(string.Compare(s1, s2, StringComparison.Ordinal));
 
         public virtual void Load(string xmlFileName)
         {
@@ -340,7 +371,9 @@ namespace System.ServiceModel.Syndication.Tests
         public virtual void Load(XmlReader reader)
         {
             if (_bLoaded)
-                throw new InvalidOperationException("The document already contains data and should not be used again.");
+                throw new InvalidOperationException(
+                    "The document already contains data and should not be used again."
+                );
             if (reader.ReadState == ReadState.Initial)
             {
                 if (!reader.Read())
@@ -395,7 +428,13 @@ namespace System.ServiceModel.Syndication.Tests
                         {
                             StringBuilder text = new StringBuilder();
                             text.Append(reader.Value);
-                            while ((lookAhead = reader.Read()) && (reader.NodeType == XmlNodeType.Text || reader.NodeType == XmlNodeType.CDATA))
+                            while (
+                                (lookAhead = reader.Read())
+                                && (
+                                    reader.NodeType == XmlNodeType.Text
+                                    || reader.NodeType == XmlNodeType.CDATA
+                                )
+                            )
                             {
                                 text.Append(reader.Value);
                             }
@@ -405,18 +444,38 @@ namespace System.ServiceModel.Syndication.Tests
                     case XmlNodeType.Text:
                         if (!CDataAsText)
                         {
-                            LoadTextNode(parent, reader, pInfo, TextNodeIsWhitespace(reader.Value) ? XmlDiffNodeType.WS : XmlDiffNodeType.Text);
+                            LoadTextNode(
+                                parent,
+                                reader,
+                                pInfo,
+                                TextNodeIsWhitespace(reader.Value)
+                                    ? XmlDiffNodeType.WS
+                                    : XmlDiffNodeType.Text
+                            );
                         }
                         else //merge with adjacent text/CDATA nodes
                         {
                             StringBuilder text = new StringBuilder();
                             text.Append(reader.Value);
-                            while ((lookAhead = reader.Read()) && (reader.NodeType == XmlNodeType.Text || reader.NodeType == XmlNodeType.CDATA))
+                            while (
+                                (lookAhead = reader.Read())
+                                && (
+                                    reader.NodeType == XmlNodeType.Text
+                                    || reader.NodeType == XmlNodeType.CDATA
+                                )
+                            )
                             {
                                 text.Append(reader.Value);
                             }
                             string txt = text.ToString();
-                            LoadTextNode(parent, txt, pInfo, TextNodeIsWhitespace(txt) ? XmlDiffNodeType.WS : XmlDiffNodeType.Text);
+                            LoadTextNode(
+                                parent,
+                                txt,
+                                pInfo,
+                                TextNodeIsWhitespace(txt)
+                                    ? XmlDiffNodeType.WS
+                                    : XmlDiffNodeType.Text
+                            );
                         }
                         break;
                     case XmlNodeType.EntityReference:
@@ -457,7 +516,11 @@ namespace System.ServiceModel.Syndication.Tests
             XmlDiffElement elem = null;
             bool bEmptyElement = reader.IsEmptyElement;
             if (bEmptyElement)
-                elem = new XmlDiffEmptyElement(reader.LocalName, reader.Prefix, reader.NamespaceURI);
+                elem = new XmlDiffEmptyElement(
+                    reader.LocalName,
+                    reader.Prefix,
+                    reader.NamespaceURI
+                );
             else
                 elem = new XmlDiffElement(reader.LocalName, reader.Prefix, reader.NamespaceURI);
             elem.LineNumber = pInfo.LineNumber;
@@ -479,50 +542,72 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 do
                 {
-                    XmlDiffAttribute attr = new XmlDiffAttribute(reader.LocalName, reader.Prefix, reader.NamespaceURI, reader.Value);
+                    XmlDiffAttribute attr = new XmlDiffAttribute(
+                        reader.LocalName,
+                        reader.Prefix,
+                        reader.NamespaceURI,
+                        reader.Value
+                    );
                     attr.SetValueAsQName(reader, reader.Value);
                     attr.LineNumber = pInfo.LineNumber;
                     attr.LinePosition = pInfo.LinePosition;
                     InsertAttribute(parent, attr);
-                }
-                while (reader.MoveToNextAttribute());
+                } while (reader.MoveToNextAttribute());
             }
         }
 
-        private void LoadTextNode(XmlDiffNode parent, XmlReader reader, PositionInfo pInfo, XmlDiffNodeType nt)
+        private void LoadTextNode(
+            XmlDiffNode parent,
+            XmlReader reader,
+            PositionInfo pInfo,
+            XmlDiffNodeType nt
+        )
         {
             LoadTextNode(parent, reader.Value, pInfo, nt);
         }
 
-        private void LoadTextNode(XmlDiffNode parent, string text, PositionInfo pInfo, XmlDiffNodeType nt)
+        private void LoadTextNode(
+            XmlDiffNode parent,
+            string text,
+            PositionInfo pInfo,
+            XmlDiffNodeType nt
+        )
         {
             if (!IgnoreEmptyTextNodes || !string.IsNullOrEmpty(text))
             {
                 XmlDiffCharacterData textNode = new XmlDiffCharacterData(text, nt, NormalizeNewline)
                 {
                     LineNumber = pInfo.LineNumber,
-                    LinePosition = pInfo.LinePosition
+                    LinePosition = pInfo.LinePosition,
                 };
                 InsertChild(parent, textNode);
             }
         }
 
-        private void LoadTopLevelAttribute(XmlDiffNode parent, string text, PositionInfo pInfo, XmlDiffNodeType nt)
+        private void LoadTopLevelAttribute(
+            XmlDiffNode parent,
+            string text,
+            PositionInfo pInfo,
+            XmlDiffNodeType nt
+        )
         {
             XmlDiffCharacterData textNode = new XmlDiffCharacterData(text, nt, NormalizeNewline)
             {
                 LineNumber = pInfo.LineNumber,
-                LinePosition = pInfo.LinePosition
+                LinePosition = pInfo.LinePosition,
             };
             InsertTopLevelAttributeAsText(parent, textNode);
         }
 
         private void LoadPI(XmlDiffNode parent, XmlReader reader, PositionInfo pInfo)
         {
-            XmlDiffProcessingInstruction pi = new XmlDiffProcessingInstruction(reader.Name, reader.Value)
+            XmlDiffProcessingInstruction pi = new XmlDiffProcessingInstruction(
+                reader.Name,
+                reader.Value
+            )
             {
                 LineNumber = pInfo.LineNumber,
-                LinePosition = pInfo.LinePosition
+                LinePosition = pInfo.LinePosition,
             };
             InsertChild(parent, pi);
         }
@@ -532,7 +617,7 @@ namespace System.ServiceModel.Syndication.Tests
             XmlDiffEntityReference er = new XmlDiffEntityReference(reader.Name)
             {
                 LineNumber = pInfo.LineNumber,
-                LinePosition = pInfo.LinePosition
+                LinePosition = pInfo.LinePosition,
             };
             InsertChild(parent, er);
         }
@@ -561,11 +646,21 @@ namespace System.ServiceModel.Syndication.Tests
                 parent.InsertChildAfter(parent.LastChild, newChild);
         }
 
-        private void InsertTopLevelAttributeAsText(XmlDiffNode parent, XmlDiffCharacterData newChild)
+        private void InsertTopLevelAttributeAsText(
+            XmlDiffNode parent,
+            XmlDiffCharacterData newChild
+        )
         {
-            if (parent.LastChild != null && (parent.LastChild.NodeType == XmlDiffNodeType.Text || parent.LastChild.NodeType == XmlDiffNodeType.WS))
+            if (
+                parent.LastChild != null
+                && (
+                    parent.LastChild.NodeType == XmlDiffNodeType.Text
+                    || parent.LastChild.NodeType == XmlDiffNodeType.WS
+                )
+            )
             {
-                ((XmlDiffCharacterData)parent.LastChild).Value = ((XmlDiffCharacterData)parent.LastChild).Value + " " + newChild.Value;
+                ((XmlDiffCharacterData)parent.LastChild).Value =
+                    ((XmlDiffCharacterData)parent.LastChild).Value + " " + newChild.Value;
             }
             else
             {
@@ -640,11 +735,17 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 if (((XmlDiffNavigator)_iter.Current).CurrentNode is XmlDiffAttribute)
                 {
-                    ((XmlDiffElement)((XmlDiffNavigator)_iter.Current).CurrentNode.ParentNode).DeleteAttribute((XmlDiffAttribute)((XmlDiffNavigator)_iter.Current).CurrentNode);
+                    (
+                        (XmlDiffElement)((XmlDiffNavigator)_iter.Current).CurrentNode.ParentNode
+                    ).DeleteAttribute(
+                        (XmlDiffAttribute)((XmlDiffNavigator)_iter.Current).CurrentNode
+                    );
                 }
                 else
                 {
-                    ((XmlDiffNavigator)_iter.Current).CurrentNode.ParentNode.DeleteChild(((XmlDiffNavigator)_iter.Current).CurrentNode);
+                    ((XmlDiffNavigator)_iter.Current).CurrentNode.ParentNode.DeleteChild(
+                        ((XmlDiffNavigator)_iter.Current).CurrentNode
+                    );
                 }
             }
         }
@@ -684,8 +785,7 @@ namespace System.ServiceModel.Syndication.Tests
                     if (_current == _last)
                         break;
                     _current = _next;
-                }
-                while (true);
+                } while (true);
                 //restore flag for ignoring child order
                 IgnoreChildOrder = temp;
             }
@@ -734,7 +834,10 @@ namespace System.ServiceModel.Syndication.Tests
                 }
                 else //look in the following nodes
                 {
-                    if (targetNode.LineNumber + targetNode.LinePosition > CurrentNode.LinePosition + CurrentNode.LineNumber)
+                    if (
+                        targetNode.LineNumber + targetNode.LinePosition
+                        > CurrentNode.LinePosition + CurrentNode.LineNumber
+                    )
                     {
                         return XmlNodeOrder.After;
                     }
@@ -742,6 +845,7 @@ namespace System.ServiceModel.Syndication.Tests
                 }
             }
         }
+
         public override string GetAttribute(string localName, string namespaceURI)
         {
             if (CurrentNode is XmlDiffElement)
@@ -781,7 +885,10 @@ namespace System.ServiceModel.Syndication.Tests
         {
             if (CurrentNode is XmlDiffElement)
             {
-                XmlDiffAttribute _attr = ((XmlDiffElement)CurrentNode).GetAttribute(localName, namespaceURI);
+                XmlDiffAttribute _attr = ((XmlDiffElement)CurrentNode).GetAttribute(
+                    localName,
+                    namespaceURI
+                );
                 if (_attr != null)
                 {
                     CurrentNode = _attr;
@@ -835,7 +942,10 @@ namespace System.ServiceModel.Syndication.Tests
 
         public override bool MoveToFirstChild()
         {
-            if ((CurrentNode is XmlDiffDocument || CurrentNode is XmlDiffElement) && CurrentNode.FirstChild != null)
+            if (
+                (CurrentNode is XmlDiffDocument || CurrentNode is XmlDiffElement)
+                && CurrentNode.FirstChild != null
+            )
             {
                 CurrentNode = CurrentNode.FirstChild;
                 return true;
@@ -929,8 +1039,8 @@ namespace System.ServiceModel.Syndication.Tests
 
         private bool IsNamespaceNode(XmlDiffAttribute attr)
         {
-            return attr.LocalName.ToLower(CultureInfo.InvariantCulture) == "xmlns" ||
-                   attr.Prefix.ToLower(CultureInfo.InvariantCulture) == "xmlns";
+            return attr.LocalName.ToLower(CultureInfo.InvariantCulture) == "xmlns"
+                || attr.Prefix.ToLower(CultureInfo.InvariantCulture) == "xmlns";
         }
 
         public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope)
@@ -1110,7 +1220,13 @@ namespace System.ServiceModel.Syndication.Tests
 
         public override bool HasAttributes
         {
-            get => (CurrentNode is XmlDiffElement && ((XmlDiffElement)CurrentNode).FirstAttribute != null) ? true : false;
+            get =>
+                (
+                    CurrentNode is XmlDiffElement
+                    && ((XmlDiffElement)CurrentNode).FirstAttribute != null
+                )
+                    ? true
+                    : false;
         }
 
         public override bool HasChildren => CurrentNode._next != null ? true : false;
@@ -1132,7 +1248,8 @@ namespace System.ServiceModel.Syndication.Tests
         internal XmlDiffNode _firstChild;
         internal XmlDiffNode _lastChild;
         internal XmlDiffNode _parent;
-        internal int _lineNumber, _linePosition;
+        internal int _lineNumber,
+            _linePosition;
         internal bool _bIgnoreValue;
         private PropertyCollection _extendedProperties;
 
@@ -1228,7 +1345,7 @@ namespace System.ServiceModel.Syndication.Tests
 
         public virtual void DeleteChild(XmlDiffNode child)
         {
-            if (child == FirstChild)//delete head
+            if (child == FirstChild) //delete head
             {
                 _firstChild = FirstChild.NextSibling;
             }
@@ -1278,7 +1395,10 @@ namespace System.ServiceModel.Syndication.Tests
             _attrC = -1;
         }
 
-        public override XmlDiffNodeType NodeType { get { return XmlDiffNodeType.Element; } }
+        public override XmlDiffNodeType NodeType
+        {
+            get { return XmlDiffNodeType.Element; }
+        }
         public string LocalName { get; }
         public string NamespaceURI { get; }
         public string Prefix { get; }
@@ -1310,8 +1430,7 @@ namespace System.ServiceModel.Syndication.Tests
                         return _current.Value;
                     }
                     _current = (XmlDiffAttribute)_current._next;
-                }
-                while (_current != LastAttribute);
+                } while (_current != LastAttribute);
             }
             return "";
         }
@@ -1328,8 +1447,7 @@ namespace System.ServiceModel.Syndication.Tests
                         return _current;
                     }
                     _current = (XmlDiffAttribute)_current._next;
-                }
-                while (_current != LastAttribute);
+                } while (_current != LastAttribute);
             }
             return null;
         }
@@ -1355,7 +1473,7 @@ namespace System.ServiceModel.Syndication.Tests
 
         internal void DeleteAttribute(XmlDiffAttribute attr)
         {
-            if (attr == FirstAttribute)//delete head
+            if (attr == FirstAttribute) //delete head
             {
                 if (attr == LastAttribute) //tail being deleted
                 {
@@ -1452,7 +1570,11 @@ namespace System.ServiceModel.Syndication.Tests
                     XmlDiffNode _current = _firstChild;
                     do
                     {
-                        if (_current is XmlDiffCharacterData && _current.NodeType != XmlDiffNodeType.Comment && _current.NodeType != XmlDiffNodeType.PI)
+                        if (
+                            _current is XmlDiffCharacterData
+                            && _current.NodeType != XmlDiffNodeType.Comment
+                            && _current.NodeType != XmlDiffNodeType.PI
+                        )
                         {
                             _bldr.Append(((XmlDiffCharacterData)_current).Value);
                         }
@@ -1461,8 +1583,7 @@ namespace System.ServiceModel.Syndication.Tests
                             _bldr.Append(((XmlDiffElement)_current).Value);
                         }
                         _current = _current._next;
-                    }
-                    while (_current != null);
+                    } while (_current != null);
                     return _bldr.ToString();
                 }
                 return "";
@@ -1472,7 +1593,8 @@ namespace System.ServiceModel.Syndication.Tests
 
     public class XmlDiffEmptyElement : XmlDiffElement
     {
-        public XmlDiffEmptyElement(string localName, string prefix, string ns) : base(localName, prefix, ns) { }
+        public XmlDiffEmptyElement(string localName, string prefix, string ns)
+            : base(localName, prefix, ns) { }
     }
 
     public class XmlDiffAttribute : XmlDiffNode
@@ -1480,7 +1602,8 @@ namespace System.ServiceModel.Syndication.Tests
         internal XmlDiffElement _ownerElement;
         private readonly string _value;
 
-        public XmlDiffAttribute(string localName, string prefix, string ns, string value) : base()
+        public XmlDiffAttribute(string localName, string prefix, string ns, string value)
+            : base()
         {
             LocalName = localName;
             Prefix = prefix;
@@ -1511,7 +1634,9 @@ namespace System.ServiceModel.Syndication.Tests
                 {
                     try
                     {
-                        string localName = XmlConvert.VerifyNCName(value.Substring(indexOfColon + 1));
+                        string localName = XmlConvert.VerifyNCName(
+                            value.Substring(indexOfColon + 1)
+                        );
                         ValueAsQName = new XmlQualifiedName(localName, ns);
                     }
                     catch (XmlException)
@@ -1551,7 +1676,8 @@ namespace System.ServiceModel.Syndication.Tests
 
     public class XmlDiffEntityReference : XmlDiffNode
     {
-        public XmlDiffEntityReference(string name) : base()
+        public XmlDiffEntityReference(string name)
+            : base()
         {
             Name = name;
         }
@@ -1578,7 +1704,8 @@ namespace System.ServiceModel.Syndication.Tests
         private string _value;
         private XmlDiffNodeType _nodetype;
 
-        public XmlDiffCharacterData(string value, XmlDiffNodeType nt, bool NormalizeNewline) : base()
+        public XmlDiffCharacterData(string value, XmlDiffNodeType nt, bool NormalizeNewline)
+            : base()
         {
             _value = value;
             if (NormalizeNewline)
@@ -1622,7 +1749,8 @@ namespace System.ServiceModel.Syndication.Tests
 
     public class XmlDiffProcessingInstruction : XmlDiffCharacterData
     {
-        public XmlDiffProcessingInstruction(string name, string value) : base(value, XmlDiffNodeType.PI, false)
+        public XmlDiffProcessingInstruction(string name, string value)
+            : base(value, XmlDiffNodeType.PI, false)
         {
             Name = name;
         }

@@ -27,17 +27,33 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync().ConfigureAwait(true);
-            await TestServices.SolutionExplorer.CreateSolutionAsync(nameof(CSharpNewDocumentFormatting), HangMitigatingCancellationToken);
-            await TestServices.Workspace.SetFullSolutionAnalysisAsync(false, HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.CreateSolutionAsync(
+                nameof(CSharpNewDocumentFormatting),
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Workspace.SetFullSolutionAnalysisAsync(
+                false,
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1411721")]
         public async Task CreateLegacyProjectWithFileScopedNamespaces()
         {
-            await TestServices.Workspace.SetFileScopedNamespaceAsync(true, HangMitigatingCancellationToken);
+            await TestServices.Workspace.SetFileScopedNamespaceAsync(
+                true,
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices.SolutionExplorer.AddProjectAsync("TestProj", WellKnownProjectTemplates.ConsoleApplication, LanguageNames.CSharp, HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.RestoreNuGetPackagesAsync(HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.AddProjectAsync(
+                "TestProj",
+                WellKnownProjectTemplates.ConsoleApplication,
+                LanguageNames.CSharp,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.SolutionExplorer.RestoreNuGetPackagesAsync(
+                HangMitigatingCancellationToken
+            );
 
             await VerifyNoErrorsAsync(HangMitigatingCancellationToken);
         }
@@ -46,11 +62,24 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1411721")]
         public async Task CreateSDKProjectWithFileScopedNamespaces()
         {
-            await TestServices.Workspace.SetFileScopedNamespaceAsync(true, HangMitigatingCancellationToken);
+            await TestServices.Workspace.SetFileScopedNamespaceAsync(
+                true,
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices.SolutionExplorer.AddProjectAsync("TestProj", WellKnownProjectTemplates.CSharpNetCoreConsoleApplication, LanguageNames.CSharp, HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.RestoreNuGetPackagesAsync(HangMitigatingCancellationToken);
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(new[] { FeatureAttribute.Workspace }, HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.AddProjectAsync(
+                "TestProj",
+                WellKnownProjectTemplates.CSharpNetCoreConsoleApplication,
+                LanguageNames.CSharp,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.SolutionExplorer.RestoreNuGetPackagesAsync(
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                new[] { FeatureAttribute.Workspace },
+                HangMitigatingCancellationToken
+            );
 
             await VerifyNoErrorsAsync(HangMitigatingCancellationToken);
         }
@@ -59,21 +88,39 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [WorkItem("https://github.com/dotnet/roslyn/issues/60449")]
         public async Task CreateSDKProjectWithBlockScopedNamespacesFromEditorConfig()
         {
-            await TestServices.Workspace.SetFileScopedNamespaceAsync(true, HangMitigatingCancellationToken);
+            await TestServices.Workspace.SetFileScopedNamespaceAsync(
+                true,
+                HangMitigatingCancellationToken
+            );
 
-            var (solutionDirectory, _, _) = await TestServices.SolutionExplorer.GetSolutionInfoAsync(HangMitigatingCancellationToken);
+            var (solutionDirectory, _, _) =
+                await TestServices.SolutionExplorer.GetSolutionInfoAsync(
+                    HangMitigatingCancellationToken
+                );
             var editorConfigFilePath = Path.Combine(solutionDirectory, ".editorconfig");
-            File.WriteAllText(editorConfigFilePath,
-@"
+            File.WriteAllText(
+                editorConfigFilePath,
+                @"
 root = true
 
 [*.cs]
 csharp_style_namespace_declarations = block_scoped
-");
+"
+            );
 
-            await TestServices.SolutionExplorer.AddProjectAsync("TestProj", WellKnownProjectTemplates.CSharpNetCoreClassLibrary, LanguageNames.CSharp, HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.RestoreNuGetPackagesAsync(HangMitigatingCancellationToken);
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(new[] { FeatureAttribute.Workspace }, HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.AddProjectAsync(
+                "TestProj",
+                WellKnownProjectTemplates.CSharpNetCoreClassLibrary,
+                LanguageNames.CSharp,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.SolutionExplorer.RestoreNuGetPackagesAsync(
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                new[] { FeatureAttribute.Workspace },
+                HangMitigatingCancellationToken
+            );
 
             await VerifyNoErrorsAsync(HangMitigatingCancellationToken);
 
@@ -84,26 +131,46 @@ csharp_style_namespace_declarations = block_scoped
         [WorkItem("https://github.com/dotnet/roslyn/issues/60449")]
         public async Task CreateSDKProjectWithBlockScopedNamespacesFromIrrelevantEditorConfigH()
         {
-            await TestServices.Workspace.SetFileScopedNamespaceAsync(true, HangMitigatingCancellationToken);
+            await TestServices.Workspace.SetFileScopedNamespaceAsync(
+                true,
+                HangMitigatingCancellationToken
+            );
 
-            var (solutionDirectory, _, _) = await TestServices.SolutionExplorer.GetSolutionInfoAsync(HangMitigatingCancellationToken);
+            var (solutionDirectory, _, _) =
+                await TestServices.SolutionExplorer.GetSolutionInfoAsync(
+                    HangMitigatingCancellationToken
+                );
             var editorConfigFilePath = Path.Combine(solutionDirectory, ".editorconfig");
-            File.WriteAllText(editorConfigFilePath,
-@"
+            File.WriteAllText(
+                editorConfigFilePath,
+                @"
 root = true
-");
+"
+            );
 
             // This editor config file should be ignored
             editorConfigFilePath = Path.Combine(solutionDirectory, "..", ".editorconfig");
-            File.WriteAllText(editorConfigFilePath,
-@"
+            File.WriteAllText(
+                editorConfigFilePath,
+                @"
 [*.cs]
 csharp_style_namespace_declarations = block_scoped
-");
+"
+            );
 
-            await TestServices.SolutionExplorer.AddProjectAsync("TestProj", WellKnownProjectTemplates.CSharpNetCoreClassLibrary, LanguageNames.CSharp, HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.RestoreNuGetPackagesAsync(HangMitigatingCancellationToken);
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(new[] { FeatureAttribute.Workspace }, HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.AddProjectAsync(
+                "TestProj",
+                WellKnownProjectTemplates.CSharpNetCoreClassLibrary,
+                LanguageNames.CSharp,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.SolutionExplorer.RestoreNuGetPackagesAsync(
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                new[] { FeatureAttribute.Workspace },
+                HangMitigatingCancellationToken
+            );
 
             await VerifyNoErrorsAsync(HangMitigatingCancellationToken);
 
@@ -114,21 +181,39 @@ csharp_style_namespace_declarations = block_scoped
         [WorkItem("https://github.com/dotnet/roslyn/issues/60449")]
         public async Task CreateSDKProjectWithFileScopedNamespacesFromEditorConfig()
         {
-            await TestServices.Workspace.SetFileScopedNamespaceAsync(false, HangMitigatingCancellationToken);
+            await TestServices.Workspace.SetFileScopedNamespaceAsync(
+                false,
+                HangMitigatingCancellationToken
+            );
 
-            var (solutionDirectory, _, _) = await TestServices.SolutionExplorer.GetSolutionInfoAsync(HangMitigatingCancellationToken);
+            var (solutionDirectory, _, _) =
+                await TestServices.SolutionExplorer.GetSolutionInfoAsync(
+                    HangMitigatingCancellationToken
+                );
             var editorConfigFilePath = Path.Combine(solutionDirectory, ".editorconfig");
-            File.WriteAllText(editorConfigFilePath,
-@"
+            File.WriteAllText(
+                editorConfigFilePath,
+                @"
 root = true
 
 [*.cs]
 csharp_style_namespace_declarations = file_scoped
-");
+"
+            );
 
-            await TestServices.SolutionExplorer.AddProjectAsync("TestProj", WellKnownProjectTemplates.CSharpNetCoreClassLibrary, LanguageNames.CSharp, HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.RestoreNuGetPackagesAsync(HangMitigatingCancellationToken);
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(new[] { FeatureAttribute.Workspace }, HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.AddProjectAsync(
+                "TestProj",
+                WellKnownProjectTemplates.CSharpNetCoreClassLibrary,
+                LanguageNames.CSharp,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.SolutionExplorer.RestoreNuGetPackagesAsync(
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                new[] { FeatureAttribute.Workspace },
+                HangMitigatingCancellationToken
+            );
 
             await VerifyNoErrorsAsync(HangMitigatingCancellationToken);
 
@@ -138,11 +223,22 @@ csharp_style_namespace_declarations = file_scoped
         private async Task VerifyNoErrorsAsync(CancellationToken cancellationToken)
         {
             await TestServices.ErrorList.ShowErrorListAsync(cancellationToken);
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(new[] { FeatureAttribute.Workspace, FeatureAttribute.SolutionCrawlerLegacy, FeatureAttribute.DiagnosticService, FeatureAttribute.ErrorSquiggles, FeatureAttribute.ErrorList }, cancellationToken);
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                new[]
+                {
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawlerLegacy,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.ErrorSquiggles,
+                    FeatureAttribute.ErrorList,
+                },
+                cancellationToken
+            );
             var actualContents = await TestServices.ErrorList.GetErrorsAsync(cancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join<string>(Environment.NewLine, Array.Empty<string>()),
-                string.Join<string>(Environment.NewLine, actualContents));
+                string.Join<string>(Environment.NewLine, actualContents)
+            );
         }
     }
 }

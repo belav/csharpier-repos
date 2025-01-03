@@ -107,8 +107,7 @@ namespace System.Data.Objects
                     // If there is only a single Include path with a single property,
                     // then simply use the property name as the cache key rather than
                     // creating any new strings.
-                    if (_spanList.Count == 1 &&
-                       _spanList[0].Navigations.Count == 1)
+                    if (_spanList.Count == 1 && _spanList[0].Navigations.Count == 1)
                     {
                         _cacheKey = _spanList[0].Navigations[0];
                     }
@@ -148,9 +147,12 @@ namespace System.Data.Objects
             EntityUtil.CheckStringArgument(path, "path");
             if (path.Trim().Length == 0)
             {
-                throw new ArgumentException(System.Data.Entity.Strings.ObjectQuery_Span_WhiteSpacePath, "path");
+                throw new ArgumentException(
+                    System.Data.Entity.Strings.ObjectQuery_Span_WhiteSpacePath,
+                    "path"
+                );
             }
-            
+
             SpanPath spanPath = new SpanPath(ParsePath(path));
             AddSpanPath(spanPath);
             _cacheKey = null;
@@ -188,10 +190,9 @@ namespace System.Data.Objects
         /// <param name="spanPath"></param>
         private bool ValidateSpanPath(SpanPath spanPath)
         {
-
             // Check for dupliacte entries
             for (int i = 0; i < _spanList.Count; i++)
-            { 
+            {
                 // make sure spanPath is not a sub-path of anything already in the list
                 if (spanPath.IsSubPath(_spanList[i]))
                 {
@@ -242,7 +243,10 @@ namespace System.Data.Objects
 
                 for (int i = 0; i < Navigations.Count; i++)
                 {
-                    if (!Navigations[i].Equals(rhs.Navigations[i], StringComparison.OrdinalIgnoreCase))
+                    if (
+                        !Navigations[i]
+                            .Equals(rhs.Navigations[i], StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         return false;
                     }
@@ -254,7 +258,12 @@ namespace System.Data.Objects
 
         private static List<string> ParsePath(string path)
         {
-            List<string> navigations = MultipartIdentifier.ParseMultipartIdentifier(path, "[", "]", '.');
+            List<string> navigations = MultipartIdentifier.ParseMultipartIdentifier(
+                path,
+                "[",
+                "]",
+                '.'
+            );
 
             for (int i = navigations.Count - 1; i >= 0; i--)
             {
@@ -271,6 +280,5 @@ namespace System.Data.Objects
             Debug.Assert(navigations.Count > 0, "Empty path found");
             return navigations;
         }
-    
     }
 }

@@ -14,77 +14,72 @@ namespace System.ServiceModel
         BasicHttpSecurity basicHttpSecurity;
 
         public BasicHttpsSecurity()
-            : this(DefaultMode, new HttpTransportSecurity(), new BasicHttpMessageSecurity())
-        {
-        }
+            : this(DefaultMode, new HttpTransportSecurity(), new BasicHttpMessageSecurity()) { }
 
-        BasicHttpsSecurity(BasicHttpsSecurityMode mode, HttpTransportSecurity transportSecurity, BasicHttpMessageSecurity messageSecurity)
+        BasicHttpsSecurity(
+            BasicHttpsSecurityMode mode,
+            HttpTransportSecurity transportSecurity,
+            BasicHttpMessageSecurity messageSecurity
+        )
         {
             if (!BasicHttpsSecurityModeHelper.IsDefined(mode))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("mode"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("mode")
+                );
             }
-            HttpTransportSecurity httpTransportSecurity = transportSecurity == null ? new HttpTransportSecurity() : transportSecurity;
-            BasicHttpMessageSecurity httpMessageSecurity = messageSecurity == null ? new BasicHttpMessageSecurity() : messageSecurity;
-            BasicHttpSecurityMode basicHttpSecurityMode = BasicHttpsSecurityModeHelper.ToBasicHttpSecurityMode(mode);
+            HttpTransportSecurity httpTransportSecurity =
+                transportSecurity == null ? new HttpTransportSecurity() : transportSecurity;
+            BasicHttpMessageSecurity httpMessageSecurity =
+                messageSecurity == null ? new BasicHttpMessageSecurity() : messageSecurity;
+            BasicHttpSecurityMode basicHttpSecurityMode =
+                BasicHttpsSecurityModeHelper.ToBasicHttpSecurityMode(mode);
             this.basicHttpSecurity = new BasicHttpSecurity()
             {
                 Mode = basicHttpSecurityMode,
                 Transport = httpTransportSecurity,
-                Message = httpMessageSecurity
+                Message = httpMessageSecurity,
             };
         }
 
         public BasicHttpsSecurityMode Mode
         {
-            get 
-            { 
-                return BasicHttpsSecurityModeHelper.ToBasicHttpsSecurityMode(this.basicHttpSecurity.Mode); 
+            get
+            {
+                return BasicHttpsSecurityModeHelper.ToBasicHttpsSecurityMode(
+                    this.basicHttpSecurity.Mode
+                );
             }
-
             set
             {
                 if (!BasicHttpsSecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
-                
-                this.basicHttpSecurity.Mode = BasicHttpsSecurityModeHelper.ToBasicHttpSecurityMode(value);
-             }
+
+                this.basicHttpSecurity.Mode = BasicHttpsSecurityModeHelper.ToBasicHttpSecurityMode(
+                    value
+                );
+            }
         }
 
         public HttpTransportSecurity Transport
         {
-            get 
-            { 
-                return this.basicHttpSecurity.Transport; 
-            }
-
-            set
-            {
-                this.basicHttpSecurity.Transport = value;
-            }
+            get { return this.basicHttpSecurity.Transport; }
+            set { this.basicHttpSecurity.Transport = value; }
         }
 
         public BasicHttpMessageSecurity Message
         {
-            get 
-            { 
-                return this.basicHttpSecurity.Message; 
-            }
-
-            set
-            {
-                this.basicHttpSecurity.Message = value;
-            }
+            get { return this.basicHttpSecurity.Message; }
+            set { this.basicHttpSecurity.Message = value; }
         }
 
         internal BasicHttpSecurity BasicHttpSecurity
         {
-            get
-            {
-                return this.basicHttpSecurity;
-            }
+            get { return this.basicHttpSecurity; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -101,38 +96,51 @@ namespace System.ServiceModel
 
         internal static BasicHttpSecurity ToBasicHttpSecurity(BasicHttpsSecurity basicHttpsSecurity)
         {
-            Fx.Assert(basicHttpsSecurity != null, "Cannot pass in a null value for basicHttpsSecurity");
-            
+            Fx.Assert(
+                basicHttpsSecurity != null,
+                "Cannot pass in a null value for basicHttpsSecurity"
+            );
+
             BasicHttpSecurity basicHttpSecurity = new BasicHttpSecurity()
             {
                 Message = basicHttpsSecurity.Message,
                 Transport = basicHttpsSecurity.Transport,
-                Mode = BasicHttpsSecurityModeHelper.ToBasicHttpSecurityMode(basicHttpsSecurity.Mode)
+                Mode = BasicHttpsSecurityModeHelper.ToBasicHttpSecurityMode(
+                    basicHttpsSecurity.Mode
+                ),
             };
-            
+
             return basicHttpSecurity;
         }
 
         internal static BasicHttpsSecurity ToBasicHttpsSecurity(BasicHttpSecurity basicHttpSecurity)
         {
             Fx.Assert(basicHttpSecurity != null, "basicHttpSecurity cannot be null");
-            
+
             BasicHttpsSecurity basicHttpsSecurity = new BasicHttpsSecurity()
             {
                 Message = basicHttpSecurity.Message,
                 Transport = basicHttpSecurity.Transport,
-                Mode = BasicHttpsSecurityModeHelper.ToBasicHttpsSecurityMode(basicHttpSecurity.Mode)
+                Mode = BasicHttpsSecurityModeHelper.ToBasicHttpsSecurityMode(
+                    basicHttpSecurity.Mode
+                ),
             };
-           
+
             return basicHttpsSecurity;
         }
 
-        internal static void EnableTransportSecurity(HttpsTransportBindingElement https, HttpTransportSecurity transportSecurity)
+        internal static void EnableTransportSecurity(
+            HttpsTransportBindingElement https,
+            HttpTransportSecurity transportSecurity
+        )
         {
             BasicHttpSecurity.EnableTransportSecurity(https, transportSecurity);
         }
 
-        internal static bool IsEnabledTransportAuthentication(HttpTransportBindingElement http, HttpTransportSecurity transportSecurity)
+        internal static bool IsEnabledTransportAuthentication(
+            HttpTransportBindingElement http,
+            HttpTransportSecurity transportSecurity
+        )
         {
             return BasicHttpSecurity.IsEnabledTransportAuthentication(http, transportSecurity);
         }

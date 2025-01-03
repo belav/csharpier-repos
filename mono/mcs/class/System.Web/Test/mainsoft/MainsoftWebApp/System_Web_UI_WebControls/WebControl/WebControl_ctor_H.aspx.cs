@@ -30,68 +30,71 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class WebControl_ctor_H
-        : GHTBaseWeb {
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) {
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() {    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
-
-        int m_ctrlCounter = 0;
-        private void Page_Load(object sender, System.EventArgs e) {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
-            GHTTestBegin(frm);
-			int num1 = 1;
-			do
-			{
-				if (!((num1 == 0x4f) | (num1 == 0x49)))
-				{
-					HtmlTextWriterTag tag1 = (HtmlTextWriterTag) num1;
-					this.Test(ref tag1);
-					num1 = (int) tag1;
-				}
-				num1++;
-			}
-			while (num1 <= 0x60);
-			GHTTestEnd();
+    public class WebControl_ctor_H : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
         }
 
-		private void Test(ref HtmlTextWriterTag testTag)
-		{
-			try
-			{
-				this.GHTSubTestBegin("Tag = " + ((HtmlTextWriterTag) testTag).ToString());
-				WebControl control1 = new WebControl(testTag);
-				this.m_ctrlCounter++;
-				control1.ID = "ctrl_" + this.m_ctrlCounter.ToString();
-				base.GHTActiveSubTest.Controls.Add(control1);
-			}
-			catch (Exception exception2)
-			{
-				// ProjectData.SetProjectError(exception2);
-				Exception exception1 = exception2;
-				this.GHTSubTestUnexpectedExceptionCaught(exception1);
-				// ProjectData.ClearProjectError();
-			}
-			this.GHTSubTestEnd();
-		}
- 	}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+
+        int m_ctrlCounter = 0;
+
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(frm);
+            int num1 = 1;
+            do
+            {
+                if (!((num1 == 0x4f) | (num1 == 0x49)))
+                {
+                    HtmlTextWriterTag tag1 = (HtmlTextWriterTag)num1;
+                    this.Test(ref tag1);
+                    num1 = (int)tag1;
+                }
+                num1++;
+            } while (num1 <= 0x60);
+            GHTTestEnd();
+        }
+
+        private void Test(ref HtmlTextWriterTag testTag)
+        {
+            try
+            {
+                this.GHTSubTestBegin("Tag = " + ((HtmlTextWriterTag)testTag).ToString());
+                WebControl control1 = new WebControl(testTag);
+                this.m_ctrlCounter++;
+                control1.ID = "ctrl_" + this.m_ctrlCounter.ToString();
+                base.GHTActiveSubTest.Controls.Add(control1);
+            }
+            catch (Exception exception2)
+            {
+                // ProjectData.SetProjectError(exception2);
+                Exception exception1 = exception2;
+                this.GHTSubTestUnexpectedExceptionCaught(exception1);
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTSubTestEnd();
+        }
+    }
 }

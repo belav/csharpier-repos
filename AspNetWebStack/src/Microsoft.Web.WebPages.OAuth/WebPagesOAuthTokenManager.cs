@@ -20,7 +20,9 @@ namespace Microsoft.Web.WebPages.OAuth
             var provider = Membership.Provider as ExtendedMembershipProvider;
             if (provider == null)
             {
-                throw new InvalidOperationException(OAuthResources.Security_NoExtendedMembershipProvider);
+                throw new InvalidOperationException(
+                    OAuthResources.Security_NoExtendedMembershipProvider
+                );
             }
             return provider;
         }
@@ -36,7 +38,10 @@ namespace Microsoft.Web.WebPages.OAuth
         {
             if (String.IsNullOrEmpty(token))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "token");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "token"
+                );
             }
 
             return VerifyProvider().GetOAuthTokenSecret(token);
@@ -48,24 +53,42 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <param name="requestToken">The request token.</param>
         /// <param name="accessToken">The access token.</param>
         /// <param name="accessTokenSecret">The access token secret.</param>
-        public void ReplaceRequestTokenWithAccessToken(string requestToken, string accessToken, string accessTokenSecret)
+        public void ReplaceRequestTokenWithAccessToken(
+            string requestToken,
+            string accessToken,
+            string accessTokenSecret
+        )
         {
             if (String.IsNullOrEmpty(requestToken))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "requestToken");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "requestToken"
+                );
             }
 
             if (String.IsNullOrEmpty(accessToken))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "accessToken");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "accessToken"
+                );
             }
 
             if (String.IsNullOrEmpty(accessTokenSecret))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "accessTokenSecret");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "accessTokenSecret"
+                );
             }
 
-            VerifyProvider().ReplaceOAuthRequestTokenWithAccessToken(requestToken, accessToken, accessTokenSecret);
+            VerifyProvider()
+                .ReplaceOAuthRequestTokenWithAccessToken(
+                    requestToken,
+                    accessToken,
+                    accessTokenSecret
+                );
         }
 
         /// <summary>
@@ -77,7 +100,10 @@ namespace Microsoft.Web.WebPages.OAuth
         {
             if (String.IsNullOrEmpty(requestToken))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "requestToken");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "requestToken"
+                );
             }
 
             VerifyProvider().StoreOAuthRequestToken(requestToken, requestTokenSecret);

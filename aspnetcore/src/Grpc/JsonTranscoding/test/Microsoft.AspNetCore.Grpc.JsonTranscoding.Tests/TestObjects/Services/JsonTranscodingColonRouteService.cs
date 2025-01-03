@@ -5,6 +5,5 @@ using Transcoding;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests.TestObjects;
 
-public class JsonTranscodingColonRouteService : JsonTranscodingColonRoute.JsonTranscodingColonRouteBase
-{
-}
+public class JsonTranscodingColonRouteService
+    : JsonTranscodingColonRoute.JsonTranscodingColonRouteBase { }

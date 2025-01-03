@@ -20,13 +20,13 @@ public class NamedPipesTransportBenchmark
     private const int _parallelCount = 10;
     private const int _parallelCallCount = 1000;
     private const string _plaintextExpectedResponse =
-        "HTTP/1.1 200 OK\r\n" +
-        "Content-Length: 13\r\n" +
-        "Date: Fri, 02 Mar 2018 18:37:05 GMT\r\n" +
-        "Content-Type: text/plain\r\n" +
-        "Server: Kestrel\r\n" +
-        "\r\n" +
-        "Hello, World!";
+        "HTTP/1.1 200 OK\r\n"
+        + "Content-Length: 13\r\n"
+        + "Date: Fri, 02 Mar 2018 18:37:05 GMT\r\n"
+        + "Content-Type: text/plain\r\n"
+        + "Server: Kestrel\r\n"
+        + "\r\n"
+        + "Hello, World!";
     private static readonly byte[] _responseBuffer = new byte[_plaintextExpectedResponse.Length];
 
     private string _pipeName;
@@ -59,7 +59,11 @@ public class NamedPipesTransportBenchmark
 
         _host.Start();
 
-        ValidateResponseAsync(RequestParsingData.PlaintextTechEmpowerRequest, _plaintextExpectedResponse).Wait();
+        ValidateResponseAsync(
+                RequestParsingData.PlaintextTechEmpowerRequest,
+                _plaintextExpectedResponse
+            )
+            .Wait();
     }
 
     private async Task ValidateResponseAsync(byte[] request, string expectedResponse)
@@ -73,13 +77,25 @@ public class NamedPipesTransportBenchmark
         var response = Encoding.ASCII.GetString(_responseBuffer);
 
         // Exclude date header since the value changes on every request
-        var expectedResponseLines = expectedResponse.Split("\r\n").Where(s => !s.StartsWith("Date:", StringComparison.Ordinal));
-        var responseLines = response.Split("\r\n").Where(s => !s.StartsWith("Date:", StringComparison.Ordinal));
+        var expectedResponseLines = expectedResponse
+            .Split("\r\n")
+            .Where(s => !s.StartsWith("Date:", StringComparison.Ordinal));
+        var responseLines = response
+            .Split("\r\n")
+            .Where(s => !s.StartsWith("Date:", StringComparison.Ordinal));
 
         if (!Enumerable.SequenceEqual(expectedResponseLines, responseLines))
         {
-            throw new InvalidOperationException(string.Join(Environment.NewLine,
-                "Invalid response", "Expected:", expectedResponse, "Actual:", response));
+            throw new InvalidOperationException(
+                string.Join(
+                    Environment.NewLine,
+                    "Invalid response",
+                    "Expected:",
+                    expectedResponse,
+                    "Actual:",
+                    response
+                )
+            );
         }
     }
 
@@ -104,15 +120,18 @@ public class NamedPipesTransportBenchmark
                     {
                         var namedPipeClient = CreateClientStream(_pipeName);
                         await namedPipeClient.ConnectAsync();
-                        await namedPipeClient.WriteAsync(RequestParsingData.PlaintextTechEmpowerRequest);
-                        await namedPipeClient.ReadAtLeastAsync(_responseBuffer, _responseBuffer.Length);
+                        await namedPipeClient.WriteAsync(
+                            RequestParsingData.PlaintextTechEmpowerRequest
+                        );
+                        await namedPipeClient.ReadAtLeastAsync(
+                            _responseBuffer,
+                            _responseBuffer.Length
+                        );
                         namedPipeClient.Dispose();
 
                         clientStreamCount++;
                     }
-                    catch (IOException)
-                    {
-                    }
+                    catch (IOException) { }
                 }
             });
         }
@@ -127,7 +146,8 @@ public class NamedPipesTransportBenchmark
             pipeName: pipeName,
             direction: PipeDirection.InOut,
             options: PipeOptions.WriteThrough | PipeOptions.Asynchronous,
-            impersonationLevel: TokenImpersonationLevel.Anonymous);
+            impersonationLevel: TokenImpersonationLevel.Anonymous
+        );
         return clientStream;
     }
 

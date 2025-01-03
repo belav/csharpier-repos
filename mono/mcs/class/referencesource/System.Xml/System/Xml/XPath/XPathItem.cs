@@ -2,17 +2,19 @@
 // <copyright file="XPathItem.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner> 
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System;
 using System.Collections;
 using System.Xml.Schema;
 
-namespace System.Xml.XPath {
+namespace System.Xml.XPath
+{
     /// <summary>
     /// Base class for XPathNavigator and XmlAtomicValue.
     /// </summary>
-    public abstract class XPathItem {
+    public abstract class XPathItem
+    {
         /// <summary>
         /// True if this item is a node, and not an atomic value.
         /// </summary>
@@ -34,8 +36,12 @@ namespace System.Xml.XPath {
         public abstract double ValueAsDouble { get; }
         public abstract int ValueAsInt { get; }
         public abstract long ValueAsLong { get; }
-        public virtual object ValueAs(Type returnType) { return ValueAs(returnType, null); }
+
+        public virtual object ValueAs(Type returnType)
+        {
+            return ValueAs(returnType, null);
+        }
+
         public abstract object ValueAs(Type returnType, IXmlNamespaceResolver nsResolver);
     }
 }
-

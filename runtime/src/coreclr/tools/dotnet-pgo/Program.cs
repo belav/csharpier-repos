@@ -19,25 +19,22 @@ using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Text.Json;
 using System.Text.Encodings.Web;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
+using ILCompiler;
+using ILCompiler.IBC;
+using ILCompiler.Reflection.ReadyToRun;
+using Internal.IL;
+using Internal.Pgo;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 using Microsoft.Diagnostics.Tools.Pgo;
 using Microsoft.Diagnostics.Tracing;
 using Microsoft.Diagnostics.Tracing.Etlx;
 using Microsoft.Diagnostics.Tracing.Parsers.Clr;
 using Microsoft.Diagnostics.Tracing.Parsers.Kernel;
-
-using ILCompiler;
-using ILCompiler.IBC;
-using ILCompiler.Reflection.ReadyToRun;
-
-using Internal.IL;
-using Internal.Pgo;
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
 
 namespace Microsoft.Diagnostics.Tools.Pgo
 {
@@ -83,14 +80,15 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 bool unusedNonLoadableModule = false;
                 type = _idParser.ResolveTypeHandle(input, ref unusedNonLoadableModule, false);
             }
-            catch
-            { }
+            catch { }
             if (type != null)
             {
                 return new TypeSystemEntityOrUnknown(type);
             }
             // Unknown type, apply unique value, but keep the upper byte zeroed so that it can be distinguished from a token
-            return new TypeSystemEntityOrUnknown(System.HashCode.Combine(input) & 0x7FFFFF | 0x800000);
+            return new TypeSystemEntityOrUnknown(
+                System.HashCode.Combine(input) & 0x7FFFFF | 0x800000
+            );
         }
 
         public TypeSystemEntityOrUnknown MethodFromLong(long input)
@@ -104,14 +102,15 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 method = _idParser.ResolveMethodID(input, out _, false);
             }
-            catch
-            { }
+            catch { }
             if (method != null)
             {
                 return new TypeSystemEntityOrUnknown(method);
             }
             // Unknown type, apply unique value, but keep the upper byte zeroed so that it can be distinguished from a token
-            return new TypeSystemEntityOrUnknown(System.HashCode.Combine(input) & 0x7FFFFF | 0x800000);
+            return new TypeSystemEntityOrUnknown(
+                System.HashCode.Combine(input) & 0x7FFFFF | 0x800000
+            );
         }
     }
 
@@ -157,15 +156,19 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         }
 
         private T Get<T>(CliOption<T> option) => _command.Result.GetValue(option);
+
         private T Get<T>(CliArgument<T> argument) => _command.Result.GetValue(argument);
+
         private bool IsSet<T>(CliOption<T> option) => _command.Result.GetResult(option) != null;
 
         private static int Main(string[] args) =>
-            new CliConfiguration(new PgoRootCommand(args)
-                .UseVersion()
-                .UseExtendedHelp(PgoRootCommand.GetExtendedHelp))
+            new CliConfiguration(
+                new PgoRootCommand(args)
+                    .UseVersion()
+                    .UseExtendedHelp(PgoRootCommand.GetExtendedHelp)
+            )
             {
-                ResponseFileTokenReplacer = Helpers.TryReadResponseFile
+                ResponseFileTokenReplacer = Helpers.TryReadResponseFile,
             }.Invoke(args);
 
         public static void PrintWarning(string warning)
@@ -202,8 +205,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             }
 
             var extension = Path.GetExtension(inputFileName);
-            if (string.Compare(extension, ".zip", StringComparison.OrdinalIgnoreCase) == 0 ||
-                string.Compare(extension, ".vspx", StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                string.Compare(extension, ".zip", StringComparison.OrdinalIgnoreCase) == 0
+                || string.Compare(extension, ".vspx", StringComparison.OrdinalIgnoreCase) == 0
+            )
             {
                 string unzipedEtlFile;
                 if (inputFileName.EndsWith(".etl.zip", StringComparison.OrdinalIgnoreCase))
@@ -216,7 +221,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 }
                 else
                 {
-                    throw new ApplicationException("File does not end with the .etl.zip file extension");
+                    throw new ApplicationException(
+                        "File does not end with the .etl.zip file extension"
+                    );
                 }
 
                 ZippedETLReader etlReader = new ZippedETLReader(inputFileName, log);
@@ -281,13 +288,26 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
             PrintDetailedMessage($"Opening {path}");
             var mibcPeReader = MIbcProfileParser.OpenMibcAsPEReader(path);
-            var tsc = new TypeRefTypeSystem.TypeRefTypeSystemContext(new PEReader[] { mibcPeReader });
+            var tsc = new TypeRefTypeSystem.TypeRefTypeSystemContext(
+                new PEReader[] { mibcPeReader }
+            );
 
             PrintDetailedMessage($"Parsing {path}");
-            var profileData = MIbcProfileParser.ParseMIbcFile(tsc, mibcPeReader, null, onlyDefinedInAssembly: null);
+            var profileData = MIbcProfileParser.ParseMIbcFile(
+                tsc,
+                mibcPeReader,
+                null,
+                onlyDefinedInAssembly: null
+            );
             PrintMibcStats(profileData);
 
-            using (FileStream outputFile = new FileStream(outputPath, FileMode.Create, FileAccess.Write))
+            using (
+                FileStream outputFile = new FileStream(
+                    outputPath,
+                    FileMode.Create,
+                    FileAccess.Write
+                )
+            )
             {
                 JsonWriterOptions options = new JsonWriterOptions();
                 options.Indented = true;
@@ -322,7 +342,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         {
                             jsonWriter.WriteStartObject();
                             jsonWriter.WriteNumber("ILOffset", schemaElem.ILOffset);
-                            jsonWriter.WriteString("InstrumentationKind", schemaElem.InstrumentationKind.ToString());
+                            jsonWriter.WriteString(
+                                "InstrumentationKind",
+                                schemaElem.InstrumentationKind.ToString()
+                            );
                             jsonWriter.WriteNumber("Other", schemaElem.Other);
                             if (schemaElem.DataHeldInDataLong)
                             {
@@ -336,7 +359,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                 }
                                 else if (schemaElem.DataObject.Length == 1)
                                 {
-                                    jsonWriter.WriteString("Data", schemaElem.DataObject.GetValue(0).ToString());
+                                    jsonWriter.WriteString(
+                                        "Data",
+                                        schemaElem.DataObject.GetValue(0).ToString()
+                                    );
                                 }
                                 else
                                 {
@@ -363,7 +389,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             return 0;
         }
 
-        private static MibcConfig ParseMibcConfigsAndMerge(TypeSystemContext tsc, params PEReader[] pEReader)
+        private static MibcConfig ParseMibcConfigsAndMerge(
+            TypeSystemContext tsc,
+            params PEReader[] pEReader
+        )
         {
             MibcConfig firstCfg = null;
             foreach (PEReader peReader in pEReader)
@@ -378,18 +407,20 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     if (firstCfg.Runtime != config.Runtime)
                     {
                         PrintMessage(
-                            $"Warning: Attempting to merge MIBCs collected on different runtimes: {firstCfg.Runtime} != {config.Runtime}");
+                            $"Warning: Attempting to merge MIBCs collected on different runtimes: {firstCfg.Runtime} != {config.Runtime}"
+                        );
                     }
                     if (firstCfg.FormatVersion != config.FormatVersion)
                     {
                         PrintMessage(
-                            $"Warning: Attempting to merge MIBCs with different format versions: {firstCfg.FormatVersion} != {config.FormatVersion}");
+                            $"Warning: Attempting to merge MIBCs with different format versions: {firstCfg.FormatVersion} != {config.FormatVersion}"
+                        );
                     }
-                    if (firstCfg.Os != config.Os ||
-                        firstCfg.Arch != config.Arch)
+                    if (firstCfg.Os != config.Os || firstCfg.Arch != config.Arch)
                     {
                         PrintMessage(
-                            $"Warning: Attempting to merge MIBCs collected on different RIDs: {firstCfg.Os}-{firstCfg.Arch} != {config.Os}-{config.Arch}");
+                            $"Warning: Attempting to merge MIBCs collected on different RIDs: {firstCfg.Os}-{firstCfg.Arch} != {config.Os}-{config.Arch}"
+                        );
                     }
                 }
             }
@@ -428,17 +459,33 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 var tsc = new TypeRefTypeSystem.TypeRefTypeSystemContext(mibcReaders);
 
-                Dictionary<MethodDesc, MethodProfileData> mergedProfileData = new Dictionary<MethodDesc, MethodProfileData>();
+                Dictionary<MethodDesc, MethodProfileData> mergedProfileData =
+                    new Dictionary<MethodDesc, MethodProfileData>();
                 for (int i = 0; i < mibcReaders.Length; i++)
                 {
                     var peReader = mibcReaders[i];
                     PrintDetailedMessage($"Merging {paths[i]}");
-                    ProfileData.MergeProfileData(mergedProfileData, MIbcProfileParser.ParseMIbcFile(tsc, peReader, assemblyNamesInBubble, onlyDefinedInAssembly: null));
+                    ProfileData.MergeProfileData(
+                        mergedProfileData,
+                        MIbcProfileParser.ParseMIbcFile(
+                            tsc,
+                            peReader,
+                            assemblyNamesInBubble,
+                            onlyDefinedInAssembly: null
+                        )
+                    );
                 }
 
                 MibcConfig mergedConfig = ParseMibcConfigsAndMerge(tsc, mibcReaders);
                 var outputFileInfo = new FileInfo(outputPath);
-                return MibcEmitter.GenerateMibcFile(mergedConfig, tsc, outputFileInfo, mergedProfileData.Values, _command.ValidateOutputFile, !Get(_command.Compressed));
+                return MibcEmitter.GenerateMibcFile(
+                    mergedConfig,
+                    tsc,
+                    outputFileInfo,
+                    mergedProfileData.Values,
+                    _command.ValidateOutputFile,
+                    !Get(_command.Compressed)
+                );
             }
             finally
             {
@@ -471,10 +518,22 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
             PEReader mibc1 = MIbcProfileParser.OpenMibcAsPEReader(file1);
             PEReader mibc2 = MIbcProfileParser.OpenMibcAsPEReader(file2);
-            var tsc = new TypeRefTypeSystem.TypeRefTypeSystemContext(new PEReader[] { mibc1, mibc2 });
+            var tsc = new TypeRefTypeSystem.TypeRefTypeSystemContext(
+                new PEReader[] { mibc1, mibc2 }
+            );
 
-            ProfileData profile1 = MIbcProfileParser.ParseMIbcFile(tsc, mibc1, null, onlyDefinedInAssembly: null);
-            ProfileData profile2 = MIbcProfileParser.ParseMIbcFile(tsc, mibc2, null, onlyDefinedInAssembly: null);
+            ProfileData profile1 = MIbcProfileParser.ParseMIbcFile(
+                tsc,
+                mibc1,
+                null,
+                onlyDefinedInAssembly: null
+            );
+            ProfileData profile2 = MIbcProfileParser.ParseMIbcFile(
+                tsc,
+                mibc2,
+                null,
+                onlyDefinedInAssembly: null
+            );
             PrintOutput($"Comparing {name1} to {name2}");
             PrintOutput($"Statistics for {name1}");
             PrintMibcStats(profile1);
@@ -489,11 +548,22 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             var profiledMethods1 = methods1.Where(m => m.SchemaData != null).ToList();
             var profiledMethods2 = methods2.Where(m => m.SchemaData != null).ToList();
 
-            PrintOutput($"# Profiled methods in {name1} not in {name2}: {profiledMethods1.Select(m => m.Method).Except(profiledMethods2.Select(m => m.Method)).Count()}");
-            PrintOutput($"# Profiled methods in {name2} not in {name1}: {profiledMethods2.Select(m => m.Method).Except(profiledMethods1.Select(m => m.Method)).Count()}");
-            PrintOutput($"# Methods with profile data in both .mibc files: {profiledMethods1.Select(m => m.Method).Intersect(profiledMethods2.Select(m => m.Method)).Count()}");
+            PrintOutput(
+                $"# Profiled methods in {name1} not in {name2}: {profiledMethods1.Select(m => m.Method).Except(profiledMethods2.Select(m => m.Method)).Count()}"
+            );
+            PrintOutput(
+                $"# Profiled methods in {name2} not in {name1}: {profiledMethods2.Select(m => m.Method).Except(profiledMethods1.Select(m => m.Method)).Count()}"
+            );
+            PrintOutput(
+                $"# Methods with profile data in both .mibc files: {profiledMethods1.Select(m => m.Method).Intersect(profiledMethods2.Select(m => m.Method)).Count()}"
+            );
             var fgMatches = new Dictionary<MethodDesc, PgoCompareMethodFlowGraph>();
-            var fgMismatches = new List<(MethodProfileData prof1, MethodProfileData prof2, List<string> mismatches)>();
+            var fgMismatches =
+                new List<(
+                    MethodProfileData prof1,
+                    MethodProfileData prof2,
+                    List<string> mismatches
+                )>();
 
             foreach (MethodProfileData prof1 in profiledMethods1)
             {
@@ -501,7 +571,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 if (prof2?.SchemaData == null)
                     continue;
 
-                PgoCompareMethodFlowGraph graph = PgoCompareMethodFlowGraph.Create(prof1, name1, prof2, name2, out var errors);
+                PgoCompareMethodFlowGraph graph = PgoCompareMethodFlowGraph.Create(
+                    prof1,
+                    name1,
+                    prof2,
+                    name2,
+                    out var errors
+                );
                 if (graph != null)
                 {
                     fgMatches.Add(prof1.Method, graph);
@@ -512,13 +588,21 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 }
             }
 
-            PrintOutput($"  Of these, {fgMatches.Count} have matching flow-graphs and the remaining {fgMismatches.Count} do not");
+            PrintOutput(
+                $"  Of these, {fgMatches.Count} have matching flow-graphs and the remaining {fgMismatches.Count} do not"
+            );
 
             if (fgMismatches.Count > 0)
             {
                 PrintOutput("");
                 PrintOutput("Methods with mismatched flow-graphs:");
-                foreach ((MethodProfileData prof1, MethodProfileData prof2, List<string> mismatches) in fgMismatches)
+                foreach (
+                    (
+                        MethodProfileData prof1,
+                        MethodProfileData prof2,
+                        List<string> mismatches
+                    ) in fgMismatches
+                )
                 {
                     PrintOutput($"{prof1.Method}");
                     foreach (string s in mismatches)
@@ -552,7 +636,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     int width = Console.WindowWidth - 10;
                     var sorted = overlaps.OrderByDescending(t => t.Overlap).ToList();
 
-                    void PrintBar(string label, ref int curIndex, Func<double, bool> include, bool forcePrint)
+                    void PrintBar(
+                        string label,
+                        ref int curIndex,
+                        Func<double, bool> include,
+                        bool forcePrint
+                    )
                     {
                         int count = 0;
                         while (curIndex < sorted.Count && include(sorted[curIndex].Overlap))
@@ -581,24 +670,51 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         if (bar == "")
                             bar = "\u258f";
 
-                        string line = FormattableString.Invariant($"{label,-maxLabelWidth} {bar} ({proportion*100:F1}%)");
+                        string line = FormattableString.Invariant(
+                            $"{label, -maxLabelWidth} {bar} ({proportion * 100:F1}%)"
+                        );
                         PrintOutput(line);
                     }
 
                     // If there are any at 100%, then print those separately
                     int curIndex = 0;
                     PrintBar("100%", ref curIndex, d => d >= (1 - 0.000000001), false);
-                    for (int proportion = 100 - bucketSize; proportion >= 0; proportion -= bucketSize)
-                        PrintBar($">{(int)proportion,2}%", ref curIndex, d => d * 100 > proportion, true);
+                    for (
+                        int proportion = 100 - bucketSize;
+                        proportion >= 0;
+                        proportion -= bucketSize
+                    )
+                        PrintBar(
+                            $">{(int)proportion, 2}%",
+                            ref curIndex,
+                            d => d * 100 > proportion,
+                            true
+                        );
                     PrintBar("0%", ref curIndex, d => true, false);
 
-                    PrintOutput(FormattableString.Invariant($"The average overlap is {sorted.Average(t => t.Overlap)*100:F2}% for the {sorted.Count} methods with matching flow graphs and profile data"));
-                    double mse = sorted.Sum(t => (100 - t.Overlap*100) * (100 - t.Overlap*100)) / sorted.Count;
+                    PrintOutput(
+                        FormattableString.Invariant(
+                            $"The average overlap is {sorted.Average(t => t.Overlap) * 100:F2}% for the {sorted.Count} methods with matching flow graphs and profile data"
+                        )
+                    );
+                    double mse =
+                        sorted.Sum(t => (100 - t.Overlap * 100) * (100 - t.Overlap * 100))
+                        / sorted.Count;
                     PrintOutput(FormattableString.Invariant($"The mean squared error is {mse:F2}"));
-                    PrintOutput(FormattableString.Invariant($"There are {sorted.Count(t => t.Overlap < 0.5)}/{sorted.Count} methods with overlaps < 50%:"));
-                    foreach (var badMethod in sorted.Where(t => t.Overlap < 0.5).OrderBy(t => t.Overlap))
+                    PrintOutput(
+                        FormattableString.Invariant(
+                            $"There are {sorted.Count(t => t.Overlap < 0.5)}/{sorted.Count} methods with overlaps < 50%:"
+                        )
+                    );
+                    foreach (
+                        var badMethod in sorted.Where(t => t.Overlap < 0.5).OrderBy(t => t.Overlap)
+                    )
                     {
-                        PrintOutput(FormattableString.Invariant($"  {badMethod.Method} ({badMethod.Overlap * 100:F2}%)"));
+                        PrintOutput(
+                            FormattableString.Invariant(
+                                $"  {badMethod.Method} ({badMethod.Overlap * 100:F2}%)"
+                            )
+                        );
                     }
                 }
 
@@ -618,7 +734,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     PrintOutput("");
                 }
 
-                var changes = new List<(MethodDesc method, int ilOffset, GetLikelyClassResult result1, GetLikelyClassResult result2)>();
+                var changes =
+                    new List<(
+                        MethodDesc method,
+                        int ilOffset,
+                        GetLikelyClassResult result1,
+                        GetLikelyClassResult result2
+                    )>();
                 int devirtToSame = 0;
                 int devirtToSameLikelihood100 = 0;
                 int devirtToSameLikelihood70 = 0;
@@ -627,9 +749,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     MethodProfileData prof1 = profile1.GetMethodProfileData(method);
                     MethodProfileData prof2 = profile2.GetMethodProfileData(method);
 
-                    List<int> typeHandleHistogramCallSites =
-                        prof1.SchemaData.Concat(prof2.SchemaData)
-                        .Where(e => e.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass || e.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes)
+                    List<int> typeHandleHistogramCallSites = prof1
+                        .SchemaData.Concat(prof2.SchemaData)
+                        .Where(e =>
+                            e.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass
+                            || e.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
+                        )
                         .Select(e => e.ILOffset)
                         .Distinct()
                         .ToList();
@@ -638,24 +763,49 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     {
                         GetLikelyClassResult result1 = GetLikelyClass(prof1.SchemaData, callsite);
                         GetLikelyClassResult result2 = GetLikelyClass(prof2.SchemaData, callsite);
-                        if (result1.Devirtualizes != result2.Devirtualizes || (result1.Devirtualizes && result2.Devirtualizes && result1.Type != result2.Type))
+                        if (
+                            result1.Devirtualizes != result2.Devirtualizes
+                            || (
+                                result1.Devirtualizes
+                                && result2.Devirtualizes
+                                && result1.Type != result2.Type
+                            )
+                        )
                             changes.Add((prof1.Method, callsite, result1, result2));
 
-                        if (result1.Devirtualizes && result2.Devirtualizes && result1.Type == result2.Type)
+                        if (
+                            result1.Devirtualizes
+                            && result2.Devirtualizes
+                            && result1.Type == result2.Type
+                        )
                         {
                             devirtToSame++;
-                            devirtToSameLikelihood100 += result1.Likelihood == 100 && result2.Likelihood == 100 ? 1 : 0;
-                            devirtToSameLikelihood70 += result1.Likelihood >= 70 && result2.Likelihood >= 70 ? 1 : 0;
+                            devirtToSameLikelihood100 +=
+                                result1.Likelihood == 100 && result2.Likelihood == 100 ? 1 : 0;
+                            devirtToSameLikelihood70 +=
+                                result1.Likelihood >= 70 && result2.Likelihood >= 70 ? 1 : 0;
                         }
                     }
                 }
 
-                PrintOutput($"There are {changes.Count(t => t.result1.Devirtualizes && !t.result2.Devirtualizes)} sites that devirtualize with {name1} but not with {name2}");
-                PrintOutput($"There are {changes.Count(t => !t.result1.Devirtualizes && t.result2.Devirtualizes)} sites that do not devirtualize with {name1} but do with {name2}");
-                PrintOutput($"There are {changes.Count(t => t.result1.Devirtualizes && t.result2.Devirtualizes && t.result1.Type != t.result2.Type)} sites that change devirtualized type");
-                PrintOutput($"There are {devirtToSame} sites that devirtualize to the same type before and after");
-                PrintOutput($"  Of these, {devirtToSameLikelihood100} have a likelihood of 100 in both .mibc files");
-                PrintOutput($"  and {devirtToSameLikelihood70} have a likelihood >= 70 in both .mibc files");
+                PrintOutput(
+                    $"There are {changes.Count(t => t.result1.Devirtualizes && !t.result2.Devirtualizes)} sites that devirtualize with {name1} but not with {name2}"
+                );
+                PrintOutput(
+                    $"There are {changes.Count(t => !t.result1.Devirtualizes && t.result2.Devirtualizes)} sites that do not devirtualize with {name1} but do with {name2}"
+                );
+                PrintOutput(
+                    $"There are {changes.Count(t => t.result1.Devirtualizes && t.result2.Devirtualizes && t.result1.Type != t.result2.Type)} sites that change devirtualized type"
+                );
+                PrintOutput(
+                    $"There are {devirtToSame} sites that devirtualize to the same type before and after"
+                );
+                PrintOutput(
+                    $"  Of these, {devirtToSameLikelihood100} have a likelihood of 100 in both .mibc files"
+                );
+                PrintOutput(
+                    $"  and {devirtToSameLikelihood70} have a likelihood >= 70 in both .mibc files"
+                );
 
                 foreach (var group in changes.GroupBy(g => g.method))
                 {
@@ -670,7 +820,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             return $"(null)";
                         }
 
-                        PrintOutput($"    At +{change.ilOffset:x}: {FormatDevirt(change.result1)} vs {FormatDevirt(change.result2)}");
+                        PrintOutput(
+                            $"    At +{change.ilOffset:x}: {FormatDevirt(change.result1)} vs {FormatDevirt(change.result2)}"
+                        );
                     }
                 }
 
@@ -682,8 +834,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     if (dumpWorstOverlapGraphs == -1)
                     {
                         // Take all with less than 0.5 overlap in order.
-                        toDump =
-                            blockOverlaps
+                        toDump = blockOverlaps
                             .Concat(edgeOverlaps)
                             .OrderBy(t => t.Overlap)
                             .TakeWhile(t => t.Overlap < 0.5)
@@ -693,8 +844,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     else
                     {
                         // Take the first N methods ordered by min(blockOverlap, edgeOverlap).
-                        toDump =
-                            blockOverlaps
+                        toDump = blockOverlaps
                             .Concat(edgeOverlaps)
                             .GroupBy(t => t.Method)
                             .Select(g => (Method: g.Key, Overlap: g.Select(t => t.Overlap).Min()))
@@ -710,22 +860,34 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         string title = $"Flowgraph for {method}\\n{name1} vs {name2}";
                         if (fg.ProfilesHadBasicBlocks)
                         {
-                            title += $"\\nBasic block counts: {fg.TotalBlockCount1} vs {fg.TotalEdgeCount2}";
-                            title += $"\\nBasic block count overlap: {fg.ComputeBlockOverlap() * 100:F2}%";
+                            title +=
+                                $"\\nBasic block counts: {fg.TotalBlockCount1} vs {fg.TotalEdgeCount2}";
+                            title +=
+                                $"\\nBasic block count overlap: {fg.ComputeBlockOverlap() * 100:F2}%";
                         }
                         if (fg.ProfilesHadEdges)
                         {
-                            title += $"\\nEdge counts: {fg.TotalEdgeCount1} vs {fg.TotalEdgeCount2}";
+                            title +=
+                                $"\\nEdge counts: {fg.TotalEdgeCount1} vs {fg.TotalEdgeCount2}";
                             title += $"\\nEdge count overlap: {fg.ComputeEdgeOverlap() * 100:F2}%";
                         }
 
                         string dot = fg.Dump(title);
 
-                        string fileName = DebugNameFormatter.Instance.FormatName(method.OwningType, DebugNameFormatter.FormatOptions.NamespaceQualify) + "." + method.DiagnosticName;
+                        string fileName =
+                            DebugNameFormatter.Instance.FormatName(
+                                method.OwningType,
+                                DebugNameFormatter.FormatOptions.NamespaceQualify
+                            )
+                            + "."
+                            + method.DiagnosticName;
                         foreach (char c in Path.GetInvalidFileNameChars())
                             fileName = fileName.Replace(c, '_');
 
-                        File.WriteAllText(Path.Combine(dumpWorstOverlapGraphsTo, fileName + ".dot"), dot);
+                        File.WriteAllText(
+                            Path.Combine(dumpWorstOverlapGraphsTo, fileName + ".dot"),
+                            dot
+                        );
                     }
                 }
             }
@@ -747,11 +909,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 return;
 
             int[] rows = new int[maxLikelyClasses + 1];
-            foreach (var item in callSites
-                .GroupBy(k => k > maxLikelyClasses ? maxLikelyClasses : k)
-                .OrderBy(d => d.Key)
-                .Select(d => new { Row = d.Key, Count = d.Count() })
-                .ToArray())
+            foreach (
+                var item in callSites
+                    .GroupBy(k => k > maxLikelyClasses ? maxLikelyClasses : k)
+                    .OrderBy(d => d.Key)
+                    .Select(d => new { Row = d.Key, Count = d.Count() })
+                    .ToArray()
+            )
             {
                 rows[item.Row] = item.Count;
             }
@@ -769,11 +933,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 int shareWidth = (int)(Math.Round(share * tableWidth));
                 bool lastRow = (i == rows.Length - 1);
 
-                Console.Write($"        {(lastRow ? "\u2265" : " ")}{i,2}: [");
+                Console.Write($"        {(lastRow ? "\u2265" : " ")}{i, 2}: [");
                 Console.Write(new string('#', shareWidth));
                 Console.Write(new string('.', tableWidth - shareWidth));
                 Console.Write("] ");
-                Console.Write($"{share * 100.0,4:F1}%");
+                Console.Write($"{share * 100.0, 4:F1}%");
                 Console.Write($" ({rows[i]})");
 
                 if (i == 0)
@@ -817,7 +981,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                 int shareWidth = (int)Math.Round((double)count / likelihoods.Length * tableWidth);
                 Console.Write(i == 0 ? "  [" : "  ("); // inclusive for [0..
-                Console.Write($"{i * columnWidth,2}-{i * columnWidth + columnWidth,3}%]: [");
+                Console.Write($"{i * columnWidth, 2}-{i * columnWidth + columnWidth, 3}%]: [");
                 Console.Write(new string('#', shareWidth));
                 Console.Write(new string('.', tableWidth - shareWidth));
                 Console.Write($"] {count}");
@@ -829,62 +993,113 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         private static void PrintMibcStats(ProfileData data)
         {
             PrintOutput(data.Config?.ToString());
-            List <MethodProfileData> methods = data.GetAllMethodProfileData().ToList();
-            List<MethodProfileData> profiledMethods = methods.Where(spd => spd.SchemaData != null).ToList();
+            List<MethodProfileData> methods = data.GetAllMethodProfileData().ToList();
+            List<MethodProfileData> profiledMethods = methods
+                .Where(spd => spd.SchemaData != null)
+                .ToList();
             PrintOutput($"# Methods: {methods.Count}");
-            PrintOutput($"# Methods with any profile data: {profiledMethods.Count(spd => spd.SchemaData.Length > 0)}");
-            PrintOutput($"# Methods with 32-bit block counts: {profiledMethods.Count(spd => spd.SchemaData.Any(elem => elem.InstrumentationKind == PgoInstrumentationKind.BasicBlockIntCount))}");
-            PrintOutput($"# Methods with 64-bit block counts: {profiledMethods.Count(spd => spd.SchemaData.Any(elem => elem.InstrumentationKind == PgoInstrumentationKind.BasicBlockLongCount))}");
-            PrintOutput($"# Methods with 32-bit edge counts: {profiledMethods.Count(spd => spd.SchemaData.Any(elem => elem.InstrumentationKind == PgoInstrumentationKind.EdgeIntCount))}");
-            PrintOutput($"# Methods with 64-bit edge counts: {profiledMethods.Count(spd => spd.SchemaData.Any(elem => elem.InstrumentationKind == PgoInstrumentationKind.EdgeLongCount))}");
-            int numTypeHandleHistograms = profiledMethods.Sum(spd => spd.SchemaData.Count(elem => elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes));
-            int methodsWithTypeHandleHistograms = profiledMethods.Count(spd => spd.SchemaData.Any(elem => elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes));
-            PrintOutput($"# Type handle histograms: {numTypeHandleHistograms} in {methodsWithTypeHandleHistograms} methods");
-            int numGetLikelyClass = profiledMethods.Sum(spd => spd.SchemaData.Count(elem => elem.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass));
-            int methodsWithGetLikelyClass = profiledMethods.Count(spd => spd.SchemaData.Any(elem => elem.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass));
-            PrintOutput($"# GetLikelyClass data: {numGetLikelyClass} in {methodsWithGetLikelyClass} methods");
+            PrintOutput(
+                $"# Methods with any profile data: {profiledMethods.Count(spd => spd.SchemaData.Length > 0)}"
+            );
+            PrintOutput(
+                $"# Methods with 32-bit block counts: {profiledMethods.Count(spd => spd.SchemaData.Any(elem => elem.InstrumentationKind == PgoInstrumentationKind.BasicBlockIntCount))}"
+            );
+            PrintOutput(
+                $"# Methods with 64-bit block counts: {profiledMethods.Count(spd => spd.SchemaData.Any(elem => elem.InstrumentationKind == PgoInstrumentationKind.BasicBlockLongCount))}"
+            );
+            PrintOutput(
+                $"# Methods with 32-bit edge counts: {profiledMethods.Count(spd => spd.SchemaData.Any(elem => elem.InstrumentationKind == PgoInstrumentationKind.EdgeIntCount))}"
+            );
+            PrintOutput(
+                $"# Methods with 64-bit edge counts: {profiledMethods.Count(spd => spd.SchemaData.Any(elem => elem.InstrumentationKind == PgoInstrumentationKind.EdgeLongCount))}"
+            );
+            int numTypeHandleHistograms = profiledMethods.Sum(spd =>
+                spd.SchemaData.Count(elem =>
+                    elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
+                )
+            );
+            int methodsWithTypeHandleHistograms = profiledMethods.Count(spd =>
+                spd.SchemaData.Any(elem =>
+                    elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
+                )
+            );
+            PrintOutput(
+                $"# Type handle histograms: {numTypeHandleHistograms} in {methodsWithTypeHandleHistograms} methods"
+            );
+            int numGetLikelyClass = profiledMethods.Sum(spd =>
+                spd.SchemaData.Count(elem =>
+                    elem.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass
+                )
+            );
+            int methodsWithGetLikelyClass = profiledMethods.Count(spd =>
+                spd.SchemaData.Any(elem =>
+                    elem.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass
+                )
+            );
+            PrintOutput(
+                $"# GetLikelyClass data: {numGetLikelyClass} in {methodsWithGetLikelyClass} methods"
+            );
 
             var histogramCallSites = new List<(MethodProfileData mpd, int ilOffset)>();
             foreach (var mpd in profiledMethods)
             {
-                var sites =
-                    mpd.SchemaData
-                    .Where(e => e.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes || e.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass)
+                var sites = mpd
+                    .SchemaData.Where(e =>
+                        e.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
+                        || e.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass
+                    )
                     .Select(e => e.ILOffset)
                     .Distinct();
 
                 histogramCallSites.AddRange(sites.Select(ilOffset => (mpd, ilOffset)));
             }
 
-            int CountGetLikelyClass(Func<GetLikelyClassResult, bool> predicate)
-                => histogramCallSites.Count(t => predicate(GetLikelyClass(t.mpd.SchemaData, t.ilOffset)));
+            int CountGetLikelyClass(Func<GetLikelyClassResult, bool> predicate) =>
+                histogramCallSites.Count(t =>
+                    predicate(GetLikelyClass(t.mpd.SchemaData, t.ilOffset))
+                );
 
-            PrintOutput($"# Call sites where getLikelyClass is null: {CountGetLikelyClass(r => r.IsNull)}");
-            PrintOutput($"# Call sites where getLikelyClass is unknown: {CountGetLikelyClass(r => r.IsUnknown)}");
-            PrintOutput($"# Call sites where getLikelyClass returns data that devirtualizes: {CountGetLikelyClass(r => r.Devirtualizes)}");
+            PrintOutput(
+                $"# Call sites where getLikelyClass is null: {CountGetLikelyClass(r => r.IsNull)}"
+            );
+            PrintOutput(
+                $"# Call sites where getLikelyClass is unknown: {CountGetLikelyClass(r => r.IsUnknown)}"
+            );
+            PrintOutput(
+                $"# Call sites where getLikelyClass returns data that devirtualizes: {CountGetLikelyClass(r => r.Devirtualizes)}"
+            );
 
-            static bool PresentAndZero(MethodProfileData mpd, PgoInstrumentationKind kind)
-                => mpd.SchemaData.Any(e => e.InstrumentationKind == kind) && mpd.SchemaData.Sum(e => e.InstrumentationKind == kind ? e.DataLong : 0) == 0;
+            static bool PresentAndZero(MethodProfileData mpd, PgoInstrumentationKind kind) =>
+                mpd.SchemaData.Any(e => e.InstrumentationKind == kind)
+                && mpd.SchemaData.Sum(e => e.InstrumentationKind == kind ? e.DataLong : 0) == 0;
 
-            static bool CountersSumToZero(MethodProfileData data)
-                => PresentAndZero(data, PgoInstrumentationKind.BasicBlockIntCount) ||
-                   PresentAndZero(data, PgoInstrumentationKind.BasicBlockLongCount) ||
-                   PresentAndZero(data, PgoInstrumentationKind.EdgeIntCount) ||
-                   PresentAndZero(data, PgoInstrumentationKind.EdgeLongCount);
+            static bool CountersSumToZero(MethodProfileData data) =>
+                PresentAndZero(data, PgoInstrumentationKind.BasicBlockIntCount)
+                || PresentAndZero(data, PgoInstrumentationKind.BasicBlockLongCount)
+                || PresentAndZero(data, PgoInstrumentationKind.EdgeIntCount)
+                || PresentAndZero(data, PgoInstrumentationKind.EdgeLongCount);
 
-            List<MethodProfileData> methodsWithZeroCounters = profiledMethods.Where(CountersSumToZero).ToList();
+            List<MethodProfileData> methodsWithZeroCounters = profiledMethods
+                .Where(CountersSumToZero)
+                .ToList();
             if (methodsWithZeroCounters.Count > 0)
             {
-                PrintOutput($"There are {methodsWithZeroCounters.Count} methods whose counters sum to 0{(methodsWithZeroCounters.Count > 10 ? " (10 shown)" : "")}:");
+                PrintOutput(
+                    $"There are {methodsWithZeroCounters.Count} methods whose counters sum to 0{(methodsWithZeroCounters.Count > 10 ? " (10 shown)" : "")}:"
+                );
                 foreach (MethodProfileData mpd in methodsWithZeroCounters.Take(10))
                     PrintOutput($"  {mpd.Method}");
             }
 
-            PrintCallsitesByLikelyClassesChart(profiledMethods
-                .SelectMany(m => m.SchemaData)
-                .Where(sd => sd.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes)
-                .Select(GetUniqueClassesSeen)
-                .ToArray());
+            PrintCallsitesByLikelyClassesChart(
+                profiledMethods
+                    .SelectMany(m => m.SchemaData)
+                    .Where(sd =>
+                        sd.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
+                    )
+                    .Select(GetUniqueClassesSeen)
+                    .ToArray()
+            );
 
             static int GetUniqueClassesSeen(PgoSchemaElem se)
             {
@@ -895,19 +1110,24 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 return uniqueClassesSeen;
             }
 
-            PrintLikelihoodHistogram(profiledMethods
-                .SelectMany(m => m.SchemaData)
-                .Where(sd => sd.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes)
-                .Select(GetLikelihoodOfMostPopularType)
-                .ToArray());
+            PrintLikelihoodHistogram(
+                profiledMethods
+                    .SelectMany(m => m.SchemaData)
+                    .Where(sd =>
+                        sd.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
+                    )
+                    .Select(GetLikelihoodOfMostPopularType)
+                    .ToArray()
+            );
 
             static double GetLikelihoodOfMostPopularType(PgoSchemaElem se)
             {
-                int count = ((TypeSystemEntityOrUnknown[])se.DataObject)
-                    .GroupBy(d => d.GetHashCode())
-                    .OrderByDescending(d => d.Count())
-                    .FirstOrDefault(d => d.FirstOrDefault().AsType != null)
-                    ?.Count() ?? 0;
+                int count =
+                    ((TypeSystemEntityOrUnknown[])se.DataObject)
+                        .GroupBy(d => d.GetHashCode())
+                        .OrderByDescending(d => d.Count())
+                        .FirstOrDefault(d => d.FirstOrDefault().AsType != null)
+                        ?.Count() ?? 0;
                 return count * 100.0 / se.DataObject.Length;
             }
         }
@@ -926,8 +1146,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             const int UNKNOWN_TYPEHANDLE_MIN = 1;
             const int UNKNOWN_TYPEHANDLE_MAX = 33;
 
-            static bool IsUnknownTypeHandle(int handle)
-                => handle >= UNKNOWN_TYPEHANDLE_MIN && handle <= UNKNOWN_TYPEHANDLE_MAX;
+            static bool IsUnknownTypeHandle(int handle) =>
+                handle >= UNKNOWN_TYPEHANDLE_MIN && handle <= UNKNOWN_TYPEHANDLE_MAX;
 
             for (int i = 0; i < schema.Length; i++)
             {
@@ -940,16 +1160,24 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     Trace.Assert(elem.Count == 1);
                     return new GetLikelyClassResult
                     {
-                        IsUnknown = IsUnknownTypeHandle(((TypeSystemEntityOrUnknown[])elem.DataObject)[0].AsUnknown),
+                        IsUnknown = IsUnknownTypeHandle(
+                            ((TypeSystemEntityOrUnknown[])elem.DataObject)[0].AsUnknown
+                        ),
                         Likelihood = (byte)elem.Other,
                     };
                 }
 
                 bool isHistogramCount =
-                    elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramIntCount ||
-                    elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramLongCount;
+                    elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramIntCount
+                    || elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramLongCount;
 
-                if (isHistogramCount && elem.Count == 1 && i + 1 < schema.Length && schema[i + 1].InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes)
+                if (
+                    isHistogramCount
+                    && elem.Count == 1
+                    && i + 1 < schema.Length
+                    && schema[i + 1].InstrumentationKind
+                        == PgoInstrumentationKind.HandleHistogramTypes
+                )
                 {
                     var handles = (TypeSystemEntityOrUnknown[])schema[i + 1].DataObject;
                     var histogram = handles.Where(e => !e.IsNull).GroupBy(e => e).ToList();
@@ -991,7 +1219,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 return -8;
             }
 
-            if ((_command.FileType.Value != PgoFileType.jittrace) && (_command.FileType != PgoFileType.mibc))
+            if (
+                (_command.FileType.Value != PgoFileType.jittrace)
+                && (_command.FileType != PgoFileType.mibc)
+            )
             {
                 PrintError($"Invalid output pgo type {_command.FileType} specified.");
                 return -9;
@@ -1014,7 +1245,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             }
 
             string etlFileName = Get(_command.TraceFilePath);
-            foreach (string nettraceExtension in new string[] { ".netperf", ".netperf.zip", ".nettrace" })
+            foreach (
+                string nettraceExtension in new string[] { ".netperf", ".netperf.zip", ".nettrace" }
+            )
             {
                 if (etlFileName.EndsWith(nettraceExtension))
                 {
@@ -1034,7 +1267,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 etlFileName = etlxFileName;
             }
 
-            UnZipIfNecessary(ref etlFileName, _command.BasicProgressMessages ? Console.Out : new StringWriter());
+            UnZipIfNecessary(
+                ref etlFileName,
+                _command.BasicProgressMessages ? Console.Out : new StringWriter()
+            );
 
             // For SPGO we need to be able to map raw IPs back to IL offsets in methods.
             // Normally TraceEvent facilitates this remapping automatically and discards the IL<->IP mapping table events.
@@ -1042,17 +1278,30 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             // Thus, when SPGO is requested, we need to keep these events.
             // Note that we always request these events to be kept because if one switches back and forth between SPGO and non-SPGO,
             // the cached .etlx file will not update.
-            using (var traceLog = TraceLog.OpenOrConvert(etlFileName, new TraceLogOptions { KeepAllEvents = true }))
+            using (
+                var traceLog = TraceLog.OpenOrConvert(
+                    etlFileName,
+                    new TraceLogOptions { KeepAllEvents = true }
+                )
+            )
             {
                 bool hasPid = IsSet(_command.Pid);
                 string processName = Get(_command.ProcessName);
                 if (hasPid && processName == null && traceLog.Processes.Count != 1)
                 {
                     PrintError("Trace file contains multiple processes to distinguish between");
-                    PrintOutput("Either a pid or process name from the following list must be specified");
-                    foreach (TraceProcess proc in traceLog.Processes.OrderByDescending(proc => proc.CPUMSec))
+                    PrintOutput(
+                        "Either a pid or process name from the following list must be specified"
+                    );
+                    foreach (
+                        TraceProcess proc in traceLog.Processes.OrderByDescending(proc =>
+                            proc.CPUMSec
+                        )
+                    )
                     {
-                        PrintOutput($"Procname = {proc.Name} Pid = {proc.ProcessID} CPUMsec = {proc.CPUMSec:F0}");
+                        PrintOutput(
+                            $"Procname = {proc.Name} Pid = {proc.ProcessID} CPUMsec = {proc.CPUMSec:F0}"
+                        );
                     }
                     return 1;
                 }
@@ -1074,7 +1323,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     List<TraceProcess> matchingProcesses = new List<TraceProcess>();
                     foreach (TraceProcess proc in traceLog.Processes)
                     {
-                        if (String.Compare(proc.Name, processName, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (
+                            String.Compare(
+                                proc.Name,
+                                processName,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
                         {
                             matchingProcesses.Add(proc);
                         }
@@ -1092,7 +1347,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         errorMessage.AppendLine("Found multiple matching processes in trace");
                         foreach (TraceProcess proc in matchingProcesses)
                         {
-                            errorMessage.AppendLine($"{proc.Name}\tpid={proc.ProcessID}\tCPUMSec={proc.CPUMSec}");
+                            errorMessage.AppendLine(
+                                $"{proc.Name}\tpid={proc.ProcessID}\tCPUMSec={proc.CPUMSec}"
+                            );
                         }
                         PrintError(errorMessage.ToString());
                         return -2;
@@ -1106,27 +1363,37 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                 if (!p.EventsInProcess.ByEventType<MethodDetailsTraceData>().Any())
                 {
-                    PrintError($"No MethodDetails\nWas the trace collected with provider at least \"Microsoft-Windows-DotNETRuntime:0x4000080018:5\"?");
+                    PrintError(
+                        $"No MethodDetails\nWas the trace collected with provider at least \"Microsoft-Windows-DotNETRuntime:0x4000080018:5\"?"
+                    );
                     return -3;
                 }
 
                 if (!p.EventsInProcess.ByEventType<GCBulkTypeTraceData>().Any())
                 {
-                    PrintError($"No BulkType data\nWas the trace collected with provider at least \"Microsoft-Windows-DotNETRuntime:0x4000080018:5\"?");
+                    PrintError(
+                        $"No BulkType data\nWas the trace collected with provider at least \"Microsoft-Windows-DotNETRuntime:0x4000080018:5\"?"
+                    );
                     return -4;
                 }
 
                 if (!p.EventsInProcess.ByEventType<ModuleLoadUnloadTraceData>().Any())
                 {
-                    PrintError($"No managed module load data\nWas the trace collected with provider at least \"Microsoft-Windows-DotNETRuntime:0x4000080018:5\"?");
+                    PrintError(
+                        $"No managed module load data\nWas the trace collected with provider at least \"Microsoft-Windows-DotNETRuntime:0x4000080018:5\"?"
+                    );
                     return -5;
                 }
 
-                if (!p.EventsInProcess.ByEventType<MethodJittingStartedTraceData>().Any() &&
-                    !p.EventsInProcess.ByEventType<R2RGetEntryPointTraceData>().Any() &&
-                    !p.EventsInProcess.ByEventType< SampledProfileTraceData>().Any())
+                if (
+                    !p.EventsInProcess.ByEventType<MethodJittingStartedTraceData>().Any()
+                    && !p.EventsInProcess.ByEventType<R2RGetEntryPointTraceData>().Any()
+                    && !p.EventsInProcess.ByEventType<SampledProfileTraceData>().Any()
+                )
                 {
-                    PrintError($"No data in trace for process\nWas the trace collected with provider at least \"Microsoft-Windows-DotNETRuntime:0x4000080018:5\"?");
+                    PrintError(
+                        $"No data in trace for process\nWas the trace collected with provider at least \"Microsoft-Windows-DotNETRuntime:0x4000080018:5\"?"
+                    );
                     return -5;
                 }
 
@@ -1136,11 +1403,17 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 {
                     HashSet<int> clrInstanceIds = new HashSet<int>();
                     HashSet<int> examinedClrInstanceIds = new HashSet<int>();
-                    foreach (var assemblyLoadTrace in p.EventsInProcess.ByEventType<AssemblyLoadUnloadTraceData>())
+                    foreach (
+                        var assemblyLoadTrace in p.EventsInProcess.ByEventType<AssemblyLoadUnloadTraceData>()
+                    )
                     {
                         if (examinedClrInstanceIds.Add(assemblyLoadTrace.ClrInstanceID))
                         {
-                            if (pgoProcess.ClrInstanceIsCoreCLRInstance(assemblyLoadTrace.ClrInstanceID))
+                            if (
+                                pgoProcess.ClrInstanceIsCoreCLRInstance(
+                                    assemblyLoadTrace.ClrInstanceID
+                                )
+                            )
                                 clrInstanceIds.Add(assemblyLoadTrace.ClrInstanceID);
                         }
                     }
@@ -1149,7 +1422,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     {
                         if (clrInstanceIds.Count == 0)
                         {
-                            PrintError($"No managed CLR in target process, or per module information could not be loaded from the trace.");
+                            PrintError(
+                                $"No managed CLR in target process, or per module information could not be loaded from the trace."
+                            );
                         }
                         else
                         {
@@ -1157,7 +1432,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             int[] clrInstanceIdsArray = clrInstanceIds.ToArray();
                             Array.Sort(clrInstanceIdsArray);
                             StringBuilder errorMessage = new StringBuilder();
-                            errorMessage.AppendLine("Multiple CLR instances used in process. Choose one to examine with -clrInstanceID:<id> Valid ids:");
+                            errorMessage.AppendLine(
+                                "Multiple CLR instances used in process. Choose one to examine with -clrInstanceID:<id> Valid ids:"
+                            );
                             foreach (int instanceID in clrInstanceIds)
                             {
                                 errorMessage.AppendLine(instanceID.ToString());
@@ -1172,7 +1449,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     }
                 }
 
-                var tsc = new TraceTypeSystemContext(pgoProcess, clrInstanceId, s_logger, Get(_command.AutomaticReferences));
+                var tsc = new TraceTypeSystemContext(
+                    pgoProcess,
+                    clrInstanceId,
+                    s_logger,
+                    Get(_command.AutomaticReferences)
+                );
 
                 if (_command.VerboseWarnings)
                     PrintWarning($"{traceLog.EventsLost} Lost events");
@@ -1210,7 +1492,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 if (!tsc.Initialize())
                     return -12;
 
-                Dictionary<string, HashSet<string>> duplicateModuleAnalysis = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+                Dictionary<string, HashSet<string>> duplicateModuleAnalysis = new Dictionary<
+                    string,
+                    HashSet<string>
+                >(StringComparer.OrdinalIgnoreCase);
                 foreach (var module in pgoProcess.EnumerateLoadedManagedModules())
                 {
                     var managedModule = module.ManagedModule;
@@ -1224,16 +1509,30 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         if (simpleName.EndsWith(".il"))
                             simpleName = simpleName.Substring(0, simpleName.Length - 3);
 
-                        string filePathTemp = PgoTraceProcess.ComputeFilePathOnDiskForModule(managedModule);
+                        string filePathTemp = PgoTraceProcess.ComputeFilePathOnDiskForModule(
+                            managedModule
+                        );
                         string candidateFilePath;
 
                         // This path may be normalized
-                        if (File.Exists(filePathTemp) || !tsc._normalizedFilePathToFilePath.TryGetValue(filePathTemp, out candidateFilePath))
+                        if (
+                            File.Exists(filePathTemp)
+                            || !tsc._normalizedFilePathToFilePath.TryGetValue(
+                                filePathTemp,
+                                out candidateFilePath
+                            )
+                        )
                             candidateFilePath = filePathTemp;
 
-                        if (!duplicateModuleAnalysis.TryGetValue(simpleName, out HashSet<string> candidatePaths))
+                        if (
+                            !duplicateModuleAnalysis.TryGetValue(
+                                simpleName,
+                                out HashSet<string> candidatePaths
+                            )
+                        )
                         {
-                            duplicateModuleAnalysis[simpleName] = candidatePaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                            duplicateModuleAnalysis[simpleName] = candidatePaths =
+                                new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                         }
                         candidatePaths.Add(candidateFilePath);
                     }
@@ -1248,7 +1547,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     ModuleDesc loadedViaReference = null;
                     foreach (var module in modulesLoadedViaReference)
                     {
-                        if (string.Equals(module.Assembly.GetName().Name, assembliesWithDuplicates.Key, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            string.Equals(
+                                module.Assembly.GetName().Name,
+                                assembliesWithDuplicates.Key,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             loadedViaReference = module;
                             break;
@@ -1259,7 +1564,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     if (loadedViaReference == null && Get(_command.AutomaticReferences))
                     {
                         duplicateError = true;
-                        PrintError($"Multiple assemblies with the same simple name loaded into the process. Specify the preferred module via the -reference parameter.");
+                        PrintError(
+                            $"Multiple assemblies with the same simple name loaded into the process. Specify the preferred module via the -reference parameter."
+                        );
                         foreach (string path in assembliesWithDuplicates.Value)
                         {
                             PrintMessage(path);
@@ -1269,7 +1576,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 if (duplicateError)
                     return -13;
 
-                TraceRuntimeDescToTypeSystemDesc idParser = new TraceRuntimeDescToTypeSystemDesc(p, tsc, clrInstanceId);
+                TraceRuntimeDescToTypeSystemDesc idParser = new TraceRuntimeDescToTypeSystemDesc(
+                    p,
+                    tsc,
+                    clrInstanceId
+                );
 
                 int mismatchErrors = 0;
                 foreach (var e in p.EventsInProcess.ByEventType<ModuleLoadUnloadTraceData>())
@@ -1278,7 +1589,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     if (loadedModule == null)
                     {
                         if (!idParser.IsDynamicModuleID(e.ModuleID))
-                            PrintWarning($"Unable to find loaded module {e.ModuleILFileName} to verify match");
+                            PrintWarning(
+                                $"Unable to find loaded module {e.ModuleILFileName} to verify match"
+                            );
                         continue;
                     }
 
@@ -1291,25 +1604,38 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     bool matched = false;
                     bool mismatch = false;
                     bool mismatchHandled = false;
-                    foreach (DebugDirectoryEntry debugEntry in ecmaModule.PEReader.SafeReadDebugDirectory())
+                    foreach (
+                        DebugDirectoryEntry debugEntry in ecmaModule.PEReader.SafeReadDebugDirectory()
+                    )
                     {
                         if (debugEntry.Type == DebugDirectoryEntryType.CodeView)
                         {
-                            var codeViewData = ecmaModule.PEReader.ReadCodeViewDebugDirectoryData(debugEntry);
+                            var codeViewData = ecmaModule.PEReader.ReadCodeViewDebugDirectoryData(
+                                debugEntry
+                            );
                             if (codeViewData.Path.EndsWith("ni.pdb"))
                                 continue;
                             if (codeViewData.Guid != e.ManagedPdbSignature)
                             {
-                                if (modulesLoadedViaReference.Contains(ecmaModule) && duplicateModuleAnalysis[ecmaModule.Assembly.GetName().Name].Count > 1)
+                                if (
+                                    modulesLoadedViaReference.Contains(ecmaModule)
+                                    && duplicateModuleAnalysis[
+                                        ecmaModule.Assembly.GetName().Name
+                                    ].Count > 1
+                                )
                                 {
                                     // This is the case where a duplicate dll mismatch was avoided by specifying a -reference parameter
-                                    PrintMessage($"Disabling load of assembly data from assembly located at \"{e.ModuleILPath}\" during trace collection as module \"{tsc.PEReaderToFilePath(ecmaModule.PEReader)}\" is preferred, and does not match");
+                                    PrintMessage(
+                                        $"Disabling load of assembly data from assembly located at \"{e.ModuleILPath}\" during trace collection as module \"{tsc.PEReaderToFilePath(ecmaModule.PEReader)}\" is preferred, and does not match"
+                                    );
                                     idParser.RemoveModuleIDFromLoader(e.ModuleID);
                                     mismatchHandled = true;
                                 }
                                 else
                                 {
-                                    PrintError($"Dll mismatch between assembly located at \"{e.ModuleILPath}\" during trace collection and module \"{tsc.PEReaderToFilePath(ecmaModule.PEReader)}\"");
+                                    PrintError(
+                                        $"Dll mismatch between assembly located at \"{e.ModuleILPath}\" during trace collection and module \"{tsc.PEReaderToFilePath(ecmaModule.PEReader)}\""
+                                    );
                                     mismatchErrors++;
                                     mismatch = true;
                                 }
@@ -1324,7 +1650,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                     if (!matched && !mismatch && !mismatchHandled)
                     {
-                        PrintMessage($"Unable to validate match between assembly located at \"{e.ModuleILPath}\" during trace collection and module \"{tsc.PEReaderToFilePath(ecmaModule.PEReader)}\"");
+                        PrintMessage(
+                            $"Unable to validate match between assembly located at \"{e.ModuleILPath}\" during trace collection and module \"{tsc.PEReaderToFilePath(ecmaModule.PEReader)}\""
+                        );
                     }
 
                     // TODO find some way to match on MVID as only some dlls have managed pdbs, and this won't find issues with embedded pdbs
@@ -1339,14 +1667,27 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 // Now that the modules are validated run Init to prepare for the rest of execution
                 idParser.Init();
 
-                SortedDictionary<long, ProcessedMethodData> methodsToAttemptToPrepare = new SortedDictionary<long, ProcessedMethodData>();
+                SortedDictionary<long, ProcessedMethodData> methodsToAttemptToPrepare =
+                    new SortedDictionary<long, ProcessedMethodData>();
 
                 double excludeEventsBefore = Get(_command.ExcludeEventsBefore);
                 double excludeEventsAfter = Get(_command.ExcludeEventsAfter);
-                Regex excludeEventsBeforeJittingMethod = !string.IsNullOrEmpty(Get(_command.ExcludeEventsBeforeJittingMethod)) ? new Regex(Get(_command.ExcludeEventsBeforeJittingMethod)) : null;
-                Regex excludeEventsAfterJittingMethod = !string.IsNullOrEmpty(Get(_command.ExcludeEventsAfterJittingMethod)) ? new Regex(Get(_command.ExcludeEventsAfterJittingMethod)) : null;
-                Regex includeMethods = !string.IsNullOrEmpty(Get(_command.IncludeMethods)) ? new Regex(Get(_command.IncludeMethods)) : null;
-                Regex excludeMethods = !string.IsNullOrEmpty(Get(_command.ExcludeMethods)) ? new Regex(Get(_command.ExcludeMethods)) : null;
+                Regex excludeEventsBeforeJittingMethod = !string.IsNullOrEmpty(
+                    Get(_command.ExcludeEventsBeforeJittingMethod)
+                )
+                    ? new Regex(Get(_command.ExcludeEventsBeforeJittingMethod))
+                    : null;
+                Regex excludeEventsAfterJittingMethod = !string.IsNullOrEmpty(
+                    Get(_command.ExcludeEventsAfterJittingMethod)
+                )
+                    ? new Regex(Get(_command.ExcludeEventsAfterJittingMethod))
+                    : null;
+                Regex includeMethods = !string.IsNullOrEmpty(Get(_command.IncludeMethods))
+                    ? new Regex(Get(_command.IncludeMethods))
+                    : null;
+                Regex excludeMethods = !string.IsNullOrEmpty(Get(_command.ExcludeMethods))
+                    ? new Regex(Get(_command.ExcludeMethods))
+                    : null;
 
                 // Find all the R2RLoad events.
                 if (_command.ProcessR2REvents)
@@ -1356,14 +1697,17 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         int parenIndex = e.MethodSignature.IndexOf('(');
                         string retArg = e.MethodSignature.Substring(0, parenIndex);
                         string paramsArgs = e.MethodSignature.Substring(parenIndex);
-                        string methodNameFromEventDirectly = retArg + e.MethodNamespace + "." + e.MethodName + paramsArgs;
+                        string methodNameFromEventDirectly =
+                            retArg + e.MethodNamespace + "." + e.MethodName + paramsArgs;
 
                         if (e.ClrInstanceID != clrInstanceId)
                         {
                             if (!_command.Warnings)
                                 continue;
 
-                            PrintWarning($"Skipped R2REntryPoint {methodNameFromEventDirectly} due to ClrInstanceID of {e.ClrInstanceID}");
+                            PrintWarning(
+                                $"Skipped R2REntryPoint {methodNameFromEventDirectly} due to ClrInstanceID of {e.ClrInstanceID}"
+                            );
                             continue;
                         }
 
@@ -1372,7 +1716,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         bool failedDueToNonloadableModule = false;
                         try
                         {
-                            method = idParser.ResolveMethodID(e.MethodID, out failedDueToNonloadableModule, _command.VerboseWarnings);
+                            method = idParser.ResolveMethodID(
+                                e.MethodID,
+                                out failedDueToNonloadableModule,
+                                _command.VerboseWarnings
+                            );
                         }
                         catch (Exception exception)
                         {
@@ -1381,10 +1729,16 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                         if (method == null)
                         {
-                            if ((e.MethodNamespace == "dynamicClass") || failedDueToNonloadableModule || !_command.Warnings)
+                            if (
+                                (e.MethodNamespace == "dynamicClass")
+                                || failedDueToNonloadableModule
+                                || !_command.Warnings
+                            )
                                 continue;
 
-                            PrintWarning($"Unable to parse {methodNameFromEventDirectly} when looking up R2R methods");
+                            PrintWarning(
+                                $"Unable to parse {methodNameFromEventDirectly} when looking up R2R methods"
+                            );
                             if (extraWarningText != null)
                                 PrintWarning(extraWarningText);
                             continue;
@@ -1400,10 +1754,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             break;
                         }
 
-                        string perfviewMethodName = e.MethodNamespace + "." + e.MethodName + paramsArgs;
+                        string perfviewMethodName =
+                            e.MethodNamespace + "." + e.MethodName + paramsArgs;
                         if (PassesMethodFilter(includeMethods, excludeMethods, perfviewMethodName))
                         {
-                            methodsToAttemptToPrepare.Add((int)e.EventIndex, new ProcessedMethodData(e.TimeStampRelativeMSec, method, "R2RLoad"));
+                            methodsToAttemptToPrepare.Add(
+                                (int)e.EventIndex,
+                                new ProcessedMethodData(e.TimeStampRelativeMSec, method, "R2RLoad")
+                            );
                         }
                     }
                 }
@@ -1411,11 +1769,19 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 // In case requesting events before/after jitting a method, discover the
                 // corresponding excludeEventsBefore/excludeEventsAfter in event stream based
                 // on filter criterias.
-                if (_command.ProcessJitEvents && (excludeEventsBeforeJittingMethod != null || excludeEventsAfterJittingMethod != null))
+                if (
+                    _command.ProcessJitEvents
+                    && (
+                        excludeEventsBeforeJittingMethod != null
+                        || excludeEventsAfterJittingMethod != null
+                    )
+                )
                 {
                     double firstMatchEventsBeforeJittingMethod = double.PositiveInfinity;
                     double lastMatchEventsAfterJittingMethod = double.NegativeInfinity;
-                    foreach (var e in p.EventsInProcess.ByEventType<MethodJittingStartedTraceData>())
+                    foreach (
+                        var e in p.EventsInProcess.ByEventType<MethodJittingStartedTraceData>()
+                    )
                     {
                         if (e.ClrInstanceID != clrInstanceId)
                         {
@@ -1426,7 +1792,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         bool failedDueToNonloadableModule = false;
                         try
                         {
-                            method = idParser.ResolveMethodID(e.MethodID, out failedDueToNonloadableModule, false);
+                            method = idParser.ResolveMethodID(
+                                e.MethodID,
+                                out failedDueToNonloadableModule,
+                                false
+                            );
                         }
                         catch { }
 
@@ -1437,14 +1807,25 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                         int parenIndex = e.MethodSignature.IndexOf('(');
                         string paramsArgs = e.MethodSignature.Substring(parenIndex);
-                        string perfviewMethodName = e.MethodNamespace + "." + e.MethodName + paramsArgs;
+                        string perfviewMethodName =
+                            e.MethodNamespace + "." + e.MethodName + paramsArgs;
 
-                        if (e.TimeStampRelativeMSec > excludeEventsBefore && e.TimeStampRelativeMSec < firstMatchEventsBeforeJittingMethod && excludeEventsBeforeJittingMethod != null && excludeEventsBeforeJittingMethod.IsMatch(perfviewMethodName))
+                        if (
+                            e.TimeStampRelativeMSec > excludeEventsBefore
+                            && e.TimeStampRelativeMSec < firstMatchEventsBeforeJittingMethod
+                            && excludeEventsBeforeJittingMethod != null
+                            && excludeEventsBeforeJittingMethod.IsMatch(perfviewMethodName)
+                        )
                         {
                             firstMatchEventsBeforeJittingMethod = e.TimeStampRelativeMSec;
                         }
 
-                        if (e.TimeStampRelativeMSec < excludeEventsAfter && e.TimeStampRelativeMSec > lastMatchEventsAfterJittingMethod && excludeEventsAfterJittingMethod != null && excludeEventsAfterJittingMethod.IsMatch(perfviewMethodName))
+                        if (
+                            e.TimeStampRelativeMSec < excludeEventsAfter
+                            && e.TimeStampRelativeMSec > lastMatchEventsAfterJittingMethod
+                            && excludeEventsAfterJittingMethod != null
+                            && excludeEventsAfterJittingMethod.IsMatch(perfviewMethodName)
+                        )
                         {
                             lastMatchEventsAfterJittingMethod = e.TimeStampRelativeMSec;
                         }
@@ -1462,7 +1843,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                     if (excludeEventsBefore > excludeEventsAfter)
                     {
-                        PrintError($"Exclude events before timestamp: \"{excludeEventsBefore}\" can't be later than exclude events after timestamp: \"{excludeEventsAfter}\"");
+                        PrintError(
+                            $"Exclude events before timestamp: \"{excludeEventsBefore}\" can't be later than exclude events after timestamp: \"{excludeEventsAfter}\""
+                        );
                         return -1;
                     }
                 }
@@ -1470,19 +1853,24 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 // Find all the jitStart events.
                 if (_command.ProcessJitEvents)
                 {
-                    foreach (var e in p.EventsInProcess.ByEventType<MethodJittingStartedTraceData>())
+                    foreach (
+                        var e in p.EventsInProcess.ByEventType<MethodJittingStartedTraceData>()
+                    )
                     {
                         int parenIndex = e.MethodSignature.IndexOf('(');
                         string retArg = e.MethodSignature.Substring(0, parenIndex);
                         string paramsArgs = e.MethodSignature.Substring(parenIndex);
-                        string methodNameFromEventDirectly = retArg + e.MethodNamespace + "." + e.MethodName + paramsArgs;
+                        string methodNameFromEventDirectly =
+                            retArg + e.MethodNamespace + "." + e.MethodName + paramsArgs;
 
                         if (e.ClrInstanceID != clrInstanceId)
                         {
                             if (!_command.Warnings)
                                 continue;
 
-                            PrintWarning($"Skipped {methodNameFromEventDirectly} due to ClrInstanceID of {e.ClrInstanceID}");
+                            PrintWarning(
+                                $"Skipped {methodNameFromEventDirectly} due to ClrInstanceID of {e.ClrInstanceID}"
+                            );
                             continue;
                         }
 
@@ -1491,7 +1879,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         bool failedDueToNonloadableModule = false;
                         try
                         {
-                            method = idParser.ResolveMethodID(e.MethodID, out failedDueToNonloadableModule, _command.VerboseWarnings);
+                            method = idParser.ResolveMethodID(
+                                e.MethodID,
+                                out failedDueToNonloadableModule,
+                                _command.VerboseWarnings
+                            );
                         }
                         catch (Exception exception)
                         {
@@ -1500,7 +1892,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                         if (method == null)
                         {
-                            if ((e.MethodNamespace == "dynamicClass") || failedDueToNonloadableModule || !_command.Warnings)
+                            if (
+                                (e.MethodNamespace == "dynamicClass")
+                                || failedDueToNonloadableModule
+                                || !_command.Warnings
+                            )
                                 continue;
 
                             PrintWarning($"Unable to parse {methodNameFromEventDirectly}");
@@ -1519,10 +1915,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             break;
                         }
 
-                        string perfviewMethodName = e.MethodNamespace + "." + e.MethodName + paramsArgs;
+                        string perfviewMethodName =
+                            e.MethodNamespace + "." + e.MethodName + paramsArgs;
                         if (PassesMethodFilter(includeMethods, excludeMethods, perfviewMethodName))
                         {
-                            methodsToAttemptToPrepare.Add((int)e.EventIndex, new ProcessedMethodData(e.TimeStampRelativeMSec, method, "JitStart"));
+                            methodsToAttemptToPrepare.Add(
+                                (int)e.EventIndex,
+                                new ProcessedMethodData(e.TimeStampRelativeMSec, method, "JitStart")
+                            );
                         }
                     }
                 }
@@ -1538,7 +1938,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             idParser,
                             clrInstanceId,
                             Get(_command.PreciseDebugInfoFile),
-                            s_logger);
+                            s_logger
+                        );
                     }
 
                     return methodMemMap;
@@ -1560,7 +1961,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     MethodMemoryMap mmap = GetMethodMemMap();
                     foreach (var e in p.EventsInProcess.ByEventType<SampledProfileTraceData>())
                     {
-                        if ((e.TimeStampRelativeMSec < excludeEventsBefore) && (e.TimeStampRelativeMSec > excludeEventsAfter))
+                        if (
+                            (e.TimeStampRelativeMSec < excludeEventsBefore)
+                            && (e.TimeStampRelativeMSec > excludeEventsAfter)
+                        )
                             continue;
 
                         var callstack = e.CallStack();
@@ -1581,7 +1985,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             if (!methodsListedToPrepare.Contains(topOfStackMethod))
                             {
                                 methodsListedToPrepare.Add(topOfStackMethod);
-                                methodsToAttemptToPrepare.Add((int)e.EventIndex, new ProcessedMethodData(e.TimeStampRelativeMSec, topOfStackMethod, "SampleMethod"));
+                                methodsToAttemptToPrepare.Add(
+                                    (int)e.EventIndex,
+                                    new ProcessedMethodData(
+                                        e.TimeStampRelativeMSec,
+                                        topOfStackMethod,
+                                        "SampleMethod"
+                                    )
+                                );
                             }
 
                             if (exclusiveSamples.TryGetValue(topOfStackMethod, out int count))
@@ -1599,7 +2010,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             if (!methodsListedToPrepare.Contains(nextMethod))
                             {
                                 methodsListedToPrepare.Add(nextMethod);
-                                methodsToAttemptToPrepare.Add(0x100000000 + (int)e.EventIndex, new ProcessedMethodData(e.TimeStampRelativeMSec, nextMethod, "SampleMethodCaller"));
+                                methodsToAttemptToPrepare.Add(
+                                    0x100000000 + (int)e.EventIndex,
+                                    new ProcessedMethodData(
+                                        e.TimeStampRelativeMSec,
+                                        nextMethod,
+                                        "SampleMethodCaller"
+                                    )
+                                );
                             }
 
                             if (!callGraph.TryGetValue(nextMethod, out var innerDictionary))
@@ -1619,9 +2037,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     }
                 }
 
-                Dictionary<MethodDesc, MethodChunks> instrumentationDataByMethod = new Dictionary<MethodDesc, MethodChunks>();
+                Dictionary<MethodDesc, MethodChunks> instrumentationDataByMethod =
+                    new Dictionary<MethodDesc, MethodChunks>();
 
-                foreach (var e in p.EventsInProcess.ByEventType<JitInstrumentationDataVerboseTraceData>())
+                foreach (
+                    var e in p.EventsInProcess.ByEventType<JitInstrumentationDataVerboseTraceData>()
+                )
                 {
                     AddToInstrumentationData(e.ClrInstanceID, e.MethodID, e.MethodFlags, e.Data);
                 }
@@ -1631,7 +2052,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 }
 
                 // Local function used with the above two loops as the behavior is supposed to be identical
-                void AddToInstrumentationData(int eventClrInstanceId, long methodID, int methodFlags, byte[] data)
+                void AddToInstrumentationData(
+                    int eventClrInstanceId,
+                    long methodID,
+                    int methodFlags,
+                    byte[] data
+                )
                 {
                     if (eventClrInstanceId != clrInstanceId)
                     {
@@ -1641,15 +2067,22 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     MethodDesc method = null;
                     try
                     {
-                        method = idParser.ResolveMethodID(methodID, out _, _command.VerboseWarnings);
+                        method = idParser.ResolveMethodID(
+                            methodID,
+                            out _,
+                            _command.VerboseWarnings
+                        );
                     }
-                    catch (Exception)
-                    {
-                    }
+                    catch (Exception) { }
 
                     if (method != null)
                     {
-                        if (!instrumentationDataByMethod.TryGetValue(method, out MethodChunks perMethodChunks))
+                        if (
+                            !instrumentationDataByMethod.TryGetValue(
+                                method,
+                                out MethodChunks perMethodChunks
+                            )
+                        )
                         {
                             perMethodChunks = new MethodChunks();
                             instrumentationDataByMethod.Add(method, perMethodChunks);
@@ -1678,18 +2111,34 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                     if (!hasLbr)
                     {
-                        foreach (SampledProfileTraceData e in p.EventsInProcess.ByEventType<SampledProfileTraceData>())
+                        foreach (
+                            SampledProfileTraceData e in p.EventsInProcess.ByEventType<SampledProfileTraceData>()
+                        )
                         {
                             correlator.AttributeSamplesToIP(e.InstructionPointer, 1);
                         }
 
-                        PrintOutput($"Samples outside managed code: {correlator.SamplesOutsideManagedCode}");
-                        PrintOutput($"Samples in managed code that does not have native<->IL mappings: {correlator.SamplesInManagedCodeWithoutAnyMappings}");
-                        PrintOutput($"Samples in managed code with mappings that could not be correlated: {correlator.SamplesInManagedCodeOutsideMappings}");
-                        PrintOutput($"Samples in inlinees that were not present in ETW events: {correlator.SamplesInUnknownInlinees}");
-                        PrintOutput($"Samples in managed code for which we could not get the IL: {correlator.SamplesInManagedCodeWithoutIL}");
-                        PrintOutput($"Samples in managed code that could not be attributed to the method's flow graph: {correlator.SamplesInManagedCodeOutsideFlowGraph}");
-                        PrintOutput($"Samples successfully attributed: {correlator.TotalAttributedSamples}");
+                        PrintOutput(
+                            $"Samples outside managed code: {correlator.SamplesOutsideManagedCode}"
+                        );
+                        PrintOutput(
+                            $"Samples in managed code that does not have native<->IL mappings: {correlator.SamplesInManagedCodeWithoutAnyMappings}"
+                        );
+                        PrintOutput(
+                            $"Samples in managed code with mappings that could not be correlated: {correlator.SamplesInManagedCodeOutsideMappings}"
+                        );
+                        PrintOutput(
+                            $"Samples in inlinees that were not present in ETW events: {correlator.SamplesInUnknownInlinees}"
+                        );
+                        PrintOutput(
+                            $"Samples in managed code for which we could not get the IL: {correlator.SamplesInManagedCodeWithoutIL}"
+                        );
+                        PrintOutput(
+                            $"Samples in managed code that could not be attributed to the method's flow graph: {correlator.SamplesInManagedCodeOutsideFlowGraph}"
+                        );
+                        PrintOutput(
+                            $"Samples successfully attributed: {correlator.TotalAttributedSamples}"
+                        );
                     }
                     else
                     {
@@ -1714,12 +2163,18 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                     if (data->ProcessId != p.ProcessID)
                                         continue;
 
-                                    Span<LbrEntry32> lbr32 = LbrTraceEventData32.Entries(ref *data, e.EventDataLength);
+                                    Span<LbrEntry32> lbr32 = LbrTraceEventData32.Entries(
+                                        ref *data,
+                                        e.EventDataLength
+                                    );
                                     correlator.AttributeSampleToLbrRuns(lbr32);
                                 }
                                 else
                                 {
-                                    Trace.Assert(traceLog.PointerSize == 8, $"Unexpected PointerSize {traceLog.PointerSize}");
+                                    Trace.Assert(
+                                        traceLog.PointerSize == 8,
+                                        $"Unexpected PointerSize {traceLog.PointerSize}"
+                                    );
 
                                     LbrTraceEventData64* data = (LbrTraceEventData64*)e.DataStart;
                                     // TODO: The process ID check is not sufficient as PIDs can be reused, so we need to use timestamps too,
@@ -1728,7 +2183,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                     if (data->ProcessId != p.ProcessID)
                                         continue;
 
-                                    Span<LbrEntry64> lbr64 = LbrTraceEventData64.Entries(ref *data, e.EventDataLength);
+                                    Span<LbrEntry64> lbr64 = LbrTraceEventData64.Entries(
+                                        ref *data,
+                                        e.EventDataLength
+                                    );
                                     correlator.AttributeSampleToLbrRuns(lbr64);
                                 }
                             }
@@ -1765,10 +2223,21 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         var methodData = entry.Value;
                         if (_command.GenerateCallGraph)
                         {
-                            exclusiveSamples.TryGetValue(methodData.Method, out methodData.ExclusiveWeight);
-                            callGraph.TryGetValue(methodData.Method, out methodData.WeightedCallData);
+                            exclusiveSamples.TryGetValue(
+                                methodData.Method,
+                                out methodData.ExclusiveWeight
+                            );
+                            callGraph.TryGetValue(
+                                methodData.Method,
+                                out methodData.WeightedCallData
+                            );
                         }
-                        if (instrumentationDataByMethod.TryGetValue(methodData.Method, out MethodChunks chunks))
+                        if (
+                            instrumentationDataByMethod.TryGetValue(
+                                methodData.Method,
+                                out MethodChunks chunks
+                            )
+                        )
                         {
                             int size = 0;
                             foreach (byte[] arr in chunks.InstrumentationData)
@@ -1785,40 +2254,52 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                 offset += arr.Length;
                             }
 
-                            var intDecompressor = new PgoProcessor.PgoEncodedCompressedIntParser(instrumentationData, 0);
-                            methodData.InstrumentationData = PgoProcessor.ParsePgoData<TypeSystemEntityOrUnknown, TypeSystemEntityOrUnknown>(pgoDataLoader, intDecompressor, true).ToArray();
+                            var intDecompressor = new PgoProcessor.PgoEncodedCompressedIntParser(
+                                instrumentationData,
+                                0
+                            );
+                            methodData.InstrumentationData = PgoProcessor
+                                .ParsePgoData<TypeSystemEntityOrUnknown, TypeSystemEntityOrUnknown>(
+                                    pgoDataLoader,
+                                    intDecompressor,
+                                    true
+                                )
+                                .ToArray();
                         }
                         else
                         {
                             SampleProfile sp = correlator?.GetProfile(methodData.Method);
                             if (sp != null && sp.AttributedSamples >= Get(_command.SpgoMinSamples))
                             {
-                                IEnumerable<PgoSchemaElem> schema =
-                                    sp.SmoothedSamples
-                                    .Select(
-                                        kvp =>
-                                        new PgoSchemaElem
-                                        {
-                                            InstrumentationKind = kvp.Value > uint.MaxValue ? PgoInstrumentationKind.BasicBlockLongCount : PgoInstrumentationKind.BasicBlockIntCount,
-                                            ILOffset = kvp.Key.Start,
-                                            Count = 1,
-                                            DataLong = kvp.Value,
-                                        });
+                                IEnumerable<PgoSchemaElem> schema = sp.SmoothedSamples.Select(
+                                    kvp => new PgoSchemaElem
+                                    {
+                                        InstrumentationKind =
+                                            kvp.Value > uint.MaxValue
+                                                ? PgoInstrumentationKind.BasicBlockLongCount
+                                                : PgoInstrumentationKind.BasicBlockIntCount,
+                                        ILOffset = kvp.Key.Start,
+                                        Count = 1,
+                                        DataLong = kvp.Value,
+                                    }
+                                );
 
                                 bool includeFullGraphs = Get(_command.IncludeFullGraphs);
                                 if (includeFullGraphs)
                                 {
                                     schema = schema.Concat(
-                                        sp.SmoothedEdgeSamples
-                                        .Select(kvp =>
-                                            new PgoSchemaElem
-                                            {
-                                                InstrumentationKind = kvp.Value > uint.MaxValue ? PgoInstrumentationKind.EdgeLongCount : PgoInstrumentationKind.EdgeIntCount,
-                                                ILOffset = kvp.Key.Item1.Start,
-                                                Other = kvp.Key.Item2.Start,
-                                                Count = 1,
-                                                DataLong = kvp.Value
-                                            }));
+                                        sp.SmoothedEdgeSamples.Select(kvp => new PgoSchemaElem
+                                        {
+                                            InstrumentationKind =
+                                                kvp.Value > uint.MaxValue
+                                                    ? PgoInstrumentationKind.EdgeLongCount
+                                                    : PgoInstrumentationKind.EdgeIntCount,
+                                            ILOffset = kvp.Key.Item1.Start,
+                                            Other = kvp.Key.Item2.Start,
+                                            Count = 1,
+                                            DataLong = kvp.Value,
+                                        })
+                                    );
                                 }
 
                                 methodData.InstrumentationData = schema.ToArray();
@@ -1826,20 +2307,40 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 #if DEBUG
                                 if (includeFullGraphs)
                                 {
-                                    var writtenBlocks =
-                                        new HashSet<int>(
-                                            methodData.InstrumentationData
-                                            .Where(elem => elem.InstrumentationKind == PgoInstrumentationKind.BasicBlockIntCount || elem.InstrumentationKind == PgoInstrumentationKind.BasicBlockLongCount)
-                                            .Select(elem => elem.ILOffset));
+                                    var writtenBlocks = new HashSet<int>(
+                                        methodData
+                                            .InstrumentationData.Where(elem =>
+                                                elem.InstrumentationKind
+                                                    == PgoInstrumentationKind.BasicBlockIntCount
+                                                || elem.InstrumentationKind
+                                                    == PgoInstrumentationKind.BasicBlockLongCount
+                                            )
+                                            .Select(elem => elem.ILOffset)
+                                    );
 
-                                    var writtenEdges =
-                                        new HashSet<(int, int)>(
-                                            methodData.InstrumentationData
-                                            .Where(elem => elem.InstrumentationKind == PgoInstrumentationKind.EdgeIntCount || elem.InstrumentationKind == PgoInstrumentationKind.EdgeLongCount)
-                                            .Select(elem => (elem.ILOffset, elem.Other)));
+                                    var writtenEdges = new HashSet<(int, int)>(
+                                        methodData
+                                            .InstrumentationData.Where(elem =>
+                                                elem.InstrumentationKind
+                                                    == PgoInstrumentationKind.EdgeIntCount
+                                                || elem.InstrumentationKind
+                                                    == PgoInstrumentationKind.EdgeLongCount
+                                            )
+                                            .Select(elem => (elem.ILOffset, elem.Other))
+                                    );
 
-                                    Debug.Assert(writtenBlocks.SetEquals(sp.FlowGraph.BasicBlocks.Select(bb => bb.Start)));
-                                    Debug.Assert(writtenEdges.SetEquals(sp.FlowGraph.BasicBlocks.SelectMany(bb => bb.Targets.Select(bbTar => (bb.Start, bbTar.Start)))));
+                                    Debug.Assert(
+                                        writtenBlocks.SetEquals(
+                                            sp.FlowGraph.BasicBlocks.Select(bb => bb.Start)
+                                        )
+                                    );
+                                    Debug.Assert(
+                                        writtenEdges.SetEquals(
+                                            sp.FlowGraph.BasicBlocks.SelectMany(bb =>
+                                                bb.Targets.Select(bbTar => (bb.Start, bbTar.Start))
+                                            )
+                                        )
+                                    );
                                 }
 #endif
                             }
@@ -1851,33 +2352,60 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                 FileInfo outputFileInfo = new(outputPath);
                 if (_command.FileType.Value == PgoFileType.jittrace)
-                    GenerateJittraceFile(outputFileInfo, methodsUsedInProcess, _command.JitTraceOptions);
+                    GenerateJittraceFile(
+                        outputFileInfo,
+                        methodsUsedInProcess,
+                        _command.JitTraceOptions
+                    );
                 else if (_command.FileType.Value == PgoFileType.mibc)
                 {
                     var config = new MibcConfig();
 
                     // Look for OS and Arch, e.g. "Windows" and "x64"
-                    TraceEvent processInfo = p.EventsInProcess.Filter(t => t.EventName == "ProcessInfo").FirstOrDefault();
+                    TraceEvent processInfo = p
+                        .EventsInProcess.Filter(t => t.EventName == "ProcessInfo")
+                        .FirstOrDefault();
                     config.Os = processInfo?.PayloadByName("OSInformation")?.ToString();
                     config.Arch = processInfo?.PayloadByName("ArchInformation")?.ToString();
 
                     // Look for Sku, e.g. "CoreClr"
-                    TraceEvent runtimeStart = p.EventsInProcess.Filter(t => t.EventName == "Runtime/Start").FirstOrDefault();
+                    TraceEvent runtimeStart = p
+                        .EventsInProcess.Filter(t => t.EventName == "Runtime/Start")
+                        .FirstOrDefault();
                     config.Runtime = runtimeStart?.PayloadByName("Sku")?.ToString();
 
-                    ILCompiler.MethodProfileData[] methodProfileData = new ILCompiler.MethodProfileData[methodsUsedInProcess.Count];
+                    ILCompiler.MethodProfileData[] methodProfileData =
+                        new ILCompiler.MethodProfileData[methodsUsedInProcess.Count];
                     for (int i = 0; i < methodProfileData.Length; i++)
                     {
                         ProcessedMethodData processedData = methodsUsedInProcess[i];
-                        methodProfileData[i] = new ILCompiler.MethodProfileData(processedData.Method, ILCompiler.MethodProfilingDataFlags.ReadMethodCode, processedData.ExclusiveWeight, processedData.WeightedCallData, 0xFFFFFFFF, processedData.InstrumentationData);
+                        methodProfileData[i] = new ILCompiler.MethodProfileData(
+                            processedData.Method,
+                            ILCompiler.MethodProfilingDataFlags.ReadMethodCode,
+                            processedData.ExclusiveWeight,
+                            processedData.WeightedCallData,
+                            0xFFFFFFFF,
+                            processedData.InstrumentationData
+                        );
                     }
-                    return MibcEmitter.GenerateMibcFile(config, tsc, outputFileInfo, methodProfileData, _command.ValidateOutputFile, !Get(_command.Compressed));
+                    return MibcEmitter.GenerateMibcFile(
+                        config,
+                        tsc,
+                        outputFileInfo,
+                        methodProfileData,
+                        _command.ValidateOutputFile,
+                        !Get(_command.Compressed)
+                    );
                 }
             }
             return 0;
         }
 
-        private static bool PassesMethodFilter(Regex includeMethods, Regex excludeMethods, string methodName)
+        private static bool PassesMethodFilter(
+            Regex includeMethods,
+            Regex excludeMethods,
+            string methodName
+        )
         {
             if (includeMethods != null || excludeMethods != null)
             {
@@ -1895,7 +2423,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             return true;
         }
 
-        private static void GenerateJittraceFile(FileInfo outputFileName, IEnumerable<ProcessedMethodData> methodsToAttemptToPrepare, JitTraceOptions jittraceOptions)
+        private static void GenerateJittraceFile(
+            FileInfo outputFileName,
+            IEnumerable<ProcessedMethodData> methodsToAttemptToPrepare,
+            JitTraceOptions jittraceOptions
+        )
         {
             PrintMessage($"JitTrace options {jittraceOptions}");
 
@@ -1925,9 +2457,16 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     if (jittraceOptions.HasFlag(JitTraceOptions.showtimestamp))
                         timeStampAddon = time.ToString("F4") + "-";
 
-                    methodPrepareInstruction.Append(CsvEscape(timeStampAddon + method.ToString(), outerCsvEscapeChar));
+                    methodPrepareInstruction.Append(
+                        CsvEscape(timeStampAddon + method.ToString(), outerCsvEscapeChar)
+                    );
                     methodPrepareInstruction.Append(outerCsvEscapeChar);
-                    methodPrepareInstruction.Append(CsvEscape(GetStringForType(method.OwningType, typeStringCache), outerCsvEscapeChar));
+                    methodPrepareInstruction.Append(
+                        CsvEscape(
+                            GetStringForType(method.OwningType, typeStringCache),
+                            outerCsvEscapeChar
+                        )
+                    );
                     methodPrepareInstruction.Append(outerCsvEscapeChar);
                     methodPrepareInstruction.Append(method.Signature.Length);
                     methodPrepareInstruction.Append(outerCsvEscapeChar);
@@ -1936,10 +2475,17 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     foreach (TypeDesc methodInstantiationType in method.Instantiation)
                     {
                         instantiationBuilder.Append(innerCsvEscapeChar);
-                        instantiationBuilder.Append(CsvEscape(GetStringForType(methodInstantiationType, typeStringCache), innerCsvEscapeChar));
+                        instantiationBuilder.Append(
+                            CsvEscape(
+                                GetStringForType(methodInstantiationType, typeStringCache),
+                                innerCsvEscapeChar
+                            )
+                        );
                     }
 
-                    methodPrepareInstruction.Append(CsvEscape(instantiationBuilder.ToString(), outerCsvEscapeChar));
+                    methodPrepareInstruction.Append(
+                        CsvEscape(instantiationBuilder.ToString(), outerCsvEscapeChar)
+                    );
                     methodPrepareInstruction.Append(outerCsvEscapeChar);
                     methodPrepareInstruction.Append(CsvEscape(method.Name, outerCsvEscapeChar));
                 }
@@ -1979,7 +2525,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             return input.Replace("\\", "\\\\").Replace(separator, "\\s");
         }
 
-        private static string GetStringForType(TypeDesc type, Dictionary<TypeDesc, string> typeStringCache)
+        private static string GetStringForType(
+            TypeDesc type,
+            Dictionary<TypeDesc, string> typeStringCache
+        )
         {
             string str;
             if (typeStringCache.TryGetValue(type, out str))

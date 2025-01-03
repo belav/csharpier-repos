@@ -10,14 +10,20 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractRenameCommandHandler :
-        IChainedCommandHandler<TabKeyCommandArgs>,
-        IChainedCommandHandler<BackTabKeyCommandArgs>
+    internal abstract partial class AbstractRenameCommandHandler
+        : IChainedCommandHandler<TabKeyCommandArgs>,
+            IChainedCommandHandler<BackTabKeyCommandArgs>
     {
-        public CommandState GetCommandState(TabKeyCommandArgs args, Func<CommandState> nextHandler)
-            => GetCommandState(nextHandler);
+        public CommandState GetCommandState(
+            TabKeyCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => GetCommandState(nextHandler);
 
-        public void ExecuteCommand(TabKeyCommandArgs args, Action nextHandler, CommandExecutionContext context)
+        public void ExecuteCommand(
+            TabKeyCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        )
         {
             // If the Dashboard is focused, just navigate through its UI.
             if (AdornmentShouldReceiveKeyboardNavigation(args.TextView))
@@ -26,30 +32,42 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 return;
             }
 
-            HandlePossibleTypingCommand(args, nextHandler, (activeSession, span) =>
-            {
-                var spans = new NormalizedSnapshotSpanCollection(
-                    activeSession.GetBufferManager(args.SubjectBuffer)
-                    .GetEditableSpansForSnapshot(args.SubjectBuffer.CurrentSnapshot));
-
-                for (var i = 0; i < spans.Count; i++)
+            HandlePossibleTypingCommand(
+                args,
+                nextHandler,
+                (activeSession, span) =>
                 {
-                    if (span == spans[i])
+                    var spans = new NormalizedSnapshotSpanCollection(
+                        activeSession
+                            .GetBufferManager(args.SubjectBuffer)
+                            .GetEditableSpansForSnapshot(args.SubjectBuffer.CurrentSnapshot)
+                    );
+
+                    for (var i = 0; i < spans.Count; i++)
                     {
-                        var selectNext = i < spans.Count - 1 ? i + 1 : 0;
-                        var newSelection = spans[selectNext];
-                        args.TextView.TryMoveCaretToAndEnsureVisible(newSelection.Start);
-                        args.TextView.SetSelection(newSelection);
-                        break;
+                        if (span == spans[i])
+                        {
+                            var selectNext = i < spans.Count - 1 ? i + 1 : 0;
+                            var newSelection = spans[selectNext];
+                            args.TextView.TryMoveCaretToAndEnsureVisible(newSelection.Start);
+                            args.TextView.SetSelection(newSelection);
+                            break;
+                        }
                     }
                 }
-            });
+            );
         }
 
-        public CommandState GetCommandState(BackTabKeyCommandArgs args, Func<CommandState> nextHandler)
-            => GetCommandState(nextHandler);
+        public CommandState GetCommandState(
+            BackTabKeyCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => GetCommandState(nextHandler);
 
-        public void ExecuteCommand(BackTabKeyCommandArgs args, Action nextHandler, CommandExecutionContext context)
+        public void ExecuteCommand(
+            BackTabKeyCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        )
         {
             // If the Dashboard is focused, just navigate through its UI.
             if (AdornmentShouldReceiveKeyboardNavigation(args.TextView))

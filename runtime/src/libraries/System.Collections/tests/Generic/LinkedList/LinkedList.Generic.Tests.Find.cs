@@ -17,7 +17,8 @@ namespace System.Collections.Tests
             LinkedList<T> linkedList = new LinkedList<T>();
             int arraySize = 16;
             int seed = 21543;
-            T[] headItems, tailItems;
+            T[] headItems,
+                tailItems;
 
             headItems = new T[arraySize];
             tailItems = new T[arraySize];
@@ -78,7 +79,6 @@ namespace System.Collections.Tests
             Array.Copy(headItems, tempItems, headItems.Length);
             Array.Copy(headItems, 0, tempItems, headItems.Length, headItems.Length);
             VerifyFindDuplicates(linkedList, tempItems);
-
 
             //[] Call Find with default(T) at the beginning
             linkedList = new LinkedList<T>();

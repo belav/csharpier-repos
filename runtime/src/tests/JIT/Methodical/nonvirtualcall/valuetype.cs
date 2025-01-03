@@ -8,68 +8,70 @@ using Xunit;
 
 namespace Test_valuetype
 {
-class ApplicationException : Exception
-{
-    public ApplicationException(string message) : base(message) { }
-}
-
-namespace Test
-{
-    public struct Dummy
+    class ApplicationException : Exception
     {
-        public string Virtual()
-        {
-            return "Dummy.Virtual";
-        }
+        public ApplicationException(string message)
+            : base(message) { }
     }
 
-    public delegate string TestMethod();
-
-    public static class Program
+    namespace Test
     {
-        public static void CallDummy()
+        public struct Dummy
         {
-            Dummy dummy = new Dummy();
-            Assert.AreEqual("Dummy.Virtual", dummy.Virtual());
-            Assert.AreEqual("Dummy.Virtual", new TestMethod(dummy.Virtual));
+            public string Virtual()
+            {
+                return "Dummy.Virtual";
+            }
         }
 
-        [Fact]
-        public static int TestEntryPoint()
+        public delegate string TestMethod();
+
+        public static class Program
         {
-            try
+            public static void CallDummy()
             {
-                CallDummy();
-                Console.WriteLine("Test SUCCESS");
-                return 100;
+                Dummy dummy = new Dummy();
+                Assert.AreEqual("Dummy.Virtual", dummy.Virtual());
+                Assert.AreEqual("Dummy.Virtual", new TestMethod(dummy.Virtual));
             }
-            catch (Exception ex)
+
+            [Fact]
+            public static int TestEntryPoint()
             {
-                Console.WriteLine(ex);
-                Console.WriteLine("Test FAILED");
-                return 101;
+                try
+                {
+                    CallDummy();
+                    Console.WriteLine("Test SUCCESS");
+                    return 100;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    Console.WriteLine("Test FAILED");
+                    return 101;
+                }
+            }
+        }
+
+        public static class Assert
+        {
+            public static void AreEqual(string left, TestMethod right)
+            {
+                AreEqual(left, right());
+            }
+
+            public static void AreEqual(string left, string right)
+            {
+                if (String.IsNullOrEmpty(left))
+                    throw new ArgumentNullException("left");
+                if (string.IsNullOrEmpty(right))
+                    throw new ArgumentNullException("right");
+                if (left != right)
+                {
+                    string message = String.Format("[[{0}]] != [[{1}]]", left, right);
+                    throw new ApplicationException(message);
+                }
             }
         }
     }
-
-    public static class Assert
-    {
-        public static void AreEqual(string left, TestMethod right)
-        {
-            AreEqual(left, right());
-        }
-        public static void AreEqual(string left, string right)
-        {
-            if (String.IsNullOrEmpty(left))
-                throw new ArgumentNullException("left");
-            if (string.IsNullOrEmpty(right))
-                throw new ArgumentNullException("right");
-            if (left != right)
-            {
-                string message = String.Format("[[{0}]] != [[{1}]]", left, right);
-                throw new ApplicationException(message);
-            }
-        }
-    }
-}
 }

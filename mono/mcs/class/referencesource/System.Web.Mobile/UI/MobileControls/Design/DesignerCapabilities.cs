@@ -1,26 +1,28 @@
 //------------------------------------------------------------------------------
 // <copyright file="DesignerCapabilities.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
 {
     using System.Collections;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Web.Mobile;
     using System.Web.UI;
-    using System.Globalization;
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class DesignerCapabilities : MobileCapabilities
     {
         private static IDictionary _items = null;
-        private readonly static DesignerCapabilities _staticInstance = new DesignerCapabilities();
+        private static readonly DesignerCapabilities _staticInstance = new DesignerCapabilities();
 
         static DesignerCapabilities()
         {
@@ -89,7 +91,7 @@ namespace System.Web.UI.Design.MobileControls
             _items["requiresContentTypeMetaTag"] = "false";
             _items["requiresDBCSCharacter"] = "false";
             _items["supportsCss"] = "true";
-            _items["hidesRightAlignedMultiselectScrollbars"]="false";
+            _items["hidesRightAlignedMultiselectScrollbars"] = "false";
             _items["isMobileDevice"] = "false";
             _items["canRenderInputAndSelectElementsTogether"] = "true";
             _items["canRenderAfterInputOrSelectElement"] = "true";
@@ -135,10 +137,22 @@ namespace System.Web.UI.Design.MobileControls
             get
             {
                 Object obj = _items[key];
-                Debug.Assert(obj != null, 
-                    String.Format(CultureInfo.CurrentCulture, "property {0} not defined in DesignerCapabilities", key));
-                Debug.Assert(obj is String,
-                    String.Format(CultureInfo.CurrentCulture, "property {0} invalid type defined", key));
+                Debug.Assert(
+                    obj != null,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        "property {0} not defined in DesignerCapabilities",
+                        key
+                    )
+                );
+                Debug.Assert(
+                    obj is String,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        "property {0} invalid type defined",
+                        key
+                    )
+                );
 
                 return obj as String;
             }
@@ -146,10 +160,7 @@ namespace System.Web.UI.Design.MobileControls
 
         internal static DesignerCapabilities Instance
         {
-            get
-            {
-                return _staticInstance;
-            }
+            get { return _staticInstance; }
         }
     }
 }

@@ -38,7 +38,11 @@ namespace System.Activities.DurableInstancing
             }
         }
 
-        public void TrackStoreLock(Guid instanceId, long instanceVersion, DependentTransaction dependentTransaction)
+        public void TrackStoreLock(
+            Guid instanceId,
+            long instanceVersion,
+            DependentTransaction dependentTransaction
+        )
         {
             this.BoundToLock = true;
             this.InstanceId = instanceId;
@@ -46,7 +50,9 @@ namespace System.Activities.DurableInstancing
 
             if (dependentTransaction != null)
             {
-                dependentTransaction.TransactionCompleted += new TransactionCompletedEventHandler(TransactionCompleted);
+                dependentTransaction.TransactionCompleted += new TransactionCompletedEventHandler(
+                    TransactionCompleted
+                );
             }
             else
             {
@@ -61,7 +67,9 @@ namespace System.Activities.DurableInstancing
 
             if (dependentTransaction != null)
             {
-                dependentTransaction.TransactionCompleted += new TransactionCompletedEventHandler(TransactedUnlockCompleted);
+                dependentTransaction.TransactionCompleted += new TransactionCompletedEventHandler(
+                    TransactedUnlockCompleted
+                );
             }
         }
 
@@ -91,7 +99,10 @@ namespace System.Activities.DurableInstancing
         {
             lock (this.synchLock)
             {
-                if (e.Transaction.TransactionInformation.Status != TransactionStatus.Committed && this.IsSafeToUnlock)
+                if (
+                    e.Transaction.TransactionInformation.Status != TransactionStatus.Committed
+                    && this.IsSafeToUnlock
+                )
                 {
                     this.store.GenerateUnlockCommand(this);
                 }

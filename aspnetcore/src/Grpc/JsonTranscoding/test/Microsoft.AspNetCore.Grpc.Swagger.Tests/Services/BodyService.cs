@@ -5,6 +5,4 @@ using Params;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Tests.Services;
 
-public class BodyService : Body.Body.BodyBase
-{
-}
+public class BodyService : Body.Body.BodyBase { }

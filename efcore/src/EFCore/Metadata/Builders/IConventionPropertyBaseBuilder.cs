@@ -47,10 +47,7 @@ public interface IConventionPropertyBaseBuilder<TBuilder> : IConventionAnnotatab
     ///     The same builder to continue configuration if the annotation was set or removed,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    new TBuilder? HasNonNullAnnotation(
-        string name,
-        object? value,
-        bool fromDataAnnotation = false);
+    new TBuilder? HasNonNullAnnotation(string name, object? value, bool fromDataAnnotation = false);
 
     /// <summary>
     ///     Removes the annotation with the given name from this object.
@@ -111,7 +108,10 @@ public interface IConventionPropertyBaseBuilder<TBuilder> : IConventionAnnotatab
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    TBuilder? UsePropertyAccessMode(PropertyAccessMode? propertyAccessMode, bool fromDataAnnotation = false);
+    TBuilder? UsePropertyAccessMode(
+        PropertyAccessMode? propertyAccessMode,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="PropertyAccessMode" /> can be set for this property-like object
@@ -120,5 +120,8 @@ public interface IConventionPropertyBaseBuilder<TBuilder> : IConventionAnnotatab
     /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for this property-like object.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the <see cref="PropertyAccessMode" /> can be set for this property-like object.</returns>
-    bool CanSetPropertyAccessMode(PropertyAccessMode? propertyAccessMode, bool fromDataAnnotation = false);
+    bool CanSetPropertyAccessMode(
+        PropertyAccessMode? propertyAccessMode,
+        bool fromDataAnnotation = false
+    );
 }

@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -24,15 +24,19 @@ namespace System.Data.Services.Client
 
     internal static class ClientConvert
     {
-#if !ASTORIA_LIGHT        
-        private const string SystemDataLinq = "System.Data.Linq, Version=" + FX35Assembly.Version + ", Culture=neutral, PublicKeyToken=" + AssemblyRef.EcmaPublicKeyToken;
+#if !ASTORIA_LIGHT
+        private const string SystemDataLinq =
+            "System.Data.Linq, Version="
+            + FX35Assembly.Version
+            + ", Culture=neutral, PublicKeyToken="
+            + AssemblyRef.EcmaPublicKeyToken;
 #endif
 
         private static readonly Type[] knownTypes = CreateKnownPrimitives();
 
         private static readonly Dictionary<string, Type> namedTypesMap = CreateKnownNamesMap();
 
-#if !ASTORIA_LIGHT       
+#if !ASTORIA_LIGHT
         private static bool needSystemDataLinqBinary = true;
 #endif
 
@@ -86,7 +90,7 @@ namespace System.Data.Services.Client
 
             XElement,
 
-#if !ASTORIA_LIGHT            
+#if !ASTORIA_LIGHT
             Binary,
 #endif
         }
@@ -109,7 +113,10 @@ namespace System.Data.Services.Client
                     case StorageType.CharArray:
                         return propertyValue.ToCharArray();
                     case StorageType.DateTime:
-                        return XmlConvert.ToDateTime(propertyValue, XmlDateTimeSerializationMode.RoundtripKind);
+                        return XmlConvert.ToDateTime(
+                            propertyValue,
+                            XmlDateTimeSerializationMode.RoundtripKind
+                        );
                     case StorageType.DateTimeOffset:
                         return XmlConvert.ToDateTimeOffset(propertyValue);
                     case StorageType.Decimal:
@@ -143,13 +150,23 @@ namespace System.Data.Services.Client
                     case StorageType.Uri:
                         return Util.CreateUri(propertyValue, UriKind.RelativeOrAbsolute);
                     case StorageType.XDocument:
-                        return (0 < propertyValue.Length ? System.Xml.Linq.XDocument.Parse(propertyValue) : new System.Xml.Linq.XDocument());
+                        return (
+                            0 < propertyValue.Length
+                                ? System.Xml.Linq.XDocument.Parse(propertyValue)
+                                : new System.Xml.Linq.XDocument()
+                        );
                     case StorageType.XElement:
                         return System.Xml.Linq.XElement.Parse(propertyValue);
-#if !ASTORIA_LIGHT                    
+#if !ASTORIA_LIGHT
                     case StorageType.Binary:
-                        Debug.Assert(null != knownTypes[(int)StorageType.Binary], "null typeof(System.Data.Linq.Binary)");
-                        return Activator.CreateInstance(knownTypes[(int)StorageType.Binary], Convert.FromBase64String(propertyValue));
+                        Debug.Assert(
+                            null != knownTypes[(int)StorageType.Binary],
+                            "null typeof(System.Data.Linq.Binary)"
+                        );
+                        return Activator.CreateInstance(
+                            knownTypes[(int)StorageType.Binary],
+                            Convert.FromBase64String(propertyValue)
+                        );
 #endif
                     default:
                         Debug.Assert(false, "new StorageType without update to knownTypes");
@@ -159,12 +176,18 @@ namespace System.Data.Services.Client
             catch (FormatException ex)
             {
                 propertyValue = (0 == propertyValue.Length ? "String.Empty" : "String");
-                throw Error.InvalidOperation(Strings.Deserialize_Current(propertyType.ToString(), propertyValue), ex);
+                throw Error.InvalidOperation(
+                    Strings.Deserialize_Current(propertyType.ToString(), propertyValue),
+                    ex
+                );
             }
             catch (OverflowException ex)
             {
                 propertyValue = (0 == propertyValue.Length ? "String.Empty" : "String");
-                throw Error.InvalidOperation(Strings.Deserialize_Current(propertyType.ToString(), propertyValue), ex);
+                throw Error.InvalidOperation(
+                    Strings.Deserialize_Current(propertyType.ToString(), propertyValue),
+                    ex
+                );
             }
         }
 
@@ -178,10 +201,29 @@ namespace System.Data.Services.Client
         internal static bool TryKeyBinaryToString(object binaryValue, out string result)
         {
             Debug.Assert(binaryValue != null, "binaryValue != null");
-            Debug.Assert(IsBinaryValue(binaryValue), "IsBinaryValue(binaryValue) - otherwise TryKeyBinaryToString shouldn't have been called.");
-            const System.Reflection.BindingFlags Flags = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.InvokeMethod;
-            byte[] bytes = (byte[])binaryValue.GetType().InvokeMember("ToArray", Flags, null, binaryValue, null, System.Globalization.CultureInfo.InvariantCulture);
-            return System.Data.Services.Parsing.WebConvert.TryKeyPrimitiveToString(bytes, out result);
+            Debug.Assert(
+                IsBinaryValue(binaryValue),
+                "IsBinaryValue(binaryValue) - otherwise TryKeyBinaryToString shouldn't have been called."
+            );
+            const System.Reflection.BindingFlags Flags =
+                System.Reflection.BindingFlags.Public
+                | System.Reflection.BindingFlags.Instance
+                | System.Reflection.BindingFlags.InvokeMethod;
+            byte[] bytes = (byte[])
+                binaryValue
+                    .GetType()
+                    .InvokeMember(
+                        "ToArray",
+                        Flags,
+                        null,
+                        binaryValue,
+                        null,
+                        System.Globalization.CultureInfo.InvariantCulture
+                    );
+            return System.Data.Services.Parsing.WebConvert.TryKeyPrimitiveToString(
+                bytes,
+                out result
+            );
         }
 #endif
 
@@ -194,13 +236,17 @@ namespace System.Data.Services.Client
                 return TryKeyBinaryToString(value, out result);
             }
 #endif
-            return System.Data.Services.Parsing.WebConvert.TryKeyPrimitiveToString(value, out result);
+            return System.Data.Services.Parsing.WebConvert.TryKeyPrimitiveToString(
+                value,
+                out result
+            );
         }
 
         internal static bool ToNamedType(string typeName, out Type type)
         {
             type = typeof(string);
-            return String.IsNullOrEmpty(typeName) || ClientConvert.namedTypesMap.TryGetValue(typeName, out type);
+            return String.IsNullOrEmpty(typeName)
+                || ClientConvert.namedTypesMap.TryGetValue(typeName, out type);
         }
 
         internal static string ToTypeName(Type type)
@@ -214,7 +260,7 @@ namespace System.Data.Services.Client
                 }
             }
 
-            return type.FullName; 
+            return type.FullName;
         }
 
         internal static string ToString(object propertyValue, bool atomDateConstruct)
@@ -232,9 +278,14 @@ namespace System.Data.Services.Client
                     return XmlConvert.ToString((char)propertyValue);
                 case StorageType.CharArray:
                     return new String((char[])propertyValue);
-                case StorageType.DateTime:                  
+                case StorageType.DateTime:
                     DateTime dt = (DateTime)propertyValue;
-                    return XmlConvert.ToString(dt.Kind == DateTimeKind.Unspecified && atomDateConstruct ? new DateTime(dt.Ticks, DateTimeKind.Utc) : dt, XmlDateTimeSerializationMode.RoundtripKind); 
+                    return XmlConvert.ToString(
+                        dt.Kind == DateTimeKind.Unspecified && atomDateConstruct
+                            ? new DateTime(dt.Ticks, DateTimeKind.Utc)
+                            : dt,
+                        XmlDateTimeSerializationMode.RoundtripKind
+                    );
                 case StorageType.DateTimeOffset:
                     return XmlConvert.ToString((DateTimeOffset)propertyValue);
                 case StorageType.Decimal:
@@ -271,10 +322,16 @@ namespace System.Data.Services.Client
                     return ((System.Xml.Linq.XDocument)propertyValue).ToString();
                 case StorageType.XElement:
                     return ((System.Xml.Linq.XElement)propertyValue).ToString();
-#if !ASTORIA_LIGHT                
+#if !ASTORIA_LIGHT
                 case StorageType.Binary:
-                    Debug.Assert(null != knownTypes[(int)StorageType.Binary], "null typeof(System.Data.Linq.Binary)");
-                    Debug.Assert(knownTypes[(int)StorageType.Binary].IsInstanceOfType(propertyValue), "not IsInstanceOfType System.Data.Linq.Binary");
+                    Debug.Assert(
+                        null != knownTypes[(int)StorageType.Binary],
+                        "null typeof(System.Data.Linq.Binary)"
+                    );
+                    Debug.Assert(
+                        knownTypes[(int)StorageType.Binary].IsInstanceOfType(propertyValue),
+                        "not IsInstanceOfType System.Data.Linq.Binary"
+                    );
                     return propertyValue.ToString();
 #endif
                 default:
@@ -306,7 +363,7 @@ namespace System.Data.Services.Client
                     return XmlConstants.EdmBooleanTypeName;
                 case StorageType.Byte:
                     return XmlConstants.EdmByteTypeName;
-#if !ASTORIA_LIGHT                
+#if !ASTORIA_LIGHT
                 case StorageType.Binary:
 #endif
                 case StorageType.ByteArray:
@@ -334,7 +391,9 @@ namespace System.Data.Services.Client
                 case StorageType.UInt16:
                 case StorageType.UInt32:
                 case StorageType.UInt64:
-                    throw new NotSupportedException(Strings.ALinq_CantCastToUnsupportedPrimitive(propertyType.Name));
+                    throw new NotSupportedException(
+                        Strings.ALinq_CantCastToUnsupportedPrimitive(propertyType.Name)
+                    );
                 case StorageType.Char:
                 case StorageType.CharArray:
                 case StorageType.String:
@@ -342,7 +401,8 @@ namespace System.Data.Services.Client
                 case StorageType.Uri:
                 case StorageType.XDocument:
                 case StorageType.XElement:
-                    return null;                default:
+                    return null;
+                default:
                     Debug.Assert(false, "knowntype without reverse mapping");
                     return null;
             }
@@ -350,7 +410,7 @@ namespace System.Data.Services.Client
 
         private static Type[] CreateKnownPrimitives()
         {
-#if !ASTORIA_LIGHT            
+#if !ASTORIA_LIGHT
             Type[] types = new Type[1 + (int)StorageType.Binary];
 #else
             Type[] types = new Type[1 + (int)StorageType.XElement];
@@ -379,7 +439,7 @@ namespace System.Data.Services.Client
             types[(int)StorageType.Uri] = typeof(Uri);
             types[(int)StorageType.XDocument] = typeof(System.Xml.Linq.XDocument);
             types[(int)StorageType.XElement] = typeof(System.Xml.Linq.XElement);
-#if !ASTORIA_LIGHT            
+#if !ASTORIA_LIGHT
             types[(int)StorageType.Binary] = null;
 #endif
             return types;
@@ -387,7 +447,9 @@ namespace System.Data.Services.Client
 
         private static Dictionary<string, Type> CreateKnownNamesMap()
         {
-            Dictionary<string, Type> named = new Dictionary<string, Type>(EqualityComparer<String>.Default);
+            Dictionary<string, Type> named = new Dictionary<string, Type>(
+                EqualityComparer<String>.Default
+            );
 
             named.Add(XmlConstants.EdmStringTypeName, typeof(string));
             named.Add(XmlConstants.EdmBooleanTypeName, typeof(Boolean));
@@ -408,7 +470,7 @@ namespace System.Data.Services.Client
         private static int IndexOfStorage(Type type)
         {
             int index = Util.IndexOfReference(ClientConvert.knownTypes, type);
-#if !ASTORIA_LIGHT            
+#if !ASTORIA_LIGHT
             if ((index < 0) && needSystemDataLinqBinary && (type.Name == "Binary"))
             {
                 return LoadSystemDataLinqBinary(type);
@@ -417,12 +479,18 @@ namespace System.Data.Services.Client
             return index;
         }
 
-#if !ASTORIA_LIGHT        
+#if !ASTORIA_LIGHT
         private static int LoadSystemDataLinqBinary(Type type)
         {
-            if ((type.Namespace == "System.Data.Linq") &&
-                (System.Reflection.AssemblyName.ReferenceMatchesDefinition(
-                    type.Assembly.GetName(), new System.Reflection.AssemblyName(SystemDataLinq))))
+            if (
+                (type.Namespace == "System.Data.Linq")
+                && (
+                    System.Reflection.AssemblyName.ReferenceMatchesDefinition(
+                        type.Assembly.GetName(),
+                        new System.Reflection.AssemblyName(SystemDataLinq)
+                    )
+                )
+            )
             {
                 ClientConvert.knownTypes[(int)StorageType.Binary] = type;
                 needSystemDataLinqBinary = false;

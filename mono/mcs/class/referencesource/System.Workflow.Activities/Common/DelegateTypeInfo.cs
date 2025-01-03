@@ -1,11 +1,11 @@
-// Copyright (c) Microsoft Corporation. All rights reserved. 
-//  
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
-// WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED 
-// WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. 
-// THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE 
-// AND INFORMATION REMAINS WITH THE USER. 
-//  
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+// WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
+// WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE
+// AND INFORMATION REMAINS WITH THE USER.
+//
 
 /*********************************************************************
  * NOTE: A copy of this file exists at: WF\Common\Shared
@@ -18,11 +18,11 @@ namespace System.Workflow.Activities.Common
     using System;
     using System.CodeDom;
     using System.Collections;
-    using System.Globalization;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Reflection;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Reflection;
 
     internal class DelegateTypeInfo
     {
@@ -32,26 +32,17 @@ namespace System.Workflow.Activities.Common
 
         internal CodeParameterDeclarationExpression[] Parameters
         {
-            get
-            {
-                return parameters;
-            }
+            get { return parameters; }
         }
 
         internal Type[] ParameterTypes
         {
-            get
-            {
-                return parameterTypes;
-            }
+            get { return parameterTypes; }
         }
 
         internal CodeTypeReference ReturnType
         {
-            get
-            {
-                return returnType;
-            }
+            get { return returnType; }
         }
 
         internal DelegateTypeInfo(Type delegateClass)
@@ -59,7 +50,11 @@ namespace System.Workflow.Activities.Common
             Resolve(delegateClass);
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1307:SpecifyStringComparison", Justification = "EndsWith(\"&\") not a security issue.")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1307:SpecifyStringComparison",
+            Justification = "EndsWith(\"&\") not a security issue."
+        )]
         private void Resolve(Type delegateClass)
         {
             MethodInfo invokeMethod = delegateClass.GetMethod("Invoke");
@@ -68,7 +63,11 @@ namespace System.Workflow.Activities.Common
             Resolve(invokeMethod);
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1307:SpecifyStringComparison", Justification = "EndsWith(\"&\") not a security issue.")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1307:SpecifyStringComparison",
+            Justification = "EndsWith(\"&\") not a security issue."
+        )]
         private void Resolve(MethodInfo method)
         {
             // Here we build up an array of argument types, separated
@@ -87,14 +86,17 @@ namespace System.Workflow.Activities.Common
 
                 FieldDirection fieldDir = FieldDirection.In;
 
-                // check for the '&' that means ref (gotta love it!) 
+                // check for the '&' that means ref (gotta love it!)
                 // and we need to strip that & before we continue.  Ouch.
                 if (paramType.IsByRef)
                 {
                     if (paramType.FullName.EndsWith("&"))
                     {
                         // strip the & and reload the type without it.
-                        paramType = paramType.Assembly.GetType(paramType.FullName.Substring(0, paramType.FullName.Length - 1), true);
+                        paramType = paramType.Assembly.GetType(
+                            paramType.FullName.Substring(0, paramType.FullName.Length - 1),
+                            true
+                        );
                     }
                     fieldDir = FieldDirection.Ref;
                 }
@@ -105,12 +107,16 @@ namespace System.Workflow.Activities.Common
                     else
                         fieldDir = FieldDirection.Out;
                 }
-                parameters[index] = new CodeParameterDeclarationExpression(new CodeTypeReference(paramType), paramName);
+                parameters[index] = new CodeParameterDeclarationExpression(
+                    new CodeTypeReference(paramType),
+                    paramName
+                );
                 parameters[index].Direction = fieldDir;
                 parameterTypes[index] = paramType;
             }
             this.returnType = new CodeTypeReference(method.ReturnType);
         }
+
         public override bool Equals(object other)
         {
             if (other == null)
@@ -121,7 +127,10 @@ namespace System.Workflow.Activities.Common
             if (dtiOther == null)
                 return false;
 
-            if (ReturnType.BaseType != dtiOther.ReturnType.BaseType || Parameters.Length != dtiOther.Parameters.Length)
+            if (
+                ReturnType.BaseType != dtiOther.ReturnType.BaseType
+                || Parameters.Length != dtiOther.Parameters.Length
+            )
                 return false;
 
             for (int parameter = 0; parameter < Parameters.Length; parameter++)
@@ -132,6 +141,7 @@ namespace System.Workflow.Activities.Common
             }
             return true;
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();

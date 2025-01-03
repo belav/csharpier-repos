@@ -57,7 +57,11 @@ internal class TestPartitionedRateLimiter<TResource> : PartitionedRateLimiter<TR
         return new TestRateLimitLease(true, leases);
     }
 
-    protected override async ValueTask<RateLimitLease> AcquireAsyncCore(TResource resourceID, int permitCount, CancellationToken cancellationToken)
+    protected override async ValueTask<RateLimitLease> AcquireAsyncCore(
+        TResource resourceID,
+        int permitCount,
+        CancellationToken cancellationToken
+    )
     {
         if (permitCount != 1)
         {

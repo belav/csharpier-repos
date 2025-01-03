@@ -15,16 +15,23 @@ namespace Microsoft.AspNet.Facebook.Test
     public class FacebookAuthorizeFilterHookTest
     {
         [Theory]
-        [InlineData("~/home/cannotcreatecookies", "https://apps.facebook.com/DefaultAppId/home/cannotcreatecookies")]
+        [InlineData(
+            "~/home/cannotcreatecookies",
+            "https://apps.facebook.com/DefaultAppId/home/cannotcreatecookies"
+        )]
         [InlineData(null, "https://www.facebook.com/")]
         public void OnAuthorization_CannotCreateCookiesHookRedirectsToConfigValueOrDefault(
             string cannotCreateCookiesRedirectPath,
-            string expectedRedirectPath)
+            string expectedRedirectPath
+        )
         {
             // Arrange
             var config = BuildConfiguration("~/home/permissions", cannotCreateCookiesRedirectPath);
             var authorizeFilter = new FacebookAuthorizeFilter(config);
-            var context = BuildSignedAuthorizationContext("http://contoso.com?__fb_mps=true", "email");
+            var context = BuildSignedAuthorizationContext(
+                "http://contoso.com?__fb_mps=true",
+                "email"
+            );
 
             // Act
             authorizeFilter.OnAuthorization(context);
@@ -40,7 +47,10 @@ namespace Microsoft.AspNet.Facebook.Test
             // Arrange
             var config = BuildConfiguration("~/home/permissions");
             var authorizeFilter = new CustomDefaultAuthorizeFilter(config);
-            var context = BuildSignedAuthorizationContext("http://contoso.com?__fb_mps=true", "email");
+            var context = BuildSignedAuthorizationContext(
+                "http://contoso.com?__fb_mps=true",
+                "email"
+            );
 
             // Act
             authorizeFilter.OnAuthorization(context);
@@ -55,9 +65,11 @@ namespace Microsoft.AspNet.Facebook.Test
         [InlineData("http://contoso.com?__fb_mps=true", "email", true)]
         [InlineData("http://contoso.com", "email", false)]
         [InlineData("http://contoso.com?__fb_mps=true", null, false)]
-        public void OnAuthorization_TriggersCannotCreateCookiesHook(string requestUrl,
-                                                                    string permission,
-                                                                    bool expectedTrigger)
+        public void OnAuthorization_TriggersCannotCreateCookiesHook(
+            string requestUrl,
+            string permission,
+            bool expectedTrigger
+        )
         {
             // Arrange
             var config = BuildConfiguration("~/home/permissions");
@@ -75,9 +87,11 @@ namespace Microsoft.AspNet.Facebook.Test
         [InlineData("http://contoso.com", "email", true)]
         [InlineData("http://contoso.com?error=access_denied", "email", false)]
         [InlineData("http://contoso.com?error=access_denied", null, false)]
-        public void OnAuthorization_TriggersPreHookPriorToPermissionsDialog(string requestUrl,
-                                                                            string permission,
-                                                                            bool expectedTrigger)
+        public void OnAuthorization_TriggersPreHookPriorToPermissionsDialog(
+            string requestUrl,
+            string permission,
+            bool expectedTrigger
+        )
         {
             // Arrange
             var config = BuildConfiguration("~/home/permissions");
@@ -95,7 +109,11 @@ namespace Microsoft.AspNet.Facebook.Test
         [InlineData("http://contoso.com", "email", true)]
         [InlineData("http://contoso.com?error=access_denied", "email", false)]
         [InlineData("http://contoso.com?error=access_denied", null, false)]
-        public void OnAuthorization_TriggersDeniedHook(string requestUrl, string permission, bool expectedTrigger)
+        public void OnAuthorization_TriggersDeniedHook(
+            string requestUrl,
+            string permission,
+            bool expectedTrigger
+        )
         {
             // Arrange
             var config = BuildConfiguration("~/home/permissions");
@@ -103,7 +121,10 @@ namespace Microsoft.AspNet.Facebook.Test
             var persistedCookies = new HttpCookieCollection();
             persistedCookies.Add(
                 new HttpCookie(
-                    PermissionHelper.RequestedPermissionCookieName, permission ?? string.Empty));
+                    PermissionHelper.RequestedPermissionCookieName,
+                    permission ?? string.Empty
+                )
+            );
             var context = BuildSignedAuthorizationContext(requestUrl, permission, persistedCookies);
 
             // Act
@@ -119,10 +140,12 @@ namespace Microsoft.AspNet.Facebook.Test
         [InlineData("http://contoso.com?error=access_denied", "email", "email", false)]
         [InlineData("http://contoso.com?error=access_denied", "email", "foo", false)]
         [InlineData("http://contoso.com?error=access_denied", null, "foo", false)]
-        public void OnAuthorization_TriggersDeniedHookWithRevokedPermissions(string requestUrl,
-                                                                             string permission,
-                                                                             string permissionInStatus,
-                                                                             bool expectedTrigger)
+        public void OnAuthorization_TriggersDeniedHookWithRevokedPermissions(
+            string requestUrl,
+            string permission,
+            string permissionInStatus,
+            bool expectedTrigger
+        )
         {
             var rawPermissionsStatus = new Dictionary<string, string>
             {
@@ -133,8 +156,10 @@ namespace Microsoft.AspNet.Facebook.Test
             var data = new List<IDictionary<string, string>>(new[] { rawPermissionsStatus });
 
             // Arrange
-            var config = BuildConfiguration("~/home/permissions", userPermissionsStatus:
-                new PermissionsStatus(data));
+            var config = BuildConfiguration(
+                "~/home/permissions",
+                userPermissionsStatus: new PermissionsStatus(data)
+            );
             var authorizeFilter = new CustomDefaultAuthorizeFilter(config);
             var context = BuildSignedAuthorizationContext(requestUrl, permission);
 
@@ -149,9 +174,11 @@ namespace Microsoft.AspNet.Facebook.Test
         [InlineData("http://contoso.com", "email", true)]
         [InlineData("http://contoso.com?error=access_denied", "email", false)]
         [InlineData("http://contoso.com?error=access_denied", null, false)]
-        public void OnAuthorization_TriggersDeniedHookAfterPersistingRequestedPermissions(string requestUrl,
-                                                                                          string permission,
-                                                                                          bool expectedTrigger)
+        public void OnAuthorization_TriggersDeniedHookAfterPersistingRequestedPermissions(
+            string requestUrl,
+            string permission,
+            bool expectedTrigger
+        )
         {
             // Arrange
             var config = BuildConfiguration("~/home/permissions");
@@ -185,7 +212,10 @@ namespace Microsoft.AspNet.Facebook.Test
             // Arrange
             var config = BuildConfiguration("~/home/permissions");
             var authorizeFilter = new CustomInvalidAuthorizeFilter(config);
-            var context = BuildSignedAuthorizationContext("http://contoso.com?__fb_mps=true", "email");
+            var context = BuildSignedAuthorizationContext(
+                "http://contoso.com?__fb_mps=true",
+                "email"
+            );
 
             // Act
             authorizeFilter.OnAuthorization(context);
@@ -217,9 +247,13 @@ namespace Microsoft.AspNet.Facebook.Test
             var authorizeFilter = new CustomInvalidAuthorizeFilter(config);
             var persistedCookies = new HttpCookieCollection();
             persistedCookies.Add(
-                new HttpCookie(
-                    PermissionHelper.RequestedPermissionCookieName, "email"));
-            var context = BuildSignedAuthorizationContext("http://contoso.com", "email", persistedCookies);
+                new HttpCookie(PermissionHelper.RequestedPermissionCookieName, "email")
+            );
+            var context = BuildSignedAuthorizationContext(
+                "http://contoso.com",
+                "email",
+                persistedCookies
+            );
 
             // Act
             authorizeFilter.OnAuthorization(context);
@@ -235,10 +269,12 @@ namespace Microsoft.AspNet.Facebook.Test
             var tempUrl = "http://contoso.com?__fb_mps=true";
             var config = BuildConfiguration("~/home/permissions");
             var cannotCreateCookiesHookResult = new RedirectResult(tempUrl);
-            var authorizeFilter = new CustomReturningAuthorizeFilter(config,
-                                                                     cannotCreateCookiesHookResult,
-                                                                     new RedirectResult(tempUrl),
-                                                                     new RedirectResult(tempUrl));
+            var authorizeFilter = new CustomReturningAuthorizeFilter(
+                config,
+                cannotCreateCookiesHookResult,
+                new RedirectResult(tempUrl),
+                new RedirectResult(tempUrl)
+            );
             var context = BuildSignedAuthorizationContext(tempUrl, "email");
 
             // Act
@@ -255,10 +291,12 @@ namespace Microsoft.AspNet.Facebook.Test
             var tempUrl = "http://contoso.com";
             var config = BuildConfiguration("~/home/permissions");
             var preHookResult = new RedirectResult(tempUrl);
-            var authorizeFilter = new CustomReturningAuthorizeFilter(config,
-                                                                     new RedirectResult(tempUrl),
-                                                                     preHookResult,
-                                                                     new RedirectResult(tempUrl));
+            var authorizeFilter = new CustomReturningAuthorizeFilter(
+                config,
+                new RedirectResult(tempUrl),
+                preHookResult,
+                new RedirectResult(tempUrl)
+            );
             var context = BuildSignedAuthorizationContext(tempUrl, "email");
 
             // Act
@@ -275,14 +313,16 @@ namespace Microsoft.AspNet.Facebook.Test
             var tempUrl = "http://contoso.com";
             var config = BuildConfiguration("~/home/permissions");
             var deniedHookResult = new RedirectResult(tempUrl);
-            var authorizeFilter = new CustomReturningAuthorizeFilter(config,
-                                                                     new RedirectResult(tempUrl),
-                                                                     new RedirectResult(tempUrl),
-                                                                     deniedHookResult);
+            var authorizeFilter = new CustomReturningAuthorizeFilter(
+                config,
+                new RedirectResult(tempUrl),
+                new RedirectResult(tempUrl),
+                deniedHookResult
+            );
             var persistedCookies = new HttpCookieCollection();
             persistedCookies.Add(
-                new HttpCookie(
-                    PermissionHelper.RequestedPermissionCookieName, "email"));
+                new HttpCookie(PermissionHelper.RequestedPermissionCookieName, "email")
+            );
             var context = BuildSignedAuthorizationContext(tempUrl, "email", persistedCookies);
 
             // Act
@@ -293,12 +333,17 @@ namespace Microsoft.AspNet.Facebook.Test
         }
 
         // Helper methods and classes
-        private FacebookConfiguration BuildConfiguration(string authorizationRedirectPath,
-                                                         string cannotCreateCookiesRedirectPath = null,
-                                                         PermissionsStatus userPermissionsStatus = null)
+        private FacebookConfiguration BuildConfiguration(
+            string authorizationRedirectPath,
+            string cannotCreateCookiesRedirectPath = null,
+            PermissionsStatus userPermissionsStatus = null
+        )
         {
             var client = MockHelpers.CreateFacebookClient();
-            var permissionService = MockHelpers.CreatePermissionService(new[] { "" }, userPermissionsStatus);
+            var permissionService = MockHelpers.CreatePermissionService(
+                new[] { "" },
+                userPermissionsStatus
+            );
             var config = MockHelpers.CreateConfiguration(client, permissionService);
             config.AuthorizationRedirectPath = authorizationRedirectPath;
 
@@ -310,23 +355,27 @@ namespace Microsoft.AspNet.Facebook.Test
             return config;
         }
 
-        private AuthorizationContext BuildSignedAuthorizationContext(string requestUrl,
-                                                                     string permission,
-                                                                     HttpCookieCollection requestCookies = null)
+        private AuthorizationContext BuildSignedAuthorizationContext(
+            string requestUrl,
+            string permission,
+            HttpCookieCollection requestCookies = null
+        )
         {
             var permissions = permission == null ? new string[0] : new string[] { permission };
 
             var requestUri = new Uri(requestUrl);
 
             var context = new AuthorizationContext(
-                MockHelpers.CreateControllerContext(new NameValueCollection
-                {
-                    {"signed_request", "exampleSignedRequest"}
-                },
-                HttpUtility.ParseQueryString(requestUri.Query),
-                requestUri,
-                requestCookies),
-                MockHelpers.CreateActionDescriptor(new[] { new FacebookAuthorizeAttribute(permissions) }));
+                MockHelpers.CreateControllerContext(
+                    new NameValueCollection { { "signed_request", "exampleSignedRequest" } },
+                    HttpUtility.ParseQueryString(requestUri.Query),
+                    requestUri,
+                    requestCookies
+                ),
+                MockHelpers.CreateActionDescriptor(
+                    new[] { new FacebookAuthorizeAttribute(permissions) }
+                )
+            );
 
             return context;
         }
@@ -334,8 +383,7 @@ namespace Microsoft.AspNet.Facebook.Test
         private class CustomInvalidAuthorizeFilter : FacebookAuthorizeFilter
         {
             public CustomInvalidAuthorizeFilter(FacebookConfiguration config)
-                : base(config)
-            { }
+                : base(config) { }
 
             protected override void OnCannotCreateCookies(PermissionContext context)
             {
@@ -356,8 +404,7 @@ namespace Microsoft.AspNet.Facebook.Test
         private class CustomDefaultAuthorizeFilter : FacebookAuthorizeFilter
         {
             public CustomDefaultAuthorizeFilter(FacebookConfiguration config)
-                : base(config)
-            { }
+                : base(config) { }
 
             public bool CannotCreateCookiesHookTriggered { get; private set; }
             public bool PermissionPromptHookTriggered { get; private set; }
@@ -391,10 +438,12 @@ namespace Microsoft.AspNet.Facebook.Test
             private ActionResult _promptPermissionHookResult;
             private ActionResult _deniedPermissionPromptHookResult;
 
-            public CustomReturningAuthorizeFilter(FacebookConfiguration config,
-                                                  ActionResult cannotCreateCookieResult,
-                                                  ActionResult promptPermissionHookResult,
-                                                  ActionResult deniedPermissionPromptHookResult)
+            public CustomReturningAuthorizeFilter(
+                FacebookConfiguration config,
+                ActionResult cannotCreateCookieResult,
+                ActionResult promptPermissionHookResult,
+                ActionResult deniedPermissionPromptHookResult
+            )
                 : base(config)
             {
                 _cannotCreateCookieResult = cannotCreateCookieResult;

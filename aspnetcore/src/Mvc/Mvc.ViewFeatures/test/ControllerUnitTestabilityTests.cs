@@ -398,7 +398,12 @@ public class ControllerUnitTestabilityTests
         var value = new { Value = "Value_1" };
 
         // Act
-        var result = controller.CreatedAtAction_Action(actionName, controllerName, routeValues, value);
+        var result = controller.CreatedAtAction_Action(
+            actionName,
+            controllerName,
+            routeValues,
+            value
+        );
 
         // Assert
         Assert.NotNull(result);
@@ -437,7 +442,12 @@ public class ControllerUnitTestabilityTests
         var value = new { Value = "Value_1" };
 
         // Act
-        var result = controller.AcceptedAtAction_Action(actionName, controllerName, routeValues, value);
+        var result = controller.AcceptedAtAction_Action(
+            actionName,
+            controllerName,
+            routeValues,
+            value
+        );
 
         // Assert
         Assert.NotNull(result);
@@ -629,7 +639,10 @@ public class ControllerUnitTestabilityTests
         Assert.Equal(controller1.ModelState, controller1.ViewData.ModelState);
 
         Assert.Equal(controller1.ControllerContext.ModelState, controller2.ModelState);
-        Assert.Equal(controller1.ControllerContext.ModelState, controller2.ControllerContext.ModelState);
+        Assert.Equal(
+            controller1.ControllerContext.ModelState,
+            controller2.ControllerContext.ModelState
+        );
         Assert.Equal(controller1.ControllerContext.ModelState, controller2.ViewData.ModelState);
     }
 
@@ -670,7 +683,10 @@ public class ControllerUnitTestabilityTests
         var controller = new TestabilityController();
 
         // Act
-        var result = controller.ViewComponent(typeof(TagCloudViewComponent), new { Arg1 = "Hi", Arg2 = "There" });
+        var result = controller.ViewComponent(
+            typeof(TagCloudViewComponent),
+            new { Arg1 = "Hi", Arg2 = "There" }
+        );
 
         // Assert
         Assert.NotNull(result);
@@ -719,16 +735,12 @@ public class ControllerUnitTestabilityTests
     {
         get
         {
-            yield return new object[]
-            {
-                    null,
-                    null
-            };
+            yield return new object[] { null, null };
 
             yield return new object[]
             {
-                    new MyModel { Property1 = "Property_1", Property2 = "Property_2" },
-                    "ViewName_1"
+                new MyModel { Property1 = "Property_1", Property2 = "Property_2" },
+                "ViewName_1",
             };
         }
     }
@@ -777,7 +789,10 @@ public class ControllerUnitTestabilityTests
             return Json(data);
         }
 
-        public IActionResult JsonWithSerializerSettings_Action(object data, object serializerSettings)
+        public IActionResult JsonWithSerializerSettings_Action(
+            object data,
+            object serializerSettings
+        )
         {
             return Json(data, serializerSettings);
         }
@@ -787,7 +802,11 @@ public class ControllerUnitTestabilityTests
             return Redirect(url);
         }
 
-        public IActionResult RedirectToAction_Action(string actionName, string controllerName, object routeValues)
+        public IActionResult RedirectToAction_Action(
+            string actionName,
+            string controllerName,
+            object routeValues
+        )
         {
             return RedirectToAction(actionName, controllerName, routeValues);
         }
@@ -797,22 +816,40 @@ public class ControllerUnitTestabilityTests
             return RedirectToRoute(routeName, routeValues);
         }
 
-        public IActionResult CreatedAtAction_Action(string actionName, string controllerName, object routeValues, object value)
+        public IActionResult CreatedAtAction_Action(
+            string actionName,
+            string controllerName,
+            object routeValues,
+            object value
+        )
         {
             return CreatedAtAction(actionName, controllerName, routeValues, value);
         }
 
-        public IActionResult CreatedAtRoute_Action(string routeName, object routeValues, object value)
+        public IActionResult CreatedAtRoute_Action(
+            string routeName,
+            object routeValues,
+            object value
+        )
         {
             return CreatedAtRoute(routeName, routeValues, value);
         }
 
-        public IActionResult AcceptedAtAction_Action(string actionName, string controllerName, object routeValues, object value)
+        public IActionResult AcceptedAtAction_Action(
+            string actionName,
+            string controllerName,
+            object routeValues,
+            object value
+        )
         {
             return AcceptedAtAction(actionName, controllerName, routeValues, value);
         }
 
-        public IActionResult AcceptedAtRoute_Action(string routeName, object routeValues, object value)
+        public IActionResult AcceptedAtRoute_Action(
+            string routeName,
+            object routeValues,
+            object value
+        )
         {
             return AcceptedAtRoute(routeName, routeValues, value);
         }
@@ -844,7 +881,5 @@ public class ControllerUnitTestabilityTests
         public string Property2 { get; set; }
     }
 
-    private class TagCloudViewComponent
-    {
-    }
+    private class TagCloudViewComponent { }
 }

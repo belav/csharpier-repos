@@ -12,7 +12,11 @@ namespace System.Data.Objects.DataClasses
 {
     /// <summary>
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Edm"
+    )]
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
     public sealed class EdmRelationshipAttribute : System.Attribute
     {
@@ -32,14 +36,16 @@ namespace System.Data.Objects.DataClasses
         /// attribute allows us access to this information even in O-Space when there is no context.
         /// There can be multiple attributes of this type in an assembly.
         /// </summary>
-        public EdmRelationshipAttribute(string relationshipNamespaceName,
+        public EdmRelationshipAttribute(
+            string relationshipNamespaceName,
             string relationshipName,
             string role1Name,
             RelationshipMultiplicity role1Multiplicity,
             Type role1Type,
             string role2Name,
             RelationshipMultiplicity role2Multiplicity,
-            Type role2Type)
+            Type role2Type
+        )
         {
             _relationshipNamespaceName = relationshipNamespaceName;
             _relationshipName = relationshipName;
@@ -59,7 +65,8 @@ namespace System.Data.Objects.DataClasses
         /// attribute allows us access to this information even in O-Space when there is no context.
         /// There can be multiple attributes of this type in an assembly.
         /// </summary>
-        public EdmRelationshipAttribute(string relationshipNamespaceName,
+        public EdmRelationshipAttribute(
+            string relationshipNamespaceName,
             string relationshipName,
             string role1Name,
             RelationshipMultiplicity role1Multiplicity,
@@ -67,7 +74,8 @@ namespace System.Data.Objects.DataClasses
             string role2Name,
             RelationshipMultiplicity role2Multiplicity,
             Type role2Type,
-            bool isForeignKey)
+            bool isForeignKey
+        )
         {
             _relationshipNamespaceName = relationshipNamespaceName;
             _relationshipName = relationshipName;
@@ -108,7 +116,7 @@ namespace System.Data.Objects.DataClasses
         }
 
         /// <summary>
-        /// The multiplicity of the the RoleName in RelationshipName 
+        /// The multiplicity of the the RoleName in RelationshipName
         /// </summary>
         public RelationshipMultiplicity Role1Multiplicity
         {
@@ -122,6 +130,7 @@ namespace System.Data.Objects.DataClasses
         {
             get { return _role1Type; }
         }
+
         /// <summary>
         /// The name of the role
         /// </summary>
@@ -131,7 +140,7 @@ namespace System.Data.Objects.DataClasses
         }
 
         /// <summary>
-        /// The multiplicity of the the RoleName in RelationshipName 
+        /// The multiplicity of the the RoleName in RelationshipName
         /// </summary>
         public RelationshipMultiplicity Role2Multiplicity
         {

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -12,12 +12,11 @@
 **
 **
 ===========================================================*/
-namespace System.Runtime.Serialization {
-
+namespace System.Runtime.Serialization
+{
     [Serializable]
     internal delegate void DeserializationEventHandler(Object sender);
 
     [Serializable]
     internal delegate void SerializationEventHandler(StreamingContext context);
-    
 }

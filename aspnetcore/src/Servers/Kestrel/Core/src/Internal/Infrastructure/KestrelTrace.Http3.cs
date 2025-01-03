@@ -25,11 +25,20 @@ internal sealed partial class KestrelTrace : ILogger
         Http3Log.Http3ConnectionClosed(_http3Logger, connectionId, highestOpenedStreamId);
     }
 
-    public void Http3StreamAbort(string traceIdentifier, Http3ErrorCode error, ConnectionAbortedException abortReason)
+    public void Http3StreamAbort(
+        string traceIdentifier,
+        Http3ErrorCode error,
+        ConnectionAbortedException abortReason
+    )
     {
         if (_http3Logger.IsEnabled(LogLevel.Debug))
         {
-            Http3Log.Http3StreamAbort(_http3Logger, traceIdentifier, Http3Formatting.ToFormattedErrorCode(error), abortReason);
+            Http3Log.Http3StreamAbort(
+                _http3Logger,
+                traceIdentifier,
+                Http3Formatting.ToFormattedErrorCode(error),
+                abortReason
+            );
         }
     }
 
@@ -37,7 +46,13 @@ internal sealed partial class KestrelTrace : ILogger
     {
         if (_http3Logger.IsEnabled(LogLevel.Trace))
         {
-            Http3Log.Http3FrameReceived(_http3Logger, connectionId, Http3Formatting.ToFormattedType(frame.Type), streamId, frame.Length);
+            Http3Log.Http3FrameReceived(
+                _http3Logger,
+                connectionId,
+                Http3Formatting.ToFormattedType(frame.Type),
+                streamId,
+                frame.Length
+            );
         }
     }
 
@@ -45,7 +60,13 @@ internal sealed partial class KestrelTrace : ILogger
     {
         if (_http3Logger.IsEnabled(LogLevel.Trace))
         {
-            Http3Log.Http3FrameSending(_http3Logger, connectionId, Http3Formatting.ToFormattedType(frame.Type), streamId, frame.Length);
+            Http3Log.Http3FrameSending(
+                _http3Logger,
+                connectionId,
+                Http3Formatting.ToFormattedType(frame.Type),
+                streamId,
+                frame.Length
+            );
         }
     }
 
@@ -71,35 +92,131 @@ internal sealed partial class KestrelTrace : ILogger
 
     private static partial class Http3Log
     {
-        [LoggerMessage(42, LogLevel.Debug, @"Connection id ""{ConnectionId}"": HTTP/3 connection error.", EventName = "Http3ConnectionError")]
-        public static partial void Http3ConnectionError(ILogger logger, string connectionId, Http3ConnectionErrorException ex);
+        [LoggerMessage(
+            42,
+            LogLevel.Debug,
+            @"Connection id ""{ConnectionId}"": HTTP/3 connection error.",
+            EventName = "Http3ConnectionError"
+        )]
+        public static partial void Http3ConnectionError(
+            ILogger logger,
+            string connectionId,
+            Http3ConnectionErrorException ex
+        );
 
-        [LoggerMessage(43, LogLevel.Debug, @"Connection id ""{ConnectionId}"" is closing.", EventName = "Http3ConnectionClosing")]
+        [LoggerMessage(
+            43,
+            LogLevel.Debug,
+            @"Connection id ""{ConnectionId}"" is closing.",
+            EventName = "Http3ConnectionClosing"
+        )]
         public static partial void Http3ConnectionClosing(ILogger logger, string connectionId);
 
-        [LoggerMessage(44, LogLevel.Debug, @"Connection id ""{ConnectionId}"" is closed. The last processed stream ID was {HighestOpenedStreamId}.", EventName = "Http3ConnectionClosed")]
-        public static partial void Http3ConnectionClosed(ILogger logger, string connectionId, long? highestOpenedStreamId);
+        [LoggerMessage(
+            44,
+            LogLevel.Debug,
+            @"Connection id ""{ConnectionId}"" is closed. The last processed stream ID was {HighestOpenedStreamId}.",
+            EventName = "Http3ConnectionClosed"
+        )]
+        public static partial void Http3ConnectionClosed(
+            ILogger logger,
+            string connectionId,
+            long? highestOpenedStreamId
+        );
 
-        [LoggerMessage(45, LogLevel.Debug, @"Trace id ""{TraceIdentifier}"": HTTP/3 stream error ""{error}"". An abort is being sent to the stream.", EventName = "Http3StreamAbort", SkipEnabledCheck = true)]
-        public static partial void Http3StreamAbort(ILogger logger, string traceIdentifier, string error, ConnectionAbortedException abortReason);
+        [LoggerMessage(
+            45,
+            LogLevel.Debug,
+            @"Trace id ""{TraceIdentifier}"": HTTP/3 stream error ""{error}"". An abort is being sent to the stream.",
+            EventName = "Http3StreamAbort",
+            SkipEnabledCheck = true
+        )]
+        public static partial void Http3StreamAbort(
+            ILogger logger,
+            string traceIdentifier,
+            string error,
+            ConnectionAbortedException abortReason
+        );
 
-        [LoggerMessage(46, LogLevel.Trace, @"Connection id ""{ConnectionId}"" received {type} frame for stream ID {id} with length {length}.", EventName = "Http3FrameReceived", SkipEnabledCheck = true)]
-        public static partial void Http3FrameReceived(ILogger logger, string connectionId, string type, long id, long length);
+        [LoggerMessage(
+            46,
+            LogLevel.Trace,
+            @"Connection id ""{ConnectionId}"" received {type} frame for stream ID {id} with length {length}.",
+            EventName = "Http3FrameReceived",
+            SkipEnabledCheck = true
+        )]
+        public static partial void Http3FrameReceived(
+            ILogger logger,
+            string connectionId,
+            string type,
+            long id,
+            long length
+        );
 
-        [LoggerMessage(47, LogLevel.Trace, @"Connection id ""{ConnectionId}"" sending {type} frame for stream ID {id} with length {length}.", EventName = "Http3FrameSending", SkipEnabledCheck = true)]
-        public static partial void Http3FrameSending(ILogger logger, string connectionId, string type, long id, long length);
+        [LoggerMessage(
+            47,
+            LogLevel.Trace,
+            @"Connection id ""{ConnectionId}"" sending {type} frame for stream ID {id} with length {length}.",
+            EventName = "Http3FrameSending",
+            SkipEnabledCheck = true
+        )]
+        public static partial void Http3FrameSending(
+            ILogger logger,
+            string connectionId,
+            string type,
+            long id,
+            long length
+        );
 
-        [LoggerMessage(50, LogLevel.Debug, @"Connection id ""{ConnectionId}"": Unexpected error when initializing outbound control stream.", EventName = "Http3OutboundControlStreamError")]
-        public static partial void Http3OutboundControlStreamError(ILogger logger, string connectionId, Exception ex);
+        [LoggerMessage(
+            50,
+            LogLevel.Debug,
+            @"Connection id ""{ConnectionId}"": Unexpected error when initializing outbound control stream.",
+            EventName = "Http3OutboundControlStreamError"
+        )]
+        public static partial void Http3OutboundControlStreamError(
+            ILogger logger,
+            string connectionId,
+            Exception ex
+        );
 
-        [LoggerMessage(51, LogLevel.Debug, @"Connection id ""{ConnectionId}"": QPACK decoding error while decoding headers for stream ID {StreamId}.", EventName = "QPackDecodingError")]
-        public static partial void QPackDecodingError(ILogger logger, string connectionId, long streamId, Exception ex);
+        [LoggerMessage(
+            51,
+            LogLevel.Debug,
+            @"Connection id ""{ConnectionId}"": QPACK decoding error while decoding headers for stream ID {StreamId}.",
+            EventName = "QPackDecodingError"
+        )]
+        public static partial void QPackDecodingError(
+            ILogger logger,
+            string connectionId,
+            long streamId,
+            Exception ex
+        );
 
-        [LoggerMessage(52, LogLevel.Information, @"Connection id ""{ConnectionId}"": QPACK encoding error while encoding headers for stream ID {StreamId}.", EventName = "QPackEncodingError")]
-        public static partial void QPackEncodingError(ILogger logger, string connectionId, long streamId, Exception ex);
+        [LoggerMessage(
+            52,
+            LogLevel.Information,
+            @"Connection id ""{ConnectionId}"": QPACK encoding error while encoding headers for stream ID {StreamId}.",
+            EventName = "QPackEncodingError"
+        )]
+        public static partial void QPackEncodingError(
+            ILogger logger,
+            string connectionId,
+            long streamId,
+            Exception ex
+        );
 
-        [LoggerMessage(53, LogLevel.Debug, @"Connection id ""{ConnectionId}"": GOAWAY stream ID {GoAwayStreamId}.", EventName = "Http3GoAwayHighestOpenedStreamId")]
-        public static partial void Http3GoAwayStreamId(ILogger logger, string connectionId, long goAwayStreamId);
+        [LoggerMessage(
+            53,
+            LogLevel.Debug,
+            @"Connection id ""{ConnectionId}"": GOAWAY stream ID {GoAwayStreamId}.",
+            EventName = "Http3GoAwayHighestOpenedStreamId"
+        )]
+        public static partial void Http3GoAwayStreamId(
+            ILogger logger,
+            string connectionId,
+            long goAwayStreamId
+        );
 
         // IDs prior to 64 are reserved for back compat (the various KestrelTrace loggers used to share a single sequence)
     }

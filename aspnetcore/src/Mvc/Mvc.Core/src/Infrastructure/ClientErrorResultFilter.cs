@@ -14,9 +14,11 @@ internal sealed partial class ClientErrorResultFilter : IAlwaysRunResultFilter, 
 
     public ClientErrorResultFilter(
         IClientErrorFactory clientErrorFactory,
-        ILogger<ClientErrorResultFilter> logger)
+        ILogger<ClientErrorResultFilter> logger
+    )
     {
-        _clientErrorFactory = clientErrorFactory ?? throw new ArgumentNullException(nameof(clientErrorFactory));
+        _clientErrorFactory =
+            clientErrorFactory ?? throw new ArgumentNullException(nameof(clientErrorFactory));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
@@ -25,9 +27,7 @@ internal sealed partial class ClientErrorResultFilter : IAlwaysRunResultFilter, 
     /// </summary>
     public int Order => FilterOrder;
 
-    public void OnResultExecuted(ResultExecutedContext context)
-    {
-    }
+    public void OnResultExecuted(ResultExecutedContext context) { }
 
     public void OnResultExecuting(ResultExecutingContext context)
     {
@@ -51,13 +51,28 @@ internal sealed partial class ClientErrorResultFilter : IAlwaysRunResultFilter, 
             return;
         }
 
-        Log.TransformingClientError(_logger, context.Result.GetType(), result.GetType(), clientError.StatusCode);
+        Log.TransformingClientError(
+            _logger,
+            context.Result.GetType(),
+            result.GetType(),
+            clientError.StatusCode
+        );
         context.Result = result;
     }
 
     private static partial class Log
     {
-        [LoggerMessage(49, LogLevel.Trace, "Replacing {InitialActionResultType} with status code {StatusCode} with {ReplacedActionResultType}.", EventName = "ClientErrorResultFilter")]
-        public static partial void TransformingClientError(ILogger logger, Type initialActionResultType, Type replacedActionResultType, int? statusCode);
+        [LoggerMessage(
+            49,
+            LogLevel.Trace,
+            "Replacing {InitialActionResultType} with status code {StatusCode} with {ReplacedActionResultType}.",
+            EventName = "ClientErrorResultFilter"
+        )]
+        public static partial void TransformingClientError(
+            ILogger logger,
+            Type initialActionResultType,
+            Type replacedActionResultType,
+            int? statusCode
+        );
     }
 }

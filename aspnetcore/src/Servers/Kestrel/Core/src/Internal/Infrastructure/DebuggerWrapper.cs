@@ -7,8 +7,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 internal sealed class DebuggerWrapper : IDebugger
 {
-    private DebuggerWrapper()
-    { }
+    private DebuggerWrapper() { }
 
     public static IDebugger Singleton { get; } = new DebuggerWrapper();
 

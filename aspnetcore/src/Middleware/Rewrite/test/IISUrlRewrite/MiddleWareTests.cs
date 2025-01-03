@@ -18,25 +18,32 @@ public class MiddlewareTests
     [Fact]
     public async Task Invoke_RedirectPathToPathAndQuery()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Rewrite to article.aspx"">
                 <match url = ""^article/([0-9]+)/([_0-9a-z-]+)"" />
                 <action type=""Redirect"" url =""article.aspx?id={R:1}&amp;title={R:2}"" />
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
-             .ConfigureWebHost(webHostBuilder =>
-             {
-                 webHostBuilder
-                 .UseTestServer()
-                 .Configure(app =>
-                 {
-                     app.UseRewriter(options);
-                     app.Run(context => context.Response.WriteAsync(context.Response.Headers.Location));
-                 });
-             }).Build();
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context =>
+                            context.Response.WriteAsync(context.Response.Headers.Location)
+                        );
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -50,25 +57,34 @@ public class MiddlewareTests
     [Fact]
     public async Task Invoke_RewritePathToPathAndQuery()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Rewrite to article.aspx"">
                 <match url = ""^article/([0-9]+)/([_0-9a-z-]+)"" />
                 <action type=""Rewrite"" url =""article.aspx?id={R:1}&amp;title={R:2}"" />
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                    app.Run(context => context.Response.WriteAsync(context.Request.Path + context.Request.QueryString));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context =>
+                            context.Response.WriteAsync(
+                                context.Request.Path + context.Request.QueryString
+                            )
+                        );
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -82,7 +98,9 @@ public class MiddlewareTests
     [Fact]
     public async Task Invoke_RewriteBasedOnQueryStringParameters()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Query String Rewrite"">
                 <match url=""page\.asp$"" />
@@ -93,18 +111,25 @@ public class MiddlewareTests
                 <action type=""Rewrite"" url=""newpage.aspx?param1={C:1}&amp;param2={C:2}"" appendQueryString=""false""/>
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                    app.Run(context => context.Response.WriteAsync(context.Request.Path + context.Request.QueryString));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context =>
+                            context.Response.WriteAsync(
+                                context.Request.Path + context.Request.QueryString
+                            )
+                        );
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -118,25 +143,32 @@ public class MiddlewareTests
     [Fact]
     public async Task Invoke_RedirectToLowerCase()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Convert to lower case"" stopProcessing=""true"">
                 <match url="".*[A-Z].*"" ignoreCase=""false"" />
                 <action type=""Redirect"" url=""{ToLower:{R:0}}"" redirectType=""Permanent"" />
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                    app.Run(context => context.Response.WriteAsync(context.Response.Headers.Location));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context =>
+                            context.Response.WriteAsync(context.Response.Headers.Location)
+                        );
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -150,7 +182,9 @@ public class MiddlewareTests
     [Fact]
     public async Task Invoke_RedirectRemoveTrailingSlash()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Remove trailing slash"" stopProcessing=""true"">
                 <match url=""(.*)/$"" />
@@ -161,17 +195,20 @@ public class MiddlewareTests
                 <action type=""Redirect"" redirectType=""Permanent"" url=""{R:1}"" />
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -185,7 +222,9 @@ public class MiddlewareTests
     [Fact]
     public async Task Invoke_RedirectAddTrailingSlash()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Add trailing slash"" stopProcessing=""true"">
                 <match url=""(.*[^/])$"" />
@@ -196,17 +235,20 @@ public class MiddlewareTests
                 <action type=""Redirect"" redirectType=""Permanent"" url=""{R:1}/"" />
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -220,7 +262,9 @@ public class MiddlewareTests
     [Fact]
     public async Task Invoke_RedirectToHttps()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Redirect to HTTPS"" stopProcessing=""true"">
                 <match url=""(.*)"" />
@@ -230,17 +274,20 @@ public class MiddlewareTests
                 <action type=""Redirect"" url=""https://{HTTP_HOST}/{R:1}"" redirectType=""Permanent"" />
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -254,7 +301,9 @@ public class MiddlewareTests
     [Fact]
     public async Task Invoke_RewriteToHttps()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Rewrite to HTTPS"" stopProcessing=""true"">
                 <match url=""(.*)"" />
@@ -264,23 +313,29 @@ public class MiddlewareTests
                 <action type=""Rewrite"" url=""https://{HTTP_HOST}/{R:1}"" />
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                    app.Run(context => context.Response.WriteAsync(
-                        context.Request.Scheme +
-                        "://" +
-                        context.Request.Host +
-                        context.Request.Path +
-                        context.Request.QueryString));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context =>
+                            context.Response.WriteAsync(
+                                context.Request.Scheme
+                                    + "://"
+                                    + context.Request.Host
+                                    + context.Request.Path
+                                    + context.Request.QueryString
+                            )
+                        );
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -294,30 +349,38 @@ public class MiddlewareTests
     [Fact]
     public async Task Invoke_ReverseProxyToAnotherSite()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Proxy"">
                 <match url=""(.*)"" />
                 <action type=""Rewrite"" url=""http://internalserver/{R:1}"" />
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                    app.Run(context => context.Response.WriteAsync(
-                        context.Request.Scheme +
-                        "://" +
-                        context.Request.Host +
-                        context.Request.Path +
-                        context.Request.QueryString));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context =>
+                            context.Response.WriteAsync(
+                                context.Request.Scheme
+                                    + "://"
+                                    + context.Request.Host
+                                    + context.Request.Path
+                                    + context.Request.QueryString
+                            )
+                        );
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -331,30 +394,38 @@ public class MiddlewareTests
     [Fact]
     public async Task Invoke_CaptureEmptyStringInRegexAssertRedirectLocationHasForwardSlash()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Test"">
                 <match url=""(.*)"" />
                 <action type=""Redirect"" url=""{R:1}"" />
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                    app.Run(context => context.Response.WriteAsync(
-                        context.Request.Scheme +
-                        "://" +
-                        context.Request.Host +
-                        context.Request.Path +
-                        context.Request.QueryString));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context =>
+                            context.Response.WriteAsync(
+                                context.Request.Scheme
+                                    + "://"
+                                    + context.Request.Host
+                                    + context.Request.Path
+                                    + context.Request.QueryString
+                            )
+                        );
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -368,27 +439,34 @@ public class MiddlewareTests
     [Fact]
     public async Task Invoke_CaptureEmptyStringInRegexAssertRewriteLocationHasForwardSlash()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Test"">
                 <match url=""(.*)"" />
                 <action type=""Rewrite"" url=""{R:1}"" />
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                    app.Run(context => context.Response.WriteAsync(
-                        context.Request.Path +
-                        context.Request.QueryString));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context =>
+                            context.Response.WriteAsync(
+                                context.Request.Path + context.Request.QueryString
+                            )
+                        );
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -402,27 +480,34 @@ public class MiddlewareTests
     [Fact]
     public async Task Invoke_CaptureEmptyStringInRegexAssertLocationHeaderContainsPathBase()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Test"">
                 <match url=""(.*)"" />
                 <action type=""Redirect"" url=""{R:1}"" />
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                    app.Run(context => context.Response.WriteAsync(
-                            context.Request.Path +
-                            context.Request.QueryString));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context =>
+                            context.Response.WriteAsync(
+                                context.Request.Path + context.Request.QueryString
+                            )
+                        );
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -441,7 +526,9 @@ public class MiddlewareTests
     [InlineData("isdirectory")]
     public async Task VerifyIsFileAndIsDirectoryParsing(string matchType)
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader($@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                $@"<rewrite>
                 <rules>
                 <rule name=""Test"">
                 <match url=""(.*[^/])$"" />
@@ -451,17 +538,20 @@ public class MiddlewareTests
                 <action type=""Redirect"" url=""{{R:1}}/"" />
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -475,7 +565,9 @@ public class MiddlewareTests
     [Fact]
     public async Task VerifyTrackAllCaptures()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Test"">
                 <match url=""(.*)"" ignoreCase=""false"" />
@@ -487,17 +579,20 @@ public class MiddlewareTests
                 <!--rewrite action uses back - references to both conditions -->
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -505,13 +600,18 @@ public class MiddlewareTests
 
         var response = await server.CreateClient().GetAsync("article/23?p1=123&p2=abc");
 
-        Assert.Equal("/blogposts/article/abc?p1=123&p2=abc", response.Headers.Location.OriginalString);
+        Assert.Equal(
+            "/blogposts/article/abc?p1=123&p2=abc",
+            response.Headers.Location.OriginalString
+        );
     }
 
     [Fact]
     public async Task VerifyTrackAllCapturesRuleAndConditionCapture()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Test"">
                 <match url=""(.*)"" ignoreCase=""false"" />
@@ -523,17 +623,20 @@ public class MiddlewareTests
                 <!--rewrite action uses back - references to both conditions -->
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -541,14 +644,19 @@ public class MiddlewareTests
 
         var response = await server.CreateClient().GetAsync("article/23?p1=123&p2=abc");
 
-        Assert.Equal("/blog/article/23/abc?p1=123&p2=abc", response.Headers.Location.OriginalString);
+        Assert.Equal(
+            "/blog/article/23/abc?p1=123&p2=abc",
+            response.Headers.Location.OriginalString
+        );
     }
 
     [Fact]
     public async Task ThrowArgumentOutOfRangeExceptionWithCorrectMessage()
     {
         // Arrange, Act, Assert
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Test"">
                 <match url=""(.*)"" ignoreCase=""false"" />
@@ -560,32 +668,41 @@ public class MiddlewareTests
                 <!--rewrite action uses back - references to both conditions -->
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var ex = await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => server.CreateClient().GetAsync("article/23?p1=123&p2=abc"));
+        var ex = await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+            () => server.CreateClient().GetAsync("article/23?p1=123&p2=abc")
+        );
 
-        Assert.Equal("Cannot access back reference at index 9. Only 5 back references were captured.", ex.Message);
+        Assert.Equal(
+            "Cannot access back reference at index 9. Only 5 back references were captured.",
+            ex.Message
+        );
     }
 
     [Fact]
     public async Task Invoke_GlobalRuleConditionMatchesAgainstFullUri_ParsedRule()
     {
         // arrange
-        var xml = @"<rewrite>
+        var xml =
+            @"<rewrite>
                             <globalRules>
                                 <rule name=""Test"" patternSyntax=""ECMAScript"" stopProcessing=""true"">
                                     <match url="".*"" />
@@ -601,20 +718,25 @@ public class MiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                    app.Run(context => context.Response.WriteAsync(context.Request.GetEncodedUrl()));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context =>
+                            context.Response.WriteAsync(context.Request.GetEncodedUrl())
+                        );
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
         // act
-        var response = await server.CreateClient().GetStringAsync($"http://localhost/{Guid.NewGuid()}/foo/bar");
+        var response = await server
+            .CreateClient()
+            .GetStringAsync($"http://localhost/{Guid.NewGuid()}/foo/bar");
 
         // assert
         Assert.Equal("http://www.test.com/foo/bar", response);
@@ -623,9 +745,14 @@ public class MiddlewareTests
     [Theory]
     [InlineData("http://fetch.environment.local/dev/path", "http://1.1.1.1/path")]
     [InlineData("http://fetch.environment.local/qa/path", "http://fetch.environment.local/qa/path")]
-    public async Task Invoke_ReverseProxyToAnotherSiteUsingXmlConfiguredRewriteMap(string requestUri, string expectedRewrittenUri)
+    public async Task Invoke_ReverseProxyToAnotherSiteUsingXmlConfiguredRewriteMap(
+        string requestUri,
+        string expectedRewrittenUri
+    )
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"
                 <rewrite>
                     <rules>
                         <rule name=""Proxy"">
@@ -641,18 +768,23 @@ public class MiddlewareTests
                             <add key=""dev"" value=""1.1.1.1"" />
                         </rewriteMap>
                     </rewriteMaps>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                    app.Run(context => context.Response.WriteAsync(context.Request.GetEncodedUrl()));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context =>
+                            context.Response.WriteAsync(context.Request.GetEncodedUrl())
+                        );
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -666,24 +798,29 @@ public class MiddlewareTests
     [Fact]
     public async Task Invoke_CustomResponse()
     {
-        var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(@"<rewrite>
+        var options = new RewriteOptions().AddIISUrlRewrite(
+            new StringReader(
+                @"<rewrite>
                 <rules>
                 <rule name=""Forbidden"">
                 <match url = "".*"" />
                 <action type=""CustomResponse"" statusCode=""403"" statusReason=""reason"" statusDescription=""description"" />
                 </rule>
                 </rules>
-                </rewrite>"));
+                </rewrite>"
+            )
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -700,16 +837,16 @@ public class MiddlewareTests
     [Theory]
     [InlineData(@"^http://localhost(/.*)", "http://localhost/foo/bar", (int)UriMatchPart.Path)]
     [InlineData(@"^http://localhost(/.*)", "http://www.test.com/foo/bar", (int)UriMatchPart.Full)]
-    public async Task Invoke_GlobalRuleConditionMatchesAgainstFullUri_CodedRule(string conditionInputPattern, string expectedResult, int uriMatchPart)
+    public async Task Invoke_GlobalRuleConditionMatchesAgainstFullUri_CodedRule(
+        string conditionInputPattern,
+        string expectedResult,
+        int uriMatchPart
+    )
     {
         // arrange
         var inputParser = new InputParser();
 
-        var ruleBuilder = new UrlRewriteRuleBuilder
-        {
-            Name = "test",
-            Global = false
-        };
+        var ruleBuilder = new UrlRewriteRuleBuilder { Name = "test", Global = false };
         ruleBuilder.AddUrlMatch(".*");
 
         var condition = new UriMatchCondition(
@@ -718,14 +855,16 @@ public class MiddlewareTests
             conditionInputPattern,
             (UriMatchPart)uriMatchPart,
             ignoreCase: true,
-            negate: false);
+            negate: false
+        );
         ruleBuilder.ConfigureConditionBehavior(LogicalGrouping.MatchAll, trackAllCaptures: true);
         ruleBuilder.AddUrlCondition(condition);
 
         var action = new RewriteAction(
             RuleResult.SkipRemainingRules,
             inputParser.ParseInputString(@"http://www.test.com{C:1}", (UriMatchPart)uriMatchPart),
-            queryStringAppend: false);
+            queryStringAppend: false
+        );
         ruleBuilder.AddUrlAction(action);
 
         var options = new RewriteOptions().Add(ruleBuilder.Build());
@@ -733,13 +872,16 @@ public class MiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRewriter(options);
-                    app.Run(context => context.Response.WriteAsync(context.Request.GetEncodedUrl()));
-                });
-            }).Build();
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context =>
+                            context.Response.WriteAsync(context.Request.GetEncodedUrl())
+                        );
+                    });
+            })
+            .Build();
 
         await host.StartAsync();
 

@@ -5,19 +5,20 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
+    using System.ComponentModel;
     using System.Net;
     using System.Net.Security;
     using System.Runtime.Serialization;
     using System.Security.Cryptography.X509Certificates;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
     using System.Xml;
-    using System.ComponentModel;
 
     public class HttpsTransportBindingElement
-        : HttpTransportBindingElement, ITransportTokenAssertionProvider
+        : HttpTransportBindingElement,
+            ITransportTokenAssertionProvider
     {
         bool requireClientCertificate;
         MessageSecurityVersion messageSecurityVersion;
@@ -36,21 +37,13 @@ namespace System.ServiceModel.Channels
         }
 
         HttpsTransportBindingElement(HttpTransportBindingElement elementToBeCloned)
-            : base(elementToBeCloned)
-        {
-        }
+            : base(elementToBeCloned) { }
 
         [DefaultValue(TransportDefaults.RequireClientCertificate)]
         public bool RequireClientCertificate
         {
-            get
-            {
-                return this.requireClientCertificate;
-            }
-            set
-            {
-                this.requireClientCertificate = value;
-            }
+            get { return this.requireClientCertificate; }
+            set { this.requireClientCertificate = value; }
         }
 
         public override string Scheme
@@ -63,35 +56,42 @@ namespace System.ServiceModel.Channels
             return new HttpsTransportBindingElement(this);
         }
 
-        internal override bool GetSupportsClientAuthenticationImpl(AuthenticationSchemes effectiveAuthenticationSchemes)
+        internal override bool GetSupportsClientAuthenticationImpl(
+            AuthenticationSchemes effectiveAuthenticationSchemes
+        )
         {
-            return this.requireClientCertificate || base.GetSupportsClientAuthenticationImpl(effectiveAuthenticationSchemes);
+            return this.requireClientCertificate
+                || base.GetSupportsClientAuthenticationImpl(effectiveAuthenticationSchemes);
         }
 
-        internal override bool GetSupportsClientWindowsIdentityImpl(AuthenticationSchemes effectiveAuthenticationSchemes)
+        internal override bool GetSupportsClientWindowsIdentityImpl(
+            AuthenticationSchemes effectiveAuthenticationSchemes
+        )
         {
-            return this.requireClientCertificate || base.GetSupportsClientWindowsIdentityImpl(effectiveAuthenticationSchemes);
+            return this.requireClientCertificate
+                || base.GetSupportsClientWindowsIdentityImpl(effectiveAuthenticationSchemes);
         }
 
         // In order to generate sp:HttpsToken with the right policy.
         // See CSD 3105 for detail.
         internal MessageSecurityVersion MessageSecurityVersion
         {
-            get
-            {
-                return this.messageSecurityVersion;
-            }
+            get { return this.messageSecurityVersion; }
             set
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 }
                 this.messageSecurityVersion = value;
             }
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -100,18 +100,31 @@ namespace System.ServiceModel.Channels
 
             if (this.MessageHandlerFactory != null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.HttpPipelineNotSupportedOnClientSide, "MessageHandlerFactory")));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.HttpPipelineNotSupportedOnClientSide,
+                            "MessageHandlerFactory"
+                        )
+                    )
+                );
             }
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
-            return (IChannelFactory<TChannel>)(object)new HttpsChannelFactory<TChannel>(this, context);
+            return (IChannelFactory<TChannel>)
+                (object)new HttpsChannelFactory<TChannel>(this, context);
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -122,7 +135,10 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             this.UpdateAuthenticationSchemes(context);
@@ -132,7 +148,9 @@ namespace System.ServiceModel.Channels
             return (IChannelListener<TChannel>)(object)listener;
         }
 
-        internal static HttpsTransportBindingElement CreateFromHttpBindingElement(HttpTransportBindingElement elementToBeCloned)
+        internal static HttpsTransportBindingElement CreateFromHttpBindingElement(
+            HttpTransportBindingElement elementToBeCloned
+        )
         {
             return new HttpsTransportBindingElement(elementToBeCloned);
         }
@@ -145,14 +163,25 @@ namespace System.ServiceModel.Channels
             }
             if (typeof(T) == typeof(ISecurityCapabilities))
             {
-                AuthenticationSchemes effectiveAuthenticationSchemes = HttpTransportBindingElement.GetEffectiveAuthenticationSchemes(this.AuthenticationScheme,
-                    context.BindingParameters);
+                AuthenticationSchemes effectiveAuthenticationSchemes =
+                    HttpTransportBindingElement.GetEffectiveAuthenticationSchemes(
+                        this.AuthenticationScheme,
+                        context.BindingParameters
+                    );
 
-                return (T)(object)new SecurityCapabilities(this.GetSupportsClientAuthenticationImpl(effectiveAuthenticationSchemes),
-                    true,
-                    this.GetSupportsClientWindowsIdentityImpl(effectiveAuthenticationSchemes),
-                    ProtectionLevel.EncryptAndSign,
-                    ProtectionLevel.EncryptAndSign);
+                return (T)
+                    (object)
+                        new SecurityCapabilities(
+                            this.GetSupportsClientAuthenticationImpl(
+                                effectiveAuthenticationSchemes
+                            ),
+                            true,
+                            this.GetSupportsClientWindowsIdentityImpl(
+                                effectiveAuthenticationSchemes
+                            ),
+                            ProtectionLevel.EncryptAndSign,
+                            ProtectionLevel.EncryptAndSign
+                        );
             }
             else
             {
@@ -160,20 +189,37 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        internal override void OnExportPolicy(MetadataExporter exporter, PolicyConversionContext context)
+        internal override void OnExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
             base.OnExportPolicy(exporter, context);
-            SecurityBindingElement.ExportPolicyForTransportTokenAssertionProviders(exporter, context);
+            SecurityBindingElement.ExportPolicyForTransportTokenAssertionProviders(
+                exporter,
+                context
+            );
         }
 
-
-        internal override void OnImportPolicy(MetadataImporter importer, PolicyConversionContext policyContext)
+        internal override void OnImportPolicy(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext
+        )
         {
             base.OnImportPolicy(importer, policyContext);
 
             WSSecurityPolicy sp = null;
-            if (WSSecurityPolicy.TryGetSecurityPolicyDriver(policyContext.GetBindingAssertions(), out sp))
-                sp.TryImportWsspHttpsTokenAssertion(importer, policyContext.GetBindingAssertions(), this);
+            if (
+                WSSecurityPolicy.TryGetSecurityPolicyDriver(
+                    policyContext.GetBindingAssertions(),
+                    out sp
+                )
+            )
+                sp.TryImportWsspHttpsTokenAssertion(
+                    importer,
+                    policyContext.GetBindingAssertions(),
+                    this
+                );
         }
 
         #region ITransportTokenAssertionProvider Members

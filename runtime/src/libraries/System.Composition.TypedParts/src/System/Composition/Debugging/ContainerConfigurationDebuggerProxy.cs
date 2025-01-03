@@ -55,14 +55,16 @@ namespace System.Composition.Debugging
                 return;
 
             var types = _configuration.DebugGetRegisteredTypes();
-            var defaultAttributeContext = _configuration.DebugGetDefaultAttributeContext() ?? new DirectAttributeContext();
+            var defaultAttributeContext =
+                _configuration.DebugGetDefaultAttributeContext() ?? new DirectAttributeContext();
             var discovered = new List<DiscoveredPart>();
             var ignored = new List<Type>();
 
             foreach (var typeSet in types)
             {
                 var ac = typeSet.Item2 ?? defaultAttributeContext;
-                var activationFeatures = TypedPartExportDescriptorProvider.DebugGetActivationFeatures(ac);
+                var activationFeatures =
+                    TypedPartExportDescriptorProvider.DebugGetActivationFeatures(ac);
                 var inspector = new TypeInspector(ac, activationFeatures);
 
                 foreach (var type in typeSet.Item1)

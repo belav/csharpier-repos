@@ -21,11 +21,15 @@ namespace Casting
 
     class ClassWithNoConstraint<T> { }
 
-    class ClassWithValueTypeConstraint<T> where T : struct { }
+    class ClassWithValueTypeConstraint<T>
+        where T : struct { }
 
-    class ClassWithBaseClassConstraint<T> where T : Base { }
+    class ClassWithBaseClassConstraint<T>
+        where T : Base { }
 
-    class ClassWithInterfaceConstraint<T> where T : IFoo { }
+    class ClassWithInterfaceConstraint<T>
+        where T : IFoo { }
 
-    class ClassWithRecursiveImplementation : IContravariant<IContravariant<ClassWithRecursiveImplementation>> { }
+    class ClassWithRecursiveImplementation
+        : IContravariant<IContravariant<ClassWithRecursiveImplementation>> { }
 }

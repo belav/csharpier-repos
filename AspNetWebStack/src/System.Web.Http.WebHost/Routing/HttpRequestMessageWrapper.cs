@@ -41,7 +41,10 @@ namespace System.Web.Http.WebHost.Routing
                 string absolutePath = Path;
                 if (absolutePath.StartsWith(_virtualPathRoot, StringComparison.OrdinalIgnoreCase))
                 {
-                    string relativePath = _virtualPathRoot.Length == 1 ? absolutePath : absolutePath.Substring(_virtualPathRoot.Length);
+                    string relativePath =
+                        _virtualPathRoot.Length == 1
+                            ? absolutePath
+                            : absolutePath.Substring(_virtualPathRoot.Length);
                     return "~" + relativePath.TrimEnd('/');
                 }
                 return null;
@@ -82,7 +85,11 @@ namespace System.Web.Http.WebHost.Routing
             {
                 // All of the HttpContextBase methods are supposed to return paths that are unescaped
                 // and begin with '/'. Don't use Uri.AbsolutePath here because it's escaped.
-                return "/" + _httpRequest.RequestUri.GetComponents(UriComponents.Path, UriFormat.Unescaped);
+                return "/"
+                    + _httpRequest.RequestUri.GetComponents(
+                        UriComponents.Path,
+                        UriFormat.Unescaped
+                    );
             }
         }
 
@@ -98,11 +105,14 @@ namespace System.Web.Http.WebHost.Routing
 
         public override string RawUrl
         {
-            get 
+            get
             {
                 // All of the HttpContextBase methods are supposed to return paths that are unescaped
                 // and begin with '/'. Don't use Uri.PathAndQuery here because it's escaped.
-                return _httpRequest.RequestUri.GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped); 
+                return _httpRequest.RequestUri.GetComponents(
+                    UriComponents.PathAndQuery,
+                    UriFormat.Unescaped
+                );
             }
         }
 

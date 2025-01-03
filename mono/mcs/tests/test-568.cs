@@ -4,12 +4,10 @@
 
 enum E
 {
-	Format
+    Format,
 }
 
 class B
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

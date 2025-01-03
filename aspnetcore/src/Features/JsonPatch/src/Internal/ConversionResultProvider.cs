@@ -18,7 +18,11 @@ public static class ConversionResultProvider
         return ConvertTo(value, typeToConvertTo, null);
     }
 
-    internal static ConversionResult ConvertTo(object value, Type typeToConvertTo, IContractResolver contractResolver)
+    internal static ConversionResult ConvertTo(
+        object value,
+        Type typeToConvertTo,
+        IContractResolver contractResolver
+    )
     {
         if (value == null)
         {
@@ -35,16 +39,23 @@ public static class ConversionResultProvider
             {
                 if (contractResolver == null)
                 {
-                    var deserialized = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(value), typeToConvertTo);
+                    var deserialized = JsonConvert.DeserializeObject(
+                        JsonConvert.SerializeObject(value),
+                        typeToConvertTo
+                    );
                     return new ConversionResult(true, deserialized);
                 }
                 else
                 {
                     var serializerSettings = new JsonSerializerSettings()
                     {
-                        ContractResolver = contractResolver
+                        ContractResolver = contractResolver,
                     };
-                    var deserialized = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(value), typeToConvertTo, serializerSettings);
+                    var deserialized = JsonConvert.DeserializeObject(
+                        JsonConvert.SerializeObject(value),
+                        typeToConvertTo,
+                        serializerSettings
+                    );
                     return new ConversionResult(true, deserialized);
                 }
             }
@@ -69,7 +80,10 @@ public static class ConversionResultProvider
         }
         try
         {
-            var deserialized = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(value), targetType);
+            var deserialized = JsonConvert.DeserializeObject(
+                JsonConvert.SerializeObject(value),
+                targetType
+            );
             return new ConversionResult(true, deserialized);
         }
         catch

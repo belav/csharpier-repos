@@ -1,5 +1,5 @@
 //
-// X509SubjectKeyIdentifierExtensionCas.cs - CAS unit tests for 
+// X509SubjectKeyIdentifierExtensionCas.cs - CAS unit tests for
 //	System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,54 +28,54 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
-using System.Security.Permissions;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-
+using System.Security.Permissions;
 using MonoTests.System.Security.Cryptography.X509Certificates;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Security.Cryptography.X509Certificates {
+namespace MonoCasTests.System.Security.Cryptography.X509Certificates
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class X509SubjectKeyIdentifierExtensionCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class X509SubjectKeyIdentifierExtensionCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests_Deny_Unrestricted()
+        {
+            X509SubjectKeyIdentifierExtensionTest unit =
+                new X509SubjectKeyIdentifierExtensionTest();
+            unit.ConstructorEmpty();
+            unit.ConstructorEmpty_SubjectKeyIdentifier();
+            unit.ConstructorAsnEncodedData();
+            unit.ConstructorAsnEncodedData_SmallestValid();
+            unit.ConstructorByteArray_20();
+            unit.ConstructorString();
+            unit.ConstructorString_NotHex();
+            unit.WrongExtension_X509Extension();
+            unit.CopyFrom_Self();
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTests_Deny_Unrestricted ()
-		{
-			X509SubjectKeyIdentifierExtensionTest unit = new X509SubjectKeyIdentifierExtensionTest ();
-			unit.ConstructorEmpty ();
-			unit.ConstructorEmpty_SubjectKeyIdentifier ();
-			unit.ConstructorAsnEncodedData ();
-			unit.ConstructorAsnEncodedData_SmallestValid ();
-			unit.ConstructorByteArray_20 ();
-			unit.ConstructorString ();
-			unit.ConstructorString_NotHex ();
-			unit.WrongExtension_X509Extension ();
-			unit.CopyFrom_Self ();
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (X509SubjectKeyIdentifierExtension).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(X509SubjectKeyIdentifierExtension).GetConstructor(
+                new Type[0]
+            );
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }
-

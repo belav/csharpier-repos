@@ -23,7 +23,11 @@ public class ObjectArrayParameterBinding : ParameterBinding
     public ObjectArrayParameterBinding(IReadOnlyList<ParameterBinding> bindings)
         : base(
             typeof(object[]),
-            Check.NotNull(bindings, nameof(bindings)).SelectMany(b => b.ConsumedProperties).ToArray())
+            Check
+                .NotNull(bindings, nameof(bindings))
+                .SelectMany(b => b.ConsumedProperties)
+                .ToArray()
+        )
     {
         _bindings = bindings;
     }
@@ -34,21 +38,21 @@ public class ObjectArrayParameterBinding : ParameterBinding
     /// </summary>
     /// <param name="bindingInfo">The binding information.</param>
     /// <returns>The expression tree.</returns>
-    public override Expression BindToParameter(ParameterBindingInfo bindingInfo)
-        => Expression.NewArrayInit(
+    public override Expression BindToParameter(ParameterBindingInfo bindingInfo) =>
+        Expression.NewArrayInit(
             typeof(object),
-            _bindings.Select(
-                b =>
+            _bindings.Select(b =>
+            {
+                var expression = b.BindToParameter(bindingInfo);
+
+                if (expression.Type.IsValueType)
                 {
-                    var expression = b.BindToParameter(bindingInfo);
+                    expression = Expression.Convert(expression, typeof(object));
+                }
 
-                    if (expression.Type.IsValueType)
-                    {
-                        expression = Expression.Convert(expression, typeof(object));
-                    }
-
-                    return expression;
-                }));
+                return expression;
+            })
+        );
 
     /// <summary>
     ///     Creates a copy that contains the given consumed properties.
@@ -61,7 +65,12 @@ public class ObjectArrayParameterBinding : ParameterBinding
         var propertyCount = 0;
         foreach (var binding in _bindings)
         {
-            var newBinding = binding.With(consumedProperties.Skip(propertyCount).Take(binding.ConsumedProperties.Count).ToArray());
+            var newBinding = binding.With(
+                consumedProperties
+                    .Skip(propertyCount)
+                    .Take(binding.ConsumedProperties.Count)
+                    .ToArray()
+            );
             newBindings.Add(newBinding);
             propertyCount += binding.ConsumedProperties.Count;
         }

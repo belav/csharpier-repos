@@ -12,7 +12,9 @@ namespace Microsoft.Extensions.Logging.Console
     /// Settings for a <see cref="ConsoleLogger"/>.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [Obsolete("This type is retained only for compatibility. The recommended alternative is ConsoleLoggerOptions.")]
+    [Obsolete(
+        "This type is retained only for compatibility. The recommended alternative is ConsoleLoggerOptions."
+    )]
     public class ConfigurationConsoleLoggerSettings : IConsoleLoggerSettings
     {
         internal readonly IConfiguration _configuration;
@@ -51,7 +53,8 @@ namespace Microsoft.Extensions.Logging.Console
                 }
                 else
                 {
-                    var message = $"Configuration value '{value}' for setting '{nameof(IncludeScopes)}' is not supported.";
+                    var message =
+                        $"Configuration value '{value}' for setting '{nameof(IncludeScopes)}' is not supported.";
                     throw new InvalidOperationException(message);
                 }
             }
@@ -95,7 +98,8 @@ namespace Microsoft.Extensions.Logging.Console
             }
             else
             {
-                var message = $"Configuration value '{value}' for category '{name}' is not supported.";
+                var message =
+                    $"Configuration value '{value}' for category '{name}' is not supported.";
                 throw new InvalidOperationException(message);
             }
         }

@@ -20,5 +20,6 @@ public interface IForeignKeyRemovedConvention : IConvention
     void ProcessForeignKeyRemoved(
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionForeignKey foreignKey,
-        IConventionContext<IConventionForeignKey> context);
+        IConventionContext<IConventionForeignKey> context
+    );
 }

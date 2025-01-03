@@ -26,9 +26,16 @@ namespace Microsoft.CodeAnalysis.Text
         private int _bufferUnreadChars;
         private bool _preambleWritten;
 
-        private static readonly Encoding s_utf8EncodingWithNoBOM = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: false);
+        private static readonly Encoding s_utf8EncodingWithNoBOM = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false,
+            throwOnInvalidBytes: false
+        );
 
-        public SourceTextStream(SourceText source, int bufferSize = 2048, bool useDefaultEncodingIfNull = false)
+        public SourceTextStream(
+            SourceText source,
+            int bufferSize = 2048,
+            bool useDefaultEncodingIfNull = false
+        )
         {
             Debug.Assert(source.Encoding != null || useDefaultEncodingIfNull);
 
@@ -79,10 +86,13 @@ namespace Microsoft.CodeAnalysis.Text
         {
             if (count < _minimumTargetBufferCount)
             {
-                // The buffer must be able to hold at least one character from the 
+                // The buffer must be able to hold at least one character from the
                 // SourceText stream.  Returning 0 for that case isn't correct because
-                // that indicates end of stream vs. insufficient buffer. 
-                throw new ArgumentException($"{nameof(count)} must be greater than or equal to {_minimumTargetBufferCount}", nameof(count));
+                // that indicates end of stream vs. insufficient buffer.
+                throw new ArgumentException(
+                    $"{nameof(count)} must be greater than or equal to {_minimumTargetBufferCount}",
+                    nameof(count)
+                );
             }
 
             int originalCount = count;
@@ -101,9 +111,21 @@ namespace Microsoft.CodeAnalysis.Text
                     FillBuffer();
                 }
 
-                int charsUsed, bytesUsed;
+                int charsUsed,
+                    bytesUsed;
                 bool ignored;
-                _encoder.Convert(_charBuffer, _bufferOffset, _bufferUnreadChars, buffer, offset, count, flush: false, charsUsed: out charsUsed, bytesUsed: out bytesUsed, completed: out ignored);
+                _encoder.Convert(
+                    _charBuffer,
+                    _bufferOffset,
+                    _bufferUnreadChars,
+                    buffer,
+                    offset,
+                    count,
+                    flush: false,
+                    charsUsed: out charsUsed,
+                    bytesUsed: out bytesUsed,
+                    completed: out ignored
+                );
                 _position += charsUsed;
                 _bufferOffset += charsUsed;
                 _bufferUnreadChars -= charsUsed;

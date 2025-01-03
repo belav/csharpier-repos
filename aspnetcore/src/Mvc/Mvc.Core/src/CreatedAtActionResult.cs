@@ -30,7 +30,8 @@ public class CreatedAtActionResult : ObjectResult
         string? actionName,
         string? controllerName,
         object? routeValues,
-        [ActionResultObjectValue] object? value)
+        [ActionResultObjectValue] object? value
+    )
         : base(value)
     {
         ActionName = actionName;
@@ -80,7 +81,8 @@ public class CreatedAtActionResult : ObjectResult
             ControllerName,
             RouteValues,
             request.Scheme,
-            request.Host.ToUriComponent());
+            request.Host.ToUriComponent()
+        );
 
         if (string.IsNullOrEmpty(url))
         {

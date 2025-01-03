@@ -11,9 +11,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddInheritdoc
 {
-    using VerifyCS = CSharpCodeFixVerifier<
-        EmptyDiagnosticAnalyzer,
-        AddInheritdocCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<EmptyDiagnosticAnalyzer, AddInheritdocCodeFixProvider>;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddInheritdoc)]
     public class AddInheritdocTests
@@ -29,8 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddInheritd
             await test.RunAsync();
         }
 
-        private static async Task TestMissingAsync(string initialMarkup)
-            => await VerifyCS.VerifyCodeFixAsync(initialMarkup, initialMarkup);
+        private static async Task TestMissingAsync(string initialMarkup) =>
+            await VerifyCS.VerifyCodeFixAsync(initialMarkup, initialMarkup);
 
         [Fact]
         public async Task AddMissingInheritdocOnOverridenMethod()
@@ -62,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddInheritd
                     /// <inheritdoc/>
                     public override void M() { }
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -72,7 +71,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddInheritd
         public async Task DoNotOfferOnNotOverridenMethod(string methodDefintion)
         {
             await TestMissingAsync(
-            $@"
+                $@"
 /// Some doc.
 public class BaseClass
 {{
@@ -83,7 +82,8 @@ public class BaseClass
 public class Derived: BaseClass
 {{
     {methodDefintion}
-}}");
+}}"
+            );
         }
 
         [Fact]
@@ -116,7 +116,8 @@ public class Derived: BaseClass
                     /// <inheritdoc/>
                     public void M() { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -135,8 +136,10 @@ public class Derived: BaseClass
                 {
                     void IInterface.M() { }
                 }
-                """);
+                """
+            );
         }
+
         [Fact]
         public async Task AddMissingInheritdocOnOverridenProperty()
         {
@@ -167,7 +170,8 @@ public class Derived: BaseClass
                     /// <inheritdoc/>
                     public override string P { get; set; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -200,7 +204,8 @@ public class Derived: BaseClass
                     /// <inheritdoc/>
                     public string P { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -237,7 +242,8 @@ public class Derived: BaseClass
 
                     void OnSomething() => SomeEvent?.Invoke();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -272,7 +278,8 @@ public class Derived: BaseClass
                     // Comment
                     public override void M() { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -307,7 +314,8 @@ public class Derived: BaseClass
                                    // Comment 1
                   /* Comment 2 */  public /* Comment 3 */ override void M /* Comment 4 */ ()  /* Comment 5 */ { } /* Comment 6 */
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -354,7 +362,8 @@ public class Derived: BaseClass
                     [Dummy]
                     public override void M() { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -394,7 +403,8 @@ public class Derived: BaseClass
                     /// <inheritdoc/>
                     public override string P { get; }
                 }
-                """);
+                """
+            );
         }
     }
 }

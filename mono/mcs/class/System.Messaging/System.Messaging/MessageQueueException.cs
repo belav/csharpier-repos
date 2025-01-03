@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,53 +33,51 @@ using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
-namespace System.Messaging 
-{	
-	[Serializable]
-	public class MessageQueueException: ExternalException 
-	{
-		private MessageQueueErrorCode _messageQueueErrorCode;
+namespace System.Messaging
+{
+    [Serializable]
+    public class MessageQueueException : ExternalException
+    {
+        private MessageQueueErrorCode _messageQueueErrorCode;
 
-		internal MessageQueueException(MessageQueueErrorCode messageQueueErrorCode, 
-		                               String message) : base (message)
-		
-		{
-			_messageQueueErrorCode = messageQueueErrorCode;
-		}
+        internal MessageQueueException(MessageQueueErrorCode messageQueueErrorCode, String message)
+            : base(message)
+        {
+            _messageQueueErrorCode = messageQueueErrorCode;
+        }
 
-		internal MessageQueueException(MessageQueueErrorCode messageQueueErrorCode) 
-			: this (messageQueueErrorCode, "UnknownError")
-		{
-		}
-		
-		protected MessageQueueException (SerializationInfo info, StreamingContext context) : base(info, context)
-		{
-			_messageQueueErrorCode = (MessageQueueErrorCode) info.GetInt32 ("NativeErrorCode");
-		}
+        internal MessageQueueException(MessageQueueErrorCode messageQueueErrorCode)
+            : this(messageQueueErrorCode, "UnknownError") { }
 
-		[MonoTODO]
-		private string TranslateCodeToDescription()
-		{
-			return "UnknownError";
-		}
+        protected MessageQueueException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            _messageQueueErrorCode = (MessageQueueErrorCode)info.GetInt32("NativeErrorCode");
+        }
 
-		public override string Message 
-		{
-			get { return base.Message; }
-		}
-		
-		public MessageQueueErrorCode MessageQueueErrorCode 
-		{
-			get { return _messageQueueErrorCode; }
-		}
-		
-		public override void GetObjectData(SerializationInfo info, StreamingContext context)
-		{
-			if (info == null)
-				throw new ArgumentNullException();
+        [MonoTODO]
+        private string TranslateCodeToDescription()
+        {
+            return "UnknownError";
+        }
 
-			info.AddValue ("NativeErrorCode", (int) _messageQueueErrorCode);
-			base.GetObjectData(info, context);
-		}
-	}
+        public override string Message
+        {
+            get { return base.Message; }
+        }
+
+        public MessageQueueErrorCode MessageQueueErrorCode
+        {
+            get { return _messageQueueErrorCode; }
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
+                throw new ArgumentNullException();
+
+            info.AddValue("NativeErrorCode", (int)_messageQueueErrorCode);
+            base.GetObjectData(info, context);
+        }
+    }
 }

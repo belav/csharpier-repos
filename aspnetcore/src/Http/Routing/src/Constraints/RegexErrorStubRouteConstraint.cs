@@ -12,7 +12,13 @@ internal sealed class RegexErrorStubRouteConstraint : IRouteConstraint
         throw new InvalidOperationException(Resources.RegexRouteContraint_NotConfigured);
     }
 
-    bool IRouteConstraint.Match(HttpContext? httpContext, IRouter? route, string routeKey, RouteValueDictionary values, RouteDirection routeDirection)
+    bool IRouteConstraint.Match(
+        HttpContext? httpContext,
+        IRouter? route,
+        string routeKey,
+        RouteValueDictionary values,
+        RouteDirection routeDirection
+    )
     {
         // Should never get called, but is same as throw in constructor in case constructor is changed.
         throw new InvalidOperationException(Resources.RegexRouteContraint_NotConfigured);

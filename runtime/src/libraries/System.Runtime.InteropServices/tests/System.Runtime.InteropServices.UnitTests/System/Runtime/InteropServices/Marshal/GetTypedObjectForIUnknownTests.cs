@@ -21,7 +21,10 @@ namespace System.Runtime.InteropServices.Tests
             yield return new NonGenericStruct();
             yield return Int32Enum.Value1;
 
-            MethodInfo method = typeof(GetTypedObjectForIUnknownTests).GetMethod(nameof(NonGenericMethod), BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo method = typeof(GetTypedObjectForIUnknownTests).GetMethod(
+                nameof(NonGenericMethod),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Delegate d = method.CreateDelegate(typeof(NonGenericDelegate));
             yield return d;
         }
@@ -31,7 +34,11 @@ namespace System.Runtime.InteropServices.Tests
             foreach (object o in GetTypedObjectForIUnknown_RoundtrippableType_TestData())
             {
                 yield return new object[] { o, o.GetType() };
-                yield return new object[] { o, typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0] };
+                yield return new object[]
+                {
+                    o,
+                    typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0],
+                };
                 yield return new object[] { o, typeof(int).MakeByRefType() };
 
                 Type baseType = o.GetType().BaseType;
@@ -56,14 +63,35 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { new int[][] { new int[] { 10 } }, typeof(object) };
             yield return new object[] { new int[][] { new int[] { 10 } }, typeof(Array) };
 
-            yield return new object[] { new int[,] { { 10 } }, typeof(object) };
-            yield return new object[] { new int[,] { { 10 } }, typeof(Array) };
+            yield return new object[]
+            {
+                new int[,]
+                {
+                    { 10 },
+                },
+                typeof(object),
+            };
+            yield return new object[]
+            {
+                new int[,]
+                {
+                    { 10 },
+                },
+                typeof(Array),
+            };
 
             yield return new object[] { new KeyValuePair<string, int>("key", 10), typeof(object) };
-            yield return new object[] { new KeyValuePair<string, int>("key", 10), typeof(ValueType) };
+            yield return new object[]
+            {
+                new KeyValuePair<string, int>("key", 10),
+                typeof(ValueType),
+            };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(GetTypedObjectForIUnknown_TestData))]
         public void GetTypedObjectForIUnknown_ValidPointer_ReturnsExpected(object o, Type type)
         {
@@ -82,13 +110,18 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void GetTypedObjectForIUnknown_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.GetTypedObjectForIUnknown(IntPtr.Zero, typeof(int)));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.GetTypedObjectForIUnknown(IntPtr.Zero, typeof(int))
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetTypedObjectForIUnknown_ZeroUnknown_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("pUnk", () => Marshal.GetTypedObjectForIUnknown(IntPtr.Zero, typeof(int)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pUnk",
+                () => Marshal.GetTypedObjectForIUnknown(IntPtr.Zero, typeof(int))
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
@@ -97,7 +130,10 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr iUnknown = Marshal.GetIUnknownForObject(new object());
             try
             {
-                AssertExtensions.Throws<ArgumentNullException>("t", () => Marshal.GetTypedObjectForIUnknown(iUnknown, null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "t",
+                    () => Marshal.GetTypedObjectForIUnknown(iUnknown, null)
+                );
             }
             finally
             {
@@ -113,20 +149,29 @@ namespace System.Runtime.InteropServices.Tests
 
             yield return new object[] { typeof(GenericClass<>) };
 
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.Run);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             yield return new object[] { typeBuilder };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(GetTypedObjectForIUnknown_Invalid_TestData))]
         public void GetTypedObjectForIUnknown_InvalidType_ThrowsArgumentException(Type type)
         {
             IntPtr ptr = Marshal.GetIUnknownForObject(new object());
             try
             {
-                AssertExtensions.Throws<ArgumentException>("t", () => Marshal.GetTypedObjectForIUnknown(ptr, type));
+                AssertExtensions.Throws<ArgumentException>(
+                    "t",
+                    () => Marshal.GetTypedObjectForIUnknown(ptr, type)
+                );
             }
             finally
             {
@@ -147,21 +192,32 @@ namespace System.Runtime.InteropServices.Tests
 
             yield return new object[] { new object(), typeof(int).MakePointerType() };
 
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             Type collectibleType = typeBuilder.CreateType();
             yield return new object[] { new object(), collectibleType };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(GetTypedObjectForIUnknownType_UncastableObject_TestData))]
-        public void GetTypedObjectForIUnknown_UncastableObject_ThrowsInvalidCastException(object o, Type type)
+        public void GetTypedObjectForIUnknown_UncastableObject_ThrowsInvalidCastException(
+            object o,
+            Type type
+        )
         {
             IntPtr ptr = Marshal.GetIUnknownForObject(o);
             try
             {
-                Assert.Throws<InvalidCastException>(() => Marshal.GetTypedObjectForIUnknown(ptr, type));
+                Assert.Throws<InvalidCastException>(
+                    () => Marshal.GetTypedObjectForIUnknown(ptr, type)
+                );
             }
             finally
             {
@@ -173,17 +229,28 @@ namespace System.Runtime.InteropServices.Tests
         {
             yield return new object[] { new int[] { 10 } };
             yield return new object[] { new int[][] { new int[] { 10 } } };
-            yield return new object[] { new int[,] { { 10 } } };
+            yield return new object[]
+            {
+                new int[,]
+                {
+                    { 10 },
+                },
+            };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(GetTypedObjectForIUnknown_ArrayObjects_TestData))]
         public void GetTypedObjectForIUnknown_ArrayType_ThrowsBadImageFormatException(object o)
         {
             IntPtr ptr = Marshal.GetIUnknownForObject(o);
             try
             {
-                Assert.Throws<BadImageFormatException>(() => Marshal.GetTypedObjectForIUnknown(ptr, o.GetType()));
+                Assert.Throws<BadImageFormatException>(
+                    () => Marshal.GetTypedObjectForIUnknown(ptr, o.GetType())
+                );
             }
             finally
             {
@@ -192,11 +259,17 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         public class ClassWithInterface : INonGenericInterface { }
+
         public struct StructWithInterface : INonGenericInterface { }
 
         private static void NonGenericMethod(int i) { }
+
         public delegate void NonGenericDelegate(int i);
 
-        public enum Int32Enum : int { Value1, Value2 }
+        public enum Int32Enum : int
+        {
+            Value1,
+            Value2,
+        }
     }
 }

@@ -11,17 +11,35 @@ using System.Windows.Markup;
 
 namespace System.Windows.Input
 {
-    class BuildInfo{
-        public const string WCP_VERSION="4.0.0.0";
-        public const string WCP_PUBLIC_KEY_TOKEN="31bf3856ad364e35";
-
+    class BuildInfo
+    {
+        public const string WCP_VERSION = "4.0.0.0";
+        public const string WCP_PUBLIC_KEY_TOKEN = "31bf3856ad364e35";
     }
+
     ///<summary>
     ///     An interface that allows an application author to define a method to be invoked.
     ///</summary>
-    [TypeForwardedFrom("PresentationCore, Version=" + BuildInfo.WCP_VERSION + ", Culture=neutral, PublicKeyToken=" + BuildInfo.WCP_PUBLIC_KEY_TOKEN)]
-    [TypeConverter("System.Windows.Input.CommandConverter, PresentationFramework, Version=" + BuildInfo.WCP_VERSION + ", Culture=neutral, PublicKeyToken=" + BuildInfo.WCP_PUBLIC_KEY_TOKEN + ", Custom=null")]
-    [ValueSerializer("System.Windows.Input.CommandValueSerializer, PresentationFramework, Version=" + BuildInfo.WCP_VERSION + ", Culture=neutral, PublicKeyToken=" + BuildInfo.WCP_PUBLIC_KEY_TOKEN + ", Custom=null")]
+    [TypeForwardedFrom(
+        "PresentationCore, Version="
+            + BuildInfo.WCP_VERSION
+            + ", Culture=neutral, PublicKeyToken="
+            + BuildInfo.WCP_PUBLIC_KEY_TOKEN
+    )]
+    [TypeConverter(
+        "System.Windows.Input.CommandConverter, PresentationFramework, Version="
+            + BuildInfo.WCP_VERSION
+            + ", Culture=neutral, PublicKeyToken="
+            + BuildInfo.WCP_PUBLIC_KEY_TOKEN
+            + ", Custom=null"
+    )]
+    [ValueSerializer(
+        "System.Windows.Input.CommandValueSerializer, PresentationFramework, Version="
+            + BuildInfo.WCP_VERSION
+            + ", Culture=neutral, PublicKeyToken="
+            + BuildInfo.WCP_PUBLIC_KEY_TOKEN
+            + ", Custom=null"
+    )]
     public interface ICommand
     {
         /// <summary>

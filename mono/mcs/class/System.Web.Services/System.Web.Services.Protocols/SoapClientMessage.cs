@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.SoapClientMessage.cs
 //
 // Authors:
@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,79 +33,91 @@
 using System.Web.Services;
 using System.Web.Services.Protocols;
 
-namespace System.Web.Services.Protocols {
-	public sealed class SoapClientMessage : SoapMessage {
+namespace System.Web.Services.Protocols
+{
+    public sealed class SoapClientMessage : SoapMessage
+    {
+        #region Fields
 
-		#region Fields
+        SoapHttpClientProtocol client;
+        string url;
+        internal SoapMethodStubInfo MethodStubInfo;
 
-		SoapHttpClientProtocol client;
-		string url;
-		internal SoapMethodStubInfo MethodStubInfo;
+        //
+        // Expose this one internally
+        //
+        internal object[] Parameters;
+        #endregion
 
-		//
-		// Expose this one internally
-		//
-		internal object [] Parameters;
-		#endregion
+        #region Constructors
 
-		#region Constructors
+        //
+        // Constructs the SoapClientMessage
+        //
+        internal SoapClientMessage(
+            SoapHttpClientProtocol client,
+            SoapMethodStubInfo msi,
+            string url,
+            object[] parameters
+        )
+        {
+            this.MethodStubInfo = msi;
+            this.client = client;
+            this.url = url;
+            Parameters = parameters;
+            if (SoapVersion == SoapProtocolVersion.Soap12)
+                ContentType = "application/soap+xml";
+        }
 
-		//
-		// Constructs the SoapClientMessage
-		//
-		internal SoapClientMessage (SoapHttpClientProtocol client, SoapMethodStubInfo msi, string url, object [] parameters)
-		{
-			this.MethodStubInfo = msi;
-			this.client = client;
-			this.url = url;
-			Parameters = parameters;
-			if (SoapVersion == SoapProtocolVersion.Soap12)
-				ContentType = "application/soap+xml";
-		}
+        #endregion
 
-		#endregion 
+        #region Properties
 
-		#region Properties
+        public override string Action
+        {
+            get { return MethodStubInfo.Action; }
+        }
 
-		public override string Action {
-			get { return MethodStubInfo.Action; }
-		}
+        public SoapHttpClientProtocol Client
+        {
+            get { return client; }
+        }
 
-		public SoapHttpClientProtocol Client {
-			get { return client; }
-		}
+        public override LogicalMethodInfo MethodInfo
+        {
+            get { return MethodStubInfo.MethodInfo; }
+        }
 
-		public override LogicalMethodInfo MethodInfo {
-			get { return MethodStubInfo.MethodInfo; }
-		}
+        public override bool OneWay
+        {
+            get { return MethodStubInfo.OneWay; }
+        }
 
-		public override bool OneWay {
-			get { return MethodStubInfo.OneWay; }
-		}
+        public override string Url
+        {
+            get { return url; }
+        }
 
-		public override string Url {
-			get { return url; }
-		}
-		
-		[System.Runtime.InteropServices.ComVisible(false)]
-		public override SoapProtocolVersion SoapVersion {
-			get { return client.SoapVersion; }
-		}
+        [System.Runtime.InteropServices.ComVisible(false)]
+        public override SoapProtocolVersion SoapVersion
+        {
+            get { return client.SoapVersion; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		protected override void EnsureInStage ()
-		{
-			EnsureStage (SoapMessageStage.BeforeSerialize);
-		}
+        protected override void EnsureInStage()
+        {
+            EnsureStage(SoapMessageStage.BeforeSerialize);
+        }
 
-		protected override void EnsureOutStage ()
-		{
-			EnsureStage (SoapMessageStage.AfterDeserialize);
-		}
+        protected override void EnsureOutStage()
+        {
+            EnsureStage(SoapMessageStage.AfterDeserialize);
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

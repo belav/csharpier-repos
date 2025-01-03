@@ -19,9 +19,10 @@ public class CookieBuilder
     public virtual string? Name
     {
         get => _name;
-        set => _name = !string.IsNullOrEmpty(value)
-            ? value
-            : throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(value));
+        set =>
+            _name = !string.IsNullOrEmpty(value)
+                ? value
+                : throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(value));
     }
 
     /// <summary>
@@ -114,8 +115,12 @@ public class CookieBuilder
             MaxAge = MaxAge,
             Domain = Domain,
             IsEssential = IsEssential,
-            Secure = SecurePolicy == CookieSecurePolicy.Always || (SecurePolicy == CookieSecurePolicy.SameAsRequest && context.Request.IsHttps),
-            Expires = Expiration.HasValue ? expiresFrom.Add(Expiration.GetValueOrDefault()) : default(DateTimeOffset?)
+            Secure =
+                SecurePolicy == CookieSecurePolicy.Always
+                || (SecurePolicy == CookieSecurePolicy.SameAsRequest && context.Request.IsHttps),
+            Expires = Expiration.HasValue
+                ? expiresFrom.Add(Expiration.GetValueOrDefault())
+                : default(DateTimeOffset?),
         };
 
         if (_extensions?.Count > 0)

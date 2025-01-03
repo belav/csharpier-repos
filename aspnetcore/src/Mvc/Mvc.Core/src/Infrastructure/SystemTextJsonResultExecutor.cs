@@ -17,7 +17,7 @@ internal sealed partial class SystemTextJsonResultExecutor : IActionResultExecut
 {
     private static readonly string DefaultContentType = new MediaTypeHeaderValue("application/json")
     {
-        Encoding = Encoding.UTF8
+        Encoding = Encoding.UTF8,
     }.ToString();
 
     private readonly JsonOptions _options;
@@ -25,7 +25,8 @@ internal sealed partial class SystemTextJsonResultExecutor : IActionResultExecut
 
     public SystemTextJsonResultExecutor(
         IOptions<JsonOptions> options,
-        ILogger<SystemTextJsonResultExecutor> logger)
+        ILogger<SystemTextJsonResultExecutor> logger
+    )
     {
         _options = options.Value;
         _logger = logger;
@@ -46,7 +47,8 @@ internal sealed partial class SystemTextJsonResultExecutor : IActionResultExecut
             (DefaultContentType, Encoding.UTF8),
             MediaType.GetEncoding,
             out var resolvedContentType,
-            out var resolvedContentTypeEncoding);
+            out var resolvedContentTypeEncoding
+        );
 
         response.ContentType = resolvedContentType;
 
@@ -66,25 +68,43 @@ internal sealed partial class SystemTextJsonResultExecutor : IActionResultExecut
         {
             try
             {
-                await JsonSerializer.SerializeAsync(responseStream, value, objectType, jsonSerializerOptions, context.HttpContext.RequestAborted);
+                await JsonSerializer.SerializeAsync(
+                    responseStream,
+                    value,
+                    objectType,
+                    jsonSerializerOptions,
+                    context.HttpContext.RequestAborted
+                );
                 await responseStream.FlushAsync(context.HttpContext.RequestAborted);
             }
-            catch (OperationCanceledException) when (context.HttpContext.RequestAborted.IsCancellationRequested) { }
+            catch (OperationCanceledException)
+                when (context.HttpContext.RequestAborted.IsCancellationRequested) { }
         }
         else
         {
             // JsonSerializer only emits UTF8 encoded output, but we need to write the response in the encoding specified by
             // selectedEncoding
-            var transcodingStream = Encoding.CreateTranscodingStream(response.Body, resolvedContentTypeEncoding, Encoding.UTF8, leaveOpen: true);
+            var transcodingStream = Encoding.CreateTranscodingStream(
+                response.Body,
+                resolvedContentTypeEncoding,
+                Encoding.UTF8,
+                leaveOpen: true
+            );
 
             ExceptionDispatchInfo? exceptionDispatchInfo = null;
             try
             {
-                await JsonSerializer.SerializeAsync(transcodingStream, value, objectType, jsonSerializerOptions, context.HttpContext.RequestAborted);
+                await JsonSerializer.SerializeAsync(
+                    transcodingStream,
+                    value,
+                    objectType,
+                    jsonSerializerOptions,
+                    context.HttpContext.RequestAborted
+                );
                 await transcodingStream.FlushAsync(context.HttpContext.RequestAborted);
             }
-            catch (OperationCanceledException) when (context.HttpContext.RequestAborted.IsCancellationRequested)
-            { }
+            catch (OperationCanceledException)
+                when (context.HttpContext.RequestAborted.IsCancellationRequested) { }
             catch (Exception ex)
             {
                 // TranscodingStream may write to the inner stream as part of it's disposal.
@@ -98,9 +118,7 @@ internal sealed partial class SystemTextJsonResultExecutor : IActionResultExecut
                 {
                     await transcodingStream.DisposeAsync();
                 }
-                catch when (exceptionDispatchInfo != null)
-                {
-                }
+                catch when (exceptionDispatchInfo != null) { }
 
                 exceptionDispatchInfo?.Throw();
             }
@@ -118,10 +136,13 @@ internal sealed partial class SystemTextJsonResultExecutor : IActionResultExecut
         {
             if (serializerSettings is not JsonSerializerOptions settingsFromResult)
             {
-                throw new InvalidOperationException(Resources.FormatProperty_MustBeInstanceOfType(
-                    nameof(JsonResult),
-                    nameof(JsonResult.SerializerSettings),
-                    typeof(JsonSerializerOptions)));
+                throw new InvalidOperationException(
+                    Resources.FormatProperty_MustBeInstanceOfType(
+                        nameof(JsonResult),
+                        nameof(JsonResult.SerializerSettings),
+                        typeof(JsonSerializerOptions)
+                    )
+                );
             }
 
             return settingsFromResult;
@@ -130,7 +151,13 @@ internal sealed partial class SystemTextJsonResultExecutor : IActionResultExecut
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Executing JsonResult, writing value of type '{Type}'.", EventName = "JsonResultExecuting", SkipEnabledCheck = true)]
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing JsonResult, writing value of type '{Type}'.",
+            EventName = "JsonResultExecuting",
+            SkipEnabledCheck = true
+        )]
         private static partial void JsonResultExecuting(ILogger logger, string? type);
 
         public static void JsonResultExecuting(ILogger logger, object? value)

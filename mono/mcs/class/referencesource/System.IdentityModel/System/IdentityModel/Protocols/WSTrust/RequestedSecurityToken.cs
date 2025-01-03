@@ -11,7 +11,7 @@ namespace System.IdentityModel.Protocols.WSTrust
     using System.Xml;
 
     /// <summary>
-    /// This class defines the requested security token which is usually opaque to 
+    /// This class defines the requested security token which is usually opaque to
     /// the token requestor.
     /// </summary>
     public class RequestedSecurityToken
@@ -20,7 +20,7 @@ namespace System.IdentityModel.Protocols.WSTrust
         SecurityToken _requestedToken;
 
         /// <summary>
-        /// Creates an instance of RequestedSecurityToken using the issued token. This is usually used 
+        /// Creates an instance of RequestedSecurityToken using the issued token. This is usually used
         /// on the token issuer end.
         /// </summary>
         /// <param name="token">The Security token requested.</param>
@@ -35,7 +35,7 @@ namespace System.IdentityModel.Protocols.WSTrust
         }
 
         /// <summary>
-        /// Creates an instance of RequestedSecurityToken using the token xml. This is usually used on the 
+        /// Creates an instance of RequestedSecurityToken using the token xml. This is usually used on the
         /// token receiving end.
         /// </summary>
         /// <param name="tokenAsXml">XML representation of the token.</param>
@@ -50,29 +50,23 @@ namespace System.IdentityModel.Protocols.WSTrust
         }
 
         /// <summary>
-        /// Returns the XML representation of the token when the RequestedSecurityToken was constructed 
+        /// Returns the XML representation of the token when the RequestedSecurityToken was constructed
         /// using the token xml. This property getter could return null if the RequestedSecurityToken was constructed
         /// using a security token.
         /// </summary>
         public virtual XmlElement SecurityTokenXml
         {
-            get
-            {
-                return _tokenAsXml;
-            }
+            get { return _tokenAsXml; }
         }
 
         /// <summary>
-        /// Gets the issued security token when the RequestedSecurityToken was constructed using the token 
-        /// itself. This property getter could return null if the RequestedSecurityToken was constructed using the 
-        /// token xml. 
+        /// Gets the issued security token when the RequestedSecurityToken was constructed using the token
+        /// itself. This property getter could return null if the RequestedSecurityToken was constructed using the
+        /// token xml.
         /// </summary>
         public SecurityToken SecurityToken
         {
-            get
-            {
-                return _requestedToken;
-            }
+            get { return _requestedToken; }
         }
     }
 }

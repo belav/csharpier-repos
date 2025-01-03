@@ -17,11 +17,14 @@ namespace Microsoft.CodeAnalysis.Options
         public static string Generate(
             ImmutableArray<(string feature, ImmutableArray<IOption2> options)> groupedOptions,
             IOptionsReader configOptions,
-            string language)
+            string language
+        )
         {
             var editorconfig = new StringBuilder();
 
-            editorconfig.AppendLine($"# {WorkspacesResources.Remove_the_line_below_if_you_want_to_inherit_dot_editorconfig_settings_from_higher_directories}");
+            editorconfig.AppendLine(
+                $"# {WorkspacesResources.Remove_the_line_below_if_you_want_to_inherit_dot_editorconfig_settings_from_higher_directories}"
+            );
             editorconfig.AppendLine("root = true");
             editorconfig.AppendLine();
 
@@ -40,23 +43,48 @@ namespace Microsoft.CodeAnalysis.Options
 
             foreach ((var feature, var options) in groupedOptions)
             {
-                AppendOptionsToEditorConfig(configOptions, feature, options, language, editorconfig);
+                AppendOptionsToEditorConfig(
+                    configOptions,
+                    feature,
+                    options,
+                    language,
+                    editorconfig
+                );
             }
 
-            if (configOptions.TryGetOption(new OptionKey2(NamingStyleOptions.NamingPreferences, language), out NamingStylePreferences namingStylePreferences))
+            if (
+                configOptions.TryGetOption(
+                    new OptionKey2(NamingStyleOptions.NamingPreferences, language),
+                    out NamingStylePreferences namingStylePreferences
+                )
+            )
             {
-                AppendNamingStylePreferencesToEditorConfig(namingStylePreferences, language, editorconfig);
+                AppendNamingStylePreferencesToEditorConfig(
+                    namingStylePreferences,
+                    language,
+                    editorconfig
+                );
             }
 
             return editorconfig.ToString();
         }
 
-        private static void AppendOptionsToEditorConfig(IOptionsReader configOptions, string feature, ImmutableArray<IOption2> options, string language, StringBuilder editorconfig)
+        private static void AppendOptionsToEditorConfig(
+            IOptionsReader configOptions,
+            string feature,
+            ImmutableArray<IOption2> options,
+            string language,
+            StringBuilder editorconfig
+        )
         {
             editorconfig.AppendLine($"#### {feature} ####");
             editorconfig.AppendLine();
 
-            foreach (var optionGrouping in options.GroupBy(o => o.Definition.Group).OrderBy(g => g.Key.Priority))
+            foreach (
+                var optionGrouping in options
+                    .GroupBy(o => o.Definition.Group)
+                    .OrderBy(g => g.Key.Priority)
+            )
             {
                 editorconfig.AppendLine($"# {optionGrouping.Key.Description}");
 
@@ -66,7 +94,9 @@ namespace Microsoft.CodeAnalysis.Options
                     var optionKey = new OptionKey2(option, option.IsPerLanguage ? language : null);
                     if (configOptions.TryGetOption<object?>(optionKey, out var value))
                     {
-                        uniqueEntries.Add($"{option.Definition.ConfigName} = {option.Definition.Serializer.Serialize(value)}");
+                        uniqueEntries.Add(
+                            $"{option.Definition.ConfigName} = {option.Definition.Serializer.Serialize(value)}"
+                        );
                     }
                 }
 

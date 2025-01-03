@@ -2,12 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using ILCompiler.DependencyAnalysisFramework;
-
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
@@ -19,7 +16,10 @@ namespace ILCompiler.DependencyAnalysis
     /// method body, as if it was generated. The node acts as a symbol for the canonical
     /// method for convenience.
     /// </summary>
-    public class ShadowConcreteMethodNode : DependencyNodeCore<NodeFactory>, IMethodNode, ISymbolNodeWithLinkage
+    public class ShadowConcreteMethodNode
+        : DependencyNodeCore<NodeFactory>,
+            IMethodNode,
+            ISymbolNodeWithLinkage
     {
         /// <summary>
         /// Gets the canonical method body that defines the dependencies of this node.
@@ -36,18 +36,21 @@ namespace ILCompiler.DependencyAnalysis
         {
             CanonicalMethodNode.AppendMangledName(nameMangler, sb);
         }
+
         public int Offset => CanonicalMethodNode.Offset;
         public bool RepresentsIndirectionCell => CanonicalMethodNode.RepresentsIndirectionCell;
 
-        public override bool StaticDependenciesAreComputed
-            => CanonicalMethodNode.StaticDependenciesAreComputed;
+        public override bool StaticDependenciesAreComputed =>
+            CanonicalMethodNode.StaticDependenciesAreComputed;
 
         public ShadowConcreteMethodNode(MethodDesc method, IMethodNode canonicalMethod)
         {
             Debug.Assert(!method.IsSharedByGenericInstantiations);
             Debug.Assert(!method.IsRuntimeDeterminedExactMethod);
             Debug.Assert(canonicalMethod.Method.IsSharedByGenericInstantiations);
-            Debug.Assert(canonicalMethod.Method == method.GetCanonMethodTarget(CanonicalFormKind.Specific));
+            Debug.Assert(
+                canonicalMethod.Method == method.GetCanonMethodTarget(CanonicalFormKind.Specific)
+            );
             Method = method;
             CanonicalMethodNode = canonicalMethod;
         }
@@ -68,7 +71,8 @@ namespace ILCompiler.DependencyAnalysis
             // with the concrete instantiation of the method to get concrete dependencies.
             Instantiation typeInst = Method.OwningType.Instantiation;
             Instantiation methodInst = Method.Instantiation;
-            IEnumerable<DependencyListEntry> staticDependencies = CanonicalMethodNode.GetStaticDependencies(factory);
+            IEnumerable<DependencyListEntry> staticDependencies =
+                CanonicalMethodNode.GetStaticDependencies(factory);
 
             if (staticDependencies != null)
             {
@@ -77,7 +81,9 @@ namespace ILCompiler.DependencyAnalysis
                     var runtimeDep = canonDep.Node as INodeWithRuntimeDeterminedDependencies;
                     if (runtimeDep != null)
                     {
-                        dependencies.AddRange(runtimeDep.InstantiateDependencies(factory, typeInst, methodInst));
+                        dependencies.AddRange(
+                            runtimeDep.InstantiateDependencies(factory, typeInst, methodInst)
+                        );
                     }
                 }
             }
@@ -85,14 +91,22 @@ namespace ILCompiler.DependencyAnalysis
             return dependencies;
         }
 
-        protected override string GetName(NodeFactory factory) => $"{Method} backed by {CanonicalMethodNode.GetMangledName(factory.NameMangler)}";
+        protected override string GetName(NodeFactory factory) =>
+            $"{Method} backed by {CanonicalMethodNode.GetMangledName(factory.NameMangler)}";
 
         public sealed override bool HasConditionalStaticDependencies => false;
         public sealed override bool HasDynamicDependencies => false;
         public sealed override bool InterestingForDynamicDependencyAnalysis => false;
 
-        public sealed override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
-        public sealed override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
+        public sealed override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
+
+        public sealed override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
 
         int ISortableNode.ClassCode => -1440570971;
 
@@ -102,7 +116,10 @@ namespace ILCompiler.DependencyAnalysis
             if (compare != 0)
                 return compare;
 
-            return comparer.Compare(CanonicalMethodNode, ((ShadowConcreteMethodNode)other).CanonicalMethodNode);
+            return comparer.Compare(
+                CanonicalMethodNode,
+                ((ShadowConcreteMethodNode)other).CanonicalMethodNode
+            );
         }
     }
 }

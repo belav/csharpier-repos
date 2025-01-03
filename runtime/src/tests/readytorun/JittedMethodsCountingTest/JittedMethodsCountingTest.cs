@@ -3,7 +3,6 @@
 
 using System;
 using Xunit;
-
 using InteropServices = System.Runtime.InteropServices;
 using JitInfo = System.Runtime.JitInfo;
 
@@ -19,9 +18,11 @@ public class JittedMethodsCountingTest
         // ought to be skipped.
         if (!IsReadyToRunEnabled() || !IsHardwareIntrinsicsEnabled() || !IsSSEEnabled())
         {
-            Console.WriteLine("\nThis test is only supported in ReadyToRun scenarios"
-                              + " with Hardware Intrinsics and SSE(2) enabled."
-                              + " Skipping...\n");
+            Console.WriteLine(
+                "\nThis test is only supported in ReadyToRun scenarios"
+                    + " with Hardware Intrinsics and SSE(2) enabled."
+                    + " Skipping...\n"
+            );
             return 100;
         }
 
@@ -29,9 +30,11 @@ public class JittedMethodsCountingTest
 
         long jits = JitInfo.GetCompiledMethodCount(currentThread: false);
 
-        Console.WriteLine("Number of Jitted Methods in App: {0} - Max Threshold: {1}\n",
-                          jits,
-                          MAX_JITTED_METHODS_ACCEPTED);
+        Console.WriteLine(
+            "Number of Jitted Methods in App: {0} - Max Threshold: {1}\n",
+            jits,
+            MAX_JITTED_METHODS_ACCEPTED
+        );
 
         return (jits >= 0 && jits <= MAX_JITTED_METHODS_ACCEPTED) ? 100 : 101;
     }
@@ -44,11 +47,11 @@ public class JittedMethodsCountingTest
 
     private static bool IsHardwareIntrinsicsEnabled()
     {
-        string? dotnetEnableHWIntrinsics =
-            Environment.GetEnvironmentVariable("DOTNET_EnableHWIntrinsic");
+        string? dotnetEnableHWIntrinsics = Environment.GetEnvironmentVariable(
+            "DOTNET_EnableHWIntrinsic"
+        );
 
-        return (string.IsNullOrEmpty(dotnetEnableHWIntrinsics)
-                || dotnetEnableHWIntrinsics != "0");
+        return (string.IsNullOrEmpty(dotnetEnableHWIntrinsics) || dotnetEnableHWIntrinsics != "0");
     }
 
     private static bool IsSSEEnabled()
@@ -56,7 +59,9 @@ public class JittedMethodsCountingTest
         string? dotnetSSE = Environment.GetEnvironmentVariable("DOTNET_EnableSSE");
         string? dotnetSSE2 = Environment.GetEnvironmentVariable("DOTNET_EnableSSE2");
 
-        return ((string.IsNullOrEmpty(dotnetSSE) || dotnetSSE != "0")
-                && (string.IsNullOrEmpty(dotnetSSE2) || dotnetSSE2 != "0"));
+        return (
+            (string.IsNullOrEmpty(dotnetSSE) || dotnetSSE != "0")
+            && (string.IsNullOrEmpty(dotnetSSE2) || dotnetSSE2 != "0")
+        );
     }
 }

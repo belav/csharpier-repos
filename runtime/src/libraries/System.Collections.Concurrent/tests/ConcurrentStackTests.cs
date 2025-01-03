@@ -11,11 +11,23 @@ namespace System.Collections.Concurrent.Tests
 {
     public class ConcurrentStackTests : ProducerConsumerCollectionTests
     {
-        protected override IProducerConsumerCollection<T> CreateProducerConsumerCollection<T>() => new ConcurrentStack<T>();
-        protected override IProducerConsumerCollection<int> CreateProducerConsumerCollection(IEnumerable<int> collection) => new ConcurrentStack<int>(collection);
-        protected override bool IsEmpty(IProducerConsumerCollection<int> pcc) => ((ConcurrentStack<int>)pcc).IsEmpty;
-        protected override bool TryPeek<T>(IProducerConsumerCollection<T> pcc, out T result) => ((ConcurrentStack<T>)pcc).TryPeek(out result);
-        protected override IProducerConsumerCollection<int> CreateOracle(IEnumerable<int> collection) => new StackOracle(collection);
+        protected override IProducerConsumerCollection<T> CreateProducerConsumerCollection<T>() =>
+            new ConcurrentStack<T>();
+
+        protected override IProducerConsumerCollection<int> CreateProducerConsumerCollection(
+            IEnumerable<int> collection
+        ) => new ConcurrentStack<int>(collection);
+
+        protected override bool IsEmpty(IProducerConsumerCollection<int> pcc) =>
+            ((ConcurrentStack<int>)pcc).IsEmpty;
+
+        protected override bool TryPeek<T>(IProducerConsumerCollection<T> pcc, out T result) =>
+            ((ConcurrentStack<T>)pcc).TryPeek(out result);
+
+        protected override IProducerConsumerCollection<int> CreateOracle(
+            IEnumerable<int> collection
+        ) => new StackOracle(collection);
+
         protected override bool ResetImplemented => false;
 
         [Fact]
@@ -94,25 +106,44 @@ namespace System.Collections.Concurrent.Tests
             Assert.True(s.IsEmpty);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(8, 10)]
         [InlineData(16, 100)]
         [InlineData(128, 100)]
-        public void PushRange_Concurrent_ConsecutiveItemsInEachRange(int numThreads, int numItemsPerThread)
+        public void PushRange_Concurrent_ConsecutiveItemsInEachRange(
+            int numThreads,
+            int numItemsPerThread
+        )
         {
             var stack = new ConcurrentStack<int>();
 
-            Task.WaitAll(Enumerable.Range(0, numThreads).Select(i => Task.Factory.StartNew((obj) =>
-            {
-                int index = (int)obj;
-                int[] array = new int[numItemsPerThread];
-                for (int j = 0; j < numItemsPerThread; j++)
-                {
-                    array[j] = index + j;
-                }
+            Task.WaitAll(
+                Enumerable
+                    .Range(0, numThreads)
+                    .Select(i =>
+                        Task.Factory.StartNew(
+                            (obj) =>
+                            {
+                                int index = (int)obj;
+                                int[] array = new int[numItemsPerThread];
+                                for (int j = 0; j < numItemsPerThread; j++)
+                                {
+                                    array[j] = index + j;
+                                }
 
-                stack.PushRange(array);
-            }, i * numItemsPerThread, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default)).ToArray());
+                                stack.PushRange(array);
+                            },
+                            i * numItemsPerThread,
+                            CancellationToken.None,
+                            TaskCreationOptions.DenyChildAttach,
+                            TaskScheduler.Default
+                        )
+                    )
+                    .ToArray()
+            );
 
             //validation
             for (int i = 0; i < numThreads; i++)
@@ -128,23 +159,42 @@ namespace System.Collections.Concurrent.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(8, 10)]
         [InlineData(16, 100)]
         [InlineData(128, 100)]
-        public void TryPopRange_Concurrent_PoppedItemsAreConsecutive(int numThreads, int numElementsPerThread)
+        public void TryPopRange_Concurrent_PoppedItemsAreConsecutive(
+            int numThreads,
+            int numElementsPerThread
+        )
         {
             int numTotalElements = numThreads * numElementsPerThread;
             var allValues = new List<int>(Enumerable.Range(1, numTotalElements));
             var stack = new ConcurrentStack<int>(allValues);
 
             int[] array = new int[numTotalElements];
-            Task.WaitAll(Enumerable.Range(0, numThreads).Select(i => Task.Factory.StartNew(obj =>
-            {
-                int index = (int)obj;
-                int res = stack.TryPopRange(array, index, numElementsPerThread);
-                Assert.Equal(numElementsPerThread, res);
-            }, i * numElementsPerThread, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default)).ToArray());
+            Task.WaitAll(
+                Enumerable
+                    .Range(0, numThreads)
+                    .Select(i =>
+                        Task.Factory.StartNew(
+                            obj =>
+                            {
+                                int index = (int)obj;
+                                int res = stack.TryPopRange(array, index, numElementsPerThread);
+                                Assert.Equal(numElementsPerThread, res);
+                            },
+                            i * numElementsPerThread,
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )
+                    )
+                    .ToArray()
+            );
 
             for (int i = 0; i < numThreads; i++)
             {
@@ -165,8 +215,14 @@ namespace System.Collections.Concurrent.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => stack.PushRange(new int[1], 0, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => stack.PushRange(new int[1], -1, 1));
             Assert.Throws<ArgumentOutOfRangeException>(() => stack.PushRange(new int[1], 2, 1));
-            AssertExtensions.Throws<ArgumentException>(null, () => stack.PushRange(new int[0], 0, 1));
-            AssertExtensions.Throws<ArgumentException>(null, () => stack.PushRange(new int[1], 0, 10));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => stack.PushRange(new int[0], 0, 1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => stack.PushRange(new int[1], 0, 10)
+            );
         }
 
         [Fact]
@@ -178,7 +234,10 @@ namespace System.Collections.Concurrent.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => stack.TryPopRange(new int[1], 0, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => stack.TryPopRange(new int[1], -1, 1));
             Assert.Throws<ArgumentOutOfRangeException>(() => stack.TryPopRange(new int[1], 2, 1));
-            AssertExtensions.Throws<ArgumentException>(null, () => stack.TryPopRange(new int[1], 0, 10));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => stack.TryPopRange(new int[1], 0, 10)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -190,7 +249,8 @@ namespace System.Collections.Concurrent.Tests
             // Consumer dequeues items until it sees last pushed item regardless of order
             Task consumer = Task.Run(() =>
             {
-                while (!q.TryPop(out var item) || item != items) ;
+                while (!q.TryPop(out var item) || item != items)
+                    ;
             });
 
             // Producer queues the expected number of items
@@ -212,15 +272,31 @@ namespace System.Collections.Concurrent.Tests
         protected sealed class StackOracle : IProducerConsumerCollection<int>
         {
             private readonly Stack<int> _stack;
-            public StackOracle(IEnumerable<int> collection) { _stack = new Stack<int>(collection); }
+
+            public StackOracle(IEnumerable<int> collection)
+            {
+                _stack = new Stack<int>(collection);
+            }
+
             public int Count => _stack.Count;
             public bool IsSynchronized => false;
             public object SyncRoot => null;
-            public void CopyTo(Array array, int index) => ((ICollection)_stack).CopyTo(array, index);
+
+            public void CopyTo(Array array, int index) =>
+                ((ICollection)_stack).CopyTo(array, index);
+
             public void CopyTo(int[] array, int index) => _stack.CopyTo(array, index);
+
             public IEnumerator<int> GetEnumerator() => _stack.GetEnumerator();
+
             public int[] ToArray() => _stack.ToArray();
-            public bool TryAdd(int item) { _stack.Push(item); return true; }
+
+            public bool TryAdd(int item)
+            {
+                _stack.Push(item);
+                return true;
+            }
+
             public bool TryTake(out int item)
             {
                 if (_stack.Count > 0)
@@ -234,6 +310,7 @@ namespace System.Collections.Concurrent.Tests
                     return false;
                 }
             }
+
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }

@@ -19,7 +19,11 @@ internal sealed class ExceptionDetailsProvider
     private readonly ILogger? _logger;
     private readonly int _sourceCodeLineCount;
 
-    public ExceptionDetailsProvider(IFileProvider fileProvider, ILogger? logger, int sourceCodeLineCount)
+    public ExceptionDetailsProvider(
+        IFileProvider fileProvider,
+        ILogger? logger,
+        int sourceCodeLineCount
+    )
     {
         _fileProvider = fileProvider;
         _logger = logger;
@@ -38,11 +42,15 @@ internal sealed class ExceptionDetailsProvider
 
     private IEnumerable<StackFrameSourceCodeInfo> GetStackFrames(Exception original)
     {
-        var stackFrames = StackTraceHelper.GetFrames(original, out var exception)
-            .Select(frame => GetStackFrameSourceCodeInfo(
-                frame.MethodDisplayInfo?.ToString(),
-                frame.FilePath,
-                frame.LineNumber));
+        var stackFrames = StackTraceHelper
+            .GetFrames(original, out var exception)
+            .Select(frame =>
+                GetStackFrameSourceCodeInfo(
+                    frame.MethodDisplayInfo?.ToString(),
+                    frame.FilePath,
+                    frame.LineNumber
+                )
+            );
 
         if (exception != null)
         {
@@ -92,13 +100,17 @@ internal sealed class ExceptionDetailsProvider
     }
 
     // make it internal to enable unit testing
-    internal StackFrameSourceCodeInfo GetStackFrameSourceCodeInfo(string? method, string? filePath, int lineNumber)
+    internal StackFrameSourceCodeInfo GetStackFrameSourceCodeInfo(
+        string? method,
+        string? filePath,
+        int lineNumber
+    )
     {
         var stackFrame = new StackFrameSourceCodeInfo
         {
             Function = method,
             File = filePath,
-            Line = lineNumber
+            Line = lineNumber,
         };
 
         if (string.IsNullOrEmpty(stackFrame.File))
@@ -143,10 +155,14 @@ internal sealed class ExceptionDetailsProvider
         StackFrameSourceCodeInfo frame,
         IEnumerable<string> allLines,
         int errorStartLineNumberInFile,
-        int errorEndLineNumberInFile)
+        int errorEndLineNumberInFile
+    )
     {
         // Get the line boundaries in the file to be read and read all these lines at once into an array.
-        var preErrorLineNumberInFile = Math.Max(errorStartLineNumberInFile - _sourceCodeLineCount, 1);
+        var preErrorLineNumberInFile = Math.Max(
+            errorStartLineNumberInFile - _sourceCodeLineCount,
+            1
+        );
         var postErrorLineNumberInFile = errorEndLineNumberInFile + _sourceCodeLineCount;
         var codeBlock = allLines
             .Skip(preErrorLineNumberInFile - 1)

@@ -16,12 +16,12 @@ namespace System.Diagnostics
     public enum DebuggerBrowsableState
     {
         Never = 0,
+
         // Expanded is not supported in this release
         // Expanded = 1,
         Collapsed = 2,
-        RootHidden = 3
+        RootHidden = 3,
     }
-
 
     // the one currently supported with the csee.dat
     // (mcee.dat, autoexp.dat) file.
@@ -35,6 +35,7 @@ namespace System.Diagnostics
 
             State = state;
         }
+
         public DebuggerBrowsableState State { get; }
     }
 }

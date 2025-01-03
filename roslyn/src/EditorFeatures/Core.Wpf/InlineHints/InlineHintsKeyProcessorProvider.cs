@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
     [TextViewRole(PredefinedTextViewRoles.Interactive)]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(nameof(InlineHintsKeyProcessorProvider))]
-    internal sealed class InlineHintsKeyProcessorProvider : IKeyProcessorProvider, IInlineHintKeyProcessor
+    internal sealed class InlineHintsKeyProcessorProvider
+        : IKeyProcessorProvider,
+            IInlineHintKeyProcessor
     {
         private readonly IGlobalOptionService _globalOptions;
         private readonly IThreadingContext _threadingContext;
@@ -33,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public InlineHintsKeyProcessorProvider(
             IGlobalOptionService globalOptions,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _globalOptions = globalOptions;
             _threadingContext = threadingContext;
@@ -46,7 +49,6 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 // Can be read on any thread.
                 return Volatile.Read(ref _state) == 1;
             }
-
             private set
             {
                 _threadingContext.ThrowIfNotOnUIThread();
@@ -56,15 +58,18 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
 
         public event Action? StateChanged;
 
-        public KeyProcessor GetAssociatedProcessor(IWpfTextView wpfTextView)
-            => new InlineHintsKeyProcessor(this, wpfTextView);
+        public KeyProcessor GetAssociatedProcessor(IWpfTextView wpfTextView) =>
+            new InlineHintsKeyProcessor(this, wpfTextView);
 
         private sealed class InlineHintsKeyProcessor : KeyProcessor
         {
             private readonly InlineHintsKeyProcessorProvider _processorProvider;
             private readonly IWpfTextView _view;
 
-            public InlineHintsKeyProcessor(InlineHintsKeyProcessorProvider processorProvider, IWpfTextView view)
+            public InlineHintsKeyProcessor(
+                InlineHintsKeyProcessorProvider processorProvider,
+                IWpfTextView view
+            )
             {
                 _processorProvider = processorProvider;
                 _view = view;
@@ -72,14 +77,13 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 _view.LostAggregateFocus += OnLostFocus;
             }
 
-            private static bool IsAlt(KeyEventArgs args)
-                => IsKey(args, Key.LeftAlt) || IsKey(args, Key.RightAlt);
+            private static bool IsAlt(KeyEventArgs args) =>
+                IsKey(args, Key.LeftAlt) || IsKey(args, Key.RightAlt);
 
-            private static bool IsF1(KeyEventArgs args)
-                => IsKey(args, Key.F1);
+            private static bool IsF1(KeyEventArgs args) => IsKey(args, Key.F1);
 
-            private static bool IsKey(KeyEventArgs args, Key key)
-                => args.SystemKey == key || args.Key == key;
+            private static bool IsKey(KeyEventArgs args, Key key) =>
+                args.SystemKey == key || args.Key == key;
 
             private void OnViewClosed(object sender, EventArgs e)
             {
@@ -102,8 +106,7 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 base.KeyDown(args);
 
                 // If the user is now holding down F1, see if they're also holding down 'alt'.  If so, toggle the inline hints on.
-                if (IsF1(args) &&
-                    args.KeyboardDevice.Modifiers == ModifierKeys.Alt)
+                if (IsF1(args) && args.KeyboardDevice.Modifiers == ModifierKeys.Alt)
                 {
                     ToggleOn();
                 }
@@ -124,11 +127,9 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                     ToggleOff();
             }
 
-            private void ToggleOn()
-                => Toggle(on: true);
+            private void ToggleOn() => Toggle(on: true);
 
-            private void ToggleOff()
-                => Toggle(on: false);
+            private void ToggleOff() => Toggle(on: false);
 
             private void Toggle(bool on)
             {
@@ -138,7 +139,11 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
 
                 // We can only enter the on-state if the user has the chord feature enabled.  We can always enter the
                 // off state though.
-                on = on && _processorProvider._globalOptions.GetOption(InlineHintsViewOptionsStorage.DisplayAllHintsWhilePressingAltF1);
+                on =
+                    on
+                    && _processorProvider._globalOptions.GetOption(
+                        InlineHintsViewOptionsStorage.DisplayAllHintsWhilePressingAltF1
+                    );
                 if (_processorProvider.State == on)
                     return;
 

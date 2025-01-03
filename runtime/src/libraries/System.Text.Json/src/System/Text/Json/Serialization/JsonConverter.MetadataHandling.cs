@@ -11,12 +11,18 @@ namespace System.Text.Json.Serialization
         /// <summary>
         /// Initializes the state for polymorphic cases and returns the appropriate derived converter.
         /// </summary>
-        internal JsonConverter? ResolvePolymorphicConverter(JsonTypeInfo jsonTypeInfo, ref ReadStack state)
+        internal JsonConverter? ResolvePolymorphicConverter(
+            JsonTypeInfo jsonTypeInfo,
+            ref ReadStack state
+        )
         {
             Debug.Assert(!IsValueType);
             Debug.Assert(CanHaveMetadata);
             Debug.Assert((state.Current.MetadataPropertyNames & MetadataPropertyName.Type) != 0);
-            Debug.Assert(state.Current.PolymorphicSerializationState != PolymorphicSerializationState.PolymorphicReEntryStarted);
+            Debug.Assert(
+                state.Current.PolymorphicSerializationState
+                    != PolymorphicSerializationState.PolymorphicReEntryStarted
+            );
             Debug.Assert(jsonTypeInfo.PolymorphicTypeResolver?.UsesTypeDiscriminators == true);
 
             JsonConverter? polymorphicConverter = null;
@@ -28,19 +34,27 @@ namespace System.Text.Json.Serialization
                     Debug.Assert(state.PolymorphicTypeDiscriminator != null);
 
                     PolymorphicTypeResolver resolver = jsonTypeInfo.PolymorphicTypeResolver;
-                    if (resolver.TryGetDerivedJsonTypeInfo(state.PolymorphicTypeDiscriminator, out JsonTypeInfo? resolvedType))
+                    if (
+                        resolver.TryGetDerivedJsonTypeInfo(
+                            state.PolymorphicTypeDiscriminator,
+                            out JsonTypeInfo? resolvedType
+                        )
+                    )
                     {
                         Debug.Assert(Type!.IsAssignableFrom(resolvedType.Type));
 
                         polymorphicConverter = state.InitializePolymorphicReEntry(resolvedType);
                         if (!polymorphicConverter.CanHaveMetadata)
                         {
-                            ThrowHelper.ThrowNotSupportedException_DerivedConverterDoesNotSupportMetadata(resolvedType.Type);
+                            ThrowHelper.ThrowNotSupportedException_DerivedConverterDoesNotSupportMetadata(
+                                resolvedType.Type
+                            );
                         }
                     }
                     else
                     {
-                        state.Current.PolymorphicSerializationState = PolymorphicSerializationState.PolymorphicReEntryNotFound;
+                        state.Current.PolymorphicSerializationState =
+                            PolymorphicSerializationState.PolymorphicReEntryNotFound;
                     }
 
                     state.PolymorphicTypeDiscriminator = null;
@@ -66,7 +80,12 @@ namespace System.Text.Json.Serialization
         /// <summary>
         /// Initializes the state for polymorphic cases and returns the appropriate derived converter.
         /// </summary>
-        internal JsonConverter? ResolvePolymorphicConverter(object value, JsonTypeInfo jsonTypeInfo, JsonSerializerOptions options, ref WriteStack state)
+        internal JsonConverter? ResolvePolymorphicConverter(
+            object value,
+            JsonTypeInfo jsonTypeInfo,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             Debug.Assert(!IsValueType);
             Debug.Assert(value != null && Type!.IsAssignableFrom(value.GetType()));
@@ -85,7 +104,10 @@ namespace System.Text.Json.Serialization
                     if (CanBePolymorphic && runtimeType != Type)
                     {
                         Debug.Assert(Type == typeof(object));
-                        jsonTypeInfo = state.Current.InitializePolymorphicReEntry(runtimeType, options);
+                        jsonTypeInfo = state.Current.InitializePolymorphicReEntry(
+                            runtimeType,
+                            options
+                        );
                         polymorphicConverter = jsonTypeInfo.Converter;
                     }
 
@@ -93,15 +115,25 @@ namespace System.Text.Json.Serialization
                     {
                         Debug.Assert(jsonTypeInfo.Converter.CanHaveMetadata);
 
-                        if (resolver.TryGetDerivedJsonTypeInfo(runtimeType, out JsonTypeInfo? derivedJsonTypeInfo, out object? typeDiscriminator))
+                        if (
+                            resolver.TryGetDerivedJsonTypeInfo(
+                                runtimeType,
+                                out JsonTypeInfo? derivedJsonTypeInfo,
+                                out object? typeDiscriminator
+                            )
+                        )
                         {
-                            polymorphicConverter = state.Current.InitializePolymorphicReEntry(derivedJsonTypeInfo);
+                            polymorphicConverter = state.Current.InitializePolymorphicReEntry(
+                                derivedJsonTypeInfo
+                            );
 
                             if (typeDiscriminator is not null)
                             {
                                 if (!polymorphicConverter.CanHaveMetadata)
                                 {
-                                    ThrowHelper.ThrowNotSupportedException_DerivedConverterDoesNotSupportMetadata(derivedJsonTypeInfo.Type);
+                                    ThrowHelper.ThrowNotSupportedException_DerivedConverterDoesNotSupportMetadata(
+                                        derivedJsonTypeInfo.Type
+                                    );
                                 }
 
                                 state.PolymorphicTypeDiscriminator = typeDiscriminator;
@@ -112,7 +144,8 @@ namespace System.Text.Json.Serialization
 
                     if (polymorphicConverter is null)
                     {
-                        state.Current.PolymorphicSerializationState = PolymorphicSerializationState.PolymorphicReEntryNotFound;
+                        state.Current.PolymorphicSerializationState =
+                            PolymorphicSerializationState.PolymorphicReEntryNotFound;
                     }
 
                     break;
@@ -135,7 +168,13 @@ namespace System.Text.Json.Serialization
             return polymorphicConverter;
         }
 
-        internal bool TryHandleSerializedObjectReference(Utf8JsonWriter writer, object value, JsonSerializerOptions options, JsonConverter? polymorphicConverter, ref WriteStack state)
+        internal bool TryHandleSerializedObjectReference(
+            Utf8JsonWriter writer,
+            object value,
+            JsonSerializerOptions options,
+            JsonConverter? polymorphicConverter,
+            ref WriteStack state
+        )
         {
             Debug.Assert(!IsValueType);
             Debug.Assert(!state.IsContinuation);
@@ -160,7 +199,10 @@ namespace System.Text.Json.Serialization
 
                 case ReferenceHandlingStrategy.Preserve:
                     bool canHaveIdMetata = polymorphicConverter?.CanHaveMetadata ?? CanHaveMetadata;
-                    if (canHaveIdMetata && JsonSerializer.TryGetReferenceForValue(value, ref state, writer))
+                    if (
+                        canHaveIdMetata
+                        && JsonSerializer.TryGetReferenceForValue(value, ref state, writer)
+                    )
                     {
                         // We found a repeating reference and wrote the relevant metadata; serialization complete.
                         return true;

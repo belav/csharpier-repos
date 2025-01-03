@@ -35,7 +35,10 @@ namespace System.Runtime.Serialization
             {
                 if (s_objectEquals == null)
                 {
-                    s_objectEquals = typeof(object).GetMethod("Equals", BindingFlags.Public | BindingFlags.Static);
+                    s_objectEquals = typeof(object).GetMethod(
+                        "Equals",
+                        BindingFlags.Public | BindingFlags.Static
+                    );
                     Debug.Assert(s_objectEquals != null);
                 }
                 return s_objectEquals;
@@ -49,7 +52,10 @@ namespace System.Runtime.Serialization
             {
                 if (s_arraySetValue == null)
                 {
-                    s_arraySetValue = typeof(Array).GetMethod("SetValue", new Type[] { typeof(object), typeof(int) });
+                    s_arraySetValue = typeof(Array).GetMethod(
+                        "SetValue",
+                        new Type[] { typeof(object), typeof(int) }
+                    );
                     Debug.Assert(s_arraySetValue != null);
                 }
                 return s_arraySetValue;
@@ -77,15 +83,21 @@ namespace System.Runtime.Serialization
             {
                 if (s_stringFormat == null)
                 {
-                    s_stringFormat = typeof(string).GetMethod("Format", new Type[] { typeof(string), typeof(object[]) });
+                    s_stringFormat = typeof(string).GetMethod(
+                        "Format",
+                        new Type[] { typeof(string), typeof(object[]) }
+                    );
                     Debug.Assert(s_stringFormat != null);
                 }
                 return s_stringFormat;
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "The trimmer will never remove the Invoke method from delegates.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "The trimmer will never remove the Invoke method from delegates."
+        )]
         internal static MethodInfo GetInvokeMethod(Type delegateType)
         {
             Debug.Assert(typeof(Delegate).IsAssignableFrom(delegateType));
@@ -95,7 +107,8 @@ namespace System.Runtime.Serialization
         private Type _delegateType = null!; // initialized in BeginMethod
 
         private static Module? s_serializationModule;
-        private static Module SerializationModule => s_serializationModule ??= typeof(CodeGenerator).Module;   // could to be replaced by different dll that has SkipVerification set to false
+        private static Module SerializationModule =>
+            s_serializationModule ??= typeof(CodeGenerator).Module; // could to be replaced by different dll that has SkipVerification set to false
 
         private DynamicMethod _dynamicMethod = null!; // initialized in BeginMethod
 
@@ -118,7 +131,11 @@ namespace System.Runtime.Serialization
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
-        internal void BeginMethod(string methodName, Type delegateType, bool allowPrivateMemberAccess)
+        internal void BeginMethod(
+            string methodName,
+            Type delegateType,
+            bool allowPrivateMemberAccess
+        )
         {
             MethodInfo signature = GetInvokeMethod(delegateType);
             ParameterInfo[] parameters = signature.GetParameters();
@@ -130,9 +147,20 @@ namespace System.Runtime.Serialization
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
-        private void BeginMethod(Type returnType, string methodName, Type[] argTypes, bool allowPrivateMemberAccess)
+        private void BeginMethod(
+            Type returnType,
+            string methodName,
+            Type[] argTypes,
+            bool allowPrivateMemberAccess
+        )
         {
-            _dynamicMethod = new DynamicMethod(methodName, returnType, argTypes, SerializationModule, allowPrivateMemberAccess);
+            _dynamicMethod = new DynamicMethod(
+                methodName,
+                returnType,
+                argTypes,
+                SerializationModule,
+                allowPrivateMemberAccess
+            );
 
             _ilGen = _dynamicMethod.GetILGenerator();
 
@@ -166,10 +194,7 @@ namespace System.Runtime.Serialization
 
         internal MethodInfo CurrentMethod
         {
-            get
-            {
-                return _dynamicMethod;
-            }
+            get { return _dynamicMethod; }
         }
 
         internal ArgBuilder GetArg(int index)
@@ -279,8 +304,12 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal void ForEach(LocalBuilder local, Type elementType,
-            LocalBuilder enumerator, MethodInfo getCurrentMethod)
+        internal void ForEach(
+            LocalBuilder local,
+            Type elementType,
+            LocalBuilder enumerator,
+            MethodInfo getCurrentMethod
+        )
         {
             ForState forState = new ForState(local, DefineLabel(), DefineLabel(), enumerator);
 
@@ -306,7 +335,6 @@ namespace System.Runtime.Serialization
             object? enumerator = forState.End;
             Call(enumerator, moveNextMethod);
 
-
             Brtrue(forState.BeginLabel);
             if (forState.RequiresEndLabel)
                 MarkLabel(forState.EndLabel);
@@ -316,8 +344,11 @@ namespace System.Runtime.Serialization
         {
             Type type = GetVariableType(value);
             TypeCode typeCode = Type.GetTypeCode(type);
-            if ((typeCode == TypeCode.Object && type.IsValueType) ||
-                typeCode == TypeCode.DateTime || typeCode == TypeCode.Decimal)
+            if (
+                (typeCode == TypeCode.Object && type.IsValueType)
+                || typeCode == TypeCode.DateTime
+                || typeCode == TypeCode.Decimal
+            )
             {
                 LoadDefaultValue(type);
                 ConvertValue(type, Globals.TypeOfObject);
@@ -373,13 +404,13 @@ namespace System.Runtime.Serialization
             _blockStack.Push(ifState);
         }
 
-
         internal void If(object value1, Cmp cmpOp, object? value2)
         {
             Load(value1);
             Load(value2);
             If(cmpOp);
         }
+
         internal void Else()
         {
             IfState ifState = PopIfState();
@@ -404,7 +435,6 @@ namespace System.Runtime.Serialization
             _blockStack.Push(ifState);
         }
 
-
         internal void EndIf()
         {
             IfState ifState = PopIfState();
@@ -416,7 +446,14 @@ namespace System.Runtime.Serialization
         internal static void VerifyParameterCount(MethodInfo methodInfo, int expectedCount)
         {
             if (methodInfo.GetParameters().Length != expectedCount)
-                throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.ParameterCountMismatch, methodInfo.Name, methodInfo.GetParameters().Length, expectedCount));
+                throw XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(
+                        SR.ParameterCountMismatch,
+                        methodInfo.Name,
+                        methodInfo.GetParameters().Length,
+                        expectedCount
+                    )
+                );
         }
 
         internal void Call(object? thisObj, MethodInfo methodInfo)
@@ -443,7 +480,13 @@ namespace System.Runtime.Serialization
             Call(methodInfo);
         }
 
-        internal void Call(object? thisObj, MethodInfo methodInfo, object? param1, object? param2, object? param3)
+        internal void Call(
+            object? thisObj,
+            MethodInfo methodInfo,
+            object? param1,
+            object? param2,
+            object? param3
+        )
         {
             VerifyParameterCount(methodInfo, 3);
             LoadThis(thisObj, methodInfo);
@@ -453,7 +496,14 @@ namespace System.Runtime.Serialization
             Call(methodInfo);
         }
 
-        internal void Call(object? thisObj, MethodInfo methodInfo, object? param1, object? param2, object? param3, object? param4)
+        internal void Call(
+            object? thisObj,
+            MethodInfo methodInfo,
+            object? param1,
+            object? param2,
+            object? param3,
+            object? param4
+        )
         {
             VerifyParameterCount(methodInfo, 4);
             LoadThis(thisObj, methodInfo);
@@ -464,7 +514,15 @@ namespace System.Runtime.Serialization
             Call(methodInfo);
         }
 
-        internal void Call(object? thisObj, MethodInfo methodInfo, object? param1, object? param2, object? param3, object? param4, object? param5)
+        internal void Call(
+            object? thisObj,
+            MethodInfo methodInfo,
+            object? param1,
+            object? param2,
+            object? param3,
+            object? param4,
+            object? param5
+        )
         {
             VerifyParameterCount(methodInfo, 5);
             LoadThis(thisObj, methodInfo);
@@ -476,7 +534,16 @@ namespace System.Runtime.Serialization
             Call(methodInfo);
         }
 
-        internal void Call(object? thisObj, MethodInfo methodInfo, object? param1, object? param2, object? param3, object? param4, object? param5, object? param6)
+        internal void Call(
+            object? thisObj,
+            MethodInfo methodInfo,
+            object? param1,
+            object? param2,
+            object? param3,
+            object? param4,
+            object? param5,
+            object? param6
+        )
         {
             VerifyParameterCount(methodInfo, 6);
             LoadThis(thisObj, methodInfo);
@@ -588,7 +655,9 @@ namespace System.Runtime.Serialization
                 memberType = property.PropertyType;
                 MethodInfo? getMethod = property.GetMethod;
                 if (getMethod == null)
-                    throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.NoGetMethodForProperty, property.DeclaringType, property));
+                    throw XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(SR.NoGetMethodForProperty, property.DeclaringType, property)
+                    );
                 Call(getMethod);
             }
             else if (memberInfo is MethodInfo method)
@@ -597,7 +666,14 @@ namespace System.Runtime.Serialization
                 Call(method);
             }
             else
-                throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.CannotLoadMemberType, "Unknown", memberInfo.DeclaringType, memberInfo.Name));
+                throw XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(
+                        SR.CannotLoadMemberType,
+                        "Unknown",
+                        memberInfo.DeclaringType,
+                        memberInfo.Name
+                    )
+                );
 
             return memberType;
         }
@@ -619,13 +695,17 @@ namespace System.Runtime.Serialization
             {
                 MethodInfo? setMethod = property.SetMethod;
                 if (setMethod == null)
-                    throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.NoSetMethodForProperty, property.DeclaringType, property));
+                    throw XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(SR.NoSetMethodForProperty, property.DeclaringType, property)
+                    );
                 Call(setMethod);
             }
             else if (memberInfo is MethodInfo method)
                 Call(method);
             else
-                throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.CannotLoadMemberType, "Unknown"));
+                throw XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(SR.CannotLoadMemberType, "Unknown")
+                );
         }
 
         internal void LoadDefaultValue(Type type)
@@ -693,7 +773,12 @@ namespace System.Runtime.Serialization
             else
             {
                 Debug.Fail("Data can only be stored into ArgBuilder or LocalBuilder.");
-                throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.CanOnlyStoreIntoArgOrLocGot0, DataContract.GetClrTypeFullName(var.GetType())));
+                throw XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(
+                        SR.CanOnlyStoreIntoArgOrLocGot0,
+                        DataContract.GetClrTypeFullName(var.GetType())
+                    )
+                );
             }
         }
 
@@ -715,7 +800,6 @@ namespace System.Runtime.Serialization
                 Load(obj);
         }
 
-
         internal void ConvertAddress(Type source, Type target)
         {
             InternalConvert(source, target, true);
@@ -725,7 +809,6 @@ namespace System.Runtime.Serialization
         {
             InternalConvert(source, target, false);
         }
-
 
         internal void Castclass(Type target)
         {
@@ -746,17 +829,17 @@ namespace System.Runtime.Serialization
             typeCode switch
             {
                 TypeCode.Boolean => OpCodes.Ldind_I1, // TypeCode.Boolean:
-                TypeCode.Char => OpCodes.Ldind_I2,    // TypeCode.Char:
-                TypeCode.SByte => OpCodes.Ldind_I1,   // TypeCode.SByte:
-                TypeCode.Byte => OpCodes.Ldind_U1,    // TypeCode.Byte:
-                TypeCode.Int16 => OpCodes.Ldind_I2,   // TypeCode.Int16:
-                TypeCode.UInt16 => OpCodes.Ldind_U2,  // TypeCode.UInt16:
-                TypeCode.Int32 => OpCodes.Ldind_I4,   // TypeCode.Int32:
-                TypeCode.UInt32 => OpCodes.Ldind_U4,  // TypeCode.UInt32:
-                TypeCode.Int64 => OpCodes.Ldind_I8,   // TypeCode.Int64:
-                TypeCode.UInt64 => OpCodes.Ldind_I8,  // TypeCode.UInt64:
-                TypeCode.Single => OpCodes.Ldind_R4,  // TypeCode.Single:
-                TypeCode.Double => OpCodes.Ldind_R8,  // TypeCode.Double:
+                TypeCode.Char => OpCodes.Ldind_I2, // TypeCode.Char:
+                TypeCode.SByte => OpCodes.Ldind_I1, // TypeCode.SByte:
+                TypeCode.Byte => OpCodes.Ldind_U1, // TypeCode.Byte:
+                TypeCode.Int16 => OpCodes.Ldind_I2, // TypeCode.Int16:
+                TypeCode.UInt16 => OpCodes.Ldind_U2, // TypeCode.UInt16:
+                TypeCode.Int32 => OpCodes.Ldind_I4, // TypeCode.Int32:
+                TypeCode.UInt32 => OpCodes.Ldind_U4, // TypeCode.UInt32:
+                TypeCode.Int64 => OpCodes.Ldind_I8, // TypeCode.Int64:
+                TypeCode.UInt64 => OpCodes.Ldind_I8, // TypeCode.UInt64:
+                TypeCode.Single => OpCodes.Ldind_R4, // TypeCode.Single:
+                TypeCode.Double => OpCodes.Ldind_R8, // TypeCode.Double:
                 TypeCode.String => OpCodes.Ldind_Ref, // TypeCode.String:
                 _ => OpCodes.Nop,
             };
@@ -778,7 +861,6 @@ namespace System.Runtime.Serialization
         {
             _ilGen.Emit(OpCodes.Stobj, type);
         }
-
 
         internal void Ceq()
         {
@@ -815,7 +897,9 @@ namespace System.Runtime.Serialization
                         Ldc((bool)o);
                         break;
                     case TypeCode.Char:
-                        Debug.Fail("Char is not a valid schema primitive and should be treated as int in DataContract");
+                        Debug.Fail(
+                            "Char is not a valid schema primitive and should be treated as int in DataContract"
+                        );
                         throw new NotSupportedException(SR.CharIsInvalidPrimitive);
                     case TypeCode.SByte:
                     case TypeCode.Byte:
@@ -850,7 +934,12 @@ namespace System.Runtime.Serialization
                     case TypeCode.Empty:
                     case TypeCode.DBNull:
                     default:
-                        throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.UnknownConstantType, DataContract.GetClrTypeFullName(valueType)));
+                        throw XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.UnknownConstantType,
+                                DataContract.GetClrTypeFullName(valueType)
+                            )
+                        );
                 }
             }
         }
@@ -964,17 +1053,17 @@ namespace System.Runtime.Serialization
             {
                 TypeCode.Object or TypeCode.DBNull => OpCodes.Ldelem_Ref, // TypeCode.Object:
                 TypeCode.Boolean => OpCodes.Ldelem_I1, // TypeCode.Boolean:
-                TypeCode.Char => OpCodes.Ldelem_I2,    // TypeCode.Char:
-                TypeCode.SByte => OpCodes.Ldelem_I1,   // TypeCode.SByte:
-                TypeCode.Byte => OpCodes.Ldelem_U1,    // TypeCode.Byte:
-                TypeCode.Int16 => OpCodes.Ldelem_I2,   // TypeCode.Int16:
-                TypeCode.UInt16 => OpCodes.Ldelem_U2,  // TypeCode.UInt16:
-                TypeCode.Int32 => OpCodes.Ldelem_I4,   // TypeCode.Int32:
-                TypeCode.UInt32 => OpCodes.Ldelem_U4,  // TypeCode.UInt32:
-                TypeCode.Int64 => OpCodes.Ldelem_I8,   // TypeCode.Int64:
-                TypeCode.UInt64 => OpCodes.Ldelem_I8,  // TypeCode.UInt64:
-                TypeCode.Single => OpCodes.Ldelem_R4,  // TypeCode.Single:
-                TypeCode.Double => OpCodes.Ldelem_R8,  // TypeCode.Double:
+                TypeCode.Char => OpCodes.Ldelem_I2, // TypeCode.Char:
+                TypeCode.SByte => OpCodes.Ldelem_I1, // TypeCode.SByte:
+                TypeCode.Byte => OpCodes.Ldelem_U1, // TypeCode.Byte:
+                TypeCode.Int16 => OpCodes.Ldelem_I2, // TypeCode.Int16:
+                TypeCode.UInt16 => OpCodes.Ldelem_U2, // TypeCode.UInt16:
+                TypeCode.Int32 => OpCodes.Ldelem_I4, // TypeCode.Int32:
+                TypeCode.UInt32 => OpCodes.Ldelem_U4, // TypeCode.UInt32:
+                TypeCode.Int64 => OpCodes.Ldelem_I8, // TypeCode.Int64:
+                TypeCode.UInt64 => OpCodes.Ldelem_I8, // TypeCode.UInt64:
+                TypeCode.Single => OpCodes.Ldelem_R4, // TypeCode.Single:
+                TypeCode.Double => OpCodes.Ldelem_R8, // TypeCode.Double:
                 TypeCode.String => OpCodes.Ldelem_Ref, // TypeCode.String:
                 _ => OpCodes.Nop,
             };
@@ -989,10 +1078,16 @@ namespace System.Runtime.Serialization
             {
                 OpCode opCode = GetLdelemOpCode(Type.GetTypeCode(arrayElementType));
                 if (opCode.Equals(OpCodes.Nop))
-                    throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.ArrayTypeIsNotSupported_GeneratingCode, DataContract.GetClrTypeFullName(arrayElementType)));
+                    throw XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(
+                            SR.ArrayTypeIsNotSupported_GeneratingCode,
+                            DataContract.GetClrTypeFullName(arrayElementType)
+                        )
+                    );
                 _ilGen.Emit(opCode);
             }
         }
+
         internal void Ldelema(Type arrayElementType)
         {
             OpCode opCode = OpCodes.Ldelema;
@@ -1004,17 +1099,17 @@ namespace System.Runtime.Serialization
             {
                 TypeCode.Object or TypeCode.DBNull => OpCodes.Stelem_Ref, // TypeCode.Object:
                 TypeCode.Boolean => OpCodes.Stelem_I1, // TypeCode.Boolean:
-                TypeCode.Char => OpCodes.Stelem_I2,    // TypeCode.Char:
-                TypeCode.SByte => OpCodes.Stelem_I1,   // TypeCode.SByte:
-                TypeCode.Byte => OpCodes.Stelem_I1,    // TypeCode.Byte:
-                TypeCode.Int16 => OpCodes.Stelem_I2,   // TypeCode.Int16:
-                TypeCode.UInt16 => OpCodes.Stelem_I2,  // TypeCode.UInt16:
-                TypeCode.Int32 => OpCodes.Stelem_I4,   // TypeCode.Int32:
-                TypeCode.UInt32 => OpCodes.Stelem_I4,  // TypeCode.UInt32:
-                TypeCode.Int64 => OpCodes.Stelem_I8,   // TypeCode.Int64:
-                TypeCode.UInt64 => OpCodes.Stelem_I8,  // TypeCode.UInt64:
-                TypeCode.Single => OpCodes.Stelem_R4,  // TypeCode.Single:
-                TypeCode.Double => OpCodes.Stelem_R8,  // TypeCode.Double:
+                TypeCode.Char => OpCodes.Stelem_I2, // TypeCode.Char:
+                TypeCode.SByte => OpCodes.Stelem_I1, // TypeCode.SByte:
+                TypeCode.Byte => OpCodes.Stelem_I1, // TypeCode.Byte:
+                TypeCode.Int16 => OpCodes.Stelem_I2, // TypeCode.Int16:
+                TypeCode.UInt16 => OpCodes.Stelem_I2, // TypeCode.UInt16:
+                TypeCode.Int32 => OpCodes.Stelem_I4, // TypeCode.Int32:
+                TypeCode.UInt32 => OpCodes.Stelem_I4, // TypeCode.UInt32:
+                TypeCode.Int64 => OpCodes.Stelem_I8, // TypeCode.Int64:
+                TypeCode.UInt64 => OpCodes.Stelem_I8, // TypeCode.UInt64:
+                TypeCode.Single => OpCodes.Stelem_R4, // TypeCode.Single:
+                TypeCode.Double => OpCodes.Stelem_R8, // TypeCode.Double:
                 TypeCode.String => OpCodes.Stelem_Ref, // TypeCode.String:
                 _ => OpCodes.Nop,
             };
@@ -1027,7 +1122,12 @@ namespace System.Runtime.Serialization
             {
                 OpCode opCode = GetStelemOpCode(Type.GetTypeCode(arrayElementType));
                 if (opCode.Equals(OpCodes.Nop))
-                    throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.ArrayTypeIsNotSupported_GeneratingCode, DataContract.GetClrTypeFullName(arrayElementType)));
+                    throw XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(
+                            SR.ArrayTypeIsNotSupported_GeneratingCode,
+                            DataContract.GetClrTypeFullName(arrayElementType)
+                        )
+                    );
                 _ilGen.Emit(opCode);
             }
         }
@@ -1056,6 +1156,7 @@ namespace System.Runtime.Serialization
         {
             _ilGen.Emit(OpCodes.And);
         }
+
         internal void Or()
         {
             _ilGen.Emit(OpCodes.Or);
@@ -1114,7 +1215,10 @@ namespace System.Runtime.Serialization
         {
             Load(arg);
             if (arg != null)
-                ConvertValue(GetVariableType(arg), methodInfo.GetParameters()[oneBasedArgIndex - 1].ParameterType);
+                ConvertValue(
+                    GetVariableType(arg),
+                    methodInfo.GetParameters()[oneBasedArgIndex - 1].ParameterType
+                );
         }
 
         private void InternalIf(bool negate)
@@ -1133,17 +1237,17 @@ namespace System.Runtime.Serialization
             typeCode switch
             {
                 TypeCode.Boolean => OpCodes.Conv_I1, // TypeCode.Boolean:
-                TypeCode.Char => OpCodes.Conv_I2,    // TypeCode.Char:
-                TypeCode.SByte => OpCodes.Conv_I1,   // TypeCode.SByte:
-                TypeCode.Byte => OpCodes.Conv_U1,    // TypeCode.Byte:
-                TypeCode.Int16 => OpCodes.Conv_I2,   // TypeCode.Int16:
-                TypeCode.UInt16 => OpCodes.Conv_U2,  // TypeCode.UInt16:
-                TypeCode.Int32 => OpCodes.Conv_I4,   // TypeCode.Int32:
-                TypeCode.UInt32 => OpCodes.Conv_U4,  // TypeCode.UInt32:
-                TypeCode.Int64 => OpCodes.Conv_I8,   // TypeCode.Int64:
-                TypeCode.UInt64 => OpCodes.Conv_I8,  // TypeCode.UInt64:
-                TypeCode.Single => OpCodes.Conv_R4,  // TypeCode.Single:
-                TypeCode.Double => OpCodes.Conv_R8,  // TypeCode.Double:
+                TypeCode.Char => OpCodes.Conv_I2, // TypeCode.Char:
+                TypeCode.SByte => OpCodes.Conv_I1, // TypeCode.SByte:
+                TypeCode.Byte => OpCodes.Conv_U1, // TypeCode.Byte:
+                TypeCode.Int16 => OpCodes.Conv_I2, // TypeCode.Int16:
+                TypeCode.UInt16 => OpCodes.Conv_U2, // TypeCode.UInt16:
+                TypeCode.Int32 => OpCodes.Conv_I4, // TypeCode.Int32:
+                TypeCode.UInt32 => OpCodes.Conv_U4, // TypeCode.UInt32:
+                TypeCode.Int64 => OpCodes.Conv_I8, // TypeCode.Int64:
+                TypeCode.UInt64 => OpCodes.Conv_I8, // TypeCode.UInt64:
+                TypeCode.Single => OpCodes.Conv_R4, // TypeCode.Single:
+                TypeCode.Double => OpCodes.Conv_R8, // TypeCode.Double:
                 _ => OpCodes.Nop,
             };
 
@@ -1157,7 +1261,12 @@ namespace System.Runtime.Serialization
                 {
                     OpCode opCode = GetConvOpCode(Type.GetTypeCode(target));
                     if (opCode.Equals(OpCodes.Nop))
-                        throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.NoConversionPossibleTo, DataContract.GetClrTypeFullName(target)));
+                        throw XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.NoConversionPossibleTo,
+                                DataContract.GetClrTypeFullName(target)
+                            )
+                        );
                     else
                     {
                         _ilGen.Emit(opCode);
@@ -1170,7 +1279,13 @@ namespace System.Runtime.Serialization
                         Ldobj(target);
                 }
                 else
-                    throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.IsNotAssignableFrom, DataContract.GetClrTypeFullName(target), DataContract.GetClrTypeFullName(source)));
+                    throw XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(
+                            SR.IsNotAssignableFrom,
+                            DataContract.GetClrTypeFullName(target),
+                            DataContract.GetClrTypeFullName(source)
+                        )
+                    );
             }
             else if (target.IsAssignableFrom(source))
             {
@@ -1190,7 +1305,13 @@ namespace System.Runtime.Serialization
                 Castclass(target);
             }
             else
-                throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.IsNotAssignableFrom, DataContract.GetClrTypeFullName(target), DataContract.GetClrTypeFullName(source)));
+                throw XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(
+                        SR.IsNotAssignableFrom,
+                        DataContract.GetClrTypeFullName(target),
+                        DataContract.GetClrTypeFullName(source)
+                    )
+                );
         }
 
         private IfState PopIfState()
@@ -1205,7 +1326,9 @@ namespace System.Runtime.Serialization
         [DoesNotReturn]
         private static void ThrowMismatchException(object expected)
         {
-            throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.ExpectingEnd, expected.ToString()));
+            throw XmlObjectSerializer.CreateSerializationException(
+                SR.Format(SR.ExpectingEnd, expected.ToString())
+            );
         }
 
         internal Label[] Switch(int labelCount)
@@ -1220,6 +1343,7 @@ namespace System.Runtime.Serialization
             _blockStack.Push(switchState);
             return caseLabels;
         }
+
         internal void Case(Label caseLabel1)
         {
             MarkLabel(caseLabel1);
@@ -1245,7 +1369,10 @@ namespace System.Runtime.Serialization
             MarkLabel(switchState.EndOfSwitchLabel);
         }
 
-        private static readonly MethodInfo s_stringLength = typeof(string).GetProperty("Length")!.GetMethod!;
+        private static readonly MethodInfo s_stringLength = typeof(string)
+            .GetProperty("Length")!
+            .GetMethod!;
+
         internal void ElseIfIsEmptyString(LocalBuilder strLocal)
         {
             IfState ifState = (IfState)_blockStack.Pop();
@@ -1319,6 +1446,7 @@ namespace System.Runtime.Serialization
     {
         internal int Index;
         internal Type ArgType;
+
         internal ArgBuilder(int index, Type argType)
         {
             Index = index;
@@ -1345,58 +1473,34 @@ namespace System.Runtime.Serialization
 
         internal LocalBuilder? Index
         {
-            get
-            {
-                return _indexVar;
-            }
+            get { return _indexVar; }
         }
 
         internal Label BeginLabel
         {
-            get
-            {
-                return _beginLabel;
-            }
+            get { return _beginLabel; }
         }
 
         internal Label TestLabel
         {
-            get
-            {
-                return _testLabel;
-            }
+            get { return _testLabel; }
         }
 
         internal Label EndLabel
         {
-            get
-            {
-                return _endLabel;
-            }
-            set
-            {
-                _endLabel = value;
-            }
+            get { return _endLabel; }
+            set { _endLabel = value; }
         }
 
         internal bool RequiresEndLabel
         {
-            get
-            {
-                return _requiresEndLabel;
-            }
-            set
-            {
-                _requiresEndLabel = value;
-            }
+            get { return _requiresEndLabel; }
+            set { _requiresEndLabel = value; }
         }
 
         internal object? End
         {
-            get
-            {
-                return _end;
-            }
+            get { return _end; }
         }
     }
 
@@ -1407,7 +1511,7 @@ namespace System.Runtime.Serialization
         LessThanOrEqualTo,
         GreaterThan,
         NotEqualTo,
-        GreaterThanOrEqualTo
+        GreaterThanOrEqualTo,
     }
 
     internal sealed class IfState
@@ -1417,66 +1521,43 @@ namespace System.Runtime.Serialization
 
         internal Label EndIf
         {
-            get
-            {
-                return _endIf;
-            }
-            set
-            {
-                _endIf = value;
-            }
+            get { return _endIf; }
+            set { _endIf = value; }
         }
 
         internal Label ElseBegin
         {
-            get
-            {
-                return _elseBegin;
-            }
-            set
-            {
-                _elseBegin = value;
-            }
+            get { return _elseBegin; }
+            set { _elseBegin = value; }
         }
     }
-
 
     internal sealed class SwitchState
     {
         private readonly Label _defaultLabel;
         private readonly Label _endOfSwitchLabel;
         private bool _defaultDefined;
+
         internal SwitchState(Label defaultLabel, Label endOfSwitchLabel)
         {
             _defaultLabel = defaultLabel;
             _endOfSwitchLabel = endOfSwitchLabel;
             _defaultDefined = false;
         }
+
         internal Label DefaultLabel
         {
-            get
-            {
-                return _defaultLabel;
-            }
+            get { return _defaultLabel; }
         }
 
         internal Label EndOfSwitchLabel
         {
-            get
-            {
-                return _endOfSwitchLabel;
-            }
+            get { return _endOfSwitchLabel; }
         }
         internal bool DefaultDefined
         {
-            get
-            {
-                return _defaultDefined;
-            }
-            set
-            {
-                _defaultDefined = value;
-            }
+            get { return _defaultDefined; }
+            set { _defaultDefined = value; }
         }
     }
 }

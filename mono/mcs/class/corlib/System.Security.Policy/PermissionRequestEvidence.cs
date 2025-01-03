@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,96 +30,111 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
+    [Serializable]
+    [ComVisible(true)]
+    public sealed class PermissionRequestEvidence : EvidenceBase, IBuiltInEvidence
+    {
+        private PermissionSet requested,
+            optional,
+            denied;
 
-	[Serializable]
-	[ComVisible (true)]
-	public sealed class PermissionRequestEvidence :
-		EvidenceBase,
-		IBuiltInEvidence {
+        public PermissionRequestEvidence(
+            PermissionSet request,
+            PermissionSet optional,
+            PermissionSet denied
+        )
+        {
+            if (request != null)
+                this.requested = new PermissionSet(request);
+            if (optional != null)
+                this.optional = new PermissionSet(optional);
+            if (denied != null)
+                this.denied = new PermissionSet(denied);
+        }
 
-		private PermissionSet requested, optional, denied;
+        public PermissionSet DeniedPermissions
+        {
+            get { return denied; }
+        }
 
-		public PermissionRequestEvidence (PermissionSet request, PermissionSet optional, PermissionSet denied) 
-		{
-			if (request != null)
-				this.requested = new PermissionSet (request);
-			if (optional != null)
-				this.optional = new PermissionSet (optional);
-			if (denied != null)
-				this.denied = new PermissionSet (denied);
-		}
+        public PermissionSet OptionalPermissions
+        {
+            get { return optional; }
+        }
 
-		public PermissionSet DeniedPermissions {
-			get { return denied; }
-		}
+        public PermissionSet RequestedPermissions
+        {
+            get { return requested; }
+        }
 
-		public PermissionSet OptionalPermissions {
-			get { return optional; }
-		}
+        public PermissionRequestEvidence Copy()
+        {
+            return new PermissionRequestEvidence(requested, optional, denied);
+        }
 
-		public PermissionSet RequestedPermissions {
-			get { return requested; }
-		}
+        public override string ToString()
+        {
+            SecurityElement se = new SecurityElement(
+                "System.Security.Policy.PermissionRequestEvidence"
+            );
+            se.AddAttribute("version", "1");
 
-		public PermissionRequestEvidence Copy ()
-		{
-			return new PermissionRequestEvidence (requested, optional, denied);
-		}
+            if (requested != null)
+            {
+                SecurityElement requestElement = new SecurityElement("Request");
+                requestElement.AddChild(requested.ToXml());
+                se.AddChild(requestElement);
+            }
+            if (optional != null)
+            {
+                SecurityElement optionalElement = new SecurityElement("Optional");
+                optionalElement.AddChild(optional.ToXml());
+                se.AddChild(optionalElement);
+            }
+            if (denied != null)
+            {
+                SecurityElement deniedElement = new SecurityElement("Denied");
+                deniedElement.AddChild(denied.ToXml());
+                se.AddChild(deniedElement);
+            }
+            return se.ToString();
+        }
 
-		public override string ToString () 
-		{
-			SecurityElement se = new SecurityElement ("System.Security.Policy.PermissionRequestEvidence");
-			se.AddAttribute ("version", "1");
+        // interface IBuiltInEvidence
 
-			if (requested != null) {
-				SecurityElement requestElement = new SecurityElement ("Request");
-				requestElement.AddChild (requested.ToXml ());
-				se.AddChild (requestElement);
-			}
-			if (optional != null) {
-				SecurityElement optionalElement = new SecurityElement ("Optional");
-				optionalElement.AddChild (optional.ToXml ());
-				se.AddChild (optionalElement);
-			}
-			if (denied != null) {
-				SecurityElement deniedElement = new SecurityElement ("Denied");
-				deniedElement.AddChild (denied.ToXml ());
-				se.AddChild (deniedElement);
-			}
-			return se.ToString ();
-		}
+        int IBuiltInEvidence.GetRequiredSize(bool verbose)
+        {
+            int size = verbose ? 3 : 1;
+            if (requested != null)
+            {
+                int r = requested.ToXml().ToString().Length + (verbose ? 5 : 0);
+                size += r;
+            }
+            if (optional != null)
+            {
+                int o = optional.ToXml().ToString().Length + (verbose ? 5 : 0);
+                size += o;
+            }
+            if (denied != null)
+            {
+                int d = denied.ToXml().ToString().Length + (verbose ? 5 : 0);
+                size += d;
+            }
+            return size;
+        }
 
-		// interface IBuiltInEvidence
+        [MonoTODO("IBuiltInEvidence")]
+        int IBuiltInEvidence.InitFromBuffer(char[] buffer, int position)
+        {
+            return 0;
+        }
 
-		int IBuiltInEvidence.GetRequiredSize (bool verbose) 
-		{
-			int size = verbose ? 3 : 1;
-			if (requested != null) {
-				int r = requested.ToXml ().ToString ().Length + (verbose ? 5 : 0);
-				size += r;
-			}
-			if (optional != null) {
-				int o = optional.ToXml ().ToString ().Length + (verbose ? 5 : 0);
-				size += o;
-			}
-			if (denied != null) {
-				int d = denied.ToXml ().ToString ().Length + (verbose ? 5 : 0);
-				size += d;
-			}
-			return size;
-		}
-
-		[MonoTODO ("IBuiltInEvidence")]
-		int IBuiltInEvidence.InitFromBuffer (char [] buffer, int position) 
-		{
-			return 0;
-		}
-
-		[MonoTODO ("IBuiltInEvidence")]
-		int IBuiltInEvidence.OutputToBuffer (char [] buffer, int position, bool verbose) 
-		{
-			return 0;
-		}
-	}
+        [MonoTODO("IBuiltInEvidence")]
+        int IBuiltInEvidence.OutputToBuffer(char[] buffer, int position, bool verbose)
+        {
+            return 0;
+        }
+    }
 }

@@ -8,7 +8,14 @@ namespace System.Collections.Immutable
     /// <content>
     /// Contains the inner <see cref="ImmutableHashSet{T}.HashBucketByValueEqualityComparer"/> class.
     /// </content>
-    public sealed partial class ImmutableHashSet<T> : IImmutableSet<T>, IHashKeyCollection<T>, IReadOnlyCollection<T>, ICollection<T>, ISet<T>, ICollection, IStrongEnumerable<T, ImmutableHashSet<T>.Enumerator>
+    public sealed partial class ImmutableHashSet<T>
+        : IImmutableSet<T>,
+            IHashKeyCollection<T>,
+            IReadOnlyCollection<T>,
+            ICollection<T>,
+            ISet<T>,
+            ICollection,
+            IStrongEnumerable<T, ImmutableHashSet<T>.Enumerator>
     {
         /// <summary>
         /// Compares equality between two <see cref="HashBucket"/> instances
@@ -19,7 +26,8 @@ namespace System.Collections.Immutable
             /// <summary>
             /// The instance to use when the value comparer is <see cref="EqualityComparer{T}.Default"/>.
             /// </summary>
-            private static readonly IEqualityComparer<HashBucket> s_defaultInstance = new HashBucketByValueEqualityComparer(EqualityComparer<T>.Default);
+            private static readonly IEqualityComparer<HashBucket> s_defaultInstance =
+                new HashBucketByValueEqualityComparer(EqualityComparer<T>.Default);
 
             /// <summary>
             /// Gets the instance to use when the value comparer is

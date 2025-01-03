@@ -12,59 +12,48 @@ namespace Microsoft.EntityFrameworkCore;
 public class TestODataController : ODataController
 {
     [NonAction]
-    public new TestNotFoundResult NotFound()
-        => new(base.NotFound());
+    public new TestNotFoundResult NotFound() => new(base.NotFound());
 
     [NonAction]
-    public new TestNotFoundObjectResult NotFound(object value)
-        => new(base.NotFound(value));
+    public new TestNotFoundObjectResult NotFound(object value) => new(base.NotFound(value));
 
     [NonAction]
-    public new TestBadRequestResult BadRequest()
-        => new(base.BadRequest());
+    public new TestBadRequestResult BadRequest() => new(base.BadRequest());
 
     [NonAction]
-    public new TestBadRequestObjectResult BadRequest(ModelStateDictionary modelState)
-        => new(base.BadRequest(modelState));
+    public new TestBadRequestObjectResult BadRequest(ModelStateDictionary modelState) =>
+        new(base.BadRequest(modelState));
 
-    public new TestBadRequestObjectResult BadRequest(object obj)
-        => new(base.BadRequest(obj));
-
-    [NonAction]
-    public new TestOkResult Ok()
-        => new(base.Ok());
+    public new TestBadRequestObjectResult BadRequest(object obj) => new(base.BadRequest(obj));
 
     [NonAction]
-    public new TestOkObjectResult Ok(object value)
-        => new(value);
+    public new TestOkResult Ok() => new(base.Ok());
 
     [NonAction]
-    public TestStatusCodeResult StatusCode(HttpStatusCode statusCode)
-        => new(base.StatusCode((int)statusCode));
+    public new TestOkObjectResult Ok(object value) => new(value);
 
     [NonAction]
-    public TestStatusCodeObjectResult StatusCode(HttpStatusCode statusCode, object value)
-        => new(base.StatusCode((int)statusCode, value));
+    public TestStatusCodeResult StatusCode(HttpStatusCode statusCode) =>
+        new(base.StatusCode((int)statusCode));
 
     [NonAction]
-    public new TestCreatedODataResult<T> Created<T>(T entity)
-        => new(entity);
+    public TestStatusCodeObjectResult StatusCode(HttpStatusCode statusCode, object value) =>
+        new(base.StatusCode((int)statusCode, value));
 
     [NonAction]
-    public new TestCreatedResult Created(string uri, object entity)
-        => new(base.Created(uri, entity));
+    public new TestCreatedODataResult<T> Created<T>(T entity) => new(entity);
 
     [NonAction]
-    public new TestUpdatedODataResult<T> Updated<T>(T entity)
-        => new(entity);
+    public new TestCreatedResult Created(string uri, object entity) =>
+        new(base.Created(uri, entity));
 
-    protected bool Validate(object model)
-        => TryValidateModel(model);
+    [NonAction]
+    public new TestUpdatedODataResult<T> Updated<T>(T entity) => new(entity);
+
+    protected bool Validate(object model) => TryValidateModel(model);
 }
 
-public interface ITestActionResult : IActionResult
-{
-}
+public interface ITestActionResult : IActionResult { }
 
 public class TestActionResult : ITestActionResult
 {
@@ -75,16 +64,14 @@ public class TestActionResult : ITestActionResult
         _innerResult = innerResult;
     }
 
-    public Task ExecuteResultAsync(ActionContext context)
-        => _innerResult.ExecuteResultAsync(context);
+    public Task ExecuteResultAsync(ActionContext context) =>
+        _innerResult.ExecuteResultAsync(context);
 }
 
 public class TestObjectResult : ObjectResult, ITestActionResult
 {
     public TestObjectResult(object innerResult)
-        : base(innerResult)
-    {
-    }
+        : base(innerResult) { }
 }
 
 public class TestStatusCodeResult : StatusCodeResult, ITestActionResult
@@ -101,41 +88,31 @@ public class TestStatusCodeResult : StatusCodeResult, ITestActionResult
 public class TestNotFoundResult : TestStatusCodeResult
 {
     public TestNotFoundResult(NotFoundResult innerResult)
-        : base(innerResult)
-    {
-    }
+        : base(innerResult) { }
 }
 
 public class TestNotFoundObjectResult : TestObjectResult
 {
     public TestNotFoundObjectResult(NotFoundObjectResult innerResult)
-        : base(innerResult)
-    {
-    }
+        : base(innerResult) { }
 }
 
 public class TestBadRequestResult : TestStatusCodeResult
 {
     public TestBadRequestResult(BadRequestResult innerResult)
-        : base(innerResult)
-    {
-    }
+        : base(innerResult) { }
 }
 
 public class TestBadRequestObjectResult : TestActionResult
 {
     public TestBadRequestObjectResult(BadRequestObjectResult innerResult)
-        : base(innerResult)
-    {
-    }
+        : base(innerResult) { }
 }
 
 public class TestOkResult : TestStatusCodeResult
 {
     public TestOkResult(OkResult innerResult)
-        : base(innerResult)
-    {
-    }
+        : base(innerResult) { }
 }
 
 public class TestOkObjectResult : TestObjectResult
@@ -166,41 +143,29 @@ public class TestOkObjectResult<T> : TestObjectResult
 public class TestStatusCodeObjectResult : TestObjectResult
 {
     public TestStatusCodeObjectResult(ObjectResult innerResult)
-        : base(innerResult)
-    {
-    }
+        : base(innerResult) { }
 }
 
 public class TestCreatedResult : TestActionResult
 {
     public TestCreatedResult(CreatedResult innerResult)
-        : base(innerResult)
-    {
-    }
+        : base(innerResult) { }
 }
 
 public class TestUpdatedODataResult<T> : UpdatedODataResult<T>, ITestActionResult
 {
     public TestUpdatedODataResult(T entity)
-        : base(entity)
-    {
-    }
+        : base(entity) { }
 
     public TestUpdatedODataResult(string uri, T entity)
-        : base(entity)
-    {
-    }
+        : base(entity) { }
 }
 
 public class TestCreatedODataResult<T> : CreatedODataResult<T>, ITestActionResult
 {
     public TestCreatedODataResult(T entity)
-        : base(entity)
-    {
-    }
+        : base(entity) { }
 
     public TestCreatedODataResult(string uri, T entity)
-        : base(entity)
-    {
-    }
+        : base(entity) { }
 }

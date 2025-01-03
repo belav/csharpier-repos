@@ -18,7 +18,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.AddPackage;
 /// <inheritdoc cref="InstallPackageData"/>
 /// <param name="packageNamespaceName">The fully qualified name of the namespace that should be added as a
 /// <c>using/Import</c> in the file if not already present. Should be of the form <c>A.B.C.D</c> only.</param>
-internal readonly struct AspNetCoreInstallPackageData(string? packageSource, string packageName, string? packageVersionOpt, string packageNamespaceName)
+internal readonly struct AspNetCoreInstallPackageData(
+    string? packageSource,
+    string packageName,
+    string? packageVersionOpt,
+    string packageNamespaceName
+)
 {
     public readonly string? PackageSource = packageSource;
     public readonly string PackageName = packageName;
@@ -39,52 +44,101 @@ internal static class AspNetCoreAddPackageCodeAction
         Document document,
         int position,
         AspNetCoreInstallPackageData installPackageData,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var textChanges = await GetTextChangesAsync(
-            document, position, installPackageData.PackageNamespaceName, cancellationToken).ConfigureAwait(false);
+                document,
+                position,
+                installPackageData.PackageNamespaceName,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         var convertedData = new InstallPackageData(
             installPackageData.PackageSource,
             installPackageData.PackageName,
             installPackageData.PackageVersionOpt,
-            textChanges);
-        return ParentInstallPackageCodeAction.TryCreateCodeAction(document, convertedData, installerService: null);
+            textChanges
+        );
+        return ParentInstallPackageCodeAction.TryCreateCodeAction(
+            document,
+            convertedData,
+            installerService: null
+        );
     }
 
     private static async Task<ImmutableArray<TextChange>> GetTextChangesAsync(
-        Document document, int position, string namespaceName, CancellationToken cancellationToken)
+        Document document,
+        int position,
+        string namespaceName,
+        CancellationToken cancellationToken
+    )
     {
         // Take the package namespace and make an actual using/import for it.
         var generator = document.GetRequiredLanguageService<SyntaxGenerator>();
         var importDirective = generator.NamespaceImportDeclaration(namespaceName);
 
         // Now add the import to the document.
-        var updatedDocument = await AddImportAsync(document, position, generator, importDirective, cancellationToken).ConfigureAwait(false);
+        var updatedDocument = await AddImportAsync(
+                document,
+                position,
+                generator,
+                importDirective,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         // Clean things up after adding (this is what normal add-package-import does).
-        var codeCleanupOptions = await document.GetCodeCleanupOptionsAsync(CodeCleanupOptions.GetDefault(document.Project.Services), cancellationToken).ConfigureAwait(false);
-        var cleanedDocument = await CodeAction.CleanupDocumentAsync(
-            updatedDocument, codeCleanupOptions, cancellationToken).ConfigureAwait(false);
+        var codeCleanupOptions = await document
+            .GetCodeCleanupOptionsAsync(
+                CodeCleanupOptions.GetDefault(document.Project.Services),
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        var cleanedDocument = await CodeAction
+            .CleanupDocumentAsync(updatedDocument, codeCleanupOptions, cancellationToken)
+            .ConfigureAwait(false);
 
         // Determine what text actually changed. Note: this may be empty if the file already had that import in it.
-        var textChanges = await cleanedDocument.GetTextChangesAsync(document, cancellationToken).ConfigureAwait(false);
+        var textChanges = await cleanedDocument
+            .GetTextChangesAsync(document, cancellationToken)
+            .ConfigureAwait(false);
 
         return textChanges.ToImmutableArray();
     }
 
-    private static async Task<Document> AddImportAsync(Document document, int position, SyntaxGenerator generator, SyntaxNode importDirective, CancellationToken cancellationToken)
+    private static async Task<Document> AddImportAsync(
+        Document document,
+        int position,
+        SyntaxGenerator generator,
+        SyntaxNode importDirective,
+        CancellationToken cancellationToken
+    )
     {
-        var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-        var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
+        var root = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var compilation = await document
+            .Project.GetRequiredCompilationAsync(cancellationToken)
+            .ConfigureAwait(false);
 
-        var addImportOptions = await document.GetAddImportPlacementOptionsAsync(AddImportPlacementOptions.Default, cancellationToken).ConfigureAwait(false);
+        var addImportOptions = await document
+            .GetAddImportPlacementOptionsAsync(AddImportPlacementOptions.Default, cancellationToken)
+            .ConfigureAwait(false);
 
         var service = document.GetRequiredLanguageService<IAddImportsService>();
 
         var contextNode = root.FindToken(position).GetRequiredParent();
         var newRoot = service.AddImport(
-            compilation, root, contextNode, importDirective, generator, addImportOptions, cancellationToken);
+            compilation,
+            root,
+            contextNode,
+            importDirective,
+            generator,
+            addImportOptions,
+            cancellationToken
+        );
 
         var updatedDocument = document.WithSyntaxRoot(newRoot);
         return updatedDocument;

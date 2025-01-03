@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Contracts.EditAndContinue;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
@@ -37,7 +37,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         public readonly ActiveStatementFlags Flags;
 
-        public ActiveStatement(int ordinal, ActiveStatementFlags flags, SourceFileSpan span, ManagedInstructionId instructionId)
+        public ActiveStatement(
+            int ordinal,
+            ActiveStatementFlags flags,
+            SourceFileSpan span,
+            ManagedInstructionId instructionId
+        )
         {
             Debug.Assert(ordinal >= 0);
 
@@ -50,46 +55,39 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Debug.Assert(!IsStale || !IsMethodUpToDate);
         }
 
-        public ActiveStatement WithSpan(LinePositionSpan span)
-            => WithFileSpan(FileSpan.WithSpan(span));
+        public ActiveStatement WithSpan(LinePositionSpan span) =>
+            WithFileSpan(FileSpan.WithSpan(span));
 
-        public ActiveStatement WithFileSpan(SourceFileSpan span)
-            => new(Ordinal, Flags, span, InstructionId);
+        public ActiveStatement WithFileSpan(SourceFileSpan span) =>
+            new(Ordinal, Flags, span, InstructionId);
 
-        public ActiveStatement WithFlags(ActiveStatementFlags flags)
-            => new(Ordinal, flags, FileSpan, InstructionId);
+        public ActiveStatement WithFlags(ActiveStatementFlags flags) =>
+            new(Ordinal, flags, FileSpan, InstructionId);
 
-        public LinePositionSpan Span
-            => FileSpan.Span;
+        public LinePositionSpan Span => FileSpan.Span;
 
-        public string FilePath
-            => FileSpan.Path;
+        public string FilePath => FileSpan.Path;
 
         /// <summary>
         /// True if at least one of the threads whom this active statement belongs to is in a leaf frame.
         /// </summary>
-        public bool IsLeaf
-            => (Flags & ActiveStatementFlags.LeafFrame) != 0;
+        public bool IsLeaf => (Flags & ActiveStatementFlags.LeafFrame) != 0;
 
         /// <summary>
         /// True if at least one of the threads whom this active statement belongs to is in a non-leaf frame.
         /// </summary>
-        public bool IsNonLeaf
-            => (Flags & ActiveStatementFlags.NonLeafFrame) != 0;
+        public bool IsNonLeaf => (Flags & ActiveStatementFlags.NonLeafFrame) != 0;
 
         /// <summary>
         /// True if the active statement is located in a version of the method that's not the latest version of the method.
         /// </summary>
-        public bool IsMethodUpToDate
-            => (Flags & ActiveStatementFlags.MethodUpToDate) != 0;
+        public bool IsMethodUpToDate => (Flags & ActiveStatementFlags.MethodUpToDate) != 0;
 
         /// <summary>
         /// True if the active statement is located in a version of the method that precedes a later version that was created by Hot Reload update.
         /// </summary>
-        public bool IsStale
-            => (Flags & ActiveStatementFlags.Stale) != 0;
+        public bool IsStale => (Flags & ActiveStatementFlags.Stale) != 0;
 
-        private string GetDebuggerDisplay()
-            => $"{Ordinal}: {Span}";
+        private string GetDebuggerDisplay() => $"{Ordinal}: {Span}";
     }
 }

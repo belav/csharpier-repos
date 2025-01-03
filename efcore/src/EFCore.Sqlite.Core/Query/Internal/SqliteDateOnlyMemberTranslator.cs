@@ -13,15 +13,14 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqliteDateOnlyMemberTranslator : IMemberTranslator
 {
-    private static readonly Dictionary<string, string> DatePartMapping
-        = new()
-        {
-            { nameof(DateOnly.Year), "%Y" },
-            { nameof(DateOnly.Month), "%m" },
-            { nameof(DateOnly.DayOfYear), "%j" },
-            { nameof(DateOnly.Day), "%d" },
-            { nameof(DateOnly.DayOfWeek), "%w" }
-        };
+    private static readonly Dictionary<string, string> DatePartMapping = new()
+    {
+        { nameof(DateOnly.Year), "%Y" },
+        { nameof(DateOnly.Month), "%m" },
+        { nameof(DateOnly.DayOfYear), "%j" },
+        { nameof(DateOnly.Day), "%d" },
+        { nameof(DateOnly.DayOfWeek), "%w" },
+    };
 
     private readonly SqliteSqlExpressionFactory _sqlExpressionFactory;
 
@@ -46,13 +45,13 @@ public class SqliteDateOnlyMemberTranslator : IMemberTranslator
         SqlExpression? instance,
         MemberInfo member,
         Type returnType,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        => member.DeclaringType == typeof(DateOnly) && DatePartMapping.TryGetValue(member.Name, out var datePart)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    ) =>
+        member.DeclaringType == typeof(DateOnly)
+        && DatePartMapping.TryGetValue(member.Name, out var datePart)
             ? _sqlExpressionFactory.Convert(
-                _sqlExpressionFactory.Strftime(
-                    typeof(string),
-                    datePart,
-                    instance!),
-                returnType)
+                _sqlExpressionFactory.Strftime(typeof(string), datePart, instance!),
+                returnType
+            )
             : null;
 }

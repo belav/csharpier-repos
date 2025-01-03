@@ -48,7 +48,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void FailChildCount()
         {
             var root = SyntaxFactory.ParseExpression("Goo(a, b)");
-            var path = new SyntaxPath(((InvocationExpressionSyntax)root).ArgumentList.Arguments.Last());
+            var path = new SyntaxPath(
+                ((InvocationExpressionSyntax)root).ArgumentList.Arguments.Last()
+            );
 
             var root2 = SyntaxFactory.ParseExpression("Goo(a)");
             Assert.False(path.TryResolve(root2, out SyntaxNode _));
@@ -58,7 +60,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void FailChildType()
         {
             var root = SyntaxFactory.ParseExpression("Goo(a)");
-            var path = new SyntaxPath(((InvocationExpressionSyntax)root).ArgumentList.Arguments.First().Expression);
+            var path = new SyntaxPath(
+                ((InvocationExpressionSyntax)root).ArgumentList.Arguments.First().Expression
+            );
 
             var root2 = SyntaxFactory.ParseExpression("Goo(3)");
             Assert.False(path.TryResolve(root2, out SyntaxNode _));
@@ -129,7 +133,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestMethodBodyChange()
         {
             var text =
-@"namespace N {
+                @"namespace N {
     class C {
       void M1() {
         int i1;
@@ -144,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)(tree.GetRoot() as CompilationUnitSyntax).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                (tree.GetRoot() as CompilationUnitSyntax).Members[0];
             var classDecl = (TypeDeclarationSyntax)namespaceDecl.Members[0];
 
             var member1 = classDecl.Members[0];
@@ -155,7 +160,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var path2 = new SyntaxPath(member2);
             var path3 = new SyntaxPath(member3);
 
-            tree = WithReplaceFirst(WithReplaceFirst(WithReplaceFirst(tree, "i1", "j1"), "i2", "j2"), "i3", "j3");
+            tree = WithReplaceFirst(
+                WithReplaceFirst(WithReplaceFirst(tree, "i1", "j1"), "i2", "j2"),
+                "i3",
+                "j3"
+            );
             Assert.True(path1.TryResolve(tree, CancellationToken.None, out SyntaxNode n1));
             Assert.True(path2.TryResolve(tree, CancellationToken.None, out SyntaxNode n2));
             Assert.True(path3.TryResolve(tree, CancellationToken.None, out SyntaxNode n3));
@@ -174,7 +183,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestAddBase()
         {
             var text =
-@"namespace N {
+                @"namespace N {
     class C {
     }
     class D {
@@ -182,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)(tree.GetRoot() as CompilationUnitSyntax).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                (tree.GetRoot() as CompilationUnitSyntax).Members[0];
             var class1 = (TypeDeclarationSyntax)namespaceDecl.Members[0];
             var class2 = (TypeDeclarationSyntax)namespaceDecl.Members[1];
 
@@ -203,7 +213,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestAddFieldBefore()
         {
             var text =
-@"namespace N {
+                @"namespace N {
     class C {
       void M1() {
         int i1;
@@ -215,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)((CompilationUnitSyntax)tree.GetRoot()).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                ((CompilationUnitSyntax)tree.GetRoot()).Members[0];
             var classDecl = (TypeDeclarationSyntax)namespaceDecl.Members[0];
 
             var member1 = classDecl.Members[0];
@@ -239,7 +250,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestChangeType()
         {
             var text =
-@"namespace N {
+                @"namespace N {
     class C {
     }
     class D {
@@ -247,7 +258,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)((CompilationUnitSyntax)tree.GetRoot()).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                ((CompilationUnitSyntax)tree.GetRoot()).Members[0];
             var class1 = (TypeDeclarationSyntax)namespaceDecl.Members[0];
             var class2 = (TypeDeclarationSyntax)namespaceDecl.Members[1];
 
@@ -266,7 +278,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestChangeType1()
         {
             var text =
-@"namespace N {
+                @"namespace N {
     class C {
       void Goo();
     }
@@ -275,7 +287,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)((CompilationUnitSyntax)tree.GetRoot()).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                ((CompilationUnitSyntax)tree.GetRoot()).Members[0];
             var class1 = (TypeDeclarationSyntax)namespaceDecl.Members[0];
             var class2 = (TypeDeclarationSyntax)namespaceDecl.Members[1];
             var method1 = class1.Members[0];
@@ -297,7 +310,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestWhitespace1()
         {
             var text =
-@"namespace N {
+                @"namespace N {
     class C {
     }
     class D {
@@ -306,7 +319,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var text2 = text.Replace(" ", "  ");
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)((CompilationUnitSyntax)tree.GetRoot()).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                ((CompilationUnitSyntax)tree.GetRoot()).Members[0];
             var class1 = (TypeDeclarationSyntax)namespaceDecl.Members[0];
             var class2 = (TypeDeclarationSyntax)namespaceDecl.Members[1];
 
@@ -327,7 +341,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestComment()
         {
             var text =
-@"namespace N {
+                @"namespace N {
     class C {
     }
     struct D {
@@ -335,14 +349,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)((CompilationUnitSyntax)tree.GetRoot()).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                ((CompilationUnitSyntax)tree.GetRoot()).Members[0];
             var class1 = (TypeDeclarationSyntax)namespaceDecl.Members[0];
             var class2 = (TypeDeclarationSyntax)namespaceDecl.Members[1];
 
             var path1 = new SyntaxPath(class1);
             var path2 = new SyntaxPath(class2);
 
-            tree = WithReplaceFirst(WithReplaceFirst(tree, "class", "/* goo */ class"), "struct", "/* bar */ struct");
+            tree = WithReplaceFirst(
+                WithReplaceFirst(tree, "class", "/* goo */ class"),
+                "struct",
+                "/* bar */ struct"
+            );
             Assert.True(path1.TryResolve(tree, CancellationToken.None, out SyntaxNode n1));
             Assert.True(path2.TryResolve(tree, CancellationToken.None, out SyntaxNode n2));
 
@@ -356,7 +375,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestPP1()
         {
             var text =
-@"namespace N {
+                @"namespace N {
     class C {
     }
     struct D {
@@ -364,7 +383,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var text2 =
-@"namespace N {
+                @"namespace N {
 #if true
     class C {
     }
@@ -374,7 +393,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)((CompilationUnitSyntax)tree.GetRoot()).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                ((CompilationUnitSyntax)tree.GetRoot()).Members[0];
             var class1 = (TypeDeclarationSyntax)namespaceDecl.Members[0];
             var class2 = (TypeDeclarationSyntax)namespaceDecl.Members[1];
 
@@ -416,27 +436,45 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return SourceText.From(newFullText);
         }
 
-        public static SyntaxTree WithReplaceFirst(SyntaxTree syntaxTree, string oldText, string newText)
+        public static SyntaxTree WithReplaceFirst(
+            SyntaxTree syntaxTree,
+            string oldText,
+            string newText
+        )
         {
-            return WithReplace(syntaxTree,
-                startIndex: 0,
-                oldText: oldText,
-                newText: newText);
+            return WithReplace(syntaxTree, startIndex: 0, oldText: oldText, newText: newText);
         }
 
-        public static SyntaxTree WithReplace(SyntaxTree syntaxTree, int offset, int length, string newText)
+        public static SyntaxTree WithReplace(
+            SyntaxTree syntaxTree,
+            int offset,
+            int length,
+            string newText
+        )
         {
             var oldFullText = syntaxTree.GetText();
-            var newFullText = oldFullText.WithChanges(new TextChange(new TextSpan(offset, length), newText));
+            var newFullText = oldFullText.WithChanges(
+                new TextChange(new TextSpan(offset, length), newText)
+            );
             return syntaxTree.WithChangedText(newFullText);
         }
 
-        public static SyntaxTree WithReplace(SyntaxTree syntaxTree, int startIndex, string oldText, string newText)
-        {            // Use the offset to find the first element to replace at
-            return WithReplace(syntaxTree,
-                offset: syntaxTree.GetText().ToString().IndexOf(oldText, startIndex, StringComparison.Ordinal),
+        public static SyntaxTree WithReplace(
+            SyntaxTree syntaxTree,
+            int startIndex,
+            string oldText,
+            string newText
+        )
+        { // Use the offset to find the first element to replace at
+            return WithReplace(
+                syntaxTree,
+                offset: syntaxTree
+                    .GetText()
+                    .ToString()
+                    .IndexOf(oldText, startIndex, StringComparison.Ordinal),
                 length: oldText.Length,
-                newText: newText);
+                newText: newText
+            );
         }
     }
 }

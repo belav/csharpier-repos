@@ -10,37 +10,37 @@
  * Copyright (c) 1999 Microsoft Corporation
  */
 
-namespace System.Web.Security {
+namespace System.Web.Security
+{
     using System;
-    using System.Web;
-    using System.Text;
-    using System.Web.Configuration;
-    using System.Web.Caching;
     using System.Collections;
-    using System.Web.Util;
-    using System.Security.Cryptography;
-    using System.Security.Principal;
-    using System.Threading;
-    using System.Globalization;
-    using System.Security.Permissions;
-    using System.Web.Management;
     using System.Collections.Specialized;
+    using System.Globalization;
+    using System.Security.Cryptography;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Text;
+    using System.Threading;
+    using System.Web;
+    using System.Web.Caching;
     using System.Web.Compilation;
+    using System.Web.Configuration;
+    using System.Web.Management;
     using System.Web.Security.Cryptography;
-
-
+    using System.Web.Util;
 
     /// <devdoc>
     ///    This class consists of static methods that
     ///    provides helper utilities for manipulating authentication tickets.
     /// </devdoc>
-    public sealed class FormsAuthentication {
+    public sealed class FormsAuthentication
+    {
         private const int MAX_TICKET_LENGTH = 4096;
         private static object _lockObject = new object();
 
         public FormsAuthentication() { }
 
-		/////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
         // Helper functions: Hash a password
@@ -50,12 +50,20 @@ namespace System.Web.Security {
         ///    configuration and getting the cookie values and encryption keys for the given
         ///    application.
         /// </devdoc>
-        [Obsolete("The recommended alternative is to use the Membership APIs, such as Membership.CreateUser. For more information, see http://go.microsoft.com/fwlink/?LinkId=252463.")]
-        public static String HashPasswordForStoringInConfigFile(String password, String passwordFormat) {
-            if (password == null) {
+        [Obsolete(
+            "The recommended alternative is to use the Membership APIs, such as Membership.CreateUser. For more information, see http://go.microsoft.com/fwlink/?LinkId=252463."
+        )]
+        public static String HashPasswordForStoringInConfigFile(
+            String password,
+            String passwordFormat
+        )
+        {
+            if (password == null)
+            {
                 throw new ArgumentNullException("password");
             }
-            if (passwordFormat == null) {
+            if (passwordFormat == null)
+            {
                 throw new ArgumentNullException("passwordFormat");
             }
             HashAlgorithm hashAlgorithm;
@@ -70,10 +78,15 @@ namespace System.Web.Security {
             else if (StringUtil.EqualsIgnoreCase(passwordFormat, "sha512"))
                 hashAlgorithm = CryptoAlgorithms.CreateSHA512();
             else
-                throw new ArgumentException(SR.GetString(SR.InvalidArgumentValue, "passwordFormat"));
+                throw new ArgumentException(
+                    SR.GetString(SR.InvalidArgumentValue, "passwordFormat")
+                );
 
-            using (hashAlgorithm) {
-                return CryptoUtil.BinaryToHex(hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(password)));
+            using (hashAlgorithm)
+            {
+                return CryptoUtil.BinaryToHex(
+                    hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(password))
+                );
             }
         }
 
@@ -87,11 +100,13 @@ namespace System.Web.Security {
         ///    configuration and getting the cookie values and encryption keys for the given
         ///    application.
         /// </devdoc>
-        public static void Initialize() {
+        public static void Initialize()
+        {
             if (_Initialized)
                 return;
 
-            lock(_lockObject) {
+            lock (_lockObject)
+            {
                 if (_Initialized)
                     return;
 
@@ -104,7 +119,7 @@ namespace System.Web.Security {
                     _FormsName = CONFIG_DEFAULT_COOKIE;
 
                 _Protection = settings.Forms.Protection;
-                _Timeout = (int) settings.Forms.Timeout.TotalMinutes;
+                _Timeout = (int)settings.Forms.Timeout.TotalMinutes;
                 _FormsCookiePath = settings.Forms.Path;
                 _LoginUrl = settings.Forms.LoginUrl;
                 if (_LoginUrl == null)
@@ -131,46 +146,75 @@ namespace System.Web.Security {
         ///       obtained from an HTTP cookie, this method returns an instance of a
         ///       FormsAuthenticationTicket class.</para>
         /// </devdoc>
-        public static FormsAuthenticationTicket Decrypt(string encryptedTicket) {
+        public static FormsAuthenticationTicket Decrypt(string encryptedTicket)
+        {
             if (String.IsNullOrEmpty(encryptedTicket) || encryptedTicket.Length > MAX_TICKET_LENGTH)
-                throw new ArgumentException(SR.GetString(SR.InvalidArgumentValue, "encryptedTicket"));
+                throw new ArgumentException(
+                    SR.GetString(SR.InvalidArgumentValue, "encryptedTicket")
+                );
 
             Initialize();
             byte[] bBlob = null;
-            if ((encryptedTicket.Length % 2) == 0) { // Could be a hex string
-                try {
+            if ((encryptedTicket.Length % 2) == 0)
+            { // Could be a hex string
+                try
+                {
                     bBlob = CryptoUtil.HexToBinary(encryptedTicket);
-                } catch { }
+                }
+                catch { }
             }
             if (bBlob == null)
                 bBlob = HttpServerUtility.UrlTokenDecode(encryptedTicket);
             if (bBlob == null || bBlob.Length < 1)
-                throw new ArgumentException(SR.GetString(SR.InvalidArgumentValue, "encryptedTicket"));
+                throw new ArgumentException(
+                    SR.GetString(SR.InvalidArgumentValue, "encryptedTicket")
+                );
 
             int ticketLength;
 
-            if (AspNetCryptoServiceProvider.Instance.IsDefaultProvider) {
+            if (AspNetCryptoServiceProvider.Instance.IsDefaultProvider)
+            {
                 // If new crypto routines are enabled, call them instead.
-                ICryptoService cryptoService = AspNetCryptoServiceProvider.Instance.GetCryptoService(Purpose.FormsAuthentication_Ticket);
+                ICryptoService cryptoService =
+                    AspNetCryptoServiceProvider.Instance.GetCryptoService(
+                        Purpose.FormsAuthentication_Ticket
+                    );
                 byte[] unprotectedData = cryptoService.Unprotect(bBlob);
                 ticketLength = unprotectedData.Length;
                 bBlob = unprotectedData;
-            } else {
+            }
+            else
+            {
 #pragma warning disable 618 // calling obsolete methods
                 // Otherwise call into MachineKeySection routines.
 
-                if (_Protection == FormsProtectionEnum.All || _Protection == FormsProtectionEnum.Encryption)
+                if (
+                    _Protection == FormsProtectionEnum.All
+                    || _Protection == FormsProtectionEnum.Encryption
+                )
                 {
                     // DevDiv Bugs 137864: Include a random IV if under the right compat mode
                     // for improved encryption semantics
-                    bBlob = MachineKeySection.EncryptOrDecryptData(false, bBlob, null, 0, bBlob.Length, false, false, IVType.Random);
+                    bBlob = MachineKeySection.EncryptOrDecryptData(
+                        false,
+                        bBlob,
+                        null,
+                        0,
+                        bBlob.Length,
+                        false,
+                        false,
+                        IVType.Random
+                    );
                     if (bBlob == null)
                         return null;
                 }
 
                 ticketLength = bBlob.Length;
 
-                if (_Protection == FormsProtectionEnum.All || _Protection == FormsProtectionEnum.Validation)
+                if (
+                    _Protection == FormsProtectionEnum.All
+                    || _Protection == FormsProtectionEnum.Validation
+                )
                 {
                     if (!MachineKeySection.VerifyHashedData(bBlob))
                         return null;
@@ -185,7 +229,8 @@ namespace System.Web.Security {
             // ** MSRC 11838 **
             // Framework20 / Framework40 ticket generation modes are insecure. We should use a
             // secure serialization mode by default.
-            if (!AppSettings.UseLegacyFormsAuthenticationTicketCompatibility) {
+            if (!AppSettings.UseLegacyFormsAuthenticationTicketCompatibility)
+            {
                 return FormsAuthenticationTicketSerializer.Deserialize(bBlob, ticketLength);
             }
 
@@ -196,17 +241,24 @@ namespace System.Web.Security {
             // forced to Framework20.
 
             int iSize = ((ticketLength > MAX_TICKET_LENGTH) ? MAX_TICKET_LENGTH : ticketLength);
-            StringBuilder     name = new StringBuilder(iSize);
-            StringBuilder     data = new StringBuilder(iSize);
-            StringBuilder     path = new StringBuilder(iSize);
-            byte []           pBin = new byte[4];
-            long []           pDates = new long[2];
+            StringBuilder name = new StringBuilder(iSize);
+            StringBuilder data = new StringBuilder(iSize);
+            StringBuilder path = new StringBuilder(iSize);
+            byte[] pBin = new byte[4];
+            long[] pDates = new long[2];
 
-            int iRet = UnsafeNativeMethods.CookieAuthParseTicket(bBlob, ticketLength,
-                                                                   name, iSize,
-                                                                   data, iSize,
-                                                                   path, iSize,
-                                                                   pBin, pDates);
+            int iRet = UnsafeNativeMethods.CookieAuthParseTicket(
+                bBlob,
+                ticketLength,
+                name,
+                iSize,
+                data,
+                iSize,
+                path,
+                iSize,
+                pBin,
+                pDates
+            );
 
             if (iRet != 0)
                 return null;
@@ -214,16 +266,17 @@ namespace System.Web.Security {
             DateTime dt1 = DateTime.FromFileTime(pDates[0]);
             DateTime dt2 = DateTime.FromFileTime(pDates[1]);
 
-            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket((int) pBin[0],
-                                                     name.ToString(),
-                                                     dt1,
-                                                     dt2,
-                                                     (bool) (pBin[1] != 0),
-                                                     data.ToString(),
-                                                     path.ToString());
+            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+                (int)pBin[0],
+                name.ToString(),
+                dt1,
+                dt2,
+                (bool)(pBin[1] != 0),
+                data.ToString(),
+                path.ToString()
+            );
             return ticket;
         }
-
 
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
@@ -235,10 +288,13 @@ namespace System.Web.Security {
         ///    method produces a string containing an encrypted authentication ticket suitable
         ///    for use in an HTTP cookie.
         /// </devdoc>
-        public static String Encrypt(FormsAuthenticationTicket ticket) {
+        public static String Encrypt(FormsAuthenticationTicket ticket)
+        {
             return Encrypt(ticket, true);
         }
-        internal static String Encrypt(FormsAuthenticationTicket ticket, bool hexEncodedTicket) {
+
+        internal static String Encrypt(FormsAuthenticationTicket ticket, bool hexEncodedTicket)
+        {
             if (ticket == null)
                 throw new ArgumentNullException("ticket");
 
@@ -251,18 +307,27 @@ namespace System.Web.Security {
 
             //////////////////////////////////////////////////////////////////////
             // Step 1b: If new crypto routines are enabled, call them instead.
-            if (AspNetCryptoServiceProvider.Instance.IsDefaultProvider) {
-                ICryptoService cryptoService = AspNetCryptoServiceProvider.Instance.GetCryptoService(Purpose.FormsAuthentication_Ticket);
+            if (AspNetCryptoServiceProvider.Instance.IsDefaultProvider)
+            {
+                ICryptoService cryptoService =
+                    AspNetCryptoServiceProvider.Instance.GetCryptoService(
+                        Purpose.FormsAuthentication_Ticket
+                    );
                 byte[] protectedData = cryptoService.Protect(bBlob);
                 bBlob = protectedData;
             }
-            else {
+            else
+            {
 #pragma warning disable 618 // calling obsolete methods
                 // otherwise..
 
                 //////////////////////////////////////////////////////////////////////
                 // Step 2: Get the MAC and add to the blob
-                if (_Protection == FormsProtectionEnum.All || _Protection == FormsProtectionEnum.Validation) {
+                if (
+                    _Protection == FormsProtectionEnum.All
+                    || _Protection == FormsProtectionEnum.Validation
+                )
+                {
                     byte[] bMac = MachineKeySection.HashData(bBlob, null, 0, bBlob.Length);
                     if (bMac == null)
                         return null;
@@ -272,12 +337,25 @@ namespace System.Web.Security {
                     bBlob = bAll;
                 }
 
-                if (_Protection == FormsProtectionEnum.All || _Protection == FormsProtectionEnum.Encryption) {
+                if (
+                    _Protection == FormsProtectionEnum.All
+                    || _Protection == FormsProtectionEnum.Encryption
+                )
+                {
                     //////////////////////////////////////////////////////////////////////
                     // Step 3: Do the actual encryption
                     // DevDiv Bugs 137864: Include a random IV if under the right compat mode
                     // for improved encryption semantics
-                    bBlob = MachineKeySection.EncryptOrDecryptData(true, bBlob, null, 0, bBlob.Length, false, false, IVType.Random);
+                    bBlob = MachineKeySection.EncryptOrDecryptData(
+                        true,
+                        bBlob,
+                        null,
+                        0,
+                        bBlob.Length,
+                        false,
+                        false,
+                        IVType.Random
+                    );
                 }
 #pragma warning restore 618 // calling obsolete methods
             }
@@ -298,23 +376,37 @@ namespace System.Web.Security {
         ///    attempts to validate the credentials against those contained in the configured
         ///    credential store.
         /// </devdoc>
-        [Obsolete("The recommended alternative is to use the Membership APIs, such as Membership.ValidateUser. For more information, see http://go.microsoft.com/fwlink/?LinkId=252463.")]
-        public static bool Authenticate(String name, String password) {
+        [Obsolete(
+            "The recommended alternative is to use the Membership APIs, such as Membership.ValidateUser. For more information, see http://go.microsoft.com/fwlink/?LinkId=252463."
+        )]
+        public static bool Authenticate(String name, String password)
+        {
             bool retVal = InternalAuthenticate(name, password);
 
-            if (retVal) {
+            if (retVal)
+            {
                 PerfCounters.IncrementCounter(AppPerfCounter.FORMS_AUTH_SUCCESS);
-                WebBaseEvent.RaiseSystemEvent(null, WebEventCodes.AuditFormsAuthenticationSuccess, name);
+                WebBaseEvent.RaiseSystemEvent(
+                    null,
+                    WebEventCodes.AuditFormsAuthenticationSuccess,
+                    name
+                );
             }
-            else {
+            else
+            {
                 PerfCounters.IncrementCounter(AppPerfCounter.FORMS_AUTH_FAIL);
-                WebBaseEvent.RaiseSystemEvent(null, WebEventCodes.AuditFormsAuthenticationFailure, name);
+                WebBaseEvent.RaiseSystemEvent(
+                    null,
+                    WebEventCodes.AuditFormsAuthenticationFailure,
+                    name
+                );
             }
 
             return retVal;
         }
 
-        private static bool InternalAuthenticate(String name, String password) {
+        private static bool InternalAuthenticate(String name, String password)
+        {
             //////////////////////////////////////////////////////////////////////
             // Step 1: Make sure we are initialized
             if (name == null || password == null)
@@ -327,9 +419,10 @@ namespace System.Web.Security {
             settings.ValidateAuthenticationMode();
             FormsAuthenticationUserCollection Users = settings.Forms.Credentials.Users;
 
-//            Hashtable hTable = settings.Credentials;
+            //            Hashtable hTable = settings.Credentials;
 
-            if (Users == null) {
+            if (Users == null)
+            {
                 return false;
             }
 
@@ -341,13 +434,14 @@ namespace System.Web.Security {
 
             String pass = (String)u.Password;
 
-            if (pass == null) {
+            if (pass == null)
+            {
                 return false;
             }
 
             //////////////////////////////////////////////////////////////////////
             // Step 4: Hash the given password
-            String   encPassword;
+            String encPassword;
 
 #pragma warning disable 618 // HashPasswordForStorignInConfigFile is now obsolete
             switch (settings.Forms.Credentials.PasswordFormat)
@@ -380,11 +474,17 @@ namespace System.Web.Security {
 
             //////////////////////////////////////////////////////////////////////
             // Step 5: Compare the hashes
-            return(String.Compare(encPassword,
-                                  pass,
-                                  ((settings.Forms.Credentials.PasswordFormat != FormsAuthPasswordFormat.Clear)
-                                        ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal))
-                   == 0);
+            return (
+                String.Compare(
+                    encPassword,
+                    pass,
+                    (
+                        (settings.Forms.Credentials.PasswordFormat != FormsAuthPasswordFormat.Clear)
+                            ? StringComparison.OrdinalIgnoreCase
+                            : StringComparison.Ordinal
+                    )
+                ) == 0
+            );
         }
 
         /////////////////////////////////////////////////////////////////////////////
@@ -396,15 +496,19 @@ namespace System.Web.Security {
         ///    removes the authentication ticket by doing a SetForms with an empty value. This
         ///    removes either durable or session cookies.
         /// </devdoc>
-        public static void SignOut() {
+        public static void SignOut()
+        {
             Initialize();
 
-            HttpContext    context    = HttpContext.Current;
-            bool           needToRedirect  = context.CookielessHelper.DoesCookieValueExistInOriginal('F');
+            HttpContext context = HttpContext.Current;
+            bool needToRedirect = context.CookielessHelper.DoesCookieValueExistInOriginal('F');
 
             context.CookielessHelper.SetCookieValue('F', null); // Always clear the uri-cookie
 
-            if (!CookielessHelperClass.UseCookieless(context, false, CookieMode) || context.Request.Browser.Cookies)
+            if (
+                !CookielessHelperClass.UseCookieless(context, false, CookieMode)
+                || context.Request.Browser.Cookies
+            )
             { // clear cookie if required
                 string cookieValue = String.Empty;
                 if (context.Request.Browser["supportsEmptyStringInCookieValue"] == "false")
@@ -422,6 +526,7 @@ namespace System.Web.Security {
             if (needToRedirect)
                 context.Response.Redirect(GetLoginPage(null), false);
         }
+
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
@@ -431,7 +536,8 @@ namespace System.Web.Security {
         ///    for the given userName and attaches it to the cookies collection of the outgoing
         ///    response. It does not perform a redirect.
         /// </devdoc>
-        public static void SetAuthCookie(String userName, bool createPersistentCookie) {
+        public static void SetAuthCookie(String userName, bool createPersistentCookie)
+        {
             Initialize();
             SetAuthCookie(userName, createPersistentCookie, FormsAuthentication.FormsCookiePath);
         }
@@ -441,20 +547,34 @@ namespace System.Web.Security {
         ///    for the given userName and attaches it to the cookies collection of the outgoing
         ///    response. It does not perform a redirect.
         /// </devdoc>
-        public static void SetAuthCookie(String userName, bool createPersistentCookie, String strCookiePath) {
+        public static void SetAuthCookie(
+            String userName,
+            bool createPersistentCookie,
+            String strCookiePath
+        )
+        {
             Initialize();
             HttpContext context = HttpContext.Current;
 
             if (!context.Request.IsSecureConnection && RequireSSL)
-                throw new HttpException(SR.GetString(SR.Connection_not_secure_creating_secure_cookie));
-            bool        cookieless  = CookielessHelperClass.UseCookieless(context, false, CookieMode);
-            HttpCookie  cookie      = GetAuthCookie(userName, createPersistentCookie, cookieless ? "/" : strCookiePath, !cookieless);
+                throw new HttpException(
+                    SR.GetString(SR.Connection_not_secure_creating_secure_cookie)
+                );
+            bool cookieless = CookielessHelperClass.UseCookieless(context, false, CookieMode);
+            HttpCookie cookie = GetAuthCookie(
+                userName,
+                createPersistentCookie,
+                cookieless ? "/" : strCookiePath,
+                !cookieless
+            );
 
-            if (!cookieless) {
+            if (!cookieless)
+            {
                 HttpContext.Current.Response.Cookies.Add(cookie);
                 context.CookielessHelper.SetCookieValue('F', null);
             }
-            else {
+            else
+            {
                 context.CookielessHelper.SetCookieValue('F', cookie.Value);
             }
         }
@@ -468,15 +588,32 @@ namespace System.Web.Security {
         ///    user name. This does not set the cookie as part of the outgoing response, so
         ///    that an application can have more control over how the cookie is issued.
         /// </devdoc>
-        public static HttpCookie GetAuthCookie(String userName, bool createPersistentCookie) {
+        public static HttpCookie GetAuthCookie(String userName, bool createPersistentCookie)
+        {
             Initialize();
-            return GetAuthCookie(userName, createPersistentCookie, FormsAuthentication.FormsCookiePath);
+            return GetAuthCookie(
+                userName,
+                createPersistentCookie,
+                FormsAuthentication.FormsCookiePath
+            );
         }
 
-        public static HttpCookie GetAuthCookie(String userName, bool createPersistentCookie, String strCookiePath) {
+        public static HttpCookie GetAuthCookie(
+            String userName,
+            bool createPersistentCookie,
+            String strCookiePath
+        )
+        {
             return GetAuthCookie(userName, createPersistentCookie, strCookiePath, true);
         }
-        private static HttpCookie GetAuthCookie(String userName, bool createPersistentCookie, String strCookiePath, bool hexEncodedTicket) {
+
+        private static HttpCookie GetAuthCookie(
+            String userName,
+            bool createPersistentCookie,
+            String strCookiePath,
+            bool hexEncodedTicket
+        )
+        {
             Initialize();
             if (userName == null)
                 userName = String.Empty;
@@ -495,13 +632,11 @@ namespace System.Web.Security {
                 createPersistentCookie, // IsPersistent
                 String.Empty, // User-Data
                 strCookiePath // Cookie Path
-                );
+            );
 
             String strTicket = Encrypt(ticket, hexEncodedTicket);
             if (strTicket == null || strTicket.Length < 1)
-                        throw new HttpException(
-                                SR.GetString(SR.Unable_to_encrypt_cookie_ticket));
-
+                throw new HttpException(SR.GetString(SR.Unable_to_encrypt_cookie_ticket));
 
             HttpCookie cookie = new HttpCookie(FormsCookieName, strTicket);
 
@@ -523,24 +658,33 @@ namespace System.Web.Security {
         {
             Initialize();
 
-            HttpContext     context     = HttpContext.Current;
-            String          returnUrl   = context.Request.QueryString[ReturnUrlVar];
+            HttpContext context = HttpContext.Current;
+            String returnUrl = context.Request.QueryString[ReturnUrlVar];
 
             // If it is not in the QueryString, look in the Posted-body
-            if (returnUrl == null) {
+            if (returnUrl == null)
+            {
                 returnUrl = context.Request.Form[ReturnUrlVar];
-                if (!string.IsNullOrEmpty(returnUrl) && !returnUrl.Contains("/") && returnUrl.Contains("%"))
+                if (
+                    !string.IsNullOrEmpty(returnUrl)
+                    && !returnUrl.Contains("/")
+                    && returnUrl.Contains("%")
+                )
                     returnUrl = HttpUtility.UrlDecode(returnUrl);
             }
 
             // Make sure it is on the current server if EnableCrossAppRedirects is false
-            if (!string.IsNullOrEmpty(returnUrl) && !EnableCrossAppRedirects) {
+            if (!string.IsNullOrEmpty(returnUrl) && !EnableCrossAppRedirects)
+            {
                 if (!UrlPath.IsPathOnSameServer(returnUrl, context.Request.Url))
                     returnUrl = null;
             }
 
             // Make sure it is not dangerous, i.e. does not contain script, etc.
-            if (!string.IsNullOrEmpty(returnUrl) && CrossSiteScriptingValidation.IsDangerousUrl(returnUrl))
+            if (
+                !string.IsNullOrEmpty(returnUrl)
+                && CrossSiteScriptingValidation.IsDangerousUrl(returnUrl)
+            )
                 throw new HttpException(SR.GetString(SR.Invalid_redirect_return_url));
 
             return ((returnUrl == null && useDefaultIfAbsent) ? DefaultUrl : returnUrl);
@@ -556,6 +700,7 @@ namespace System.Web.Security {
                 return null;
             return GetReturnUrl(true);
         }
+
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
@@ -565,43 +710,62 @@ namespace System.Web.Security {
         ///    This method redirects an authenticated user
         ///    back to the original URL that they requested.
         /// </devdoc>
-        public static void RedirectFromLoginPage(String userName, bool createPersistentCookie) {
+        public static void RedirectFromLoginPage(String userName, bool createPersistentCookie)
+        {
             Initialize();
-            RedirectFromLoginPage(userName, createPersistentCookie, FormsAuthentication.FormsCookiePath);
+            RedirectFromLoginPage(
+                userName,
+                createPersistentCookie,
+                FormsAuthentication.FormsCookiePath
+            );
         }
 
-        public static void RedirectFromLoginPage(String userName, bool createPersistentCookie, String strCookiePath) {
+        public static void RedirectFromLoginPage(
+            String userName,
+            bool createPersistentCookie,
+            String strCookiePath
+        )
+        {
             Initialize();
             if (userName == null)
                 return;
 
             HttpContext context = HttpContext.Current;
             string strUrl = GetReturnUrl(true);
-            if (  CookiesSupported || // Cookies-supported: Most common scenario
-                  IsPathWithinAppRoot(context, strUrl)) { // Cookies not suported, so add it to the current app URL
-
+            if (
+                CookiesSupported
+                || // Cookies-supported: Most common scenario
+                IsPathWithinAppRoot(context, strUrl)
+            )
+            { // Cookies not suported, so add it to the current app URL
                 SetAuthCookie(userName, createPersistentCookie, strCookiePath);
                 strUrl = RemoveQueryStringVariableFromUrl(strUrl, FormsCookieName); // Make sure there is no other ticket in the Query String.
-                if (!CookiesSupported) {// Make sure the URL is relative, if we are using cookieless.
+                if (!CookiesSupported)
+                { // Make sure the URL is relative, if we are using cookieless.
                     int pos = strUrl.IndexOf("://", StringComparison.Ordinal);
-                    if (pos > 0) {
+                    if (pos > 0)
+                    {
                         pos = strUrl.IndexOf('/', pos + 3);
                         if (pos > 0)
                             strUrl = strUrl.Substring(pos);
                     }
                 }
-            } else if (EnableCrossAppRedirects) { // Cookieless scenario -- add it to the QueryString if allowed to
-
+            }
+            else if (EnableCrossAppRedirects)
+            { // Cookieless scenario -- add it to the QueryString if allowed to
                 HttpCookie cookie = GetAuthCookie(userName, createPersistentCookie, strCookiePath);
                 strUrl = RemoveQueryStringVariableFromUrl(strUrl, cookie.Name); // Make sure there is no other ticket in the Query String.
-                if (strUrl.IndexOf('?') > 0) {
+                if (strUrl.IndexOf('?') > 0)
+                {
                     strUrl += "&" + cookie.Name + "=" + cookie.Value;
                 }
-                else {
+                else
+                {
                     strUrl += "?" + cookie.Name + "=" + cookie.Value;
                 }
-
-            } else {
+            }
+            else
+            {
                 // Broken scenario:
                 throw new HttpException(SR.GetString(SR.Can_not_issue_cookie_or_redirect));
             }
@@ -609,7 +773,8 @@ namespace System.Web.Security {
             context.Response.Redirect(strUrl, false);
         }
 
-        public static FormsAuthenticationTicket RenewTicketIfOld(FormsAuthenticationTicket tOld) {
+        public static FormsAuthenticationTicket RenewTicketIfOld(FormsAuthenticationTicket tOld)
+        {
             if (tOld == null)
                 return null;
 
@@ -627,96 +792,191 @@ namespace System.Web.Security {
             DateTime newExpirationUtc = utcNow + originalTicketTotalLifetime;
 
             FormsAuthenticationTicket ticket = FormsAuthenticationTicket.FromUtc(
-                tOld.Version /* version */,
-                tOld.Name /* name */,
-                utcNow /* issueDateUtc */,
-                newExpirationUtc /* expirationUtc */,
-                tOld.IsPersistent /* isPersistent */,
-                tOld.UserData /* userData */,
-                tOld.CookiePath /* cookiePath */);
+                tOld.Version /* version */
+                ,
+                tOld.Name /* name */
+                ,
+                utcNow /* issueDateUtc */
+                ,
+                newExpirationUtc /* expirationUtc */
+                ,
+                tOld.IsPersistent /* isPersistent */
+                ,
+                tOld.UserData /* userData */
+                ,
+                tOld.CookiePath /* cookiePath */
+            );
 
             return ticket;
         }
 
-        public static void EnableFormsAuthentication(NameValueCollection configurationData) {
+        public static void EnableFormsAuthentication(NameValueCollection configurationData)
+        {
             BuildManager.ThrowIfPreAppStartNotRunning();
             configurationData = configurationData ?? new NameValueCollection();
             AuthenticationConfig.Mode = AuthenticationMode.Forms;
             Initialize();
             // Last caller overwrites only the values that are present in the dictionary.
             string defaultUrl = configurationData["defaultUrl"];
-            if (!String.IsNullOrEmpty(defaultUrl)) {
+            if (!String.IsNullOrEmpty(defaultUrl))
+            {
                 _DefaultUrl = defaultUrl;
             }
             string loginUrl = configurationData["loginUrl"];
-            if (!String.IsNullOrEmpty(loginUrl)) {
+            if (!String.IsNullOrEmpty(loginUrl))
+            {
                 _LoginUrl = loginUrl;
             }
         }
 
-        public static bool IsEnabled {
-            get {
-                return AuthenticationConfig.Mode == AuthenticationMode.Forms;
+        public static bool IsEnabled
+        {
+            get { return AuthenticationConfig.Mode == AuthenticationMode.Forms; }
+        }
+
+        public static String FormsCookieName
+        {
+            get
+            {
+                Initialize();
+                return _FormsName;
             }
         }
 
-        public static String FormsCookieName { get { Initialize(); return _FormsName; }}
+        public static String FormsCookiePath
+        {
+            get
+            {
+                Initialize();
+                return _FormsCookiePath;
+            }
+        }
 
-        public static String FormsCookiePath { get { Initialize(); return _FormsCookiePath; }}
+        public static bool RequireSSL
+        {
+            get
+            {
+                Initialize();
+                return _RequireSSL;
+            }
+        }
 
-        public static bool   RequireSSL { get { Initialize(); return _RequireSSL; }}
+        public static TimeSpan Timeout
+        {
+            get
+            {
+                Initialize();
+                return new TimeSpan(0, _Timeout, 0);
+            }
+        }
 
-        public static TimeSpan Timeout { get { Initialize(); return new TimeSpan(0, _Timeout, 0); } }
+        public static bool SlidingExpiration
+        {
+            get
+            {
+                Initialize();
+                return _SlidingExpiration;
+            }
+        }
 
-        public static bool   SlidingExpiration { get { Initialize(); return _SlidingExpiration; }}
+        public static HttpCookieMode CookieMode
+        {
+            get
+            {
+                Initialize();
+                return _CookieMode;
+            }
+        }
 
-        public static HttpCookieMode CookieMode { get { Initialize(); return _CookieMode; }}
+        public static string CookieDomain
+        {
+            get
+            {
+                Initialize();
+                return _CookieDomain;
+            }
+        }
 
-        public static string CookieDomain { get { Initialize ();return _CookieDomain; } }
+        public static bool EnableCrossAppRedirects
+        {
+            get
+            {
+                Initialize();
+                return _EnableCrossAppRedirects;
+            }
+        }
 
-        public static bool EnableCrossAppRedirects { get { Initialize(); return _EnableCrossAppRedirects; } }
+        public static TicketCompatibilityMode TicketCompatibilityMode
+        {
+            get
+            {
+                Initialize();
+                return _TicketCompatibilityMode;
+            }
+        }
 
-        public static TicketCompatibilityMode TicketCompatibilityMode { get { Initialize(); return _TicketCompatibilityMode; } }
-
-        public static bool CookiesSupported {
-            get {
+        public static bool CookiesSupported
+        {
+            get
+            {
                 HttpContext context = HttpContext.Current;
-                if (context != null) {
+                if (context != null)
+                {
                     return !(CookielessHelperClass.UseCookieless(context, false, CookieMode));
                 }
                 return true;
             }
         }
 
-        public static string LoginUrl {
-            get {
+        public static string LoginUrl
+        {
+            get
+            {
                 Initialize();
                 HttpContext context = HttpContext.Current;
-                if (context != null)  {
+                if (context != null)
+                {
                     return AuthenticationConfig.GetCompleteLoginUrl(context, _LoginUrl);
                 }
-                if (_LoginUrl.Length == 0 || (_LoginUrl[0] != '/' && _LoginUrl.IndexOf("//", StringComparison.Ordinal) < 0))
+                if (
+                    _LoginUrl.Length == 0
+                    || (
+                        _LoginUrl[0] != '/' && _LoginUrl.IndexOf("//", StringComparison.Ordinal) < 0
+                    )
+                )
                     return ("/" + _LoginUrl);
                 return _LoginUrl;
             }
         }
 
-        public static string DefaultUrl {
-            get {
+        public static string DefaultUrl
+        {
+            get
+            {
                 Initialize();
                 HttpContext context = HttpContext.Current;
-                if (context != null)  {
+                if (context != null)
+                {
                     return AuthenticationConfig.GetCompleteLoginUrl(context, _DefaultUrl);
                 }
-                if (_DefaultUrl.Length == 0 || (_DefaultUrl[0] != '/' && _DefaultUrl.IndexOf("//", StringComparison.Ordinal) < 0))
+                if (
+                    _DefaultUrl.Length == 0
+                    || (
+                        _DefaultUrl[0] != '/'
+                        && _DefaultUrl.IndexOf("//", StringComparison.Ordinal) < 0
+                    )
+                )
                     return ("/" + _DefaultUrl);
                 return _DefaultUrl;
             }
         }
 
-        internal static string ReturnUrlVar {
-            get {
-                if (!String.IsNullOrEmpty(AppSettings.FormsAuthReturnUrlVar)) {
+        internal static string ReturnUrlVar
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(AppSettings.FormsAuthReturnUrlVar))
+                {
                     return AppSettings.FormsAuthReturnUrlVar;
                 }
 
@@ -724,10 +984,13 @@ namespace System.Web.Security {
             }
         }
 
-        internal static string GetLoginPage(string extraQueryString) {
+        internal static string GetLoginPage(string extraQueryString)
+        {
             return GetLoginPage(extraQueryString, false);
         }
-        internal static string GetLoginPage(string extraQueryString, bool reuseReturnUrl) {
+
+        internal static string GetLoginPage(string extraQueryString, bool reuseReturnUrl)
+        {
             HttpContext context = HttpContext.Current;
             string loginUrl = FormsAuthentication.LoginUrl;
             if (loginUrl.IndexOf('?') >= 0)
@@ -735,31 +998,37 @@ namespace System.Web.Security {
             int pos = loginUrl.IndexOf('?');
             if (pos < 0)
                 loginUrl += "?";
-            else
-                if (pos < loginUrl.Length -1)
-                    loginUrl += "&";
+            else if (pos < loginUrl.Length - 1)
+                loginUrl += "&";
             string returnUrl = null;
-            if (reuseReturnUrl) {
-                returnUrl = HttpUtility.UrlEncode( GetReturnUrl(false),
-                                                   context.Request.QueryStringEncoding );
+            if (reuseReturnUrl)
+            {
+                returnUrl = HttpUtility.UrlEncode(
+                    GetReturnUrl(false),
+                    context.Request.QueryStringEncoding
+                );
             }
             if (returnUrl == null)
-                returnUrl = HttpUtility.UrlEncode(context.Request.RawUrl, context.Request.ContentEncoding);
+                returnUrl = HttpUtility.UrlEncode(
+                    context.Request.RawUrl,
+                    context.Request.ContentEncoding
+                );
 
             loginUrl += ReturnUrlVar + "=" + returnUrl;
-            if (!String.IsNullOrEmpty(extraQueryString)) {
+            if (!String.IsNullOrEmpty(extraQueryString))
+            {
                 loginUrl += "&" + extraQueryString;
             }
             return loginUrl;
         }
 
-
-        public static void RedirectToLoginPage() {
+        public static void RedirectToLoginPage()
+        {
             RedirectToLoginPage(null);
         }
 
-
-        public static void RedirectToLoginPage(string extraQueryString) {
+        public static void RedirectToLoginPage(string extraQueryString)
+        {
             HttpContext context = HttpContext.Current;
             string loginUrl = GetLoginPage(extraQueryString);
             context.Response.Redirect(loginUrl, false);
@@ -772,37 +1041,41 @@ namespace System.Web.Security {
 
         /////////////////////////////////////////////////////////////////////////////
         // Config Tags
-        private  const String   CONFIG_DEFAULT_COOKIE    = ".ASPXAUTH";
+        private const String CONFIG_DEFAULT_COOKIE = ".ASPXAUTH";
 
         /////////////////////////////////////////////////////////////////////////////
         // Private data
-        private static bool                _Initialized;
-        private static String              _FormsName;
+        private static bool _Initialized;
+        private static String _FormsName;
+
         //private static FormsProtectionEnum _Protection;
         private static FormsProtectionEnum _Protection;
-        private static Int32               _Timeout;
-        private static String              _FormsCookiePath;
-        private static bool                _RequireSSL;
-        private static bool                _SlidingExpiration;
-        private static string              _LoginUrl;
-        private static string              _DefaultUrl;
-        private static HttpCookieMode      _CookieMode;
-        private static string              _CookieDomain = null;
-        private static bool                _EnableCrossAppRedirects;
+        private static Int32 _Timeout;
+        private static String _FormsCookiePath;
+        private static bool _RequireSSL;
+        private static bool _SlidingExpiration;
+        private static string _LoginUrl;
+        private static string _DefaultUrl;
+        private static HttpCookieMode _CookieMode;
+        private static string _CookieDomain = null;
+        private static bool _EnableCrossAppRedirects;
         private static TicketCompatibilityMode _TicketCompatibilityMode;
 
         /////////////////////////////////////////////////////////////////////////////
-        private static byte[] MakeTicketIntoBinaryBlob(FormsAuthenticationTicket ticket) {
+        private static byte[] MakeTicketIntoBinaryBlob(FormsAuthenticationTicket ticket)
+        {
             // None of the modes (Framework20 / Framework40 / beyond) support null values for these fields;
             // they always eventually just returned a null value.
-            if (ticket.Name == null || ticket.UserData == null || ticket.CookiePath == null) {
+            if (ticket.Name == null || ticket.UserData == null || ticket.CookiePath == null)
+            {
                 return null;
             }
 
             // ** MSRC 11838 **
             // Framework20 / Framework40 ticket generation modes are insecure. We should use a
             // secure serialization mode by default.
-            if (!AppSettings.UseLegacyFormsAuthenticationTicketCompatibility) {
+            if (!AppSettings.UseLegacyFormsAuthenticationTicketCompatibility)
+            {
                 return FormsAuthenticationTicketSerializer.Serialize(ticket);
             }
 
@@ -812,10 +1085,10 @@ namespace System.Web.Security {
             // the Framework40 serialization mode, so everybody using the legacy code path is
             // forced to Framework20.
 
-            byte []   bData  = new byte[4096];
-            byte []   pBin   = new byte[4];
-            long []   pDates = new long[2];
-            byte []   pNull  = { 0, 0, 0 };
+            byte[] bData = new byte[4096];
+            byte[] pBin = new byte[4];
+            long[] pDates = new long[2];
+            byte[] pNull = { 0, 0, 0 };
 
             // DevDiv Bugs 137864: 8 bytes may not be enough random bits as the length should be equal to the
             // key size. In CompatMode > Framework20SP1, use the IVType.Random feature instead of these 8 bytes,
@@ -823,29 +1096,41 @@ namespace System.Web.Security {
             // Note that even in CompatMode = Framework20SP2 we fill 8 bytes with random data if the ticket
             // is not going to be encrypted.
 
-            bool willEncrypt = (_Protection == FormsProtectionEnum.All || _Protection == FormsProtectionEnum.Encryption);
-            bool legacyPadding = !willEncrypt || (MachineKeySection.CompatMode == MachineKeyCompatibilityMode.Framework20SP1);
-            if (legacyPadding) {
+            bool willEncrypt = (
+                _Protection == FormsProtectionEnum.All
+                || _Protection == FormsProtectionEnum.Encryption
+            );
+            bool legacyPadding =
+                !willEncrypt
+                || (MachineKeySection.CompatMode == MachineKeyCompatibilityMode.Framework20SP1);
+            if (legacyPadding)
+            {
                 // Fill the first 8 bytes of the blob with random bits
                 byte[] bRandom = new byte[8];
                 RNGCryptoServiceProvider randgen = new RNGCryptoServiceProvider();
                 randgen.GetBytes(bRandom);
                 Buffer.BlockCopy(bRandom, 0, bData, 0, 8);
             }
-            else {
+            else
+            {
                 // use blank 8 bytes for compatibility with CookieAuthConstructTicket (do nothing)
             }
 
-            pBin[0] = (byte) ticket.Version;
-            pBin[1] = (byte) (ticket.IsPersistent ? 1 : 0);
+            pBin[0] = (byte)ticket.Version;
+            pBin[1] = (byte)(ticket.IsPersistent ? 1 : 0);
 
             pDates[0] = ticket.IssueDate.ToFileTime();
             pDates[1] = ticket.Expiration.ToFileTime();
 
             int iRet = UnsafeNativeMethods.CookieAuthConstructTicket(
-                        bData, bData.Length,
-                        ticket.Name, ticket.UserData, ticket.CookiePath,
-                        pBin, pDates);
+                bData,
+                bData.Length,
+                ticket.Name,
+                ticket.UserData,
+                ticket.CookiePath,
+                pBin,
+                pDates
+            );
 
             if (iRet < 0)
                 return null;
@@ -858,13 +1143,14 @@ namespace System.Web.Security {
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
 
-        internal static string RemoveQueryStringVariableFromUrl(string strUrl, string QSVar) {
+        internal static string RemoveQueryStringVariableFromUrl(string strUrl, string QSVar)
+        {
             int posQ = strUrl.IndexOf('?');
             if (posQ < 0)
                 return strUrl;
 
             // Remove non-encoded QSVars
-            string amp   = @"&";
+            string amp = @"&";
             string question = @"?";
 
             string token = amp + QSVar + "=";
@@ -887,11 +1173,22 @@ namespace System.Web.Security {
 
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
-        static private void RemoveQSVar(ref string strUrl, int posQ, string token, string sep, int lenAtStartToLeave)
+        static private void RemoveQSVar(
+            ref string strUrl,
+            int posQ,
+            string token,
+            string sep,
+            int lenAtStartToLeave
+        )
         {
-            for (int pos = strUrl.LastIndexOf(token, StringComparison.Ordinal); pos >= posQ; pos = strUrl.LastIndexOf(token, StringComparison.Ordinal))
+            for (
+                int pos = strUrl.LastIndexOf(token, StringComparison.Ordinal);
+                pos >= posQ;
+                pos = strUrl.LastIndexOf(token, StringComparison.Ordinal)
+            )
             {
-                int end = strUrl.IndexOf(sep, pos + token.Length, StringComparison.Ordinal) + sep.Length;
+                int end =
+                    strUrl.IndexOf(sep, pos + token.Length, StringComparison.Ordinal) + sep.Length;
                 if (end < sep.Length || end >= strUrl.Length)
                 { // ending separator not found or nothing is at the end
                     strUrl = strUrl.Substring(0, pos);
@@ -902,17 +1199,24 @@ namespace System.Web.Security {
                 }
             }
         }
-        static private bool IsPathWithinAppRoot(HttpContext context, string path)
+
+        private static bool IsPathWithinAppRoot(HttpContext context, string path)
         {
             Uri absUri;
             if (!Uri.TryCreate(path, UriKind.Absolute, out absUri))
                 return HttpRuntime.IsPathWithinAppRoot(path);
 
-            if (!absUri.IsLoopback && !string.Equals(context.Request.Url.Host, absUri.Host, StringComparison.OrdinalIgnoreCase))
+            if (
+                !absUri.IsLoopback
+                && !string.Equals(
+                    context.Request.Url.Host,
+                    absUri.Host,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
                 return false; // different servers
 
             return HttpRuntime.IsPathWithinAppRoot(absUri.AbsolutePath);
         }
     }
 }
-

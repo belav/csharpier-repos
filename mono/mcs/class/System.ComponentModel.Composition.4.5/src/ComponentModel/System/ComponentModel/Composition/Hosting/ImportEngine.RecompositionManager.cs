@@ -21,9 +21,12 @@ namespace System.ComponentModel.Composition.Hosting
         /// </summary>
         private class RecompositionManager
         {
-            private WeakReferenceCollection<PartManager> _partsToIndex = new WeakReferenceCollection<PartManager>();
-            private WeakReferenceCollection<PartManager> _partsToUnindex = new WeakReferenceCollection<PartManager>();
-            private Dictionary<string, WeakReferenceCollection<PartManager>> _partManagerIndex = new Dictionary<string, WeakReferenceCollection<PartManager>>();
+            private WeakReferenceCollection<PartManager> _partsToIndex =
+                new WeakReferenceCollection<PartManager>();
+            private WeakReferenceCollection<PartManager> _partsToUnindex =
+                new WeakReferenceCollection<PartManager>();
+            private Dictionary<string, WeakReferenceCollection<PartManager>> _partManagerIndex =
+                new Dictionary<string, WeakReferenceCollection<PartManager>>();
 
             public void AddPartToIndex(PartManager partManager)
             {
@@ -35,7 +38,9 @@ namespace System.ComponentModel.Composition.Hosting
                 this._partsToUnindex.Add(partManager);
             }
 
-            public IEnumerable<PartManager> GetAffectedParts(IEnumerable<string> changedContractNames)
+            public IEnumerable<PartManager> GetAffectedParts(
+                IEnumerable<string> changedContractNames
+            )
             {
                 this.UpdateImportIndex();
 
@@ -51,12 +56,20 @@ namespace System.ComponentModel.Composition.Hosting
                 return parts;
             }
 
-            public static IEnumerable<ImportDefinition> GetAffectedImports(ComposablePart part, IEnumerable<ExportDefinition> changedExports)
+            public static IEnumerable<ImportDefinition> GetAffectedImports(
+                ComposablePart part,
+                IEnumerable<ExportDefinition> changedExports
+            )
             {
-                return part.ImportDefinitions.Where(import => IsAffectedImport(import, changedExports));
+                return part.ImportDefinitions.Where(import =>
+                    IsAffectedImport(import, changedExports)
+                );
             }
 
-            private static bool IsAffectedImport(ImportDefinition import, IEnumerable<ExportDefinition> changedExports)
+            private static bool IsAffectedImport(
+                ImportDefinition import,
+                IEnumerable<ExportDefinition> changedExports
+            )
             {
                 // This could be more efficient still if the export definitions were indexed by contract name,
                 // only worth revisiting if we need to squeeze more performance out of recomposition
@@ -67,7 +80,7 @@ namespace System.ComponentModel.Composition.Hosting
                         return true;
                     }
                 }
-               
+
                 return false;
             }
 

@@ -36,9 +36,20 @@ public class DataReaderClosingEventData : DataReaderEventData
         bool async,
         int recordsAffected,
         int readCount,
-        DateTimeOffset startTime)
+        DateTimeOffset startTime
+    )
         : base(
-            eventDefinition, messageGenerator, command, dataReader, context, commandId, connectionId, recordsAffected, readCount, startTime)
+            eventDefinition,
+            messageGenerator,
+            command,
+            dataReader,
+            context,
+            commandId,
+            connectionId,
+            recordsAffected,
+            readCount,
+            startTime
+        )
     {
         IsAsync = async;
     }

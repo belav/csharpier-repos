@@ -1,14 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Threading;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Threading;
 using Microsoft.DotNet.RemoteExecutor;
-using System.Collections.Generic;
+using Xunit;
 
 namespace System.Tests
 {
@@ -38,41 +38,58 @@ namespace System.Tests
             yield return new object[] { 1000 };
         }
 
-        public static bool NotMobileAndRemoteExecutable => PlatformDetection.IsNotMobile && RemoteExecutor.IsSupported;
+        public static bool NotMobileAndRemoteExecutable =>
+            PlatformDetection.IsNotMobile && RemoteExecutor.IsSupported;
 
         [ConditionalTheory(nameof(NotMobileAndRemoteExecutable))]
         [SkipOnPlatform(TestPlatforms.LinuxBionic, "Remote executor has problems with exit codes")]
         [MemberData(nameof(SupportedSignals))]
         public void SignalHandlerCalledForKnownSignals(PosixSignal s)
         {
-            RemoteExecutor.Invoke(signalStr =>
-            {
-                PosixSignal signal = Enum.Parse<PosixSignal>(signalStr);
-
-                using SemaphoreSlim semaphore = new(0);
-                using var _ = PosixSignalRegistration.Create(signal, ctx =>
-                {
-                    Assert.Equal(signal, ctx.Signal);
-
-                    // Ensure signal doesn't cause the process to terminate.
-                    ctx.Cancel = true;
-
-                    semaphore.Release();
-                });
-
-                // Use 'kill' command with signal name to validate the signal pal mapping.
-                string sigArg = signalStr.StartsWith("SIG") ? signalStr.Substring(3) : signalStr;
-                using var process = Process.Start(new ProcessStartInfo
+            RemoteExecutor
+                .Invoke(
+                    signalStr =>
                     {
-                        FileName = "/bin/sh", // Use a shell because not all platforms include a 'kill' executable.
-                        ArgumentList = { "-c", $"kill -s {sigArg} {Environment.ProcessId.ToString()}" }
-                    });
-                process.WaitForExit();
-                Assert.Equal(0, process.ExitCode);
+                        PosixSignal signal = Enum.Parse<PosixSignal>(signalStr);
 
-                bool entered = semaphore.Wait(SuccessTimeout);
-                Assert.True(entered);
-            }, s.ToString()).Dispose();
+                        using SemaphoreSlim semaphore = new(0);
+                        using var _ = PosixSignalRegistration.Create(
+                            signal,
+                            ctx =>
+                            {
+                                Assert.Equal(signal, ctx.Signal);
+
+                                // Ensure signal doesn't cause the process to terminate.
+                                ctx.Cancel = true;
+
+                                semaphore.Release();
+                            }
+                        );
+
+                        // Use 'kill' command with signal name to validate the signal pal mapping.
+                        string sigArg = signalStr.StartsWith("SIG")
+                            ? signalStr.Substring(3)
+                            : signalStr;
+                        using var process = Process.Start(
+                            new ProcessStartInfo
+                            {
+                                FileName = "/bin/sh", // Use a shell because not all platforms include a 'kill' executable.
+                                ArgumentList =
+                                {
+                                    "-c",
+                                    $"kill -s {sigArg} {Environment.ProcessId.ToString()}",
+                                },
+                            }
+                        );
+                        process.WaitForExit();
+                        Assert.Equal(0, process.ExitCode);
+
+                        bool entered = semaphore.Wait(SuccessTimeout);
+                        Assert.True(entered);
+                    },
+                    s.ToString()
+                )
+                .Dispose();
         }
 
         [ConditionalTheory(nameof(NotMobileAndRemoteExecutable))]
@@ -80,25 +97,33 @@ namespace System.Tests
         [MemberData(nameof(PosixSignalAsRawValues))]
         public void SignalHandlerCalledForRawSignals(PosixSignal s)
         {
-            RemoteExecutor.Invoke((signalStr) =>
-            {
-                PosixSignal signal = Enum.Parse<PosixSignal>(signalStr);
+            RemoteExecutor
+                .Invoke(
+                    (signalStr) =>
+                    {
+                        PosixSignal signal = Enum.Parse<PosixSignal>(signalStr);
 
-                using SemaphoreSlim semaphore = new(0);
-                using var _ = PosixSignalRegistration.Create(signal, ctx =>
-                {
-                    Assert.Equal(signal, ctx.Signal);
+                        using SemaphoreSlim semaphore = new(0);
+                        using var _ = PosixSignalRegistration.Create(
+                            signal,
+                            ctx =>
+                            {
+                                Assert.Equal(signal, ctx.Signal);
 
-                    // Ensure signal doesn't cause the process to terminate.
-                    ctx.Cancel = true;
+                                // Ensure signal doesn't cause the process to terminate.
+                                ctx.Cancel = true;
 
-                    semaphore.Release();
-                });
+                                semaphore.Release();
+                            }
+                        );
 
-                kill(signal);
-                bool entered = semaphore.Wait(SuccessTimeout);
-                Assert.True(entered);
-            }, s.ToString()).Dispose();
+                        kill(signal);
+                        bool entered = semaphore.Wait(SuccessTimeout);
+                        Assert.True(entered);
+                    },
+                    s.ToString()
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMobile))]
@@ -109,15 +134,18 @@ namespace System.Tests
             for (int i = 0; i < 2; i++)
             {
                 using SemaphoreSlim semaphore = new(0);
-                using var _ = PosixSignalRegistration.Create(signal, ctx =>
-                {
-                    Assert.Equal(signal, ctx.Signal);
+                using var _ = PosixSignalRegistration.Create(
+                    signal,
+                    ctx =>
+                    {
+                        Assert.Equal(signal, ctx.Signal);
 
-                    // Ensure signal doesn't cause the process to terminate.
-                    ctx.Cancel = true;
+                        // Ensure signal doesn't cause the process to terminate.
+                        ctx.Cancel = true;
 
-                    semaphore.Release();
-                });
+                        semaphore.Release();
+                    }
+                );
 
                 kill(signal);
                 bool entered = semaphore.Wait(SuccessTimeout);
@@ -130,16 +158,25 @@ namespace System.Tests
         {
             PosixSignal signal = PosixSignal.SIGCONT;
 
-            PosixSignalRegistration.Create(signal, ctx =>
-            {
-                Assert.Fail("Signal handler was called.");
-            }).Dispose();
+            PosixSignalRegistration
+                .Create(
+                    signal,
+                    ctx =>
+                    {
+                        Assert.Fail("Signal handler was called.");
+                    }
+                )
+                .Dispose();
 
             kill(signal);
             Thread.Sleep(100);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMobile), nameof(PlatformDetection.IsPreciseGcSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotMobile),
+            nameof(PlatformDetection.IsPreciseGcSupported)
+        )]
         public void SignalHandlerNotCalledWhenFinalized()
         {
             PosixSignal signal = PosixSignal.SIGCONT;
@@ -154,10 +191,13 @@ namespace System.Tests
             [MethodImpl(MethodImplOptions.NoInlining)]
             void CreateDanglingRegistration()
             {
-                PosixSignalRegistration.Create(signal, ctx =>
-                {
-                    Assert.Fail("Signal handler was called.");
-                });
+                PosixSignalRegistration.Create(
+                    signal,
+                    ctx =>
+                    {
+                        Assert.Fail("Signal handler was called.");
+                    }
+                );
             }
         }
 
@@ -175,39 +215,59 @@ namespace System.Tests
         [InlineData(PosixSignal.SIGTERM, true, 0)]
         [InlineData(PosixSignal.SIGTERM, false, 143)]
         [InlineData(PosixSignal.SIGQUIT, true, 0)]
-        public void SignalCanCancelTermination(PosixSignal signal, bool cancel, int expectedExitCode)
+        public void SignalCanCancelTermination(
+            PosixSignal signal,
+            bool cancel,
+            int expectedExitCode
+        )
         {
             // Mono doesn't restore and call SIG_DFL on SIGQUIT.
-            if (PlatformDetection.IsMonoRuntime && signal ==  PosixSignal.SIGQUIT && cancel == false)
+            if (PlatformDetection.IsMonoRuntime && signal == PosixSignal.SIGQUIT && cancel == false)
             {
                 expectedExitCode = 0;
             }
 
-            RemoteExecutor.Invoke((signalStr, cancelStr, expectedStr) =>
-            {
-                PosixSignal signalArg = Enum.Parse<PosixSignal>(signalStr);
-                bool cancelArg = bool.Parse(cancelStr);
-                int expected = int.Parse(expectedStr);
+            RemoteExecutor
+                .Invoke(
+                    (signalStr, cancelStr, expectedStr) =>
+                    {
+                        PosixSignal signalArg = Enum.Parse<PosixSignal>(signalStr);
+                        bool cancelArg = bool.Parse(cancelStr);
+                        int expected = int.Parse(expectedStr);
 
-                using SemaphoreSlim semaphore = new(0);
-                using var _ = PosixSignalRegistration.Create(signalArg, ctx =>
-                {
-                    ctx.Cancel = cancelArg;
+                        using SemaphoreSlim semaphore = new(0);
+                        using var _ = PosixSignalRegistration.Create(
+                            signalArg,
+                            ctx =>
+                            {
+                                ctx.Cancel = cancelArg;
 
-                    semaphore.Release();
-                });
+                                semaphore.Release();
+                            }
+                        );
 
-                kill(signalArg);
+                        kill(signalArg);
 
-                bool entered = semaphore.Wait(SuccessTimeout);
-                Assert.True(entered);
+                        bool entered = semaphore.Wait(SuccessTimeout);
+                        Assert.True(entered);
 
-                // Give the default signal handler a chance to run.
-                Thread.Sleep(expected == 0 ? TimeSpan.FromSeconds(2) : TimeSpan.FromMinutes(10));
+                        // Give the default signal handler a chance to run.
+                        Thread.Sleep(
+                            expected == 0 ? TimeSpan.FromSeconds(2) : TimeSpan.FromMinutes(10)
+                        );
 
-                return 0;
-            }, signal.ToString(), cancel.ToString(), expectedExitCode.ToString(),
-               new RemoteInvokeOptions() { ExpectedExitCode = expectedExitCode, TimeOut = 10 * 60 * 1000 }).Dispose();
+                        return 0;
+                    },
+                    signal.ToString(),
+                    cancel.ToString(),
+                    expectedExitCode.ToString(),
+                    new RemoteInvokeOptions()
+                    {
+                        ExpectedExitCode = expectedExitCode,
+                        TimeOut = 10 * 60 * 1000,
+                    }
+                )
+                .Dispose();
         }
 
         public static TheoryData<PosixSignal> PosixSignalAsRawValues
@@ -236,7 +296,10 @@ namespace System.Tests
             Assert.Equal(0, rv);
         }
 
-        [DllImport(Interop.Libraries.SystemNative, EntryPoint = "SystemNative_GetPlatformSignalNumber")]
+        [DllImport(
+            Interop.Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetPlatformSignalNumber"
+        )]
         private static extern int GetPlatformSignalNumber(PosixSignal signal);
     }
 }

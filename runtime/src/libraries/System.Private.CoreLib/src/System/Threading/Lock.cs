@@ -206,7 +206,8 @@ namespace System.Threading
         /// The lock has reached the limit of recursive enters. The limit is implementation-defined, but is expected to be high
         /// enough that it would typically not be reached when the lock is used properly.
         /// </exception>
-        public bool TryEnter(TimeSpan timeout) => TryEnter_Outlined(WaitHandle.ToTimeoutMilliseconds(timeout));
+        public bool TryEnter(TimeSpan timeout) =>
+            TryEnter_Outlined(WaitHandle.ToTimeoutMilliseconds(timeout));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         private bool TryEnter_Outlined(int timeoutMs) => TryEnter_Inlined(timeoutMs).IsInitialized;
@@ -242,7 +243,10 @@ namespace System.Threading
         public void Exit()
         {
             var owningThreadId = new ThreadId(_owningThreadId);
-            if (!owningThreadId.IsInitialized || owningThreadId.Id != ThreadId.Current_NoInitialize.Id)
+            if (
+                !owningThreadId.IsInitialized
+                || owningThreadId.Id != ThreadId.Current_NoInitialize.Id
+            )
             {
                 ThrowHelper.ThrowSynchronizationLockException_LockExit();
             }
@@ -349,7 +353,11 @@ namespace System.Threading
 
             // Try to acquire the lock, and check if non-waiters should stop preempting waiters. If this thread should not
             // preempt waiters, skip spin-waiting. Upon contention, register a spinner.
-            TryLockResult tryLockResult = State.TryLockBeforeSpinLoop(this, spinCount, out bool isFirstSpinner);
+            TryLockResult tryLockResult = State.TryLockBeforeSpinLoop(
+                this,
+                spinCount,
+                out bool isFirstSpinner
+            );
             if (tryLockResult != TryLockResult.Spin)
             {
                 goto LockedOrWait;
@@ -365,7 +373,7 @@ namespace System.Threading
                 spinCount = maxSpinCount;
             }
 
-            for (short spinIndex = 0; ;)
+            for (short spinIndex = 0; ; )
             {
                 LowLevelSpinWaiter.Wait(spinIndex, SpinSleep0Threshold, isSingleProcessor);
 
@@ -427,7 +435,7 @@ namespace System.Threading
                 }
             }
 
-        LockedOrWait:
+            LockedOrWait:
             Debug.Assert(tryLockResult != TryLockResult.Spin);
             if (tryLockResult == TryLockResult.Wait)
             {
@@ -436,17 +444,17 @@ namespace System.Threading
 
             Debug.Assert(tryLockResult == TryLockResult.Locked);
 
-        Locked:
+            Locked:
             Debug.Assert(!new ThreadId(_owningThreadId).IsInitialized);
             Debug.Assert(_recursionCount == 0);
             _owningThreadId = currentThreadId.Id;
             return currentThreadId;
 
-        Wait:
-            bool areContentionEventsEnabled =
-                NativeRuntimeEventSource.Log.IsEnabled(
-                    EventLevel.Informational,
-                    NativeRuntimeEventSource.Keywords.ContentionKeyword);
+            Wait:
+            bool areContentionEventsEnabled = NativeRuntimeEventSource.Log.IsEnabled(
+                EventLevel.Informational,
+                NativeRuntimeEventSource.Keywords.ContentionKeyword
+            );
             AutoResetEvent waitEvent = _waitEvent ?? CreateWaitEvent(areContentionEventsEnabled);
             if (State.TryLockBeforeWait(this))
             {
@@ -534,7 +542,9 @@ namespace System.Threading
                     if (areContentionEventsEnabled)
                     {
                         double waitDurationNs =
-                            (Stopwatch.GetTimestamp() - waitStartTimeTicks) * 1_000_000_000.0 / Stopwatch.Frequency;
+                            (Stopwatch.GetTimestamp() - waitStartTimeTicks)
+                            * 1_000_000_000.0
+                            / Stopwatch.Frequency;
                         NativeRuntimeEventSource.Log.ContentionStop(waitDurationNs);
                     }
 
@@ -572,9 +582,9 @@ namespace System.Threading
             {
                 // If the recorded time is zero, a time has not been recorded yet
                 ushort waiterStartTimeMs = _waiterStartTimeMs;
-                return
-                    waiterStartTimeMs != 0 &&
-                    (ushort)Environment.TickCount - waiterStartTimeMs >= MaxDurationMsForPreemptingWaiters;
+                return waiterStartTimeMs != 0
+                    && (ushort)Environment.TickCount - waiterStartTimeMs
+                        >= MaxDurationMsForPreemptingWaiters;
             }
         }
 
@@ -582,7 +592,11 @@ namespace System.Threading
         private unsafe AutoResetEvent CreateWaitEvent(bool areContentionEventsEnabled)
         {
             var newWaitEvent = new AutoResetEvent(false);
-            AutoResetEvent? waitEventBeforeUpdate = Interlocked.CompareExchange(ref _waitEvent, newWaitEvent, null);
+            AutoResetEvent? waitEventBeforeUpdate = Interlocked.CompareExchange(
+                ref _waitEvent,
+                newWaitEvent,
+                null
+            );
             if (waitEventBeforeUpdate == null)
             {
                 // Also check NativeRuntimeEventSource.Log.IsEnabled() to enable trimming
@@ -618,13 +632,16 @@ namespace System.Threading
             get
             {
                 var owningThreadId = new ThreadId(_owningThreadId);
-                bool isHeld = owningThreadId.IsInitialized && owningThreadId.Id == ThreadId.Current_NoInitialize.Id;
+                bool isHeld =
+                    owningThreadId.IsInitialized
+                    && owningThreadId.Id == ThreadId.Current_NoInitialize.Id;
                 Debug.Assert(!isHeld || new State(this).IsLocked);
                 return isHeld;
             }
         }
 
         internal static long ContentionCount => s_contentionCount;
+
         internal void Dispose() => _waitEvent?.Dispose();
 
         internal nint LockIdForEvents
@@ -652,17 +669,18 @@ namespace System.Threading
                 "System.Threading.Lock.SpinCount",
                 "DOTNET_Lock_SpinCount",
                 DefaultMaxSpinCount,
-                allowNegative: false);
+                allowNegative: false
+            );
 
         private static short DetermineMinSpinCount()
         {
             // The config var can be set to -1 to disable adaptive spin
-            short adaptiveSpinPeriod =
-                AppContextConfigHelper.GetInt16Config(
-                    "System.Threading.Lock.AdaptiveSpinPeriod",
-                    "DOTNET_Lock_AdaptiveSpinPeriod",
-                    DefaultAdaptiveSpinPeriod,
-                    allowNegative: true);
+            short adaptiveSpinPeriod = AppContextConfigHelper.GetInt16Config(
+                "System.Threading.Lock.AdaptiveSpinPeriod",
+                "DOTNET_Lock_AdaptiveSpinPeriod",
+                DefaultAdaptiveSpinPeriod,
+                allowNegative: true
+            );
             if (adaptiveSpinPeriod < -1)
             {
                 adaptiveSpinPeriod = DefaultAdaptiveSpinPeriod;
@@ -684,12 +702,16 @@ namespace System.Threading
 
             private uint _state;
 
-            public State(Lock lockObj) : this(lockObj._state) { }
+            public State(Lock lockObj)
+                : this(lockObj._state) { }
+
             private State(uint state) => _state = state;
 
             public static uint InitialStateValue => 0;
             public static uint LockedStateValue => IsLockedMask;
+
             private static uint Neg(uint state) => (uint)-(int)state;
+
             public bool IsInitialState => this == default;
             public bool IsLocked => (_state & IsLockedMask) != 0;
 
@@ -787,15 +809,25 @@ namespace System.Threading
                 }
             }
 
-            public static bool operator ==(State state1, State state2) => state1._state == state2._state;
+            public static bool operator ==(State state1, State state2) =>
+                state1._state == state2._state;
+
             public static bool operator !=(State state1, State state2) => !(state1 == state2);
 
             bool IEquatable<State>.Equals(State other) => this == other;
+
             public override bool Equals(object? obj) => obj is State other && this == other;
+
             public override int GetHashCode() => (int)_state;
 
             private static State CompareExchange(Lock lockObj, State toState, State fromState) =>
-                new State(Interlocked.CompareExchange(ref lockObj._state, toState._state, fromState._state));
+                new State(
+                    Interlocked.CompareExchange(
+                        ref lockObj._state,
+                        toState._state,
+                        fromState._state
+                    )
+                );
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool TryLock(Lock lockObj)
@@ -839,7 +871,11 @@ namespace System.Threading
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static TryLockResult TryLockBeforeSpinLoop(Lock lockObj, short spinCount, out bool isFirstSpinner)
+            public static TryLockResult TryLockBeforeSpinLoop(
+                Lock lockObj,
+                short spinCount,
+                out bool isFirstSpinner
+            )
             {
                 // Normally, threads are allowed to preempt waiters to acquire the lock in order to avoid creating lock convoys,
                 // see TryLock(). There can be cases where waiters can be easily starved as a result. For example, a thread that
@@ -898,7 +934,10 @@ namespace System.Threading
                             newState.SetIsLocked();
                             result = TryLockResult.Locked;
                         }
-                        else if ((newState.HasAnySpinners && spinCount == 0) || !newState.TryIncrementSpinnerCount())
+                        else if (
+                            (newState.HasAnySpinners && spinCount == 0)
+                            || !newState.TryIncrementSpinnerCount()
+                        )
                         {
                             return TryLockResult.Wait;
                         }
@@ -929,7 +968,9 @@ namespace System.Threading
                     Debug.Assert(state.HasAnySpinners);
                     if (!state.ShouldNonWaiterAttemptToAcquireLock)
                     {
-                        return state.ShouldNotPreemptWaiters ? TryLockResult.Wait : TryLockResult.Spin;
+                        return state.ShouldNotPreemptWaiters
+                            ? TryLockResult.Wait
+                            : TryLockResult.Spin;
                     }
 
                     State newState = state;
@@ -953,7 +994,9 @@ namespace System.Threading
                 // if it's available. If the lock is available, a spinner must acquire the lock along with unregistering itself,
                 // because a lock releaser does not wake a waiter when there is a spinner registered.
 
-                var state = new State(Interlocked.Add(ref lockObj._state, Neg(SpinnerCountIncrement)));
+                var state = new State(
+                    Interlocked.Add(ref lockObj._state, Neg(SpinnerCountIncrement))
+                );
                 Debug.Assert(new State(state._state + SpinnerCountIncrement).HasAnySpinners);
 
                 while (true)
@@ -1074,7 +1117,9 @@ namespace System.Threading
                     {
                         if (newState.HasAnyWaiters)
                         {
-                            Debug.Assert(!state.ShouldNotPreemptWaiters || waiterStartTimeWasRecorded);
+                            Debug.Assert(
+                                !state.ShouldNotPreemptWaiters || waiterStartTimeWasRecorded
+                            );
                             if (!waiterStartTimeWasRecorded)
                             {
                                 // Since the lock was acquired successfully by a waiter, update the waiter starvation start time
@@ -1097,8 +1142,12 @@ namespace System.Threading
                 // when a waiter was signaled but the wake signal has not been observed. If the lock is acquired, the waiter
                 // starvation start time is also updated.
 
-                var state = new State(Interlocked.Add(ref lockObj._state, Neg(IsWaiterSignaledToWakeMask)));
-                Debug.Assert(new State(state._state + IsWaiterSignaledToWakeMask).IsWaiterSignaledToWake);
+                var state = new State(
+                    Interlocked.Add(ref lockObj._state, Neg(IsWaiterSignaledToWakeMask))
+                );
+                Debug.Assert(
+                    new State(state._state + IsWaiterSignaledToWakeMask).IsWaiterSignaledToWake
+                );
 
                 bool waiterStartTimeWasRecorded = false;
                 while (true)
@@ -1133,7 +1182,9 @@ namespace System.Threading
                     {
                         if (newState.HasAnyWaiters)
                         {
-                            Debug.Assert(!state.ShouldNotPreemptWaiters || waiterStartTimeWasRecorded);
+                            Debug.Assert(
+                                !state.ShouldNotPreemptWaiters || waiterStartTimeWasRecorded
+                            );
                             if (!waiterStartTimeWasRecorded)
                             {
                                 // Since the lock was acquired successfully by a waiter, update the waiter starvation start time
@@ -1222,7 +1273,7 @@ namespace System.Threading
         {
             Locked,
             Spin,
-            Wait
+            Wait,
         }
     }
 }

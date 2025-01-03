@@ -24,7 +24,7 @@ namespace System.IdentityModel.Diagnostics
         int _originalSize;
         int _deflatedSize;
 
-        public DeflateCookieTraceRecord( int originalSize, int deflatedSize )
+        public DeflateCookieTraceRecord(int originalSize, int deflatedSize)
         {
             _originalSize = originalSize;
             _deflatedSize = deflatedSize;
@@ -35,16 +35,21 @@ namespace System.IdentityModel.Diagnostics
             get { return _eventId; }
         }
 
-        internal override void WriteTo( XmlWriter writer ) 
+        internal override void WriteTo(XmlWriter writer)
         {
-            writer.WriteStartElement( ElementName );
-            writer.WriteAttributeString( DiagnosticStrings.NamespaceTag, EventId );
+            writer.WriteStartElement(ElementName);
+            writer.WriteAttributeString(DiagnosticStrings.NamespaceTag, EventId);
 
-            writer.WriteElementString( DiagnosticStrings.DeflateCookieOriginalSizeTag, _originalSize.ToString( CultureInfo.InvariantCulture ) );
-            writer.WriteElementString( DiagnosticStrings.DeflateCookieAfterDeflatingTag, _deflatedSize.ToString( CultureInfo.InvariantCulture ) );
+            writer.WriteElementString(
+                DiagnosticStrings.DeflateCookieOriginalSizeTag,
+                _originalSize.ToString(CultureInfo.InvariantCulture)
+            );
+            writer.WriteElementString(
+                DiagnosticStrings.DeflateCookieAfterDeflatingTag,
+                _deflatedSize.ToString(CultureInfo.InvariantCulture)
+            );
 
             writer.WriteEndElement();
-        }                     
+        }
     }
-
 }

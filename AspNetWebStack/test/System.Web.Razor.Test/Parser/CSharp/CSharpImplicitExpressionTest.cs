@@ -22,15 +22,23 @@ namespace System.Web.Razor.Test.Parser.CSharp
         [Fact]
         public void NestedImplicitExpression()
         {
-            ParseBlockTest("if (true) { @foo }",
-                           new StatementBlock(
-                               Factory.Code("if (true) { ").AsStatement(),
-                               new ExpressionBlock(
-                                   Factory.CodeTransition(),
-                                   Factory.Code("foo")
-                                       .AsImplicitExpression(CSharpCodeParser.DefaultKeywords, acceptTrailingDot: true)
-                                       .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                               Factory.Code(" }").AsStatement()));
+            ParseBlockTest(
+                "if (true) { @foo }",
+                new StatementBlock(
+                    Factory.Code("if (true) { ").AsStatement(),
+                    new ExpressionBlock(
+                        Factory.CodeTransition(),
+                        Factory
+                            .Code("foo")
+                            .AsImplicitExpression(
+                                CSharpCodeParser.DefaultKeywords,
+                                acceptTrailingDot: true
+                            )
+                            .Accepts(AcceptedCharacters.NonWhiteSpace)
+                    ),
+                    Factory.Code(" }").AsStatement()
+                )
+            );
         }
 
         [Fact]
@@ -42,35 +50,50 @@ namespace System.Web.Razor.Test.Parser.CSharp
         [Fact]
         public void ParseBlockOutputsZeroLengthCodeSpanIfInvalidCharacterFollowsTransition()
         {
-            ParseBlockTest("@/",
-                           new ExpressionBlock(
-                               Factory.CodeTransition(),
-                               Factory.EmptyCSharp()
-                                   .AsImplicitExpression(KeywordSet)
-                                   .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                           new RazorError(
-                               String.Format(RazorResources.ParseError_Unexpected_Character_At_Start_Of_CodeBlock_CS, "/"),
-                               new SourceLocation(1, 0, 1)));
+            ParseBlockTest(
+                "@/",
+                new ExpressionBlock(
+                    Factory.CodeTransition(),
+                    Factory
+                        .EmptyCSharp()
+                        .AsImplicitExpression(KeywordSet)
+                        .Accepts(AcceptedCharacters.NonWhiteSpace)
+                ),
+                new RazorError(
+                    String.Format(
+                        RazorResources.ParseError_Unexpected_Character_At_Start_Of_CodeBlock_CS,
+                        "/"
+                    ),
+                    new SourceLocation(1, 0, 1)
+                )
+            );
         }
 
         [Fact]
         public void ParseBlockOutputsZeroLengthCodeSpanIfEOFOccursAfterTransition()
         {
-            ParseBlockTest("@",
-                           new ExpressionBlock(
-                               Factory.CodeTransition(),
-                               Factory.EmptyCSharp()
-                                   .AsImplicitExpression(KeywordSet)
-                                   .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                           new RazorError(
-                               RazorResources.ParseError_Unexpected_EndOfFile_At_Start_Of_CodeBlock,
-                               new SourceLocation(1, 0, 1)));
+            ParseBlockTest(
+                "@",
+                new ExpressionBlock(
+                    Factory.CodeTransition(),
+                    Factory
+                        .EmptyCSharp()
+                        .AsImplicitExpression(KeywordSet)
+                        .Accepts(AcceptedCharacters.NonWhiteSpace)
+                ),
+                new RazorError(
+                    RazorResources.ParseError_Unexpected_EndOfFile_At_Start_Of_CodeBlock,
+                    new SourceLocation(1, 0, 1)
+                )
+            );
         }
 
         [Fact]
         public void ParseBlockSupportsSlashesWithinComplexImplicitExpressions()
         {
-            ImplicitExpressionTest("DataGridColumn.Template(\"Years of Service\", e => (int)Math.Round((DateTime.Now - dt).TotalDays / 365))");
+            ImplicitExpressionTest(
+                "DataGridColumn.Template(\"Years of Service\", e => (int)Math.Round((DateTime.Now - dt).TotalDays / 365))"
+            );
         }
 
         [Fact]
@@ -131,7 +154,9 @@ namespace System.Web.Razor.Test.Parser.CSharp
         [Fact]
         public void ParseBlockProperlyParsesParenthesesAndBalancesThemInImplicitExpression()
         {
-            ImplicitExpressionTest(@"foo().bar(""bi\""z"", 4)(""chained method; call"").baz(@""bo""""z"", '\'', () => { return 4; }, (4+5+new { foo = bar[4] }))");
+            ImplicitExpressionTest(
+                @"foo().bar(""bi\""z"", 4)(""chained method; call"").baz(@""bo""""z"", '\'', () => { return 4; }, (4+5+new { foo = bar[4] }))"
+            );
         }
 
         [Fact]
@@ -161,9 +186,19 @@ namespace System.Web.Razor.Test.Parser.CSharp
         [Fact]
         public void ParseBlockStopsBalancingParenthesesAtEOF()
         {
-            ImplicitExpressionTest("foo(()", "foo(()",
-                                   acceptedCharacters: AcceptedCharacters.Any,
-                                   errors: new RazorError(String.Format(RazorResources.ParseError_Expected_CloseBracket_Before_EOF, "(", ")"), new SourceLocation(4, 0, 4)));
+            ImplicitExpressionTest(
+                "foo(()",
+                "foo(()",
+                acceptedCharacters: AcceptedCharacters.Any,
+                errors: new RazorError(
+                    String.Format(
+                        RazorResources.ParseError_Expected_CloseBracket_Before_EOF,
+                        "(",
+                        ")"
+                    ),
+                    new SourceLocation(4, 0, 4)
+                )
+            );
         }
 
         [Fact]
@@ -192,13 +227,16 @@ namespace System.Web.Razor.Test.Parser.CSharp
 
         private void RunTrailingSemicolonTest(string expr)
         {
-            ParseBlockTest(SyntaxConstants.TransitionString + expr + ";",
-                           new ExpressionBlock(
-                               Factory.CodeTransition(),
-                               Factory.Code(expr)
-                                   .AsImplicitExpression(KeywordSet)
-                                   .Accepts(AcceptedCharacters.NonWhiteSpace)
-                               ));
+            ParseBlockTest(
+                SyntaxConstants.TransitionString + expr + ";",
+                new ExpressionBlock(
+                    Factory.CodeTransition(),
+                    Factory
+                        .Code(expr)
+                        .AsImplicitExpression(KeywordSet)
+                        .Accepts(AcceptedCharacters.NonWhiteSpace)
+                )
+            );
         }
     }
 }

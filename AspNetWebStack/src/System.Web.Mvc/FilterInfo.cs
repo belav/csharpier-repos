@@ -10,14 +10,14 @@ namespace System.Web.Mvc
     public class FilterInfo
     {
         private readonly List<IActionFilter> _actionFilters = new List<IActionFilter>();
-        private readonly List<IAuthenticationFilter> _authenticationFilters = new List<IAuthenticationFilter>();
-        private readonly List<IAuthorizationFilter> _authorizationFilters = new List<IAuthorizationFilter>();
+        private readonly List<IAuthenticationFilter> _authenticationFilters =
+            new List<IAuthenticationFilter>();
+        private readonly List<IAuthorizationFilter> _authorizationFilters =
+            new List<IAuthorizationFilter>();
         private readonly List<IExceptionFilter> _exceptionFilters = new List<IExceptionFilter>();
         private readonly List<IResultFilter> _resultFilters = new List<IResultFilter>();
 
-        public FilterInfo()
-        {
-        }
+        public FilterInfo() { }
 
         public FilterInfo(IEnumerable<Filter> filters)
         {
@@ -61,7 +61,7 @@ namespace System.Web.Mvc
                 AuthorizationOverrideScope = FilterScope.First,
                 ExceptionOverrideScope = FilterScope.First,
                 ResultOverrideScope = FilterScope.First,
-                Filters = new List<Filter>()
+                Filters = new List<Filter>(),
             };
 
             // Evaluate the 'filters' enumerable only once since the operation can be quite expensive.
@@ -75,28 +75,38 @@ namespace System.Web.Mvc
 
                 if (overrideFilter != null)
                 {
-                    if (overrideFilter.FiltersToOverride == typeof(IActionFilter)
-                        && filter.Scope >= result.ActionOverrideScope)
+                    if (
+                        overrideFilter.FiltersToOverride == typeof(IActionFilter)
+                        && filter.Scope >= result.ActionOverrideScope
+                    )
                     {
                         result.ActionOverrideScope = filter.Scope;
                     }
-                    else if (overrideFilter.FiltersToOverride == typeof(IAuthenticationFilter)
-                        && filter.Scope >= result.AuthenticationOverrideScope)
+                    else if (
+                        overrideFilter.FiltersToOverride == typeof(IAuthenticationFilter)
+                        && filter.Scope >= result.AuthenticationOverrideScope
+                    )
                     {
                         result.AuthenticationOverrideScope = filter.Scope;
                     }
-                    else if (overrideFilter.FiltersToOverride == typeof(IAuthorizationFilter)
-                        && filter.Scope >= result.AuthorizationOverrideScope)
+                    else if (
+                        overrideFilter.FiltersToOverride == typeof(IAuthorizationFilter)
+                        && filter.Scope >= result.AuthorizationOverrideScope
+                    )
                     {
                         result.AuthorizationOverrideScope = filter.Scope;
                     }
-                    else if (overrideFilter.FiltersToOverride == typeof(IExceptionFilter)
-                        && filter.Scope >= result.ExceptionOverrideScope)
+                    else if (
+                        overrideFilter.FiltersToOverride == typeof(IExceptionFilter)
+                        && filter.Scope >= result.ExceptionOverrideScope
+                    )
                     {
                         result.ExceptionOverrideScope = filter.Scope;
                     }
-                    else if (overrideFilter.FiltersToOverride == typeof(IResultFilter)
-                        && filter.Scope >= result.ResultOverrideScope)
+                    else if (
+                        overrideFilter.FiltersToOverride == typeof(IResultFilter)
+                        && filter.Scope >= result.ResultOverrideScope
+                    )
                     {
                         result.ResultOverrideScope = filter.Scope;
                     }
@@ -124,9 +134,13 @@ namespace System.Web.Mvc
                     _actionFilters.Add(actionFilter);
                 }
 
-                IAuthenticationFilter authenticationFilter = filter.Instance as IAuthenticationFilter;
+                IAuthenticationFilter authenticationFilter =
+                    filter.Instance as IAuthenticationFilter;
 
-                if (authenticationFilter != null && filter.Scope >= info.AuthenticationOverrideScope)
+                if (
+                    authenticationFilter != null
+                    && filter.Scope >= info.AuthenticationOverrideScope
+                )
                 {
                     _authenticationFilters.Add(authenticationFilter);
                 }

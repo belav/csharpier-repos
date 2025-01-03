@@ -4,8 +4,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Xunit;
 using System.Runtime.CompilerServices;
+using Xunit;
 
 namespace System.Tests
 {
@@ -52,8 +52,8 @@ namespace System.Tests
             Assert.Equal(4, it[3]);
             Assert.Throws<IndexOutOfRangeException>(() => it[4].ToString());
         }
-        [Fact]
 
+        [Fact]
         private static void FiveTuples()
         {
             ITuple it = Tuple.Create(1, 2, 3, 4, 5);
@@ -95,9 +95,27 @@ namespace System.Tests
             Assert.Throws<IndexOutOfRangeException>(() => it[7].ToString());
         }
 
-        private static Tuple<T1, T2, T3, T4, T5, T6, T7, TRest> CreateLongRef<T1, T2, T3, T4, T5, T6, T7, TRest>(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, TRest rest)
+        private static Tuple<T1, T2, T3, T4, T5, T6, T7, TRest> CreateLongRef<
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            TRest
+        >(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, TRest rest)
         {
-            return new Tuple<T1, T2, T3, T4, T5, T6, T7, TRest>(item1, item2, item3, item4, item5, item6, item7, rest);
+            return new Tuple<T1, T2, T3, T4, T5, T6, T7, TRest>(
+                item1,
+                item2,
+                item3,
+                item4,
+                item5,
+                item6,
+                item7,
+                rest
+            );
         }
 
         [Fact]

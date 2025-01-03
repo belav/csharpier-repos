@@ -41,7 +41,12 @@ namespace System.Reflection.Emit.Tests
             static MethodInfo GetCode(int num)
             {
                 TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-                MethodBuilder method = type.DefineMethod("meth1", MethodAttributes.Public | MethodAttributes.Static, typeof(int), Type.EmptyTypes);
+                MethodBuilder method = type.DefineMethod(
+                    "meth1",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    typeof(int),
+                    Type.EmptyTypes
+                );
                 var ilg = method.GetILGenerator();
 
                 var loc = ilg.DeclareLocal(typeof(int));
@@ -106,7 +111,12 @@ namespace System.Reflection.Emit.Tests
             static MethodInfo GetCode(int num)
             {
                 TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-                MethodBuilder method = type.DefineMethod("meth1", MethodAttributes.Public | MethodAttributes.Static, typeof(int), Type.EmptyTypes);
+                MethodBuilder method = type.DefineMethod(
+                    "meth1",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    typeof(int),
+                    Type.EmptyTypes
+                );
                 var ilg = method.GetILGenerator();
 
                 ilg.Emit(OpCodes.Ldc_I4_0);
@@ -172,7 +182,12 @@ namespace System.Reflection.Emit.Tests
             static MethodInfo GetCode(int num)
             {
                 TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-                MethodBuilder method = type.DefineMethod("meth1", MethodAttributes.Public | MethodAttributes.Static, typeof(int), Type.EmptyTypes);
+                MethodBuilder method = type.DefineMethod(
+                    "meth1",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    typeof(int),
+                    Type.EmptyTypes
+                );
                 var ilg = method.GetILGenerator();
 
                 var labels = new Label[num + 1];
@@ -182,7 +197,7 @@ namespace System.Reflection.Emit.Tests
                 ilg.Emit(OpCodes.Ldc_I4_0);
                 ilg.Emit(OpCodes.Br, labels[0]);
 
-                for (int i = num; --i >= 0;)
+                for (int i = num; --i >= 0; )
                 {
                     ilg.MarkLabel(labels[i]);
 
@@ -239,7 +254,12 @@ namespace System.Reflection.Emit.Tests
             static MethodInfo GetCode()
             {
                 TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-                MethodBuilder method = type.DefineMethod("meth1", MethodAttributes.Public | MethodAttributes.Static, typeof(int), new[] { typeof(bool) });
+                MethodBuilder method = type.DefineMethod(
+                    "meth1",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    typeof(int),
+                    new[] { typeof(bool) }
+                );
                 var ilg = method.GetILGenerator();
 
                 // The label is targeted with stack depth zero.
@@ -279,7 +299,12 @@ namespace System.Reflection.Emit.Tests
             static MethodInfo GetCode()
             {
                 TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-                MethodBuilder method = type.DefineMethod("meth1", MethodAttributes.Public | MethodAttributes.Static, typeof(int), Type.EmptyTypes);
+                MethodBuilder method = type.DefineMethod(
+                    "meth1",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    typeof(int),
+                    Type.EmptyTypes
+                );
                 var ilg = method.GetILGenerator();
 
                 var lab = ilg.DefineLabel();
@@ -291,7 +316,7 @@ namespace System.Reflection.Emit.Tests
                 // Unreachable.
                 ilg.Emit(OpCodes.Ldarg_0);
 
-                // Depth 
+                // Depth
                 ilg.MarkLabel(lab);
                 ilg.Emit(OpCodes.Add);
                 ilg.Emit(OpCodes.Ret);

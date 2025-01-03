@@ -9,7 +9,7 @@ namespace System.ServiceModel.Security
     {
         readonly XmlDictionaryString scNamespace;
         readonly XmlDictionaryString prefix;
-        
+
         internal SecureConversationVersion(XmlDictionaryString ns, XmlDictionaryString prefix)
         {
             this.scNamespace = ns;
@@ -18,18 +18,12 @@ namespace System.ServiceModel.Security
 
         public XmlDictionaryString Namespace
         {
-            get
-            {
-                return this.scNamespace;
-            }
+            get { return this.scNamespace; }
         }
 
         public XmlDictionaryString Prefix
         {
-            get
-            {
-                return this.prefix;
-            }
+            get { return this.prefix; }
         }
 
         public static SecureConversationVersion Default
@@ -49,39 +43,36 @@ namespace System.ServiceModel.Security
 
         class WSSecureConversationVersionFeb2005 : SecureConversationVersion
         {
-            static readonly WSSecureConversationVersionFeb2005 instance = new WSSecureConversationVersionFeb2005();
+            static readonly WSSecureConversationVersionFeb2005 instance =
+                new WSSecureConversationVersionFeb2005();
 
             protected WSSecureConversationVersionFeb2005()
-                : base(XD.SecureConversationFeb2005Dictionary.Namespace, XD.SecureConversationFeb2005Dictionary.Prefix)
-            {
-            }
+                : base(
+                    XD.SecureConversationFeb2005Dictionary.Namespace,
+                    XD.SecureConversationFeb2005Dictionary.Prefix
+                ) { }
 
             public static SecureConversationVersion Instance
             {
-                get
-                {
-                    return instance;
-                }
+                get { return instance; }
             }
         }
 
         class WSSecureConversationVersion13 : SecureConversationVersion
         {
-            static readonly WSSecureConversationVersion13 instance = new WSSecureConversationVersion13();
+            static readonly WSSecureConversationVersion13 instance =
+                new WSSecureConversationVersion13();
 
             protected WSSecureConversationVersion13()
-                : base(DXD.SecureConversationDec2005Dictionary.Namespace, DXD.SecureConversationDec2005Dictionary.Prefix)
-            {
-            }
+                : base(
+                    DXD.SecureConversationDec2005Dictionary.Namespace,
+                    DXD.SecureConversationDec2005Dictionary.Prefix
+                ) { }
 
             public static SecureConversationVersion Instance
             {
-                get
-                {
-                    return instance;
-                }
+                get { return instance; }
             }
         }
-
     }
 }

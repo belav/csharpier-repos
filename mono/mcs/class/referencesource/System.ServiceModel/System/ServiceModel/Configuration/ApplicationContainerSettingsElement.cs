@@ -15,21 +15,19 @@ namespace System.ServiceModel.Configuration
     /// The ApplicationContainerSettingsElement provides configuration support for the NamedPipes
     /// services in in application containers.
     /// </summary>
-    public sealed partial class ApplicationContainerSettingsElement : ServiceModelConfigurationElement
+    public sealed partial class ApplicationContainerSettingsElement
+        : ServiceModelConfigurationElement
     {
-        public ApplicationContainerSettingsElement()
-        {
-        }
+        public ApplicationContainerSettingsElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.PackageFullName, DefaultValue = ApplicationContainerSettingsDefaults.PackageFullNameDefaultString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.PackageFullName,
+            DefaultValue = ApplicationContainerSettingsDefaults.PackageFullNameDefaultString
+        )]
         [StringValidator(MinLength = 0)]
         public string PackageFullName
         {
-            get
-            {
-                return (string)base[ConfigurationStrings.PackageFullName];
-            }
-
+            get { return (string)base[ConfigurationStrings.PackageFullName]; }
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -41,7 +39,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.SessionIdAttribute, DefaultValue = ApplicationContainerSettingsDefaults.CurrentUserSessionDefaultString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.SessionIdAttribute,
+            DefaultValue = ApplicationContainerSettingsDefaults.CurrentUserSessionDefaultString
+        )]
         [TypeConverter(typeof(SessionIdTypeConvertor))]
         [SessionIdTypeValidator]
         public int SessionId
@@ -68,8 +69,14 @@ namespace System.ServiceModel.Configuration
                 throw FxTrace.Exception.ArgumentNull("settings");
             }
 
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.PackageFullName, settings.PackageFullName);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.SessionIdAttribute, settings.SessionId);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.PackageFullName,
+                settings.PackageFullName
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.SessionIdAttribute,
+                settings.SessionId
+            );
         }
 
         internal void CopyFrom(ApplicationContainerSettingsElement source)
@@ -86,16 +93,16 @@ namespace System.ServiceModel.Configuration
         class SessionIdTypeValidator : IntegerValidator
         {
             public SessionIdTypeValidator()
-                : base(1, int.MaxValue)
-            {
-            }
+                : base(1, int.MaxValue) { }
 
             public override void Validate(object value)
             {
                 int id = (int)value;
 
-                if (id == ApplicationContainerSettingsDefaults.CurrentSession ||
-                    id == ApplicationContainerSettingsDefaults.ServiceSession)
+                if (
+                    id == ApplicationContainerSettingsDefaults.CurrentSession
+                    || id == ApplicationContainerSettingsDefaults.ServiceSession
+                )
                 {
                     return;
                 }
@@ -111,7 +118,11 @@ namespace System.ServiceModel.Configuration
                         throw;
                     }
 
-                    throw FxTrace.Exception.AsError(new InvalidEnumArgumentException(SR.GetString(SR.SessionValueInvalid, value)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidEnumArgumentException(
+                            SR.GetString(SR.SessionValueInvalid, value)
+                        )
+                    );
                 }
             }
         }
@@ -121,10 +132,7 @@ namespace System.ServiceModel.Configuration
         {
             public override ConfigurationValidatorBase ValidatorInstance
             {
-                get
-                {
-                    return new SessionIdTypeValidator();
-                }
+                get { return new SessionIdTypeValidator(); }
             }
         }
     }

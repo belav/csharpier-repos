@@ -35,10 +35,7 @@ namespace System.ComponentModel.Tests
         [InlineData("displayName")]
         public void DisplayNameValue_Set_GetReturnsExpected(string value)
         {
-            var attribute = new SubDisplayNameAttribute("Name")
-            {
-                DisplayNameValue = value
-            };
+            var attribute = new SubDisplayNameAttribute("Name") { DisplayNameValue = value };
             Assert.Same(value, attribute.DisplayName);
             Assert.Same(value, attribute.DisplayNameValue);
 
@@ -62,9 +59,24 @@ namespace System.ComponentModel.Tests
             // .NET Framework throws a NullReferenceException.
             if (!PlatformDetection.IsNetFramework)
             {
-                yield return new object[] { new DisplayNameAttribute(null), new DisplayNameAttribute(null), true };
-                yield return new object[] { new DisplayNameAttribute(null), new DisplayNameAttribute(""), false };
-                yield return new object[] { new DisplayNameAttribute(null), new DisplayNameAttribute("name"), false };
+                yield return new object[]
+                {
+                    new DisplayNameAttribute(null),
+                    new DisplayNameAttribute(null),
+                    true,
+                };
+                yield return new object[]
+                {
+                    new DisplayNameAttribute(null),
+                    new DisplayNameAttribute(""),
+                    false,
+                };
+                yield return new object[]
+                {
+                    new DisplayNameAttribute(null),
+                    new DisplayNameAttribute("name"),
+                    false,
+                };
             }
 
             yield return new object[] { new DisplayNameAttribute("name"), new object(), false };
@@ -75,10 +87,18 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(DisplayNameAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            DisplayNameAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
-            if (other is DisplayNameAttribute otherAttribute && otherAttribute.DisplayName != null && attribute.DisplayName != null)
+            if (
+                other is DisplayNameAttribute otherAttribute
+                && otherAttribute.DisplayName != null
+                && attribute.DisplayName != null
+            )
             {
                 Assert.Equal(expected, attribute.GetHashCode().Equals(other.GetHashCode()));
             }
@@ -101,13 +121,11 @@ namespace System.ComponentModel.Tests
 
         private class SubDisplayNameAttribute : DisplayNameAttribute
         {
-            public SubDisplayNameAttribute() : base()
-            {
-            }
+            public SubDisplayNameAttribute()
+                : base() { }
 
-            public SubDisplayNameAttribute(string displayName) : base(displayName)
-            {
-            }
+            public SubDisplayNameAttribute(string displayName)
+                : base(displayName) { }
 
             public new string DisplayNameValue
             {
@@ -118,13 +136,11 @@ namespace System.ComponentModel.Tests
 
         private class AlwaysEqualAttribute : DisplayNameAttribute
         {
-            public AlwaysEqualAttribute() : base()
-            {
-            }
+            public AlwaysEqualAttribute()
+                : base() { }
 
-            public AlwaysEqualAttribute(string displayName) : base(displayName)
-            {
-            }
+            public AlwaysEqualAttribute(string displayName)
+                : base(displayName) { }
 
             public override bool Equals(object obj) => true;
 

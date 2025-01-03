@@ -10,7 +10,10 @@ internal static class BinaryMessageParser
 {
     private const int MaxLengthPrefixSize = 5;
 
-    public static bool TryParseMessage(ref ReadOnlySequence<byte> buffer, out ReadOnlySequence<byte> payload)
+    public static bool TryParseMessage(
+        ref ReadOnlySequence<byte> buffer,
+        out ReadOnlySequence<byte> payload
+    )
     {
         if (buffer.IsEmpty)
         {
@@ -42,8 +45,7 @@ internal static class BinaryMessageParser
             byteRead = span[numBytes];
             length = length | (((uint)(byteRead & 0x7f)) << (numBytes * 7));
             numBytes++;
-        }
-        while (numBytes < lengthPrefixBuffer.Length && ((byteRead & 0x80) != 0));
+        } while (numBytes < lengthPrefixBuffer.Length && ((byteRead & 0x80) != 0));
 
         // size bytes are missing
         if ((byteRead & 0x80) != 0 && (numBytes < MaxLengthPrefixSize))

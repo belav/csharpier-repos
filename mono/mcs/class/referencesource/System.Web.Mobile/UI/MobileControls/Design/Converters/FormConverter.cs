@@ -1,29 +1,31 @@
 //------------------------------------------------------------------------------
 // <copyright file="FormConverter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls.Converters
 {
-    using System.Diagnostics;
     using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
     using System.Web.UI;
-    using System.Web.UI.MobileControls;
     using System.Web.UI.Design.MobileControls.Adapters;
+    using System.Web.UI.MobileControls;
 
     /// <summary>
     ///    <para>
     ///       Can filter and retrieve several types of values from Style controls.
     ///    </para>
     /// </summary>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class FormConverter : StringConverter
     {
         private Form GetContainingForm(MobileControl mc)
@@ -50,26 +52,28 @@ namespace System.Web.UI.Design.MobileControls.Converters
 
         protected virtual ArrayList GetControls(ITypeDescriptorContext context)
         {
-            ArrayList       controlList = new ArrayList();
-            MobileControl   control = null;
-            IContainer      container = context.Container;
+            ArrayList controlList = new ArrayList();
+            MobileControl control = null;
+            IContainer container = context.Container;
 
             if (context.Instance is Array)
             {
                 Array list = (Array)context.Instance;
                 Debug.Assert(list.Length > 0);
 
-                foreach(Object obj in list)
+                foreach (Object obj in list)
                 {
                     Debug.Assert(obj is MobileControl);
                     Form form = GetContainingForm((MobileControl)obj);
 
                     // If the control is not within a Form control or a StyleSheet control,
                     // simply return the empty combobox.
-                    // If the control is placed at UserControl top level, the ID of the 
+                    // If the control is placed at UserControl top level, the ID of the
                     // containing Form is null.
-                    if ((form == null || form.ID == null) && 
-                        GetContainingStyleSheet((MobileControl)obj) == null)
+                    if (
+                        (form == null || form.ID == null)
+                        && GetContainingStyleSheet((MobileControl)obj) == null
+                    )
                     {
                         return null;
                     }
@@ -80,7 +84,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
             {
                 if (context.Instance is MobileControl)
                 {
-                    control = (MobileControl) context.Instance;
+                    control = (MobileControl)context.Instance;
                 }
                 else if (context.Instance is ChoicePropertyFilter)
                 {
@@ -109,8 +113,10 @@ namespace System.Web.UI.Design.MobileControls.Converters
                 // MobileUserControl has a default Form with null ID
                 else if (form.ID == null && (GetContainingStyleSheet(control) == null))
                 {
-                    Debug.Assert(container is IDesignerHost &&
-                        ((IDesignerHost)container).RootComponent is MobileUserControl);
+                    Debug.Assert(
+                        container is IDesignerHost
+                            && ((IDesignerHost)container).RootComponent is MobileUserControl
+                    );
 
                     // Just return an empty array list, so that url picker still works.
                     return controlList;
@@ -133,12 +139,10 @@ namespace System.Web.UI.Design.MobileControls.Converters
                 return null;
             }
 
-            foreach(IComponent component in container.Components)
+            foreach (IComponent component in container.Components)
             {
                 Form candidate = component as Form;
-                if (candidate != null &&
-                    candidate.ID != null &&
-                    candidate.ID.Length != 0)
+                if (candidate != null && candidate.ID != null && candidate.ID.Length != 0)
                 {
                     controlList.Add(ProcessControlId(candidate.ID));
                 }
@@ -156,7 +160,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
             }
 
             ArrayList objValues = GetControls(context);
-            return (objValues != null? new StandardValuesCollection(objValues) : null);
+            return (objValues != null ? new StandardValuesCollection(objValues) : null);
         }
 
         /// <summary>
@@ -170,7 +174,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
         /// </param>
         /// <returns>
         ///    <para>
-        ///    <see langword='true'/> if the specified context contains exclusive standard 
+        ///    <see langword='true'/> if the specified context contains exclusive standard
         ///       values, otherwise <see langword='false'/>.
         ///    </para>
         /// </returns>
@@ -190,7 +194,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
         /// </param>
         /// <returns>
         ///    <para>
-        ///    <see langword='true'/> if the specified context conatins supported standard 
+        ///    <see langword='true'/> if the specified context conatins supported standard
         ///       values, otherwise <see langword='false'/>.
         ///    </para>
         /// </returns>

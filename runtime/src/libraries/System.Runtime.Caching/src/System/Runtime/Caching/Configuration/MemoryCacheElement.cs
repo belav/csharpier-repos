@@ -13,46 +13,51 @@ namespace System.Runtime.Caching.Configuration
 #endif
     internal sealed class MemoryCacheElement : ConfigurationElement
     {
-        private static readonly ConfigurationProperty s_propName =
-            new ConfigurationProperty("name",
-                typeof(string),
-                null,
-                new WhiteSpaceTrimStringConverter(),
-                new StringValidator(1),
-                ConfigurationPropertyOptions.IsRequired |
-                ConfigurationPropertyOptions.IsKey);
+        private static readonly ConfigurationProperty s_propName = new ConfigurationProperty(
+            "name",
+            typeof(string),
+            null,
+            new WhiteSpaceTrimStringConverter(),
+            new StringValidator(1),
+            ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        );
         private static readonly ConfigurationProperty s_propPhysicalMemoryLimitPercentage =
-            new ConfigurationProperty("physicalMemoryLimitPercentage",
+            new ConfigurationProperty(
+                "physicalMemoryLimitPercentage",
                 typeof(int),
                 (int)0,
                 null,
                 new IntegerValidator(0, 100),
-                ConfigurationPropertyOptions.None);
+                ConfigurationPropertyOptions.None
+            );
         private static readonly ConfigurationProperty s_propCacheMemoryLimitMegabytes =
-            new ConfigurationProperty("cacheMemoryLimitMegabytes",
+            new ConfigurationProperty(
+                "cacheMemoryLimitMegabytes",
                 typeof(int),
                 (int)0,
                 null,
                 new IntegerValidator(0, int.MaxValue),
-                ConfigurationPropertyOptions.None);
+                ConfigurationPropertyOptions.None
+            );
         private static readonly ConfigurationProperty s_propPollingInterval =
-            new ConfigurationProperty("pollingInterval",
+            new ConfigurationProperty(
+                "pollingInterval",
                 typeof(TimeSpan),
                 TimeSpan.FromMilliseconds(ConfigUtil.DefaultPollingTimeMilliseconds),
                 new InfiniteTimeSpanConverter(),
                 new PositiveTimeSpanValidator(),
-                ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationPropertyCollection s_properties = new ConfigurationPropertyCollection()
-        {
-            s_propName,
-            s_propPhysicalMemoryLimitPercentage,
-            s_propCacheMemoryLimitMegabytes,
-            s_propPollingInterval
-        };
+                ConfigurationPropertyOptions.None
+            );
+        private static readonly ConfigurationPropertyCollection s_properties =
+            new ConfigurationPropertyCollection()
+            {
+                s_propName,
+                s_propPhysicalMemoryLimitPercentage,
+                s_propCacheMemoryLimitMegabytes,
+                s_propPollingInterval,
+            };
 
-        internal MemoryCacheElement()
-        {
-        }
+        internal MemoryCacheElement() { }
 
         public MemoryCacheElement(string name)
         {
@@ -61,10 +66,7 @@ namespace System.Runtime.Caching.Configuration
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return s_properties;
-            }
+            get { return s_properties; }
         }
 
         [ConfigurationProperty("name", DefaultValue = "", IsRequired = true, IsKey = true)]
@@ -72,56 +74,32 @@ namespace System.Runtime.Caching.Configuration
         [StringValidator(MinLength = 1)]
         public string Name
         {
-            get
-            {
-                return (string)base["name"];
-            }
-            set
-            {
-                base["name"] = value;
-            }
+            get { return (string)base["name"]; }
+            set { base["name"] = value; }
         }
 
         [ConfigurationProperty("physicalMemoryLimitPercentage", DefaultValue = (int)0)]
         [IntegerValidator(MinValue = 0, MaxValue = 100)]
         public int PhysicalMemoryLimitPercentage
         {
-            get
-            {
-                return (int)base["physicalMemoryLimitPercentage"];
-            }
-            set
-            {
-                base["physicalMemoryLimitPercentage"] = value;
-            }
+            get { return (int)base["physicalMemoryLimitPercentage"]; }
+            set { base["physicalMemoryLimitPercentage"] = value; }
         }
 
         [ConfigurationProperty("cacheMemoryLimitMegabytes", DefaultValue = (int)0)]
         [IntegerValidator(MinValue = 0)]
         public int CacheMemoryLimitMegabytes
         {
-            get
-            {
-                return (int)base["cacheMemoryLimitMegabytes"];
-            }
-            set
-            {
-                base["cacheMemoryLimitMegabytes"] = value;
-            }
+            get { return (int)base["cacheMemoryLimitMegabytes"]; }
+            set { base["cacheMemoryLimitMegabytes"] = value; }
         }
 
         [ConfigurationProperty("pollingInterval", DefaultValue = "00:02:00")]
         [TypeConverter(typeof(InfiniteTimeSpanConverter))]
         public TimeSpan PollingInterval
         {
-            get
-            {
-                return (TimeSpan)base["pollingInterval"];
-            }
-            set
-            {
-                base["pollingInterval"] = value;
-            }
+            get { return (TimeSpan)base["pollingInterval"]; }
+            set { base["pollingInterval"] = value; }
         }
     }
 }

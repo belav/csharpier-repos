@@ -14,9 +14,11 @@ namespace System.IdentityModel.Protocols.WSTrust
 #pragma warning disable 1591
         public const string NamespaceURI = "http://schemas.xmlsoap.org/ws/2005/02/trust";
         public const string Prefix = "t";
-        public const string SchemaLocation = "http://schemas.xmlsoap.org/ws/2005/02/trust/ws-trust.xsd";
+        public const string SchemaLocation =
+            "http://schemas.xmlsoap.org/ws/2005/02/trust/ws-trust.xsd";
 
-        public const string Schema = @"<?xml version='1.0' encoding='utf-8'?>
+        public const string Schema =
+            @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
            xmlns:wst='http://schemas.xmlsoap.org/ws/2005/02/trust'
            targetNamespace='http://schemas.xmlsoap.org/ws/2005/02/trust'
@@ -45,22 +47,31 @@ namespace System.IdentityModel.Protocols.WSTrust
         public static class Actions
         {
             public const string Issue = "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Issue";
-            public const string IssueResponse = "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Issue";
+            public const string IssueResponse =
+                "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Issue";
 
             public const string Renew = "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Renew";
-            public const string RenewResponse = "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Renew";
+            public const string RenewResponse =
+                "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Renew";
 
-            public const string Validate = "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Validate";
-            public const string ValidateResponse = "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Validate";
+            public const string Validate =
+                "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Validate";
+            public const string ValidateResponse =
+                "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Validate";
 
             public const string Cancel = "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Cancel";
-            public const string CancelResponse = "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Cancel";
+            public const string CancelResponse =
+                "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Cancel";
 
-            public const string RequestSecurityContextToken = "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT";
-            public const string RequestSecurityContextTokenResponse = "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT";
+            public const string RequestSecurityContextToken =
+                "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT";
+            public const string RequestSecurityContextTokenResponse =
+                "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT";
 
-            public const string RequestSecurityContextTokenCancel = "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT-Cancel";
-            public const string RequestSecurityContextTokenResponseCancel = "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT-Cancel";
+            public const string RequestSecurityContextTokenCancel =
+                "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/SCT-Cancel";
+            public const string RequestSecurityContextTokenResponseCancel =
+                "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/SCT-Cancel";
         }
 
         public static class AttributeNames
@@ -119,7 +130,7 @@ namespace System.IdentityModel.Protocols.WSTrust
             public const string SignWith = "SignWith";
             public const string Status = "Status";
             public const string TokenType = "TokenType";
-            public const string UseKey = "UseKey";                       
+            public const string UseKey = "UseKey";
         }
 
         public static class FaultCodeValues
@@ -147,11 +158,14 @@ namespace System.IdentityModel.Protocols.WSTrust
 
         public static class KeyTypes
         {
-            public const string Asymmetric = "http://schemas.xmlsoap.org/ws/2005/02/trust/PublicKey";
-            public const string Symmetric = "http://schemas.xmlsoap.org/ws/2005/02/trust/SymmetricKey";
-            public const string Bearer = "http://schemas.xmlsoap.org/ws/2005/05/identity/NoProofKey";
+            public const string Asymmetric =
+                "http://schemas.xmlsoap.org/ws/2005/02/trust/PublicKey";
+            public const string Symmetric =
+                "http://schemas.xmlsoap.org/ws/2005/02/trust/SymmetricKey";
+            public const string Bearer =
+                "http://schemas.xmlsoap.org/ws/2005/05/identity/NoProofKey";
         }
-        
+
         public static class ComputedKeyAlgorithms
         {
             public const string PSHA1 = "http://schemas.xmlsoap.org/ws/2005/02/trust/CK/PSHA1";

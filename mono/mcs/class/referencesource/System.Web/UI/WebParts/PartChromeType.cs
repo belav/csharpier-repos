@@ -3,15 +3,15 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
 
     /// <devdoc>
     /// Specifies how to render the title bar and/or border of a part or zone.
     /// </devdoc>
-    public enum PartChromeType {
-
+    public enum PartChromeType
+    {
         /// <devdoc>
         /// Inherit the chrome type from the zone.  Applies only to parts.
         /// </devdoc>
@@ -35,6 +35,6 @@ namespace System.Web.UI.WebControls.WebParts {
         /// <devdoc>
         /// Render the border only.
         /// </devdoc>
-        BorderOnly = 4
+        BorderOnly = 4,
     }
 }

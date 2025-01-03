@@ -10,9 +10,9 @@ using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Connections.Abstractions;
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http.Connections.Client;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.AspNetCore.SignalR.Tests;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
@@ -27,17 +27,22 @@ public partial class HubConnectionTests : VerifiableLoggedTest
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return writeContext.LoggerName == typeof(HubConnection).FullName &&
-                   writeContext.EventId.Name == "FailedToSendInvocation";
+            return writeContext.LoggerName == typeof(HubConnection).FullName
+                && writeContext.EventId.Name == "FailedToSendInvocation";
         }
         using (StartVerifiableLog(ExpectedErrors))
         {
             var exception = new InvalidOperationException();
-            var hubConnection = CreateHubConnection(new TestConnection(), protocol: MockHubProtocol.Throw(exception), LoggerFactory);
+            var hubConnection = CreateHubConnection(
+                new TestConnection(),
+                protocol: MockHubProtocol.Throw(exception),
+                LoggerFactory
+            );
             await hubConnection.StartAsync().DefaultTimeout();
 
-            var actualException =
-                await Assert.ThrowsAsync<InvalidOperationException>(async () => await hubConnection.InvokeAsync<int>("test").DefaultTimeout());
+            var actualException = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await hubConnection.InvokeAsync<int>("test").DefaultTimeout()
+            );
             Assert.Same(exception, actualException);
         }
     }
@@ -48,11 +53,16 @@ public partial class HubConnectionTests : VerifiableLoggedTest
         using (StartVerifiableLog())
         {
             var exception = new InvalidOperationException();
-            var hubConnection = CreateHubConnection(new TestConnection(), protocol: MockHubProtocol.Throw(exception), LoggerFactory);
+            var hubConnection = CreateHubConnection(
+                new TestConnection(),
+                protocol: MockHubProtocol.Throw(exception),
+                LoggerFactory
+            );
             await hubConnection.StartAsync().DefaultTimeout();
 
-            var actualException =
-                await Assert.ThrowsAsync<InvalidOperationException>(async () => await hubConnection.SendAsync("test").DefaultTimeout());
+            var actualException = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await hubConnection.SendAsync("test").DefaultTimeout()
+            );
             Assert.Same(exception, actualException);
         }
     }
@@ -62,8 +72,9 @@ public partial class HubConnectionTests : VerifiableLoggedTest
     {
         var builder = new HubConnectionBuilder().WithUrl("http://example.com");
 
-        var delegateConnectionFactory = new DelegateConnectionFactory(
-            endPoint => new TestConnection().StartAsync());
+        var delegateConnectionFactory = new DelegateConnectionFactory(endPoint =>
+            new TestConnection().StartAsync()
+        );
         builder.Services.AddSingleton<IConnectionFactory>(delegateConnectionFactory);
 
         var hubConnection = builder.Build();
@@ -86,15 +97,27 @@ public partial class HubConnectionTests : VerifiableLoggedTest
         var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
 
         var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        hubConnection.On("method", async () =>
-        {
-            await hubConnection.StopAsync().DefaultTimeout();
-            tcs.SetResult();
-        });
+        hubConnection.On(
+            "method",
+            async () =>
+            {
+                await hubConnection.StopAsync().DefaultTimeout();
+                tcs.SetResult();
+            }
+        );
 
         await hubConnection.StartAsync().DefaultTimeout();
 
-        await connection.ReceiveJsonMessage(new { type = HubProtocolConstants.InvocationMessageType, target = "method", arguments = new object[] { } }).DefaultTimeout();
+        await connection
+            .ReceiveJsonMessage(
+                new
+                {
+                    type = HubProtocolConstants.InvocationMessageType,
+                    target = "method",
+                    arguments = new object[] { },
+                }
+            )
+            .DefaultTimeout();
 
         await tcs.Task.DefaultTimeout();
     }
@@ -106,16 +129,30 @@ public partial class HubConnectionTests : VerifiableLoggedTest
         var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
 
         var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var methodCalledTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        hubConnection.On("method", async () =>
-        {
-            methodCalledTcs.SetResult();
-            await tcs.Task;
-        });
+        var methodCalledTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        hubConnection.On(
+            "method",
+            async () =>
+            {
+                methodCalledTcs.SetResult();
+                await tcs.Task;
+            }
+        );
 
         await hubConnection.StartAsync().DefaultTimeout();
 
-        await connection.ReceiveJsonMessage(new { type = HubProtocolConstants.InvocationMessageType, target = "method", arguments = new object[] { } }).DefaultTimeout();
+        await connection
+            .ReceiveJsonMessage(
+                new
+                {
+                    type = HubProtocolConstants.InvocationMessageType,
+                    target = "method",
+                    arguments = new object[] { },
+                }
+            )
+            .DefaultTimeout();
 
         await methodCalledTcs.Task.DefaultTimeout();
         await hubConnection.StopAsync().DefaultTimeout();
@@ -128,7 +165,10 @@ public partial class HubConnectionTests : VerifiableLoggedTest
     {
         using (StartVerifiableLog())
         {
-            var hubConnection = CreateHubConnection(new TestConnection(), loggerFactory: LoggerFactory);
+            var hubConnection = CreateHubConnection(
+                new TestConnection(),
+                loggerFactory: LoggerFactory
+            );
 
             await hubConnection.StartAsync().DefaultTimeout();
             var invokeTask = hubConnection.InvokeAsync<int>("testMethod").DefaultTimeout();
@@ -143,14 +183,20 @@ public partial class HubConnectionTests : VerifiableLoggedTest
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return writeContext.LoggerName == typeof(HubConnection).FullName &&
-                   (writeContext.EventId.Name == "ShutdownWithError" ||
-                   writeContext.EventId.Name == "ServerDisconnectedWithError");
+            return writeContext.LoggerName == typeof(HubConnection).FullName
+                && (
+                    writeContext.EventId.Name == "ShutdownWithError"
+                    || writeContext.EventId.Name == "ServerDisconnectedWithError"
+                );
         }
         using (StartVerifiableLog(ExpectedErrors))
         {
             var connection = new TestConnection();
-            var hubConnection = CreateHubConnection(connection, protocol: Mock.Of<IHubProtocol>(), LoggerFactory);
+            var hubConnection = CreateHubConnection(
+                connection,
+                protocol: Mock.Of<IHubProtocol>(),
+                LoggerFactory
+            );
 
             await hubConnection.StartAsync().DefaultTimeout();
             var invokeTask = hubConnection.InvokeAsync<int>("testMethod").DefaultTimeout();
@@ -158,7 +204,9 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var exception = new InvalidOperationException();
             connection.CompleteFromTransport(exception);
 
-            var actualException = await Assert.ThrowsAsync<InvalidOperationException>(async () => await invokeTask);
+            var actualException = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await invokeTask
+            );
             Assert.Equal(exception, actualException);
         }
     }
@@ -168,11 +216,16 @@ public partial class HubConnectionTests : VerifiableLoggedTest
     {
         using (StartVerifiableLog())
         {
-            var hubConnection = CreateHubConnection(new TestConnection(), loggerFactory: LoggerFactory);
+            var hubConnection = CreateHubConnection(
+                new TestConnection(),
+                loggerFactory: LoggerFactory
+            );
 
             await hubConnection.StartAsync().DefaultTimeout();
             var cts = new CancellationTokenSource();
-            var invokeTask = hubConnection.InvokeAsync<int>("testMethod", cancellationToken: cts.Token).DefaultTimeout();
+            var invokeTask = hubConnection
+                .InvokeAsync<int>("testMethod", cancellationToken: cts.Token)
+                .DefaultTimeout();
             cts.Cancel();
 
             await Assert.ThrowsAsync<TaskCanceledException>(async () => await invokeTask);
@@ -188,13 +241,23 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
 
             await hubConnection.StartAsync().DefaultTimeout();
-            await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                hubConnection.InvokeAsync<int>("testMethod", cancellationToken: new CancellationToken(canceled: true)).DefaultTimeout());
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () =>
+                    hubConnection
+                        .InvokeAsync<int>(
+                            "testMethod",
+                            cancellationToken: new CancellationToken(canceled: true)
+                        )
+                        .DefaultTimeout()
+            );
 
             await hubConnection.StopAsync().DefaultTimeout();
 
             // Assert that InvokeAsync didn't send a message
-            Assert.Equal("{\"type\":7}", await connection.ReadSentTextMessageAsync().DefaultTimeout());
+            Assert.Equal(
+                "{\"type\":7}",
+                await connection.ReadSentTextMessageAsync().DefaultTimeout()
+            );
         }
     }
 
@@ -207,13 +270,23 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
 
             await hubConnection.StartAsync().DefaultTimeout();
-            await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                hubConnection.SendAsync("testMethod", cancellationToken: new CancellationToken(canceled: true)).DefaultTimeout());
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () =>
+                    hubConnection
+                        .SendAsync(
+                            "testMethod",
+                            cancellationToken: new CancellationToken(canceled: true)
+                        )
+                        .DefaultTimeout()
+            );
 
             await hubConnection.StopAsync().DefaultTimeout();
 
             // Assert that SendAsync didn't send a message
-            Assert.Equal("{\"type\":7}", await connection.ReadSentTextMessageAsync().DefaultTimeout());
+            Assert.Equal(
+                "{\"type\":7}",
+                await connection.ReadSentTextMessageAsync().DefaultTimeout()
+            );
         }
     }
 
@@ -223,7 +296,15 @@ public partial class HubConnectionTests : VerifiableLoggedTest
         using (StartVerifiableLog())
         {
             // Use pause threshold to block FlushAsync when writing 100+ bytes
-            var connection = new TestConnection(pipeOptions: new PipeOptions(readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, pauseWriterThreshold: 100, useSynchronizationContext: false, resumeWriterThreshold: 50));
+            var connection = new TestConnection(
+                pipeOptions: new PipeOptions(
+                    readerScheduler: PipeScheduler.Inline,
+                    writerScheduler: PipeScheduler.Inline,
+                    pauseWriterThreshold: 100,
+                    useSynchronizationContext: false,
+                    resumeWriterThreshold: 50
+                )
+            );
             var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
 
             await hubConnection.StartAsync().DefaultTimeout();
@@ -249,13 +330,23 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
 
             await hubConnection.StartAsync().DefaultTimeout();
-            await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                hubConnection.StreamAsChannelAsync<int>("testMethod", cancellationToken: new CancellationToken(canceled: true)).DefaultTimeout());
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () =>
+                    hubConnection
+                        .StreamAsChannelAsync<int>(
+                            "testMethod",
+                            cancellationToken: new CancellationToken(canceled: true)
+                        )
+                        .DefaultTimeout()
+            );
 
             await hubConnection.StopAsync().DefaultTimeout();
 
             // Assert that StreamAsChannelAsync didn't send a message
-            Assert.Equal("{\"type\":7}", await connection.ReadSentTextMessageAsync().DefaultTimeout());
+            Assert.Equal(
+                "{\"type\":7}",
+                await connection.ReadSentTextMessageAsync().DefaultTimeout()
+            );
         }
     }
 
@@ -268,13 +359,21 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
 
             await hubConnection.StartAsync().DefaultTimeout();
-            var result = hubConnection.StreamAsync<int>("testMethod", cancellationToken: new CancellationToken(canceled: true));
-            await Assert.ThrowsAsync<TaskCanceledException>(() => result.GetAsyncEnumerator().MoveNextAsync().DefaultTimeout());
+            var result = hubConnection.StreamAsync<int>(
+                "testMethod",
+                cancellationToken: new CancellationToken(canceled: true)
+            );
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => result.GetAsyncEnumerator().MoveNextAsync().DefaultTimeout()
+            );
 
             await hubConnection.StopAsync().DefaultTimeout();
 
             // Assert that StreamAsync didn't send a message
-            Assert.Equal("{\"type\":7}", await connection.ReadSentTextMessageAsync().DefaultTimeout());
+            Assert.Equal(
+                "{\"type\":7}",
+                await connection.ReadSentTextMessageAsync().DefaultTimeout()
+            );
         }
     }
 
@@ -294,15 +393,19 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var task = e.MoveNextAsync();
 
             var item = await connection.ReadSentJsonAsync().DefaultTimeout();
-            await connection.ReceiveJsonMessage(
-                new { type = HubProtocolConstants.CompletionMessageType, invocationId = item["invocationId"] }
-                ).DefaultTimeout();
+            await connection
+                .ReceiveJsonMessage(
+                    new
+                    {
+                        type = HubProtocolConstants.CompletionMessageType,
+                        invocationId = item["invocationId"],
+                    }
+                )
+                .DefaultTimeout();
 
             await task.DefaultTimeout();
 
-            while (await e.MoveNextAsync().DefaultTimeout())
-            {
-            }
+            while (await e.MoveNextAsync().DefaultTimeout()) { }
             // Cancel after stream is completed but before the AsyncEnumerator is disposed
             cts.Cancel();
         }
@@ -326,9 +429,16 @@ public partial class HubConnectionTests : VerifiableLoggedTest
 
             var item = await connection.ReadSentJsonAsync().DefaultTimeout();
             var invocationId = item["invocationId"];
-            await connection.ReceiveJsonMessage(
-                new { type = HubProtocolConstants.StreamItemMessageType, invocationId, item = 1 }
-                ).DefaultTimeout();
+            await connection
+                .ReceiveJsonMessage(
+                    new
+                    {
+                        type = HubProtocolConstants.StreamItemMessageType,
+                        invocationId,
+                        item = 1,
+                    }
+                )
+                .DefaultTimeout();
 
             await task.DefaultTimeout();
             cts.Cancel();
@@ -338,7 +448,9 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             Assert.Equal(invocationId, item["invocationId"]);
 
             // Stream on client-side completes on cancellation
-            await Assert.ThrowsAsync<TaskCanceledException>(async () => await e.MoveNextAsync()).DefaultTimeout();
+            await Assert
+                .ThrowsAsync<TaskCanceledException>(async () => await e.MoveNextAsync())
+                .DefaultTimeout();
         }
     }
 
@@ -347,12 +459,15 @@ public partial class HubConnectionTests : VerifiableLoggedTest
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return writeContext.LoggerName == typeof(HubConnection).FullName &&
-                   writeContext.EventId.Name == "ShutdownWithError";
+            return writeContext.LoggerName == typeof(HubConnection).FullName
+                && writeContext.EventId.Name == "ShutdownWithError";
         }
         using (StartVerifiableLog(ExpectedErrors))
         {
-            var hubConnection = CreateHubConnection(new TestConnection(), loggerFactory: LoggerFactory);
+            var hubConnection = CreateHubConnection(
+                new TestConnection(),
+                loggerFactory: LoggerFactory
+            );
             hubConnection.ServerTimeout = TimeSpan.FromMilliseconds(100);
 
             var closeTcs = new TaskCompletionSource<Exception>();
@@ -367,7 +482,10 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var exception = Assert.IsType<TimeoutException>(await closeTcs.Task.DefaultTimeout());
 
             // We use an interpolated string so the tests are accurate on non-US machines.
-            Assert.Equal($"Server timeout ({hubConnection.ServerTimeout.TotalMilliseconds:0.00}ms) elapsed without receiving a message from the server.", exception.Message);
+            Assert.Equal(
+                $"Server timeout ({hubConnection.ServerTimeout.TotalMilliseconds:0.00}ms) elapsed without receiving a message from the server.",
+                exception.Message
+            );
         }
     }
 
@@ -377,7 +495,9 @@ public partial class HubConnectionTests : VerifiableLoggedTest
         using (StartVerifiableLog())
         {
             var testConnection = new TestConnection();
-            testConnection.Features.Set<IConnectionInherentKeepAliveFeature>(new TestKeepAliveFeature() { HasInherentKeepAlive = true });
+            testConnection.Features.Set<IConnectionInherentKeepAliveFeature>(
+                new TestKeepAliveFeature() { HasInherentKeepAlive = true }
+            );
             var hubConnection = CreateHubConnection(testConnection, loggerFactory: LoggerFactory);
             hubConnection.ServerTimeout = TimeSpan.FromMilliseconds(1);
 
@@ -404,13 +524,16 @@ public partial class HubConnectionTests : VerifiableLoggedTest
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return writeContext.LoggerName == typeof(HubConnection).FullName &&
-                   writeContext.EventId.Name == "ShutdownWithError";
+            return writeContext.LoggerName == typeof(HubConnection).FullName
+                && writeContext.EventId.Name == "ShutdownWithError";
         }
 
         using (StartVerifiableLog(expectedErrorsFilter: ExpectedErrors))
         {
-            var hubConnection = CreateHubConnection(new TestConnection(), loggerFactory: LoggerFactory);
+            var hubConnection = CreateHubConnection(
+                new TestConnection(),
+                loggerFactory: LoggerFactory
+            );
             hubConnection.ServerTimeout = TimeSpan.FromMilliseconds(2000);
 
             await hubConnection.StartAsync().DefaultTimeout();
@@ -421,7 +544,10 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var exception = await Assert.ThrowsAsync<TimeoutException>(() => invokeTask);
 
             // We use an interpolated string so the tests are accurate on non-US machines.
-            Assert.Equal($"Server timeout ({hubConnection.ServerTimeout.TotalMilliseconds:0.00}ms) elapsed without receiving a message from the server.", exception.Message);
+            Assert.Equal(
+                $"Server timeout ({hubConnection.ServerTimeout.TotalMilliseconds:0.00}ms) elapsed without receiving a message from the server.",
+                exception.Message
+            );
         }
     }
 
@@ -457,9 +583,16 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var completion = await connection.ReadSentJsonAsync().DefaultTimeout();
             Assert.Equal(HubProtocolConstants.CompletionMessageType, completion["type"]);
 
-            await connection.ReceiveJsonMessage(
-                new { type = HubProtocolConstants.CompletionMessageType, invocationId = invocation["invocationId"], result = 42 }
-                ).DefaultTimeout();
+            await connection
+                .ReceiveJsonMessage(
+                    new
+                    {
+                        type = HubProtocolConstants.CompletionMessageType,
+                        invocationId = invocation["invocationId"],
+                        result = 42,
+                    }
+                )
+                .DefaultTimeout();
             var result = await invokeTask.DefaultTimeout();
             Assert.Equal(42, result);
         }
@@ -507,7 +640,10 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             await hubConnection.StartAsync().DefaultTimeout();
 
             var channel = Channel.CreateUnbounded<object>();
-            var invokeTask = hubConnection.InvokeAsync<SampleObject>("UploadMethod", channel.Reader);
+            var invokeTask = hubConnection.InvokeAsync<SampleObject>(
+                "UploadMethod",
+                channel.Reader
+            );
 
             var invocation = await connection.ReadSentJsonAsync().DefaultTimeout();
             Assert.Equal(HubProtocolConstants.InvocationMessageType, invocation["type"]);
@@ -530,9 +666,16 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             Assert.Equal(HubProtocolConstants.CompletionMessageType, completion["type"]);
 
             var expected = new SampleObject("oof", 14);
-            await connection.ReceiveJsonMessage(
-                new { type = HubProtocolConstants.CompletionMessageType, invocationId = id, result = expected }
-                ).DefaultTimeout();
+            await connection
+                .ReceiveJsonMessage(
+                    new
+                    {
+                        type = HubProtocolConstants.CompletionMessageType,
+                        invocationId = id,
+                        result = expected,
+                    }
+                )
+                .DefaultTimeout();
             var result = await invokeTask.DefaultTimeout();
 
             Assert.Equal(expected.Foo, result.Foo);
@@ -552,7 +695,11 @@ public partial class HubConnectionTests : VerifiableLoggedTest
 
             var cts = new CancellationTokenSource();
             var channel = Channel.CreateUnbounded<int>();
-            var invokeTask = hubConnection.InvokeAsync<object>("UploadMethod", channel.Reader, cts.Token);
+            var invokeTask = hubConnection.InvokeAsync<object>(
+                "UploadMethod",
+                channel.Reader,
+                cts.Token
+            );
 
             var invokeMessage = await connection.ReadSentJsonAsync().DefaultTimeout();
             Assert.Equal(HubProtocolConstants.InvocationMessageType, invokeMessage["type"]);
@@ -584,7 +731,11 @@ public partial class HubConnectionTests : VerifiableLoggedTest
 
             var cts = new CancellationTokenSource();
             var channel = Channel.CreateUnbounded<int>();
-            var invokeTask = hubConnection.InvokeAsync<object>("UploadMethod", channel.Reader, cts.Token);
+            var invokeTask = hubConnection.InvokeAsync<object>(
+                "UploadMethod",
+                channel.Reader,
+                cts.Token
+            );
 
             var invokeMessage = await connection.ReadSentJsonAsync().DefaultTimeout();
             Assert.Equal(HubProtocolConstants.InvocationMessageType, invokeMessage["type"]);
@@ -594,7 +745,10 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             // the next sent message should be a completion message
             var complete = await connection.ReadSentJsonAsync().DefaultTimeout();
             Assert.Equal(HubProtocolConstants.CompletionMessageType, complete["type"]);
-            Assert.StartsWith("Stream errored by client: 'System.Exception: error from client", ((string)complete["error"]));
+            Assert.StartsWith(
+                "Stream errored by client: 'System.Exception: error from client",
+                ((string)complete["error"])
+            );
         }
     }
 
@@ -648,7 +802,14 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             Assert.Equal(HubProtocolConstants.InvocationMessageType, invocation["type"]);
             var id = invocation["invocationId"];
 
-            await connection.ReceiveJsonMessage(new { type = HubProtocolConstants.CompletionMessageType, invocationId = id, result = 10 });
+            await connection.ReceiveJsonMessage(
+                new
+                {
+                    type = HubProtocolConstants.CompletionMessageType,
+                    invocationId = id,
+                    result = 10,
+                }
+            );
 
             var result = await invokeTask.DefaultTimeout();
             Assert.Equal(10L, result);
@@ -664,9 +825,11 @@ public partial class HubConnectionTests : VerifiableLoggedTest
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return writeContext.LoggerName == typeof(HubConnection).FullName &&
-                   (writeContext.EventId.Name == "ServerDisconnectedWithError"
-                    || writeContext.EventId.Name == "ShutdownWithError");
+            return writeContext.LoggerName == typeof(HubConnection).FullName
+                && (
+                    writeContext.EventId.Name == "ServerDisconnectedWithError"
+                    || writeContext.EventId.Name == "ShutdownWithError"
+                );
         }
         using (StartVerifiableLog(ExpectedErrors))
         {
@@ -685,16 +848,21 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             await channel.Writer.WriteAsync(5);
             await channel.Writer.WriteAsync(10);
 
-            await connection.ReceiveJsonMessage(new { type = HubProtocolConstants.CompletionMessageType, invocationId = id, result = "humbug" });
+            await connection.ReceiveJsonMessage(
+                new
+                {
+                    type = HubProtocolConstants.CompletionMessageType,
+                    invocationId = id,
+                    result = "humbug",
+                }
+            );
 
             try
             {
                 await invokeTask;
                 Assert.True(false);
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
     }
 
@@ -708,23 +876,28 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             await hubConnection.StartAsync().DefaultTimeout();
 
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            hubConnection.On<string>("Echo", async msg =>
-            {
-                try
+            hubConnection.On<string>(
+                "Echo",
+                async msg =>
                 {
-                    // This should be canceled when the connection is closed
-                    await hubConnection.InvokeAsync<string>("Echo", msg).DefaultTimeout();
-                }
-                catch (Exception ex)
-                {
-                    tcs.SetException(ex);
-                    return;
-                }
+                    try
+                    {
+                        // This should be canceled when the connection is closed
+                        await hubConnection.InvokeAsync<string>("Echo", msg).DefaultTimeout();
+                    }
+                    catch (Exception ex)
+                    {
+                        tcs.SetException(ex);
+                        return;
+                    }
 
-                tcs.SetResult();
-            });
+                    tcs.SetResult();
+                }
+            );
 
-            var closedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var closedTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             hubConnection.Closed += _ =>
             {
                 closedTcs.SetResult();
@@ -732,11 +905,22 @@ public partial class HubConnectionTests : VerifiableLoggedTest
                 return Task.CompletedTask;
             };
 
-            await connection.ReceiveJsonMessage(new { type = HubProtocolConstants.InvocationMessageType, target = "Echo", arguments = new object[] { "42" } }).DefaultTimeout();
+            await connection
+                .ReceiveJsonMessage(
+                    new
+                    {
+                        type = HubProtocolConstants.InvocationMessageType,
+                        target = "Echo",
+                        arguments = new object[] { "42" },
+                    }
+                )
+                .DefaultTimeout();
 
             // Read sent message first to make sure invoke has been processed and is waiting for a response
             await connection.ReadSentJsonAsync().DefaultTimeout();
-            await connection.ReceiveJsonMessage(new { type = HubProtocolConstants.CloseMessageType }).DefaultTimeout();
+            await connection
+                .ReceiveJsonMessage(new { type = HubProtocolConstants.CloseMessageType })
+                .DefaultTimeout();
 
             await closedTcs.Task.DefaultTimeout();
 
@@ -750,7 +934,10 @@ public partial class HubConnectionTests : VerifiableLoggedTest
         using (StartVerifiableLog())
         {
             var connection = new TestConnection();
-            await using var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
+            await using var hubConnection = CreateHubConnection(
+                connection,
+                loggerFactory: LoggerFactory
+            );
             await hubConnection.StartAsync().DefaultTimeout();
         }
     }
@@ -760,12 +947,17 @@ public partial class HubConnectionTests : VerifiableLoggedTest
     {
         using (StartVerifiableLog())
         {
-            HttpConnectionOptions originalOptions = null, resolvedOptions = null;
-            var accessTokenFactory = new Func<Task<string>>(() => Task.FromResult("fakeAccessToken"));
+            HttpConnectionOptions originalOptions = null,
+                resolvedOptions = null;
+            var accessTokenFactory = new Func<Task<string>>(
+                () => Task.FromResult("fakeAccessToken")
+            );
             var fakeHeader = "fakeHeader";
 
             var connection = new HubConnectionBuilder()
-                .WithUrl("http://example.com", Http.Connections.HttpTransportType.WebSockets,
+                .WithUrl(
+                    "http://example.com",
+                    Http.Connections.HttpTransportType.WebSockets,
                     options =>
                     {
                         originalOptions = options;
@@ -777,13 +969,16 @@ public partial class HubConnectionTests : VerifiableLoggedTest
                             resolvedOptions = context.Options;
                             return ValueTask.FromResult<WebSocket>(null);
                         };
-                    })
+                    }
+                )
                 .Build();
 
             try
             {
                 // since we returned null WebSocket it would fail
-                await Assert.ThrowsAsync<InvalidOperationException>(() => connection.StartAsync().DefaultTimeout());
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => connection.StartAsync().DefaultTimeout()
+                );
             }
             finally
             {
@@ -794,7 +989,10 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             Assert.NotNull(originalOptions);
             // verify that object was copied
             Assert.NotSame(resolvedOptions, originalOptions);
-            Assert.NotSame(resolvedOptions.AccessTokenProvider, originalOptions.AccessTokenProvider);
+            Assert.NotSame(
+                resolvedOptions.AccessTokenProvider,
+                originalOptions.AccessTokenProvider
+            );
             // verify original object still points to the same provider
             Assert.Same(originalOptions.AccessTokenProvider, accessTokenFactory);
             Assert.Same(resolvedOptions.Headers, originalOptions.Headers);
@@ -812,14 +1010,23 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
             await hubConnection.StartAsync().DefaultTimeout();
 
-            var resultTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            hubConnection.On("Result", async () =>
-            {
-                await resultTcs.Task;
-                return 1;
-            });
+            var resultTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            hubConnection.On(
+                "Result",
+                async () =>
+                {
+                    await resultTcs.Task;
+                    return 1;
+                }
+            );
 
-            await connection.ReceiveTextAsync("{\"type\":1,\"invocationId\":\"1\",\"target\":\"Result\",\"arguments\":[]}\u001e").DefaultTimeout();
+            await connection
+                .ReceiveTextAsync(
+                    "{\"type\":1,\"invocationId\":\"1\",\"target\":\"Result\",\"arguments\":[]}\u001e"
+                )
+                .DefaultTimeout();
 
             // Not sure how to test for unobserved task exceptions, best I could come up with is to check that we log where there once was an unobserved task exception
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
@@ -841,40 +1048,148 @@ public partial class HubConnectionTests : VerifiableLoggedTest
     [Fact]
     public async Task HubConnectionIsMockable()
     {
-        var mockConnection = new Mock<HubConnection>(new Mock<IConnectionFactory>().Object, new Mock<IHubProtocol>().Object, new Mock<EndPoint>().Object,
-            new Mock<IServiceProvider>().Object, new Mock<ILoggerFactory>().Object, new Mock<IRetryPolicy>().Object);
+        var mockConnection = new Mock<HubConnection>(
+            new Mock<IConnectionFactory>().Object,
+            new Mock<IHubProtocol>().Object,
+            new Mock<EndPoint>().Object,
+            new Mock<IServiceProvider>().Object,
+            new Mock<ILoggerFactory>().Object,
+            new Mock<IRetryPolicy>().Object
+        );
 
         mockConnection.Setup(c => c.StartAsync(default)).Returns(() => Task.CompletedTask);
         mockConnection.Setup(c => c.StopAsync(default)).Returns(() => Task.CompletedTask);
         mockConnection.Setup(c => c.DisposeAsync()).Returns(() => ValueTask.CompletedTask);
-        mockConnection.Setup(c => c.On(It.IsAny<string>(), It.IsAny<Type[]>(), It.IsAny<Func<object[], object, Task>>(), It.IsAny<object>()));
+        mockConnection.Setup(c =>
+            c.On(
+                It.IsAny<string>(),
+                It.IsAny<Type[]>(),
+                It.IsAny<Func<object[], object, Task>>(),
+                It.IsAny<object>()
+            )
+        );
         mockConnection.Setup(c => c.Remove(It.IsAny<string>()));
-        mockConnection.Setup(c => c.StreamAsChannelCoreAsync(It.IsAny<string>(), It.IsAny<Type>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
+        mockConnection
+            .Setup(c =>
+                c.StreamAsChannelCoreAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<Type>(),
+                    It.IsAny<object[]>(),
+                    It.IsAny<CancellationToken>()
+                )
+            )
             .Returns(() => Task.FromResult(It.IsAny<ChannelReader<object>>()));
-        mockConnection.Setup(c => c.InvokeCoreAsync(It.IsAny<string>(), It.IsAny<Type>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>())).Returns(() => Task.FromResult(It.IsAny<object>()));
-        mockConnection.Setup(c => c.SendCoreAsync(It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>())).Returns(() => Task.CompletedTask);
-        mockConnection.Setup(c => c.StreamAsyncCore<object>(It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>())).Returns(() => It.IsAny<IAsyncEnumerable<object>>());
+        mockConnection
+            .Setup(c =>
+                c.InvokeCoreAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<Type>(),
+                    It.IsAny<object[]>(),
+                    It.IsAny<CancellationToken>()
+                )
+            )
+            .Returns(() => Task.FromResult(It.IsAny<object>()));
+        mockConnection
+            .Setup(c =>
+                c.SendCoreAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<object[]>(),
+                    It.IsAny<CancellationToken>()
+                )
+            )
+            .Returns(() => Task.CompletedTask);
+        mockConnection
+            .Setup(c =>
+                c.StreamAsyncCore<object>(
+                    It.IsAny<string>(),
+                    It.IsAny<object[]>(),
+                    It.IsAny<CancellationToken>()
+                )
+            )
+            .Returns(() => It.IsAny<IAsyncEnumerable<object>>());
 
         var hubConnection = mockConnection.Object;
         // .On extension method
         _ = hubConnection.On("someMethod", () => { });
         // .On non-extension method
-        _ = hubConnection.On("someMethod2", new Type[] { typeof(int) }, (args, obj) => Task.CompletedTask, 2);
+        _ = hubConnection.On(
+            "someMethod2",
+            new Type[] { typeof(int) },
+            (args, obj) => Task.CompletedTask,
+            2
+        );
         hubConnection.Remove("someMethod");
         await hubConnection.StartAsync();
-        _ = await hubConnection.StreamAsChannelCoreAsync("stream", typeof(int), Array.Empty<object>(), default);
-        _ = await hubConnection.InvokeCoreAsync("test", typeof(int), Array.Empty<object>(), default);
+        _ = await hubConnection.StreamAsChannelCoreAsync(
+            "stream",
+            typeof(int),
+            Array.Empty<object>(),
+            default
+        );
+        _ = await hubConnection.InvokeCoreAsync(
+            "test",
+            typeof(int),
+            Array.Empty<object>(),
+            default
+        );
         await hubConnection.SendCoreAsync("test2", Array.Empty<object>(), default);
         _ = hubConnection.StreamAsyncCore<int>("stream2", Array.Empty<object>(), default);
         await hubConnection.StopAsync();
 
-        mockConnection.Verify(c => c.On("someMethod", It.IsAny<Type[]>(), It.IsAny<Func<object[], object, Task>>(), It.IsAny<object>()), Times.Once);
-        mockConnection.Verify(c => c.On("someMethod2", It.IsAny<Type[]>(), It.IsAny<Func<object[], object, Task>>(), 2), Times.Once);
+        mockConnection.Verify(
+            c =>
+                c.On(
+                    "someMethod",
+                    It.IsAny<Type[]>(),
+                    It.IsAny<Func<object[], object, Task>>(),
+                    It.IsAny<object>()
+                ),
+            Times.Once
+        );
+        mockConnection.Verify(
+            c =>
+                c.On(
+                    "someMethod2",
+                    It.IsAny<Type[]>(),
+                    It.IsAny<Func<object[], object, Task>>(),
+                    2
+                ),
+            Times.Once
+        );
         mockConnection.Verify(c => c.Remove("someMethod"), Times.Once);
-        mockConnection.Verify(c => c.StreamAsChannelCoreAsync("stream", It.IsAny<Type>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()), Times.Once);
-        mockConnection.Verify(c => c.InvokeCoreAsync("test", typeof(int), Array.Empty<object>(), It.IsAny<CancellationToken>()), Times.Once);
-        mockConnection.Verify(c => c.SendCoreAsync("test2", Array.Empty<object>(), It.IsAny<CancellationToken>()), Times.Once);
-        mockConnection.Verify(c => c.StreamAsyncCore<int>("stream2", Array.Empty<object>(), It.IsAny<CancellationToken>()), Times.Once);
+        mockConnection.Verify(
+            c =>
+                c.StreamAsChannelCoreAsync(
+                    "stream",
+                    It.IsAny<Type>(),
+                    It.IsAny<object[]>(),
+                    It.IsAny<CancellationToken>()
+                ),
+            Times.Once
+        );
+        mockConnection.Verify(
+            c =>
+                c.InvokeCoreAsync(
+                    "test",
+                    typeof(int),
+                    Array.Empty<object>(),
+                    It.IsAny<CancellationToken>()
+                ),
+            Times.Once
+        );
+        mockConnection.Verify(
+            c => c.SendCoreAsync("test2", Array.Empty<object>(), It.IsAny<CancellationToken>()),
+            Times.Once
+        );
+        mockConnection.Verify(
+            c =>
+                c.StreamAsyncCore<int>(
+                    "stream2",
+                    Array.Empty<object>(),
+                    It.IsAny<CancellationToken>()
+                ),
+            Times.Once
+        );
         mockConnection.Verify(c => c.StartAsync(It.IsAny<CancellationToken>()), Times.Once);
         mockConnection.Verify(c => c.StopAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
@@ -889,8 +1204,9 @@ public partial class HubConnectionTests : VerifiableLoggedTest
         innerConnection.Features.Set<IStatefulReconnectFeature>(reconnectFeature);
 #pragma warning restore CA2252 // This API requires opting into preview features
 
-        var delegateConnectionFactory = new DelegateConnectionFactory(
-            endPoint => innerConnection.StartAsync());
+        var delegateConnectionFactory = new DelegateConnectionFactory(endPoint =>
+            innerConnection.StartAsync()
+        );
         builder.Services.AddSingleton<IConnectionFactory>(delegateConnectionFactory);
 
         var hubConnection = builder.Build();
@@ -903,7 +1219,9 @@ public partial class HubConnectionTests : VerifiableLoggedTest
 
         await hubConnection.StartAsync().DefaultTimeout();
 
-        await innerConnection.ReceiveJsonMessage(new { type = HubProtocolConstants.CloseMessageType });
+        await innerConnection.ReceiveJsonMessage(
+            new { type = HubProtocolConstants.CloseMessageType }
+        );
 
         var exception = await closedEventTcs.Task.DefaultTimeout();
         Assert.Null(exception);
@@ -921,8 +1239,9 @@ public partial class HubConnectionTests : VerifiableLoggedTest
         innerConnection.Features.Set<IStatefulReconnectFeature>(reconnectFeature);
 #pragma warning restore CA2252 // This API requires opting into preview features
 
-        var delegateConnectionFactory = new DelegateConnectionFactory(
-            endPoint => innerConnection.StartAsync());
+        var delegateConnectionFactory = new DelegateConnectionFactory(endPoint =>
+            innerConnection.StartAsync()
+        );
         builder.Services.AddSingleton<IConnectionFactory>(delegateConnectionFactory);
 
         var hubConnection = builder.Build();
@@ -968,18 +1287,12 @@ public partial class HubConnectionTests : VerifiableLoggedTest
 
         public static MockHubProtocol ReturnOnParse(HubInvocationMessage parsed)
         {
-            return new MockHubProtocol
-            {
-                _parsed = parsed
-            };
+            return new MockHubProtocol { _parsed = parsed };
         }
 
         public static MockHubProtocol Throw(Exception error)
         {
-            return new MockHubProtocol
-            {
-                _error = error
-            };
+            return new MockHubProtocol { _error = error };
         }
 
         public string Name => "MockHubProtocol";
@@ -993,7 +1306,11 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             return true;
         }
 
-        public bool TryParseMessage(ref ReadOnlySequence<byte> input, IInvocationBinder binder, out HubMessage message)
+        public bool TryParseMessage(
+            ref ReadOnlySequence<byte> input,
+            IInvocationBinder binder,
+            out HubMessage message
+        )
         {
             if (_error != null)
             {
@@ -1032,7 +1349,9 @@ public partial class HubConnectionTests : VerifiableLoggedTest
     private sealed class TestReconnectFeature : IStatefulReconnectFeature
 #pragma warning restore CA2252 // This API requires opting into preview features
     {
-        private TaskCompletionSource _disableReconnect = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        private TaskCompletionSource _disableReconnect = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         public Task DisableReconnectCalled => _disableReconnect.Task;
 

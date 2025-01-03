@@ -23,22 +23,28 @@ public static class RelationalForeignKeyExtensions
         this IReadOnlyForeignKey foreignKey,
         IReadOnlyForeignKey duplicateForeignKey,
         in StoreObjectIdentifier storeObject,
-        bool shouldThrow)
+        bool shouldThrow
+    )
     {
         var principalType = foreignKey.PrincipalKey.IsPrimaryKey()
             ? foreignKey.PrincipalEntityType
             : foreignKey.PrincipalKey.DeclaringEntityType;
-        var principalTable = StoreObjectIdentifier.Create(principalType, storeObject.StoreObjectType);
+        var principalTable = StoreObjectIdentifier.Create(
+            principalType,
+            storeObject.StoreObjectType
+        );
 
         var duplicatePrincipalType = duplicateForeignKey.PrincipalKey.IsPrimaryKey()
             ? duplicateForeignKey.PrincipalEntityType
             : duplicateForeignKey.PrincipalKey.DeclaringEntityType;
-        var duplicatePrincipalTable = StoreObjectIdentifier.Create(duplicatePrincipalType, storeObject.StoreObjectType);
+        var duplicatePrincipalTable = StoreObjectIdentifier.Create(
+            duplicatePrincipalType,
+            storeObject.StoreObjectType
+        );
 
         var columnNames = foreignKey.Properties.GetColumnNames(storeObject);
         var duplicateColumnNames = duplicateForeignKey.Properties.GetColumnNames(storeObject);
-        if (columnNames is null
-            || duplicateColumnNames is null)
+        if (columnNames is null || duplicateColumnNames is null)
         {
             if (shouldThrow)
             {
@@ -52,19 +58,23 @@ public static class RelationalForeignKeyExtensions
                             ? foreignKey.GetConstraintName(storeObject, principalTable.Value)
                             : foreignKey.GetDefaultName(),
                         foreignKey.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                        duplicateForeignKey.DeclaringEntityType.GetSchemaQualifiedTableName()));
+                        duplicateForeignKey.DeclaringEntityType.GetSchemaQualifiedTableName()
+                    )
+                );
             }
 
             return false;
         }
 
-        if (principalTable is null
+        if (
+            principalTable is null
             || duplicatePrincipalTable is null
             || principalTable != duplicatePrincipalTable
             || foreignKey.PrincipalKey.Properties.GetColumnNames(principalTable.Value)
                 is not { } principalColumns
             || duplicateForeignKey.PrincipalKey.Properties.GetColumnNames(principalTable.Value)
-                is not { } duplicatePrincipalColumns)
+                is not { } duplicatePrincipalColumns
+        )
         {
             if (shouldThrow)
             {
@@ -79,7 +89,9 @@ public static class RelationalForeignKeyExtensions
                             ? foreignKey.GetConstraintName(storeObject, principalTable.Value)
                             : foreignKey.GetDefaultName(),
                         principalType.GetSchemaQualifiedTableName(),
-                        duplicatePrincipalType.GetSchemaQualifiedTableName()));
+                        duplicatePrincipalType.GetSchemaQualifiedTableName()
+                    )
+                );
             }
 
             return false;
@@ -98,7 +110,9 @@ public static class RelationalForeignKeyExtensions
                         foreignKey.DeclaringEntityType.GetSchemaQualifiedTableName(),
                         foreignKey.GetConstraintName(storeObject, principalTable.Value),
                         foreignKey.Properties.FormatColumns(storeObject),
-                        duplicateForeignKey.Properties.FormatColumns(storeObject)));
+                        duplicateForeignKey.Properties.FormatColumns(storeObject)
+                    )
+                );
             }
 
             return false;
@@ -117,7 +131,11 @@ public static class RelationalForeignKeyExtensions
                         foreignKey.DeclaringEntityType.GetSchemaQualifiedTableName(),
                         foreignKey.GetConstraintName(storeObject, principalTable.Value),
                         foreignKey.PrincipalKey.Properties.FormatColumns(principalTable.Value),
-                        duplicateForeignKey.PrincipalKey.Properties.FormatColumns(principalTable.Value)));
+                        duplicateForeignKey.PrincipalKey.Properties.FormatColumns(
+                            principalTable.Value
+                        )
+                    )
+                );
             }
 
             return false;
@@ -134,14 +152,18 @@ public static class RelationalForeignKeyExtensions
                         duplicateForeignKey.Properties.Format(),
                         duplicateForeignKey.DeclaringEntityType.DisplayName(),
                         foreignKey.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                        foreignKey.GetConstraintName(storeObject, principalTable.Value)));
+                        foreignKey.GetConstraintName(storeObject, principalTable.Value)
+                    )
+                );
             }
 
             return false;
         }
 
         var referentialAction = RelationalModel.ToReferentialAction(foreignKey.DeleteBehavior);
-        var duplicateReferentialAction = RelationalModel.ToReferentialAction(duplicateForeignKey.DeleteBehavior);
+        var duplicateReferentialAction = RelationalModel.ToReferentialAction(
+            duplicateForeignKey.DeleteBehavior
+        );
         if (referentialAction != duplicateReferentialAction)
         {
             if (shouldThrow)
@@ -155,7 +177,9 @@ public static class RelationalForeignKeyExtensions
                         foreignKey.DeclaringEntityType.GetSchemaQualifiedTableName(),
                         foreignKey.GetConstraintName(storeObject, principalTable.Value),
                         referentialAction,
-                        duplicateReferentialAction));
+                        duplicateReferentialAction
+                    )
+                );
             }
 
             return false;
@@ -174,19 +198,20 @@ public static class RelationalForeignKeyExtensions
         this IReadOnlyForeignKey foreignKey,
         in StoreObjectIdentifier storeObject,
         in StoreObjectIdentifier principalStoreObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? logger
+    )
     {
-        if (storeObject.StoreObjectType != StoreObjectType.Table
-            || principalStoreObject.StoreObjectType != StoreObjectType.Table)
+        if (
+            storeObject.StoreObjectType != StoreObjectType.Table
+            || principalStoreObject.StoreObjectType != StoreObjectType.Table
+        )
         {
             return null;
         }
 
         var defaultName = foreignKey.GetDefaultName(storeObject, principalStoreObject, logger);
         var annotation = foreignKey.FindAnnotation(RelationalAnnotationNames.Name);
-        return annotation != null && defaultName != null
-            ? (string?)annotation.Value
-            : defaultName;
+        return annotation != null && defaultName != null ? (string?)annotation.Value : defaultName;
     }
 
     /// <summary>
@@ -199,32 +224,37 @@ public static class RelationalForeignKeyExtensions
         this IReadOnlyForeignKey foreignKey,
         in StoreObjectIdentifier storeObject,
         in StoreObjectIdentifier principalStoreObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? logger
+    )
     {
-        if (storeObject.StoreObjectType != StoreObjectType.Table
+        if (
+            storeObject.StoreObjectType != StoreObjectType.Table
             || principalStoreObject.StoreObjectType != StoreObjectType.Table
-            || foreignKey.DeclaringEntityType.IsMappedToJson())
+            || foreignKey.DeclaringEntityType.IsMappedToJson()
+        )
         {
             return null;
         }
 
         var propertyNames = foreignKey.Properties.GetColumnNames(storeObject);
-        var principalPropertyNames = foreignKey.PrincipalKey.Properties.GetColumnNames(principalStoreObject);
-        if (propertyNames == null
-            || principalPropertyNames == null)
+        var principalPropertyNames = foreignKey.PrincipalKey.Properties.GetColumnNames(
+            principalStoreObject
+        );
+        if (propertyNames == null || principalPropertyNames == null)
         {
             if (logger != null)
             {
                 var principalTable = principalStoreObject;
-                var derivedTables = foreignKey.DeclaringEntityType.GetDerivedTypes()
+                var derivedTables = foreignKey
+                    .DeclaringEntityType.GetDerivedTypes()
                     .Select(t => StoreObjectIdentifier.Create(t, StoreObjectType.Table))
                     .Where(t => t != null);
-                if (foreignKey.GetConstraintName() != null
-                    && derivedTables.All(
-                        t => foreignKey.GetConstraintName(
-                                t!.Value,
-                                principalTable)
-                            == null))
+                if (
+                    foreignKey.GetConstraintName() != null
+                    && derivedTables.All(t =>
+                        foreignKey.GetConstraintName(t!.Value, principalTable) == null
+                    )
+                )
                 {
                     logger.ForeignKeyPropertiesMappedToUnrelatedTables((IForeignKey)foreignKey);
                 }
@@ -233,15 +263,22 @@ public static class RelationalForeignKeyExtensions
             return null;
         }
 
-        if (foreignKey.PrincipalEntityType.GetMappingStrategy() == RelationalAnnotationNames.TpcMappingStrategy
-            && foreignKey.PrincipalEntityType.GetDerivedTypes().Any(et => StoreObjectIdentifier.Create(et, StoreObjectType.Table) != null))
+        if (
+            foreignKey.PrincipalEntityType.GetMappingStrategy()
+                == RelationalAnnotationNames.TpcMappingStrategy
+            && foreignKey
+                .PrincipalEntityType.GetDerivedTypes()
+                .Any(et => StoreObjectIdentifier.Create(et, StoreObjectType.Table) != null)
+        )
         {
             logger?.ForeignKeyTpcPrincipalWarning((IForeignKey)foreignKey);
             return null;
         }
 
-        if (storeObject == principalStoreObject
-            && propertyNames.SequenceEqual(principalPropertyNames))
+        if (
+            storeObject == principalStoreObject
+            && propertyNames.SequenceEqual(principalPropertyNames)
+        )
         {
             // Redundant FK
             return null;
@@ -254,21 +291,33 @@ public static class RelationalForeignKeyExtensions
         for (var i = 0; i < RelationalEntityTypeExtensions.MaxEntityTypesSharingTable; i++)
         {
             IReadOnlyForeignKey? linkedForeignKey = null;
-            foreach (var otherForeignKey in rootForeignKey.DeclaringEntityType
-                         .FindRowInternalForeignKeys(storeObject)
-                         .SelectMany(fk => fk.PrincipalEntityType.GetForeignKeys()))
+            foreach (
+                var otherForeignKey in rootForeignKey
+                    .DeclaringEntityType.FindRowInternalForeignKeys(storeObject)
+                    .SelectMany(fk => fk.PrincipalEntityType.GetForeignKeys())
+            )
             {
-                if (principalStoreObject.Name == otherForeignKey.PrincipalEntityType.GetTableName()
-                    && principalStoreObject.Schema == otherForeignKey.PrincipalEntityType.GetSchema())
+                if (
+                    principalStoreObject.Name == otherForeignKey.PrincipalEntityType.GetTableName()
+                    && principalStoreObject.Schema
+                        == otherForeignKey.PrincipalEntityType.GetSchema()
+                )
                 {
                     var otherColumnNames = otherForeignKey.Properties.GetColumnNames(storeObject);
-                    var otherPrincipalColumnNames = otherForeignKey.PrincipalKey.Properties.GetColumnNames(principalStoreObject);
-                    if (otherColumnNames != null
+                    var otherPrincipalColumnNames =
+                        otherForeignKey.PrincipalKey.Properties.GetColumnNames(
+                            principalStoreObject
+                        );
+                    if (
+                        otherColumnNames != null
                         && otherPrincipalColumnNames != null
                         && propertyNames.SequenceEqual(otherColumnNames)
-                        && principalPropertyNames.SequenceEqual(otherPrincipalColumnNames))
+                        && principalPropertyNames.SequenceEqual(otherPrincipalColumnNames)
+                    )
                     {
-                        var nameAnnotation = otherForeignKey.FindAnnotation(RelationalAnnotationNames.Name);
+                        var nameAnnotation = otherForeignKey.FindAnnotation(
+                            RelationalAnnotationNames.Name
+                        );
                         if (nameAnnotation != null)
                         {
                             return (string?)nameAnnotation.Value;
@@ -289,32 +338,42 @@ public static class RelationalForeignKeyExtensions
         }
 
         var onDependentMainFragment = foreignKey.DeclaringEntityType.IsMainFragment(storeObject);
-        var onPrincipalMainFragment = foreignKey.PrincipalEntityType.IsMainFragment(principalStoreObject);
-        if (foreignKey.PrincipalKey.IsPrimaryKey()
+        var onPrincipalMainFragment = foreignKey.PrincipalEntityType.IsMainFragment(
+            principalStoreObject
+        );
+        if (
+            foreignKey.PrincipalKey.IsPrimaryKey()
             && foreignKey.DeclaringEntityType.FindPrimaryKey() is IKey pk
-            && foreignKey.Properties.SequenceEqual(pk.Properties))
+            && foreignKey.Properties.SequenceEqual(pk.Properties)
+        )
         {
-            if (!foreignKey.PrincipalEntityType.IsAssignableFrom(foreignKey.DeclaringEntityType)
-                && (!onDependentMainFragment
-                    || !onPrincipalMainFragment)
-                && ShareAnyFragments(foreignKey.DeclaringEntityType, foreignKey.PrincipalEntityType))
+            if (
+                !foreignKey.PrincipalEntityType.IsAssignableFrom(foreignKey.DeclaringEntityType)
+                && (!onDependentMainFragment || !onPrincipalMainFragment)
+                && ShareAnyFragments(foreignKey.DeclaringEntityType, foreignKey.PrincipalEntityType)
+            )
             {
                 // Only create table-sharing linking FKs between the main fragments
                 return null;
             }
 
-            if (foreignKey.PrincipalEntityType == foreignKey.DeclaringEntityType
-                && !onPrincipalMainFragment)
+            if (
+                foreignKey.PrincipalEntityType == foreignKey.DeclaringEntityType
+                && !onPrincipalMainFragment
+            )
             {
                 // Only create entity-splitting linking FKs to the main fragment
                 return null;
             }
         }
 
-        if (foreignKey.DeclaringEntityType.GetMappingStrategy() == RelationalAnnotationNames.TptMappingStrategy
+        if (
+            foreignKey.DeclaringEntityType.GetMappingStrategy()
+                == RelationalAnnotationNames.TptMappingStrategy
             && !onDependentMainFragment
             && foreignKey.DeclaringEntityType.FindPrimaryKey() is IKey primaryKey
-            && foreignKey.Properties.SequenceEqual(primaryKey.Properties))
+            && foreignKey.Properties.SequenceEqual(primaryKey.Properties)
+        )
         {
             // The identifying FK constraint is needed to be created only on the table that corresponds
             // to the least derived mapped entity type
@@ -330,9 +389,15 @@ public static class RelationalForeignKeyExtensions
             .AppendJoin(propertyNames, "_")
             .ToString();
 
-        return Uniquifier.Truncate(baseName, foreignKey.DeclaringEntityType.Model.GetMaxIdentifierLength());
+        return Uniquifier.Truncate(
+            baseName,
+            foreignKey.DeclaringEntityType.Model.GetMaxIdentifierLength()
+        );
 
-        static bool ShareAnyFragments(IReadOnlyEntityType entityType1, IReadOnlyEntityType entityType2)
+        static bool ShareAnyFragments(
+            IReadOnlyEntityType entityType1,
+            IReadOnlyEntityType entityType2
+        )
         {
             var commonTables = GetMappedStoreObjects(entityType1, StoreObjectType.Table);
             commonTables.IntersectWith(GetMappedStoreObjects(entityType2, StoreObjectType.Table));
@@ -341,19 +406,22 @@ public static class RelationalForeignKeyExtensions
 
         static HashSet<StoreObjectIdentifier> GetMappedStoreObjects(
             IReadOnlyTypeBase type,
-            StoreObjectType storeObjectType)
-            => AddMappedStoreObjects(type, storeObjectType, new HashSet<StoreObjectIdentifier>());
+            StoreObjectType storeObjectType
+        ) => AddMappedStoreObjects(type, storeObjectType, new HashSet<StoreObjectIdentifier>());
 
         static HashSet<StoreObjectIdentifier> AddMappedStoreObjects(
             IReadOnlyTypeBase type,
             StoreObjectType storeObjectType,
-            HashSet<StoreObjectIdentifier> storeObjects)
+            HashSet<StoreObjectIdentifier> storeObjects
+        )
         {
             var mainStoreObject = StoreObjectIdentifier.Create(type, storeObjectType);
             if (mainStoreObject != null)
             {
                 storeObjects.Add(mainStoreObject.Value);
-                storeObjects.UnionWith(type.GetMappingFragments(StoreObjectType.Table).Select(f => f.StoreObject));
+                storeObjects.UnionWith(
+                    type.GetMappingFragments(StoreObjectType.Table).Select(f => f.StoreObject)
+                );
                 return storeObjects;
             }
 

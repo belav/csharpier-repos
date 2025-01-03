@@ -17,13 +17,13 @@ namespace System.ServiceModel.Channels
         bool useHttpBackedProperty;
 
         public HttpRequestMessageProperty()
-            : this((IHttpHeaderProvider)null)
-        {
-        }
+            : this((IHttpHeaderProvider)null) { }
 
         internal HttpRequestMessageProperty(IHttpHeaderProvider httpHeaderProvider)
         {
-            this.traditionalProperty = new TraditionalHttpRequestMessageProperty(httpHeaderProvider);
+            this.traditionalProperty = new TraditionalHttpRequestMessageProperty(
+                httpHeaderProvider
+            );
             this.useHttpBackedProperty = false;
         }
 
@@ -42,9 +42,9 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                return this.useHttpBackedProperty ?
-                    this.httpBackedProperty.Headers :
-                    this.traditionalProperty.Headers;
+                return this.useHttpBackedProperty
+                    ? this.httpBackedProperty.Headers
+                    : this.traditionalProperty.Headers;
             }
         }
 
@@ -52,11 +52,10 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                return this.useHttpBackedProperty ?
-                    this.httpBackedProperty.Method :
-                    this.traditionalProperty.Method;
+                return this.useHttpBackedProperty
+                    ? this.httpBackedProperty.Method
+                    : this.traditionalProperty.Method;
             }
-
             set
             {
                 if (value == null)
@@ -79,14 +78,12 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                return this.useHttpBackedProperty ?
-                    this.httpBackedProperty.QueryString :
-                    this.traditionalProperty.QueryString;
+                return this.useHttpBackedProperty
+                    ? this.httpBackedProperty.QueryString
+                    : this.traditionalProperty.QueryString;
             }
-
             set
             {
-
                 if (value == null)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
@@ -107,11 +104,10 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                return this.useHttpBackedProperty ?
-                    this.httpBackedProperty.SuppressEntityBody :
-                    this.traditionalProperty.SuppressEntityBody;
+                return this.useHttpBackedProperty
+                    ? this.httpBackedProperty.SuppressEntityBody
+                    : this.traditionalProperty.SuppressEntityBody;
             }
-
             set
             {
                 if (this.useHttpBackedProperty)
@@ -142,7 +138,10 @@ namespace System.ServiceModel.Channels
         {
             HttpRequestMessage httpRequestMessage = null;
 
-            HttpRequestMessageProperty property = message.Properties.GetValue<HttpRequestMessageProperty>(HttpRequestMessageProperty.Name);
+            HttpRequestMessageProperty property =
+                message.Properties.GetValue<HttpRequestMessageProperty>(
+                    HttpRequestMessageProperty.Name
+                );
             if (property != null)
             {
                 httpRequestMessage = property.HttpRequestMessage;
@@ -158,8 +157,7 @@ namespace System.ServiceModel.Channels
 
         IMessageProperty IMessageProperty.CreateCopy()
         {
-            if (!this.useHttpBackedProperty ||
-                !this.initialCopyPerformed)
+            if (!this.useHttpBackedProperty || !this.initialCopyPerformed)
             {
                 this.initialCopyPerformed = true;
                 return this;
@@ -172,18 +170,21 @@ namespace System.ServiceModel.Channels
         {
             // The ImmutableDispatchRuntime will merge MessageProperty instances from the
             //  OperationContext (that were created before the response message was created) with
-            //  MessageProperty instances on the message itself.  The message's version of the 
-            //  HttpRequestMessageProperty may hold a reference to an HttpRequestMessage, and this 
-            //  cannot be discarded, so values from the OperationContext's property must be set on 
+            //  MessageProperty instances on the message itself.  The message's version of the
+            //  HttpRequestMessageProperty may hold a reference to an HttpRequestMessage, and this
+            //  cannot be discarded, so values from the OperationContext's property must be set on
             //  the message's version without completely replacing the message's property.
             if (this.useHttpBackedProperty)
             {
-                HttpRequestMessageProperty requestProperty = propertyToMerge as HttpRequestMessageProperty;
+                HttpRequestMessageProperty requestProperty =
+                    propertyToMerge as HttpRequestMessageProperty;
                 if (requestProperty != null)
                 {
                     if (!requestProperty.useHttpBackedProperty)
                     {
-                        this.httpBackedProperty.MergeWithTraditionalProperty(requestProperty.traditionalProperty);
+                        this.httpBackedProperty.MergeWithTraditionalProperty(
+                            requestProperty.traditionalProperty
+                        );
                         requestProperty.traditionalProperty = null;
                         requestProperty.httpBackedProperty = this.httpBackedProperty;
                         requestProperty.useHttpBackedProperty = true;
@@ -237,11 +238,7 @@ namespace System.ServiceModel.Channels
 
             public string Method
             {
-                get
-                {
-                    return this.method;
-                }
-
+                get { return this.method; }
                 set
                 {
                     this.method = value;
@@ -262,7 +259,10 @@ namespace System.ServiceModel.Channels
 
             public HttpRequestMessageBackedProperty(HttpRequestMessage httpRequestMessage)
             {
-                Fx.Assert(httpRequestMessage != null, "The 'httpRequestMessage' property should never be null.");
+                Fx.Assert(
+                    httpRequestMessage != null,
+                    "The 'httpRequestMessage' property should never be null."
+                );
 
                 this.HttpRequestMessage = httpRequestMessage;
             }
@@ -284,15 +284,8 @@ namespace System.ServiceModel.Channels
 
             public string Method
             {
-                get
-                {
-                    return this.HttpRequestMessage.Method.Method;
-                }
-
-                set
-                {
-                    this.HttpRequestMessage.Method = new HttpMethod(value);
-                }
+                get { return this.HttpRequestMessage.Method.Method; }
+                set { this.HttpRequestMessage.Method = new HttpMethod(value); }
             }
 
             public string QueryString
@@ -300,9 +293,8 @@ namespace System.ServiceModel.Channels
                 get
                 {
                     string query = this.HttpRequestMessage.RequestUri.Query;
-                    return query.Length > 0 ? query.Substring(1) : string.Empty;                  
+                    return query.Length > 0 ? query.Substring(1) : string.Empty;
                 }
-
                 set
                 {
                     UriBuilder uriBuilder = new UriBuilder(this.HttpRequestMessage.RequestUri);
@@ -320,8 +312,10 @@ namespace System.ServiceModel.Channels
                     {
                         long? contentLength = content.Headers.ContentLength;
 
-                        if (!contentLength.HasValue ||
-                            (contentLength.HasValue && contentLength.Value > 0))
+                        if (
+                            !contentLength.HasValue
+                            || (contentLength.HasValue && contentLength.Value > 0)
+                        )
                         {
                             return false;
                         }
@@ -329,16 +323,22 @@ namespace System.ServiceModel.Channels
 
                     return true;
                 }
-
                 set
                 {
                     HttpContent content = this.HttpRequestMessage.Content;
-                    if (value && content != null &&
-                        (!content.Headers.ContentLength.HasValue ||
-                        content.Headers.ContentLength.Value > 0))
+                    if (
+                        value
+                        && content != null
+                        && (
+                            !content.Headers.ContentLength.HasValue
+                            || content.Headers.ContentLength.Value > 0
+                        )
+                    )
                     {
                         HttpContent newContent = new ByteArrayContent(EmptyArray<byte>.Instance);
-                        foreach (KeyValuePair<string, IEnumerable<string>> header in content.Headers)
+                        foreach (
+                            KeyValuePair<string, IEnumerable<string>> header in content.Headers
+                        )
                         {
                             newContent.Headers.AddHeaderWithoutValidation(header);
                         }
@@ -348,7 +348,9 @@ namespace System.ServiceModel.Channels
                     }
                     else if (!value && content == null)
                     {
-                        this.HttpRequestMessage.Content = new ByteArrayContent(EmptyArray<byte>.Instance);
+                        this.HttpRequestMessage.Content = new ByteArrayContent(
+                            EmptyArray<byte>.Instance
+                        );
                     }
                 }
             }
@@ -370,14 +372,19 @@ namespace System.ServiceModel.Channels
                 return copiedProperty;
             }
 
-            public void MergeWithTraditionalProperty(TraditionalHttpRequestMessageProperty propertyToMerge)
+            public void MergeWithTraditionalProperty(
+                TraditionalHttpRequestMessageProperty propertyToMerge
+            )
             {
                 if (propertyToMerge.HasMethodBeenSet)
                 {
                     this.Method = propertyToMerge.Method;
                 }
 
-                if (propertyToMerge.QueryString != TraditionalHttpRequestMessageProperty.DefaultQueryString)
+                if (
+                    propertyToMerge.QueryString
+                    != TraditionalHttpRequestMessageProperty.DefaultQueryString
+                )
                 {
                     this.QueryString = propertyToMerge.QueryString;
                 }

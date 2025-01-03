@@ -5,67 +5,78 @@ using Microsoft.EntityFrameworkCore.TestModels.OptionalDependent;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class OptionalDependentQueryFixtureBase : SharedStoreFixtureBase<OptionalDependentContext>, IQueryFixtureBase
+public abstract class OptionalDependentQueryFixtureBase
+    : SharedStoreFixtureBase<OptionalDependentContext>,
+        IQueryFixtureBase
 {
     private OptionalDependentData _expectedData;
 
-    public Func<DbContext> GetContextCreator()
-        => () => CreateContext();
+    public Func<DbContext> GetContextCreator() => () => CreateContext();
 
-    public virtual ISetSource GetExpectedData()
-        => _expectedData ??= new OptionalDependentData();
+    public virtual ISetSource GetExpectedData() => _expectedData ??= new OptionalDependentData();
 
-    public IReadOnlyDictionary<Type, object> EntitySorters { get; } = new Dictionary<Type, Func<object, object>>
-    {
-        { typeof(OptionalDependentEntityAllOptional), e => ((OptionalDependentEntityAllOptional)e)?.Id },
-        { typeof(OptionalDependentEntitySomeRequired), e => ((OptionalDependentEntitySomeRequired)e)?.Id },
-    }.ToDictionary(e => e.Key, e => (object)e.Value);
-
-    public IReadOnlyDictionary<Type, object> EntityAsserters { get; } = new Dictionary<Type, Action<object, object>>
-    {
+    public IReadOnlyDictionary<Type, object> EntitySorters { get; } =
+        new Dictionary<Type, Func<object, object>>
         {
-            typeof(OptionalDependentEntityAllOptional), (e, a) =>
             {
-                Assert.Equal(e == null, a == null);
-                if (a != null)
+                typeof(OptionalDependentEntityAllOptional),
+                e => ((OptionalDependentEntityAllOptional)e)?.Id
+            },
+            {
+                typeof(OptionalDependentEntitySomeRequired),
+                e => ((OptionalDependentEntitySomeRequired)e)?.Id
+            },
+        }.ToDictionary(e => e.Key, e => (object)e.Value);
+
+    public IReadOnlyDictionary<Type, object> EntityAsserters { get; } =
+        new Dictionary<Type, Action<object, object>>
+        {
+            {
+                typeof(OptionalDependentEntityAllOptional),
+                (e, a) =>
                 {
-                    var ee = (OptionalDependentEntityAllOptional)e;
-                    var aa = (OptionalDependentEntityAllOptional)a;
-
-                    Assert.Equal(ee.Id, aa.Id);
-                    Assert.Equal(ee.Name, aa.Name);
-
-                    if (ee.Json is not null || aa.Json is not null)
+                    Assert.Equal(e == null, a == null);
+                    if (a != null)
                     {
-                        AssertOptionalDependentJsonAllOptional(ee.Json, aa.Json);
+                        var ee = (OptionalDependentEntityAllOptional)e;
+                        var aa = (OptionalDependentEntityAllOptional)a;
+
+                        Assert.Equal(ee.Id, aa.Id);
+                        Assert.Equal(ee.Name, aa.Name);
+
+                        if (ee.Json is not null || aa.Json is not null)
+                        {
+                            AssertOptionalDependentJsonAllOptional(ee.Json, aa.Json);
+                        }
                     }
                 }
-            }
-        },
-        {
-            typeof(OptionalDependentEntitySomeRequired), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-                if (a != null)
+                typeof(OptionalDependentEntitySomeRequired),
+                (e, a) =>
                 {
-                    var ee = (OptionalDependentEntitySomeRequired)e;
-                    var aa = (OptionalDependentEntitySomeRequired)a;
-
-                    Assert.Equal(ee.Id, aa.Id);
-                    Assert.Equal(ee.Name, aa.Name);
-
-                    if (ee.Json is not null || aa.Json is not null)
+                    Assert.Equal(e == null, a == null);
+                    if (a != null)
                     {
-                        AssertOptionalDependentJsonSomeRequired(ee.Json, aa.Json);
+                        var ee = (OptionalDependentEntitySomeRequired)e;
+                        var aa = (OptionalDependentEntitySomeRequired)a;
+
+                        Assert.Equal(ee.Id, aa.Id);
+                        Assert.Equal(ee.Name, aa.Name);
+
+                        if (ee.Json is not null || aa.Json is not null)
+                        {
+                            AssertOptionalDependentJsonSomeRequired(ee.Json, aa.Json);
+                        }
                     }
                 }
-            }
-        },
-    }.ToDictionary(e => e.Key, e => (object)e.Value);
+            },
+        }.ToDictionary(e => e.Key, e => (object)e.Value);
 
     public static void AssertOptionalDependentJsonAllOptional(
         OptionalDependentJsonAllOptional expected,
-        OptionalDependentJsonAllOptional actual)
+        OptionalDependentJsonAllOptional actual
+    )
     {
         Assert.Equal(expected.OpProp1, actual.OpProp1);
         Assert.Equal(expected.OpProp2, actual.OpProp2);
@@ -83,12 +94,12 @@ public abstract class OptionalDependentQueryFixtureBase : SharedStoreFixtureBase
 
     public static void AssertOptionalDependentJsonSomeRequired(
         OptionalDependentJsonSomeRequired expected,
-        OptionalDependentJsonSomeRequired actual)
+        OptionalDependentJsonSomeRequired actual
+    )
     {
         Assert.Equal(expected.OpProp1, actual.OpProp1);
         Assert.Equal(expected.OpProp2, actual.OpProp2);
         Assert.Equal(expected.ReqProp, actual.ReqProp);
-
 
         if (expected.OpNav1 is not null || actual.OpNav1 is not null)
         {
@@ -106,7 +117,8 @@ public abstract class OptionalDependentQueryFixtureBase : SharedStoreFixtureBase
 
     public static void AssertOptionalDependentNestedJsonAllOptional(
         OptionalDependentNestedJsonAllOptional expected,
-        OptionalDependentNestedJsonAllOptional actual)
+        OptionalDependentNestedJsonAllOptional actual
+    )
     {
         Assert.Equal(expected.OpNested1, actual.OpNested1);
         Assert.Equal(expected.OpNested2, actual.OpNested2);
@@ -114,7 +126,8 @@ public abstract class OptionalDependentQueryFixtureBase : SharedStoreFixtureBase
 
     public static void AssertOptionalDependentNestedJsonSomeRequired(
         OptionalDependentNestedJsonSomeRequired expected,
-        OptionalDependentNestedJsonSomeRequired actual)
+        OptionalDependentNestedJsonSomeRequired actual
+    )
     {
         Assert.Equal(expected.OpNested1, actual.OpNested1);
         Assert.Equal(expected.OpNested2, actual.OpNested2);
@@ -124,41 +137,53 @@ public abstract class OptionalDependentQueryFixtureBase : SharedStoreFixtureBase
 
     protected override string StoreName { get; } = "OptionalDependentQueryTest";
 
-    public new RelationalTestStore TestStore
-        => (RelationalTestStore)base.TestStore;
+    public new RelationalTestStore TestStore => (RelationalTestStore)base.TestStore;
 
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-    protected override void Seed(OptionalDependentContext context)
-        => OptionalDependentContext.Seed(context);
+    protected override void Seed(OptionalDependentContext context) =>
+        OptionalDependentContext.Seed(context);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {
-        modelBuilder.Entity<OptionalDependentEntityAllOptional>().Property(x => x.Id).ValueGeneratedNever();
-        modelBuilder.Entity<OptionalDependentEntitySomeRequired>().Property(x => x.Id).ValueGeneratedNever();
+        modelBuilder
+            .Entity<OptionalDependentEntityAllOptional>()
+            .Property(x => x.Id)
+            .ValueGeneratedNever();
+        modelBuilder
+            .Entity<OptionalDependentEntitySomeRequired>()
+            .Property(x => x.Id)
+            .ValueGeneratedNever();
 
-        modelBuilder.Entity<OptionalDependentEntityAllOptional>().OwnsOne(
-            x => x.Json, b =>
-            {
-                b.ToJson();
+        modelBuilder
+            .Entity<OptionalDependentEntityAllOptional>()
+            .OwnsOne(
+                x => x.Json,
+                b =>
+                {
+                    b.ToJson();
 
-                b.OwnsOne(x => x.OpNav1);
-                b.OwnsOne(x => x.OpNav2);
-            });
+                    b.OwnsOne(x => x.OpNav1);
+                    b.OwnsOne(x => x.OpNav2);
+                }
+            );
 
-        modelBuilder.Entity<OptionalDependentEntitySomeRequired>().OwnsOne(
-            x => x.Json, b =>
-            {
-                b.ToJson();
+        modelBuilder
+            .Entity<OptionalDependentEntitySomeRequired>()
+            .OwnsOne(
+                x => x.Json,
+                b =>
+                {
+                    b.ToJson();
 
-                b.OwnsOne(x => x.OpNav1);
-                b.OwnsOne(x => x.OpNav2);
+                    b.OwnsOne(x => x.OpNav1);
+                    b.OwnsOne(x => x.OpNav2);
 
-                b.OwnsOne(x => x.ReqNav1);
-                b.Navigation(x => x.ReqNav1).IsRequired();
-                b.OwnsOne(x => x.ReqNav2);
-                b.Navigation(x => x.ReqNav2).IsRequired();
-            });
+                    b.OwnsOne(x => x.ReqNav1);
+                    b.Navigation(x => x.ReqNav1).IsRequired();
+                    b.OwnsOne(x => x.ReqNav2);
+                    b.Navigation(x => x.ReqNav2).IsRequired();
+                }
+            );
     }
 }

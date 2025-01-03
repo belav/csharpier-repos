@@ -27,28 +27,49 @@ namespace System.Web.WebPages.Html
             return ValidationMessage(name, null, AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
-        public IHtmlString ValidationMessage(string name, IDictionary<string, object> htmlAttributes)
+        public IHtmlString ValidationMessage(
+            string name,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             return ValidationMessage(name, null, htmlAttributes);
         }
 
         public IHtmlString ValidationMessage(string name, string message, object htmlAttributes)
         {
-            return ValidationMessage(name, message, AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return ValidationMessage(
+                name,
+                message,
+                AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
 
-        public IHtmlString ValidationMessage(string name, string message, IDictionary<string, object> htmlAttributes)
+        public IHtmlString ValidationMessage(
+            string name,
+            string message,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
             return BuildValidationMessage(name, message, htmlAttributes);
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-            Justification = "Normalization to lowercase is a common requirement for JavaScript and HTML values")]
-        private IHtmlString BuildValidationMessage(string name, string message, IDictionary<string, object> htmlAttributes)
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "Normalization to lowercase is a common requirement for JavaScript and HTML values"
+        )]
+        private IHtmlString BuildValidationMessage(
+            string name,
+            string message,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             var modelState = ModelState[name];
             IEnumerable<string> errors = null;
@@ -76,59 +97,111 @@ namespace System.Web.WebPages.Html
                 {
                     bool replaceValidationMessageContents = String.IsNullOrEmpty(message);
                     tagBuilder.MergeAttribute("data-valmsg-for", name);
-                    tagBuilder.MergeAttribute("data-valmsg-replace", replaceValidationMessageContents.ToString().ToLowerInvariant());
+                    tagBuilder.MergeAttribute(
+                        "data-valmsg-replace",
+                        replaceValidationMessageContents.ToString().ToLowerInvariant()
+                    );
                 }
-                tagBuilder.AddCssClass(hasError ? ValidationMessageCssClassName : ValidationMessageValidCssClassName);
+                tagBuilder.AddCssClass(
+                    hasError ? ValidationMessageCssClassName : ValidationMessageValidCssClassName
+                );
                 return tagBuilder.ToHtmlString(TagRenderMode.Normal);
             }
         }
 
         public IHtmlString ValidationSummary()
         {
-            return BuildValidationSummary(message: null, excludeFieldErrors: false, htmlAttributes: (IDictionary<string, object>)null);
+            return BuildValidationSummary(
+                message: null,
+                excludeFieldErrors: false,
+                htmlAttributes: (IDictionary<string, object>)null
+            );
         }
 
         public IHtmlString ValidationSummary(string message)
         {
-            return BuildValidationSummary(message: message, excludeFieldErrors: false, htmlAttributes: (IDictionary<string, object>)null);
+            return BuildValidationSummary(
+                message: message,
+                excludeFieldErrors: false,
+                htmlAttributes: (IDictionary<string, object>)null
+            );
         }
 
         public IHtmlString ValidationSummary(bool excludeFieldErrors)
         {
-            return ValidationSummary(message: null, excludeFieldErrors: excludeFieldErrors, htmlAttributes: (IDictionary<string, object>)null);
+            return ValidationSummary(
+                message: null,
+                excludeFieldErrors: excludeFieldErrors,
+                htmlAttributes: (IDictionary<string, object>)null
+            );
         }
 
         public IHtmlString ValidationSummary(object htmlAttributes)
         {
-            return ValidationSummary(message: null, excludeFieldErrors: false, htmlAttributes: htmlAttributes);
+            return ValidationSummary(
+                message: null,
+                excludeFieldErrors: false,
+                htmlAttributes: htmlAttributes
+            );
         }
 
         public IHtmlString ValidationSummary(IDictionary<string, object> htmlAttributes)
         {
-            return ValidationSummary(message: null, excludeFieldErrors: false, htmlAttributes: htmlAttributes);
+            return ValidationSummary(
+                message: null,
+                excludeFieldErrors: false,
+                htmlAttributes: htmlAttributes
+            );
         }
 
         public IHtmlString ValidationSummary(string message, object htmlAttributes)
         {
-            return ValidationSummary(message, excludeFieldErrors: false, htmlAttributes: htmlAttributes);
+            return ValidationSummary(
+                message,
+                excludeFieldErrors: false,
+                htmlAttributes: htmlAttributes
+            );
         }
 
-        public IHtmlString ValidationSummary(string message, IDictionary<string, object> htmlAttributes)
+        public IHtmlString ValidationSummary(
+            string message,
+            IDictionary<string, object> htmlAttributes
+        )
         {
-            return ValidationSummary(message, excludeFieldErrors: false, htmlAttributes: htmlAttributes);
+            return ValidationSummary(
+                message,
+                excludeFieldErrors: false,
+                htmlAttributes: htmlAttributes
+            );
         }
 
-        public IHtmlString ValidationSummary(string message, bool excludeFieldErrors, object htmlAttributes)
+        public IHtmlString ValidationSummary(
+            string message,
+            bool excludeFieldErrors,
+            object htmlAttributes
+        )
         {
-            return ValidationSummary(message, excludeFieldErrors, AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return ValidationSummary(
+                message,
+                excludeFieldErrors,
+                AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
 
-        public IHtmlString ValidationSummary(string message, bool excludeFieldErrors, IDictionary<string, object> htmlAttributes)
+        public IHtmlString ValidationSummary(
+            string message,
+            bool excludeFieldErrors,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             return BuildValidationSummary(message, excludeFieldErrors, htmlAttributes);
         }
 
-        private IHtmlString BuildValidationSummary(string message, bool excludeFieldErrors, IDictionary<string, object> htmlAttributes)
+        private IHtmlString BuildValidationSummary(
+            string message,
+            bool excludeFieldErrors,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             IEnumerable<string> errors = null;
             if (excludeFieldErrors)
@@ -155,7 +228,9 @@ namespace System.Web.WebPages.Html
             {
                 TagBuilder tagBuilder = new TagBuilder("div");
                 tagBuilder.MergeAttributes(htmlAttributes);
-                tagBuilder.AddCssClass(hasErrors ? ValidationSummaryClass : ValidationSummaryValidClass);
+                tagBuilder.AddCssClass(
+                    hasErrors ? ValidationSummaryClass : ValidationSummaryValidClass
+                );
                 if (UnobtrusiveJavaScriptEnabled && !excludeFieldErrors)
                 {
                     tagBuilder.MergeAttribute("data-valmsg-summary", "true");

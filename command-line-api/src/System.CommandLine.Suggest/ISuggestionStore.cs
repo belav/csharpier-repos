@@ -6,7 +6,10 @@ namespace System.CommandLine.Suggest
 {
     public interface ISuggestionStore
     {
-        string GetCompletions(string exeFileName, string suggestionTargetArguments, TimeSpan timeout);
+        string GetCompletions(
+            string exeFileName,
+            string suggestionTargetArguments,
+            TimeSpan timeout
+        );
     }
 }
-

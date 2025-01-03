@@ -14,9 +14,7 @@ public class AntiforgeryValidationException : Exception
     /// </summary>
     /// <param name="message">The message that describes the error.</param>
     public AntiforgeryValidationException(string message)
-        : base(message)
-    {
-    }
+        : base(message) { }
 
     /// <summary>
     /// Creates a new instance of <see cref="AntiforgeryValidationException"/> with the specified
@@ -25,7 +23,5 @@ public class AntiforgeryValidationException : Exception
     /// <param name="message">The message that describes the error.</param>
     /// <param name="innerException">The inner <see cref="Exception"/>.</param>
     public AntiforgeryValidationException(string message, Exception? innerException)
-        : base(message, innerException)
-    {
-    }
+        : base(message, innerException) { }
 }

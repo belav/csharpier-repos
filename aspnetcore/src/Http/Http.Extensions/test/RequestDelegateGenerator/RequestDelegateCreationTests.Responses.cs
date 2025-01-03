@@ -1,14 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.Routing.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.ObjectPool;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Nodes;
 
 namespace Microsoft.AspNetCore.Http.Generators.Tests;
 
@@ -19,19 +19,42 @@ public abstract partial class RequestDelegateCreationTests
     [InlineData(@"app.MapPost(""/hello"", () => ""Hello world!"");", "MapPost", "Hello world!")]
     [InlineData(@"app.MapDelete(""/hello"", () => ""Hello world!"");", "MapDelete", "Hello world!")]
     [InlineData(@"app.MapPut(""/hello"", () => ""Hello world!"");", "MapPut", "Hello world!")]
-    [InlineData(@"app.MapGet(pattern: ""/hello"", handler: () => ""Hello world!"");", "MapGet", "Hello world!")]
-    [InlineData(@"app.MapPost(handler: () => ""Hello world!"", pattern: ""/hello"");", "MapPost", "Hello world!")]
-    [InlineData(@"app.MapDelete(pattern: ""/hello"", handler: () => ""Hello world!"");", "MapDelete", "Hello world!")]
-    [InlineData(@"app.MapPut(handler: () => ""Hello world!"", pattern: ""/hello"");", "MapPut", "Hello world!")]
-    public async Task MapAction_NoParam_StringReturn(string source, string httpMethod, string expectedBody)
+    [InlineData(
+        @"app.MapGet(pattern: ""/hello"", handler: () => ""Hello world!"");",
+        "MapGet",
+        "Hello world!"
+    )]
+    [InlineData(
+        @"app.MapPost(handler: () => ""Hello world!"", pattern: ""/hello"");",
+        "MapPost",
+        "Hello world!"
+    )]
+    [InlineData(
+        @"app.MapDelete(pattern: ""/hello"", handler: () => ""Hello world!"");",
+        "MapDelete",
+        "Hello world!"
+    )]
+    [InlineData(
+        @"app.MapPut(handler: () => ""Hello world!"", pattern: ""/hello"");",
+        "MapPut",
+        "Hello world!"
+    )]
+    public async Task MapAction_NoParam_StringReturn(
+        string source,
+        string httpMethod,
+        string expectedBody
+    )
     {
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(result, (endpointModel) =>
-        {
-            Assert.Equal(httpMethod, endpointModel.HttpMethod);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            (endpointModel) =>
+            {
+                Assert.Equal(httpMethod, endpointModel.HttpMethod);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -53,10 +76,13 @@ app.MapGet("/hello", () => "Hello world!")
         var endpoint = GetEndpointFromCompilation(compilation);
 
         await VerifyAgainstBaselineUsingFile(compilation);
-        VerifyStaticEndpointModel(result, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -69,37 +95,53 @@ app.MapGet("/hello", () => "Hello world!")
     [InlineData(@"app.MapGet(""/"", () => new DateTime(2023, 1, 1));", @"""2023-01-01T00:00:00""")]
     [InlineData(@"app.MapGet(""/"", int () => 123456);", "123456")]
     [InlineData(@"app.MapGet(""/"", bool () => true);", "true")]
-    [InlineData(@"app.MapGet(""/"", DateTime () => new DateTime(2023, 1, 1));", @"""2023-01-01T00:00:00""")]
+    [InlineData(
+        @"app.MapGet(""/"", DateTime () => new DateTime(2023, 1, 1));",
+        @"""2023-01-01T00:00:00"""
+    )]
     public async Task MapAction_NoParam_AnyReturn(string source, string expectedBody)
     {
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(result, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
         await VerifyResponseBodyAsync(httpContext, expectedBody);
     }
 
-    public static IEnumerable<object[]> MapAction_NoParam_ComplexReturn_Data => new List<object[]>()
-    {
-        new object[] { """app.MapGet("/", () => new Todo() { Name = "Test Item"});""" },
-        new object[] { """app.MapGet("/", Todo () => new Todo() { Name = "Test Item"});""" },
-        new object[] { """app.MapGet("/", Todo? () => new Todo() { Name = "Test Item"});""" },
-        new object[] { """
+    public static IEnumerable<object[]> MapAction_NoParam_ComplexReturn_Data =>
+        new List<object[]>()
+        {
+            new object[] { """app.MapGet("/", () => new Todo() { Name = "Test Item"});""" },
+            new object[] { """app.MapGet("/", Todo () => new Todo() { Name = "Test Item"});""" },
+            new object[] { """app.MapGet("/", Todo? () => new Todo() { Name = "Test Item"});""" },
+            new object[]
+            {
+                """
 object GetTodo() => new Todo() { Name = "Test Item"};
 app.MapGet("/", GetTodo);
-"""},
-        new object[] { """
+""",
+            },
+            new object[]
+            {
+                """
 object? GetTodo() => new Todo() { Name = "Test Item"};
 app.MapGet("/", GetTodo);
-"""},
-        new object[] { """app.MapGet("/", IResult () => TypedResults.Ok(new Todo() { Name = "Test Item"}));""" }
-    };
+""",
+            },
+            new object[]
+            {
+                """app.MapGet("/", IResult () => TypedResults.Ok(new Todo() { Name = "Test Item"}));""",
+            },
+        };
 
     [Theory]
     [MemberData(nameof(MapAction_NoParam_ComplexReturn_Data))]
@@ -109,21 +151,25 @@ app.MapGet("/", GetTodo);
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(result, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
         await VerifyResponseBodyAsync(httpContext, expectedBody);
     }
 
-    public static IEnumerable<object[]> MapAction_NoParam_ExtensionResult_Data => new List<object[]>()
-    {
-        new object[] { """app.MapGet("/", () => Results.Extensions.TestResult());""" },
-        new object[] { """app.MapGet("/", () => TypedResults.Extensions.TestResult());""" }
-    };
+    public static IEnumerable<object[]> MapAction_NoParam_ExtensionResult_Data =>
+        new List<object[]>()
+        {
+            new object[] { """app.MapGet("/", () => Results.Extensions.TestResult());""" },
+            new object[] { """app.MapGet("/", () => TypedResults.Extensions.TestResult());""" },
+        };
 
     [Theory]
     [MemberData(nameof(MapAction_NoParam_ExtensionResult_Data))]
@@ -133,25 +179,53 @@ app.MapGet("/", GetTodo);
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(result, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
         await VerifyResponseBodyAsync(httpContext, expectedBody);
     }
 
-    public static IEnumerable<object[]>  MapAction_NoParam_TaskOfTReturn_Data => new List<object[]>()
-    {
-        new object[] { @"app.MapGet(""/"", () => Task.FromResult(""Hello world!""));", "Hello world!" },
-        new object[] { @"app.MapGet(""/"", () => Task.FromResult(new Todo() { Name = ""Test Item"" }));", """{"id":0,"name":"Test Item","isComplete":false}""" },
-        new object[] { @"app.MapGet(""/"", () => Task.FromResult(TypedResults.Ok(new Todo() { Name = ""Test Item"" })));", """{"id":0,"name":"Test Item","isComplete":false}""" },
-        new object[] { @"app.MapGet(""/"", Task<string> () => Task.FromResult(""Hello world!""));", "Hello world!" },
-        new object[] { @"app.MapGet(""/"", Task<Todo> () => Task.FromResult(new Todo() { Name = ""Test Item"" }));", """{"id":0,"name":"Test Item","isComplete":false}""" },
-        new object[] { @"app.MapGet(""/"", Task<Microsoft.AspNetCore.Http.HttpResults.Ok<Todo>> () => Task.FromResult(TypedResults.Ok(new Todo() { Name = ""Test Item"" })));", """{"id":0,"name":"Test Item","isComplete":false}""" }
-    };
+    public static IEnumerable<object[]> MapAction_NoParam_TaskOfTReturn_Data =>
+        new List<object[]>()
+        {
+            new object[]
+            {
+                @"app.MapGet(""/"", () => Task.FromResult(""Hello world!""));",
+                "Hello world!",
+            },
+            new object[]
+            {
+                @"app.MapGet(""/"", () => Task.FromResult(new Todo() { Name = ""Test Item"" }));",
+                """{"id":0,"name":"Test Item","isComplete":false}""",
+            },
+            new object[]
+            {
+                @"app.MapGet(""/"", () => Task.FromResult(TypedResults.Ok(new Todo() { Name = ""Test Item"" })));",
+                """{"id":0,"name":"Test Item","isComplete":false}""",
+            },
+            new object[]
+            {
+                @"app.MapGet(""/"", Task<string> () => Task.FromResult(""Hello world!""));",
+                "Hello world!",
+            },
+            new object[]
+            {
+                @"app.MapGet(""/"", Task<Todo> () => Task.FromResult(new Todo() { Name = ""Test Item"" }));",
+                """{"id":0,"name":"Test Item","isComplete":false}""",
+            },
+            new object[]
+            {
+                @"app.MapGet(""/"", Task<Microsoft.AspNetCore.Http.HttpResults.Ok<Todo>> () => Task.FromResult(TypedResults.Ok(new Todo() { Name = ""Test Item"" })));",
+                """{"id":0,"name":"Test Item","isComplete":false}""",
+            },
+        };
 
     [Theory]
     [MemberData(nameof(MapAction_NoParam_TaskOfTReturn_Data))]
@@ -160,23 +234,39 @@ app.MapGet("/", GetTodo);
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(result, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-            Assert.True(endpointModel.Response.IsAwaitable);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+                Assert.True(endpointModel.Response.IsAwaitable);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
         await VerifyResponseBodyAsync(httpContext, expectedBody);
     }
 
-    public static IEnumerable<object[]> MapAction_NoParam_ValueTaskOfTReturn_Data => new List<object[]>()
-    {
-        new object[] { @"app.MapGet(""/"", () => ValueTask.FromResult(""Hello world!""));", "Hello world!" },
-        new object[] { @"app.MapGet(""/"", () => ValueTask.FromResult(new Todo() { Name = ""Test Item""}));", """{"id":0,"name":"Test Item","isComplete":false}""" },
-        new object[] { @"app.MapGet(""/"", () => ValueTask.FromResult(TypedResults.Ok(new Todo() { Name = ""Test Item""})));", """{"id":0,"name":"Test Item","isComplete":false}""" }
-    };
+    public static IEnumerable<object[]> MapAction_NoParam_ValueTaskOfTReturn_Data =>
+        new List<object[]>()
+        {
+            new object[]
+            {
+                @"app.MapGet(""/"", () => ValueTask.FromResult(""Hello world!""));",
+                "Hello world!",
+            },
+            new object[]
+            {
+                @"app.MapGet(""/"", () => ValueTask.FromResult(new Todo() { Name = ""Test Item""}));",
+                """{"id":0,"name":"Test Item","isComplete":false}""",
+            },
+            new object[]
+            {
+                @"app.MapGet(""/"", () => ValueTask.FromResult(TypedResults.Ok(new Todo() { Name = ""Test Item""})));",
+                """{"id":0,"name":"Test Item","isComplete":false}""",
+            },
+        };
 
     [Theory]
     [MemberData(nameof(MapAction_NoParam_ValueTaskOfTReturn_Data))]
@@ -185,26 +275,54 @@ app.MapGet("/", GetTodo);
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(result, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-            Assert.True(endpointModel.Response.IsAwaitable);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+                Assert.True(endpointModel.Response.IsAwaitable);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
         await VerifyResponseBodyAsync(httpContext, expectedBody);
     }
 
-    public static IEnumerable<object[]> MapAction_NoParam_TaskLikeOfObjectReturn_Data => new List<object[]>()
-    {
-        new object[] { @"app.MapGet(""/"", () => new ValueTask<object>(""Hello world!""));", "Hello world!" },
-        new object[] { @"app.MapGet(""/"", () => Task<object>.FromResult(""Hello world!""));", "Hello world!" },
-        new object[] { @"app.MapGet(""/"", () => new ValueTask<object>(new Todo() { Name = ""Test Item""}));", """{"id":0,"name":"Test Item","isComplete":false}""" },
-        new object[] { @"app.MapGet(""/"", () => Task<object>.FromResult(new Todo() { Name = ""Test Item""}));", """{"id":0,"name":"Test Item","isComplete":false}""" },
-        new object[] { @"app.MapGet(""/"", () => new ValueTask<object>(TypedResults.Ok(new Todo() { Name = ""Test Item""})));", """{"id":0,"name":"Test Item","isComplete":false}""" },
-        new object[] { @"app.MapGet(""/"", () => Task<object>.FromResult(TypedResults.Ok(new Todo() { Name = ""Test Item""})));", """{"id":0,"name":"Test Item","isComplete":false}""" }
-    };
+    public static IEnumerable<object[]> MapAction_NoParam_TaskLikeOfObjectReturn_Data =>
+        new List<object[]>()
+        {
+            new object[]
+            {
+                @"app.MapGet(""/"", () => new ValueTask<object>(""Hello world!""));",
+                "Hello world!",
+            },
+            new object[]
+            {
+                @"app.MapGet(""/"", () => Task<object>.FromResult(""Hello world!""));",
+                "Hello world!",
+            },
+            new object[]
+            {
+                @"app.MapGet(""/"", () => new ValueTask<object>(new Todo() { Name = ""Test Item""}));",
+                """{"id":0,"name":"Test Item","isComplete":false}""",
+            },
+            new object[]
+            {
+                @"app.MapGet(""/"", () => Task<object>.FromResult(new Todo() { Name = ""Test Item""}));",
+                """{"id":0,"name":"Test Item","isComplete":false}""",
+            },
+            new object[]
+            {
+                @"app.MapGet(""/"", () => new ValueTask<object>(TypedResults.Ok(new Todo() { Name = ""Test Item""})));",
+                """{"id":0,"name":"Test Item","isComplete":false}""",
+            },
+            new object[]
+            {
+                @"app.MapGet(""/"", () => Task<object>.FromResult(TypedResults.Ok(new Todo() { Name = ""Test Item""})));",
+                """{"id":0,"name":"Test Item","isComplete":false}""",
+            },
+        };
 
     [Theory]
     [MemberData(nameof(MapAction_NoParam_TaskLikeOfObjectReturn_Data))]
@@ -213,11 +331,14 @@ app.MapGet("/", GetTodo);
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(result, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-            Assert.True(endpointModel.Response.IsAwaitable);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+                Assert.True(endpointModel.Response.IsAwaitable);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -234,19 +355,25 @@ app.MapGet("/value-task", () => ValueTask.CompletedTask);
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoints = GetEndpointsFromCompilation(compilation);
 
-        VerifyStaticEndpointModels(result, endpointModels => Assert.Collection(endpointModels,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-                Assert.True(endpointModel.Response.IsAwaitable);
-                Assert.True(endpointModel.Response.HasNoResponse);
-            },
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-                Assert.True(endpointModel.Response.IsAwaitable);
-                Assert.True(endpointModel.Response.HasNoResponse);
-            }));
+        VerifyStaticEndpointModels(
+            result,
+            endpointModels =>
+                Assert.Collection(
+                    endpointModels,
+                    endpointModel =>
+                    {
+                        Assert.Equal("MapGet", endpointModel.HttpMethod);
+                        Assert.True(endpointModel.Response.IsAwaitable);
+                        Assert.True(endpointModel.Response.HasNoResponse);
+                    },
+                    endpointModel =>
+                    {
+                        Assert.Equal("MapGet", endpointModel.HttpMethod);
+                        Assert.True(endpointModel.Response.IsAwaitable);
+                        Assert.True(endpointModel.Response.HasNoResponse);
+                    }
+                )
+        );
 
         var httpContext = CreateHttpContext();
         await endpoints[0].RequestDelegate(httpContext);
@@ -261,39 +388,86 @@ app.MapGet("/value-task", () => ValueTask.CompletedTask);
     {
         get
         {
-            yield return new[] { "TestAction", """Todo TestAction() => new Todo { Name = "Write even more tests!" };""" };
-            yield return new[] { "TaskTestAction", """Task<Todo> TaskTestAction() => Task.FromResult(new Todo { Name = "Write even more tests!" });""" };
-            yield return new[] { "ValueTaskTestAction", """ValueTask<Todo> ValueTaskTestAction() => ValueTask.FromResult(new Todo { Name = "Write even more tests!" });""" };
+            yield return new[]
+            {
+                "TestAction",
+                """Todo TestAction() => new Todo { Name = "Write even more tests!" };""",
+            };
+            yield return new[]
+            {
+                "TaskTestAction",
+                """Task<Todo> TaskTestAction() => Task.FromResult(new Todo { Name = "Write even more tests!" });""",
+            };
+            yield return new[]
+            {
+                "ValueTaskTestAction",
+                """ValueTask<Todo> ValueTaskTestAction() => ValueTask.FromResult(new Todo { Name = "Write even more tests!" });""",
+            };
 
-            yield return new[] { "StaticTestAction", """static Todo StaticTestAction() => new Todo { Name = "Write even more tests!" };""" };
-            yield return new[] { "StaticTaskTestAction", """static Task<Todo> StaticTaskTestAction() => Task.FromResult(new Todo { Name = "Write even more tests!" });""" };
-            yield return new[] { "StaticValueTaskTestAction", """static ValueTask<Todo> StaticValueTaskTestAction() => ValueTask.FromResult(new Todo { Name = "Write even more tests!" });""" };
+            yield return new[]
+            {
+                "StaticTestAction",
+                """static Todo StaticTestAction() => new Todo { Name = "Write even more tests!" };""",
+            };
+            yield return new[]
+            {
+                "StaticTaskTestAction",
+                """static Task<Todo> StaticTaskTestAction() => Task.FromResult(new Todo { Name = "Write even more tests!" });""",
+            };
+            yield return new[]
+            {
+                "StaticValueTaskTestAction",
+                """static ValueTask<Todo> StaticValueTaskTestAction() => ValueTask.FromResult(new Todo { Name = "Write even more tests!" });""",
+            };
 
-            yield return new[] { "TestAction", """Todo TestAction() => new JsonTodoChild { Name = "Write even more tests!", Child = "With type hierarchies!" };""" };
+            yield return new[]
+            {
+                "TestAction",
+                """Todo TestAction() => new JsonTodoChild { Name = "Write even more tests!", Child = "With type hierarchies!" };""",
+            };
 
-            yield return new[] { "TaskTestAction", """Task<Todo> TaskTestAction() => Task.FromResult<Todo>(new JsonTodoChild { Name = "Write even more tests!", Child = "With type hierarchies!" });""" };
-            yield return new[] { "TaskTestActionAwaited", """
+            yield return new[]
+            {
+                "TaskTestAction",
+                """Task<Todo> TaskTestAction() => Task.FromResult<Todo>(new JsonTodoChild { Name = "Write even more tests!", Child = "With type hierarchies!" });""",
+            };
+            yield return new[]
+            {
+                "TaskTestActionAwaited",
+                """
                     async Task<Todo> TaskTestActionAwaited()
                     {
                         await Task.Yield();
                         return new JsonTodoChild { Name = "Write even more tests!", Child = "With type hierarchies!" };
                     }
-                    """ };
+                    """,
+            };
 
-            yield return new[] { "ValueTaskTestAction", """ValueTask<Todo> ValueTaskTestAction() => ValueTask.FromResult<Todo>(new JsonTodoChild { Name = "Write even more tests!", Child = "With type hierarchies!" });""" };
-            yield return new[] { "ValueTaskTestActionAwaited", """
+            yield return new[]
+            {
+                "ValueTaskTestAction",
+                """ValueTask<Todo> ValueTaskTestAction() => ValueTask.FromResult<Todo>(new JsonTodoChild { Name = "Write even more tests!", Child = "With type hierarchies!" });""",
+            };
+            yield return new[]
+            {
+                "ValueTaskTestActionAwaited",
+                """
                     async ValueTask<Todo> ValueTaskTestActionAwaited()
                     {
                         await Task.Yield();
                         return new JsonTodoChild { Name = "Write even more tests!", Child = "With type hierarchies!" };
                     }
-                    """ };
+                    """,
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(JsonContextActions))]
-    public async Task RequestDelegateWritesAsJsonResponseBody_WithJsonSerializerContext(string delegateName, string delegateSource)
+    public async Task RequestDelegateWritesAsJsonResponseBody_WithJsonSerializerContext(
+        string delegateName,
+        string delegateSource
+    )
     {
         var source = $"""
 app.MapGet("/test", {delegateName});
@@ -304,7 +478,9 @@ app.MapGet("/test", {delegateName});
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.ConfigureHttpJsonOptions(o => o.SerializerOptions.TypeInfoResolver = SharedTestJsonContext.Default);
+            serviceCollection.ConfigureHttpJsonOptions(o =>
+                o.SerializerOptions.TypeInfoResolver = SharedTestJsonContext.Default
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
@@ -312,10 +488,10 @@ app.MapGet("/test", {delegateName});
 
         await endpoint.RequestDelegate(httpContext);
 
-        var deserializedResponseBody = JsonSerializer.Deserialize<Todo>(((MemoryStream)httpContext.Response.Body).ToArray(), new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        });
+        var deserializedResponseBody = JsonSerializer.Deserialize<Todo>(
+            ((MemoryStream)httpContext.Response.Body).ToArray(),
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+        );
 
         Assert.NotNull(deserializedResponseBody);
         Assert.Equal("Write even more tests!", deserializedResponseBody!.Name);
@@ -346,7 +522,10 @@ static async IAsyncEnumerable<JsonTodo> GetTodosAsync()
             {
                 serviceCollection.ConfigureHttpJsonOptions(o =>
                 {
-                    o.SerializerOptions.TypeInfoResolverChain.Insert(0, SharedTestJsonContext.Default);
+                    o.SerializerOptions.TypeInfoResolverChain.Insert(
+                        0,
+                        SharedTestJsonContext.Default
+                    );
                     o.SerializerOptions.TypeInfoResolver = SharedTestJsonContext.Default;
                 });
             }
@@ -357,14 +536,17 @@ static async IAsyncEnumerable<JsonTodo> GetTodosAsync()
 
         await endpoint.RequestDelegate(httpContext);
 
-        var expectedBody = """[{"id":1,"name":"One","isComplete":true},{"$type":"JsonTodoChild","child":"TwoChild","id":2,"name":"Two","isComplete":false}]""";
+        var expectedBody =
+            """[{"id":1,"name":"One","isComplete":true},{"$type":"JsonTodoChild","child":"TwoChild","id":2,"name":"Two","isComplete":false}]""";
         await VerifyResponseBodyAsync(httpContext, expectedBody);
     }
 
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task RequestDelegateWritesAsJsonResponseBody_UnspeakableType_InFilter(bool useJsonContext)
+    public async Task RequestDelegateWritesAsJsonResponseBody_UnspeakableType_InFilter(
+        bool useJsonContext
+    )
     {
         var source = """
 app.MapGet("/todos", () => "not going to be returned")
@@ -379,7 +561,9 @@ app.MapGet("/todos", () => "not going to be returned")
         {
             if (useJsonContext)
             {
-                serviceCollection.ConfigureHttpJsonOptions(o => o.SerializerOptions.TypeInfoResolver = SharedTestJsonContext.Default);
+                serviceCollection.ConfigureHttpJsonOptions(o =>
+                    o.SerializerOptions.TypeInfoResolver = SharedTestJsonContext.Default
+                );
             }
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
@@ -388,10 +572,13 @@ app.MapGet("/todos", () => "not going to be returned")
 
         await endpoint.RequestDelegate(httpContext);
 
-        await VerifyResponseJsonBodyAsync<Todo>(httpContext, (todo) =>
-        {
-            Assert.Equal("Write even more tests!", todo.Name);
-        });
+        await VerifyResponseJsonBodyAsync<Todo>(
+            httpContext,
+            (todo) =>
+            {
+                Assert.Equal("Write even more tests!", todo.Name);
+            }
+        );
     }
 
     [Fact]
@@ -442,14 +629,14 @@ static ValueTask<Todo> StaticValueTaskTestAction() => ValueTask.FromResult(new T
 """;
 
             return new List<object[]>
-                {
-                    new object[] { testAction },
-                    new object[] { taskTestAction },
-                    new object[] { valueTaskTestAction },
-                    new object[] { staticTestAction },
-                    new object[] { staticTaskTestAction },
-                    new object[] { staticValueTaskTestAction }
-                };
+            {
+                new object[] { testAction },
+                new object[] { taskTestAction },
+                new object[] { valueTaskTestAction },
+                new object[] { staticTestAction },
+                new object[] { staticTaskTestAction },
+                new object[] { staticValueTaskTestAction },
+            };
         }
     }
 
@@ -464,11 +651,14 @@ static ValueTask<Todo> StaticValueTaskTestAction() => ValueTask.FromResult(new T
 
         await endpoint.RequestDelegate(httpContext);
 
-        await VerifyResponseJsonBodyAsync<Todo>(httpContext, (todo) =>
-        {
-            Assert.NotNull(todo);
-            Assert.Equal("Write even more tests!", todo!.Name);
-        });
+        await VerifyResponseJsonBodyAsync<Todo>(
+            httpContext,
+            (todo) =>
+            {
+                Assert.NotNull(todo);
+                Assert.Equal("Write even more tests!", todo!.Name);
+            }
+        );
     }
 
     [Fact]
@@ -485,13 +675,16 @@ app.MapPost("/", () => new TodoStruct(42, "Bob", true, TodoStatus.Done));
 
         await endpoint.RequestDelegate(httpContext);
 
-        await VerifyResponseJsonBodyAsync<TodoStruct>(httpContext, (todo) =>
-        {
-            Assert.Equal(42, todo.Id);
-            Assert.Equal("Bob", todo.Name);
-            Assert.True(todo.IsComplete);
-            Assert.Equal(TodoStatus.Done, todo.Status);
-        });
+        await VerifyResponseJsonBodyAsync<TodoStruct>(
+            httpContext,
+            (todo) =>
+            {
+                Assert.Equal(42, todo.Id);
+                Assert.Equal("Bob", todo.Name);
+                Assert.True(todo.IsComplete);
+                Assert.Equal(TodoStatus.Done, todo.Status);
+            }
+        );
     }
 
     public static IEnumerable<object[]> ChildResult
@@ -547,10 +740,10 @@ app.MapPost("/", async ValueTask<Todo> () => {
             return new List<object[]>
             {
                 new object[] { testAction },
-                new object[] { taskTestAction},
-                new object[] { taskTestActionAwaited},
-                new object[] { valueTaskTestAction},
-                new object[] { valueTaskTestActionAwaited},
+                new object[] { taskTestAction },
+                new object[] { taskTestActionAwaited },
+                new object[] { valueTaskTestAction },
+                new object[] { valueTaskTestActionAwaited },
             };
         }
     }
@@ -566,12 +759,15 @@ app.MapPost("/", async ValueTask<Todo> () => {
 
         await endpoint.RequestDelegate(httpContext);
 
-        await VerifyResponseJsonBodyAsync<TodoChild>(httpContext, (todo) =>
-        {
-            Assert.NotNull(todo);
-            Assert.Equal("Write even more tests!", todo!.Name);
-            Assert.Equal("With type hierarchies!", todo!.Child);
-        });
+        await VerifyResponseJsonBodyAsync<TodoChild>(
+            httpContext,
+            (todo) =>
+            {
+                Assert.NotNull(todo);
+                Assert.Equal("Write even more tests!", todo!.Name);
+                Assert.Equal("With type hierarchies!", todo!.Child);
+            }
+        );
     }
 
     public static IEnumerable<object[]> PolymorphicResult
@@ -625,19 +821,21 @@ app.MapPost("/", async ValueTask<JsonTodo> () => {
 """;
 
             return new List<object[]>
-                {
-                    new object[] { testAction },
-                    new object[] { taskTestAction},
-                    new object[] { taskTestActionAwaited},
-                    new object[] { valueTaskTestAction},
-                    new object[] { valueTaskTestActionAwaited},
-                };
+            {
+                new object[] { testAction },
+                new object[] { taskTestAction },
+                new object[] { taskTestActionAwaited },
+                new object[] { valueTaskTestAction },
+                new object[] { valueTaskTestActionAwaited },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(PolymorphicResult))]
-    public async Task RequestDelegateWritesMembersFromChildTypesToJsonResponseBody_WithJsonPolymorphicOptionsAndConfiguredJsonOptions(string source)
+    public async Task RequestDelegateWritesMembersFromChildTypesToJsonResponseBody_WithJsonPolymorphicOptionsAndConfiguredJsonOptions(
+        string source
+    )
     {
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -650,17 +848,22 @@ app.MapPost("/", async ValueTask<JsonTodo> () => {
 
         await endpoint.RequestDelegate(httpContext);
 
-        await VerifyResponseJsonBodyAsync<JsonTodoChild>(httpContext, (todo) =>
-        {
-            Assert.NotNull(todo);
-            Assert.Equal("Write even more tests!", todo!.Name);
-            Assert.Equal("With type hierarchies!", todo!.Child);
-        });
+        await VerifyResponseJsonBodyAsync<JsonTodoChild>(
+            httpContext,
+            (todo) =>
+            {
+                Assert.NotNull(todo);
+                Assert.Equal("Write even more tests!", todo!.Name);
+                Assert.Equal("With type hierarchies!", todo!.Child);
+            }
+        );
     }
 
     [Theory]
     [MemberData(nameof(PolymorphicResult))]
-    public async Task RequestDelegateWritesJsonTypeDiscriminatorToJsonResponseBody_WithJsonPolymorphicOptionsAndConfiguredJsonOptions(string source)
+    public async Task RequestDelegateWritesJsonTypeDiscriminatorToJsonResponseBody_WithJsonPolymorphicOptionsAndConfiguredJsonOptions(
+        string source
+    )
     {
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -673,13 +876,15 @@ app.MapPost("/", async ValueTask<JsonTodo> () => {
 
         await endpoint.RequestDelegate(httpContext);
 
-        await VerifyResponseJsonNodeAsync(httpContext, (node) =>
-        {
-            Assert.NotNull(node);
-            Assert.NotNull(node["$type"]);
-            Assert.Equal(nameof(JsonTodoChild), node["$type"]!.GetValue<string>());
-
-        });
+        await VerifyResponseJsonNodeAsync(
+            httpContext,
+            (node) =>
+            {
+                Assert.NotNull(node);
+                Assert.NotNull(node["$type"]);
+                Assert.Equal(nameof(JsonTodoChild), node["$type"]!.GetValue<string>());
+            }
+        );
     }
 
     public static IEnumerable<object[]> StringResult
@@ -729,20 +934,17 @@ static ValueTask<object> StaticValueTaskTestAction() => ValueTask.FromResult<obj
 """;
 
             return new List<object[]>
-                {
-                    new object[] { testAction },
-                    new object[] { taskTestAction },
-                    new object[] { valueTaskTestAction },
-                    new object[] { staticTestAction },
-                    new object[] { staticTaskTestAction },
-                    new object[] { staticValueTaskTestAction },
-
-                    new object[] { staticStringAsObjectTestAction },
-
-                    new object[] { staticStringAsTaskObjectTestAction },
-                    new object[] { staticStringAsValueTaskObjectTestAction },
-
-                };
+            {
+                new object[] { testAction },
+                new object[] { taskTestAction },
+                new object[] { valueTaskTestAction },
+                new object[] { staticTestAction },
+                new object[] { staticTaskTestAction },
+                new object[] { staticValueTaskTestAction },
+                new object[] { staticStringAsObjectTestAction },
+                new object[] { staticStringAsTaskObjectTestAction },
+                new object[] { staticStringAsValueTaskObjectTestAction },
+            };
         }
     }
 
@@ -812,14 +1014,14 @@ static ValueTask<bool> StaticValueTaskTestAction() => ValueTask.FromResult(true)
 """;
 
             return new List<object[]>
-                {
-                    new object[] { testAction },
-                    new object[] { taskTestAction },
-                    new object[] { valueTaskTestAction },
-                    new object[] { staticTestAction },
-                    new object[] { staticTaskTestAction },
-                    new object[] { staticValueTaskTestAction },
-                };
+            {
+                new object[] { testAction },
+                new object[] { taskTestAction },
+                new object[] { valueTaskTestAction },
+                new object[] { staticTestAction },
+                new object[] { staticTaskTestAction },
+                new object[] { staticValueTaskTestAction },
+            };
         }
     }
 
@@ -868,14 +1070,14 @@ static ValueTask<int> StaticValueTaskTestAction() => ValueTask.FromResult(42);
 """;
 
             return new List<object[]>
-                {
-                    new object[] { testAction },
-                    new object[] { taskTestAction },
-                    new object[] { valueTaskTestAction },
-                    new object[] { staticTestAction },
-                    new object[] { staticTaskTestAction },
-                    new object[] { staticValueTaskTestAction },
-                };
+            {
+                new object[] { testAction },
+                new object[] { taskTestAction },
+                new object[] { valueTaskTestAction },
+                new object[] { staticTestAction },
+                new object[] { staticTaskTestAction },
+                new object[] { staticValueTaskTestAction },
+            };
         }
     }
 
@@ -946,18 +1148,18 @@ app.MapPost("/", TodoStruct? () => null);
 """;
 
             return new List<object[]>
-                {
-                    new object[] { testBoolAction },
-                    new object[] { testTaskBoolAction },
-                    new object[] { testValueTaskBoolAction },
-                    new object[] { testIntAction },
-                    new object[] { testTaskIntAction },
-                    new object[] { testValueTaskIntAction },
-                    new object[] { testTodoAction },
-                    new object[] { testTaskTodoAction },
-                    new object[] { testValueTaskTodoAction },
-                    new object[] { testTodoStructAction },
-                };
+            {
+                new object[] { testBoolAction },
+                new object[] { testTaskBoolAction },
+                new object[] { testValueTaskBoolAction },
+                new object[] { testIntAction },
+                new object[] { testTaskIntAction },
+                new object[] { testValueTaskIntAction },
+                new object[] { testTodoAction },
+                new object[] { testTaskTodoAction },
+                new object[] { testValueTaskTodoAction },
+                new object[] { testTodoStructAction },
+            };
         }
     }
 
@@ -981,16 +1183,25 @@ app.MapPost("/", TodoStruct? () => null);
     [InlineData(@"app.MapGet(""/"", () => Console.WriteLine(""Returns void""));", null)]
     [InlineData(@"app.MapGet(""/"", () => TypedResults.Ok(""Alright!""));", null)]
     [InlineData(@"app.MapGet(""/"", () => Results.NotFound(""Oops!""));", null)]
-    [InlineData(@"app.MapGet(""/"", () => Task.FromResult(new Todo() { Name = ""Test Item""}));", "application/json")]
+    [InlineData(
+        @"app.MapGet(""/"", () => Task.FromResult(new Todo() { Name = ""Test Item""}));",
+        "application/json"
+    )]
     [InlineData(@"app.MapGet(""/"", () => ""Hello world!"");", "text/plain; charset=utf-8")]
-    public async Task MapAction_ProducesCorrectContentType(string source, string expectedContentType)
+    public async Task MapAction_ProducesCorrectContentType(
+        string source,
+        string expectedContentType
+    )
     {
         var (result, compilation) = await RunGeneratorAsync(source);
 
-        VerifyStaticEndpointModel(result, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-            Assert.Equal(expectedContentType, endpointModel.Response.ContentType);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+                Assert.Equal(expectedContentType, endpointModel.Response.ContentType);
+            }
+        );
     }
 }

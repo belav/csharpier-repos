@@ -7,17 +7,20 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 {
     public abstract record SimpleTypeSpec : TypeSpec
     {
-        public SimpleTypeSpec(ITypeSymbol type) : base(type) { }
+        public SimpleTypeSpec(ITypeSymbol type)
+            : base(type) { }
     }
 
     internal sealed record ConfigurationSectionSpec : SimpleTypeSpec
     {
-        public ConfigurationSectionSpec(ITypeSymbol type) : base(type) { }
+        public ConfigurationSectionSpec(ITypeSymbol type)
+            : base(type) { }
     }
 
     public sealed record ParsableFromStringSpec : SimpleTypeSpec
     {
-        public ParsableFromStringSpec(ITypeSymbol type) : base(type) { }
+        public ParsableFromStringSpec(ITypeSymbol type)
+            : base(type) { }
 
         public required StringParsableTypeKind StringParsableTypeKind { get; init; }
     }

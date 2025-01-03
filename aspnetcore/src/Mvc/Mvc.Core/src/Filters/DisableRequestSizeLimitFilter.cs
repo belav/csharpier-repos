@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Mvc.Filters;
 /// A filter that sets <see cref="IHttpMaxRequestBodySizeFeature.MaxRequestBodySize"/>
 /// to <c>null</c>.
 /// </summary>
-internal sealed partial class DisableRequestSizeLimitFilter : IAuthorizationFilter, IRequestSizePolicy
+internal sealed partial class DisableRequestSizeLimitFilter
+    : IAuthorizationFilter,
+        IRequestSizePolicy
 {
     private readonly ILogger _logger;
 
@@ -36,11 +38,17 @@ internal sealed partial class DisableRequestSizeLimitFilter : IAuthorizationFilt
         var effectivePolicy = context.FindEffectivePolicy<IRequestSizePolicy>();
         if (effectivePolicy != null && effectivePolicy != this)
         {
-            Log.NotMostEffectiveFilter(_logger, GetType(), effectivePolicy.GetType(), typeof(IRequestSizePolicy));
+            Log.NotMostEffectiveFilter(
+                _logger,
+                GetType(),
+                effectivePolicy.GetType(),
+                typeof(IRequestSizePolicy)
+            );
             return;
         }
 
-        var maxRequestBodySizeFeature = context.HttpContext.Features.Get<IHttpMaxRequestBodySizeFeature>();
+        var maxRequestBodySizeFeature =
+            context.HttpContext.Features.Get<IHttpMaxRequestBodySizeFeature>();
 
         if (maxRequestBodySizeFeature == null)
         {
@@ -59,16 +67,41 @@ internal sealed partial class DisableRequestSizeLimitFilter : IAuthorizationFilt
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Warning, "A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.", EventName = "FeatureNotFound")]
+        [LoggerMessage(
+            1,
+            LogLevel.Warning,
+            "A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.",
+            EventName = "FeatureNotFound"
+        )]
         public static partial void FeatureNotFound(ILogger logger);
 
-        [LoggerMessage(2, LogLevel.Warning, "A request body size limit could not be applied. The IHttpRequestBodySizeFeature for the server is read-only.", EventName = "FeatureIsReadOnly")]
+        [LoggerMessage(
+            2,
+            LogLevel.Warning,
+            "A request body size limit could not be applied. The IHttpRequestBodySizeFeature for the server is read-only.",
+            EventName = "FeatureIsReadOnly"
+        )]
         public static partial void FeatureIsReadOnly(ILogger logger);
 
-        [LoggerMessage(3, LogLevel.Debug, "The request body size limit has been disabled.", EventName = "RequestBodySizeLimitDisabled")]
+        [LoggerMessage(
+            3,
+            LogLevel.Debug,
+            "The request body size limit has been disabled.",
+            EventName = "RequestBodySizeLimitDisabled"
+        )]
         public static partial void RequestBodySizeLimitDisabled(ILogger logger);
 
-        [LoggerMessage(4, LogLevel.Debug, "Execution of filter {OverriddenFilter} is preempted by filter {OverridingFilter} which is the most effective filter implementing policy {FilterPolicy}.", EventName = "NotMostEffectiveFilter")]
-        public static partial void NotMostEffectiveFilter(ILogger logger, Type overriddenFilter, Type overridingFilter, Type filterPolicy);
+        [LoggerMessage(
+            4,
+            LogLevel.Debug,
+            "Execution of filter {OverriddenFilter} is preempted by filter {OverridingFilter} which is the most effective filter implementing policy {FilterPolicy}.",
+            EventName = "NotMostEffectiveFilter"
+        )]
+        public static partial void NotMostEffectiveFilter(
+            ILogger logger,
+            Type overriddenFilter,
+            Type overridingFilter,
+            Type filterPolicy
+        );
     }
 }

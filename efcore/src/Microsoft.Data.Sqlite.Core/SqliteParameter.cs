@@ -29,9 +29,7 @@ namespace Microsoft.Data.Sqlite
         ///     Initializes a new instance of the <see cref="SqliteParameter" /> class.
         /// </summary>
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/parameters">Parameters</seealso>
-        public SqliteParameter()
-        {
-        }
+        public SqliteParameter() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteParameter" /> class.
@@ -66,8 +64,7 @@ namespace Microsoft.Data.Sqlite
         /// <param name="size">The maximum size, in bytes, of the parameter.</param>
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/parameters">Parameters</seealso>
         public SqliteParameter(string? name, SqliteType type, int size)
-            : this(name, type)
-            => Size = size;
+            : this(name, type) => Size = size;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteParameter" /> class.
@@ -78,8 +75,7 @@ namespace Microsoft.Data.Sqlite
         /// <param name="sourceColumn">The source column used for loading the value. Can be null.</param>
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/parameters">Parameters</seealso>
         public SqliteParameter(string? name, SqliteType type, int size, string? sourceColumn)
-            : this(name, type, size)
-            => SourceColumn = sourceColumn;
+            : this(name, type, size) => SourceColumn = sourceColumn;
 
         /// <summary>
         ///     Gets or sets the type of the parameter.
@@ -139,14 +135,13 @@ namespace Microsoft.Data.Sqlite
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/parameters">Parameters</seealso>
         public override int Size
         {
-            get
-                => _size
-                    ?? (_value is string stringValue
-                        ? stringValue.Length
-                        : _value is byte[] byteArray
-                            ? byteArray.Length
-                            : 0);
-
+            get =>
+                _size
+                ?? (
+                    _value is string stringValue ? stringValue.Length
+                    : _value is byte[] byteArray ? byteArray.Length
+                    : 0
+                );
             set
             {
                 if (value < -1)
@@ -191,8 +186,7 @@ namespace Microsoft.Data.Sqlite
         /// <summary>
         ///     Resets the <see cref="DbType" /> property to its original value.
         /// </summary>
-        public override void ResetDbType()
-            => ResetSqliteType();
+        public override void ResetDbType() => ResetSqliteType();
 
         /// <summary>
         ///     Resets the <see cref="SqliteType" /> property to its original value.
@@ -211,8 +205,7 @@ namespace Microsoft.Data.Sqlite
             }
 
             var index = sqlite3_bind_parameter_index(stmt, ParameterName);
-            if (index == 0
-                && (index = FindPrefixedParameter(stmt)) == 0)
+            if (index == 0 && (index = FindPrefixedParameter(stmt)) == 0)
             {
                 return false;
             }
@@ -252,7 +245,9 @@ namespace Microsoft.Data.Sqlite
 
                 if (index != 0)
                 {
-                    throw new InvalidOperationException(Resources.AmbiguousParameterName(ParameterName));
+                    throw new InvalidOperationException(
+                        Resources.AmbiguousParameterName(ParameterName)
+                    );
                 }
 
                 index = nextIndex;

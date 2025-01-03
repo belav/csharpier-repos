@@ -53,15 +53,78 @@ public class UrlPrefixTests
     [InlineData("http://+", "http", "+", "80", "/", "http://+:80/")]
     [InlineData("http://*", "http", "*", "80", "/", "http://*:80/")]
     [InlineData("http://localhost", "http", "localhost", "80", "/", "http://localhost:80/")]
-    [InlineData("http://www.example.com", "http", "www.example.com", "80", "/", "http://www.example.com:80/")]
-    [InlineData("https://www.example.com", "https", "www.example.com", "443", "/", "https://www.example.com:443/")]
-    [InlineData("http://www.example.com/", "http", "www.example.com", "80", "/", "http://www.example.com:80/")]
-    [InlineData("http://www.example.com/foo?bar=baz", "http", "www.example.com", "80", "/foo?bar=baz/", "http://www.example.com:80/foo?bar=baz/")]
-    [InlineData("http://www.example.com:5000", "http", "www.example.com", "5000", "/", "http://www.example.com:5000/")]
-    [InlineData("https://www.example.com:5000", "https", "www.example.com", "5000", "/", "https://www.example.com:5000/")]
-    [InlineData("http://www.example.com:5000/", "http", "www.example.com", "5000", "/", "http://www.example.com:5000/")]
-    [InlineData("http://www.example.com/foo:bar", "http", "www.example.com", "80", "/foo:bar/", "http://www.example.com:80/foo:bar/")]
-    public void UrlsAreParsedCorrectly(string url, string scheme, string host, string port, string pathBase, string toString)
+    [InlineData(
+        "http://www.example.com",
+        "http",
+        "www.example.com",
+        "80",
+        "/",
+        "http://www.example.com:80/"
+    )]
+    [InlineData(
+        "https://www.example.com",
+        "https",
+        "www.example.com",
+        "443",
+        "/",
+        "https://www.example.com:443/"
+    )]
+    [InlineData(
+        "http://www.example.com/",
+        "http",
+        "www.example.com",
+        "80",
+        "/",
+        "http://www.example.com:80/"
+    )]
+    [InlineData(
+        "http://www.example.com/foo?bar=baz",
+        "http",
+        "www.example.com",
+        "80",
+        "/foo?bar=baz/",
+        "http://www.example.com:80/foo?bar=baz/"
+    )]
+    [InlineData(
+        "http://www.example.com:5000",
+        "http",
+        "www.example.com",
+        "5000",
+        "/",
+        "http://www.example.com:5000/"
+    )]
+    [InlineData(
+        "https://www.example.com:5000",
+        "https",
+        "www.example.com",
+        "5000",
+        "/",
+        "https://www.example.com:5000/"
+    )]
+    [InlineData(
+        "http://www.example.com:5000/",
+        "http",
+        "www.example.com",
+        "5000",
+        "/",
+        "http://www.example.com:5000/"
+    )]
+    [InlineData(
+        "http://www.example.com/foo:bar",
+        "http",
+        "www.example.com",
+        "80",
+        "/foo:bar/",
+        "http://www.example.com:80/foo:bar/"
+    )]
+    public void UrlsAreParsedCorrectly(
+        string url,
+        string scheme,
+        string host,
+        string port,
+        string pathBase,
+        string toString
+    )
     {
         var urlPrefix = UrlPrefix.Create(url);
 

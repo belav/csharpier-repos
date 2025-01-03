@@ -2,15 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Buffers;
 using System.Diagnostics.Tracing;
-using System.Threading.Channels;
-using System.Text;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
-using System.Buffers;
+using System.Text;
+using System.Threading;
+using System.Threading.Channels;
+using System.Threading.Tasks;
 using Microsoft.Extensions.ObjectPool;
 
 namespace HttpStress
@@ -23,7 +23,8 @@ namespace HttpStress
         private FileStream _log;
         private Channel<string> _messagesChannel = Channel.CreateUnbounded<string>();
         private Task _processMessages;
-        private DefaultObjectPool<StringBuilder> _stringBuilderPool = new DefaultObjectPool<StringBuilder>(new StringBuilderPooledObjectPolicy());
+        private DefaultObjectPool<StringBuilder> _stringBuilderPool =
+            new DefaultObjectPool<StringBuilder>(new StringBuilderPooledObjectPolicy());
 
         private FileStream CreateNextLogFileStream()
         {
@@ -47,7 +48,8 @@ namespace HttpStress
                 try
                 {
                     File.Delete(filename);
-                } catch {}
+                }
+                catch { }
             }
             _log = CreateNextLogFileStream();
             _messagesChannel = Channel.CreateUnbounded<string>();
@@ -56,8 +58,10 @@ namespace HttpStress
 
         protected override void OnEventSourceCreated(EventSource eventSource)
         {
-            if (eventSource.Name == "Private.InternalDiagnostics.System.Net.Http" ||
-                eventSource.Name == "Private.InternalDiagnostics.System.Net.Quic")
+            if (
+                eventSource.Name == "Private.InternalDiagnostics.System.Net.Http"
+                || eventSource.Name == "Private.InternalDiagnostics.System.Net.Quic"
+            )
             {
                 EnableEvents(eventSource, EventLevel.LogAlways);
             }

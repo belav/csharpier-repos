@@ -39,7 +39,9 @@ public class MessagePumpTests : LoggedTest
     [InlineData("invalid address")]
     [InlineData("")]
     [InlineData(null)]
-    public void DoesNotOverrideDirectConfigurationWithIServerAddressesFeature_IfPreferHostinUrlsFalse(string overrideAddress)
+    public void DoesNotOverrideDirectConfigurationWithIServerAddressesFeature_IfPreferHostinUrlsFalse(
+        string overrideAddress
+    )
     {
         var serverAddress = "http://localhost:11002/";
 
@@ -77,7 +79,9 @@ public class MessagePumpTests : LoggedTest
     [InlineData("invalid address")]
     [InlineData("")]
     [InlineData(null)]
-    public void OverridingIServerAddressesFeatureWithDirectConfiguration_WarnsOnStart(string serverAddress)
+    public void OverridingIServerAddressesFeatureWithDirectConfiguration_WarnsOnStart(
+        string serverAddress
+    )
     {
         var overrideAddress = "http://localhost:11002/";
 
@@ -117,8 +121,10 @@ public class MessagePumpTests : LoggedTest
             server.StartAsync(new DummyApplication(), CancellationToken.None).Wait();
 
             // Trailing slash is added when put in UrlPrefix.
-            Assert.StartsWith(Constants.DefaultServerAddress, server.Features.Get<IServerAddressesFeature>().Addresses.Single());
+            Assert.StartsWith(
+                Constants.DefaultServerAddress,
+                server.Features.Get<IServerAddressesFeature>().Addresses.Single()
+            );
         }
     }
-
 }

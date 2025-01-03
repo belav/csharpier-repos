@@ -5,9 +5,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -115,7 +115,7 @@ public abstract class JsonResultExecutorTestBase
         var result = new JsonResult(new { foo = "abcd" });
         result.ContentType = new MediaTypeHeaderValue("text/json")
         {
-            Encoding = Encoding.ASCII
+            Encoding = Encoding.ASCII,
         }.ToString();
         var executor = CreateExecutor();
 
@@ -155,7 +155,8 @@ public abstract class JsonResultExecutorTestBase
     [InlineData("text/foo; p1=p1-value", "text/foo; p1=p1-value")]
     public async Task ExecuteAsync_NoResultContentTypeSet_UsesDefaultEncoding_DoesNotSetCharset(
         string responseContentType,
-        string expectedContentType)
+        string expectedContentType
+    )
     {
         // Arrange
         var expected = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(new { foo = "abcd" }));
@@ -179,9 +180,12 @@ public abstract class JsonResultExecutorTestBase
     public async Task ExecuteAsync_UsesPassedInSerializerSettings()
     {
         // Arrange
-        var expected = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(
-            new { foo = "abcd" },
-            new JsonSerializerOptions { WriteIndented = true }));
+        var expected = Encoding.UTF8.GetBytes(
+            JsonSerializer.Serialize(
+                new { foo = "abcd" },
+                new JsonSerializerOptions { WriteIndented = true }
+            )
+        );
 
         var context = GetActionContext();
 
@@ -220,7 +224,9 @@ public abstract class JsonResultExecutorTestBase
         }
         catch (Exception serializerException)
         {
-            var expectedException = Assert.IsType<NotImplementedException>(serializerException.InnerException);
+            var expectedException = Assert.IsType<NotImplementedException>(
+                serializerException.InnerException
+            );
             Assert.Equal("Property Age has not been implemented", expectedException.Message);
         }
 
@@ -269,10 +275,21 @@ public abstract class JsonResultExecutorTestBase
     public async Task ExecuteAsync_LargePayload_DoesNotPerformSynchronousWrites()
     {
         // Arrange
-        var model = Enumerable.Range(0, 1000).Select(p => new TestModel { Property = new string('a', 5000) }).ToArray();
+        var model = Enumerable
+            .Range(0, 1000)
+            .Select(p => new TestModel { Property = new string('a', 5000) })
+            .ToArray();
 
         var stream = new Mock<Stream>();
-        stream.Setup(v => v.WriteAsync(It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<CancellationToken>()))
+        stream
+            .Setup(v =>
+                v.WriteAsync(
+                    It.IsAny<byte[]>(),
+                    It.IsAny<int>(),
+                    It.IsAny<int>(),
+                    It.IsAny<CancellationToken>()
+                )
+            )
             .Returns(Task.CompletedTask)
             .Verifiable();
         stream.SetupGet(s => s.CanWrite).Returns(true);
@@ -286,7 +303,10 @@ public abstract class JsonResultExecutorTestBase
         await executor.ExecuteAsync(context, result);
 
         // Assert
-        stream.Verify(v => v.Write(It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>()), Times.Never());
+        stream.Verify(
+            v => v.Write(It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>()),
+            Times.Never()
+        );
         stream.Verify(v => v.Flush(), Times.Never());
     }
 
@@ -300,10 +320,15 @@ public abstract class JsonResultExecutorTestBase
         var executor = CreateExecutor();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => executor.ExecuteAsync(context, result));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => executor.ExecuteAsync(context, result)
+        );
 
         // Assert
-        Assert.StartsWith("Property 'JsonResult.SerializerSettings' must be an instance of type", ex.Message);
+        Assert.StartsWith(
+            "Property 'JsonResult.SerializerSettings' must be an instance of type",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -379,7 +404,9 @@ public abstract class JsonResultExecutorTestBase
         Assert.InRange(written.Length, 0, 1);
         Assert.False(iterated);
 
-        async IAsyncEnumerable<int> AsyncEnumerableClosedConnection([EnumeratorCancellation] CancellationToken cancellationToken = default)
+        async IAsyncEnumerable<int> AsyncEnumerableClosedConnection(
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
+        )
         {
             await Task.Yield();
             cts.Cancel();
@@ -413,7 +440,9 @@ public abstract class JsonResultExecutorTestBase
         Assert.InRange(written.Length, 0, 2);
         Assert.False(iterated);
 
-        async IAsyncEnumerable<int> AsyncEnumerableClosedConnection([EnumeratorCancellation] CancellationToken cancellationToken = default)
+        async IAsyncEnumerable<int> AsyncEnumerableClosedConnection(
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
+        )
         {
             await Task.Yield();
             cts.Cancel();
@@ -435,9 +464,13 @@ public abstract class JsonResultExecutorTestBase
         var executor = CreateExecutor();
 
         // Act & Assert
-        await Assert.ThrowsAsync<OperationCanceledException>(() => executor.ExecuteAsync(context, result));
+        await Assert.ThrowsAsync<OperationCanceledException>(
+            () => executor.ExecuteAsync(context, result)
+        );
 
-        async IAsyncEnumerable<int> AsyncEnumerableThrows([EnumeratorCancellation] CancellationToken cancellationToken = default)
+        async IAsyncEnumerable<int> AsyncEnumerableThrows(
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
+        )
         {
             await Task.Yield();
             yield return 1;
@@ -462,7 +495,9 @@ public abstract class JsonResultExecutorTestBase
         // System.Text.Json might write the '[' before cancellation is observed (utf-16 means 2 bytes per character)
         Assert.InRange(written.Length, 0, 2);
 
-        async IAsyncEnumerable<int> AsyncEnumerableThrows([EnumeratorCancellation] CancellationToken cancellationToken = default)
+        async IAsyncEnumerable<int> AsyncEnumerableThrows(
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
+        )
         {
             await Task.Yield();
             cts.Cancel();
@@ -471,9 +506,12 @@ public abstract class JsonResultExecutorTestBase
         }
     }
 
-    protected IActionResultExecutor<JsonResult> CreateExecutor() => CreateExecutor(NullLoggerFactory.Instance);
+    protected IActionResultExecutor<JsonResult> CreateExecutor() =>
+        CreateExecutor(NullLoggerFactory.Instance);
 
-    protected abstract IActionResultExecutor<JsonResult> CreateExecutor(ILoggerFactory loggerFactory);
+    protected abstract IActionResultExecutor<JsonResult> CreateExecutor(
+        ILoggerFactory loggerFactory
+    );
 
     private static HttpContext GetHttpContext()
     {
@@ -506,7 +544,9 @@ public abstract class JsonResultExecutorTestBase
         {
             get
             {
-                throw new NotImplementedException($"Property {nameof(Age)} has not been implemented");
+                throw new NotImplementedException(
+                    $"Property {nameof(Age)} has not been implemented"
+                );
             }
         }
     }

@@ -46,7 +46,9 @@ namespace System.Xml.Linq.xNodeReader.Tests
         {
             XmlReader dataReader = GetReaderFromXDocumentAndPositionOnElementZero();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => dataReader.GetAttribute(dataReader.AttributeCount));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => dataReader.GetAttribute(dataReader.AttributeCount)
+            );
         }
 
         [Fact]
@@ -54,7 +56,9 @@ namespace System.Xml.Linq.xNodeReader.Tests
         {
             XmlReader dataReader = GetReaderFromXDocumentAndPositionOnElementOne();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => dataReader.GetAttribute(dataReader.AttributeCount + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => dataReader.GetAttribute(dataReader.AttributeCount + 1)
+            );
         }
 
         [Fact]
@@ -70,7 +74,9 @@ namespace System.Xml.Linq.xNodeReader.Tests
         {
             XmlReader dataReader = GetReaderFromXDocumentAndPositionOnElementOne();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => dataReader[dataReader.AttributeCount + 1]);
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => dataReader[dataReader.AttributeCount + 1]
+            );
         }
 
         [Fact]
@@ -182,13 +188,16 @@ namespace System.Xml.Linq.xNodeReader.Tests
         {
             var xNode = new List<XNode>
             {
-                new XDocument(new XDocumentType("root", "", "", "<!ELEMENT root ANY>"), new XElement("root")),
+                new XDocument(
+                    new XDocumentType("root", "", "", "<!ELEMENT root ANY>"),
+                    new XElement("root")
+                ),
                 new XElement("elem1"),
                 new XText("text1"),
                 new XComment("comment1"),
                 new XProcessingInstruction("pi1", "pi1pi1pi1pi1pi1"),
                 new XCData("cdata cdata"),
-                new XDocumentType("dtd1", "dtd1dtd1dtd1", "dtd1dtd1", "dtd1dtd1dtd1dtd1")
+                new XDocumentType("dtd1", "dtd1dtd1dtd1", "dtd1dtd1", "dtd1dtd1dtd1dtd1"),
             };
 
             return xNode;

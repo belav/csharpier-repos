@@ -16,16 +16,28 @@ namespace System.Web.WebPages.Administration.Test
         public void ConstructorThrowsIfRemoteSourceIsNullOrEmpty()
         {
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => new WebProjectManager((string)null, "foo"), "remoteSource");
-            Assert.ThrowsArgumentNullOrEmptyString(() => new WebProjectManager("", @"D:\baz"), "remoteSource");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new WebProjectManager((string)null, "foo"),
+                "remoteSource"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new WebProjectManager("", @"D:\baz"),
+                "remoteSource"
+            );
         }
 
         [Fact]
         public void ConstructorThrowsIfSiteRootIsNullOrEmpty()
         {
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => new WebProjectManager("foo", null), "siteRoot");
-            Assert.ThrowsArgumentNullOrEmptyString(() => new WebProjectManager("foo", ""), "siteRoot");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new WebProjectManager("foo", null),
+                "siteRoot"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new WebProjectManager("foo", ""),
+                "siteRoot"
+            );
         }
 
         [Fact]
@@ -33,11 +45,13 @@ namespace System.Web.WebPages.Administration.Test
         {
             // Arrange
             var projectManager = new Mock<IProjectManager>();
-            projectManager.Setup(p => p.AddPackageReference("A", new SemanticVersion("1.0"), false, false)).Verifiable();
+            projectManager
+                .Setup(p => p.AddPackageReference("A", new SemanticVersion("1.0"), false, false))
+                .Verifiable();
 
             var webProjectManager = new WebProjectManager(projectManager.Object, @"x:\")
             {
-                DoNotAddBindingRedirects = true
+                DoNotAddBindingRedirects = true,
             };
 
             var packageFile1 = new Mock<IPackageFile>();
@@ -49,7 +63,9 @@ namespace System.Web.WebPages.Administration.Test
             var package = new Mock<IPackage>();
             package.Setup(p => p.Id).Returns("A");
             package.Setup(p => p.Version).Returns(new SemanticVersion("1.0"));
-            package.Setup(p => p.GetFiles()).Returns(new[] { packageFile1.Object, packageFile2.Object });
+            package
+                .Setup(p => p.GetFiles())
+                .Returns(new[] { packageFile1.Object, packageFile2.Object });
 
             // Act
             webProjectManager.InstallPackage(package.Object, appDomain: null);
@@ -107,7 +123,11 @@ namespace System.Web.WebPages.Administration.Test
 
             // Act
             var package = remoteRepository.GetPackages().Find("C").SingleOrDefault();
-            var result = WebProjectManager.GetPackagesRequiringLicenseAcceptance(package, localRepository, remoteRepository);
+            var result = WebProjectManager.GetPackagesRequiringLicenseAcceptance(
+                package,
+                localRepository,
+                remoteRepository
+            );
 
             // Assert
             Assert.Equal(2, result.Count());
@@ -124,7 +144,11 @@ namespace System.Web.WebPages.Administration.Test
 
             // Act
             var package = remoteRepository.GetPackages().Find("A").SingleOrDefault();
-            var result = WebProjectManager.GetPackagesRequiringLicenseAcceptance(package, localRepository, remoteRepository);
+            var result = WebProjectManager.GetPackagesRequiringLicenseAcceptance(
+                package,
+                localRepository,
+                remoteRepository
+            );
 
             // Assert
             Assert.False(result.Any());
@@ -137,17 +161,30 @@ namespace System.Web.WebPages.Administration.Test
             {
                 GetPackage("A", desc: "testing"),
                 GetPackage("B", version: "1.1", requiresLicense: true),
-                GetPackage("C", requiresLicense: true, dependencies: new[]
-                {
-                    new PackageDependency("B", new VersionSpec { MinVersion = new SemanticVersion("1.0") })
-                })
+                GetPackage(
+                    "C",
+                    requiresLicense: true,
+                    dependencies: new[]
+                    {
+                        new PackageDependency(
+                            "B",
+                            new VersionSpec { MinVersion = new SemanticVersion("1.0") }
+                        ),
+                    }
+                ),
             };
             repository.Setup(c => c.GetPackages()).Returns(packages.AsQueryable());
 
             return repository.Object;
         }
 
-        private static IPackage GetPackage(string id, string version = "1.0", string desc = null, bool requiresLicense = false, IEnumerable<PackageDependency> dependencies = null)
+        private static IPackage GetPackage(
+            string id,
+            string version = "1.0",
+            string desc = null,
+            bool requiresLicense = false,
+            IEnumerable<PackageDependency> dependencies = null
+        )
         {
             Mock<IPackage> package = new Mock<IPackage>();
             package.SetupGet(c => c.Id).Returns(id);
@@ -155,7 +192,9 @@ namespace System.Web.WebPages.Administration.Test
             package.SetupGet(c => c.Description).Returns(desc ?? id);
             package.SetupGet(c => c.RequireLicenseAcceptance).Returns(requiresLicense);
             package.SetupGet(c => c.LicenseUrl).Returns(new Uri("http://www." + id + ".com"));
-            package.SetupGet(c => c.Dependencies).Returns(dependencies ?? Enumerable.Empty<PackageDependency>());
+            package
+                .SetupGet(c => c.Dependencies)
+                .Returns(dependencies ?? Enumerable.Empty<PackageDependency>());
             return package.Object;
         }
     }

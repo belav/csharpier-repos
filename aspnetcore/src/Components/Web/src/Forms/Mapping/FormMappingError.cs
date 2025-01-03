@@ -17,7 +17,11 @@ public sealed class FormMappingError
     /// <param name="path">The path from the root of the mapping operation to the property or element that failed to map.</param>
     /// <param name="errorMessages">The error messages associated with the mapping error.</param>
     /// <param name="attemptedValue">The attempted value that failed to map.</param>
-    internal FormMappingError(string path, List<FormattableString> errorMessages, string? attemptedValue)
+    internal FormMappingError(
+        string path,
+        List<FormattableString> errorMessages,
+        string? attemptedValue
+    )
     {
         _errorMessages = errorMessages;
         AttemptedValue = attemptedValue;

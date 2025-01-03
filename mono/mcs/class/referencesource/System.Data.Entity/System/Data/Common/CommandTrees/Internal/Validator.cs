@@ -21,8 +21,10 @@ namespace System.Data.Common.CommandTrees.Internal
         private readonly DataSpace requiredSpace;
         private readonly DataSpace[] allowedMetadataSpaces;
         private readonly DataSpace[] allowedFunctionSpaces;
-        private readonly Dictionary<string, DbParameterReferenceExpression> paramMappings = new Dictionary<string, DbParameterReferenceExpression>();
-        private readonly Stack<Dictionary<string, TypeUsage>> variableScopes = new Stack<Dictionary<string, TypeUsage>>();
+        private readonly Dictionary<string, DbParameterReferenceExpression> paramMappings =
+            new Dictionary<string, DbParameterReferenceExpression>();
+        private readonly Stack<Dictionary<string, TypeUsage>> variableScopes =
+            new Stack<Dictionary<string, TypeUsage>>();
 
         private string expressionArgumentName;
 
@@ -37,45 +39,80 @@ namespace System.Data.Common.CommandTrees.Internal
             }
             else
             {
-                this.allowedMetadataSpaces = new[] { DataSpace.CSpace };   
+                this.allowedMetadataSpaces = new[] { DataSpace.CSpace };
             }
         }
 
-        internal Dictionary<string, DbParameterReferenceExpression> Parameters { get { return this.paramMappings; } }
+        internal Dictionary<string, DbParameterReferenceExpression> Parameters
+        {
+            get { return this.paramMappings; }
+        }
 
         internal void ValidateExpression(DbExpression expression, string argumentName)
         {
-            Debug.Assert(expression != null, "Ensure expression is non-null before calling ValidateExpression");
+            Debug.Assert(
+                expression != null,
+                "Ensure expression is non-null before calling ValidateExpression"
+            );
             this.expressionArgumentName = argumentName;
             this.VisitExpression(expression);
             this.expressionArgumentName = null;
-            Debug.Assert(this.variableScopes.Count == 0, "Variable scope stack left in inconsistent state");
+            Debug.Assert(
+                this.variableScopes.Count == 0,
+                "Variable scope stack left in inconsistent state"
+            );
         }
 
         protected override EntitySetBase VisitEntitySet(EntitySetBase entitySet)
         {
-            return ValidateMetadata(entitySet, base.VisitEntitySet, es => es.EntityContainer.DataSpace, this.allowedMetadataSpaces);
+            return ValidateMetadata(
+                entitySet,
+                base.VisitEntitySet,
+                es => es.EntityContainer.DataSpace,
+                this.allowedMetadataSpaces
+            );
         }
 
         protected override EdmFunction VisitFunction(EdmFunction function)
         {
             // Functions from the current space and S-Space are allowed
-            return ValidateMetadata(function, base.VisitFunction, func => func.DataSpace, this.allowedFunctionSpaces);
+            return ValidateMetadata(
+                function,
+                base.VisitFunction,
+                func => func.DataSpace,
+                this.allowedFunctionSpaces
+            );
         }
 
         protected override EdmType VisitType(EdmType type)
         {
-            return ValidateMetadata(type, base.VisitType, et => et.DataSpace, this.allowedMetadataSpaces);
+            return ValidateMetadata(
+                type,
+                base.VisitType,
+                et => et.DataSpace,
+                this.allowedMetadataSpaces
+            );
         }
 
         protected override TypeUsage VisitTypeUsage(TypeUsage type)
         {
-            return ValidateMetadata(type, base.VisitTypeUsage, tu => tu.EdmType.DataSpace, this.allowedMetadataSpaces);
+            return ValidateMetadata(
+                type,
+                base.VisitTypeUsage,
+                tu => tu.EdmType.DataSpace,
+                this.allowedMetadataSpaces
+            );
         }
 
-        protected override void OnEnterScope(IEnumerable<DbVariableReferenceExpression> scopeVariables)
+        protected override void OnEnterScope(
+            IEnumerable<DbVariableReferenceExpression> scopeVariables
+        )
         {
-            var newScope = scopeVariables.ToDictionary(var => var.VariableName, var => var.ResultType, StringComparer.Ordinal);
+            var newScope = scopeVariables.ToDictionary(
+                var => var.VariableName,
+                var => var.ResultType,
+                StringComparer.Ordinal
+            );
             this.variableScopes.Push(newScope);
         }
 
@@ -87,27 +124,33 @@ namespace System.Data.Common.CommandTrees.Internal
         public override DbExpression Visit(DbVariableReferenceExpression expression)
         {
             DbExpression result = base.Visit(expression);
-            if(result.ExpressionKind == DbExpressionKind.VariableReference)
+            if (result.ExpressionKind == DbExpressionKind.VariableReference)
             {
                 DbVariableReferenceExpression varRef = (DbVariableReferenceExpression)result;
                 TypeUsage foundType = null;
-                foreach(Dictionary<string, TypeUsage> scope in this.variableScopes)
+                foreach (Dictionary<string, TypeUsage> scope in this.variableScopes)
                 {
-                    if(scope.TryGetValue(varRef.VariableName, out foundType))
+                    if (scope.TryGetValue(varRef.VariableName, out foundType))
                     {
                         break;
                     }
                 }
-                
-                if(foundType == null)
+
+                if (foundType == null)
                 {
-                    ThrowInvalid(System.Data.Entity.Strings.Cqt_Validator_VarRefInvalid(varRef.VariableName));
+                    ThrowInvalid(
+                        System.Data.Entity.Strings.Cqt_Validator_VarRefInvalid(varRef.VariableName)
+                    );
                 }
-                                
+
                 // SQLBUDT#545720: Equivalence is not a sufficient check (consider row types) - equality is required.
                 if (!TypeSemantics.IsEqual(varRef.ResultType, foundType))
                 {
-                    ThrowInvalid(System.Data.Entity.Strings.Cqt_Validator_VarRefTypeMismatch(varRef.VariableName));
+                    ThrowInvalid(
+                        System.Data.Entity.Strings.Cqt_Validator_VarRefTypeMismatch(
+                            varRef.VariableName
+                        )
+                    );
                 }
             }
 
@@ -127,7 +170,11 @@ namespace System.Data.Common.CommandTrees.Internal
                     // SQLBUDT#545720: Equivalence is not a sufficient check (consider row types for TVPs) - equality is required.
                     if (!TypeSemantics.IsEqual(paramRef.ResultType, foundParam.ResultType))
                     {
-                        ThrowInvalid(Strings.Cqt_Validator_InvalidIncompatibleParameterReferences(paramRef.ParameterName));
+                        ThrowInvalid(
+                            Strings.Cqt_Validator_InvalidIncompatibleParameterReferences(
+                                paramRef.ParameterName
+                            )
+                        );
                     }
                 }
                 else
@@ -138,7 +185,12 @@ namespace System.Data.Common.CommandTrees.Internal
             return result;
         }
 
-        private TMetadata ValidateMetadata<TMetadata>(TMetadata metadata, Func<TMetadata, TMetadata> map, Func<TMetadata, DataSpace> getDataSpace, DataSpace[] allowedSpaces)
+        private TMetadata ValidateMetadata<TMetadata>(
+            TMetadata metadata,
+            Func<TMetadata, TMetadata> map,
+            Func<TMetadata, DataSpace> getDataSpace,
+            DataSpace[] allowedSpaces
+        )
         {
             TMetadata result = map(metadata);
             if (!object.ReferenceEquals(metadata, result))
@@ -153,15 +205,22 @@ namespace System.Data.Common.CommandTrees.Internal
             }
             return result;
         }
-                
+
         private void ThrowInvalidMetadata<TMetadata>(TMetadata invalid)
         {
-            ThrowInvalid(Strings.Cqt_Validator_InvalidOtherWorkspaceMetadata(typeof(TMetadata).Name));
+            ThrowInvalid(
+                Strings.Cqt_Validator_InvalidOtherWorkspaceMetadata(typeof(TMetadata).Name)
+            );
         }
 
         private void ThrowInvalidSpace<TMetadata>(TMetadata invalid)
         {
-            ThrowInvalid(Strings.Cqt_Validator_InvalidIncorrectDataSpaceMetadata(typeof(TMetadata).Name, Enum.GetName(typeof(DataSpace), this.requiredSpace)));
+            ThrowInvalid(
+                Strings.Cqt_Validator_InvalidIncorrectDataSpaceMetadata(
+                    typeof(TMetadata).Name,
+                    Enum.GetName(typeof(DataSpace), this.requiredSpace)
+                )
+            );
         }
 
         private void ThrowInvalid(string message)

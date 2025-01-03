@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features
         public Document Document { get; }
         public TextSpan TextSpan { get; }
 
-        public DocumentSpan(Document document, TextSpan textSpan) : this()
+        public DocumentSpan(Document document, TextSpan textSpan)
+            : this()
         {
             this.Document = document;
             this.TextSpan = textSpan;

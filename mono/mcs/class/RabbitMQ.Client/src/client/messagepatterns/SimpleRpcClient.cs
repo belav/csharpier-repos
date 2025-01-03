@@ -55,16 +55,16 @@
 //
 //---------------------------------------------------------------------------
 using System;
+using System.Collections;
 using System.IO;
 using System.Net;
-using System.Collections;
 using System.Threading;
-
 using RabbitMQ.Client;
 using RabbitMQ.Client.Content;
 using RabbitMQ.Client.Events;
 
-namespace RabbitMQ.Client.MessagePatterns {
+namespace RabbitMQ.Client.MessagePatterns
+{
     ///<summary>Implements a simple RPC client.</summary>
     ///<remarks>
     ///<para>
@@ -87,7 +87,7 @@ namespace RabbitMQ.Client.MessagePatterns {
     ///	        SimpleRpcClient client =
     ///	            new SimpleRpcClient(ch, queueName);
     ///	        client.TimeoutMilliseconds = 5000; // optional
-    ///	
+    ///
     ///	        /// ... make use of the various Call() overloads
     ///	    }
     ///	}
@@ -110,24 +110,25 @@ namespace RabbitMQ.Client.MessagePatterns {
     ///</para>
     ///</remarks>
     ///<see cref="SimpleRpcServer"/>
-    public class SimpleRpcClient: IDisposable {
-	///<summary>This event is fired whenever Call() decides that a
-	///timeout has occurred while waiting for a reply from the
-	///service.</summary>
-	///<remarks>
+    public class SimpleRpcClient : IDisposable
+    {
+        ///<summary>This event is fired whenever Call() decides that a
+        ///timeout has occurred while waiting for a reply from the
+        ///service.</summary>
+        ///<remarks>
         /// See also OnTimedOut().
-	///</remarks>
-	public event EventHandler TimedOut;
+        ///</remarks>
+        public event EventHandler TimedOut;
 
-	///<summary>This event is fired whenever Call() detects the
-	///disconnection of the underlying Subscription while waiting
-	///for a reply from the service.</summary>
-	///<remarks>
+        ///<summary>This event is fired whenever Call() detects the
+        ///disconnection of the underlying Subscription while waiting
+        ///for a reply from the service.</summary>
+        ///<remarks>
         /// See also OnDisconnected(). Note that the sending of a
         /// request may result in OperationInterruptedException before
         /// the request is even sent.
-	///</remarks>
-	public event EventHandler Disconnected;
+        ///</remarks>
+        public event EventHandler Disconnected;
 
         protected IModel m_model;
         protected Subscription m_subscription;
@@ -135,7 +136,10 @@ namespace RabbitMQ.Client.MessagePatterns {
         private int m_timeout;
 
         ///<summary>Retrieve the IModel this instance uses to communicate.</summary>
-        public IModel Model { get { return m_model; } }
+        public IModel Model
+        {
+            get { return m_model; }
+        }
 
         ///<summary>Retrieve the Subscription that is used to receive
         ///RPC replies corresponding to Call() RPC requests. May be
@@ -149,7 +153,10 @@ namespace RabbitMQ.Client.MessagePatterns {
         /// replies are expected or possible when using Cast().
         ///</para>
         ///</remarks>
-        public Subscription Subscription { get { return m_subscription; } }
+        public Subscription Subscription
+        {
+            get { return m_subscription; }
+        }
 
         ///<summary>Retrieve or modify the address that will be used
         ///for the next Call() or Cast().</summary>
@@ -160,14 +167,15 @@ namespace RabbitMQ.Client.MessagePatterns {
         /// the value at the time of the call is used by Call() and
         /// Cast().
         ///</remarks>
-        public PublicationAddress Address {
+        public PublicationAddress Address
+        {
             get { return m_address; }
             set { m_address = value; }
         }
 
-	///<summary>Retrieve or modify the timeout (in milliseconds)
-	///that will be used for the next Call().</summary>
-	///<remarks>
+        ///<summary>Retrieve or modify the timeout (in milliseconds)
+        ///that will be used for the next Call().</summary>
+        ///<remarks>
         ///<para>
         /// This property defaults to
         /// System.Threading.Timeout.Infinite (i.e. -1). If it is set
@@ -178,31 +186,36 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///<para>
         /// See also TimedOut event and OnTimedOut().
         ///</para>
-	///</remarks>
-	public int TimeoutMilliseconds {
-	    get { return m_timeout; }
-	    set { m_timeout = value; }
-	}
+        ///</remarks>
+        public int TimeoutMilliseconds
+        {
+            get { return m_timeout; }
+            set { m_timeout = value; }
+        }
 
         ///<summary>Construct an instance with no configured
         ///Address. The Address property must be set before Call() or
         ///Cast() are called.</summary>
         public SimpleRpcClient(IModel model)
-            : this(model, (PublicationAddress) null) {}
+            : this(model, (PublicationAddress)null) { }
 
         ///<summary>Construct an instance that will deliver to the
         ///default exchange (""), with routing key equal to the passed
         ///in queueName, thereby delivering directly to a named queue
         ///on the AMQP server.</summary>
         public SimpleRpcClient(IModel model, string queueName)
-            : this(model, new PublicationAddress(ExchangeType.Direct, "", queueName)) {}
+            : this(model, new PublicationAddress(ExchangeType.Direct, "", queueName)) { }
 
         ///<summary>Construct an instance that will deliver to the
         ///named and typed exchange, with the given routing
         ///key.</summary>
-        public SimpleRpcClient(IModel model, string exchange,
-                               string exchangeType, string routingKey)
-            : this(model, new PublicationAddress(exchangeType, exchange, routingKey)) {}
+        public SimpleRpcClient(
+            IModel model,
+            string exchange,
+            string exchangeType,
+            string routingKey
+        )
+            : this(model, new PublicationAddress(exchangeType, exchange, routingKey)) { }
 
         ///<summary>Construct an instance that will deliver to the
         ///given address.</summary>
@@ -211,7 +224,7 @@ namespace RabbitMQ.Client.MessagePatterns {
             m_model = model;
             m_address = address;
             m_subscription = null;
-	    m_timeout = Timeout.Infinite;
+            m_timeout = Timeout.Infinite;
         }
 
         ///<summary>Close the reply subscription associated with this instance, if any.</summary>
@@ -223,7 +236,8 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///</remarks>
         public void Close()
         {
-            if (m_subscription != null) {
+            if (m_subscription != null)
+            {
                 m_subscription.Close();
                 m_subscription = null;
             }
@@ -234,7 +248,8 @@ namespace RabbitMQ.Client.MessagePatterns {
         ///through the AMQP server.</summary>
         protected virtual void EnsureSubscription()
         {
-            if (m_subscription == null) {
+            if (m_subscription == null)
+            {
                 m_subscription = new Subscription(m_model);
             }
         }
@@ -268,17 +283,24 @@ namespace RabbitMQ.Client.MessagePatterns {
             IStreamMessageBuilder builder = new StreamMessageBuilder(m_model);
             builder.WriteObjects(args);
             IBasicProperties replyProperties;
-            byte[] replyBody = Call((IBasicProperties) builder.GetContentHeader(),
-                                    builder.GetContentBody(),
-                                    out replyProperties);
-            if (replyProperties == null) {
+            byte[] replyBody = Call(
+                (IBasicProperties)builder.GetContentHeader(),
+                builder.GetContentBody(),
+                out replyProperties
+            );
+            if (replyProperties == null)
+            {
                 return null;
             }
-            if (replyProperties.ContentType != StreamMessageBuilder.MimeType) {
-                throw new ProtocolViolationException
-                    (string.Format("Expected reply of MIME type {0}; got {1}",
-                                   StreamMessageBuilder.MimeType,
-                                   replyProperties.ContentType));
+            if (replyProperties.ContentType != StreamMessageBuilder.MimeType)
+            {
+                throw new ProtocolViolationException(
+                    string.Format(
+                        "Expected reply of MIME type {0}; got {1}",
+                        StreamMessageBuilder.MimeType,
+                        replyProperties.ContentType
+                    )
+                );
             }
             IStreamMessageReader reader = new StreamMessageReader(replyProperties, replyBody);
             return reader.ReadObjects();
@@ -336,15 +358,20 @@ namespace RabbitMQ.Client.MessagePatterns {
         /// server via Subscription.Ack().
         ///</para>
         ///</remarks>
-        public virtual byte[] Call(IBasicProperties requestProperties,
-                                   byte[] body,
-                                   out IBasicProperties replyProperties)
+        public virtual byte[] Call(
+            IBasicProperties requestProperties,
+            byte[] body,
+            out IBasicProperties replyProperties
+        )
         {
             BasicDeliverEventArgs reply = Call(requestProperties, body);
-            if (reply == null) {
+            if (reply == null)
+            {
                 replyProperties = null;
                 return null;
-            } else {
+            }
+            else
+            {
                 replyProperties = reply.BasicProperties;
                 return reply.Body;
             }
@@ -381,7 +408,8 @@ namespace RabbitMQ.Client.MessagePatterns {
         {
             EnsureSubscription();
 
-            if (requestProperties == null) {
+            if (requestProperties == null)
+            {
                 requestProperties = m_model.CreateBasicProperties();
             }
             requestProperties.CorrelationId = Guid.NewGuid().ToString();
@@ -401,21 +429,27 @@ namespace RabbitMQ.Client.MessagePatterns {
         protected virtual BasicDeliverEventArgs RetrieveReply(string correlationId)
         {
             BasicDeliverEventArgs reply;
-	    if (!m_subscription.Next(m_timeout, out reply)) {
-		OnTimedOut();
-		return null;
-	    }
+            if (!m_subscription.Next(m_timeout, out reply))
+            {
+                OnTimedOut();
+                return null;
+            }
 
-	    if (reply == null) {
-		OnDisconnected();
-		return null;
-	    }
+            if (reply == null)
+            {
+                OnDisconnected();
+                return null;
+            }
 
-            if (reply.BasicProperties.CorrelationId != correlationId) {
-                throw new ProtocolViolationException
-                    (string.Format("Wrong CorrelationId in reply; expected {0}, got {1}",
-                                   correlationId,
-                                   reply.BasicProperties.CorrelationId));
+            if (reply.BasicProperties.CorrelationId != correlationId)
+            {
+                throw new ProtocolViolationException(
+                    string.Format(
+                        "Wrong CorrelationId in reply; expected {0}, got {1}",
+                        correlationId,
+                        reply.BasicProperties.CorrelationId
+                    )
+                );
             }
 
             m_subscription.Ack(reply);
@@ -424,36 +458,33 @@ namespace RabbitMQ.Client.MessagePatterns {
 
         ///<summary>Sends an asynchronous/one-way message to the
         ///service.</summary>
-        public virtual void Cast(IBasicProperties requestProperties,
-                                 byte[] body)
+        public virtual void Cast(IBasicProperties requestProperties, byte[] body)
         {
-            m_model.BasicPublish(Address,
-                                 requestProperties,
-                                 body);
+            m_model.BasicPublish(Address, requestProperties, body);
         }
 
-	///<summary>Signals that the configured timeout fired while
-	///waiting for an RPC reply.</summary>
-	///<remarks>
+        ///<summary>Signals that the configured timeout fired while
+        ///waiting for an RPC reply.</summary>
+        ///<remarks>
         /// Fires the TimedOut event.
-	///</remarks>
-	public virtual void OnTimedOut()
-	{
-	    if (TimedOut != null)
-		TimedOut(this, null);
-	}
+        ///</remarks>
+        public virtual void OnTimedOut()
+        {
+            if (TimedOut != null)
+                TimedOut(this, null);
+        }
 
-	///<summary>Signals that the Subscription we use for receiving
-	///our RPC replies was disconnected while we were
-	///waiting.</summary>
-	///<remarks>
+        ///<summary>Signals that the Subscription we use for receiving
+        ///our RPC replies was disconnected while we were
+        ///waiting.</summary>
+        ///<remarks>
         /// Fires the Disconnected event.
-	///</remarks>
-	public virtual void OnDisconnected()
-	{
-	    if (Disconnected != null)
-		Disconnected(this, null);
-	}
+        ///</remarks>
+        public virtual void OnDisconnected()
+        {
+            if (Disconnected != null)
+                Disconnected(this, null);
+        }
 
         ///<summary>Implement the IDisposable interface, permitting
         ///SimpleRpcClient instances to be used in using

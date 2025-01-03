@@ -9,7 +9,10 @@ namespace System
     public sealed partial class TimeZoneInfo
     {
         [Serializable]
-        public readonly struct TransitionTime : IEquatable<TransitionTime>, ISerializable, IDeserializationCallback
+        public readonly struct TransitionTime
+            : IEquatable<TransitionTime>,
+                ISerializable,
+                IDeserializationCallback
         {
             private readonly DateTime _timeOfDay;
             private readonly byte _month;
@@ -38,16 +41,25 @@ namespace System
             public static bool operator !=(TransitionTime t1, TransitionTime t2) => !t1.Equals(t2);
 
             public bool Equals(TransitionTime other) =>
-                _isFixedDateRule == other._isFixedDateRule &&
-                _timeOfDay == other._timeOfDay &&
-                _month == other._month &&
-                (other._isFixedDateRule ?
-                    _day == other._day :
-                    _week == other._week && _dayOfWeek == other._dayOfWeek);
+                _isFixedDateRule == other._isFixedDateRule
+                && _timeOfDay == other._timeOfDay
+                && _month == other._month
+                && (
+                    other._isFixedDateRule
+                        ? _day == other._day
+                        : _week == other._week && _dayOfWeek == other._dayOfWeek
+                );
 
             public override int GetHashCode() => (int)_month ^ (int)_week << 8;
 
-            private TransitionTime(DateTime timeOfDay, int month, int week, int day, DayOfWeek dayOfWeek, bool isFixedDateRule)
+            private TransitionTime(
+                DateTime timeOfDay,
+                int month,
+                int week,
+                int day,
+                DayOfWeek dayOfWeek,
+                bool isFixedDateRule
+            )
             {
                 ValidateTransitionTime(timeOfDay, month, week, day, dayOfWeek);
 
@@ -59,32 +71,62 @@ namespace System
                 _isFixedDateRule = isFixedDateRule;
             }
 
-            public static TransitionTime CreateFixedDateRule(DateTime timeOfDay, int month, int day) =>
-                new TransitionTime(timeOfDay, month, 1, day, DayOfWeek.Sunday, isFixedDateRule: true);
+            public static TransitionTime CreateFixedDateRule(
+                DateTime timeOfDay,
+                int month,
+                int day
+            ) =>
+                new TransitionTime(
+                    timeOfDay,
+                    month,
+                    1,
+                    day,
+                    DayOfWeek.Sunday,
+                    isFixedDateRule: true
+                );
 
-            public static TransitionTime CreateFloatingDateRule(DateTime timeOfDay, int month, int week, DayOfWeek dayOfWeek) =>
-                new TransitionTime(timeOfDay, month, week, 1, dayOfWeek, isFixedDateRule: false);
+            public static TransitionTime CreateFloatingDateRule(
+                DateTime timeOfDay,
+                int month,
+                int week,
+                DayOfWeek dayOfWeek
+            ) => new TransitionTime(timeOfDay, month, week, 1, dayOfWeek, isFixedDateRule: false);
 
             /// <summary>
             /// Helper function that validates a TransitionTime instance.
             /// </summary>
-            private static void ValidateTransitionTime(DateTime timeOfDay, int month, int week, int day, DayOfWeek dayOfWeek)
+            private static void ValidateTransitionTime(
+                DateTime timeOfDay,
+                int month,
+                int week,
+                int day,
+                DayOfWeek dayOfWeek
+            )
             {
                 if (timeOfDay.Kind != DateTimeKind.Unspecified)
                 {
-                    throw new ArgumentException(SR.Argument_DateTimeKindMustBeUnspecified, nameof(timeOfDay));
+                    throw new ArgumentException(
+                        SR.Argument_DateTimeKindMustBeUnspecified,
+                        nameof(timeOfDay)
+                    );
                 }
 
                 // Month range 1-12
                 if (month < 1 || month > 12)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(month), SR.ArgumentOutOfRange_MonthParam);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(month),
+                        SR.ArgumentOutOfRange_MonthParam
+                    );
                 }
 
                 // Day range 1-31
                 if (day < 1 || day > 31)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(day), SR.ArgumentOutOfRange_DayParam);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(day),
+                        SR.ArgumentOutOfRange_DayParam
+                    );
                 }
 
                 // Week range 1-5
@@ -96,11 +138,23 @@ namespace System
                 // DayOfWeek range 0-6
                 if ((int)dayOfWeek < 0 || (int)dayOfWeek > 6)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(dayOfWeek), SR.ArgumentOutOfRange_DayOfWeek);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(dayOfWeek),
+                        SR.ArgumentOutOfRange_DayOfWeek
+                    );
                 }
 
-                timeOfDay.GetDate(out int timeOfDayYear, out int timeOfDayMonth, out int timeOfDayDay);
-                if (timeOfDayYear != 1 || timeOfDayMonth != 1 || timeOfDayDay != 1 || (timeOfDay.Ticks % TimeSpan.TicksPerMillisecond != 0))
+                timeOfDay.GetDate(
+                    out int timeOfDayYear,
+                    out int timeOfDayMonth,
+                    out int timeOfDayDay
+                );
+                if (
+                    timeOfDayYear != 1
+                    || timeOfDayMonth != 1
+                    || timeOfDayDay != 1
+                    || (timeOfDay.Ticks % TimeSpan.TicksPerMillisecond != 0)
+                )
                 {
                     throw new ArgumentException(SR.Argument_DateTimeHasTicks, nameof(timeOfDay));
                 }

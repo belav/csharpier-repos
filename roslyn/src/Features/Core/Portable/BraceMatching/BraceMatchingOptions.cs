@@ -9,12 +9,11 @@ namespace Microsoft.CodeAnalysis.BraceMatching
 {
     [DataContract]
     internal readonly record struct BraceMatchingOptions(
-        [property: DataMember(Order = 0)] HighlightingOptions HighlightingOptions)
+        [property: DataMember(Order = 0)] HighlightingOptions HighlightingOptions
+    )
     {
         public BraceMatchingOptions()
-            : this(HighlightingOptions.Default)
-        {
-        }
+            : this(HighlightingOptions.Default) { }
 
         public static readonly BraceMatchingOptions Default = new();
     }

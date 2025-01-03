@@ -11,10 +11,13 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
 public class ServerAuthTest : AuthTest
 {
-    public ServerAuthTest(BrowserFixture browserFixture, ToggleExecutionModeServerFixture<BasicTestApp.Program> serverFixture, ITestOutputHelper output)
+    public ServerAuthTest(
+        BrowserFixture browserFixture,
+        ToggleExecutionModeServerFixture<BasicTestApp.Program> serverFixture,
+        ITestOutputHelper output
+    )
         : base(browserFixture, serverFixture.WithServerExecution(), output, ExecutionMode.Server)
-    {
-    }
+    { }
 
     [Theory]
     [InlineData(null, null)]
@@ -22,7 +25,9 @@ public class ServerAuthTest : AuthTest
     [InlineData("Someone", null)]
     [InlineData("Someone", "Someone")]
     public void UpdatesAuthenticationStateWhenReconnecting(
-        string usernameBefore, string usernameAfter)
+        string usernameBefore,
+        string usernameAfter
+    )
     {
         // Establish state before disconnection
         SignInAs(usernameBefore, usernameBefore == null ? null : "TestRole");
@@ -38,19 +43,31 @@ public class ServerAuthTest : AuthTest
         {
             if (username == null)
             {
-                Browser.Equal("You're not authorized, anonymous", () =>
-                    appElement.FindElement(By.CssSelector("#authorize-role .not-authorized")).Text);
+                Browser.Equal(
+                    "You're not authorized, anonymous",
+                    () =>
+                        appElement
+                            .FindElement(By.CssSelector("#authorize-role .not-authorized"))
+                            .Text
+                );
             }
             else
             {
-                Browser.Equal($"Welcome, {username}!", () =>
-                    appElement.FindElement(By.CssSelector("#authorize-role .authorized")).Text);
+                Browser.Equal(
+                    $"Welcome, {username}!",
+                    () => appElement.FindElement(By.CssSelector("#authorize-role .authorized")).Text
+                );
             }
         }
     }
 
     private void SignInAs(string usernName, string roles, bool useSeparateTab = false) =>
-        Browser.SignInAs(new Uri(_serverFixture.RootUri, "/subdir"), usernName, roles, useSeparateTab);
+        Browser.SignInAs(
+            new Uri(_serverFixture.RootUri, "/subdir"),
+            usernName,
+            roles,
+            useSeparateTab
+        );
 
     private void PerformReconnection()
     {

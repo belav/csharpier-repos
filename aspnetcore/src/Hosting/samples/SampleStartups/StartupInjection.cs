@@ -49,10 +49,12 @@ public class NormalStartup
     public void Configure(IApplicationBuilder app)
     {
         Console.WriteLine("NormalStartup.Configure");
-        app.Run(async (context) =>
-        {
-            await context.Response.WriteAsync("Hello World!");
-        });
+        app.Run(
+            async (context) =>
+            {
+                await context.Response.WriteAsync("Hello World!");
+            }
+        );
     }
 }
 
@@ -66,9 +68,11 @@ public class InjectedStartup
     public void Configure(IApplicationBuilder app)
     {
         Console.WriteLine("InjectedStartup.Configure");
-        app.Run(async (context) =>
-        {
-            await context.Response.WriteAsync("Hello World!");
-        });
+        app.Run(
+            async (context) =>
+            {
+                await context.Response.WriteAsync("Hello World!");
+            }
+        );
     }
 }

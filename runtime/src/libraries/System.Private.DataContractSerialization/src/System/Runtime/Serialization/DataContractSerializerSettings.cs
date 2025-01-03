@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Xml;
 
-
 namespace System.Runtime.Serialization
 {
     /// <summary>
@@ -47,7 +46,6 @@ namespace System.Runtime.Serialization
         /// Gets or sets a value indicating whether Dummy documentation
         /// </summary>
         public bool PreserveObjectReferences { get; set; }
-
 
         /// <summary>
         /// Gets or sets Dummy documentation

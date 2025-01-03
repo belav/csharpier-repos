@@ -1,23 +1,27 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 using System;
 
-namespace System.Collections {
-    public static class StructuralComparisons {
-
+namespace System.Collections
+{
+    public static class StructuralComparisons
+    {
         private static volatile IComparer s_StructuralComparer;
         private static volatile IEqualityComparer s_StructuralEqualityComparer;
 
-        public static IComparer StructuralComparer {
-            get {
+        public static IComparer StructuralComparer
+        {
+            get
+            {
                 IComparer comparer = s_StructuralComparer;
-                if (comparer == null) {
+                if (comparer == null)
+                {
                     comparer = new StructuralComparer();
                     s_StructuralComparer = comparer;
                 }
@@ -25,10 +29,13 @@ namespace System.Collections {
             }
         }
 
-        public static IEqualityComparer StructuralEqualityComparer {
-            get {
+        public static IEqualityComparer StructuralEqualityComparer
+        {
+            get
+            {
                 IEqualityComparer comparer = s_StructuralEqualityComparer;
-                if (comparer == null) {
+                if (comparer == null)
+                {
                     comparer = new StructuralEqualityComparer();
                     s_StructuralEqualityComparer = comparer;
                 }
@@ -38,32 +45,42 @@ namespace System.Collections {
     }
 
     [Serializable]
-    internal class StructuralEqualityComparer : IEqualityComparer {
-        public new bool Equals(Object x, Object y) {
-            if (x != null) {
-
+    internal class StructuralEqualityComparer : IEqualityComparer
+    {
+        public new bool Equals(Object x, Object y)
+        {
+            if (x != null)
+            {
                 IStructuralEquatable seObj = x as IStructuralEquatable;
 
-                if (seObj != null){
+                if (seObj != null)
+                {
                     return seObj.Equals(y, this);
                 }
 
-                if (y != null) {
+                if (y != null)
+                {
                     return x.Equals(y);
-                } else {
+                }
+                else
+                {
                     return false;
                 }
             }
-            if (y != null) return false;
+            if (y != null)
+                return false;
             return true;
         }
 
-        public int GetHashCode(Object obj) {
-            if (obj == null) return 0;
+        public int GetHashCode(Object obj)
+        {
+            if (obj == null)
+                return 0;
 
             IStructuralEquatable seObj = obj as IStructuralEquatable;
 
-            if (seObj != null) {
+            if (seObj != null)
+            {
                 return seObj.GetHashCode(this);
             }
 
@@ -72,20 +89,23 @@ namespace System.Collections {
     }
 
     [Serializable]
-    internal class StructuralComparer : IComparer {
-        public int Compare(Object x, Object y) {
-
-            if (x == null) return y == null ? 0 : -1;
-            if (y == null) return 1;
+    internal class StructuralComparer : IComparer
+    {
+        public int Compare(Object x, Object y)
+        {
+            if (x == null)
+                return y == null ? 0 : -1;
+            if (y == null)
+                return 1;
 
             IStructuralComparable scX = x as IStructuralComparable;
 
-            if (scX != null) {
+            if (scX != null)
+            {
                 return scX.CompareTo(y, this);
             }
 
             return Comparer.Default.Compare(x, y);
         }
-    }        
-
+    }
 }

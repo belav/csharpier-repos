@@ -17,12 +17,16 @@ public class EmbeddedFilesManifestTests
             ManifestDirectory.CreateRootDirectory(
                 new[]
                 {
-                        ManifestDirectory.CreateDirectory("wwwroot",
+                    ManifestDirectory.CreateDirectory(
+                        "wwwroot",
                         new[]
                         {
-                            new ManifestFile("jquery.validate.js","wwwroot.jquery.validate.js")
-                        })
-                }));
+                            new ManifestFile("jquery.validate.js", "wwwroot.jquery.validate.js"),
+                        }
+                    ),
+                }
+            )
+        );
         // Act
         var entry = manifest.ResolveEntry(path);
 
@@ -42,12 +46,16 @@ public class EmbeddedFilesManifestTests
             ManifestDirectory.CreateRootDirectory(
                 new[]
                 {
-                        ManifestDirectory.CreateDirectory("wwwroot",
+                    ManifestDirectory.CreateDirectory(
+                        "wwwroot",
                         new[]
                         {
-                            new ManifestFile("jquery.validate.js","wwwroot.jquery.validate.js")
-                        })
-                }));
+                            new ManifestFile("jquery.validate.js", "wwwroot.jquery.validate.js"),
+                        }
+                    ),
+                }
+            )
+        );
         // Act
         var entry = manifest.ResolveEntry(path);
 

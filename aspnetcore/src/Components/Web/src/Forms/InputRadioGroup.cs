@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Components.Forms;
 /// <summary>
 /// Groups child <see cref="InputRadio{TValue}"/> components.
 /// </summary>
-public class InputRadioGroup<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputBase<TValue>
+public class InputRadioGroup<
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue
+> : InputBase<TValue>
 {
     private readonly string _defaultGroupName = Guid.NewGuid().ToString("N");
     private InputRadioContext? _context;
@@ -18,14 +20,17 @@ public class InputRadioGroup<[DynamicallyAccessedMembers(DynamicallyAccessedMemb
     /// <summary>
     /// Gets or sets the child content to be rendering inside the <see cref="InputRadioGroup{TValue}"/>.
     /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the group.
     /// </summary>
-    [Parameter] public string? Name { get; set; }
+    [Parameter]
+    public string? Name { get; set; }
 
-    [CascadingParameter] private InputRadioContext? CascadedContext { get; set; }
+    [CascadingParameter]
+    private InputRadioContext? CascadedContext { get; set; }
 
     /// <inheritdoc />
     protected override void OnParametersSet()
@@ -33,13 +38,19 @@ public class InputRadioGroup<[DynamicallyAccessedMembers(DynamicallyAccessedMemb
         // On the first render, we can instantiate the InputRadioContext
         if (_context is null)
         {
-            var changeEventCallback = EventCallback.Factory.CreateBinder<string?>(this, __value => CurrentValueAsString = __value, CurrentValueAsString);
+            var changeEventCallback = EventCallback.Factory.CreateBinder<string?>(
+                this,
+                __value => CurrentValueAsString = __value,
+                CurrentValueAsString
+            );
             _context = new InputRadioContext(CascadedContext, changeEventCallback);
         }
         else if (_context.ParentContext != CascadedContext)
         {
             // This should never be possible in any known usage pattern, but if it happens, we want to know
-            throw new InvalidOperationException("An InputRadioGroup cannot change context after creation");
+            throw new InvalidOperationException(
+                "An InputRadioGroup cannot change context after creation"
+            );
         }
 
         // Mutate the InputRadioContext instance in place. Since this is a non-fixed cascading parameter, the descendant
@@ -77,6 +88,9 @@ public class InputRadioGroup<[DynamicallyAccessedMembers(DynamicallyAccessedMemb
     }
 
     /// <inheritdoc />
-    protected override bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out TValue result, [NotNullWhen(false)] out string? validationErrorMessage)
-        => this.TryParseSelectableValueFromString(value, out result, out validationErrorMessage);
+    protected override bool TryParseValueFromString(
+        string? value,
+        [MaybeNullWhen(false)] out TValue result,
+        [NotNullWhen(false)] out string? validationErrorMessage
+    ) => this.TryParseSelectableValueFromString(value, out result, out validationErrorMessage);
 }

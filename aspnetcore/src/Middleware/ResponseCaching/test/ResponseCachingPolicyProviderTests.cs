@@ -11,14 +11,7 @@ public class ResponseCachingPolicyProviderTests
 {
     public static TheoryData<string> CacheableMethods
     {
-        get
-        {
-            return new TheoryData<string>
-                {
-                    HttpMethods.Get,
-                    HttpMethods.Head
-                };
-        }
+        get { return new TheoryData<string> { HttpMethods.Get, HttpMethods.Head }; }
     }
 
     [Theory]
@@ -32,21 +25,22 @@ public class ResponseCachingPolicyProviderTests
         Assert.True(new ResponseCachingPolicyProvider().AttemptResponseCaching(context));
         Assert.Empty(sink.Writes);
     }
+
     public static TheoryData<string> NonCacheableMethods
     {
         get
         {
             return new TheoryData<string>
-                {
-                    HttpMethods.Post,
-                    HttpMethods.Put,
-                    HttpMethods.Delete,
-                    HttpMethods.Trace,
-                    HttpMethods.Connect,
-                    HttpMethods.Options,
-                    "",
-                    null
-                };
+            {
+                HttpMethods.Post,
+                HttpMethods.Put,
+                HttpMethods.Delete,
+                HttpMethods.Trace,
+                HttpMethods.Connect,
+                HttpMethods.Options,
+                "",
+                null,
+            };
         }
     }
 
@@ -59,9 +53,7 @@ public class ResponseCachingPolicyProviderTests
         context.HttpContext.Request.Method = method;
 
         Assert.False(new ResponseCachingPolicyProvider().AttemptResponseCaching(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.RequestMethodNotCacheable);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.RequestMethodNotCacheable);
     }
 
     [Fact]
@@ -75,7 +67,8 @@ public class ResponseCachingPolicyProviderTests
         Assert.False(new ResponseCachingPolicyProvider().AttemptResponseCaching(context));
         TestUtils.AssertLoggedMessages(
             sink.Writes,
-            LoggedMessage.RequestWithAuthorizationNotCacheable);
+            LoggedMessage.RequestWithAuthorizationNotCacheable
+        );
     }
 
     [Fact]
@@ -86,7 +79,7 @@ public class ResponseCachingPolicyProviderTests
         context.HttpContext.Request.Method = HttpMethods.Get;
         context.HttpContext.Request.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            NoStore = true
+            NoStore = true,
         }.ToString();
 
         Assert.True(new ResponseCachingPolicyProvider().AllowCacheLookup(context));
@@ -101,13 +94,11 @@ public class ResponseCachingPolicyProviderTests
         context.HttpContext.Request.Method = HttpMethods.Get;
         context.HttpContext.Request.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            NoCache = true
+            NoCache = true,
         }.ToString();
 
         Assert.False(new ResponseCachingPolicyProvider().AllowCacheLookup(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.RequestWithNoCacheNotCacheable);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.RequestWithNoCacheNotCacheable);
     }
 
     [Fact]
@@ -121,7 +112,8 @@ public class ResponseCachingPolicyProviderTests
         Assert.False(new ResponseCachingPolicyProvider().AllowCacheLookup(context));
         TestUtils.AssertLoggedMessages(
             sink.Writes,
-            LoggedMessage.RequestWithPragmaNoCacheNotCacheable);
+            LoggedMessage.RequestWithPragmaNoCacheNotCacheable
+        );
     }
 
     [Fact]
@@ -145,7 +137,7 @@ public class ResponseCachingPolicyProviderTests
         context.HttpContext.Request.Method = HttpMethods.Get;
         context.HttpContext.Request.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            NoStore = true
+            NoStore = true,
         }.ToString();
 
         Assert.False(new ResponseCachingPolicyProvider().AllowCacheStorage(context));
@@ -161,7 +153,8 @@ public class ResponseCachingPolicyProviderTests
         Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
         TestUtils.AssertLoggedMessages(
             sink.Writes,
-            LoggedMessage.ResponseWithoutPublicNotCacheable);
+            LoggedMessage.ResponseWithoutPublicNotCacheable
+        );
     }
 
     [Fact]
@@ -171,7 +164,7 @@ public class ResponseCachingPolicyProviderTests
         var context = TestUtils.CreateTestContext(sink);
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            Public = true
+            Public = true,
         }.ToString();
 
         Assert.True(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
@@ -186,13 +179,11 @@ public class ResponseCachingPolicyProviderTests
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
             Public = true,
-            NoCache = true
+            NoCache = true,
         }.ToString();
 
         Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ResponseWithNoCacheNotCacheable);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ResponseWithNoCacheNotCacheable);
     }
 
     [Fact]
@@ -203,13 +194,11 @@ public class ResponseCachingPolicyProviderTests
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
             Public = true,
-            NoStore = true
+            NoStore = true,
         }.ToString();
 
         Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ResponseWithNoStoreNotCacheable);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ResponseWithNoStoreNotCacheable);
     }
 
     [Fact]
@@ -219,14 +208,15 @@ public class ResponseCachingPolicyProviderTests
         var context = TestUtils.CreateTestContext(sink);
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            Public = true
+            Public = true,
         }.ToString();
         context.HttpContext.Response.Headers.SetCookie = "cookieName=cookieValue";
 
         Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
         TestUtils.AssertLoggedMessages(
             sink.Writes,
-            LoggedMessage.ResponseWithSetCookieNotCacheable);
+            LoggedMessage.ResponseWithSetCookieNotCacheable
+        );
     }
 
     [Fact]
@@ -236,14 +226,12 @@ public class ResponseCachingPolicyProviderTests
         var context = TestUtils.CreateTestContext(sink);
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            Public = true
+            Public = true,
         }.ToString();
         context.HttpContext.Response.Headers.Vary = "*";
 
         Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ResponseWithVaryStarNotCacheable);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ResponseWithVaryStarNotCacheable);
     }
 
     [Fact]
@@ -254,13 +242,11 @@ public class ResponseCachingPolicyProviderTests
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
             Public = true,
-            Private = true
+            Private = true,
         }.ToString();
 
         Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ResponseWithPrivateNotCacheable);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ResponseWithPrivateNotCacheable);
     }
 
     [Theory]
@@ -272,7 +258,7 @@ public class ResponseCachingPolicyProviderTests
         context.HttpContext.Response.StatusCode = statusCode;
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            Public = true
+            Public = true,
         }.ToString();
 
         Assert.True(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
@@ -348,13 +334,14 @@ public class ResponseCachingPolicyProviderTests
         context.HttpContext.Response.StatusCode = statusCode;
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            Public = true
+            Public = true,
         }.ToString();
 
         Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
         TestUtils.AssertLoggedMessages(
             sink.Writes,
-            LoggedMessage.ResponseWithUnsuccessfulStatusCodeNotCacheable);
+            LoggedMessage.ResponseWithUnsuccessfulStatusCodeNotCacheable
+        );
     }
 
     [Fact]
@@ -365,7 +352,7 @@ public class ResponseCachingPolicyProviderTests
         context.HttpContext.Response.StatusCode = StatusCodes.Status200OK;
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            Public = true
+            Public = true,
         }.ToString();
 
         var utcNow = DateTimeOffset.UtcNow;
@@ -384,7 +371,7 @@ public class ResponseCachingPolicyProviderTests
         context.HttpContext.Response.StatusCode = StatusCodes.Status200OK;
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            Public = true
+            Public = true,
         }.ToString();
         var utcNow = DateTimeOffset.UtcNow;
         context.HttpContext.Response.Headers.Expires = HeaderUtilities.FormatDate(utcNow);
@@ -393,9 +380,7 @@ public class ResponseCachingPolicyProviderTests
         context.ResponseTime = utcNow;
 
         Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ExpirationExpiresExceeded);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ExpirationExpiresExceeded);
     }
 
     [Fact]
@@ -408,7 +393,7 @@ public class ResponseCachingPolicyProviderTests
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
             Public = true,
-            MaxAge = TimeSpan.FromSeconds(10)
+            MaxAge = TimeSpan.FromSeconds(10),
         }.ToString();
         context.HttpContext.Response.Headers.Expires = HeaderUtilities.FormatDate(utcNow);
         context.HttpContext.Response.Headers.Date = HeaderUtilities.FormatDate(utcNow);
@@ -428,16 +413,14 @@ public class ResponseCachingPolicyProviderTests
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
             Public = true,
-            MaxAge = TimeSpan.FromSeconds(10)
+            MaxAge = TimeSpan.FromSeconds(10),
         }.ToString();
         context.HttpContext.Response.Headers.Expires = HeaderUtilities.FormatDate(utcNow);
         context.HttpContext.Response.Headers.Date = HeaderUtilities.FormatDate(utcNow);
         context.ResponseTime = utcNow + TimeSpan.FromSeconds(10);
 
         Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ExpirationMaxAgeExceeded);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ExpirationMaxAgeExceeded);
     }
 
     [Fact]
@@ -451,7 +434,7 @@ public class ResponseCachingPolicyProviderTests
         {
             Public = true,
             MaxAge = TimeSpan.FromSeconds(10),
-            SharedMaxAge = TimeSpan.FromSeconds(15)
+            SharedMaxAge = TimeSpan.FromSeconds(15),
         }.ToString();
         context.HttpContext.Response.Headers.Date = HeaderUtilities.FormatDate(utcNow);
         context.ResponseTime = utcNow + TimeSpan.FromSeconds(11);
@@ -471,15 +454,13 @@ public class ResponseCachingPolicyProviderTests
         {
             Public = true,
             MaxAge = TimeSpan.FromSeconds(10),
-            SharedMaxAge = TimeSpan.FromSeconds(5)
+            SharedMaxAge = TimeSpan.FromSeconds(5),
         }.ToString();
         context.HttpContext.Response.Headers.Date = HeaderUtilities.FormatDate(utcNow);
         context.ResponseTime = utcNow + TimeSpan.FromSeconds(5);
 
         Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ExpirationSharedMaxAgeExceeded);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ExpirationSharedMaxAgeExceeded);
     }
 
     [Fact]
@@ -507,7 +488,7 @@ public class ResponseCachingPolicyProviderTests
         context.CachedResponseHeaders = new HeaderDictionary();
         context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
         {
-            Public = true
+            Public = true,
         }.ToString();
 
         Assert.True(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
@@ -525,14 +506,12 @@ public class ResponseCachingPolicyProviderTests
         context.CachedResponseHeaders = new HeaderDictionary();
         context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
         {
-            Public = true
+            Public = true,
         }.ToString();
         context.CachedResponseHeaders[HeaderNames.Expires] = HeaderUtilities.FormatDate(utcNow);
 
         Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ExpirationExpiresExceeded);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ExpirationExpiresExceeded);
     }
 
     [Fact]
@@ -547,7 +526,7 @@ public class ResponseCachingPolicyProviderTests
         context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
         {
             Public = true,
-            MaxAge = TimeSpan.FromSeconds(10)
+            MaxAge = TimeSpan.FromSeconds(10),
         }.ToString();
         context.HttpContext.Response.Headers.Expires = HeaderUtilities.FormatDate(utcNow);
 
@@ -567,14 +546,12 @@ public class ResponseCachingPolicyProviderTests
         context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
         {
             Public = true,
-            MaxAge = TimeSpan.FromSeconds(10)
+            MaxAge = TimeSpan.FromSeconds(10),
         }.ToString();
         context.HttpContext.Response.Headers.Expires = HeaderUtilities.FormatDate(utcNow);
 
         Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ExpirationMaxAgeExceeded);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ExpirationMaxAgeExceeded);
     }
 
     [Fact]
@@ -590,7 +567,7 @@ public class ResponseCachingPolicyProviderTests
         {
             Public = true,
             MaxAge = TimeSpan.FromSeconds(10),
-            SharedMaxAge = TimeSpan.FromSeconds(15)
+            SharedMaxAge = TimeSpan.FromSeconds(15),
         }.ToString();
         context.CachedResponseHeaders[HeaderNames.Expires] = HeaderUtilities.FormatDate(utcNow);
 
@@ -611,14 +588,12 @@ public class ResponseCachingPolicyProviderTests
         {
             Public = true,
             MaxAge = TimeSpan.FromSeconds(10),
-            SharedMaxAge = TimeSpan.FromSeconds(5)
+            SharedMaxAge = TimeSpan.FromSeconds(5),
         }.ToString();
         context.CachedResponseHeaders[HeaderNames.Expires] = HeaderUtilities.FormatDate(utcNow);
 
         Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ExpirationSharedMaxAgeExceeded);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ExpirationSharedMaxAgeExceeded);
     }
 
     [Fact]
@@ -628,13 +603,13 @@ public class ResponseCachingPolicyProviderTests
         var context = TestUtils.CreateTestContext(sink);
         context.HttpContext.Request.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            MinFresh = TimeSpan.FromSeconds(2)
+            MinFresh = TimeSpan.FromSeconds(2),
         }.ToString();
         context.CachedResponseHeaders = new HeaderDictionary();
         context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
         {
             MaxAge = TimeSpan.FromSeconds(10),
-            SharedMaxAge = TimeSpan.FromSeconds(5)
+            SharedMaxAge = TimeSpan.FromSeconds(5),
         }.ToString();
         context.CachedEntryAge = TimeSpan.FromSeconds(3);
 
@@ -642,7 +617,8 @@ public class ResponseCachingPolicyProviderTests
         TestUtils.AssertLoggedMessages(
             sink.Writes,
             LoggedMessage.ExpirationMinFreshAdded,
-            LoggedMessage.ExpirationSharedMaxAgeExceeded);
+            LoggedMessage.ExpirationSharedMaxAgeExceeded
+        );
     }
 
     [Fact]
@@ -652,7 +628,7 @@ public class ResponseCachingPolicyProviderTests
         var context = TestUtils.CreateTestContext(sink);
         context.HttpContext.Request.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            MaxAge = TimeSpan.FromSeconds(5)
+            MaxAge = TimeSpan.FromSeconds(5),
         }.ToString();
         context.CachedResponseHeaders = new HeaderDictionary();
         context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
@@ -662,9 +638,7 @@ public class ResponseCachingPolicyProviderTests
         context.CachedEntryAge = TimeSpan.FromSeconds(5);
 
         Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ExpirationMaxAgeExceeded);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ExpirationMaxAgeExceeded);
     }
 
     [Fact]
@@ -676,7 +650,7 @@ public class ResponseCachingPolicyProviderTests
         {
             MaxAge = TimeSpan.FromSeconds(5),
             MaxStale = true, // This value must be set to true in order to specify MaxStaleLimit
-            MaxStaleLimit = TimeSpan.FromSeconds(2)
+            MaxStaleLimit = TimeSpan.FromSeconds(2),
         }.ToString();
         context.CachedResponseHeaders = new HeaderDictionary();
         context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
@@ -686,9 +660,7 @@ public class ResponseCachingPolicyProviderTests
         context.CachedEntryAge = TimeSpan.FromSeconds(6);
 
         Assert.True(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ExpirationMaxStaleSatisfied);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ExpirationMaxStaleSatisfied);
     }
 
     [Fact]
@@ -699,7 +671,7 @@ public class ResponseCachingPolicyProviderTests
         context.HttpContext.Request.Headers.CacheControl = new CacheControlHeaderValue()
         {
             MaxAge = TimeSpan.FromSeconds(5),
-            MaxStale = true // No value specified means a MaxStaleLimit of infinity
+            MaxStale = true, // No value specified means a MaxStaleLimit of infinity
         }.ToString();
         context.CachedResponseHeaders = new HeaderDictionary();
         context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
@@ -711,7 +683,8 @@ public class ResponseCachingPolicyProviderTests
         Assert.True(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
         TestUtils.AssertLoggedMessages(
             sink.Writes,
-            LoggedMessage.ExpirationInfiniteMaxStaleSatisfied);
+            LoggedMessage.ExpirationInfiniteMaxStaleSatisfied
+        );
     }
 
     [Fact]
@@ -723,7 +696,7 @@ public class ResponseCachingPolicyProviderTests
         {
             MaxAge = TimeSpan.FromSeconds(5),
             MaxStale = true, // This value must be set to true in order to specify MaxStaleLimit
-            MaxStaleLimit = TimeSpan.FromSeconds(1)
+            MaxStaleLimit = TimeSpan.FromSeconds(1),
         }.ToString();
         context.CachedResponseHeaders = new HeaderDictionary();
         context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
@@ -733,9 +706,7 @@ public class ResponseCachingPolicyProviderTests
         context.CachedEntryAge = TimeSpan.FromSeconds(6);
 
         Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ExpirationMaxAgeExceeded);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ExpirationMaxAgeExceeded);
     }
 
     [Fact]
@@ -747,20 +718,18 @@ public class ResponseCachingPolicyProviderTests
         {
             MaxAge = TimeSpan.FromSeconds(5),
             MaxStale = true, // This value must be set to true in order to specify MaxStaleLimit
-            MaxStaleLimit = TimeSpan.FromSeconds(2)
+            MaxStaleLimit = TimeSpan.FromSeconds(2),
         }.ToString();
         context.CachedResponseHeaders = new HeaderDictionary();
         context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
         {
             MaxAge = TimeSpan.FromSeconds(5),
-            MustRevalidate = true
+            MustRevalidate = true,
         }.ToString();
         context.CachedEntryAge = TimeSpan.FromSeconds(6);
 
         Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ExpirationMustRevalidate);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ExpirationMustRevalidate);
     }
 
     [Fact]
@@ -772,19 +741,17 @@ public class ResponseCachingPolicyProviderTests
         {
             MaxAge = TimeSpan.FromSeconds(5),
             MaxStale = true, // This value must be set to true in order to specify MaxStaleLimit
-            MaxStaleLimit = TimeSpan.FromSeconds(2)
+            MaxStaleLimit = TimeSpan.FromSeconds(2),
         }.ToString();
         context.CachedResponseHeaders = new HeaderDictionary();
         context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
         {
             MaxAge = TimeSpan.FromSeconds(5),
-            MustRevalidate = true
+            MustRevalidate = true,
         }.ToString();
         context.CachedEntryAge = TimeSpan.FromSeconds(6);
 
         Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ExpirationMustRevalidate);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ExpirationMustRevalidate);
     }
 }

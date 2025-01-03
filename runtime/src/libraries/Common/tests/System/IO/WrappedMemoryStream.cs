@@ -13,10 +13,8 @@ namespace System.IO.Tests
         private bool _canRead;
         private bool _canSeek;
 
-        public WrappedMemoryStream(bool canRead, bool canWrite, bool canSeek) :
-            this(canRead, canWrite, canSeek, null)
-        {
-        }
+        public WrappedMemoryStream(bool canRead, bool canWrite, bool canSeek)
+            : this(canRead, canWrite, canSeek, null) { }
 
         public WrappedMemoryStream(bool canRead, bool canWrite, bool canSeek, byte[] data)
         {
@@ -28,47 +26,28 @@ namespace System.IO.Tests
 
         public override bool CanRead
         {
-            get
-            {
-                return _canRead;
-            }
+            get { return _canRead; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return _canSeek;
-            }
+            get { return _canSeek; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return _canWrite;
-            }
+            get { return _canWrite; }
         }
 
         public override long Length
         {
-            get
-            {
-                return wrapped.Length;
-            }
+            get { return wrapped.Length; }
         }
 
         public override long Position
         {
-            get
-            {
-                return wrapped.Position;
-            }
-
-            set
-            {
-                wrapped.Position = value;
-            }
+            get { return wrapped.Position; }
+            set { wrapped.Position = value; }
         }
 
         public override void Flush()
@@ -83,7 +62,7 @@ namespace System.IO.Tests
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-           return  wrapped.Seek(offset, origin);
+            return wrapped.Seek(offset, origin);
         }
 
         public override void SetLength(long value)

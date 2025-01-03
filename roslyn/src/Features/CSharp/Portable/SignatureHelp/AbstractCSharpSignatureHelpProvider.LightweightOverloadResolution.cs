@@ -26,36 +26,64 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 ImmutableArray<IMethodSymbol> candidates,
                 SeparatedSyntaxList<ArgumentSyntax> arguments,
                 out IMethodSymbol? currentSymbol,
-                out int parameterIndex)
+                out int parameterIndex
+            )
             {
-                var semanticFactsService = document.GetRequiredLanguageService<ISemanticFactsService>();
+                var semanticFactsService =
+                    document.GetRequiredLanguageService<ISemanticFactsService>();
                 if (candidates.Length == 1)
                 {
                     // The compiler told us the correct overload or we only have one choice, but we need to find out the parameter to highlight given cursor position
                     currentSymbol = candidates[0];
-                    FindParameterIndexIfCompatibleMethod(arguments, currentSymbol, position, semanticModel, semanticFactsService, out parameterIndex);
+                    FindParameterIndexIfCompatibleMethod(
+                        arguments,
+                        currentSymbol,
+                        position,
+                        semanticModel,
+                        semanticFactsService,
+                        out parameterIndex
+                    );
                 }
                 else
                 {
-                    (currentSymbol, parameterIndex) = GuessCurrentSymbolAndParameter(arguments, candidates, position, semanticModel, semanticFactsService);
+                    (currentSymbol, parameterIndex) = GuessCurrentSymbolAndParameter(
+                        arguments,
+                        candidates,
+                        position,
+                        semanticModel,
+                        semanticFactsService
+                    );
                 }
             }
 
             /// <summary>
             /// If the symbol could not be bound, we could be dealing with a partial invocation, we'll try to find a possible overload.
             /// </summary>
-            private static (IMethodSymbol? symbol, int parameterIndex) GuessCurrentSymbolAndParameter(
+            private static (
+                IMethodSymbol? symbol,
+                int parameterIndex
+            ) GuessCurrentSymbolAndParameter(
                 SeparatedSyntaxList<ArgumentSyntax> arguments,
                 ImmutableArray<IMethodSymbol> methodGroup,
                 int position,
                 SemanticModel semanticModel,
-                ISemanticFactsService semanticFactsService)
+                ISemanticFactsService semanticFactsService
+            )
             {
                 if (arguments.Count != 0)
                 {
                     foreach (var method in methodGroup)
                     {
-                        if (FindParameterIndexIfCompatibleMethod(arguments, method, position, semanticModel, semanticFactsService, out var parameterIndex))
+                        if (
+                            FindParameterIndexIfCompatibleMethod(
+                                arguments,
+                                method,
+                                position,
+                                semanticModel,
+                                semanticFactsService,
+                                out var parameterIndex
+                            )
+                        )
                             return (method, parameterIndex);
                     }
                 }
@@ -75,11 +103,16 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 int position,
                 SemanticModel semanticModel,
                 ISemanticFactsService semanticFactsService,
-                out int foundParameterIndex)
+                out int foundParameterIndex
+            )
             {
                 // map the arguments to their corresponding parameters
                 var argumentCount = arguments.Count;
-                using var _ = ArrayBuilder<int>.GetInstance(argumentCount, fillWithValue: -1, out var argToParamMap);
+                using var _ = ArrayBuilder<int>.GetInstance(
+                    argumentCount,
+                    fillWithValue: -1,
+                    out var argToParamMap
+                );
                 if (!TryPrepareArgToParamMap(arguments, method, argToParamMap))
                 {
                     foundParameterIndex = -1;
@@ -115,7 +148,10 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     }
                     else
                     {
-                        foundParameterIndex = FirstUnspecifiedParameter(argToParamMap, argumentCount);
+                        foundParameterIndex = FirstUnspecifiedParameter(
+                            argToParamMap,
+                            argumentCount
+                        );
                     }
                 }
                 else
@@ -129,9 +165,16 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
                 // If the cursor is pointing at an argument for which we did not find the corresponding
                 // parameter, we will highlight the first unspecified parameter.
-                static int FirstUnspecifiedParameter(ArrayBuilder<int> argToParamMap, int argumentCount)
+                static int FirstUnspecifiedParameter(
+                    ArrayBuilder<int> argToParamMap,
+                    int argumentCount
+                )
                 {
-                    using var _ = ArrayBuilder<bool>.GetInstance(argumentCount, false, out var specified);
+                    using var _ = ArrayBuilder<bool>.GetInstance(
+                        argumentCount,
+                        false,
+                        out var specified
+                    );
                     for (var i = 0; i < argumentCount; i++)
                     {
                         var parameterIndex = argToParamMap[i];
@@ -160,9 +203,11 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                         }
 
                         var type = parameter.Type;
-                        if (parameter.IsParams
+                        if (
+                            parameter.IsParams
                             && type is IArrayTypeSymbol arrayType
-                            && HasImplicitConversion(argument.Expression, arrayType.ElementType))
+                            && HasImplicitConversion(argument.Expression, arrayType.ElementType)
+                        )
                         {
                             return true;
                         }
@@ -187,7 +232,11 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
                 bool HasImplicitConversion(SyntaxNode expression, ITypeSymbol destination)
                 {
-                    var conversion = semanticFactsService.ClassifyConversion(semanticModel, expression, destination);
+                    var conversion = semanticFactsService.ClassifyConversion(
+                        semanticModel,
+                        expression,
+                        destination
+                    );
                     return conversion.IsImplicit;
                 }
             }
@@ -195,7 +244,11 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             /// <summary>
             /// Find the parameter index corresponding to each argument provided
             /// </summary>
-            private static bool TryPrepareArgToParamMap(SeparatedSyntaxList<ArgumentSyntax> arguments, IMethodSymbol method, ArrayBuilder<int> argToParamMap)
+            private static bool TryPrepareArgToParamMap(
+                SeparatedSyntaxList<ArgumentSyntax> arguments,
+                IMethodSymbol method,
+                ArrayBuilder<int> argToParamMap
+            )
             {
                 var parameters = method.Parameters;
                 var parameterCount = parameters.Length;
@@ -268,14 +321,17 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 }
             }
 
-            private static bool IsEmptyArgument(ExpressionSyntax expression)
-                => expression.Span.IsEmpty;
+            private static bool IsEmptyArgument(ExpressionSyntax expression) =>
+                expression.Span.IsEmpty;
 
             /// <summary>
             /// Given the cursor position, find which argument is active.
             /// This will be useful to later find which parameter should be highlighted.
             /// </summary>
-            private static int TryGetArgumentIndex(SeparatedSyntaxList<ArgumentSyntax> arguments, int position)
+            private static int TryGetArgumentIndex(
+                SeparatedSyntaxList<ArgumentSyntax> arguments,
+                int position
+            )
             {
                 if (arguments.Count == 0)
                     return -1;
@@ -291,7 +347,10 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 return arguments.Count - 1;
             }
 
-            private static bool HasName(ArgumentSyntax argument, [NotNullWhen(true)] out string? name)
+            private static bool HasName(
+                ArgumentSyntax argument,
+                [NotNullWhen(true)] out string? name
+            )
             {
                 name = argument.NameColon?.Name.Identifier.ValueText;
                 return name != null;

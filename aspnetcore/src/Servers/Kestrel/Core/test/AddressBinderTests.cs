@@ -5,8 +5,8 @@ using System.Net;
 using System.Net.Sockets;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -23,10 +23,15 @@ public class AddressBinderTests
     [InlineData("http://[::1]", "::1", 80)]
     [InlineData("http://127.0.0.1", "127.0.0.1", 80)]
     [InlineData("https://127.0.0.1", "127.0.0.1", 443)]
-    public void CorrectIPEndpointsAreCreated(string address, string expectedAddress, int expectedPort)
+    public void CorrectIPEndpointsAreCreated(
+        string address,
+        string expectedAddress,
+        int expectedPort
+    )
     {
-        Assert.True(AddressBinder.TryCreateIPEndPoint(
-            BindingAddress.Parse(address), out var endpoint));
+        Assert.True(
+            AddressBinder.TryCreateIPEndPoint(BindingAddress.Parse(address), out var endpoint)
+        );
         Assert.NotNull(endpoint);
         Assert.Equal(IPAddress.Parse(expectedAddress), endpoint.Address);
         Assert.Equal(expectedPort, endpoint.Port);
@@ -42,8 +47,9 @@ public class AddressBinderTests
     [InlineData("https://randomhost")]
     public void DoesNotCreateIPEndPointOnInvalidIPAddress(string address)
     {
-        Assert.False(AddressBinder.TryCreateIPEndPoint(
-            BindingAddress.Parse(address), out var endpoint));
+        Assert.False(
+            AddressBinder.TryCreateIPEndPoint(BindingAddress.Parse(address), out var endpoint)
+        );
     }
 
     [Theory]
@@ -117,21 +123,33 @@ public class AddressBinderTests
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.Windows, SkipReason = "tmp/kestrel-test.sock is not valid for windows. Unix socket path must be absolute.")]
+    [OSSkipCondition(
+        OperatingSystems.Windows,
+        SkipReason = "tmp/kestrel-test.sock is not valid for windows. Unix socket path must be absolute."
+    )]
     public void ParseAddressUnixPipe()
     {
-        var listenOptions = AddressBinder.ParseAddress("http://unix:/tmp/kestrel-test.sock", out var https);
+        var listenOptions = AddressBinder.ParseAddress(
+            "http://unix:/tmp/kestrel-test.sock",
+            out var https
+        );
         Assert.IsType<UnixDomainSocketEndPoint>(listenOptions.EndPoint);
         Assert.Equal("/tmp/kestrel-test.sock", listenOptions.SocketPath);
         Assert.False(https);
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX, SkipReason = "Windows has drive letters and volume separator (c:), testing this url on unix or osx provides completely different output.")]
+    [OSSkipCondition(
+        OperatingSystems.Linux | OperatingSystems.MacOSX,
+        SkipReason = "Windows has drive letters and volume separator (c:), testing this url on unix or osx provides completely different output."
+    )]
     [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_RS4)]
     public void ParseAddressUnixPipeOnWindows()
     {
-        var listenOptions = AddressBinder.ParseAddress(@"http://unix:/c:/foo/bar/pipe.socket", out var https);
+        var listenOptions = AddressBinder.ParseAddress(
+            @"http://unix:/c:/foo/bar/pipe.socket",
+            out var https
+        );
         Assert.IsType<UnixDomainSocketEndPoint>(listenOptions.EndPoint);
         Assert.Equal("c:/foo/bar/pipe.socket", listenOptions.SocketPath);
         Assert.False(https);
@@ -163,10 +181,18 @@ public class AddressBinderTests
             addresses,
             options,
             NullLogger.Instance,
-            endpoint => throw new AddressInUseException("already in use"));
+            endpoint => throw new AddressInUseException("already in use")
+        );
 
-        await Assert.ThrowsAsync<IOException>(() =>
-            AddressBinder.BindAsync(options.GetListenOptions(), addressBindContext, _noopUseHttps, CancellationToken.None));
+        await Assert.ThrowsAsync<IOException>(
+            () =>
+                AddressBinder.BindAsync(
+                    options.GetListenOptions(),
+                    addressBindContext,
+                    _noopUseHttps,
+                    CancellationToken.None
+                )
+        );
     }
 
     [Fact]
@@ -185,14 +211,23 @@ public class AddressBinderTests
             addresses,
             options,
             logger,
-            endpoint => Task.CompletedTask);
+            endpoint => Task.CompletedTask
+        );
 
-        var bindTask = AddressBinder.BindAsync(options.GetListenOptions(), addressBindContext, _noopUseHttps, CancellationToken.None);
+        var bindTask = AddressBinder.BindAsync(
+            options.GetListenOptions(),
+            addressBindContext,
+            _noopUseHttps,
+            CancellationToken.None
+        );
         Assert.True(bindTask.IsCompletedSuccessfully);
 
         var log = Assert.Single(logger.Messages);
         Assert.Equal(LogLevel.Warning, log.LogLevel);
-        Assert.Equal(CoreStrings.FormatOverridingWithKestrelOptions(overriddenAddress), log.Message);
+        Assert.Equal(
+            CoreStrings.FormatOverridingWithKestrelOptions(overriddenAddress),
+            log.Message
+        );
     }
 
     [Fact]
@@ -211,16 +246,28 @@ public class AddressBinderTests
             addresses,
             options,
             logger,
-            endpoint => Task.CompletedTask);
+            endpoint => Task.CompletedTask
+        );
 
         addressBindContext.ServerAddressesFeature.PreferHostingUrls = true;
 
-        var bindTask = AddressBinder.BindAsync(options.GetListenOptions(), addressBindContext, _noopUseHttps, CancellationToken.None);
+        var bindTask = AddressBinder.BindAsync(
+            options.GetListenOptions(),
+            addressBindContext,
+            _noopUseHttps,
+            CancellationToken.None
+        );
         Assert.True(bindTask.IsCompletedSuccessfully);
 
         var log = Assert.Single(logger.Messages);
         Assert.Equal(LogLevel.Information, log.LogLevel);
-        Assert.Equal(CoreStrings.FormatOverridingWithPreferHostingUrls(nameof(addressBindContext.ServerAddressesFeature.PreferHostingUrls), overriddenAddress), log.Message);
+        Assert.Equal(
+            CoreStrings.FormatOverridingWithPreferHostingUrls(
+                nameof(addressBindContext.ServerAddressesFeature.PreferHostingUrls),
+                overriddenAddress
+            ),
+            log.Message
+        );
     }
 
     [Fact]
@@ -238,10 +285,18 @@ public class AddressBinderTests
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 return Task.CompletedTask;
-            });
+            }
+        );
 
-        await Assert.ThrowsAsync<OperationCanceledException>(() =>
-            AddressBinder.BindAsync(options.GetListenOptions(), addressBindContext, _noopUseHttps, new CancellationToken(true)));
+        await Assert.ThrowsAsync<OperationCanceledException>(
+            () =>
+                AddressBinder.BindAsync(
+                    options.GetListenOptions(),
+                    addressBindContext,
+                    _noopUseHttps,
+                    new CancellationToken(true)
+                )
+        );
     }
 
     [Theory]
@@ -276,9 +331,15 @@ public class AddressBinderTests
                 }
 
                 return Task.CompletedTask;
-            });
+            }
+        );
 
-        await AddressBinder.BindAsync(options.GetListenOptions(), addressBindContext, _noopUseHttps, CancellationToken.None);
+        await AddressBinder.BindAsync(
+            options.GetListenOptions(),
+            addressBindContext,
+            _noopUseHttps,
+            CancellationToken.None
+        );
 
         Assert.True(ipV4Attempt, "Should have attempted to bind to IPAddress.Any");
         Assert.True(ipV6Attempt, "Should have attempted to bind to IPAddress.IPv6Any");
@@ -294,7 +355,7 @@ public class AddressBinderTests
         services.AddLogging();
         var options = new KestrelServerOptions()
         {
-            ApplicationServices = services.BuildServiceProvider()
+            ApplicationServices = services.BuildServiceProvider(),
         };
 
         var endpoints = new List<ListenOptions>();
@@ -307,9 +368,15 @@ public class AddressBinderTests
             {
                 endpoints.Add(listenOptions);
                 return Task.CompletedTask;
-            });
+            }
+        );
 
-        await AddressBinder.BindAsync(options.GetListenOptions(), addressBindContext, _noopUseHttps, CancellationToken.None);
+        await AddressBinder.BindAsync(
+            options.GetListenOptions(),
+            addressBindContext,
+            _noopUseHttps,
+            CancellationToken.None
+        );
 
         Assert.Contains(endpoints, e => e.IPEndPoint.Port == 5000 && !e.IsTls);
     }

@@ -16,18 +16,14 @@ public class HtmlContentBuilder : IHtmlContentBuilder
     /// Creates a new <see cref="HtmlContentBuilder"/>.
     /// </summary>
     public HtmlContentBuilder()
-        : this(new List<object>())
-    {
-    }
+        : this(new List<object>()) { }
 
     /// <summary>
     /// Creates a new <see cref="HtmlContentBuilder"/> with the given initial capacity.
     /// </summary>
     /// <param name="capacity">The initial capacity of the backing store.</param>
     public HtmlContentBuilder(int capacity)
-        : this(new List<object>(capacity))
-    {
-    }
+        : this(new List<object>(capacity)) { }
 
     /// <summary>
     /// Gets the number of elements in the <see cref="HtmlContentBuilder"/>.

@@ -19,10 +19,13 @@ namespace System.ComponentModel.Tests
 
             yield return ConvertTest.Valid((decimal)-1, "?1", new CustomPositiveSymbolCulture());
 
-            yield return ConvertTest.Valid((decimal)3, new InstanceDescriptor(
-                typeof(decimal).GetConstructor(new Type[] { typeof(int[]) }),
-                new object[] { new int[] { 3, 0, 0, 0 } }
-            ));
+            yield return ConvertTest.Valid(
+                (decimal)3,
+                new InstanceDescriptor(
+                    typeof(decimal).GetConstructor(new Type[] { typeof(int[]) }),
+                    new object[] { new int[] { 3, 0, 0, 0 } }
+                )
+            );
 
             yield return ConvertTest.CantConvertTo((decimal)3, typeof(decimal));
             yield return ConvertTest.CantConvertTo((decimal)3, typeof(object));

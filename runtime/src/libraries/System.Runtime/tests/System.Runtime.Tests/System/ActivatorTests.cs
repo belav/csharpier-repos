@@ -37,7 +37,8 @@ namespace System.Tests
 
             Activator.CreateInstance(typeof(StructTypeWithoutReflectionMetadata));
 
-            StructWithPublicDefaultConstructor s = (StructWithPublicDefaultConstructor)Activator.CreateInstance(typeof(StructWithPublicDefaultConstructor));
+            StructWithPublicDefaultConstructor s = (StructWithPublicDefaultConstructor)
+                Activator.CreateInstance(typeof(StructWithPublicDefaultConstructor));
             Assert.True(s.ConstructorInvoked);
         }
 
@@ -45,7 +46,9 @@ namespace System.Tests
         public static void CreateInstance_ConstructorWithPrimitive_PerformsPrimitiveWidening()
         {
             // Primitive widening is allowed by the binder, but not by Dynamic.DelegateInvoke().
-            Choice1 c = (Choice1)(Activator.CreateInstance(typeof(Choice1), new object[] { (short)-2 }));
+            Choice1 c = (Choice1)(
+                Activator.CreateInstance(typeof(Choice1), new object[] { (short)-2 })
+            );
             Assert.Equal(2, c.I);
         }
 
@@ -53,22 +56,43 @@ namespace System.Tests
         public static void CreateInstance_ConstructorWithParamsParameter()
         {
             // C# params arguments are honored by Activator.CreateInstance()
-            Choice1 c = (Choice1)(Activator.CreateInstance(typeof(Choice1), new object[] { new VarArgs() }));
+            Choice1 c = (Choice1)(
+                Activator.CreateInstance(typeof(Choice1), new object[] { new VarArgs() })
+            );
             Assert.Equal(5, c.I);
 
-            c = (Choice1)(Activator.CreateInstance(typeof(Choice1), new object[] { new VarArgs(), "P1" }));
+            c = (Choice1)(
+                Activator.CreateInstance(typeof(Choice1), new object[] { new VarArgs(), "P1" })
+            );
             Assert.Equal(5, c.I);
 
-            c = (Choice1)(Activator.CreateInstance(typeof(Choice1), new object[] { new VarArgs(), "P1", "P2" }));
+            c = (Choice1)(
+                Activator.CreateInstance(
+                    typeof(Choice1),
+                    new object[] { new VarArgs(), "P1", "P2" }
+                )
+            );
             Assert.Equal(5, c.I);
 
-            c = (Choice1)(Activator.CreateInstance(typeof(Choice1), new object[] { new VarStringArgs() }));
+            c = (Choice1)(
+                Activator.CreateInstance(typeof(Choice1), new object[] { new VarStringArgs() })
+            );
             Assert.Equal(6, c.I);
 
-            c = (Choice1)(Activator.CreateInstance(typeof(Choice1), new object[] { new VarStringArgs(), "P1" }));
+            c = (Choice1)(
+                Activator.CreateInstance(
+                    typeof(Choice1),
+                    new object[] { new VarStringArgs(), "P1" }
+                )
+            );
             Assert.Equal(6, c.I);
 
-            c = (Choice1)(Activator.CreateInstance(typeof(Choice1), new object[] { new VarStringArgs(), "P1", "P2" }));
+            c = (Choice1)(
+                Activator.CreateInstance(
+                    typeof(Choice1),
+                    new object[] { new VarStringArgs(), "P1", "P2" }
+                )
+            );
             Assert.Equal(6, c.I);
         }
 
@@ -77,9 +101,15 @@ namespace System.Tests
         {
             // Activator holds a cache of constructors and the types to which they belong.
             // Test caching behaviour by activating multiple times.
-            Assert.IsType<ValueTypeWithDefaultConstructor>(Activator.CreateInstance(typeof(ValueTypeWithDefaultConstructor)));
-            Assert.IsType<ValueTypeWithDefaultConstructor>(Activator.CreateInstance(typeof(ValueTypeWithDefaultConstructor), nonPublic: true));
-            Assert.IsType<ValueTypeWithDefaultConstructor>(Activator.CreateInstance(typeof(ValueTypeWithDefaultConstructor), nonPublic: false));
+            Assert.IsType<ValueTypeWithDefaultConstructor>(
+                Activator.CreateInstance(typeof(ValueTypeWithDefaultConstructor))
+            );
+            Assert.IsType<ValueTypeWithDefaultConstructor>(
+                Activator.CreateInstance(typeof(ValueTypeWithDefaultConstructor), nonPublic: true)
+            );
+            Assert.IsType<ValueTypeWithDefaultConstructor>(
+                Activator.CreateInstance(typeof(ValueTypeWithDefaultConstructor), nonPublic: false)
+            );
         }
 
         [Fact]
@@ -87,24 +117,50 @@ namespace System.Tests
         {
             // Activator holds a cache of constructors and the types to which they belong.
             // Test caching behaviour by activating multiple times.
-            TypeWithPrivateDefaultConstructor c1 = (TypeWithPrivateDefaultConstructor)Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor), nonPublic: true);
+            TypeWithPrivateDefaultConstructor c1 = (TypeWithPrivateDefaultConstructor)
+                Activator.CreateInstance(
+                    typeof(TypeWithPrivateDefaultConstructor),
+                    nonPublic: true
+                );
             Assert.Equal(-1, c1.Property);
 
-            TypeWithPrivateDefaultConstructor c2 = (TypeWithPrivateDefaultConstructor)Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor), nonPublic: true);
+            TypeWithPrivateDefaultConstructor c2 = (TypeWithPrivateDefaultConstructor)
+                Activator.CreateInstance(
+                    typeof(TypeWithPrivateDefaultConstructor),
+                    nonPublic: true
+                );
             Assert.Equal(-1, c2.Property);
         }
 
         [Fact]
         public void CreateInstance_PublicOnlyTypeWithPrivateDefaultConstructor_ThrowsMissingMethodException()
         {
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor)));
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor), nonPublic: false));
+            Assert.Throws<MissingMethodException>(
+                () => Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor))
+            );
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(TypeWithPrivateDefaultConstructor),
+                        nonPublic: false
+                    )
+            );
 
             // Put the private default constructor into the cache and make sure we still throw if public only.
-            Assert.NotNull(Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor), nonPublic: true));
+            Assert.NotNull(
+                Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor), nonPublic: true)
+            );
 
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor)));
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor), nonPublic: false));
+            Assert.Throws<MissingMethodException>(
+                () => Activator.CreateInstance(typeof(TypeWithPrivateDefaultConstructor))
+            );
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(TypeWithPrivateDefaultConstructor),
+                        nonPublic: false
+                    )
+            );
         }
 
         [Fact]
@@ -116,14 +172,22 @@ namespace System.Tests
         [Fact]
         public void CreateInstance_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => Activator.CreateInstance((Type)null));
-            AssertExtensions.Throws<ArgumentNullException>("type", () => Activator.CreateInstance(null, new object[0]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => Activator.CreateInstance((Type)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => Activator.CreateInstance(null, new object[0])
+            );
         }
 
         [Fact]
         public static void CreateInstance_MultipleMatchingConstructors_ThrowsAmbiguousMatchException()
         {
-            Assert.Throws<AmbiguousMatchException>(() => Activator.CreateInstance(typeof(Choice1), new object[] { null }));
+            Assert.Throws<AmbiguousMatchException>(
+                () => Activator.CreateInstance(typeof(Choice1), new object[] { null })
+            );
         }
 
         [Fact]
@@ -132,8 +196,14 @@ namespace System.Tests
             // This cannot be a [Theory] due to https://github.com/xunit/xunit/issues/1325.
             foreach (Type nonRuntimeType in Helpers.NonRuntimeTypes)
             {
-                AssertExtensions.Throws<ArgumentException>("type", () => Activator.CreateInstance(nonRuntimeType));
-                AssertExtensions.Throws<ArgumentException>("type", () => Activator.CreateInstance(nonRuntimeType, new object[0]));
+                AssertExtensions.Throws<ArgumentException>(
+                    "type",
+                    () => Activator.CreateInstance(nonRuntimeType)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "type",
+                    () => Activator.CreateInstance(nonRuntimeType, new object[0])
+                );
             }
         }
 
@@ -148,7 +218,10 @@ namespace System.Tests
         public void CreateInstance_ContainsGenericParameters_ThrowsArgumentException(Type type)
         {
             AssertExtensions.Throws<ArgumentException>(null, () => Activator.CreateInstance(type));
-            AssertExtensions.Throws<ArgumentException>(null, () => Activator.CreateInstance(type, new object[0]));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Activator.CreateInstance(type, new object[0])
+            );
         }
 
         public static IEnumerable<object[]> CreateInstance_InvalidType_TestData()
@@ -162,21 +235,33 @@ namespace System.Tests
         public void CreateInstance_InvalidType_ThrowsNotSupportedException(Type type)
         {
             Assert.Throws<NotSupportedException>(() => Activator.CreateInstance(type));
-            Assert.Throws<NotSupportedException>(() => Activator.CreateInstance(type, new object[0]));
+            Assert.Throws<NotSupportedException>(
+                () => Activator.CreateInstance(type, new object[0])
+            );
         }
 
         [Fact]
         public void CreateInstance_DesignatedOptionalParameters_ThrowsMissingMemberException()
         {
             // C# designated optional parameters are not optional as far as Activator.CreateInstance() is concerned.
-            Assert.ThrowsAny<MissingMemberException>(() => Activator.CreateInstance(typeof(Choice1), new object[] { 5.1 }));
-            Assert.ThrowsAny<MissingMemberException>(() => Activator.CreateInstance(typeof(Choice1), new object[] { 5.1, Type.Missing }));
+            Assert.ThrowsAny<MissingMemberException>(
+                () => Activator.CreateInstance(typeof(Choice1), new object[] { 5.1 })
+            );
+            Assert.ThrowsAny<MissingMemberException>(
+                () => Activator.CreateInstance(typeof(Choice1), new object[] { 5.1, Type.Missing })
+            );
         }
 
         [Fact]
         public void CreateInstance_InvalidParamArgs_ThrowsMissingMemberException()
         {
-            Assert.ThrowsAny<MissingMemberException>(() => Activator.CreateInstance(typeof(Choice1), new object[] { new VarStringArgs(), 5, 6 }));
+            Assert.ThrowsAny<MissingMemberException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(Choice1),
+                        new object[] { new VarStringArgs(), 5, 6 }
+                    )
+            );
         }
 
         [Fact]
@@ -188,7 +273,13 @@ namespace System.Tests
             // params array element type and gives it the go-ahead if it is. Unfortunately, the binder then bollixes itself by using Array.Copy() to copy
             // the params arguments. Since Array.Copy() doesn't tolerate this sort of type mismatch, it throws an InvalidCastException which bubbles out
             // out of Activator.CreateInstance. Accidental or not, we'll inherit that behavior on .NET Native.)
-            Assert.Throws<InvalidCastException>(() => Activator.CreateInstance(typeof(Choice1), new object[] { new VarIntArgs(), 1, (short)2 }));
+            Assert.Throws<InvalidCastException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(Choice1),
+                        new object[] { new VarIntArgs(), 1, (short)2 }
+                    )
+            );
         }
 
         public static IEnumerable<object[]> CreateInstance_NoDefaultConstructor_TestData()
@@ -198,7 +289,7 @@ namespace System.Tests
             yield return new object[] { typeof(int).MakeByRefType() };
             yield return new object[] { typeof(int).MakePointerType() };
             yield return new object[] { FunctionPointerType() };
-            static unsafe Type FunctionPointerType() => typeof(delegate*<int, int>);
+            static unsafe Type FunctionPointerType() => typeof(delegate* <int, int>);
         }
 
         [Theory]
@@ -233,37 +324,51 @@ namespace System.Tests
         [Fact]
         public void CreateInstance_InterfaceType_ThrowsMissingMemberException()
         {
-            Assert.ThrowsAny<MissingMemberException>(() => Activator.CreateInstance(typeof(IInterfaceType)));
+            Assert.ThrowsAny<MissingMemberException>(
+                () => Activator.CreateInstance(typeof(IInterfaceType))
+            );
         }
 
-        public class SubMarshalByRefObject : MarshalByRefObject
-        {
-        }
+        public class SubMarshalByRefObject : MarshalByRefObject { }
 
         [Fact]
         public void CreateInstance_ConstructorThrows_ThrowsTargetInvocationException()
         {
             // Put the constructor into the cache and make sure we still throw if cached.
-            Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrows)));
-            Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrows)));
+            Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrows))
+            );
+            Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrows))
+            );
         }
 
         [Fact]
         public void CreateInstance_ConstructorThrowsFromCache_ThrowsTargetInvocationException()
         {
             // Put the constructor into the cache and make sure we still throw if cached.
-            Assert.IsType<TypeWithDefaultCtorThatThrowsOnSecondCall>(Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrowsOnSecondCall)));
-            Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrowsOnSecondCall)));
+            Assert.IsType<TypeWithDefaultCtorThatThrowsOnSecondCall>(
+                Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrowsOnSecondCall))
+            );
+            Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(typeof(TypeWithDefaultCtorThatThrowsOnSecondCall))
+            );
         }
 
         [Theory]
         [InlineData(typeof(MarshalByRefObject))]
         [InlineData(typeof(SubMarshalByRefObject))]
-        public void CreateInstance_MarshalByRefObjectNetCore_ThrowsPlatformNotSupportedException(Type type)
+        public void CreateInstance_MarshalByRefObjectNetCore_ThrowsPlatformNotSupportedException(
+            Type type
+        )
         {
             // Activation Attributes are not supported in .NET Core.
-            Assert.Throws<PlatformNotSupportedException>(() => Activator.CreateInstance(type, null, new object[] { 1 } ));
-            Assert.Throws<PlatformNotSupportedException>(() => Activator.CreateInstance(type, null, new object[] { 1, 2 } ));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Activator.CreateInstance(type, null, new object[] { 1 })
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Activator.CreateInstance(type, null, new object[] { 1, 2 })
+            );
         }
 
         [Fact]
@@ -272,7 +377,10 @@ namespace System.Tests
             // On runtimes where the generic Activator is implemented with special codegen intrinsics, we might allocate
             // an uninitialized instance of the object before we realize there's no default constructor to run.
             // Make sure this has no observable side effects.
-            Assert.ThrowsAny<MissingMemberException>(() => { Activator.CreateInstance<TypeWithPrivateDefaultCtorAndFinalizer>(); });
+            Assert.ThrowsAny<MissingMemberException>(() =>
+            {
+                Activator.CreateInstance<TypeWithPrivateDefaultCtorAndFinalizer>();
+            });
 
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -298,23 +406,53 @@ namespace System.Tests
 
         class PrivateTypeWithDefaultCtorThatThrows
         {
-            public PrivateTypeWithDefaultCtorThatThrows() { throw new Exception(); }
+            public PrivateTypeWithDefaultCtorThatThrows()
+            {
+                throw new Exception();
+            }
         }
 
         [Fact]
         public static void CreateInstance_Type_Bool()
         {
-            Assert.Equal(typeof(PrivateType), Activator.CreateInstance(typeof(PrivateType), true).GetType());
-            Assert.Equal(typeof(PrivateType), Activator.CreateInstance(typeof(PrivateType), false).GetType());
+            Assert.Equal(
+                typeof(PrivateType),
+                Activator.CreateInstance(typeof(PrivateType), true).GetType()
+            );
+            Assert.Equal(
+                typeof(PrivateType),
+                Activator.CreateInstance(typeof(PrivateType), false).GetType()
+            );
 
-            Assert.Equal(typeof(PrivateTypeWithDefaultCtor), Activator.CreateInstance(typeof(PrivateTypeWithDefaultCtor), true).GetType());
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(PrivateTypeWithDefaultCtor), false).GetType());
+            Assert.Equal(
+                typeof(PrivateTypeWithDefaultCtor),
+                Activator.CreateInstance(typeof(PrivateTypeWithDefaultCtor), true).GetType()
+            );
+            Assert.Throws<MissingMethodException>(
+                () => Activator.CreateInstance(typeof(PrivateTypeWithDefaultCtor), false).GetType()
+            );
 
-            Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(typeof(PrivateTypeWithDefaultCtorThatThrows), true).GetType());
-            Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(typeof(PrivateTypeWithDefaultCtorThatThrows), false).GetType());
+            Assert.Throws<TargetInvocationException>(
+                () =>
+                    Activator
+                        .CreateInstance(typeof(PrivateTypeWithDefaultCtorThatThrows), true)
+                        .GetType()
+            );
+            Assert.Throws<TargetInvocationException>(
+                () =>
+                    Activator
+                        .CreateInstance(typeof(PrivateTypeWithDefaultCtorThatThrows), false)
+                        .GetType()
+            );
 
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(PrivateTypeWithoutDefaultCtor), true).GetType());
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(PrivateTypeWithoutDefaultCtor), false).GetType());
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(typeof(PrivateTypeWithoutDefaultCtor), true).GetType()
+            );
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(typeof(PrivateTypeWithoutDefaultCtor), false).GetType()
+            );
         }
 
         public class Choice1 : Attribute
@@ -363,9 +501,7 @@ namespace System.Tests
 
         public class VarIntArgs { }
 
-        public struct ValueTypeWithDefaultConstructor
-        {
-        }
+        public struct ValueTypeWithDefaultConstructor { }
 
         public class TypeWithPrivateDefaultConstructor
         {
@@ -389,9 +525,7 @@ namespace System.Tests
             }
         }
 
-        private interface IInterfaceType
-        {
-        }
+        private interface IInterfaceType { }
 
         public abstract class AbstractTypeWithDefaultCtor
         {
@@ -407,7 +541,10 @@ namespace System.Tests
 
         public class TypeWithDefaultCtorThatThrows
         {
-            public TypeWithDefaultCtorThatThrows() { throw new Exception(); }
+            public TypeWithDefaultCtorThatThrows()
+            {
+                throw new Exception();
+            }
         }
 
         public class TypeWithDefaultCtorThatThrowsOnSecondCall
@@ -427,21 +564,56 @@ namespace System.Tests
 
         class ClassWithPrivateCtor
         {
-            static ClassWithPrivateCtor() { Flag.Reset(100); }
-            private ClassWithPrivateCtor() { Flag.Increase(200); }
-            public ClassWithPrivateCtor(int i) { Flag.Increase(300); }
+            static ClassWithPrivateCtor()
+            {
+                Flag.Reset(100);
+            }
+
+            private ClassWithPrivateCtor()
+            {
+                Flag.Increase(200);
+            }
+
+            public ClassWithPrivateCtor(int i)
+            {
+                Flag.Increase(300);
+            }
         }
+
         class ClassWithPrivateCtor2
         {
-            static ClassWithPrivateCtor2() { Flag.Reset(100); }
-            private ClassWithPrivateCtor2() { Flag.Increase(200); }
-            public ClassWithPrivateCtor2(int i) { Flag.Increase(300); }
+            static ClassWithPrivateCtor2()
+            {
+                Flag.Reset(100);
+            }
+
+            private ClassWithPrivateCtor2()
+            {
+                Flag.Increase(200);
+            }
+
+            public ClassWithPrivateCtor2(int i)
+            {
+                Flag.Increase(300);
+            }
         }
+
         class ClassWithPrivateCtor3
         {
-            static ClassWithPrivateCtor3() { Flag.Reset(100); }
-            private ClassWithPrivateCtor3() { Flag.Increase(200); }
-            public ClassWithPrivateCtor3(int i) { Flag.Increase(300); }
+            static ClassWithPrivateCtor3()
+            {
+                Flag.Reset(100);
+            }
+
+            private ClassWithPrivateCtor3()
+            {
+                Flag.Increase(200);
+            }
+
+            public ClassWithPrivateCtor3(int i)
+            {
+                Flag.Increase(300);
+            }
         }
 
         class HasPublicCtor
@@ -461,75 +633,242 @@ namespace System.Tests
         public class IsTestedAttribute : Attribute
         {
             private bool flag;
+
             public IsTestedAttribute(bool flag)
             {
                 this.flag = flag;
-
             }
         }
+
         [IsTestedAttribute(false)]
         class ClassWithIsTestedAttribute { }
+
         [Serializable]
         class ClassWithSerializableAttribute { }
+
         [IsTestedAttribute(false)]
         class MBRWithIsTestedAttribute : MarshalByRefObject { }
+
         class Flag
         {
             public static int cnt = 0;
-            public static void Reset(int i) { cnt = i; }
-            public static void Increase(int i) { cnt += i; }
-            public static bool Equal(int i) { return cnt == i; }
+
+            public static void Reset(int i)
+            {
+                cnt = i;
+            }
+
+            public static void Increase(int i)
+            {
+                cnt += i;
+            }
+
+            public static bool Equal(int i)
+            {
+                return cnt == i;
+            }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsInvokingStaticConstructorsSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsInvokingStaticConstructorsSupported)
+        )]
         public static void TestingBindingFlags()
         {
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(ClassWithPrivateCtor), BindingFlags.Public | BindingFlags.Instance, null, null, CultureInfo.CurrentCulture));
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(ClassWithPrivateCtor), BindingFlags.Public | BindingFlags.Instance, null, new object[] { 1, 2, 3 }, CultureInfo.CurrentCulture));
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(ClassWithPrivateCtor),
+                        BindingFlags.Public | BindingFlags.Instance,
+                        null,
+                        null,
+                        CultureInfo.CurrentCulture
+                    )
+            );
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(ClassWithPrivateCtor),
+                        BindingFlags.Public | BindingFlags.Instance,
+                        null,
+                        new object[] { 1, 2, 3 },
+                        CultureInfo.CurrentCulture
+                    )
+            );
 
-
-            Flag.Reset(0); Assert.Equal(0, Flag.cnt);
-            Activator.CreateInstance(typeof(ClassWithPrivateCtor), BindingFlags.Static | BindingFlags.NonPublic, null, null, CultureInfo.CurrentCulture);
+            Flag.Reset(0);
+            Assert.Equal(0, Flag.cnt);
+            Activator.CreateInstance(
+                typeof(ClassWithPrivateCtor),
+                BindingFlags.Static | BindingFlags.NonPublic,
+                null,
+                null,
+                CultureInfo.CurrentCulture
+            );
             Assert.Equal(300, Flag.cnt);
-            Activator.CreateInstance(typeof(ClassWithPrivateCtor), BindingFlags.Instance | BindingFlags.NonPublic, null, null, CultureInfo.CurrentCulture);
+            Activator.CreateInstance(
+                typeof(ClassWithPrivateCtor),
+                BindingFlags.Instance | BindingFlags.NonPublic,
+                null,
+                null,
+                CultureInfo.CurrentCulture
+            );
             Assert.Equal(500, Flag.cnt);
 
-            Flag.Reset(0); Assert.Equal(0, Flag.cnt);
-            Activator.CreateInstance(typeof(ClassWithPrivateCtor2), BindingFlags.Instance | BindingFlags.NonPublic, null, null, CultureInfo.CurrentCulture);
+            Flag.Reset(0);
+            Assert.Equal(0, Flag.cnt);
+            Activator.CreateInstance(
+                typeof(ClassWithPrivateCtor2),
+                BindingFlags.Instance | BindingFlags.NonPublic,
+                null,
+                null,
+                CultureInfo.CurrentCulture
+            );
             Assert.Equal(300, Flag.cnt);
-            Activator.CreateInstance(typeof(ClassWithPrivateCtor2), BindingFlags.Static | BindingFlags.NonPublic, null, null, CultureInfo.CurrentCulture);
+            Activator.CreateInstance(
+                typeof(ClassWithPrivateCtor2),
+                BindingFlags.Static | BindingFlags.NonPublic,
+                null,
+                null,
+                CultureInfo.CurrentCulture
+            );
             Assert.Equal(500, Flag.cnt);
 
-            Flag.Reset(0); Assert.Equal(0, Flag.cnt);
-            Activator.CreateInstance(typeof(ClassWithPrivateCtor3), BindingFlags.Instance | BindingFlags.Public, null, new object[] { 122 }, CultureInfo.CurrentCulture);
+            Flag.Reset(0);
+            Assert.Equal(0, Flag.cnt);
+            Activator.CreateInstance(
+                typeof(ClassWithPrivateCtor3),
+                BindingFlags.Instance | BindingFlags.Public,
+                null,
+                new object[] { 122 },
+                CultureInfo.CurrentCulture
+            );
             Assert.Equal(400, Flag.cnt);
-            Activator.CreateInstance(typeof(ClassWithPrivateCtor3), BindingFlags.Static | BindingFlags.NonPublic, null, null, CultureInfo.CurrentCulture);
+            Activator.CreateInstance(
+                typeof(ClassWithPrivateCtor3),
+                BindingFlags.Static | BindingFlags.NonPublic,
+                null,
+                null,
+                CultureInfo.CurrentCulture
+            );
             Assert.Equal(600, Flag.cnt);
-            Activator.CreateInstance(typeof(ClassWithPrivateCtor3), BindingFlags.Instance | BindingFlags.Public, null, new object[] { 122 }, CultureInfo.CurrentCulture);
+            Activator.CreateInstance(
+                typeof(ClassWithPrivateCtor3),
+                BindingFlags.Instance | BindingFlags.Public,
+                null,
+                new object[] { 122 },
+                CultureInfo.CurrentCulture
+            );
             Assert.Equal(900, Flag.cnt);
 
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(ClassWithPrivateCtor), BindingFlags.Public | BindingFlags.Static, null, null, CultureInfo.CurrentCulture));
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(ClassWithPrivateCtor), BindingFlags.Public | BindingFlags.Static, null, new object[] { 122 }, CultureInfo.CurrentCulture));
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(ClassWithPrivateCtor),
+                        BindingFlags.Public | BindingFlags.Static,
+                        null,
+                        null,
+                        CultureInfo.CurrentCulture
+                    )
+            );
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(ClassWithPrivateCtor),
+                        BindingFlags.Public | BindingFlags.Static,
+                        null,
+                        new object[] { 122 },
+                        CultureInfo.CurrentCulture
+                    )
+            );
         }
 
         [Fact]
         public static void TestingBindingFlagsInstanceOnly()
         {
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(HasPublicCtor), default(BindingFlags), null, null, null));
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(HasPublicCtor), BindingFlags.NonPublic | BindingFlags.Instance, null, null, null));
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(HasPublicCtor), BindingFlags.Public | BindingFlags.Static, null, null, null));
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(HasPublicCtor),
+                        default(BindingFlags),
+                        null,
+                        null,
+                        null
+                    )
+            );
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(HasPublicCtor),
+                        BindingFlags.NonPublic | BindingFlags.Instance,
+                        null,
+                        null,
+                        null
+                    )
+            );
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(HasPublicCtor),
+                        BindingFlags.Public | BindingFlags.Static,
+                        null,
+                        null,
+                        null
+                    )
+            );
 
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(HasPrivateCtor), default(BindingFlags), null, null, null));
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(HasPrivateCtor), BindingFlags.Public | BindingFlags.Instance, null, null, null));
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(HasPrivateCtor), BindingFlags.NonPublic | BindingFlags.Static, null, null, null));
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(HasPrivateCtor),
+                        default(BindingFlags),
+                        null,
+                        null,
+                        null
+                    )
+            );
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(HasPrivateCtor),
+                        BindingFlags.Public | BindingFlags.Instance,
+                        null,
+                        null,
+                        null
+                    )
+            );
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(HasPrivateCtor),
+                        BindingFlags.NonPublic | BindingFlags.Static,
+                        null,
+                        null,
+                        null
+                    )
+            );
 
             {
-                HasPublicCtor a = (HasPublicCtor)Activator.CreateInstance(typeof(HasPublicCtor), BindingFlags.Public | BindingFlags.Instance, null, new object[] { 100 }, null);
+                HasPublicCtor a = (HasPublicCtor)
+                    Activator.CreateInstance(
+                        typeof(HasPublicCtor),
+                        BindingFlags.Public | BindingFlags.Instance,
+                        null,
+                        new object[] { 100 },
+                        null
+                    );
                 Assert.Equal(100, a.Value);
             }
 
             {
-                HasPrivateCtor a = (HasPrivateCtor)Activator.CreateInstance(typeof(HasPrivateCtor), BindingFlags.NonPublic | BindingFlags.Instance, null, new object[] { 100 }, null);
+                HasPrivateCtor a = (HasPrivateCtor)
+                    Activator.CreateInstance(
+                        typeof(HasPrivateCtor),
+                        BindingFlags.NonPublic | BindingFlags.Instance,
+                        null,
+                        new object[] { 100 },
+                        null
+                    );
                 Assert.Equal(100, a.Value);
             }
         }
@@ -537,24 +876,122 @@ namespace System.Tests
         [Fact]
         public static void TestingBindingFlags1()
         {
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(ClassWithPrivateCtor), BindingFlags.Public | BindingFlags.Instance, null, null, CultureInfo.CurrentCulture, null));
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(ClassWithPrivateCtor), BindingFlags.Public | BindingFlags.Instance, null, new object[] { 1, 2, 3 }, CultureInfo.CurrentCulture, null));
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(ClassWithPrivateCtor),
+                        BindingFlags.Public | BindingFlags.Instance,
+                        null,
+                        null,
+                        CultureInfo.CurrentCulture,
+                        null
+                    )
+            );
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(ClassWithPrivateCtor),
+                        BindingFlags.Public | BindingFlags.Instance,
+                        null,
+                        new object[] { 1, 2, 3 },
+                        CultureInfo.CurrentCulture,
+                        null
+                    )
+            );
 
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(ClassWithPrivateCtor), BindingFlags.Public | BindingFlags.Static, null, null, CultureInfo.CurrentCulture, null));
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(typeof(ClassWithPrivateCtor), BindingFlags.Public | BindingFlags.Static, null, new object[] { 122 }, CultureInfo.CurrentCulture, null));
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(ClassWithPrivateCtor),
+                        BindingFlags.Public | BindingFlags.Static,
+                        null,
+                        null,
+                        CultureInfo.CurrentCulture,
+                        null
+                    )
+            );
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(ClassWithPrivateCtor),
+                        BindingFlags.Public | BindingFlags.Static,
+                        null,
+                        new object[] { 122 },
+                        CultureInfo.CurrentCulture,
+                        null
+                    )
+            );
         }
 
         [Fact]
         public static void TestingActivationAttributes()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => Activator.CreateInstance(typeof(ClassWithIsTestedAttribute), null, new object[] { new object() }));
-            Assert.Throws<PlatformNotSupportedException>(() => Activator.CreateInstance(typeof(ClassWithIsTestedAttribute), null, new object[] { new IsTestedAttribute(true) }));
-            Assert.Throws<PlatformNotSupportedException>(() => Activator.CreateInstance(typeof(ClassWithSerializableAttribute), null, new object[] { new ClassWithIsTestedAttribute() }));
-            Assert.Throws<PlatformNotSupportedException>(() => Activator.CreateInstance(typeof(MBRWithIsTestedAttribute), null, new object[] { new IsTestedAttribute(true) }));
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(ClassWithIsTestedAttribute),
+                        null,
+                        new object[] { new object() }
+                    )
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(ClassWithIsTestedAttribute),
+                        null,
+                        new object[] { new IsTestedAttribute(true) }
+                    )
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(ClassWithSerializableAttribute),
+                        null,
+                        new object[] { new ClassWithIsTestedAttribute() }
+                    )
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(MBRWithIsTestedAttribute),
+                        null,
+                        new object[] { new IsTestedAttribute(true) }
+                    )
+            );
 
-            Assert.Throws<PlatformNotSupportedException>(() => Activator.CreateInstance(typeof(ClassWithIsTestedAttribute), 0, null, null, CultureInfo.CurrentCulture, new object[] { new IsTestedAttribute(true) }));
-            Assert.Throws<PlatformNotSupportedException>(() => Activator.CreateInstance(typeof(ClassWithSerializableAttribute), 0, null, null, CultureInfo.CurrentCulture, new object[] { new ClassWithIsTestedAttribute() }));
-            Assert.Throws<PlatformNotSupportedException>(() => Activator.CreateInstance(typeof(MBRWithIsTestedAttribute), 0, null, null, CultureInfo.CurrentCulture, new object[] { new IsTestedAttribute(true) }));
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(ClassWithIsTestedAttribute),
+                        0,
+                        null,
+                        null,
+                        CultureInfo.CurrentCulture,
+                        new object[] { new IsTestedAttribute(true) }
+                    )
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(ClassWithSerializableAttribute),
+                        0,
+                        null,
+                        null,
+                        CultureInfo.CurrentCulture,
+                        new object[] { new ClassWithIsTestedAttribute() }
+                    )
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    Activator.CreateInstance(
+                        typeof(MBRWithIsTestedAttribute),
+                        0,
+                        null,
+                        null,
+                        CultureInfo.CurrentCulture,
+                        new object[] { new IsTestedAttribute(true) }
+                    )
+            );
         }
 
         [Fact]
@@ -564,16 +1001,37 @@ namespace System.Tests
             Activator.CreateInstance(typeof(ClassWithIsTestedAttribute), null, new object[] { });
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void CreateInstance_NonPublicValueTypeWithPrivateDefaultConstructor_Success()
         {
             AssemblyName assemblyName = new AssemblyName("Assembly");
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                assemblyName,
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
-            TypeBuilder typeBuilder = moduleBuilder.DefineType("Type", TypeAttributes.Public, typeof(ValueType));
+            TypeBuilder typeBuilder = moduleBuilder.DefineType(
+                "Type",
+                TypeAttributes.Public,
+                typeof(ValueType)
+            );
 
-            FieldBuilder fieldBuilder = typeBuilder.DefineField("_field", typeof(int), FieldAttributes.Public);
-            ConstructorBuilder constructorBuilder = typeBuilder.DefineConstructor(MethodAttributes.Private | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName | MethodAttributes.HideBySig, CallingConventions.Standard, new Type[0]);
+            FieldBuilder fieldBuilder = typeBuilder.DefineField(
+                "_field",
+                typeof(int),
+                FieldAttributes.Public
+            );
+            ConstructorBuilder constructorBuilder = typeBuilder.DefineConstructor(
+                MethodAttributes.Private
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.RTSpecialName
+                    | MethodAttributes.HideBySig,
+                CallingConventions.Standard,
+                new Type[0]
+            );
 
             ILGenerator generator = constructorBuilder.GetILGenerator();
             generator.Emit(OpCodes.Ldarg_0);
@@ -593,16 +1051,37 @@ namespace System.Tests
             Assert.Equal(-1, field.GetValue(v2));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void CreateInstance_PublicOnlyValueTypeWithPrivateDefaultConstructor_ThrowsMissingMethodException()
         {
             AssemblyName assemblyName = new AssemblyName("Assembly");
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                assemblyName,
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
-            TypeBuilder typeBuilder = moduleBuilder.DefineType("Type", TypeAttributes.Public, typeof(ValueType));
+            TypeBuilder typeBuilder = moduleBuilder.DefineType(
+                "Type",
+                TypeAttributes.Public,
+                typeof(ValueType)
+            );
 
-            FieldBuilder fieldBuilder = typeBuilder.DefineField("_field", typeof(int), FieldAttributes.Public);
-            ConstructorBuilder constructorBuilder = typeBuilder.DefineConstructor(MethodAttributes.Private | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName | MethodAttributes.HideBySig, CallingConventions.Standard, new Type[0]);
+            FieldBuilder fieldBuilder = typeBuilder.DefineField(
+                "_field",
+                typeof(int),
+                FieldAttributes.Public
+            );
+            ConstructorBuilder constructorBuilder = typeBuilder.DefineConstructor(
+                MethodAttributes.Private
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.RTSpecialName
+                    | MethodAttributes.HideBySig,
+                CallingConventions.Standard,
+                new Type[0]
+            );
 
             ILGenerator generator = constructorBuilder.GetILGenerator();
             generator.Emit(OpCodes.Ldarg_0);
@@ -613,23 +1092,38 @@ namespace System.Tests
             Type type = typeBuilder.CreateType();
 
             Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(type));
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(type, nonPublic: false));
+            Assert.Throws<MissingMethodException>(
+                () => Activator.CreateInstance(type, nonPublic: false)
+            );
 
             // Put the private default constructor into the cache and make sure we still throw if public only.
             Assert.NotNull(Activator.CreateInstance(type, nonPublic: true));
 
             Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(type));
-            Assert.Throws<MissingMethodException>(() => Activator.CreateInstance(type, nonPublic: false));
+            Assert.Throws<MissingMethodException>(
+                () => Activator.CreateInstance(type, nonPublic: false)
+            );
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsAssemblyLoadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsAssemblyLoadingSupported)
+        )]
         [MemberData(nameof(TestingCreateInstanceFromObjectHandleData))]
-        public static void TestingCreateInstanceFromObjectHandle(string assemblyFile, string type, string returnedFullNameType, Type exceptionType)
+        public static void TestingCreateInstanceFromObjectHandle(
+            string assemblyFile,
+            string type,
+            string returnedFullNameType,
+            Type exceptionType
+        )
         {
             ObjectHandle oh = null;
             if (exceptionType != null)
             {
-                Assert.Throws(exceptionType, () => Activator.CreateInstanceFrom(assemblyFile: assemblyFile, typeName: type));
+                Assert.Throws(
+                    exceptionType,
+                    () => Activator.CreateInstanceFrom(assemblyFile: assemblyFile, typeName: type)
+                );
             }
             else
             {
@@ -639,7 +1133,15 @@ namespace System.Tests
 
             if (exceptionType != null)
             {
-                Assert.Throws(exceptionType, () => Activator.CreateInstanceFrom(assemblyFile: assemblyFile, typeName: type, null));
+                Assert.Throws(
+                    exceptionType,
+                    () =>
+                        Activator.CreateInstanceFrom(
+                            assemblyFile: assemblyFile,
+                            typeName: type,
+                            null
+                        )
+                );
             }
             else
             {
@@ -648,29 +1150,70 @@ namespace System.Tests
             }
         }
 
-        public static TheoryData<string, string, string, Type> TestingCreateInstanceFromObjectHandleData => new TheoryData<string, string, string, Type>()
-        {
-            // string assemblyFile, string typeName, returnedFullNameType, expectedException
-            { "TestLoadAssembly.dll", "PublicClassSample", "PublicClassSample", null },
-            { "TestLoadAssembly.dll", "publicclasssample", "PublicClassSample", typeof(TypeLoadException) },
+        public static TheoryData<
+            string,
+            string,
+            string,
+            Type
+        > TestingCreateInstanceFromObjectHandleData =>
+            new TheoryData<string, string, string, Type>()
+            {
+                // string assemblyFile, string typeName, returnedFullNameType, expectedException
+                { "TestLoadAssembly.dll", "PublicClassSample", "PublicClassSample", null },
+                {
+                    "TestLoadAssembly.dll",
+                    "publicclasssample",
+                    "PublicClassSample",
+                    typeof(TypeLoadException)
+                },
+                { "TestLoadAssembly.dll", "PrivateClassSample", "PrivateClassSample", null },
+                {
+                    "TestLoadAssembly.dll",
+                    "privateclasssample",
+                    "PrivateClassSample",
+                    typeof(TypeLoadException)
+                },
+                {
+                    "TestLoadAssembly.dll",
+                    "PublicClassNoDefaultConstructorSample",
+                    "PublicClassNoDefaultConstructorSample",
+                    typeof(MissingMethodException)
+                },
+                {
+                    "TestLoadAssembly.dll",
+                    "publicclassnodefaultconstructorsample",
+                    "PublicClassNoDefaultConstructorSample",
+                    typeof(TypeLoadException)
+                },
+            };
 
-            { "TestLoadAssembly.dll", "PrivateClassSample", "PrivateClassSample", null },
-            { "TestLoadAssembly.dll", "privateclasssample", "PrivateClassSample", typeof(TypeLoadException) },
-
-            { "TestLoadAssembly.dll", "PublicClassNoDefaultConstructorSample", "PublicClassNoDefaultConstructorSample", typeof(MissingMethodException) },
-            { "TestLoadAssembly.dll", "publicclassnodefaultconstructorsample", "PublicClassNoDefaultConstructorSample", typeof(TypeLoadException) }
-        };
-
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsAssemblyLoadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51912", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsAssemblyLoadingSupported)
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51912",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         [MemberData(nameof(TestingCreateInstanceObjectHandleData))]
-        public static void TestingCreateInstanceObjectHandle(string assemblyName, string type, string returnedFullNameType, Type exceptionType, bool returnNull)
+        public static void TestingCreateInstanceObjectHandle(
+            string assemblyName,
+            string type,
+            string returnedFullNameType,
+            Type exceptionType,
+            bool returnNull
+        )
         {
             ObjectHandle oh = null;
 
             if (exceptionType != null)
             {
-                Assert.Throws(exceptionType, () => Activator.CreateInstance(assemblyName: assemblyName, typeName: type));
+                Assert.Throws(
+                    exceptionType,
+                    () => Activator.CreateInstance(assemblyName: assemblyName, typeName: type)
+                );
             }
             else
             {
@@ -687,7 +1230,10 @@ namespace System.Tests
 
             if (exceptionType != null)
             {
-                Assert.Throws(exceptionType, () => Activator.CreateInstance(assemblyName: assemblyName, typeName: type, null));
+                Assert.Throws(
+                    exceptionType,
+                    () => Activator.CreateInstance(assemblyName: assemblyName, typeName: type, null)
+                );
             }
             else
             {
@@ -703,49 +1249,221 @@ namespace System.Tests
             }
         }
 
-        public static TheoryData<string, string, string, Type, bool> TestingCreateInstanceObjectHandleData => new TheoryData<string, string, string, Type, bool>()
-        {
-            // string assemblyName, string typeName, returnedFullNameType, expectedException
-            { "TestLoadAssembly", "PublicClassSample", "PublicClassSample", null, false },
-            { "testloadassembly", "publicclasssample", "PublicClassSample", typeof(TypeLoadException), false },
+        public static TheoryData<
+            string,
+            string,
+            string,
+            Type,
+            bool
+        > TestingCreateInstanceObjectHandleData =>
+            new TheoryData<string, string, string, Type, bool>()
+            {
+                // string assemblyName, string typeName, returnedFullNameType, expectedException
+                { "TestLoadAssembly", "PublicClassSample", "PublicClassSample", null, false },
+                {
+                    "testloadassembly",
+                    "publicclasssample",
+                    "PublicClassSample",
+                    typeof(TypeLoadException),
+                    false
+                },
+                { "TestLoadAssembly", "PrivateClassSample", "PrivateClassSample", null, false },
+                {
+                    "testloadassembly",
+                    "privateclasssample",
+                    "PrivateClassSample",
+                    typeof(TypeLoadException),
+                    false
+                },
+                {
+                    "TestLoadAssembly",
+                    "PublicClassNoDefaultConstructorSample",
+                    "PublicClassNoDefaultConstructorSample",
+                    typeof(MissingMethodException),
+                    false
+                },
+                {
+                    "testloadassembly",
+                    "publicclassnodefaultconstructorsample",
+                    "PublicClassNoDefaultConstructorSample",
+                    typeof(TypeLoadException),
+                    false
+                },
+                {
+                    "mscorlib",
+                    "System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]",
+                    "",
+                    null,
+                    true
+                },
+            };
 
-            { "TestLoadAssembly", "PrivateClassSample", "PrivateClassSample", null, false },
-            { "testloadassembly", "privateclasssample", "PrivateClassSample", typeof(TypeLoadException), false },
-
-            { "TestLoadAssembly", "PublicClassNoDefaultConstructorSample", "PublicClassNoDefaultConstructorSample", typeof(MissingMethodException), false },
-            { "testloadassembly", "publicclassnodefaultconstructorsample", "PublicClassNoDefaultConstructorSample", typeof(TypeLoadException), false },
-
-            { "mscorlib", "System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]", "", null, true }
-        };
-
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsAssemblyLoadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsAssemblyLoadingSupported)
+        )]
         [MemberData(nameof(TestingCreateInstanceFromObjectHandleFullSignatureData))]
-        public static void TestingCreateInstanceFromObjectHandleFullSignature(string assemblyFile, string type, bool ignoreCase, BindingFlags bindingAttr, Binder binder, object[] args, CultureInfo culture, object[] activationAttributes, string returnedFullNameType)
+        public static void TestingCreateInstanceFromObjectHandleFullSignature(
+            string assemblyFile,
+            string type,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            object[] args,
+            CultureInfo culture,
+            object[] activationAttributes,
+            string returnedFullNameType
+        )
         {
-            ObjectHandle oh = Activator.CreateInstanceFrom(assemblyFile: assemblyFile, typeName: type, ignoreCase: ignoreCase, bindingAttr: bindingAttr, binder: binder, args: args, culture: culture, activationAttributes: activationAttributes);
+            ObjectHandle oh = Activator.CreateInstanceFrom(
+                assemblyFile: assemblyFile,
+                typeName: type,
+                ignoreCase: ignoreCase,
+                bindingAttr: bindingAttr,
+                binder: binder,
+                args: args,
+                culture: culture,
+                activationAttributes: activationAttributes
+            );
             CheckValidity(oh, returnedFullNameType);
         }
 
         public static IEnumerable<object[]> TestingCreateInstanceFromObjectHandleFullSignatureData()
         {
             // string assemblyFile, string typeName, bool ignoreCase, BindingFlags bindingAttr, Binder binder, object[] args, CultureInfo culture, object[] activationAttributes, returnedFullNameType
-            yield return new object[] { "TestLoadAssembly.dll", "PublicClassSample", false, BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[0], CultureInfo.InvariantCulture, null, "PublicClassSample" };
-            yield return new object[] { "TestLoadAssembly.dll", "publicclasssample", true, BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[0], CultureInfo.InvariantCulture, null, "PublicClassSample" };
-            yield return new object[] { "TestLoadAssembly.dll", "PublicClassSample", false, BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[1] { 1 }, CultureInfo.InvariantCulture, null, "PublicClassSample" };
-            yield return new object[] { "TestLoadAssembly.dll", "publicclasssample", true, BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[1] { 1 }, CultureInfo.InvariantCulture, null, "PublicClassSample" };
+            yield return new object[]
+            {
+                "TestLoadAssembly.dll",
+                "PublicClassSample",
+                false,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[0],
+                CultureInfo.InvariantCulture,
+                null,
+                "PublicClassSample",
+            };
+            yield return new object[]
+            {
+                "TestLoadAssembly.dll",
+                "publicclasssample",
+                true,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[0],
+                CultureInfo.InvariantCulture,
+                null,
+                "PublicClassSample",
+            };
+            yield return new object[]
+            {
+                "TestLoadAssembly.dll",
+                "PublicClassSample",
+                false,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[1] { 1 },
+                CultureInfo.InvariantCulture,
+                null,
+                "PublicClassSample",
+            };
+            yield return new object[]
+            {
+                "TestLoadAssembly.dll",
+                "publicclasssample",
+                true,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[1] { 1 },
+                CultureInfo.InvariantCulture,
+                null,
+                "PublicClassSample",
+            };
 
-            yield return new object[] { "TestLoadAssembly.dll", "PrivateClassSample", false, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[0], CultureInfo.InvariantCulture, null, "PrivateClassSample" };
-            yield return new object[] { "TestLoadAssembly.dll", "privateclasssample", true, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[0], CultureInfo.InvariantCulture, null, "PrivateClassSample" };
-            yield return new object[] { "TestLoadAssembly.dll", "PrivateClassSample", false, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[1] { 1 }, CultureInfo.InvariantCulture, null, "PrivateClassSample" };
-            yield return new object[] { "TestLoadAssembly.dll", "privateclasssample", true, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[1] { 1 }, CultureInfo.InvariantCulture, null, "PrivateClassSample" };
+            yield return new object[]
+            {
+                "TestLoadAssembly.dll",
+                "PrivateClassSample",
+                false,
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[0],
+                CultureInfo.InvariantCulture,
+                null,
+                "PrivateClassSample",
+            };
+            yield return new object[]
+            {
+                "TestLoadAssembly.dll",
+                "privateclasssample",
+                true,
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[0],
+                CultureInfo.InvariantCulture,
+                null,
+                "PrivateClassSample",
+            };
+            yield return new object[]
+            {
+                "TestLoadAssembly.dll",
+                "PrivateClassSample",
+                false,
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[1] { 1 },
+                CultureInfo.InvariantCulture,
+                null,
+                "PrivateClassSample",
+            };
+            yield return new object[]
+            {
+                "TestLoadAssembly.dll",
+                "privateclasssample",
+                true,
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[1] { 1 },
+                CultureInfo.InvariantCulture,
+                null,
+                "PrivateClassSample",
+            };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsAssemblyLoadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51912", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsAssemblyLoadingSupported)
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51912",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         [MemberData(nameof(TestingCreateInstanceObjectHandleFullSignatureData))]
-        public static void TestingCreateInstanceObjectHandleFullSignature(string assemblyName, string type, bool ignoreCase, BindingFlags bindingAttr, Binder binder, object[] args, CultureInfo culture, object[] activationAttributes, string returnedFullNameType, bool returnNull)
+        public static void TestingCreateInstanceObjectHandleFullSignature(
+            string assemblyName,
+            string type,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            object[] args,
+            CultureInfo culture,
+            object[] activationAttributes,
+            string returnedFullNameType,
+            bool returnNull
+        )
         {
-            ObjectHandle oh = Activator.CreateInstance(assemblyName: assemblyName, typeName: type, ignoreCase: ignoreCase, bindingAttr: bindingAttr, binder: binder, args: args, culture: culture, activationAttributes: activationAttributes);
+            ObjectHandle oh = Activator.CreateInstance(
+                assemblyName: assemblyName,
+                typeName: type,
+                ignoreCase: ignoreCase,
+                bindingAttr: bindingAttr,
+                binder: binder,
+                args: args,
+                culture: culture,
+                activationAttributes: activationAttributes
+            );
             if (returnNull)
             {
                 Assert.Null(oh);
@@ -759,21 +1477,165 @@ namespace System.Tests
         public static IEnumerable<object[]> TestingCreateInstanceObjectHandleFullSignatureData()
         {
             // string assemblyName, string typeName, bool ignoreCase, BindingFlags bindingAttr, Binder binder, object[] args, CultureInfo culture, object[] activationAttributes, returnedFullNameType
-            yield return new object[] { "TestLoadAssembly", "PublicClassSample", false, BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[0], CultureInfo.InvariantCulture, null, "PublicClassSample" , false };
-            yield return new object[] { "testloadassembly", "publicclasssample", true, BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[0], CultureInfo.InvariantCulture, null, "PublicClassSample" , false };
-            yield return new object[] { "TestLoadAssembly", "PublicClassSample", false, BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[1] { 1 }, CultureInfo.InvariantCulture, null, "PublicClassSample" , false };
-            yield return new object[] { "testloadassembly", "publicclasssample", true, BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[1] { 1 }, CultureInfo.InvariantCulture, null, "PublicClassSample" , false };
+            yield return new object[]
+            {
+                "TestLoadAssembly",
+                "PublicClassSample",
+                false,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[0],
+                CultureInfo.InvariantCulture,
+                null,
+                "PublicClassSample",
+                false,
+            };
+            yield return new object[]
+            {
+                "testloadassembly",
+                "publicclasssample",
+                true,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[0],
+                CultureInfo.InvariantCulture,
+                null,
+                "PublicClassSample",
+                false,
+            };
+            yield return new object[]
+            {
+                "TestLoadAssembly",
+                "PublicClassSample",
+                false,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[1] { 1 },
+                CultureInfo.InvariantCulture,
+                null,
+                "PublicClassSample",
+                false,
+            };
+            yield return new object[]
+            {
+                "testloadassembly",
+                "publicclasssample",
+                true,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[1] { 1 },
+                CultureInfo.InvariantCulture,
+                null,
+                "PublicClassSample",
+                false,
+            };
 
-            yield return new object[] { "TestLoadAssembly", "PrivateClassSample", false, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[0], CultureInfo.InvariantCulture, null, "PrivateClassSample", false };
-            yield return new object[] { "testloadassembly", "privateclasssample", true, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[0], CultureInfo.InvariantCulture, null, "PrivateClassSample", false };
-            yield return new object[] { "TestLoadAssembly", "PrivateClassSample", false, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[1] { 1 }, CultureInfo.InvariantCulture, null, "PrivateClassSample", false };
-            yield return new object[] { "testloadassembly", "privateclasssample", true, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[1] { 1 }, CultureInfo.InvariantCulture, null, "PrivateClassSample", false };
+            yield return new object[]
+            {
+                "TestLoadAssembly",
+                "PrivateClassSample",
+                false,
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[0],
+                CultureInfo.InvariantCulture,
+                null,
+                "PrivateClassSample",
+                false,
+            };
+            yield return new object[]
+            {
+                "testloadassembly",
+                "privateclasssample",
+                true,
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[0],
+                CultureInfo.InvariantCulture,
+                null,
+                "PrivateClassSample",
+                false,
+            };
+            yield return new object[]
+            {
+                "TestLoadAssembly",
+                "PrivateClassSample",
+                false,
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[1] { 1 },
+                CultureInfo.InvariantCulture,
+                null,
+                "PrivateClassSample",
+                false,
+            };
+            yield return new object[]
+            {
+                "testloadassembly",
+                "privateclasssample",
+                true,
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[1] { 1 },
+                CultureInfo.InvariantCulture,
+                null,
+                "PrivateClassSample",
+                false,
+            };
 
-            yield return new object[] { null, typeof(PublicType).FullName, false, BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[0], CultureInfo.InvariantCulture, null, typeof(PublicType).FullName, false };
-            yield return new object[] { null, typeof(PrivateType).FullName, false, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[0], CultureInfo.InvariantCulture, null, typeof(PrivateType).FullName, false };
+            yield return new object[]
+            {
+                null,
+                typeof(PublicType).FullName,
+                false,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[0],
+                CultureInfo.InvariantCulture,
+                null,
+                typeof(PublicType).FullName,
+                false,
+            };
+            yield return new object[]
+            {
+                null,
+                typeof(PrivateType).FullName,
+                false,
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[0],
+                CultureInfo.InvariantCulture,
+                null,
+                typeof(PrivateType).FullName,
+                false,
+            };
 
-            yield return new object[] { "mscorlib", "System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]", true, BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[0], CultureInfo.InvariantCulture, null, "", true };
-            yield return new object[] { "mscorlib", "SyStEm.NULLABLE`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]", true, BindingFlags.Public | BindingFlags.Instance, Type.DefaultBinder, new object[0], CultureInfo.InvariantCulture, null, "", true };
+            yield return new object[]
+            {
+                "mscorlib",
+                "System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]",
+                true,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[0],
+                CultureInfo.InvariantCulture,
+                null,
+                "",
+                true,
+            };
+            yield return new object[]
+            {
+                "mscorlib",
+                "SyStEm.NULLABLE`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]",
+                true,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.DefaultBinder,
+                new object[0],
+                CultureInfo.InvariantCulture,
+                null,
+                "",
+                true,
+            };
         }
 
         private static void CheckValidity(ObjectHandle instance, string expected)
@@ -790,23 +1652,41 @@ namespace System.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void CreateInstanceAssemblyResolve()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                AppDomain.CurrentDomain.AssemblyResolve += (object sender, ResolveEventArgs args) => Assembly.LoadFile(Path.Combine(Directory.GetCurrentDirectory(), "TestLoadAssembly.dll"));
-                Assert.Throws<FileLoadException>(() => Activator.CreateInstance(",,,,", "PublicClassSample"));
-            }).Dispose();
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.AssemblyResolve += (
+                        object sender,
+                        ResolveEventArgs args
+                    ) =>
+                        Assembly.LoadFile(
+                            Path.Combine(Directory.GetCurrentDirectory(), "TestLoadAssembly.dll")
+                        );
+                    Assert.Throws<FileLoadException>(
+                        () => Activator.CreateInstance(",,,,", "PublicClassSample")
+                    );
+                })
+                .Dispose();
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void CreateInstance_TypeBuilder_ThrowsNotSupportedException()
         {
             AssemblyName assemblyName = new AssemblyName("Assembly");
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                assemblyName,
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type", TypeAttributes.Public);
 
             Assert.Throws<ArgumentException>("type", () => Activator.CreateInstance(typeBuilder));
-            Assert.Throws<NotSupportedException>(() => Activator.CreateInstance(typeBuilder, new object[0]));
+            Assert.Throws<NotSupportedException>(
+                () => Activator.CreateInstance(typeBuilder, new object[0])
+            );
         }
     }
 }

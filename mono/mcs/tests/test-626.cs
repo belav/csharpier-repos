@@ -3,24 +3,23 @@
 //
 using System;
 
-class X {
+class X
+{
+    void A() { }
 
-	void A ()
-	{
-	}
-				
-	public static void Main ()
-	{
-		int loop = 0;
-		
-		goto a;
-	b:
-		loop++;
-		return;
-	a:
-		Console.WriteLine ("Hello");
-		for (;;){
-			goto b;
-		}
-	}
+    public static void Main()
+    {
+        int loop = 0;
+
+        goto a;
+        b:
+        loop++;
+        return;
+        a:
+        Console.WriteLine("Hello");
+        for (; ; )
+        {
+            goto b;
+        }
+    }
 }

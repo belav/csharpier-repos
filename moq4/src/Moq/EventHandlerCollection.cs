@@ -7,7 +7,6 @@ using System.Reflection;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class EventHandlerCollection
@@ -29,7 +28,6 @@ namespace Moq
         sealed class EventHandlerCollection
     */
     sealed class EventHandlerCollection
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private readonly Dictionary<EventInfo, Delegate> eventHandlers;

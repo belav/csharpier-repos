@@ -24,9 +24,18 @@ namespace System.Tests
             Assert.Equal(expected, ParsableHelper<bool>.Parse(value, provider: null));
 
             // Current Culture
-            Assert.True(ParsableHelper<bool>.TryParse(value, provider: CultureInfo.CurrentCulture, out result));
+            Assert.True(
+                ParsableHelper<bool>.TryParse(
+                    value,
+                    provider: CultureInfo.CurrentCulture,
+                    out result
+                )
+            );
             Assert.Equal(expected, result);
-            Assert.Equal(expected, ParsableHelper<bool>.Parse(value, provider: CultureInfo.CurrentCulture));
+            Assert.Equal(
+                expected,
+                ParsableHelper<bool>.Parse(value, provider: CultureInfo.CurrentCulture)
+            );
         }
 
         [Theory]
@@ -41,26 +50,59 @@ namespace System.Tests
             Assert.Throws(exceptionType, () => ParsableHelper<bool>.Parse(value, provider: null));
 
             // Current Culture
-            Assert.False(ParsableHelper<bool>.TryParse(value, provider: CultureInfo.CurrentCulture, out result));
+            Assert.False(
+                ParsableHelper<bool>.TryParse(
+                    value,
+                    provider: CultureInfo.CurrentCulture,
+                    out result
+                )
+            );
             Assert.Equal(default(bool), result);
-            Assert.Throws(exceptionType, () => ParsableHelper<bool>.Parse(value, provider: CultureInfo.CurrentCulture));
+            Assert.Throws(
+                exceptionType,
+                () => ParsableHelper<bool>.Parse(value, provider: CultureInfo.CurrentCulture)
+            );
         }
 
         [Theory]
-        [MemberData(nameof(BooleanTests.Parse_ValidWithOffsetCount_TestData), MemberType = typeof(BooleanTests))]
+        [MemberData(
+            nameof(BooleanTests.Parse_ValidWithOffsetCount_TestData),
+            MemberType = typeof(BooleanTests)
+        )]
         public static void ParseValidSpanTest(string value, int offset, int count, bool expected)
         {
             bool result;
 
             // Default
-            Assert.True(SpanParsableHelper<bool>.TryParse(value.AsSpan(offset, count), provider: null, out result));
+            Assert.True(
+                SpanParsableHelper<bool>.TryParse(
+                    value.AsSpan(offset, count),
+                    provider: null,
+                    out result
+                )
+            );
             Assert.Equal(expected, result);
-            Assert.Equal(expected, SpanParsableHelper<bool>.Parse(value.AsSpan(offset, count), provider: null));
+            Assert.Equal(
+                expected,
+                SpanParsableHelper<bool>.Parse(value.AsSpan(offset, count), provider: null)
+            );
 
             // Current Culture
-            Assert.True(SpanParsableHelper<bool>.TryParse(value.AsSpan(offset, count), provider: CultureInfo.CurrentCulture, out result));
+            Assert.True(
+                SpanParsableHelper<bool>.TryParse(
+                    value.AsSpan(offset, count),
+                    provider: CultureInfo.CurrentCulture,
+                    out result
+                )
+            );
             Assert.Equal(expected, result);
-            Assert.Equal(expected, SpanParsableHelper<bool>.Parse(value.AsSpan(offset, count), provider: CultureInfo.CurrentCulture));
+            Assert.Equal(
+                expected,
+                SpanParsableHelper<bool>.Parse(
+                    value.AsSpan(offset, count),
+                    provider: CultureInfo.CurrentCulture
+                )
+            );
         }
 
         [Theory]
@@ -76,14 +118,32 @@ namespace System.Tests
             bool result;
 
             // Default
-            Assert.False(SpanParsableHelper<bool>.TryParse(value.AsSpan(), provider: null, out result));
+            Assert.False(
+                SpanParsableHelper<bool>.TryParse(value.AsSpan(), provider: null, out result)
+            );
             Assert.Equal(default(bool), result);
-            Assert.Throws(exceptionType, () => SpanParsableHelper<bool>.Parse(value.AsSpan(), provider: null));
+            Assert.Throws(
+                exceptionType,
+                () => SpanParsableHelper<bool>.Parse(value.AsSpan(), provider: null)
+            );
 
             // Current Culture
-            Assert.False(SpanParsableHelper<bool>.TryParse(value.AsSpan(), provider: CultureInfo.CurrentCulture, out result));
+            Assert.False(
+                SpanParsableHelper<bool>.TryParse(
+                    value.AsSpan(),
+                    provider: CultureInfo.CurrentCulture,
+                    out result
+                )
+            );
             Assert.Equal(default(bool), result);
-            Assert.Throws(exceptionType, () => SpanParsableHelper<bool>.Parse(value.AsSpan(), provider: CultureInfo.CurrentCulture));
+            Assert.Throws(
+                exceptionType,
+                () =>
+                    SpanParsableHelper<bool>.Parse(
+                        value.AsSpan(),
+                        provider: CultureInfo.CurrentCulture
+                    )
+            );
         }
     }
 }

@@ -11,9 +11,7 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
         private readonly byte[] _buffer;
 
         public XmlBuffer(string filePath)
-            : this(File.ReadAllBytes(filePath))
-        {
-        }
+            : this(File.ReadAllBytes(filePath)) { }
 
         internal XmlBuffer(byte[] buffer)
         {
@@ -51,8 +49,10 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 }
             }
 
-            throw new ArgumentException("elementToStartAt", string.Format(
-                "The element '{0}' was not found in the XML input", elementToStartAt));
+            throw new ArgumentException(
+                "elementToStartAt",
+                string.Format("The element '{0}' was not found in the XML input", elementToStartAt)
+            );
         }
 
         public XmlDocument CreateDocument()

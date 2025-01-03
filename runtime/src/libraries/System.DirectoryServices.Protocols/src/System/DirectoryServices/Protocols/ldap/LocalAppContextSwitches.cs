@@ -12,7 +12,11 @@ namespace System
         public static bool UseBasicAuthFallback
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("System.DirectoryServices.Protocols.UseBasicAuthFallback", ref s_useBasicAuthFallback);
+            get =>
+                GetCachedSwitchValue(
+                    "System.DirectoryServices.Protocols.UseBasicAuthFallback",
+                    ref s_useBasicAuthFallback
+                );
         }
     }
 }

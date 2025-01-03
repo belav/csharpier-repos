@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
     /// Similar to FixAllCodeRefactoringSuggestedAction, but in a location that can be used by
     /// both local Roslyn and LSP.
     /// </summary>
-    internal class UnifiedFixAllCodeRefactoringSuggestedAction : UnifiedSuggestedAction, IFixAllCodeRefactoringSuggestedAction
+    internal class UnifiedFixAllCodeRefactoringSuggestedAction
+        : UnifiedSuggestedAction,
+            IFixAllCodeRefactoringSuggestedAction
     {
         public IFixAllState FixAllState { get; }
 
@@ -21,7 +23,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             Workspace workspace,
             CodeAction codeAction,
             CodeActionPriority codeActionPriority,
-            IFixAllState fixAllState)
+            IFixAllState fixAllState
+        )
             : base(workspace, codeAction, codeActionPriority)
         {
             FixAllState = fixAllState;

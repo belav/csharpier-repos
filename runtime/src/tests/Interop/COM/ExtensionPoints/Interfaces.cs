@@ -20,54 +20,39 @@ namespace COM
     public unsafe interface IMallocSpy
     {
         [PreserveSig]
-        nuint PreAlloc(
-            nuint cbRequest);
+        nuint PreAlloc(nuint cbRequest);
 
         [PreserveSig]
-        void* PostAlloc(
-            void* pActual);
+        void* PostAlloc(void* pActual);
 
         [PreserveSig]
-        void* PreFree(
-            void* pRequest,
-            [MarshalAs(UnmanagedType.Bool)] bool fSpyed);
+        void* PreFree(void* pRequest, [MarshalAs(UnmanagedType.Bool)] bool fSpyed);
 
         [PreserveSig]
-        void PostFree(
-            [MarshalAs(UnmanagedType.Bool)] bool fSpyed);
+        void PostFree([MarshalAs(UnmanagedType.Bool)] bool fSpyed);
 
         [PreserveSig]
         nuint PreRealloc(
             void* pRequest,
             nuint cbRequest,
             void** ppNewRequest,
-            [MarshalAs(UnmanagedType.Bool)] bool fSpyed);
+            [MarshalAs(UnmanagedType.Bool)] bool fSpyed
+        );
 
         [PreserveSig]
-        void* PostRealloc(
-            void* pActual,
-            [MarshalAs(UnmanagedType.Bool)] bool fSpyed);
+        void* PostRealloc(void* pActual, [MarshalAs(UnmanagedType.Bool)] bool fSpyed);
 
         [PreserveSig]
-        void* PreGetSize(
-            void* pRequest,
-            [MarshalAs(UnmanagedType.Bool)] bool fSpyed);
+        void* PreGetSize(void* pRequest, [MarshalAs(UnmanagedType.Bool)] bool fSpyed);
 
         [PreserveSig]
-        nuint PostGetSize(
-            nuint cbActual,
-            [MarshalAs(UnmanagedType.Bool)] bool fSpyed);
+        nuint PostGetSize(nuint cbActual, [MarshalAs(UnmanagedType.Bool)] bool fSpyed);
 
         [PreserveSig]
-        void* PreDidAlloc(
-            void* pRequest,
-            [MarshalAs(UnmanagedType.Bool)] bool fSpyed);
+        void* PreDidAlloc(void* pRequest, [MarshalAs(UnmanagedType.Bool)] bool fSpyed);
 
         [PreserveSig]
-        int PostDidAlloc(
-            void* pRequest,
-            [MarshalAs(UnmanagedType.Bool)] bool fSpyed,
-            int fActual);
+        int PostDidAlloc(void* pRequest, [MarshalAs(UnmanagedType.Bool)] bool fSpyed, int fActual);
 
         [PreserveSig]
         void PreHeapMinimize();

@@ -78,7 +78,7 @@ internal static partial class Interop
             FileRenameInformationEx = 65,
             FileRenameInformationExBypassAccessCheck = 66,
             FileDesiredStorageClassInformation = 67,
-            FileStatInformation = 68
+            FileStatInformation = 68,
         }
     }
 }

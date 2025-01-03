@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <typeparam name="TRightEntity">One of the entity types in this relationship.</typeparam>
 public class CollectionCollectionBuilder<
     [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TLeftEntity,
-    [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TRightEntity> : CollectionCollectionBuilder
+    [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TRightEntity
+> : CollectionCollectionBuilder
     where TLeftEntity : class
     where TRightEntity : class
 {
@@ -37,20 +38,20 @@ public class CollectionCollectionBuilder<
         IMutableEntityType leftEntityType,
         IMutableEntityType rightEntityType,
         IMutableSkipNavigation leftNavigation,
-        IMutableSkipNavigation rightNavigation)
-        : base(leftEntityType, rightEntityType, leftNavigation, rightNavigation)
-    {
-    }
+        IMutableSkipNavigation rightNavigation
+    )
+        : base(leftEntityType, rightEntityType, leftNavigation, rightNavigation) { }
 
     /// <summary>
     ///     Configures the join entity type implementing the many-to-many relationship.
     /// </summary>
     /// <typeparam name="TJoinEntity">The CLR type of the join entity.</typeparam>
     /// <returns>The builder for the join entity type.</returns>
-    public virtual EntityTypeBuilder<TJoinEntity> UsingEntity
-        <[DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity>()
-        where TJoinEntity : class
-        => Using<TJoinEntity>(joinEntityName: null, configureRight: null, configureLeft: null);
+    public virtual EntityTypeBuilder<TJoinEntity> UsingEntity<
+        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
+    >()
+        where TJoinEntity : class =>
+        Using<TJoinEntity>(joinEntityName: null, configureRight: null, configureLeft: null);
 
     /// <summary>
     ///     Configures the join entity type implementing the many-to-many relationship.
@@ -58,8 +59,9 @@ public class CollectionCollectionBuilder<
     /// <param name="joinEntityName">The name of the join entity.</param>
     /// <typeparam name="TJoinEntity">The CLR type of the join entity.</typeparam>
     /// <returns>The builder for the join entity type.</returns>
-    public virtual EntityTypeBuilder<TJoinEntity> UsingEntity
-        <[DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity>(string joinEntityName)
+    public virtual EntityTypeBuilder<TJoinEntity> UsingEntity<
+        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
+    >(string joinEntityName)
         where TJoinEntity : class
     {
         Check.NotEmpty(joinEntityName, nameof(joinEntityName));
@@ -73,14 +75,22 @@ public class CollectionCollectionBuilder<
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
     /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
-        Action<EntityTypeBuilder> configureJoinEntityType)
+        Action<EntityTypeBuilder> configureJoinEntityType
+    )
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
-        Check.DebugAssert(LeftNavigation.JoinEntityType != null, "LeftNavigation.JoinEntityType is null");
-        Check.DebugAssert(RightNavigation.JoinEntityType != null, "RightNavigation.JoinEntityType is null");
+        Check.DebugAssert(
+            LeftNavigation.JoinEntityType != null,
+            "LeftNavigation.JoinEntityType is null"
+        );
+        Check.DebugAssert(
+            RightNavigation.JoinEntityType != null,
+            "RightNavigation.JoinEntityType is null"
+        );
         Check.DebugAssert(
             LeftNavigation.JoinEntityType == RightNavigation.JoinEntityType,
-            "LeftNavigation.JoinEntityType != RightNavigation.JoinEntityType");
+            "LeftNavigation.JoinEntityType != RightNavigation.JoinEntityType"
+        );
 
         configureJoinEntityType(new EntityTypeBuilder(LeftNavigation.JoinEntityType));
 
@@ -95,7 +105,8 @@ public class CollectionCollectionBuilder<
     /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
         Type joinEntityType,
-        Action<EntityTypeBuilder> configureJoinEntityType)
+        Action<EntityTypeBuilder> configureJoinEntityType
+    )
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
 
@@ -112,7 +123,8 @@ public class CollectionCollectionBuilder<
     /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
         string joinEntityName,
-        Action<EntityTypeBuilder> configureJoinEntityType)
+        Action<EntityTypeBuilder> configureJoinEntityType
+    )
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
 
@@ -130,8 +142,10 @@ public class CollectionCollectionBuilder<
     /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
         string joinEntityName,
-        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type joinEntityType,
-        Action<EntityTypeBuilder> configureJoinEntityType)
+        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)]
+            Type joinEntityType,
+        Action<EntityTypeBuilder> configureJoinEntityType
+    )
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
 
@@ -146,9 +160,9 @@ public class CollectionCollectionBuilder<
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
     /// <typeparam name="TJoinEntity">The CLR type of the join entity.</typeparam>
     /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
-    public virtual EntityTypeBuilder<TRightEntity> UsingEntity
-        <[DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity>(
-            Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
+    public virtual EntityTypeBuilder<TRightEntity> UsingEntity<
+        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
+    >(Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
         where TJoinEntity : class
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
@@ -166,10 +180,9 @@ public class CollectionCollectionBuilder<
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
     /// <typeparam name="TJoinEntity">The CLR type of the join entity.</typeparam>
     /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
-    public virtual EntityTypeBuilder<TRightEntity> UsingEntity
-        <[DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity>(
-            string joinEntityName,
-            Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
+    public virtual EntityTypeBuilder<TRightEntity> UsingEntity<
+        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
+    >(string joinEntityName, Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
         where TJoinEntity : class
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
@@ -187,10 +200,18 @@ public class CollectionCollectionBuilder<
     /// <param name="configureLeft">The configuration for the relationship to the left entity type.</param>
     /// <typeparam name="TJoinEntity">The CLR type of the join entity.</typeparam>
     /// <returns>The builder for the join type.</returns>
-    public virtual EntityTypeBuilder<TJoinEntity> UsingEntity
-        <[DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity>(
-            Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>> configureRight,
-            Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TRightEntity, TJoinEntity>> configureLeft)
+    public virtual EntityTypeBuilder<TJoinEntity> UsingEntity<
+        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
+    >(
+        Func<
+            EntityTypeBuilder<TJoinEntity>,
+            ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>
+        > configureRight,
+        Func<
+            EntityTypeBuilder<TJoinEntity>,
+            ReferenceCollectionBuilder<TRightEntity, TJoinEntity>
+        > configureLeft
+    )
         where TJoinEntity : class
     {
         Check.NotNull(configureRight, nameof(configureRight));
@@ -207,11 +228,19 @@ public class CollectionCollectionBuilder<
     /// <param name="configureLeft">The configuration for the relationship to the left entity type.</param>
     /// <typeparam name="TJoinEntity">The CLR type of the join entity.</typeparam>
     /// <returns>The builder for the join entity type.</returns>
-    public virtual EntityTypeBuilder<TJoinEntity> UsingEntity
-        <[DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity>(
-            string joinEntityName,
-            Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>> configureRight,
-            Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TRightEntity, TJoinEntity>> configureLeft)
+    public virtual EntityTypeBuilder<TJoinEntity> UsingEntity<
+        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
+    >(
+        string joinEntityName,
+        Func<
+            EntityTypeBuilder<TJoinEntity>,
+            ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>
+        > configureRight,
+        Func<
+            EntityTypeBuilder<TJoinEntity>,
+            ReferenceCollectionBuilder<TRightEntity, TJoinEntity>
+        > configureLeft
+    )
         where TJoinEntity : class
     {
         Check.NotEmpty(joinEntityName, nameof(joinEntityName));
@@ -231,7 +260,8 @@ public class CollectionCollectionBuilder<
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
         Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureRight,
         Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft,
-        Action<EntityTypeBuilder> configureJoinEntityType)
+        Action<EntityTypeBuilder> configureJoinEntityType
+    )
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
 
@@ -249,10 +279,12 @@ public class CollectionCollectionBuilder<
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
     /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
-        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type joinEntityType,
+        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)]
+            Type joinEntityType,
         Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureRight,
         Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft,
-        Action<EntityTypeBuilder> configureJoinEntityType)
+        Action<EntityTypeBuilder> configureJoinEntityType
+    )
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
 
@@ -273,7 +305,8 @@ public class CollectionCollectionBuilder<
         string joinEntityName,
         Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureRight,
         Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft,
-        Action<EntityTypeBuilder> configureJoinEntityType)
+        Action<EntityTypeBuilder> configureJoinEntityType
+    )
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
 
@@ -293,14 +326,18 @@ public class CollectionCollectionBuilder<
     /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
         string joinEntityName,
-        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type joinEntityType,
+        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)]
+            Type joinEntityType,
         Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureRight,
         Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft,
-        Action<EntityTypeBuilder> configureJoinEntityType)
+        Action<EntityTypeBuilder> configureJoinEntityType
+    )
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
 
-        configureJoinEntityType(UsingEntity(joinEntityName, joinEntityType, configureRight, configureLeft));
+        configureJoinEntityType(
+            UsingEntity(joinEntityName, joinEntityType, configureRight, configureLeft)
+        );
 
         return new EntityTypeBuilder<TRightEntity>(RightEntityType);
     }
@@ -313,11 +350,19 @@ public class CollectionCollectionBuilder<
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
     /// <typeparam name="TJoinEntity">The CLR type of the join entity.</typeparam>
     /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
-    public virtual EntityTypeBuilder<TRightEntity> UsingEntity
-        <[DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity>(
-            Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>> configureRight,
-            Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TRightEntity, TJoinEntity>> configureLeft,
-            Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
+    public virtual EntityTypeBuilder<TRightEntity> UsingEntity<
+        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
+    >(
+        Func<
+            EntityTypeBuilder<TJoinEntity>,
+            ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>
+        > configureRight,
+        Func<
+            EntityTypeBuilder<TJoinEntity>,
+            ReferenceCollectionBuilder<TRightEntity, TJoinEntity>
+        > configureLeft,
+        Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType
+    )
         where TJoinEntity : class
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
@@ -338,11 +383,19 @@ public class CollectionCollectionBuilder<
     /// <typeparam name="TJoinEntity">The CLR type of the join entity.</typeparam>
     /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
     public virtual EntityTypeBuilder<TRightEntity> UsingEntity<
-        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity>(
+        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
+    >(
         string joinEntityName,
-        Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>> configureRight,
-        Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TRightEntity, TJoinEntity>> configureLeft,
-        Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
+        Func<
+            EntityTypeBuilder<TJoinEntity>,
+            ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>
+        > configureRight,
+        Func<
+            EntityTypeBuilder<TJoinEntity>,
+            ReferenceCollectionBuilder<TRightEntity, TJoinEntity>
+        > configureLeft,
+        Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType
+    )
         where TJoinEntity : class
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
@@ -353,12 +406,21 @@ public class CollectionCollectionBuilder<
         return new EntityTypeBuilder<TRightEntity>(RightEntityType);
     }
 
-    private EntityTypeBuilder<TJoinEntity> Using<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity>(
+    private EntityTypeBuilder<TJoinEntity> Using<
+        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
+    >(
         string? joinEntityName,
-        Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>>? configureRight,
-        Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TRightEntity, TJoinEntity>>? configureLeft)
-        where TJoinEntity : class
-        => new(
+        Func<
+            EntityTypeBuilder<TJoinEntity>,
+            ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>
+        >? configureRight,
+        Func<
+            EntityTypeBuilder<TJoinEntity>,
+            ReferenceCollectionBuilder<TRightEntity, TJoinEntity>
+        >? configureLeft
+    )
+        where TJoinEntity : class =>
+        new(
             UsingEntity(
                 joinEntityName,
                 typeof(TJoinEntity),
@@ -367,5 +429,7 @@ public class CollectionCollectionBuilder<
                     : null,
                 configureLeft != null
                     ? e => configureLeft(new EntityTypeBuilder<TJoinEntity>(e)).Metadata
-                    : null));
+                    : null
+            )
+        );
 }

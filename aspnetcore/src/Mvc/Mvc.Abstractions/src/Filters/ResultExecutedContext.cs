@@ -26,7 +26,8 @@ public class ResultExecutedContext : FilterContext
         ActionContext actionContext,
         IList<IFilterMetadata> filters,
         IActionResult result,
-        object controller)
+        object controller
+    )
         : base(actionContext, filters)
     {
         ArgumentNullException.ThrowIfNull(result);
@@ -63,7 +64,6 @@ public class ResultExecutedContext : FilterContext
                 return _exception;
             }
         }
-
         set
         {
             _exceptionDispatchInfo = null;
@@ -77,11 +77,7 @@ public class ResultExecutedContext : FilterContext
     /// </summary>
     public virtual ExceptionDispatchInfo? ExceptionDispatchInfo
     {
-        get
-        {
-            return _exceptionDispatchInfo;
-        }
-
+        get { return _exceptionDispatchInfo; }
         set
         {
             _exception = null;

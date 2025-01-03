@@ -13,7 +13,10 @@ public class SkipOnCITests
     [SkipOnCI]
     public void AlwaysSkipOnCI()
     {
-        if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HELIX")) || !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AGENT_OS")))
+        if (
+            !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HELIX"))
+            || !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AGENT_OS"))
+        )
         {
             throw new Exception("Flaky!");
         }

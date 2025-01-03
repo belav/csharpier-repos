@@ -14,9 +14,18 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         [Fact]
         public void DoubleDisposeWorks()
         {
-            var provider = new ServiceProvider(new ServiceCollection(), ServiceProviderOptions.Default);
-            var serviceProviderEngineScope = new ServiceProviderEngineScope(provider, isRootScope: true);
-            serviceProviderEngineScope.ResolvedServices.Add(new ServiceCacheKey(ServiceIdentifier.FromServiceType(typeof(IFakeService)), 0), null);
+            var provider = new ServiceProvider(
+                new ServiceCollection(),
+                ServiceProviderOptions.Default
+            );
+            var serviceProviderEngineScope = new ServiceProviderEngineScope(
+                provider,
+                isRootScope: true
+            );
+            serviceProviderEngineScope.ResolvedServices.Add(
+                new ServiceCacheKey(ServiceIdentifier.FromServiceType(typeof(IFakeService)), 0),
+                null
+            );
             serviceProviderEngineScope.Dispose();
             serviceProviderEngineScope.Dispose();
         }

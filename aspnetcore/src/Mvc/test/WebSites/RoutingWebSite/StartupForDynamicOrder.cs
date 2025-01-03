@@ -27,16 +27,16 @@ public class StartupForDynamicOrder
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services
-            .AddMvc()
-            .AddNewtonsoftJson();
+        services.AddMvc().AddNewtonsoftJson();
 
         services.AddTransient<Transformer>();
         services.AddScoped<TestResponseGenerator>();
         services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
         // Used by some controllers defined in this project.
-        services.Configure<RouteOptions>(options => options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer));
+        services.Configure<RouteOptions>(options =>
+            options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer)
+        );
     }
 
     public void Configure(IApplicationBuilder app)
@@ -49,32 +49,65 @@ public class StartupForDynamicOrder
             switch (scenario)
             {
                 case DynamicOrderScenarios.AttributeRouteDynamicRoute:
-                    endpoints.MapDynamicControllerRoute<Transformer>("attribute-dynamic-order/{**slug}", new TransformerState() { Identifier = "slug" });
+                    endpoints.MapDynamicControllerRoute<Transformer>(
+                        "attribute-dynamic-order/{**slug}",
+                        new TransformerState() { Identifier = "slug" }
+                    );
                     endpoints.MapControllers();
                     break;
                 case DynamicOrderScenarios.ConventionalRouteDynamicRoute:
-                    endpoints.MapControllerRoute(null, "{**conventional-dynamic-order-before:regex(^((?!conventional\\-dynamic\\-order\\-after).)*$)}", new { controller = "DynamicOrder", action = "Index" });
-                    endpoints.MapDynamicControllerRoute<Transformer>("{conventional-dynamic-order}", new TransformerState() { Identifier = "slug" });
-                    endpoints.MapControllerRoute(null, "conventional-dynamic-order-after", new { controller = "DynamicOrder", action = "Index" });
+                    endpoints.MapControllerRoute(
+                        null,
+                        "{**conventional-dynamic-order-before:regex(^((?!conventional\\-dynamic\\-order\\-after).)*$)}",
+                        new { controller = "DynamicOrder", action = "Index" }
+                    );
+                    endpoints.MapDynamicControllerRoute<Transformer>(
+                        "{conventional-dynamic-order}",
+                        new TransformerState() { Identifier = "slug" }
+                    );
+                    endpoints.MapControllerRoute(
+                        null,
+                        "conventional-dynamic-order-after",
+                        new { controller = "DynamicOrder", action = "Index" }
+                    );
                     break;
                 case DynamicOrderScenarios.MultipleDynamicRoute:
-                    endpoints.MapDynamicControllerRoute<Transformer>("dynamic-order/{**slug}", new TransformerState() { Identifier = "slug" });
-                    endpoints.MapDynamicControllerRoute<Transformer>("dynamic-order/specific/{**slug}", new TransformerState() { Identifier = "specific" });
+                    endpoints.MapDynamicControllerRoute<Transformer>(
+                        "dynamic-order/{**slug}",
+                        new TransformerState() { Identifier = "slug" }
+                    );
+                    endpoints.MapDynamicControllerRoute<Transformer>(
+                        "dynamic-order/specific/{**slug}",
+                        new TransformerState() { Identifier = "specific" }
+                    );
                     break;
                 case DynamicOrderScenarios.DynamicControllerAndPages:
-                    endpoints.MapDynamicPageRoute<Transformer>("{**dynamic-order-page-controller-before:regex(^((?!dynamic\\-order\\-page\\-controller\\-after).)*$)}", new TransformerState() { Identifier = "before", ForPages = true });
-                    endpoints.MapDynamicControllerRoute<Transformer>("{dynamic-order-page-controller}", new TransformerState() { Identifier = "controller" });
-                    endpoints.MapDynamicPageRoute<Transformer>("dynamic-order-page-controller-after", new TransformerState() { Identifier = "after", ForPages = true });
+                    endpoints.MapDynamicPageRoute<Transformer>(
+                        "{**dynamic-order-page-controller-before:regex(^((?!dynamic\\-order\\-page\\-controller\\-after).)*$)}",
+                        new TransformerState() { Identifier = "before", ForPages = true }
+                    );
+                    endpoints.MapDynamicControllerRoute<Transformer>(
+                        "{dynamic-order-page-controller}",
+                        new TransformerState() { Identifier = "controller" }
+                    );
+                    endpoints.MapDynamicPageRoute<Transformer>(
+                        "dynamic-order-page-controller-after",
+                        new TransformerState() { Identifier = "after", ForPages = true }
+                    );
                     break;
                 default:
                     throw new InvalidOperationException("Invalid scenario configuration.");
             }
         });
 
-        app.Map("/afterrouting", b => b.Run(c =>
-        {
-            return c.Response.WriteAsync("Hello from middleware after routing");
-        }));
+        app.Map(
+            "/afterrouting",
+            b =>
+                b.Run(c =>
+                {
+                    return c.Response.WriteAsync("Hello from middleware after routing");
+                })
+        );
     }
 
     private class TransformerState
@@ -86,9 +119,14 @@ public class StartupForDynamicOrder
     private class Transformer : DynamicRouteValueTransformer
     {
         // Turns a format like `controller=Home,action=Index` into an RVD
-        public override ValueTask<RouteValueDictionary> TransformAsync(HttpContext httpContext, RouteValueDictionary values)
+        public override ValueTask<RouteValueDictionary> TransformAsync(
+            HttpContext httpContext,
+            RouteValueDictionary values
+        )
         {
-            var kvps = ((string)values?["slug"])?.Split("/")?.LastOrDefault()?.Split(",") ?? Array.Empty<string>();
+            var kvps =
+                ((string)values?["slug"])?.Split("/")?.LastOrDefault()?.Split(",")
+                ?? Array.Empty<string>();
 
             // Go to index by default if the route doesn't follow the slug pattern, we want to make sure always match to
             // test the order is applied

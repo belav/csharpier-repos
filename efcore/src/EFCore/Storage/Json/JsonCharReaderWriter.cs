@@ -15,15 +15,15 @@ public sealed class JsonCharReaderWriter : JsonValueReaderWriter<char>
     /// </summary>
     public static JsonCharReaderWriter Instance { get; } = new();
 
-    private JsonCharReaderWriter()
-    {
-    }
+    private JsonCharReaderWriter() { }
 
     /// <inheritdoc />
-    public override char FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => manager.CurrentReader.GetString()![0];
+    public override char FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => manager.CurrentReader.GetString()![0];
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, char value)
-        => writer.WriteStringValue(value.ToString());
+    public override void ToJsonTyped(Utf8JsonWriter writer, char value) =>
+        writer.WriteStringValue(value.ToString());
 }

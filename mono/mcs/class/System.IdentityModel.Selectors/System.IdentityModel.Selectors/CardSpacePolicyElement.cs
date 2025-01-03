@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,57 +31,65 @@ using System.Xml;
 
 namespace System.IdentityModel.Selectors
 {
-	public class CardSpacePolicyElement
-	{
-		public CardSpacePolicyElement (
-			XmlElement target, XmlElement issuer,
-			Collection<XmlElement> parameters,
-			Uri privacyNoticeLink,
-			int privacyNoticeVersion,
-			bool isManagedIssuer)
-		{
-			this.target = target;
-			this.issuer = issuer;
-			this.parameters = parameters ?? new Collection<XmlElement> ();
-			this.policy_link = privacyNoticeLink;
-			policy_ver = privacyNoticeVersion;
-			is_managed = isManagedIssuer;
-		}
+    public class CardSpacePolicyElement
+    {
+        public CardSpacePolicyElement(
+            XmlElement target,
+            XmlElement issuer,
+            Collection<XmlElement> parameters,
+            Uri privacyNoticeLink,
+            int privacyNoticeVersion,
+            bool isManagedIssuer
+        )
+        {
+            this.target = target;
+            this.issuer = issuer;
+            this.parameters = parameters ?? new Collection<XmlElement>();
+            this.policy_link = privacyNoticeLink;
+            policy_ver = privacyNoticeVersion;
+            is_managed = isManagedIssuer;
+        }
 
-		XmlElement target;
-		XmlElement issuer;
-		Collection<XmlElement> parameters;
-		Uri policy_link;
-		int policy_ver;
-		bool is_managed;
+        XmlElement target;
+        XmlElement issuer;
+        Collection<XmlElement> parameters;
+        Uri policy_link;
+        int policy_ver;
+        bool is_managed;
 
-		public bool IsManagedIssuer {
-			get { return is_managed; }
-			set { is_managed = value; }
-		}
+        public bool IsManagedIssuer
+        {
+            get { return is_managed; }
+            set { is_managed = value; }
+        }
 
-		public XmlElement Issuer {
-			get { return issuer; }
-			set { issuer = value; }
-		}
+        public XmlElement Issuer
+        {
+            get { return issuer; }
+            set { issuer = value; }
+        }
 
-		public Collection<XmlElement> Parameters {
-			get { return parameters; }
-		}
+        public Collection<XmlElement> Parameters
+        {
+            get { return parameters; }
+        }
 
-		public Uri PolicyNoticeLink {
-			get { return policy_link; }
-			set { policy_link = value; }
-		}
+        public Uri PolicyNoticeLink
+        {
+            get { return policy_link; }
+            set { policy_link = value; }
+        }
 
-		public int PolicyNoticeVersion {
-			get { return policy_ver; }
-			set { policy_ver = value; }
-		}
+        public int PolicyNoticeVersion
+        {
+            get { return policy_ver; }
+            set { policy_ver = value; }
+        }
 
-		public XmlElement Target {
-			get { return target; }
-			set { target = value; }
-		}
-	}
+        public XmlElement Target
+        {
+            get { return target; }
+            set { target = value; }
+        }
+    }
 }

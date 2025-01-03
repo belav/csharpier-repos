@@ -71,14 +71,15 @@ namespace Microsoft.CodeAnalysis.Scripting
             Func<object[], Task> currentExecutor,
             StrongBox<Exception> exceptionHolderOpt,
             Func<Exception, bool> catchExceptionOpt,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(_frozen == 0);
             Debug.Assert((exceptionHolderOpt != null) == (catchExceptionOpt != null));
 
             // Each executor points to a <Factory> method of the Submission class.
             // The method creates an instance of the Submission class passing the submission states to its constructor.
-            // The consturctor initializes the links between submissions and stores the Submission instance to 
+            // The consturctor initializes the links between submissions and stores the Submission instance to
             // a slot in submission states that corresponds to the submission.
             // The <Factory> method then calls the <Initialize> method that consists of top-level script code statements.
 
@@ -93,7 +94,9 @@ namespace Microsoft.CodeAnalysis.Scripting
 
                     try
                     {
-                        await precedingExecutors[executorIndex++](_submissionStates).ConfigureAwait(continueOnCapturedContext: false);
+                        await precedingExecutors[executorIndex++]
+                            (_submissionStates)
+                            .ConfigureAwait(continueOnCapturedContext: false);
                     }
                     finally
                     {
@@ -111,7 +114,9 @@ namespace Microsoft.CodeAnalysis.Scripting
                 try
                 {
                     executorIndex++;
-                    result = await ((Task<TResult>)currentExecutor(_submissionStates)).ConfigureAwait(continueOnCapturedContext: false);
+                    result = await (
+                        (Task<TResult>)currentExecutor(_submissionStates)
+                    ).ConfigureAwait(continueOnCapturedContext: false);
                 }
                 finally
                 {
@@ -135,7 +140,10 @@ namespace Microsoft.CodeAnalysis.Scripting
                     // update the value since the array might have been resized:
                     submissionCtorArgs[0] = _submissionStates;
 
-                    Activator.CreateInstance(precedingExecutors[executorIndex++].GetMethodInfo().DeclaringType, submissionCtorArgs);
+                    Activator.CreateInstance(
+                        precedingExecutors[executorIndex++].GetMethodInfo().DeclaringType,
+                        submissionCtorArgs
+                    );
                     AdvanceStateCounter();
                 }
 
@@ -146,7 +154,10 @@ namespace Microsoft.CodeAnalysis.Scripting
                     // update the value since the array might have been resized:
                     submissionCtorArgs[0] = _submissionStates;
 
-                    Activator.CreateInstance(currentExecutor.GetMethodInfo().DeclaringType, submissionCtorArgs);
+                    Activator.CreateInstance(
+                        currentExecutor.GetMethodInfo().DeclaringType,
+                        submissionCtorArgs
+                    );
                     AdvanceStateCounter();
                 }
 

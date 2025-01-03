@@ -7,7 +7,9 @@ using System.Runtime.Serialization;
 namespace System.Reflection
 {
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class AmbiguousMatchException : SystemException
     {
         public AmbiguousMatchException()
@@ -28,9 +30,12 @@ namespace System.Reflection
             HResult = HResults.COR_E_AMBIGUOUSMATCH;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        private AmbiguousMatchException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        private AmbiguousMatchException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

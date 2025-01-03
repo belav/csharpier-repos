@@ -10,7 +10,10 @@ namespace Microsoft.AspNetCore.Hosting;
 ///  The recommended alternative is Microsoft.Extensions.Hosting.IHostApplicationLifetime.
 /// </para>
 /// </summary>
-[System.Obsolete("This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.Extensions.Hosting.IHostApplicationLifetime.", error: false)]
+[System.Obsolete(
+    "This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.Extensions.Hosting.IHostApplicationLifetime.",
+    error: false
+)]
 public interface IApplicationLifetime
 {
     /// <summary>

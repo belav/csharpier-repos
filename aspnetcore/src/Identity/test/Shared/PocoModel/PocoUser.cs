@@ -20,7 +20,8 @@ public class PocoUser : PocoUser<string>
     /// Ctor
     /// </summary>
     /// <param name="userName"></param>
-    public PocoUser(string userName) : this()
+    public PocoUser(string userName)
+        : this()
     {
         UserName = userName;
     }
@@ -30,7 +31,8 @@ public class PocoUser : PocoUser<string>
 /// Test user
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public class PocoUser<TKey> where TKey : IEquatable<TKey>
+public class PocoUser<TKey>
+    where TKey : IEquatable<TKey>
 {
     /// <summary>
     /// ctor
@@ -41,7 +43,8 @@ public class PocoUser<TKey> where TKey : IEquatable<TKey>
     /// ctor
     /// </summary>
     /// <param name="userName"></param>
-    public PocoUser(string userName) : this()
+    public PocoUser(string userName)
+        : this()
     {
         UserName = userName;
     }
@@ -131,17 +134,24 @@ public class PocoUser<TKey> where TKey : IEquatable<TKey>
     /// <summary>
     /// Navigation property
     /// </summary>
-    public virtual ICollection<PocoUserRole<TKey>> Roles { get; private set; } = new List<PocoUserRole<TKey>>();
+    public virtual ICollection<PocoUserRole<TKey>> Roles { get; private set; } =
+        new List<PocoUserRole<TKey>>();
+
     /// <summary>
     /// Navigation property
     /// </summary>
-    public virtual ICollection<PocoUserClaim<TKey>> Claims { get; private set; } = new List<PocoUserClaim<TKey>>();
+    public virtual ICollection<PocoUserClaim<TKey>> Claims { get; private set; } =
+        new List<PocoUserClaim<TKey>>();
+
     /// <summary>
     /// Navigation property
     /// </summary>
-    public virtual ICollection<PocoUserLogin<TKey>> Logins { get; private set; } = new List<PocoUserLogin<TKey>>();
+    public virtual ICollection<PocoUserLogin<TKey>> Logins { get; private set; } =
+        new List<PocoUserLogin<TKey>>();
+
     /// <summary>
     /// Navigation property
     /// </summary>
-    public virtual ICollection<PocoUserToken<TKey>> Tokens { get; private set; } = new List<PocoUserToken<TKey>>();
+    public virtual ICollection<PocoUserToken<TKey>> Tokens { get; private set; } =
+        new List<PocoUserToken<TKey>>();
 }

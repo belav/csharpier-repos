@@ -13,27 +13,36 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 internal sealed class DefaultPageActivatorProvider : IPageActivatorProvider
 {
     private readonly Action<PageContext, ViewContext, object> _disposer = Dispose;
-    private readonly Func<PageContext, ViewContext, object, ValueTask> _asyncDisposer = AsyncDispose;
-    private readonly Func<PageContext, ViewContext, object, ValueTask> _syncAsyncDisposer = SyncAsyncDispose;
+    private readonly Func<PageContext, ViewContext, object, ValueTask> _asyncDisposer =
+        AsyncDispose;
+    private readonly Func<PageContext, ViewContext, object, ValueTask> _syncAsyncDisposer =
+        SyncAsyncDispose;
 
     /// <inheritdoc />
-    public Func<PageContext, ViewContext, object> CreateActivator(CompiledPageActionDescriptor actionDescriptor)
+    public Func<PageContext, ViewContext, object> CreateActivator(
+        CompiledPageActionDescriptor actionDescriptor
+    )
     {
         ArgumentNullException.ThrowIfNull(actionDescriptor);
 
         var pageTypeInfo = actionDescriptor.PageTypeInfo?.AsType();
         if (pageTypeInfo == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(actionDescriptor.PageTypeInfo),
-                nameof(actionDescriptor)),
-                nameof(actionDescriptor));
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(actionDescriptor.PageTypeInfo),
+                    nameof(actionDescriptor)
+                ),
+                nameof(actionDescriptor)
+            );
         }
 
         return CreatePageFactory(pageTypeInfo);
     }
 
-    public Action<PageContext, ViewContext, object>? CreateReleaser(CompiledPageActionDescriptor actionDescriptor)
+    public Action<PageContext, ViewContext, object>? CreateReleaser(
+        CompiledPageActionDescriptor actionDescriptor
+    )
     {
         ArgumentNullException.ThrowIfNull(actionDescriptor);
 
@@ -45,7 +54,9 @@ internal sealed class DefaultPageActivatorProvider : IPageActivatorProvider
         return null;
     }
 
-    public Func<PageContext, ViewContext, object, ValueTask>? CreateAsyncReleaser(CompiledPageActionDescriptor actionDescriptor)
+    public Func<PageContext, ViewContext, object, ValueTask>? CreateAsyncReleaser(
+        CompiledPageActionDescriptor actionDescriptor
+    )
     {
         ArgumentNullException.ThrowIfNull(actionDescriptor);
 
@@ -86,7 +97,11 @@ internal sealed class DefaultPageActivatorProvider : IPageActivatorProvider
         ((IDisposable)page).Dispose();
     }
 
-    private static ValueTask SyncAsyncDispose(PageContext context, ViewContext viewContext, object page)
+    private static ValueTask SyncAsyncDispose(
+        PageContext context,
+        ViewContext viewContext,
+        object page
+    )
     {
         Dispose(context, viewContext, page);
         return default;

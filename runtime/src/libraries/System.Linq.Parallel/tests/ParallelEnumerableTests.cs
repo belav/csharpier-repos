@@ -16,14 +16,35 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void NullQuery()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).AsParallel());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable)null).AsParallel());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((Partitioner<int>)null).AsParallel());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((int[])null).AsParallel());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).AsParallel()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable)null).AsParallel()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((Partitioner<int>)null).AsParallel()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((int[])null).AsParallel()
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ParallelEnumerable.AsOrdered((ParallelQuery<int>)null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ParallelEnumerable.AsOrdered((ParallelQuery)null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ParallelEnumerable.AsUnordered<int>((ParallelQuery<int>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ParallelEnumerable.AsOrdered((ParallelQuery<int>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ParallelEnumerable.AsOrdered((ParallelQuery)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ParallelEnumerable.AsUnordered<int>((ParallelQuery<int>)null)
+            );
         }
 
         //
@@ -31,7 +52,7 @@ namespace System.Linq.Parallel.Tests
         //
         public static IEnumerable<object[]> RangeData()
         {
-            int[] datapoints = { 0, 1, 2, 16, };
+            int[] datapoints = { 0, 1, 2, 16 };
             foreach (int sign in new[] { -1, 1 })
             {
                 foreach (int start in datapoints)
@@ -165,7 +186,9 @@ namespace System.Linq.Parallel.Tests
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => ParallelEnumerable.Range(0, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => ParallelEnumerable.Range(-8, -8));
-            Assert.Throws<ArgumentOutOfRangeException>(() => ParallelEnumerable.Range(int.MaxValue, 2));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => ParallelEnumerable.Range(int.MaxValue, 2)
+            );
         }
 
         //
@@ -195,7 +218,14 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<T> query = ParallelEnumerable.Repeat(element, count);
 
             int counted = 0;
-            Assert.All(query, e => { counted++; Assert.Equal(element, e); });
+            Assert.All(
+                query,
+                e =>
+                {
+                    counted++;
+                    Assert.Equal(element, e);
+                }
+            );
             Assert.Equal(count, counted);
         }
 
@@ -206,7 +236,14 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<T> query = ParallelEnumerable.Repeat(element, count).Select(i => i);
 
             int counted = 0;
-            Assert.All(query, e => { counted++; Assert.Equal(element, e); });
+            Assert.All(
+                query,
+                e =>
+                {
+                    counted++;
+                    Assert.Equal(element, e);
+                }
+            );
             Assert.Equal(count, counted);
         }
 
@@ -214,11 +251,17 @@ namespace System.Linq.Parallel.Tests
         public static void Repeat_Exception()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => ParallelEnumerable.Repeat(1, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => ParallelEnumerable.Repeat((long)1024, -1024));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => ParallelEnumerable.Repeat((long)1024, -1024)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => ParallelEnumerable.Repeat(2.0, -2));
-            Assert.Throws<ArgumentOutOfRangeException>(() => ParallelEnumerable.Repeat((decimal)8, -8));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => ParallelEnumerable.Repeat((decimal)8, -8)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => ParallelEnumerable.Repeat("fail", -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => ParallelEnumerable.Repeat((string)null, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => ParallelEnumerable.Repeat((string)null, -1)
+            );
         }
 
         [Fact]
@@ -263,7 +306,10 @@ namespace System.Linq.Parallel.Tests
             Assert.Equal(0, ParallelEnumerable.Empty<T>().Count());
             Assert.Equal(0, ParallelEnumerable.Empty<T>().LongCount());
             Assert.Equal(new T[0], ParallelEnumerable.Empty<T>().ToArray());
-            Assert.Equal(new Dictionary<T, T>(), ParallelEnumerable.Empty<T>().ToDictionary(x => x));
+            Assert.Equal(
+                new Dictionary<T, T>(),
+                ParallelEnumerable.Empty<T>().ToDictionary(x => x)
+            );
             Assert.Equal(new List<T>(), ParallelEnumerable.Empty<T>().ToList());
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<T>().First());
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<T>().Last());

@@ -19,7 +19,8 @@ public class DictionaryAdapter<TKey, TValue> : IAdapter
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var contract = (JsonDictionaryContract)contractResolver.ResolveContract(target.GetType());
         var key = contract.DictionaryKeyResolver(segment);
@@ -46,7 +47,8 @@ public class DictionaryAdapter<TKey, TValue> : IAdapter
         string segment,
         IContractResolver contractResolver,
         out object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var contract = (JsonDictionaryContract)contractResolver.ResolveContract(target.GetType());
         var key = contract.DictionaryKeyResolver(segment);
@@ -74,7 +76,8 @@ public class DictionaryAdapter<TKey, TValue> : IAdapter
         object target,
         string segment,
         IContractResolver contractResolver,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var contract = (JsonDictionaryContract)contractResolver.ResolveContract(target.GetType());
         var key = contract.DictionaryKeyResolver(segment);
@@ -101,7 +104,8 @@ public class DictionaryAdapter<TKey, TValue> : IAdapter
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var contract = (JsonDictionaryContract)contractResolver.ResolveContract(target.GetType());
         var key = contract.DictionaryKeyResolver(segment);
@@ -135,7 +139,8 @@ public class DictionaryAdapter<TKey, TValue> : IAdapter
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var contract = (JsonDictionaryContract)contractResolver.ResolveContract(target.GetType());
         var key = contract.DictionaryKeyResolver(segment);
@@ -165,7 +170,12 @@ public class DictionaryAdapter<TKey, TValue> : IAdapter
             return false;
         }
 
-        if (!JToken.DeepEquals(JsonConvert.SerializeObject(currentValue), JsonConvert.SerializeObject(convertedValue)))
+        if (
+            !JToken.DeepEquals(
+                JsonConvert.SerializeObject(currentValue),
+                JsonConvert.SerializeObject(convertedValue)
+            )
+        )
         {
             errorMessage = Resources.FormatValueNotEqualToTestValue(currentValue, value, segment);
             return false;
@@ -182,7 +192,8 @@ public class DictionaryAdapter<TKey, TValue> : IAdapter
         string segment,
         IContractResolver contractResolver,
         out object nextTarget,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         var contract = (JsonDictionaryContract)contractResolver.ResolveContract(target.GetType());
         var key = contract.DictionaryKeyResolver(segment);
@@ -225,14 +236,27 @@ public class DictionaryAdapter<TKey, TValue> : IAdapter
         }
     }
 
-    protected virtual bool TryConvertValue(object value, out TValue convertedValue, out string errorMessage)
+    protected virtual bool TryConvertValue(
+        object value,
+        out TValue convertedValue,
+        out string errorMessage
+    )
     {
         return TryConvertValue(value, null, out convertedValue, out errorMessage);
     }
 
-    protected virtual bool TryConvertValue(object value, IContractResolver contractResolver, out TValue convertedValue, out string errorMessage)
+    protected virtual bool TryConvertValue(
+        object value,
+        IContractResolver contractResolver,
+        out TValue convertedValue,
+        out string errorMessage
+    )
     {
-        var conversionResult = ConversionResultProvider.ConvertTo(value, typeof(TValue), contractResolver);
+        var conversionResult = ConversionResultProvider.ConvertTo(
+            value,
+            typeof(TValue),
+            contractResolver
+        );
         if (conversionResult.CanBeConverted)
         {
             errorMessage = null;

@@ -12,11 +12,16 @@ namespace ILLink.Shared.TypeSystemProxy
 {
     internal partial struct ParameterProxy
     {
-        public partial ReferenceKind GetReferenceKind() => Method.Method.ParameterReferenceKind((int)Index);
-        public TypeDesc ParameterType => IsImplicitThis ? Method.Method.OwningType : Method.Method.Signature[MetadataIndex];
+        public partial ReferenceKind GetReferenceKind() =>
+            Method.Method.ParameterReferenceKind((int)Index);
 
-        public partial string GetDisplayName() => IsImplicitThis ? "this"
-            : (Method.Method is EcmaMethod ecmaMethod) ? ecmaMethod.GetParameterDisplayName(MetadataIndex)
+        public TypeDesc ParameterType =>
+            IsImplicitThis ? Method.Method.OwningType : Method.Method.Signature[MetadataIndex];
+
+        public partial string GetDisplayName() =>
+            IsImplicitThis ? "this"
+            : (Method.Method is EcmaMethod ecmaMethod)
+                ? ecmaMethod.GetParameterDisplayName(MetadataIndex)
             : $"#{Index}";
 
         public partial bool IsTypeOf(string typeName) => ParameterType.IsTypeOf(typeName);

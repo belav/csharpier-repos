@@ -6,8 +6,8 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System.IdentityModel.Selectors;
-    using System.ServiceModel;
     using System.IdentityModel.Tokens;
+    using System.ServiceModel;
     using System.ServiceModel.Security;
 
     public class UserNameSecurityTokenParameters : SecurityTokenParameters
@@ -24,22 +24,42 @@ namespace System.ServiceModel.Security.Tokens
             base.RequireDerivedKeys = false;
         }
 
-        internal protected override bool HasAsymmetricKey { get { return false; } }
-        internal protected override bool SupportsClientAuthentication { get { return true; } }
-        internal protected override bool SupportsServerAuthentication { get { return false; } }
-        internal protected override bool SupportsClientWindowsIdentity { get { return true; } }
+        protected internal override bool HasAsymmetricKey
+        {
+            get { return false; }
+        }
+        protected internal override bool SupportsClientAuthentication
+        {
+            get { return true; }
+        }
+        protected internal override bool SupportsServerAuthentication
+        {
+            get { return false; }
+        }
+        protected internal override bool SupportsClientWindowsIdentity
+        {
+            get { return true; }
+        }
 
         protected override SecurityTokenParameters CloneCore()
         {
             return new UserNameSecurityTokenParameters(this);
         }
 
-        internal protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause(SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
+        protected internal override SecurityKeyIdentifierClause CreateKeyIdentifierClause(
+            SecurityToken token,
+            SecurityTokenReferenceStyle referenceStyle
+        )
         {
-            return this.CreateKeyIdentifierClause<SecurityKeyIdentifierClause, LocalIdKeyIdentifierClause>(token, referenceStyle);
+            return this.CreateKeyIdentifierClause<
+                SecurityKeyIdentifierClause,
+                LocalIdKeyIdentifierClause
+            >(token, referenceStyle);
         }
 
-        protected internal override void InitializeSecurityTokenRequirement(SecurityTokenRequirement requirement)
+        protected internal override void InitializeSecurityTokenRequirement(
+            SecurityTokenRequirement requirement
+        )
         {
             requirement.TokenType = SecurityTokenTypes.UserName;
             requirement.RequireCryptographicToken = false;

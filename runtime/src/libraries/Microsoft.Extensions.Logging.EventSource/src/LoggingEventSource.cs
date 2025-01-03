@@ -90,14 +90,17 @@ namespace Microsoft.Extensions.Logging.EventSource
             /// Meta events are events about the LoggingEventSource itself (that is they did not come from ILogger
             /// </summary>
             public const EventKeywords Meta = (EventKeywords)1;
+
             /// <summary>
             /// Turns on the 'Message' event when ILogger.Log() is called.   It gives the information in a programmatic (not formatted) way
             /// </summary>
             public const EventKeywords Message = (EventKeywords)2;
+
             /// <summary>
             /// Turns on the 'FormatMessage' event when ILogger.Log() is called.  It gives the formatted string version of the information.
             /// </summary>
             public const EventKeywords FormattedMessage = (EventKeywords)4;
+
             /// <summary>
             /// Turns on the 'MessageJson' event when ILogger.Log() is called.   It gives  JSON representation of the Arguments.
             /// </summary>
@@ -115,23 +118,34 @@ namespace Microsoft.Extensions.Logging.EventSource
         private LoggerFilterRule[] _filterSpec = Array.Empty<LoggerFilterRule>();
         private CancellationTokenSource? _cancellationTokenSource;
         private const string UseAppFilters = "UseAppFilters";
-        private const string WriteEventCoreSuppressionJustification = "WriteEventCore is safe when eventData object is a primitive type which is in this case.";
-        private const string WriteEventDynamicDependencySuppressionJustification = "DynamicDependency attribute will ensure that the required properties are not trimmed.";
+        private const string WriteEventCoreSuppressionJustification =
+            "WriteEventCore is safe when eventData object is a primitive type which is in this case.";
+        private const string WriteEventDynamicDependencySuppressionJustification =
+            "DynamicDependency attribute will ensure that the required properties are not trimmed.";
         private static readonly char[] s_semicolon = new[] { ';' };
         private static readonly char[] s_colon = new[] { ':' };
 
-        private LoggingEventSource() : base(EventSourceSettings.EtwSelfDescribingEventFormat)
-        {
-        }
+        private LoggingEventSource()
+            : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
 
         /// <summary>
         /// FormattedMessage() is called when ILogger.Log() is called. and the FormattedMessage keyword is active
         /// This only gives you the human readable formatted message.
         /// </summary>
         [Event(1, Keywords = Keywords.FormattedMessage, Level = EventLevel.LogAlways)]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = WriteEventCoreSuppressionJustification)]
-        internal unsafe void FormattedMessage(LogLevel Level, int FactoryID, string LoggerName, int EventId, string? EventName, string FormattedMessage)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = WriteEventCoreSuppressionJustification
+        )]
+        internal unsafe void FormattedMessage(
+            LogLevel Level,
+            int FactoryID,
+            string LoggerName,
+            int EventId,
+            string? EventName,
+            string FormattedMessage
+        )
         {
             if (IsEnabled())
             {
@@ -163,25 +177,64 @@ namespace Microsoft.Extensions.Logging.EventSource
         /// This gives you the logged information in a programmatic format (arguments are key-value pairs)
         /// </summary>
         [Event(2, Keywords = Keywords.Message, Level = EventLevel.LogAlways)]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(KeyValuePair<string, string>))]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = WriteEventDynamicDependencySuppressionJustification)]
-        internal void Message(LogLevel Level, int FactoryID, string LoggerName, int EventId, string? EventName, ExceptionInfo Exception, IEnumerable<KeyValuePair<string, string?>> Arguments)
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicProperties,
+            typeof(KeyValuePair<string, string>)
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = WriteEventDynamicDependencySuppressionJustification
+        )]
+        internal void Message(
+            LogLevel Level,
+            int FactoryID,
+            string LoggerName,
+            int EventId,
+            string? EventName,
+            ExceptionInfo Exception,
+            IEnumerable<KeyValuePair<string, string?>> Arguments
+        )
         {
             if (IsEnabled())
             {
-                WriteEvent(2, Level, FactoryID, LoggerName, EventId, EventName, Exception, Arguments);
+                WriteEvent(
+                    2,
+                    Level,
+                    FactoryID,
+                    LoggerName,
+                    EventId,
+                    EventName,
+                    Exception,
+                    Arguments
+                );
             }
         }
 
         /// <summary>
         /// ActivityStart is called when ILogger.BeginScope() is called
         /// </summary>
-        [Event(3, Keywords = Keywords.Message | Keywords.FormattedMessage, Level = EventLevel.LogAlways, ActivityOptions = EventActivityOptions.Recursive)]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(KeyValuePair<string, string>))]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = WriteEventDynamicDependencySuppressionJustification)]
-        internal void ActivityStart(int ID, int FactoryID, string LoggerName, IEnumerable<KeyValuePair<string, string?>> Arguments)
+        [Event(
+            3,
+            Keywords = Keywords.Message | Keywords.FormattedMessage,
+            Level = EventLevel.LogAlways,
+            ActivityOptions = EventActivityOptions.Recursive
+        )]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicProperties,
+            typeof(KeyValuePair<string, string>)
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = WriteEventDynamicDependencySuppressionJustification
+        )]
+        internal void ActivityStart(
+            int ID,
+            int FactoryID,
+            string LoggerName,
+            IEnumerable<KeyValuePair<string, string?>> Arguments
+        )
         {
             if (IsEnabled())
             {
@@ -189,9 +242,16 @@ namespace Microsoft.Extensions.Logging.EventSource
             }
         }
 
-        [Event(4, Keywords = Keywords.Message | Keywords.FormattedMessage, Level = EventLevel.LogAlways)]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = WriteEventCoreSuppressionJustification)]
+        [Event(
+            4,
+            Keywords = Keywords.Message | Keywords.FormattedMessage,
+            Level = EventLevel.LogAlways
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = WriteEventCoreSuppressionJustification
+        )]
         internal unsafe void ActivityStop(int ID, int FactoryID, string LoggerName)
         {
             if (IsEnabled())
@@ -213,9 +273,21 @@ namespace Microsoft.Extensions.Logging.EventSource
         }
 
         [Event(5, Keywords = Keywords.JsonMessage, Level = EventLevel.LogAlways)]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = WriteEventCoreSuppressionJustification)]
-        internal unsafe void MessageJson(LogLevel Level, int FactoryID, string LoggerName, int EventId, string? EventName, string ExceptionJson, string ArgumentsJson, string FormattedMessage)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = WriteEventCoreSuppressionJustification
+        )]
+        internal unsafe void MessageJson(
+            LogLevel Level,
+            int FactoryID,
+            string LoggerName,
+            int EventId,
+            string? EventName,
+            string ExceptionJson,
+            string ArgumentsJson,
+            string FormattedMessage
+        )
         {
             if (IsEnabled())
             {
@@ -248,10 +320,23 @@ namespace Microsoft.Extensions.Logging.EventSource
             }
         }
 
-        [Event(6, Keywords = Keywords.JsonMessage | Keywords.FormattedMessage, Level = EventLevel.LogAlways, ActivityOptions = EventActivityOptions.Recursive)]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = WriteEventCoreSuppressionJustification)]
-        internal unsafe void ActivityJsonStart(int ID, int FactoryID, string LoggerName, string ArgumentsJson)
+        [Event(
+            6,
+            Keywords = Keywords.JsonMessage | Keywords.FormattedMessage,
+            Level = EventLevel.LogAlways,
+            ActivityOptions = EventActivityOptions.Recursive
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = WriteEventCoreSuppressionJustification
+        )]
+        internal unsafe void ActivityJsonStart(
+            int ID,
+            int FactoryID,
+            string LoggerName,
+            string ArgumentsJson
+        )
         {
             if (IsEnabled())
             {
@@ -274,9 +359,16 @@ namespace Microsoft.Extensions.Logging.EventSource
             }
         }
 
-        [Event(7, Keywords = Keywords.JsonMessage | Keywords.FormattedMessage, Level = EventLevel.LogAlways)]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = WriteEventCoreSuppressionJustification)]
+        [Event(
+            7,
+            Keywords = Keywords.JsonMessage | Keywords.FormattedMessage,
+            Level = EventLevel.LogAlways
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = WriteEventCoreSuppressionJustification
+        )]
         internal unsafe void ActivityJsonStop(int ID, int FactoryID, string LoggerName)
         {
             if (IsEnabled())
@@ -330,7 +422,10 @@ namespace Microsoft.Extensions.Logging.EventSource
         [NonEvent]
         internal IChangeToken GetFilterChangeToken()
         {
-            CancellationTokenSource cts = LazyInitializer.EnsureInitialized(ref _cancellationTokenSource, () => new CancellationTokenSource());
+            CancellationTokenSource cts = LazyInitializer.EnsureInitialized(
+                ref _cancellationTokenSource,
+                () => new CancellationTokenSource()
+            );
             return new CancellationChangeToken(cts.Token);
         }
 
@@ -357,26 +452,55 @@ namespace Microsoft.Extensions.Logging.EventSource
         {
             if (filterSpec == string.Empty)
             {
-                return new[] { new LoggerFilterRule(typeof(EventSourceLoggerProvider).FullName, null, defaultLevel, null) };
+                return new[]
+                {
+                    new LoggerFilterRule(
+                        typeof(EventSourceLoggerProvider).FullName,
+                        null,
+                        defaultLevel,
+                        null
+                    ),
+                };
             }
 
             if (filterSpec == null)
             {
                 // All event source loggers are disabled by default
-                return new[] { new LoggerFilterRule(typeof(EventSourceLoggerProvider).FullName, null, LogLevel.None, null) };
+                return new[]
+                {
+                    new LoggerFilterRule(
+                        typeof(EventSourceLoggerProvider).FullName,
+                        null,
+                        LogLevel.None,
+                        null
+                    ),
+                };
             }
 
             var rules = new List<LoggerFilterRule>();
             int ruleStringsStartIndex = 0;
-            string[] ruleStrings = filterSpec.Split(s_semicolon, StringSplitOptions.RemoveEmptyEntries);
-            if (ruleStrings.Length > 0 && ruleStrings[0].Equals(UseAppFilters, StringComparison.OrdinalIgnoreCase))
+            string[] ruleStrings = filterSpec.Split(
+                s_semicolon,
+                StringSplitOptions.RemoveEmptyEntries
+            );
+            if (
+                ruleStrings.Length > 0
+                && ruleStrings[0].Equals(UseAppFilters, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 // Avoid adding default rule to disable event source loggers
                 ruleStringsStartIndex = 1;
             }
             else
             {
-                rules.Add(new LoggerFilterRule(typeof(EventSourceLoggerProvider).FullName, null, LogLevel.None, null));
+                rules.Add(
+                    new LoggerFilterRule(
+                        typeof(EventSourceLoggerProvider).FullName,
+                        null,
+                        LogLevel.None,
+                        null
+                    )
+                );
             }
 
             for (int i = ruleStringsStartIndex; i < ruleStrings.Length; i++)
@@ -403,7 +527,14 @@ namespace Microsoft.Extensions.Logging.EventSource
                     }
                 }
 
-                rules.Add(new LoggerFilterRule(typeof(EventSourceLoggerProvider).FullName, loggerName, level, null));
+                rules.Add(
+                    new LoggerFilterRule(
+                        typeof(EventSourceLoggerProvider).FullName,
+                        loggerName,
+                        level,
+                        null
+                    )
+                );
             }
 
             return rules.ToArray();
@@ -416,7 +547,11 @@ namespace Microsoft.Extensions.Logging.EventSource
         /// It returns the value in 'ret' and returns true if successful.  If false is returned ret is left unchanged.
         /// </summary>
         [NonEvent]
-        private static bool TryParseLevel(LogLevel defaultLevel, string levelString, out LogLevel ret)
+        private static bool TryParseLevel(
+            LogLevel defaultLevel,
+            string levelString,
+            out LogLevel ret
+        )
         {
             ret = defaultLevel;
 
@@ -466,7 +601,8 @@ namespace Microsoft.Extensions.Logging.EventSource
         [NonEvent]
         private LogLevel GetDefaultLevel()
         {
-            EventKeywords allMessageKeywords = Keywords.Message | Keywords.FormattedMessage | Keywords.JsonMessage;
+            EventKeywords allMessageKeywords =
+                Keywords.Message | Keywords.FormattedMessage | Keywords.JsonMessage;
 
             if (IsEnabled(EventLevel.Verbose, allMessageKeywords))
             {
@@ -499,7 +635,11 @@ namespace Microsoft.Extensions.Logging.EventSource
 
         [NonEvent]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe void SetEventData<T>(ref EventData eventData, ref T value, void* pinnedString = null)
+        private static unsafe void SetEventData<T>(
+            ref EventData eventData,
+            ref T value,
+            void* pinnedString = null
+        )
         {
             if (typeof(T) == typeof(string))
             {
@@ -513,7 +653,6 @@ namespace Microsoft.Extensions.Logging.EventSource
 
                 eventData.DataPointer = (IntPtr)pinnedString;
                 eventData.Size = checked((str.Length + 1) * sizeof(char)); // size is specified in bytes, including null wide char
-
             }
             else
             {

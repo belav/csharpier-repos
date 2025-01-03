@@ -25,8 +25,8 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-        CountResults(new RecursiveThrowNew().Run(),             ref nSuccesses, ref nFailures);
-        
+        CountResults(new RecursiveThrowNew().Run(), ref nSuccesses, ref nFailures);
+
         if (0 == nFailures)
         {
             Console.WriteLine("OVERALL PASS: " + nSuccesses + " tests");
@@ -47,7 +47,7 @@ public class RecursiveThrowNew
     public int Run()
     {
         _trace = new Trace("RecursiveThrowNew", "210C0(eX)C1(e0)C2(e1)CM(e2)");
-        
+
         try
         {
             LoveToRecurse(2);
@@ -60,7 +60,6 @@ public class RecursiveThrowNew
 
         return _trace.Match();
     }
-
 
     void SeparatorMethod(int i)
     {
@@ -89,5 +88,3 @@ public class RecursiveThrowNew
         }
     }
 }
-
-

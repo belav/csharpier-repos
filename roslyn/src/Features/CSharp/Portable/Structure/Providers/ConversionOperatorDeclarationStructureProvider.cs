@@ -11,21 +11,29 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class ConversionOperatorDeclarationStructureProvider : AbstractSyntaxNodeStructureProvider<ConversionOperatorDeclarationSyntax>
+    internal class ConversionOperatorDeclarationStructureProvider
+        : AbstractSyntaxNodeStructureProvider<ConversionOperatorDeclarationSyntax>
     {
         protected override void CollectBlockSpans(
             SyntaxToken previousToken,
             ConversionOperatorDeclarationSyntax operatorDeclaration,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            CSharpStructureHelpers.CollectCommentBlockSpans(operatorDeclaration, ref spans, options);
+            CSharpStructureHelpers.CollectCommentBlockSpans(
+                operatorDeclaration,
+                ref spans,
+                options
+            );
 
             // fault tolerance
-            if (operatorDeclaration.Body == null ||
-                operatorDeclaration.Body.OpenBraceToken.IsMissing ||
-                operatorDeclaration.Body.CloseBraceToken.IsMissing)
+            if (
+                operatorDeclaration.Body == null
+                || operatorDeclaration.Body.OpenBraceToken.IsMissing
+                || operatorDeclaration.Body.CloseBraceToken.IsMissing
+            )
             {
                 return;
             }
@@ -36,16 +44,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             // Check IsNode to compress blank lines after this node if it is the last child of the parent.
             //
             // Whitespace between conversion operators is collapsed in Metadata as Source.
-            var compressEmptyLines = options.IsMetadataAsSource
-                && (!nextSibling.IsNode || nextSibling.IsKind(SyntaxKind.ConversionOperatorDeclaration));
+            var compressEmptyLines =
+                options.IsMetadataAsSource
+                && (
+                    !nextSibling.IsNode
+                    || nextSibling.IsKind(SyntaxKind.ConversionOperatorDeclaration)
+                );
 
-            spans.AddIfNotNull(CSharpStructureHelpers.CreateBlockSpan(
-                operatorDeclaration,
-                operatorDeclaration.ParameterList.GetLastToken(includeZeroWidth: true),
-                compressEmptyLines: compressEmptyLines,
-                autoCollapse: true,
-                type: BlockTypes.Member,
-                isCollapsible: true));
+            spans.AddIfNotNull(
+                CSharpStructureHelpers.CreateBlockSpan(
+                    operatorDeclaration,
+                    operatorDeclaration.ParameterList.GetLastToken(includeZeroWidth: true),
+                    compressEmptyLines: compressEmptyLines,
+                    autoCollapse: true,
+                    type: BlockTypes.Member,
+                    isCollapsible: true
+                )
+            );
         }
     }
 }

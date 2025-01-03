@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,54 +28,60 @@
 
 
 using System;
-using System.Text;
-using System.Configuration;
 using System.Collections.Specialized;
+using System.Configuration;
+using System.Text;
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration
 {
-	[TestFixture]
-	public class SettingElementTest
-	{
-		[Test]
-		public void Initial ()
-		{
-			SettingElement el = new SettingElement ();
-			Assert.IsNotNull (el.Value, "#1");
-			Assert.IsNull (el.Value.ValueXml, "#2");
-		}
+    [TestFixture]
+    public class SettingElementTest
+    {
+        [Test]
+        public void Initial()
+        {
+            SettingElement el = new SettingElement();
+            Assert.IsNotNull(el.Value, "#1");
+            Assert.IsNull(el.Value.ValueXml, "#2");
+        }
 
-		[Test]
-		public void CollectionAddNull ()
-		{
-			try {
-				SettingElementCollection c = new SettingElementCollection ();
-				c.Add (null);
-				Assert.Fail ();
-			} catch (NullReferenceException) {
-				// .net s cks here
-			} catch (ArgumentNullException) {
-			}
-		}
+        [Test]
+        public void CollectionAddNull()
+        {
+            try
+            {
+                SettingElementCollection c = new SettingElementCollection();
+                c.Add(null);
+                Assert.Fail();
+            }
+            catch (NullReferenceException)
+            {
+                // .net s cks here
+            }
+            catch (ArgumentNullException) { }
+        }
 
-		[Test]
-		public void CollectionAddNameless ()
-		{
-			SettingElement el = new SettingElement ();
-			Assert.AreEqual (String.Empty, el.Name, "premise #1");
-			SettingElementCollection c = new SettingElementCollection ();
-			Assert.AreEqual (ConfigurationElementCollectionType.BasicMap, c.CollectionType, "premise #2");
-			c.Add (el);
-			Assert.AreEqual (el, c.Get (""), "#1");
-		}
+        [Test]
+        public void CollectionAddNameless()
+        {
+            SettingElement el = new SettingElement();
+            Assert.AreEqual(String.Empty, el.Name, "premise #1");
+            SettingElementCollection c = new SettingElementCollection();
+            Assert.AreEqual(
+                ConfigurationElementCollectionType.BasicMap,
+                c.CollectionType,
+                "premise #2"
+            );
+            c.Add(el);
+            Assert.AreEqual(el, c.Get(""), "#1");
+        }
 
-		[Test]
-		public void CollectionGetNonExistent ()
-		{
-			SettingElementCollection c = new SettingElementCollection ();
-			Assert.IsNull (c.Get ("nonexistent"));
-		}
-	}
+        [Test]
+        public void CollectionGetNonExistent()
+        {
+            SettingElementCollection c = new SettingElementCollection();
+            Assert.IsNull(c.Get("nonexistent"));
+        }
+    }
 }
-

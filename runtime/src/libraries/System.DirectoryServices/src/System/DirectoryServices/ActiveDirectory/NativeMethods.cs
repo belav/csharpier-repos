@@ -6,7 +6,6 @@ using System.Security;
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-
     /*typedef struct _DOMAIN_CONTROLLER_INFO {
         LPTSTR DomainControllerName;
         LPTSTR DomainControllerAddress;
@@ -247,6 +246,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public int minorVersion;
         public int buildNumber;
         public int platformId;
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
         public string? csdVersion = null;
         public short servicePackMajor;
@@ -309,14 +309,19 @@ namespace System.DirectoryServices.ActiveDirectory
                 ULONG Flags,
                 PDOMAIN_CONTROLLER_INFO* DomainControllerInfo
                 );*/
-        [LibraryImport(global::Interop.Libraries.Netapi32, EntryPoint = "DsGetDcNameW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            global::Interop.Libraries.Netapi32,
+            EntryPoint = "DsGetDcNameW",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int DsGetDcName(
             string? computerName,
             string? domainName,
             IntPtr domainGuid,
             string? siteName,
             int flags,
-            out IntPtr domainControllerInfo);
+            out IntPtr domainControllerInfo
+        );
 
         /* DWORD WINAPI DsGetDcOpen(
                          LPCTSTR DnsName,
@@ -327,7 +332,11 @@ namespace System.DirectoryServices.ActiveDirectory
                          ULONG DcFlags,
                          PHANDLE RetGetDcContext
                          );*/
-        [LibraryImport(global::Interop.Libraries.Netapi32, EntryPoint = "DsGetDcOpenW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            global::Interop.Libraries.Netapi32,
+            EntryPoint = "DsGetDcOpenW",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int DsGetDcOpen(
             string? dnsName,
             int optionFlags,
@@ -335,7 +344,8 @@ namespace System.DirectoryServices.ActiveDirectory
             IntPtr domainGuid,
             string? dnsForestName,
             int dcFlags,
-            out IntPtr retGetDcContext);
+            out IntPtr retGetDcContext
+        );
 
         /*DWORD WINAPI DsGetDcNext(
                         HANDLE GetDcContextHandle,
@@ -343,26 +353,33 @@ namespace System.DirectoryServices.ActiveDirectory
                         LPSOCKET_ADDRESS* SockAddresses,
                         LPTSTR* DnsHostName
                         );*/
-        [LibraryImport(global::Interop.Libraries.Netapi32, EntryPoint = "DsGetDcNextW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            global::Interop.Libraries.Netapi32,
+            EntryPoint = "DsGetDcNextW",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int DsGetDcNext(
             IntPtr getDcContextHandle,
             ref IntPtr sockAddressCount,
             out IntPtr sockAddresses,
-            out IntPtr dnsHostName);
+            out IntPtr dnsHostName
+        );
 
         /*void WINAPI DsGetDcClose(
                         HANDLE GetDcContextHandle
                         );*/
-        [LibraryImport(global::Interop.Libraries.Netapi32, EntryPoint = "DsGetDcCloseW", StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial void DsGetDcClose(
-            IntPtr getDcContextHandle);
+        [LibraryImport(
+            global::Interop.Libraries.Netapi32,
+            EntryPoint = "DsGetDcCloseW",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
+        internal static partial void DsGetDcClose(IntPtr getDcContextHandle);
 
         /*NET_API_STATUS NetApiBufferFree(
                 LPVOID Buffer
                 );*/
         [LibraryImport(global::Interop.Libraries.Netapi32)]
-        internal static partial int NetApiBufferFree(
-            IntPtr buffer);
+        internal static partial int NetApiBufferFree(IntPtr buffer);
 
         internal const int DsDomainControllerInfoLevel2 = 2;
         internal const int DsDomainControllerInfoLevel3 = 3;
@@ -380,14 +397,19 @@ namespace System.DirectoryServices.ActiveDirectory
             PDNS_RECORD *ppQueryResultsSet,
             PVOID *pReserved
             );*/
-        [LibraryImport(global::Interop.Libraries.Dnsapi, EntryPoint = "DnsQuery_W", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            global::Interop.Libraries.Dnsapi,
+            EntryPoint = "DnsQuery_W",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int DnsQuery(
             string recordName,
             short recordType,
             int options,
             IntPtr servers,
             out IntPtr dnsResultList,
-            IntPtr reserved);
+            IntPtr reserved
+        );
 
         /*VOID WINAPI DnsRecordListFree(
             PDNS_RECORD pRecordList,
@@ -396,14 +418,14 @@ namespace System.DirectoryServices.ActiveDirectory
         [LibraryImport(global::Interop.Libraries.Dnsapi)]
         internal static partial void DnsRecordListFree(
             IntPtr dnsResultList,
-            [MarshalAs(UnmanagedType.Bool)] bool dnsFreeType);
+            [MarshalAs(UnmanagedType.Bool)] bool dnsFreeType
+        );
 
         /*NTSTATUS LsaConnectUntrusted(
               PHANDLE LsaHandle
             );*/
         [LibraryImport(global::Interop.Libraries.Secur32)]
-        internal static partial uint LsaConnectUntrusted(
-             out LsaLogonProcessSafeHandle lsaHandle);
+        internal static partial uint LsaConnectUntrusted(out LsaLogonProcessSafeHandle lsaHandle);
 
         internal const int NegGetCallerName = 1;
 
@@ -424,21 +446,20 @@ namespace System.DirectoryServices.ActiveDirectory
             int submitBufferLength,
             out IntPtr protocolReturnBuffer,
             out int returnBufferLength,
-            out uint protocolStatus);
+            out uint protocolStatus
+        );
 
         /*NTSTATUS LsaFreeReturnBuffer(
               PVOID Buffer
             );*/
         [LibraryImport(global::Interop.Libraries.Secur32)]
-        internal static partial uint LsaFreeReturnBuffer(
-            IntPtr buffer);
+        internal static partial uint LsaFreeReturnBuffer(IntPtr buffer);
 
         /*NTSTATUS LsaDeregisterLogonProcess(
               HANDLE LsaHandle
             );*/
         [LibraryImport(global::Interop.Libraries.Secur32)]
-        internal static partial int LsaDeregisterLogonProcess(
-            IntPtr lsaHandle);
+        internal static partial int LsaDeregisterLogonProcess(IntPtr lsaHandle);
 
         /*int CompareString(LCID Locale,
             DWORD dwCmpFlags,
@@ -447,14 +468,20 @@ namespace System.DirectoryServices.ActiveDirectory
             DWORD lpString2,
             DWORD cchCount2
             );*/
-        [LibraryImport(global::Interop.Libraries.Kernel32, EntryPoint = "CompareStringW",  SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            global::Interop.Libraries.Kernel32,
+            EntryPoint = "CompareStringW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int CompareString(
             uint locale,
             uint dwCmpFlags,
             IntPtr lpString1,
             int cchCount1,
             IntPtr lpString2,
-            int cchCount2);
+            int cchCount2
+        );
     }
 
     internal sealed class NativeComInterfaces
@@ -497,15 +524,16 @@ namespace System.DirectoryServices.ActiveDirectory
         // Pathname as a co-class that implements the IAdsPathname interface
         //
         [ComImport, Guid("080d0d78-f421-11d0-a36e-00c04fb950dc")]
-        internal class Pathname
-        {
-        }
+        internal class Pathname { }
 
         [ComImport, Guid("D592AED4-F420-11D0-A36E-00C04FB950DC")]
         internal interface IAdsPathname
         {
             // HRESULT Set([in] BSTR bstrADsPath,  [in] long lnSetType);
-            int Set([In, MarshalAs(UnmanagedType.BStr)] string bstrADsPath, [In, MarshalAs(UnmanagedType.U4)] int lnSetType);
+            int Set(
+                [In, MarshalAs(UnmanagedType.BStr)] string bstrADsPath,
+                [In, MarshalAs(UnmanagedType.U4)] int lnSetType
+            );
 
             // HRESULT SetDisplayType([in] long lnDisplayType);
             int SetDisplayType([In, MarshalAs(UnmanagedType.U4)] int lnDisplayType);
@@ -534,13 +562,12 @@ namespace System.DirectoryServices.ActiveDirectory
 
             // HRESULT GetEscapedElement([in] long lnReserved, [in] BSTR bstrInStr, [out, retval] BSTR*  pbstrOutStr );
             [return: MarshalAs(UnmanagedType.BStr)]
-            string GetEscapedElement([In, MarshalAs(UnmanagedType.U4)] int lnReserved, [In, MarshalAs(UnmanagedType.BStr)] string bstrInStr);
+            string GetEscapedElement(
+                [In, MarshalAs(UnmanagedType.U4)] int lnReserved,
+                [In, MarshalAs(UnmanagedType.BStr)] string bstrInStr
+            );
 
-            int EscapedMode
-            {
-                get;
-                set;
-            }
+            int EscapedMode { get; set; }
         }
 
         [ComImport, Guid("C8F93DD3-4AE0-11CF-9E73-00AA004A5691")]
@@ -592,17 +619,20 @@ namespace System.DirectoryServices.ActiveDirectory
 
             object Get([In, MarshalAs(UnmanagedType.BStr)] string bstrName);
 
-            void Put([In, MarshalAs(UnmanagedType.BStr)] string bstrName,
-                        [In] object vProp);
+            void Put([In, MarshalAs(UnmanagedType.BStr)] string bstrName, [In] object vProp);
 
             object GetEx([In, MarshalAs(UnmanagedType.BStr)] string bstrName);
 
-            void PutEx([In, MarshalAs(UnmanagedType.U4)] int lnControlCode,
-                        [In, MarshalAs(UnmanagedType.BStr)] string bstrName,
-                        [In] object vProp);
+            void PutEx(
+                [In, MarshalAs(UnmanagedType.U4)] int lnControlCode,
+                [In, MarshalAs(UnmanagedType.BStr)] string bstrName,
+                [In] object vProp
+            );
 
-            void GetInfoEx([In] object vProperties,
-                        [In, MarshalAs(UnmanagedType.U4)] int lnReserved);
+            void GetInfoEx(
+                [In] object vProperties,
+                [In, MarshalAs(UnmanagedType.U4)] int lnReserved
+            );
 
             //
             // IAdsProperty definition starts here
@@ -640,11 +670,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 set;
             }
 
-            bool MultiValued
-            {
-                get;
-                set;
-            }
+            bool MultiValued { get; set; }
             object Qualifiers();
         }
 
@@ -697,17 +723,20 @@ namespace System.DirectoryServices.ActiveDirectory
 
             object Get([In, MarshalAs(UnmanagedType.BStr)] string bstrName);
 
-            void Put([In, MarshalAs(UnmanagedType.BStr)] string bstrName,
-                        [In] object vProp);
+            void Put([In, MarshalAs(UnmanagedType.BStr)] string bstrName, [In] object vProp);
 
             object GetEx([In, MarshalAs(UnmanagedType.BStr)] string bstrName);
 
-            void PutEx([In, MarshalAs(UnmanagedType.U4)] int lnControlCode,
-                        [In, MarshalAs(UnmanagedType.BStr)] string bstrName,
-                        [In] object vProp);
+            void PutEx(
+                [In, MarshalAs(UnmanagedType.U4)] int lnControlCode,
+                [In, MarshalAs(UnmanagedType.BStr)] string bstrName,
+                [In] object vProp
+            );
 
-            void GetInfoEx([In] object vProperties,
-                        [In, MarshalAs(UnmanagedType.U4)] int lnReserved);
+            void GetInfoEx(
+                [In] object vProperties,
+                [In, MarshalAs(UnmanagedType.U4)] int lnReserved
+            );
 
             //
             // IAdsClass definition starts here
@@ -739,37 +768,17 @@ namespace System.DirectoryServices.ActiveDirectory
 
             bool Auxiliary { get; set; }
 
-            object MandatoryProperties
-            {
-                get;
-                set;
-            }
+            object MandatoryProperties { get; set; }
 
-            object OptionalProperties
-            {
-                get;
-                set;
-            }
+            object OptionalProperties { get; set; }
 
             object NamingProperties { get; set; }
 
-            object DerivedFrom
-            {
-                get;
-                set;
-            }
+            object DerivedFrom { get; set; }
 
-            object AuxDerivedFrom
-            {
-                get;
-                set;
-            }
+            object AuxDerivedFrom { get; set; }
 
-            object PossibleSuperiors
-            {
-                get;
-                set;
-            }
+            object PossibleSuperiors { get; set; }
 
             object Containment { get; set; }
 

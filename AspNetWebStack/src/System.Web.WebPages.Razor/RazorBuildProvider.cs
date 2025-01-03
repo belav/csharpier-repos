@@ -123,7 +123,9 @@ namespace System.Web.WebPages.Razor
             get
             {
                 EnsureGeneratedCode();
-                CompilerType compilerType = GetDefaultCompilerTypeForLanguage(Host.CodeLanguage.LanguageName);
+                CompilerType compilerType = GetDefaultCompilerTypeForLanguage(
+                    Host.CodeLanguage.LanguageName
+                );
                 if (_isFullTrust != false && Host.DefaultDebugCompilation)
                 {
                     try
@@ -153,7 +155,14 @@ namespace System.Web.WebPages.Razor
 
         public override Type GetGeneratedType(CompilerResults results)
         {
-            return results.CompiledAssembly.GetType(String.Format(CultureInfo.CurrentCulture, "{0}.{1}", Host.DefaultNamespace, Host.DefaultClassName));
+            return results.CompiledAssembly.GetType(
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0}.{1}",
+                    Host.DefaultNamespace,
+                    Host.DefaultClassName
+                )
+            );
         }
 
         public override void GenerateCode(AssemblyBuilder assemblyBuilder)
@@ -165,7 +174,14 @@ namespace System.Web.WebPages.Razor
         {
             OnCodeGenerationStarted(assemblyBuilder);
             assemblyBuilder.AddCodeCompileUnit(this, GeneratedCode);
-            assemblyBuilder.GenerateTypeFactory(String.Format(CultureInfo.InvariantCulture, "{0}.{1}", Host.DefaultNamespace, Host.DefaultClassName));
+            assemblyBuilder.GenerateTypeFactory(
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}.{1}",
+                    Host.DefaultNamespace,
+                    Host.DefaultClassName
+                )
+            );
         }
 
         protected internal virtual TextReader InternalOpenReader()
@@ -186,7 +202,11 @@ namespace System.Web.WebPages.Razor
             return args.Host;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method performs significant work and a property would not be appropriate")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method performs significant work and a property would not be appropriate"
+        )]
         protected internal virtual WebPageRazorHost GetHostFromConfig()
         {
             return WebRazorHostFactory.CreateHostFromConfig(VirtualPath);
@@ -213,10 +233,18 @@ namespace System.Web.WebPages.Razor
 
         private void OnCodeGenerationCompleted(CodeCompileUnit generatedCode)
         {
-            EventHandler<CodeGenerationCompleteEventArgs> handler = _codeGenerationCompletedInternal ?? CodeGenerationCompleted;
+            EventHandler<CodeGenerationCompleteEventArgs> handler =
+                _codeGenerationCompletedInternal ?? CodeGenerationCompleted;
             if (handler != null)
             {
-                handler(this, new CodeGenerationCompleteEventArgs(Host.VirtualPath, Host.PhysicalPath, generatedCode));
+                handler(
+                    this,
+                    new CodeGenerationCompleteEventArgs(
+                        Host.VirtualPath,
+                        Host.PhysicalPath,
+                        generatedCode
+                    )
+                );
             }
         }
 
@@ -228,7 +256,12 @@ namespace System.Web.WebPages.Razor
                 GeneratorResults results = null;
                 using (TextReader reader = InternalOpenReader())
                 {
-                    results = engine.GenerateCode(reader, className: null, rootNamespace: null, sourceFileName: Host.PhysicalPath);
+                    results = engine.GenerateCode(
+                        reader,
+                        className: null,
+                        rootNamespace: null,
+                        sourceFileName: Host.PhysicalPath
+                    );
                 }
                 if (!results.Success)
                 {
@@ -241,12 +274,25 @@ namespace System.Web.WebPages.Razor
             }
         }
 
-        private static HttpParseException CreateExceptionFromParserError(RazorError error, string virtualPath)
+        private static HttpParseException CreateExceptionFromParserError(
+            RazorError error,
+            string virtualPath
+        )
         {
-            return new HttpParseException(error.Message + Environment.NewLine, null, virtualPath, null, error.Location.LineIndex + 1);
+            return new HttpParseException(
+                error.Message + Environment.NewLine,
+                null,
+                virtualPath,
+                null,
+                error.Location.LineIndex + 1
+            );
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2141:TransparentMethodsMustNotSatisfyLinkDemandsFxCopRule", Justification = "We are catching the SecurityException to detect medium trust")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2141:TransparentMethodsMustNotSatisfyLinkDemandsFxCopRule",
+            Justification = "We are catching the SecurityException to detect medium trust"
+        )]
         private static void SetIncludeDebugInfoFlag(CompilerType compilerType)
         {
             compilerType.CompilerParameters.IncludeDebugInformation = true;

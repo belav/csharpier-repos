@@ -18,7 +18,5 @@ public class NoContentResult : StatusCodeResult
     /// Initializes a new <see cref="NoContentResult"/> instance.
     /// </summary>
     public NoContentResult()
-        : base(DefaultStatusCode)
-    {
-    }
+        : base(DefaultStatusCode) { }
 }

@@ -17,7 +17,6 @@ namespace EEGC
         {
             if (iDepth <= 0)
                 return;
-
             else
             {
                 iDepth--;
@@ -35,9 +34,9 @@ namespace EEGC
             Node tempTree;
             Thread sleepThread;
 
-            kStretchTreeDepth = 19;     // about 24MB
-            kLongLivedTreeDepth = 18;   // about 12MB
-            kShortLivedTreeDepth = 13;  // about 0.4MB
+            kStretchTreeDepth = 19; // about 24MB
+            kLongLivedTreeDepth = 18; // about 12MB
+            kShortLivedTreeDepth = 13; // about 0.4MB
 
             tempTree = new Node();
             Populate(kStretchTreeDepth, tempTree);

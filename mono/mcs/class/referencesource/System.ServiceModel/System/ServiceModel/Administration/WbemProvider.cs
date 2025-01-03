@@ -22,7 +22,9 @@ namespace System.ServiceModel.Administration
         object syncRoot = new object();
         WbemNative.IWbemDecoupledRegistrar wbemRegistrar = null;
         WbemNative.IWbemServices wbemServices = null;
-        Dictionary<string, IWmiProvider> wmiProviders = new Dictionary<string, IWmiProvider>(StringComparer.OrdinalIgnoreCase);
+        Dictionary<string, IWmiProvider> wmiProviders = new Dictionary<string, IWmiProvider>(
+            StringComparer.OrdinalIgnoreCase
+        );
         string nameSpace;
         string appName;
         bool initialized = false;
@@ -39,7 +41,9 @@ namespace System.ServiceModel.Administration
             {
                 AppDomain.CurrentDomain.DomainUnload += new EventHandler(ExitOrUnloadEventHandler);
                 AppDomain.CurrentDomain.ProcessExit += new EventHandler(ExitOrUnloadEventHandler);
-                AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(ExitOrUnloadEventHandler);
+                AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(
+                    ExitOrUnloadEventHandler
+                );
                 MTAExecute(new WaitCallback(RegisterWbemProvider), null);
                 this.initialized = true;
             }
@@ -47,22 +51,33 @@ namespace System.ServiceModel.Administration
             {
                 // WMI is not supported in PT, rethrow a meaningful exception (will fail the service activation)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.PartialTrustWMINotEnabled)));
+                    new InvalidOperationException(SR.GetString(SR.PartialTrustWMINotEnabled))
+                );
             }
         }
 
         void RegisterWbemProvider(object state)
         {
-            this.wbemRegistrar = (WbemNative.IWbemDecoupledRegistrar)new WbemNative.WbemDecoupledRegistrar();
-            int hr = this.wbemRegistrar.Register(0, null, null, null,
-                this.nameSpace, this.appName, this);
+            this.wbemRegistrar = (WbemNative.IWbemDecoupledRegistrar)
+                new WbemNative.WbemDecoupledRegistrar();
+            int hr = this.wbemRegistrar.Register(
+                0,
+                null,
+                null,
+                null,
+                this.nameSpace,
+                this.appName,
+                this
+            );
             if ((int)WbemNative.WbemStatus.WBEM_S_NO_ERROR != hr)
             {
-                DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
+                DiagnosticUtility.EventLog.LogEvent(
+                    TraceEventType.Error,
                     (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
                     (uint)System.Runtime.Diagnostics.EventLogEventId.WmiRegistrationFailed,
                     TraceUtility.CreateSourceString(this),
-                    hr.ToString("x", CultureInfo.InvariantCulture));
+                    hr.ToString("x", CultureInfo.InvariantCulture)
+                );
 
                 this.wbemRegistrar = null;
             }
@@ -75,11 +90,13 @@ namespace System.ServiceModel.Administration
                 int hr = this.wbemRegistrar.UnRegister();
                 if ((int)WbemNative.WbemStatus.WBEM_S_NO_ERROR != hr)
                 {
-                    DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
+                    DiagnosticUtility.EventLog.LogEvent(
+                        TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
                         (uint)System.Runtime.Diagnostics.EventLogEventId.WmiUnregistrationFailed,
                         TraceUtility.CreateSourceString(this),
-                        hr.ToString("x", CultureInfo.InvariantCulture));
+                        hr.ToString("x", CultureInfo.InvariantCulture)
+                    );
                 }
                 this.wbemRegistrar = null;
             }
@@ -127,7 +144,7 @@ namespace System.ServiceModel.Administration
             WbemNative.IWbemServices wbemServices,
             WbemNative.IWbemContext wbemContext,
             WbemNative.IWbemProviderInitSink wbemSink
-            )
+        )
         {
             if (wbemServices == null || wbemContext == null || wbemSink == null)
                 return (int)WbemNative.WbemStatus.WBEM_E_INVALID_PARAMETER;
@@ -135,7 +152,10 @@ namespace System.ServiceModel.Administration
             try
             {
                 MTAExecute(new WaitCallback(this.RelocateWbemServicesRCWToMTA), wbemServices);
-                wbemSink.SetStatus((int)WbemNative.tag_WBEM_EXTRA_RETURN_CODES.WBEM_S_INITIALIZED, 0);
+                wbemSink.SetStatus(
+                    (int)WbemNative.tag_WBEM_EXTRA_RETURN_CODES.WBEM_S_INITIALIZED,
+                    0
+                );
             }
             catch (WbemException e)
             {
@@ -151,7 +171,7 @@ namespace System.ServiceModel.Administration
             finally
             {
                 // WMI relies on destructor of this interface to perform certain task
-                // explicitly release this so that the GC won't hold on to the ref of 
+                // explicitly release this so that the GC won't hold on to the ref of
                 // this after the function
                 Marshal.ReleaseComObject(wbemSink);
             }
@@ -173,14 +193,12 @@ namespace System.ServiceModel.Administration
             WbemNative.IWbemContext wbemContext,
             ref WbemNative.IWbemServices wbemServices,
             IntPtr wbemCallResult
-            )
+        )
         {
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
         }
 
-        int WbemNative.IWbemServices.CancelAsyncCall(
-            WbemNative.IWbemObjectSink wbemSink
-            )
+        int WbemNative.IWbemServices.CancelAsyncCall(WbemNative.IWbemObjectSink wbemSink)
         {
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
         }
@@ -188,7 +206,7 @@ namespace System.ServiceModel.Administration
         int WbemNative.IWbemServices.QueryObjectSink(
             Int32 flags,
             out WbemNative.IWbemObjectSink wbemSink
-            )
+        )
         {
             wbemSink = null;
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
@@ -200,7 +218,7 @@ namespace System.ServiceModel.Administration
             WbemNative.IWbemContext wbemContext,
             ref WbemNative.IWbemClassObject wbemObject,
             IntPtr wbemResult
-            )
+        )
         {
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
         }
@@ -209,18 +227,34 @@ namespace System.ServiceModel.Administration
             string objectPath,
             Int32 flags,
             WbemNative.IWbemContext wbemContext,
-            WbemNative.IWbemObjectSink wbemSink)
+            WbemNative.IWbemObjectSink wbemSink
+        )
         {
             if (wbemContext == null || wbemSink == null || this.wbemServices == null)
                 return (int)WbemNative.WbemStatus.WBEM_E_INVALID_PARAMETER;
 
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ?
-                ServiceModelActivity.CreateActivity(true, SR.GetString(SR.WmiGetObject, string.IsNullOrEmpty(objectPath) ? string.Empty : objectPath), ActivityType.WmiGetObject) : null)
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateActivity(
+                        true,
+                        SR.GetString(
+                            SR.WmiGetObject,
+                            string.IsNullOrEmpty(objectPath) ? string.Empty : objectPath
+                        ),
+                        ActivityType.WmiGetObject
+                    )
+                    : null
+            )
             {
                 try
                 {
                     ObjectPathRegex objPathRegex = new ObjectPathRegex(objectPath);
-                    ParameterContext parms = new ParameterContext(objPathRegex.ClassName, this.wbemServices, wbemContext, wbemSink);
+                    ParameterContext parms = new ParameterContext(
+                        objPathRegex.ClassName,
+                        this.wbemServices,
+                        wbemContext,
+                        wbemSink
+                    );
                     WbemInstance wbemInstance = new WbemInstance(parms, objPathRegex);
                     IWmiProvider wmiProvider = this.GetProvider(parms.ClassName);
                     if (wmiProvider.GetInstance(new InstanceContext(wbemInstance)))
@@ -228,27 +262,48 @@ namespace System.ServiceModel.Administration
                         wbemInstance.Indicate();
                     }
 
-                    WbemException.ThrowIfFail(wbemSink.SetStatus(
-                        (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                        (int)WbemNative.WbemStatus.WBEM_S_NO_ERROR,
-                        null,
-                        null));
+                    WbemException.ThrowIfFail(
+                        wbemSink.SetStatus(
+                            (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                            (int)WbemNative.WbemStatus.WBEM_S_NO_ERROR,
+                            null,
+                            null
+                        )
+                    );
                 }
                 catch (WbemException e)
                 {
-                    DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error, (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi, (uint)System.Runtime.Diagnostics.EventLogEventId.WmiGetObjectFailed,
-                        TraceUtility.CreateSourceString(this), e.ToString());
-                    wbemSink.SetStatus((int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                        e.ErrorCode, null, null);
+                    DiagnosticUtility.EventLog.LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiGetObjectFailed,
+                        TraceUtility.CreateSourceString(this),
+                        e.ToString()
+                    );
+                    wbemSink.SetStatus(
+                        (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                        e.ErrorCode,
+                        null,
+                        null
+                    );
                     return e.ErrorCode;
                 }
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
-                    DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error, (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi, (uint)System.Runtime.Diagnostics.EventLogEventId.WmiGetObjectFailed,
-                        TraceUtility.CreateSourceString(this), e.ToString());
-                    wbemSink.SetStatus((int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                        (int)WbemNative.WbemStatus.WBEM_E_FAILED, null, null);
+                    DiagnosticUtility.EventLog.LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiGetObjectFailed,
+                        TraceUtility.CreateSourceString(this),
+                        e.ToString()
+                    );
+                    wbemSink.SetStatus(
+                        (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                        (int)WbemNative.WbemStatus.WBEM_E_FAILED,
+                        null,
+                        null
+                    );
                     return (int)WbemNative.WbemStatus.WBEM_E_FAILED;
                 }
                 finally
@@ -263,7 +318,8 @@ namespace System.ServiceModel.Administration
             WbemNative.IWbemClassObject wbemObject,
             Int32 flags,
             WbemNative.IWbemContext wbemContext,
-            IntPtr wbemCallResult)
+            IntPtr wbemCallResult
+        )
         {
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
         }
@@ -272,7 +328,8 @@ namespace System.ServiceModel.Administration
             WbemNative.IWbemClassObject wbemObject,
             Int32 flags,
             WbemNative.IWbemContext wbemContext,
-            WbemNative.IWbemObjectSink wbemSink)
+            WbemNative.IWbemObjectSink wbemSink
+        )
         {
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
         }
@@ -281,7 +338,8 @@ namespace System.ServiceModel.Administration
             string className,
             Int32 flags,
             WbemNative.IWbemContext wbemContext,
-            IntPtr wbemCallResult)
+            IntPtr wbemCallResult
+        )
         {
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
         }
@@ -290,7 +348,8 @@ namespace System.ServiceModel.Administration
             string className,
             Int32 lFlags,
             WbemNative.IWbemContext wbemContext,
-            WbemNative.IWbemObjectSink wbemSink)
+            WbemNative.IWbemObjectSink wbemSink
+        )
         {
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
         }
@@ -299,7 +358,8 @@ namespace System.ServiceModel.Administration
             string superClassName,
             Int32 flags,
             WbemNative.IWbemContext wbemContext,
-            out WbemNative.IEnumWbemClassObject wbemEnum)
+            out WbemNative.IEnumWbemClassObject wbemEnum
+        )
         {
             wbemEnum = null;
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
@@ -309,7 +369,8 @@ namespace System.ServiceModel.Administration
             string superClassName,
             Int32 flags,
             WbemNative.IWbemContext wbemContext,
-            WbemNative.IWbemObjectSink wbemSink)
+            WbemNative.IWbemObjectSink wbemSink
+        )
         {
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
         }
@@ -318,7 +379,8 @@ namespace System.ServiceModel.Administration
             WbemNative.IWbemClassObject pInst,
             Int32 lFlags,
             WbemNative.IWbemContext wbemContext,
-            IntPtr wbemCallResult)
+            IntPtr wbemCallResult
+        )
         {
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
         }
@@ -328,23 +390,46 @@ namespace System.ServiceModel.Administration
             Int32 lFlags,
             WbemNative.IWbemContext wbemContext,
             WbemNative.IWbemObjectSink wbemSink
-            )
+        )
         {
-            if (wbemObject == null || wbemContext == null || wbemSink == null || this.wbemServices == null)
+            if (
+                wbemObject == null
+                || wbemContext == null
+                || wbemSink == null
+                || this.wbemServices == null
+            )
                 return (int)WbemNative.WbemStatus.WBEM_E_INVALID_PARAMETER;
 
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity() : null)
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivity()
+                    : null
+            )
             {
                 try
                 {
                     object val = null;
                     int type = 0;
                     int favor = 0;
-                    WbemException.ThrowIfFail(wbemObject.Get("__CLASS", 0, ref val, ref type, ref favor));
+                    WbemException.ThrowIfFail(
+                        wbemObject.Get("__CLASS", 0, ref val, ref type, ref favor)
+                    );
                     string className = (string)val;
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.WmiPutInstance, string.IsNullOrEmpty(className) ? string.Empty : className), ActivityType.WmiPutInstance);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(
+                            SR.WmiPutInstance,
+                            string.IsNullOrEmpty(className) ? string.Empty : className
+                        ),
+                        ActivityType.WmiPutInstance
+                    );
 
-                    ParameterContext parms = new ParameterContext(className, this.wbemServices, wbemContext, wbemSink);
+                    ParameterContext parms = new ParameterContext(
+                        className,
+                        this.wbemServices,
+                        wbemContext,
+                        wbemSink
+                    );
                     WbemInstance wbemInstance = new WbemInstance(parms, wbemObject);
                     IWmiProvider wmiProvider = this.GetProvider(parms.ClassName);
                     if (wmiProvider.PutInstance(new InstanceContext(wbemInstance)))
@@ -352,24 +437,48 @@ namespace System.ServiceModel.Administration
                         wbemInstance.Indicate();
                     }
 
-                    WbemException.ThrowIfFail(wbemSink.SetStatus((int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                        (int)WbemNative.WbemStatus.WBEM_S_NO_ERROR, null, null));
+                    WbemException.ThrowIfFail(
+                        wbemSink.SetStatus(
+                            (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                            (int)WbemNative.WbemStatus.WBEM_S_NO_ERROR,
+                            null,
+                            null
+                        )
+                    );
                 }
                 catch (WbemException e)
                 {
-                    DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error, (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi, (uint)System.Runtime.Diagnostics.EventLogEventId.WmiPutInstanceFailed,
-                        TraceUtility.CreateSourceString(this), e.ToString());
-                    wbemSink.SetStatus((int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                        e.ErrorCode, null, null);
+                    DiagnosticUtility.EventLog.LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiPutInstanceFailed,
+                        TraceUtility.CreateSourceString(this),
+                        e.ToString()
+                    );
+                    wbemSink.SetStatus(
+                        (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                        e.ErrorCode,
+                        null,
+                        null
+                    );
                     return e.ErrorCode;
                 }
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
-                    DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error, (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi, (uint)System.Runtime.Diagnostics.EventLogEventId.WmiPutInstanceFailed,
-                        TraceUtility.CreateSourceString(this), e.ToString());
-                    wbemSink.SetStatus((int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                        (int)WbemNative.WbemStatus.WBEM_E_FAILED, null, null);
+                    DiagnosticUtility.EventLog.LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiPutInstanceFailed,
+                        TraceUtility.CreateSourceString(this),
+                        e.ToString()
+                    );
+                    wbemSink.SetStatus(
+                        (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                        (int)WbemNative.WbemStatus.WBEM_E_FAILED,
+                        null,
+                        null
+                    );
                     return (int)WbemNative.WbemStatus.WBEM_E_FAILED;
                 }
                 finally
@@ -384,7 +493,8 @@ namespace System.ServiceModel.Administration
             string objectPath,
             Int32 flags,
             WbemNative.IWbemContext wbemContext,
-            IntPtr wbemCallResult)
+            IntPtr wbemCallResult
+        )
         {
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
         }
@@ -393,7 +503,8 @@ namespace System.ServiceModel.Administration
             string objectPath,
             Int32 lFlags,
             WbemNative.IWbemContext wbemContext,
-            WbemNative.IWbemObjectSink wbemSink)
+            WbemNative.IWbemObjectSink wbemSink
+        )
         {
             if (wbemContext == null || wbemSink == null || this.wbemServices == null)
                 return (int)WbemNative.WbemStatus.WBEM_E_INVALID_PARAMETER;
@@ -401,7 +512,12 @@ namespace System.ServiceModel.Administration
             try
             {
                 ObjectPathRegex objPathRegex = new ObjectPathRegex(objectPath);
-                ParameterContext parms = new ParameterContext(objPathRegex.ClassName, this.wbemServices, wbemContext, wbemSink);
+                ParameterContext parms = new ParameterContext(
+                    objPathRegex.ClassName,
+                    this.wbemServices,
+                    wbemContext,
+                    wbemSink
+                );
                 WbemInstance wbemInstance = new WbemInstance(parms, objPathRegex);
                 IWmiProvider wmiProvider = this.GetProvider(parms.ClassName);
                 if (wmiProvider.DeleteInstance(new InstanceContext(wbemInstance)))
@@ -409,29 +525,46 @@ namespace System.ServiceModel.Administration
                     wbemInstance.Indicate();
                 }
 
-                WbemException.ThrowIfFail(wbemSink.SetStatus(
-                    (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                    (int)WbemNative.WbemStatus.WBEM_S_NO_ERROR, null, null));
+                WbemException.ThrowIfFail(
+                    wbemSink.SetStatus(
+                        (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                        (int)WbemNative.WbemStatus.WBEM_S_NO_ERROR,
+                        null,
+                        null
+                    )
+                );
             }
             catch (WbemException e)
             {
-                DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
+                DiagnosticUtility.EventLog.LogEvent(
+                    TraceEventType.Error,
                     (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
                     (uint)System.Runtime.Diagnostics.EventLogEventId.WmiDeleteInstanceFailed,
-                    e.ToString());
-                wbemSink.SetStatus((int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                    e.ErrorCode, null, null);
+                    e.ToString()
+                );
+                wbemSink.SetStatus(
+                    (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                    e.ErrorCode,
+                    null,
+                    null
+                );
                 return e.ErrorCode;
             }
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
+                DiagnosticUtility.EventLog.LogEvent(
+                    TraceEventType.Error,
                     (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
                     (uint)System.Runtime.Diagnostics.EventLogEventId.WmiDeleteInstanceFailed,
-                    e.ToString());
-                wbemSink.SetStatus((int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                    (int)WbemNative.WbemStatus.WBEM_E_FAILED, null, null);
+                    e.ToString()
+                );
+                wbemSink.SetStatus(
+                    (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                    (int)WbemNative.WbemStatus.WBEM_E_FAILED,
+                    null,
+                    null
+                );
                 return (int)WbemNative.WbemStatus.WBEM_E_FAILED;
             }
             finally
@@ -446,7 +579,7 @@ namespace System.ServiceModel.Administration
             Int32 flags,
             WbemNative.IWbemContext wbemContext,
             out WbemNative.IEnumWbemClassObject wbemEnum
-            )
+        )
         {
             wbemEnum = null;
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
@@ -456,44 +589,65 @@ namespace System.ServiceModel.Administration
             string className,
             Int32 flags,
             WbemNative.IWbemContext wbemContext,
-            WbemNative.IWbemObjectSink wbemSink)
+            WbemNative.IWbemObjectSink wbemSink
+        )
         {
             if (wbemContext == null || wbemSink == null || this.wbemServices == null)
                 return (int)WbemNative.WbemStatus.WBEM_E_INVALID_PARAMETER;
 
             try
             {
-                ParameterContext parms = new ParameterContext(className, this.wbemServices, wbemContext, wbemSink);
+                ParameterContext parms = new ParameterContext(
+                    className,
+                    this.wbemServices,
+                    wbemContext,
+                    wbemSink
+                );
                 IWmiProvider wmiProvider = this.GetProvider(parms.ClassName);
                 wmiProvider.EnumInstances(new InstancesContext(parms));
 
-                WbemException.ThrowIfFail(wbemSink.SetStatus(
-                    (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                    (int)WbemNative.WbemStatus.WBEM_S_NO_ERROR,
-                    null,
-                    null));
+                WbemException.ThrowIfFail(
+                    wbemSink.SetStatus(
+                        (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                        (int)WbemNative.WbemStatus.WBEM_S_NO_ERROR,
+                        null,
+                        null
+                    )
+                );
             }
             catch (WbemException e)
             {
-                wbemSink.SetStatus((int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                    e.ErrorCode, null, null);
-                DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
+                wbemSink.SetStatus(
+                    (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                    e.ErrorCode,
+                    null,
+                    null
+                );
+                DiagnosticUtility.EventLog.LogEvent(
+                    TraceEventType.Error,
                     (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
                     (uint)System.Runtime.Diagnostics.EventLogEventId.WmiCreateInstanceFailed,
                     className,
-                    e.ToString());
+                    e.ToString()
+                );
                 return e.ErrorCode;
             }
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
+                DiagnosticUtility.EventLog.LogEvent(
+                    TraceEventType.Error,
                     (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
                     (uint)System.Runtime.Diagnostics.EventLogEventId.WmiCreateInstanceFailed,
                     className,
-                    e.ToString());
-                wbemSink.SetStatus((int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                    (int)WbemNative.WbemStatus.WBEM_E_FAILED, null, null);
+                    e.ToString()
+                );
+                wbemSink.SetStatus(
+                    (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                    (int)WbemNative.WbemStatus.WBEM_E_FAILED,
+                    null,
+                    null
+                );
                 return (int)WbemNative.WbemStatus.WBEM_E_FAILED;
             }
             finally
@@ -508,7 +662,8 @@ namespace System.ServiceModel.Administration
             string query,
             Int32 flags,
             WbemNative.IWbemContext wbemContext,
-            out WbemNative.IEnumWbemClassObject wbemEnum)
+            out WbemNative.IEnumWbemClassObject wbemEnum
+        )
         {
             wbemEnum = null;
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
@@ -519,7 +674,8 @@ namespace System.ServiceModel.Administration
             string query,
             Int32 flags,
             WbemNative.IWbemContext wbemContext,
-            WbemNative.IWbemObjectSink wbemSink)
+            WbemNative.IWbemObjectSink wbemSink
+        )
         {
             if (wbemContext == null || wbemSink == null || this.wbemServices == null)
                 return (int)WbemNative.WbemStatus.WBEM_E_INVALID_PARAMETER;
@@ -527,34 +683,56 @@ namespace System.ServiceModel.Administration
             try
             {
                 QueryRegex queryRegex = new QueryRegex(query);
-                ParameterContext parms = new ParameterContext(queryRegex.ClassName, this.wbemServices, wbemContext, wbemSink);
+                ParameterContext parms = new ParameterContext(
+                    queryRegex.ClassName,
+                    this.wbemServices,
+                    wbemContext,
+                    wbemSink
+                );
                 IWmiProvider wmiProvider = this.GetProvider(parms.ClassName);
                 //we let WMI to parse WQL to filter results from appropriate provider
                 wmiProvider.EnumInstances(new InstancesContext(parms));
 
-                WbemException.ThrowIfFail(wbemSink.SetStatus(
-                    (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                    (int)WbemNative.WbemStatus.WBEM_S_NO_ERROR, null, null));
+                WbemException.ThrowIfFail(
+                    wbemSink.SetStatus(
+                        (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                        (int)WbemNative.WbemStatus.WBEM_S_NO_ERROR,
+                        null,
+                        null
+                    )
+                );
             }
             catch (WbemException e)
             {
-                DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
-                   (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                   (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecQueryFailed,
-                   e.ToString());
-                wbemSink.SetStatus((int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                    e.ErrorCode, null, null);
+                DiagnosticUtility.EventLog.LogEvent(
+                    TraceEventType.Error,
+                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                    (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecQueryFailed,
+                    e.ToString()
+                );
+                wbemSink.SetStatus(
+                    (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                    e.ErrorCode,
+                    null,
+                    null
+                );
                 return e.ErrorCode;
             }
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
-                   (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                   (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecQueryFailed,
-                   e.ToString());
-                wbemSink.SetStatus((int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                    (int)WbemNative.WbemStatus.WBEM_E_FAILED, null, null);
+                DiagnosticUtility.EventLog.LogEvent(
+                    TraceEventType.Error,
+                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                    (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecQueryFailed,
+                    e.ToString()
+                );
+                wbemSink.SetStatus(
+                    (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                    (int)WbemNative.WbemStatus.WBEM_E_FAILED,
+                    null,
+                    null
+                );
                 return (int)WbemNative.WbemStatus.WBEM_E_FAILED;
             }
             finally
@@ -569,7 +747,8 @@ namespace System.ServiceModel.Administration
             string query,
             Int32 flags,
             WbemNative.IWbemContext wbemContext,
-            out WbemNative.IEnumWbemClassObject wbemEnum)
+            out WbemNative.IEnumWbemClassObject wbemEnum
+        )
         {
             wbemEnum = null;
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
@@ -580,10 +759,12 @@ namespace System.ServiceModel.Administration
             string query,
             Int32 flags,
             WbemNative.IWbemContext wbemContext,
-            WbemNative.IWbemObjectSink wbemSink)
+            WbemNative.IWbemObjectSink wbemSink
+        )
         {
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
         }
+
         int WbemNative.IWbemServices.ExecMethod(
             string objectPath,
             string methodName,
@@ -591,7 +772,8 @@ namespace System.ServiceModel.Administration
             WbemNative.IWbemContext wbemContext,
             WbemNative.IWbemClassObject wbemInParams,
             ref WbemNative.IWbemClassObject wbemOutParams,
-            IntPtr wbemCallResult)
+            IntPtr wbemCallResult
+        )
         {
             return (int)WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED;
         }
@@ -602,9 +784,15 @@ namespace System.ServiceModel.Administration
             Int32 flags,
             WbemNative.IWbemContext wbemContext,
             WbemNative.IWbemClassObject wbemInParams,
-            WbemNative.IWbemObjectSink wbemSink)
+            WbemNative.IWbemObjectSink wbemSink
+        )
         {
-            if (wbemContext == null || wbemInParams == null || wbemSink == null || this.wbemServices == null)
+            if (
+                wbemContext == null
+                || wbemInParams == null
+                || wbemSink == null
+                || this.wbemServices == null
+            )
                 return (int)WbemNative.WbemStatus.WBEM_E_INVALID_PARAMETER;
 
             int result = (int)WbemNative.WbemStatus.WBEM_S_NO_ERROR;
@@ -612,42 +800,67 @@ namespace System.ServiceModel.Administration
             try
             {
                 ObjectPathRegex objPathRegex = new ObjectPathRegex(objectPath);
-                ParameterContext parms = new ParameterContext(objPathRegex.ClassName, this.wbemServices, wbemContext, wbemSink);
+                ParameterContext parms = new ParameterContext(
+                    objPathRegex.ClassName,
+                    this.wbemServices,
+                    wbemContext,
+                    wbemSink
+                );
                 WbemInstance wbemInstance = new WbemInstance(parms, objPathRegex);
 
-                MethodContext methodContext = new MethodContext(parms, methodName, wbemInParams, wbemInstance);
+                MethodContext methodContext = new MethodContext(
+                    parms,
+                    methodName,
+                    wbemInParams,
+                    wbemInstance
+                );
                 IWmiProvider wmiProvider = this.GetProvider(parms.ClassName);
                 if (!wmiProvider.InvokeMethod(methodContext))
                 {
                     result = (int)WbemNative.WbemStatus.WBEM_E_NOT_FOUND;
                 }
 
-                WbemException.ThrowIfFail(wbemSink.SetStatus(
-                    (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                    (int)result,
-                    null,
-                    null));
+                WbemException.ThrowIfFail(
+                    wbemSink.SetStatus(
+                        (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                        (int)result,
+                        null,
+                        null
+                    )
+                );
             }
             catch (WbemException e)
             {
-                DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
-                   (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                   (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecMethodFailed,
-                   e.ToString());
+                DiagnosticUtility.EventLog.LogEvent(
+                    TraceEventType.Error,
+                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                    (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecMethodFailed,
+                    e.ToString()
+                );
                 result = e.ErrorCode;
-                wbemSink.SetStatus((int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                    result, null, null);
+                wbemSink.SetStatus(
+                    (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                    result,
+                    null,
+                    null
+                );
             }
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
-                   (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                   (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecMethodFailed,
-                   e.ToString());
+                DiagnosticUtility.EventLog.LogEvent(
+                    TraceEventType.Error,
+                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                    (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecMethodFailed,
+                    e.ToString()
+                );
                 result = (int)WbemNative.WbemStatus.WBEM_E_FAILED;
-                wbemSink.SetStatus((int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
-                    (int)result, null, null);
+                wbemSink.SetStatus(
+                    (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
+                    (int)result,
+                    null,
+                    null
+                );
             }
             finally
             {
@@ -672,8 +885,12 @@ namespace System.ServiceModel.Administration
 
             void IWmiInstances.AddInstance(IWmiInstance inst)
             {
-                WbemException.ThrowIfFail(this.parms.WbemSink.Indicate(1,
-                    new WbemNative.IWbemClassObject[] { ((InstanceContext)inst).WbemObject }));
+                WbemException.ThrowIfFail(
+                    this.parms.WbemSink.Indicate(
+                        1,
+                        new WbemNative.IWbemClassObject[] { ((InstanceContext)inst).WbemObject }
+                    )
+                );
             }
         }
 
@@ -715,7 +932,12 @@ namespace System.ServiceModel.Administration
             WbemNative.IWbemClassObject wbemOutParms;
             IWmiInstance instance;
 
-            internal MethodContext(ParameterContext parms, string methodName, WbemNative.IWbemClassObject wbemInParms, WbemInstance wbemInstance)
+            internal MethodContext(
+                ParameterContext parms,
+                string methodName,
+                WbemNative.IWbemClassObject wbemInParms,
+                WbemInstance wbemInstance
+            )
             {
                 this.parms = parms;
                 this.methodName = methodName;
@@ -723,11 +945,20 @@ namespace System.ServiceModel.Administration
                 this.instance = new InstanceContext(wbemInstance);
 
                 WbemNative.IWbemClassObject wbemObject = null;
-                WbemException.ThrowIfFail(parms.WbemServices.GetObject(parms.ClassName, 0, parms.WbemContext,
-                    ref wbemObject, IntPtr.Zero));
+                WbemException.ThrowIfFail(
+                    parms.WbemServices.GetObject(
+                        parms.ClassName,
+                        0,
+                        parms.WbemContext,
+                        ref wbemObject,
+                        IntPtr.Zero
+                    )
+                );
 
                 WbemNative.IWbemClassObject wbemMethod = null;
-                WbemException.ThrowIfFail(wbemObject.GetMethod(methodName, 0, IntPtr.Zero, out wbemMethod));
+                WbemException.ThrowIfFail(
+                    wbemObject.GetMethod(methodName, 0, IntPtr.Zero, out wbemMethod)
+                );
                 WbemException.ThrowIfFail(wbemMethod.SpawnInstance(0, out this.wbemOutParms));
             }
 
@@ -746,10 +977,13 @@ namespace System.ServiceModel.Administration
                 set
                 {
                     object val = value;
-                    WbemException.ThrowIfFail(this.wbemOutParms.Put("ReturnValue",
-                        0, ref val, 0));
-                    WbemException.ThrowIfFail(this.parms.WbemSink.Indicate(1,
-                        new WbemNative.IWbemClassObject[] { this.wbemOutParms }));
+                    WbemException.ThrowIfFail(this.wbemOutParms.Put("ReturnValue", 0, ref val, 0));
+                    WbemException.ThrowIfFail(
+                        this.parms.WbemSink.Indicate(
+                            1,
+                            new WbemNative.IWbemClassObject[] { this.wbemOutParms }
+                        )
+                    );
                 }
             }
 
@@ -759,7 +993,9 @@ namespace System.ServiceModel.Administration
                 object val = null;
                 int type = 0;
                 int favor = 0;
-                WbemException.ThrowIfFail(this.wbemInParms.Get(name, 0, ref val, ref type, ref favor));
+                WbemException.ThrowIfFail(
+                    this.wbemInParms.Get(name, 0, ref val, ref type, ref favor)
+                );
                 return val;
             }
 
@@ -800,7 +1036,10 @@ namespace System.ServiceModel.Administration
                 {
                     if (!String.IsNullOrEmpty(match.Groups["ival"].Value))
                     {
-                        this.keys.Add(match.Groups["key"].Value, Int32.Parse(match.Groups["ival"].Value, CultureInfo.CurrentCulture));
+                        this.keys.Add(
+                            match.Groups["key"].Value,
+                            Int32.Parse(match.Groups["ival"].Value, CultureInfo.CurrentCulture)
+                        );
                     }
                     else
                     {
@@ -810,13 +1049,22 @@ namespace System.ServiceModel.Administration
                 }
             }
 
-            internal string ClassName { get { return this.className; } }
-            internal Dictionary<string, object> Keys { get { return this.keys; } }
+            internal string ClassName
+            {
+                get { return this.className; }
+            }
+            internal Dictionary<string, object> Keys
+            {
+                get { return this.keys; }
+            }
         }
 
         class QueryRegex
         {
-            static Regex regEx = new Regex("\\bfrom\\b\\s+(?<className>\\w+)", RegexOptions.IgnoreCase);
+            static Regex regEx = new Regex(
+                "\\bfrom\\b\\s+(?<className>\\w+)",
+                RegexOptions.IgnoreCase
+            );
             string className;
 
             internal QueryRegex(string query)
@@ -829,7 +1077,10 @@ namespace System.ServiceModel.Administration
                 this.className = match.Groups["className"].Value;
             }
 
-            internal string ClassName { get { return this.className; } }
+            internal string ClassName
+            {
+                get { return this.className; }
+            }
         }
 
         class ParameterContext
@@ -843,7 +1094,8 @@ namespace System.ServiceModel.Administration
                 string className,
                 WbemNative.IWbemServices wbemServices,
                 WbemNative.IWbemContext wbemContext,
-                WbemNative.IWbemObjectSink wbemSink)
+                WbemNative.IWbemObjectSink wbemSink
+            )
             {
                 this.className = className;
                 this.wbemServices = wbemServices;
@@ -885,9 +1137,7 @@ namespace System.ServiceModel.Administration
             }
 
             internal WbemInstance(WbemInstance wbemInstance, string className)
-                : this(wbemInstance.parms, className)
-            {
-            }
+                : this(wbemInstance.parms, className) { }
 
             internal WbemInstance(ParameterContext parms, string className)
             {
@@ -899,9 +1149,14 @@ namespace System.ServiceModel.Administration
                 this.className = className;
                 WbemNative.IWbemClassObject tempObj = null;
                 WbemException.ThrowIfFail(
-                    parms.WbemServices.GetObject(className, 0, parms.WbemContext, ref tempObj, IntPtr.Zero)
+                    parms.WbemServices.GetObject(
+                        className,
+                        0,
+                        parms.WbemContext,
+                        ref tempObj,
+                        IntPtr.Zero
+                    )
                 );
-
 
                 if (null != tempObj)
                 {
@@ -932,14 +1187,29 @@ namespace System.ServiceModel.Administration
                     WbemNative.CIMTYPE type = 0;
                     if (val is DateTime)
                     {
-                        val = ((DateTime)val).ToString("yyyyMMddhhmmss.ffffff", CultureInfo.InvariantCulture) + "+000";
+                        val =
+                            ((DateTime)val).ToString(
+                                "yyyyMMddhhmmss.ffffff",
+                                CultureInfo.InvariantCulture
+                            ) + "+000";
                     }
                     else if (val is TimeSpan)
                     {
                         TimeSpan ts = (TimeSpan)val;
                         long microSeconds = (ts.Ticks % 1000) / 10;
-                        val = string.Format(CultureInfo.InvariantCulture, "{0:00000000}{1:00}{2:00}{3:00}.{4:000}{5:000}:000",
-                            new object[] { ts.Days, ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds, microSeconds });
+                        val = string.Format(
+                            CultureInfo.InvariantCulture,
+                            "{0:00000000}{1:00}{2:00}{3:00}.{4:000}{5:000}:000",
+                            new object[]
+                            {
+                                ts.Days,
+                                ts.Hours,
+                                ts.Minutes,
+                                ts.Seconds,
+                                ts.Milliseconds,
+                                microSeconds,
+                            }
+                        );
                     }
                     else if (val is InstanceContext)
                     {
@@ -951,7 +1221,9 @@ namespace System.ServiceModel.Administration
                         Array objs = (Array)val;
                         if (objs.GetLength(0) > 0 && objs.GetValue(0) is InstanceContext)
                         {
-                            WbemNative.IWbemClassObject[] insts = new WbemNative.IWbemClassObject[objs.GetLength(0)];
+                            WbemNative.IWbemClassObject[] insts = new WbemNative.IWbemClassObject[
+                                objs.GetLength(0)
+                            ];
                             for (int i = 0; i < insts.Length; ++i)
                             {
                                 insts[i] = ((InstanceContext)objs.GetValue(i)).WbemObject;
@@ -966,24 +1238,33 @@ namespace System.ServiceModel.Administration
                     }
 
                     int hResult = this.wbemObject.Put(name, 0, ref val, (int)type);
-                    if ((int)WbemNative.WbemStatus.WBEM_E_TYPE_MISMATCH == hResult || (int)WbemNative.WbemStatus.WBEM_E_NOT_FOUND == hResult)
+                    if (
+                        (int)WbemNative.WbemStatus.WBEM_E_TYPE_MISMATCH == hResult
+                        || (int)WbemNative.WbemStatus.WBEM_E_NOT_FOUND == hResult
+                    )
                     {
                         //This would be most likely a product bug (somebody changed type without updating MOF), improper installation or tampering with MOF
                         System.Runtime.Diagnostics.EventLogEventId eventId;
                         if ((int)WbemNative.WbemStatus.WBEM_E_TYPE_MISMATCH == hResult)
                         {
-                            eventId = System.Runtime.Diagnostics.EventLogEventId.WmiAdminTypeMismatch;
+                            eventId = System
+                                .Runtime
+                                .Diagnostics
+                                .EventLogEventId
+                                .WmiAdminTypeMismatch;
                         }
                         else
                         {
                             eventId = System.Runtime.Diagnostics.EventLogEventId.WmiPropertyMissing;
                         }
-                        DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
+                        DiagnosticUtility.EventLog.LogEvent(
+                            TraceEventType.Error,
                             (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
                             (uint)eventId,
                             this.className,
                             name,
-                            val.GetType().ToString());
+                            val.GetType().ToString()
+                        );
                     }
                     else
                     {
@@ -997,14 +1278,20 @@ namespace System.ServiceModel.Administration
                 object val = null;
                 int type = 0;
                 int favor = 0;
-                WbemException.ThrowIfFail(this.wbemObject.Get(name, 0, ref val, ref type, ref favor));
+                WbemException.ThrowIfFail(
+                    this.wbemObject.Get(name, 0, ref val, ref type, ref favor)
+                );
                 return val;
             }
 
             internal void Indicate()
             {
-                WbemException.ThrowIfFail(this.parms.WbemSink.Indicate(1,
-                    new WbemNative.IWbemClassObject[] { this.wbemObject }));
+                WbemException.ThrowIfFail(
+                    this.parms.WbemSink.Indicate(
+                        1,
+                        new WbemNative.IWbemClassObject[] { this.wbemObject }
+                    )
+                );
             }
         }
 
@@ -1067,7 +1354,12 @@ namespace System.ServiceModel.Administration
                     Exception exception = job.Wait();
                     if (null != exception)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ApplicationException(SR.GetString(SR.AdminMTAWorkerThreadException), exception));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ApplicationException(
+                                SR.GetString(SR.AdminMTAWorkerThreadException),
+                                exception
+                            )
+                        );
                     }
                 }
             }
@@ -1093,10 +1385,26 @@ namespace System.ServiceModel.Administration
             }
 
             void IWmiProvider.EnumInstances(IWmiInstances instances) { }
-            bool IWmiProvider.GetInstance(IWmiInstance instance) { return false; }
-            bool IWmiProvider.PutInstance(IWmiInstance instance) { return false; }
-            bool IWmiProvider.DeleteInstance(IWmiInstance instance) { return false; }
-            bool IWmiProvider.InvokeMethod(IWmiMethodContext method) { return false; }
+
+            bool IWmiProvider.GetInstance(IWmiInstance instance)
+            {
+                return false;
+            }
+
+            bool IWmiProvider.PutInstance(IWmiInstance instance)
+            {
+                return false;
+            }
+
+            bool IWmiProvider.DeleteInstance(IWmiInstance instance)
+            {
+                return false;
+            }
+
+            bool IWmiProvider.InvokeMethod(IWmiMethodContext method)
+            {
+                return false;
+            }
         }
     }
 

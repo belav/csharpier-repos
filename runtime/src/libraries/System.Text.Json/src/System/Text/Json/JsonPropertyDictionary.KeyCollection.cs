@@ -42,7 +42,8 @@ namespace System.Text.Json
                 }
             }
 
-            public void Add(string propertyName) => ThrowHelper.ThrowNotSupportedException_CollectionIsReadOnly();
+            public void Add(string propertyName) =>
+                ThrowHelper.ThrowNotSupportedException_CollectionIsReadOnly();
 
             public void Clear() => ThrowHelper.ThrowNotSupportedException_CollectionIsReadOnly();
 
@@ -74,10 +75,17 @@ namespace System.Text.Json
                 }
             }
 
-            bool ICollection<string>.Remove(string propertyName) => throw ThrowHelper.GetNotSupportedException_CollectionIsReadOnly();
-            public int IndexOf(string item) => throw ThrowHelper.GetNotSupportedException_CollectionIsReadOnly();
-            public void Insert(int index, string item) => throw ThrowHelper.GetNotSupportedException_CollectionIsReadOnly();
-            public void RemoveAt(int index) => throw ThrowHelper.GetNotSupportedException_CollectionIsReadOnly();
+            bool ICollection<string>.Remove(string propertyName) =>
+                throw ThrowHelper.GetNotSupportedException_CollectionIsReadOnly();
+
+            public int IndexOf(string item) =>
+                throw ThrowHelper.GetNotSupportedException_CollectionIsReadOnly();
+
+            public void Insert(int index, string item) =>
+                throw ThrowHelper.GetNotSupportedException_CollectionIsReadOnly();
+
+            public void RemoveAt(int index) =>
+                throw ThrowHelper.GetNotSupportedException_CollectionIsReadOnly();
         }
     }
 }

@@ -5,43 +5,54 @@ using System.Runtime.InteropServices;
 
 class A
 {
-	[StructLayout (LayoutKind.Sequential)]
-	struct S { int x; }
+    [StructLayout(LayoutKind.Sequential)]
+    struct S
+    {
+        int x;
+    }
 
-	public class B
-	{
-		[StructLayout (LayoutKind.Sequential)]
-		struct S { int x; int y; }
-		S s;
+    public class B
+    {
+        [StructLayout(LayoutKind.Sequential)]
+        struct S
+        {
+            int x;
+            int y;
+        }
 
-		public B () {
-			string error = "";
+        S s;
 
-			unsafe {
-				if (typeof (S *).GetElementType () != typeof (A.B.S))
-					error += " composed cast (pointer),";
+        public B()
+        {
+            string error = "";
 
-				if (sizeof (S) != sizeof (A.B.S))
-					error += " sizeof,";
+            unsafe
+            {
+                if (typeof(S*).GetElementType() != typeof(A.B.S))
+                    error += " composed cast (pointer),";
 
-				S *p1 = stackalloc S [1];
+                if (sizeof(S) != sizeof(A.B.S))
+                    error += " sizeof,";
 
-				if ((*p1).GetType () != typeof (A.B.S))
-					error += " local declaration, 'stackalloc' keyword,";
+                S* p1 = stackalloc S[1];
 
-				fixed (S *p2 = &s) {
-					if ((*p2).GetType () != typeof (A.B.S))
-						error += " class declaration, 'fixed' statement,";
-				}
-			}
+                if ((*p1).GetType() != typeof(A.B.S))
+                    error += " local declaration, 'stackalloc' keyword,";
 
-			if (error.Length != 0)
-				throw new Exception ("The following couldn't resolve S as A+B+S:" + error);
-		}
-	}
+                fixed (S* p2 = &s)
+                {
+                    if ((*p2).GetType() != typeof(A.B.S))
+                        error += " class declaration, 'fixed' statement,";
+                }
+            }
 
-	public static void Main()
-	{
-		object o = new A.B();
-	}
+            if (error.Length != 0)
+                throw new Exception("The following couldn't resolve S as A+B+S:" + error);
+        }
+    }
+
+    public static void Main()
+    {
+        object o = new A.B();
+    }
 }

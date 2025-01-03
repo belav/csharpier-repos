@@ -30,102 +30,106 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_SessionState
 {
-	public class HttpSessionState_Add_Nothing
-		: GHTBaseWeb 
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+    public class HttpSessionState_Add_Nothing : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-			GHTTestBegin(frm);
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+            GHTTestBegin(frm);
 
-			GHTSubTestBegin("GHTSubTest1");;
-			try 
-			{
-				Session.Clear();
-				Session.Add("s_nothing", null);
+            GHTSubTestBegin("GHTSubTest1");
+            ;
+            try
+            {
+                Session.Clear();
+                Session.Add("s_nothing", null);
 
-				if (Session["s_nothing"] == null)
-				{
-					GHTSubTestAddResult("Session(\"s_nothing\") is really Nothing");
-					GHTSubTestAddResult(Session.Count.ToString());
-				}
-				else
-					GHTSubTestAddResult("Session(\"s_nothing\") has " + Session["s_nothing"].GetType().ToString());
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+                if (Session["s_nothing"] == null)
+                {
+                    GHTSubTestAddResult("Session(\"s_nothing\") is really Nothing");
+                    GHTSubTestAddResult(Session.Count.ToString());
+                }
+                else
+                    GHTSubTestAddResult(
+                        "Session(\"s_nothing\") has " + Session["s_nothing"].GetType().ToString()
+                    );
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			GHTSubTestBegin("GHTSubTest2");
-				try 
-				{
-					Session.Clear();
-					Session["name"] = "Name";
-					Session["name"] = null;
+            GHTSubTestBegin("GHTSubTest2");
+            try
+            {
+                Session.Clear();
+                Session["name"] = "Name";
+                Session["name"] = null;
 
-					if (Session["name"] == null)
-					{
-						GHTSubTestAddResult("Session(\"name\") is really Nothing");
-						GHTSubTestAddResult(Session.Count.ToString());
-					}
-					else
-						GHTSubTestAddResult("Session(\"name\") has " + Session["name"].GetType().ToString());
-				}
-				catch (Exception ex) 
-				{
-					GHTSubTestUnexpectedExceptionCaught(ex);
-				}
-			GHTSubTestEnd();
+                if (Session["name"] == null)
+                {
+                    GHTSubTestAddResult("Session(\"name\") is really Nothing");
+                    GHTSubTestAddResult(Session.Count.ToString());
+                }
+                else
+                    GHTSubTestAddResult(
+                        "Session(\"name\") has " + Session["name"].GetType().ToString()
+                    );
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			GHTSubTestBegin("GHTSubTest1");;
-			try 
-			{
-				Session.Clear();
-				Session["name"] = "Name";
-				Session[0] = null;
+            GHTSubTestBegin("GHTSubTest1");
+            ;
+            try
+            {
+                Session.Clear();
+                Session["name"] = "Name";
+                Session[0] = null;
 
-				if (Session[0] == null)
-				{
-					GHTSubTestAddResult("Session(0) is really Nothing");
-					GHTSubTestAddResult(Session.Count.ToString());
-				}
-				else
-					GHTSubTestAddResult("Session(0) has " + Session[0].GetType().ToString());
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
-			GHTTestEnd();
-		}
-	}
+                if (Session[0] == null)
+                {
+                    GHTSubTestAddResult("Session(0) is really Nothing");
+                    GHTSubTestAddResult(Session.Count.ToString());
+                }
+                else
+                    GHTSubTestAddResult("Session(0) has " + Session[0].GetType().ToString());
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
+            GHTTestEnd();
+        }
+    }
 }

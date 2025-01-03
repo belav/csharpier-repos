@@ -16,8 +16,7 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Diagnostics;
     using System.Xml;
 
-    abstract class TransportChannelListener
-        : ChannelListenerBase, ITransportFactorySettings
+    abstract class TransportChannelListener : ChannelListenerBase, ITransportFactorySettings
     {
         // Double-checked locking pattern requires volatile for read/write synchronization
         static volatile bool addressPrefixesInitialized = false;
@@ -42,25 +41,42 @@ namespace System.ServiceModel.Channels
         ServiceModelActivity activity = null;
         TransportManagerContainer transportManagerContainer;
 
-        protected TransportChannelListener(TransportBindingElement bindingElement, BindingContext context)
-            : this(bindingElement, context, TransportDefaults.GetDefaultMessageEncoderFactory())
-        {
-        }
+        protected TransportChannelListener(
+            TransportBindingElement bindingElement,
+            BindingContext context
+        )
+            : this(bindingElement, context, TransportDefaults.GetDefaultMessageEncoderFactory()) { }
 
-        protected TransportChannelListener(TransportBindingElement bindingElement, BindingContext context,
-            MessageEncoderFactory defaultMessageEncoderFactory)
-            : this(bindingElement, context, defaultMessageEncoderFactory, TransportDefaults.HostNameComparisonMode)
-        {
-        }
+        protected TransportChannelListener(
+            TransportBindingElement bindingElement,
+            BindingContext context,
+            MessageEncoderFactory defaultMessageEncoderFactory
+        )
+            : this(
+                bindingElement,
+                context,
+                defaultMessageEncoderFactory,
+                TransportDefaults.HostNameComparisonMode
+            ) { }
 
-        protected TransportChannelListener(TransportBindingElement bindingElement, BindingContext context,
-            HostNameComparisonMode hostNameComparisonMode)
-            : this(bindingElement, context, TransportDefaults.GetDefaultMessageEncoderFactory(), hostNameComparisonMode)
-        {
-        }
+        protected TransportChannelListener(
+            TransportBindingElement bindingElement,
+            BindingContext context,
+            HostNameComparisonMode hostNameComparisonMode
+        )
+            : this(
+                bindingElement,
+                context,
+                TransportDefaults.GetDefaultMessageEncoderFactory(),
+                hostNameComparisonMode
+            ) { }
 
-        protected TransportChannelListener(TransportBindingElement bindingElement, BindingContext context,
-            MessageEncoderFactory defaultMessageEncoderFactory, HostNameComparisonMode hostNameComparisonMode)
+        protected TransportChannelListener(
+            TransportBindingElement bindingElement,
+            BindingContext context,
+            MessageEncoderFactory defaultMessageEncoderFactory,
+            HostNameComparisonMode hostNameComparisonMode
+        )
             : base(context.Binding)
         {
             HostNameComparisonModeHelper.Validate(hostNameComparisonMode);
@@ -69,16 +85,19 @@ namespace System.ServiceModel.Channels
             this.maxBufferPoolSize = bindingElement.MaxBufferPoolSize;
             this.maxReceivedMessageSize = bindingElement.MaxReceivedMessageSize;
 
-            Collection<MessageEncodingBindingElement> messageEncoderBindingElements
-                = context.BindingParameters.FindAll<MessageEncodingBindingElement>();
+            Collection<MessageEncodingBindingElement> messageEncoderBindingElements =
+                context.BindingParameters.FindAll<MessageEncodingBindingElement>();
 
             if (messageEncoderBindingElements.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MultipleMebesInParameters)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.MultipleMebesInParameters))
+                );
             }
             else if (messageEncoderBindingElements.Count == 1)
             {
-                this.messageEncoderFactory = messageEncoderBindingElements[0].CreateMessageEncoderFactory();
+                this.messageEncoderFactory = messageEncoderBindingElements[0]
+                    .CreateMessageEncoderFactory();
                 context.BindingParameters.Remove<MessageEncodingBindingElement>();
             }
             else
@@ -91,7 +110,8 @@ namespace System.ServiceModel.Channels
             else
                 this.messageVersion = MessageVersion.None;
 
-            ServiceSecurityAuditBehavior auditBehavior = context.BindingParameters.Find<ServiceSecurityAuditBehavior>();
+            ServiceSecurityAuditBehavior auditBehavior =
+                context.BindingParameters.Find<ServiceSecurityAuditBehavior>();
             if (auditBehavior != null)
             {
                 this.auditBehavior = auditBehavior.Clone();
@@ -101,22 +121,39 @@ namespace System.ServiceModel.Channels
                 this.auditBehavior = new ServiceSecurityAuditBehavior();
             }
 
-            if ((context.ListenUriMode == ListenUriMode.Unique) && (context.ListenUriBaseAddress == null))
+            if (
+                (context.ListenUriMode == ListenUriMode.Unique)
+                && (context.ListenUriBaseAddress == null)
+            )
             {
                 UriBuilder uriBuilder = new UriBuilder(this.Scheme, DnsCache.MachineName);
                 uriBuilder.Path = this.GeneratedAddressPrefix;
                 context.ListenUriBaseAddress = uriBuilder.Uri;
             }
 
-            UriSchemeKeyedCollection.ValidateBaseAddress(context.ListenUriBaseAddress, "baseAddress");
+            UriSchemeKeyedCollection.ValidateBaseAddress(
+                context.ListenUriBaseAddress,
+                "baseAddress"
+            );
             if (context.ListenUriBaseAddress.Scheme != this.Scheme)
             {
                 // URI schemes are case-insensitive, so try a case insensitive compare now
-                if (string.Compare(context.ListenUriBaseAddress.Scheme, this.Scheme, StringComparison.OrdinalIgnoreCase) != 0)
+                if (
+                    string.Compare(
+                        context.ListenUriBaseAddress.Scheme,
+                        this.Scheme,
+                        StringComparison.OrdinalIgnoreCase
+                    ) != 0
+                )
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
                         "context.ListenUriBaseAddress",
-                        SR.GetString(SR.InvalidUriScheme, context.ListenUriBaseAddress.Scheme, this.Scheme));
+                        SR.GetString(
+                            SR.InvalidUriScheme,
+                            context.ListenUriBaseAddress.Scheme,
+                            this.Scheme
+                        )
+                    );
                 }
             }
 
@@ -128,12 +165,18 @@ namespace System.ServiceModel.Channels
             else // ListenUriMode.Unique:
             {
                 string relativeAddress = context.ListenUriRelativeAddress;
-                if (relativeAddress.Length > 0 && !relativeAddress.EndsWith("/", StringComparison.Ordinal))
+                if (
+                    relativeAddress.Length > 0
+                    && !relativeAddress.EndsWith("/", StringComparison.Ordinal)
+                )
                 {
                     relativeAddress += "/";
                 }
 
-                this.SetUri(context.ListenUriBaseAddress, relativeAddress + Guid.NewGuid().ToString());
+                this.SetUri(
+                    context.ListenUriBaseAddress,
+                    relativeAddress + Guid.NewGuid().ToString()
+                );
             }
 
             this.transportManagerContainer = new TransportManagerContainer(this);
@@ -147,10 +190,7 @@ namespace System.ServiceModel.Channels
 
         internal Uri BaseUri
         {
-            get
-            {
-                return this.baseUri;
-            }
+            get { return this.baseUri; }
         }
 
         string GeneratedAddressPrefix
@@ -158,7 +198,7 @@ namespace System.ServiceModel.Channels
             get
             {
                 EnsureAddressPrefixesInitialized();
-            
+
                 // We use different address prefixes based on hostname comparison mode in order to avoid creating
                 // starved reservations.  For example, if we register http://+:80/TLA/G1 and http://*:80/TLA/G1, the
                 // latter will never receive any traffic.  We handle this case by instead using http://+:80/TLA/G1
@@ -180,102 +220,62 @@ namespace System.ServiceModel.Channels
 
         internal string HostedVirtualPath
         {
-            get
-            {
-                return this.hostedVirtualPath;
-            }
+            get { return this.hostedVirtualPath; }
         }
 
         internal bool InheritBaseAddressSettings
         {
-            get
-            {
-                return this.inheritBaseAddressSettings;
-            }
-
-            set
-            {
-                this.inheritBaseAddressSettings = value;
-            }
+            get { return this.inheritBaseAddressSettings; }
+            set { this.inheritBaseAddressSettings = value; }
         }
 
         internal ServiceSecurityAuditBehavior AuditBehavior
         {
-            get
-            {
-                return this.auditBehavior;
-            }
+            get { return this.auditBehavior; }
         }
 
         public BufferManager BufferManager
         {
-            get
-            {
-                return this.bufferManager;
-            }
+            get { return this.bufferManager; }
         }
 
         internal HostNameComparisonMode HostNameComparisonModeInternal
         {
-            get
-            {
-                return this.hostNameComparisonMode;
-            }
+            get { return this.hostNameComparisonMode; }
         }
 
         public bool ManualAddressing
         {
-            get
-            {
-                return this.manualAddressing;
-            }
+            get { return this.manualAddressing; }
         }
 
         public long MaxBufferPoolSize
         {
-            get
-            {
-                return this.maxBufferPoolSize;
-            }
+            get { return this.maxBufferPoolSize; }
         }
 
         public virtual long MaxReceivedMessageSize
         {
-            get
-            {
-                return maxReceivedMessageSize;
-            }
+            get { return maxReceivedMessageSize; }
         }
 
         public MessageEncoderFactory MessageEncoderFactory
         {
-            get
-            {
-                return this.messageEncoderFactory;
-            }
+            get { return this.messageEncoderFactory; }
         }
 
         public MessageVersion MessageVersion
         {
-            get
-            {
-                return this.messageVersion;
-            }
+            get { return this.messageVersion; }
         }
 
-        internal abstract UriPrefixTable<ITransportManagerRegistration> TransportManagerTable
-        {
-            get;
-        }
+        internal abstract UriPrefixTable<ITransportManagerRegistration> TransportManagerTable { get; }
 
         public abstract string Scheme { get; }
 
         public override Uri Uri
         {
-            get
-            {
-                return uri;
-            }
+            get { return uri; }
         }
 
         public override T GetProperty<T>()
@@ -308,7 +308,10 @@ namespace System.ServiceModel.Channels
                 return false;
             }
 
-            if (hostNameComparisonMode == HostNameComparisonMode.Exact && uri.HostNameType == UriHostNameType.IPv6)
+            if (
+                hostNameComparisonMode == HostNameComparisonMode.Exact
+                && uri.HostNameType == UriHostNameType.IPv6
+            )
             {
                 // the hostname type of the channel listener MUST be IPv6 if we got here.
                 // as this should have been enforced by UriPrefixTable.
@@ -350,7 +353,8 @@ namespace System.ServiceModel.Channels
                 Uri relativeUri = baseUri.MakeRelativeUri(fullUri);
                 string relativePath = relativeUri.OriginalString;
                 int slashIndex = relativePath.IndexOf('/');
-                string segment = (slashIndex == -1) ? relativePath : relativePath.Substring(0, slashIndex);
+                string segment =
+                    (slashIndex == -1) ? relativePath : relativePath.Substring(0, slashIndex);
                 builder.Path = builder.Path + segment;
                 result = builder.Uri;
             }
@@ -362,7 +366,9 @@ namespace System.ServiceModel.Channels
             return this.CreateTransportManagerRegistration(this.BaseUri);
         }
 
-        internal abstract ITransportManagerRegistration CreateTransportManagerRegistration(Uri listenUri);
+        internal abstract ITransportManagerRegistration CreateTransportManagerRegistration(
+            Uri listenUri
+        );
 
         static void EnsureAddressPrefixesInitialized()
         {
@@ -374,9 +380,12 @@ namespace System.ServiceModel.Channels
                     {
                         // we use the ephemeral namespace prefix plus a GUID for our App-Domain (which is the
                         // extent to which we can share a TransportManager prefix)
-                        exactGeneratedAddressPrefix = "Temporary_Listen_Addresses/" + Guid.NewGuid().ToString();
-                        strongWildcardGeneratedAddressPrefix = "Temporary_Listen_Addresses/" + Guid.NewGuid().ToString();
-                        weakWildcardGeneratedAddressPrefix = "Temporary_Listen_Addresses/" + Guid.NewGuid().ToString();
+                        exactGeneratedAddressPrefix =
+                            "Temporary_Listen_Addresses/" + Guid.NewGuid().ToString();
+                        strongWildcardGeneratedAddressPrefix =
+                            "Temporary_Listen_Addresses/" + Guid.NewGuid().ToString();
+                        weakWildcardGeneratedAddressPrefix =
+                            "Temporary_Listen_Addresses/" + Guid.NewGuid().ToString();
                         addressPrefixesInitialized = true;
                     }
                 }
@@ -401,21 +410,33 @@ namespace System.ServiceModel.Channels
             if (this.HostedVirtualPath != null)
             {
                 // Copy the HostNameComparisonMode if necessary
-                BaseUriWithWildcard baseAddress = AspNetEnvironment.Current.GetBaseUri(this.Scheme, this.Uri);
+                BaseUriWithWildcard baseAddress = AspNetEnvironment.Current.GetBaseUri(
+                    this.Scheme,
+                    this.Uri
+                );
                 if (baseAddress != null)
                 {
                     this.hostNameComparisonMode = baseAddress.HostNameComparisonMode;
                 }
             }
 
-            this.bufferManager = BufferManager.CreateBufferManager(MaxBufferPoolSize, GetMaxBufferSize());
+            this.bufferManager = BufferManager.CreateBufferManager(
+                MaxBufferPoolSize,
+                GetMaxBufferSize()
+            );
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.transportManagerContainer.BeginOpen(
                 new SelectTransportManagersCallback(this.SelectTransportManagers),
-                callback, state);
+                callback,
+                state
+            );
         }
 
         protected override void OnEndOpen(IAsyncResult result)
@@ -425,15 +446,23 @@ namespace System.ServiceModel.Channels
 
         protected override void OnOpen(TimeSpan timeout)
         {
-            this.transportManagerContainer.Open(new SelectTransportManagersCallback(this.SelectTransportManagers));
+            this.transportManagerContainer.Open(
+                new SelectTransportManagersCallback(this.SelectTransportManagers)
+            );
         }
 
         protected override void OnOpened()
         {
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
-                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.OpenedListener,
-                    SR.GetString(SR.TraceCodeOpenedListener), new UriTraceRecord(this.Uri), this, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.OpenedListener,
+                    SR.GetString(SR.TraceCodeOpenedListener),
+                    new UriTraceRecord(this.Uri),
+                    this,
+                    null
+                );
             }
 
             base.OnOpened();
@@ -441,7 +470,9 @@ namespace System.ServiceModel.Channels
 
         internal TransportManagerContainer GetTransportManagers()
         {
-            return TransportManagerContainer.TransferTransportManagers(this.transportManagerContainer);
+            return TransportManagerContainer.TransferTransportManagers(
+                this.transportManagerContainer
+            );
         }
 
         protected override void OnAbort()
@@ -449,7 +480,11 @@ namespace System.ServiceModel.Channels
             this.transportManagerContainer.Abort();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.transportManagerContainer.BeginClose(timeout, callback, state);
         }
@@ -477,10 +512,18 @@ namespace System.ServiceModel.Channels
         {
             if (!InheritBaseAddressSettings)
             {
-                return TryGetTransportManagerRegistration(this.hostNameComparisonMode, out registration);
+                return TryGetTransportManagerRegistration(
+                    this.hostNameComparisonMode,
+                    out registration
+                );
             }
 
-            if (TryGetTransportManagerRegistration(HostNameComparisonMode.StrongWildcard, out registration))
+            if (
+                TryGetTransportManagerRegistration(
+                    HostNameComparisonMode.StrongWildcard,
+                    out registration
+                )
+            )
             {
                 return true;
             }
@@ -490,7 +533,12 @@ namespace System.ServiceModel.Channels
                 return true;
             }
 
-            if (TryGetTransportManagerRegistration(HostNameComparisonMode.WeakWildcard, out registration))
+            if (
+                TryGetTransportManagerRegistration(
+                    HostNameComparisonMode.WeakWildcard,
+                    out registration
+                )
+            )
             {
                 return true;
             }
@@ -499,10 +547,16 @@ namespace System.ServiceModel.Channels
             return false;
         }
 
-        protected virtual bool TryGetTransportManagerRegistration(HostNameComparisonMode hostNameComparisonMode,
-            out ITransportManagerRegistration registration)
+        protected virtual bool TryGetTransportManagerRegistration(
+            HostNameComparisonMode hostNameComparisonMode,
+            out ITransportManagerRegistration registration
+        )
         {
-            return this.TransportManagerTable.TryLookupUri(this.Uri, hostNameComparisonMode, out registration);
+            return this.TransportManagerTable.TryLookupUri(
+                this.Uri,
+                hostNameComparisonMode,
+                out registration
+            );
         }
 
         // This is virtual so that PeerChannelListener and MsmqChannelListener can override it.
@@ -517,8 +571,14 @@ namespace System.ServiceModel.Channels
             {
                 if (DiagnosticUtility.ShouldTraceVerbose)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.NoExistingTransportManager,
-                        SR.GetString(SR.TraceCodeNoExistingTransportManager), new UriTraceRecord(this.Uri), this, null);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Verbose,
+                        TraceCode.NoExistingTransportManager,
+                        SR.GetString(SR.TraceCodeNoExistingTransportManager),
+                        new UriTraceRecord(this.Uri),
+                        this,
+                        null
+                    );
                 }
 
                 // Don't create TransportManagerRegistration in hosted case.
@@ -526,7 +586,11 @@ namespace System.ServiceModel.Channels
                 {
                     // Create a new registration at the default point in the URI hierarchy.
                     registration = this.CreateTransportManagerRegistration();
-                    this.TransportManagerTable.RegisterUri(registration.ListenUri, this.hostNameComparisonMode, registration);
+                    this.TransportManagerTable.RegisterUri(
+                        registration.ListenUri,
+                        this.hostNameComparisonMode,
+                        registration
+                    );
                 }
             }
 
@@ -538,8 +602,14 @@ namespace System.ServiceModel.Channels
                 {
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.IncompatibleExistingTransportManager,
-                            SR.GetString(SR.TraceCodeIncompatibleExistingTransportManager), new UriTraceRecord(this.Uri), this, null);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
+                            TraceCode.IncompatibleExistingTransportManager,
+                            SR.GetString(SR.TraceCodeIncompatibleExistingTransportManager),
+                            new UriTraceRecord(this.Uri),
+                            this,
+                            null
+                        );
                     }
 
                     // Don't create TransportManagerRegistration in hosted case.
@@ -550,7 +620,11 @@ namespace System.ServiceModel.Channels
                         if (nextUri != null)
                         {
                             registration = this.CreateTransportManagerRegistration(nextUri);
-                            this.TransportManagerTable.RegisterUri(nextUri, this.hostNameComparisonMode, registration);
+                            this.TransportManagerTable.RegisterUri(
+                                nextUri,
+                                this.hostNameComparisonMode,
+                                registration
+                            );
                             foundTransportManagers = registration.Select(this);
                         }
                     }
@@ -569,26 +643,59 @@ namespace System.ServiceModel.Channels
         {
             if (this.HostedVirtualPath != null)
             {
-                if ((String.Compare(this.Uri.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) == 0) ||
-                    (String.Compare(this.Uri.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    (
+                        String.Compare(
+                            this.Uri.Scheme,
+                            Uri.UriSchemeHttp,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
                     )
+                    || (
+                        String.Compare(
+                            this.Uri.Scheme,
+                            Uri.UriSchemeHttps,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
+                )
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                         new InvalidOperationException(
-                            SR.GetString(SR.Hosting_NoHttpTransportManagerForUri, this.Uri)));
+                            SR.GetString(SR.Hosting_NoHttpTransportManagerForUri, this.Uri)
+                        )
+                    );
                 }
-                else if ((String.Compare(this.Uri.Scheme, Uri.UriSchemeNetTcp, StringComparison.OrdinalIgnoreCase) == 0) ||
-                         (String.Compare(this.Uri.Scheme, Uri.UriSchemeNetPipe, StringComparison.OrdinalIgnoreCase) == 0)
-                         )
+                else if (
+                    (
+                        String.Compare(
+                            this.Uri.Scheme,
+                            Uri.UriSchemeNetTcp,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
+                    || (
+                        String.Compare(
+                            this.Uri.Scheme,
+                            Uri.UriSchemeNetPipe,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
+                )
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(
-                            SR.Hosting_NoTcpPipeTransportManagerForUri, this.Uri)));
+                        new InvalidOperationException(
+                            SR.GetString(SR.Hosting_NoTcpPipeTransportManagerForUri, this.Uri)
+                        )
+                    );
                 }
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                    SR.NoCompatibleTransportManagerForUri, this.Uri)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(SR.NoCompatibleTransportManagerForUri, this.Uri)
+                )
+            );
         }
 
         protected void SetUri(Uri baseAddress, string relativeAddress)
@@ -620,9 +727,7 @@ namespace System.ServiceModel.Channels
             this.uri = fullUri;
         }
 
-        protected virtual void ValidateUri(Uri uri)
-        {
-        }
+        protected virtual void ValidateUri(Uri uri) { }
 
         long ITransportFactorySettings.MaxReceivedMessageSize
         {
@@ -671,7 +776,10 @@ namespace System.ServiceModel.Channels
         HostNameComparisonMode hostNameComparisonMode;
         Uri listenUri;
 
-        protected TransportManagerRegistration(Uri listenUri, HostNameComparisonMode hostNameComparisonMode)
+        protected TransportManagerRegistration(
+            Uri listenUri,
+            HostNameComparisonMode hostNameComparisonMode
+        )
         {
             this.listenUri = listenUri;
             this.hostNameComparisonMode = hostNameComparisonMode;
@@ -684,10 +792,7 @@ namespace System.ServiceModel.Channels
 
         public Uri ListenUri
         {
-            get
-            {
-                return this.listenUri;
-            }
+            get { return this.listenUri; }
         }
 
         public abstract IList<TransportManager> Select(TransportChannelListener factory);

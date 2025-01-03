@@ -3,7 +3,6 @@
 
 using Microsoft.CSharp.RuntimeBinder;
 using Xunit;
-
 using static Dynamic.Operator.Tests.LiftCommon;
 
 namespace Dynamic.Operator.Tests
@@ -79,7 +78,10 @@ namespace Dynamic.Operator.Tests
             d -= s_uint;
 
             d = (byte)1;
-            unchecked { d -= s_ulong; }
+            unchecked
+            {
+                d -= s_ulong;
+            }
 
             d = (byte)1;
             d -= s_ushort;

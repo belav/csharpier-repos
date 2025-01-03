@@ -14,7 +14,8 @@ namespace System.Data.ProviderBase
     {
         private readonly int _bufferLength;
 
-        protected DbBuffer(int initialSize) : base(IntPtr.Zero, true)
+        protected DbBuffer(int initialSize)
+            : base(IntPtr.Zero, true)
         {
             if (0 < initialSize)
             {
@@ -32,26 +33,22 @@ namespace System.Data.ProviderBase
             }
         }
 
-        protected DbBuffer(IntPtr invalidHandleValue, bool ownsHandle) : base(invalidHandleValue, ownsHandle)
-        {
-        }
+        protected DbBuffer(IntPtr invalidHandleValue, bool ownsHandle)
+            : base(invalidHandleValue, ownsHandle) { }
 
-        private static int BaseOffset { get { return 0; } }
+        private static int BaseOffset
+        {
+            get { return 0; }
+        }
 
         public override bool IsInvalid
         {
-            get
-            {
-                return (IntPtr.Zero == base.handle);
-            }
+            get { return (IntPtr.Zero == base.handle); }
         }
 
         internal int Length
         {
-            get
-            {
-                return _bufferLength;
-            }
+            get { return _bufferLength; }
         }
 
         internal string PtrToStringUni(int offset)
@@ -394,7 +391,11 @@ namespace System.Data.ProviderBase
                 DangerousAddRef(ref mustRelease);
 
                 IntPtr ptr = ADP.IntPtrOffset(DangerousGetHandle(), offset);
-                Marshal.StructureToPtr(structure, ptr, false/*fDeleteOld*/);
+                Marshal.StructureToPtr(
+                    structure,
+                    ptr,
+                    false /*fDeleteOld*/
+                );
             }
             finally
             {
@@ -666,6 +667,7 @@ namespace System.Data.ProviderBase
             ReadBytes(offset, buffer, 0, 16);
             return new Guid(buffer);
         }
+
         internal void WriteGuid(int offset, Guid value)
         {
             // faster than Marshal.Copy(value.GetByteArray()
@@ -677,13 +679,16 @@ namespace System.Data.ProviderBase
             short[] buffer = new short[3];
             ReadInt16Array(offset, buffer, 0, 3);
             return new DateTime(
-                unchecked((ushort)buffer[0]),   // Year
-                unchecked((ushort)buffer[1]),   // Month
-                unchecked((ushort)buffer[2]));  // Day
+                unchecked((ushort)buffer[0]), // Year
+                unchecked((ushort)buffer[1]), // Month
+                unchecked((ushort)buffer[2])
+            ); // Day
         }
+
         internal void WriteDate(int offset, DateTime value)
         {
-            short[] buffer = new short[3] {
+            short[] buffer = new short[3]
+            {
                 unchecked((short)value.Year),
                 unchecked((short)value.Month),
                 unchecked((short)value.Day),
@@ -696,13 +701,16 @@ namespace System.Data.ProviderBase
             short[] buffer = new short[3];
             ReadInt16Array(offset, buffer, 0, 3);
             return new TimeSpan(
-                unchecked((ushort)buffer[0]),   // Hours
-                unchecked((ushort)buffer[1]),   // Minutes
-                unchecked((ushort)buffer[2]));  // Seconds
+                unchecked((ushort)buffer[0]), // Hours
+                unchecked((ushort)buffer[1]), // Minutes
+                unchecked((ushort)buffer[2])
+            ); // Seconds
         }
+
         internal void WriteTime(int offset, TimeSpan value)
         {
-            short[] buffer = new short[3] {
+            short[] buffer = new short[3]
+            {
                 unchecked((short)value.Hours),
                 unchecked((short)value.Minutes),
                 unchecked((short)value.Seconds),
@@ -716,18 +724,21 @@ namespace System.Data.ProviderBase
             ReadInt16Array(offset, buffer, 0, 6);
             int ticks = ReadInt32(offset + 12);
             DateTime value = new DateTime(
-                unchecked((ushort)buffer[0]),  // Year
-                unchecked((ushort)buffer[1]),  // Month
-                unchecked((ushort)buffer[2]),  // Day
-                unchecked((ushort)buffer[3]),  // Hours
-                unchecked((ushort)buffer[4]),  // Minutes
-                unchecked((ushort)buffer[5])); // Seconds
+                unchecked((ushort)buffer[0]), // Year
+                unchecked((ushort)buffer[1]), // Month
+                unchecked((ushort)buffer[2]), // Day
+                unchecked((ushort)buffer[3]), // Hours
+                unchecked((ushort)buffer[4]), // Minutes
+                unchecked((ushort)buffer[5])
+            ); // Seconds
             return value.AddTicks(ticks / 100);
         }
+
         internal void WriteDateTime(int offset, DateTime value)
         {
             int ticks = (int)(value.Ticks % 10000000L) * 100;
-            short[] buffer = new short[6] {
+            short[] buffer = new short[6]
+            {
                 unchecked((short)value.Year),
                 unchecked((short)value.Month),
                 unchecked((short)value.Day),
@@ -750,9 +761,9 @@ namespace System.Data.ProviderBase
             {
                 buffer[3] |= unchecked((int)0x80000000); //sign
             }
-            buffer[0] = BitConverter.ToInt32(bits, 4);     // low
-            buffer[1] = BitConverter.ToInt32(bits, 8);     // mid
-            buffer[2] = BitConverter.ToInt32(bits, 12);     // high
+            buffer[0] = BitConverter.ToInt32(bits, 4); // low
+            buffer[1] = BitConverter.ToInt32(bits, 8); // mid
+            buffer[2] = BitConverter.ToInt32(bits, 12); // high
             if (0 != BitConverter.ToInt32(bits, 16))
             {
                 throw ADP.NumericToDecimalOverflow();

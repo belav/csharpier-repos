@@ -49,9 +49,18 @@ namespace System.Runtime.InteropServices
             return 0 == (lPtr & HIWORDMASK);
         }
 
-        internal static unsafe int StringToAnsiString(string s, byte* buffer, int bufferLength, bool bestFit = false, bool throwOnUnmappableChar = false)
+        internal static unsafe int StringToAnsiString(
+            string s,
+            byte* buffer,
+            int bufferLength,
+            bool bestFit = false,
+            bool throwOnUnmappableChar = false
+        )
         {
-            Debug.Assert(bufferLength >= (s.Length + 1) * SystemMaxDBCSCharSize, "Insufficient buffer length passed to StringToAnsiString");
+            Debug.Assert(
+                bufferLength >= (s.Length + 1) * SystemMaxDBCSCharSize,
+                "Insufficient buffer length passed to StringToAnsiString"
+            );
 
             int nb;
 
@@ -68,7 +77,8 @@ namespace System.Runtime.InteropServices
                     buffer,
                     bufferLength,
                     null,
-                    throwOnUnmappableChar ? &defaultCharUsed : null);
+                    throwOnUnmappableChar ? &defaultCharUsed : null
+                );
             }
 
             if (defaultCharUsed != Interop.BOOL.FALSE)
@@ -94,7 +104,15 @@ namespace System.Runtime.InteropServices
                 fixed (char* pChars = chars)
                 {
                     byteLength = Interop.Kernel32.WideCharToMultiByte(
-                        Interop.Kernel32.CP_ACP, Interop.Kernel32.WC_NO_BEST_FIT_CHARS, pChars, chars.Length, null, 0, null, null);
+                        Interop.Kernel32.CP_ACP,
+                        Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
+                        pChars,
+                        chars.Length,
+                        null,
+                        0,
+                        null,
+                        null
+                    );
                     if (byteLength <= 0)
                         throw new ArgumentException();
                 }
@@ -118,7 +136,15 @@ namespace System.Runtime.InteropServices
                 fixed (byte* pBytes = bytes)
                 {
                     byteLength = Interop.Kernel32.WideCharToMultiByte(
-                       Interop.Kernel32.CP_ACP, Interop.Kernel32.WC_NO_BEST_FIT_CHARS, pChars, chars.Length, pBytes, bytes.Length, null, null);
+                        Interop.Kernel32.CP_ACP,
+                        Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
+                        pChars,
+                        chars.Length,
+                        pBytes,
+                        bytes.Length,
+                        null,
+                        null
+                    );
                     if (byteLength <= 0)
                         throw new ArgumentException();
                 }
@@ -126,6 +152,7 @@ namespace System.Runtime.InteropServices
 
             bytes[byteLength] = 0;
         }
+
         public static unsafe IntPtr AllocHGlobal(nint cb)
         {
             void* pNewMem = Interop.Kernel32.LocalAlloc((nuint)cb);

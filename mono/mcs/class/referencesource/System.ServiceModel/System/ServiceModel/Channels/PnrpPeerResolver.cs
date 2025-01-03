@@ -28,10 +28,13 @@ namespace System.ServiceModel.Channels
 
     sealed class PnrpPeerResolver : PeerResolver
     {
-        UnsafePnrpNativeMethods.PeerNameRegistrar registrar = new UnsafePnrpNativeMethods.PeerNameRegistrar();
+        UnsafePnrpNativeMethods.PeerNameRegistrar registrar =
+            new UnsafePnrpNativeMethods.PeerNameRegistrar();
         static bool isPnrpAvailable;
         static bool isPnrpInstalled;
-        const UnsafePnrpNativeMethods.PnrpResolveCriteria resolutionScope = UnsafePnrpNativeMethods.PnrpResolveCriteria.NearestNonCurrentProcess;
+        const UnsafePnrpNativeMethods.PnrpResolveCriteria resolutionScope = UnsafePnrpNativeMethods
+            .PnrpResolveCriteria
+            .NearestNonCurrentProcess;
         public const int PNRPINFO_HINT = 0x00000001;
 
         internal const int CommentLength = 80;
@@ -59,21 +62,26 @@ namespace System.ServiceModel.Channels
             Global = 1,
             SiteLocal = 2,
             LinkLocal = 4,
-            All = Global | SiteLocal | LinkLocal
+            All = Global | SiteLocal | LinkLocal,
         }
 
         static PnrpPeerResolver()
         {
             // determine if PNRP is installed
             isPnrpAvailable = false;
-            using (UnsafePnrpNativeMethods.DiscoveryBase db = new UnsafePnrpNativeMethods.DiscoveryBase())
+            using (
+                UnsafePnrpNativeMethods.DiscoveryBase db =
+                    new UnsafePnrpNativeMethods.DiscoveryBase()
+            )
             {
                 isPnrpInstalled = db.IsPnrpInstalled();
                 isPnrpAvailable = db.IsPnrpAvailable(TimeToWaitForStatus);
             }
         }
 
-        internal PnrpPeerResolver() : this(PeerReferralPolicy.Share) { }
+        internal PnrpPeerResolver()
+            : this(PeerReferralPolicy.Share) { }
+
         internal PnrpPeerResolver(PeerReferralPolicy referralPolicy)
         {
             this.referralPolicy = referralPolicy;
@@ -81,10 +89,7 @@ namespace System.ServiceModel.Channels
 
         static Encoding PnrpEncoder
         {
-            get
-            {
-                return System.Text.Encoding.UTF8;
-            }
+            get { return System.Text.Encoding.UTF8; }
         }
 
         public static bool IsPnrpAvailable
@@ -124,19 +129,25 @@ namespace System.ServiceModel.Channels
         // nodes to work in the same process.
         string localExtension;
         string remoteExtension;
+
         internal void SetMeshExtensions(string local, string remote)
         {
             localExtension = local;
             remoteExtension = remote;
         }
 
-        internal PnrpResolveScope EnumerateClouds(bool forResolve, Dictionary<uint, string> LinkCloudNames, Dictionary<uint, string> SiteCloudNames)
+        internal PnrpResolveScope EnumerateClouds(
+            bool forResolve,
+            Dictionary<uint, string> LinkCloudNames,
+            Dictionary<uint, string> SiteCloudNames
+        )
         {
             bool foundActive = false;
             PnrpResolveScope currentScope = PnrpResolveScope.None;
             LinkCloudNames.Clear();
             SiteCloudNames.Clear();
-            UnsafePnrpNativeMethods.CloudInfo[] cloudInfos = UnsafePnrpNativeMethods.PeerCloudEnumerator.GetClouds();
+            UnsafePnrpNativeMethods.CloudInfo[] cloudInfos =
+                UnsafePnrpNativeMethods.PeerCloudEnumerator.GetClouds();
 
             // If we are resolving we should first look for active clouds only
             // If we find some then we should return those to the caller
@@ -154,14 +165,20 @@ namespace System.ServiceModel.Channels
                         }
                         else if (cloud.Scope == UnsafePnrpNativeMethods.PnrpScope.LinkLocal)
                         {
-                            Fx.Assert(!String.IsNullOrEmpty(cloud.Name), "Unknown scope id in the IPAddress");
+                            Fx.Assert(
+                                !String.IsNullOrEmpty(cloud.Name),
+                                "Unknown scope id in the IPAddress"
+                            );
                             LinkCloudNames.Add(cloud.ScopeId, cloud.Name);
                             currentScope |= PnrpResolveScope.LinkLocal;
                             foundActive = true;
                         }
                         else if (cloud.Scope == UnsafePnrpNativeMethods.PnrpScope.SiteLocal)
                         {
-                            Fx.Assert(!String.IsNullOrEmpty(cloud.Name), "Unknown scope id in the IPAddress");
+                            Fx.Assert(
+                                !String.IsNullOrEmpty(cloud.Name),
+                                "Unknown scope id in the IPAddress"
+                            );
                             SiteCloudNames.Add(cloud.ScopeId, cloud.Name);
                             currentScope |= PnrpResolveScope.SiteLocal;
                             foundActive = true;
@@ -174,10 +191,13 @@ namespace System.ServiceModel.Channels
             {
                 foreach (UnsafePnrpNativeMethods.CloudInfo cloud in cloudInfos)
                 {
-                    if (!((cloud.State == UnsafePnrpNativeMethods.PnrpCloudState.Dead)
-                        || (cloud.State == UnsafePnrpNativeMethods.PnrpCloudState.Disabled)
-                        || (cloud.State == UnsafePnrpNativeMethods.PnrpCloudState.NoNet))
-                       )
+                    if (
+                        !(
+                            (cloud.State == UnsafePnrpNativeMethods.PnrpCloudState.Dead)
+                            || (cloud.State == UnsafePnrpNativeMethods.PnrpCloudState.Disabled)
+                            || (cloud.State == UnsafePnrpNativeMethods.PnrpCloudState.NoNet)
+                        )
+                    )
                     {
                         if (cloud.Scope == UnsafePnrpNativeMethods.PnrpScope.Global)
                         {
@@ -186,13 +206,19 @@ namespace System.ServiceModel.Channels
                         }
                         if (cloud.Scope == UnsafePnrpNativeMethods.PnrpScope.LinkLocal)
                         {
-                            Fx.Assert(!String.IsNullOrEmpty(cloud.Name), "Unknown scope id in the IPAddress");
+                            Fx.Assert(
+                                !String.IsNullOrEmpty(cloud.Name),
+                                "Unknown scope id in the IPAddress"
+                            );
                             LinkCloudNames.Add(cloud.ScopeId, cloud.Name);
                             currentScope |= PnrpResolveScope.LinkLocal;
                         }
                         else if (cloud.Scope == UnsafePnrpNativeMethods.PnrpScope.SiteLocal)
                         {
-                            Fx.Assert(!String.IsNullOrEmpty(cloud.Name), "Unknown scope id in the IPAddress");
+                            Fx.Assert(
+                                !String.IsNullOrEmpty(cloud.Name),
+                                "Unknown scope id in the IPAddress"
+                            );
                             SiteCloudNames.Add(cloud.ScopeId, cloud.Name);
                             currentScope |= PnrpResolveScope.SiteLocal;
                         }
@@ -206,11 +232,13 @@ namespace System.ServiceModel.Channels
         {
             public string PeerName;
             public List<string> Clouds;
+
             public RegistrationHandle(string peerName)
             {
                 this.PeerName = peerName;
                 Clouds = new List<string>();
             }
+
             public void AddCloud(string name)
             {
                 this.Clouds.Add(name);
@@ -219,12 +247,14 @@ namespace System.ServiceModel.Channels
 
         public override bool CanShareReferrals
         {
-            get
-            {
-                return referralPolicy != PeerReferralPolicy.DoNotShare;
-            }
+            get { return referralPolicy != PeerReferralPolicy.DoNotShare; }
         }
-        public override object Register(string meshId, PeerNodeAddress nodeAddress, TimeSpan timeout)
+
+        public override object Register(
+            string meshId,
+            PeerNodeAddress nodeAddress,
+            TimeSpan timeout
+        )
         {
             ThrowIfNoPnrp();
 
@@ -236,7 +266,11 @@ namespace System.ServiceModel.Channels
             Dictionary<uint, string> SiteCloudNames = new Dictionary<uint, string>();
             Dictionary<uint, string> LinkCloudNames = new Dictionary<uint, string>();
 
-            PnrpResolveScope availableScope = EnumerateClouds(false, LinkCloudNames, SiteCloudNames);
+            PnrpResolveScope availableScope = EnumerateClouds(
+                false,
+                LinkCloudNames,
+                SiteCloudNames
+            );
 
             if (availableScope == PnrpResolveScope.None)
             {
@@ -249,12 +283,23 @@ namespace System.ServiceModel.Channels
 
             try
             {
-                PeerNodeAddressToPnrpRegistrations(meshId, LinkCloudNames, SiteCloudNames, nodeAddress, out linkEntries, out siteEntries, out globalEntry);
+                PeerNodeAddressToPnrpRegistrations(
+                    meshId,
+                    LinkCloudNames,
+                    SiteCloudNames,
+                    nodeAddress,
+                    out linkEntries,
+                    out siteEntries,
+                    out globalEntry
+                );
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.PeerPnrpIllegalUri), e));
+                if (Fx.IsFatal(e))
+                    throw;
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.PeerPnrpIllegalUri), e)
+                );
             }
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
 
@@ -263,7 +308,10 @@ namespace System.ServiceModel.Channels
                 PnrpResolveScope currentScope = PnrpResolveScope.None;
                 if (globalEntry != null)
                 {
-                    if (globalEntry.Addresses.Length > 0 && (availableScope & PnrpResolveScope.Global) != 0)
+                    if (
+                        globalEntry.Addresses.Length > 0
+                        && (availableScope & PnrpResolveScope.Global) != 0
+                    )
                     {
                         registrar.Register(globalEntry, timeoutHelper.RemainingTime());
                         regHandle.AddCloud(globalEntry.CloudName);
@@ -316,10 +364,20 @@ namespace System.ServiceModel.Channels
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                PnrpRegisterTraceRecord record = new PnrpRegisterTraceRecord(meshId, globalEntry, siteEntries, linkEntries);
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PnrpRegisteredAddresses,
+                PnrpRegisterTraceRecord record = new PnrpRegisterTraceRecord(
+                    meshId,
+                    globalEntry,
+                    siteEntries,
+                    linkEntries
+                );
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.PnrpRegisteredAddresses,
                     SR.GetString(SR.TraceCodePnrpRegisteredAddresses),
-                    record, this, null);
+                    record,
+                    this,
+                    null
+                );
             }
 
             return regHandle;
@@ -329,8 +387,9 @@ namespace System.ServiceModel.Channels
         {
             if (!isPnrpAvailable)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.PeerPnrpNotAvailable)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.PeerPnrpNotAvailable))
+                );
             }
         }
 
@@ -338,7 +397,12 @@ namespace System.ServiceModel.Channels
         {
             RegistrationHandle regHandle = registrationId as RegistrationHandle;
             if (regHandle == null || String.IsNullOrEmpty(regHandle.PeerName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.PeerInvalidRegistrationId, regHandle), "registrationId"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.PeerInvalidRegistrationId, regHandle),
+                        "registrationId"
+                    )
+                );
             string meshId = regHandle.PeerName;
 
             // prepend a 0. for unsecured peername
@@ -347,18 +411,35 @@ namespace System.ServiceModel.Channels
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                PnrpPeerResolverTraceRecord record = new PnrpPeerResolverTraceRecord(meshId, new List<PeerNodeAddress>());
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PnrpUnregisteredAddresses,
+                PnrpPeerResolverTraceRecord record = new PnrpPeerResolverTraceRecord(
+                    meshId,
+                    new List<PeerNodeAddress>()
+                );
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.PnrpUnregisteredAddresses,
                     SR.GetString(SR.TraceCodePnrpUnregisteredAddresses),
-                    record, this, null);
+                    record,
+                    this,
+                    null
+                );
             }
         }
 
-        public override void Update(object registrationId, PeerNodeAddress updatedNodeAddress, TimeSpan timeout)
+        public override void Update(
+            object registrationId,
+            PeerNodeAddress updatedNodeAddress,
+            TimeSpan timeout
+        )
         {
             RegistrationHandle regHandle = registrationId as RegistrationHandle;
             if (regHandle == null || string.IsNullOrEmpty(regHandle.PeerName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.PeerInvalidRegistrationId, regHandle), "registrationId"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.PeerInvalidRegistrationId, regHandle),
+                        "registrationId"
+                    )
+                );
 
             string meshId = regHandle.PeerName;
             Register(meshId, updatedNodeAddress, timeout);
@@ -378,7 +459,13 @@ namespace System.ServiceModel.Channels
             {
                 if (input == null || String.IsNullOrEmpty(input.Comment))
                     return null;
-                Array.ForEach(input.Addresses, delegate(IPEndPoint obj) { addresses.Add(obj.Address); });
+                Array.ForEach(
+                    input.Addresses,
+                    delegate(IPEndPoint obj)
+                    {
+                        addresses.Add(obj.Address);
+                    }
+                );
                 if (addresses.Count != 0)
                 {
                     UriBuilder uriBuilder = new UriBuilder();
@@ -388,19 +475,36 @@ namespace System.ServiceModel.Channels
                     CharEncoder.Decode(input.Comment, out version, out protocolScheme, out guids);
 
                     if (
-                        (version == PayloadVersion) &&
-                        (guids != null) && (guids.Length <= MaxGuids) &&
-                        (guids.Length >= MinGuids)
+                        (version == PayloadVersion)
+                        && (guids != null)
+                        && (guids.Length <= MaxGuids)
+                        && (guids.Length >= MinGuids)
                     )
                     {
                         uriBuilder.Scheme = protocolScheme;
-                        Array.ForEach(guids, delegate(Guid guid)
-                                            {
-                                                pathBuilder.Append(PathSeparator + String.Format(CultureInfo.InvariantCulture, "{0}", guid.ToString()));
-                                            }
+                        Array.ForEach(
+                            guids,
+                            delegate(Guid guid)
+                            {
+                                pathBuilder.Append(
+                                    PathSeparator
+                                        + String.Format(
+                                            CultureInfo.InvariantCulture,
+                                            "{0}",
+                                            guid.ToString()
+                                        )
+                                );
+                            }
                         );
-                        uriBuilder.Path = String.Format(CultureInfo.InvariantCulture, "{0}", pathBuilder.ToString());
-                        result = new PeerNodeAddress(new EndpointAddress(uriBuilder.Uri), new ReadOnlyCollection<IPAddress>(addresses));
+                        uriBuilder.Path = String.Format(
+                            CultureInfo.InvariantCulture,
+                            "{0}",
+                            pathBuilder.ToString()
+                        );
+                        result = new PeerNodeAddress(
+                            new EndpointAddress(uriBuilder.Uri),
+                            new ReadOnlyCollection<IPAddress>(addresses)
+                        );
                     }
                 }
             }
@@ -418,7 +522,6 @@ namespace System.ServiceModel.Channels
             }
 
             return result;
-
         }
 
         void TrimToMaxAddresses(List<IPEndPoint> addressList)
@@ -429,12 +532,22 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        void PeerNodeAddressToPnrpRegistrations(string meshName, Dictionary<uint, string> LinkCloudNames, Dictionary<uint, string> SiteCloudNames, PeerNodeAddress input, out PnrpRegistration[] linkRegs, out PnrpRegistration[] siteRegs, out PnrpRegistration global)
+        void PeerNodeAddressToPnrpRegistrations(
+            string meshName,
+            Dictionary<uint, string> LinkCloudNames,
+            Dictionary<uint, string> SiteCloudNames,
+            PeerNodeAddress input,
+            out PnrpRegistration[] linkRegs,
+            out PnrpRegistration[] siteRegs,
+            out PnrpRegistration global
+        )
         {
             PnrpRegistration reg = new PnrpRegistration();
 
-            Dictionary<uint, PnrpRegistration> resultsLink = new Dictionary<uint, PnrpRegistration>();
-            Dictionary<uint, PnrpRegistration> resultsSite = new Dictionary<uint, PnrpRegistration>();
+            Dictionary<uint, PnrpRegistration> resultsLink =
+                new Dictionary<uint, PnrpRegistration>();
+            Dictionary<uint, PnrpRegistration> resultsSite =
+                new Dictionary<uint, PnrpRegistration>();
             PnrpRegistration entry = null;
             string scheme;
             Guid[] guids;
@@ -448,9 +561,9 @@ namespace System.ServiceModel.Channels
             string cloudName = string.Empty;
             foreach (IPAddress address in input.IPAddresses)
             {
-                if (address.AddressFamily == AddressFamily.InterNetworkV6
-                    &&
-                    ((address.IsIPv6LinkLocal) || (address.IsIPv6SiteLocal))
+                if (
+                    address.AddressFamily == AddressFamily.InterNetworkV6
+                    && ((address.IsIPv6LinkLocal) || (address.IsIPv6SiteLocal))
                 )
                 {
                     if (address.IsIPv6LinkLocal)
@@ -546,7 +659,10 @@ namespace System.ServiceModel.Channels
                 return TcpTransport;
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("name", SR.GetString(SR.PeerPnrpIllegalUri));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                "name",
+                SR.GetString(SR.PeerPnrpIllegalUri)
+            );
         }
 
         static string NameFromProtocol(byte number)
@@ -556,7 +672,9 @@ namespace System.ServiceModel.Channels
                 case TcpTransport:
                     return Uri.UriSchemeNetTcp;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.PeerPnrpIllegalUri)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.PeerPnrpIllegalUri))
+                    );
             }
         }
 
@@ -567,8 +685,19 @@ namespace System.ServiceModel.Channels
                 if ((ProtocolFromName(uri.Scheme) != 0) && !String.IsNullOrEmpty(uri.AbsolutePath))
                 {
                     scheme = uri.Scheme;
-                    string[] parts = uri.AbsolutePath.Trim(new char[] { ' ', PathSeparator }).Split(PathSeparator);
-                    if ((0 == String.Compare(parts[0], PeerStrings.KnownServiceUriPrefix, StringComparison.OrdinalIgnoreCase)))
+                    string[] parts = uri
+                        .AbsolutePath.Trim(new char[] { ' ', PathSeparator })
+                        .Split(PathSeparator);
+                    if (
+                        (
+                            0
+                            == String.Compare(
+                                parts[0],
+                                PeerStrings.KnownServiceUriPrefix,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                    )
                     {
                         if (parts.Length >= MinGuids && parts.Length <= MaxGuids + 1)
                         {
@@ -581,13 +710,17 @@ namespace System.ServiceModel.Channels
                             }
                             catch (FormatException e)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.PeerPnrpIllegalUri), e));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new ArgumentException(SR.GetString(SR.PeerPnrpIllegalUri), e)
+                                );
                             }
                         }
                     }
                 }
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.PeerPnrpIllegalUri)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new ArgumentException(SR.GetString(SR.PeerPnrpIllegalUri))
+            );
         }
 
         void MergeResults(Dictionary<string, PnrpRegistration> results, List<PnrpRegistration> regs)
@@ -606,9 +739,15 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        void MergeResults(List<PeerNodeAddress> nodeAddressList, List<PnrpRegistration> globalRegistrations, List<PnrpRegistration> linkRegistrations, List<PnrpRegistration> siteRegistrations)
+        void MergeResults(
+            List<PeerNodeAddress> nodeAddressList,
+            List<PnrpRegistration> globalRegistrations,
+            List<PnrpRegistration> linkRegistrations,
+            List<PnrpRegistration> siteRegistrations
+        )
         {
-            Dictionary<string, PnrpRegistration> results = new Dictionary<string, PnrpRegistration>();
+            Dictionary<string, PnrpRegistration> results =
+                new Dictionary<string, PnrpRegistration>();
             MergeResults(results, globalRegistrations);
             MergeResults(results, siteRegistrations);
             MergeResults(results, linkRegistrations);
@@ -622,11 +761,16 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public override ReadOnlyCollection<PeerNodeAddress> Resolve(string meshId, int maxAddresses, TimeSpan timeout)
+        public override ReadOnlyCollection<PeerNodeAddress> Resolve(
+            string meshId,
+            int maxAddresses,
+            TimeSpan timeout
+        )
         {
             ThrowIfNoPnrp();
             UnsafePnrpNativeMethods.PeerNameResolver resolver;
-            List<UnsafePnrpNativeMethods.PeerNameResolver> resolvers = new List<UnsafePnrpNativeMethods.PeerNameResolver>();
+            List<UnsafePnrpNativeMethods.PeerNameResolver> resolvers =
+                new List<UnsafePnrpNativeMethods.PeerNameResolver>();
             List<PnrpRegistration> globalRegistrations = new List<PnrpRegistration>();
             List<PnrpRegistration> linkRegistrations = new List<PnrpRegistration>();
             List<PnrpRegistration> siteRegistrations = new List<PnrpRegistration>();
@@ -634,7 +778,9 @@ namespace System.ServiceModel.Channels
             Dictionary<uint, string> SiteCloudNames = new Dictionary<uint, string>();
             Dictionary<uint, string> LinkCloudNames = new Dictionary<uint, string>();
             UnsafePnrpNativeMethods.PnrpResolveCriteria targetScope = resolutionScope;
-            TimeoutHelper timeoutHelper = new TimeoutHelper(TimeSpan.Compare(timeout, MaxResolveTimeout) <= 0 ? timeout : MaxResolveTimeout);
+            TimeoutHelper timeoutHelper = new TimeoutHelper(
+                TimeSpan.Compare(timeout, MaxResolveTimeout) <= 0 ? timeout : MaxResolveTimeout
+            );
 
             if (!HasPeerNodeForMesh(meshId))
                 targetScope = UnsafePnrpNativeMethods.PnrpResolveCriteria.Any;
@@ -648,7 +794,14 @@ namespace System.ServiceModel.Channels
             if ((currentScope & PnrpResolveScope.Global) != 0)
             {
                 resolver = new UnsafePnrpNativeMethods.PeerNameResolver(
-                                    peerName, maxAddresses, targetScope, 0, GlobalCloudName, timeoutHelper.RemainingTime(), globalRegistrations);
+                    peerName,
+                    maxAddresses,
+                    targetScope,
+                    0,
+                    GlobalCloudName,
+                    timeoutHelper.RemainingTime(),
+                    globalRegistrations
+                );
                 handles.Add(resolver.AsyncWaitHandle);
                 resolvers.Add(resolver);
             }
@@ -658,7 +811,14 @@ namespace System.ServiceModel.Channels
                 foreach (KeyValuePair<uint, string> linkEntry in LinkCloudNames)
                 {
                     resolver = new UnsafePnrpNativeMethods.PeerNameResolver(
-                                    peerName, maxAddresses, targetScope, linkEntry.Key, linkEntry.Value, timeoutHelper.RemainingTime(), linkRegistrations);
+                        peerName,
+                        maxAddresses,
+                        targetScope,
+                        linkEntry.Key,
+                        linkEntry.Value,
+                        timeoutHelper.RemainingTime(),
+                        linkRegistrations
+                    );
                     handles.Add(resolver.AsyncWaitHandle);
                     resolvers.Add(resolver);
                 }
@@ -669,7 +829,14 @@ namespace System.ServiceModel.Channels
                 foreach (KeyValuePair<uint, string> siteEntry in SiteCloudNames)
                 {
                     resolver = new UnsafePnrpNativeMethods.PeerNameResolver(
-                                    peerName, maxAddresses, targetScope, siteEntry.Key, siteEntry.Value, timeoutHelper.RemainingTime(), siteRegistrations);
+                        peerName,
+                        maxAddresses,
+                        targetScope,
+                        siteEntry.Key,
+                        siteEntry.Value,
+                        timeoutHelper.RemainingTime(),
+                        siteRegistrations
+                    );
                     handles.Add(resolver.AsyncWaitHandle);
                     resolvers.Add(resolver);
                 }
@@ -679,11 +846,22 @@ namespace System.ServiceModel.Channels
                 //could not find any clouds.
                 if (DiagnosticUtility.ShouldTraceWarning)
                 {
-                    Exception exception = new InvalidOperationException(SR.GetString(SR.PnrpNoClouds));
-                    PnrpResolveExceptionTraceRecord record = new PnrpResolveExceptionTraceRecord(meshId, string.Empty, exception);
-                    TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.PnrpResolvedAddresses,
+                    Exception exception = new InvalidOperationException(
+                        SR.GetString(SR.PnrpNoClouds)
+                    );
+                    PnrpResolveExceptionTraceRecord record = new PnrpResolveExceptionTraceRecord(
+                        meshId,
+                        string.Empty,
+                        exception
+                    );
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Warning,
+                        TraceCode.PnrpResolvedAddresses,
                         SR.GetString(SR.TraceCodePnrpResolvedAddresses),
-                        record, this, null);
+                        record,
+                        this,
+                        null
+                    );
                 }
                 return new ReadOnlyCollection<PeerNodeAddress>(new List<PeerNodeAddress>());
             }
@@ -703,19 +881,31 @@ namespace System.ServiceModel.Channels
             }
 
             List<PeerNodeAddress> nodeAddressList = new List<PeerNodeAddress>();
-            MergeResults(nodeAddressList, globalRegistrations, linkRegistrations, siteRegistrations);
+            MergeResults(
+                nodeAddressList,
+                globalRegistrations,
+                linkRegistrations,
+                siteRegistrations
+            );
             if ((lastException != null) && (nodeAddressList.Count == 0))
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(lastException);
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                PnrpPeerResolverTraceRecord record = new PnrpPeerResolverTraceRecord(meshId, nodeAddressList);
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PnrpResolvedAddresses,
+                PnrpPeerResolverTraceRecord record = new PnrpPeerResolverTraceRecord(
+                    meshId,
+                    nodeAddressList
+                );
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.PnrpResolvedAddresses,
                     SR.GetString(SR.TraceCodePnrpResolvedAddresses),
-                    record, this, null);
+                    record,
+                    this,
+                    null
+                );
             }
             return new ReadOnlyCollection<PeerNodeAddress>(nodeAddressList);
         }
-
 
         // contains the friendly PNRP information
         internal class PnrpRegistration
@@ -726,7 +916,11 @@ namespace System.ServiceModel.Channels
             public IPEndPoint[] Addresses;
             public List<IPEndPoint> addressList;
 
-            internal static PnrpRegistration Create(string peerName, string comment, string cloudName)
+            internal static PnrpRegistration Create(
+                string peerName,
+                string comment,
+                string cloudName
+            )
             {
                 PnrpRegistration reg = new PnrpRegistration();
                 reg.Comment = comment;
@@ -742,8 +936,11 @@ namespace System.ServiceModel.Channels
             static void CheckAtLimit(int current)
             {
                 if (current + 1 >= CommentLength)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.PeerPnrpIllegalUri)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.PeerPnrpIllegalUri))
+                    );
             }
+
             static void EncodeByte(byte b, ref int offset, byte[] bytes)
             {
                 if (b == 0 || b == GuidEscape)
@@ -755,7 +952,7 @@ namespace System.ServiceModel.Channels
                 bytes[offset++] = b;
             }
 
-            static internal string Encode(int version, string protocolName, Guid[] guids)
+            internal static string Encode(int version, string protocolName, Guid[] guids)
             {
                 byte[] bytes = new byte[CommentLength];
                 int i = 0;
@@ -774,7 +971,7 @@ namespace System.ServiceModel.Channels
                     bytes[i] = GuidEscape;
                 // Now we have a collection of bytes lets turn it into a string
                 int length = i;
-                int clength = (length / 2) + (length % 2);         // Pack 2 bytes per char
+                int clength = (length / 2) + (length % 2); // Pack 2 bytes per char
                 char[] chars = new char[clength];
                 i = 0;
                 for (int j = 0; j < clength; j++)
@@ -801,7 +998,12 @@ namespace System.ServiceModel.Channels
                 return b;
             }
 
-            static internal void Decode(string buffer, out int version, out string protocolName, out Guid[] guids)
+            internal static void Decode(
+                string buffer,
+                out int version,
+                out string protocolName,
+                out Guid[] guids
+            )
             {
                 char[] chars = buffer.ToCharArray();
                 byte protocol;
@@ -830,10 +1032,12 @@ namespace System.ServiceModel.Channels
             WSA_PNRP_ERROR_BASE = 11500,
             WSA_PNRP_CLOUD_NOT_FOUND = 11501,
             WSA_PNRP_CLOUD_DISABLED = 11502,
+
             //these error codes are not relevant for now
             //            WSA_PNRP_INVALID_IDENTITY = 11503,
             //            WSA_PNRP_TOO_MUCH_LOAD = 11504,
             WSA_PNRP_CLOUD_IS_RESOLVE_ONLY = 11505,
+
             //            WSA_PNRP_CLIENT_INVALID_COMPARTMENT_ID = 11506,
             WSA_PNRP_FW_PORT_BLOCKED = 11507,
             WSA_PNRP_DUPLICATE_PEER_NAME = 11508,
@@ -894,37 +1098,121 @@ namespace System.ServiceModel.Channels
             // WSA import functions
             [DllImport("ws2_32.dll", CharSet = CharSet.Unicode)]
             [ResourceExposure(ResourceScope.None)]
-            static extern int WSASetService(CriticalAllocHandle querySet, WsaSetServiceOp essOperation, int dwControlFlags);
+            static extern int WSASetService(
+                CriticalAllocHandle querySet,
+                WsaSetServiceOp essOperation,
+                int dwControlFlags
+            );
 
             [DllImport("ws2_32.dll", CharSet = CharSet.Unicode)]
             [ResourceExposure(ResourceScope.None)]
-            static extern int WSALookupServiceNext(CriticalLookupHandle hLookup,
-                WsaNspControlFlags dwControlFlags, ref int lpdwBufferLength, IntPtr Results);
-            [DllImport("ws2_32.dll", CharSet = CharSet.Unicode), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+            static extern int WSALookupServiceNext(
+                CriticalLookupHandle hLookup,
+                WsaNspControlFlags dwControlFlags,
+                ref int lpdwBufferLength,
+                IntPtr Results
+            );
+
+            [
+                DllImport("ws2_32.dll", CharSet = CharSet.Unicode),
+                ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
+            ]
             [ResourceExposure(ResourceScope.None)]
             static extern int WSALookupServiceEnd(IntPtr hLookup);
+
             [DllImport("ws2_32.dll", CharSet = CharSet.Unicode)]
             [ResourceExposure(ResourceScope.None)]
-            static extern int WSALookupServiceBegin(CriticalAllocHandle query, WsaNspControlFlags dwControlFlags, out CriticalLookupHandle hLookup);
+            static extern int WSALookupServiceBegin(
+                CriticalAllocHandle query,
+                WsaNspControlFlags dwControlFlags,
+                out CriticalLookupHandle hLookup
+            );
+
             [DllImport("ws2_32.dll", CharSet = CharSet.Ansi)]
             [ResourceExposure(ResourceScope.None)]
             static extern int WSAStartup(Int16 wVersionRequested, ref WsaData lpWSAData);
+
             [DllImport("ws2_32.dll", CharSet = CharSet.Ansi)]
             [ResourceExposure(ResourceScope.None)]
             static extern int WSACleanup();
+
             [DllImport("ws2_32.dll", CharSet = CharSet.Ansi)]
             [ResourceExposure(ResourceScope.None)]
             static extern int WSAGetLastError();
+
             [DllImport("ws2_32.dll", CharSet = CharSet.Unicode)]
             [ResourceExposure(ResourceScope.None)]
-            static extern int WSAEnumNameSpaceProviders(ref int lpdwBufferLength, IntPtr lpnspBuffer);
+            static extern int WSAEnumNameSpaceProviders(
+                ref int lpdwBufferLength,
+                IntPtr lpnspBuffer
+            );
 
             // PNRP namespace identifiers
-            static Guid SvcIdCloud = new Guid(0xc2239ce6, 0x00c0, 0x4fbf, 0xba, 0xd6, 0x18, 0x13, 0x93, 0x85, 0xa4, 0x9a);
-            static Guid SvcIdNameV1 = new Guid(0xc2239ce5, 0x00c0, 0x4fbf, 0xba, 0xd6, 0x18, 0x13, 0x93, 0x85, 0xa4, 0x9a);
-            static Guid SvcIdName = new Guid(0xc2239ce7, 0x00c0, 0x4fbf, 0xba, 0xd6, 0x18, 0x13, 0x93, 0x85, 0xa4, 0x9a);
-            static Guid NsProviderName = new Guid(0x03fe89cd, 0x766d, 0x4976, 0xb9, 0xc1, 0xbb, 0x9b, 0xc4, 0x2c, 0x7b, 0x4d);
-            static Guid NsProviderCloud = new Guid(0x03fe89ce, 0x766d, 0x4976, 0xb9, 0xc1, 0xbb, 0x9b, 0xc4, 0x2c, 0x7b, 0x4d);
+            static Guid SvcIdCloud = new Guid(
+                0xc2239ce6,
+                0x00c0,
+                0x4fbf,
+                0xba,
+                0xd6,
+                0x18,
+                0x13,
+                0x93,
+                0x85,
+                0xa4,
+                0x9a
+            );
+            static Guid SvcIdNameV1 = new Guid(
+                0xc2239ce5,
+                0x00c0,
+                0x4fbf,
+                0xba,
+                0xd6,
+                0x18,
+                0x13,
+                0x93,
+                0x85,
+                0xa4,
+                0x9a
+            );
+            static Guid SvcIdName = new Guid(
+                0xc2239ce7,
+                0x00c0,
+                0x4fbf,
+                0xba,
+                0xd6,
+                0x18,
+                0x13,
+                0x93,
+                0x85,
+                0xa4,
+                0x9a
+            );
+            static Guid NsProviderName = new Guid(
+                0x03fe89cd,
+                0x766d,
+                0x4976,
+                0xb9,
+                0xc1,
+                0xbb,
+                0x9b,
+                0xc4,
+                0x2c,
+                0x7b,
+                0x4d
+            );
+            static Guid NsProviderCloud = new Guid(
+                0x03fe89ce,
+                0x766d,
+                0x4976,
+                0xb9,
+                0xc1,
+                0xbb,
+                0x9b,
+                0xc4,
+                0x2c,
+                0x7b,
+                0x4d
+            );
 
             const int MaxAddresses = 10;
             const int MaxAddressesV1 = 4;
@@ -949,12 +1237,12 @@ namespace System.ServiceModel.Channels
             [Serializable]
             internal enum PnrpCloudState
             {
-                Virtual = 0,        //  Not initialized
-                Synchronizing = 1,  //  The cache is initializing
-                Active = 2,         //  Cloud is active
-                Dead = 3,            //  Initialized but lost network
-                Disabled = 4,       //disabled in the registry
-                NoNet = 5,          //active but lost network
+                Virtual = 0, //  Not initialized
+                Synchronizing = 1, //  The cache is initializing
+                Active = 2, //  Cloud is active
+                Dead = 3, //  Initialized but lost network
+                Disabled = 4, //disabled in the registry
+                NoNet = 5, //active but lost network
                 Alone = 6,
             }
 
@@ -963,30 +1251,36 @@ namespace System.ServiceModel.Channels
             {
                 None = 0,
                 Binary,
-                String
+                String,
             }
 
             // internal because it is exposed by PeerNameResolver
             [Serializable]
             internal enum PnrpResolveCriteria
             {
-                Default = 0,                    // Default = PNRP_RESOLVE_CRITERIA_NON_CURRENT_PROCESS_PEER_NAME
-                Remote = 1,                     // match first 128 bits (remote node)
-                NearestRemote = 2,              // match first 128 bits, and close to top 64 bits
+                Default = 0, // Default = PNRP_RESOLVE_CRITERIA_NON_CURRENT_PROCESS_PEER_NAME
+                Remote = 1, // match first 128 bits (remote node)
+                NearestRemote = 2, // match first 128 bits, and close to top 64 bits
+
                 // of the second 128 bits (remote node)
-                NonCurrentProcess = 3,          //  match first 128 bits (not in the current process) 
-                NearestNonCurrentProcess = 4,   // match first 128 bits, and close to top 64 bits
-                // of the second 128 bits (not in the current process)   
-                Any = 5,                        // match first 128 bits (any node)
-                Nearest = 6                     // match first 128 bits, and close to top 64 bits
-                // of the second 128 bits (any node)   
+                NonCurrentProcess = 3, //  match first 128 bits (not in the current process)
+                NearestNonCurrentProcess = 4, // match first 128 bits, and close to top 64 bits
+
+                // of the second 128 bits (not in the current process)
+                Any = 5, // match first 128 bits (any node)
+                Nearest =
+                    6 // match first 128 bits, and close to top 64 bits
+                ,
+                // of the second 128 bits (any node)
             }
 
             [Serializable]
             internal enum PnrpRegisteredIdState
             {
-                Ok = 1,     //  Id is active in cloud
-                Problem = 2 //  Id is no longer registered in cloud
+                Ok = 1, //  Id is active in cloud
+                Problem =
+                    2 //  Id is no longer registered in cloud
+                ,
             }
 
             internal enum PnrpScope
@@ -1025,7 +1319,7 @@ namespace System.ServiceModel.Channels
                 WSAEFAULT = 10014,
                 WSAENOMORE = 10102,
                 WSA_E_NO_MORE = 10110,
-                WSANO_DATA = 11004
+                WSANO_DATA = 11004,
             }
 
             // specifies the operation of WSASetService
@@ -1033,7 +1327,7 @@ namespace System.ServiceModel.Channels
             {
                 Register = 0,
                 Deregister,
-                Delete
+                Delete,
             }
 
             internal struct BlobSafe
@@ -1047,7 +1341,6 @@ namespace System.ServiceModel.Channels
                 public int cbSize;
                 public IntPtr pBlobData;
             }
-
 
             // PnrpResolver does not currently support any cloud except Global. If this needs to be changed, we will
             // need to be able to enumerate clouds.
@@ -1094,14 +1387,19 @@ namespace System.ServiceModel.Channels
                     foreach (CsAddrInfo info in addresses)
                     {
                         addr = new CsAddrInfoSafe();
-                        addr.LocalAddr = SOCKET_ADDRESS_SAFE.SocketAddressFromIPEndPoint(info.LocalAddr);
-                        addr.RemoteAddr = SOCKET_ADDRESS_SAFE.SocketAddressFromIPEndPoint(info.RemoteAddr);
+                        addr.LocalAddr = SOCKET_ADDRESS_SAFE.SocketAddressFromIPEndPoint(
+                            info.LocalAddr
+                        );
+                        addr.RemoteAddr = SOCKET_ADDRESS_SAFE.SocketAddressFromIPEndPoint(
+                            info.RemoteAddr
+                        );
                         addr.iProtocol = info.iProtocol;
                         addr.iSocketType = info.iSocketType;
                         result[i++] = addr;
                     }
                     return result;
                 }
+
                 public static void StructureToPtr(CsAddrInfoSafe input, IntPtr target)
                 {
                     CsAddrInfoNative native;
@@ -1114,15 +1412,18 @@ namespace System.ServiceModel.Channels
 
                     Marshal.StructureToPtr(native, target, false);
                 }
+
                 ~CsAddrInfoSafe()
                 {
                     Dispose(false);
                 }
+
                 public virtual void Dispose()
                 {
                     Dispose(true);
                     GC.SuppressFinalize(this);
                 }
+
                 void Dispose(bool disposing)
                 {
                     if (disposed)
@@ -1135,7 +1436,6 @@ namespace System.ServiceModel.Channels
                     }
                     disposed = true;
                 }
-
             }
 
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -1152,30 +1452,29 @@ namespace System.ServiceModel.Channels
             internal struct PnrpCloudId
             {
                 public int AddressFamily; // should be AF_INET6
-                public PnrpScope Scope;     // Global, site, or link
-                public uint ScopeId;       // specifies interface
-
+                public PnrpScope Scope; // Global, site, or link
+                public uint ScopeId; // specifies interface
             }
 
             internal struct PnrpCloudInfo
             {
-                public int dwSize;            // size of this struct
-                public PnrpCloudId Cloud;       // network cloud information
+                public int dwSize; // size of this struct
+                public PnrpCloudId Cloud; // network cloud information
                 public PnrpCloudState dwCloudState; // state of cloud
                 public PnrpCloudFlags Flags;
             }
 
-            //native equivalent for easy marshalling. 
+            //native equivalent for easy marshalling.
             //should be exactly like PnrpInfo except CriticalHandles
             internal struct PnrpInfoNative
             {
-                public int dwSize;            // size of this struct
-                public string lpwszIdentity;  // identity name string
-                public int nMaxResolve;       // number of desired resolutions
-                public int dwTimeout;         // time in seconds to wait for responses
-                public int dwLifetime;        // time in seconds for validity
+                public int dwSize; // size of this struct
+                public string lpwszIdentity; // identity name string
+                public int nMaxResolve; // number of desired resolutions
+                public int dwTimeout; // time in seconds to wait for responses
+                public int dwLifetime; // time in seconds for validity
                 public PnrpResolveCriteria enResolveCriteria; // criteria for resolve matches
-                public int dwFlags;           // set of flags
+                public int dwFlags; // set of flags
                 public SOCKET_ADDRESS_NATIVE saHint; // IPv6 addr use for location
                 public PnrpRegisteredIdState enNameState; // state of registered name
             }
@@ -1183,15 +1482,16 @@ namespace System.ServiceModel.Channels
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
             internal struct PnrpInfo
             {
-                public int dwSize;            // size of this struct
-                public string lpwszIdentity;  // identity name string
-                public int nMaxResolve;       // number of desired resolutions
-                public int dwTimeout;         // time in seconds to wait for responses
-                public int dwLifetime;        // time in seconds for validity
+                public int dwSize; // size of this struct
+                public string lpwszIdentity; // identity name string
+                public int nMaxResolve; // number of desired resolutions
+                public int dwTimeout; // time in seconds to wait for responses
+                public int dwLifetime; // time in seconds for validity
                 public PnrpResolveCriteria enResolveCriteria; // criteria for resolve matches
-                public int dwFlags;           // set of flags
+                public int dwFlags; // set of flags
                 public SOCKET_ADDRESS_SAFE saHint; // IPv6 addr use for location
                 public PnrpRegisteredIdState enNameState; // state of registered name
+
                 public static void ToPnrpInfoNative(PnrpInfo source, ref PnrpInfoNative target)
                 {
                     target.dwSize = source.dwSize;
@@ -1221,8 +1521,10 @@ namespace System.ServiceModel.Channels
             {
                 public short sin_family;
                 public ushort sin_port;
+
                 [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
                 public byte[] sin_addr;
+
                 [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
                 public byte[] sin_zero;
             }
@@ -1234,6 +1536,7 @@ namespace System.ServiceModel.Channels
                 public short sin6_family;
                 public ushort sin6_port;
                 public uint sin6_flowinfo;
+
                 [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
                 public byte[] sin6_addr;
                 public uint sin6_scope_id;
@@ -1244,6 +1547,7 @@ namespace System.ServiceModel.Channels
                 public CriticalAllocHandle lpSockAddr;
                 public int iSockaddrLength;
                 bool disposed;
+
                 public static SOCKET_ADDRESS_SAFE SocketAddressFromIPEndPoint(IPEndPoint endpoint)
                 {
                     SOCKET_ADDRESS_SAFE socketAddress = new SOCKET_ADDRESS_SAFE();
@@ -1253,7 +1557,9 @@ namespace System.ServiceModel.Channels
                     if (endpoint.AddressFamily == AddressFamily.InterNetwork)
                     {
                         socketAddress.iSockaddrLength = Marshal.SizeOf(typeof(sockaddr_in));
-                        socketAddress.lpSockAddr = CriticalAllocHandle.FromSize(socketAddress.iSockaddrLength);
+                        socketAddress.lpSockAddr = CriticalAllocHandle.FromSize(
+                            socketAddress.iSockaddrLength
+                        );
                         sockaddr_in sa = new sockaddr_in();
                         sa.sin_family = (short)AddressFamily.InterNetwork;
                         sa.sin_port = (ushort)endpoint.Port;
@@ -1263,7 +1569,9 @@ namespace System.ServiceModel.Channels
                     else if (endpoint.AddressFamily == AddressFamily.InterNetworkV6)
                     {
                         socketAddress.iSockaddrLength = Marshal.SizeOf(typeof(sockaddr_in6));
-                        socketAddress.lpSockAddr = CriticalAllocHandle.FromSize(socketAddress.iSockaddrLength);
+                        socketAddress.lpSockAddr = CriticalAllocHandle.FromSize(
+                            socketAddress.iSockaddrLength
+                        );
                         sockaddr_in6 sa = new sockaddr_in6();
                         sa.sin6_family = (short)AddressFamily.InterNetworkV6;
                         sa.sin6_port = (ushort)endpoint.Port;
@@ -1294,7 +1602,6 @@ namespace System.ServiceModel.Channels
                     }
                     disposed = true;
                 }
-
             }
 
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -1310,8 +1617,10 @@ namespace System.ServiceModel.Channels
             {
                 public Int16 wVersion;
                 public Int16 wHighVersion;
+
                 [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 257)]
                 public string szDescription;
+
                 [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 129)]
                 public string szSystemStatus;
 
@@ -1328,6 +1637,7 @@ namespace System.ServiceModel.Channels
                 public int dwNameSpace;
                 public int fActive;
                 public int dwVersion;
+
                 // don't bother marshalling this as a string since we don't need to look at it
                 public IntPtr lpszIdentifier;
             }
@@ -1343,16 +1653,20 @@ namespace System.ServiceModel.Channels
                 public string Context;
                 public CsAddrInfo[] CsAddrInfos;
                 public object Blob;
-                static public WsaQuerySetSafe ToWsaQuerySetSafe(WsaQuerySet input)
-                {
 
+                public static WsaQuerySetSafe ToWsaQuerySetSafe(WsaQuerySet input)
+                {
                     WsaQuerySetSafe result = new WsaQuerySetSafe();
                     if (input == null)
                         return result;
 
                     result.dwSize = Marshal.SizeOf(typeof(WsaQuerySetNative));
-                    result.lpszServiceInstanceName = CriticalAllocHandleString.FromString(input.ServiceInstanceName);
-                    result.lpServiceClassId = CriticalAllocHandleGuid.FromGuid(input.ServiceClassId);
+                    result.lpszServiceInstanceName = CriticalAllocHandleString.FromString(
+                        input.ServiceInstanceName
+                    );
+                    result.lpServiceClassId = CriticalAllocHandleGuid.FromGuid(
+                        input.ServiceClassId
+                    );
                     result.lpszComment = CriticalAllocHandleString.FromString(input.Comment);
                     result.dwNameSpace = input.NameSpace;
                     result.lpNSProviderId = CriticalAllocHandleGuid.FromGuid(input.NSProviderId);
@@ -1383,12 +1697,17 @@ namespace System.ServiceModel.Channels
                         if (input.GetType() == typeof(PnrpInfo))
                         {
                             int blobSize = Marshal.SizeOf(typeof(PnrpInfoNative));
-                            blob.pBlobData = CriticalAllocHandle.FromSize(blobSize + Marshal.SizeOf(typeof(BlobNative)));
+                            blob.pBlobData = CriticalAllocHandle.FromSize(
+                                blobSize + Marshal.SizeOf(typeof(BlobNative))
+                            );
 
                             //write the BlobSafe fields first,
                             BlobNative nativeBlob;
                             nativeBlob.cbSize = blobSize;
-                            nativeBlob.pBlobData = (IntPtr)(((IntPtr)blob.pBlobData).ToInt64() + Marshal.SizeOf(typeof(BlobNative)));
+                            nativeBlob.pBlobData = (IntPtr)(
+                                ((IntPtr)blob.pBlobData).ToInt64()
+                                + Marshal.SizeOf(typeof(BlobNative))
+                            );
                             Marshal.StructureToPtr(nativeBlob, (IntPtr)blob.pBlobData, false);
                             PnrpInfo pnrpInfo = (PnrpInfo)input;
                             pnrpInfo.dwSize = blobSize;
@@ -1400,12 +1719,17 @@ namespace System.ServiceModel.Channels
                         else if (input.GetType() == typeof(PnrpCloudInfo))
                         {
                             int blobSize = Marshal.SizeOf(input.GetType());
-                            blob.pBlobData = CriticalAllocHandle.FromSize(blobSize + Marshal.SizeOf(typeof(BlobNative)));
+                            blob.pBlobData = CriticalAllocHandle.FromSize(
+                                blobSize + Marshal.SizeOf(typeof(BlobNative))
+                            );
 
                             //write the BlobSafe fields first,
                             BlobNative nativeBlob;
                             nativeBlob.cbSize = blobSize;
-                            nativeBlob.pBlobData = (IntPtr)(((IntPtr)blob.pBlobData).ToInt64() + Marshal.SizeOf(typeof(BlobNative)));
+                            nativeBlob.pBlobData = (IntPtr)(
+                                ((IntPtr)blob.pBlobData).ToInt64()
+                                + Marshal.SizeOf(typeof(BlobNative))
+                            );
                             Marshal.StructureToPtr(nativeBlob, (IntPtr)blob.pBlobData, false);
                             PnrpCloudInfo cloudInfo = (PnrpCloudInfo)input;
                             cloudInfo.dwSize = Marshal.SizeOf(typeof(PnrpCloudInfo));
@@ -1418,7 +1742,6 @@ namespace System.ServiceModel.Channels
                         }
                     }
                     return blob.pBlobData;
-
                 }
             }
 
@@ -1443,13 +1766,17 @@ namespace System.ServiceModel.Channels
                 {
                     int structSize = Marshal.SizeOf(typeof(WsaQuerySetNative));
                     if (safeQuerySet.addressList != null)
-                        structSize += safeQuerySet.addressList.Length * Marshal.SizeOf(typeof(CsAddrInfoNative));
+                        structSize +=
+                            safeQuerySet.addressList.Length
+                            * Marshal.SizeOf(typeof(CsAddrInfoNative));
                     return structSize;
                 }
 
                 public static CriticalAllocHandle FromWsaQuerySetSafe(WsaQuerySetSafe safeQuerySet)
                 {
-                    CriticalAllocHandle result = CriticalAllocHandle.FromSize(CalculateSize(safeQuerySet));
+                    CriticalAllocHandle result = CriticalAllocHandle.FromSize(
+                        CalculateSize(safeQuerySet)
+                    );
                     WsaQuerySetSafe.StructureToPtr(safeQuerySet, (IntPtr)result);
                     return result;
                 }
@@ -1514,7 +1841,7 @@ namespace System.ServiceModel.Channels
                     disposed = true;
                 }
 
-                static public void StructureToPtr(WsaQuerySetSafe input, IntPtr target)
+                public static void StructureToPtr(WsaQuerySetSafe input, IntPtr target)
                 {
                     WsaQuerySetNative native = new WsaQuerySetNative();
                     native.dwSize = input.dwSize;
@@ -1532,15 +1859,18 @@ namespace System.ServiceModel.Channels
                     native.dwOutputFlags = 0; // 0
                     native.lpBlob = input.lpBlob;
 
-                    Int64 sockAddressStart = target.ToInt64() + Marshal.SizeOf(typeof(WsaQuerySetNative));
+                    Int64 sockAddressStart =
+                        target.ToInt64() + Marshal.SizeOf(typeof(WsaQuerySetNative));
                     native.lpcsaBuffer = (IntPtr)sockAddressStart;
 
                     Marshal.StructureToPtr(native, target, false);
                     MarshalSafeAddressesToNative(input, (IntPtr)sockAddressStart);
-
                 }
 
-                public static void MarshalSafeAddressesToNative(WsaQuerySetSafe safeQuery, IntPtr target)
+                public static void MarshalSafeAddressesToNative(
+                    WsaQuerySetSafe safeQuery,
+                    IntPtr target
+                )
                 {
                     // marshal the addresses
                     if (safeQuery.addressList != null && safeQuery.addressList.Length > 0)
@@ -1555,7 +1885,6 @@ namespace System.ServiceModel.Channels
                         }
                     }
                 }
-
             }
 
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
@@ -1600,10 +1929,15 @@ namespace System.ServiceModel.Channels
                         if (refCount == 0)
                         {
                             WsaData WinsockVersion = new WsaData();
-                            int ret = WSAStartup(UnsafePnrpNativeMethods.RequiredWinsockVersion, ref WinsockVersion);
+                            int ret = WSAStartup(
+                                UnsafePnrpNativeMethods.RequiredWinsockVersion,
+                                ref WinsockVersion
+                            );
                             if (ret != 0)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SocketException(ret));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new SocketException(ret)
+                                );
                             }
                         }
                         refCount++;
@@ -1637,7 +1971,11 @@ namespace System.ServiceModel.Channels
                     this.Dispose(false);
                 }
 
-                [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "ServiceController has demands for ServiceControllerPermission.")]
+                [SuppressMessage(
+                    FxCop.Category.Security,
+                    FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+                    Justification = "ServiceController has demands for ServiceControllerPermission."
+                )]
                 public bool IsPnrpServiceRunning(TimeSpan waitForService)
                 {
                     TimeoutHelper timeoutHelper = new TimeoutHelper(waitForService);
@@ -1649,17 +1987,24 @@ namespace System.ServiceModel.Channels
                             {
                                 if (sc.Status == ServiceControllerStatus.StopPending)
                                 {
-                                    sc.WaitForStatus(ServiceControllerStatus.Stopped, timeoutHelper.RemainingTime());
+                                    sc.WaitForStatus(
+                                        ServiceControllerStatus.Stopped,
+                                        timeoutHelper.RemainingTime()
+                                    );
                                 }
                                 if (sc.Status == ServiceControllerStatus.Stopped)
                                 {
                                     sc.Start();
                                 }
-                                sc.WaitForStatus(ServiceControllerStatus.Running, timeoutHelper.RemainingTime());
+                                sc.WaitForStatus(
+                                    ServiceControllerStatus.Running,
+                                    timeoutHelper.RemainingTime()
+                                );
                             }
                             catch (Exception e)
                             {
-                                if (Fx.IsFatal(e)) throw;
+                                if (Fx.IsFatal(e))
+                                    throw;
                                 if (e is InvalidOperationException || e is TimeoutException)
                                     return false;
                                 else
@@ -1701,7 +2046,6 @@ namespace System.ServiceModel.Channels
 
                     // if the call didn't fail or returned any other error, PNRP clearly isn't working properly
                     return false;
-
                 }
 
                 // determine if any version of PNRP is installed and available
@@ -1728,10 +2072,12 @@ namespace System.ServiceModel.Channels
                     // loop through the providers
                     for (int i = 0; i < nProviders; i++)
                     {
-                        IntPtr nsInfoPtr = (IntPtr)(((IntPtr)dataPtr).ToInt64() + i *
-                            Marshal.SizeOf(typeof(WsaNamespaceInfo)));
-                        WsaNamespaceInfo nsInfo = (WsaNamespaceInfo)Marshal.PtrToStructure(nsInfoPtr,
-                            typeof(WsaNamespaceInfo));
+                        IntPtr nsInfoPtr = (IntPtr)(
+                            ((IntPtr)dataPtr).ToInt64()
+                            + i * Marshal.SizeOf(typeof(WsaNamespaceInfo))
+                        );
+                        WsaNamespaceInfo nsInfo = (WsaNamespaceInfo)
+                            Marshal.PtrToStructure(nsInfoPtr, typeof(WsaNamespaceInfo));
 
                         // if this is the PNRP name namespace provider and it is active, it is installed
                         if (nsInfo.NSProviderId == NsProviderName && nsInfo.fActive != 0)
@@ -1748,7 +2094,8 @@ namespace System.ServiceModel.Channels
                     int error = 0;
                     using (native)
                     {
-                        CriticalAllocHandle handle = CriticalAllocHandleWsaQuerySetSafe.FromWsaQuerySetSafe(native);
+                        CriticalAllocHandle handle =
+                            CriticalAllocHandleWsaQuerySetSafe.FromWsaQuerySetSafe(native);
                         using (handle)
                         {
                             int retval = WSASetService(handle, op, flags);
@@ -1760,12 +2107,11 @@ namespace System.ServiceModel.Channels
                     }
                     return error;
                 }
-
             }
 
             public class PeerCloudEnumerator : DiscoveryBase
             {
-                static public CloudInfo[] GetClouds()
+                public static CloudInfo[] GetClouds()
                 {
                     int retval = 0;
                     ArrayList clouds = new ArrayList();
@@ -1785,8 +2131,13 @@ namespace System.ServiceModel.Channels
                     WsaQuerySetSafe native = WsaQuerySet.ToWsaQuerySetSafe(querySet);
                     using (native)
                     {
-                        CriticalAllocHandle handle = CriticalAllocHandleWsaQuerySetSafe.FromWsaQuerySetSafe(native);
-                        retval = WSALookupServiceBegin(handle, WsaNspControlFlags.ReturnAll, out hLookup);
+                        CriticalAllocHandle handle =
+                            CriticalAllocHandleWsaQuerySetSafe.FromWsaQuerySetSafe(native);
+                        retval = WSALookupServiceBegin(
+                            handle,
+                            WsaNspControlFlags.ReturnAll,
+                            out hLookup
+                        );
                     }
                     if (retval != 0)
                     {
@@ -1804,11 +2155,19 @@ namespace System.ServiceModel.Channels
                     {
                         while (true)
                         {
-                            retval = WSALookupServiceNext(hLookup, 0, ref size, (IntPtr)nativeQuerySetPtr);
+                            retval = WSALookupServiceNext(
+                                hLookup,
+                                0,
+                                ref size,
+                                (IntPtr)nativeQuerySetPtr
+                            );
                             if (retval != 0)
                             {
                                 int error = WSAGetLastError();
-                                if (error == (int)WsaError.WSAENOMORE || error == (int)WsaError.WSA_E_NO_MORE)
+                                if (
+                                    error == (int)WsaError.WSAENOMORE
+                                    || error == (int)WsaError.WSA_E_NO_MORE
+                                )
                                 {
                                     // no more
                                     break;
@@ -1827,17 +2186,24 @@ namespace System.ServiceModel.Channels
                                 }
 
                                 // unexpected error
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SocketException(error));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new SocketException(error)
+                                );
                             }
                             else
                             {
                                 if (nativeQuerySetPtr != IntPtr.Zero)
                                 {
                                     // marshal the results into something usable
-                                    WsaQuerySet resultQuerySet = PeerNameResolver.MarshalWsaQuerySetNativeToWsaQuerySet(nativeQuerySetPtr, 0);
+                                    WsaQuerySet resultQuerySet =
+                                        PeerNameResolver.MarshalWsaQuerySetNativeToWsaQuerySet(
+                                            nativeQuerySetPtr,
+                                            0
+                                        );
                                     // extract out the friendly cloud attributes
                                     CloudInfo resultCloudInfo = new CloudInfo();
-                                    PnrpCloudInfo prnpCloudInfo = (PnrpCloudInfo)resultQuerySet.Blob;
+                                    PnrpCloudInfo prnpCloudInfo = (PnrpCloudInfo)
+                                        resultQuerySet.Blob;
                                     resultCloudInfo.Name = resultQuerySet.ServiceInstanceName;
                                     resultCloudInfo.Scope = prnpCloudInfo.Cloud.Scope;
                                     resultCloudInfo.ScopeId = prnpCloudInfo.Cloud.ScopeId;
@@ -1854,7 +2220,6 @@ namespace System.ServiceModel.Channels
                     // package up the results into a nice array
                     return (CloudInfo[])clouds.ToArray(typeof(CloudInfo));
                 }
-
             }
 
             internal class PeerNameRegistrar : DiscoveryBase
@@ -1862,9 +2227,7 @@ namespace System.ServiceModel.Channels
                 const int RegistrationLifetime = 60 * 60; // 1 hour
 
                 public PeerNameRegistrar()
-                    : base()
-                {
-                }
+                    : base() { }
 
                 public void Register(PnrpRegistration registration, TimeSpan timeout)
                 {
@@ -1889,7 +2252,10 @@ namespace System.ServiceModel.Channels
                     // copy over the addresses
                     if (registration.Addresses != null)
                     {
-                        Fx.Assert(registration.Addresses.Length <= 4, "Pnrp supports only 4 addresses");
+                        Fx.Assert(
+                            registration.Addresses.Length <= 4,
+                            "Pnrp supports only 4 addresses"
+                        );
                         registerQuery.CsAddrInfos = new CsAddrInfo[registration.Addresses.Length];
                         for (int i = 0; i < registration.Addresses.Length; i++)
                         {
@@ -1950,8 +2316,14 @@ namespace System.ServiceModel.Channels
                     {
                         if (PnrpPeerResolver.MaxAddressEntriesV1 < registerQuery.CsAddrInfos.Length)
                         {
-                            List<CsAddrInfo> infos = new List<CsAddrInfo>(registerQuery.CsAddrInfos);
-                            infos.RemoveRange(PnrpPeerResolver.MaxAddressEntriesV1, registerQuery.CsAddrInfos.Length - PnrpPeerResolver.MaxAddressEntriesV1);
+                            List<CsAddrInfo> infos = new List<CsAddrInfo>(
+                                registerQuery.CsAddrInfos
+                            );
+                            infos.RemoveRange(
+                                PnrpPeerResolver.MaxAddressEntriesV1,
+                                registerQuery.CsAddrInfos.Length
+                                    - PnrpPeerResolver.MaxAddressEntriesV1
+                            );
                             registerQuery.CsAddrInfos = infos.ToArray();
                             InvokeService(registerQuery, WsaSetServiceOp.Register, 0);
                         }
@@ -1970,7 +2342,8 @@ namespace System.ServiceModel.Channels
                     WsaQuerySetSafe native = WsaQuerySet.ToWsaQuerySetSafe(registerQuery);
                     using (native)
                     {
-                        CriticalAllocHandle handle = CriticalAllocHandleWsaQuerySetSafe.FromWsaQuerySetSafe(native);
+                        CriticalAllocHandle handle =
+                            CriticalAllocHandleWsaQuerySetSafe.FromWsaQuerySetSafe(native);
                         int retval = WSASetService(handle, op, flags);
                         if (retval != 0)
                         {
@@ -1989,14 +2362,32 @@ namespace System.ServiceModel.Channels
                 Exception lastException;
                 TimeoutHelper timeoutHelper;
 
-                public PeerNameResolver(string peerName, int numberOfResultsRequested,
-                    PnrpResolveCriteria resolveCriteria, TimeSpan timeout, List<PnrpRegistration> results)
-                    : this(peerName, numberOfResultsRequested, resolveCriteria, 0, GlobalCloudName, timeout, results)
-                {
-                }
+                public PeerNameResolver(
+                    string peerName,
+                    int numberOfResultsRequested,
+                    PnrpResolveCriteria resolveCriteria,
+                    TimeSpan timeout,
+                    List<PnrpRegistration> results
+                )
+                    : this(
+                        peerName,
+                        numberOfResultsRequested,
+                        resolveCriteria,
+                        0,
+                        GlobalCloudName,
+                        timeout,
+                        results
+                    ) { }
 
-                public PeerNameResolver(string peerName, int numberOfResultsRequested,
-                    PnrpResolveCriteria resolveCriteria, uint scopeId, string cloudName, TimeSpan timeout, List<PnrpRegistration> results)
+                public PeerNameResolver(
+                    string peerName,
+                    int numberOfResultsRequested,
+                    PnrpResolveCriteria resolveCriteria,
+                    uint scopeId,
+                    string cloudName,
+                    TimeSpan timeout,
+                    List<PnrpRegistration> results
+                )
                     : base(null, null)
                 {
                     // pnrp has a hard-coded limit on the timeout value that can be passed to it
@@ -2041,8 +2432,13 @@ namespace System.ServiceModel.Channels
                     WsaQuerySetSafe native = WsaQuerySet.ToWsaQuerySetSafe(resolveQuery);
                     using (native)
                     {
-                        CriticalAllocHandle handle = CriticalAllocHandleWsaQuerySetSafe.FromWsaQuerySetSafe(native);
-                        retval = WSALookupServiceBegin(handle, WsaNspControlFlags.ReturnAll, out hLookup);
+                        CriticalAllocHandle handle =
+                            CriticalAllocHandleWsaQuerySetSafe.FromWsaQuerySetSafe(native);
+                        retval = WSALookupServiceBegin(
+                            handle,
+                            WsaNspControlFlags.ReturnAll,
+                            out hLookup
+                        );
                     }
                     if (retval != 0)
                     {
@@ -2066,11 +2462,19 @@ namespace System.ServiceModel.Channels
                                 {
                                     break;
                                 }
-                                retval = WSALookupServiceNext(hLookup, 0, ref size, (IntPtr)nativeQuerySetPtr);
+                                retval = WSALookupServiceNext(
+                                    hLookup,
+                                    0,
+                                    ref size,
+                                    (IntPtr)nativeQuerySetPtr
+                                );
                                 if (retval != 0)
                                 {
                                     int error = WSAGetLastError();
-                                    if (error == (int)WsaError.WSAENOMORE || error == (int)WsaError.WSA_E_NO_MORE)
+                                    if (
+                                        error == (int)WsaError.WSAENOMORE
+                                        || error == (int)WsaError.WSA_E_NO_MORE
+                                    )
                                     {
                                         // no more
                                         break;
@@ -2090,16 +2494,23 @@ namespace System.ServiceModel.Channels
                                     if (nativeQuerySetPtr != IntPtr.Zero)
                                     {
                                         // marshal the results into something useful
-                                        querySet = MarshalWsaQuerySetNativeToWsaQuerySet(nativeQuerySetPtr, scopeId);
+                                        querySet = MarshalWsaQuerySetNativeToWsaQuerySet(
+                                            nativeQuerySetPtr,
+                                            scopeId
+                                        );
 
                                         // allocate the friendly PnrpRegistration and fill it in
                                         PnrpRegistration pnrpRegistration = new PnrpRegistration();
                                         pnrpRegistration.CloudName = querySet.Context;
                                         pnrpRegistration.Comment = querySet.Comment;
                                         pnrpRegistration.PeerName = querySet.ServiceInstanceName;
-                                        pnrpRegistration.Addresses = new IPEndPoint[querySet.CsAddrInfos.Length];
+                                        pnrpRegistration.Addresses = new IPEndPoint[
+                                            querySet.CsAddrInfos.Length
+                                        ];
                                         for (int i = 0; i < querySet.CsAddrInfos.Length; i++)
-                                            pnrpRegistration.Addresses[i] = querySet.CsAddrInfos[i].LocalAddr;
+                                            pnrpRegistration.Addresses[i] = querySet
+                                                .CsAddrInfos[i]
+                                                .LocalAddr;
 
                                         // add it to the list to return later.
                                         // all cloud enumeratos in the same scope will reference the same list and hence the lock.
@@ -2114,15 +2525,27 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
-                            PnrpResolveExceptionTraceRecord record = new PnrpResolveExceptionTraceRecord(resolveQuery.ServiceInstanceName, resolveQuery.Context, e);
+                            PnrpResolveExceptionTraceRecord record =
+                                new PnrpResolveExceptionTraceRecord(
+                                    resolveQuery.ServiceInstanceName,
+                                    resolveQuery.Context,
+                                    e
+                                );
                             if (DiagnosticUtility.ShouldTraceError)
                             {
-                                TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.PnrpResolveException,
-                                    SR.GetString(SR.TraceCodePnrpResolveException), record, this, null);
+                                TraceUtility.TraceEvent(
+                                    TraceEventType.Error,
+                                    TraceCode.PnrpResolveException,
+                                    SR.GetString(SR.TraceCodePnrpResolveException),
+                                    record,
+                                    this,
+                                    null
+                                );
                             }
                         }
                         lastException = e;
@@ -2133,12 +2556,17 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                static internal WsaQuerySet MarshalWsaQuerySetNativeToWsaQuerySet(IntPtr pNativeData)
+                internal static WsaQuerySet MarshalWsaQuerySetNativeToWsaQuerySet(
+                    IntPtr pNativeData
+                )
                 {
                     return MarshalWsaQuerySetNativeToWsaQuerySet(pNativeData, 0);
                 }
 
-                static internal WsaQuerySet MarshalWsaQuerySetNativeToWsaQuerySet(IntPtr pNativeData, uint scopeId)
+                internal static WsaQuerySet MarshalWsaQuerySetNativeToWsaQuerySet(
+                    IntPtr pNativeData,
+                    uint scopeId
+                )
                 {
                     if (pNativeData == IntPtr.Zero)
                         return null;
@@ -2146,38 +2574,48 @@ namespace System.ServiceModel.Channels
                     WsaQuerySet querySet = new WsaQuerySet();
                     // build a native structure from the raw memory
                     WsaQuerySetNative nativeQuerySet;
-                    nativeQuerySet = (WsaQuerySetNative)Marshal.PtrToStructure(pNativeData,
-                        typeof(WsaQuerySetNative));
+                    nativeQuerySet = (WsaQuerySetNative)
+                        Marshal.PtrToStructure(pNativeData, typeof(WsaQuerySetNative));
                     CsAddrInfoNative nativeCsAddrInfo;
                     int sizeOfCsAddrInfo = Marshal.SizeOf(typeof(CsAddrInfoNative));
 
                     // copy over the simple fields
                     querySet.Context = Marshal.PtrToStringUni(nativeQuerySet.lpszContext);
                     querySet.NameSpace = nativeQuerySet.dwNameSpace;
-                    querySet.ServiceInstanceName = Marshal.PtrToStringUni(nativeQuerySet.lpszServiceInstanceName);
+                    querySet.ServiceInstanceName = Marshal.PtrToStringUni(
+                        nativeQuerySet.lpszServiceInstanceName
+                    );
                     querySet.Comment = Marshal.PtrToStringUni(nativeQuerySet.lpszComment);
 
                     // copy the addresses
                     querySet.CsAddrInfos = new CsAddrInfo[nativeQuerySet.dwNumberOfCsAddrs];
                     for (int i = 0; i < nativeQuerySet.dwNumberOfCsAddrs; i++)
                     {
-                        IntPtr addressPtr = (IntPtr)(nativeQuerySet.lpcsaBuffer.ToInt64() + (i * sizeOfCsAddrInfo));
-                        nativeCsAddrInfo = (CsAddrInfoNative)Marshal.PtrToStructure(addressPtr,
-                            typeof(CsAddrInfoNative));
+                        IntPtr addressPtr = (IntPtr)(
+                            nativeQuerySet.lpcsaBuffer.ToInt64() + (i * sizeOfCsAddrInfo)
+                        );
+                        nativeCsAddrInfo = (CsAddrInfoNative)
+                            Marshal.PtrToStructure(addressPtr, typeof(CsAddrInfoNative));
                         querySet.CsAddrInfos[i].iProtocol = nativeCsAddrInfo.iProtocol;
                         querySet.CsAddrInfos[i].iSocketType = nativeCsAddrInfo.iSocketType;
-                        querySet.CsAddrInfos[i].LocalAddr = IPEndPointFromSocketAddress(nativeCsAddrInfo.LocalAddr, scopeId);
-                        querySet.CsAddrInfos[i].RemoteAddr = IPEndPointFromSocketAddress(nativeCsAddrInfo.RemoteAddr, scopeId);
+                        querySet.CsAddrInfos[i].LocalAddr = IPEndPointFromSocketAddress(
+                            nativeCsAddrInfo.LocalAddr,
+                            scopeId
+                        );
+                        querySet.CsAddrInfos[i].RemoteAddr = IPEndPointFromSocketAddress(
+                            nativeCsAddrInfo.RemoteAddr,
+                            scopeId
+                        );
                     }
 
                     // copy the GUIDs
                     if (nativeQuerySet.lpNSProviderId != IntPtr.Zero)
-                        querySet.NSProviderId = (Guid)Marshal.PtrToStructure(nativeQuerySet.lpNSProviderId,
-                            typeof(Guid));
+                        querySet.NSProviderId = (Guid)
+                            Marshal.PtrToStructure(nativeQuerySet.lpNSProviderId, typeof(Guid));
 
                     if (nativeQuerySet.lpServiceClassId != IntPtr.Zero)
-                        querySet.ServiceClassId = (Guid)Marshal.PtrToStructure(nativeQuerySet.lpServiceClassId,
-                            typeof(Guid));
+                        querySet.ServiceClassId = (Guid)
+                            Marshal.PtrToStructure(nativeQuerySet.lpServiceClassId, typeof(Guid));
 
                     // marshal the BLOB according to namespace
                     if (querySet.NameSpace == NspNamespaces.Cloud)
@@ -2187,14 +2625,14 @@ namespace System.ServiceModel.Channels
                             // give it a default value
                             querySet.Blob = new PnrpCloudInfo();
                             // marshal the blob in order to get the pointer
-                            BlobNative blob = (BlobNative)Marshal.PtrToStructure(nativeQuerySet.lpBlob, typeof(BlobNative));
+                            BlobNative blob = (BlobNative)
+                                Marshal.PtrToStructure(nativeQuerySet.lpBlob, typeof(BlobNative));
                             // marshal the actual PnrpCloudInfo
                             if (blob.pBlobData != IntPtr.Zero)
-                                querySet.Blob = (PnrpCloudInfo)Marshal.PtrToStructure(blob.pBlobData,
-                                    typeof(PnrpCloudInfo));
+                                querySet.Blob = (PnrpCloudInfo)
+                                    Marshal.PtrToStructure(blob.pBlobData, typeof(PnrpCloudInfo));
                         }
                     }
-
                     else if (querySet.NameSpace == NspNamespaces.Name)
                     {
                         if (nativeQuerySet.lpBlob != IntPtr.Zero)
@@ -2202,12 +2640,13 @@ namespace System.ServiceModel.Channels
                             // give it a default value
                             querySet.Blob = new PnrpInfo();
                             // marshal the blob in order to get the pointer
-                            BlobSafe blob = (BlobSafe)Marshal.PtrToStructure(nativeQuerySet.lpBlob, typeof(BlobSafe));
+                            BlobSafe blob = (BlobSafe)
+                                Marshal.PtrToStructure(nativeQuerySet.lpBlob, typeof(BlobSafe));
                             // marshal the actual PnrpInfo
                             if (blob.pBlobData != IntPtr.Zero)
                             {
-                                PnrpInfo pnrpInfo = (PnrpInfo)Marshal.PtrToStructure(blob.pBlobData,
-                                    typeof(PnrpInfo));
+                                PnrpInfo pnrpInfo = (PnrpInfo)
+                                    Marshal.PtrToStructure(blob.pBlobData, typeof(PnrpInfo));
                                 querySet.Blob = pnrpInfo;
                             }
                         }
@@ -2216,20 +2655,29 @@ namespace System.ServiceModel.Channels
                     return querySet;
                 }
 
-                static IPEndPoint IPEndPointFromSocketAddress(SOCKET_ADDRESS_NATIVE socketAddress, uint scopeId)
+                static IPEndPoint IPEndPointFromSocketAddress(
+                    SOCKET_ADDRESS_NATIVE socketAddress,
+                    uint scopeId
+                )
                 {
                     IPEndPoint endPoint = null;
                     if (socketAddress.lpSockAddr != IntPtr.Zero)
                     {
-                        AddressFamily addressFamily = (AddressFamily)Marshal.ReadInt16(socketAddress.lpSockAddr);
+                        AddressFamily addressFamily = (AddressFamily)
+                            Marshal.ReadInt16(socketAddress.lpSockAddr);
                         if (addressFamily == AddressFamily.InterNetwork)
                         {
                             // if the sockaddr length is not the sizeof(sockaddr_in), the data is invalid so
                             // return an null endpoint
-                            if (socketAddress.iSockaddrLength == Marshal.SizeOf(typeof(sockaddr_in)))
+                            if (
+                                socketAddress.iSockaddrLength == Marshal.SizeOf(typeof(sockaddr_in))
+                            )
                             {
-                                sockaddr_in sa = (sockaddr_in)Marshal.PtrToStructure(socketAddress.lpSockAddr,
-                                    typeof(sockaddr_in));
+                                sockaddr_in sa = (sockaddr_in)
+                                    Marshal.PtrToStructure(
+                                        socketAddress.lpSockAddr,
+                                        typeof(sockaddr_in)
+                                    );
                                 endPoint = new IPEndPoint(new IPAddress(sa.sin_addr), sa.sin_port);
                             }
                         }
@@ -2237,13 +2685,22 @@ namespace System.ServiceModel.Channels
                         {
                             // if the sockaddr length is not the sizeof(sockaddr_in6), the data is invalid so
                             // return an null endpoint
-                            if (socketAddress.iSockaddrLength == Marshal.SizeOf(typeof(sockaddr_in6)))
+                            if (
+                                socketAddress.iSockaddrLength
+                                == Marshal.SizeOf(typeof(sockaddr_in6))
+                            )
                             {
-                                sockaddr_in6 sa = (sockaddr_in6)Marshal.PtrToStructure(socketAddress.lpSockAddr,
-                                    typeof(sockaddr_in6));
+                                sockaddr_in6 sa = (sockaddr_in6)
+                                    Marshal.PtrToStructure(
+                                        socketAddress.lpSockAddr,
+                                        typeof(sockaddr_in6)
+                                    );
                                 if (scopeId != 0 && sa.sin6_scope_id != 0)
                                     scopeId = sa.sin6_scope_id;
-                                endPoint = new IPEndPoint(new IPAddress(sa.sin6_addr, scopeId), sa.sin6_port);
+                                endPoint = new IPEndPoint(
+                                    new IPAddress(sa.sin6_addr, scopeId),
+                                    sa.sin6_port
+                                );
                             }
                         }
                         // else this is an unknown address family, so return null
@@ -2251,9 +2708,9 @@ namespace System.ServiceModel.Channels
 
                     return endPoint;
                 }
-
             }
         }
+
         public override bool Equals(object other)
         {
             return ((other as PnrpPeerResolver) != null);
@@ -2263,6 +2720,5 @@ namespace System.ServiceModel.Channels
         {
             return base.GetHashCode();
         }
-
     }
 }

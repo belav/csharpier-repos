@@ -32,7 +32,6 @@ namespace System.Web.WebPages
         internal DisplayModeProvider DisplayModeProvider
         {
             get { return _displayModeProvider ?? DisplayModeProvider.Instance; }
-
             set { _displayModeProvider = value; }
         }
 
@@ -169,7 +168,11 @@ namespace System.Web.WebPages
                 {
                     return false;
                 }
-                return (request["X-Requested-With"] == "XMLHttpRequest") || ((request.Headers != null) && (request.Headers["X-Requested-With"] == "XMLHttpRequest"));
+                return (request["X-Requested-With"] == "XMLHttpRequest")
+                    || (
+                        (request.Headers != null)
+                        && (request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    );
             }
         }
 
@@ -181,7 +184,10 @@ namespace System.Web.WebPages
                 if (String.IsNullOrEmpty(value))
                 {
                     // GetCultureInfo accepts empty strings but throws for null strings. To maintain consistency in our string handling behavior, throw
-                    throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "value");
+                    throw new ArgumentException(
+                        CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "value"
+                    );
                 }
                 CultureUtil.SetCulture(Thread.CurrentThread, Context, value);
             }
@@ -195,7 +201,10 @@ namespace System.Web.WebPages
                 if (String.IsNullOrEmpty(value))
                 {
                     // GetCultureInfo accepts empty strings but throws for null strings. To maintain consistency in our string handling behavior, throw
-                    throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "value");
+                    throw new ArgumentException(
+                        CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "value"
+                    );
                 }
                 CultureUtil.SetUICulture(Thread.CurrentThread, Context, value);
             }

@@ -41,7 +41,15 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLiftedDivideNullableDecimalTest(bool useInterpreter)
         {
-            decimal?[] values = new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
+            decimal?[] values = new decimal?[]
+            {
+                null,
+                decimal.Zero,
+                decimal.One,
+                decimal.MinusOne,
+                decimal.MinValue,
+                decimal.MaxValue,
+            };
             for (int i = 0; i < values.Length; i++)
             {
                 for (int j = 0; j < values.Length; j++)
@@ -54,7 +62,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLiftedDivideNullableDoubleTest(bool useInterpreter)
         {
-            double?[] values = new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
+            double?[] values = new double?[]
+            {
+                null,
+                0,
+                1,
+                -1,
+                double.MinValue,
+                double.MaxValue,
+                double.Epsilon,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NaN,
+            };
             for (int i = 0; i < values.Length; i++)
             {
                 for (int j = 0; j < values.Length; j++)
@@ -67,7 +87,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLiftedDivideNullableFloatTest(bool useInterpreter)
         {
-            float?[] values = new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
+            float?[] values = new float?[]
+            {
+                null,
+                0,
+                1,
+                -1,
+                float.MinValue,
+                float.MaxValue,
+                float.Epsilon,
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                float.NaN,
+            };
             for (int i = 0; i < values.Length; i++)
             {
                 for (int j = 0; j < values.Length; j++)
@@ -181,7 +213,13 @@ namespace System.Linq.Expressions.Tests
         {
             AssertExtensions.ThrowsOnAot<NotSupportedException>(() =>
             {
-                Number?[] values = new Number?[] { null, new Number(0), new Number(1), Number.MaxValue };
+                Number?[] values = new Number?[]
+                {
+                    null,
+                    new Number(0),
+                    new Number(1),
+                    Number.MaxValue,
+                };
                 for (int i = 0; i < values.Length; i++)
                 {
                     for (int j = 0; j < values.Length; j++)
@@ -262,12 +300,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDivideNullableByte(byte? a, byte? b, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Divide(
-                        Expression.Constant(a, typeof(byte?)),
-                        Expression.Constant(b, typeof(byte?)),
-                        typeof(LiftedDivideNullableTests).GetTypeInfo().GetDeclaredMethod("DivideNullableByte")));
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Divide(
+                    Expression.Constant(a, typeof(byte?)),
+                    Expression.Constant(b, typeof(byte?)),
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("DivideNullableByte")
+                )
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -278,12 +319,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDivideNullableChar(char? a, char? b, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Divide(
-                        Expression.Constant(a, typeof(char?)),
-                        Expression.Constant(b, typeof(char?)),
-                        typeof(LiftedDivideNullableTests).GetTypeInfo().GetDeclaredMethod("DivideNullableChar")));
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Divide(
+                    Expression.Constant(a, typeof(char?)),
+                    Expression.Constant(b, typeof(char?)),
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("DivideNullableChar")
+                )
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == '\0')
@@ -294,12 +338,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDivideNullableDecimal(decimal? a, decimal? b, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Divide(
-                        Expression.Constant(a, typeof(decimal?)),
-                        Expression.Constant(b, typeof(decimal?)),
-                        typeof(LiftedDivideNullableTests).GetTypeInfo().GetDeclaredMethod("DivideNullableDecimal")));
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Divide(
+                    Expression.Constant(a, typeof(decimal?)),
+                    Expression.Constant(b, typeof(decimal?)),
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("DivideNullableDecimal")
+                )
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -310,12 +357,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDivideNullableDouble(double? a, double? b, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Divide(
-                        Expression.Constant(a, typeof(double?)),
-                        Expression.Constant(b, typeof(double?)),
-                        typeof(LiftedDivideNullableTests).GetTypeInfo().GetDeclaredMethod("DivideNullableDouble")));
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Divide(
+                    Expression.Constant(a, typeof(double?)),
+                    Expression.Constant(b, typeof(double?)),
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("DivideNullableDouble")
+                )
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a / b, f());
@@ -323,12 +373,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDivideNullableFloat(float? a, float? b, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Divide(
-                        Expression.Constant(a, typeof(float?)),
-                        Expression.Constant(b, typeof(float?)),
-                        typeof(LiftedDivideNullableTests).GetTypeInfo().GetDeclaredMethod("DivideNullableFloat")));
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Divide(
+                    Expression.Constant(a, typeof(float?)),
+                    Expression.Constant(b, typeof(float?)),
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("DivideNullableFloat")
+                )
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a / b, f());
@@ -336,12 +389,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDivideNullableInt(int? a, int? b, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Divide(
-                        Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int?)),
-                        typeof(LiftedDivideNullableTests).GetTypeInfo().GetDeclaredMethod("DivideNullableInt")));
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Divide(
+                    Expression.Constant(a, typeof(int?)),
+                    Expression.Constant(b, typeof(int?)),
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("DivideNullableInt")
+                )
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -354,12 +410,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDivideNullableLong(long? a, long? b, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Divide(
-                        Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(long?)),
-                        typeof(LiftedDivideNullableTests).GetTypeInfo().GetDeclaredMethod("DivideNullableLong")));
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Divide(
+                    Expression.Constant(a, typeof(long?)),
+                    Expression.Constant(b, typeof(long?)),
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("DivideNullableLong")
+                )
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -372,12 +431,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDivideNullableSByte(sbyte? a, sbyte? b, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Divide(
-                        Expression.Constant(a, typeof(sbyte?)),
-                        Expression.Constant(b, typeof(sbyte?)),
-                        typeof(LiftedDivideNullableTests).GetTypeInfo().GetDeclaredMethod("DivideNullableSByte")));
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Divide(
+                    Expression.Constant(a, typeof(sbyte?)),
+                    Expression.Constant(b, typeof(sbyte?)),
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("DivideNullableSByte")
+                )
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -388,12 +450,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDivideNullableShort(short? a, short? b, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Divide(
-                        Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(short?)),
-                        typeof(LiftedDivideNullableTests).GetTypeInfo().GetDeclaredMethod("DivideNullableShort")));
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Divide(
+                    Expression.Constant(a, typeof(short?)),
+                    Expression.Constant(b, typeof(short?)),
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("DivideNullableShort")
+                )
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -404,12 +469,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDivideNullableUInt(uint? a, uint? b, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Divide(
-                        Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(uint?)),
-                        typeof(LiftedDivideNullableTests).GetTypeInfo().GetDeclaredMethod("DivideNullableUInt")));
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Divide(
+                    Expression.Constant(a, typeof(uint?)),
+                    Expression.Constant(b, typeof(uint?)),
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("DivideNullableUInt")
+                )
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -420,12 +488,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDivideNullableULong(ulong? a, ulong? b, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Divide(
-                        Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(ulong?)),
-                        typeof(LiftedDivideNullableTests).GetTypeInfo().GetDeclaredMethod("DivideNullableULong")));
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Divide(
+                    Expression.Constant(a, typeof(ulong?)),
+                    Expression.Constant(b, typeof(ulong?)),
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("DivideNullableULong")
+                )
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -436,12 +507,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDivideNullableUShort(ushort? a, ushort? b, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Divide(
-                        Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(ushort?)),
-                        typeof(LiftedDivideNullableTests).GetTypeInfo().GetDeclaredMethod("DivideNullableUShort")));
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Divide(
+                    Expression.Constant(a, typeof(ushort?)),
+                    Expression.Constant(b, typeof(ushort?)),
+                    typeof(LiftedDivideNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("DivideNullableUShort")
+                )
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -452,11 +526,12 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDivideNullableNumber(Number? a, Number? b, bool useInterpreter)
         {
-            Expression<Func<Number?>> e =
-                Expression.Lambda<Func<Number?>>(
-                    Expression.Divide(
-                        Expression.Constant(a, typeof(Number?)),
-                        Expression.Constant(b, typeof(Number?))));
+            Expression<Func<Number?>> e = Expression.Lambda<Func<Number?>>(
+                Expression.Divide(
+                    Expression.Constant(a, typeof(Number?)),
+                    Expression.Constant(b, typeof(Number?))
+                )
+            );
             Assert.Equal(typeof(Number?), e.Body.Type);
             Func<Number?> f = e.Compile(useInterpreter);
 

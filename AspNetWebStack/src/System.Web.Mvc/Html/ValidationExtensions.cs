@@ -23,14 +23,29 @@ namespace System.Web.Mvc.Html
             set { _resourceClassKey = value; }
         }
 
-        private static FieldValidationMetadata ApplyFieldValidationMetadata(HtmlHelper htmlHelper, ModelMetadata modelMetadata, string modelName)
+        private static FieldValidationMetadata ApplyFieldValidationMetadata(
+            HtmlHelper htmlHelper,
+            ModelMetadata modelMetadata,
+            string modelName
+        )
         {
             FormContext formContext = htmlHelper.ViewContext.FormContext;
-            FieldValidationMetadata fieldMetadata = formContext.GetValidationMetadataForField(modelName, true /* createIfNotFound */);
+            FieldValidationMetadata fieldMetadata = formContext.GetValidationMetadataForField(
+                modelName,
+                true /* createIfNotFound */
+            );
 
             // write rules to context object
-            IEnumerable<ModelValidator> validators = ModelValidatorProviders.Providers.GetValidators(modelMetadata, htmlHelper.ViewContext);
-            foreach (ModelClientValidationRule rule in validators.SelectMany(v => v.GetClientValidationRules()))
+            IEnumerable<ModelValidator> validators =
+                ModelValidatorProviders.Providers.GetValidators(
+                    modelMetadata,
+                    htmlHelper.ViewContext
+                );
+            foreach (
+                ModelClientValidationRule rule in validators.SelectMany(v =>
+                    v.GetClientValidationRules()
+                )
+            )
             {
                 fieldMetadata.ValidationRules.Add(rule);
             }
@@ -47,12 +62,21 @@ namespace System.Web.Mvc.Html
                 // If the class key is invalid, an exception will be thrown.
                 // If the class key is valid but the resource is not found, it returns null, in which
                 // case it will fall back to the MVC default error message.
-                resourceValue = httpContext.GetGlobalResourceObject(ResourceClassKey, "InvalidPropertyValue", CultureInfo.CurrentUICulture) as string;
+                resourceValue =
+                    httpContext.GetGlobalResourceObject(
+                        ResourceClassKey,
+                        "InvalidPropertyValue",
+                        CultureInfo.CurrentUICulture
+                    ) as string;
             }
             return resourceValue ?? MvcResources.Common_ValueNotValidForProperty;
         }
 
-        private static string GetUserErrorMessageOrDefault(HttpContextBase httpContext, ModelError error, ModelState modelState)
+        private static string GetUserErrorMessageOrDefault(
+            HttpContextBase httpContext,
+            ModelError error,
+            ModelState modelState
+        )
         {
             if (!String.IsNullOrEmpty(error.ErrorMessage))
             {
@@ -63,8 +87,13 @@ namespace System.Web.Mvc.Html
                 return null;
             }
 
-            string attemptedValue = (modelState.Value != null) ? modelState.Value.AttemptedValue : null;
-            return String.Format(CultureInfo.CurrentCulture, GetInvalidPropertyValueResource(httpContext), attemptedValue);
+            string attemptedValue =
+                (modelState.Value != null) ? modelState.Value.AttemptedValue : null;
+            return String.Format(
+                CultureInfo.CurrentCulture,
+                GetInvalidPropertyValueResource(httpContext),
+                attemptedValue
+            );
         }
 
         // Validate
@@ -76,20 +105,35 @@ namespace System.Web.Mvc.Html
                 throw new ArgumentNullException("modelName");
             }
 
-            ValidateHelper(htmlHelper,
-                           ModelMetadata.FromStringExpression(modelName, htmlHelper.ViewContext.ViewData),
-                           modelName);
+            ValidateHelper(
+                htmlHelper,
+                ModelMetadata.FromStringExpression(modelName, htmlHelper.ViewContext.ViewData),
+                modelName
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static void ValidateFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static void ValidateFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression
+        )
         {
-            ValidateHelper(htmlHelper,
-                           ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData),
-                           ExpressionHelper.GetExpressionText(expression));
+            ValidateHelper(
+                htmlHelper,
+                ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData),
+                ExpressionHelper.GetExpressionText(expression)
+            );
         }
 
-        private static void ValidateHelper(HtmlHelper htmlHelper, ModelMetadata modelMetadata, string expression)
+        private static void ValidateHelper(
+            HtmlHelper htmlHelper,
+            ModelMetadata modelMetadata,
+            string expression
+        )
         {
             FormContext formContext = htmlHelper.ViewContext.GetFormContextForClientValidation();
             if (formContext == null || htmlHelper.ViewContext.UnobtrusiveJavaScriptEnabled)
@@ -97,7 +141,9 @@ namespace System.Web.Mvc.Html
                 return; // nothing to do
             }
 
-            string modelName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(expression);
+            string modelName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
+                expression
+            );
             ApplyFieldValidationMetadata(htmlHelper, modelMetadata, modelName);
         }
 
@@ -105,12 +151,26 @@ namespace System.Web.Mvc.Html
 
         public static MvcHtmlString ValidationMessage(this HtmlHelper htmlHelper, string modelName)
         {
-            return ValidationMessage(htmlHelper, modelName, validationMessage: null, htmlAttributes: new RouteValueDictionary());
+            return ValidationMessage(
+                htmlHelper,
+                modelName,
+                validationMessage: null,
+                htmlAttributes: new RouteValueDictionary()
+            );
         }
 
-        public static MvcHtmlString ValidationMessage(this HtmlHelper htmlHelper, string modelName, object htmlAttributes)
+        public static MvcHtmlString ValidationMessage(
+            this HtmlHelper htmlHelper,
+            string modelName,
+            object htmlAttributes
+        )
         {
-            return ValidationMessage(htmlHelper, modelName, validationMessage: null, htmlAttributes: HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return ValidationMessage(
+                htmlHelper,
+                modelName,
+                validationMessage: null,
+                htmlAttributes: HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
 
         /// <summary>
@@ -123,28 +183,59 @@ namespace System.Web.Mvc.Html
         /// <param name="tag">The tag to be set for the wrapping HTML element of the validation message.</param>
         /// <returns>null if the entry is valid and client-side validation is disabled.
         /// Otherwise, a <paramref name="tag"/> element that contains an error message.</returns>
-        public static MvcHtmlString ValidationMessage(this HtmlHelper htmlHelper,
-                                                      string modelName,
-                                                      object htmlAttributes,
-                                                      string tag)
+        public static MvcHtmlString ValidationMessage(
+            this HtmlHelper htmlHelper,
+            string modelName,
+            object htmlAttributes,
+            string tag
+        )
         {
-            return ValidationMessage(htmlHelper,
-                                     modelName,
-                                     validationMessage: null,
-                                     htmlAttributes: HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes),
-                                     tag: tag);
+            return ValidationMessage(
+                htmlHelper,
+                modelName,
+                validationMessage: null,
+                htmlAttributes: HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes),
+                tag: tag
+            );
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", Justification = "'validationMessage' refers to the message that will be rendered by the ValidationMessage helper.")]
-        public static MvcHtmlString ValidationMessage(this HtmlHelper htmlHelper, string modelName, string validationMessage)
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1719:ParameterNamesShouldNotMatchMemberNames",
+            Justification = "'validationMessage' refers to the message that will be rendered by the ValidationMessage helper."
+        )]
+        public static MvcHtmlString ValidationMessage(
+            this HtmlHelper htmlHelper,
+            string modelName,
+            string validationMessage
+        )
         {
-            return ValidationMessage(htmlHelper, modelName, validationMessage, new RouteValueDictionary());
+            return ValidationMessage(
+                htmlHelper,
+                modelName,
+                validationMessage,
+                new RouteValueDictionary()
+            );
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", Justification = "'validationMessage' refers to the message that will be rendered by the ValidationMessage helper.")]
-        public static MvcHtmlString ValidationMessage(this HtmlHelper htmlHelper, string modelName, string validationMessage, object htmlAttributes)
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1719:ParameterNamesShouldNotMatchMemberNames",
+            Justification = "'validationMessage' refers to the message that will be rendered by the ValidationMessage helper."
+        )]
+        public static MvcHtmlString ValidationMessage(
+            this HtmlHelper htmlHelper,
+            string modelName,
+            string validationMessage,
+            object htmlAttributes
+        )
         {
-            return ValidationMessage(htmlHelper, modelName, validationMessage, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return ValidationMessage(
+                htmlHelper,
+                modelName,
+                validationMessage,
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
 
         /// <summary>
@@ -158,19 +249,26 @@ namespace System.Web.Mvc.Html
         /// <param name="tag">The tag to be set for the wrapping HTML element of the validation message.</param>
         /// <returns>null if the entry is valid and client-side validation is disabled.
         /// Otherwise, a <paramref name="tag"/> element that contains an error message.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", Justification =
-            "'validationMessage' refers to the message that will be rendered by the ValidationMessage helper.")]
-        public static MvcHtmlString ValidationMessage(this HtmlHelper htmlHelper,
-                                                      string modelName,
-                                                      string validationMessage,
-                                                      object htmlAttributes,
-                                                      string tag)
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1719:ParameterNamesShouldNotMatchMemberNames",
+            Justification = "'validationMessage' refers to the message that will be rendered by the ValidationMessage helper."
+        )]
+        public static MvcHtmlString ValidationMessage(
+            this HtmlHelper htmlHelper,
+            string modelName,
+            string validationMessage,
+            object htmlAttributes,
+            string tag
+        )
         {
-            return ValidationMessage(htmlHelper,
-                                     modelName,
-                                     validationMessage,
-                                     HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes),
-                                     tag);
+            return ValidationMessage(
+                htmlHelper,
+                modelName,
+                validationMessage,
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes),
+                tag
+            );
         }
 
         /// <summary>
@@ -183,23 +281,39 @@ namespace System.Web.Mvc.Html
         /// <param name="tag">The tag to be set for the wrapping HTML element of the validation message.</param>
         /// <returns>null if the entry is valid and client-side validation is disabled.
         /// Otherwise, a <paramref name="tag"/> element that contains an error message.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", Justification =
-            "'validationMessage' refers to the message that will be rendered by the ValidationMessage helper.")]
-        public static MvcHtmlString ValidationMessage(this HtmlHelper htmlHelper,
-                                                      string modelName,
-                                                      string validationMessage,
-                                                      string tag)
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1719:ParameterNamesShouldNotMatchMemberNames",
+            Justification = "'validationMessage' refers to the message that will be rendered by the ValidationMessage helper."
+        )]
+        public static MvcHtmlString ValidationMessage(
+            this HtmlHelper htmlHelper,
+            string modelName,
+            string validationMessage,
+            string tag
+        )
         {
-            return ValidationMessage(htmlHelper,
-                                     modelName,
-                                     validationMessage,
-                                     htmlAttributes: new RouteValueDictionary(),
-                                     tag: tag);
+            return ValidationMessage(
+                htmlHelper,
+                modelName,
+                validationMessage,
+                htmlAttributes: new RouteValueDictionary(),
+                tag: tag
+            );
         }
 
-        public static MvcHtmlString ValidationMessage(this HtmlHelper htmlHelper, string modelName, IDictionary<string, object> htmlAttributes)
+        public static MvcHtmlString ValidationMessage(
+            this HtmlHelper htmlHelper,
+            string modelName,
+            IDictionary<string, object> htmlAttributes
+        )
         {
-            return ValidationMessage(htmlHelper, modelName, validationMessage: null, htmlAttributes: htmlAttributes);
+            return ValidationMessage(
+                htmlHelper,
+                modelName,
+                validationMessage: null,
+                htmlAttributes: htmlAttributes
+            );
         }
 
         /// <summary>
@@ -213,22 +327,41 @@ namespace System.Web.Mvc.Html
         /// <param name="tag">The tag to be set for the wrapping HTML element of the validation message.</param>
         /// <returns>null if the entry is valid and client-side validation is disabled.
         /// Otherwise, a <paramref name="tag"/> element that contains an error message.</returns>
-        public static MvcHtmlString ValidationMessage(this HtmlHelper htmlHelper,
-                                                      string modelName,
-                                                      IDictionary<string, object> htmlAttributes,
-                                                      string tag)
+        public static MvcHtmlString ValidationMessage(
+            this HtmlHelper htmlHelper,
+            string modelName,
+            IDictionary<string, object> htmlAttributes,
+            string tag
+        )
         {
-            return ValidationMessage(htmlHelper,
-                                     modelName,
-                                     validationMessage: null,
-                                     htmlAttributes: htmlAttributes,
-                                     tag: tag);
+            return ValidationMessage(
+                htmlHelper,
+                modelName,
+                validationMessage: null,
+                htmlAttributes: htmlAttributes,
+                tag: tag
+            );
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", Justification = "'validationMessage' refers to the message that will be rendered by the ValidationMessage helper.")]
-        public static MvcHtmlString ValidationMessage(this HtmlHelper htmlHelper, string modelName, string validationMessage, IDictionary<string, object> htmlAttributes)
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1719:ParameterNamesShouldNotMatchMemberNames",
+            Justification = "'validationMessage' refers to the message that will be rendered by the ValidationMessage helper."
+        )]
+        public static MvcHtmlString ValidationMessage(
+            this HtmlHelper htmlHelper,
+            string modelName,
+            string validationMessage,
+            IDictionary<string, object> htmlAttributes
+        )
         {
-            return ValidationMessage(htmlHelper, modelName, validationMessage, htmlAttributes, tag: null);
+            return ValidationMessage(
+                htmlHelper,
+                modelName,
+                validationMessage,
+                htmlAttributes,
+                tag: null
+            );
         }
 
         /// <summary>
@@ -243,53 +376,110 @@ namespace System.Web.Mvc.Html
         /// <param name="tag">The tag to be set for the wrapping HTML element of the validation message.</param>
         /// <returns>null if the model object is valid and client-side validation is disabled.
         /// Otherwise, a <paramref name="tag"/> element that contains an error message.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", Justification =
-            "'validationMessage' refers to the message that will be rendered by the ValidationMessage helper.")]
-        public static MvcHtmlString ValidationMessage(this HtmlHelper htmlHelper,
-                                                      string modelName,
-                                                      string validationMessage,
-                                                      IDictionary<string, object> htmlAttributes,
-                                                      string tag)
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1719:ParameterNamesShouldNotMatchMemberNames",
+            Justification = "'validationMessage' refers to the message that will be rendered by the ValidationMessage helper."
+        )]
+        public static MvcHtmlString ValidationMessage(
+            this HtmlHelper htmlHelper,
+            string modelName,
+            string validationMessage,
+            IDictionary<string, object> htmlAttributes,
+            string tag
+        )
         {
             if (modelName == null)
             {
                 throw new ArgumentNullException("modelName");
             }
 
-            return ValidationMessageHelper(htmlHelper,
-                                           ModelMetadata.FromStringExpression(modelName, htmlHelper.ViewContext.ViewData),
-                                           modelName,
-                                           validationMessage,
-                                           htmlAttributes,
-                                           tag);
+            return ValidationMessageHelper(
+                htmlHelper,
+                ModelMetadata.FromStringExpression(modelName, htmlHelper.ViewContext.ViewData),
+                modelName,
+                validationMessage,
+                htmlAttributes,
+                tag
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression
+        )
         {
-            return ValidationMessageFor(htmlHelper, expression, validationMessage: null, htmlAttributes: new RouteValueDictionary());
+            return ValidationMessageFor(
+                htmlHelper,
+                expression,
+                validationMessage: null,
+                htmlAttributes: new RouteValueDictionary()
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, string validationMessage)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string validationMessage
+        )
         {
-            return ValidationMessageFor(htmlHelper, expression, validationMessage, new RouteValueDictionary());
+            return ValidationMessageFor(
+                htmlHelper,
+                expression,
+                validationMessage,
+                new RouteValueDictionary()
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, string validationMessage, object htmlAttributes)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string validationMessage,
+            object htmlAttributes
+        )
         {
-            return ValidationMessageFor(htmlHelper, expression, validationMessage, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return ValidationMessageFor(
+                htmlHelper,
+                expression,
+                validationMessage,
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, string validationMessage, IDictionary<string, object> htmlAttributes)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string validationMessage,
+            IDictionary<string, object> htmlAttributes
+        )
         {
-            return ValidationMessageFor(htmlHelper,
-                                        expression,
-                                        validationMessage,
-                                        htmlAttributes,
-                                        tag: null);
+            return ValidationMessageFor(
+                htmlHelper,
+                expression,
+                validationMessage,
+                htmlAttributes,
+                tag: null
+            );
         }
 
         /// <summary>
@@ -304,18 +494,25 @@ namespace System.Web.Mvc.Html
         /// <param name="tag">The tag to be set for the wrapping HTML element of the validation message.</param>
         /// <returns>null if the model object is valid and client-side validation is disabled.
         /// Otherwise, a <paramref name="tag"/> element that contains an error message.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification =
-            "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper,
-                                                                            Expression<Func<TModel, TProperty>> expression,
-                                                                            string validationMessage,
-                                                                            string tag)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string validationMessage,
+            string tag
+        )
         {
-            return ValidationMessageFor(htmlHelper,
-                                        expression,
-                                        validationMessage,
-                                        htmlAttributes: null,
-                                        tag: tag);
+            return ValidationMessageFor(
+                htmlHelper,
+                expression,
+                validationMessage,
+                htmlAttributes: null,
+                tag: tag
+            );
         }
 
         /// <summary>
@@ -331,19 +528,26 @@ namespace System.Web.Mvc.Html
         /// <param name="tag">The tag to be set for the wrapping HTML element of the validation message.</param>
         /// <returns>null if the model object is valid and client-side validation is disabled.
         /// Otherwise, a <paramref name="tag"/> element that contains an error message.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification =
-            "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper,
-                                                                            Expression<Func<TModel, TProperty>> expression,
-                                                                            string validationMessage,
-                                                                            object htmlAttributes,
-                                                                            string tag)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string validationMessage,
+            object htmlAttributes,
+            string tag
+        )
         {
-            return ValidationMessageFor(htmlHelper,
-                                        expression,
-                                        validationMessage,
-                                        HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes),
-                                        tag);
+            return ValidationMessageFor(
+                htmlHelper,
+                expression,
+                validationMessage,
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes),
+                tag
+            );
         }
 
         /// <summary>
@@ -360,26 +564,46 @@ namespace System.Web.Mvc.Html
         /// <param name="tag">The tag to be set for the wrapping HTML element of the validation message.</param>
         /// <returns>null if the model object is valid and client-side validation is disabled.
         /// Otherwise, a <paramref name="tag"/> element that contains an error message.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification =
-            "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper,
-                                                                            Expression<Func<TModel, TProperty>> expression,
-                                                                            string validationMessage,
-                                                                            IDictionary<string, object> htmlAttributes,
-                                                                            string tag)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string validationMessage,
+            IDictionary<string, object> htmlAttributes,
+            string tag
+        )
         {
-            return ValidationMessageHelper(htmlHelper,
-                                           ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData),
-                                           ExpressionHelper.GetExpressionText(expression),
-                                           validationMessage,
-                                           htmlAttributes,
-                                           tag);
+            return ValidationMessageHelper(
+                htmlHelper,
+                ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData),
+                ExpressionHelper.GetExpressionText(expression),
+                validationMessage,
+                htmlAttributes,
+                tag
+            );
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Normalization to lowercase is a common requirement for JavaScript and HTML values")]
-        private static MvcHtmlString ValidationMessageHelper(this HtmlHelper htmlHelper, ModelMetadata modelMetadata, string expression, string validationMessage, IDictionary<string, object> htmlAttributes, string tag)
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "Normalization to lowercase is a common requirement for JavaScript and HTML values"
+        )]
+        private static MvcHtmlString ValidationMessageHelper(
+            this HtmlHelper htmlHelper,
+            ModelMetadata modelMetadata,
+            string expression,
+            string validationMessage,
+            IDictionary<string, object> htmlAttributes,
+            string tag
+        )
         {
-            string modelName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(expression);
+            string modelName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
+                expression
+            );
             FormContext formContext = htmlHelper.ViewContext.GetFormContextForClientValidation();
 
             if (!htmlHelper.ViewData.ModelState.ContainsKey(modelName) && formContext == null)
@@ -389,7 +613,12 @@ namespace System.Web.Mvc.Html
 
             ModelState modelState = htmlHelper.ViewData.ModelState[modelName];
             ModelErrorCollection modelErrors = (modelState == null) ? null : modelState.Errors;
-            ModelError modelError = (((modelErrors == null) || (modelErrors.Count == 0)) ? null : modelErrors.FirstOrDefault(m => !String.IsNullOrEmpty(m.ErrorMessage)) ?? modelErrors[0]);
+            ModelError modelError = (
+                ((modelErrors == null) || (modelErrors.Count == 0))
+                    ? null
+                    : modelErrors.FirstOrDefault(m => !String.IsNullOrEmpty(m.ErrorMessage))
+                        ?? modelErrors[0]
+            );
 
             if (modelError == null && formContext == null)
             {
@@ -403,7 +632,11 @@ namespace System.Web.Mvc.Html
 
             TagBuilder builder = new TagBuilder(tag);
             builder.MergeAttributes(htmlAttributes);
-            builder.AddCssClass((modelError != null) ? HtmlHelper.ValidationMessageCssClassName : HtmlHelper.ValidationMessageValidCssClassName);
+            builder.AddCssClass(
+                (modelError != null)
+                    ? HtmlHelper.ValidationMessageCssClassName
+                    : HtmlHelper.ValidationMessageValidCssClassName
+            );
 
             if (!String.IsNullOrEmpty(validationMessage))
             {
@@ -411,7 +644,13 @@ namespace System.Web.Mvc.Html
             }
             else if (modelError != null)
             {
-                builder.SetInnerText(GetUserErrorMessageOrDefault(htmlHelper.ViewContext.HttpContext, modelError, modelState));
+                builder.SetInnerText(
+                    GetUserErrorMessageOrDefault(
+                        htmlHelper.ViewContext.HttpContext,
+                        modelError,
+                        modelState
+                    )
+                );
             }
 
             if (formContext != null)
@@ -421,13 +660,21 @@ namespace System.Web.Mvc.Html
                 if (htmlHelper.ViewContext.UnobtrusiveJavaScriptEnabled)
                 {
                     builder.MergeAttribute("data-valmsg-for", modelName);
-                    builder.MergeAttribute("data-valmsg-replace", replaceValidationMessageContents.ToString().ToLowerInvariant());
+                    builder.MergeAttribute(
+                        "data-valmsg-replace",
+                        replaceValidationMessageContents.ToString().ToLowerInvariant()
+                    );
                 }
                 else
                 {
-                    FieldValidationMetadata fieldMetadata = ApplyFieldValidationMetadata(htmlHelper, modelMetadata, modelName);
+                    FieldValidationMetadata fieldMetadata = ApplyFieldValidationMetadata(
+                        htmlHelper,
+                        modelMetadata,
+                        modelName
+                    );
                     // rules will already have been written to the metadata object
-                    fieldMetadata.ReplaceValidationMessageContents = replaceValidationMessageContents; // only replace contents if no explicit message was specified
+                    fieldMetadata.ReplaceValidationMessageContents =
+                        replaceValidationMessageContents; // only replace contents if no explicit message was specified
 
                     // client validation always requires an ID
                     builder.GenerateId(modelName + "_validationMessage");
@@ -445,67 +692,189 @@ namespace System.Web.Mvc.Html
             return ValidationSummary(htmlHelper, excludePropertyErrors: false);
         }
 
-        public static MvcHtmlString ValidationSummary(this HtmlHelper htmlHelper, bool excludePropertyErrors)
+        public static MvcHtmlString ValidationSummary(
+            this HtmlHelper htmlHelper,
+            bool excludePropertyErrors
+        )
         {
             return ValidationSummary(htmlHelper, excludePropertyErrors, message: null);
         }
 
         public static MvcHtmlString ValidationSummary(this HtmlHelper htmlHelper, string message)
         {
-            return ValidationSummary(htmlHelper, excludePropertyErrors: false, message: message, htmlAttributes: (object)null, headingTag: null);
+            return ValidationSummary(
+                htmlHelper,
+                excludePropertyErrors: false,
+                message: message,
+                htmlAttributes: (object)null,
+                headingTag: null
+            );
         }
 
-        public static MvcHtmlString ValidationSummary(this HtmlHelper htmlHelper, string message, string headingTag)
+        public static MvcHtmlString ValidationSummary(
+            this HtmlHelper htmlHelper,
+            string message,
+            string headingTag
+        )
         {
-            return ValidationSummary(htmlHelper, excludePropertyErrors: false, message: message, htmlAttributes: (object)null, headingTag: headingTag);
+            return ValidationSummary(
+                htmlHelper,
+                excludePropertyErrors: false,
+                message: message,
+                htmlAttributes: (object)null,
+                headingTag: headingTag
+            );
         }
 
-        public static MvcHtmlString ValidationSummary(this HtmlHelper htmlHelper, bool excludePropertyErrors, string message)
+        public static MvcHtmlString ValidationSummary(
+            this HtmlHelper htmlHelper,
+            bool excludePropertyErrors,
+            string message
+        )
         {
-            return ValidationSummary(htmlHelper, excludePropertyErrors, message, htmlAttributes: (object)null, headingTag: null);
+            return ValidationSummary(
+                htmlHelper,
+                excludePropertyErrors,
+                message,
+                htmlAttributes: (object)null,
+                headingTag: null
+            );
         }
 
-        public static MvcHtmlString ValidationSummary(this HtmlHelper htmlHelper, bool excludePropertyErrors, string message, string headingTag)
+        public static MvcHtmlString ValidationSummary(
+            this HtmlHelper htmlHelper,
+            bool excludePropertyErrors,
+            string message,
+            string headingTag
+        )
         {
-            return ValidationSummary(htmlHelper, excludePropertyErrors, message, htmlAttributes: (object)null, headingTag: headingTag);
+            return ValidationSummary(
+                htmlHelper,
+                excludePropertyErrors,
+                message,
+                htmlAttributes: (object)null,
+                headingTag: headingTag
+            );
         }
 
-        public static MvcHtmlString ValidationSummary(this HtmlHelper htmlHelper, string message, object htmlAttributes)
+        public static MvcHtmlString ValidationSummary(
+            this HtmlHelper htmlHelper,
+            string message,
+            object htmlAttributes
+        )
         {
-            return ValidationSummary(htmlHelper, excludePropertyErrors: false, message: message, htmlAttributes: HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes), headingTag: null);
+            return ValidationSummary(
+                htmlHelper,
+                excludePropertyErrors: false,
+                message: message,
+                htmlAttributes: HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes),
+                headingTag: null
+            );
         }
 
-        public static MvcHtmlString ValidationSummary(this HtmlHelper htmlHelper, string message, object htmlAttributes, string headingTag)
+        public static MvcHtmlString ValidationSummary(
+            this HtmlHelper htmlHelper,
+            string message,
+            object htmlAttributes,
+            string headingTag
+        )
         {
-            return ValidationSummary(htmlHelper, excludePropertyErrors: false, message: message, htmlAttributes: HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes), headingTag: headingTag);
+            return ValidationSummary(
+                htmlHelper,
+                excludePropertyErrors: false,
+                message: message,
+                htmlAttributes: HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes),
+                headingTag: headingTag
+            );
         }
 
-        public static MvcHtmlString ValidationSummary(this HtmlHelper htmlHelper, bool excludePropertyErrors, string message, object htmlAttributes)
+        public static MvcHtmlString ValidationSummary(
+            this HtmlHelper htmlHelper,
+            bool excludePropertyErrors,
+            string message,
+            object htmlAttributes
+        )
         {
-            return ValidationSummary(htmlHelper, excludePropertyErrors, message, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes), null);
+            return ValidationSummary(
+                htmlHelper,
+                excludePropertyErrors,
+                message,
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes),
+                null
+            );
         }
 
-        public static MvcHtmlString ValidationSummary(this HtmlHelper htmlHelper, bool excludePropertyErrors, string message, object htmlAttributes, string headingTag)
+        public static MvcHtmlString ValidationSummary(
+            this HtmlHelper htmlHelper,
+            bool excludePropertyErrors,
+            string message,
+            object htmlAttributes,
+            string headingTag
+        )
         {
-            return ValidationSummary(htmlHelper, excludePropertyErrors, message, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes), headingTag);
+            return ValidationSummary(
+                htmlHelper,
+                excludePropertyErrors,
+                message,
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes),
+                headingTag
+            );
         }
 
-        public static MvcHtmlString ValidationSummary(this HtmlHelper htmlHelper, string message, IDictionary<string, object> htmlAttributes)
+        public static MvcHtmlString ValidationSummary(
+            this HtmlHelper htmlHelper,
+            string message,
+            IDictionary<string, object> htmlAttributes
+        )
         {
-            return ValidationSummary(htmlHelper, excludePropertyErrors: false, message: message, htmlAttributes: htmlAttributes, headingTag: null);
+            return ValidationSummary(
+                htmlHelper,
+                excludePropertyErrors: false,
+                message: message,
+                htmlAttributes: htmlAttributes,
+                headingTag: null
+            );
         }
 
-        public static MvcHtmlString ValidationSummary(this HtmlHelper htmlHelper, string message, IDictionary<string, object> htmlAttributes, string headingTag)
+        public static MvcHtmlString ValidationSummary(
+            this HtmlHelper htmlHelper,
+            string message,
+            IDictionary<string, object> htmlAttributes,
+            string headingTag
+        )
         {
-            return ValidationSummary(htmlHelper, excludePropertyErrors: false, message: message, htmlAttributes: htmlAttributes, headingTag: headingTag);
+            return ValidationSummary(
+                htmlHelper,
+                excludePropertyErrors: false,
+                message: message,
+                htmlAttributes: htmlAttributes,
+                headingTag: headingTag
+            );
         }
 
-        public static MvcHtmlString ValidationSummary(this HtmlHelper htmlHelper, bool excludePropertyErrors, string message, IDictionary<string, object> htmlAttributes)
+        public static MvcHtmlString ValidationSummary(
+            this HtmlHelper htmlHelper,
+            bool excludePropertyErrors,
+            string message,
+            IDictionary<string, object> htmlAttributes
+        )
         {
-            return ValidationSummary(htmlHelper, excludePropertyErrors, message, htmlAttributes, null);
+            return ValidationSummary(
+                htmlHelper,
+                excludePropertyErrors,
+                message,
+                htmlAttributes,
+                null
+            );
         }
 
-        public static MvcHtmlString ValidationSummary(this HtmlHelper htmlHelper, bool excludePropertyErrors, string message, IDictionary<string, object> htmlAttributes, string headingTag)
+        public static MvcHtmlString ValidationSummary(
+            this HtmlHelper htmlHelper,
+            bool excludePropertyErrors,
+            string message,
+            IDictionary<string, object> htmlAttributes,
+            string headingTag
+        )
         {
             if (htmlHelper == null)
             {
@@ -548,13 +917,20 @@ namespace System.Web.Mvc.Html
             StringBuilder htmlSummary = new StringBuilder();
             TagBuilder unorderedList = new TagBuilder("ul");
 
-            IEnumerable<ModelState> modelStates = GetModelStateList(htmlHelper, excludePropertyErrors);
+            IEnumerable<ModelState> modelStates = GetModelStateList(
+                htmlHelper,
+                excludePropertyErrors
+            );
 
             foreach (ModelState modelState in modelStates)
             {
                 foreach (ModelError modelError in modelState.Errors)
                 {
-                    string errorText = GetUserErrorMessageOrDefault(htmlHelper.ViewContext.HttpContext, modelError, null /* modelState */);
+                    string errorText = GetUserErrorMessageOrDefault(
+                        htmlHelper.ViewContext.HttpContext,
+                        modelError,
+                        null /* modelState */
+                    );
                     if (!String.IsNullOrEmpty(errorText))
                     {
                         TagBuilder listItem = new TagBuilder("li");
@@ -573,7 +949,11 @@ namespace System.Web.Mvc.Html
 
             TagBuilder divBuilder = new TagBuilder("div");
             divBuilder.MergeAttributes(htmlAttributes);
-            divBuilder.AddCssClass((htmlHelper.ViewData.ModelState.IsValid) ? HtmlHelper.ValidationSummaryValidCssClassName : HtmlHelper.ValidationSummaryCssClassName);
+            divBuilder.AddCssClass(
+                (htmlHelper.ViewData.ModelState.IsValid)
+                    ? HtmlHelper.ValidationSummaryValidCssClassName
+                    : HtmlHelper.ValidationSummaryCssClassName
+            );
             divBuilder.InnerHtml = messageSpan + unorderedList.ToString(TagRenderMode.Normal);
 
             if (formContext != null)
@@ -598,12 +978,18 @@ namespace System.Web.Mvc.Html
         }
 
         // Returns non-null list of model states, which caller will render in order provided.
-        private static IEnumerable<ModelState> GetModelStateList(HtmlHelper htmlHelper, bool excludePropertyErrors)
+        private static IEnumerable<ModelState> GetModelStateList(
+            HtmlHelper htmlHelper,
+            bool excludePropertyErrors
+        )
         {
             if (excludePropertyErrors)
             {
                 ModelState ms;
-                htmlHelper.ViewData.ModelState.TryGetValue(htmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix, out ms);
+                htmlHelper.ViewData.ModelState.TryGetValue(
+                    htmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix,
+                    out ms
+                );
                 if (ms != null)
                 {
                     return new ModelState[] { ms };
@@ -613,7 +999,7 @@ namespace System.Web.Mvc.Html
             }
             else
             {
-                // Sort modelStates to respect the ordering in the metadata.                 
+                // Sort modelStates to respect the ordering in the metadata.
                 // ModelState doesn't refer to ModelMetadata, but we can correlate via the property name.
                 Dictionary<string, int> ordering = new Dictionary<string, int>();
 
@@ -627,9 +1013,9 @@ namespace System.Web.Mvc.Html
                 }
 
                 return from kv in htmlHelper.ViewData.ModelState
-                       let name = kv.Key
-                       orderby ordering.GetOrDefault(name, ModelMetadata.DefaultOrder)
-                       select kv.Value;
+                    let name = kv.Key
+                    orderby ordering.GetOrDefault(name, ModelMetadata.DefaultOrder)
+                    select kv.Value;
             }
         }
     }

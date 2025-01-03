@@ -31,7 +31,11 @@ namespace System.Web.Razor.Parser
             return reader.ReadUntil(inclusive: false, terminators: terminators);
         }
 
-        public static string ReadUntil(this TextReader reader, bool inclusive, params char[] terminators)
+        public static string ReadUntil(
+            this TextReader reader,
+            bool inclusive,
+            params char[] terminators
+        )
         {
             if (reader == null)
             {
@@ -50,7 +54,11 @@ namespace System.Web.Razor.Parser
             return reader.ReadUntil(condition, inclusive: false);
         }
 
-        public static string ReadUntil(this TextReader reader, Predicate<char> condition, bool inclusive)
+        public static string ReadUntil(
+            this TextReader reader,
+            Predicate<char> condition,
+            bool inclusive
+        )
         {
             if (reader == null)
             {
@@ -82,7 +90,11 @@ namespace System.Web.Razor.Parser
             return reader.ReadWhile(condition, inclusive: false);
         }
 
-        public static string ReadWhile(this TextReader reader, Predicate<char> condition, bool inclusive)
+        public static string ReadWhile(
+            this TextReader reader,
+            Predicate<char> condition,
+            bool inclusive
+        )
         {
             if (reader == null)
             {

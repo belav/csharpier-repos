@@ -10,8 +10,6 @@ namespace System.Linq
         public static IEnumerable<TResult> Empty<TResult>() => Array.Empty<TResult>();
 
         private static TResult[]? GetEmptyIfEmpty<TSource, TResult>(IEnumerable<TSource> source) =>
-            source is TSource[] { Length: 0 } ?
-                Array.Empty<TResult>() :
-                null;
+            source is TSource[] { Length: 0 } ? Array.Empty<TResult>() : null;
     }
 }

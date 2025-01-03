@@ -25,7 +25,7 @@ namespace Microsoft.Interop
         /// <summary>
         /// The native signature should be a pointer to the type returned by <see cref="IMarshallingGenerator.AsNativeType(TypePositionInfo)"/> passed by value.
         /// </summary>
-        PointerToNativeType
+        PointerToNativeType,
     }
 
     /// <summary>
@@ -51,7 +51,7 @@ namespace Microsoft.Interop
         /// <summary>
         /// The native identifier provided by <see cref="StubCodeContext.GetIdentifiers(TypePositionInfo)"/> should be cast to the native type.
         /// </summary>
-        CastNativeIdentifier
+        CastNativeIdentifier,
     }
 
     /// <summary>
@@ -63,14 +63,17 @@ namespace Microsoft.Interop
         /// The provided <see cref="ByValueContentsMarshalKind" /> is supported and changes behavior from the default behavior.
         /// </summary>
         Supported,
+
         /// <summary>
         /// The provided <see cref="ByValueContentsMarshalKind" /> is not supported.
         /// </summary>
         NotSupported,
+
         /// <summary>
         /// The provided <see cref="ByValueContentsMarshalKind" /> is supported but does not change behavior from the default in this scenario.
         /// </summary>
         Unnecessary,
+
         /// <summary>
         /// The provided <see cref="ByValueContentsMarshalKind" /> is supported but does not follow best practices.
         /// </summary>
@@ -102,7 +105,10 @@ namespace Microsoft.Interop
         /// <param name="info">Object to marshal</param>
         /// <param name="context">Code generation context</param>
         /// <returns>Argument syntax for <paramref name="info"/></returns>
-        ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context);
+        ValueBoundaryBehavior GetValueBoundaryBehavior(
+            TypePositionInfo info,
+            StubCodeContext context
+        );
 
         /// <summary>
         /// Generate code for marshalling
@@ -142,6 +148,11 @@ namespace Microsoft.Interop
         /// It should be non-null if the value is not <see cref="ByValueMarshalKindSupport.Supported"/>
         /// </param>
         /// <returns>If the provided <paramref name="marshalKind"/> is supported and if it is required to specify the requested behavior.</returns>
-        ByValueMarshalKindSupport SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, TypePositionInfo info, StubCodeContext context, out GeneratorDiagnostic? diagnostic);
+        ByValueMarshalKindSupport SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            TypePositionInfo info,
+            StubCodeContext context,
+            out GeneratorDiagnostic? diagnostic
+        );
     }
 }

@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,109 +29,124 @@ using System.Reflection;
 using System.Windows.Markup;
 using System.Xaml;
 using System.Xaml.Schema;
-using NUnit.Framework;
 using MonoTests.System.Xaml;
-
+using NUnit.Framework;
 using Category = NUnit.Framework.CategoryAttribute;
 
 namespace MonoTests.System.Windows.Markup
 {
-	[TestFixture]
-	public class TypeExtensionConverterTest
-	{
-		class XamlTypeResolver : IXamlTypeResolver
-		{
-			public Type Resolve (string qualifiedTypeName)
-			{
-				throw new NotImplementedException ();
-			}
-		}
-		
-		class TypeDescriptorContext : ITypeDescriptorContext
-		{
-			public object Service { get; set; }
+    [TestFixture]
+    public class TypeExtensionConverterTest
+    {
+        class XamlTypeResolver : IXamlTypeResolver
+        {
+            public Type Resolve(string qualifiedTypeName)
+            {
+                throw new NotImplementedException();
+            }
+        }
 
-			public object GetService (Type serviceType)
-			{
-				return Service != null && serviceType.IsAssignableFrom (Service.GetType ()) ? Service : null;
-			}
+        class TypeDescriptorContext : ITypeDescriptorContext
+        {
+            public object Service { get; set; }
 
-			public void OnComponentChanged ()
-			{
-			}
+            public object GetService(Type serviceType)
+            {
+                return Service != null && serviceType.IsAssignableFrom(Service.GetType())
+                    ? Service
+                    : null;
+            }
 
-			public bool OnComponentChanging ()
-			{
-				return true;
-			}
-			
-			public IContainer Container { get; set; }
+            public void OnComponentChanged() { }
 
-			public object Instance { get; set; }
+            public bool OnComponentChanging()
+            {
+                return true;
+            }
 
-			public PropertyDescriptor PropertyDescriptor { get; set; }
-		}
-		
-		[Test]
-		public void CanConvertFrom ()
-		{
-			var tc = XamlLanguage.Type.TypeConverter.ConverterInstance;
-			Assert.IsFalse (tc.CanConvertFrom (null, typeof (string)), "#1");
-			Assert.IsFalse (tc.CanConvertFrom (null, typeof (Type)), "#2");
-			Assert.IsFalse (tc.CanConvertFrom (null, typeof (Type)), "#3");
-			Assert.IsTrue (tc.CanConvertFrom (null, typeof (InstanceDescriptor)), "#4");
+            public IContainer Container { get; set; }
 
-			var idc = new TypeDescriptorContext () {Instance = "x:Int32", Service = new XamlTypeResolver ()}; // gives no difference ...
-			Assert.IsFalse (tc.CanConvertFrom (idc, typeof (string)), "#5");
-			Assert.IsFalse (tc.CanConvertFrom (idc, typeof (Type)), "#6");
-			Assert.IsFalse (tc.CanConvertFrom (idc, typeof (TypeExtension)), "#7");
-		}
+            public object Instance { get; set; }
 
-		[Test]
-		public void CanConvertTo ()
-		{
-			var tc = XamlLanguage.Type.TypeConverter.ConverterInstance;
-			Assert.IsTrue (tc.CanConvertTo (null, typeof (string)), "#1");
-			Assert.IsFalse (tc.CanConvertTo (null, typeof (Type)), "#2");
-			Assert.IsFalse (tc.CanConvertTo (null, typeof (TypeExtension)), "#3");
+            public PropertyDescriptor PropertyDescriptor { get; set; }
+        }
 
-			var idc = new TypeDescriptorContext () {Instance = "x:Int32", Service = new XamlTypeResolver ()}; // gives no differences...
-			Assert.IsTrue (tc.CanConvertTo (idc, typeof (string)), "#5");
-			Assert.IsFalse (tc.CanConvertTo (idc, typeof (Type)), "#6");
-			Assert.IsFalse (tc.CanConvertTo (idc, typeof (TypeExtension)), "#7");
-		}
+        [Test]
+        public void CanConvertFrom()
+        {
+            var tc = XamlLanguage.Type.TypeConverter.ConverterInstance;
+            Assert.IsFalse(tc.CanConvertFrom(null, typeof(string)), "#1");
+            Assert.IsFalse(tc.CanConvertFrom(null, typeof(Type)), "#2");
+            Assert.IsFalse(tc.CanConvertFrom(null, typeof(Type)), "#3");
+            Assert.IsTrue(tc.CanConvertFrom(null, typeof(InstanceDescriptor)), "#4");
 
-		[Test]
-		public void ConvertTo ()
-		{
-			var tc = XamlLanguage.Type.TypeConverter.ConverterInstance;
-			Assert.AreEqual ("x:Int32", tc.ConvertTo (null, null, "x:Int32", typeof (string)), "#1");
-			Assert.AreEqual ("System.Int32", tc.ConvertTo (null, null, typeof (int), typeof (string)), "#2");
-			Assert.AreEqual ("System.Type", tc.ConvertTo (null, null, typeof (Type), typeof (string)), "#3");
-		}
-		
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ConvertToFail ()
-		{
-			var tc = XamlLanguage.Type.TypeConverter.ConverterInstance;
-			tc.ConvertTo (null, null, typeof (int), typeof (Type));
-		}
-		
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ConvertToFail2 ()
-		{
-			var tc = XamlLanguage.Type.TypeConverter.ConverterInstance;
-			tc.ConvertTo (new DummyValueSerializerContext (), null, "x:Int32", typeof (TypeExtension));
-		}
-		
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ConvertToFail3 ()
-		{
-			var tc = XamlLanguage.Type.TypeConverter.ConverterInstance;
-			tc.ConvertTo (new DummyValueSerializerContext (), null, "x:Int32", typeof (TypeExtension));
-		}
-	}
+            var idc = new TypeDescriptorContext()
+            {
+                Instance = "x:Int32",
+                Service = new XamlTypeResolver(),
+            }; // gives no difference ...
+            Assert.IsFalse(tc.CanConvertFrom(idc, typeof(string)), "#5");
+            Assert.IsFalse(tc.CanConvertFrom(idc, typeof(Type)), "#6");
+            Assert.IsFalse(tc.CanConvertFrom(idc, typeof(TypeExtension)), "#7");
+        }
+
+        [Test]
+        public void CanConvertTo()
+        {
+            var tc = XamlLanguage.Type.TypeConverter.ConverterInstance;
+            Assert.IsTrue(tc.CanConvertTo(null, typeof(string)), "#1");
+            Assert.IsFalse(tc.CanConvertTo(null, typeof(Type)), "#2");
+            Assert.IsFalse(tc.CanConvertTo(null, typeof(TypeExtension)), "#3");
+
+            var idc = new TypeDescriptorContext()
+            {
+                Instance = "x:Int32",
+                Service = new XamlTypeResolver(),
+            }; // gives no differences...
+            Assert.IsTrue(tc.CanConvertTo(idc, typeof(string)), "#5");
+            Assert.IsFalse(tc.CanConvertTo(idc, typeof(Type)), "#6");
+            Assert.IsFalse(tc.CanConvertTo(idc, typeof(TypeExtension)), "#7");
+        }
+
+        [Test]
+        public void ConvertTo()
+        {
+            var tc = XamlLanguage.Type.TypeConverter.ConverterInstance;
+            Assert.AreEqual("x:Int32", tc.ConvertTo(null, null, "x:Int32", typeof(string)), "#1");
+            Assert.AreEqual(
+                "System.Int32",
+                tc.ConvertTo(null, null, typeof(int), typeof(string)),
+                "#2"
+            );
+            Assert.AreEqual(
+                "System.Type",
+                tc.ConvertTo(null, null, typeof(Type), typeof(string)),
+                "#3"
+            );
+        }
+
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertToFail()
+        {
+            var tc = XamlLanguage.Type.TypeConverter.ConverterInstance;
+            tc.ConvertTo(null, null, typeof(int), typeof(Type));
+        }
+
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertToFail2()
+        {
+            var tc = XamlLanguage.Type.TypeConverter.ConverterInstance;
+            tc.ConvertTo(new DummyValueSerializerContext(), null, "x:Int32", typeof(TypeExtension));
+        }
+
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertToFail3()
+        {
+            var tc = XamlLanguage.Type.TypeConverter.ConverterInstance;
+            tc.ConvertTo(new DummyValueSerializerContext(), null, "x:Int32", typeof(TypeExtension));
+        }
+    }
 }

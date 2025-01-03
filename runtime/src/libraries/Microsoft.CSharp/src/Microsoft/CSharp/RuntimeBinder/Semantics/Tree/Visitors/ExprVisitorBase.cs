@@ -32,7 +32,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ExpressionKind.Concat => VisitCONCAT(pExpr as ExprConcat),
                 ExpressionKind.ArrayInit => VisitARRINIT(pExpr as ExprArrayInit),
                 ExpressionKind.Cast => VisitCAST(pExpr as ExprCast),
-                ExpressionKind.UserDefinedConversion => VisitUSERDEFINEDCONVERSION(pExpr as ExprUserDefinedConversion),
+                ExpressionKind.UserDefinedConversion => VisitUSERDEFINEDCONVERSION(
+                    pExpr as ExprUserDefinedConversion
+                ),
                 ExpressionKind.TypeOf => VisitTYPEOF(pExpr as ExprTypeOf),
                 ExpressionKind.ZeroInit => VisitZEROINIT(pExpr as ExprZeroInit),
                 ExpressionKind.UserLogicalOp => VisitUSERLOGOP(pExpr as ExprUserLogicalOp),

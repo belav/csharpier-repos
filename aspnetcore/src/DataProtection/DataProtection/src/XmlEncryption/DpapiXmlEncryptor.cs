@@ -56,7 +56,9 @@ public sealed class DpapiXmlEncryptor : IXmlEncryptor
         }
         else
         {
-            _logger.EncryptingToWindowsDPAPIForCurrentUserAccount(WindowsIdentity.GetCurrent().Name);
+            _logger.EncryptingToWindowsDPAPIForCurrentUserAccount(
+                WindowsIdentity.GetCurrent().Name
+            );
         }
 
         // Convert the XML element to a binary secret so that it can be run through DPAPI
@@ -65,7 +67,10 @@ public sealed class DpapiXmlEncryptor : IXmlEncryptor
         {
             using (var plaintextElementAsSecret = plaintextElement.ToSecret())
             {
-                dpapiEncryptedData = DpapiSecretSerializerHelper.ProtectWithDpapi(plaintextElementAsSecret, protectToLocalMachine: _protectToLocalMachine);
+                dpapiEncryptedData = DpapiSecretSerializerHelper.ProtectWithDpapi(
+                    plaintextElementAsSecret,
+                    protectToLocalMachine: _protectToLocalMachine
+                );
             }
         }
         catch (Exception ex)
@@ -79,10 +84,11 @@ public sealed class DpapiXmlEncryptor : IXmlEncryptor
         //   <value>{base64}</value>
         // </encryptedKey>
 
-        var element = new XElement("encryptedKey",
+        var element = new XElement(
+            "encryptedKey",
             new XComment(" This key is encrypted with Windows DPAPI. "),
-            new XElement("value",
-                Convert.ToBase64String(dpapiEncryptedData)));
+            new XElement("value", Convert.ToBase64String(dpapiEncryptedData))
+        );
 
         return new EncryptedXmlInfo(element, typeof(DpapiXmlDecryptor));
     }

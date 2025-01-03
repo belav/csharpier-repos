@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,29 +33,29 @@ using System;
 using System.Data;
 using System.Data.OleDb;
 
-namespace MonoTests.System.Data.OleDb {
+namespace MonoTests.System.Data.OleDb
+{
+    [TestFixture]
+    public class OleDbParameterCollectionTest
+    {
+        [Test]
+        [Category("NotWorking")] // it tries to PInvoke LocalAlloc() and fails on non-Windows.
+        public void AddWithValueTest()
+        {
+            OleDbCommand command = new OleDbCommand();
+            OleDbParameterCollection parameters = command.Parameters;
 
-	[TestFixture]
-	public class OleDbParameterCollectionTest {
+            // Test with string
+            OleDbParameter parameter = parameters.AddWithValue("parameterName", "parameterValue");
 
-		[Test]
-		[Category ("NotWorking")] // it tries to PInvoke LocalAlloc() and fails on non-Windows.
-		public void AddWithValueTest ()
-		{
-			OleDbCommand command = new OleDbCommand();
-			OleDbParameterCollection parameters = command.Parameters;
-
-			// Test with string
-			OleDbParameter parameter = parameters.AddWithValue("parameterName", "parameterValue");
-			
-			Assert.AreEqual("parameterValue", parameter.Value);
-			Assert.AreEqual("parameterName", parameter.ParameterName);
-			Assert.AreEqual(DbType.AnsiString, parameter.DbType);
-			Assert.AreEqual(OleDbType.VarChar, parameter.OleDbType);
-			Assert.AreEqual(1, parameters.Count);
-			Assert.AreEqual(parameter, parameters[0]);	
-		}
-	}
+            Assert.AreEqual("parameterValue", parameter.Value);
+            Assert.AreEqual("parameterName", parameter.ParameterName);
+            Assert.AreEqual(DbType.AnsiString, parameter.DbType);
+            Assert.AreEqual(OleDbType.VarChar, parameter.OleDbType);
+            Assert.AreEqual(1, parameters.Count);
+            Assert.AreEqual(parameter, parameters[0]);
+        }
+    }
 }
 
 #endif

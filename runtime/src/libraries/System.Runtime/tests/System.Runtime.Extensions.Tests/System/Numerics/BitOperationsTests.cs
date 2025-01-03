@@ -111,7 +111,7 @@ namespace System.Numerics.Tests
         [InlineData(int.MinValue, false)]
         public static void BitOps_IsPow2_nint_32(int n, bool expected)
         {
-            bool actual = BitOperations.IsPow2((nint) n);
+            bool actual = BitOperations.IsPow2((nint)n);
             Assert.Equal(expected, actual);
         }
 
@@ -133,7 +133,7 @@ namespace System.Numerics.Tests
         [InlineData(long.MinValue, false)]
         public static void BitOps_IsPow2_nint_64(long n, bool expected)
         {
-            bool actual = BitOperations.IsPow2((nint) n);
+            bool actual = BitOperations.IsPow2((nint)n);
             Assert.Equal(expected, actual);
         }
 
@@ -153,7 +153,7 @@ namespace System.Numerics.Tests
         [InlineData(uint.MaxValue, false)]
         public static void BitOps_IsPow2_nuint_32(uint n, bool expected)
         {
-            bool actual = BitOperations.IsPow2((nuint) n);
+            bool actual = BitOperations.IsPow2((nuint)n);
             Assert.Equal(expected, actual);
         }
 
@@ -173,10 +173,9 @@ namespace System.Numerics.Tests
         [InlineData(ulong.MaxValue, false)]
         public static void BitOps_IsPow2_nuint_64(ulong n, bool expected)
         {
-            bool actual = BitOperations.IsPow2((nuint) n);
+            bool actual = BitOperations.IsPow2((nuint)n);
             Assert.Equal(expected, actual);
         }
-
 
         [Theory]
         [InlineData(0u, 32)]
@@ -221,7 +220,6 @@ namespace System.Numerics.Tests
             int actual = BitOperations.LeadingZeroCount(n);
             Assert.Equal(expected, actual);
         }
-
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.Is32BitProcess))]
         [InlineData(0u, 32)]
@@ -375,7 +373,7 @@ namespace System.Numerics.Tests
         [InlineData(uint.MaxValue, 0)]
         public static void BitOps_TrailingZeroCount_nuint_32(uint n, int expected)
         {
-            int actual = BitOperations.TrailingZeroCount((nuint) n);
+            int actual = BitOperations.TrailingZeroCount((nuint)n);
             Assert.Equal(expected, actual);
         }
 
@@ -398,7 +396,7 @@ namespace System.Numerics.Tests
         [InlineData(ulong.MaxValue, 0)]
         public static void BitOps_TrailingZeroCount_nuint_64(ulong n, int expected)
         {
-            int actual = BitOperations.TrailingZeroCount((nuint) n);
+            int actual = BitOperations.TrailingZeroCount((nuint)n);
             Assert.Equal(expected, actual);
         }
 
@@ -420,7 +418,7 @@ namespace System.Numerics.Tests
         [InlineData(int.MaxValue, 0)]
         public static void BitOps_TrailingZeroCount_nint_32(int n, int expected)
         {
-            int actual = BitOperations.TrailingZeroCount((nint) n);
+            int actual = BitOperations.TrailingZeroCount((nint)n);
             Assert.Equal(expected, actual);
         }
 
@@ -443,7 +441,7 @@ namespace System.Numerics.Tests
         [InlineData(long.MaxValue, 0)]
         public static void BitOps_TrailingZeroCount_nint_64(long n, int expected)
         {
-            int actual = BitOperations.TrailingZeroCount((nint) n);
+            int actual = BitOperations.TrailingZeroCount((nint)n);
             Assert.Equal(expected, actual);
         }
 
@@ -504,7 +502,7 @@ namespace System.Numerics.Tests
         [InlineData(uint.MaxValue, 32 - 1)]
         public static void BitOps_Log2_nuint_32(uint n, int expected)
         {
-            int actual = BitOperations.Log2((nuint) n);
+            int actual = BitOperations.Log2((nuint)n);
             Assert.Equal(expected, actual);
         }
 
@@ -525,7 +523,7 @@ namespace System.Numerics.Tests
         [InlineData(ulong.MaxValue, 64 - 1)]
         public static void BitOps_Log2_nuint_64(ulong n, int expected)
         {
-            int actual = BitOperations.Log2((nuint) n);
+            int actual = BitOperations.Log2((nuint)n);
             Assert.Equal(expected, actual);
         }
 
@@ -614,7 +612,7 @@ namespace System.Numerics.Tests
         [InlineData(0b1111110, 6)]
         public static void BitOps_PopCount_nuint_32(uint n, int expected)
         {
-            int actual = BitOperations.PopCount((nuint) n);
+            int actual = BitOperations.PopCount((nuint)n);
             Assert.Equal(expected, actual);
         }
 
@@ -653,15 +651,51 @@ namespace System.Numerics.Tests
         }
 
         [Theory]
-        [InlineData(0b00000000_00000000_00000000_00000001u, int.MaxValue, 0b10000000_00000000_00000000_00000000u)] // % 32 = 31
-        [InlineData(0b01000000_00000001_00000000_00000001u, 3, 0b00000000_00001000_00000000_00001010u)]
-        [InlineData(0b01000000_00000001_00000000_00000001u, 2, 0b00000000_00000100_00000000_00000101u)]
-        [InlineData(0b01010101_01010101_01010101_01010101u, 1, 0b10101010_10101010_10101010_10101010u)]
-        [InlineData(0b01010101_11111111_01010101_01010101u, 0, 0b01010101_11111111_01010101_01010101u)]
-        [InlineData(0b00000000_00000000_00000000_00000001u, -1, 0b10000000_00000000_00000000_00000000u)]
-        [InlineData(0b00000000_00000000_00000000_00000001u, -2, 0b01000000_00000000_00000000_00000000u)]
-        [InlineData(0b00000000_00000000_00000000_00000001u, -3, 0b00100000_00000000_00000000_00000000u)]
-        [InlineData(0b01010101_11111111_01010101_01010101u, int.MinValue, 0b01010101_11111111_01010101_01010101u)] // % 32 = 0
+        [InlineData(
+            0b00000000_00000000_00000000_00000001u,
+            int.MaxValue,
+            0b10000000_00000000_00000000_00000000u
+        )] // % 32 = 31
+        [InlineData(
+            0b01000000_00000001_00000000_00000001u,
+            3,
+            0b00000000_00001000_00000000_00001010u
+        )]
+        [InlineData(
+            0b01000000_00000001_00000000_00000001u,
+            2,
+            0b00000000_00000100_00000000_00000101u
+        )]
+        [InlineData(
+            0b01010101_01010101_01010101_01010101u,
+            1,
+            0b10101010_10101010_10101010_10101010u
+        )]
+        [InlineData(
+            0b01010101_11111111_01010101_01010101u,
+            0,
+            0b01010101_11111111_01010101_01010101u
+        )]
+        [InlineData(
+            0b00000000_00000000_00000000_00000001u,
+            -1,
+            0b10000000_00000000_00000000_00000000u
+        )]
+        [InlineData(
+            0b00000000_00000000_00000000_00000001u,
+            -2,
+            0b01000000_00000000_00000000_00000000u
+        )]
+        [InlineData(
+            0b00000000_00000000_00000000_00000001u,
+            -3,
+            0b00100000_00000000_00000000_00000000u
+        )]
+        [InlineData(
+            0b01010101_11111111_01010101_01010101u,
+            int.MinValue,
+            0b01010101_11111111_01010101_01010101u
+        )] // % 32 = 0
         public static void BitOps_RotateLeft_uint(uint n, int offset, uint expected)
         {
             Assert.Equal(expected, BitOperations.RotateLeft(n, offset));
@@ -674,39 +708,73 @@ namespace System.Numerics.Tests
             {
                 if (Environment.Is64BitProcess)
                 {
-                    nuint value = (nuint)0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul;
-                    Assert.Equal((nuint)0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
-                        BitOperations.RotateLeft(value, 1));
-                    Assert.Equal((nuint)0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul,
-                        BitOperations.RotateLeft(value, 2));
-                    Assert.Equal((nuint)0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
-                        BitOperations.RotateLeft(value, 3));
+                    nuint value = (nuint)
+                        0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul;
+                    Assert.Equal(
+                        (nuint)
+                            0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
+                        BitOperations.RotateLeft(value, 1)
+                    );
+                    Assert.Equal(
+                        (nuint)
+                            0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul,
+                        BitOperations.RotateLeft(value, 2)
+                    );
+                    Assert.Equal(
+                        (nuint)
+                            0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
+                        BitOperations.RotateLeft(value, 3)
+                    );
                     Assert.Equal(value, BitOperations.RotateLeft(value, int.MinValue)); // % 64 = 0
-                    Assert.Equal(BitOperations.RotateLeft(value, 63),
-                        BitOperations.RotateLeft(value, int.MaxValue)); // % 64 = 63
+                    Assert.Equal(
+                        BitOperations.RotateLeft(value, 63),
+                        BitOperations.RotateLeft(value, int.MaxValue)
+                    ); // % 64 = 63
                 }
                 else
                 {
-                    Assert.Equal((nuint)0b10000000_00000000_00000000_00000000u,
-                        BitOperations.RotateLeft((nuint)0b00000000_00000000_00000000_00000001u,
-                            int.MaxValue)); // % 32 = 31
-                    Assert.Equal((nuint)0b00000000_00001000_00000000_00001010u,
-                        BitOperations.RotateLeft((nuint)0b01000000_00000001_00000000_00000001u, 3));
-                    Assert.Equal((nuint)0b00000000_00000100_00000000_00000101u,
-                        BitOperations.RotateLeft((nuint)0b01000000_00000001_00000000_00000001u, 2));
-                    Assert.Equal((nuint)0b10101010_10101010_10101010_10101010u,
-                        BitOperations.RotateLeft((nuint)0b01010101_01010101_01010101_01010101u, 1));
-                    Assert.Equal((nuint)0b01010101_11111111_01010101_01010101u,
-                        BitOperations.RotateLeft((nuint)0b01010101_11111111_01010101_01010101u, 0));
-                    Assert.Equal((nuint)0b10000000_00000000_00000000_00000000u,
-                        BitOperations.RotateLeft((nuint)0b00000000_00000000_00000000_00000001u, -1));
-                    Assert.Equal((nuint)0b01000000_00000000_00000000_00000000u,
-                        BitOperations.RotateLeft((nuint)0b00000000_00000000_00000000_00000001u, -2));
-                    Assert.Equal((nuint)0b00100000_00000000_00000000_00000000u,
-                        BitOperations.RotateLeft((nuint)0b00000000_00000000_00000000_00000001u, -3));
-                    Assert.Equal((nuint)0b01010101_11111111_01010101_01010101u,
-                        BitOperations.RotateLeft((nuint)0b01010101_11111111_01010101_01010101u,
-                            int.MinValue)); // % 32 = 0
+                    Assert.Equal(
+                        (nuint)0b10000000_00000000_00000000_00000000u,
+                        BitOperations.RotateLeft(
+                            (nuint)0b00000000_00000000_00000000_00000001u,
+                            int.MaxValue
+                        )
+                    ); // % 32 = 31
+                    Assert.Equal(
+                        (nuint)0b00000000_00001000_00000000_00001010u,
+                        BitOperations.RotateLeft((nuint)0b01000000_00000001_00000000_00000001u, 3)
+                    );
+                    Assert.Equal(
+                        (nuint)0b00000000_00000100_00000000_00000101u,
+                        BitOperations.RotateLeft((nuint)0b01000000_00000001_00000000_00000001u, 2)
+                    );
+                    Assert.Equal(
+                        (nuint)0b10101010_10101010_10101010_10101010u,
+                        BitOperations.RotateLeft((nuint)0b01010101_01010101_01010101_01010101u, 1)
+                    );
+                    Assert.Equal(
+                        (nuint)0b01010101_11111111_01010101_01010101u,
+                        BitOperations.RotateLeft((nuint)0b01010101_11111111_01010101_01010101u, 0)
+                    );
+                    Assert.Equal(
+                        (nuint)0b10000000_00000000_00000000_00000000u,
+                        BitOperations.RotateLeft((nuint)0b00000000_00000000_00000000_00000001u, -1)
+                    );
+                    Assert.Equal(
+                        (nuint)0b01000000_00000000_00000000_00000000u,
+                        BitOperations.RotateLeft((nuint)0b00000000_00000000_00000000_00000001u, -2)
+                    );
+                    Assert.Equal(
+                        (nuint)0b00100000_00000000_00000000_00000000u,
+                        BitOperations.RotateLeft((nuint)0b00000000_00000000_00000000_00000001u, -3)
+                    );
+                    Assert.Equal(
+                        (nuint)0b01010101_11111111_01010101_01010101u,
+                        BitOperations.RotateLeft(
+                            (nuint)0b01010101_11111111_01010101_01010101u,
+                            int.MinValue
+                        )
+                    ); // % 32 = 0
                 }
             }
         }
@@ -714,24 +782,73 @@ namespace System.Numerics.Tests
         [Fact]
         public static void BitOps_RotateLeft_ulong()
         {
-            ulong value = 0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul;
-            Assert.Equal(0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul, BitOperations.RotateLeft(value, 1));
-            Assert.Equal(0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul, BitOperations.RotateLeft(value, 2));
-            Assert.Equal(0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul, BitOperations.RotateLeft(value, 3));
+            ulong value =
+                0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul;
+            Assert.Equal(
+                0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
+                BitOperations.RotateLeft(value, 1)
+            );
+            Assert.Equal(
+                0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul,
+                BitOperations.RotateLeft(value, 2)
+            );
+            Assert.Equal(
+                0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
+                BitOperations.RotateLeft(value, 3)
+            );
             Assert.Equal(value, BitOperations.RotateLeft(value, int.MinValue)); // % 64 = 0
-            Assert.Equal(BitOperations.RotateLeft(value, 63), BitOperations.RotateLeft(value, int.MaxValue)); // % 64 = 63
+            Assert.Equal(
+                BitOperations.RotateLeft(value, 63),
+                BitOperations.RotateLeft(value, int.MaxValue)
+            ); // % 64 = 63
         }
 
         [Theory]
-        [InlineData(0b10000000_00000000_00000000_00000000u, int.MaxValue, 0b00000000_00000000_00000000_00000001u)] // % 32 = 31
-        [InlineData(0b00000000_00001000_00000000_00001010u, 3, 0b01000000_00000001_00000000_00000001u)]
-        [InlineData(0b00000000_00000100_00000000_00000101u, 2, 0b01000000_00000001_00000000_00000001u)]
-        [InlineData(0b01010101_01010101_01010101_01010101u, 1, 0b10101010_10101010_10101010_10101010u)]
-        [InlineData(0b01010101_11111111_01010101_01010101u, 0, 0b01010101_11111111_01010101_01010101u)]
-        [InlineData(0b10000000_00000000_00000000_00000000u, -1, 0b00000000_00000000_00000000_00000001u)]
-        [InlineData(0b00000000_00000000_00000000_00000001u, -2, 0b00000000_00000000_00000000_00000100u)]
-        [InlineData(0b01000000_00000000_00000000_00000000u, -3, 0b00000000_00000000_00000000_00000010u)]
-        [InlineData(0b01010101_11111111_01010101_01010101u, int.MinValue, 0b01010101_11111111_01010101_01010101u)] // % 32 = 0
+        [InlineData(
+            0b10000000_00000000_00000000_00000000u,
+            int.MaxValue,
+            0b00000000_00000000_00000000_00000001u
+        )] // % 32 = 31
+        [InlineData(
+            0b00000000_00001000_00000000_00001010u,
+            3,
+            0b01000000_00000001_00000000_00000001u
+        )]
+        [InlineData(
+            0b00000000_00000100_00000000_00000101u,
+            2,
+            0b01000000_00000001_00000000_00000001u
+        )]
+        [InlineData(
+            0b01010101_01010101_01010101_01010101u,
+            1,
+            0b10101010_10101010_10101010_10101010u
+        )]
+        [InlineData(
+            0b01010101_11111111_01010101_01010101u,
+            0,
+            0b01010101_11111111_01010101_01010101u
+        )]
+        [InlineData(
+            0b10000000_00000000_00000000_00000000u,
+            -1,
+            0b00000000_00000000_00000000_00000001u
+        )]
+        [InlineData(
+            0b00000000_00000000_00000000_00000001u,
+            -2,
+            0b00000000_00000000_00000000_00000100u
+        )]
+        [InlineData(
+            0b01000000_00000000_00000000_00000000u,
+            -3,
+            0b00000000_00000000_00000000_00000010u
+        )]
+        [InlineData(
+            0b01010101_11111111_01010101_01010101u,
+            int.MinValue,
+            0b01010101_11111111_01010101_01010101u
+        )] // % 32 = 0
         public static void BitOps_RotateRight_uint(uint n, int offset, uint expected)
         {
             Assert.Equal(expected, BitOperations.RotateRight(n, offset));
@@ -740,12 +857,25 @@ namespace System.Numerics.Tests
         [Fact]
         public static void BitOps_RotateRight_ulong()
         {
-            ulong value = 0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul;
-            Assert.Equal(0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul, BitOperations.RotateRight(value, 1));
-            Assert.Equal(0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul, BitOperations.RotateRight(value, 2));
-            Assert.Equal(0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul, BitOperations.RotateRight(value, 3));
+            ulong value =
+                0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul;
+            Assert.Equal(
+                0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
+                BitOperations.RotateRight(value, 1)
+            );
+            Assert.Equal(
+                0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul,
+                BitOperations.RotateRight(value, 2)
+            );
+            Assert.Equal(
+                0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
+                BitOperations.RotateRight(value, 3)
+            );
             Assert.Equal(value, BitOperations.RotateRight(value, int.MinValue)); // % 64 = 0
-            Assert.Equal(BitOperations.RotateLeft(value, 63), BitOperations.RotateRight(value, int.MaxValue)); // % 64 = 63
+            Assert.Equal(
+                BitOperations.RotateLeft(value, 63),
+                BitOperations.RotateRight(value, int.MaxValue)
+            ); // % 64 = 63
         }
 
         [Fact]
@@ -755,39 +885,70 @@ namespace System.Numerics.Tests
             {
                 if (Environment.Is64BitProcess)
                 {
-                    const ulong value = 0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul;
-                    Assert.Equal(0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
-                        BitOperations.RotateRight(value, 1));
-                    Assert.Equal(0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul,
-                        BitOperations.RotateRight(value, 2));
-                    Assert.Equal(0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
-                        BitOperations.RotateRight(value, 3));
+                    const ulong value =
+                        0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul;
+                    Assert.Equal(
+                        0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
+                        BitOperations.RotateRight(value, 1)
+                    );
+                    Assert.Equal(
+                        0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul,
+                        BitOperations.RotateRight(value, 2)
+                    );
+                    Assert.Equal(
+                        0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
+                        BitOperations.RotateRight(value, 3)
+                    );
                     Assert.Equal(value, BitOperations.RotateRight(value, int.MinValue)); // % 64 = 0
-                    Assert.Equal(BitOperations.RotateLeft(value, 63),
-                        BitOperations.RotateRight(value, int.MaxValue)); // % 64 = 63
+                    Assert.Equal(
+                        BitOperations.RotateLeft(value, 63),
+                        BitOperations.RotateRight(value, int.MaxValue)
+                    ); // % 64 = 63
                 }
                 else
                 {
-                    Assert.Equal((nuint)0b00000000_00000000_00000000_00000001u,
-                        BitOperations.RotateRight((nuint)0b10000000_00000000_00000000_00000000u,
-                            int.MaxValue)); // % 32 = 31
-                    Assert.Equal((nuint)0b01000000_00000001_00000000_00000001u,
-                        BitOperations.RotateRight((nuint)0b00000000_00001000_00000000_00001010u, 3));
-                    Assert.Equal((nuint)0b01000000_00000001_00000000_00000001u,
-                        BitOperations.RotateRight((nuint)0b00000000_00000100_00000000_00000101u, 2));
-                    Assert.Equal((nuint)0b10101010_10101010_10101010_10101010u,
-                        BitOperations.RotateRight((nuint)0b01010101_01010101_01010101_01010101u, 1));
-                    Assert.Equal((nuint)0b01010101_11111111_01010101_01010101u,
-                        BitOperations.RotateRight((nuint)0b01010101_11111111_01010101_01010101u, 0));
-                    Assert.Equal((nuint)0b00000000_00000000_00000000_00000001u,
-                        BitOperations.RotateRight((nuint)0b10000000_00000000_00000000_00000000u, -1));
-                    Assert.Equal((nuint)0b00000000_00000000_00000001_00000000u,
-                        BitOperations.RotateRight((nuint)0b00000000_00000000_00000000_01000000u, -2));
-                    Assert.Equal((nuint)0b00000000_00000000_00000000_00000010u,
-                        BitOperations.RotateRight((nuint)0b01000000_00000000_00000000_00000000u, -3));
-                    Assert.Equal((nuint)0b01010101_11111111_01010101_01010101u,
-                        BitOperations.RotateRight((nuint)0b01010101_11111111_01010101_01010101u,
-                            int.MinValue)); // % 32 = 0
+                    Assert.Equal(
+                        (nuint)0b00000000_00000000_00000000_00000001u,
+                        BitOperations.RotateRight(
+                            (nuint)0b10000000_00000000_00000000_00000000u,
+                            int.MaxValue
+                        )
+                    ); // % 32 = 31
+                    Assert.Equal(
+                        (nuint)0b01000000_00000001_00000000_00000001u,
+                        BitOperations.RotateRight((nuint)0b00000000_00001000_00000000_00001010u, 3)
+                    );
+                    Assert.Equal(
+                        (nuint)0b01000000_00000001_00000000_00000001u,
+                        BitOperations.RotateRight((nuint)0b00000000_00000100_00000000_00000101u, 2)
+                    );
+                    Assert.Equal(
+                        (nuint)0b10101010_10101010_10101010_10101010u,
+                        BitOperations.RotateRight((nuint)0b01010101_01010101_01010101_01010101u, 1)
+                    );
+                    Assert.Equal(
+                        (nuint)0b01010101_11111111_01010101_01010101u,
+                        BitOperations.RotateRight((nuint)0b01010101_11111111_01010101_01010101u, 0)
+                    );
+                    Assert.Equal(
+                        (nuint)0b00000000_00000000_00000000_00000001u,
+                        BitOperations.RotateRight((nuint)0b10000000_00000000_00000000_00000000u, -1)
+                    );
+                    Assert.Equal(
+                        (nuint)0b00000000_00000000_00000001_00000000u,
+                        BitOperations.RotateRight((nuint)0b00000000_00000000_00000000_01000000u, -2)
+                    );
+                    Assert.Equal(
+                        (nuint)0b00000000_00000000_00000000_00000010u,
+                        BitOperations.RotateRight((nuint)0b01000000_00000000_00000000_00000000u, -3)
+                    );
+                    Assert.Equal(
+                        (nuint)0b01010101_11111111_01010101_01010101u,
+                        BitOperations.RotateRight(
+                            (nuint)0b01010101_11111111_01010101_01010101u,
+                            int.MinValue
+                        )
+                    ); // % 32 = 0
                 }
             }
         }
@@ -857,7 +1018,7 @@ namespace System.Numerics.Tests
         [InlineData(0xFFFF_FFFFu, 0ul)]
         public static void BitOps_RoundUpToPow2_nuint_32(uint value, uint expected)
         {
-            Assert.Equal(expected, BitOperations.RoundUpToPowerOf2((nuint) value));
+            Assert.Equal(expected, BitOperations.RoundUpToPowerOf2((nuint)value));
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.Is64BitProcess))]
@@ -885,7 +1046,7 @@ namespace System.Numerics.Tests
         [InlineData(0xFFFF_FFFF_FFFF_FFFFul, 0ul)]
         public static void BitOps_RoundUpToPow2_nuint_64(ulong value, ulong expected)
         {
-            Assert.Equal(expected, BitOperations.RoundUpToPowerOf2((nuint) value));
+            Assert.Equal(expected, BitOperations.RoundUpToPowerOf2((nuint)value));
         }
 
         [Theory]

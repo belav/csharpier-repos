@@ -25,7 +25,10 @@ internal sealed class NamedPolicy : IOutputCachePolicy
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.ServeResponseAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeResponseAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         var policy = GetProfilePolicy(context);
 
@@ -38,7 +41,10 @@ internal sealed class NamedPolicy : IOutputCachePolicy
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.ServeFromCacheAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeFromCacheAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         var policy = GetProfilePolicy(context);
 
@@ -51,7 +57,10 @@ internal sealed class NamedPolicy : IOutputCachePolicy
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.CacheRequestAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.CacheRequestAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         var policy = GetProfilePolicy(context);
 
@@ -69,7 +78,9 @@ internal sealed class NamedPolicy : IOutputCachePolicy
         {
             lock (_synLock)
             {
-                _options ??= context.HttpContext.RequestServices.GetRequiredService<IOptions<OutputCacheOptions>>();
+                _options ??= context.HttpContext.RequestServices.GetRequiredService<
+                    IOptions<OutputCacheOptions>
+                >();
             }
         }
 

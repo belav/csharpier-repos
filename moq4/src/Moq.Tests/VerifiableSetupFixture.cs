@@ -2,7 +2,6 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -151,11 +150,19 @@ namespace Moq.Tests
             mock1.Object.Method(mutableArg1);
             mock1.Object.Method(mutableArg1);
             mutableArg1.Value = "one";
-            Assert.Throws<MockException>(() => mock1.Verify(m => m.Method(It.Is<MutableArg>(arg => arg.Value is int)), Times.Exactly(2)));
+            Assert.Throws<MockException>(
+                () =>
+                    mock1.Verify(
+                        m => m.Method(It.Is<MutableArg>(arg => arg.Value is int)),
+                        Times.Exactly(2)
+                    )
+            );
 
             // This can be worked around by explicitly setting up the call and specifying the expected number of calls upfront:
             var mock2 = new Mock<IX>();
-            mock2.Setup(m => m.Method(It.Is<MutableArg>(arg => arg.Value is int))).Verifiable(Times.Exactly(2));
+            mock2
+                .Setup(m => m.Method(It.Is<MutableArg>(arg => arg.Value is int)))
+                .Verifiable(Times.Exactly(2));
             var mutableArg2 = new MutableArg { Value = 1 };
             mock2.Object.Method(mutableArg2);
             mock2.Object.Method(mutableArg2);

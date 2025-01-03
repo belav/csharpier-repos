@@ -34,10 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal NamespaceOrTypeSymbol Container
         {
-            get
-            {
-                return _container;
-            }
+            get { return _container; }
         }
 
         internal override Symbol ContainingMemberOrLambda
@@ -45,25 +42,49 @@ namespace Microsoft.CodeAnalysis.CSharp
             get
             {
                 var merged = _container as MergedNamespaceSymbol;
-                return ((object)merged != null) ? merged.GetConstituentForCompilation(this.Compilation) : _container;
+                return ((object)merged != null)
+                    ? merged.GetConstituentForCompilation(this.Compilation)
+                    : _container;
             }
         }
 
         private bool IsScriptClass
         {
-            get { return (_container.Kind == SymbolKind.NamedType) && ((NamedTypeSymbol)_container).IsScriptClass; }
+            get
+            {
+                return (_container.Kind == SymbolKind.NamedType)
+                    && ((NamedTypeSymbol)_container).IsScriptClass;
+            }
         }
 
-        internal override bool IsAccessibleHelper(Symbol symbol, TypeSymbol accessThroughType, out bool failedThroughTypeCheck, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo, ConsList<TypeSymbol> basesBeingResolved)
+        internal override bool IsAccessibleHelper(
+            Symbol symbol,
+            TypeSymbol accessThroughType,
+            out bool failedThroughTypeCheck,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             var type = _container as NamedTypeSymbol;
             if ((object)type != null)
             {
-                return this.IsSymbolAccessibleConditional(symbol, type, accessThroughType, out failedThroughTypeCheck, ref useSiteInfo);
+                return this.IsSymbolAccessibleConditional(
+                    symbol,
+                    type,
+                    accessThroughType,
+                    out failedThroughTypeCheck,
+                    ref useSiteInfo
+                );
             }
             else
             {
-                return Next.IsAccessibleHelper(symbol, accessThroughType, out failedThroughTypeCheck, ref useSiteInfo, basesBeingResolved);  // delegate to containing Binder, eventually checking assembly.
+                return Next.IsAccessibleHelper(
+                    symbol,
+                    accessThroughType,
+                    out failedThroughTypeCheck,
+                    ref useSiteInfo,
+                    basesBeingResolved
+                ); // delegate to containing Binder, eventually checking assembly.
             }
         }
 
@@ -77,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             int arity,
             LookupOptions options,
-            Binder originalBinder)
+            Binder originalBinder
+        )
         {
             if (_container.Kind == SymbolKind.Namespace)
             {
@@ -90,8 +112,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (IsScriptClass)
             {
                 // This is the scenario where a `yield return` exists in the script file as a global statement.
-                // This method is to guard against hitting `BuckStopsHereBinder` and crash. 
-                return TypeWithAnnotations.Create(this.Compilation.GetSpecialType(SpecialType.System_Object));
+                // This method is to guard against hitting `BuckStopsHereBinder` and crash.
+                return TypeWithAnnotations.Create(
+                    this.Compilation.GetSpecialType(SpecialType.System_Object)
+                );
             }
             else
             {
@@ -101,24 +125,59 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         internal override void LookupSymbolsInSingleBinder(
-            LookupResult result, string name, int arity, ConsList<TypeSymbol> basesBeingResolved, LookupOptions options, Binder originalBinder, bool diagnose, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            LookupResult result,
+            string name,
+            int arity,
+            ConsList<TypeSymbol> basesBeingResolved,
+            LookupOptions options,
+            Binder originalBinder,
+            bool diagnose,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(result.IsClear);
 
             // first lookup members of the namespace
             if ((options & LookupOptions.NamespaceAliasesOnly) == 0)
             {
-                this.LookupMembersInternal(result, _container, name, arity, basesBeingResolved, options, originalBinder, diagnose, ref useSiteInfo);
+                this.LookupMembersInternal(
+                    result,
+                    _container,
+                    name,
+                    arity,
+                    basesBeingResolved,
+                    options,
+                    originalBinder,
+                    diagnose,
+                    ref useSiteInfo
+                );
 
                 if (result.IsMultiViable)
                 {
                     if (arity == 0)
                     {
                         // symbols cannot conflict with using alias names
-                        if (Next is WithExternAndUsingAliasesBinder withUsingAliases && withUsingAliases.IsUsingAlias(name, originalBinder.IsSemanticModelBinder, basesBeingResolved))
+                        if (
+                            Next is WithExternAndUsingAliasesBinder withUsingAliases
+                            && withUsingAliases.IsUsingAlias(
+                                name,
+                                originalBinder.IsSemanticModelBinder,
+                                basesBeingResolved
+                            )
+                        )
                         {
-                            CSDiagnosticInfo diagInfo = new CSDiagnosticInfo(ErrorCode.ERR_ConflictAliasAndMember, name, _container);
-                            var error = new ExtendedErrorTypeSymbol((NamespaceOrTypeSymbol)null, name, arity, diagInfo, unreported: true);
+                            CSDiagnosticInfo diagInfo = new CSDiagnosticInfo(
+                                ErrorCode.ERR_ConflictAliasAndMember,
+                                name,
+                                _container
+                            );
+                            var error = new ExtendedErrorTypeSymbol(
+                                (NamespaceOrTypeSymbol)null,
+                                name,
+                                arity,
+                                diagInfo,
+                                unreported: true
+                            );
                             result.SetFrom(LookupResult.Good(error)); // force lookup to be done w/ error symbol as result
                         }
                     }
@@ -128,7 +187,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        internal override void AddLookupSymbolsInfoInSingleBinder(LookupSymbolsInfo result, LookupOptions options, Binder originalBinder)
+        internal override void AddLookupSymbolsInfoInSingleBinder(
+            LookupSymbolsInfo result,
+            LookupOptions options,
+            Binder originalBinder
+        )
         {
             this.AddMemberLookupSymbolsInfo(result, _container, options, originalBinder);
         }

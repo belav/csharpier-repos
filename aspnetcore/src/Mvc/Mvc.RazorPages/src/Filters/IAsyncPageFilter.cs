@@ -24,5 +24,8 @@ public interface IAsyncPageFilter : IFilterMetadata
     /// The <see cref="PageHandlerExecutionDelegate"/>. Invoked to execute the next page filter or the handler method itself.
     /// </param>
     /// <returns>A <see cref="Task"/> that on completion indicates the filter has executed.</returns>
-    Task OnPageHandlerExecutionAsync(PageHandlerExecutingContext context, PageHandlerExecutionDelegate next);
+    Task OnPageHandlerExecutionAsync(
+        PageHandlerExecutingContext context,
+        PageHandlerExecutionDelegate next
+    );
 }

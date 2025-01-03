@@ -19,7 +19,10 @@ namespace System.ComponentModel.Composition.Hosting
         internal interface IComposablePartCatalogTraversal
         {
             void Initialize();
-            bool TryTraverse(ComposablePartDefinition part, [NotNullWhen(true)] out IEnumerable<ComposablePartDefinition>? reachableParts);
+            bool TryTraverse(
+                ComposablePartDefinition part,
+                [NotNullWhen(true)] out IEnumerable<ComposablePartDefinition>? reachableParts
+            );
         }
     }
 }

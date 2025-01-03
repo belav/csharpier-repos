@@ -24,10 +24,7 @@ public class ModelBinderAttributeTest
     public void BinderType_DefaultCustomBindingSource()
     {
         // Arrange
-        var attribute = new ModelBinderAttribute
-        {
-            BinderType = typeof(ByteArrayModelBinder),
-        };
+        var attribute = new ModelBinderAttribute { BinderType = typeof(ByteArrayModelBinder) };
 
         // Act
         var source = attribute.BindingSource;
@@ -55,7 +52,7 @@ public class ModelBinderAttributeTest
         // Arrange
         var attribute = new FromQueryModelBinderAttribute
         {
-            BinderType = typeof(ByteArrayModelBinder)
+            BinderType = typeof(ByteArrayModelBinder),
         };
 
         // Act

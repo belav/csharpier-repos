@@ -3,9 +3,9 @@
 // -----------------------------------------------------------------------
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
@@ -18,7 +18,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
     {
         private readonly ReflectionWritableMember _member;
 
-        public ImportingMember(ContractBasedImportDefinition definition, ReflectionWritableMember member, ImportType importType)
+        public ImportingMember(
+            ContractBasedImportDefinition definition,
+            ReflectionWritableMember member,
+            ImportType importType
+        )
             : base(definition, importType)
         {
             Assumes.NotNull(definition, member);
@@ -41,14 +45,14 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private bool RequiresCollectionNormalization()
         {
             if (this.Definition.Cardinality != ImportCardinality.ZeroOrMore)
-            {   // If we're not looking at a collection import, then don't 
+            { // If we're not looking at a collection import, then don't
                 // 'normalize' the collection.
 
                 return false;
             }
 
             if (this._member.CanWrite && this.ImportType.IsAssignableCollectionType)
-            {   // If we can simply replace the entire value of the property/field, then 
+            { // If we can simply replace the entire value of the property/field, then
                 // we don't need to 'normalize' the collection.
 
                 return false;
@@ -66,15 +70,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 this._member.SetValue(instance, value);
             }
             catch (TargetInvocationException exception)
-            {   // Member threw an exception. Avoid letting this 
+            { // Member threw an exception. Avoid letting this
                 // leak out as a 'raw' unhandled exception, instead,
                 // we'll add some context and rethrow.
                 throw new ComposablePartException(
-                    String.Format(CultureInfo.CurrentCulture,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
                         Strings.ReflectionModel_ImportThrewException,
-                        this._member.GetDisplayName()),
+                        this._member.GetDisplayName()
+                    ),
                     Definition.ToElement(),
-                    exception.InnerException);
+                    exception.InnerException
+                );
             }
             catch (TargetParameterCountException exception)
             {
@@ -82,25 +89,31 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 // this is not supported in MEF currently.  Ideally we would validate against it, however, we already shipped
                 // so we will turn it into a ComposablePartException instead, that they should already be prepared for
                 throw new ComposablePartException(
-                    String.Format(CultureInfo.CurrentCulture,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
                         Strings.ImportNotValidOnIndexers,
-                        this._member.GetDisplayName()),
+                        this._member.GetDisplayName()
+                    ),
                     Definition.ToElement(),
-                    exception.InnerException);
+                    exception.InnerException
+                );
             }
         }
 
         private void EnsureWritable()
         {
             if (!this._member.CanWrite)
-            {   // Property does not have a setter, or 
+            { // Property does not have a setter, or
                 // field is marked as read-only.
 
                 throw new ComposablePartException(
-                    String.Format(CultureInfo.CurrentCulture,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
                         Strings.ReflectionModel_ImportNotWritable,
-                        this._member.GetDisplayName()),
-                        Definition.ToElement());
+                        this._member.GetDisplayName()
+                    ),
+                    Definition.ToElement()
+                );
             }
         }
 
@@ -134,17 +147,22 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 catch (TargetInvocationException exception)
                 {
                     throw new ComposablePartException(
-                        String.Format(CultureInfo.CurrentCulture,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
                             Strings.ReflectionModel_ImportCollectionGetThrewException,
-                            this._member.GetDisplayName()),
+                            this._member.GetDisplayName()
+                        ),
                         this.Definition.ToElement(),
-                        exception.InnerException);
+                        exception.InnerException
+                    );
                 }
             }
 
             if (collectionObject == null)
             {
-                ConstructorInfo constructor = this.ImportType.ActualType.GetConstructor(Type.EmptyTypes);
+                ConstructorInfo constructor = this.ImportType.ActualType.GetConstructor(
+                    Type.EmptyTypes
+                );
 
                 // If it contains a default public constructor create a new instance.
                 if (constructor != null)
@@ -156,12 +174,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     catch (TargetInvocationException exception)
                     {
                         throw new ComposablePartException(
-                            String.Format(CultureInfo.CurrentCulture,
+                            String.Format(
+                                CultureInfo.CurrentCulture,
                                 Strings.ReflectionModel_ImportCollectionConstructionThrewException,
                                 this._member.GetDisplayName(),
-                                this.ImportType.ActualType.FullName),
+                                this.ImportType.ActualType.FullName
+                            ),
                             this.Definition.ToElement(),
-                            exception.InnerException);
+                            exception.InnerException
+                        );
                     }
 
                     SetSingleMemberValue(instance, collectionObject);
@@ -171,10 +192,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
             if (collectionObject == null)
             {
                 throw new ComposablePartException(
-                    String.Format(CultureInfo.CurrentCulture,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
                         Strings.ReflectionModel_ImportCollectionNull,
-                        this._member.GetDisplayName()),
-                    this.Definition.ToElement());
+                        this._member.GetDisplayName()
+                    ),
+                    this.Definition.ToElement()
+                );
             }
 
             return CollectionServices.GetCollectionWrapper(itemType, collectionObject);
@@ -184,7 +208,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private void EnsureCollectionIsWritable(ICollection<object> collection)
         {
             bool isReadOnly = true;
-                
+
             try
             {
                 if (collection != null)
@@ -195,21 +219,27 @@ namespace System.ComponentModel.Composition.ReflectionModel
             catch (Exception exception)
             {
                 throw new ComposablePartException(
-                    String.Format(CultureInfo.CurrentCulture,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
                         Strings.ReflectionModel_ImportCollectionIsReadOnlyThrewException,
                         this._member.GetDisplayName(),
-                        collection.GetType().FullName),
+                        collection.GetType().FullName
+                    ),
                     this.Definition.ToElement(),
-                    exception);
+                    exception
+                );
             }
 
             if (isReadOnly)
             {
                 throw new ComposablePartException(
-                    String.Format(CultureInfo.CurrentCulture,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
                         Strings.ReflectionModel_ImportCollectionNotWritable,
-                        this._member.GetDisplayName()),
-                    this.Definition.ToElement());
+                        this._member.GetDisplayName()
+                    ),
+                    this.Definition.ToElement()
+                );
             }
         }
 
@@ -225,12 +255,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
             catch (Exception exception)
             {
                 throw new ComposablePartException(
-                    String.Format(CultureInfo.CurrentCulture,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
                         Strings.ReflectionModel_ImportCollectionClearThrewException,
                         this._member.GetDisplayName(),
-                        collection.GetType().FullName),
+                        collection.GetType().FullName
+                    ),
                     this.Definition.ToElement(),
-                    exception);
+                    exception
+                );
             }
 
             foreach (object value in values)
@@ -242,12 +275,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 catch (Exception exception)
                 {
                     throw new ComposablePartException(
-                        String.Format(CultureInfo.CurrentCulture,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
                             Strings.ReflectionModel_ImportCollectionAddThrewException,
                             this._member.GetDisplayName(),
-                            collection.GetType().FullName),
+                            collection.GetType().FullName
+                        ),
                         this.Definition.ToElement(),
-                        exception);
+                        exception
+                    );
                 }
             }
         }

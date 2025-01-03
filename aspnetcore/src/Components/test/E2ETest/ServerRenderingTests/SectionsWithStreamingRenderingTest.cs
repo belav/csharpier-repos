@@ -11,18 +11,17 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETests.ServerRenderingTests;
 
-public class SectionsWithStreamingRenderingTest : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
+public class SectionsWithStreamingRenderingTest
+    : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
 {
     public SectionsWithStreamingRenderingTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
-    public override Task InitializeAsync()
-        => InitializeAsync(BrowserFixture.StreamingContext);
+    public override Task InitializeAsync() => InitializeAsync(BrowserFixture.StreamingContext);
 
     [Fact]
     public void StreamingRenderingForSectionOutletContentIsDeterminedByMatchingSectionContent()
@@ -51,10 +50,16 @@ public class SectionsWithStreamingRenderingTest : ServerTestBase<BasicTestAppSer
         {
             // Each time we click, there's another streaming render batch and the UI is updated
             Browser.FindElement(By.Id("add-item-link")).Click();
-            Browser.Collection(getDisplayedItems, Enumerable.Range(1, i).Select<int, Action<IWebElement>>(index =>
-            {
-                return actualItem => Assert.Equal($"Item {index}", actualItem.Text);
-            }).ToArray());
+            Browser.Collection(
+                getDisplayedItems,
+                Enumerable
+                    .Range(1, i)
+                    .Select<int, Action<IWebElement>>(index =>
+                    {
+                        return actualItem => Assert.Equal($"Item {index}", actualItem.Text);
+                    })
+                    .ToArray()
+            );
             Assert.Equal("Waiting for more...", getStatusText().Text);
 
             // These are insta-removed so they don't pollute anything

@@ -9,9 +9,12 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests;
 
-public class IdentityExternalClaimsTests : IClassFixture<WebApplicationFactory<Identity.ExternalClaims.Startup>>
+public class IdentityExternalClaimsTests
+    : IClassFixture<WebApplicationFactory<Identity.ExternalClaims.Startup>>
 {
-    public IdentityExternalClaimsTests(WebApplicationFactory<Identity.ExternalClaims.Startup> fixture)
+    public IdentityExternalClaimsTests(
+        WebApplicationFactory<Identity.ExternalClaims.Startup> fixture
+    )
     {
         Client = fixture.CreateDefaultClient();
     }
@@ -38,6 +41,9 @@ public class IdentityExternalClaimsTests : IClassFixture<WebApplicationFactory<I
 
         // Assert
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        Assert.Equal("http://localhost/Account/Login?ReturnUrl=%2FMyClaims", response.Headers.Location.ToString());
+        Assert.Equal(
+            "http://localhost/Account/Login?ReturnUrl=%2FMyClaims",
+            response.Headers.Location.ToString()
+        );
     }
 }

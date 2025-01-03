@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,61 +33,72 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-	public sealed class DiscoveryClientBindingElement : BindingElement
-	{
-		public static readonly EndpointAddress DiscoveryEndpointAddress = new EndpointAddress ("http://schemas.microsoft.com/discovery/dynamic");
+    public sealed class DiscoveryClientBindingElement : BindingElement
+    {
+        public static readonly EndpointAddress DiscoveryEndpointAddress = new EndpointAddress(
+            "http://schemas.microsoft.com/discovery/dynamic"
+        );
 
-		public DiscoveryClientBindingElement ()
-		{
-			DiscoveryEndpointProvider = DiscoveryEndpointProvider.CreateDefault ();
-			FindCriteria = new FindCriteria (); // empty
-		}
+        public DiscoveryClientBindingElement()
+        {
+            DiscoveryEndpointProvider = DiscoveryEndpointProvider.CreateDefault();
+            FindCriteria = new FindCriteria(); // empty
+        }
 
-		public DiscoveryClientBindingElement (DiscoveryEndpointProvider discoveryEndpointProvider, FindCriteria findCriteria)
-		{
-			if (discoveryEndpointProvider == null)
-				throw new ArgumentNullException ("discoveryEndpointProvider");
-			if (findCriteria == null)
-				throw new ArgumentNullException ("findCriteria");
+        public DiscoveryClientBindingElement(
+            DiscoveryEndpointProvider discoveryEndpointProvider,
+            FindCriteria findCriteria
+        )
+        {
+            if (discoveryEndpointProvider == null)
+                throw new ArgumentNullException("discoveryEndpointProvider");
+            if (findCriteria == null)
+                throw new ArgumentNullException("findCriteria");
 
-			DiscoveryEndpointProvider = discoveryEndpointProvider;
-			FindCriteria = findCriteria;
-		}
+            DiscoveryEndpointProvider = discoveryEndpointProvider;
+            FindCriteria = findCriteria;
+        }
 
-		public DiscoveryEndpointProvider DiscoveryEndpointProvider { get; set; }
-		public FindCriteria FindCriteria { get; set; }
+        public DiscoveryEndpointProvider DiscoveryEndpointProvider { get; set; }
+        public FindCriteria FindCriteria { get; set; }
 
-		public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (BindingContext context)
-		{
-			if (!(context.Binding.CreateBindingElements ().First () is DiscoveryClientBindingElement))
-				throw new InvalidOperationException ("DiscoveryClientBindingElement is expected at the top of the input binding elements in the BindingContext");
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
+        {
+            if (!(context.Binding.CreateBindingElements().First() is DiscoveryClientBindingElement))
+                throw new InvalidOperationException(
+                    "DiscoveryClientBindingElement is expected at the top of the input binding elements in the BindingContext"
+                );
 
-			return new DiscoveryChannelFactory<TChannel> (this, context);
-		}
+            return new DiscoveryChannelFactory<TChannel>(this, context);
+        }
 
-		public override IChannelListener<TChannel> BuildChannelListener<TChannel> (BindingContext context)
-		{
-			throw new NotSupportedException ();
-		}
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
+        {
+            throw new NotSupportedException();
+        }
 
-		public override bool CanBuildChannelFactory<TChannel> (BindingContext context)
-		{
-			return context.CanBuildInnerChannelFactory<TChannel> ();
-		}
+        public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
+        {
+            return context.CanBuildInnerChannelFactory<TChannel>();
+        }
 
-		public override bool CanBuildChannelListener<TChannel> (BindingContext context)
-		{
-			return false;
-		}
+        public override bool CanBuildChannelListener<TChannel>(BindingContext context)
+        {
+            return false;
+        }
 
-		public override BindingElement Clone ()
-		{
-			return new DiscoveryClientBindingElement (DiscoveryEndpointProvider, FindCriteria);
-		}
+        public override BindingElement Clone()
+        {
+            return new DiscoveryClientBindingElement(DiscoveryEndpointProvider, FindCriteria);
+        }
 
-		public override T GetProperty<T> (BindingContext context)
-		{
-			return context.GetInnerProperty<T> ();
-		}
-	}
+        public override T GetProperty<T>(BindingContext context)
+        {
+            return context.GetInnerProperty<T>();
+        }
+    }
 }

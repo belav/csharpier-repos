@@ -104,8 +104,15 @@ namespace JIT.HardwareIntrinsics.X86._Avx512BW.handwritten
         {
             var random = new Random();
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (byte)(random.Next(0, byte.MaxValue)); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Byte>, byte>(ref _clsVar), ref Unsafe.As<Byte, byte>(ref _data[0]), 16);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (byte)(random.Next(0, byte.MaxValue));
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Byte>, byte>(ref _clsVar),
+                ref Unsafe.As<Byte, byte>(ref _data[0]),
+                16
+            );
         }
 
         public SimpleUnaryOpTest__ConvertToVector512UInt16Byte()
@@ -114,11 +121,25 @@ namespace JIT.HardwareIntrinsics.X86._Avx512BW.handwritten
 
             var random = new Random();
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (byte)(random.Next(0, byte.MaxValue)); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Byte>, byte>(ref _fld), ref Unsafe.As<Byte, byte>(ref _data[0]), 16);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (byte)(random.Next(0, byte.MaxValue));
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Byte>, byte>(ref _fld),
+                ref Unsafe.As<Byte, byte>(ref _data[0]),
+                16
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (byte)(random.Next(0, byte.MaxValue)); }
-            _dataTable = new SimpleUnaryOpTest__DataTable<UInt16, Byte>(_data, new UInt16[RetElementCount], VectorSize);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (byte)(random.Next(0, byte.MaxValue));
+            }
+            _dataTable = new SimpleUnaryOpTest__DataTable<UInt16, Byte>(
+                _data,
+                new UInt16[RetElementCount],
+                VectorSize
+            );
         }
 
         public bool IsSupported => Avx512BW.IsSupported;
@@ -157,10 +178,12 @@ namespace JIT.HardwareIntrinsics.X86._Avx512BW.handwritten
 
         public void RunReflectionScenario_UnsafeRead()
         {
-            var result = typeof(Avx512BW).GetMethod(nameof(Avx512BW.ConvertToVector512UInt16), new Type[] { typeof(Vector256<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector256<Byte>>(_dataTable.inArrayPtr)
-                                     });
+            var result = typeof(Avx512BW)
+                .GetMethod(
+                    nameof(Avx512BW.ConvertToVector512UInt16),
+                    new Type[] { typeof(Vector256<Byte>) }
+                )
+                .Invoke(null, new object[] { Unsafe.Read<Vector256<Byte>>(_dataTable.inArrayPtr) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector512<UInt16>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -168,10 +191,12 @@ namespace JIT.HardwareIntrinsics.X86._Avx512BW.handwritten
 
         public void RunReflectionScenario_Load()
         {
-            var result = typeof(Avx512BW).GetMethod(nameof(Avx512BW.ConvertToVector512UInt16), new Type[] { typeof(Vector256<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Avx.LoadVector256((Byte*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Avx512BW)
+                .GetMethod(
+                    nameof(Avx512BW.ConvertToVector512UInt16),
+                    new Type[] { typeof(Vector256<Byte>) }
+                )
+                .Invoke(null, new object[] { Avx.LoadVector256((Byte*)(_dataTable.inArrayPtr)) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector512<UInt16>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -179,10 +204,15 @@ namespace JIT.HardwareIntrinsics.X86._Avx512BW.handwritten
 
         public void RunReflectionScenario_LoadAligned()
         {
-            var result = typeof(Avx512BW).GetMethod(nameof(Avx512BW.ConvertToVector512UInt16), new Type[] { typeof(Vector256<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Avx.LoadAlignedVector256((Byte*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Avx512BW)
+                .GetMethod(
+                    nameof(Avx512BW.ConvertToVector512UInt16),
+                    new Type[] { typeof(Vector256<Byte>) }
+                )
+                .Invoke(
+                    null,
+                    new object[] { Avx.LoadAlignedVector256((Byte*)(_dataTable.inArrayPtr)) }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector512<UInt16>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -190,9 +220,7 @@ namespace JIT.HardwareIntrinsics.X86._Avx512BW.handwritten
 
         public void RunClsVarScenario()
         {
-            var result = Avx512BW.ConvertToVector512UInt16(
-                _clsVar
-            );
+            var result = Avx512BW.ConvertToVector512UInt16(_clsVar);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_clsVar, _dataTable.outArrayPtr);
@@ -256,29 +284,53 @@ namespace JIT.HardwareIntrinsics.X86._Avx512BW.handwritten
             }
         }
 
-        private void ValidateResult(Vector256<Byte> firstOp, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector256<Byte> firstOp,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Byte[] inArray = new Byte[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref inArray[0]), firstOp);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), VectorSize);
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                VectorSize
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(void* firstOp, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            void* firstOp,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Byte[] inArray = new Byte[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Byte, byte>(ref inArray[0]), ref Unsafe.AsRef<byte>(firstOp), 32);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), VectorSize);
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Byte, byte>(ref inArray[0]),
+                ref Unsafe.AsRef<byte>(firstOp),
+                32
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                VectorSize
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(Byte[] firstOp, UInt16[] result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Byte[] firstOp,
+            UInt16[] result,
+            [CallerMemberName] string method = ""
+        )
         {
             if (result[0] != (ushort)firstOp[0])
             {
@@ -298,7 +350,9 @@ namespace JIT.HardwareIntrinsics.X86._Avx512BW.handwritten
 
             if (!Succeeded)
             {
-                Console.WriteLine($"{nameof(Avx512BW)}.{nameof(Avx512BW.ConvertToVector512UInt16)}<UInt16>(Vector256<Byte>): {method} failed:");
+                Console.WriteLine(
+                    $"{nameof(Avx512BW)}.{nameof(Avx512BW.ConvertToVector512UInt16)}<UInt16>(Vector256<Byte>): {method} failed:"
+                );
                 Console.WriteLine($"  firstOp: ({string.Join(", ", firstOp)})");
                 Console.WriteLine($"   result: ({string.Join(", ", result)})");
                 Console.WriteLine();

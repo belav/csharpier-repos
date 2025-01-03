@@ -9,7 +9,6 @@ using Xunit;
 
 public class ConditionalNegateTest
 {
-
     [Theory]
     [InlineData(72, 13, 13)]
     [InlineData(32, 13, 224)]
@@ -18,7 +17,7 @@ public class ConditionalNegateTest
     {
         //ARM64-FULL-LINE: cmp {{w[0-9]+}}, #42
         //ARM64-FULL-LINE-NEXT: csneg {{w[0-9]+}}, {{w[0-9]+}}, {{w[0-9]+}}, {{gt|le}}
-        byte result = (byte) (op1 > 42 ? op2: -op1);
+        byte result = (byte)(op1 > 42 ? op2 : -op1);
         Assert.Equal(expected, result);
     }
 
@@ -30,7 +29,7 @@ public class ConditionalNegateTest
     {
         //ARM64-FULL-LINE: cmp {{w[0-9]+}}, #43
         //ARM64-FULL-LINE-NEXT: csneg {{w[0-9]+}}, {{w[0-9]+}}, {{w[0-9]+}}, {{gt|le}}
-        short result = (short) (op1 <= 43 ? -op2 : op1);
+        short result = (short)(op1 <= 43 ? -op2 : op1);
         Assert.Equal(expected, result);
     }
 
@@ -42,7 +41,7 @@ public class ConditionalNegateTest
     {
         //ARM64-FULL-LINE: cmp {{w[0-9]+}}, #44
         //ARM64-FULL-LINE-NEXT: csel {{w[0-9]+}}, {{w[0-9]+}}, {{w[0-9]+}}, {{gt|le}}
-        short result = (short) (op1 > 44 ? -short.MaxValue : short.MaxValue);
+        short result = (short)(op1 > 44 ? -short.MaxValue : short.MaxValue);
         Assert.Equal(expected, result);
     }
 

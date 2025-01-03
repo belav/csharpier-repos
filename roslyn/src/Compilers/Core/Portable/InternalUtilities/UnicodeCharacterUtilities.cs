@@ -25,7 +25,7 @@ namespace Roslyn.Utilities
                     return false;
                 }
 
-                return ch <= 'Z'  // '\u005A'
+                return ch <= 'Z' // '\u005A'
                     || ch == '_'; // '\u005F'
             }
 
@@ -59,11 +59,11 @@ namespace Roslyn.Utilities
             {
                 if (ch < 'A') // '\u0041'
                 {
-                    return ch >= '0'  // '\u0030'
+                    return ch >= '0' // '\u0030'
                         && ch <= '9'; // '\u0039'
                 }
 
-                return ch <= 'Z'  // '\u005A'
+                return ch <= 'Z' // '\u005A'
                     || ch == '_'; // '\u005F'
             }
 
@@ -115,7 +115,7 @@ namespace Roslyn.Utilities
         private static bool IsLetterChar(UnicodeCategory cat)
         {
             // letter-character:
-            //   A Unicode character of classes Lu, Ll, Lt, Lm, Lo, or Nl 
+            //   A Unicode character of classes Lu, Ll, Lt, Lm, Lo, or Nl
             //   A Unicode-escape-sequence representing a character of classes Lu, Ll, Lt, Lm, Lo, or Nl
 
             switch (cat)
@@ -135,7 +135,7 @@ namespace Roslyn.Utilities
         private static bool IsCombiningChar(UnicodeCategory cat)
         {
             // combining-character:
-            //   A Unicode character of classes Mn or Mc 
+            //   A Unicode character of classes Mn or Mc
             //   A Unicode-escape-sequence representing a character of classes Mn or Mc
 
             switch (cat)
@@ -151,7 +151,7 @@ namespace Roslyn.Utilities
         private static bool IsDecimalDigitChar(UnicodeCategory cat)
         {
             // decimal-digit-character:
-            //   A Unicode character of the class Nd 
+            //   A Unicode character of the class Nd
             //   A unicode-escape-sequence representing a character of the class Nd
 
             return cat == UnicodeCategory.DecimalDigitNumber;
@@ -159,7 +159,7 @@ namespace Roslyn.Utilities
 
         private static bool IsConnectingChar(UnicodeCategory cat)
         {
-            // connecting-character:  
+            // connecting-character:
             //   A Unicode character of the class Pc
             //   A unicode-escape-sequence representing a character of the class Pc
 
@@ -183,7 +183,7 @@ namespace Roslyn.Utilities
         /// <param name="cat">The Unicode character.</param>
         private static bool IsFormattingChar(UnicodeCategory cat)
         {
-            // formatting-character:  
+            // formatting-character:
             //   A Unicode character of the class Cf
             //   A unicode-escape-sequence representing a character of the class Cf
 

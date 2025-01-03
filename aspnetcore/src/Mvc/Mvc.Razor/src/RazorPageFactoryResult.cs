@@ -19,7 +19,8 @@ public readonly struct RazorPageFactoryResult
     /// <param name="viewDescriptor">The <see cref="CompiledViewDescriptor"/>.</param>
     public RazorPageFactoryResult(
         CompiledViewDescriptor viewDescriptor,
-        Func<IRazorPage>? razorPageFactory)
+        Func<IRazorPage>? razorPageFactory
+    )
     {
         ViewDescriptor = viewDescriptor ?? throw new ArgumentNullException(nameof(viewDescriptor));
         RazorPageFactory = razorPageFactory;

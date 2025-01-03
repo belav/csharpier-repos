@@ -49,7 +49,8 @@ namespace System.Reflection.Metadata.Ecma335
             // Make sure the current thread isn't aborted in the middle of the operation.
             RuntimeHelpers.PrepareConstrainedRegions();
             try
-            { /* intentionally left blank */ }
+            { /* intentionally left blank */
+            }
             finally
 #endif
             {
@@ -96,7 +97,8 @@ namespace System.Reflection.Metadata.Ecma335
 #if FEATURE_CER
             RuntimeHelpers.PrepareConstrainedRegions();
             try
-            { /* intentionally left blank */ }
+            { /* intentionally left blank */
+            }
             finally
 #endif
             {

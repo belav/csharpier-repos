@@ -15,7 +15,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.TestUtility
             DirectoryInfoBase parentDirectory,
             string fullName,
             string name,
-            string[] paths)
+            string[] paths
+        )
         {
             ParentDirectory = parentDirectory;
             Recorder = recorder;
@@ -58,7 +59,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.TestUtility
                         recorder: Recorder,
                         parentDirectory: this,
                         fullName: path,
-                        name: path.Substring(beginSegment, endSegment - beginSegment));
+                        name: path.Substring(beginSegment, endSegment - beginSegment)
+                    );
                 }
                 else
                 {
@@ -71,7 +73,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.TestUtility
                             parentDirectory: this,
                             fullName: path.Substring(0, endSegment + 1),
                             name: name,
-                            paths: Paths);
+                            paths: Paths
+                        );
                     }
                 }
             }
@@ -94,14 +97,16 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.TestUtility
                     parentDirectory: this,
                     fullName: FullName.Substring(0, indexOfPenultimateSlash + 1),
                     name: name,
-                    paths: Paths);
+                    paths: Paths
+                );
             }
             return new MockDirectoryInfo(
                 recorder: Recorder,
                 parentDirectory: this,
                 fullName: FullName + name + "\\",
                 name: name,
-                paths: Paths);
+                paths: Paths
+            );
         }
 
         public override FileInfoBase GetFile(string name)
@@ -110,7 +115,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.TestUtility
                 recorder: Recorder,
                 parentDirectory: this,
                 fullName: FullName + name,
-                name: name);
+                name: name
+            );
         }
     }
 }

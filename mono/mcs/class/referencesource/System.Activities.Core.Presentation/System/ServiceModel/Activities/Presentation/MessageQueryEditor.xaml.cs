@@ -3,14 +3,16 @@
 //----------------------------------------------------------------
 namespace System.ServiceModel.Activities.Presentation
 {
-    using System.Activities.Presentation.Model;
     using System.Activities.Core.Presentation;
+    using System.Activities.Presentation.Model;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Reflection;
+    using System.Runtime;
     using System.Runtime.Serialization;
     using System.ServiceModel;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
     using System.Text;
     using System.Windows;
@@ -19,37 +21,42 @@ namespace System.ServiceModel.Activities.Presentation
     using System.Windows.Input;
     using System.Xml;
     using System.Xml.Linq;
-    using System.ServiceModel.Description;
-    using System.Runtime;
 
     partial class MessageQueryEditor
     {
-        public static readonly DependencyProperty TypeCollectionProperty = DependencyProperty.Register(
-            "TypeCollection",
-            typeof(IList<KeyValuePair<string, Type>>), 
-            typeof(MessageQueryEditor), 
-            new UIPropertyMetadata(null, OnTypeCollectionChanged));
+        public static readonly DependencyProperty TypeCollectionProperty =
+            DependencyProperty.Register(
+                "TypeCollection",
+                typeof(IList<KeyValuePair<string, Type>>),
+                typeof(MessageQueryEditor),
+                new UIPropertyMetadata(null, OnTypeCollectionChanged)
+            );
 
-        static readonly DependencyPropertyKey QueryPropertyKey = DependencyProperty.RegisterReadOnly(
-            "Query",
-            typeof(XPathMessageQuery),
-            typeof(MessageQueryEditor),
-            new UIPropertyMetadata(null));
+        static readonly DependencyPropertyKey QueryPropertyKey =
+            DependencyProperty.RegisterReadOnly(
+                "Query",
+                typeof(XPathMessageQuery),
+                typeof(MessageQueryEditor),
+                new UIPropertyMetadata(null)
+            );
 
         static readonly DependencyProperty ActivityProperty = DependencyProperty.Register(
             "Activity",
             typeof(ModelItem),
             typeof(MessageQueryEditor),
-            new UIPropertyMetadata(null));
+            new UIPropertyMetadata(null)
+        );
 
-        public static readonly DependencyProperty QueryProperty = QueryPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty QueryProperty =
+            QueryPropertyKey.DependencyProperty;
 
         public static readonly RoutedEvent XPathCreatedEvent = EventManager.RegisterRoutedEvent(
-            "XPathCreated", 
-            RoutingStrategy.Bubble, 
-            typeof(RoutedEventHandler), 
-            typeof(MessageQueryEditor));
-      
+            "XPathCreated",
+            RoutingStrategy.Bubble,
+            typeof(RoutedEventHandler),
+            typeof(MessageQueryEditor)
+        );
+
         public MessageQueryEditor()
         {
             InitializeComponent();
@@ -84,7 +91,10 @@ namespace System.ServiceModel.Activities.Presentation
         //override default combo box item with my own implementation and style
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new MessageQueryComboBoxItem() { Style = (Style)this.FindResource("comboBoxStyle") };
+            return new MessageQueryComboBoxItem()
+            {
+                Style = (Style)this.FindResource("comboBoxStyle"),
+            };
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -105,23 +115,35 @@ namespace System.ServiceModel.Activities.Presentation
         {
             if (!LocalAppContextSwitches.UseLegacyAccessibilityFeatures)
             {
-                this.SetValue(AutomationProperties.NameProperty, this.Resources["MessageQueryEditorAutomationName"]);
+                this.SetValue(
+                    AutomationProperties.NameProperty,
+                    this.Resources["MessageQueryEditorAutomationName"]
+                );
                 if (this.IsEditable && this.Template != null)
                 {
                     var textBox = this.Template.FindName("PART_EditableTextBox", this) as TextBox;
                     if (textBox != null)
                     {
-                        textBox.SetValue(AutomationProperties.NameProperty, this.GetValue(AutomationProperties.NameProperty));
+                        textBox.SetValue(
+                            AutomationProperties.NameProperty,
+                            this.GetValue(AutomationProperties.NameProperty)
+                        );
                     }
                 }
             }
         }
 
         //user double clicked on the expanded type, create a xpath
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Propagating exceptions might lead to VS crash.")]
-        [SuppressMessage("Reliability", "Reliability108:IsFatalRule",
-            Justification = "Propagating exceptions might lead to VS crash.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Propagating exceptions might lead to VS crash."
+        )]
+        [SuppressMessage(
+            "Reliability",
+            "Reliability108:IsFatalRule",
+            Justification = "Propagating exceptions might lead to VS crash."
+        )]
         void OnTypeSelectionChanged(object sender, RoutedEventArgs e)
         {
             var contentCorrelationDesigner = (ContentCorrelationTypeExpander)sender;
@@ -135,10 +157,17 @@ namespace System.ServiceModel.Activities.Presentation
                     XmlNamespaceManager namespaceManager = null;
                     string xpathQuery = string.Empty;
                     var content = this.Activity.Properties["Content"].Value;
-                    if (content.IsAssignableFrom<ReceiveMessageContent>() || content.IsAssignableFrom<SendMessageContent>())
+                    if (
+                        content.IsAssignableFrom<ReceiveMessageContent>()
+                        || content.IsAssignableFrom<SendMessageContent>()
+                    )
                     {
                         //generating xpath for message content
-                        xpathQuery = XPathQueryGenerator.CreateFromDataContractSerializer(type, path, out namespaceManager);
+                        xpathQuery = XPathQueryGenerator.CreateFromDataContractSerializer(
+                            type,
+                            path,
+                            out namespaceManager
+                        );
                     }
                     else
                     {
@@ -146,35 +175,79 @@ namespace System.ServiceModel.Activities.Presentation
                         XName serviceContractName = null;
                         string operationName = null;
                         string parameterName = contentCorrelationDesigner.SelectedTypeEntry.Name;
-                        bool isReply = this.Activity.IsAssignableFrom<SendReply>() || this.Activity.IsAssignableFrom<ReceiveReply>();
+                        bool isReply =
+                            this.Activity.IsAssignableFrom<SendReply>()
+                            || this.Activity.IsAssignableFrom<ReceiveReply>();
                         if (isReply)
                         {
-                            operationName = (string)this.Activity.Properties["Request"].Value.Properties["OperationName"].ComputedValue;
-                            serviceContractName = (XName)this.Activity.Properties["Request"].Value.Properties["ServiceContractName"].ComputedValue;
+                            operationName = (string)
+                                this.Activity
+                                    .Properties["Request"]
+                                    .Value
+                                    .Properties["OperationName"]
+                                    .ComputedValue;
+                            serviceContractName = (XName)
+                                this.Activity
+                                    .Properties["Request"]
+                                    .Value
+                                    .Properties["ServiceContractName"]
+                                    .ComputedValue;
 
                             if (string.IsNullOrEmpty(operationName) || null == serviceContractName)
                             {
                                 ModelItem requestDisplayName;
-                                this.Activity.TryGetPropertyValue(out requestDisplayName, "Request", "DisplayName");
-                                throw FxTrace.Exception.AsError(new InvalidOperationException(
-                                        string.Format(CultureInfo.CurrentUICulture, (string)this.FindResource("parametersRequiredText"), requestDisplayName.GetCurrentValue())));
+                                this.Activity.TryGetPropertyValue(
+                                    out requestDisplayName,
+                                    "Request",
+                                    "DisplayName"
+                                );
+                                throw FxTrace.Exception.AsError(
+                                    new InvalidOperationException(
+                                        string.Format(
+                                            CultureInfo.CurrentUICulture,
+                                            (string)this.FindResource("parametersRequiredText"),
+                                            requestDisplayName.GetCurrentValue()
+                                        )
+                                    )
+                                );
                             }
                         }
                         else
                         {
-                            operationName = (string)this.Activity.Properties["OperationName"].ComputedValue;
-                            serviceContractName = (XName)this.Activity.Properties["ServiceContractName"].ComputedValue;
+                            operationName = (string)
+                                this.Activity.Properties["OperationName"].ComputedValue;
+                            serviceContractName = (XName)
+                                this.Activity.Properties["ServiceContractName"].ComputedValue;
 
                             if (string.IsNullOrEmpty(operationName) || null == serviceContractName)
                             {
-                                throw FxTrace.Exception.AsError(new InvalidOperationException(
-                                        string.Format(CultureInfo.CurrentUICulture, (string)this.FindResource("parametersRequiredText"), this.Activity.Properties["DisplayName"].ComputedValue)));
+                                throw FxTrace.Exception.AsError(
+                                    new InvalidOperationException(
+                                        string.Format(
+                                            CultureInfo.CurrentUICulture,
+                                            (string)this.FindResource("parametersRequiredText"),
+                                            this.Activity.Properties["DisplayName"].ComputedValue
+                                        )
+                                    )
+                                );
                             }
                         }
-                        xpathQuery = ParameterXPathQueryGenerator.CreateFromDataContractSerializer(serviceContractName, operationName, parameterName, isReply, type, path, out namespaceManager);
+                        xpathQuery = ParameterXPathQueryGenerator.CreateFromDataContractSerializer(
+                            serviceContractName,
+                            operationName,
+                            parameterName,
+                            isReply,
+                            type,
+                            path,
+                            out namespaceManager
+                        );
                     }
                     //use CDF api to build a xpath out of type and its properties
-                    string xpath = string.Format(CultureInfo.InvariantCulture, "sm:body(){0}", xpathQuery);
+                    string xpath = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "sm:body(){0}",
+                        xpathQuery
+                    );
 
                     //get the context
                     //We need to copy over the namespaces from the manager's table 1 by 1. According to MSDN:
@@ -183,14 +256,21 @@ namespace System.ServiceModel.Activities.Presentation
                     XPathMessageContext messageContext = new XPathMessageContext();
                     foreach (string prefix in namespaceManager)
                     {
-                        if (!string.IsNullOrEmpty(prefix) && !messageContext.HasNamespace(prefix) && prefix != "xmlns")
+                        if (
+                            !string.IsNullOrEmpty(prefix)
+                            && !messageContext.HasNamespace(prefix)
+                            && prefix != "xmlns"
+                        )
                         {
-                            messageContext.AddNamespace(prefix, namespaceManager.LookupNamespace(prefix));
+                            messageContext.AddNamespace(
+                                prefix,
+                                namespaceManager.LookupNamespace(prefix)
+                            );
                         }
                     }
 
                     var typeEntry = (ExpanderTypeEntry)contentCorrelationDesigner.Tag;
-                    //construct xpath 
+                    //construct xpath
                     XPathMessageQuery query = new XPathMessageQuery(xpath, messageContext);
                     //store the xpath in the Tag property; this combo's selectedValue is bound to i
                     typeEntry.Tag = query;
@@ -204,7 +284,9 @@ namespace System.ServiceModel.Activities.Presentation
                     MessageBox.Show(
                         err.Message,
                         (string)this.Resources["controlTitle"],
-                        MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
                 }
             }
         }
@@ -215,7 +297,9 @@ namespace System.ServiceModel.Activities.Presentation
             var items = new List<ExpanderTypeEntry>();
             if (null != this.TypeCollection)
             {
-                StringBuilder text = new StringBuilder((string)this.FindResource("selectedDisplayText"));
+                StringBuilder text = new StringBuilder(
+                    (string)this.FindResource("selectedDisplayText")
+                );
                 bool addComma = false;
                 //copy all of then into ExpanderTypeEntry
                 foreach (var entry in this.TypeCollection)
@@ -224,12 +308,17 @@ namespace System.ServiceModel.Activities.Presentation
                     {
                         text.Append(", ");
                     }
-                    items.Add(new ExpanderTypeEntry() { TypeToExpand = entry.Value, Name = entry.Key });
+                    items.Add(
+                        new ExpanderTypeEntry() { TypeToExpand = entry.Value, Name = entry.Key }
+                    );
                     text.Append(entry.Key);
                     addComma = true;
                 }
-                //requirement of combo box is that data source must be enumerable, so provide one elemnt array 
-                this.ItemsSource = new object[] { new TypeEntryContainer() { Items = items, DisplayText = text.ToString() } };
+                //requirement of combo box is that data source must be enumerable, so provide one elemnt array
+                this.ItemsSource = new object[]
+                {
+                    new TypeEntryContainer() { Items = items, DisplayText = text.ToString() },
+                };
             }
             else
             {
@@ -242,7 +331,7 @@ namespace System.ServiceModel.Activities.Presentation
             ((MessageQueryEditor)sender).OnTypeCollectionChanged();
         }
 
-        //ComboBox item subclass 
+        //ComboBox item subclass
         sealed class MessageQueryComboBoxItem : ComboBoxItem
         {
             public MessageQueryComboBoxItem()
@@ -253,14 +342,9 @@ namespace System.ServiceModel.Activities.Presentation
 
             //do not notify parent ComboBox about mouse down & up events - i don't want to close popup too early
             //i handle closing myself
-            protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
-            {                
-            }
-            protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
-            {
-            }
+            protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e) { }
+
+            protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e) { }
         }
-
     }
-
 }

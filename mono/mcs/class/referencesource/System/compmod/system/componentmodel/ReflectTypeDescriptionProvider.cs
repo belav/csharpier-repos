@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="ReflectTypeDescriptionProvider.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -16,9 +16,9 @@ namespace System.ComponentModel {
     using System.Reflection;
     using System.Security;
     using System.Security.Permissions;
-   
+
     /// <devdoc>
-    ///     This type description provider provides type information through 
+    ///     This type description provider provides type information through
     ///     reflection.  Unless someone has provided a custom type description
     ///     provider for a type or instance, or unless an instance implements
     ///     ICustomTypeDescriptor, any query for type information will go through
@@ -26,8 +26,8 @@ namespace System.ComponentModel {
     ///     with "object", as it can provide all type information for any type.
     /// </devdoc>
     [HostProtection(SharedState = true)]
-    internal sealed class ReflectTypeDescriptionProvider : TypeDescriptionProvider {
-
+    internal sealed class ReflectTypeDescriptionProvider : TypeDescriptionProvider
+    {
         // Hastable of Type -> ReflectedTypeData.  ReflectedTypeData contains all
         // of the type information we have gathered for a given type.
         //
@@ -38,7 +38,7 @@ namespace System.ComponentModel {
         // there is one enum converter that can work with all enums, but it needs to know
         // the type of enum it is dealing with.
         //
-        private static Type[] _typeConstructor = new Type[] {typeof(Type)};
+        private static Type[] _typeConstructor = new Type[] { typeof(Type) };
 
         // This is where we store the various converters, etc for the intrinsic types.
         //
@@ -79,18 +79,16 @@ namespace System.ComponentModel {
         {
             typeof(System.Runtime.InteropServices.GuidAttribute),
             typeof(System.Runtime.InteropServices.ComVisibleAttribute),
-            typeof(System.Runtime.InteropServices.InterfaceTypeAttribute)
+            typeof(System.Runtime.InteropServices.InterfaceTypeAttribute),
         };
 
-
-        internal static Guid ExtenderProviderKey {
-            get {
-                return _extenderProviderKey;
-            }
+        internal static Guid ExtenderProviderKey
+        {
+            get { return _extenderProviderKey; }
         }
 
-
         private static object _internalSyncObject = new object();
+
         /// <devdoc>
         ///     Creates a new ReflectTypeDescriptionProvider.  The type is the
         ///     type we will obtain type information for.
@@ -100,47 +98,125 @@ namespace System.ComponentModel {
             TypeDescriptor.Trace("Reflect : Creating ReflectTypeDescriptionProvider");
         }
 
-        /// <devdoc> 
-        ///      This is a table we create for intrinsic types. 
-        ///      There should be entries here ONLY for intrinsic 
-        ///      types, as all other types we should be able to 
-        ///      add attributes directly as metadata. 
-        /// </devdoc> 
-        private static Hashtable IntrinsicTypeConverters {
-    #if MONO
+        /// <devdoc>
+        ///      This is a table we create for intrinsic types.
+        ///      There should be entries here ONLY for intrinsic
+        ///      types, as all other types we should be able to
+        ///      add attributes directly as metadata.
+        /// </devdoc>
+        private static Hashtable IntrinsicTypeConverters
+        {
+#if MONO
             // TODO: typeof (BooleanConverter) would work better
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.BooleanConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.ByteConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.SByteConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.CharConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.DoubleConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.StringConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.Int32Converter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.Int16Converter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.Int64Converter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.SingleConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.UInt16Converter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.UInt32Converter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.UInt16Converter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.TypeConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.CultureInfoConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.DateTimeConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.DateTimeOffsetConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.DecimalConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.TimeSpanConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.GuidConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.ArrayConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor()", "System.ComponentModel.CollectionConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor(System.Type)", "System.ComponentModel.EnumConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor(System.Type)", "System.ComponentModel.ReferenceConverter")]
-            [System.Runtime.CompilerServices.PreserveDependency (".ctor(System.Type)", "System.ComponentModel.NullableConverter")]
-    #endif
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.BooleanConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.ByteConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.SByteConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.CharConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.DoubleConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.StringConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.Int32Converter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.Int16Converter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.Int64Converter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.SingleConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.UInt16Converter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.UInt32Converter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.UInt16Converter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.TypeConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.CultureInfoConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.DateTimeConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.DateTimeOffsetConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.DecimalConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.TimeSpanConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.GuidConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.ArrayConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor()",
+                "System.ComponentModel.CollectionConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor(System.Type)",
+                "System.ComponentModel.EnumConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor(System.Type)",
+                "System.ComponentModel.ReferenceConverter"
+            )]
+            [System.Runtime.CompilerServices.PreserveDependency(
+                ".ctor(System.Type)",
+                "System.ComponentModel.NullableConverter"
+            )]
+#endif
 
-            get {
+            get
+            {
                 // It is not worth taking a lock for this -- worst case of a collision
                 // would build two tables, one that garbage collects very quickly.
                 //
-                if (_intrinsicTypeConverters == null) {
+                if (_intrinsicTypeConverters == null)
+                {
                     Hashtable temp = new Hashtable();
 
                     // Add the intrinsics
@@ -188,7 +264,7 @@ namespace System.ComponentModel {
         ///     ypeDescriptor will search an editor
         ///     able for the editor type, if one can be found.
         /// </devdoc>
-        internal static void AddEditorTable(Type editorBaseType, Hashtable table) 
+        internal static void AddEditorTable(Type editorBaseType, Hashtable table)
         {
             if (editorBaseType == null)
             {
@@ -201,14 +277,14 @@ namespace System.ComponentModel {
                 // don't throw; RTM didn't so we can't do it either.
             }
 
-            lock(_internalSyncObject) 
+            lock (_internalSyncObject)
             {
                 if (_editorTables == null)
                 {
                     _editorTables = new Hashtable(4);
                 }
 
-                if (!_editorTables.ContainsKey(editorBaseType)) 
+                if (!_editorTables.ContainsKey(editorBaseType))
                 {
                     _editorTables[editorBaseType] = table;
                 }
@@ -218,52 +294,76 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///     CreateInstance implementation.  We delegate to Activator.
         /// </devdoc>
-        public override object CreateInstance(IServiceProvider provider, Type objectType, Type[] argTypes, object[] args)
+        public override object CreateInstance(
+            IServiceProvider provider,
+            Type objectType,
+            Type[] argTypes,
+            object[] args
+        )
         {
             Debug.Assert(objectType != null, "Should have arg-checked before coming in here");
 
             object obj = null;
-            
+
             if (argTypes != null)
             {
-                obj = SecurityUtils.SecureConstructorInvoke(objectType, argTypes, args, true, BindingFlags.ExactBinding);
+                obj = SecurityUtils.SecureConstructorInvoke(
+                    objectType,
+                    argTypes,
+                    args,
+                    true,
+                    BindingFlags.ExactBinding
+                );
             }
-            else {
-                if (args != null) {
+            else
+            {
+                if (args != null)
+                {
                     argTypes = new Type[args.Length];
-                    for(int idx = 0; idx < args.Length; idx++) {
-                        if (args[idx] != null) {
+                    for (int idx = 0; idx < args.Length; idx++)
+                    {
+                        if (args[idx] != null)
+                        {
                             argTypes[idx] = args[idx].GetType();
                         }
-                        else {
+                        else
+                        {
                             argTypes[idx] = typeof(object);
                         }
                     }
                 }
-                else {
+                else
+                {
                     argTypes = new Type[0];
                 }
 
                 obj = SecurityUtils.SecureConstructorInvoke(objectType, argTypes, args, true);
             }
 
-            if (obj == null) {
+            if (obj == null)
+            {
                 obj = SecurityUtils.SecureCreateInstance(objectType, args);
             }
 
             return obj;
         }
 
-
-        /// <devdoc> 
+        /// <devdoc>
         ///     Helper method to create editors and type converters. This checks to see if the
-        ///     type implements a Type constructor, and if it does it invokes that ctor. 
+        ///     type implements a Type constructor, and if it does it invokes that ctor.
         ///     Otherwise, it just tries to create the type.
-        /// </devdoc> 
-        private static object CreateInstance(Type objectType, Type callingType) {
-            object obj = SecurityUtils.SecureConstructorInvoke(objectType, _typeConstructor, new object[] {callingType}, false);
+        /// </devdoc>
+        private static object CreateInstance(Type objectType, Type callingType)
+        {
+            object obj = SecurityUtils.SecureConstructorInvoke(
+                objectType,
+                _typeConstructor,
+                new object[] { callingType },
+                false
+            );
 
-            if (obj == null) {
+            if (obj == null)
+            {
                 obj = SecurityUtils.SecureCreateInstance(objectType);
             }
 
@@ -287,7 +387,8 @@ namespace System.ComponentModel {
             IComponent comp = instance as IComponent;
             if (comp != null && comp.Site != null)
             {
-                IDictionaryService ds = comp.Site.GetService(typeof(IDictionaryService)) as IDictionaryService;
+                IDictionaryService ds =
+                    comp.Site.GetService(typeof(IDictionaryService)) as IDictionaryService;
                 if (ds != null)
                 {
                     IDictionary dict = ds.GetValue(_dictionaryKey) as IDictionary;
@@ -360,14 +461,14 @@ namespace System.ComponentModel {
             return td.GetEditor(instance, editorBaseType);
         }
 
-        /// <devdoc> 
-        ///      Retrieves a default editor table for the given editor base type. 
-        /// </devdoc> 
-        private static Hashtable GetEditorTable(Type editorBaseType) {
-
+        /// <devdoc>
+        ///      Retrieves a default editor table for the given editor base type.
+        /// </devdoc>
+        private static Hashtable GetEditorTable(Type editorBaseType)
+        {
             if (_editorTables == null)
             {
-                lock(_internalSyncObject)
+                lock (_internalSyncObject)
                 {
                     if (_editorTables == null)
                     {
@@ -377,14 +478,16 @@ namespace System.ComponentModel {
             }
 
             object table = _editorTables[editorBaseType];
-            
-            if (table == null) 
+
+            if (table == null)
             {
                 // Before we give up, it is possible that the
-                // class initializer for editorBaseType hasn't 
+                // class initializer for editorBaseType hasn't
                 // actually run.
                 //
-                System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(editorBaseType.TypeHandle);
+                System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(
+                    editorBaseType.TypeHandle
+                );
                 table = _editorTables[editorBaseType];
 
                 // If the table is still null, then throw a
@@ -396,26 +499,26 @@ namespace System.ComponentModel {
                     lock (_internalSyncObject)
                     {
                         table = _editorTables[editorBaseType];
-                        if (table == null) 
+                        if (table == null)
                         {
                             _editorTables[editorBaseType] = _editorTables;
                         }
                     }
                 }
             }
-            
+
             // Look for our sentinel value that indicates
             // we have already tried and failed to get
             // a table.
             //
-            if (table == _editorTables) 
+            if (table == _editorTables)
             {
                 table = null;
             }
-            
+
             return (Hashtable)table;
         }
-        
+
         /// <devdoc>
         ///     Retrieves the events for this type.
         /// </devdoc>
@@ -484,7 +587,7 @@ namespace System.ComponentModel {
         {
             return GetEditor(instance.GetType(), instance, editorBaseType);
         }
-        
+
         /// <devdoc>
         ///     Retrieves the events for this type.
         /// </devdoc>
@@ -535,7 +638,7 @@ namespace System.ComponentModel {
             }
 
             // Unlike normal properties, it is fine for there to be properties with
-            // duplicate names here.  
+            // duplicate names here.
             //
             ArrayList propertyList = null;
 
@@ -551,16 +654,22 @@ namespace System.ComponentModel {
                 for (int propIdx = 0; propIdx < propertyArray.Length; propIdx++)
                 {
                     PropertyDescriptor prop = propertyArray[propIdx];
-                    ExtenderProvidedPropertyAttribute eppa = prop.Attributes[typeof(ExtenderProvidedPropertyAttribute)] as ExtenderProvidedPropertyAttribute;
+                    ExtenderProvidedPropertyAttribute eppa =
+                        prop.Attributes[typeof(ExtenderProvidedPropertyAttribute)]
+                        as ExtenderProvidedPropertyAttribute;
 
-                    Debug.Assert(eppa != null, "Extender property " + prop.Name + " has no provider attribute.  We will skip it.");
+                    Debug.Assert(
+                        eppa != null,
+                        "Extender property "
+                            + prop.Name
+                            + " has no provider attribute.  We will skip it."
+                    );
                     if (eppa != null)
                     {
                         Type receiverType = eppa.ReceiverType;
-                        if (receiverType != null) 
+                        if (receiverType != null)
                         {
-
-                            if (receiverType.IsAssignableFrom(componentType)) 
+                            if (receiverType.IsAssignableFrom(componentType))
                             {
                                 propertyList.Add(prop);
                             }
@@ -574,7 +683,10 @@ namespace System.ComponentModel {
             //
             if (propertyList != null)
             {
-                TypeDescriptor.Trace("Extenders : Allocating property collection for {0} properties", propertyList.Count);
+                TypeDescriptor.Trace(
+                    "Extenders : Allocating property collection for {0} properties",
+                    propertyList.Count
+                );
                 PropertyDescriptor[] fullArray = new PropertyDescriptor[propertyList.Count];
                 propertyList.CopyTo(fullArray, 0);
                 properties = new PropertyDescriptorCollection(fullArray, true);
@@ -603,7 +715,8 @@ namespace System.ComponentModel {
             IComponent component = instance as IComponent;
             if (component != null && component.Site != null)
             {
-                IExtenderListService extenderList = component.Site.GetService(typeof(IExtenderListService)) as IExtenderListService;
+                IExtenderListService extenderList =
+                    component.Site.GetService(typeof(IExtenderListService)) as IExtenderListService;
                 IDictionary cache = TypeDescriptor.GetCache(instance);
 
                 if (extenderList != null)
@@ -625,18 +738,22 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///     GetExtenders builds a list of extender providers from
         ///     a collection of components.  It validates the extenders
-        ///     against any cached collection of extenders in the 
+        ///     against any cached collection of extenders in the
         ///     cache.  If there is a discrepancy, this will erase
         ///     any cached extender properties from the cache and
         ///     save the updated extender list.  If there is no
         ///     discrepancy this will simply return the cached list.
         /// </devdoc>
-        private static IExtenderProvider[] GetExtenders(ICollection components, object instance, IDictionary cache)
+        private static IExtenderProvider[] GetExtenders(
+            ICollection components,
+            object instance,
+            IDictionary cache
+        )
         {
             bool newExtenders = false;
             int extenderCount = 0;
             IExtenderProvider[] existingExtenders = null;
-    
+
             //CanExtend is expensive. We will remember results of CanExtend for the first 64 extenders and using "long canExtend" as a bit vector.
             // we want to avoid memory allocation as well so we don't use some more sophisticated data structure like an array of booleans
             UInt64 canExtend = 0;
@@ -661,7 +778,7 @@ namespace System.ComponentModel {
 
             int curIdx = 0;
             int idx = 0;
-           
+
             if (currentExtenders != null)
             {
                 for (curIdx = 0; curIdx < currentExtenders.Length; curIdx++)
@@ -672,7 +789,13 @@ namespace System.ComponentModel {
                         // Performance:We would like to call CanExtend as little as possible therefore we remember its result
                         if (curIdx < maxCanExtendResults)
                             canExtend |= (UInt64)1 << curIdx;
-                        if (!newExtenders && (idx >= existingExtenders.Length || currentExtenders[curIdx] != existingExtenders[idx++]))
+                        if (
+                            !newExtenders
+                            && (
+                                idx >= existingExtenders.Length
+                                || currentExtenders[curIdx] != existingExtenders[idx++]
+                            )
+                        )
                         {
                             newExtenders = true;
                         }
@@ -681,15 +804,18 @@ namespace System.ComponentModel {
             }
             else if (components != null)
             {
-                foreach(object obj in components)
+                foreach (object obj in components)
                 {
                     IExtenderProvider prov = obj as IExtenderProvider;
                     if (prov != null && prov.CanExtend(instance))
                     {
                         extenderCount++;
                         if (curIdx < maxCanExtendResults)
-                            canExtend |= (UInt64)1<<curIdx;
-                        if (!newExtenders && (idx >= existingExtenders.Length || prov != existingExtenders[idx++]))
+                            canExtend |= (UInt64)1 << curIdx;
+                        if (
+                            !newExtenders
+                            && (idx >= existingExtenders.Length || prov != existingExtenders[idx++])
+                        )
                         {
                             newExtenders = true;
                         }
@@ -703,8 +829,14 @@ namespace System.ComponentModel {
             }
             if (newExtenders)
             {
-                TypeDescriptor.Trace("Extenders : object has new extenders : {0}", instance.GetType().Name);
-                TypeDescriptor.Trace("Extenders : Identified {0} extender providers", extenderCount);
+                TypeDescriptor.Trace(
+                    "Extenders : object has new extenders : {0}",
+                    instance.GetType().Name
+                );
+                TypeDescriptor.Trace(
+                    "Extenders : Identified {0} extender providers",
+                    extenderCount
+                );
                 if (currentExtenders == null || extenderCount != currentExtenders.Length)
                 {
                     IExtenderProvider[] newExtenderArray = new IExtenderProvider[extenderCount];
@@ -714,29 +846,50 @@ namespace System.ComponentModel {
 
                     if (currentExtenders != null && extenderCount > 0)
                     {
-                        while(curIdx < currentExtenders.Length)
-                        { 
-                            if ((curIdx < maxCanExtendResults && (canExtend & ((UInt64)1 << curIdx)) != 0 )|| 
-                                            (curIdx >= maxCanExtendResults && currentExtenders[curIdx].CanExtend(instance)))
+                        while (curIdx < currentExtenders.Length)
+                        {
+                            if (
+                                (
+                                    curIdx < maxCanExtendResults
+                                    && (canExtend & ((UInt64)1 << curIdx)) != 0
+                                )
+                                || (
+                                    curIdx >= maxCanExtendResults
+                                    && currentExtenders[curIdx].CanExtend(instance)
+                                )
+                            )
                             {
-                                Debug.Assert(idx < extenderCount, "There are more extenders than we expect");
+                                Debug.Assert(
+                                    idx < extenderCount,
+                                    "There are more extenders than we expect"
+                                );
                                 newExtenderArray[idx++] = currentExtenders[curIdx];
                             }
-                            curIdx++;                      
+                            curIdx++;
                         }
                         Debug.Assert(idx == extenderCount, "Wrong number of extenders");
                     }
                     else if (extenderCount > 0)
                     {
                         IEnumerator componentEnum = components.GetEnumerator();
-                        while(componentEnum.MoveNext())
+                        while (componentEnum.MoveNext())
                         {
                             IExtenderProvider p = componentEnum.Current as IExtenderProvider;
 
-                            if (p != null && ((curIdx < maxCanExtendResults && (canExtend & ((UInt64)1 << curIdx)) != 0) ||
-                                                (curIdx >= maxCanExtendResults && p.CanExtend(instance))))
+                            if (
+                                p != null
+                                && (
+                                    (
+                                        curIdx < maxCanExtendResults
+                                        && (canExtend & ((UInt64)1 << curIdx)) != 0
+                                    ) || (curIdx >= maxCanExtendResults && p.CanExtend(instance))
+                                )
+                            )
                             {
-                                Debug.Assert(idx < extenderCount, "There are more extenders than we expect");
+                                Debug.Assert(
+                                    idx < extenderCount,
+                                    "There are more extenders than we expect"
+                                );
                                 newExtenderArray[idx++] = p;
                             }
                             curIdx++;
@@ -771,7 +924,7 @@ namespace System.ComponentModel {
         //////////////////////////////////////////////////////////
         /// <devdoc>
         ///     Provides a type descriptor for the given object.  We only support this
-        ///     if the object is a component that 
+        ///     if the object is a component that
         /// </devdoc>
         public override ICustomTypeDescriptor GetExtendedTypeDescriptor(object instance)
         {
@@ -788,11 +941,14 @@ namespace System.ComponentModel {
         ///     If not overridden, the default implementation of this method will call
         ///     GetComponentName.
         /// </devdoc>
-        public override string GetFullComponentName(object component) {
+        public override string GetFullComponentName(object component)
+        {
             IComponent comp = component as IComponent;
-            if (comp != null) {
+            if (comp != null)
+            {
                 INestedSite ns = comp.Site as INestedSite;
-                if (ns != null) {
+                if (ns != null)
+                {
                     return ns.FullName;
                 }
             }
@@ -804,14 +960,18 @@ namespace System.ComponentModel {
         ///     Returns an array of types we have populated metadata for that live
         ///     in the current module.
         /// </devdoc>
-        internal Type[] GetPopulatedTypes(Module module) {
-            ArrayList typeList = new ArrayList();;
+        internal Type[] GetPopulatedTypes(Module module)
+        {
+            ArrayList typeList = new ArrayList();
+            ;
 
-            foreach(DictionaryEntry de in _typeData) {
+            foreach (DictionaryEntry de in _typeData)
+            {
                 Type type = (Type)de.Key;
                 ReflectedTypeData typeData = (ReflectedTypeData)de.Value;
 
-                if (type.Module == module && typeData.IsPopulated) {
+                if (type.Module == module && typeData.IsPopulated)
+                {
                     typeList.Add(type);
                 }
             }
@@ -851,25 +1011,31 @@ namespace System.ComponentModel {
         ///     null if there is no type data for the type yet and
         ///     createIfNeeded is false.
         /// </devdoc>
-        private ReflectedTypeData GetTypeData(Type type, bool createIfNeeded) {
-
+        private ReflectedTypeData GetTypeData(Type type, bool createIfNeeded)
+        {
             ReflectedTypeData td = null;
 
-            if (_typeData != null) {
+            if (_typeData != null)
+            {
                 td = (ReflectedTypeData)_typeData[type];
-                if (td != null) {
+                if (td != null)
+                {
                     return td;
                 }
             }
 
-            lock (_internalSyncObject) {
-                if (_typeData != null) {
+            lock (_internalSyncObject)
+            {
+                if (_typeData != null)
+                {
                     td = (ReflectedTypeData)_typeData[type];
                 }
 
-                if (td == null && createIfNeeded) {
+                if (td == null && createIfNeeded)
+                {
                     td = new ReflectedTypeData(type);
-                    if (_typeData == null) {
+                    if (_typeData == null)
+                    {
                         _typeData = new Hashtable();
                     }
                     _typeData[type] = td;
@@ -880,11 +1046,11 @@ namespace System.ComponentModel {
         }
 
         /// <devdoc>
-        ///     This method returns a custom type descriptor for the given type / object.  
-        ///     The objectType parameter is always valid, but the instance parameter may 
-        ///     be null if no instance was passed to TypeDescriptor.  The method should 
-        ///     return a custom type descriptor for the object.  If the method is not 
-        ///     interested in providing type information for the object it should 
+        ///     This method returns a custom type descriptor for the given type / object.
+        ///     The objectType parameter is always valid, but the instance parameter may
+        ///     be null if no instance was passed to TypeDescriptor.  The method should
+        ///     return a custom type descriptor for the object.  If the method is not
+        ///     interested in providing type information for the object it should
         ///     return null.
         /// </devdoc>
         public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
@@ -892,15 +1058,15 @@ namespace System.ComponentModel {
             Debug.Fail("This should never be invoked.  TypeDescriptionNode should wrap for us.");
             return null;
         }
-    
+
         /// <devdoc>
         ///     Retrieves a type from a name.
         /// </devdoc>
-        private static Type GetTypeFromName(string typeName) 
+        private static Type GetTypeFromName(string typeName)
         {
             Type t = Type.GetType(typeName);
 
-            if (t == null) 
+            if (t == null)
             {
                 int commaIndex = typeName.IndexOf(',');
 
@@ -912,7 +1078,7 @@ namespace System.ComponentModel {
                     // so it could be looking in the previous version
                     // of the assembly and not finding the type.  We work
                     // around this by looking for the non-assembly qualified
-                    // name, which causes the domain to raise a type 
+                    // name, which causes the domain to raise a type
                     // resolve event.
                     //
                     t = Type.GetType(typeName.Substring(0, commaIndex));
@@ -923,13 +1089,14 @@ namespace System.ComponentModel {
         }
 
         /// <devdoc>
-        ///     This method returns true if the data cache in this reflection 
+        ///     This method returns true if the data cache in this reflection
         ///     type descriptor has data in it.
         /// </devdoc>
         internal bool IsPopulated(Type type)
         {
             ReflectedTypeData td = GetTypeData(type, false);
-            if (td != null) {
+            if (td != null)
+            {
                 return td.IsPopulated;
             }
             return false;
@@ -938,7 +1105,7 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///     Static helper API around reflection to get and cache
         ///     custom attributes.  This does not recurse, but it will
-        ///     walk interfaces on the type.  Interfaces are added 
+        ///     walk interfaces on the type.  Interfaces are added
         ///     to the end, so merging should be done from length - 1
         ///     to 0.
         /// </devdoc>
@@ -1050,7 +1217,8 @@ namespace System.ComponentModel {
                 events = (EventDescriptor[])_eventCache[type];
                 if (events == null)
                 {
-                    BindingFlags bindingFlags = BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance;
+                    BindingFlags bindingFlags =
+                        BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance;
                     TypeDescriptor.Trace("Events : Building events for {0}", type.Name);
 
                     // Get the type's events.  Events may have their add and
@@ -1070,8 +1238,20 @@ namespace System.ComponentModel {
 
                         // GetEvents returns events that are on nonpublic types
                         // if those types are from our assembly.  Screen these.
-                        // 
-                        if ((!(eventInfo.DeclaringType.IsPublic || eventInfo.DeclaringType.IsNestedPublic)) && (eventInfo.DeclaringType.Assembly == typeof(ReflectTypeDescriptionProvider).Assembly)) {
+                        //
+                        if (
+                            (
+                                !(
+                                    eventInfo.DeclaringType.IsPublic
+                                    || eventInfo.DeclaringType.IsNestedPublic
+                                )
+                            )
+                            && (
+                                eventInfo.DeclaringType.Assembly
+                                == typeof(ReflectTypeDescriptionProvider).Assembly
+                            )
+                        )
+                        {
                             Debug.Fail("Hey, assumption holds true.  Rip this assert.");
                             continue;
                         }
@@ -1092,12 +1272,12 @@ namespace System.ComponentModel {
                         events = newEvents;
                     }
 
-                    #if DEBUG
-                    foreach(EventDescriptor dbgEvent in events)
+#if DEBUG
+                    foreach (EventDescriptor dbgEvent in events)
                     {
                         Debug.Assert(dbgEvent != null, "Holes in event array for type " + type);
                     }
-                    #endif
+#endif
                     _eventCache[type] = events;
                 }
             }
@@ -1115,7 +1295,7 @@ namespace System.ComponentModel {
         ///     parameter types and get and set methods of the extended property,
         ///     and there is an ExtendedPropertyDescriptor that combines this
         ///     with an extender provider object to create what looks like a
-        ///     normal property.  ReflectGetExtendedProperties maintains two 
+        ///     normal property.  ReflectGetExtendedProperties maintains two
         ///     separate caches for these two sets:  a static one for the
         ///     ReflectPropertyDescriptor values that don't change for each
         ///     provider instance, and a per-provider cache that contains
@@ -1151,12 +1331,14 @@ namespace System.ComponentModel {
             }
 
             Type providerType = provider.GetType();
-            ReflectPropertyDescriptor[] extendedProperties = (ReflectPropertyDescriptor[])_extendedPropertyCache[providerType];
+            ReflectPropertyDescriptor[] extendedProperties = (ReflectPropertyDescriptor[])
+                _extendedPropertyCache[providerType];
             if (extendedProperties == null)
             {
                 lock (_internalSyncObject)
                 {
-                    extendedProperties = (ReflectPropertyDescriptor[])_extendedPropertyCache[providerType];
+                    extendedProperties = (ReflectPropertyDescriptor[])
+                        _extendedPropertyCache[providerType];
 
                     // Our class-based property store failed as well, so we need to build up the set of
                     // extended properties here.
@@ -1166,28 +1348,51 @@ namespace System.ComponentModel {
                         AttributeCollection attributes = TypeDescriptor.GetAttributes(providerType);
                         ArrayList extendedList = new ArrayList(attributes.Count);
 
-                        foreach(Attribute attr in attributes) 
+                        foreach (Attribute attr in attributes)
                         {
                             ProvidePropertyAttribute provideAttr = attr as ProvidePropertyAttribute;
 
-                            if (provideAttr != null) 
+                            if (provideAttr != null)
                             {
                                 Type receiverType = GetTypeFromName(provideAttr.ReceiverTypeName);
 
-                                if (receiverType != null) 
+                                if (receiverType != null)
                                 {
-                                    MethodInfo getMethod = providerType.GetMethod("Get" + provideAttr.PropertyName, new Type[] {receiverType});
+                                    MethodInfo getMethod = providerType.GetMethod(
+                                        "Get" + provideAttr.PropertyName,
+                                        new Type[] { receiverType }
+                                    );
 
-                                    if (getMethod != null && !getMethod.IsStatic && getMethod.IsPublic) 
+                                    if (
+                                        getMethod != null
+                                        && !getMethod.IsStatic
+                                        && getMethod.IsPublic
+                                    )
                                     {
-                                        MethodInfo setMethod = providerType.GetMethod("Set" + provideAttr.PropertyName, new Type[] {receiverType, getMethod.ReturnType});
+                                        MethodInfo setMethod = providerType.GetMethod(
+                                            "Set" + provideAttr.PropertyName,
+                                            new Type[] { receiverType, getMethod.ReturnType }
+                                        );
 
-                                        if (setMethod != null && (setMethod.IsStatic || !setMethod.IsPublic)) 
+                                        if (
+                                            setMethod != null
+                                            && (setMethod.IsStatic || !setMethod.IsPublic)
+                                        )
                                         {
                                             setMethod = null;
                                         }
 
-                                        extendedList.Add(new ReflectPropertyDescriptor(providerType, provideAttr.PropertyName, getMethod.ReturnType, receiverType, getMethod, setMethod, null));
+                                        extendedList.Add(
+                                            new ReflectPropertyDescriptor(
+                                                providerType,
+                                                provideAttr.PropertyName,
+                                                getMethod.ReturnType,
+                                                receiverType,
+                                                getMethod,
+                                                setMethod,
+                                                null
+                                            )
+                                        );
                                     }
                                 }
                             }
@@ -1200,7 +1405,7 @@ namespace System.ComponentModel {
                 }
             }
 
-            // Now that we have our extended properties we can build up a list of callable properties.  These can be 
+            // Now that we have our extended properties we can build up a list of callable properties.  These can be
             // returned to the user.
             //
             properties = new PropertyDescriptor[extendedProperties.Length];
@@ -1210,11 +1415,16 @@ namespace System.ComponentModel {
                 IComponent comp = provider as IComponent;
                 if (comp == null || comp.Site == null)
                 {
-                    attrs = new Attribute[] {DesignOnlyAttribute.Yes};
+                    attrs = new Attribute[] { DesignOnlyAttribute.Yes };
                 }
 
-                ReflectPropertyDescriptor  rpd = extendedProperties[idx];
-                ExtendedPropertyDescriptor epd = new ExtendedPropertyDescriptor(rpd, rpd.ExtenderGetReceiverType(), provider, attrs);
+                ReflectPropertyDescriptor rpd = extendedProperties[idx];
+                ExtendedPropertyDescriptor epd = new ExtendedPropertyDescriptor(
+                    rpd,
+                    rpd.ExtenderGetReceiverType(),
+                    provider,
+                    attrs
+                );
                 properties[idx] = epd;
             }
 
@@ -1234,7 +1444,7 @@ namespace System.ComponentModel {
         {
             if (_propertyCache == null)
             {
-                lock(_internalSyncObject)
+                lock (_internalSyncObject)
                 {
                     if (_propertyCache == null)
                     {
@@ -1255,7 +1465,8 @@ namespace System.ComponentModel {
 
                 if (properties == null)
                 {
-                    BindingFlags bindingFlags = BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance;
+                    BindingFlags bindingFlags =
+                        BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance;
                     TypeDescriptor.Trace("Properties : Building properties for {0}", type.Name);
 
                     // Get the type's properties.  Properties may have their
@@ -1269,16 +1480,16 @@ namespace System.ComponentModel {
                     properties = new PropertyDescriptor[propertyInfos.Length];
                     int propertyCount = 0;
 
-               
                     for (int idx = 0; idx < propertyInfos.Length; idx++)
                     {
                         PropertyInfo propertyInfo = propertyInfos[idx];
 
                         // Today we do not support parameterized properties.
-                        // 
-                        if (propertyInfo.GetIndexParameters().Length > 0) {
+                        //
+                        if (propertyInfo.GetIndexParameters().Length > 0)
+                        {
                             continue;
-                        } 
+                        }
 
                         MethodInfo getMethod = propertyInfo.GetGetMethod();
                         MethodInfo setMethod = propertyInfo.GetSetMethod();
@@ -1287,21 +1498,25 @@ namespace System.ComponentModel {
                         // If the property only overrode "set", then we don't
                         // pick it up here.  Rather, we just merge it in from
                         // the base class list.
-      
+
 
                         // If a property had at least a get method, we consider it.  We don't
                         // consider write-only properties.
                         //
                         if (getMethod != null)
                         {
-                            properties[propertyCount++] = new ReflectPropertyDescriptor(type, name, 
-                                                                                    propertyInfo.PropertyType, 
-                                                                                    propertyInfo, getMethod, 
-                                                                                    setMethod, null);
+                            properties[propertyCount++] = new ReflectPropertyDescriptor(
+                                type,
+                                name,
+                                propertyInfo.PropertyType,
+                                propertyInfo,
+                                getMethod,
+                                setMethod,
+                                null
+                            );
                         }
                     }
 
-               
                     if (propertyCount != properties.Length)
                     {
                         PropertyDescriptor[] newProperties = new PropertyDescriptor[propertyCount];
@@ -1309,12 +1524,12 @@ namespace System.ComponentModel {
                         properties = newProperties;
                     }
 
-                    #if DEBUG
-                    foreach(PropertyDescriptor dbgProp in properties)
+#if DEBUG
+                    foreach (PropertyDescriptor dbgProp in properties)
                     {
                         Debug.Assert(dbgProp != null, "Holes in property array for type " + type);
                     }
-                    #endif
+#endif
                     _propertyCache[type] = properties;
                 }
             }
@@ -1330,21 +1545,22 @@ namespace System.ComponentModel {
         internal void Refresh(Type type)
         {
             ReflectedTypeData td = GetTypeData(type, false);
-            if (td != null) {
+            if (td != null)
+            {
                 td.Refresh();
             }
         }
 
-        /// <devdoc> 
-        ///      Searches the provided intrinsic hashtable for a match with the object type. 
-        ///      At the beginning, the hashtable contains types for the various converters. 
-        ///      As this table is searched, the types for these objects 
-        ///      are replaced with instances, so we only create as needed.  This method 
-        ///      does the search up the base class hierarchy and will create instances 
-        ///      for types as needed.  These instances are stored back into the table 
-        ///      for the base type, and for the original component type, for fast access. 
-        /// </devdoc> 
-        private static object SearchIntrinsicTable(Hashtable table, Type callingType) 
+        /// <devdoc>
+        ///      Searches the provided intrinsic hashtable for a match with the object type.
+        ///      At the beginning, the hashtable contains types for the various converters.
+        ///      As this table is searched, the types for these objects
+        ///      are replaced with instances, so we only create as needed.  This method
+        ///      does the search up the base class hierarchy and will create instances
+        ///      for types as needed.  These instances are stored back into the table
+        ///      for the base type, and for the original component type, for fast access.
+        /// </devdoc>
+        private static object SearchIntrinsicTable(Hashtable table, Type callingType)
         {
             object hashEntry = null;
 
@@ -1353,10 +1569,10 @@ namespace System.ComponentModel {
             // lock.  Also, this allows multiple intrinsic tables to be searched
             // at once.
             //
-            lock(table) 
+            lock (table)
             {
                 Type baseType = callingType;
-                while (baseType != null && baseType != typeof(object)) 
+                while (baseType != null && baseType != typeof(object))
                 {
                     hashEntry = table[baseType];
 
@@ -1364,16 +1580,16 @@ namespace System.ComponentModel {
                     // resolve it.
                     //
                     string typeString = hashEntry as string;
-                    if (typeString != null) 
+                    if (typeString != null)
                     {
                         hashEntry = Type.GetType(typeString);
-                        if (hashEntry != null) 
+                        if (hashEntry != null)
                         {
                             table[baseType] = hashEntry;
                         }
                     }
 
-                    if (hashEntry != null) 
+                    if (hashEntry != null)
                     {
                         break;
                     }
@@ -1384,29 +1600,31 @@ namespace System.ComponentModel {
                 // Now make a scan through each value in the table, looking for interfaces.
                 // If we find one, see if the object implements the interface.
                 //
-                if (hashEntry == null) 
+                if (hashEntry == null)
                 {
-
-                    foreach(DictionaryEntry de in table)
+                    foreach (DictionaryEntry de in table)
                     {
                         Type keyType = de.Key as Type;
 
-                        if (keyType != null && keyType.IsInterface && keyType.IsAssignableFrom(callingType)) 
+                        if (
+                            keyType != null
+                            && keyType.IsInterface
+                            && keyType.IsAssignableFrom(callingType)
+                        )
                         {
-
                             hashEntry = de.Value;
                             string typeString = hashEntry as string;
 
-                            if (typeString != null) 
+                            if (typeString != null)
                             {
                                 hashEntry = Type.GetType(typeString);
-                                if (hashEntry != null) 
+                                if (hashEntry != null)
                                 {
                                     table[callingType] = hashEntry;
                                 }
                             }
 
-                            if (hashEntry != null) 
+                            if (hashEntry != null)
                             {
                                 break;
                             }
@@ -1418,7 +1636,10 @@ namespace System.ComponentModel {
                 //
                 if (hashEntry == null)
                 {
-                    if (callingType.IsGenericType && callingType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    if (
+                        callingType.IsGenericType
+                        && callingType.GetGenericTypeDefinition() == typeof(Nullable<>)
+                    )
                     {
                         // Check if it is a nullable value
                         hashEntry = table[_intrinsicNullableKey];
@@ -1434,7 +1655,7 @@ namespace System.ComponentModel {
                 // Interfaces do not derive from object, so we
                 // must handle the case of no hash entry here.
                 //
-                if (hashEntry == null) 
+                if (hashEntry == null)
                 {
                     hashEntry = table[typeof(object)];
                 }
@@ -1446,10 +1667,10 @@ namespace System.ComponentModel {
                 //
                 Type type = hashEntry as Type;
 
-                if (type != null) 
+                if (type != null)
                 {
                     hashEntry = CreateInstance(type, callingType);
-                    if (type.GetConstructor(_typeConstructor) == null) 
+                    if (type.GetConstructor(_typeConstructor) == null)
                     {
                         table[callingType] = hashEntry;
                     }
@@ -1463,32 +1684,30 @@ namespace System.ComponentModel {
         ///     This class contains all the reflection information for a
         ///     given type.
         /// </devdoc>
-        private class ReflectedTypeData {
+        private class ReflectedTypeData
+        {
+            private Type _type;
+            private AttributeCollection _attributes;
+            private EventDescriptorCollection _events;
+            private PropertyDescriptorCollection _properties;
+            private TypeConverter _converter;
+            private object[] _editors;
+            private Type[] _editorTypes;
+            private int _editorCount;
 
-            private Type                            _type;
-            private AttributeCollection             _attributes;
-            private EventDescriptorCollection       _events;
-            private PropertyDescriptorCollection    _properties;
-            private TypeConverter                   _converter;
-            private object[]                        _editors;
-            private Type[]                          _editorTypes;
-            private int                             _editorCount;
-
-            internal ReflectedTypeData(Type type) {
+            internal ReflectedTypeData(Type type)
+            {
                 _type = type;
                 TypeDescriptor.Trace("Reflect : Creating ReflectedTypeData for {0}", type.Name);
             }
 
             /// <devdoc>
-            ///     This method returns true if the data cache in this reflection 
+            ///     This method returns true if the data cache in this reflection
             ///     type descriptor has data in it.
             /// </devdoc>
             internal bool IsPopulated
             {
-                get
-                {
-                    return (_attributes != null) | (_events != null) | (_properties != null);
-                }
+                get { return (_attributes != null) | (_events != null) | (_properties != null); }
             }
 
             /// <devdoc>
@@ -1530,18 +1749,22 @@ namespace System.ComponentModel {
                     // We cannot be sure that there is no custom provider for
                     // interfaces that _type implements, however, because they are not derived
                     // from _type.  So, for interfaces, we must go through TypeDescriptor
-                    // again to get the interfaces attributes.  
+                    // again to get the interfaces attributes.
 
                     // Get the type's attributes. This does not recurse up the base class chain.
                     // We append base class attributes to this array so when walking we will
                     // walk from Length - 1 to zero.
                     //
-                    Attribute[] attrArray = ReflectTypeDescriptionProvider.ReflectGetAttributes(_type);
+                    Attribute[] attrArray = ReflectTypeDescriptionProvider.ReflectGetAttributes(
+                        _type
+                    );
                     Type baseType = _type.BaseType;
 
                     while (baseType != null && baseType != typeof(object))
                     {
-                        Attribute[] baseArray = ReflectTypeDescriptionProvider.ReflectGetAttributes(baseType);
+                        Attribute[] baseArray = ReflectTypeDescriptionProvider.ReflectGetAttributes(
+                            baseType
+                        );
                         Attribute[] temp = new Attribute[attrArray.Length + baseArray.Length];
                         Array.Copy(attrArray, 0, temp, 0, attrArray.Length);
                         Array.Copy(baseArray, 0, temp, attrArray.Length, baseArray.Length);
@@ -1553,20 +1776,29 @@ namespace System.ComponentModel {
                     // the attribute array as well.
                     //
                     int ifaceStartIdx = attrArray.Length;
-                    Type[] interfaces = _type.GetInterfaces(); 
+                    Type[] interfaces = _type.GetInterfaces();
                     TypeDescriptor.Trace("Attributes : Walking {0} interfaces", interfaces.Length);
-                    for(int idx = 0; idx < interfaces.Length; idx++)
+                    for (int idx = 0; idx < interfaces.Length; idx++)
                     {
                         Type iface = interfaces[idx];
 
                         // only do this for public interfaces.
                         //
-                        if ((iface.Attributes & (TypeAttributes.Public | TypeAttributes.NestedPublic)) != 0) {
+                        if (
+                            (
+                                iface.Attributes
+                                & (TypeAttributes.Public | TypeAttributes.NestedPublic)
+                            ) != 0
+                        )
+                        {
                             // No need to pass an instance into GetTypeDescriptor here because, if someone provided a custom
                             // provider based on object, it already would have hit.
                             AttributeCollection ifaceAttrs = TypeDescriptor.GetAttributes(iface);
-                            if (ifaceAttrs.Count > 0) {
-                                Attribute[] temp = new Attribute[attrArray.Length + ifaceAttrs.Count];
+                            if (ifaceAttrs.Count > 0)
+                            {
+                                Attribute[] temp = new Attribute[
+                                    attrArray.Length + ifaceAttrs.Count
+                                ];
                                 Array.Copy(attrArray, 0, temp, 0, attrArray.Length);
                                 ifaceAttrs.CopyTo(temp, attrArray.Length);
                                 attrArray = temp;
@@ -1581,19 +1813,27 @@ namespace System.ComponentModel {
                     for (int idx = 0; idx < attrArray.Length; idx++)
                     {
                         bool addAttr = true;
-                        if (idx >= ifaceStartIdx) {
-                            for (int ifaceSkipIdx = 0; ifaceSkipIdx < _skipInterfaceAttributeList.Length; ifaceSkipIdx++)
+                        if (idx >= ifaceStartIdx)
+                        {
+                            for (
+                                int ifaceSkipIdx = 0;
+                                ifaceSkipIdx < _skipInterfaceAttributeList.Length;
+                                ifaceSkipIdx++
+                            )
                             {
-                                if (_skipInterfaceAttributeList[ifaceSkipIdx].IsInstanceOfType(attrArray[idx]))
+                                if (
+                                    _skipInterfaceAttributeList[ifaceSkipIdx]
+                                        .IsInstanceOfType(attrArray[idx])
+                                )
                                 {
                                     addAttr = false;
                                     break;
                                 }
                             }
-
                         }
 
-                        if (addAttr && !attrDictionary.Contains(attrArray[idx].TypeId)) {
+                        if (addAttr && !attrDictionary.Contains(attrArray[idx].TypeId))
+                        {
                             attrDictionary[attrArray[idx].TypeId] = attrArray[idx];
                         }
                     }
@@ -1620,17 +1860,17 @@ namespace System.ComponentModel {
             internal string GetComponentName(object instance)
             {
                 IComponent comp = instance as IComponent;
-                if (comp != null) 
+                if (comp != null)
                 {
                     ISite site = comp.Site;
-                    if (site != null) 
+                    if (site != null)
                     {
                         INestedSite nestedSite = site as INestedSite;
-                        if (nestedSite != null) 
+                        if (nestedSite != null)
                         {
                             return nestedSite.FullName;
                         }
-                        else 
+                        else
                         {
                             return site.Name;
                         }
@@ -1657,20 +1897,32 @@ namespace System.ComponentModel {
                 //
                 if (instance != null)
                 {
-                    typeAttr = (TypeConverterAttribute)TypeDescriptor.GetAttributes(_type)[typeof(TypeConverterAttribute)];
-                    TypeConverterAttribute instanceAttr = (TypeConverterAttribute)TypeDescriptor.GetAttributes(instance)[typeof(TypeConverterAttribute)];
+                    typeAttr = (TypeConverterAttribute)
+                        TypeDescriptor.GetAttributes(_type)[typeof(TypeConverterAttribute)];
+                    TypeConverterAttribute instanceAttr = (TypeConverterAttribute)
+                        TypeDescriptor.GetAttributes(instance)[typeof(TypeConverterAttribute)];
                     if (typeAttr != instanceAttr)
                     {
                         Type converterType = GetTypeFromName(instanceAttr.ConverterTypeName);
-                        if (converterType != null && typeof(TypeConverter).IsAssignableFrom(converterType)) 
+                        if (
+                            converterType != null
+                            && typeof(TypeConverter).IsAssignableFrom(converterType)
+                        )
                         {
 #if MONO_FEATURE_CAS
-                            try {
+                            try
+                            {
                                 IntSecurity.FullReflection.Assert();
 #endif
-                                return (TypeConverter)ReflectTypeDescriptionProvider.CreateInstance(converterType, _type);
+                                return (TypeConverter)
+                                    ReflectTypeDescriptionProvider.CreateInstance(
+                                        converterType,
+                                        _type
+                                    );
 #if MONO_FEATURE_CAS
-                            } finally {
+                            }
+                            finally
+                            {
                                 CodeAccessPermission.RevertAssert();
                             }
 #endif
@@ -1686,21 +1938,32 @@ namespace System.ComponentModel {
 
                     if (typeAttr == null)
                     {
-                        typeAttr = (TypeConverterAttribute)TypeDescriptor.GetAttributes(_type)[typeof(TypeConverterAttribute)];
+                        typeAttr = (TypeConverterAttribute)
+                            TypeDescriptor.GetAttributes(_type)[typeof(TypeConverterAttribute)];
                     }
 
                     if (typeAttr != null)
                     {
                         Type converterType = GetTypeFromName(typeAttr.ConverterTypeName);
-                        if (converterType != null && typeof(TypeConverter).IsAssignableFrom(converterType)) 
+                        if (
+                            converterType != null
+                            && typeof(TypeConverter).IsAssignableFrom(converterType)
+                        )
                         {
 #if MONO_FEATURE_CAS
-                            try {
+                            try
+                            {
                                 IntSecurity.FullReflection.Assert();
 #endif
-                                _converter = (TypeConverter)ReflectTypeDescriptionProvider.CreateInstance(converterType, _type);
+                                _converter = (TypeConverter)
+                                    ReflectTypeDescriptionProvider.CreateInstance(
+                                        converterType,
+                                        _type
+                                    );
 #if MONO_FEATURE_CAS
-                            } finally {
+                            }
+                            finally
+                            {
                                 CodeAccessPermission.RevertAssert();
                             }
 #endif
@@ -1712,8 +1975,15 @@ namespace System.ComponentModel {
                         // We did not get a converter.  Traverse up the base class chain until
                         // we find one in the stock hashtable.
                         //
-                        _converter = (TypeConverter)ReflectTypeDescriptionProvider.SearchIntrinsicTable(IntrinsicTypeConverters, _type);
-                        Debug.Assert(_converter != null, "There is no intrinsic setup in the hashtable for the Object type");
+                        _converter = (TypeConverter)
+                            ReflectTypeDescriptionProvider.SearchIntrinsicTable(
+                                IntrinsicTypeConverters,
+                                _type
+                            );
+                        Debug.Assert(
+                            _converter != null,
+                            "There is no intrinsic setup in the hashtable for the Object type"
+                        );
                     }
                 }
 
@@ -1737,7 +2007,8 @@ namespace System.ComponentModel {
                     attributes = TypeDescriptor.GetAttributes(_type);
                 }
 
-                DefaultEventAttribute attr = (DefaultEventAttribute)attributes[typeof(DefaultEventAttribute)];
+                DefaultEventAttribute attr = (DefaultEventAttribute)
+                    attributes[typeof(DefaultEventAttribute)];
                 if (attr != null && attr.Name != null)
                 {
                     if (instance != null)
@@ -1769,7 +2040,8 @@ namespace System.ComponentModel {
                     attributes = TypeDescriptor.GetAttributes(_type);
                 }
 
-                DefaultPropertyAttribute attr = (DefaultPropertyAttribute)attributes[typeof(DefaultPropertyAttribute)];
+                DefaultPropertyAttribute attr = (DefaultPropertyAttribute)
+                    attributes[typeof(DefaultPropertyAttribute)];
                 if (attr != null && attr.Name != null)
                 {
                     if (instance != null)
@@ -1800,12 +2072,18 @@ namespace System.ComponentModel {
                 //
                 if (instance != null)
                 {
-                    typeAttr = GetEditorAttribute(TypeDescriptor.GetAttributes(_type), editorBaseType);
-                    EditorAttribute instanceAttr = GetEditorAttribute(TypeDescriptor.GetAttributes(instance), editorBaseType);
+                    typeAttr = GetEditorAttribute(
+                        TypeDescriptor.GetAttributes(_type),
+                        editorBaseType
+                    );
+                    EditorAttribute instanceAttr = GetEditorAttribute(
+                        TypeDescriptor.GetAttributes(instance),
+                        editorBaseType
+                    );
                     if (typeAttr != instanceAttr)
                     {
                         Type editorType = GetTypeFromName(instanceAttr.EditorTypeName);
-                        if (editorType != null && editorBaseType.IsAssignableFrom(editorType)) 
+                        if (editorType != null && editorBaseType.IsAssignableFrom(editorType))
                         {
                             return ReflectTypeDescriptionProvider.CreateInstance(editorType, _type);
                         }
@@ -1814,7 +2092,7 @@ namespace System.ComponentModel {
 
                 // If we got here, we return our type-based editor.
                 //
-                lock(this)
+                lock (this)
                 {
                     for (int idx = 0; idx < _editorCount; idx++)
                     {
@@ -1833,7 +2111,7 @@ namespace System.ComponentModel {
                 if (typeAttr != null)
                 {
                     Type editorType = GetTypeFromName(typeAttr.EditorTypeName);
-                    if (editorType != null && editorBaseType.IsAssignableFrom(editorType)) 
+                    if (editorType != null && editorBaseType.IsAssignableFrom(editorType))
                     {
                         editor = ReflectTypeDescriptionProvider.CreateInstance(editorType, _type);
                     }
@@ -1843,24 +2121,36 @@ namespace System.ComponentModel {
                 //
                 if (editor == null)
                 {
-                    Hashtable intrinsicEditors = ReflectTypeDescriptionProvider.GetEditorTable(editorBaseType);
-                    if (intrinsicEditors != null) 
+                    Hashtable intrinsicEditors = ReflectTypeDescriptionProvider.GetEditorTable(
+                        editorBaseType
+                    );
+                    if (intrinsicEditors != null)
                     {
-                        editor = ReflectTypeDescriptionProvider.SearchIntrinsicTable(intrinsicEditors, _type);
+                        editor = ReflectTypeDescriptionProvider.SearchIntrinsicTable(
+                            intrinsicEditors,
+                            _type
+                        );
                     }
 
-                    // As a quick sanity check, check to see that the editor we got back is of 
+                    // As a quick sanity check, check to see that the editor we got back is of
                     // the correct type.
                     //
-                    if (editor != null && !editorBaseType.IsInstanceOfType(editor)) {
-                        Debug.Fail("Editor " + editor.GetType().FullName + " is not an instance of " + editorBaseType.FullName + " but it is in that base types table.");
+                    if (editor != null && !editorBaseType.IsInstanceOfType(editor))
+                    {
+                        Debug.Fail(
+                            "Editor "
+                                + editor.GetType().FullName
+                                + " is not an instance of "
+                                + editorBaseType.FullName
+                                + " but it is in that base types table."
+                        );
                         editor = null;
                     }
                 }
 
                 if (editor != null)
                 {
-                    lock(this)
+                    lock (this)
                     {
                         if (_editorTypes == null || _editorTypes.Length == _editorCount)
                         {
@@ -1890,16 +2180,19 @@ namespace System.ComponentModel {
             /// <devdoc>
             ///     Helper method to return an editor attribute of the correct base type.
             /// </devdoc>
-            private static EditorAttribute GetEditorAttribute(AttributeCollection attributes, Type editorBaseType)
+            private static EditorAttribute GetEditorAttribute(
+                AttributeCollection attributes,
+                Type editorBaseType
+            )
             {
-                foreach(Attribute attr in attributes)
+                foreach (Attribute attr in attributes)
                 {
                     EditorAttribute edAttr = attr as EditorAttribute;
                     if (edAttr != null)
                     {
                         Type attrEditorBaseType = Type.GetType(edAttr.EditorBaseTypeName);
 
-                        if (attrEditorBaseType != null && attrEditorBaseType == editorBaseType) 
+                        if (attrEditorBaseType != null && attrEditorBaseType == editorBaseType)
                         {
                             return edAttr;
                         }
@@ -1908,7 +2201,7 @@ namespace System.ComponentModel {
 
                 return null;
             }
-        
+
             /// <devdoc>
             ///     Retrieves the events for this type.
             /// </devdoc>
@@ -1923,20 +2216,25 @@ namespace System.ComponentModel {
                     TypeDescriptor.Trace("Events : Building collection for {0}", _type.Name);
 
                     EventDescriptor[] eventArray;
-                    Dictionary<string, EventDescriptor> eventList = new Dictionary<string, EventDescriptor>(16);
+                    Dictionary<string, EventDescriptor> eventList = new Dictionary<
+                        string,
+                        EventDescriptor
+                    >(16);
                     Type baseType = _type;
                     Type objType = typeof(object);
 
-                    do {
+                    do
+                    {
                         eventArray = ReflectGetEvents(baseType);
-                        foreach(EventDescriptor ed in eventArray) {
-                            if (!eventList.ContainsKey(ed.Name)) {
+                        foreach (EventDescriptor ed in eventArray)
+                        {
+                            if (!eventList.ContainsKey(ed.Name))
+                            {
                                 eventList.Add(ed.Name, ed);
-                            }    
+                            }
                         }
                         baseType = baseType.BaseType;
-                    }
-                    while(baseType != null && baseType != objType);
+                    } while (baseType != null && baseType != objType);
 
                     eventArray = new EventDescriptor[eventList.Count];
                     eventList.Values.CopyTo(eventArray, 0);
@@ -1945,7 +2243,7 @@ namespace System.ComponentModel {
 
                 return _events;
             }
-        
+
             /// <devdoc>
             ///     Retrieves the properties for this type.
             /// </devdoc>
@@ -1960,20 +2258,25 @@ namespace System.ComponentModel {
                     TypeDescriptor.Trace("Properties : Building collection for {0}", _type.Name);
 
                     PropertyDescriptor[] propertyArray;
-                    Dictionary<string, PropertyDescriptor> propertyList = new Dictionary<string, PropertyDescriptor>(10);
+                    Dictionary<string, PropertyDescriptor> propertyList = new Dictionary<
+                        string,
+                        PropertyDescriptor
+                    >(10);
                     Type baseType = _type;
                     Type objType = typeof(object);
 
-                    do {
+                    do
+                    {
                         propertyArray = ReflectGetProperties(baseType);
-                        foreach(PropertyDescriptor p in propertyArray) {
-                            if (!propertyList.ContainsKey(p.Name)) {
+                        foreach (PropertyDescriptor p in propertyArray)
+                        {
+                            if (!propertyList.ContainsKey(p.Name))
+                            {
                                 propertyList.Add(p.Name, p);
-                            }    
+                            }
                         }
                         baseType = baseType.BaseType;
-                    }
-                    while(baseType != null && baseType != objType);
+                    } while (baseType != null && baseType != objType);
 
                     propertyArray = new PropertyDescriptor[propertyList.Count];
                     propertyList.Values.CopyTo(propertyArray, 0);
@@ -1982,29 +2285,28 @@ namespace System.ComponentModel {
 
                 return _properties;
             }
-        
+
             /// <devdoc>
             ///     Retrieves a type from a name.  The Assembly of the type
             ///     that this PropertyDescriptor came from is first checked,
             ///     then a global Type.GetType is performed.
             /// </devdoc>
-            private Type GetTypeFromName(string typeName) 
+            private Type GetTypeFromName(string typeName)
             {
-
-                if (typeName == null || typeName.Length == 0) 
+                if (typeName == null || typeName.Length == 0)
                 {
-                     return null;
+                    return null;
                 }
 
                 int commaIndex = typeName.IndexOf(',');
                 Type t = null;
 
-                if (commaIndex == -1) 
+                if (commaIndex == -1)
                 {
                     t = _type.Assembly.GetType(typeName);
                 }
 
-                if (t == null) 
+                if (t == null)
                 {
                     t = Type.GetType(typeName);
                 }
@@ -2017,7 +2319,7 @@ namespace System.ComponentModel {
                     // so it could be looking in the previous version
                     // of the assembly and not finding the type.  We work
                     // around this by looking for the non-assembly qualified
-                    // name, which causes the domain to raise a type 
+                    // name, which causes the domain to raise a type
                     // resolve event.
                     //
                     t = Type.GetType(typeName.Substring(0, commaIndex));
@@ -2044,4 +2346,3 @@ namespace System.ComponentModel {
         }
     }
 }
-

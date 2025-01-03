@@ -20,11 +20,13 @@ namespace System.CommandLine.Rendering.Tests
                 return;
             }
 
-            console.Invoking(c => c.CursorLeft = -1)
-                   .Should()
-                   .Throw<ArgumentOutOfRangeException>()
-                   .WithMessage(
-                       $"The value must be greater than or equal to zero and less than the console's buffer size in that dimension. (Parameter 'left'){Environment.NewLine}Actual value was -1.");
+            console
+                .Invoking(c => c.CursorLeft = -1)
+                .Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage(
+                    $"The value must be greater than or equal to zero and less than the console's buffer size in that dimension. (Parameter 'left'){Environment.NewLine}Actual value was -1."
+                );
         }
 
         [Fact]
@@ -37,11 +39,13 @@ namespace System.CommandLine.Rendering.Tests
                 return;
             }
 
-            console.Invoking(c => c.CursorTop = -1)
-                   .Should()
-                   .Throw<ArgumentOutOfRangeException>()
-                   .WithMessage(
-                       $"The value must be greater than or equal to zero and less than the console's buffer size in that dimension. (Parameter 'top'){Environment.NewLine}Actual value was -1.");
+            console
+                .Invoking(c => c.CursorTop = -1)
+                .Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .WithMessage(
+                    $"The value must be greater than or equal to zero and less than the console's buffer size in that dimension. (Parameter 'top'){Environment.NewLine}Actual value was -1."
+                );
         }
 
         [Fact(Skip = "How to test?")]

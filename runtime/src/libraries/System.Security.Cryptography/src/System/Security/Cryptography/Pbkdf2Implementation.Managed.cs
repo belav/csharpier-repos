@@ -13,16 +13,20 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             int iterations,
             HashAlgorithmName hashAlgorithmName,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             Debug.Assert(!destination.IsEmpty);
             Debug.Assert(hashAlgorithmName.Name is not null);
 
-            using (Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(
-                password,
-                salt,
-                iterations,
-                hashAlgorithmName))
+            using (
+                Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(
+                    password,
+                    salt,
+                    iterations,
+                    hashAlgorithmName
+                )
+            )
             {
                 deriveBytes.GetBytes(destination);
             }

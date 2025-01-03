@@ -13,29 +13,34 @@ namespace Microsoft.AspNetCore.Components.QuickGrid;
 /// <typeparam name="TGridItem">The type of data represented by each row in the grid.</typeparam>
 public abstract partial class ColumnBase<TGridItem>
 {
-    [CascadingParameter] internal InternalGridContext<TGridItem> InternalGridContext { get; set; } = default!;
+    [CascadingParameter]
+    internal InternalGridContext<TGridItem> InternalGridContext { get; set; } = default!;
 
     /// <summary>
     /// Title text for the column. This is rendered automatically if <see cref="HeaderTemplate" /> is not used.
     /// </summary>
-    [Parameter] public string? Title { get; set; }
+    [Parameter]
+    public string? Title { get; set; }
 
     /// <summary>
     /// An optional CSS class name. If specified, this is included in the class attribute of table header and body cells
     /// for this column.
     /// </summary>
-    [Parameter] public string? Class { get; set; }
+    [Parameter]
+    public string? Class { get; set; }
 
     /// <summary>
     /// If specified, controls the justification of table header and body cells for this column.
     /// </summary>
-    [Parameter] public Align Align { get; set; }
+    [Parameter]
+    public Align Align { get; set; }
 
     /// <summary>
     /// An optional template for this column's header cell. If not specified, the default header template
     /// includes the <see cref="Title" /> along with any applicable sort indicators and options buttons.
     /// </summary>
-    [Parameter] public RenderFragment<ColumnBase<TGridItem>>? HeaderTemplate { get; set; }
+    [Parameter]
+    public RenderFragment<ColumnBase<TGridItem>>? HeaderTemplate { get; set; }
 
     /// <summary>
     /// If specified, indicates that this column has this associated options UI. A button to display this
@@ -44,7 +49,8 @@ public abstract partial class ColumnBase<TGridItem>
     /// If <see cref="HeaderTemplate" /> is used, it is left up to that template to render any relevant
     /// "show options" UI and invoke the grid's <see cref="QuickGrid{TGridItem}.ShowColumnOptionsAsync(ColumnBase{TGridItem})" />).
     /// </summary>
-    [Parameter] public RenderFragment? ColumnOptions { get; set; }
+    [Parameter]
+    public RenderFragment? ColumnOptions { get; set; }
 
     /// <summary>
     /// Indicates whether the data should be sortable by this column.
@@ -52,7 +58,8 @@ public abstract partial class ColumnBase<TGridItem>
     /// The default value may vary according to the column type (for example, a <see cref="TemplateColumn{TGridItem}" />
     /// is sortable by default if any <see cref="TemplateColumn{TGridItem}.SortBy" /> parameter is specified).
     /// </summary>
-    [Parameter] public bool? Sortable { get; set; }
+    [Parameter]
+    public bool? Sortable { get; set; }
 
     /// <summary>
     /// Specifies sorting rules for a column.
@@ -63,17 +70,20 @@ public abstract partial class ColumnBase<TGridItem>
     /// Indicates which direction to sort in
     /// if <see cref="IsDefaultSortColumn"/> is true.
     /// </summary>
-    [Parameter] public SortDirection InitialSortDirection { get; set; } = default;
+    [Parameter]
+    public SortDirection InitialSortDirection { get; set; } = default;
 
     /// <summary>
     /// Indicates whether this column should be sorted by default.
     /// </summary>
-    [Parameter] public bool IsDefaultSortColumn { get; set; } = false;
+    [Parameter]
+    public bool IsDefaultSortColumn { get; set; } = false;
 
     /// <summary>
     /// If specified, virtualized grids will use this template to render cells whose data has not yet been loaded.
     /// </summary>
-    [Parameter] public RenderFragment<PlaceholderContext>? PlaceholderTemplate { get; set; }
+    [Parameter]
+    public RenderFragment<PlaceholderContext>? PlaceholderTemplate { get; set; }
 
     /// <summary>
     /// Gets a reference to the enclosing <see cref="QuickGrid{TGridItem}" />.

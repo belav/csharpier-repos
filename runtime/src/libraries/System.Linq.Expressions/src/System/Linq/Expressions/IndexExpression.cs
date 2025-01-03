@@ -23,7 +23,8 @@ namespace System.Linq.Expressions
         internal IndexExpression(
             Expression? instance,
             PropertyInfo? indexer,
-            IReadOnlyList<Expression> arguments)
+            IReadOnlyList<Expression> arguments
+        )
         {
             if (indexer == null)
             {
@@ -135,7 +136,11 @@ namespace System.Linq.Expressions
         /// <param name="indexer">An <see cref="Expression"/> representing the property to index.</param>
         /// <param name="arguments">An <see cref="IEnumerable{Expression}"/> containing the arguments to be used to index the property.</param>
         /// <returns>The created <see cref="IndexExpression"/>.</returns>
-        public static IndexExpression MakeIndex(Expression instance, PropertyInfo? indexer, IEnumerable<Expression>? arguments)
+        public static IndexExpression MakeIndex(
+            Expression instance,
+            PropertyInfo? indexer,
+            IEnumerable<Expression>? arguments
+        )
         {
             if (indexer != null)
             {
@@ -170,7 +175,10 @@ namespace System.Linq.Expressions
         /// <remarks>The expression representing the array can be obtained by using the <see cref="MakeMemberAccess"/> method,
         /// or through <see cref="NewArrayBounds(Type, IEnumerable{Expression})"/> or <see cref="NewArrayInit(Type, IEnumerable{Expression})"/>.</remarks>
         /// <returns>The created <see cref="IndexExpression"/>.</returns>
-        public static IndexExpression ArrayAccess(Expression array, IEnumerable<Expression>? indexes)
+        public static IndexExpression ArrayAccess(
+            Expression array,
+            IEnumerable<Expression>? indexes
+        )
         {
             ExpressionUtils.RequiresCanRead(array, nameof(array));
 
@@ -210,7 +218,11 @@ namespace System.Linq.Expressions
         /// <param name="arguments">An array of <see cref="Expression"/> objects that are used to index the property.</param>
         /// <returns>The created <see cref="IndexExpression"/>.</returns>
         [RequiresUnreferencedCode(ExpressionRequiresUnreferencedCode)]
-        public static IndexExpression Property(Expression instance, string propertyName, params Expression[]? arguments)
+        public static IndexExpression Property(
+            Expression instance,
+            string propertyName,
+            params Expression[]? arguments
+        )
         {
             ExpressionUtils.RequiresCanRead(instance, nameof(instance));
             ArgumentNullException.ThrowIfNull(propertyName);
@@ -225,27 +237,48 @@ namespace System.Linq.Expressions
         /// the arguments if it is a indexer. If the arguments is null or empty, we get a normal property.
         /// </summary>
         private static PropertyInfo FindInstanceProperty(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] Type type,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.NonPublicProperties
+            )]
+                Type type,
             string propertyName,
-            Expression[]? arguments)
+            Expression[]? arguments
+        )
         {
             // bind to public names first
-            BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase | BindingFlags.FlattenHierarchy;
+            BindingFlags flags =
+                BindingFlags.Instance
+                | BindingFlags.Public
+                | BindingFlags.IgnoreCase
+                | BindingFlags.FlattenHierarchy;
             PropertyInfo? pi = FindProperty(type, propertyName, arguments, flags);
             if (pi == null)
             {
-                flags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase | BindingFlags.FlattenHierarchy;
+                flags =
+                    BindingFlags.Instance
+                    | BindingFlags.NonPublic
+                    | BindingFlags.IgnoreCase
+                    | BindingFlags.FlattenHierarchy;
                 pi = FindProperty(type, propertyName, arguments, flags);
             }
             if (pi == null)
             {
                 if (arguments == null || arguments.Length == 0)
                 {
-                    throw Error.InstancePropertyWithoutParameterNotDefinedForType(propertyName, type);
+                    throw Error.InstancePropertyWithoutParameterNotDefinedForType(
+                        propertyName,
+                        type
+                    );
                 }
                 else
                 {
-                    throw Error.InstancePropertyWithSpecifiedParametersNotDefinedForType(propertyName, GetArgTypesString(arguments), type, nameof(propertyName));
+                    throw Error.InstancePropertyWithSpecifiedParametersNotDefinedForType(
+                        propertyName,
+                        GetArgTypesString(arguments),
+                        type,
+                        nameof(propertyName)
+                    );
                 }
             }
             return pi;
@@ -268,16 +301,24 @@ namespace System.Linq.Expressions
         }
 
         private static PropertyInfo? FindProperty(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] Type type,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.NonPublicProperties
+            )]
+                Type type,
             string propertyName,
             Expression[]? arguments,
-            BindingFlags flags)
+            BindingFlags flags
+        )
         {
             PropertyInfo? property = null;
 
             foreach (PropertyInfo pi in type.GetProperties(flags))
             {
-                if (pi.Name.Equals(propertyName, StringComparison.OrdinalIgnoreCase) && IsCompatible(pi, arguments))
+                if (
+                    pi.Name.Equals(propertyName, StringComparison.OrdinalIgnoreCase)
+                    && IsCompatible(pi, arguments)
+                )
                 {
                     if (property == null)
                     {
@@ -327,7 +368,8 @@ namespace System.Linq.Expressions
                 return false;
             for (int i = 0; i < args.Length; i++)
             {
-                if (args[i] == null) return false;
+                if (args[i] == null)
+                    return false;
                 if (!TypeUtils.AreReferenceAssignable(parms[i].ParameterType, args[i].Type))
                 {
                     return false;
@@ -345,7 +387,11 @@ namespace System.Linq.Expressions
         /// <param name="indexer">The <see cref="PropertyInfo"/> that represents the property to index.</param>
         /// <param name="arguments">An array of <see cref="Expression"/> objects that are used to index the property.</param>
         /// <returns>The created <see cref="IndexExpression"/>.</returns>
-        public static IndexExpression Property(Expression? instance, PropertyInfo indexer, params Expression[]? arguments)
+        public static IndexExpression Property(
+            Expression? instance,
+            PropertyInfo indexer,
+            params Expression[]? arguments
+        )
         {
             return Property(instance, indexer, (IEnumerable<Expression>?)arguments);
         }
@@ -357,10 +403,18 @@ namespace System.Linq.Expressions
         /// <param name="indexer">The <see cref="PropertyInfo"/> that represents the property to index.</param>
         /// <param name="arguments">An <see cref="IEnumerable{T}"/> of <see cref="Expression"/> objects that are used to index the property.</param>
         /// <returns>The created <see cref="IndexExpression"/>.</returns>
-        public static IndexExpression Property(Expression? instance, PropertyInfo indexer, IEnumerable<Expression>? arguments) =>
-            MakeIndexProperty(instance, indexer, nameof(indexer), arguments.ToReadOnly());
+        public static IndexExpression Property(
+            Expression? instance,
+            PropertyInfo indexer,
+            IEnumerable<Expression>? arguments
+        ) => MakeIndexProperty(instance, indexer, nameof(indexer), arguments.ToReadOnly());
 
-        private static IndexExpression MakeIndexProperty(Expression? instance, PropertyInfo indexer, string paramName, ReadOnlyCollection<Expression> argList)
+        private static IndexExpression MakeIndexProperty(
+            Expression? instance,
+            PropertyInfo indexer,
+            string paramName,
+            ReadOnlyCollection<Expression> argList
+        )
         {
             ValidateIndexedProperty(instance, indexer, paramName, ref argList);
             return new IndexExpression(instance, indexer, argList);
@@ -371,7 +425,12 @@ namespace System.Linq.Expressions
         //
         // Does reflection help us out at all? Expression.Property skips all of
         // these checks, so either it needs more checks or we need less here.
-        private static void ValidateIndexedProperty(Expression? instance, PropertyInfo indexer, string paramName, ref ReadOnlyCollection<Expression> argList)
+        private static void ValidateIndexedProperty(
+            Expression? instance,
+            PropertyInfo indexer,
+            string paramName,
+            ref ReadOnlyCollection<Expression> argList
+        )
         {
             // If both getter and setter specified, all their parameter types
             // should match, with exception of the last setter parameter which
@@ -446,7 +505,13 @@ namespace System.Linq.Expressions
                 }
                 else
                 {
-                    ValidateAccessor(instance, setter, setParameters.RemoveLast(), ref argList, paramName);
+                    ValidateAccessor(
+                        instance,
+                        setter,
+                        setParameters.RemoveLast(),
+                        ref argList,
+                        paramName
+                    );
                 }
             }
             else if (getter == null)
@@ -455,7 +520,13 @@ namespace System.Linq.Expressions
             }
         }
 
-        private static void ValidateAccessor(Expression? instance, MethodInfo method, ParameterInfo[] indexes, ref ReadOnlyCollection<Expression> arguments, string? paramName)
+        private static void ValidateAccessor(
+            Expression? instance,
+            MethodInfo method,
+            ParameterInfo[] indexes,
+            ref ReadOnlyCollection<Expression> arguments,
+            string? paramName
+        )
         {
             ArgumentNullException.ThrowIfNull(arguments);
 
@@ -486,7 +557,12 @@ namespace System.Linq.Expressions
             ValidateAccessorArgumentTypes(method, indexes, ref arguments, paramName);
         }
 
-        private static void ValidateAccessorArgumentTypes(MethodInfo method, ParameterInfo[] indexes, ref ReadOnlyCollection<Expression> arguments, string? paramName)
+        private static void ValidateAccessorArgumentTypes(
+            MethodInfo method,
+            ParameterInfo[] indexes,
+            ref ReadOnlyCollection<Expression> arguments,
+            string? paramName
+        )
         {
             if (indexes.Length > 0)
             {
@@ -502,14 +578,21 @@ namespace System.Linq.Expressions
                     ExpressionUtils.RequiresCanRead(arg, nameof(arguments), i);
 
                     Type pType = pi.ParameterType;
-                    if (pType.IsByRef) throw Error.AccessorsCannotHaveByRefArgs(nameof(indexes), i);
+                    if (pType.IsByRef)
+                        throw Error.AccessorsCannotHaveByRefArgs(nameof(indexes), i);
                     TypeUtils.ValidateType(pType, nameof(indexes), i);
 
                     if (!TypeUtils.AreReferenceAssignable(pType, arg.Type))
                     {
                         if (!TryQuote(pType, ref arg))
                         {
-                            throw Error.ExpressionTypeDoesNotMatchMethodParameter(arg.Type, pType, method, nameof(arguments), i);
+                            throw Error.ExpressionTypeDoesNotMatchMethodParameter(
+                                arg.Type,
+                                pType,
+                                method,
+                                nameof(arguments),
+                                i
+                            );
                         }
                     }
                     if (newArgs == null && arg != arguments[i])

@@ -24,21 +24,16 @@ namespace System.CommandLine.Generator.Tests
             var nameArgument = new CliArgument<string>("arg");
             var ageOption = new CliOption<int>("--age");
 
-            var command = new CliCommand("command")
-            {
-                nameArgument,
-                ageOption
-            };
+            var command = new CliCommand("command") { nameArgument, ageOption };
 
-            command.SetHandler<Action<string, int>>
-                (Execute, nameArgument, ageOption);
+            command.SetHandler<Action<string, int>>(Execute, nameArgument, ageOption);
 
             await command.Parse("command Gandalf --age 425").InvokeAsync();
 
             boundName.Should().Be("Gandalf");
             boundAge.Should().Be(425);
-        }   
-        
+        }
+
         [Fact]
         public async Task Can_generate_handler_for_void_returning_delegate()
         {
@@ -48,18 +43,17 @@ namespace System.CommandLine.Generator.Tests
             var nameArgument = new CliArgument<string>("arg");
             var ageOption = new CliOption<int>("--age");
 
-            var command = new CliCommand("command")
-            {
-                nameArgument,
-                ageOption
-            };
+            var command = new CliCommand("command") { nameArgument, ageOption };
 
-            command.SetHandler<Action<string, int>>
-                ((fullnameOrNickname, age) =>
+            command.SetHandler<Action<string, int>>(
+                (fullnameOrNickname, age) =>
                 {
                     boundName = fullnameOrNickname;
                     boundAge = age;
-                }, nameArgument, ageOption);
+                },
+                nameArgument,
+                ageOption
+            );
 
             await command.Parse("command Gandalf --age 425").InvokeAsync();
 
@@ -119,8 +113,7 @@ namespace System.CommandLine.Generator.Tests
         {
             ParseResult? boundParseResult = null;
 
-            void Execute(
-                ParseResult parseResult)
+            void Execute(ParseResult parseResult)
             {
                 boundParseResult = parseResult;
             }
@@ -150,14 +143,9 @@ namespace System.CommandLine.Generator.Tests
             var nameArgument = new CliArgument<string>("arg");
             var ageOption = new CliOption<int>("--age");
 
-            var command = new CliCommand("command")
-            {
-                nameArgument,
-                ageOption
-            };
+            var command = new CliCommand("command") { nameArgument, ageOption };
 
-            command.SetHandler<Func<string, int, Task>>
-                (ExecuteAsync, nameArgument, ageOption);
+            command.SetHandler<Func<string, int, Task>>(ExecuteAsync, nameArgument, ageOption);
 
             await command.Parse("command Gandalf --age 425").InvokeAsync();
 
@@ -176,14 +164,9 @@ namespace System.CommandLine.Generator.Tests
 
             var firstArgument = new CliArgument<int>("first");
             var secondArgument = new CliArgument<int>("second");
-            var command = new CliCommand("add")
-            {
-                firstArgument,
-                secondArgument
-            };
+            var command = new CliCommand("add") { firstArgument, secondArgument };
 
-            command.SetHandler<Func<int, int, Task<int>>>
-                (Execute, firstArgument, secondArgument);
+            command.SetHandler<Func<int, int, Task<int>>>(Execute, firstArgument, secondArgument);
 
             int result = await command.Parse("add 1 2").InvokeAsync();
 
@@ -239,11 +222,7 @@ namespace System.CommandLine.Generator.Tests
             var nameArgument = new CliArgument<string>("arg");
             var ageOption = new CliOption<int>("--age");
 
-            var command = new CliCommand("command")
-            {
-                nameArgument,
-                ageOption
-            };
+            var command = new CliCommand("command") { nameArgument, ageOption };
 
             command.SetHandler(Execute, nameArgument, ageOption);
 
@@ -262,17 +241,17 @@ namespace System.CommandLine.Generator.Tests
             var nameArgument = new CliArgument<string>("arg");
             var ageOption = new CliOption<int>("--age");
 
-            var command = new CliCommand("command")
-            {
+            var command = new CliCommand("command") { nameArgument, ageOption };
+
+            command.SetHandler(
+                (string fullnameOrNickname, int age) =>
+                {
+                    boundName = fullnameOrNickname;
+                    boundAge = age;
+                },
                 nameArgument,
                 ageOption
-            };
-
-            command.SetHandler((string fullnameOrNickname, int age) =>
-            {
-                boundName = fullnameOrNickname;
-                boundAge = age;
-            }, nameArgument, ageOption);
+            );
 
             await command.Parse("command Gandalf --age 425").InvokeAsync();
 
@@ -289,18 +268,18 @@ namespace System.CommandLine.Generator.Tests
             var nameArgument = new CliArgument<string>("arg");
             var ageOption = new CliOption<int>("--age");
 
-            var command = new CliCommand("command")
-            {
+            var command = new CliCommand("command") { nameArgument, ageOption };
+
+            command.SetHandler(
+                int (string fullnameOrNickname, int age) =>
+                {
+                    boundName = fullnameOrNickname;
+                    boundAge = age;
+                    return 42;
+                },
                 nameArgument,
                 ageOption
-            };
-
-            command.SetHandler(int (string fullnameOrNickname, int age) =>
-            {
-                boundName = fullnameOrNickname;
-                boundAge = age;
-                return 42;
-            }, nameArgument, ageOption);
+            );
 
             int rv = await command.Parse("command Gandalf --age 425").InvokeAsync();
 
@@ -317,9 +296,7 @@ namespace System.CommandLine.Generator.Tests
                 Age = age;
             }
 
-            public Character()
-            {
-            }
+            public Character() { }
 
             public string? FullName { get; set; }
             public int Age { get; set; }

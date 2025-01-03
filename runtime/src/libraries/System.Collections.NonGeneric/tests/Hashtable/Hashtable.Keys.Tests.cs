@@ -9,15 +9,21 @@ namespace System.Collections.Tests
 {
     public class HashtableKeysTests : ICollection_NonGeneric_Tests
     {
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType => typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType =>
+            typeof(InvalidCastException);
         protected override bool IsReadOnly => true;
         protected override EnumerableOrder Order => EnumerableOrder.Unspecified;
         protected override bool SupportsSerialization => false;
 
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations) => new List<ModifyEnumerable>();
+
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new List<ModifyEnumerable>();
 
         protected override ICollection NonGenericICollectionFactory() => new Hashtable().Keys;
 
@@ -39,7 +45,8 @@ namespace System.Collections.Tests
             return Convert.ToBase64String(bytes);
         }
 
-        protected override void AddToCollection(ICollection collection, int numberOfItemsToAdd) => Debug.Assert(false);
+        protected override void AddToCollection(ICollection collection, int numberOfItemsToAdd) =>
+            Debug.Assert(false);
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]

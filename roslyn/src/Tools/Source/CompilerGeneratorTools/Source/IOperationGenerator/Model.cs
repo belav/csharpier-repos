@@ -151,11 +151,13 @@ namespace IOperationGenerator
 
         [XmlAttribute(AttributeName = "Value")]
         public string ValueText;
-        public int Value => int.Parse(ValueText.Substring(2), System.Globalization.NumberStyles.HexNumber);
+        public int Value =>
+            int.Parse(ValueText.Substring(2), System.Globalization.NumberStyles.HexNumber);
 
         [XmlAttribute(AttributeName = "EditorBrowsable")]
         public string? EditorBrowsableText;
-        public bool? EditorBrowsable => EditorBrowsableText is null ? (bool?)null : EditorBrowsableText == "true";
+        public bool? EditorBrowsable =>
+            EditorBrowsableText is null ? (bool?)null : EditorBrowsableText == "true";
 
         [XmlAttribute]
         public string? ExtraDescription;

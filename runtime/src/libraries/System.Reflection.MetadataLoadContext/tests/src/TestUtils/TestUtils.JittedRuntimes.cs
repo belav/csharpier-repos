@@ -26,12 +26,17 @@ namespace System.Reflection.Tests
             string location = assembly.Location;
             if (PlatformDetection.IsNotBrowser && (location == null || location == string.Empty))
             {
-                throw new Exception("Could not find the IL for assembly " + type.Assembly + " on disk. The most likely cause " +
-                    "is that you built the tests for a Jitted runtime but are running them on an AoT runtime.");
+                throw new Exception(
+                    "Could not find the IL for assembly "
+                        + type.Assembly
+                        + " on disk. The most likely cause "
+                        + "is that you built the tests for a Jitted runtime but are running them on an AoT runtime."
+                );
             }
 
-            Assembly projectedAssembly = s_assemblyDict.GetOrAdd(assembly,
-                delegate (Assembly a)
+            Assembly projectedAssembly = s_assemblyDict.GetOrAdd(
+                assembly,
+                delegate(Assembly a)
                 {
                     // The core assembly we're using might not be the one powering the runtime.
                     // Make sure we project to the core assembly the MetataLoadContext is using.
@@ -40,10 +45,16 @@ namespace System.Reflection.Tests
                         TestMetadataLoadContext.LoadFromStream(CreateStreamForCoreAssembly());
                     }
 
-                    return TestMetadataLoadContext.LoadFromAssemblyPath(AssemblyPathHelper.GetAssemblyLocation(a));
-                });
+                    return TestMetadataLoadContext.LoadFromAssemblyPath(
+                        AssemblyPathHelper.GetAssemblyLocation(a)
+                    );
+                }
+            );
 
-            Type projectedType = s_typeDict.GetOrAdd(type, (t) => projectedAssembly.GetType(t.FullName, throwOnError: true, ignoreCase: false));
+            Type projectedType = s_typeDict.GetOrAdd(
+                type,
+                (t) => projectedAssembly.GetType(t.FullName, throwOnError: true, ignoreCase: false)
+            );
 
             if (s_useRuntimeTypesForTests.Value)
                 return type;
@@ -51,8 +62,10 @@ namespace System.Reflection.Tests
             return projectedType;
         }
 
-        private static readonly ConcurrentDictionary<Assembly, Assembly> s_assemblyDict = new ConcurrentDictionary<Assembly, Assembly>();
-        private static readonly ConcurrentDictionary<Type, Type> s_typeDict = new ConcurrentDictionary<Type, Type>();
+        private static readonly ConcurrentDictionary<Assembly, Assembly> s_assemblyDict =
+            new ConcurrentDictionary<Assembly, Assembly>();
+        private static readonly ConcurrentDictionary<Type, Type> s_typeDict =
+            new ConcurrentDictionary<Type, Type>();
 
         public static Stream CreateStreamForCoreAssembly()
         {
@@ -61,11 +74,16 @@ namespace System.Reflection.Tests
             if (PlatformDetection.IsNotBrowser)
             {
                 string assumedLocationOfCoreLibrary = typeof(object).Assembly.Location;
-                if (assumedLocationOfCoreLibrary == null || assumedLocationOfCoreLibrary == string.Empty)
+                if (
+                    assumedLocationOfCoreLibrary == null
+                    || assumedLocationOfCoreLibrary == string.Empty
+                )
                 {
-                    throw new Exception("Could not find a core assembly to use for tests as 'typeof(object).Assembly.Location` returned " +
-                        "a null or empty value. The most likely cause is that you built the tests for a Jitted runtime but are running them " +
-                        "on an AoT runtime.");
+                    throw new Exception(
+                        "Could not find a core assembly to use for tests as 'typeof(object).Assembly.Location` returned "
+                            + "a null or empty value. The most likely cause is that you built the tests for a Jitted runtime but are running them "
+                            + "on an AoT runtime."
+                    );
                 }
             }
 

@@ -29,8 +29,14 @@ namespace Microsoft.CSharp.RuntimeBinder
         // it is unlikely to see a lot of contention on the binder cache.
         // creating binders is not a very frequent operation.
         // typically a dynamic operation in the source will create just one binder lazily when first executed.
-        private static readonly ConcurrentDictionary<ICSharpBinder, ICSharpBinder> binderEquivalenceCache =
-            new ConcurrentDictionary<ICSharpBinder, ICSharpBinder>(concurrencyLevel: 2, capacity: 32, new BinderEqualityComparer());
+        private static readonly ConcurrentDictionary<
+            ICSharpBinder,
+            ICSharpBinder
+        > binderEquivalenceCache = new ConcurrentDictionary<ICSharpBinder, ICSharpBinder>(
+            concurrencyLevel: 2,
+            capacity: 32,
+            new BinderEqualityComparer()
+        );
 
         internal static T TryGetExisting<T>(this T binder)
             where T : ICSharpBinder
@@ -55,6 +61,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         internal sealed class BinderEqualityComparer : IEqualityComparer<ICSharpBinder>
         {
             public bool Equals(ICSharpBinder x, ICSharpBinder y) => x.IsEquivalentTo(y);
+
             public int GetHashCode(ICSharpBinder obj) => obj.GetGetBinderEquivalenceHash();
         }
     }

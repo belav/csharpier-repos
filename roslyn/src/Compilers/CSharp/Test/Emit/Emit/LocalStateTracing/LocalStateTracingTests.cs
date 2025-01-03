@@ -26,11 +26,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         // collections, anonymous types, tuples
         // LogLocalStoreUnmanaged with local/parameter typed to a generic parameter
 
-        private static readonly EmitOptions s_emitOptions = GetEmitOptions(InstrumentationKindExtensions.LocalStateTracing);
+        private static readonly EmitOptions s_emitOptions = GetEmitOptions(
+            InstrumentationKindExtensions.LocalStateTracing
+        );
 
         private static EmitOptions GetEmitOptions(params InstrumentationKind[] kinds)
         {
-            var options = EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.CreateRange(kinds));
+            var options = EmitOptions.Default.WithInstrumentationKinds(
+                ImmutableArray.CreateRange(kinds)
+            );
             options.TestOnly_AllowLocalStateTracing();
             return options;
         }
@@ -150,62 +154,91 @@ namespace Microsoft.CodeAnalysis.Runtime
     }
 }
 """;
-        private static string WithHelpers(string source)
-            => source + s_helpers;
+
+        private static string WithHelpers(string source) => source + s_helpers;
 
         private static readonly TargetFramework s_targetFramework = TargetFramework.Net70;
 
         private static readonly Verification s_verification = Verification.Fails with
         {
             ILVerifyMessage = """
-            [LogMethodEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x9 }
-            [LogLambdaEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x9 }
-            [LogStateMachineMethodEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x8 }
-            [LogStateMachineLambdaEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x8 }
-            [Entry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0xbc }
-            [MemoryToString]: Unmanaged pointers are not a verifiable type. { Offset = 0x5 }
-            [LogLocalStore]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
-            [LogLocalStoreUnmanaged]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
-            [LogParameterStore]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
-            [LogParameterStoreUnmanaged]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
-            """
+                [LogMethodEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x9 }
+                [LogLambdaEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x9 }
+                [LogStateMachineMethodEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x8 }
+                [LogStateMachineLambdaEntry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x8 }
+                [Entry]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0xbc }
+                [MemoryToString]: Unmanaged pointers are not a verifiable type. { Offset = 0x5 }
+                [LogLocalStore]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
+                [LogLocalStoreUnmanaged]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
+                [LogParameterStore]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
+                [LogParameterStoreUnmanaged]: Unmanaged pointers are not a verifiable type. { Offset = 0x1 }
+                """,
         };
 
-        private CompilationVerifier CompileAndVerify(string source, string? ilVerifyMessage = null, string? expectedOutput = null)
-            => CompileAndVerify(
+        private CompilationVerifier CompileAndVerify(
+            string source,
+            string? ilVerifyMessage = null,
+            string? expectedOutput = null
+        ) =>
+            CompileAndVerify(
                 source,
-                options: (expectedOutput != null) ? TestOptions.UnsafeDebugExe : TestOptions.UnsafeDebugDll,
+                options: (expectedOutput != null)
+                    ? TestOptions.UnsafeDebugExe
+                    : TestOptions.UnsafeDebugDll,
                 emitOptions: s_emitOptions,
-                verify: s_verification with { ILVerifyMessage = ilVerifyMessage + Environment.NewLine + s_verification.ILVerifyMessage },
+                verify: s_verification with
+                {
+                    ILVerifyMessage =
+                        ilVerifyMessage + Environment.NewLine + s_verification.ILVerifyMessage,
+                },
                 targetFramework: s_targetFramework,
-                expectedOutput: expectedOutput);
+                expectedOutput: expectedOutput
+            );
 
         // Only used to diagnose test verification failures (rename CompileAndVerify to CompileAndVerifyFails and rerun).
-        public CompilationVerifier CompileAndVerifyFails(string source, string? ilVerifyMessage = null, string? expectedOutput = null)
-            => CompileAndVerify(
+        public CompilationVerifier CompileAndVerifyFails(
+            string source,
+            string? ilVerifyMessage = null,
+            string? expectedOutput = null
+        ) =>
+            CompileAndVerify(
                 source,
-                options: (expectedOutput != null) ? TestOptions.UnsafeDebugExe : TestOptions.UnsafeDebugDll,
+                options: (expectedOutput != null)
+                    ? TestOptions.UnsafeDebugExe
+                    : TestOptions.UnsafeDebugDll,
                 emitOptions: s_emitOptions,
                 verify: Verification.Fails,
                 targetFramework: s_targetFramework,
-                expectedOutput: null);
+                expectedOutput: null
+            );
 
-        private static void AssertNotInstrumented(CompilationVerifier verifier, string qualifiedMethodName)
-            => AssertInstrumented(verifier, qualifiedMethodName, expected: false);
+        private static void AssertNotInstrumented(
+            CompilationVerifier verifier,
+            string qualifiedMethodName
+        ) => AssertInstrumented(verifier, qualifiedMethodName, expected: false);
 
-        private static void AssertInstrumented(CompilationVerifier verifier, string qualifiedMethodName, bool expected = true)
+        private static void AssertInstrumented(
+            CompilationVerifier verifier,
+            string qualifiedMethodName,
+            bool expected = true
+        )
         {
             var il = verifier.VisualizeIL(qualifiedMethodName);
             var isInstrumented = il.Contains(TrackerTypeName);
 
-            AssertEx.AreEqual(expected, isInstrumented,
-                $"Method '{qualifiedMethodName}' should {(expected ? "be" : "not be")} instrumented. Actual IL:{Environment.NewLine}{il}");
+            AssertEx.AreEqual(
+                expected,
+                isInstrumented,
+                $"Method '{qualifiedMethodName}' should {(expected ? "be" : "not be")} instrumented. Actual IL:{Environment.NewLine}{il}"
+            );
         }
 
         [Fact]
         public void Composition_LocalStateTracing_TestCoverage()
         {
-            var source = WithHelpers(@"
+            var source =
+                WithHelpers(
+                    @"
 class C
 {
     static void Main(string[] p)
@@ -214,22 +247,32 @@ class C
         Microsoft.CodeAnalysis.Runtime.Instrumentation.FlushPayload();
     }
 }
-") + CSharpInstrumentationChecker.InstrumentationHelperSource;
+"
+                ) + CSharpInstrumentationChecker.InstrumentationHelperSource;
 
             var verifier = CompileAndVerify(
                 source,
                 options: TestOptions.UnsafeDebugExe,
-                emitOptions: GetEmitOptions(InstrumentationKindExtensions.LocalStateTracing, InstrumentationKind.TestCoverage),
+                emitOptions: GetEmitOptions(
+                    InstrumentationKindExtensions.LocalStateTracing,
+                    InstrumentationKind.TestCoverage
+                ),
                 verify: s_verification with
                 {
-                    ILVerifyMessage = s_verification.ILVerifyMessage + Environment.NewLine + """
-                    [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
-                    [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
-                    """
+                    ILVerifyMessage =
+                        s_verification.ILVerifyMessage
+                        + Environment.NewLine
+                        + """
+                        [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
+                        [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
+                        """,
                 },
-                targetFramework: s_targetFramework);
+                targetFramework: s_targetFramework
+            );
 
-            verifier.VerifyMethodBody("C.Main", @"
+            verifier.VerifyMethodBody(
+                "C.Main",
+                @"
 {
   // Code size      128 (0x80)
   .maxstack  5
@@ -307,13 +350,16 @@ class C
   // sequence point: }
   IL_007f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void Composition_LocalStateTracing_TestCoverage_LocallySuppressed()
         {
-            var source = WithHelpers(@"
+            var source =
+                WithHelpers(
+                    @"
 class C
 {
     static void Main()
@@ -329,22 +375,32 @@ class C
         Microsoft.CodeAnalysis.Runtime.Instrumentation.FlushPayload();
     }
 }
-") + CSharpInstrumentationChecker.InstrumentationHelperSource;
+"
+                ) + CSharpInstrumentationChecker.InstrumentationHelperSource;
 
             var verifier = CompileAndVerify(
                 source,
                 options: TestOptions.UnsafeDebugExe,
-                emitOptions: GetEmitOptions(InstrumentationKindExtensions.LocalStateTracing, InstrumentationKind.TestCoverage),
+                emitOptions: GetEmitOptions(
+                    InstrumentationKindExtensions.LocalStateTracing,
+                    InstrumentationKind.TestCoverage
+                ),
                 verify: s_verification with
                 {
-                    ILVerifyMessage = s_verification.ILVerifyMessage + Environment.NewLine + """
-                    [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
-                    [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
-                    """
+                    ILVerifyMessage =
+                        s_verification.ILVerifyMessage
+                        + Environment.NewLine
+                        + """
+                        [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
+                        [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
+                        """,
                 },
-                targetFramework: s_targetFramework);
+                targetFramework: s_targetFramework
+            );
 
-            verifier.VerifyMethodBody("C.<Main>g__F|0_0", @"
+            verifier.VerifyMethodBody(
+                "C.<Main>g__F|0_0",
+                @"
 {
   // Code size       41 (0x29)
   .maxstack  3
@@ -381,13 +437,15 @@ class C
   // sequence point: }
   IL_0028:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void EmitDifference()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     static void F()
@@ -399,23 +457,41 @@ class C
         LF();
     }
 }
-");
+"
+            );
 
-            var compilation0 = CreateCompilation(source, options: TestOptions.UnsafeDebugDll, targetFramework: s_targetFramework);
+            var compilation0 = CreateCompilation(
+                source,
+                options: TestOptions.UnsafeDebugDll,
+                targetFramework: s_targetFramework
+            );
             var compilation1 = compilation0.WithSource(source);
 
             var f0 = (IMethodSymbol)compilation0.GetMember("C.F").GetPublicSymbol();
             var f1 = (IMethodSymbol)compilation1.GetMember("C.F").GetPublicSymbol();
 
             using var md0 = ModuleMetadata.CreateFromImage(compilation0.EmitToArray());
-            var generation0 = EmitBaseline.CreateInitialBaseline(compilation0, md0, debugInformationProvider: _ => default, localSignatureProvider: _ => default, hasPortableDebugInformation: true);
+            var generation0 = EmitBaseline.CreateInitialBaseline(
+                compilation0,
+                md0,
+                debugInformationProvider: _ => default,
+                localSignatureProvider: _ => default,
+                hasPortableDebugInformation: true
+            );
 
             var diff = compilation1.EmitDifference(
                 generation0,
                 edits: ImmutableArray.Create(
-                    new SemanticEdit(f0, f1, ImmutableArray.Create(InstrumentationKindExtensions.LocalStateTracing))));
+                    new SemanticEdit(
+                        f0,
+                        f1,
+                        ImmutableArray.Create(InstrumentationKindExtensions.LocalStateTracing)
+                    )
+                )
+            );
 
-            diff.VerifyIL(@"
+            diff.VerifyIL(
+                @"
 {
   // Code size       47 (0x2f)
   .maxstack  3
@@ -462,13 +538,15 @@ class C
   IL_002b:  endfinally
   IL_002c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void HelpersNotInstrumented()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 namespace Microsoft.CodeAnalysis.Runtime
 {
     partial struct LocalStoreTracker
@@ -484,7 +562,8 @@ namespace Microsoft.CodeAnalysis.Runtime
         }
     }
 }
-");
+"
+            );
             var verifier = CompileAndVerify(source);
             foreach (var entry in verifier.TestData.Methods)
             {
@@ -496,7 +575,8 @@ namespace Microsoft.CodeAnalysis.Runtime
         [Fact]
         public void HelpersMissing()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C
@@ -514,12 +594,19 @@ class C
     }
 } ";
 
-            var compilation = CreateCompilation(source, options: TestOptions.UnsafeDebugDll, targetFramework: s_targetFramework);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.UnsafeDebugDll,
+                targetFramework: s_targetFramework
+            );
 
-            compilation.VerifyEmitDiagnostics(s_emitOptions,
+            compilation.VerifyEmitDiagnostics(
+                s_emitOptions,
                 // (4,1): error CS0656: Missing compiler required member 'Microsoft.CodeAnalysis.Runtime.LocalStoreTracker.LogMethodEntry'
                 // class C
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"class C
+                Diagnostic(
+                        ErrorCode.ERR_MissingPredefinedMember,
+                        @"class C
 {
     DateTime F(int p, ref int q)
     {
@@ -532,10 +619,18 @@ class C
 
         return a;
     }
-}").WithArguments("Microsoft.CodeAnalysis.Runtime.LocalStoreTracker", "LogMethodEntry").WithLocation(4, 1),
+}"
+                    )
+                    .WithArguments(
+                        "Microsoft.CodeAnalysis.Runtime.LocalStoreTracker",
+                        "LogMethodEntry"
+                    )
+                    .WithLocation(4, 1),
                 // (4,1): error CS0656: Missing compiler required member 'Microsoft.CodeAnalysis.Runtime.LocalStoreTracker.LogReturn'
                 // class C
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"class C
+                Diagnostic(
+                        ErrorCode.ERR_MissingPredefinedMember,
+                        @"class C
 {
     DateTime F(int p, ref int q)
     {
@@ -548,10 +643,15 @@ class C
 
         return a;
     }
-}").WithArguments("Microsoft.CodeAnalysis.Runtime.LocalStoreTracker", "LogReturn").WithLocation(4, 1),
+}"
+                    )
+                    .WithArguments("Microsoft.CodeAnalysis.Runtime.LocalStoreTracker", "LogReturn")
+                    .WithLocation(4, 1),
                 // (7,5): error CS0656: Missing compiler required member 'Microsoft.CodeAnalysis.Runtime.LocalStoreTracker.LogParameterStore'
                 //     {
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"{
+                Diagnostic(
+                        ErrorCode.ERR_MissingPredefinedMember,
+                        @"{
         var a = DateTime.Now;
         p = 1;
         q = 1;
@@ -560,10 +660,18 @@ class C
         ref var s = ref q;
 
         return a;
-    }").WithArguments("Microsoft.CodeAnalysis.Runtime.LocalStoreTracker", "LogParameterStore").WithLocation(7, 5),
+    }"
+                    )
+                    .WithArguments(
+                        "Microsoft.CodeAnalysis.Runtime.LocalStoreTracker",
+                        "LogParameterStore"
+                    )
+                    .WithLocation(7, 5),
                 // (7,5): error CS0656: Missing compiler required member 'Microsoft.CodeAnalysis.Runtime.LocalStoreTracker.LogParameterStore'
                 //     {
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"{
+                Diagnostic(
+                        ErrorCode.ERR_MissingPredefinedMember,
+                        @"{
         var a = DateTime.Now;
         p = 1;
         q = 1;
@@ -572,10 +680,18 @@ class C
         ref var s = ref q;
 
         return a;
-    }").WithArguments("Microsoft.CodeAnalysis.Runtime.LocalStoreTracker", "LogParameterStore").WithLocation(7, 5),
+    }"
+                    )
+                    .WithArguments(
+                        "Microsoft.CodeAnalysis.Runtime.LocalStoreTracker",
+                        "LogParameterStore"
+                    )
+                    .WithLocation(7, 5),
                 // (7,5): error CS0656: Missing compiler required member 'Microsoft.CodeAnalysis.Runtime.LocalStoreTracker.LogMethodEntry'
                 //     {
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"{
+                Diagnostic(
+                        ErrorCode.ERR_MissingPredefinedMember,
+                        @"{
         var a = DateTime.Now;
         p = 1;
         q = 1;
@@ -584,10 +700,18 @@ class C
         ref var s = ref q;
 
         return a;
-    }").WithArguments("Microsoft.CodeAnalysis.Runtime.LocalStoreTracker", "LogMethodEntry").WithLocation(7, 5),
+    }"
+                    )
+                    .WithArguments(
+                        "Microsoft.CodeAnalysis.Runtime.LocalStoreTracker",
+                        "LogMethodEntry"
+                    )
+                    .WithLocation(7, 5),
                 // (7,5): error CS0656: Missing compiler required member 'Microsoft.CodeAnalysis.Runtime.LocalStoreTracker.LogReturn'
                 //     {
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"{
+                Diagnostic(
+                        ErrorCode.ERR_MissingPredefinedMember,
+                        @"{
         var a = DateTime.Now;
         p = 1;
         q = 1;
@@ -596,38 +720,71 @@ class C
         ref var s = ref q;
 
         return a;
-    }").WithArguments("Microsoft.CodeAnalysis.Runtime.LocalStoreTracker", "LogReturn").WithLocation(7, 5),
+    }"
+                    )
+                    .WithArguments("Microsoft.CodeAnalysis.Runtime.LocalStoreTracker", "LogReturn")
+                    .WithLocation(7, 5),
                 // (8,13): error CS0656: Missing compiler required member 'Microsoft.CodeAnalysis.Runtime.LocalStoreTracker.LogLocalStoreUnmanaged'
                 //         var a = DateTime.Now;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "a = DateTime.Now").WithArguments("Microsoft.CodeAnalysis.Runtime.LocalStoreTracker", "LogLocalStoreUnmanaged").WithLocation(8, 13),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "a = DateTime.Now")
+                    .WithArguments(
+                        "Microsoft.CodeAnalysis.Runtime.LocalStoreTracker",
+                        "LogLocalStoreUnmanaged"
+                    )
+                    .WithLocation(8, 13),
                 // (9,9): error CS0656: Missing compiler required member 'Microsoft.CodeAnalysis.Runtime.LocalStoreTracker.LogParameterStore'
                 //         p = 1;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "p = 1").WithArguments("Microsoft.CodeAnalysis.Runtime.LocalStoreTracker", "LogParameterStore").WithLocation(9, 9),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "p = 1")
+                    .WithArguments(
+                        "Microsoft.CodeAnalysis.Runtime.LocalStoreTracker",
+                        "LogParameterStore"
+                    )
+                    .WithLocation(9, 9),
                 // (10,9): error CS0656: Missing compiler required member 'Microsoft.CodeAnalysis.Runtime.LocalStoreTracker.LogParameterStore'
                 //         q = 1;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "q = 1").WithArguments("Microsoft.CodeAnalysis.Runtime.LocalStoreTracker", "LogParameterStore").WithLocation(10, 9),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "q = 1")
+                    .WithArguments(
+                        "Microsoft.CodeAnalysis.Runtime.LocalStoreTracker",
+                        "LogParameterStore"
+                    )
+                    .WithLocation(10, 9),
                 // (12,17): error CS0656: Missing compiler required member 'Microsoft.CodeAnalysis.Runtime.LocalStoreTracker.LogLocalStoreLocalAlias'
                 //         ref var r = ref a;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "r = ref a").WithArguments("Microsoft.CodeAnalysis.Runtime.LocalStoreTracker", "LogLocalStoreLocalAlias").WithLocation(12, 17),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "r = ref a")
+                    .WithArguments(
+                        "Microsoft.CodeAnalysis.Runtime.LocalStoreTracker",
+                        "LogLocalStoreLocalAlias"
+                    )
+                    .WithLocation(12, 17),
                 // (13,17): error CS0656: Missing compiler required member 'Microsoft.CodeAnalysis.Runtime.LocalStoreTracker.LogLocalStoreParameterAlias'
                 //         ref var s = ref q;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "s = ref q").WithArguments("Microsoft.CodeAnalysis.Runtime.LocalStoreTracker", "LogLocalStoreParameterAlias").WithLocation(13, 17));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "s = ref q")
+                    .WithArguments(
+                        "Microsoft.CodeAnalysis.Runtime.LocalStoreTracker",
+                        "LogLocalStoreParameterAlias"
+                    )
+                    .WithLocation(13, 17)
+            );
         }
 
         [Fact]
         public void ObjectInitializers_NotInstrumented()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     int X;
 
     public C F() => new C() { X = 1 };
 }
-");
+"
+            );
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyMethodBody("C.F", @"
+            verifier.VerifyMethodBody(
+                "C.F",
+                @"
 {
   // Code size       37 (0x25)
   .maxstack  3
@@ -659,21 +816,26 @@ class C
   IL_0023:  ldloc.1
   IL_0024:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void WithExpressions_NotInstrumented()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 record class C(int X)
 {
     public C F() => new C(0) with { X = 1 };
 }
-");
+"
+            );
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyMethodBody("C.F", @"
+            verifier.VerifyMethodBody(
+                "C.F",
+                @"
 {
   // Code size       44 (0x2c)
   .maxstack  3
@@ -708,13 +870,15 @@ record class C(int X)
   IL_002a:  ldloc.1
   IL_002b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void MemberAssignment_NotInstrumented()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     int X;
@@ -722,10 +886,13 @@ class C
 
     public void F() { X = 1; P = 2; }
 }
-");
+"
+            );
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyMethodBody("C.F", @"
+            verifier.VerifyMethodBody(
+                "C.F",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  2
@@ -761,18 +928,21 @@ class C
   // sequence point: }
   IL_0026:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void AutoPropertyAccessors_NotInstrumented()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     int P { get; set; }
 }
-");
+"
+            );
             var verifier = CompileAndVerify(source);
 
             AssertNotInstrumented(verifier, "C.P.get");
@@ -782,14 +952,16 @@ class C
         [Fact]
         public void EventAccessors_NotInstrumented()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System;
 
 class C
 {
     event Action E;
 }
-");
+"
+            );
 
             var verifier = CompileAndVerify(source);
 
@@ -800,7 +972,8 @@ class C
         [Fact]
         public void SimpleLocalsAndParameters()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     public void F(int p, int q)
@@ -813,10 +986,13 @@ class C
         }
     }
 }
-");
+"
+            );
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyMethodBody("C.F", @"
+            verifier.VerifyMethodBody(
+                "C.F",
+                @"
 {
   // Code size      150 (0x96)
   .maxstack  4
@@ -930,7 +1106,8 @@ class C
   // sequence point: }
   IL_0095:  ret
 }
-");
+"
+            );
         }
 
         [Theory]
@@ -952,9 +1129,16 @@ class C
         [InlineData("void*", "void*", "(void*)100000", "100000", false)]
         [InlineData("byte*", "void*", "(byte*)100000", "100000", false)]
         [InlineData("delegate*<int>", "void*", "(delegate*<int>)100000", "100000")]
-        public void SpecialTypes_NoConv(string typeName, string targetType, string valueSource, string value, bool verificationPasses = true)
+        public void SpecialTypes_NoConv(
+            string typeName,
+            string targetType,
+            string valueSource,
+            string value,
+            bool verificationPasses = true
+        )
         {
-            var source = WithHelpers($$"""
+            var source = WithHelpers(
+                $$"""
 interface I {}
 
 unsafe class C : I
@@ -969,10 +1153,13 @@ unsafe class C : I
 
     static void Main() => F(s);
 }
-""");
+"""
+            );
             var verifier = CompileAndVerify(
                 source,
-                ilVerifyMessage: verificationPasses ? "" : @"
+                ilVerifyMessage: verificationPasses
+                    ? ""
+                    : @"
 [F]: Unmanaged pointers are not a verifiable type. { Offset = 0xd }
 [F]: Unmanaged pointers are not a verifiable type. { Offset = 0x28 }
 ",
@@ -988,9 +1175,12 @@ F: P'p'[0] = {value}
 F: L1 = {value}
 F: Returned
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.F", $@"
+            verifier.VerifyMethodBody(
+                "C.F",
+                $@"
 {{
   // Code size       62 (0x3e)
   .maxstack  4
@@ -1037,15 +1227,23 @@ Main: Returned
   // sequence point: }}
   IL_003d:  ret
 }}
-");
+"
+            );
         }
 
         [Theory]
         [InlineData("sbyte", "byte", "conv.u1", "-1", "255")]
         [InlineData("short", "ushort", "conv.u2", "-1", "65535")]
-        public void SpecialTypes_ConvU(string typeName, string targetType, string conversion, string valueSource, string value)
+        public void SpecialTypes_ConvU(
+            string typeName,
+            string targetType,
+            string conversion,
+            string valueSource,
+            string value
+        )
         {
-            var source = WithHelpers($$"""
+            var source = WithHelpers(
+                $$"""
 class C
 {
     static readonly {{typeName}} s = {{valueSource}};
@@ -1057,8 +1255,11 @@ class C
 
     static void Main() => F(s);
 }
-""");
-            var verifier = CompileAndVerify(source, expectedOutput: $@"
+"""
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: $@"
 Main: Entered
 .cctor: Entered
 .cctor: Returned
@@ -1068,9 +1269,12 @@ F: P'p'[0] = {value}
 F: L1 = {value}
 F: Returned
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.F", $@"
+            verifier.VerifyMethodBody(
+                "C.F",
+                $@"
 {{
   // Code size       65 (0x41)
   .maxstack  4
@@ -1120,7 +1324,8 @@ Main: Returned
   // sequence point: }}
   IL_0040:  ret
 }}
-");
+"
+            );
         }
 
         [Theory]
@@ -1132,7 +1337,8 @@ Main: Returned
         [InlineData("ulong", "ulong")]
         public void Enums_NoConv(string typeName, string targetType)
         {
-            var source = WithHelpers($$"""
+            var source = WithHelpers(
+                $$"""
 enum E : {{typeName}}
 {
 }
@@ -1146,10 +1352,13 @@ class C
         var x = p = s;
     }
 }
-""");
+"""
+            );
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyMethodBody("C.F", $@"
+            verifier.VerifyMethodBody(
+                "C.F",
+                $@"
 {{
   // Code size       62 (0x3e)
   .maxstack  4
@@ -1196,7 +1405,8 @@ class C
   // sequence point: }}
   IL_003d:  ret
 }}
-");
+"
+            );
         }
 
         [Theory]
@@ -1204,7 +1414,8 @@ class C
         [InlineData("short", "ushort", "conv.u2")]
         public void Enums_ConvU(string typeName, string targetType, string conversion)
         {
-            var source = WithHelpers($$"""
+            var source = WithHelpers(
+                $$"""
 enum E : {{typeName}}
 {
 }
@@ -1218,10 +1429,13 @@ class C
         var x = p = s;
     }
 }
-""");
+"""
+            );
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyMethodBody("C.F", $@"
+            verifier.VerifyMethodBody(
+                "C.F",
+                $@"
 {{
   // Code size       65 (0x41)
   .maxstack  4
@@ -1271,13 +1485,26 @@ class C
   // sequence point: }}
   IL_0040:  ret
 }}
-");
+"
+            );
         }
 
 #pragma warning disable
         private struct S1 { }
-        private struct S2<T> where T : struct { T t; }
-        private struct S3 { System.DateTime X; System.Guid Y; decimal Z; unsafe void* P; }
+
+        private struct S2<T>
+            where T : struct
+        {
+            T t;
+        }
+
+        private struct S3
+        {
+            System.DateTime X;
+            System.Guid Y;
+            decimal Z;
+            unsafe void* P;
+        }
 #pragma warning restore
 
         public static IEnumerable<object[]> UnmanagedStruct_TestData
@@ -1286,24 +1513,72 @@ class C
             {
                 yield return new object[] { "", "nint", "IntPtr", Unsafe.SizeOf<nint>() };
                 yield return new object[] { "", "nuint", "UIntPtr", Unsafe.SizeOf<nuint>() };
-                yield return new object[] { "", "System.Int128", "'[System.Runtime]System.Int128'", Unsafe.SizeOf<Int128>() };
-                yield return new object[] { "", "System.Guid", "'[System.Runtime]System.Guid'", Unsafe.SizeOf<Guid>() };
-                yield return new object[] { "", "System.ValueTuple<int, bool>", "'[System.Runtime]System.ValueTuple`2<int32,bool>'", Unsafe.SizeOf<(int, bool)>() };
+                yield return new object[]
+                {
+                    "",
+                    "System.Int128",
+                    "'[System.Runtime]System.Int128'",
+                    Unsafe.SizeOf<Int128>(),
+                };
+                yield return new object[]
+                {
+                    "",
+                    "System.Guid",
+                    "'[System.Runtime]System.Guid'",
+                    Unsafe.SizeOf<Guid>(),
+                };
+                yield return new object[]
+                {
+                    "",
+                    "System.ValueTuple<int, bool>",
+                    "'[System.Runtime]System.ValueTuple`2<int32,bool>'",
+                    Unsafe.SizeOf<(int, bool)>(),
+                };
                 yield return new object[] { "struct S { }", "S", "'S'", Unsafe.SizeOf<S1>() };
-                yield return new object[] { "struct S<T> where T : struct { T t; }", "S<int>", "'S`1<int32>'", Unsafe.SizeOf<S2<int>>() };
-                yield return new object[] { "struct S { System.DateTime X; System.Guid Y; decimal Z; unsafe void* P; }", "S", "'S'", Unsafe.SizeOf<S3>() };
-                yield return new object[] { "", "System.ValueTuple<int?, bool?>", "'[System.Runtime]System.ValueTuple`2<System.Nullable`1<int32>,System.Nullable`1<bool>>'", Unsafe.SizeOf<(int?, bool?)>() };
-                yield return new object[] { "", "int?", "'[System.Runtime]System.Nullable`1<int32>'", Unsafe.SizeOf<int?>() };
+                yield return new object[]
+                {
+                    "struct S<T> where T : struct { T t; }",
+                    "S<int>",
+                    "'S`1<int32>'",
+                    Unsafe.SizeOf<S2<int>>(),
+                };
+                yield return new object[]
+                {
+                    "struct S { System.DateTime X; System.Guid Y; decimal Z; unsafe void* P; }",
+                    "S",
+                    "'S'",
+                    Unsafe.SizeOf<S3>(),
+                };
+                yield return new object[]
+                {
+                    "",
+                    "System.ValueTuple<int?, bool?>",
+                    "'[System.Runtime]System.ValueTuple`2<System.Nullable`1<int32>,System.Nullable`1<bool>>'",
+                    Unsafe.SizeOf<(int?, bool?)>(),
+                };
+                yield return new object[]
+                {
+                    "",
+                    "int?",
+                    "'[System.Runtime]System.Nullable`1<int32>'",
+                    Unsafe.SizeOf<int?>(),
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(UnmanagedStruct_TestData))]
-        public void UnmanagedStruct(string definition, string typeName, string ilTypeName, int expectedSize)
+        public void UnmanagedStruct(
+            string definition,
+            string typeName,
+            string ilTypeName,
+            int expectedSize
+        )
         {
             var expectedValue = $"<{string.Join("-", Enumerable.Repeat("00", expectedSize))}>";
 
-            var source = WithHelpers($$"""
+            var source = WithHelpers(
+                $$"""
 C.F(default);
 
 {{definition}}
@@ -1317,7 +1592,8 @@ class C
         var x = p = s;
     }
 }
-""");
+"""
+            );
 
             var verifier = CompileAndVerify(
                 source,
@@ -1333,9 +1609,12 @@ F: P'p'[0] = {expectedValue}
 F: L1 = {expectedValue}
 F: Returned
 <Main>$: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.F", $@"
+            verifier.VerifyMethodBody(
+                "C.F",
+                $@"
 {{
       // Code size       86 (0x56)
       .maxstack  5
@@ -1388,7 +1667,8 @@ F: Returned
       // sequence point: }}
       IL_0055:  ret
     }}
-");
+"
+            );
         }
 
         [Theory]
@@ -1397,7 +1677,8 @@ F: Returned
         [InlineData("struct S { string A; }", "S?", "")]
         public void ManagedStruct(string definition, string typeName, string value)
         {
-            var source = WithHelpers($$"""
+            var source = WithHelpers(
+                $$"""
 C.F(default);
 
 {{definition}}
@@ -1411,8 +1692,11 @@ class C
         var x = p = s;
     }
 }
-""");
-            var verifier = CompileAndVerify(source, expectedOutput: $@"
+"""
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: $@"
 <Main>$: Entered
 <Main>$: P'args'[0] = System.String[]
 F: Entered
@@ -1421,13 +1705,16 @@ F: P'p'[0] = {value}
 F: L1 = {value}
 F: Returned
 <Main>$: Returned
-");
+"
+            );
 
             // TODO: why is the stloc+ldloc.a of V_2 emitted? https://github.com/dotnet/roslyn/issues/66810
             // IL_0045: stloc.2
             // IL_0046: ldloca.s V_2
 
-            verifier.VerifyMethodBody("C.F", $@"
+            verifier.VerifyMethodBody(
+                "C.F",
+                $@"
 {{
   // Code size      102 (0x66)
   .maxstack  4
@@ -1485,13 +1772,15 @@ F: Returned
   // sequence point: }}
   IL_0065:  ret
 }}
-");
+"
+            );
         }
 
         [Fact]
         public void RefStructWithRefFieldAndNoToStringOverride()
         {
-            var source = WithHelpers("""
+            var source = WithHelpers(
+                """
 S.F(new S());
 
 ref struct S
@@ -1504,18 +1793,24 @@ ref struct S
         var x = p = new S();
     }
 }
-""");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"""
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 <Main>$: Entered
 <Main>$: P'args'[0] = System.String[]
 F: Entered
 F: L1 = 1
 F: Returned
 <Main>$: Returned
-");
+"
+            );
 
             // writes to x and p are not logged since we can't invoke ToString()
-            verifier.VerifyMethodBody("S.F", @"
+            verifier.VerifyMethodBody(
+                "S.F",
+                @"
 {
   // Code size       46 (0x2e)
   .maxstack  3
@@ -1557,13 +1852,15 @@ F: Returned
   // sequence point: }
   IL_002d:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void RefStructWithRefFieldAndToStringOverride()
         {
-            var source = WithHelpers("""
+            var source = WithHelpers(
+                """
 S.F(new S());
 
 ref struct S
@@ -1577,8 +1874,11 @@ ref struct S
 
     public override string ToString() => "str";
 }
-""");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"""
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 <Main>$: Entered
 <Main>$: P'args'[0] = System.String[]
 F: Entered
@@ -1593,9 +1893,12 @@ ToString: Returned
 F: L1 = str
 F: Returned
 <Main>$: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("S.F", @"
+            verifier.VerifyMethodBody(
+                "S.F",
+                @"
  {
   // Code size      103 (0x67)
   .maxstack  4
@@ -1652,13 +1955,15 @@ F: Returned
   }
   // sequence point: }
   IL_0066:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void UnmanagedRefStruct()
         {
-            var source = WithHelpers($$"""
+            var source = WithHelpers(
+                $$"""
 C.F(default);
 
 ref struct S { int X; }
@@ -1670,7 +1975,8 @@ class C
         var x = p = new S();
     }
 }
-""");
+"""
+            );
             var verifier = CompileAndVerify(
                 source,
                 expectedOutput: @"
@@ -1685,9 +1991,12 @@ F: Returned
                 ",
                 ilVerifyMessage: @"
 [F]: Expected numeric type on the stack. { Offset = 0xf, Found = address of 'S' }
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.F", $@"
+            verifier.VerifyMethodBody(
+                "C.F",
+                $@"
 {{
     // Code size       87 (0x57)
     .maxstack  5
@@ -1739,13 +2048,15 @@ F: Returned
     }}
     // sequence point: }}
     IL_0056:  ret
-}}");
+}}"
+            );
         }
 
         [Fact]
         public void Dynamic()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     static void Main()
@@ -1754,15 +2065,21 @@ class C
         x++;
     }
 }
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 Main: L1 = 1
 Main: L1 = 2
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.Main", @"
+            verifier.VerifyMethodBody(
+                "C.Main",
+                @"
 {
   // Code size      128 (0x80)
   .maxstack  9
@@ -1832,13 +2149,15 @@ Main: Returned
   // sequence point: }
   IL_007f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ThisAssignment_NotInstrumented()
         {
-            var source = WithHelpers($$"""
+            var source = WithHelpers(
+                $$"""
 struct S
 {
     void F()
@@ -1846,10 +2165,13 @@ struct S
         this = new S();
     }
 }
-""");
+"""
+            );
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyMethodBody("S.F", @"
+            verifier.VerifyMethodBody(
+                "S.F",
+                @"
 {
   // Code size       31 (0x1f)
   .maxstack  1
@@ -1879,13 +2201,15 @@ struct S
   // sequence point: }
   IL_001e:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void RefAssignments()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     static void G(int p1, ref int p2, out int p3, ref int p4)
@@ -1920,8 +2244,11 @@ class C
         G(1, ref a, out var b, ref a);
     }
 }
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 Main: L1 = 1
 G: Entered
@@ -1955,14 +2282,17 @@ Main: L1 = 1
 Main: L2 = 3
 Main: L1 = 1
 Main: Returned
-");
+"
+            );
 
             // TODO: eliminate https://github.com/dotnet/roslyn/issues/66810
             // IL_007b:  ldloc.2
             // IL_007c:  ldind.i4
             // IL_007d:  pop
 
-            verifier.VerifyMethodBody("C.G", @"
+            verifier.VerifyMethodBody(
+                "C.G",
+                @"
  {
   // Code size      297 (0x129)
   .maxstack  5
@@ -2163,7 +2493,8 @@ Main: Returned
   }
   // sequence point: }
   IL_0128:  ret
-}");
+}"
+            );
         }
 
         /// <summary>
@@ -2172,7 +2503,8 @@ Main: Returned
         [Fact]
         public void RefAssignments_RefFields_NotInstrumented()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 ref struct S
 {
     public ref int X;
@@ -2198,8 +2530,11 @@ class C
         s.Y = 4;                    // not recognized as update of a
     }
 }
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 Main: L1 = 1
 ToString: Entered
@@ -2207,9 +2542,12 @@ ToString: Returned
 Main: L2 = str
 Main: L3 = 3
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.Main", @"
+            verifier.VerifyMethodBody(
+                "C.Main",
+                @"
 {
   // Code size      136 (0x88)
   .maxstack  4
@@ -2298,13 +2636,15 @@ Main: Returned
   // sequence point: }
   IL_0087:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void RefArguments_Call()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     static int G(ref int x, ref long y) => 1;
@@ -2316,8 +2656,11 @@ class C
         int c = G(y: ref b, x: ref a) + 1;
     }
 }
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 Main: L1 = 1
 Main: L2 = 2
@@ -2329,9 +2672,12 @@ Main: L2 = 2
 Main: L1 = 1
 Main: L3 = 2
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.Main", @"
+            verifier.VerifyMethodBody(
+                "C.Main",
+                @"
 {
   // Code size       91 (0x5b)
   .maxstack  5
@@ -2400,13 +2746,15 @@ Main: Returned
   // sequence point: }
   IL_005a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void RefArguments_Call_Void()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     static void G(ref int x, ref long y)
@@ -2420,8 +2768,11 @@ class C
         G(y: ref b, x: ref a);
     }
 }
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 Main: L1 = 1
 Main: L2 = 2
@@ -2432,9 +2783,12 @@ G: Returned
 Main: L2 = 2
 Main: L1 = 1
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.Main", @"
+            verifier.VerifyMethodBody(
+                "C.Main",
+                @"
 { 
   // Code size       79 (0x4f)
   .maxstack  3
@@ -2495,13 +2849,15 @@ Main: Returned
   // sequence point: }
   IL_004e:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void RefArguments_Call_IgnoreNonLocalRefs()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     int A;
@@ -2518,10 +2874,13 @@ class C
         G(y: ref c.B[1], x: ref c.A);
     }
 }
-");
+"
+            );
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyMethodBody("C.F", @"
+            verifier.VerifyMethodBody(
+                "C.F",
+                @"
 {
   // Code size       67 (0x43)
   .maxstack  3
@@ -2570,13 +2929,15 @@ class C
   // sequence point: }
   IL_0042:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void RefArguments_ObjectCreation()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     public C(ref int x, ref long y)
@@ -2590,10 +2951,13 @@ class C
         var c = new C(y: ref b, x: ref a);
     }
 }
-");
+"
+            );
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyMethodBody("C.F", @"
+            verifier.VerifyMethodBody(
+                "C.F",
+                @"
  {
   // Code size       89 (0x59)
   .maxstack  5
@@ -2660,13 +3024,15 @@ class C
   // sequence point: }
   IL_0058:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void RefArguments_RefSelf()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 static class C
 {
     static void F()
@@ -2678,10 +3044,13 @@ static class C
 
     static void G(this ref int self, ref int x, ref long y) { }
 }
-");
+"
+            );
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyMethodBody("C.F", @"
+            verifier.VerifyMethodBody(
+                "C.F",
+                @"
  {
   // Code size       91 (0x5b)
   .maxstack  3
@@ -2747,13 +3116,15 @@ static class C
   }
   // sequence point: }
   IL_005a:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void RefArguments_CollectionInitializer()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -2772,13 +3143,19 @@ static class Extensions
 {
     public static void Add(this ref C self, int item) { }
 }
-");
-            var verifier = CompileAndVerify(source, ilVerifyMessage: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                ilVerifyMessage: @"
 [F]: Expected numeric type on the stack. { Offset = 0x23, Found = address of 'C' }
 [Add]: Expected numeric type on the stack. { Offset = 0xe, Found = address of 'C' }
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.F", @"
+            verifier.VerifyMethodBody(
+                "C.F",
+                @"
 {
   // Code size       61 (0x3d)
   .maxstack  4
@@ -2823,13 +3200,15 @@ static class Extensions
   // sequence point: }
   IL_003c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void RefArguments_FunctionPointerInvocation()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 unsafe class C
 {
     void F(delegate*<ref int, ref long, void> f)
@@ -2839,12 +3218,18 @@ unsafe class C
         f(ref a, ref b);
     }
 }
-");
-            var verifier = CompileAndVerify(source, ilVerifyMessage: """
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                ilVerifyMessage: """
                 [F]: ImportCalli not implemented
-                """);
+                """
+            );
 
-            verifier.VerifyMethodBody("C.F", @"
+            verifier.VerifyMethodBody(
+                "C.F",
+                @"
  {
   // Code size       91 (0x5b)
   .maxstack  3
@@ -2913,13 +3298,15 @@ unsafe class C
   // sequence point: }
   IL_005a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void Initializers()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 C.F(out var _);
 
 class C
@@ -2929,16 +3316,22 @@ class C
 
     public static int F(out int a) => a = 1;
 }
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 <Main>$: Entered
 <Main>$: P'args'[0] = System.String[]
 F: Entered
 F: P'a'[0] = 1
 F: Returned
 <Main>$: Returned
-");
-            verifier.VerifyMethodBody("C..cctor", @"
+"
+            );
+            verifier.VerifyMethodBody(
+                "C..cctor",
+                @"
 {
   // Code size       95 (0x5f)
   .maxstack  4
@@ -2999,13 +3392,15 @@ F: Returned
   }
   // sequence point: <hidden>
   IL_005e:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void Initializers_Lambda()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System;
 
 class C
@@ -3014,9 +3409,11 @@ class C
 
     static void Main() { A(); }
 }
-");
+"
+            );
 
-            var expectedOutput = @"
+            var expectedOutput =
+                @"
 Main: Entered
 .cctor: Entered
 .cctor: Returned
@@ -3028,7 +3425,9 @@ Main: Returned
 
             var verifier = CompileAndVerify(source, expectedOutput: expectedOutput);
 
-            verifier.VerifyMethodBody("C..cctor", @"
+            verifier.VerifyMethodBody(
+                "C..cctor",
+                @"
 {
   // Code size       44 (0x2c)
   .maxstack  2
@@ -3057,13 +3456,16 @@ Main: Returned
   // sequence point: <hidden>
   IL_002b:  ret
 }
-");
+"
+            );
 
             // TODO: is this sequence point correct? https://github.com/dotnet/roslyn/issues/66811
             // sequence point: }
             // IL_001d:  leave.s    IL_0028
 
-            verifier.VerifyMethodBody("C.<>c.<.cctor>b__3_0", @"
+            verifier.VerifyMethodBody(
+                "C.<>c.<.cctor>b__3_0",
+                @"
 {
   // Code size       41 (0x29)
   .maxstack  3
@@ -3100,13 +3502,15 @@ Main: Returned
   // sequence point: }
   IL_0028:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void Constructors()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class B
 {
     public B(int p) {}
@@ -3124,8 +3528,11 @@ class C : B
     static int F(out int a) => a = 4;
     static void Main() => new C();
 }
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 .ctor: Entered
 F: Entered
@@ -3144,8 +3551,11 @@ F: Returned
 .ctor: L3 = 3
 .ctor: Returned
 Main: Returned
-");
-            verifier.VerifyMethodBody("B..ctor", @"
+"
+            );
+            verifier.VerifyMethodBody(
+                "B..ctor",
+                @"
 {
   // Code size       41 (0x29)
   .maxstack  3
@@ -3182,8 +3592,11 @@ Main: Returned
   // sequence point: }
   IL_0028:  ret
 }
-");
-            verifier.VerifyMethodBody("C..ctor", @"
+"
+            );
+            verifier.VerifyMethodBody(
+                "C..ctor",
+                @"
  {
   // Code size      111 (0x6f)
   .maxstack  5
@@ -3260,13 +3673,15 @@ Main: Returned
   // sequence point: }
   IL_006e:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void EmbeddedStatement()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     void M()
@@ -3278,10 +3693,13 @@ class C
     int F(out int a) => a = 1;
     void G(int a, int b) {}
 }
-");
+"
+            );
 
             var verifier = CompileAndVerify(source);
-            verifier.VerifyMethodBody("C.M", @"
+            verifier.VerifyMethodBody(
+                "C.M",
+                @"
 {
   // Code size       65 (0x41)
   .maxstack  5
@@ -3332,13 +3750,15 @@ class C
     IL_0040:  endfinally
   }
 }
-");
+"
+            );
         }
 
         [Fact]
         public void Lambdas()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System;
 
 class C
@@ -3360,9 +3780,12 @@ class C
 
     static void F(Func<int> f) { f(); }
 }
-");
+"
+            );
 
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 Main: L'a' = 1
 Main: L'b' = 2
@@ -3380,9 +3803,12 @@ Main: Entered lambda '<Main>b__0'
 <Main>b__0: Returned
 F: Returned
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.<>c__DisplayClass0_1.<Main>b__0()", @"
+            verifier.VerifyMethodBody(
+                "C.<>c__DisplayClass0_1.<Main>b__0()",
+                @"
 {
   // Code size       86 (0x56)
   .maxstack  4
@@ -3431,9 +3857,12 @@ Main: Returned
   IL_0054:  ldloc.2
   IL_0055:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.<>c__DisplayClass0_2.<Main>b__1()", @"
+            verifier.VerifyMethodBody(
+                "C.<>c__DisplayClass0_2.<Main>b__1()",
+                @"
 {
   // Code size       66 (0x42)
   .maxstack  4
@@ -3478,9 +3907,12 @@ Main: Returned
   IL_0040:  ldloc.2
   IL_0041:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.Main", @"
+            verifier.VerifyMethodBody(
+                "C.Main",
+                @"
 {
   // Code size      183 (0xb7)
   .maxstack  4
@@ -3585,13 +4017,15 @@ Main: Returned
   // sequence point: }
   IL_00b6:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void Lambdas_Parameters()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System;
 
 class C
@@ -3609,9 +4043,12 @@ class C
 
     static void F(Action<int> f) => f(3);
 }
-");
+"
+            );
 
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 F: Entered
 F: P'f'[0] = System.Action`1[System.Int32]
@@ -3624,9 +4061,12 @@ Main: Entered lambda '<Main>b__0_0'
 <Main>b__0_0: Returned
 F: Returned
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.<>c.<Main>b__0_0", @"
+            verifier.VerifyMethodBody(
+                "C.<>c.<Main>b__0_0",
+                @"
 {
   // Code size       95 (0x5f)
   .maxstack  3
@@ -3699,13 +4139,15 @@ Main: Returned
   // sequence point: }
   IL_005e:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void Lambdas_LiftedParameters()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System;
 
 class C
@@ -3726,9 +4168,12 @@ class C
 
     static int F(Func<int, int> f) => f(2);
 }
-");
+"
+            );
 
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 G: Entered
 G: P'a'[0] = 1
@@ -3748,9 +4193,12 @@ F: Returned
 F: Returned
 G: Returned
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.G", @"
+            verifier.VerifyMethodBody(
+                "C.G",
+                @"
 {
   // Code size       69 (0x45)
   .maxstack  3
@@ -3795,8 +4243,11 @@ Main: Returned
   // sequence point: }
   IL_0044:  ret
 }
-");
-            verifier.VerifyMethodBody("C.<>c__DisplayClass1_0.<G>b__0", @"
+"
+            );
+            verifier.VerifyMethodBody(
+                "C.<>c__DisplayClass1_0.<G>b__0",
+                @"
 {
   // Code size      110 (0x6e)
   .maxstack  4
@@ -3858,8 +4309,11 @@ Main: Returned
   // sequence point: }
   IL_006c:  ldloc.3
   IL_006d:  ret
-}");
-            verifier.VerifyMethodBody("C.<>c__DisplayClass1_1.<G>b__1", @"
+}"
+            );
+            verifier.VerifyMethodBody(
+                "C.<>c__DisplayClass1_1.<G>b__1",
+                @"
 {
   // Code size       80 (0x50)
   .maxstack  4
@@ -3914,13 +4368,15 @@ Main: Returned
   IL_004e:  ldloc.3
   IL_004f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void StateMachine_Async()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -3936,9 +4392,12 @@ class C
     static int F(out int a) => a = 1;
     static async Task Main() => await M(2);
 }
-");
+"
+            );
 
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered state machine #1
 M: Entered state machine #2
 M: P'p'[0] = 2
@@ -3950,9 +4409,12 @@ M: L'b' = 1
 M: L'c' = 1
 M: Returned
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.M", @"
+            verifier.VerifyMethodBody(
+                "C.M",
+                @"
 {
   // Code size       67 (0x43)
   .maxstack  2
@@ -3980,9 +4442,12 @@ Main: Returned
   IL_003d:  call       ""System.Threading.Tasks.Task System.Runtime.CompilerServices.AsyncTaskMethodBuilder.Task.get""
   IL_0042:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.<M>d__0..ctor", @"
+            verifier.VerifyMethodBody(
+                "C.<M>d__0..ctor",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  1
@@ -3991,13 +4456,16 @@ Main: Returned
   IL_0006:  nop
   IL_0007:  ret
 }
-");
+"
+            );
             // TODO: remove unnecessary IL:  https://github.com/dotnet/roslyn/issues/66810
             // IL_0038: ldarg.0
             // IL_0039: ldfld      ""int C.<Main>d__0.<a>5__1""
             // IL_003e: pop
 
-            verifier.VerifyMethodBody("C.<M>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()", @"
+            verifier.VerifyMethodBody(
+                "C.<M>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      304 (0x130)
   .maxstack  4
@@ -4154,13 +4622,15 @@ Main: Returned
   // sequence point: <hidden>
   IL_012f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void StateMachine_Iterator()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System.Linq;
 using System.Collections.Generic;
 
@@ -4178,9 +4648,12 @@ class C
 
     static void Main() => M(2).ToArray();
 }
-");
+"
+            );
 
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 M: Entered state machine #1
 M: P'p'[0] = 2
@@ -4194,9 +4667,12 @@ M: Entered state machine #1
 M: L'c' = 1
 M: Returned
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.M", @"
+            verifier.VerifyMethodBody(
+                "C.M",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  3
@@ -4207,8 +4683,11 @@ Main: Returned
   IL_0009:  stfld      ""int C.<M>d__0.<>3__p""
   IL_000e:  ret
 }
-");
-            verifier.VerifyMethodBody("C.<M>d__0..ctor", @"
+"
+            );
+            verifier.VerifyMethodBody(
+                "C.<M>d__0..ctor",
+                @"
 {
   // Code size       37 (0x25)
   .maxstack  2
@@ -4226,14 +4705,17 @@ Main: Returned
   IL_001f:  stfld      ""ulong C.<M>d__0.<>I""
   IL_0024:  ret
 }
-");
+"
+            );
 
             // TODO: remove unnecessary IL:
             // ldarg.0
             // ldfld      ""int C.<M>d__0.<a>5__1""
             // pop
 
-            verifier.VerifyMethodBody("C.<M>d__0.System.Collections.IEnumerator.MoveNext()", @"
+            verifier.VerifyMethodBody(
+                "C.<M>d__0.System.Collections.IEnumerator.MoveNext()",
+                @"
 {
   // Code size      209 (0xd1)
   .maxstack  4
@@ -4346,13 +4828,15 @@ Main: Returned
   // sequence point: <hidden>
   IL_00cf:  ldloc.2
   IL_00d0:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void StateMachine_AsyncIterator()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -4374,9 +4858,12 @@ class C
         await foreach (var n in M(2)) {}
     }
 }
-");
+"
+            );
 
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered state machine #1
 M: Entered state machine #2
 M: P'p'[0] = 2
@@ -4391,9 +4878,12 @@ M: Entered state machine #2
 M: L'c' = 1
 M: Returned
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.M", @"
+            verifier.VerifyMethodBody(
+                "C.M",
+                @"
  {
   // Code size       15 (0xf)
   .maxstack  3
@@ -4404,14 +4894,17 @@ Main: Returned
   IL_0009:  stfld      ""int C.<M>d__0.<>3__p""
   IL_000e:  ret
 }
-");
+"
+            );
 
             // TODO: remove unnecessary IL:  https://github.com/dotnet/roslyn/issues/66810
             // IL_0038: ldarg.0
             // IL_0039: ldfld      ""int C.<M>d__0.<a>5__1""
             // IL_003e: pop
 
-            verifier.VerifyMethodBody("C.<M>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()", @"
+            verifier.VerifyMethodBody(
+                "C.<M>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      457 (0x1c9)
   .maxstack  4
@@ -4626,13 +5119,15 @@ Main: Returned
   }
   // sequence point: <hidden>
   IL_01c8:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void StateMachine_Lambda_Async()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -4649,8 +5144,11 @@ class C
 
     static async Task F(Func<int, Task<int>> t) => await t(2);
 }
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered state machine #1
 F: Entered state machine #2
 F: P't'[0] = System.Func`2[System.Int32,System.Threading.Tasks.Task`1[System.Int32]]
@@ -4660,8 +5158,11 @@ Main: Entered lambda '<Main>b__0_0' state machine #3
 <Main>b__0_0: Returned
 F: Returned
 Main: Returned
-");
-            verifier.VerifyMethodBody("C.<>c.<<Main>b__0_0>d.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()", @"
+"
+            );
+            verifier.VerifyMethodBody(
+                "C.<>c.<<Main>b__0_0>d.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      256 (0x100)
   .maxstack  4
@@ -4799,13 +5300,15 @@ Main: Returned
   // sequence point: <hidden>
   IL_00ff:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void StateMachine_LocalFunction_Iterator()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -4827,9 +5330,12 @@ class C
     static IEnumerable<int> M(Func<int, IEnumerable<int>> p)
         => p(2);
 }
-");
+"
+            );
 
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 M: Entered
 M: P'p'[0] = System.Func`2[System.Int32,System.Collections.Generic.IEnumerable`1[System.Int32]]
@@ -4842,9 +5348,12 @@ Main: L2 = 1
 Main: Entered lambda '<Main>g__f|0_0' state machine #1
 <Main>g__f|0_0: Returned
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.<<Main>g__f|0_0>d.System.Collections.IEnumerator.MoveNext()", @"
+            verifier.VerifyMethodBody(
+                "C.<<Main>g__f|0_0>d.System.Collections.IEnumerator.MoveNext()",
+                @"
 {
   // Code size      145 (0x91)
   .maxstack  4
@@ -4932,13 +5441,15 @@ Main: Returned
   // sequence point: <hidden>
   IL_008f:  ldloc.2
   IL_0090:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void StateMachine_LocalFunction_AsyncIterator()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -4962,9 +5473,12 @@ class C
     static IAsyncEnumerable<int> M(Func<int, IAsyncEnumerable<int>> p)
         => p(2);
 }
-");
+"
+            );
 
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered state machine #1
 M: Entered
 M: P'p'[0] = System.Func`2[System.Int32,System.Collections.Generic.IAsyncEnumerable`1[System.Int32]]
@@ -4977,9 +5491,12 @@ Main: L'n' = 1
 Main: Entered lambda '<Main>g__f|0_0' state machine #2
 <Main>g__f|0_0: Returned
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.<<Main>g__f|0_0>d.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()", @"
+            verifier.VerifyMethodBody(
+                "C.<<Main>g__f|0_0>d.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      391 (0x187)
   .maxstack  4
@@ -5170,13 +5687,15 @@ Main: Returned
   }
   // sequence point: <hidden>
   IL_0186:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void LocalFunctions()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System;
 
 class C
@@ -5197,9 +5716,12 @@ class C
         }
     }
 }
-");
+"
+            );
 
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 Main: L'a' = 1
 Main: L'b' = 2
@@ -5211,9 +5733,12 @@ Main: Entered lambda '<Main>g__g|0_0'
 <Main>g__g|0_0: L'a' = 3
 <Main>g__g|0_0: Returned
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.<Main>g__f|0_1", @"
+            verifier.VerifyMethodBody(
+                "C.<Main>g__f|0_1",
+                @"
 {
   // Code size       66 (0x42)
   .maxstack  4
@@ -5258,8 +5783,11 @@ Main: Returned
   IL_0040:  ldloc.2
   IL_0041:  ret
 }
-");
-            verifier.VerifyMethodBody("C.<Main>g__g|0_0", @"
+"
+            );
+            verifier.VerifyMethodBody(
+                "C.<Main>g__g|0_0",
+                @"
 {
   // Code size       71 (0x47)
   .maxstack  4
@@ -5304,8 +5832,11 @@ Main: Returned
   // sequence point: <hidden>
   IL_0045:  ldloc.2
   IL_0046:  ret
-}");
-            verifier.VerifyMethodBody("C.Main", @"
+}"
+            );
+            verifier.VerifyMethodBody(
+                "C.Main",
+                @"
 {
   // Code size      120 (0x78)
   .maxstack  4
@@ -5388,13 +5919,15 @@ Main: Returned
   // sequence point: }
   IL_0077:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void Queries()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System;
 using System.Linq;
 
@@ -5412,9 +5945,12 @@ class C
         }
     }
 }
-");
+"
+            );
 
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 Main: L'a' = 1
 Main: L'b' = 2
@@ -5434,9 +5970,12 @@ Main: Entered lambda '<Main>b__1'
 <Main>b__1: L'a' = 2
 <Main>b__1: Returned
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.<>c__DisplayClass0_1.<Main>b__1", @"
+            verifier.VerifyMethodBody(
+                "C.<>c__DisplayClass0_1.<Main>b__1",
+                @"
  {
   // Code size       91 (0x5b)
   .maxstack  5
@@ -5488,9 +6027,12 @@ Main: Returned
   // sequence point: <hidden>
   IL_0059:  ldloc.2
   IL_005a:  ret
-}");
+}"
+            );
 
-            verifier.VerifyMethodBody("C.<>c__DisplayClass0_1.<Main>b__0", @"
+            verifier.VerifyMethodBody(
+                "C.<>c__DisplayClass0_1.<Main>b__0",
+                @"
 {
   // Code size       64 (0x40)
   .maxstack  3
@@ -5531,25 +6073,33 @@ Main: Returned
   // sequence point: <hidden>
   IL_003e:  ldloc.1
   IL_003f:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void ExpressionLambdas()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System;
 using System.Linq.Expressions;
 
 Expression<Func<int, int>> expression = a => a + 1;
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 <Main>$: Entered
 <Main>$: P'args'[0] = System.String[]
 <Main>$: L1 = a => (a + 1)
 <Main>$: Returned
-");
-            verifier.VerifyMethodBody("<top-level-statements-entry-point>", @"
+"
+            );
+            verifier.VerifyMethodBody(
+                "<top-level-statements-entry-point>",
+                @"
 {
   // Code size      107 (0x6b)
   .maxstack  6
@@ -5607,24 +6157,32 @@ Expression<Func<int, int>> expression = a => a + 1;
   // sequence point: <hidden>
   IL_006a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void TopLevelCode()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 int a = 1;
 int b = 2;
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 <Main>$: Entered
 <Main>$: P'args'[0] = System.String[]
 <Main>$: L1 = 1
 <Main>$: L2 = 2
 <Main>$: Returned
-");
-            verifier.VerifyMethodBody("<top-level-statements-entry-point>", @"
+"
+            );
+            verifier.VerifyMethodBody(
+                "<top-level-statements-entry-point>",
+                @"
 {
   // Code size       57 (0x39)
   .maxstack  3
@@ -5672,13 +6230,15 @@ int b = 2;
   // sequence point: <hidden>
   IL_0038:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ExceptionHandler_CatchAll()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     static void Main(string[] args)
@@ -5694,15 +6254,21 @@ class C
         }
     }
 }
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 Main: P'args'[0] = System.String[]
 Main: L1 = error
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.Main", @"
+            verifier.VerifyMethodBody(
+                "C.Main",
+                @"
  {
   // Code size       72 (0x48)
   .maxstack  3
@@ -5769,13 +6335,15 @@ Main: Returned
   }
   // sequence point: }
   IL_0047:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void ExceptionHandler_CatchType()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     static void Main(string[] args)
@@ -5791,10 +6359,13 @@ class C
         }
     }
 }
-");
+"
+            );
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyMethodBody("C.Main", @"
+            verifier.VerifyMethodBody(
+                "C.Main",
+                @"
 {
   // Code size       72 (0x48)
   .maxstack  3
@@ -5861,13 +6432,15 @@ class C
   }
   // sequence point: }
   IL_0047:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void ExceptionHandler_CatchTypeWithVariable()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     static void Main(string[] args)
@@ -5883,17 +6456,23 @@ class C
         }
     }
 }
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 Main: P'args'[0] = System.String[]
 Main: L2 = System.IndexOutOfRangeException: Index was outside the bounds of the array.
    at C.Main(String[] args)
 Main: L1 = error
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.Main", @"
+            verifier.VerifyMethodBody(
+                "C.Main",
+                @"
 {
   // Code size       82 (0x52)
   .maxstack  3
@@ -5967,13 +6546,15 @@ Main: Returned
   // sequence point: }
   IL_0051:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ExceptionHandler_CatchTypeWithVariableAndLocalsInCatchBlock()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     static void Main(string[] args)
@@ -5990,8 +6571,11 @@ class C
         }
     }
 }
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 Main: P'args'[0] = System.String[]
 Main: L2 = System.IndexOutOfRangeException: Index was outside the bounds of the array.
@@ -5999,9 +6583,12 @@ Main: L2 = System.IndexOutOfRangeException: Index was outside the bounds of the 
 Main: L3 = 1
 Main: L4 = 2
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.Main", @"
+            verifier.VerifyMethodBody(
+                "C.Main",
+                @"
 {
   // Code size       91 (0x5b)
   .maxstack  3
@@ -6085,13 +6672,15 @@ Main: Returned
   // sequence point: }
   IL_005a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ExceptionHandler_CatchTypeWithFilter()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     static void Main(string[] args)
@@ -6108,8 +6697,11 @@ class C
         }
     }
 }
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 Main: P'args'[0] = System.String[]
 Main: L1 = False
@@ -6118,9 +6710,12 @@ Main: L3 = System.IndexOutOfRangeException: Index was outside the bounds of the 
 Main: L1 = True
 Main: L2 = error
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.Main", @"
+            verifier.VerifyMethodBody(
+                "C.Main",
+                @"
 {
   // Code size      129 (0x81)
   .maxstack  3
@@ -6229,13 +6824,15 @@ Main: Returned
   // sequence point: }
   IL_0080:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ExceptionHandler_CatchAllWithFilter()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     static void Main(string[] args)
@@ -6252,17 +6849,23 @@ class C
         }
     }
 }
-");
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 Main: P'args'[0] = System.String[]
 Main: L1 = False
 Main: L1 = True
 Main: L2 = error
 Main: Returned
-");
+"
+            );
 
-            verifier.VerifyMethodBody("C.Main", @"
+            verifier.VerifyMethodBody(
+                "C.Main",
+                @"
 {
   // Code size      105 (0x69)
   .maxstack  3
@@ -6358,13 +6961,15 @@ Main: Returned
   }
   // sequence point: }
   IL_0068:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void Recursion()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 class C
 {
     static void M(int depth)
@@ -6385,8 +6990,11 @@ class C
 
     static void Main() => M(0);
 }
-");
-            CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            CompileAndVerify(
+                source,
+                expectedOutput: @"
 Main: Entered
 M: Entered
 M: P'depth'[0] = 0
@@ -6418,13 +7026,15 @@ M: L1 = 10
 M: L2 = 10
 M: Returned
 Main: Returned
-");
+"
+            );
         }
 
         [Fact]
         public void Discards()
         {
-            var source = WithHelpers(@"
+            var source = WithHelpers(
+                @"
 using System;
 
 _ = G(y: out var a, x: out _, z: out _);
@@ -6432,8 +7042,11 @@ F((_, _) => _ = 1);
 
 static int G(out int x, out int y, out int z) => x = y = z = 1;
 static int F(Func<int, int, int> f) => f(1, 2);
-");
-            CompileAndVerify(source, expectedOutput: @"
+"
+            );
+            CompileAndVerify(
+                source,
+                expectedOutput: @"
 <Main>$: Entered
 <Main>$: P'args'[0] = System.String[]
 <Main>$: Entered lambda '<<Main>$>g__G|0_1'
@@ -6448,7 +7061,8 @@ static int F(Func<int, int, int> f) => f(1, 2);
 <<Main>$>b__0_0: Returned
 <<Main>$>g__F|0_2: Returned
 <Main>$: Returned
-");
+"
+            );
         }
     }
 }

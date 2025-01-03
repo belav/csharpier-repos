@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace System.Threading.Tasks.Tests.ContinueWithAllAny
 {
@@ -19,16 +19,15 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
     {
         #region Private Fields
 
-        private API _api;                               // the API to be tested
-        private TaskType _taskType;                     // the continuation chain type
-        private TaskContinuationOptions _tcOption;      // the TaskContinuationOptions given to the ContinueWhenAll/Any
-        private TaskScheduler _tm;                      // the TaskScheduler given to the ContinueWhenAll/Any
-        private CancellationToken _cancellationToken;   // the CancellationToken given to the ContinueWhenAll/Any
+        private API _api; // the API to be tested
+        private TaskType _taskType; // the continuation chain type
+        private TaskContinuationOptions _tcOption; // the TaskContinuationOptions given to the ContinueWhenAll/Any
+        private TaskScheduler _tm; // the TaskScheduler given to the ContinueWhenAll/Any
+        private CancellationToken _cancellationToken; // the CancellationToken given to the ContinueWhenAll/Any
         private Task _continuation = null;
 
-        private TaskInfo[] _taskInfos;                  // task info for each task
-        private Task[] _tasks;                          // tasks to be continued from
-
+        private TaskInfo[] _taskInfos; // task info for each task
+        private Task[] _tasks; // tasks to be continued from
         #endregion
 
         #region Constructor
@@ -42,12 +41,13 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             _taskType = parameters.TaskType;
             _tcOption = parameters.ContinuationOptions;
 
-
             // set up the TaskScheduler under which the continuation will be scheduled
             _tm = TaskScheduler.Default;
 
             // create a new cancellation token for each test
-            _cancellationToken = parameters.WithCancellation ? CancellationToken.None : new CancellationToken();
+            _cancellationToken = parameters.WithCancellation
+                ? CancellationToken.None
+                : new CancellationToken();
 
             _taskInfos = parameters.AllTaskInfos;
             _tasks = new Task[parameters.AllTaskInfos.Length];
@@ -128,44 +128,78 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                     {
                         if (_api == API.ContinueWhenAll)
                         {
-                            _continuation = Task.Factory.ContinueWhenAll(_tasks, allCompletedAction, _cancellationToken);
+                            _continuation = Task.Factory.ContinueWhenAll(
+                                _tasks,
+                                allCompletedAction,
+                                _cancellationToken
+                            );
                         }
                         else // must be API.ContinueWhenAny
                         {
-                            _continuation = Task.Factory.ContinueWhenAny(_tasks, oneCompletedAction, _cancellationToken);
+                            _continuation = Task.Factory.ContinueWhenAny(
+                                _tasks,
+                                oneCompletedAction,
+                                _cancellationToken
+                            );
                         }
                     }
                     else if (_tm != TaskScheduler.Default)
                     {
                         if (_api == API.ContinueWhenAll)
                         {
-                            _continuation = Task.Factory.ContinueWhenAll(_tasks, allCompletedAction, _cancellationToken, _tcOption, _tm);
+                            _continuation = Task.Factory.ContinueWhenAll(
+                                _tasks,
+                                allCompletedAction,
+                                _cancellationToken,
+                                _tcOption,
+                                _tm
+                            );
                         }
                         else // must be API.ContinueWhenAny
                         {
-                            _continuation = Task.Factory.ContinueWhenAny(_tasks, oneCompletedAction, _cancellationToken, _tcOption, _tm);
+                            _continuation = Task.Factory.ContinueWhenAny(
+                                _tasks,
+                                oneCompletedAction,
+                                _cancellationToken,
+                                _tcOption,
+                                _tm
+                            );
                         }
                     }
                     else if (_tcOption != TaskContinuationOptions.None)
                     {
                         if (_api == API.ContinueWhenAll)
                         {
-                            _continuation = Task.Factory.ContinueWhenAll(_tasks, allCompletedAction, _tcOption);
+                            _continuation = Task.Factory.ContinueWhenAll(
+                                _tasks,
+                                allCompletedAction,
+                                _tcOption
+                            );
                         }
                         else // must be API.ContinueWhenAny
                         {
-                            _continuation = Task.Factory.ContinueWhenAny(_tasks, oneCompletedAction, _tcOption);
+                            _continuation = Task.Factory.ContinueWhenAny(
+                                _tasks,
+                                oneCompletedAction,
+                                _tcOption
+                            );
                         }
                     }
                     else
                     {
                         if (_api == API.ContinueWhenAll)
                         {
-                            _continuation = Task.Factory.ContinueWhenAll(_tasks, allCompletedAction);
+                            _continuation = Task.Factory.ContinueWhenAll(
+                                _tasks,
+                                allCompletedAction
+                            );
                         }
                         else // must be API.ContinueWhenAny
                         {
-                            _continuation = Task.Factory.ContinueWhenAny(_tasks, oneCompletedAction);
+                            _continuation = Task.Factory.ContinueWhenAny(
+                                _tasks,
+                                oneCompletedAction
+                            );
                         }
                     }
 
@@ -180,30 +214,64 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                     if (_cancellationToken.CanBeCanceled)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double>(taskDoubles, allCompletedActionT, _cancellationToken);
+                            _continuation = Task.Factory.ContinueWhenAll<double>(
+                                taskDoubles,
+                                allCompletedActionT,
+                                _cancellationToken
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double>(taskDoubles, oneCompletedActionT, _cancellationToken);
+                            _continuation = Task.Factory.ContinueWhenAny<double>(
+                                taskDoubles,
+                                oneCompletedActionT,
+                                _cancellationToken
+                            );
                     }
                     else if (_tm != TaskScheduler.Default)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double>(taskDoubles, allCompletedActionT, _cancellationToken, _tcOption, _tm);
+                            _continuation = Task.Factory.ContinueWhenAll<double>(
+                                taskDoubles,
+                                allCompletedActionT,
+                                _cancellationToken,
+                                _tcOption,
+                                _tm
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double>(taskDoubles, oneCompletedActionT, _cancellationToken, _tcOption, _tm);
+                            _continuation = Task.Factory.ContinueWhenAny<double>(
+                                taskDoubles,
+                                oneCompletedActionT,
+                                _cancellationToken,
+                                _tcOption,
+                                _tm
+                            );
                     }
                     else if (_tcOption != TaskContinuationOptions.None)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double>(taskDoubles, allCompletedActionT, _tcOption);
+                            _continuation = Task.Factory.ContinueWhenAll<double>(
+                                taskDoubles,
+                                allCompletedActionT,
+                                _tcOption
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double>(taskDoubles, oneCompletedActionT, _tcOption);
+                            _continuation = Task.Factory.ContinueWhenAny<double>(
+                                taskDoubles,
+                                oneCompletedActionT,
+                                _tcOption
+                            );
                     }
                     else
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double>(taskDoubles, allCompletedActionT);
+                            _continuation = Task.Factory.ContinueWhenAll<double>(
+                                taskDoubles,
+                                allCompletedActionT
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double>(taskDoubles, oneCompletedActionT);
+                            _continuation = Task.Factory.ContinueWhenAny<double>(
+                                taskDoubles,
+                                oneCompletedActionT
+                            );
                     }
 
                     break;
@@ -213,30 +281,64 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                     if (_cancellationToken.CanBeCanceled)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<bool>(_tasks, allCompletedFunc, _cancellationToken);
+                            _continuation = Task.Factory.ContinueWhenAll<bool>(
+                                _tasks,
+                                allCompletedFunc,
+                                _cancellationToken
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<bool>(_tasks, oneCompletedFunc, _cancellationToken);
+                            _continuation = Task.Factory.ContinueWhenAny<bool>(
+                                _tasks,
+                                oneCompletedFunc,
+                                _cancellationToken
+                            );
                     }
                     else if (_tm != TaskScheduler.Default)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<bool>(_tasks, allCompletedFunc, _cancellationToken, _tcOption, _tm);
+                            _continuation = Task.Factory.ContinueWhenAll<bool>(
+                                _tasks,
+                                allCompletedFunc,
+                                _cancellationToken,
+                                _tcOption,
+                                _tm
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<bool>(_tasks, oneCompletedFunc, _cancellationToken, _tcOption, _tm);
+                            _continuation = Task.Factory.ContinueWhenAny<bool>(
+                                _tasks,
+                                oneCompletedFunc,
+                                _cancellationToken,
+                                _tcOption,
+                                _tm
+                            );
                     }
                     else if (_tcOption != TaskContinuationOptions.None)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<bool>(_tasks, allCompletedFunc, _tcOption);
+                            _continuation = Task.Factory.ContinueWhenAll<bool>(
+                                _tasks,
+                                allCompletedFunc,
+                                _tcOption
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<bool>(_tasks, oneCompletedFunc, _tcOption);
+                            _continuation = Task.Factory.ContinueWhenAny<bool>(
+                                _tasks,
+                                oneCompletedFunc,
+                                _tcOption
+                            );
                     }
                     else
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<bool>(_tasks, allCompletedFunc);
+                            _continuation = Task.Factory.ContinueWhenAll<bool>(
+                                _tasks,
+                                allCompletedFunc
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<bool>(_tasks, oneCompletedFunc);
+                            _continuation = Task.Factory.ContinueWhenAny<bool>(
+                                _tasks,
+                                oneCompletedFunc
+                            );
                     }
 
                     break;
@@ -246,30 +348,64 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                     if (_cancellationToken.CanBeCanceled)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll(_tasks, allCompletedFunc, _cancellationToken);
+                            _continuation = Task<bool>.Factory.ContinueWhenAll(
+                                _tasks,
+                                allCompletedFunc,
+                                _cancellationToken
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny(_tasks, oneCompletedFunc, _cancellationToken);
+                            _continuation = Task<bool>.Factory.ContinueWhenAny(
+                                _tasks,
+                                oneCompletedFunc,
+                                _cancellationToken
+                            );
                     }
                     else if (_tm != TaskScheduler.Default)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll(_tasks, allCompletedFunc, _cancellationToken, _tcOption, _tm);
+                            _continuation = Task<bool>.Factory.ContinueWhenAll(
+                                _tasks,
+                                allCompletedFunc,
+                                _cancellationToken,
+                                _tcOption,
+                                _tm
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny(_tasks, oneCompletedFunc, _cancellationToken, _tcOption, _tm);
+                            _continuation = Task<bool>.Factory.ContinueWhenAny(
+                                _tasks,
+                                oneCompletedFunc,
+                                _cancellationToken,
+                                _tcOption,
+                                _tm
+                            );
                     }
                     else if (_tcOption != TaskContinuationOptions.None)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll(_tasks, allCompletedFunc, _tcOption);
+                            _continuation = Task<bool>.Factory.ContinueWhenAll(
+                                _tasks,
+                                allCompletedFunc,
+                                _tcOption
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny(_tasks, oneCompletedFunc, _tcOption);
+                            _continuation = Task<bool>.Factory.ContinueWhenAny(
+                                _tasks,
+                                oneCompletedFunc,
+                                _tcOption
+                            );
                     }
                     else
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll(_tasks, allCompletedFunc);
+                            _continuation = Task<bool>.Factory.ContinueWhenAll(
+                                _tasks,
+                                allCompletedFunc
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny(_tasks, oneCompletedFunc);
+                            _continuation = Task<bool>.Factory.ContinueWhenAny(
+                                _tasks,
+                                oneCompletedFunc
+                            );
                     }
 
                     break;
@@ -283,30 +419,64 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                     if (_cancellationToken.CanBeCanceled)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double, bool>(taskDoublesB, allCompletedFuncT, _cancellationToken);
+                            _continuation = Task.Factory.ContinueWhenAll<double, bool>(
+                                taskDoublesB,
+                                allCompletedFuncT,
+                                _cancellationToken
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double, bool>(taskDoublesB, oneCompletedFuncT, _cancellationToken);
+                            _continuation = Task.Factory.ContinueWhenAny<double, bool>(
+                                taskDoublesB,
+                                oneCompletedFuncT,
+                                _cancellationToken
+                            );
                     }
                     else if (_tm != TaskScheduler.Default)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double, bool>(taskDoublesB, allCompletedFuncT, _cancellationToken, _tcOption, _tm);
+                            _continuation = Task.Factory.ContinueWhenAll<double, bool>(
+                                taskDoublesB,
+                                allCompletedFuncT,
+                                _cancellationToken,
+                                _tcOption,
+                                _tm
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double, bool>(taskDoublesB, oneCompletedFuncT, _cancellationToken, _tcOption, _tm);
+                            _continuation = Task.Factory.ContinueWhenAny<double, bool>(
+                                taskDoublesB,
+                                oneCompletedFuncT,
+                                _cancellationToken,
+                                _tcOption,
+                                _tm
+                            );
                     }
                     else if (_tcOption != TaskContinuationOptions.None)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double, bool>(taskDoublesB, allCompletedFuncT, _tcOption);
+                            _continuation = Task.Factory.ContinueWhenAll<double, bool>(
+                                taskDoublesB,
+                                allCompletedFuncT,
+                                _tcOption
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double, bool>(taskDoublesB, oneCompletedFuncT, _tcOption);
+                            _continuation = Task.Factory.ContinueWhenAny<double, bool>(
+                                taskDoublesB,
+                                oneCompletedFuncT,
+                                _tcOption
+                            );
                     }
                     else
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task.Factory.ContinueWhenAll<double, bool>(taskDoublesB, allCompletedFuncT);
+                            _continuation = Task.Factory.ContinueWhenAll<double, bool>(
+                                taskDoublesB,
+                                allCompletedFuncT
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task.Factory.ContinueWhenAny<double, bool>(taskDoublesB, oneCompletedFuncT);
+                            _continuation = Task.Factory.ContinueWhenAny<double, bool>(
+                                taskDoublesB,
+                                oneCompletedFuncT
+                            );
                     }
 
                     break;
@@ -319,30 +489,64 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                     if (_cancellationToken.CanBeCanceled)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll<double>(taskDoublesC, allCompletedFuncT, _cancellationToken);
+                            _continuation = Task<bool>.Factory.ContinueWhenAll<double>(
+                                taskDoublesC,
+                                allCompletedFuncT,
+                                _cancellationToken
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny<double>(taskDoublesC, oneCompletedFuncT, _cancellationToken);
+                            _continuation = Task<bool>.Factory.ContinueWhenAny<double>(
+                                taskDoublesC,
+                                oneCompletedFuncT,
+                                _cancellationToken
+                            );
                     }
                     else if (_tm != TaskScheduler.Default)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll<double>(taskDoublesC, allCompletedFuncT, _cancellationToken, _tcOption, _tm);
+                            _continuation = Task<bool>.Factory.ContinueWhenAll<double>(
+                                taskDoublesC,
+                                allCompletedFuncT,
+                                _cancellationToken,
+                                _tcOption,
+                                _tm
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny<double>(taskDoublesC, oneCompletedFuncT, _cancellationToken, _tcOption, _tm);
+                            _continuation = Task<bool>.Factory.ContinueWhenAny<double>(
+                                taskDoublesC,
+                                oneCompletedFuncT,
+                                _cancellationToken,
+                                _tcOption,
+                                _tm
+                            );
                     }
                     else if (_tcOption != TaskContinuationOptions.None)
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll<double>(taskDoublesC, allCompletedFuncT, _tcOption);
+                            _continuation = Task<bool>.Factory.ContinueWhenAll<double>(
+                                taskDoublesC,
+                                allCompletedFuncT,
+                                _tcOption
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny<double>(taskDoublesC, oneCompletedFuncT, _tcOption);
+                            _continuation = Task<bool>.Factory.ContinueWhenAny<double>(
+                                taskDoublesC,
+                                oneCompletedFuncT,
+                                _tcOption
+                            );
                     }
                     else
                     {
                         if (_api == API.ContinueWhenAll)
-                            _continuation = Task<bool>.Factory.ContinueWhenAll<double>(taskDoublesC, allCompletedFuncT);
+                            _continuation = Task<bool>.Factory.ContinueWhenAll<double>(
+                                taskDoublesC,
+                                allCompletedFuncT
+                            );
                         else // must be API.ContinueWhenAny
-                            _continuation = Task<bool>.Factory.ContinueWhenAny<double>(taskDoublesC, oneCompletedFuncT);
+                            _continuation = Task<bool>.Factory.ContinueWhenAny<double>(
+                                taskDoublesC,
+                                oneCompletedFuncT
+                            );
                     }
 
                     break;
@@ -350,7 +554,9 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
 
             // check continuation is non-blocking, i.e., it does not block until all/one tasks finish
             if (_continuation.Status != TaskStatus.WaitingForActivation)
-                Assert.Fail(string.Format("continuation task should be created when none task finish"));
+                Assert.Fail(
+                    string.Format("continuation task should be created when none task finish")
+                );
 
             // allow continuation to kick off later
             foreach (Task t in _tasks)
@@ -378,20 +584,29 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             for (int i = 0; i < _taskInfos.Length; i++)
             {
                 int iCopy = i;
-                if (_taskType == TaskType.TaskContinueWithTask || _taskType == TaskType.TaskContinueWithTaskT)
+                if (
+                    _taskType == TaskType.TaskContinueWithTask
+                    || _taskType == TaskType.TaskContinueWithTaskT
+                )
                 {
-                    _taskInfos[i].Task = new Task(() =>
-                    {
-                        _taskInfos[iCopy].RunWorkload();
-                    }, _taskInfos[i].CancellationTokenSource.Token);
+                    _taskInfos[i].Task = new Task(
+                        () =>
+                        {
+                            _taskInfos[iCopy].RunWorkload();
+                        },
+                        _taskInfos[i].CancellationTokenSource.Token
+                    );
                 }
                 else
                 {
-                    _taskInfos[i].Task = new Task<double>(() =>
-                    {
-                        _taskInfos[iCopy].RunWorkload();
-                        return _taskInfos[iCopy].Result;
-                    }, _taskInfos[i].CancellationTokenSource.Token);
+                    _taskInfos[i].Task = new Task<double>(
+                        () =>
+                        {
+                            _taskInfos[iCopy].RunWorkload();
+                            return _taskInfos[iCopy].Result;
+                        },
+                        _taskInfos[i].CancellationTokenSource.Token
+                    );
                 }
 
                 _tasks[i] = _taskInfos[i].Task;
@@ -413,7 +628,12 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             }
 
             if (firstIncompleteTaskIndex != -1)
-                Assert.Fail(string.Format("ContinueWhenAll contract is broken -- Task at Index = {0} does not finish", firstIncompleteTaskIndex));
+                Assert.Fail(
+                    string.Format(
+                        "ContinueWhenAll contract is broken -- Task at Index = {0} does not finish",
+                        firstIncompleteTaskIndex
+                    )
+                );
 
             // do the sanity check against the input tasks
             CheckSequence(_tasks, inputTasks);
@@ -436,7 +656,12 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             }
 
             if (firstIncompleteTaskIndex != -1)
-                Assert.Fail(string.Format("ContinueWhenAll contract is broken -- Task at Index = {0} does not finish", firstIncompleteTaskIndex));
+                Assert.Fail(
+                    string.Format(
+                        "ContinueWhenAll contract is broken -- Task at Index = {0} does not finish",
+                        firstIncompleteTaskIndex
+                    )
+                );
 
             // do the sanity check against the input tasks
             CheckSequence(_tasks, inputTasks);
@@ -448,7 +673,9 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         private void VerifyAny(Task inputTask)
         {
             if (!inputTask.IsCompleted)
-                Assert.Fail(string.Format("ContinueWhenAny contract is broken -- none task has completed"));
+                Assert.Fail(
+                    string.Format("ContinueWhenAny contract is broken -- none task has completed")
+                );
 
             // do the sanity check against the input task
 
@@ -464,7 +691,9 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             }
 
             if (!found)
-                Assert.Fail(string.Format("input task do not exist in the expected original tasks"));
+                Assert.Fail(
+                    string.Format("input task do not exist in the expected original tasks")
+                );
 
             Verify();
         }
@@ -473,7 +702,9 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         private void VerifyAnyT(Task<double> inputTask)
         {
             if (!inputTask.IsCompleted)
-                Assert.Fail(string.Format("ContinueWhenAny contract is broken -- none task has completed"));
+                Assert.Fail(
+                    string.Format("ContinueWhenAny contract is broken -- none task has completed")
+                );
 
             // do the sanity check against the input task
 
@@ -490,7 +721,9 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             }
 
             if (!found)
-                Assert.Fail(string.Format("input task do not exist in the expected original tasks"));
+                Assert.Fail(
+                    string.Format("input task do not exist in the expected original tasks")
+                );
 
             Verify();
         }
@@ -499,23 +732,43 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         private void Verify()
         {
             // check against the taskCreationOptions
-            TaskCreationOptions option = (TaskCreationOptions)(_tcOption & ~TaskContinuationOptions.ExecuteSynchronously);
+            TaskCreationOptions option = (TaskCreationOptions)(
+                _tcOption & ~TaskContinuationOptions.ExecuteSynchronously
+            );
 
             if (TaskContinuationOptions.LazyCancellation != _tcOption)
             {
                 if (_continuation.CreationOptions != option)
-                    Assert.Fail(string.Format("Wrong TaskCreationOption of {0}, expecting {1}", _continuation.CreationOptions, _tcOption));
+                    Assert.Fail(
+                        string.Format(
+                            "Wrong TaskCreationOption of {0}, expecting {1}",
+                            _continuation.CreationOptions,
+                            _tcOption
+                        )
+                    );
             }
             else
             {
                 if (_continuation.CreationOptions != TaskCreationOptions.None)
-                    Assert.Fail(string.Format("Wrong TaskCreationOption of {0}, expecting {1}", _continuation.CreationOptions, TaskCreationOptions.None));
+                    Assert.Fail(
+                        string.Format(
+                            "Wrong TaskCreationOption of {0}, expecting {1}",
+                            _continuation.CreationOptions,
+                            TaskCreationOptions.None
+                        )
+                    );
             }
 
             // check against the taskScheduler
             // @TODO: add verification for SynchronizedTM, CustomizedTM later
             if (TaskScheduler.Current != _tm)
-                Assert.Fail(string.Format("Wrong TaskScheduler of {0}, expecting {1}", TaskScheduler.Current.Id, _tm.Id));
+                Assert.Fail(
+                    string.Format(
+                        "Wrong TaskScheduler of {0}, expecting {1}",
+                        TaskScheduler.Current.Id,
+                        _tm.Id
+                    )
+                );
 
             // check for the workload results
             for (int i = 0; i < _taskInfos.Length; i++)
@@ -531,15 +784,24 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                         ti.Task.Wait();
 
                         // should never come here
-                        Assert.Fail(string.Format("excepted TPLTestException in Task at Index = {0}  NOT caught", i));
+                        Assert.Fail(
+                            string.Format(
+                                "excepted TPLTestException in Task at Index = {0}  NOT caught",
+                                i
+                            )
+                        );
                     }
                     catch (AggregateException ex)
                     {
-                        ex.Flatten().Handle((e) =>
-                        {
-                            TPLTestException expectedExp = e as TPLTestException;
-                            return expectedExp != null && expectedExp.FromTaskId == ti.Task.Id;
-                        });
+                        ex.Flatten()
+                            .Handle(
+                                (e) =>
+                                {
+                                    TPLTestException expectedExp = e as TPLTestException;
+                                    return expectedExp != null
+                                        && expectedExp.FromTaskId == ti.Task.Id;
+                                }
+                            );
                     }
                 }
                 else if (workType == WorkloadType.Cancelled)
@@ -549,22 +811,38 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                         ti.Task.Wait();
 
                         // should never come here
-                        Assert.Fail(string.Format("excepted TaskCanceledException in Task at Index = {0}  NOT caught", i));
+                        Assert.Fail(
+                            string.Format(
+                                "excepted TaskCanceledException in Task at Index = {0}  NOT caught",
+                                i
+                            )
+                        );
                     }
                     catch (AggregateException ex)
                     {
-                        ex.Flatten().Handle((e) =>
-                        {
-                            TaskCanceledException expectedExp = e as TaskCanceledException;
-                            return expectedExp != null && expectedExp.Task == ti.Task;
-                        });
+                        ex.Flatten()
+                            .Handle(
+                                (e) =>
+                                {
+                                    TaskCanceledException expectedExp = e as TaskCanceledException;
+                                    return expectedExp != null && expectedExp.Task == ti.Task;
+                                }
+                            );
                     }
                 }
                 else
                 {
-                    double result = (ti.Task is Task<double>) ? ((Task<double>)(ti.Task)).Result : ti.Result;
+                    double result =
+                        (ti.Task is Task<double>) ? ((Task<double>)(ti.Task)).Result : ti.Result;
                     if (ti.Task.IsCompleted && !CheckResult(result))
-                        Assert.Fail(string.Format("Failed result verification in Task at Index = {0}. Task result is {1} TaskStatus is {2}", i, result, ti.Task.Status));
+                        Assert.Fail(
+                            string.Format(
+                                "Failed result verification in Task at Index = {0}. Task result is {1} TaskStatus is {2}",
+                                i,
+                                result,
+                                ti.Task.Status
+                            )
+                        );
 
                     //else if (ti.Thread == null && result != -1)
                     //{
@@ -609,7 +887,13 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
 
         public readonly bool WithCancellation;
 
-        public TestParameters(API api, TaskType taskType, TaskContinuationOptions continuationOptions, bool withCancellation, TaskInfo[] allTasks)
+        public TestParameters(
+            API api,
+            TaskType taskType,
+            TaskContinuationOptions continuationOptions,
+            bool withCancellation,
+            TaskInfo[] allTasks
+        )
         {
             Api = api;
             TaskType = taskType;
@@ -698,7 +982,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
                 {
                     Result = ZetaSequence((int)WorkType);
                 }
-                else  // task re-entry, mark it failed
+                else // task re-entry, mark it failed
                 {
                     Result = s_UNINITIALED_RESULT;
                 }
@@ -751,7 +1035,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
     {
         Exceptional = -2,
         Cancelled = -1,
-        VeryLight = 100,     // the number is the N input to the ZetaSequence workload
+        VeryLight = 100, // the number is the N input to the ZetaSequence workload
         Light = 200,
         Medium = 400,
         Heavy = 800,
@@ -765,12 +1049,12 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
     /// </summary>
     public enum TaskType
     {
-        TaskContinueWithTask,          // test Task.Factory.ContinueWhenAll/Any(..., Action,...)
-        TaskContinueWithTaskT,         // test Task<T>.Factory.ContinueWhenAll/Any(..., Func<>,...)
-        TaskContinueWithTaskT_NEW,     // test new overload of Task.Factory.ContinueWhenAll/Any<TNEW>(..., Func<>,...)
-        TaskTContinueWithTask,         // test Task.Factory.Factory.ContinueWhenAll/Any<T>(..., Action,...)
-        TaskTContinueWithTaskT,        // test Task<T>.Factory.Factory.ContinueWhenAll/Any<T>(..., Func<>,...)
-        TaskTContinueWithTaskT_NEW,    // test new overload of Task.Factory.Factory.ContinueWhenAll/Any<T1, T2>(..., Func<>,...)
+        TaskContinueWithTask, // test Task.Factory.ContinueWhenAll/Any(..., Action,...)
+        TaskContinueWithTaskT, // test Task<T>.Factory.ContinueWhenAll/Any(..., Func<>,...)
+        TaskContinueWithTaskT_NEW, // test new overload of Task.Factory.ContinueWhenAll/Any<TNEW>(..., Func<>,...)
+        TaskTContinueWithTask, // test Task.Factory.Factory.ContinueWhenAll/Any<T>(..., Action,...)
+        TaskTContinueWithTaskT, // test Task<T>.Factory.Factory.ContinueWhenAll/Any<T>(..., Func<>,...)
+        TaskTContinueWithTaskT_NEW, // test new overload of Task.Factory.Factory.ContinueWhenAll/Any<T1, T2>(..., Func<>,...)
     }
 
     #endregion
@@ -781,8 +1065,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest0()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskContinueWithTaskT, TaskContinuationOptions.ExecuteSynchronously, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskContinueWithTaskT,
+                TaskContinuationOptions.ExecuteSynchronously,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -794,8 +1084,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node3 = new TaskInfo(WorkloadType.Light);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskContinueWithTaskT, TaskContinuationOptions.None, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskContinueWithTaskT,
+                TaskContinuationOptions.None,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -810,8 +1106,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node3 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node4 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node5 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskContinueWithTaskT, TaskContinuationOptions.PreferFairness, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskContinueWithTaskT,
+                TaskContinuationOptions.PreferFairness,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -824,8 +1126,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Heavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.Light);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskContinueWithTaskT, TaskContinuationOptions.AttachedToParent, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskContinueWithTaskT,
+                TaskContinuationOptions.AttachedToParent,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -835,8 +1143,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest4()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
-            TaskInfo[] allTasks = new[] { node1, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskContinueWithTaskT, TaskContinuationOptions.LongRunning, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskContinueWithTaskT,
+                TaskContinuationOptions.LongRunning,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -849,8 +1163,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskContinueWithTaskT_NEW, TaskContinuationOptions.AttachedToParent, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskContinueWithTaskT_NEW,
+                TaskContinuationOptions.AttachedToParent,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -864,8 +1184,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node3 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node4 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node5 = new TaskInfo(WorkloadType.Exceptional);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskContinueWithTaskT_NEW, TaskContinuationOptions.ExecuteSynchronously, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskContinueWithTaskT_NEW,
+                TaskContinuationOptions.ExecuteSynchronously,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -880,8 +1206,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node3 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node4 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node5 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskContinueWithTaskT_NEW, TaskContinuationOptions.None, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskContinueWithTaskT_NEW,
+                TaskContinuationOptions.None,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -891,8 +1223,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest8()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Cancelled);
-            TaskInfo[] allTasks = new[] { node1, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskContinueWithTaskT_NEW, TaskContinuationOptions.LongRunning, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskContinueWithTaskT_NEW,
+                TaskContinuationOptions.LongRunning,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -905,8 +1243,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskContinueWithTask, TaskContinuationOptions.PreferFairness, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskContinueWithTask,
+                TaskContinuationOptions.PreferFairness,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -921,8 +1265,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node4 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node5 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskContinueWithTask, TaskContinuationOptions.AttachedToParent, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskContinueWithTask,
+                TaskContinuationOptions.AttachedToParent,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -938,8 +1288,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node4 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node5 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node6 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskContinueWithTask, TaskContinuationOptions.PreferFairness, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskContinueWithTask,
+                TaskContinuationOptions.PreferFairness,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -949,20 +1305,33 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest12()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskContinueWithTask, TaskContinuationOptions.ExecuteSynchronously, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskContinueWithTask,
+                TaskContinuationOptions.ExecuteSynchronously,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskContinueWithAllAnyTest13()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node3 = new TaskInfo(WorkloadType.Light);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskContinueWithTask, TaskContinuationOptions.LongRunning, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskContinueWithTask,
+                TaskContinuationOptions.LongRunning,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -977,8 +1346,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node3 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node4 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node5 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskContinueWithTask, TaskContinuationOptions.None, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskContinueWithTask,
+                TaskContinuationOptions.None,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -989,8 +1364,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskTContinueWithTaskT, TaskContinuationOptions.AttachedToParent, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskTContinueWithTaskT,
+                TaskContinuationOptions.AttachedToParent,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1000,13 +1381,18 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest16()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
-            TaskInfo[] allTasks = new[] { node1, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskTContinueWithTaskT, TaskContinuationOptions.ExecuteSynchronously, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskTContinueWithTaskT,
+                TaskContinuationOptions.ExecuteSynchronously,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
-
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         [OuterLoop]
@@ -1015,8 +1401,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskTContinueWithTaskT, TaskContinuationOptions.LongRunning, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskTContinueWithTaskT,
+                TaskContinuationOptions.LongRunning,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1030,8 +1422,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node3 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node4 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node5 = new TaskInfo(WorkloadType.Exceptional);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskTContinueWithTaskT, TaskContinuationOptions.None, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskTContinueWithTaskT,
+                TaskContinuationOptions.None,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1043,8 +1441,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskTContinueWithTaskT, TaskContinuationOptions.PreferFairness, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskTContinueWithTaskT,
+                TaskContinuationOptions.PreferFairness,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1054,8 +1458,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest20()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskTContinueWithTaskT_NEW, TaskContinuationOptions.ExecuteSynchronously, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskTContinueWithTaskT_NEW,
+                TaskContinuationOptions.ExecuteSynchronously,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1065,8 +1475,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest21()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Cancelled);
-            TaskInfo[] allTasks = new[] { node1, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskTContinueWithTaskT_NEW, TaskContinuationOptions.LongRunning, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskTContinueWithTaskT_NEW,
+                TaskContinuationOptions.LongRunning,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1079,8 +1495,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskTContinueWithTaskT_NEW, TaskContinuationOptions.None, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskTContinueWithTaskT_NEW,
+                TaskContinuationOptions.None,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1092,8 +1514,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node3 = new TaskInfo(WorkloadType.Light);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskTContinueWithTaskT_NEW, TaskContinuationOptions.PreferFairness, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskTContinueWithTaskT_NEW,
+                TaskContinuationOptions.PreferFairness,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1108,8 +1536,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node4 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node5 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskTContinueWithTaskT_NEW, TaskContinuationOptions.AttachedToParent, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskTContinueWithTaskT_NEW,
+                TaskContinuationOptions.AttachedToParent,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1119,8 +1553,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest25()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskTContinueWithTask, TaskContinuationOptions.AttachedToParent, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskTContinueWithTask,
+                TaskContinuationOptions.AttachedToParent,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1140,8 +1580,26 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node8 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node9 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node10 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskTContinueWithTask, TaskContinuationOptions.LongRunning, false, allTasks);
+            TaskInfo[] allTasks = new[]
+            {
+                node1,
+                node2,
+                node3,
+                node4,
+                node5,
+                node6,
+                node7,
+                node8,
+                node9,
+                node10,
+            };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskTContinueWithTask,
+                TaskContinuationOptions.LongRunning,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1157,8 +1615,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node5 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node6 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node7 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskTContinueWithTask, TaskContinuationOptions.None, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskTContinueWithTask,
+                TaskContinuationOptions.None,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1178,8 +1642,26 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node8 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node9 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node10 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskTContinueWithTask, TaskContinuationOptions.ExecuteSynchronously, false, allTasks);
+            TaskInfo[] allTasks = new[]
+            {
+                node1,
+                node2,
+                node3,
+                node4,
+                node5,
+                node6,
+                node7,
+                node8,
+                node9,
+                node10,
+            };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskTContinueWithTask,
+                TaskContinuationOptions.ExecuteSynchronously,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1199,8 +1681,26 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node8 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node9 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node10 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskTContinueWithTask, TaskContinuationOptions.PreferFairness, false, allTasks);
+            TaskInfo[] allTasks = new[]
+            {
+                node1,
+                node2,
+                node3,
+                node4,
+                node5,
+                node6,
+                node7,
+                node8,
+                node9,
+                node10,
+            };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskTContinueWithTask,
+                TaskContinuationOptions.PreferFairness,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1220,78 +1720,138 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node8 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node9 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node10 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskContinueWithTaskT_NEW, TaskContinuationOptions.None, true, allTasks);
+            TaskInfo[] allTasks = new[]
+            {
+                node1,
+                node2,
+                node3,
+                node4,
+                node5,
+                node6,
+                node7,
+                node8,
+                node9,
+                node10,
+            };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskContinueWithTaskT_NEW,
+                TaskContinuationOptions.None,
+                true,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskContinueWithAllAnyTest31()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskContinueWithTaskT_NEW, TaskContinuationOptions.None, true, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskContinueWithTaskT_NEW,
+                TaskContinuationOptions.None,
+                true,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskContinueWithAllAnyTest32()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskTContinueWithTaskT_NEW, TaskContinuationOptions.None, true, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskTContinueWithTaskT_NEW,
+                TaskContinuationOptions.None,
+                true,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskContinueWithAllAnyTest33()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskTContinueWithTaskT_NEW, TaskContinuationOptions.None, true, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskTContinueWithTaskT_NEW,
+                TaskContinuationOptions.None,
+                true,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskContinueWithAllAnyTest34()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskTContinueWithTaskT_NEW, TaskContinuationOptions.LazyCancellation, true, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskTContinueWithTaskT_NEW,
+                TaskContinuationOptions.LazyCancellation,
+                true,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskContinueWithAllAnyTest35()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskContinueWithTask, TaskContinuationOptions.LazyCancellation, true, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskContinueWithTask,
+                TaskContinuationOptions.LazyCancellation,
+                true,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskContinueWithAllAnyTest36()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskContinueWithTaskT, TaskContinuationOptions.LazyCancellation, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskContinueWithTaskT,
+                TaskContinuationOptions.LazyCancellation,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1303,8 +1863,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskTContinueWithTask, TaskContinuationOptions.LazyCancellation, false, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskTContinueWithTask,
+                TaskContinuationOptions.LazyCancellation,
+                false,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1316,8 +1882,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAny, TaskType.TaskTContinueWithTaskT, TaskContinuationOptions.LazyCancellation, true, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAny,
+                TaskType.TaskTContinueWithTaskT,
+                TaskContinuationOptions.LazyCancellation,
+                true,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
@@ -1329,8 +1901,14 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, };
-            TestParameters parameters = new TestParameters(API.ContinueWhenAll, TaskType.TaskTContinueWithTaskT_NEW, TaskContinuationOptions.LazyCancellation, true, allTasks);
+            TaskInfo[] allTasks = new[] { node1, node2 };
+            TestParameters parameters = new TestParameters(
+                API.ContinueWhenAll,
+                TaskType.TaskTContinueWithTaskT_NEW,
+                TaskContinuationOptions.LazyCancellation,
+                true,
+                allTasks
+            );
 
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();

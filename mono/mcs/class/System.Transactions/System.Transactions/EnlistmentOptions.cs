@@ -10,10 +10,10 @@
 
 namespace System.Transactions
 {
-	[Flags]
-	public enum EnlistmentOptions {
-		None,
-		EnlistDuringPrepareRequired,
-	}
+    [Flags]
+    public enum EnlistmentOptions
+    {
+        None,
+        EnlistDuringPrepareRequired,
+    }
 }
-

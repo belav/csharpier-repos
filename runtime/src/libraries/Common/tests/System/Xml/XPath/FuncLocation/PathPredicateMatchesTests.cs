@@ -26,8 +26,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var startingNodePath = "/Doc/Chap";
             var testExpression = @"descendant::*[3]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -45,7 +49,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"child::*[position() >= 2][position() <= 4]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -63,7 +73,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[publication/country]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -80,8 +96,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var startingNodePath = "/bookstore/book/author";
             var testExpression = @"(book/author)[last-name=(/bookstore/book/author/last-name)[1]]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -99,7 +119,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[last-name!=(/bookstore/book/author)[1]/last-name]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -117,7 +143,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[last-name<=(/bookstore/book/author[1]/last-name)]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -135,7 +167,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book[price=55]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -153,7 +191,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[parent::book/price!=55.56]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -171,7 +215,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[parent::book/price<=10.0001]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -189,7 +239,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[parent::book/price>=.0001]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -207,7 +263,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[parent::book/price<10.0]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -225,7 +287,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[parent::book/price>55.0]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -243,7 +311,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[parent::book/price>55.0]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -261,7 +335,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[last-name='Bob']";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -279,7 +359,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[last-name!='Bob']";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -297,7 +383,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[last-name>='Robinson']";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -315,7 +407,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[last-name>'R']";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -333,7 +431,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[last-name<'Boc']";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -351,7 +455,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/author[award=true()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -369,7 +479,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/title[true()!=false()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -387,7 +503,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/title[true()=5]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -405,7 +527,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book/title[false()!='gramps']";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -423,7 +551,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"magazine/title[-23.987 = -23.987]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -441,7 +575,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"magazine/title[0!=' -  100   ']";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -459,7 +599,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"magazine/title['z'='z']";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -476,8 +622,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var startingNodePath = "/bookstore/book[3]/title";
             var testExpression = @"(book/title)[2+1]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -494,8 +644,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var startingNodePath = "/bookstore/book[2]/title";
             var testExpression = @"(book/title)[100-98]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -512,8 +666,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var startingNodePath = "/bookstore/book[3]/title";
             var testExpression = @"(book/title)[(8/4)=2]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -530,8 +688,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var startingNodePath = "/bookstore/book[4]/title";
             var testExpression = @"(book/title)[2*2]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -548,8 +710,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var startingNodePath = "/bookstore/book[5]/title";
             var testExpression = @"(book/title)[5.01]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -567,7 +733,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book / author  /      last-name";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -584,8 +756,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var startingNodePath = "/bookstore";
             var testExpression = @"child::node()[Schema|]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -603,7 +779,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"*[@style]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -621,7 +803,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"bookstore//author[degree and award]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -639,7 +827,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"bookstore//author[(degree or award) and publication]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -657,7 +851,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"bookstore//author[degree and not(publication)]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -675,7 +875,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"book['!']";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -693,7 +899,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"*[self::comment()]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -726,8 +938,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var startingNodePath = "/bookstore/book";
             var testExpression = @"/bookstore/book[ancestor(.)]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -745,7 +961,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore/*/title[ancestor::book]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -763,7 +985,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"//*[following::book]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -781,7 +1009,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore/magazine[following::book]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -796,10 +1030,17 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var startingNodePath = "/bookstore/magazine[6]";
-            var testExpression = @"/bookstore/magazine[preceding::book[title='How To Fix Computers']]";
+            var testExpression =
+                @"/bookstore/magazine[preceding::book[title='How To Fix Computers']]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -817,7 +1058,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore/magazine[preceding-sibling::book]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -835,7 +1082,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore/magazine[ancestor-or-self::magazine]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -853,7 +1106,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore/book[child::title]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -871,7 +1130,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore/* [descendant::title]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -889,7 +1154,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore/*/title [parent::book]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -907,7 +1178,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore/* [following-sibling::book]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -925,7 +1202,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore/* [attribute::frequency]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -960,7 +1243,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore/*[descendant-or-self::*]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -978,7 +1267,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore/book[0]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -996,7 +1291,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore/book[1] [2]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1013,8 +1314,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var startingNodePath = "/bookstore";
             var testExpression = @"/bookstore/book/ancestor::node()[2]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1032,7 +1337,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore//* [position()=count(parent::node()/child::*)]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1051,7 +1362,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"//node() [position()=count(parent::node()/child::node())]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1072,8 +1389,14 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             namespaceManager.AddNamespace("my", "urn:http//www.placeholder-name-here.com/schema/");
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1108,7 +1431,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"//node() [position() = //*]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1126,8 +1455,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression =
                 @"/bookstore/book[7]/preceding::*[ self::magazine and position()=last()-count(//*[self::magazine])+21]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1145,8 +1478,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression =
                 @"/bookstore/book[7]/preceding::* [self::magazine and position()=last()-count(//*[self::book])]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1161,10 +1498,15 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var startingNodePath = "/bookstore/magazine[last()]";
-            var testExpression = @"/bookstore/book[7]/preceding::* [self::magazine and position()=last()-count(//book)]";
+            var testExpression =
+                @"/bookstore/book[7]/preceding::* [self::magazine and position()=last()-count(//book)]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1182,7 +1524,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"//node() [boolean(self::*)=false()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1200,8 +1548,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression =
                 @"/bookstore/book[1]/following::* [following-sibling::*[self::magazine] and count(following-sibling::magazine)>5]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1219,8 +1571,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression =
                 @"/bookstore/book[1]/self::* [(following-sibling::*[self::magazine]) and count(following-sibling::magazine)>5 and boolean(preceding-sibling::*)=false()][position()=last() and position()= 1]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1238,7 +1594,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"bookstore//author[true() and true()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1256,7 +1618,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"bookstore//author[true() or true()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1273,7 +1641,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore//*[position()=3]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1290,7 +1664,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"/bookstore//*[position()=3][.=""12""]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1308,7 +1688,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                 @"/bookstore/*[position()=1][title=""Seven Years in Trenton""]/author[count(child::*)=4][count(preceding-sibling::*)=1]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1322,10 +1708,17 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[1]/author";
-            var testExpression = @"/bookstore/*[position()=1]/author[count(child::*)=4][count(preceding-sibling::*)=1]";
+            var testExpression =
+                @"/bookstore/*[position()=1]/author[count(child::*)=4][count(preceding-sibling::*)=1]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1342,8 +1735,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var startingNodePath = "/bookstore/book";
             var testExpression = @"book[!]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
     }
 }

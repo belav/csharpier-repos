@@ -11,10 +11,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
     {
         public const string Kind = "CodeAction_Warning";
 
-        public static SyntaxAnnotation Create(string description)
-            => new(Kind, description);
+        public static SyntaxAnnotation Create(string description) => new(Kind, description);
 
-        public static string? GetDescription(SyntaxAnnotation annotation)
-            => annotation.Data;
+        public static string? GetDescription(SyntaxAnnotation annotation) => annotation.Data;
     }
 }

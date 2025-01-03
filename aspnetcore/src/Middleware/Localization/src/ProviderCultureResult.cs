@@ -16,9 +16,7 @@ public class ProviderCultureResult
     /// </summary>
     /// <param name="culture">The name of the culture to be used for formatting, text, i.e. language.</param>
     public ProviderCultureResult(StringSegment culture)
-        : this(new List<StringSegment> { culture }, new List<StringSegment> { culture })
-    {
-    }
+        : this(new List<StringSegment> { culture }, new List<StringSegment> { culture }) { }
 
     /// <summary>
     /// Creates a new <see cref="ProviderCultureResult"/> object has its <see cref="Cultures"/> and
@@ -27,9 +25,7 @@ public class ProviderCultureResult
     /// <param name="culture">The name of the culture to be used for formatting.</param>
     /// <param name="uiCulture"> The name of the ui culture to be used for text, i.e. language.</param>
     public ProviderCultureResult(StringSegment culture, StringSegment uiCulture)
-        : this(new List<StringSegment> { culture }, new List<StringSegment> { uiCulture })
-    {
-    }
+        : this(new List<StringSegment> { culture }, new List<StringSegment> { uiCulture }) { }
 
     /// <summary>
     /// Creates a new <see cref="ProviderCultureResult"/> object that has its <see cref="Cultures"/> and
@@ -37,9 +33,7 @@ public class ProviderCultureResult
     /// </summary>
     /// <param name="cultures">The list of cultures to be used for formatting, text, i.e. language.</param>
     public ProviderCultureResult(IList<StringSegment> cultures)
-        : this(cultures, cultures)
-    {
-    }
+        : this(cultures, cultures) { }
 
     /// <summary>
     /// Creates a new <see cref="ProviderCultureResult"/> object has its <see cref="Cultures"/> and

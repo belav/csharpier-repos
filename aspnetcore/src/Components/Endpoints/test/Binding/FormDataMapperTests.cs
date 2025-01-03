@@ -23,7 +23,10 @@ public class FormDataMapperTests
     public void CanDeserialize_PrimitiveTypes(string value, Type type, object expected)
     {
         // Arrange
-        var collection = new Dictionary<string, StringValues>() { ["value"] = new StringValues(value) };
+        var collection = new Dictionary<string, StringValues>()
+        {
+            ["value"] = new StringValues(value),
+        };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
         var options = new FormDataMapperOptions();
@@ -43,7 +46,10 @@ public class FormDataMapperTests
     public void CanDeserialize_EnumTypes(string value, Colors expected)
     {
         // Arrange
-        var collection = new Dictionary<string, StringValues>() { ["value"] = new StringValues(value) };
+        var collection = new Dictionary<string, StringValues>()
+        {
+            ["value"] = new StringValues(value),
+        };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
         var options = new FormDataMapperOptions();
@@ -63,7 +69,10 @@ public class FormDataMapperTests
     public void CanDeserialize_NullableEnumTypes(string value, Colors expected)
     {
         // Arrange
-        var collection = new Dictionary<string, StringValues>() { ["value"] = new StringValues(value) };
+        var collection = new Dictionary<string, StringValues>()
+        {
+            ["value"] = new StringValues(value),
+        };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
         var options = new FormDataMapperOptions();
@@ -75,7 +84,11 @@ public class FormDataMapperTests
         Assert.Equal(expected, result);
     }
 
-    private FormDataReader CreateFormDataReader(Dictionary<string, StringValues> collection, CultureInfo invariantCulture, IFormFileCollection formFileCollection = null)
+    private FormDataReader CreateFormDataReader(
+        Dictionary<string, StringValues> collection,
+        CultureInfo invariantCulture,
+        IFormFileCollection formFileCollection = null
+    )
     {
         var dictionary = new Dictionary<FormKey, StringValues>(collection.Count);
         foreach (var kvp in collection)
@@ -84,7 +97,12 @@ public class FormDataMapperTests
         }
         return formFileCollection is null
             ? new FormDataReader(dictionary, CultureInfo.InvariantCulture, new char[2048])
-            : new FormDataReader(dictionary, CultureInfo.InvariantCulture, new char[2048], formFileCollection);
+            : new FormDataReader(
+                dictionary,
+                CultureInfo.InvariantCulture,
+                new char[2048],
+                formFileCollection
+            );
     }
 
     [Theory]
@@ -116,16 +134,24 @@ public class FormDataMapperTests
     public void Throws_ForInvalidValues()
     {
         // Arrange
-        var collection = new Dictionary<string, StringValues>() { ["value"] = new StringValues("abc") };
+        var collection = new Dictionary<string, StringValues>()
+        {
+            ["value"] = new StringValues("abc"),
+        };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
         var options = new FormDataMapperOptions();
 
         // Act & Assert
-        var exception = Assert.Throws<FormDataMappingException>(() => FormDataMapper.Map<int>(reader, options));
+        var exception = Assert.Throws<FormDataMappingException>(
+            () => FormDataMapper.Map<int>(reader, options)
+        );
         Assert.NotNull(exception?.Error);
         Assert.Equal("value", exception.Error.Key);
-        Assert.Equal("The value 'abc' is not valid for 'value'.", exception.Error.Message.ToString(reader.Culture));
+        Assert.Equal(
+            "The value 'abc' is not valid for 'value'.",
+            exception.Error.Message.ToString(reader.Culture)
+        );
         Assert.Equal("abc", exception.Error.Value);
     }
 
@@ -133,7 +159,10 @@ public class FormDataMapperTests
     public void CanCollectErrors_WithCustomHandler_ForInvalidValues()
     {
         // Arrange
-        var collection = new Dictionary<string, StringValues>() { ["value"] = new StringValues("abc") };
+        var collection = new Dictionary<string, StringValues>()
+        {
+            ["value"] = new StringValues("abc"),
+        };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         var errors = new List<FormDataMappingError>();
         reader.ErrorHandler = (key, message, attemptedValue) =>
@@ -150,7 +179,10 @@ public class FormDataMapperTests
         var error = Assert.Single(errors);
         Assert.NotNull(error);
         Assert.Equal("value", error.Key);
-        Assert.Equal("The value 'abc' is not valid for 'value'.", error.Message.ToString(reader.Culture));
+        Assert.Equal(
+            "The value 'abc' is not valid for 'value'.",
+            error.Message.ToString(reader.Culture)
+        );
         Assert.Equal("abc", error.Value);
     }
 
@@ -159,7 +191,10 @@ public class FormDataMapperTests
     public void CanDeserialize_NullablePrimitiveTypes(string value, Type type, object expected)
     {
         // Arrange
-        var collection = new Dictionary<string, StringValues>() { ["value"] = new StringValues(value) };
+        var collection = new Dictionary<string, StringValues>()
+        {
+            ["value"] = new StringValues(value),
+        };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
         var options = new FormDataMapperOptions();
@@ -193,7 +228,10 @@ public class FormDataMapperTests
     public void CanDeserialize_Uri(string value, Uri expected)
     {
         // Arrange
-        var collection = new Dictionary<string, StringValues>() { ["value"] = new StringValues(value) };
+        var collection = new Dictionary<string, StringValues>()
+        {
+            ["value"] = new StringValues(value),
+        };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
         var options = new FormDataMapperOptions();
@@ -210,7 +248,10 @@ public class FormDataMapperTests
     public void CanDeserialize_ComplexTypes_WithUriProperties(string value, Uri expected)
     {
         // Arrange
-        var collection = new Dictionary<string, StringValues>() { ["value.Slug"] = new StringValues(value) };
+        var collection = new Dictionary<string, StringValues>()
+        {
+            ["value.Slug"] = new StringValues(value),
+        };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
         var options = new FormDataMapperOptions();
@@ -223,20 +264,24 @@ public class FormDataMapperTests
         Assert.Equal(expected, result.Slug);
     }
 
-    public static TheoryData<string, Uri> UriTestData => new TheoryData<string, Uri>
-    {
-        { "http://www.example.com", new Uri("http://www.example.com") },
-        { "http://www.example.com/path", new Uri("http://www.example.com/path") },
-        { "http://www.example.com/path/", new Uri("http://www.example.com/path/") },
-        { "/path", new Uri("/path", UriKind.Relative) },
-    };
+    public static TheoryData<string, Uri> UriTestData =>
+        new TheoryData<string, Uri>
+        {
+            { "http://www.example.com", new Uri("http://www.example.com") },
+            { "http://www.example.com/path", new Uri("http://www.example.com/path") },
+            { "http://www.example.com/path/", new Uri("http://www.example.com/path/") },
+            { "/path", new Uri("/path", UriKind.Relative) },
+        };
 
     [Fact]
     public void CanDeserialize_CustomParsableTypes()
     {
         // Arrange
         var expected = new Point { X = 1, Y = 1 };
-        var collection = new Dictionary<string, StringValues>() { ["value"] = new StringValues("(1,1)") };
+        var collection = new Dictionary<string, StringValues>()
+        {
+            ["value"] = new StringValues("(1,1)"),
+        };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
         var options = new FormDataMapperOptions();
@@ -254,7 +299,10 @@ public class FormDataMapperTests
     {
         // Arrange
         var expected = new ValuePoint { X = 1, Y = 1 };
-        var collection = new Dictionary<string, StringValues>() { ["value"] = new StringValues("(1,1)") };
+        var collection = new Dictionary<string, StringValues>()
+        {
+            ["value"] = new StringValues("(1,1)"),
+        };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
         var options = new FormDataMapperOptions();
@@ -281,6 +329,7 @@ public class FormDataMapperTests
         // Assert
         Assert.Null(result);
     }
+
 #nullable disable
 
     [Fact]
@@ -319,7 +368,10 @@ public class FormDataMapperTests
     public void Deserialize_Collections_SupportsMultipleElementsPerKey_ForSingleValueElementTypes_ParsableTypes()
     {
         // Arrange
-        var data = new Dictionary<string, StringValues>() { ["values"] = new StringValues(new[] { "10", "11" }) };
+        var data = new Dictionary<string, StringValues>()
+        {
+            ["values"] = new StringValues(new[] { "10", "11" }),
+        };
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         reader.PushPrefix("values");
         var options = new FormDataMapperOptions();
@@ -328,16 +380,17 @@ public class FormDataMapperTests
         var result = FormDataMapper.Map<List<int>>(reader, options);
 
         // Assert
-        Assert.Collection(result,
-            v => Assert.Equal(10, v),
-            v => Assert.Equal(11, v));
+        Assert.Collection(result, v => Assert.Equal(10, v), v => Assert.Equal(11, v));
     }
 
     [Fact]
     public void Deserialize_Collections_SupportsMultipleElementsPerKey_ForSingleValueElementTypes_EnumTypes()
     {
         // Arrange
-        var data = new Dictionary<string, StringValues>() { ["values"] = new StringValues(new[] { "Red", "Blue" }) };
+        var data = new Dictionary<string, StringValues>()
+        {
+            ["values"] = new StringValues(new[] { "Red", "Blue" }),
+        };
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         reader.PushPrefix("values");
         var options = new FormDataMapperOptions();
@@ -346,16 +399,21 @@ public class FormDataMapperTests
         var result = FormDataMapper.Map<List<Colors>>(reader, options);
 
         // Assert
-        Assert.Collection(result,
+        Assert.Collection(
+            result,
             v => Assert.Equal(Colors.Red, v),
-            v => Assert.Equal(Colors.Blue, v));
+            v => Assert.Equal(Colors.Blue, v)
+        );
     }
 
     [Fact]
     public void Deserialize_Collections_SupportsMultipleElementsPerKey_ForSingleValueElementTypes_Nullable_WhenUnderlyingElementIsSingleValue()
     {
         // Arrange
-        var data = new Dictionary<string, StringValues>() { ["values"] = new StringValues(new[] { "Red", "Blue" }) };
+        var data = new Dictionary<string, StringValues>()
+        {
+            ["values"] = new StringValues(new[] { "Red", "Blue" }),
+        };
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         reader.PushPrefix("values");
         var options = new FormDataMapperOptions();
@@ -364,16 +422,21 @@ public class FormDataMapperTests
         var result = FormDataMapper.Map<List<Colors?>>(reader, options);
 
         // Assert
-        Assert.Collection(result,
+        Assert.Collection(
+            result,
             v => Assert.Equal(Colors.Red, v),
-            v => Assert.Equal(Colors.Blue, v));
+            v => Assert.Equal(Colors.Blue, v)
+        );
     }
 
     [Fact]
     public void Deserialize_Collections_MultipleElementsPerKey_CanReportErrors()
     {
         // Arrange
-        var data = new Dictionary<string, StringValues>() { ["values"] = new StringValues(new[] { "10", "a" }) };
+        var data = new Dictionary<string, StringValues>()
+        {
+            ["values"] = new StringValues(new[] { "10", "a" }),
+        };
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         reader.PushPrefix("values");
         var errors = new List<FormDataMappingError>();
@@ -391,14 +454,20 @@ public class FormDataMapperTests
         Assert.Equal(10, Assert.Single(result));
         var error = Assert.Single(errors);
         Assert.Equal("values", error.Key);
-        Assert.Equal("The value 'a' is not valid for 'values'.", error.Message.ToString(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "The value 'a' is not valid for 'values'.",
+            error.Message.ToString(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public void Deserialize_Collections_MultipleElementsPerKey_ContinuesProcessingValuesAfterErrors()
     {
         // Arrange
-        var data = new Dictionary<string, StringValues>() { ["values"] = new StringValues(new[] { "10", "a", "11" }) };
+        var data = new Dictionary<string, StringValues>()
+        {
+            ["values"] = new StringValues(new[] { "10", "a", "11" }),
+        };
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         reader.PushPrefix("values");
         var errors = new List<FormDataMappingError>();
@@ -413,12 +482,13 @@ public class FormDataMapperTests
         var result = FormDataMapper.Map<List<int>>(reader, options);
 
         // Assert
-        Assert.Collection(result,
-            v => Assert.Equal(10, v),
-            v => Assert.Equal(11, v));
+        Assert.Collection(result, v => Assert.Equal(10, v), v => Assert.Equal(11, v));
         var error = Assert.Single(errors);
         Assert.Equal("values", error.Key);
-        Assert.Equal("The value 'a' is not valid for 'values'.", error.Message.ToString(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "The value 'a' is not valid for 'values'.",
+            error.Message.ToString(CultureInfo.InvariantCulture)
+        );
     }
 
     [Theory]
@@ -428,16 +498,17 @@ public class FormDataMapperTests
     public void Deserialize_Collections_HandlesComputedIndexesBoundaryCorrectly(int size)
     {
         // Arrange
-        var data = new Dictionary<string, StringValues>(Enumerable.Range(0, size)
-            .Select(i => new KeyValuePair<string, StringValues>(
-                $"[{i.ToString(CultureInfo.InvariantCulture)}]",
-                (i + 10).ToString(CultureInfo.InvariantCulture))));
+        var data = new Dictionary<string, StringValues>(
+            Enumerable
+                .Range(0, size)
+                .Select(i => new KeyValuePair<string, StringValues>(
+                    $"[{i.ToString(CultureInfo.InvariantCulture)}]",
+                    (i + 10).ToString(CultureInfo.InvariantCulture)
+                ))
+        );
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
-        var options = new FormDataMapperOptions
-        {
-            MaxCollectionSize = 110
-        };
+        var options = new FormDataMapperOptions { MaxCollectionSize = 110 };
 
         // Act
         var result = FormDataMapper.Map<List<int>>(reader, options);
@@ -459,22 +530,24 @@ public class FormDataMapperTests
         var rented = new List<int[]>();
         var returned = new List<int[]>();
 
-        var data = new Dictionary<string, StringValues>(Enumerable.Range(0, size)
-            .Select(i => new KeyValuePair<string, StringValues>(
-                $"[{i.ToString(CultureInfo.InvariantCulture)}]",
-                (i + 10).ToString(CultureInfo.InvariantCulture))));
+        var data = new Dictionary<string, StringValues>(
+            Enumerable
+                .Range(0, size)
+                .Select(i => new KeyValuePair<string, StringValues>(
+                    $"[{i.ToString(CultureInfo.InvariantCulture)}]",
+                    (i + 10).ToString(CultureInfo.InvariantCulture)
+                ))
+        );
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
-        var options = new FormDataMapperOptions
-        {
-            MaxCollectionSize = 140
-        };
+        var options = new FormDataMapperOptions { MaxCollectionSize = 140 };
 
         var converter = new CollectionConverter<
-                int[],
-                TestArrayPoolBufferAdapter,
-                TestArrayPoolBufferAdapter.PooledBuffer,
-                int>(new ParsableConverter<int>());
+            int[],
+            TestArrayPoolBufferAdapter,
+            TestArrayPoolBufferAdapter.PooledBuffer,
+            int
+        >(new ParsableConverter<int>());
 
         options.AddConverter(converter);
 
@@ -505,19 +578,26 @@ public class FormDataMapperTests
         var rented = new List<int[]>();
         var returned = new List<int[]>();
 
-        var data = new Dictionary<string, StringValues>(Enumerable.Range(0, size)
-            .Select(i => new KeyValuePair<string, StringValues>(
-                $"[{i.ToString(CultureInfo.InvariantCulture)}]",
-                (i + 10).ToString(CultureInfo.InvariantCulture))));
+        var data = new Dictionary<string, StringValues>(
+            Enumerable
+                .Range(0, size)
+                .Select(i => new KeyValuePair<string, StringValues>(
+                    $"[{i.ToString(CultureInfo.InvariantCulture)}]",
+                    (i + 10).ToString(CultureInfo.InvariantCulture)
+                ))
+        );
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
-        var options = new FormDataMapperOptions
-        {
-            MaxCollectionSize = 140
-        };
+        var options = new FormDataMapperOptions { MaxCollectionSize = 140 };
 
         var elementConverter = new ThrowingConverter();
-        elementConverter.OnTryReadDelegate = (ref FormDataReader context, Type type, FormDataMapperOptions options, out int result, out bool found) =>
+        elementConverter.OnTryReadDelegate = (
+            ref FormDataReader context,
+            Type type,
+            FormDataMapperOptions options,
+            out int result,
+            out bool found
+        ) =>
         {
             context.TryGetValue(out var value);
             var index = int.Parse(value, CultureInfo.InvariantCulture) - 10;
@@ -531,10 +611,11 @@ public class FormDataMapperTests
         };
 
         var converter = new CollectionConverter<
-                int[],
-                TestArrayPoolBufferAdapter,
-                TestArrayPoolBufferAdapter.PooledBuffer,
-                int>(elementConverter);
+            int[],
+            TestArrayPoolBufferAdapter,
+            TestArrayPoolBufferAdapter.PooledBuffer,
+            int
+        >(elementConverter);
 
         options.AddConverter(converter);
 
@@ -542,7 +623,9 @@ public class FormDataMapperTests
         TestArrayPoolBufferAdapter.OnReturn += returned.Add;
 
         // Act
-        var result = Assert.Throws<InvalidOperationException>(() => FormDataMapper.Map<int[]>(reader, options));
+        var result = Assert.Throws<InvalidOperationException>(
+            () => FormDataMapper.Map<int[]>(reader, options)
+        );
 
         TestArrayPoolBufferAdapter.OnRent -= rented.Add;
         TestArrayPoolBufferAdapter.OnReturn -= returned.Add;
@@ -566,10 +649,14 @@ public class FormDataMapperTests
     public void Deserialize_Collections_RespectsMaxCollectionSize(int size, int maxCollectionSize)
     {
         // Arrange
-        var data = new Dictionary<string, StringValues>(Enumerable.Range(0, size)
-            .Select(i => new KeyValuePair<string, StringValues>(
-                $"[{i.ToString(CultureInfo.InvariantCulture)}]",
-                (i + 10).ToString(CultureInfo.InvariantCulture))));
+        var data = new Dictionary<string, StringValues>(
+            Enumerable
+                .Range(0, size)
+                .Select(i => new KeyValuePair<string, StringValues>(
+                    $"[{i.ToString(CultureInfo.InvariantCulture)}]",
+                    (i + 10).ToString(CultureInfo.InvariantCulture)
+                ))
+        );
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         var errors = new List<FormDataMappingError>();
@@ -578,10 +665,7 @@ public class FormDataMapperTests
             errors.Add(new FormDataMappingError(key, message, attemptedValue));
         };
 
-        var options = new FormDataMapperOptions
-        {
-            MaxCollectionSize = maxCollectionSize
-        };
+        var options = new FormDataMapperOptions { MaxCollectionSize = maxCollectionSize };
 
         // Act
         var result = FormDataMapper.Map<List<int>>(reader, options);
@@ -592,7 +676,10 @@ public class FormDataMapperTests
         {
             var error = Assert.Single(errors);
             Assert.Equal("", error.Key);
-            Assert.Equal($"The number of elements in the collection exceeded the maximum number of '{maxCollectionSize}' elements allowed.", error.Message.ToString(reader.Culture));
+            Assert.Equal(
+                $"The number of elements in the collection exceeded the maximum number of '{maxCollectionSize}' elements allowed.",
+                error.Message.ToString(reader.Culture)
+            );
             Assert.Null(error.Value);
         }
         else
@@ -635,19 +722,27 @@ public class FormDataMapperTests
         var list = Assert.IsType<List<int>>(result);
         Assert.Equal(expected, list);
         Assert.Equal(2, errors.Count);
-        Assert.Collection(errors,
+        Assert.Collection(
+            errors,
             e =>
             {
                 Assert.Equal("[0]", e.Key);
-                Assert.Equal("The value 'abc' is not valid for '0'.", e.Message.ToString(reader.Culture));
+                Assert.Equal(
+                    "The value 'abc' is not valid for '0'.",
+                    e.Message.ToString(reader.Culture)
+                );
                 Assert.Equal("abc", e.Value);
             },
             e =>
             {
                 Assert.Equal("[4]", e.Key);
-                Assert.Equal("The value 'def' is not valid for '4'.", e.Message.ToString(reader.Culture));
+                Assert.Equal(
+                    "The value 'def' is not valid for '4'.",
+                    e.Message.ToString(reader.Culture)
+                );
                 Assert.Equal("def", e.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -734,7 +829,9 @@ public class FormDataMapperTests
     public void CanDeserialize_Collections_ReadOnlyCollectionOfT()
     {
         // Arrange
-        var expected = new ReadOnlyCollection<int>(new List<int> { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 });
+        var expected = new ReadOnlyCollection<int>(
+            new List<int> { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 }
+        );
         CanDeserialize_Collection<ReadOnlyCollection<int>, ReadOnlyCollection<int>, int>(expected);
     }
 
@@ -807,7 +904,10 @@ public class FormDataMapperTests
     {
         // Arrange
         var expected = ImmutableArray.CreateRange(new[] { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 });
-        CanDeserialize_Collection<ImmutableArray<int>, ImmutableArray<int>, int>(expected, sequenceEquals: true);
+        CanDeserialize_Collection<ImmutableArray<int>, ImmutableArray<int>, int>(
+            expected,
+            sequenceEquals: true
+        );
     }
 
     [Fact]
@@ -822,7 +922,9 @@ public class FormDataMapperTests
     public void CanDeserialize_Collections_ImmutableHashSet()
     {
         // Arrange
-        var expected = ImmutableHashSet.CreateRange(new[] { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 });
+        var expected = ImmutableHashSet.CreateRange(
+            new[] { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 }
+        );
         CanDeserialize_Collection<ImmutableHashSet<int>, ImmutableHashSet<int>, int>(expected);
     }
 
@@ -830,7 +932,9 @@ public class FormDataMapperTests
     public void CanDeserialize_Collections_ImmutableSortedSet()
     {
         // Arrange
-        var expected = ImmutableSortedSet.CreateRange(new[] { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 });
+        var expected = ImmutableSortedSet.CreateRange(
+            new[] { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 }
+        );
         CanDeserialize_Collection<ImmutableSortedSet<int>, ImmutableSortedSet<int>, int>(expected);
     }
 
@@ -862,7 +966,9 @@ public class FormDataMapperTests
     public void CanDeserialize_Collections_IImmutableSet()
     {
         // Arrange
-        var expected = ImmutableHashSet.CreateRange(new[] { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 });
+        var expected = ImmutableHashSet.CreateRange(
+            new[] { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 }
+        );
         CanDeserialize_Collection<IImmutableSet<int>, ImmutableHashSet<int>, int>(expected);
     }
 
@@ -894,7 +1000,19 @@ public class FormDataMapperTests
     public void CanDeserialize_Dictionary_Dictionary()
     {
         // Arrange
-        var expected = new Dictionary<int, int>() { [0] = 10, [1] = 11, [2] = 12, [3] = 13, [4] = 14, [5] = 15, [6] = 16, [7] = 17, [8] = 18, [9] = 19, };
+        var expected = new Dictionary<int, int>()
+        {
+            [0] = 10,
+            [1] = 11,
+            [2] = 12,
+            [3] = 13,
+            [4] = 14,
+            [5] = 15,
+            [6] = 16,
+            [7] = 17,
+            [8] = 18,
+            [9] = 19,
+        };
         CanDeserialize_Dictionary<Dictionary<int, int>, Dictionary<int, int>, int, int>(expected);
     }
 
@@ -902,31 +1020,102 @@ public class FormDataMapperTests
     public void CanDeserialize_Dictionary_ConcurrentDictionary()
     {
         // Arrange
-        var expected = new ConcurrentDictionary<int, int>(new Dictionary<int, int>() { [0] = 10, [1] = 11, [2] = 12, [3] = 13, [4] = 14, [5] = 15, [6] = 16, [7] = 17, [8] = 18, [9] = 19, });
-        CanDeserialize_Dictionary<ConcurrentDictionary<int, int>, ConcurrentDictionary<int, int>, int, int>(expected);
+        var expected = new ConcurrentDictionary<int, int>(
+            new Dictionary<int, int>()
+            {
+                [0] = 10,
+                [1] = 11,
+                [2] = 12,
+                [3] = 13,
+                [4] = 14,
+                [5] = 15,
+                [6] = 16,
+                [7] = 17,
+                [8] = 18,
+                [9] = 19,
+            }
+        );
+        CanDeserialize_Dictionary<
+            ConcurrentDictionary<int, int>,
+            ConcurrentDictionary<int, int>,
+            int,
+            int
+        >(expected);
     }
 
     [Fact]
     public void CanDeserialize_Dictionary_ImmutableDictionary()
     {
         // Arrange
-        var expected = ImmutableDictionary.CreateRange(new Dictionary<int, int>() { [0] = 10, [1] = 11, [2] = 12, [3] = 13, [4] = 14, [5] = 15, [6] = 16, [7] = 17, [8] = 18, [9] = 19, });
-        CanDeserialize_Dictionary<ImmutableDictionary<int, int>, ImmutableDictionary<int, int>, int, int>(expected);
+        var expected = ImmutableDictionary.CreateRange(
+            new Dictionary<int, int>()
+            {
+                [0] = 10,
+                [1] = 11,
+                [2] = 12,
+                [3] = 13,
+                [4] = 14,
+                [5] = 15,
+                [6] = 16,
+                [7] = 17,
+                [8] = 18,
+                [9] = 19,
+            }
+        );
+        CanDeserialize_Dictionary<
+            ImmutableDictionary<int, int>,
+            ImmutableDictionary<int, int>,
+            int,
+            int
+        >(expected);
     }
 
     [Fact]
     public void CanDeserialize_Dictionary_ImmutableSortedDictionary()
     {
         // Arrange
-        var expected = ImmutableSortedDictionary.CreateRange(new Dictionary<int, int>() { [0] = 10, [1] = 11, [2] = 12, [3] = 13, [4] = 14, [5] = 15, [6] = 16, [7] = 17, [8] = 18, [9] = 19, });
-        CanDeserialize_Dictionary<ImmutableSortedDictionary<int, int>, ImmutableSortedDictionary<int, int>, int, int>(expected);
+        var expected = ImmutableSortedDictionary.CreateRange(
+            new Dictionary<int, int>()
+            {
+                [0] = 10,
+                [1] = 11,
+                [2] = 12,
+                [3] = 13,
+                [4] = 14,
+                [5] = 15,
+                [6] = 16,
+                [7] = 17,
+                [8] = 18,
+                [9] = 19,
+            }
+        );
+        CanDeserialize_Dictionary<
+            ImmutableSortedDictionary<int, int>,
+            ImmutableSortedDictionary<int, int>,
+            int,
+            int
+        >(expected);
     }
 
     [Fact]
     public void CanDeserialize_Dictionary_IImmutableDictionary()
     {
         // Arrange
-        var expected = ImmutableDictionary.CreateRange(new Dictionary<int, int>() { [0] = 10, [1] = 11, [2] = 12, [3] = 13, [4] = 14, [5] = 15, [6] = 16, [7] = 17, [8] = 18, [9] = 19, });
+        var expected = ImmutableDictionary.CreateRange(
+            new Dictionary<int, int>()
+            {
+                [0] = 10,
+                [1] = 11,
+                [2] = 12,
+                [3] = 13,
+                [4] = 14,
+                [5] = 15,
+                [6] = 16,
+                [7] = 17,
+                [8] = 18,
+                [9] = 19,
+            }
+        );
         // Arrange
         var collection = new Dictionary<string, StringValues>()
         {
@@ -950,14 +1139,29 @@ public class FormDataMapperTests
         // Assert
         var dictionary = Assert.IsType<ImmutableDictionary<int, int>>(result);
         Assert.Equal(expected.Count, dictionary.Count);
-        Assert.Equal(expected.OrderBy(o => o.Key).ToArray(), dictionary.OrderBy(o => o.Key).ToArray());
+        Assert.Equal(
+            expected.OrderBy(o => o.Key).ToArray(),
+            dictionary.OrderBy(o => o.Key).ToArray()
+        );
     }
 
     [Fact]
     public void CanDeserialize_Dictionary_IDictionary()
     {
         // Arrange
-        var expected = new Dictionary<int, int>() { [0] = 10, [1] = 11, [2] = 12, [3] = 13, [4] = 14, [5] = 15, [6] = 16, [7] = 17, [8] = 18, [9] = 19, };
+        var expected = new Dictionary<int, int>()
+        {
+            [0] = 10,
+            [1] = 11,
+            [2] = 12,
+            [3] = 13,
+            [4] = 14,
+            [5] = 15,
+            [6] = 16,
+            [7] = 17,
+            [8] = 18,
+            [9] = 19,
+        };
         CanDeserialize_Dictionary<IDictionary<int, int>, Dictionary<int, int>, int, int>(expected);
     }
 
@@ -965,7 +1169,19 @@ public class FormDataMapperTests
     public void CanDeserialize_Dictionary_SortedList()
     {
         // Arrange
-        var expected = new SortedList<int, int>() { [0] = 10, [1] = 11, [2] = 12, [3] = 13, [4] = 14, [5] = 15, [6] = 16, [7] = 17, [8] = 18, [9] = 19, };
+        var expected = new SortedList<int, int>()
+        {
+            [0] = 10,
+            [1] = 11,
+            [2] = 12,
+            [3] = 13,
+            [4] = 14,
+            [5] = 15,
+            [6] = 16,
+            [7] = 17,
+            [8] = 18,
+            [9] = 19,
+        };
         CanDeserialize_Dictionary<SortedList<int, int>, SortedList<int, int>, int, int>(expected);
     }
 
@@ -973,15 +1189,41 @@ public class FormDataMapperTests
     public void CanDeserialize_Dictionary_SortedDictionary()
     {
         // Arrange
-        var expected = new SortedDictionary<int, int>() { [0] = 10, [1] = 11, [2] = 12, [3] = 13, [4] = 14, [5] = 15, [6] = 16, [7] = 17, [8] = 18, [9] = 19, };
-        CanDeserialize_Dictionary<SortedDictionary<int, int>, SortedDictionary<int, int>, int, int>(expected);
+        var expected = new SortedDictionary<int, int>()
+        {
+            [0] = 10,
+            [1] = 11,
+            [2] = 12,
+            [3] = 13,
+            [4] = 14,
+            [5] = 15,
+            [6] = 16,
+            [7] = 17,
+            [8] = 18,
+            [9] = 19,
+        };
+        CanDeserialize_Dictionary<SortedDictionary<int, int>, SortedDictionary<int, int>, int, int>(
+            expected
+        );
     }
 
     [Fact]
     public void CanDeserialize_Dictionary_IReadOnlyDictionary()
     {
         // Arrange
-        var expected = new Dictionary<int, int>() { [0] = 10, [1] = 11, [2] = 12, [3] = 13, [4] = 14, [5] = 15, [6] = 16, [7] = 17, [8] = 18, [9] = 19, };
+        var expected = new Dictionary<int, int>()
+        {
+            [0] = 10,
+            [1] = 11,
+            [2] = 12,
+            [3] = 13,
+            [4] = 14,
+            [5] = 15,
+            [6] = 16,
+            [7] = 17,
+            [8] = 18,
+            [9] = 19,
+        };
         var collection = new Dictionary<string, StringValues>()
         {
             ["[0]"] = "10",
@@ -1004,14 +1246,29 @@ public class FormDataMapperTests
         // Assert
         var dictionary = Assert.IsType<ReadOnlyDictionary<int, int>>(result);
         Assert.Equal(expected.Count, dictionary.Count);
-        Assert.Equal(expected.OrderBy(o => o.Key).ToArray(), dictionary.OrderBy(o => o.Key).ToArray());
+        Assert.Equal(
+            expected.OrderBy(o => o.Key).ToArray(),
+            dictionary.OrderBy(o => o.Key).ToArray()
+        );
     }
 
     [Fact]
     public void CanDeserialize_Dictionary_ReadOnlyDictionary()
     {
         // Arrange
-        var expected = new Dictionary<int, int>() { [0] = 10, [1] = 11, [2] = 12, [3] = 13, [4] = 14, [5] = 15, [6] = 16, [7] = 17, [8] = 18, [9] = 19, };
+        var expected = new Dictionary<int, int>()
+        {
+            [0] = 10,
+            [1] = 11,
+            [2] = 12,
+            [3] = 13,
+            [4] = 14,
+            [5] = 15,
+            [6] = 16,
+            [7] = 17,
+            [8] = 18,
+            [9] = 19,
+        };
         var collection = new Dictionary<string, StringValues>()
         {
             ["[0]"] = "10",
@@ -1034,7 +1291,10 @@ public class FormDataMapperTests
         // Assert
         var dictionary = Assert.IsType<ReadOnlyDictionary<int, int>>(result);
         Assert.Equal(expected.Count, dictionary.Count);
-        Assert.Equal(expected.OrderBy(o => o.Key).ToArray(), dictionary.OrderBy(o => o.Key).ToArray());
+        Assert.Equal(
+            expected.OrderBy(o => o.Key).ToArray(),
+            dictionary.OrderBy(o => o.Key).ToArray()
+        );
     }
 
     [Fact]
@@ -1063,10 +1323,14 @@ public class FormDataMapperTests
     public void Deserialize_Dictionary_RespectsMaxCollectionSize(int size, int maxCollectionSize)
     {
         // Arrange
-        var data = new Dictionary<string, StringValues>(Enumerable.Range(0, size)
-            .Select(i => new KeyValuePair<string, StringValues>(
-                $"[{i.ToString(CultureInfo.InvariantCulture)}]",
-                (i + 10).ToString(CultureInfo.InvariantCulture))));
+        var data = new Dictionary<string, StringValues>(
+            Enumerable
+                .Range(0, size)
+                .Select(i => new KeyValuePair<string, StringValues>(
+                    $"[{i.ToString(CultureInfo.InvariantCulture)}]",
+                    (i + 10).ToString(CultureInfo.InvariantCulture)
+                ))
+        );
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         var errors = new List<FormDataMappingError>();
@@ -1075,10 +1339,7 @@ public class FormDataMapperTests
             errors.Add(new FormDataMappingError(key, message, attemptedValue));
         };
 
-        var options = new FormDataMapperOptions
-        {
-            MaxCollectionSize = maxCollectionSize
-        };
+        var options = new FormDataMapperOptions { MaxCollectionSize = maxCollectionSize };
 
         // Act
         var result = FormDataMapper.Map<Dictionary<int, int>>(reader, options);
@@ -1089,7 +1350,10 @@ public class FormDataMapperTests
         {
             var error = Assert.Single(errors);
             Assert.Equal("", error.Key);
-            Assert.Equal($"The number of elements in the dictionary exceeded the maximum number of '{maxCollectionSize}' elements allowed.", error.Message.ToString(reader.Culture));
+            Assert.Equal(
+                $"The number of elements in the dictionary exceeded the maximum number of '{maxCollectionSize}' elements allowed.",
+                error.Message.ToString(reader.Culture)
+            );
             Assert.Null(error.Value);
         }
         else
@@ -1144,19 +1408,27 @@ public class FormDataMapperTests
         var dictionary = Assert.IsType<Dictionary<int, int>>(result);
         Assert.Equal(expected, dictionary);
         Assert.Equal(2, errors.Count);
-        Assert.Collection(errors,
+        Assert.Collection(
+            errors,
             e =>
             {
                 Assert.Equal("[0]", e.Key);
-                Assert.Equal("The value 'abc' is not valid for '0'.", e.Message.ToString(reader.Culture));
+                Assert.Equal(
+                    "The value 'abc' is not valid for '0'.",
+                    e.Message.ToString(reader.Culture)
+                );
                 Assert.Equal("abc", e.Value);
             },
             e =>
             {
                 Assert.Equal("[4]", e.Key);
-                Assert.Equal("The value 'def' is not valid for '4'.", e.Message.ToString(reader.Culture));
+                Assert.Equal(
+                    "The value 'def' is not valid for '4'.",
+                    e.Message.ToString(reader.Culture)
+                );
                 Assert.Equal("def", e.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -1203,22 +1475,32 @@ public class FormDataMapperTests
         var dictionary = Assert.IsType<Dictionary<int, int>>(result);
         Assert.Equal(expected, dictionary);
         Assert.Equal(2, errors.Count);
-        Assert.Collection(errors,
+        Assert.Collection(
+            errors,
             e =>
             {
                 Assert.Equal("", e.Key);
-                Assert.Equal("The value 'abc' is not a valid key for ''.", e.Message.ToString(reader.Culture));
+                Assert.Equal(
+                    "The value 'abc' is not a valid key for ''.",
+                    e.Message.ToString(reader.Culture)
+                );
                 Assert.Null(e.Value);
             },
             e =>
             {
                 Assert.Equal("", e.Key);
-                Assert.Equal("The value 'def' is not a valid key for ''.", e.Message.ToString(reader.Culture));
+                Assert.Equal(
+                    "The value 'def' is not a valid key for ''.",
+                    e.Message.ToString(reader.Culture)
+                );
                 Assert.Null(e.Value);
-            });
+            }
+        );
     }
 
-    private void CanDeserialize_Dictionary<TDictionary, TImplementation, TKey, TValue>(TImplementation expected)
+    private void CanDeserialize_Dictionary<TDictionary, TImplementation, TKey, TValue>(
+        TImplementation expected
+    )
         where TDictionary : IDictionary<TKey, TValue>
         where TImplementation : TDictionary
     {
@@ -1245,10 +1527,16 @@ public class FormDataMapperTests
         // Assert
         var dictionary = Assert.IsType<TImplementation>(result);
         Assert.Equal(expected.Count, dictionary.Count);
-        Assert.Equal(expected.OrderBy(o => o.Key).ToArray(), dictionary.OrderBy(o => o.Key).ToArray());
+        Assert.Equal(
+            expected.OrderBy(o => o.Key).ToArray(),
+            dictionary.OrderBy(o => o.Key).ToArray()
+        );
     }
 
-    private void CanDeserialize_Collection<TCollection, TImplementation, TElement>(TImplementation expected, bool sequenceEquals = false)
+    private void CanDeserialize_Collection<TCollection, TImplementation, TElement>(
+        TImplementation expected,
+        bool sequenceEquals = false
+    )
     {
         // Arrange
         var collection = new Dictionary<string, StringValues>()
@@ -1278,7 +1566,9 @@ public class FormDataMapperTests
         }
         else
         {
-            Assert.True(((IEnumerable<TElement>)expected).SequenceEqual((IEnumerable<TElement>)list));
+            Assert.True(
+                ((IEnumerable<TElement>)expected).SequenceEqual((IEnumerable<TElement>)list)
+            );
         }
     }
 
@@ -1286,7 +1576,13 @@ public class FormDataMapperTests
     public void CanDeserialize_ComplexValueType_Address()
     {
         // Arrange
-        var expected = new Address() { City = "Redmond", Street = "1 Microsoft Way", Country = "United States", ZipCode = 98052 };
+        var expected = new Address()
+        {
+            City = "Redmond",
+            Street = "1 Microsoft Way",
+            Country = "United States",
+            ZipCode = 98052,
+        };
         var data = new Dictionary<string, StringValues>()
         {
             ["City"] = "Redmond",
@@ -1311,7 +1607,13 @@ public class FormDataMapperTests
     public void CanDeserialize_ComplexReferenceType_Customer()
     {
         // Arrange
-        var expected = new Customer() { Age = 20, Name = "John Doe", Email = "john.doe@example.com", IsPreferred = true };
+        var expected = new Customer()
+        {
+            Age = 20,
+            Name = "John Doe",
+            Email = "john.doe@example.com",
+            IsPreferred = true,
+        };
         var data = new Dictionary<string, StringValues>()
         {
             ["Age"] = "20",
@@ -1338,19 +1640,11 @@ public class FormDataMapperTests
     public void CanDeserialize_ComplexRecursiveTypes_RecursiveList()
     {
         // Arrange
-        var expected = new RecursiveList()
-        {
-            Head = 10,
-            Tail = null
-        };
+        var expected = new RecursiveList() { Head = 10, Tail = null };
 
         for (var i = 10 - 1; i >= 0; i--)
         {
-            expected = new RecursiveList()
-            {
-                Head = i,
-                Tail = expected
-            };
+            expected = new RecursiveList() { Head = i, Tail = expected };
         }
 
         var data = new Dictionary<string, StringValues>()
@@ -1383,12 +1677,30 @@ public class FormDataMapperTests
             Assert.Equal(expected.Tail.Tail.Head, result.Tail.Tail.Head);
             Assert.Equal(expected.Tail.Tail.Tail.Head, result.Tail.Tail.Tail.Head);
             Assert.Equal(expected.Tail.Tail.Tail.Tail.Head, result.Tail.Tail.Tail.Tail.Head);
-            Assert.Equal(expected.Tail.Tail.Tail.Tail.Tail.Head, result.Tail.Tail.Tail.Tail.Tail.Head);
-            Assert.Equal(expected.Tail.Tail.Tail.Tail.Tail.Tail.Head, result.Tail.Tail.Tail.Tail.Tail.Tail.Head);
-            Assert.Equal(expected.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head, result.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head);
-            Assert.Equal(expected.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head, result.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head);
-            Assert.Equal(expected.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head, result.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head);
-            Assert.Equal(expected.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head, result.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head);
+            Assert.Equal(
+                expected.Tail.Tail.Tail.Tail.Tail.Head,
+                result.Tail.Tail.Tail.Tail.Tail.Head
+            );
+            Assert.Equal(
+                expected.Tail.Tail.Tail.Tail.Tail.Tail.Head,
+                result.Tail.Tail.Tail.Tail.Tail.Tail.Head
+            );
+            Assert.Equal(
+                expected.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head,
+                result.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head
+            );
+            Assert.Equal(
+                expected.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head,
+                result.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head
+            );
+            Assert.Equal(
+                expected.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head,
+                result.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head
+            );
+            Assert.Equal(
+                expected.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head,
+                result.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Head
+            );
             Assert.Null(result.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail.Tail);
         });
     }
@@ -1397,19 +1709,11 @@ public class FormDataMapperTests
     public void CanDeserialize_ComplexRecursiveTypes_ThrowsWhenMaxRecursionDepthExceeded()
     {
         // Arrange
-        var expected = new RecursiveList()
-        {
-            Head = 5,
-            Tail = null
-        };
+        var expected = new RecursiveList() { Head = 5, Tail = null };
 
         for (var i = 5 - 1; i >= 0; i--)
         {
-            expected = new RecursiveList()
-            {
-                Head = i,
-                Tail = expected
-            };
+            expected = new RecursiveList() { Head = i, Tail = expected };
         }
 
         var data = new Dictionary<string, StringValues>()
@@ -1451,35 +1755,39 @@ public class FormDataMapperTests
             Assert.Equal(expected.Tail.Tail.Tail.Tail.Head, result.Tail.Tail.Tail.Tail.Head);
             Assert.Null(result.Tail.Tail.Tail.Tail.Tail);
         });
-        Assert.Collection(errors,
+        Assert.Collection(
+            errors,
             e =>
             {
                 Assert.Equal("Tail.Tail.Tail.Tail.Tail", e.Key);
-                Assert.Equal("The maximum recursion depth of '5' was exceeded for 'Tail.Tail.Tail.Tail.Tail.Head'.", e.Message.ToString(CultureInfo.InvariantCulture));
+                Assert.Equal(
+                    "The maximum recursion depth of '5' was exceeded for 'Tail.Tail.Tail.Tail.Tail.Head'.",
+                    e.Message.ToString(CultureInfo.InvariantCulture)
+                );
             },
             e =>
             {
                 Assert.Equal("Tail.Tail.Tail.Tail.Tail", e.Key);
-                Assert.Equal("The maximum recursion depth of '5' was exceeded for 'Tail.Tail.Tail.Tail.Tail.Tail'.", e.Message.ToString(CultureInfo.InvariantCulture));
-            });
+                Assert.Equal(
+                    "The maximum recursion depth of '5' was exceeded for 'Tail.Tail.Tail.Tail.Tail.Tail'.",
+                    e.Message.ToString(CultureInfo.InvariantCulture)
+                );
+            }
+        );
     }
 
     [Fact]
     public void CanDeserialize_ComplexRecursiveCollectionTypes_RecursiveTree()
     {
         // Arrange
-        var expected = new RecursiveTree()
-        {
-            Value = 10,
-            Children = null
-        };
+        var expected = new RecursiveTree() { Value = 10, Children = null };
 
         for (var i = 10 - 1; i >= 0; i--)
         {
             expected = new RecursiveTree()
             {
                 Value = i,
-                Children = new List<RecursiveTree>() { expected }
+                Children = new List<RecursiveTree>() { expected },
             };
         }
 
@@ -1492,10 +1800,18 @@ public class FormDataMapperTests
             ["Children[0].Children[0].Children[0].Children[0].Value"] = "4",
             ["Children[0].Children[0].Children[0].Children[0].Children[0].Value"] = "5",
             ["Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"] = "6",
-            ["Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"] = "7",
-            ["Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"] = "8",
-            ["Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"] = "9",
-            ["Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"] = "10",
+            [
+                "Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"
+            ] = "7",
+            [
+                "Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"
+            ] = "8",
+            [
+                "Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"
+            ] = "9",
+            [
+                "Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"
+            ] = "10",
         };
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
@@ -1510,16 +1826,139 @@ public class FormDataMapperTests
         {
             Assert.Equal(expected.Value, result.Value);
             Assert.Equal(expected.Children[0].Value, result.Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Value, result.Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value);
-            Assert.Null(result.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children);
+            Assert.Equal(
+                expected.Children[0].Children[0].Value,
+                result.Children[0].Children[0].Value
+            );
+            Assert.Equal(
+                expected.Children[0].Children[0].Children[0].Value,
+                result.Children[0].Children[0].Children[0].Value
+            );
+            Assert.Equal(
+                expected.Children[0].Children[0].Children[0].Children[0].Value,
+                result.Children[0].Children[0].Children[0].Children[0].Value
+            );
+            Assert.Equal(
+                expected.Children[0].Children[0].Children[0].Children[0].Children[0].Value,
+                result.Children[0].Children[0].Children[0].Children[0].Children[0].Value
+            );
+            Assert.Equal(
+                expected
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value,
+                result.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value
+            );
+            Assert.Equal(
+                expected
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value,
+                result
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value
+            );
+            Assert.Equal(
+                expected
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value,
+                result
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value
+            );
+            Assert.Equal(
+                expected
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value,
+                result
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value
+            );
+            Assert.Equal(
+                expected
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value,
+                result
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value
+            );
+            Assert.Null(
+                result
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children
+            );
         });
     }
 
@@ -1527,18 +1966,14 @@ public class FormDataMapperTests
     public void CanDeserialize_ComplexRecursiveCollectionTypes_RecursiveDictionaryTree()
     {
         // Arrange
-        var expected = new RecursiveDictionaryTree()
-        {
-            Value = 10,
-            Children = null
-        };
+        var expected = new RecursiveDictionaryTree() { Value = 10, Children = null };
 
         for (var i = 10 - 1; i >= 0; i--)
         {
             expected = new RecursiveDictionaryTree()
             {
                 Value = i,
-                Children = new Dictionary<int, RecursiveDictionaryTree>() { [0] = expected }
+                Children = new Dictionary<int, RecursiveDictionaryTree>() { [0] = expected },
             };
         }
 
@@ -1551,10 +1986,18 @@ public class FormDataMapperTests
             ["Children[0].Children[0].Children[0].Children[0].Value"] = "4",
             ["Children[0].Children[0].Children[0].Children[0].Children[0].Value"] = "5",
             ["Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"] = "6",
-            ["Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"] = "7",
-            ["Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"] = "8",
-            ["Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"] = "9",
-            ["Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"] = "10",
+            [
+                "Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"
+            ] = "7",
+            [
+                "Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"
+            ] = "8",
+            [
+                "Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"
+            ] = "9",
+            [
+                "Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value"
+            ] = "10",
         };
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
@@ -1569,16 +2012,139 @@ public class FormDataMapperTests
         {
             Assert.Equal(expected.Value, result.Value);
             Assert.Equal(expected.Children[0].Value, result.Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Value, result.Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value);
-            Assert.Equal(expected.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value, result.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value);
-            Assert.Null(result.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Children);
+            Assert.Equal(
+                expected.Children[0].Children[0].Value,
+                result.Children[0].Children[0].Value
+            );
+            Assert.Equal(
+                expected.Children[0].Children[0].Children[0].Value,
+                result.Children[0].Children[0].Children[0].Value
+            );
+            Assert.Equal(
+                expected.Children[0].Children[0].Children[0].Children[0].Value,
+                result.Children[0].Children[0].Children[0].Children[0].Value
+            );
+            Assert.Equal(
+                expected.Children[0].Children[0].Children[0].Children[0].Children[0].Value,
+                result.Children[0].Children[0].Children[0].Children[0].Children[0].Value
+            );
+            Assert.Equal(
+                expected
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value,
+                result.Children[0].Children[0].Children[0].Children[0].Children[0].Children[0].Value
+            );
+            Assert.Equal(
+                expected
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value,
+                result
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value
+            );
+            Assert.Equal(
+                expected
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value,
+                result
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value
+            );
+            Assert.Equal(
+                expected
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value,
+                result
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value
+            );
+            Assert.Equal(
+                expected
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value,
+                result
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Value
+            );
+            Assert.Null(
+                result
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children[0]
+                    .Children
+            );
         });
     }
 
@@ -1586,7 +2152,13 @@ public class FormDataMapperTests
     public void Deserialize_ComplexType_ContinuesMappingAfterPropertyError()
     {
         // Arrange
-        var expected = new Customer() { Age = 0, Name = "John Doe", Email = "john.doe@example.com", IsPreferred = true };
+        var expected = new Customer()
+        {
+            Age = 0,
+            Name = "John Doe",
+            Email = "john.doe@example.com",
+            IsPreferred = true,
+        };
         var data = new Dictionary<string, StringValues>()
         {
             ["Age"] = "abc",
@@ -1625,7 +2197,16 @@ public class FormDataMapperTests
     public void CanDeserialize_ComplexReferenceType_Inheritance()
     {
         // Arrange
-        var expected = new FrequentCustomer() { Age = 20, Name = "John Doe", Email = "john@example.com", IsPreferred = true, TotalVisits = 10, PreferredStore = "Redmond", MonthlyFrequency = 0.8 };
+        var expected = new FrequentCustomer()
+        {
+            Age = 20,
+            Name = "John Doe",
+            Email = "john@example.com",
+            IsPreferred = true,
+            TotalVisits = 10,
+            PreferredStore = "Redmond",
+            MonthlyFrequency = 0.8,
+        };
         var data = new Dictionary<string, StringValues>()
         {
             ["Age"] = "20",
@@ -1657,11 +2238,7 @@ public class FormDataMapperTests
     {
         // Arrange
         var expected = new KeyValuePair<string, int>("Age", 20);
-        var data = new Dictionary<string, StringValues>()
-        {
-            ["Key"] = "Age",
-            ["Value"] = "20",
-        };
+        var data = new Dictionary<string, StringValues>() { ["Key"] = "Age", ["Value"] = "20" };
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         var options = new FormDataMapperOptions();
@@ -1676,11 +2253,7 @@ public class FormDataMapperTests
     {
         // Arrange
         var expected = new ClassRecordType("Age", 20);
-        var data = new Dictionary<string, StringValues>()
-        {
-            ["Key"] = "Age",
-            ["Value"] = "20",
-        };
+        var data = new Dictionary<string, StringValues>() { ["Key"] = "Age", ["Value"] = "20" };
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         var options = new FormDataMapperOptions();
@@ -1695,11 +2268,7 @@ public class FormDataMapperTests
     {
         // Arrange
         var expected = new StructRecordType("Age", 20);
-        var data = new Dictionary<string, StringValues>()
-        {
-            ["Key"] = "Age",
-            ["Value"] = "20",
-        };
+        var data = new Dictionary<string, StringValues>() { ["Key"] = "Age", ["Value"] = "20" };
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         var options = new FormDataMapperOptions();
@@ -1784,10 +2353,7 @@ public class FormDataMapperTests
     {
         // Arrange
         var expected = new TypeRequiredProperties() { Name = null, Age = 20 };
-        var data = new Dictionary<string, StringValues>()
-        {
-            ["Age"] = "20",
-        };
+        var data = new Dictionary<string, StringValues>() { ["Age"] = "20" };
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         var errors = new List<FormDataMappingError>();
@@ -1809,11 +2375,7 @@ public class FormDataMapperTests
     {
         // Arrange
         var expected = new Tuple<int, string>(1, "John");
-        var data = new Dictionary<string, StringValues>()
-        {
-            ["Item1"] = "1",
-            ["Item2"] = "John",
-        };
+        var data = new Dictionary<string, StringValues>() { ["Item1"] = "1", ["Item2"] = "John" };
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         var options = new FormDataMapperOptions();
@@ -1829,11 +2391,7 @@ public class FormDataMapperTests
     {
         // Arrange
         var expected = new ValueTuple<int, string>(1, "John");
-        var data = new Dictionary<string, StringValues>()
-        {
-            ["Item1"] = "1",
-            ["Item2"] = "John",
-        };
+        var data = new Dictionary<string, StringValues>() { ["Item1"] = "1", ["Item2"] = "John" };
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         var options = new FormDataMapperOptions();
@@ -1890,11 +2448,17 @@ public class FormDataMapperTests
         Assert.Equal(2, errors.Count);
         var error = errors[0];
         Assert.Equal("key", error.Key);
-        Assert.Equal("Missing required value for constructor parameter 'key'.", error.Message.ToString(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Missing required value for constructor parameter 'key'.",
+            error.Message.ToString(CultureInfo.InvariantCulture)
+        );
 
         var constructorError = errors[1];
         Assert.Equal("", constructorError.Key);
-        Assert.Equal("Value cannot be null. (Parameter 'key')", constructorError.Message.ToString(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Value cannot be null. (Parameter 'key')",
+            constructorError.Message.ToString(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
@@ -1946,7 +2510,8 @@ public class FormDataMapperTests
 
         // Assert
         var formFileResult = Assert.IsAssignableFrom<IReadOnlyList<IFormFile>>(result);
-        Assert.Collection(formFileResult,
+        Assert.Collection(
+            formFileResult,
             element => Assert.Equal("file-1.txt", element.FileName),
             element => Assert.Equal("file-2.txt", element.FileName),
             element => Assert.Equal("file-3.txt", element.FileName)
@@ -1985,7 +2550,10 @@ public class FormDataMapperTests
     public void CanDeserialize_ComplexType_CanSerializerFormFileCollection()
     {
         // Arrange
-        var expected = new FormFileCollection { new FormFile(Stream.Null, 0, 10, "file", "file.txt") };
+        var expected = new FormFileCollection
+        {
+            new FormFile(Stream.Null, 0, 10, "file", "file.txt"),
+        };
         var data = new Dictionary<string, StringValues>();
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture, expected);
         var errors = new List<FormDataMappingError>();
@@ -2008,7 +2576,16 @@ public class FormDataMapperTests
     {
         // Arrange
         var expectedString = "This is the contents of my text file.";
-        var expected = new FormFileCollection { new FormFile(new MemoryStream(Encoding.UTF8.GetBytes(expectedString)), 0, expectedString.Length, "file", "file.txt") };
+        var expected = new FormFileCollection
+        {
+            new FormFile(
+                new MemoryStream(Encoding.UTF8.GetBytes(expectedString)),
+                0,
+                expectedString.Length,
+                "file",
+                "file.txt"
+            ),
+        };
         var data = new Dictionary<string, StringValues>();
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture, expected);
         var errors = new List<FormDataMappingError>();
@@ -2039,8 +2616,20 @@ public class FormDataMapperTests
         var expectedString2 = "This is the contents of my second text file.";
         var expected = new FormFileCollection
         {
-            new FormFile(new MemoryStream(Encoding.UTF8.GetBytes(expectedString1)), 0, expectedString1.Length, "file", "file1.txt"),
-            new FormFile(new MemoryStream(Encoding.UTF8.GetBytes(expectedString2)), 0, expectedString2.Length, "file", "file2.txt")
+            new FormFile(
+                new MemoryStream(Encoding.UTF8.GetBytes(expectedString1)),
+                0,
+                expectedString1.Length,
+                "file",
+                "file1.txt"
+            ),
+            new FormFile(
+                new MemoryStream(Encoding.UTF8.GetBytes(expectedString2)),
+                0,
+                expectedString2.Length,
+                "file",
+                "file2.txt"
+            ),
         };
         var data = new Dictionary<string, StringValues>();
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture, expected);
@@ -2081,7 +2670,7 @@ public class FormDataMapperTests
         {
             ["customerId"] = "20",
             ["customer[Id]"] = "20",
-            ["customer.Id"] = "20"
+            ["customer.Id"] = "20",
         };
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         reader.PushPrefix("customer");
@@ -2100,35 +2689,48 @@ public class FormDataMapperTests
             var result = new TheoryData<string, Type, object>
             {
                 // strings
-                { "C", typeof(char?), new char?('C')},
+                { "C", typeof(char?), new char?('C') },
                 // bool
-                { "true", typeof(bool?), new bool?(true)},
+                { "true", typeof(bool?), new bool?(true) },
                 // bytes
-                { "63", typeof(byte?), new byte?((byte)0b_0011_1111)},
-                { "-63", typeof(sbyte?), new sbyte?((sbyte)-0b_0011_1111)},
+                { "63", typeof(byte?), new byte?((byte)0b_0011_1111) },
+                { "-63", typeof(sbyte?), new sbyte?((sbyte)-0b_0011_1111) },
                 // numeric types
-                { "123", typeof(ushort?), new ushort?((ushort)123u)},
-                { "456", typeof(uint?), new uint?(456u)},
-                { "789", typeof(ulong?), new ulong?(789uL)},
-                { "-101112", typeof(Int128?), new Int128?(-(Int128)101112)},
-                { "-123", typeof(short?), new short?((short)-123)},
-                { "-456", typeof(int?), new int?(-456)},
-                { "-789", typeof(long?), new long?(-789L)},
-                { "101112", typeof(UInt128?), new UInt128?((UInt128)101112)},
+                { "123", typeof(ushort?), new ushort?((ushort)123u) },
+                { "456", typeof(uint?), new uint?(456u) },
+                { "789", typeof(ulong?), new ulong?(789uL) },
+                { "-101112", typeof(Int128?), new Int128?(-(Int128)101112) },
+                { "-123", typeof(short?), new short?((short)-123) },
+                { "-456", typeof(int?), new int?(-456) },
+                { "-789", typeof(long?), new long?(-789L) },
+                { "101112", typeof(UInt128?), new UInt128?((UInt128)101112) },
                 // floating point types
-                { "12.56", typeof(Half?), new Half?((Half)12.56f)},
-                { "6.28", typeof(float?), new float?(6.28f)},
-                { "3.14", typeof(double?), new double?(3.14)},
-                { "1.23", typeof(decimal?), new decimal?(1.23m)},
+                { "12.56", typeof(Half?), new Half?((Half)12.56f) },
+                { "6.28", typeof(float?), new float?(6.28f) },
+                { "3.14", typeof(double?), new double?(3.14) },
+                { "1.23", typeof(decimal?), new decimal?(1.23m) },
                 // dates and times
-                { "04/20/2023", typeof(DateOnly?), new DateOnly?(new DateOnly(2023, 04, 20))},
-                { "4/20/2023 12:56:34", typeof(DateTime?), new DateTime?(new DateTime(2023, 04, 20, 12, 56, 34))},
-                { "4/20/2023 12:56:34 PM +02:00", typeof(DateTimeOffset?), new DateTimeOffset?(new DateTimeOffset(2023, 04, 20, 12, 56, 34, TimeSpan.FromHours(2)))},
-                { "02:01:03", typeof(TimeSpan?), new TimeSpan?(new TimeSpan(02, 01, 03))},
-                { "12:56:34", typeof(TimeOnly?), new TimeOnly?(new TimeOnly(12, 56, 34))},
-
+                { "04/20/2023", typeof(DateOnly?), new DateOnly?(new DateOnly(2023, 04, 20)) },
+                {
+                    "4/20/2023 12:56:34",
+                    typeof(DateTime?),
+                    new DateTime?(new DateTime(2023, 04, 20, 12, 56, 34))
+                },
+                {
+                    "4/20/2023 12:56:34 PM +02:00",
+                    typeof(DateTimeOffset?),
+                    new DateTimeOffset?(
+                        new DateTimeOffset(2023, 04, 20, 12, 56, 34, TimeSpan.FromHours(2))
+                    )
+                },
+                { "02:01:03", typeof(TimeSpan?), new TimeSpan?(new TimeSpan(02, 01, 03)) },
+                { "12:56:34", typeof(TimeOnly?), new TimeOnly?(new TimeOnly(12, 56, 34)) },
                 // other types
-                { "a55eb3df-e984-42b5-85ca-4f68da8567d1", typeof(Guid?), new Guid?(new Guid("a55eb3df-e984-42b5-85ca-4f68da8567d1")) },
+                {
+                    "a55eb3df-e984-42b5-85ca-4f68da8567d1",
+                    typeof(Guid?),
+                    new Guid?(new Guid("a55eb3df-e984-42b5-85ca-4f68da8567d1"))
+                },
             };
 
             return result;
@@ -2168,7 +2770,6 @@ public class FormDataMapperTests
                 { typeof(DateTimeOffset?) },
                 { typeof(TimeSpan?) },
                 { typeof(TimeOnly?) },
-
                 // other types
                 { typeof(Guid?) },
             };
@@ -2208,12 +2809,19 @@ public class FormDataMapperTests
                 // dates and times
                 { "04/20/2023", typeof(DateOnly), new DateOnly(2023, 04, 20) },
                 { "4/20/2023 12:56:34", typeof(DateTime), new DateTime(2023, 04, 20, 12, 56, 34) },
-                { "4/20/2023 12:56:34 PM +02:00", typeof(DateTimeOffset), new DateTimeOffset(2023, 04, 20, 12, 56, 34, TimeSpan.FromHours(2)) },
+                {
+                    "4/20/2023 12:56:34 PM +02:00",
+                    typeof(DateTimeOffset),
+                    new DateTimeOffset(2023, 04, 20, 12, 56, 34, TimeSpan.FromHours(2))
+                },
                 { "02:01:03", typeof(TimeSpan), new TimeSpan(02, 01, 03) },
                 { "12:56:34", typeof(TimeOnly), new TimeOnly(12, 56, 34) },
-
                 // other types
-                { "a55eb3df-e984-42b5-85ca-4f68da8567d1", typeof(Guid), new Guid("a55eb3df-e984-42b5-85ca-4f68da8567d1") }
+                {
+                    "a55eb3df-e984-42b5-85ca-4f68da8567d1",
+                    typeof(Guid),
+                    new Guid("a55eb3df-e984-42b5-85ca-4f68da8567d1")
+                },
             };
 
             return result;
@@ -2222,9 +2830,11 @@ public class FormDataMapperTests
 
     private object CallDeserialize(FormDataReader reader, FormDataMapperOptions options, Type type)
     {
-        var method = typeof(FormDataMapper)
-            .GetMethod("Map", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public) ??
-            throw new InvalidOperationException("Unable to find method 'Map'.");
+        var method =
+            typeof(FormDataMapper).GetMethod(
+                "Map",
+                System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public
+            ) ?? throw new InvalidOperationException("Unable to find method 'Map'.");
 
         return method.MakeGenericMethod(type).Invoke(null, new object[] { reader, options })!;
     }
@@ -2255,7 +2865,11 @@ internal class Point : IParsable<Point>, IEquatable<Point>
         return result;
     }
 
-    public static bool TryParse([NotNullWhen(true)] string s, IFormatProvider provider, [MaybeNullWhen(false)] out Point result)
+    public static bool TryParse(
+        [NotNullWhen(true)] string s,
+        IFormatProvider provider,
+        [MaybeNullWhen(false)] out Point result
+    )
     {
         // Try parse points is similar to Parse, but returns a bool to indicate success.
         // It also uses the out parameter to return the result.
@@ -2277,7 +2891,8 @@ internal class Point : IParsable<Point>, IEquatable<Point>
 
     public override int GetHashCode() => HashCode.Combine(X, Y);
 
-    public static bool operator ==(Point left, Point right) => EqualityComparer<Point>.Default.Equals(left, right);
+    public static bool operator ==(Point left, Point right) =>
+        EqualityComparer<Point>.Default.Equals(left, right);
 
     public static bool operator !=(Point left, Point right) => !(left == right);
 }
@@ -2303,7 +2918,11 @@ internal struct ValuePoint : IParsable<ValuePoint>, IEquatable<ValuePoint>
         return result;
     }
 
-    public static bool TryParse([NotNullWhen(true)] string s, IFormatProvider provider, [MaybeNullWhen(false)] out ValuePoint result)
+    public static bool TryParse(
+        [NotNullWhen(true)] string s,
+        IFormatProvider provider,
+        [MaybeNullWhen(false)] out ValuePoint result
+    )
     {
         // Try parse points is similar to Parse, but returns a bool to indicate success.
         // It also uses the out parameter to return the result.
@@ -2325,7 +2944,8 @@ internal struct ValuePoint : IParsable<ValuePoint>, IEquatable<ValuePoint>
 
     public override int GetHashCode() => HashCode.Combine(X, Y);
 
-    public static bool operator ==(ValuePoint left, ValuePoint right) => EqualityComparer<ValuePoint>.Default.Equals(left, right);
+    public static bool operator ==(ValuePoint left, ValuePoint right) =>
+        EqualityComparer<ValuePoint>.Default.Equals(left, right);
 
     public static bool operator !=(ValuePoint left, ValuePoint right) => !(left == right);
 }
@@ -2384,7 +3004,7 @@ public enum Colors
 {
     Red,
     Green,
-    Blue
+    Blue,
 }
 
 internal struct Address
@@ -2419,12 +3039,19 @@ internal class CustomCollection<T> : ICollection<T>
 
     public int Count => _inner.Count;
     public bool IsReadOnly => false;
+
     public void Add(T item) => _inner.Add(item);
+
     public void Clear() => _inner.Clear();
+
     public bool Contains(T item) => _inner.Contains(item);
+
     public bool Remove(T item) => _inner.Remove(item);
+
     public IEnumerator<T> GetEnumerator() => _inner.GetEnumerator();
+
     IEnumerator IEnumerable.GetEnumerator() => _inner.GetEnumerator();
+
     public void CopyTo(T[] array, int arrayIndex) => _inner.CopyTo(array, arrayIndex);
 }
 
@@ -2518,12 +3145,28 @@ public class Throwing { }
 
 internal class ThrowingConverter : FormDataConverter<int>
 {
-    internal delegate bool OnTryRead(ref FormDataReader context, Type type, FormDataMapperOptions options, out int result, out bool found);
+    internal delegate bool OnTryRead(
+        ref FormDataReader context,
+        Type type,
+        FormDataMapperOptions options,
+        out int result,
+        out bool found
+    );
 
     internal OnTryRead OnTryReadDelegate { get; set; } =
-        (ref FormDataReader context, Type type, FormDataMapperOptions options, out int result, out bool found) =>
-            throw new InvalidOperationException("Could not read value.");
+        (
+            ref FormDataReader context,
+            Type type,
+            FormDataMapperOptions options,
+            out int result,
+            out bool found
+        ) => throw new InvalidOperationException("Could not read value.");
 
-    internal override bool TryRead(ref FormDataReader context, Type type, FormDataMapperOptions options, out int result, out bool found) =>
-        OnTryReadDelegate.Invoke(ref context, type, options, out result, out found);
+    internal override bool TryRead(
+        ref FormDataReader context,
+        Type type,
+        FormDataMapperOptions options,
+        out int result,
+        out bool found
+    ) => OnTryReadDelegate.Invoke(ref context, type, options, out result, out found);
 }

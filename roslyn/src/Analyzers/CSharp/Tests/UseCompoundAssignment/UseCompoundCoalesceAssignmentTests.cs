@@ -15,20 +15,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseCompoundCoalesceAssignmentDiagnosticAnalyzer,
-        CSharpUseCompoundCoalesceAssignmentCodeFixProvider>;
+        CSharpUseCompoundCoalesceAssignmentCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseCompoundAssignment)]
     public class UseCompoundCoalesceAssignmentTests
     {
         private static async Task TestInRegularAndScriptAsync(string testCode, string fixedCode)
         {
-            await new VerifyCS.Test
-            {
-                TestCode = testCode,
-                FixedCode = fixedCode,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = testCode, FixedCode = fixedCode }.RunAsync();
         }
-        private static async Task TestMissingAsync(string testCode, LanguageVersion languageVersion = LanguageVersion.CSharp8)
+
+        private static async Task TestMissingAsync(
+            string testCode,
+            LanguageVersion languageVersion = LanguageVersion.CSharp8
+        )
         {
             await new VerifyCS.Test
             {
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                     private static string s_goo;
                     private static string Goo => s_goo ??= new string('c', 42);
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44793")]
@@ -69,7 +71,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                     private static string s_goo;
                     private static string Goo => s_goo ?? (s_goo = new string('c', 42));
                 }
-                """, LanguageVersion.CSharp7_3);
+                """,
+                LanguageVersion.CSharp7_3
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38059")]
@@ -82,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                     private static string s_goo;
                     private static string Goo => {|CS0131:s_goo ?? s_goo|} = new string('c', 42);
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38059")]
@@ -95,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                     private static string s_goo;
                     private static string Goo => {|CS0019:s_goo ?? (s_goo == new string('c', 42))|};
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38059")]
@@ -108,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                     private static string s_goo;
                     private static string Goo => s_goo ?? (s_goo ??= new string('c', 42));
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38059")]
@@ -122,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                     private static string s_goo2;
                     private static string Goo => s_goo ?? (s_goo2 = new string('c', 42));
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38059")]
@@ -135,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                     private static string s_goo;
                     private static string Goo => s_goo.GetType() ?? ({|CS0131:s_goo.GetType()|} = new string('c', 42));
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38059")]
@@ -155,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                     private string goo;
                     private string Goo => this.goo ??= new string('c', 42);
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38059")]
@@ -181,7 +191,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         var x = (int?)(a ??= 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38059")]
@@ -215,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         M((int?)(a ??= 1));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38059")]
@@ -247,7 +259,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         M(a ??= 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -276,7 +289,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         o ??= "";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -295,7 +309,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """, LanguageVersion.CSharp7_3);
+                """,
+                LanguageVersion.CSharp7_3
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -318,7 +334,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -345,7 +362,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         o ??= "";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -363,7 +381,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -383,7 +402,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -412,7 +432,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         o ??= "";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -441,7 +462,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         o ??= "";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -470,7 +492,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         o ??= "";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -499,7 +522,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         o ??= "";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -518,7 +542,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -537,7 +562,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -566,7 +592,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         o ??= "";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -592,7 +619,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -612,7 +640,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -634,7 +663,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -663,7 +693,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         o ??= new C();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -694,7 +725,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         o ??= new C(); // After
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -725,7 +757,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         o ??= new C(); // After
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32985")]
@@ -758,7 +791,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         o ??= new C(); // After
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63552")]
@@ -779,7 +813,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63552")]
@@ -801,7 +836,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63552")]
@@ -824,7 +860,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63552")]
@@ -847,7 +884,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63552")]
@@ -870,7 +908,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63552")]
@@ -893,7 +932,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63552")]
@@ -912,7 +952,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 #endif
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63552")]
@@ -933,7 +974,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 #endif
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/62473")]
@@ -944,7 +986,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
             // If the test failed because language added support and this is no longer
             // an error. The behavior for test 'TestPointer' below should be updated as well to suggest ??=
             // Note that, when ??= is supported for pointers, the analyzer should check the language version which supports it.
-            await TestMissingAsync("""
+            await TestMissingAsync(
+                """
                 unsafe class Program
                 {
                     private static void Main()
@@ -955,13 +998,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
 
                     static byte* Get() => null;
                 }
-                """, LanguageVersion.CSharp12);
+                """,
+                LanguageVersion.CSharp12
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/62473")]
         public async Task TestPointer()
         {
-            await TestMissingAsync("""
+            await TestMissingAsync(
+                """
                 unsafe class Program
                 {
                     private static void Main()
@@ -975,13 +1021,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
 
                     static byte* Get() => null;
                 }
-                """, LanguageVersion.CSharp12);
+                """,
+                LanguageVersion.CSharp12
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63551")]
         public async Task TestFunctionPointer()
         {
-            await TestMissingAsync("""
+            await TestMissingAsync(
+                """
                 using System.Runtime.InteropServices;
                 public unsafe class C {
                     [DllImport("A")]
@@ -998,7 +1047,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         return func;
                     }
                 }
-                """, LanguageVersion.CSharp12);
+                """,
+                LanguageVersion.CSharp12
+            );
         }
     }
 }

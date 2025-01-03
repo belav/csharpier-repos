@@ -56,8 +56,8 @@ internal partial class SyntacticClassificationTaggerProvider
 
         private Workspace? _workspace;
 
-        // The latest data about the document being classified that we've cached.  objects can 
-        // be accessed from both threads, and must be obtained when this lock is held. 
+        // The latest data about the document being classified that we've cached.  objects can
+        // be accessed from both threads, and must be obtained when this lock is held.
         //
         // SyntaxNode is the preferred storage here because it doesn't GC-root a Solution instance.
         // For languages that do not support syntax, this field offers fallback storage for a Document.
@@ -66,7 +66,10 @@ internal partial class SyntacticClassificationTaggerProvider
         // get called.
 
         private readonly object _gate = new();
-        private (ITextSnapshot lastSnapshot, SumType<SyntaxNode, Document> lastDocumentOrRoot)? _lastProcessedData;
+        private (
+            ITextSnapshot lastSnapshot,
+            SumType<SyntaxNode, Document> lastDocumentOrRoot
+        )? _lastProcessedData;
 
         // this will cache previous classification information for a span, so that we can avoid
         // digging into same tree again and again to find exactly same answer
@@ -77,7 +80,8 @@ internal partial class SyntacticClassificationTaggerProvider
         public TagComputer(
             SyntacticClassificationTaggerProvider taggerProvider,
             ITextBuffer2 subjectBuffer,
-            TimeSpan diffTimeout)
+            TimeSpan diffTimeout
+        )
         {
             _taggerProvider = taggerProvider;
             _subjectBuffer = subjectBuffer;
@@ -87,11 +91,14 @@ internal partial class SyntacticClassificationTaggerProvider
                 ProcessChangesAsync,
                 equalityComparer: null,
                 taggerProvider._listener,
-                _disposalCancellationSource.Token);
+                _disposalCancellationSource.Token
+            );
 
             _lastLineCache = new LastLineCache(taggerProvider._threadingContext);
 
-            _workspaceRegistration = Workspace.GetWorkspaceRegistration(subjectBuffer.AsTextContainer());
+            _workspaceRegistration = Workspace.GetWorkspaceRegistration(
+                subjectBuffer.AsTextContainer()
+            );
             _workspaceRegistration.WorkspaceChanged += OnWorkspaceRegistrationChanged;
 
             if (_workspaceRegistration.Workspace != null)
@@ -101,28 +108,45 @@ internal partial class SyntacticClassificationTaggerProvider
         }
 
         public static TagComputer GetOrCreate(
-            SyntacticClassificationTaggerProvider taggerProvider, ITextBuffer2 subjectBuffer)
+            SyntacticClassificationTaggerProvider taggerProvider,
+            ITextBuffer2 subjectBuffer
+        )
         {
             taggerProvider._threadingContext.ThrowIfNotOnUIThread();
 
             var tagComputer = subjectBuffer.Properties.GetOrCreateSingletonProperty(
-                s_uniqueKey, () => new TagComputer(taggerProvider, subjectBuffer, TaggerDelay.NearImmediate.ComputeTimeDelay()));
+                s_uniqueKey,
+                () =>
+                    new TagComputer(
+                        taggerProvider,
+                        subjectBuffer,
+                        TaggerDelay.NearImmediate.ComputeTimeDelay()
+                    )
+            );
 
             tagComputer.IncrementReferenceCount();
             return tagComputer;
         }
 
-        private void DisconnectTagComputer()
-            => _subjectBuffer.Properties.RemoveProperty(s_uniqueKey);
+        private void DisconnectTagComputer() =>
+            _subjectBuffer.Properties.RemoveProperty(s_uniqueKey);
 
         public event EventHandler<SnapshotSpanEventArgs>? TagsChanged;
 
-        private (SolutionServices solutionServices, IClassificationService classificationService)? TryGetClassificationService(ITextSnapshot snapshot)
+        private (
+            SolutionServices solutionServices,
+            IClassificationService classificationService
+        )? TryGetClassificationService(ITextSnapshot snapshot)
         {
             if (_workspace?.Services.SolutionServices is not { } solutionServices)
                 return null;
 
-            if (solutionServices.GetProjectServices(snapshot.ContentType)?.GetService<IClassificationService>() is not { } classificationService)
+            if (
+                solutionServices
+                    .GetProjectServices(snapshot.ContentType)
+                    ?.GetService<IClassificationService>()
+                is not { } classificationService
+            )
                 return null;
 
             return (solutionServices, classificationService);
@@ -132,7 +156,9 @@ internal partial class SyntacticClassificationTaggerProvider
 
         private void OnWorkspaceRegistrationChanged(object? sender, EventArgs e)
         {
-            var token = _taggerProvider._listener.BeginAsyncOperation(nameof(OnWorkspaceRegistrationChanged));
+            var token = _taggerProvider._listener.BeginAsyncOperation(
+                nameof(OnWorkspaceRegistrationChanged)
+            );
             var task = SwitchToMainThreadAndHookupWorkspaceAsync();
             task.CompletesAsyncOperation(token);
         }
@@ -141,7 +167,9 @@ internal partial class SyntacticClassificationTaggerProvider
         {
             try
             {
-                await _taggerProvider._threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(_disposalCancellationSource.Token);
+                await _taggerProvider._threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    _disposalCancellationSource.Token
+                );
 
                 // We both try to connect synchronously, and register for workspace registration events.
                 // It's possible (particularly in tests), to connect in the startup path, but then get a
@@ -235,13 +263,18 @@ internal partial class SyntacticClassificationTaggerProvider
             _workQueue.AddWork(args.After);
         }
 
-        private void OnDocumentActiveContextChanged(object? sender, DocumentActiveContextChangedEventArgs args)
+        private void OnDocumentActiveContextChanged(
+            object? sender,
+            DocumentActiveContextChangedEventArgs args
+        )
         {
             if (_workspace == null)
                 return;
 
             var documentId = args.NewActiveContextDocumentId;
-            var bufferDocumentId = _workspace.GetDocumentIdInCurrentContext(_subjectBuffer.AsTextContainer());
+            var bufferDocumentId = _workspace.GetDocumentIdInCurrentContext(
+                _subjectBuffer.AsTextContainer()
+            );
             if (bufferDocumentId != documentId)
                 return;
 
@@ -259,7 +292,9 @@ internal partial class SyntacticClassificationTaggerProvider
             if (args.Kind != WorkspaceChangeKind.ProjectChanged)
                 return;
 
-            var documentId = _workspace.GetDocumentIdInCurrentContext(_subjectBuffer.AsTextContainer());
+            var documentId = _workspace.GetDocumentIdInCurrentContext(
+                _subjectBuffer.AsTextContainer()
+            );
             if (args.ProjectId != documentId?.ProjectId)
                 return;
 
@@ -281,14 +316,21 @@ internal partial class SyntacticClassificationTaggerProvider
         /// the editor.  Calls to <see cref="ProcessChangesAsync"/> are serialized by <see cref="AsyncBatchingWorkQueue{TItem}"/>
         /// so we don't need to worry about multiple calls to this happening concurrently.
         /// </summary>
-        private async ValueTask ProcessChangesAsync(ImmutableSegmentedList<ITextSnapshot> snapshots, CancellationToken cancellationToken)
+        private async ValueTask ProcessChangesAsync(
+            ImmutableSegmentedList<ITextSnapshot> snapshots,
+            CancellationToken cancellationToken
+        )
         {
             // We have potentially heard about several changes to the subject buffer.  However
             // we only need to process the latest once.
             Contract.ThrowIfTrue(snapshots.IsDefault || snapshots.IsEmpty);
             var currentSnapshot = GetLatest(snapshots);
 
-            if (TryGetClassificationService(currentSnapshot) is not (var solutionServices, var classificationService))
+            if (
+                TryGetClassificationService(currentSnapshot)
+                is not
+                (var solutionServices, var classificationService)
+            )
                 return;
 
             var currentDocument = currentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
@@ -301,13 +343,16 @@ internal partial class SyntacticClassificationTaggerProvider
             // once GetTags is called.  Also, attempt to determine a smaller change range span
             // for this document so that we can avoid reporting the entire document as changed.
 
-            var currentRoot = await currentDocument.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var currentRoot = await currentDocument
+                .GetSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var changedSpan = await ComputeChangedSpanAsync().ConfigureAwait(false);
 
             lock (_gate)
             {
-                SumType<SyntaxNode, Document> lastProcessedDocumentOrRoot =
-                    currentRoot is not null ? currentRoot : currentDocument;
+                SumType<SyntaxNode, Document> lastProcessedDocumentOrRoot = currentRoot is not null
+                    ? currentRoot
+                    : currentDocument;
                 _lastProcessedData = (currentSnapshot, lastProcessedDocumentOrRoot);
             }
 
@@ -334,7 +379,10 @@ internal partial class SyntacticClassificationTaggerProvider
             {
                 var changeRange = await ComputeChangedRangeAsync().ConfigureAwait(false);
                 return changeRange != null
-                    ? currentSnapshot.GetSpan(changeRange.Value.Span.Start, changeRange.Value.NewLength)
+                    ? currentSnapshot.GetSpan(
+                        changeRange.Value.Span.Start,
+                        changeRange.Value.NewLength
+                    )
                     : currentSnapshot.GetFullSpan();
             }
 
@@ -347,33 +395,60 @@ internal partial class SyntacticClassificationTaggerProvider
                 {
                     // If we have syntax available fast path the change computation without async or blocking.
                     if (currentRoot is not null)
-                        return new(classificationService.ComputeSyntacticChangeRange(solutionServices, previousRoot, currentRoot, _diffTimeout, cancellationToken));
+                        return new(
+                            classificationService.ComputeSyntacticChangeRange(
+                                solutionServices,
+                                previousRoot,
+                                currentRoot,
+                                _diffTimeout,
+                                cancellationToken
+                            )
+                        );
                     else
                         return ValueTaskFactory.FromResult<TextChangeRange?>(null);
                 }
                 else
                 {
                     // Otherwise, fall back to the language to compute the difference based on the document contents.
-                    return classificationService.ComputeSyntacticChangeRangeAsync(previousDocumentOrRoot.Value.Second, currentDocument, _diffTimeout, cancellationToken);
+                    return classificationService.ComputeSyntacticChangeRangeAsync(
+                        previousDocumentOrRoot.Value.Second,
+                        currentDocument,
+                        _diffTimeout,
+                        cancellationToken
+                    );
                 }
             }
         }
 
-        private (ITextSnapshot lastSnapshot, SumType<SyntaxNode, Document> lastDocumentOrRoot)? GetLastProcessedData()
+        private (
+            ITextSnapshot lastSnapshot,
+            SumType<SyntaxNode, Document> lastDocumentOrRoot
+        )? GetLastProcessedData()
         {
             lock (_gate)
                 return _lastProcessedData;
         }
 
-        public void AddTags(NormalizedSnapshotSpanCollection spans, SegmentedList<ITagSpan<IClassificationTag>> tags)
+        public void AddTags(
+            NormalizedSnapshotSpanCollection spans,
+            SegmentedList<ITagSpan<IClassificationTag>> tags
+        )
         {
             _taggerProvider._threadingContext.ThrowIfNotOnUIThread();
 
-            using (Logger.LogBlock(FunctionId.Tagger_SyntacticClassification_TagComputer_GetTags, CancellationToken.None))
+            using (
+                Logger.LogBlock(
+                    FunctionId.Tagger_SyntacticClassification_TagComputer_GetTags,
+                    CancellationToken.None
+                )
+            )
                 AddTagsWorker(spans, tags);
         }
 
-        private void AddTagsWorker(NormalizedSnapshotSpanCollection spans, SegmentedList<ITagSpan<IClassificationTag>> tags)
+        private void AddTagsWorker(
+            NormalizedSnapshotSpanCollection spans,
+            SegmentedList<ITagSpan<IClassificationTag>> tags
+        )
         {
             _taggerProvider._threadingContext.ThrowIfNotOnUIThread();
             if (spans.Count == 0 || _workspace == null)
@@ -381,7 +456,11 @@ internal partial class SyntacticClassificationTaggerProvider
 
             var snapshot = spans[0].Snapshot;
 
-            if (TryGetClassificationService(snapshot) is not (var solutionServices, var classificationService))
+            if (
+                TryGetClassificationService(snapshot)
+                is not
+                (var solutionServices, var classificationService)
+            )
                 return;
 
             using var _ = Classifier.GetPooledList(out var classifiedSpans);
@@ -400,7 +479,11 @@ internal partial class SyntacticClassificationTaggerProvider
                 _taggerProvider._threadingContext.ThrowIfNotOnUIThread();
 
                 // First, get the tree and snapshot that we'll be operating over.
-                if (GetLastProcessedData() is not (var lastProcessedSnapshot, var lastProcessedDocumentOrRoot))
+                if (
+                    GetLastProcessedData()
+                    is not
+                    (var lastProcessedSnapshot, var lastProcessedDocumentOrRoot)
+                )
                 {
                     // We don't have a syntax tree yet.  Just do a lexical classification of the document.
                     AddLexicalClassifications(classificationService, span, classifiedSpans);
@@ -411,29 +494,57 @@ internal partial class SyntacticClassificationTaggerProvider
                 // If it is for an older version, then classify that older version and translate
                 // the classifications forward.  Otherwise, just classify normally.
 
-                if (lastProcessedSnapshot.Version.ReiteratedVersionNumber != span.Snapshot.Version.ReiteratedVersionNumber)
+                if (
+                    lastProcessedSnapshot.Version.ReiteratedVersionNumber
+                    != span.Snapshot.Version.ReiteratedVersionNumber
+                )
                 {
                     // Slightly more complicated.  We have a parse tree, it's just not for the snapshot we're being asked for.
-                    AddClassifiedSpansForPreviousDocument(solutionServices, classificationService, span, lastProcessedSnapshot, lastProcessedDocumentOrRoot, classifiedSpans);
+                    AddClassifiedSpansForPreviousDocument(
+                        solutionServices,
+                        classificationService,
+                        span,
+                        lastProcessedSnapshot,
+                        lastProcessedDocumentOrRoot,
+                        classifiedSpans
+                    );
                     return;
                 }
 
                 // Mainline case.  We have the corresponding document for the snapshot we're classifying.
-                AddSyntacticClassificationsForDocument(solutionServices, classificationService, span, lastProcessedDocumentOrRoot, classifiedSpans);
+                AddSyntacticClassificationsForDocument(
+                    solutionServices,
+                    classificationService,
+                    span,
+                    lastProcessedDocumentOrRoot,
+                    classifiedSpans
+                );
             }
         }
 
-        private void AddLexicalClassifications(IClassificationService classificationService, SnapshotSpan span, SegmentedList<ClassifiedSpan> classifiedSpans)
+        private void AddLexicalClassifications(
+            IClassificationService classificationService,
+            SnapshotSpan span,
+            SegmentedList<ClassifiedSpan> classifiedSpans
+        )
         {
             _taggerProvider._threadingContext.ThrowIfNotOnUIThread();
 
             classificationService.AddLexicalClassifications(
-                span.Snapshot.AsText(), span.Span.ToTextSpan(), classifiedSpans, CancellationToken.None);
+                span.Snapshot.AsText(),
+                span.Span.ToTextSpan(),
+                classifiedSpans,
+                CancellationToken.None
+            );
         }
 
         private void AddSyntacticClassificationsForDocument(
-            SolutionServices solutionServices, IClassificationService classificationService, SnapshotSpan span,
-            SumType<SyntaxNode, Document> lastProcessedDocumentOrRoot, SegmentedList<ClassifiedSpan> classifiedSpans)
+            SolutionServices solutionServices,
+            IClassificationService classificationService,
+            SnapshotSpan span,
+            SumType<SyntaxNode, Document> lastProcessedDocumentOrRoot,
+            SegmentedList<ClassifiedSpan> classifiedSpans
+        )
         {
             _taggerProvider._threadingContext.ThrowIfNotOnUIThread();
             var cancellationToken = CancellationToken.None;
@@ -449,25 +560,44 @@ internal partial class SyntacticClassificationTaggerProvider
             //
             // If this is a language that does not support syntax, we have no choice but to try to get the
             // classifications asynchronously, blocking on that result.
-            var root = lastProcessedDocumentOrRoot.TryGetFirst(out var tempRoot)
-                ? tempRoot
+            var root =
+                lastProcessedDocumentOrRoot.TryGetFirst(out var tempRoot) ? tempRoot
                 : lastProcessedDocumentOrRoot.Second.SupportsSyntaxTree
-                    ? lastProcessedDocumentOrRoot.Second.GetSyntaxRootSynchronously(cancellationToken)
-                    : null;
+                    ? lastProcessedDocumentOrRoot.Second.GetSyntaxRootSynchronously(
+                        cancellationToken
+                    )
+                : null;
 
             if (root != null)
-                classificationService.AddSyntacticClassifications(solutionServices, root, span.Span.ToTextSpan(), tempList, cancellationToken);
+                classificationService.AddSyntacticClassifications(
+                    solutionServices,
+                    root,
+                    span.Span.ToTextSpan(),
+                    tempList,
+                    cancellationToken
+                );
             else
-                classificationService.AddSyntacticClassificationsAsync(lastProcessedDocumentOrRoot.Second, span.Span.ToTextSpan(), tempList, cancellationToken).Wait(cancellationToken);
+                classificationService
+                    .AddSyntacticClassificationsAsync(
+                        lastProcessedDocumentOrRoot.Second,
+                        span.Span.ToTextSpan(),
+                        tempList,
+                        cancellationToken
+                    )
+                    .Wait(cancellationToken);
 
             _lastLineCache.Update(span, tempList);
             classifiedSpans.AddRange(tempList);
         }
 
         private void AddClassifiedSpansForPreviousDocument(
-            SolutionServices solutionServices, IClassificationService classificationService, SnapshotSpan span,
-            ITextSnapshot lastProcessedSnapshot, SumType<SyntaxNode, Document> lastProcessedDocumentOrRoot,
-            SegmentedList<ClassifiedSpan> classifiedSpans)
+            SolutionServices solutionServices,
+            IClassificationService classificationService,
+            SnapshotSpan span,
+            ITextSnapshot lastProcessedSnapshot,
+            SumType<SyntaxNode, Document> lastProcessedDocumentOrRoot,
+            SegmentedList<ClassifiedSpan> classifiedSpans
+        )
         {
             _taggerProvider._threadingContext.ThrowIfNotOnUIThread();
 
@@ -481,7 +611,10 @@ internal partial class SyntacticClassificationTaggerProvider
 
             // 1) translate the requested span onto the right span for the snapshot that corresponds
             //    to the syntax tree.
-            var translatedSpan = span.TranslateTo(lastProcessedSnapshot, SpanTrackingMode.EdgeExclusive);
+            var translatedSpan = span.TranslateTo(
+                lastProcessedSnapshot,
+                SpanTrackingMode.EdgeExclusive
+            );
             if (translatedSpan.IsEmpty)
             {
                 // well, there is no information we can get from previous tree, use lexer to
@@ -492,7 +625,13 @@ internal partial class SyntacticClassificationTaggerProvider
             {
                 using var _ = Classifier.GetPooledList(out var tempList);
 
-                AddSyntacticClassificationsForDocument(solutionServices, classificationService, translatedSpan, lastProcessedDocumentOrRoot, tempList);
+                AddSyntacticClassificationsForDocument(
+                    solutionServices,
+                    classificationService,
+                    translatedSpan,
+                    lastProcessedDocumentOrRoot,
+                    tempList
+                );
 
                 var currentSnapshot = span.Snapshot;
                 var currentText = currentSnapshot.AsText();
@@ -500,15 +639,26 @@ internal partial class SyntacticClassificationTaggerProvider
                 {
                     // 2) Translate those classifications forward so that they correspond to the true
                     //    requested snapshot.
-                    var lastSnapshotSpan = lastClassifiedSpan.TextSpan.ToSnapshotSpan(lastProcessedSnapshot);
-                    var currentSnapshotSpan = lastSnapshotSpan.TranslateTo(currentSnapshot, SpanTrackingMode.EdgeInclusive);
+                    var lastSnapshotSpan = lastClassifiedSpan.TextSpan.ToSnapshotSpan(
+                        lastProcessedSnapshot
+                    );
+                    var currentSnapshotSpan = lastSnapshotSpan.TranslateTo(
+                        currentSnapshot,
+                        SpanTrackingMode.EdgeInclusive
+                    );
 
-                    var currentClassifiedSpan = new ClassifiedSpan(lastClassifiedSpan.ClassificationType, currentSnapshotSpan.Span.ToTextSpan());
+                    var currentClassifiedSpan = new ClassifiedSpan(
+                        lastClassifiedSpan.ClassificationType,
+                        currentSnapshotSpan.Span.ToTextSpan()
+                    );
 
                     // 3) The classifications may be incorrect due to changes in the text.  For example,
                     //    if "clss" becomes "class", then we want to changes the classification from
                     //    'identifier' to 'keyword'.
-                    currentClassifiedSpan = classificationService.AdjustStaleClassification(currentText, currentClassifiedSpan);
+                    currentClassifiedSpan = classificationService.AdjustStaleClassification(
+                        currentText,
+                        currentClassifiedSpan
+                    );
 
                     classifiedSpans.Add(currentClassifiedSpan);
                 }

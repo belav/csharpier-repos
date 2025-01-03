@@ -2,15 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections;
-using Xunit;
 using System.Reflection;
+using Xunit;
 
 namespace System.Diagnostics.TraceSourceTests
 {
-    public sealed class TraceListenerCollectionClassTests
-        : ListBaseTests<TraceListenerCollection>
+    public sealed class TraceListenerCollectionClassTests : ListBaseTests<TraceListenerCollection>
     {
-
         public override TraceListenerCollection Create(int count = 0)
         {
             // TraceListenerCollection has an internal constructor
@@ -88,11 +86,7 @@ namespace System.Diagnostics.TraceSourceTests
         {
             var list = Create();
             Assert.Throws<ArgumentNullException>(() => list.AddRange((TraceListener[])null));
-            var items =
-                new TraceListener[] {
-                    CreateListener(),
-                    CreateListener(),
-                };
+            var items = new TraceListener[] { CreateListener(), CreateListener() };
             list.AddRange(items);
             Assert.Equal(items[0], list[0]);
             Assert.Equal(items[1], list[1]);
@@ -102,7 +96,9 @@ namespace System.Diagnostics.TraceSourceTests
         public void AddRangeCollectionTest()
         {
             var list = Create();
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((TraceListenerCollection)null));
+            Assert.Throws<ArgumentNullException>(
+                () => list.AddRange((TraceListenerCollection)null)
+            );
             var items = Create();
             var item0 = CreateListener();
             var item1 = CreateListener();
@@ -344,8 +340,7 @@ namespace System.Diagnostics.TraceSourceTests
         }
     }
 
-    public abstract class CollectionBaseTests<T>
-        : EnumerableBaseTests<T>
+    public abstract class CollectionBaseTests<T> : EnumerableBaseTests<T>
         where T : ICollection
     {
         public abstract bool IsSynchronized { get; }
@@ -400,10 +395,13 @@ namespace System.Diagnostics.TraceSourceTests
         {
             var list = Create(4);
             var arr = new object[2];
-            AssertExtensions.Throws<ArgumentException>("destinationArray", "", () => list.CopyTo(arr, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                "destinationArray",
+                "",
+                () => list.CopyTo(arr, 0)
+            );
         }
     }
-
 
     public abstract class EnumerableBaseTests<T>
         where T : IEnumerable

@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         NoBestSourceType,
         NoBestTargetType,
         Ambiguous,
-        Valid
+        Valid,
     }
 
     internal readonly struct UserDefinedConversionResult
@@ -26,50 +26,67 @@ namespace Microsoft.CodeAnalysis.CSharp
         public readonly int Best;
         public readonly UserDefinedConversionResultKind Kind;
 
-        public static UserDefinedConversionResult NoApplicableOperators(ImmutableArray<UserDefinedConversionAnalysis> results)
+        public static UserDefinedConversionResult NoApplicableOperators(
+            ImmutableArray<UserDefinedConversionAnalysis> results
+        )
         {
             return new UserDefinedConversionResult(
                 UserDefinedConversionResultKind.NoApplicableOperators,
                 results,
-                -1);
+                -1
+            );
         }
 
-        public static UserDefinedConversionResult NoBestSourceType(ImmutableArray<UserDefinedConversionAnalysis> results)
+        public static UserDefinedConversionResult NoBestSourceType(
+            ImmutableArray<UserDefinedConversionAnalysis> results
+        )
         {
             return new UserDefinedConversionResult(
                 UserDefinedConversionResultKind.NoBestSourceType,
                 results,
-                -1);
+                -1
+            );
         }
 
-        public static UserDefinedConversionResult NoBestTargetType(ImmutableArray<UserDefinedConversionAnalysis> results)
+        public static UserDefinedConversionResult NoBestTargetType(
+            ImmutableArray<UserDefinedConversionAnalysis> results
+        )
         {
             return new UserDefinedConversionResult(
                 UserDefinedConversionResultKind.NoBestTargetType,
                 results,
-                -1);
+                -1
+            );
         }
 
-        public static UserDefinedConversionResult Ambiguous(ImmutableArray<UserDefinedConversionAnalysis> results)
+        public static UserDefinedConversionResult Ambiguous(
+            ImmutableArray<UserDefinedConversionAnalysis> results
+        )
         {
             return new UserDefinedConversionResult(
                 UserDefinedConversionResultKind.Ambiguous,
                 results,
-                -1);
+                -1
+            );
         }
 
-        public static UserDefinedConversionResult Valid(ImmutableArray<UserDefinedConversionAnalysis> results, int best)
+        public static UserDefinedConversionResult Valid(
+            ImmutableArray<UserDefinedConversionAnalysis> results,
+            int best
+        )
         {
             return new UserDefinedConversionResult(
                 UserDefinedConversionResultKind.Valid,
                 results,
-                best);
+                best
+            );
         }
 
         private UserDefinedConversionResult(
             UserDefinedConversionResultKind kind,
             ImmutableArray<UserDefinedConversionAnalysis> results,
-            int best)
+            int best
+        )
         {
             this.Kind = kind;
             this.Results = results;
@@ -84,10 +101,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             sb.AppendFormat("Summary: {0}\n", Kind);
             for (int i = 0; i < Results.Length; ++i)
             {
-                sb.AppendFormat("{0} Conversion: {1} Result: {2}\n",
+                sb.AppendFormat(
+                    "{0} Conversion: {1} Result: {2}\n",
                     i == Best ? "*" : " ",
                     Results[i].Operator,
-                    Results[i].Kind);
+                    Results[i].Kind
+                );
             }
 
             return sb.ToString();
@@ -96,4 +115,3 @@ namespace Microsoft.CodeAnalysis.CSharp
 #endif
     }
 }
-

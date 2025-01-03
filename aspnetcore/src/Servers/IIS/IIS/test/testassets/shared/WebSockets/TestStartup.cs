@@ -17,11 +17,14 @@ public static class TestStartup
         var delegates = new Dictionary<string, RequestDelegate>();
 
         var type = startup.GetType();
-        foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+        foreach (
+            var method in type.GetMethods(
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            )
+        )
         {
             var parameters = method.GetParameters();
-            if (method.Name != "Configure" &&
-                parameters.Length == 1)
+            if (method.Name != "Configure" && parameters.Length == 1)
             {
                 RequestDelegate appfunc = null;
 
@@ -49,7 +52,13 @@ public static class TestStartup
         {
             foreach (var requestDelegate in delegates)
             {
-                if (context.Request.Path.StartsWithSegments(requestDelegate.Key, out var matchedPath, out var remainingPath))
+                if (
+                    context.Request.Path.StartsWithSegments(
+                        requestDelegate.Key,
+                        out var matchedPath,
+                        out var remainingPath
+                    )
+                )
                 {
                     var pathBase = context.Request.PathBase;
                     context.Request.PathBase = pathBase.Add(matchedPath);

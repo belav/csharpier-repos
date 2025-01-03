@@ -2,10 +2,10 @@
 
 class X
 {
-	public static void Main ()
-	{
-		TypeWithIndexer a = new TypeWithIndexer ();
-		var x = a[0];
-		a[0] = x;
-	}
+    public static void Main()
+    {
+        TypeWithIndexer a = new TypeWithIndexer();
+        var x = a[0];
+        a[0] = x;
+    }
 }

@@ -10,5 +10,6 @@ internal sealed class EndpointDelegateComparer : IEqualityComparer<Endpoint>
     public static readonly EndpointDelegateComparer Instance = new EndpointDelegateComparer();
 
     public bool Equals(Endpoint a, Endpoint b) => Endpoint.SignatureEquals(a, b);
+
     public int GetHashCode(Endpoint endpoint) => Endpoint.GetSignatureHashCode(endpoint);
 }

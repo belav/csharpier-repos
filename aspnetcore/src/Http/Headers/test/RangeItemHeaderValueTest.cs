@@ -98,8 +98,12 @@ public class RangeItemHeaderValueTest
         // The separator doesn't matter. It only parses until the first non-whitespace
         CheckValidTryParse(" 1 - 2 ,", 1, 2);
 
-        CheckValidTryParse(",,1-2, 3 -  , , -6 , ,,", new Tuple<long?, long?>(1, 2), new Tuple<long?, long?>(3, null),
-            new Tuple<long?, long?>(null, 6));
+        CheckValidTryParse(
+            ",,1-2, 3 -  , , -6 , ,,",
+            new Tuple<long?, long?>(1, 2),
+            new Tuple<long?, long?>(3, null),
+            new Tuple<long?, long?>(null, 6)
+        );
         CheckValidTryParse("1-2,", new Tuple<long?, long?>(1, 2));
         CheckValidTryParse("1-", new Tuple<long?, long?>(1, null));
     }
@@ -139,7 +143,10 @@ public class RangeItemHeaderValueTest
         Assert.Equal(expectedTo, range.To);
     }
 
-    private static void CheckValidTryParse(string input, params Tuple<long?, long?>[] expectedRanges)
+    private static void CheckValidTryParse(
+        string input,
+        params Tuple<long?, long?>[] expectedRanges
+    )
     {
         RangeHeaderValue? result;
         Assert.True(RangeHeaderValue.TryParse("byte=" + input, out result), input);

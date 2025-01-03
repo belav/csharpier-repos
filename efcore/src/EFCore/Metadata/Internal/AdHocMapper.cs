@@ -21,9 +21,7 @@ public class AdHocMapper : IAdHocMapper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public AdHocMapper(
-        IModel model,
-        ModelCreationDependencies modelCreationDependencies)
+    public AdHocMapper(IModel model, ModelCreationDependencies modelCreationDependencies)
     {
         _model = model;
         _modelCreationDependencies = modelCreationDependencies;
@@ -35,7 +33,8 @@ public class AdHocMapper : IAdHocMapper
         {
             if (_conventionSet == null)
             {
-                _conventionSet = _modelCreationDependencies.ConventionSetBuilder.CreateConventionSet();
+                _conventionSet =
+                    _modelCreationDependencies.ConventionSetBuilder.CreateConventionSet();
                 _conventionSet.Remove(typeof(DbSetFindingConvention));
                 _conventionSet.Remove(typeof(RelationshipDiscoveryConvention));
                 _conventionSet.Remove(typeof(KeyDiscoveryConvention));
@@ -75,20 +74,31 @@ public class AdHocMapper : IAdHocMapper
     /// </summary>
     public virtual RuntimeEntityType GetOrAddEntityType(Type clrType)
     {
-        Check.DebugAssert(_model is RuntimeModel, "Ad-hoc entity types can only be used at runtime.");
+        Check.DebugAssert(
+            _model is RuntimeModel,
+            "Ad-hoc entity types can only be used at runtime."
+        );
 
         return ((RuntimeModel)_model).FindAdHocEntityType(clrType) ?? AddEntityType(clrType);
     }
 
     private RuntimeEntityType AddEntityType(Type clrType)
     {
-        var modelBuilder = new ModelBuilder(ConventionSet, _modelCreationDependencies.ModelDependencies);
+        var modelBuilder = new ModelBuilder(
+            ConventionSet,
+            _modelCreationDependencies.ModelDependencies
+        );
         modelBuilder.HasAnnotation(CoreAnnotationNames.AdHocModel, true);
         modelBuilder.Entity(clrType).HasNoKey();
         var finalizedModel = modelBuilder.FinalizeModel();
         var runtimeModel = _modelCreationDependencies.ModelRuntimeInitializer.Initialize(
-            finalizedModel, designTime: false, _modelCreationDependencies.ValidationLogger);
+            finalizedModel,
+            designTime: false,
+            _modelCreationDependencies.ValidationLogger
+        );
 
-        return ((RuntimeModel)_model).GetOrAddAdHocEntityType((RuntimeEntityType)runtimeModel.FindEntityType(clrType)!);
+        return ((RuntimeModel)_model).GetOrAddAdHocEntityType(
+            (RuntimeEntityType)runtimeModel.FindEntityType(clrType)!
+        );
     }
 }

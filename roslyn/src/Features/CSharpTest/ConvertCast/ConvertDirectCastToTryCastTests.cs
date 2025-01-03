@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertConversionOperat
         [InlineData("List<int>")]
         public async Task ConvertFromExplicitToAsSpecialTypes(string targetType)
         {
-            var initialMarkup = @$"
+            var initialMarkup =
+                @$"
 using System;
 using System.Collections.Generic;
 
@@ -66,7 +67,8 @@ class Program
         var x = ([||]{targetType})o;
     }}
 }}";
-            var expectedMarkup = @$"
+            var expectedMarkup =
+                @$"
 using System;
 using System.Collections.Generic;
 
@@ -186,9 +188,13 @@ class Program
         [Theory]
         [InlineData("class", true)]
         [InlineData("interface", false)]
-        public async Task ConvertFromExplicitToAs_ConcreteClassOrInterfaceConstraint(string targetTypeKind, bool shouldBeFixed)
+        public async Task ConvertFromExplicitToAs_ConcreteClassOrInterfaceConstraint(
+            string targetTypeKind,
+            bool shouldBeFixed
+        )
         {
-            var initialMarkup = @$"
+            var initialMarkup =
+                @$"
 public {targetTypeKind} Target {{ }}
 
 public class C
@@ -200,7 +206,8 @@ public class C
     }}
 }}
 ";
-            var fixedCode = @$"
+            var fixedCode =
+                @$"
 public {targetTypeKind} Target {{ }}
 
 public class C
@@ -276,24 +283,31 @@ public class C
                 """;
             await new VerifyCS.Test
             {
-                TestState = {
+                TestState =
+                {
                     Sources = { InitialMarkup },
                     // /0/Test0.cs(7,18): error CS0246: Type or namespace "MissingType" not found.
-                    ExpectedDiagnostics = { DiagnosticResult.CompilerError("CS0246").WithLocation(0).WithArguments("MissingType") }
+                    ExpectedDiagnostics =
+                    {
+                        DiagnosticResult
+                            .CompilerError("CS0246")
+                            .WithLocation(0)
+                            .WithArguments("MissingType"),
+                    },
                 },
                 FixedCode = InitialMarkup,
                 OffersEmptyRefactoring = false,
                 CodeActionValidationMode = CodeActionValidationMode.None,
             }.RunAsync();
         }
+
         [Theory]
-        [InlineData("(C$$)((object)1)",
-                    "((object)1) as C")]
-        [InlineData("(C)((object$$)1)",
-                    "(C)(1 as object)")]
+        [InlineData("(C$$)((object)1)", "((object)1) as C")]
+        [InlineData("(C)((object$$)1)", "(C)(1 as object)")]
         public async Task ConvertFromExplicitToAs_Nested(string cast, string asExpression)
         {
-            var initialMarkup = @$"
+            var initialMarkup =
+                @$"
 class C {{ }}
 
 class Program
@@ -304,7 +318,8 @@ class Program
     }}
 }}
 ";
-            var expectedMarkup = @$"
+            var expectedMarkup =
+                @$"
 class C {{ }}
 
 class Program
@@ -321,43 +336,45 @@ class Program
                 FixedCode = expectedMarkup,
                 CodeActionValidationMode = CodeActionValidationMode.Full,
             }.RunAsync();
-
         }
 
         [Theory]
-        [InlineData("/* Leading */ (obj$$ect)1",
-                    "/* Leading */ 1 as object")]
-        [InlineData("(obj$$ect)1 /* Trailing */",
-                    "1 as object /* Trailing */")]
-        [InlineData("(obj$$ect)1; // Trailing",
-                    "1 as object; // Trailing")]
-        [InlineData("(/* Middle1 */ obj$$ect)1",
-                    """
-                    1 as
-                    /* Middle1 */ object
-                    """)]
-        [InlineData("(obj$$ect /* Middle2 */ )1",
-                    "1 as object /* Middle2 */ ")]
-        [InlineData("(obj$$ect) /* Middle3 */ 1",
-                    "/* Middle3 */ 1 as object")]
-        [InlineData("/* Leading */ (/* Middle1 */ obj$$ect /* Middle2 */ ) /* Middle3 */ 1 /* Trailing */",
-                    """
-                    /* Leading */ /* Middle3 */ 1 as
-                    /* Middle1 */ object /* Middle2 */  /* Trailing */
-                    """)]
-        [InlineData("""
-            ($$
-            object
-            )
-            1
-            """, """
+        [InlineData("/* Leading */ (obj$$ect)1", "/* Leading */ 1 as object")]
+        [InlineData("(obj$$ect)1 /* Trailing */", "1 as object /* Trailing */")]
+        [InlineData("(obj$$ect)1; // Trailing", "1 as object; // Trailing")]
+        [InlineData(
+            "(/* Middle1 */ obj$$ect)1",
+            """
+                1 as
+                /* Middle1 */ object
+                """
+        )]
+        [InlineData("(obj$$ect /* Middle2 */ )1", "1 as object /* Middle2 */ ")]
+        [InlineData("(obj$$ect) /* Middle3 */ 1", "/* Middle3 */ 1 as object")]
+        [InlineData(
+            "/* Leading */ (/* Middle1 */ obj$$ect /* Middle2 */ ) /* Middle3 */ 1 /* Trailing */",
+            """
+                /* Leading */ /* Middle3 */ 1 as
+                /* Middle1 */ object /* Middle2 */  /* Trailing */
+                """
+        )]
+        [InlineData(
+            """
+                ($$
+                object
+                )
+                1
+                """,
+            """
 
-            1 as
-            object
-            """)]
+                1 as
+                object
+                """
+        )]
         public async Task ConvertFromExplicitToAs_Trivia(string cast, string asExpression)
         {
-            var initialMarkup = @$"
+            var initialMarkup =
+                @$"
 class Program
 {{
     public static void Main()
@@ -366,7 +383,8 @@ class Program
     }}
 }}
 ";
-            var expectedMarkup = @$"
+            var expectedMarkup =
+                @$"
 class Program
 {{
     public static void Main()

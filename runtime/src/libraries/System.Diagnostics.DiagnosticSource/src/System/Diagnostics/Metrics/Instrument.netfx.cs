@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Threading;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace System.Diagnostics.Metrics
 {
@@ -12,7 +12,8 @@ namespace System.Diagnostics.Metrics
     /// <remarks>
     /// This class supports only the following generic parameter types: <see cref="byte" />, <see cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double" />, and <see cref="decimal" />
     /// </remarks>
-    public abstract partial class Instrument<T> : Instrument where T : struct
+    public abstract partial class Instrument<T> : Instrument
+        where T : struct
     {
         [ThreadStatic]
         private static KeyValuePair<string, object?>[] ts_tags;
@@ -39,7 +40,11 @@ namespace System.Diagnostics.Metrics
         /// <param name="measurement">The measurement value.</param>
         /// <param name="tag1">A first key-value pair tag associated with the measurement.</param>
         /// <param name="tag2">A second key-value pair tag associated with the measurement.</param>
-        protected void RecordMeasurement(T measurement, KeyValuePair<string, object?> tag1, KeyValuePair<string, object?> tag2)
+        protected void RecordMeasurement(
+            T measurement,
+            KeyValuePair<string, object?> tag1,
+            KeyValuePair<string, object?> tag2
+        )
         {
             var tags = ts_tags ?? new KeyValuePair<string, object?>[MaxTagsCount];
             ts_tags = null;
@@ -56,7 +61,12 @@ namespace System.Diagnostics.Metrics
         /// <param name="tag1">A first key-value pair tag associated with the measurement.</param>
         /// <param name="tag2">A second key-value pair tag associated with the measurement.</param>
         /// <param name="tag3">A third key-value pair tag associated with the measurement.</param>
-        protected void RecordMeasurement(T measurement, KeyValuePair<string, object?> tag1, KeyValuePair<string, object?> tag2, KeyValuePair<string, object?> tag3)
+        protected void RecordMeasurement(
+            T measurement,
+            KeyValuePair<string, object?> tag1,
+            KeyValuePair<string, object?> tag2,
+            KeyValuePair<string, object?> tag3
+        )
         {
             var tags = ts_tags ?? new KeyValuePair<string, object?>[MaxTagsCount];
             ts_tags = null;
@@ -67,12 +77,12 @@ namespace System.Diagnostics.Metrics
             ts_tags = tags;
         }
 
-         /// <summary>
+        /// <summary>
         /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to this instrument.
         /// </summary>
         /// <param name="measurement">The measurement value.</param>
         /// <param name="tagList">A <see cref="T:System.Diagnostics.TagList" /> of tags associated with the measurement.</param>
-       protected void RecordMeasurement(T measurement, in TagList tagList)
+        protected void RecordMeasurement(T measurement, in TagList tagList)
         {
             KeyValuePair<string, object?>[]? tags = tagList.Tags;
             if (tags is not null)
@@ -85,15 +95,32 @@ namespace System.Diagnostics.Metrics
             Debug.Assert(tagList.Count <= MaxTagsCount);
             switch (tagList.Count)
             {
-                case 8: tags[7] = tagList.Tag8; goto case 7;
-                case 7: tags[6] = tagList.Tag7; goto case 6;
-                case 6: tags[5] = tagList.Tag6; goto case 5;
-                case 5: tags[4] = tagList.Tag5; goto case 4;
-                case 4: tags[3] = tagList.Tag4; goto case 3;
-                case 3: tags[2] = tagList.Tag3; goto case 2;
-                case 2: tags[1] = tagList.Tag2; goto case 1;
-                case 1: tags[0] = tagList.Tag1; break;
-                case 0: return; // no need to report anything
+                case 8:
+                    tags[7] = tagList.Tag8;
+                    goto case 7;
+                case 7:
+                    tags[6] = tagList.Tag7;
+                    goto case 6;
+                case 6:
+                    tags[5] = tagList.Tag6;
+                    goto case 5;
+                case 5:
+                    tags[4] = tagList.Tag5;
+                    goto case 4;
+                case 4:
+                    tags[3] = tagList.Tag4;
+                    goto case 3;
+                case 3:
+                    tags[2] = tagList.Tag3;
+                    goto case 2;
+                case 2:
+                    tags[1] = tagList.Tag2;
+                    goto case 1;
+                case 1:
+                    tags[0] = tagList.Tag1;
+                    break;
+                case 0:
+                    return; // no need to report anything
                 default:
                     Debug.Assert(false);
                     return;

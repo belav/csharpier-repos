@@ -17,8 +17,13 @@ namespace System.ServiceModel.Channels
         PeerNode peerNode;
         bool released = false;
 
-        public PeerInputChannel(PeerNodeImplementation peerNode, PeerNodeImplementation.Registration registration, ChannelManagerBase channelManager,
-            EndpointAddress localAddress, Uri via)
+        public PeerInputChannel(
+            PeerNodeImplementation peerNode,
+            PeerNodeImplementation.Registration registration,
+            ChannelManagerBase channelManager,
+            EndpointAddress localAddress,
+            Uri via
+        )
             : base(channelManager, localAddress)
         {
             PeerNodeImplementation.ValidateVia(via);
@@ -47,7 +52,11 @@ namespace System.ServiceModel.Channels
             }
             else if (typeof(T) == typeof(FaultConverter))
             {
-                return (T)(object)FaultConverter.GetDefaultFaultConverter(MessageVersion.Soap12WSAddressing10);
+                return (T)
+                    (object)
+                        FaultConverter.GetDefaultFaultConverter(
+                            MessageVersion.Soap12WSAddressing10
+                        );
             }
             return base.GetProperty<T>();
         }
@@ -63,17 +72,29 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                 }
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             // first close the node, then the base
-            return new ChainedAsyncResult(timeout, callback, state, OnBeginCloseNode, OnEndCloseNode,
-                base.OnBeginClose, base.OnEndClose);
+            return new ChainedAsyncResult(
+                timeout,
+                callback,
+                state,
+                OnBeginCloseNode,
+                OnEndCloseNode,
+                base.OnBeginClose,
+                base.OnEndClose
+            );
         }
 
         // fisrt step in the chained async close
@@ -82,11 +103,22 @@ namespace System.ServiceModel.Channels
             return this.peerNode.InnerNode.BeginClose(timeout, callback, state);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             // open the base, then the node
-            return new ChainedAsyncResult(timeout, callback, state, base.OnBeginOpen, base.OnEndOpen,
-                OnBeginOpenNode, OnEndOpenNode);
+            return new ChainedAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginOpen,
+                base.OnEndOpen,
+                OnBeginOpenNode,
+                OnEndOpenNode
+            );
         }
 
         // second step in the chained async open
@@ -155,8 +187,13 @@ namespace System.ServiceModel.Channels
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerChannelMessageReceived,
-                    SR.GetString(SR.TraceCodePeerChannelMessageReceived), this, message);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.PeerChannelMessageReceived,
+                    SR.GetString(SR.TraceCodePeerChannelMessageReceived),
+                    this,
+                    message
+                );
             }
         }
 

@@ -20,7 +20,10 @@ unsafe partial class GenericsNative
     public static extern Point1<char> AddPoint1C(Point1<char> lhs, Point1<char> rhs);
 
     [DllImport(nameof(GenericsNative))]
-    public static extern Point1<char> AddPoint1Cs([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point1<char>[] pValues, int count);
+    public static extern Point1<char> AddPoint1Cs(
+        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point1<char>[] pValues,
+        int count
+    );
 
     [DllImport(nameof(GenericsNative))]
     public static extern Point1<char> AddPoint1Cs(in Point1<char> pValues, int count);
@@ -32,22 +35,29 @@ unsafe partial class GenericsTest
     {
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint1C('1'));
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint1COut('1', out GenericsNative.Point1<char> value3));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.GetPoint1COut('1', out GenericsNative.Point1<char> value3)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint1CRef('1'));
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint1C(default, default));
 
-        GenericsNative.Point1<char>[] values = new GenericsNative.Point1<char>[] {
+        GenericsNative.Point1<char>[] values = new GenericsNative.Point1<char>[]
+        {
             default,
             default,
             default,
             default,
-            default
+            default,
         };
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint1Cs(values, values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddPoint1Cs(values, values.Length)
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint1Cs(in values[0], values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddPoint1Cs(in values[0], values.Length)
+        );
     }
 }

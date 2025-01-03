@@ -30,31 +30,34 @@ public class InternationalizationStartup
         }
 
         // Mount the server-side Blazor app on /subdir
-        app.Map("/subdir", app =>
-        {
-            app.UseBlazorFrameworkFiles();
-            app.UseStaticFiles();
-
-            app.UseRequestLocalization(options =>
+        app.Map(
+            "/subdir",
+            app =>
             {
-                options.AddSupportedCultures("en-US", "fr-FR");
-                options.AddSupportedUICultures("en-US", "fr-FR");
+                app.UseBlazorFrameworkFiles();
+                app.UseStaticFiles();
 
-                // Cookie culture provider is included by default, but we want it to be the only one.
-                options.RequestCultureProviders.Clear();
-                options.RequestCultureProviders.Add(new CookieRequestCultureProvider());
+                app.UseRequestLocalization(options =>
+                {
+                    options.AddSupportedCultures("en-US", "fr-FR");
+                    options.AddSupportedUICultures("en-US", "fr-FR");
 
-                // We want the default to be en-US so that the tests for bind can work consistently.
-                options.SetDefaultCulture("en-US");
-            });
+                    // Cookie culture provider is included by default, but we want it to be the only one.
+                    options.RequestCultureProviders.Clear();
+                    options.RequestCultureProviders.Add(new CookieRequestCultureProvider());
 
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapBlazorHub();
-                endpoints.MapFallbackToPage("/_ServerHost");
-            });
-        });
+                    // We want the default to be en-US so that the tests for bind can work consistently.
+                    options.SetDefaultCulture("en-US");
+                });
+
+                app.UseRouting();
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                    endpoints.MapBlazorHub();
+                    endpoints.MapFallbackToPage("/_ServerHost");
+                });
+            }
+        );
     }
 }

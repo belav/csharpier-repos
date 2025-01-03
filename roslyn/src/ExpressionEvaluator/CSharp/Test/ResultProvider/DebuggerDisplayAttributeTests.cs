@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         [Fact]
         public void WithoutExpressionHoles()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 class C0 { }
@@ -52,20 +53,45 @@ class Wrapper
             var assembly = GetAssembly(source);
 
             var type = assembly.GetType("Wrapper");
-            var value = CreateDkmClrValue(type.Instantiate(), type, evalFlags: DkmEvaluationResultFlags.None);
+            var value = CreateDkmClrValue(
+                type.Instantiate(),
+                type,
+                evalFlags: DkmEvaluationResultFlags.None
+            );
 
-            Verify(GetChildren(FormatResult("w", value)),
-                EvalResult("c0", "{C0}", "C0", "w.c0", DkmEvaluationResultFlags.None | DkmEvaluationResultFlags.CanFavorite),
-                EvalResult("c1", "Value", "C1", "w.c1", DkmEvaluationResultFlags.None | DkmEvaluationResultFlags.CanFavorite),
+            Verify(
+                GetChildren(FormatResult("w", value)),
+                EvalResult(
+                    "c0",
+                    "{C0}",
+                    "C0",
+                    "w.c0",
+                    DkmEvaluationResultFlags.None | DkmEvaluationResultFlags.CanFavorite
+                ),
+                EvalResult(
+                    "c1",
+                    "Value",
+                    "C1",
+                    "w.c1",
+                    DkmEvaluationResultFlags.None | DkmEvaluationResultFlags.CanFavorite
+                ),
                 EvalResult("Name", "Value", "C2", "w.c2", DkmEvaluationResultFlags.None),
-                EvalResult("c3", "Value", "Type", "w.c3", DkmEvaluationResultFlags.None | DkmEvaluationResultFlags.CanFavorite),
-                EvalResult("Name", "Value", "Type", "w.c4", DkmEvaluationResultFlags.None));
+                EvalResult(
+                    "c3",
+                    "Value",
+                    "Type",
+                    "w.c3",
+                    DkmEvaluationResultFlags.None | DkmEvaluationResultFlags.CanFavorite
+                ),
+                EvalResult("Name", "Value", "Type", "w.c4", DkmEvaluationResultFlags.None)
+            );
         }
 
         [Fact]
         public void OnlyExpressionHoles()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""{value}"", Name=""{name}"", Type=""{type}"")]
@@ -84,16 +110,29 @@ class Wrapper
             var assembly = GetAssembly(source);
 
             var type = assembly.GetType("Wrapper");
-            var value = CreateDkmClrValue(type.Instantiate(), type, evalFlags: DkmEvaluationResultFlags.None);
+            var value = CreateDkmClrValue(
+                type.Instantiate(),
+                type,
+                evalFlags: DkmEvaluationResultFlags.None
+            );
 
-            Verify(GetChildren(FormatResult("c", value)),
-                EvalResult("\"Name\"", "\"Value\"", "\"Type\"", "c.c", DkmEvaluationResultFlags.Expandable));
+            Verify(
+                GetChildren(FormatResult("c", value)),
+                EvalResult(
+                    "\"Name\"",
+                    "\"Value\"",
+                    "\"Type\"",
+                    "c.c",
+                    DkmEvaluationResultFlags.Expandable
+                )
+            );
         }
 
         [Fact]
         public void FormatStrings()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""<{value}>"", Name=""<{name}>"", Type=""<{type}>"")]
@@ -112,16 +151,29 @@ class Wrapper
             var assembly = GetAssembly(source);
 
             var type = assembly.GetType("Wrapper");
-            var value = CreateDkmClrValue(type.Instantiate(), type, evalFlags: DkmEvaluationResultFlags.None);
+            var value = CreateDkmClrValue(
+                type.Instantiate(),
+                type,
+                evalFlags: DkmEvaluationResultFlags.None
+            );
 
-            Verify(GetChildren(FormatResult("w", value)),
-                EvalResult("<\"Name\">", "<\"Value\">", "<\"Type\">", "w.c", DkmEvaluationResultFlags.Expandable));
+            Verify(
+                GetChildren(FormatResult("w", value)),
+                EvalResult(
+                    "<\"Name\">",
+                    "<\"Value\">",
+                    "<\"Type\">",
+                    "w.c",
+                    DkmEvaluationResultFlags.Expandable
+                )
+            );
         }
 
         [Fact]
         public void BindingError()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""<{missing}>"")]
@@ -134,16 +186,29 @@ class C
             var assembly = GetAssembly(source);
 
             var type = assembly.GetType("C");
-            var value = CreateDkmClrValue(type.Instantiate(), type, evalFlags: DkmEvaluationResultFlags.None);
+            var value = CreateDkmClrValue(
+                type.Instantiate(),
+                type,
+                evalFlags: DkmEvaluationResultFlags.None
+            );
 
-            Verify(FormatResult(rootExpr, value),
-                EvalResult(rootExpr, "<Problem evaluating expression>", "C", rootExpr, DkmEvaluationResultFlags.None)); // Message inlined without quotation marks.
+            Verify(
+                FormatResult(rootExpr, value),
+                EvalResult(
+                    rootExpr,
+                    "<Problem evaluating expression>",
+                    "C",
+                    rootExpr,
+                    DkmEvaluationResultFlags.None
+                )
+            ); // Message inlined without quotation marks.
         }
 
         [Fact]
         public void RecursiveDebuggerDisplay()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""{value}"")]
@@ -162,17 +227,24 @@ class C
             var assembly = GetAssembly(source);
 
             var type = assembly.GetType("C");
-            var value = CreateDkmClrValue(type.Instantiate(), type, evalFlags: DkmEvaluationResultFlags.None);
+            var value = CreateDkmClrValue(
+                type.Instantiate(),
+                type,
+                evalFlags: DkmEvaluationResultFlags.None
+            );
 
             // No stack overflow, since attribute on computed value is ignored.
-            Verify(FormatResult(rootExpr, value),
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                FormatResult(rootExpr, value),
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
         }
 
         [Fact]
         public void MultipleAttributes()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""V1"")]
@@ -186,17 +258,21 @@ class C
             var assembly = GetAssembly(source);
 
             var type = assembly.GetType("C");
-            var value = CreateDkmClrValue(type.Instantiate(), type, evalFlags: DkmEvaluationResultFlags.None);
+            var value = CreateDkmClrValue(
+                type.Instantiate(),
+                type,
+                evalFlags: DkmEvaluationResultFlags.None
+            );
 
             // First attribute wins, as in dev12.
-            Verify(FormatResult(rootExpr, value),
-                EvalResult(rootExpr, "V1", "C", rootExpr));
+            Verify(FormatResult(rootExpr, value), EvalResult(rootExpr, "V1", "C", rootExpr));
         }
 
         [Fact]
         public void NullValues()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(null, Name=null, Type=null)]
@@ -209,16 +285,20 @@ class C
             var assembly = GetAssembly(source);
 
             var type = assembly.GetType("C");
-            var value = CreateDkmClrValue(type.Instantiate(), type, evalFlags: DkmEvaluationResultFlags.None);
+            var value = CreateDkmClrValue(
+                type.Instantiate(),
+                type,
+                evalFlags: DkmEvaluationResultFlags.None
+            );
 
-            Verify(FormatResult(rootExpr, value),
-                EvalResult(rootExpr, "{C}", "C", rootExpr));
+            Verify(FormatResult(rootExpr, value), EvalResult(rootExpr, "{C}", "C", rootExpr));
         }
 
         [Fact]
         public void EmptyStringValues()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay("""", Name="""", Type="""")]
@@ -234,16 +314,20 @@ class Wrapper
             var assembly = GetAssembly(source);
 
             var type = assembly.GetType("Wrapper");
-            var value = CreateDkmClrValue(type.Instantiate(), type, evalFlags: DkmEvaluationResultFlags.None);
+            var value = CreateDkmClrValue(
+                type.Instantiate(),
+                type,
+                evalFlags: DkmEvaluationResultFlags.None
+            );
 
-            Verify(GetChildren(FormatResult("w", value)),
-                EvalResult("", "", "", "w.c"));
+            Verify(GetChildren(FormatResult("w", value)), EvalResult("", "", "", "w.c"));
         }
 
         [Fact]
         public void ConstructedGenericType()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""Name"")]
@@ -256,16 +340,20 @@ class C<T>
             var assembly = GetAssembly(source);
 
             var type = assembly.GetType("C`1").MakeGenericType(typeof(int));
-            var value = CreateDkmClrValue(type.Instantiate(), type, evalFlags: DkmEvaluationResultFlags.None);
+            var value = CreateDkmClrValue(
+                type.Instantiate(),
+                type,
+                evalFlags: DkmEvaluationResultFlags.None
+            );
 
-            Verify(FormatResult(rootExpr, value),
-                EvalResult("c", "Name", "C<int>", rootExpr));
+            Verify(FormatResult(rootExpr, value), EvalResult("c", "Name", "C<int>", rootExpr));
         }
 
         [Fact]
         public void MemberExpansion()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 interface I
@@ -289,22 +377,31 @@ class D
             var assembly = GetAssembly(source);
 
             var type = assembly.GetType("C");
-            var value = CreateDkmClrValue(type.Instantiate(), type, evalFlags: DkmEvaluationResultFlags.None);
+            var value = CreateDkmClrValue(
+                type.Instantiate(),
+                type,
+                evalFlags: DkmEvaluationResultFlags.None
+            );
 
             var root = FormatResult(rootExpr, value);
 
-            Verify(root,
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                root,
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
 
-            Verify(GetChildren(root),
+            Verify(
+                GetChildren(root),
                 EvalResult("Name", "Value", "D", "((I)c).P", DkmEvaluationResultFlags.ReadOnly), // Not "I.Name".
-                EvalResult("Name", "Value", "D", "c.Q", DkmEvaluationResultFlags.ReadOnly));
+                EvalResult("Name", "Value", "D", "c.Q", DkmEvaluationResultFlags.ReadOnly)
+            );
         }
 
         [Fact]
         public void PointerDereferenceExpansion_Null()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""Value"", Name=""Name"", Type=""Type"")]
@@ -328,20 +425,43 @@ class Wrapper
             var assembly = GetUnsafeAssembly(source);
 
             var type = assembly.GetType("Wrapper");
-            var value = CreateDkmClrValue(type.Instantiate(), type, evalFlags: DkmEvaluationResultFlags.None);
+            var value = CreateDkmClrValue(
+                type.Instantiate(),
+                type,
+                evalFlags: DkmEvaluationResultFlags.None
+            );
 
             var root = FormatResult("wrapper", value);
 
-            Verify(DepthFirstSearch(GetChildren(root).Single(), maxDepth: 3),
-                EvalResult("Name", "Value", "Type", "wrapper.display", DkmEvaluationResultFlags.Expandable),
-                EvalResult("DisplayPointer", PointerToString(IntPtr.Zero), "Display*", "wrapper.display.DisplayPointer"),
-                EvalResult("NoDisplayPointer", PointerToString(IntPtr.Zero), "NoDisplay*", "wrapper.display.NoDisplayPointer"));
+            Verify(
+                DepthFirstSearch(GetChildren(root).Single(), maxDepth: 3),
+                EvalResult(
+                    "Name",
+                    "Value",
+                    "Type",
+                    "wrapper.display",
+                    DkmEvaluationResultFlags.Expandable
+                ),
+                EvalResult(
+                    "DisplayPointer",
+                    PointerToString(IntPtr.Zero),
+                    "Display*",
+                    "wrapper.display.DisplayPointer"
+                ),
+                EvalResult(
+                    "NoDisplayPointer",
+                    PointerToString(IntPtr.Zero),
+                    "NoDisplay*",
+                    "wrapper.display.NoDisplayPointer"
+                )
+            );
         }
 
         [Fact]
         public void PointerDereferenceExpansion_NonNull()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Diagnostics;
 
@@ -390,22 +510,80 @@ unsafe class C
                 var noDisplayPtr = noDisplayHandle.AddrOfPinnedObject();
 
                 var testType = assembly.GetType("C");
-                var testInstance = ReflectionUtilities.Instantiate(testType, displayPtr, noDisplayPtr);
-                var testValue = CreateDkmClrValue(testInstance, testType, evalFlags: DkmEvaluationResultFlags.None);
+                var testInstance = ReflectionUtilities.Instantiate(
+                    testType,
+                    displayPtr,
+                    noDisplayPtr
+                );
+                var testValue = CreateDkmClrValue(
+                    testInstance,
+                    testType,
+                    evalFlags: DkmEvaluationResultFlags.None
+                );
 
                 var displayPtrString = PointerToString(displayPtr);
                 var noDisplayPtrString = PointerToString(noDisplayPtr);
 
-                Verify(DepthFirstSearch(FormatResult("c", testValue), maxDepth: 3),
+                Verify(
+                    DepthFirstSearch(FormatResult("c", testValue), maxDepth: 3),
                     EvalResult("c", "{C}", "C", "c", DkmEvaluationResultFlags.Expandable),
-                    EvalResult("DisplayPointer", displayPtrString, "Display*", "c.DisplayPointer", DkmEvaluationResultFlags.Expandable),
-                    EvalResult("*c.DisplayPointer", "Value", "Type", "*c.DisplayPointer", DkmEvaluationResultFlags.Expandable),
-                    EvalResult("DisplayPointer", displayPtrString, "Display*", "(*c.DisplayPointer).DisplayPointer", DkmEvaluationResultFlags.Expandable),
-                    EvalResult("NoDisplayPointer", noDisplayPtrString, "NoDisplay*", "(*c.DisplayPointer).NoDisplayPointer", DkmEvaluationResultFlags.Expandable),
-                    EvalResult("NoDisplayPointer", noDisplayPtrString, "NoDisplay*", "c.NoDisplayPointer", DkmEvaluationResultFlags.Expandable),
-                    EvalResult("*c.NoDisplayPointer", "{NoDisplay}", "NoDisplay", "*c.NoDisplayPointer", DkmEvaluationResultFlags.Expandable),
-                    EvalResult("DisplayPointer", displayPtrString, "Display*", "(*c.NoDisplayPointer).DisplayPointer", DkmEvaluationResultFlags.Expandable),
-                    EvalResult("NoDisplayPointer", noDisplayPtrString, "NoDisplay*", "(*c.NoDisplayPointer).NoDisplayPointer", DkmEvaluationResultFlags.Expandable));
+                    EvalResult(
+                        "DisplayPointer",
+                        displayPtrString,
+                        "Display*",
+                        "c.DisplayPointer",
+                        DkmEvaluationResultFlags.Expandable
+                    ),
+                    EvalResult(
+                        "*c.DisplayPointer",
+                        "Value",
+                        "Type",
+                        "*c.DisplayPointer",
+                        DkmEvaluationResultFlags.Expandable
+                    ),
+                    EvalResult(
+                        "DisplayPointer",
+                        displayPtrString,
+                        "Display*",
+                        "(*c.DisplayPointer).DisplayPointer",
+                        DkmEvaluationResultFlags.Expandable
+                    ),
+                    EvalResult(
+                        "NoDisplayPointer",
+                        noDisplayPtrString,
+                        "NoDisplay*",
+                        "(*c.DisplayPointer).NoDisplayPointer",
+                        DkmEvaluationResultFlags.Expandable
+                    ),
+                    EvalResult(
+                        "NoDisplayPointer",
+                        noDisplayPtrString,
+                        "NoDisplay*",
+                        "c.NoDisplayPointer",
+                        DkmEvaluationResultFlags.Expandable
+                    ),
+                    EvalResult(
+                        "*c.NoDisplayPointer",
+                        "{NoDisplay}",
+                        "NoDisplay",
+                        "*c.NoDisplayPointer",
+                        DkmEvaluationResultFlags.Expandable
+                    ),
+                    EvalResult(
+                        "DisplayPointer",
+                        displayPtrString,
+                        "Display*",
+                        "(*c.NoDisplayPointer).DisplayPointer",
+                        DkmEvaluationResultFlags.Expandable
+                    ),
+                    EvalResult(
+                        "NoDisplayPointer",
+                        noDisplayPtrString,
+                        "NoDisplay*",
+                        "(*c.NoDisplayPointer).NoDisplayPointer",
+                        DkmEvaluationResultFlags.Expandable
+                    )
+                );
 
                 displayHandle.Free();
                 noDisplayHandle.Free();
@@ -415,7 +593,8 @@ unsafe class C
         [Fact]
         public void ArrayExpansion()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""Value"", Name=""Name"", Type=""Type"")]
@@ -452,30 +631,109 @@ class C
             var assembly = GetUnsafeAssembly(source);
 
             var type = assembly.GetType("C");
-            var value = CreateDkmClrValue(type.Instantiate(), type, evalFlags: DkmEvaluationResultFlags.None);
+            var value = CreateDkmClrValue(
+                type.Instantiate(),
+                type,
+                evalFlags: DkmEvaluationResultFlags.None
+            );
 
             var root = FormatResult("c", value);
 
-            Verify(DepthFirstSearch(root, maxDepth: 4),
+            Verify(
+                DepthFirstSearch(root, maxDepth: 4),
                 EvalResult("c", "{C}", "C", "c", DkmEvaluationResultFlags.Expandable),
-                EvalResult("DisplayArray", "{Display[1]}", "Display[]", "c.DisplayArray", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite),
-                EvalResult("Name", "Value", "Type", "c.DisplayArray[0]", DkmEvaluationResultFlags.Expandable),
-                EvalResult("DisplayArray", "{Display[1]}", "Display[]", "c.DisplayArray[0].DisplayArray", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite),
-                EvalResult("Name", "Value", "Type", "c.DisplayArray[0].DisplayArray[0]", DkmEvaluationResultFlags.Expandable),
-                EvalResult("NoDisplayArray", "{NoDisplay[1]}", "NoDisplay[]", "c.DisplayArray[0].NoDisplayArray", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite),
-                EvalResult("[0]", "{NoDisplay}", "NoDisplay", "c.DisplayArray[0].NoDisplayArray[0]", DkmEvaluationResultFlags.Expandable),
-                EvalResult("NoDisplayArray", "{NoDisplay[1]}", "NoDisplay[]", "c.NoDisplayArray", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite),
-                EvalResult("[0]", "{NoDisplay}", "NoDisplay", "c.NoDisplayArray[0]", DkmEvaluationResultFlags.Expandable),
-                EvalResult("DisplayArray", "{Display[1]}", "Display[]", "c.NoDisplayArray[0].DisplayArray", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite),
-                EvalResult("Name", "Value", "Type", "c.NoDisplayArray[0].DisplayArray[0]", DkmEvaluationResultFlags.Expandable),
-                EvalResult("NoDisplayArray", "{NoDisplay[1]}", "NoDisplay[]", "c.NoDisplayArray[0].NoDisplayArray", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite),
-                EvalResult("[0]", "{NoDisplay}", "NoDisplay", "c.NoDisplayArray[0].NoDisplayArray[0]", DkmEvaluationResultFlags.Expandable));
+                EvalResult(
+                    "DisplayArray",
+                    "{Display[1]}",
+                    "Display[]",
+                    "c.DisplayArray",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                ),
+                EvalResult(
+                    "Name",
+                    "Value",
+                    "Type",
+                    "c.DisplayArray[0]",
+                    DkmEvaluationResultFlags.Expandable
+                ),
+                EvalResult(
+                    "DisplayArray",
+                    "{Display[1]}",
+                    "Display[]",
+                    "c.DisplayArray[0].DisplayArray",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                ),
+                EvalResult(
+                    "Name",
+                    "Value",
+                    "Type",
+                    "c.DisplayArray[0].DisplayArray[0]",
+                    DkmEvaluationResultFlags.Expandable
+                ),
+                EvalResult(
+                    "NoDisplayArray",
+                    "{NoDisplay[1]}",
+                    "NoDisplay[]",
+                    "c.DisplayArray[0].NoDisplayArray",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                ),
+                EvalResult(
+                    "[0]",
+                    "{NoDisplay}",
+                    "NoDisplay",
+                    "c.DisplayArray[0].NoDisplayArray[0]",
+                    DkmEvaluationResultFlags.Expandable
+                ),
+                EvalResult(
+                    "NoDisplayArray",
+                    "{NoDisplay[1]}",
+                    "NoDisplay[]",
+                    "c.NoDisplayArray",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                ),
+                EvalResult(
+                    "[0]",
+                    "{NoDisplay}",
+                    "NoDisplay",
+                    "c.NoDisplayArray[0]",
+                    DkmEvaluationResultFlags.Expandable
+                ),
+                EvalResult(
+                    "DisplayArray",
+                    "{Display[1]}",
+                    "Display[]",
+                    "c.NoDisplayArray[0].DisplayArray",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                ),
+                EvalResult(
+                    "Name",
+                    "Value",
+                    "Type",
+                    "c.NoDisplayArray[0].DisplayArray[0]",
+                    DkmEvaluationResultFlags.Expandable
+                ),
+                EvalResult(
+                    "NoDisplayArray",
+                    "{NoDisplay[1]}",
+                    "NoDisplay[]",
+                    "c.NoDisplayArray[0].NoDisplayArray",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                ),
+                EvalResult(
+                    "[0]",
+                    "{NoDisplay}",
+                    "NoDisplay",
+                    "c.NoDisplayArray[0].NoDisplayArray[0]",
+                    DkmEvaluationResultFlags.Expandable
+                )
+            );
         }
 
         [Fact]
         public void DebuggerTypeProxyExpansion()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""Value"", Name=""Name"", Type=""Type"")]
@@ -501,23 +759,37 @@ public class P
             var assembly = GetUnsafeAssembly(source);
 
             var type = assembly.GetType("C");
-            var value = CreateDkmClrValue(type.Instantiate(), type, evalFlags: DkmEvaluationResultFlags.None);
+            var value = CreateDkmClrValue(
+                type.Instantiate(),
+                type,
+                evalFlags: DkmEvaluationResultFlags.None
+            );
 
             var root = FormatResult("c", value);
 
-            Verify(DepthFirstSearch(root, maxDepth: 4),
+            Verify(
+                DepthFirstSearch(root, maxDepth: 4),
                 EvalResult("c", "{C}", "C", "c", DkmEvaluationResultFlags.Expandable),
                 EvalResult("Name", "Value", "Type", "new P(c).DisplayP"),
                 EvalResult("NoDisplayP", "{NoDisplay}", "NoDisplay", "new P(c).NoDisplayP"),
-                EvalResult("Raw View", null, "", "c, raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "c, raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                ),
                 EvalResult("Name", "Value", "Type", "c.DisplayC"),
-                EvalResult("NoDisplayC", "{NoDisplay}", "NoDisplay", "c.NoDisplayC"));
+                EvalResult("NoDisplayC", "{NoDisplay}", "NoDisplay", "c.NoDisplayC")
+            );
         }
 
         [Fact]
         public void NullInstance()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""Hello"")]
@@ -532,14 +804,14 @@ class C
             var type = assembly.GetType("C");
             var value = CreateDkmClrValue(null, type, evalFlags: DkmEvaluationResultFlags.None);
 
-            Verify(FormatResult(rootExpr, value),
-                EvalResult(rootExpr, "null", "C", rootExpr));
+            Verify(FormatResult(rootExpr, value), EvalResult(rootExpr, "null", "C", rootExpr));
         }
 
         [Fact]
         public void NonGenericDisplayAttributeOnGenericBase()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""Type={GetType()}"")]
@@ -548,16 +820,20 @@ class B : A<int> { }
 ";
             var assembly = GetAssembly(source);
             var type = assembly.GetType("B");
-            var value = CreateDkmClrValue(type.Instantiate(), type, evalFlags: DkmEvaluationResultFlags.None);
+            var value = CreateDkmClrValue(
+                type.Instantiate(),
+                type,
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var result = FormatResult("b", value);
-            Verify(result,
-                EvalResult("b", "Type={B}", "B", "b", DkmEvaluationResultFlags.None));
+            Verify(result, EvalResult("b", "Type={B}", "B", "b", DkmEvaluationResultFlags.None));
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1016895")]
         public void RootVersusInternal()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""Value"", Name = ""Name"")]
@@ -578,19 +854,20 @@ class B
             var instanceA = typeA.Instantiate();
             var instanceB = typeB.Instantiate(instanceA);
             var result = FormatResult("a", CreateDkmClrValue(instanceA));
-            Verify(result,
-                EvalResult("a", "Value", "A", "a", DkmEvaluationResultFlags.None));
+            Verify(result, EvalResult("a", "Value", "A", "a", DkmEvaluationResultFlags.None));
 
             result = FormatResult("b", CreateDkmClrValue(instanceB));
-            Verify(GetChildren(result),
-                EvalResult("Name", "Value", "A", "b.a", DkmEvaluationResultFlags.None));
+            Verify(
+                GetChildren(result),
+                EvalResult("Name", "Value", "A", "b.a", DkmEvaluationResultFlags.None)
+            );
         }
 
         [Fact]
         public void Error()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerDisplay(""Value"", Name=""Name"", Type=""Type"")]
 class A
 {
@@ -603,18 +880,41 @@ class B
 }
 ";
             DkmClrRuntimeInstance runtime = null;
-            VisualStudio.Debugger.Evaluation.ClrCompilation.DkmClrValue getMemberValue(VisualStudio.Debugger.Evaluation.ClrCompilation.DkmClrValue v, string m) => (m == "Q") ? CreateErrorValue(runtime.GetType("A"), "Function evaluation timed out") : null;
-            runtime = new DkmClrRuntimeInstance(ReflectionUtilities.GetMscorlibAndSystemCore(GetAssembly(source)), getMemberValue: getMemberValue);
+            VisualStudio.Debugger.Evaluation.ClrCompilation.DkmClrValue getMemberValue(
+                VisualStudio.Debugger.Evaluation.ClrCompilation.DkmClrValue v,
+                string m
+            ) =>
+                (m == "Q")
+                    ? CreateErrorValue(runtime.GetType("A"), "Function evaluation timed out")
+                    : null;
+            runtime = new DkmClrRuntimeInstance(
+                ReflectionUtilities.GetMscorlibAndSystemCore(GetAssembly(source)),
+                getMemberValue: getMemberValue
+            );
             using (runtime.Load())
             {
                 var type = runtime.GetType("B");
                 var value = type.Instantiate();
                 var evalResult = FormatResult("o", value);
                 var children = GetChildren(evalResult);
-                Verify(children,
+                Verify(
+                    children,
                     EvalResult("Name", "Value", "Type", "o.P", DkmEvaluationResultFlags.ReadOnly),
-                    EvalFailedResult("Q", "Function evaluation timed out", "A", "o.Q", DkmEvaluationResultFlags.CanFavorite),
-                    EvalResult("f", "false", "bool", "o.f", DkmEvaluationResultFlags.Boolean | DkmEvaluationResultFlags.CanFavorite));
+                    EvalFailedResult(
+                        "Q",
+                        "Function evaluation timed out",
+                        "A",
+                        "o.Q",
+                        DkmEvaluationResultFlags.CanFavorite
+                    ),
+                    EvalResult(
+                        "f",
+                        "false",
+                        "bool",
+                        "o.f",
+                        DkmEvaluationResultFlags.Boolean | DkmEvaluationResultFlags.CanFavorite
+                    )
+                );
             }
         }
 
@@ -622,7 +922,7 @@ class B
         public void UnhandledException()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerDisplay(""Value}"")]
 class A
 {
@@ -633,14 +933,23 @@ class A
             var typeA = assembly.GetType("A");
             var instanceA = typeA.Instantiate();
             var result = FormatResult("a", CreateDkmClrValue(instanceA));
-            Verify(result,
-                EvalFailedResult("a", "Unmatched closing brace in 'Value}'", null, null, DkmEvaluationResultFlags.None));
+            Verify(
+                result,
+                EvalFailedResult(
+                    "a",
+                    "Unmatched closing brace in 'Value}'",
+                    null,
+                    null,
+                    DkmEvaluationResultFlags.None
+                )
+            );
         }
 
         [Fact, WorkItem(171123, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv")]
         public void ExceptionDuringEvaluate()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 [DebuggerDisplay(""Make it throw."")]
 public class Picard { }
@@ -648,22 +957,31 @@ public class Picard { }
             var assembly = GetAssembly(source);
             var picard = assembly.GetType("Picard");
             var jeanLuc = picard.Instantiate();
-            var result = FormatAsyncResult("says", "says", CreateDkmClrValue(jeanLuc), declaredType: new BadType(picard));
+            var result = FormatAsyncResult(
+                "says",
+                "says",
+                CreateDkmClrValue(jeanLuc),
+                declaredType: new BadType(picard)
+            );
             Assert.Equal(BadType.Exception, result.Exception);
         }
 
         private class BadType : DkmClrType
         {
-            public static readonly Exception Exception = new TargetInvocationException(new DkmException(DkmExceptionCode.E_PROCESS_DESTROYED));
+            public static readonly Exception Exception = new TargetInvocationException(
+                new DkmException(DkmExceptionCode.E_PROCESS_DESTROYED)
+            );
 
             public BadType(System.Type innerType)
-                : base((TypeImpl)innerType)
-            {
-            }
+                : base((TypeImpl)innerType) { }
 
             public override VisualStudio.Debugger.Metadata.Type GetLmrType()
             {
-                if (Environment.StackTrace.Contains("Microsoft.CodeAnalysis.ExpressionEvaluator.ResultProvider.GetTypeName"))
+                if (
+                    Environment.StackTrace.Contains(
+                        "Microsoft.CodeAnalysis.ExpressionEvaluator.ResultProvider.GetTypeName"
+                    )
+                )
                 {
                     throw Exception;
                 }
@@ -672,7 +990,10 @@ public class Picard { }
             }
         }
 
-        private IReadOnlyList<DkmEvaluationResult> DepthFirstSearch(DkmEvaluationResult root, int maxDepth)
+        private IReadOnlyList<DkmEvaluationResult> DepthFirstSearch(
+            DkmEvaluationResult root,
+            int maxDepth
+        )
         {
             var builder = ArrayBuilder<DkmEvaluationResult>.GetInstance();
 
@@ -681,7 +1002,12 @@ public class Picard { }
             return builder.ToImmutableAndFree();
         }
 
-        private void DepthFirstSearchInternal(ArrayBuilder<DkmEvaluationResult> builder, DkmEvaluationResult curr, int depth, int maxDepth)
+        private void DepthFirstSearchInternal(
+            ArrayBuilder<DkmEvaluationResult> builder,
+            DkmEvaluationResult curr,
+            int depth,
+            int maxDepth
+        )
         {
             Assert.InRange(depth, 0, maxDepth);
             builder.Add(curr);

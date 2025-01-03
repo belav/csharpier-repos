@@ -19,18 +19,45 @@ namespace System.Globalization
         private const int DaysInUniformLengthCentury = 36525;
 
         private static readonly long s_startOf1810 = GetNumberOfDays(new DateTime(1810, 1, 1));
-        private static readonly long s_startOf1900Century = GetNumberOfDays(new DateTime(1900, 1, 1));
+        private static readonly long s_startOf1900Century = GetNumberOfDays(
+            new DateTime(1900, 1, 1)
+        );
 
-        private static ReadOnlySpan<double> Coefficients1900to1987 => [-0.00002, 0.000297, 0.025184, -0.181133, 0.553040, -0.861938, 0.677066, -0.212591];
-        private static ReadOnlySpan<double> Coefficients1800to1899 => [-0.000009, 0.003844, 0.083563, 0.865736, 4.867575, 15.845535, 31.332267, 38.291999, 28.316289, 11.636204, 2.043794];
-        private static ReadOnlySpan<double> Coefficients1700to1799 => [8.118780842, -0.005092142, 0.003336121, -0.0000266484];
-        private static ReadOnlySpan<double> Coefficients1620to1699 => [196.58333, -4.0675, 0.0219167];
-        private static ReadOnlySpan<double> LambdaCoefficients => [280.46645, 36000.76983, 0.0003032];
-        private static ReadOnlySpan<double> AnomalyCoefficients => [357.52910, 35999.05030, -0.0001559, -0.00000048];
-        private static ReadOnlySpan<double> EccentricityCoefficients => [0.016708617, -0.000042037, -0.0000001236];
+        private static ReadOnlySpan<double> Coefficients1900to1987 =>
+            [-0.00002, 0.000297, 0.025184, -0.181133, 0.553040, -0.861938, 0.677066, -0.212591];
+        private static ReadOnlySpan<double> Coefficients1800to1899 =>
+            [
+                -0.000009,
+                0.003844,
+                0.083563,
+                0.865736,
+                4.867575,
+                15.845535,
+                31.332267,
+                38.291999,
+                28.316289,
+                11.636204,
+                2.043794,
+            ];
+        private static ReadOnlySpan<double> Coefficients1700to1799 =>
+            [8.118780842, -0.005092142, 0.003336121, -0.0000266484];
+        private static ReadOnlySpan<double> Coefficients1620to1699 =>
+            [196.58333, -4.0675, 0.0219167];
+        private static ReadOnlySpan<double> LambdaCoefficients =>
+            [280.46645, 36000.76983, 0.0003032];
+        private static ReadOnlySpan<double> AnomalyCoefficients =>
+            [357.52910, 35999.05030, -0.0001559, -0.00000048];
+        private static ReadOnlySpan<double> EccentricityCoefficients =>
+            [0.016708617, -0.000042037, -0.0000001236];
         private static ReadOnlySpan<double> CoefficientsA => [124.90, -1934.134, 0.002063];
         private static ReadOnlySpan<double> CoefficientsB => [201.11, 72001.5377, 0.00057];
-        private static ReadOnlySpan<double> Coefficients => [23.43929111111111, -0.013004166666666667, -1.638888888888889E-07, 5.03611111111111E-07];
+        private static ReadOnlySpan<double> Coefficients =>
+            [
+                23.43929111111111,
+                -0.013004166666666667,
+                -1.638888888888889E-07,
+                5.03611111111111E-07,
+            ];
 
         private static double RadiansFromDegrees(double degree)
         {
@@ -64,7 +91,12 @@ namespace System.Globalization
 
         private static int GetGregorianYear(double numberOfDays)
         {
-            return new DateTime(Math.Min((long)(Math.Floor(numberOfDays) * Calendar.TicksPerDay), DateTime.MaxValue.Ticks)).Year;
+            return new DateTime(
+                Math.Min(
+                    (long)(Math.Floor(numberOfDays) * Calendar.TicksPerDay),
+                    DateTime.MaxValue.Ticks
+                )
+            ).Year;
         }
 
         private enum CorrectionAlgorithm
@@ -74,7 +106,7 @@ namespace System.Globalization
             Year1900to1987,
             Year1800to1899,
             Year1700to1799,
-            Year1620to1699
+            Year1620to1699,
         }
 
         private readonly struct EphemerisCorrectionAlgorithmMap
@@ -89,17 +121,18 @@ namespace System.Globalization
             internal readonly CorrectionAlgorithm _algorithm;
         }
 
-        private static readonly EphemerisCorrectionAlgorithmMap[] s_ephemerisCorrectionTable = new EphemerisCorrectionAlgorithmMap[]
-        {
-            // lowest year that starts algorithm, algorithm to use
-            new EphemerisCorrectionAlgorithmMap(2020, CorrectionAlgorithm.Default),
-            new EphemerisCorrectionAlgorithmMap(1988, CorrectionAlgorithm.Year1988to2019),
-            new EphemerisCorrectionAlgorithmMap(1900, CorrectionAlgorithm.Year1900to1987),
-            new EphemerisCorrectionAlgorithmMap(1800, CorrectionAlgorithm.Year1800to1899),
-            new EphemerisCorrectionAlgorithmMap(1700, CorrectionAlgorithm.Year1700to1799),
-            new EphemerisCorrectionAlgorithmMap(1620, CorrectionAlgorithm.Year1620to1699),
-            new EphemerisCorrectionAlgorithmMap(int.MinValue, CorrectionAlgorithm.Default) // default must be last
-        };
+        private static readonly EphemerisCorrectionAlgorithmMap[] s_ephemerisCorrectionTable =
+            new EphemerisCorrectionAlgorithmMap[]
+            {
+                // lowest year that starts algorithm, algorithm to use
+                new EphemerisCorrectionAlgorithmMap(2020, CorrectionAlgorithm.Default),
+                new EphemerisCorrectionAlgorithmMap(1988, CorrectionAlgorithm.Year1988to2019),
+                new EphemerisCorrectionAlgorithmMap(1900, CorrectionAlgorithm.Year1900to1987),
+                new EphemerisCorrectionAlgorithmMap(1800, CorrectionAlgorithm.Year1800to1899),
+                new EphemerisCorrectionAlgorithmMap(1700, CorrectionAlgorithm.Year1700to1799),
+                new EphemerisCorrectionAlgorithmMap(1620, CorrectionAlgorithm.Year1620to1699),
+                new EphemerisCorrectionAlgorithmMap(int.MinValue, CorrectionAlgorithm.Default), // default must be last
+            };
 
         private static double Reminder(double divisor, double dividend)
         {
@@ -195,12 +228,18 @@ namespace System.Globalization
                 {
                     switch (map._algorithm)
                     {
-                        case CorrectionAlgorithm.Default: return DefaultEphemerisCorrection(year);
-                        case CorrectionAlgorithm.Year1988to2019: return EphemerisCorrection1988to2019(year);
-                        case CorrectionAlgorithm.Year1900to1987: return EphemerisCorrection1900to1987(year);
-                        case CorrectionAlgorithm.Year1800to1899: return EphemerisCorrection1800to1899(year);
-                        case CorrectionAlgorithm.Year1700to1799: return EphemerisCorrection1700to1799(year);
-                        case CorrectionAlgorithm.Year1620to1699: return EphemerisCorrection1620to1699(year);
+                        case CorrectionAlgorithm.Default:
+                            return DefaultEphemerisCorrection(year);
+                        case CorrectionAlgorithm.Year1988to2019:
+                            return EphemerisCorrection1988to2019(year);
+                        case CorrectionAlgorithm.Year1900to1987:
+                            return EphemerisCorrection1900to1987(year);
+                        case CorrectionAlgorithm.Year1800to1899:
+                            return EphemerisCorrection1800to1899(year);
+                        case CorrectionAlgorithm.Year1700to1799:
+                            return EphemerisCorrection1700to1799(year);
+                        case CorrectionAlgorithm.Year1620to1699:
+                            return EphemerisCorrection1620to1699(year);
                     }
 
                     break; // break the loop and assert eventually
@@ -234,11 +273,13 @@ namespace System.Globalization
             double tanHalfEpsilon = TanOfDegree(epsilon / 2);
             double y = tanHalfEpsilon * tanHalfEpsilon;
 
-            double dividend = ((y * SinOfDegree(2 * lambda))
+            double dividend = (
+                (y * SinOfDegree(2 * lambda))
                 - (2 * eccentricity * SinOfDegree(anomaly))
                 + (4 * eccentricity * y * SinOfDegree(anomaly) * CosOfDegree(2 * lambda))
                 - (0.5 * Math.Pow(y, 2) * SinOfDegree(4 * lambda))
-                - (1.25 * Math.Pow(eccentricity, 2) * SinOfDegree(2 * anomaly)));
+                - (1.25 * Math.Pow(eccentricity, 2) * SinOfDegree(2 * anomaly))
+            );
             const double Divisor = 2 * Math.PI;
             double equation = dividend / Divisor;
 
@@ -346,7 +387,8 @@ namespace System.Globalization
         public static double Compute(double time)
         {
             double julianCenturies = JulianCenturies(time);
-            double lambda = 282.7771834
+            double lambda =
+                282.7771834
                 + (36000.76953744 * julianCenturies)
                 + (0.000005729577951308232 * SumLongSequenceOfPeriodicTerms(julianCenturies));
 
@@ -361,7 +403,8 @@ namespace System.Globalization
 
         private static double EstimatePrior(double longitude, double time)
         {
-            double timeSunLastAtLongitude = time - (MeanSpeedOfSun * AsSeason(InitLongitude(Compute(time) - longitude)));
+            double timeSunLastAtLongitude =
+                time - (MeanSpeedOfSun * AsSeason(InitLongitude(Compute(time) - longitude)));
             double longitudeErrorDelta = InitLongitude(Compute(timeSunLastAtLongitude) - longitude);
             return Math.Min(time, timeSunLastAtLongitude - (MeanSpeedOfSun * longitudeErrorDelta));
         }

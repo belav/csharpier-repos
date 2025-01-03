@@ -3,10 +3,18 @@
 
 namespace System.Runtime.InteropServices
 {
-    [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Enum | AttributeTargets.Struct | AttributeTargets.Delegate, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Interface
+            | AttributeTargets.Enum
+            | AttributeTargets.Struct
+            | AttributeTargets.Delegate,
+        AllowMultiple = false,
+        Inherited = false
+    )]
     public sealed class TypeIdentifierAttribute : Attribute
     {
         public TypeIdentifierAttribute() { }
+
         public TypeIdentifierAttribute(string? scope, string? identifier)
         {
             Scope = scope;

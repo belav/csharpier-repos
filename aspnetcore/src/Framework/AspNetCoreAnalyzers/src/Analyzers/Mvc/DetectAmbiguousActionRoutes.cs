@@ -18,9 +18,17 @@ using WellKnownType = WellKnownTypeData.WellKnownType;
 
 public partial class MvcAnalyzer
 {
-    private static void DetectAmbiguousActionRoutes(SymbolAnalysisContext context, WellKnownTypes wellKnownTypes, RoutePatternTree? controllerRoutePattern, List<ActionRoute> actionRoutes)
+    private static void DetectAmbiguousActionRoutes(
+        SymbolAnalysisContext context,
+        WellKnownTypes wellKnownTypes,
+        RoutePatternTree? controllerRoutePattern,
+        List<ActionRoute> actionRoutes
+    )
     {
-        var controllerHasActionReplacement = controllerRoutePattern != null ? HasActionReplacementToken(controllerRoutePattern) : false;
+        var controllerHasActionReplacement =
+            controllerRoutePattern != null
+                ? HasActionReplacementToken(controllerRoutePattern)
+                : false;
 
         // Ambiguous action route detection is conservative in what it detects to avoid false positives.
         //
@@ -32,17 +40,25 @@ public partial class MvcAnalyzer
         if (actionRoutes.Count > 0)
         {
             // Group action routes together. When multiple match in a group, then report action routes to diagnostics.
-            var groupedByParent = actionRoutes
-                .GroupBy(ar => new ActionRouteGroupKey(ar.ActionSymbol, ar.RouteUsageModel.RoutePattern, ar.HttpMethods, controllerHasActionReplacement, wellKnownTypes));
+            var groupedByParent = actionRoutes.GroupBy(ar => new ActionRouteGroupKey(
+                ar.ActionSymbol,
+                ar.RouteUsageModel.RoutePattern,
+                ar.HttpMethods,
+                controllerHasActionReplacement,
+                wellKnownTypes
+            ));
 
             foreach (var ambiguousGroup in groupedByParent.Where(g => g.Count() >= 2))
             {
                 foreach (var ambiguousActionRoute in ambiguousGroup)
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(
-                        DiagnosticDescriptors.AmbiguousActionRoute,
-                        ambiguousActionRoute.RouteUsageModel.UsageContext.RouteToken.GetLocation(),
-                        ambiguousActionRoute.RouteUsageModel.RoutePattern.Root.ToString()));
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(
+                            DiagnosticDescriptors.AmbiguousActionRoute,
+                            ambiguousActionRoute.RouteUsageModel.UsageContext.RouteToken.GetLocation(),
+                            ambiguousActionRoute.RouteUsageModel.RoutePattern.Root.ToString()
+                        )
+                    );
                 }
             }
         }
@@ -83,7 +99,13 @@ public partial class MvcAnalyzer
         public bool HasActionReplacement { get; }
         private readonly WellKnownTypes _wellKnownTypes;
 
-        public ActionRouteGroupKey(IMethodSymbol actionSymbol, RoutePatternTree routePattern, ImmutableArray<string> httpMethods, bool controllerHasActionReplacement, WellKnownTypes wellKnownTypes)
+        public ActionRouteGroupKey(
+            IMethodSymbol actionSymbol,
+            RoutePatternTree routePattern,
+            ImmutableArray<string> httpMethods,
+            bool controllerHasActionReplacement,
+            WellKnownTypes wellKnownTypes
+        )
         {
             Debug.Assert(!httpMethods.IsDefault);
 
@@ -92,13 +114,26 @@ public partial class MvcAnalyzer
             HttpMethods = httpMethods;
             _wellKnownTypes = wellKnownTypes;
             ActionName = GetActionName(ActionSymbol, _wellKnownTypes);
-            HasActionReplacement = controllerHasActionReplacement || HasActionReplacementToken(RoutePattern);
+            HasActionReplacement =
+                controllerHasActionReplacement || HasActionReplacementToken(RoutePattern);
         }
 
-        private static string GetActionName(IMethodSymbol actionSymbol, WellKnownTypes wellKnownTypes)
+        private static string GetActionName(
+            IMethodSymbol actionSymbol,
+            WellKnownTypes wellKnownTypes
+        )
         {
-            var actionNameAttribute = actionSymbol.GetAttributes(wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_ActionNameAttribute), inherit: true).FirstOrDefault();
-            if (actionNameAttribute != null && actionNameAttribute.ConstructorArguments.Length > 0 && actionNameAttribute.ConstructorArguments[0].Value is string name)
+            var actionNameAttribute = actionSymbol
+                .GetAttributes(
+                    wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_ActionNameAttribute),
+                    inherit: true
+                )
+                .FirstOrDefault();
+            if (
+                actionNameAttribute != null
+                && actionNameAttribute.ConstructorArguments.Length > 0
+                && actionNameAttribute.ConstructorArguments[0].Value is string name
+            )
             {
                 return name;
             }
@@ -116,14 +151,24 @@ public partial class MvcAnalyzer
 
         public bool Equals(ActionRouteGroupKey other)
         {
-            return
-                AmbiguousRoutePatternComparer.Instance.Equals(RoutePattern, other.RoutePattern) &&
-                (!HasActionReplacement || string.Equals(ActionName, other.ActionName, StringComparison.OrdinalIgnoreCase)) &&
-                HasMatchingHttpMethods(HttpMethods, other.HttpMethods) &&
-                CanMatchActions(_wellKnownTypes, ActionSymbol, other.ActionSymbol);
+            return AmbiguousRoutePatternComparer.Instance.Equals(RoutePattern, other.RoutePattern)
+                && (
+                    !HasActionReplacement
+                    || string.Equals(
+                        ActionName,
+                        other.ActionName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
+                && HasMatchingHttpMethods(HttpMethods, other.HttpMethods)
+                && CanMatchActions(_wellKnownTypes, ActionSymbol, other.ActionSymbol);
         }
 
-        private static bool CanMatchActions(WellKnownTypes wellKnownTypes, IMethodSymbol actionSymbol1, IMethodSymbol actionSymbol2)
+        private static bool CanMatchActions(
+            WellKnownTypes wellKnownTypes,
+            IMethodSymbol actionSymbol1,
+            IMethodSymbol actionSymbol2
+        )
         {
             // Only match routes if either they are on the same action.
             if (SymbolEqualityComparer.Default.Equals(actionSymbol1, actionSymbol2))
@@ -133,7 +178,10 @@ public partial class MvcAnalyzer
 
             // Or all attributes on the actions are known to have no impact on routing.
             // This ensures we don't detect routes that might have metadata added that impacts routing.
-            if (!HasUnknownAttribute(actionSymbol1, wellKnownTypes) && !HasUnknownAttribute(actionSymbol2, wellKnownTypes))
+            if (
+                !HasUnknownAttribute(actionSymbol1, wellKnownTypes)
+                && !HasUnknownAttribute(actionSymbol2, wellKnownTypes)
+            )
             {
                 return true;
             }
@@ -186,10 +234,13 @@ public partial class MvcAnalyzer
             WellKnownType.Microsoft_AspNetCore_Mvc_SkipStatusCodePagesAttribute,
             WellKnownType.Microsoft_AspNetCore_Mvc_ValidateAntiForgeryTokenAttribute,
             WellKnownType.Microsoft_AspNetCore_Authorization_AllowAnonymousAttribute,
-            WellKnownType.Microsoft_AspNetCore_Authorization_AuthorizeAttribute
+            WellKnownType.Microsoft_AspNetCore_Authorization_AuthorizeAttribute,
         };
 
-        private static bool HasUnknownAttribute(IMethodSymbol actionSymbol, WellKnownTypes wellKnownTypes)
+        private static bool HasUnknownAttribute(
+            IMethodSymbol actionSymbol,
+            WellKnownTypes wellKnownTypes
+        )
         {
             foreach (var attribute in actionSymbol.GetAttributes())
             {
@@ -207,7 +258,10 @@ public partial class MvcAnalyzer
             return false;
         }
 
-        private static bool HasMatchingHttpMethods(ImmutableArray<string> httpMethods1, ImmutableArray<string> httpMethods2)
+        private static bool HasMatchingHttpMethods(
+            ImmutableArray<string> httpMethods1,
+            ImmutableArray<string> httpMethods2
+        )
         {
             if (httpMethods1.IsEmpty || httpMethods2.IsEmpty)
             {

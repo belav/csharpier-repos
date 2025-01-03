@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System.Runtime.Serialization;
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
 {
@@ -20,14 +20,11 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
     /// <param name="method">Method ID.</param>
     [DataContract]
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    internal readonly struct ManagedMethodId(
-        Guid module,
-        ManagedModuleMethodId method) : IEquatable<ManagedMethodId>
+    internal readonly struct ManagedMethodId(Guid module, ManagedModuleMethodId method)
+        : IEquatable<ManagedMethodId>
     {
         public ManagedMethodId(Guid module, int token, int version)
-            : this(module, new(token, version))
-        {
-        }
+            : this(module, new(token, version)) { }
 
         /// <summary>
         /// The module version ID in which the method exists.
@@ -57,9 +54,11 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
             return Module.GetHashCode() ^ Method.GetHashCode();
         }
 
-        public static bool operator ==(ManagedMethodId left, ManagedMethodId right) => left.Equals(right);
+        public static bool operator ==(ManagedMethodId left, ManagedMethodId right) =>
+            left.Equals(right);
 
-        public static bool operator !=(ManagedMethodId left, ManagedMethodId right) => !(left == right);
+        public static bool operator !=(ManagedMethodId left, ManagedMethodId right) =>
+            !(left == right);
 
         internal string GetDebuggerDisplay() => $"mvid={Module} {Method.GetDebuggerDisplay()}";
     }

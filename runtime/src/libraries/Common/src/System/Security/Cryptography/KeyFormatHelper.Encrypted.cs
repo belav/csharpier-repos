@@ -17,13 +17,23 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             KeyReader<TRet> keyReader,
             out int bytesRead,
-            out TRet ret)
+            out TRet ret
+        )
         {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
-                using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length))
+                using (
+                    MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
+                )
                 {
-                    ReadEncryptedPkcs8(validOids, manager.Memory, password, keyReader, out bytesRead, out ret);
+                    ReadEncryptedPkcs8(
+                        validOids,
+                        manager.Memory,
+                        password,
+                        keyReader,
+                        out bytesRead,
+                        out ret
+                    );
                 }
             }
         }
@@ -34,11 +44,14 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             KeyReader<TRet> keyReader,
             out int bytesRead,
-            out TRet ret)
+            out TRet ret
+        )
         {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
-                using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length))
+                using (
+                    MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
+                )
                 {
                     ReadEncryptedPkcs8(
                         validOids,
@@ -46,7 +59,8 @@ namespace System.Security.Cryptography
                         passwordBytes,
                         keyReader,
                         out bytesRead,
-                        out ret);
+                        out ret
+                    );
                 }
             }
         }
@@ -57,7 +71,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             KeyReader<TRet> keyReader,
             out int bytesRead,
-            out TRet ret)
+            out TRet ret
+        )
         {
             ReadEncryptedPkcs8(
                 validOids,
@@ -66,7 +81,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte>.Empty,
                 keyReader,
                 out bytesRead,
-                out ret);
+                out ret
+            );
         }
 
         private static void ReadEncryptedPkcs8<TRet>(
@@ -75,7 +91,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             KeyReader<TRet> keyReader,
             out int bytesRead,
-            out TRet ret)
+            out TRet ret
+        )
         {
             ReadEncryptedPkcs8(
                 validOids,
@@ -84,7 +101,8 @@ namespace System.Security.Cryptography
                 passwordBytes,
                 keyReader,
                 out bytesRead,
-                out ret);
+                out ret
+            );
         }
 
         private static void ReadEncryptedPkcs8<TRet>(
@@ -94,7 +112,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             KeyReader<TRet> keyReader,
             out int bytesRead,
-            out TRet ret)
+            out TRet ret
+        )
         {
             int read;
             EncryptedPrivateKeyInfoAsn epki;
@@ -122,16 +141,12 @@ namespace System.Security.Cryptography
                     password,
                     passwordBytes,
                     epki.EncryptedData.Span,
-                    decrypted);
+                    decrypted
+                );
 
                 decryptedMemory = decryptedMemory.Slice(0, decryptedBytes);
 
-                ReadPkcs8(
-                    validOids,
-                    decryptedMemory,
-                    keyReader,
-                    out int innerRead,
-                    out ret);
+                ReadPkcs8(validOids, decryptedMemory, keyReader, out int innerRead, out ret);
 
                 if (innerRead != decryptedMemory.Length)
                 {
@@ -155,50 +170,60 @@ namespace System.Security.Cryptography
         internal static AsnWriter WriteEncryptedPkcs8(
             ReadOnlySpan<char> password,
             AsnWriter pkcs8Writer,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             return WriteEncryptedPkcs8(
                 password,
                 ReadOnlySpan<byte>.Empty,
                 pkcs8Writer,
-                pbeParameters);
+                pbeParameters
+            );
         }
 
         internal static AsnWriter WriteEncryptedPkcs8(
             ReadOnlySpan<byte> passwordBytes,
             AsnWriter pkcs8Writer,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             return WriteEncryptedPkcs8(
                 ReadOnlySpan<char>.Empty,
                 passwordBytes,
                 pkcs8Writer,
-                pbeParameters);
+                pbeParameters
+            );
         }
 
         private static AsnWriter WriteEncryptedPkcs8(
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> passwordBytes,
             AsnWriter pkcs8Writer,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             PasswordBasedEncryption.InitiateEncryption(
                 pbeParameters,
                 out SymmetricAlgorithm cipher,
                 out string hmacOid,
                 out string encryptionAlgorithmOid,
-                out bool isPkcs12);
+                out bool isPkcs12
+            );
 
             Span<byte> encryptedSpan = default;
             AsnWriter? writer = null;
 
-            Debug.Assert(cipher.BlockSize <= 128, $"Encountered unexpected block size: {cipher.BlockSize}");
+            Debug.Assert(
+                cipher.BlockSize <= 128,
+                $"Encountered unexpected block size: {cipher.BlockSize}"
+            );
             Span<byte> iv = stackalloc byte[cipher.BlockSize / 8];
             Span<byte> salt = stackalloc byte[16];
 
             // We need at least one block size beyond the input data size.
             byte[] encryptedRent = CryptoPool.Rent(
-                checked(pkcs8Writer.GetEncodedLength() + (cipher.BlockSize / 8)));
+                checked(pkcs8Writer.GetEncodedLength() + (cipher.BlockSize / 8))
+            );
 
             try
             {
@@ -213,7 +238,8 @@ namespace System.Security.Cryptography
                     pbeParameters,
                     salt,
                     encryptedRent,
-                    iv);
+                    iv
+                );
 
                 encryptedSpan = encryptedRent.AsSpan(0, written);
 
@@ -230,7 +256,8 @@ namespace System.Security.Cryptography
                     salt,
                     pbeParameters.IterationCount,
                     hmacOid,
-                    iv);
+                    iv
+                );
 
                 // encryptedData
                 writer.WriteOctetString(encryptedSpan);
@@ -250,32 +277,32 @@ namespace System.Security.Cryptography
         internal static ArraySegment<byte> DecryptPkcs8(
             ReadOnlySpan<char> inputPassword,
             ReadOnlyMemory<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
-            return DecryptPkcs8(
-                inputPassword,
-                ReadOnlySpan<byte>.Empty,
-                source,
-                out bytesRead);
+            return DecryptPkcs8(inputPassword, ReadOnlySpan<byte>.Empty, source, out bytesRead);
         }
 
         internal static ArraySegment<byte> DecryptPkcs8(
             ReadOnlySpan<byte> inputPasswordBytes,
             ReadOnlyMemory<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             return DecryptPkcs8(
                 ReadOnlySpan<char>.Empty,
                 inputPasswordBytes,
                 source,
-                out bytesRead);
+                out bytesRead
+            );
         }
 
         private static ArraySegment<byte> DecryptPkcs8(
             ReadOnlySpan<char> inputPassword,
             ReadOnlySpan<byte> inputPasswordBytes,
             ReadOnlyMemory<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             int localRead;
             EncryptedPrivateKeyInfoAsn epki;
@@ -302,7 +329,8 @@ namespace System.Security.Cryptography
                     inputPassword,
                     inputPasswordBytes,
                     epki.EncryptedData.Span,
-                    decrypted);
+                    decrypted
+                );
 
                 bytesRead = localRead;
 
@@ -319,12 +347,10 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> inputPassword,
             ReadOnlyMemory<byte> current,
             ReadOnlySpan<char> newPassword,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
-            ArraySegment<byte> decrypted = DecryptPkcs8(
-                inputPassword,
-                current,
-                out int bytesRead);
+            ArraySegment<byte> decrypted = DecryptPkcs8(inputPassword, current, out int bytesRead);
 
             try
             {
@@ -336,10 +362,7 @@ namespace System.Security.Cryptography
                 AsnWriter pkcs8Writer = new AsnWriter(AsnEncodingRules.BER);
                 pkcs8Writer.WriteEncodedValueForCrypto(decrypted);
 
-                return WriteEncryptedPkcs8(
-                    newPassword,
-                    pkcs8Writer,
-                    pbeParameters);
+                return WriteEncryptedPkcs8(newPassword, pkcs8Writer, pbeParameters);
             }
             catch (CryptographicException e)
             {
@@ -355,12 +378,10 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> inputPassword,
             ReadOnlyMemory<byte> current,
             ReadOnlySpan<byte> newPasswordBytes,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
-            ArraySegment<byte> decrypted = DecryptPkcs8(
-                inputPassword,
-                current,
-                out int bytesRead);
+            ArraySegment<byte> decrypted = DecryptPkcs8(inputPassword, current, out int bytesRead);
 
             try
             {
@@ -372,10 +393,7 @@ namespace System.Security.Cryptography
                 AsnWriter pkcs8Writer = new AsnWriter(AsnEncodingRules.BER);
                 pkcs8Writer.WriteEncodedValueForCrypto(decrypted);
 
-                return WriteEncryptedPkcs8(
-                    newPasswordBytes,
-                    pkcs8Writer,
-                    pbeParameters);
+                return WriteEncryptedPkcs8(newPasswordBytes, pkcs8Writer, pbeParameters);
             }
             catch (CryptographicException e)
             {

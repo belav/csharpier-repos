@@ -9,7 +9,11 @@ using Xunit;
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 [SkipIfHostableWebCoreNotAvailable]
-[MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win8, SkipReason = "https://github.com/aspnet/IISIntegration/issues/866")]
+[MinimumOSVersion(
+    OperatingSystems.Windows,
+    WindowsVersions.Win8,
+    SkipReason = "https://github.com/aspnet/IISIntegration/issues/866"
+)]
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class ConnectionIdFeatureTests : StrictTestServerTests
 {
@@ -17,12 +21,17 @@ public class ConnectionIdFeatureTests : StrictTestServerTests
     public async Task ProvidesConnectionId()
     {
         string connectionId = null;
-        using (var testServer = await TestServer.Create(ctx =>
-        {
-            var connectionIdFeature = ctx.Features.Get<IHttpConnectionFeature>();
-            connectionId = connectionIdFeature.ConnectionId;
-            return Task.CompletedTask;
-        }, LoggerFactory))
+        using (
+            var testServer = await TestServer.Create(
+                ctx =>
+                {
+                    var connectionIdFeature = ctx.Features.Get<IHttpConnectionFeature>();
+                    connectionId = connectionIdFeature.ConnectionId;
+                    return Task.CompletedTask;
+                },
+                LoggerFactory
+            )
+        )
         {
             await testServer.HttpClient.GetStringAsync("/");
         }

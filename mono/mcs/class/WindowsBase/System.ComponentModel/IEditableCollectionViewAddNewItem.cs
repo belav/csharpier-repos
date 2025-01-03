@@ -27,10 +27,9 @@
 
 namespace System.ComponentModel
 {
-	public interface IEditableCollectionViewAddNewItem : IEditableCollectionView
-	{
-		bool CanAddNewItem { get; }
-		object AddNewItem (object newItem);
-	}
+    public interface IEditableCollectionViewAddNewItem : IEditableCollectionView
+    {
+        bool CanAddNewItem { get; }
+        object AddNewItem(object newItem);
+    }
 }
-

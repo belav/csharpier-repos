@@ -1846,7 +1846,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                         System.Console.WriteLine();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/632351")]
@@ -4118,7 +4119,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         }
 
         // dataflow in and out can be false for symbols in unreachable code
-        // boolean indicates 
+        // boolean indicates
         // dataFlowIn: false, dataFlowOut: false, alwaysAssigned: true, variableDeclared: false, readInside: true, writtenInside: false, readOutside: false, writtenOutside: true
         [Fact]
         public async Task MatrixCase_NoNoYesNoYesNoNoYes()
@@ -4168,7 +4169,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         }
 
         // dataflow in and out can be false for symbols in unreachable code
-        // boolean indicates 
+        // boolean indicates
         // dataFlowIn: false, dataFlowOut: false, alwaysAssigned: true, variableDeclared: false, readInside: true, writtenInside: false, readOutside: true, writtenOutside: true
         [Fact]
         public async Task MatrixCase_NoNoYesNoYesNoYesYes()
@@ -10377,14 +10378,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                 }
                 """;
 
-            await TestExtractMethodAsync(code, expected, parseOptions: new CSharpParseOptions(kind: SourceCodeKind.Script));
+            await TestExtractMethodAsync(
+                code,
+                expected,
+                parseOptions: new CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530322")]
         public async Task ExtractMethodShouldNotBreakFormatting()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M(int i, int j, int k)
@@ -10418,8 +10422,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/604389")]
         public async Task TestExtractLiteralExpression()
         {
-            var code =
-                """
+            var code = """
                 class Program
                 {
                     static void Main()
@@ -10459,8 +10462,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/604389")]
         public async Task TestExtractCollectionInitializer()
         {
-            var code =
-                """
+            var code = """
                 class Program
                 {
                     static void Main()
@@ -10500,8 +10502,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/854662")]
         public async Task TestExtractCollectionInitializer2()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 using System.Collections.Generic;
                 class Program
@@ -10539,8 +10540,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530267")]
         public async Task TestCoClassImplicitConversion()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 using System.Runtime.InteropServices;
 
@@ -10586,8 +10586,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530710")]
         public async Task TestOverloadResolution()
         {
-            var code =
-                """
+            var code = """
                 using System;
 
                 static class C
@@ -10649,8 +10648,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530710")]
         public async Task TestOverloadResolution1()
         {
-            var code =
-                """
+            var code = """
                 using System;
 
                 static class C
@@ -10712,8 +10710,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530710")]
         public async Task TestOverloadResolution2()
         {
-            var code =
-                """
+            var code = """
                 using System;
 
                 static class C
@@ -10775,8 +10772,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/731924")]
         public async Task TestTreatEnumSpecial()
         {
-            var code =
-                """
+            var code = """
                 using System;
 
                 class Program
@@ -10826,8 +10822,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/756222")]
         public async Task TestReturnStatementInAsyncMethod()
         {
-            var code =
-                """
+            var code = """
                 using System.Threading.Tasks;
 
                 class C
@@ -10863,8 +10858,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/574576")]
         public async Task TestAsyncMethodWithRefOrOutParameters()
         {
-            var code =
-                """
+            var code = """
                 using System.Threading.Tasks;
 
                 class C
@@ -10886,8 +10880,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1025272")]
         public async Task TestAsyncMethodWithWellKnownValueType()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 using System.Threading;
                 using System.Threading.Tasks;
@@ -10946,8 +10939,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact]
         public async Task TestAsyncMethodWithWellKnownValueType1()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 using System.Threading;
                 using System.Threading.Tasks;
@@ -10977,8 +10969,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact]
         public async Task TestDoNotPutOutOrRefForStructOff()
         {
-            var code =
-                """
+            var code = """
                 using System.Threading.Tasks;
 
                 namespace ClassLibrary9
@@ -11012,8 +11003,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact]
         public async Task TestDoNotPutOutOrRefForStructOn()
         {
-            var code =
-                """
+            var code = """
                 using System.Threading.Tasks;
 
                 namespace ClassLibrary9
@@ -11041,8 +11031,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System.Threading.Tasks;
 
                 namespace ClassLibrary9
@@ -11083,11 +11072,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [InlineData("add", "remove")]
         [InlineData("remove", "add")]
         [WorkItem("https://github.com/dotnet/roslyn/issues/17474")]
-        public async Task TestExtractMethodEventAccessorUnresolvedName(string testedAccessor, string untestedAccessor)
+        public async Task TestExtractMethodEventAccessorUnresolvedName(
+            string testedAccessor,
+            string untestedAccessor
+        )
         {
             // This code intentionally omits a 'using System;'
             var code =
-$@"namespace ClassLibrary9
+                $@"namespace ClassLibrary9
 {{
     public class Class
     {{
@@ -11099,7 +11091,7 @@ $@"namespace ClassLibrary9
     }}
 }}";
             var expected =
-$@"namespace ClassLibrary9
+                $@"namespace ClassLibrary9
 {{
     public class Class
     {{
@@ -11122,8 +11114,7 @@ $@"namespace ClassLibrary9
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19958")]
         public async Task TestExtractMethodRefPassThrough()
         {
-            var code =
-                """
+            var code = """
                 using System;
 
                 namespace ClassLibrary9
@@ -11137,8 +11128,7 @@ $@"namespace ClassLibrary9
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
 
                 namespace ClassLibrary9
@@ -11164,8 +11154,7 @@ $@"namespace ClassLibrary9
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19958")]
         public async Task TestExtractMethodRefPassThroughDuplicateVariable()
         {
-            var code =
-                """
+            var code = """
                 using System;
 
                 namespace ClassLibrary9
@@ -11194,8 +11183,7 @@ $@"namespace ClassLibrary9
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
 
                 namespace ClassLibrary9
@@ -11237,10 +11225,18 @@ $@"namespace ClassLibrary9
         public async Task ExtractMethod_Argument1()
         {
             var service = new CSharpExtractMethodService();
-            Assert.NotNull(await Record.ExceptionAsync(async () =>
-            {
-                var tree = await service.ExtractMethodAsync(document: null, textSpan: default, localFunction: false, options: default, CancellationToken.None);
-            }));
+            Assert.NotNull(
+                await Record.ExceptionAsync(async () =>
+                {
+                    var tree = await service.ExtractMethodAsync(
+                        document: null,
+                        textSpan: default,
+                        localFunction: false,
+                        options: default,
+                        CancellationToken.None
+                    );
+                })
+            );
         }
 
         [Fact]
@@ -11248,37 +11244,58 @@ $@"namespace ClassLibrary9
         {
             var solution = new AdhocWorkspace().CurrentSolution;
             var projectId = ProjectId.CreateNewId();
-            var project = solution.AddProject(projectId, "Project", "Project.dll", LanguageNames.CSharp).GetProject(projectId);
+            var project = solution
+                .AddProject(projectId, "Project", "Project.dll", LanguageNames.CSharp)
+                .GetProject(projectId);
 
-            var document = project.AddMetadataReference(TestMetadata.Net451.mscorlib)
-                                  .AddDocument("Document", SourceText.From(""));
+            var document = project
+                .AddMetadataReference(TestMetadata.Net451.mscorlib)
+                .AddDocument("Document", SourceText.From(""));
 
             var service = new CSharpExtractMethodService() as IExtractMethodService;
 
-            await service.ExtractMethodAsync(document, textSpan: default, localFunction: false, ExtractMethodGenerationOptions.GetDefault(project.Services), CancellationToken.None);
+            await service.ExtractMethodAsync(
+                document,
+                textSpan: default,
+                localFunction: false,
+                ExtractMethodGenerationOptions.GetDefault(project.Services),
+                CancellationToken.None
+            );
         }
 
         [WpfFact]
         [Trait(Traits.Feature, Traits.Features.Interactive)]
         public void ExtractMethodCommandDisabledInSubmission()
         {
-            using var workspace = TestWorkspace.Create(XElement.Parse("""
-                <Workspace>
-                    <Submission Language="C#" CommonReferences="true">  
-                        typeof(string).$$Name
-                    </Submission>
-                </Workspace>
-                """),
+            using var workspace = TestWorkspace.Create(
+                XElement.Parse(
+                    """
+                    <Workspace>
+                        <Submission Language="C#" CommonReferences="true">  
+                            typeof(string).$$Name
+                        </Submission>
+                    </Workspace>
+                    """
+                ),
                 workspaceKind: WorkspaceKind.Interactive,
-                composition: EditorTestCompositions.EditorFeaturesWpf);
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             // Force initialization.
-            workspace.GetOpenDocumentIds().Select(id => workspace.GetTestDocument(id).GetTextView()).ToList();
+            workspace
+                .GetOpenDocumentIds()
+                .Select(id => workspace.GetTestDocument(id).GetTextView())
+                .ToList();
 
             var textView = workspace.Documents.Single().GetTextView();
 
-            var handler = workspace.ExportProvider.GetCommandHandler<ExtractMethodCommandHandler>(PredefinedCommandHandlerNames.ExtractMethod, ContentTypeNames.CSharpContentType);
+            var handler = workspace.ExportProvider.GetCommandHandler<ExtractMethodCommandHandler>(
+                PredefinedCommandHandlerNames.ExtractMethod,
+                ContentTypeNames.CSharpContentType
+            );
 
-            var state = handler.GetCommandState(new ExtractMethodCommandArgs(textView, textView.TextBuffer));
+            var state = handler.GetCommandState(
+                new ExtractMethodCommandArgs(textView, textView.TextBuffer)
+            );
             Assert.True(state.IsUnspecified);
         }
 
@@ -11496,7 +11513,8 @@ $@"namespace ClassLibrary9
         [WorkItem("https://github.com/dotnet/roslyn/issues/18347")]
         public async Task ExtractMethodFlowsToLocalFunction1(string usageSyntax)
         {
-            var code = $@"namespace ExtractMethodCrashRepro
+            var code =
+                $@"namespace ExtractMethodCrashRepro
 {{
     public static class SomeClass
     {{
@@ -11510,7 +11528,8 @@ $@"namespace ClassLibrary9
         }}
     }}
 }}";
-            var expected = $@"namespace ExtractMethodCrashRepro
+            var expected =
+                $@"namespace ExtractMethodCrashRepro
 {{
     public static class SomeClass
     {{
@@ -11541,7 +11560,8 @@ $@"namespace ClassLibrary9
         [WorkItem("https://github.com/dotnet/roslyn/issues/18347")]
         public async Task ExtractMethodFlowsToLocalFunction2(string usageSyntax)
         {
-            var code = $@"namespace ExtractMethodCrashRepro
+            var code =
+                $@"namespace ExtractMethodCrashRepro
 {{
     public static class SomeClass
     {{
@@ -11555,7 +11575,8 @@ $@"namespace ClassLibrary9
         }}
     }}
 }}";
-            var expected = $@"namespace ExtractMethodCrashRepro
+            var expected =
+                $@"namespace ExtractMethodCrashRepro
 {{
     public static class SomeClass
     {{
@@ -11590,7 +11611,8 @@ $@"namespace ClassLibrary9
         [WorkItem("https://github.com/dotnet/roslyn/issues/18347")]
         public async Task ExtractMethodFlowsToLocalFunctionWithUnassignedLocal(string usageSyntax)
         {
-            var code = $@"namespace ExtractMethodCrashRepro
+            var code =
+                $@"namespace ExtractMethodCrashRepro
 {{
     public static class SomeClass
     {{
@@ -11605,7 +11627,8 @@ $@"namespace ClassLibrary9
         }}
     }}
 }}";
-            var expected = $@"namespace ExtractMethodCrashRepro
+            var expected =
+                $@"namespace ExtractMethodCrashRepro
 {{
     public static class SomeClass
     {{
@@ -11721,7 +11744,7 @@ $@"namespace ClassLibrary9
                 }
                 """;
 
-            // allowMovingDeclaration: false is default behavior on VS. 
+            // allowMovingDeclaration: false is default behavior on VS.
             // it doesn't affect result mostly but it does affect for symbols in unreachable code since
             // data flow in and out for the symbol is always set to false
             await TestExtractMethodAsync(code, expected);
@@ -12168,7 +12191,7 @@ $@"namespace ClassLibrary9
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44260")]
         public async Task TopLevelStatement_ArgumentInInvocation()
         {
-            // Note: the cast should be simplified 
+            // Note: the cast should be simplified
             // https://github.com/dotnet/roslyn/issues/44260
 
             var code = """
@@ -12192,7 +12215,8 @@ $@"namespace ClassLibrary9
         [WorkItem("https://github.com/dotnet/roslyn/issues/4950")]
         public async Task ExtractMethodInvolvingUnsafeBlock(string keyword)
         {
-            var code = $@"
+            var code =
+                $@"
 using System;
 
 class Program {{
@@ -12213,7 +12237,8 @@ class Program {{
     }}
 }}
 ";
-            var expected = $@"
+            var expected =
+                $@"
 using System;
 
 class Program {{

@@ -11,35 +11,40 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 {
     internal sealed partial class TopLevelSyntaxTreeIndex
     {
-        private readonly struct ExtensionMethodInfo(ImmutableDictionary<string, ImmutableArray<int>> receiverTypeNameToExtensionMethodMap)
+        private readonly struct ExtensionMethodInfo(
+            ImmutableDictionary<string, ImmutableArray<int>> receiverTypeNameToExtensionMethodMap
+        )
         {
             // We divide extension methods into two categories, simple and complex, for filtering purpose.
             // Whether a method is simple is determined based on if we can determine it's receiver type easily
-            // with a pure text matching. For complex methods, we will need to rely on symbol to decide if it's 
+            // with a pure text matching. For complex methods, we will need to rely on symbol to decide if it's
             // feasible.
             //
             // Complex methods include:
             // - Method declared in the document which includes using alias directive
             // - Generic method where the receiver type is a type-paramter (e.g. List<T> would be considered simple, not complex)
-            // - If the receiver type name is Pointer type (i.e. name of the type for the first parameter) 
+            // - If the receiver type name is Pointer type (i.e. name of the type for the first parameter)
             //
             // The rest of methods are considered simple.
 
             /// <summary>
             /// Name of the extension method's receiver type to the index of its DeclaredSymbolInfo in `_declarationInfo`.
-            /// 
+            ///
             /// For simple types, the receiver type name is it's metadata name. All predefined types are converted to its metadata form.
             /// e.g. int => Int32. For generic types, type parameters are ignored.
-            /// 
+            ///
             /// For complex types, the receiver type name is "".
-            /// 
+            ///
             /// For any kind of array types, it's "{element's receiver type name}[]".
-            /// e.g. 
+            /// e.g.
             /// int[][,] => "Int32[]"
             /// T (where T is a type parameter) => ""
             /// T[,] (where T is a type parameter) => "T[]"
             /// </summary>
-            public readonly ImmutableDictionary<string, ImmutableArray<int>> ReceiverTypeNameToExtensionMethodMap { get; } = receiverTypeNameToExtensionMethodMap;
+            public readonly ImmutableDictionary<
+                string,
+                ImmutableArray<int>
+            > ReceiverTypeNameToExtensionMethodMap { get; } = receiverTypeNameToExtensionMethodMap;
 
             public bool ContainsExtensionMethod => !ReceiverTypeNameToExtensionMethodMap.IsEmpty;
 
@@ -61,7 +66,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 try
                 {
-                    var receiverTypeNameToExtensionMethodMapBuilder = ImmutableDictionary.CreateBuilder<string, ImmutableArray<int>>();
+                    var receiverTypeNameToExtensionMethodMapBuilder =
+                        ImmutableDictionary.CreateBuilder<string, ImmutableArray<int>>();
                     var count = reader.ReadInt32();
 
                     for (var i = 0; i < count; ++i)
@@ -73,14 +79,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         for (var j = 0; j < arrayLength; ++j)
                             builder.Add(reader.ReadInt32());
 
-                        receiverTypeNameToExtensionMethodMapBuilder[typeName] = builder.ToImmutableAndClear();
+                        receiverTypeNameToExtensionMethodMapBuilder[typeName] =
+                            builder.ToImmutableAndClear();
                     }
 
-                    return new ExtensionMethodInfo(receiverTypeNameToExtensionMethodMapBuilder.ToImmutable());
+                    return new ExtensionMethodInfo(
+                        receiverTypeNameToExtensionMethodMapBuilder.ToImmutable()
+                    );
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
 
                 return null;
             }

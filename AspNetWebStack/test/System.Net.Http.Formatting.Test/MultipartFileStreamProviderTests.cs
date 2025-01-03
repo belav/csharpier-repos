@@ -11,22 +11,17 @@ namespace System.Net.Http
     public class MockMultipartFileStreamProvider : MultipartFileStreamProvider
     {
         public MockMultipartFileStreamProvider()
-            : base(Path.GetTempPath())
-        {
-        }
+            : base(Path.GetTempPath()) { }
 
         public MockMultipartFileStreamProvider(string rootPath)
-            : base(rootPath)
-        {
-        }
+            : base(rootPath) { }
 
         public MockMultipartFileStreamProvider(string rootPath, int bufferSize)
-            : base(rootPath, bufferSize)
-        {
-        }
+            : base(rootPath, bufferSize) { }
     }
 
-    public class MultipartFileStreamProviderTests : MultipartStreamProviderTestBase<MockMultipartFileStreamProvider>
+    public class MultipartFileStreamProviderTests
+        : MultipartStreamProviderTestBase<MockMultipartFileStreamProvider>
     {
         private const int MinBufferSize = 1;
         private const int ValidBufferSize = 0x111;
@@ -35,15 +30,7 @@ namespace System.Net.Http
 #if !NETCOREAPP // .NET Core does not enforce path validity in many APIs.
         public static TheoryDataSet<string> NotSupportedFilePaths
         {
-            get
-            {
-                return new TheoryDataSet<string>
-                {
-                    "cc:\\a\\b",
-                    "123:\\a\\b",
-                    "c d:\\a\\b",
-                };
-            }
+            get { return new TheoryDataSet<string> { "cc:\\a\\b", "123:\\a\\b", "c d:\\a\\b" }; }
         }
 #endif
 
@@ -74,7 +61,13 @@ namespace System.Net.Http
         [Fact]
         public void Constructor_ThrowsOnNullRootPath()
         {
-            Assert.ThrowsArgumentNull(() => { new MultipartFileStreamProvider(null); }, "rootPath");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new MultipartFileStreamProvider(null);
+                },
+                "rootPath"
+            );
         }
 
 #if !NETCOREAPP // .NET Core does not enforce path validity in many APIs.
@@ -82,7 +75,9 @@ namespace System.Net.Http
         [PropertyData("NotSupportedFilePaths")]
         public void Constructor_ThrowsOnNotSupportedRootPath(string notSupportedPath)
         {
-            Assert.Throws<NotSupportedException>(() => new MultipartFileStreamProvider(notSupportedPath, ValidBufferSize));
+            Assert.Throws<NotSupportedException>(
+                () => new MultipartFileStreamProvider(notSupportedPath, ValidBufferSize)
+            );
         }
 #endif
 
@@ -90,20 +85,30 @@ namespace System.Net.Http
         [PropertyData("InvalidFilePaths")]
         public void Constructor_ThrowsOnInvalidRootPath(string invalidPath)
         {
-            Assert.ThrowsArgument(() => new MultipartFileStreamProvider(invalidPath, ValidBufferSize), null);
+            Assert.ThrowsArgument(
+                () => new MultipartFileStreamProvider(invalidPath, ValidBufferSize),
+                null
+            );
         }
 
         [Fact]
         public void Constructor_InvalidBufferSize()
         {
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(() => new MultipartFileStreamProvider(ValidPath, MinBufferSize - 1),
-                "bufferSize", MinBufferSize.ToString(), MinBufferSize - 1);
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(
+                () => new MultipartFileStreamProvider(ValidPath, MinBufferSize - 1),
+                "bufferSize",
+                MinBufferSize.ToString(),
+                MinBufferSize - 1
+            );
         }
 
         [Fact]
         public void FileData_IsEmpty()
         {
-            MultipartFileStreamProvider provider = new MultipartFileStreamProvider(ValidPath, ValidBufferSize);
+            MultipartFileStreamProvider provider = new MultipartFileStreamProvider(
+                ValidPath,
+                ValidBufferSize
+            );
             Assert.Empty(provider.FileData);
         }
 
@@ -132,8 +137,14 @@ namespace System.Net.Http
                 Assert.Contains(partialFileName, provider.FileData[0].LocalFileName);
                 Assert.Contains(partialFileName, provider.FileData[1].LocalFileName);
 
-                Assert.Same(content.ElementAt(0).Headers.ContentDisposition, provider.FileData[0].Headers.ContentDisposition);
-                Assert.Same(content.ElementAt(1).Headers.ContentDisposition, provider.FileData[1].Headers.ContentDisposition);
+                Assert.Same(
+                    content.ElementAt(0).Headers.ContentDisposition,
+                    provider.FileData[0].Headers.ContentDisposition
+                );
+                Assert.Same(
+                    content.ElementAt(1).Headers.ContentDisposition,
+                    provider.FileData[1].Headers.ContentDisposition
+                );
             }
             finally
             {

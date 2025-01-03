@@ -10,11 +10,17 @@ namespace Microsoft.AspNetCore.InternalTesting;
 public class LoggedTest : LoggedTestBase
 {
     // Obsolete but keeping for back compat
-    public LoggedTest(ITestOutputHelper output = null) : base(output) { }
+    public LoggedTest(ITestOutputHelper output = null)
+        : base(output) { }
 
     public ITestSink TestSink { get; set; }
 
-    public override void Initialize(TestContext context, MethodInfo methodInfo, object[] testMethodArguments, ITestOutputHelper testOutputHelper)
+    public override void Initialize(
+        TestContext context,
+        MethodInfo methodInfo,
+        object[] testMethodArguments,
+        ITestOutputHelper testOutputHelper
+    )
     {
         base.Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
 

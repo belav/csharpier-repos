@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace Moq.Async
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class TaskFactory : AwaitableFactory<Task>
@@ -34,7 +33,6 @@ namespace Moq.Async
     {
         public static readonly TaskFactory Instance = new TaskFactory();
 
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                 private TaskFactory()
@@ -55,9 +53,7 @@ namespace Moq.Async
         After:
                 TaskFactory()
         */
-        TaskFactory()
-        {
-        }
+        TaskFactory() { }
 
         public override Task CreateCompleted()
         {

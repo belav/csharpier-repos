@@ -31,10 +31,7 @@ namespace Internal.TypeSystem
 
             public int EndSentinel
             {
-                get
-                {
-                    return Start + Size;
-                }
+                get { return Start + Size; }
                 set
                 {
                     Size = value - Start;
@@ -71,7 +68,10 @@ namespace Internal.TypeSystem
 
             foreach (FieldAndOffset fieldAndOffset in layout.Offsets)
             {
-                validator.AddToFieldLayout(fieldAndOffset.Offset.AsInt, fieldAndOffset.Field.FieldType);
+                validator.AddToFieldLayout(
+                    fieldAndOffset.Offset.AsInt,
+                    fieldAndOffset.Field.FieldType
+                );
             }
         }
 
@@ -115,8 +115,15 @@ namespace Internal.TypeSystem
 
                     foreach (var gcRegion in fieldRefMap)
                     {
-                        SetFieldLayout(offset + lastGCRegionReportedEnd, gcRegion.Start - lastGCRegionReportedEnd, FieldLayoutTag.NonORef);
-                        Debug.Assert(gcRegion.Tag == FieldLayoutTag.ORef || gcRegion.Tag == FieldLayoutTag.ByRef);
+                        SetFieldLayout(
+                            offset + lastGCRegionReportedEnd,
+                            gcRegion.Start - lastGCRegionReportedEnd,
+                            FieldLayoutTag.NonORef
+                        );
+                        Debug.Assert(
+                            gcRegion.Tag == FieldLayoutTag.ORef
+                                || gcRegion.Tag == FieldLayoutTag.ByRef
+                        );
                         SetFieldLayout(offset + gcRegion.Start, gcRegion.Size, gcRegion.Tag);
                         lastGCRegionReportedEnd = gcRegion.EndSentinel;
                     }
@@ -125,7 +132,11 @@ namespace Internal.TypeSystem
                     {
                         int trailingRegionStart = fieldRefMap[fieldRefMap.Count - 1].EndSentinel;
                         int trailingRegionSize = fieldSize - trailingRegionStart;
-                        SetFieldLayout(offset + trailingRegionStart, trailingRegionSize, FieldLayoutTag.NonORef);
+                        SetFieldLayout(
+                            offset + trailingRegionStart,
+                            trailingRegionSize,
+                            FieldLayoutTag.NonORef
+                        );
                     }
                 }
             }
@@ -144,7 +155,11 @@ namespace Internal.TypeSystem
             }
         }
 
-        private void MarkByRefAndORefLocations(MetadataType type, List<FieldLayoutInterval> refMap, int offset)
+        private void MarkByRefAndORefLocations(
+            MetadataType type,
+            List<FieldLayoutInterval> refMap,
+            int offset
+        )
         {
             // Recurse into struct fields
             foreach (FieldDesc field in type.GetFields())
@@ -172,7 +187,12 @@ namespace Internal.TypeSystem
             }
         }
 
-        private void SetFieldLayout(List<FieldLayoutInterval> fieldLayoutInterval, int offset, int count, FieldLayoutTag tag)
+        private void SetFieldLayout(
+            List<FieldLayoutInterval> fieldLayoutInterval,
+            int offset,
+            int count,
+            FieldLayoutTag tag
+        )
         {
             if (count == 0)
                 return;
@@ -201,7 +221,10 @@ namespace Internal.TypeSystem
                     existingInterval.Size = count;
                     fieldLayoutInterval[binarySearchIndex] = existingInterval;
 
-                    ValidateAndMergeIntervalWithFollowingIntervals(fieldLayoutInterval, binarySearchIndex);
+                    ValidateAndMergeIntervalWithFollowingIntervals(
+                        fieldLayoutInterval,
+                        binarySearchIndex
+                    );
                 }
             }
             else
@@ -225,7 +248,10 @@ namespace Internal.TypeSystem
                         }
                     }
 
-                    if (previousInterval.EndSentinel > offset || (tagMatches && previousInterval.EndSentinel == offset))
+                    if (
+                        previousInterval.EndSentinel > offset
+                        || (tagMatches && previousInterval.EndSentinel == offset)
+                    )
                     {
                         // Previous interval overlaps, or exactly matches up with new interval and tag matches. Instead
                         // of expanding interval set, simply expand the previous interval.
@@ -245,11 +271,17 @@ namespace Internal.TypeSystem
                     fieldLayoutInterval.Insert(newIntervalLocation, newInterval);
                 }
 
-                ValidateAndMergeIntervalWithFollowingIntervals(fieldLayoutInterval, newIntervalLocation);
+                ValidateAndMergeIntervalWithFollowingIntervals(
+                    fieldLayoutInterval,
+                    newIntervalLocation
+                );
             }
         }
 
-        private void ValidateAndMergeIntervalWithFollowingIntervals(List<FieldLayoutInterval> fieldLayoutInterval, int intervalIndex)
+        private void ValidateAndMergeIntervalWithFollowingIntervals(
+            List<FieldLayoutInterval> fieldLayoutInterval,
+            int intervalIndex
+        )
         {
             while (true)
             {
@@ -270,7 +302,10 @@ namespace Internal.TypeSystem
                         break;
                     }
 
-                    if ((nextInterval.Start == expandedInterval.EndSentinel) && nextInterval.Tag != tag)
+                    if (
+                        (nextInterval.Start == expandedInterval.EndSentinel)
+                        && nextInterval.Tag != tag
+                    )
                     {
                         // Next interval starts just after existing interval, but does not match tag. Expansion succeeded
                         break;
@@ -301,7 +336,11 @@ namespace Internal.TypeSystem
 
         private void ThrowFieldLayoutError(int offset)
         {
-            ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadExplicitLayout, _typeBeingValidated, offset.ToStringInvariant());
+            ThrowHelper.ThrowTypeLoadException(
+                ExceptionStringID.ClassLoadExplicitLayout,
+                _typeBeingValidated,
+                offset.ToStringInvariant()
+            );
         }
     }
 }

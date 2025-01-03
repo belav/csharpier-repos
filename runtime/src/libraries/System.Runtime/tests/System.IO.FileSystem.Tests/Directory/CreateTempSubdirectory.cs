@@ -33,7 +33,10 @@ namespace System.IO.Tests
                 Assert.True(tmpDir.Exists);
                 Assert.Equal(-1, tmpDir.FullName.IndexOfAny(Path.GetInvalidPathChars()));
                 Assert.Empty(Directory.GetFileSystemEntries(tmpDir.FullName));
-                Assert.Equal(Path.TrimEndingDirectorySeparator(Path.GetTempPath()), tmpDir.Parent.FullName);
+                Assert.Equal(
+                    Path.TrimEndingDirectorySeparator(Path.GetTempPath()),
+                    tmpDir.Parent.FullName
+                );
 
                 if (!string.IsNullOrEmpty(prefix))
                 {
@@ -44,13 +47,20 @@ namespace System.IO.Tests
 
                 if (!OperatingSystem.IsWindows())
                 {
-                    UnixFileMode userRWX = UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute;
+                    UnixFileMode userRWX =
+                        UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute;
                     Assert.Equal(userRWX, tmpDir.UnixFileMode);
                 }
 
                 // Ensure a file can be written to the directory
                 string tempFile = Path.Combine(tmpDir.FullName, "newFile");
-                using (FileStream fs = File.Create(tempFile, bufferSize: 1024, FileOptions.DeleteOnClose))
+                using (
+                    FileStream fs = File.Create(
+                        tempFile,
+                        bufferSize: 1024,
+                        FileOptions.DeleteOnClose
+                    )
+                )
                 {
                     Assert.Equal(0, fs.Length);
                 }
@@ -64,27 +74,34 @@ namespace System.IO.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void CreateTempSubdirectoryTempUnicode()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                DirectoryInfo tempPathWithUnicode = new DirectoryInfo(Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + "\u00F6"));
-                tempPathWithUnicode.Create();
-                
-                string tempEnvVar = OperatingSystem.IsWindows() ? "TMP" : "TMPDIR";
-                Environment.SetEnvironmentVariable(tempEnvVar, tempPathWithUnicode.FullName);
-                
-                try
+            RemoteExecutor
+                .Invoke(() =>
                 {
-                    DirectoryInfo tmpDir = Directory.CreateTempSubdirectory();
-                    Assert.True(tmpDir.Exists);
-                    Assert.Equal(tempPathWithUnicode.FullName, tmpDir.Parent.FullName);
+                    DirectoryInfo tempPathWithUnicode = new DirectoryInfo(
+                        Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + "\u00F6")
+                    );
+                    tempPathWithUnicode.Create();
 
-                    Environment.SetEnvironmentVariable(tempEnvVar, tempPathWithUnicode.Parent.FullName);
-                }
-                finally
-                {
-                    tempPathWithUnicode.Delete(recursive: true);
-                }
-            }).Dispose();
+                    string tempEnvVar = OperatingSystem.IsWindows() ? "TMP" : "TMPDIR";
+                    Environment.SetEnvironmentVariable(tempEnvVar, tempPathWithUnicode.FullName);
+
+                    try
+                    {
+                        DirectoryInfo tmpDir = Directory.CreateTempSubdirectory();
+                        Assert.True(tmpDir.Exists);
+                        Assert.Equal(tempPathWithUnicode.FullName, tmpDir.Parent.FullName);
+
+                        Environment.SetEnvironmentVariable(
+                            tempEnvVar,
+                            tempPathWithUnicode.Parent.FullName
+                        );
+                    }
+                    finally
+                    {
+                        tempPathWithUnicode.Delete(recursive: true);
+                    }
+                })
+                .Dispose();
         }
 
         public static TheoryData<string> InvalidPrefixData
@@ -104,9 +121,14 @@ namespace System.IO.Tests
 
         [Theory]
         [MemberData(nameof(InvalidPrefixData))]
-        public void CreateTempSubdirectoryThrowsWithPrefixContainingDirectorySeparator(string prefix)
+        public void CreateTempSubdirectoryThrowsWithPrefixContainingDirectorySeparator(
+            string prefix
+        )
         {
-            AssertExtensions.Throws<ArgumentException>("prefix", () => Directory.CreateTempSubdirectory(prefix));
+            AssertExtensions.Throws<ArgumentException>(
+                "prefix",
+                () => Directory.CreateTempSubdirectory(prefix)
+            );
         }
     }
 }

@@ -1,13 +1,11 @@
 using System;
 
-[assembly: System.CLSCompliant (true)]
+[assembly: System.CLSCompliant(true)]
 
 namespace NS.System
 {
-	class A
-	{
-		public static void Main ()
-		{
-		}
-	}
+    class A
+    {
+        public static void Main() { }
+    }
 }

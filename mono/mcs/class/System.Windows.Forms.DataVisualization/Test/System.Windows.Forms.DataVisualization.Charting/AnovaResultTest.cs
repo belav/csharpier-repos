@@ -2,7 +2,7 @@
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
-// Copyright (C) 2009 Novell, Inc (http://www.novell.com) 
+// Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,24 +29,24 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms.DataVisualization.Charting
 {
-	[TestFixture]
-	public class AnovaResultTest
-	{
-		[Test]
-		public void Constructor ()
-		{
-			AnovaResult ar = new AnovaResult ();
-			
-			Assert.AreEqual (0, ar.DegreeOfFreedomBetweenGroups, "A1");
-			Assert.AreEqual (0, ar.DegreeOfFreedomTotal, "A2");
-			Assert.AreEqual (0, ar.DegreeOfFreedomWithinGroups, "A3");
-			Assert.AreEqual (0, ar.FCriticalValue, "A4");
-			Assert.AreEqual (0, ar.FRatio, "A5");
-			Assert.AreEqual (0, ar.MeanSquareVarianceBetweenGroups, "A6");
-			Assert.AreEqual (0, ar.MeanSquareVarianceWithinGroups, "A7");
-			Assert.AreEqual (0, ar.SumOfSquaresBetweenGroups, "A8");
-			Assert.AreEqual (0, ar.SumOfSquaresTotal, "A9");
-			Assert.AreEqual (0, ar.SumOfSquaresWithinGroups, "A10");
-		}
-	}
+    [TestFixture]
+    public class AnovaResultTest
+    {
+        [Test]
+        public void Constructor()
+        {
+            AnovaResult ar = new AnovaResult();
+
+            Assert.AreEqual(0, ar.DegreeOfFreedomBetweenGroups, "A1");
+            Assert.AreEqual(0, ar.DegreeOfFreedomTotal, "A2");
+            Assert.AreEqual(0, ar.DegreeOfFreedomWithinGroups, "A3");
+            Assert.AreEqual(0, ar.FCriticalValue, "A4");
+            Assert.AreEqual(0, ar.FRatio, "A5");
+            Assert.AreEqual(0, ar.MeanSquareVarianceBetweenGroups, "A6");
+            Assert.AreEqual(0, ar.MeanSquareVarianceWithinGroups, "A7");
+            Assert.AreEqual(0, ar.SumOfSquaresBetweenGroups, "A8");
+            Assert.AreEqual(0, ar.SumOfSquaresTotal, "A9");
+            Assert.AreEqual(0, ar.SumOfSquaresWithinGroups, "A10");
+        }
+    }
 }

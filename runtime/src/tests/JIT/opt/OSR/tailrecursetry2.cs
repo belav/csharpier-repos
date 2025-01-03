@@ -9,25 +9,24 @@ using Xunit;
 
 public class TailRecursionCandidateOSREntryInTry
 {
-    public unsafe static int F(int from, int to, int n, int result, int *x)
+    public static unsafe int F(int from, int to, int n, int result, int* x)
     {
-        try 
+        try
         {
             for (int i = from; i < to; i++)
             {
                 result += i;
             }
         }
-        catch(Exception)
-        {
-        }
+        catch (Exception) { }
 
-        if (n <= 0) return result;
+        if (n <= 0)
+            return result;
 
         int delta = to - from;
 
         // Tail recursive site, but can't tail call
-        return F(to, to + delta, n-1, result, &result);
+        return F(to, to + delta, n - 1, result, &result);
     }
 
     [Fact]
@@ -39,5 +38,5 @@ public class TailRecursionCandidateOSREntryInTry
         string msg = ok ? "Pass" : "Fail";
         Console.WriteLine($"done, sum is {result}, {msg}");
         return ok ? 100 : -1;
-    }  
+    }
 }

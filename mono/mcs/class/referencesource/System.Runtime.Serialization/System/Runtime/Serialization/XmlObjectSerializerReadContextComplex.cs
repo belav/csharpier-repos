@@ -6,19 +6,22 @@ namespace System.Runtime.Serialization
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
-    using System.Text;
-    using System.Xml;
-    using DataContractDictionary = System.Collections.Generic.Dictionary<System.Xml.XmlQualifiedName, DataContract>;
-    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization.Diagnostics.Application;
     using System.Runtime.Serialization.Formatters;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.CompilerServices;
+    using System.Text;
+    using System.Xml;
+    using DataContractDictionary = System.Collections.Generic.Dictionary<
+        System.Xml.XmlQualifiedName,
+        DataContract
+    >;
 
 #if USE_REFEMIT
     public class XmlObjectSerializerReadContextComplex : XmlObjectSerializerReadContext
@@ -36,7 +39,11 @@ namespace System.Runtime.Serialization
         FormatterAssemblyStyle assemblyFormat;
         Hashtable surrogateDataContracts;
 
-        internal XmlObjectSerializerReadContextComplex(DataContractSerializer serializer, DataContract rootTypeDataContract, DataContractResolver dataContractResolver)
+        internal XmlObjectSerializerReadContextComplex(
+            DataContractSerializer serializer,
+            DataContract rootTypeDataContract,
+            DataContractResolver dataContractResolver
+        )
             : base(serializer, rootTypeDataContract, dataContractResolver)
         {
             this.mode = SerializationMode.SharedContract;
@@ -54,10 +61,14 @@ namespace System.Runtime.Serialization
             this.assemblyFormat = serializer.AssemblyFormat;
         }
 
-        internal XmlObjectSerializerReadContextComplex(XmlObjectSerializer serializer, int maxItemsInObjectGraph, StreamingContext streamingContext, bool ignoreExtensionDataObject)
+        internal XmlObjectSerializerReadContextComplex(
+            XmlObjectSerializer serializer,
+            int maxItemsInObjectGraph,
+            StreamingContext streamingContext,
+            bool ignoreExtensionDataObject
+        )
             : base(serializer, maxItemsInObjectGraph, streamingContext, ignoreExtensionDataObject)
-        {
-        }
+        { }
 
         internal override SerializationMode Mode
         {
@@ -69,15 +80,28 @@ namespace System.Runtime.Serialization
             DataContract dataContract = null;
             if (mode == SerializationMode.SharedType && surrogateSelector != null)
             {
-                dataContract = NetDataContractSerializer.GetDataContractFromSurrogateSelector(surrogateSelector, GetStreamingContext(), typeHandle, null /*type*/, ref surrogateDataContracts);
+                dataContract = NetDataContractSerializer.GetDataContractFromSurrogateSelector(
+                    surrogateSelector,
+                    GetStreamingContext(),
+                    typeHandle,
+                    null /*type*/
+                    ,
+                    ref surrogateDataContracts
+                );
             }
 
             if (dataContract != null)
             {
                 if (this.IsGetOnlyCollection && dataContract is SurrogateDataContract)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
-                        DataContract.GetClrTypeFullName(dataContract.UnderlyingType))));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.GetString(
+                                SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
+                                DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                            )
+                        )
+                    );
                 }
                 return dataContract;
             }
@@ -90,15 +114,27 @@ namespace System.Runtime.Serialization
             DataContract dataContract = null;
             if (mode == SerializationMode.SharedType && surrogateSelector != null)
             {
-                dataContract = NetDataContractSerializer.GetDataContractFromSurrogateSelector(surrogateSelector, GetStreamingContext(), typeHandle, type, ref surrogateDataContracts);
+                dataContract = NetDataContractSerializer.GetDataContractFromSurrogateSelector(
+                    surrogateSelector,
+                    GetStreamingContext(),
+                    typeHandle,
+                    type,
+                    ref surrogateDataContracts
+                );
             }
 
             if (dataContract != null)
             {
                 if (this.IsGetOnlyCollection && dataContract is SurrogateDataContract)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
-                        DataContract.GetClrTypeFullName(dataContract.UnderlyingType))));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.GetString(
+                                SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
+                                DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                            )
+                        )
+                    );
                 }
                 return dataContract;
             }
@@ -106,29 +142,66 @@ namespace System.Runtime.Serialization
             return base.GetDataContract(typeHandle, type);
         }
 
-        public override object InternalDeserialize(XmlReaderDelegator xmlReader, int declaredTypeID, RuntimeTypeHandle declaredTypeHandle, string name, string ns)
+        public override object InternalDeserialize(
+            XmlReaderDelegator xmlReader,
+            int declaredTypeID,
+            RuntimeTypeHandle declaredTypeHandle,
+            string name,
+            string ns
+        )
         {
             if (mode == SerializationMode.SharedContract)
             {
                 if (dataContractSurrogate == null)
-                    return base.InternalDeserialize(xmlReader, declaredTypeID, declaredTypeHandle, name, ns);
+                    return base.InternalDeserialize(
+                        xmlReader,
+                        declaredTypeID,
+                        declaredTypeHandle,
+                        name,
+                        ns
+                    );
                 else
-                    return InternalDeserializeWithSurrogate(xmlReader, Type.GetTypeFromHandle(declaredTypeHandle), null /*surrogateDataContract*/, name, ns);
+                    return InternalDeserializeWithSurrogate(
+                        xmlReader,
+                        Type.GetTypeFromHandle(declaredTypeHandle),
+                        null /*surrogateDataContract*/
+                        ,
+                        name,
+                        ns
+                    );
             }
             else
             {
-                return InternalDeserializeInSharedTypeMode(xmlReader, declaredTypeID, Type.GetTypeFromHandle(declaredTypeHandle), name, ns);
+                return InternalDeserializeInSharedTypeMode(
+                    xmlReader,
+                    declaredTypeID,
+                    Type.GetTypeFromHandle(declaredTypeHandle),
+                    name,
+                    ns
+                );
             }
         }
 
-        internal override object InternalDeserialize(XmlReaderDelegator xmlReader, Type declaredType, string name, string ns)
+        internal override object InternalDeserialize(
+            XmlReaderDelegator xmlReader,
+            Type declaredType,
+            string name,
+            string ns
+        )
         {
             if (mode == SerializationMode.SharedContract)
             {
                 if (dataContractSurrogate == null)
                     return base.InternalDeserialize(xmlReader, declaredType, name, ns);
                 else
-                    return InternalDeserializeWithSurrogate(xmlReader, declaredType, null /*surrogateDataContract*/, name, ns);
+                    return InternalDeserializeWithSurrogate(
+                        xmlReader,
+                        declaredType,
+                        null /*surrogateDataContract*/
+                        ,
+                        name,
+                        ns
+                    );
             }
             else
             {
@@ -136,14 +209,32 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal override object InternalDeserialize(XmlReaderDelegator xmlReader, Type declaredType, DataContract dataContract, string name, string ns)
+        internal override object InternalDeserialize(
+            XmlReaderDelegator xmlReader,
+            Type declaredType,
+            DataContract dataContract,
+            string name,
+            string ns
+        )
         {
             if (mode == SerializationMode.SharedContract)
             {
                 if (dataContractSurrogate == null)
-                    return base.InternalDeserialize(xmlReader, declaredType, dataContract, name, ns);
+                    return base.InternalDeserialize(
+                        xmlReader,
+                        declaredType,
+                        dataContract,
+                        name,
+                        ns
+                    );
                 else
-                    return InternalDeserializeWithSurrogate(xmlReader, declaredType, dataContract, name, ns);
+                    return InternalDeserializeWithSurrogate(
+                        xmlReader,
+                        declaredType,
+                        dataContract,
+                        name,
+                        ns
+                    );
             }
             else
             {
@@ -151,7 +242,13 @@ namespace System.Runtime.Serialization
             }
         }
 
-        object InternalDeserializeInSharedTypeMode(XmlReaderDelegator xmlReader, int declaredTypeID, Type declaredType, string name, string ns)
+        object InternalDeserializeInSharedTypeMode(
+            XmlReaderDelegator xmlReader,
+            int declaredTypeID,
+            Type declaredType,
+            string name,
+            string ns
+        )
         {
             object retObj = null;
             if (TryHandleNullOrRef(xmlReader, declaredType, name, ns, ref retObj))
@@ -164,49 +261,139 @@ namespace System.Runtime.Serialization
             {
                 Assembly assembly;
                 Type type;
-                dataContract = ResolveDataContractInSharedTypeMode(assemblyName, typeName, out assembly, out type);
+                dataContract = ResolveDataContractInSharedTypeMode(
+                    assemblyName,
+                    typeName,
+                    out assembly,
+                    out type
+                );
                 if (dataContract == null)
                 {
                     if (assembly == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.AssemblyNotFound, assemblyName)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.GetString(SR.AssemblyNotFound, assemblyName)
+                            )
+                        );
                     if (type == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.ClrTypeNotFound, assembly.FullName, typeName)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.GetString(SR.ClrTypeNotFound, assembly.FullName, typeName)
+                            )
+                        );
                 }
                 //Array covariance is not supported in XSD. If declared type is array, data is sent in format of base array
                 if (declaredType != null && declaredType.IsArray)
-                    dataContract = (declaredTypeID < 0) ? GetDataContract(declaredType) : GetDataContract(declaredTypeID, declaredType.TypeHandle);
+                    dataContract =
+                        (declaredTypeID < 0)
+                            ? GetDataContract(declaredType)
+                            : GetDataContract(declaredTypeID, declaredType.TypeHandle);
             }
             else
             {
                 if (assemblyName != null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(XmlObjectSerializer.TryAddLineInfo(xmlReader, SR.GetString(SR.AttributeNotFound, Globals.SerializationNamespace, Globals.ClrTypeLocalName, xmlReader.NodeType, xmlReader.NamespaceURI, xmlReader.LocalName))));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            XmlObjectSerializer.TryAddLineInfo(
+                                xmlReader,
+                                SR.GetString(
+                                    SR.AttributeNotFound,
+                                    Globals.SerializationNamespace,
+                                    Globals.ClrTypeLocalName,
+                                    xmlReader.NodeType,
+                                    xmlReader.NamespaceURI,
+                                    xmlReader.LocalName
+                                )
+                            )
+                        )
+                    );
                 else if (typeName != null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(XmlObjectSerializer.TryAddLineInfo(xmlReader, SR.GetString(SR.AttributeNotFound, Globals.SerializationNamespace, Globals.ClrAssemblyLocalName, xmlReader.NodeType, xmlReader.NamespaceURI, xmlReader.LocalName))));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            XmlObjectSerializer.TryAddLineInfo(
+                                xmlReader,
+                                SR.GetString(
+                                    SR.AttributeNotFound,
+                                    Globals.SerializationNamespace,
+                                    Globals.ClrAssemblyLocalName,
+                                    xmlReader.NodeType,
+                                    xmlReader.NamespaceURI,
+                                    xmlReader.LocalName
+                                )
+                            )
+                        )
+                    );
                 else if (declaredType == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(XmlObjectSerializer.TryAddLineInfo(xmlReader, SR.GetString(SR.AttributeNotFound, Globals.SerializationNamespace, Globals.ClrTypeLocalName, xmlReader.NodeType, xmlReader.NamespaceURI, xmlReader.LocalName))));
-                dataContract = (declaredTypeID < 0) ? GetDataContract(declaredType) : GetDataContract(declaredTypeID, declaredType.TypeHandle);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            XmlObjectSerializer.TryAddLineInfo(
+                                xmlReader,
+                                SR.GetString(
+                                    SR.AttributeNotFound,
+                                    Globals.SerializationNamespace,
+                                    Globals.ClrTypeLocalName,
+                                    xmlReader.NodeType,
+                                    xmlReader.NamespaceURI,
+                                    xmlReader.LocalName
+                                )
+                            )
+                        )
+                    );
+                dataContract =
+                    (declaredTypeID < 0)
+                        ? GetDataContract(declaredType)
+                        : GetDataContract(declaredTypeID, declaredType.TypeHandle);
             }
             return ReadDataContractValue(dataContract, xmlReader);
         }
 
-        object InternalDeserializeWithSurrogate(XmlReaderDelegator xmlReader, Type declaredType, DataContract surrogateDataContract, string name, string ns)
+        object InternalDeserializeWithSurrogate(
+            XmlReaderDelegator xmlReader,
+            Type declaredType,
+            DataContract surrogateDataContract,
+            string name,
+            string ns
+        )
         {
             if (TD.DCDeserializeWithSurrogateStartIsEnabled())
             {
                 TD.DCDeserializeWithSurrogateStart(declaredType.FullName);
             }
 
-            DataContract dataContract = surrogateDataContract ??
-                GetDataContract(DataContractSurrogateCaller.GetDataContractType(dataContractSurrogate, declaredType));
+            DataContract dataContract =
+                surrogateDataContract
+                ?? GetDataContract(
+                    DataContractSurrogateCaller.GetDataContractType(
+                        dataContractSurrogate,
+                        declaredType
+                    )
+                );
             if (this.IsGetOnlyCollection && dataContract.UnderlyingType != declaredType)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
-                    DataContract.GetClrTypeFullName(declaredType))));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidDataContractException(
+                        SR.GetString(
+                            SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
+                            DataContract.GetClrTypeFullName(declaredType)
+                        )
+                    )
+                );
             }
             ReadAttributes(xmlReader);
             string objectId = GetObjectId();
-            object oldObj = InternalDeserialize(xmlReader, name, ns, declaredType, ref dataContract);
-            object obj = DataContractSurrogateCaller.GetDeserializedObject(dataContractSurrogate, oldObj, dataContract.UnderlyingType, declaredType);
+            object oldObj = InternalDeserialize(
+                xmlReader,
+                name,
+                ns,
+                declaredType,
+                ref dataContract
+            );
+            object obj = DataContractSurrogateCaller.GetDeserializedObject(
+                dataContractSurrogate,
+                oldObj,
+                dataContract.UnderlyingType,
+                declaredType
+            );
             ReplaceDeserializedObject(objectId, oldObj, obj);
 
             if (TD.DCDeserializeWithSurrogateStopIsEnabled())
@@ -217,7 +404,11 @@ namespace System.Runtime.Serialization
             return obj;
         }
 
-        Type ResolveDataContractTypeInSharedTypeMode(string assemblyName, string typeName, out Assembly assembly)
+        Type ResolveDataContractTypeInSharedTypeMode(
+            string assemblyName,
+            string typeName,
+            out Assembly assembly
+        )
         {
             assembly = null;
             Type type = null;
@@ -226,8 +417,12 @@ namespace System.Runtime.Serialization
                 type = binder.BindToType(assemblyName, typeName);
             if (type == null)
             {
-                XmlObjectDataContractTypeKey key = new XmlObjectDataContractTypeKey(assemblyName, typeName);
-                XmlObjectDataContractTypeInfo dataContractTypeInfo = (XmlObjectDataContractTypeInfo)dataContractTypeCache[key];
+                XmlObjectDataContractTypeKey key = new XmlObjectDataContractTypeKey(
+                    assemblyName,
+                    typeName
+                );
+                XmlObjectDataContractTypeInfo dataContractTypeInfo = (XmlObjectDataContractTypeInfo)
+                    dataContractTypeCache[key];
                 if (dataContractTypeInfo == null)
                 {
                     if (assemblyFormat == FormatterAssemblyStyle.Full)
@@ -245,7 +440,9 @@ namespace System.Runtime.Serialization
                     }
                     else
                     {
-                        assembly = XmlObjectSerializerReadContextComplex.ResolveSimpleAssemblyName(assemblyName);
+                        assembly = XmlObjectSerializerReadContextComplex.ResolveSimpleAssemblyName(
+                            assemblyName
+                        );
                         if (assembly != null)
                         {
                             // Catching any exceptions that could be thrown from a failure on assembly load
@@ -261,7 +458,12 @@ namespace System.Runtime.Serialization
 
                             if (type == null)
                             {
-                                type = Type.GetType(typeName, XmlObjectSerializerReadContextComplex.ResolveSimpleAssemblyName, new TopLevelAssemblyTypeResolver(assembly).ResolveType, false /* throwOnError */);
+                                type = Type.GetType(
+                                    typeName,
+                                    XmlObjectSerializerReadContextComplex.ResolveSimpleAssemblyName,
+                                    new TopLevelAssemblyTypeResolver(assembly).ResolveType,
+                                    false /* throwOnError */
+                                );
                             }
                         }
                     }
@@ -290,7 +492,12 @@ namespace System.Runtime.Serialization
             return type;
         }
 
-        DataContract ResolveDataContractInSharedTypeMode(string assemblyName, string typeName, out Assembly assembly, out Type type)
+        DataContract ResolveDataContractInSharedTypeMode(
+            string assemblyName,
+            string typeName,
+            out Assembly assembly,
+            out Type type
+        )
         {
             type = ResolveDataContractTypeInSharedTypeMode(assemblyName, typeName, out assembly);
             if (type != null)
@@ -313,27 +520,50 @@ namespace System.Runtime.Serialization
                 {
                     Assembly assembly;
                     Type type;
-                    return ResolveDataContractInSharedTypeMode(attributes.ClrAssembly, attributes.ClrType, out assembly, out type);
+                    return ResolveDataContractInSharedTypeMode(
+                        attributes.ClrAssembly,
+                        attributes.ClrType,
+                        out assembly,
+                        out type
+                    );
                 }
             }
             return null;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls the critical methods of ISurrogateSelector", Safe = "Demands for FullTrust")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls the critical methods of ISurrogateSelector",
+            Safe = "Demands for FullTrust"
+        )]
         [SecuritySafeCritical]
         [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
         [MethodImpl(MethodImplOptions.NoInlining)]
         bool CheckIfTypeSerializableForSharedTypeMode(Type memberType)
         {
-            Fx.Assert(surrogateSelector != null, "Method should not be called when surrogateSelector is null.");
+            Fx.Assert(
+                surrogateSelector != null,
+                "Method should not be called when surrogateSelector is null."
+            );
             ISurrogateSelector surrogateSelectorNotUsed;
-            return (surrogateSelector.GetSurrogate(memberType, GetStreamingContext(), out surrogateSelectorNotUsed) != null);
+            return (
+                surrogateSelector.GetSurrogate(
+                    memberType,
+                    GetStreamingContext(),
+                    out surrogateSelectorNotUsed
+                ) != null
+            );
         }
 
-        internal override void CheckIfTypeSerializable(Type memberType, bool isMemberTypeSerializable)
+        internal override void CheckIfTypeSerializable(
+            Type memberType,
+            bool isMemberTypeSerializable
+        )
         {
-            if (mode == SerializationMode.SharedType && surrogateSelector != null &&
-                CheckIfTypeSerializableForSharedTypeMode(memberType))
+            if (
+                mode == SerializationMode.SharedType
+                && surrogateSelector != null
+                && CheckIfTypeSerializableForSharedTypeMode(memberType)
+            )
             {
                 return;
             }
@@ -343,9 +573,16 @@ namespace System.Runtime.Serialization
                 {
                     while (memberType.IsArray)
                         memberType = memberType.GetElementType();
-                    memberType = DataContractSurrogateCaller.GetDataContractType(dataContractSurrogate, memberType);
+                    memberType = DataContractSurrogateCaller.GetDataContractType(
+                        dataContractSurrogate,
+                        memberType
+                    );
                     if (!DataContract.IsTypeSerializable(memberType))
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.TypeNotSerializable, memberType)));
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(SR.TypeNotSerializable, memberType)
+                            )
+                        );
                     return;
                 }
             }
@@ -362,11 +599,20 @@ namespace System.Runtime.Serialization
             else
             {
                 type = DataContract.UnwrapNullableType(type);
-                Type surrogateType = DataContractSerializer.GetSurrogatedType(dataContractSurrogate, type);
+                Type surrogateType = DataContractSerializer.GetSurrogatedType(
+                    dataContractSurrogate,
+                    type
+                );
                 if (this.IsGetOnlyCollection && surrogateType != type)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
-                        DataContract.GetClrTypeFullName(type))));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.GetString(
+                                SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
+                                DataContract.GetClrTypeFullName(type)
+                            )
+                        )
+                    );
                 }
                 else
                 {
@@ -409,19 +655,31 @@ namespace System.Runtime.Serialization
             return assembly;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Gets the SecurityCritical PermissionSet for sourceAssembly and destinationAssembly.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Gets the SecurityCritical PermissionSet for sourceAssembly and destinationAssembly.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
-        static void CheckTypeForwardedTo(Assembly sourceAssembly, Assembly destinationAssembly, Type resolvedType)
+        static void CheckTypeForwardedTo(
+            Assembly sourceAssembly,
+            Assembly destinationAssembly,
+            Type resolvedType
+        )
         {
-            if (sourceAssembly != destinationAssembly && !NetDataContractSerializer.UnsafeTypeForwardingEnabled && !sourceAssembly.IsFullyTrusted)
+            if (
+                sourceAssembly != destinationAssembly
+                && !NetDataContractSerializer.UnsafeTypeForwardingEnabled
+                && !sourceAssembly.IsFullyTrusted
+            )
             {
 #if !NO_DESKTOP_SECURITY
                 // We have a TypeForwardedTo attribute
                 if (!destinationAssembly.PermissionSet.IsSubsetOf(sourceAssembly.PermissionSet))
                 {
                     // We look for a matching TypeForwardedFrom attribute
-                    TypeInformation typeInfo = NetDataContractSerializer.GetTypeInformation(resolvedType);
+                    TypeInformation typeInfo = NetDataContractSerializer.GetTypeInformation(
+                        resolvedType
+                    );
                     if (typeInfo.HasTypeForwardedFrom)
                     {
                         Assembly typeForwardedFromAssembly = null;
@@ -437,7 +695,14 @@ namespace System.Runtime.Serialization
                             return;
                         }
                     }
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.CannotDeserializeForwardedType, DataContract.GetClrTypeFullName(resolvedType))));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.CannotDeserializeForwardedType,
+                                DataContract.GetClrTypeFullName(resolvedType)
+                            )
+                        )
+                    );
                 }
 #endif
             }
@@ -451,6 +716,7 @@ namespace System.Runtime.Serialization
             {
                 this.topLevelAssembly = topLevelAssembly;
             }
+
             public Type ResolveType(Assembly assembly, string simpleTypeName, bool ignoreCase)
             {
                 if (assembly == null)
@@ -464,6 +730,7 @@ namespace System.Runtime.Serialization
         {
             Assembly assembly;
             Type type;
+
             public XmlObjectDataContractTypeInfo(Assembly assembly, Type type)
             {
                 this.assembly = assembly;
@@ -472,18 +739,12 @@ namespace System.Runtime.Serialization
 
             public Assembly Assembly
             {
-                get
-                {
-                    return this.assembly;
-                }
+                get { return this.assembly; }
             }
 
             public Type Type
             {
-                get
-                {
-                    return this.type;
-                }
+                get { return this.type; }
             }
         }
 
@@ -491,6 +752,7 @@ namespace System.Runtime.Serialization
         {
             string assemblyName;
             string typeName;
+
             public XmlObjectDataContractTypeKey(string assemblyName, string typeName)
             {
                 this.assemblyName = assemblyName;

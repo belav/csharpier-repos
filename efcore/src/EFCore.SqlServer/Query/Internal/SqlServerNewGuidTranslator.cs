@@ -13,7 +13,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 /// </summary>
 public class SqlServerNewGuidTranslator : IMethodCallTranslator
 {
-    private static readonly MethodInfo MethodInfo = typeof(Guid).GetRuntimeMethod(nameof(Guid.NewGuid), Type.EmptyTypes)!;
+    private static readonly MethodInfo MethodInfo = typeof(Guid).GetRuntimeMethod(
+        nameof(Guid.NewGuid),
+        Type.EmptyTypes
+    )!;
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
     /// <summary>
@@ -37,13 +40,15 @@ public class SqlServerNewGuidTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        => MethodInfo.Equals(method)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    ) =>
+        MethodInfo.Equals(method)
             ? _sqlExpressionFactory.Function(
                 "NEWID",
                 Enumerable.Empty<SqlExpression>(),
                 nullable: false,
                 argumentsPropagateNullability: Enumerable.Empty<bool>(),
-                method.ReturnType)
+                method.ReturnType
+            )
             : null;
 }

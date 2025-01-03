@@ -35,7 +35,11 @@ public static class PageLinkGeneratorExtensions
     /// names from <c>RouteOptions</c>.
     /// </param>
     /// <returns>A URI with an absolute path, or <c>null</c> if a URI cannot be created.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetPathByPage(
         this LinkGenerator generator,
         HttpContext httpContext,
@@ -44,7 +48,8 @@ public static class PageLinkGeneratorExtensions
         object? values = default,
         PathString? pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(httpContext);
@@ -57,7 +62,8 @@ public static class PageLinkGeneratorExtensions
             address.AmbientValues,
             pathBase,
             fragment,
-            options);
+            options
+        );
     }
 
     /// <summary>
@@ -78,7 +84,11 @@ public static class PageLinkGeneratorExtensions
     /// names from <c>RouteOptions</c>.
     /// </param>
     /// <returns>A URI with an absolute path, or <c>null</c> if a URI cannot be created.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetPathByPage(
         this LinkGenerator generator,
         string page,
@@ -86,13 +96,20 @@ public static class PageLinkGeneratorExtensions
         object? values = default,
         PathString pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(page);
 
         var address = CreateAddress(httpContext: null, page, handler, values);
-        return generator.GetPathByAddress(address, address.ExplicitValues, pathBase, fragment, options);
+        return generator.GetPathByAddress(
+            address,
+            address.ExplicitValues,
+            pathBase,
+            fragment,
+            options
+        );
     }
 
     /// <summary>
@@ -131,7 +148,11 @@ public static class PageLinkGeneratorExtensions
     /// your deployment environment.
     /// </para>
     /// </remarks>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetUriByPage(
         this LinkGenerator generator,
         HttpContext httpContext,
@@ -142,7 +163,8 @@ public static class PageLinkGeneratorExtensions
         HostString? host = default,
         PathString? pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(httpContext);
@@ -157,7 +179,8 @@ public static class PageLinkGeneratorExtensions
             host,
             pathBase,
             fragment,
-            options);
+            options
+        );
     }
 
     /// <summary>
@@ -184,7 +207,11 @@ public static class PageLinkGeneratorExtensions
     /// your deployment environment.
     /// </para>
     /// </remarks>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetUriByPage(
         this LinkGenerator generator,
         string page,
@@ -194,26 +221,46 @@ public static class PageLinkGeneratorExtensions
         HostString host,
         PathString pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(page);
 
         var address = CreateAddress(httpContext: null, page, handler, values);
-        return generator.GetUriByAddress<RouteValuesAddress>(address, address.ExplicitValues, scheme, host, pathBase, fragment, options);
+        return generator.GetUriByAddress<RouteValuesAddress>(
+            address,
+            address.ExplicitValues,
+            scheme,
+            host,
+            pathBase,
+            fragment,
+            options
+        );
     }
 
-    private static RouteValuesAddress CreateAddress(HttpContext? httpContext, string? page, string? handler, object? values)
+    private static RouteValuesAddress CreateAddress(
+        HttpContext? httpContext,
+        string? page,
+        string? handler,
+        object? values
+    )
     {
         var explicitValues = new RouteValueDictionary(values);
         var ambientValues = GetAmbientValues(httpContext);
 
-        UrlHelperBase.NormalizeRouteValuesForPage(context: null, page, handler, explicitValues, ambientValues);
+        UrlHelperBase.NormalizeRouteValuesForPage(
+            context: null,
+            page,
+            handler,
+            explicitValues,
+            ambientValues
+        );
 
         return new RouteValuesAddress()
         {
             AmbientValues = ambientValues,
-            ExplicitValues = explicitValues
+            ExplicitValues = explicitValues,
         };
     }
 

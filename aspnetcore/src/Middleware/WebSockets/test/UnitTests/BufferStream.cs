@@ -132,14 +132,15 @@ public class BufferStream : Stream
                 }
                 int actualCount = Math.Min(count, _topBuffer.Count);
                 Buffer.BlockCopy(_topBuffer.Array, _topBuffer.Offset, buffer, offset, actualCount);
-                _topBuffer = new ArraySegment<byte>(_topBuffer.Array,
+                _topBuffer = new ArraySegment<byte>(
+                    _topBuffer.Array,
                     _topBuffer.Offset + actualCount,
-                    _topBuffer.Count - actualCount);
+                    _topBuffer.Count - actualCount
+                );
                 totalRead += actualCount;
                 offset += actualCount;
                 count -= actualCount;
-            }
-            while (count > 0 && (_topBuffer.Count > 0 || !_bufferedData.IsEmpty));
+            } while (count > 0 && (_topBuffer.Count > 0 || !_bufferedData.IsEmpty));
             // Keep reading while there is more data available and we have more space to put it in.
             return totalRead;
         }
@@ -149,7 +150,13 @@ public class BufferStream : Stream
         }
     }
 
-    public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+    public override IAsyncResult BeginRead(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback callback,
+        object state
+    )
     {
         // TODO: This option doesn't preserve the state object.
         // return ReadAsync(buffer, offset, count);
@@ -162,7 +169,12 @@ public class BufferStream : Stream
         return base.EndRead(asyncResult);
     }
 
-    public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override async Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         if (_terminated)
         {
@@ -196,14 +208,15 @@ public class BufferStream : Stream
                 }
                 var actualCount = Math.Min(count, _topBuffer.Count);
                 Buffer.BlockCopy(_topBuffer.Array, _topBuffer.Offset, buffer, offset, actualCount);
-                _topBuffer = new ArraySegment<byte>(_topBuffer.Array,
+                _topBuffer = new ArraySegment<byte>(
+                    _topBuffer.Array,
                     _topBuffer.Offset + actualCount,
-                    _topBuffer.Count - actualCount);
+                    _topBuffer.Count - actualCount
+                );
                 totalRead += actualCount;
                 offset += actualCount;
                 count -= actualCount;
-            }
-            while (count > 0 && (_topBuffer.Count > 0 || !_bufferedData.IsEmpty));
+            } while (count > 0 && (_topBuffer.Count > 0 || !_bufferedData.IsEmpty));
             // Keep reading while there is more data available and we have more space to put it in.
             return totalRead;
         }
@@ -240,7 +253,13 @@ public class BufferStream : Stream
         }
     }
 
-    public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+    public override IAsyncResult BeginWrite(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback callback,
+        object state
+    )
     {
         Write(buffer, offset, count);
         var tcs = new TaskCompletionSource<object>(state);
@@ -255,7 +274,12 @@ public class BufferStream : Stream
 
     public override void EndWrite(IAsyncResult asyncResult) { }
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         VerifyBuffer(buffer, offset, count, allowEmpty: true);
         if (cancellationToken.IsCancellationRequested)
@@ -275,8 +299,7 @@ public class BufferStream : Stream
         {
             throw new ArgumentOutOfRangeException(nameof(offset), offset, string.Empty);
         }
-        if (count < 0 || count > buffer.Length - offset
-            || (!allowEmpty && count == 0))
+        if (count < 0 || count > buffer.Length - offset || (!allowEmpty && count == 0))
         {
             throw new ArgumentOutOfRangeException(nameof(count), count, string.Empty);
         }
@@ -322,8 +345,18 @@ public class BufferStream : Stream
         }
     }
 
-    [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_writeLock", Justification = "ODEs from the locks would mask IOEs from abort.")]
-    [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_readLock", Justification = "Data can still be read unless we get aborted.")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2213:DisposableFieldsShouldBeDisposed",
+        MessageId = "_writeLock",
+        Justification = "ODEs from the locks would mask IOEs from abort."
+    )]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2213:DisposableFieldsShouldBeDisposed",
+        MessageId = "_readLock",
+        Justification = "Data can still be read unless we get aborted."
+    )]
     protected override void Dispose(bool disposing)
     {
         if (disposing)

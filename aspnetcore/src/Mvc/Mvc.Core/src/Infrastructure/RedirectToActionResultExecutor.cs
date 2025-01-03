@@ -21,7 +21,10 @@ public partial class RedirectToActionResultExecutor : IActionResultExecutor<Redi
     /// </summary>
     /// <param name="loggerFactory">The factory used to create loggers.</param>
     /// <param name="urlHelperFactory">The factory used to create url helpers.</param>
-    public RedirectToActionResultExecutor(ILoggerFactory loggerFactory, IUrlHelperFactory urlHelperFactory)
+    public RedirectToActionResultExecutor(
+        ILoggerFactory loggerFactory,
+        IUrlHelperFactory urlHelperFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(loggerFactory);
         ArgumentNullException.ThrowIfNull(urlHelperFactory);
@@ -44,7 +47,8 @@ public partial class RedirectToActionResultExecutor : IActionResultExecutor<Redi
             result.RouteValues,
             protocol: null,
             host: null,
-            fragment: result.Fragment);
+            fragment: result.Fragment
+        );
         if (string.IsNullOrEmpty(destinationUrl))
         {
             throw new InvalidOperationException(Resources.NoRoutesMatched);
@@ -54,8 +58,9 @@ public partial class RedirectToActionResultExecutor : IActionResultExecutor<Redi
 
         if (result.PreserveMethod)
         {
-            context.HttpContext.Response.StatusCode = result.Permanent ?
-                StatusCodes.Status308PermanentRedirect : StatusCodes.Status307TemporaryRedirect;
+            context.HttpContext.Response.StatusCode = result.Permanent
+                ? StatusCodes.Status308PermanentRedirect
+                : StatusCodes.Status307TemporaryRedirect;
             context.HttpContext.Response.Headers.Location = destinationUrl;
         }
         else
@@ -68,7 +73,15 @@ public partial class RedirectToActionResultExecutor : IActionResultExecutor<Redi
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Executing RedirectResult, redirecting to {Destination}.", EventName = "RedirectToActionResultExecuting")]
-        public static partial void RedirectToActionResultExecuting(ILogger logger, string destination);
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing RedirectResult, redirecting to {Destination}.",
+            EventName = "RedirectToActionResultExecuting"
+        )]
+        public static partial void RedirectToActionResultExecuting(
+            ILogger logger,
+            string destination
+        );
     }
 }

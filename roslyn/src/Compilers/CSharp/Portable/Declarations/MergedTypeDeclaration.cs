@@ -32,29 +32,27 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public ImmutableArray<SingleTypeDeclaration> Declarations
         {
-            get
-            {
-                return _declarations;
-            }
+            get { return _declarations; }
         }
 
         public ImmutableArray<SyntaxReference> SyntaxReferences
         {
-            get
-            {
-                return _declarations.SelectAsArray(r => r.SyntaxReference);
-            }
+            get { return _declarations.SelectAsArray(r => r.SyntaxReference); }
         }
 
         /// <summary>
         /// Returns the original syntax nodes for this type declaration across all its parts.  If
         /// <paramref name="quickAttributes"/> is provided, attributes will not be returned if it
-        /// is certain there are none that could match the request.  This prevents going back to 
+        /// is certain there are none that could match the request.  This prevents going back to
         /// source unnecessarily.
         /// </summary>
-        public ImmutableArray<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations(QuickAttributes? quickAttributes)
+        public ImmutableArray<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations(
+            QuickAttributes? quickAttributes
+        )
         {
-            var attributeSyntaxListBuilder = ArrayBuilder<SyntaxList<AttributeListSyntax>>.GetInstance();
+            var attributeSyntaxListBuilder = ArrayBuilder<
+                SyntaxList<AttributeListSyntax>
+            >.GetInstance();
 
             foreach (var decl in _declarations)
             {
@@ -101,18 +99,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override DeclarationKind Kind
         {
-            get
-            {
-                return this.Declarations[0].Kind;
-            }
+            get { return this.Declarations[0].Kind; }
         }
 
         public int Arity
         {
-            get
-            {
-                return this.Declarations[0].Arity;
-            }
+            get { return this.Declarations[0].Arity; }
         }
 
         public bool ContainsExtensionMethods
@@ -162,7 +154,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             LexicalSortKey sortKey = new LexicalSortKey(Declarations[0].NameLocation, compilation);
             for (var i = 1; i < Declarations.Length; i++)
             {
-                sortKey = LexicalSortKey.First(sortKey, new LexicalSortKey(Declarations[i].NameLocation, compilation));
+                sortKey = LexicalSortKey.First(
+                    sortKey,
+                    new LexicalSortKey(Declarations[i].NameLocation, compilation)
+                );
             }
 
             return sortKey;
@@ -243,7 +238,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (_lazyMemberNames == null)
                 {
-                    var names = UnionCollection<string>.Create(this.Declarations, d => d.MemberNames.Value);
+                    var names = UnionCollection<string>.Create(
+                        this.Declarations,
+                        d => d.MemberNames.Value
+                    );
                     Interlocked.CompareExchange(ref _lazyMemberNames, names, null);
                 }
 

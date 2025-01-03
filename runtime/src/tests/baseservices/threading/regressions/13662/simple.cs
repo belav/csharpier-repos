@@ -5,30 +5,30 @@ using System;
 using System.Threading;
 using Xunit;
 
+public class Test_simple
+{
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        int rValue = 100;
+        Timer[] tArray = new Timer[100];
+        int val = 0;
+        while (val < 10)
+        {
+            Interlocked.Increment(ref val);
+            Console.WriteLine("Loop {0}", val);
+            for (int i = 0; i < tArray.Length; i++)
+                tArray[i] = new Timer(new TimerCallback(TFunc), 0, 1000, 1000000);
 
-public class Test_simple {
+            Thread.Sleep(1000);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
+        return rValue;
+    }
 
-	[Fact]
-	public static int TestEntryPoint(){
-
-		int rValue = 100;
-		Timer[] tArray = new Timer[100];
-		int val = 0;
-		while(val < 10){
-			Interlocked.Increment(ref val);
-			Console.WriteLine("Loop {0}",val);
-			for(int i = 0;i<tArray.Length;i++)
-				tArray[i] = new Timer(new TimerCallback(TFunc),0,1000,1000000);		
-
-			Thread.Sleep(1000);
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-		}		
-		return rValue;
-	}
-
-	public static void TFunc(Object o)
-	{
-		Thread.Sleep(1);
-	}
+    public static void TFunc(Object o)
+    {
+        Thread.Sleep(1);
+    }
 }

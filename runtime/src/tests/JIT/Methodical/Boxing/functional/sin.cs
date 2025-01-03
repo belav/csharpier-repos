@@ -5,19 +5,27 @@
 using System;
 using Xunit;
 
-
 namespace SinCalc_sin_functional_cs
 {
     public class SinCalc
     {
         protected struct CalcCtx
         {
-            private double _powX,_sumOfTerms;
+            private double _powX,
+                _sumOfTerms;
             private object _term;
 
             public double fact;
-            public double get_powX() { return _powX; }
-            public void set_powX(double val) { _powX = val; }
+
+            public double get_powX()
+            {
+                return _powX;
+            }
+
+            public void set_powX(double val)
+            {
+                _powX = val;
+            }
 
             public double sumOfTerms
             {
@@ -58,7 +66,8 @@ namespace SinCalc_sin_functional_cs
         {
             object i;
             object Angle;
-            object Result1, Result2;
+            object Result1,
+                Result2;
             object[] testresults = new object[10];
             testresults[0] = 0.000000000d;
             testresults[1] = 0.309016994d;

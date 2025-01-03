@@ -23,6 +23,6 @@ namespace Microsoft.Data.Sqlite
         ///     locking.
         /// </summary>
         /// <seealso href="https://www.sqlite.org/sharedcache.html">SQLite Shared-Cache Mode</seealso>
-        Shared
+        Shared,
     }
 }

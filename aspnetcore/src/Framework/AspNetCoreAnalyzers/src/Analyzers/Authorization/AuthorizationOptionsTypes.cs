@@ -13,22 +13,29 @@ internal sealed class AuthorizationOptionsTypes
 {
     public AuthorizationOptionsTypes(WellKnownTypes wellKnownTypes)
     {
-        AuthorizationOptions = wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Authorization_AuthorizationOptions);
+        AuthorizationOptions = wellKnownTypes.Get(
+            WellKnownType.Microsoft_AspNetCore_Authorization_AuthorizationOptions
+        );
 
         if (AuthorizationOptions is not null)
         {
             var authorizationOptionsMembers = AuthorizationOptions.GetMembers();
 
-            var authorizationOptionsProperties = authorizationOptionsMembers.OfType<IPropertySymbol>();
+            var authorizationOptionsProperties =
+                authorizationOptionsMembers.OfType<IPropertySymbol>();
 
-            DefaultPolicy = authorizationOptionsProperties
-                .FirstOrDefault(member => member.Name == "DefaultPolicy");
-            FallbackPolicy = authorizationOptionsProperties
-                .FirstOrDefault(member => member.Name == "FallbackPolicy");
-            InvokeHandlersAfterFailure = authorizationOptionsProperties
-                .FirstOrDefault(member => member.Name == "InvokeHandlersAfterFailure");
+            DefaultPolicy = authorizationOptionsProperties.FirstOrDefault(member =>
+                member.Name == "DefaultPolicy"
+            );
+            FallbackPolicy = authorizationOptionsProperties.FirstOrDefault(member =>
+                member.Name == "FallbackPolicy"
+            );
+            InvokeHandlersAfterFailure = authorizationOptionsProperties.FirstOrDefault(member =>
+                member.Name == "InvokeHandlersAfterFailure"
+            );
 
-            GetPolicy = authorizationOptionsMembers.OfType<IMethodSymbol>()
+            GetPolicy = authorizationOptionsMembers
+                .OfType<IMethodSymbol>()
                 .FirstOrDefault(member => member.Name == "GetPolicy");
         }
     }
@@ -39,7 +46,8 @@ internal sealed class AuthorizationOptionsTypes
     public IPropertySymbol? InvokeHandlersAfterFailure { get; }
     public IMethodSymbol? GetPolicy { get; }
 
-    public bool HasRequiredTypes => AuthorizationOptions is not null
+    public bool HasRequiredTypes =>
+        AuthorizationOptions is not null
         && DefaultPolicy is not null
         && FallbackPolicy is not null
         && InvokeHandlersAfterFailure is not null

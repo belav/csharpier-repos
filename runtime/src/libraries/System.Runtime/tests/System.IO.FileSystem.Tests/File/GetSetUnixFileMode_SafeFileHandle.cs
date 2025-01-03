@@ -12,13 +12,23 @@ namespace System.IO.Tests
 
         protected override UnixFileMode GetMode(string path)
         {
-            using SafeFileHandle fileHandle = File.OpenHandle(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using SafeFileHandle fileHandle = File.OpenHandle(
+                path,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.ReadWrite
+            );
             return File.GetUnixFileMode(fileHandle);
         }
 
         protected override void SetMode(string path, UnixFileMode mode)
         {
-            using SafeFileHandle fileHandle = File.OpenHandle(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using SafeFileHandle fileHandle = File.OpenHandle(
+                path,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.ReadWrite
+            );
             File.SetUnixFileMode(fileHandle, mode);
         }
     }

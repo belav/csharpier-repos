@@ -7,19 +7,16 @@ namespace System.Net.PeerToPeer.Collaboration
         private PeerInvitationResponseType m_peerInvResponseType;
 
         internal PeerInvitationResponse() { }
-        internal PeerInvitationResponse(PeerInvitationResponseType reponseType) 
+
+        internal PeerInvitationResponse(PeerInvitationResponseType reponseType)
         {
             m_peerInvResponseType = reponseType;
         }
 
         public PeerInvitationResponseType PeerInvitationResponseType
         {
-            get{
-                return m_peerInvResponseType;
-            }
-            internal set{
-                m_peerInvResponseType = value;
-            }
+            get { return m_peerInvResponseType; }
+            internal set { m_peerInvResponseType = value; }
         }
     }
 }

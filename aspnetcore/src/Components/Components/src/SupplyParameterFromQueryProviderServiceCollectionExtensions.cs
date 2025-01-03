@@ -18,9 +18,13 @@ public static class SupplyParameterFromQueryProviderServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
-    public static IServiceCollection AddSupplyValueFromQueryProvider(this IServiceCollection services)
+    public static IServiceCollection AddSupplyValueFromQueryProvider(
+        this IServiceCollection services
+    )
     {
-        services.TryAddEnumerable(ServiceDescriptor.Scoped<ICascadingValueSupplier, SupplyValueFromQueryValueProvider>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Scoped<ICascadingValueSupplier, SupplyValueFromQueryValueProvider>()
+        );
         return services;
     }
 
@@ -39,8 +43,8 @@ public static class SupplyParameterFromQueryProviderServiceCollectionExtensions
 
         public bool IsFixed => false;
 
-        public bool CanSupplyValue(in CascadingParameterInfo parameterInfo)
-            => parameterInfo.Attribute is SupplyParameterFromQueryAttribute;
+        public bool CanSupplyValue(in CascadingParameterInfo parameterInfo) =>
+            parameterInfo.Attribute is SupplyParameterFromQueryAttribute;
 
         public object? GetCurrentValue(in CascadingParameterInfo parameterInfo)
         {
@@ -52,7 +56,10 @@ public static class SupplyParameterFromQueryProviderServiceCollectionExtensions
 
             var attribute = (SupplyParameterFromQueryAttribute)parameterInfo.Attribute; // Must be a valid cast because we check in CanSupplyValue
             var queryParameterName = attribute.Name ?? parameterInfo.PropertyName;
-            return _queryParameterValueSupplier.GetQueryParameterValue(parameterInfo.PropertyType, queryParameterName);
+            return _queryParameterValueSupplier.GetQueryParameterValue(
+                parameterInfo.PropertyType,
+                queryParameterName
+            );
         }
 
         public void Subscribe(ComponentState subscriber, in CascadingParameterInfo parameterInfo)

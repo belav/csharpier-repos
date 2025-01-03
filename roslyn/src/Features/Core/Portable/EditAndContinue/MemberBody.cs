@@ -18,14 +18,13 @@ internal abstract class MemberBody : DeclarationBody
     /// <summary>
     /// True if <paramref name="span"/> belongs to the <see cref="MemberBody"/>.
     /// </summary>
-    public bool ContainsActiveStatementSpan(TextSpan span)
-        => Envelope.Contains(span) && !IsExcludedActiveStatementSpanWithinEnvelope(span);
+    public bool ContainsActiveStatementSpan(TextSpan span) =>
+        Envelope.Contains(span) && !IsExcludedActiveStatementSpanWithinEnvelope(span);
 
     /// <summary>
     /// True for <paramref name="span"/> within <see cref="Envelope"/> does not belong to the body.
     /// </summary>
-    public virtual bool IsExcludedActiveStatementSpanWithinEnvelope(TextSpan span)
-        => false;
+    public virtual bool IsExcludedActiveStatementSpanWithinEnvelope(TextSpan span) => false;
 
     /// <summary>
     /// All tokens of the body that may be part of an active statement.
@@ -33,16 +32,23 @@ internal abstract class MemberBody : DeclarationBody
     public abstract IEnumerable<SyntaxToken>? GetActiveTokens();
 
     /// <summary>
-    /// Finds an active statement at given span within this body and the corresponding partner statement in 
+    /// Finds an active statement at given span within this body and the corresponding partner statement in
     /// <paramref name="partnerDeclarationBody"/>, if specified. Only called with <paramref name="partnerDeclarationBody"/> when
     /// the body does not have any non-trivial changes and thus the correpsonding active statement is always found in the partner body.
     /// </summary>
-    public abstract SyntaxNode FindStatementAndPartner(TextSpan span, MemberBody? partnerDeclarationBody, out SyntaxNode? partnerStatement, out int statementPart);
+    public abstract SyntaxNode FindStatementAndPartner(
+        TextSpan span,
+        MemberBody? partnerDeclarationBody,
+        out SyntaxNode? partnerStatement,
+        out int statementPart
+    );
 
-    public SyntaxNode FindStatement(TextSpan span, out int statementPart)
-        => FindStatementAndPartner(span, partnerDeclarationBody: null, out _, out statementPart);
+    public SyntaxNode FindStatement(TextSpan span, out int statementPart) =>
+        FindStatementAndPartner(span, partnerDeclarationBody: null, out _, out statementPart);
 
-    public IEnumerable<int> GetOverlappingActiveStatements(ImmutableArray<UnmappedActiveStatement> statements)
+    public IEnumerable<int> GetOverlappingActiveStatements(
+        ImmutableArray<UnmappedActiveStatement> statements
+    )
     {
         var envelope = Envelope;
 
@@ -50,7 +56,8 @@ internal abstract class MemberBody : DeclarationBody
             envelope.Start,
             envelope.End,
             statements,
-            startPositionComparer: (x, y) => x.UnmappedSpan.Start.CompareTo(y));
+            startPositionComparer: (x, y) => x.UnmappedSpan.Start.CompareTo(y)
+        );
 
         for (var i = range.Start.Value; i < range.End.Value; i++)
         {

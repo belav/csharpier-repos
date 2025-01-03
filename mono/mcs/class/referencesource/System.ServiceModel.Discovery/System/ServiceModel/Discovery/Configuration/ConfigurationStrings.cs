@@ -28,6 +28,7 @@ namespace System.ServiceModel.Discovery.Configuration
         public const string ScopeMatchBy = "scopeMatchBy";
         public const string Types = "types";
         public const string UdpDiscoveryEndpoint = "udpDiscoveryEndpoint";
+
         // UDP transport settings
         public const string TransportSettings = "transportSettings";
         public const string DuplicateMessageHistoryLength = "duplicateMessageHistoryLength";

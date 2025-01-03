@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void SimpleCase()
         {
-            var config = Parse(@"
+            var config = Parse(
+                @"
 root = true
 
 # Comment1
@@ -37,20 +38,27 @@ my_global_prop = my_global_val
 
 [*.cs]
 my_prop = my_val
-", "/bogus/.editorconfig");
+",
+                "/bogus/.editorconfig"
+            );
 
             Assert.Equal("", config.GlobalSection.Name);
             var properties = config.GlobalSection.Properties;
             AssertEx.SetEqual(
-                new[] { KeyValuePair.Create("my_global_prop", "my_global_val"),
-                        KeyValuePair.Create("root", "true") },
-                properties);
+                new[]
+                {
+                    KeyValuePair.Create("my_global_prop", "my_global_val"),
+                    KeyValuePair.Create("root", "true"),
+                },
+                properties
+            );
 
             var namedSections = config.NamedSections;
             Assert.Equal("*.cs", namedSections[0].Name);
             AssertEx.SetEqual(
                 new[] { KeyValuePair.Create("my_prop", "my_val") },
-                namedSections[0].Properties);
+                namedSections[0].Properties
+            );
 
             Assert.True(config.IsRoot);
 
@@ -61,7 +69,8 @@ my_prop = my_val
         [WorkItem(52469, "https://github.com/dotnet/roslyn/issues/52469")]
         public void ConfigWithEscapedValues()
         {
-            var config = ParseConfigFile(@"is_global = true
+            var config = ParseConfigFile(
+                @"is_global = true
 
 [c:/\{f\*i\?le1\}.cs]
 build_metadata.Compile.ToRetrieve = abc123
@@ -71,7 +80,8 @@ build_metadata.Compile.ToRetrieve = def456
 
 [c:/f\;i\!le\[3\].cs]
 build_metadata.Compile.ToRetrieve = ghi789
-");
+"
+            );
 
             var namedSections = config.NamedSections;
             Assert.Equal("c:/\\{f\\*i\\?le1\\}.cs", namedSections[0].Name);
@@ -97,22 +107,30 @@ build_metadata.Compile.ToRetrieve = ghi789
         [WorkItem(52469, "https://github.com/dotnet/roslyn/issues/52469")]
         public void CanGetSectionsWithSpecialCharacters()
         {
-            var config = ParseConfigFile(@"is_global = true
+            var config = ParseConfigFile(
+                @"is_global = true
 
 [/home/foo/src/\{releaseid\}.cs]
 build_metadata.Compile.ToRetrieve = abc123
 
 [/home/foo/src/Pages/\#foo/HomePage.cs]
 build_metadata.Compile.ToRetrieve = def456
-");
+"
+            );
 
             var set = AnalyzerConfigSet.Create(ImmutableArray.Create(config));
 
             var sectionOptions = set.GetOptionsForSourcePath("/home/foo/src/{releaseid}.cs");
-            Assert.Equal("abc123", sectionOptions.AnalyzerOptions["build_metadata.compile.toretrieve"]);
+            Assert.Equal(
+                "abc123",
+                sectionOptions.AnalyzerOptions["build_metadata.compile.toretrieve"]
+            );
 
             sectionOptions = set.GetOptionsForSourcePath("/home/foo/src/Pages/#foo/HomePage.cs");
-            Assert.Equal("def456", sectionOptions.AnalyzerOptions["build_metadata.compile.toretrieve"]);
+            Assert.Equal(
+                "def456",
+                sectionOptions.AnalyzerOptions["build_metadata.compile.toretrieve"]
+            );
         }
 
         [ConditionalFact(typeof(WindowsOnly))]
@@ -128,13 +146,13 @@ build_metadata.Compile.ToRetrieve = def456
         [Fact]
         public void MissingClosingBracket()
         {
-            var config = ParseConfigFile(@"
+            var config = ParseConfigFile(
+                @"
 [*.cs
-my_prop = my_val");
+my_prop = my_val"
+            );
             var properties = config.GlobalSection.Properties;
-            AssertEx.SetEqual(
-                new[] { KeyValuePair.Create("my_prop", "my_val") },
-                properties);
+            AssertEx.SetEqual(new[] { KeyValuePair.Create("my_prop", "my_val") }, properties);
 
             Assert.Equal(0, config.NamedSections.Length);
         }
@@ -142,9 +160,11 @@ my_prop = my_val");
         [Fact]
         public void EmptySection()
         {
-            var config = ParseConfigFile(@"
+            var config = ParseConfigFile(
+                @"
 []
-my_prop = my_val");
+my_prop = my_val"
+            );
 
             var properties = config.GlobalSection.Properties;
             Assert.Equal(new[] { KeyValuePair.Create("my_prop", "my_val") }, properties);
@@ -154,8 +174,10 @@ my_prop = my_val");
         [Fact]
         public void CaseInsensitivePropKey()
         {
-            var config = ParseConfigFile(@"
-my_PROP = my_VAL");
+            var config = ParseConfigFile(
+                @"
+my_PROP = my_VAL"
+            );
             var properties = config.GlobalSection.Properties;
 
             Assert.True(properties.TryGetValue("my_PrOp", out var val));
@@ -166,19 +188,28 @@ my_PROP = my_VAL");
         [Fact]
         public void NonReservedKeyPreservedCaseVal()
         {
-            var config = ParseConfigFile(string.Join(Environment.NewLine,
-                AnalyzerConfig.ReservedKeys.Select(k => "MY_" + k + " = MY_VAL")));
+            var config = ParseConfigFile(
+                string.Join(
+                    Environment.NewLine,
+                    AnalyzerConfig.ReservedKeys.Select(k => "MY_" + k + " = MY_VAL")
+                )
+            );
             AssertEx.SetEqual(
-                AnalyzerConfig.ReservedKeys.Select(k => KeyValuePair.Create("my_" + k, "MY_VAL")).ToList(),
-                config.GlobalSection.Properties);
+                AnalyzerConfig
+                    .ReservedKeys.Select(k => KeyValuePair.Create("my_" + k, "MY_VAL"))
+                    .ToList(),
+                config.GlobalSection.Properties
+            );
         }
 
         [Fact]
         public void DuplicateKeys()
         {
-            var config = ParseConfigFile(@"
+            var config = ParseConfigFile(
+                @"
 my_prop = my_val
-my_prop = my_other_val");
+my_prop = my_other_val"
+            );
 
             var properties = config.GlobalSection.Properties;
             Assert.Equal(new[] { KeyValuePair.Create("my_prop", "my_other_val") }, properties);
@@ -187,9 +218,11 @@ my_prop = my_other_val");
         [Fact]
         public void DuplicateKeysCasing()
         {
-            var config = ParseConfigFile(@"
+            var config = ParseConfigFile(
+                @"
 my_prop = my_val
-my_PROP = my_other_val");
+my_PROP = my_other_val"
+            );
 
             var properties = config.GlobalSection.Properties;
             Assert.Equal(new[] { KeyValuePair.Create("my_prop", "my_other_val") }, properties);
@@ -198,61 +231,69 @@ my_PROP = my_other_val");
         [Fact]
         public void MissingKey()
         {
-            var config = ParseConfigFile(@"
+            var config = ParseConfigFile(
+                @"
 = my_val1
-my_prop = my_val2");
+my_prop = my_val2"
+            );
 
             var properties = config.GlobalSection.Properties;
-            AssertEx.SetEqual(
-                new[] { KeyValuePair.Create("my_prop", "my_val2") },
-                properties);
+            AssertEx.SetEqual(new[] { KeyValuePair.Create("my_prop", "my_val2") }, properties);
         }
 
         [Fact]
         public void MissingVal()
         {
-            var config = ParseConfigFile(@"
+            var config = ParseConfigFile(
+                @"
 my_prop1 =
-my_prop2 = my_val");
+my_prop2 = my_val"
+            );
 
             var properties = config.GlobalSection.Properties;
             AssertEx.SetEqual(
-                new[] { KeyValuePair.Create("my_prop1", ""),
-                        KeyValuePair.Create("my_prop2", "my_val") },
-                properties);
+                new[]
+                {
+                    KeyValuePair.Create("my_prop1", ""),
+                    KeyValuePair.Create("my_prop2", "my_val"),
+                },
+                properties
+            );
         }
 
         [Fact]
         public void SpacesInProperties()
         {
-            var config = ParseConfigFile(@"
+            var config = ParseConfigFile(
+                @"
 my prop1 = my_val1
-my_prop2 = my val2");
+my_prop2 = my val2"
+            );
 
             var properties = config.GlobalSection.Properties;
-            AssertEx.SetEqual(
-                new[] { KeyValuePair.Create("my_prop2", "my val2") },
-                properties);
+            AssertEx.SetEqual(new[] { KeyValuePair.Create("my_prop2", "my val2") }, properties);
         }
 
         [Fact]
         public void EndOfLineComments()
         {
-            var config = ParseConfigFile(@"
-my_prop2 = my val2 # Comment");
+            var config = ParseConfigFile(
+                @"
+my_prop2 = my val2 # Comment"
+            );
 
             var properties = config.GlobalSection.Properties;
-            AssertEx.SetEqual(
-                new[] { KeyValuePair.Create("my_prop2", "my val2") },
-                properties);
+            AssertEx.SetEqual(new[] { KeyValuePair.Create("my_prop2", "my val2") }, properties);
         }
 
         [Fact]
         public void SymbolsStartKeys()
         {
-            var config = ParseConfigFile(@"
+            var config = ParseConfigFile(
+                @"
 @!$abc = my_val1
-@!$\# = my_val2");
+@!$\# = my_val2"
+            );
 
             var properties = config.GlobalSection.Properties;
             Assert.Equal(0, properties.Count);
@@ -261,28 +302,34 @@ my_prop2 = my val2 # Comment");
         [Fact]
         public void EqualsAndColon()
         {
-            var config = ParseConfigFile(@"
+            var config = ParseConfigFile(
+                @"
 my:key1 = my_val
-my_key2 = my:val");
+my_key2 = my:val"
+            );
 
             var properties = config.GlobalSection.Properties;
             AssertEx.SetEqual(
-                new[] { KeyValuePair.Create("my", "key1 = my_val"),
-                        KeyValuePair.Create("my_key2", "my:val")},
-                properties);
+                new[]
+                {
+                    KeyValuePair.Create("my", "key1 = my_val"),
+                    KeyValuePair.Create("my_key2", "my:val"),
+                },
+                properties
+            );
         }
 
         [Fact]
         public void SymbolsInProperties()
         {
-            var config = ParseConfigFile(@"
+            var config = ParseConfigFile(
+                @"
 my@key1 = my_val
-my_key2 = my@val");
+my_key2 = my@val"
+            );
 
             var properties = config.GlobalSection.Properties;
-            AssertEx.SetEqual(
-                new[] { KeyValuePair.Create("my_key2", "my@val") },
-                properties);
+            AssertEx.SetEqual(new[] { KeyValuePair.Create("my_key2", "my@val") }, properties);
         }
 
         [Fact]
@@ -292,21 +339,26 @@ my_key2 = my@val");
             // line continuation via the RFC 822 specification, section 3.1.1
             // LONG HEADER FIELDS. The VS parser does not accept this as a
             // valid parse for an editorconfig file. We follow similarly.
-            var config = ParseConfigFile(@"
+            var config = ParseConfigFile(
+                @"
 long: this value continues
-   in the next line");
+   in the next line"
+            );
 
             var properties = config.GlobalSection.Properties;
             AssertEx.SetEqual(
                 new[] { KeyValuePair.Create("long", "this value continues") },
-                properties);
+                properties
+            );
         }
 
         [Fact]
         public void CaseInsensitiveRoot()
         {
-            var config = ParseConfigFile(@"
-RoOt = TruE");
+            var config = ParseConfigFile(
+                @"
+RoOt = TruE"
+            );
             Assert.True(config.IsRoot);
         }
 
@@ -314,22 +366,36 @@ RoOt = TruE");
         public void ReservedValues()
         {
             int index = 0;
-            var config = ParseConfigFile(string.Join(Environment.NewLine,
-                AnalyzerConfig.ReservedValues.Select(v => "MY_KEY" + (index++) + " = " + v.ToUpperInvariant())));
+            var config = ParseConfigFile(
+                string.Join(
+                    Environment.NewLine,
+                    AnalyzerConfig.ReservedValues.Select(v =>
+                        "MY_KEY" + (index++) + " = " + v.ToUpperInvariant()
+                    )
+                )
+            );
             index = 0;
             AssertEx.SetEqual(
-                AnalyzerConfig.ReservedValues.Select(v => KeyValuePair.Create("my_key" + (index++), v)).ToList(),
-                config.GlobalSection.Properties);
+                AnalyzerConfig
+                    .ReservedValues.Select(v => KeyValuePair.Create("my_key" + (index++), v))
+                    .ToList(),
+                config.GlobalSection.Properties
+            );
         }
 
         [Fact]
         public void ReservedKeys()
         {
-            var config = ParseConfigFile(string.Join(Environment.NewLine,
-                AnalyzerConfig.ReservedKeys.Select(k => k + " = MY_VAL")));
+            var config = ParseConfigFile(
+                string.Join(
+                    Environment.NewLine,
+                    AnalyzerConfig.ReservedKeys.Select(k => k + " = MY_VAL")
+                )
+            );
             AssertEx.SetEqual(
                 AnalyzerConfig.ReservedKeys.Select(k => KeyValuePair.Create(k, "my_val")).ToList(),
-                config.GlobalSection.Properties);
+                config.GlobalSection.Properties
+            );
         }
 
         #endregion
@@ -566,8 +632,13 @@ RoOt = TruE");
         [Fact]
         public void RecursiveChoice()
         {
-            SectionNameMatcher matcher = TryCreateSectionNameMatcher("{test{.cs,.vb},other.{a{bb,cc}}}").Value;
-            Assert.Equal("^.*/(?:test(?:\\.cs|\\.vb)|other\\.(?:a(?:bb|cc)))$", matcher.Regex.ToString());
+            SectionNameMatcher matcher = TryCreateSectionNameMatcher(
+                "{test{.cs,.vb},other.{a{bb,cc}}}"
+            ).Value;
+            Assert.Equal(
+                "^.*/(?:test(?:\\.cs|\\.vb)|other\\.(?:a(?:bb|cc)))$",
+                matcher.Regex.ToString()
+            );
 
             Assert.True(matcher.IsMatch("/test.cs"));
             Assert.True(matcher.IsMatch("/test.vb"));
@@ -913,53 +984,75 @@ RoOt = TruE");
         public void EditorConfigToDiagnostics()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 dotnet_diagnostic.cs000.severity = none
 
 [*.vb]
-dotnet_diagnostic.cs000.severity = error", "/.editorconfig"));
+dotnet_diagnostic.cs000.severity = error",
+                    "/.editorconfig"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
                 new[] { "/test.cs", "/test.vb", "/test" },
-                configs);
+                configs
+            );
             configs.Free();
 
-            Assert.Equal(new[] {
-                CreateImmutableDictionary(("cs000", ReportDiagnostic.Suppress)),
-                CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
-                SyntaxTree.EmptyDiagnosticOptions
-            }, options.Select(o => o.TreeOptions).ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Suppress)),
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
+                    SyntaxTree.EmptyDiagnosticOptions,
+                },
+                options.Select(o => o.TreeOptions).ToArray()
+            );
         }
 
         [Fact]
         public void LaterSectionOverrides()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 dotnet_diagnostic.cs000.severity = none
 
 [test.*]
-dotnet_diagnostic.cs000.severity = error", "/.editorconfig"));
+dotnet_diagnostic.cs000.severity = error",
+                    "/.editorconfig"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
                 new[] { "/test.cs", "/test.vb", "/test" },
-                configs);
+                configs
+            );
             configs.Free();
 
-            Assert.Equal(new[] {
-                CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
-                CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
-                SyntaxTree.EmptyDiagnosticOptions
-            }, options.Select(o => o.TreeOptions).ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
+                    SyntaxTree.EmptyDiagnosticOptions,
+                },
+                options.Select(o => o.TreeOptions).ToArray()
+            );
         }
 
         [Fact]
         public void BadSectionInConfigIgnored()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 dotnet_diagnostic.cs000.severity = none
 
@@ -967,178 +1060,240 @@ dotnet_diagnostic.cs000.severity = none
 dotnet_diagnostic.cs000.severity = error
 
 [{test.*]
-dotnet_diagnostic.cs000.severity = suggestion"
-, "/.editorconfig"));
+dotnet_diagnostic.cs000.severity = suggestion",
+                    "/.editorconfig"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
                 new[] { "/test.cs", "/test.vb", "/test" },
-                configs);
+                configs
+            );
             configs.Free();
 
-            Assert.Equal(new[] {
-                CreateImmutableDictionary(("cs000", ReportDiagnostic.Suppress)),
-                CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
-                SyntaxTree.EmptyDiagnosticOptions
-            }, options.Select(o => o.TreeOptions).ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Suppress)),
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
+                    SyntaxTree.EmptyDiagnosticOptions,
+                },
+                options.Select(o => o.TreeOptions).ToArray()
+            );
         }
 
         [Fact]
         public void TwoSettingsSameSection()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 dotnet_diagnostic.cs000.severity = none
-dotnet_diagnostic.cs001.severity = suggestion", "/.editorconfig"));
+dotnet_diagnostic.cs001.severity = suggestion",
+                    "/.editorconfig"
+                )
+            );
 
-            var options = GetAnalyzerConfigOptions(
-                new[] { "/test.cs" },
-                configs);
+            var options = GetAnalyzerConfigOptions(new[] { "/test.cs" }, configs);
             configs.Free();
 
-            Assert.Equal(new[]
-            {
-                CreateImmutableDictionary(
-                    ("cs000", ReportDiagnostic.Suppress),
-                    ("cs001", ReportDiagnostic.Info)),
-            }, options.Select(o => o.TreeOptions).ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    CreateImmutableDictionary(
+                        ("cs000", ReportDiagnostic.Suppress),
+                        ("cs001", ReportDiagnostic.Info)
+                    ),
+                },
+                options.Select(o => o.TreeOptions).ToArray()
+            );
         }
 
         [Fact]
         public void TwoTermsForHidden()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 dotnet_diagnostic.cs000.severity = silent
-dotnet_diagnostic.cs001.severity = refactoring", "/.editorconfig"));
+dotnet_diagnostic.cs001.severity = refactoring",
+                    "/.editorconfig"
+                )
+            );
 
-            var options = GetAnalyzerConfigOptions(
-                new[] { "/test.cs" },
-                configs);
+            var options = GetAnalyzerConfigOptions(new[] { "/test.cs" }, configs);
             configs.Free();
 
-            Assert.Equal(new[]
-            {
-                CreateImmutableDictionary(
-                    ("cs000", ReportDiagnostic.Hidden),
-                    ("cs001", ReportDiagnostic.Hidden)),
-            }, options.Select(o => o.TreeOptions).ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    CreateImmutableDictionary(
+                        ("cs000", ReportDiagnostic.Hidden),
+                        ("cs001", ReportDiagnostic.Hidden)
+                    ),
+                },
+                options.Select(o => o.TreeOptions).ToArray()
+            );
         }
 
         [Fact]
         public void TwoSettingsDifferentSections()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 dotnet_diagnostic.cs000.severity = none
 
 [test.*]
-dotnet_diagnostic.cs001.severity = suggestion", "/.editorconfig"));
+dotnet_diagnostic.cs001.severity = suggestion",
+                    "/.editorconfig"
+                )
+            );
 
-            var options = GetAnalyzerConfigOptions(
-                new[] { "/test.cs" },
-                configs);
+            var options = GetAnalyzerConfigOptions(new[] { "/test.cs" }, configs);
             configs.Free();
 
-            Assert.Equal(new[]
-            {
-                CreateImmutableDictionary(
-                    ("cs000", ReportDiagnostic.Suppress),
-                    ("cs001", ReportDiagnostic.Info))
-            }, options.Select(o => o.TreeOptions).ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    CreateImmutableDictionary(
+                        ("cs000", ReportDiagnostic.Suppress),
+                        ("cs001", ReportDiagnostic.Info)
+                    ),
+                },
+                options.Select(o => o.TreeOptions).ToArray()
+            );
         }
 
         [Fact]
         public void MultipleEditorConfigs()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [**/*]
 dotnet_diagnostic.cs000.severity = none
 
 [**test.*]
-dotnet_diagnostic.cs001.severity = suggestion", "/.editorconfig"));
-            configs.Add(Parse(@"
+dotnet_diagnostic.cs001.severity = suggestion",
+                    "/.editorconfig"
+                )
+            );
+            configs.Add(
+                Parse(
+                    @"
 [**]
 dotnet_diagnostic.cs000.severity = warning
 
 [test.cs]
-dotnet_diagnostic.cs001.severity = error", "/subdir/.editorconfig"));
+dotnet_diagnostic.cs001.severity = error",
+                    "/subdir/.editorconfig"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
                 new[] { "/subdir/test.cs", "/subdir/test.vb" },
-                configs);
+                configs
+            );
             configs.Free();
 
-            Assert.Equal(new[]
-            {
-                CreateImmutableDictionary(
-                    ("cs000", ReportDiagnostic.Warn),
-                    ("cs001", ReportDiagnostic.Error)),
-                CreateImmutableDictionary(
-                    ("cs000", ReportDiagnostic.Warn),
-                    ("cs001", ReportDiagnostic.Info))
-            }, options.Select(o => o.TreeOptions).ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    CreateImmutableDictionary(
+                        ("cs000", ReportDiagnostic.Warn),
+                        ("cs001", ReportDiagnostic.Error)
+                    ),
+                    CreateImmutableDictionary(
+                        ("cs000", ReportDiagnostic.Warn),
+                        ("cs001", ReportDiagnostic.Info)
+                    ),
+                },
+                options.Select(o => o.TreeOptions).ToArray()
+            );
         }
 
         [Fact]
         public void InheritOuterConfig()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [**/*]
 dotnet_diagnostic.cs000.severity = none
 
 [**test.cs]
-dotnet_diagnostic.cs001.severity = suggestion", "/.editorconfig"));
-            configs.Add(Parse(@"
+dotnet_diagnostic.cs001.severity = suggestion",
+                    "/.editorconfig"
+                )
+            );
+            configs.Add(
+                Parse(
+                    @"
 [test.cs]
-dotnet_diagnostic.cs001.severity = error", "/subdir/.editorconfig"));
+dotnet_diagnostic.cs001.severity = error",
+                    "/subdir/.editorconfig"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
                 new[] { "/test.cs", "/subdir/test.cs", "/subdir/test.vb" },
-                configs);
+                configs
+            );
             configs.Free();
 
-            Assert.Equal(new[]
-            {
-                CreateImmutableDictionary(
-                    ("cs001", ReportDiagnostic.Info)),
-                CreateImmutableDictionary(
-                    ("cs000", ReportDiagnostic.Suppress),
-                    ("cs001", ReportDiagnostic.Error)),
-                CreateImmutableDictionary(
-                    ("cs000", ReportDiagnostic.Suppress))
-            }, options.Select(o => o.TreeOptions).ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    CreateImmutableDictionary(("cs001", ReportDiagnostic.Info)),
+                    CreateImmutableDictionary(
+                        ("cs000", ReportDiagnostic.Suppress),
+                        ("cs001", ReportDiagnostic.Error)
+                    ),
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Suppress)),
+                },
+                options.Select(o => o.TreeOptions).ToArray()
+            );
         }
 
         [ConditionalFact(typeof(WindowsOnly))]
         public void WindowsRootConfig()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
-dotnet_diagnostic.cs000.severity = none", "Z:\\.editorconfig"));
+dotnet_diagnostic.cs000.severity = none",
+                    "Z:\\.editorconfig"
+                )
+            );
 
-            var options = GetAnalyzerConfigOptions(
-                new[] { "Z:\\test.cs" },
-                configs);
+            var options = GetAnalyzerConfigOptions(new[] { "Z:\\test.cs" }, configs);
             configs.Free();
 
-            Assert.Equal(new[]
-            {
-                CreateImmutableDictionary(
-                    ("cs000", ReportDiagnostic.Suppress))
-            }, options.Select(o => o.TreeOptions).ToArray());
+            Assert.Equal(
+                new[] { CreateImmutableDictionary(("cs000", ReportDiagnostic.Suppress)) },
+                options.Select(o => o.TreeOptions).ToArray()
+            );
         }
 
         #endregion
 
         #region Processing of Analyzer Options
 
-        private AnalyzerConfigOptionsResult[] GetAnalyzerConfigOptions(string[] filePaths, ArrayBuilder<AnalyzerConfig> configs)
+        private AnalyzerConfigOptionsResult[] GetAnalyzerConfigOptions(
+            string[] filePaths,
+            ArrayBuilder<AnalyzerConfig> configs
+        )
         {
             var set = AnalyzerConfigSet.Create(configs);
             return filePaths.Select(f => set.GetOptionsForSourcePath(f)).ToArray();
@@ -1146,7 +1301,8 @@ dotnet_diagnostic.cs000.severity = none", "Z:\\.editorconfig"));
 
         private static void VerifyAnalyzerOptions(
             (string key, string val)[][] expected,
-            AnalyzerConfigOptionsResult[] options)
+            AnalyzerConfigOptionsResult[] options
+        )
         {
             Assert.Equal(expected.Length, options.Length);
 
@@ -1160,14 +1316,16 @@ dotnet_diagnostic.cs000.severity = none", "Z:\\.editorconfig"));
                 {
                     AssertEx.SetEqual(
                         expected[i].Select(KeyValuePair.ToKeyValuePair),
-                        options[i].AnalyzerOptions);
+                        options[i].AnalyzerOptions
+                    );
                 }
             }
         }
 
         private static void VerifyTreeOptions(
             (string diagId, ReportDiagnostic severity)[][] expected,
-            AnalyzerConfigOptionsResult[] options)
+            AnalyzerConfigOptionsResult[] options
+        )
         {
             Assert.Equal(expected.Length, options.Length);
 
@@ -1194,187 +1352,219 @@ dotnet_diagnostic.cs000.severity = none", "Z:\\.editorconfig"));
         public void SimpleAnalyzerOptions()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
-dotnet_diagnostic.cs000.some_key = some_val", "/.editorconfig"));
+dotnet_diagnostic.cs000.some_key = some_val",
+                    "/.editorconfig"
+                )
+            );
 
-            var options = GetAnalyzerConfigOptions(
-                new[] { "/test.cs", "/test.vb" },
-                configs);
+            var options = GetAnalyzerConfigOptions(new[] { "/test.cs", "/test.vb" }, configs);
             configs.Free();
 
             VerifyAnalyzerOptions(
-                new[] {
+                new[]
+                {
                     new[] { ("dotnet_diagnostic.cs000.some_key", "some_val") },
-                    new (string, string) [] { }
+                    new (string, string)[] { },
                 },
-                options);
+                options
+            );
         }
 
         [Fact]
         public void NestedAnalyzerOptionsWithRoot()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
-dotnet_diagnostic.cs000.bad_key = bad_val", "/.editorconfig"));
-            configs.Add(Parse(@"
+dotnet_diagnostic.cs000.bad_key = bad_val",
+                    "/.editorconfig"
+                )
+            );
+            configs.Add(
+                Parse(
+                    @"
 root = true
 
 [*.cs]
-dotnet_diagnostic.cs000.some_key = some_val", "/src/.editorconfig"));
+dotnet_diagnostic.cs000.some_key = some_val",
+                    "/src/.editorconfig"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
                 new[] { "/src/test.cs", "/src/test.vb", "/root.cs" },
-                configs);
+                configs
+            );
             configs.Free();
 
             VerifyAnalyzerOptions(
-                new[] {
+                new[]
+                {
                     new[] { ("dotnet_diagnostic.cs000.some_key", "some_val") },
-                    new (string, string) [] { },
-                    new[] { ("dotnet_diagnostic.cs000.bad_key", "bad_val") }
-               },
-                options);
+                    new (string, string)[] { },
+                    new[] { ("dotnet_diagnostic.cs000.bad_key", "bad_val") },
+                },
+                options
+            );
         }
 
         [Fact]
         public void NestedAnalyzerOptionsWithOverrides()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
-dotnet_diagnostic.cs000.some_key = a_val", "/.editorconfig"));
-            configs.Add(Parse(@"
+dotnet_diagnostic.cs000.some_key = a_val",
+                    "/.editorconfig"
+                )
+            );
+            configs.Add(
+                Parse(
+                    @"
 [test.*]
-dotnet_diagnostic.cs000.some_key = b_val", "/src/.editorconfig"));
+dotnet_diagnostic.cs000.some_key = b_val",
+                    "/src/.editorconfig"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
                 new[] { "/src/test.cs", "/src/test.vb", "/root.cs" },
-                configs);
+                configs
+            );
             configs.Free();
 
             VerifyAnalyzerOptions(
-                new[] {
+                new[]
+                {
                     new[] { ("dotnet_diagnostic.cs000.some_key", "b_val") },
                     new[] { ("dotnet_diagnostic.cs000.some_key", "b_val") },
-                    new[] { ("dotnet_diagnostic.cs000.some_key", "a_val") }
-               },
-                options);
+                    new[] { ("dotnet_diagnostic.cs000.some_key", "a_val") },
+                },
+                options
+            );
         }
 
         [Fact]
         public void NestedAnalyzerOptionsWithSectionOverrides()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
-dotnet_diagnostic.cs000.some_key = a_val", "/.editorconfig"));
-            configs.Add(Parse(@"
+dotnet_diagnostic.cs000.some_key = a_val",
+                    "/.editorconfig"
+                )
+            );
+            configs.Add(
+                Parse(
+                    @"
 [test.*]
 dotnet_diagnostic.cs000.some_key = b_val
 
 [*.cs]
-dotnet_diagnostic.cs000.some_key = c_val", "/src/.editorconfig"));
+dotnet_diagnostic.cs000.some_key = c_val",
+                    "/src/.editorconfig"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
                 new[] { "/src/test.cs", "/src/test.vb", "/root.cs" },
-                configs);
+                configs
+            );
             configs.Free();
 
             VerifyAnalyzerOptions(
-                new[] {
+                new[]
+                {
                     new[] { ("dotnet_diagnostic.cs000.some_key", "c_val") },
                     new[] { ("dotnet_diagnostic.cs000.some_key", "b_val") },
-                    new[] { ("dotnet_diagnostic.cs000.some_key", "a_val") }
-               },
-                options);
+                    new[] { ("dotnet_diagnostic.cs000.some_key", "a_val") },
+                },
+                options
+            );
         }
 
         [Fact]
         public void NestedBothOptionsWithSectionOverrides()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 dotnet_diagnostic.cs000.severity = warning
-somekey = a_val", "/.editorconfig"));
-            configs.Add(Parse(@"
+somekey = a_val",
+                    "/.editorconfig"
+                )
+            );
+            configs.Add(
+                Parse(
+                    @"
 [test.*]
 dotnet_diagnostic.cs000.severity = error
 somekey = b_val
 
 [*.cs]
 dotnet_diagnostic.cs000.severity = none
-somekey = c_val", "/src/.editorconfig"));
+somekey = c_val",
+                    "/src/.editorconfig"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
                 new[] { "/src/test.cs", "/src/test.vb", "/root.cs" },
-                configs);
+                configs
+            );
             configs.Free();
 
             VerifyAnalyzerOptions(
-                new[] {
+                new[]
+                {
                     new[] { ("somekey", "c_val") },
                     new[] { ("somekey", "b_val") },
-                    new[] { ("somekey", "a_val") }
-               }, options);
+                    new[] { ("somekey", "a_val") },
+                },
+                options
+            );
 
             VerifyTreeOptions(
                 new[]
                 {
                     new[] { ("cs000", ReportDiagnostic.Suppress) },
                     new[] { ("cs000", ReportDiagnostic.Error) },
-                    new[] { ("cs000", ReportDiagnostic.Warn) }
-                }, options);
+                    new[] { ("cs000", ReportDiagnostic.Warn) },
+                },
+                options
+            );
         }
 
         [Fact]
         public void FromMultipleSectionsAnalyzerOptions()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 dotnet_diagnostic.cs000.some_key = some_val
 
 [test.*]
 dotnet_diagnostic.cs001.some_key2 = some_val2
-", "/.editorconfig"));
+",
+                    "/.editorconfig"
+                )
+            );
 
-            var options = GetAnalyzerConfigOptions(
-                new[] { "/test.cs", "/test.vb" },
-                configs);
-            configs.Free();
-
-            VerifyAnalyzerOptions(
-                new[] {
-                    new[]
-                    {
-                        ("dotnet_diagnostic.cs000.some_key", "some_val"),
-                        ("dotnet_diagnostic.cs001.some_key2", "some_val2")
-                    },
-                    new[]
-                    {
-                        ("dotnet_diagnostic.cs001.some_key2", "some_val2")
-                    }
-                },
-                options);
-        }
-
-        [Fact]
-        public void AnalyzerOptionsOverride()
-        {
-            var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
-[**.cs]
-dotnet_diagnostic.cs000.some_key = some_val", "/.editorconfig"));
-            configs.Add(Parse(@"
-[*.cs]
-dotnet_diagnostic.cs000.some_key = some_other_val", "/subdir/.editorconfig"));
-
-            var options = GetAnalyzerConfigOptions(
-                new[] { "/test.cs", "/subdir/test.cs" },
-                configs);
+            var options = GetAnalyzerConfigOptions(new[] { "/test.cs", "/test.vb" }, configs);
             configs.Free();
 
             VerifyAnalyzerOptions(
@@ -1382,14 +1572,50 @@ dotnet_diagnostic.cs000.some_key = some_other_val", "/subdir/.editorconfig"));
                 {
                     new[]
                     {
-                        ("dotnet_diagnostic.cs000.some_key", "some_val")
+                        ("dotnet_diagnostic.cs000.some_key", "some_val"),
+                        ("dotnet_diagnostic.cs001.some_key2", "some_val2"),
                     },
-                    new[]
-                    {
-                        ("dotnet_diagnostic.cs000.some_key", "some_other_val")
-                    }
+                    new[] { ("dotnet_diagnostic.cs001.some_key2", "some_val2") },
                 },
-                options);
+                options
+            );
+        }
+
+        [Fact]
+        public void AnalyzerOptionsOverride()
+        {
+            var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
+            configs.Add(
+                Parse(
+                    @"
+[**.cs]
+dotnet_diagnostic.cs000.some_key = some_val",
+                    "/.editorconfig"
+                )
+            );
+            configs.Add(
+                Parse(
+                    @"
+[*.cs]
+dotnet_diagnostic.cs000.some_key = some_other_val",
+                    "/subdir/.editorconfig"
+                )
+            );
+
+            var options = GetAnalyzerConfigOptions(
+                new[] { "/test.cs", "/subdir/test.cs" },
+                configs
+            );
+            configs.Free();
+
+            VerifyAnalyzerOptions(
+                new[]
+                {
+                    new[] { ("dotnet_diagnostic.cs000.some_key", "some_val") },
+                    new[] { ("dotnet_diagnostic.cs000.some_key", "some_other_val") },
+                },
+                options
+            );
         }
 
         [Fact]
@@ -1412,49 +1638,54 @@ dotnet_diagnostic.cs000.some_key = some_other_val", "/subdir/.editorconfig"));
         public void EmptyDiagnosticId()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 dotnet_diagnostic..severity = warning
-dotnet_diagnostic..some_key = some_val", "/.editorconfig"));
+dotnet_diagnostic..some_key = some_val",
+                    "/.editorconfig"
+                )
+            );
 
-            var options = GetAnalyzerConfigOptions(
-                new[] { "/test.cs", },
-                configs);
+            var options = GetAnalyzerConfigOptions(new[] { "/test.cs" }, configs);
             configs.Free();
 
-            Assert.Equal(new[] {
-                CreateImmutableDictionary(("", ReportDiagnostic.Warn)),
-            }, options.Select(o => o.TreeOptions).ToArray());
+            Assert.Equal(
+                new[] { CreateImmutableDictionary(("", ReportDiagnostic.Warn)) },
+                options.Select(o => o.TreeOptions).ToArray()
+            );
 
             VerifyAnalyzerOptions(
-                new[]
-                {
-                    new[]
-                    {
-                        ("dotnet_diagnostic..some_key", "some_val")
-                    }
-                },
-                options);
+                new[] { new[] { ("dotnet_diagnostic..some_key", "some_val") } },
+                options
+            );
         }
 
         [Fact]
         public void NoDiagnosticId()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 dotnet_diagnostic.severity = warn
-dotnet_diagnostic.some_key = some_val", "/.editorconfig"));
+dotnet_diagnostic.some_key = some_val",
+                    "/.editorconfig"
+                )
+            );
 
-            var options = GetAnalyzerConfigOptions(
-                new[] { "/test.cs", },
-                configs);
+            var options = GetAnalyzerConfigOptions(new[] { "/test.cs" }, configs);
             configs.Free();
 
-            Assert.Equal(new ImmutableDictionary<string, ReportDiagnostic>[]
-            {
-                SyntaxTree.EmptyDiagnosticOptions
-            }, options.Select(o => o.TreeOptions).ToArray());
+            Assert.Equal(
+                new ImmutableDictionary<string, ReportDiagnostic>[]
+                {
+                    SyntaxTree.EmptyDiagnosticOptions,
+                },
+                options.Select(o => o.TreeOptions).ToArray()
+            );
 
             VerifyAnalyzerOptions(
                 new[]
@@ -1462,46 +1693,57 @@ dotnet_diagnostic.some_key = some_val", "/.editorconfig"));
                     new[]
                     {
                         ("dotnet_diagnostic.severity", "warn"),
-                        ("dotnet_diagnostic.some_key", "some_val")
-                    }
+                        ("dotnet_diagnostic.some_key", "some_val"),
+                    },
                 },
-                options);
+                options
+            );
         }
 
         [Fact]
         public void E2ENumberRange()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [a{-10..0}b{0..10}.cs]
-dotnet_diagnostic.cs000.severity = warning", "/.editorconfig"));
+dotnet_diagnostic.cs000.severity = warning",
+                    "/.editorconfig"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
                 new[] { "/a0b0.cs", "/test/a-5b5.cs", "/a0b0.vb" },
-                configs);
+                configs
+            );
             configs.Free();
 
-            Assert.Equal(new[]
-            {
-                CreateImmutableDictionary(
-                    ("cs000", ReportDiagnostic.Warn)),
-                CreateImmutableDictionary(
-                    ("cs000", ReportDiagnostic.Warn)),
-                SyntaxTree.EmptyDiagnosticOptions
-            }, options.Select(o => o.TreeOptions).ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Warn)),
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Warn)),
+                    SyntaxTree.EmptyDiagnosticOptions,
+                },
+                options.Select(o => o.TreeOptions).ToArray()
+            );
         }
 
         [Fact]
         public void DiagnosticIdInstancesAreSharedBetweenMultipleTrees()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
-dotnet_diagnostic.cs000.severity = warning", "/.editorconfig"));
+dotnet_diagnostic.cs000.severity = warning",
+                    "/.editorconfig"
+                )
+            );
 
-            var options = GetAnalyzerConfigOptions(
-                new[] { "/a.cs", "/b.cs", "/c.cs" },
-                configs);
+            var options = GetAnalyzerConfigOptions(new[] { "/a.cs", "/b.cs", "/c.cs" }, configs);
             configs.Free();
 
             Assert.Equal("cs000", options[0].TreeOptions.Keys.Single());
@@ -1514,15 +1756,21 @@ dotnet_diagnostic.cs000.severity = warning", "/.editorconfig"));
         public void TreesShareOptionsInstances()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
-dotnet_diagnostic.cs000.severity = warning", "/.editorconfig"));
+dotnet_diagnostic.cs000.severity = warning",
+                    "/.editorconfig"
+                )
+            );
 
-            var options = GetAnalyzerConfigOptions(
-                new[] { "/a.cs", "/b.cs", "/c.cs" },
-                configs);
+            var options = GetAnalyzerConfigOptions(new[] { "/a.cs", "/b.cs", "/c.cs" }, configs);
             configs.Free();
-            Assert.Equal(KeyValuePair.Create("cs000", ReportDiagnostic.Warn), options[0].TreeOptions.Single());
+            Assert.Equal(
+                KeyValuePair.Create("cs000", ReportDiagnostic.Warn),
+                options[0].TreeOptions.Single()
+            );
 
             Assert.Same(options[0].TreeOptions, options[1].TreeOptions);
             Assert.Same(options[0].AnalyzerOptions, options[1].AnalyzerOptions);
@@ -1551,9 +1799,14 @@ dotnet_diagnostic.cs000.severity = warning", "/.editorconfig"));
         public void IsNotGlobalIfInSection()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
-is_global = true ", "/.editorconfig"));
+is_global = true ",
+                    "/.editorconfig"
+                )
+            );
             var globalConfig = AnalyzerConfigSet.MergeGlobalConfigs(configs, out _);
 
             Assert.Single(configs);
@@ -1567,8 +1820,13 @@ is_global = true ", "/.editorconfig"));
         public void FilterReturnsSingleGlobalConfig()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
-option1 = value1", "/.globalconfig1"));
+            configs.Add(
+                Parse(
+                    @"is_global = true
+option1 = value1",
+                    "/.globalconfig1"
+                )
+            );
 
             configs.Add(Parse(@"option2 = value2", "/.editorconfig1"));
             configs.Add(Parse(@"option3 = value3", "/.editorconfig2"));
@@ -1586,11 +1844,21 @@ option1 = value1", "/.globalconfig1"));
         public void FilterReturnsSingleCombinedGlobalConfig()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
-option1 = value1", "/.globalconfig1"));
+            configs.Add(
+                Parse(
+                    @"is_global = true
+option1 = value1",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse(@"is_global = true
-option2 = value2", "/.globalconfig2"));
+            configs.Add(
+                Parse(
+                    @"is_global = true
+option2 = value2",
+                    "/.globalconfig2"
+                )
+            );
 
             configs.Add(Parse(@"option3 = value3", "/.editorconfig1"));
             configs.Add(Parse(@"option4 = value4", "/.editorconfig2"));
@@ -1609,7 +1877,9 @@ option2 = value2", "/.globalconfig2"));
         public void FilterCombinesSections()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 option1 = value1
 
 [/path/to/file1.cs]
@@ -1617,9 +1887,14 @@ option1 = value1
 
 [/path/to/file2.cs]
 option1 = value1
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 option2 = value2
 
 [/path/to/file1.cs]
@@ -1627,7 +1902,9 @@ option2 = value2
 
 [/path/to/file3.cs]
 option1 = value1",
-"/.globalconfig2"));
+                    "/.globalconfig2"
+                )
+            );
 
             var globalConfig = AnalyzerConfigSet.MergeGlobalConfigs(configs, out var diagnostics);
 
@@ -1660,49 +1937,86 @@ option1 = value1",
         public void DuplicateOptionsInGlobalConfigsAreUnset()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
-option1 = value1", "/.globalconfig1"));
+            configs.Add(
+                Parse(
+                    @"is_global = true
+option1 = value1",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse(@"is_global = true
-option1 = value2", "/.globalconfig2"));
+            configs.Add(
+                Parse(
+                    @"is_global = true
+option1 = value2",
+                    "/.globalconfig2"
+                )
+            );
 
             var globalConfig = AnalyzerConfigSet.MergeGlobalConfigs(configs, out var diagnostics);
 
             diagnostics.Verify(
-                Diagnostic("MultipleGlobalAnalyzerKeys").WithArguments("option1", "Global Section", "/.globalconfig1, /.globalconfig2").WithLocation(1, 1)
-                );
+                Diagnostic("MultipleGlobalAnalyzerKeys")
+                    .WithArguments("option1", "Global Section", "/.globalconfig1, /.globalconfig2")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
         public void DuplicateOptionsInGlobalConfigsSectionsAreUnset()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 [/path/to/file1.cs]
 option1 = value1
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 [/path/to/file1.cs]
 option1 = value2",
-"/.globalconfig2"));
+                    "/.globalconfig2"
+                )
+            );
 
             var globalConfig = AnalyzerConfigSet.MergeGlobalConfigs(configs, out var diagnostics);
 
             diagnostics.Verify(
-                Diagnostic("MultipleGlobalAnalyzerKeys").WithArguments("option1", "/path/to/file1.cs", "/.globalconfig1, /.globalconfig2").WithLocation(1, 1)
-                );
+                Diagnostic("MultipleGlobalAnalyzerKeys")
+                    .WithArguments(
+                        "option1",
+                        "/path/to/file1.cs",
+                        "/.globalconfig1, /.globalconfig2"
+                    )
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
         public void DuplicateGlobalOptionsInNonGlobalConfigsAreKept()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
-option1 = value1", "/.globalconfig1"));
+            configs.Add(
+                Parse(
+                    @"is_global = true
+option1 = value1",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse(@"
-option1 = value2", "/.globalconfig2"));
+            configs.Add(
+                Parse(
+                    @"
+option1 = value2",
+                    "/.globalconfig2"
+                )
+            );
 
             var globalConfig = AnalyzerConfigSet.MergeGlobalConfigs(configs, out var diagnostics);
             diagnostics.Verify();
@@ -1712,15 +2026,24 @@ option1 = value2", "/.globalconfig2"));
         public void DuplicateSectionOptionsInNonGlobalConfigsAreKept()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 [/path/to/file1.cs]
 option1 = value1
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [/path/to/file1.cs]
 option1 = value2",
-"/.globalconfig2"));
+                    "/.globalconfig2"
+                )
+            );
 
             var globalConfig = AnalyzerConfigSet.MergeGlobalConfigs(configs, out var diagnostics);
             diagnostics.Verify();
@@ -1730,30 +2053,39 @@ option1 = value2",
         public void GlobalConfigsPropertiesAreGlobal()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 option1 = value1
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
-                 new[] { "/file1.cs", "/path/to/file1.cs", "/file1.vb" },
-                 configs);
+                new[] { "/file1.cs", "/path/to/file1.cs", "/file1.vb" },
+                configs
+            );
             configs.Free();
 
             VerifyAnalyzerOptions(
-              new[]
-              {
+                new[]
+                {
                     new[] { ("option1", "value1") },
                     new[] { ("option1", "value1") },
-                    new[] { ("option1", "value1") }
-              },
-              options);
+                    new[] { ("option1", "value1") },
+                },
+                options
+            );
         }
 
         [Fact]
         public void GlobalConfigsSectionsMustBeFullPath()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 [/path/to/file1.cs]
 option1 = value1
 
@@ -1765,96 +2097,120 @@ option3 = value3
 
 [/.*/*.cs]
 option4 = value4
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
-                 new[] { "/file1.cs", "/path/to/file2.cs", "/path/to/file1.cs", "/file1.vb" },
-                 configs);
+                new[] { "/file1.cs", "/path/to/file2.cs", "/path/to/file1.cs", "/file1.vb" },
+                configs
+            );
             configs.Free();
 
             VerifyAnalyzerOptions(
-              new[]
-              {
+                new[]
+                {
                     new (string, string)[] { },
                     new (string, string)[] { },
-                    new (string, string)[]
-                    {
-                        ("option1", "value1")
-                    },
-                    new (string, string)[] { }
-              },
-              options);
+                    new (string, string)[] { ("option1", "value1") },
+                    new (string, string)[] { },
+                },
+                options
+            );
         }
 
         [Fact]
         public void GlobalConfigsSectionsAreOverriddenByNonGlobal()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 option1 = global
 
 [/path/to/file1.cs]
 option2 = global
 option3 = global
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 option2 = config1
-", "/.editorconfig"));
+",
+                    "/.editorconfig"
+                )
+            );
 
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 option3 = config2
-", "/path/.editorconfig"));
+",
+                    "/path/.editorconfig"
+                )
+            );
 
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 option2 = config3
-", "/path/to/.editorconfig"));
+",
+                    "/path/to/.editorconfig"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
-                 new[] { "/path/to/file1.cs", "/path/file1.cs", "/file1.cs" },
-                 configs);
+                new[] { "/path/to/file1.cs", "/path/file1.cs", "/file1.cs" },
+                configs
+            );
             configs.Free();
 
             VerifyAnalyzerOptions(
-              new[]
-              {
-                    new []
+                new[]
+                {
+                    new[]
                     {
                         ("option1", "global"),
                         ("option2", "config3"), // overridden by config3
-                        ("option3", "config2")  // overridden by config2
+                        ("option3", "config2"), // overridden by config2
                     },
-                    new []
-                    {
-                        ("option1", "global"),
-                        ("option2", "config1"),
-                        ("option3", "config2")
-                    },
-                    new []
-                    {
-                        ("option1", "global"),
-                        ("option2", "config1")
-                    }
-              },
-              options);
+                    new[] { ("option1", "global"), ("option2", "config1"), ("option3", "config2") },
+                    new[] { ("option1", "global"), ("option2", "config1") },
+                },
+                options
+            );
         }
 
         [Fact]
         public void GlobalConfigSectionsAreCaseSensitive()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 [/path/to/file1.cs]
 option1 = value1
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 [/pAth/To/fiLe1.cs]
 option1 = value2",
-"/.globalconfig2"));
+                    "/.globalconfig2"
+                )
+            );
 
             var globalConfig = AnalyzerConfigSet.MergeGlobalConfigs(configs, out var diagnostics);
             diagnostics.Verify();
@@ -1867,20 +2223,35 @@ option1 = value2",
         public void GlobalConfigSectionsPropertiesAreNotCaseSensitive()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 [/path/to/file1.cs]
 option1 = value1
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 [/path/to/file1.cs]
 opTioN1 = value2",
-"/.globalconfig2"));
+                    "/.globalconfig2"
+                )
+            );
 
             var globalConfig = AnalyzerConfigSet.MergeGlobalConfigs(configs, out var diagnostics);
             diagnostics.Verify(
-                Diagnostic("MultipleGlobalAnalyzerKeys").WithArguments("option1", "/path/to/file1.cs", "/.globalconfig1, /.globalconfig2").WithLocation(1, 1)
-                );
+                Diagnostic("MultipleGlobalAnalyzerKeys")
+                    .WithArguments(
+                        "option1",
+                        "/path/to/file1.cs",
+                        "/.globalconfig1, /.globalconfig2"
+                    )
+                    .WithLocation(1, 1)
+            );
             configs.Free();
         }
 
@@ -1888,18 +2259,29 @@ opTioN1 = value2",
         public void GlobalConfigPropertiesAreNotCaseSensitive()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 option1 = value1
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 opTioN1 = value2",
-"/.globalconfig2"));
+                    "/.globalconfig2"
+                )
+            );
 
             var globalConfig = AnalyzerConfigSet.MergeGlobalConfigs(configs, out var diagnostics);
             diagnostics.Verify(
-                Diagnostic("MultipleGlobalAnalyzerKeys").WithArguments("option1", "Global Section", "/.globalconfig1, /.globalconfig2").WithLocation(1, 1)
-                );
+                Diagnostic("MultipleGlobalAnalyzerKeys")
+                    .WithArguments("option1", "Global Section", "/.globalconfig1, /.globalconfig2")
+                    .WithLocation(1, 1)
+            );
             configs.Free();
         }
 
@@ -1907,94 +2289,125 @@ opTioN1 = value2",
         public void GlobalConfigSectionPathsMustBeNormalized()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 [/path/to/file1.cs]
 option1 = value1
 
 [\path\to\file2.cs]
 option1 = value1
 
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
-                 new[] { "/path/to/file1.cs", "/path/to/file2.cs" },
-                 configs);
+                new[] { "/path/to/file1.cs", "/path/to/file2.cs" },
+                configs
+            );
             configs.Free();
 
             VerifyAnalyzerOptions(
-                new[]
-                {
-                    new []
-                    {
-                        ("option1", "value1")
-                    },
-                    new (string, string) [] { }
-                },
-                options);
+                new[] { new[] { ("option1", "value1") }, new (string, string)[] { } },
+                options
+            );
         }
 
         [Fact]
         public void GlobalConfigCanSetSeverity()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 is_global = true
 dotnet_diagnostic.cs000.severity = none
 dotnet_diagnostic.cs001.severity = error
-", "/.editorconfig"));
+",
+                    "/.editorconfig"
+                )
+            );
 
             var set = AnalyzerConfigSet.Create(configs);
             configs.Free();
 
-            Assert.Equal(CreateImmutableDictionary(("cs000", ReportDiagnostic.Suppress),
-                                                   ("cs001", ReportDiagnostic.Error)),
-                         set.GlobalConfigOptions.TreeOptions);
+            Assert.Equal(
+                CreateImmutableDictionary(
+                    ("cs000", ReportDiagnostic.Suppress),
+                    ("cs001", ReportDiagnostic.Error)
+                ),
+                set.GlobalConfigOptions.TreeOptions
+            );
         }
 
         [Fact]
         public void GlobalConfigCanSetSeverityInSection()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 is_global = true
 
 [/path/to/file.cs]
 dotnet_diagnostic.cs000.severity = error
-", "/.editorconfig"));
+",
+                    "/.editorconfig"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
                 new[] { "/test.cs", "/path/to/file.cs" },
-                configs);
+                configs
+            );
             configs.Free();
 
-            Assert.Equal(new[] {
-                SyntaxTree.EmptyDiagnosticOptions,
-                CreateImmutableDictionary(("cs000", ReportDiagnostic.Error))
-            }, options.Select(o => o.TreeOptions).ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    SyntaxTree.EmptyDiagnosticOptions,
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
+                },
+                options.Select(o => o.TreeOptions).ToArray()
+            );
         }
 
         [Fact]
         public void GlobalConfigInvalidSeverity()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 is_global = true
 dotnet_diagnostic.cs000.severity = foo
 
 [/path/to/file.cs]
 dotnet_diagnostic.cs001.severity = bar
-", "/.editorconfig"));
+",
+                    "/.editorconfig"
+                )
+            );
 
             var set = AnalyzerConfigSet.Create(configs);
-            var options = new[] { "/test.cs", "/path/to/file.cs" }.Select(f => set.GetOptionsForSourcePath(f)).ToArray();
+            var options = new[] { "/test.cs", "/path/to/file.cs" }
+                .Select(f => set.GetOptionsForSourcePath(f))
+                .ToArray();
             configs.Free();
 
             set.GlobalConfigOptions.Diagnostics.Verify(
-                Diagnostic("InvalidSeverityInAnalyzerConfig").WithArguments("cs000", "foo", "<Global Config>").WithLocation(1, 1)
-                );
+                Diagnostic("InvalidSeverityInAnalyzerConfig")
+                    .WithArguments("cs000", "foo", "<Global Config>")
+                    .WithLocation(1, 1)
+            );
 
-            options[1].Diagnostics.Verify(
-                Diagnostic("InvalidSeverityInAnalyzerConfig").WithArguments("cs001", "bar", "<Global Config>").WithLocation(1, 1)
+            options[1]
+                .Diagnostics.Verify(
+                    Diagnostic("InvalidSeverityInAnalyzerConfig")
+                        .WithArguments("cs001", "bar", "<Global Config>")
+                        .WithLocation(1, 1)
                 );
         }
 
@@ -2002,83 +2415,109 @@ dotnet_diagnostic.cs001.severity = bar
         public void GlobalConfigSeverityInSectionOverridesGlobal()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 is_global = true
 dotnet_diagnostic.cs000.severity = none
 
 [/path/to/file.cs]
 dotnet_diagnostic.cs000.severity = error
-", "/.editorconfig"));
+",
+                    "/.editorconfig"
+                )
+            );
 
-            var options = GetAnalyzerConfigOptions(
-                new[] { "/path/to/file.cs" },
-                configs);
+            var options = GetAnalyzerConfigOptions(new[] { "/path/to/file.cs" }, configs);
             configs.Free();
 
             Assert.Equal(
                 CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
-                options[0].TreeOptions);
+                options[0].TreeOptions
+            );
         }
 
         [Fact]
         public void GlobalConfigSeverityIsOverriddenByEditorConfig()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 is_global = true
 dotnet_diagnostic.cs000.severity = error
-", "/.globalconfig"));
+",
+                    "/.globalconfig"
+                )
+            );
 
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 dotnet_diagnostic.cs000.severity = none
-", "/.editorconfig"));
+",
+                    "/.editorconfig"
+                )
+            );
 
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 dotnet_diagnostic.cs000.severity = warning
-", "/path/.editorconfig"));
+",
+                    "/path/.editorconfig"
+                )
+            );
 
-            var options = GetAnalyzerConfigOptions(
-                new[] { "/test.cs", "/path/file.cs" },
-                configs);
+            var options = GetAnalyzerConfigOptions(new[] { "/test.cs", "/path/file.cs" }, configs);
             configs.Free();
 
-            Assert.Equal(new[] {
-                CreateImmutableDictionary(("cs000", ReportDiagnostic.Suppress)),
-                CreateImmutableDictionary(("cs000", ReportDiagnostic.Warn))
-            }, options.Select(o => o.TreeOptions).ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Suppress)),
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Warn)),
+                },
+                options.Select(o => o.TreeOptions).ToArray()
+            );
         }
 
         [Fact]
         public void GlobalKeyIsNotSkippedIfInSection()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 is_global = true
 [/path/to/file.cs]
 is_global = true
-", "/.globalconfig"));
+",
+                    "/.globalconfig"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
                 new[] { "/file.cs", "/path/to/file.cs" },
-                configs);
+                configs
+            );
             configs.Free();
 
             VerifyAnalyzerOptions(
-              new[]
-              {
-                    new (string,string)[] { },
-                    new[] { ("is_global", "true") }
-              },
-              options);
+                new[] { new (string, string)[] { }, new[] { ("is_global", "true") } },
+                options
+            );
         }
 
         [Fact]
         public void GlobalConfigIsNotClearedByRootEditorConfig()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"is_global = true
+            configs.Add(
+                Parse(
+                    @"is_global = true
 option1 = global
 
 [/path/to/file1.cs]
@@ -2093,53 +2532,63 @@ option3 = global
 option2 = global
 option3 = global
 
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 root = true
 [*.cs]
 option2 = config1
-", "/.editorconfig"));
+",
+                    "/.editorconfig"
+                )
+            );
 
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 [*.cs]
 option3 = config2
-", "/path/.editorconfig"));
+",
+                    "/path/.editorconfig"
+                )
+            );
 
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 root = true
 [*.cs]
 option2 = config3
-", "/path/to/.editorconfig"));
+",
+                    "/path/to/.editorconfig"
+                )
+            );
 
             var options = GetAnalyzerConfigOptions(
-                 new[] { "/path/to/file1.cs", "/path/file1.cs", "/file1.cs" },
-                 configs);
+                new[] { "/path/to/file1.cs", "/path/file1.cs", "/file1.cs" },
+                configs
+            );
             configs.Free();
 
             VerifyAnalyzerOptions(
-              new[]
-              {
-                    new []
+                new[]
+                {
+                    new[]
                     {
                         ("option1", "global"),
                         ("option2", "config3"), // overridden by config3
-                        ("option3", "global") // not overridden by config2, because config3 is root
+                        ("option3", "global"), // not overridden by config2, because config3 is root
                     },
-                    new []
-                    {
-                        ("option1", "global"),
-                        ("option2", "config1"),
-                        ("option3", "config2")
-                    },
-                    new []
-                    {
-                        ("option1", "global"),
-                        ("option2", "config1"),
-                        ("option3", "global")
-                    }
-              },
-              options);
+                    new[] { ("option1", "global"), ("option2", "config1"), ("option3", "config2") },
+                    new[] { ("option1", "global"), ("option2", "config1"), ("option3", "global") },
+                },
+                options
+            );
         }
 
         [Fact]
@@ -2178,7 +2627,7 @@ option2 = config3
         [InlineData(@"\\", false)] //invalid: editorconfig sees an escaped, literal backslash
         [InlineData(@"/\{\}\,\[\]\*", true)]
         [InlineData(@"c:\my\file.cs", false)] // invalid: editorconfig sees a single file called 'c:(\m)y(\f)ile.cs' (i.e. \m and \f are escape chars)
-        [InlineData(@"\my\file.cs", false)] // invalid: editorconfig sees a single file called '(\m)y(\f)ile.cs' 
+        [InlineData(@"\my\file.cs", false)] // invalid: editorconfig sees a single file called '(\m)y(\f)ile.cs'
         [InlineData(@"\\my\\file.cs", false)] // invalid: editorconfig sees a single file called '\my\file.cs' with literal backslashes
         [InlineData(@"\\\\my\\file.cs", false)] // invalid: editorconfig sees a single file called '\\my\file.cs' not a UNC path
         [InlineData("//server/file.cs", true)]
@@ -2188,13 +2637,21 @@ option2 = config3
         [InlineData(".", false)]
         [InlineData("/", true)]
         [InlineData("", true)] // only true because [] isn't a valid editorconfig section name either and thus never gets parsed
-        public void GlobalConfigIssuesWarningWithInvalidSectionNames(string sectionName, bool isValid)
+        public void GlobalConfigIssuesWarningWithInvalidSectionNames(
+            string sectionName,
+            bool isValid
+        )
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse($@"
+            configs.Add(
+                Parse(
+                    $@"
 is_global = true
 [{sectionName}]
-", "/.editorconfig"));
+",
+                    "/.editorconfig"
+                )
+            );
 
             _ = AnalyzerConfigSet.Create(configs, out var diagnostics);
             configs.Free();
@@ -2206,8 +2663,10 @@ is_global = true
             else
             {
                 diagnostics.Verify(
-                    Diagnostic("InvalidGlobalSectionName", isSuppressed: false).WithArguments(sectionName, "/.editorconfig").WithLocation(1, 1)
-                    );
+                    Diagnostic("InvalidGlobalSectionName", isSuppressed: false)
+                        .WithArguments(sectionName, "/.editorconfig")
+                        .WithLocation(1, 1)
+                );
             }
         }
 
@@ -2226,8 +2685,15 @@ is_global = true
         [InlineData(@"\c\:", false, false)]
         [InlineData("c:/", true, false)]
         [InlineData("c:/*.cs", false, false)]
-        public void GlobalConfigIssuesWarningWithInvalidSectionNames_PlatformSpecific(string sectionName, bool isValidWindows, bool isValidOther)
-            => GlobalConfigIssuesWarningWithInvalidSectionNames(sectionName, ExecutionConditionUtil.IsWindows ? isValidWindows : isValidOther);
+        public void GlobalConfigIssuesWarningWithInvalidSectionNames_PlatformSpecific(
+            string sectionName,
+            bool isValidWindows,
+            bool isValidOther
+        ) =>
+            GlobalConfigIssuesWarningWithInvalidSectionNames(
+                sectionName,
+                ExecutionConditionUtil.IsWindows ? isValidWindows : isValidOther
+            );
 
         [Theory]
         [InlineData("/.globalconfig", true)]
@@ -2240,7 +2706,10 @@ is_global = true
         [InlineData("/path/to/my.globalconfig", false)]
         [InlineData("/.editorconfig", false)]
         [InlineData("/.globalconfİg", false)]
-        public void FileNameCausesConfigToBeReportedAsGlobal(string fileName, bool shouldBeTreatedAsGlobal)
+        public void FileNameCausesConfigToBeReportedAsGlobal(
+            string fileName,
+            bool shouldBeTreatedAsGlobal
+        )
         {
             var config = Parse("", fileName);
             Assert.Equal(shouldBeTreatedAsGlobal, config.IsGlobal);
@@ -2296,9 +2765,12 @@ is_global = true
         [Fact]
         public void GlobalLevelInSectionIsPresentInConfigSet()
         {
-            var config = Parse(@"
+            var config = Parse(
+                @"
 [/path]
-global_level = 123", "/.globalconfig");
+global_level = 123",
+                "/.globalconfig"
+            );
 
             var set = AnalyzerConfigSet.Create(ImmutableArray.Create(config));
             var globalOptions = set.GlobalConfigOptions;
@@ -2323,17 +2795,26 @@ global_level = 123", "/.globalconfig");
         public void GlobalLevelAllowsOverrideOfGlobalKeys(int level1, int level2)
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse($@"
+            configs.Add(
+                Parse(
+                    $@"
 is_global = true
 global_level = {level1}
 option1 = value1
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse($@"
+            configs.Add(
+                Parse(
+                    $@"
 is_global = true
 global_level = {level2}
 option1 = value2",
-"/.globalconfig2"));
+                    "/.globalconfig2"
+                )
+            );
 
             var globalConfig = AnalyzerConfigSet.MergeGlobalConfigs(configs, out var diagnostics);
             diagnostics.Verify();
@@ -2350,21 +2831,30 @@ option1 = value2",
         public void GlobalLevelAllowsOverrideOfSectionKeys()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 is_global = true
 global_level = 1
 
 [/path]
 option1 = value1
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 is_global = true
 global_level = 2
 
 [/path]
 option1 = value2",
-"/.globalconfig2"));
+                    "/.globalconfig2"
+                )
+            );
 
             var globalConfig = AnalyzerConfigSet.MergeGlobalConfigs(configs, out var diagnostics);
             diagnostics.Verify();
@@ -2384,26 +2874,44 @@ option1 = value2",
         [InlineData(1, 2, 1, "value2")]
         [InlineData(1, 1, 2, "value3")]
         [InlineData(2, 1, 1, "value1")]
-        public void GlobalLevelAllowsOverrideOfDuplicateGlobalKeys(int level1, int level2, int level3, string expectedValue)
+        public void GlobalLevelAllowsOverrideOfDuplicateGlobalKeys(
+            int level1,
+            int level2,
+            int level3,
+            string expectedValue
+        )
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse($@"
+            configs.Add(
+                Parse(
+                    $@"
 is_global = true
 global_level = {level1}
 option1 = value1
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse($@"
+            configs.Add(
+                Parse(
+                    $@"
 is_global = true
 global_level = {level2}
 option1 = value2",
-"/.globalconfig2"));
+                    "/.globalconfig2"
+                )
+            );
 
-            configs.Add(Parse($@"
+            configs.Add(
+                Parse(
+                    $@"
 is_global = true
 global_level = {level3}
 option1 = value3",
-"/.globalconfig3"));
+                    "/.globalconfig3"
+                )
+            );
 
             var globalConfig = AnalyzerConfigSet.MergeGlobalConfigs(configs, out var diagnostics);
             diagnostics.Verify();
@@ -2418,48 +2926,75 @@ option1 = value3",
         public void GlobalLevelReportsConflictsOnlyAtTheHighestLevel()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse($@"
+            configs.Add(
+                Parse(
+                    $@"
 is_global = true
 global_level = 1
 option1 = value1
-", "/.globalconfig1"));
+",
+                    "/.globalconfig1"
+                )
+            );
 
-            configs.Add(Parse($@"
+            configs.Add(
+                Parse(
+                    $@"
 is_global = true
 global_level = 1
 option1 = value2",
-"/.globalconfig2"));
+                    "/.globalconfig2"
+                )
+            );
 
-            configs.Add(Parse($@"
+            configs.Add(
+                Parse(
+                    $@"
 is_global = true
 global_level = 3
 option1 = value3",
-"/.globalconfig3"));
+                    "/.globalconfig3"
+                )
+            );
 
-            configs.Add(Parse($@"
+            configs.Add(
+                Parse(
+                    $@"
 is_global = true
 global_level = 3
 option1 = value4",
-"/.globalconfig4"));
+                    "/.globalconfig4"
+                )
+            );
 
-            configs.Add(Parse($@"
+            configs.Add(
+                Parse(
+                    $@"
 is_global = true
 global_level = 2
 option1 = value5",
-"/.globalconfig5"));
+                    "/.globalconfig5"
+                )
+            );
 
-            configs.Add(Parse($@"
+            configs.Add(
+                Parse(
+                    $@"
 is_global = true
 global_level = 2
 option1 = value6",
-"/.globalconfig6"));
+                    "/.globalconfig6"
+                )
+            );
 
             var globalConfig = AnalyzerConfigSet.MergeGlobalConfigs(configs, out var diagnostics);
 
             // we don't report config1, 2, 5, or 6, because they didn't conflict: 3 + 4 overrode them, but then themselves were conflicting
             diagnostics.Verify(
-                Diagnostic("MultipleGlobalAnalyzerKeys").WithArguments("option1", "Global Section", "/.globalconfig3, /.globalconfig4").WithLocation(1, 1)
-                );
+                Diagnostic("MultipleGlobalAnalyzerKeys")
+                    .WithArguments("option1", "Global Section", "/.globalconfig3, /.globalconfig4")
+                    .WithLocation(1, 1)
+            );
 
             configs.Free();
         }
@@ -2467,15 +3002,21 @@ option1 = value6",
         [Fact]
         public void InvalidGlobalLevelIsIgnored()
         {
-            var userGlobalConfig = Parse($@"
+            var userGlobalConfig = Parse(
+                $@"
 is_global = true
 global_level = abc
-", "/.globalconfig");
+",
+                "/.globalconfig"
+            );
 
-            var nonUserGlobalConfig = Parse($@"
+            var nonUserGlobalConfig = Parse(
+                $@"
 is_global = true
 global_level = abc
-", "/.editorconfig");
+",
+                "/.editorconfig"
+            );
 
             Assert.Equal(100, userGlobalConfig.GlobalLevel);
             Assert.Equal(0, nonUserGlobalConfig.GlobalLevel);
@@ -2510,11 +3051,16 @@ global_level = abc
             }
 
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse($@"
+            configs.Add(
+                Parse(
+                    $@"
 is_global = true
 [{sectionName}]
 a = b
-", "/.editorconfig"));
+",
+                    "/.editorconfig"
+                )
+            );
 
             var configSet = AnalyzerConfigSet.Create(configs, out var diagnostics);
             configs.Free();
@@ -2536,13 +3082,18 @@ a = b
         public void CorrectlyMergeGlobalConfigWithEscapedPaths()
         {
             var configs = ArrayBuilder<AnalyzerConfig>.GetInstance();
-            configs.Add(Parse(@"
+            configs.Add(
+                Parse(
+                    @"
 is_global = true
 [/Test.cs]
 a = a
 [/\Test.cs]
 b = b
-", "/.editorconfig"));
+",
+                    "/.editorconfig"
+                )
+            );
 
             var configSet = AnalyzerConfigSet.Create(configs, out var diagnostics);
             configs.Free();

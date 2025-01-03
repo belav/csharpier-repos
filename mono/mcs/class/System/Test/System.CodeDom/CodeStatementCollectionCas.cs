@@ -1,5 +1,5 @@
 //
-// CodeStatementCollectionCas.cs 
+// CodeStatementCollectionCas.cs
 //	- CAS unit tests for System.CodeDom.CodeStatementCollectionCas
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,93 +27,92 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.CodeDom {
+namespace MonoCasTests.System.CodeDom
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class CodeStatementCollectionCas
+    {
+        private CodeStatement cs;
+        private CodeStatement[] array;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeStatementCollectionCas {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            cs = new CodeStatement();
+            array = new CodeStatement[1] { cs };
+        }
 
-		private CodeStatement cs;
-		private CodeStatement[] array;
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			cs = new CodeStatement ();
-			array = new CodeStatement[1] { cs };
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted()
+        {
+            CodeStatementCollection coll = new CodeStatementCollection();
+            Assert.AreEqual(0, coll.Add(cs), "Add");
+            Assert.AreSame(cs, coll[0], "this[int]");
+            coll.CopyTo(array, 0);
+            coll.AddRange(array);
+            coll.AddRange(coll);
+            Assert.IsTrue(coll.Contains(cs), "Contains");
+            Assert.AreEqual(0, coll.IndexOf(cs), "IndexOf");
+            coll.Insert(0, cs);
+            coll.Remove(cs);
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted()
+        {
+            CodeStatementCollection coll = new CodeStatementCollection(array);
+            coll.CopyTo(array, 0);
+            Assert.AreEqual(1, coll.Add(cs), "Add");
+            Assert.AreSame(cs, coll[0], "this[int]");
+            coll.AddRange(array);
+            coll.AddRange(coll);
+            Assert.IsTrue(coll.Contains(cs), "Contains");
+            Assert.AreEqual(0, coll.IndexOf(cs), "IndexOf");
+            coll.Insert(0, cs);
+            coll.Remove(cs);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeStatementCollection coll = new CodeStatementCollection ();
-			Assert.AreEqual (0, coll.Add (cs), "Add");
-			Assert.AreSame (cs, coll[0], "this[int]");
-			coll.CopyTo (array, 0);
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (cs), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (cs), "IndexOf");
-			coll.Insert (0, cs);
-			coll.Remove (cs);
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted()
+        {
+            CodeStatementCollection c = new CodeStatementCollection();
+            CodeStatementCollection coll = new CodeStatementCollection(c);
+            Assert.AreEqual(0, coll.Add(cs), "Add");
+            Assert.AreSame(cs, coll[0], "this[int]");
+            coll.CopyTo(array, 0);
+            coll.AddRange(array);
+            coll.AddRange(coll);
+            Assert.IsTrue(coll.Contains(cs), "Contains");
+            Assert.AreEqual(0, coll.IndexOf(cs), "IndexOf");
+            coll.Insert(0, cs);
+            coll.Remove(cs);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeStatementCollection coll = new CodeStatementCollection (array);
-			coll.CopyTo (array, 0);
-			Assert.AreEqual (1, coll.Add (cs), "Add");
-			Assert.AreSame (cs, coll[0], "this[int]");
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (cs), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (cs), "IndexOf");
-			coll.Insert (0, cs);
-			coll.Remove (cs);
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			CodeStatementCollection c = new CodeStatementCollection ();
-			CodeStatementCollection coll = new CodeStatementCollection (c);
-			Assert.AreEqual (0, coll.Add (cs), "Add");
-			Assert.AreSame (cs, coll[0], "this[int]");
-			coll.CopyTo (array, 0);
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (cs), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (cs), "IndexOf");
-			coll.Insert (0, cs);
-			coll.Remove (cs);
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeStatementCollection).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(CodeStatementCollection).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }

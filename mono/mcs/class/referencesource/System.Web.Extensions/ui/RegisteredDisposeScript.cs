@@ -4,15 +4,22 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System.Diagnostics;
 
-    public sealed class RegisteredDisposeScript {
+    public sealed class RegisteredDisposeScript
+    {
         private Control _control;
         private UpdatePanel _parentUpdatePanel;
         private string _script;
 
-        internal RegisteredDisposeScript(Control control, string disposeScript, UpdatePanel parentUpdatePanel) {
+        internal RegisteredDisposeScript(
+            Control control,
+            string disposeScript,
+            UpdatePanel parentUpdatePanel
+        )
+        {
             Debug.Assert(control != null);
             Debug.Assert(disposeScript != null);
             Debug.Assert(parentUpdatePanel != null);
@@ -21,22 +28,19 @@ namespace System.Web.UI {
             _parentUpdatePanel = parentUpdatePanel;
         }
 
-        public Control Control {
-            get {
-                return _control;
-            }
+        public Control Control
+        {
+            get { return _control; }
         }
 
-        public string Script {
-            get {
-                return _script;
-            }
+        public string Script
+        {
+            get { return _script; }
         }
 
-        internal UpdatePanel ParentUpdatePanel {
-            get {
-                return _parentUpdatePanel;
-            }
+        internal UpdatePanel ParentUpdatePanel
+        {
+            get { return _parentUpdatePanel; }
         }
     }
 }

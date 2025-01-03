@@ -9,7 +9,7 @@ namespace System.IdentityModel.Protocols.WSTrust
     using System.IdentityModel.Tokens;
 
     /// <summary>
-    /// The content of a RequestedProofToken element could be EncryptedSecurityToken which means that EncryptedKey is used 
+    /// The content of a RequestedProofToken element could be EncryptedSecurityToken which means that EncryptedKey is used
     /// under the RequestedProofToken. If the security token is a regular token, such as a SCT,
     /// then its session key will be the material which gets encrypted.  Another possibility is where
     /// we use combined entropy, then RequestedProofToken will only contain a ComputedKey element.
@@ -20,11 +20,11 @@ namespace System.IdentityModel.Protocols.WSTrust
         ProtectedKey _keys;
 
         /// <summary>
-        /// In case of combined entropy, construct a requestedprooftoken 
-        /// instance with computed key algorithm to specify the algorithm used to 
+        /// In case of combined entropy, construct a requestedprooftoken
+        /// instance with computed key algorithm to specify the algorithm used to
         /// calculate the session key.
         /// </summary>
-        /// <param name="computedKeyAlgorithm">The algorithm used to computed the session key in 
+        /// <param name="computedKeyAlgorithm">The algorithm used to computed the session key in
         /// the combined entropy case.</param>
         public RequestedProofToken(string computedKeyAlgorithm)
             : base()
@@ -71,28 +71,22 @@ namespace System.IdentityModel.Protocols.WSTrust
         }
 
         /// <summary>
-        /// Gets the computed key algorithm used to calculate the session key in the combined 
+        /// Gets the computed key algorithm used to calculate the session key in the combined
         /// entropy case.
         /// </summary>
         public string ComputedKeyAlgorithm
         {
-            get
-            {
-                return _computedKeyAlgorithm;
-            }
+            get { return _computedKeyAlgorithm; }
         }
 
         /// <summary>
-        /// In the case when the requested proof token contains the real key, 
+        /// In the case when the requested proof token contains the real key,
         /// ProtectedKey getter will returns the real key bytes either encrypted
         /// or plaintext.
         /// </summary>
         public ProtectedKey ProtectedKey
         {
-            get
-            {
-                return _keys;
-            }
+            get { return _keys; }
         }
     }
 }

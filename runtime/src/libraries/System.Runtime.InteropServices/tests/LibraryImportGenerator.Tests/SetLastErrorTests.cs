@@ -4,7 +4,6 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
-
 using Xunit;
 
 namespace LibraryImportGenerator.IntegrationTests
@@ -17,7 +16,7 @@ namespace LibraryImportGenerator.IntegrationTests
             return i;
         }
 
-        public static int ConvertToManaged(int i )
+        public static int ConvertToManaged(int i)
         {
             // Explicitly set the last error to something else on unmarshalling
             Marshal.SetLastPInvokeError(i * 2);
@@ -34,11 +33,22 @@ namespace LibraryImportGenerator.IntegrationTests
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "set_error", SetLastError = true)]
             [return: MarshalUsing(typeof(SetLastErrorMarshaller))]
-            public static partial int SetError_CustomMarshallingSetsError(int error, byte shouldSetError);
+            public static partial int SetError_CustomMarshallingSetsError(
+                int error,
+                byte shouldSetError
+            );
 
-            [LibraryImport(NativeExportsNE_Binary, EntryPoint = "set_error_return_string", SetLastError = true)]
+            [LibraryImport(
+                NativeExportsNE_Binary,
+                EntryPoint = "set_error_return_string",
+                SetLastError = true
+            )]
             [return: MarshalAs(UnmanagedType.LPWStr)]
-            public static partial string SetError_NonBlittableSignature(int error, [MarshalAs(UnmanagedType.U1)] bool shouldSetError, [MarshalAs(UnmanagedType.LPWStr)] string errorString);
+            public static partial string SetError_NonBlittableSignature(
+                int error,
+                [MarshalAs(UnmanagedType.U1)] bool shouldSetError,
+                [MarshalAs(UnmanagedType.LPWStr)] string errorString
+            );
         }
     }
 
@@ -51,7 +61,11 @@ namespace LibraryImportGenerator.IntegrationTests
         public void LastWin32Error_HasExpectedValue(int error)
         {
             string errorString = error.ToString();
-            string ret = NativeExportsNE.SetLastError.SetError_NonBlittableSignature(error, shouldSetError: true, errorString);
+            string ret = NativeExportsNE.SetLastError.SetError_NonBlittableSignature(
+                error,
+                shouldSetError: true,
+                errorString
+            );
             Assert.Equal(error, Marshal.GetLastPInvokeError());
             Assert.Equal(errorString, ret);
 
@@ -65,7 +79,10 @@ namespace LibraryImportGenerator.IntegrationTests
 
             // Custom marshalling sets the last error on unmarshalling.
             // Last error should reflect error from native call, not unmarshalling.
-            NativeExportsNE.SetLastError.SetError_CustomMarshallingSetsError(error, shouldSetError: 1);
+            NativeExportsNE.SetLastError.SetError_CustomMarshallingSetsError(
+                error,
+                shouldSetError: 1
+            );
             Assert.Equal(error, Marshal.GetLastPInvokeError());
         }
 
@@ -78,7 +95,11 @@ namespace LibraryImportGenerator.IntegrationTests
 
             // Don't actually set the error in the native call. SetLastError=true should clear any existing error.
             string errorString = error.ToString();
-            string ret = NativeExportsNE.SetLastError.SetError_NonBlittableSignature(error, shouldSetError: false, errorString);
+            string ret = NativeExportsNE.SetLastError.SetError_NonBlittableSignature(
+                error,
+                shouldSetError: false,
+                errorString
+            );
             Assert.Equal(0, Marshal.GetLastPInvokeError());
             Assert.Equal(errorString, ret);
 
@@ -90,7 +111,10 @@ namespace LibraryImportGenerator.IntegrationTests
 
             // Don't actually set the error in the native call. Custom marshalling still sets the last error.
             // SetLastError=true should clear any existing error and ignore error set by custom marshalling.
-            NativeExportsNE.SetLastError.SetError_CustomMarshallingSetsError(error, shouldSetError: 0);
+            NativeExportsNE.SetLastError.SetError_CustomMarshallingSetsError(
+                error,
+                shouldSetError: 0
+            );
             Assert.Equal(0, Marshal.GetLastPInvokeError());
         }
     }

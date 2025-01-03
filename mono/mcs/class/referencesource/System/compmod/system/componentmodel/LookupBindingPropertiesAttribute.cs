@@ -1,23 +1,24 @@
 //------------------------------------------------------------------------------
 // <copyright file="LookupBindingPropertiesAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Security.Permissions;
-    
+
     /// <devdoc>
     ///    <para>Specifies the data source and data member properties for a component.</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Class)]
-    public sealed class LookupBindingPropertiesAttribute : Attribute {
-
+    public sealed class LookupBindingPropertiesAttribute : Attribute
+    {
         private readonly string dataSource;
         private readonly string displayMember;
         private readonly string valueMember;
@@ -29,7 +30,8 @@ namespace System.ComponentModel {
         ///       the <see cref='System.ComponentModel.LookupBindingPropertiesAttribute'/> class.
         ///    </para>
         /// </devdoc>
-        public LookupBindingPropertiesAttribute() {
+        public LookupBindingPropertiesAttribute()
+        {
             this.dataSource = null;
             this.displayMember = null;
             this.valueMember = null;
@@ -42,7 +44,13 @@ namespace System.ComponentModel {
         ///       the <see cref='System.ComponentModel.LookupBindingPropertiesAttribute'/> class.
         ///    </para>
         /// </devdoc>
-        public LookupBindingPropertiesAttribute(string dataSource, string displayMember, string valueMember, string lookupMember) {
+        public LookupBindingPropertiesAttribute(
+            string dataSource,
+            string displayMember,
+            string valueMember,
+            string lookupMember
+        )
+        {
             this.dataSource = dataSource;
             this.displayMember = displayMember;
             this.valueMember = valueMember;
@@ -55,10 +63,9 @@ namespace System.ComponentModel {
         ///       bound to.
         ///    </para>
         /// </devdoc>
-        public string DataSource {
-            get {
-                return dataSource;
-            }
+        public string DataSource
+        {
+            get { return dataSource; }
         }
 
         /// <devdoc>
@@ -67,10 +74,9 @@ namespace System.ComponentModel {
         ///       bound to.
         ///    </para>
         /// </devdoc>
-        public string DisplayMember {
-            get {
-                return displayMember;
-            }
+        public string DisplayMember
+        {
+            get { return displayMember; }
         }
 
         /// <devdoc>
@@ -79,10 +85,9 @@ namespace System.ComponentModel {
         ///       bound to.
         ///    </para>
         /// </devdoc>
-        public string ValueMember {
-            get {
-                return valueMember;
-            }
+        public string ValueMember
+        {
+            get { return valueMember; }
         }
 
         /// <devdoc>
@@ -91,30 +96,32 @@ namespace System.ComponentModel {
         ///       bound to.
         ///    </para>
         /// </devdoc>
-        public string LookupMember {
-            get {
-                return lookupMember;
-            }
+        public string LookupMember
+        {
+            get { return lookupMember; }
         }
 
         /// <devdoc>
         ///    <para>
         ///       Specifies the default value for the <see cref='System.ComponentModel.LookupBindingPropertiesAttribute'/>, which is <see langword='null'/>. This
-        ///    <see langword='static '/>field is read-only. 
+        ///    <see langword='static '/>field is read-only.
         ///    </para>
         /// </devdoc>
-        public static readonly LookupBindingPropertiesAttribute Default = new LookupBindingPropertiesAttribute();
+        public static readonly LookupBindingPropertiesAttribute Default =
+            new LookupBindingPropertiesAttribute();
 
-        public override bool Equals(object obj) {
-            LookupBindingPropertiesAttribute other = obj as LookupBindingPropertiesAttribute; 
-            return other != null &&
-                   other.DataSource == dataSource &&
-                   other.displayMember == displayMember &&
-                   other.valueMember == valueMember &&
-                   other.lookupMember == lookupMember;
+        public override bool Equals(object obj)
+        {
+            LookupBindingPropertiesAttribute other = obj as LookupBindingPropertiesAttribute;
+            return other != null
+                && other.DataSource == dataSource
+                && other.displayMember == displayMember
+                && other.valueMember == valueMember
+                && other.lookupMember == lookupMember;
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return base.GetHashCode();
         }
     }

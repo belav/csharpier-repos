@@ -17,7 +17,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             // Create a couple of views
             var view1 = new DataView(buffer);
             var view2 = new DataView(buffer, 12, 4); //from byte 12 for the next 4 bytes
-            view1.SetInt8(12, 42); // put 42 in slot 12 
+            view1.SetInt8(12, 42); // put 42 in slot 12
 
             Assert.Equal(42, view2.GetInt8(0));
         }
@@ -58,7 +58,6 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         [Theory]
         [MemberData(nameof(DataView_Test_Data))]
-
         public static void DataViewGetFloat32(DataView view)
         {
             view.SetFloat32(1, (float)Math.PI);
@@ -112,7 +111,6 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             view.SetUint16(1, 1234);
             Assert.Equal(1234, view.GetUint16(1));
-
         }
 
         [Theory]

@@ -5,7 +5,8 @@ using System.Runtime.CompilerServices;
 
 namespace System.Reflection.Runtime.BindingFlagSupport
 {
-    internal partial struct QueryResult<M> where M : MemberInfo
+    internal partial struct QueryResult<M>
+        where M : MemberInfo
     {
         internal struct QueryResultEnumerator
         {
@@ -19,9 +20,9 @@ namespace System.Reflection.Runtime.BindingFlagSupport
 
             public bool MoveNext()
             {
-                while (++_index < _unfilteredCount && !_queriedMembers!.Matches(_index, _bindingAttr))
-                {
-                }
+                while (
+                    ++_index < _unfilteredCount && !_queriedMembers!.Matches(_index, _bindingAttr)
+                ) { }
 
                 if (_index < _unfilteredCount)
                     return true;
@@ -33,10 +34,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             public M Current
             {
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                get
-                {
-                    return _queriedMembers![_index];
-                }
+                get { return _queriedMembers![_index]; }
             }
 
             private int _index;

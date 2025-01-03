@@ -11,7 +11,7 @@ namespace System.IO.Tests
     {
         #region Utilities
 
-        protected virtual bool IsAppend {  get; }
+        protected virtual bool IsAppend { get; }
 
         protected virtual void Write(string path, string content)
         {
@@ -42,7 +42,10 @@ namespace System.IO.Tests
         [Fact]
         public void NonExistentPath()
         {
-            Assert.Throws<DirectoryNotFoundException>(() => Write(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()), "Text"));
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    Write(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()), "Text")
+            );
         }
 
         [Fact]
@@ -155,7 +158,14 @@ namespace System.IO.Tests
         public static IEnumerable<object[]> OutputIsTheSameAsForStreamWriter_Args()
         {
             string longText = new string('z', 50_000);
-            foreach (Encoding encoding in new[] { Encoding.Unicode , new UTF8Encoding(encoderShouldEmitUTF8Identifier: true), new UTF8Encoding(encoderShouldEmitUTF8Identifier: false) })
+            foreach (
+                Encoding encoding in new[]
+                {
+                    Encoding.Unicode,
+                    new UTF8Encoding(encoderShouldEmitUTF8Identifier: true),
+                    new UTF8Encoding(encoderShouldEmitUTF8Identifier: false),
+                }
+            )
             {
                 foreach (string text in new[] { null, string.Empty, " ", "shortText", longText })
                 {

@@ -8,16 +8,17 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
     using System.Net.Security;
-    using System.Text;
     using System.ServiceModel.Channels;
+    using System.Text;
 
     public sealed partial class WindowsStreamSecurityElement : BindingElementExtensionElement
     {
-        public WindowsStreamSecurityElement()
-        {
-        }
+        public WindowsStreamSecurityElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.ProtectionLevel, DefaultValue = ConnectionOrientedTransportDefaults.ProtectionLevel)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ProtectionLevel,
+            DefaultValue = ConnectionOrientedTransportDefaults.ProtectionLevel
+        )]
         [StandardRuntimeEnumValidator(typeof(ProtectionLevel))]
         public ProtectionLevel ProtectionLevel
         {
@@ -35,8 +36,8 @@ namespace System.ServiceModel.Configuration
 
         protected internal override BindingElement CreateBindingElement()
         {
-            WindowsStreamSecurityBindingElement windowsBindingElement
-                = new WindowsStreamSecurityBindingElement();
+            WindowsStreamSecurityBindingElement windowsBindingElement =
+                new WindowsStreamSecurityBindingElement();
 
             this.ApplyConfiguration(windowsBindingElement);
             return windowsBindingElement;
@@ -59,12 +60,12 @@ namespace System.ServiceModel.Configuration
         protected internal override void InitializeFrom(BindingElement bindingElement)
         {
             base.InitializeFrom(bindingElement);
-            WindowsStreamSecurityBindingElement windowsBindingElement
-                = (WindowsStreamSecurityBindingElement)bindingElement;
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ProtectionLevel, windowsBindingElement.ProtectionLevel);
+            WindowsStreamSecurityBindingElement windowsBindingElement =
+                (WindowsStreamSecurityBindingElement)bindingElement;
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ProtectionLevel,
+                windowsBindingElement.ProtectionLevel
+            );
         }
     }
 }
-
-
-

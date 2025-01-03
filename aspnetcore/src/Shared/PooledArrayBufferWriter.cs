@@ -177,6 +177,8 @@ internal sealed class PooledArrayBufferWriter<T> : IBufferWriter<T>, IDisposable
 
     private static void ThrowInvalidOperationException(int capacity)
     {
-        throw new InvalidOperationException($"Cannot advance past the end of the buffer, which has a size of {capacity}.");
+        throw new InvalidOperationException(
+            $"Cannot advance past the end of the buffer, which has a size of {capacity}."
+        );
     }
 }

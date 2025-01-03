@@ -8,7 +8,10 @@ namespace Microsoft.AspNetCore.Hosting;
 
 [DebuggerDisplay("ApplicationName = {ApplicationName}, EnvironmentName = {EnvironmentName}")]
 #pragma warning disable CS0618 // Type or member is obsolete
-internal sealed class HostingEnvironment : IHostingEnvironment, Extensions.Hosting.IHostingEnvironment, IWebHostEnvironment
+internal sealed class HostingEnvironment
+    : IHostingEnvironment,
+        Extensions.Hosting.IHostingEnvironment,
+        IWebHostEnvironment
 #pragma warning restore CS0618 // Type or member is obsolete
 {
     public string EnvironmentName { get; set; } = Extensions.Hosting.Environments.Production;

@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
@@ -15,7 +14,10 @@ namespace Internal.IL.Stubs
         protected override int CompareToImpl(MethodDesc other, TypeSystemComparer comparer)
         {
             var otherMethod = (TypeGetTypeMethodThunk)other;
-            int result = StringComparer.Ordinal.Compare(DefaultAssemblyName, otherMethod.DefaultAssemblyName);
+            int result = StringComparer.Ordinal.Compare(
+                DefaultAssemblyName,
+                otherMethod.DefaultAssemblyName
+            );
             if (result != 0)
                 return result;
 

@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             ComHandle<EnvDTE.FileCodeModel, FileCodeModel> fileCodeModel,
             SyntaxNode parentNode,
             AbstractCodeElement parentElement,
-            ImmutableArray<SyntaxNode> nodes)
+            ImmutableArray<SyntaxNode> nodes
+        )
         {
             _state = state;
             _fileCodeModel = fileCodeModel;
@@ -47,7 +48,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
         private EnvDTE.CodeElement CreateCodeOptionsStatement(SyntaxNode node)
         {
-            this.CodeModelService.GetOptionNameAndOrdinal(_parentNode, node, out var name, out var ordinal);
+            this.CodeModelService.GetOptionNameAndOrdinal(
+                _parentNode,
+                node,
+                out var name,
+                out var ordinal
+            );
 
             return CodeOptionsStatement.Create(_state, this.FileCodeModel, name, ordinal);
         }
@@ -61,18 +67,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
         private EnvDTE.CodeElement CreateCodeAttribute(SyntaxNode node)
         {
-            this.CodeModelService.GetAttributeNameAndOrdinal(_parentNode, node, out var name, out var ordinal);
+            this.CodeModelService.GetAttributeNameAndOrdinal(
+                _parentNode,
+                node,
+                out var name,
+                out var ordinal
+            );
 
-            return (EnvDTE.CodeElement)CodeAttribute.Create(_state, this.FileCodeModel, _parentElement, name, ordinal);
+            return (EnvDTE.CodeElement)
+                CodeAttribute.Create(_state, this.FileCodeModel, _parentElement, name, ordinal);
         }
 
         private EnvDTE.CodeElement CreateCodeParameter(SyntaxNode node)
         {
-            Debug.Assert(_parentElement is AbstractCodeMember, "Parameters should always have an associated member!");
+            Debug.Assert(
+                _parentElement is AbstractCodeMember,
+                "Parameters should always have an associated member!"
+            );
 
             var name = this.CodeModelService.GetParameterName(node);
 
-            return (EnvDTE.CodeElement)CodeParameter.Create(_state, (AbstractCodeMember)_parentElement, name);
+            return (EnvDTE.CodeElement)
+                CodeParameter.Create(_state, (AbstractCodeMember)_parentElement, name);
         }
 
         public override int Count

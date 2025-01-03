@@ -62,9 +62,15 @@ namespace System.Net.Http.Unit.Tests.HPack
                 for (int prefixLength = 1; prefixLength <= 8; ++prefixLength)
                 {
                     integerBytes.Clear();
-                    Assert.True(IntegerEncoder.Encode(i, prefixLength, integerBytes, out int length));
+                    Assert.True(
+                        IntegerEncoder.Encode(i, prefixLength, integerBytes, out int length)
+                    );
 
-                    bool decodeResult = decoder.BeginTryDecode(integerBytes[0], prefixLength, out int intResult);
+                    bool decodeResult = decoder.BeginTryDecode(
+                        integerBytes[0],
+                        prefixLength,
+                        out int intResult
+                    );
 
                     for (int j = 1; j < length; j++)
                     {
@@ -84,8 +90,18 @@ namespace System.Net.Http.Unit.Tests.HPack
             yield return new object[] { 1337, 5, new byte[] { 0x1F, 0x9A, 0x0A } };
             yield return new object[] { 42, 8, new byte[] { 0x2A } };
             yield return new object[] { 7, 3, new byte[] { 0x7, 0x0 } };
-            yield return new object[] { int.MaxValue, 1, new byte[] { 0x01, 0xfe, 0xff, 0xff, 0xff, 0x07 } };
-            yield return new object[] { int.MaxValue, 8, new byte[] { 0xff, 0x80, 0xfe, 0xff, 0xff, 0x07 } };
+            yield return new object[]
+            {
+                int.MaxValue,
+                1,
+                new byte[] { 0x01, 0xfe, 0xff, 0xff, 0xff, 0x07 },
+            };
+            yield return new object[]
+            {
+                int.MaxValue,
+                8,
+                new byte[] { 0xff, 0x80, 0xfe, 0xff, 0xff, 0x07 },
+            };
         }
 
         [Theory]
@@ -100,7 +116,9 @@ namespace System.Net.Http.Unit.Tests.HPack
                 Assert.False(decoder.TryDecode(octets[j], out intResult));
             }
 
-            Assert.Throws<HPackDecodingException>(() => decoder.TryDecode(octets[octets.Length - 1], out intResult));
+            Assert.Throws<HPackDecodingException>(
+                () => decoder.TryDecode(octets[octets.Length - 1], out intResult)
+            );
         }
 
         public static TheoryData<int, byte[]> IntegerData_OverMax

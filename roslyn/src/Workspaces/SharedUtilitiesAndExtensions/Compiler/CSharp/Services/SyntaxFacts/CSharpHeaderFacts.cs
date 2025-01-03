@@ -15,27 +15,36 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
     {
         public static readonly IHeaderFacts Instance = new CSharpHeaderFacts();
 
-        protected CSharpHeaderFacts()
-        {
-        }
+        protected CSharpHeaderFacts() { }
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 
-        public override bool IsOnTypeHeader(SyntaxNode root, int position, bool fullHeader, [NotNullWhen(true)] out SyntaxNode? typeDeclaration)
+        public override bool IsOnTypeHeader(
+            SyntaxNode root,
+            int position,
+            bool fullHeader,
+            [NotNullWhen(true)] out SyntaxNode? typeDeclaration
+        )
         {
             var node = TryGetAncestorForLocation<BaseTypeDeclarationSyntax>(root, position);
             typeDeclaration = node;
             if (node == null)
                 return false;
 
-            var lastToken = (node as TypeDeclarationSyntax)?.TypeParameterList?.GetLastToken() ?? node.Identifier;
+            var lastToken =
+                (node as TypeDeclarationSyntax)?.TypeParameterList?.GetLastToken()
+                ?? node.Identifier;
             if (fullHeader)
                 lastToken = node.BaseList?.GetLastToken() ?? lastToken;
 
             return IsOnHeader(root, position, node, lastToken);
         }
 
-        public override bool IsOnPropertyDeclarationHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? propertyDeclaration)
+        public override bool IsOnPropertyDeclarationHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? propertyDeclaration
+        )
         {
             var node = TryGetAncestorForLocation<PropertyDeclarationSyntax>(root, position);
             propertyDeclaration = node;
@@ -48,7 +57,11 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             return IsOnHeader(root, position, node, node.Identifier);
         }
 
-        public override bool IsOnParameterHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? parameter)
+        public override bool IsOnParameterHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? parameter
+        )
         {
             var node = TryGetAncestorForLocation<ParameterSyntax>(root, position);
             parameter = node;
@@ -61,7 +74,11 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             return IsOnHeader(root, position, node, node);
         }
 
-        public override bool IsOnMethodHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? method)
+        public override bool IsOnMethodHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? method
+        )
         {
             var node = TryGetAncestorForLocation<MethodDeclarationSyntax>(root, position);
             method = node;
@@ -74,7 +91,11 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             return IsOnHeader(root, position, node, node.ParameterList);
         }
 
-        public override bool IsOnLocalFunctionHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? localFunction)
+        public override bool IsOnLocalFunctionHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? localFunction
+        )
         {
             var node = TryGetAncestorForLocation<LocalFunctionStatementSyntax>(root, position);
             localFunction = node;
@@ -87,7 +108,11 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             return IsOnHeader(root, position, node, node.ParameterList);
         }
 
-        public override bool IsOnLocalDeclarationHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? localDeclaration)
+        public override bool IsOnLocalDeclarationHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? localDeclaration
+        )
         {
             var node = TryGetAncestorForLocation<LocalDeclarationStatementSyntax>(root, position);
             localDeclaration = node;
@@ -96,13 +121,17 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
                 return false;
             }
 
-            var initializersExpressions = node!.Declaration.Variables
-                .Where(v => v.Initializer != null)
+            var initializersExpressions = node!
+                .Declaration.Variables.Where(v => v.Initializer != null)
                 .SelectAsArray(initializedV => initializedV.Initializer!.Value);
             return IsOnHeader(root, position, node, node, holes: initializersExpressions);
         }
 
-        public override bool IsOnIfStatementHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? ifStatement)
+        public override bool IsOnIfStatementHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? ifStatement
+        )
         {
             var node = TryGetAncestorForLocation<IfStatementSyntax>(root, position);
             ifStatement = node;
@@ -115,7 +144,11 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             return IsOnHeader(root, position, node, node.CloseParenToken);
         }
 
-        public override bool IsOnWhileStatementHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? whileStatement)
+        public override bool IsOnWhileStatementHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? whileStatement
+        )
         {
             var node = TryGetAncestorForLocation<WhileStatementSyntax>(root, position);
             whileStatement = node;
@@ -128,7 +161,11 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             return IsOnHeader(root, position, node, node.CloseParenToken);
         }
 
-        public override bool IsOnForeachHeader(SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? foreachStatement)
+        public override bool IsOnForeachHeader(
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? foreachStatement
+        )
         {
             var node = TryGetAncestorForLocation<ForEachStatementSyntax>(root, position);
             foreachStatement = node;

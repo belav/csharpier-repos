@@ -6,23 +6,27 @@
 
 #if WMLSUPPORT
 
-namespace System.Web.UI.WebControls.Adapters {
-    using System.Web.UI.Adapters;
+namespace System.Web.UI.WebControls.Adapters
+{
     using System.Globalization;
+    using System.Web.UI.Adapters;
     using System.Web.UI.WebControls;
 
     // Provides adaptive rendering for the TextBox control.
-    public class WmlTextBoxAdapter : TextBoxAdapter {
+    public class WmlTextBoxAdapter : TextBoxAdapter
+    {
         private String _staticValue;
 
         // Called during the Init lifecycle phase.
-        protected internal override void OnInit(EventArgs e) {
+        protected internal override void OnInit(EventArgs e)
+        {
             _staticValue = Control.Text;
             base.OnInit(e);
         }
 
         // Renders the control.
-        protected internal override void Render(HtmlTextWriter markupWriter) {
+        protected internal override void Render(HtmlTextWriter markupWriter)
+        {
             WmlTextWriter writer = (WmlTextWriter)markupWriter;
 
             String value = Control.Text;
@@ -31,23 +35,38 @@ namespace System.Web.UI.WebControls.Adapters {
 
             // writer.EnterLayout(Style);
 
-            if (Control.TextMode == TextBoxMode.Password) {
+            if (Control.TextMode == TextBoxMode.Password)
+            {
                 value = String.Empty;
                 // UNDONE: Consider adding property or wml adapter property to set requiresRandomID to true.
                 requiresRandomID = true;
             }
 
-            ((WmlPageAdapter)PageAdapter).RegisterPostField(writer, Control.UniqueID, Control.ClientID, true /* isDynamic */, requiresRandomID);
-            
-            if (!password) {
-                // Add a form variable for the textbox to populate it.  
+            ((WmlPageAdapter)PageAdapter).RegisterPostField(
+                writer,
+                Control.UniqueID,
+                Control.ClientID,
+                true /* isDynamic */
+                ,
+                requiresRandomID
+            );
+
+            if (!password)
+            {
+                // Add a form variable for the textbox to populate it.
                 // We need to do this since OnEnterForward values override the value attribute -see WML 1.1 spec.
                 // Do not add the form variable if the text mode is password, since we don't want it to be displayed on
                 // the client.
-                ((WmlPageAdapter)PageAdapter).AddFormVariable(writer, Control.ClientID, value, requiresRandomID);
+                ((WmlPageAdapter)PageAdapter).AddFormVariable(
+                    writer,
+                    Control.ClientID,
+                    value,
+                    requiresRandomID
+                );
                 // Note: AddFormVariable calls MapClientIDToShortName.
             }
-            else {
+            else
+            {
                 // This is to make sure an id is determined in the first
                 // pass, and this is done in AddFormVariable as well.
                 writer.MapClientIDToShortName(Control.ClientID, requiresRandomID);
@@ -55,42 +74,69 @@ namespace System.Web.UI.WebControls.Adapters {
 
             // UNDONE: There are some wml-specific properties (format, title, size, maxLength) which
             // we should consider for Whidbey.
-            RenderTextBox((WmlTextWriter)writer, Control.ClientID, 
-                          value,
-                          null /* format */, 
-                          null /* title */,
-                          password, 
-                          Control.Columns /* size */, 
-                          Control.MaxLength /* maxLength */, 
-                          requiresRandomID);
+            RenderTextBox(
+                (WmlTextWriter)writer,
+                Control.ClientID,
+                value,
+                null /* format */
+                ,
+                null /* title */
+                ,
+                password,
+                Control.Columns /* size */
+                ,
+                Control.MaxLength /* maxLength */
+                ,
+                requiresRandomID
+            );
             // writer.ExitLayout(Style);
         }
 
         // Renders the TextBox.
-        public virtual void RenderTextBox(WmlTextWriter writer, String id, String value, String format, String title, bool password, int size, int maxLength, bool generateRandomID) {
-            if (!writer.AnalyzeMode) {
-                // UNDONE: Handle rendersBreakBeforeWmlSelectAndInput, if this capability is still needed for Whidbey devices                
-                                
+        public virtual void RenderTextBox(
+            WmlTextWriter writer,
+            String id,
+            String value,
+            String format,
+            String title,
+            bool password,
+            int size,
+            int maxLength,
+            bool generateRandomID
+        )
+        {
+            if (!writer.AnalyzeMode)
+            {
+                // UNDONE: Handle rendersBreakBeforeWmlSelectAndInput, if this capability is still needed for Whidbey devices
+
                 // VSWhidbey 147458.  Close any style tags.
                 writer.CloseCurrentStyleTags();
                 writer.WriteBeginTag("input");
                 // Map the client ID to a short name. See
                 // MapClientIDToShortName for details.
                 writer.WriteAttribute("name", writer.MapClientIDToShortName(id, generateRandomID));
-                if (password) {
+                if (password)
+                {
                     writer.WriteAttribute("type", "password");
                 }
-                if (!String.IsNullOrEmpty(format)) {
+                if (!String.IsNullOrEmpty(format))
+                {
                     writer.WriteAttribute("format", format);
                 }
-                if (!String.IsNullOrEmpty(title)) {
+                if (!String.IsNullOrEmpty(title))
+                {
                     writer.WriteAttribute("title", title, true);
                 }
-                if (size > 0) {
+                if (size > 0)
+                {
                     writer.WriteAttribute("size", size.ToString(CultureInfo.InvariantCulture));
                 }
-                if (maxLength > 0) {
-                    writer.WriteAttribute("maxlength", maxLength.ToString(CultureInfo.InvariantCulture));
+                if (maxLength > 0)
+                {
+                    writer.WriteAttribute(
+                        "maxlength",
+                        maxLength.ToString(CultureInfo.InvariantCulture)
+                    );
                 }
                 // We do not need a value attribute.  The Text value is populated by the client side var set in onenterforward.
                 writer.WriteLine(" />");
@@ -101,4 +147,3 @@ namespace System.Web.UI.WebControls.Adapters {
 }
 
 #endif
-

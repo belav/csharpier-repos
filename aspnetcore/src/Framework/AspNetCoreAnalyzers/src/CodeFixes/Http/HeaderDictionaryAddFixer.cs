@@ -21,19 +21,25 @@ using WellKnownType = WellKnownTypeData.WellKnownType;
 [ExportCodeFixProvider(LanguageNames.CSharp), Shared]
 public sealed class HeaderDictionaryAddFixer : CodeFixProvider
 {
-    public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(DiagnosticDescriptors.DoNotUseIHeaderDictionaryAdd.Id);
+    public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+        ImmutableArray.Create(DiagnosticDescriptors.DoNotUseIHeaderDictionaryAdd.Id);
 
-    public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
+    public sealed override FixAllProvider GetFixAllProvider() =>
+        WellKnownFixAllProviders.BatchFixer;
 
     public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
-        var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+        var root = await context
+            .Document.GetSyntaxRootAsync(context.CancellationToken)
+            .ConfigureAwait(false);
         if (root == null)
         {
             return;
         }
 
-        var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+        var semanticModel = await context
+            .Document.GetSemanticModelAsync(context.CancellationToken)
+            .ConfigureAwait(false);
         if (semanticModel == null)
         {
             return;
@@ -47,35 +53,78 @@ public sealed class HeaderDictionaryAddFixer : CodeFixProvider
             {
                 var appendTitle = "Use 'IHeaderDictionary.Append'";
                 context.RegisterCodeFix(
-                    CodeAction.Create(appendTitle,
-                        cancellationToken => ReplaceWithAppend(diagnostic, wellKnownTypes, root, context.Document, invocation),
-                        equivalenceKey: appendTitle),
-                    diagnostic);
+                    CodeAction.Create(
+                        appendTitle,
+                        cancellationToken =>
+                            ReplaceWithAppend(
+                                diagnostic,
+                                wellKnownTypes,
+                                root,
+                                context.Document,
+                                invocation
+                            ),
+                        equivalenceKey: appendTitle
+                    ),
+                    diagnostic
+                );
             }
 
             if (CanReplaceWithIndexer(diagnostic, root, out var assignment))
             {
                 var indexerTitle = "Use indexer";
                 context.RegisterCodeFix(
-                    CodeAction.Create(indexerTitle,
-                        cancellationToken => ReplaceWithIndexer(diagnostic, root, context.Document, assignment),
-                        equivalenceKey: indexerTitle),
-                    diagnostic);
+                    CodeAction.Create(
+                        indexerTitle,
+                        cancellationToken =>
+                            ReplaceWithIndexer(diagnostic, root, context.Document, assignment),
+                        equivalenceKey: indexerTitle
+                    ),
+                    diagnostic
+                );
             }
         }
     }
 
-    private static Task<Document> ReplaceWithAppend(Diagnostic diagnostic, WellKnownTypes wellKnownTypes, SyntaxNode root, Document document, InvocationExpressionSyntax invocation)
+    private static Task<Document> ReplaceWithAppend(
+        Diagnostic diagnostic,
+        WellKnownTypes wellKnownTypes,
+        SyntaxNode root,
+        Document document,
+        InvocationExpressionSyntax invocation
+    )
     {
-        var diagnosticTarget = root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
+        var diagnosticTarget = root.FindNode(
+            diagnostic.Location.SourceSpan,
+            getInnermostNodeForTie: true
+        );
 
-        var annotation = new SyntaxAnnotation("SymbolId", DocumentationCommentId.CreateReferenceId(wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_HeaderDictionaryExtensions)));
+        var annotation = new SyntaxAnnotation(
+            "SymbolId",
+            DocumentationCommentId.CreateReferenceId(
+                wellKnownTypes.Get(
+                    WellKnownType.Microsoft_AspNetCore_Http_HeaderDictionaryExtensions
+                )
+            )
+        );
 
-        return Task.FromResult(document.WithSyntaxRoot(
-            root.ReplaceNode(diagnosticTarget, invocation.WithAdditionalAnnotations(Simplifier.AddImportsAnnotation, annotation))));
+        return Task.FromResult(
+            document.WithSyntaxRoot(
+                root.ReplaceNode(
+                    diagnosticTarget,
+                    invocation.WithAdditionalAnnotations(
+                        Simplifier.AddImportsAnnotation,
+                        annotation
+                    )
+                )
+            )
+        );
     }
 
-    private static bool CanReplaceWithAppend(Diagnostic diagnostic, SyntaxNode root, [NotNullWhen(true)] out InvocationExpressionSyntax? invocation)
+    private static bool CanReplaceWithAppend(
+        Diagnostic diagnostic,
+        SyntaxNode root,
+        [NotNullWhen(true)] out InvocationExpressionSyntax? invocation
+    )
     {
         invocation = null;
 
@@ -84,11 +133,22 @@ public sealed class HeaderDictionaryAddFixer : CodeFixProvider
             return false;
         }
 
-        var diagnosticTarget = root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
+        var diagnosticTarget = root.FindNode(
+            diagnostic.Location.SourceSpan,
+            getInnermostNodeForTie: true
+        );
 
-        if (diagnosticTarget is InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax { Name.Identifier: { } identifierToken } } invocationExpression)
+        if (
+            diagnosticTarget is InvocationExpressionSyntax
+            {
+                Expression: MemberAccessExpressionSyntax { Name.Identifier: { } identifierToken }
+            } invocationExpression
+        )
         {
-            invocation = invocationExpression.ReplaceToken(identifierToken, SyntaxFactory.Identifier("Append"));
+            invocation = invocationExpression.ReplaceToken(
+                identifierToken,
+                SyntaxFactory.Identifier("Append")
+            );
 
             return true;
         }
@@ -96,14 +156,28 @@ public sealed class HeaderDictionaryAddFixer : CodeFixProvider
         return false;
     }
 
-    private static Task<Document> ReplaceWithIndexer(Diagnostic diagnostic, SyntaxNode root, Document document, AssignmentExpressionSyntax assignment)
+    private static Task<Document> ReplaceWithIndexer(
+        Diagnostic diagnostic,
+        SyntaxNode root,
+        Document document,
+        AssignmentExpressionSyntax assignment
+    )
     {
-        var diagnosticTarget = root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
+        var diagnosticTarget = root.FindNode(
+            diagnostic.Location.SourceSpan,
+            getInnermostNodeForTie: true
+        );
 
-        return Task.FromResult(document.WithSyntaxRoot(root.ReplaceNode(diagnosticTarget, assignment)));
+        return Task.FromResult(
+            document.WithSyntaxRoot(root.ReplaceNode(diagnosticTarget, assignment))
+        );
     }
 
-    private static bool CanReplaceWithIndexer(Diagnostic diagnostic, SyntaxNode root, [NotNullWhen(true)] out AssignmentExpressionSyntax? assignment)
+    private static bool CanReplaceWithIndexer(
+        Diagnostic diagnostic,
+        SyntaxNode root,
+        [NotNullWhen(true)] out AssignmentExpressionSyntax? assignment
+    )
     {
         assignment = null;
 
@@ -112,22 +186,29 @@ public sealed class HeaderDictionaryAddFixer : CodeFixProvider
             return false;
         }
 
-        var diagnosticTarget = root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
+        var diagnosticTarget = root.FindNode(
+            diagnostic.Location.SourceSpan,
+            getInnermostNodeForTie: true
+        );
 
-        if (diagnosticTarget is InvocationExpressionSyntax
+        if (
+            diagnosticTarget is InvocationExpressionSyntax
             {
                 Expression: MemberAccessExpressionSyntax memberAccessExpression,
                 ArgumentList.Arguments: { Count: 2 } arguments
-            })
+            }
+        )
         {
-            assignment =
-                SyntaxFactory.AssignmentExpression(
-                    SyntaxKind.SimpleAssignmentExpression,
-                    SyntaxFactory.ElementAccessExpression(
-                        memberAccessExpression.Expression,
-                        SyntaxFactory.BracketedArgumentList(
-                            SyntaxFactory.SeparatedList(new[] { arguments[0] }))),
-                    arguments[1].Expression);
+            assignment = SyntaxFactory.AssignmentExpression(
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxFactory.ElementAccessExpression(
+                    memberAccessExpression.Expression,
+                    SyntaxFactory.BracketedArgumentList(
+                        SyntaxFactory.SeparatedList(new[] { arguments[0] })
+                    )
+                ),
+                arguments[1].Expression
+            );
 
             return true;
         }

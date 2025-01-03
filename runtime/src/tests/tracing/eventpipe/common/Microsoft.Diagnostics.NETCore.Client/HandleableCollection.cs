@@ -21,10 +21,15 @@ namespace Microsoft.Diagnostics.NETCore.Client
         /// <summary>
         /// Accepts the first item it encounters and requests that the item is removed from the collection.
         /// </summary>
-        private static readonly Handler DefaultHandler = (T item, out bool removeItem) => { removeItem = true; return true; };
+        private static readonly Handler DefaultHandler = (T item, out bool removeItem) =>
+        {
+            removeItem = true;
+            return true;
+        };
 
         private readonly List<T> _items = new List<T>();
-        private readonly List<Tuple<TaskCompletionSource<T>, Handler>> _handlers = new List<Tuple<TaskCompletionSource<T>, Handler>>();
+        private readonly List<Tuple<TaskCompletionSource<T>, Handler>> _handlers =
+            new List<Tuple<TaskCompletionSource<T>, Handler>>();
 
         private bool _disposed = false;
 
@@ -83,7 +88,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
             foreach (Tuple<TaskCompletionSource<T>, Handler> tuple in _handlers)
             {
-                tuple.Item1.TrySetException(new ObjectDisposedException(nameof(HandleableCollection<T>)));
+                tuple.Item1.TrySetException(
+                    new ObjectDisposedException(nameof(HandleableCollection<T>))
+                );
             }
             _handlers.Clear();
         }
@@ -142,7 +149,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
             var completionSource = new TaskCompletionSource<T>();
             using var _ = cancellation.Token.Register(
-                () => completionSource.TrySetException(new TimeoutException()));
+                () => completionSource.TrySetException(new TimeoutException())
+            );
 
             RunOrQueueHandler(handler, completionSource);
 
@@ -173,7 +181,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
         /// <returns>A task that completes with the item on which the handler completes.</returns>
         public async Task<T> HandleAsync(Handler handler, CancellationToken token)
         {
-            var completionSource = new TaskCompletionSource<T>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var completionSource = new TaskCompletionSource<T>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             using var _ = token.Register(() => completionSource.TrySetCanceled(token));
 
             RunOrQueueHandler(handler, completionSource);
@@ -210,7 +220,12 @@ namespace Microsoft.Diagnostics.NETCore.Client
             }
         }
 
-        private static bool TryHandler(in T item, Handler handler, TaskCompletionSource<T> completionSource, out bool removeItem)
+        private static bool TryHandler(
+            in T item,
+            Handler handler,
+            TaskCompletionSource<T> completionSource,
+            out bool removeItem
+        )
         {
             removeItem = false;
             if (completionSource.Task.IsCompleted)
@@ -272,8 +287,6 @@ namespace Microsoft.Diagnostics.NETCore.Client
             }
         }
 
-        protected virtual void OnHandlerBegin()
-        {
-        }
+        protected virtual void OnHandlerBegin() { }
     }
 }

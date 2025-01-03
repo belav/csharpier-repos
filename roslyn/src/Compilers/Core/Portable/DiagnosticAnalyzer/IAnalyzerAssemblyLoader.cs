@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// Handles loading analyzer assemblies and their dependencies.
-    /// 
+    ///
     /// Before an analyzer assembly is loaded with <see cref="LoadFromPath(string)"/>,
     /// its location and the location of all of its dependencies must first be specified
     /// by calls to <see cref="AddDependencyLocation(string)"/>.
@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis
         /// corresponding <see cref="Assembly"/> object.
         /// </summary>
         /// <remarks>
-        /// Multiple calls with the same path should return the same 
+        /// Multiple calls with the same path should return the same
         /// <see cref="Assembly"/> instance.
         /// </remarks>
         /// <exception cref="ArgumentNullException"><paramref name="fullPath" /> is null.</exception>

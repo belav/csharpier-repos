@@ -57,7 +57,10 @@ public static class JSObjectReferenceJsonWorker
     /// </summary>
     /// <param name="writer">The <see cref="Utf8JsonWriter"/>.</param>
     /// <param name="objectReference">The <see cref="JSObjectReference"/> to write.</param>
-    public static void WriteJSObjectReference(Utf8JsonWriter writer, JSObjectReference objectReference)
+    public static void WriteJSObjectReference(
+        Utf8JsonWriter writer,
+        JSObjectReference objectReference
+    )
     {
         writer.WriteStartObject();
         writer.WriteNumber(JSObjectIdKey, objectReference.Id);

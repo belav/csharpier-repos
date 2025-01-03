@@ -26,15 +26,27 @@ public class LocalMemoryStream : MemoryStream
         return ms;
     }
 
-    public void SetCanRead(bool CanRead) { _canRead = CanRead; }
+    public void SetCanRead(bool CanRead)
+    {
+        _canRead = CanRead;
+    }
+
     private bool? _canRead = null;
     public override bool CanRead => _canRead ?? base.CanRead;
 
-    public void SetCanWrite(bool CanWrite) { _canWrite = CanWrite; }
+    public void SetCanWrite(bool CanWrite)
+    {
+        _canWrite = CanWrite;
+    }
+
     private bool? _canWrite = null;
     public override bool CanWrite => _canWrite ?? base.CanWrite;
 
-    public void SetCanSeek(bool CanSeek) { _canSeek = CanSeek; }
+    public void SetCanSeek(bool CanSeek)
+    {
+        _canSeek = CanSeek;
+    }
+
     private bool? _canSeek = null;
     public override bool CanSeek => _canSeek ?? base.CanSeek;
 }

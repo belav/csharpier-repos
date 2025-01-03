@@ -29,7 +29,8 @@ namespace Grpc.Shared.Server;
 /// <typeparam name="TService">Service type for this method.</typeparam>
 /// <typeparam name="TRequest">Request message type for this method.</typeparam>
 /// <typeparam name="TResponse">Response message type for this method.</typeparam>
-internal sealed class UnaryServerMethodInvoker<TService, TRequest, TResponse> : ServerMethodInvokerBase<TService, TRequest, TResponse>
+internal sealed class UnaryServerMethodInvoker<TService, TRequest, TResponse>
+    : ServerMethodInvokerBase<TService, TRequest, TResponse>
     where TRequest : class
     where TResponse : class
     where TService : class
@@ -48,24 +49,32 @@ internal sealed class UnaryServerMethodInvoker<TService, TRequest, TResponse> : 
         UnaryServerMethod<TService, TRequest, TResponse> invoker,
         Method<TRequest, TResponse> method,
         MethodOptions options,
-        IGrpcServiceActivator<TService> serviceActivator)
+        IGrpcServiceActivator<TService> serviceActivator
+    )
         : base(method, options, serviceActivator)
     {
         _invoker = invoker;
 
         if (Options.HasInterceptors)
         {
-            var interceptorPipeline = new InterceptorPipelineBuilder<TRequest, TResponse>(Options.Interceptors);
+            var interceptorPipeline = new InterceptorPipelineBuilder<TRequest, TResponse>(
+                Options.Interceptors
+            );
             _pipelineInvoker = interceptorPipeline.UnaryPipeline(ResolvedInterceptorInvoker);
         }
     }
 
-    private async Task<TResponse> ResolvedInterceptorInvoker(TRequest resolvedRequest, ServerCallContext resolvedContext)
+    private async Task<TResponse> ResolvedInterceptorInvoker(
+        TRequest resolvedRequest,
+        ServerCallContext resolvedContext
+    )
     {
         GrpcActivatorHandle<TService> serviceHandle = default;
         try
         {
-            serviceHandle = ServiceActivator.Create(resolvedContext.GetHttpContext().RequestServices);
+            serviceHandle = ServiceActivator.Create(
+                resolvedContext.GetHttpContext().RequestServices
+            );
             return await _invoker(serviceHandle.Instance, resolvedRequest, resolvedContext);
         }
         finally
@@ -85,7 +94,11 @@ internal sealed class UnaryServerMethodInvoker<TService, TRequest, TResponse> : 
     /// <param name="request">The <typeparamref name="TRequest"/> message.</param>
     /// <returns>A <see cref="Task{TResponse}"/> that represents the asynchronous method. The <see cref="Task{TResponse}.Result"/>
     /// property returns the <typeparamref name="TResponse"/> message.</returns>
-    public async Task<TResponse> Invoke(HttpContext httpContext, ServerCallContext serverCallContext, TRequest request)
+    public async Task<TResponse> Invoke(
+        HttpContext httpContext,
+        ServerCallContext serverCallContext,
+        TRequest request
+    )
     {
         if (_pipelineInvoker == null)
         {
@@ -93,10 +106,7 @@ internal sealed class UnaryServerMethodInvoker<TService, TRequest, TResponse> : 
             try
             {
                 serviceHandle = ServiceActivator.Create(httpContext.RequestServices);
-                return await _invoker(
-                    serviceHandle.Instance,
-                    request,
-                    serverCallContext);
+                return await _invoker(serviceHandle.Instance, request, serverCallContext);
             }
             finally
             {
@@ -108,9 +118,7 @@ internal sealed class UnaryServerMethodInvoker<TService, TRequest, TResponse> : 
         }
         else
         {
-            return await _pipelineInvoker(
-                request,
-                serverCallContext);
+            return await _pipelineInvoker(request, serverCallContext);
         }
     }
 }

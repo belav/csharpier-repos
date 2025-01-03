@@ -1,22 +1,22 @@
 //------------------------------------------------------------------------------
 // <copyright file="ControlAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
-using System.Globalization;
-using System.IO;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.Mobile;
-using RootMobile = System.Web.Mobile;
-using System.Web.UI.MobileControls;
 using System.Collections;
 using System.Collections.Specialized;
-using System.Text;
+using System.Globalization;
+using System.IO;
 using System.Security.Permissions;
+using System.Text;
+using System.Web;
+using System.Web.Mobile;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.MobileControls;
+using RootMobile = System.Web.Mobile;
 
 // We don't recompile this base class in the shipped source samples, as it
 // accesses some internal functionality and is a core utility (rather than an
@@ -25,97 +25,101 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls.Adapters
 {
-
     /*
      * ControlAdapter base class.
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public abstract class ControlAdapter : IControlAdapter
     {
-        private static readonly String[] LabelIDs = new String[] {
-                                                RootMobile.SR.ControlAdapter_BackLabel,
-                                                RootMobile.SR.ControlAdapter_GoLabel,
-                                                RootMobile.SR.ControlAdapter_OKLabel,
-                                                RootMobile.SR.ControlAdapter_MoreLabel,
-                                                RootMobile.SR.ControlAdapter_OptionsLabel,
-                                                RootMobile.SR.ControlAdapter_NextLabel,
-                                                RootMobile.SR.ControlAdapter_PreviousLabel,
-                                                RootMobile.SR.ControlAdapter_LinkLabel,
-                                                RootMobile.SR.ControlAdapter_PhoneCallLabel
-                                           };
+        private static readonly String[] LabelIDs = new String[]
+        {
+            RootMobile.SR.ControlAdapter_BackLabel,
+            RootMobile.SR.ControlAdapter_GoLabel,
+            RootMobile.SR.ControlAdapter_OKLabel,
+            RootMobile.SR.ControlAdapter_MoreLabel,
+            RootMobile.SR.ControlAdapter_OptionsLabel,
+            RootMobile.SR.ControlAdapter_NextLabel,
+            RootMobile.SR.ControlAdapter_PreviousLabel,
+            RootMobile.SR.ControlAdapter_LinkLabel,
+            RootMobile.SR.ControlAdapter_PhoneCallLabel,
+        };
 
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.BackLabel"]/*' />
-        protected static readonly int BackLabel     = 0;
+        protected static readonly int BackLabel = 0;
+
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.GoLabel"]/*' />
-        protected static readonly int GoLabel       = 1;
+        protected static readonly int GoLabel = 1;
+
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.OKLabel"]/*' />
-        protected static readonly int OKLabel       = 2;
+        protected static readonly int OKLabel = 2;
+
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.MoreLabel"]/*' />
-        protected static readonly int MoreLabel     = 3;
+        protected static readonly int MoreLabel = 3;
+
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.OptionsLabel"]/*' />
-        protected static readonly int OptionsLabel  = 4;
+        protected static readonly int OptionsLabel = 4;
+
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.NextLabel"]/*' />
-        protected static readonly int NextLabel     = 5;
+        protected static readonly int NextLabel = 5;
+
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.PreviousLabel"]/*' />
         protected static readonly int PreviousLabel = 6;
+
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.LinkLabel"]/*' />
-        protected static readonly int LinkLabel     = 7;
+        protected static readonly int LinkLabel = 7;
+
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.CallLabel"]/*' />
-        protected static readonly int CallLabel     = 8;
+        protected static readonly int CallLabel = 8;
 
         private MobileControl _control;
 
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.Control"]/*' />
         public MobileControl Control
         {
-            get
-            {
-                return _control;
-            }
-            set
-            {
-                _control = value;
-            }
+            get { return _control; }
+            set { _control = value; }
         }
 
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.Page"]/*' />
         public virtual MobilePage Page
         {
-            get
-            {
-                return Control.MobilePage;
-            }
+            get { return Control.MobilePage; }
             set
             {
                 // Do not expect to be called directly.  Subclasses should
                 // override this when needed.
-                throw new Exception(
-                    SR.GetString(
-                        SR.ControlAdapterBasePagePropertyShouldNotBeSet));
+                throw new Exception(SR.GetString(SR.ControlAdapterBasePagePropertyShouldNotBeSet));
             }
         }
 
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.Device"]/*' />
         public virtual MobileCapabilities Device
         {
-            get
-            {
-                return (MobileCapabilities)Page.Request.Browser;
-            }
+            get { return (MobileCapabilities)Page.Request.Browser; }
         }
 
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.OnInit"]/*' />
-        public virtual void OnInit(EventArgs e){}
+        public virtual void OnInit(EventArgs e) { }
+
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.OnLoad"]/*' />
-        public virtual void OnLoad(EventArgs e){}
+        public virtual void OnLoad(EventArgs e) { }
+
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.OnPreRender"]/*' />
-        public virtual void OnPreRender(EventArgs e){}
-        
+        public virtual void OnPreRender(EventArgs e) { }
+
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.Render"]/*' />
         public virtual void Render(HtmlTextWriter writer)
         {
@@ -123,7 +127,7 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.OnUnload"]/*' />
-        public virtual void OnUnload(EventArgs e){}
+        public virtual void OnUnload(EventArgs e) { }
 
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.HandlePostBackEvent"]/*' />
         public virtual bool HandlePostBackEvent(String eventArgument)
@@ -132,25 +136,25 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         // By default, always return false, so the control itself will handle
-        // it. 
+        // it.
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.LoadPostData"]/*' />
-        public virtual bool LoadPostData(String key,
-                                         NameValueCollection data,
-                                         Object controlPrivateData,
-                                         out bool dataChanged)
+        public virtual bool LoadPostData(
+            String key,
+            NameValueCollection data,
+            Object controlPrivateData,
+            out bool dataChanged
+        )
         {
             dataChanged = false;
             return false;
         }
 
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.LoadAdapterState"]/*' />
-        public virtual void LoadAdapterState(Object state)
-        {
-        }
+        public virtual void LoadAdapterState(Object state) { }
 
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.SaveAdapterState"]/*' />
         public virtual Object SaveAdapterState()
-        { 
+        {
             return null;
         }
 
@@ -166,10 +170,7 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.Style"]/*' />
         public Style Style
         {
-            get
-            {
-                return Control.Style;
-            }
+            get { return Control.Style; }
         }
 
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.RenderChildren"]/*' />
@@ -187,19 +188,13 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.VisibleWeight"]/*' />
         public virtual int VisibleWeight
         {
-            get
-            {
-                return ControlPager.UseDefaultWeight;
-            }
+            get { return ControlPager.UseDefaultWeight; }
         }
 
         /// <include file='doc\ControlAdapter.uex' path='docs/doc[@for="ControlAdapter.ItemWeight"]/*' />
         public virtual int ItemWeight
         {
-            get
-            {
-                return ControlPager.UseDefaultWeight;
-            }
+            get { return ControlPager.UseDefaultWeight; }
         }
 
         // The following method is used by PageAdapter subclasses of
@@ -220,7 +215,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
             // Pull OptimumPageWeight from the web.config parameter of the same
             // name, when present.
-            String pageWeight = Device[Constants.OptimumPageWeightParameter]; 
+            String pageWeight = Device[Constants.OptimumPageWeightParameter];
 
             if (pageWeight != null)
             {
@@ -268,8 +263,11 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             if ((labelID < 0) || (labelID >= LabelIDs.Length))
             {
-                throw new ArgumentException(System.Web.Mobile.SR.GetString(
-                                                System.Web.Mobile.SR.ControlAdapter_InvalidDefaultLabel));
+                throw new ArgumentException(
+                    System.Web.Mobile.SR.GetString(
+                        System.Web.Mobile.SR.ControlAdapter_InvalidDefaultLabel
+                    )
+                );
             }
 
             MobilePage page = Page;
@@ -297,11 +295,13 @@ namespace System.Web.UI.MobileControls.Adapters
         }
     }
 
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class EmptyControlAdapter : ControlAdapter {
-        internal EmptyControlAdapter() {}
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class EmptyControlAdapter : ControlAdapter
+    {
+        internal EmptyControlAdapter() { }
     }
-
 }
 
 #endif

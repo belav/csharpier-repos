@@ -22,6 +22,9 @@ public class NameAuthorizationRequirementTests
         var formattedValue = requirement.ToString();
 
         // Assert
-        Assert.Equal("NameAuthorizationRequirement:Requires a user identity with Name equal to Custom", formattedValue);
+        Assert.Equal(
+            "NameAuthorizationRequirement:Requires a user identity with Name equal to Custom",
+            formattedValue
+        );
     }
 }

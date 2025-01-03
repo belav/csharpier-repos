@@ -26,7 +26,7 @@ public class ListenOptionsTests
         var serviceProvider = new ServiceCollection().BuildServiceProvider();
         localhostListenOptions.KestrelServerOptions = new KestrelServerOptions
         {
-            ApplicationServices = serviceProvider
+            ApplicationServices = serviceProvider,
         };
         var middlewareRan = false;
         localhostListenOptions.Use(next =>
@@ -70,6 +70,9 @@ public class ListenOptionsTests
     {
         var listenOptions = new ListenOptions(new UriEndPoint(new Uri("http://127.0.0.1:5555")));
         Assert.IsType<UriEndPoint>(listenOptions.EndPoint);
-        Assert.Equal("http://127.0.0.1:5555/", ((UriEndPoint)listenOptions.EndPoint).Uri.ToString());
+        Assert.Equal(
+            "http://127.0.0.1:5555/",
+            ((UriEndPoint)listenOptions.EndPoint).Uri.ToString()
+        );
     }
 }

@@ -13,18 +13,15 @@ internal readonly struct ViewLocationCacheKey : IEquatable<ViewLocationCacheKey>
     /// </summary>
     /// <param name="viewName">The view name or path.</param>
     /// <param name="isMainPage">Determines if the page being found is the main page for an action.</param>
-    public ViewLocationCacheKey(
-        string viewName,
-        bool isMainPage)
+    public ViewLocationCacheKey(string viewName, bool isMainPage)
         : this(
-              viewName,
-              controllerName: null,
-              areaName: null,
-              pageName: null,
-              isMainPage: isMainPage,
-              values: null)
-    {
-    }
+            viewName,
+            controllerName: null,
+            areaName: null,
+            pageName: null,
+            isMainPage: isMainPage,
+            values: null
+        ) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ViewLocationCacheKey"/>.
@@ -41,7 +38,8 @@ internal readonly struct ViewLocationCacheKey : IEquatable<ViewLocationCacheKey>
         string? areaName,
         string? pageName,
         bool isMainPage,
-        IReadOnlyDictionary<string, string?>? values)
+        IReadOnlyDictionary<string, string?>? values
+    )
     {
         ViewName = viewName;
         ControllerName = controllerName;
@@ -84,11 +82,13 @@ internal readonly struct ViewLocationCacheKey : IEquatable<ViewLocationCacheKey>
     /// <inheritdoc />
     public bool Equals(ViewLocationCacheKey y)
     {
-        if (IsMainPage != y.IsMainPage ||
-            !string.Equals(ViewName, y.ViewName, StringComparison.Ordinal) ||
-            !string.Equals(ControllerName, y.ControllerName, StringComparison.Ordinal) ||
-            !string.Equals(AreaName, y.AreaName, StringComparison.Ordinal) ||
-            !string.Equals(PageName, y.PageName, StringComparison.Ordinal))
+        if (
+            IsMainPage != y.IsMainPage
+            || !string.Equals(ViewName, y.ViewName, StringComparison.Ordinal)
+            || !string.Equals(ControllerName, y.ControllerName, StringComparison.Ordinal)
+            || !string.Equals(AreaName, y.AreaName, StringComparison.Ordinal)
+            || !string.Equals(PageName, y.PageName, StringComparison.Ordinal)
+        )
         {
             return false;
         }
@@ -98,17 +98,21 @@ internal readonly struct ViewLocationCacheKey : IEquatable<ViewLocationCacheKey>
             return true;
         }
 
-        if (ViewLocationExpanderValues == null ||
-            y.ViewLocationExpanderValues == null ||
-            (ViewLocationExpanderValues.Count != y.ViewLocationExpanderValues.Count))
+        if (
+            ViewLocationExpanderValues == null
+            || y.ViewLocationExpanderValues == null
+            || (ViewLocationExpanderValues.Count != y.ViewLocationExpanderValues.Count)
+        )
         {
             return false;
         }
 
         foreach (var item in ViewLocationExpanderValues)
         {
-            if (!y.ViewLocationExpanderValues.TryGetValue(item.Key, out var yValue) ||
-                !string.Equals(item.Value, yValue, StringComparison.Ordinal))
+            if (
+                !y.ViewLocationExpanderValues.TryGetValue(item.Key, out var yValue)
+                || !string.Equals(item.Value, yValue, StringComparison.Ordinal)
+            )
             {
                 return false;
             }

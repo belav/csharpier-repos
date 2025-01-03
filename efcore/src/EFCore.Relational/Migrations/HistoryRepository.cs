@@ -57,8 +57,7 @@ public abstract class HistoryRepository : IHistoryRepository
     /// <summary>
     ///     A helper class for generation of SQL.
     /// </summary>
-    protected virtual ISqlGenerationHelper SqlGenerationHelper
-        => Dependencies.SqlGenerationHelper;
+    protected virtual ISqlGenerationHelper SqlGenerationHelper => Dependencies.SqlGenerationHelper;
 
     /// <summary>
     ///     THe history table name.
@@ -73,8 +72,8 @@ public abstract class HistoryRepository : IHistoryRepository
     /// <summary>
     ///     The name of the column that holds the Migration identifier.
     /// </summary>
-    protected virtual string MigrationIdColumnName
-        => _migrationIdColumnName ??= EnsureModel()
+    protected virtual string MigrationIdColumnName =>
+        _migrationIdColumnName ??= EnsureModel()
             .FindEntityType(typeof(HistoryRow))!
             .FindProperty(nameof(HistoryRow.MigrationId))!
             .GetColumnName();
@@ -89,15 +88,17 @@ public abstract class HistoryRepository : IHistoryRepository
             conventionSet.Remove(typeof(RelationalDbFunctionAttributeConvention));
 
             var modelBuilder = new ModelBuilder(conventionSet);
-            modelBuilder.Entity<HistoryRow>(
-                x =>
-                {
-                    ConfigureTable(x);
-                    x.ToTable(TableName, TableSchema);
-                });
+            modelBuilder.Entity<HistoryRow>(x =>
+            {
+                ConfigureTable(x);
+                x.ToTable(TableName, TableSchema);
+            });
 
             _model = Dependencies.ModelRuntimeInitializer.Initialize(
-                (IModel)modelBuilder.Model, designTime: true, validationLogger: null);
+                (IModel)modelBuilder.Model,
+                designTime: true,
+                validationLogger: null
+            );
         }
 
         return _model;
@@ -106,8 +107,8 @@ public abstract class HistoryRepository : IHistoryRepository
     /// <summary>
     ///     The name of the column that contains the Entity Framework product version.
     /// </summary>
-    protected virtual string ProductVersionColumnName
-        => _productVersionColumnName ??= EnsureModel()
+    protected virtual string ProductVersionColumnName =>
+        _productVersionColumnName ??= EnsureModel()
             .FindEntityType(typeof(HistoryRow))!
             .FindProperty(nameof(HistoryRow.ProductVersion))!
             .GetColumnName();
@@ -121,16 +122,22 @@ public abstract class HistoryRepository : IHistoryRepository
     ///     Checks whether or not the history table exists.
     /// </summary>
     /// <returns><see langword="true" /> if the table already exists, <see langword="false" /> otherwise.</returns>
-    public virtual bool Exists()
-        => Dependencies.DatabaseCreator.Exists()
-            && InterpretExistsResult(
-                Dependencies.RawSqlCommandBuilder.Build(ExistsSql).ExecuteScalar(
+    public virtual bool Exists() =>
+        Dependencies.DatabaseCreator.Exists()
+        && InterpretExistsResult(
+            Dependencies
+                .RawSqlCommandBuilder.Build(ExistsSql)
+                .ExecuteScalar(
                     new RelationalCommandParameterObject(
                         Dependencies.Connection,
                         null,
                         null,
                         Dependencies.CurrentContext.Context,
-                        Dependencies.CommandLogger, CommandSource.Migrations)));
+                        Dependencies.CommandLogger,
+                        CommandSource.Migrations
+                    )
+                )
+        );
 
     /// <summary>
     ///     Checks whether or not the history table exists.
@@ -141,17 +148,24 @@ public abstract class HistoryRepository : IHistoryRepository
     ///     <see langword="true" /> if the table already exists, <see langword="false" /> otherwise.
     /// </returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual async Task<bool> ExistsAsync(CancellationToken cancellationToken = default)
-        => await Dependencies.DatabaseCreator.ExistsAsync(cancellationToken).ConfigureAwait(false)
-            && InterpretExistsResult(
-                await Dependencies.RawSqlCommandBuilder.Build(ExistsSql).ExecuteScalarAsync(
+    public virtual async Task<bool> ExistsAsync(CancellationToken cancellationToken = default) =>
+        await Dependencies.DatabaseCreator.ExistsAsync(cancellationToken).ConfigureAwait(false)
+        && InterpretExistsResult(
+            await Dependencies
+                .RawSqlCommandBuilder.Build(ExistsSql)
+                .ExecuteScalarAsync(
                     new RelationalCommandParameterObject(
                         Dependencies.Connection,
                         null,
                         null,
                         Dependencies.CurrentContext.Context,
-                        Dependencies.CommandLogger, CommandSource.Migrations),
-                    cancellationToken).ConfigureAwait(false));
+                        Dependencies.CommandLogger,
+                        CommandSource.Migrations
+                    ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false)
+        );
 
     /// <summary>
     ///     Interprets the result of executing <see cref="ExistsSql" />.
@@ -213,10 +227,18 @@ public abstract class HistoryRepository : IHistoryRepository
                     null,
                     null,
                     Dependencies.CurrentContext.Context,
-                    Dependencies.CommandLogger, CommandSource.Migrations));
+                    Dependencies.CommandLogger,
+                    CommandSource.Migrations
+                )
+            );
             while (reader.Read())
             {
-                rows.Add(new HistoryRow(reader.DbDataReader.GetString(0), reader.DbDataReader.GetString(1)));
+                rows.Add(
+                    new HistoryRow(
+                        reader.DbDataReader.GetString(0),
+                        reader.DbDataReader.GetString(1)
+                    )
+                );
             }
         }
 
@@ -233,7 +255,8 @@ public abstract class HistoryRepository : IHistoryRepository
     /// </returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public virtual async Task<IReadOnlyList<HistoryRow>> GetAppliedMigrationsAsync(
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var rows = new List<HistoryRow>();
 
@@ -241,20 +264,30 @@ public abstract class HistoryRepository : IHistoryRepository
         {
             var command = Dependencies.RawSqlCommandBuilder.Build(GetAppliedMigrationsSql);
 
-            var reader = await command.ExecuteReaderAsync(
-                new RelationalCommandParameterObject(
-                    Dependencies.Connection,
-                    null,
-                    null,
-                    Dependencies.CurrentContext.Context,
-                    Dependencies.CommandLogger, CommandSource.Migrations),
-                cancellationToken).ConfigureAwait(false);
+            var reader = await command
+                .ExecuteReaderAsync(
+                    new RelationalCommandParameterObject(
+                        Dependencies.Connection,
+                        null,
+                        null,
+                        Dependencies.CurrentContext.Context,
+                        Dependencies.CommandLogger,
+                        CommandSource.Migrations
+                    ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             await using var _ = reader.ConfigureAwait(false);
 
             while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
             {
-                rows.Add(new HistoryRow(reader.DbDataReader.GetString(0), reader.DbDataReader.GetString(1)));
+                rows.Add(
+                    new HistoryRow(
+                        reader.DbDataReader.GetString(0),
+                        reader.DbDataReader.GetString(1)
+                    )
+                );
             }
         }
 
@@ -264,8 +297,8 @@ public abstract class HistoryRepository : IHistoryRepository
     /// <summary>
     ///     Generates SQL to query for the migrations that have been applied.
     /// </summary>
-    protected virtual string GetAppliedMigrationsSql
-        => new StringBuilder()
+    protected virtual string GetAppliedMigrationsSql =>
+        new StringBuilder()
             .Append("SELECT ")
             .Append(SqlGenerationHelper.DelimitIdentifier(MigrationIdColumnName))
             .Append(", ")
@@ -286,7 +319,8 @@ public abstract class HistoryRepository : IHistoryRepository
     {
         var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
 
-        return new StringBuilder().Append("INSERT INTO ")
+        return new StringBuilder()
+            .Append("INSERT INTO ")
             .Append(SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema))
             .Append(" (")
             .Append(SqlGenerationHelper.DelimitIdentifier(MigrationIdColumnName))
@@ -311,7 +345,8 @@ public abstract class HistoryRepository : IHistoryRepository
     {
         var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
 
-        return new StringBuilder().Append("DELETE FROM ")
+        return new StringBuilder()
+            .Append("DELETE FROM ")
             .AppendLine(SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema))
             .Append("WHERE ")
             .Append(SqlGenerationHelper.DelimitIdentifier(MigrationIdColumnName))

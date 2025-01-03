@@ -22,15 +22,11 @@ internal sealed class HttpConnectionsEventSource : EventSource
     private long _currentConnections;
 
     internal HttpConnectionsEventSource()
-        : base("Microsoft.AspNetCore.Http.Connections")
-    {
-    }
+        : base("Microsoft.AspNetCore.Http.Connections") { }
 
     // Used for testing
     internal HttpConnectionsEventSource(string eventSourceName)
-        : base(eventSourceName, EventSourceSettings.EtwManifestEventFormat)
-    {
-    }
+        : base(eventSourceName, EventSourceSettings.EtwManifestEventFormat) { }
 
     // This has to go through NonEvent because only Primitive types are allowed
     // in function parameters for Events
@@ -85,19 +81,35 @@ internal sealed class HttpConnectionsEventSource : EventSource
             // This is the convention for initializing counters in the RuntimeEventSource (lazily on the first enable command).
             // They aren't disabled afterwards...
 
-            _connectionsStartedCounter ??= new PollingCounter("connections-started", this, () => Volatile.Read(ref _connectionsStarted))
+            _connectionsStartedCounter ??= new PollingCounter(
+                "connections-started",
+                this,
+                () => Volatile.Read(ref _connectionsStarted)
+            )
             {
                 DisplayName = "Total Connections Started",
             };
-            _connectionsStoppedCounter ??= new PollingCounter("connections-stopped", this, () => Volatile.Read(ref _connectionsStopped))
+            _connectionsStoppedCounter ??= new PollingCounter(
+                "connections-stopped",
+                this,
+                () => Volatile.Read(ref _connectionsStopped)
+            )
             {
                 DisplayName = "Total Connections Stopped",
             };
-            _connectionsTimedOutCounter ??= new PollingCounter("connections-timed-out", this, () => Volatile.Read(ref _connectionsTimedOut))
+            _connectionsTimedOutCounter ??= new PollingCounter(
+                "connections-timed-out",
+                this,
+                () => Volatile.Read(ref _connectionsTimedOut)
+            )
             {
                 DisplayName = "Total Connections Timed Out",
             };
-            _currentConnectionsCounter ??= new PollingCounter("current-connections", this, () => Volatile.Read(ref _currentConnections))
+            _currentConnectionsCounter ??= new PollingCounter(
+                "current-connections",
+                this,
+                () => Volatile.Read(ref _currentConnections)
+            )
             {
                 DisplayName = "Current Connections",
             };

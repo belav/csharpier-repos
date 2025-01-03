@@ -9,16 +9,13 @@ namespace System.ServiceModel.Discovery.VersionCD1
     [DataContract(Namespace = ProtocolStrings.VersionCD1.Namespace)]
     class ResolveMatchesCD1
     {
-        private ResolveMatchesCD1()
-        {
-        }
+        private ResolveMatchesCD1() { }
 
-        [DataMember(EmitDefaultValue = false, Name = ProtocolStrings.SchemaNames.ResolveMatchElement)]
-        public EndpointDiscoveryMetadataCD1 ResolveMatch
-        {
-            get;
-            private set;
-        }
+        [DataMember(
+            EmitDefaultValue = false,
+            Name = ProtocolStrings.SchemaNames.ResolveMatchElement
+        )]
+        public EndpointDiscoveryMetadataCD1 ResolveMatch { get; private set; }
 
         public static ResolveMatchesCD1 Create(EndpointDiscoveryMetadata endpointDiscoveryMetadata)
         {
@@ -26,7 +23,9 @@ namespace System.ServiceModel.Discovery.VersionCD1
             if (endpointDiscoveryMetadata != null)
             {
                 resolveMatches.ResolveMatch =
-                    EndpointDiscoveryMetadataCD1.FromEndpointDiscoveryMetadata(endpointDiscoveryMetadata);
+                    EndpointDiscoveryMetadataCD1.FromEndpointDiscoveryMetadata(
+                        endpointDiscoveryMetadata
+                    );
             }
 
             return resolveMatches;

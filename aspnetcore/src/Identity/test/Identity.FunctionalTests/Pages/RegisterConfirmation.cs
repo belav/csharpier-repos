@@ -12,10 +12,7 @@ public class RegisterConfirmation : DefaultUIPage
     private readonly IHtmlAnchorElement _confirmLink;
     public static readonly string Path = "/Identity/Account/RegisterConfirmation";
 
-    public RegisterConfirmation(
-        HttpClient client,
-        IHtmlDocument register,
-        DefaultUIContext context)
+    public RegisterConfirmation(HttpClient client, IHtmlDocument register, DefaultUIContext context)
         : base(client, register, context)
     {
         if (Context.HasRealEmailSender)

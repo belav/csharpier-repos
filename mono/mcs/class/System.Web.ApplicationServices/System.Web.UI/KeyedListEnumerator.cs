@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,55 +30,54 @@ using System.Collections;
 
 namespace System.Web.UI
 {
-	internal class KeyedListEnumerator : IDictionaryEnumerator
-	{
-		int index = -1;
-		ArrayList objs;
+    internal class KeyedListEnumerator : IDictionaryEnumerator
+    {
+        int index = -1;
+        ArrayList objs;
 
-		internal KeyedListEnumerator (ArrayList list)
-		{
-			objs = list;
-		}
+        internal KeyedListEnumerator(ArrayList list)
+        {
+            objs = list;
+        }
 
-		public bool MoveNext ()
-		{
-			index++;
-			if (index >= objs.Count)
-				return false;
+        public bool MoveNext()
+        {
+            index++;
+            if (index >= objs.Count)
+                return false;
 
-			return true;
-		}
+            return true;
+        }
 
-		public void Reset ()
-		{
-			index = -1;
-		}
+        public void Reset()
+        {
+            index = -1;
+        }
 
-		public object Current {
-			get {
-				if (index < 0 || index >= objs.Count)
-					throw new InvalidOperationException ();
+        public object Current
+        {
+            get
+            {
+                if (index < 0 || index >= objs.Count)
+                    throw new InvalidOperationException();
 
-				return ((DictionaryEntry)objs[index]).Value;
-			}
-		}
+                return ((DictionaryEntry)objs[index]).Value;
+            }
+        }
 
-		public DictionaryEntry Entry {
-			get {
-				return (DictionaryEntry) Current;
-			}
-		}
+        public DictionaryEntry Entry
+        {
+            get { return (DictionaryEntry)Current; }
+        }
 
-		public object Key {
-			get {
-				return Entry.Key;
-			}
-		}
+        public object Key
+        {
+            get { return Entry.Key; }
+        }
 
-		public object Value {
-			get {
-				return Entry.Value;
-			}
-		}
-	}
+        public object Value
+        {
+            get { return Entry.Value; }
+        }
+    }
 }

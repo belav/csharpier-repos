@@ -23,32 +23,48 @@ public class AuthenticationMiddlewareTests
     {
         using var host = new HostBuilder()
             .ConfigureWebHost(builder =>
-                builder.UseTestServer()
+                builder
+                    .UseTestServer()
                     .Configure(app =>
                     {
                         app.UseAuthentication();
                     })
-                    .ConfigureServices(services => services.AddAuthentication(o =>
-                    {
-                        o.AddScheme("Skip", s =>
+                    .ConfigureServices(services =>
+                        services.AddAuthentication(o =>
                         {
-                            s.HandlerType = typeof(SkipHandler);
-                        });
-                        // Won't get hit since CanHandleRequests is false
-                        o.AddScheme("throws", s =>
-                        {
-                            s.HandlerType = typeof(ThrowsHandler);
-                        });
-                        o.AddScheme("607", s =>
-                        {
-                            s.HandlerType = typeof(SixOhSevenHandler);
-                        });
-                        // Won't get run since 607 will finish
-                        o.AddScheme("305", s =>
-                        {
-                            s.HandlerType = typeof(ThreeOhFiveHandler);
-                        });
-                    })))
+                            o.AddScheme(
+                                "Skip",
+                                s =>
+                                {
+                                    s.HandlerType = typeof(SkipHandler);
+                                }
+                            );
+                            // Won't get hit since CanHandleRequests is false
+                            o.AddScheme(
+                                "throws",
+                                s =>
+                                {
+                                    s.HandlerType = typeof(ThrowsHandler);
+                                }
+                            );
+                            o.AddScheme(
+                                "607",
+                                s =>
+                                {
+                                    s.HandlerType = typeof(SixOhSevenHandler);
+                                }
+                            );
+                            // Won't get run since 607 will finish
+                            o.AddScheme(
+                                "305",
+                                s =>
+                                {
+                                    s.HandlerType = typeof(ThreeOhFiveHandler);
+                                }
+                            );
+                        })
+                    )
+            )
             .Build();
 
         await host.StartAsync();
@@ -61,12 +77,27 @@ public class AuthenticationMiddlewareTests
     public async Task IAuthenticateResultFeature_SetOnSuccessfulAuthenticate()
     {
         var authenticationService = new Mock<IAuthenticationService>();
-        authenticationService.Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
-            .Returns(Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(new ClaimsPrincipal(), "custom"))));
+        authenticationService
+            .Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
+            .Returns(
+                Task.FromResult(
+                    AuthenticateResult.Success(
+                        new AuthenticationTicket(new ClaimsPrincipal(), "custom")
+                    )
+                )
+            );
         var schemeProvider = new Mock<IAuthenticationSchemeProvider>();
-        schemeProvider.Setup(p => p.GetDefaultAuthenticateSchemeAsync())
-            .Returns(Task.FromResult(new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))));
-        var middleware = new AuthenticationMiddleware(c => Task.CompletedTask, schemeProvider.Object);
+        schemeProvider
+            .Setup(p => p.GetDefaultAuthenticateSchemeAsync())
+            .Returns(
+                Task.FromResult(
+                    new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))
+                )
+            );
+        var middleware = new AuthenticationMiddleware(
+            c => Task.CompletedTask,
+            schemeProvider.Object
+        );
         var context = GetHttpContext(authenticationService: authenticationService.Object);
 
         // Act
@@ -84,12 +115,21 @@ public class AuthenticationMiddlewareTests
     public async Task IAuthenticateResultFeature_NotSetOnUnsuccessfulAuthenticate()
     {
         var authenticationService = new Mock<IAuthenticationService>();
-        authenticationService.Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
+        authenticationService
+            .Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
             .Returns(Task.FromResult(AuthenticateResult.Fail("not authenticated")));
         var schemeProvider = new Mock<IAuthenticationSchemeProvider>();
-        schemeProvider.Setup(p => p.GetDefaultAuthenticateSchemeAsync())
-            .Returns(Task.FromResult(new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))));
-        var middleware = new AuthenticationMiddleware(c => Task.CompletedTask, schemeProvider.Object);
+        schemeProvider
+            .Setup(p => p.GetDefaultAuthenticateSchemeAsync())
+            .Returns(
+                Task.FromResult(
+                    new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))
+                )
+            );
+        var middleware = new AuthenticationMiddleware(
+            c => Task.CompletedTask,
+            schemeProvider.Object
+        );
         var context = GetHttpContext(authenticationService: authenticationService.Object);
 
         // Act
@@ -104,12 +144,27 @@ public class AuthenticationMiddlewareTests
     public async Task IAuthenticateResultFeature_NullResultWhenUserSetAfter()
     {
         var authenticationService = new Mock<IAuthenticationService>();
-        authenticationService.Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
-            .Returns(Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(new ClaimsPrincipal(), "custom"))));
+        authenticationService
+            .Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
+            .Returns(
+                Task.FromResult(
+                    AuthenticateResult.Success(
+                        new AuthenticationTicket(new ClaimsPrincipal(), "custom")
+                    )
+                )
+            );
         var schemeProvider = new Mock<IAuthenticationSchemeProvider>();
-        schemeProvider.Setup(p => p.GetDefaultAuthenticateSchemeAsync())
-            .Returns(Task.FromResult(new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))));
-        var middleware = new AuthenticationMiddleware(c => Task.CompletedTask, schemeProvider.Object);
+        schemeProvider
+            .Setup(p => p.GetDefaultAuthenticateSchemeAsync())
+            .Returns(
+                Task.FromResult(
+                    new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))
+                )
+            );
+        var middleware = new AuthenticationMiddleware(
+            c => Task.CompletedTask,
+            schemeProvider.Object
+        );
         var context = GetHttpContext(authenticationService: authenticationService.Object);
 
         // Act
@@ -130,12 +185,27 @@ public class AuthenticationMiddlewareTests
     public async Task IAuthenticateResultFeature_SettingResultSetsUser()
     {
         var authenticationService = new Mock<IAuthenticationService>();
-        authenticationService.Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
-            .Returns(Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(new ClaimsPrincipal(), "custom"))));
+        authenticationService
+            .Setup(s => s.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
+            .Returns(
+                Task.FromResult(
+                    AuthenticateResult.Success(
+                        new AuthenticationTicket(new ClaimsPrincipal(), "custom")
+                    )
+                )
+            );
         var schemeProvider = new Mock<IAuthenticationSchemeProvider>();
-        schemeProvider.Setup(p => p.GetDefaultAuthenticateSchemeAsync())
-            .Returns(Task.FromResult(new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))));
-        var middleware = new AuthenticationMiddleware(c => Task.CompletedTask, schemeProvider.Object);
+        schemeProvider
+            .Setup(p => p.GetDefaultAuthenticateSchemeAsync())
+            .Returns(
+                Task.FromResult(
+                    new AuthenticationScheme("custom", "custom", typeof(JwtBearerHandler))
+                )
+            );
+        var middleware = new AuthenticationMiddleware(
+            c => Task.CompletedTask,
+            schemeProvider.Object
+        );
         var context = GetHttpContext(authenticationService: authenticationService.Object);
 
         // Act
@@ -157,11 +227,19 @@ public class AuthenticationMiddlewareTests
     public async Task WebApplicationBuilder_RegistersAuthenticationAndAuthorizationMiddlewares()
     {
         var builder = WebApplication.CreateBuilder();
-        builder.Configuration.AddInMemoryCollection(new[]
-        {
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:ValidIssuer", "SomeIssuer"),
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:ValidAudiences:0", "https://localhost:5001")
-        });
+        builder.Configuration.AddInMemoryCollection(
+            new[]
+            {
+                new KeyValuePair<string, string>(
+                    "Authentication:Schemes:Bearer:ValidIssuer",
+                    "SomeIssuer"
+                ),
+                new KeyValuePair<string, string>(
+                    "Authentication:Schemes:Bearer:ValidAudiences:0",
+                    "https://localhost:5001"
+                ),
+            }
+        );
         builder.Services.AddAuthorization();
         builder.Services.AddAuthentication().AddJwtBearer();
         await using var app = builder.Build();
@@ -176,9 +254,14 @@ public class AuthenticationMiddlewareTests
         Assert.True(app.Properties.ContainsKey("__AuthenticationMiddlewareSet"));
         Assert.True(app.Properties.ContainsKey("__AuthorizationMiddlewareSet"));
 
-        var options = app.Services.GetService<IOptionsMonitor<JwtBearerOptions>>().Get(JwtBearerDefaults.AuthenticationScheme);
+        var options = app
+            .Services.GetService<IOptionsMonitor<JwtBearerOptions>>()
+            .Get(JwtBearerDefaults.AuthenticationScheme);
         Assert.Equal(new[] { "SomeIssuer" }, options.TokenValidationParameters.ValidIssuers);
-        Assert.Equal(new[] { "https://localhost:5001" }, options.TokenValidationParameters.ValidAudiences);
+        Assert.Equal(
+            new[] { "https://localhost:5001" },
+            options.TokenValidationParameters.ValidAudiences
+        );
     }
 
     [Fact]
@@ -199,7 +282,8 @@ public class AuthenticationMiddlewareTests
 
     private HttpContext GetHttpContext(
         Action<IServiceCollection> registerServices = null,
-        IAuthenticationService authenticationService = null)
+        IAuthenticationService authenticationService = null
+    )
     {
         // ServiceProvider
         var serviceCollection = new ServiceCollection();
@@ -224,17 +308,20 @@ public class AuthenticationMiddlewareTests
 
     private class ThreeOhFiveHandler : StatusCodeHandler
     {
-        public ThreeOhFiveHandler() : base(305) { }
+        public ThreeOhFiveHandler()
+            : base(305) { }
     }
 
     private class SixOhSevenHandler : StatusCodeHandler
     {
-        public SixOhSevenHandler() : base(607) { }
+        public SixOhSevenHandler()
+            : base(607) { }
     }
 
     private class SevenOhSevenHandler : StatusCodeHandler
     {
-        public SevenOhSevenHandler() : base(707) { }
+        public SevenOhSevenHandler()
+            : base(707) { }
     }
 
     private class StatusCodeHandler : IAuthenticationRequestHandler

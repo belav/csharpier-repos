@@ -77,7 +77,8 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
         Expression<Func<TModel, TResult>> expression,
         string templateName,
         string htmlFieldName,
-        object additionalViewData);
+        object additionalViewData
+    );
 
     /// <summary>
     /// Returns the display name for the specified <paramref name="expression"/>.
@@ -96,7 +97,8 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
     /// <typeparam name="TResult">The type of the <paramref name="expression"/> result.</typeparam>
     /// <returns>A <see cref="string"/> containing the display name.</returns>
     string DisplayNameForInnerType<TModelItem, TResult>(
-        Expression<Func<TModelItem, TResult>> expression);
+        Expression<Func<TModelItem, TResult>> expression
+    );
 
     /// <summary>
     /// Returns the simple display text for the specified <paramref name="expression"/>.
@@ -143,7 +145,8 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
         Expression<Func<TModel, TResult>> expression,
         IEnumerable<SelectListItem> selectList,
         string optionLabel,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Returns HTML markup for the <paramref name="expression"/>, using an editor template, specified HTML field
@@ -177,7 +180,8 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
         Expression<Func<TModel, TResult>> expression,
         string templateName,
         string htmlFieldName,
-        object additionalViewData);
+        object additionalViewData
+    );
 
     /// <inheritdoc cref="IHtmlHelper.Encode(object)"/>
     new string Encode(object value);
@@ -207,7 +211,8 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
     /// </remarks>
     IHtmlContent HiddenFor<TResult>(
         Expression<Func<TModel, TResult>> expression,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Returns the HTML element Id for the specified <paramref name="expression"/>.
@@ -231,7 +236,8 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
     IHtmlContent LabelFor<TResult>(
         Expression<Func<TModel, TResult>> expression,
         string labelText,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Returns a multi-selection &lt;select&gt; element for the <paramref name="expression"/>. Adds
@@ -262,7 +268,8 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
     IHtmlContent ListBoxFor<TResult>(
         Expression<Func<TModel, TResult>> expression,
         IEnumerable<SelectListItem> selectList,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Returns the full HTML element name for the specified <paramref name="expression"/>. Uses
@@ -293,7 +300,8 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
     /// </remarks>
     IHtmlContent PasswordFor<TResult>(
         Expression<Func<TModel, TResult>> expression,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Returns an &lt;input&gt; element of type "radio" for the specified <paramref name="expression"/>.
@@ -327,7 +335,8 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
     IHtmlContent RadioButtonFor<TResult>(
         Expression<Func<TModel, TResult>> expression,
         object value,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <inheritdoc cref="IHtmlHelper.Raw(object)"/>
     new IHtmlContent Raw(object value);
@@ -360,7 +369,8 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
         Expression<Func<TModel, TResult>> expression,
         int rows,
         int columns,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Returns an &lt;input&gt; element of type "text" for the specified <paramref name="expression"/>. Adds a
@@ -389,7 +399,8 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
     IHtmlContent TextBoxFor<TResult>(
         Expression<Func<TModel, TResult>> expression,
         string format,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Returns the validation message if an error exists in the <see cref="ModelBinding.ModelStateDictionary"/>
@@ -418,7 +429,8 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
         Expression<Func<TModel, TResult>> expression,
         string message,
         object htmlAttributes,
-        string tag);
+        string tag
+    );
 
     /// <summary>
     /// Returns the formatted value for the specified <paramref name="expression"/>. Specifically, returns the
@@ -438,7 +450,5 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
     /// Converts the <paramref name="expression"/> result to a <see cref="string"/> directly if
     /// <paramref name="format"/> is <c>null</c> or empty.
     /// </remarks>
-    string ValueFor<TResult>(
-        Expression<Func<TModel, TResult>> expression,
-        string format);
+    string ValueFor<TResult>(Expression<Func<TModel, TResult>> expression, string format);
 }

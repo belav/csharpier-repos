@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Formatting
 {
     /// <summary>
-    /// this class maintain contextual information such as 
+    /// this class maintain contextual information such as
     /// indentation of current position, based token to follow in current position and etc.
     /// </summary>
     internal partial class FormattingContext
@@ -28,15 +28,33 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         // interval tree for inseparable regions (Span to indentation data)
         // due to dependencies, each region defined in the data can't be formatted independently.
-        private readonly ContextIntervalTree<RelativeIndentationData, FormattingContextIntervalIntrospector> _relativeIndentationTree;
+        private readonly ContextIntervalTree<
+            RelativeIndentationData,
+            FormattingContextIntervalIntrospector
+        > _relativeIndentationTree;
 
         // interval tree for each operations.
         // given a span in the tree, it returns data (indentation, anchor delta, etc) to be applied for the span
-        private readonly ContextIntervalTree<IndentationData, FormattingContextIntervalIntrospector> _indentationTree;
-        private readonly ContextIntervalTree<SuppressWrappingData, SuppressIntervalIntrospector> _suppressWrappingTree;
-        private readonly ContextIntervalTree<SuppressSpacingData, SuppressIntervalIntrospector> _suppressSpacingTree;
-        private readonly ContextIntervalTree<SuppressSpacingData, SuppressIntervalIntrospector> _suppressFormattingTree;
-        private readonly ContextIntervalTree<AnchorData, FormattingContextIntervalIntrospector> _anchorTree;
+        private readonly ContextIntervalTree<
+            IndentationData,
+            FormattingContextIntervalIntrospector
+        > _indentationTree;
+        private readonly ContextIntervalTree<
+            SuppressWrappingData,
+            SuppressIntervalIntrospector
+        > _suppressWrappingTree;
+        private readonly ContextIntervalTree<
+            SuppressSpacingData,
+            SuppressIntervalIntrospector
+        > _suppressSpacingTree;
+        private readonly ContextIntervalTree<
+            SuppressSpacingData,
+            SuppressIntervalIntrospector
+        > _suppressFormattingTree;
+        private readonly ContextIntervalTree<
+            AnchorData,
+            FormattingContextIntervalIntrospector
+        > _anchorTree;
 
         // anchor token to anchor data map.
         // unlike anchorTree that would return anchor data for given span in the tree, it will return
@@ -62,20 +80,39 @@ namespace Microsoft.CodeAnalysis.Formatting
             _engine = engine;
             _tokenStream = tokenStream;
 
-            _relativeIndentationTree = new ContextIntervalTree<RelativeIndentationData, FormattingContextIntervalIntrospector>(new FormattingContextIntervalIntrospector());
+            _relativeIndentationTree = new ContextIntervalTree<
+                RelativeIndentationData,
+                FormattingContextIntervalIntrospector
+            >(new FormattingContextIntervalIntrospector());
 
-            _indentationTree = new ContextIntervalTree<IndentationData, FormattingContextIntervalIntrospector>(new FormattingContextIntervalIntrospector());
-            _suppressWrappingTree = new ContextIntervalTree<SuppressWrappingData, SuppressIntervalIntrospector>(new SuppressIntervalIntrospector());
-            _suppressSpacingTree = new ContextIntervalTree<SuppressSpacingData, SuppressIntervalIntrospector>(new SuppressIntervalIntrospector());
-            _suppressFormattingTree = new ContextIntervalTree<SuppressSpacingData, SuppressIntervalIntrospector>(new SuppressIntervalIntrospector());
-            _anchorTree = new ContextIntervalTree<AnchorData, FormattingContextIntervalIntrospector>(new FormattingContextIntervalIntrospector());
+            _indentationTree = new ContextIntervalTree<
+                IndentationData,
+                FormattingContextIntervalIntrospector
+            >(new FormattingContextIntervalIntrospector());
+            _suppressWrappingTree = new ContextIntervalTree<
+                SuppressWrappingData,
+                SuppressIntervalIntrospector
+            >(new SuppressIntervalIntrospector());
+            _suppressSpacingTree = new ContextIntervalTree<
+                SuppressSpacingData,
+                SuppressIntervalIntrospector
+            >(new SuppressIntervalIntrospector());
+            _suppressFormattingTree = new ContextIntervalTree<
+                SuppressSpacingData,
+                SuppressIntervalIntrospector
+            >(new SuppressIntervalIntrospector());
+            _anchorTree = new ContextIntervalTree<
+                AnchorData,
+                FormattingContextIntervalIntrospector
+            >(new FormattingContextIntervalIntrospector());
         }
 
         public void Initialize(
             ChainedFormattingRules formattingRules,
             SyntaxToken startToken,
             SyntaxToken endToken,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var rootNode = this.TreeData.Root;
             if (_tokenStream.IsFormattingWholeDocument)
@@ -88,8 +125,15 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return;
             }
 
-            var initialContextFinder = new InitialContextFinder(_tokenStream, formattingRules, rootNode);
-            var (indentOperations, suppressOperations) = initialContextFinder.Do(startToken, endToken);
+            var initialContextFinder = new InitialContextFinder(
+                _tokenStream,
+                formattingRules,
+                rootNode
+            );
+            var (indentOperations, suppressOperations) = initialContextFinder.Do(
+                startToken,
+                endToken
+            );
 
             if (indentOperations != null)
             {
@@ -97,15 +141,18 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 var initialOperation = indentationOperations[0];
                 var baseIndentationFinder = new BottomUpBaseIndentationFinder(
-                                                formattingRules,
-                                                Options.TabSize,
-                                                Options.IndentationSize,
-                                                _tokenStream,
-                                                _engine.HeaderFacts);
+                    formattingRules,
+                    Options.TabSize,
+                    Options.IndentationSize,
+                    _tokenStream,
+                    _engine.HeaderFacts
+                );
                 var initialIndentation = baseIndentationFinder.GetIndentationOfCurrentPosition(
                     rootNode,
                     initialOperation,
-                    _tokenStream.GetCurrentColumn, cancellationToken);
+                    _tokenStream.GetCurrentColumn,
+                    cancellationToken
+                );
 
                 var data = new SimpleIndentationData(initialOperation.TextSpan, initialIndentation);
                 _indentationTree.AddIntervalInPlace(data);
@@ -120,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         public void AddIndentBlockOperations(
             List<IndentBlockOperation> operations,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(operations);
 
@@ -159,8 +207,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 // filter out operations whose position is before the base indentation
                 var operationSpan = operations[i].TextSpan;
 
-                if (operationSpan.Start < baseSpan.Start ||
-                    operationSpan.Contains(baseSpan))
+                if (operationSpan.Start < baseSpan.Start || operationSpan.Contains(baseSpan))
                 {
                     continue;
                 }
@@ -181,8 +228,7 @@ namespace Microsoft.CodeAnalysis.Formatting
             var intervalTreeSpan = operation.TextSpan;
 
             // don't add stuff if it is empty
-            if (intervalTreeSpan.IsEmpty ||
-                _indentationMap.Contains(intervalTreeSpan))
+            if (intervalTreeSpan.IsEmpty || _indentationMap.Contains(intervalTreeSpan))
             {
                 return;
             }
@@ -190,23 +236,54 @@ namespace Microsoft.CodeAnalysis.Formatting
             // relative indentation case where indentation depends on other token
             if (operation.IsRelativeIndentation)
             {
-                Func<FormattingContext, IndentBlockOperation, SyntaxToken> effectiveBaseTokenGetter = operation.Option.IsOn(IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine)
-                    ? static (self, operation) => self._tokenStream.FirstTokenOfBaseTokenLine(operation.BaseToken)
+                Func<
+                    FormattingContext,
+                    IndentBlockOperation,
+                    SyntaxToken
+                > effectiveBaseTokenGetter = operation.Option.IsOn(
+                    IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine
+                )
+                    ? static (self, operation) =>
+                        self._tokenStream.FirstTokenOfBaseTokenLine(operation.BaseToken)
                     : static (self, operation) => operation.BaseToken;
 
-                Func<FormattingContext, IndentBlockOperation, SyntaxToken, int> relativeIndentationDeltaGetter = static (self, operation, effectiveBaseToken) =>
+                Func<
+                    FormattingContext,
+                    IndentBlockOperation,
+                    SyntaxToken,
+                    int
+                > relativeIndentationDeltaGetter = static (self, operation, effectiveBaseToken) =>
                 {
-                    var baseIndentationDelta = operation.GetAdjustedIndentationDelta(self._engine.HeaderFacts, self.TreeData.Root, effectiveBaseToken);
+                    var baseIndentationDelta = operation.GetAdjustedIndentationDelta(
+                        self._engine.HeaderFacts,
+                        self.TreeData.Root,
+                        effectiveBaseToken
+                    );
                     return baseIndentationDelta * self.Options.IndentationSize;
                 };
 
                 // baseIndentation is calculated for the adjusted token if option is RelativeToFirstTokenOnBaseTokenLine
-                Func<FormattingContext, SyntaxToken, int> relativeIndentationBaseIndentationGetter =
-                    static (self, effectiveBaseToken) => self._tokenStream.GetCurrentColumn(effectiveBaseToken);
+                Func<
+                    FormattingContext,
+                    SyntaxToken,
+                    int
+                > relativeIndentationBaseIndentationGetter = static (self, effectiveBaseToken) =>
+                    self._tokenStream.GetCurrentColumn(effectiveBaseToken);
 
                 // set new indentation
-                var inseparableRegionStartingPosition = effectiveBaseTokenGetter(this, operation).FullSpan.Start;
-                var relativeIndentationData = new RelativeIndentationData(this, inseparableRegionStartingPosition, intervalTreeSpan, operation, effectiveBaseTokenGetter, relativeIndentationDeltaGetter, relativeIndentationBaseIndentationGetter);
+                var inseparableRegionStartingPosition = effectiveBaseTokenGetter(
+                    this,
+                    operation
+                ).FullSpan.Start;
+                var relativeIndentationData = new RelativeIndentationData(
+                    this,
+                    inseparableRegionStartingPosition,
+                    intervalTreeSpan,
+                    operation,
+                    effectiveBaseTokenGetter,
+                    relativeIndentationDeltaGetter,
+                    relativeIndentationBaseIndentationGetter
+                );
 
                 _indentationTree.AddIntervalInPlace(relativeIndentationData);
                 _relativeIndentationTree.AddIntervalInPlace(relativeIndentationData);
@@ -218,24 +295,41 @@ namespace Microsoft.CodeAnalysis.Formatting
             // absolute position case
             if (operation.Option.IsOn(IndentBlockOption.AbsolutePosition))
             {
-                _indentationTree.AddIntervalInPlace(new SimpleIndentationData(intervalTreeSpan, operation.IndentationDeltaOrPosition));
+                _indentationTree.AddIntervalInPlace(
+                    new SimpleIndentationData(
+                        intervalTreeSpan,
+                        operation.IndentationDeltaOrPosition
+                    )
+                );
                 _indentationMap.Add(intervalTreeSpan);
                 return;
             }
 
             // regular indentation case where indentation is based on its previous indentation
-            var indentationData = _indentationTree.GetSmallestContainingInterval(operation.TextSpan.Start, 0);
+            var indentationData = _indentationTree.GetSmallestContainingInterval(
+                operation.TextSpan.Start,
+                0
+            );
             if (indentationData == null)
             {
                 // no previous indentation
                 var indentation = operation.IndentationDeltaOrPosition * Options.IndentationSize;
-                _indentationTree.AddIntervalInPlace(new SimpleIndentationData(intervalTreeSpan, indentation));
+                _indentationTree.AddIntervalInPlace(
+                    new SimpleIndentationData(intervalTreeSpan, indentation)
+                );
                 _indentationMap.Add(intervalTreeSpan);
                 return;
             }
 
             // get indentation based on its previous indentation
-            if (indentationData is not AdjustedIndentationData { BaseIndentationData: var baseIndentationData, Adjustment: var totalAdjustment })
+            if (
+                indentationData
+                is not AdjustedIndentationData
+                {
+                    BaseIndentationData: var baseIndentationData,
+                    Adjustment: var totalAdjustment
+                }
+            )
             {
                 (baseIndentationData, totalAdjustment) = (indentationData, 0);
             }
@@ -247,13 +341,22 @@ namespace Microsoft.CodeAnalysis.Formatting
             {
                 derived = baseIndentationData.WithTextSpan(intervalTreeSpan);
             }
-            else if (baseIndentationData is SimpleIndentationData { Indentation: var baseIndentation })
+            else if (
+                baseIndentationData is SimpleIndentationData { Indentation: var baseIndentation }
+            )
             {
-                derived = new SimpleIndentationData(intervalTreeSpan, baseIndentation + totalAdjustment);
+                derived = new SimpleIndentationData(
+                    intervalTreeSpan,
+                    baseIndentation + totalAdjustment
+                );
             }
             else
             {
-                derived = new AdjustedIndentationData(intervalTreeSpan, baseIndentationData, totalAdjustment);
+                derived = new AdjustedIndentationData(
+                    intervalTreeSpan,
+                    baseIndentationData,
+                    totalAdjustment
+                );
             }
 
             // set new indentation
@@ -269,15 +372,23 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return;
             }
 
-            var onSameLine = _tokenStream.TwoTokensOriginallyOnSameLine(operation.StartToken, operation.EndToken);
+            var onSameLine = _tokenStream.TwoTokensOriginallyOnSameLine(
+                operation.StartToken,
+                operation.EndToken
+            );
             AddSuppressOperation(operation, onSameLine);
         }
 
         public void AddSuppressOperations(
             List<SuppressOperation> operations,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var valuePairs = new SegmentedArray<(SuppressOperation operation, bool shouldSuppress, bool onSameLine)>(operations.Count);
+            var valuePairs = new SegmentedArray<(
+                SuppressOperation operation,
+                bool shouldSuppress,
+                bool onSameLine
+            )>(operations.Count);
 
             // TODO: think about a way to figure out whether it is already suppressed and skip the expensive check below.
             for (var i = 0; i < operations.Count; i++)
@@ -286,16 +397,22 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 var operation = operations[i];
 
-                // if an operation contains elastic trivia itself and the operation is not marked to ignore the elastic trivia 
-                // ignore the operation 
-                if (operation.ContainsElasticTrivia(_tokenStream) && !operation.Option.IsOn(SuppressOption.IgnoreElasticWrapping))
+                // if an operation contains elastic trivia itself and the operation is not marked to ignore the elastic trivia
+                // ignore the operation
+                if (
+                    operation.ContainsElasticTrivia(_tokenStream)
+                    && !operation.Option.IsOn(SuppressOption.IgnoreElasticWrapping)
+                )
                 {
-                    // don't bother to calculate line alignment between tokens 
+                    // don't bother to calculate line alignment between tokens
                     valuePairs[i] = (operation, shouldSuppress: false, onSameLine: false);
                     continue;
                 }
 
-                var onSameLine = _tokenStream.TwoTokensOriginallyOnSameLine(operation.StartToken, operation.EndToken);
+                var onSameLine = _tokenStream.TwoTokensOriginallyOnSameLine(
+                    operation.StartToken,
+                    operation.EndToken
+                );
                 valuePairs[i] = (operation, shouldSuppress: true, onSameLine);
             }
 
@@ -317,24 +434,31 @@ namespace Microsoft.CodeAnalysis.Formatting
             AddWrappingSuppressOperation(operation, onSameLine);
         }
 
-        private void AddSpacingSuppressOperation(SuppressOperation operation, bool twoTokensOnSameLine)
+        private void AddSpacingSuppressOperation(
+            SuppressOperation operation,
+            bool twoTokensOnSameLine
+        )
         {
             // don't add stuff if it is empty
-            if (operation == null ||
-                operation.TextSpan.IsEmpty)
+            if (operation == null || operation.TextSpan.IsEmpty)
             {
                 return;
             }
 
             // we might need to merge bits with enclosing suppress flag
             var option = operation.Option;
-            if (!option.IsMaskOn(SuppressOption.NoSpacing) || _suppressSpacingMap.Contains(operation.TextSpan))
+            if (
+                !option.IsMaskOn(SuppressOption.NoSpacing)
+                || _suppressSpacingMap.Contains(operation.TextSpan)
+            )
             {
                 return;
             }
 
-            if (!(option.IsOn(SuppressOption.NoSpacingIfOnSingleLine) && twoTokensOnSameLine) &&
-                !(option.IsOn(SuppressOption.NoSpacingIfOnMultipleLine) && !twoTokensOnSameLine))
+            if (
+                !(option.IsOn(SuppressOption.NoSpacingIfOnSingleLine) && twoTokensOnSameLine)
+                && !(option.IsOn(SuppressOption.NoSpacingIfOnMultipleLine) && !twoTokensOnSameLine)
+            )
             {
                 return;
             }
@@ -348,15 +472,17 @@ namespace Microsoft.CodeAnalysis.Formatting
         private void AddFormattingSuppressOperation(SuppressOperation operation)
         {
             // don't add stuff if it is empty
-            if (operation == null ||
-                operation.TextSpan.IsEmpty)
+            if (operation == null || operation.TextSpan.IsEmpty)
             {
                 return;
             }
 
             // we might need to merge bits with enclosing suppress flag
             var option = operation.Option;
-            if (!option.IsOn(SuppressOption.DisableFormatting) || _suppressFormattingMap.Contains(operation.TextSpan))
+            if (
+                !option.IsOn(SuppressOption.DisableFormatting)
+                || _suppressFormattingMap.Contains(operation.TextSpan)
+            )
             {
                 return;
             }
@@ -367,29 +493,37 @@ namespace Microsoft.CodeAnalysis.Formatting
             _suppressFormattingTree.AddIntervalInPlace(data);
         }
 
-        private void AddWrappingSuppressOperation(SuppressOperation operation, bool twoTokensOnSameLine)
+        private void AddWrappingSuppressOperation(
+            SuppressOperation operation,
+            bool twoTokensOnSameLine
+        )
         {
             // don't add stuff if it is empty
-            if (operation == null ||
-                operation.TextSpan.IsEmpty)
+            if (operation == null || operation.TextSpan.IsEmpty)
             {
                 return;
             }
 
             var option = operation.Option;
-            if (!option.IsMaskOn(SuppressOption.NoWrapping) || _suppressWrappingMap.Contains(operation.TextSpan))
+            if (
+                !option.IsMaskOn(SuppressOption.NoWrapping)
+                || _suppressWrappingMap.Contains(operation.TextSpan)
+            )
             {
                 return;
             }
 
-            if (!(option.IsOn(SuppressOption.NoWrappingIfOnSingleLine) && twoTokensOnSameLine) &&
-                !(option.IsOn(SuppressOption.NoWrappingIfOnMultipleLine) && !twoTokensOnSameLine))
+            if (
+                !(option.IsOn(SuppressOption.NoWrappingIfOnSingleLine) && twoTokensOnSameLine)
+                && !(option.IsOn(SuppressOption.NoWrappingIfOnMultipleLine) && !twoTokensOnSameLine)
+            )
             {
                 return;
             }
 
-            var ignoreElastic = option.IsMaskOn(SuppressOption.IgnoreElasticWrapping) ||
-                                !operation.ContainsElasticTrivia(_tokenStream);
+            var ignoreElastic =
+                option.IsMaskOn(SuppressOption.IgnoreElasticWrapping)
+                || !operation.ContainsElasticTrivia(_tokenStream);
 
             var data = new SuppressWrappingData(operation.TextSpan, ignoreElastic: ignoreElastic);
 
@@ -400,9 +534,11 @@ namespace Microsoft.CodeAnalysis.Formatting
         public void AddAnchorIndentationOperation(AnchorIndentationOperation operation)
         {
             // don't add stuff if it is empty
-            if (operation.TextSpan.IsEmpty ||
-                _anchorMap.Contains(operation.TextSpan) ||
-                _anchorBaseTokenMap.ContainsKey(operation.AnchorToken))
+            if (
+                operation.TextSpan.IsEmpty
+                || _anchorMap.Contains(operation.TextSpan)
+                || _anchorBaseTokenMap.ContainsKey(operation.AnchorToken)
+            )
             {
                 return;
             }
@@ -430,15 +566,17 @@ namespace Microsoft.CodeAnalysis.Formatting
         }
 
         [Conditional("DEBUG")]
-        private static void DebugCheckEmpty<T, TIntrospector>(ContextIntervalTree<T, TIntrospector> tree, TextSpan textSpan)
+        private static void DebugCheckEmpty<T, TIntrospector>(
+            ContextIntervalTree<T, TIntrospector> tree,
+            TextSpan textSpan
+        )
             where TIntrospector : struct, IIntervalIntrospector<T>
         {
             var intervals = tree.GetIntervalsThatContain(textSpan.Start, textSpan.Length);
             Contract.ThrowIfFalse(intervals.Length == 0);
         }
 
-        public int GetBaseIndentation(SyntaxToken token)
-            => GetBaseIndentation(token.SpanStart);
+        public int GetBaseIndentation(SyntaxToken token) => GetBaseIndentation(token.SpanStart);
 
         public int GetBaseIndentation(int position)
         {
@@ -452,10 +590,21 @@ namespace Microsoft.CodeAnalysis.Formatting
             return indentationData.Indentation;
         }
 
-        public IEnumerable<IndentBlockOperation> GetAllRelativeIndentBlockOperations()
-            => _relativeIndentationTree.GetIntervalsThatIntersectWith(this.TreeData.StartPosition, this.TreeData.EndPosition, new FormattingContextIntervalIntrospector()).Select(i => i.Operation);
+        public IEnumerable<IndentBlockOperation> GetAllRelativeIndentBlockOperations() =>
+            _relativeIndentationTree
+                .GetIntervalsThatIntersectWith(
+                    this.TreeData.StartPosition,
+                    this.TreeData.EndPosition,
+                    new FormattingContextIntervalIntrospector()
+                )
+                .Select(i => i.Operation);
 
-        public bool TryGetEndTokenForRelativeIndentationSpan(SyntaxToken token, int maxChainDepth, out SyntaxToken endToken, CancellationToken cancellationToken)
+        public bool TryGetEndTokenForRelativeIndentationSpan(
+            SyntaxToken token,
+            int maxChainDepth,
+            out SyntaxToken endToken,
+            CancellationToken cancellationToken
+        )
         {
             endToken = default;
 
@@ -470,7 +619,10 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
 
                 var span = token.Span;
-                var indentationData = _relativeIndentationTree.GetSmallestContainingInterval(span.Start, 0);
+                var indentationData = _relativeIndentationTree.GetSmallestContainingInterval(
+                    span.Start,
+                    0
+                );
                 if (indentationData == null)
                 {
                     // this means the given token is not inside of inseparable regions
@@ -526,7 +678,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             return anchorData.AnchorToken;
         }
 
-        public int GetDeltaFromPreviousChangesMap(SyntaxToken token, Dictionary<SyntaxToken, int> previousChangesMap)
+        public int GetDeltaFromPreviousChangesMap(
+            SyntaxToken token,
+            Dictionary<SyntaxToken, int> previousChangesMap
+        )
         {
             // no changes
             if (!previousChangesMap.TryGetValue(token, out var value))
@@ -544,12 +699,12 @@ namespace Microsoft.CodeAnalysis.Formatting
             //
             // var q = from c in cs
             //              where c > 1
-            //                          + 
+            //                          +
             //                            2;
             //
             // if alignment operation moves "where" to align with "from"
             // we want to move "+" and "2" along with it (anchor operation)
-            // 
+            //
             // below we are trying to figure out up to which token ("2" in the above example)
             // we should apply the anchor operation
             var baseAnchorData = FindAnchorSpanOnSameLineAfterToken(tokenData);
@@ -563,7 +718,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             // below, we will try to flat the overlapped anchor span, and find the last position (token) of that span
 
             // find other anchors overlapping with current anchor span
-            var anchorData = _anchorTree.GetIntervalsThatOverlapWith(baseAnchorData.TextSpan.Start, baseAnchorData.TextSpan.Length);
+            var anchorData = _anchorTree.GetIntervalsThatOverlapWith(
+                baseAnchorData.TextSpan.Start,
+                baseAnchorData.TextSpan.Length
+            );
 
             // among those anchors find the biggest end token
             var lastEndToken = baseAnchorData.EndToken;
@@ -601,8 +759,10 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 // tokenPairIndex is always 0 <= ... < TokenCount - 1
                 var tokenPairIndex = tokenData.IndexInStream;
-                if (_tokenStream.TokenCount - 1 <= tokenPairIndex ||
-                    _tokenStream.GetTriviaData(tokenPairIndex).SecondTokenIsFirstTokenOnLine)
+                if (
+                    _tokenStream.TokenCount - 1 <= tokenPairIndex
+                    || _tokenStream.GetTriviaData(tokenPairIndex).SecondTokenIsFirstTokenOnLine
+                )
                 {
                     return lastBaseAnchorData;
                 }
@@ -621,7 +781,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             // use edge exclusive version of GetSmallestContainingInterval
-            var data = _suppressWrappingTree.GetSmallestEdgeExclusivelyContainingInterval(textSpan.Start, textSpan.Length);
+            var data = _suppressWrappingTree.GetSmallestEdgeExclusivelyContainingInterval(
+                textSpan.Start,
+                textSpan.Length
+            );
             if (data == null)
             {
                 return false;
@@ -642,7 +805,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return true;
             }
 
-            // For spaces, never ignore elastic trivia because that can 
+            // For spaces, never ignore elastic trivia because that can
             // generate incorrect code
             if (containsElasticTrivia)
             {
@@ -650,7 +813,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             // use edge exclusive version of GetSmallestContainingInterval
-            var data = _suppressSpacingTree.GetSmallestEdgeExclusivelyContainingInterval(textSpan.Start, textSpan.Length);
+            var data = _suppressSpacingTree.GetSmallestEdgeExclusivelyContainingInterval(
+                textSpan.Start,
+                textSpan.Length
+            );
             if (data == null)
             {
                 return false;
@@ -666,13 +832,13 @@ namespace Microsoft.CodeAnalysis.Formatting
 
             var spanBetweenTwoTokens = TextSpan.FromBounds(token1.SpanStart, token2.Span.End);
 
-            // this version of SpacingSuppressed will be called after all basic space operations are done. 
+            // this version of SpacingSuppressed will be called after all basic space operations are done.
             // so no more elastic trivia should have left out
             return IsSpacingSuppressed(spanBetweenTwoTokens, containsElasticTrivia: false);
         }
 
-        public bool IsFormattingDisabled(TextSpan textSpan)
-            => _suppressFormattingTree.HasIntervalThatIntersectsWith(textSpan.Start, textSpan.Length);
+        public bool IsFormattingDisabled(TextSpan textSpan) =>
+            _suppressFormattingTree.HasIntervalThatIntersectsWith(textSpan.Start, textSpan.Length);
 
         public bool IsFormattingDisabled(int pairIndex)
         {

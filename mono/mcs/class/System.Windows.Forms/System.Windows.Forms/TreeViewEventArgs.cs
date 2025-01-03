@@ -22,30 +22,32 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
+    public class TreeViewEventArgs : EventArgs
+    {
+        private TreeNode node;
+        private TreeViewAction action;
 
-	public class TreeViewEventArgs : EventArgs {
+        public TreeViewEventArgs(TreeNode node)
+        {
+            this.node = node;
+        }
 
-		private TreeNode node;
-		private TreeViewAction action;
+        public TreeViewEventArgs(TreeNode node, TreeViewAction action)
+            : this(node)
+        {
+            this.action = action;
+        }
 
-		public TreeViewEventArgs (TreeNode node)
-		{
-			this.node = node;
-		}
+        public TreeViewAction Action
+        {
+            get { return action; }
+        }
 
-		public TreeViewEventArgs (TreeNode node, TreeViewAction action) : this (node)
-		{
-			this.action = action;
-		}
-
-		public TreeViewAction Action {
-			get { return action; }
-		}
-
-		public TreeNode Node {
-			get { return node; }
-		}
-	}
+        public TreeNode Node
+        {
+            get { return node; }
+        }
+    }
 }
-

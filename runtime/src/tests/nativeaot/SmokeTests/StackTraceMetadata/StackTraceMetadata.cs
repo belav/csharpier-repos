@@ -21,5 +21,4 @@ class Program
         bool actual = stackTrace.Contains(nameof(Main)) && stackTrace.Contains(nameof(Program));
         return expected == actual ? 100 : 1;
     }
-
 }

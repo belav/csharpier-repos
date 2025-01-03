@@ -25,7 +25,8 @@ public abstract class DependentKeyValueFactory<TKey>
     /// </summary>
     protected DependentKeyValueFactory(
         IForeignKey foreignKey,
-        IPrincipalKeyValueFactory<TKey> principalKeyValueFactory)
+        IPrincipalKeyValueFactory<TKey> principalKeyValueFactory
+    )
     {
         _foreignKey = foreignKey;
         _principalKeyValueFactory = principalKeyValueFactory;
@@ -45,7 +46,10 @@ public abstract class DependentKeyValueFactory<TKey>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public abstract bool TryCreateFromCurrentValues(IUpdateEntry entry, [NotNullWhen(true)] out TKey? key);
+    public abstract bool TryCreateFromCurrentValues(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out TKey? key
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -53,7 +57,10 @@ public abstract class DependentKeyValueFactory<TKey>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public abstract bool TryCreateFromOriginalValues(IUpdateEntry entry, [NotNullWhen(true)] out TKey? key);
+    public abstract bool TryCreateFromOriginalValues(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out TKey? key
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,13 +68,17 @@ public abstract class DependentKeyValueFactory<TKey>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object CreatePrincipalEquatableKey(IUpdateEntry entry, bool fromOriginalValues)
-        => new EquatableKeyValue<TKey>(
+    public virtual object CreatePrincipalEquatableKey(
+        IUpdateEntry entry,
+        bool fromOriginalValues
+    ) =>
+        new EquatableKeyValue<TKey>(
             _foreignKey,
             fromOriginalValues
                 ? _principalKeyValueFactory.CreateFromOriginalValues(entry)!
                 : _principalKeyValueFactory.CreateFromCurrentValues(entry)!,
-            EqualityComparer);
+            EqualityComparer
+        );
 
     /// <summary>
     ///     Creates an equatable key object from the foreign key values in the given entry.
@@ -75,8 +86,11 @@ public abstract class DependentKeyValueFactory<TKey>
     /// <param name="entry">The entry tracking an entity instance.</param>
     /// <param name="fromOriginalValues">Whether the original or current values should be used.</param>
     /// <returns>The key object.</returns>
-    public virtual object? CreateDependentEquatableKey(IUpdateEntry entry, bool fromOriginalValues)
-        => fromOriginalValues
+    public virtual object? CreateDependentEquatableKey(
+        IUpdateEntry entry,
+        bool fromOriginalValues
+    ) =>
+        fromOriginalValues
             ? TryCreateFromOriginalValues(entry, out var originalKeyValue)
                 ? new EquatableKeyValue<TKey>(_foreignKey, originalKeyValue, EqualityComparer)
                 : null

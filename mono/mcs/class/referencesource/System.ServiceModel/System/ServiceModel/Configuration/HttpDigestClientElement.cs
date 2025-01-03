@@ -5,21 +5,22 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel;
     using System.Configuration;
-    using System.ServiceModel.Security;
-    using System.ServiceModel.Channels;
-    using System.Xml;
-    using System.Security.Principal;
     using System.Security.Cryptography.X509Certificates;
+    using System.Security.Principal;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Security;
+    using System.Xml;
 
     public sealed partial class HttpDigestClientElement : ConfigurationElement
     {
-        public HttpDigestClientElement()
-        {
-        }
+        public HttpDigestClientElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.ImpersonationLevel, DefaultValue = WindowsClientCredential.DefaultImpersonationLevel)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ImpersonationLevel,
+            DefaultValue = WindowsClientCredential.DefaultImpersonationLevel
+        )]
         [ServiceModelEnumValidator(typeof(TokenImpersonationLevelHelper))]
         public TokenImpersonationLevel ImpersonationLevel
         {
@@ -31,7 +32,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (null == from)
             {
@@ -51,6 +54,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

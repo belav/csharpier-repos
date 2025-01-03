@@ -16,12 +16,17 @@ internal sealed class DictionaryJumpTable : JumpTable
     public DictionaryJumpTable(
         int defaultDestination,
         int exitDestination,
-        (string text, int destination)[] entries)
+        (string text, int destination)[] entries
+    )
     {
         _defaultDestination = defaultDestination;
         _exitDestination = exitDestination;
 
-        _dictionary = entries.ToFrozenDictionary(e => e.text, e => e.destination, StringComparer.OrdinalIgnoreCase);
+        _dictionary = entries.ToFrozenDictionary(
+            e => e.text,
+            e => e.destination,
+            StringComparer.OrdinalIgnoreCase
+        );
     }
 
     public override int GetDestination(string path, PathSegment segment)

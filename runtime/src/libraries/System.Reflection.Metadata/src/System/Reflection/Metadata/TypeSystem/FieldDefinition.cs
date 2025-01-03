@@ -76,9 +76,16 @@ namespace System.Reflection.Metadata
             }
         }
 
-        public TType DecodeSignature<TType, TGenericContext>(ISignatureTypeProvider<TType, TGenericContext> provider, TGenericContext genericContext)
+        public TType DecodeSignature<TType, TGenericContext>(
+            ISignatureTypeProvider<TType, TGenericContext> provider,
+            TGenericContext genericContext
+        )
         {
-            var decoder = new SignatureDecoder<TType, TGenericContext>(provider, _reader, genericContext);
+            var decoder = new SignatureDecoder<TType, TGenericContext>(
+                provider,
+                _reader,
+                genericContext
+            );
             var blob = _reader.GetBlobReader(Signature);
             return decoder.DecodeFieldSignature(ref blob);
         }
@@ -145,7 +152,7 @@ namespace System.Reflection.Metadata
             return new CustomAttributeHandleCollection(_reader, Handle);
         }
 
-#region Projections
+        #region Projections
 
         private StringHandle GetProjectedName()
         {
@@ -169,6 +176,6 @@ namespace System.Reflection.Metadata
         {
             return _reader.FieldTable.GetSignature(Handle);
         }
-#endregion
+        #endregion
     }
 }

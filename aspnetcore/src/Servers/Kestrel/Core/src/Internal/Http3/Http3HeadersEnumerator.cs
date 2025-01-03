@@ -14,8 +14,9 @@ internal sealed class Http3HeadersEnumerator : IEnumerator<KeyValuePair<string, 
     {
         Headers,
         Trailers,
-        Untyped
+        Untyped,
     }
+
     private HeadersType _headersType;
     private HttpResponseHeaders.Enumerator _headersEnumerator;
     private HttpResponseTrailers.Enumerator _trailersEnumerator;
@@ -24,9 +25,12 @@ internal sealed class Http3HeadersEnumerator : IEnumerator<KeyValuePair<string, 
     private bool _hasMultipleValues;
     private KnownHeaderType _knownHeaderType;
 
-    public Func<string, Encoding?> EncodingSelector { get; set; } = KestrelServerOptions.DefaultHeaderEncodingSelector;
+    public Func<string, Encoding?> EncodingSelector { get; set; } =
+        KestrelServerOptions.DefaultHeaderEncodingSelector;
 
-    public (int index, bool matchedValue) GetQPackStaticTableId() => HttpHeadersCompression.MatchKnownHeaderQPack(_knownHeaderType, Current.Value);
+    public (int index, bool matchedValue) GetQPackStaticTableId() =>
+        HttpHeadersCompression.MatchKnownHeaderQPack(_knownHeaderType, Current.Value);
+
     public KeyValuePair<string, string> Current { get; private set; }
     object IEnumerator.Current => Current;
 
@@ -77,19 +81,31 @@ internal sealed class Http3HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         if (_headersType == HeadersType.Headers)
         {
             return _headersEnumerator.MoveNext()
-                ? SetCurrent(_headersEnumerator.Current.Key, _headersEnumerator.Current.Value, _headersEnumerator.CurrentKnownType)
+                ? SetCurrent(
+                    _headersEnumerator.Current.Key,
+                    _headersEnumerator.Current.Value,
+                    _headersEnumerator.CurrentKnownType
+                )
                 : false;
         }
         else if (_headersType == HeadersType.Trailers)
         {
             return _trailersEnumerator.MoveNext()
-                ? SetCurrent(_trailersEnumerator.Current.Key, _trailersEnumerator.Current.Value, _trailersEnumerator.CurrentKnownType)
+                ? SetCurrent(
+                    _trailersEnumerator.Current.Key,
+                    _trailersEnumerator.Current.Value,
+                    _trailersEnumerator.CurrentKnownType
+                )
                 : false;
         }
         else
         {
             return _genericEnumerator!.MoveNext()
-                ? SetCurrent(_genericEnumerator.Current.Key, _genericEnumerator.Current.Value, default)
+                ? SetCurrent(
+                    _genericEnumerator.Current.Key,
+                    _genericEnumerator.Current.Value,
+                    default
+                )
                 : false;
         }
     }
@@ -99,7 +115,9 @@ internal sealed class Http3HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         var result = _stringValuesEnumerator.MoveNext();
 
         // Current is null only when result is false.
-        Current = result ? new KeyValuePair<string, string>(key, _stringValuesEnumerator.Current!) : default;
+        Current = result
+            ? new KeyValuePair<string, string>(key, _stringValuesEnumerator.Current!)
+            : default;
         return result;
     }
 
@@ -139,7 +157,5 @@ internal sealed class Http3HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         _knownHeaderType = default;
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }

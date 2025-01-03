@@ -10,9 +10,9 @@ using System.Text;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Primitives;
 using Moq;
 using Xunit;
@@ -26,14 +26,20 @@ public class HttpResponseHeadersTests
     {
         using (var memoryPool = PinnedBlockMemoryPoolFactory.Create())
         {
-            var options = new PipeOptions(memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+            var options = new PipeOptions(
+                memoryPool,
+                readerScheduler: PipeScheduler.Inline,
+                writerScheduler: PipeScheduler.Inline,
+                useSynchronizationContext: false
+            );
             var pair = DuplexPipe.CreateConnectionPair(options, options);
             var http1ConnectionContext = TestContextFactory.CreateHttpConnectionContext(
                 serviceContext: new TestServiceContext(),
                 connectionContext: Mock.Of<ConnectionContext>(),
                 transport: pair.Transport,
                 memoryPool: memoryPool,
-                connectionFeatures: new FeatureCollection());
+                connectionFeatures: new FeatureCollection()
+            );
 
             var http1Connection = new Http1Connection(http1ConnectionContext);
 
@@ -203,7 +209,9 @@ public class HttpResponseHeadersTests
 
         Assert.Throws<InvalidOperationException>(() =>
         {
-            ((IHeaderDictionary)responseHeaders)["Unknown"] = new StringValues(new[] { "valid", value });
+            ((IHeaderDictionary)responseHeaders)["Unknown"] = new StringValues(
+                new[] { "valid", value }
+            );
         });
 
         Assert.Throws<InvalidOperationException>(() =>
@@ -240,7 +248,9 @@ public class HttpResponseHeadersTests
 
         ((IHeaderDictionary)responseHeaders)["Unknown"] = value;
 
-        ((IHeaderDictionary)responseHeaders)["Unknown"] = new StringValues(new[] { "valid", value });
+        ((IHeaderDictionary)responseHeaders)["Unknown"] = new StringValues(
+            new[] { "valid", value }
+        );
 
         ((IDictionary<string, StringValues>)responseHeaders)["Unknown"] = value;
 
@@ -259,7 +269,9 @@ public class HttpResponseHeadersTests
         var headers = new HttpResponseHeaders();
         headers.SetReadOnly();
 
-        Assert.Throws<InvalidOperationException>(() => ((IDictionary<string, StringValues>)headers).Add("my-header", new[] { "value" }));
+        Assert.Throws<InvalidOperationException>(
+            () => ((IDictionary<string, StringValues>)headers).Add("my-header", new[] { "value" })
+        );
     }
 
     [Fact]
@@ -311,8 +323,13 @@ public class HttpResponseHeadersTests
         var headers = new HttpResponseHeaders();
         var dictionary = (IDictionary<string, StringValues>)headers;
 
-        var exception = Assert.Throws<InvalidOperationException>(() => dictionary.Add("Content-Length", new[] { contentLength }));
-        Assert.Equal(CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength), exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => dictionary.Add("Content-Length", new[] { contentLength })
+        );
+        Assert.Equal(
+            CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),
+            exception.Message
+        );
     }
 
     [Theory]
@@ -322,8 +339,13 @@ public class HttpResponseHeadersTests
         var headers = new HttpResponseHeaders();
         var dictionary = (IDictionary<string, StringValues>)headers;
 
-        var exception = Assert.Throws<InvalidOperationException>(() => ((IHeaderDictionary)headers)["Content-Length"] = contentLength);
-        Assert.Equal(CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength), exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => ((IHeaderDictionary)headers)["Content-Length"] = contentLength
+        );
+        Assert.Equal(
+            CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),
+            exception.Message
+        );
     }
 
     [Theory]
@@ -332,8 +354,13 @@ public class HttpResponseHeadersTests
     {
         var headers = new HttpResponseHeaders();
 
-        var exception = Assert.Throws<InvalidOperationException>(() => headers.HeaderContentLength = contentLength);
-        Assert.Equal(CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength), exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => headers.HeaderContentLength = contentLength
+        );
+        Assert.Equal(
+            CoreStrings.FormatInvalidContentLength_InvalidNumber(contentLength),
+            exception.Message
+        );
     }
 
     [Theory]
@@ -394,19 +421,25 @@ public class HttpResponseHeadersTests
 
     private static long ParseLong(string value)
     {
-        return long.Parse(value, NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite, CultureInfo.InvariantCulture);
+        return long.Parse(
+            value,
+            NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
+            CultureInfo.InvariantCulture
+        );
     }
 
-    public static TheoryData<string> GoodContentLengths => new TheoryData<string>
+    public static TheoryData<string> GoodContentLengths =>
+        new TheoryData<string>
         {
             "0",
             "00",
             "042",
             "42",
-            long.MaxValue.ToString(CultureInfo.InvariantCulture)
+            long.MaxValue.ToString(CultureInfo.InvariantCulture),
         };
 
-    public static TheoryData<string> BadContentLengths => new TheoryData<string>
+    public static TheoryData<string> BadContentLengths =>
+        new TheoryData<string>
         {
             "",
             " ",

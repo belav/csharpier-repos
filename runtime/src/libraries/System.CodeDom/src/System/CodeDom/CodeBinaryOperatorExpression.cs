@@ -7,7 +7,11 @@ namespace System.CodeDom
     {
         public CodeBinaryOperatorExpression() { }
 
-        public CodeBinaryOperatorExpression(CodeExpression left, CodeBinaryOperatorType op, CodeExpression right)
+        public CodeBinaryOperatorExpression(
+            CodeExpression left,
+            CodeBinaryOperatorType op,
+            CodeExpression right
+        )
         {
             Right = right;
             Operator = op;

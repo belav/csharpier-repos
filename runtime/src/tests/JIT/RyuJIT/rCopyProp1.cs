@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 //
-// This test is primarily for detecting bad reverse copy prop on 
-// newobj calls.   If the intended target has any interference with the sources 
+// This test is primarily for detecting bad reverse copy prop on
+// newobj calls.   If the intended target has any interference with the sources
 // of the newobj call, then you can't safely do the reverse copy prop.
 //
 // s = new S(ref s);
@@ -14,69 +14,86 @@
 
 using System;
 
-public struct  S {
+public struct S
+{
     public int a;
     public int b;
 
     // Straight forward constructor
-    public S(int a, int b) {
+    public S(int a, int b)
+    {
         this.a = a;
         this.b = b;
     }
+
     // Swapping constructor
-    public S(ref S s) {
+    public S(ref S s)
+    {
         this.a = s.b;
         this.b = s.a;
     }
+
     // Swapping constructor
-    public S(ref U u) {
+    public S(ref U u)
+    {
         this.a = u.s.b;
         this.b = u.s.a;
     }
+
     // Swapping constructor
-    public unsafe S(ref V v) {
-        this.a = v.sRef->b;
-        this.b = v.sRef->a;
-    }
-    // Swapping constructor
-    public unsafe S(V v) {
+    public unsafe S(ref V v)
+    {
         this.a = v.sRef->b;
         this.b = v.sRef->a;
     }
 
+    // Swapping constructor
+    public unsafe S(V v)
+    {
+        this.a = v.sRef->b;
+        this.b = v.sRef->a;
+    }
 }
 
-public struct T {
+public struct T
+{
     public S s;
 
     // Straight forward constructor
-    public T(int a, int b) {
+    public T(int a, int b)
+    {
         s = new S(a, b);
     }
 }
 
-public class U {
+public class U
+{
     public S s;
 
     // Straight forward constructor
-    public U(int a, int b) {
+    public U(int a, int b)
+    {
         s = new S(a, b);
     }
 }
 
-public unsafe struct V {
-    public S *sRef;
+public unsafe struct V
+{
+    public S* sRef;
 
     // Straight forward constructor
-    public unsafe V(S * sRef) {
+    public unsafe V(S* sRef)
+    {
         this.sRef = sRef;
     }
 }
 
-
-public class Bug {
+public class Bug
+{
     static S ss;
-    public static unsafe int Main() {
+
+    public static unsafe int Main()
+    {
         int fail = 0;
 
         S s = new S(1, 2);
@@ -122,4 +139,3 @@ public class Bug {
         }
     }
 }
-

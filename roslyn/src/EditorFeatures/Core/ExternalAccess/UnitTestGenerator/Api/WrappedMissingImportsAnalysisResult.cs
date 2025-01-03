@@ -7,7 +7,9 @@ using Microsoft.CodeAnalysis.AddMissingImports;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTestGenerator.Api;
 
-internal sealed class WrappedMissingImportsAnalysisResult(ImmutableArray<WrappedAddImportFixData> addImportFixDatas)
+internal sealed class WrappedMissingImportsAnalysisResult(
+    ImmutableArray<WrappedAddImportFixData> addImportFixDatas
+)
 {
     public ImmutableArray<WrappedAddImportFixData> AddImportFixDatas = addImportFixDatas;
 }

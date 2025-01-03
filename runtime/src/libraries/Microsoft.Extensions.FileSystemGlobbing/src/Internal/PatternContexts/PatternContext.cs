@@ -7,7 +7,8 @@ using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
 
 namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
 {
-    public abstract class PatternContext<TFrame> : IPatternContext where TFrame : struct
+    public abstract class PatternContext<TFrame> : IPatternContext
+        where TFrame : struct
     {
         private readonly Stack<TFrame> _stack = new();
         protected TFrame Frame;

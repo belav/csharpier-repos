@@ -16,7 +16,13 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.AddExplicitCast), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.AddExplicitCast
+        ),
+        Shared
+    ]
     internal sealed partial class CSharpAddExplicitCastCodeFixProvider
         : AbstractAddExplicitCastCodeFixProvider<ExpressionSyntax>
     {
@@ -34,24 +40,33 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
         private readonly AttributeArgumentFixer _attributeArgumentFixer;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public CSharpAddExplicitCastCodeFixProvider()
         {
             _argumentFixer = new ArgumentFixer();
             _attributeArgumentFixer = new AttributeArgumentFixer();
         }
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CS0266, CS1503);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(CS0266, CS1503);
 
-        protected override void GetPartsOfCastOrConversionExpression(ExpressionSyntax expression, out SyntaxNode type, out SyntaxNode castedExpression)
+        protected override void GetPartsOfCastOrConversionExpression(
+            ExpressionSyntax expression,
+            out SyntaxNode type,
+            out SyntaxNode castedExpression
+        )
         {
             var castExpression = (CastExpressionSyntax)expression;
             type = castExpression.Type;
             castedExpression = castExpression.Expression;
         }
 
-        protected override ExpressionSyntax Cast(ExpressionSyntax expression, ITypeSymbol type)
-            => expression.Cast(type);
+        protected override ExpressionSyntax Cast(ExpressionSyntax expression, ITypeSymbol type) =>
+            expression.Cast(type);
 
         protected override bool TryGetTargetTypeInfo(
             Document document,
@@ -60,15 +75,23 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
             string diagnosticId,
             ExpressionSyntax spanNode,
             CancellationToken cancellationToken,
-            out ImmutableArray<(ExpressionSyntax, ITypeSymbol)> potentialConversionTypes)
+            out ImmutableArray<(ExpressionSyntax, ITypeSymbol)> potentialConversionTypes
+        )
         {
             potentialConversionTypes = ImmutableArray<(ExpressionSyntax, ITypeSymbol)>.Empty;
-            using var _ = ArrayBuilder<(ExpressionSyntax, ITypeSymbol)>.GetInstance(out var mutablePotentialConversionTypes);
+            using var _ = ArrayBuilder<(ExpressionSyntax, ITypeSymbol)>.GetInstance(
+                out var mutablePotentialConversionTypes
+            );
 
             if (diagnosticId == CS0266)
             {
                 var inferenceService = document.GetRequiredLanguageService<ITypeInferenceService>();
-                var conversionType = inferenceService.InferType(semanticModel, spanNode, objectAsDefault: false, cancellationToken);
+                var conversionType = inferenceService.InferType(
+                    semanticModel,
+                    spanNode,
+                    objectAsDefault: false,
+                    cancellationToken
+                );
                 if (conversionType is null)
                     return false;
 
@@ -76,26 +99,54 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
             }
             else if (diagnosticId == CS1503)
             {
-                if (spanNode.GetAncestorOrThis<ArgumentSyntax>() is ArgumentSyntax targetArgument
+                if (
+                    spanNode.GetAncestorOrThis<ArgumentSyntax>() is ArgumentSyntax targetArgument
                     && targetArgument.Parent is ArgumentListSyntax argumentList
-                    && argumentList.Parent is SyntaxNode invocationNode)
+                    && argumentList.Parent is SyntaxNode invocationNode
+                )
                 {
                     // invocationNode could be Invocation Expression, Object Creation, Base Constructor...)
-                    mutablePotentialConversionTypes.AddRange(_argumentFixer.GetPotentialConversionTypes(
-                        document, semanticModel, root, targetArgument, argumentList, invocationNode, cancellationToken));
+                    mutablePotentialConversionTypes.AddRange(
+                        _argumentFixer.GetPotentialConversionTypes(
+                            document,
+                            semanticModel,
+                            root,
+                            targetArgument,
+                            argumentList,
+                            invocationNode,
+                            cancellationToken
+                        )
+                    );
                 }
-                else if (spanNode.GetAncestorOrThis<AttributeArgumentSyntax>() is AttributeArgumentSyntax targetAttributeArgument
-                    && targetAttributeArgument.Parent is AttributeArgumentListSyntax attributeArgumentList
-                    && attributeArgumentList.Parent is AttributeSyntax attributeNode)
+                else if (
+                    spanNode.GetAncestorOrThis<AttributeArgumentSyntax>()
+                        is AttributeArgumentSyntax targetAttributeArgument
+                    && targetAttributeArgument.Parent
+                        is AttributeArgumentListSyntax attributeArgumentList
+                    && attributeArgumentList.Parent is AttributeSyntax attributeNode
+                )
                 {
                     // attribute node
-                    mutablePotentialConversionTypes.AddRange(_attributeArgumentFixer.GetPotentialConversionTypes(
-                        document, semanticModel, root, targetAttributeArgument, attributeArgumentList, attributeNode, cancellationToken));
+                    mutablePotentialConversionTypes.AddRange(
+                        _attributeArgumentFixer.GetPotentialConversionTypes(
+                            document,
+                            semanticModel,
+                            root,
+                            targetAttributeArgument,
+                            attributeArgumentList,
+                            attributeNode,
+                            cancellationToken
+                        )
+                    );
                 }
             }
 
             // clear up duplicate types
-            potentialConversionTypes = FilterValidPotentialConversionTypes(document, semanticModel, mutablePotentialConversionTypes);
+            potentialConversionTypes = FilterValidPotentialConversionTypes(
+                document,
+                semanticModel,
+                mutablePotentialConversionTypes
+            );
             return !potentialConversionTypes.IsEmpty;
         }
     }

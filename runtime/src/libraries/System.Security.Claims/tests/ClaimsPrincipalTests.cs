@@ -32,8 +32,9 @@ namespace System.Security.Claims
         public void Ctor_IIdentity()
         {
             var id = new ClaimsIdentity(
-                       new List<Claim> { new Claim("claim_type", "claim_value") },
-                       "");
+                new List<Claim> { new Claim("claim_type", "claim_value") },
+                ""
+            );
             var cp = new ClaimsPrincipal(id);
 
             Assert.NotNull(cp.Identities);
@@ -45,7 +46,10 @@ namespace System.Security.Claims
 
             Assert.NotNull(cp.Claims);
             Assert.Equal(1, cp.Claims.Count());
-            Assert.Contains(cp.Claims, claim => claim.Type == "claim_type" && claim.Value == "claim_value");
+            Assert.Contains(
+                cp.Claims,
+                claim => claim.Type == "claim_type" && claim.Value == "claim_value"
+            );
         }
 
         [Fact]
@@ -63,15 +67,21 @@ namespace System.Security.Claims
 
             Assert.NotNull(cp.Claims);
             Assert.Equal(1, cp.Claims.Count());
-            Assert.Contains(cp.Claims, claim => claim.Type == ClaimsIdentity.DefaultNameClaimType && claim.Value == "NonClaimsIdentity_Name");
+            Assert.Contains(
+                cp.Claims,
+                claim =>
+                    claim.Type == ClaimsIdentity.DefaultNameClaimType
+                    && claim.Value == "NonClaimsIdentity_Name"
+            );
         }
 
         [Fact]
         public void Ctor_IPrincipal()
         {
             var baseId = new ClaimsIdentity(
-                           new List<Claim> { new Claim("claim_type", "claim_value") },
-                           "");
+                new List<Claim> { new Claim("claim_type", "claim_value") },
+                ""
+            );
             var basePrincipal = new ClaimsPrincipal();
             basePrincipal.AddIdentity(baseId);
 
@@ -86,7 +96,10 @@ namespace System.Security.Claims
 
             Assert.NotNull(cp.Claims);
             Assert.Equal(1, cp.Claims.Count());
-            Assert.Contains(cp.Claims, claim => claim.Type == "claim_type" && claim.Value == "claim_value");
+            Assert.Contains(
+                cp.Claims,
+                claim => claim.Type == "claim_type" && claim.Value == "claim_value"
+            );
         }
 
         [Fact]
@@ -105,7 +118,12 @@ namespace System.Security.Claims
 
             Assert.NotNull(cp.Claims);
             Assert.Equal(1, cp.Claims.Count());
-            Assert.Contains(cp.Claims, claim => claim.Type == ClaimsIdentity.DefaultNameClaimType && claim.Value == "NonClaimsIdentity_Name");
+            Assert.Contains(
+                cp.Claims,
+                claim =>
+                    claim.Type == ClaimsIdentity.DefaultNameClaimType
+                    && claim.Value == "NonClaimsIdentity_Name"
+            );
         }
 
         [Fact]
@@ -155,7 +173,12 @@ namespace System.Security.Claims
 
             Assert.Equal(baseId1, cp.Identity);
 
-            Assert.Contains(cp.Claims, claim => claim.Type == ClaimsIdentity.DefaultNameClaimType && claim.Value == "generic_name");
+            Assert.Contains(
+                cp.Claims,
+                claim =>
+                    claim.Type == ClaimsIdentity.DefaultNameClaimType
+                    && claim.Value == "generic_name"
+            );
 
             Assert.Equal(baseId2.Claims.First(), cp.Claims.First());
         }
@@ -187,8 +210,18 @@ namespace System.Security.Claims
 
             Assert.Equal(baseId1, cp.Identity);
 
-            Assert.Contains(cp.Claims, claim => claim.Type == ClaimsIdentity.DefaultNameClaimType && claim.Value == "generic_name2");
-            Assert.Contains(cp.Claims, claim => claim.Type == ClaimsIdentity.DefaultNameClaimType && claim.Value == "generic_name3");
+            Assert.Contains(
+                cp.Claims,
+                claim =>
+                    claim.Type == ClaimsIdentity.DefaultNameClaimType
+                    && claim.Value == "generic_name2"
+            );
+            Assert.Contains(
+                cp.Claims,
+                claim =>
+                    claim.Type == ClaimsIdentity.DefaultNameClaimType
+                    && claim.Value == "generic_name3"
+            );
 
             Assert.Equal(baseId2.Claims.First(), cp.Claims.First());
             Assert.Equal(baseId3.Claims.Last(), cp.Claims.Last());
@@ -197,49 +230,73 @@ namespace System.Security.Claims
         [Fact]
         public void Ctor_ArgumentValidation()
         {
-            AssertExtensions.Throws<ArgumentNullException>("identities", () => new ClaimsPrincipal((IEnumerable<ClaimsIdentity>)null));
-            AssertExtensions.Throws<ArgumentNullException>("identity", () => new ClaimsPrincipal((IIdentity)null));
-            AssertExtensions.Throws<ArgumentNullException>("principal", () => new ClaimsPrincipal((IPrincipal)null));
-            AssertExtensions.Throws<ArgumentNullException>("reader", () => new ClaimsPrincipal((BinaryReader)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "identities",
+                () => new ClaimsPrincipal((IEnumerable<ClaimsIdentity>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "identity",
+                () => new ClaimsPrincipal((IIdentity)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "principal",
+                () => new ClaimsPrincipal((IPrincipal)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "reader",
+                () => new ClaimsPrincipal((BinaryReader)null)
+            );
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void Current_FallsBackToThread_NoPrincipalPolicy()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                ClaimsPrincipal principal1 = new ClaimsPrincipal();
-                ClaimsPrincipal principal2 = new ClaimsPrincipal();
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    ClaimsPrincipal principal1 = new ClaimsPrincipal();
+                    ClaimsPrincipal principal2 = new ClaimsPrincipal();
 
-                Thread.CurrentPrincipal = principal1;
-                Assert.Same(principal1, ClaimsPrincipal.Current);
+                    Thread.CurrentPrincipal = principal1;
+                    Assert.Same(principal1, ClaimsPrincipal.Current);
 
-                Thread.CurrentPrincipal = principal2;
-                Assert.Same(principal2, ClaimsPrincipal.Current);
+                    Thread.CurrentPrincipal = principal2;
+                    Assert.Same(principal2, ClaimsPrincipal.Current);
 
-                NonClaimsIdentity id = new NonClaimsIdentity() { Name = "NonClaimsIdentity_Name" };
-                NonClaimsPrincipal nonClaimsPrincipal = new NonClaimsPrincipal() { Identity = id };
+                    NonClaimsIdentity id = new NonClaimsIdentity()
+                    {
+                        Name = "NonClaimsIdentity_Name",
+                    };
+                    NonClaimsPrincipal nonClaimsPrincipal = new NonClaimsPrincipal()
+                    {
+                        Identity = id,
+                    };
 
-                Thread.CurrentPrincipal = nonClaimsPrincipal;
+                    Thread.CurrentPrincipal = nonClaimsPrincipal;
 
-                ClaimsPrincipal current = ClaimsPrincipal.Current;
-                Assert.NotNull(current);
-                Assert.Equal("NonClaimsIdentity_Name", current.Identity.Name);
+                    ClaimsPrincipal current = ClaimsPrincipal.Current;
+                    Assert.NotNull(current);
+                    Assert.Equal("NonClaimsIdentity_Name", current.Identity.Name);
 
-                Thread.CurrentPrincipal = null;
-                Assert.Null(ClaimsPrincipal.Current);
-            }).Dispose();
+                    Thread.CurrentPrincipal = null;
+                    Assert.Null(ClaimsPrincipal.Current);
+                })
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void Current_FallsBackToThread_UnauthenticatedPrincipalPolicy()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.UnauthenticatedPrincipal);
-                Thread.CurrentPrincipal = null;
-                Assert.IsType<GenericPrincipal>(ClaimsPrincipal.Current);
-            }).Dispose();
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(
+                        PrincipalPolicy.UnauthenticatedPrincipal
+                    );
+                    Thread.CurrentPrincipal = null;
+                    Assert.IsType<GenericPrincipal>(ClaimsPrincipal.Current);
+                })
+                .Dispose();
         }
 
         private class NonClaimsPrincipal : IPrincipal

@@ -10,44 +10,54 @@ public class ComplexNavigationsCollectionsSharedTypeQueryInMemoryTest
 {
     public ComplexNavigationsCollectionsSharedTypeQueryInMemoryTest(
         ComplexNavigationsSharedTypeQueryInMemoryFixture fixture,
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;
     }
 
-    public override Task Final_GroupBy_property_entity_Include_collection(bool async)
-        => AssertTranslationFailedWithDetails(
+    public override Task Final_GroupBy_property_entity_Include_collection(bool async) =>
+        AssertTranslationFailedWithDetails(
             () => base.Final_GroupBy_property_entity_Include_collection(async),
-            InMemoryStrings.NonComposedGroupByNotSupported);
+            InMemoryStrings.NonComposedGroupByNotSupported
+        );
 
-    public override Task Final_GroupBy_property_entity_Include_collection_nested(bool async)
-        => AssertTranslationFailedWithDetails(
+    public override Task Final_GroupBy_property_entity_Include_collection_nested(bool async) =>
+        AssertTranslationFailedWithDetails(
             () => base.Final_GroupBy_property_entity_Include_collection_nested(async),
-            InMemoryStrings.NonComposedGroupByNotSupported);
+            InMemoryStrings.NonComposedGroupByNotSupported
+        );
 
-    public override Task Final_GroupBy_property_entity_Include_collection_reference(bool async)
-        => AssertTranslationFailedWithDetails(
+    public override Task Final_GroupBy_property_entity_Include_collection_reference(bool async) =>
+        AssertTranslationFailedWithDetails(
             () => base.Final_GroupBy_property_entity_Include_collection_reference(async),
-            InMemoryStrings.NonComposedGroupByNotSupported);
+            InMemoryStrings.NonComposedGroupByNotSupported
+        );
 
-    public override Task Final_GroupBy_property_entity_Include_collection_multiple(bool async)
-        => AssertTranslationFailedWithDetails(
+    public override Task Final_GroupBy_property_entity_Include_collection_multiple(bool async) =>
+        AssertTranslationFailedWithDetails(
             () => base.Final_GroupBy_property_entity_Include_collection_multiple(async),
-            InMemoryStrings.NonComposedGroupByNotSupported);
+            InMemoryStrings.NonComposedGroupByNotSupported
+        );
 
-    public override Task Final_GroupBy_property_entity_Include_collection_reference_same_level(bool async)
-        => AssertTranslationFailedWithDetails(
+    public override Task Final_GroupBy_property_entity_Include_collection_reference_same_level(
+        bool async
+    ) =>
+        AssertTranslationFailedWithDetails(
             () => base.Final_GroupBy_property_entity_Include_collection_reference_same_level(async),
-            InMemoryStrings.NonComposedGroupByNotSupported);
+            InMemoryStrings.NonComposedGroupByNotSupported
+        );
 
-    public override Task Final_GroupBy_property_entity_Include_reference(bool async)
-        => AssertTranslationFailedWithDetails(
+    public override Task Final_GroupBy_property_entity_Include_reference(bool async) =>
+        AssertTranslationFailedWithDetails(
             () => base.Final_GroupBy_property_entity_Include_reference(async),
-            InMemoryStrings.NonComposedGroupByNotSupported);
+            InMemoryStrings.NonComposedGroupByNotSupported
+        );
 
-    public override Task Final_GroupBy_property_entity_Include_reference_multiple(bool async)
-        => AssertTranslationFailedWithDetails(
+    public override Task Final_GroupBy_property_entity_Include_reference_multiple(bool async) =>
+        AssertTranslationFailedWithDetails(
             () => base.Final_GroupBy_property_entity_Include_reference_multiple(async),
-            InMemoryStrings.NonComposedGroupByNotSupported);
+            InMemoryStrings.NonComposedGroupByNotSupported
+        );
 }

@@ -10,8 +10,11 @@ namespace Microsoft.CodeAnalysis.LanguageService
 {
     internal static class SymbolDescriptionOptionsStorage
     {
-        public static SymbolDescriptionOptions GetSymbolDescriptionOptions(this IGlobalOptionService globalOptions, string language)
-            => new()
+        public static SymbolDescriptionOptions GetSymbolDescriptionOptions(
+            this IGlobalOptionService globalOptions,
+            string language
+        ) =>
+            new()
             {
                 QuickInfoOptions = globalOptions.GetQuickInfoOptions(language),
                 ClassificationOptions = globalOptions.GetClassificationOptions(language),

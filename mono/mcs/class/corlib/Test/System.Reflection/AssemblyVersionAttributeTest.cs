@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,86 +27,77 @@
 //
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Threading;
 using NUnit.Framework;
 
-namespace MonoTests.System.Reflection {
-
-	/// <summary>
-	/// Summary description for AssemblyVersionAttributeTest.
-	/// </summary>
-	[TestFixture]
-	public class AssemblyVersionAttributeTest
-	{
+namespace MonoTests.System.Reflection
+{
+    /// <summary>
+    /// Summary description for AssemblyVersionAttributeTest.
+    /// </summary>
+    [TestFixture]
+    public class AssemblyVersionAttributeTest
+    {
 #if !MOBILE
-		private AssemblyBuilder dynAssembly;
-		AssemblyName dynAsmName = new AssemblyName ();
-		AssemblyVersionAttribute attr;
-		
-		public AssemblyVersionAttributeTest ()
-		{
-			//create a dynamic assembly with the required attribute
-			//and check for the validity
+        private AssemblyBuilder dynAssembly;
+        AssemblyName dynAsmName = new AssemblyName();
+        AssemblyVersionAttribute attr;
 
-			dynAsmName.Name = "TestAssembly";
+        public AssemblyVersionAttributeTest()
+        {
+            //create a dynamic assembly with the required attribute
+            //and check for the validity
 
-			dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
-				dynAsmName,AssemblyBuilderAccess.Run
-				);
+            dynAsmName.Name = "TestAssembly";
 
-			// Set the required Attribute of the assembly.
-			Type attribute = typeof (AssemblyVersionAttribute);
-			ConstructorInfo ctrInfo = attribute.GetConstructor (
-				new Type [] { typeof (string) }
-				);
-			CustomAttributeBuilder attrBuilder =
-				new CustomAttributeBuilder (ctrInfo, new object [1] { "1.2.3.4" });
-			dynAssembly.SetCustomAttribute (attrBuilder);
-			object [] attributes = dynAssembly.GetCustomAttributes (true);
-			attr = attributes [0] as AssemblyVersionAttribute;
-		}
+            dynAssembly = Thread
+                .GetDomain()
+                .DefineDynamicAssembly(dynAsmName, AssemblyBuilderAccess.Run);
 
-		[Test]
-		public void VersionTest ()
-		{
-			Assert.AreEqual (
-				attr.Version,
-				"1.2.3.4", "#1");
-		}
+            // Set the required Attribute of the assembly.
+            Type attribute = typeof(AssemblyVersionAttribute);
+            ConstructorInfo ctrInfo = attribute.GetConstructor(new Type[] { typeof(string) });
+            CustomAttributeBuilder attrBuilder = new CustomAttributeBuilder(
+                ctrInfo,
+                new object[1] { "1.2.3.4" }
+            );
+            dynAssembly.SetCustomAttribute(attrBuilder);
+            object[] attributes = dynAssembly.GetCustomAttributes(true);
+            attr = attributes[0] as AssemblyVersionAttribute;
+        }
 
-		[Test]
-		public void TypeIdTest ()
-		{
-			Assert.AreEqual (
-				attr.TypeId,
-				typeof (AssemblyVersionAttribute), "#1"
-				);
-		}
+        [Test]
+        public void VersionTest()
+        {
+            Assert.AreEqual(attr.Version, "1.2.3.4", "#1");
+        }
 
-		[Test]
-		public void MatchTestForTrue ()
-		{
-			Assert.AreEqual (
-				attr.Match (attr),
-				true, "#1");
-		}
+        [Test]
+        public void TypeIdTest()
+        {
+            Assert.AreEqual(attr.TypeId, typeof(AssemblyVersionAttribute), "#1");
+        }
 
-		[Test]
-		public void MatchTestForFalse ()
-		{
-			Assert.AreEqual (
-				attr.Match (new AssemblyVersionAttribute ("2.0.0.0")),
-				false, "#1");
-		}
+        [Test]
+        public void MatchTestForTrue()
+        {
+            Assert.AreEqual(attr.Match(attr), true, "#1");
+        }
+
+        [Test]
+        public void MatchTestForFalse()
+        {
+            Assert.AreEqual(attr.Match(new AssemblyVersionAttribute("2.0.0.0")), false, "#1");
+        }
 #endif
-		[Test]
-		public void CtorTest ()
-		{
-			var a = new AssemblyVersionAttribute ("some text");
-			Assert.AreEqual ("some text", a.Version);
-		}
-	}
-}
 
+        [Test]
+        public void CtorTest()
+        {
+            var a = new AssemblyVersionAttribute("some text");
+            Assert.AreEqual("some text", a.Version);
+        }
+    }
+}

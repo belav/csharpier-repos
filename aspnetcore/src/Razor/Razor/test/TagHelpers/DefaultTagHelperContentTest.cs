@@ -235,12 +235,20 @@ public class DefaultTagHelperContentTest
         var tagHelperContent = new DefaultTagHelperContent();
 
         // Act
-        tagHelperContent.AppendFormat(CultureInfo.InvariantCulture, "{0} {1} {2} {3}!", "First", "Second", "Third", "Fourth");
+        tagHelperContent.AppendFormat(
+            CultureInfo.InvariantCulture,
+            "{0} {1} {2} {3}!",
+            "First",
+            "Second",
+            "Third",
+            "Fourth"
+        );
 
         // Assert
         Assert.Equal(
             "HtmlEncode[[First]] HtmlEncode[[Second]] HtmlEncode[[Third]] HtmlEncode[[Fourth]]!",
-            tagHelperContent.GetContent(new HtmlTestEncoder()));
+            tagHelperContent.GetContent(new HtmlTestEncoder())
+        );
     }
 
     [Fact]
@@ -256,13 +264,15 @@ public class DefaultTagHelperContentTest
             1.1,
             2.98,
             145.82,
-            32.86);
+            32.86
+        );
 
         // Assert
         Assert.Equal(
-            "Numbers in InvariantCulture - HtmlEncode[[1.10]] HtmlEncode[[2.98]] " +
-                "HtmlEncode[[145.82]] HtmlEncode[[32.86]]!",
-            tagHelperContent.GetContent(new HtmlTestEncoder()));
+            "Numbers in InvariantCulture - HtmlEncode[[1.10]] HtmlEncode[[2.98]] "
+                + "HtmlEncode[[145.82]] HtmlEncode[[32.86]]!",
+            tagHelperContent.GetContent(new HtmlTestEncoder())
+        );
     }
 
     [Fact]
@@ -275,7 +285,11 @@ public class DefaultTagHelperContentTest
         var expected = "Content was HtmlEncode[[HelloWorld]]";
 
         // Act
-        tagHelperContent.AppendFormat(CultureInfo.InvariantCulture, "Content was {0}", helloWorldContent);
+        tagHelperContent.AppendFormat(
+            CultureInfo.InvariantCulture,
+            "Content was {0}",
+            helloWorldContent
+        );
 
         // Assert
         Assert.Equal(expected, tagHelperContent.GetContent(new HtmlTestEncoder()));
@@ -358,19 +372,19 @@ public class DefaultTagHelperContentTest
         get
         {
             return new TheoryData<string>
-                {
-                    null,
-                    string.Empty,
-                    " ",
-                    "\n",
-                    "\t",
-                    "\r",
-                    "\r\n",
-                    "\u2000",
-                    "\u205f",
-                    "\u3000",
-                    " \u200a \t",
-                };
+            {
+                null,
+                string.Empty,
+                " ",
+                "\n",
+                "\t",
+                "\r",
+                "\r\n",
+                "\u2000",
+                "\u205f",
+                "\u3000",
+                " \u200a \t",
+            };
         }
     }
 
@@ -551,7 +565,9 @@ public class DefaultTagHelperContentTest
 
     [Theory]
     [MemberData(nameof(EmptyOrWhiteSpaceData))]
-    public void IsEmptyOrWhiteSpace_TrueAfterAppendTagHelperContentTwice_WithDataToEncode(string data)
+    public void IsEmptyOrWhiteSpace_TrueAfterAppendTagHelperContentTwice_WithDataToEncode(
+        string data
+    )
     {
         // Arrange
         var tagHelperContent = new DefaultTagHelperContent();
@@ -701,7 +717,9 @@ public class DefaultTagHelperContentTest
         var expected = "HtmlEncode[[First ]]HtmlEncode[[Second]] Third";
 
         // Act
-        tagHelperContent.SetContent("First ").AppendFormat(CultureInfo.InvariantCulture, "{0} Third", "Second");
+        tagHelperContent
+            .SetContent("First ")
+            .AppendFormat(CultureInfo.InvariantCulture, "{0} Third", "Second");
 
         // Assert
         Assert.Equal(expected, tagHelperContent.GetContent(new HtmlTestEncoder()));

@@ -17,11 +17,19 @@ public static class PropertyBaseExtensions
     /// <param name="properties">The properties to format.</param>
     /// <param name="includeTypes">If true, then type names are included in the string. The default is <see langword="false" />.</param>
     /// <returns>The string representation.</returns>
-    public static string Format(this IEnumerable<IReadOnlyPropertyBase> properties, bool includeTypes = false)
-        => "{"
-            + string.Join(
-                ", ",
-                properties.Select(
-                    p => "'" + p.Name + "'" + (includeTypes ? " : " + p.ClrType.DisplayName(fullName: false) : "")))
-            + "}";
+    public static string Format(
+        this IEnumerable<IReadOnlyPropertyBase> properties,
+        bool includeTypes = false
+    ) =>
+        "{"
+        + string.Join(
+            ", ",
+            properties.Select(p =>
+                "'"
+                + p.Name
+                + "'"
+                + (includeTypes ? " : " + p.ClrType.DisplayName(fullName: false) : "")
+            )
+        )
+        + "}";
 }

@@ -19,15 +19,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     {
         public EventInfo AssociatedEventInfo;
 
-        public new bool isStatic;        // Static member?
+        public new bool isStatic; // Static member?
 
         // If this is true then tell the user to call the accessors directly.
 
         public bool isOverride;
 
-        public CType type;               // Type of the event.
+        public CType type; // Type of the event.
 
-        public MethodSymbol methAdd;            // Adder method (always has same parent)
-        public MethodSymbol methRemove;         // Remover method (always has same parent)
+        public MethodSymbol methAdd; // Adder method (always has same parent)
+        public MethodSymbol methRemove; // Remover method (always has same parent)
     }
 }

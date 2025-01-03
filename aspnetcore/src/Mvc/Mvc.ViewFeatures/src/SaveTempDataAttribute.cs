@@ -12,7 +12,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 /// <summary>
 /// A filter that saves the <see cref="ITempDataDictionary"/> for a request.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public class SaveTempDataAttribute : Attribute, IFilterFactory, IOrderedFilter
 {
     /// <summary>

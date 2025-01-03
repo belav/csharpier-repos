@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,37 +27,43 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-namespace System.Net.NetworkInformation {
-	abstract class UnixIPv4InterfaceProperties : IPv4InterfaceProperties
-	{
-		protected UnixNetworkInterface iface;
+namespace System.Net.NetworkInformation
+{
+    abstract class UnixIPv4InterfaceProperties : IPv4InterfaceProperties
+    {
+        protected UnixNetworkInterface iface;
 
-		public UnixIPv4InterfaceProperties (UnixNetworkInterface iface)
-		{
-			this.iface = iface;
-		}
+        public UnixIPv4InterfaceProperties(UnixNetworkInterface iface)
+        {
+            this.iface = iface;
+        }
 
-		public override int Index {
-			get { return iface.NameIndex; }
-		}
+        public override int Index
+        {
+            get { return iface.NameIndex; }
+        }
 
-		// TODO: how to discover that?
-		public override bool IsAutomaticPrivateAddressingActive {
-			get { return false; }
-		}
+        // TODO: how to discover that?
+        public override bool IsAutomaticPrivateAddressingActive
+        {
+            get { return false; }
+        }
 
-		// TODO: how to discover that?
-		public override bool IsAutomaticPrivateAddressingEnabled {
-			get { return false; }
-		}
+        // TODO: how to discover that?
+        public override bool IsAutomaticPrivateAddressingEnabled
+        {
+            get { return false; }
+        }
 
-		// TODO: how to discover that? The only way is distribution-specific...
-		public override bool IsDhcpEnabled {
-			get { return false; }
-		}
+        // TODO: how to discover that? The only way is distribution-specific...
+        public override bool IsDhcpEnabled
+        {
+            get { return false; }
+        }
 
-		public override bool UsesWins {
-			get { return false; }
-		}
-	}
+        public override bool UsesWins
+        {
+            get { return false; }
+        }
+    }
 }

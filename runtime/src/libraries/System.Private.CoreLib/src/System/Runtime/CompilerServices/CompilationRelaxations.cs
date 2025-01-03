@@ -7,8 +7,10 @@ namespace System.Runtime.CompilerServices
     [Flags]
     public enum CompilationRelaxations : int
     {
-        NoStringInterning = 0x0008  // Start in 0x0008, we had other non public flags in this enum before,
-                                    // so we'll start here just in case somebody used them. This flag is only
-                                    // valid when set for Assemblies.
+        NoStringInterning =
+            0x0008 // Start in 0x0008, we had other non public flags in this enum before,
+        ,
+        // so we'll start here just in case somebody used them. This flag is only
+        // valid when set for Assemblies.
     }
 }

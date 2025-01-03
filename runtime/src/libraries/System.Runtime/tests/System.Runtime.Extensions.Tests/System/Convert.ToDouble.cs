@@ -34,8 +34,22 @@ namespace System.Tests
         [Fact]
         public void FromDouble()
         {
-            double[] testValues = { double.MaxValue, double.MinValue, double.NegativeInfinity, double.PositiveInfinity, double.Epsilon };
-            double[] expectedValues = { double.MaxValue, double.MinValue, double.NegativeInfinity, double.PositiveInfinity, double.Epsilon };
+            double[] testValues =
+            {
+                double.MaxValue,
+                double.MinValue,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.Epsilon,
+            };
+            double[] expectedValues =
+            {
+                double.MaxValue,
+                double.MinValue,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.Epsilon,
+            };
             Verify(Convert.ToDouble, testValues, expectedValues);
         }
 
@@ -71,7 +85,11 @@ namespace System.Tests
             VerifyFromObject(Convert.ToDouble, Convert.ToDouble, testValues, expectedValues);
 
             object[] invalidValues = { new object(), DateTime.Now };
-            VerifyFromObjectThrows<InvalidCastException>(Convert.ToDouble, Convert.ToDouble, invalidValues);
+            VerifyFromObjectThrows<InvalidCastException>(
+                Convert.ToDouble,
+                Convert.ToDouble,
+                invalidValues
+            );
         }
 
         [Fact]
@@ -93,19 +111,36 @@ namespace System.Tests
         [Fact]
         public void FromString()
         {
-            string[] testValues = { Double.MinValue.ToString("R"), Double.MaxValue.ToString("R"), (0.0).ToString(), (10.0).ToString(), (-10.0).ToString(), null };
+            string[] testValues =
+            {
+                Double.MinValue.ToString("R"),
+                Double.MaxValue.ToString("R"),
+                (0.0).ToString(),
+                (10.0).ToString(),
+                (-10.0).ToString(),
+                null,
+            };
             double[] expectedValues = { double.MinValue, double.MaxValue, 0.0, 10.0, -10.0, 0.0 };
             VerifyFromString(Convert.ToDouble, Convert.ToDouble, testValues, expectedValues);
 
             string[] formatExceptionValues = { "123xyz" };
-            VerifyFromStringThrows<FormatException>(Convert.ToDouble, Convert.ToDouble, formatExceptionValues);
+            VerifyFromStringThrows<FormatException>(
+                Convert.ToDouble,
+                Convert.ToDouble,
+                formatExceptionValues
+            );
         }
 
         [Fact]
         public void FromString_NotNetFramework()
         {
             string[] overflowValues = { Double.MaxValue.ToString(), Double.MinValue.ToString() };
-            VerifyFromString(Convert.ToDouble, Convert.ToDouble, overflowValues, new double[] { 1.7976931348623157E+308, -1.7976931348623157E+308 });
+            VerifyFromString(
+                Convert.ToDouble,
+                Convert.ToDouble,
+                overflowValues,
+                new double[] { 1.7976931348623157E+308, -1.7976931348623157E+308 }
+            );
         }
 
         [Fact]

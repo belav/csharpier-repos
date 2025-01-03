@@ -121,7 +121,6 @@ namespace System.Data.Tests
                 Assert.NotNull(ib.SortProperty);
                 Assert.Equal(ListSortDirection.Descending, ib.SortDirection);
 
-
                 _args = null;
                 dv.Sort = null;
                 Assert.Equal(ListChangedType.Reset, _args.ListChangedType);

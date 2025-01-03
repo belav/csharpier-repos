@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.HtmlControls {
+namespace System.Web.UI.HtmlControls
+{
     using System.ComponentModel;
     using System.Web;
     using System.Web.UI;
@@ -18,17 +19,14 @@ namespace System.Web.UI.HtmlControls {
     ///       the HTML 5 &lt;Source&gt; element.
     ///    </para>
     /// </devdoc>
-    [
-    ControlBuilderAttribute(typeof(HtmlEmptyTagControlBuilder))
-    ]
-    public class HtmlSource : HtmlControl {
-
+    [ControlBuilderAttribute(typeof(HtmlEmptyTagControlBuilder))]
+    public class HtmlSource : HtmlControl
+    {
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlSource'/> class.</para>
         /// </devdoc>
         public HtmlSource()
-            : base("source") {
-        }
+            : base("source") { }
 
         /// <devdoc>
         ///    <para>
@@ -36,25 +34,26 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        UrlProperty()
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            UrlProperty()
         ]
-        public string Src {
-            get {
+        public string Src
+        {
+            get
+            {
                 string s = Attributes["src"];
                 return s ?? String.Empty;
             }
-            set {
-                Attributes["src"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["src"] = MapStringAttributeToString(value); }
         }
 
         /*
          * Override to process src attribute
          */
-        protected override void RenderAttributes(HtmlTextWriter writer) {
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
             PreProcessRelativeReferenceAttribute(writer, "src");
             base.RenderAttributes(writer);
             writer.Write(" /");

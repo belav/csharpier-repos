@@ -40,17 +40,24 @@ namespace Test_NUnit_MySql
             string currDir = Directory.GetCurrentDirectory();
             string mysqlExampleDir = "../../../Example/DbLinq.Mysql.Example/nwind";
             bool ok = Directory.Exists(mysqlExampleDir);
-            string args1 = string.Format(" -provider=MySql -namespace:nwind -code:Northwind_temp.cs -sprocs {0}/Northwind_from_mysql.dbml"
-                , mysqlExampleDir);
+            string args1 = string.Format(
+                " -provider=MySql -namespace:nwind -code:Northwind_temp.cs -sprocs {0}/Northwind_from_mysql.dbml",
+                mysqlExampleDir
+            );
 
             ProcessRunner p1 = new ProcessRunner();
             int sqlMetalExitCode = p1.Run(sqlMetal, args1, 5000);
-            Assert.IsTrue(sqlMetalExitCode == 0, "Got SqlMetal.exe error exit code " + sqlMetalExitCode);
+            Assert.IsTrue(
+                sqlMetalExitCode == 0,
+                "Got SqlMetal.exe error exit code " + sqlMetalExitCode
+            );
 
             //3. make sure generated code compiles with 'bin/Northwind_temp.cs'
             Directory.SetCurrentDirectory("..");
-            string dependencies = @"/r:bin\nunit.framework.dll /r:bin\DbLinq.dll /r:bin\DbLinq.mysql.dll /r:bin\Mysql.data.dll";
-            string cscArgs = @"/nologo /target:library /d:MYSQL /out:bin/SqlMetal_test.dll  bin/Northwind_temp.cs  ReadTest.cs  WriteTest.cs  TestBase.cs  "
+            string dependencies =
+                @"/r:bin\nunit.framework.dll /r:bin\DbLinq.dll /r:bin\DbLinq.mysql.dll /r:bin\Mysql.data.dll";
+            string cscArgs =
+                @"/nologo /target:library /d:MYSQL /out:bin/SqlMetal_test.dll  bin/Northwind_temp.cs  ReadTest.cs  WriteTest.cs  TestBase.cs  "
                 + dependencies;
 
             ProcessRunner p2 = new ProcessRunner();
@@ -111,6 +118,5 @@ namespace Test_NUnit_MySql
             }
         }
         #endregion
-
     }
 }

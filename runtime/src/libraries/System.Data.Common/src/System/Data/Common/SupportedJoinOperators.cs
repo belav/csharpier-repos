@@ -10,6 +10,6 @@ namespace System.Data.Common
         Inner = 0x00000001,
         LeftOuter = 0x00000002,
         RightOuter = 0x00000004,
-        FullOuter = 0x00000008
+        FullOuter = 0x00000008,
     }
 }

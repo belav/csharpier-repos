@@ -7,7 +7,14 @@ namespace System.Data.Common
 {
     internal sealed class DbConnectionStringBuilderDescriptor : PropertyDescriptor
     {
-        internal DbConnectionStringBuilderDescriptor(string propertyName, Type componentType, Type propertyType, bool isReadOnly, Attribute[] attributes) : base(propertyName, attributes)
+        internal DbConnectionStringBuilderDescriptor(
+            string propertyName,
+            Type componentType,
+            Type propertyType,
+            bool isReadOnly,
+            Attribute[] attributes
+        )
+            : base(propertyName, attributes)
         {
             ComponentType = componentType;
             PropertyType = propertyType;

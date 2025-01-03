@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             IPeekableItemFactory peekableItemFactory,
             IPeekResultFactory peekResultFactory,
             IThreadingContext threadingContext,
-            IUIThreadOperationExecutor uiThreadOperationExecutor)
+            IUIThreadOperationExecutor uiThreadOperationExecutor
+        )
         {
             _peekableItemFactory = peekableItemFactory;
             _peekResultFactory = peekResultFactory;
@@ -39,8 +40,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
         }
 
-        public IPeekableItemSource TryCreatePeekableItemSource(ITextBuffer textBuffer)
-            => textBuffer.Properties.GetOrCreateSingletonProperty(() =>
-                new PeekableItemSource(textBuffer, _peekableItemFactory, _peekResultFactory, _threadingContext, _uiThreadOperationExecutor));
+        public IPeekableItemSource TryCreatePeekableItemSource(ITextBuffer textBuffer) =>
+            textBuffer.Properties.GetOrCreateSingletonProperty(
+                () =>
+                    new PeekableItemSource(
+                        textBuffer,
+                        _peekableItemFactory,
+                        _peekResultFactory,
+                        _threadingContext,
+                        _uiThreadOperationExecutor
+                    )
+            );
     }
 }

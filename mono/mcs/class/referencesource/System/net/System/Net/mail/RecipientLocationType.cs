@@ -9,16 +9,16 @@ namespace System.Net.Mail
     using System;
 
 #if MAKE_MAILCLIENT_PUBLIC
-    internal 
+    internal
 #else
     internal
 #endif
-        enum RecipientLocationType
+    enum RecipientLocationType
     {
         Local,
         Unknown,
         NotLocal,
         WillForward,
-        Ambiguous
+        Ambiguous,
     }
 }

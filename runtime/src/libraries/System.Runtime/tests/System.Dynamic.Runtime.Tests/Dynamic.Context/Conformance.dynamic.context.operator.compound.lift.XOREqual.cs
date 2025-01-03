@@ -3,7 +3,6 @@
 
 using Microsoft.CSharp.RuntimeBinder;
 using Xunit;
-
 using static Dynamic.Operator.Tests.LiftCommon;
 
 namespace Dynamic.Operator.Tests

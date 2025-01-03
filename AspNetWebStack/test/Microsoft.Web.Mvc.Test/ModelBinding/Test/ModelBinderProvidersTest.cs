@@ -23,7 +23,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 typeof(DictionaryModelBinderProvider),
                 typeof(CollectionModelBinderProvider),
                 typeof(TypeConverterModelBinderProvider),
-                typeof(MutableObjectModelBinderProvider)
+                typeof(MutableObjectModelBinderProvider),
             };
 
             // Act

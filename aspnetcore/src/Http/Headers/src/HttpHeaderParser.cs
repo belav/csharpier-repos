@@ -38,23 +38,39 @@ internal abstract class HttpHeaderParser<T>
         // can ignore the value.
         if (!TryParseValue(value, ref index, out var result))
         {
-            throw new FormatException(string.Format(CultureInfo.InvariantCulture,
-                "The header contains invalid values at index {0}: '{1}'", index, value.Value ?? "<null>"));
+            throw new FormatException(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "The header contains invalid values at index {0}: '{1}'",
+                    index,
+                    value.Value ?? "<null>"
+                )
+            );
         }
         return result;
     }
 
-    public virtual bool TryParseValues(IList<string>? values, [NotNullWhen(true)] out IList<T>? parsedValues)
+    public virtual bool TryParseValues(
+        IList<string>? values,
+        [NotNullWhen(true)] out IList<T>? parsedValues
+    )
     {
         return TryParseValues(values, strict: false, parsedValues: out parsedValues);
     }
 
-    public virtual bool TryParseStrictValues(IList<string>? values, [NotNullWhen(true)] out IList<T>? parsedValues)
+    public virtual bool TryParseStrictValues(
+        IList<string>? values,
+        [NotNullWhen(true)] out IList<T>? parsedValues
+    )
     {
         return TryParseValues(values, strict: true, parsedValues: out parsedValues);
     }
 
-    protected virtual bool TryParseValues(IList<string>? values, bool strict, [NotNullWhen(true)] out IList<T>? parsedValues)
+    protected virtual bool TryParseValues(
+        IList<string>? values,
+        bool strict,
+        [NotNullWhen(true)] out IList<T>? parsedValues
+    )
     {
         Contract.Assert(_supportsMultipleValues);
         // If a parser returns an empty list, it means there was no value, but that's valid (e.g. "Accept: "). The caller
@@ -79,7 +95,7 @@ internal abstract class HttpHeaderParser<T>
                     {
                         if (results == null)
                         {
-                            results = new List<T>();    // Allocate it only when used
+                            results = new List<T>(); // Allocate it only when used
                         }
                         results.Add(output);
                     }
@@ -139,8 +155,14 @@ internal abstract class HttpHeaderParser<T>
                 }
                 else if (strict)
                 {
-                    throw new FormatException(string.Format(CultureInfo.InvariantCulture,
-                        "The header contains invalid values at index {0}: '{1}'", index, value));
+                    throw new FormatException(
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            "The header contains invalid values at index {0}: '{1}'",
+                            index,
+                            value
+                        )
+                    );
                 }
                 else
                 {

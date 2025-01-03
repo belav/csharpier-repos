@@ -7,7 +7,6 @@ using System.Linq.Expressions;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal static class Evaluator
@@ -42,9 +41,14 @@ namespace Moq
         /// <param name="fnCanBeEvaluated">A function that decides whether a given expression
         /// node can be part of the local function.</param>
         /// <returns>A new tree with sub-trees evaluated and replaced.</returns>
-        public static Expression PartialEval(Expression expression, Func<Expression, bool> fnCanBeEvaluated)
+        public static Expression PartialEval(
+            Expression expression,
+            Func<Expression, bool> fnCanBeEvaluated
+        )
         {
-            return new SubtreeEvaluator(new Nominator(fnCanBeEvaluated).Nominate(expression)).Eval(expression);
+            return new SubtreeEvaluator(new Nominator(fnCanBeEvaluated).Nominate(expression)).Eval(
+                expression
+            );
         }
 
         /// <summary>
@@ -54,7 +58,10 @@ namespace Moq
         /// <returns>A new tree with sub-trees evaluated and replaced.</returns>
         public static Expression PartialEval(Expression expression)
         {
-            return PartialEval(expression, e => e.NodeType != ExpressionType.Parameter && !(e is MatchExpression));
+            return PartialEval(
+                expression,
+                e => e.NodeType != ExpressionType.Parameter && !(e is MatchExpression)
+            );
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:
@@ -82,7 +89,6 @@ namespace Moq
         /// Evaluates and replaces sub-trees when first candidate is reached (top-down)
         /// </summary>
         class SubtreeEvaluator : ExpressionVisitor
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                     private HashSet<Expression> candidates;
@@ -188,7 +194,6 @@ namespace Moq
         /// be part of an evaluated sub-tree.
         /// </summary>
         class Nominator : ExpressionVisitor
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                     private Func<Expression, bool> fnCanBeEvaluated;

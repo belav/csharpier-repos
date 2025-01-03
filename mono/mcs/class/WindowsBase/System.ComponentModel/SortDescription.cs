@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,78 +26,99 @@
 
 using System;
 
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
+    public struct SortDescription
+    {
+        private string sortPropertyName;
+        private ListSortDirection sortDirection;
+        private bool isSealed;
 
-	public struct SortDescription
-	{
-		private string sortPropertyName;
-		private ListSortDirection sortDirection;
-		private bool isSealed;
+        public SortDescription(string propertyName, ListSortDirection direction)
+        {
+            if (
+                direction != ListSortDirection.Ascending
+                && direction != ListSortDirection.Descending
+            )
+                throw new InvalidEnumArgumentException(
+                    "direction",
+                    (int)direction,
+                    typeof(ListSortDirection)
+                );
 
-		public SortDescription (string propertyName, ListSortDirection direction)
-		{
-			if(direction != ListSortDirection.Ascending && direction != ListSortDirection.Descending)
-				throw new InvalidEnumArgumentException("direction", (int)direction, typeof(ListSortDirection));
+            sortPropertyName = propertyName;
+            sortDirection = direction;
+            isSealed = false;
+        }
 
-			sortPropertyName = propertyName;
-			sortDirection = direction;
-			isSealed = false;
-		}
+        public static bool operator !=(SortDescription sd1, SortDescription sd2)
+        {
+            return !(sd1 == sd2);
+        }
 
-		public static bool operator!= (SortDescription sd1, SortDescription sd2)
-		{
-			return !(sd1 == sd2);
-		}
+        public static bool operator ==(SortDescription sd1, SortDescription sd2)
+        {
+            return sd1.sortDirection == sd2.sortDirection
+                && sd1.sortPropertyName == sd2.sortPropertyName;
+        }
 
-		public static bool operator== (SortDescription sd1, SortDescription sd2)
-		{
-			return sd1.sortDirection == sd2.sortDirection && sd1.sortPropertyName == sd2.sortPropertyName;
-		}
+        public ListSortDirection Direction
+        {
+            get { return sortDirection; }
+            set
+            {
+                if (isSealed)
+                    throw new InvalidOperationException(
+                        "Cannot change Direction once the SortDescription has been sealed."
+                    );
 
-		public ListSortDirection Direction {
-			get { return sortDirection; }
-			set { 
-				if(isSealed)
-					throw new InvalidOperationException("Cannot change Direction once the SortDescription has been sealed.");
-				
-				if(value != ListSortDirection.Ascending && value != ListSortDirection.Descending)
-					throw new InvalidEnumArgumentException("direction", (int)value, typeof(ListSortDirection));
-				
-				sortDirection = value; 
-			}
-		}
+                if (value != ListSortDirection.Ascending && value != ListSortDirection.Descending)
+                    throw new InvalidEnumArgumentException(
+                        "direction",
+                        (int)value,
+                        typeof(ListSortDirection)
+                    );
 
-		public bool IsSealed {
-			get { return isSealed; }
-		}
+                sortDirection = value;
+            }
+        }
 
-		public string PropertyName {
-			get { return sortPropertyName; }
-			set {
-				if(isSealed)
-					throw new InvalidOperationException("Cannot change Direction once the SortDescription has been sealed.");
-				
-				sortPropertyName = value;
-			}
-		}
+        public bool IsSealed
+        {
+            get { return isSealed; }
+        }
 
-		public override bool Equals (object obj)
-		{
-			if (!(obj is SortDescription))
-				return false;
-			return ((SortDescription)obj) == this;
-		}
+        public string PropertyName
+        {
+            get { return sortPropertyName; }
+            set
+            {
+                if (isSealed)
+                    throw new InvalidOperationException(
+                        "Cannot change Direction once the SortDescription has been sealed."
+                    );
 
-		public override int GetHashCode ()
-		{
-			if(sortPropertyName == null)
-				return sortDirection.GetHashCode ();
-			return sortPropertyName.GetHashCode () ^ sortDirection.GetHashCode ();
-		}
+                sortPropertyName = value;
+            }
+        }
 
-		internal void Seal()
-		{
-			isSealed = true;
-		}
-	}
+        public override bool Equals(object obj)
+        {
+            if (!(obj is SortDescription))
+                return false;
+            return ((SortDescription)obj) == this;
+        }
+
+        public override int GetHashCode()
+        {
+            if (sortPropertyName == null)
+                return sortDirection.GetHashCode();
+            return sortPropertyName.GetHashCode() ^ sortDirection.GetHashCode();
+        }
+
+        internal void Seal()
+        {
+            isSealed = true;
+        }
+    }
 }

@@ -5,11 +5,10 @@ namespace Microsoft.AspNetCore.Components.Discovery;
 
 internal class DefaultRazorComponentApplication<TComponent> : IRazorComponentApplication
 {
-    public static IRazorComponentApplication Instance { get; } = new DefaultRazorComponentApplication<TComponent>();
+    public static IRazorComponentApplication Instance { get; } =
+        new DefaultRazorComponentApplication<TComponent>();
 
-    public DefaultRazorComponentApplication()
-    {
-    }
+    public DefaultRazorComponentApplication() { }
 
     public ComponentApplicationBuilder GetBuilder()
     {

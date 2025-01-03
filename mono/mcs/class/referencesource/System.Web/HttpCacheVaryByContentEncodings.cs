@@ -1,49 +1,54 @@
 //------------------------------------------------------------------------------
 // <copyright file="HttpCacheVaryByContentEncodings.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  * HttpCacheVaryByContentEncodings
- * 
+ *
  * Copyright (c) 1998 Microsoft Corporation
  */
 
-namespace System.Web {
-    using System.Text;
+namespace System.Web
+{
     using System.Runtime.InteropServices;
-    using System.Web.Util;
     using System.Security.Permissions;
-
+    using System.Text;
+    using System.Web.Util;
 
     /// <devdoc>
     ///    <para>Provides a type-safe way to vary by Content-Encoding.</para>
     /// </devdoc>
-    public sealed class HttpCacheVaryByContentEncodings {
-        String[]        _contentEncodings;
-        bool            _isModified;
+    public sealed class HttpCacheVaryByContentEncodings
+    {
+        String[] _contentEncodings;
+        bool _isModified;
 
-        public HttpCacheVaryByContentEncodings() {
+        public HttpCacheVaryByContentEncodings()
+        {
             Reset();
         }
 
-        internal void Reset() {
+        internal void Reset()
+        {
             _isModified = false;
             _contentEncodings = null;
         }
-  
+
         /// <summary>
         /// Set the Content Encodings in Cache Vary
         /// </summary>
         /// <param name="contentEncodings"></param>
-        public void SetContentEncodings(string[] contentEncodings) {
-
+        public void SetContentEncodings(string[] contentEncodings)
+        {
             Reset();
-            if (contentEncodings != null) {
+            if (contentEncodings != null)
+            {
                 _isModified = true;
                 _contentEncodings = new String[contentEncodings.Length];
-                for (int i = 0; i < contentEncodings.Length; i++) {
+                for (int i = 0; i < contentEncodings.Length; i++)
+                {
                     _contentEncodings[i] = contentEncodings[i];
                 }
             }
@@ -52,20 +57,25 @@ namespace System.Web {
         // the response is not cacheable if we're varying by content encoding
         // and the content-encoding header is not one of the encodings that we're
         // varying by
-        internal bool IsCacheableEncoding(string coding) {
+        internal bool IsCacheableEncoding(string coding)
+        {
             // return true if we are not varying by content encoding.
-            if (_contentEncodings == null) {
+            if (_contentEncodings == null)
+            {
                 return true;
             }
 
             // return true if there is no Content-Encoding header
-            if (coding == null) {
+            if (coding == null)
+            {
                 return true;
             }
 
             // return true if the Content-Encoding header is listed
-            for (int i = 0; i < _contentEncodings.Length; i++) {
-                if (_contentEncodings[i] == coding) {
+            for (int i = 0; i < _contentEncodings.Length; i++)
+            {
+                if (_contentEncodings[i] == coding)
+                {
                     return true;
                 }
             }
@@ -74,16 +84,19 @@ namespace System.Web {
             return false;
         }
 
-        internal bool IsModified() {
+        internal bool IsModified()
+        {
             return _isModified;
         }
-               
+
         /// <summary>
         /// Get the Content Encodings in Cache Vary
         /// </summary>
         /// <returns></returns>
-        public string[] GetContentEncodings() {
-            if (_contentEncodings != null) {
+        public string[] GetContentEncodings()
+        {
+            if (_contentEncodings != null)
+            {
                 string[] contentEncodings = new string[_contentEncodings.Length];
                 _contentEncodings.CopyTo(contentEncodings, 0);
                 return contentEncodings;
@@ -103,35 +116,48 @@ namespace System.Web {
         /// </devdoc>
         public bool this[String contentEncoding]
         {
-            get {
-                if (String.IsNullOrEmpty(contentEncoding)) {
-                    throw new ArgumentNullException(SR.GetString(SR.Parameter_NullOrEmpty, "contentEncoding"));
+            get
+            {
+                if (String.IsNullOrEmpty(contentEncoding))
+                {
+                    throw new ArgumentNullException(
+                        SR.GetString(SR.Parameter_NullOrEmpty, "contentEncoding")
+                    );
                 }
-                if (_contentEncodings == null) {
+                if (_contentEncodings == null)
+                {
                     return false;
                 }
-                for(int i = 0; i < _contentEncodings.Length; i++) {
-                    if (_contentEncodings[i] == contentEncoding) {
+                for (int i = 0; i < _contentEncodings.Length; i++)
+                {
+                    if (_contentEncodings[i] == contentEncoding)
+                    {
                         return true;
                     }
                 }
                 return false;
             }
-
-            set {
-                if (String.IsNullOrEmpty(contentEncoding)) {
-                    throw new ArgumentNullException(SR.GetString(SR.Parameter_NullOrEmpty, "contentEncoding"));
+            set
+            {
+                if (String.IsNullOrEmpty(contentEncoding))
+                {
+                    throw new ArgumentNullException(
+                        SR.GetString(SR.Parameter_NullOrEmpty, "contentEncoding")
+                    );
                 }
 
                 // if someone enabled it, don't allow someone else to disable it.
-                if (!value) {
+                if (!value)
+                {
                     return;
                 }
 
                 _isModified = true;
-                if (_contentEncodings != null) {
+                if (_contentEncodings != null)
+                {
                     string[] contentEncodings = new String[_contentEncodings.Length + 1];
-                    for (int i = 0; i < _contentEncodings.Length; i++) {
+                    for (int i = 0; i < _contentEncodings.Length; i++)
+                    {
                         contentEncodings[i] = _contentEncodings[i];
                     }
                     contentEncodings[contentEncodings.Length - 1] = contentEncoding;

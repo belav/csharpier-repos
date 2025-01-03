@@ -14,6 +14,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     public class MyClass<T>
     {
         public int Field = 0;
+
         //    public static MyEnum?[] operator -(MyClass p1, dynamic[] p2) { return new MyEnum?[] { MyEnum.First, null }; }
         public static T operator ^(MyClass<T> p1, float p2)
         {
@@ -29,49 +30,32 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         {
             return new MyClass<T>[]
             {
-            null, new MyClass<T>()
-            {
-            Field = 4
-            }
-            }
-
-            ;
+                null,
+                new MyClass<T>() { Field = 4 },
+            };
         }
 
         public static MyStruct?[] operator <=(MyClass<T> p1, int p2)
         {
             return new MyStruct?[]
             {
-            null, new MyStruct()
-            {
-            Number = int.MinValue
-            }
-            }
-
-            ;
+                null,
+                new MyStruct() { Number = int.MinValue },
+            };
         }
 
         public static MyStruct?[] operator >=(MyClass<T> p1, int p2)
         {
             return new MyStruct?[]
             {
-            null, new MyStruct()
-            {
-            Number = int.MaxValue
-            }
-            }
-
-            ;
+                null,
+                new MyStruct() { Number = int.MaxValue },
+            };
         }
 
         public static decimal[] operator -(dynamic p1, MyClass<T> p2)
         {
-            return new decimal[]
-            {
-            decimal.MaxValue
-            }
-
-            ;
+            return new decimal[] { decimal.MaxValue };
         }
 
         public static string operator *(dynamic[] p1, MyClass<T> p2)
@@ -81,77 +65,48 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
         public static dynamic[] operator &(MyClass<T> p1, string p2)
         {
-            return new dynamic[]
-            {
-            p1
-            }
-
-            ;
+            return new dynamic[] { p1 };
         }
 
         public static dynamic[] operator -(MyClass<T> p1)
         {
-            return new dynamic[]
-            {
-            p1
-            }
-
-            ;
+            return new dynamic[] { p1 };
         }
 
         public static MyClass<T> operator --(MyClass<T> p1)
         {
-            return new MyClass<T>()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MyClass<T>() { Field = 4 };
         }
 
         // CS1964 -> negative
         // public static implicit operator MyClass<T>(dynamic p1) { return new MyClass<T>() { Field = 4 }; }
         // public static implicit operator dynamic(MyClass<T> p1) { return p1; }
-        public static implicit operator MyStruct[] (MyClass<T> p1)
+        public static implicit operator MyStruct[](MyClass<T> p1)
         {
-            return new MyStruct[]
-            {
-            new MyStruct()
-            {
-            Number = 4
-            }
-            }
-
-            ;
+            return new MyStruct[] { new MyStruct() { Number = 4 } };
         }
 
         public static explicit operator MyClass<T>(MyStruct?[] p1)
         {
-            return new MyClass<T>()
-            {
-                Field = 3
-            }
-
-            ;
+            return new MyClass<T>() { Field = 3 };
         }
     }
 
     public class MemberClassMultipleParams<T, U, V>
     {
         public int Field;
-        public static MemberClassMultipleParams<T, U, V> operator >>(MemberClassMultipleParams<T, U, V> p1, int p2)
+
+        public static MemberClassMultipleParams<T, U, V> operator >>(
+            MemberClassMultipleParams<T, U, V> p1,
+            int p2
+        )
         {
             return new MemberClassMultipleParams<T, U, V>();
         }
 
         public static dynamic[] operator &(MemberClassMultipleParams<T, U, V> p1, string p2)
         {
-            return new dynamic[]
-            {
-            p1
-            }
-
-            ;
+            return new dynamic[] { p1 };
         }
 
         public static bool operator true(MemberClassMultipleParams<T, U, V> p1)
@@ -166,22 +121,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
         public static explicit operator MemberClassMultipleParams<T, U, V>(U p1)
         {
-            return new MemberClassMultipleParams<T, U, V>()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MemberClassMultipleParams<T, U, V>() { Field = 4 };
         }
 
         public static implicit operator MemberClassMultipleParams<T, U, V>(double[] p1)
         {
-            return new MemberClassMultipleParams<T, U, V>()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MemberClassMultipleParams<T, U, V>() { Field = 4 };
         }
     }
 
@@ -189,14 +134,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         where T : class
     {
         public int Field;
+
         public static decimal[] operator |(bool? p1, MemberClassWithClassConstraint<T> p2)
         {
-            return new decimal[]
-            {
-            decimal.MaxValue
-            }
-
-            ;
+            return new decimal[] { decimal.MaxValue };
         }
 
         public static MyEnum? operator <(byte?[] p1, MemberClassWithClassConstraint<T> p2)
@@ -214,6 +155,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         where T : new()
     {
         public static int Status;
+
         public static bool? operator !(MemberClassWithNewConstraint<T> p1)
         {
             return true;
@@ -224,7 +166,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
             return string.Empty;
         }
 
-        public static MemberClassWithNewConstraint<T> operator ++(MemberClassWithNewConstraint<T> p1)
+        public static MemberClassWithNewConstraint<T> operator ++(
+            MemberClassWithNewConstraint<T> p1
+        )
         {
             return new MemberClassWithNewConstraint<T>();
         }
@@ -233,42 +177,24 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     public class MemberClassWithAnotherTypeConstraint<T, U>
         where T : U
     {
-        public static implicit operator MyStruct[] (MemberClassWithAnotherTypeConstraint<T, U> p1)
+        public static implicit operator MyStruct[](MemberClassWithAnotherTypeConstraint<T, U> p1)
         {
-            return new MyStruct[]
-            {
-            new MyStruct()
-            {
-            Number = 4
-            }
-            }
-
-            ;
+            return new MyStruct[] { new MyStruct() { Number = 4 } };
         }
 
-        public static implicit operator int? (MemberClassWithAnotherTypeConstraint<T, U> p1)
+        public static implicit operator int?(MemberClassWithAnotherTypeConstraint<T, U> p1)
         {
             return int.MinValue;
         }
 
-        public static explicit operator object[] (MemberClassWithAnotherTypeConstraint<T, U> p1)
+        public static explicit operator object[](MemberClassWithAnotherTypeConstraint<T, U> p1)
         {
-            return new object[]
-            {
-            p1
-            }
-
-            ;
+            return new object[] { p1 };
         }
 
-        public static explicit operator MyEnum[] (MemberClassWithAnotherTypeConstraint<T, U> p1)
+        public static explicit operator MyEnum[](MemberClassWithAnotherTypeConstraint<T, U> p1)
         {
-            return new MyEnum[]
-            {
-            MyEnum.First
-            }
-
-            ;
+            return new MyEnum[] { MyEnum.First };
         }
     }
 
@@ -281,11 +207,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     {
         First = 1,
         Second = 2,
-        Third = 3
+        Third = 3,
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass001.genclass001
 {
@@ -316,8 +240,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass002.genclass002
 {
@@ -354,8 +276,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass003.genclass003
 {
     // <Title> Tests generic class operator used in variable initializer.</Title>
@@ -380,15 +300,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
             float? p2 = 1.33f;
             // MyClass<Test>[]
             dynamic[] result = dy / p2;
-            if (result.Length == 2 && result[0] == null && result[1].GetType() == typeof(MyClass<Test>) && result[1].Field == 4)
+            if (
+                result.Length == 2
+                && result[0] == null
+                && result[1].GetType() == typeof(MyClass<Test>)
+                && result[1].Field == 4
+            )
                 return 0;
             return 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass005.genclass005
 {
@@ -424,8 +347,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass006.genclass006
 {
@@ -466,8 +387,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass007.genclass007
 {
@@ -510,8 +429,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass008.genclass008
 {
     // <Title> Tests generic class operator used in the for-iterator.</Title>
@@ -531,12 +448,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
         public static int MainMethod()
         {
-            MyClass<int> mc = new MyClass<int>()
-            {
-                Field = 10
-            }
-
-            ;
+            MyClass<int> mc = new MyClass<int>() { Field = 10 };
             dynamic dy = mc;
             dynamic[] result = null;
             int index = 0;
@@ -553,8 +465,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass009.genclass009
 {
@@ -575,12 +485,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
         public static int MainMethod()
         {
-            MyClass<int> mc = new MyClass<int>()
-            {
-                Field = 10
-            }
-
-            ;
+            MyClass<int> mc = new MyClass<int>() { Field = 10 };
             dynamic dy = mc;
             int index = 0;
             foreach (var m in dy & "Test")
@@ -597,8 +502,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass010.genclass010
 {
@@ -627,18 +530,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         {
             MemberClassMultipleParams<T, U, V> mc = new MemberClassMultipleParams<T, U, V>()
             {
-                Field = -1
-            }
-
-            ;
+                Field = -1,
+            };
             dynamic dy = mc;
             return (dy >> -1).Field == 0 ? 0 : 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass011.genclass011
 {
@@ -677,8 +576,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass012.genclass012
 {
@@ -720,8 +617,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass013.genclass013
 {
     // <Title> Tests generic class operator used in implicitly-typed variable initializer.</Title>
@@ -741,24 +636,28 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
         public static int MainMethod()
         {
-            MemberClassMultipleParams<string, Test, int> mc = new MemberClassMultipleParams<string, Test, int>()
+            MemberClassMultipleParams<string, Test, int> mc = new MemberClassMultipleParams<
+                string,
+                Test,
+                int
+            >()
             {
-                Field = 10
-            }
-
-            ;
+                Field = 10,
+            };
             dynamic dy = mc;
             string s = null;
             var result = dy & s;
-            if (result.Length == 1 && result[0].GetType() == typeof(MemberClassMultipleParams<string, Test, int>) && result[0].Field == 10)
+            if (
+                result.Length == 1
+                && result[0].GetType() == typeof(MemberClassMultipleParams<string, Test, int>)
+                && result[0].Field == 10
+            )
                 return 0;
             return 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass014.genclass014
 {
@@ -779,12 +678,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
         public static int MainMethod()
         {
-            MemberClassMultipleParams<int, int, int> mc = new MemberClassMultipleParams<int, int, int>()
+            MemberClassMultipleParams<int, int, int> mc = new MemberClassMultipleParams<
+                int,
+                int,
+                int
+            >()
             {
-                Field = 10
-            }
-
-            ;
+                Field = 10,
+            };
             dynamic dy = mc;
             bool isHit = false;
             if (dy)
@@ -799,8 +700,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass015.genclass015
 {
@@ -823,21 +722,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
         public static int MainMethod()
         {
-            Test t = new Test()
-            {
-                _field = (MemberClassMultipleParams<int, int, int>)1
-            }
-
-            ;
-            if (t._field.GetType() == typeof(MemberClassMultipleParams<int, int, int>) && t._field.Field == 4)
+            Test t = new Test() { _field = (MemberClassMultipleParams<int, int, int>)1 };
+            if (
+                t._field.GetType() == typeof(MemberClassMultipleParams<int, int, int>)
+                && t._field.Field == 4
+            )
                 return 0;
             return 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass016.genclass016
 {
@@ -860,17 +755,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
         public static int MainMethod()
         {
-            MemberClassWithClassConstraint<MyClass> mc = new MemberClassWithClassConstraint<MyClass>();
+            MemberClassWithClassConstraint<MyClass> mc =
+                new MemberClassWithClassConstraint<MyClass>();
             s_dy = mc;
             bool? b = false;
             byte?[] p = null;
-            var result = new
-            {
-                A = b | s_dy,
-                B = p < s_dy
-            }
-
-            ;
+            var result = new { A = b | s_dy, B = p < s_dy };
             if (result.A.Length == 1 && result.A[0] == decimal.MaxValue && result.B == MyEnum.First)
                 return 0;
             return 1;
@@ -878,8 +768,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass017.genclass017
 {
@@ -892,12 +780,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
     public class Test
     {
-        private static dynamic s_dy = new MyClass<Test>()
-        {
-            Field = 10
-        }
+        private static dynamic s_dy = new MyClass<Test>() { Field = 10 }; //implicit operator.
 
-        ; //implicit operator.
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -913,8 +797,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass018.genclass018
 {
@@ -954,8 +836,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass019.genclass019
 {
     // <Title> Tests generic class operator used in property-set body.</Title>
@@ -980,7 +860,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         {
             Test.MyProp = null;
             Type[] t = s_result.GetType().GenericTypeArguments;
-            if (t.Length != 3 || t[0] != typeof(int) || t[1] != typeof(string) || t[1] != typeof(string))
+            if (
+                t.Length != 3
+                || t[0] != typeof(int)
+                || t[1] != typeof(string)
+                || t[1] != typeof(string)
+            )
                 return 1;
             if (s_result.Field == 4)
                 return 0;
@@ -991,20 +876,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         {
             set
             {
-                double[] d = new double[]
-                {
-                double.Epsilon, double.MaxValue
-                }
-
-                ;
+                double[] d = new double[] { double.Epsilon, double.MaxValue };
                 s_result = (MemberClassMultipleParams<int, string, string>)d;
             }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass020.genclass020
 {
@@ -1018,8 +896,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
     public class Test
     {
-        private static MemberClassWithClassConstraint<MyClass<MyClass>> s_mc = new MemberClassWithClassConstraint<MyClass<MyClass>>();
+        private static MemberClassWithClassConstraint<MyClass<MyClass>> s_mc =
+            new MemberClassWithClassConstraint<MyClass<MyClass>>();
         private MyEnum? _field;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1046,24 +926,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
                 byte?[] p1 = new byte?[0];
                 _field = p1 < dy;
             }
-
             get
             {
                 dynamic dy = s_mc;
-                byte?[] p1 = new byte?[]
-                {
-                byte.MaxValue, byte.MinValue
-                }
-
-                ;
+                byte?[] p1 = new byte?[] { byte.MaxValue, byte.MinValue };
                 return p1 > dy;
             }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass021.genclass021
 {
@@ -1078,7 +950,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     public class Test
     {
         private static int s_a = 0;
-        private static MemberClassWithNewConstraint<MyClass> s_mc = new MemberClassWithNewConstraint<MyClass>();
+        private static MemberClassWithNewConstraint<MyClass> s_mc =
+            new MemberClassWithNewConstraint<MyClass>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1113,8 +987,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass022.genclass022
 {
     // <Title> Tests generic class operator used in collection initializer list.</Title>
@@ -1138,11 +1010,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
             MemberClassWithNewConstraint<MemberClassWithNewConstraint<MyClass>>.Status = 3;
             dynamic dy2 = new MemberClassWithNewConstraint<MemberClassWithNewConstraint<MyClass>>();
             MemberClassWithNewConstraint<MemberClassWithNewConstraint<MyClass>>.Status = 4;
-            var list = new List<MemberClassWithNewConstraint<MemberClassWithNewConstraint<MyClass>>>()
+            var list = new List<
+                MemberClassWithNewConstraint<MemberClassWithNewConstraint<MyClass>>
+            >()
             {
-            dy1++, ++dy2, default (MemberClassWithNewConstraint<MemberClassWithNewConstraint<MyClass>>)}
-
-            ;
+                dy1++,
+                ++dy2,
+                default(MemberClassWithNewConstraint<MemberClassWithNewConstraint<MyClass>>),
+            };
             if (list.Count == 3) // TODO: (Status is static) -> && list[0].Status == 3 && list[1].Status == 0 && list[2] == null)
                 return 0;
             return 1;
@@ -1150,8 +1025,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass024.genclass024
 {
@@ -1190,8 +1063,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass026.genclass026
 {
     // <Title> Tests generic class operator used in variable named dynamic.</Title>
@@ -1203,9 +1074,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
     public class Test
     {
-        public class InnerTest : Test
-        {
-        }
+        public class InnerTest : Test { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1215,7 +1084,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
         public static int MainMethod()
         {
-            MemberClassWithAnotherTypeConstraint<InnerTest, Test> mc = new MemberClassWithAnotherTypeConstraint<InnerTest, Test>();
+            MemberClassWithAnotherTypeConstraint<InnerTest, Test> mc =
+                new MemberClassWithAnotherTypeConstraint<InnerTest, Test>();
             dynamic dy = mc;
             dynamic dynamic = (MyStruct[])dy;
             if (dynamic.Length == 1 && dynamic[0].Number == 4)
@@ -1225,8 +1095,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass027.genclass027
 {
@@ -1250,12 +1118,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         {
             MemberClassWithNewConstraint<Test> mc = new MemberClassWithNewConstraint<Test>();
             dynamic dy = mc;
-            string[] array = new string[]
-            {
-            null, string.Empty, string.Empty, null, "Test", "a"
-            }
-
-            ;
+            string[] array = new string[] { null, string.Empty, string.Empty, null, "Test", "a" };
             var result = array.Where(p => p == ~dy).ToArray();
             if (result.Length == 2 && result[0] == string.Empty && result[1] == string.Empty)
                 return 0;
@@ -1264,8 +1127,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass028.genclass028
 {
@@ -1298,8 +1159,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass030.genclass030
 {
     // <Title> Tests generic class operator used in ctor.</Title>
@@ -1312,6 +1171,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     public class Test
     {
         private int? _field;
+
         public Test()
         {
             dynamic dy = new MemberClassWithAnotherTypeConstraint<string, string>();
@@ -1334,8 +1194,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass031.genclass031
 {
@@ -1375,8 +1233,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genclass032.genclass032
 {
     // <Title> Tests generic class operator used in + operator.</Title>
@@ -1406,8 +1262,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.errorverifier.errorverifier
 {
@@ -1528,6 +1382,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         RefReadonlyLocal, // Cannot pass '{0}' as a ref or out argument because it is read-only
         ReturnNotLValue, // Cannot modify the return value of '{0}' because it is not a variable
         BadArgExtraRef, // Argument '{0}' should not be passed with the '{1}' keyword
+
         // DelegateOnConditional, // Cannot create delegate with '{0}' because it has a Conditional attribute (REMOVED)
         BadArgRef, // Argument '{0}' must be passed with the '{1}' keyword
         AssgReadonly2, // Members of readonly field '{0}' cannot be modified (except in a constructor or a variable initializer)
@@ -1554,44 +1409,59 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     public enum RuntimeErrorId
     {
         None,
+
         // RuntimeBinderInternalCompilerException
         InternalCompilerError, // An unexpected exception occurred while binding a dynamic operation
+
         // ArgumentException
         BindRequireArguments, // Cannot bind call with no calling object
+
         // RuntimeBinderException
         BindCallFailedOverloadResolution, // Overload resolution failed
+
         // ArgumentException
         BindBinaryOperatorRequireTwoArguments, // Binary operators must be invoked with two arguments
+
         // ArgumentException
         BindUnaryOperatorRequireOneArgument, // Unary operators must be invoked with one argument
+
         // RuntimeBinderException
         BindPropertyFailedMethodGroup, // The name '{0}' is bound to a method and cannot be used like a property
+
         // RuntimeBinderException
         BindPropertyFailedEvent, // The event '{0}' can only appear on the left hand side of += or -=
+
         // RuntimeBinderException
         BindInvokeFailedNonDelegate, // Cannot invoke a non-delegate type
+
         // ArgumentException
         BindImplicitConversionRequireOneArgument, // Implicit conversion takes exactly one argument
+
         // ArgumentException
         BindExplicitConversionRequireOneArgument, // Explicit conversion takes exactly one argument
+
         // ArgumentException
         BindBinaryAssignmentRequireTwoArguments, // Binary operators cannot be invoked with one argument
+
         // RuntimeBinderException
         BindBinaryAssignmentFailedNullReference, // Cannot perform member assignment on a null reference
+
         // RuntimeBinderException
         NullReferenceOnMemberException, // Cannot perform runtime binding on a null reference
+
         // RuntimeBinderException
         BindCallToConditionalMethod, // Cannot dynamically invoke method '{0}' because it has a Conditional attribute
+
         // RuntimeBinderException
         BindToVoidMethodButExpectResult, // Cannot implicitly convert type 'void' to 'object'
+
         // EE?
         EmptyDynamicView, // No further information on this object could be discovered
+
         // MissingMemberException
         GetValueonWriteOnlyProperty, // Write Only properties are not supported
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genericuserconversion002.genericuserconversion002
 {
@@ -1604,13 +1474,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     //<Expects Status=success></Expects>
     // <Code>
 
-    public class A
-    {
-    }
+    public class A { }
 
-    public class B : A
-    {
-    }
+    public class B : A { }
 
     public class C
     {
@@ -1642,7 +1508,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
             try
             {
                 B b2 = (B)e2; // CS0457: Ambiguous user defined conversions 'D.implicit operator A(D)' and 'C.implicit operator B(C)'
-                              //         when converting from 'D' to 'B'
+                //         when converting from 'D' to 'B'
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
@@ -1658,8 +1524,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genericuserconversion004.genericuserconversion004
 {
     // <Area> User-defined conversions </Area>
@@ -1673,9 +1537,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
 
     public class A
     {
-        public class B : A
-        {
-        }
+        public class B : A { }
     }
 
     public class C
@@ -1706,7 +1568,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
             try
             {
                 A.B b2 = (A.B)e2; // CS0457: Ambiguous user defined conversions 'D.implicit operator A(D)' and 'C.implicit operator B(C)'
-                                  //         when converting from 'D' to 'B'
+                //         when converting from 'D' to 'B'
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
@@ -1721,8 +1583,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genericuserconversion006.genericuserconversion006
 {
@@ -1752,9 +1612,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         }
     }
 
-    public class C
-    {
-    }
+    public class C { }
 
     public class D : C
     {
@@ -1767,12 +1625,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         public static int MainMethod()
         {
             var retval = 1; // failure
-            var errorString = @"Ambiguous user defined conversions 'A.implicit operator A(D)' and 'B.implicit operator B(C)' when converting from 'D' to 'B'";
+            var errorString =
+                @"Ambiguous user defined conversions 'A.implicit operator A(D)' and 'B.implicit operator B(C)' when converting from 'D' to 'B'";
             dynamic e2 = new D();
             try
             {
                 B b2 = (B)e2; // CS0457: Ambiguous user defined conversions 'A.implicit operator A(D)' and 'B.implicit operator B(C)'
-                              //         when converting from 'D' to 'B'
+                //         when converting from 'D' to 'B'
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
@@ -1788,8 +1647,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclass.genericuserconversion008.genericuserconversion008
 {
     // <Area> User-defined conversions </Area>
@@ -1802,13 +1659,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     //<Expects Status=warning>\(40,16\).*CS0168</Expects>
     // <Code>
 
-    public class A<T>
-    {
-    }
+    public class A<T> { }
 
-    public class B<T> : A<T>
-    {
-    }
+    public class B<T> : A<T> { }
 
     public class C<T>
     {
@@ -1844,7 +1697,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
             try
             {
                 var b1 = (B<int>)e1; // CS0457: Ambiguous user defined conversions 'D<int>.implicit operator A<int>(D<int>)' and 'C<int>.implicit operator B<int>(C<int>)'
-                                     //         when converting from 'D<int>' to 'B<int>'
+                //         when converting from 'D<int>' to 'B<int>'
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
@@ -1858,7 +1711,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
             try
             {
                 var b2 = (B<object>)e2; // CS0457: Ambiguous user defined conversions 'D<object>.implicit operator A<object>(D<object>)' and 'C<object>.implicit operator B<object>(C<object>)'
-                                        //         when converting from 'D<object>' to 'B<object>'
+                //         when converting from 'D<object>' to 'B<object>'
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
@@ -1872,7 +1725,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
             try
             {
                 var b3 = (B<dynamic>)e3; // CS0457: Ambiguous user defined conversions 'D<dynamic>.implicit operator A<dynamic>(D<dynamic>)' and 'C<dynamic>.implicit operator B<dynamic>(C<dynamic>)'
-                                         //         when converting from 'D<dynamic>' to 'B<dynamic>'
+                //         when converting from 'D<dynamic>' to 'B<dynamic>'
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {

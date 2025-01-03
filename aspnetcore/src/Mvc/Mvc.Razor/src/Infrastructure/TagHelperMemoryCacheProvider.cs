@@ -15,8 +15,11 @@ public sealed class TagHelperMemoryCacheProvider
     /// This API supports the MVC's infrastructure and is not intended to be used
     /// directly from your code. This API may change in future releases.
     /// </summary>
-    public IMemoryCache Cache { get; internal set; } = new MemoryCache(new MemoryCacheOptions
-    {
-        SizeLimit = 10 * 1024 * 1024 // 10MB
-    });
+    public IMemoryCache Cache { get; internal set; } =
+        new MemoryCache(
+            new MemoryCacheOptions
+            {
+                SizeLimit = 10 * 1024 * 1024, // 10MB
+            }
+        );
 }

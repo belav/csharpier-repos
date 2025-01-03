@@ -17,22 +17,31 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal class CSharpUseImplicitObjectCreationDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+internal class CSharpUseImplicitObjectCreationDiagnosticAnalyzer
+    : AbstractBuiltInCodeStyleDiagnosticAnalyzer
 {
     public CSharpUseImplicitObjectCreationDiagnosticAnalyzer()
-        : base(IDEDiagnosticIds.UseImplicitObjectCreationDiagnosticId,
-               EnforceOnBuildValues.UseImplicitObjectCreation,
-               CSharpCodeStyleOptions.ImplicitObjectCreationWhenTypeIsApparent,
-               new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_new), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-               new LocalizableResourceString(nameof(CSharpAnalyzersResources.new_expression_can_be_simplified), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-    {
-    }
+        : base(
+            IDEDiagnosticIds.UseImplicitObjectCreationDiagnosticId,
+            EnforceOnBuildValues.UseImplicitObjectCreation,
+            CSharpCodeStyleOptions.ImplicitObjectCreationWhenTypeIsApparent,
+            new LocalizableResourceString(
+                nameof(CSharpAnalyzersResources.Use_new),
+                CSharpAnalyzersResources.ResourceManager,
+                typeof(CSharpAnalyzersResources)
+            ),
+            new LocalizableResourceString(
+                nameof(CSharpAnalyzersResources.new_expression_can_be_simplified),
+                CSharpAnalyzersResources.ResourceManager,
+                typeof(CSharpAnalyzersResources)
+            )
+        ) { }
 
-    public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-        => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+    public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+        DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-    protected override void InitializeWorker(AnalysisContext context)
-        => context.RegisterSyntaxNodeAction(AnalyzeSyntax, SyntaxKind.ObjectCreationExpression);
+    protected override void InitializeWorker(AnalysisContext context) =>
+        context.RegisterSyntaxNodeAction(AnalyzeSyntax, SyntaxKind.ObjectCreationExpression);
 
     private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
     {
@@ -44,7 +53,9 @@ internal class CSharpUseImplicitObjectCreationDiagnosticAnalyzer : AbstractBuilt
         if (syntaxTree.Options.LanguageVersion() < LanguageVersion.CSharp9)
             return;
 
-        var styleOption = context.GetCSharpAnalyzerOptions().ImplicitObjectCreationWhenTypeIsApparent;
+        var styleOption = context
+            .GetCSharpAnalyzerOptions()
+            .ImplicitObjectCreationWhenTypeIsApparent;
         if (!styleOption.Value || ShouldSkipAnalysis(context, styleOption.Notification))
         {
             // Bail immediately if the user has disabled this feature.
@@ -52,22 +63,33 @@ internal class CSharpUseImplicitObjectCreationDiagnosticAnalyzer : AbstractBuilt
         }
 
         var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
-        if (!Analyze(semanticModel, context.GetCSharpAnalyzerOptions().GetSimplifierOptions(), objectCreation, cancellationToken))
+        if (
+            !Analyze(
+                semanticModel,
+                context.GetCSharpAnalyzerOptions().GetSimplifierOptions(),
+                objectCreation,
+                cancellationToken
+            )
+        )
             return;
 
-        context.ReportDiagnostic(DiagnosticHelper.Create(
-            Descriptor,
-            objectCreation.Type.GetLocation(),
-            styleOption.Notification,
-            ImmutableArray.Create(objectCreation.GetLocation()),
-            properties: null));
+        context.ReportDiagnostic(
+            DiagnosticHelper.Create(
+                Descriptor,
+                objectCreation.Type.GetLocation(),
+                styleOption.Notification,
+                ImmutableArray.Create(objectCreation.GetLocation()),
+                properties: null
+            )
+        );
     }
 
     public static bool Analyze(
         SemanticModel semanticModel,
         CSharpSimplifierOptions simplifierOptions,
         ObjectCreationExpressionSyntax objectCreation,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         // type is apparent if we the object creation location is closely tied (spatially) to the explicit type.  Specifically:
         //
@@ -76,16 +98,21 @@ internal class CSharpUseImplicitObjectCreationDiagnosticAnalyzer : AbstractBuilt
         // 2. Expression-bodied constructs with an explicit return type.  i.e. `List<int> Prop => new ...` or
         //    `List<int> GetValue(...) => ...` The latter doesn't necessarily have the object creation spatially next to
         //    the type.  However, the type is always in a very easy to ascertain location in C#, so it is treated as
-        //    apparent. 
+        //    apparent.
         // 3. Collection-like constructs where the type of the collection is itself explicit.  For example: `new
         //    List<C> { new() }` or `new C[] { new() }`.
 
         TypeSyntax? typeNode;
 
-        if (objectCreation.Parent is EqualsValueClauseSyntax
+        if (
+            objectCreation.Parent is EqualsValueClauseSyntax
             {
-                Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Type.IsVar: false } variableDeclaration }
-            })
+                Parent: VariableDeclaratorSyntax
+                {
+                    Parent: VariableDeclarationSyntax { Type.IsVar: false } variableDeclaration
+                }
+            }
+        )
         {
             typeNode = variableDeclaration.Type;
 
@@ -93,7 +120,16 @@ internal class CSharpUseImplicitObjectCreationDiagnosticAnalyzer : AbstractBuilt
             if (helper.ShouldAnalyzeVariableDeclaration(variableDeclaration, cancellationToken))
             {
                 // this is a case where the user would prefer 'var'.  don't offer to use an implicit object here.
-                if (helper.AnalyzeTypeName(typeNode, semanticModel, simplifierOptions, cancellationToken).IsStylePreferred)
+                if (
+                    helper
+                        .AnalyzeTypeName(
+                            typeNode,
+                            semanticModel,
+                            simplifierOptions,
+                            cancellationToken
+                        )
+                        .IsStylePreferred
+                )
                     return false;
             }
         }
@@ -106,29 +142,62 @@ internal class CSharpUseImplicitObjectCreationDiagnosticAnalyzer : AbstractBuilt
                 ConversionOperatorDeclarationSyntax conversion => conversion.Type,
                 OperatorDeclarationSyntax op => op.ReturnType,
                 BasePropertyDeclarationSyntax property => property.Type,
-                AccessorDeclarationSyntax(SyntaxKind.GetAccessorDeclaration) { Parent: AccessorListSyntax { Parent: BasePropertyDeclarationSyntax baseProperty } } => baseProperty.Type,
+                AccessorDeclarationSyntax(SyntaxKind.GetAccessorDeclaration)
+                {
+                    Parent: AccessorListSyntax
+                    {
+                        Parent: BasePropertyDeclarationSyntax baseProperty
+                    }
+                } => baseProperty.Type,
                 _ => null,
             };
         }
-        else if (objectCreation.Parent is InitializerExpressionSyntax { Parent: ObjectCreationExpressionSyntax { Type: var collectionType } })
+        else if (
+            objectCreation.Parent is InitializerExpressionSyntax
+            {
+                Parent: ObjectCreationExpressionSyntax { Type: var collectionType }
+            }
+        )
         {
             typeNode = collectionType switch
             {
-                GenericNameSyntax { TypeArgumentList.Arguments: [{ } typeArgument] } => typeArgument,
-                QualifiedNameSyntax { Right: GenericNameSyntax { TypeArgumentList.Arguments: [{ } typeArgument] } } => typeArgument,
+                GenericNameSyntax { TypeArgumentList.Arguments: [{ } typeArgument] } =>
+                    typeArgument,
+                QualifiedNameSyntax
+                {
+                    Right: GenericNameSyntax { TypeArgumentList.Arguments: [{ } typeArgument] }
+                } => typeArgument,
                 _ => null,
             };
         }
-        else if (objectCreation.Parent is InitializerExpressionSyntax(kind: SyntaxKind.ArrayInitializerExpression)
+        else if (
+            objectCreation.Parent is InitializerExpressionSyntax
+            (kind: SyntaxKind.ArrayInitializerExpression)
+            {
+                Parent: EqualsValueClauseSyntax
+                {
+                    Parent: VariableDeclaratorSyntax
+                    {
+                        Parent: VariableDeclarationSyntax arrayVariableDeclaration
+                    }
+                }
+            }
+        )
         {
-            Parent: EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax arrayVariableDeclaration } }
-        })
-        {
-            typeNode = arrayVariableDeclaration.Type is ArrayTypeSyntax arrayType ? arrayType.ElementType : null;
+            typeNode = arrayVariableDeclaration.Type is ArrayTypeSyntax arrayType
+                ? arrayType.ElementType
+                : null;
         }
-        else if (objectCreation.Parent is InitializerExpressionSyntax { Parent: ArrayCreationExpressionSyntax { Type: var arrayCreationType } })
+        else if (
+            objectCreation.Parent is InitializerExpressionSyntax
+            {
+                Parent: ArrayCreationExpressionSyntax { Type: var arrayCreationType }
+            }
+        )
         {
-            typeNode = arrayCreationType is ArrayTypeSyntax arrayType ? arrayType.ElementType : null;
+            typeNode = arrayCreationType is ArrayTypeSyntax arrayType
+                ? arrayType.ElementType
+                : null;
         }
         else
         {

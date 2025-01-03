@@ -4,16 +4,15 @@
 
 namespace System.ServiceModel.Configuration
 {
-    using System.Configuration;
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Configuration;
+    using System.ServiceModel.Description;
 
-    public sealed partial class UseRequestHeadersForMetadataAddressElement : BehaviorExtensionElement
+    public sealed partial class UseRequestHeadersForMetadataAddressElement
+        : BehaviorExtensionElement
     {
-        public UseRequestHeadersForMetadataAddressElement()
-        {
-        }
+        public UseRequestHeadersForMetadataAddressElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.DefaultPorts)]
         public DefaultPortElementCollection DefaultPorts
@@ -25,7 +24,8 @@ namespace System.ServiceModel.Configuration
         {
             base.CopyFrom(from);
 
-            UseRequestHeadersForMetadataAddressElement source = (UseRequestHeadersForMetadataAddressElement)from;
+            UseRequestHeadersForMetadataAddressElement source =
+                (UseRequestHeadersForMetadataAddressElement)from;
             this.DefaultPorts.Clear();
             foreach (DefaultPortElement DefaultPort in source.DefaultPorts)
             {
@@ -35,7 +35,8 @@ namespace System.ServiceModel.Configuration
 
         protected internal override object CreateBehavior()
         {
-            UseRequestHeadersForMetadataAddressBehavior behavior = new UseRequestHeadersForMetadataAddressBehavior();
+            UseRequestHeadersForMetadataAddressBehavior behavior =
+                new UseRequestHeadersForMetadataAddressBehavior();
             foreach (DefaultPortElement DefaultPort in this.DefaultPorts)
             {
                 behavior.DefaultPortsByScheme.Add(DefaultPort.Scheme, DefaultPort.Port);

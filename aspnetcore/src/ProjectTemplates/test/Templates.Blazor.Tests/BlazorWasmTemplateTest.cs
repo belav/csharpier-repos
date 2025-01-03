@@ -31,7 +31,10 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
 
         // The service worker assets manifest isn't generated for non-PWA projects
         var publishDir = Path.Combine(project.TemplatePublishDir, "wwwroot");
-        Assert.False(File.Exists(Path.Combine(publishDir, "service-worker-assets.js")), "Non-PWA templates should not produce service-worker-assets.js");
+        Assert.False(
+            File.Exists(Path.Combine(publishDir, "service-worker-assets.js")),
+            "Non-PWA templates should not produce service-worker-assets.js"
+        );
 
         await BuildAndRunTest(project.ProjectName, project, browserKind);
 
@@ -41,7 +44,10 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
             Output.WriteLine($"Opening browser at {listeningUri}...");
             if (BrowserManager.IsAvailable(browserKind))
             {
-                await using var browser = await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo);
+                await using var browser = await BrowserManager.GetBrowserInstance(
+                    browserKind,
+                    BrowserContextInfo
+                );
                 var page = await NavigateToPage(browser, listeningUri);
                 await TestBasicNavigation(project.ProjectName, page);
             }
@@ -59,11 +65,14 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
         return page;
     }
 
-    [Theory(Skip="https://github.com/dotnet/aspnetcore/issues/46430")]
+    [Theory(Skip = "https://github.com/dotnet/aspnetcore/issues/46430")]
     [InlineData(BrowserKind.Chromium)]
     public async Task BlazorWasmHostedTemplate_Works(BrowserKind browserKind)
     {
-        var project = await CreateBuildPublishAsync(args: new[] { "--hosted" }, serverProject: true);
+        var project = await CreateBuildPublishAsync(
+            args: new[] { "--hosted" },
+            serverProject: true
+        );
 
         var serverProject = GetSubProject(project, "Server", $"{project.ProjectName}.Server");
 
@@ -73,14 +82,22 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
 
         Assert.False(
             aspNetProcess.Process.HasExited,
-            ErrorMessages.GetFailedProcessMessageOrEmpty("Run published project", serverProject, aspNetProcess.Process));
+            ErrorMessages.GetFailedProcessMessageOrEmpty(
+                "Run published project",
+                serverProject,
+                aspNetProcess.Process
+            )
+        );
 
         await aspNetProcess.AssertStatusCode("/", HttpStatusCode.OK, "text/html");
         await AssertCompressionFormat(aspNetProcess, "br");
 
         if (BrowserManager.IsAvailable(browserKind))
         {
-            await using var browser = await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo);
+            await using var browser = await BrowserManager.GetBrowserInstance(
+                browserKind,
+                BrowserContextInfo
+            );
             var page = await browser.NewPageAsync();
             await aspNetProcess.VisitInBrowserAsync(page);
             await TestBasicNavigation(project.ProjectName, page);
@@ -91,11 +108,17 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
         }
     }
 
-    private static async Task AssertCompressionFormat(AspNetProcess aspNetProcess, string expectedEncoding)
+    private static async Task AssertCompressionFormat(
+        AspNetProcess aspNetProcess,
+        string expectedEncoding
+    )
     {
         var response = await aspNetProcess.SendRequest(() =>
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, new Uri(aspNetProcess.ListeningUri, "/_framework/blazor.boot.json"));
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri(aspNetProcess.ListeningUri, "/_framework/blazor.boot.json")
+            );
             // These are the same as chrome
             request.Headers.AcceptEncoding.Clear();
             request.Headers.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("gzip"));
@@ -120,7 +143,10 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
         if (BrowserManager.IsAvailable(browserKind))
         {
             var (serveProcess, listeningUri) = RunPublishedStandaloneBlazorProject(project);
-            await using var browser = await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo);
+            await using var browser = await BrowserManager.GetBrowserInstance(
+                browserKind,
+                BrowserContextInfo
+            );
             Output.WriteLine($"Opening browser at {listeningUri}...");
             var page = await NavigateToPage(browser, listeningUri);
             using (serveProcess)
@@ -146,7 +172,10 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
     [InlineData(BrowserKind.Chromium)]
     public async Task BlazorWasmHostedPwaTemplate_Works(BrowserKind browserKind)
     {
-        var project = await CreateBuildPublishAsync(args: new[] { "--hosted", "--pwa" }, serverProject: true);
+        var project = await CreateBuildPublishAsync(
+            args: new[] { "--hosted", "--pwa" },
+            serverProject: true
+        );
 
         var serverProject = GetSubProject(project, "Server", $"{project.ProjectName}.Server");
 
@@ -157,13 +186,21 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
         string listeningUri = null;
         if (BrowserManager.IsAvailable(browserKind))
         {
-            await using var browser = await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo);
+            await using var browser = await BrowserManager.GetBrowserInstance(
+                browserKind,
+                BrowserContextInfo
+            );
             IPage page = null;
             using (var aspNetProcess = serverProject.StartPublishedProjectAsync())
             {
                 Assert.False(
                     aspNetProcess.Process.HasExited,
-                    ErrorMessages.GetFailedProcessMessageOrEmpty("Run published project", serverProject, aspNetProcess.Process));
+                    ErrorMessages.GetFailedProcessMessageOrEmpty(
+                        "Run published project",
+                        serverProject,
+                        aspNetProcess.Process
+                    )
+                );
 
                 await aspNetProcess.AssertStatusCode("/", HttpStatusCode.OK, "text/html");
                 page = await browser.NewPageAsync();
@@ -195,78 +232,150 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
 
         // When publishing the PWA template, we generate an assets manifest
         // and move service-worker.published.js to overwrite service-worker.js
-        Assert.False(File.Exists(Path.Combine(publishDir, "service-worker.published.js")), "service-worker.published.js should not be published");
-        Assert.True(File.Exists(Path.Combine(publishDir, "service-worker.js")), "service-worker.js should be published");
-        Assert.True(File.Exists(Path.Combine(publishDir, "service-worker-assets.js")), "service-worker-assets.js should be published");
+        Assert.False(
+            File.Exists(Path.Combine(publishDir, "service-worker.published.js")),
+            "service-worker.published.js should not be published"
+        );
+        Assert.True(
+            File.Exists(Path.Combine(publishDir, "service-worker.js")),
+            "service-worker.js should be published"
+        );
+        Assert.True(
+            File.Exists(Path.Combine(publishDir, "service-worker-assets.js")),
+            "service-worker-assets.js should be published"
+        );
 
         // We automatically append the SWAM version as a comment in the published service worker file
         var serviceWorkerAssetsManifestContents = ReadFile(publishDir, "service-worker-assets.js");
         var serviceWorkerContents = ReadFile(publishDir, "service-worker.js");
 
         // Parse the "version": "..." value from the SWAM, and check it's in the service worker
-        var serviceWorkerAssetsManifestVersionMatch = new Regex(@"^\s*\""version\"":\s*(\""[^\""]+\"")", RegexOptions.Multiline)
-            .Match(serviceWorkerAssetsManifestContents);
+        var serviceWorkerAssetsManifestVersionMatch = new Regex(
+            @"^\s*\""version\"":\s*(\""[^\""]+\"")",
+            RegexOptions.Multiline
+        ).Match(serviceWorkerAssetsManifestContents);
         Assert.True(serviceWorkerAssetsManifestVersionMatch.Success);
-        var serviceWorkerAssetsManifestVersionJson = serviceWorkerAssetsManifestVersionMatch.Groups[1].Captures[0].Value;
-        var serviceWorkerAssetsManifestVersion = JsonSerializer.Deserialize<string>(serviceWorkerAssetsManifestVersionJson);
-        Assert.True(serviceWorkerContents.Contains($"/* Manifest version: {serviceWorkerAssetsManifestVersion} */", StringComparison.Ordinal));
+        var serviceWorkerAssetsManifestVersionJson = serviceWorkerAssetsManifestVersionMatch
+            .Groups[1]
+            .Captures[0]
+            .Value;
+        var serviceWorkerAssetsManifestVersion = JsonSerializer.Deserialize<string>(
+            serviceWorkerAssetsManifestVersionJson
+        );
+        Assert.True(
+            serviceWorkerContents.Contains(
+                $"/* Manifest version: {serviceWorkerAssetsManifestVersion} */",
+                StringComparison.Ordinal
+            )
+        );
     }
 
-    public static TheoryData<TemplateInstance> TemplateData => new TheoryData<TemplateInstance>
+    public static TheoryData<TemplateInstance> TemplateData =>
+        new TheoryData<TemplateInstance>
         {
             new TemplateInstance(
-                "blazorwasmhostedaadb2c", "-ho",
-                "-au", "IndividualB2C",
-                "--aad-b2c-instance", "example.b2clogin.com",
-                "-ssp", "b2c_1_siupin",
-                "--client-id", "clientId",
-                "--domain", "my-domain",
-                "--default-scope", "full",
-                "--app-id-uri", "ApiUri",
-                "--api-client-id", "1234123413241324"),
+                "blazorwasmhostedaadb2c",
+                "-ho",
+                "-au",
+                "IndividualB2C",
+                "--aad-b2c-instance",
+                "example.b2clogin.com",
+                "-ssp",
+                "b2c_1_siupin",
+                "--client-id",
+                "clientId",
+                "--domain",
+                "my-domain",
+                "--default-scope",
+                "full",
+                "--app-id-uri",
+                "ApiUri",
+                "--api-client-id",
+                "1234123413241324"
+            ),
             new TemplateInstance(
-                "blazorwasmhostedaad", "-ho",
-                "-au", "SingleOrg",
-                "--domain", "my-domain",
-                "--tenant-id", "tenantId",
-                "--client-id", "clientId",
-                "--default-scope", "full",
-                "--app-id-uri", "ApiUri",
-                "--api-client-id", "1234123413241324"),
+                "blazorwasmhostedaad",
+                "-ho",
+                "-au",
+                "SingleOrg",
+                "--domain",
+                "my-domain",
+                "--tenant-id",
+                "tenantId",
+                "--client-id",
+                "clientId",
+                "--default-scope",
+                "full",
+                "--app-id-uri",
+                "ApiUri",
+                "--api-client-id",
+                "1234123413241324"
+            ),
             new TemplateInstance(
-                "blazorwasmhostedaadgraph", "-ho",
-                "-au", "SingleOrg",
+                "blazorwasmhostedaadgraph",
+                "-ho",
+                "-au",
+                "SingleOrg",
                 "--calls-graph",
-                "--domain", "my-domain",
-                "--tenant-id", "tenantId",
-                "--client-id", "clientId",
-                "--default-scope", "full",
-                "--app-id-uri", "ApiUri",
-                "--api-client-id", "1234123413241324"),
+                "--domain",
+                "my-domain",
+                "--tenant-id",
+                "tenantId",
+                "--client-id",
+                "clientId",
+                "--default-scope",
+                "full",
+                "--app-id-uri",
+                "ApiUri",
+                "--api-client-id",
+                "1234123413241324"
+            ),
             new TemplateInstance(
-                "blazorwasmhostedaadapi", "-ho",
-                "-au", "SingleOrg",
-                "--called-api-url", "\"https://graph.microsoft.com\"",
-                "--called-api-scopes", "user.readwrite",
-                "--domain", "my-domain",
-                "--tenant-id", "tenantId",
-                "--client-id", "clientId",
-                "--default-scope", "full",
-                "--app-id-uri", "ApiUri",
-                "--api-client-id", "1234123413241324"),
+                "blazorwasmhostedaadapi",
+                "-ho",
+                "-au",
+                "SingleOrg",
+                "--called-api-url",
+                "\"https://graph.microsoft.com\"",
+                "--called-api-scopes",
+                "user.readwrite",
+                "--domain",
+                "my-domain",
+                "--tenant-id",
+                "tenantId",
+                "--client-id",
+                "clientId",
+                "--default-scope",
+                "full",
+                "--app-id-uri",
+                "ApiUri",
+                "--api-client-id",
+                "1234123413241324"
+            ),
             new TemplateInstance(
                 "blazorwasmstandaloneaadb2c",
-                "-au", "IndividualB2C",
-                "--aad-b2c-instance", "example.b2clogin.com",
-                "-ssp", "b2c_1_siupin",
-                "--client-id", "clientId",
-                "--domain", "my-domain"),
+                "-au",
+                "IndividualB2C",
+                "--aad-b2c-instance",
+                "example.b2clogin.com",
+                "-ssp",
+                "b2c_1_siupin",
+                "--client-id",
+                "clientId",
+                "--domain",
+                "my-domain"
+            ),
             new TemplateInstance(
                 "blazorwasmstandaloneaad",
-                "-au", "SingleOrg",
-                "--domain", "my-domain",
-                "--tenant-id", "tenantId",
-                "--client-id", "clientId"),
+                "-au",
+                "SingleOrg",
+                "--domain",
+                "my-domain",
+                "--tenant-id",
+                "tenantId",
+                "--client-id",
+                "clientId"
+            ),
         };
 
     public class TemplateInstance
@@ -283,21 +392,35 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
 
     [Theory(Skip = "https://github.com/dotnet/aspnetcore/issues/37782")]
     [MemberData(nameof(TemplateData))]
-    public Task BlazorWasmHostedTemplate_AzureActiveDirectoryTemplate_Works(TemplateInstance instance)
-        => CreateBuildPublishAsync(args: instance.Arguments, targetFramework: "netstandard2.1");
+    public Task BlazorWasmHostedTemplate_AzureActiveDirectoryTemplate_Works(
+        TemplateInstance instance
+    ) => CreateBuildPublishAsync(args: instance.Arguments, targetFramework: "netstandard2.1");
 
-    protected async Task BuildAndRunTest(string appName, Project project, BrowserKind browserKind, bool usesAuth = false)
+    protected async Task BuildAndRunTest(
+        string appName,
+        Project project,
+        BrowserKind browserKind,
+        bool usesAuth = false
+    )
     {
         using var aspNetProcess = project.StartBuiltProjectAsync();
 
         Assert.False(
             aspNetProcess.Process.HasExited,
-            ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, aspNetProcess.Process));
+            ErrorMessages.GetFailedProcessMessageOrEmpty(
+                "Run built project",
+                project,
+                aspNetProcess.Process
+            )
+        );
 
         await aspNetProcess.AssertStatusCode("/", HttpStatusCode.OK, "text/html");
         if (BrowserManager.IsAvailable(browserKind))
         {
-            await using var browser = await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo);
+            await using var browser = await BrowserManager.GetBrowserInstance(
+                browserKind,
+                BrowserContextInfo
+            );
             var page = await browser.NewPageAsync();
             await aspNetProcess.VisitInBrowserAsync(page);
             await TestBasicNavigation(appName, page, usesAuth);
@@ -309,7 +432,12 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
         }
     }
 
-    private static async Task TestBasicNavigation(string appName, IPage page, bool usesAuth = false, bool skipFetchData = false)
+    private static async Task TestBasicNavigation(
+        string appName,
+        IPage page,
+        bool usesAuth = false,
+        bool skipFetchData = false
+    )
     {
         await page.WaitForSelectorAsync("nav");
 
@@ -323,23 +451,39 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
             page.WaitForNavigationAsync(new() { UrlString = "**/counter" }),
             page.WaitForSelectorAsync("h1 >> text=Counter"),
             page.WaitForSelectorAsync("p >> text=Current count: 0"),
-            page.ClickAsync("a[href=counter]"));
+            page.ClickAsync("a[href=counter]")
+        );
 
         // Clicking the counter button works
         await Task.WhenAll(
             page.WaitForSelectorAsync("p >> text=Current count: 1"),
-            page.ClickAsync("p+button >> text=Click me"));
+            page.ClickAsync("p+button >> text=Click me")
+        );
 
         if (usesAuth)
         {
             await Task.WhenAll(
-                page.WaitForNavigationAsync(new() { UrlString = "**/Identity/Account/Login**", WaitUntil = WaitUntilState.NetworkIdle }),
-                page.ClickAsync("text=Log in"));
+                page.WaitForNavigationAsync(
+                    new()
+                    {
+                        UrlString = "**/Identity/Account/Login**",
+                        WaitUntil = WaitUntilState.NetworkIdle,
+                    }
+                ),
+                page.ClickAsync("text=Log in")
+            );
 
             await Task.WhenAll(
                 page.WaitForSelectorAsync("[name=\"Input.Email\"]"),
-                page.WaitForNavigationAsync(new() { UrlString = "**/Identity/Account/Register**", WaitUntil = WaitUntilState.NetworkIdle }),
-                page.ClickAsync("text=Register as a new user"));
+                page.WaitForNavigationAsync(
+                    new()
+                    {
+                        UrlString = "**/Identity/Account/Register**",
+                        WaitUntil = WaitUntilState.NetworkIdle,
+                    }
+                ),
+                page.ClickAsync("text=Register as a new user")
+            );
 
             var userName = $"{Guid.NewGuid()}@example.com";
             var password = "[PLACEHOLDER]-1a";
@@ -350,13 +494,27 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
 
             // We will be redirected to the RegisterConfirmation
             await Task.WhenAll(
-                page.WaitForNavigationAsync(new() { UrlString = "**/Identity/Account/RegisterConfirmation**", WaitUntil = WaitUntilState.NetworkIdle }),
-                page.ClickAsync("#registerSubmit"));
+                page.WaitForNavigationAsync(
+                    new()
+                    {
+                        UrlString = "**/Identity/Account/RegisterConfirmation**",
+                        WaitUntil = WaitUntilState.NetworkIdle,
+                    }
+                ),
+                page.ClickAsync("#registerSubmit")
+            );
 
             // We will be redirected to the ConfirmEmail
             await Task.WhenAll(
-                page.WaitForNavigationAsync(new() { UrlString = "**/Identity/Account/ConfirmEmail**", WaitUntil = WaitUntilState.NetworkIdle }),
-                page.ClickAsync("text=Click here to confirm your account"));
+                page.WaitForNavigationAsync(
+                    new()
+                    {
+                        UrlString = "**/Identity/Account/ConfirmEmail**",
+                        WaitUntil = WaitUntilState.NetworkIdle,
+                    }
+                ),
+                page.ClickAsync("text=Click here to confirm your account")
+            );
 
             // Now we can login
             await page.ClickAsync("text=Login");
@@ -396,7 +554,8 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
 
         Output.WriteLine("Running dotnet serve on published output...");
         var developmentCertificate = DevelopmentCertificate.Create(project.TemplateOutputDir);
-        var args = $"-S --pfx \"{developmentCertificate.CertificatePath}\" --pfx-pwd \"{developmentCertificate.CertificatePassword}\" --port 0";
+        var args =
+            $"-S --pfx \"{developmentCertificate.CertificatePath}\" --pfx-pwd \"{developmentCertificate.CertificatePassword}\" --port 0";
         var command = DotNetMuxer.MuxerPathOrDefault();
         if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HELIX_DIR")))
         {
@@ -423,18 +582,21 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
                 if (line != null)
                 {
                     buffer.Add(line);
-                    if (line.Trim().Contains("https://", StringComparison.Ordinal) || line.Trim().Contains("http://", StringComparison.Ordinal))
+                    if (
+                        line.Trim().Contains("https://", StringComparison.Ordinal)
+                        || line.Trim().Contains("http://", StringComparison.Ordinal)
+                    )
                     {
                         return line.Trim();
                     }
                 }
             }
         }
-        catch (OperationCanceledException)
-        {
-        }
+        catch (OperationCanceledException) { }
 
-        throw new InvalidOperationException(@$"Couldn't find listening url:
-{string.Join(Environment.NewLine, buffer.Append(process.Error))}");
+        throw new InvalidOperationException(
+            @$"Couldn't find listening url:
+{string.Join(Environment.NewLine, buffer.Append(process.Error))}"
+        );
     }
 }

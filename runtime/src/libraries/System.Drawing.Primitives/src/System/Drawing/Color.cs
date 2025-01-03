@@ -9,11 +9,17 @@ using System.Runtime.CompilerServices;
 namespace System.Drawing
 {
     [DebuggerDisplay("{NameAndARGBValue}")]
-    [Editor("System.Drawing.Design.ColorEditor, System.Drawing.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Editor(
+        "System.Drawing.Design.ColorEditor, System.Drawing.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+        "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     [Serializable]
-    [TypeConverter("System.Drawing.ColorConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [TypeForwardedFrom("System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [TypeConverter(
+        "System.Drawing.ColorConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
+    [TypeForwardedFrom(
+        "System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public readonly struct Color : IEquatable<Color>
     {
         public static readonly Color Empty;
@@ -308,6 +314,7 @@ namespace System.Drawing
         public static Color Yellow => new Color(KnownColor.Yellow);
 
         public static Color YellowGreen => new Color(KnownColor.YellowGreen);
+
         //
         //  end "web" colors
         // -------------------------------------------------------------------
@@ -377,8 +384,8 @@ namespace System.Drawing
 
         public bool IsSystemColor => IsKnownColor && IsKnownColorSystem((KnownColor)knownColor);
 
-        internal static bool IsKnownColorSystem(KnownColor knownColor)
-            => KnownColorTable.ColorKindTable[(int)knownColor] == KnownColorTable.KnownColorKindSystem;
+        internal static bool IsKnownColorSystem(KnownColor knownColor) =>
+            KnownColorTable.ColorKindTable[(int)knownColor] == KnownColorTable.KnownColorKindSystem;
 
         // Used for the [DebuggerDisplay]. Inlining in the attribute is possible, but
         // against best practices as the current project language parses the string with
@@ -399,7 +406,10 @@ namespace System.Drawing
                 if (IsKnownColor)
                 {
                     string tablename = KnownColorNames.KnownColorToName((KnownColor)knownColor);
-                    Debug.Assert(tablename != null, $"Could not find known color '{(KnownColor)knownColor}' in the KnownColorTable");
+                    Debug.Assert(
+                        tablename != null,
+                        $"Could not find known color '{(KnownColor)knownColor}' in the KnownColorTable"
+                    );
 
                     return tablename;
                 }
@@ -432,13 +442,16 @@ namespace System.Drawing
         private static void CheckByte(int value, string name)
         {
             static void ThrowOutOfByteRange(int v, string n) =>
-                throw new ArgumentException(SR.Format(SR.InvalidEx2BoundArgument, n, v, byte.MinValue, byte.MaxValue));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidEx2BoundArgument, n, v, byte.MinValue, byte.MaxValue)
+                );
 
             if (unchecked((uint)value) > byte.MaxValue)
                 ThrowOutOfByteRange(value, name);
         }
 
-        private static Color FromArgb(uint argb) => new Color(argb, StateARGBValueValid, null, (KnownColor)0);
+        private static Color FromArgb(uint argb) =>
+            new Color(argb, StateARGBValueValid, null, (KnownColor)0);
 
         public static Color FromArgb(int argb) => FromArgb(unchecked((uint)argb));
 
@@ -450,10 +463,10 @@ namespace System.Drawing
             CheckByte(blue, nameof(blue));
 
             return FromArgb(
-                (uint)alpha << ARGBAlphaShift |
-                (uint)red << ARGBRedShift |
-                (uint)green << ARGBGreenShift |
-                (uint)blue << ARGBBlueShift
+                (uint)alpha << ARGBAlphaShift
+                    | (uint)red << ARGBRedShift
+                    | (uint)green << ARGBGreenShift
+                    | (uint)blue << ARGBBlueShift
             );
         }
 
@@ -461,16 +474,16 @@ namespace System.Drawing
         {
             CheckByte(alpha, nameof(alpha));
 
-            return FromArgb(
-                (uint)alpha << ARGBAlphaShift |
-                (uint)baseColor.Value & ~ARGBAlphaMask
-            );
+            return FromArgb((uint)alpha << ARGBAlphaShift | (uint)baseColor.Value & ~ARGBAlphaMask);
         }
 
-        public static Color FromArgb(int red, int green, int blue) => FromArgb(byte.MaxValue, red, green, blue);
+        public static Color FromArgb(int red, int green, int blue) =>
+            FromArgb(byte.MaxValue, red, green, blue);
 
         public static Color FromKnownColor(KnownColor color) =>
-            color <= 0 || color > KnownColor.RebeccaPurple ? FromName(color.ToString()) : new Color(color);
+            color <= 0 || color > KnownColor.RebeccaPurple
+                ? FromName(color.ToString())
+                : new Color(color);
 
         public static Color FromName(string name)
         {
@@ -570,19 +583,20 @@ namespace System.Drawing
         public KnownColor ToKnownColor() => (KnownColor)knownColor;
 
         public override string ToString() =>
-            IsNamedColor ? $"{nameof(Color)} [{Name}]":
-            (state & StateValueMask) != 0 ? $"{nameof(Color)} [A={A}, R={R}, G={G}, B={B}]" :
-            $"{nameof(Color)} [Empty]";
+            IsNamedColor ? $"{nameof(Color)} [{Name}]"
+            : (state & StateValueMask) != 0 ? $"{nameof(Color)} [A={A}, R={R}, G={G}, B={B}]"
+            : $"{nameof(Color)} [Empty]";
 
         public static bool operator ==(Color left, Color right) =>
             left.value == right.value
-                && left.state == right.state
-                && left.knownColor == right.knownColor
-                && left.name == right.name;
+            && left.state == right.state
+            && left.knownColor == right.knownColor
+            && left.name == right.name;
 
         public static bool operator !=(Color left, Color right) => !(left == right);
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is Color other && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is Color other && Equals(other);
 
         public bool Equals(Color other) => this == other;
 
@@ -598,7 +612,11 @@ namespace System.Drawing
             if (name != null && !IsKnownColor)
                 return name.GetHashCode();
 
-            return HashCode.Combine(value.GetHashCode(), state.GetHashCode(), knownColor.GetHashCode());
+            return HashCode.Combine(
+                value.GetHashCode(),
+                state.GetHashCode(),
+                knownColor.GetHashCode()
+            );
         }
     }
 }

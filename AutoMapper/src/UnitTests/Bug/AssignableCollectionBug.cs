@@ -20,14 +20,15 @@ namespace AutoMapper.UnitTests.Bug
                 public byte[] ImageData { get; set; }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateMap<Picture, PictureDto>();
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateMap<Picture, PictureDto>();
+                });
 
             protected override void Because_of()
             {
-                _source = new Picture {ImageData = new byte[100_000]};
+                _source = new Picture { ImageData = new byte[100_000] };
                 _dest = Mapper.Map<Picture, PictureDto>(_source);
             }
 

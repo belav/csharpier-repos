@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.ChangeSignature
     [Name(PredefinedCommandHandlerNames.ChangeSignature)]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class CSharpChangeSignatureCommandHandler(IThreadingContext threadingContext, IGlobalOptionService globalOptions) : AbstractChangeSignatureCommandHandler(threadingContext, globalOptions)
-    {
-    }
+    internal sealed class CSharpChangeSignatureCommandHandler(
+        IThreadingContext threadingContext,
+        IGlobalOptionService globalOptions
+    ) : AbstractChangeSignatureCommandHandler(threadingContext, globalOptions) { }
 }

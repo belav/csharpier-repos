@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Contracts.EditAndContinue;
-using System;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
@@ -48,19 +48,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         /// <summary>
         /// Exception regions -- spans of catch and finally handlers that surround the active statements.
-        /// 
+        ///
         /// Null if the document has syntax errors, rude edits or has not changed.
         /// </summary>
         /// <remarks>
         /// Null if there are any rude edit diagnostics.
-        /// 
+        ///
         /// Otherwise, each active statement in <see cref="ActiveStatements"/> has a corresponding slot in <see cref="ExceptionRegions"/>.
         ///
         /// Exception regions for each EH block/clause are marked as |...|.
         ///   try { ... AS ... } |catch { } finally { }|
         ///   try { } |catch { ... AS ... }| finally { }
         ///   try { } catch { } |finally { ... AS ... }|
-        /// 
+        ///
         /// Contains a minimal set of spans that cover the handlers.
         /// For example:
         ///   try { } |finally { try { ... AS ... } catch {  } }|
@@ -73,7 +73,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// Line edits in the document (or mapped documents), or null if the document has syntax errors, rude edits or has not changed.
         /// </summary>
         /// <remarks>
-        /// Grouped by file name and updates in each group are ordered by <see cref="SourceLineUpdate.OldLine"/>. 
+        /// Grouped by file name and updates in each group are ordered by <see cref="SourceLineUpdate.OldLine"/>.
         /// Each entry in the group applies the delta of <see cref="SourceLineUpdate.NewLine"/> - <see cref="SourceLineUpdate.OldLine"/>
         /// to all lines in range [<see cref="SourceLineUpdate.OldLine"/>, next entry's <see cref="SourceLineUpdate.OldLine"/>).
         /// </remarks>
@@ -112,7 +112,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             EditAndContinueCapabilities requiredCapabilities,
             TimeSpan elapsedTime,
             bool hasChanges,
-            bool hasSyntaxErrors)
+            bool hasSyntaxErrors
+        )
         {
             Debug.Assert(!rudeEdits.IsDefault);
 
@@ -144,11 +145,21 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     Debug.Assert(!lineEditsOpt.IsDefault);
 
                     // no duplicate files in line edits:
-                    Debug.Assert(lineEditsOpt.Select(edit => edit.FileName).Distinct().Count() == lineEditsOpt.Length);
+                    Debug.Assert(
+                        lineEditsOpt.Select(edit => edit.FileName).Distinct().Count()
+                            == lineEditsOpt.Length
+                    );
 
                     // line updates are sorted:
-                    Debug.Assert(lineEditsOpt.All(documentLineEdits => documentLineEdits.LineUpdates.IsSorted(Comparer<SourceLineUpdate>.Create(
-                        (x, y) => x.OldLine.CompareTo(y.OldLine)))));
+                    Debug.Assert(
+                        lineEditsOpt.All(documentLineEdits =>
+                            documentLineEdits.LineUpdates.IsSorted(
+                                Comparer<SourceLineUpdate>.Create(
+                                    (x, y) => x.OldLine.CompareTo(y.OldLine)
+                                )
+                            )
+                        )
+                    );
 
                     Debug.Assert(exceptionRegionsOpt.Length == activeStatementsOpt.Length);
                     Debug.Assert(requiredCapabilities != EditAndContinueCapabilities.None);
@@ -169,20 +180,26 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             HasChanges = hasChanges;
         }
 
-        public bool HasChangesAndErrors
-            => HasChanges && (HasSyntaxErrors || !RudeEditErrors.IsEmpty);
+        public bool HasChangesAndErrors =>
+            HasChanges && (HasSyntaxErrors || !RudeEditErrors.IsEmpty);
 
-        public bool HasChangesAndSyntaxErrors
-            => HasChanges && HasSyntaxErrors;
+        public bool HasChangesAndSyntaxErrors => HasChanges && HasSyntaxErrors;
 
-        public bool HasSignificantValidChanges
-            => HasChanges && (!SemanticEdits.IsDefaultOrEmpty || !LineEdits.IsDefaultOrEmpty);
+        public bool HasSignificantValidChanges =>
+            HasChanges && (!SemanticEdits.IsDefaultOrEmpty || !LineEdits.IsDefaultOrEmpty);
 
         /// <summary>
         /// Report errors blocking the document analysis.
         /// </summary>
-        public static DocumentAnalysisResults SyntaxErrors(DocumentId documentId, string filePath, ImmutableArray<RudeEditDiagnostic> rudeEdits, Diagnostic? syntaxError, TimeSpan elapsedTime, bool hasChanges)
-            => new(
+        public static DocumentAnalysisResults SyntaxErrors(
+            DocumentId documentId,
+            string filePath,
+            ImmutableArray<RudeEditDiagnostic> rudeEdits,
+            Diagnostic? syntaxError,
+            TimeSpan elapsedTime,
+            bool hasChanges
+        ) =>
+            new(
                 documentId,
                 filePath,
                 activeStatementsOpt: default,
@@ -194,13 +211,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 EditAndContinueCapabilities.None,
                 elapsedTime,
                 hasChanges,
-                hasSyntaxErrors: true);
+                hasSyntaxErrors: true
+            );
 
         /// <summary>
         /// Report unchanged document results.
         /// </summary>
-        public static DocumentAnalysisResults Unchanged(DocumentId documentId, string filePath, TimeSpan elapsedTime)
-            => new(
+        public static DocumentAnalysisResults Unchanged(
+            DocumentId documentId,
+            string filePath,
+            TimeSpan elapsedTime
+        ) =>
+            new(
                 documentId,
                 filePath,
                 activeStatementsOpt: default,
@@ -212,6 +234,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 EditAndContinueCapabilities.None,
                 elapsedTime,
                 hasChanges: false,
-                hasSyntaxErrors: false);
+                hasSyntaxErrors: false
+            );
     }
 }

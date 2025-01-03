@@ -2,16 +2,15 @@
 
 using System;
 
-namespace Library {
+namespace Library
+{
+    public class Foo { }
 
-	public class Foo {
-	}
-
-	public static class Extensions {
-
-		public static void Bar (this Foo self)
-		{
-			Console.WriteLine ("Bar");
-		}
-	}
+    public static class Extensions
+    {
+        public static void Bar(this Foo self)
+        {
+            Console.WriteLine("Bar");
+        }
+    }
 }

@@ -6,15 +6,20 @@
 // @owner  willa
 // @backupOwner Microsoft
 //------------------------------------------------------------------------------
-using System.Diagnostics;
-using System.Data.Metadata.Edm;
 using System.Data.Common;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
 
 namespace System.Data.Spatial
 {
     internal static class SpatialHelpers
     {
-        internal static object GetSpatialValue(MetadataWorkspace workspace, DbDataReader reader, TypeUsage columnType, int columnOrdinal)
+        internal static object GetSpatialValue(
+            MetadataWorkspace workspace,
+            DbDataReader reader,
+            TypeUsage columnType,
+            int columnOrdinal
+        )
         {
             Debug.Assert(Helper.IsSpatialType(columnType));
             DbSpatialDataReader spatialReader = CreateSpatialDataReader(workspace, reader);
@@ -28,15 +33,30 @@ namespace System.Data.Spatial
             }
         }
 
-        internal static DbSpatialDataReader CreateSpatialDataReader(MetadataWorkspace workspace, DbDataReader reader)
+        internal static DbSpatialDataReader CreateSpatialDataReader(
+            MetadataWorkspace workspace,
+            DbDataReader reader
+        )
         {
-            StoreItemCollection storeItemCollection = (StoreItemCollection)workspace.GetItemCollection(DataSpace.SSpace);
+            StoreItemCollection storeItemCollection = (StoreItemCollection)
+                workspace.GetItemCollection(DataSpace.SSpace);
             DbProviderFactory providerFactory = storeItemCollection.StoreProviderFactory;
-            Debug.Assert(providerFactory != null, "GetProviderSpatialServices requires provider factory to have been initialized");
+            Debug.Assert(
+                providerFactory != null,
+                "GetProviderSpatialServices requires provider factory to have been initialized"
+            );
 
-            DbProviderServices providerServices = DbProviderServices.GetProviderServices(providerFactory);
-            DbSpatialDataReader result = providerServices.GetSpatialDataReader(reader, storeItemCollection.StoreProviderManifestToken);
-            Debug.Assert(result != null, "DbProviderServices did not throw ProviderIncompatibleException for null IDbSpatialDataReader");
+            DbProviderServices providerServices = DbProviderServices.GetProviderServices(
+                providerFactory
+            );
+            DbSpatialDataReader result = providerServices.GetSpatialDataReader(
+                reader,
+                storeItemCollection.StoreProviderManifestToken
+            );
+            Debug.Assert(
+                result != null,
+                "DbProviderServices did not throw ProviderIncompatibleException for null IDbSpatialDataReader"
+            );
 
             return result;
         }

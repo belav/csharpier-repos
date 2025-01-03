@@ -18,12 +18,16 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
-    internal abstract class AbstractGoToDefinitionHandler : ILspServiceDocumentRequestHandler<LSP.TextDocumentPositionParams, LSP.Location[]?>
+    internal abstract class AbstractGoToDefinitionHandler
+        : ILspServiceDocumentRequestHandler<LSP.TextDocumentPositionParams, LSP.Location[]?>
     {
         private readonly IMetadataAsSourceFileService _metadataAsSourceFileService;
         private readonly IGlobalOptionService _globalOptions;
 
-        public AbstractGoToDefinitionHandler(IMetadataAsSourceFileService metadataAsSourceFileService, IGlobalOptionService globalOptions)
+        public AbstractGoToDefinitionHandler(
+            IMetadataAsSourceFileService metadataAsSourceFileService,
+            IGlobalOptionService globalOptions
+        )
         {
             _metadataAsSourceFileService = metadataAsSourceFileService;
             _globalOptions = globalOptions;
@@ -32,11 +36,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public TextDocumentIdentifier GetTextDocumentIdentifier(LSP.TextDocumentPositionParams request) => request.TextDocument;
+        public TextDocumentIdentifier GetTextDocumentIdentifier(
+            LSP.TextDocumentPositionParams request
+        ) => request.TextDocument;
 
-        public abstract Task<LSP.Location[]?> HandleRequestAsync(TextDocumentPositionParams request, RequestContext context, CancellationToken cancellationToken);
+        public abstract Task<LSP.Location[]?> HandleRequestAsync(
+            TextDocumentPositionParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        );
 
-        protected async Task<LSP.Location[]?> GetDefinitionAsync(LSP.TextDocumentPositionParams request, bool typeOnly, RequestContext context, CancellationToken cancellationToken)
+        protected async Task<LSP.Location[]?> GetDefinitionAsync(
+            LSP.TextDocumentPositionParams request,
+            bool typeOnly,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var workspace = context.Workspace;
             var document = context.Document;
@@ -44,11 +59,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return null;
 
             var locations = ArrayBuilder<LSP.Location>.GetInstance();
-            var position = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(request.Position), cancellationToken).ConfigureAwait(false);
+            var position = await document
+                .GetPositionFromLinePositionAsync(
+                    ProtocolConversions.PositionToLinePosition(request.Position),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var service = document.GetRequiredLanguageService<INavigableItemsService>();
 
-            var definitions = await service.GetNavigableItemsAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var definitions = await service
+                .GetNavigableItemsAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             if (definitions.Length > 0)
             {
                 foreach (var definition in definitions)
@@ -56,31 +78,59 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     if (!ShouldInclude(definition, typeOnly))
                         continue;
 
-                    var location = await ProtocolConversions.TextSpanToLocationAsync(
-                        await definition.Document.GetRequiredDocumentAsync(document.Project.Solution, cancellationToken).ConfigureAwait(false),
-                        definition.SourceSpan,
-                        definition.IsStale,
-                        cancellationToken).ConfigureAwait(false);
+                    var location = await ProtocolConversions
+                        .TextSpanToLocationAsync(
+                            await definition
+                                .Document.GetRequiredDocumentAsync(
+                                    document.Project.Solution,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false),
+                            definition.SourceSpan,
+                            definition.IsStale,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     locations.AddIfNotNull(location);
                 }
             }
             else if (document.SupportsSemanticModel && _metadataAsSourceFileService != null)
             {
                 // No definition found - see if we can get metadata as source but that's only applicable for C#\VB.
-                var symbol = await SymbolFinder.FindSymbolAtPositionAsync(document, position, cancellationToken).ConfigureAwait(false);
-                if (symbol != null && _metadataAsSourceFileService.IsNavigableMetadataSymbol(symbol))
+                var symbol = await SymbolFinder
+                    .FindSymbolAtPositionAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false);
+                if (
+                    symbol != null
+                    && _metadataAsSourceFileService.IsNavigableMetadataSymbol(symbol)
+                )
                 {
                     if (!typeOnly || symbol is ITypeSymbol)
                     {
-                        var options = _globalOptions.GetMetadataAsSourceOptions(document.Project.Services);
-                        var declarationFile = await _metadataAsSourceFileService.GetGeneratedFileAsync(workspace, document.Project, symbol, signaturesOnly: false, options, cancellationToken).ConfigureAwait(false);
+                        var options = _globalOptions.GetMetadataAsSourceOptions(
+                            document.Project.Services
+                        );
+                        var declarationFile = await _metadataAsSourceFileService
+                            .GetGeneratedFileAsync(
+                                workspace,
+                                document.Project,
+                                symbol,
+                                signaturesOnly: false,
+                                options,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                         var linePosSpan = declarationFile.IdentifierLocation.GetLineSpan().Span;
-                        locations.Add(new LSP.Location
-                        {
-                            Uri = ProtocolConversions.CreateAbsoluteUri(declarationFile.FilePath),
-                            Range = ProtocolConversions.LinePositionToRange(linePosSpan),
-                        });
+                        locations.Add(
+                            new LSP.Location
+                            {
+                                Uri = ProtocolConversions.CreateAbsoluteUri(
+                                    declarationFile.FilePath
+                                ),
+                                Range = ProtocolConversions.LinePositionToRange(linePosSpan),
+                            }
+                        );
                     }
                 }
             }

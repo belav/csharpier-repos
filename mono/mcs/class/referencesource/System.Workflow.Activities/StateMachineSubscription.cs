@@ -4,8 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Reflection;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Design;
@@ -31,14 +31,8 @@ namespace System.Workflow.Activities
 
         internal Guid SubscriptionId
         {
-            get
-            {
-                return _subscriptionId;
-            }
-            set
-            {
-                _subscriptionId = value;
-            }
+            get { return _subscriptionId; }
+            set { _subscriptionId = value; }
         }
 
         #endregion Properties
@@ -47,7 +41,10 @@ namespace System.Workflow.Activities
         {
             ActivityExecutionContext context = sender as ActivityExecutionContext;
             if (context == null)
-                throw new ArgumentException(SR.Error_SenderMustBeActivityExecutionContext, "sender");
+                throw new ArgumentException(
+                    SR.Error_SenderMustBeActivityExecutionContext,
+                    "sender"
+                );
 
             Enqueue(context);
         }
@@ -76,41 +73,31 @@ namespace System.Workflow.Activities
 
         internal string EventActivityName
         {
-            get
-            {
-                return _eventActivityName;
-            }
+            get { return _eventActivityName; }
         }
 
         internal string StateName
         {
-            get
-            {
-                return _stateName;
-            }
+            get { return _stateName; }
         }
 
         internal IComparable QueueName
         {
-            get
-            {
-                return _queueName;
-            }
+            get { return _queueName; }
         }
 
         internal string EventDrivenName
         {
-            get
-            {
-                return _eventDrivenName;
-            }
+            get { return _eventDrivenName; }
         }
 
         #endregion Properties
 
-        internal void Subscribe(ActivityExecutionContext context,
+        internal void Subscribe(
+            ActivityExecutionContext context,
             StateActivity state,
-            IEventActivity eventActivity)
+            IEventActivity eventActivity
+        )
         {
             eventActivity.Subscribe(context, this);
             Activity activity = (Activity)eventActivity;
@@ -118,28 +105,36 @@ namespace System.Workflow.Activities
             this._eventActivityName = activity.QualifiedName;
             this._stateName = state.QualifiedName;
             this.SubscriptionId = Guid.NewGuid();
-            EventDrivenActivity eventDriven = StateMachineHelpers.GetParentEventDriven(eventActivity);
+            EventDrivenActivity eventDriven = StateMachineHelpers.GetParentEventDriven(
+                eventActivity
+            );
             this._eventDrivenName = eventDriven.QualifiedName;
         }
 
-        internal void Unsubscribe(ActivityExecutionContext context,
-            IEventActivity eventActivity)
+        internal void Unsubscribe(ActivityExecutionContext context, IEventActivity eventActivity)
         {
             eventActivity.Unsubscribe(context, this);
         }
 
         protected override void Enqueue(ActivityExecutionContext context)
         {
-            StateActivity rootState = StateMachineHelpers.GetRootState((StateActivity)context.Activity);
+            StateActivity rootState = StateMachineHelpers.GetRootState(
+                (StateActivity)context.Activity
+            );
             StateMachineExecutionState executionState = StateMachineExecutionState.Get(rootState);
             executionState.SubscriptionManager.Enqueue(context, this.QueueName);
         }
 
         internal override void ProcessEvent(ActivityExecutionContext context)
         {
-            StateActivity rootState = StateMachineHelpers.GetRootState((StateActivity)context.Activity);
+            StateActivity rootState = StateMachineHelpers.GetRootState(
+                (StateActivity)context.Activity
+            );
             StateMachineExecutionState executionState = StateMachineExecutionState.Get(rootState);
-            ExternalEventAction action = new ExternalEventAction(this.StateName, this.EventDrivenName);
+            ExternalEventAction action = new ExternalEventAction(
+                this.StateName,
+                this.EventDrivenName
+            );
             Debug.Assert(!executionState.HasEnqueuedActions);
             executionState.EnqueueAction(action);
             executionState.ProcessActions(context);
@@ -171,15 +166,18 @@ namespace System.Workflow.Activities
                 return;
             }
 
-            WorkflowQueuingService workflowQueuingService = context.GetService<WorkflowQueuingService>();
+            WorkflowQueuingService workflowQueuingService =
+                context.GetService<WorkflowQueuingService>();
 
             MessageEventSubscription subscription = new MessageEventSubscription(
                 StateMachineWorkflowActivity.SetStateQueueName,
-                this._instanceId);
+                this._instanceId
+            );
 
             WorkflowQueue workflowQueue = workflowQueuingService.CreateWorkflowQueue(
                 StateMachineWorkflowActivity.SetStateQueueName,
-                true);
+                true
+            );
             this.SubscriptionId = subscription.SubscriptionId;
         }
 
@@ -194,44 +192,67 @@ namespace System.Workflow.Activities
                 return;
             }
 
-            WorkflowQueuingService workflowQueuingService = context.GetService<WorkflowQueuingService>();
-            WorkflowQueue workflowQueue = workflowQueuingService.GetWorkflowQueue(StateMachineWorkflowActivity.SetStateQueueName);
-            workflowQueuingService.DeleteWorkflowQueue(StateMachineWorkflowActivity.SetStateQueueName);
+            WorkflowQueuingService workflowQueuingService =
+                context.GetService<WorkflowQueuingService>();
+            WorkflowQueue workflowQueue = workflowQueuingService.GetWorkflowQueue(
+                StateMachineWorkflowActivity.SetStateQueueName
+            );
+            workflowQueuingService.DeleteWorkflowQueue(
+                StateMachineWorkflowActivity.SetStateQueueName
+            );
         }
 
         internal void Subscribe(ActivityExecutionContext context)
         {
-            WorkflowQueuingService workflowQueuingService = context.GetService<WorkflowQueuingService>();
-            WorkflowQueue workflowQueue = workflowQueuingService.GetWorkflowQueue(StateMachineWorkflowActivity.SetStateQueueName);
+            WorkflowQueuingService workflowQueuingService =
+                context.GetService<WorkflowQueuingService>();
+            WorkflowQueue workflowQueue = workflowQueuingService.GetWorkflowQueue(
+                StateMachineWorkflowActivity.SetStateQueueName
+            );
             workflowQueue.RegisterForQueueItemAvailable(this);
         }
 
         internal void Unsubscribe(ActivityExecutionContext context)
         {
-            WorkflowQueuingService workflowQueuingService = context.GetService<WorkflowQueuingService>();
-            WorkflowQueue workflowQueue = workflowQueuingService.GetWorkflowQueue(StateMachineWorkflowActivity.SetStateQueueName);
+            WorkflowQueuingService workflowQueuingService =
+                context.GetService<WorkflowQueuingService>();
+            WorkflowQueue workflowQueue = workflowQueuingService.GetWorkflowQueue(
+                StateMachineWorkflowActivity.SetStateQueueName
+            );
             workflowQueue.UnregisterForQueueItemAvailable(this);
         }
 
         protected override void Enqueue(ActivityExecutionContext context)
         {
-            StateActivity rootState = StateMachineHelpers.GetRootState((StateActivity)context.Activity);
+            StateActivity rootState = StateMachineHelpers.GetRootState(
+                (StateActivity)context.Activity
+            );
             StateMachineExecutionState executionState = StateMachineExecutionState.Get(rootState);
             executionState.SubscriptionManager.Enqueue(context, this.SubscriptionId);
         }
 
         internal override void ProcessEvent(ActivityExecutionContext context)
         {
-            WorkflowQueuingService workflowQueuingService = context.GetService<WorkflowQueuingService>();
-            WorkflowQueue workflowQueue = workflowQueuingService.GetWorkflowQueue(StateMachineWorkflowActivity.SetStateQueueName);
+            WorkflowQueuingService workflowQueuingService =
+                context.GetService<WorkflowQueuingService>();
+            WorkflowQueue workflowQueue = workflowQueuingService.GetWorkflowQueue(
+                StateMachineWorkflowActivity.SetStateQueueName
+            );
             SetStateEventArgs eventArgs = workflowQueue.Dequeue() as SetStateEventArgs;
             StateActivity currentState = StateMachineHelpers.GetCurrentState(context);
             if (currentState == null)
-                throw new InvalidOperationException(SR.GetStateMachineWorkflowMustHaveACurrentState());
+                throw new InvalidOperationException(
+                    SR.GetStateMachineWorkflowMustHaveACurrentState()
+                );
 
-            StateActivity rootState = StateMachineHelpers.GetRootState((StateActivity)context.Activity);
+            StateActivity rootState = StateMachineHelpers.GetRootState(
+                (StateActivity)context.Activity
+            );
             StateMachineExecutionState executionState = StateMachineExecutionState.Get(rootState);
-            SetStateAction action = new SetStateAction(currentState.QualifiedName, eventArgs.TargetStateName);
+            SetStateAction action = new SetStateAction(
+                currentState.QualifiedName,
+                eventArgs.TargetStateName
+            );
             Debug.Assert(!executionState.HasEnqueuedActions);
             executionState.EnqueueAction(action);
             executionState.ProcessActions(context);

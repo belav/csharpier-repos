@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,35 +32,34 @@
 using System;
 using System.Web;
 
-namespace System.Web.Hosting {
+namespace System.Web.Hosting
+{
+    public abstract class VirtualFileBase : MarshalByRefObject
+    {
+        string vpath;
 
-	public abstract class VirtualFileBase : MarshalByRefObject
-	{
-		string vpath;
+        protected VirtualFileBase() { }
 
-		protected VirtualFileBase ()
-		{
-		}
+        internal void SetVirtualPath(string vpath)
+        {
+            this.vpath = vpath;
+        }
 
-		internal void SetVirtualPath (string vpath)
-		{
-			this.vpath = vpath;
-		}
+        public abstract bool IsDirectory { get; }
 
-		public abstract bool IsDirectory { get; }
+        public virtual string Name
+        {
+            get { return VirtualPathUtility.GetFileName(vpath); }
+        }
 
-		public virtual string Name {
-			get { return VirtualPathUtility.GetFileName (vpath); }
-		}
+        public string VirtualPath
+        {
+            get { return vpath; }
+        }
 
-		public string VirtualPath {
-			get { return vpath; }
-		}
-
-		public override object InitializeLifetimeService ()
-		{
-			return null; // forever young
-		}
-	}
+        public override object InitializeLifetimeService()
+        {
+            return null; // forever young
+        }
+    }
 }
-

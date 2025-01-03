@@ -35,8 +35,10 @@ namespace System.ServiceModel.Transactions
             if (!string.IsNullOrEmpty(cacheIdentifier) || this.timeout != 0)
             {
                 // Cache extended information for subsequent marshal operations
-                WsatExtendedInformationCache.Cache(tx, new WsatExtendedInformation(cacheIdentifier,
-                                                                                   this.timeout));
+                WsatExtendedInformationCache.Cache(
+                    tx,
+                    new WsatExtendedInformation(cacheIdentifier, this.timeout)
+                );
             }
         }
 
@@ -50,11 +52,11 @@ namespace System.ServiceModel.Transactions
 
         public static bool IsNativeIdentifier(string identifier, Guid transactionId)
         {
-            return string.Compare(identifier,
-                                  CreateNativeIdentifier(transactionId),
-                                  StringComparison.Ordinal) == 0;
+            return string.Compare(
+                    identifier,
+                    CreateNativeIdentifier(transactionId),
+                    StringComparison.Ordinal
+                ) == 0;
         }
-
-
     }
 }

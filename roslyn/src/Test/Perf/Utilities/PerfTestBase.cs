@@ -17,7 +17,8 @@ namespace Roslyn.Test.Performance.Utilities
         /// Constructor for PerfTest that sets up the correct working path location.
         /// </summary>
         /// <param name="workingFile"></param>
-        public PerfTest([CallerFilePath] string workingFile = "") : base(workingFile) { }
+        public PerfTest([CallerFilePath] string workingFile = "")
+            : base(workingFile) { }
 
         /// <summary>
         /// Setup is called once for every test on a run.  This is where you should do all
@@ -26,7 +27,7 @@ namespace Roslyn.Test.Performance.Utilities
         public abstract void Setup();
 
         /// <summary>
-        /// The body of the test.  In most cases, this method will be shelling out to an 
+        /// The body of the test.  In most cases, this method will be shelling out to an
         /// external tool.
         /// </summary>
         public abstract void Test();
@@ -43,7 +44,7 @@ namespace Roslyn.Test.Performance.Utilities
 
         /// <summary>
         /// The name of the process that the profiler should pay attention to.
-        /// 
+        ///
         /// 'csc' is an example.
         /// </summary>
         public abstract string MeasuredProc { get; }

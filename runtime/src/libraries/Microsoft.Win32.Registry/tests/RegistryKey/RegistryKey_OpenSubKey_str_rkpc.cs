@@ -12,16 +12,35 @@ namespace Microsoft.Win32.RegistryTests
         public void NegativeTests()
         {
             // Should throw if passed subkey name is null
-            Assert.Throws<ArgumentNullException>(() => TestRegistryKey.OpenSubKey(name: null, permissionCheck: RegistryKeyPermissionCheck.ReadSubTree));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    TestRegistryKey.OpenSubKey(
+                        name: null,
+                        permissionCheck: RegistryKeyPermissionCheck.ReadSubTree
+                    )
+            );
 
             // Should throw if subkey name greater than 255 chars
-            AssertExtensions.Throws<ArgumentException>("name", null, () => TestRegistryKey.OpenSubKey(new string('a', 256), RegistryKeyPermissionCheck.Default));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                null,
+                () =>
+                    TestRegistryKey.OpenSubKey(
+                        new string('a', 256),
+                        RegistryKeyPermissionCheck.Default
+                    )
+            );
 
             // Should throw when opened with default permission check
             const string name = "FooBar";
             TestRegistryKey.SetValue(name, 42);
             TestRegistryKey.CreateSubKey(name).Dispose();
-            using (var rk = Registry.CurrentUser.OpenSubKey(name: TestRegistryKeyName, permissionCheck: RegistryKeyPermissionCheck.Default))
+            using (
+                var rk = Registry.CurrentUser.OpenSubKey(
+                    name: TestRegistryKeyName,
+                    permissionCheck: RegistryKeyPermissionCheck.Default
+                )
+            )
             {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.SetValue(name, "String"));
@@ -31,7 +50,12 @@ namespace Microsoft.Win32.RegistryTests
             }
 
             // Should throw when opened with read permission check
-            using (var rk = Registry.CurrentUser.OpenSubKey(name: TestRegistryKeyName, permissionCheck: RegistryKeyPermissionCheck.ReadSubTree))
+            using (
+                var rk = Registry.CurrentUser.OpenSubKey(
+                    name: TestRegistryKeyName,
+                    permissionCheck: RegistryKeyPermissionCheck.ReadSubTree
+                )
+            )
             {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.SetValue(name, "String"));
@@ -55,7 +79,9 @@ namespace Microsoft.Win32.RegistryTests
             const string valueName = "FooBar";
             const string expectedValue = "BLAH";
 
-            using (var rk = TestRegistryKey.OpenSubKey("", RegistryKeyPermissionCheck.ReadWriteSubTree))
+            using (
+                var rk = TestRegistryKey.OpenSubKey("", RegistryKeyPermissionCheck.ReadWriteSubTree)
+            )
             {
                 rk.SetValue(valueName, expectedValue);
                 Assert.Equal(expectedValue, rk.GetValue(valueName));
@@ -65,38 +91,77 @@ namespace Microsoft.Win32.RegistryTests
             }
         }
 
-        private const RegistryKeyPermissionCheck DefaultPermissionCheck = RegistryKeyPermissionCheck.Default;
-        private const RegistryKeyPermissionCheck Writable = RegistryKeyPermissionCheck.ReadWriteSubTree;
-        private const RegistryKeyPermissionCheck NonWritable = RegistryKeyPermissionCheck.ReadSubTree;
+        private const RegistryKeyPermissionCheck DefaultPermissionCheck =
+            RegistryKeyPermissionCheck.Default;
+        private const RegistryKeyPermissionCheck Writable =
+            RegistryKeyPermissionCheck.ReadWriteSubTree;
+        private const RegistryKeyPermissionCheck NonWritable =
+            RegistryKeyPermissionCheck.ReadSubTree;
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void OpenSubKey_DefaultPermissionCheck_KeyExists_OpensWithFixedUpName(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(expected, () => TestRegistryKey.OpenSubKey(subKeyName, DefaultPermissionCheck));
+        public void OpenSubKey_DefaultPermissionCheck_KeyExists_OpensWithFixedUpName(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName, DefaultPermissionCheck)
+            );
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void OpenSubKey_Writable_KeyExists_OpensWithFixedUpName(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(expected, () => TestRegistryKey.OpenSubKey(subKeyName, Writable));
+        public void OpenSubKey_Writable_KeyExists_OpensWithFixedUpName(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName, Writable)
+            );
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void OpenSubKey_NonWritable_KeyExists_OpensWithFixedUpName(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(expected, () => TestRegistryKey.OpenSubKey(subKeyName, NonWritable));
+        public void OpenSubKey_NonWritable_KeyExists_OpensWithFixedUpName(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName, NonWritable)
+            );
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void OpenSubKey_DefaultPermissionCheck_KeyDoesNotExist_ReturnsNull(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(expected, () => TestRegistryKey.OpenSubKey(subKeyName, DefaultPermissionCheck));
+        public void OpenSubKey_DefaultPermissionCheck_KeyDoesNotExist_ReturnsNull(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName, DefaultPermissionCheck)
+            );
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void OpenSubKey_Writable_KeyDoesNotExist_ReturnsNull(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(expected, () => TestRegistryKey.OpenSubKey(subKeyName, Writable));
+        public void OpenSubKey_Writable_KeyDoesNotExist_ReturnsNull(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName, Writable)
+            );
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void OpenSubKey_NonWritable_KeyDoesNotExist_ReturnsNull(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(expected, () => TestRegistryKey.OpenSubKey(subKeyName, NonWritable));
+        public void OpenSubKey_NonWritable_KeyDoesNotExist_ReturnsNull(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName, NonWritable)
+            );
     }
 }

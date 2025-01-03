@@ -94,7 +94,6 @@ namespace System.Xml.Xsl.Qil
             return false;
         }
 
-
         //-----------------------------------------------
         // QilVisitor methods (auto-generated)
         //-----------------------------------------------
@@ -230,7 +229,9 @@ namespace System.Xml.Xsl.Qil
 
                 QilNodeType.XsltGenerateId => VisitXsltGenerateId((QilUnary)n),
                 QilNodeType.XsltInvokeLateBound => VisitXsltInvokeLateBound((QilInvokeLateBound)n),
-                QilNodeType.XsltInvokeEarlyBound => VisitXsltInvokeEarlyBound((QilInvokeEarlyBound)n),
+                QilNodeType.XsltInvokeEarlyBound => VisitXsltInvokeEarlyBound(
+                    (QilInvokeEarlyBound)n
+                ),
                 QilNodeType.XsltCopy => VisitXsltCopy((QilBinary)n),
                 QilNodeType.XsltCopyOf => VisitXsltCopyOf((QilUnary)n),
                 QilNodeType.XsltConvert => VisitXsltConvert((QilTargetType)n),
@@ -256,177 +257,604 @@ namespace System.Xml.Xsl.Qil
             };
         }
 
-        protected virtual QilNode? VisitNull() { return null; }
+        protected virtual QilNode? VisitNull()
+        {
+            return null;
+        }
 
         #region meta
-        protected virtual QilNode VisitQilExpression(QilExpression n) { return VisitChildren(n); }
-        protected virtual QilNode VisitFunctionList(QilList n) { return VisitChildren(n); }
-        protected virtual QilNode VisitGlobalVariableList(QilList n) { return VisitChildren(n); }
-        protected virtual QilNode VisitGlobalParameterList(QilList n) { return VisitChildren(n); }
-        protected virtual QilNode VisitActualParameterList(QilList n) { return VisitChildren(n); }
-        protected virtual QilNode VisitFormalParameterList(QilList n) { return VisitChildren(n); }
-        protected virtual QilNode VisitSortKeyList(QilList n) { return VisitChildren(n); }
-        protected virtual QilNode VisitBranchList(QilList n) { return VisitChildren(n); }
-        protected virtual QilNode VisitOptimizeBarrier(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitUnknown(QilNode n) { return VisitChildren(n); }
+        protected virtual QilNode VisitQilExpression(QilExpression n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitFunctionList(QilList n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitGlobalVariableList(QilList n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitGlobalParameterList(QilList n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitActualParameterList(QilList n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitFormalParameterList(QilList n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitSortKeyList(QilList n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitBranchList(QilList n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitOptimizeBarrier(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitUnknown(QilNode n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region specials
-        protected virtual QilNode VisitDataSource(QilDataSource n) { return VisitChildren(n); }
-        protected virtual QilNode VisitNop(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitError(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitWarning(QilUnary n) { return VisitChildren(n); }
+        protected virtual QilNode VisitDataSource(QilDataSource n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitNop(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitError(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitWarning(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region variables
-        protected virtual QilNode VisitFor(QilIterator n) { return VisitChildren(n); }
-        protected virtual QilNode VisitForReference(QilIterator n) { return n; }
-        protected virtual QilNode VisitLet(QilIterator n) { return VisitChildren(n); }
-        protected virtual QilNode VisitLetReference(QilIterator n) { return n; }
-        protected virtual QilNode VisitParameter(QilParameter n) { return VisitChildren(n); }
-        protected virtual QilNode VisitParameterReference(QilParameter n) { return n; }
-        protected virtual QilNode VisitPositionOf(QilUnary n) { return VisitChildren(n); }
+        protected virtual QilNode VisitFor(QilIterator n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitForReference(QilIterator n)
+        {
+            return n;
+        }
+
+        protected virtual QilNode VisitLet(QilIterator n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitLetReference(QilIterator n)
+        {
+            return n;
+        }
+
+        protected virtual QilNode VisitParameter(QilParameter n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitParameterReference(QilParameter n)
+        {
+            return n;
+        }
+
+        protected virtual QilNode VisitPositionOf(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region literals
-        protected virtual QilNode VisitTrue(QilNode n) { return VisitChildren(n); }
-        protected virtual QilNode VisitFalse(QilNode n) { return VisitChildren(n); }
-        protected virtual QilNode VisitLiteralString(QilLiteral n) { return VisitChildren(n); }
-        protected virtual QilNode VisitLiteralInt32(QilLiteral n) { return VisitChildren(n); }
-        protected virtual QilNode VisitLiteralInt64(QilLiteral n) { return VisitChildren(n); }
-        protected virtual QilNode VisitLiteralDouble(QilLiteral n) { return VisitChildren(n); }
-        protected virtual QilNode VisitLiteralDecimal(QilLiteral n) { return VisitChildren(n); }
-        protected virtual QilNode VisitLiteralQName(QilName n) { return VisitChildren(n); }
-        protected virtual QilNode VisitLiteralType(QilLiteral n) { return VisitChildren(n); }
-        protected virtual QilNode VisitLiteralObject(QilLiteral n) { return VisitChildren(n); }
+        protected virtual QilNode VisitTrue(QilNode n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitFalse(QilNode n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitLiteralString(QilLiteral n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitLiteralInt32(QilLiteral n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitLiteralInt64(QilLiteral n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitLiteralDouble(QilLiteral n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitLiteralDecimal(QilLiteral n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitLiteralQName(QilName n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitLiteralType(QilLiteral n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitLiteralObject(QilLiteral n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region boolean operators
-        protected virtual QilNode VisitAnd(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitOr(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitNot(QilUnary n) { return VisitChildren(n); }
+        protected virtual QilNode VisitAnd(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitOr(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitNot(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region choice
-        protected virtual QilNode VisitConditional(QilTernary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitChoice(QilChoice n) { return VisitChildren(n); }
+        protected virtual QilNode VisitConditional(QilTernary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitChoice(QilChoice n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region collection operators
-        protected virtual QilNode VisitLength(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitSequence(QilList n) { return VisitChildren(n); }
-        protected virtual QilNode VisitUnion(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitIntersection(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitDifference(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitAverage(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitSum(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitMinimum(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitMaximum(QilUnary n) { return VisitChildren(n); }
+        protected virtual QilNode VisitLength(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitSequence(QilList n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitUnion(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitIntersection(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitDifference(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitAverage(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitSum(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitMinimum(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitMaximum(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region arithmetic operators
-        protected virtual QilNode VisitNegate(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitAdd(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitSubtract(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitMultiply(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitDivide(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitModulo(QilBinary n) { return VisitChildren(n); }
+        protected virtual QilNode VisitNegate(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitAdd(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitSubtract(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitMultiply(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitDivide(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitModulo(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region string operators
-        protected virtual QilNode VisitStrLength(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitStrConcat(QilStrConcat n) { return VisitChildren(n); }
-        protected virtual QilNode VisitStrParseQName(QilBinary n) { return VisitChildren(n); }
+        protected virtual QilNode VisitStrLength(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitStrConcat(QilStrConcat n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitStrParseQName(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region value comparison operators
-        protected virtual QilNode VisitNe(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitEq(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitGt(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitGe(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitLt(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitLe(QilBinary n) { return VisitChildren(n); }
+        protected virtual QilNode VisitNe(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitEq(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitGt(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitGe(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitLt(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitLe(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region node comparison operators
-        protected virtual QilNode VisitIs(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitAfter(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitBefore(QilBinary n) { return VisitChildren(n); }
+        protected virtual QilNode VisitIs(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitAfter(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitBefore(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region loops
-        protected virtual QilNode VisitLoop(QilLoop n) { return VisitChildren(n); }
-        protected virtual QilNode VisitFilter(QilLoop n) { return VisitChildren(n); }
+        protected virtual QilNode VisitLoop(QilLoop n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitFilter(QilLoop n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region sorting
-        protected virtual QilNode VisitSort(QilLoop n) { return VisitChildren(n); }
-        protected virtual QilNode VisitSortKey(QilSortKey n) { return VisitChildren(n); }
-        protected virtual QilNode VisitDocOrderDistinct(QilUnary n) { return VisitChildren(n); }
+        protected virtual QilNode VisitSort(QilLoop n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitSortKey(QilSortKey n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitDocOrderDistinct(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region function definition and invocation
-        protected virtual QilNode VisitFunction(QilFunction n) { return VisitChildren(n); }
-        protected virtual QilNode VisitFunctionReference(QilFunction n) { return n; }
-        protected virtual QilNode VisitInvoke(QilInvoke n) { return VisitChildren(n); }
+        protected virtual QilNode VisitFunction(QilFunction n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitFunctionReference(QilFunction n)
+        {
+            return n;
+        }
+
+        protected virtual QilNode VisitInvoke(QilInvoke n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region XML navigation
-        protected virtual QilNode VisitContent(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitAttribute(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitParent(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitRoot(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitXmlContext(QilNode n) { return VisitChildren(n); }
-        protected virtual QilNode VisitDescendant(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitDescendantOrSelf(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitAncestor(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitAncestorOrSelf(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitPreceding(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitFollowingSibling(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitPrecedingSibling(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitNodeRange(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitDeref(QilBinary n) { return VisitChildren(n); }
+        protected virtual QilNode VisitContent(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitAttribute(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitParent(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitRoot(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitXmlContext(QilNode n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitDescendant(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitDescendantOrSelf(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitAncestor(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitAncestorOrSelf(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitPreceding(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitFollowingSibling(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitPrecedingSibling(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitNodeRange(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitDeref(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region XML construction
-        protected virtual QilNode VisitElementCtor(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitAttributeCtor(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitCommentCtor(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitPICtor(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitTextCtor(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitRawTextCtor(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitDocumentCtor(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitNamespaceDecl(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitRtfCtor(QilBinary n) { return VisitChildren(n); }
+        protected virtual QilNode VisitElementCtor(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitAttributeCtor(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitCommentCtor(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitPICtor(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitTextCtor(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitRawTextCtor(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitDocumentCtor(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitNamespaceDecl(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitRtfCtor(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region Node properties
-        protected virtual QilNode VisitNameOf(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitLocalNameOf(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitNamespaceUriOf(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitPrefixOf(QilUnary n) { return VisitChildren(n); }
+        protected virtual QilNode VisitNameOf(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitLocalNameOf(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitNamespaceUriOf(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitPrefixOf(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region Type operators
-        protected virtual QilNode VisitTypeAssert(QilTargetType n) { return VisitChildren(n); }
-        protected virtual QilNode VisitIsType(QilTargetType n) { return VisitChildren(n); }
-        protected virtual QilNode VisitIsEmpty(QilUnary n) { return VisitChildren(n); }
+        protected virtual QilNode VisitTypeAssert(QilTargetType n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitIsType(QilTargetType n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitIsEmpty(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region XPath operators
-        protected virtual QilNode VisitXPathNodeValue(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitXPathFollowing(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitXPathPreceding(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitXPathNamespace(QilUnary n) { return VisitChildren(n); }
+        protected virtual QilNode VisitXPathNodeValue(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitXPathFollowing(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitXPathPreceding(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitXPathNamespace(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #region XSLT
-        protected virtual QilNode VisitXsltGenerateId(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitXsltInvokeLateBound(QilInvokeLateBound n) { return VisitChildren(n); }
-        protected virtual QilNode VisitXsltInvokeEarlyBound(QilInvokeEarlyBound n) { return VisitChildren(n); }
-        protected virtual QilNode VisitXsltCopy(QilBinary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitXsltCopyOf(QilUnary n) { return VisitChildren(n); }
-        protected virtual QilNode VisitXsltConvert(QilTargetType n) { return VisitChildren(n); }
+        protected virtual QilNode VisitXsltGenerateId(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitXsltInvokeLateBound(QilInvokeLateBound n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitXsltInvokeEarlyBound(QilInvokeEarlyBound n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitXsltCopy(QilBinary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitXsltCopyOf(QilUnary n)
+        {
+            return VisitChildren(n);
+        }
+
+        protected virtual QilNode VisitXsltConvert(QilTargetType n)
+        {
+            return VisitChildren(n);
+        }
         #endregion
 
         #endregion // AUTOGENERATED

@@ -10,12 +10,18 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.IntroduceVariable
 {
-    internal partial class AbstractIntroduceVariableService<TService, TExpressionSyntax, TTypeSyntax, TTypeDeclarationSyntax, TQueryExpressionSyntax, TNameSyntax>
+    internal partial class AbstractIntroduceVariableService<
+        TService,
+        TExpressionSyntax,
+        TTypeSyntax,
+        TTypeDeclarationSyntax,
+        TQueryExpressionSyntax,
+        TNameSyntax
+    >
     {
         private partial class State
         {
-            private bool IsInParameterContext(
-                CancellationToken cancellationToken)
+            private bool IsInParameterContext(CancellationToken cancellationToken)
             {
                 if (!_service.IsInParameterInitializer(Expression))
                 {
@@ -25,9 +31,12 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 // The default value for a parameter is a constant.  So we always allow it unless it
                 // happens to capture one of the method's type parameters.
                 var bindingMap = GetSemanticMap(cancellationToken);
-                if (bindingMap.AllReferencedSymbols.OfType<ITypeParameterSymbol>()
-                                                    .Where(tp => tp.TypeParameterKind == TypeParameterKind.Method)
-                                                    .Any())
+                if (
+                    bindingMap
+                        .AllReferencedSymbols.OfType<ITypeParameterSymbol>()
+                        .Where(tp => tp.TypeParameterKind == TypeParameterKind.Method)
+                        .Any()
+                )
                 {
                     return false;
                 }

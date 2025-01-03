@@ -49,7 +49,8 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
             byte[]? rented = null;
 
@@ -65,7 +66,8 @@ namespace System.Formats.Asn1
                 UniversalTagNumber.GeneralizedTime,
                 out int bytesRead,
                 ref rented,
-                tmpSpace);
+                tmpSpace
+            );
 
             DateTimeOffset value = ParseGeneralizedTime(ruleSet, contents);
 
@@ -80,7 +82,8 @@ namespace System.Formats.Asn1
 
         private static DateTimeOffset ParseGeneralizedTime(
             AsnEncodingRules ruleSet,
-            ReadOnlySpan<byte> contentOctets)
+            ReadOnlySpan<byte> contentOctets
+        )
         {
             // T-REC-X.680-201510 sec 46 defines a lot of formats for GeneralizedTime.
             //
@@ -203,7 +206,9 @@ namespace System.Formats.Asn1
                     // T-REC-X.690-201510 sec 11.7.4
                     if (strict)
                     {
-                        throw new AsnContentException(SR.ContentException_InvalidUnderCerOrDer_TryBer);
+                        throw new AsnContentException(
+                            SR.ContentException_InvalidUnderCerOrDer_TryBer
+                        );
                     }
                 }
                 else
@@ -223,8 +228,14 @@ namespace System.Formats.Asn1
                 // In case the double -> Ticks conversion allows for rounding up we can allow
                 // for a 12th digit.
 
-                if (!Utf8Parser.TryParse(SliceAtMost(contents, 12), out fraction, out int fracLength) ||
-                    fracLength == 0)
+                if (
+                    !Utf8Parser.TryParse(
+                        SliceAtMost(contents, 12),
+                        out fraction,
+                        out int fracLength
+                    )
+                    || fracLength == 0
+                )
                 {
                     throw new AsnContentException();
                 }
@@ -242,7 +253,13 @@ namespace System.Formats.Asn1
                 // The unsigned parsers will not accept + or - as a leading character, so
                 // they won't eat timezone suffix.
                 // But Utf8Parser.TryParse reports false on overflow, so limit it to 9 digits at a time.
-                while (Utf8Parser.TryParse(SliceAtMost(contents, 9), out uint nonSemantic, out fracLength))
+                while (
+                    Utf8Parser.TryParse(
+                        SliceAtMost(contents, 9),
+                        out uint nonSemantic,
+                        out fracLength
+                    )
+                )
                 {
                     contents = contents.Slice(fracLength);
                     lastFracDigit = (byte)(nonSemantic % 10);
@@ -382,12 +399,22 @@ namespace System.Formats.Asn1
                 {
                     // Use the local timezone offset since there's no information in the contents.
                     // T-REC-X.680-201510 sec 46.2(a).
-                    value = new DateTimeOffset(new DateTime(year, month, day, hour, minute.Value, second.Value));
+                    value = new DateTimeOffset(
+                        new DateTime(year, month, day, hour, minute.Value, second.Value)
+                    );
                 }
                 else
                 {
                     // T-REC-X.680-201510 sec 46.2(b) or 46.2(c).
-                    value = new DateTimeOffset(year, month, day, hour, minute.Value, second.Value, timeOffset.Value);
+                    value = new DateTimeOffset(
+                        year,
+                        month,
+                        day,
+                        hour,
+                        minute.Value,
+                        second.Value,
+                        timeOffset.Value
+                    );
                 }
 
                 value += fractionSpan;
@@ -430,7 +457,12 @@ namespace System.Formats.Asn1
         /// </exception>
         public DateTimeOffset ReadGeneralizedTime(Asn1Tag? expectedTag = null)
         {
-            DateTimeOffset ret = AsnDecoder.ReadGeneralizedTime(_data.Span, RuleSet, out int consumed, expectedTag);
+            DateTimeOffset ret = AsnDecoder.ReadGeneralizedTime(
+                _data.Span,
+                RuleSet,
+                out int consumed,
+                expectedTag
+            );
             _data = _data.Slice(consumed);
             return ret;
         }

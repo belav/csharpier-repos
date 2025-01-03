@@ -3,8 +3,8 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class InheritanceRelationshipsQueryRelationalFixture : InheritanceRelationshipsQueryFixtureBase
+public abstract class InheritanceRelationshipsQueryRelationalFixture
+    : InheritanceRelationshipsQueryFixtureBase
 {
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 }

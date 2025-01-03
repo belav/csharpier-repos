@@ -31,7 +31,10 @@ internal sealed class NullableConverterFactory : IFormDataConverterFactory
         var expectedConverterType = typeof(NullableConverter<>).MakeGenericType(underlyingType);
         Debug.Assert(expectedConverterType != null);
 
-        return Activator.CreateInstance(expectedConverterType, underlyingConverter) as FormDataConverter ??
-            throw new InvalidOperationException($"Unable to create converter for type '{type}'.");
+        return Activator.CreateInstance(expectedConverterType, underlyingConverter)
+                as FormDataConverter
+            ?? throw new InvalidOperationException(
+                $"Unable to create converter for type '{type}'."
+            );
     }
 }

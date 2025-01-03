@@ -17,11 +17,15 @@ namespace Microsoft.Extensions.ObjectPool;
 /// </para>
 /// </summary>
 /// <typeparam name="T">The type of object which is being pooled.</typeparam>
-[Obsolete("LeakTrackingObjectPool<T> was only intended for internal use in diagnostic builds of .NET. " +
-    "It never functioned in publicly shipped .NET versions and may be removed in a future release.")]
-public class LeakTrackingObjectPool<T> : ObjectPool<T> where T : class
+[Obsolete(
+    "LeakTrackingObjectPool<T> was only intended for internal use in diagnostic builds of .NET. "
+        + "It never functioned in publicly shipped .NET versions and may be removed in a future release."
+)]
+public class LeakTrackingObjectPool<T> : ObjectPool<T>
+    where T : class
 {
-    private readonly ConditionalWeakTable<T, Tracker> _trackers = new ConditionalWeakTable<T, Tracker>();
+    private readonly ConditionalWeakTable<T, Tracker> _trackers =
+        new ConditionalWeakTable<T, Tracker>();
     private readonly ObjectPool<T> _inner;
 
     /// <summary>
@@ -75,7 +79,9 @@ public class LeakTrackingObjectPool<T> : ObjectPool<T> where T : class
         {
             if (!_disposed && !Environment.HasShutdownStarted)
             {
-                Debug.Fail($"{typeof(T).Name} was leaked. Created at: {Environment.NewLine}{_stack}");
+                Debug.Fail(
+                    $"{typeof(T).Name} was leaked. Created at: {Environment.NewLine}{_stack}"
+                );
             }
         }
     }

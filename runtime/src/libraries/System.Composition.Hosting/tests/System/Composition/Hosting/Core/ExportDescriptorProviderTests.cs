@@ -31,11 +31,17 @@ namespace System.Composition.Hosting.Core.Tests
 
         private class SubProvider : ExportDescriptorProvider
         {
-            public IEnumerable<ExportDescriptorPromise> GetNoExportDescriptors() => NoExportDescriptors;
+            public IEnumerable<ExportDescriptorPromise> GetNoExportDescriptors() =>
+                NoExportDescriptors;
+
             public IDictionary<string, object> GetNoMetadata() => NoMetadata;
+
             public Func<IEnumerable<CompositionDependency>> GetNoDependencies() => NoDependencies;
 
-            public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(CompositionContract contract, DependencyAccessor descriptorAccessor)
+            public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
+                CompositionContract contract,
+                DependencyAccessor descriptorAccessor
+            )
             {
                 throw new NotImplementedException();
             }

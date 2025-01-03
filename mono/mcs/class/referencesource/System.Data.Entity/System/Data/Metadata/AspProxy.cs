@@ -59,9 +59,6 @@ namespace System.Data.Metadata.Edm
             }
         }
 
-
-
-
         private bool TryInitializeWebAssembly()
         {
             // We cannot introduce a hard dependency on the System.Web assembly, so we load
@@ -88,15 +85,13 @@ namespace System.Data.Metadata.Edm
             {
                 if (!EntityUtil.IsCatchableExceptionType(e))
                 {
-
-                    throw;  // StackOverflow, OutOfMemory, ...
+                    throw; // StackOverflow, OutOfMemory, ...
                 }
 
                 // It is possible that we are operating in an environment where
                 // System.Web is simply not available (for instance, inside SQL
                 // Server). Instead of throwing or rethrowing, we simply fail
                 // gracefully
-
             }
 
             return false;
@@ -106,20 +101,22 @@ namespace System.Data.Metadata.Edm
         {
             if (!TryInitializeWebAssembly())
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.UnableToDetermineApplicationContext);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.UnableToDetermineApplicationContext
+                );
             }
         }
 
         /// <summary>
         /// This method accepts a string parameter that represents a path in a Web (specifically,
-        /// an ASP.NET) application -- one that starts with a '~' -- and resolves it to a 
+        /// an ASP.NET) application -- one that starts with a '~' -- and resolves it to a
         /// canonical file path.
         /// </summary>
         /// <remarks>
         /// The implementation assumes that you cannot have file names that begin with the '~'
         /// character. (This is a pretty reasonable assumption.) Additionally, the method does not
         /// test for the existence of a directory or file resource after resolving the path.
-        /// 
+        ///
 
 
 
@@ -145,19 +142,25 @@ namespace System.Data.Metadata.Edm
             Debug.Assert(path.StartsWith(EdmConstants.WebHomeSymbol, StringComparison.Ordinal));
 
             InitializeWebAssembly();
-            // Each managed application domain contains a static instance of the HostingEnvironment class, which 
+            // Each managed application domain contains a static instance of the HostingEnvironment class, which
             // provides access to application-management functions and application services. We'll try to invoke
             // the static method MapPath() on that object.
             //
             try
             {
-                Type hostingEnvType = _webAssembly.GetType("System.Web.Hosting.HostingEnvironment", true);
+                Type hostingEnvType = _webAssembly.GetType(
+                    "System.Web.Hosting.HostingEnvironment",
+                    true
+                );
 
                 MethodInfo miMapPath = hostingEnvType.GetMethod("MapPath");
-                Debug.Assert(miMapPath != null, "Unpexpected missing member in type System.Web.Hosting.HostingEnvironment");
+                Debug.Assert(
+                    miMapPath != null,
+                    "Unpexpected missing member in type System.Web.Hosting.HostingEnvironment"
+                );
 
                 // Note:
-                //   1. If path is null, then the MapPath() method returns the full physical path to the directory 
+                //   1. If path is null, then the MapPath() method returns the full physical path to the directory
                 //      containing the current application.
                 //   2. Any attempt to navigate out of the application directory (using "../..") will generate
                 //      a (wrapped) System.Web.HttpException under ASP.NET (which we catch and re-throw).
@@ -166,31 +169,52 @@ namespace System.Data.Metadata.Edm
             }
             catch (TargetException e)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.UnableToDetermineApplicationContext, e);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.UnableToDetermineApplicationContext,
+                    e
+                );
             }
             catch (ArgumentException e)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.UnableToDetermineApplicationContext, e);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.UnableToDetermineApplicationContext,
+                    e
+                );
             }
             catch (TargetInvocationException e)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.UnableToDetermineApplicationContext, e);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.UnableToDetermineApplicationContext,
+                    e
+                );
             }
             catch (TargetParameterCountException e)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.UnableToDetermineApplicationContext, e);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.UnableToDetermineApplicationContext,
+                    e
+                );
             }
             catch (MethodAccessException e)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.UnableToDetermineApplicationContext, e);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.UnableToDetermineApplicationContext,
+                    e
+                );
             }
             catch (MemberAccessException e)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.UnableToDetermineApplicationContext, e);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.UnableToDetermineApplicationContext,
+                    e
+                );
             }
             catch (TypeLoadException e)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.UnableToDetermineApplicationContext, e);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.UnableToDetermineApplicationContext,
+                    e
+                );
             }
         }
 
@@ -200,13 +224,11 @@ namespace System.Data.Metadata.Edm
             return TryGetBuildManagerType(out buildManager);
         }
 
-
         private bool TryGetBuildManagerType(out Type buildManager)
         {
             InitializeWebAssembly();
             buildManager = _webAssembly.GetType(BUILD_MANAGER_TYPE_NAME, false);
             return buildManager != null;
-
         }
 
         internal IEnumerable<Assembly> GetBuildManagerReferencedAssemblies()
@@ -219,13 +241,18 @@ namespace System.Data.Metadata.Edm
             Type buildManager;
             if (!TryGetBuildManagerType(out buildManager))
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.UnableToFindReflectedType(BUILD_MANAGER_TYPE_NAME, AssemblyRef.SystemWeb));
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.UnableToFindReflectedType(
+                        BUILD_MANAGER_TYPE_NAME,
+                        AssemblyRef.SystemWeb
+                    )
+                );
             }
 
             MethodInfo getRefAssembliesMethod = buildManager.GetMethod(
-                                                            @"GetReferencedAssemblies",
-                                                            BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.Public
-                                                        );
+                @"GetReferencedAssemblies",
+                BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.Public
+            );
 
             if (getRefAssembliesMethod == null)
             {
@@ -245,15 +272,24 @@ namespace System.Data.Metadata.Edm
             }
             catch (TargetException e)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.UnableToDetermineApplicationContext, e);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.UnableToDetermineApplicationContext,
+                    e
+                );
             }
             catch (TargetInvocationException e)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.UnableToDetermineApplicationContext, e);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.UnableToDetermineApplicationContext,
+                    e
+                );
             }
             catch (MethodAccessException e)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.UnableToDetermineApplicationContext, e);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.UnableToDetermineApplicationContext,
+                    e
+                );
             }
         }
     }

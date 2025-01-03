@@ -4,11 +4,11 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities;
 using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
-using Microsoft.AspNetCore.InternalTesting;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -23,13 +23,11 @@ public class NtlmAuthenticationTests : IISFunctionalTestBase
     // TODO either enable windows auth on our CI or use containers to test this
     // behavior
 
-    public NtlmAuthenticationTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public NtlmAuthenticationTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
-    public static TestMatrix TestVariants
-        => TestMatrix.ForServers(DeployerSelector.ServerType)
-            .WithTfms(Tfm.Default);
+    public static TestMatrix TestVariants =>
+        TestMatrix.ForServers(DeployerSelector.ServerType).WithTfms(Tfm.Default);
 
     [ConditionalTheory]
     [RequiresIIS(IISCapability.WindowsAuthentication)]

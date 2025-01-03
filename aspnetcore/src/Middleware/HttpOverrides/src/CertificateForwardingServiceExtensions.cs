@@ -18,12 +18,18 @@ public static class CertificateForwardingServiceExtensions
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
     public static IServiceCollection AddCertificateForwarding(
         this IServiceCollection services,
-        Action<CertificateForwardingOptions> configure)
+        Action<CertificateForwardingOptions> configure
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configure);
 
-        services.AddOptions<CertificateForwardingOptions>().Validate(o => !string.IsNullOrEmpty(o.CertificateHeader), "CertificateForwarderOptions.CertificateHeader cannot be null or empty.");
+        services
+            .AddOptions<CertificateForwardingOptions>()
+            .Validate(
+                o => !string.IsNullOrEmpty(o.CertificateHeader),
+                "CertificateForwarderOptions.CertificateHeader cannot be null or empty."
+            );
         return services.Configure(configure);
     }
 }

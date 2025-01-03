@@ -75,7 +75,8 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
 
     public bool IsTimingWrite { get; set; }
 
-    public bool AppCompletedWithNoResponseBodyOrTrailers => _appCompletedWithNoResponseBodyOrTrailers;
+    public bool AppCompletedWithNoResponseBodyOrTrailers =>
+        _appCompletedWithNoResponseBodyOrTrailers;
 
     public bool CompletedResponse
     {
@@ -89,7 +90,8 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
     }
 
     // Useful for debugging the scheduling state in the debugger
-    internal (int, long, State, State, long) SchedulingState => (Stream.StreamId, _unconsumedBytes, _unobservedState, _currentState, _streamWindow);
+    internal (int, long, State, State, long) SchedulingState =>
+        (Stream.StreamId, _unconsumedBytes, _unobservedState, _currentState, _streamWindow);
 
     public State UnobservedState
     {
@@ -145,7 +147,12 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
     // Removes consumed bytes from the queue.
     // Returns a bool that represents whether we should schedule this producer to write
     // the remaining bytes.
-    internal (bool hasMoreData, bool reschedule, State currentState, bool waitingForWindowUpdates) ObserveDataAndState(long bytes, State state)
+    internal (
+        bool hasMoreData,
+        bool reschedule,
+        State currentState,
+        bool waitingForWindowUpdates
+    ) ObserveDataAndState(long bytes, State state)
     {
         lock (_dataWriterLock)
         {
@@ -153,7 +160,12 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
             _unobservedState &= ~state;
             _currentState |= state;
             _unconsumedBytes -= bytes;
-            return (_unconsumedBytes > 0, _unobservedState != State.None, _currentState, _waitingForWindowUpdates);
+            return (
+                _unconsumedBytes > 0,
+                _unobservedState != State.None,
+                _currentState,
+                _waitingForWindowUpdates
+            );
         }
     }
 
@@ -248,7 +260,10 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
 
     void IHttpOutputAborter.OnInputOrOutputCompleted()
     {
-        _stream.ResetAndAbort(new ConnectionAbortedException($"{nameof(Http2OutputProducer)} has completed."), Http2ErrorCode.INTERNAL_ERROR);
+        _stream.ResetAndAbort(
+            new ConnectionAbortedException($"{nameof(Http2OutputProducer)} has completed."),
+            Http2ErrorCode.INTERNAL_ERROR
+        );
     }
 
     public ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken)
@@ -351,7 +366,13 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         }
     }
 
-    public void WriteResponseHeaders(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, bool appCompleted)
+    public void WriteResponseHeaders(
+        int statusCode,
+        string? reasonPhrase,
+        HttpResponseHeaders responseHeaders,
+        bool autoChunk,
+        bool appCompleted
+    )
     {
         lock (_dataWriterLock)
         {
@@ -369,7 +390,11 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
             // The headers will be the final frame if:
             // 1. There is no content
             // 2. There is no trailing HEADERS frame.
-            if (appCompleted && !_startedWritingDataFrames && (_stream.ResponseTrailers == null || _stream.ResponseTrailers.Count == 0))
+            if (
+                appCompleted
+                && !_startedWritingDataFrames
+                && (_stream.ResponseTrailers == null || _stream.ResponseTrailers.Count == 0)
+            )
             {
                 _appCompletedWithNoResponseBodyOrTrailers = true;
             }
@@ -512,7 +537,10 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         }
     }
 
-    public ValueTask<FlushResult> WriteDataToPipeAsync(ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> WriteDataToPipeAsync(
+        ReadOnlySpan<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         if (cancellationToken.IsCancellationRequested)
         {
@@ -543,22 +571,45 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         }
     }
 
-    public ValueTask<FlushResult> FirstWriteAsync(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> FirstWriteAsync(
+        int statusCode,
+        string? reasonPhrase,
+        HttpResponseHeaders responseHeaders,
+        bool autoChunk,
+        ReadOnlySpan<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         lock (_dataWriterLock)
         {
-            WriteResponseHeaders(statusCode, reasonPhrase, responseHeaders, autoChunk, appCompleted: false);
+            WriteResponseHeaders(
+                statusCode,
+                reasonPhrase,
+                responseHeaders,
+                autoChunk,
+                appCompleted: false
+            );
 
             return WriteDataToPipeAsync(data, cancellationToken);
         }
     }
 
-    ValueTask<FlushResult> IHttpOutputProducer.WriteChunkAsync(ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+    ValueTask<FlushResult> IHttpOutputProducer.WriteChunkAsync(
+        ReadOnlySpan<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotImplementedException();
     }
 
-    public ValueTask<FlushResult> FirstWriteChunkedAsync(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> FirstWriteChunkedAsync(
+        int statusCode,
+        string? reasonPhrase,
+        HttpResponseHeaders responseHeaders,
+        bool autoChunk,
+        ReadOnlySpan<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotImplementedException();
     }
@@ -584,9 +635,7 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         }
     }
 
-    public void Reset()
-    {
-    }
+    public void Reset() { }
 
     internal void OnRequestProcessingEnded()
     {
@@ -738,23 +787,26 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
     [StackTraceHidden]
     private static void ThrowWriterComplete()
     {
-        throw new InvalidOperationException("Cannot write to response after the request has completed.");
+        throw new InvalidOperationException(
+            "Cannot write to response after the request has completed."
+        );
     }
 
-    private static Pipe CreateDataPipe(MemoryPool<byte> pool, bool scheduleInline)
-        => new Pipe(new PipeOptions
-        (
-            pool: pool,
-            readerScheduler: PipeScheduler.Inline,
-            writerScheduler: PipeScheduler.ThreadPool,
-            // The unit tests rely on inline scheduling and the ability to control individual writes
-            // and assert individual frames. Setting the thresholds to 1 avoids frames being coaleased together
-            // and allows the test to assert them individually.
-            pauseWriterThreshold: scheduleInline ? 1 : 4096,
-            resumeWriterThreshold: scheduleInline ? 1 : 2048,
-            useSynchronizationContext: false,
-            minimumSegmentSize: pool.GetMinimumSegmentSize()
-        ));
+    private static Pipe CreateDataPipe(MemoryPool<byte> pool, bool scheduleInline) =>
+        new Pipe(
+            new PipeOptions(
+                pool: pool,
+                readerScheduler: PipeScheduler.Inline,
+                writerScheduler: PipeScheduler.ThreadPool,
+                // The unit tests rely on inline scheduling and the ability to control individual writes
+                // and assert individual frames. Setting the thresholds to 1 avoids frames being coaleased together
+                // and allows the test to assert them individually.
+                pauseWriterThreshold: scheduleInline ? 1 : 4096,
+                resumeWriterThreshold: scheduleInline ? 1 : 2048,
+                useSynchronizationContext: false,
+                minimumSegmentSize: pool.GetMinimumSegmentSize()
+            )
+        );
 
     public void Dispose()
     {
@@ -771,6 +823,6 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         None = 0,
         FlushHeaders = 1,
         Aborted = 2,
-        Completed = 4
+        Completed = 4,
     }
 }

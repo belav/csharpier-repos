@@ -8,7 +8,10 @@ using Xunit;
 
 namespace System.Security.Cryptography.Dsa.Tests
 {
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst, "Not supported on Browser/iOS/tvOS/MacCatalyst")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
+        "Not supported on Browser/iOS/tvOS/MacCatalyst"
+    )]
     public abstract class DSASignatureFormatTests : DsaFamilySignatureFormatTests
     {
         protected override bool SupportsSha2 => DSAFactory.SupportsFips186_3;
@@ -33,10 +36,7 @@ namespace System.Security.Cryptography.Dsa.Tests
                 fieldSize = dsa.ExportParameters(false).Q.Length * 8;
             }
 
-            return new KeyDescription(
-                dsa,
-                $"{keySize}-bit random key",
-                fieldSize);
+            return new KeyDescription(dsa, $"{keySize}-bit random key", fieldSize);
         }
 
         private static KeyDescription OpenKey(in DSAParameters dsaParameters)
@@ -44,7 +44,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             return new KeyDescription(
                 DSAFactory.Create(dsaParameters),
                 $"{dsaParameters.Y.Length * 8}-bit static key",
-                dsaParameters.Q.Length * 8);
+                dsaParameters.Q.Length * 8
+            );
         }
 
         protected static IEnumerable<KeyDescription> LocalGenerateTestKeys()
@@ -73,12 +74,14 @@ namespace System.Security.Cryptography.Dsa.Tests
         private static readonly KeyDescription[] s_keys = LocalGenerateTestKeys().ToArray();
 
         protected override KeyDescription[] GenerateTestKeys() => s_keys;
+
         protected override bool IsArrayBased => true;
 
         protected override byte[] SignHash(
             KeyDescription key,
             byte[] hash,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             return ((DSA)key.Key).CreateSignature(hash, signatureFormat);
         }
@@ -87,7 +90,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             KeyDescription key,
             byte[] hash,
             byte[] signature,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             return ((DSA)key.Key).VerifySignature(hash, signature, signatureFormat);
         }
@@ -96,7 +100,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             KeyDescription key,
             byte[] data,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             return ((DSA)key.Key).SignData(data, hashAlgorithm, signatureFormat);
         }
@@ -106,7 +111,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             byte[] data,
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             return ((DSA)key.Key).VerifyData(data, signature, hashAlgorithm, signatureFormat);
         }
@@ -117,12 +123,14 @@ namespace System.Security.Cryptography.Dsa.Tests
         private static readonly KeyDescription[] s_keys = LocalGenerateTestKeys().ToArray();
 
         protected override KeyDescription[] GenerateTestKeys() => s_keys;
+
         protected override bool IsArrayBased => true;
 
         protected override byte[] SignHash(
             KeyDescription key,
             byte[] hash,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             return ((DSA)key.Key).CreateSignature(hash, signatureFormat);
         }
@@ -131,7 +139,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             KeyDescription key,
             byte[] hash,
             byte[] signature,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             return ((DSA)key.Key).VerifySignature(hash, signature, signatureFormat);
         }
@@ -140,7 +149,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             KeyDescription key,
             byte[] data,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             int offset = 0;
             int count = 0;
@@ -162,7 +172,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             byte[] data,
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             int offset = 0;
             int count = 0;
@@ -176,7 +187,14 @@ namespace System.Security.Cryptography.Dsa.Tests
                 data = bigger;
             }
 
-            return ((DSA)key.Key).VerifyData(data, offset, count, signature, hashAlgorithm, signatureFormat);
+            return ((DSA)key.Key).VerifyData(
+                data,
+                offset,
+                count,
+                signature,
+                hashAlgorithm,
+                signatureFormat
+            );
         }
 
         [Fact]
@@ -192,43 +210,53 @@ namespace System.Security.Cryptography.Dsa.Tests
             {
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "offset",
-                    () => key.SignData(buffer, -1, buffer.Length, hash, format));
+                    () => key.SignData(buffer, -1, buffer.Length, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "offset",
-                    () => key.SignData(buffer, buffer.Length + 1, 0, hash, format));
+                    () => key.SignData(buffer, buffer.Length + 1, 0, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "offset",
-                    () => key.VerifyData(buffer, -1, buffer.Length, buffer, hash, format));
+                    () => key.VerifyData(buffer, -1, buffer.Length, buffer, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "offset",
-                    () => key.VerifyData(buffer, buffer.Length + 1, 0, buffer, hash, format));
+                    () => key.VerifyData(buffer, buffer.Length + 1, 0, buffer, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "count",
-                    () => key.SignData(buffer, 1, buffer.Length, hash, format));
+                    () => key.SignData(buffer, 1, buffer.Length, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "count",
-                    () => key.SignData(buffer, 0, buffer.Length + 1, hash, format));
+                    () => key.SignData(buffer, 0, buffer.Length + 1, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "count",
-                    () => key.SignData(buffer, buffer.Length, 1, hash, format));
+                    () => key.SignData(buffer, buffer.Length, 1, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "count",
-                    () => key.VerifyData(buffer, 1, buffer.Length, buffer, hash, format));
+                    () => key.VerifyData(buffer, 1, buffer.Length, buffer, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "count",
-                    () => key.VerifyData(buffer, 0, buffer.Length + 1, buffer, hash, format));
+                    () => key.VerifyData(buffer, 0, buffer.Length + 1, buffer, hash, format)
+                );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "count",
-                    () => key.VerifyData(buffer, buffer.Length, 1, buffer, hash, format));
+                    () => key.VerifyData(buffer, buffer.Length, 1, buffer, hash, format)
+                );
             }
         }
     }
@@ -238,19 +266,22 @@ namespace System.Security.Cryptography.Dsa.Tests
         private static readonly KeyDescription[] s_keys = LocalGenerateTestKeys().ToArray();
 
         protected override KeyDescription[] GenerateTestKeys() => s_keys;
+
         protected override bool IsArrayBased => false;
 
         protected override byte[] SignHash(
             KeyDescription key,
             byte[] hash,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             DSA dsa = (DSA)key.Key;
             byte[] predictedMax = new byte[dsa.GetMaxSignatureSize(signatureFormat)];
 
             Assert.True(
                 dsa.TryCreateSignature(hash, predictedMax, signatureFormat, out int written),
-                "TryCreateSignature with a GetMaxSignatureSize buffer");
+                "TryCreateSignature with a GetMaxSignatureSize buffer"
+            );
 
             if (signatureFormat == DSASignatureFormat.IeeeP1363FixedFieldConcatenation)
             {
@@ -270,7 +301,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             KeyDescription key,
             byte[] hash,
             byte[] signature,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             ReadOnlySpan<byte> readOnlyHash = hash;
             ReadOnlySpan<byte> readOnlySignature = signature;
@@ -281,14 +313,22 @@ namespace System.Security.Cryptography.Dsa.Tests
             KeyDescription key,
             byte[] data,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             DSA dsa = (DSA)key.Key;
             byte[] predictedMax = new byte[dsa.GetMaxSignatureSize(signatureFormat)];
 
             Assert.True(
-                dsa.TrySignData(data, predictedMax, hashAlgorithm, signatureFormat, out int written),
-                "TrySignData with a GetMaxSignatureSize buffer");
+                dsa.TrySignData(
+                    data,
+                    predictedMax,
+                    hashAlgorithm,
+                    signatureFormat,
+                    out int written
+                ),
+                "TrySignData with a GetMaxSignatureSize buffer"
+            );
 
             if (signatureFormat == DSASignatureFormat.IeeeP1363FixedFieldConcatenation)
             {
@@ -309,12 +349,18 @@ namespace System.Security.Cryptography.Dsa.Tests
             byte[] data,
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             ReadOnlySpan<byte> readOnlyData = data;
             ReadOnlySpan<byte> readOnlySignature = signature;
 
-            return ((DSA)key.Key).VerifyData(readOnlyData, readOnlySignature, hashAlgorithm, signatureFormat);
+            return ((DSA)key.Key).VerifyData(
+                readOnlyData,
+                readOnlySignature,
+                hashAlgorithm,
+                signatureFormat
+            );
         }
 
         private static int GetExpectedSize(int fieldSizeInBits)
@@ -354,7 +400,9 @@ namespace System.Security.Cryptography.Dsa.Tests
                 Assert.Equal(0, written);
             }
 
-            Assert.Fail($"TryCreateSignature eventually succeeds with a {expectedSize}/{maxSize}-byte destination");
+            Assert.Fail(
+                $"TryCreateSignature eventually succeeds with a {expectedSize}/{maxSize}-byte destination"
+            );
         }
 
         [Fact]
@@ -374,7 +422,15 @@ namespace System.Security.Cryptography.Dsa.Tests
 
             for (int i = 0; i < RetryCount; i++)
             {
-                if (key.TrySignData(Array.Empty<byte>(), signature, hashAlgorithm, SignatureFormat, out int written))
+                if (
+                    key.TrySignData(
+                        Array.Empty<byte>(),
+                        signature,
+                        hashAlgorithm,
+                        SignatureFormat,
+                        out int written
+                    )
+                )
                 {
                     return;
                 }
@@ -382,7 +438,9 @@ namespace System.Security.Cryptography.Dsa.Tests
                 Assert.Equal(0, written);
             }
 
-            Assert.Fail($"TrySignData eventually succeeds with a {expectedSize}/{maxSize}-byte destination");
+            Assert.Fail(
+                $"TrySignData eventually succeeds with a {expectedSize}/{maxSize}-byte destination"
+            );
         }
     }
 }

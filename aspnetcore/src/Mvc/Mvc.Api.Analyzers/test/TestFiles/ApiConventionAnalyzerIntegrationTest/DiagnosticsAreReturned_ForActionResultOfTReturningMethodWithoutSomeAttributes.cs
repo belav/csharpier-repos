@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {
     [ApiController]
-    public class DiagnosticsAreReturned_ForActionResultOfTReturningMethodWithoutSomeAttributes : ControllerBase
+    public class DiagnosticsAreReturned_ForActionResultOfTReturningMethodWithoutSomeAttributes
+        : ControllerBase
     {
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(string), 404)]
@@ -19,7 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
             if (!ModelState.IsValid)
             {
-                return /*MM*/UnprocessableEntity();
+                return /*MM*/
+                UnprocessableEntity();
             }
 
             return Ok();

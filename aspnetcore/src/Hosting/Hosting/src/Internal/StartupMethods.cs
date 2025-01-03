@@ -9,7 +9,11 @@ namespace Microsoft.AspNetCore.Hosting;
 
 internal sealed class StartupMethods
 {
-    public StartupMethods(object? instance, Action<IApplicationBuilder> configure, Func<IServiceCollection, IServiceProvider> configureServices)
+    public StartupMethods(
+        object? instance,
+        Action<IApplicationBuilder> configure,
+        Func<IServiceCollection, IServiceProvider> configureServices
+    )
     {
         Debug.Assert(configure != null);
         Debug.Assert(configureServices != null);

@@ -86,7 +86,10 @@ namespace System.Linq.Expressions
         /// <param name="addMethod">The <see cref="MethodInfo"/> for the list's Add method.</param>
         /// <param name="arguments">An <see cref="IEnumerable{T}"/> containing <see cref="Expression"/> elements to initialize the list.</param>
         /// <returns>The created <see cref="Expressions.ElementInit" /> expression.</returns>
-        public static ElementInit ElementInit(MethodInfo addMethod, IEnumerable<Expression> arguments)
+        public static ElementInit ElementInit(
+            MethodInfo addMethod,
+            IEnumerable<Expression> arguments
+        )
         {
             ArgumentNullException.ThrowIfNull(addMethod);
             ArgumentNullException.ThrowIfNull(arguments);
@@ -95,7 +98,12 @@ namespace System.Linq.Expressions
 
             RequiresCanRead(argumentsRO, nameof(arguments));
             ValidateElementInitAddMethodInfo(addMethod, nameof(addMethod));
-            ValidateArgumentTypes(addMethod, ExpressionType.Call, ref argumentsRO, nameof(addMethod));
+            ValidateArgumentTypes(
+                addMethod,
+                ExpressionType.Call,
+                ref argumentsRO,
+                nameof(addMethod)
+            );
             return new ElementInit(addMethod, argumentsRO);
         }
 
@@ -119,7 +127,11 @@ namespace System.Linq.Expressions
             {
                 if (pi.ParameterType.IsByRef)
                 {
-                    throw Error.ElementInitializerMethodNoRefOutParam(pi.Name, addMethod.Name, paramName);
+                    throw Error.ElementInitializerMethodNoRefOutParam(
+                        pi.Name,
+                        addMethod.Name,
+                        paramName
+                    );
                 }
             }
         }

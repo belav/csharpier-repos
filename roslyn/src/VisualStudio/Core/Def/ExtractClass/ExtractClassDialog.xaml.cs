@@ -42,7 +42,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
             }
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-            => DialogResult = false;
+        private void Cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
     }
 }

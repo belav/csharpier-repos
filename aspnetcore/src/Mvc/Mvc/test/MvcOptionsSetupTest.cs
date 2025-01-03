@@ -62,7 +62,8 @@ public class MvcOptionsSetupTest
             binder => Assert.IsType<DictionaryModelBinderProvider>(binder),
             binder => Assert.IsType<ArrayModelBinderProvider>(binder),
             binder => Assert.IsType<CollectionModelBinderProvider>(binder),
-            binder => Assert.IsType<ComplexObjectModelBinderProvider>(binder));
+            binder => Assert.IsType<ComplexObjectModelBinderProvider>(binder)
+        );
     }
 
     [Fact]
@@ -73,12 +74,14 @@ public class MvcOptionsSetupTest
 
         // Assert
         var valueProviders = options.ValueProviderFactories;
-        Assert.Collection(valueProviders,
+        Assert.Collection(
+            valueProviders,
             provider => Assert.IsType<FormValueProviderFactory>(provider),
             provider => Assert.IsType<RouteValueProviderFactory>(provider),
             provider => Assert.IsType<QueryStringValueProviderFactory>(provider),
             provider => Assert.IsType<JQueryFormValueProviderFactory>(provider),
-            provider => Assert.IsType<FormFileValueProviderFactory>(provider));
+            provider => Assert.IsType<FormFileValueProviderFactory>(provider)
+        );
     }
 
     [Fact]
@@ -88,11 +91,13 @@ public class MvcOptionsSetupTest
         var options = GetOptions<MvcOptions>();
 
         // Assert
-        Assert.Collection(options.OutputFormatters,
+        Assert.Collection(
+            options.OutputFormatters,
             formatter => Assert.IsType<HttpNoContentOutputFormatter>(formatter),
             formatter => Assert.IsType<StringOutputFormatter>(formatter),
             formatter => Assert.IsType<StreamOutputFormatter>(formatter),
-            formatter => Assert.IsType<SystemTextJsonOutputFormatter>(formatter));
+            formatter => Assert.IsType<SystemTextJsonOutputFormatter>(formatter)
+        );
     }
 
     [Fact]
@@ -104,7 +109,8 @@ public class MvcOptionsSetupTest
         // Assert
         Assert.Collection(
             options.InputFormatters,
-            formatter => Assert.IsType<SystemTextJsonInputFormatter>(formatter));
+            formatter => Assert.IsType<SystemTextJsonInputFormatter>(formatter)
+        );
     }
 
     [Fact]
@@ -125,9 +131,11 @@ public class MvcOptionsSetupTest
         var options = GetOptions<MvcOptions>();
 
         // Assert
-        Assert.Collection(options.ModelValidatorProviders,
+        Assert.Collection(
+            options.ModelValidatorProviders,
             validator => Assert.IsType<DefaultModelValidatorProvider>(validator),
-            validator => Assert.IsType<DataAnnotationsModelValidatorProvider>(validator));
+            validator => Assert.IsType<DataAnnotationsModelValidatorProvider>(validator)
+        );
     }
 
     [Fact]
@@ -137,10 +145,12 @@ public class MvcOptionsSetupTest
         var options = GetOptions<MvcViewOptions>(AddViewEngineOptionsServices);
 
         // Assert
-        Assert.Collection(options.ClientModelValidatorProviders,
+        Assert.Collection(
+            options.ClientModelValidatorProviders,
             validator => Assert.IsType<DefaultClientModelValidatorProvider>(validator),
             validator => Assert.IsType<DataAnnotationsClientModelValidatorProvider>(validator),
-            validator => Assert.IsType<NumericClientModelValidatorProvider>(validator));
+            validator => Assert.IsType<NumericClientModelValidatorProvider>(validator)
+        );
     }
 
     [Fact]
@@ -165,7 +175,8 @@ public class MvcOptionsSetupTest
 
         // Assert
         var providers = options.ModelMetadataDetailsProviders;
-        Assert.Collection(providers,
+        Assert.Collection(
+            providers,
             provider => Assert.IsType<ExcludeBindingMetadataProvider>(provider),
             provider => Assert.IsType<DefaultBindingMetadataProvider>(provider),
             provider => Assert.IsType<DefaultValidationMetadataProvider>(provider),
@@ -183,7 +194,9 @@ public class MvcOptionsSetupTest
             },
             provider =>
             {
-                var formCollectionParameter = Assert.IsType<BindingSourceMetadataProvider>(provider);
+                var formCollectionParameter = Assert.IsType<BindingSourceMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(IFormCollection), formCollectionParameter.Type);
                 Assert.Equal(BindingSource.FormFile, formCollectionParameter.BindingSource);
             },
@@ -201,77 +214,106 @@ public class MvcOptionsSetupTest
             },
             provider =>
             {
-                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(provider);
+                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(Type), excludeFilter.Type);
             },
             provider =>
             {
-                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(provider);
+                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(Delegate), excludeFilter.Type);
             },
             provider =>
             {
-                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(provider);
+                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(MethodInfo), excludeFilter.Type);
             },
             provider =>
             {
-                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(provider);
+                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(MemberInfo), excludeFilter.Type);
             },
             provider =>
             {
-                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(provider);
+                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(ParameterInfo), excludeFilter.Type);
             },
             provider =>
             {
-                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(provider);
+                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(Assembly), excludeFilter.Type);
             },
             provider =>
             {
-                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(provider);
+                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(Uri), excludeFilter.Type);
             },
             provider =>
             {
-                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(provider);
+                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(CancellationToken), excludeFilter.Type);
             },
             provider =>
             {
-                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(provider);
+                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(IFormFile), excludeFilter.Type);
             },
             provider =>
             {
-                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(provider);
+                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(IFormCollection), excludeFilter.Type);
             },
             provider =>
             {
-                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(provider);
+                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(IFormFileCollection), excludeFilter.Type);
             },
             provider =>
             {
-                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(provider);
+                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(Stream), excludeFilter.Type);
             },
             provider => Assert.IsType<DataAnnotationsMetadataProvider>(provider),
             provider => Assert.IsType<DataMemberRequiredBindingMetadataProvider>(provider),
             provider =>
             {
-                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(provider);
+                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(XObject).FullName, excludeFilter.FullTypeName);
             },
             provider =>
             {
-                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(provider);
+                var excludeFilter = Assert.IsType<SuppressChildValidationMetadataProvider>(
+                    provider
+                );
                 Assert.Equal(typeof(XmlNode).FullName, excludeFilter.FullTypeName);
             },
-            provider => Assert.IsType<HasValidatorsValidationMetadataProvider>(provider));
+            provider => Assert.IsType<HasValidatorsValidationMetadataProvider>(provider)
+        );
     }
 
     private static T GetOptions<T>(Action<IServiceCollection> action = null)
@@ -305,10 +347,12 @@ public class MvcOptionsSetupTest
     private static void AddViewEngineOptionsServices(IServiceCollection serviceCollection)
     {
         var hostingEnvironment = new Mock<IWebHostEnvironment>();
-        hostingEnvironment.SetupGet(e => e.ApplicationName)
+        hostingEnvironment
+            .SetupGet(e => e.ApplicationName)
             .Returns(typeof(MvcOptionsSetupTest).Assembly.GetName().Name);
 
-        hostingEnvironment.SetupGet(e => e.ContentRootFileProvider)
+        hostingEnvironment
+            .SetupGet(e => e.ContentRootFileProvider)
             .Returns(Mock.Of<IFileProvider>());
 
         serviceCollection.AddSingleton(hostingEnvironment.Object);

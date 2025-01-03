@@ -34,7 +34,8 @@ public readonly record struct ModificationCommandParameters
         bool detailedErrorsEnabled = false,
         IComparer<IUpdateEntry>? comparer = null,
         Func<string>? generateParameterName = null,
-        IDiagnosticsLogger<DbLoggerCategory.Update>? logger = null)
+        IDiagnosticsLogger<DbLoggerCategory.Update>? logger = null
+    )
     {
         Table = table;
         TableName = table.Name;
@@ -62,10 +63,17 @@ public readonly record struct ModificationCommandParameters
         bool detailedErrorsEnabled = false,
         IComparer<IUpdateEntry>? comparer = null,
         Func<string>? generateParameterName = null,
-        IDiagnosticsLogger<DbLoggerCategory.Update>? logger = null)
-        : this(table, storeStoredProcedure: null, sensitiveLoggingEnabled, detailedErrorsEnabled, comparer, generateParameterName, logger)
-    {
-    }
+        IDiagnosticsLogger<DbLoggerCategory.Update>? logger = null
+    )
+        : this(
+            table,
+            storeStoredProcedure: null,
+            sensitiveLoggingEnabled,
+            detailedErrorsEnabled,
+            comparer,
+            generateParameterName,
+            logger
+        ) { }
 
     /// <summary>
     ///     The name of the table containing the data to be modified.

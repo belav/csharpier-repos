@@ -12,11 +12,16 @@ namespace System.Runtime.InteropServices.Tests
         public void Exists()
         {
             Type type = typeof(ProgIdAttributeTests);
-            ProgIdAttribute attribute = Assert.IsType<ProgIdAttribute>(Assert.Single(type.GetCustomAttributes(typeof(ProgIdAttribute), inherit: false)));
+            ProgIdAttribute attribute = Assert.IsType<ProgIdAttribute>(
+                Assert.Single(type.GetCustomAttributes(typeof(ProgIdAttribute), inherit: false))
+            );
             Assert.Equal("pizza", attribute.Value);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [InlineData(null)]
         [InlineData("ProgId")]
         public void Ctor_ProgId(string progId)

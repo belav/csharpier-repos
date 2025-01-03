@@ -8,9 +8,7 @@ namespace Microsoft.AspNetCore.Hosting.Fakes;
 
 public class Startup : StartupBase
 {
-    public Startup()
-    {
-    }
+    public Startup() { }
 
     public void ConfigureServices(IServiceCollection services)
     {
@@ -91,7 +89,5 @@ public class Startup : StartupBase
         return services.BuildServiceProvider();
     }
 
-    public virtual void Configure(IApplicationBuilder builder)
-    {
-    }
+    public virtual void Configure(IApplicationBuilder builder) { }
 }

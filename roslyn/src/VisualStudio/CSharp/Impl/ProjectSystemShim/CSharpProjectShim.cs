@@ -25,7 +25,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
     /// are in a separate files. Methods that are shared across multiple interfaces (which are
     /// effectively methods that just QI from one interface to another), are implemented here.
     /// </remarks>
-    internal sealed partial class CSharpProjectShim : AbstractLegacyProject, ICodeModelInstanceFactory
+    internal sealed partial class CSharpProjectShim
+        : AbstractLegacyProject,
+            ICodeModelInstanceFactory
     {
         /// <summary>
         /// This member is used to store a raw array of warning numbers, which is needed to properly implement
@@ -51,23 +53,32 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             string projectSystemName,
             IVsHierarchy hierarchy,
             IServiceProvider serviceProvider,
-            IThreadingContext threadingContext)
-            : base(projectSystemName,
-                   hierarchy,
-                   LanguageNames.CSharp,
-                   isVsIntellisenseProject: projectRoot is IVsIntellisenseProject,
-                   serviceProvider,
-                   threadingContext,
-                   externalErrorReportingPrefix: "CS")
+            IThreadingContext threadingContext
+        )
+            : base(
+                projectSystemName,
+                hierarchy,
+                LanguageNames.CSharp,
+                isVsIntellisenseProject: projectRoot is IVsIntellisenseProject,
+                serviceProvider,
+                threadingContext,
+                externalErrorReportingPrefix: "CS"
+            )
         {
             _projectRoot = projectRoot;
             _serviceProvider = serviceProvider;
             _warningNumberArrayPointer = Marshal.AllocHGlobal(0);
 
-            var componentModel = (IComponentModel)serviceProvider.GetService(typeof(SComponentModel));
+            var componentModel = (IComponentModel)
+                serviceProvider.GetService(typeof(SComponentModel));
 
-            this.ProjectCodeModel = componentModel.GetService<IProjectCodeModelFactory>().CreateProjectCodeModel(ProjectSystemProject.Id, this);
-            this.ProjectSystemProjectOptionsProcessor = new OptionsProcessor(this.ProjectSystemProject, Workspace.Services.SolutionServices);
+            this.ProjectCodeModel = componentModel
+                .GetService<IProjectCodeModelFactory>()
+                .CreateProjectCodeModel(ProjectSystemProject.Id, this);
+            this.ProjectSystemProjectOptionsProcessor = new OptionsProcessor(
+                this.ProjectSystemProject,
+                Workspace.Services.SolutionServices
+            );
 
             // Ensure the default options are set up
             ResetAllOptions();
@@ -95,7 +106,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             }
         }
 
-        EnvDTE.FileCodeModel ICodeModelInstanceFactory.TryCreateFileCodeModelThroughProjectSystem(string filePath)
+        EnvDTE.FileCodeModel ICodeModelInstanceFactory.TryCreateFileCodeModelThroughProjectSystem(
+            string filePath
+        )
         {
             if (_projectRoot.CanCreateFileCodeModel(filePath))
             {

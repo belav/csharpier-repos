@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -18,53 +18,59 @@
 
 using System;
 using System.Globalization;
-using System.Runtime.Serialization;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Permissions;
-using System.Runtime.Versioning;
 using SecurityException = System.Security.SecurityException;
 
-namespace System.IO {
-
+namespace System.IO
+{
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public class FileLoadException : IOException {
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class FileLoadException : IOException
+    {
+        private String _fileName; // the name of the file we could not load.
+        private String _fusionLog; // fusion log (when applicable)
 
-        private String _fileName;   // the name of the file we could not load.
-        private String _fusionLog;  // fusion log (when applicable)
-
-        public FileLoadException() 
-            : base(Environment.GetResourceString("IO.FileLoad")) {
-            SetErrorCode(__HResults.COR_E_FILELOAD);
-        }
-    
-        public FileLoadException(String message) 
-            : base(message) {
-            SetErrorCode(__HResults.COR_E_FILELOAD);
-        }
-    
-        public FileLoadException(String message, Exception inner) 
-            : base(message, inner) {
+        public FileLoadException()
+            : base(Environment.GetResourceString("IO.FileLoad"))
+        {
             SetErrorCode(__HResults.COR_E_FILELOAD);
         }
 
-        public FileLoadException(String message, String fileName) : base(message)
+        public FileLoadException(String message)
+            : base(message)
+        {
+            SetErrorCode(__HResults.COR_E_FILELOAD);
+        }
+
+        public FileLoadException(String message, Exception inner)
+            : base(message, inner)
+        {
+            SetErrorCode(__HResults.COR_E_FILELOAD);
+        }
+
+        public FileLoadException(String message, String fileName)
+            : base(message)
         {
             SetErrorCode(__HResults.COR_E_FILELOAD);
             _fileName = fileName;
         }
 
-        public FileLoadException(String message, String fileName, Exception inner) 
-            : base(message, inner) {
+        public FileLoadException(String message, String fileName, Exception inner)
+            : base(message, inner)
+        {
             SetErrorCode(__HResults.COR_E_FILELOAD);
             _fileName = fileName;
         }
 
         public override String Message
         {
-            get {
+            get
+            {
                 SetMessageField();
                 return _message;
             }
@@ -76,22 +82,28 @@ namespace System.IO {
                 _message = FormatFileLoadExceptionMessage(_fileName, HResult);
         }
 
-        public String FileName {
+        public String FileName
+        {
             get { return _fileName; }
         }
 
 #if FEATURE_LEGACYNETCF
         // override Data property to populate FileLoadException with Hresult
-        public override System.Collections.IDictionary Data { 
+        public override System.Collections.IDictionary Data
+        {
             [System.Security.SecuritySafeCritical]
-            get {
+            get
+            {
                 var _data = base.Data;
-                if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8 && !_data.Contains("HResult"))
+                if (
+                    CompatibilitySwitches.IsAppEarlierThanWindowsPhone8
+                    && !_data.Contains("HResult")
+                )
                 {
                     _data.Add("HResult", HResult);
                 }
                 return _data;
-           }
+            }
         }
 #endif //FEATURE_LEGACYNETCF
 
@@ -100,8 +112,10 @@ namespace System.IO {
             String s = GetType().FullName + ": " + Message;
 
             if (_fileName != null && _fileName.Length != 0)
-                s += Environment.NewLine + Environment.GetResourceString("IO.FileName_Name", _fileName);
-            
+                s +=
+                    Environment.NewLine
+                    + Environment.GetResourceString("IO.FileName_Name", _fileName);
+
             if (InnerException != null)
                 s = s + " ---> " + InnerException.ToString();
 
@@ -111,25 +125,24 @@ namespace System.IO {
 #if FEATURE_FUSION
             try
             {
-                if(FusionLog!=null)
+                if (FusionLog != null)
                 {
-                    if (s==null)
-                        s=" ";
-                    s+=Environment.NewLine;
-                    s+=Environment.NewLine;
-                    s+=FusionLog;
+                    if (s == null)
+                        s = " ";
+                    s += Environment.NewLine;
+                    s += Environment.NewLine;
+                    s += FusionLog;
                 }
             }
-            catch(SecurityException)
-            {
-            
-            }
+            catch (SecurityException) { }
 #endif // FEATURE_FUSION
 
             return s;
         }
 
-        protected FileLoadException(SerializationInfo info, StreamingContext context) : base (info, context) {
+        protected FileLoadException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
             // Base class constructor will check info != null.
 
             _fileName = info.GetString("FileLoad_FileName");
@@ -138,33 +151,38 @@ namespace System.IO {
             {
                 _fusionLog = info.GetString("FileLoad_FusionLog");
             }
-            catch 
+            catch
             {
                 _fusionLog = null;
             }
-                
         }
 
-        private FileLoadException(String fileName, String fusionLog,int hResult)
+        private FileLoadException(String fileName, String fusionLog, int hResult)
             : base(null)
         {
             SetErrorCode(hResult);
             _fileName = fileName;
-            _fusionLog=fusionLog;
+            _fusionLog = fusionLog;
             SetMessageField();
         }
 
 #if FEATURE_FUSION
-        public String FusionLog {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            [SecurityPermissionAttribute( SecurityAction.Demand, Flags = SecurityPermissionFlag.ControlEvidence | SecurityPermissionFlag.ControlPolicy)]
+        public String FusionLog
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
+            [SecurityPermissionAttribute(
+                SecurityAction.Demand,
+                Flags = SecurityPermissionFlag.ControlEvidence
+                    | SecurityPermissionFlag.ControlPolicy
+            )]
             get { return _fusionLog; }
         }
 #endif // FEATURE_FUSION
 
 #if FEATURE_SERIALIZATION
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public override void GetObjectData(SerializationInfo info, StreamingContext context) {
+        [System.Security.SecurityCritical] // auto-generated_required
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
             // Serialize data for our base classes.  base will verify info != null.
             base.GetObjectData(info, context);
 
@@ -175,18 +193,19 @@ namespace System.IO {
             {
                 info.AddValue("FileLoad_FusionLog", FusionLog, typeof(String));
             }
-            catch (SecurityException)
-            {
-            }
+            catch (SecurityException) { }
         }
 #endif
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        internal static String FormatFileLoadExceptionMessage(String fileName,
-            int hResult)
+        [System.Security.SecuritySafeCritical] // auto-generated
+        internal static String FormatFileLoadExceptionMessage(String fileName, int hResult)
         {
 #if MONO
-            return string.Format (CultureInfo.InvariantCulture, "Could not load file or assembly '{0}' or one of its dependencies", fileName);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "Could not load file or assembly '{0}' or one of its dependencies",
+                fileName
+            );
 #else
             string format = null;
             GetFileLoadExceptionMessage(hResult, JitHelpers.GetStringHandleOnStack(ref format));
@@ -197,14 +216,18 @@ namespace System.IO {
             return String.Format(CultureInfo.CurrentCulture, format, fileName, message);
 #endif
         }
+
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void GetFileLoadExceptionMessage(int hResult, StringHandleOnStack retString);
+        private static extern void GetFileLoadExceptionMessage(
+            int hResult,
+            StringHandleOnStack retString
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]

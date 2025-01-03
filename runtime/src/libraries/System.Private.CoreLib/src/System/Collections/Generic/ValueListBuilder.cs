@@ -177,7 +177,10 @@ namespace System.Collections.Generic
 
             // Double the size of the span.  If it's currently empty, default to size 4,
             // although it'll be increased in Rent to the pool's minimum bucket size.
-            int nextCapacity = Math.Max(_span.Length != 0 ? _span.Length * 2 : 4, _span.Length + additionalCapacityRequired);
+            int nextCapacity = Math.Max(
+                _span.Length != 0 ? _span.Length * 2 : 4,
+                _span.Length + additionalCapacityRequired
+            );
 
             // If the computed doubled capacity exceeds the possible length of an array, then we
             // want to downgrade to either the maximum array length if that's large enough to hold

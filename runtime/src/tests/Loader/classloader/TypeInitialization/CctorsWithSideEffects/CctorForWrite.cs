@@ -9,9 +9,7 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-public class CorrectException : Exception
-{
-}
+public class CorrectException : Exception { }
 
 public class CCC
 {
@@ -29,9 +27,7 @@ public class CCC
         {
             return 100;
         }
-        catch
-        {
-        }
+        catch { }
         return 1;
     }
 }
@@ -39,5 +35,6 @@ public class CCC
 class ClassWithCctor
 {
     public static int StaticField;
+
     static ClassWithCctor() => throw new Exception();
 }

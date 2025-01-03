@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Reflection.Runtime.General;
-
 using Internal.Reflection.Core;
 
 namespace System.Reflection.Runtime.ParameterInfos
@@ -17,26 +16,36 @@ namespace System.Reflection.Runtime.ParameterInfos
     //
     internal abstract class RuntimeMethodParameterInfo : RuntimeParameterInfo
     {
-        protected RuntimeMethodParameterInfo(MethodBase member, int position, QSignatureTypeHandle qualifiedParameterTypeHandle, TypeContext typeContext)
+        protected RuntimeMethodParameterInfo(
+            MethodBase member,
+            int position,
+            QSignatureTypeHandle qualifiedParameterTypeHandle,
+            TypeContext typeContext
+        )
             : base(member, position)
         {
             QualifiedParameterTypeHandle = qualifiedParameterTypeHandle;
             _typeContext = typeContext;
         }
 
-        public sealed override Type[] GetOptionalCustomModifiers() => QualifiedParameterTypeHandle.GetCustomModifiers(_typeContext, optional: true);
+        public sealed override Type[] GetOptionalCustomModifiers() =>
+            QualifiedParameterTypeHandle.GetCustomModifiers(_typeContext, optional: true);
 
-        public sealed override Type[] GetRequiredCustomModifiers() => QualifiedParameterTypeHandle.GetCustomModifiers(_typeContext, optional: false);
+        public sealed override Type[] GetRequiredCustomModifiers() =>
+            QualifiedParameterTypeHandle.GetCustomModifiers(_typeContext, optional: false);
 
         public sealed override Type ParameterType
         {
             get
             {
-                return _lazyParameterType ??= QualifiedParameterTypeHandle.Resolve(_typeContext).ToType();
+                return _lazyParameterType ??= QualifiedParameterTypeHandle
+                    .Resolve(_typeContext)
+                    .ToType();
             }
         }
 
-        public sealed override Type GetModifiedParameterType() => QualifiedParameterTypeHandle.GetModifiedType(_typeContext);
+        public sealed override Type GetModifiedParameterType() =>
+            QualifiedParameterTypeHandle.GetModifiedType(_typeContext);
 
         protected readonly QSignatureTypeHandle QualifiedParameterTypeHandle;
         private readonly TypeContext _typeContext;

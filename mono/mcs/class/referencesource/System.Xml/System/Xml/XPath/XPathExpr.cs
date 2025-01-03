@@ -1,51 +1,62 @@
 //------------------------------------------------------------------------------
 // <copyright file="XPathExpr.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.XPath {
-
+namespace System.Xml.XPath
+{
     using System;
-    using System.Xml;
     using System.Collections;
+    using System.Xml;
     using MS.Internal.Xml.XPath;
 
-    public enum XmlSortOrder {
-        Ascending       = 1,
-        Descending      = 2,
+    public enum XmlSortOrder
+    {
+        Ascending = 1,
+        Descending = 2,
     }
 
-    public enum XmlCaseOrder {
-        None            = 0,
-        UpperFirst      = 1,
-        LowerFirst      = 2,
+    public enum XmlCaseOrder
+    {
+        None = 0,
+        UpperFirst = 1,
+        LowerFirst = 2,
     }
 
-    public enum XmlDataType {
-        Text            = 1,
-        Number          = 2,
+    public enum XmlDataType
+    {
+        Text = 1,
+        Number = 2,
     }
 
-    public enum XPathResultType {
-        Number         = 0 ,
-        String          = 1,
-        Boolean         = 2,
-        NodeSet        = 3,
-        Navigator       = XPathResultType.String,
-        Any            = 5,
-        Error
+    public enum XPathResultType
+    {
+        Number = 0,
+        String = 1,
+        Boolean = 2,
+        NodeSet = 3,
+        Navigator = XPathResultType.String,
+        Any = 5,
+        Error,
     };
 
-    public abstract class XPathExpression {
-        internal XPathExpression(){}
+    public abstract class XPathExpression
+    {
+        internal XPathExpression() { }
 
-        public  abstract string Expression { get; }
+        public abstract string Expression { get; }
 
         public abstract void AddSort(object expr, IComparer comparer);
 
-        public abstract void AddSort(object expr, XmlSortOrder order, XmlCaseOrder caseOrder, string lang, XmlDataType dataType);
+        public abstract void AddSort(
+            object expr,
+            XmlSortOrder order,
+            XmlCaseOrder caseOrder,
+            string lang,
+            XmlDataType dataType
+        );
 
         public abstract XPathExpression Clone();
 
@@ -54,22 +65,29 @@ namespace System.Xml.XPath {
         public abstract void SetContext(IXmlNamespaceResolver nsResolver);
 
         public abstract XPathResultType ReturnType { get; }
-        
-        public static XPathExpression Compile(string xpath) {
-            return Compile(xpath, /*nsResolver:*/null);
+
+        public static XPathExpression Compile(string xpath)
+        {
+            return Compile(
+                xpath, /*nsResolver:*/
+                null
+            );
         }
 
-        public static XPathExpression Compile(string xpath, IXmlNamespaceResolver nsResolver) {
+        public static XPathExpression Compile(string xpath, IXmlNamespaceResolver nsResolver)
+        {
             bool hasPrefix;
             Query query = new QueryBuilder().Build(xpath, out hasPrefix);
             CompiledXpathExpr expr = new CompiledXpathExpr(query, xpath, hasPrefix);
-            if (null != nsResolver) {
+            if (null != nsResolver)
+            {
                 expr.SetContext(nsResolver);
             }
             return expr;
         }
 
-        private void PrintQuery(XmlWriter w) {
+        private void PrintQuery(XmlWriter w)
+        {
             ((CompiledXpathExpr)this).QueryTree.PrintQuery(w);
         }
     }

@@ -21,7 +21,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 {
     internal static class CodeFixVerifierHelper
     {
-        public static void VerifyStandardProperty(DiagnosticAnalyzer analyzer, AnalyzerProperty property)
+        public static void VerifyStandardProperty(
+            DiagnosticAnalyzer analyzer,
+            AnalyzerProperty property
+        )
         {
             switch (property)
             {
@@ -46,7 +49,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         {
             foreach (var descriptor in analyzer.SupportedDiagnostics)
             {
-                if (descriptor.ImmutableCustomTags().Contains(WellKnownDiagnosticTags.NotConfigurable))
+                if (
+                    descriptor
+                        .ImmutableCustomTags()
+                        .Contains(WellKnownDiagnosticTags.NotConfigurable)
+                )
                 {
                     // The title only displayed for rule configuration
                     continue;
@@ -73,9 +80,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             // Local function
             static bool ShouldSkipMessageDescriptionVerification(DiagnosticDescriptor descriptor)
             {
-                if (descriptor.ImmutableCustomTags().Contains(WellKnownDiagnosticTags.NotConfigurable))
+                if (
+                    descriptor
+                        .ImmutableCustomTags()
+                        .Contains(WellKnownDiagnosticTags.NotConfigurable)
+                )
                 {
-                    if (!descriptor.IsEnabledByDefault || descriptor.DefaultSeverity == DiagnosticSeverity.Hidden)
+                    if (
+                        !descriptor.IsEnabledByDefault
+                        || descriptor.DefaultSeverity == DiagnosticSeverity.Hidden
+                    )
                     {
                         // The message only displayed if either enabled and not hidden, or configurable
                         return true;
@@ -96,15 +110,25 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
         public static string? GetEditorConfigText(this OptionsCollection options)
         {
-            var text = ConvertOptionsToAnalyzerConfig(options.DefaultExtension, explicitEditorConfig: string.Empty, options);
+            var text = ConvertOptionsToAnalyzerConfig(
+                options.DefaultExtension,
+                explicitEditorConfig: string.Empty,
+                options
+            );
             return text?.ToString();
         }
 
-        public static SourceText? ConvertOptionsToAnalyzerConfig(string defaultFileExtension, string? explicitEditorConfig, OptionsCollection options)
+        public static SourceText? ConvertOptionsToAnalyzerConfig(
+            string defaultFileExtension,
+            string? explicitEditorConfig,
+            OptionsCollection options
+        )
         {
             if (options.Count == 0)
             {
-                return explicitEditorConfig is object ? SourceText.From(explicitEditorConfig, Encoding.UTF8) : null;
+                return explicitEditorConfig is object
+                    ? SourceText.From(explicitEditorConfig, Encoding.UTF8)
+                    : null;
             }
 
             var analyzerConfig = new StringBuilder();
@@ -126,11 +150,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
                 if (value is NamingStylePreferences namingStylePreferences)
                 {
-                    EditorConfigFileGenerator.AppendNamingStylePreferencesToEditorConfig(namingStylePreferences, optionKey.Language!, analyzerConfig);
+                    EditorConfigFileGenerator.AppendNamingStylePreferencesToEditorConfig(
+                        namingStylePreferences,
+                        optionKey.Language!,
+                        analyzerConfig
+                    );
                     continue;
                 }
 
-                analyzerConfig.AppendLine($"{optionKey.Option.Definition.ConfigName} = {optionKey.Option.Definition.Serializer.Serialize(value)}");
+                analyzerConfig.AppendLine(
+                    $"{optionKey.Option.Definition.ConfigName} = {optionKey.Option.Definition.Serializer.Serialize(value)}"
+                );
             }
 
             return SourceText.From(analyzerConfig.ToString(), Encoding.UTF8);

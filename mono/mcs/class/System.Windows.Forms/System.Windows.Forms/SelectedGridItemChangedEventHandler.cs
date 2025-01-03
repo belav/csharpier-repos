@@ -25,7 +25,10 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms 
+namespace System.Windows.Forms
 {
-	public delegate void SelectedGridItemChangedEventHandler(object sender, SelectedGridItemChangedEventArgs e);
+    public delegate void SelectedGridItemChangedEventHandler(
+        object sender,
+        SelectedGridItemChangedEventArgs e
+    );
 }

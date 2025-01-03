@@ -47,9 +47,10 @@ public class Program
 
             default:
                 Console.WriteLine($"unknown scenario {scenario}");
-                Console.WriteLine($"usage: dotnet run -- ({EndpointRoutingScenario}|{RouterScenario})");
+                Console.WriteLine(
+                    $"usage: dotnet run -- ({EndpointRoutingScenario}|{RouterScenario})"
+                );
                 throw new InvalidOperationException();
-
         }
 
         return new HostBuilder()

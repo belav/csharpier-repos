@@ -1,21 +1,25 @@
 //------------------------------------------------------------------------------
 // <copyright file="SessionSwitchReason.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace Microsoft.Win32 {
-    using System.Diagnostics;
+namespace Microsoft.Win32
+{
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para> Specifies the reason for the session switch</para>
     /// </devdoc>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1008:EnumsShouldHaveZeroValue")]
-    public enum SessionSwitchReason {
-
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Design",
+        "CA1008:EnumsShouldHaveZeroValue"
+    )]
+    public enum SessionSwitchReason
+    {
         /// <devdoc>
         ///      A session was connected to the console session.
         /// </devdoc>
@@ -59,7 +63,6 @@ namespace Microsoft.Win32 {
         /// <devdoc>
         ///      A session has changed its remote controlled status.
         /// </devdoc>
-        SessionRemoteControl = NativeMethods.WTS_SESSION_REMOTE_CONTROL
+        SessionRemoteControl = NativeMethods.WTS_SESSION_REMOTE_CONTROL,
     }
 }
-

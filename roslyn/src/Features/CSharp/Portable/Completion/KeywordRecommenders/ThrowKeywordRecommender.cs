@@ -10,11 +10,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class ThrowKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public ThrowKeywordRecommender()
-            : base(SyntaxKind.ThrowKeyword)
-        {
-        }
+            : base(SyntaxKind.ThrowKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             if (context.IsStatementContext || context.IsGlobalStatementContext)
             {
@@ -35,8 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
             //  expr ? throw : ...
             //  expr ? ... : throw
-            if (context.TargetToken.Kind() is SyntaxKind.QuestionToken or
-                SyntaxKind.ColonToken)
+            if (context.TargetToken.Kind() is SyntaxKind.QuestionToken or SyntaxKind.ColonToken)
             {
                 return context.TargetToken.Parent.IsKind(SyntaxKind.ConditionalExpression);
             }

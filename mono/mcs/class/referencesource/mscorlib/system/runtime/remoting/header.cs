@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -13,25 +13,26 @@
 **
 **
 ===========================================================*/
-namespace System.Runtime.Remoting.Messaging{
-    using System.Runtime.Remoting;
+namespace System.Runtime.Remoting.Messaging
+{
     using System;
+    using System.Runtime.Remoting;
+
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public class Header
     {
-        public Header (String _Name, Object _Value)
-        
-            : this(_Name, _Value, true) {
-        }
-        public Header (String _Name, Object _Value, bool _MustUnderstand)
+        public Header(String _Name, Object _Value)
+            : this(_Name, _Value, true) { }
+
+        public Header(String _Name, Object _Value, bool _MustUnderstand)
         {
             Name = _Name;
             Value = _Value;
             MustUnderstand = _MustUnderstand;
         }
 
-        public Header (String _Name, Object _Value, bool _MustUnderstand, String _HeaderNamespace)
+        public Header(String _Name, Object _Value, bool _MustUnderstand, String _HeaderNamespace)
         {
             Name = _Name;
             Value = _Value;
@@ -39,9 +40,9 @@ namespace System.Runtime.Remoting.Messaging{
             HeaderNamespace = _HeaderNamespace;
         }
 
-        public String    Name;
-        public Object    Value;
-        public bool   MustUnderstand;
+        public String Name;
+        public Object Value;
+        public bool MustUnderstand;
 
         public String HeaderNamespace;
     }

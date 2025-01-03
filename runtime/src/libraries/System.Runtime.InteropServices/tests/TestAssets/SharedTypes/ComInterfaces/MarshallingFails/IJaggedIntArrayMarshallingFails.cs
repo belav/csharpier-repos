@@ -11,48 +11,64 @@ namespace SharedTypes.ComInterfaces.MarshallingFails
     [Guid("9FA4A8A9-3D8F-48A8-B6FB-B45B5F1B9FB6")]
     internal partial interface IJaggedIntArrayMarshallingFails
     {
-        [return: MarshalUsing(CountElementName = nameof(length)),
+        [return:
+            MarshalUsing(CountElementName = nameof(length)),
             MarshalUsing(ElementIndirectionDepth = 1, CountElementName = nameof(widths)),
-            MarshalUsing(typeof(ThrowOn4thElementMarshalled), ElementIndirectionDepth = 2)]
+            MarshalUsing(typeof(ThrowOn4thElementMarshalled), ElementIndirectionDepth = 2)
+        ]
         int[][] Get(
-            [MarshalUsing(CountElementName = nameof(length))]
-            out int[] widths,
-            out int length);
+            [MarshalUsing(CountElementName = nameof(length))] out int[] widths,
+            out int length
+        );
 
         int Get2(
-            [MarshalUsing(CountElementName = MarshalUsingAttribute.ReturnsCountValue),
-            MarshalUsing(ElementIndirectionDepth = 1, CountElementName = nameof(widths)),
-            MarshalUsing(typeof(ThrowOn4thElementMarshalled), ElementIndirectionDepth = 2)]
-            out int[][] array,
+            [
+                MarshalUsing(CountElementName = MarshalUsingAttribute.ReturnsCountValue),
+                MarshalUsing(ElementIndirectionDepth = 1, CountElementName = nameof(widths)),
+                MarshalUsing(typeof(ThrowOn4thElementMarshalled), ElementIndirectionDepth = 2)
+            ]
+                out int[][] array,
             [MarshalUsing(CountElementName = MarshalUsingAttribute.ReturnsCountValue)]
-            out int[] widths);
+                out int[] widths
+        );
 
-        [return: MarshalUsing(ConstantElementCount = 10),
+        [return:
+            MarshalUsing(ConstantElementCount = 10),
             MarshalUsing(ElementIndirectionDepth = 1, ConstantElementCount = 10),
-            MarshalUsing(typeof(ThrowOn4thElementMarshalled), ElementIndirectionDepth = 2)]
+            MarshalUsing(typeof(ThrowOn4thElementMarshalled), ElementIndirectionDepth = 2)
+        ]
         int[][] GetConstSize();
 
         void Set(
-            [MarshalUsing(CountElementName = nameof(length)),
-            MarshalUsing(ElementIndirectionDepth = 1, CountElementName = nameof(widths)),
-            MarshalUsing(typeof(ThrowOn4thElementMarshalled), ElementIndirectionDepth = 2)]
-            int[][] array,
-            [MarshalUsing(CountElementName = nameof(length))]
-            int[] widths,
-            int length);
+            [
+                MarshalUsing(CountElementName = nameof(length)),
+                MarshalUsing(ElementIndirectionDepth = 1, CountElementName = nameof(widths)),
+                MarshalUsing(typeof(ThrowOn4thElementMarshalled), ElementIndirectionDepth = 2)
+            ]
+                int[][] array,
+            [MarshalUsing(CountElementName = nameof(length))] int[] widths,
+            int length
+        );
     }
 
     [GeneratedComClass]
     internal partial class IJaggedIntArrayMarshallingFailsImpl : IJaggedIntArrayMarshallingFails
     {
-        int[][] _data = new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5 }, new int[] { 6, 7, 8, 9 } };
+        int[][] _data = new int[][]
+        {
+            new int[] { 1, 2, 3 },
+            new int[] { 4, 5 },
+            new int[] { 6, 7, 8, 9 },
+        };
         int[] _widths = new int[] { 3, 2, 4 };
+
         public int[][] Get(out int[] widths, out int length)
         {
             widths = _widths;
             length = _data.Length;
             return _data;
         }
+
         public int Get2(out int[][] array, out int[] widths)
         {
             array = _data;
@@ -60,7 +76,11 @@ namespace SharedTypes.ComInterfaces.MarshallingFails
             return array.Length;
         }
 
-        [return: MarshalUsing(ConstantElementCount = 10), MarshalUsing(ElementIndirectionDepth = 1, ConstantElementCount = 10), MarshalUsing(typeof(ThrowOn4thElementMarshalled), ElementIndirectionDepth = 2)]
+        [return:
+            MarshalUsing(ConstantElementCount = 10),
+            MarshalUsing(ElementIndirectionDepth = 1, ConstantElementCount = 10),
+            MarshalUsing(typeof(ThrowOn4thElementMarshalled), ElementIndirectionDepth = 2)
+        ]
         public int[][] GetConstSize()
         {
             int[][] values = new int[10][];

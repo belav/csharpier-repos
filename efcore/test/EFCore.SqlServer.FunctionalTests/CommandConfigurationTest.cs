@@ -6,7 +6,8 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class CommandConfigurationTest : IClassFixture<CommandConfigurationTest.CommandConfigurationFixture>
+public class CommandConfigurationTest
+    : IClassFixture<CommandConfigurationTest.CommandConfigurationFixture>
 {
     public CommandConfigurationTest(CommandConfigurationFixture fixture)
     {
@@ -31,36 +32,49 @@ public class CommandConfigurationTest : IClassFixture<CommandConfigurationTest.C
     public void Keys_generated_in_batches(int count, int expected)
     {
         TestHelpers.ExecuteWithStrategyInTransaction(
-            Fixture.CreateContext, UseTransaction,
+            Fixture.CreateContext,
+            UseTransaction,
             context =>
             {
                 for (var i = 0; i < count; i++)
                 {
-                    context.Set<KettleChips>().Add(new KettleChips { BestBuyDate = DateTime.Now, Name = "Doritos Locos Tacos " + i });
+                    context
+                        .Set<KettleChips>()
+                        .Add(
+                            new KettleChips
+                            {
+                                BestBuyDate = DateTime.Now,
+                                Name = "Doritos Locos Tacos " + i,
+                            }
+                        );
                 }
 
                 context.SaveChanges();
-            });
+            }
+        );
 
-        Assert.Equal(expected, CountSqlLinesContaining("SELECT NEXT VALUE FOR", Fixture.TestSqlLoggerFactory.Sql));
+        Assert.Equal(
+            expected,
+            CountSqlLinesContaining("SELECT NEXT VALUE FOR", Fixture.TestSqlLoggerFactory.Sql)
+        );
     }
 
-    private ChipsContext CreateContext()
-        => (ChipsContext)Fixture.CreateContext();
+    private ChipsContext CreateContext() => (ChipsContext)Fixture.CreateContext();
 
-    protected void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction) =>
+        facade.UseTransaction(transaction.GetDbTransaction());
 
-    public int CountSqlLinesContaining(string searchTerm, string sql)
-        => CountLinesContaining(sql, searchTerm);
+    public int CountSqlLinesContaining(string searchTerm, string sql) =>
+        CountLinesContaining(sql, searchTerm);
 
     public int CountLinesContaining(string source, string searchTerm)
     {
-        var text = source.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+        var text = source.Split(
+            new[] { Environment.NewLine },
+            StringSplitOptions.RemoveEmptyEntries
+        );
 
-        var matchQuery = from word in text
-                         where word.Contains(searchTerm)
-                         select word;
+        var matchQuery = from word in text where word.Contains(searchTerm) select word;
 
         return matchQuery.Count();
     }
@@ -68,14 +82,12 @@ public class CommandConfigurationTest : IClassFixture<CommandConfigurationTest.C
     private class ChipsContext : PoolableDbContext
     {
         public ChipsContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<KettleChips> Chips { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.UseHiLo();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.UseHiLo();
     }
 
     private class KettleChips
@@ -89,15 +101,12 @@ public class CommandConfigurationTest : IClassFixture<CommandConfigurationTest.C
 
     public class CommandConfigurationFixture : SharedStoreFixtureBase<DbContext>
     {
-        protected override string StoreName
-            => "CommandConfiguration";
+        protected override string StoreName => "CommandConfiguration";
 
         protected override Type ContextType { get; } = typeof(ChipsContext);
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
     }
 }

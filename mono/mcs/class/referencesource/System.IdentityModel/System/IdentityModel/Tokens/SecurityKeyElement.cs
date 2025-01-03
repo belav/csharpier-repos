@@ -7,9 +7,8 @@ using System.IdentityModel.Selectors;
 
 namespace System.IdentityModel.Tokens
 {
-
     /// <summary>
-    /// SecurityKeyElement provides delayed resolution of security keys by resolving the SecurityKeyIdentifierClause or SecurityKeyIdentifier 
+    /// SecurityKeyElement provides delayed resolution of security keys by resolving the SecurityKeyIdentifierClause or SecurityKeyIdentifier
     /// only when cryptographic functions are needed.  This allows a key clause or identifier that is never used by an application
     /// to be serialized and deserialzied on and off the wire without issue.
     /// </summary>
@@ -26,14 +25,22 @@ namespace System.IdentityModel.Tokens
         /// <param name="securityKeyIdentifierClause">SecurityKeyIdentifierClause that represents a SecuriytKey</param>
         /// <param name="securityTokenResolver">SecurityTokenResolver that can be resolved to a SecurityKey</param>
         /// <exception cref="ArgumentNullException">Thrown if the 'clause' is null</exception>
-        public SecurityKeyElement(SecurityKeyIdentifierClause securityKeyIdentifierClause, SecurityTokenResolver securityTokenResolver)
+        public SecurityKeyElement(
+            SecurityKeyIdentifierClause securityKeyIdentifierClause,
+            SecurityTokenResolver securityTokenResolver
+        )
         {
             if (securityKeyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityKeyIdentifierClause");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityKeyIdentifierClause"
+                );
             }
 
-            Initialize(new SecurityKeyIdentifier(securityKeyIdentifierClause), securityTokenResolver);
+            Initialize(
+                new SecurityKeyIdentifier(securityKeyIdentifierClause),
+                securityTokenResolver
+            );
         }
 
         /// <summary>
@@ -42,17 +49,25 @@ namespace System.IdentityModel.Tokens
         /// <param name="securityKeyIdentifier">SecurityKeyIdentifier that represents a SecuriytKey</param>
         /// <param name="securityTokenResolver">SecurityTokenResolver that can be resolved to a SecurityKey</param>
         /// <exception cref="ArgumentNullException">Thrown if the 'securityKeyIdentifier' is null</exception>
-        public SecurityKeyElement(SecurityKeyIdentifier securityKeyIdentifier, SecurityTokenResolver securityTokenResolver)
+        public SecurityKeyElement(
+            SecurityKeyIdentifier securityKeyIdentifier,
+            SecurityTokenResolver securityTokenResolver
+        )
         {
             if (securityKeyIdentifier == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityKeyIdentifier");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityKeyIdentifier"
+                );
             }
 
             Initialize(securityKeyIdentifier, securityTokenResolver);
         }
 
-        void Initialize(SecurityKeyIdentifier securityKeyIdentifier, SecurityTokenResolver securityTokenResolver)
+        void Initialize(
+            SecurityKeyIdentifier securityKeyIdentifier,
+            SecurityTokenResolver securityTokenResolver
+        )
         {
             _keyLock = new object();
             _securityKeyIdentifier = securityKeyIdentifier;
@@ -184,13 +199,12 @@ namespace System.IdentityModel.Tokens
 
         /// <summary>
         /// Attempts to resolve the _securityKeyIdentifier into a securityKey.  If successful, the private _securityKey is set.
-        /// Uses the tokenresolver that was passed in, it may be the case a keyIdentifier can 
+        /// Uses the tokenresolver that was passed in, it may be the case a keyIdentifier can
         /// generate a securityKey.  A RSA key can generate a key with just the public part.
         /// </summary>
         /// <returns>void</returns>
         void ResolveKey()
         {
-
             if (_securityKeyIdentifier == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("ski");
@@ -202,12 +216,16 @@ namespace System.IdentityModel.Tokens
                 {
                     if (_securityKey == null)
                     {
-
                         if (_securityTokenResolver != null)
                         {
                             for (int i = 0; i < _securityKeyIdentifier.Count; ++i)
                             {
-                                if (_securityTokenResolver.TryResolveSecurityKey(_securityKeyIdentifier[i], out _securityKey))
+                                if (
+                                    _securityTokenResolver.TryResolveSecurityKey(
+                                        _securityKeyIdentifier[i],
+                                        out _securityKey
+                                    )
+                                )
                                 {
                                     return;
                                 }
@@ -222,9 +240,19 @@ namespace System.IdentityModel.Tokens
                         }
 
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                            new SecurityTokenException(SR.GetString(SR.ID2080,
-                                        _securityTokenResolver == null ? "null" : _securityTokenResolver.ToString(),
-                                        _securityKeyIdentifier == null ? "null" : _securityKeyIdentifier.ToString())), System.Diagnostics.TraceEventType.Error);
+                            new SecurityTokenException(
+                                SR.GetString(
+                                    SR.ID2080,
+                                    _securityTokenResolver == null
+                                        ? "null"
+                                        : _securityTokenResolver.ToString(),
+                                    _securityKeyIdentifier == null
+                                        ? "null"
+                                        : _securityKeyIdentifier.ToString()
+                                )
+                            ),
+                            System.Diagnostics.TraceEventType.Error
+                        );
                     }
                 }
             }

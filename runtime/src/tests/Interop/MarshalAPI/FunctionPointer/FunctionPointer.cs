@@ -15,10 +15,10 @@ public partial class FunctionPtr
         public static extern bool CheckFcnPtr(IntPtr fcnptr);
 
         [DllImport(nameof(FunctionPointerNative))]
-        static unsafe extern void FillOutPtr(IntPtr* p);
+        static extern unsafe void FillOutPtr(IntPtr* p);
 
-	[DllImport(nameof(FunctionPointerNative))]
-	static unsafe extern void FillOutIntParameter(out IntPtr p);
+        [DllImport(nameof(FunctionPointerNative))]
+        static extern unsafe void FillOutIntParameter(out IntPtr p);
     }
 
     delegate void VoidDelegate();
@@ -32,7 +32,8 @@ public partial class FunctionPtr
             VoidDelegate md = new VoidDelegate(VoidVoidMethod);
             IntPtr fcnptr = Marshal.GetFunctionPointerForDelegate<VoidDelegate>(md);
 
-            VoidDelegate del = (VoidDelegate)Marshal.GetDelegateForFunctionPointer(fcnptr, typeof(VoidDelegate));
+            VoidDelegate del = (VoidDelegate)
+                Marshal.GetDelegateForFunctionPointer(fcnptr, typeof(VoidDelegate));
             Assert.Equal(md.Target, del.Target);
             Assert.Equal(md.Method, del.Method);
         }
@@ -40,7 +41,8 @@ public partial class FunctionPtr
         // Native FcnPtr -> Delegate
         {
             IntPtr fcnptr = FunctionPointerNative.GetVoidVoidFcnPtr();
-            VoidDelegate del = (VoidDelegate)Marshal.GetDelegateForFunctionPointer(fcnptr, typeof(VoidDelegate));
+            VoidDelegate del = (VoidDelegate)
+                Marshal.GetDelegateForFunctionPointer(fcnptr, typeof(VoidDelegate));
             Assert.Null(del.Target);
             Assert.Equal("Invoke", del.Method.Name);
 
@@ -62,9 +64,8 @@ public partial class FunctionPtr
         }
     }
 
-
     [DllImport(nameof(FunctionPointerNative))]
-    static unsafe extern void FillOutPtr(IntPtr* p);
+    static extern unsafe void FillOutPtr(IntPtr* p);
 
     private unsafe delegate void DelegateToFillOutPtr([Out] IntPtr* p);
 
@@ -77,7 +78,8 @@ public partial class FunctionPtr
         {
             DelegateToFillOutPtr d = new DelegateToFillOutPtr(FillOutPtr);
             IntPtr ptr = Marshal.GetFunctionPointerForDelegate(d);
-            DelegateToFillOutPtr OutPtrDelegate = Marshal.GetDelegateForFunctionPointer<DelegateToFillOutPtr>(ptr);
+            DelegateToFillOutPtr OutPtrDelegate =
+                Marshal.GetDelegateForFunctionPointer<DelegateToFillOutPtr>(ptr);
             OutPtrDelegate(&outVar);
             GC.KeepAlive(d);
         }
@@ -85,7 +87,7 @@ public partial class FunctionPtr
     }
 
     [DllImport(nameof(FunctionPointerNative))]
-    static unsafe extern void FillOutIntParameter(out IntPtr p);
+    static extern unsafe void FillOutIntParameter(out IntPtr p);
 
     private unsafe delegate void DelegateToFillOutIntParameter(out IntPtr p);
 
@@ -96,9 +98,12 @@ public partial class FunctionPtr
         int expectedValue = 50;
         unsafe
         {
-            DelegateToFillOutIntParameter d = new DelegateToFillOutIntParameter(FillOutIntParameter);
+            DelegateToFillOutIntParameter d = new DelegateToFillOutIntParameter(
+                FillOutIntParameter
+            );
             IntPtr ptr = Marshal.GetFunctionPointerForDelegate(d);
-            DelegateToFillOutIntParameter OutPtrDelegate = Marshal.GetDelegateForFunctionPointer<DelegateToFillOutIntParameter>(ptr);
+            DelegateToFillOutIntParameter OutPtrDelegate =
+                Marshal.GetDelegateForFunctionPointer<DelegateToFillOutIntParameter>(ptr);
             OutPtrDelegate(out outVar);
             GC.KeepAlive(d);
         }

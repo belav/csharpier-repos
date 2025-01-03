@@ -21,13 +21,15 @@ namespace System.Web.Mvc
         private RouteData _routeData;
 
         // parameterless constructor used for mocking
-        public ControllerContext()
-        {
-        }
+        public ControllerContext() { }
 
         // copy constructor - allows for subclassed types to take an existing ControllerContext as a parameter
         // and we'll automatically set the appropriate properties
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "The virtual property setters are only to support mocking frameworks, in which case this constructor shouldn't be called anyway.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "The virtual property setters are only to support mocking frameworks, in which case this constructor shouldn't be called anyway."
+        )]
         protected ControllerContext(ControllerContext controllerContext)
         {
             if (controllerContext == null)
@@ -39,12 +41,18 @@ namespace System.Web.Mvc
             RequestContext = controllerContext.RequestContext;
         }
 
-        public ControllerContext(HttpContextBase httpContext, RouteData routeData, ControllerBase controller)
-            : this(new RequestContext(httpContext, routeData), controller)
-        {
-        }
+        public ControllerContext(
+            HttpContextBase httpContext,
+            RouteData routeData,
+            ControllerBase controller
+        )
+            : this(new RequestContext(httpContext, routeData), controller) { }
 
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "The virtual property setters are only to support mocking frameworks, in which case this constructor shouldn't be called anyway.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "The virtual property setters are only to support mocking frameworks, in which case this constructor shouldn't be called anyway."
+        )]
         public ControllerContext(RequestContext requestContext, ControllerBase controller)
         {
             if (requestContext == null)
@@ -74,7 +82,10 @@ namespace System.Web.Mvc
             {
                 if (_httpContext == null)
                 {
-                    _httpContext = (_requestContext != null) ? _requestContext.HttpContext : new EmptyHttpContext();
+                    _httpContext =
+                        (_requestContext != null)
+                            ? _requestContext.HttpContext
+                            : new EmptyHttpContext();
                 }
                 return _httpContext;
             }
@@ -122,15 +133,14 @@ namespace System.Web.Mvc
             {
                 if (_routeData == null)
                 {
-                    _routeData = (_requestContext != null) ? _requestContext.RouteData : new RouteData();
+                    _routeData =
+                        (_requestContext != null) ? _requestContext.RouteData : new RouteData();
                 }
                 return _routeData;
             }
             set { _routeData = value; }
         }
 
-        private sealed class EmptyHttpContext : HttpContextBase
-        {
-        }
+        private sealed class EmptyHttpContext : HttpContextBase { }
     }
 }

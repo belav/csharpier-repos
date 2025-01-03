@@ -72,7 +72,8 @@ namespace System.Diagnostics.Metrics
         }
 
         // this isn't exactly identical to the netcore algorithm, but good enough
-        public override int GetHashCode() => (Value1?.GetHashCode() ?? 0) ^ (Value2?.GetHashCode() ?? 0 << 3);
+        public override int GetHashCode() =>
+            (Value1?.GetHashCode() ?? 0) ^ (Value2?.GetHashCode() ?? 0 << 3);
     }
 
     internal partial struct ObjectSequence3 : IEquatable<ObjectSequence3>, IObjectSequence
@@ -117,21 +118,18 @@ namespace System.Diagnostics.Metrics
         }
 
         // this isn't exactly identical to the netcore algorithm, but good enough
-        public override int GetHashCode() => (Value1?.GetHashCode() ?? 0) ^ (Value2?.GetHashCode() ?? 0 << 3) ^ (Value3?.GetHashCode() ?? 0 << 6);
+        public override int GetHashCode() =>
+            (Value1?.GetHashCode() ?? 0)
+            ^ (Value2?.GetHashCode() ?? 0 << 3)
+            ^ (Value3?.GetHashCode() ?? 0 << 6);
     }
 
     internal partial struct ObjectSequenceMany : IEquatable<ObjectSequenceMany>, IObjectSequence
     {
         public object? this[int i]
         {
-            get
-            {
-                return _values[i];
-            }
-            set
-            {
-                _values[i] = value;
-            }
+            get { return _values[i]; }
+            set { _values[i] = value; }
         }
 
         public override int GetHashCode()

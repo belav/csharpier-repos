@@ -17,7 +17,10 @@ namespace System.Threading
             private const int DefaultSampleIntervalMsLow = 10;
             private const int DefaultSampleIntervalMsHigh = 200;
 
-            public static readonly bool IsDisabled = AppContextConfigHelper.GetBooleanConfig("System.Threading.ThreadPool.HillClimbing.Disable", false);
+            public static readonly bool IsDisabled = AppContextConfigHelper.GetBooleanConfig(
+                "System.Threading.ThreadPool.HillClimbing.Disable",
+                false
+            );
 
             // SOS's ThreadPool command depends on this name
             public static readonly HillClimbing ThreadPoolHillClimber = new HillClimbing();
@@ -80,16 +83,61 @@ namespace System.Threading
 
             public HillClimbing()
             {
-                _wavePeriod = AppContextConfigHelper.GetInt32Config("System.Threading.ThreadPool.HillClimbing.WavePeriod", 4, false);
-                _maxThreadWaveMagnitude = AppContextConfigHelper.GetInt32Config("System.Threading.ThreadPool.HillClimbing.MaxWaveMagnitude", 20, false);
-                _threadMagnitudeMultiplier = AppContextConfigHelper.GetInt32Config("System.Threading.ThreadPool.HillClimbing.WaveMagnitudeMultiplier", 100, false) / 100.0;
-                _samplesToMeasure = _wavePeriod * AppContextConfigHelper.GetInt32Config("System.Threading.ThreadPool.HillClimbing.WaveHistorySize", 8, false);
-                _targetThroughputRatio = AppContextConfigHelper.GetInt32Config("System.Threading.ThreadPool.HillClimbing.Bias", 15, false) / 100.0;
-                _targetSignalToNoiseRatio = AppContextConfigHelper.GetInt32Config("System.Threading.ThreadPool.HillClimbing.TargetSignalToNoiseRatio", 300, false) / 100.0;
-                _maxChangePerSecond = AppContextConfigHelper.GetInt32Config("System.Threading.ThreadPool.HillClimbing.MaxChangePerSecond", 4, false);
-                _maxChangePerSample = AppContextConfigHelper.GetInt32Config("System.Threading.ThreadPool.HillClimbing.MaxChangePerSample", 20, false);
-                int sampleIntervalMsLow = AppContextConfigHelper.GetInt32Config("System.Threading.ThreadPool.HillClimbing.SampleIntervalLow", DefaultSampleIntervalMsLow, false);
-                int sampleIntervalMsHigh = AppContextConfigHelper.GetInt32Config("System.Threading.ThreadPool.HillClimbing.SampleIntervalHigh", DefaultSampleIntervalMsHigh, false);
+                _wavePeriod = AppContextConfigHelper.GetInt32Config(
+                    "System.Threading.ThreadPool.HillClimbing.WavePeriod",
+                    4,
+                    false
+                );
+                _maxThreadWaveMagnitude = AppContextConfigHelper.GetInt32Config(
+                    "System.Threading.ThreadPool.HillClimbing.MaxWaveMagnitude",
+                    20,
+                    false
+                );
+                _threadMagnitudeMultiplier =
+                    AppContextConfigHelper.GetInt32Config(
+                        "System.Threading.ThreadPool.HillClimbing.WaveMagnitudeMultiplier",
+                        100,
+                        false
+                    ) / 100.0;
+                _samplesToMeasure =
+                    _wavePeriod
+                    * AppContextConfigHelper.GetInt32Config(
+                        "System.Threading.ThreadPool.HillClimbing.WaveHistorySize",
+                        8,
+                        false
+                    );
+                _targetThroughputRatio =
+                    AppContextConfigHelper.GetInt32Config(
+                        "System.Threading.ThreadPool.HillClimbing.Bias",
+                        15,
+                        false
+                    ) / 100.0;
+                _targetSignalToNoiseRatio =
+                    AppContextConfigHelper.GetInt32Config(
+                        "System.Threading.ThreadPool.HillClimbing.TargetSignalToNoiseRatio",
+                        300,
+                        false
+                    ) / 100.0;
+                _maxChangePerSecond = AppContextConfigHelper.GetInt32Config(
+                    "System.Threading.ThreadPool.HillClimbing.MaxChangePerSecond",
+                    4,
+                    false
+                );
+                _maxChangePerSample = AppContextConfigHelper.GetInt32Config(
+                    "System.Threading.ThreadPool.HillClimbing.MaxChangePerSample",
+                    20,
+                    false
+                );
+                int sampleIntervalMsLow = AppContextConfigHelper.GetInt32Config(
+                    "System.Threading.ThreadPool.HillClimbing.SampleIntervalLow",
+                    DefaultSampleIntervalMsLow,
+                    false
+                );
+                int sampleIntervalMsHigh = AppContextConfigHelper.GetInt32Config(
+                    "System.Threading.ThreadPool.HillClimbing.SampleIntervalHigh",
+                    DefaultSampleIntervalMsHigh,
+                    false
+                );
                 if (sampleIntervalMsLow <= sampleIntervalMsHigh)
                 {
                     _sampleIntervalMsLow = sampleIntervalMsLow;
@@ -100,19 +148,40 @@ namespace System.Threading
                     _sampleIntervalMsLow = DefaultSampleIntervalMsLow;
                     _sampleIntervalMsHigh = DefaultSampleIntervalMsHigh;
                 }
-                _throughputErrorSmoothingFactor = AppContextConfigHelper.GetInt32Config("System.Threading.ThreadPool.HillClimbing.ErrorSmoothingFactor", 1, false) / 100.0;
-                _gainExponent = AppContextConfigHelper.GetInt32Config("System.Threading.ThreadPool.HillClimbing.GainExponent", 200, false) / 100.0;
-                _maxSampleError = AppContextConfigHelper.GetInt32Config("System.Threading.ThreadPool.HillClimbing.MaxSampleErrorPercent", 15, false) / 100.0;
+                _throughputErrorSmoothingFactor =
+                    AppContextConfigHelper.GetInt32Config(
+                        "System.Threading.ThreadPool.HillClimbing.ErrorSmoothingFactor",
+                        1,
+                        false
+                    ) / 100.0;
+                _gainExponent =
+                    AppContextConfigHelper.GetInt32Config(
+                        "System.Threading.ThreadPool.HillClimbing.GainExponent",
+                        200,
+                        false
+                    ) / 100.0;
+                _maxSampleError =
+                    AppContextConfigHelper.GetInt32Config(
+                        "System.Threading.ThreadPool.HillClimbing.MaxSampleErrorPercent",
+                        15,
+                        false
+                    ) / 100.0;
 
                 _samples = new double[_samplesToMeasure];
                 _threadCounts = new double[_samplesToMeasure];
 
-                _currentSampleMs = _randomIntervalGenerator.Next(_sampleIntervalMsLow, _sampleIntervalMsHigh + 1);
+                _currentSampleMs = _randomIntervalGenerator.Next(
+                    _sampleIntervalMsLow,
+                    _sampleIntervalMsHigh + 1
+                );
             }
 
-            public (int newThreadCount, int newSampleMs) Update(int currentThreadCount, double sampleDurationSeconds, int numCompletions)
+            public (int newThreadCount, int newSampleMs) Update(
+                int currentThreadCount,
+                double sampleDurationSeconds,
+                int numCompletions
+            )
             {
-
                 //
                 // If someone changed the thread count without telling us, update our records accordingly.
                 //
@@ -152,7 +221,10 @@ namespace System.Threading
                 // two "low" samples and one "high" sample.  This will appear as periodic variation right in the frequency
                 // range we're targeting, which will not be filtered by the frequency-domain translation.
                 //
-                if (_totalSamples > 0 && ((currentThreadCount - 1.0) / numCompletions) >= _maxSampleError)
+                if (
+                    _totalSamples > 0
+                    && ((currentThreadCount - 1.0) / numCompletions) >= _maxSampleError
+                )
                 {
                     // not accurate enough yet.  Let's accumulate the data so far, and tell the ThreadPool
                     // to collect a little more.
@@ -197,7 +269,10 @@ namespace System.Threading
                 // multiple of the primary wave's period; otherwise the frequency we're looking for will fall between two  frequency bands
                 // in the Fourier analysis, and we won't be able to measure it accurately.
                 //
-                int sampleCount = ((int)Math.Min(_totalSamples - 1, _samplesToMeasure)) / _wavePeriod * _wavePeriod;
+                int sampleCount =
+                    ((int)Math.Min(_totalSamples - 1, _samplesToMeasure))
+                    / _wavePeriod
+                    * _wavePeriod;
 
                 if (sampleCount > _wavePeriod)
                 {
@@ -208,8 +283,12 @@ namespace System.Threading
                     double threadSum = 0;
                     for (int i = 0; i < sampleCount; i++)
                     {
-                        sampleSum += _samples[(_totalSamples - sampleCount + i) % _samplesToMeasure];
-                        threadSum += _threadCounts[(_totalSamples - sampleCount + i) % _samplesToMeasure];
+                        sampleSum += _samples[
+                            (_totalSamples - sampleCount + i) % _samplesToMeasure
+                        ];
+                        threadSum += _threadCounts[
+                            (_totalSamples - sampleCount + i) % _samplesToMeasure
+                        ];
                     }
                     double averageThroughput = sampleSum / sampleCount;
                     double averageThreadCount = threadSum / sampleCount;
@@ -220,26 +299,41 @@ namespace System.Threading
                         // Calculate the periods of the adjacent frequency bands we'll be using to measure noise levels.
                         // We want the two adjacent Fourier frequency bands.
                         //
-                        double adjacentPeriod1 = sampleCount / (((double)sampleCount / _wavePeriod) + 1);
-                        double adjacentPeriod2 = sampleCount / (((double)sampleCount / _wavePeriod) - 1);
+                        double adjacentPeriod1 =
+                            sampleCount / (((double)sampleCount / _wavePeriod) + 1);
+                        double adjacentPeriod2 =
+                            sampleCount / (((double)sampleCount / _wavePeriod) - 1);
 
                         //
                         // Get the three different frequency components of the throughput (scaled by average
                         // throughput).  Our "error" estimate (the amount of noise that might be present in the
                         // frequency band we're really interested in) is the average of the adjacent bands.
                         //
-                        throughputWaveComponent = GetWaveComponent(_samples, sampleCount, _wavePeriod) / averageThroughput;
-                        throughputErrorEstimate = (GetWaveComponent(_samples, sampleCount, adjacentPeriod1) / averageThroughput).Abs();
+                        throughputWaveComponent =
+                            GetWaveComponent(_samples, sampleCount, _wavePeriod)
+                            / averageThroughput;
+                        throughputErrorEstimate = (
+                            GetWaveComponent(_samples, sampleCount, adjacentPeriod1)
+                            / averageThroughput
+                        ).Abs();
                         if (adjacentPeriod2 <= sampleCount)
                         {
-                            throughputErrorEstimate = Math.Max(throughputErrorEstimate, (GetWaveComponent(_samples, sampleCount, adjacentPeriod2) / averageThroughput).Abs());
+                            throughputErrorEstimate = Math.Max(
+                                throughputErrorEstimate,
+                                (
+                                    GetWaveComponent(_samples, sampleCount, adjacentPeriod2)
+                                    / averageThroughput
+                                ).Abs()
+                            );
                         }
 
                         //
                         // Do the same for the thread counts, so we have something to compare to.  We don't measure thread count
                         // noise, because there is none; these are exact measurements.
                         //
-                        threadWaveComponent = GetWaveComponent(_threadCounts, sampleCount, _wavePeriod) / averageThreadCount;
+                        threadWaveComponent =
+                            GetWaveComponent(_threadCounts, sampleCount, _wavePeriod)
+                            / averageThreadCount;
 
                         //
                         // Update our moving average of the throughput noise.  We'll use this later as feedback to
@@ -248,14 +342,23 @@ namespace System.Threading
                         if (_averageThroughputNoise == 0)
                             _averageThroughputNoise = throughputErrorEstimate;
                         else
-                            _averageThroughputNoise = (_throughputErrorSmoothingFactor * throughputErrorEstimate) + ((1.0 - _throughputErrorSmoothingFactor) * _averageThroughputNoise);
+                            _averageThroughputNoise =
+                                (_throughputErrorSmoothingFactor * throughputErrorEstimate)
+                                + (
+                                    (1.0 - _throughputErrorSmoothingFactor)
+                                    * _averageThroughputNoise
+                                );
 
                         if (threadWaveComponent.Abs() > 0)
                         {
                             //
                             // Adjust the throughput wave so it's centered around the target wave, and then calculate the adjusted throughput/thread ratio.
                             //
-                            ratio = (throughputWaveComponent - (_targetThroughputRatio * threadWaveComponent)) / threadWaveComponent;
+                            ratio =
+                                (
+                                    throughputWaveComponent
+                                    - (_targetThroughputRatio * threadWaveComponent)
+                                ) / threadWaveComponent;
                             state = StateOrTransition.ClimbingMove;
                         }
                         else
@@ -268,12 +371,16 @@ namespace System.Threading
                         // Calculate how confident we are in the ratio.  More noise == less confident.  This has
                         // the effect of slowing down movements that might be affected by random noise.
                         //
-                        double noiseForConfidence = Math.Max(_averageThroughputNoise, throughputErrorEstimate);
+                        double noiseForConfidence = Math.Max(
+                            _averageThroughputNoise,
+                            throughputErrorEstimate
+                        );
                         if (noiseForConfidence > 0)
-                            confidence = (threadWaveComponent.Abs() / noiseForConfidence) / _targetSignalToNoiseRatio;
+                            confidence =
+                                (threadWaveComponent.Abs() / noiseForConfidence)
+                                / _targetSignalToNoiseRatio;
                         else
                             confidence = 1.0; //there is no noise!
-
                     }
                 }
 
@@ -317,7 +424,16 @@ namespace System.Threading
                 // Calculate the new thread wave magnitude, which is based on the moving average we've been keeping of
                 // the throughput error.  This average starts at zero, so we'll start with a nice safe little wave at first.
                 //
-                int newThreadWaveMagnitude = (int)(0.5 + (_currentControlSetting * _averageThroughputNoise * _targetSignalToNoiseRatio * _threadMagnitudeMultiplier * 2.0));
+                int newThreadWaveMagnitude = (int)(
+                    0.5
+                    + (
+                        _currentControlSetting
+                        * _averageThroughputNoise
+                        * _targetSignalToNoiseRatio
+                        * _threadMagnitudeMultiplier
+                        * 2.0
+                    )
+                );
                 newThreadWaveMagnitude = Math.Min(newThreadWaveMagnitude, _maxThreadWaveMagnitude);
                 newThreadWaveMagnitude = Math.Max(newThreadWaveMagnitude, 1);
 
@@ -329,13 +445,19 @@ namespace System.Threading
                 int maxThreads = threadPoolInstance._maxThreads;
                 int minThreads = threadPoolInstance.MinThreadsGoal;
 
-                _currentControlSetting = Math.Min(maxThreads - newThreadWaveMagnitude, _currentControlSetting);
+                _currentControlSetting = Math.Min(
+                    maxThreads - newThreadWaveMagnitude,
+                    _currentControlSetting
+                );
                 _currentControlSetting = Math.Max(minThreads, _currentControlSetting);
 
                 //
                 // Calculate the new thread count (control setting + square wave)
                 //
-                int newThreadCount = (int)(_currentControlSetting + newThreadWaveMagnitude * ((_totalSamples / (_wavePeriod / 2)) % 2));
+                int newThreadCount = (int)(
+                    _currentControlSetting
+                    + newThreadWaveMagnitude * ((_totalSamples / (_wavePeriod / 2)) % 2)
+                );
 
                 //
                 // Make sure the new thread count doesn't exceed the ThreadPool's limits
@@ -349,10 +471,19 @@ namespace System.Threading
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
                 {
-                    NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadAdjustmentStats(sampleDurationSeconds, throughput, threadWaveComponent.Real, throughputWaveComponent.Real,
-                        throughputErrorEstimate, _averageThroughputNoise, ratio.Real, confidence, _currentControlSetting, (ushort)newThreadWaveMagnitude);
+                    NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadAdjustmentStats(
+                        sampleDurationSeconds,
+                        throughput,
+                        threadWaveComponent.Real,
+                        throughputWaveComponent.Real,
+                        throughputErrorEstimate,
+                        _averageThroughputNoise,
+                        ratio.Real,
+                        confidence,
+                        _currentControlSetting,
+                        (ushort)newThreadWaveMagnitude
+                    );
                 }
-
 
                 //
                 // If all of this caused an actual change in thread count, log that as well.
@@ -374,7 +505,9 @@ namespace System.Threading
                 //
                 int newSampleInterval;
                 if (ratio.Real < 0.0 && newThreadCount == minThreads)
-                    newSampleInterval = (int)(0.5 + _currentSampleMs * (10.0 * Math.Min(-ratio.Real, 1.0)));
+                    newSampleInterval = (int)(
+                        0.5 + _currentSampleMs * (10.0 * Math.Min(-ratio.Real, 1.0))
+                    );
                 else
                     newSampleInterval = _currentSampleMs;
 
@@ -387,14 +520,24 @@ namespace System.Threading
 
                 if (state != StateOrTransition.CooperativeBlocking) // this can be noisy
                 {
-                    _currentSampleMs = _randomIntervalGenerator.Next(_sampleIntervalMsLow, _sampleIntervalMsHigh + 1);
+                    _currentSampleMs = _randomIntervalGenerator.Next(
+                        _sampleIntervalMsLow,
+                        _sampleIntervalMsHigh + 1
+                    );
                 }
 
-                double throughput = _secondsElapsedSinceLastChange > 0 ? _completionsSinceLastChange / _secondsElapsedSinceLastChange : 0;
+                double throughput =
+                    _secondsElapsedSinceLastChange > 0
+                        ? _completionsSinceLastChange / _secondsElapsedSinceLastChange
+                        : 0;
                 LogTransition(newThreadCount, throughput, state);
             }
 
-            private void LogTransition(int newThreadCount, double throughput, StateOrTransition stateOrTransition)
+            private void LogTransition(
+                int newThreadCount,
+                double throughput,
+                StateOrTransition stateOrTransition
+            )
             {
                 // Use the _log array as a circular array for log entries
                 int index = (_logStart + _logSize) % LogCapacity;
@@ -410,7 +553,8 @@ namespace System.Threading
                 entry.tickCount = Environment.TickCount;
                 entry.stateOrTransition = stateOrTransition;
                 entry.newControlSetting = newThreadCount;
-                entry.lastHistoryCount = (int)(Math.Min(_totalSamples, _samplesToMeasure) / _wavePeriod) * _wavePeriod;
+                entry.lastHistoryCount =
+                    (int)(Math.Min(_totalSamples, _samplesToMeasure) / _wavePeriod) * _wavePeriod;
                 entry.lastHistoryMean = (float)throughput;
 
                 _logSize++;
@@ -420,7 +564,8 @@ namespace System.Threading
                     NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadAdjustmentAdjustment(
                         throughput,
                         (uint)newThreadCount,
-                        (NativeRuntimeEventSource.ThreadAdjustmentReasonMap)stateOrTransition);
+                        (NativeRuntimeEventSource.ThreadAdjustmentReasonMap)stateOrTransition
+                    );
                 }
             }
 
@@ -447,10 +592,15 @@ namespace System.Threading
                 double w = 2 * Math.PI / period;
                 double cos = Math.Cos(w);
                 double coeff = 2 * cos;
-                double q0, q1 = 0, q2 = 0;
+                double q0,
+                    q1 = 0,
+                    q2 = 0;
                 for (int i = 0; i < numSamples; ++i)
                 {
-                    q0 = coeff * q1 - q2 + samples[(_totalSamples - numSamples + i) % _samplesToMeasure];
+                    q0 =
+                        coeff * q1
+                        - q2
+                        + samples[(_totalSamples - numSamples + i) % _samplesToMeasure];
                     q2 = q1;
                     q1 = q0;
                 }

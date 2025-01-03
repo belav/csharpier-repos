@@ -40,11 +40,16 @@ namespace Microsoft.CodeAnalysis.Utilities
                 // Otherwise, massage it a bit to be a more suitable match for
                 // how people actually writing parameters.
                 var trimmed = nameBasedOnArgument.TrimStart('_');
-                BestNameForParameter = trimmed.Length > 0 ? trimmed.ToCamelCase() : nameBasedOnArgument;
+                BestNameForParameter =
+                    trimmed.Length > 0 ? trimmed.ToCamelCase() : nameBasedOnArgument;
             }
         }
 
-        public ParameterName(string nameBasedOnArgument, bool isFixed, NamingRule parameterNamingRule)
+        public ParameterName(
+            string nameBasedOnArgument,
+            bool isFixed,
+            NamingRule parameterNamingRule
+        )
         {
             NameBasedOnArgument = nameBasedOnArgument;
 
@@ -57,17 +62,17 @@ namespace Microsoft.CodeAnalysis.Utilities
             {
                 // Otherwise, massage it a bit to be a more suitable match for
                 // how people actually writing parameters.
-                BestNameForParameter = parameterNamingRule.NamingStyle.MakeCompliant(nameBasedOnArgument).First();
+                BestNameForParameter = parameterNamingRule
+                    .NamingStyle.MakeCompliant(nameBasedOnArgument)
+                    .First();
             }
         }
 
-        public override bool Equals(object obj)
-            => Equals((ParameterName)obj);
+        public override bool Equals(object obj) => Equals((ParameterName)obj);
 
-        public bool Equals(ParameterName other)
-            => NameBasedOnArgument.Equals(other.NameBasedOnArgument);
+        public bool Equals(ParameterName other) =>
+            NameBasedOnArgument.Equals(other.NameBasedOnArgument);
 
-        public override int GetHashCode()
-            => NameBasedOnArgument.GetHashCode();
+        public override int GetHashCode() => NameBasedOnArgument.GetHashCode();
     }
 }

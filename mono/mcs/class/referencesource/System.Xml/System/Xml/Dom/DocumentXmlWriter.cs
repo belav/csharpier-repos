@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="DocumentXmlWriter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
@@ -11,8 +11,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml.Schema;
 
-namespace System.Xml {
-    enum DocumentXmlWriterType {
+namespace System.Xml
+{
+    enum DocumentXmlWriterType
+    {
         InsertSiblingAfter,
         InsertSiblingBefore,
         PrependChild,
@@ -22,8 +24,10 @@ namespace System.Xml {
     }
 
     // Implements a XmlWriter that augments a XmlDocument.
-    sealed class DocumentXmlWriter : XmlRawWriter, IXmlNamespaceResolver {
-        enum State {
+    sealed class DocumentXmlWriter : XmlRawWriter, IXmlNamespaceResolver
+    {
+        enum State
+        {
             Error,
             Attribute,
             Prolog,
@@ -33,7 +37,8 @@ namespace System.Xml {
             Last, // always last
         }
 
-        enum Method {
+        enum Method
+        {
             WriteXmlDeclaration,
             WriteStartDocument,
             WriteEndDocument,
@@ -55,286 +60,352 @@ namespace System.Xml {
 
         DocumentXmlWriterType type; // writer type
         XmlNode start; // context node
-        XmlDocument document; // context document 
+        XmlDocument document; // context document
         XmlNamespaceManager namespaceManager; // context namespace manager
         State state; // current state
-        XmlNode write; // current node 
+        XmlNode write; // current node
         List<XmlNode> fragment; // top level node cache
         XmlWriterSettings settings; // wrapping writer settings
-        DocumentXPathNavigator navigator; // context for replace 
-        XmlNode end; // context for replace 
+        DocumentXPathNavigator navigator; // context for replace
+        XmlNode end; // context for replace
 
-        public DocumentXmlWriter(DocumentXmlWriterType type, XmlNode start, XmlDocument document) {
+        public DocumentXmlWriter(DocumentXmlWriterType type, XmlNode start, XmlDocument document)
+        {
             this.type = type;
             this.start = start;
             this.document = document;
 
-            state = StartState(); 
+            state = StartState();
             fragment = new List<XmlNode>();
             settings = new XmlWriterSettings();
             settings.ReadOnly = false;
             settings.CheckCharacters = false;
             settings.CloseOutput = false;
-            settings.ConformanceLevel = (state == State.Prolog ? ConformanceLevel.Document : ConformanceLevel.Fragment);
+            settings.ConformanceLevel = (
+                state == State.Prolog ? ConformanceLevel.Document : ConformanceLevel.Fragment
+            );
             settings.ReadOnly = true;
         }
 
-        public XmlNamespaceManager NamespaceManager {
-            set { 
-                namespaceManager = value; 
-            }
+        public XmlNamespaceManager NamespaceManager
+        {
+            set { namespaceManager = value; }
         }
 
-        public override XmlWriterSettings Settings {
-            get { 
-                return settings; 
-            }
+        public override XmlWriterSettings Settings
+        {
+            get { return settings; }
         }
 
-        internal void SetSettings(XmlWriterSettings value) {
+        internal void SetSettings(XmlWriterSettings value)
+        {
             settings = value;
         }
 
-        public DocumentXPathNavigator Navigator {
-            set {
-                navigator = value;
-            }
+        public DocumentXPathNavigator Navigator
+        {
+            set { navigator = value; }
         }
 
-        public XmlNode EndNode {
-            set {
-                end = value;
-            }
+        public XmlNode EndNode
+        {
+            set { end = value; }
         }
 
-        internal override void WriteXmlDeclaration(XmlStandalone standalone) {
+        internal override void WriteXmlDeclaration(XmlStandalone standalone)
+        {
             VerifyState(Method.WriteXmlDeclaration);
-            if (standalone != XmlStandalone.Omit) {
-                XmlNode node = document.CreateXmlDeclaration("1.0", string.Empty, standalone == XmlStandalone.Yes ? "yes" : "no");  
+            if (standalone != XmlStandalone.Omit)
+            {
+                XmlNode node = document.CreateXmlDeclaration(
+                    "1.0",
+                    string.Empty,
+                    standalone == XmlStandalone.Yes ? "yes" : "no"
+                );
                 AddChild(node, write);
             }
         }
 
-        internal override void WriteXmlDeclaration(string xmldecl) {
+        internal override void WriteXmlDeclaration(string xmldecl)
+        {
             VerifyState(Method.WriteXmlDeclaration);
-            string version, encoding, standalone;
+            string version,
+                encoding,
+                standalone;
             XmlLoader.ParseXmlDeclarationValue(xmldecl, out version, out encoding, out standalone);
             XmlNode node = document.CreateXmlDeclaration(version, encoding, standalone);
             AddChild(node, write);
         }
 
-        public override void WriteStartDocument() {
+        public override void WriteStartDocument()
+        {
             VerifyState(Method.WriteStartDocument);
         }
 
-        public override void WriteStartDocument(bool standalone) {
+        public override void WriteStartDocument(bool standalone)
+        {
             VerifyState(Method.WriteStartDocument);
         }
 
-        public override void WriteEndDocument() {
+        public override void WriteEndDocument()
+        {
             VerifyState(Method.WriteEndDocument);
         }
 
-        public override void WriteDocType(string name, string pubid, string sysid, string subset) {
+        public override void WriteDocType(string name, string pubid, string sysid, string subset)
+        {
             VerifyState(Method.WriteDocType);
             XmlNode node = document.CreateDocumentType(name, pubid, sysid, subset);
-            AddChild(node, write); 
+            AddChild(node, write);
         }
 
-        public override void WriteStartElement(string prefix, string localName, string ns) {
+        public override void WriteStartElement(string prefix, string localName, string ns)
+        {
             VerifyState(Method.WriteStartElement);
             XmlNode node = document.CreateElement(prefix, localName, ns);
             AddChild(node, write);
-            write = node; 
+            write = node;
         }
 
-        public override void WriteEndElement() {
+        public override void WriteEndElement()
+        {
             VerifyState(Method.WriteEndElement);
-            if (write == null) {
+            if (write == null)
+            {
                 throw new InvalidOperationException();
             }
             write = write.ParentNode;
         }
 
-        internal override void WriteEndElement(string prefix, string localName, string ns) {
+        internal override void WriteEndElement(string prefix, string localName, string ns)
+        {
             WriteEndElement();
         }
 
-        public override void WriteFullEndElement() {
+        public override void WriteFullEndElement()
+        {
             VerifyState(Method.WriteFullEndElement);
             XmlElement elem = write as XmlElement;
-            if (elem == null) {
+            if (elem == null)
+            {
                 throw new InvalidOperationException();
             }
             elem.IsEmpty = false;
             write = elem.ParentNode;
         }
 
-        internal override void WriteFullEndElement(string prefix, string localName, string ns) {
+        internal override void WriteFullEndElement(string prefix, string localName, string ns)
+        {
             WriteFullEndElement();
         }
 
-        internal override void StartElementContent() {
+        internal override void StartElementContent()
+        {
             // nop
         }
 
-        public override void WriteStartAttribute(string prefix, string localName, string ns) {
+        public override void WriteStartAttribute(string prefix, string localName, string ns)
+        {
             VerifyState(Method.WriteStartAttribute);
             XmlAttribute attr = document.CreateAttribute(prefix, localName, ns);
             AddAttribute(attr, write);
             write = attr;
         }
 
-        public override void WriteEndAttribute() {
+        public override void WriteEndAttribute()
+        {
             VerifyState(Method.WriteEndAttribute);
             XmlAttribute attr = write as XmlAttribute;
-            if (attr == null) {
+            if (attr == null)
+            {
                 throw new InvalidOperationException();
             }
-            if (!attr.HasChildNodes) {
-                XmlNode node = document.CreateTextNode(string.Empty); 
-                AddChild(node, attr);
-            }
-            write = attr.OwnerElement;
-        }
-
-        internal override void WriteNamespaceDeclaration(string prefix, string ns) {
-            this.WriteStartNamespaceDeclaration(prefix);
-            this.WriteString(ns);
-            this.WriteEndNamespaceDeclaration();
-        }
-
-        internal override bool SupportsNamespaceDeclarationInChunks {
-            get {
-                return true;
-            }
-        }
-
-        internal override void WriteStartNamespaceDeclaration(string prefix) {
-            VerifyState(Method.WriteStartNamespaceDeclaration);
-            XmlAttribute attr;
-            if (prefix.Length == 0) {
-                attr = document.CreateAttribute(prefix, document.strXmlns, document.strReservedXmlns);
-            }
-            else {
-                attr = document.CreateAttribute(document.strXmlns, prefix, document.strReservedXmlns);
-            }
-            AddAttribute(attr, write);
-            write = attr;
-        }
-
-        internal override void WriteEndNamespaceDeclaration() {
-            VerifyState(Method.WriteEndNamespaceDeclaration);
-            XmlAttribute attr = write as XmlAttribute;
-            if (attr == null) {
-                throw new InvalidOperationException();
-            }
-            if (!attr.HasChildNodes) {
+            if (!attr.HasChildNodes)
+            {
                 XmlNode node = document.CreateTextNode(string.Empty);
                 AddChild(node, attr);
             }
             write = attr.OwnerElement;
         }
 
-        public override void WriteCData(string text) {
+        internal override void WriteNamespaceDeclaration(string prefix, string ns)
+        {
+            this.WriteStartNamespaceDeclaration(prefix);
+            this.WriteString(ns);
+            this.WriteEndNamespaceDeclaration();
+        }
+
+        internal override bool SupportsNamespaceDeclarationInChunks
+        {
+            get { return true; }
+        }
+
+        internal override void WriteStartNamespaceDeclaration(string prefix)
+        {
+            VerifyState(Method.WriteStartNamespaceDeclaration);
+            XmlAttribute attr;
+            if (prefix.Length == 0)
+            {
+                attr = document.CreateAttribute(
+                    prefix,
+                    document.strXmlns,
+                    document.strReservedXmlns
+                );
+            }
+            else
+            {
+                attr = document.CreateAttribute(
+                    document.strXmlns,
+                    prefix,
+                    document.strReservedXmlns
+                );
+            }
+            AddAttribute(attr, write);
+            write = attr;
+        }
+
+        internal override void WriteEndNamespaceDeclaration()
+        {
+            VerifyState(Method.WriteEndNamespaceDeclaration);
+            XmlAttribute attr = write as XmlAttribute;
+            if (attr == null)
+            {
+                throw new InvalidOperationException();
+            }
+            if (!attr.HasChildNodes)
+            {
+                XmlNode node = document.CreateTextNode(string.Empty);
+                AddChild(node, attr);
+            }
+            write = attr.OwnerElement;
+        }
+
+        public override void WriteCData(string text)
+        {
             VerifyState(Method.WriteCData);
             XmlConvert.VerifyCharData(text, ExceptionType.ArgumentException);
             XmlNode node = document.CreateCDataSection(text);
             AddChild(node, write);
         }
 
-        public override void WriteComment(string text) {
+        public override void WriteComment(string text)
+        {
             VerifyState(Method.WriteComment);
             XmlConvert.VerifyCharData(text, ExceptionType.ArgumentException);
             XmlNode node = document.CreateComment(text);
             AddChild(node, write);
         }
 
-        public override void WriteProcessingInstruction(string name, string text) {
+        public override void WriteProcessingInstruction(string name, string text)
+        {
             VerifyState(Method.WriteProcessingInstruction);
             XmlConvert.VerifyCharData(text, ExceptionType.ArgumentException);
             XmlNode node = document.CreateProcessingInstruction(name, text);
             AddChild(node, write);
         }
 
-        public override void WriteEntityRef(string name) {
+        public override void WriteEntityRef(string name)
+        {
             VerifyState(Method.WriteEntityRef);
             XmlNode node = document.CreateEntityReference(name);
             AddChild(node, write);
-            // 
+            //
         }
 
-        public override void WriteCharEntity(char ch) {
+        public override void WriteCharEntity(char ch)
+        {
             WriteString(new string(ch, 1));
         }
 
-        public override void WriteWhitespace(string text) {
+        public override void WriteWhitespace(string text)
+        {
             VerifyState(Method.WriteWhitespace);
             XmlConvert.VerifyCharData(text, ExceptionType.ArgumentException);
-            if (document.PreserveWhitespace) {
+            if (document.PreserveWhitespace)
+            {
                 XmlNode node = document.CreateWhitespace(text);
                 AddChild(node, write);
             }
         }
 
-        public override void WriteString(string text) {
+        public override void WriteString(string text)
+        {
             VerifyState(Method.WriteString);
             XmlConvert.VerifyCharData(text, ExceptionType.ArgumentException);
             XmlNode node = document.CreateTextNode(text);
             AddChild(node, write);
         }
 
-        public override void WriteSurrogateCharEntity(char lowCh, char highCh) {
-            WriteString(new string(new char[] {highCh, lowCh}));
+        public override void WriteSurrogateCharEntity(char lowCh, char highCh)
+        {
+            WriteString(new string(new char[] { highCh, lowCh }));
         }
 
-        public override void WriteChars(char[] buffer, int index, int count) {
+        public override void WriteChars(char[] buffer, int index, int count)
+        {
             WriteString(new string(buffer, index, count));
         }
 
-        public override void WriteRaw(char[] buffer, int index, int count) {
+        public override void WriteRaw(char[] buffer, int index, int count)
+        {
             WriteString(new string(buffer, index, count));
         }
 
-        public override void WriteRaw(string data) {
+        public override void WriteRaw(string data)
+        {
             WriteString(data);
         }
 
-        public override void Close() {
+        public override void Close()
+        {
             // nop
         }
 
-        internal override void Close(WriteState currentState) {
-            if (currentState == WriteState.Error) {
+        internal override void Close(WriteState currentState)
+        {
+            if (currentState == WriteState.Error)
+            {
                 return;
             }
-            try {
-                switch (type) {
+            try
+            {
+                switch (type)
+                {
                     case DocumentXmlWriterType.InsertSiblingAfter:
                         XmlNode parent = start.ParentNode;
-                        if (parent == null) {
-                            throw new InvalidOperationException(Res.GetString(Res.Xpn_MissingParent));
+                        if (parent == null)
+                        {
+                            throw new InvalidOperationException(
+                                Res.GetString(Res.Xpn_MissingParent)
+                            );
                         }
-                        for (int i = fragment.Count - 1; i >= 0; i--) {
+                        for (int i = fragment.Count - 1; i >= 0; i--)
+                        {
                             parent.InsertAfter(fragment[i], start);
                         }
                         break;
                     case DocumentXmlWriterType.InsertSiblingBefore:
                         parent = start.ParentNode;
-                        if (parent == null) {
-                            throw new InvalidOperationException(Res.GetString(Res.Xpn_MissingParent));
+                        if (parent == null)
+                        {
+                            throw new InvalidOperationException(
+                                Res.GetString(Res.Xpn_MissingParent)
+                            );
                         }
-                        for (int i = 0; i < fragment.Count; i++) {
+                        for (int i = 0; i < fragment.Count; i++)
+                        {
                             parent.InsertBefore(fragment[i], start);
                         }
                         break;
                     case DocumentXmlWriterType.PrependChild:
-                        for (int i = fragment.Count - 1; i >= 0; i--) {
+                        for (int i = fragment.Count - 1; i >= 0; i--)
+                        {
                             start.PrependChild(fragment[i]);
                         }
                         break;
                     case DocumentXmlWriterType.AppendChild:
-                        for (int i = 0; i < fragment.Count; i++) {
+                        for (int i = 0; i < fragment.Count; i++)
+                        {
                             start.AppendChild(fragment[i]);
                         }
                         break;
@@ -342,122 +413,160 @@ namespace System.Xml {
                         CloseWithAppendAttribute();
                         break;
                     case DocumentXmlWriterType.ReplaceToFollowingSibling:
-                        if (fragment.Count == 0) {
+                        if (fragment.Count == 0)
+                        {
                             throw new InvalidOperationException(Res.GetString(Res.Xpn_NoContent));
                         }
                         CloseWithReplaceToFollowingSibling();
                         break;
                 }
             }
-            finally {
+            finally
+            {
                 fragment.Clear();
             }
         }
 
-        private void CloseWithAppendAttribute() {
+        private void CloseWithAppendAttribute()
+        {
             XmlElement elem = start as XmlElement;
             Debug.Assert(elem != null);
             XmlAttributeCollection attrs = elem.Attributes;
-            for (int i = 0; i < fragment.Count; i++) {
-                XmlAttribute attr = fragment[i] as XmlAttribute; 
+            for (int i = 0; i < fragment.Count; i++)
+            {
+                XmlAttribute attr = fragment[i] as XmlAttribute;
                 Debug.Assert(attr != null);
                 int offset = attrs.FindNodeOffsetNS(attr);
-                if (offset != -1
-                    && ((XmlAttribute)attrs.nodes[offset]).Specified) {
-                    throw new XmlException(Res.Xml_DupAttributeName, attr.Prefix.Length == 0 ? attr.LocalName : string.Concat(attr.Prefix, ":", attr.LocalName));
+                if (offset != -1 && ((XmlAttribute)attrs.nodes[offset]).Specified)
+                {
+                    throw new XmlException(
+                        Res.Xml_DupAttributeName,
+                        attr.Prefix.Length == 0
+                            ? attr.LocalName
+                            : string.Concat(attr.Prefix, ":", attr.LocalName)
+                    );
                 }
             }
-            for (int i = 0; i < fragment.Count; i++) {
-                XmlAttribute attr = fragment[i] as XmlAttribute; 
+            for (int i = 0; i < fragment.Count; i++)
+            {
+                XmlAttribute attr = fragment[i] as XmlAttribute;
                 Debug.Assert(attr != null);
                 attrs.Append(attr);
             }
         }
 
-        private void CloseWithReplaceToFollowingSibling() {
+        private void CloseWithReplaceToFollowingSibling()
+        {
             XmlNode parent = start.ParentNode;
-            if (parent == null) {
+            if (parent == null)
+            {
                 throw new InvalidOperationException(Res.GetString(Res.Xpn_MissingParent));
             }
-            if (start != end) {
-                if (!DocumentXPathNavigator.IsFollowingSibling(start, end)) {
+            if (start != end)
+            {
+                if (!DocumentXPathNavigator.IsFollowingSibling(start, end))
+                {
                     throw new InvalidOperationException(Res.GetString(Res.Xpn_BadPosition));
                 }
-                if (start.IsReadOnly) {
-                    throw new InvalidOperationException(Res.GetString(Res.Xdom_Node_Modify_ReadOnly));
+                if (start.IsReadOnly)
+                {
+                    throw new InvalidOperationException(
+                        Res.GetString(Res.Xdom_Node_Modify_ReadOnly)
+                    );
                 }
                 DocumentXPathNavigator.DeleteToFollowingSibling(start.NextSibling, end);
             }
             XmlNode fragment0 = fragment[0];
             parent.ReplaceChild(fragment0, start);
-            for (int i = fragment.Count - 1; i >= 1; i--) {
+            for (int i = fragment.Count - 1; i >= 1; i--)
+            {
                 parent.InsertAfter(fragment[i], fragment0);
             }
             navigator.ResetPosition(fragment0);
         }
 
-        public override void Flush() {
+        public override void Flush()
+        {
             // nop
         }
 
-        IDictionary<string,string> IXmlNamespaceResolver.GetNamespacesInScope(XmlNamespaceScope scope) {
+        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
+            XmlNamespaceScope scope
+        )
+        {
             return namespaceManager.GetNamespacesInScope(scope);
         }
 
-        string IXmlNamespaceResolver.LookupNamespace(string prefix) {
+        string IXmlNamespaceResolver.LookupNamespace(string prefix)
+        {
             return namespaceManager.LookupNamespace(prefix);
         }
 
-        string IXmlNamespaceResolver.LookupPrefix(string namespaceName) {
+        string IXmlNamespaceResolver.LookupPrefix(string namespaceName)
+        {
             return namespaceManager.LookupPrefix(namespaceName);
         }
 
-        void AddAttribute(XmlAttribute attr, XmlNode parent) {
-            if (parent == null) {
+        void AddAttribute(XmlAttribute attr, XmlNode parent)
+        {
+            if (parent == null)
+            {
                 fragment.Add(attr);
             }
-            else {
-                XmlElement elem = parent as XmlElement; 
-                if (elem == null) {
+            else
+            {
+                XmlElement elem = parent as XmlElement;
+                if (elem == null)
+                {
                     throw new InvalidOperationException();
                 }
                 elem.Attributes.Append(attr);
             }
         }
 
-        void AddChild(XmlNode node, XmlNode parent) {
-            if (parent == null) {
+        void AddChild(XmlNode node, XmlNode parent)
+        {
+            if (parent == null)
+            {
                 fragment.Add(node);
             }
-            else {
+            else
+            {
                 parent.AppendChild(node);
             }
         }
 
-        State StartState() {
+        State StartState()
+        {
             XmlNodeType nodeType = XmlNodeType.None;
 
-            switch (type) {
+            switch (type)
+            {
                 case DocumentXmlWriterType.InsertSiblingAfter:
                 case DocumentXmlWriterType.InsertSiblingBefore:
                     XmlNode parent = start.ParentNode;
-                    if (parent != null) { 
-                        nodeType = parent.NodeType; 
+                    if (parent != null)
+                    {
+                        nodeType = parent.NodeType;
                     }
-                    if (nodeType == XmlNodeType.Document) {
+                    if (nodeType == XmlNodeType.Document)
+                    {
                         return State.Prolog;
                     }
-                    else if (nodeType == XmlNodeType.DocumentFragment)  {
+                    else if (nodeType == XmlNodeType.DocumentFragment)
+                    {
                         return State.Fragment;
                     }
                     break;
                 case DocumentXmlWriterType.PrependChild:
                 case DocumentXmlWriterType.AppendChild:
-                    nodeType = start.NodeType; 
-                    if (nodeType == XmlNodeType.Document) {
+                    nodeType = start.NodeType;
+                    if (nodeType == XmlNodeType.Document)
+                    {
                         return State.Prolog;
                     }
-                    else if (nodeType == XmlNodeType.DocumentFragment)  {
+                    else if (nodeType == XmlNodeType.DocumentFragment)
+                    {
                         return State.Fragment;
                     }
                     break;
@@ -469,48 +578,119 @@ namespace System.Xml {
             return State.Content;
         }
 
-        static State[] changeState = {
-//          State.Error,    State.Attribute,State.Prolog,   State.Fragment, State.Content,  
+        static State[] changeState =
+        {
+            //          State.Error,    State.Attribute,State.Prolog,   State.Fragment, State.Content,
 
-// Method.XmlDeclaration:
-            State.Error,    State.Error,    State.Prolog,   State.Content,  State.Error,    
-// Method.StartDocument:
-            State.Error,    State.Error,    State.Error,    State.Error,    State.Error,    
-// Method.EndDocument:
-            State.Error,    State.Error,    State.Error,    State.Error,    State.Error,    
-// Method.DocType:
-            State.Error,    State.Error,    State.Prolog,   State.Error,    State.Error,    
-// Method.StartElement:
-            State.Error,    State.Error,    State.Content,  State.Content,  State.Content,  
-// Method.EndElement:
-            State.Error,    State.Error,    State.Error,    State.Error,    State.Content,  
-// Method.FullEndElement:
-            State.Error,    State.Error,    State.Error,    State.Error,    State.Content,  
-// Method.StartAttribute:
-            State.Error,    State.Content,  State.Error,    State.Error,    State.Content,  
-// Method.EndAttribute:
-            State.Error,    State.Error,    State.Error,    State.Error,    State.Content,  
-// Method.StartNamespaceDeclaration:
-            State.Error,    State.Content,  State.Error,    State.Error,    State.Content,  
-// Method.EndNamespaceDeclaration:
-            State.Error,    State.Error,    State.Error,    State.Error,    State.Content,  
-// Method.CData:
-            State.Error,    State.Error,    State.Error,    State.Content,  State.Content,  
-// Method.Comment:
-            State.Error,    State.Error,    State.Prolog,   State.Content,  State.Content,  
-// Method.ProcessingInstruction:
-            State.Error,    State.Error,    State.Prolog,   State.Content,  State.Content,  
-// Method.EntityRef:
-            State.Error,    State.Error,    State.Error,    State.Content,  State.Content,  
-// Method.Whitespace:
-            State.Error,    State.Error,    State.Prolog,   State.Content,  State.Content,  
-// Method.String:
-            State.Error,    State.Error,    State.Error,    State.Content,  State.Content,  
+            // Method.XmlDeclaration:
+            State.Error,
+            State.Error,
+            State.Prolog,
+            State.Content,
+            State.Error,
+            // Method.StartDocument:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            // Method.EndDocument:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            // Method.DocType:
+            State.Error,
+            State.Error,
+            State.Prolog,
+            State.Error,
+            State.Error,
+            // Method.StartElement:
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Content,
+            State.Content,
+            // Method.EndElement:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            // Method.FullEndElement:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            // Method.StartAttribute:
+            State.Error,
+            State.Content,
+            State.Error,
+            State.Error,
+            State.Content,
+            // Method.EndAttribute:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            // Method.StartNamespaceDeclaration:
+            State.Error,
+            State.Content,
+            State.Error,
+            State.Error,
+            State.Content,
+            // Method.EndNamespaceDeclaration:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            // Method.CData:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Content,
+            // Method.Comment:
+            State.Error,
+            State.Error,
+            State.Prolog,
+            State.Content,
+            State.Content,
+            // Method.ProcessingInstruction:
+            State.Error,
+            State.Error,
+            State.Prolog,
+            State.Content,
+            State.Content,
+            // Method.EntityRef:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Content,
+            // Method.Whitespace:
+            State.Error,
+            State.Error,
+            State.Prolog,
+            State.Content,
+            State.Content,
+            // Method.String:
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Content,
         };
 
-        void VerifyState(Method method) {
-            state = changeState[(int)method * (int)State.Last + (int)state]; 
-            if (state == State.Error) {
+        void VerifyState(Method method)
+        {
+            state = changeState[(int)method * (int)State.Last + (int)state];
+            if (state == State.Error)
+            {
                 throw new InvalidOperationException(Res.GetString(Res.Xml_ClosedOrError));
             }
         }

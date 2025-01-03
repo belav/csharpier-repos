@@ -6,7 +6,8 @@ using Xunit;
 
 namespace System.CodeDom.Tests
 {
-    public class CodeDelegateCreateExpressionTests : CodeObjectTestBase<CodeDelegateCreateExpression>
+    public class CodeDelegateCreateExpressionTests
+        : CodeObjectTestBase<CodeDelegateCreateExpression>
     {
         [Fact]
         public void Ctor_Default()
@@ -21,16 +22,37 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_TestData()
         {
             yield return new object[] { null, null, null };
-            yield return new object[] { new CodeTypeReference(""), new CodePrimitiveExpression(""), "" };
-            yield return new object[] { new CodeTypeReference(typeof(Delegate)), new CodePrimitiveExpression("Value"), "MethodName" };
+            yield return new object[]
+            {
+                new CodeTypeReference(""),
+                new CodePrimitiveExpression(""),
+                "",
+            };
+            yield return new object[]
+            {
+                new CodeTypeReference(typeof(Delegate)),
+                new CodePrimitiveExpression("Value"),
+                "MethodName",
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_TestData))]
-        public void Ctor(CodeTypeReference delegateType, CodeExpression targetObject, string methodName)
+        public void Ctor(
+            CodeTypeReference delegateType,
+            CodeExpression targetObject,
+            string methodName
+        )
         {
-            var delegateCreate = new CodeDelegateCreateExpression(delegateType, targetObject, methodName);
-            Assert.Equal((delegateType ?? new CodeTypeReference("")).BaseType, delegateCreate.DelegateType.BaseType);
+            var delegateCreate = new CodeDelegateCreateExpression(
+                delegateType,
+                targetObject,
+                methodName
+            );
+            Assert.Equal(
+                (delegateType ?? new CodeTypeReference("")).BaseType,
+                delegateCreate.DelegateType.BaseType
+            );
             Assert.Equal(targetObject, delegateCreate.TargetObject);
             Assert.Equal(methodName ?? string.Empty, delegateCreate.MethodName);
         }
@@ -41,7 +63,10 @@ namespace System.CodeDom.Tests
         {
             var delegateCreate = new CodeDelegateCreateExpression();
             delegateCreate.DelegateType = value;
-            Assert.Equal((value ?? new CodeTypeReference("")).BaseType, delegateCreate.DelegateType.BaseType);
+            Assert.Equal(
+                (value ?? new CodeTypeReference("")).BaseType,
+                delegateCreate.DelegateType.BaseType
+            );
         }
 
         [Theory]

@@ -14,13 +14,17 @@ public struct Point
     public int z;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public Point(int a, int b, int c) { x = a; y = b; z = c; }
+    public Point(int a, int b, int c)
+    {
+        x = a;
+        y = b;
+        z = c;
+    }
 
     public int X
     {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         get { return this.x; }
-
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         set { this.x = value; }
     }
@@ -29,7 +33,6 @@ public struct Point
     {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         get { return this.y; }
-
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         set { this.y = value; }
     }
@@ -38,14 +41,16 @@ public struct Point
     {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         get { return this.z; }
-
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         set { this.z = value; }
     }
 
     // Returns true if this represents 'origin' otherwise false.
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public bool StructInstMethod() { return (x == 0 && y == 0 && z == 0); }
+    public bool StructInstMethod()
+    {
+        return (x == 0 && y == 0 && z == 0);
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public int StructInstMethod(ref Point p)
@@ -68,7 +73,6 @@ public class BringUpTest_StructInstMethod
     const int Pass = 100;
     const int Fail = -1;
 
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int StructInstMethod(ref Point p2)
     {
@@ -76,25 +80,28 @@ public class BringUpTest_StructInstMethod
 
         p1.StructInstMethod();
 
-        if (p1.StructInstMethod()) return Fail;
-        if (!p2.StructInstMethod()) return Fail;
+        if (p1.StructInstMethod())
+            return Fail;
+        if (!p2.StructInstMethod())
+            return Fail;
 
         int a = p1.StructInstMethod(ref p2);
         int b = p1.X;
-        if (a != b) return Fail;
+        if (a != b)
+            return Fail;
 
         return Pass;
     }
-
 
     [Fact]
     public static int TestEntryPoint()
     {
         Point p = new Point(10, 20, 30);
-        if (p.StructInstMethod()) return Fail;
+        if (p.StructInstMethod())
+            return Fail;
 
-        if (p.StructInstMethod(ref p) != 20) return Fail;
-
+        if (p.StructInstMethod(ref p) != 20)
+            return Fail;
 
         Point p2 = new Point(0, 0, 0);
         return StructInstMethod(ref p2);

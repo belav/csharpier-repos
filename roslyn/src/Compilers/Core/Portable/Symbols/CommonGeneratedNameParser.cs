@@ -12,14 +12,20 @@ internal static partial class CommonGeneratedNames
 {
     /// <summary>
     /// Parses one or two debug ids that the specified <paramref name="metadataNameSuffix"/> ends with.
-    /// 
+    ///
     /// Returns true if <paramref name="metadataNameSuffix"/> ends with one or two well-formed debug ids.
     /// If two ids are present in the name then the first is <paramref name="methodId"/> and the second is <paramref name="entityId"/>.
     /// Otherwise, if <paramref name="isMethodIdOptional"/> is true then the single parsed id is returned in <paramref name="entityId"/>,
     /// otherwise in <paramref name="methodId"/>.
     /// </summary>
     /// <param name="metadataNameSuffix">Suffix of the metadata name following the suffix separator.</param>
-    public static bool TryParseDebugIds(ReadOnlySpan<char> metadataNameSuffix, char idSeparator, bool isMethodIdOptional, out DebugId methodId, out DebugId entityId)
+    public static bool TryParseDebugIds(
+        ReadOnlySpan<char> metadataNameSuffix,
+        char idSeparator,
+        bool isMethodIdOptional,
+        out DebugId methodId,
+        out DebugId entityId
+    )
     {
         methodId = entityId = default;
 
@@ -34,7 +40,8 @@ internal static partial class CommonGeneratedNames
             var c = (i >= 0) ? metadataNameSuffix[i] : '\0';
             switch (c)
             {
-                case >= '0' and <= '9':
+                case >= '0'
+                and <= '9':
                     value += (c - '0') * power;
                     if (value > int.MaxValue)
                     {

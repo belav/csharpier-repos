@@ -18,7 +18,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
                     MyClass.Status = 1;
                     return d;
                 }
-
                 set
                 {
                     //We look at the value element to make sure it got passed in correctly
@@ -49,8 +48,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.indexers.indexer002.indexer002
 {
     public class Test
@@ -65,7 +62,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
                     MyClass.Status = 1;
                     return x;
                 }
-
                 set
                 {
                     if ((string)value == "Foo")
@@ -95,8 +91,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.indexers.indexer003.indexer003
 {
     public class Test
@@ -116,7 +110,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
                     MyClass.Status = 1;
                     return x;
                 }
-
                 set
                 {
                     if (((C)value).Field == 4)
@@ -138,12 +131,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
             dynamic d = mc[c];
             if (d != c || MyClass.Status != 1)
                 return 1;
-            mc[c] = new C()
-            {
-                Field = 4
-            }
-
-            ;
+            mc[c] = new C() { Field = 4 };
             if (MyClass.Status != 2)
                 return 1;
             return 0;
@@ -151,8 +139,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.indexers.indexer004.indexer004
 {
@@ -168,7 +154,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
                     MyClass.Status = 1;
                     return 4.5f;
                 }
-
                 set
                 {
                     if ((int)value == 4)
@@ -198,8 +183,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.indexers.indexer008.indexer008
 {
     public class Test
@@ -214,7 +197,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
                     MyClass.Status = 1;
                     return d;
                 }
-
                 set
                 {
                     //We look at the value element to make sure it got passed in correctly
@@ -244,8 +226,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.indexers.indexer009.indexer009
 {
@@ -282,7 +262,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.AssgReadonlyProp, e.Message, "Test.MyClass.this[int, object]"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.AssgReadonlyProp,
+                        e.Message,
+                        "Test.MyClass.this[int, object]"
+                    )
+                )
                     return 0;
             }
 
@@ -291,8 +277,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.indexers.indexer010.indexer010
 {
@@ -309,11 +293,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
                     if ((int)value == 5)
                         MyClass.Status = 2;
                 }
-
-                get
-                {
-                    return 4;
-                }
+                get { return 4; }
             }
         }
 

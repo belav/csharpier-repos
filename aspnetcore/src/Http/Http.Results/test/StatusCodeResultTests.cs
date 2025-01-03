@@ -32,14 +32,19 @@ public class StatusCodeResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void StatusCodeResult_Implements_IStatusCodeHttpResult_Correctly()
     {
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IStatusCodeHttpResult>(new StatusCodeHttpResult(StatusCodes.Status406NotAcceptable));
+        var result = Assert.IsAssignableFrom<IStatusCodeHttpResult>(
+            new StatusCodeHttpResult(StatusCodes.Status406NotAcceptable)
+        );
         Assert.Equal(StatusCodes.Status406NotAcceptable, result.StatusCode);
     }
 

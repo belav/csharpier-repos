@@ -39,47 +39,52 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             IEnumerable<AbstractCallFinder> finders,
             Func<ImageSource> glyphCreator,
             ImmutableArray<Location> callsites,
-            Project project)
+            Project project
+        )
         {
             _workspace = project.Solution.Workspace;
             _provider = provider;
             _navigableLocation = navigableLocation;
             _finders = finders;
             _containingTypeName = symbol.ContainingType.ToDisplayString(ContainingTypeFormat);
-            _containingNamespaceName = symbol.ContainingNamespace.ToDisplayString(ContainingNamespaceFormat);
+            _containingNamespaceName = symbol.ContainingNamespace.ToDisplayString(
+                ContainingNamespaceFormat
+            );
             _glyphCreator = glyphCreator;
             _name = symbol.ToDisplayString(MemberNameFormat);
-            _callsites = callsites.SelectAsArray(loc => new CallHierarchyDetail(provider, loc, _workspace));
+            _callsites = callsites.SelectAsArray(loc => new CallHierarchyDetail(
+                provider,
+                loc,
+                _workspace
+            ));
             _sortText = symbol.ToDisplayString();
             ProjectName = project.Name;
         }
 
-        public static readonly SymbolDisplayFormat MemberNameFormat =
-            new(
-                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                memberOptions: SymbolDisplayMemberOptions.IncludeParameters | SymbolDisplayMemberOptions.IncludeExplicitInterface,
-                parameterOptions:
-                    SymbolDisplayParameterOptions.IncludeParamsRefOut |
-                    SymbolDisplayParameterOptions.IncludeExtensionThis |
-                    SymbolDisplayParameterOptions.IncludeType,
-                miscellaneousOptions:
-                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+        public static readonly SymbolDisplayFormat MemberNameFormat = new(
+            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+            propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            memberOptions: SymbolDisplayMemberOptions.IncludeParameters
+                | SymbolDisplayMemberOptions.IncludeExplicitInterface,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeExtensionThis
+                | SymbolDisplayParameterOptions.IncludeType,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
-        public static readonly SymbolDisplayFormat ContainingTypeFormat =
-            new(
-                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                miscellaneousOptions:
-                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+        public static readonly SymbolDisplayFormat ContainingTypeFormat = new(
+            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
-        public static readonly SymbolDisplayFormat ContainingNamespaceFormat =
-           new(
-               globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-               typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
+        public static readonly SymbolDisplayFormat ContainingNamespaceFormat = new(
+            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
+        );
 
         public string ProjectName { get; }
 
@@ -91,10 +96,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
 
         public ImageSource DisplayGlyph
         {
-            get
-            {
-                return _glyphCreator();
-            }
+            get { return _glyphCreator(); }
         }
 
         public string MemberName => _name;
@@ -107,13 +109,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
         {
             get
             {
-                return _finders.Select(s => new CallHierarchySearchCategory(s.SearchCategory, s.DisplayName));
+                return _finders.Select(s => new CallHierarchySearchCategory(
+                    s.SearchCategory,
+                    s.DisplayName
+                ));
             }
         }
 
         public bool SupportsFindReferences
-                // TODO: Use Dustin's find-references-from-symbol service.
-                => false;
+            // TODO: Use Dustin's find-references-from-symbol service.
+            =>
+            false;
 
         public bool SupportsNavigateTo => true;
 
@@ -125,13 +131,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             finder.CancelSearch();
         }
 
-        public void FindReferences()
-        {
-        }
+        public void FindReferences() { }
 
-        public void ItemSelected()
-        {
-        }
+        public void ItemSelected() { }
 
         public void NavigateTo()
         {
@@ -142,12 +144,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
         private async Task NavigateToAsync()
         {
             using var context = _provider.ThreadOperationExecutor.BeginExecute(
-                ServicesVSResources.Call_Hierarchy, ServicesVSResources.Navigating, allowCancellation: true, showProgress: false);
-            await _navigableLocation.NavigateToAsync(
-                NavigationOptions.Default with { PreferProvisionalTab = true }, context.UserCancellationToken).ConfigureAwait(false);
+                ServicesVSResources.Call_Hierarchy,
+                ServicesVSResources.Navigating,
+                allowCancellation: true,
+                showProgress: false
+            );
+            await _navigableLocation
+                .NavigateToAsync(
+                    NavigationOptions.Default with
+                    {
+                        PreferProvisionalTab = true,
+                    },
+                    context.UserCancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        public void StartSearch(string categoryName, CallHierarchySearchScope searchScope, ICallHierarchySearchCallback callback)
+        public void StartSearch(
+            string categoryName,
+            CallHierarchySearchScope searchScope,
+            ICallHierarchySearchCallback callback
+        )
         {
             var finder = _finders.FirstOrDefault(s => s.SearchCategory == categoryName);
             finder.StartSearch(_workspace, searchScope, callback);
@@ -165,7 +182,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
         }
 
         // For Testing only
-        internal void StartSearchWithDocuments(string categoryName, CallHierarchySearchScope searchScope, ICallHierarchySearchCallback callback, IImmutableSet<Document> documents)
+        internal void StartSearchWithDocuments(
+            string categoryName,
+            CallHierarchySearchScope searchScope,
+            ICallHierarchySearchCallback callback,
+            IImmutableSet<Document> documents
+        )
         {
             var finder = _finders.FirstOrDefault(s => s.SearchCategory == categoryName);
             finder.SetDocuments(documents);

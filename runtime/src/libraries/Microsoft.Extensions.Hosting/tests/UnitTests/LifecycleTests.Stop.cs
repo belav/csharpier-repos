@@ -78,8 +78,11 @@ namespace Microsoft.Extensions.Hosting.Tests
             public static SemaphoreSlim? s_wait3 = new SemaphoreSlim(1);
 
             public Task StartingAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StartAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StartedAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public async Task StoppingAsync(CancellationToken cancellationToken)
             {
                 s_initialCount++;
@@ -89,7 +92,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 await s_wait3.WaitAsync();
                 s_finalCount++;
             }
+
             public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StoppedAsync(CancellationToken cancellationToken) => Task.CompletedTask;
         }
 
@@ -98,10 +103,10 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var hostBuilder = CreateHostBuilder(services =>
             {
-                services.
-                    AddHostedService<StopTestClass<Impl1>>().
-                    AddHostedService<StopTestClass<Impl2>>().
-                    Configure<HostOptions>(opts => opts.ServicesStopConcurrently = true);
+                services
+                    .AddHostedService<StopTestClass<Impl1>>()
+                    .AddHostedService<StopTestClass<Impl2>>()
+                    .Configure<HostOptions>(opts => opts.ServicesStopConcurrently = true);
             });
 
             using (IHost host = hostBuilder.Build())
@@ -160,10 +165,13 @@ namespace Microsoft.Extensions.Hosting.Tests
             public static SemaphoreSlim? s_wait3 = new SemaphoreSlim(1);
 
             public Task StartingAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StartAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StartedAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 
             public Task StoppingAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public async Task StopAsync(CancellationToken cancellationToken)
             {
                 s_initialCount++;
@@ -173,6 +181,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                 await s_wait3.WaitAsync();
                 s_finalCount++;
             }
+
             public Task StoppedAsync(CancellationToken cancellationToken) => Task.CompletedTask;
         }
 
@@ -181,10 +190,10 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var hostBuilder = CreateHostBuilder(services =>
             {
-                services.
-                    AddHostedService<StopNonconcurrentTestClass<Impl1>>().
-                    AddHostedService<StopNonconcurrentTestClass<Impl2>>().
-                    Configure<HostOptions>(opts => opts.ServicesStopConcurrently = false);
+                services
+                    .AddHostedService<StopNonconcurrentTestClass<Impl1>>()
+                    .AddHostedService<StopNonconcurrentTestClass<Impl2>>()
+                    .Configure<HostOptions>(opts => opts.ServicesStopConcurrently = false);
             });
 
             using (IHost host = hostBuilder.Build())
@@ -222,14 +231,19 @@ namespace Microsoft.Extensions.Hosting.Tests
             public static SemaphoreSlim? s_wait = new SemaphoreSlim(1);
 
             public Task StartingAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StartAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StartedAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StoppingAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public async Task StopAsync(CancellationToken cancellationToken)
             {
                 s_count++;
                 await s_wait.WaitAsync();
             }
+
             public Task StoppedAsync(CancellationToken cancellationToken) => Task.CompletedTask;
         }
 
@@ -300,10 +314,15 @@ namespace Microsoft.Extensions.Hosting.Tests
             public static SemaphoreSlim? s_wait3 = new SemaphoreSlim(1);
 
             public Task StartingAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StartAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StartedAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StoppingAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public async Task StoppedAsync(CancellationToken cancellationToken)
             {
                 s_initialCount++;
@@ -320,7 +339,10 @@ namespace Microsoft.Extensions.Hosting.Tests
         [InlineData(false)]
         public async Task StopPhasesException(bool throwAfterAsyncCall)
         {
-            ExceptionImpl impl = new(throwAfterAsyncCall: throwAfterAsyncCall, throwOnShutdown: true);
+            ExceptionImpl impl = new(
+                throwAfterAsyncCall: throwAfterAsyncCall,
+                throwOnShutdown: true
+            );
             var hostBuilder = CreateHostBuilder(services =>
             {
                 services.AddHostedService((token) => impl);
@@ -329,7 +351,9 @@ namespace Microsoft.Extensions.Hosting.Tests
             using (IHost host = hostBuilder.Build())
             {
                 await host.StartAsync();
-                AggregateException ex = await Assert.ThrowsAnyAsync<AggregateException>(async () => await host.StopAsync());
+                AggregateException ex = await Assert.ThrowsAnyAsync<AggregateException>(
+                    async () => await host.StopAsync()
+                );
 
                 Assert.True(impl.StartingCalled);
                 Assert.True(impl.StartCalled);

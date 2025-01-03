@@ -28,8 +28,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     /// </summary>
     internal sealed class VarEnumSelector
     {
-        private static readonly Dictionary<VarEnum, Type> s_comToManagedPrimitiveTypes = CreateComToManagedPrimitiveTypes();
-        private static readonly IList<IList<VarEnum>> s_comPrimitiveTypeFamilies = CreateComPrimitiveTypeFamilies();
+        private static readonly Dictionary<VarEnum, Type> s_comToManagedPrimitiveTypes =
+            CreateComToManagedPrimitiveTypes();
+        private static readonly IList<IList<VarEnum>> s_comPrimitiveTypeFamilies =
+            CreateComPrimitiveTypeFamilies();
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         internal VarEnumSelector(Type[] explicitArgTypes)
@@ -91,24 +93,24 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         {
             Dictionary<VarEnum, Type> dict = new Dictionary<VarEnum, Type>()
             {
-                { VarEnum.VT_I1,        typeof(sbyte) },
-                { VarEnum.VT_I2,        typeof(short) },
-                { VarEnum.VT_I4,        typeof(int) },
-                { VarEnum.VT_I8,        typeof(long) },
-                { VarEnum.VT_UI1,       typeof(byte) },
-                { VarEnum.VT_UI2,       typeof(ushort) },
-                { VarEnum.VT_UI4,       typeof(uint) },
-                { VarEnum.VT_UI8,       typeof(ulong) },
-                { VarEnum.VT_INT,       typeof(int) },
-                { VarEnum.VT_UINT,      typeof(uint) },
-                { VarEnum.VT_BOOL,      typeof(bool) },
-                { VarEnum.VT_R4,        typeof(float) },
-                { VarEnum.VT_R8,        typeof(double) },
-                { VarEnum.VT_DECIMAL,   typeof(decimal) },
-                { VarEnum.VT_DATE,      typeof(DateTime) },
-                { VarEnum.VT_BSTR,      typeof(string) },
-                { VarEnum.VT_CY,        typeof(CurrencyWrapper) },
-                { VarEnum.VT_ERROR,     typeof(ErrorWrapper) },
+                { VarEnum.VT_I1, typeof(sbyte) },
+                { VarEnum.VT_I2, typeof(short) },
+                { VarEnum.VT_I4, typeof(int) },
+                { VarEnum.VT_I8, typeof(long) },
+                { VarEnum.VT_UI1, typeof(byte) },
+                { VarEnum.VT_UI2, typeof(ushort) },
+                { VarEnum.VT_UI4, typeof(uint) },
+                { VarEnum.VT_UI8, typeof(ulong) },
+                { VarEnum.VT_INT, typeof(int) },
+                { VarEnum.VT_UINT, typeof(uint) },
+                { VarEnum.VT_BOOL, typeof(bool) },
+                { VarEnum.VT_R4, typeof(float) },
+                { VarEnum.VT_R8, typeof(double) },
+                { VarEnum.VT_DECIMAL, typeof(decimal) },
+                { VarEnum.VT_DATE, typeof(DateTime) },
+                { VarEnum.VT_BSTR, typeof(string) },
+                { VarEnum.VT_CY, typeof(CurrencyWrapper) },
+                { VarEnum.VT_ERROR, typeof(ErrorWrapper) },
             };
             return dict;
         }
@@ -121,7 +123,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         /// </summary>
         private static IList<IList<VarEnum>> CreateComPrimitiveTypeFamilies()
         {
-            VarEnum[][] typeFamilies = new VarEnum[][] {
+            VarEnum[][] typeFamilies = new VarEnum[][]
+            {
                 new VarEnum[] { VarEnum.VT_I8, VarEnum.VT_I4, VarEnum.VT_I2, VarEnum.VT_I1 },
                 new VarEnum[] { VarEnum.VT_UI8, VarEnum.VT_UI4, VarEnum.VT_UI2, VarEnum.VT_UI1 },
                 new VarEnum[] { VarEnum.VT_INT },
@@ -131,7 +134,6 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 new VarEnum[] { VarEnum.VT_R8, VarEnum.VT_R4 },
                 new VarEnum[] { VarEnum.VT_DECIMAL },
                 new VarEnum[] { VarEnum.VT_BSTR },
-
                 // wrappers
                 new VarEnum[] { VarEnum.VT_CY },
                 new VarEnum[] { VarEnum.VT_ERROR },
@@ -168,7 +170,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         /// If there is more than one type family that the argument can be converted to, we will throw a
         /// AmbiguousMatchException instead of randomly picking a winner.
         /// </summary>
-        private static void CheckForAmbiguousMatch(Type argumentType, List<VarEnum> compatibleComTypes)
+        private static void CheckForAmbiguousMatch(
+            Type argumentType,
+            List<VarEnum> compatibleComTypes
+        )
         {
             if (compatibleComTypes.Count <= 1)
             {
@@ -276,10 +281,15 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         /// Is there a unique primitive type that has the best conversion for the argument
         /// </summary>
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private static bool TryGetPrimitiveComTypeViaConversion(Type argumentType, out VarEnum primitiveVarEnum)
+        private static bool TryGetPrimitiveComTypeViaConversion(
+            Type argumentType,
+            out VarEnum primitiveVarEnum
+        )
         {
             // Look for a unique type family that the argument can be converted to.
-            List<VarEnum> compatibleComTypes = GetConversionsToComPrimitiveTypeFamilies(argumentType);
+            List<VarEnum> compatibleComTypes = GetConversionsToComPrimitiveTypeFamilies(
+                argumentType
+            );
             CheckForAmbiguousMatch(argumentType, compatibleComTypes);
             if (compatibleComTypes.Count == 1)
             {
@@ -435,7 +445,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 {
                     elementVarEnum = convertibleTo;
                     Type marshalType = GetManagedMarshalType(elementVarEnum);
-                    return new ConversionArgBuilder(elementType, GetSimpleArgBuilder(marshalType, elementVarEnum));
+                    return new ConversionArgBuilder(
+                        elementType,
+                        GetSimpleArgBuilder(marshalType, elementVarEnum)
+                    );
                 }
 
                 // Checking for IConvertible.
@@ -448,7 +461,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         }
 
         // This helper can produce a builder for types that are directly supported by ComVariant or our extension methods.
-        private static SimpleArgBuilder GetSimpleArgBuilder(Type elementType, VarEnum elementVarEnum)
+        private static SimpleArgBuilder GetSimpleArgBuilder(
+            Type elementType,
+            VarEnum elementVarEnum
+        )
         {
             SimpleArgBuilder argBuilder;
 

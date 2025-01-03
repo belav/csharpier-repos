@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlFormAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System.Drawing;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
@@ -24,27 +24,32 @@ namespace System.Web.UI.MobileControls.Adapters
 #endif
 
 {
-
     /*
      * HtmlFormAdapter class.
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\HtmlFormAdapter.uex' path='docs/doc[@for="HtmlFormAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class HtmlFormAdapter : HtmlControlAdapter
     {
-        private static readonly String _contentTypeMetaTag = "<meta http-equiv=\"Content-Type\" content=\"{0}; charset={1}\">\r\n";
+        private static readonly String _contentTypeMetaTag =
+            "<meta http-equiv=\"Content-Type\" content=\"{0}; charset={1}\">\r\n";
 
         /// <include file='doc\HtmlFormAdapter.uex' path='docs/doc[@for="HtmlFormAdapter.Control"]/*' />
         protected new Form Control
         {
-            get
-            {
-                return (Form)base.Control;
-            }
+            get { return (Form)base.Control; }
         }
 
         /// <include file='doc\HtmlFormAdapter.uex' path='docs/doc[@for="HtmlFormAdapter.Render"]/*' />
@@ -54,9 +59,7 @@ namespace System.Web.UI.MobileControls.Adapters
             String title = Control.Title;
             bool isTitleEmpty = String.IsNullOrEmpty(title);
 
-            bool willWriteHeadElements =
-                !isTitleEmpty ||
-                RenderExtraHeadElements(null);
+            bool willWriteHeadElements = !isTitleEmpty || RenderExtraHeadElements(null);
 
             if (willWriteHeadElements)
             {
@@ -96,7 +99,10 @@ namespace System.Web.UI.MobileControls.Adapters
                 writer.WriteBeginTag("form");
                 writer.WriteAttribute("id", Control.ClientID);
                 writer.WriteAttribute("name", Control.ClientID);
-                writer.WriteAttribute("method", Control.Method.ToString().ToLower(CultureInfo.InvariantCulture));
+                writer.WriteAttribute(
+                    "method",
+                    Control.Method.ToString().ToLower(CultureInfo.InvariantCulture)
+                );
                 writer.Write(" action=\"");
 
                 if (Control.Action.Length > 0)
@@ -156,30 +162,29 @@ namespace System.Web.UI.MobileControls.Adapters
 
             if (secondaryUIControl != null && secondaryUIControl.Form == Control)
             {
-                bool secondaryUIInHeaderOrFooter = IsControlInFormHeader(secondaryUIControl) 
+                bool secondaryUIInHeaderOrFooter =
+                    IsControlInFormHeader(secondaryUIControl)
                     || IsControlInFormFooter(secondaryUIControl);
 
-
                 SetControlPageRecursive(secondaryUIControl, -1);
-                if(Control.Header != null && !secondaryUIInHeaderOrFooter)
+                if (Control.Header != null && !secondaryUIInHeaderOrFooter)
                 {
-                     Control.Header.RenderControl(writer);
+                    Control.Header.RenderControl(writer);
                 }
                 secondaryUIControl.RenderControl(writer);
-                if(Control.Footer != null && !secondaryUIInHeaderOrFooter)
+                if (Control.Footer != null && !secondaryUIInHeaderOrFooter)
                 {
                     Control.Footer.RenderControl(writer);
                 }
             }
             else
             {
-
                 bool pagerRendered = false;
-                if(Control.HasControls())
+                if (Control.HasControls())
                 {
-                    foreach(Control child in Control.Controls)
+                    foreach (Control child in Control.Controls)
                     {
-                        if(Control.Footer == child)
+                        if (Control.Footer == child)
                         {
                             RenderPager(writer);
                             pagerRendered = true;
@@ -187,7 +192,7 @@ namespace System.Web.UI.MobileControls.Adapters
                         child.RenderControl(writer);
                     }
                 }
-                if(!pagerRendered)
+                if (!pagerRendered)
                 {
                     RenderPager(writer);
                 }
@@ -215,7 +220,7 @@ namespace System.Web.UI.MobileControls.Adapters
         protected virtual bool RenderExtraHeadElements(HtmlMobileTextWriter writer)
         {
             bool result = false;
-            
+
             String metaTagName = Device.RequiredMetaTagNameValue;
             if (metaTagName != null)
             {
@@ -227,43 +232,49 @@ namespace System.Web.UI.MobileControls.Adapters
             }
 
             String charset = Page.Response.Charset;
-            if (Device.RequiresContentTypeMetaTag &&
-                charset != null && charset.Length > 0)
+            if (Device.RequiresContentTypeMetaTag && charset != null && charset.Length > 0)
             {
                 if (writer != null)
                 {
-                    writer.Write(String.Format(CultureInfo.InvariantCulture, _contentTypeMetaTag, Device.PreferredRenderingMime, charset));
+                    writer.Write(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            _contentTypeMetaTag,
+                            Device.PreferredRenderingMime,
+                            charset
+                        )
+                    );
                 }
                 result = true;
             }
-            
+
             Form form = this.Control as Form;
-            if(writer == null)
+            if (writer == null)
             {
-                if((form != null) && (form.Script != null))
+                if ((form != null) && (form.Script != null))
                 {
                     result = true;
                 }
             }
             else if ((form != null) && (form.Script != null))
             {
-                 foreach(Control childControl in form.Script.Controls)
-                 {
-                     LiteralControl lc = childControl as LiteralControl;
-                     if(lc != null)
-                     {
-                         writer.Write(lc.Text);
-                     }
-                     else
-                     {
-                         DataBoundLiteralControl dlc = childControl as DataBoundLiteralControl;
-                         if(dlc != null)
-                         {
-                             writer.Write(dlc.Text);
-                         }
-                     }
-                 }
-                 result = true;
+                foreach (Control childControl in form.Script.Controls)
+                {
+                    LiteralControl lc = childControl as LiteralControl;
+                    if (lc != null)
+                    {
+                        writer.Write(lc.Text);
+                    }
+                    else
+                    {
+                        DataBoundLiteralControl dlc = childControl as DataBoundLiteralControl;
+                        if (dlc != null)
+                        {
+                            writer.Write(dlc.Text);
+                        }
+                    }
+                }
+                result = true;
             }
             return result;
         }
@@ -296,7 +307,7 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\HtmlFormAdapter.uex' path='docs/doc[@for="HtmlFormAdapter.RenderPager"]/*' />
         protected virtual void RenderPager(HtmlMobileTextWriter writer)
         {
-            if(!_renderPager)
+            if (!_renderPager)
             {
                 return;
             }
@@ -310,15 +321,14 @@ namespace System.Web.UI.MobileControls.Adapters
             int page = Control.CurrentPage;
             String text = pagerStyle.GetPageLabelText(page, pageCount);
 
-            if((page > 1) || (text.Length > 0) || (page < pageCount))
+            if ((page > 1) || (text.Length > 0) || (page < pageCount))
             {
                 writer.EnterStyle(pagerStyle);
             }
 
             if (page > 1)
             {
-                RenderPagerTag(writer, page - 1,
-                               pagerStyle.GetPreviousPageText(page));
+                RenderPagerTag(writer, page - 1, pagerStyle.GetPreviousPageText(page));
                 writer.Write(" ");
             }
 
@@ -330,11 +340,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
             if (page < pageCount)
             {
-                RenderPagerTag(writer, page + 1,
-                               pagerStyle.GetNextPageText(page));
+                RenderPagerTag(writer, page + 1, pagerStyle.GetNextPageText(page));
             }
 
-            if((page > 1) || (text.Length > 0) || (page < pageCount))
+            if ((page > 1) || (text.Length > 0) || (page < pageCount))
             {
                 writer.ExitStyle(pagerStyle, true);
             }
@@ -344,29 +353,37 @@ namespace System.Web.UI.MobileControls.Adapters
         protected internal virtual void RenderPagerTag(
             HtmlMobileTextWriter writer,
             int pageToNavigate,
-            String text)
+            String text
+        )
         {
-            RenderPostBackEventAsAnchor(writer, pageToNavigate.ToString(CultureInfo.InvariantCulture),
-                                        text);
+            RenderPostBackEventAsAnchor(
+                writer,
+                pageToNavigate.ToString(CultureInfo.InvariantCulture),
+                text
+            );
         }
 
-        private void RenderQueryParametersAsHiddenFields(
-            HtmlMobileTextWriter writer)
+        private void RenderQueryParametersAsHiddenFields(HtmlMobileTextWriter writer)
         {
             String action = Page.ActiveForm.Action;
             int indexOfQueryStringText = action.IndexOf('?');
             String queryString = Page.QueryStringText;
 
-            if (indexOfQueryStringText != -1 ||
-                queryString == null ||
-                queryString.Length > 0 ||
-                Control.Method == FormMethod.Get)
+            if (
+                indexOfQueryStringText != -1
+                || queryString == null
+                || queryString.Length > 0
+                || Control.Method == FormMethod.Get
+            )
             {
                 // We use __ufps as the delimiter in the collection.
                 writer.WriteHiddenField(
                     Constants.UniqueFilePathSuffixVariable.Substring(
-                        0, Constants.UniqueFilePathSuffixVariable.Length - 1),
-                    String.Empty);
+                        0,
+                        Constants.UniqueFilePathSuffixVariable.Length - 1
+                    ),
+                    String.Empty
+                );
 
                 // If there is some query string on the Action attribute,
                 // it takes the precedence.
@@ -377,23 +394,22 @@ namespace System.Web.UI.MobileControls.Adapters
 
                 if (queryString != null && queryString.Length != 0)
                 {
-                    NameValueCollection collection =
-                            ParseQueryStringIntoCollection(queryString);
+                    NameValueCollection collection = ParseQueryStringIntoCollection(queryString);
 
                     for (int i = 0; i < collection.Count; i++)
                     {
-                        writer.WriteHiddenField(collection.GetKey(i),
-                                                collection.Get(i));
+                        writer.WriteHiddenField(collection.GetKey(i), collection.Get(i));
                     }
                 }
             }
         }
 
-        private NameValueCollection ParseQueryStringIntoCollection(
-            String queryString)
+        private NameValueCollection ParseQueryStringIntoCollection(String queryString)
         {
-            Debug.Assert(queryString != null && queryString.Length > 0,
-                         "queryString is null or empty");
+            Debug.Assert(
+                queryString != null && queryString.Length > 0,
+                "queryString is null or empty"
+            );
 
             NameValueCollection collection = new NameValueCollection();
 
@@ -426,23 +442,24 @@ namespace System.Web.UI.MobileControls.Adapters
                 }
 
                 // extract the name / value pair
-                String name, value;
+                String name,
+                    value;
                 if (ti >= 0)
                 {
-                    name  = Page.Server.UrlDecode(queryString.Substring(si, ti-si));
-                    value = Page.Server.UrlDecode(queryString.Substring(ti+1, i-ti-1));
+                    name = Page.Server.UrlDecode(queryString.Substring(si, ti - si));
+                    value = Page.Server.UrlDecode(queryString.Substring(ti + 1, i - ti - 1));
                 }
                 else
                 {
                     name = null;
-                    value = Page.Server.UrlDecode(queryString.Substring(si, i-si));
+                    value = Page.Server.UrlDecode(queryString.Substring(si, i - si));
                 }
 
                 // add name / value pair to the collection
                 collection.Add(name, value);
 
                 // trailing '&'
-                if (i == l-1 && queryString[i] == '&')
+                if (i == l - 1 && queryString[i] == '&')
                 {
                     collection.Add(null, "");
                 }
@@ -462,7 +479,9 @@ namespace System.Web.UI.MobileControls.Adapters
 
         internal int GetSecondaryUIMode(Control control)
         {
-            return (control != null && _secondaryUIControl == control) ? _secondaryUIMode : NotSecondaryUI;
+            return (control != null && _secondaryUIControl == control)
+                ? _secondaryUIMode
+                : NotSecondaryUI;
         }
 
         internal void SetSecondaryUIMode(Control control, int mode)
@@ -472,7 +491,8 @@ namespace System.Web.UI.MobileControls.Adapters
                 if (_secondaryUIControl != null && _secondaryUIControl != control)
                 {
                     throw new Exception(
-                        SR.GetString(SR.FormAdapterMultiControlsAttemptSecondaryUI));
+                        SR.GetString(SR.FormAdapterMultiControlsAttemptSecondaryUI)
+                    );
                 }
                 _secondaryUIControl = control;
                 _secondaryUIMode = mode;
@@ -487,17 +507,14 @@ namespace System.Web.UI.MobileControls.Adapters
 
         internal Control SecondaryUIControl
         {
-            get
-            {
-                return _secondaryUIControl;
-            }
+            get { return _secondaryUIControl; }
         }
 
         //identical to method in wmlformadapter
         private static void SetControlPageRecursive(Control control, int page)
         {
             MobileControl mc = control as MobileControl;
-            if(mc != null)
+            if (mc != null)
             {
                 mc.FirstPage = page;
                 mc.LastPage = page;
@@ -509,10 +526,10 @@ namespace System.Web.UI.MobileControls.Adapters
                     MobileControl mobileChild = child as MobileControl;
                     if (mobileChild != null)
                     {
-                            mobileChild.FirstPage = page;
-                            mobileChild.LastPage = page;
+                        mobileChild.FirstPage = page;
+                        mobileChild.LastPage = page;
                     }
-                    else 
+                    else
                     {
                         SetControlPageRecursive(child, page);
                     }
@@ -543,4 +560,3 @@ namespace System.Web.UI.MobileControls.Adapters
         }
     }
 }
-

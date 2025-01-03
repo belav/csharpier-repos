@@ -1,15 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using Xunit;
 #if USE_MDT_EVENTSOURCE
 using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using System.Diagnostics;
-using Xunit;
-using System;
-using System.Collections.Generic;
 
 namespace BasicEventSourceTests
 {
@@ -27,21 +27,23 @@ namespace BasicEventSourceTests
             foreach (var eventSource in EventSource.GetSources())
             {
                 // Exempt sources built in to the framework that might be used by types involved in the tests
-                if (eventSource.Name != "System.Threading.Tasks.TplEventSource" &&
-                    eventSource.Name != "System.Diagnostics.Eventing.FrameworkEventSource" &&
-                    eventSource.Name != "System.Buffers.ArrayPoolEventSource" &&
-                    eventSource.Name != "System.Threading.SynchronizationEventSource" &&
-                    eventSource.Name != "System.Collections.Concurrent.ConcurrentCollectionsEventSource" &&
-                    eventSource.Name != "System.Runtime.InteropServices.InteropEventProvider" &&
-                    eventSource.Name != "System.Reflection.Runtime.Tracing" &&
-                    eventSource.Name != "Microsoft-Windows-DotNETRuntime" &&
-                    eventSource.Name != "System.Runtime" &&
-
+                if (
+                    eventSource.Name != "System.Threading.Tasks.TplEventSource"
+                    && eventSource.Name != "System.Diagnostics.Eventing.FrameworkEventSource"
+                    && eventSource.Name != "System.Buffers.ArrayPoolEventSource"
+                    && eventSource.Name != "System.Threading.SynchronizationEventSource"
+                    && eventSource.Name
+                        != "System.Collections.Concurrent.ConcurrentCollectionsEventSource"
+                    && eventSource.Name != "System.Runtime.InteropServices.InteropEventProvider"
+                    && eventSource.Name != "System.Reflection.Runtime.Tracing"
+                    && eventSource.Name != "Microsoft-Windows-DotNETRuntime"
+                    && eventSource.Name != "System.Runtime"
+                    &&
                     // These event sources show up when hosted in the VS test runner
-                    eventSource.Name != "System.Net.Sockets" &&
-                    eventSource.Name != "Private.InternalDiagnostics.System.Net.Sockets" &&
-                    eventSource.Name != "TestPlatform"
-                    )
+                    eventSource.Name != "System.Net.Sockets"
+                    && eventSource.Name != "Private.InternalDiagnostics.System.Net.Sockets"
+                    && eventSource.Name != "TestPlatform"
+                )
                 {
                     eventSourceNames += eventSource.Name + " ";
                 }
@@ -57,7 +59,8 @@ namespace BasicEventSourceTests
         /// <typeparam name="T">The type to unwrap</typeparam>
         /// <param name="wrappedValue">Value returned from event payload</param>
         /// <returns></returns>
-        public static T? UnwrapNullable<T>(object wrappedValue) where T : struct
+        public static T? UnwrapNullable<T>(object wrappedValue)
+            where T : struct
         {
             // ETW will return a collection of key/value pairs
             if (wrappedValue is IDictionary<string, object> dict)

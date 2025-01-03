@@ -31,7 +31,7 @@ namespace System.DirectoryServices.AccountManagement
     {
         Win2k = 0,
         Win2k3 = 2,
-        WinLH = 3
+        WinLH = 3,
     };
 
     internal static class CapabilityMap
@@ -40,7 +40,8 @@ namespace System.DirectoryServices.AccountManagement
         public const string LDAP_CAP_ACTIVE_DIRECTORY_V51_OID = "1.2.840.113556.1.4.1670";
         public const string LDAP_CAP_ACTIVE_DIRECTORY_LDAP_INTEG_OID = "1.2.840.113556.1.4.1791";
         public const string LDAP_CAP_ACTIVE_DIRECTORY_ADAM_OID = "1.2.840.113556.1.4.1851";
-        public const string LDAP_CAP_ACTIVE_DIRECTORY_PARTIAL_SECRETS_OID = "1.2.840.113556.1.4.1920";
+        public const string LDAP_CAP_ACTIVE_DIRECTORY_PARTIAL_SECRETS_OID =
+            "1.2.840.113556.1.4.1920";
         public const string LDAP_CAP_ACTIVE_DIRECTORY_V61_OID = "1.2.840.113556.1.4.1935";
     }
 
@@ -49,7 +50,7 @@ namespace System.DirectoryServices.AccountManagement
         private enum AuthMethod
         {
             Simple = 1,
-            Negotiate = 2
+            Negotiate = 2,
         }
 
         private bool _fastConcurrentSupported = true;
@@ -63,10 +64,16 @@ namespace System.DirectoryServices.AccountManagement
         private readonly ContextType _contextType;
         private ServerProperties _serverProperties;
 
-        private const ContextOptions defaultContextOptionsNegotiate = ContextOptions.Signing | ContextOptions.Sealing | ContextOptions.Negotiate;
-        private const ContextOptions defaultContextOptionsSimple = ContextOptions.SecureSocketLayer | ContextOptions.SimpleBind;
+        private const ContextOptions defaultContextOptionsNegotiate =
+            ContextOptions.Signing | ContextOptions.Sealing | ContextOptions.Negotiate;
+        private const ContextOptions defaultContextOptionsSimple =
+            ContextOptions.SecureSocketLayer | ContextOptions.SimpleBind;
 
-        public CredentialValidator(ContextType contextType, string serverName, ServerProperties serverProperties)
+        public CredentialValidator(
+            ContextType contextType,
+            string serverName,
+            ServerProperties serverProperties
+        )
         {
             _fastConcurrentSupported = !(serverProperties.OsVersion == DomainControllerMode.Win2k);
 
@@ -107,7 +114,14 @@ namespace System.DirectoryServices.AccountManagement
                     }
                 }
 
-                int hr = UnsafeNativeMethods.ADsOpenObject(adsPath, userName, password, (int)authenticationType, ref g, out value);
+                int hr = UnsafeNativeMethods.ADsOpenObject(
+                    adsPath,
+                    userName,
+                    password,
+                    (int)authenticationType,
+                    ref g,
+                    out value
+                );
 
                 if (hr != 0)
                 {
@@ -152,11 +166,17 @@ namespace System.DirectoryServices.AccountManagement
 
             if (_contextType == ContextType.ApplicationDirectory)
             {
-                _directoryIdent = new LdapDirectoryIdentifier(_serverProperties.dnsHostName, useSSL ? _serverProperties.portSSL : _serverProperties.portLDAP);
+                _directoryIdent = new LdapDirectoryIdentifier(
+                    _serverProperties.dnsHostName,
+                    useSSL ? _serverProperties.portSSL : _serverProperties.portLDAP
+                );
             }
             else
             {
-                _directoryIdent = new LdapDirectoryIdentifier(_serverName, useSSL ? LdapConstants.LDAP_SSL_PORT : LdapConstants.LDAP_PORT);
+                _directoryIdent = new LdapDirectoryIdentifier(
+                    _serverName,
+                    useSSL ? LdapConstants.LDAP_SSL_PORT : LdapConstants.LDAP_PORT
+                );
             }
 
             bool attemptFastConcurrent = useSSL && _fastConcurrentSupported;
@@ -219,11 +239,23 @@ namespace System.DirectoryServices.AccountManagement
             return true;
         }
 
-        private void lockedLdapBind(LdapConnection current, NetworkCredential creds, ContextOptions contextOptions)
+        private void lockedLdapBind(
+            LdapConnection current,
+            NetworkCredential creds,
+            ContextOptions contextOptions
+        )
         {
-            current.AuthType = ((ContextOptions.SimpleBind & contextOptions) > 0 ? AuthType.Basic : AuthType.Negotiate);
-            current.SessionOptions.Signing = ((ContextOptions.Signing & contextOptions) > 0 ? true : false);
-            current.SessionOptions.Sealing = ((ContextOptions.Sealing & contextOptions) > 0 ? true : false);
+            current.AuthType = (
+                (ContextOptions.SimpleBind & contextOptions) > 0
+                    ? AuthType.Basic
+                    : AuthType.Negotiate
+            );
+            current.SessionOptions.Signing = (
+                (ContextOptions.Signing & contextOptions) > 0 ? true : false
+            );
+            current.SessionOptions.Sealing = (
+                (ContextOptions.Sealing & contextOptions) > 0 ? true : false
+            );
             if ((null == creds.UserName) && (null == creds.Password))
             {
                 current.Bind();
@@ -244,11 +276,20 @@ namespace System.DirectoryServices.AccountManagement
             if (userName != null && userName.Length == 0)
                 return false;
 
-            if (_contextType == ContextType.Domain || _contextType == ContextType.ApplicationDirectory)
+            if (
+                _contextType == ContextType.Domain
+                || _contextType == ContextType.ApplicationDirectory
+            )
             {
                 try
                 {
-                    if (_lastBindMethod == AuthMethod.Simple && (_fastConcurrentSupported || _contextType == ContextType.ApplicationDirectory))
+                    if (
+                        _lastBindMethod == AuthMethod.Simple
+                        && (
+                            _fastConcurrentSupported
+                            || _contextType == ContextType.ApplicationDirectory
+                        )
+                    )
                     {
                         try
                         {
@@ -315,7 +356,10 @@ namespace System.DirectoryServices.AccountManagement
             if (userName != null && userName.Length == 0)
                 return false;
 
-            if (_contextType == ContextType.Domain || _contextType == ContextType.ApplicationDirectory)
+            if (
+                _contextType == ContextType.Domain
+                || _contextType == ContextType.ApplicationDirectory
+            )
             {
                 try
                 {
@@ -347,6 +391,7 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
     }
+
     // ********************************************
     public class PrincipalContext : IDisposable
     {
@@ -354,69 +399,155 @@ namespace System.DirectoryServices.AccountManagement
         // Public Constructors
         //
 
-        public PrincipalContext(ContextType contextType) :
-            this(contextType, null, null, PrincipalContext.GetDefaultOptionForStore(contextType), null, null)
-        { }
+        public PrincipalContext(ContextType contextType)
+            : this(
+                contextType,
+                null,
+                null,
+                PrincipalContext.GetDefaultOptionForStore(contextType),
+                null,
+                null
+            ) { }
 
-        public PrincipalContext(ContextType contextType, string name) :
-            this(contextType, name, null, PrincipalContext.GetDefaultOptionForStore(contextType), null, null)
-        { }
+        public PrincipalContext(ContextType contextType, string name)
+            : this(
+                contextType,
+                name,
+                null,
+                PrincipalContext.GetDefaultOptionForStore(contextType),
+                null,
+                null
+            ) { }
 
-        public PrincipalContext(ContextType contextType, string name, string container) :
-            this(contextType, name, container, PrincipalContext.GetDefaultOptionForStore(contextType), null, null)
-        { }
-
-        public PrincipalContext(ContextType contextType, string name, string container, ContextOptions options) :
-            this(contextType, name, container, options, null, null)
-        { }
-
-        public PrincipalContext(ContextType contextType, string name, string userName, string password) :
-            this(contextType, name, null, PrincipalContext.GetDefaultOptionForStore(contextType), userName, password)
-        { }
-
-        public PrincipalContext(ContextType contextType, string name, string container, string userName, string password) :
-            this(contextType, name, container, PrincipalContext.GetDefaultOptionForStore(contextType), userName, password)
-        { }
+        public PrincipalContext(ContextType contextType, string name, string container)
+            : this(
+                contextType,
+                name,
+                container,
+                PrincipalContext.GetDefaultOptionForStore(contextType),
+                null,
+                null
+            ) { }
 
         public PrincipalContext(
-                    ContextType contextType, string name, string container, ContextOptions options, string userName, string password)
+            ContextType contextType,
+            string name,
+            string container,
+            ContextOptions options
+        )
+            : this(contextType, name, container, options, null, null) { }
+
+        public PrincipalContext(
+            ContextType contextType,
+            string name,
+            string userName,
+            string password
+        )
+            : this(
+                contextType,
+                name,
+                null,
+                PrincipalContext.GetDefaultOptionForStore(contextType),
+                userName,
+                password
+            ) { }
+
+        public PrincipalContext(
+            ContextType contextType,
+            string name,
+            string container,
+            string userName,
+            string password
+        )
+            : this(
+                contextType,
+                name,
+                container,
+                PrincipalContext.GetDefaultOptionForStore(contextType),
+                userName,
+                password
+            ) { }
+
+        public PrincipalContext(
+            ContextType contextType,
+            string name,
+            string container,
+            ContextOptions options,
+            string userName,
+            string password
+        )
         {
             GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "Entering ctor");
 
-            if ((userName == null && password != null) ||
-                (userName != null && password == null))
+            if ((userName == null && password != null) || (userName != null && password == null))
                 throw new ArgumentException(SR.ContextBadUserPwdCombo);
 
-            if ((options & ~(ContextOptions.Signing | ContextOptions.Negotiate | ContextOptions.Sealing | ContextOptions.SecureSocketLayer | ContextOptions.SimpleBind | ContextOptions.ServerBind)) != 0)
-                throw new InvalidEnumArgumentException(nameof(options), (int)options, typeof(ContextOptions));
+            if (
+                (
+                    options
+                    & ~(
+                        ContextOptions.Signing
+                        | ContextOptions.Negotiate
+                        | ContextOptions.Sealing
+                        | ContextOptions.SecureSocketLayer
+                        | ContextOptions.SimpleBind
+                        | ContextOptions.ServerBind
+                    )
+                ) != 0
+            )
+                throw new InvalidEnumArgumentException(
+                    nameof(options),
+                    (int)options,
+                    typeof(ContextOptions)
+                );
 
             if (contextType == ContextType.Machine && ((options & ~ContextOptions.Negotiate) != 0))
             {
                 throw new ArgumentException(SR.InvalidContextOptionsForMachine);
             }
 
-            if ((contextType == ContextType.Domain || contextType == ContextType.ApplicationDirectory) &&
-                (((options & (ContextOptions.Negotiate | ContextOptions.SimpleBind)) == 0) ||
-                (((options & (ContextOptions.Negotiate | ContextOptions.SimpleBind)) == ((ContextOptions.Negotiate | ContextOptions.SimpleBind))))))
+            if (
+                (
+                    contextType == ContextType.Domain
+                    || contextType == ContextType.ApplicationDirectory
+                )
+                && (
+                    ((options & (ContextOptions.Negotiate | ContextOptions.SimpleBind)) == 0)
+                    || (
+                        (
+                            (options & (ContextOptions.Negotiate | ContextOptions.SimpleBind))
+                            == ((ContextOptions.Negotiate | ContextOptions.SimpleBind))
+                        )
+                    )
+                )
+            )
             {
                 throw new ArgumentException(SR.InvalidContextOptionsForAD);
             }
 
-            if ((contextType != ContextType.Machine) &&
-                (contextType != ContextType.Domain) &&
-                (contextType != ContextType.ApplicationDirectory)
+            if (
+                (contextType != ContextType.Machine)
+                && (contextType != ContextType.Domain)
+                && (contextType != ContextType.ApplicationDirectory)
 #if TESTHOOK
                 && (contextType != ContextType.Test)
 #endif
-                )
+            )
             {
-                throw new InvalidEnumArgumentException(nameof(contextType), (int)contextType, typeof(ContextType));
+                throw new InvalidEnumArgumentException(
+                    nameof(contextType),
+                    (int)contextType,
+                    typeof(ContextType)
+                );
             }
 
             if ((contextType == ContextType.Machine) && (container != null))
                 throw new ArgumentException(SR.ContextNoContainerForMachineCtx);
 
-            if ((contextType == ContextType.ApplicationDirectory) && ((string.IsNullOrEmpty(container)) || (string.IsNullOrEmpty(name))))
+            if (
+                (contextType == ContextType.ApplicationDirectory)
+                && ((string.IsNullOrEmpty(container)) || (string.IsNullOrEmpty(name)))
+            )
                 throw new ArgumentException(SR.ContextNoContainerForApplicationDirectoryCtx);
 
             _contextType = contextType;
@@ -513,15 +644,14 @@ namespace System.DirectoryServices.AccountManagement
         {
             CheckDisposed();
 
-            if ((userName == null && password != null) ||
-                (userName != null && password == null))
+            if ((userName == null && password != null) || (userName != null && password == null))
                 throw new ArgumentException(SR.ContextBadUserPwdCombo);
 
 #if TESTHOOK
-                if ( contextType == ContextType.Test )
-                {
-                    return true;
-                }
+            if (contextType == ContextType.Test)
+            {
+                return true;
+            }
 #endif
 
             return (_credValidate.Validate(userName, password));
@@ -536,18 +666,17 @@ namespace System.DirectoryServices.AccountManagement
             // Perform credential validation using fast concurrent bind...
             CheckDisposed();
 
-            if ((userName == null && password != null) ||
-                (userName != null && password == null))
+            if ((userName == null && password != null) || (userName != null && password == null))
                 throw new ArgumentException(SR.ContextBadUserPwdCombo);
 
             if (options != ContextOptions.Negotiate && _contextType == ContextType.Machine)
                 throw new ArgumentException(SR.ContextOptionsNotValidForMachineStore);
 
 #if TESTHOOK
-                if ( contextType == ContextType.Test )
-                {
-                    return true;
-                }
+            if (contextType == ContextType.Test)
+            {
+                return true;
+            }
 #endif
 
             return (_credValidate.Validate(userName, password, options));
@@ -565,7 +694,11 @@ namespace System.DirectoryServices.AccountManagement
                     if (_initialized)
                         return;
 
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "Initializing Context");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "PrincipalContext",
+                        "Initializing Context"
+                    );
 
                     switch (_contextType)
                     {
@@ -587,7 +720,10 @@ namespace System.DirectoryServices.AccountManagement
 #endif
                         default:
                             // Internal error
-                            Debug.Fail("PrincipalContext.Initialize: fell off end looking for " + _contextType.ToString());
+                            Debug.Fail(
+                                "PrincipalContext.Initialize: fell off end looking for "
+                                    + _contextType.ToString()
+                            );
                             break;
                     }
 
@@ -598,18 +734,30 @@ namespace System.DirectoryServices.AccountManagement
 
         private void DoApplicationDirectoryInit()
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "Entering DoApplicationDirecotryInit");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalContext",
+                "Entering DoApplicationDirecotryInit"
+            );
 
             Debug.Assert(_contextType == ContextType.ApplicationDirectory);
 
             if (_container == null)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "DoApplicationDirecotryInit: using no-container path");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PrincipalContext",
+                    "DoApplicationDirecotryInit: using no-container path"
+                );
                 DoLDAPDirectoryInitNoContainer();
             }
             else
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "DoApplicationDirecotryInit: using container path");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PrincipalContext",
+                    "DoApplicationDirecotryInit: using container path"
+                );
                 DoLDAPDirectoryInit();
             }
         }
@@ -627,14 +775,27 @@ namespace System.DirectoryServices.AccountManagement
             {
                 string hostname = _name ?? Utils.GetComputerFlatName();
 
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "DoMachineInit: hostname is " + hostname);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PrincipalContext",
+                    "DoMachineInit: hostname is " + hostname
+                );
 
                 // use the options they specified
                 AuthenticationTypes authTypes = SDSUtils.MapOptionsToAuthTypes(_options);
 
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "DoMachineInit: authTypes is " + authTypes.ToString());
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PrincipalContext",
+                    "DoMachineInit: authTypes is " + authTypes.ToString()
+                );
 
-                de = new DirectoryEntry("WinNT://" + hostname + ",computer", _username, _password, authTypes);
+                de = new DirectoryEntry(
+                    "WinNT://" + hostname + ",computer",
+                    _username,
+                    _password,
+                    authTypes
+                );
 
                 // Force ADSI to connect so we detect if the server is down or if the servername is invalid
                 de.RefreshCache();
@@ -651,11 +812,14 @@ namespace System.DirectoryServices.AccountManagement
             }
             catch (Exception e)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Error,
-                                                  "PrincipalContext",
-                                                  "DoMachineInit: caught exception of type "
-                                                   + e.GetType().ToString() +
-                                                   " and message " + e.Message);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Error,
+                    "PrincipalContext",
+                    "DoMachineInit: caught exception of type "
+                        + e.GetType().ToString()
+                        + " and message "
+                        + e.Message
+                );
 
                 // Cleanup the DE on failure
                 de?.Dispose();
@@ -672,13 +836,21 @@ namespace System.DirectoryServices.AccountManagement
 
             if (_container == null)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "DoDomainInit: using no-container path");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PrincipalContext",
+                    "DoDomainInit: using no-container path"
+                );
                 DoLDAPDirectoryInitNoContainer();
                 return;
             }
             else
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "DoDomainInit: using container path");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PrincipalContext",
+                    "DoDomainInit: using container path"
+                );
                 DoLDAPDirectoryInit();
                 return;
             }
@@ -687,13 +859,21 @@ namespace System.DirectoryServices.AccountManagement
         private void DoServerVerifyAndPropRetrieval()
         {
             _serverProperties = default;
-            if (_contextType == ContextType.ApplicationDirectory || _contextType == ContextType.Domain)
+            if (
+                _contextType == ContextType.ApplicationDirectory
+                || _contextType == ContextType.Domain
+            )
             {
                 ReadServerConfig(_name, ref _serverProperties);
 
                 if (_serverProperties.contextType != _contextType)
                 {
-                    throw new ArgumentException(SR.Format(SR.PassedContextTypeDoesNotMatchDetectedType, _serverProperties.contextType.ToString()));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.PassedContextTypeDoesNotMatchDetectedType,
+                            _serverProperties.contextType.ToString()
+                        )
+                    );
                 }
             }
         }
@@ -707,8 +887,14 @@ namespace System.DirectoryServices.AccountManagement
             {
                 if (_contextType == ContextType.ApplicationDirectory)
                 {
-                    serverName = _serverProperties.dnsHostName + ":" +
-                        ((ContextOptions.SecureSocketLayer & _options) > 0 ? _serverProperties.portSSL : _serverProperties.portLDAP);
+                    serverName =
+                        _serverProperties.dnsHostName
+                        + ":"
+                        + (
+                            (ContextOptions.SecureSocketLayer & _options) > 0
+                                ? _serverProperties.portSSL
+                                : _serverProperties.portLDAP
+                        );
                 }
                 else
                 {
@@ -718,14 +904,27 @@ namespace System.DirectoryServices.AccountManagement
                 serverName += "/";
             }
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "DoLDAPDirectoryInit: serverName is " + serverName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalContext",
+                "DoLDAPDirectoryInit: serverName is " + serverName
+            );
 
             // use the options they specified
             AuthenticationTypes authTypes = SDSUtils.MapOptionsToAuthTypes(_options);
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "DoLDAPDirectoryInit: authTypes is " + authTypes.ToString());
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalContext",
+                "DoLDAPDirectoryInit: authTypes is " + authTypes.ToString()
+            );
 
-            DirectoryEntry de = new DirectoryEntry("LDAP://" + serverName + _container, _username, _password, authTypes);
+            DirectoryEntry de = new DirectoryEntry(
+                "LDAP://" + serverName + _container,
+                _username,
+                _password,
+                authTypes
+            );
 
             try
             {
@@ -754,10 +953,14 @@ namespace System.DirectoryServices.AccountManagement
             }
             catch (Exception e)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Error, "PrincipalContext",
-                                                   "DoLDAPDirectoryInit: caught exception of type "
-                                                   + e.GetType().ToString() +
-                                                   " and message " + e.Message);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Error,
+                    "PrincipalContext",
+                    "DoLDAPDirectoryInit: caught exception of type "
+                        + e.GetType().ToString()
+                        + " and message "
+                        + e.Message
+                );
 
                 throw;
             }
@@ -770,8 +973,44 @@ namespace System.DirectoryServices.AccountManagement
 
         private void DoLDAPDirectoryInitNoContainer()
         {
-            byte[] USERS_CONTAINER_GUID = new byte[] { 0xa9, 0xd1, 0xca, 0x15, 0x76, 0x88, 0x11, 0xd1, 0xad, 0xed, 0x00, 0xc0, 0x4f, 0xd8, 0xd5, 0xcd };
-            byte[] COMPUTERS_CONTAINER_GUID = new byte[] { 0xaa, 0x31, 0x28, 0x25, 0x76, 0x88, 0x11, 0xd1, 0xad, 0xed, 0x00, 0xc0, 0x4f, 0xd8, 0xd5, 0xcd };
+            byte[] USERS_CONTAINER_GUID = new byte[]
+            {
+                0xa9,
+                0xd1,
+                0xca,
+                0x15,
+                0x76,
+                0x88,
+                0x11,
+                0xd1,
+                0xad,
+                0xed,
+                0x00,
+                0xc0,
+                0x4f,
+                0xd8,
+                0xd5,
+                0xcd,
+            };
+            byte[] COMPUTERS_CONTAINER_GUID = new byte[]
+            {
+                0xaa,
+                0x31,
+                0x28,
+                0x25,
+                0x76,
+                0x88,
+                0x11,
+                0xd1,
+                0xad,
+                0xed,
+                0x00,
+                0xc0,
+                0x4f,
+                0xd8,
+                0xd5,
+                0xcd,
+            };
 
             // The StoreCtxs that will be used in the PrincipalContext, and their associated DirectoryEntry objects.
             DirectoryEntry deUserGroupOrg = null;
@@ -782,7 +1021,11 @@ namespace System.DirectoryServices.AccountManagement
             ADStoreCtx storeCtxComputer = null;
             ADStoreCtx storeCtxBase = null;
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "Entering DoLDAPDirectoryInitNoContainer");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalContext",
+                "Entering DoLDAPDirectoryInitNoContainer"
+            );
 
             //
             // Build a DirectoryEntry that represents the root of the domain.
@@ -799,23 +1042,44 @@ namespace System.DirectoryServices.AccountManagement
                 serverName = _name + "/";
             }
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "DoLDAPDirectoryInitNoContainer: serverName is " + serverName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalContext",
+                "DoLDAPDirectoryInitNoContainer: serverName is " + serverName
+            );
 
             // use the options they specified
             AuthenticationTypes authTypes = SDSUtils.MapOptionsToAuthTypes(_options);
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "DoLDAPDirectoryInitNoContainer: authTypes is " + authTypes.ToString());
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalContext",
+                "DoLDAPDirectoryInitNoContainer: authTypes is " + authTypes.ToString()
+            );
 
             try
             {
-                deRootDse = new DirectoryEntry("LDAP://" + serverName + "rootDse", _username, _password, authTypes);
+                deRootDse = new DirectoryEntry(
+                    "LDAP://" + serverName + "rootDse",
+                    _username,
+                    _password,
+                    authTypes
+                );
 
                 // This will also detect if the server is down or nonexistent
                 string domainNC = (string)deRootDse.Properties["defaultNamingContext"][0];
                 adsPathBase = "LDAP://" + serverName + domainNC;
 
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "DoLDAPDirectoryInitNoContainer: domainNC is " + domainNC);
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "DoLDAPDirectoryInitNoContainer: adsPathBase is " + adsPathBase);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PrincipalContext",
+                    "DoLDAPDirectoryInitNoContainer: domainNC is " + domainNC
+                );
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PrincipalContext",
+                    "DoLDAPDirectoryInitNoContainer: adsPathBase is " + adsPathBase
+                );
             }
             finally
             {
@@ -844,7 +1108,9 @@ namespace System.DirectoryServices.AccountManagement
                 string adsPathUserGroupOrg = null;
                 string adsPathComputer = null;
 
-                PropertyValueCollection wellKnownObjectValues = deBase.Properties["wellKnownObjects"];
+                PropertyValueCollection wellKnownObjectValues = deBase.Properties[
+                    "wellKnownObjects"
+                ];
 
                 foreach (UnsafeNativeMethods.IADsDNWithBinary value in wellKnownObjectValues)
                 {
@@ -854,9 +1120,11 @@ namespace System.DirectoryServices.AccountManagement
                         adsPathUserGroupOrg = "LDAP://" + serverName + value.DNString;
 
                         GlobalDebug.WriteLineIf(
-                                GlobalDebug.Info,
-                                "PrincipalContext",
-                                "DoLDAPDirectoryInitNoContainer: found USER, adsPathUserGroupOrg is " + adsPathUserGroupOrg);
+                            GlobalDebug.Info,
+                            "PrincipalContext",
+                            "DoLDAPDirectoryInitNoContainer: found USER, adsPathUserGroupOrg is "
+                                + adsPathUserGroupOrg
+                        );
                     }
 
                     // Is it the computer container?
@@ -866,9 +1134,11 @@ namespace System.DirectoryServices.AccountManagement
                         adsPathComputer = "LDAP://" + serverName + value.DNString;
 
                         GlobalDebug.WriteLineIf(
-                                GlobalDebug.Info,
-                                "PrincipalContext",
-                                "DoLDAPDirectoryInitNoContainer: found COMPUTER, adsPathComputer is " + adsPathComputer);
+                            GlobalDebug.Info,
+                            "PrincipalContext",
+                            "DoLDAPDirectoryInitNoContainer: found COMPUTER, adsPathComputer is "
+                                + adsPathComputer
+                        );
                     }
                 }
 
@@ -887,14 +1157,19 @@ namespace System.DirectoryServices.AccountManagement
                 // by default create principals in the root of their directory.  When a search happens the base context is used so that
                 // the whole directory will be covered.
                 //
-                deUserGroupOrg = new DirectoryEntry(adsPathUserGroupOrg, _username, _password, authTypes);
+                deUserGroupOrg = new DirectoryEntry(
+                    adsPathUserGroupOrg,
+                    _username,
+                    _password,
+                    authTypes
+                );
                 deComputer = new DirectoryEntry(adsPathComputer, _username, _password, authTypes);
 
                 StoreCtx userStore = CreateContextFromDirectoryEntry(deUserGroupOrg);
 
                 _userCtx = userStore;
                 _groupCtx = userStore;
-                deUserGroupOrg = null;  // since we handed off ownership to the StoreCtx
+                deUserGroupOrg = null; // since we handed off ownership to the StoreCtx
 
                 _computerCtx = CreateContextFromDirectoryEntry(deComputer);
 
@@ -908,11 +1183,14 @@ namespace System.DirectoryServices.AccountManagement
             }
             catch (Exception e)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Error,
-                                        "PrincipalContext",
-                                        "DoLDAPDirectoryInitNoContainer: caught exception of type "
-                                         + e.GetType().ToString() +
-                                         " and message " + e.Message);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Error,
+                    "PrincipalContext",
+                    "DoLDAPDirectoryInitNoContainer: caught exception of type "
+                        + e.GetType().ToString()
+                        + " and message "
+                        + e.Message
+                );
 
                 // Cleanup on failure.  Once a DE has been successfully handed off to a ADStoreCtx,
                 // that ADStoreCtx will handle Dispose()'ing it
@@ -972,7 +1250,6 @@ namespace System.DirectoryServices.AccountManagement
                 return ctx;
             }
         }
-
 #endif // TESTHOOK
 
         //
@@ -1012,7 +1289,10 @@ namespace System.DirectoryServices.AccountManagement
 
         // Have we been disposed?
         private bool _disposed;
-        internal bool Disposed { get { return _disposed; } }
+        internal bool Disposed
+        {
+            get { return _disposed; }
+        }
 
         // Our constructor parameters
 
@@ -1026,10 +1306,7 @@ namespace System.DirectoryServices.AccountManagement
 
         internal ServerProperties ServerInformation
         {
-            get
-            {
-                return _serverProperties;
-            }
+            get { return _serverProperties; }
         }
 
         private readonly string _name;
@@ -1062,16 +1339,19 @@ namespace System.DirectoryServices.AccountManagement
                 Initialize();
                 return _queryCtx;
             }
-
-            set
-            {
-                _queryCtx = value;
-            }
+            set { _queryCtx = value; }
         }
 
         internal void ReadServerConfig(string serverName, ref ServerProperties properties)
         {
-            string[] proplist = new string[] { "msDS-PortSSL", "msDS-PortLDAP", "domainControllerFunctionality", "dnsHostName", "supportedCapabilities" };
+            string[] proplist = new string[]
+            {
+                "msDS-PortSSL",
+                "msDS-PortLDAP",
+                "domainControllerFunctionality",
+                "dnsHostName",
+                "supportedCapabilities",
+            };
             LdapConnection ldapConnection = null;
 
             try
@@ -1080,7 +1360,10 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (useSSL && _contextType == ContextType.Domain)
                 {
-                    LdapDirectoryIdentifier directoryid = new LdapDirectoryIdentifier(serverName, LdapConstants.LDAP_SSL_PORT);
+                    LdapDirectoryIdentifier directoryid = new LdapDirectoryIdentifier(
+                        serverName,
+                        LdapConstants.LDAP_SSL_PORT
+                    );
                     ldapConnection = new LdapConnection(directoryid);
                 }
                 else
@@ -1097,8 +1380,12 @@ namespace System.DirectoryServices.AccountManagement
                 string ldapSearchFilter = "(objectClass=*)";
                 SearchResponse searchResponse = null;
 
-                SearchRequest searchRequest = new SearchRequest(baseDN, ldapSearchFilter, System.DirectoryServices.Protocols
-                    .SearchScope.Base, proplist);
+                SearchRequest searchRequest = new SearchRequest(
+                    baseDN,
+                    ldapSearchFilter,
+                    System.DirectoryServices.Protocols.SearchScope.Base,
+                    proplist
+                );
 
                 try
                 {
@@ -1111,11 +1398,19 @@ namespace System.DirectoryServices.AccountManagement
 
                 // Fill in the struct with the casted properties from the serach results.
                 // there will always be only 1 item on the rootDSE so all entry indexes are 0
-                properties.dnsHostName = (string)searchResponse.Entries[0].Attributes["dnsHostName"][0];
-                properties.SupportCapabilities = new string[searchResponse.Entries[0].Attributes["supportedCapabilities"].Count];
-                for (int i = 0; i < searchResponse.Entries[0].Attributes["supportedCapabilities"].Count; i++)
+                properties.dnsHostName = (string)
+                    searchResponse.Entries[0].Attributes["dnsHostName"][0];
+                properties.SupportCapabilities = new string[
+                    searchResponse.Entries[0].Attributes["supportedCapabilities"].Count
+                ];
+                for (
+                    int i = 0;
+                    i < searchResponse.Entries[0].Attributes["supportedCapabilities"].Count;
+                    i++
+                )
                 {
-                    properties.SupportCapabilities[i] = (string)searchResponse.Entries[0].Attributes["supportedCapabilities"][i];
+                    properties.SupportCapabilities[i] = (string)
+                        searchResponse.Entries[0].Attributes["supportedCapabilities"][i];
                 }
 
                 foreach (string capability in properties.SupportCapabilities)
@@ -1133,7 +1428,13 @@ namespace System.DirectoryServices.AccountManagement
                 // If we can't determine the OS version so we must fall back to lowest level of functionality
                 if (searchResponse.Entries[0].Attributes.Contains("domainControllerFunctionality"))
                 {
-                    properties.OsVersion = (DomainControllerMode)Convert.ToInt32(searchResponse.Entries[0].Attributes["domainControllerFunctionality"][0], CultureInfo.InvariantCulture);
+                    properties.OsVersion = (DomainControllerMode)
+                        Convert.ToInt32(
+                            searchResponse.Entries[0].Attributes["domainControllerFunctionality"][
+                                0
+                            ],
+                            CultureInfo.InvariantCulture
+                        );
                 }
                 else
                 {
@@ -1144,19 +1445,43 @@ namespace System.DirectoryServices.AccountManagement
                 {
                     if (searchResponse.Entries[0].Attributes.Contains("msDS-PortSSL"))
                     {
-                        properties.portSSL = Convert.ToInt32(searchResponse.Entries[0].Attributes["msDS-PortSSL"][0]);
+                        properties.portSSL = Convert.ToInt32(
+                            searchResponse.Entries[0].Attributes["msDS-PortSSL"][0]
+                        );
                     }
                     if (searchResponse.Entries[0].Attributes.Contains("msDS-PortLDAP"))
                     {
-                        properties.portLDAP = Convert.ToInt32(searchResponse.Entries[0].Attributes["msDS-PortLDAP"][0]);
+                        properties.portLDAP = Convert.ToInt32(
+                            searchResponse.Entries[0].Attributes["msDS-PortLDAP"][0]
+                        );
                     }
                 }
 
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ReadServerConfig", "OsVersion : " + properties.OsVersion.ToString());
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ReadServerConfig", "dnsHostName : " + properties.dnsHostName);
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ReadServerConfig", "contextType : " + properties.contextType.ToString());
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ReadServerConfig", "portSSL : " + properties.portSSL.ToString(CultureInfo.InvariantCulture));
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ReadServerConfig", "portLDAP :" + properties.portLDAP.ToString(CultureInfo.InvariantCulture));
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "ReadServerConfig",
+                    "OsVersion : " + properties.OsVersion.ToString()
+                );
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "ReadServerConfig",
+                    "dnsHostName : " + properties.dnsHostName
+                );
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "ReadServerConfig",
+                    "contextType : " + properties.contextType.ToString()
+                );
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "ReadServerConfig",
+                    "portSSL : " + properties.portSSL.ToString(CultureInfo.InvariantCulture)
+                );
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "ReadServerConfig",
+                    "portLDAP :" + properties.portLDAP.ToString(CultureInfo.InvariantCulture)
+                );
             }
             finally
             {
@@ -1170,7 +1495,11 @@ namespace System.DirectoryServices.AccountManagement
 
             Debug.Assert(entry != null);
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "CreateContextFromDirectoryEntry: path is " + entry.Path);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalContext",
+                "CreateContextFromDirectoryEntry: path is " + entry.Path
+            );
 
             if (entry.Path.StartsWith("LDAP:", StringComparison.Ordinal))
             {
@@ -1199,7 +1528,11 @@ namespace System.DirectoryServices.AccountManagement
         {
             if (_disposed)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "PrincipalContext", "CheckDisposed: accessing disposed object");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "PrincipalContext",
+                    "CheckDisposed: accessing disposed object"
+                );
 
                 throw new ObjectDisposedException("PrincipalContext");
             }
@@ -1221,25 +1554,47 @@ namespace System.DirectoryServices.AccountManagement
         // Helper method: given a typeof(User/Computer/etc.), returns the userCtx/computerCtx/etc.
         internal StoreCtx ContextForType(Type t)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalContext", "ContextForType: type is " + t.ToString());
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalContext",
+                "ContextForType: type is " + t.ToString()
+            );
 
             Initialize();
 
-            if (t == typeof(System.DirectoryServices.AccountManagement.UserPrincipal) || t.IsSubclassOf(typeof(System.DirectoryServices.AccountManagement.UserPrincipal)))
+            if (
+                t == typeof(System.DirectoryServices.AccountManagement.UserPrincipal)
+                || t.IsSubclassOf(typeof(System.DirectoryServices.AccountManagement.UserPrincipal))
+            )
             {
                 return _userCtx;
             }
-            else if (t == typeof(System.DirectoryServices.AccountManagement.ComputerPrincipal) || t.IsSubclassOf(typeof(System.DirectoryServices.AccountManagement.ComputerPrincipal)))
+            else if (
+                t == typeof(System.DirectoryServices.AccountManagement.ComputerPrincipal)
+                || t.IsSubclassOf(
+                    typeof(System.DirectoryServices.AccountManagement.ComputerPrincipal)
+                )
+            )
             {
                 return _computerCtx;
             }
-            else if (t == typeof(System.DirectoryServices.AccountManagement.AuthenticablePrincipal) || t.IsSubclassOf(typeof(System.DirectoryServices.AccountManagement.AuthenticablePrincipal)))
+            else if (
+                t == typeof(System.DirectoryServices.AccountManagement.AuthenticablePrincipal)
+                || t.IsSubclassOf(
+                    typeof(System.DirectoryServices.AccountManagement.AuthenticablePrincipal)
+                )
+            )
             {
                 return _userCtx;
             }
             else
             {
-                Debug.Assert(t == typeof(System.DirectoryServices.AccountManagement.GroupPrincipal) || t.IsSubclassOf(typeof(System.DirectoryServices.AccountManagement.GroupPrincipal)));
+                Debug.Assert(
+                    t == typeof(System.DirectoryServices.AccountManagement.GroupPrincipal)
+                        || t.IsSubclassOf(
+                            typeof(System.DirectoryServices.AccountManagement.GroupPrincipal)
+                        )
+                );
                 return _groupCtx;
             }
         }

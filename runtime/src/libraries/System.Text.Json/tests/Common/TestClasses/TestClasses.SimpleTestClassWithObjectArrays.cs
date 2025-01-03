@@ -28,26 +28,27 @@ namespace System.Text.Json.Serialization.Tests
         public object[] MyEnum { get; set; }
 
         public static readonly string s_json =
-                @"{" +
-                @"""MyInt16"" : [1]," +
-                @"""MyInt32"" : [2]," +
-                @"""MyInt64"" : [3]," +
-                @"""MyUInt16"" : [4]," +
-                @"""MyUInt32"" : [5]," +
-                @"""MyUInt64"" : [6]," +
-                @"""MyByte"" : [7]," +
-                @"""MySByte"" : [8]," +
-                @"""MyChar"" : [""a""]," +
-                @"""MyString"" : [""Hello""]," +
-                @"""MyBooleanTrue"" : [true]," +
-                @"""MyBooleanFalse"" : [false]," +
-                @"""MySingle"" : [1.1]," +
-                @"""MyDouble"" : [2.2]," +
-                @"""MyDecimal"" : [3.3]," +
-                @"""MyDateTime"" : [""2019-01-30T12:01:02.0000000Z""]," +
-                @"""MyGuid"" : [""97E9F02C-337E-4615-B26C-0020F5DC28C9""]," +
-                @"""MyUri"" : [""https://github.com/dotnet/runtime""]," +
-                @"""MyEnum"" : [2]" + // int by default
+            @"{"
+            + @"""MyInt16"" : [1],"
+            + @"""MyInt32"" : [2],"
+            + @"""MyInt64"" : [3],"
+            + @"""MyUInt16"" : [4],"
+            + @"""MyUInt32"" : [5],"
+            + @"""MyUInt64"" : [6],"
+            + @"""MyByte"" : [7],"
+            + @"""MySByte"" : [8],"
+            + @"""MyChar"" : [""a""],"
+            + @"""MyString"" : [""Hello""],"
+            + @"""MyBooleanTrue"" : [true],"
+            + @"""MyBooleanFalse"" : [false],"
+            + @"""MySingle"" : [1.1],"
+            + @"""MyDouble"" : [2.2],"
+            + @"""MyDecimal"" : [3.3],"
+            + @"""MyDateTime"" : [""2019-01-30T12:01:02.0000000Z""],"
+            + @"""MyGuid"" : [""97E9F02C-337E-4615-B26C-0020F5DC28C9""],"
+            + @"""MyUri"" : [""https://github.com/dotnet/runtime""],"
+            + @"""MyEnum"" : [2]"
+            + // int by default
             @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
@@ -135,13 +136,22 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(2.2d, ((JsonElement)MyDouble[0]).GetDouble());
             Assert.IsType<JsonElement>(MyDateTime[0]);
             Assert.Equal(JsonValueKind.String, ((JsonElement)MyDateTime[0]).ValueKind);
-            Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc), ((JsonElement)MyDateTime[0]).GetDateTime());
+            Assert.Equal(
+                new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc),
+                ((JsonElement)MyDateTime[0]).GetDateTime()
+            );
             Assert.IsType<JsonElement>(MyGuid[0]);
             Assert.Equal(JsonValueKind.String, ((JsonElement)MyGuid[0]).ValueKind);
-            Assert.Equal(new Guid("97E9F02C-337E-4615-B26C-0020F5DC28C9"), ((JsonElement)MyGuid[0]).GetGuid());
+            Assert.Equal(
+                new Guid("97E9F02C-337E-4615-B26C-0020F5DC28C9"),
+                ((JsonElement)MyGuid[0]).GetGuid()
+            );
             Assert.IsType<JsonElement>(MyUri[0]);
             Assert.Equal(JsonValueKind.String, ((JsonElement)MyUri[0]).ValueKind);
-            Assert.Equal(new Uri("https://github.com/dotnet/runtime"), new Uri(((JsonElement)MyUri[0]).GetString()));
+            Assert.Equal(
+                new Uri("https://github.com/dotnet/runtime"),
+                new Uri(((JsonElement)MyUri[0]).GetString())
+            );
             Assert.IsType<JsonElement>(MyEnum[0]);
             Assert.Equal(JsonValueKind.Number, ((JsonElement)MyEnum[0]).ValueKind);
             Assert.Equal(SampleEnum.Two, (SampleEnum)((JsonElement)MyEnum[0]).GetUInt32());

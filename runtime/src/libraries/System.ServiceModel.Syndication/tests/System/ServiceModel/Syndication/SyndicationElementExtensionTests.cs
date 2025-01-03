@@ -17,26 +17,57 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_Reader()
         {
-            var extension = new SyndicationElementExtension(new XElement("ExtensionObject", new XElement("Value", 10)).CreateReader());
+            var extension = new SyndicationElementExtension(
+                new XElement("ExtensionObject", new XElement("Value", 10)).CreateReader()
+            );
             Assert.Equal("ExtensionObject", extension.OuterName);
             Assert.Empty(extension.OuterNamespace);
             Assert.Equal(0, extension.GetObject<ExtensionObject>().Value);
-            Assert.Equal(0, extension.GetObject<ExtensionObject>(new DataContractSerializer(typeof(ExtensionObject))).Value);
-            Assert.Equal(10, extension.GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                0,
+                extension
+                    .GetObject<ExtensionObject>(new DataContractSerializer(typeof(ExtensionObject)))
+                    .Value
+            );
+            Assert.Equal(
+                10,
+                extension
+                    .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
+            );
         }
 
         [Fact]
         public void Ctor_ReaderNotAtStart_ReturnsExpected()
         {
-            using (XmlReader reader = new XElement("parent", new XElement("ExtensionObject", new XElement("Value", 10))).CreateReader())
+            using (
+                XmlReader reader = new XElement(
+                    "parent",
+                    new XElement("ExtensionObject", new XElement("Value", 10))
+                ).CreateReader()
+            )
             {
                 reader.MoveToElement();
-                var extension = new SyndicationElementExtension(new XElement("ExtensionObject", new XElement("Value", 10)).CreateReader());
+                var extension = new SyndicationElementExtension(
+                    new XElement("ExtensionObject", new XElement("Value", 10)).CreateReader()
+                );
                 Assert.Equal("ExtensionObject", extension.OuterName);
                 Assert.Empty(extension.OuterNamespace);
                 Assert.Equal(0, extension.GetObject<ExtensionObject>().Value);
-                Assert.Equal(0, extension.GetObject<ExtensionObject>(new DataContractSerializer(typeof(ExtensionObject))).Value);
-                Assert.Equal(10, extension.GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+                Assert.Equal(
+                    0,
+                    extension
+                        .GetObject<ExtensionObject>(
+                            new DataContractSerializer(typeof(ExtensionObject))
+                        )
+                        .Value
+                );
+                Assert.Equal(
+                    10,
+                    extension
+                        .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                        .Value
+                );
             }
         }
 
@@ -53,7 +84,10 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullReader_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("xmlReader", () => new SyndicationElementExtension(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "xmlReader",
+                () => new SyndicationElementExtension(null)
+            );
         }
 
         [Fact]
@@ -64,12 +98,18 @@ namespace System.ServiceModel.Syndication.Tests
             // Get OuterName first.
             var extension = new SyndicationElementExtension(extensionObject);
             Assert.Equal("ServiceElementExtensionTests.ExtensionObject", extension.OuterName);
-            Assert.Equal("http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests", extension.OuterNamespace);
+            Assert.Equal(
+                "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests",
+                extension.OuterNamespace
+            );
             Assert.Equal(10, extension.GetObject<ExtensionObject>().Value);
 
             // Get OuterNamespace first.
             extension = new SyndicationElementExtension(extensionObject);
-            Assert.Equal("http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests", extension.OuterNamespace);
+            Assert.Equal(
+                "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests",
+                extension.OuterNamespace
+            );
             Assert.Equal("ServiceElementExtensionTests.ExtensionObject", extension.OuterName);
             Assert.Equal(10, extension.GetObject<ExtensionObject>().Value);
 
@@ -77,7 +117,10 @@ namespace System.ServiceModel.Syndication.Tests
             extension = new SyndicationElementExtension(extensionObject);
             Assert.Equal(10, extension.GetObject<ExtensionObject>().Value);
             Assert.Equal("ServiceElementExtensionTests.ExtensionObject", extension.OuterName);
-            Assert.Equal("http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests", extension.OuterNamespace);
+            Assert.Equal(
+                "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests",
+                extension.OuterNamespace
+            );
         }
 
         public static IEnumerable<object[]> Ctor_XmlObjectSerializer_TestData()
@@ -93,7 +136,10 @@ namespace System.ServiceModel.Syndication.Tests
             var extensionObject = new ExtensionObject { Value = 10 };
             var extension = new SyndicationElementExtension(extensionObject, serializer);
             Assert.Equal("ServiceElementExtensionTests.ExtensionObject", extension.OuterName);
-            Assert.Equal("http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests", extension.OuterNamespace);
+            Assert.Equal(
+                "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests",
+                extension.OuterNamespace
+            );
             Assert.Equal(10, extension.GetObject<ExtensionObject>().Value);
         }
 
@@ -109,22 +155,50 @@ namespace System.ServiceModel.Syndication.Tests
             var extensionObject = new ExtensionObject { Value = 10 };
 
             // Get OuterName first.
-            var extension = new SyndicationElementExtension(outerName, outerNamespace, extensionObject);
-            Assert.Equal(outerName ?? "ServiceElementExtensionTests.ExtensionObject", extension.OuterName);
-            Assert.Equal(outerName == null ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests" : outerNamespace, extension.OuterNamespace);
+            var extension = new SyndicationElementExtension(
+                outerName,
+                outerNamespace,
+                extensionObject
+            );
+            Assert.Equal(
+                outerName ?? "ServiceElementExtensionTests.ExtensionObject",
+                extension.OuterName
+            );
+            Assert.Equal(
+                outerName == null
+                    ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
+                    : outerNamespace,
+                extension.OuterNamespace
+            );
             Assert.Equal(10, extension.GetObject<ExtensionObject>().Value);
 
             // Get OuterNamespace first.
             extension = new SyndicationElementExtension(outerName, outerNamespace, extensionObject);
-            Assert.Equal(outerName == null ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests" : outerNamespace, extension.OuterNamespace);
-            Assert.Equal(outerName ?? "ServiceElementExtensionTests.ExtensionObject", extension.OuterName);
+            Assert.Equal(
+                outerName == null
+                    ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
+                    : outerNamespace,
+                extension.OuterNamespace
+            );
+            Assert.Equal(
+                outerName ?? "ServiceElementExtensionTests.ExtensionObject",
+                extension.OuterName
+            );
             Assert.Equal(10, extension.GetObject<ExtensionObject>().Value);
 
             // Get Object first.
             extension = new SyndicationElementExtension(outerName, outerNamespace, extensionObject);
             Assert.Equal(10, extension.GetObject<ExtensionObject>().Value);
-            Assert.Equal(outerName ?? "ServiceElementExtensionTests.ExtensionObject", extension.OuterName);
-            Assert.Equal(outerName == null ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests" : outerNamespace, extension.OuterNamespace);
+            Assert.Equal(
+                outerName ?? "ServiceElementExtensionTests.ExtensionObject",
+                extension.OuterName
+            );
+            Assert.Equal(
+                outerName == null
+                    ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
+                    : outerNamespace,
+                extension.OuterNamespace
+            );
         }
 
         [Theory]
@@ -134,42 +208,101 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData(null, "outerNamespace")]
         [InlineData("outerName", "")]
         [InlineData("outerName", "outerNamespace")]
-        public void Ctor_String_String_Object_XmlObjectSerializer(string outerName, string outerNamespace)
+        public void Ctor_String_String_Object_XmlObjectSerializer(
+            string outerName,
+            string outerNamespace
+        )
         {
             var extensionObject = new ExtensionObject { Value = 10 };
 
             // Get OuterName first.
-            var extension = new SyndicationElementExtension(outerName, outerNamespace, extensionObject, new DataContractSerializer(typeof(ExtensionObject)));
-            Assert.Equal(outerName ?? "ServiceElementExtensionTests.ExtensionObject", extension.OuterName);
-            Assert.Equal(outerName == null ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests" : outerNamespace, extension.OuterNamespace);
+            var extension = new SyndicationElementExtension(
+                outerName,
+                outerNamespace,
+                extensionObject,
+                new DataContractSerializer(typeof(ExtensionObject))
+            );
+            Assert.Equal(
+                outerName ?? "ServiceElementExtensionTests.ExtensionObject",
+                extension.OuterName
+            );
+            Assert.Equal(
+                outerName == null
+                    ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
+                    : outerNamespace,
+                extension.OuterNamespace
+            );
             Assert.Equal(10, extension.GetObject<ExtensionObject>().Value);
 
             // Get OuterNamespace first.
-            extension = new SyndicationElementExtension(outerName, outerNamespace, extensionObject, new DataContractSerializer(typeof(ExtensionObject)));
-            Assert.Equal(outerName == null ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests" : outerNamespace, extension.OuterNamespace);
-            Assert.Equal(outerName ?? "ServiceElementExtensionTests.ExtensionObject", extension.OuterName);
+            extension = new SyndicationElementExtension(
+                outerName,
+                outerNamespace,
+                extensionObject,
+                new DataContractSerializer(typeof(ExtensionObject))
+            );
+            Assert.Equal(
+                outerName == null
+                    ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
+                    : outerNamespace,
+                extension.OuterNamespace
+            );
+            Assert.Equal(
+                outerName ?? "ServiceElementExtensionTests.ExtensionObject",
+                extension.OuterName
+            );
             Assert.Equal(10, extension.GetObject<ExtensionObject>().Value);
 
             // Get Object first.
-            extension = new SyndicationElementExtension(outerName, outerNamespace, extensionObject, new DataContractSerializer(typeof(ExtensionObject)));
+            extension = new SyndicationElementExtension(
+                outerName,
+                outerNamespace,
+                extensionObject,
+                new DataContractSerializer(typeof(ExtensionObject))
+            );
             Assert.Equal(10, extension.GetObject<ExtensionObject>().Value);
-            Assert.Equal(outerName ?? "ServiceElementExtensionTests.ExtensionObject", extension.OuterName);
-            Assert.Equal(outerName == null ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests" : outerNamespace, extension.OuterNamespace);
+            Assert.Equal(
+                outerName ?? "ServiceElementExtensionTests.ExtensionObject",
+                extension.OuterName
+            );
+            Assert.Equal(
+                outerName == null
+                    ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
+                    : outerNamespace,
+                extension.OuterNamespace
+            );
         }
 
         [Fact]
         public void Ctor_EmptyOuterName_ThrowsArgumentException()
         {
             var extensionObject = new ExtensionObject { Value = 10 };
-            AssertExtensions.Throws<ArgumentException>("outerName", null, () => new SyndicationElementExtension("", "outerNamespace", extensionObject));
+            AssertExtensions.Throws<ArgumentException>(
+                "outerName",
+                null,
+                () => new SyndicationElementExtension("", "outerNamespace", extensionObject)
+            );
         }
 
         [Fact]
         public void Ctor_NullDataContractExtension_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("dataContractExtension", () => new SyndicationElementExtension((object)null));
-            AssertExtensions.Throws<ArgumentNullException>("dataContractExtension", () => new SyndicationElementExtension(null, new DataContractSerializer(typeof(ExtensionObject))));
-            AssertExtensions.Throws<ArgumentNullException>("dataContractExtension", () => new SyndicationElementExtension("OuterName", "OuterNamespace", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "dataContractExtension",
+                () => new SyndicationElementExtension((object)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "dataContractExtension",
+                () =>
+                    new SyndicationElementExtension(
+                        null,
+                        new DataContractSerializer(typeof(ExtensionObject))
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "dataContractExtension",
+                () => new SyndicationElementExtension("OuterName", "OuterNamespace", null)
+            );
         }
 
         public static IEnumerable<object[]> Ctor_XmlContractExtension_TestData()
@@ -195,8 +328,18 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Empty(extension.OuterNamespace);
             Assert.Equal("ExtensionObject", extension.OuterName);
             Assert.Equal(10, extension.GetObject<ExtensionObject>().Value);
-            Assert.Equal(10, extension.GetObject<ExtensionObject>(new DataContractSerializer(typeof(ExtensionObject))).Value);
-            Assert.Equal(10, extension.GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                10,
+                extension
+                    .GetObject<ExtensionObject>(new DataContractSerializer(typeof(ExtensionObject)))
+                    .Value
+            );
+            Assert.Equal(
+                10,
+                extension
+                    .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
+            );
 
             // Get Object first.
             extension = new SyndicationElementExtension(extensionObject, serializer);
@@ -208,24 +351,42 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullXmlContractExtension_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("xmlSerializerExtension", () => new SyndicationElementExtension(null, new XmlSerializer(typeof(ExtensionObject))));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "xmlSerializerExtension",
+                () =>
+                    new SyndicationElementExtension(
+                        null,
+                        new XmlSerializer(typeof(ExtensionObject))
+                    )
+            );
         }
 
         [Fact]
         public void GetReader_WithReader_ReturnsExpected()
         {
-            var extension = new SyndicationElementExtension(new XElement("ExtensionObject", new XElement("Value", 10)).CreateReader());
+            var extension = new SyndicationElementExtension(
+                new XElement("ExtensionObject", new XElement("Value", 10)).CreateReader()
+            );
             XmlReader reader = extension.GetReader();
-            Assert.Equal(@"<ExtensionObject><Value>10</Value></ExtensionObject>", reader.ReadOuterXml());
+            Assert.Equal(
+                @"<ExtensionObject><Value>10</Value></ExtensionObject>",
+                reader.ReadOuterXml()
+            );
         }
 
         [Fact]
         public void GetReader_ObjectWithXmlObjectSerializer_ReturnsExpected()
         {
             var extensionObject = new ExtensionObject() { Value = 10 };
-            var extension = new SyndicationElementExtension(extensionObject, new DataContractSerializer(typeof(ExtensionObject)));
+            var extension = new SyndicationElementExtension(
+                extensionObject,
+                new DataContractSerializer(typeof(ExtensionObject))
+            );
             XmlReader reader = extension.GetReader();
-            Assert.Equal(@"<ServiceElementExtensionTests.ExtensionObject xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><Value>10</Value></ServiceElementExtensionTests.ExtensionObject>", reader.ReadOuterXml());
+            Assert.Equal(
+                @"<ServiceElementExtensionTests.ExtensionObject xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><Value>10</Value></ServiceElementExtensionTests.ExtensionObject>",
+                reader.ReadOuterXml()
+            );
         }
 
         [Fact]
@@ -233,29 +394,43 @@ namespace System.ServiceModel.Syndication.Tests
         public void GetReader_ObjectWithXmlSerializer_ReturnsExpected()
         {
             var extensionObject = new ExtensionObject() { Value = 10 };
-            var extension = new SyndicationElementExtension(extensionObject, new XmlSerializer(typeof(ExtensionObject)));
+            var extension = new SyndicationElementExtension(
+                extensionObject,
+                new XmlSerializer(typeof(ExtensionObject))
+            );
             XmlReader reader = extension.GetReader();
-            Assert.Equal(@"<ExtensionObject xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema""><Value>10</Value></ExtensionObject>", reader.ReadOuterXml());
+            Assert.Equal(
+                @"<ExtensionObject xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema""><Value>10</Value></ExtensionObject>",
+                reader.ReadOuterXml()
+            );
         }
 
         [Fact]
         public void GetObject_NullXmlSerializer_ThrowsArgumentNullException()
         {
             var extension = new SyndicationElementExtension(new ExtensionObject());
-            Assert.Throws<ArgumentNullException>("serializer", () => extension.GetObject<ExtensionObject>((XmlSerializer)null));
+            Assert.Throws<ArgumentNullException>(
+                "serializer",
+                () => extension.GetObject<ExtensionObject>((XmlSerializer)null)
+            );
         }
 
         [Fact]
         public void GetObject_NullXmlObjectSerializer_ThrowsArgumentNullException()
         {
             var extension = new SyndicationElementExtension(new ExtensionObject());
-            Assert.Throws<ArgumentNullException>("serializer", () => extension.GetObject<ExtensionObject>((XmlObjectSerializer)null));
+            Assert.Throws<ArgumentNullException>(
+                "serializer",
+                () => extension.GetObject<ExtensionObject>((XmlObjectSerializer)null)
+            );
         }
 
         [Fact]
         public void WriteTo_WithReader_ReturnsExpected()
         {
-            var extension = new SyndicationElementExtension(new XElement("ExtensionObject", new XElement("Value", 10)).CreateReader());
+            var extension = new SyndicationElementExtension(
+                new XElement("ExtensionObject", new XElement("Value", 10)).CreateReader()
+            );
 
             using (var stringWriter = new StringWriter())
             {
@@ -264,7 +439,10 @@ namespace System.ServiceModel.Syndication.Tests
                     extension.WriteTo(writer);
                 }
 
-                Assert.Equal(@"<ExtensionObject><Value>10</Value></ExtensionObject>", stringWriter.ToString());
+                Assert.Equal(
+                    @"<ExtensionObject><Value>10</Value></ExtensionObject>",
+                    stringWriter.ToString()
+                );
             }
         }
 
@@ -272,7 +450,10 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteTo_ObjectWithXmlObjectSerializer_ReturnsExpected()
         {
             var extensionObject = new ExtensionObject { Value = 10 };
-            var extension = new SyndicationElementExtension(extensionObject, new DataContractSerializer(typeof(ExtensionObject)));
+            var extension = new SyndicationElementExtension(
+                extensionObject,
+                new DataContractSerializer(typeof(ExtensionObject))
+            );
 
             using (var stringWriter = new StringWriter())
             {
@@ -281,7 +462,10 @@ namespace System.ServiceModel.Syndication.Tests
                     extension.WriteTo(writer);
                 }
 
-                Assert.Equal(@"<ServiceElementExtensionTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests""><Value>10</Value></ServiceElementExtensionTests.ExtensionObject>", stringWriter.ToString());
+                Assert.Equal(
+                    @"<ServiceElementExtensionTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests""><Value>10</Value></ServiceElementExtensionTests.ExtensionObject>",
+                    stringWriter.ToString()
+                );
             }
         }
 
@@ -290,7 +474,10 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteTo_ObjectWithXmlSerializer_ReturnsExpected()
         {
             var extensionObject = new ExtensionObject { Value = 10 };
-            var extension = new SyndicationElementExtension(extensionObject, new XmlSerializer(typeof(ExtensionObject)));
+            var extension = new SyndicationElementExtension(
+                extensionObject,
+                new XmlSerializer(typeof(ExtensionObject))
+            );
 
             using (var stringWriter = new StringWriter())
             {
@@ -299,7 +486,10 @@ namespace System.ServiceModel.Syndication.Tests
                     extension.WriteTo(writer);
                 }
 
-                Assert.Equal(@"<?xml version=""1.0"" encoding=""utf-16""?><ExtensionObject xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema""><Value>10</Value></ExtensionObject>", stringWriter.ToString());
+                Assert.Equal(
+                    @"<?xml version=""1.0"" encoding=""utf-16""?><ExtensionObject xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema""><Value>10</Value></ExtensionObject>",
+                    stringWriter.ToString()
+                );
             }
         }
 
@@ -314,20 +504,34 @@ namespace System.ServiceModel.Syndication.Tests
         public void ISerializableIsAny_XmlObjectSerializer_OuterNameReturnsExpected()
         {
             var extensionObject = new XmlSerializabWithIsAnyNull();
-            var extension = new SyndicationElementExtension(extensionObject, new DataContractSerializer(typeof(XmlSerializabWithIsAnyNull)));
+            var extension = new SyndicationElementExtension(
+                extensionObject,
+                new DataContractSerializer(typeof(XmlSerializabWithIsAnyNull))
+            );
             Assert.Equal("name", extension.OuterName);
             Assert.Empty(extension.OuterNamespace);
-            Assert.NotNull(extension.GetObject<XmlSerializabWithIsAnyNull>(new DataContractSerializer(typeof(XmlSerializabWithIsAnyNull))));
+            Assert.NotNull(
+                extension.GetObject<XmlSerializabWithIsAnyNull>(
+                    new DataContractSerializer(typeof(XmlSerializabWithIsAnyNull))
+                )
+            );
         }
 
         [Fact]
         public void ISerializableIsAny_XmlSerializer_OuterNameReturnsExpected()
         {
             var extensionObject = new XmlSerializabWithIsAny();
-            var extension = new SyndicationElementExtension(extensionObject, new XmlSerializer(typeof(XmlSerializabWithIsAny)));
+            var extension = new SyndicationElementExtension(
+                extensionObject,
+                new XmlSerializer(typeof(XmlSerializabWithIsAny))
+            );
             Assert.Equal("name", extension.OuterName);
             Assert.Empty(extension.OuterNamespace);
-            Assert.NotNull(extension.GetObject<XmlSerializabWithIsAny>(new XmlSerializer(typeof(XmlSerializabWithIsAny))));
+            Assert.NotNull(
+                extension.GetObject<XmlSerializabWithIsAny>(
+                    new XmlSerializer(typeof(XmlSerializabWithIsAny))
+                )
+            );
         }
 
         [DataContract]
@@ -340,7 +544,8 @@ namespace System.ServiceModel.Syndication.Tests
         [XmlSchemaProvider("GetXsdType", IsAny = true)]
         public class XmlSerializabWithIsAny : IXmlSerializable
         {
-            public static XmlQualifiedName GetXsdType(XmlSchemaSet schemaSet) => new XmlQualifiedName("string", XmlSchema.Namespace);
+            public static XmlQualifiedName GetXsdType(XmlSchemaSet schemaSet) =>
+                new XmlQualifiedName("string", XmlSchema.Namespace);
 
             public XmlSchema GetSchema() => null;
 

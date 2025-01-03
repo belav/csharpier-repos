@@ -80,7 +80,9 @@ namespace System.Xml.Xsl.Runtime
             while (_sequencesToMerge.Count != 1)
             {
                 // Save last item in list in temp variable, and remove it from list
-                IEnumerator<XPathNavigator> sequence = _sequencesToMerge[_sequencesToMerge.Count - 1];
+                IEnumerator<XPathNavigator> sequence = _sequencesToMerge[
+                    _sequencesToMerge.Count - 1
+                ];
                 _sequencesToMerge.RemoveAt(_sequencesToMerge.Count - 1);
 
                 // Add current node to merged sequence
@@ -91,12 +93,14 @@ namespace System.Xml.Xsl.Runtime
             }
 
             // Add nodes in remaining sequence to end of list
-            Debug.Assert(_sequencesToMerge.Count == 1, "While loop should terminate when count == 1");
+            Debug.Assert(
+                _sequencesToMerge.Count == 1,
+                "While loop should terminate when count == 1"
+            );
             do
             {
                 newSequence.Add(_sequencesToMerge[0].Current);
-            }
-            while (_sequencesToMerge[0].MoveNext());
+            } while (_sequencesToMerge[0].MoveNext());
 
             return newSequence;
         }

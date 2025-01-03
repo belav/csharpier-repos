@@ -4,7 +4,8 @@
 using Microsoft.CodeAnalysis.Testing;
 using VerifyCS = Microsoft.AspNetCore.Analyzers.Verifiers.CSharpCodeFixVerifier<
     Microsoft.AspNetCore.Analyzers.Authorization.AddAuthorizationBuilderAnalyzer,
-    Microsoft.AspNetCore.Analyzers.Authorization.Fixers.AddAuthorizationBuilderFixer>;
+    Microsoft.AspNetCore.Analyzers.Authorization.Fixers.AddAuthorizationBuilderFixer
+>;
 
 namespace Microsoft.AspNetCore.Analyzers.Authorization;
 
@@ -17,7 +18,8 @@ public sealed class AddAuthorizationBuilderTests
             .WithLocation(0)
             .WithMessage(Resources.Analyzer_UseAddAuthorizationBuilder_Message);
 
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,7 +31,8 @@ var builder = WebApplication.CreateBuilder(args);
         policy.Requirements.Add(new MinimumAgeRequirement(21))))|};
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,7 +54,8 @@ builder.Services.AddAuthorizationBuilder()
             .WithLocation(0)
             .WithMessage(Resources.Analyzer_UseAddAuthorizationBuilder_Message);
 
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -65,7 +69,8 @@ var builder = WebApplication.CreateBuilder(args);
 })|};
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -87,7 +92,8 @@ builder.Services.AddAuthorizationBuilder()
             .WithLocation(0)
             .WithMessage(Resources.Analyzer_UseAddAuthorizationBuilder_Message);
 
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -104,7 +110,8 @@ var builder = WebApplication.CreateBuilder(args);
 })|};
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -128,7 +135,8 @@ builder.Services.AddAuthorizationBuilder()
             .WithLocation(0)
             .WithMessage(Resources.Analyzer_UseAddAuthorizationBuilder_Message);
 
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -144,7 +152,8 @@ var builder = WebApplication.CreateBuilder(args);
 })|};
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -168,7 +177,8 @@ builder.Services.AddAuthorizationBuilder()
             .WithLocation(0)
             .WithMessage(Resources.Analyzer_UseAddAuthorizationBuilder_Message);
 
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -189,7 +199,8 @@ var builder = WebApplication.CreateBuilder(args);
 })|};
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -217,7 +228,8 @@ builder.Services.AddAuthorizationBuilder()
             .WithLocation(0)
             .WithMessage(Resources.Analyzer_UseAddAuthorizationBuilder_Message);
 
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -235,7 +247,8 @@ var builder = WebApplication.CreateBuilder(args);
 })|};
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -260,7 +273,8 @@ builder.Services.AddAuthorizationBuilder()
             .WithLocation(0)
             .WithMessage(Resources.Analyzer_UseAddAuthorizationBuilder_Message);
 
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -278,7 +292,8 @@ var builder = WebApplication.CreateBuilder(args);
 })|};
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -303,7 +318,8 @@ builder.Services.AddAuthorizationBuilder()
             .WithLocation(0)
             .WithMessage(Resources.Analyzer_UseAddAuthorizationBuilder_Message);
 
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -319,7 +335,8 @@ var builder = WebApplication.CreateBuilder(args);
 })|};
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -339,10 +356,11 @@ builder.Services.AddAuthorizationBuilder()
     public async Task AddAuthorization_IsTheLastCallInChain_FixedWithAddAuthorizationBuilder()
     {
         var diagnostic = new DiagnosticResult(DiagnosticDescriptors.UseAddAuthorizationBuilder)
-           .WithLocation(0)
-           .WithMessage(Resources.Analyzer_UseAddAuthorizationBuilder_Message);
+            .WithLocation(0)
+            .WithMessage(Resources.Analyzer_UseAddAuthorizationBuilder_Message);
 
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -357,7 +375,8 @@ var builder = WebApplication.CreateBuilder(args);
     })|};
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -376,7 +395,8 @@ builder.Services.AddRouting()
     [Fact]
     public async Task AddAuthorization_IsNotTheLastCallInChain_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -397,7 +417,8 @@ builder.Services.AddAuthorization(options =>
     [Fact]
     public async Task AuthorizationOptions_DefaultPolicyAccess_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -416,7 +437,8 @@ builder.Services.AddAuthorization(options =>
     [Fact]
     public async Task AuthorizationOptions_DefaultPolicyAccess_SelfAssignment_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -435,7 +457,8 @@ builder.Services.AddAuthorization(options =>
     [Fact]
     public async Task AuthorizationOptions_FallbackPolicyAccess_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -454,7 +477,8 @@ builder.Services.AddAuthorization(options =>
     [Fact]
     public async Task AuthorizationOptions_FallbackPolicyAccess_SelfAssignment_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -473,7 +497,8 @@ builder.Services.AddAuthorization(options =>
     [Fact]
     public async Task AuthorizationOptions_InvokeHandlesAfterFailureAccess_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -492,7 +517,8 @@ builder.Services.AddAuthorization(options =>
     [Fact]
     public async Task AuthorizationOptions_InvokeHandlesAfterFailureAccess_SelfAssignment_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -511,7 +537,8 @@ builder.Services.AddAuthorization(options =>
     [Fact]
     public async Task AuthorizationOptions_GetPolicyReference_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -531,7 +558,8 @@ builder.Services.AddAuthorization(options =>
     [Fact]
     public async Task AuthorizationOptions_GetPolicyInvocation_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -550,7 +578,8 @@ builder.Services.AddAuthorization(options =>
     [Fact]
     public async Task ConfigureAction_IsNotAnonymousFunction_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -577,7 +606,8 @@ public static class Helper
     [Fact]
     public async Task ConfigureAction_AuthorizationOptionsPassedToMethodCall_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -604,7 +634,8 @@ public static class Helper
     [Fact]
     public async Task ConfigureAction_ContainsOperationsNotRelatedToAuthorizationOptions_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -629,10 +660,11 @@ builder.Services.AddAuthorization(options =>
     public async Task NestedAddAuthorization_UsingBlockBody_FixedWithAddAuthorizationBuilder()
     {
         var diagnostic = new DiagnosticResult(DiagnosticDescriptors.UseAddAuthorizationBuilder)
-           .WithLocation(0)
-           .WithMessage(Resources.Analyzer_UseAddAuthorizationBuilder_Message);
+            .WithLocation(0)
+            .WithMessage(Resources.Analyzer_UseAddAuthorizationBuilder_Message);
 
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -650,7 +682,8 @@ var builder = new HostBuilder()
     });
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -673,10 +706,11 @@ var builder = new HostBuilder()
     public async Task NestedAddAuthorization_UsingExpressionBody_FixedWithAddAuthorizationBuilder()
     {
         var diagnostic = new DiagnosticResult(DiagnosticDescriptors.UseAddAuthorizationBuilder)
-           .WithLocation(0)
-           .WithMessage(Resources.Analyzer_UseAddAuthorizationBuilder_Message);
+            .WithLocation(0)
+            .WithMessage(Resources.Analyzer_UseAddAuthorizationBuilder_Message);
 
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -690,7 +724,8 @@ var builder = new HostBuilder()
     });
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -710,7 +745,8 @@ var builder = new HostBuilder()
     [Fact]
     public async Task AddAuthorization_CallAssignedToVariable_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -725,22 +761,39 @@ var services = builder.Services.AddAuthorization(options =>
         await VerifyNoCodeFix(source);
     }
 
-    private static async Task VerifyCodeFix(string source, DiagnosticResult[] diagnostics, string fixedSource)
+    private static async Task VerifyCodeFix(
+        string source,
+        DiagnosticResult[] diagnostics,
+        string fixedSource
+    )
     {
-        var fullSource = string.Join(Environment.NewLine, source, _testAuthorizationPolicyClassDeclaration);
-        var fullFixedSource = string.Join(Environment.NewLine, fixedSource, _testAuthorizationPolicyClassDeclaration);
+        var fullSource = string.Join(
+            Environment.NewLine,
+            source,
+            _testAuthorizationPolicyClassDeclaration
+        );
+        var fullFixedSource = string.Join(
+            Environment.NewLine,
+            fixedSource,
+            _testAuthorizationPolicyClassDeclaration
+        );
 
         await VerifyCS.VerifyCodeFixAsync(fullSource, diagnostics, fullFixedSource);
     }
 
     private static async Task VerifyNoCodeFix(string source)
     {
-        var fullSource = string.Join(Environment.NewLine, source, _testAuthorizationPolicyClassDeclaration);
+        var fullSource = string.Join(
+            Environment.NewLine,
+            source,
+            _testAuthorizationPolicyClassDeclaration
+        );
 
         await VerifyCS.VerifyCodeFixAsync(fullSource, Array.Empty<DiagnosticResult>(), fullSource);
     }
 
-    private const string _testAuthorizationPolicyClassDeclaration = @"
+    private const string _testAuthorizationPolicyClassDeclaration =
+        @"
 public class MinimumAgeRequirement: IAuthorizationRequirement
 {
     public int Age { get; }

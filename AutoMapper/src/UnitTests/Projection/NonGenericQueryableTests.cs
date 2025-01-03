@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class NonGenericQueryableTests
 {
     private MapperConfiguration _config;
@@ -15,11 +16,25 @@ public class NonGenericQueryableTests
     [Fact]
     public void CanMapNonGenericQueryable()
     {
-        var movies =
-            new List<Movie>() {
-            new Movie() { Actors = new Actor[] { new Actor() { Name = "Actor 1" }, new Actor() { Name = "Actor 2" } } },
-            new Movie() { Actors = new Actor[] { new Actor() { Name = "Actor 3" }, new Actor() { Name = "Actor 4" } } }
-            }.AsQueryable();
+        var movies = new List<Movie>()
+        {
+            new Movie()
+            {
+                Actors = new Actor[]
+                {
+                    new Actor() { Name = "Actor 1" },
+                    new Actor() { Name = "Actor 2" },
+                },
+            },
+            new Movie()
+            {
+                Actors = new Actor[]
+                {
+                    new Actor() { Name = "Actor 3" },
+                    new Actor() { Name = "Actor 4" },
+                },
+            },
+        }.AsQueryable();
 
         var mapped = movies.ProjectTo<MovieDto>(_config);
 

@@ -10,12 +10,11 @@ namespace System.ServiceModel.Discovery.VersionApril2005
     {
         public ByeOperationApril2005AsyncResult(
             IAnnouncementServiceImplementation announcementServiceImpl,
-            ByeMessageApril2005 message, 
-            AsyncCallback callback, 
-            object state)
-            : base(announcementServiceImpl, message, callback, state)
-        {
-        }
+            ByeMessageApril2005 message,
+            AsyncCallback callback,
+            object state
+        )
+            : base(announcementServiceImpl, message, callback, state) { }
 
         public static void End(IAsyncResult result)
         {
@@ -32,7 +31,9 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             return DiscoveryUtility.ToDiscoveryMessageSequenceOrNull(message.MessageSequence);
         }
 
-        protected override EndpointDiscoveryMetadata GetEndpointDiscoveryMetadata(ByeMessageApril2005 message)
+        protected override EndpointDiscoveryMetadata GetEndpointDiscoveryMetadata(
+            ByeMessageApril2005 message
+        )
         {
             return message.Bye.ToEndpointDiscoveryMetadata();
         }

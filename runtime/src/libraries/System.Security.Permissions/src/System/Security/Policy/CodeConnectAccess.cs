@@ -9,12 +9,30 @@ namespace System.Security.Policy
         public static readonly int DefaultPort;
         public static readonly int OriginPort;
         public static readonly string OriginScheme;
+
         public CodeConnectAccess(string allowScheme, int allowPort) { }
-        public int Port { get { return 0; } }
-        public string Scheme { get { return null; } }
-        public static CodeConnectAccess CreateAnySchemeAccess(int allowPort) { return default(CodeConnectAccess); }
-        public static CodeConnectAccess CreateOriginSchemeAccess(int allowPort) { return default(CodeConnectAccess); }
+
+        public int Port
+        {
+            get { return 0; }
+        }
+        public string Scheme
+        {
+            get { return null; }
+        }
+
+        public static CodeConnectAccess CreateAnySchemeAccess(int allowPort)
+        {
+            return default(CodeConnectAccess);
+        }
+
+        public static CodeConnectAccess CreateOriginSchemeAccess(int allowPort)
+        {
+            return default(CodeConnectAccess);
+        }
+
         public override bool Equals(object o) => base.Equals(o);
+
         public override int GetHashCode() => base.GetHashCode();
     }
 }

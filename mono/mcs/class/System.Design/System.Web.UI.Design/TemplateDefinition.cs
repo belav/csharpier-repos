@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,103 +33,111 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-	public class TemplateDefinition : DesignerObject
-	{		
-		[MonoNotSupported ("")]
-		public TemplateDefinition (ControlDesigner designer, string name, Object templatedObject, string templatePropertyName)
-			: base (designer, name)
-		{
-			throw new NotImplementedException ();
-		}
+    public class TemplateDefinition : DesignerObject
+    {
+        [MonoNotSupported("")]
+        public TemplateDefinition(
+            ControlDesigner designer,
+            string name,
+            Object templatedObject,
+            string templatePropertyName
+        )
+            : base(designer, name)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		public TemplateDefinition (ControlDesigner designer, string name, Object templatedObject, string templatePropertyName,
-					   bool serverControlsOnly)
-			: base (designer, name)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        public TemplateDefinition(
+            ControlDesigner designer,
+            string name,
+            Object templatedObject,
+            string templatePropertyName,
+            bool serverControlsOnly
+        )
+            : base(designer, name)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		public TemplateDefinition (ControlDesigner designer, string name, Object templatedObject, string templatePropertyName,
-					   Style style)
-			: base (designer, name)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        public TemplateDefinition(
+            ControlDesigner designer,
+            string name,
+            Object templatedObject,
+            string templatePropertyName,
+            Style style
+        )
+            : base(designer, name)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		public TemplateDefinition (ControlDesigner designer, string name, Object templatedObject, string templatePropertyName,
-					   Style style, bool serverControlsOnly)
-			: base (designer, name)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        public TemplateDefinition(
+            ControlDesigner designer,
+            string name,
+            Object templatedObject,
+            string templatePropertyName,
+            Style style,
+            bool serverControlsOnly
+        )
+            : base(designer, name)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		public virtual bool AllowEditing {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public virtual bool AllowEditing
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public virtual string Content {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
+        [MonoNotSupported("")]
+        public virtual string Content
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+            [MonoNotSupported("")]
+            set { throw new NotImplementedException(); }
+        }
 
-			[MonoNotSupported ("")]
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public bool ServerControlsOnly
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public bool ServerControlsOnly {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public Style Style
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public Style Style {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoNotSupported("")]
+        public bool SupportsDataBinding
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+            [MonoNotSupported("")]
+            set { throw new NotImplementedException(); }
+        }
 
-		[MonoNotSupported ("")]
-		public bool SupportsDataBinding {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
+        [MonoNotSupported("")]
+        public object TemplatedObject
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-			[MonoNotSupported ("")]
-			set {
-				throw new NotImplementedException ();
-			}
-		}
-
-		[MonoNotSupported ("")]
-		public object TemplatedObject {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-
-		[MonoNotSupported ("")]
-		public string TemplatePropertyName {
-			[MonoNotSupported ("")]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-	}
+        [MonoNotSupported("")]
+        public string TemplatePropertyName
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
+    }
 }

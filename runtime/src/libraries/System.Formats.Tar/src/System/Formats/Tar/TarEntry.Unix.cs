@@ -14,21 +14,40 @@ namespace System.Formats.Tar
         private void ExtractAsBlockDevice(string destinationFileName)
         {
             Debug.Assert(EntryType is TarEntryType.BlockDevice);
-            Interop.CheckIo(Interop.Sys.CreateBlockDevice(destinationFileName, (uint)Mode, (uint)_header._devMajor, (uint)_header._devMinor), destinationFileName);
+            Interop.CheckIo(
+                Interop.Sys.CreateBlockDevice(
+                    destinationFileName,
+                    (uint)Mode,
+                    (uint)_header._devMajor,
+                    (uint)_header._devMinor
+                ),
+                destinationFileName
+            );
         }
 
         // Unix specific implementation of the method that extracts the current entry as a character device.
         private void ExtractAsCharacterDevice(string destinationFileName)
         {
             Debug.Assert(EntryType is TarEntryType.CharacterDevice);
-            Interop.CheckIo(Interop.Sys.CreateCharacterDevice(destinationFileName, (uint)Mode, (uint)_header._devMajor, (uint)_header._devMinor), destinationFileName);
+            Interop.CheckIo(
+                Interop.Sys.CreateCharacterDevice(
+                    destinationFileName,
+                    (uint)Mode,
+                    (uint)_header._devMajor,
+                    (uint)_header._devMinor
+                ),
+                destinationFileName
+            );
         }
 
         // Unix specific implementation of the method that extracts the current entry as a fifo file.
         private void ExtractAsFifo(string destinationFileName)
         {
             Debug.Assert(EntryType is TarEntryType.Fifo);
-            Interop.CheckIo(Interop.Sys.MkFifo(destinationFileName, (uint)Mode), destinationFileName);
+            Interop.CheckIo(
+                Interop.Sys.MkFifo(destinationFileName, (uint)Mode),
+                destinationFileName
+            );
         }
 
         // Unix specific implementation of the method that extracts the current entry as a hard link.

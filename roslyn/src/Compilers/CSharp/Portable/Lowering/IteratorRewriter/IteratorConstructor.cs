@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// The constructor of the class that is the translation of an iterator method.
     /// </summary>
-    internal sealed class IteratorConstructor : SynthesizedInstanceConstructor, ISynthesizedMethodBodyImplementationSymbol
+    internal sealed class IteratorConstructor
+        : SynthesizedInstanceConstructor,
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly ImmutableArray<ParameterSymbol> _parameters;
 
@@ -25,15 +27,30 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var intType = container.DeclaringCompilation.GetSpecialType(SpecialType.System_Int32);
             _parameters = ImmutableArray.Create<ParameterSymbol>(
-                SynthesizedParameterSymbol.Create(this, TypeWithAnnotations.Create(intType), 0, RefKind.None, GeneratedNames.MakeStateMachineStateFieldName()));
+                SynthesizedParameterSymbol.Create(
+                    this,
+                    TypeWithAnnotations.Create(intType),
+                    0,
+                    RefKind.None,
+                    GeneratedNames.MakeStateMachineStateFieldName()
+                )
+            );
         }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             var compilation = this.DeclaringCompilation;
-            AddSynthesizedAttribute(ref attributes, compilation.TrySynthesizeAttribute(WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor));
+            AddSynthesizedAttribute(
+                ref attributes,
+                compilation.TrySynthesizeAttribute(
+                    WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor
+                )
+            );
         }
 
         public override ImmutableArray<ParameterSymbol> Parameters
@@ -48,7 +65,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         IMethodSymbolInternal ISynthesizedMethodBodyImplementationSymbol.Method
         {
-            get { return ((ISynthesizedMethodBodyImplementationSymbol)this.ContainingSymbol).Method; }
+            get
+            {
+                return ((ISynthesizedMethodBodyImplementationSymbol)this.ContainingSymbol).Method;
+            }
         }
 
         bool ISynthesizedMethodBodyImplementationSymbol.HasMethodBodyDependency

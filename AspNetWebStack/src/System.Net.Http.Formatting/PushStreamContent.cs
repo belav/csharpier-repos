@@ -30,9 +30,7 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="onStreamAvailable">The action to call when an output stream is available.</param>
         public PushStreamContent(Action<Stream, HttpContent, TransportContext> onStreamAvailable)
-            : this(Taskify(onStreamAvailable), (MediaTypeHeaderValue)null)
-        {
-        }
+            : this(Taskify(onStreamAvailable), (MediaTypeHeaderValue)null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class.
@@ -40,20 +38,21 @@ namespace System.Net.Http
         /// <param name="onStreamAvailable">The action to call when an output stream is available. When the
         /// output stream is closed or disposed, it will signal to the content that it has completed and the
         /// HTTP request or response will be completed.</param>
-        public PushStreamContent(Func<Stream, HttpContent, TransportContext, Task> onStreamAvailable)
-            : this(onStreamAvailable, (MediaTypeHeaderValue)null)
-        {
-        }
+        public PushStreamContent(
+            Func<Stream, HttpContent, TransportContext, Task> onStreamAvailable
+        )
+            : this(onStreamAvailable, (MediaTypeHeaderValue)null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class with the given media type.
         /// </summary>
         /// <param name="onStreamAvailable">The action to call when an output stream is available.</param>
         /// <param name="mediaType">The value of the Content-Type content header on an HTTP response.</param>
-        public PushStreamContent(Action<Stream, HttpContent, TransportContext> onStreamAvailable, string mediaType)
-            : this(Taskify(onStreamAvailable), new MediaTypeHeaderValue(mediaType))
-        {
-        }
+        public PushStreamContent(
+            Action<Stream, HttpContent, TransportContext> onStreamAvailable,
+            string mediaType
+        )
+            : this(Taskify(onStreamAvailable), new MediaTypeHeaderValue(mediaType)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class with the given media type.
@@ -62,20 +61,22 @@ namespace System.Net.Http
         /// output stream is closed or disposed, it will signal to the content that it has completed and the
         /// HTTP request or response will be completed.</param>
         /// <param name="mediaType">The value of the Content-Type content header on an HTTP response.</param>
-        public PushStreamContent(Func<Stream, HttpContent, TransportContext, Task> onStreamAvailable, string mediaType)
-            : this(onStreamAvailable, new MediaTypeHeaderValue(mediaType))
-        {
-        }
+        public PushStreamContent(
+            Func<Stream, HttpContent, TransportContext, Task> onStreamAvailable,
+            string mediaType
+        )
+            : this(onStreamAvailable, new MediaTypeHeaderValue(mediaType)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class with the given <see cref="MediaTypeHeaderValue"/>.
         /// </summary>
         /// <param name="onStreamAvailable">The action to call when an output stream is available.</param>
         /// <param name="mediaType">The value of the Content-Type content header on an HTTP response.</param>
-        public PushStreamContent(Action<Stream, HttpContent, TransportContext> onStreamAvailable, MediaTypeHeaderValue mediaType)
-            : this(Taskify(onStreamAvailable), mediaType)
-        {
-        }
+        public PushStreamContent(
+            Action<Stream, HttpContent, TransportContext> onStreamAvailable,
+            MediaTypeHeaderValue mediaType
+        )
+            : this(Taskify(onStreamAvailable), mediaType) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class with the given <see cref="MediaTypeHeaderValue"/>.
@@ -84,7 +85,10 @@ namespace System.Net.Http
         /// output stream is closed or disposed, it will signal to the content that it has completed and the
         /// HTTP request or response will be completed.</param>
         /// <param name="mediaType">The value of the Content-Type content header on an HTTP response.</param>
-        public PushStreamContent(Func<Stream, HttpContent, TransportContext, Task> onStreamAvailable, MediaTypeHeaderValue mediaType)
+        public PushStreamContent(
+            Func<Stream, HttpContent, TransportContext, Task> onStreamAvailable,
+            MediaTypeHeaderValue mediaType
+        )
         {
             if (onStreamAvailable == null)
             {
@@ -96,7 +100,8 @@ namespace System.Net.Http
         }
 
         private static Func<Stream, HttpContent, TransportContext, Task> Taskify(
-            Action<Stream, HttpContent, TransportContext> onStreamAvailable)
+            Action<Stream, HttpContent, TransportContext> onStreamAvailable
+        )
         {
             if (onStreamAvailable == null)
             {
@@ -118,8 +123,15 @@ namespace System.Net.Http
         /// <param name="stream">The <see cref="Stream"/> to which to write.</param>
         /// <param name="context">The associated <see cref="TransportContext"/>.</param>
         /// <returns>A <see cref="Task"/> instance that is asynchronously serializing the object's content.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is passed as task result.")]
-        protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exception is passed as task result."
+        )]
+        protected override async Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext context
+        )
         {
             TaskCompletionSource<bool> serializeToStreamTask = new TaskCompletionSource<bool>();
 
@@ -146,7 +158,10 @@ namespace System.Net.Http
         {
             private TaskCompletionSource<bool> _serializeToStreamTask;
 
-            public CompleteTaskOnCloseStream(Stream innerStream, TaskCompletionSource<bool> serializeToStreamTask)
+            public CompleteTaskOnCloseStream(
+                Stream innerStream,
+                TaskCompletionSource<bool> serializeToStreamTask
+            )
                 : base(innerStream)
             {
                 Contract.Assert(serializeToStreamTask != null);
@@ -157,7 +172,8 @@ namespace System.Net.Http
             [SuppressMessage(
                 "Microsoft.Usage",
                 "CA2215:Dispose methods should call base class dispose",
-                Justification = "See comments, this is intentional.")]
+                Justification = "See comments, this is intentional."
+            )]
             protected override void Dispose(bool disposing)
             {
                 // We don't dispose the underlying stream because we don't own it. Dispose in this case just signifies

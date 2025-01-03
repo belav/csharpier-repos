@@ -24,7 +24,8 @@ internal static class AttributeMatcher
         TagHelperContext context,
         ModeAttributes<TMode>[] modeInfos,
         Func<TMode, TMode, int> compare,
-        out TMode result)
+        out TMode result
+    )
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(modeInfos);
@@ -41,9 +42,11 @@ internal static class AttributeMatcher
         {
             var requiredAttributes = modeInfo.Attributes;
             // If there are fewer attributes present than required, one or more of them must be missing.
-            if (allAttributesCount >= requiredAttributes.Length &&
-                !HasMissingAttributes(allAttributes, requiredAttributes) &&
-                compare(result, modeInfo.Mode) <= 0)
+            if (
+                allAttributesCount >= requiredAttributes.Length
+                && !HasMissingAttributes(allAttributes, requiredAttributes)
+                && compare(result, modeInfo.Mode) <= 0
+            )
             {
                 foundResult = true;
                 result = modeInfo.Mode;
@@ -53,7 +56,10 @@ internal static class AttributeMatcher
         return foundResult;
     }
 
-    private static bool HasMissingAttributes(ReadOnlyTagHelperAttributeList allAttributes, string[] requiredAttributes)
+    private static bool HasMissingAttributes(
+        ReadOnlyTagHelperAttributeList allAttributes,
+        string[] requiredAttributes
+    )
     {
         // Check for all attribute values
         // Perf: Avoid allocating enumerator

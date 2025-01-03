@@ -31,9 +31,8 @@ namespace System.ComponentModel
         /// Basic constructor that creates a property tab attribute that will create a tab
         /// of the specified type.
         /// </summary>
-        public PropertyTabAttribute(Type tabClass) : this(tabClass, PropertyTabScope.Component)
-        {
-        }
+        public PropertyTabAttribute(Type tabClass)
+            : this(tabClass, PropertyTabScope.Component) { }
 
         /// <summary>
         /// Basic constructor that creates a property tab attribute that will create a tab
@@ -41,10 +40,12 @@ namespace System.ComponentModel
         /// </summary>
         public PropertyTabAttribute(
             // Using PublicParameterlessConstructor to preserve the type. See https://github.com/mono/linker/issues/1878
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] string tabClassName)
-            : this(tabClassName, PropertyTabScope.Component)
-        {
-        }
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                string tabClassName
+        )
+            : this(tabClassName, PropertyTabScope.Component) { }
 
         /// <summary>
         /// Basic constructor that creates a property tab attribute that will create a tab
@@ -55,7 +56,10 @@ namespace System.ComponentModel
             _tabClasses = new Type[] { tabClass };
             if (tabScope < PropertyTabScope.Document)
             {
-                throw new ArgumentException(SR.PropertyTabAttributeBadPropertyTabScope, nameof(tabScope));
+                throw new ArgumentException(
+                    SR.PropertyTabAttributeBadPropertyTabScope,
+                    nameof(tabScope)
+                );
             }
             TabScopes = new PropertyTabScope[] { tabScope };
         }
@@ -66,13 +70,20 @@ namespace System.ComponentModel
         /// </summary>
         public PropertyTabAttribute(
             // Using PublicParameterlessConstructor to preserve the type. See https://github.com/mono/linker/issues/1878
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] string tabClassName,
-            PropertyTabScope tabScope)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                string tabClassName,
+            PropertyTabScope tabScope
+        )
         {
             _tabClassNames = new string[] { tabClassName };
             if (tabScope < PropertyTabScope.Document)
             {
-                throw new ArgumentException(SR.PropertyTabAttributeBadPropertyTabScope, nameof(tabScope));
+                throw new ArgumentException(
+                    SR.PropertyTabAttributeBadPropertyTabScope,
+                    nameof(tabScope)
+                );
             }
             TabScopes = new PropertyTabScope[] { tabScope };
         }
@@ -92,10 +103,16 @@ namespace System.ComponentModel
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The APIs that specify _tabClassNames are either marked with DynamicallyAccessedMembers or RequiresUnreferencedCode.")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2057:TypeGetType",
-            Justification = "The APIs that specify _tabClassNames are either marked with DynamicallyAccessedMembers or RequiresUnreferencedCode.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The APIs that specify _tabClassNames are either marked with DynamicallyAccessedMembers or RequiresUnreferencedCode."
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2057:TypeGetType",
+            Justification = "The APIs that specify _tabClassNames are either marked with DynamicallyAccessedMembers or RequiresUnreferencedCode."
+        )]
         [MemberNotNull(nameof(_tabClasses))]
         private void InitializeTabClasses()
         {
@@ -131,7 +148,9 @@ namespace System.ComponentModel
                     }
                     else
                     {
-                        throw new TypeLoadException(SR.Format(SR.PropertyTabAttributeTypeLoadException, className));
+                        throw new TypeLoadException(
+                            SR.Format(SR.PropertyTabAttributeTypeLoadException, className)
+                        );
                     }
                 }
             }
@@ -144,8 +163,8 @@ namespace System.ComponentModel
         /// </summary>
         public PropertyTabScope[] TabScopes { get; private set; }
 
-        public override bool Equals([NotNullWhen(true)] object? other)
-            => Equals(other as PropertyTabAttribute);
+        public override bool Equals([NotNullWhen(true)] object? other) =>
+            Equals(other as PropertyTabAttribute);
 
         public bool Equals([NotNullWhen(true)] PropertyTabAttribute? other)
         {
@@ -155,7 +174,10 @@ namespace System.ComponentModel
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (other.TabClasses.Length != TabClasses.Length || other.TabScopes.Length != TabScopes.Length)
+            if (
+                other.TabClasses.Length != TabClasses.Length
+                || other.TabScopes.Length != TabScopes.Length
+            )
                 return false;
 
             for (int i = 0; i < TabClasses.Length; i++)
@@ -189,7 +211,11 @@ namespace System.ComponentModel
             InitializeArrays(null, tabClasses, tabScopes);
         }
 
-        private void InitializeArrays(string[]? tabClassNames, Type[]? tabClasses, PropertyTabScope[]? tabScopes)
+        private void InitializeArrays(
+            string[]? tabClassNames,
+            Type[]? tabClasses,
+            PropertyTabScope[]? tabScopes
+        )
         {
             if (tabClasses != null)
             {

@@ -6,7 +6,7 @@ namespace System.IdentityModel
 {
     using System.IdentityModel.Diagnostics;
     using System.Xml;
-    
+
     internal class EncryptionMethodElement
     {
         private string _algorithm;
@@ -24,31 +24,39 @@ namespace System.IdentityModel
             set { _parameters = value; }
         }
 
-        public void ReadXml( XmlDictionaryReader reader )
+        public void ReadXml(XmlDictionaryReader reader)
         {
-            if ( reader == null )
+            if (reader == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "reader" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
             reader.MoveToContent();
-            if ( !reader.IsStartElement( XmlEncryptionConstants.Elements.EncryptionMethod, XmlEncryptionConstants.Namespace ) )
+            if (
+                !reader.IsStartElement(
+                    XmlEncryptionConstants.Elements.EncryptionMethod,
+                    XmlEncryptionConstants.Namespace
+                )
+            )
             {
                 return;
             }
 
-            _algorithm = reader.GetAttribute( XmlEncryptionConstants.Attributes.Algorithm, null );
+            _algorithm = reader.GetAttribute(XmlEncryptionConstants.Attributes.Algorithm, null);
 
-            if ( !reader.IsEmptyElement )
+            if (!reader.IsEmptyElement)
             {
                 //
                 // Trace unread missing element
                 //
 
                 string xml = reader.ReadOuterXml();
-                if ( DiagnosticUtility.ShouldTraceWarning )
+                if (DiagnosticUtility.ShouldTraceWarning)
                 {
-                    TraceUtility.TraceString( System.Diagnostics.TraceEventType.Warning, SR.GetString( SR.ID8024, reader.Name, reader.NamespaceURI, xml ) );
+                    TraceUtility.TraceString(
+                        System.Diagnostics.TraceEventType.Warning,
+                        SR.GetString(SR.ID8024, reader.Name, reader.NamespaceURI, xml)
+                    );
                 }
             }
             else
@@ -60,16 +68,23 @@ namespace System.IdentityModel
             }
         }
 
-        public void WriteXml( XmlWriter writer )
+        public void WriteXml(XmlWriter writer)
         {
-            writer.WriteStartElement( XmlEncryptionConstants.Prefix, XmlEncryptionConstants.Elements.EncryptionMethod, XmlEncryptionConstants.Namespace );
+            writer.WriteStartElement(
+                XmlEncryptionConstants.Prefix,
+                XmlEncryptionConstants.Elements.EncryptionMethod,
+                XmlEncryptionConstants.Namespace
+            );
 
-            writer.WriteAttributeString( XmlEncryptionConstants.Attributes.Algorithm, null, _algorithm );
+            writer.WriteAttributeString(
+                XmlEncryptionConstants.Attributes.Algorithm,
+                null,
+                _algorithm
+            );
 
             // <EncryptionMethod>
 
-            writer.WriteEndElement(); 
+            writer.WriteEndElement();
         }
-
     }
 }

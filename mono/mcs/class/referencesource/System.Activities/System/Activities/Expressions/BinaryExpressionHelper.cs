@@ -12,23 +12,38 @@ namespace System.Activities.Expressions
 
     static class BinaryExpressionHelper
     {
-        public static void OnGetArguments<TLeft, TRight>(CodeActivityMetadata metadata, InArgument<TLeft> left, InArgument<TRight> right)
+        public static void OnGetArguments<TLeft, TRight>(
+            CodeActivityMetadata metadata,
+            InArgument<TLeft> left,
+            InArgument<TRight> right
+        )
         {
-            RuntimeArgument rightArgument = new RuntimeArgument("Right", typeof(TRight), ArgumentDirection.In, true);
+            RuntimeArgument rightArgument = new RuntimeArgument(
+                "Right",
+                typeof(TRight),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(right, rightArgument);
 
-            RuntimeArgument leftArgument = new RuntimeArgument("Left", typeof(TLeft), ArgumentDirection.In, true);
+            RuntimeArgument leftArgument = new RuntimeArgument(
+                "Left",
+                typeof(TLeft),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(left, leftArgument);
 
             metadata.SetArgumentsCollection(
-                new Collection<RuntimeArgument>
-                {
-                    rightArgument,
-                    leftArgument
-                });
+                new Collection<RuntimeArgument> { rightArgument, leftArgument }
+            );
         }
 
-        public static bool TryGenerateLinqDelegate<TLeft, TRight, TResult>(ExpressionType operatorType, out Func<TLeft, TRight, TResult> function, out ValidationError validationError)
+        public static bool TryGenerateLinqDelegate<TLeft, TRight, TResult>(
+            ExpressionType operatorType,
+            out Func<TLeft, TRight, TResult> function,
+            out ValidationError validationError
+        )
         {
             function = null;
             validationError = null;
@@ -38,10 +53,20 @@ namespace System.Activities.Expressions
 
             try
             {
-                BinaryExpression binaryExpression = Expression.MakeBinary(operatorType, leftParameter, rightParameter);
+                BinaryExpression binaryExpression = Expression.MakeBinary(
+                    operatorType,
+                    leftParameter,
+                    rightParameter
+                );
 
-                Expression expressionToCompile = OperatorPermissionHelper.InjectReflectionPermissionIfNecessary(binaryExpression.Method, binaryExpression);
-                Expression<Func<TLeft, TRight, TResult>> lambdaExpression = Expression.Lambda<Func<TLeft, TRight, TResult>>(expressionToCompile, leftParameter, rightParameter);
+                Expression expressionToCompile =
+                    OperatorPermissionHelper.InjectReflectionPermissionIfNecessary(
+                        binaryExpression.Method,
+                        binaryExpression
+                    );
+                Expression<Func<TLeft, TRight, TResult>> lambdaExpression = Expression.Lambda<
+                    Func<TLeft, TRight, TResult>
+                >(expressionToCompile, leftParameter, rightParameter);
                 function = lambdaExpression.Compile();
 
                 return true;
@@ -58,5 +83,4 @@ namespace System.Activities.Expressions
             }
         }
     }
-
 }

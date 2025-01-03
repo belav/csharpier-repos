@@ -568,12 +568,17 @@ public class CachedExpressionCompilerTest
             {
                 ValueTypeModel = new ValueType1
                 {
-                    TestModel = new TestModel { DifferentModel = new DifferentModel { Name = expected } }
-                }
-            }
+                    TestModel = new TestModel
+                    {
+                        DifferentModel = new DifferentModel { Name = expected },
+                    },
+                },
+            },
         };
 
-        var expression = GetExpression<Chain0Model, string>(m => m.Chain1.ValueTypeModel.TestModel.DifferentModel.Name);
+        var expression = GetExpression<Chain0Model, string>(m =>
+            m.Chain1.ValueTypeModel.TestModel.DifferentModel.Name
+        );
 
         // Act
         var func = CachedExpressionCompiler.Process(expression);
@@ -590,13 +595,12 @@ public class CachedExpressionCompilerTest
         // Arrange
         var model = new Chain0Model
         {
-            Chain1 = new Chain1Model
-            {
-                ValueTypeModel = new ValueType1 { TestModel = null },
-            }
+            Chain1 = new Chain1Model { ValueTypeModel = new ValueType1 { TestModel = null } },
         };
 
-        var expression = GetExpression<Chain0Model, string>(m => m.Chain1.ValueTypeModel.TestModel.DifferentModel.Name);
+        var expression = GetExpression<Chain0Model, string>(m =>
+            m.Chain1.ValueTypeModel.TestModel.DifferentModel.Name
+        );
 
         // Act
         var func = CachedExpressionCompiler.Process(expression);
@@ -612,12 +616,11 @@ public class CachedExpressionCompilerTest
     {
         // Arrange
         // Chain2 is a value type
-        var model = new Chain0Model
-        {
-            Chain1 = null
-        };
+        var model = new Chain0Model { Chain1 = null };
 
-        var expression = GetExpression<Chain0Model, string>(m => m.Chain1.ValueTypeModel.TestModel.DifferentModel.Name);
+        var expression = GetExpression<Chain0Model, string>(m =>
+            m.Chain1.ValueTypeModel.TestModel.DifferentModel.Name
+        );
 
         // Act
         var func = CachedExpressionCompiler.Process(expression);
@@ -639,12 +642,17 @@ public class CachedExpressionCompilerTest
             {
                 NullableValueTypeModel = new ValueType1
                 {
-                    TestModel = new TestModel { DifferentModel = new DifferentModel { Name = expected } }
-                }
-            }
+                    TestModel = new TestModel
+                    {
+                        DifferentModel = new DifferentModel { Name = expected },
+                    },
+                },
+            },
         };
 
-        var expression = GetExpression<Chain0Model, string>(m => m.Chain1.NullableValueTypeModel.Value.TestModel.DifferentModel.Name);
+        var expression = GetExpression<Chain0Model, string>(m =>
+            m.Chain1.NullableValueTypeModel.Value.TestModel.DifferentModel.Name
+        );
 
         // Act
         var func = CachedExpressionCompiler.Process(expression);
@@ -659,15 +667,11 @@ public class CachedExpressionCompilerTest
     public void Process_ChainedMemberAccess_LongChain_WithNullValuedNullableValueType()
     {
         // Arrange
-        var model = new Chain0Model
-        {
-            Chain1 = new Chain1Model
-            {
-                NullableValueTypeModel = null
-            }
-        };
+        var model = new Chain0Model { Chain1 = new Chain1Model { NullableValueTypeModel = null } };
 
-        var expression = GetExpression<Chain0Model, string>(m => m.Chain1.NullableValueTypeModel.Value.TestModel.DifferentModel.Name);
+        var expression = GetExpression<Chain0Model, string>(m =>
+            m.Chain1.NullableValueTypeModel.Value.TestModel.DifferentModel.Name
+        );
 
         // Act
         var func = CachedExpressionCompiler.Process(expression);
@@ -715,10 +719,7 @@ public class CachedExpressionCompilerTest
     {
         // Arrange
         var expected = "TestName";
-        var model = new ValueType1
-        {
-            ValueType2 = new ValueType2 { Name = expected },
-        };
+        var model = new ValueType1 { ValueType2 = new ValueType2 { Name = expected } };
         var expression = GetExpression<ValueType1, string>(m => m.ValueType2.Name);
 
         // Act
@@ -735,10 +736,7 @@ public class CachedExpressionCompilerTest
     {
         // Arrange
         var expected = new DateTime(2001, 1, 1);
-        var model = new ValueType1
-        {
-            ValueType2 = new ValueType2 { Date = expected },
-        };
+        var model = new ValueType1 { ValueType2 = new ValueType2 { Date = expected } };
         var expression = GetExpression<ValueType1, DateTime>(m => m.ValueType2.Date);
 
         // Act
@@ -755,10 +753,7 @@ public class CachedExpressionCompilerTest
     {
         // Arrange
         var expected = "TestName";
-        var model = new ValueType1
-        {
-            NullableValueType2 = new ValueType2 { Name = expected },
-        };
+        var model = new ValueType1 { NullableValueType2 = new ValueType2 { Name = expected } };
         var expression = GetExpression<ValueType1, string>(m => m.NullableValueType2.Value.Name);
 
         // Act
@@ -869,7 +864,10 @@ public class CachedExpressionCompilerTest
     {
         // Arrange
         var expected = "SomeName";
-        var model = new TestModel { DifferentModels = new[] { new DifferentModel { Name = expected } } };
+        var model = new TestModel
+        {
+            DifferentModels = new[] { new DifferentModel { Name = expected } },
+        };
         var expression = GetTestModelExpression(m => m.DifferentModels[0].Name);
 
         // Act
@@ -892,11 +890,13 @@ public class CachedExpressionCompilerTest
         Assert.Null(func);
     }
 
-    private static Expression<Func<TModel, TResult>> GetExpression<TModel, TResult>(Expression<Func<TModel, TResult>> expression)
-        => expression;
+    private static Expression<Func<TModel, TResult>> GetExpression<TModel, TResult>(
+        Expression<Func<TModel, TResult>> expression
+    ) => expression;
 
-    private static Expression<Func<TestModel, TResult>> GetTestModelExpression<TResult>(Expression<Func<TestModel, TResult>> expression)
-        => GetExpression(expression);
+    private static Expression<Func<TestModel, TResult>> GetTestModelExpression<TResult>(
+        Expression<Func<TestModel, TResult>> expression
+    ) => GetExpression(expression);
 
     public class TestModel
     {

@@ -26,59 +26,58 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Reflection;
 using System.ComponentModel.Design;
+using System.Reflection;
 
 namespace System.Resources
 {
-	sealed class AssemblyNamesTypeResolutionService : ITypeResolutionService
-	{
-		public AssemblyNamesTypeResolutionService (AssemblyName[] names)
-		{
+    sealed class AssemblyNamesTypeResolutionService : ITypeResolutionService
+    {
+        public AssemblyNamesTypeResolutionService(AssemblyName[] names) { }
 
-		}
+        #region ITypeResolutionService implementation
 
-		#region ITypeResolutionService implementation
+        public Assembly GetAssembly(AssemblyName name)
+        {
+            return GetAssembly(name, true);
+        }
 
-		public Assembly GetAssembly (AssemblyName name)
-		{
-			return GetAssembly (name, true);
-		}
+        public Assembly GetAssembly(AssemblyName name, bool throwOnError)
+        {
+            throw new NotImplementedException();
+        }
 
-		public Assembly GetAssembly (AssemblyName name, bool throwOnError)
-		{
-			throw new NotImplementedException ();
-		}
+        public Type GetType(string name)
+        {
+            return GetType(name, true);
+        }
 
-		public Type GetType (string name)
-		{
-			return GetType (name, true);
-		}
+        public Type GetType(string name, bool throwOnError)
+        {
+            return GetType(name, throwOnError, false);
+        }
 
-		public Type GetType (string name, bool throwOnError)
-		{
-			return GetType (name, throwOnError, false);
-		}
+        public Type GetType(string name, bool throwOnError, bool ignoreCase)
+        {
+            var type = Type.GetType(name, false, ignoreCase);
+            if (type == null && throwOnError)
+                throw new ArgumentException(
+                    string.Format("Could not find a type for a name. The type name was `{0}'", name)
+                );
 
-		public Type GetType (string name, bool throwOnError, bool ignoreCase)
-		{
-			var type = Type.GetType (name, false, ignoreCase);
-			if (type == null && throwOnError)
-				throw new ArgumentException (string.Format ("Could not find a type for a name. The type name was `{0}'", name));
+            return type;
+        }
 
-			return type;
-		}
+        public void ReferenceAssembly(AssemblyName name)
+        {
+            throw new NotImplementedException();
+        }
 
-		public void ReferenceAssembly (AssemblyName name)
-		{
-			throw new NotImplementedException ();
-		}
+        public string GetPathOfAssembly(AssemblyName name)
+        {
+            throw new NotImplementedException();
+        }
 
-		public string GetPathOfAssembly (AssemblyName name)
-		{
-			throw new NotImplementedException ();
-		}
-
-		#endregion
-	}
+        #endregion
+    }
 }

@@ -5,8 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Linq;
+using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -20,15 +20,8 @@ public class AppleAppBuilderTask : Task
     [Required]
     public string TargetOS
     {
-        get
-        {
-            return targetOS;
-        }
-
-        set
-        {
-            targetOS = value.ToLowerInvariant();
-        }
+        get { return targetOS; }
+        set { targetOS = value.ToLowerInvariant(); }
     }
 
     /// <summary>
@@ -196,30 +189,46 @@ public class AppleAppBuilderTask : Task
         if (UseNativeAOTRuntime)
         {
             if (!string.IsNullOrEmpty(MonoRuntimeHeaders))
-                throw new ArgumentException($"Property \"{nameof(MonoRuntimeHeaders)}\" is not supported with NativeAOT runtime and will be ignored.");
+                throw new ArgumentException(
+                    $"Property \"{nameof(MonoRuntimeHeaders)}\" is not supported with NativeAOT runtime and will be ignored."
+                );
 
             if (!string.IsNullOrEmpty(MainLibraryFileName))
-                throw new ArgumentException($"Property \"{nameof(MainLibraryFileName)}\" is not supported with NativeAOT runtime and will be ignored.");
+                throw new ArgumentException(
+                    $"Property \"{nameof(MainLibraryFileName)}\" is not supported with NativeAOT runtime and will be ignored."
+                );
 
             if (ForceInterpreter)
-                throw new ArgumentException($"Property \"{nameof(ForceInterpreter)}\" is not supported with NativeAOT runtime and will be ignored.");
+                throw new ArgumentException(
+                    $"Property \"{nameof(ForceInterpreter)}\" is not supported with NativeAOT runtime and will be ignored."
+                );
 
             if (ForceAOT)
-                throw new ArgumentException($"Property \"{nameof(ForceAOT)}\" is not supported with NativeAOT runtime and will be ignored.");
+                throw new ArgumentException(
+                    $"Property \"{nameof(ForceAOT)}\" is not supported with NativeAOT runtime and will be ignored."
+                );
 
             if (RuntimeComponents.Length > 0)
-                throw new ArgumentException($"Item \"{nameof(RuntimeComponents)}\" is not supported with NativeAOT runtime and will be ignored.");
+                throw new ArgumentException(
+                    $"Item \"{nameof(RuntimeComponents)}\" is not supported with NativeAOT runtime and will be ignored."
+                );
 
             if (!string.IsNullOrEmpty(DiagnosticPorts))
-                throw new ArgumentException($"Property \"{nameof(DiagnosticPorts)}\" is not supported with NativeAOT runtime and will be ignored.");
+                throw new ArgumentException(
+                    $"Property \"{nameof(DiagnosticPorts)}\" is not supported with NativeAOT runtime and will be ignored."
+                );
 
             if (EnableRuntimeLogging)
-                throw new ArgumentException($"Property \"{nameof(EnableRuntimeLogging)}\" is not supported with NativeAOT runtime and will be ignored.");
+                throw new ArgumentException(
+                    $"Property \"{nameof(EnableRuntimeLogging)}\" is not supported with NativeAOT runtime and will be ignored."
+                );
         }
         else
         {
             if (string.IsNullOrEmpty(MonoRuntimeHeaders))
-                throw new ArgumentException($"The \"{nameof(AppleAppBuilderTask)}\" task was not given a value for the required parameter \"{nameof(MonoRuntimeHeaders)}\" when using Mono runtime.");
+                throw new ArgumentException(
+                    $"The \"{nameof(AppleAppBuilderTask)}\" task was not given a value for the required parameter \"{nameof(MonoRuntimeHeaders)}\" when using Mono runtime."
+                );
         }
     }
 
@@ -234,7 +243,9 @@ public class AppleAppBuilderTask : Task
         {
             if (!File.Exists(Path.Combine(AppDir, MainLibraryFileName)))
             {
-                throw new ArgumentException($"MainLibraryFileName='{MainLibraryFileName}' was not found in AppDir='{AppDir}'");
+                throw new ArgumentException(
+                    $"MainLibraryFileName='{MainLibraryFileName}' was not found in AppDir='{AppDir}'"
+                );
             }
         }
 
@@ -288,20 +299,44 @@ public class AppleAppBuilderTask : Task
                 }
             }
 
-            if (!ForceInterpreter && (shouldStaticLink || ForceAOT) && (assemblerFiles.Count == 0 && !UseNativeAOTRuntime))
+            if (
+                !ForceInterpreter
+                && (shouldStaticLink || ForceAOT)
+                && (assemblerFiles.Count == 0 && !UseNativeAOTRuntime)
+            )
             {
-                throw new InvalidOperationException("Need list of AOT files for static linked builds.");
+                throw new InvalidOperationException(
+                    "Need list of AOT files for static linked builds."
+                );
             }
         }
 
-        if (!string.IsNullOrEmpty(DiagnosticPorts) && !Array.Exists(RuntimeComponents, runtimeComponent => string.Equals(runtimeComponent, "diagnostics_tracing", StringComparison.OrdinalIgnoreCase)))
+        if (
+            !string.IsNullOrEmpty(DiagnosticPorts)
+            && !Array.Exists(
+                RuntimeComponents,
+                runtimeComponent =>
+                    string.Equals(
+                        runtimeComponent,
+                        "diagnostics_tracing",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+            )
+        )
         {
-            throw new ArgumentException($"Using DiagnosticPorts requires diagnostics_tracing runtime component, which was not included in 'RuntimeComponents' item group. @RuntimeComponents: '{string.Join(", ", RuntimeComponents)}'");
+            throw new ArgumentException(
+                $"Using DiagnosticPorts requires diagnostics_tracing runtime component, which was not included in 'RuntimeComponents' item group. @RuntimeComponents: '{string.Join(", ", RuntimeComponents)}'"
+            );
         }
 
-        if (EnableAppSandbox && (string.IsNullOrEmpty(DevTeamProvisioning) || DevTeamProvisioning == "-"))
+        if (
+            EnableAppSandbox
+            && (string.IsNullOrEmpty(DevTeamProvisioning) || DevTeamProvisioning == "-")
+        )
         {
-            throw new ArgumentException("DevTeamProvisioning must be set to a valid value when App Sandbox is enabled, using '-' is not supported.");
+            throw new ArgumentException(
+                "DevTeamProvisioning must be set to a valid value when App Sandbox is enabled, using '-' is not supported."
+            );
         }
 
         foreach (var nativeDependency in NativeDependencies)
@@ -310,7 +345,7 @@ public class AppleAppBuilderTask : Task
         }
 
         List<string> extraLinkerArgs = new List<string>();
-        foreach(ITaskItem item in ExtraLinkerArguments)
+        foreach (ITaskItem item in ExtraLinkerArguments)
         {
             extraLinkerArgs.Add(item.ItemSpec);
         }
@@ -319,19 +354,50 @@ public class AppleAppBuilderTask : Task
 
         if (GenerateXcodeProject)
         {
-            XcodeProjectPath = generator.GenerateXCode(ProjectName, MainLibraryFileName, assemblerFiles, assemblerDataFiles, assemblerFilesToLink, extraLinkerArgs, excludes,
-                AppDir, binDir, MonoRuntimeHeaders, !shouldStaticLink, UseConsoleUITemplate, ForceAOT, ForceInterpreter, InvariantGlobalization, HybridGlobalization, Optimized, EnableRuntimeLogging, EnableAppSandbox, DiagnosticPorts, RuntimeComponents, NativeMainSource, UseNativeAOTRuntime, IsLibraryMode);
+            XcodeProjectPath = generator.GenerateXCode(
+                ProjectName,
+                MainLibraryFileName,
+                assemblerFiles,
+                assemblerDataFiles,
+                assemblerFilesToLink,
+                extraLinkerArgs,
+                excludes,
+                AppDir,
+                binDir,
+                MonoRuntimeHeaders,
+                !shouldStaticLink,
+                UseConsoleUITemplate,
+                ForceAOT,
+                ForceInterpreter,
+                InvariantGlobalization,
+                HybridGlobalization,
+                Optimized,
+                EnableRuntimeLogging,
+                EnableAppSandbox,
+                DiagnosticPorts,
+                RuntimeComponents,
+                NativeMainSource,
+                UseNativeAOTRuntime,
+                IsLibraryMode
+            );
 
             if (BuildAppBundle)
             {
                 if (isDevice && string.IsNullOrEmpty(DevTeamProvisioning))
                 {
                     // DevTeamProvisioning shouldn't be empty for arm64 builds
-                    Log.LogMessage(MessageImportance.High, "DevTeamProvisioning is not set, BuildAppBundle step is skipped.");
+                    Log.LogMessage(
+                        MessageImportance.High,
+                        "DevTeamProvisioning is not set, BuildAppBundle step is skipped."
+                    );
                 }
                 else
                 {
-                    string appDir = generator.BuildAppBundle(XcodeProjectPath, Optimized, DevTeamProvisioning);
+                    string appDir = generator.BuildAppBundle(
+                        XcodeProjectPath,
+                        Optimized,
+                        DevTeamProvisioning
+                    );
                     AppBundlePath = Xcode.GetAppPath(appDir, XcodeProjectPath);
 
                     if (StripSymbolTable)
@@ -345,8 +411,32 @@ public class AppleAppBuilderTask : Task
         }
         else if (GenerateCMakeProject)
         {
-             generator.GenerateCMake(ProjectName, MainLibraryFileName, assemblerFiles, assemblerDataFiles, assemblerFilesToLink, extraLinkerArgs, excludes,
-                AppDir, binDir, MonoRuntimeHeaders, !shouldStaticLink, UseConsoleUITemplate, ForceAOT, ForceInterpreter, InvariantGlobalization, HybridGlobalization, Optimized, EnableRuntimeLogging, EnableAppSandbox, DiagnosticPorts, RuntimeComponents, NativeMainSource, UseNativeAOTRuntime, IsLibraryMode);
+            generator.GenerateCMake(
+                ProjectName,
+                MainLibraryFileName,
+                assemblerFiles,
+                assemblerDataFiles,
+                assemblerFilesToLink,
+                extraLinkerArgs,
+                excludes,
+                AppDir,
+                binDir,
+                MonoRuntimeHeaders,
+                !shouldStaticLink,
+                UseConsoleUITemplate,
+                ForceAOT,
+                ForceInterpreter,
+                InvariantGlobalization,
+                HybridGlobalization,
+                Optimized,
+                EnableRuntimeLogging,
+                EnableAppSandbox,
+                DiagnosticPorts,
+                RuntimeComponents,
+                NativeMainSource,
+                UseNativeAOTRuntime,
+                IsLibraryMode
+            );
         }
 
         return true;

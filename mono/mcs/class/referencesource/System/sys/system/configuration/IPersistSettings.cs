@@ -1,17 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="IPersistComponentSettings.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     /// <devdoc>
-    ///     Components should implement this interface if they want to persist custom settings 
+    ///     Components should implement this interface if they want to persist custom settings
     ///     in a hosting application. This interface allows the application author to tell a control
     ///     whether to persist, when to load, save etc.
     /// </devdoc>
-    public interface IPersistComponentSettings {
-
+    public interface IPersistComponentSettings
+    {
         /// <devdoc>
         ///     Indicates to the implementor that settings should be persisted.
         /// </devdoc>
@@ -40,4 +41,3 @@ namespace System.Configuration {
         void ResetComponentSettings();
     }
 }
-

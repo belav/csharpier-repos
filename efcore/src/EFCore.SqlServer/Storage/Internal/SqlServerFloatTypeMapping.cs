@@ -31,15 +31,19 @@ public class SqlServerFloatTypeMapping : FloatTypeMapping
     public SqlServerFloatTypeMapping(
         string storeType,
         DbType? dbType = System.Data.DbType.Single,
-        StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision)
+        StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision
+    )
         : base(
             new RelationalTypeMappingParameters(
-                new CoreTypeMappingParameters(typeof(float), jsonValueReaderWriter: JsonFloatReaderWriter.Instance),
+                new CoreTypeMappingParameters(
+                    typeof(float),
+                    jsonValueReaderWriter: JsonFloatReaderWriter.Instance
+                ),
                 storeType,
                 storeTypePostfix,
-                dbType))
-    {
-    }
+                dbType
+            )
+        ) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,17 +52,15 @@ public class SqlServerFloatTypeMapping : FloatTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerFloatTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqlServerFloatTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqlServerFloatTypeMapping(parameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -66,8 +68,8 @@ public class SqlServerFloatTypeMapping : FloatTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override string GenerateNonNullSqlLiteral(object value)
-        => $"CAST({base.GenerateNonNullSqlLiteral(value)} AS {StoreType})";
+    protected override string GenerateNonNullSqlLiteral(object value) =>
+        $"CAST({base.GenerateNonNullSqlLiteral(value)} AS {StoreType})";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -79,8 +81,7 @@ public class SqlServerFloatTypeMapping : FloatTypeMapping
     {
         base.ConfigureParameter(parameter);
 
-        if (Precision.HasValue
-            && Precision.Value != -1)
+        if (Precision.HasValue && Precision.Value != -1)
         {
             // SqlClient wants this set as "size"
             parameter.Size = (byte)Precision.Value;

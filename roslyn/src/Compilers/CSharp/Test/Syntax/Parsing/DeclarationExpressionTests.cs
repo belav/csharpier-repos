@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
     [CompilerTrait(CompilerFeature.Tuples)]
     public class DeclarationExpressionTests : ParsingTests
     {
-        public DeclarationExpressionTests(ITestOutputHelper output) : base(output) { }
+        public DeclarationExpressionTests(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void NullaboutOutDeclaration()
@@ -137,14 +138,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact]
         public void NullableTypeTest_03()
         {
-            UsingStatement("if (e is int? x) {}",
+            UsingStatement(
+                "if (e is int? x) {}",
                 // (1,16): error CS1003: Syntax error, ':' expected
                 // if (e is int? x) {}
                 Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments(":").WithLocation(1, 16),
                 // (1,16): error CS1525: Invalid expression term ')'
                 // if (e is int? x) {}
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(1, 16)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(1, 16)
+            );
             N(SyntaxKind.IfStatement);
             {
                 N(SyntaxKind.IfKeyword);
@@ -799,11 +803,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact]
         public void NewForeach_08()
         {
-            UsingStatement("foreach (x in e) {}",
+            UsingStatement(
+                "foreach (x in e) {}",
                 // (1,12): error CS0230: Type and identifier are both required in a foreach statement
                 // foreach (x in e) {}
                 Diagnostic(ErrorCode.ERR_BadForeachDecl, "in").WithLocation(1, 12)
-                );
+            );
             N(SyntaxKind.ForEachVariableStatement);
             {
                 N(SyntaxKind.ForEachKeyword);
@@ -857,11 +862,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact]
         public void NewForeach_10()
         {
-            UsingStatement("foreach (a.b in e) {}",
+            UsingStatement(
+                "foreach (a.b in e) {}",
                 // (1,14): error CS0230: Type and identifier are both required in a foreach statement
                 // foreach (a.b in e) {}
                 Diagnostic(ErrorCode.ERR_BadForeachDecl, "in").WithLocation(1, 14)
-                );
+            );
             N(SyntaxKind.ForEachVariableStatement);
             {
                 N(SyntaxKind.ForEachKeyword);

@@ -13,68 +13,179 @@ namespace System.IO.Packaging
     {
         // Fields
         private static readonly ThreadSafeNameTable s_nameTable = new ThreadSafeNameTable();
-        private static readonly XmlStringTableStruct[] s_xmlstringtable = new XmlStringTableStruct[0x1b];
+        private static readonly XmlStringTableStruct[] s_xmlstringtable = new XmlStringTableStruct[
+            0x1b
+        ];
 
         // Methods
         static PackageXmlStringTable()
         {
             string nameString = s_nameTable.AddNoLock("http://www.w3.org/2001/XMLSchema-instance");
-            s_xmlstringtable[1] = new XmlStringTableStruct(nameString, PackageXmlEnum.NotDefined, null);
+            s_xmlstringtable[1] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.NotDefined,
+                null
+            );
             nameString = s_nameTable.AddNoLock("xsi");
-            s_xmlstringtable[2] = new XmlStringTableStruct(nameString, PackageXmlEnum.NotDefined, null);
+            s_xmlstringtable[2] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.NotDefined,
+                null
+            );
             nameString = s_nameTable.AddNoLock("xmlns");
-            s_xmlstringtable[3] = new XmlStringTableStruct(nameString, PackageXmlEnum.NotDefined, null);
-            nameString = s_nameTable.AddNoLock("http://schemas.openxmlformats.org/package/2006/metadata/core-properties");
-            s_xmlstringtable[4] = new XmlStringTableStruct(nameString, PackageXmlEnum.NotDefined, null);
+            s_xmlstringtable[3] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.NotDefined,
+                null
+            );
+            nameString = s_nameTable.AddNoLock(
+                "http://schemas.openxmlformats.org/package/2006/metadata/core-properties"
+            );
+            s_xmlstringtable[4] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.NotDefined,
+                null
+            );
             nameString = s_nameTable.AddNoLock("http://purl.org/dc/elements/1.1/");
-            s_xmlstringtable[5] = new XmlStringTableStruct(nameString, PackageXmlEnum.NotDefined, null);
+            s_xmlstringtable[5] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.NotDefined,
+                null
+            );
             nameString = s_nameTable.AddNoLock("http://purl.org/dc/terms/");
-            s_xmlstringtable[6] = new XmlStringTableStruct(nameString, PackageXmlEnum.NotDefined, null);
+            s_xmlstringtable[6] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.NotDefined,
+                null
+            );
             nameString = s_nameTable.AddNoLock("dc");
-            s_xmlstringtable[7] = new XmlStringTableStruct(nameString, PackageXmlEnum.NotDefined, null);
+            s_xmlstringtable[7] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.NotDefined,
+                null
+            );
             nameString = s_nameTable.AddNoLock("dcterms");
-            s_xmlstringtable[8] = new XmlStringTableStruct(nameString, PackageXmlEnum.NotDefined, null);
+            s_xmlstringtable[8] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.NotDefined,
+                null
+            );
             nameString = s_nameTable.AddNoLock("coreProperties");
-            s_xmlstringtable[9] = new XmlStringTableStruct(nameString, PackageXmlEnum.PackageCorePropertiesNamespace, "NotSpecified");
+            s_xmlstringtable[9] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.PackageCorePropertiesNamespace,
+                "NotSpecified"
+            );
             nameString = s_nameTable.AddNoLock("type");
-            s_xmlstringtable[10] = new XmlStringTableStruct(nameString, PackageXmlEnum.NotDefined, "NotSpecified");
+            s_xmlstringtable[10] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.NotDefined,
+                "NotSpecified"
+            );
             nameString = s_nameTable.AddNoLock("creator");
-            s_xmlstringtable[11] = new XmlStringTableStruct(nameString, PackageXmlEnum.DublinCorePropertiesNamespace, "String");
+            s_xmlstringtable[11] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.DublinCorePropertiesNamespace,
+                "String"
+            );
             nameString = s_nameTable.AddNoLock("identifier");
-            s_xmlstringtable[12] = new XmlStringTableStruct(nameString, PackageXmlEnum.DublinCorePropertiesNamespace, "String");
+            s_xmlstringtable[12] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.DublinCorePropertiesNamespace,
+                "String"
+            );
             nameString = s_nameTable.AddNoLock("title");
-            s_xmlstringtable[13] = new XmlStringTableStruct(nameString, PackageXmlEnum.DublinCorePropertiesNamespace, "String");
+            s_xmlstringtable[13] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.DublinCorePropertiesNamespace,
+                "String"
+            );
             nameString = s_nameTable.AddNoLock("subject");
-            s_xmlstringtable[14] = new XmlStringTableStruct(nameString, PackageXmlEnum.DublinCorePropertiesNamespace, "String");
+            s_xmlstringtable[14] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.DublinCorePropertiesNamespace,
+                "String"
+            );
             nameString = s_nameTable.AddNoLock("description");
-            s_xmlstringtable[15] = new XmlStringTableStruct(nameString, PackageXmlEnum.DublinCorePropertiesNamespace, "String");
+            s_xmlstringtable[15] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.DublinCorePropertiesNamespace,
+                "String"
+            );
             nameString = s_nameTable.AddNoLock("language");
-            s_xmlstringtable[0x10] = new XmlStringTableStruct(nameString, PackageXmlEnum.DublinCorePropertiesNamespace, "String");
+            s_xmlstringtable[0x10] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.DublinCorePropertiesNamespace,
+                "String"
+            );
             nameString = s_nameTable.AddNoLock("created");
-            s_xmlstringtable[0x11] = new XmlStringTableStruct(nameString, PackageXmlEnum.DublinCoreTermsNamespace, "DateTime");
+            s_xmlstringtable[0x11] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.DublinCoreTermsNamespace,
+                "DateTime"
+            );
             nameString = s_nameTable.AddNoLock("modified");
-            s_xmlstringtable[0x12] = new XmlStringTableStruct(nameString, PackageXmlEnum.DublinCoreTermsNamespace, "DateTime");
+            s_xmlstringtable[0x12] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.DublinCoreTermsNamespace,
+                "DateTime"
+            );
             nameString = s_nameTable.AddNoLock("contentType");
-            s_xmlstringtable[0x13] = new XmlStringTableStruct(nameString, PackageXmlEnum.PackageCorePropertiesNamespace, "String");
+            s_xmlstringtable[0x13] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.PackageCorePropertiesNamespace,
+                "String"
+            );
             nameString = s_nameTable.AddNoLock("keywords");
-            s_xmlstringtable[20] = new XmlStringTableStruct(nameString, PackageXmlEnum.PackageCorePropertiesNamespace, "String");
+            s_xmlstringtable[20] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.PackageCorePropertiesNamespace,
+                "String"
+            );
             nameString = s_nameTable.AddNoLock("category");
-            s_xmlstringtable[0x15] = new XmlStringTableStruct(nameString, PackageXmlEnum.PackageCorePropertiesNamespace, "String");
+            s_xmlstringtable[0x15] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.PackageCorePropertiesNamespace,
+                "String"
+            );
             nameString = s_nameTable.AddNoLock("version");
-            s_xmlstringtable[0x16] = new XmlStringTableStruct(nameString, PackageXmlEnum.PackageCorePropertiesNamespace, "String");
+            s_xmlstringtable[0x16] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.PackageCorePropertiesNamespace,
+                "String"
+            );
             nameString = s_nameTable.AddNoLock("lastModifiedBy");
-            s_xmlstringtable[0x17] = new XmlStringTableStruct(nameString, PackageXmlEnum.PackageCorePropertiesNamespace, "String");
+            s_xmlstringtable[0x17] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.PackageCorePropertiesNamespace,
+                "String"
+            );
             nameString = s_nameTable.AddNoLock("contentStatus");
-            s_xmlstringtable[0x18] = new XmlStringTableStruct(nameString, PackageXmlEnum.PackageCorePropertiesNamespace, "String");
+            s_xmlstringtable[0x18] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.PackageCorePropertiesNamespace,
+                "String"
+            );
             nameString = s_nameTable.AddNoLock("revision");
-            s_xmlstringtable[0x19] = new XmlStringTableStruct(nameString, PackageXmlEnum.PackageCorePropertiesNamespace, "String");
+            s_xmlstringtable[0x19] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.PackageCorePropertiesNamespace,
+                "String"
+            );
             nameString = s_nameTable.AddNoLock("lastPrinted");
-            s_xmlstringtable[0x1a] = new XmlStringTableStruct(nameString, PackageXmlEnum.PackageCorePropertiesNamespace, "DateTime");
+            s_xmlstringtable[0x1a] = new XmlStringTableStruct(
+                nameString,
+                PackageXmlEnum.PackageCorePropertiesNamespace,
+                "DateTime"
+            );
         }
 
         private static void CheckIdRange(PackageXmlEnum id)
         {
-            if ((id <= PackageXmlEnum.NotDefined) || (id >= (PackageXmlEnum.LastPrinted | PackageXmlEnum.XmlSchemaInstanceNamespace)))
+            if (
+                (id <= PackageXmlEnum.NotDefined)
+                || (id >= (PackageXmlEnum.LastPrinted | PackageXmlEnum.XmlSchemaInstanceNamespace))
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(id));
             }
@@ -119,10 +230,7 @@ namespace System.IO.Packaging
         // Properties
         internal static NameTable NameTable
         {
-            get
-            {
-                return s_nameTable;
-            }
+            get { return s_nameTable; }
         }
 
         // Nested Types

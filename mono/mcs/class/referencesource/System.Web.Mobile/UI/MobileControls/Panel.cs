@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // <copyright file="Panel.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-using System.Collections;                    
-using System.Web.UI;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Security.Permissions;
+using System.Web.UI;
 
 namespace System.Web.UI.MobileControls
 {
@@ -20,19 +20,28 @@ namespace System.Web.UI.MobileControls
         PersistChildren(true),
         ToolboxData("<{0}:Panel runat=\"server\"></{0}:Panel>"),
         ToolboxItem("System.Web.UI.Design.WebControlToolboxItem, " + AssemblyRef.SystemDesign)
-    ]    
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    ]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class Panel : MobileControl, ITemplateable
     {
         Panel _deviceSpecificContents = null;
 
         /// <include file='doc\Panel.uex' path='docs/doc[@for="Panel.Panel"]/*' />
-        public Panel() : base()
+        public Panel()
+            : base()
         {
             Form frm = this as Form;
-            if(frm == null)
+            if (frm == null)
             {
                 _breakAfter = false;
             }
@@ -51,50 +60,32 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\Panel.uex' path='docs/doc[@for="Panel.BreakAfter"]/*' />
-        [
-            DefaultValue(false),
-        ]
+        [DefaultValue(false)]
         public override bool BreakAfter
         {
-            get
-            {
-                return base.BreakAfter;
-            }
-
-            set
-            {
-                base.BreakAfter = value;
-            }
+            get { return base.BreakAfter; }
+            set { base.BreakAfter = value; }
         }
 
         /// <include file='doc\Panel.uex' path='docs/doc[@for="Panel.PaginateChildren"]/*' />
         protected override bool PaginateChildren
         {
-            get
-            {
-                return Paginate;
-            }
+            get { return Paginate; }
         }
 
         private bool _paginationStateChanged = false;
         internal bool PaginationStateChanged
         {
-            get
-            {
-                return _paginationStateChanged;
-            }
-            set
-            {
-                _paginationStateChanged = value;
-            }
+            get { return _paginationStateChanged; }
+            set { _paginationStateChanged = value; }
         }
 
         /// <include file='doc\Panel.uex' path='docs/doc[@for="Panel.Paginate"]/*' />
         [
-          Bindable(true),
-          DefaultValue(false),
-          MobileCategory(SR.Category_Behavior),
-          MobileSysDescription(SR.Panel_Paginate)
+            Bindable(true),
+            DefaultValue(false),
+            MobileCategory(SR.Category_Behavior),
+            MobileSysDescription(SR.Panel_Paginate)
         ]
         public virtual bool Paginate
         {
@@ -103,7 +94,6 @@ namespace System.Web.UI.MobileControls
                 Object o = ViewState["Paginate"];
                 return o != null ? (bool)o : false;
             }
-
             set
             {
                 bool wasPaginating = Paginate;
@@ -111,7 +101,7 @@ namespace System.Web.UI.MobileControls
                 if (IsTrackingViewState)
                 {
                     PaginationStateChanged = true;
-                    if (value == false && wasPaginating == true )
+                    if (value == false && wasPaginating == true)
                     {
                         SetControlPageRecursive(this, 1);
                     }
@@ -149,7 +139,7 @@ namespace System.Web.UI.MobileControls
             else
             {
                 base.PaginateRecursive(pager);
-            }        
+            }
         }
 
         /// <include file='doc\Panel.uex' path='docs/doc[@for="Panel.CreateDefaultTemplatedUI"]/*' />
@@ -159,7 +149,7 @@ namespace System.Web.UI.MobileControls
             if (contentTemplate != null)
             {
                 _deviceSpecificContents = new TemplateContainer();
-                CheckedInstantiateTemplate (contentTemplate, _deviceSpecificContents, this);
+                CheckedInstantiateTemplate(contentTemplate, _deviceSpecificContents, this);
                 Controls.AddAt(0, _deviceSpecificContents);
             }
         }
@@ -172,24 +162,27 @@ namespace System.Web.UI.MobileControls
         ]
         public Panel Content
         {
-            get
-            {
-                return _deviceSpecificContents;
-            }
+            get { return _deviceSpecificContents; }
         }
     }
 
     /*
-     * Control builder for panels. 
+     * Control builder for panels.
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
 
     /// <include file='doc\Panel.uex' path='docs/doc[@for="PanelControlBuilder"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    public class PanelControlBuilder : LiteralTextContainerControlBuilder
-    {
-    }
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    public class PanelControlBuilder : LiteralTextContainerControlBuilder { }
 }

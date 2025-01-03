@@ -27,9 +27,7 @@ namespace Microsoft.DotNet.Build.Tasks
                 string line = lines[i].Trim();
                 string lineBelow = lines[i + 1].Trim();
 
-                if (line.Length > 2 &&
-                    IsSeparatorLine(line) &&
-                    string.IsNullOrEmpty(lineBelow))
+                if (line.Length > 2 && IsSeparatorLine(line) && string.IsNullOrEmpty(lineBelow))
                 {
                     // 'line' is a separator line. Check around to see what kind it is.
 
@@ -71,15 +69,10 @@ namespace Microsoft.DotNet.Build.Tasks
             switch (Format)
             {
                 case TpnSectionHeaderFormat.Separated:
-                    return
-                        SeparatorLine + Environment.NewLine +
-                        Environment.NewLine +
-                        Name;
+                    return SeparatorLine + Environment.NewLine + Environment.NewLine + Name;
 
                 case TpnSectionHeaderFormat.Underlined:
-                    return
-                        Name + Environment.NewLine +
-                        SeparatorLine;
+                    return Name + Environment.NewLine + SeparatorLine;
 
                 case TpnSectionHeaderFormat.Numbered:
                     return SeparatorLine;
@@ -105,8 +98,7 @@ namespace Microsoft.DotNet.Build.Tasks
             {
                 if (nameLines.Take(nameLines.Length - 1).Any(IsSeparatorLine))
                 {
-                    throw new ArgumentException(
-                        $"Separator line detected inside name '{name}'");
+                    throw new ArgumentException($"Separator line detected inside name '{name}'");
                 }
             }
             else
@@ -119,7 +111,7 @@ namespace Microsoft.DotNet.Build.Tasks
                     Format = TpnSectionHeaderFormat.Separated,
 
                     StartLine = i,
-                    LineLength = 2 + nameLines.Length
+                    LineLength = 2 + nameLines.Length,
                 };
             }
 
@@ -146,16 +138,19 @@ namespace Microsoft.DotNet.Build.Tasks
                 Format = TpnSectionHeaderFormat.Underlined,
 
                 StartLine = nameStartLine,
-                LineLength = nameLines.Length + 1
+                LineLength = nameLines.Length + 1,
             };
         }
+
         private static TpnSectionHeader ParseNumberedOrNull(string[] lines, int i)
         {
             Match numberListMatch;
 
-            if (string.IsNullOrWhiteSpace(lines[i - 1]) &&
-                string.IsNullOrWhiteSpace(lines[i + 1]) &&
-                (numberListMatch = NumberListPrefix.Match(lines[i])).Success)
+            if (
+                string.IsNullOrWhiteSpace(lines[i - 1])
+                && string.IsNullOrWhiteSpace(lines[i + 1])
+                && (numberListMatch = NumberListPrefix.Match(lines[i])).Success
+            )
             {
                 return new TpnSectionHeader
                 {
@@ -165,7 +160,7 @@ namespace Microsoft.DotNet.Build.Tasks
                     Format = TpnSectionHeaderFormat.Numbered,
 
                     StartLine = i,
-                    LineLength = 1
+                    LineLength = 1,
                 };
             }
 

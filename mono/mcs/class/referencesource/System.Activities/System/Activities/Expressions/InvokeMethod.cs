@@ -9,11 +9,11 @@ namespace System.Activities.Expressions
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Runtime.Collections;
-    using System.Windows.Markup;
-    using System.Runtime;
     using System.Reflection;
+    using System.Runtime;
+    using System.Runtime.Collections;
     using System.Threading;
+    using System.Windows.Markup;
 
     [ContentProperty("Parameters")]
     public sealed class InvokeMethod<TResult> : AsyncCodeActivity<TResult>
@@ -25,8 +25,10 @@ namespace System.Activities.Expressions
         MethodExecutor methodExecutor;
         RuntimeArgument resultArgument;
 
-        static MruCache<MethodInfo, Func<object, object[], object>> funcCache =
-            new MruCache<MethodInfo, Func<object, object[], object>>(MethodCallExpressionHelper.FuncCacheCapacity);
+        static MruCache<MethodInfo, Func<object, object[], object>> funcCache = new MruCache<
+            MethodInfo,
+            Func<object, object[], object>
+        >(MethodCallExpressionHelper.FuncCacheCapacity);
         static ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
 
         public Collection<Type> GenericTypeArguments
@@ -44,18 +46,14 @@ namespace System.Activities.Expressions
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.genericTypeArguments;
             }
         }
 
-        public string MethodName
-        {
-            get;
-            set;
-        }
+        public string MethodName { get; set; }
 
         public Collection<Argument> Parameters
         {
@@ -72,7 +70,7 @@ namespace System.Activities.Expressions
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.parameters;
@@ -80,25 +78,13 @@ namespace System.Activities.Expressions
         }
 
         [DefaultValue(null)]
-        public InArgument TargetObject
-        {
-            get;
-            set;
-        }
+        public InArgument TargetObject { get; set; }
 
         [DefaultValue(null)]
-        public Type TargetType
-        {
-            get;
-            set;
-        }
+        public Type TargetType { get; set; }
 
         [DefaultValue(false)]
-        public bool RunAsynchronously
-        {
-            get;
-            set;
-        }
+        public bool RunAsynchronously { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
@@ -111,20 +97,33 @@ namespace System.Activities.Expressions
                 targetObjectType = this.TargetObject.ArgumentType;
             }
 
-            RuntimeArgument targetObjectArgument = new RuntimeArgument("TargetObject", targetObjectType, ArgumentDirection.In);
+            RuntimeArgument targetObjectArgument = new RuntimeArgument(
+                "TargetObject",
+                targetObjectType,
+                ArgumentDirection.In
+            );
             metadata.Bind(this.TargetObject, targetObjectArgument);
             arguments.Add(targetObjectArgument);
 
-            this.resultArgument = new RuntimeArgument("Result", typeof(TResult), ArgumentDirection.Out);
+            this.resultArgument = new RuntimeArgument(
+                "Result",
+                typeof(TResult),
+                ArgumentDirection.Out
+            );
             metadata.Bind(this.Result, this.resultArgument);
             arguments.Add(this.resultArgument);
 
-            // Parameters are named according to MethodInfo name if DetermineMethodInfo 
+            // Parameters are named according to MethodInfo name if DetermineMethodInfo
             // succeeds, otherwise arbitrary names are used.
             this.methodResolver = CreateMethodResolver();
-            
-            this.methodResolver.DetermineMethodInfo(metadata, funcCache, locker, ref this.methodExecutor);
-             this.methodResolver.RegisterParameters(arguments);
+
+            this.methodResolver.DetermineMethodInfo(
+                metadata,
+                funcCache,
+                locker,
+                ref this.methodExecutor
+            );
+            this.methodResolver.RegisterParameters(arguments);
 
             metadata.SetArgumentsCollection(arguments);
 
@@ -136,7 +135,11 @@ namespace System.Activities.Expressions
             }
         }
 
-        protected override IAsyncResult BeginExecute(AsyncCodeActivityContext context, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginExecute(
+            AsyncCodeActivityContext context,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.methodExecutor.BeginExecuteMethod(context, callback, state);
         }
@@ -150,17 +153,17 @@ namespace System.Activities.Expressions
         MethodResolver CreateMethodResolver()
         {
             return new MethodResolver
-                {
-                    MethodName = this.MethodName,
-                    RunAsynchronously = this.RunAsynchronously,
-                    TargetType = this.TargetType,
-                    TargetObject = this.TargetObject,
-                    GenericTypeArguments = this.GenericTypeArguments,
-                    Parameters = this.Parameters,
-                    Result = this.resultArgument,
-                    ResultType = typeof(TResult),
-                    Parent = this
-                };            
+            {
+                MethodName = this.MethodName,
+                RunAsynchronously = this.RunAsynchronously,
+                TargetType = this.TargetType,
+                TargetObject = this.TargetObject,
+                GenericTypeArguments = this.GenericTypeArguments,
+                Parameters = this.Parameters,
+                Result = this.resultArgument,
+                ResultType = typeof(TResult),
+                Parent = this,
+            };
         }
     }
 }

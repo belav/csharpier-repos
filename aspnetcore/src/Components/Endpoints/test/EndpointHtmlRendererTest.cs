@@ -33,12 +33,15 @@ namespace Microsoft.AspNetCore.Components.Endpoints;
 public class EndpointHtmlRendererTest
 {
     private const string MarkerPrefix = "<!--Blazor:";
-    private const string PrerenderedComponentPattern = "^<!--Blazor:(?<preamble>.*?)-->(?<content>.+?)<!--Blazor:(?<epilogue>.*?)-->$";
+    private const string PrerenderedComponentPattern =
+        "^<!--Blazor:(?<preamble>.*?)-->(?<content>.+?)<!--Blazor:(?<epilogue>.*?)-->$";
     private const string ComponentPattern = "^<!--Blazor:(.*?)-->$";
 
-    private static readonly IDataProtectionProvider _dataprotectorProvider = new EphemeralDataProtectionProvider();
+    private static readonly IDataProtectionProvider _dataprotectorProvider =
+        new EphemeralDataProtectionProvider();
 
-    private readonly IServiceProvider _services = CreateDefaultServiceCollection().BuildServiceProvider();
+    private readonly IServiceProvider _services = CreateDefaultServiceCollection()
+        .BuildServiceProvider();
     private readonly TestEndpointHtmlRenderer renderer;
 
     public EndpointHtmlRendererTest()
@@ -54,14 +57,22 @@ public class EndpointHtmlRendererTest
         var writer = new StringWriter();
 
         // Act
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(SimpleComponent), new InteractiveWebAssemblyRenderMode(prerender: false), ParameterView.Empty);
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(SimpleComponent),
+            new InteractiveWebAssemblyRenderMode(prerender: false),
+            ParameterView.Empty
+        );
         await renderer.Dispatcher.InvokeAsync(() => result.WriteTo(writer, HtmlEncoder.Default));
         var content = writer.ToString();
         var match = Regex.Match(content, ComponentPattern);
 
         // Assert
         Assert.True(match.Success);
-        var marker = JsonSerializer.Deserialize<ComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var marker = JsonSerializer.Deserialize<ComponentMarker>(
+            match.Groups[1].Value,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Null(marker.PrerenderId);
         Assert.Equal("webassembly", marker.Type);
         Assert.Equal(typeof(SimpleComponent).Assembly.GetName().Name, marker.Assembly);
@@ -77,7 +88,12 @@ public class EndpointHtmlRendererTest
         var writer = new StringWriter();
 
         // Act
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(SimpleComponent), RenderMode.InteractiveWebAssembly, ParameterView.Empty);
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(SimpleComponent),
+            RenderMode.InteractiveWebAssembly,
+            ParameterView.Empty
+        );
         await renderer.Dispatcher.InvokeAsync(() => result.WriteTo(writer, HtmlEncoder.Default));
         var content = writer.ToString();
         var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);
@@ -85,7 +101,10 @@ public class EndpointHtmlRendererTest
         // Assert
         Assert.True(match.Success);
         var preamble = match.Groups["preamble"].Value;
-        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            preamble,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.NotNull(preambleMarker.PrerenderId);
         Assert.Equal("webassembly", preambleMarker.Type);
         Assert.Equal(typeof(SimpleComponent).Assembly.GetName().Name, preambleMarker.Assembly);
@@ -95,7 +114,10 @@ public class EndpointHtmlRendererTest
         Assert.Equal("<h1>Hello from SimpleComponent</h1>", prerenderedContent);
 
         var epilogue = match.Groups["epilogue"].Value;
-        var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            epilogue,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);
         Assert.Null(epilogueMarker.Assembly);
         Assert.Null(epilogueMarker.TypeName);
@@ -115,31 +137,43 @@ public class EndpointHtmlRendererTest
         var writer = new StringWriter();
 
         // Act
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GreetingComponent),
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(GreetingComponent),
             new InteractiveWebAssemblyRenderMode(prerender: false),
-            ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { "Name", "Daniel" }
-            }));
+            ParameterView.FromDictionary(new Dictionary<string, object> { { "Name", "Daniel" } })
+        );
         await renderer.Dispatcher.InvokeAsync(() => result.WriteTo(writer, HtmlEncoder.Default));
         var content = writer.ToString();
         var match = Regex.Match(content, ComponentPattern);
 
         // Assert
         Assert.True(match.Success);
-        var marker = JsonSerializer.Deserialize<ComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var marker = JsonSerializer.Deserialize<ComponentMarker>(
+            match.Groups[1].Value,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Null(marker.PrerenderId);
         Assert.Equal("webassembly", marker.Type);
         Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, marker.Assembly);
         Assert.Equal(typeof(GreetingComponent).FullName, marker.TypeName);
 
         var parameterDefinition = Assert.Single(
-            JsonSerializer.Deserialize<ComponentParameter[]>(Convert.FromBase64String(marker.ParameterDefinitions), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+            JsonSerializer.Deserialize<ComponentParameter[]>(
+                Convert.FromBase64String(marker.ParameterDefinitions),
+                WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+            )
+        );
         Assert.Equal("Name", parameterDefinition.Name);
         Assert.Equal("System.String", parameterDefinition.TypeName);
         Assert.Equal("System.Private.CoreLib", parameterDefinition.Assembly);
 
-        var value = Assert.Single(JsonSerializer.Deserialize<object[]>(Convert.FromBase64String(marker.ParameterValues), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+        var value = Assert.Single(
+            JsonSerializer.Deserialize<object[]>(
+                Convert.FromBase64String(marker.ParameterValues),
+                WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+            )
+        );
         var rawValue = Assert.IsType<JsonElement>(value);
         Assert.Equal("Daniel", rawValue.GetString());
     }
@@ -152,30 +186,43 @@ public class EndpointHtmlRendererTest
         var writer = new StringWriter();
 
         // Act
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GreetingComponent),
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(GreetingComponent),
             new InteractiveWebAssemblyRenderMode(prerender: false),
-            ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { "Name", null }
-            }));
+            ParameterView.FromDictionary(new Dictionary<string, object> { { "Name", null } })
+        );
         await renderer.Dispatcher.InvokeAsync(() => result.WriteTo(writer, HtmlEncoder.Default));
         var content = writer.ToString();
         var match = Regex.Match(content, ComponentPattern);
 
         // Assert
         Assert.True(match.Success);
-        var marker = JsonSerializer.Deserialize<ComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var marker = JsonSerializer.Deserialize<ComponentMarker>(
+            match.Groups[1].Value,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Null(marker.PrerenderId);
         Assert.Equal("webassembly", marker.Type);
         Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, marker.Assembly);
         Assert.Equal(typeof(GreetingComponent).FullName, marker.TypeName);
 
-        var parameterDefinition = Assert.Single(JsonSerializer.Deserialize<ComponentParameter[]>(Convert.FromBase64String(marker.ParameterDefinitions), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+        var parameterDefinition = Assert.Single(
+            JsonSerializer.Deserialize<ComponentParameter[]>(
+                Convert.FromBase64String(marker.ParameterDefinitions),
+                WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+            )
+        );
         Assert.Equal("Name", parameterDefinition.Name);
         Assert.Null(parameterDefinition.TypeName);
         Assert.Null(parameterDefinition.Assembly);
 
-        var value = Assert.Single(JsonSerializer.Deserialize<object[]>(Convert.FromBase64String(marker.ParameterValues), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+        var value = Assert.Single(
+            JsonSerializer.Deserialize<object[]>(
+                Convert.FromBase64String(marker.ParameterValues),
+                WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+            )
+        );
         Assert.Null(value);
     }
 
@@ -187,12 +234,12 @@ public class EndpointHtmlRendererTest
         var writer = new StringWriter();
 
         // Act
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GreetingComponent),
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(GreetingComponent),
             RenderMode.InteractiveWebAssembly,
-            ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { "Name", "Daniel" }
-            }));
+            ParameterView.FromDictionary(new Dictionary<string, object> { { "Name", "Daniel" } })
+        );
         await renderer.Dispatcher.InvokeAsync(() => result.WriteTo(writer, HtmlEncoder.Default));
         var content = writer.ToString();
         var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);
@@ -200,18 +247,31 @@ public class EndpointHtmlRendererTest
         // Assert
         Assert.True(match.Success);
         var preamble = match.Groups["preamble"].Value;
-        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            preamble,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.NotNull(preambleMarker.PrerenderId);
         Assert.Equal("webassembly", preambleMarker.Type);
         Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, preambleMarker.Assembly);
         Assert.Equal(typeof(GreetingComponent).FullName, preambleMarker.TypeName);
 
-        var parameterDefinition = Assert.Single(JsonSerializer.Deserialize<ComponentParameter[]>(Convert.FromBase64String(preambleMarker.ParameterDefinitions), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+        var parameterDefinition = Assert.Single(
+            JsonSerializer.Deserialize<ComponentParameter[]>(
+                Convert.FromBase64String(preambleMarker.ParameterDefinitions),
+                WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+            )
+        );
         Assert.Equal("Name", parameterDefinition.Name);
         Assert.Equal("System.String", parameterDefinition.TypeName);
         Assert.Equal("System.Private.CoreLib", parameterDefinition.Assembly);
 
-        var value = Assert.Single(JsonSerializer.Deserialize<object[]>(Convert.FromBase64String(preambleMarker.ParameterValues), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+        var value = Assert.Single(
+            JsonSerializer.Deserialize<object[]>(
+                Convert.FromBase64String(preambleMarker.ParameterValues),
+                WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+            )
+        );
         var rawValue = Assert.IsType<JsonElement>(value);
         Assert.Equal("Daniel", rawValue.GetString());
 
@@ -219,7 +279,10 @@ public class EndpointHtmlRendererTest
         Assert.Equal("<p>Hello Daniel!</p>", prerenderedContent);
 
         var epilogue = match.Groups["epilogue"].Value;
-        var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            epilogue,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);
         Assert.Null(epilogueMarker.Assembly);
         Assert.Null(epilogueMarker.TypeName);
@@ -236,12 +299,12 @@ public class EndpointHtmlRendererTest
         var writer = new StringWriter();
 
         // Act
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GreetingComponent),
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(GreetingComponent),
             RenderMode.InteractiveWebAssembly,
-            ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { "Name", null }
-            }));
+            ParameterView.FromDictionary(new Dictionary<string, object> { { "Name", null } })
+        );
         await renderer.Dispatcher.InvokeAsync(() => result.WriteTo(writer, HtmlEncoder.Default));
         var content = writer.ToString();
         var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);
@@ -249,25 +312,41 @@ public class EndpointHtmlRendererTest
         // Assert
         Assert.True(match.Success);
         var preamble = match.Groups["preamble"].Value;
-        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            preamble,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.NotNull(preambleMarker.PrerenderId);
         Assert.Equal("webassembly", preambleMarker.Type);
         Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, preambleMarker.Assembly);
         Assert.Equal(typeof(GreetingComponent).FullName, preambleMarker.TypeName);
 
-        var parameterDefinition = Assert.Single(JsonSerializer.Deserialize<ComponentParameter[]>(Convert.FromBase64String(preambleMarker.ParameterDefinitions), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+        var parameterDefinition = Assert.Single(
+            JsonSerializer.Deserialize<ComponentParameter[]>(
+                Convert.FromBase64String(preambleMarker.ParameterDefinitions),
+                WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+            )
+        );
         Assert.Equal("Name", parameterDefinition.Name);
         Assert.Null(parameterDefinition.TypeName);
         Assert.Null(parameterDefinition.Assembly);
 
-        var value = Assert.Single(JsonSerializer.Deserialize<object[]>(Convert.FromBase64String(preambleMarker.ParameterValues), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+        var value = Assert.Single(
+            JsonSerializer.Deserialize<object[]>(
+                Convert.FromBase64String(preambleMarker.ParameterValues),
+                WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+            )
+        );
         Assert.Null(value);
 
         var prerenderedContent = match.Groups["content"].Value;
         Assert.Equal("<p>Hello (null)!</p>", prerenderedContent);
 
         var epilogue = match.Groups["epilogue"].Value;
-        var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            epilogue,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);
         Assert.Null(epilogueMarker.Assembly);
         Assert.Null(epilogueMarker.TypeName);
@@ -284,7 +363,12 @@ public class EndpointHtmlRendererTest
         var writer = new StringWriter();
 
         // Act
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(SimpleComponent), null, ParameterView.Empty);
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(SimpleComponent),
+            null,
+            ParameterView.Empty
+        );
         await renderer.Dispatcher.InvokeAsync(() => result.WriteTo(writer, HtmlEncoder.Default));
         var content = writer.ToString();
 
@@ -297,24 +381,36 @@ public class EndpointHtmlRendererTest
     {
         // Arrange
         var httpContext = GetHttpContext();
-        var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+        var protector = _dataprotectorProvider
+            .CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
             .ToTimeLimitedDataProtector();
 
         // Act
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(SimpleComponent), new InteractiveServerRenderMode(false), ParameterView.Empty);
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(SimpleComponent),
+            new InteractiveServerRenderMode(false),
+            ParameterView.Empty
+        );
         var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));
         var match = Regex.Match(content, ComponentPattern);
 
         // Assert
         Assert.True(match.Success);
-        var marker = JsonSerializer.Deserialize<ComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var marker = JsonSerializer.Deserialize<ComponentMarker>(
+            match.Groups[1].Value,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(0, marker.Sequence);
         Assert.Null(marker.PrerenderId);
         Assert.NotNull(marker.Descriptor);
         Assert.Equal("server", marker.Type);
 
         var unprotectedServerComponent = protector.Unprotect(marker.Descriptor);
-        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(
+            unprotectedServerComponent,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(0, serverComponent.Sequence);
         Assert.Equal(typeof(SimpleComponent).Assembly.GetName().Name, serverComponent.AssemblyName);
         Assert.Equal(typeof(SimpleComponent).FullName, serverComponent.TypeName);
@@ -329,25 +425,37 @@ public class EndpointHtmlRendererTest
     {
         // Arrange
         var httpContext = GetHttpContext();
-        var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+        var protector = _dataprotectorProvider
+            .CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
             .ToTimeLimitedDataProtector();
 
         // Act
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(SimpleComponent), RenderMode.InteractiveServer, ParameterView.Empty);
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(SimpleComponent),
+            RenderMode.InteractiveServer,
+            ParameterView.Empty
+        );
         var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));
         var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);
 
         // Assert
         Assert.True(match.Success);
         var preamble = match.Groups["preamble"].Value;
-        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            preamble,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(0, preambleMarker.Sequence);
         Assert.NotNull(preambleMarker.PrerenderId);
         Assert.NotNull(preambleMarker.Descriptor);
         Assert.Equal("server", preambleMarker.Type);
 
         var unprotectedServerComponent = protector.Unprotect(preambleMarker.Descriptor);
-        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(
+            unprotectedServerComponent,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.NotEqual(default, serverComponent);
         Assert.Equal(0, serverComponent.Sequence);
         Assert.Equal(typeof(SimpleComponent).Assembly.GetName().Name, serverComponent.AssemblyName);
@@ -358,7 +466,10 @@ public class EndpointHtmlRendererTest
         Assert.Equal("<h1>Hello from SimpleComponent</h1>", prerenderedContent);
 
         var epilogue = match.Groups["epilogue"].Value;
-        var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            epilogue,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);
         Assert.Null(epilogueMarker.Sequence);
         Assert.Null(epilogueMarker.Descriptor);
@@ -376,13 +487,28 @@ public class EndpointHtmlRendererTest
         var httpContext = GetHttpContext();
 
         // Act
-        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { "Name", "SomeName" } });
-        var server = await renderer.PrerenderComponentAsync(httpContext, typeof(GreetingComponent), RenderMode.InteractiveServer, parameters);
-        var client = await renderer.PrerenderComponentAsync(httpContext, typeof(GreetingComponent), RenderMode.InteractiveWebAssembly, parameters);
+        var parameters = ParameterView.FromDictionary(
+            new Dictionary<string, object> { { "Name", "SomeName" } }
+        );
+        var server = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(GreetingComponent),
+            RenderMode.InteractiveServer,
+            parameters
+        );
+        var client = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(GreetingComponent),
+            RenderMode.InteractiveWebAssembly,
+            parameters
+        );
 
         // Assert
         var (_, mode) = Assert.Single(httpContext.Items, (kvp) => kvp.Value is InvokedRenderModes);
-        Assert.Equal(InvokedRenderModes.Mode.ServerAndWebAssembly, ((InvokedRenderModes)mode).Value);
+        Assert.Equal(
+            InvokedRenderModes.Mode.ServerAndWebAssembly,
+            ((InvokedRenderModes)mode).Value
+        );
     }
 
     [Fact]
@@ -390,38 +516,69 @@ public class EndpointHtmlRendererTest
     {
         // Arrange
         var httpContext = GetHttpContext();
-        var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+        var protector = _dataprotectorProvider
+            .CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
             .ToTimeLimitedDataProtector();
 
         // Act
-        var firstResult = await renderer.PrerenderComponentAsync(httpContext, typeof(SimpleComponent), new InteractiveServerRenderMode(true), ParameterView.Empty);
-        var firstComponent = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(firstResult));
-        var firstMatch = Regex.Match(firstComponent, PrerenderedComponentPattern, RegexOptions.Multiline);
+        var firstResult = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(SimpleComponent),
+            new InteractiveServerRenderMode(true),
+            ParameterView.Empty
+        );
+        var firstComponent = await renderer.Dispatcher.InvokeAsync(
+            () => HtmlContentToString(firstResult)
+        );
+        var firstMatch = Regex.Match(
+            firstComponent,
+            PrerenderedComponentPattern,
+            RegexOptions.Multiline
+        );
 
-        var secondResult = await renderer.PrerenderComponentAsync(httpContext, typeof(SimpleComponent), new InteractiveServerRenderMode(false), ParameterView.Empty);
-        var secondComponent = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(secondResult));
+        var secondResult = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(SimpleComponent),
+            new InteractiveServerRenderMode(false),
+            ParameterView.Empty
+        );
+        var secondComponent = await renderer.Dispatcher.InvokeAsync(
+            () => HtmlContentToString(secondResult)
+        );
         var secondMatch = Regex.Match(secondComponent, ComponentPattern);
 
         // Assert
         Assert.True(firstMatch.Success);
         var preamble = firstMatch.Groups["preamble"].Value;
-        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            preamble,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(0, preambleMarker.Sequence);
         Assert.NotNull(preambleMarker.Descriptor);
 
         var unprotectedFirstServerComponent = protector.Unprotect(preambleMarker.Descriptor);
-        var firstServerComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedFirstServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var firstServerComponent = JsonSerializer.Deserialize<ServerComponent>(
+            unprotectedFirstServerComponent,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(0, firstServerComponent.Sequence);
         Assert.NotEqual(Guid.Empty, firstServerComponent.InvocationId);
 
         Assert.True(secondMatch.Success);
         var marker = secondMatch.Groups[1].Value;
-        var markerMarker = JsonSerializer.Deserialize<ComponentMarker>(marker, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var markerMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            marker,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(1, markerMarker.Sequence);
         Assert.NotNull(markerMarker.Descriptor);
 
         var unprotectedSecondServerComponent = protector.Unprotect(markerMarker.Descriptor);
-        var secondServerComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedSecondServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var secondServerComponent = JsonSerializer.Deserialize<ServerComponent>(
+            unprotectedSecondServerComponent,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(1, secondServerComponent.Sequence);
 
         Assert.Equal(firstServerComponent.InvocationId, secondServerComponent.InvocationId);
@@ -434,8 +591,15 @@ public class EndpointHtmlRendererTest
         var httpContext = GetHttpContext();
 
         // Act
-        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { "Name", "SomeName" } });
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GreetingComponent), null, parameters);
+        var parameters = ParameterView.FromDictionary(
+            new Dictionary<string, object> { { "Name", "SomeName" } }
+        );
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(GreetingComponent),
+            null,
+            parameters
+        );
 
         // Assert
         var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));
@@ -447,27 +611,44 @@ public class EndpointHtmlRendererTest
     {
         // Arrange
         var httpContext = GetHttpContext();
-        var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+        var protector = _dataprotectorProvider
+            .CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
             .ToTimeLimitedDataProtector();
 
         // Act
-        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { "Name", "SomeName" } });
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GreetingComponent), new InteractiveServerRenderMode(false), parameters);
+        var parameters = ParameterView.FromDictionary(
+            new Dictionary<string, object> { { "Name", "SomeName" } }
+        );
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(GreetingComponent),
+            new InteractiveServerRenderMode(false),
+            parameters
+        );
         var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));
         var match = Regex.Match(content, ComponentPattern);
 
         // Assert
         Assert.True(match.Success);
-        var marker = JsonSerializer.Deserialize<ComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var marker = JsonSerializer.Deserialize<ComponentMarker>(
+            match.Groups[1].Value,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(0, marker.Sequence);
         Assert.Null(marker.PrerenderId);
         Assert.NotNull(marker.Descriptor);
         Assert.Equal("server", marker.Type);
 
         var unprotectedServerComponent = protector.Unprotect(marker.Descriptor);
-        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(
+            unprotectedServerComponent,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(0, serverComponent.Sequence);
-        Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, serverComponent.AssemblyName);
+        Assert.Equal(
+            typeof(GreetingComponent).Assembly.GetName().Name,
+            serverComponent.AssemblyName
+        );
         Assert.Equal(typeof(GreetingComponent).FullName, serverComponent.TypeName);
         Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);
 
@@ -486,27 +667,44 @@ public class EndpointHtmlRendererTest
     {
         // Arrange
         var httpContext = GetHttpContext();
-        var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+        var protector = _dataprotectorProvider
+            .CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
             .ToTimeLimitedDataProtector();
 
         // Act
-        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { "Name", null } });
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GreetingComponent), new InteractiveServerRenderMode(false), parameters);
+        var parameters = ParameterView.FromDictionary(
+            new Dictionary<string, object> { { "Name", null } }
+        );
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(GreetingComponent),
+            new InteractiveServerRenderMode(false),
+            parameters
+        );
         var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));
         var match = Regex.Match(content, ComponentPattern);
 
         // Assert
         Assert.True(match.Success);
-        var marker = JsonSerializer.Deserialize<ComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var marker = JsonSerializer.Deserialize<ComponentMarker>(
+            match.Groups[1].Value,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(0, marker.Sequence);
         Assert.Null(marker.PrerenderId);
         Assert.NotNull(marker.Descriptor);
         Assert.Equal("server", marker.Type);
 
         var unprotectedServerComponent = protector.Unprotect(marker.Descriptor);
-        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(
+            unprotectedServerComponent,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(0, serverComponent.Sequence);
-        Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, serverComponent.AssemblyName);
+        Assert.Equal(
+            typeof(GreetingComponent).Assembly.GetName().Name,
+            serverComponent.AssemblyName
+        );
         Assert.Equal(typeof(GreetingComponent).FullName, serverComponent.TypeName);
         Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);
 
@@ -525,29 +723,46 @@ public class EndpointHtmlRendererTest
     {
         // Arrange
         var httpContext = GetHttpContext();
-        var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+        var protector = _dataprotectorProvider
+            .CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
             .ToTimeLimitedDataProtector();
 
         // Act
-        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { "Name", "SomeName" } });
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GreetingComponent), RenderMode.InteractiveServer, parameters);
+        var parameters = ParameterView.FromDictionary(
+            new Dictionary<string, object> { { "Name", "SomeName" } }
+        );
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(GreetingComponent),
+            RenderMode.InteractiveServer,
+            parameters
+        );
         var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));
         var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);
 
         // Assert
         Assert.True(match.Success);
         var preamble = match.Groups["preamble"].Value;
-        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            preamble,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(0, preambleMarker.Sequence);
         Assert.NotNull(preambleMarker.PrerenderId);
         Assert.NotNull(preambleMarker.Descriptor);
         Assert.Equal("server", preambleMarker.Type);
 
         var unprotectedServerComponent = protector.Unprotect(preambleMarker.Descriptor);
-        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(
+            unprotectedServerComponent,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.NotEqual(default, serverComponent);
         Assert.Equal(0, serverComponent.Sequence);
-        Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, serverComponent.AssemblyName);
+        Assert.Equal(
+            typeof(GreetingComponent).Assembly.GetName().Name,
+            serverComponent.AssemblyName
+        );
         Assert.Equal(typeof(GreetingComponent).FullName, serverComponent.TypeName);
         Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);
 
@@ -564,7 +779,10 @@ public class EndpointHtmlRendererTest
         Assert.Equal("<p>Hello SomeName!</p>", prerenderedContent);
 
         var epilogue = match.Groups["epilogue"].Value;
-        var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            epilogue,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);
         Assert.Null(epilogueMarker.Sequence);
         Assert.Null(epilogueMarker.Descriptor);
@@ -576,29 +794,46 @@ public class EndpointHtmlRendererTest
     {
         // Arrange
         var httpContext = GetHttpContext();
-        var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+        var protector = _dataprotectorProvider
+            .CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
             .ToTimeLimitedDataProtector();
 
         // Act
-        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { "Name", null } });
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(GreetingComponent), RenderMode.InteractiveServer, parameters);
+        var parameters = ParameterView.FromDictionary(
+            new Dictionary<string, object> { { "Name", null } }
+        );
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(GreetingComponent),
+            RenderMode.InteractiveServer,
+            parameters
+        );
         var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));
         var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);
 
         // Assert
         Assert.True(match.Success);
         var preamble = match.Groups["preamble"].Value;
-        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            preamble,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(0, preambleMarker.Sequence);
         Assert.NotNull(preambleMarker.PrerenderId);
         Assert.NotNull(preambleMarker.Descriptor);
         Assert.Equal("server", preambleMarker.Type);
 
         var unprotectedServerComponent = protector.Unprotect(preambleMarker.Descriptor);
-        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var serverComponent = JsonSerializer.Deserialize<ServerComponent>(
+            unprotectedServerComponent,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.NotEqual(default, serverComponent);
         Assert.Equal(0, serverComponent.Sequence);
-        Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, serverComponent.AssemblyName);
+        Assert.Equal(
+            typeof(GreetingComponent).Assembly.GetName().Name,
+            serverComponent.AssemblyName
+        );
         Assert.Equal(typeof(GreetingComponent).FullName, serverComponent.TypeName);
         Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);
 
@@ -615,7 +850,10 @@ public class EndpointHtmlRendererTest
         Assert.Equal("<p>Hello (null)!</p>", prerenderedContent);
 
         var epilogue = match.Groups["epilogue"].Value;
-        var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var epilogueMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            epilogue,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);
         Assert.Null(epilogueMarker.Sequence);
         Assert.Null(epilogueMarker.Descriptor);
@@ -629,11 +867,20 @@ public class EndpointHtmlRendererTest
         var httpContext = GetHttpContext();
 
         // Act & Assert
-        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { "Name", "SomeName" } });
+        var parameters = ParameterView.FromDictionary(
+            new Dictionary<string, object> { { "Name", "SomeName" } }
+        );
         var ex = await ExceptionAssert.ThrowsArgumentAsync(
-            async () => await renderer.PrerenderComponentAsync(httpContext, typeof(GreetingComponent), new NonexistentRenderMode(), parameters),
+            async () =>
+                await renderer.PrerenderComponentAsync(
+                    httpContext,
+                    typeof(GreetingComponent),
+                    new NonexistentRenderMode(),
+                    parameters
+                ),
             "renderMode",
-            $"Server-side rendering does not support the render mode '{typeof(NonexistentRenderMode)}'.");
+            $"Server-side rendering does not support the render mode '{typeof(NonexistentRenderMode)}'."
+        );
     }
 
     class NonexistentRenderMode : IComponentRenderMode { }
@@ -646,8 +893,15 @@ public class EndpointHtmlRendererTest
 
         // Act
         var state = new OnAfterRenderState();
-        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { "state", state } });
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(OnAfterRenderComponent), null, parameters);
+        var parameters = ParameterView.FromDictionary(
+            new Dictionary<string, object> { { "state", state } }
+        );
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(OnAfterRenderComponent),
+            null,
+            parameters
+        );
 
         // Assert
         var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));
@@ -676,8 +930,15 @@ public class EndpointHtmlRendererTest
 
         // Act
         var state = new AsyncDisposableState();
-        var parameters = ParameterView.FromDictionary(new Dictionary<string, object> { { "state", state } });
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(AsyncDisposableComponent), null, parameters);
+        var parameters = ParameterView.FromDictionary(
+            new Dictionary<string, object> { { "state", state } }
+        );
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(AsyncDisposableComponent),
+            null,
+            parameters
+        );
 
         // Assert
         var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));
@@ -694,14 +955,17 @@ public class EndpointHtmlRendererTest
         var httpContext = GetHttpContext();
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await renderer.PrerenderComponentAsync(
-            httpContext,
-            typeof(ExceptionComponent),
-            null,
-            ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { "IsAsync", false }
-            })));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () =>
+                await renderer.PrerenderComponentAsync(
+                    httpContext,
+                    typeof(ExceptionComponent),
+                    null,
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object> { { "IsAsync", false } }
+                    )
+                )
+        );
 
         // Assert
         Assert.Equal("Threw an exception synchronously", exception.Message);
@@ -714,14 +978,17 @@ public class EndpointHtmlRendererTest
         var httpContext = GetHttpContext();
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await renderer.PrerenderComponentAsync(
-            httpContext,
-            typeof(ExceptionComponent),
-            null,
-            ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { "IsAsync", true }
-            })));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () =>
+                await renderer.PrerenderComponentAsync(
+                    httpContext,
+                    typeof(ExceptionComponent),
+                    null,
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object> { { "IsAsync", true } }
+                    )
+                )
+        );
 
         // Assert
         Assert.Equal("Threw an exception asynchronously", exception.Message);
@@ -734,20 +1001,25 @@ public class EndpointHtmlRendererTest
         var httpContext = GetHttpContext();
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await renderer.PrerenderComponentAsync(
-            httpContext,
-            typeof(ExceptionComponent),
-            null,
-            ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { "JsInterop", true }
-            })));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () =>
+                await renderer.PrerenderComponentAsync(
+                    httpContext,
+                    typeof(ExceptionComponent),
+                    null,
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object> { { "JsInterop", true } }
+                    )
+                )
+        );
 
         // Assert
-        Assert.Equal("JavaScript interop calls cannot be issued during server-side static rendering, because the page "
-            + "has not yet loaded in the browser. Statically-rendered components must wrap any JavaScript interop calls "
-            + "in conditional logic to ensure those interop calls are not attempted during static rendering.",
-            exception.Message);
+        Assert.Equal(
+            "JavaScript interop calls cannot be issued during server-side static rendering, because the page "
+                + "has not yet loaded in the browser. Statically-rendered components must wrap any JavaScript interop calls "
+                + "in conditional logic to ensure those interop calls are not attempted during static rendering.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -766,19 +1038,27 @@ public class EndpointHtmlRendererTest
         var httpContext = GetHttpContext(ctx);
 
         // Act
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await renderer.PrerenderComponentAsync(
-            httpContext,
-            typeof(RedirectComponent),
-            null,
-            ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { "RedirectUri", "http://localhost/redirect" }
-            })));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () =>
+                await renderer.PrerenderComponentAsync(
+                    httpContext,
+                    typeof(RedirectComponent),
+                    null,
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
+                        {
+                            { "RedirectUri", "http://localhost/redirect" },
+                        }
+                    )
+                )
+        );
 
-        Assert.Equal("A navigation command was attempted during prerendering after the server already started sending the response. " +
-                        "Navigation commands can not be issued during server-side prerendering after the response from the server has started. Applications must buffer the" +
-                        "response and avoid using features like FlushAsync() before all components on the page have been rendered to prevent failed navigation commands.",
-            exception.Message);
+        Assert.Equal(
+            "A navigation command was attempted during prerendering after the server already started sending the response. "
+                + "Navigation commands can not be issued during server-side prerendering after the response from the server has started. Applications must buffer the"
+                + "response and avoid using features like FlushAsync() before all components on the page have been rendered to prevent failed navigation commands.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -798,10 +1078,10 @@ public class EndpointHtmlRendererTest
             httpContext,
             typeof(RedirectComponent),
             null,
-            ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { "RedirectUri", "http://localhost/redirect" }
-            }));
+            ParameterView.FromDictionary(
+                new Dictionary<string, object> { { "RedirectUri", "http://localhost/redirect" } }
+            )
+        );
 
         // Assert
         Assert.Equal(302, ctx.Response.StatusCode);
@@ -815,7 +1095,12 @@ public class EndpointHtmlRendererTest
         var httpContext = GetHttpContext();
 
         // Act
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(AsyncComponent), null, ParameterView.Empty);
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(AsyncComponent),
+            null,
+            ParameterView.Empty
+        );
         var content = await renderer.Dispatcher.InvokeAsync(() => HtmlContentToString(result));
 
         // Assert
@@ -826,7 +1111,8 @@ public class EndpointHtmlRendererTest
     public async void Duplicate_NamedEventHandlers_AcrossComponents_ThowsOnDispatch()
     {
         // Arrange
-        var expectedError = @"There is more than one named submit event with the name 'default'. Ensure named submit events have unique names, or are in scopes with distinct names. The following components use this name:
+        var expectedError =
+            @"There is more than one named submit event with the name 'default'. Ensure named submit events have unique names, or are in scopes with distinct names. The following components use this name:
  - TestComponent > NamedEventHandlerComponent
  - TestComponent > OtherNamedEventHandlerComponent";
 
@@ -839,11 +1125,15 @@ public class EndpointHtmlRendererTest
             builder.CloseComponent();
         });
 
-        await renderer.Dispatcher.InvokeAsync(() => renderer.BeginRenderingComponent(component, ParameterView.Empty).QuiescenceTask);
+        await renderer.Dispatcher.InvokeAsync(
+            () => renderer.BeginRenderingComponent(component, ParameterView.Empty).QuiescenceTask
+        );
 
         // Act/Assert
         bool isBadRequest;
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => renderer.DispatchSubmitEventAsync("default", out isBadRequest));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => renderer.DispatchSubmitEventAsync("default", out isBadRequest)
+        );
         Assert.Equal(expectedError.ReplaceLineEndings(), exception.Message.ReplaceLineEndings());
     }
 
@@ -853,16 +1143,22 @@ public class EndpointHtmlRendererTest
         // Arrange
         var renderer = GetEndpointHtmlRenderer();
         var invoked = false;
-        var handler = () => { invoked = true; };
+        var handler = () =>
+        {
+            invoked = true;
+        };
         var isBadRequest = false;
         await renderer.Dispatcher.InvokeAsync(async () =>
         {
             var result = renderer.BeginRenderingComponent(
                 typeof(NamedEventHandlerComponent),
-                ParameterView.FromDictionary(new Dictionary<string, object>
-                {
-                    [nameof(NamedEventHandlerComponent.Handler)] = handler
-                }));
+                ParameterView.FromDictionary(
+                    new Dictionary<string, object>
+                    {
+                        [nameof(NamedEventHandlerComponent.Handler)] = handler,
+                    }
+                )
+            );
 
             await result.QuiescenceTask;
 
@@ -890,7 +1186,12 @@ public class EndpointHtmlRendererTest
 
         await renderer.Dispatcher.InvokeAsync(async () =>
         {
-            await renderer.RenderEndpointComponent(httpContext, typeof(NamedEventHandlerComponent), ParameterView.Empty, true);
+            await renderer.RenderEndpointComponent(
+                httpContext,
+                typeof(NamedEventHandlerComponent),
+                ParameterView.Empty,
+                true
+            );
 
             // Act
             await renderer.DispatchSubmitEventAsync(null, out isBadRequest);
@@ -900,8 +1201,10 @@ public class EndpointHtmlRendererTest
 
         Assert.True(isBadRequest);
         Assert.Equal(400, httpContext.Response.StatusCode);
-        Assert.StartsWith("The POST request does not specify which form is being submitted.",
-            await new StreamReader(bodyStream).ReadToEndAsync());
+        Assert.StartsWith(
+            "The POST request does not specify which form is being submitted.",
+            await new StreamReader(bodyStream).ReadToEndAsync()
+        );
     }
 
     [Fact]
@@ -919,7 +1222,12 @@ public class EndpointHtmlRendererTest
 
         await renderer.Dispatcher.InvokeAsync(async () =>
         {
-            await renderer.RenderEndpointComponent(httpContext, typeof(NamedEventHandlerComponent), ParameterView.Empty, true);
+            await renderer.RenderEndpointComponent(
+                httpContext,
+                typeof(NamedEventHandlerComponent),
+                ParameterView.Empty,
+                true
+            );
 
             // Act
             await renderer.DispatchSubmitEventAsync("other", out isBadRequest);
@@ -929,8 +1237,10 @@ public class EndpointHtmlRendererTest
 
         Assert.True(isBadRequest);
         Assert.Equal(400, httpContext.Response.StatusCode);
-        Assert.StartsWith("Cannot submit the form 'other' because",
-            await new StreamReader(bodyStream).ReadToEndAsync());
+        Assert.StartsWith(
+            "Cannot submit the form 'other' because",
+            await new StreamReader(bodyStream).ReadToEndAsync()
+        );
     }
 
     [Fact]
@@ -942,8 +1252,13 @@ public class EndpointHtmlRendererTest
         var isBadRequest = false;
 
         // Act
-        var component = new MultiAsyncRenderNamedEventHandlerComponent { Continue = continuationTcs.Task };
-        var result = await renderer.Dispatcher.InvokeAsync(() => renderer.BeginRenderingComponent(component, ParameterView.Empty));
+        var component = new MultiAsyncRenderNamedEventHandlerComponent
+        {
+            Continue = continuationTcs.Task,
+        };
+        var result = await renderer.Dispatcher.InvokeAsync(
+            () => renderer.BeginRenderingComponent(component, ParameterView.Empty)
+        );
 
         // Assert: it won't complete until we allow it
         await Task.Delay(500);
@@ -953,7 +1268,9 @@ public class EndpointHtmlRendererTest
 
         // Act/Assert: Dispatching the event uses the final delegate, not the intermediate one
         Assert.Null(component.Message);
-        await renderer.Dispatcher.InvokeAsync(() => renderer.DispatchSubmitEventAsync("default", out isBadRequest));
+        await renderer.Dispatcher.InvokeAsync(
+            () => renderer.DispatchSubmitEventAsync("default", out isBadRequest)
+        );
         Assert.Equal("Received call to updated handler", component.Message);
         Assert.False(isBadRequest);
     }
@@ -980,16 +1297,28 @@ public class EndpointHtmlRendererTest
             builder.OpenElement(0, "form");
             builder.SetKey(firstRender);
 
-            builder.AddAttribute(1, "onsubmit", () => { eventReceivedCount++; component.TriggerRender(); });
+            builder.AddAttribute(
+                1,
+                "onsubmit",
+                () =>
+                {
+                    eventReceivedCount++;
+                    component.TriggerRender();
+                }
+            );
             builder.AddNamedEvent("onsubmit", "my-name");
             builder.CloseElement();
 
             firstRender = false;
         });
-        var result = await renderer.Dispatcher.InvokeAsync(() => renderer.BeginRenderingComponent(component, ParameterView.Empty));
+        var result = await renderer.Dispatcher.InvokeAsync(
+            () => renderer.BeginRenderingComponent(component, ParameterView.Empty)
+        );
 
         // Act/Assert
-        await renderer.Dispatcher.InvokeAsync(() => renderer.DispatchSubmitEventAsync("my-name", out isBadRequest));
+        await renderer.Dispatcher.InvokeAsync(
+            () => renderer.DispatchSubmitEventAsync("my-name", out isBadRequest)
+        );
         Assert.False(isBadRequest);
         Assert.Equal(1, eventReceivedCount);
     }
@@ -1014,7 +1343,14 @@ public class EndpointHtmlRendererTest
         component = new TestComponent(builder =>
         {
             builder.OpenElement(0, "form");
-            builder.AddAttribute(1, "onsubmit", () => { eventReceivedCount++; });
+            builder.AddAttribute(
+                1,
+                "onsubmit",
+                () =>
+                {
+                    eventReceivedCount++;
+                }
+            );
             builder.AddNamedEvent("onsubmit", firstRender ? "my-name-1" : "my-name-2");
             builder.CloseElement();
             firstRender = false;
@@ -1023,7 +1359,12 @@ public class EndpointHtmlRendererTest
         // Act
         await renderer.Dispatcher.InvokeAsync(async () =>
         {
-            await renderer.RenderEndpointComponent(httpContext, typeof(EmptyComponent), ParameterView.Empty, true);
+            await renderer.RenderEndpointComponent(
+                httpContext,
+                typeof(EmptyComponent),
+                ParameterView.Empty,
+                true
+            );
             await renderer.BeginRenderingComponent(component, ParameterView.Empty).QuiescenceTask;
         });
 
@@ -1031,18 +1372,24 @@ public class EndpointHtmlRendererTest
         component.TriggerRender();
 
         // Act/Assert: Can dispatch with new name
-        await renderer.Dispatcher.InvokeAsync(() => renderer.DispatchSubmitEventAsync("my-name-2", out isBadRequest));
+        await renderer.Dispatcher.InvokeAsync(
+            () => renderer.DispatchSubmitEventAsync("my-name-2", out isBadRequest)
+        );
         Assert.False(isBadRequest);
         Assert.Equal(1, eventReceivedCount);
 
         // Act/Assert: Cannot dispatch with old name
-        await renderer.Dispatcher.InvokeAsync(() => renderer.DispatchSubmitEventAsync("my-name-1", out isBadRequest));
+        await renderer.Dispatcher.InvokeAsync(
+            () => renderer.DispatchSubmitEventAsync("my-name-1", out isBadRequest)
+        );
         Assert.Equal(1, eventReceivedCount);
         Assert.True(isBadRequest);
         Assert.Equal(400, httpContext.Response.StatusCode);
         httpContext.Response.Body.Position = 0;
-        Assert.StartsWith("Cannot submit the form 'my-name-1' because",
-            await new StreamReader(bodyStream).ReadToEndAsync());
+        Assert.StartsWith(
+            "Cannot submit the form 'my-name-1' because",
+            await new StreamReader(bodyStream).ReadToEndAsync()
+        );
     }
 
     [Fact]
@@ -1051,11 +1398,17 @@ public class EndpointHtmlRendererTest
         // Arrange
         var httpContext = GetHttpContext();
         var writer = new StringWriter();
-        var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+        var protector = _dataprotectorProvider
+            .CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
             .ToTimeLimitedDataProtector();
 
         // Act
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(ComponentWithInteractiveChildren), null, ParameterView.Empty);
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(ComponentWithInteractiveChildren),
+            null,
+            ParameterView.Empty
+        );
         await renderer.Dispatcher.InvokeAsync(() => result.WriteTo(writer, HtmlEncoder.Default));
         var content = writer.ToString();
 
@@ -1071,16 +1424,25 @@ public class EndpointHtmlRendererTest
             var markerText = serverMarkerMatch.Groups[1].Value;
             var innerHtml = serverMarkerMatch.Groups[2].Value;
 
-            var marker = JsonSerializer.Deserialize<ComponentMarker>(markerText, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var marker = JsonSerializer.Deserialize<ComponentMarker>(
+                markerText,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(0, marker.Sequence);
             Assert.NotNull(marker.PrerenderId);
             Assert.NotNull(marker.Descriptor);
             Assert.Equal("server", marker.Type);
 
             var unprotectedServerComponent = protector.Unprotect(marker.Descriptor);
-            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(
+                unprotectedServerComponent,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(0, serverComponent.Sequence);
-            Assert.Equal(typeof(InteractiveGreetingServer).Assembly.GetName().Name, serverComponent.AssemblyName);
+            Assert.Equal(
+                typeof(InteractiveGreetingServer).Assembly.GetName().Name,
+                serverComponent.AssemblyName
+            );
             Assert.Equal(typeof(InteractiveGreetingServer).FullName, serverComponent.TypeName);
             Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);
 
@@ -1100,17 +1462,29 @@ public class EndpointHtmlRendererTest
         {
             var markerText = serverNonPrerenderedMarkerMatch.Groups[1].Value;
 
-            var marker = JsonSerializer.Deserialize<ComponentMarker>(markerText, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var marker = JsonSerializer.Deserialize<ComponentMarker>(
+                markerText,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(1, marker.Sequence);
             Assert.Null(marker.PrerenderId);
             Assert.NotNull(marker.Descriptor);
             Assert.Equal("server", marker.Type);
 
             var unprotectedServerComponent = protector.Unprotect(marker.Descriptor);
-            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(
+                unprotectedServerComponent,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(1, serverComponent.Sequence);
-            Assert.Equal(typeof(InteractiveGreetingServer).Assembly.GetName().Name, serverComponent.AssemblyName);
-            Assert.Equal(typeof(InteractiveGreetingServerNonPrerendered).FullName, serverComponent.TypeName);
+            Assert.Equal(
+                typeof(InteractiveGreetingServer).Assembly.GetName().Name,
+                serverComponent.AssemblyName
+            );
+            Assert.Equal(
+                typeof(InteractiveGreetingServerNonPrerendered).FullName,
+                serverComponent.TypeName
+            );
             Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);
 
             var parameterDefinition = Assert.Single(serverComponent.ParameterDefinitions);
@@ -1128,10 +1502,16 @@ public class EndpointHtmlRendererTest
             var markerText = webAssemblyMarkerMatch.Groups[1].Value;
             var innerHtml = webAssemblyMarkerMatch.Groups[2].Value;
 
-            var marker = JsonSerializer.Deserialize<ComponentMarker>(markerText, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var marker = JsonSerializer.Deserialize<ComponentMarker>(
+                markerText,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(typeof(InteractiveGreetingWebAssembly).FullName, marker.TypeName);
 
-            var parameterValues = JsonSerializer.Deserialize<object[]>(Convert.FromBase64String(marker.ParameterValues), WebAssemblyComponentSerializationSettings.JsonSerializationOptions);
+            var parameterValues = JsonSerializer.Deserialize<object[]>(
+                Convert.FromBase64String(marker.ParameterValues),
+                WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal("WebAssemblyPrerendered", parameterValues.Single().ToString());
 
             Assert.Equal("<p>Hello WebAssemblyPrerendered!</p>", innerHtml);
@@ -1141,10 +1521,19 @@ public class EndpointHtmlRendererTest
         {
             var markerText = webAssemblyNonPrerenderedMarkerMatch.Groups[1].Value;
 
-            var marker = JsonSerializer.Deserialize<ComponentMarker>(markerText, ServerComponentSerializationSettings.JsonSerializationOptions);
-            Assert.Equal(typeof(InteractiveGreetingWebAssemblyNonPrerendered).FullName, marker.TypeName);
+            var marker = JsonSerializer.Deserialize<ComponentMarker>(
+                markerText,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
+            Assert.Equal(
+                typeof(InteractiveGreetingWebAssemblyNonPrerendered).FullName,
+                marker.TypeName
+            );
 
-            var parameterValues = JsonSerializer.Deserialize<object[]>(Convert.FromBase64String(marker.ParameterValues), WebAssemblyComponentSerializationSettings.JsonSerializationOptions);
+            var parameterValues = JsonSerializer.Deserialize<object[]>(
+                Convert.FromBase64String(marker.ParameterValues),
+                WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal("WebAssembly", parameterValues.Single().ToString());
         }
     }
@@ -1157,9 +1546,12 @@ public class EndpointHtmlRendererTest
         var writer = new StringWriter();
 
         // Act
-        var result = await renderer.PrerenderComponentAsync(httpContext, typeof(InteractiveWithInteractiveChild),
+        var result = await renderer.PrerenderComponentAsync(
+            httpContext,
+            typeof(InteractiveWithInteractiveChild),
             null,
-            ParameterView.Empty);
+            ParameterView.Empty
+        );
         await renderer.Dispatcher.InvokeAsync(() => result.WriteTo(writer, HtmlEncoder.Default));
         var content = writer.ToString();
 
@@ -1170,20 +1562,29 @@ public class EndpointHtmlRendererTest
         var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Singleline);
         Assert.True(match.Success);
         var preamble = match.Groups["preamble"].Value;
-        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+        var preambleMarker = JsonSerializer.Deserialize<ComponentMarker>(
+            preamble,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
         Assert.NotNull(preambleMarker.PrerenderId);
         Assert.Equal("webassembly", preambleMarker.Type);
 
         var prerenderedContent = match.Groups["content"].Value;
-        Assert.Equal("<h1>This is InteractiveWithInteractiveChild</h1>\n\n<p>Hello from InteractiveGreetingServer!</p>", prerenderedContent.Replace("\r\n", "\n"));
+        Assert.Equal(
+            "<h1>This is InteractiveWithInteractiveChild</h1>\n\n<p>Hello from InteractiveGreetingServer!</p>",
+            prerenderedContent.Replace("\r\n", "\n")
+        );
     }
 
     [Fact]
     public async Task PrerenderedState_EmptyWhenNoDeclaredRenderModes()
     {
         var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata([]);
-        var endpoint = new Endpoint((context) => Task.CompletedTask, new EndpointMetadataCollection(declaredRenderModesMetadata),
-            "TestEndpoint");
+        var endpoint = new Endpoint(
+            (context) => Task.CompletedTask,
+            new EndpointMetadataCollection(declaredRenderModesMetadata),
+            "TestEndpoint"
+        );
 
         var httpContext = GetHttpContext();
         httpContext.SetEndpoint(endpoint);
@@ -1192,19 +1593,23 @@ public class EndpointHtmlRendererTest
         Assert.Equal(EndpointHtmlRenderer.ComponentStateHtmlContent.Empty, content);
     }
 
-    public static TheoryData<IComponentRenderMode> SingleComponentRenderModeData => new TheoryData<IComponentRenderMode>
-    {
-        RenderMode.InteractiveServer,
-        RenderMode.InteractiveWebAssembly
-    };
+    public static TheoryData<IComponentRenderMode> SingleComponentRenderModeData =>
+        new TheoryData<IComponentRenderMode>
+        {
+            RenderMode.InteractiveServer,
+            RenderMode.InteractiveWebAssembly,
+        };
 
     [Theory]
     [MemberData(nameof(SingleComponentRenderModeData))]
     public async Task PrerenderedState_SelectsSingleStoreCorrectly(IComponentRenderMode renderMode)
     {
         var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata([renderMode]);
-        var endpoint = new Endpoint((context) => Task.CompletedTask, new EndpointMetadataCollection(declaredRenderModesMetadata),
-            "TestEndpoint");
+        var endpoint = new Endpoint(
+            (context) => Task.CompletedTask,
+            new EndpointMetadataCollection(declaredRenderModesMetadata),
+            "TestEndpoint"
+        );
 
         var httpContext = GetHttpContext();
         httpContext.SetEndpoint(endpoint);
@@ -1232,9 +1637,14 @@ public class EndpointHtmlRendererTest
     [Fact]
     public async Task PrerenderedState_MultipleStoresCorrectly()
     {
-        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata([RenderMode.InteractiveServer, RenderMode.InteractiveWebAssembly]);
-        var endpoint = new Endpoint((context) => Task.CompletedTask, new EndpointMetadataCollection(declaredRenderModesMetadata),
-            "TestEndpoint");
+        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata(
+            [RenderMode.InteractiveServer, RenderMode.InteractiveWebAssembly]
+        );
+        var endpoint = new Endpoint(
+            (context) => Task.CompletedTask,
+            new EndpointMetadataCollection(declaredRenderModesMetadata),
+            "TestEndpoint"
+        );
 
         var httpContext = GetHttpContext();
         httpContext.SetEndpoint(endpoint);
@@ -1260,19 +1670,27 @@ public class EndpointHtmlRendererTest
             _ => throw new InvalidOperationException($"Unexpected render mode: {renderMode}"),
         };
 
-        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata([RenderMode.InteractiveServer, RenderMode.InteractiveWebAssembly]);
-        var endpoint = new Endpoint((context) => Task.CompletedTask, new EndpointMetadataCollection(declaredRenderModesMetadata),
-            "TestEndpoint");
+        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata(
+            [RenderMode.InteractiveServer, RenderMode.InteractiveWebAssembly]
+        );
+        var endpoint = new Endpoint(
+            (context) => Task.CompletedTask,
+            new EndpointMetadataCollection(declaredRenderModesMetadata),
+            "TestEndpoint"
+        );
 
         var httpContext = GetHttpContext();
         httpContext.SetEndpoint(endpoint);
         var state = httpContext.RequestServices.GetRequiredService<PersistentComponentState>();
 
-        state.RegisterOnPersisting(() =>
-        {
-            state.PersistAsJson(renderMode, "persisted");
-            return Task.CompletedTask;
-        }, persistenceMode);
+        state.RegisterOnPersisting(
+            () =>
+            {
+                state.PersistAsJson(renderMode, "persisted");
+                return Task.CompletedTask;
+            },
+            persistenceMode
+        );
 
         var content = await renderer.PrerenderPersistedStateAsync(httpContext);
 
@@ -1304,19 +1722,26 @@ public class EndpointHtmlRendererTest
     [Theory]
     [InlineData("server")]
     [InlineData("wasm")]
-    public async Task PrerenderedState_PersistToStores_DoesNotNeedToInferRenderMode_ForSingleRenderMode(string declaredRenderMode)
+    public async Task PrerenderedState_PersistToStores_DoesNotNeedToInferRenderMode_ForSingleRenderMode(
+        string declaredRenderMode
+    )
     {
         IComponentRenderMode configuredMode = declaredRenderMode switch
         {
             "server" => RenderMode.InteractiveServer,
             "wasm" => RenderMode.InteractiveWebAssembly,
             "auto" => RenderMode.InteractiveAuto,
-            _ => throw new InvalidOperationException($"Unexpected render mode: {declaredRenderMode}"),
+            _ => throw new InvalidOperationException(
+                $"Unexpected render mode: {declaredRenderMode}"
+            ),
         };
 
         var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata([configuredMode]);
-        var endpoint = new Endpoint((context) => Task.CompletedTask, new EndpointMetadataCollection(declaredRenderModesMetadata),
-            "TestEndpoint");
+        var endpoint = new Endpoint(
+            (context) => Task.CompletedTask,
+            new EndpointMetadataCollection(declaredRenderModesMetadata),
+            "TestEndpoint"
+        );
 
         var httpContext = GetHttpContext();
         httpContext.SetEndpoint(endpoint);
@@ -1352,9 +1777,14 @@ public class EndpointHtmlRendererTest
     [Fact]
     public async Task PrerenderedState_Throws_WhenItCanInfer_CallbackRenderMode_ForMultipleRenderModes()
     {
-        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata([RenderMode.InteractiveServer, RenderMode.InteractiveWebAssembly]);
-        var endpoint = new Endpoint((context) => Task.CompletedTask, new EndpointMetadataCollection(declaredRenderModesMetadata),
-            "TestEndpoint");
+        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata(
+            [RenderMode.InteractiveServer, RenderMode.InteractiveWebAssembly]
+        );
+        var endpoint = new Endpoint(
+            (context) => Task.CompletedTask,
+            new EndpointMetadataCollection(declaredRenderModesMetadata),
+            "TestEndpoint"
+        );
 
         var httpContext = GetHttpContext();
         httpContext.SetEndpoint(endpoint);
@@ -1366,14 +1796,18 @@ public class EndpointHtmlRendererTest
             return Task.CompletedTask;
         });
 
-        await Assert.ThrowsAsync<InvalidOperationException>(async () => await renderer.PrerenderPersistedStateAsync(httpContext));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await renderer.PrerenderPersistedStateAsync(httpContext)
+        );
     }
 
     [Theory]
     [InlineData("server")]
     [InlineData("auto")]
     [InlineData("wasm")]
-    public async Task PrerenderedState_InfersCallbackRenderMode_ForMultipleRenderModes(string renderMode)
+    public async Task PrerenderedState_InfersCallbackRenderMode_ForMultipleRenderModes(
+        string renderMode
+    )
     {
         IComponentRenderMode persistenceMode = renderMode switch
         {
@@ -1382,18 +1816,29 @@ public class EndpointHtmlRendererTest
             "auto" => RenderMode.InteractiveAuto,
             _ => throw new InvalidOperationException($"Unexpected render mode: {renderMode}"),
         };
-        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata([RenderMode.InteractiveServer, RenderMode.InteractiveWebAssembly]);
-        var endpoint = new Endpoint((context) => Task.CompletedTask, new EndpointMetadataCollection(declaredRenderModesMetadata),
-            "TestEndpoint");
+        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata(
+            [RenderMode.InteractiveServer, RenderMode.InteractiveWebAssembly]
+        );
+        var endpoint = new Endpoint(
+            (context) => Task.CompletedTask,
+            new EndpointMetadataCollection(declaredRenderModesMetadata),
+            "TestEndpoint"
+        );
 
         var httpContext = GetHttpContext();
         httpContext.SetEndpoint(endpoint);
         var state = httpContext.RequestServices.GetRequiredService<PersistentComponentState>();
 
-        var ssrBoundary = new SSRRenderModeBoundary(httpContext, typeof(PersistenceComponent), persistenceMode);
+        var ssrBoundary = new SSRRenderModeBoundary(
+            httpContext,
+            typeof(PersistenceComponent),
+            persistenceMode
+        );
         var id = renderer.AssignRootComponentId(ssrBoundary);
 
-        await renderer.Dispatcher.InvokeAsync(() => renderer.RenderRootComponentAsync(id, ParameterView.Empty));
+        await renderer.Dispatcher.InvokeAsync(
+            () => renderer.RenderRootComponentAsync(id, ParameterView.Empty)
+        );
 
         var content = await renderer.PrerenderPersistedStateAsync(httpContext);
         Assert.NotNull(content);
@@ -1429,7 +1874,11 @@ public class EndpointHtmlRendererTest
     // Note that when an incompatible explicit render mode is specified we don't serialize the data.
     [InlineData("server", "wasm", false)]
     [InlineData("wasm", "server", false)]
-    public async Task PrerenderedState_ExplicitRenderModes_AreRespected(string renderMode, string declared, bool persisted)
+    public async Task PrerenderedState_ExplicitRenderModes_AreRespected(
+        string renderMode,
+        string declared,
+        bool persisted
+    )
     {
         IComponentRenderMode persistenceMode = renderMode switch
         {
@@ -1448,21 +1897,31 @@ public class EndpointHtmlRendererTest
         };
 
         var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata([configuredMode]);
-        var endpoint = new Endpoint((context) => Task.CompletedTask, new EndpointMetadataCollection(declaredRenderModesMetadata),
-            "TestEndpoint");
+        var endpoint = new Endpoint(
+            (context) => Task.CompletedTask,
+            new EndpointMetadataCollection(declaredRenderModesMetadata),
+            "TestEndpoint"
+        );
 
         var httpContext = GetHttpContext();
         httpContext.SetEndpoint(endpoint);
         var state = httpContext.RequestServices.GetRequiredService<PersistentComponentState>();
 
-        var ssrBoundary = new SSRRenderModeBoundary(httpContext, typeof(PersistenceComponent), configuredMode);
+        var ssrBoundary = new SSRRenderModeBoundary(
+            httpContext,
+            typeof(PersistenceComponent),
+            configuredMode
+        );
         var id = renderer.AssignRootComponentId(ssrBoundary);
-        await renderer.Dispatcher.InvokeAsync(() => renderer.RenderRootComponentAsync(
-            id,
-            ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                ["Mode"] = renderMode,
-            })));
+        await renderer.Dispatcher.InvokeAsync(
+            () =>
+                renderer.RenderRootComponentAsync(
+                    id,
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object> { ["Mode"] = renderMode }
+                    )
+                )
+        );
 
         var content = await renderer.PrerenderPersistedStateAsync(httpContext);
         Assert.NotNull(content);
@@ -1526,7 +1985,14 @@ public class EndpointHtmlRendererTest
             }
             else
             {
-                builder.AddAttribute(1, "onsubmit", () => { GC.KeepAlive(new object()); });
+                builder.AddAttribute(
+                    1,
+                    "onsubmit",
+                    () =>
+                    {
+                        GC.KeepAlive(new object());
+                    }
+                );
                 builder.AddNamedEvent("onsubmit", "default");
             }
             builder.CloseElement();
@@ -1544,14 +2010,25 @@ public class EndpointHtmlRendererTest
 
         public string Message { get; private set; }
 
-        [Parameter] public Task Continue { get; set; }
+        [Parameter]
+        public Task Continue { get; set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             builder.OpenElement(0, "form");
-            builder.AddAttribute(1, "onsubmit", !hasRendered
-                ? () => { Message = "Received call to original handler"; }
-            : () => { Message = "Received call to updated handler"; });
+            builder.AddAttribute(
+                1,
+                "onsubmit",
+                !hasRendered
+                    ? () =>
+                    {
+                        Message = "Received call to original handler";
+                    }
+                    : () =>
+                    {
+                        Message = "Received call to updated handler";
+                    }
+            );
             builder.AddNamedEvent("onsubmit", "default");
             builder.CloseElement();
         }
@@ -1583,15 +2060,17 @@ public class EndpointHtmlRendererTest
             _renderFragment = renderFragment;
         }
 
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
-            => _renderFragment(builder);
+        protected override void BuildRenderTree(RenderTreeBuilder builder) =>
+            _renderFragment(builder);
     }
 
     class PersistenceComponent : IComponent
     {
-        [Inject] public PersistentComponentState State { get; set; }
+        [Inject]
+        public PersistentComponentState State { get; set; }
 
-        [Parameter] public string Mode { get; set; }
+        [Parameter]
+        public string Mode { get; set; }
 
         private Task PersistState()
         {
@@ -1599,9 +2078,7 @@ public class EndpointHtmlRendererTest
             return Task.CompletedTask;
         }
 
-        public void Attach(RenderHandle renderHandle)
-        {
-        }
+        public void Attach(RenderHandle renderHandle) { }
 
         public Task SetParametersAsync(ParameterView parameters)
         {
@@ -1640,9 +2117,11 @@ public class EndpointHtmlRendererTest
 
     private class TestEndpointHtmlRenderer : EndpointHtmlRenderer
     {
-        public TestEndpointHtmlRenderer(IServiceProvider serviceProvider, ILoggerFactory loggerFactory) : base(serviceProvider, loggerFactory)
-        {
-        }
+        public TestEndpointHtmlRenderer(
+            IServiceProvider serviceProvider,
+            ILoggerFactory loggerFactory
+        )
+            : base(serviceProvider, loggerFactory) { }
 
         internal int TestAssignRootComponentId(IComponent component)
         {
@@ -1670,27 +2149,39 @@ public class EndpointHtmlRendererTest
         services.AddSingleton<IJSRuntime, UnsupportedJavaScriptRuntime>();
         services.AddSingleton<NavigationManager, HttpNavigationManager>();
         services.AddSingleton<ILoggerFactory, NullLoggerFactory>();
-        services.AddSingleton<ILogger<ComponentStatePersistenceManager>, NullLogger<ComponentStatePersistenceManager>>();
+        services.AddSingleton<
+            ILogger<ComponentStatePersistenceManager>,
+            NullLogger<ComponentStatePersistenceManager>
+        >();
         services.AddSingleton<ComponentStatePersistenceManager>();
-        services.AddSingleton(sp => sp.GetRequiredService<ComponentStatePersistenceManager>().State);
+        services.AddSingleton(sp =>
+            sp.GetRequiredService<ComponentStatePersistenceManager>().State
+        );
         services.AddSingleton<ServerComponentSerializer>();
         services.AddSingleton<HttpContextFormDataProvider>();
         services.AddAntiforgery();
         services.AddSingleton<ComponentStatePersistenceManager>();
-        services.AddSingleton<PersistentComponentState>(sp => sp.GetRequiredService<ComponentStatePersistenceManager>().State);
+        services.AddSingleton<PersistentComponentState>(sp =>
+            sp.GetRequiredService<ComponentStatePersistenceManager>().State
+        );
         services.AddSingleton<AntiforgeryStateProvider, EndpointAntiforgeryStateProvider>();
-        services.AddSingleton<ICascadingValueSupplier>(_ => new SupplyParameterFromFormValueProvider(null, ""));
+        services.AddSingleton<ICascadingValueSupplier>(
+            _ => new SupplyParameterFromFormValueProvider(null, "")
+        );
 
         return services;
     }
 
     private class RedirectComponent : ComponentBase
     {
-        [Inject] NavigationManager NavigationManager { get; set; }
+        [Inject]
+        NavigationManager NavigationManager { get; set; }
 
-        [Parameter] public string RedirectUri { get; set; }
+        [Parameter]
+        public string RedirectUri { get; set; }
 
-        [Parameter] public bool Force { get; set; }
+        [Parameter]
+        public bool Force { get; set; }
 
         protected override void OnInitialized()
         {
@@ -1700,11 +2191,14 @@ public class EndpointHtmlRendererTest
 
     private class ExceptionComponent : ComponentBase
     {
-        [Parameter] public bool IsAsync { get; set; }
+        [Parameter]
+        public bool IsAsync { get; set; }
 
-        [Parameter] public bool JsInterop { get; set; }
+        [Parameter]
+        public bool JsInterop { get; set; }
 
-        [Inject] IJSRuntime JsRuntime { get; set; }
+        [Inject]
+        IJSRuntime JsRuntime { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
@@ -1727,7 +2221,8 @@ public class EndpointHtmlRendererTest
 
     private class OnAfterRenderComponent : ComponentBase
     {
-        [Parameter] public OnAfterRenderState State { get; set; }
+        [Parameter]
+        public OnAfterRenderState State { get; set; }
 
         protected override void OnAfterRender(bool firstRender)
         {
@@ -1747,7 +2242,8 @@ public class EndpointHtmlRendererTest
 
     private class AsyncDisposableComponent : ComponentBase, IAsyncDisposable
     {
-        [Parameter] public AsyncDisposableState State { get; set; }
+        [Parameter]
+        public AsyncDisposableState State { get; set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -1770,9 +2266,25 @@ public class EndpointHtmlRendererTest
 
     private class TestEnvironment(string environmentName) : IHostEnvironment
     {
-        public string EnvironmentName { get => environmentName; set => throw new NotImplementedException(); }
-        public string ApplicationName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string ContentRootPath { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IFileProvider ContentRootFileProvider { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string EnvironmentName
+        {
+            get => environmentName;
+            set => throw new NotImplementedException();
+        }
+        public string ApplicationName
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+        public string ContentRootPath
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+        public IFileProvider ContentRootFileProvider
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
     }
 }

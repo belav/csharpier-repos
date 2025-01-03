@@ -13,9 +13,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 {
     public class InteractiveCSharpTestWorkspaceFixture : CSharpTestWorkspaceFixture
     {
-        internal static TestWorkspace CreateInteractiveWorkspace(string fileContent, TestComposition composition)
+        internal static TestWorkspace CreateInteractiveWorkspace(
+            string fileContent,
+            TestComposition composition
+        )
         {
-            var workspaceDefinition = $@"
+            var workspaceDefinition =
+                $@"
 <Workspace>
     <Submission Language=""C#"" CommonReferences=""true"">
 <![CDATA[
@@ -23,10 +27,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
     </Submission>
 </Workspace>
 ";
-            return TestWorkspace.Create(XElement.Parse(workspaceDefinition), composition: composition, workspaceKind: WorkspaceKind.Interactive);
+            return TestWorkspace.Create(
+                XElement.Parse(workspaceDefinition),
+                composition: composition,
+                workspaceKind: WorkspaceKind.Interactive
+            );
         }
 
-        protected override TestWorkspace CreateWorkspace(TestComposition composition = null)
-            => CreateInteractiveWorkspace(fileContent: "", composition);
+        protected override TestWorkspace CreateWorkspace(TestComposition composition = null) =>
+            CreateInteractiveWorkspace(fileContent: "", composition);
     }
 }

@@ -9,40 +9,76 @@ namespace Microsoft.AspNetCore.Http.RequestDelegateGenerator.StaticRouteHandlerM
 
 internal static class DiagnosticEmitter
 {
-    public static void EmitRequiredDiagnostics(this EndpointResponse response, List<Diagnostic> diagnostics, Location location)
+    public static void EmitRequiredDiagnostics(
+        this EndpointResponse response,
+        List<Diagnostic> diagnostics,
+        Location location
+    )
     {
         if (response.ResponseType is ITypeParameterSymbol)
         {
-            diagnostics.Add(Diagnostic.Create(DiagnosticDescriptors.TypeParametersNotSupported, location));
+            diagnostics.Add(
+                Diagnostic.Create(DiagnosticDescriptors.TypeParametersNotSupported, location)
+            );
         }
 
-        if (response.ResponseType?.DeclaredAccessibility is Accessibility.Private or Accessibility.Protected)
+        if (
+            response.ResponseType?.DeclaredAccessibility
+            is Accessibility.Private
+                or Accessibility.Protected
+        )
         {
-            diagnostics.Add(Diagnostic.Create(DiagnosticDescriptors.InaccessibleTypesNotSupported, location));
+            diagnostics.Add(
+                Diagnostic.Create(DiagnosticDescriptors.InaccessibleTypesNotSupported, location)
+            );
         }
 
         if (response.ResponseType?.IsAnonymousType == true)
         {
-            diagnostics.Add(Diagnostic.Create(DiagnosticDescriptors.UnableToResolveAnonymousReturnType, location));
+            diagnostics.Add(
+                Diagnostic.Create(
+                    DiagnosticDescriptors.UnableToResolveAnonymousReturnType,
+                    location
+                )
+            );
         }
     }
 
-    public static void EmitRequiredDiagnostics(this IParameterSymbol parameterSymbol, List<Diagnostic> diagnostics, Location location)
+    public static void EmitRequiredDiagnostics(
+        this IParameterSymbol parameterSymbol,
+        List<Diagnostic> diagnostics,
+        Location location
+    )
     {
         var typeSymbol = parameterSymbol.Type;
-        if (typeSymbol is ITypeParameterSymbol ||
-            typeSymbol is INamedTypeSymbol &&
-            ((INamedTypeSymbol)typeSymbol).TypeArguments.Any(a => a is ITypeParameterSymbol))
+        if (
+            typeSymbol is ITypeParameterSymbol
+            || typeSymbol is INamedTypeSymbol
+                && ((INamedTypeSymbol)typeSymbol).TypeArguments.Any(a => a is ITypeParameterSymbol)
+        )
         {
-            diagnostics.Add(Diagnostic.Create(DiagnosticDescriptors.TypeParametersNotSupported, location));
+            diagnostics.Add(
+                Diagnostic.Create(DiagnosticDescriptors.TypeParametersNotSupported, location)
+            );
         }
 
-        if (typeSymbol.DeclaredAccessibility is Accessibility.Private or Accessibility.Protected ||
-            typeSymbol is INamedTypeSymbol &&
-            ((INamedTypeSymbol)typeSymbol).TypeArguments.Any(typeArg =>
-                typeArg.DeclaredAccessibility is Accessibility.Private or Accessibility.Protected))
+        if (
+            typeSymbol.DeclaredAccessibility is Accessibility.Private or Accessibility.Protected
+            || typeSymbol is INamedTypeSymbol
+                && ((INamedTypeSymbol)typeSymbol).TypeArguments.Any(typeArg =>
+                    typeArg.DeclaredAccessibility
+                        is Accessibility.Private
+                            or Accessibility.Protected
+                )
+        )
         {
-            diagnostics.Add(Diagnostic.Create(DiagnosticDescriptors.InaccessibleTypesNotSupported, location, typeSymbol.Name));
+            diagnostics.Add(
+                Diagnostic.Create(
+                    DiagnosticDescriptors.InaccessibleTypesNotSupported,
+                    location,
+                    typeSymbol.Name
+                )
+            );
         }
     }
 }

@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
     /// </summary>
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    internal sealed class ExportAspNetCoreEmbeddedLanguageDocumentHighlighterAttribute : ExportAttribute
+    internal sealed class ExportAspNetCoreEmbeddedLanguageDocumentHighlighterAttribute
+        : ExportAttribute
     {
         /// <summary>
         /// Name of the classifier.
@@ -25,7 +26,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
         public string Language { get; }
 
         public ExportAspNetCoreEmbeddedLanguageDocumentHighlighterAttribute(
-            string name, string language)
+            string name,
+            string language
+        )
             : base(typeof(IAspNetCoreEmbeddedLanguageDocumentHighlighter))
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));

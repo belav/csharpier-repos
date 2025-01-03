@@ -32,6 +32,6 @@ namespace System.Runtime.Diagnostics
         /// <summary>
         /// Create an activity Id and set it to the thread
         /// </summary>
-        EVENT_ACTIVITY_CTRL_CREATE_SET_ID = 5
+        EVENT_ACTIVITY_CTRL_CREATE_SET_ID = 5,
     }
 }

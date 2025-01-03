@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
@@ -34,10 +33,12 @@ namespace ILCompiler.DependencyAnalysis
         {
             // If the class library doesn't provide this helper, the optimization is disabled.
             MethodDesc helper = factory.InstanceMethodRemovedHelper;
-            return helper == null ? RealBody: factory.MethodEntrypoint(helper);
+            return helper == null ? RealBody : factory.MethodEntrypoint(helper);
         }
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory)
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        )
         {
             // Convert methods on Array<T> into T[]
             TypeDesc owningType = Method.OwningType;
@@ -53,7 +54,8 @@ namespace ILCompiler.DependencyAnalysis
                 new CombinedDependencyListEntry(
                     RealBody,
                     factory.ConstructedTypeSymbol(owningType),
-                    "Instance method on a constructed type"),
+                    "Instance method on a constructed type"
+                ),
             };
         }
 

@@ -4,28 +4,39 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
     using System.Configuration;
 
-    internal sealed class VersionValidator : ConfigurationValidatorBase {
+    internal sealed class VersionValidator : ConfigurationValidatorBase
+    {
         private readonly Version _minimumVersion;
 
-        public VersionValidator(Version minimumVersion) {
+        public VersionValidator(Version minimumVersion)
+        {
             _minimumVersion = minimumVersion;
         }
 
-        public override bool CanValidate(Type type) {
+        public override bool CanValidate(Type type)
+        {
             return typeof(Version).Equals(type);
         }
 
-        public override void Validate(object value) {
-            if (value == null) {
+        public override void Validate(object value)
+        {
+            if (value == null)
+            {
                 throw new ArgumentNullException("value");
             }
-            if (((Version)value) < _minimumVersion) {
-                throw new ArgumentOutOfRangeException("value", 
-                    SR.GetString(SR.Config_control_rendering_compatibility_version_is_less_than_minimum_version));
+            if (((Version)value) < _minimumVersion)
+            {
+                throw new ArgumentOutOfRangeException(
+                    "value",
+                    SR.GetString(
+                        SR.Config_control_rendering_compatibility_version_is_less_than_minimum_version
+                    )
+                );
             }
         }
     }

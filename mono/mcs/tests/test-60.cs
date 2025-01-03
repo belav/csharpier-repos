@@ -7,46 +7,44 @@
 #endregion
 
 #if FALSE
-	#region Fields
-		#if B
+#region Fields
+#if B
 			int a;
-		#else
+#else
 			bool a;
-		#endif
-	#endregion
+#endif
+#endregion
 #endif
 
 #if FLAG_FALSE
-        #pragma foo
-        namespace ns1
+#pragma foo
+namespace ns1
 #else
-        #if FLAG_FALSE
-                        #if FLAG_FALSE
-                                #error No error
+#if FLAG_FALSE
+#if FLAG_FALSE
+#error No error
                                 namespace ns2
-                        #else
-                                #line aa
+#else
+#line aa
                                 namespace ns3
-                        #endif
-        #else
-                #if FLAG_TRUE
-                        namespace ns4
-                #elif FLAG_FALSE
+#endif
+#else
+#if FLAG_TRUE
+namespace ns4
+#elif FLAG_FALSE
                         namespace ns41
-                #else
-                        namespace ns5
-                #endif
-        #endif
+#else
+namespace ns5
+#endif
+#endif
 #endif
 {
-        public class Y
-        {
-                public Y()
-                {
-                }
+    public class Y
+    {
+        public Y() { }
 
-		public void Run () {}
-        }
+        public void Run() { }
+    }
 }
 
 #if (X)
@@ -59,16 +57,16 @@
 #else
 #endif
 #else
-class X {
-	public static int Main ()
-	{
+class X
+{
+    public static int Main()
+    {
 #if (TEST)
-		ns5.Y y = new ns5.Y ();
+        ns5.Y y = new ns5.Y();
 
-		y.Run ();
-		return 0;
+        y.Run();
+        return 0;
 #endif
-	}
+    }
 }
 #endif
-

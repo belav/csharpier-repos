@@ -14,7 +14,10 @@ namespace System.Formats.Tar.Tests
         [InlineData("../file.txt", "subDirectory1/subDirectory1.1")]
         [InlineData("./file.txt", "subDirectory1/subDirectory1.1")]
         [InlineData("./file.txt", null)]
-        public void SymlinkRelativeTargets_InsideTheArchive_RoundtripsSuccessfully(string symlinkTargetPath, string subDirectory)
+        public void SymlinkRelativeTargets_InsideTheArchive_RoundtripsSuccessfully(
+            string symlinkTargetPath,
+            string subDirectory
+        )
         {
             using TempDirectory root = new TempDirectory();
 
@@ -27,15 +30,24 @@ namespace System.Formats.Tar.Tests
             Directory.CreateDirectory(destinationDirectoryName);
 
             string sourceSubDirectory = Path.Join(sourceDirectoryName, subDirectory);
-            if(subDirectory != null)  Directory.CreateDirectory(sourceSubDirectory);
+            if (subDirectory != null)
+                Directory.CreateDirectory(sourceSubDirectory);
 
             File.Create(Path.Join(sourceDirectoryName, subDirectory, symlinkTargetPath)).Dispose();
             File.CreateSymbolicLink(Path.Join(sourceSubDirectory, "linkToFile"), symlinkTargetPath);
 
-            TarFile.CreateFromDirectory(sourceDirectoryName, destinationArchive, includeBaseDirectory: false);
+            TarFile.CreateFromDirectory(
+                sourceDirectoryName,
+                destinationArchive,
+                includeBaseDirectory: false
+            );
 
             using FileStream archiveStream = File.OpenRead(destinationArchive);
-            TarFile.ExtractToDirectory(archiveStream, destinationDirectoryName, overwriteFiles: true);
+            TarFile.ExtractToDirectory(
+                archiveStream,
+                destinationDirectoryName,
+                overwriteFiles: true
+            );
 
             string destinationSubDirectory = Path.Join(destinationDirectoryName, subDirectory);
             string symlinkPath = Path.Join(destinationSubDirectory, "linkToFile");
@@ -44,14 +56,20 @@ namespace System.Formats.Tar.Tests
             FileInfo? fileInfo = new(symlinkPath);
             Assert.Equal(symlinkTargetPath, fileInfo.LinkTarget);
 
-            FileSystemInfo? symlinkTarget = File.ResolveLinkTarget(symlinkPath, returnFinalTarget: true);
+            FileSystemInfo? symlinkTarget = File.ResolveLinkTarget(
+                symlinkPath,
+                returnFinalTarget: true
+            );
             Assert.True(File.Exists(symlinkTarget.FullName));
         }
 
         [ConditionalTheory(typeof(MountHelper), nameof(MountHelper.CanCreateSymbolicLinks))]
         [InlineData("../file.txt", null)]
         [InlineData("../../file.txt", "subDirectory")]
-        public void SymlinkRelativeTargets_OutsideTheArchive_Fails(string symlinkTargetPath, string subDirectory)
+        public void SymlinkRelativeTargets_OutsideTheArchive_Fails(
+            string symlinkTargetPath,
+            string subDirectory
+        )
         {
             using TempDirectory root = new TempDirectory();
 
@@ -64,16 +82,35 @@ namespace System.Formats.Tar.Tests
             Directory.CreateDirectory(destinationDirectoryName);
 
             string sourceSubDirectory = Path.Join(sourceDirectoryName, subDirectory);
-            if(subDirectory != null)  Directory.CreateDirectory(sourceSubDirectory);
+            if (subDirectory != null)
+                Directory.CreateDirectory(sourceSubDirectory);
 
             File.CreateSymbolicLink(Path.Join(sourceSubDirectory, "linkToFile"), symlinkTargetPath);
 
-            TarFile.CreateFromDirectory(sourceDirectoryName, destinationArchive, includeBaseDirectory: false);
+            TarFile.CreateFromDirectory(
+                sourceDirectoryName,
+                destinationArchive,
+                includeBaseDirectory: false
+            );
 
             using FileStream archiveStream = File.OpenRead(destinationArchive);
-            Exception exception = Assert.Throws<IOException>(() => TarFile.ExtractToDirectory(archiveStream, destinationDirectoryName, overwriteFiles: true));
+            Exception exception = Assert.Throws<IOException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        archiveStream,
+                        destinationDirectoryName,
+                        overwriteFiles: true
+                    )
+            );
 
-            Assert.Equal(SR.Format(SR.TarExtractingResultsLinkOutside, symlinkTargetPath, $"{destinationDirectoryName}{Path.DirectorySeparatorChar}"), exception.Message);
+            Assert.Equal(
+                SR.Format(
+                    SR.TarExtractingResultsLinkOutside,
+                    symlinkTargetPath,
+                    $"{destinationDirectoryName}{Path.DirectorySeparatorChar}"
+                ),
+                exception.Message
+            );
         }
     }
 }

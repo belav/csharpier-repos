@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,97 +32,102 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Xml;
-using System.Xml.XPath;
 using System.Xml.Schema;
+using System.Xml.XPath;
 using AC = System.ComponentModel.AttributeCollection;
 
 namespace System.Web.UI.WebControls
 {
-	internal class XmlDataSourceNodeDescriptor: ICustomTypeDescriptor, IXPathNavigable
-	{
-		XmlNode node;
-		
-		public XmlDataSourceNodeDescriptor (XmlNode node)
-		{
-			this.node = node;
-		}
-		
-		public XmlNode Node {
-			get { return node; }
-		}
-		
-		public AC GetAttributes()
-		{
-			return AC.Empty;
-		}
+    internal class XmlDataSourceNodeDescriptor : ICustomTypeDescriptor, IXPathNavigable
+    {
+        XmlNode node;
 
-		public string GetClassName()
-		{
-			return "XmlDataSourceNodeDescriptor";
-		}
+        public XmlDataSourceNodeDescriptor(XmlNode node)
+        {
+            this.node = node;
+        }
 
-		public string GetComponentName()
-		{
-			return null;
-		}
+        public XmlNode Node
+        {
+            get { return node; }
+        }
 
-		public TypeConverter GetConverter()
-		{
-			return null;
-		}
+        public AC GetAttributes()
+        {
+            return AC.Empty;
+        }
 
-		public EventDescriptor GetDefaultEvent()
-		{
-			return null;
-		}
+        public string GetClassName()
+        {
+            return "XmlDataSourceNodeDescriptor";
+        }
 
-		public PropertyDescriptor GetDefaultProperty()
-		{
-			return null;
-		}
+        public string GetComponentName()
+        {
+            return null;
+        }
 
-		public object GetEditor(Type editorBaseType)
-		{
-			return null;
-		}
+        public TypeConverter GetConverter()
+        {
+            return null;
+        }
 
-		public EventDescriptorCollection GetEvents()
-		{
-			return null;
-		}
+        public EventDescriptor GetDefaultEvent()
+        {
+            return null;
+        }
 
-		public EventDescriptorCollection GetEvents(Attribute[] arr)
-		{
-			return null;
-		}
+        public PropertyDescriptor GetDefaultProperty()
+        {
+            return null;
+        }
 
-		public PropertyDescriptorCollection GetProperties()
-		{
-			if (node.Attributes != null) {
-				PropertyDescriptor[] props = new PropertyDescriptor [node.Attributes.Count];
-				for (int n=0; n<props.Length; n++)
-					props [n] = new XmlDataSourcePropertyDescriptor (node.Attributes [n].Name, node.IsReadOnly);
-				return new PropertyDescriptorCollection (props);
-			} else
-				return PropertyDescriptorCollection.Empty;
-		}
+        public object GetEditor(Type editorBaseType)
+        {
+            return null;
+        }
 
-		public PropertyDescriptorCollection GetProperties(Attribute[] arr)
-		{
-			return GetProperties ();
-		}
+        public EventDescriptorCollection GetEvents()
+        {
+            return null;
+        }
 
-		public object GetPropertyOwner (PropertyDescriptor pd)
-		{
-			if (pd is XmlDataSourcePropertyDescriptor)
-				return this;
-			return null;
-		}
+        public EventDescriptorCollection GetEvents(Attribute[] arr)
+        {
+            return null;
+        }
 
-		public XPathNavigator CreateNavigator ()
-		{
-			return node.CreateNavigator();
-		}
-	}
+        public PropertyDescriptorCollection GetProperties()
+        {
+            if (node.Attributes != null)
+            {
+                PropertyDescriptor[] props = new PropertyDescriptor[node.Attributes.Count];
+                for (int n = 0; n < props.Length; n++)
+                    props[n] = new XmlDataSourcePropertyDescriptor(
+                        node.Attributes[n].Name,
+                        node.IsReadOnly
+                    );
+                return new PropertyDescriptorCollection(props);
+            }
+            else
+                return PropertyDescriptorCollection.Empty;
+        }
+
+        public PropertyDescriptorCollection GetProperties(Attribute[] arr)
+        {
+            return GetProperties();
+        }
+
+        public object GetPropertyOwner(PropertyDescriptor pd)
+        {
+            if (pd is XmlDataSourcePropertyDescriptor)
+                return this;
+            return null;
+        }
+
+        public XPathNavigator CreateNavigator()
+        {
+            return node.CreateNavigator();
+        }
+    }
 }
-

@@ -5,13 +5,13 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Internal;
 using Microsoft.Extensions.Logging;
@@ -37,7 +37,9 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             BoundProperties = new List<ParameterDescriptor>(),
         };
 
-        actionDescriptor.MethodInfo = typeof(TestController).GetMethod(nameof(TestController.ActionMethod));
+        actionDescriptor.MethodInfo = typeof(TestController).GetMethod(
+            nameof(TestController.ActionMethod)
+        );
         actionDescriptor.ControllerTypeInfo = typeof(TestController).GetTypeInfo();
 
         var listener = new TestDiagnosticListener();
@@ -51,7 +53,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             actionDescriptor,
             controller: new TestController(),
             diagnosticListener: listener,
-            routeData: routeData);
+            routeData: routeData
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -78,7 +81,9 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             BoundProperties = new List<ParameterDescriptor>(),
         };
 
-        actionDescriptor.MethodInfo = typeof(TestController).GetMethod(nameof(TestController.ActionMethod));
+        actionDescriptor.MethodInfo = typeof(TestController).GetMethod(
+            nameof(TestController.ActionMethod)
+        );
         actionDescriptor.ControllerTypeInfo = typeof(TestController).GetTypeInfo();
 
         var listener = new TestDiagnosticListener();
@@ -88,7 +93,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             new[] { filter },
             actionDescriptor,
             controller: new TestController(),
-            diagnosticListener: listener);
+            diagnosticListener: listener
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -109,30 +115,47 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             BoundProperties = new List<ParameterDescriptor>(),
         };
 
-        actionDescriptor.MethodInfo = typeof(TestController).GetMethod(nameof(TestController.ActionMethod));
+        actionDescriptor.MethodInfo = typeof(TestController).GetMethod(
+            nameof(TestController.ActionMethod)
+        );
         actionDescriptor.ControllerTypeInfo = typeof(TestController).GetTypeInfo();
 
-        var listener = new TestDiagnosticListener();        
+        var listener = new TestDiagnosticListener();
         var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
         resourceFilter
-            .Setup(f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()))
-            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(async (c, next) =>
-            {
-                await next();
-            })
+            .Setup(f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                )
+            )
+            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
+                async (c, next) =>
+                {
+                    await next();
+                }
+            )
             .Verifiable();
 
         var invoker = CreateInvoker(
             new IFilterMetadata[] { resourceFilter.Object },
             actionDescriptor,
             controller: new TestController(),
-            diagnosticListener: listener);
+            diagnosticListener: listener
+        );
 
         // Act
         await invoker.InvokeAsync();
 
         // Assert
-        resourceFilter.Verify(f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()), Times.Once);
+        resourceFilter.Verify(
+            f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                ),
+            Times.Once
+        );
         Assert.NotNull(listener.BeforeResource?.ActionDescriptor);
         Assert.NotNull(listener.BeforeResource?.ExecutingContext);
         Assert.NotNull(listener.BeforeResource?.Filter);
@@ -158,31 +181,48 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Returns(Task.FromResult(true))
             .Verifiable();
 
-        actionDescriptor.MethodInfo = typeof(TestController).GetMethod(nameof(TestController.ActionMethod));
+        actionDescriptor.MethodInfo = typeof(TestController).GetMethod(
+            nameof(TestController.ActionMethod)
+        );
         actionDescriptor.ControllerTypeInfo = typeof(TestController).GetTypeInfo();
 
-        var listener = new TestDiagnosticListener();        
+        var listener = new TestDiagnosticListener();
         var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
         resourceFilter
-            .Setup(f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()))
-            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>((c, next) =>
-            {
-                c.Result = expected.Object;
-                return Task.FromResult(true);
-            })
+            .Setup(f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                )
+            )
+            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
+                (c, next) =>
+                {
+                    c.Result = expected.Object;
+                    return Task.FromResult(true);
+                }
+            )
             .Verifiable();
 
         var invoker = CreateInvoker(
             new IFilterMetadata[] { resourceFilter.Object },
             actionDescriptor,
             controller: new TestController(),
-            diagnosticListener: listener);
+            diagnosticListener: listener
+        );
 
         // Act
         await invoker.InvokeAsync();
 
         // Assert
-        resourceFilter.Verify(f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()), Times.Once());
+        resourceFilter.Verify(
+            f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                ),
+            Times.Once()
+        );
         Assert.NotNull(listener.BeforeResource?.ActionDescriptor);
         Assert.NotNull(listener.BeforeResource?.ExecutingContext);
         Assert.NotNull(listener.BeforeResource?.Filter);
@@ -203,16 +243,20 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var resourceFilter = new Mock<IResourceFilter>();
         resourceFilter
             .Setup(f => f.OnResourceExecuting(It.IsAny<ResourceExecutingContext>()))
-            .Callback<ResourceExecutingContext>((resourceExecutingContext) =>
-            {
-                resourceExecutingContext.ValueProviderFactories.Add(valueProviderFactory2);
-            });
+            .Callback<ResourceExecutingContext>(
+                (resourceExecutingContext) =>
+                {
+                    resourceExecutingContext.ValueProviderFactories.Add(valueProviderFactory2);
+                }
+            );
         var valueProviderFactory1 = Mock.Of<IValueProviderFactory>();
         var valueProviderFactories = new List<IValueProviderFactory>();
         valueProviderFactories.Add(valueProviderFactory1);
 
         var invoker = CreateInvoker(
-            new IFilterMetadata[] { resourceFilter.Object }, valueProviderFactories: valueProviderFactories);
+            new IFilterMetadata[] { resourceFilter.Object },
+            valueProviderFactories: valueProviderFactories
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -232,10 +276,12 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var resourceFilter = new Mock<IResourceFilter>();
         resourceFilter
             .Setup(f => f.OnResourceExecuting(It.IsAny<ResourceExecutingContext>()))
-            .Callback<ResourceExecutingContext>((resourceExecutingContext) =>
-            {
-                resourceExecutingContext.ValueProviderFactories.RemoveAt(0);
-            });
+            .Callback<ResourceExecutingContext>(
+                (resourceExecutingContext) =>
+                {
+                    resourceExecutingContext.ValueProviderFactories.RemoveAt(0);
+                }
+            );
 
         var valueProviderFactory1 = Mock.Of<IValueProviderFactory>();
         var valueProviderFactory2 = Mock.Of<IValueProviderFactory>();
@@ -244,7 +290,9 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         valueProviderFactories.Add(valueProviderFactory2);
 
         var invoker = CreateInvoker(
-            new IFilterMetadata[] { resourceFilter.Object }, valueProviderFactories: valueProviderFactories);
+            new IFilterMetadata[] { resourceFilter.Object },
+            valueProviderFactories: valueProviderFactories
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -293,12 +341,19 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
 
         var filter = new Mock<IAsyncActionFilter>(MockBehavior.Strict);
         filter
-            .Setup(f => f.OnActionExecutionAsync(It.IsAny<ActionExecutingContext>(), It.IsAny<ActionExecutionDelegate>()))
-            .Returns<ActionExecutingContext, ActionExecutionDelegate>(async (context, next) =>
-            {
-                var resultContext = await next();
-                result = resultContext.Result;
-            })
+            .Setup(f =>
+                f.OnActionExecutionAsync(
+                    It.IsAny<ActionExecutingContext>(),
+                    It.IsAny<ActionExecutionDelegate>()
+                )
+            )
+            .Returns<ActionExecutingContext, ActionExecutionDelegate>(
+                async (context, next) =>
+                {
+                    var resultContext = await next();
+                    result = resultContext.Result;
+                }
+            )
             .Verifiable();
 
         var invoker = CreateInvoker(filter.Object, result: Result);
@@ -308,8 +363,13 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
 
         // Assert
         filter.Verify(
-            f => f.OnActionExecutionAsync(It.IsAny<ActionExecutingContext>(), It.IsAny<ActionExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnActionExecutionAsync(
+                    It.IsAny<ActionExecutingContext>(),
+                    It.IsAny<ActionExecutionDelegate>()
+                ),
+            Times.Once()
+        );
 
         Assert.Same(Result, result);
     }
@@ -327,7 +387,9 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         ActionExecutedContext context = null;
 
         var actionFilter1 = new Mock<IActionFilter>(MockBehavior.Strict);
-        actionFilter1.Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>())).Verifiable();
+        actionFilter1
+            .Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()))
+            .Verifiable();
         actionFilter1
             .Setup(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()))
             .Callback<ActionExecutedContext>(c => context = c)
@@ -342,30 +404,52 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var actionFilter3 = new Mock<IActionFilter>(MockBehavior.Strict);
 
         var resultFilter = new Mock<IResultFilter>(MockBehavior.Strict);
-        resultFilter.Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>())).Verifiable();
+        resultFilter
+            .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
+            .Verifiable();
         resultFilter.Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>())).Verifiable();
 
-        var invoker = CreateInvoker(new IFilterMetadata[]
-        {
+        var invoker = CreateInvoker(
+            new IFilterMetadata[]
+            {
                 actionFilter1.Object,
                 actionFilter2.Object,
                 actionFilter3.Object,
                 resultFilter.Object,
-        });
+            }
+        );
 
         // Act
         await invoker.InvokeAsync();
 
         // Assert
         result.Verify(r => r.ExecuteResultAsync(It.IsAny<ActionContext>()), Times.Once());
-        actionFilter1.Verify(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()), Times.Once());
-        actionFilter1.Verify(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()), Times.Once());
+        actionFilter1.Verify(
+            f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()),
+            Times.Once()
+        );
+        actionFilter1.Verify(
+            f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()),
+            Times.Once()
+        );
 
-        actionFilter2.Verify(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()), Times.Once());
-        actionFilter2.Verify(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()), Times.Never());
+        actionFilter2.Verify(
+            f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()),
+            Times.Once()
+        );
+        actionFilter2.Verify(
+            f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()),
+            Times.Never()
+        );
 
-        resultFilter.Verify(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()), Times.Once());
-        resultFilter.Verify(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()), Times.Once());
+        resultFilter.Verify(
+            f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()),
+            Times.Once()
+        );
+        resultFilter.Verify(
+            f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()),
+            Times.Once()
+        );
 
         Assert.True(context.Canceled);
         Assert.Same(context.Result, result.Object);
@@ -384,7 +468,9 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         ActionExecutedContext context = null;
 
         var actionFilter1 = new Mock<IActionFilter>(MockBehavior.Strict);
-        actionFilter1.Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>())).Verifiable();
+        actionFilter1
+            .Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()))
+            .Verifiable();
         actionFilter1
             .Setup(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()))
             .Callback<ActionExecutedContext>(c => context = c)
@@ -392,49 +478,89 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
 
         var actionFilter2 = new Mock<IAsyncActionFilter>(MockBehavior.Strict);
         actionFilter2
-            .Setup(f => f.OnActionExecutionAsync(It.IsAny<ActionExecutingContext>(), It.IsAny<ActionExecutionDelegate>()))
-            .Returns<ActionExecutingContext, ActionExecutionDelegate>((c, next) =>
-            {
-                // Notice we're not calling next
-                c.Result = result.Object;
-                return Task.FromResult(true);
-            })
+            .Setup(f =>
+                f.OnActionExecutionAsync(
+                    It.IsAny<ActionExecutingContext>(),
+                    It.IsAny<ActionExecutionDelegate>()
+                )
+            )
+            .Returns<ActionExecutingContext, ActionExecutionDelegate>(
+                (c, next) =>
+                {
+                    // Notice we're not calling next
+                    c.Result = result.Object;
+                    return Task.FromResult(true);
+                }
+            )
             .Verifiable();
 
         var actionFilter3 = new Mock<IActionFilter>(MockBehavior.Strict);
 
         var resultFilter1 = new Mock<IResultFilter>(MockBehavior.Strict);
-        resultFilter1.Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>())).Verifiable();
-        resultFilter1.Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>())).Verifiable();
+        resultFilter1
+            .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
+            .Verifiable();
+        resultFilter1
+            .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
+            .Verifiable();
         var resultFilter2 = new Mock<IResultFilter>(MockBehavior.Strict);
-        resultFilter2.Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>())).Verifiable();
-        resultFilter2.Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>())).Verifiable();
+        resultFilter2
+            .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
+            .Verifiable();
+        resultFilter2
+            .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
+            .Verifiable();
 
-        var invoker = CreateInvoker(new IFilterMetadata[]
-        {
+        var invoker = CreateInvoker(
+            new IFilterMetadata[]
+            {
                 actionFilter1.Object,
                 actionFilter2.Object,
                 actionFilter3.Object,
                 resultFilter1.Object,
                 resultFilter2.Object,
-        });
+            }
+        );
 
         // Act
         await invoker.InvokeAsync();
 
         // Assert
         result.Verify(r => r.ExecuteResultAsync(It.IsAny<ActionContext>()), Times.Once());
-        actionFilter1.Verify(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()), Times.Once());
-        actionFilter1.Verify(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()), Times.Once());
+        actionFilter1.Verify(
+            f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()),
+            Times.Once()
+        );
+        actionFilter1.Verify(
+            f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()),
+            Times.Once()
+        );
 
         actionFilter2.Verify(
-            f => f.OnActionExecutionAsync(It.IsAny<ActionExecutingContext>(), It.IsAny<ActionExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnActionExecutionAsync(
+                    It.IsAny<ActionExecutingContext>(),
+                    It.IsAny<ActionExecutionDelegate>()
+                ),
+            Times.Once()
+        );
 
-        resultFilter1.Verify(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()), Times.Once());
-        resultFilter1.Verify(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()), Times.Once());
-        resultFilter2.Verify(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()), Times.Once());
-        resultFilter2.Verify(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()), Times.Once());
+        resultFilter1.Verify(
+            f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()),
+            Times.Once()
+        );
+        resultFilter1.Verify(
+            f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()),
+            Times.Once()
+        );
+        resultFilter2.Verify(
+            f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()),
+            Times.Once()
+        );
+        resultFilter2.Verify(
+            f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()),
+            Times.Once()
+        );
 
         Assert.True(context.Canceled);
         Assert.Same(context.Result, result.Object);
@@ -447,7 +573,9 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         ActionExecutedContext context = null;
 
         var actionFilter1 = new Mock<IActionFilter>(MockBehavior.Strict);
-        actionFilter1.Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>())).Verifiable();
+        actionFilter1
+            .Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()))
+            .Verifiable();
         actionFilter1
             .Setup(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()))
             .Callback<ActionExecutedContext>(c => context = c)
@@ -455,41 +583,69 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
 
         var actionFilter2 = new Mock<IAsyncActionFilter>(MockBehavior.Strict);
         actionFilter2
-            .Setup(f => f.OnActionExecutionAsync(It.IsAny<ActionExecutingContext>(), It.IsAny<ActionExecutionDelegate>()))
-            .Returns<ActionExecutingContext, ActionExecutionDelegate>((c, next) =>
-            {
-                // Notice we're not calling next
-                return Task.FromResult(true);
-            })
+            .Setup(f =>
+                f.OnActionExecutionAsync(
+                    It.IsAny<ActionExecutingContext>(),
+                    It.IsAny<ActionExecutionDelegate>()
+                )
+            )
+            .Returns<ActionExecutingContext, ActionExecutionDelegate>(
+                (c, next) =>
+                {
+                    // Notice we're not calling next
+                    return Task.FromResult(true);
+                }
+            )
             .Verifiable();
 
         var actionFilter3 = new Mock<IActionFilter>(MockBehavior.Strict);
 
         var resultFilter = new Mock<IResultFilter>(MockBehavior.Strict);
-        resultFilter.Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>())).Verifiable();
+        resultFilter
+            .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
+            .Verifiable();
         resultFilter.Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>())).Verifiable();
 
-        var invoker = CreateInvoker(new IFilterMetadata[]
-        {
+        var invoker = CreateInvoker(
+            new IFilterMetadata[]
+            {
                 actionFilter1.Object,
                 actionFilter2.Object,
                 actionFilter3.Object,
                 resultFilter.Object,
-        });
+            }
+        );
 
         // Act
         await invoker.InvokeAsync();
 
         // Assert
-        actionFilter1.Verify(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()), Times.Once());
-        actionFilter1.Verify(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()), Times.Once());
+        actionFilter1.Verify(
+            f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()),
+            Times.Once()
+        );
+        actionFilter1.Verify(
+            f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()),
+            Times.Once()
+        );
 
         actionFilter2.Verify(
-            f => f.OnActionExecutionAsync(It.IsAny<ActionExecutingContext>(), It.IsAny<ActionExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnActionExecutionAsync(
+                    It.IsAny<ActionExecutingContext>(),
+                    It.IsAny<ActionExecutionDelegate>()
+                ),
+            Times.Once()
+        );
 
-        resultFilter.Verify(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()), Times.Once());
-        resultFilter.Verify(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()), Times.Once());
+        resultFilter.Verify(
+            f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()),
+            Times.Once()
+        );
+        resultFilter.Verify(
+            f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()),
+            Times.Once()
+        );
 
         Assert.True(context.Canceled);
         Assert.Null(context.Result);
@@ -501,25 +657,33 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         // Arrange
         var actionFilter = new Mock<IAsyncActionFilter>(MockBehavior.Strict);
         actionFilter
-            .Setup(f => f.OnActionExecutionAsync(It.IsAny<ActionExecutingContext>(), It.IsAny<ActionExecutionDelegate>()))
-            .Returns<ActionExecutingContext, ActionExecutionDelegate>(async (c, next) =>
-            {
-                c.Result = new EmptyResult();
-                await next();
-            })
+            .Setup(f =>
+                f.OnActionExecutionAsync(
+                    It.IsAny<ActionExecutingContext>(),
+                    It.IsAny<ActionExecutionDelegate>()
+                )
+            )
+            .Returns<ActionExecutingContext, ActionExecutionDelegate>(
+                async (c, next) =>
+                {
+                    c.Result = new EmptyResult();
+                    await next();
+                }
+            )
             .Verifiable();
 
         var message =
-            "If an IAsyncActionFilter provides a result value by setting the Result property of " +
-            "ActionExecutingContext to a non-null value, then it cannot call the next filter by invoking " +
-            "ActionExecutionDelegate.";
+            "If an IAsyncActionFilter provides a result value by setting the Result property of "
+            + "ActionExecutingContext to a non-null value, then it cannot call the next filter by invoking "
+            + "ActionExecutionDelegate.";
 
         var invoker = CreateInvoker(actionFilter.Object);
 
         // Act & Assert
         await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
             async () => await invoker.InvokeAsync(),
-            message);
+            message
+        );
     }
 
     [Fact]
@@ -579,7 +743,10 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var filter2 = new Mock<IActionFilter>(MockBehavior.Strict);
         filter2
             .Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()))
-            .Callback<ActionExecutingContext>(c => { throw exception; })
+            .Callback<ActionExecutingContext>(c =>
+            {
+                throw exception;
+            })
             .Verifiable();
 
         var invoker = CreateInvoker(new[] { filter1.Object, filter2.Object });
@@ -607,22 +774,32 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
 
         var filter1 = new Mock<IAsyncActionFilter>(MockBehavior.Strict);
         filter1
-            .Setup(f => f.OnActionExecutionAsync(It.IsAny<ActionExecutingContext>(), It.IsAny<ActionExecutionDelegate>()))
-            .Returns<ActionExecutingContext, ActionExecutionDelegate>(async (c, next) =>
-            {
-                context = await next();
+            .Setup(f =>
+                f.OnActionExecutionAsync(
+                    It.IsAny<ActionExecutingContext>(),
+                    It.IsAny<ActionExecutionDelegate>()
+                )
+            )
+            .Returns<ActionExecutingContext, ActionExecutionDelegate>(
+                async (c, next) =>
+                {
+                    context = await next();
 
-                // Handle the exception so the test doesn't throw.
-                Assert.False(context.ExceptionHandled);
-                context.ExceptionHandled = true;
-            })
+                    // Handle the exception so the test doesn't throw.
+                    Assert.False(context.ExceptionHandled);
+                    context.ExceptionHandled = true;
+                }
+            )
             .Verifiable();
 
         var filter2 = new Mock<IActionFilter>(MockBehavior.Strict);
         filter2.Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>())).Verifiable();
         filter2
             .Setup(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()))
-            .Callback<ActionExecutedContext>(c => { throw exception; })
+            .Callback<ActionExecutedContext>(c =>
+            {
+                throw exception;
+            })
             .Verifiable();
 
         var invoker = CreateInvoker(new IFilterMetadata[] { filter1.Object, filter2.Object });
@@ -632,8 +809,13 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
 
         // Assert
         filter1.Verify(
-            f => f.OnActionExecutionAsync(It.IsAny<ActionExecutingContext>(), It.IsAny<ActionExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnActionExecutionAsync(
+                    It.IsAny<ActionExecutingContext>(),
+                    It.IsAny<ActionExecutionDelegate>()
+                ),
+            Times.Once()
+        );
 
         filter2.Verify(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()), Times.Once());
 
@@ -652,7 +834,9 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Verifiable();
 
         var actionFilter = new Mock<IActionFilter>(MockBehavior.Strict);
-        actionFilter.Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>())).Verifiable();
+        actionFilter
+            .Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()))
+            .Verifiable();
         actionFilter
             .Setup(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()))
             .Callback<ActionExecutedContext>(c =>
@@ -666,22 +850,37 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Verifiable();
 
         var resultFilter = new Mock<IResultFilter>(MockBehavior.Strict);
-        resultFilter.Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>())).Verifiable();
+        resultFilter
+            .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
+            .Verifiable();
         resultFilter.Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>())).Verifiable();
 
         var invoker = CreateInvoker(
             new IFilterMetadata[] { actionFilter.Object, resultFilter.Object },
-            exception: Exception);
+            exception: Exception
+        );
 
         // Act
         await invoker.InvokeAsync();
 
         // Assert
-        actionFilter.Verify(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()), Times.Once());
-        actionFilter.Verify(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()), Times.Once());
+        actionFilter.Verify(
+            f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()),
+            Times.Once()
+        );
+        actionFilter.Verify(
+            f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()),
+            Times.Once()
+        );
 
-        resultFilter.Verify(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()), Times.Once());
-        resultFilter.Verify(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()), Times.Once());
+        resultFilter.Verify(
+            f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()),
+            Times.Once()
+        );
+        resultFilter.Verify(
+            f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()),
+            Times.Once()
+        );
 
         result.Verify(r => r.ExecuteResultAsync(It.IsAny<ActionContext>()), Times.Once());
     }
@@ -695,22 +894,33 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         ResourceExecutedContext context = null;
         var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
         resourceFilter
-            .Setup(f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()))
-            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(async (c, next) =>
-            {
-                context = await next();
-            })
+            .Setup(f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                )
+            )
+            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
+                async (c, next) =>
+                {
+                    context = await next();
+                }
+            )
             .Verifiable();
 
         var actionFilter = new Mock<IActionFilter>(MockBehavior.Strict);
         actionFilter
             .Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()))
-            .Callback<ActionExecutingContext>((c) =>
-            {
-                c.Result = expected;
-            });
+            .Callback<ActionExecutingContext>(
+                (c) =>
+                {
+                    c.Result = expected;
+                }
+            );
 
-        var invoker = CreateInvoker(new IFilterMetadata[] { resourceFilter.Object, actionFilter.Object });
+        var invoker = CreateInvoker(
+            new IFilterMetadata[] { resourceFilter.Object, actionFilter.Object }
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -719,8 +929,13 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         Assert.Same(expected, context.Result);
 
         resourceFilter.Verify(
-            f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                ),
+            Times.Once()
+        );
     }
 
     [Fact]
@@ -732,23 +947,34 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         ResourceExecutedContext context = null;
         var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
         resourceFilter
-            .Setup(f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()))
-            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(async (c, next) =>
-            {
-                context = await next();
-                context.ExceptionHandled = true;
-            })
+            .Setup(f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                )
+            )
+            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
+                async (c, next) =>
+                {
+                    context = await next();
+                    context.ExceptionHandled = true;
+                }
+            )
             .Verifiable();
 
         var actionFilter = new Mock<IActionFilter>(MockBehavior.Strict);
         actionFilter
             .Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()))
-            .Callback<ActionExecutingContext>((c) =>
-            {
-                throw expected;
-            });
+            .Callback<ActionExecutingContext>(
+                (c) =>
+                {
+                    throw expected;
+                }
+            );
 
-        var invoker = CreateInvoker(new IFilterMetadata[] { resourceFilter.Object, actionFilter.Object });
+        var invoker = CreateInvoker(
+            new IFilterMetadata[] { resourceFilter.Object, actionFilter.Object }
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -758,8 +984,13 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         Assert.Same(expected, context.ExceptionDispatchInfo.SourceException);
 
         resourceFilter.Verify(
-            f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                ),
+            Times.Once()
+        );
     }
 
     [Fact]
@@ -771,23 +1002,35 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         ResourceExecutedContext context = null;
         var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
         resourceFilter
-            .Setup(f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()))
-            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(async (c, next) =>
-            {
-                context = await next();
-                context.ExceptionHandled = true;
-            })
+            .Setup(f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                )
+            )
+            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
+                async (c, next) =>
+                {
+                    context = await next();
+                    context.ExceptionHandled = true;
+                }
+            )
             .Verifiable();
 
         var exceptionFilter = new Mock<IExceptionFilter>(MockBehavior.Strict);
         exceptionFilter
             .Setup(f => f.OnException(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>((c) =>
-            {
-                throw expected;
-            });
+            .Callback<ExceptionContext>(
+                (c) =>
+                {
+                    throw expected;
+                }
+            );
 
-        var invoker = CreateInvoker(new IFilterMetadata[] { resourceFilter.Object, exceptionFilter.Object }, exception: Exception);
+        var invoker = CreateInvoker(
+            new IFilterMetadata[] { resourceFilter.Object, exceptionFilter.Object },
+            exception: Exception
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -797,8 +1040,13 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         Assert.Same(expected, context.ExceptionDispatchInfo.SourceException);
 
         resourceFilter.Verify(
-            f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                ),
+            Times.Once()
+        );
     }
 
     [Fact]
@@ -807,39 +1055,61 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         // Arrange
         var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
         resourceFilter
-            .Setup(f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()))
-            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(async (c, next) =>
-            {
-                var context = await next();
-                Assert.Same(Exception, context.Exception);
-                context.ExceptionHandled = true;
-            });
+            .Setup(f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                )
+            )
+            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
+                async (c, next) =>
+                {
+                    var context = await next();
+                    Assert.Same(Exception, context.Exception);
+                    context.ExceptionHandled = true;
+                }
+            );
 
         var actionFilter1 = new Mock<IAsyncActionFilter>(MockBehavior.Strict);
         actionFilter1
-            .Setup(f => f.OnActionExecutionAsync(It.IsAny<ActionExecutingContext>(), It.IsAny<ActionExecutionDelegate>()))
-            .Returns<ActionExecutingContext, ActionExecutionDelegate>(async (c, next) =>
-            {
-                await next();
-            });
+            .Setup(f =>
+                f.OnActionExecutionAsync(
+                    It.IsAny<ActionExecutingContext>(),
+                    It.IsAny<ActionExecutionDelegate>()
+                )
+            )
+            .Returns<ActionExecutingContext, ActionExecutionDelegate>(
+                async (c, next) =>
+                {
+                    await next();
+                }
+            );
 
         var actionFilter2 = new Mock<IAsyncActionFilter>(MockBehavior.Strict);
         actionFilter2
-            .Setup(f => f.OnActionExecutionAsync(It.IsAny<ActionExecutingContext>(), It.IsAny<ActionExecutionDelegate>()))
-            .Returns<ActionExecutingContext, ActionExecutionDelegate>(async (c, next) =>
-            {
-                await next();
-            });
+            .Setup(f =>
+                f.OnActionExecutionAsync(
+                    It.IsAny<ActionExecutingContext>(),
+                    It.IsAny<ActionExecutionDelegate>()
+                )
+            )
+            .Returns<ActionExecutingContext, ActionExecutionDelegate>(
+                async (c, next) =>
+                {
+                    await next();
+                }
+            );
 
         var invoker = CreateInvoker(
             new IFilterMetadata[]
             {
-                    resourceFilter.Object,
-                    actionFilter1.Object,
-                    actionFilter2.Object,
+                resourceFilter.Object,
+                actionFilter1.Object,
+                actionFilter2.Object,
             },
             // The action won't run
-            exception: Exception);
+            exception: Exception
+        );
 
         // Act & Assert
         await invoker.InvokeAsync();
@@ -855,7 +1125,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         // Arrange
         var inputParam1 = 1;
         var inputParam2 = "Second Parameter";
-        var actionParameters = new Dictionary<string, object> { { "i", inputParam1 }, { "s", inputParam2 } };
+        var actionParameters = new Dictionary<string, object>
+        {
+            { "i", inputParam1 },
+            { "s", inputParam2 },
+        };
         IActionResult result = null;
 
         var filter = new Mock<IActionFilter>(MockBehavior.Strict);
@@ -865,7 +1139,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Callback<ActionExecutedContext>(c => result = c.Result)
             .Verifiable();
 
-        var invoker = CreateInvoker(new[] { filter.Object }, nameof(TestController.TaskAction), actionParameters);
+        var invoker = CreateInvoker(
+            new[] { filter.Object },
+            nameof(TestController.TaskAction),
+            actionParameters
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -880,7 +1158,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         // Arrange
         var inputParam1 = 1;
         var inputParam2 = "Second Parameter";
-        var actionParameters = new Dictionary<string, object> { { "i", inputParam1 }, { "s", inputParam2 } };
+        var actionParameters = new Dictionary<string, object>
+        {
+            { "i", inputParam1 },
+            { "s", inputParam2 },
+        };
         IActionResult result = null;
 
         var filter = new Mock<IActionFilter>(MockBehavior.Strict);
@@ -890,7 +1172,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Callback<ActionExecutedContext>(c => result = c.Result)
             .Verifiable();
 
-        var invoker = CreateInvoker(new[] { filter.Object }, nameof(TestController.TaskValueTypeAction), actionParameters);
+        var invoker = CreateInvoker(
+            new[] { filter.Object },
+            nameof(TestController.TaskValueTypeAction),
+            actionParameters
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -906,7 +1192,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         // Arrange
         var inputParam1 = 1;
         var inputParam2 = "Second Parameter";
-        var actionParameters = new Dictionary<string, object> { { "i", inputParam1 }, { "s", inputParam2 } };
+        var actionParameters = new Dictionary<string, object>
+        {
+            { "i", inputParam1 },
+            { "s", inputParam2 },
+        };
         IActionResult result = null;
 
         var filter = new Mock<IActionFilter>(MockBehavior.Strict);
@@ -916,11 +1206,14 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Callback<ActionExecutedContext>(c => result = c.Result)
             .Verifiable();
 
-        var invoker = CreateInvoker(new[] { filter.Object }, nameof(TestController.TaskActionWithException), actionParameters);
+        var invoker = CreateInvoker(
+            new[] { filter.Object },
+            nameof(TestController.TaskActionWithException),
+            actionParameters
+        );
 
         // Act and Assert
-        await Assert.ThrowsAsync<NotImplementedException>(
-                () => invoker.InvokeAsync());
+        await Assert.ThrowsAsync<NotImplementedException>(() => invoker.InvokeAsync());
     }
 
     [Fact]
@@ -929,7 +1222,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         // Arrange
         var inputParam1 = 1;
         var inputParam2 = "Second Parameter";
-        var actionParameters = new Dictionary<string, object> { { "i", inputParam1 }, { "s", inputParam2 } };
+        var actionParameters = new Dictionary<string, object>
+        {
+            { "i", inputParam1 },
+            { "s", inputParam2 },
+        };
         IActionResult result = null;
 
         var filter = new Mock<IActionFilter>(MockBehavior.Strict);
@@ -939,11 +1236,14 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Callback<ActionExecutedContext>(c => result = c.Result)
             .Verifiable();
 
-        var invoker = CreateInvoker(new[] { filter.Object }, nameof(TestController.TaskActionWithExceptionWithoutAsync), actionParameters);
+        var invoker = CreateInvoker(
+            new[] { filter.Object },
+            nameof(TestController.TaskActionWithExceptionWithoutAsync),
+            actionParameters
+        );
 
         // Act and Assert
-        await Assert.ThrowsAsync<NotImplementedException>(
-                () => invoker.InvokeAsync());
+        await Assert.ThrowsAsync<NotImplementedException>(() => invoker.InvokeAsync());
     }
 
     [Fact]
@@ -952,7 +1252,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         // Arrange
         var inputParam1 = 1;
         var inputParam2 = "Second Parameter";
-        var actionParameters = new Dictionary<string, object> { { "i", inputParam1 }, { "s", inputParam2 } };
+        var actionParameters = new Dictionary<string, object>
+        {
+            { "i", inputParam1 },
+            { "s", inputParam2 },
+        };
         IActionResult result = null;
 
         var filter = new Mock<IActionFilter>(MockBehavior.Strict);
@@ -962,12 +1266,15 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Callback<ActionExecutedContext>(c => result = c.Result)
             .Verifiable();
 
-        var invoker = CreateInvoker(new[] { filter.Object }, nameof(TestController.TaskActionThrowAfterAwait), actionParameters);
+        var invoker = CreateInvoker(
+            new[] { filter.Object },
+            nameof(TestController.TaskActionThrowAfterAwait),
+            actionParameters
+        );
         var expectedException = "Argument Exception";
 
         // Act and Assert
-        var ex = await Assert.ThrowsAsync<ArgumentException>(
-            () => invoker.InvokeAsync());
+        var ex = await Assert.ThrowsAsync<ArgumentException>(() => invoker.InvokeAsync());
         Assert.Equal(expectedException, ex.Message);
     }
 
@@ -985,7 +1292,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Callback<ActionExecutedContext>(c => result = c.Result)
             .Verifiable();
 
-        var invoker = CreateInvoker(new[] { filter.Object }, nameof(TestController.Echo), new Dictionary<string, object>() { { "input", inputString } });
+        var invoker = CreateInvoker(
+            new[] { filter.Object },
+            nameof(TestController.Echo),
+            new Dictionary<string, object>() { { "input", inputString } }
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1012,11 +1323,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var invoker = CreateInvoker(
             new[] { filter.Object },
             nameof(TestController.EchoWithException),
-            new Dictionary<string, object>() { { "input", inputString } });
+            new Dictionary<string, object>() { { "input", inputString } }
+        );
 
         // Act & Assert
-        await Assert.ThrowsAsync<NotImplementedException>(
-            () => invoker.InvokeAsync());
+        await Assert.ThrowsAsync<NotImplementedException>(() => invoker.InvokeAsync());
     }
 
     [Fact]
@@ -1035,7 +1346,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var invoker = CreateInvoker(
             new[] { filter.Object },
             nameof(TestController.EchoWithDefaultValue),
-            new Dictionary<string, object>());
+            new Dictionary<string, object>()
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1062,7 +1374,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var invoker = CreateInvoker(
             new[] { filter.Object },
             nameof(TestController.EchoWithDefaultValue),
-            new Dictionary<string, object>() { { "input", inputString } });
+            new Dictionary<string, object>() { { "input", inputString } }
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1088,7 +1401,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var invoker = CreateInvoker(
             new[] { filter.Object },
             nameof(TestController.EchoWithDefaultValueAndAttribute),
-            new Dictionary<string, object>());
+            new Dictionary<string, object>()
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1115,7 +1429,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var invoker = CreateInvoker(
             new[] { filter.Object },
             nameof(TestController.EchoWithDefaultValueAndAttribute),
-            new Dictionary<string, object>() { { "input", inputString } });
+            new Dictionary<string, object>() { { "input", inputString } }
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1131,7 +1446,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         // Arrange
         var inputParam1 = 1;
         var inputParam2 = "Second Parameter";
-        var actionParameters = new Dictionary<string, object> { { "i", inputParam1 }, { "s", inputParam2 } };
+        var actionParameters = new Dictionary<string, object>
+        {
+            { "i", inputParam1 },
+            { "s", inputParam2 },
+        };
         IActionResult result = null;
 
         var filter = new Mock<IActionFilter>(MockBehavior.Strict);
@@ -1144,7 +1463,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var invoker = CreateInvoker(
             new[] { filter.Object },
             nameof(TestController.TaskActionWithCustomTaskReturnType),
-            actionParameters);
+            actionParameters
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1159,7 +1479,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         // Arrange
         var inputParam1 = 1;
         var inputParam2 = "Second Parameter";
-        var actionParameters = new Dictionary<string, object> { { "i", inputParam1 }, { "s", inputParam2 } };
+        var actionParameters = new Dictionary<string, object>
+        {
+            { "i", inputParam1 },
+            { "s", inputParam2 },
+        };
         IActionResult result = null;
 
         var filter = new Mock<IActionFilter>(MockBehavior.Strict);
@@ -1172,7 +1496,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var invoker = CreateInvoker(
             new[] { filter.Object },
             nameof(TestController.TaskActionWithCustomTaskOfTReturnType),
-            actionParameters);
+            actionParameters
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1189,7 +1514,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         // Arrange
         var inputParam1 = 1;
         var inputParam2 = "Second Parameter";
-        var actionParameters = new Dictionary<string, object> { { "i", inputParam1 }, { "s", inputParam2 } };
+        var actionParameters = new Dictionary<string, object>
+        {
+            { "i", inputParam1 },
+            { "s", inputParam2 },
+        };
         IActionResult result = null;
 
         var filter = new Mock<IActionFilter>(MockBehavior.Strict);
@@ -1199,7 +1528,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Callback<ActionExecutedContext>(c => result = c.Result)
             .Verifiable();
 
-        var invoker = CreateInvoker(new[] { filter.Object }, nameof(TestController.UnwrappedTask), actionParameters);
+        var invoker = CreateInvoker(
+            new[] { filter.Object },
+            nameof(TestController.UnwrappedTask),
+            actionParameters
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1223,8 +1556,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
 
         var invoker = CreateInvoker(
             new[] { filter.Object },
-            nameof(TestController.AsyncActionMethodReturningActionResultWithTaskOfObjectAsReturnType),
-            actionParameters);
+            nameof(
+                TestController.AsyncActionMethodReturningActionResultWithTaskOfObjectAsReturnType
+            ),
+            actionParameters
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1250,7 +1586,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var invoker = CreateInvoker(
             new[] { filter.Object },
             nameof(TestController.ActionMethodReturningActionResultWithObjectAsReturnType),
-            actionParameters);
+            actionParameters
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1268,7 +1605,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var inputParam2 = "Second Parameter";
 
         // Note that the order of parameters is reversed
-        var actionParameters = new Dictionary<string, object> { { "s", inputParam2 }, { "i", inputParam1 } };
+        var actionParameters = new Dictionary<string, object>
+        {
+            { "s", inputParam2 },
+            { "i", inputParam1 },
+        };
         IActionResult result = null;
 
         var filter = new Mock<IActionFilter>(MockBehavior.Strict);
@@ -1281,7 +1622,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var invoker = CreateInvoker(
             new[] { filter.Object },
             nameof(TestController.TaskValueTypeAction),
-            actionParameters);
+            actionParameters
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1308,10 +1650,7 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Callback<ActionExecutedContext>(c => result = c.Result)
             .Verifiable();
 
-        var invoker = CreateInvoker(
-            new[] { filter.Object },
-            methodName,
-            actionParameters);
+        var invoker = CreateInvoker(new[] { filter.Object }, methodName, actionParameters);
 
         // Act
         await invoker.InvokeAsync();
@@ -1327,7 +1666,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         //Arrange
         var inputParam2 = "Second Parameter";
 
-        var actionParameters = new Dictionary<string, object> { { "i", "Some Invalid Value" }, { "s", inputParam2 } };
+        var actionParameters = new Dictionary<string, object>
+        {
+            { "i", "Some Invalid Value" },
+            { "s", inputParam2 },
+        };
         IActionResult result = null;
 
         var filter = new Mock<IActionFilter>(MockBehavior.Strict);
@@ -1340,18 +1683,27 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var invoker = CreateInvoker(
             new[] { filter.Object },
             nameof(TestController.TaskValueTypeAction),
-            actionParameters);
+            actionParameters
+        );
 
         // Act & Assert
-        await Assert.ThrowsAsync<InvalidCastException>(
-            () => invoker.InvokeAsync());
+        await Assert.ThrowsAsync<InvalidCastException>(() => invoker.InvokeAsync());
     }
 
     [Theory]
     [InlineData(nameof(TestController.ActionMethodWithNullActionResult), typeof(IActionResult))]
-    [InlineData(nameof(TestController.TestActionMethodWithNullActionResult), typeof(TestActionResult))]
-    [InlineData(nameof(TestController.AsyncActionMethodWithNullActionResult), typeof(IActionResult))]
-    [InlineData(nameof(TestController.AsyncActionMethodWithNullTestActionResult), typeof(TestActionResult))]
+    [InlineData(
+        nameof(TestController.TestActionMethodWithNullActionResult),
+        typeof(TestActionResult)
+    )]
+    [InlineData(
+        nameof(TestController.AsyncActionMethodWithNullActionResult),
+        typeof(IActionResult)
+    )]
+    [InlineData(
+        nameof(TestController.AsyncActionMethodWithNullTestActionResult),
+        typeof(TestActionResult)
+    )]
     [ReplaceCulture]
     public async Task InvokeAction_WithNullActionResultThrows(string methodName, Type resultType)
     {
@@ -1368,12 +1720,14 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var invoker = CreateInvoker(
             new[] { filter.Object },
             methodName,
-            new Dictionary<string, object>());
+            new Dictionary<string, object>()
+        );
 
         // Act & Assert
         await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
             () => invoker.InvokeAsync(),
-            $"Cannot return null from an action method with a return type of '{resultType}'.");
+            $"Cannot return null from an action method with a return type of '{resultType}'."
+        );
     }
 
     [Fact]
@@ -1384,39 +1738,42 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         {
             ControllerTypeInfo = typeof(TestController).GetTypeInfo(),
             BoundProperties = new List<ParameterDescriptor>(),
-            MethodInfo = typeof(TestController).GetTypeInfo()
-                .DeclaredMethods
-                .First(m => m.Name.Equals("ActionMethodWithDefaultValues", StringComparison.Ordinal)),
+            MethodInfo = typeof(TestController)
+                .GetTypeInfo()
+                .DeclaredMethods.First(m =>
+                    m.Name.Equals("ActionMethodWithDefaultValues", StringComparison.Ordinal)
+                ),
 
             Parameters = new List<ParameterDescriptor>
+            {
+                new ParameterDescriptor
                 {
-                    new ParameterDescriptor
-                    {
-                        Name = "value",
-                        ParameterType = typeof(int),
-                        BindingInfo = new BindingInfo(),
-                    }
+                    Name = "value",
+                    ParameterType = typeof(int),
+                    BindingInfo = new BindingInfo(),
                 },
-            FilterDescriptors = new List<FilterDescriptor>()
+            },
+            FilterDescriptors = new List<FilterDescriptor>(),
         };
 
         var context = new Mock<HttpContext>();
-        context.SetupGet(c => c.Items)
-            .Returns(new Dictionary<object, object>());
-        context.Setup(c => c.RequestServices.GetService(typeof(ILoggerFactory)))
+        context.SetupGet(c => c.Items).Returns(new Dictionary<object, object>());
+        context
+            .Setup(c => c.RequestServices.GetService(typeof(ILoggerFactory)))
             .Returns(new NullLoggerFactory());
 
         var actionContext = new ActionContext(context.Object, new RouteData(), actionDescriptor);
 
         var controllerContext = new ControllerContext(actionContext)
         {
-            ValueProviderFactories = new IValueProviderFactory[0]
+            ValueProviderFactories = new IValueProviderFactory[0],
         };
         controllerContext.ModelState.MaxAllowedErrors = 200;
         var objectMethodExecutor = ObjectMethodExecutor.Create(
             actionDescriptor.MethodInfo,
             actionDescriptor.ControllerTypeInfo,
-            ParameterDefaultValues.GetParameterDefaultValues(actionDescriptor.MethodInfo));
+            ParameterDefaultValues.GetParameterDefaultValues(actionDescriptor.MethodInfo)
+        );
 
         var controllerMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
@@ -1427,7 +1784,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             (_, __, ___) => Task.CompletedTask,
             objectMethodExecutor,
             controllerMethodExecutor,
-            controllerMethodExecutor);
+            controllerMethodExecutor
+        );
 
         var invoker = new ControllerActionInvoker(
             new NullLoggerFactory().CreateLogger<ControllerActionInvoker>(),
@@ -1436,7 +1794,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             new ActionResultTypeMapper(),
             controllerContext,
             cacheEntry,
-            new IFilterMetadata[0]);
+            new IFilterMetadata[0]
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1450,7 +1809,7 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
     {
         // Arrange
         var inputParam = 12;
-        var actionParameters = new Dictionary<string, object> { { "input", inputParam }, };
+        var actionParameters = new Dictionary<string, object> { { "input", inputParam } };
         IActionResult result = null;
 
         var filter = new Mock<IActionFilter>(MockBehavior.Strict);
@@ -1460,7 +1819,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Callback<ActionExecutedContext>(c => result = c.Result)
             .Verifiable();
 
-        var invoker = CreateInvoker(new[] { filter.Object }, nameof(TestController.ActionReturningConvertibleToActionResult), actionParameters);
+        var invoker = CreateInvoker(
+            new[] { filter.Object },
+            nameof(TestController.ActionReturningConvertibleToActionResult),
+            actionParameters
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1475,7 +1838,7 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
     {
         // Arrange
         var inputParam = 13;
-        var actionParameters = new Dictionary<string, object> { { "input", inputParam }, };
+        var actionParameters = new Dictionary<string, object> { { "input", inputParam } };
         IActionResult result = null;
 
         var filter = new Mock<IActionFilter>(MockBehavior.Strict);
@@ -1485,7 +1848,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Callback<ActionExecutedContext>(c => result = c.Result)
             .Verifiable();
 
-        var invoker = CreateInvoker(new[] { filter.Object }, nameof(TestController.ActionReturningConvertibleToActionResultAsync), actionParameters);
+        var invoker = CreateInvoker(
+            new[] { filter.Object },
+            nameof(TestController.ActionReturningConvertibleToActionResultAsync),
+            actionParameters
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1509,7 +1876,11 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Callback<ActionExecutedContext>(c => result = c.Result)
             .Verifiable();
 
-        var invoker = CreateInvoker(new[] { filter.Object }, nameof(TestController.ActionReturningConvertibleAsObject), actionParameters);
+        var invoker = CreateInvoker(
+            new[] { filter.Object },
+            nameof(TestController.ActionReturningConvertibleAsObject),
+            actionParameters
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1522,7 +1893,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
     public async Task InvokeAction_ConvertibleToActionResult_ReturningNull_Throws()
     {
         // Arrange
-        var expectedMessage = @"Cannot return null from an action method with a return type of 'Microsoft.AspNetCore.Mvc.Infrastructure.IConvertToActionResult'.";
+        var expectedMessage =
+            @"Cannot return null from an action method with a return type of 'Microsoft.AspNetCore.Mvc.Infrastructure.IConvertToActionResult'.";
         var actionParameters = new Dictionary<string, object>();
         IActionResult result = null;
 
@@ -1533,10 +1905,16 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Callback<ActionExecutedContext>(c => result = c.Result)
             .Verifiable();
 
-        var invoker = CreateInvoker(new[] { filter.Object }, nameof(TestController.ConvertibleToActionResultReturningNull), actionParameters);
+        var invoker = CreateInvoker(
+            new[] { filter.Object },
+            nameof(TestController.ConvertibleToActionResultReturningNull),
+            actionParameters
+        );
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => invoker.InvokeAsync());
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => invoker.InvokeAsync()
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 
@@ -1565,33 +1943,58 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             new IFilterMetadata[0],
             actionDescriptor,
             new TestController(),
-            logger: logger);
+            logger: logger
+        );
 
         // Act
         await invoker.InvokeAsync();
 
         // Assert
         var messages = testSink.Writes.Select(write => write.State.ToString()).ToList();
-        var actionSignature = $"{typeof(IActionResult).FullName} {nameof(TestController.ActionMethod)}()";
-        var controllerName = $"{typeof(ControllerActionInvokerTest).FullName}+{nameof(TestController)} ({typeof(ControllerActionInvokerTest).Assembly.GetName().Name})";
-        var actionName = $"{typeof(ControllerActionInvokerTest).FullName}+{nameof(TestController)}.{nameof(TestController.ActionMethod)} ({typeof(ControllerActionInvokerTest).Assembly.GetName().Name})";
+        var actionSignature =
+            $"{typeof(IActionResult).FullName} {nameof(TestController.ActionMethod)}()";
+        var controllerName =
+            $"{typeof(ControllerActionInvokerTest).FullName}+{nameof(TestController)} ({typeof(ControllerActionInvokerTest).Assembly.GetName().Name})";
+        var actionName =
+            $"{typeof(ControllerActionInvokerTest).FullName}+{nameof(TestController)}.{nameof(TestController.ActionMethod)} ({typeof(ControllerActionInvokerTest).Assembly.GetName().Name})";
         var actionResultName = $"{typeof(CommonResourceInvokerTest).FullName}+{nameof(TestResult)}";
 
         Assert.Collection(
             messages,
-            m => Assert.Equal($"Route matched with {{}}. Executing controller action with signature {actionSignature} on controller {controllerName}.", m),
-            m => Assert.Equal("Execution plan of authorization filters (in the following order): None", m),
-            m => Assert.Equal("Execution plan of resource filters (in the following order): None", m),
+            m =>
+                Assert.Equal(
+                    $"Route matched with {{}}. Executing controller action with signature {actionSignature} on controller {controllerName}.",
+                    m
+                ),
+            m =>
+                Assert.Equal(
+                    "Execution plan of authorization filters (in the following order): None",
+                    m
+                ),
+            m =>
+                Assert.Equal(
+                    "Execution plan of resource filters (in the following order): None",
+                    m
+                ),
             m => Assert.Equal("Execution plan of action filters (in the following order): None", m),
-            m => Assert.Equal("Execution plan of exception filters (in the following order): None", m),
+            m =>
+                Assert.Equal(
+                    "Execution plan of exception filters (in the following order): None",
+                    m
+                ),
             m => Assert.Equal("Execution plan of result filters (in the following order): None", m),
             m => Assert.Equal($"Executing controller factory for controller {controllerName}", m),
             m => Assert.Equal($"Executed controller factory for controller {controllerName}", m),
             m => Assert.Equal($"Executing action method {actionName} - Validation state: Valid", m),
-            m => Assert.StartsWith($"Executed action method {actionName}, returned result {actionResultName} in ", m),
+            m =>
+                Assert.StartsWith(
+                    $"Executed action method {actionName}, returned result {actionResultName} in ",
+                    m
+                ),
             m => Assert.Equal($"Before executing action result {actionResultName}.", m),
             m => Assert.Equal($"After executing action result {actionResultName}.", m),
-            m => Assert.StartsWith($"Executed action {actionName} in ", m));
+            m => Assert.StartsWith($"Executed action {actionName} in ", m)
+        );
     }
 
     #endregion
@@ -1600,7 +2003,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         IFilterMetadata[] filters,
         Exception exception = null,
         IActionResult result = null,
-        IList<IValueProviderFactory> valueProviderFactories = null)
+        IList<IValueProviderFactory> valueProviderFactories = null
+    )
     {
         var actionDescriptor = new ControllerActionDescriptor()
         {
@@ -1612,7 +2016,9 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
 
         if (result == Result)
         {
-            actionDescriptor.MethodInfo = typeof(TestController).GetMethod(nameof(TestController.ActionMethod));
+            actionDescriptor.MethodInfo = typeof(TestController).GetMethod(
+                nameof(TestController.ActionMethod)
+            );
         }
         else if (result != null)
         {
@@ -1620,7 +2026,9 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         }
         else if (exception == Exception)
         {
-            actionDescriptor.MethodInfo = typeof(TestController).GetMethod(nameof(TestController.ThrowingActionMethod));
+            actionDescriptor.MethodInfo = typeof(TestController).GetMethod(
+                nameof(TestController.ThrowingActionMethod)
+            );
         }
         else if (exception != null)
         {
@@ -1628,21 +2036,25 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         }
         else
         {
-            actionDescriptor.MethodInfo = typeof(TestController).GetMethod(nameof(TestController.ActionMethod));
+            actionDescriptor.MethodInfo = typeof(TestController).GetMethod(
+                nameof(TestController.ActionMethod)
+            );
         }
 
         return CreateInvoker(
             filters,
             actionDescriptor,
             new TestController(),
-            valueProviderFactories: valueProviderFactories);
+            valueProviderFactories: valueProviderFactories
+        );
     }
 
     // Used by tests which directly test different types of signatures for controller methods.
     private ControllerActionInvoker CreateInvoker(
         IFilterMetadata[] filters,
         string methodName,
-        IDictionary<string, object> arguments)
+        IDictionary<string, object> arguments
+    )
     {
         var actionDescriptor = new ControllerActionDescriptor()
         {
@@ -1658,11 +2070,13 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
 
         foreach (var kvp in arguments)
         {
-            actionDescriptor.Parameters.Add(new ControllerParameterDescriptor()
-            {
-                Name = kvp.Key,
-                ParameterInfo = method.GetParameters().Where(p => p.Name == kvp.Key).Single(),
-            });
+            actionDescriptor.Parameters.Add(
+                new ControllerParameterDescriptor()
+                {
+                    Name = kvp.Key,
+                    ParameterInfo = method.GetParameters().Where(p => p.Name == kvp.Key).Single(),
+                }
+            );
         }
 
         return CreateInvoker(filters, actionDescriptor, new TestController(), arguments);
@@ -1676,7 +2090,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         IList<IValueProviderFactory> valueProviderFactories = null,
         RouteData routeData = null,
         ILogger logger = null,
-        object diagnosticListener = null)
+        object diagnosticListener = null
+    )
     {
         Assert.NotNull(actionDescriptor.MethodInfo);
 
@@ -1707,11 +2122,14 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
         services.AddSingleton<IOptions<MvcOptions>>(options);
-        services.AddSingleton<IActionResultExecutor<ObjectResult>>(new ObjectResultExecutor(
-            new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
-            new TestHttpResponseStreamWriterFactory(),
-            NullLoggerFactory.Instance,
-            options));
+        services.AddSingleton<IActionResultExecutor<ObjectResult>>(
+            new ObjectResultExecutor(
+                new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
+                new TestHttpResponseStreamWriterFactory(),
+                NullLoggerFactory.Instance,
+                options
+            )
+        );
 
         httpContext.Response.Body = new MemoryStream();
         httpContext.RequestServices = services.BuildServiceProvider();
@@ -1739,7 +2157,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         var objectMethodExecutor = ObjectMethodExecutor.Create(
             actionDescriptor.MethodInfo,
             actionDescriptor.ControllerTypeInfo,
-            ParameterDefaultValues.GetParameterDefaultValues(actionDescriptor.MethodInfo));
+            ParameterDefaultValues.GetParameterDefaultValues(actionDescriptor.MethodInfo)
+        );
 
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
@@ -1758,7 +2177,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             },
             objectMethodExecutor,
             actionMethodExecutor,
-            actionMethodExecutor);
+            actionMethodExecutor
+        );
 
         var actionContext = new ActionContext(httpContext, routeData, actionDescriptor);
         var controllerContext = new ControllerContext(actionContext)
@@ -1773,7 +2193,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             new ActionResultTypeMapper(),
             controllerContext,
             cacheEntry,
-            filters);
+            filters
+        );
         return invoker;
     }
 
@@ -1814,7 +2235,9 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             return new TestActionResult { Value = value };
         }
 
-        public async Task<object> AsyncActionMethodReturningActionResultWithTaskOfObjectAsReturnType(int value = 5)
+        public async Task<object> AsyncActionMethodReturningActionResultWithTaskOfObjectAsReturnType(
+            int value = 5
+        )
         {
             return await Task.FromResult(new TestActionResult { Value = value });
         }
@@ -1914,16 +2337,19 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             return input;
         }
 
-        public string EchoWithDefaultValueAndAttribute([DefaultValue("hello")] string input = "world")
+        public string EchoWithDefaultValueAndAttribute(
+            [DefaultValue("hello")] string input = "world"
+        )
         {
             return input;
         }
 
-        public ConvertibleToActionResult ActionReturningConvertibleToActionResult(int input)
-            => new ConvertibleToActionResult { Value = input };
+        public ConvertibleToActionResult ActionReturningConvertibleToActionResult(int input) =>
+            new ConvertibleToActionResult { Value = input };
 
-        public Task<ConvertibleToActionResult> ActionReturningConvertibleToActionResultAsync(int input)
-            => Task.FromResult(new ConvertibleToActionResult { Value = input });
+        public Task<ConvertibleToActionResult> ActionReturningConvertibleToActionResultAsync(
+            int input
+        ) => Task.FromResult(new ConvertibleToActionResult { Value = input });
 
         public object ActionReturningConvertibleAsObject() => new ConvertibleToActionResult();
 
@@ -1938,17 +2364,13 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         public class TaskDerivedType : Task
         {
             public TaskDerivedType()
-                : base(() => { })
-            {
-            }
+                : base(() => { }) { }
         }
 
         public class TaskOfTDerivedType<T> : Task<T>
         {
             public TaskOfTDerivedType(T input)
-                : base(() => input)
-            {
-            }
+                : base(() => input) { }
         }
     }
 
@@ -1968,7 +2390,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         return ObjectMethodExecutor.Create(
             actionDescriptor.MethodInfo,
             actionDescriptor.ControllerTypeInfo,
-            ParameterDefaultValues.GetParameterDefaultValues(actionDescriptor.MethodInfo));
+            ParameterDefaultValues.GetParameterDefaultValues(actionDescriptor.MethodInfo)
+        );
     }
 
     public class ConvertibleToActionResult : IConvertToActionResult

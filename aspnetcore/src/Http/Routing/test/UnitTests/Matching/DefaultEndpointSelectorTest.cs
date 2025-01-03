@@ -30,8 +30,8 @@ public class DefaultEndpointSelectorTest
     public async Task SelectAsync_NoValidCandidates_DoesNothing()
     {
         // Arrange
-        var endpoints = new RouteEndpoint[] { CreateEndpoint("/test"), };
-        var scores = new int[] { 0, };
+        var endpoints = new RouteEndpoint[] { CreateEndpoint("/test") };
+        var scores = new int[] { 0 };
         var candidateSet = CreateCandidateSet(endpoints, scores);
 
         candidateSet[0].Values = new RouteValueDictionary();
@@ -51,8 +51,8 @@ public class DefaultEndpointSelectorTest
     public async Task SelectAsync_SingleCandidate_ChoosesCandidate()
     {
         // Arrange
-        var endpoints = new RouteEndpoint[] { CreateEndpoint("/test"), };
-        var scores = new int[] { 0, };
+        var endpoints = new RouteEndpoint[] { CreateEndpoint("/test") };
+        var scores = new int[] { 0 };
         var candidateSet = CreateCandidateSet(endpoints, scores);
 
         candidateSet[0].Values = new RouteValueDictionary();
@@ -72,7 +72,7 @@ public class DefaultEndpointSelectorTest
     public async Task SelectAsync_SingleValidCandidate_ChoosesCandidate()
     {
         // Arrange
-        var endpoints = new RouteEndpoint[] { CreateEndpoint("/test1"), CreateEndpoint("/test2"), };
+        var endpoints = new RouteEndpoint[] { CreateEndpoint("/test1"), CreateEndpoint("/test2") };
         var scores = new int[] { 0, 0 };
         var candidateSet = CreateCandidateSet(endpoints, scores);
 
@@ -93,7 +93,12 @@ public class DefaultEndpointSelectorTest
     public async Task SelectAsync_SingleValidCandidateInGroup_ChoosesCandidate()
     {
         // Arrange
-        var endpoints = new RouteEndpoint[] { CreateEndpoint("/test1"), CreateEndpoint("/test2"), CreateEndpoint("/test3"), };
+        var endpoints = new RouteEndpoint[]
+        {
+            CreateEndpoint("/test1"),
+            CreateEndpoint("/test2"),
+            CreateEndpoint("/test3"),
+        };
         var scores = new int[] { 0, 0, 1 };
         var candidateSet = CreateCandidateSet(endpoints, scores);
 
@@ -117,11 +122,11 @@ public class DefaultEndpointSelectorTest
         // Arrange
         var endpoints = new RouteEndpoint[]
         {
-                CreateEndpoint("/test1"),
-                CreateEndpoint("/test2"),
-                CreateEndpoint("/test3"),
-                CreateEndpoint("/test4"),
-                CreateEndpoint("/test5"),
+            CreateEndpoint("/test1"),
+            CreateEndpoint("/test2"),
+            CreateEndpoint("/test3"),
+            CreateEndpoint("/test4"),
+            CreateEndpoint("/test5"),
         };
         var scores = new int[] { 0, 1, 2, 3, 4 };
         var candidateSet = CreateCandidateSet(endpoints, scores);
@@ -146,7 +151,12 @@ public class DefaultEndpointSelectorTest
     public async Task SelectAsync_MultipleValidCandidatesInGroup_ReportsAmbiguity()
     {
         // Arrange
-        var endpoints = new RouteEndpoint[] { CreateEndpoint("/test1"), CreateEndpoint("/test2"), CreateEndpoint("/test3"), };
+        var endpoints = new RouteEndpoint[]
+        {
+            CreateEndpoint("/test1"),
+            CreateEndpoint("/test2"),
+            CreateEndpoint("/test3"),
+        };
         var scores = new int[] { 0, 1, 1 };
         var candidateSet = CreateCandidateSet(endpoints, scores);
 
@@ -158,12 +168,20 @@ public class DefaultEndpointSelectorTest
         var selector = CreateSelector();
 
         // Act
-        var ex = await Assert.ThrowsAsync<AmbiguousMatchException>(() => selector.SelectAsync(httpContext, candidateSet));
+        var ex = await Assert.ThrowsAsync<AmbiguousMatchException>(
+            () => selector.SelectAsync(httpContext, candidateSet)
+        );
 
         // Assert
         Assert.Equal(
-@"The request matched multiple endpoints. Matches: " + Environment.NewLine + Environment.NewLine +
-"test: /test2" + Environment.NewLine + "test: /test3", ex.Message);
+            @"The request matched multiple endpoints. Matches: "
+                + Environment.NewLine
+                + Environment.NewLine
+                + "test: /test2"
+                + Environment.NewLine
+                + "test: /test3",
+            ex.Message
+        );
         Assert.Null(httpContext.GetEndpoint());
     }
 
@@ -179,7 +197,8 @@ public class DefaultEndpointSelectorTest
             RoutePatternFactory.Parse(template),
             0,
             EndpointMetadataCollection.Empty,
-            $"test: {template}");
+            $"test: {template}"
+        );
     }
 
     private static CandidateSet CreateCandidateSet(RouteEndpoint[] endpoints, int[] scores)

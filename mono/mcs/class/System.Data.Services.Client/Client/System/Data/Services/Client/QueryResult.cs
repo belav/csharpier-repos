@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -17,7 +17,7 @@ namespace System.Data.Services.Client
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-#if !ASTORIA_LIGHT    
+#if !ASTORIA_LIGHT
     using System.Net;
 #else
     using System.Data.Services.Http;
@@ -57,7 +57,14 @@ namespace System.Data.Services.Client
         private bool responseStreamIsCopyBuffer;
 #endif
 
-        internal QueryResult(object source, string method, DataServiceRequest serviceRequest, HttpWebRequest request, AsyncCallback callback, object state)
+        internal QueryResult(
+            object source,
+            string method,
+            DataServiceRequest serviceRequest,
+            HttpWebRequest request,
+            AsyncCallback callback,
+            object state
+        )
             : base(source, method, callback, state)
         {
             Debug.Assert(null != request, "null request");
@@ -96,13 +103,22 @@ namespace System.Data.Services.Client
             catch (InvalidOperationException ex)
             {
                 response = asyncResult as QueryResult;
-                Debug.Assert(response != null, "response != null, BaseAsyncResult.EndExecute() would have thrown a different exception otherwise.");
+                Debug.Assert(
+                    response != null,
+                    "response != null, BaseAsyncResult.EndExecute() would have thrown a different exception otherwise."
+                );
 
-                QueryOperationResponse operationResponse = response.GetResponse<TElement>(MaterializeAtom.EmptyResults);
+                QueryOperationResponse operationResponse = response.GetResponse<TElement>(
+                    MaterializeAtom.EmptyResults
+                );
                 if (operationResponse != null)
                 {
                     operationResponse.Error = ex;
-                    throw new DataServiceQueryException(Strings.DataServiceException_GeneralError, ex, operationResponse);
+                    throw new DataServiceQueryException(
+                        Strings.DataServiceException_GeneralError,
+                        ex,
+                        operationResponse
+                    );
                 }
 
                 throw;
@@ -132,7 +148,11 @@ namespace System.Data.Services.Client
                 else
 #endif
                 {
-                    asyncResult = BaseAsyncResult.InvokeAsync(this.Request.BeginGetResponse, QueryResult.AsyncEndGetResponse, this);
+                    asyncResult = BaseAsyncResult.InvokeAsync(
+                        this.Request.BeginGetResponse,
+                        QueryResult.AsyncEndGetResponse,
+                        this
+                    );
                 }
 
                 this.CompletedSynchronously &= asyncResult.CompletedSynchronously;
@@ -147,7 +167,10 @@ namespace System.Data.Services.Client
                 this.HandleCompleted();
             }
 
-            Debug.Assert(!this.CompletedSynchronously || this.IsCompleted, "if CompletedSynchronously then MUST IsCompleted");
+            Debug.Assert(
+                !this.CompletedSynchronously || this.IsCompleted,
+                "if CompletedSynchronously then MUST IsCompleted"
+            );
         }
 
 #if !ASTORIA_LIGHT
@@ -204,7 +227,8 @@ namespace System.Data.Services.Client
                                     this.responseStream = null;
                                 }
                                 else if (copy.Position < copy.Length)
-                                {                                    ((MemoryStream)copy).SetLength(copy.Position);
+                                {
+                                    ((MemoryStream)copy).SetLength(copy.Position);
                                 }
                             }
 
@@ -235,8 +259,14 @@ namespace System.Data.Services.Client
         {
             if (this.httpWebResponse != null)
             {
-                Dictionary<string, string> headers = WebUtil.WrapResponseHeaders(this.httpWebResponse);
-                QueryOperationResponse<TElement> response = new QueryOperationResponse<TElement>(headers, this.ServiceRequest, results);
+                Dictionary<string, string> headers = WebUtil.WrapResponseHeaders(
+                    this.httpWebResponse
+                );
+                QueryOperationResponse<TElement> response = new QueryOperationResponse<TElement>(
+                    headers,
+                    this.ServiceRequest,
+                    results
+                );
                 response.StatusCode = (int)this.httpWebResponse.StatusCode;
                 return response;
             }
@@ -244,12 +274,22 @@ namespace System.Data.Services.Client
             return null;
         }
 
-        internal QueryOperationResponse GetResponseWithType(MaterializeAtom results, Type elementType)
+        internal QueryOperationResponse GetResponseWithType(
+            MaterializeAtom results,
+            Type elementType
+        )
         {
             if (this.httpWebResponse != null)
             {
-                Dictionary<string, string> headers = WebUtil.WrapResponseHeaders(this.httpWebResponse);
-                QueryOperationResponse response = QueryOperationResponse.GetInstance(elementType, headers, this.ServiceRequest, results);
+                Dictionary<string, string> headers = WebUtil.WrapResponseHeaders(
+                    this.httpWebResponse
+                );
+                QueryOperationResponse response = QueryOperationResponse.GetInstance(
+                    elementType,
+                    headers,
+                    this.ServiceRequest,
+                    results
+                );
                 response.StatusCode = (int)this.httpWebResponse.StatusCode;
                 return response;
             }
@@ -264,7 +304,13 @@ namespace System.Data.Services.Client
             MaterializeAtom materializer;
             if (HttpStatusCode.NoContent != this.StatusCode)
             {
-                materializer = DataServiceRequest.Materialize(context, this.ServiceRequest.QueryComponents, plan, this.ContentType, this.GetResponseStream());
+                materializer = DataServiceRequest.Materialize(
+                    context,
+                    this.ServiceRequest.QueryComponents,
+                    plan,
+                    this.ContentType,
+                    this.GetResponseStream()
+                );
             }
             else
             {
@@ -273,13 +319,22 @@ namespace System.Data.Services.Client
 
             return materializer;
         }
-        
-        internal QueryOperationResponse<TElement> ProcessResult<TElement>(DataServiceContext context, ProjectionPlan plan)
+
+        internal QueryOperationResponse<TElement> ProcessResult<TElement>(
+            DataServiceContext context,
+            ProjectionPlan plan
+        )
         {
-            MaterializeAtom materializeAtom = DataServiceRequest.Materialize(context, this.ServiceRequest.QueryComponents, plan, this.ContentType, this.GetResponseStream());
+            MaterializeAtom materializeAtom = DataServiceRequest.Materialize(
+                context,
+                this.ServiceRequest.QueryComponents,
+                plan,
+                this.ContentType,
+                this.GetResponseStream()
+            );
             return this.GetResponse<TElement>(materializeAtom);
         }
-        
+
         protected override void CompletedRequest()
         {
             Util.Dispose(ref this.asyncResponseStream);
@@ -291,10 +346,10 @@ namespace System.Data.Services.Client
 #if StreamContainsBuffer
             if (!this.responseStreamIsCopyBuffer)
 #endif
-            if ((null != buffer) && !this.usingBuffer)
-            {
-                this.PutAsyncResponseStreamCopyBuffer(buffer);
-            }
+                if ((null != buffer) && !this.usingBuffer)
+                {
+                    this.PutAsyncResponseStreamCopyBuffer(buffer);
+                }
 
             if (this.responseStreamOwner)
             {
@@ -304,12 +359,20 @@ namespace System.Data.Services.Client
                 }
             }
 
-            Debug.Assert(null != this.httpWebResponse || null != this.Failure, "should have response or exception");
+            Debug.Assert(
+                null != this.httpWebResponse || null != this.Failure,
+                "should have response or exception"
+            );
             if (null != this.httpWebResponse)
             {
                 this.httpWebResponse.Close();
 
-                Exception ex = DataServiceContext.HandleResponse(this.StatusCode, this.httpWebResponse.Headers[XmlConstants.HttpDataServiceVersion], this.GetResponseStream, false);
+                Exception ex = DataServiceContext.HandleResponse(
+                    this.StatusCode,
+                    this.httpWebResponse.Headers[XmlConstants.HttpDataServiceVersion],
+                    this.GetResponseStream,
+                    false
+                );
                 if (null != ex)
                 {
                     this.HandleFailure(ex);
@@ -329,7 +392,8 @@ namespace System.Data.Services.Client
 #if StreamContainsBuffer
                 byte[] buffer = new byte[(int)length];
                 if (length < UInt16.MaxValue)
-                {                    responseStreamIsCopyBuffer = true;
+                {
+                    responseStreamIsCopyBuffer = true;
                     this.asyncStreamCopyBuffer = buffer;
                 }
                 return new MemoryStream(buffer, 0, buffer.Length, true, true);
@@ -342,8 +406,10 @@ namespace System.Data.Services.Client
         }
 
         protected virtual byte[] GetAsyncResponseStreamCopyBuffer()
-        {            Debug.Assert(null == this.asyncStreamCopyBuffer, "non-null this.asyncStreamCopyBuffer");
-            return System.Threading.Interlocked.Exchange(ref reusableAsyncCopyBuffer, null) ?? new byte[8000];
+        {
+            Debug.Assert(null == this.asyncStreamCopyBuffer, "non-null this.asyncStreamCopyBuffer");
+            return System.Threading.Interlocked.Exchange(ref reusableAsyncCopyBuffer, null)
+                ?? new byte[8000];
         }
 
         protected virtual void PutAsyncResponseStreamCopyBuffer(byte[] buffer)
@@ -440,7 +506,11 @@ namespace System.Data.Services.Client
         }
 #endif
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "required for this feature")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "required for this feature"
+        )]
         private static void AsyncEndGetResponse(IAsyncResult asyncResult)
         {
             Debug.Assert(asyncResult != null && asyncResult.IsCompleted, "asyncResult.IsCompleted");
@@ -449,7 +519,10 @@ namespace System.Data.Services.Client
             {
                 CompleteCheck(state, InternalError.InvalidEndGetResponseCompleted);
                 state.CompletedSynchronously &= asyncResult.CompletedSynchronously;
-                HttpWebRequest httpWebRequest = Util.NullCheck(state.Request, InternalError.InvalidEndGetResponseRequest);
+                HttpWebRequest httpWebRequest = Util.NullCheck(
+                    state.Request,
+                    InternalError.InvalidEndGetResponseRequest
+                );
 
                 HttpWebResponse response = null;
                 try
@@ -465,7 +538,9 @@ namespace System.Data.Services.Client
                     }
                 }
 
-                state.SetHttpWebResponse(Util.NullCheck(response, InternalError.InvalidEndGetResponseResponse));
+                state.SetHttpWebResponse(
+                    Util.NullCheck(response, InternalError.InvalidEndGetResponseResponse)
+                );
                 Debug.Assert(null == state.asyncResponseStream, "non-null asyncResponseStream");
 
                 Stream stream = null;
@@ -478,11 +553,19 @@ namespace System.Data.Services.Client
                 if ((null != stream) && stream.CanRead)
                 {
                     if (null == state.responseStream)
-                    {                        state.responseStream = Util.NullCheck(state.GetAsyncResponseStreamCopy(), InternalError.InvalidAsyncResponseStreamCopy);
+                    {
+                        state.responseStream = Util.NullCheck(
+                            state.GetAsyncResponseStreamCopy(),
+                            InternalError.InvalidAsyncResponseStreamCopy
+                        );
                     }
 
                     if (null == state.asyncStreamCopyBuffer)
-                    {                        state.asyncStreamCopyBuffer = Util.NullCheck(state.GetAsyncResponseStreamCopyBuffer(), InternalError.InvalidAsyncResponseStreamCopyBuffer);
+                    {
+                        state.asyncStreamCopyBuffer = Util.NullCheck(
+                            state.GetAsyncResponseStreamCopyBuffer(),
+                            InternalError.InvalidAsyncResponseStreamCopyBuffer
+                        );
                     }
 
                     QueryResult.ReadResponseStream(state);
@@ -513,10 +596,12 @@ namespace System.Data.Services.Client
             Stream stream = queryResult.asyncResponseStream;
             do
             {
-                int bufferOffset, bufferLength;
+                int bufferOffset,
+                    bufferLength;
 #if StreamContainsBuffer
                 if (state.responseStreamIsCopyBuffer)
-                {                    bufferOffset = checked((int)state.responseStream.Position);
+                {
+                    bufferOffset = checked((int)state.responseStream.Position);
                     bufferLength = buffer.Length - bufferOffset;
                 }
                 else
@@ -527,14 +612,32 @@ namespace System.Data.Services.Client
                 }
 
                 queryResult.usingBuffer = true;
-                asyncResult = BaseAsyncResult.InvokeAsync(stream.BeginRead, buffer, bufferOffset, bufferLength, QueryResult.AsyncEndRead, queryResult);
-                queryResult.CompletedSynchronously &= asyncResult.CompletedSynchronously;            }
-            while (asyncResult.CompletedSynchronously && !queryResult.IsCompletedInternally && stream.CanRead);
+                asyncResult = BaseAsyncResult.InvokeAsync(
+                    stream.BeginRead,
+                    buffer,
+                    bufferOffset,
+                    bufferLength,
+                    QueryResult.AsyncEndRead,
+                    queryResult
+                );
+                queryResult.CompletedSynchronously &= asyncResult.CompletedSynchronously;
+            } while (
+                asyncResult.CompletedSynchronously
+                && !queryResult.IsCompletedInternally
+                && stream.CanRead
+            );
 
-            Debug.Assert(!queryResult.CompletedSynchronously || queryResult.IsCompletedInternally, "AsyncEndGetResponse !IsCompleted");
+            Debug.Assert(
+                !queryResult.CompletedSynchronously || queryResult.IsCompletedInternally,
+                "AsyncEndGetResponse !IsCompleted"
+            );
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "required for this feature")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "required for this feature"
+        )]
         private static void AsyncEndRead(IAsyncResult asyncResult)
         {
             Debug.Assert(asyncResult != null && asyncResult.IsCompleted, "asyncResult.IsCompleted");
@@ -544,9 +647,18 @@ namespace System.Data.Services.Client
             {
                 CompleteCheck(state, InternalError.InvalidEndReadCompleted);
                 state.CompletedSynchronously &= asyncResult.CompletedSynchronously;
-                Stream stream = Util.NullCheck(state.asyncResponseStream, InternalError.InvalidEndReadStream);
-                Stream outputResponse = Util.NullCheck(state.responseStream, InternalError.InvalidEndReadCopy);
-                byte[] buffer = Util.NullCheck(state.asyncStreamCopyBuffer, InternalError.InvalidEndReadBuffer);
+                Stream stream = Util.NullCheck(
+                    state.asyncResponseStream,
+                    InternalError.InvalidEndReadStream
+                );
+                Stream outputResponse = Util.NullCheck(
+                    state.responseStream,
+                    InternalError.InvalidEndReadCopy
+                );
+                byte[] buffer = Util.NullCheck(
+                    state.asyncStreamCopyBuffer,
+                    InternalError.InvalidEndReadBuffer
+                );
 
                 count = stream.EndRead(asyncResult);
                 state.usingBuffer = false;
@@ -554,7 +666,8 @@ namespace System.Data.Services.Client
                 {
 #if StreamContainsBuffer
                     if (state.responseStreamIsCopyBuffer)
-                    {                        outputResponse.Position = outputResponse.Position + count;
+                    {
+                        outputResponse.Position = outputResponse.Position + count;
                     }
                     else
 #endif
@@ -573,7 +686,11 @@ namespace System.Data.Services.Client
                 else
                 {
 #if StreamContainsBuffer
-                    Debug.Assert(!state.responseStreamIsCopyBuffer || (outputResponse.Position == outputResponse.Length), "didn't read expected count");
+                    Debug.Assert(
+                        !state.responseStreamIsCopyBuffer
+                            || (outputResponse.Position == outputResponse.Length),
+                        "didn't read expected count"
+                    );
 #endif
                     if (outputResponse.Position < outputResponse.Length)
                     {

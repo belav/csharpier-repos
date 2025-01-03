@@ -38,41 +38,51 @@ public class KnownStringsTests
     static readonly byte[] _invalidMethod12 = Encoding.ASCII.GetBytes("TRACE_\0\0");
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static object[] CreateTestDataEntry(byte[] methodData, int expectedMethod, int expectedLength, bool expectedResult)
+    private static object[] CreateTestDataEntry(
+        byte[] methodData,
+        int expectedMethod,
+        int expectedLength,
+        bool expectedResult
+    )
     {
         return new object[] { methodData, expectedMethod, expectedLength, expectedResult };
     }
 
     private static readonly object[][] _testData = new object[][]
     {
-            CreateTestDataEntry(_methodGet, (int)HttpMethod.Get, 3, true),
-            CreateTestDataEntry(_methodPut, (int)HttpMethod.Put, 3, true),
-            CreateTestDataEntry(_methodPost, (int)HttpMethod.Post, 4, true),
-            CreateTestDataEntry(_methodHead, (int)HttpMethod.Head, 4, true),
-            CreateTestDataEntry(_methodTrace, (int)HttpMethod.Trace, 5, true),
-            CreateTestDataEntry(_methodPatch, (int)HttpMethod.Patch, 5, true),
-            CreateTestDataEntry(_methodDelete, (int)HttpMethod.Delete, 6, true),
-            CreateTestDataEntry(_methodConnect, (int)HttpMethod.Connect, 7, true),
-            CreateTestDataEntry(_methodOptions, (int)HttpMethod.Options, 7, true),
-            CreateTestDataEntry(_invalidMethod1, (int)HttpMethod.Custom, 0, false),
-            CreateTestDataEntry(_invalidMethod2, (int)HttpMethod.Custom, 0, false),
-            CreateTestDataEntry(_invalidMethod3, (int)HttpMethod.Custom, 0, false),
-            CreateTestDataEntry(_invalidMethod4, (int)HttpMethod.Custom, 0, false),
-            CreateTestDataEntry(_invalidMethod5, (int)HttpMethod.Custom, 0, false),
-            CreateTestDataEntry(_invalidMethod6, (int)HttpMethod.Custom, 0, false),
-            CreateTestDataEntry(_invalidMethod7, (int)HttpMethod.Custom, 0, false),
-            CreateTestDataEntry(_invalidMethod8, (int)HttpMethod.Custom, 0, false),
-            CreateTestDataEntry(_invalidMethod9, (int)HttpMethod.Custom, 0, false),
-            CreateTestDataEntry(_invalidMethod10, (int)HttpMethod.Custom, 0, false),
-            CreateTestDataEntry(_invalidMethod11, (int)HttpMethod.Custom, 0, false),
-            CreateTestDataEntry(_invalidMethod12, (int)HttpMethod.Custom, 0, false),
+        CreateTestDataEntry(_methodGet, (int)HttpMethod.Get, 3, true),
+        CreateTestDataEntry(_methodPut, (int)HttpMethod.Put, 3, true),
+        CreateTestDataEntry(_methodPost, (int)HttpMethod.Post, 4, true),
+        CreateTestDataEntry(_methodHead, (int)HttpMethod.Head, 4, true),
+        CreateTestDataEntry(_methodTrace, (int)HttpMethod.Trace, 5, true),
+        CreateTestDataEntry(_methodPatch, (int)HttpMethod.Patch, 5, true),
+        CreateTestDataEntry(_methodDelete, (int)HttpMethod.Delete, 6, true),
+        CreateTestDataEntry(_methodConnect, (int)HttpMethod.Connect, 7, true),
+        CreateTestDataEntry(_methodOptions, (int)HttpMethod.Options, 7, true),
+        CreateTestDataEntry(_invalidMethod1, (int)HttpMethod.Custom, 0, false),
+        CreateTestDataEntry(_invalidMethod2, (int)HttpMethod.Custom, 0, false),
+        CreateTestDataEntry(_invalidMethod3, (int)HttpMethod.Custom, 0, false),
+        CreateTestDataEntry(_invalidMethod4, (int)HttpMethod.Custom, 0, false),
+        CreateTestDataEntry(_invalidMethod5, (int)HttpMethod.Custom, 0, false),
+        CreateTestDataEntry(_invalidMethod6, (int)HttpMethod.Custom, 0, false),
+        CreateTestDataEntry(_invalidMethod7, (int)HttpMethod.Custom, 0, false),
+        CreateTestDataEntry(_invalidMethod8, (int)HttpMethod.Custom, 0, false),
+        CreateTestDataEntry(_invalidMethod9, (int)HttpMethod.Custom, 0, false),
+        CreateTestDataEntry(_invalidMethod10, (int)HttpMethod.Custom, 0, false),
+        CreateTestDataEntry(_invalidMethod11, (int)HttpMethod.Custom, 0, false),
+        CreateTestDataEntry(_invalidMethod12, (int)HttpMethod.Custom, 0, false),
     };
 
     public static IEnumerable<object[]> TestData => _testData;
 
     [Theory]
     [MemberData(nameof(TestData), MemberType = typeof(KnownStringsTests))]
-    public void GetsKnownMethod(byte[] methodData, int intExpectedMethod, int expectedLength, bool expectedResult)
+    public void GetsKnownMethod(
+        byte[] methodData,
+        int intExpectedMethod,
+        int expectedLength,
+        bool expectedResult
+    )
     {
         var expectedMethod = (HttpMethod)intExpectedMethod;
         var data = new ReadOnlySpan<byte>(methodData);

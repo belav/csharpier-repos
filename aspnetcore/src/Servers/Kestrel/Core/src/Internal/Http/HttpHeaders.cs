@@ -22,7 +22,8 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
     protected long? _contentLength;
     protected bool _isReadOnly;
     protected Dictionary<string, StringValues>? MaybeUnknown;
-    protected Dictionary<string, StringValues> Unknown => MaybeUnknown ??= new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase);
+    protected Dictionary<string, StringValues> Unknown =>
+        MaybeUnknown ??= new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase);
 
     public long? ContentLength
     {
@@ -85,10 +86,7 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
             }
             return value;
         }
-        set
-        {
-            ((IHeaderDictionary)this)[key] = value;
-        }
+        set { ((IHeaderDictionary)this)[key] = value; }
     }
 
     protected static void ThrowHeadersReadOnlyException()
@@ -115,9 +113,13 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
 
     bool ICollection<KeyValuePair<string, StringValues>>.IsReadOnly => _isReadOnly;
 
-    ICollection<string> IDictionary<string, StringValues>.Keys => ((IDictionary<string, StringValues>)this).Select(pair => pair.Key).ToHashSet(StringComparer.OrdinalIgnoreCase);
+    ICollection<string> IDictionary<string, StringValues>.Keys =>
+        ((IDictionary<string, StringValues>)this)
+            .Select(pair => pair.Key)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-    ICollection<StringValues> IDictionary<string, StringValues>.Values => ((IDictionary<string, StringValues>)this).Select(pair => pair.Value).ToList();
+    ICollection<StringValues> IDictionary<string, StringValues>.Values =>
+        ((IDictionary<string, StringValues>)this).Select(pair => pair.Value).ToList();
 
     public void SetReadOnly()
     {
@@ -151,36 +153,55 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    protected bool TryGetUnknown(string key, ref StringValues value) => MaybeUnknown?.TryGetValue(key, out value) ?? false;
+    protected bool TryGetUnknown(string key, ref StringValues value) =>
+        MaybeUnknown?.TryGetValue(key, out value) ?? false;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     protected bool RemoveUnknown(string key) => MaybeUnknown?.Remove(key) ?? false;
 
     protected virtual int GetCountFast()
-    { throw new NotImplementedException(); }
+    {
+        throw new NotImplementedException();
+    }
 
     protected virtual bool TryGetValueFast(string key, out StringValues value)
-    { throw new NotImplementedException(); }
+    {
+        throw new NotImplementedException();
+    }
 
     protected virtual void SetValueFast(string key, StringValues value)
-    { throw new NotImplementedException(); }
+    {
+        throw new NotImplementedException();
+    }
 
     protected virtual bool AddValueFast(string key, StringValues value)
-    { throw new NotImplementedException(); }
+    {
+        throw new NotImplementedException();
+    }
 
     protected virtual bool RemoveFast(string key)
-    { throw new NotImplementedException(); }
+    {
+        throw new NotImplementedException();
+    }
 
     protected virtual void ClearFast()
-    { throw new NotImplementedException(); }
+    {
+        throw new NotImplementedException();
+    }
 
     protected virtual bool CopyToFast(KeyValuePair<string, StringValues>[] array, int arrayIndex)
-    { throw new NotImplementedException(); }
+    {
+        throw new NotImplementedException();
+    }
 
     protected virtual IEnumerator<KeyValuePair<string, StringValues>> GetEnumeratorFast()
-    { throw new NotImplementedException(); }
+    {
+        throw new NotImplementedException();
+    }
 
-    void ICollection<KeyValuePair<string, StringValues>>.Add(KeyValuePair<string, StringValues> item)
+    void ICollection<KeyValuePair<string, StringValues>>.Add(
+        KeyValuePair<string, StringValues> item
+    )
     {
         ((IDictionary<string, StringValues>)this).Add(item.Key, item.Value);
     }
@@ -211,11 +232,11 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
         ClearFast();
     }
 
-    bool ICollection<KeyValuePair<string, StringValues>>.Contains(KeyValuePair<string, StringValues> item)
+    bool ICollection<KeyValuePair<string, StringValues>>.Contains(
+        KeyValuePair<string, StringValues> item
+    )
     {
-        return
-            TryGetValueFast(item.Key, out var value) &&
-            value.Equals(item.Value);
+        return TryGetValueFast(item.Key, out var value) && value.Equals(item.Value);
     }
 
     bool IDictionary<string, StringValues>.ContainsKey(string key)
@@ -223,7 +244,10 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
         return TryGetValueFast(key, out _);
     }
 
-    void ICollection<KeyValuePair<string, StringValues>>.CopyTo(KeyValuePair<string, StringValues>[] array, int arrayIndex)
+    void ICollection<KeyValuePair<string, StringValues>>.CopyTo(
+        KeyValuePair<string, StringValues>[] array,
+        int arrayIndex
+    )
     {
         if (!CopyToFast(array, arrayIndex))
         {
@@ -236,17 +260,20 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
         return GetEnumeratorFast();
     }
 
-    IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<KeyValuePair<string, StringValues>>.GetEnumerator()
+    IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<
+        KeyValuePair<string, StringValues>
+    >.GetEnumerator()
     {
         return GetEnumeratorFast();
     }
 
-    bool ICollection<KeyValuePair<string, StringValues>>.Remove(KeyValuePair<string, StringValues> item)
+    bool ICollection<KeyValuePair<string, StringValues>>.Remove(
+        KeyValuePair<string, StringValues> item
+    )
     {
-        return
-            TryGetValueFast(item.Key, out var value) &&
-            value.Equals(item.Value) &&
-            RemoveFast(item.Key);
+        return TryGetValueFast(item.Key, out var value)
+            && value.Equals(item.Value)
+            && RemoveFast(item.Key);
     }
 
     bool IDictionary<string, StringValues>.Remove(string key)
@@ -273,9 +300,14 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
         return debugText;
     }
 
-    public static void ValidateHeaderValueCharacters(string headerName, StringValues headerValues, Func<string, Encoding?> encodingSelector)
+    public static void ValidateHeaderValueCharacters(
+        string headerName,
+        StringValues headerValues,
+        Func<string, Encoding?> encodingSelector
+    )
     {
-        var requireAscii = ReferenceEquals(encodingSelector, KestrelServerOptions.DefaultHeaderEncodingSelector)
+        var requireAscii =
+            ReferenceEquals(encodingSelector, KestrelServerOptions.DefaultHeaderEncodingSelector)
             || encodingSelector(headerName) == null;
 
         var count = headerValues.Count;
@@ -289,7 +321,8 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
     {
         if (headerCharacters != null)
         {
-            var invalid = requireAscii ? HttpCharacters.IndexOfInvalidFieldValueChar(headerCharacters)
+            var invalid = requireAscii
+                ? HttpCharacters.IndexOfInvalidFieldValueChar(headerCharacters)
                 : HttpCharacters.IndexOfInvalidFieldValueCharExtended(headerCharacters);
             if (invalid >= 0)
             {
@@ -321,10 +354,10 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
         const ulong keepAliveStart = 0x002d_0070_0065_0065; // 4 chars "eep-"
         const ulong keepAliveMiddle = 0x0076_0069_006c_0061; // 4 chars "aliv"
         const ushort keepAliveEnd = 0x0065; // 1 char "e"
-                                            // Upgrade
+        // Upgrade
         const ulong upgradeStart = 0x0061_0072_0067_0070; // 4 chars "pgra"
         const uint upgradeEnd = 0x0065_0064; // 2 chars "de"
-                                             // Close
+        // Close
         const ulong closeEnd = 0x0065_0073_006f_006c; // 4 chars "lose"
 
         var connection = headers.HeaderConnection;
@@ -495,15 +528,19 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static ulong ReadLowerCaseUInt64(ReadOnlySpan<byte> value, ulong lowerCaseMask = 0x0020_0020_0020_0020)
+    private static ulong ReadLowerCaseUInt64(
+        ReadOnlySpan<byte> value,
+        ulong lowerCaseMask = 0x0020_0020_0020_0020
+    )
     {
         ulong result = MemoryMarshal.Read<ulong>(value);
         if (!BitConverter.IsLittleEndian)
         {
-            result = (result & 0xffff_0000_0000_0000) >> 48 |
-                     (result & 0x0000_ffff_0000_0000) >> 16 |
-                     (result & 0x0000_0000_ffff_0000) << 16 |
-                     (result & 0x0000_0000_0000_ffff) << 48;
+            result =
+                (result & 0xffff_0000_0000_0000) >> 48
+                | (result & 0x0000_ffff_0000_0000) >> 16
+                | (result & 0x0000_0000_ffff_0000) << 16
+                | (result & 0x0000_0000_0000_ffff) << 48;
         }
         return result | lowerCaseMask;
     }
@@ -514,15 +551,14 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
         uint result = MemoryMarshal.Read<uint>(value);
         if (!BitConverter.IsLittleEndian)
         {
-            result = (result & 0xffff_0000) >> 16 |
-                     (result & 0x0000_ffff) << 16;
+            result = (result & 0xffff_0000) >> 16 | (result & 0x0000_ffff) << 16;
         }
         return result | 0x0020_0020;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static ushort ReadLowerCaseUInt16(ReadOnlySpan<byte> value)
-        => (ushort)(MemoryMarshal.Read<ushort>(value) | 0x0020);
+    private static ushort ReadLowerCaseUInt16(ReadOnlySpan<byte> value) =>
+        (ushort)(MemoryMarshal.Read<ushort>(value) | 0x0020);
 
     private static char ToLowerCase(char value) => (char)(value | (char)0x0020);
 
@@ -566,13 +602,19 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
 
                 var byteValue = MemoryMarshal.AsBytes(values);
 
-                if (ToLowerCase(c) == 'c' &&
-                    TryReadLowerCaseUInt64(byteValue, out var result64) && result64 == chunkedStart)
+                if (
+                    ToLowerCase(c) == 'c'
+                    && TryReadLowerCaseUInt64(byteValue, out var result64)
+                    && result64 == chunkedStart
+                )
                 {
                     offset += sizeof(ulong) / 2;
                     byteValue = byteValue.Slice(sizeof(ulong));
 
-                    if (TryReadLowerCaseUInt32(byteValue, out var result32) && result32 == chunkedEnd)
+                    if (
+                        TryReadLowerCaseUInt32(byteValue, out var result32)
+                        && result32 == chunkedEnd
+                    )
                     {
                         offset += sizeof(uint) / 2;
                         transferEncodingOptions = TransferCoding.Chunked;
@@ -644,10 +686,11 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
         {
             if (!BitConverter.IsLittleEndian)
             {
-                result = (result & 0xffff_0000_0000_0000) >> 48 |
-                         (result & 0x0000_ffff_0000_0000) >> 16 |
-                         (result & 0x0000_0000_ffff_0000) << 16 |
-                         (result & 0x0000_0000_0000_ffff) << 48;
+                result =
+                    (result & 0xffff_0000_0000_0000) >> 48
+                    | (result & 0x0000_ffff_0000_0000) >> 16
+                    | (result & 0x0000_0000_ffff_0000) << 16
+                    | (result & 0x0000_0000_0000_ffff) << 48;
             }
             value = result | 0x0020_0020_0020_0020;
             return true;
@@ -664,8 +707,7 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
         {
             if (!BitConverter.IsLittleEndian)
             {
-                result = (result & 0xffff_0000) >> 16 |
-                         (result & 0x0000_ffff) << 16;
+                result = (result & 0xffff_0000) >> 16 | (result & 0x0000_ffff) << 16;
             }
             value = result | 0x0020_0020;
             return true;
@@ -677,12 +719,18 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
 
     private static void ThrowInvalidContentLengthException(long value)
     {
-        throw new ArgumentOutOfRangeException(CoreStrings.FormatInvalidContentLength_InvalidNumber(value));
+        throw new ArgumentOutOfRangeException(
+            CoreStrings.FormatInvalidContentLength_InvalidNumber(value)
+        );
     }
 
     private static void ThrowInvalidHeaderCharacter(char ch)
     {
-        throw new InvalidOperationException(CoreStrings.FormatInvalidAsciiOrControlChar(string.Format(CultureInfo.InvariantCulture, "0x{0:X4}", (ushort)ch)));
+        throw new InvalidOperationException(
+            CoreStrings.FormatInvalidAsciiOrControlChar(
+                string.Format(CultureInfo.InvariantCulture, "0x{0:X4}", (ushort)ch)
+            )
+        );
     }
 
     private static void ThrowInvalidEmptyHeaderName()
@@ -695,6 +743,9 @@ internal abstract partial class HttpHeaders : IHeaderDictionary
         private readonly HttpHeaders _headers = headers;
 
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-        public KeyValuePair<string, string>[] Items => _headers.Select(pair => new KeyValuePair<string, string>(pair.Key, pair.Value.ToString())).ToArray();
+        public KeyValuePair<string, string>[] Items =>
+            _headers
+                .Select(pair => new KeyValuePair<string, string>(pair.Key, pair.Value.ToString()))
+                .ToArray();
     }
 }

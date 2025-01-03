@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 LanguageNames.CSharp,
                 compilationOptions: null,
                 parseOptions: new CSharpParseOptions(kind: SourceCodeKind.Regular),
-                composition: composition);
+                composition: composition
+            );
         }
     }
 }

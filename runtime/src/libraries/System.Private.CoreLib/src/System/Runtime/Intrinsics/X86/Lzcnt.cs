@@ -14,14 +14,20 @@ namespace System.Runtime.Intrinsics.X86
     {
         internal Lzcnt() { }
 
-        public static new bool IsSupported { get => IsSupported; }
+        public static new bool IsSupported
+        {
+            get => IsSupported;
+        }
 
         [Intrinsic]
         public new abstract class X64 : X86Base.X64
         {
             internal X64() { }
 
-            public static new bool IsSupported { get => IsSupported; }
+            public static new bool IsSupported
+            {
+                get => IsSupported;
+            }
 
             /// <summary>
             /// unsigned __int64 _lzcnt_u64 (unsigned __int64 a)

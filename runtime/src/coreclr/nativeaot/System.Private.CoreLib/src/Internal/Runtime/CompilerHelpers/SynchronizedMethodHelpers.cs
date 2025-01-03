@@ -3,9 +3,7 @@
 
 using System;
 using System.Threading;
-
 using Internal.Runtime.Augments;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Runtime.CompilerHelpers
@@ -26,13 +24,15 @@ namespace Internal.Runtime.CompilerHelpers
                 return;
             }
 
-            Lock lck = resultOrIndex == 0 ?
-                ObjectHeader.GetLockObject(obj) :
-                SyncTable.GetLockObject(resultOrIndex);
+            Lock lck =
+                resultOrIndex == 0
+                    ? ObjectHeader.GetLockObject(obj)
+                    : SyncTable.GetLockObject(resultOrIndex);
 
             lck.TryEnterSlow(Timeout.Infinite, currentThreadID);
             lockTaken = true;
         }
+
         private static void MonitorExit(object obj, ref bool lockTaken)
         {
             // Inlined Monitor.Exit with a few tweaks
@@ -55,13 +55,15 @@ namespace Internal.Runtime.CompilerHelpers
                 return;
             }
 
-            Lock lck = resultOrIndex == 0 ?
-                ObjectHeader.GetLockObject(obj) :
-                SyncTable.GetLockObject(resultOrIndex);
+            Lock lck =
+                resultOrIndex == 0
+                    ? ObjectHeader.GetLockObject(obj)
+                    : SyncTable.GetLockObject(resultOrIndex);
 
             lck.TryEnterSlow(Timeout.Infinite, currentThreadID);
             lockTaken = true;
         }
+
         private static unsafe void MonitorExitStatic(MethodTable* pMT, ref bool lockTaken)
         {
             // Inlined Monitor.Exit with a few tweaks
@@ -82,7 +84,10 @@ namespace Internal.Runtime.CompilerHelpers
 
         private static unsafe MethodTable* GetClassFromMethodParam(IntPtr pDictionary)
         {
-            bool success = RuntimeAugments.TypeLoaderCallbacks.TryGetOwningTypeForMethodDictionary(pDictionary, out RuntimeTypeHandle th);
+            bool success = RuntimeAugments.TypeLoaderCallbacks.TryGetOwningTypeForMethodDictionary(
+                pDictionary,
+                out RuntimeTypeHandle th
+            );
             Debug.Assert(success);
             return th.ToMethodTable();
         }

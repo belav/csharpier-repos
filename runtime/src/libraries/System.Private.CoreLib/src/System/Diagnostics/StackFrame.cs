@@ -132,7 +132,8 @@ namespace System.Diagnostics
         /// </summary>
         public const int OFFSET_UNKNOWN = -1;
 
-        internal bool IsLastFrameFromForeignExceptionStackTrace => _isLastFrameFromForeignExceptionStackTrace;
+        internal bool IsLastFrameFromForeignExceptionStackTrace =>
+            _isLastFrameFromForeignExceptionStackTrace;
 
 #if !NATIVEAOT
         /// <summary>
@@ -153,7 +154,6 @@ namespace System.Diagnostics
         {
             return _nativeOffset;
         }
-
 
         /// <summary>
         /// Returns the offset from the start of the IL code for the

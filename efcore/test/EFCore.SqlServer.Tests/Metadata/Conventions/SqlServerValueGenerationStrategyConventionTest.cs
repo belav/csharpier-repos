@@ -25,9 +25,7 @@ public class SqlServerValueGenerationStrategyConventionTest
     [ConditionalFact]
     public void Annotations_are_added_when_conventional_model_builder_is_used_with_sequences()
     {
-        var model = SqlServerTestHelpers.Instance.CreateConventionBuilder()
-            .UseHiLo()
-            .Model;
+        var model = SqlServerTestHelpers.Instance.CreateConventionBuilder().UseHiLo().Model;
 
         model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
 
@@ -36,9 +34,7 @@ public class SqlServerValueGenerationStrategyConventionTest
 
         Assert.Equal(RelationalAnnotationNames.MaxIdentifierLength, annotations[0].Name);
 
-        Assert.Equal(
-            RelationalAnnotationNames.Sequences,
-            annotations[1].Name);
+        Assert.Equal(RelationalAnnotationNames.Sequences, annotations[1].Name);
         Assert.NotNull(annotations[1].Value);
 
         Assert.Equal(SqlServerAnnotationNames.HiLoSequenceName, annotations[2].Name);
@@ -51,9 +47,7 @@ public class SqlServerValueGenerationStrategyConventionTest
     [ConditionalFact]
     public void Annotations_are_added_when_conventional_model_builder_is_used_with_key_sequences()
     {
-        var model = SqlServerTestHelpers.Instance.CreateConventionBuilder()
-            .UseKeySequences()
-            .Model;
+        var model = SqlServerTestHelpers.Instance.CreateConventionBuilder().UseKeySequences().Model;
 
         model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
 

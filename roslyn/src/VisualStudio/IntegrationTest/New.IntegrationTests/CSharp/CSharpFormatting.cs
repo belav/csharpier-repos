@@ -23,39 +23,51 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpFormatting()
-            : base(nameof(CSharpFormatting))
-        {
-        }
+            : base(nameof(CSharpFormatting)) { }
 
         [IdeFact]
         public async Task AlignOpenBraceWithMethodDeclaration()
         {
-            await using (var telemetry = await TestServices.Telemetry.EnableTestTelemetryChannelAsync(HangMitigatingCancellationToken))
+            await using (
+                var telemetry = await TestServices.Telemetry.EnableTestTelemetryChannelAsync(
+                    HangMitigatingCancellationToken
+                )
+            )
             {
-                await SetUpEditorAsync(@"
+                await SetUpEditorAsync(
+                    @"
 $$class C
 {
     void Main()
      {
     }
-}", HangMitigatingCancellationToken);
+}",
+                    HangMitigatingCancellationToken
+                );
 
                 await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
-                await TestServices.EditorVerifier.TextContainsAsync(@"
+                await TestServices.EditorVerifier.TextContainsAsync(
+                    @"
 class C
 {
     void Main()
     {
     }
-}", cancellationToken: HangMitigatingCancellationToken);
-                await telemetry.VerifyFiredAsync(["vs/ide/vbcs/commandhandler/formatcommand"], HangMitigatingCancellationToken);
+}",
+                    cancellationToken: HangMitigatingCancellationToken
+                );
+                await telemetry.VerifyFiredAsync(
+                    ["vs/ide/vbcs/commandhandler/formatcommand"],
+                    HangMitigatingCancellationToken
+                );
             }
         }
 
         [IdeFact]
         public async Task FormatOnSemicolon()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 public class C
 {
     void Goo()
@@ -64,10 +76,16 @@ public class C
     where x % 2 = 0
                       select x   ;$$
     }
-}", HangMitigatingCancellationToken);
+}",
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices.Input.SendAsync([VirtualKeyCode.BACK, ';'], HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextContainsAsync(@"
+            await TestServices.Input.SendAsync(
+                [VirtualKeyCode.BACK, ';'],
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 public class C
 {
     void Goo()
@@ -76,32 +94,44 @@ public class C
                 where x % 2 = 0
                 select x;
     }
-}", cancellationToken: HangMitigatingCancellationToken);
+}",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task FormatSelection()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 public class C {
     public void M( ) {$$
         }
-}", HangMitigatingCancellationToken);
+}",
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices.Editor.SelectTextInCurrentDocumentAsync("public void M( ) {", HangMitigatingCancellationToken);
+            await TestServices.Editor.SelectTextInCurrentDocumentAsync(
+                "public void M( ) {",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.FormatSelectionAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextContainsAsync(@"
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 public class C {
     public void M()
     {
     }
-}", cancellationToken: HangMitigatingCancellationToken);
+}",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task PasteCodeWithLambdaBody()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 using System;
 class Program
 {
@@ -115,13 +145,19 @@ class Program
             }
         };
     }
-}", HangMitigatingCancellationToken);
-            await TestServices.Editor.PasteAsync(@"        Action b = () =>
+}",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Editor.PasteAsync(
+                @"        Action b = () =>
         {
 
-            };", HangMitigatingCancellationToken);
+            };",
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices.EditorVerifier.TextContainsAsync(@"
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 using System;
 class Program
 {
@@ -138,10 +174,16 @@ class Program
             }
         };
     }
-}", cancellationToken: HangMitigatingCancellationToken);
+}",
+                cancellationToken: HangMitigatingCancellationToken
+            );
             // Undo should only undo the formatting
-            await TestServices.Shell.ExecuteCommandAsync(WellKnownCommands.Edit.Undo, HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextContainsAsync(@"
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.Undo,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 using System;
 class Program
 {
@@ -158,13 +200,16 @@ class Program
             }
         };
     }
-}", cancellationToken: HangMitigatingCancellationToken);
+}",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task PasteCodeWithLambdaBody2()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 using System;
 class Program
 {
@@ -178,13 +223,19 @@ class Program
             }
         };
     }
-}", HangMitigatingCancellationToken);
-            await TestServices.Editor.PasteAsync(@"        Action<int> b = n =>
+}",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Editor.PasteAsync(
+                @"        Action<int> b = n =>
         {
             Console.Writeline(n);
-        };", HangMitigatingCancellationToken);
+        };",
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices.EditorVerifier.TextContainsAsync(@"
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 using System;
 class Program
 {
@@ -201,13 +252,16 @@ class Program
             }
         };
     }
-}", cancellationToken: HangMitigatingCancellationToken);
+}",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task PasteCodeWithLambdaBody3()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 using System;
 class Program
 {
@@ -221,13 +275,19 @@ class Program
             }
         };
     }
-}", HangMitigatingCancellationToken);
-            await TestServices.Editor.PasteAsync(@"        D d = delegate(int x)
+}",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Editor.PasteAsync(
+                @"        D d = delegate(int x)
 {
     return 2 * x;
-};", HangMitigatingCancellationToken);
+};",
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices.EditorVerifier.TextContainsAsync(@"
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 using System;
 class Program
 {
@@ -244,23 +304,35 @@ class Program
             }
         };
     }
-}", cancellationToken: HangMitigatingCancellationToken);
+}",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task ShiftEnterWithIntelliSenseAndBraceMatching()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 class Program
 {
     object M(object bar)
     {
         return M$$
     }
-}", HangMitigatingCancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.Workspace, HangMitigatingCancellationToken);
-            await TestServices.Input.SendAsync(["(ba", (VirtualKeyCode.RETURN, VirtualKeyCode.SHIFT), "// comment"], HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextContainsAsync(@"
+}",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.Workspace,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendAsync(
+                ["(ba", (VirtualKeyCode.RETURN, VirtualKeyCode.SHIFT), "// comment"],
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 class Program
 {
     object M(object bar)
@@ -268,7 +340,9 @@ class Program
         return M(bar);
         // comment
     }
-}", cancellationToken: HangMitigatingCancellationToken);
+}",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
@@ -276,7 +350,8 @@ class Program
         [WorkItem("https://github.com/dotnet/roslyn/issues/15003")]
         public async Task ApplyEditorConfigAndFormatDocument()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     public int X1
@@ -287,7 +362,8 @@ class C
         }
     }
 }";
-            var expectedTextTwoSpaceIndent = @"
+            var expectedTextTwoSpaceIndent =
+                @"
 class C
 {
   public int X1
@@ -299,7 +375,11 @@ class C
   }
 }";
 
-            await TestServices.SolutionExplorer.OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.OpenFileAsync(
+                ProjectName,
+                "Class1.cs",
+                HangMitigatingCancellationToken
+            );
 
             MarkupTestFile.GetSpans(markup, out var expectedTextFourSpaceIndent, out _);
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
@@ -314,56 +394,80 @@ class C
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
-                HangMitigatingCancellationToken);
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
 
-            Assert.Equal(expectedTextFourSpaceIndent, await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken));
+            Assert.Equal(
+                expectedTextFourSpaceIndent,
+                await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken)
+            );
 
             /*
              * The second portion of this test adds a .editorconfig file to configure the indentation behavior, and
              * verifies that the next Format Document operation adheres to the formatting.
              */
 
-            var editorConfig = @"root = true
+            var editorConfig =
+                @"root = true
 
 [*.cs]
 indent_size = 2
 ";
 
-            await TestServices.SolutionExplorer.AddFileAsync(ProjectName, ".editorconfig", editorConfig, open: false, HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.AddFileAsync(
+                ProjectName,
+                ".editorconfig",
+                editorConfig,
+                open: false,
+                HangMitigatingCancellationToken
+            );
 
             await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
                 [
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
-                HangMitigatingCancellationToken);
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
 
-            Assert.Equal(expectedTextTwoSpaceIndent, await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken));
+            Assert.Equal(
+                expectedTextTwoSpaceIndent,
+                await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken)
+            );
 
             /*
              * The third portion of this test modifies the existing .editorconfig file with a new indentation behavior,
              * and verifies that the next Format Document operation adheres to the updated formatting.
              */
 
-            await TestServices.SolutionExplorer.SetFileContentsAsync(ProjectName, ".editorconfig", editorConfig.Replace("2", "4"), HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.SetFileContentsAsync(
+                ProjectName,
+                ".editorconfig",
+                editorConfig.Replace("2", "4"),
+                HangMitigatingCancellationToken
+            );
 
             await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
                 [
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
-                HangMitigatingCancellationToken);
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
 
-            Assert.Equal(expectedTextFourSpaceIndent, await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken));
+            Assert.Equal(
+                expectedTextFourSpaceIndent,
+                await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken)
+            );
         }
     }
 }

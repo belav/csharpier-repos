@@ -16,7 +16,11 @@ namespace System.Security.Cryptography.X509Certificates
         private readonly X509Certificate2Collection _copyTo;
         private readonly bool _validOnly;
 
-        internal ManagedCertificateFinder(X509Certificate2Collection findFrom, X509Certificate2Collection copyTo, bool validOnly)
+        internal ManagedCertificateFinder(
+            X509Certificate2Collection findFrom,
+            X509Certificate2Collection copyTo,
+            bool validOnly
+        )
         {
             _findFrom = findFrom;
             _copyTo = copyTo;
@@ -49,8 +53,14 @@ namespace System.Security.Cryptography.X509Certificates
 
                 Span<byte> hashBuffer = stackalloc byte[SHA1.HashSizeInBytes];
 
-                if (!certificate.TryGetCertHash(HashAlgorithmName.SHA1, hashBuffer, out int hashBytesWritten) ||
-                    hashBytesWritten != SHA1.HashSizeInBytes)
+                if (
+                    !certificate.TryGetCertHash(
+                        HashAlgorithmName.SHA1,
+                        hashBuffer,
+                        out int hashBytesWritten
+                    )
+                    || hashBytesWritten != SHA1.HashSizeInBytes
+                )
                 {
                     Debug.Fail("Presized hash buffer was not the correct size.");
                     throw new CryptographicException();
@@ -68,15 +78,24 @@ namespace System.Security.Cryptography.X509Certificates
                 subjectName,
                 static (subjectName, cert) =>
                 {
-                    string formedSubject = X500NameEncoder.X500DistinguishedNameDecode(cert.SubjectName.RawData, false, X500DistinguishedNameFlags.None);
+                    string formedSubject = X500NameEncoder.X500DistinguishedNameDecode(
+                        cert.SubjectName.RawData,
+                        false,
+                        X500DistinguishedNameFlags.None
+                    );
 
                     return formedSubject.Contains(subjectName, StringComparison.OrdinalIgnoreCase);
-                });
+                }
+            );
         }
 
         public void FindBySubjectDistinguishedName(string subjectDistinguishedName)
         {
-            FindCore(subjectDistinguishedName, static (subjectDistinguishedName, cert) => StringComparer.OrdinalIgnoreCase.Equals(subjectDistinguishedName, cert.Subject));
+            FindCore(
+                subjectDistinguishedName,
+                static (subjectDistinguishedName, cert) =>
+                    StringComparer.OrdinalIgnoreCase.Equals(subjectDistinguishedName, cert.Subject)
+            );
         }
 
         public void FindByIssuerName(string issuerName)
@@ -85,15 +104,24 @@ namespace System.Security.Cryptography.X509Certificates
                 issuerName,
                 static (issuerName, cert) =>
                 {
-                    string formedIssuer = X500NameEncoder.X500DistinguishedNameDecode(cert.IssuerName.RawData, false, X500DistinguishedNameFlags.None);
+                    string formedIssuer = X500NameEncoder.X500DistinguishedNameDecode(
+                        cert.IssuerName.RawData,
+                        false,
+                        X500DistinguishedNameFlags.None
+                    );
 
                     return formedIssuer.Contains(issuerName, StringComparison.OrdinalIgnoreCase);
-                });
+                }
+            );
         }
 
         public void FindByIssuerDistinguishedName(string issuerDistinguishedName)
         {
-            FindCore(issuerDistinguishedName, static (issuerDistinguishedName, cert) => StringComparer.OrdinalIgnoreCase.Equals(issuerDistinguishedName, cert.Issuer));
+            FindCore(
+                issuerDistinguishedName,
+                static (issuerDistinguishedName, cert) =>
+                    StringComparer.OrdinalIgnoreCase.Equals(issuerDistinguishedName, cert.Issuer)
+            );
         }
 
         public void FindBySerialNumber(BigInteger hexValue, BigInteger decimalValue)
@@ -104,10 +132,13 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     byte[] serialBytes = cert.GetSerialNumber();
                     BigInteger serialNumber = new BigInteger(serialBytes, isUnsigned: true);
-                    bool match = state.hexValue.Equals(serialNumber) || state.decimalValue.Equals(serialNumber);
+                    bool match =
+                        state.hexValue.Equals(serialNumber)
+                        || state.decimalValue.Equals(serialNumber);
 
                     return match;
-                });
+                }
+            );
         }
 
         private static DateTime NormalizeDateTime(DateTime dateTime)
@@ -128,7 +159,11 @@ namespace System.Security.Cryptography.X509Certificates
         {
             DateTime normalized = NormalizeDateTime(dateTime);
 
-            FindCore(normalized, static (normalized, cert) => cert.NotBefore <= normalized && normalized <= cert.NotAfter);
+            FindCore(
+                normalized,
+                static (normalized, cert) =>
+                    cert.NotBefore <= normalized && normalized <= cert.NotAfter
+            );
         }
 
         public void FindByTimeNotYetValid(DateTime dateTime)
@@ -166,7 +201,10 @@ namespace System.Security.Cryptography.X509Certificates
                         }
                         catch (AsnContentException e)
                         {
-                            throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding, e);
+                            throw new CryptographicException(
+                                SR.Cryptography_Der_Invalid_Encoding,
+                                e
+                            );
                         }
 
                         // If this doesn't match, maybe a V2 template will
@@ -180,7 +218,10 @@ namespace System.Security.Cryptography.X509Certificates
 
                     if (ext != null)
                     {
-                        CertificateTemplateAsn template = CertificateTemplateAsn.Decode(ext.RawData, AsnEncodingRules.DER);
+                        CertificateTemplateAsn template = CertificateTemplateAsn.Decode(
+                            ext.RawData,
+                            AsnEncodingRules.DER
+                        );
                         if (StringComparer.Ordinal.Equals(templateName, template.TemplateID))
                         {
                             return true;
@@ -188,7 +229,8 @@ namespace System.Security.Cryptography.X509Certificates
                     }
 
                     return false;
-                });
+                }
+            );
         }
 
         public void FindByApplicationPolicy(string oidValue)
@@ -218,7 +260,8 @@ namespace System.Security.Cryptography.X509Certificates
                     // If the certificate had an EKU extension, and the value we wanted was
                     // not present, then it is not valid for that usage.
                     return false;
-                });
+                }
+            );
         }
 
         public void FindByCertificatePolicy(string oidValue)
@@ -235,9 +278,12 @@ namespace System.Security.Cryptography.X509Certificates
                         return false;
                     }
 
-                    HashSet<string> policyOids = CertificatePolicyChain.ReadCertPolicyExtension(ext.RawData);
+                    HashSet<string> policyOids = CertificatePolicyChain.ReadCertPolicyExtension(
+                        ext.RawData
+                    );
                     return policyOids.Contains(oidValue);
-                });
+                }
+            );
         }
 
         public void FindByExtension(string oidValue)
@@ -262,12 +308,17 @@ namespace System.Security.Cryptography.X509Certificates
                     var kuExt = (X509KeyUsageExtension)ext;
 
                     return (kuExt.KeyUsages & keyUsage) == keyUsage;
-                });
+                }
+            );
         }
 
         protected abstract byte[] GetSubjectPublicKeyInfo(X509Certificate2 cert);
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "SHA1 is required for Compat")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5350",
+            Justification = "SHA1 is required for Compat"
+        )]
         public void FindBySubjectKeyIdentifier(byte[] keyIdentifier)
         {
             FindCore(
@@ -281,7 +332,10 @@ namespace System.Security.Cryptography.X509Certificates
                     {
                         // The extension exposes the value as a hexadecimal string, or we can decode here.
                         // Enough parsing has gone on, let's decode.
-                        certKeyId = ManagedX509ExtensionProcessor.DecodeX509SubjectKeyIdentifierExtension(ext.RawData);
+                        certKeyId =
+                            ManagedX509ExtensionProcessor.DecodeX509SubjectKeyIdentifierExtension(
+                                ext.RawData
+                            );
                     }
                     else
                     {
@@ -299,7 +353,8 @@ namespace System.Security.Cryptography.X509Certificates
                     }
 
                     return certKeyId.SequenceEqual(keyIdentifier);
-                });
+                }
+            );
         }
 
         public void Dispose()
@@ -307,9 +362,7 @@ namespace System.Security.Cryptography.X509Certificates
             Dispose(true);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         private static X509Extension? FindExtension(X509Certificate2 cert, string extensionOid)
         {
@@ -320,9 +373,11 @@ namespace System.Security.Cryptography.X509Certificates
 
             foreach (X509Extension ext in cert.Extensions)
             {
-                if (ext != null &&
-                    ext.Oid != null &&
-                    StringComparer.Ordinal.Equals(extensionOid, ext.Oid.Value))
+                if (
+                    ext != null
+                    && ext.Oid != null
+                    && StringComparer.Ordinal.Equals(extensionOid, ext.Oid.Value)
+                )
                 {
                     return ext;
                 }
@@ -359,14 +414,16 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 // This needs to be kept in sync with VerifyCertificateIgnoringErrors in the
                 // Windows PAL version (and potentially any other PALs that come about)
-                using (X509Chain chain = new X509Chain
-                {
-                    ChainPolicy =
+                using (
+                    X509Chain chain = new X509Chain
                     {
-                        RevocationMode = X509RevocationMode.NoCheck,
-                        RevocationFlag = X509RevocationFlag.ExcludeRoot
+                        ChainPolicy =
+                        {
+                            RevocationMode = X509RevocationMode.NoCheck,
+                            RevocationFlag = X509RevocationFlag.ExcludeRoot,
+                        },
                     }
-                })
+                )
                 {
                     bool valid = chain.Build(cert);
                     int elementCount = chain.ChainElements.Count;

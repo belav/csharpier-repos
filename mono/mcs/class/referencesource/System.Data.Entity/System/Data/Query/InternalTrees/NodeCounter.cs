@@ -9,10 +9,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Diagnostics;
 using System.Data.Common;
-using md=System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Globalization;
+using md = System.Data.Metadata.Edm;
 
 namespace System.Data.Query.InternalTrees
 {
@@ -49,5 +49,3 @@ namespace System.Data.Query.InternalTrees
         }
     }
 }
-
-

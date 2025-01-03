@@ -6,22 +6,36 @@ using System;
 using Xunit;
 
 public struct ValX0 { }
-public struct ValY0 { }
-public struct ValX1<T> { }
-public struct ValY1<T> { }
-public struct ValX2<T, U> { }
-public struct ValY2<T, U> { }
-public struct ValX3<T, U, V> { }
-public struct ValY3<T, U, V> { }
-public class RefX0 { }
-public class RefY0 { }
-public class RefX1<T> { }
-public class RefY1<T> { }
-public class RefX2<T, U> { }
-public class RefY2<T, U> { }
-public class RefX3<T, U, V> { }
-public class RefY3<T, U, V> { }
 
+public struct ValY0 { }
+
+public struct ValX1<T> { }
+
+public struct ValY1<T> { }
+
+public struct ValX2<T, U> { }
+
+public struct ValY2<T, U> { }
+
+public struct ValX3<T, U, V> { }
+
+public struct ValY3<T, U, V> { }
+
+public class RefX0 { }
+
+public class RefY0 { }
+
+public class RefX1<T> { }
+
+public class RefY1<T> { }
+
+public class RefX2<T, U> { }
+
+public class RefY2<T, U> { }
+
+public class RefX3<T, U, V> { }
+
+public class RefY3<T, U, V> { }
 
 public struct Gen<T>
 {
@@ -36,6 +50,7 @@ public class Test_static_equalnull_struct01
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -44,13 +59,11 @@ public class Test_static_equalnull_struct01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     [Fact]
     public static int TestEntryPoint()
     {
-
         int _int = 0;
         Eval(false == Gen<int>.EqualNull(_int));
 
@@ -79,5 +92,4 @@ public class Test_static_equalnull_struct01
             return 1;
         }
     }
-
 }

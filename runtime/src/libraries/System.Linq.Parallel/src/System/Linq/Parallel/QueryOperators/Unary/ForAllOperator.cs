@@ -50,17 +50,25 @@ namespace System.Linq.Parallel
             // has been executed and we are done. We expect the return to be null.
             Shared<bool> dummyTopLevelDisposeFlag = new Shared<bool>(false);
 
-            CancellationTokenSource dummyInternalCancellationTokenSource = new CancellationTokenSource();
+            CancellationTokenSource dummyInternalCancellationTokenSource =
+                new CancellationTokenSource();
 
             // stuff in appropriate defaults for unspecified options.
             QuerySettings settingsWithDefaults = SpecifiedQuerySettings
-                .WithPerExecutionSettings(dummyInternalCancellationTokenSource, dummyTopLevelDisposeFlag)
+                .WithPerExecutionSettings(
+                    dummyInternalCancellationTokenSource,
+                    dummyTopLevelDisposeFlag
+                )
                 .WithDefaults();
 
             QueryLifecycle.LogicalQueryExecutionBegin(settingsWithDefaults.QueryId);
 
-            IEnumerator<TInput>? enumerator = GetOpenedEnumerator(ParallelMergeOptions.FullyBuffered, true, true,
-                settingsWithDefaults);
+            IEnumerator<TInput>? enumerator = GetOpenedEnumerator(
+                ParallelMergeOptions.FullyBuffered,
+                true,
+                true,
+                settingsWithDefaults
+            );
             settingsWithDefaults.CleanStateAtQueryEnd();
             Debug.Assert(enumerator == null);
 
@@ -72,8 +80,7 @@ namespace System.Linq.Parallel
         // partitions as needed.
         //
 
-        internal override QueryResults<TInput> Open(
-            QuerySettings settings, bool preferStriping)
+        internal override QueryResults<TInput> Open(QuerySettings settings, bool preferStriping)
         {
             // We just open the child operator.
             QueryResults<TInput> childQueryResults = Child.Open(settings, preferStriping);
@@ -81,15 +88,25 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TInput, TKey> inputStream, IPartitionedStreamRecipient<TInput> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TInput, TKey> inputStream,
+            IPartitionedStreamRecipient<TInput> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             int partitionCount = inputStream.PartitionCount;
             PartitionedStream<TInput, int> outputStream = new PartitionedStream<TInput, int>(
-                partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Correct);
+                partitionCount,
+                Util.GetDefaultComparer<int>(),
+                OrdinalIndexState.Correct
+            );
             for (int i = 0; i < partitionCount; i++)
             {
                 outputStream[i] = new ForAllEnumerator<TKey>(
-                    inputStream[i], _elementAction, settings.CancellationState.MergedCancellationToken);
+                    inputStream[i],
+                    _elementAction,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
 
             recipient.Receive(outputStream);
@@ -99,7 +116,9 @@ namespace System.Linq.Parallel
         // Returns an enumerable that represents the query executing sequentially.
         //
 
-        [ExcludeFromCodeCoverage(Justification = "AsSequentialQuery is not supported on ForAllOperator")]
+        [ExcludeFromCodeCoverage(
+            Justification = "AsSequentialQuery is not supported on ForAllOperator"
+        )]
         internal override IEnumerable<TInput> AsSequentialQuery(CancellationToken token)
         {
             Debug.Fail("AsSequentialQuery is not supported on ForAllOperator");
@@ -131,7 +150,11 @@ namespace System.Linq.Parallel
             // Constructs a new forall enumerator object.
             //
 
-            internal ForAllEnumerator(QueryOperatorEnumerator<TInput, TKey> source, Action<TInput> elementAction, CancellationToken cancellationToken)
+            internal ForAllEnumerator(
+                QueryOperatorEnumerator<TInput, TKey> source,
+                Action<TInput> elementAction,
+                CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(source != null);
                 Debug.Assert(elementAction != null);
@@ -146,7 +169,10 @@ namespace System.Linq.Parallel
             // element action for each element.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TInput currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TInput currentElement,
+                ref int currentKey
+            )
             {
                 Debug.Assert(_elementAction != null, "expected a compiled operator");
 

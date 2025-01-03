@@ -19,33 +19,38 @@ namespace System.Data
     using System.Data.Common;
     using System.Diagnostics;
 
-    internal enum RBTreeError {
-        InvalidPageSize                             =  1,
-//      InvalidCompareDelegate                      =  2,
-        PagePositionInSlotInUse                     =  3,
-        NoFreeSlots                                 =  4,
-        InvalidStateinInsert                        =  5,
-//      InvalidStateinEndInsert                     =  6,
-        InvalidNextSizeInDelete                     =  7,
-        InvalidStateinDelete                        =  8,
-        InvalidNodeSizeinDelete                     =  9,
-        InvalidStateinEndDelete                     = 10,
-        CannotRotateInvalidsuccessorNodeinDelete    = 11,
-//      IndexOutOfRange                             = 12,
-        IndexOutOFRangeinGetNodeByIndex             = 13,
-        RBDeleteFixup                               = 14,
-        UnsupportedAccessMethod1                    = 15,
-        UnsupportedAccessMethod2                    = 16,
+    internal enum RBTreeError
+    {
+        InvalidPageSize = 1,
+
+        //      InvalidCompareDelegate                      =  2,
+        PagePositionInSlotInUse = 3,
+        NoFreeSlots = 4,
+        InvalidStateinInsert = 5,
+
+        //      InvalidStateinEndInsert                     =  6,
+        InvalidNextSizeInDelete = 7,
+        InvalidStateinDelete = 8,
+        InvalidNodeSizeinDelete = 9,
+        InvalidStateinEndDelete = 10,
+        CannotRotateInvalidsuccessorNodeinDelete = 11,
+
+        //      IndexOutOfRange                             = 12,
+        IndexOutOFRangeinGetNodeByIndex = 13,
+        RBDeleteFixup = 14,
+        UnsupportedAccessMethod1 = 15,
+        UnsupportedAccessMethod2 = 16,
         UnsupportedAccessMethodInNonNillRootSubtree = 17,
-        AttachedNodeWithZerorbTreeNodeId            = 18, // DataRowCollection
-        CompareNodeInDataRowTree                    = 19, // DataRowCollection
-        CompareSateliteTreeNodeInDataRowTree        = 20, // DataRowCollection
-        NestedSatelliteTreeEnumerator               = 21,
+        AttachedNodeWithZerorbTreeNodeId = 18, // DataRowCollection
+        CompareNodeInDataRowTree = 19, // DataRowCollection
+        CompareSateliteTreeNodeInDataRowTree = 20, // DataRowCollection
+        NestedSatelliteTreeEnumerator = 21,
     }
 
-    internal enum TreeAccessMethod{
+    internal enum TreeAccessMethod
+    {
         KEY_SEARCH_AND_INDEX = 1,
-        INDEX_ONLY           = 2,
+        INDEX_ONLY = 2,
     }
 
     // an index represents location the tree
@@ -92,51 +97,56 @@ namespace System.Data
     // unnecessary searching for the node in the main tree when operating on a node in the satellite branch
     // in all cases except GetNodeByKey(K)& GetIndexByNode(int), we know what that mainTreeNodeID is and can avoid searching
 
-    internal abstract class RBTree<K> : System.Collections.IEnumerable {
+    internal abstract class RBTree<K> : System.Collections.IEnumerable
+    {
         // 2^16 #pages * 2^n == total number of nodes.  512 = 32 million, 1024 = 64 million, 2048 = 128m, 4096=256m, 8192=512m, 16284=1 billion
         // 32K=2 billion.
         internal const int DefaultPageSize = 32; /* 512 = 2^9 32 million nodes*/
-        internal const int NIL = 0;                  // 0th page, 0th slot for each tree till CLR static & generics issue is fixed
+        internal const int NIL = 0; // 0th page, 0th slot for each tree till CLR static & generics issue is fixed
 
-        private TreePage[] _pageTable;          // initial size 4, then doubles (grows) - it never shrinks
+        private TreePage[] _pageTable; // initial size 4, then doubles (grows) - it never shrinks
         private Int32[] _pageTableMap;
-        private int _inUsePageCount = 0;    // contains count of allocated pages per tree, its <= the capacity of  pageTable
-        private int nextFreePageLine;   // used for keeping track of position of last used free page in pageTable
-        public  int root;
+        private int _inUsePageCount = 0; // contains count of allocated pages per tree, its <= the capacity of  pageTable
+        private int nextFreePageLine; // used for keeping track of position of last used free page in pageTable
+        public int root;
         private int _version;
 
         private int _inUseNodeCount = 0; // total number of nodes currently in use by this tree.
         private int _inUseSatelliteTreeCount = 0; // total number of satellite associated with this tree.
         private readonly TreeAccessMethod _accessMethod;
 
-        protected abstract int CompareNode (K record1, K record2);
-        protected abstract int CompareSateliteTreeNode (K record1, K record2);
+        protected abstract int CompareNode(K record1, K record2);
+        protected abstract int CompareSateliteTreeNode(K record1, K record2);
 
-        protected RBTree (TreeAccessMethod accessMethod) {
+        protected RBTree(TreeAccessMethod accessMethod)
+        {
             _accessMethod = accessMethod;
             InitTree();
         }
 
-        private void InitTree() {
+        private void InitTree()
+        {
             root = NIL;
             _pageTable = new TreePage[1 * TreePage.slotLineSize];
-            _pageTableMap = new Int32[(_pageTable.Length + TreePage.slotLineSize - 1) / TreePage.slotLineSize]; // Ceiling(size)
+            _pageTableMap = new Int32[
+                (_pageTable.Length + TreePage.slotLineSize - 1) / TreePage.slotLineSize
+            ]; // Ceiling(size)
             _inUsePageCount = 0;
             nextFreePageLine = 0;
-            AllocPage (DefaultPageSize);
+            AllocPage(DefaultPageSize);
 
             // alloc storage for reserved NIL node. segment 0, slot 0; Initialize NIL
             _pageTable[0].Slots[0].nodeColor = NodeColor.black;
-            _pageTable[0].SlotMap[0]         = 0x1;
-            _pageTable[0].InUseCount         = 1;
+            _pageTable[0].SlotMap[0] = 0x1;
+            _pageTable[0].InUseCount = 1;
 
             _inUseNodeCount = 1;
             _inUseSatelliteTreeCount = 0; // total number of satellite associated with this tree.
         }
 
-        private void FreePage (TreePage page)
+        private void FreePage(TreePage page)
         {
-            MarkPageFree (page);
+            MarkPageFree(page);
             _pageTable[page.PageId] = null;
             _inUsePageCount--;
         }
@@ -148,28 +158,30 @@ namespace System.Data
          *   (1) If entry for an unallocated page exists in current pageTable - use it
          *   (2) else extend pageTable
          */
-        private TreePage AllocPage (int size)
+        private TreePage AllocPage(int size)
         {
-            int freePageIndex = GetIndexOfPageWithFreeSlot (false);
+            int freePageIndex = GetIndexOfPageWithFreeSlot(false);
 
             if (freePageIndex != -1)
             {
-                _pageTable[freePageIndex] = new TreePage (size);
+                _pageTable[freePageIndex] = new TreePage(size);
                 nextFreePageLine = freePageIndex / TreePage.slotLineSize;
             }
             else
             {
                 // no free position found, increase pageTable size
                 TreePage[] newPageTable = new TreePage[_pageTable.Length * 2];
-                System.Array.Copy (_pageTable, 0, newPageTable, 0, _pageTable.Length);
-                Int32[] newPageTableMap = new Int32[(newPageTable.Length + TreePage.slotLineSize - 1) / TreePage.slotLineSize];
-                System.Array.Copy (_pageTableMap, 0, newPageTableMap, 0, _pageTableMap.Length);
+                System.Array.Copy(_pageTable, 0, newPageTable, 0, _pageTable.Length);
+                Int32[] newPageTableMap = new Int32[
+                    (newPageTable.Length + TreePage.slotLineSize - 1) / TreePage.slotLineSize
+                ];
+                System.Array.Copy(_pageTableMap, 0, newPageTableMap, 0, _pageTableMap.Length);
 
                 nextFreePageLine = _pageTableMap.Length;
                 freePageIndex = _pageTable.Length;
                 _pageTable = newPageTable;
                 _pageTableMap = newPageTableMap;
-                _pageTable[freePageIndex] = new TreePage (size);
+                _pageTable[freePageIndex] = new TreePage(size);
             }
             _pageTable[freePageIndex].PageId = freePageIndex;
             _inUsePageCount++;
@@ -179,7 +191,7 @@ namespace System.Data
         /* MarkPageFull()
          * Mark the specified page "Full" as all its slots aer in use
          */
-        private void MarkPageFull (TreePage page)
+        private void MarkPageFull(TreePage page)
         {
             // set bit associated with page to mark it as full
             /*
@@ -188,13 +200,15 @@ namespace System.Data
             Int32 pageBitMask = ((Int32)1) << pageTableMapOffset;
             _pageTableMap[pageTableMapIndex] |= (pageBitMask);
             */
-            _pageTableMap[page.PageId / TreePage.slotLineSize] |= (1 << (page.PageId % TreePage.slotLineSize));
+            _pageTableMap[page.PageId / TreePage.slotLineSize] |= (
+                1 << (page.PageId % TreePage.slotLineSize)
+            );
         }
 
         /* MarkPageFree()
          * Mark the specified page as "Free". It has atleast 1 available slot.
          */
-        private void MarkPageFree (TreePage page)
+        private void MarkPageFree(TreePage page)
         {
             // set bit associated with page to mark it as free
             /*
@@ -203,10 +217,12 @@ namespace System.Data
             Int32 pageBitMask = ((Int32)1) << pageTableMapOffset;
             _pageTableMap[pageTableMapIndex] &= ~(pageBitMask);
             */
-            _pageTableMap[page.PageId / TreePage.slotLineSize] &= ~(1 << (page.PageId % TreePage.slotLineSize));
+            _pageTableMap[page.PageId / TreePage.slotLineSize] &= ~(
+                1 << (page.PageId % TreePage.slotLineSize)
+            );
         }
 
-        private static int GetIntValueFromBitMap (UInt32 bitMap)
+        private static int GetIntValueFromBitMap(UInt32 bitMap)
         {
             Int32 value = 0; // 0 based slot position
 
@@ -218,22 +234,22 @@ namespace System.Data
             if ((bitMap & 0xFFFF0000) != 0)
             {
                 value += 16;
-                bitMap >>=16;
+                bitMap >>= 16;
             }
             if ((bitMap & 0x0000FF00) != 0)
             {
                 value += 8;
-                bitMap >>=8;
+                bitMap >>= 8;
             }
             if ((bitMap & 0x000000F0) != 0)
             {
                 value += 4;
-                bitMap >>=4;
+                bitMap >>= 4;
             }
             if ((bitMap & 0x0000000C) != 0)
             {
                 value += 2;
-                bitMap >>=2;
+                bitMap >>= 2;
             }
             if ((bitMap & 0x00000002) != 0)
                 value += 1;
@@ -244,7 +260,7 @@ namespace System.Data
          * FreeNode()
          * nodeId: The nodeId of the node to be freed
          */
-        private void FreeNode (int nodeId)
+        private void FreeNode(int nodeId)
         {
             TreePage page = _pageTable[nodeId >> 16];
             int slotIndex = nodeId & 0xFFFF;
@@ -252,13 +268,15 @@ namespace System.Data
             page.Slots[slotIndex] = default(Node);
 
             // clear slotMap entry associated with nodeId
-            page.SlotMap[slotIndex / TreePage.slotLineSize] &= ~( ((Int32)1) << (int)(slotIndex % TreePage.slotLineSize));
+            page.SlotMap[slotIndex / TreePage.slotLineSize] &= ~(
+                ((Int32)1) << (int)(slotIndex % TreePage.slotLineSize)
+            );
             page.InUseCount--;
             _inUseNodeCount--;
             if (page.InUseCount == 0)
-                FreePage (page);
+                FreePage(page);
             else if (page.InUseCount == page.Slots.Length - 1)
-                MarkPageFree (page); // With freeing of a node, a previous full page has a free slot.
+                MarkPageFree(page); // With freeing of a node, a previous full page has a free slot.
         }
 
         /*
@@ -267,7 +285,7 @@ namespace System.Data
          * return: if allocatedPage is true, return index of a page with at least 1 free slot
          *            else return index of an unallocated page, pageTable[index] is empty.
          */
-        private int GetIndexOfPageWithFreeSlot (bool allocatedPage)
+        private int GetIndexOfPageWithFreeSlot(bool allocatedPage)
         {
             int pageTableMapPos = nextFreePageLine;
             int pageIndex = -1;
@@ -277,15 +295,21 @@ namespace System.Data
                 if (((UInt32)_pageTableMap[pageTableMapPos]) < 0xFFFFFFFF)
                 {
                     UInt32 pageSegmentMap = (UInt32)_pageTableMap[pageTableMapPos];
-                    while ((pageSegmentMap ^ (0xFFFFFFFF)) != 0)         //atleast one "0" is there (same as <0xFFFFFFFF)
+                    while ((pageSegmentMap ^ (0xFFFFFFFF)) != 0) //atleast one "0" is there (same as <0xFFFFFFFF)
                     {
-                        UInt32 pageWithFreeSlot = (UInt32)((~(pageSegmentMap)) & (pageSegmentMap + 1));
+                        UInt32 pageWithFreeSlot = (UInt32)(
+                            (~(pageSegmentMap)) & (pageSegmentMap + 1)
+                        );
 
-                        // 
+                        //
                         if ((_pageTableMap[pageTableMapPos] & pageWithFreeSlot) != 0) //paranoia check
-                            throw ExceptionBuilder.InternalRBTreeError(RBTreeError.PagePositionInSlotInUse);
+                            throw ExceptionBuilder.InternalRBTreeError(
+                                RBTreeError.PagePositionInSlotInUse
+                            );
 
-                        pageIndex = (pageTableMapPos * TreePage.slotLineSize) + GetIntValueFromBitMap (pageWithFreeSlot); // segment + offset
+                        pageIndex =
+                            (pageTableMapPos * TreePage.slotLineSize)
+                            + GetIntValueFromBitMap(pageWithFreeSlot); // segment + offset
                         if (allocatedPage)
                         {
                             if (_pageTable[pageIndex] != null)
@@ -294,7 +318,7 @@ namespace System.Data
                         else
                         {
                             if (_pageTable[pageIndex] == null)
-                                return pageIndex;           // pageIndex points to an unallocated Page
+                                return pageIndex; // pageIndex points to an unallocated Page
                         }
                         pageIndex = -1;
                         pageSegmentMap |= pageWithFreeSlot; // found "reset bit", but unallocated page, mark it as unavaiable and continue search
@@ -308,22 +332,23 @@ namespace System.Data
             {
                 //Try one more time, starting from 0th page segment position to locate a page with free slots
                 nextFreePageLine = 0;
-                pageIndex = GetIndexOfPageWithFreeSlot (allocatedPage);
+                pageIndex = GetIndexOfPageWithFreeSlot(allocatedPage);
             }
             return pageIndex;
         }
 
-        public int Count {
-            get {
-                Debug.Assert(_inUseNodeCount-1 == SubTreeSize(root), "count mismatch");
-                return (_inUseNodeCount-1);
+        public int Count
+        {
+            get
+            {
+                Debug.Assert(_inUseNodeCount - 1 == SubTreeSize(root), "count mismatch");
+                return (_inUseNodeCount - 1);
             }
         }
 
-        public bool HasDuplicates {
-            get {
-                return (0 != _inUseSatelliteTreeCount);
-            }
+        public bool HasDuplicates
+        {
+            get { return (0 != _inUseSatelliteTreeCount); }
         }
 
         /*
@@ -334,31 +359,31 @@ namespace System.Data
          * Use bitmap associated with page to allocate a slot.
          * mark the slot as used and return its index.
          */
-        private int GetNewNode (K key)
+        private int GetNewNode(K key)
         {
             // find page with free slots, if none, allocate a new page
             TreePage page = null;
 
-            int freePageIndex = GetIndexOfPageWithFreeSlot (true);
+            int freePageIndex = GetIndexOfPageWithFreeSlot(true);
             if (freePageIndex != -1)
                 page = _pageTable[freePageIndex];
             else if (_inUsePageCount < (4))
-                page = AllocPage (DefaultPageSize);  // First 128 slots
+                page = AllocPage(DefaultPageSize); // First 128 slots
             else if (_inUsePageCount < (32))
-                page = AllocPage (256);
+                page = AllocPage(256);
             else if (_inUsePageCount < (128))
-                page = AllocPage (1024);
+                page = AllocPage(1024);
             else if (_inUsePageCount < (4096))
-                page = AllocPage (4096);
-            else if (_inUsePageCount < (32*1024))
-                page = AllocPage (8192);              // approximately First 16 million slots (2^24)
+                page = AllocPage(4096);
+            else if (_inUsePageCount < (32 * 1024))
+                page = AllocPage(8192); // approximately First 16 million slots (2^24)
             else
-                page = AllocPage (64*1024);          // Page size to accomodate more than 16 million slots (Max 2 Billion and 16 million slots)
+                page = AllocPage(64 * 1024); // Page size to accomodate more than 16 million slots (Max 2 Billion and 16 million slots)
 
             // page contains atleast 1 free slot.
-            int slotId = page.AllocSlot (this);
+            int slotId = page.AllocSlot(this);
 
-            // 
+            //
             if (slotId == -1)
                 throw ExceptionBuilder.InternalRBTreeError(RBTreeError.NoFreeSlots);
 
@@ -368,22 +393,22 @@ namespace System.Data
             Debug.Assert(page.Slots[slotId].rightId == NIL, "node not cleared");
             Debug.Assert(page.Slots[slotId].parentId == NIL, "node not cleared");
             Debug.Assert(page.Slots[slotId].nextId == NIL, "node not cleared");
-            page.Slots[slotId].subTreeSize = 1;     // new Nodes have size 1.
+            page.Slots[slotId].subTreeSize = 1; // new Nodes have size 1.
             page.Slots[slotId].keyOfNode = key;
             Debug.Assert(page.Slots[slotId].nodeColor == NodeColor.red, "node not cleared");
             return page.Slots[slotId].selfId;
         }
 
-        private int Successor (int x_id)
+        private int Successor(int x_id)
         {
-            if (Right (x_id) != NIL)
-                return Minimum (Right (x_id)); //return left most node in right sub-tree.
-            int y_id = Parent (x_id);
+            if (Right(x_id) != NIL)
+                return Minimum(Right(x_id)); //return left most node in right sub-tree.
+            int y_id = Parent(x_id);
 
-            while (y_id != NIL && x_id == Right (y_id))
+            while (y_id != NIL && x_id == Right(y_id))
             {
                 x_id = y_id;
-                y_id = Parent (y_id);
+                y_id = Parent(y_id);
             }
             return y_id;
         }
@@ -391,27 +416,29 @@ namespace System.Data
         private bool Successor(ref int nodeId, ref int mainTreeNodeId)
         {
             if (NIL == nodeId)
-            {   // find first node, using branchNodeId as the root
+            { // find first node, using branchNodeId as the root
                 nodeId = Minimum(mainTreeNodeId);
                 mainTreeNodeId = NIL;
             }
             else
-            {   // find next node
+            { // find next node
                 nodeId = Successor(nodeId);
 
                 if ((NIL == nodeId) && (NIL != mainTreeNodeId))
-                {   // done with satellite branch, move back to main tree
+                { // done with satellite branch, move back to main tree
                     nodeId = Successor(mainTreeNodeId);
                     mainTreeNodeId = NIL;
                 }
             }
             if (NIL != nodeId)
-            {   // test for satellite branch
+            { // test for satellite branch
                 if (NIL != Next(nodeId))
-                {   // find first node of satellite branch
+                { // find first node of satellite branch
                     if (NIL != mainTreeNodeId)
-                    {   // satellite branch has satellite branch - very bad
-                        throw ExceptionBuilder.InternalRBTreeError(RBTreeError.NestedSatelliteTreeEnumerator);
+                    { // satellite branch has satellite branch - very bad
+                        throw ExceptionBuilder.InternalRBTreeError(
+                            RBTreeError.NestedSatelliteTreeEnumerator
+                        );
                     }
                     mainTreeNodeId = nodeId;
                     nodeId = Minimum(Next(nodeId));
@@ -423,10 +450,11 @@ namespace System.Data
             return false;
         }
 
-        private int Minimum (int x_id)
+        private int Minimum(int x_id)
         {
-            while (Left (x_id) != NIL) {
-                x_id = Left (x_id);
+            while (Left(x_id) != NIL)
+            {
+                x_id = Left(x_id);
             }
             return x_id;
         }
@@ -436,89 +464,130 @@ namespace System.Data
          *
          * It returns the node id for the root of the rotated tree
          */
-        private int LeftRotate (int root_id, int x_id, int mainTreeNode)
+        private int LeftRotate(int root_id, int x_id, int mainTreeNode)
         {
-            int y_id = Right (x_id);
+            int y_id = Right(x_id);
 
             // Turn y's left subtree into x's right subtree
-            SetRight (x_id, Left (y_id));
-            if (Left (y_id) != NIL) {
-                SetParent (Left (y_id), x_id);
+            SetRight(x_id, Left(y_id));
+            if (Left(y_id) != NIL)
+            {
+                SetParent(Left(y_id), x_id);
             }
 
-            SetParent (y_id, Parent (x_id));
-            if (Parent (x_id) == NIL) {
-                if (root_id == NIL) {
+            SetParent(y_id, Parent(x_id));
+            if (Parent(x_id) == NIL)
+            {
+                if (root_id == NIL)
+                {
                     root = y_id;
                 }
-                else {
-                    SetNext (mainTreeNode, y_id);
-                    SetKey (mainTreeNode, Key (y_id));
+                else
+                {
+                    SetNext(mainTreeNode, y_id);
+                    SetKey(mainTreeNode, Key(y_id));
                     root_id = y_id;
                 }
             }
-            else if (x_id == Left (Parent (x_id))) {  // x is left child of its parent
-                SetLeft (Parent (x_id), y_id);
+            else if (x_id == Left(Parent(x_id)))
+            { // x is left child of its parent
+                SetLeft(Parent(x_id), y_id);
             }
-            else {
-                SetRight (Parent (x_id), y_id);
+            else
+            {
+                SetRight(Parent(x_id), y_id);
             }
 
-            SetLeft (y_id, x_id);
-            SetParent (x_id, y_id);
+            SetLeft(y_id, x_id);
+            SetParent(x_id, y_id);
 
             //maintain size:  y_id = parent & x_id == child
-            if (x_id != NIL) {
-                SetSubTreeSize(x_id, (SubTreeSize(Left(x_id)) + SubTreeSize(Right(x_id)) + (Next(x_id) == NIL ? 1 : SubTreeSize(Next(x_id)))));
+            if (x_id != NIL)
+            {
+                SetSubTreeSize(
+                    x_id,
+                    (
+                        SubTreeSize(Left(x_id))
+                        + SubTreeSize(Right(x_id))
+                        + (Next(x_id) == NIL ? 1 : SubTreeSize(Next(x_id)))
+                    )
+                );
             }
 
-            if (y_id != NIL) {
-                SetSubTreeSize(y_id, (SubTreeSize(Left(y_id)) + SubTreeSize(Right(y_id)) + (Next(y_id) == NIL ? 1 : SubTreeSize(Next(y_id)))));
+            if (y_id != NIL)
+            {
+                SetSubTreeSize(
+                    y_id,
+                    (
+                        SubTreeSize(Left(y_id))
+                        + SubTreeSize(Right(y_id))
+                        + (Next(y_id) == NIL ? 1 : SubTreeSize(Next(y_id)))
+                    )
+                );
             }
             return root_id;
         }
-
 
         /*
          * RightRotate()
          *
          * It returns the node id for the root of the rotated tree
          */
-        private int RightRotate (int root_id, int x_id, int mainTreeNode)
+        private int RightRotate(int root_id, int x_id, int mainTreeNode)
         {
-            int y_id = Left (x_id);
+            int y_id = Left(x_id);
 
-            SetLeft (x_id, Right (y_id));       // Turn y's right subtree into x's left subtree
-            if (Right (y_id) != NIL) {
-                SetParent (Right (y_id), x_id);
+            SetLeft(x_id, Right(y_id)); // Turn y's right subtree into x's left subtree
+            if (Right(y_id) != NIL)
+            {
+                SetParent(Right(y_id), x_id);
             }
 
-            SetParent (y_id, Parent (x_id));
-            if (Parent (x_id) == NIL) {
-                if (root_id == NIL) {
+            SetParent(y_id, Parent(x_id));
+            if (Parent(x_id) == NIL)
+            {
+                if (root_id == NIL)
+                {
                     root = y_id;
                 }
-                else {
-                    SetNext (mainTreeNode, y_id);
-                    SetKey (mainTreeNode, Key (y_id));
+                else
+                {
+                    SetNext(mainTreeNode, y_id);
+                    SetKey(mainTreeNode, Key(y_id));
                     root_id = y_id;
                 }
             }
-            else if (x_id == Left (Parent (x_id))) // x is left child of its parent
-                SetLeft (Parent (x_id), y_id);
+            else if (x_id == Left(Parent(x_id))) // x is left child of its parent
+                SetLeft(Parent(x_id), y_id);
             else
-                SetRight (Parent (x_id), y_id);
+                SetRight(Parent(x_id), y_id);
 
-            SetRight (y_id, x_id);
-            SetParent (x_id, y_id);
+            SetRight(y_id, x_id);
+            SetParent(x_id, y_id);
 
             //maintain size: y_id == parent && x_id == child.
-            if (x_id != NIL) {
-                SetSubTreeSize(x_id, (SubTreeSize(Left(x_id)) + SubTreeSize(Right(x_id)) + (Next(x_id) == NIL ? 1 : SubTreeSize(Next(x_id)))));
+            if (x_id != NIL)
+            {
+                SetSubTreeSize(
+                    x_id,
+                    (
+                        SubTreeSize(Left(x_id))
+                        + SubTreeSize(Right(x_id))
+                        + (Next(x_id) == NIL ? 1 : SubTreeSize(Next(x_id)))
+                    )
+                );
             }
 
-            if (y_id != NIL) {
-                SetSubTreeSize(y_id, (SubTreeSize(Left(y_id)) + SubTreeSize(Right(y_id)) + (Next(y_id) == NIL ? 1 : SubTreeSize(Next(y_id)))));
+            if (y_id != NIL)
+            {
+                SetSubTreeSize(
+                    y_id,
+                    (
+                        SubTreeSize(Left(y_id))
+                        + SubTreeSize(Right(y_id))
+                        + (Next(y_id) == NIL ? 1 : SubTreeSize(Next(y_id)))
+                    )
+                );
             }
             return root_id;
         }
@@ -526,10 +595,13 @@ namespace System.Data
 #if VerifySort
         // This helps validate the sorting of the tree to help catch instances of corruption much sooner.
         // corruption happens when the data changes without telling the tree or when multi-threads do simultanous write operations
-        private int Compare(int root_id, int x_id, int z_id) {
+        private int Compare(int root_id, int x_id, int z_id)
+        {
             Debug.Assert(NIL != x_id, "nil left");
             Debug.Assert(NIL != z_id, "nil right");
-            return (root_id == NIL) ? CompareNode (Key (x_id), Key (z_id)) : CompareSateliteTreeNode (Key (x_id), Key (z_id));
+            return (root_id == NIL)
+                ? CompareNode(Key(x_id), Key(z_id))
+                : CompareSateliteTreeNode(Key(x_id), Key(z_id));
         }
 #endif
 
@@ -547,53 +619,73 @@ namespace System.Data
          * The Duplicate tree nodes have same key when used with CompareRecords but distinct record ids.
          * The current record at all times will have the same *key* as the duplicate tree root.
          */
-        private int RBInsert (int root_id, int x_id, int mainTreeNodeID, int position, bool append)
+        private int RBInsert(int root_id, int x_id, int mainTreeNodeID, int position, bool append)
         {
-            unchecked{_version++;}
+            unchecked
+            {
+                _version++;
+            }
 
             // Insert Node x at the appropriate position
             int y_id = NIL;
-            int z_id = (root_id == NIL) ? root : root_id;  //if non NIL, then use the specifid root_id as tree's root.
+            int z_id = (root_id == NIL) ? root : root_id; //if non NIL, then use the specifid root_id as tree's root.
 
             if (_accessMethod == TreeAccessMethod.KEY_SEARCH_AND_INDEX && !append)
             {
                 Debug.Assert(-1 == position, "KEY_SEARCH_AND_INDEX with bad position");
-                while (z_id != NIL)  // in-order traverse and find node with a NILL left or right child
+                while (z_id != NIL) // in-order traverse and find node with a NILL left or right child
                 {
-                    IncreaseSize (z_id);
-                    y_id = z_id;            // y_id set to the proposed parent of x_id
+                    IncreaseSize(z_id);
+                    y_id = z_id; // y_id set to the proposed parent of x_id
 
-                    int c = (root_id == NIL) ? CompareNode (Key (x_id), Key (z_id)) : CompareSateliteTreeNode (Key (x_id), Key (z_id));
+                    int c =
+                        (root_id == NIL)
+                            ? CompareNode(Key(x_id), Key(z_id))
+                            : CompareSateliteTreeNode(Key(x_id), Key(z_id));
 
-                    if (c < 0) {
+                    if (c < 0)
+                    {
 #if VerifySort
-                        Debug.Assert((NIL == Left(z_id)) || (0 > Compare(root_id, Left(z_id), z_id)), "Left is not left");
+                        Debug.Assert(
+                            (NIL == Left(z_id)) || (0 > Compare(root_id, Left(z_id), z_id)),
+                            "Left is not left"
+                        );
 #endif
-                        z_id = Left (z_id);
+                        z_id = Left(z_id);
                     }
-                    else if (c > 0) {
+                    else if (c > 0)
+                    {
 #if VerifySort
-                        Debug.Assert((NIL == Right(z_id)) || (0 < Compare(root_id, Right(z_id), z_id)), "Right is not right");
+                        Debug.Assert(
+                            (NIL == Right(z_id)) || (0 < Compare(root_id, Right(z_id), z_id)),
+                            "Right is not right"
+                        );
 #endif
-                        z_id = Right (z_id);
+                        z_id = Right(z_id);
                     }
-                    else {
+                    else
+                    {
                         // Multiple records with same key - insert it to the duplicate record tree associated with current node
-                        if (root_id != NIL) {
-                            throw ExceptionBuilder.InternalRBTreeError(RBTreeError.InvalidStateinInsert);
+                        if (root_id != NIL)
+                        {
+                            throw ExceptionBuilder.InternalRBTreeError(
+                                RBTreeError.InvalidStateinInsert
+                            );
                         }
-                        if (Next(z_id) != NIL) {
-                            root_id = RBInsert (Next (z_id), x_id, z_id, -1, false); // z_id is existing mainTreeNodeID
-                            SetKey (z_id, Key (Next (z_id)));
+                        if (Next(z_id) != NIL)
+                        {
+                            root_id = RBInsert(Next(z_id), x_id, z_id, -1, false); // z_id is existing mainTreeNodeID
+                            SetKey(z_id, Key(Next(z_id)));
 #if VerifyPath
                             (new NodePath(x_id, z_id)).VerifyPath(this); // verify x_id after its been added
-#endif                            
+#endif
                         }
-                        else {
+                        else
+                        {
                             int newMainTreeNodeId = NIL;
                             // The existing node is pushed into the Satellite Tree and a new Node
                             // is created in the main tree, whose's next points to satellite root.
-                            newMainTreeNodeId = GetNewNode (Key (z_id));
+                            newMainTreeNodeId = GetNewNode(Key(z_id));
                             _inUseSatelliteTreeCount++;
 
                             // copy contents of z_id to dupRootId (main tree node).
@@ -604,10 +696,10 @@ namespace System.Data
                             SetRight(newMainTreeNodeId, Right(z_id));
 
                             // Update z_id's non-nil parent
-                            if( Left(Parent(z_id))==z_id)
-                              SetLeft(Parent(z_id), newMainTreeNodeId);
-                            else if (Right(Parent(z_id))==z_id)
-                              SetRight(Parent(z_id), newMainTreeNodeId);
+                            if (Left(Parent(z_id)) == z_id)
+                                SetLeft(Parent(z_id), newMainTreeNodeId);
+                            else if (Right(Parent(z_id)) == z_id)
+                                SetRight(Parent(z_id), newMainTreeNodeId);
 
                             // update children.
                             if (Left(z_id) != NIL)
@@ -627,12 +719,12 @@ namespace System.Data
                             int savedSize = SubTreeSize(z_id);
                             SetSubTreeSize(z_id, 1);
                             // With z_id as satellite root, insert x_id
-                            root_id = RBInsert (z_id, x_id, newMainTreeNodeId, -1, false);
+                            root_id = RBInsert(z_id, x_id, newMainTreeNodeId, -1, false);
 
                             SetSubTreeSize(newMainTreeNodeId, savedSize);
 #if VerifyPath
                             (new NodePath(x_id, newMainTreeNodeId)).VerifyPath(this); // verify x_id after its been added
-#endif                            
+#endif
                         }
                         return root_id;
                     }
@@ -640,38 +732,44 @@ namespace System.Data
             }
             else if (_accessMethod == TreeAccessMethod.INDEX_ONLY || append)
             {
-                if (position == -1) {
-                    position = SubTreeSize(root);   // append
+                if (position == -1)
+                {
+                    position = SubTreeSize(root); // append
                 }
 
-                while (z_id != NIL)    // in-order traverse and find node with a NILL left or right child
+                while (z_id != NIL) // in-order traverse and find node with a NILL left or right child
                 {
-                    IncreaseSize (z_id);
-                    y_id = z_id;            // y_id set to the proposed parent of x_id
+                    IncreaseSize(z_id);
+                    y_id = z_id; // y_id set to the proposed parent of x_id
 
                     //int c = (SubTreeSize(y_id)-(position)); // Actually it should be: SubTreeSize(y_id)+1 - (position + 1)
                     int c = (position) - (SubTreeSize(Left(y_id)));
 
-                    if (c <= 0) {
-                        z_id = Left (z_id);
+                    if (c <= 0)
+                    {
+                        z_id = Left(z_id);
                     }
-                    else {
+                    else
+                    {
                         //position = position - SubTreeSize(z_id);
-                        z_id = Right (z_id);
-                        if (z_id != NIL) {
-                            position = c-1;    //skip computation of position for leaf node
+                        z_id = Right(z_id);
+                        if (z_id != NIL)
+                        {
+                            position = c - 1; //skip computation of position for leaf node
                         }
                     }
                 }
             }
-            else {
+            else
+            {
                 throw ExceptionBuilder.InternalRBTreeError(RBTreeError.UnsupportedAccessMethod1);
             }
 
-            SetParent (x_id, y_id);
+            SetParent(x_id, y_id);
             if (y_id == NIL)
             {
-                if (root_id == NIL) {
+                if (root_id == NIL)
+                {
                     root = x_id;
                 }
                 else
@@ -688,85 +786,91 @@ namespace System.Data
             }
             else
             {
-                int c=0;
+                int c = 0;
                 if (_accessMethod == TreeAccessMethod.KEY_SEARCH_AND_INDEX)
-                    c = (root_id == NIL) ? CompareNode (Key(x_id), Key(y_id)) : CompareSateliteTreeNode (Key (x_id), Key (y_id));
+                    c =
+                        (root_id == NIL)
+                            ? CompareNode(Key(x_id), Key(y_id))
+                            : CompareSateliteTreeNode(Key(x_id), Key(y_id));
                 else if (_accessMethod == TreeAccessMethod.INDEX_ONLY)
                     c = (position <= 0) ? -1 : 1;
-                else {
-                    throw ExceptionBuilder.InternalRBTreeError(RBTreeError.UnsupportedAccessMethod2);
+                else
+                {
+                    throw ExceptionBuilder.InternalRBTreeError(
+                        RBTreeError.UnsupportedAccessMethod2
+                    );
                 }
 
                 if (c < 0)
-                    SetLeft (y_id, x_id);
+                    SetLeft(y_id, x_id);
                 else
-                    SetRight (y_id, x_id);
+                    SetRight(y_id, x_id);
             }
 
-            SetLeft (x_id, NIL);
-            SetRight (x_id, NIL);
-            SetColor (x_id, NodeColor.red);
+            SetLeft(x_id, NIL);
+            SetRight(x_id, NIL);
+            SetColor(x_id, NodeColor.red);
             z_id = x_id; // for verification later
 
             // fix the tree
-            while (color (Parent (x_id)) == NodeColor.red)
+            while (color(Parent(x_id)) == NodeColor.red)
             {
-                if (Parent (x_id) == Left (Parent (Parent (x_id))))     // if x.parent is a left child
+                if (Parent(x_id) == Left(Parent(Parent(x_id)))) // if x.parent is a left child
                 {
-                    y_id = Right (Parent (Parent (x_id)));              // x.parent.parent.right;
-                    if (color (y_id) == NodeColor.red)              // my right uncle is red
+                    y_id = Right(Parent(Parent(x_id))); // x.parent.parent.right;
+                    if (color(y_id) == NodeColor.red) // my right uncle is red
                     {
-                        SetColor (Parent (x_id), NodeColor.black);      // x.parent.color = Color.black;
-                        SetColor (y_id, NodeColor.black);
-                        SetColor (Parent (Parent (x_id)), NodeColor.red);   // x.parent.parent.color = Color.red;
-                        x_id = Parent (Parent (x_id));                     // x = x.parent.parent;
+                        SetColor(Parent(x_id), NodeColor.black); // x.parent.color = Color.black;
+                        SetColor(y_id, NodeColor.black);
+                        SetColor(Parent(Parent(x_id)), NodeColor.red); // x.parent.parent.color = Color.red;
+                        x_id = Parent(Parent(x_id)); // x = x.parent.parent;
                     }
                     else
-                    {     // my right uncle is black
-                        if (x_id == Right (Parent (x_id)))
+                    { // my right uncle is black
+                        if (x_id == Right(Parent(x_id)))
                         {
-                            x_id = Parent (x_id);
-                            root_id = LeftRotate (root_id, x_id, mainTreeNodeID);
+                            x_id = Parent(x_id);
+                            root_id = LeftRotate(root_id, x_id, mainTreeNodeID);
                         }
 
-                        SetColor (Parent (x_id), NodeColor.black);                           // x.parent.color = Color.black;
-                        SetColor (Parent (Parent (x_id)), NodeColor.red);                 //    x.parent.parent.color = Color.red;
-                        root_id = RightRotate (root_id, Parent (Parent (x_id)), mainTreeNodeID);   //    RightRotate (x.parent.parent);
+                        SetColor(Parent(x_id), NodeColor.black); // x.parent.color = Color.black;
+                        SetColor(Parent(Parent(x_id)), NodeColor.red); //    x.parent.parent.color = Color.red;
+                        root_id = RightRotate(root_id, Parent(Parent(x_id)), mainTreeNodeID); //    RightRotate (x.parent.parent);
                     }
                 }
                 else
-                {     // x.parent is a right child
-                    y_id = Left (Parent (Parent (x_id)));          // y = x.parent.parent.left;
-                    if (color (y_id) == NodeColor.red)      // if (y.color == Color.red)    // my right uncle is red
+                { // x.parent is a right child
+                    y_id = Left(Parent(Parent(x_id))); // y = x.parent.parent.left;
+                    if (color(y_id) == NodeColor.red) // if (y.color == Color.red)    // my right uncle is red
                     {
-                        SetColor (Parent (x_id), NodeColor.black);
-                        SetColor (y_id, NodeColor.black);
-                        SetColor (Parent (Parent (x_id)), NodeColor.red);   // x.parent.parent.color = Color.red;
-                        x_id = Parent (Parent (x_id));
+                        SetColor(Parent(x_id), NodeColor.black);
+                        SetColor(y_id, NodeColor.black);
+                        SetColor(Parent(Parent(x_id)), NodeColor.red); // x.parent.parent.color = Color.red;
+                        x_id = Parent(Parent(x_id));
                     }
                     else
-                    {// my right uncle is black
-                        if (x_id == Left (Parent (x_id)))
+                    { // my right uncle is black
+                        if (x_id == Left(Parent(x_id)))
                         {
-                            x_id = Parent (x_id);
-                            root_id = RightRotate (root_id, x_id, mainTreeNodeID);
+                            x_id = Parent(x_id);
+                            root_id = RightRotate(root_id, x_id, mainTreeNodeID);
                         }
 
-                        SetColor (Parent (x_id), NodeColor.black);             // x.parent.color = Color.black;
-                        SetColor (Parent (Parent (x_id)), NodeColor.red);   // x.parent.parent.color = Color.red;
-                        root_id = LeftRotate (root_id, Parent (Parent (x_id)), mainTreeNodeID);
+                        SetColor(Parent(x_id), NodeColor.black); // x.parent.color = Color.black;
+                        SetColor(Parent(Parent(x_id)), NodeColor.red); // x.parent.parent.color = Color.red;
+                        root_id = LeftRotate(root_id, Parent(Parent(x_id)), mainTreeNodeID);
                     }
                 }
             }
 
             if (root_id == NIL)
-                SetColor (root, NodeColor.black);
+                SetColor(root, NodeColor.black);
             else
-                SetColor (root_id, NodeColor.black);
+                SetColor(root_id, NodeColor.black);
 
 #if VerifyPath
             (new NodePath(z_id, mainTreeNodeID)).VerifyPath(this); // verify x_id after its been added
-#endif                            
+#endif
             return root_id;
         } //Insert
 
@@ -774,7 +878,7 @@ namespace System.Data
         {
             // swap oldRecord with NewRecord in nodeId associated with oldRecord
             // if the matched node is a satellite root then also change the key in the associated main tree node.
-            NodePath x_id = GetNodeByKey (currentKey);
+            NodePath x_id = GetNodeByKey(currentKey);
             if (Parent(x_id.NodeID) == NIL && x_id.NodeID != root) //determine if x_id is a satellite root.
             {
 #if VerifyPath
@@ -782,7 +886,7 @@ namespace System.Data
 #endif
                 SetKey(x_id.MainTreeNodeID, newKey);
             }
-            SetKey (x_id.NodeID, newKey);
+            SetKey(x_id.NodeID, newKey);
         }
 
         public K DeleteByIndex(int i)
@@ -802,13 +906,15 @@ namespace System.Data
             return key;
         }
 
-        public int RBDelete (int z_id)
+        public int RBDelete(int z_id)
         {
             // always perform delete operation on the main tree
-            Debug.Assert(_accessMethod == TreeAccessMethod.INDEX_ONLY, "not expecting anything else");
-            return RBDeleteX (NIL, z_id, NIL);
+            Debug.Assert(
+                _accessMethod == TreeAccessMethod.INDEX_ONLY,
+                "not expecting anything else"
+            );
+            return RBDeleteX(NIL, z_id, NIL);
         }
-
 
         /*
          * RBDelete()
@@ -831,42 +937,44 @@ namespace System.Data
         private int RBDeleteX(int root_id, int z_id, int mainTreeNodeID)
         {
             int x_id = NIL; // used for holding spliced node (y_id's) child
-            int y_id;                // the spliced node
-            int py_id;           // for holding spliced node (y_id's) parent
-
+            int y_id; // the spliced node
+            int py_id; // for holding spliced node (y_id's) parent
 #if VerifyPath
             // by knowing the NodePath, when z_id is in a satellite branch we don't have to Search for mainTreeNodeID
             (new NodePath(z_id, mainTreeNodeID)).VerifyPath(this);
 #endif
-            if (Next (z_id) != NIL)
+            if (Next(z_id) != NIL)
                 return RBDeleteX(Next(z_id), Next(z_id), z_id); // delete root of satelite tree.
 
             // if we we reach here, we are guaranteed z_id.next is NIL.
             bool isCase3 = false;
-            int mNode = ((_accessMethod == TreeAccessMethod.KEY_SEARCH_AND_INDEX) ? mainTreeNodeID : z_id);
+            int mNode = (
+                (_accessMethod == TreeAccessMethod.KEY_SEARCH_AND_INDEX) ? mainTreeNodeID : z_id
+            );
 
-            if (Next (mNode) != NIL)
-                root_id = Next (mNode);
+            if (Next(mNode) != NIL)
+                root_id = Next(mNode);
 
-            if (SubTreeSize (Next (mNode)) == 2) // Next(mNode) == root_id
+            if (SubTreeSize(Next(mNode)) == 2) // Next(mNode) == root_id
                 isCase3 = true;
-            else if (SubTreeSize (Next (mNode)) == 1) {
+            else if (SubTreeSize(Next(mNode)) == 1)
+            {
                 throw ExceptionBuilder.InternalRBTreeError(RBTreeError.InvalidNextSizeInDelete);
             }
 
-            if (Left (z_id) == NIL || Right (z_id) == NIL)
+            if (Left(z_id) == NIL || Right(z_id) == NIL)
                 y_id = z_id;
             else
-                y_id = Successor (z_id);
+                y_id = Successor(z_id);
 
-            if (Left (y_id) != NIL)
-                x_id = Left (y_id);
+            if (Left(y_id) != NIL)
+                x_id = Left(y_id);
             else
-                x_id = Right (y_id);
+                x_id = Right(y_id);
 
             py_id = Parent(y_id);
             if (x_id != NIL)
-                SetParent (x_id, py_id);
+                SetParent(x_id, py_id);
 
             if (py_id == NIL) // if the spliced node is the root.
             {
@@ -879,33 +987,34 @@ namespace System.Data
                     root_id = x_id;
                 }
             }
-            else if (y_id == Left (py_id))    // update y's parent to point to X as its child
-                SetLeft (py_id, x_id);
+            else if (y_id == Left(py_id)) // update y's parent to point to X as its child
+                SetLeft(py_id, x_id);
             else
-                SetRight (py_id, x_id);
+                SetRight(py_id, x_id);
 
             if (y_id != z_id)
             {
                 // assign all values from y (spliced node) to z (node containing key to be deleted)
                 // -----------
 
-                SetKey (z_id, Key (y_id));      // assign all values from y to z
-                SetNext (z_id, Next (y_id));    //z.value = y.value;
+                SetKey(z_id, Key(y_id)); // assign all values from y to z
+                SetNext(z_id, Next(y_id)); //z.value = y.value;
             }
 
             if (Next(mNode) != NIL)
             {
                 // update mNode to point to satellite tree root and have the same key value.
                 // mNode will have to be patched again after RBDeleteFixup as root_id can again change
-                if (root_id == NIL && z_id != mNode) {
+                if (root_id == NIL && z_id != mNode)
+                {
                     throw ExceptionBuilder.InternalRBTreeError(RBTreeError.InvalidStateinDelete);
                 }
                 // -- it's possible for Next(mNode) to be != NIL and root_id == NIL when, the spliced node is a mNode of some
                 // -- satellite tree and its "next" gets assigned to mNode
                 if (root_id != NIL)
                 {
-                    SetNext (mNode, root_id);
-                    SetKey (mNode, Key (root_id));
+                    SetNext(mNode, root_id);
+                    SetKey(mNode, Key(root_id));
                 }
             }
 
@@ -915,8 +1024,8 @@ namespace System.Data
             while (tmp_py_id != NIL)
             {
                 //DecreaseSize (py_id, (Next(y_id)==NIL)?1:Size(Next(y_id)));
-                RecomputeSize (tmp_py_id);
-                tmp_py_id = Parent (tmp_py_id);
+                RecomputeSize(tmp_py_id);
+                tmp_py_id = Parent(tmp_py_id);
             }
 
             //if satelite tree node deleted, decrease size in main tree as well.
@@ -926,18 +1035,19 @@ namespace System.Data
                 int nodeId = mNode;
                 while (nodeId != NIL)
                 {
-                    DecreaseSize (nodeId);
-                    nodeId = Parent (nodeId);
+                    DecreaseSize(nodeId);
+                    nodeId = Parent(nodeId);
                 }
             }
 
-            if (color (y_id) == NodeColor.black)
-                root_id = RBDeleteFixup (root_id, x_id, py_id, mainTreeNodeID); // passing x.parent as y.parent, to handle x=Node.NIL case.
+            if (color(y_id) == NodeColor.black)
+                root_id = RBDeleteFixup(root_id, x_id, py_id, mainTreeNodeID); // passing x.parent as y.parent, to handle x=Node.NIL case.
 
             if (isCase3)
             {
                 // Collpase satelite tree, by swapping it with the main tree counterpart and freeing the main tree node
-                if (mNode == NIL || SubTreeSize(Next(mNode)) != 1) {
+                if (mNode == NIL || SubTreeSize(Next(mNode)) != 1)
+                {
                     throw ExceptionBuilder.InternalRBTreeError(RBTreeError.InvalidNodeSizeinDelete);
                 }
                 _inUseSatelliteTreeCount--;
@@ -945,90 +1055,106 @@ namespace System.Data
                 SetLeft(satelliteRootId, Left(mNode));
                 SetRight(satelliteRootId, Right(mNode));
                 SetSubTreeSize(satelliteRootId, SubTreeSize(mNode));
-                SetColor(satelliteRootId, color(mNode));  // Next of satelliteRootId is already NIL
+                SetColor(satelliteRootId, color(mNode)); // Next of satelliteRootId is already NIL
                 if (Parent(mNode) != NIL)
                 {
                     SetParent(satelliteRootId, Parent(mNode));
-                    if (Left(Parent(mNode)) == mNode) {
+                    if (Left(Parent(mNode)) == mNode)
+                    {
                         SetLeft(Parent(mNode), satelliteRootId);
                     }
-                    else {
+                    else
+                    {
                         SetRight(Parent(mNode), satelliteRootId);
                     }
                 }
 
                 // update mNode's children.
-                if (Left(mNode) != NIL) {
+                if (Left(mNode) != NIL)
+                {
                     SetParent(Left(mNode), satelliteRootId);
                 }
-                if (Right(mNode) != NIL) {
+                if (Right(mNode) != NIL)
+                {
                     SetParent(Right(mNode), satelliteRootId);
                 }
-                if (root == mNode) {
+                if (root == mNode)
+                {
                     root = satelliteRootId;
                 }
 
-                FreeNode (mNode);
+                FreeNode(mNode);
                 mNode = NIL;
             }
             else if (Next(mNode) != NIL)
             {
                 // update mNode to point to satellite tree root and have the same key value
-                if (root_id == NIL && z_id != mNode) { //if mNode being deleted, its OK for root_id (it should be) NIL.
+                if (root_id == NIL && z_id != mNode)
+                { //if mNode being deleted, its OK for root_id (it should be) NIL.
                     throw ExceptionBuilder.InternalRBTreeError(RBTreeError.InvalidStateinEndDelete);
                 }
 
                 if (root_id != NIL)
                 {
-                    SetNext (mNode, root_id);
-                    SetKey (mNode, Key (root_id));
+                    SetNext(mNode, root_id);
+                    SetKey(mNode, Key(root_id));
                 }
-
             }
 
             // In order to pin a key to it's node, free deleted z_id instead of the spliced y_id
             if (y_id != z_id)
             {
                 // we know that key, next and value are same for z_id and y_id
-                SetLeft (y_id, Left (z_id));
-                SetRight (y_id, Right (z_id));
-                SetColor (y_id, color (z_id));
-                SetSubTreeSize (y_id, SubTreeSize(z_id));
+                SetLeft(y_id, Left(z_id));
+                SetRight(y_id, Right(z_id));
+                SetColor(y_id, color(z_id));
+                SetSubTreeSize(y_id, SubTreeSize(z_id));
                 if (Parent(z_id) != NIL)
                 {
                     SetParent(y_id, Parent(z_id));
-                    if (Left(Parent(z_id)) == z_id) {
+                    if (Left(Parent(z_id)) == z_id)
+                    {
                         SetLeft(Parent(z_id), y_id);
                     }
-                    else {
+                    else
+                    {
                         SetRight(Parent(z_id), y_id);
                     }
                 }
-                else {
+                else
+                {
                     SetParent(y_id, NIL);
                 }
 
                 // update children.
-                if (Left(z_id) != NIL) {
+                if (Left(z_id) != NIL)
+                {
                     SetParent(Left(z_id), y_id);
                 }
-                if (Right(z_id) != NIL) {
+                if (Right(z_id) != NIL)
+                {
                     SetParent(Right(z_id), y_id);
                 }
 
-                if (root == z_id) {
+                if (root == z_id)
+                {
                     root = y_id;
                 }
-                else if (root_id == z_id) {
+                else if (root_id == z_id)
+                {
                     root_id = y_id;
                 }
                 // update a next reference to z_id (if any)
-                if (mNode != NIL && Next(mNode) == z_id) {
+                if (mNode != NIL && Next(mNode) == z_id)
+                {
                     SetNext(mNode, y_id);
                 }
             }
-            FreeNode (z_id);
-            unchecked{_version++;}
+            FreeNode(z_id);
+            unchecked
+            {
+                _version++;
+            }
             return z_id;
         }
 
@@ -1038,8 +1164,14 @@ namespace System.Data
          *
          * returns: The id of the root
          */
-        private int RBDeleteFixup (int root_id, int x_id, int px_id /* px is parent of x */, int mainTreeNodeID)
-        {    //x is successor's non nil child or nil if both children are nil
+        private int RBDeleteFixup(
+            int root_id,
+            int x_id,
+            int px_id /* px is parent of x */
+            ,
+            int mainTreeNodeID
+        )
+        { //x is successor's non nil child or nil if both children are nil
             int w_id;
 
 #if VerifyPath
@@ -1047,175 +1179,217 @@ namespace System.Data
             (new NodePath(root_id, mainTreeNodeID)).VerifyPath(this);
 #endif
 
-            if (x_id == NIL && px_id == NIL) {
+            if (x_id == NIL && px_id == NIL)
+            {
                 return NIL; //case of satelite tree root being deleted.
             }
 
-            while (((root_id == NIL ? root : root_id) != x_id) && color (x_id) == NodeColor.black)
+            while (((root_id == NIL ? root : root_id) != x_id) && color(x_id) == NodeColor.black)
             {
                 // (1) x's parent should have aleast 1 non-NIL child.
                 // (2) check if x is a NIL left child or a non NIL left child
-                if ((x_id != NIL && x_id == Left (Parent (x_id))) || (x_id == NIL && Left (px_id) == NIL))
+                if (
+                    (x_id != NIL && x_id == Left(Parent(x_id)))
+                    || (x_id == NIL && Left(px_id) == NIL)
+                )
                 {
-                  // we have from DELETE, then x cannot be NIL and be a right child of its parent
-                  // also from DELETE, if x is non nil, it will be a left child.
-                    w_id = (x_id == NIL) ? Right (px_id) : Right (Parent (x_id));     // w is x's right sibling and it cannot be NIL
+                    // we have from DELETE, then x cannot be NIL and be a right child of its parent
+                    // also from DELETE, if x is non nil, it will be a left child.
+                    w_id = (x_id == NIL) ? Right(px_id) : Right(Parent(x_id)); // w is x's right sibling and it cannot be NIL
 
-                    if (w_id == NIL) {
+                    if (w_id == NIL)
+                    {
                         throw ExceptionBuilder.InternalRBTreeError(RBTreeError.RBDeleteFixup);
                     }
 
-                    if (color (w_id) == NodeColor.red)
+                    if (color(w_id) == NodeColor.red)
                     {
-                        SetColor (w_id, NodeColor.black);
-                        SetColor (px_id, NodeColor.red);
-                        root_id = LeftRotate (root_id, px_id, mainTreeNodeID);
-                        w_id = (x_id == NIL) ? Right (px_id) : Right (Parent (x_id));
+                        SetColor(w_id, NodeColor.black);
+                        SetColor(px_id, NodeColor.red);
+                        root_id = LeftRotate(root_id, px_id, mainTreeNodeID);
+                        w_id = (x_id == NIL) ? Right(px_id) : Right(Parent(x_id));
                     }
 
-                    if (color (Left (w_id)) == NodeColor.black && color (Right (w_id)) == NodeColor.black)
+                    if (
+                        color(Left(w_id)) == NodeColor.black
+                        && color(Right(w_id)) == NodeColor.black
+                    )
                     {
-                        SetColor (w_id, NodeColor.red);
+                        SetColor(w_id, NodeColor.red);
                         x_id = px_id;
-                        px_id = Parent (px_id); //maintain px_id
+                        px_id = Parent(px_id); //maintain px_id
                     }
                     else
                     {
-                        if (color (Right (w_id)) == NodeColor.black)
+                        if (color(Right(w_id)) == NodeColor.black)
                         {
-                            SetColor (Left (w_id), NodeColor.black);
-                            SetColor (w_id, NodeColor.red);
-                            root_id = RightRotate (root_id, w_id, mainTreeNodeID);
-                            w_id = (x_id == NIL) ? Right (px_id) : Right (Parent (x_id));
+                            SetColor(Left(w_id), NodeColor.black);
+                            SetColor(w_id, NodeColor.red);
+                            root_id = RightRotate(root_id, w_id, mainTreeNodeID);
+                            w_id = (x_id == NIL) ? Right(px_id) : Right(Parent(x_id));
                         }
 
-                        SetColor (w_id, color (px_id));
-                        SetColor (px_id, NodeColor.black);
-                        SetColor (Right (w_id), NodeColor.black);
-                        root_id = LeftRotate (root_id, px_id, mainTreeNodeID);
+                        SetColor(w_id, color(px_id));
+                        SetColor(px_id, NodeColor.black);
+                        SetColor(Right(w_id), NodeColor.black);
+                        root_id = LeftRotate(root_id, px_id, mainTreeNodeID);
 
                         x_id = (root_id == NIL) ? root : root_id;
-                        px_id = Parent (x_id);
+                        px_id = Parent(x_id);
                     }
                 }
                 else
-                {  //x is a right child or it is NIL
-                    w_id = Left (px_id);
-                    if (color (w_id) == NodeColor.red)
-                    {   // x_id is y's (the spliced node) sole non-NIL child or NIL if y had no children
-                        SetColor (w_id, NodeColor.black);
-                        if (x_id != NIL) {
-                            SetColor (px_id, NodeColor.red);
-                            root_id = RightRotate (root_id, px_id, mainTreeNodeID);
-                            w_id = (x_id == NIL) ? Left (px_id) : Left (Parent (x_id));
+                { //x is a right child or it is NIL
+                    w_id = Left(px_id);
+                    if (color(w_id) == NodeColor.red)
+                    { // x_id is y's (the spliced node) sole non-NIL child or NIL if y had no children
+                        SetColor(w_id, NodeColor.black);
+                        if (x_id != NIL)
+                        {
+                            SetColor(px_id, NodeColor.red);
+                            root_id = RightRotate(root_id, px_id, mainTreeNodeID);
+                            w_id = (x_id == NIL) ? Left(px_id) : Left(Parent(x_id));
                         }
-                        else {
+                        else
+                        {
                             //we have from DELETE, then x cannot be NIL and be a right child of its parent
                             // w_id cannot be nil.
-                            SetColor (px_id, NodeColor.red);
-                            root_id = RightRotate (root_id, px_id, mainTreeNodeID);
-                            w_id = (x_id == NIL) ? Left (px_id) : Left (Parent (x_id));
+                            SetColor(px_id, NodeColor.red);
+                            root_id = RightRotate(root_id, px_id, mainTreeNodeID);
+                            w_id = (x_id == NIL) ? Left(px_id) : Left(Parent(x_id));
 
-                            if (w_id == NIL) {
-                                throw ExceptionBuilder.InternalRBTreeError(RBTreeError.CannotRotateInvalidsuccessorNodeinDelete);
+                            if (w_id == NIL)
+                            {
+                                throw ExceptionBuilder.InternalRBTreeError(
+                                    RBTreeError.CannotRotateInvalidsuccessorNodeinDelete
+                                );
                             }
                         }
                     }
 
-                    if (color (Right (w_id)) == NodeColor.black && color (Left (w_id)) == NodeColor.black) {
-                        SetColor (w_id, NodeColor.red);
+                    if (
+                        color(Right(w_id)) == NodeColor.black
+                        && color(Left(w_id)) == NodeColor.black
+                    )
+                    {
+                        SetColor(w_id, NodeColor.red);
                         x_id = px_id;
-                        px_id = Parent (px_id);
+                        px_id = Parent(px_id);
                     }
-                    else {
-                        if (color (Left (w_id)) == NodeColor.black)
+                    else
+                    {
+                        if (color(Left(w_id)) == NodeColor.black)
                         {
-                            SetColor (Right (w_id), NodeColor.black);
-                            SetColor (w_id, NodeColor.red);
-                            root_id = LeftRotate (root_id, w_id, mainTreeNodeID);
-                            w_id = (x_id == NIL) ? Left (px_id) : Left (Parent (x_id));
+                            SetColor(Right(w_id), NodeColor.black);
+                            SetColor(w_id, NodeColor.red);
+                            root_id = LeftRotate(root_id, w_id, mainTreeNodeID);
+                            w_id = (x_id == NIL) ? Left(px_id) : Left(Parent(x_id));
                         }
 
                         if (x_id != NIL)
                         {
-                            SetColor (w_id, color (px_id));
-                            SetColor (px_id, NodeColor.black);
-                            SetColor (Left (w_id), NodeColor.black);
-                            root_id = RightRotate (root_id, px_id, mainTreeNodeID);
+                            SetColor(w_id, color(px_id));
+                            SetColor(px_id, NodeColor.black);
+                            SetColor(Left(w_id), NodeColor.black);
+                            root_id = RightRotate(root_id, px_id, mainTreeNodeID);
 
                             x_id = (root_id == NIL) ? root : root_id;
-                            px_id = Parent (x_id);
+                            px_id = Parent(x_id);
                         }
                         else
                         {
-                            SetColor (w_id, color (px_id));
-                            SetColor (px_id, NodeColor.black);
-                            SetColor (Left (w_id), NodeColor.black);
-                            root_id = RightRotate (root_id, px_id, mainTreeNodeID);
+                            SetColor(w_id, color(px_id));
+                            SetColor(px_id, NodeColor.black);
+                            SetColor(Left(w_id), NodeColor.black);
+                            root_id = RightRotate(root_id, px_id, mainTreeNodeID);
 
                             x_id = (root_id == NIL) ? root : root_id;
-                            px_id = Parent (x_id);
+                            px_id = Parent(x_id);
                         }
                     }
                 }
             }
 
-            SetColor (x_id, NodeColor.black);
+            SetColor(x_id, NodeColor.black);
             return root_id;
         }
 
-        private int SearchSubTree (int root_id, K key)
+        private int SearchSubTree(int root_id, K key)
         {
-            if (root_id != NIL &&  _accessMethod!=TreeAccessMethod.KEY_SEARCH_AND_INDEX) {
-                throw ExceptionBuilder.InternalRBTreeError(RBTreeError.UnsupportedAccessMethodInNonNillRootSubtree);
+            if (root_id != NIL && _accessMethod != TreeAccessMethod.KEY_SEARCH_AND_INDEX)
+            {
+                throw ExceptionBuilder.InternalRBTreeError(
+                    RBTreeError.UnsupportedAccessMethodInNonNillRootSubtree
+                );
             }
 
             int x_id = (root_id == NIL) ? root : root_id;
             int c;
             while (x_id != NIL)
             {
-                c = (root_id == NIL) ? CompareNode (key, Key (x_id)) : CompareSateliteTreeNode (key, Key (x_id));
-                if (c == 0) {
+                c =
+                    (root_id == NIL)
+                        ? CompareNode(key, Key(x_id))
+                        : CompareSateliteTreeNode(key, Key(x_id));
+                if (c == 0)
+                {
                     break;
                 }
-                if (c < 0) {
+                if (c < 0)
+                {
 #if VerifySort
-                    Debug.Assert((NIL == Left(x_id)) || (0 > Compare(root_id, Left(x_id), x_id)), "Search duplicate Left is not left");
+                    Debug.Assert(
+                        (NIL == Left(x_id)) || (0 > Compare(root_id, Left(x_id), x_id)),
+                        "Search duplicate Left is not left"
+                    );
 #endif
-                    x_id = Left (x_id);
+                    x_id = Left(x_id);
                 }
-                else {
+                else
+                {
 #if VerifySort
-                    Debug.Assert((NIL == Right(x_id)) || (0 < Compare(root_id, Right(x_id), x_id)), "Search duplicate Right is not right");
+                    Debug.Assert(
+                        (NIL == Right(x_id)) || (0 < Compare(root_id, Right(x_id), x_id)),
+                        "Search duplicate Right is not right"
+                    );
 #endif
-                    x_id = Right (x_id);
+                    x_id = Right(x_id);
                 }
             }
             return x_id;
         }
 
         // only works on the main tree - does not work with satelite tree
-        public int Search (K key)
-        {   // for performance reasons, written as a while loop instead of a recursive method
+        public int Search(K key)
+        { // for performance reasons, written as a while loop instead of a recursive method
             int x_id = root;
             int c;
             while (x_id != NIL)
             {
-                c = CompareNode (key, Key (x_id));
-                if (c == 0) {
+                c = CompareNode(key, Key(x_id));
+                if (c == 0)
+                {
                     break;
                 }
-                if (c < 0) {
+                if (c < 0)
+                {
 #if VerifySort
-                    Debug.Assert((NIL == Left(x_id)) || (0 > Compare(NIL, Left(x_id), x_id)), "Search Left is not left");
+                    Debug.Assert(
+                        (NIL == Left(x_id)) || (0 > Compare(NIL, Left(x_id), x_id)),
+                        "Search Left is not left"
+                    );
 #endif
-                    x_id = Left (x_id);
+                    x_id = Left(x_id);
                 }
-                else {
+                else
+                {
 #if VerifySort
-                    Debug.Assert((NIL == Right(x_id)) || (0 < Compare(NIL, Right(x_id), x_id)), "Search Right is not right");
+                    Debug.Assert(
+                        (NIL == Right(x_id)) || (0 < Compare(NIL, Right(x_id), x_id)),
+                        "Search Right is not right"
+                    );
 #endif
-                    x_id = Right (x_id);
+                    x_id = Right(x_id);
                 }
             }
             return x_id;
@@ -1230,10 +1404,7 @@ namespace System.Data
         // return record i.e key at specified index
         public K this[int index]
         {
-            get
-            {
-                return Key(GetNodeByIndex(index).NodeID);
-            }
+            get { return Key(GetNodeByIndex(index).NodeID); }
         }
 
         // Get Record(s) having same key value as that of specified record. Then scan the matched nodes
@@ -1242,10 +1413,12 @@ namespace System.Data
         private NodePath GetNodeByKey(K key) //i.e. GetNodeByKey
         {
             int nodeId = SearchSubTree(NIL, key);
-            if (Next (nodeId) != NIL) {
+            if (Next(nodeId) != NIL)
+            {
                 return new NodePath(SearchSubTree(Next(nodeId), key), nodeId);
             }
-            else if (!Key(nodeId).Equals(key)) {
+            else if (!Key(nodeId).Equals(key))
+            {
                 nodeId = NIL;
             }
             return new NodePath(nodeId, NIL);
@@ -1255,16 +1428,16 @@ namespace System.Data
          * GetIndexByRecord()
          * Gets index of the specified record. returns (-1) if specified record is not found.
          */
-        public int GetIndexByKey (K key)
+        public int GetIndexByKey(K key)
         {
             int nodeIndex = -1;
-            NodePath nodeId = GetNodeByKey (key);
-            if (nodeId.NodeID != NIL) {
-                nodeIndex = GetIndexByNodePath (nodeId);
+            NodePath nodeId = GetNodeByKey(key);
+            if (nodeId.NodeID != NIL)
+            {
+                nodeIndex = GetIndexByNodePath(nodeId);
             }
             return nodeIndex;
         }
-
 
         /*
 
@@ -1289,38 +1462,38 @@ namespace System.Data
          */
         // SQLBU 428961: Serious performance issue when creating DataView
         // this improves performance when used heavily, like with the default view (creating before rows added)
-        public int GetIndexByNode (int node)
+        public int GetIndexByNode(int node)
         {
             Debug.Assert(NIL != node, "GetIndexByNode(NIL)");
 
             if (0 == _inUseSatelliteTreeCount)
-            {   // compute from the main tree when no satellite branches exist
+            { // compute from the main tree when no satellite branches exist
                 return ComputeIndexByNode(node);
             }
             else if (NIL != Next(node))
-            {   // node is a main tree node
+            { // node is a main tree node
 #if VerifyIndex && VerifyPath
                 (new NodePath(Next(node), node)).VerifyPath(this);
-#endif                
+#endif
                 return ComputeIndexWithSatelliteByNode(node);
             }
             else
             {
                 int mainTreeNodeId = SearchSubTree(NIL, Key(node));
                 if (mainTreeNodeId == node)
-                {   // node is a main tree node
+                { // node is a main tree node
 #if VerifyIndex && VerifyPath
                     (new NodePath(node, NIL)).VerifyPath(this);
-#endif                
+#endif
                     return ComputeIndexWithSatelliteByNode(node);
                 }
                 else
-                {   //compute the main tree rank + satellite branch rank
+                { //compute the main tree rank + satellite branch rank
 #if VerifyIndex && VerifyPath
                     (new NodePath(node, mainTreeNodeId)).VerifyPath(this);
-#endif 
-                    return ComputeIndexWithSatelliteByNode(mainTreeNodeId) +
-                           ComputeIndexByNode(node);
+#endif
+                    return ComputeIndexWithSatelliteByNode(mainTreeNodeId)
+                        + ComputeIndexByNode(node);
                 }
             }
         }
@@ -1333,21 +1506,22 @@ namespace System.Data
             path.VerifyPath(this);
 #endif
             if (0 == _inUseSatelliteTreeCount)
-            {   // compute from the main tree when no satellite branches exist
+            { // compute from the main tree when no satellite branches exist
                 return ComputeIndexByNode(path.NodeID);
             }
             else if (NIL == path.MainTreeNodeID)
-            {   // compute from the main tree accounting for satellite branches
+            { // compute from the main tree accounting for satellite branches
                 return ComputeIndexWithSatelliteByNode(path.NodeID);
             }
             else
-            {   //compute the main tree rank + satellite branch rank
-                return ComputeIndexWithSatelliteByNode(path.MainTreeNodeID) +
-                       ComputeIndexByNode(path.NodeID);
+            { //compute the main tree rank + satellite branch rank
+                return ComputeIndexWithSatelliteByNode(path.MainTreeNodeID)
+                    + ComputeIndexByNode(path.NodeID);
             }
         }
 
-        private int ComputeIndexByNode(int nodeId) {
+        private int ComputeIndexByNode(int nodeId)
+        {
 #if VerifyIndex
             Debug.Assert(NIL != nodeId, "ComputeIndexByNode(NIL)");
 #endif
@@ -1367,7 +1541,8 @@ namespace System.Data
             return myRank;
         }
 
-        private int ComputeIndexWithSatelliteByNode(int nodeId) {
+        private int ComputeIndexWithSatelliteByNode(int nodeId)
+        {
 #if VerifyIndex
             Debug.Assert(NIL != nodeId, "ComputeIndexWithSatelliteByNode(NIL)");
 #endif
@@ -1377,7 +1552,10 @@ namespace System.Data
                 int parent = Parent(nodeId);
                 if (nodeId == Right(parent))
                 {
-                    myRank += (SubTreeSize(Left(parent)) + ((Next(parent) == NIL) ? 1 : SubTreeSize(Next(parent))));
+                    myRank += (
+                        SubTreeSize(Left(parent))
+                        + ((Next(parent) == NIL) ? 1 : SubTreeSize(Next(parent)))
+                    );
                 }
                 nodeId = parent;
             }
@@ -1388,8 +1566,10 @@ namespace System.Data
         /// <exception cref="IndexOutOfRangeException"></exception>
         private NodePath GetNodeByIndex(int userIndex)
         {
-            int x_id, satelliteRootId;
-            if (0 == _inUseSatelliteTreeCount) {
+            int x_id,
+                satelliteRootId;
+            if (0 == _inUseSatelliteTreeCount)
+            {
                 // if rows were only contigously append, then using (userIndex -= _pageTable[i].InUseCount) would
                 // be faster for the first 12 pages (about 5248) nodes before (log2 of Count) becomes faster again.
                 // the additional complexity was deemed not worthy for the possible perf gain
@@ -1398,16 +1578,22 @@ namespace System.Data
                 x_id = ComputeNodeByIndex(root, unchecked(userIndex + 1));
                 satelliteRootId = NIL;
             }
-            else {
+            else
+            {
                 // computation cost is ((log2 of Distinct Count) + (log2 of Duplicate Count))
                 x_id = ComputeNodeByIndex(userIndex, out satelliteRootId);
             }
-            if (x_id == NIL) {
-                if (TreeAccessMethod.INDEX_ONLY == _accessMethod) {
+            if (x_id == NIL)
+            {
+                if (TreeAccessMethod.INDEX_ONLY == _accessMethod)
+                {
                     throw ExceptionBuilder.RowOutOfRange(userIndex);
                 }
-                else {
-                    throw ExceptionBuilder.InternalRBTreeError(RBTreeError.IndexOutOFRangeinGetNodeByIndex);
+                else
+                {
+                    throw ExceptionBuilder.InternalRBTreeError(
+                        RBTreeError.IndexOutOFRangeinGetNodeByIndex
+                    );
                 }
             }
             return new NodePath(x_id, satelliteRootId);
@@ -1415,17 +1601,25 @@ namespace System.Data
 
         private int ComputeNodeByIndex(int index, out int satelliteRootId)
         {
-            index  = unchecked(index + 1); // index is 0 based, while size is 1 based.
+            index = unchecked(index + 1); // index is 0 based, while size is 1 based.
             satelliteRootId = NIL;
             int x_id = root;
 
             int rank = -1;
-            while (x_id != NIL && !(((rank = SubTreeSize (Left (x_id)) + 1) == index) && Next (x_id) == NIL))
+            while (
+                x_id != NIL
+                && !(((rank = SubTreeSize(Left(x_id)) + 1) == index) && Next(x_id) == NIL)
+            )
             {
-                if (index < rank) {
-                    x_id = Left (x_id);
+                if (index < rank)
+                {
+                    x_id = Left(x_id);
                 }
-                else if (Next (x_id) != NIL && index >= rank && index <= rank + SubTreeSize (Next (x_id)) - 1)
+                else if (
+                    Next(x_id) != NIL
+                    && index >= rank
+                    && index <= rank + SubTreeSize(Next(x_id)) - 1
+                )
                 {
                     // node with matching index is in the associated satellite tree. continue searching for index in satellite tree.
                     satelliteRootId = x_id;
@@ -1434,31 +1628,36 @@ namespace System.Data
                 }
                 else
                 {
-                    if (Next (x_id) == NIL)
+                    if (Next(x_id) == NIL)
                         index -= rank;
                     else
-                        index -= rank + SubTreeSize (Next (x_id)) - 1;
+                        index -= rank + SubTreeSize(Next(x_id)) - 1;
 
-                    x_id = Right (x_id);
+                    x_id = Right(x_id);
                 }
             }
             return x_id;
         }
 
-        private int ComputeNodeByIndex(int x_id, int index) {
-            while (x_id != NIL) {
+        private int ComputeNodeByIndex(int x_id, int index)
+        {
+            while (x_id != NIL)
+            {
                 Debug.Assert(NIL == Next(x_id), "has unexpected satellite tree");
 
                 int y_id = Left(x_id);
                 int rank = SubTreeSize(y_id) + 1;
-                if (index < rank) {
+                if (index < rank)
+                {
                     x_id = y_id;
                 }
-                else if (rank < index) {
+                else if (rank < index)
+                {
                     x_id = Right(x_id);
                     index -= rank;
                 }
-                else {
+                else
+                {
                     break;
                 }
             }
@@ -1467,14 +1666,14 @@ namespace System.Data
 
 #if DEBUG
         // return true if all nodes are unique; i.e. no satelite trees.
-        public bool CheckUnique (int curNodeId)
+        public bool CheckUnique(int curNodeId)
         {
             if (curNodeId != NIL)
             {
-                if (Next (curNodeId) != NIL)
-                    return false;    // atleast 1 duplicate found
+                if (Next(curNodeId) != NIL)
+                    return false; // atleast 1 duplicate found
 
-                if (!CheckUnique (Left (curNodeId)) || !CheckUnique (Right (curNodeId)))
+                if (!CheckUnique(Left(curNodeId)) || !CheckUnique(Right(curNodeId)))
                     return false;
             }
 
@@ -1482,11 +1681,11 @@ namespace System.Data
         }
 #endif
 
-        public int Insert (K item)
+        public int Insert(K item)
         {
             int nodeId = GetNewNode(item);
 
-            RBInsert (NIL, nodeId, NIL, -1, false);
+            RBInsert(NIL, nodeId, NIL, -1, false);
             return nodeId;
         }
 
@@ -1494,12 +1693,13 @@ namespace System.Data
 
         public int Add(K item) //Insert (int record)
         {
-            int nodeId = GetNewNode (item);
+            int nodeId = GetNewNode(item);
             RBInsert(NIL, nodeId, NIL, -1, false);
             return nodeId;
         }
 
-        public IEnumerator GetEnumerator() {
+        public IEnumerator GetEnumerator()
+        {
             return new RBTreeEnumerator(this);
         }
 
@@ -1507,19 +1707,22 @@ namespace System.Data
         //
         // iterate over all nodes, InOrder and return index of node with the specified Item
         // For the short term use a recursive method, later re-write it based on a stack data structure (if needed)
-        public int IndexOf (int nodeId, K item)
+        public int IndexOf(int nodeId, K item)
         {
             int index = -1;
             // BIG ASSUMPTION: There is not satellite tree, this is INDEX_ONLY.
             if (nodeId != NIL)
             {
-                if ( (Object) Key(nodeId) == (Object)item) {
+                if ((Object)Key(nodeId) == (Object)item)
+                {
                     return GetIndexByNode(nodeId);
                 }
-                if ( (index=IndexOf(Left(nodeId), item)) != -1) {
+                if ((index = IndexOf(Left(nodeId), item)) != -1)
+                {
                     return index;
                 }
-                if ( (index=IndexOf(Right(nodeId), item)) != -1) {
+                if ((index = IndexOf(Right(nodeId), item)) != -1)
+                {
                     return index;
                 }
             }
@@ -1532,11 +1735,10 @@ namespace System.Data
             return InsertAt(position, item, false);
         }
 
-
         public int InsertAt(int position, K item, bool append)
         {
-            int nodeId = GetNewNode (item);
-            RBInsert (NIL, nodeId, NIL, position, append);
+            int nodeId = GetNewNode(item);
+            RBInsert(NIL, nodeId, NIL, position, append);
             return nodeId;
         }
 
@@ -1548,43 +1750,56 @@ namespace System.Data
         public void Clear()
         {
             InitTree();
-            unchecked{_version++;}
+            unchecked
+            {
+                _version++;
+            }
         }
 
-        public void CopyTo(Array array, int index) {
-            if (array==null) {
+        public void CopyTo(Array array, int index)
+        {
+            if (array == null)
+            {
                 throw ExceptionBuilder.ArgumentNull("array");
             }
-            if (index < 0) {
+            if (index < 0)
+            {
                 throw ExceptionBuilder.ArgumentOutOfRange("index");
             }
 
             int count = Count;
-            if (array.Length - index < Count) {
+            if (array.Length - index < Count)
+            {
                 throw ExceptionBuilder.InvalidOffsetLength();
             }
 
             int x_id = Minimum(root);
-            for(int i = 0; i < count; ++i) {
+            for (int i = 0; i < count; ++i)
+            {
                 array.SetValue(Key(x_id), index + i);
                 x_id = Successor(x_id);
             }
         }
 
-        public void CopyTo(K[] array, int index) {
-            if (array==null) {
+        public void CopyTo(K[] array, int index)
+        {
+            if (array == null)
+            {
                 throw ExceptionBuilder.ArgumentNull("array");
             }
-            if (index < 0) {
+            if (index < 0)
+            {
                 throw ExceptionBuilder.ArgumentOutOfRange("index");
             }
             int count = Count;
-            if (array.Length - index < Count) {
+            if (array.Length - index < Count)
+            {
                 throw ExceptionBuilder.InvalidOffsetLength();
             }
 
             int x_id = Minimum(root);
-            for(int i = 0; i < count; ++i) {
+            for (int i = 0; i < count; ++i)
+            {
                 array[index + i] = Key(x_id);
                 x_id = Successor(x_id);
             }
@@ -1592,7 +1807,7 @@ namespace System.Data
 
         // End: List of methods for making it easy to work with ArrayList
 
-        private void SetRight (int nodeId, int rightNodeId)
+        private void SetRight(int nodeId, int rightNodeId)
         {
             /*
             TreePage page = _pageTable[nodeId >> 16];
@@ -1602,7 +1817,7 @@ namespace System.Data
             _pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].rightId = rightNodeId;
         }
 
-        private void SetLeft (int nodeId, int leftNodeId)
+        private void SetLeft(int nodeId, int leftNodeId)
         {
             /*
             TreePage page = _pageTable[nodeId >> 16];
@@ -1612,7 +1827,7 @@ namespace System.Data
             _pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].leftId = leftNodeId;
         }
 
-        private void SetParent (int nodeId, int parentNodeId)
+        private void SetParent(int nodeId, int parentNodeId)
         {
             Debug.Assert(nodeId != NIL, " in SetParent  nodeId == NIL");
             /*
@@ -1623,7 +1838,7 @@ namespace System.Data
             _pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].parentId = parentNodeId;
         }
 
-        private void SetColor (int nodeId, NodeColor color)
+        private void SetColor(int nodeId, NodeColor color)
         {
             Debug.Assert(nodeId != NIL, " in SetColor  nodeId == NIL");
             /*
@@ -1634,7 +1849,7 @@ namespace System.Data
             _pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].nodeColor = color;
         }
 
-        private void SetKey (int nodeId, K key)
+        private void SetKey(int nodeId, K key)
         {
             /*
             TreePage page = _pageTable[nodeId >> 16];
@@ -1644,7 +1859,7 @@ namespace System.Data
             _pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].keyOfNode = key;
         }
 
-        private void SetNext (int nodeId, int nextNodeId)
+        private void SetNext(int nodeId, int nextNodeId)
         {
             /*
             TreePage page = _pageTable[nodeId >> 16];
@@ -1654,18 +1869,21 @@ namespace System.Data
             _pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].nextId = nextNodeId;
         }
 
-        private void SetSubTreeSize (int nodeId, int size)
+        private void SetSubTreeSize(int nodeId, int size)
         {
-            Debug.Assert(nodeId != NIL &&
-                         (size != 0 || _pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].selfId == NIL) &&
-                         (size != 1 || _pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].nextId == NIL), "SetSize");
+            Debug.Assert(
+                nodeId != NIL
+                    && (size != 0 || _pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].selfId == NIL)
+                    && (size != 1 || _pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].nextId == NIL),
+                "SetSize"
+            );
             // SQLBU 428961: Serious performance issue when creating DataView
             // this improves performance by reducing the impact of this heavily used method
             _pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].subTreeSize = size;
             VerifySize(nodeId, size);
         }
 
-        private void IncreaseSize (int nodeId)
+        private void IncreaseSize(int nodeId)
         {
             /*
             TreePage page = _pageTable[nodeId >> 16];
@@ -1675,10 +1893,12 @@ namespace System.Data
             _pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].subTreeSize += 1;
         }
 
-
         private void RecomputeSize(int nodeId)
         {
-            int myCorrectSize = SubTreeSize (Left (nodeId)) + SubTreeSize (Right (nodeId)) + (Next (nodeId) == NIL ? 1 : SubTreeSize (Next (nodeId)));
+            int myCorrectSize =
+                SubTreeSize(Left(nodeId))
+                + SubTreeSize(Right(nodeId))
+                + (Next(nodeId) == NIL ? 1 : SubTreeSize(Next(nodeId)));
             /*
             TreePage page = _pageTable[nodeId >> 16];
             int slotIndex = nodeId & 0xFFFF;
@@ -1687,7 +1907,7 @@ namespace System.Data
             _pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].subTreeSize = myCorrectSize;
         }
 
-        private void DecreaseSize (int nodeId)
+        private void DecreaseSize(int nodeId)
         {
             /*
             TreePage page = _pageTable[nodeId >> 16];
@@ -1699,12 +1919,16 @@ namespace System.Data
         }
 
         [ConditionalAttribute("DEBUG")]
-        private void VerifySize(int nodeId, int size) {
-            int myCorrectSize = SubTreeSize(Left(nodeId)) + SubTreeSize(Right(nodeId)) + (Next(nodeId) == NIL ? 1 : SubTreeSize(Next(nodeId)));
+        private void VerifySize(int nodeId, int size)
+        {
+            int myCorrectSize =
+                SubTreeSize(Left(nodeId))
+                + SubTreeSize(Right(nodeId))
+                + (Next(nodeId) == NIL ? 1 : SubTreeSize(Next(nodeId)));
             Debug.Assert(myCorrectSize == size, "VerifySize");
         }
 
-        public int Right (int nodeId)
+        public int Right(int nodeId)
         {
             /*
             TreePage page = _pageTable[nodeId >> 16];
@@ -1715,7 +1939,7 @@ namespace System.Data
             return (_pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].rightId);
         }
 
-        public int Left (int nodeId)
+        public int Left(int nodeId)
         {
             /*
             TreePage page = _pageTable[nodeId >> 16];
@@ -1726,7 +1950,7 @@ namespace System.Data
             return (_pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].leftId);
         }
 
-        public int Parent (int nodeId)
+        public int Parent(int nodeId)
         {
             /*
             TreePage page = _pageTable[nodeId >> 16];
@@ -1737,7 +1961,7 @@ namespace System.Data
             return (_pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].parentId);
         }
 
-        private NodeColor color (int nodeId)
+        private NodeColor color(int nodeId)
         {
             /*
             TreePage page = _pageTable[nodeId >> 16];
@@ -1748,7 +1972,7 @@ namespace System.Data
             return (_pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].nodeColor);
         }
 
-        public int Next (int nodeId)
+        public int Next(int nodeId)
         {
             /*
             TreePage page = _pageTable[nodeId >> 16];
@@ -1759,7 +1983,7 @@ namespace System.Data
             return (_pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].nextId);
         }
 
-        public int SubTreeSize (int nodeId)
+        public int SubTreeSize(int nodeId)
         {
             /*
             TreePage page = _pageTable[nodeId >> 16];
@@ -1770,7 +1994,7 @@ namespace System.Data
             return (_pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].subTreeSize);
         }
 
-        public K Key (int nodeId)
+        public K Key(int nodeId)
         {
             /*
             TreePage page = _pageTable[nodeId >> 16];
@@ -1781,8 +2005,9 @@ namespace System.Data
             return (_pageTable[nodeId >> 16].Slots[nodeId & 0xFFFF].keyOfNode);
         }
 
-        private enum NodeColor {
-            red   = 0,
+        private enum NodeColor
+        {
+            red = 0,
             black = 1,
         };
 
@@ -1792,12 +2017,11 @@ namespace System.Data
             internal int leftId;
             internal int rightId;
             internal int parentId;
-            internal int nextId;      // multiple records associated with same key
-            internal int subTreeSize;     // number of nodes in subtree rooted at the current node
+            internal int nextId; // multiple records associated with same key
+            internal int subTreeSize; // number of nodes in subtree rooted at the current node
             internal K keyOfNode;
             internal NodeColor nodeColor;
         }
-
 
         /// <summary>Represents the node in the tree and the satellite branch it took to get there.</summary>
         private struct NodePath
@@ -1822,11 +2046,17 @@ namespace System.Data
             internal void VerifyPath(RBTree<K> tree)
             {
                 Debug.Assert(null != tree, "null tree");
-                Debug.Assert((NIL == NodeID && NIL == MainTreeNodeID) || (NIL != NodeID), "MainTreeNodeID is not NIL");
+                Debug.Assert(
+                    (NIL == NodeID && NIL == MainTreeNodeID) || (NIL != NodeID),
+                    "MainTreeNodeID is not NIL"
+                );
 
                 if (NIL != MainTreeNodeID)
                 {
-                    Debug.Assert(NIL != tree.Next(MainTreeNodeID), "MainTreeNodeID should have a Next");
+                    Debug.Assert(
+                        NIL != tree.Next(MainTreeNodeID),
+                        "MainTreeNodeID should have a Next"
+                    );
                     int node = MainTreeNodeID;
                     while (NIL != tree.Parent(node))
                     {
@@ -1838,41 +2068,51 @@ namespace System.Data
                 {
                     Debug.Assert(NIL == tree.Next(NodeID), "NodeID should not have a Next");
                     int node = NodeID;
-                    if (NIL == MainTreeNodeID) {
+                    if (NIL == MainTreeNodeID)
+                    {
                         while (NIL != tree.Parent(node))
                         {
                             node = tree.Parent(node);
                         }
                     }
-                    else {
+                    else
+                    {
                         while (NIL != tree.Parent(node))
                         {
-                            Debug.Assert(NIL == tree.Next(node), "duplicate node should not have a next");
+                            Debug.Assert(
+                                NIL == tree.Next(node),
+                                "duplicate node should not have a next"
+                            );
                             node = tree.Parent(node);
                         }
                     }
-                    Debug.Assert((NIL == MainTreeNodeID && tree.root == node) ||
-                                 (tree.Next(MainTreeNodeID) == node), "NodeID parent change doesn't align");
+                    Debug.Assert(
+                        (NIL == MainTreeNodeID && tree.root == node)
+                            || (tree.Next(MainTreeNodeID) == node),
+                        "NodeID parent change doesn't align"
+                    );
                 }
             }
 #endif
         }
 
-        private sealed class TreePage {
-            public  const Int32 slotLineSize = 32;
+        private sealed class TreePage
+        {
+            public const Int32 slotLineSize = 32;
 
-            internal readonly Node[] Slots;             // List of slots
-            internal readonly Int32[] SlotMap;          // CEILING(slots.size/slotLineSize)
-            private Int32 _inUseCount;          // 0 to _slots.size
-            private Int32 _pageId;              // Page's Id
-            private Int32 _nextFreeSlotLine;    // o based position of next free slot line
+            internal readonly Node[] Slots; // List of slots
+            internal readonly Int32[] SlotMap; // CEILING(slots.size/slotLineSize)
+            private Int32 _inUseCount; // 0 to _slots.size
+            private Int32 _pageId; // Page's Id
+            private Int32 _nextFreeSlotLine; // o based position of next free slot line
 
             /*
              * size: number of slots per page. Maximum allowed is 64K
              */
-            internal TreePage (int size)
+            internal TreePage(int size)
             {
-                if (size > 64 * 1024) {
+                if (size > 64 * 1024)
+                {
                     throw ExceptionBuilder.InternalRBTreeError(RBTreeError.InvalidPageSize);
                 }
                 Slots = new Node[size];
@@ -1883,10 +2123,10 @@ namespace System.Data
              * Allocate a free slot from the current page belonging to the specified tree.
              * return the Id of the allocated slot, or -1 if the current page does not have any free slots.
              */
-            internal int AllocSlot (RBTree<K> tree)
+            internal int AllocSlot(RBTree<K> tree)
             {
-                int segmentPos = 0;  // index into _SlotMap
-                Int32 freeSlot = 0;  // Uint, slot offset within the segment
+                int segmentPos = 0; // index into _SlotMap
+                Int32 freeSlot = 0; // Uint, slot offset within the segment
                 int freeSlotId = -1; // 0 based slot position
 
                 if (_inUseCount < Slots.Length)
@@ -1900,12 +2140,15 @@ namespace System.Data
                             freeSlot = (~(SlotMap[segmentPos])) & (SlotMap[segmentPos] + 1);
 
                             // avoid string concat to allow debug code to run faster
-                            Debug.Assert((SlotMap[segmentPos] & freeSlot) == 0,"Slot position segment[segmentPos ]: [freeSlot] is in use. Expected to be empty");
+                            Debug.Assert(
+                                (SlotMap[segmentPos] & freeSlot) == 0,
+                                "Slot position segment[segmentPos ]: [freeSlot] is in use. Expected to be empty"
+                            );
 
                             SlotMap[segmentPos] |= freeSlot; //mark free slot as used.
                             _inUseCount++;
                             if (_inUseCount == Slots.Length) // mark page as full
-                                tree.MarkPageFull (this);
+                                tree.MarkPageFull(this);
                             tree._inUseNodeCount++;
 
                             // convert freeSlotPos to int value giving number of 0's to its right i.e. freeSlotId
@@ -1925,7 +2168,7 @@ namespace System.Data
                     {
                         //Try one more time, starting from 0th segment position to locate a free slot.
                         _nextFreeSlotLine = 0;
-                        freeSlotId = AllocSlot (tree);
+                        freeSlotId = AllocSlot(tree);
                     }
                 }
 
@@ -1934,8 +2177,8 @@ namespace System.Data
 
             internal Int32 InUseCount
             {
-                get {return _inUseCount;}
-                set {_inUseCount = value;}
+                get { return _inUseCount; }
+                set { _inUseCount = value; }
             }
 
             internal Int32 PageId
@@ -1945,21 +2188,24 @@ namespace System.Data
             }
         }
 
-
         // SQLBU 428961: Serious performance issue when creating DataView
         // this improves performance allowing to iterating of the index instead of computing record by index
         // changes are required to handle satellite nodes which do not exist in DataRowCollection
         // enumerator over index will not be handed to the user, only used internally
 
         // instance of this enumerator will be handed to the user via DataRowCollection.GetEnumerator()
-        internal struct RBTreeEnumerator : System.Collections.Generic.IEnumerator<K>, System.Collections.IEnumerator
+        internal struct RBTreeEnumerator
+            : System.Collections.Generic.IEnumerator<K>,
+                System.Collections.IEnumerator
         {
             private readonly RBTree<K> tree;
             private readonly int version;
-            private int index, mainTreeNodeId;
+            private int index,
+                mainTreeNodeId;
             private K current;
 
-            internal RBTreeEnumerator(RBTree<K> tree) {
+            internal RBTreeEnumerator(RBTree<K> tree)
+            {
                 this.tree = tree;
                 version = tree._version;
                 index = NIL;
@@ -1978,20 +2224,23 @@ namespace System.Data
                 }
                 else
                 {
-                    index = tree.ComputeNodeByIndex(position-1, out mainTreeNodeId);
+                    index = tree.ComputeNodeByIndex(position - 1, out mainTreeNodeId);
                     if (NIL == index)
                     {
-                        throw ExceptionBuilder.InternalRBTreeError(RBTreeError.IndexOutOFRangeinGetNodeByIndex);
+                        throw ExceptionBuilder.InternalRBTreeError(
+                            RBTreeError.IndexOutOFRangeinGetNodeByIndex
+                        );
                     }
                 }
                 current = default(K);
             }
 
-            public void Dispose() {
-            }
+            public void Dispose() { }
 
-            public bool MoveNext() {
-                if (version != tree._version) {
+            public bool MoveNext()
+            {
+                if (version != tree._version)
+                {
                     throw ExceptionBuilder.EnumeratorModified();
                 }
 
@@ -2000,20 +2249,20 @@ namespace System.Data
                 return hasCurrent;
             }
 
-            public K Current {
-                get {
-                    return current;
-                }
+            public K Current
+            {
+                get { return current; }
             }
 
-            Object System.Collections.IEnumerator.Current {
-                get {
-                    return Current;
-                }
+            Object System.Collections.IEnumerator.Current
+            {
+                get { return Current; }
             }
 
-            void System.Collections.IEnumerator.Reset() {
-                if (version != tree._version) {
+            void System.Collections.IEnumerator.Reset()
+            {
+                if (version != tree._version)
+                {
                     throw ExceptionBuilder.EnumeratorModified();
                 }
 

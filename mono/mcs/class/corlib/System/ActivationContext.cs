@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,92 +29,97 @@
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
-namespace System {
+namespace System
+{
+    [Serializable]
+    [ComVisible(false)]
+    public sealed class ActivationContext : IDisposable, ISerializable
+    {
+        public enum ContextForm
+        {
+            Loose,
+            StoreBounded,
+        }
 
-	[Serializable]
-	[ComVisible (false)]
-	public sealed class ActivationContext : IDisposable, ISerializable {
+        private ApplicationIdentity _appid;
 
-		public enum ContextForm {
-			Loose,
-			StoreBounded
-		}
+        // FIXME:
+#pragma warning disable 649
+        private ContextForm _form;
+#pragma warning restore 649
+        private bool _disposed;
 
-		private ApplicationIdentity _appid;
+        private ActivationContext(ApplicationIdentity identity)
+        {
+            _appid = identity;
+        }
 
-		// FIXME:
-        #pragma warning disable 649
-		private ContextForm _form;
-        #pragma warning restore 649
-		private bool _disposed;
+        ~ActivationContext()
+        {
+            Dispose(false);
+        }
 
-		private ActivationContext (ApplicationIdentity identity)
-		{
-			_appid = identity;
-		}
+        public ContextForm Form
+        {
+            get { return _form; }
+        }
 
-		~ActivationContext ()
-		{
-			Dispose (false);
-		}
+        public ApplicationIdentity Identity
+        {
+            get { return _appid; }
+        }
 
-		public ContextForm Form {
-			get { return _form; }
-		}
+        [MonoTODO("Missing validation")]
+        public static ActivationContext CreatePartialActivationContext(ApplicationIdentity identity)
+        {
+            if (identity == null)
+                throw new ArgumentNullException("identity");
 
-		public ApplicationIdentity Identity {
-			get { return _appid; }
-		}
+            // TODO - throw new ArgumentException
+            // - for invalid ApplicationIdentity
 
-		[MonoTODO ("Missing validation")]
-		static public ActivationContext CreatePartialActivationContext (ApplicationIdentity identity)
-		{
-			if (identity == null)
-				throw new ArgumentNullException ("identity");
+            return new ActivationContext(identity);
+        }
 
-			// TODO - throw new ArgumentException
-			// - for invalid ApplicationIdentity
+        [MonoTODO("Missing validation")]
+        public static ActivationContext CreatePartialActivationContext(
+            ApplicationIdentity identity,
+            string[] manifestPaths
+        )
+        {
+            if (identity == null)
+                throw new ArgumentNullException("identity");
+            if (manifestPaths == null)
+                throw new ArgumentNullException("manifestPaths");
 
-			return new ActivationContext (identity);
-		}
+            // TODO - throw new ArgumentException
+            // - for invalid ApplicationIdentity
+            // - not matching manifests
+            // - number components != # manifest paths
 
-		[MonoTODO("Missing validation")]
-		static public ActivationContext CreatePartialActivationContext (ApplicationIdentity identity, string[] manifestPaths)
-		{
-			if (identity == null)
-				throw new ArgumentNullException ("identity");
-			if (manifestPaths == null)
-				throw new ArgumentNullException ("manifestPaths");
+            return new ActivationContext(identity);
+        }
 
-			// TODO - throw new ArgumentException
-			// - for invalid ApplicationIdentity
-			// - not matching manifests
-			// - number components != # manifest paths
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-			return new ActivationContext (identity);
-		}
+        void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                if (disposing) { }
+                _disposed = true;
+            }
+        }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
-
-		void Dispose (bool disposing)
-		{
-			if (_disposed) {
-				if (disposing) {
-				}
-				_disposed = true;
-			}
-		}
-
-		[MonoTODO("Missing serialization support")]
-		void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			if (info == null)
-				throw new ArgumentNullException ("info");
-		}
-	}
+        [MonoTODO("Missing serialization support")]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
+                throw new ArgumentNullException("info");
+        }
+    }
 }
-

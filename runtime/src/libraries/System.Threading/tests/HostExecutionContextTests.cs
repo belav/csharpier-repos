@@ -38,25 +38,15 @@ namespace System.Threading.Tests
         {
             public bool DisposeTrueCalled { get; private set; }
 
-            public TestHostExecutionContext()
-            {
-            }
+            public TestHostExecutionContext() { }
 
             public TestHostExecutionContext(object state)
-                : base(state)
-            {
-            }
+                : base(state) { }
 
             public new object State
             {
-                get
-                {
-                    return base.State;
-                }
-                set
-                {
-                    base.State = value;
-                }
+                get { return base.State; }
+                set { base.State = value; }
             }
 
             public override void Dispose(bool disposing)

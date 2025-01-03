@@ -10,7 +10,8 @@ internal static class ArgConstants
     public const string Pwa = "--pwa";
     public const string CallsGraph = "--calls-graph";
     public const string CalledApiUrl = "--called-api-url";
-    public const string CalledApiUrlGraphMicrosoftCom = "--called-api-url \"https://graph.microsoft.com\"";
+    public const string CalledApiUrlGraphMicrosoftCom =
+        "--called-api-url \"https://graph.microsoft.com\"";
     public const string CalledApiScopes = "--called-api-scopes";
     public const string CalledApiScopesUserReadWrite = $"{CalledApiScopes} user.readwrite";
     public const string NoOpenApi = "--no-openapi";

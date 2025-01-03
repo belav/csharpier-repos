@@ -1,13 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 using System.Buffers.Binary;
-using System.Text;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
-using System.Security.Cryptography;
 using System.Net.Security;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using System.Text;
 using Xunit;
 
 namespace System.Net.Security
@@ -33,7 +33,8 @@ namespace System.Net.Security
 
         // Behavior modifiers
         public bool SendTimestamp { get; set; } = true;
-        public byte[] Version { get; set; } = new byte[] { 0x06, 0x00, 0x70, 0x17, 0x00, 0x00, 0x00, 0x0f }; // 6.0.6000 / 15
+        public byte[] Version { get; set; } =
+            new byte[] { 0x06, 0x00, 0x70, 0x17, 0x00, 0x00, 0x00, 0x0f }; // 6.0.6000 / 15
         public bool TargetIsServer { get; set; } = false;
         public bool PreferUnicode { get; set; } = true;
         public bool ForceNegotiateVersion { get; set; } = true;
@@ -67,13 +68,27 @@ namespace System.Net.Security
             Flags.NegotiateNtlm2 | Flags.NegotiateNtlm | Flags.NegotiateAlwaysSign;
 
         // Fixed server challenge (same value as in Protocol Examples section of the specification)
-        private byte[] _serverChallenge = new byte[] { 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef };
+        private byte[] _serverChallenge = new byte[]
+        {
+            0x01,
+            0x23,
+            0x45,
+            0x67,
+            0x89,
+            0xab,
+            0xcd,
+            0xef,
+        };
 
         private static ReadOnlySpan<byte> NtlmHeader => "NTLMSSP\0"u8;
-        private static ReadOnlySpan<byte> ClientSigningKeyMagic => "session key to client-to-server signing key magic constant\0"u8;
-        private static ReadOnlySpan<byte> ServerSigningKeyMagic => "session key to server-to-client signing key magic constant\0"u8;
-        private static ReadOnlySpan<byte> ClientSealingKeyMagic => "session key to client-to-server sealing key magic constant\0"u8;
-        private static ReadOnlySpan<byte> ServerSealingKeyMagic => "session key to server-to-client sealing key magic constant\0"u8;
+        private static ReadOnlySpan<byte> ClientSigningKeyMagic =>
+            "session key to client-to-server signing key magic constant\0"u8;
+        private static ReadOnlySpan<byte> ServerSigningKeyMagic =>
+            "session key to server-to-client signing key magic constant\0"u8;
+        private static ReadOnlySpan<byte> ClientSealingKeyMagic =>
+            "session key to client-to-server sealing key magic constant\0"u8;
+        private static ReadOnlySpan<byte> ServerSealingKeyMagic =>
+            "session key to server-to-client sealing key magic constant\0"u8;
 
         private enum MessageType : uint
         {
@@ -109,14 +124,26 @@ namespace System.Net.Security
             Negotiate56 = 0x80000000,
 
             AllSupported =
-                NegotiateUnicode | NegotiateOEM | RequestTargetName |
-                NegotiateSign | NegotiateSeal | NegotiateDatagram |
-                /* NegotiateLMKey | */ NegotiateNtlm | /* NegotiateAnonymous | */
+                NegotiateUnicode
+                | NegotiateOEM
+                | RequestTargetName
+                | NegotiateSign
+                | NegotiateSeal
+                | NegotiateDatagram
+                |
+                /* NegotiateLMKey | */NegotiateNtlm
+                | /* NegotiateAnonymous | */
                 /* NegotiateDomainSupplied | NegotiateWorkstationSupplied | */
-                NegotiateAlwaysSign | TargetTypeDomain | TargetTypeServer |
-                NegotiateNtlm2 | /* RequestIdenityToken | RequestNonNtSessionKey | */
-                NegotiateTargetInfo | NegotiateVersion | Negotiate128 |
-                NegotiateKeyExchange | Negotiate56,
+                NegotiateAlwaysSign
+                | TargetTypeDomain
+                | TargetTypeServer
+                | NegotiateNtlm2
+                | /* RequestIdenityToken | RequestNonNtSessionKey | */
+                NegotiateTargetInfo
+                | NegotiateVersion
+                | Negotiate128
+                | NegotiateKeyExchange
+                | Negotiate56,
         }
 
         private enum AvId
@@ -169,7 +196,8 @@ namespace System.Net.Security
             Assert.True(incomingBlob.Length >= 12);
             Assert.Equal(NtlmHeader.ToArray(), incomingBlob.AsSpan(0, 8).ToArray());
 
-            var messageType = (MessageType)BinaryPrimitives.ReadUInt32LittleEndian(incomingBlob.AsSpan(8, 4));
+            var messageType = (MessageType)
+                BinaryPrimitives.ReadUInt32LittleEndian(incomingBlob.AsSpan(8, 4));
             Assert.Equal(_expectedMessageType, messageType);
 
             switch (messageType)
@@ -177,7 +205,8 @@ namespace System.Net.Security
                 case MessageType.Negotiate:
                     // We don't negotiate, we just verify
                     Assert.True(incomingBlob.Length >= 32);
-                    Flags flags = (Flags)BinaryPrimitives.ReadUInt32LittleEndian(incomingBlob.AsSpan(12, 4));
+                    Flags flags = (Flags)
+                        BinaryPrimitives.ReadUInt32LittleEndian(incomingBlob.AsSpan(12, 4));
                     Assert.Equal(_requiredFlags, (flags & _requiredFlags));
                     Assert.True((flags & (Flags.NegotiateOEM | Flags.NegotiateUnicode)) != 0);
                     if (flags.HasFlag(Flags.NegotiateDomainSupplied))
@@ -213,7 +242,9 @@ namespace System.Net.Security
         private byte[] GenerateChallenge(Flags flags)
         {
             byte[] buffer = new byte[1000];
-            byte[] targetName = Encoding.Unicode.GetBytes(TargetIsServer ? "Server" : _expectedCredential.Domain);
+            byte[] targetName = Encoding.Unicode.GetBytes(
+                TargetIsServer ? "Server" : _expectedCredential.Domain
+            );
             int payloadOffset = 56;
 
             // Loosely follow the flag manipulation in
@@ -248,14 +279,31 @@ namespace System.Net.Security
 
             int targetInfoOffset = payloadOffset;
             int targetInfoCurrentOffset = targetInfoOffset;
-            targetInfoCurrentOffset += WriteAvIdString(buffer.AsSpan(targetInfoCurrentOffset), AvId.NbDomainName, _expectedCredential.Domain);
-            targetInfoCurrentOffset += WriteAvIdString(buffer.AsSpan(targetInfoCurrentOffset), AvId.NbComputerName, "Server");
+            targetInfoCurrentOffset += WriteAvIdString(
+                buffer.AsSpan(targetInfoCurrentOffset),
+                AvId.NbDomainName,
+                _expectedCredential.Domain
+            );
+            targetInfoCurrentOffset += WriteAvIdString(
+                buffer.AsSpan(targetInfoCurrentOffset),
+                AvId.NbComputerName,
+                "Server"
+            );
 
             if (SendTimestamp)
             {
-                BinaryPrimitives.WriteUInt16LittleEndian(buffer.AsSpan(targetInfoCurrentOffset), (ushort)AvId.Timestamp);
-                BinaryPrimitives.WriteUInt16LittleEndian(buffer.AsSpan(targetInfoCurrentOffset + 2), (ushort)8);
-                BinaryPrimitives.WriteInt64LittleEndian(buffer.AsSpan(targetInfoCurrentOffset + 4), DateTime.UtcNow.ToFileTimeUtc());
+                BinaryPrimitives.WriteUInt16LittleEndian(
+                    buffer.AsSpan(targetInfoCurrentOffset),
+                    (ushort)AvId.Timestamp
+                );
+                BinaryPrimitives.WriteUInt16LittleEndian(
+                    buffer.AsSpan(targetInfoCurrentOffset + 2),
+                    (ushort)8
+                );
+                BinaryPrimitives.WriteInt64LittleEndian(
+                    buffer.AsSpan(targetInfoCurrentOffset + 4),
+                    DateTime.UtcNow.ToFileTimeUtc()
+                );
                 targetInfoCurrentOffset += 12;
             }
 
@@ -278,7 +326,11 @@ namespace System.Net.Security
             MD4.HashData(pwBytes, pwHash);
             using (IncrementalHash hmac = IncrementalHash.CreateHMAC(HashAlgorithmName.MD5, pwHash))
             {
-                hmac.AppendData(Encoding.Unicode.GetBytes(_expectedCredential.UserName.ToUpper() + _expectedCredential.Domain));
+                hmac.AppendData(
+                    Encoding.Unicode.GetBytes(
+                        _expectedCredential.UserName.ToUpper() + _expectedCredential.Domain
+                    )
+                );
                 return hmac.GetHashAndReset();
             }
         }
@@ -306,8 +358,13 @@ namespace System.Net.Security
 
             // Only one encoding can be selected by the client
             Assert.True((flags & (Flags.NegotiateOEM | Flags.NegotiateUnicode)) != 0);
-            Assert.True((flags & (Flags.NegotiateOEM | Flags.NegotiateUnicode)) != (Flags.NegotiateOEM | Flags.NegotiateUnicode));
-            Encoding encoding = flags.HasFlag(Flags.NegotiateUnicode) ? Encoding.Unicode : Encoding.ASCII;
+            Assert.True(
+                (flags & (Flags.NegotiateOEM | Flags.NegotiateUnicode))
+                    != (Flags.NegotiateOEM | Flags.NegotiateUnicode)
+            );
+            Encoding encoding = flags.HasFlag(Flags.NegotiateUnicode)
+                ? Encoding.Unicode
+                : Encoding.ASCII;
 
             string domainName = encoding.GetString(GetField(incomingBlob, 28));
             string userName = encoding.GetString(GetField(incomingBlob, 36));
@@ -317,12 +374,16 @@ namespace System.Net.Security
 
             byte[] ntlm2hash = MakeNtlm2Hash();
             Span<byte> sessionBaseKey = stackalloc byte[16];
-            using (IncrementalHash hmac = IncrementalHash.CreateHMAC(HashAlgorithmName.MD5, ntlm2hash))
+            using (
+                IncrementalHash hmac = IncrementalHash.CreateHMAC(HashAlgorithmName.MD5, ntlm2hash)
+            )
             {
                 hmac.AppendData(_serverChallenge);
                 hmac.AppendData(ntChallengeResponse.Slice(16));
                 // If this matches then the password matched
-                IsAuthenticated = hmac.GetHashAndReset().AsSpan().SequenceEqual(ntChallengeResponse.Slice(0, 16));
+                IsAuthenticated = hmac.GetHashAndReset()
+                    .AsSpan()
+                    .SequenceEqual(ntChallengeResponse.Slice(0, 16));
 
                 if (!IsAuthenticated)
                 {
@@ -358,8 +419,10 @@ namespace System.Net.Security
 
             // Decrypt exportedSessionKey with sessionBaseKey
             Span<byte> exportedSessionKey = stackalloc byte[16];
-            if (flags.HasFlag(Flags.NegotiateKeyExchange) &&
-                (flags.HasFlag(Flags.NegotiateSeal) || flags.HasFlag(Flags.NegotiateSign)))
+            if (
+                flags.HasFlag(Flags.NegotiateKeyExchange)
+                && (flags.HasFlag(Flags.NegotiateSeal) || flags.HasFlag(Flags.NegotiateSign))
+            )
             {
                 using (RC4 rc4 = new RC4(sessionBaseKey))
                 {
@@ -379,7 +442,12 @@ namespace System.Net.Security
                 Assert.NotNull(_negotiateMessage);
                 Assert.NotNull(_challengeMessage);
                 byte[] calculatedMic = new byte[16];
-                using (var hmacMic = IncrementalHash.CreateHMAC(HashAlgorithmName.MD5, exportedSessionKey))
+                using (
+                    var hmacMic = IncrementalHash.CreateHMAC(
+                        HashAlgorithmName.MD5,
+                        exportedSessionKey
+                    )
+                )
                 {
                     hmacMic.AppendData(_negotiateMessage);
                     hmacMic.AppendData(_challengeMessage);
@@ -416,7 +484,8 @@ namespace System.Net.Security
             uint sequenceNumber,
             ReadOnlySpan<byte> signingKey,
             RC4 seal,
-            Span<byte> signature)
+            Span<byte> signature
+        )
         {
             BinaryPrimitives.WriteInt32LittleEndian(signature, 1);
             BinaryPrimitives.WriteUInt32LittleEndian(signature.Slice(12), sequenceNumber);
@@ -447,7 +516,13 @@ namespace System.Net.Security
             Assert.NotNull(_clientSigningKey);
 
             Span<byte> expectedSignature = stackalloc byte[16];
-            CalculateSignature(message, _clientSequence, _clientSigningKey, _clientSeal, expectedSignature);
+            CalculateSignature(
+                message,
+                _clientSequence,
+                _clientSigningKey,
+                _clientSeal,
+                expectedSignature
+            );
             _clientSequence++;
             Assert.True(signature.SequenceEqual(expectedSignature));
         }

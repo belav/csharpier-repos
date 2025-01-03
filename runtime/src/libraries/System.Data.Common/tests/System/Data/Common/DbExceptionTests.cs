@@ -33,19 +33,24 @@ namespace System.Data.Common.Tests
         }
 
         [Fact]
-        public void IsTransient_is_false_by_default()
-            => Assert.False(new CustomDbException().IsTransient);
+        public void IsTransient_is_false_by_default() =>
+            Assert.False(new CustomDbException().IsTransient);
 
         [Fact]
-        public void SqlState_is_null_by_default()
-            => Assert.Null(new CustomDbException().SqlState);
+        public void SqlState_is_null_by_default() => Assert.Null(new CustomDbException().SqlState);
 
         private class CustomDbException : DbException
         {
             public CustomDbException() { }
-            public CustomDbException(string message) : base(message) { }
-            public CustomDbException(string message, int errorCode) : base(message, errorCode) { }
-            public CustomDbException(string message, Exception innerException) : base(message, innerException) { }
+
+            public CustomDbException(string message)
+                : base(message) { }
+
+            public CustomDbException(string message, int errorCode)
+                : base(message, errorCode) { }
+
+            public CustomDbException(string message, Exception innerException)
+                : base(message, innerException) { }
         }
     }
 }

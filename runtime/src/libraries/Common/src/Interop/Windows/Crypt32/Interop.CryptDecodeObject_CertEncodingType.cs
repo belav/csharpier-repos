@@ -10,6 +10,14 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CryptDecodeObject(CertEncodingType dwCertEncodingType, IntPtr lpszStructType, byte[] pbEncoded, int cbEncoded, CryptDecodeObjectFlags dwFlags, byte[]? pvStructInfo, ref int pcbStructInfo);
+        internal static partial bool CryptDecodeObject(
+            CertEncodingType dwCertEncodingType,
+            IntPtr lpszStructType,
+            byte[] pbEncoded,
+            int cbEncoded,
+            CryptDecodeObjectFlags dwFlags,
+            byte[]? pvStructInfo,
+            ref int pcbStructInfo
+        );
     }
 }

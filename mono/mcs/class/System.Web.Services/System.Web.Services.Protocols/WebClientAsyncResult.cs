@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.WebClientAsyncResult.cs
 //
 // Author:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,96 +32,108 @@
 using System.Net;
 using System.Threading;
 
-namespace System.Web.Services.Protocols {
-	public class WebClientAsyncResult : IAsyncResult {
+namespace System.Web.Services.Protocols
+{
+    public class WebClientAsyncResult : IAsyncResult
+    {
+        #region Fields
 
-		#region Fields
+        AsyncCallback _callback;
+        object _asyncState;
 
-		AsyncCallback _callback;
-		object _asyncState;
+        bool _completedSynchronously;
+        bool _done;
+        ManualResetEvent _waitHandle;
 
-		bool _completedSynchronously;
-		bool _done;
-		ManualResetEvent _waitHandle;
-		
-		internal object Result;
-		internal Exception Exception;
-		internal WebRequest Request;
-			
-		#endregion // Fields
+        internal object Result;
+        internal Exception Exception;
+        internal WebRequest Request;
 
-		#region Constructors 
+        #endregion // Fields
 
-		internal WebClientAsyncResult (WebRequest request, AsyncCallback callback, object asyncState)
-		{
-			_callback = callback; 
-			Request = request;
-			_asyncState = asyncState;
-		}
+        #region Constructors
 
-		#endregion // Constructors
+        internal WebClientAsyncResult(WebRequest request, AsyncCallback callback, object asyncState)
+        {
+            _callback = callback;
+            Request = request;
+            _asyncState = asyncState;
+        }
 
-		#region Properties
+        #endregion // Constructors
 
-		public object AsyncState {
-			get { return _asyncState; }
-		}
+        #region Properties
 
-		public WaitHandle AsyncWaitHandle 
-		{
-			get
-			{
-				lock (this) {
-					if (_waitHandle != null) return _waitHandle;
-					_waitHandle = new ManualResetEvent (_done);
-					return _waitHandle;
-				}
-			}
-		}
+        public object AsyncState
+        {
+            get { return _asyncState; }
+        }
 
-		public bool CompletedSynchronously 
-		{
-			get { return _completedSynchronously; }
-		}
+        public WaitHandle AsyncWaitHandle
+        {
+            get
+            {
+                lock (this)
+                {
+                    if (_waitHandle != null)
+                        return _waitHandle;
+                    _waitHandle = new ManualResetEvent(_done);
+                    return _waitHandle;
+                }
+            }
+        }
 
-		public bool IsCompleted 
-		{
-			get { lock (this) { return _done; } }
-		}
+        public bool CompletedSynchronously
+        {
+            get { return _completedSynchronously; }
+        }
 
-		#endregion // Properties
+        public bool IsCompleted
+        {
+            get
+            {
+                lock (this)
+                {
+                    return _done;
+                }
+            }
+        }
 
-		#region Methods
+        #endregion // Properties
 
-		public void Abort ()
-		{
-			Request.Abort ();
-		}
+        #region Methods
 
-		internal void SetCompleted (object result, Exception exception, bool async)
-		{
-			lock (this)
-			{
-				Exception = exception;
-				Result = result;
-				_done = true;
-				_completedSynchronously = async;
-				if (_waitHandle != null) _waitHandle.Set ();
-				Monitor.PulseAll (this);
-			}
-			if (_callback != null) _callback (this);
-		}
+        public void Abort()
+        {
+            Request.Abort();
+        }
 
-		internal void WaitForComplete ()
-		{
-			lock (this)
-			{
-				if (_done)
-					return;
-				Monitor.Wait (this);
-			}
-		}
+        internal void SetCompleted(object result, Exception exception, bool async)
+        {
+            lock (this)
+            {
+                Exception = exception;
+                Result = result;
+                _done = true;
+                _completedSynchronously = async;
+                if (_waitHandle != null)
+                    _waitHandle.Set();
+                Monitor.PulseAll(this);
+            }
+            if (_callback != null)
+                _callback(this);
+        }
 
-		#endregion // Methods
-	}
+        internal void WaitForComplete()
+        {
+            lock (this)
+            {
+                if (_done)
+                    return;
+                Monitor.Wait(this);
+            }
+        }
+
+        #endregion // Methods
+    }
 }

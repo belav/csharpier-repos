@@ -124,6 +124,7 @@ internal static class OwinConstants
         // 5. Consumption
 
         public const string Stream = "opaque.Stream";
+
         // public const string Version = "opaque.Version"; // redundant, declared above
         public const string CallCancelled = "opaque.CallCancelled";
     }
@@ -155,6 +156,7 @@ internal static class OwinConstants
         public const string SendAsync = "websocket.SendAsync";
         public const string ReceiveAsync = "websocket.ReceiveAsync";
         public const string CloseAsync = "websocket.CloseAsync";
+
         // public const string Version = "websocket.Version"; // redundant, declared above
         public const string CallCancelled = "websocket.CallCancelled";
         public const string ClientCloseStatus = "websocket.ClientCloseStatus";

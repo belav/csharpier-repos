@@ -32,7 +32,11 @@ namespace System.Web.Http.SelfHost
             baseAddress = String.Format("http://localhost/");
 
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{action}", new { controller = "MaxHttpCollectionKeyType" });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{action}",
+                new { controller = "MaxHttpCollectionKeyType" }
+            );
 
             server = new HttpServer(config);
 
@@ -46,10 +50,16 @@ namespace System.Web.Http.SelfHost
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
-            request.RequestUri = new Uri(Path.Combine(baseAddress, "MaxHttpCollectionKeyType/" + actionName));
+            request.RequestUri = new Uri(
+                Path.Combine(baseAddress, "MaxHttpCollectionKeyType/" + actionName)
+            );
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
             request.Method = HttpMethod.Post;
-            request.Content = new StringContent(GenerateHttpCollectionKeyInput(100), UTF8Encoding.UTF8, "application/x-www-form-urlencoded");
+            request.Content = new StringContent(
+                GenerateHttpCollectionKeyInput(100),
+                UTF8Encoding.UTF8,
+                "application/x-www-form-urlencoded"
+            );
             MediaTypeFormatter.MaxHttpCollectionKeys = 99;
 
             // Action
@@ -57,7 +67,8 @@ namespace System.Web.Http.SelfHost
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            string expectedResponseValue = @"The number of keys in a NameValueCollection has exceeded the limit of '99'. You can adjust it by modifying the MaxHttpCollectionKeys property on the 'System.Net.Http.Formatting.MediaTypeFormatter' class.";
+            string expectedResponseValue =
+                @"The number of keys in a NameValueCollection has exceeded the limit of '99'. You can adjust it by modifying the MaxHttpCollectionKeys property on the 'System.Net.Http.Formatting.MediaTypeFormatter' class.";
             Assert.Equal(expectedResponseValue, await response.Content.ReadAsStringAsync());
         }
 
@@ -68,17 +79,26 @@ namespace System.Web.Http.SelfHost
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
-            request.RequestUri = new Uri(Path.Combine(baseAddress, "MaxHttpCollectionKeyType/" + actionName));
+            request.RequestUri = new Uri(
+                Path.Combine(baseAddress, "MaxHttpCollectionKeyType/" + actionName)
+            );
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
             request.Method = HttpMethod.Post;
-            request.Content = new StringContent(GenerateHttpCollectionKeyInput(100), UTF8Encoding.UTF8, "application/x-www-form-urlencoded");
+            request.Content = new StringContent(
+                GenerateHttpCollectionKeyInput(100),
+                UTF8Encoding.UTF8,
+                "application/x-www-form-urlencoded"
+            );
             MediaTypeFormatter.MaxHttpCollectionKeys = 1000;
 
             // Action
             HttpResponseMessage response = await httpClient.SendAsync(request);
 
             // Assert
-            string expectedResponseValue = @"<string xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">success from " + actionName + "</string>";
+            string expectedResponseValue =
+                @"<string xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">success from "
+                + actionName
+                + "</string>";
             Assert.NotNull(response.Content);
             Assert.NotNull(response.Content.Headers.ContentType);
             Assert.Equal("application/xml", response.Content.Headers.ContentType.MediaType);
@@ -92,13 +112,25 @@ namespace System.Web.Http.SelfHost
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
-            request.RequestUri = new Uri(Path.Combine(baseAddress, "MaxHttpCollectionKeyType/" + actionName + "/?" + GenerateHttpCollectionKeyInput(100)));
+            request.RequestUri = new Uri(
+                Path.Combine(
+                    baseAddress,
+                    "MaxHttpCollectionKeyType/"
+                        + actionName
+                        + "/?"
+                        + GenerateHttpCollectionKeyInput(100)
+                )
+            );
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
 
             if (actionName.StartsWith("Post"))
             {
                 request.Method = HttpMethod.Post;
-                request.Content = new StringContent("", UTF8Encoding.UTF8, "application/x-www-form-urlencoded");
+                request.Content = new StringContent(
+                    "",
+                    UTF8Encoding.UTF8,
+                    "application/x-www-form-urlencoded"
+                );
             }
             else
             {
@@ -121,13 +153,25 @@ namespace System.Web.Http.SelfHost
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
-            request.RequestUri = new Uri(Path.Combine(baseAddress, "MaxHttpCollectionKeyType/" + actionName + "/?" + GenerateHttpCollectionKeyInput(100)));
+            request.RequestUri = new Uri(
+                Path.Combine(
+                    baseAddress,
+                    "MaxHttpCollectionKeyType/"
+                        + actionName
+                        + "/?"
+                        + GenerateHttpCollectionKeyInput(100)
+                )
+            );
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
 
             if (actionName.StartsWith("Post"))
             {
                 request.Method = HttpMethod.Post;
-                request.Content = new StringContent("", UTF8Encoding.UTF8, "application/x-www-form-urlencoded");
+                request.Content = new StringContent(
+                    "",
+                    UTF8Encoding.UTF8,
+                    "application/x-www-form-urlencoded"
+                );
             }
             else
             {
@@ -201,7 +245,7 @@ namespace System.Web.Http.SelfHost
             return "success from PostFormData";
         }
 
-        public string PostCustomerFromUri([FromUri]Customer a)
+        public string PostCustomerFromUri([FromUri] Customer a)
         {
             if (!ModelState.IsValid)
             {

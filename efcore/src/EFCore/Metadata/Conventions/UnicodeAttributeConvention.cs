@@ -16,15 +16,13 @@ public class UnicodeAttributeConvention : PropertyAttributeConventionBase<Unicod
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public UnicodeAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <inheritdoc />
     protected override void ProcessPropertyAdded(
         IConventionPropertyBuilder propertyBuilder,
         UnicodeAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
-        => propertyBuilder.IsUnicode(attribute.IsUnicode, fromDataAnnotation: true);
+        IConventionContext context
+    ) => propertyBuilder.IsUnicode(attribute.IsUnicode, fromDataAnnotation: true);
 }

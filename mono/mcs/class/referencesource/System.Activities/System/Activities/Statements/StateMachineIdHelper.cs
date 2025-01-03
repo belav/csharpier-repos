@@ -29,7 +29,10 @@ namespace System.Activities.Statements
         /// <returns>Index position of the state in the state machine.</returns>
         public static int GetChildStateIndex(string stateId, string descendantId)
         {
-            Fx.Assert(!string.IsNullOrEmpty(descendantId), "descendantId should not be null or empty.");
+            Fx.Assert(
+                !string.IsNullOrEmpty(descendantId),
+                "descendantId should not be null or empty."
+            );
             Fx.Assert(!string.IsNullOrEmpty(stateId), "stateId should not be null or empty.");
             string[] child = descendantId.Split(StateIdSeparator);
             string[] parent = stateId.Split(StateIdSeparator);
@@ -56,7 +59,9 @@ namespace System.Activities.Statements
         /// <returns>Unique identifier of a transition within a state.</returns>
         public static string GenerateTransitionId(string stateid, int transitionIndex)
         {
-            return stateid + StateIdSeparator + transitionIndex.ToString(CultureInfo.InvariantCulture);
+            return stateid
+                + StateIdSeparator
+                + transitionIndex.ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>

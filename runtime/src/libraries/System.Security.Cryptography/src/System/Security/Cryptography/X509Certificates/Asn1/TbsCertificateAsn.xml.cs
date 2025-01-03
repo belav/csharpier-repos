@@ -51,11 +51,13 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
         {
             writer.PushSequence(tag);
 
-
             // DEFAULT value handler for Version.
             {
                 const int AsnManagedIntegerDerMaxEncodeSize = 6;
-                AsnWriter tmp = new AsnWriter(AsnEncodingRules.DER, initialCapacity: AsnManagedIntegerDerMaxEncodeSize);
+                AsnWriter tmp = new AsnWriter(
+                    AsnEncodingRules.DER,
+                    initialCapacity: AsnManagedIntegerDerMaxEncodeSize
+                );
                 tmp.WriteInteger(Version);
 
                 if (!tmp.EncodedValueEquals(DefaultVersion))
@@ -70,8 +72,10 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             SignatureAlgorithm.Encode(writer);
             // Validator for tag constraint for Issuer
             {
-                if (!Asn1Tag.TryDecode(Issuer.Span, out Asn1Tag validateTag, out _) ||
-                    !validateTag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16)))
+                if (
+                    !Asn1Tag.TryDecode(Issuer.Span, out Asn1Tag validateTag, out _)
+                    || !validateTag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16))
+                )
                 {
                     throw new CryptographicException();
                 }
@@ -88,8 +92,10 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             Validity.Encode(writer);
             // Validator for tag constraint for Subject
             {
-                if (!Asn1Tag.TryDecode(Subject.Span, out Asn1Tag validateTag, out _) ||
-                    !validateTag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16)))
+                if (
+                    !Asn1Tag.TryDecode(Subject.Span, out Asn1Tag validateTag, out _)
+                    || !validateTag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16))
+                )
                 {
                     throw new CryptographicException();
                 }
@@ -107,15 +113,21 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
             if (IssuerUniqueId.HasValue)
             {
-                writer.WriteBitString(IssuerUniqueId.Value.Span, 0, new Asn1Tag(TagClass.ContextSpecific, 1));
+                writer.WriteBitString(
+                    IssuerUniqueId.Value.Span,
+                    0,
+                    new Asn1Tag(TagClass.ContextSpecific, 1)
+                );
             }
-
 
             if (SubjectUniqueId.HasValue)
             {
-                writer.WriteBitString(SubjectUniqueId.Value.Span, 0, new Asn1Tag(TagClass.ContextSpecific, 2));
+                writer.WriteBitString(
+                    SubjectUniqueId.Value.Span,
+                    0,
+                    new Asn1Tag(TagClass.ContextSpecific, 2)
+                );
             }
-
 
             if (Extensions != null)
             {
@@ -134,12 +146,19 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             writer.PopSequence(tag);
         }
 
-        internal static TbsCertificateAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static TbsCertificateAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static TbsCertificateAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static TbsCertificateAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -155,12 +174,21 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out TbsCertificateAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out TbsCertificateAsn decoded
+        )
         {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out TbsCertificateAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out TbsCertificateAsn decoded
+        )
         {
             try
             {
@@ -172,7 +200,12 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out TbsCertificateAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out TbsCertificateAsn decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
@@ -183,10 +216,16 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             int offset;
             ReadOnlySpan<byte> tmpSpan;
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0)))
+            if (
+                sequenceReader.HasData
+                && sequenceReader
+                    .PeekTag()
+                    .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0))
+            )
             {
-                explicitReader = sequenceReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 0));
+                explicitReader = sequenceReader.ReadSequence(
+                    new Asn1Tag(TagClass.ContextSpecific, 0)
+                );
 
                 if (!explicitReader.TryReadInt32(out decoded.Version))
                 {
@@ -203,62 +242,111 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                 {
                     defaultReader.ThrowIfNotEmpty();
                 }
-
             }
 
             tmpSpan = sequenceReader.ReadIntegerBytes();
-            decoded.SerialNumber = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
-            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(ref sequenceReader, rebind, out decoded.SignatureAlgorithm);
+            decoded.SerialNumber = rebindSpan.Overlaps(tmpSpan, out offset)
+                ? rebind.Slice(offset, tmpSpan.Length)
+                : tmpSpan.ToArray();
+            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.SignatureAlgorithm
+            );
             if (!sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16)))
             {
                 throw new CryptographicException();
             }
 
             tmpSpan = sequenceReader.ReadEncodedValue();
-            decoded.Issuer = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
-            System.Security.Cryptography.X509Certificates.Asn1.ValidityAsn.Decode(ref sequenceReader, out decoded.Validity);
+            decoded.Issuer = rebindSpan.Overlaps(tmpSpan, out offset)
+                ? rebind.Slice(offset, tmpSpan.Length)
+                : tmpSpan.ToArray();
+            System.Security.Cryptography.X509Certificates.Asn1.ValidityAsn.Decode(
+                ref sequenceReader,
+                out decoded.Validity
+            );
             if (!sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16)))
             {
                 throw new CryptographicException();
             }
 
             tmpSpan = sequenceReader.ReadEncodedValue();
-            decoded.Subject = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
-            System.Security.Cryptography.Asn1.SubjectPublicKeyInfoAsn.Decode(ref sequenceReader, rebind, out decoded.SubjectPublicKeyInfo);
+            decoded.Subject = rebindSpan.Overlaps(tmpSpan, out offset)
+                ? rebind.Slice(offset, tmpSpan.Length)
+                : tmpSpan.ToArray();
+            System.Security.Cryptography.Asn1.SubjectPublicKeyInfoAsn.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.SubjectPublicKeyInfo
+            );
 
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1)))
+            if (
+                sequenceReader.HasData
+                && sequenceReader
+                    .PeekTag()
+                    .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1))
+            )
             {
-
-                if (sequenceReader.TryReadPrimitiveBitString(out _, out tmpSpan, new Asn1Tag(TagClass.ContextSpecific, 1)))
+                if (
+                    sequenceReader.TryReadPrimitiveBitString(
+                        out _,
+                        out tmpSpan,
+                        new Asn1Tag(TagClass.ContextSpecific, 1)
+                    )
+                )
                 {
-                    decoded.IssuerUniqueId = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                    decoded.IssuerUniqueId = rebindSpan.Overlaps(tmpSpan, out offset)
+                        ? rebind.Slice(offset, tmpSpan.Length)
+                        : tmpSpan.ToArray();
                 }
                 else
                 {
-                    decoded.IssuerUniqueId = sequenceReader.ReadBitString(out _, new Asn1Tag(TagClass.ContextSpecific, 1));
+                    decoded.IssuerUniqueId = sequenceReader.ReadBitString(
+                        out _,
+                        new Asn1Tag(TagClass.ContextSpecific, 1)
+                    );
                 }
-
             }
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 2)))
+            if (
+                sequenceReader.HasData
+                && sequenceReader
+                    .PeekTag()
+                    .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 2))
+            )
             {
-
-                if (sequenceReader.TryReadPrimitiveBitString(out _, out tmpSpan, new Asn1Tag(TagClass.ContextSpecific, 2)))
+                if (
+                    sequenceReader.TryReadPrimitiveBitString(
+                        out _,
+                        out tmpSpan,
+                        new Asn1Tag(TagClass.ContextSpecific, 2)
+                    )
+                )
                 {
-                    decoded.SubjectUniqueId = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                    decoded.SubjectUniqueId = rebindSpan.Overlaps(tmpSpan, out offset)
+                        ? rebind.Slice(offset, tmpSpan.Length)
+                        : tmpSpan.ToArray();
                 }
                 else
                 {
-                    decoded.SubjectUniqueId = sequenceReader.ReadBitString(out _, new Asn1Tag(TagClass.ContextSpecific, 2));
+                    decoded.SubjectUniqueId = sequenceReader.ReadBitString(
+                        out _,
+                        new Asn1Tag(TagClass.ContextSpecific, 2)
+                    );
                 }
-
             }
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 3)))
+            if (
+                sequenceReader.HasData
+                && sequenceReader
+                    .PeekTag()
+                    .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 3))
+            )
             {
-                explicitReader = sequenceReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 3));
+                explicitReader = sequenceReader.ReadSequence(
+                    new Asn1Tag(TagClass.ContextSpecific, 3)
+                );
 
                 // Decode SEQUENCE OF for Extensions
                 {
@@ -268,7 +356,11 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System.Security.Cryptography.Asn1.X509ExtensionAsn.Decode(ref collectionReader, rebind, out tmpItem);
+                        System.Security.Cryptography.Asn1.X509ExtensionAsn.Decode(
+                            ref collectionReader,
+                            rebind,
+                            out tmpItem
+                        );
                         tmpList.Add(tmpItem);
                     }
 
@@ -277,7 +369,6 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
                 explicitReader.ThrowIfNotEmpty();
             }
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

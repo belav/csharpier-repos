@@ -74,14 +74,30 @@ internal sealed class Utf8BufferTextReader : TextReader
         var charsUsed = 0;
 #if NETCOREAPP
         var destination = new Span<char>(buffer, index, count);
-        _decoder.Convert(source, destination, false, out bytesUsed, out charsUsed, out var completed);
+        _decoder.Convert(
+            source,
+            destination,
+            false,
+            out bytesUsed,
+            out charsUsed,
+            out var completed
+        );
 #else
         unsafe
         {
             fixed (char* destinationChars = &buffer[index])
             fixed (byte* sourceBytes = &MemoryMarshal.GetReference(source))
             {
-                _decoder.Convert(sourceBytes, source.Length, destinationChars, count, false, out bytesUsed, out charsUsed, out var completed);
+                _decoder.Convert(
+                    sourceBytes,
+                    source.Length,
+                    destinationChars,
+                    count,
+                    false,
+                    out bytesUsed,
+                    out charsUsed,
+                    out var completed
+                );
             }
         }
 #endif

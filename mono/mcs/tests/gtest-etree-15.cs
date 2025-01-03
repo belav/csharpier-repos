@@ -1,17 +1,17 @@
 using System;
-using System.Linq.Expressions;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
-static public class Foo
+public static class Foo
 {
-	static public int Helper (Expression<Predicate<int>> match)
-	{
-		return 0;
-	}
+    public static int Helper(Expression<Predicate<int>> match)
+    {
+        return 0;
+    }
 
-	static public void Main ()
-	{
-		Expression<Action<List<int>>> exp = x => x.Add (Helper (i => true));
-		exp.Compile () (new List<int> { 1 });
-	}
+    public static void Main()
+    {
+        Expression<Action<List<int>>> exp = x => x.Add(Helper(i => true));
+        exp.Compile()(new List<int> { 1 });
+    }
 }

@@ -31,7 +31,11 @@ namespace System.Security.Cryptography
             return state.HasElement(name);
         }
 
-        internal static byte[]? ReadCryptoBinary(ref ParseState state, string name, int sizeHint = -1)
+        internal static byte[]? ReadCryptoBinary(
+            ref ParseState state,
+            string name,
+            int sizeHint = -1
+        )
         {
             string? value = state.GetValue(name);
 
@@ -119,7 +123,11 @@ namespace System.Security.Cryptography
             WriteCryptoBinary(name, valBuf.Slice(start), builder);
         }
 
-        internal static void WriteCryptoBinary(string name, ReadOnlySpan<byte> value, StringBuilder builder)
+        internal static void WriteCryptoBinary(
+            string name,
+            ReadOnlySpan<byte> value,
+            StringBuilder builder
+        )
         {
             Debug.Assert(name.Length > 0);
             Debug.Assert(value.Length > 0);
@@ -143,9 +151,17 @@ namespace System.Security.Cryptography
             {
                 int localLength = Math.Min(ByteLimit, length);
 
-                if (!Convert.TryToBase64Chars(value.Slice(offset, localLength), base64, out int written))
+                if (
+                    !Convert.TryToBase64Chars(
+                        value.Slice(offset, localLength),
+                        base64,
+                        out int written
+                    )
+                )
                 {
-                    Debug.Fail($"Convert.TryToBase64Chars failed with {localLength} bytes to {StackChars} chars");
+                    Debug.Fail(
+                        $"Convert.TryToBase64Chars failed with {localLength} bytes to {StackChars} chars"
+                    );
                     throw new CryptographicException();
                 }
 
@@ -258,7 +274,8 @@ namespace System.Security.Cryptography
 
             private static class Functions
             {
-                private const string XmlLinqAssemblyString = ", System.Private.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51";
+                private const string XmlLinqAssemblyString =
+                    ", System.Private.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51";
 
                 private static readonly Func<string, object> s_xDocumentCreate;
                 private static readonly PropertyInfo s_docRootProperty;
@@ -270,25 +287,32 @@ namespace System.Security.Cryptography
 #pragma warning disable CA1810 // explicit static cctor
                 static Functions()
                 {
-                    Type xDocument = Type.GetType("System.Xml.Linq.XDocument" + XmlLinqAssemblyString)!;
-                    s_xDocumentCreate = xDocument.GetMethod(
-                        "Parse",
-                        BindingFlags.Static | BindingFlags.Public,
-                        new[] { typeof(string) })!
-                            .CreateDelegate<Func<string, object>>();
+                    Type xDocument = Type.GetType(
+                        "System.Xml.Linq.XDocument" + XmlLinqAssemblyString
+                    )!;
+                    s_xDocumentCreate = xDocument
+                        .GetMethod(
+                            "Parse",
+                            BindingFlags.Static | BindingFlags.Public,
+                            new[] { typeof(string) }
+                        )!
+                        .CreateDelegate<Func<string, object>>();
 
                     s_docRootProperty = xDocument.GetProperty("Root")!;
 
-                    Type xElement = Type.GetType("System.Xml.Linq.XElement" + XmlLinqAssemblyString)!;
+                    Type xElement = Type.GetType(
+                        "System.Xml.Linq.XElement" + XmlLinqAssemblyString
+                    )!;
                     s_getElementsMethod = xElement.GetMethod(
                         "Elements",
                         BindingFlags.Instance | BindingFlags.Public,
-                        Type.EmptyTypes)!;
+                        Type.EmptyTypes
+                    )!;
 
                     s_elementNameProperty = xElement.GetProperty("Name")!;
                     s_elementValueProperty = xElement.GetProperty("Value")!;
 
-                    Type xName= Type.GetType("System.Xml.Linq.XName" + XmlLinqAssemblyString)!;
+                    Type xName = Type.GetType("System.Xml.Linq.XName" + XmlLinqAssemblyString)!;
                     s_nameNameProperty = xName.GetProperty("LocalName")!;
                 }
 #pragma warning restore CA1810

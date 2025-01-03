@@ -41,14 +41,8 @@ namespace System.Runtime
 
         public TValue this[TKey key]
         {
-            get
-            {
-                return this.dictionary[key];
-            }
-            set
-            {
-                throw Fx.Exception.AsError(CreateReadOnlyException());
-            }
+            get { return this.dictionary[key]; }
+            set { throw Fx.Exception.AsError(CreateReadOnlyException()); }
         }
 
         public static IDictionary<TKey, TValue> Create(IDictionary<TKey, TValue> dictionary)
@@ -87,6 +81,7 @@ namespace System.Runtime
         {
             return this.dictionary.Contains(item);
         }
+
         public bool ContainsKey(TKey key)
         {
             return this.dictionary.ContainsKey(key);

@@ -21,10 +21,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public override string ContractName
         {
-            get
-            {
-                return CompositionConstants.PartCreatorContractName;
-            }
+            get { return CompositionConstants.PartCreatorContractName; }
         }
 
         public override IDictionary<string, object> Metadata
@@ -34,8 +31,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 if (this._metadata == null)
                 {
                     var metadata = new Dictionary<string, object>(this._productDefinition.Metadata);
-                    metadata[CompositionConstants.ExportTypeIdentityMetadataName] = CompositionConstants.PartCreatorTypeIdentity;
-                    metadata[CompositionConstants.ProductDefinitionMetadataName] = this._productDefinition;
+                    metadata[CompositionConstants.ExportTypeIdentityMetadataName] =
+                        CompositionConstants.PartCreatorTypeIdentity;
+                    metadata[CompositionConstants.ProductDefinitionMetadataName] =
+                        this._productDefinition;
 
                     this._metadata = metadata.AsReadOnly();
                 }
@@ -43,10 +42,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
             }
         }
 
-        internal static bool IsProductConstraintSatisfiedBy(ImportDefinition productImportDefinition, ExportDefinition exportDefinition)
+        internal static bool IsProductConstraintSatisfiedBy(
+            ImportDefinition productImportDefinition,
+            ExportDefinition exportDefinition
+        )
         {
             object productValue = null;
-            if (exportDefinition.Metadata.TryGetValue(CompositionConstants.ProductDefinitionMetadataName, out productValue))
+            if (
+                exportDefinition.Metadata.TryGetValue(
+                    CompositionConstants.ProductDefinitionMetadataName,
+                    out productValue
+                )
+            )
             {
                 ExportDefinition productDefinition = productValue as ExportDefinition;
 

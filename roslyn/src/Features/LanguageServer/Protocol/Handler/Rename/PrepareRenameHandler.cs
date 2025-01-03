@@ -17,23 +17,34 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 [Method(LSP.Methods.TextDocumentPrepareRenameName)]
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-internal class PrepareRenameHandler() : ILspServiceDocumentRequestHandler<LSP.PrepareRenameParams, LSP.Range?>
+internal class PrepareRenameHandler()
+    : ILspServiceDocumentRequestHandler<LSP.PrepareRenameParams, LSP.Range?>
 {
     public bool MutatesSolutionState => false;
     public bool RequiresLSPSolution => true;
 
-    public LSP.TextDocumentIdentifier GetTextDocumentIdentifier(LSP.PrepareRenameParams request)
-        => request.TextDocument;
+    public LSP.TextDocumentIdentifier GetTextDocumentIdentifier(LSP.PrepareRenameParams request) =>
+        request.TextDocument;
 
-    public async Task<LSP.Range?> HandleRequestAsync(LSP.PrepareRenameParams request, RequestContext context, CancellationToken cancellationToken)
+    public async Task<LSP.Range?> HandleRequestAsync(
+        LSP.PrepareRenameParams request,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         var document = context.Document;
         Contract.ThrowIfNull(document);
 
-        var position = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(request.Position), cancellationToken).ConfigureAwait(false);
+        var position = await document
+            .GetPositionFromLinePositionAsync(
+                ProtocolConversions.PositionToLinePosition(request.Position),
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
-        var symbolicRenameInfo = await SymbolicRenameInfo.GetRenameInfoAsync(
-            document, position, cancellationToken).ConfigureAwait(false);
+        var symbolicRenameInfo = await SymbolicRenameInfo
+            .GetRenameInfoAsync(document, position, cancellationToken)
+            .ConfigureAwait(false);
         if (symbolicRenameInfo.IsError)
             return null;
 

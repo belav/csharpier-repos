@@ -6,9 +6,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 public class AppendSelectConstantExpressionMutator : ExpressionMutator
 {
     public AppendSelectConstantExpressionMutator(DbContext context)
-        : base(context)
-    {
-    }
+        : base(context) { }
 
     private readonly List<(Type type, Expression expression)> _expressions = new()
     {
@@ -16,11 +14,10 @@ public class AppendSelectConstantExpressionMutator : ExpressionMutator
         (type: typeof(int?), expression: Expression.Constant(7, typeof(int?))),
         (type: typeof(int?), expression: Expression.Constant(null, typeof(int?))),
         (type: typeof(string), expression: Expression.Constant("Foo", typeof(string))),
-        (type: typeof(string), expression: Expression.Constant(null, typeof(string)))
+        (type: typeof(string), expression: Expression.Constant(null, typeof(string))),
     };
 
-    public override bool IsValid(Expression expression)
-        => IsQueryableResult(expression);
+    public override bool IsValid(Expression expression) => IsQueryableResult(expression);
 
     public override Expression Apply(Expression expression, Random random)
     {
@@ -28,7 +25,10 @@ public class AppendSelectConstantExpressionMutator : ExpressionMutator
 
         var typeArgument = expression.Type.GetGenericArguments()[0];
         var select = QueryableMethods.Select.MakeGenericMethod(typeArgument, _expressions[i].type);
-        var lambda = Expression.Lambda(_expressions[i].expression, Expression.Parameter(typeArgument, "prm"));
+        var lambda = Expression.Lambda(
+            _expressions[i].expression,
+            Expression.Parameter(typeArgument, "prm")
+        );
         var resultExpression = Expression.Call(select, expression, lambda);
 
         return resultExpression;

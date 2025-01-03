@@ -27,7 +27,9 @@ internal sealed class ConfigureContainerBuilder
         if (parameters.Length != 1)
         {
             // REVIEW: This might be a breaking change
-            throw new InvalidOperationException($"The {MethodInfo.Name} method must take only one parameter.");
+            throw new InvalidOperationException(
+                $"The {MethodInfo.Name} method must take only one parameter."
+            );
         }
         return parameters[0].ParameterType;
     }
@@ -36,7 +38,8 @@ internal sealed class ConfigureContainerBuilder
     {
         ConfigureContainerFilters(StartupConfigureContainer)(container);
 
-        void StartupConfigureContainer(object containerBuilder) => InvokeCore(instance, containerBuilder);
+        void StartupConfigureContainer(object containerBuilder) =>
+            InvokeCore(instance, containerBuilder);
     }
 
     private void InvokeCore(object instance, object container)

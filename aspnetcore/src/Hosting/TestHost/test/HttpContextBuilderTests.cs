@@ -47,7 +47,8 @@ public class HttpContextBuilderTests
     [Fact]
     public async Task UserAgentHeaderWorks()
     {
-        var userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0";
+        var userAgent =
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0";
         var builder = new WebHostBuilder().Configure(app => { });
         var server = new TestServer(builder);
         server.BaseAddress = new Uri("https://example.com/");
@@ -295,7 +296,9 @@ public class HttpContextBuilderTests
         Assert.Equal("TestValue", context.Response.Headers["TestHeader"]);
         Assert.Equal(11, context.Response.Body.Read(new byte[100], 0, 100));
         block.SetResult();
-        var ex = Assert.Throws<IOException>(() => context.Response.Body.Read(new byte[100], 0, 100));
+        var ex = Assert.Throws<IOException>(
+            () => context.Response.Body.Read(new byte[100], 0, 100)
+        );
         Assert.IsAssignableFrom<InvalidOperationException>(ex.InnerException);
     }
 
@@ -325,20 +328,23 @@ public class HttpContextBuilderTests
     [Fact]
     public async Task CallingAbortInsideHandlerShouldSetRequestAborted()
     {
-        var requestAborted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var builder = new WebHostBuilder()
-            .Configure(app =>
+        var requestAborted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(context =>
             {
-                app.Run(context =>
-                {
-                    context.RequestAborted.Register(() => requestAborted.SetResult());
-                    context.Abort();
-                    return Task.CompletedTask;
-                });
+                context.RequestAborted.Register(() => requestAborted.SetResult());
+                context.Abort();
+                return Task.CompletedTask;
             });
+        });
         var server = new TestServer(builder);
 
-        var ex = await Assert.ThrowsAsync<OperationCanceledException>(() => server.SendAsync(c => { }));
+        var ex = await Assert.ThrowsAsync<OperationCanceledException>(
+            () => server.SendAsync(c => { })
+        );
         Assert.Equal("The application aborted the request.", ex.Message);
         await requestAborted.Task.DefaultTimeout();
     }
@@ -350,13 +356,17 @@ public class HttpContextBuilderTests
         public bool IsEnabled(LogLevel logLevel) => true;
 
         // This call verifies that fields of HttpRequest are accessed and valid
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter) => formatter(state, exception);
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        ) => formatter(state, exception);
 
         class NoopDispoasble : IDisposable
         {
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

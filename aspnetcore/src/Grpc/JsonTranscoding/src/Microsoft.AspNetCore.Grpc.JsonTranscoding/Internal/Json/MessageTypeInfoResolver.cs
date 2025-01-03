@@ -42,7 +42,12 @@ internal sealed class MessageTypeInfoResolver : IJsonTypeInfoResolver
 
         foreach (var field in fields)
         {
-            var propertyInfo = CreatePropertyInfo(typeInfo, field.JsonName, field, isSerializable: true);
+            var propertyInfo = CreatePropertyInfo(
+                typeInfo,
+                field.JsonName,
+                field,
+                isSerializable: true
+            );
             typeInfo.Properties.Add(propertyInfo);
 
             // We have a property for reading and writing the JSON name so remove from mappings.
@@ -54,14 +59,22 @@ internal sealed class MessageTypeInfoResolver : IJsonTypeInfoResolver
         // Remaining mappings are for extra setter only properties.
         foreach (var mapping in mappings)
         {
-            var propertyInfo = CreatePropertyInfo(typeInfo, mapping.Key, mapping.Value, isSerializable: false);
+            var propertyInfo = CreatePropertyInfo(
+                typeInfo,
+                mapping.Key,
+                mapping.Value,
+                isSerializable: false
+            );
             typeInfo.Properties.Add(propertyInfo);
         }
 
         return typeInfo;
     }
 
-    private bool IsStandardMessage(Type type, [NotNullWhen(true)] out MessageDescriptor? messageDescriptor)
+    private bool IsStandardMessage(
+        Type type,
+        [NotNullWhen(true)] out MessageDescriptor? messageDescriptor
+    )
     {
         if (type.IsInterface || !typeof(IMessage).IsAssignableFrom(type))
         {
@@ -69,10 +82,13 @@ internal sealed class MessageTypeInfoResolver : IJsonTypeInfoResolver
             return false;
         }
 
-        messageDescriptor = (MessageDescriptor?) _context.DescriptorRegistry.FindDescriptorByType(type);
+        messageDescriptor = (MessageDescriptor?)
+            _context.DescriptorRegistry.FindDescriptorByType(type);
         if (messageDescriptor == null)
         {
-            throw new InvalidOperationException("Couldn't resolve descriptor for message type: " + type);
+            throw new InvalidOperationException(
+                "Couldn't resolve descriptor for message type: " + type
+            );
         }
 
         // Wrappers and well known types are handled by converters.
@@ -88,11 +104,17 @@ internal sealed class MessageTypeInfoResolver : IJsonTypeInfoResolver
         return true;
     }
 
-    private JsonPropertyInfo CreatePropertyInfo(JsonTypeInfo typeInfo, string name, FieldDescriptor field, bool isSerializable)
+    private JsonPropertyInfo CreatePropertyInfo(
+        JsonTypeInfo typeInfo,
+        string name,
+        FieldDescriptor field,
+        bool isSerializable
+    )
     {
         var propertyInfo = typeInfo.CreateJsonPropertyInfo(
             JsonConverterHelper.GetFieldType(field),
-            name);
+            name
+        );
 
         propertyInfo.ShouldSerialize = (o, v) =>
         {
@@ -101,7 +123,12 @@ internal sealed class MessageTypeInfoResolver : IJsonTypeInfoResolver
             {
                 return false;
             }
-            return JsonConverterHelper.ShouldFormatFieldValue((IMessage)o, field, v, !_context.Settings.IgnoreDefaultValues);
+            return JsonConverterHelper.ShouldFormatFieldValue(
+                (IMessage)o,
+                field,
+                v,
+                !_context.Settings.IgnoreDefaultValues
+            );
         };
         propertyInfo.Get = (o) =>
         {
@@ -129,10 +156,14 @@ internal sealed class MessageTypeInfoResolver : IJsonTypeInfoResolver
         {
             return (o, v) =>
             {
-                var caseField = field.RealContainingOneof.Accessor.GetCaseFieldDescriptor((IMessage)o);
+                var caseField = field.RealContainingOneof.Accessor.GetCaseFieldDescriptor(
+                    (IMessage)o
+                );
                 if (caseField != null)
                 {
-                    throw new InvalidOperationException($"Multiple values specified for oneof {field.RealContainingOneof.Name}.");
+                    throw new InvalidOperationException(
+                        $"Multiple values specified for oneof {field.RealContainingOneof.Name}."
+                    );
                 }
 
                 SetFieldValue(field, (IMessage)o, v);
@@ -157,7 +188,9 @@ internal sealed class MessageTypeInfoResolver : IJsonTypeInfoResolver
         }
     }
 
-    private static Dictionary<string, FieldDescriptor> CreateJsonFieldMap(IList<FieldDescriptor> fields)
+    private static Dictionary<string, FieldDescriptor> CreateJsonFieldMap(
+        IList<FieldDescriptor> fields
+    )
     {
         var map = new Dictionary<string, FieldDescriptor>();
         // The ordering is important here: JsonName takes priority over Name,

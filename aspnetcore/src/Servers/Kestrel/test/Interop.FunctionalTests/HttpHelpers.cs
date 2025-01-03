@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -35,14 +35,20 @@ internal static class HttpHelpers
         throw new Exception($"Couldn't find {nameof(HttpProtocolException)}. Original error: {ex}");
     }
 
-    public static HttpMessageInvoker CreateClient(TimeSpan? idleTimeout = null, TimeSpan? expect100ContinueTimeout = null, bool includeClientCert = false)
+    public static HttpMessageInvoker CreateClient(
+        TimeSpan? idleTimeout = null,
+        TimeSpan? expect100ContinueTimeout = null,
+        bool includeClientCert = false
+    )
     {
         var handler = new SocketsHttpHandler();
         handler.SslOptions = new System.Net.Security.SslClientAuthenticationOptions
         {
             RemoteCertificateValidationCallback = (_, __, ___, ____) => true,
             TargetHost = "targethost",
-            ClientCertificates = !includeClientCert ? null : new X509CertificateCollection() { TestResources.GetTestCertificate() },
+            ClientCertificates = !includeClientCert
+                ? null
+                : new X509CertificateCollection() { TestResources.GetTestCertificate() },
         };
 
         if (expect100ContinueTimeout != null)
@@ -58,7 +64,13 @@ internal static class HttpHelpers
         return new HttpMessageInvoker(handler);
     }
 
-    public static IHostBuilder CreateHostBuilder(Action<IServiceCollection> configureServices, RequestDelegate requestDelegate, HttpProtocols? protocol = null, Action<KestrelServerOptions> configureKestrel = null, bool? plaintext = null)
+    public static IHostBuilder CreateHostBuilder(
+        Action<IServiceCollection> configureServices,
+        RequestDelegate requestDelegate,
+        HttpProtocols? protocol = null,
+        Action<KestrelServerOptions> configureKestrel = null,
+        bool? plaintext = null
+    )
     {
         return new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
@@ -68,14 +80,18 @@ internal static class HttpHelpers
                     {
                         if (configureKestrel == null)
                         {
-                            o.Listen(IPAddress.Parse("127.0.0.1"), 0, listenOptions =>
-                            {
-                                listenOptions.Protocols = protocol ?? HttpProtocols.Http3;
-                                if (!(plaintext ?? false))
+                            o.Listen(
+                                IPAddress.Parse("127.0.0.1"),
+                                0,
+                                listenOptions =>
                                 {
-                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                    listenOptions.Protocols = protocol ?? HttpProtocols.Http3;
+                                    if (!(plaintext ?? false))
+                                    {
+                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                    }
                                 }
-                            });
+                            );
                         }
                         else
                         {

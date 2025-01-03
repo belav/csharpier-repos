@@ -12,16 +12,20 @@ namespace System.Composition.Hosting.Core
     {
         private readonly IDictionary<CompositionContract, ExportDescriptor[]> _partDefinitions;
         private readonly ExportDescriptorProvider[] _exportDescriptorProviders;
-        private readonly Dictionary<CompositionContract, UpdateResult> _updateResults = new Dictionary<CompositionContract, UpdateResult>();
+        private readonly Dictionary<CompositionContract, UpdateResult> _updateResults =
+            new Dictionary<CompositionContract, UpdateResult>();
 
-        private static readonly CompositionDependency[] s_noDependenciesValue = Array.Empty<CompositionDependency>();
-        private static readonly Func<CompositionDependency[]> s_noDependencies = () => s_noDependenciesValue;
+        private static readonly CompositionDependency[] s_noDependenciesValue =
+            Array.Empty<CompositionDependency>();
+        private static readonly Func<CompositionDependency[]> s_noDependencies = () =>
+            s_noDependenciesValue;
 
         private bool _updateFinished;
 
         public ExportDescriptorRegistryUpdate(
             IDictionary<CompositionContract, ExportDescriptor[]> partDefinitions,
-            ExportDescriptorProvider[] exportDescriptorProviders)
+            ExportDescriptorProvider[] exportDescriptorProviders
+        )
         {
             _partDefinitions = partDefinitions;
             _exportDescriptorProviders = exportDescriptorProviders;
@@ -31,7 +35,8 @@ namespace System.Composition.Hosting.Core
         {
             // Opportunism - we'll miss recursive calls to Execute(), but this will catch some problems
             // and the _updateFinished flag is required for other purposes anyway.
-            if (_updateFinished) throw new InvalidOperationException(SR.Update_already_executed);
+            if (_updateFinished)
+                throw new InvalidOperationException(SR.Update_already_executed);
 
             CompositionDependency initial;
             if (TryResolveOptionalDependency("initial request", contract, true, out initial))
@@ -46,12 +51,19 @@ namespace System.Composition.Hosting.Core
             foreach (var result in _updateResults)
             {
                 var resultContract = result.Key;
-                var descriptors = result.Value.GetResults().Select(cb => cb.GetDescriptor()).ToArray();
+                var descriptors = result
+                    .Value.GetResults()
+                    .Select(cb => cb.GetDescriptor())
+                    .ToArray();
                 _partDefinitions.Add(resultContract, descriptors);
             }
         }
 
-        private void CheckTarget(CompositionDependency dependency, HashSet<ExportDescriptorPromise> @checked, Stack<CompositionDependency> checking)
+        private void CheckTarget(
+            CompositionDependency dependency,
+            HashSet<ExportDescriptorPromise> @checked,
+            Stack<CompositionDependency> checking
+        )
         {
             if (dependency.IsError)
             {
@@ -76,7 +88,11 @@ namespace System.Composition.Hosting.Core
             checking.Pop();
         }
 
-        private void CheckDependency(CompositionDependency dependency, HashSet<ExportDescriptorPromise> @checked, Stack<CompositionDependency> checking)
+        private void CheckDependency(
+            CompositionDependency dependency,
+            HashSet<ExportDescriptorPromise> @checked,
+            Stack<CompositionDependency> checking
+        )
         {
             if (@checked.Contains(dependency.Target))
             {
@@ -94,7 +110,10 @@ namespace System.Composition.Hosting.Core
                     if (step.Target.Equals(dependency.Target))
                     {
                         var message = new StringBuilder();
-                        message.AppendFormat(SR.ExportDescriptor_UnsupportedCycle, dependency.Target.Origin);
+                        message.AppendFormat(
+                            SR.ExportDescriptor_UnsupportedCycle,
+                            dependency.Target.Origin
+                        );
                         message.AppendLine();
                         message.Append(DescribeCompositionStack(dependency, checking));
 
@@ -111,7 +130,10 @@ namespace System.Composition.Hosting.Core
             CheckTarget(dependency, @checked, checking);
         }
 
-        private static StringBuilder DescribeCompositionStack(CompositionDependency import, Stack<CompositionDependency> dependencies)
+        private static StringBuilder DescribeCompositionStack(
+            CompositionDependency import,
+            Stack<CompositionDependency> dependencies
+        )
         {
             var result = new StringBuilder();
             if (dependencies.Count == 0 || dependencies.Peek() == null)
@@ -121,7 +143,11 @@ namespace System.Composition.Hosting.Core
 
             foreach (CompositionDependency step in dependencies)
             {
-                result.AppendFormat(SR.ExportDescriptor_DependencyErrorLine, import.Site, step.Target.Origin);
+                result.AppendFormat(
+                    SR.ExportDescriptor_DependencyErrorLine,
+                    import.Site,
+                    step.Target.Origin
+                );
                 result.AppendLine();
                 import = step;
             }
@@ -130,7 +156,9 @@ namespace System.Composition.Hosting.Core
             return result;
         }
 
-        protected override IEnumerable<ExportDescriptorPromise> GetPromises(CompositionContract contract)
+        protected override IEnumerable<ExportDescriptorPromise> GetPromises(
+            CompositionContract contract
+        )
         {
             if (_updateFinished)
             {
@@ -138,7 +166,15 @@ namespace System.Composition.Hosting.Core
             }
             ExportDescriptor[] definitions;
             if (_partDefinitions.TryGetValue(contract, out definitions))
-                return definitions.Select(d => new ExportDescriptorPromise(contract, "Preexisting", false, s_noDependencies, _ => d)).ToArray();
+                return definitions
+                    .Select(d => new ExportDescriptorPromise(
+                        contract,
+                        "Preexisting",
+                        false,
+                        s_noDependencies,
+                        _ => d
+                    ))
+                    .ToArray();
 
             UpdateResult updateResult;
             if (!_updateResults.TryGetValue(contract, out updateResult))

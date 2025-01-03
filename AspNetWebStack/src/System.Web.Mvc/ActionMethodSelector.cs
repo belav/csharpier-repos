@@ -7,15 +7,17 @@ namespace System.Web.Mvc
 {
     internal sealed class ActionMethodSelector : ActionMethodSelectorBase
     {
-        public ActionMethodSelector(Type controllerType)            
+        public ActionMethodSelector(Type controllerType)
         {
             Initialize(controllerType);
         }
-                
+
         protected override bool IsValidActionMethod(MethodInfo methodInfo)
         {
-            return !(methodInfo.IsSpecialName ||
-                     methodInfo.GetBaseDefinition().DeclaringType.IsAssignableFrom(typeof(Controller)));
-        }        
+            return !(
+                methodInfo.IsSpecialName
+                || methodInfo.GetBaseDefinition().DeclaringType.IsAssignableFrom(typeof(Controller))
+            );
+        }
     }
 }

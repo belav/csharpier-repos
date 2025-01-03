@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Xunit;
 
 namespace System.SpanTests
 {
@@ -29,11 +29,17 @@ namespace System.SpanTests
                 //
                 unsafe
                 {
-                    if (!AllocationHelper.TryAllocNative(unchecked((nint)ThreeGiB), out IntPtr memBlock))
+                    if (
+                        !AllocationHelper.TryAllocNative(
+                            unchecked((nint)ThreeGiB),
+                            out IntPtr memBlock
+                        )
+                    )
                     {
-                        Console.WriteLine($"Span.Overflow test {nameof(IndexOverflow)} skipped (could not alloc memory).");
+                        Console.WriteLine(
+                            $"Span.Overflow test {nameof(IndexOverflow)} skipped (could not alloc memory)."
+                        );
                         return; // It's not implausible to believe that a 3gb allocation will fail - if so, skip this test to avoid unnecessary test flakiness.
-
                     }
 
                     try
@@ -43,16 +49,26 @@ namespace System.SpanTests
 
                         int bigIndex = checked(s_guidTwoGiBLimit + 1);
                         uint byteOffset = checked((uint)bigIndex * (uint)sizeof(Guid));
-                        Assert.True(byteOffset > int.MaxValue);  // Make sure byteOffset actually overflows 2Gb, or this test is pointless.
+                        Assert.True(byteOffset > int.MaxValue); // Make sure byteOffset actually overflows 2Gb, or this test is pointless.
                         ref Guid expected = ref Unsafe.Add<Guid>(ref memory, bigIndex);
 
                         Assert.True(Unsafe.AreSame<Guid>(ref expected, ref span[bigIndex]));
 
                         Span<Guid> slice = span.Slice(bigIndex);
-                        Assert.True(Unsafe.AreSame<Guid>(ref expected, ref MemoryMarshal.GetReference(slice)));
+                        Assert.True(
+                            Unsafe.AreSame<Guid>(
+                                ref expected,
+                                ref MemoryMarshal.GetReference(slice)
+                            )
+                        );
 
                         slice = span.Slice(bigIndex, 1);
-                        Assert.True(Unsafe.AreSame<Guid>(ref expected, ref MemoryMarshal.GetReference(slice)));
+                        Assert.True(
+                            Unsafe.AreSame<Guid>(
+                                ref expected,
+                                ref MemoryMarshal.GetReference(slice)
+                            )
+                        );
                     }
                     finally
                     {
@@ -78,16 +94,22 @@ namespace System.SpanTests
             {
                 unsafe
                 {
-                    if (!AllocationHelper.TryAllocNative(unchecked((nint)ThreeGiB), out IntPtr memory))
+                    if (
+                        !AllocationHelper.TryAllocNative(
+                            unchecked((nint)ThreeGiB),
+                            out IntPtr memory
+                        )
+                    )
                     {
-                        Console.WriteLine($"Span.Overflow test {nameof(SliceStartInt32Overflow)} skipped (could not alloc memory).");
+                        Console.WriteLine(
+                            $"Span.Overflow test {nameof(SliceStartInt32Overflow)} skipped (could not alloc memory)."
+                        );
                         return;
                     }
 
                     try
                     {
-                        int
-                            GuidThreeGiBLimit = (int)(ThreeGiB / sizeof(Guid)),
+                        int GuidThreeGiBLimit = (int)(ThreeGiB / sizeof(Guid)),
                             GuidTwoGiBLimit = (int)(TwoGiB / sizeof(Guid)),
                             GuidOneGiBLimit = (int)(OneGiB / sizeof(Guid));
 
@@ -122,21 +144,30 @@ namespace System.SpanTests
             {
                 unsafe
                 {
-                    if (!AllocationHelper.TryAllocNative(unchecked((nint)ThreeGiB), out IntPtr memory))
+                    if (
+                        !AllocationHelper.TryAllocNative(
+                            unchecked((nint)ThreeGiB),
+                            out IntPtr memory
+                        )
+                    )
                     {
-                        Console.WriteLine($"Span.Overflow test {nameof(ReadOnlySliceStartInt32Overflow)} skipped (could not alloc memory).");
+                        Console.WriteLine(
+                            $"Span.Overflow test {nameof(ReadOnlySliceStartInt32Overflow)} skipped (could not alloc memory)."
+                        );
                         return;
                     }
 
                     try
                     {
-                        int
-                            GuidThreeGiBLimit = (int)(ThreeGiB / sizeof(Guid)),
+                        int GuidThreeGiBLimit = (int)(ThreeGiB / sizeof(Guid)),
                             GuidTwoGiBLimit = (int)(TwoGiB / sizeof(Guid)),
                             GuidOneGiBLimit = (int)(OneGiB / sizeof(Guid));
 
                         Span<Guid> mutable = new Span<Guid>((void*)memory, GuidThreeGiBLimit);
-                        ReadOnlySpan<Guid> span = new ReadOnlySpan<Guid>((void*)memory, GuidThreeGiBLimit);
+                        ReadOnlySpan<Guid> span = new ReadOnlySpan<Guid>(
+                            (void*)memory,
+                            GuidThreeGiBLimit
+                        );
                         Guid guid = Guid.NewGuid();
                         ReadOnlySpan<Guid> slice = span.Slice(GuidTwoGiBLimit + 1);
                         mutable[GuidTwoGiBLimit + 1] = guid;
@@ -157,7 +188,7 @@ namespace System.SpanTests
         private const long TwoGiB = 2L * 1024L * 1024L * 1024L;
         private const long OneGiB = 1L * 1024L * 1024L * 1024L;
 
-        private static readonly int s_guidThreeGiBLimit = (int)(ThreeGiB / Unsafe.SizeOf<Guid>());  // sizeof(Guid) requires unsafe keyword and I don't want to mark the entire class unsafe.
+        private static readonly int s_guidThreeGiBLimit = (int)(ThreeGiB / Unsafe.SizeOf<Guid>()); // sizeof(Guid) requires unsafe keyword and I don't want to mark the entire class unsafe.
         private static readonly int s_guidTwoGiBLimit = (int)(TwoGiB / Unsafe.SizeOf<Guid>());
     }
 }

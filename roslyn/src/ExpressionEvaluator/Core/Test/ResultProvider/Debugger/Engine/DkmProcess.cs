@@ -33,7 +33,5 @@ namespace Microsoft.VisualStudio.Debugger
         }
     }
 
-    public class DkmThread
-    {
-    }
+    public class DkmThread { }
 }

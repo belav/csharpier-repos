@@ -20,7 +20,10 @@ public class ResponseCompressionMiddleware
     /// </summary>
     /// <param name="next">The delegate representing the remaining middleware in the request pipeline.</param>
     /// <param name="provider">The <see cref="IResponseCompressionProvider"/>.</param>
-    public ResponseCompressionMiddleware(RequestDelegate next, IResponseCompressionProvider provider)
+    public ResponseCompressionMiddleware(
+        RequestDelegate next,
+        IResponseCompressionProvider provider
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(provider);

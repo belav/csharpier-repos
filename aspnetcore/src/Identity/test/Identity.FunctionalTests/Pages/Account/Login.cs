@@ -15,10 +15,7 @@ public class Login : DefaultUIPage
     private readonly IHtmlElement _contosoButton;
     private readonly IHtmlElement _loginButton;
 
-    public Login(
-        HttpClient client,
-        IHtmlDocument login,
-        DefaultUIContext context)
+    public Login(HttpClient client, IHtmlDocument login, DefaultUIContext context)
         : base(client, login, context)
     {
         _loginForm = HtmlAssert.HasForm("#account", login);
@@ -67,10 +64,7 @@ public class Login : DefaultUIPage
         Assert.Equal(Index.Path, loggedInLocation.ToString());
         var indexResponse = await Client.GetAsync(loggedInLocation);
         var index = await ResponseAssert.IsHtmlDocumentAsync(indexResponse);
-        return new Index(
-            Client,
-            index,
-            Context.WithAuthenticatedUser().WithPasswordLogin());
+        return new Index(Client, index, Context.WithAuthenticatedUser().WithPasswordLogin());
     }
 
     public async Task LoginWrongPasswordAsync(string userName, string password)
@@ -96,21 +90,30 @@ public class Login : DefaultUIPage
 
     private async Task<HttpResponseMessage> SendLoginForm(string userName, string password)
     {
-        return await Client.SendAsync(_loginForm, _loginButton, new Dictionary<string, string>()
-        {
-            ["Input_Email"] = userName,
-            ["Input_Password"] = password
-        });
+        return await Client.SendAsync(
+            _loginForm,
+            _loginButton,
+            new Dictionary<string, string>()
+            {
+                ["Input_Email"] = userName,
+                ["Input_Password"] = password,
+            }
+        );
     }
 
-    public async Task<LoginWith2fa> PasswordLoginValidUserWith2FaAsync(string userName, string password)
+    public async Task<LoginWith2fa> PasswordLoginValidUserWith2FaAsync(
+        string userName,
+        string password
+    )
     {
         var loggedIn = await SendLoginForm(userName, password);
 
         var loggedInLocation = ResponseAssert.IsRedirect(loggedIn);
         Assert.StartsWith(LoginWith2fa.Path, loggedInLocation.ToString());
         var loginWithTwoFactorResponse = await Client.GetAsync(loggedInLocation);
-        var loginWithTwoFactor = await ResponseAssert.IsHtmlDocumentAsync(loginWithTwoFactorResponse);
+        var loginWithTwoFactor = await ResponseAssert.IsHtmlDocumentAsync(
+            loginWithTwoFactorResponse
+        );
 
         return new LoginWith2fa(Client, loginWithTwoFactor, Context);
     }

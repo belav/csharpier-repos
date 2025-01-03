@@ -33,7 +33,8 @@ public class RewriteMiddleware
         RequestDelegate next,
         IWebHostEnvironment hostingEnvironment,
         ILoggerFactory loggerFactory,
-        IOptions<RewriteOptions> options)
+        IOptions<RewriteOptions> options
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(options);
@@ -58,7 +59,7 @@ public class RewriteMiddleware
             HttpContext = context,
             StaticFileProvider = _fileProvider,
             Logger = _logger,
-            Result = RuleResult.ContinueRules
+            Result = RuleResult.ContinueRules,
         };
 
         var originalPath = context.Request.Path;
@@ -89,7 +90,12 @@ public class RewriteMiddleware
         return _next(context);
     }
 
-    static void RunRules(RewriteContext rewriteContext, RewriteOptions options, HttpContext httpContext, ILogger logger)
+    static void RunRules(
+        RewriteContext rewriteContext,
+        RewriteOptions options,
+        HttpContext httpContext,
+        ILogger logger
+    )
     {
         foreach (var rule in options.Rules)
         {
@@ -97,18 +103,23 @@ public class RewriteMiddleware
             switch (rewriteContext.Result)
             {
                 case RuleResult.ContinueRules:
-                    logger.RewriteMiddlewareRequestContinueResults(httpContext.Request.GetEncodedUrl());
+                    logger.RewriteMiddlewareRequestContinueResults(
+                        httpContext.Request.GetEncodedUrl()
+                    );
                     break;
                 case RuleResult.EndResponse:
                     logger.RewriteMiddlewareRequestResponseComplete(
                         httpContext.Response.Headers.Location.ToString(),
-                        httpContext.Response.StatusCode);
+                        httpContext.Response.StatusCode
+                    );
                     return;
                 case RuleResult.SkipRemainingRules:
                     logger.RewriteMiddlewareRequestStopRules(httpContext.Request.GetEncodedUrl());
                     return;
                 default:
-                    throw new ArgumentOutOfRangeException($"Invalid rule termination {rewriteContext.Result}");
+                    throw new ArgumentOutOfRangeException(
+                        $"Invalid rule termination {rewriteContext.Result}"
+                    );
             }
         }
     }

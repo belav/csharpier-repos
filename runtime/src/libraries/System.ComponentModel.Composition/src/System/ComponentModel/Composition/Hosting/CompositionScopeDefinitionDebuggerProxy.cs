@@ -15,7 +15,9 @@ namespace System.ComponentModel.Composition.Hosting
     {
         private readonly CompositionScopeDefinition _compositionScopeDefinition;
 
-        public CompositionScopeDefinitionDebuggerProxy(CompositionScopeDefinition compositionScopeDefinition)
+        public CompositionScopeDefinitionDebuggerProxy(
+            CompositionScopeDefinition compositionScopeDefinition
+        )
         {
             Requires.NotNull(compositionScopeDefinition, nameof(compositionScopeDefinition));
 
@@ -29,18 +31,12 @@ namespace System.ComponentModel.Composition.Hosting
 
         public IEnumerable<ExportDefinition> PublicSurface
         {
-            get
-            {
-                return _compositionScopeDefinition.PublicSurface.ToReadOnlyCollection();
-            }
+            get { return _compositionScopeDefinition.PublicSurface.ToReadOnlyCollection(); }
         }
 
         public IEnumerable<CompositionScopeDefinition> Children
         {
-            get
-            {
-                return _compositionScopeDefinition.Children.ToReadOnlyCollection();
-            }
+            get { return _compositionScopeDefinition.Children.ToReadOnlyCollection(); }
         }
     }
 }

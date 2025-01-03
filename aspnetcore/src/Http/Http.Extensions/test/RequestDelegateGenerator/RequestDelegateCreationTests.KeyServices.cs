@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Http.RequestDelegateGenerator;
 using Microsoft.Extensions.DependencyInjection;
+
 namespace Microsoft.AspNetCore.Http.Generators.Tests;
 
 public partial class RequestDelegateCreationTests : RequestDelegateCreationTestBase
@@ -15,7 +16,10 @@ app.MapGet("/", (HttpContext context, [FromKeyedServices("service1")] TestServic
 """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var myOriginalService = new TestService();
-        var serviceProvider = CreateServiceProvider((serviceCollection) => serviceCollection.AddKeyedSingleton("service1", myOriginalService));
+        var serviceProvider = CreateServiceProvider(
+            (serviceCollection) =>
+                serviceCollection.AddKeyedSingleton("service1", myOriginalService)
+        );
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
         var httpContext = CreateHttpContext(serviceProvider);
@@ -31,7 +35,10 @@ app.MapGet("/", (HttpContext context, [FromKeyedServices("service1")] TestServic
 app.MapGet("/", (HttpContext context, [FromKeyedServices("service1")] [FromServices] TestService arg) => context.Items["arg"] = arg);
 """;
         var myOriginalService = new TestService();
-        var serviceProvider = CreateServiceProvider((serviceCollection) => serviceCollection.AddKeyedSingleton("service1", myOriginalService));
+        var serviceProvider = CreateServiceProvider(
+            (serviceCollection) =>
+                serviceCollection.AddKeyedSingleton("service1", myOriginalService)
+        );
 
         var (result, compilation) = await RunGeneratorAsync(source);
 
@@ -39,12 +46,22 @@ app.MapGet("/", (HttpContext context, [FromKeyedServices("service1")] [FromServi
         // runtime.
         if (IsGeneratorEnabled)
         {
-            Assert.Contains(result.Value.Diagnostics, diagnostic => diagnostic.Id == DiagnosticDescriptors.KeyedAndNotKeyedServiceAttributesNotSupported.Id);
+            Assert.Contains(
+                result.Value.Diagnostics,
+                diagnostic =>
+                    diagnostic.Id
+                    == DiagnosticDescriptors.KeyedAndNotKeyedServiceAttributesNotSupported.Id
+            );
         }
 
         // Throw during endpoint construction
-        var exception = Assert.Throws<NotSupportedException>(() => GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider));
-        Assert.Equal($"The {nameof(FromKeyedServicesAttribute)} is not supported on parameters that are also annotated with {nameof(IFromServiceMetadata)}.", exception.Message);
+        var exception = Assert.Throws<NotSupportedException>(
+            () => GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider)
+        );
+        Assert.Equal(
+            $"The {nameof(FromKeyedServicesAttribute)} is not supported on parameters that are also annotated with {nameof(IFromServiceMetadata)}.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -57,11 +74,13 @@ app.MapGet("/null", (HttpContext context, [FromKeyedServices(null!)] TestService
         var (_, compilation) = await RunGeneratorAsync(source);
         var myOriginalService1 = new TestService();
         var myOriginalService2 = new TestService();
-        var serviceProvider = CreateServiceProvider((serviceCollection) =>
-        {
-            serviceCollection.AddKeyedSingleton("", myOriginalService1);
-            serviceCollection.AddSingleton(myOriginalService2);
-        });
+        var serviceProvider = CreateServiceProvider(
+            (serviceCollection) =>
+            {
+                serviceCollection.AddKeyedSingleton("", myOriginalService1);
+                serviceCollection.AddSingleton(myOriginalService2);
+            }
+        );
         var endpoints = GetEndpointsFromCompilation(compilation, serviceProvider: serviceProvider);
 
         var httpContext1 = CreateHttpContext(serviceProvider);
@@ -81,7 +100,9 @@ app.MapGet("/", (HttpContext context, [FromKeyedServices('a')] TestService arg) 
 """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var myOriginalService = new TestService();
-        var serviceProvider = CreateServiceProvider((serviceCollection) => serviceCollection.AddKeyedSingleton('a', myOriginalService));
+        var serviceProvider = CreateServiceProvider(
+            (serviceCollection) => serviceCollection.AddKeyedSingleton('a', myOriginalService)
+        );
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
         var httpContext = CreateHttpContext(serviceProvider);
@@ -101,7 +122,9 @@ app.MapGet("/", (HttpContext context, [FromKeyedServices({{key.ToString()?.ToLow
 """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var myOriginalService = new TestService();
-        var serviceProvider = CreateServiceProvider((serviceCollection) => serviceCollection.AddKeyedSingleton(key, myOriginalService));
+        var serviceProvider = CreateServiceProvider(
+            (serviceCollection) => serviceCollection.AddKeyedSingleton(key, myOriginalService)
+        );
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
         var httpContext = CreateHttpContext(serviceProvider);
@@ -121,9 +144,13 @@ app.MapGet("/", (HttpContext context, [FromKeyedServices("service1")] TestServic
 
         var httpContext = CreateHttpContext();
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await endpoint.RequestDelegate(httpContext));
+            async () => await endpoint.RequestDelegate(httpContext)
+        );
 
-        Assert.Equal("No service for type 'Microsoft.AspNetCore.Http.Generators.Tests.TestService' has been registered.", exception.Message);
+        Assert.Equal(
+            "No service for type 'Microsoft.AspNetCore.Http.Generators.Tests.TestService' has been registered.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -154,11 +181,13 @@ app.MapGet("/", (HttpContext context, [FromKeyedServices("service1")] TestServic
 """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var myOriginalService1 = new TestService();
-        var serviceProvider = CreateServiceProvider((serviceCollection) =>
-        {
-            serviceCollection.AddKeyedSingleton("service1", myOriginalService1);
-            serviceCollection.AddKeyedScoped<TestService>("service2");
-        });
+        var serviceProvider = CreateServiceProvider(
+            (serviceCollection) =>
+            {
+                serviceCollection.AddKeyedSingleton("service1", myOriginalService1);
+                serviceCollection.AddKeyedScoped<TestService>("service2");
+            }
+        );
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
         var httpContext = CreateHttpContext(serviceProvider);
@@ -182,12 +211,14 @@ app.MapGet("/", (HttpContext context, [FromKeyedServices("service1")] TestServic
         var (_, compilation) = await RunGeneratorAsync(source);
         var myOriginalService1 = new TestService();
         var myOriginalService2 = new TestService();
-        var serviceProvider = CreateServiceProvider((serviceCollection) =>
-        {
-            serviceCollection.AddKeyedSingleton("service1", myOriginalService1);
-            serviceCollection.AddKeyedScoped<TestService>("service2");
-            serviceCollection.AddSingleton(myOriginalService2);
-        });
+        var serviceProvider = CreateServiceProvider(
+            (serviceCollection) =>
+            {
+                serviceCollection.AddKeyedSingleton("service1", myOriginalService1);
+                serviceCollection.AddKeyedScoped<TestService>("service2");
+                serviceCollection.AddSingleton(myOriginalService2);
+            }
+        );
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
         var httpContext = CreateHttpContext(serviceProvider);

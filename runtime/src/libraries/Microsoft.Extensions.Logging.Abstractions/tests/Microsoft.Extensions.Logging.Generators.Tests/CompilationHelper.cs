@@ -15,7 +15,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         public static Compilation CreateCompilation(
             string source,
             MetadataReference[]? additionalReferences = null,
-            string assemblyName = "TestAssembly")
+            string assemblyName = "TestAssembly"
+        )
         {
             string corelib = Assembly.GetAssembly(typeof(object))!.Location;
             string runtimeDir = Path.GetDirectoryName(corelib)!;
@@ -23,9 +24,13 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             var refs = new List<MetadataReference>();
             refs.Add(MetadataReference.CreateFromFile(corelib));
             refs.Add(MetadataReference.CreateFromFile(Path.Combine(runtimeDir, "netstandard.dll")));
-            refs.Add(MetadataReference.CreateFromFile(Path.Combine(runtimeDir, "System.Runtime.dll")));
+            refs.Add(
+                MetadataReference.CreateFromFile(Path.Combine(runtimeDir, "System.Runtime.dll"))
+            );
             refs.Add(MetadataReference.CreateFromFile(typeof(ILogger).Assembly.Location));
-            refs.Add(MetadataReference.CreateFromFile(typeof(LoggerMessageAttribute).Assembly.Location));
+            refs.Add(
+                MetadataReference.CreateFromFile(typeof(LoggerMessageAttribute).Assembly.Location)
+            );
 
             if (additionalReferences != null)
             {

@@ -5,7 +5,9 @@ using Microsoft.JSInterop.Implementation;
 
 namespace Microsoft.JSInterop.WebAssembly;
 
-internal sealed class WebAssemblyJSObjectReference : JSInProcessObjectReference, IJSUnmarshalledObjectReference
+internal sealed class WebAssemblyJSObjectReference
+    : JSInProcessObjectReference,
+        IJSUnmarshalledObjectReference
 {
     private readonly WebAssemblyJSRuntime _jsRuntime;
 
@@ -21,7 +23,13 @@ internal sealed class WebAssemblyJSObjectReference : JSInProcessObjectReference,
     {
         ThrowIfDisposed();
 
-        return _jsRuntime.InvokeUnmarshalled<object?, object?, object?, TResult>(identifier, null, null, null, Id);
+        return _jsRuntime.InvokeUnmarshalled<object?, object?, object?, TResult>(
+            identifier,
+            null,
+            null,
+            null,
+            Id
+        );
     }
 
     [Obsolete("This method is obsolete. Use JSImportAttribute instead.")]
@@ -29,7 +37,13 @@ internal sealed class WebAssemblyJSObjectReference : JSInProcessObjectReference,
     {
         ThrowIfDisposed();
 
-        return _jsRuntime.InvokeUnmarshalled<T0, object?, object?, TResult>(identifier, arg0, null, null, Id);
+        return _jsRuntime.InvokeUnmarshalled<T0, object?, object?, TResult>(
+            identifier,
+            arg0,
+            null,
+            null,
+            Id
+        );
     }
 
     [Obsolete("This method is obsolete. Use JSImportAttribute instead.")]
@@ -37,11 +51,22 @@ internal sealed class WebAssemblyJSObjectReference : JSInProcessObjectReference,
     {
         ThrowIfDisposed();
 
-        return _jsRuntime.InvokeUnmarshalled<T0, T1, object?, TResult>(identifier, arg0, arg1, null, Id);
+        return _jsRuntime.InvokeUnmarshalled<T0, T1, object?, TResult>(
+            identifier,
+            arg0,
+            arg1,
+            null,
+            Id
+        );
     }
 
     [Obsolete("This method is obsolete. Use JSImportAttribute instead.")]
-    public TResult InvokeUnmarshalled<T0, T1, T2, TResult>(string identifier, T0 arg0, T1 arg1, T2 arg2)
+    public TResult InvokeUnmarshalled<T0, T1, T2, TResult>(
+        string identifier,
+        T0 arg0,
+        T1 arg1,
+        T2 arg2
+    )
     {
         ThrowIfDisposed();
 

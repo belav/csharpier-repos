@@ -24,7 +24,10 @@ internal sealed class DynamicHPackEncoder
 
     internal uint TableSize => _headerTableSize;
 
-    public DynamicHPackEncoder(bool allowDynamicCompression = true, uint maxHeaderTableSize = DefaultHeaderTableSize)
+    public DynamicHPackEncoder(
+        bool allowDynamicCompression = true,
+        uint maxHeaderTableSize = DefaultHeaderTableSize
+    )
     {
         _allowDynamicCompression = allowDynamicCompression;
         _maxHeaderTableSize = maxHeaderTableSize;
@@ -56,7 +59,11 @@ internal sealed class DynamicHPackEncoder
         // Check if there is a table size update that should be encoded
         if (_pendingTableSizeUpdate)
         {
-            bool success = HPackEncoder.EncodeDynamicTableSizeUpdate((int)_maxHeaderTableSize, buffer, out length);
+            bool success = HPackEncoder.EncodeDynamicTableSizeUpdate(
+                (int)_maxHeaderTableSize,
+                buffer,
+                out length
+            );
             _pendingTableSizeUpdate = false;
             return success;
         }
@@ -65,10 +72,20 @@ internal sealed class DynamicHPackEncoder
         return true;
     }
 
-    public bool EncodeHeader(Span<byte> buffer, int staticTableIndex, HeaderEncodingHint encodingHint, string name, string value,
-        Encoding? valueEncoding, out int bytesWritten)
+    public bool EncodeHeader(
+        Span<byte> buffer,
+        int staticTableIndex,
+        HeaderEncodingHint encodingHint,
+        string name,
+        string value,
+        Encoding? valueEncoding,
+        out int bytesWritten
+    )
     {
-        Debug.Assert(!_pendingTableSizeUpdate, "Dynamic table size update should be encoded before headers.");
+        Debug.Assert(
+            !_pendingTableSizeUpdate,
+            "Dynamic table size update should be encoded before headers."
+        );
 
         // Never index sensitive value.
         if (encodingHint == HeaderEncodingHint.NeverIndex)
@@ -76,31 +93,82 @@ internal sealed class DynamicHPackEncoder
             int index = ResolveDynamicTableIndex(staticTableIndex, name);
 
             return index == -1
-                ? HPackEncoder.EncodeLiteralHeaderFieldNeverIndexingNewName(name, value, valueEncoding, buffer, out bytesWritten)
-                : HPackEncoder.EncodeLiteralHeaderFieldNeverIndexing(index, value, valueEncoding, buffer, out bytesWritten);
+                ? HPackEncoder.EncodeLiteralHeaderFieldNeverIndexingNewName(
+                    name,
+                    value,
+                    valueEncoding,
+                    buffer,
+                    out bytesWritten
+                )
+                : HPackEncoder.EncodeLiteralHeaderFieldNeverIndexing(
+                    index,
+                    value,
+                    valueEncoding,
+                    buffer,
+                    out bytesWritten
+                );
         }
 
         // No dynamic table. Only use the static table.
-        if (!_allowDynamicCompression || _maxHeaderTableSize == 0 || encodingHint == HeaderEncodingHint.IgnoreIndex)
+        if (
+            !_allowDynamicCompression
+            || _maxHeaderTableSize == 0
+            || encodingHint == HeaderEncodingHint.IgnoreIndex
+        )
         {
             return staticTableIndex == -1
-                ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(name, value, valueEncoding, buffer, out bytesWritten)
-                : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(staticTableIndex, value, valueEncoding, buffer, out bytesWritten);
+                ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
+                    name,
+                    value,
+                    valueEncoding,
+                    buffer,
+                    out bytesWritten
+                )
+                : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(
+                    staticTableIndex,
+                    value,
+                    valueEncoding,
+                    buffer,
+                    out bytesWritten
+                );
         }
 
         // Header is greater than the maximum table size.
         // Don't attempt to add dynamic header as all existing dynamic headers will be removed.
-        var headerLength = HeaderField.GetLength(name.Length, valueEncoding?.GetByteCount(value) ?? value.Length);
+        var headerLength = HeaderField.GetLength(
+            name.Length,
+            valueEncoding?.GetByteCount(value) ?? value.Length
+        );
         if (headerLength > _maxHeaderTableSize)
         {
             int index = ResolveDynamicTableIndex(staticTableIndex, name);
 
             return index == -1
-                ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(name, value, valueEncoding, buffer, out bytesWritten)
-                : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(index, value, valueEncoding, buffer, out bytesWritten);
+                ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
+                    name,
+                    value,
+                    valueEncoding,
+                    buffer,
+                    out bytesWritten
+                )
+                : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(
+                    index,
+                    value,
+                    valueEncoding,
+                    buffer,
+                    out bytesWritten
+                );
         }
 
-        return EncodeDynamicHeader(buffer, staticTableIndex, name, value, headerLength, valueEncoding, out bytesWritten);
+        return EncodeDynamicHeader(
+            buffer,
+            staticTableIndex,
+            name,
+            value,
+            headerLength,
+            valueEncoding,
+            out bytesWritten
+        );
     }
 
     private int ResolveDynamicTableIndex(int staticTableIndex, string name)
@@ -114,8 +182,15 @@ internal sealed class DynamicHPackEncoder
         return CalculateDynamicTableIndex(name);
     }
 
-    private bool EncodeDynamicHeader(Span<byte> buffer, int staticTableIndex, string name, string value,
-        int headerLength, Encoding? valueEncoding, out int bytesWritten)
+    private bool EncodeDynamicHeader(
+        Span<byte> buffer,
+        int staticTableIndex,
+        string name,
+        string value,
+        int headerLength,
+        Encoding? valueEncoding,
+        out int bytesWritten
+    )
     {
         EncoderHeaderEntry? headerField = GetEntry(name, value);
         if (headerField != null)
@@ -129,9 +204,22 @@ internal sealed class DynamicHPackEncoder
             // Doesn't exist in dynamic table. Add new entry to dynamic table.
 
             int index = ResolveDynamicTableIndex(staticTableIndex, name);
-            bool success = index == -1
-                ? HPackEncoder.EncodeLiteralHeaderFieldIndexingNewName(name, value, valueEncoding, buffer, out bytesWritten)
-                : HPackEncoder.EncodeLiteralHeaderFieldIndexing(index, value, valueEncoding, buffer, out bytesWritten);
+            bool success =
+                index == -1
+                    ? HPackEncoder.EncodeLiteralHeaderFieldIndexingNewName(
+                        name,
+                        value,
+                        valueEncoding,
+                        buffer,
+                        out bytesWritten
+                    )
+                    : HPackEncoder.EncodeLiteralHeaderFieldIndexing(
+                        index,
+                        value,
+                        valueEncoding,
+                        buffer,
+                        out bytesWritten
+                    );
 
             if (success)
             {
@@ -150,7 +238,10 @@ internal sealed class DynamicHPackEncoder
     /// </summary>
     private void EnsureCapacity(uint headerSize)
     {
-        Debug.Assert(headerSize <= _maxHeaderTableSize, "Header is bigger than dynamic table size.");
+        Debug.Assert(
+            headerSize <= _maxHeaderTableSize,
+            "Header is bigger than dynamic table size."
+        );
 
         while (_maxHeaderTableSize - _headerTableSize < headerSize)
         {
@@ -174,9 +265,11 @@ internal sealed class DynamicHPackEncoder
         {
             // We've already looked up entries based on a hash of the name.
             // Compare value before name as it is more likely to be different.
-            if (e.Hash == hash &&
-                string.Equals(value, e.Value, StringComparison.Ordinal) &&
-                string.Equals(name, e.Name, StringComparison.Ordinal))
+            if (
+                e.Hash == hash
+                && string.Equals(value, e.Value, StringComparison.Ordinal)
+                && string.Equals(name, e.Name, StringComparison.Ordinal)
+            )
             {
                 return e;
             }
@@ -209,8 +302,14 @@ internal sealed class DynamicHPackEncoder
 
     private void AddHeaderEntry(string name, string value, uint headerSize)
     {
-        Debug.Assert(headerSize <= _maxHeaderTableSize, "Header is bigger than dynamic table size.");
-        Debug.Assert(headerSize <= _maxHeaderTableSize - _headerTableSize, "Not enough room in dynamic table.");
+        Debug.Assert(
+            headerSize <= _maxHeaderTableSize,
+            "Header is bigger than dynamic table size."
+        );
+        Debug.Assert(
+            headerSize <= _maxHeaderTableSize - _headerTableSize,
+            "Not enough room in dynamic table."
+        );
 
         int hash = name.GetHashCode();
         int bucketIndex = CalculateBucketIndex(hash);
@@ -295,5 +394,5 @@ internal enum HeaderEncodingHint
 {
     Index,
     IgnoreIndex,
-    NeverIndex
+    NeverIndex,
 }

@@ -16,7 +16,7 @@ namespace System.Text.Json.Tests
         {
             var segment = new BufferSegment<T>(memory)
             {
-                RunningIndex = RunningIndex + Memory.Length
+                RunningIndex = RunningIndex + Memory.Length,
             };
             Next = segment;
             return segment;

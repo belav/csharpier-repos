@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 /*
 ** This program was translated to C# and adapted for xunit-performance.
-** New variants of several tests were added to compare class versus 
+** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
 
@@ -23,7 +23,7 @@
 ** are error-free.  Consequently, McGraw-HIll and BYTE Magazine make
 ** no claims in regard to the fitness of the source code, executable
 ** code, and documentation of the BYTEmark.
-** 
+**
 ** Furthermore, BYTE Magazine, McGraw-Hill, and all employees
 ** of McGraw-Hill cannot be held responsible for any damages resulting
 ** from the use of this code or the results obtained from using
@@ -111,16 +111,17 @@ public class EMFloat : EmFloatStruct
     {
         public InternalFPF(int len)
         {
-            type = IFPF.IFPF_IS_ZERO; sign = (byte)0;
-            exp = (short)0; mantissa = new char[len];
+            type = IFPF.IFPF_IS_ZERO;
+            sign = (byte)0;
+            exp = (short)0;
+            mantissa = new char[len];
         }
 
-        public IFPF type;        /* Indicates, NORMAL, SUBNORMAL, etc. */
-        public byte sign;        /* Mantissa sign */
-        public short exp;      /* Signed exponent...no bias */
+        public IFPF type; /* Indicates, NORMAL, SUBNORMAL, etc. */
+        public byte sign; /* Mantissa sign */
+        public short exp; /* Signed exponent...no bias */
         public char[] mantissa; // [INTERNAL_FPF_PRECISION]
     };
-
 
     /*
     ** emfloat.c
@@ -174,13 +175,13 @@ public class EMFloat : EmFloatStruct
     */
     public override double Run()
     {
-        InternalFPF[] abase;             /* Base of A array */
-        InternalFPF[] bbase;             /* Base of B array */
-        InternalFPF[] cbase;             /* Base of C array */
-        long accumtime;                /* Accumulated time in ticks */
-        double iterations;              /* # of iterations */
-        long tickcount;                /* # of ticks */
-        int loops;                    /* # of loops */
+        InternalFPF[] abase; /* Base of A array */
+        InternalFPF[] bbase; /* Base of B array */
+        InternalFPF[] cbase; /* Base of C array */
+        long accumtime; /* Accumulated time in ticks */
+        double iterations; /* # of iterations */
+        long tickcount; /* # of ticks */
+        int loops; /* # of loops */
 
         /*
         ** Test the emulation routines.
@@ -190,7 +191,6 @@ public class EMFloat : EmFloatStruct
         bbase = new InternalFPF[this.arraysize];
         cbase = new InternalFPF[this.arraysize];
 
-
         for (int i = 0; i < this.arraysize; i++)
         {
             abase[i] = new InternalFPF(INTERNAL_FPF_PRECISION);
@@ -198,9 +198,8 @@ public class EMFloat : EmFloatStruct
             cbase[i] = new InternalFPF(INTERNAL_FPF_PRECISION);
         }
 
-
         /*
-        for (int i = 0; i < this.arraysize; i++) 
+        for (int i = 0; i < this.arraysize; i++)
         {
             abase[i].type = IFPF.IFPF_IS_ZERO;
             abase[i].sign = (byte)0;
@@ -239,9 +238,7 @@ public class EMFloat : EmFloatStruct
             */
             for (loops = 1; loops < global.CPUEMFLOATLOOPMAX; loops += loops)
             {
-                tickcount = DoEmFloatIteration(abase, bbase, cbase,
-                    this.arraysize,
-                    loops);
+                tickcount = DoEmFloatIteration(abase, bbase, cbase, this.arraysize, loops);
                 if (tickcount > global.min_ticks)
                 {
                     this.loops = loops;
@@ -268,9 +265,7 @@ public class EMFloat : EmFloatStruct
         iterations = (double)0.0;
         do
         {
-            accumtime += DoEmFloatIteration(abase, bbase, cbase,
-                this.arraysize,
-                this.loops);
+            accumtime += DoEmFloatIteration(abase, bbase, cbase, this.arraysize, this.loops);
             iterations += (double)1.0;
         } while (ByteMark.TicksToSecs(accumtime) < this.request_secs);
 
@@ -281,15 +276,11 @@ public class EMFloat : EmFloatStruct
 
         if (this.adjust == 0)
             this.adjust = 1;
-        double emflops = (iterations * (double)this.loops) /
-            (double)ByteMark.TicksToFracSecs(accumtime);
+        double emflops =
+            (iterations * (double)this.loops) / (double)ByteMark.TicksToFracSecs(accumtime);
 
         return (emflops);
     }
-
-
-
-
 
     /**************************
     ** SetupCPUEmFloatArrays **
@@ -302,14 +293,16 @@ public class EMFloat : EmFloatStruct
     ** NOTE: We really don't need the pointer to cbase...cbase
     ** is overwritten in the benchmark.
     */
-    private static
-    void SetupCPUEmFloatArrays(InternalFPF[] abase,
+    private static void SetupCPUEmFloatArrays(
+        InternalFPF[] abase,
         InternalFPF[] bbase,
         InternalFPF[] cbase,
-        int arraysize)
+        int arraysize
+    )
     {
         int i;
-        InternalFPF locFPF1, locFPF2;
+        InternalFPF locFPF1,
+            locFPF2;
         locFPF1 = new InternalFPF(INTERNAL_FPF_PRECISION);
         locFPF2 = new InternalFPF(INTERNAL_FPF_PRECISION);
 
@@ -331,13 +324,15 @@ public class EMFloat : EmFloatStruct
     ** benchmark.  Note that "an iteration" can involve multiple
     ** loops through the benchmark.
     */
-    private static
-    long DoEmFloatIteration(InternalFPF[] abase,
+    private static long DoEmFloatIteration(
+        InternalFPF[] abase,
         InternalFPF[] bbase,
         InternalFPF[] cbase,
-        int arraysize, int loops)
+        int arraysize,
+        int loops
+    )
     {
-        long elapsed;          /* For the stopwatch */
+        long elapsed; /* For the stopwatch */
         byte[] jtable = new byte[] { 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3 };
         int i;
 
@@ -358,24 +353,16 @@ public class EMFloat : EmFloatStruct
                 switch (jtable[i % 16])
                 {
                     case 0: /* Add */
-                        AddSubInternalFPF(0, ref abase[i],
-                            ref bbase[i],
-                            ref cbase[i]);
+                        AddSubInternalFPF(0, ref abase[i], ref bbase[i], ref cbase[i]);
                         break;
                     case 1: /* Subtract */
-                        AddSubInternalFPF(1, ref abase[i],
-                            ref bbase[i],
-                            ref cbase[i]);
+                        AddSubInternalFPF(1, ref abase[i], ref bbase[i], ref cbase[i]);
                         break;
                     case 2: /* Multiply */
-                        MultiplyInternalFPF(ref abase[i],
-                            ref bbase[i],
-                            ref cbase[i]);
+                        MultiplyInternalFPF(ref abase[i], ref bbase[i], ref cbase[i]);
                         break;
                     case 3: /* Divide */
-                        DivideInternalFPF(ref abase[i],
-                            ref bbase[i],
-                            ref cbase[i]);
+                        DivideInternalFPF(ref abase[i], ref bbase[i], ref cbase[i]);
                         break;
                 }
         }
@@ -389,10 +376,9 @@ public class EMFloat : EmFloatStruct
     ** Set an internal floating-point-format number to zero.
     ** sign determines the sign of the zero.
     */
-    private static void SetInternalFPFZero(ref InternalFPF dest,
-        byte sign)
+    private static void SetInternalFPFZero(ref InternalFPF dest, byte sign)
     {
-        int i;          /* Index */
+        int i; /* Index */
 
         dest.type = IFPF.IFPF_IS_ZERO;
         dest.sign = sign;
@@ -410,10 +396,9 @@ public class EMFloat : EmFloatStruct
     ** This can happen if the exponent exceeds MAX_EXP.
     ** As above, sign picks the sign of infinity.
     */
-    private static void SetInternalFPFInfinity(ref InternalFPF dest,
-        byte sign)
+    private static void SetInternalFPFInfinity(ref InternalFPF dest, byte sign)
     {
-        int i;          /* Index */
+        int i; /* Index */
 
         dest.type = IFPF.IFPF_IS_INFINITY;
         dest.sign = sign;
@@ -433,7 +418,7 @@ public class EMFloat : EmFloatStruct
     */
     private static void SetInternalFPFNaN(ref InternalFPF dest)
     {
-        int i;          /* Index */
+        int i; /* Index */
 
         dest.type = IFPF.IFPF_IS_NAN;
         dest.exp = MAX_EXP;
@@ -455,8 +440,8 @@ public class EMFloat : EmFloatStruct
     */
     private static bool IsMantissaZero(char[] mant)
     {
-        int i;          /* Index */
-        int n;          /* Return value */
+        int i; /* Index */
+        int n; /* Return value */
 
         n = 0;
         for (i = 0; i < INTERNAL_FPF_PRECISION; i++)
@@ -470,12 +455,9 @@ public class EMFloat : EmFloatStruct
     ***************
     ** Add b, c, and carry.  Retult in a.  New carry in carry.
     */
-    private static void Add16Bits(ref char carry,
-        out char a,
-        char b,
-        char c)
+    private static void Add16Bits(ref char carry, out char a, char b, char c)
     {
-        int accum;              /* Accumulator */
+        int accum; /* Accumulator */
 
         /*
         ** Do the work in the 32-bit accumulator so we can return
@@ -484,8 +466,8 @@ public class EMFloat : EmFloatStruct
         accum = b;
         accum += c;
         accum += carry;
-        carry = (char)(((accum & 0x00010000) != 0) ? 1 : 0);     /* New carry */
-        a = (char)(accum & 0xFFFF);       /* Result is lo 16 bits */
+        carry = (char)(((accum & 0x00010000) != 0) ? 1 : 0); /* New carry */
+        a = (char)(accum & 0xFFFF); /* Result is lo 16 bits */
         return;
     }
 
@@ -494,17 +476,14 @@ public class EMFloat : EmFloatStruct
     ***************
     ** Additive inverse of above.
     */
-    private static void Sub16Bits(ref char borrow,
-        out char a,
-        char b,
-        char c)
+    private static void Sub16Bits(ref char borrow, out char a, char b, char c)
     {
-        int accum;              /* Accumulator */
+        int accum; /* Accumulator */
 
         accum = b;
         accum -= c;
         accum -= borrow;
-        borrow = (char)(((accum & 0x00010000) != 0) ? 1 : 0);    /* New borrow */
+        borrow = (char)(((accum & 0x00010000) != 0) ? 1 : 0); /* New borrow */
         a = (char)(accum & 0xFFFF);
         return;
     }
@@ -516,22 +495,21 @@ public class EMFloat : EmFloatStruct
     ** a carry bit, which is shifted in at the beginning, and
     ** shifted out at the end.
     */
-    private static void ShiftMantLeft1(ref char carry,
-        char[] mantissa)
+    private static void ShiftMantLeft1(ref char carry, char[] mantissa)
     {
-        int i;          /* Index */
+        int i; /* Index */
         int new_carry;
-        char accum;      /* Temporary holding placed */
+        char accum; /* Temporary holding placed */
 
         for (i = INTERNAL_FPF_PRECISION - 1; i >= 0; i--)
         {
             accum = mantissa[i];
-            new_carry = accum & 0x8000;       /* Get new carry */
+            new_carry = accum & 0x8000; /* Get new carry */
             accum = unchecked((char)(accum << 1)); /* Do the shift */
             if (carry != 0)
-                accum |= (char)1;               /* Insert previous carry */
+                accum |= (char)1; /* Insert previous carry */
             carry = (char)new_carry;
-            mantissa[i] = accum;              /* Return shifted value */
+            mantissa[i] = accum; /* Return shifted value */
         }
         return;
     }
@@ -542,17 +520,16 @@ public class EMFloat : EmFloatStruct
     ** Shift a mantissa right by 1 bit.  Provides carry, as
     ** above
     */
-    private static void ShiftMantRight1(ref char carry,
-        char[] mantissa)
+    private static void ShiftMantRight1(ref char carry, char[] mantissa)
     {
-        int i;          /* Index */
+        int i; /* Index */
         int new_carry;
         char accum;
 
         for (i = 0; i < INTERNAL_FPF_PRECISION; i++)
         {
             accum = mantissa[i];
-            new_carry = accum & 1;            /* Get new carry */
+            new_carry = accum & 1; /* Get new carry */
             accum = (char)(accum >> 1);
             if (carry != 0)
                 accum |= (char)0x8000;
@@ -562,7 +539,6 @@ public class EMFloat : EmFloatStruct
         return;
     }
 
-
     /*****************************
     ** StickyShiftMantRight **
     ******************************
@@ -570,13 +546,12 @@ public class EMFloat : EmFloatStruct
     ** I.E., if a carry of 1 is shifted out of the least significant
     ** bit, the least significant bit is set to 1.
     */
-    private static void StickyShiftRightMant(ref InternalFPF ptr,
-        int amount)
+    private static void StickyShiftRightMant(ref InternalFPF ptr, int amount)
     {
-        int i;          /* Index */
-        char carry;      /* Self-explanatory */
+        int i; /* Index */
+        char carry; /* Self-explanatory */
 
-        if (ptr.type != IFPF.IFPF_IS_ZERO)     /* Don't bother shifting a zero */
+        if (ptr.type != IFPF.IFPF_IS_ZERO) /* Don't bother shifting a zero */
         {
             /*
             ** If the amount of shifting will shift everyting
@@ -600,7 +575,6 @@ public class EMFloat : EmFloatStruct
         }
         return;
     }
-
 
     /**************************************************
     **         POST ARITHMETIC PROCESSING            **
@@ -639,8 +613,7 @@ public class EMFloat : EmFloatStruct
     ** minimum_exponent. (You have to do this often in order
     ** to perform additions and subtractions).
     */
-    private static void denormalize(ref InternalFPF ptr,
-        int minimum_exponent)
+    private static void denormalize(ref InternalFPF ptr, int minimum_exponent)
     {
         int exponent_difference;
 
@@ -670,7 +643,6 @@ public class EMFloat : EmFloatStruct
         return;
     }
 
-
     /*********************
     ** RoundInternalFPF **
     **********************
@@ -678,13 +650,11 @@ public class EMFloat : EmFloatStruct
     ** The kind of rounding we do here is simplest...referred to as
     ** "chop".  "Extraneous" rightmost bits are simply hacked off.
     */
-    private static
-    void RoundInternalFPF(ref InternalFPF ptr)
+    private static void RoundInternalFPF(ref InternalFPF ptr)
     {
         /* int i; */
 
-        if (ptr.type == IFPF.IFPF_IS_NORMAL ||
-            ptr.type == IFPF.IFPF_IS_SUBNORMAL)
+        if (ptr.type == IFPF.IFPF_IS_NORMAL || ptr.type == IFPF.IFPF_IS_SUBNORMAL)
         {
             denormalize(ref ptr, MIN_EXP);
             if (ptr.type != IFPF.IFPF_IS_ZERO)
@@ -738,10 +708,12 @@ public class EMFloat : EmFloatStruct
     ** a pair of NaN's.  This routine "selects" which NaN is
     ** to be returned.
     */
-    private static void choose_nan(ref InternalFPF x,
+    private static void choose_nan(
+        ref InternalFPF x,
         ref InternalFPF y,
         ref InternalFPF z,
-        int intel_flag)
+        int intel_flag
+    )
     {
         int i;
 
@@ -776,7 +748,6 @@ public class EMFloat : EmFloatStruct
         return;
     }
 
-
     /**********************
     ** AddSubInternalFPF **
     ***********************
@@ -784,16 +755,19 @@ public class EMFloat : EmFloatStruct
     ** Internal-representation numbers pointed to by x and y are
     ** added/subtracted and the result returned in z.
     */
-    private static void AddSubInternalFPF(byte operation,
+    private static void AddSubInternalFPF(
+        byte operation,
         ref InternalFPF x,
         ref InternalFPF y,
-        ref InternalFPF z)
+        ref InternalFPF z
+    )
     {
         int exponent_difference;
         char borrow;
         char carry;
         int i;
-        InternalFPF locx, locy;  /* Needed since we alter them */
+        InternalFPF locx,
+            locy; /* Needed since we alter them */
         /*
         ** Following big switch statement handles the
         ** various combinations of operand types.
@@ -820,7 +794,6 @@ public class EMFloat : EmFloatStruct
             case STATE.INFINITY_NORMAL:
                 memmove(ref z, ref x);
                 break;
-
 
             case STATE.ZERO_NAN:
             case STATE.SUBNORMAL_NAN:
@@ -859,8 +832,7 @@ public class EMFloat : EmFloatStruct
                     ** locx.exp == locy.exp
                     ** so, no shifting required
                     */
-                    if (locx.type == IFPF.IFPF_IS_SUBNORMAL ||
-                        locy.type == IFPF.IFPF_IS_SUBNORMAL)
+                    if (locx.type == IFPF.IFPF_IS_SUBNORMAL || locy.type == IFPF.IFPF_IS_SUBNORMAL)
                         z.type = IFPF.IFPF_IS_SUBNORMAL;
                     else
                         z.type = IFPF.IFPF_IS_NORMAL;
@@ -871,25 +843,22 @@ public class EMFloat : EmFloatStruct
                     z.sign = locx.sign;
                     z.exp = locx.exp;
                 }
-                else
-                    if (exponent_difference > 0)
+                else if (exponent_difference > 0)
                 {
                     /*
                     ** locx.exp > locy.exp
                     */
-                    StickyShiftRightMant(ref locy,
-                        exponent_difference);
+                    StickyShiftRightMant(ref locy, exponent_difference);
                     z.type = locx.type;
                     z.sign = locx.sign;
                     z.exp = locx.exp;
                 }
-                else    /* if (exponent_difference < 0) */
+                else /* if (exponent_difference < 0) */
                 {
                     /*
                     ** locx.exp < locy.exp
                     */
-                    StickyShiftRightMant(ref locx,
-                        -exponent_difference);
+                    StickyShiftRightMant(ref locx, -exponent_difference);
                     z.type = locy.type;
                     z.sign = (byte)(locy.sign ^ operation);
                     z.exp = locy.exp;
@@ -902,10 +871,12 @@ public class EMFloat : EmFloatStruct
                     */
                     borrow = (char)0;
                     for (i = (INTERNAL_FPF_PRECISION - 1); i >= 0; i--)
-                        Sub16Bits(ref borrow,
-                        out z.mantissa[i],
-                        locx.mantissa[i],
-                        locy.mantissa[i]);
+                        Sub16Bits(
+                            ref borrow,
+                            out z.mantissa[i],
+                            locx.mantissa[i],
+                            locy.mantissa[i]
+                        );
 
                     if (borrow != 0)
                     {
@@ -919,10 +890,7 @@ public class EMFloat : EmFloatStruct
                         borrow = (char)0;
                         for (i = (INTERNAL_FPF_PRECISION - 1); i >= 0; i--)
                         {
-                            Sub16Bits(ref borrow,
-                                out z.mantissa[i],
-                                (char)0,
-                                z.mantissa[i]);
+                            Sub16Bits(ref borrow, out z.mantissa[i], (char)0, z.mantissa[i]);
                         }
                     }
                     else
@@ -939,9 +907,7 @@ public class EMFloat : EmFloatStruct
                         z.type = IFPF.IFPF_IS_ZERO;
                         z.sign = 0; /* positive */
                     }
-                    else
-                        if (locx.type == IFPF.IFPF_IS_NORMAL ||
-                            locy.type == IFPF.IFPF_IS_NORMAL)
+                    else if (locx.type == IFPF.IFPF_IS_NORMAL || locy.type == IFPF.IFPF_IS_NORMAL)
                     {
                         normalize(ref z);
                     }
@@ -952,10 +918,7 @@ public class EMFloat : EmFloatStruct
                     carry = (char)0;
                     for (i = (INTERNAL_FPF_PRECISION - 1); i >= 0; i--)
                     {
-                        Add16Bits(ref carry,
-                            out z.mantissa[i],
-                            locx.mantissa[i],
-                            locy.mantissa[i]);
+                        Add16Bits(ref carry, out z.mantissa[i], locx.mantissa[i], locy.mantissa[i]);
                     }
 
                     if (carry != 0)
@@ -966,8 +929,7 @@ public class EMFloat : EmFloatStruct
                         z.mantissa[0] |= (char)0x8000;
                         z.type = IFPF.IFPF_IS_NORMAL;
                     }
-                    else
-                        if ((z.mantissa[0] & 0x8000) != 0)
+                    else if ((z.mantissa[0] & 0x8000) != 0)
                         z.type = IFPF.IFPF_IS_NORMAL;
                 }
                 break;
@@ -988,23 +950,19 @@ public class EMFloat : EmFloatStruct
         return;
     }
 
-
     /************************
     ** MultiplyInternalFPF **
     *************************
     ** Two internal-representation numbers x and y are multiplied; the
     ** result is returned in z.
     */
-    private static void MultiplyInternalFPF(
-        ref InternalFPF x,
-        ref InternalFPF y,
-        ref InternalFPF z)
+    private static void MultiplyInternalFPF(ref InternalFPF x, ref InternalFPF y, ref InternalFPF z)
     {
         int i;
         int j;
         char carry;
         char[] extra_bits = new char[INTERNAL_FPF_PRECISION];
-        InternalFPF locy;       /* Needed since this will be altered */
+        InternalFPF locy; /* Needed since this will be altered */
         /*
         ** As in the preceding function, this large switch
         ** statement selects among the many combinations
@@ -1050,7 +1008,6 @@ public class EMFloat : EmFloatStruct
                 memmove(ref z, ref y);
                 break;
 
-
             case STATE.SUBNORMAL_SUBNORMAL:
             case STATE.SUBNORMAL_NORMAL:
             case STATE.NORMAL_SUBNORMAL:
@@ -1073,8 +1030,7 @@ public class EMFloat : EmFloatStruct
                 /*
                 ** Initialize the result
                 */
-                if (x.type == IFPF.IFPF_IS_SUBNORMAL ||
-                    y.type == IFPF.IFPF_IS_SUBNORMAL)
+                if (x.type == IFPF.IFPF_IS_SUBNORMAL || y.type == IFPF.IFPF_IS_SUBNORMAL)
                     z.type = IFPF.IFPF_IS_SUBNORMAL;
                 else
                     z.type = IFPF.IFPF_IS_NORMAL;
@@ -1101,10 +1057,7 @@ public class EMFloat : EmFloatStruct
                         */
                         carry = (char)0;
                         for (j = (INTERNAL_FPF_PRECISION - 1); j >= 0; j--)
-                            Add16Bits(ref carry,
-                            out z.mantissa[j],
-                            z.mantissa[j],
-                            x.mantissa[j]);
+                            Add16Bits(ref carry, out z.mantissa[j], z.mantissa[j], x.mantissa[j]);
                     }
                     else
                     {
@@ -1156,22 +1109,18 @@ public class EMFloat : EmFloatStruct
         return;
     }
 
-
     /**********************
     ** DivideInternalFPF **
     ***********************
     ** Divide internal FPF number x by y.  Return result in z.
     */
-    private static void DivideInternalFPF(
-        ref InternalFPF x,
-        ref InternalFPF y,
-        ref InternalFPF z)
+    private static void DivideInternalFPF(ref InternalFPF x, ref InternalFPF y, ref InternalFPF z)
     {
         int i;
         int j;
         char carry;
         char[] extra_bits = new char[INTERNAL_FPF_PRECISION];
-        InternalFPF locx;       /* Local for x number */
+        InternalFPF locx; /* Local for x number */
 
         /*
         ** As with preceding function, the following switch
@@ -1264,8 +1213,7 @@ public class EMFloat : EmFloatStruct
                 */
                 z.type = x.type;
                 z.sign = (byte)(x.sign ^ y.sign);
-                z.exp = (short)(x.exp - y.exp +
-                    ((INTERNAL_FPF_PRECISION * 16 * 2)));
+                z.exp = (short)(x.exp - y.exp + ((INTERNAL_FPF_PRECISION * 16 * 2)));
                 for (i = 0; i < INTERNAL_FPF_PRECISION; i++)
                 {
                     z.mantissa[i] = (char)0;
@@ -1297,12 +1245,9 @@ public class EMFloat : EmFloatStruct
                     */
                     carry = (char)0;
                     for (j = (INTERNAL_FPF_PRECISION - 1); j >= 0; j--)
-                        Sub16Bits(ref carry,
-                        out extra_bits[j],
-                        extra_bits[j],
-                        y.mantissa[j]);
-                    carry = (char)1;      /* 1 shifted into quotient */
-                no_subtract:
+                        Sub16Bits(ref carry, out extra_bits[j], extra_bits[j], y.mantissa[j]);
+                    carry = (char)1; /* 1 shifted into quotient */
+                    no_subtract:
                     ShiftMantLeft1(ref carry, z.mantissa);
                     z.exp--;
                 }
@@ -1324,12 +1269,10 @@ public class EMFloat : EmFloatStruct
     ***********************
     ** Convert a signed long integer into an internal FPF number.
     */
-    private static void LongToInternalFPF(
-        int mylong,
-        ref InternalFPF dest)
+    private static void LongToInternalFPF(int mylong, ref InternalFPF dest)
     {
-        int i;          /* Index */
-        char myword;     /* Used to hold converted stuff */
+        int i; /* Index */
+        char myword; /* Used to hold converted stuff */
         /*
         ** Save the sign and get the absolute value.  This will help us
         ** with 64-bit machines, since we use only the lower 32
@@ -1392,19 +1335,19 @@ public class EMFloat : EmFloatStruct
     **  conversion.  It should be more than enough for programmers
     **  to determine whether the package is properly ported.
     */
-    private static int InternalFPFToString(
-        out string dest,
-        ref InternalFPF src)
+    private static int InternalFPFToString(out string dest, ref InternalFPF src)
     {
-        InternalFPF locFPFNum;          /* Local for src (will be altered) */
-        InternalFPF IFPF10;             /* Floating-point 10 */
-        InternalFPF IFPFComp;           /* For doing comparisons */
-        int msign;                      /* Holding for mantissa sign */
-        int expcount;                   /* Exponent counter */
-        int ccount;                     /* Character counter */
-        int i, j, k;                      /* Index */
-        char carryaccum;                 /* Carry accumulator */
-        char mycarry;                    /* Local for carry */
+        InternalFPF locFPFNum; /* Local for src (will be altered) */
+        InternalFPF IFPF10; /* Floating-point 10 */
+        InternalFPF IFPFComp; /* For doing comparisons */
+        int msign; /* Holding for mantissa sign */
+        int expcount; /* Exponent counter */
+        int ccount; /* Character counter */
+        int i,
+            j,
+            k; /* Index */
+        char carryaccum; /* Carry accumulator */
+        char mycarry; /* Local for carry */
 
         locFPFNum = new InternalFPF(INTERNAL_FPF_PRECISION);
         IFPF10 = new InternalFPF(INTERNAL_FPF_PRECISION);
@@ -1452,7 +1395,7 @@ public class EMFloat : EmFloatStruct
         msign = src.sign;
         src.sign = 0;
 
-        expcount = 0;             /* Init exponent counter */
+        expcount = 0; /* Init exponent counter */
 
         /*
         ** See if the number is less than 10.  If so, multiply
@@ -1489,7 +1432,7 @@ public class EMFloat : EmFloatStruct
         ** About time to start storing things.  First, store the
         ** mantissa sign.
         */
-        ccount = 1;               /* Init character counter */
+        ccount = 1; /* Init character counter */
         if (msign == 0)
             dest += "+";
         else
@@ -1531,12 +1474,12 @@ public class EMFloat : EmFloatStruct
 
         for (i = 0; i < 6; i++)
             if (i == 1)
-            {       /* Emit decimal point */
+            { /* Emit decimal point */
                 dest += ".";
                 ccount++;
             }
             else
-            {       /* Emit a digit */
+            { /* Emit a digit */
                 string s = "0"; // (char)('0'+carryaccum)); // this isn't ever called
                 dest += s;
                 ccount++;
@@ -1549,9 +1492,12 @@ public class EMFloat : EmFloatStruct
                 {
                     mycarry = (char)0;
                     for (k = (INTERNAL_FPF_PRECISION - 1); k >= 0; k--)
-                        Add16Bits(ref mycarry, out IFPFComp.mantissa[k],
+                        Add16Bits(
+                            ref mycarry,
+                            out IFPFComp.mantissa[k],
                             locFPFNum.mantissa[k],
-                            IFPF10.mantissa[k]);
+                            IFPF10.mantissa[k]
+                        );
                     carryaccum += (char)(mycarry != 0 ? 1 : 0);
                     memmove(ref locFPFNum, ref IFPFComp);
                 }

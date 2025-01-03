@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
         public void Test()
         {
             // This test ensures that our perf benchmark code compiles without problems.
-            // Benchmark code can be found in the following file under the 
+            // Benchmark code can be found in the following file under the
             // "CompilerTestResources" project that is part of Roslyn.sln -
             //      $/Roslyn/Main/Open/Compilers/Test/Resources/Core/PerfTests/CSPerfTest.cs
 
@@ -29,11 +29,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
             // as opposed to 'fixing' the test by updating the benchmark code.
 
             //GNAMBOO: Changing this code has implications for perf tests.
-            CompileAndVerify(TestResources.PerfTests.CSPerfTest).
-                             VerifyDiagnostics(
-                                // (2416,9): info CS8019: Unnecessary using directive.
-                                //         using nested;
-                                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using nested;"));
+            CompileAndVerify(TestResources.PerfTests.CSPerfTest)
+                .VerifyDiagnostics(
+                    // (2416,9): info CS8019: Unnecessary using directive.
+                    //         using nested;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using nested;")
+                );
         }
     }
 }

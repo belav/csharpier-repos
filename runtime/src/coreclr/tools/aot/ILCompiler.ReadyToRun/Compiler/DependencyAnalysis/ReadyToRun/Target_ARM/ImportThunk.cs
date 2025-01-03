@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using ILCompiler.DependencyAnalysis.ARM;
 using Internal.Text;
 using Internal.TypeSystem;
-
-using ILCompiler.DependencyAnalysis.ARM;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -15,7 +14,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     /// </summary>
     public partial class ImportThunk
     {
-        protected override void EmitCode(NodeFactory factory, ref ARM.ARMEmitter instructionEncoder, bool relocsOnly)
+        protected override void EmitCode(
+            NodeFactory factory,
+            ref ARM.ARMEmitter instructionEncoder,
+            bool relocsOnly
+        )
         {
             switch (_thunkKind)
             {

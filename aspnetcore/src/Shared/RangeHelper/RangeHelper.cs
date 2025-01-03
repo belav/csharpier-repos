@@ -35,7 +35,8 @@ internal static class RangeHelper
         HttpContext context,
         RequestHeaders requestHeaders,
         long length,
-        ILogger logger)
+        ILogger logger
+    )
     {
         var rawRangeHeader = context.Request.Headers.Range;
         if (StringValues.IsNullOrEmpty(rawRangeHeader))

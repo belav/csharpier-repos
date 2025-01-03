@@ -29,11 +29,12 @@ namespace System.DirectoryServices.AccountManagement
                     //  (CurrentEnumeratorMode.None implies we're _before_ the first value)
 
                     GlobalDebug.WriteLineIf(
-                                        GlobalDebug.Warn,
-                                        "PrincipalCollectionEnumerator",
-                                        "Current: bad position, endReached={0}, currentMode={1}",
-                                        _endReached,
-                                        _currentMode);
+                        GlobalDebug.Warn,
+                        "PrincipalCollectionEnumerator",
+                        "Current: bad position, endReached={0}, currentMode={1}",
+                        _endReached,
+                        _currentMode
+                    );
 
                     throw new InvalidOperationException(SR.PrincipalCollectionEnumInvalidPos);
                 }
@@ -45,10 +46,7 @@ namespace System.DirectoryServices.AccountManagement
 
         object IEnumerator.Current
         {
-            get
-            {
-                return Current;
-            }
+            get { return Current; }
         }
 
         //
@@ -57,7 +55,11 @@ namespace System.DirectoryServices.AccountManagement
 
         public bool MoveNext()
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalCollectionEnumerator", "Entering MoveNext");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalCollectionEnumerator",
+                "Entering MoveNext"
+            );
 
             CheckDisposed();
             CheckChanged();
@@ -65,7 +67,11 @@ namespace System.DirectoryServices.AccountManagement
             // We previously reached the end, nothing more to do
             if (_endReached)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalCollectionEnumerator", "MoveNext: endReached");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PrincipalCollectionEnumerator",
+                    "MoveNext: endReached"
+                );
                 return false;
             }
 
@@ -81,7 +87,11 @@ namespace System.DirectoryServices.AccountManagement
 
                     if (!_memberCollection.Cleared && !_memberCollection.ClearCompleted)
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalCollectionEnumerator", "MoveNext: None mode, starting with existing values");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "PrincipalCollectionEnumerator",
+                            "MoveNext: None mode, starting with existing values"
+                        );
 
                         // Start by enumerating the existing values in the store
                         _currentMode = CurrentEnumeratorMode.ResultSet;
@@ -89,11 +99,16 @@ namespace System.DirectoryServices.AccountManagement
                     }
                     else
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalCollectionEnumerator", "MoveNext: None mode, skipping existing values");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "PrincipalCollectionEnumerator",
+                            "MoveNext: None mode, skipping existing values"
+                        );
 
                         // The member collection was cleared.  Skip the ResultSet phase
                         _currentMode = CurrentEnumeratorMode.InsertedValuesCompleted;
-                        _enumerator = (IEnumerator<Principal>)_insertedValuesCompleted.GetEnumerator();
+                        _enumerator =
+                            (IEnumerator<Principal>)_insertedValuesCompleted.GetEnumerator();
                     }
                 }
 
@@ -101,7 +116,11 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (_currentMode == CurrentEnumeratorMode.ResultSet)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalCollectionEnumerator", "MoveNext: ResultSet mode");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "PrincipalCollectionEnumerator",
+                        "MoveNext: ResultSet mode"
+                    );
 
                     bool needToRepeat = false;
 
@@ -113,16 +132,26 @@ namespace System.DirectoryServices.AccountManagement
                         {
                             Principal principal = (Principal)_resultSet.CurrentAsPrincipal;
 
-                            if (_removedValuesCompleted.Contains(principal) || _removedValuesPending.Contains(principal))
+                            if (
+                                _removedValuesCompleted.Contains(principal)
+                                || _removedValuesPending.Contains(principal)
+                            )
                             {
                                 // It's a value that's been removed (either a pending remove that hasn't completed, or a remove
                                 // that completed _after_ we loaded the ResultSet from the store).
-                                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalCollectionEnumerator", "MoveNext: ResultSet mode, found remove, skipping");
+                                GlobalDebug.WriteLineIf(
+                                    GlobalDebug.Info,
+                                    "PrincipalCollectionEnumerator",
+                                    "MoveNext: ResultSet mode, found remove, skipping"
+                                );
 
                                 needToRepeat = true;
                                 continue;
                             }
-                            else if (_insertedValuesCompleted.Contains(principal) || _insertedValuesPending.Contains(principal))
+                            else if (
+                                _insertedValuesCompleted.Contains(principal)
+                                || _insertedValuesPending.Contains(principal)
+                            )
                             {
                                 // insertedValuesCompleted: We must have gotten the ResultSet after the inserted committed.
                                 // We don't want to return
@@ -131,7 +160,11 @@ namespace System.DirectoryServices.AccountManagement
                                 //
                                 // insertedValuesPending: The principal must have been originally in the ResultSet, but then
                                 // removed, saved, and re-added, with the re-add still pending.
-                                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalCollectionEnumerator", "MoveNext: ResultSet mode, found insert, skipping");
+                                GlobalDebug.WriteLineIf(
+                                    GlobalDebug.Info,
+                                    "PrincipalCollectionEnumerator",
+                                    "MoveNext: ResultSet mode, found insert, skipping"
+                                );
 
                                 needToRepeat = true;
                                 continue;
@@ -146,20 +179,28 @@ namespace System.DirectoryServices.AccountManagement
                         else
                         {
                             // No more values left to retrieve.  Now try the insertedValuesCompleted list.
-                            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalCollectionEnumerator", "MoveNext: ResultSet mode, moving to InsValuesComp mode");
+                            GlobalDebug.WriteLineIf(
+                                GlobalDebug.Info,
+                                "PrincipalCollectionEnumerator",
+                                "MoveNext: ResultSet mode, moving to InsValuesComp mode"
+                            );
 
                             _currentMode = CurrentEnumeratorMode.InsertedValuesCompleted;
-                            _enumerator = (IEnumerator<Principal>)_insertedValuesCompleted.GetEnumerator();
+                            _enumerator =
+                                (IEnumerator<Principal>)_insertedValuesCompleted.GetEnumerator();
                             needToRepeat = false;
                         }
-                    }
-                    while (needToRepeat);
+                    } while (needToRepeat);
                 }
 
                 // These are values whose insertion has completed, but after we already loaded the ResultSet from the store.
                 if (_currentMode == CurrentEnumeratorMode.InsertedValuesCompleted)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalCollectionEnumerator", "MoveNext: InsValuesComp mode");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "PrincipalCollectionEnumerator",
+                        "MoveNext: InsValuesComp mode"
+                    );
 
                     bool f = _enumerator.MoveNext();
 
@@ -170,17 +211,26 @@ namespace System.DirectoryServices.AccountManagement
                     }
                     else
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalCollectionEnumerator", "MoveNext: InsValuesComp mode, moving to InsValuesPend mode");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "PrincipalCollectionEnumerator",
+                            "MoveNext: InsValuesComp mode, moving to InsValuesPend mode"
+                        );
 
                         _currentMode = CurrentEnumeratorMode.InsertedValuesPending;
-                        _enumerator = (IEnumerator<Principal>)_insertedValuesPending.GetEnumerator();
+                        _enumerator =
+                            (IEnumerator<Principal>)_insertedValuesPending.GetEnumerator();
                     }
                 }
 
                 // These are values whose insertion has not yet been committed to the store.
                 if (_currentMode == CurrentEnumeratorMode.InsertedValuesPending)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalCollectionEnumerator", "MoveNext: InsValuesPend mode");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "PrincipalCollectionEnumerator",
+                        "MoveNext: InsValuesPend mode"
+                    );
 
                     bool f = _enumerator.MoveNext();
 
@@ -191,7 +241,11 @@ namespace System.DirectoryServices.AccountManagement
                     }
                     else
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalCollectionEnumerator", "MoveNext: InsValuesPend mode, nothing left");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "PrincipalCollectionEnumerator",
+                            "MoveNext: InsValuesPend mode, nothing left"
+                        );
 
                         _endReached = true;
                         return false;
@@ -199,7 +253,9 @@ namespace System.DirectoryServices.AccountManagement
                 }
             }
 
-            Debug.Fail($"PrincipalCollectionEnumerator.MoveNext: fell off end of function, mode = {_currentMode}");
+            Debug.Fail(
+                $"PrincipalCollectionEnumerator.MoveNext: fell off end of function, mode = {_currentMode}"
+            );
             return false;
         }
 
@@ -226,7 +282,7 @@ namespace System.DirectoryServices.AccountManagement
             Reset();
         }
 
-        public void Dispose()   // IEnumerator<Principal> inherits from IDisposable
+        public void Dispose() // IEnumerator<Principal> inherits from IDisposable
         {
             _disposed = true;
         }
@@ -235,13 +291,13 @@ namespace System.DirectoryServices.AccountManagement
         // Internal constructors
         //
         internal PrincipalCollectionEnumerator(
-                                    ResultSet resultSet,
-                                    PrincipalCollection memberCollection,
-                                    List<Principal> removedValuesCompleted,
-                                    List<Principal> removedValuesPending,
-                                    List<Principal> insertedValuesCompleted,
-                                    List<Principal> insertedValuesPending
-                                    )
+            ResultSet resultSet,
+            PrincipalCollection memberCollection,
+            List<Principal> removedValuesCompleted,
+            List<Principal> removedValuesPending,
+            List<Principal> insertedValuesCompleted,
+            List<Principal> insertedValuesPending
+        )
         {
             GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalCollectionEnumerator", "Ctor");
 
@@ -276,16 +332,16 @@ namespace System.DirectoryServices.AccountManagement
         private readonly List<Principal> _removedValuesPending;
         private readonly List<Principal> _removedValuesCompleted;
 
-        private bool _endReached;    // true if there are no results left to iterate over
+        private bool _endReached; // true if there are no results left to iterate over
 
-        private IEnumerator<Principal> _enumerator;   // The insertedValues{Completed,Pending} enumerator, used by MoveNext
+        private IEnumerator<Principal> _enumerator; // The insertedValues{Completed,Pending} enumerator, used by MoveNext
 
-        private enum CurrentEnumeratorMode          // The set of values that MoveNext is currently iterating over
+        private enum CurrentEnumeratorMode // The set of values that MoveNext is currently iterating over
         {
             None,
             ResultSet,
             InsertedValuesCompleted,
-            InsertedValuesPending
+            InsertedValuesPending,
         }
 
         private CurrentEnumeratorMode _currentMode = CurrentEnumeratorMode.None;
@@ -297,7 +353,11 @@ namespace System.DirectoryServices.AccountManagement
         {
             if (_disposed)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "PrincipalCollectionEnumerator", "CheckDisposed: accessing disposed object");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "PrincipalCollectionEnumerator",
+                    "CheckDisposed: accessing disposed object"
+                );
                 throw new ObjectDisposedException("PrincipalCollectionEnumerator");
             }
         }
@@ -313,11 +373,12 @@ namespace System.DirectoryServices.AccountManagement
             if (_memberCollection.LastChange > _creationTime)
             {
                 GlobalDebug.WriteLineIf(
-                            GlobalDebug.Warn,
-                            "PrincipalCollectionEnumerator",
-                            "CheckChanged: has changed (last change={0}, creation={1})",
-                            _memberCollection.LastChange,
-                            _creationTime);
+                    GlobalDebug.Warn,
+                    "PrincipalCollectionEnumerator",
+                    "CheckChanged: has changed (last change={0}, creation={1})",
+                    _memberCollection.LastChange,
+                    _creationTime
+                );
 
                 throw new InvalidOperationException(SR.PrincipalCollectionEnumHasChanged);
             }

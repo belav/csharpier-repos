@@ -4,8 +4,8 @@
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
-using System.UnitTesting;
 using System.Reflection;
+using System.UnitTesting;
 using Xunit;
 
 namespace System.ComponentModel.Composition.Primitives
@@ -15,10 +15,13 @@ namespace System.ComponentModel.Composition.Primitives
         [Fact]
         public void Constructor_NullAsCatalogArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>("catalog", () =>
-            {
-                new DirectoryCatalog.DirectoryCatalogDebuggerProxy((DirectoryCatalog)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "catalog",
+                () =>
+                {
+                    new DirectoryCatalog.DirectoryCatalogDebuggerProxy((DirectoryCatalog)null);
+                }
+            );
         }
 
         [Fact]
@@ -44,7 +47,9 @@ namespace System.ComponentModel.Composition.Primitives
             string directoryPath = TemporaryFileCopier.GetNewTemporaryDirectory();
             var expectations = Expectations.GetAssemblies();
 
-            foreach (string fileName in expectations.Select(assembly => assembly.Location).ToArray())
+            foreach (
+                string fileName in expectations.Select(assembly => assembly.Location).ToArray()
+            )
             {
                 File.Copy(fileName, Path.Combine(directoryPath, Path.GetFileName(fileName)));
             }
@@ -52,7 +57,6 @@ namespace System.ComponentModel.Composition.Primitives
             var proxy = new DirectoryCatalog.DirectoryCatalogDebuggerProxy(catalog);
 
             Assert.Equal(expectations, proxy.Assemblies);
-
         }
 
         [Fact]
@@ -87,7 +91,10 @@ namespace System.ComponentModel.Composition.Primitives
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )]
         [PlatformSpecific(TestPlatforms.Windows)]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void FullPath_ValidPath_ShouldBeFine()
@@ -96,18 +103,26 @@ namespace System.ComponentModel.Composition.Primitives
             var expectations = new ExpectationCollection<string, string>();
 
             // Ensure the path is always normalized properly.
-            string rootTempPath = Path.GetFullPath(TemporaryFileCopier.GetRootTemporaryDirectory()).ToUpperInvariant();
+            string rootTempPath = Path.GetFullPath(TemporaryFileCopier.GetRootTemporaryDirectory())
+                .ToUpperInvariant();
 
             // Note: These relative paths work properly because the unit test temporary directories are always
             // created as a subfolder off the AppDomain.CurrentDomain.BaseDirectory.
-            expectations.Add(".", Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".")).ToUpperInvariant());
+            expectations.Add(
+                ".",
+                Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "."))
+                    .ToUpperInvariant()
+            );
             expectations.Add(TemporaryFileCopier.RootTemporaryDirectoryName, rootTempPath);
             expectations.Add(TemporaryFileCopier.GetRootTemporaryDirectory(), rootTempPath);
             expectations.Add(directoryPath, Path.GetFullPath(directoryPath).ToUpperInvariant());
 
             foreach (var e in expectations)
             {
-                var cat = CreateDirectoryCatalog(e.Input, DirectoryCatalogTests.NonExistentSearchPattern);
+                var cat = CreateDirectoryCatalog(
+                    e.Input,
+                    DirectoryCatalogTests.NonExistentSearchPattern
+                );
                 var proxy = new DirectoryCatalog.DirectoryCatalogDebuggerProxy(cat);
 
                 Assert.Equal(e.Output, proxy.FullPath);
@@ -131,8 +146,7 @@ namespace System.ComponentModel.Composition.Primitives
         {
             string directoryPath = TemporaryFileCopier.GetNewTemporaryDirectory();
             // Add one text file
-            using (File.CreateText(Path.Combine(directoryPath, "Test.txt")))
-            { }
+            using (File.CreateText(Path.Combine(directoryPath, "Test.txt"))) { }
 
             // Add two dll's
             string dll1 = Path.Combine(directoryPath, "Test1.dll");
@@ -143,11 +157,15 @@ namespace System.ComponentModel.Composition.Primitives
             var cat = CreateDirectoryCatalog(directoryPath);
             var proxy = new DirectoryCatalog.DirectoryCatalogDebuggerProxy(cat);
 
-            EqualityExtensions.CheckEquals(new string[] { dll1.ToUpperInvariant(), dll2.ToUpperInvariant() },
-                proxy.LoadedFiles);
+            EqualityExtensions.CheckEquals(
+                new string[] { dll1.ToUpperInvariant(), dll2.ToUpperInvariant() },
+                proxy.LoadedFiles
+            );
         }
 
-        private DirectoryCatalog.DirectoryCatalogDebuggerProxy CreateAssemblyDebuggerProxy(DirectoryCatalog catalog)
+        private DirectoryCatalog.DirectoryCatalogDebuggerProxy CreateAssemblyDebuggerProxy(
+            DirectoryCatalog catalog
+        )
         {
             return new DirectoryCatalog.DirectoryCatalogDebuggerProxy(catalog);
         }
@@ -167,11 +185,15 @@ namespace System.ComponentModel.Composition.Primitives
     {
         public const string RootTemporaryDirectoryName = "RootTempDirectory";
         private static string _temporaryDirectory;
+
         public static string GetRootTemporaryDirectory()
         {
             if (_temporaryDirectory == null)
             {
-                string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), RootTemporaryDirectoryName);
+                string path = Path.Combine(
+                    Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                    RootTemporaryDirectoryName
+                );
 
                 if (!Directory.Exists(path))
                 {

@@ -4,11 +4,11 @@
 // Tests Nested Finalize()
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
-public class Test_finalizenested {
-
+public class Test_finalizenested
+{
     public class D
     {
         ~D()
@@ -30,7 +30,7 @@ public class Test_finalizenested {
         ~C()
         {
             Console.WriteLine("In Finalize() of C");
-            d=null;
+            d = null;
             Thread.Sleep(1000);
         }
     }
@@ -47,7 +47,7 @@ public class Test_finalizenested {
         ~B()
         {
             Console.WriteLine("In Finalize() of B");
-            c=null;
+            c = null;
             Thread.Sleep(1000);
         }
     }
@@ -64,13 +64,13 @@ public class Test_finalizenested {
         ~A()
         {
             Console.WriteLine("In Finalize() of A");
-            b=null;
+            b = null;
             Thread.Sleep(1000);
         }
     }
 
-    public class Dummy {
-
+    public class Dummy
+    {
         public A a;
         public static bool visited;
 
@@ -82,42 +82,42 @@ public class Test_finalizenested {
         ~Dummy()
         {
             Console.WriteLine("In Finalize() of Dummy");
-            a=null;
-            visited=true;
+            a = null;
+            visited = true;
         }
     }
 
     public class CreateObj
     {
-// disabling unused variable warning
+        // disabling unused variable warning
 #pragma warning disable 0414
         Dummy obj;
 #pragma warning restore 0414
 
         public CreateObj()
         {
-            obj=new Dummy();
+            obj = new Dummy();
         }
 
         public void RunTest()
         {
-            obj=null;
+            obj = null;
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void AllocAndDealloc() 
+    public static void AllocAndDealloc()
     {
         CreateObj temp = new CreateObj();
         temp.RunTest();
     }
 
-    public static int Main() 
+    public static int Main()
     {
         AllocAndDealloc();
 
         GC.Collect();
-        GC.WaitForPendingFinalizers();  // makes sure Finalize() is called.
+        GC.WaitForPendingFinalizers(); // makes sure Finalize() is called.
         GC.Collect();
 
         if (Dummy.visited)
@@ -127,6 +127,5 @@ public class Test_finalizenested {
         }
         Console.WriteLine("Test Failed");
         return 1;
-
     }
 }

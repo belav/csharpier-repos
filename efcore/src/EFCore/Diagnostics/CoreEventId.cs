@@ -133,13 +133,12 @@ public static class CoreEventId
         StartedTracking,
         StateChanged,
         ValueGenerated,
-        SkipCollectionChangeDetected
+        SkipCollectionChangeDetected,
     }
 
     private static readonly string _updatePrefix = DbLoggerCategory.Update.Name + ".";
 
-    private static EventId MakeUpdateId(Id id)
-        => new((int)id, _updatePrefix + id);
+    private static EventId MakeUpdateId(Id id) => new((int)id, _updatePrefix + id);
 
     /// <summary>
     ///     An error occurred while attempting to save changes to the database.
@@ -171,13 +170,13 @@ public static class CoreEventId
     ///     The same entity is being tracked as a different shared entity entity type.
     ///     This event is in the <see cref="DbLoggerCategory.Update" /> category.
     /// </summary>
-    public static readonly EventId DuplicateDependentEntityTypeInstanceWarning =
-        MakeUpdateId(Id.DuplicateDependentEntityTypeInstanceWarning);
+    public static readonly EventId DuplicateDependentEntityTypeInstanceWarning = MakeUpdateId(
+        Id.DuplicateDependentEntityTypeInstanceWarning
+    );
 
     private static readonly string _queryPrefix = DbLoggerCategory.Query.Name + ".";
 
-    private static EventId MakeQueryId(Id id)
-        => new((int)id, _queryPrefix + id);
+    private static EventId MakeQueryId(Id id) => new((int)id, _queryPrefix + id);
 
     /// <summary>
     ///     An error occurred while processing the results of a query.
@@ -216,8 +215,8 @@ public static class CoreEventId
     ///         This event uses the <see cref="NavigationEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId PossibleUnintendedCollectionNavigationNullComparisonWarning
-        = MakeQueryId(Id.PossibleUnintendedCollectionNavigationNullComparisonWarning);
+    public static readonly EventId PossibleUnintendedCollectionNavigationNullComparisonWarning =
+        MakeQueryId(Id.PossibleUnintendedCollectionNavigationNullComparisonWarning);
 
     /// <summary>
     ///     Possible unintended reference comparison.
@@ -230,8 +229,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="BinaryExpressionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId PossibleUnintendedReferenceComparisonWarning
-        = MakeQueryId(Id.PossibleUnintendedReferenceComparisonWarning);
+    public static readonly EventId PossibleUnintendedReferenceComparisonWarning = MakeQueryId(
+        Id.PossibleUnintendedReferenceComparisonWarning
+    );
 
     /// <summary>
     ///     Invalid include path '{navigationChain}', couldn't find navigation for '{navigationName}'.
@@ -244,8 +244,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="InvalidIncludePathEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId InvalidIncludePathError
-        = MakeQueryId(Id.InvalidIncludePathError);
+    public static readonly EventId InvalidIncludePathError = MakeQueryId(
+        Id.InvalidIncludePathError
+    );
 
     /// <summary>
     ///     Starting query compilation.
@@ -258,8 +259,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="QueryExpressionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId QueryCompilationStarting
-        = MakeQueryId(Id.QueryCompilationStarting);
+    public static readonly EventId QueryCompilationStarting = MakeQueryId(
+        Id.QueryCompilationStarting
+    );
 
     /// <summary>
     ///     A navigation base was included in the query.
@@ -272,8 +274,7 @@ public static class CoreEventId
     ///         This event uses the <see cref="NavigationBaseEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId NavigationBaseIncluded
-        = MakeQueryId(Id.NavigationBaseIncluded);
+    public static readonly EventId NavigationBaseIncluded = MakeQueryId(Id.NavigationBaseIncluded);
 
     /// <summary>
     ///     A navigation base specific in Include in the query was ignored because it will be populated already due to fix-up.
@@ -286,8 +287,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="NavigationBaseEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId NavigationBaseIncludeIgnored
-        = MakeQueryId(Id.NavigationBaseIncludeIgnored);
+    public static readonly EventId NavigationBaseIncludeIgnored = MakeQueryId(
+        Id.NavigationBaseIncludeIgnored
+    );
 
     /// <summary>
     ///     A query uses a row limiting operation (Skip/Take) without OrderBy which may lead to unpredictable results.
@@ -295,8 +297,9 @@ public static class CoreEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Query" /> category.
     /// </remarks>
-    public static readonly EventId RowLimitingOperationWithoutOrderByWarning
-        = MakeQueryId(Id.RowLimitingOperationWithoutOrderByWarning);
+    public static readonly EventId RowLimitingOperationWithoutOrderByWarning = MakeQueryId(
+        Id.RowLimitingOperationWithoutOrderByWarning
+    );
 
     /// <summary>
     ///     A query uses First/FirstOrDefault operation without OrderBy and filter which may lead to unpredictable results.
@@ -304,8 +307,9 @@ public static class CoreEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Query" /> category.
     /// </remarks>
-    public static readonly EventId FirstWithoutOrderByAndFilterWarning
-        = MakeQueryId(Id.FirstWithoutOrderByAndFilterWarning);
+    public static readonly EventId FirstWithoutOrderByAndFilterWarning = MakeQueryId(
+        Id.FirstWithoutOrderByAndFilterWarning
+    );
 
     /// <summary>
     ///     The query uses the 'Distinct' operator after applying an ordering. If there are any row limiting operation used before `Distinct`
@@ -315,8 +319,8 @@ public static class CoreEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Query" /> category.
     /// </remarks>
-    public static readonly EventId DistinctAfterOrderByWithoutRowLimitingOperatorWarning
-        = MakeQueryId(Id.DistinctAfterOrderByWithoutRowLimitingOperatorWarning);
+    public static readonly EventId DistinctAfterOrderByWithoutRowLimitingOperatorWarning =
+        MakeQueryId(Id.DistinctAfterOrderByWithoutRowLimitingOperatorWarning);
 
     /// <summary>
     ///     A query was canceled for context type '{contextType}'.
@@ -324,8 +328,7 @@ public static class CoreEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Query" /> category.
     /// </remarks>
-    public static readonly EventId QueryCanceled
-        = MakeQueryId(Id.QueryCanceled);
+    public static readonly EventId QueryCanceled = MakeQueryId(Id.QueryCanceled);
 
     /// <summary>
     ///     A string value for an enum was read from JSON. Starting with EF Core 8, a breaking change was made to store enum
@@ -334,13 +337,11 @@ public static class CoreEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Query" /> category.
     /// </remarks>
-    public static readonly EventId StringEnumValueInJson
-        = MakeQueryId(Id.StringEnumValueInJson);
+    public static readonly EventId StringEnumValueInJson = MakeQueryId(Id.StringEnumValueInJson);
 
     private static readonly string _infraPrefix = DbLoggerCategory.Infrastructure.Name + ".";
 
-    private static EventId MakeInfraId(Id id)
-        => new((int)id, _infraPrefix + id);
+    private static EventId MakeInfraId(Id id) => new((int)id, _infraPrefix + id);
 
     /// <summary>
     ///     A warning indicating that sensitive data logging is enabled and may be logged.
@@ -353,7 +354,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="EventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId SensitiveDataLoggingEnabledWarning = MakeInfraId(Id.SensitiveDataLoggingEnabledWarning);
+    public static readonly EventId SensitiveDataLoggingEnabledWarning = MakeInfraId(
+        Id.SensitiveDataLoggingEnabledWarning
+    );
 
     /// <summary>
     ///     A service provider was created for internal use by Entity Framework.
@@ -379,7 +382,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="ServiceProvidersEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ManyServiceProvidersCreatedWarning = MakeInfraId(Id.ManyServiceProvidersCreatedWarning);
+    public static readonly EventId ManyServiceProvidersCreatedWarning = MakeInfraId(
+        Id.ManyServiceProvidersCreatedWarning
+    );
 
     /// <summary>
     ///     A <see cref="DbContext" /> was initialized.
@@ -405,7 +410,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="ServiceProviderDebugInfoEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ServiceProviderDebugInfo = MakeInfraId(Id.ServiceProviderDebugInfo);
+    public static readonly EventId ServiceProviderDebugInfo = MakeInfraId(
+        Id.ServiceProviderDebugInfo
+    );
 
     /// <summary>
     ///     A transient exception has been encountered during execution and the operation will be retried.
@@ -418,7 +425,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="ContextInitializedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ExecutionStrategyRetrying = MakeInfraId(Id.ExecutionStrategyRetrying);
+    public static readonly EventId ExecutionStrategyRetrying = MakeInfraId(
+        Id.ExecutionStrategyRetrying
+    );
 
     /// <summary>
     ///     A navigation property is being lazy-loaded.
@@ -444,7 +453,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="LazyLoadingEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId LazyLoadOnDisposedContextWarning = MakeInfraId(Id.LazyLoadOnDisposedContextWarning);
+    public static readonly EventId LazyLoadOnDisposedContextWarning = MakeInfraId(
+        Id.LazyLoadOnDisposedContextWarning
+    );
 
     /// <summary>
     ///     An attempt was made to lazy-load a property from a detached/no-tracking entity.
@@ -457,7 +468,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="LazyLoadingEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId DetachedLazyLoadingWarning = MakeInfraId(Id.DetachedLazyLoadingWarning);
+    public static readonly EventId DetachedLazyLoadingWarning = MakeInfraId(
+        Id.DetachedLazyLoadingWarning
+    );
 
     /// <summary>
     ///     'AddEntityFramework*' was called on the service provider, but 'UseInternalServiceProvider' wasn't.
@@ -470,7 +483,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="ServiceProviderEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId RedundantAddServicesCallWarning = MakeInfraId(Id.RedundantAddServicesCallWarning);
+    public static readonly EventId RedundantAddServicesCallWarning = MakeInfraId(
+        Id.RedundantAddServicesCallWarning
+    );
 
     /// <summary>
     ///     The model supplied in the context options was created with an older EF Core version.
@@ -487,13 +502,13 @@ public static class CoreEventId
 
     private static readonly string _modelPrefix = DbLoggerCategory.Model.Name + ".";
 
-    private static EventId MakeModelId(Id id)
-        => new((int)id, _modelPrefix + id);
+    private static EventId MakeModelId(Id id) => new((int)id, _modelPrefix + id);
 
-    private static readonly string _modelValidationPrefix = DbLoggerCategory.Model.Validation.Name + ".";
+    private static readonly string _modelValidationPrefix =
+        DbLoggerCategory.Model.Validation.Name + ".";
 
-    private static EventId MakeModelValidationId(Id id)
-        => new((int)id, _modelValidationPrefix + id);
+    private static EventId MakeModelValidationId(Id id) =>
+        new((int)id, _modelValidationPrefix + id);
 
     /// <summary>
     ///     A shadow property has been created.
@@ -506,7 +521,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ShadowPropertyCreated = MakeModelValidationId(Id.ShadowPropertyCreated);
+    public static readonly EventId ShadowPropertyCreated = MakeModelValidationId(
+        Id.ShadowPropertyCreated
+    );
 
     /// <summary>
     ///     A foreign key property was created in shadow state because a conflicting property with the simple name for
@@ -525,7 +542,9 @@ public static class CoreEventId
     ///         examples.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ShadowForeignKeyPropertyCreated = MakeModelValidationId(Id.ShadowForeignKeyPropertyCreated);
+    public static readonly EventId ShadowForeignKeyPropertyCreated = MakeModelValidationId(
+        Id.ShadowForeignKeyPropertyCreated
+    );
 
     /// <summary>
     ///     An entity type  was first mapped explicitly and then ignored.
@@ -542,7 +561,9 @@ public static class CoreEventId
     ///         examples.
     ///     </para>
     /// </remarks>
-    public static readonly EventId MappedEntityTypeIgnoredWarning = MakeModelId(Id.MappedEntityTypeIgnoredWarning);
+    public static readonly EventId MappedEntityTypeIgnoredWarning = MakeModelId(
+        Id.MappedEntityTypeIgnoredWarning
+    );
 
     /// <summary>
     ///     A navigation was first mapped explicitly and then ignored.
@@ -559,7 +580,9 @@ public static class CoreEventId
     ///         examples.
     ///     </para>
     /// </remarks>
-    public static readonly EventId MappedNavigationIgnoredWarning = MakeModelId(Id.MappedNavigationIgnoredWarning);
+    public static readonly EventId MappedNavigationIgnoredWarning = MakeModelId(
+        Id.MappedNavigationIgnoredWarning
+    );
 
     /// <summary>
     ///     A property was first mapped explicitly and then ignored.
@@ -576,7 +599,9 @@ public static class CoreEventId
     ///         examples.
     ///     </para>
     /// </remarks>
-    public static readonly EventId MappedPropertyIgnoredWarning = MakeModelId(Id.MappedPropertyIgnoredWarning);
+    public static readonly EventId MappedPropertyIgnoredWarning = MakeModelId(
+        Id.MappedPropertyIgnoredWarning
+    );
 
     /// <summary>
     ///     A property was first mapped explicitly and then ignored.
@@ -593,7 +618,9 @@ public static class CoreEventId
     ///         examples.
     ///     </para>
     /// </remarks>
-    public static readonly EventId MappedComplexPropertyIgnoredWarning = MakeModelId(Id.MappedComplexPropertyIgnoredWarning);
+    public static readonly EventId MappedComplexPropertyIgnoredWarning = MakeModelId(
+        Id.MappedComplexPropertyIgnoredWarning
+    );
 
     /// <summary>
     ///     An index was not created as the properties are already covered.
@@ -621,7 +648,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId IncompatibleMatchingForeignKeyProperties = MakeModelId(Id.IncompatibleMatchingForeignKeyProperties);
+    public static readonly EventId IncompatibleMatchingForeignKeyProperties = MakeModelId(
+        Id.IncompatibleMatchingForeignKeyProperties
+    );
 
     /// <summary>
     ///     Foreign key configured as required before the dependent end was determined.
@@ -635,7 +664,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId AmbiguousEndRequiredWarning = MakeModelId(Id.AmbiguousEndRequiredWarning);
+    public static readonly EventId AmbiguousEndRequiredWarning = MakeModelId(
+        Id.AmbiguousEndRequiredWarning
+    );
 
     /// <summary>
     ///     The <see cref="RequiredAttribute" /> on the collection navigation property was ignored.
@@ -648,7 +679,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="NavigationEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId RequiredAttributeOnCollection = MakeModelId(Id.RequiredAttributeOnCollection);
+    public static readonly EventId RequiredAttributeOnCollection = MakeModelId(
+        Id.RequiredAttributeOnCollection
+    );
 
     /// <summary>
     ///     The <see cref="RequiredAttribute" /> on the skip navigation property was ignored.
@@ -661,7 +694,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="SkipNavigationEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId RequiredAttributeOnSkipNavigation = MakeModelId(Id.RequiredAttributeOnSkipNavigation);
+    public static readonly EventId RequiredAttributeOnSkipNavigation = MakeModelId(
+        Id.RequiredAttributeOnSkipNavigation
+    );
 
     /// <summary>
     ///     The properties that best match the foreign key convention are already used by a different foreign key.
@@ -674,7 +709,9 @@ public static class CoreEventId
     ///         This event uses the <see cref="ForeignKeyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ConflictingShadowForeignKeysWarning = MakeModelId(Id.ConflictingShadowForeignKeysWarning);
+    public static readonly EventId ConflictingShadowForeignKeysWarning = MakeModelId(
+        Id.ConflictingShadowForeignKeysWarning
+    );
 
     /// <summary>
     ///     There are multiple properties that could be used as the primary key.
@@ -688,7 +725,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId MultiplePrimaryKeyCandidates = MakeModelId(Id.MultiplePrimaryKeyCandidates);
+    public static readonly EventId MultiplePrimaryKeyCandidates = MakeModelId(
+        Id.MultiplePrimaryKeyCandidates
+    );
 
     /// <summary>
     ///     There are multiple properties that could be navigations to the same type.
@@ -702,7 +741,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId MultipleNavigationProperties = MakeModelId(Id.MultipleNavigationProperties);
+    public static readonly EventId MultipleNavigationProperties = MakeModelId(
+        Id.MultipleNavigationProperties
+    );
 
     /// <summary>
     ///     There are multiple navigations with <see cref="InversePropertyAttribute" /> that point
@@ -717,8 +758,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId MultipleInversePropertiesSameTargetWarning =
-        MakeModelId(Id.MultipleInversePropertiesSameTargetWarning);
+    public static readonly EventId MultipleInversePropertiesSameTargetWarning = MakeModelId(
+        Id.MultipleInversePropertiesSameTargetWarning
+    );
 
     /// <summary>
     ///     The navigation that <see cref="InversePropertyAttribute" /> points to is not the defining navigation.
@@ -733,7 +775,9 @@ public static class CoreEventId
     ///     </para>
     /// </remarks>
     [Obsolete("Log message with this event Id has been removed.")]
-    public static readonly EventId NonDefiningInverseNavigationWarning = MakeModelId(Id.Obsolete_NonDefiningInverseNavigationWarning);
+    public static readonly EventId NonDefiningInverseNavigationWarning = MakeModelId(
+        Id.Obsolete_NonDefiningInverseNavigationWarning
+    );
 
     /// <summary>
     ///     The navigation that <see cref="InversePropertyAttribute" /> points to is not the defining navigation.
@@ -747,7 +791,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId NonOwnershipInverseNavigationWarning = MakeModelId(Id.NonOwnershipInverseNavigationWarning);
+    public static readonly EventId NonOwnershipInverseNavigationWarning = MakeModelId(
+        Id.NonOwnershipInverseNavigationWarning
+    );
 
     /// <summary>
     ///     Navigations separated into two relationships as <see cref="ForeignKeyAttribute" /> was specified on properties
@@ -762,8 +808,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ForeignKeyAttributesOnBothPropertiesWarning =
-        MakeModelId(Id.ForeignKeyAttributesOnBothPropertiesWarning);
+    public static readonly EventId ForeignKeyAttributesOnBothPropertiesWarning = MakeModelId(
+        Id.ForeignKeyAttributesOnBothPropertiesWarning
+    );
 
     /// <summary>
     ///     Navigations separated into two relationships as <see cref="ForeignKeyAttribute" /> was specified on navigations
@@ -778,8 +825,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ForeignKeyAttributesOnBothNavigationsWarning =
-        MakeModelId(Id.ForeignKeyAttributesOnBothNavigationsWarning);
+    public static readonly EventId ForeignKeyAttributesOnBothNavigationsWarning = MakeModelId(
+        Id.ForeignKeyAttributesOnBothNavigationsWarning
+    );
 
     /// <summary>
     ///     The <see cref="ForeignKeyAttribute" /> specified on the navigation doesn't match the <see cref="ForeignKeyAttribute" />
@@ -809,7 +857,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId RedundantForeignKeyWarning = MakeModelValidationId(Id.RedundantForeignKeyWarning);
+    public static readonly EventId RedundantForeignKeyWarning = MakeModelValidationId(
+        Id.RedundantForeignKeyWarning
+    );
 
     /// <summary>
     ///     A <see cref="KeylessAttribute" /> attribute on the entity type is conflicting
@@ -824,8 +874,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ConflictingKeylessAndKeyAttributesWarning =
-        MakeModelId(Id.ConflictingKeylessAndKeyAttributesWarning);
+    public static readonly EventId ConflictingKeylessAndKeyAttributesWarning = MakeModelId(
+        Id.ConflictingKeylessAndKeyAttributesWarning
+    );
 
     /// <summary>
     ///     Required navigation with principal entity having global query filter defined
@@ -840,13 +891,15 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId PossibleIncorrectRequiredNavigationWithQueryFilterInteractionWarning
-        = MakeModelValidationId(Id.PossibleIncorrectRequiredNavigationWithQueryFilterInteractionWarning);
+    public static readonly EventId PossibleIncorrectRequiredNavigationWithQueryFilterInteractionWarning =
+        MakeModelValidationId(
+            Id.PossibleIncorrectRequiredNavigationWithQueryFilterInteractionWarning
+        );
 
-    private static readonly string _changeTrackingPrefix = DbLoggerCategory.ChangeTracking.Name + ".";
+    private static readonly string _changeTrackingPrefix =
+        DbLoggerCategory.ChangeTracking.Name + ".";
 
-    private static EventId MakeChangeTrackingId(Id id)
-        => new((int)id, _changeTrackingPrefix + id);
+    private static EventId MakeChangeTrackingId(Id id) => new((int)id, _changeTrackingPrefix + id);
 
     /// <summary>
     ///     DetectChanges is starting.
@@ -860,7 +913,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId DetectChangesStarting = MakeChangeTrackingId(Id.DetectChangesStarting);
+    public static readonly EventId DetectChangesStarting = MakeChangeTrackingId(
+        Id.DetectChangesStarting
+    );
 
     /// <summary>
     ///     DetectChanges has completed.
@@ -874,7 +929,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId DetectChangesCompleted = MakeChangeTrackingId(Id.DetectChangesCompleted);
+    public static readonly EventId DetectChangesCompleted = MakeChangeTrackingId(
+        Id.DetectChangesCompleted
+    );
 
     /// <summary>
     ///     DetectChanges has detected a change in a property value.
@@ -888,7 +945,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId PropertyChangeDetected = MakeChangeTrackingId(Id.PropertyChangeDetected);
+    public static readonly EventId PropertyChangeDetected = MakeChangeTrackingId(
+        Id.PropertyChangeDetected
+    );
 
     /// <summary>
     ///     DetectChanges has detected a change in a foreign key property value.
@@ -902,7 +961,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ForeignKeyChangeDetected = MakeChangeTrackingId(Id.ForeignKeyChangeDetected);
+    public static readonly EventId ForeignKeyChangeDetected = MakeChangeTrackingId(
+        Id.ForeignKeyChangeDetected
+    );
 
     /// <summary>
     ///     DetectChanges has detected entities were added and/or removed from a collection
@@ -917,7 +978,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId CollectionChangeDetected = MakeChangeTrackingId(Id.CollectionChangeDetected);
+    public static readonly EventId CollectionChangeDetected = MakeChangeTrackingId(
+        Id.CollectionChangeDetected
+    );
 
     /// <summary>
     ///     DetectChanges has detected entities were added and/or removed from a collection skip navigation property.
@@ -931,7 +994,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId SkipCollectionChangeDetected = MakeChangeTrackingId(Id.SkipCollectionChangeDetected);
+    public static readonly EventId SkipCollectionChangeDetected = MakeChangeTrackingId(
+        Id.SkipCollectionChangeDetected
+    );
 
     /// <summary>
     ///     DetectChanges has detected a change to the entity references by another entity.
@@ -945,7 +1010,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ReferenceChangeDetected = MakeChangeTrackingId(Id.ReferenceChangeDetected);
+    public static readonly EventId ReferenceChangeDetected = MakeChangeTrackingId(
+        Id.ReferenceChangeDetected
+    );
 
     /// <summary>
     ///     An entity is being tracked by the <see cref="DbContext" />.
@@ -1060,7 +1127,9 @@ public static class CoreEventId
     ///         <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId OptimisticConcurrencyException = MakeUpdateId(Id.OptimisticConcurrencyException);
+    public static readonly EventId OptimisticConcurrencyException = MakeUpdateId(
+        Id.OptimisticConcurrencyException
+    );
 
     /// <summary>
     ///     The <see cref="DbContext" /> is being disposed.
@@ -1087,5 +1156,7 @@ public static class CoreEventId
     ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId CollectionWithoutComparer = MakeModelValidationId(Id.CollectionWithoutComparer);
+    public static readonly EventId CollectionWithoutComparer = MakeModelValidationId(
+        Id.CollectionWithoutComparer
+    );
 }

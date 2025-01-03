@@ -1,17 +1,22 @@
 ﻿namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.Xml;
-    using System.Runtime.Serialization;
-    using System.Reflection;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Xml;
 
     #region XmlDocumentSurrogate
     internal sealed class XmlDocumentSurrogate : ISerializationSurrogate
     {
         internal XmlDocumentSurrogate() { }
-        void ISerializationSurrogate.GetObjectData(object obj, SerializationInfo info, StreamingContext context)
+
+        void ISerializationSurrogate.GetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context
+        )
         {
             XmlDocument doc = obj as XmlDocument;
             if (doc == null)
@@ -20,7 +25,13 @@
             info.AddValue("innerXml", doc.InnerXml);
             info.SetType(typeof(XmlDocumentReference));
         }
-        object ISerializationSurrogate.SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
+
+        object ISerializationSurrogate.SetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context,
+            ISurrogateSelector selector
+        )
         {
             return null;
         }

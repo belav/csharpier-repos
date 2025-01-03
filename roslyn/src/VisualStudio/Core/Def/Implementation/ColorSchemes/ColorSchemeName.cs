@@ -8,5 +8,5 @@ internal enum ColorSchemeName
 {
     None = 0,
     VisualStudio2017 = 1,
-    VisualStudio2019 = 2
+    VisualStudio2019 = 2,
 }

@@ -24,6 +24,7 @@ namespace System.Xml
         internal const string NsExsltCommon = "http://exslt.org/common";
         internal const string NsXQueryDataType = "http://www.w3.org/2003/11/xpath-datatypes";
         internal const string NsCollationBase = "http://collations.microsoft.com";
-        internal const string NsCollCodePoint = "http://www.w3.org/2004/10/xpath-functions/collation/codepoint";
+        internal const string NsCollCodePoint =
+            "http://www.w3.org/2004/10/xpath-functions/collation/codepoint";
     };
 }

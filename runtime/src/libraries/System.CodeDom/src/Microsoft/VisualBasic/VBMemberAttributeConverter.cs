@@ -9,12 +9,21 @@ namespace Microsoft.VisualBasic
     {
         private VBMemberAttributeConverter() { } // no  need to create an instance; use Default
 
-        public static VBMemberAttributeConverter Default { get; } = new VBMemberAttributeConverter();
+        public static VBMemberAttributeConverter Default { get; } =
+            new VBMemberAttributeConverter();
 
-        protected override string[] Names { get; } = new[] { "Public", "Protected", "Protected Friend", "Friend", "Private" };
+        protected override string[] Names { get; } =
+            new[] { "Public", "Protected", "Protected Friend", "Friend", "Private" };
 
         protected override object[] Values { get; } =
-            new object[] { MemberAttributes.Public, MemberAttributes.Family, MemberAttributes.FamilyOrAssembly, MemberAttributes.Assembly, MemberAttributes.Private };
+            new object[]
+            {
+                MemberAttributes.Public,
+                MemberAttributes.Family,
+                MemberAttributes.FamilyOrAssembly,
+                MemberAttributes.Assembly,
+                MemberAttributes.Private,
+            };
 
         protected override object DefaultValue => MemberAttributes.Private;
     }

@@ -73,9 +73,7 @@ public interface IStoreFunction : ITableBase
 
         try
         {
-            builder
-                .Append(indentString)
-                .Append("StoreFunction: ");
+            builder.Append(indentString).Append("StoreFunction: ");
 
             if (ReturnType != null)
             {
@@ -90,9 +88,7 @@ public interface IStoreFunction : ITableBase
 
             if (Schema != null)
             {
-                builder
-                    .Append(Schema)
-                    .Append('.');
+                builder.Append(Schema).Append('.');
             }
 
             builder.Append(Name);

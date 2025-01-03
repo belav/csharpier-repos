@@ -11,27 +11,60 @@ namespace System.IO.Strategies
         /// <summary>Caches whether Serialization Guard has been disabled for file writes</summary>
         private static int s_cachedSerializationSwitch;
 
-        internal static FileStreamStrategy ChooseStrategy(FileStream fileStream, SafeFileHandle handle, FileAccess access, int bufferSize, bool isAsync)
+        internal static FileStreamStrategy ChooseStrategy(
+            FileStream fileStream,
+            SafeFileHandle handle,
+            FileAccess access,
+            int bufferSize,
+            bool isAsync
+        )
         {
-            FileStreamStrategy strategy =
-                EnableBufferingIfNeeded(ChooseStrategyCore(handle, access, isAsync), bufferSize);
+            FileStreamStrategy strategy = EnableBufferingIfNeeded(
+                ChooseStrategyCore(handle, access, isAsync),
+                bufferSize
+            );
 
             return WrapIfDerivedType(fileStream, strategy);
         }
 
-        internal static FileStreamStrategy ChooseStrategy(FileStream fileStream, string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options, long preallocationSize, UnixFileMode? unixCreateMode)
+        internal static FileStreamStrategy ChooseStrategy(
+            FileStream fileStream,
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            FileOptions options,
+            long preallocationSize,
+            UnixFileMode? unixCreateMode
+        )
         {
-            FileStreamStrategy strategy =
-                EnableBufferingIfNeeded(ChooseStrategyCore(path, mode, access, share, options, preallocationSize, unixCreateMode), bufferSize);
+            FileStreamStrategy strategy = EnableBufferingIfNeeded(
+                ChooseStrategyCore(
+                    path,
+                    mode,
+                    access,
+                    share,
+                    options,
+                    preallocationSize,
+                    unixCreateMode
+                ),
+                bufferSize
+            );
 
             return WrapIfDerivedType(fileStream, strategy);
         }
 
-        private static FileStreamStrategy EnableBufferingIfNeeded(FileStreamStrategy strategy, int bufferSize)
-            => bufferSize > 1 ? new BufferedFileStreamStrategy(strategy, bufferSize) : strategy;
+        private static FileStreamStrategy EnableBufferingIfNeeded(
+            FileStreamStrategy strategy,
+            int bufferSize
+        ) => bufferSize > 1 ? new BufferedFileStreamStrategy(strategy, bufferSize) : strategy;
 
-        private static FileStreamStrategy WrapIfDerivedType(FileStream fileStream, FileStreamStrategy strategy)
-            => fileStream.GetType() == typeof(FileStream)
+        private static FileStreamStrategy WrapIfDerivedType(
+            FileStream fileStream,
+            FileStreamStrategy strategy
+        ) =>
+            fileStream.GetType() == typeof(FileStream)
                 ? strategy
                 : new DerivedFileStreamStrategy(fileStream, strategy);
 
@@ -44,14 +77,23 @@ namespace System.IO.Strategies
             //     FileNotFoundException
             //     PathTooLongException
             //     PipeException
-            e is IOException ||
+            e is IOException
+            ||
             // Note that SecurityException is only thrown on runtimes that support CAS
             // e is SecurityException ||
-            e is UnauthorizedAccessException ||
-            e is NotSupportedException ||
-            (e is ArgumentException && !(e is ArgumentNullException));
+            e is UnauthorizedAccessException
+            || e is NotSupportedException
+            || (e is ArgumentException && !(e is ArgumentNullException));
 
-        internal static void ValidateArguments(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options, long preallocationSize)
+        internal static void ValidateArguments(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            FileOptions options,
+            long preallocationSize
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(path);
 
@@ -67,7 +109,10 @@ namespace System.IO.Strategies
             {
                 badArg = nameof(access);
             }
-            else if (tempshare < FileShare.None || tempshare > (FileShare.ReadWrite | FileShare.Delete))
+            else if (
+                tempshare < FileShare.None
+                || tempshare > (FileShare.ReadWrite | FileShare.Delete)
+            )
             {
                 badArg = nameof(share);
             }
@@ -78,7 +123,21 @@ namespace System.IO.Strategies
             }
 
             // NOTE: any change to FileOptions enum needs to be matched here in the error validation
-            if (options != FileOptions.None && (options & ~(FileOptions.WriteThrough | FileOptions.Asynchronous | FileOptions.RandomAccess | FileOptions.DeleteOnClose | FileOptions.SequentialScan | FileOptions.Encrypted | (FileOptions)0x20000000 /* NoBuffering */)) != 0)
+            if (
+                options != FileOptions.None
+                && (
+                    options
+                    & ~(
+                        FileOptions.WriteThrough
+                        | FileOptions.Asynchronous
+                        | FileOptions.RandomAccess
+                        | FileOptions.DeleteOnClose
+                        | FileOptions.SequentialScan
+                        | FileOptions.Encrypted
+                        | (FileOptions)0x20000000 /* NoBuffering */
+                    )
+                ) != 0
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(options), SR.ArgumentOutOfRange_Enum);
             }
@@ -88,16 +147,26 @@ namespace System.IO.Strategies
             }
             else if (preallocationSize < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException_NeedNonNegNum(nameof(preallocationSize));
+                ThrowHelper.ThrowArgumentOutOfRangeException_NeedNonNegNum(
+                    nameof(preallocationSize)
+                );
             }
 
             // Write access validation
             if ((access & FileAccess.Write) == 0)
             {
-                if (mode == FileMode.Truncate || mode == FileMode.CreateNew || mode == FileMode.Create || mode == FileMode.Append)
+                if (
+                    mode == FileMode.Truncate
+                    || mode == FileMode.CreateNew
+                    || mode == FileMode.Create
+                    || mode == FileMode.Append
+                )
                 {
                     // No write access, mode and access disagree but flag access since mode comes first
-                    throw new ArgumentException(SR.Format(SR.Argument_InvalidFileModeAndAccessCombo, mode, access), nameof(access));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_InvalidFileModeAndAccessCombo, mode, access),
+                        nameof(access)
+                    );
                 }
             }
 
@@ -124,8 +193,7 @@ namespace System.IO.Strategies
 
             // Only allow preallocation for newly created/overwritten files.
             // When we fail to preallocate, we'll remove the file.
-            if (mode != FileMode.Create &&
-                mode != FileMode.CreateNew)
+            if (mode != FileMode.Create && mode != FileMode.CreateNew)
             {
                 throw new ArgumentException(SR.Argument_InvalidPreallocateMode, nameof(mode));
             }
@@ -135,7 +203,10 @@ namespace System.IO.Strategies
         {
             if ((access & FileAccess.Write) == FileAccess.Write)
             {
-                SerializationInfo.ThrowIfDeserializationInProgress("AllowFileWrites", ref s_cachedSerializationSwitch);
+                SerializationInfo.ThrowIfDeserializationInProgress(
+                    "AllowFileWrites",
+                    ref s_cachedSerializationSwitch
+                );
             }
         }
     }

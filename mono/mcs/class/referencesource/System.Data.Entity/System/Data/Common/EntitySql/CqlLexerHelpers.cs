@@ -10,12 +10,12 @@
 namespace System.Data.Common.EntitySql
 {
     using System;
-    using System.Globalization;
     using System.Collections.Generic;
-    using System.Text.RegularExpressions;
-    using System.Diagnostics;
-    using System.Text;
     using System.Data.Entity;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.Text;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Represents eSQL error context.
@@ -58,42 +58,50 @@ namespace System.Data.Common.EntitySql
         static Regex _reDateTimeValue;
         static Regex _reTimeValue;
         static Regex _reDateTimeOffsetValue;
-        private const string _datetimeValueRegularExpression = @"^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}([ ])+[0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2}(\.[0-9]{1,7})?)?$";
-        private const string _timeValueRegularExpression = @"^[0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2}(\.[0-9]{1,7})?)?$";
-        private const string _datetimeOffsetValueRegularExpression = @"^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}([ ])+[0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2}(\.[0-9]{1,7})?)?([ ])*[\+-][0-9]{1,2}:[0-9]{1,2}$";
+        private const string _datetimeValueRegularExpression =
+            @"^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}([ ])+[0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2}(\.[0-9]{1,7})?)?$";
+        private const string _timeValueRegularExpression =
+            @"^[0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2}(\.[0-9]{1,7})?)?$";
+        private const string _datetimeOffsetValueRegularExpression =
+            @"^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}([ ])+[0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2}(\.[0-9]{1,7})?)?([ ])*[\+-][0-9]{1,2}:[0-9]{1,2}$";
 
         private int _iPos;
         private int _lineNumber;
         ParserOptions _parserOptions;
         private string _query;
+
         /// <summary>
         /// set for DOT expressions
         /// </summary>
         private bool _symbolAsIdentifierState = false;
+
         /// <summary>
         /// set for AS expressions
         /// </summary>
         private bool _symbolAsAliasIdentifierState = false;
+
         /// <summary>
         /// set for function definitions
         /// </summary>
         private bool _symbolAsInlineFunctionNameState = false;
 
         /// Defines the set of characters to be interpreted as mandatory line breaks
-        /// according to UNICODE 5.0, section 5.8 Newline Guidelines.These are 'mandatory' 
-        /// line breaks. We do not handle other 'line breaking opportunities'as defined by 
-        /// UNICODE 5.0 since they are intended for presentation. The mandatory line break 
+        /// according to UNICODE 5.0, section 5.8 Newline Guidelines.These are 'mandatory'
+        /// line breaks. We do not handle other 'line breaking opportunities'as defined by
+        /// UNICODE 5.0 since they are intended for presentation. The mandatory line break
         /// defines breaking opportunities that must not be ignored. For all practical purposes
         /// the interpretation of mandatory breaks determines the end of one line and consequently
-        /// the start of the next line of query text. 
-        /// NOTE that CR and CRLF is treated as a composite 'character' and was obviously and intentionaly 
+        /// the start of the next line of query text.
+        /// NOTE that CR and CRLF is treated as a composite 'character' and was obviously and intentionaly
         /// omitted in the character set bellow.
-        static readonly Char[] _newLineCharacters = { '\u000A' , // LF - line feed
-                                                      '\u0085' , // NEL - next line
-                                                      '\u000B' , // VT - vertical tab
-                                                      '\u2028' , // LS - line separator
-                                                      '\u2029'   // PS - paragraph separator
-                                                    };
+        static readonly Char[] _newLineCharacters =
+        {
+            '\u000A', // LF - line feed
+            '\u0085', // NEL - next line
+            '\u000B', // VT - vertical tab
+            '\u2028', // LS - line separator
+            '\u2029', // PS - paragraph separator
+        };
 
         /// <summary>
         /// Intializes scanner
@@ -215,12 +223,11 @@ namespace System.Data.Common.EntitySql
 
                 //
                 // otherwise pass dummy 'marker' char so as we can continue 'extracting' tokens.
-                // 
+                //
                 return '`';
             }
             #endregion
         }
-
 
         /// <summary>
         /// Returns current lexeme
@@ -267,7 +274,7 @@ namespace System.Data.Common.EntitySql
         {
             /*
             The purpose of this method is to separate symbols into keywords and identifiers.
-            This separation then leads parser into applying different productions 
+            This separation then leads parser into applying different productions
             to the same eSQL expression. For example if 'key' symbol is mapped to a keyword then
             the expression 'KEY(x)' will satisfy 'keyExpr ::= KEY parenExpr', else if 'key' is mapped
             to an identifier then the expression satisfies
@@ -275,24 +282,24 @@ namespace System.Data.Common.EntitySql
 
             Escaped symbols are always assumed to be identifiers.
 
-            For unescaped symbols the naive implementation would check the symbol against 
-            the collection of keywords and map the symbol to a keyword in case of match, 
+            For unescaped symbols the naive implementation would check the symbol against
+            the collection of keywords and map the symbol to a keyword in case of match,
             otherwise map to an identifier.
             This would result in a strong restriction on unescaped identifiers - they must not
             match keywords.
 
-            In the long run this strategy has a potential of invalidating user queries with addition 
+            In the long run this strategy has a potential of invalidating user queries with addition
             of new keywords to the language. This is an undesired effect and the current implementation
             tries to mitigate it.
 
             The general mitigation pattern is to separate the collection of keywords and the collection of
             invalid aliases (identifiers), making invalid identifiers a subset of keywords.
-            This allows in certain language constructs using unescaped references 'common' identifiers 
-            that may be defined in the query or in the model (such as Key in Customer.Key). 
+            This allows in certain language constructs using unescaped references 'common' identifiers
+            that may be defined in the query or in the model (such as Key in Customer.Key).
             Although it adds usability for common cases, it does not solve the general problem:
             select c.id as Key from Customers as c -- works
             select Key from (select c.id from Customers as c) as Key -- does not work for the first occurence of Key
-                                                                     -- it is mapped to a keyword which results in 
+                                                                     -- it is mapped to a keyword which results in
                                                                      -- invalid syntax
             select [Key] from (select c.id from Customers as c) as Key -- works again
 
@@ -300,14 +307,14 @@ namespace System.Data.Common.EntitySql
             1. DOT expressions where a symbol before DOT or after DOT is expected to be an identifier.
             2. AS expressions where a symbol after AS is expected to be an identifier.
             In both places identifiers are checked against the invalid aliases collection instead of
-            the keywords collection. If an unescaped identifier appears outside of these two places 
+            the keywords collection. If an unescaped identifier appears outside of these two places
             (like the Key in the second query above) it must be escaped or it must not match a keyword.
 
             The third special case is related to method expressions (function calls). Normally method identifier
             in a method expression must not match a keyword or must be escaped, except the two cases: LEFT and RIGHT.
-            LEFT and RIGHT are canonical functions and their usage in a method expression is not ambiguos with 
+            LEFT and RIGHT are canonical functions and their usage in a method expression is not ambiguos with
             LEFT OUTER JOIN and RIGHT OUT JOIN constructs.
-            Note that if method identifier is a DOT expression (multipart identifier) such as 'MyNameSpace.Key.Ref(x)' 
+            Note that if method identifier is a DOT expression (multipart identifier) such as 'MyNameSpace.Key.Ref(x)'
             then every part of the identifier follows the relaxed check described for DOT expressions (see above).
             This would help with LEFT and RIGHT functions, 'Edm.Left(x)' would work without the third specialcase,
             but most common use of these function is likely to be without 'Edm.'
@@ -358,7 +365,11 @@ namespace System.Data.Common.EntitySql
                 }
                 else
                 {
-                    throw EntityUtil.EntitySqlError(_query, System.Data.Entity.Strings.InvalidEscapedIdentifier(symbol), _iPos);
+                    throw EntityUtil.EntitySqlError(
+                        _query,
+                        System.Data.Entity.Strings.InvalidEscapedIdentifier(symbol),
+                        _iPos
+                    );
                 }
             }
             else
@@ -372,9 +383,11 @@ namespace System.Data.Common.EntitySql
         {
             Char lookAheadChar = GetLookAheadChar();
 
-            if (!IsInSymbolAsIdentifierState(lookAheadChar) &&
-                !IsCanonicalFunctionCall(symbol, lookAheadChar) &&
-                CqlLexer.InternalKeywordDictionary.ContainsKey(symbol))
+            if (
+                !IsInSymbolAsIdentifierState(lookAheadChar)
+                && !IsCanonicalFunctionCall(symbol, lookAheadChar)
+                && CqlLexer.InternalKeywordDictionary.ContainsKey(symbol)
+            )
             {
                 ResetSymbolAsIdentifierState(true);
 
@@ -384,7 +397,7 @@ namespace System.Data.Common.EntitySql
                 {
                     // Treat the symbol following AS keyword as an identifier.
                     // Note that this state will be turned off by a punctuator, so in case of function definitions:
-                    // FUNCTION identifier(...) AS (generalExpr) 
+                    // FUNCTION identifier(...) AS (generalExpr)
                     // the generalExpr will not be affected by the state.
                     _symbolAsAliasIdentifierState = true;
                 }
@@ -407,7 +420,7 @@ namespace System.Data.Common.EntitySql
 
         /// <summary>
         /// Returns true when current symbol looks like a caninical function name in a function call.
-        /// Method only treats canonical functions with names ovelapping eSQL keywords. 
+        /// Method only treats canonical functions with names ovelapping eSQL keywords.
         /// This check allows calling these canonical functions without escaping their names.
         /// Check lookAheadChar for a left paren to see if looks like a function call, check symbol against the list of
         /// canonical functions with names overlapping keywords.
@@ -430,7 +443,11 @@ namespace System.Data.Common.EntitySql
 
             if (invalidIdentifier)
             {
-                throw EntityUtil.EntitySqlError(_query, System.Data.Entity.Strings.InvalidAliasName(symbol), _iPos);
+                throw EntityUtil.EntitySqlError(
+                    _query,
+                    System.Data.Entity.Strings.InvalidAliasName(symbol),
+                    _iPos
+                );
             }
             else
             {
@@ -447,7 +464,10 @@ namespace System.Data.Common.EntitySql
         {
             yy_mark_end();
             Char lookAheadChar = yy_advance();
-            while (lookAheadChar != YY_EOF && (Char.IsWhiteSpace(lookAheadChar) || IsNewLine(lookAheadChar)))
+            while (
+                lookAheadChar != YY_EOF
+                && (Char.IsWhiteSpace(lookAheadChar) || IsNewLine(lookAheadChar))
+            )
             {
                 lookAheadChar = yy_advance();
             }
@@ -457,10 +477,12 @@ namespace System.Data.Common.EntitySql
 
         private bool IsInSymbolAsIdentifierState(char lookAheadChar)
         {
-            return _symbolAsIdentifierState ||
-                   _symbolAsAliasIdentifierState ||
-                   _symbolAsInlineFunctionNameState ||
-                   lookAheadChar == '.' /*treat symbols followed by DOT as identifiers*/;
+            return _symbolAsIdentifierState
+                || _symbolAsAliasIdentifierState
+                || _symbolAsInlineFunctionNameState
+                || lookAheadChar
+                    == '.' /*treat symbols followed by DOT as identifiers*/
+            ;
         }
 
         /// <summary>
@@ -493,7 +515,11 @@ namespace System.Data.Common.EntitySql
             }
             else
             {
-                throw EntityUtil.EntitySqlError(_query, System.Data.Entity.Strings.InvalidOperatorSymbol, _iPos);
+                throw EntityUtil.EntitySqlError(
+                    _query,
+                    System.Data.Entity.Strings.InvalidOperatorSymbol,
+                    _iPos
+                );
             }
         }
 
@@ -513,11 +539,18 @@ namespace System.Data.Common.EntitySql
                     _symbolAsIdentifierState = true;
                 }
 
-                return NewToken(InternalPunctuatorDictionary[punct], new TerminalToken(punct, _iPos));
+                return NewToken(
+                    InternalPunctuatorDictionary[punct],
+                    new TerminalToken(punct, _iPos)
+                );
             }
             else
             {
-                throw EntityUtil.EntitySqlError(_query, System.Data.Entity.Strings.InvalidPunctuatorSymbol, _iPos);
+                throw EntityUtil.EntitySqlError(
+                    _query,
+                    System.Data.Entity.Strings.InvalidPunctuatorSymbol,
+                    _iPos
+                );
             }
         }
 
@@ -531,7 +564,7 @@ namespace System.Data.Common.EntitySql
             // If there is a mode that makes eSQL parser to follow the SQL-92 rules regarding quotation mark
             // delimiting identifiers then this method may decide to map to identifiers.
             // In this case identifiers delimited by double quotation marks can be either eSQL reserved keywords
-            // or can contain characters not usually allowed by the eSQL syntax rules for identifiers, 
+            // or can contain characters not usually allowed by the eSQL syntax rules for identifiers,
             // so identifiers mapped here should be treated as escaped identifiers.
             return NewLiteralToken(symbol, AST.LiteralKind.String);
         }
@@ -545,7 +578,10 @@ namespace System.Data.Common.EntitySql
         internal Token NewLiteralToken(string literal, AST.LiteralKind literalKind)
         {
             Debug.Assert(!String.IsNullOrEmpty(literal), "literal must not be null or empty");
-            Debug.Assert(literalKind != AST.LiteralKind.Null, "literalKind must not be LiteralKind.Null");
+            Debug.Assert(
+                literalKind != AST.LiteralKind.Null,
+                "literalKind must not be LiteralKind.Null"
+            );
 
             string literalValue = literal;
             switch (literalKind)
@@ -554,7 +590,11 @@ namespace System.Data.Common.EntitySql
                     literalValue = GetLiteralSingleQuotePayload(literal);
                     if (!IsValidBinaryValue(literalValue))
                     {
-                        throw EntityUtil.EntitySqlError(_query, System.Data.Entity.Strings.InvalidLiteralFormat("binary", literalValue), _iPos);
+                        throw EntityUtil.EntitySqlError(
+                            _query,
+                            System.Data.Entity.Strings.InvalidLiteralFormat("binary", literalValue),
+                            _iPos
+                        );
                     }
                     break;
 
@@ -569,7 +609,14 @@ namespace System.Data.Common.EntitySql
                     literalValue = GetLiteralSingleQuotePayload(literal);
                     if (!IsValidDateTimeValue(literalValue))
                     {
-                        throw EntityUtil.EntitySqlError(_query, System.Data.Entity.Strings.InvalidLiteralFormat("datetime", literalValue), _iPos);
+                        throw EntityUtil.EntitySqlError(
+                            _query,
+                            System.Data.Entity.Strings.InvalidLiteralFormat(
+                                "datetime",
+                                literalValue
+                            ),
+                            _iPos
+                        );
                     }
                     break;
 
@@ -577,14 +624,25 @@ namespace System.Data.Common.EntitySql
                     literalValue = GetLiteralSingleQuotePayload(literal);
                     if (!IsValidTimeValue(literalValue))
                     {
-                        throw EntityUtil.EntitySqlError(_query, System.Data.Entity.Strings.InvalidLiteralFormat("time", literalValue), _iPos);
+                        throw EntityUtil.EntitySqlError(
+                            _query,
+                            System.Data.Entity.Strings.InvalidLiteralFormat("time", literalValue),
+                            _iPos
+                        );
                     }
                     break;
                 case AST.LiteralKind.DateTimeOffset:
                     literalValue = GetLiteralSingleQuotePayload(literal);
                     if (!IsValidDateTimeOffsetValue(literalValue))
                     {
-                        throw EntityUtil.EntitySqlError(_query, System.Data.Entity.Strings.InvalidLiteralFormat("datetimeoffset", literalValue), _iPos);
+                        throw EntityUtil.EntitySqlError(
+                            _query,
+                            System.Data.Entity.Strings.InvalidLiteralFormat(
+                                "datetimeoffset",
+                                literalValue
+                            ),
+                            _iPos
+                        );
                     }
                     break;
 
@@ -592,12 +650,19 @@ namespace System.Data.Common.EntitySql
                     literalValue = GetLiteralSingleQuotePayload(literal);
                     if (!IsValidGuidValue(literalValue))
                     {
-                        throw EntityUtil.EntitySqlError(_query, System.Data.Entity.Strings.InvalidLiteralFormat("guid", literalValue), _iPos);
+                        throw EntityUtil.EntitySqlError(
+                            _query,
+                            System.Data.Entity.Strings.InvalidLiteralFormat("guid", literalValue),
+                            _iPos
+                        );
                     }
                     break;
             }
 
-            return NewToken(CqlParser.LITERAL, new AST.Literal(literalValue, literalKind, _query, _iPos));
+            return NewToken(
+                CqlParser.LITERAL,
+                new AST.Literal(literalValue, literalKind, _query, _iPos)
+            );
         }
 
         /// <summary>
@@ -633,7 +698,11 @@ namespace System.Data.Common.EntitySql
                 ch = yy_advance();
             }
             Debug.Assert(ch == YY_EOF, "ch == YY_EOF");
-            throw EntityUtil.EntitySqlError(_query, System.Data.Entity.Strings.InvalidEscapedIdentifierUnbalanced(YYText), _iPos);
+            throw EntityUtil.EntitySqlError(
+                _query,
+                System.Data.Entity.Strings.InvalidEscapedIdentifierUnbalanced(YYText),
+                _iPos
+            );
         }
 
         internal static bool IsLetterOrDigitOrUnderscore(string symbol, out bool isIdentifierASCII)
@@ -642,7 +711,12 @@ namespace System.Data.Common.EntitySql
             for (int i = 0; i < symbol.Length; i++)
             {
                 isIdentifierASCII = isIdentifierASCII && symbol[i] < 0x80;
-                if (!isIdentifierASCII && !IsLetter(symbol[i]) && !IsDigit(symbol[i]) && (symbol[i] != '_'))
+                if (
+                    !isIdentifierASCII
+                    && !IsLetter(symbol[i])
+                    && !IsDigit(symbol[i])
+                    && (symbol[i] != '_')
+                )
                 {
                     return false;
                 }
@@ -668,7 +742,7 @@ namespace System.Data.Common.EntitySql
         /// <summary>
         /// Returns true if given char is a new line character defined by
         /// UNICODE 5.0, section 5.8 Newline Guidelines.
-        /// These are 'mandatory' line breaks. NOTE that CRLF is treated as a 
+        /// These are 'mandatory' line breaks. NOTE that CRLF is treated as a
         /// composite 'character' and was intentionaly omitted in the character set bellow.
         /// </summary>
         /// <param name="c"></param>
@@ -692,32 +766,61 @@ namespace System.Data.Common.EntitySql
         /// <returns></returns>
         private static string GetLiteralSingleQuotePayload(string literal)
         {
-            Debug.Assert(-1 != literal.IndexOf('\''), "quoted literal value must have single quotes");
-            Debug.Assert(-1 != literal.LastIndexOf('\''), "quoted literal value must have single quotes");
-            Debug.Assert(literal.IndexOf('\'') != literal.LastIndexOf('\''), "quoted literal value must have 2 single quotes");
-            Debug.Assert(literal.Split(new char[] { '\'' }).Length == 3, "quoted literal value must have 2 single quotes");
+            Debug.Assert(
+                -1 != literal.IndexOf('\''),
+                "quoted literal value must have single quotes"
+            );
+            Debug.Assert(
+                -1 != literal.LastIndexOf('\''),
+                "quoted literal value must have single quotes"
+            );
+            Debug.Assert(
+                literal.IndexOf('\'') != literal.LastIndexOf('\''),
+                "quoted literal value must have 2 single quotes"
+            );
+            Debug.Assert(
+                literal.Split(new char[] { '\'' }).Length == 3,
+                "quoted literal value must have 2 single quotes"
+            );
 
-            // NOTE: this is not a precondition validation. This validation is for security purposes based on the 
-            // paranoid assumption that all input is evil. we should not see this exception under normal 
+            // NOTE: this is not a precondition validation. This validation is for security purposes based on the
+            // paranoid assumption that all input is evil. we should not see this exception under normal
             // conditions.
-            if ((literal.Split(new char[] { '\'' }).Length != 3) || (-1 == literal.IndexOf('\'')) || (-1 == literal.LastIndexOf('\'')))
+            if (
+                (literal.Split(new char[] { '\'' }).Length != 3)
+                || (-1 == literal.IndexOf('\''))
+                || (-1 == literal.LastIndexOf('\''))
+            )
             {
-                throw EntityUtil.EntitySqlError(System.Data.Entity.Strings.MalformedSingleQuotePayload);
+                throw EntityUtil.EntitySqlError(
+                    System.Data.Entity.Strings.MalformedSingleQuotePayload
+                );
             }
 
             int startIndex = literal.IndexOf('\'');
 
-            string literalPayload = literal.Substring(startIndex + 1, literal.Length - (startIndex + 2));
+            string literalPayload = literal.Substring(
+                startIndex + 1,
+                literal.Length - (startIndex + 2)
+            );
 
-            Debug.Assert(literalPayload.IndexOf('\'') == -1, "quoted literal payload must not have single quotes");
-            Debug.Assert(literalPayload.LastIndexOf('\'') == -1, "quoted literal payload must not have single quotes");
+            Debug.Assert(
+                literalPayload.IndexOf('\'') == -1,
+                "quoted literal payload must not have single quotes"
+            );
+            Debug.Assert(
+                literalPayload.LastIndexOf('\'') == -1,
+                "quoted literal payload must not have single quotes"
+            );
 
-            // NOTE: this is not a precondition validation. This validation is for security purposes based on the 
-            // paranoid assumption that all input is evil. we should not see this exception under normal 
+            // NOTE: this is not a precondition validation. This validation is for security purposes based on the
+            // paranoid assumption that all input is evil. we should not see this exception under normal
             // conditions.
             if (literalPayload.Split(new char[] { '\'' }).Length != 1)
             {
-                throw EntityUtil.EntitySqlError(System.Data.Entity.Strings.MalformedSingleQuotePayload);
+                throw EntityUtil.EntitySqlError(
+                    System.Data.Entity.Strings.MalformedSingleQuotePayload
+                );
             }
 
             return literalPayload;
@@ -789,7 +892,10 @@ namespace System.Data.Common.EntitySql
         {
             if (null == _reDateTimeValue)
             {
-                _reDateTimeValue = new Regex(_datetimeValueRegularExpression, RegexOptions.Singleline | RegexOptions.CultureInvariant);
+                _reDateTimeValue = new Regex(
+                    _datetimeValueRegularExpression,
+                    RegexOptions.Singleline | RegexOptions.CultureInvariant
+                );
             }
             return _reDateTimeValue.IsMatch(datetimeValue);
         }
@@ -805,7 +911,10 @@ namespace System.Data.Common.EntitySql
         {
             if (null == _reTimeValue)
             {
-                _reTimeValue = new Regex(_timeValueRegularExpression, RegexOptions.Singleline | RegexOptions.CultureInvariant);
+                _reTimeValue = new Regex(
+                    _timeValueRegularExpression,
+                    RegexOptions.Singleline | RegexOptions.CultureInvariant
+                );
             }
             return _reTimeValue.IsMatch(timeValue);
         }
@@ -821,7 +930,10 @@ namespace System.Data.Common.EntitySql
         {
             if (null == _reDateTimeOffsetValue)
             {
-                _reDateTimeOffsetValue = new Regex(_datetimeOffsetValueRegularExpression, RegexOptions.Singleline | RegexOptions.CultureInvariant);
+                _reDateTimeOffsetValue = new Regex(
+                    _datetimeOffsetValueRegularExpression,
+                    RegexOptions.Singleline | RegexOptions.CultureInvariant
+                );
             }
             return _reDateTimeOffsetValue.IsMatch(datetimeOffsetValue);
         }
@@ -833,7 +945,10 @@ namespace System.Data.Common.EntitySql
                 if (null == _keywords)
                 {
                     #region Initializes eSQL keywords
-                    Dictionary<string, short> keywords = new Dictionary<string, short>(60, _stringComparer);
+                    Dictionary<string, short> keywords = new Dictionary<string, short>(
+                        60,
+                        _stringComparer
+                    );
                     keywords.Add("all", CqlParser.ALL);
                     keywords.Add("and", CqlParser.AND);
                     keywords.Add("anyelement", CqlParser.ANYELEMENT);
@@ -908,7 +1023,6 @@ namespace System.Data.Common.EntitySql
                 }
                 return _keywords;
             }
-
         }
 
         private static HashSet<string> InternalInvalidAliasNames
@@ -984,7 +1098,9 @@ namespace System.Data.Common.EntitySql
                 if (null == _invalidInlineFunctionNames)
                 {
                     #region Initializes invalid inline function names
-                    HashSet<string> invalidInlineFunctionNames = new HashSet<string>(_stringComparer);
+                    HashSet<string> invalidInlineFunctionNames = new HashSet<string>(
+                        _stringComparer
+                    );
                     invalidInlineFunctionNames.Add("anyelement");
                     invalidInlineFunctionNames.Add("element");
                     invalidInlineFunctionNames.Add("function");
@@ -1009,7 +1125,10 @@ namespace System.Data.Common.EntitySql
                 if (null == _operators)
                 {
                     #region Initializes operator dictionary
-                    Dictionary<string, short> operators = new Dictionary<string, short>(16, _stringComparer);
+                    Dictionary<string, short> operators = new Dictionary<string, short>(
+                        16,
+                        _stringComparer
+                    );
                     operators.Add("==", CqlParser.OP_EQ);
                     operators.Add("!=", CqlParser.OP_NEQ);
                     operators.Add("<>", CqlParser.OP_NEQ);
@@ -1039,7 +1158,10 @@ namespace System.Data.Common.EntitySql
                 if (null == _punctuators)
                 {
                     #region Initializes punctuators dictionary
-                    Dictionary<string, short> punctuators = new Dictionary<string, short>(16, _stringComparer);
+                    Dictionary<string, short> punctuators = new Dictionary<string, short>(
+                        16,
+                        _stringComparer
+                    );
                     punctuators.Add(",", CqlParser.COMMA);
                     punctuators.Add(":", CqlParser.COLON);
                     punctuators.Add(".", CqlParser.DOT);

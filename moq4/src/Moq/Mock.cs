@@ -9,7 +9,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
-
 using Moq.Async;
 using Moq.Properties;
 
@@ -21,15 +20,15 @@ namespace Moq
     /// </summary>
     public abstract partial class Mock : IFluentInterface
     {
-        internal static readonly MethodInfo GetMethod =
-            typeof(Mock).GetMethod(nameof(Get), BindingFlags.Public | BindingFlags.Static);
+        internal static readonly MethodInfo GetMethod = typeof(Mock).GetMethod(
+            nameof(Get),
+            BindingFlags.Public | BindingFlags.Static
+        );
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="Mock"/> class.
         /// </summary>
-        protected Mock()
-        {
-        }
+        protected Mock() { }
 
         /// <summary>
         ///   Retrieves the mock object for the given object instance.
@@ -57,7 +56,8 @@ namespace Moq
         ///            .Returns(tempUrl);
         ///   </code>
         /// </example>
-        public static Mock<T> Get<T>(T mocked) where T : class
+        public static Mock<T> Get<T>(T mocked)
+            where T : class
         {
             if (mocked is IMocked<T> mockedOfT)
             {
@@ -72,7 +72,7 @@ namespace Moq
 
             if (mocked is IMocked mockedPlain)
             {
-                // We may have received a T of an implemented 
+                // We may have received a T of an implemented
                 // interface in the mock.
                 var mock = mockedPlain.Mock;
                 if (mock.ImplementsInterface(typeof(T)))
@@ -80,13 +80,16 @@ namespace Moq
                     return mock.As<T>();
                 }
 
-                // Alternatively, we may have been asked 
-                // for a type that is assignable to the 
+                // Alternatively, we may have been asked
+                // for a type that is assignable to the
                 // one for the mock.
-                // This is not valid as generic types 
-                // do not support covariance on 
+                // This is not valid as generic types
+                // do not support covariance on
                 // the generic parameters.
-                var imockedType = mocked.GetType().GetInterfaces().Single(i => i.Name.Equals("IMocked`1", StringComparison.Ordinal));
+                var imockedType = mocked
+                    .GetType()
+                    .GetInterfaces()
+                    .Single(i => i.Name.Equals("IMocked`1", StringComparison.Ordinal));
                 var mockedType = imockedType.GetGenericArguments()[0];
                 var types = string.Join(
                     ", ",
@@ -95,13 +98,17 @@ namespace Moq
                         .Concat(mock.InheritedInterfaces)
                         .Concat(mock.AdditionalInterfaces)
                         .Select(t => t.Name)
-                        .ToArray());
+                        .ToArray()
+                );
 
-                throw new ArgumentException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.InvalidMockGetType,
-                    typeof(T).Name,
-                    types));
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.InvalidMockGetType,
+                        typeof(T).Name,
+                        types
+                    )
+                );
             }
 
             throw new ArgumentException(Resources.ObjectInstanceNotMock, "mocked");
@@ -157,10 +164,7 @@ namespace Moq
         /// </summary>
         public DefaultValue DefaultValue
         {
-            get
-            {
-                return this.DefaultValueProvider.Kind;
-            }
+            get { return this.DefaultValueProvider.Kind; }
             set
             {
                 this.DefaultValueProvider = value switch
@@ -292,7 +296,11 @@ namespace Moq
 
             var errors = new List<MockException>();
 
-            foreach (var setup in this.MutableSetups.FindAll(setup => !setup.IsConditional && predicate(setup)))
+            foreach (
+                var setup in this.MutableSetups.FindAll(setup =>
+                    !setup.IsConditional && predicate(setup)
+                )
+            )
             {
                 try
                 {
@@ -308,15 +316,29 @@ namespace Moq
             {
                 throw MockException.Combined(
                     errors,
-                    preamble: string.Format(CultureInfo.CurrentCulture, Resources.VerificationErrorsOfMock, this));
+                    preamble: string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.VerificationErrorsOfMock,
+                        this
+                    )
+                );
             }
         }
 
-        internal static void Verify(Mock mock, LambdaExpression expression, Times times, string failMessage)
+        internal static void Verify(
+            Mock mock,
+            LambdaExpression expression,
+            Times times,
+            string failMessage
+        )
         {
             Guard.NotNull(times, nameof(times));
 
-            var invocationCount = Mock.GetMatchingInvocationCount(mock, expression, out var invocationsToBeMarkedAsVerified);
+            var invocationCount = Mock.GetMatchingInvocationCount(
+                mock,
+                expression,
+                out var invocationsToBeMarkedAsVerified
+            );
 
             if (times.Validate(invocationCount))
             {
@@ -328,15 +350,26 @@ namespace Moq
             }
             else
             {
-                throw MockException.NoMatchingCalls(mock, expression, failMessage, times, invocationCount);
+                throw MockException.NoMatchingCalls(
+                    mock,
+                    expression,
+                    failMessage,
+                    times,
+                    invocationCount
+                );
             }
         }
 
-        internal static void VerifyGet(Mock mock, LambdaExpression expression, Times times, string failMessage)
+        internal static void VerifyGet(
+            Mock mock,
+            LambdaExpression expression,
+            Times times,
+            string failMessage
+        )
         {
             Guard.NotNull(expression, nameof(expression));
 
-            if (!expression.IsPropertyIndexer())  // guard because `.ToPropertyInfo()` doesn't (yet) work for indexers
+            if (!expression.IsPropertyIndexer()) // guard because `.ToPropertyInfo()` doesn't (yet) work for indexers
             {
                 var property = expression.ToPropertyInfo();
                 Guard.CanRead(property);
@@ -345,7 +378,12 @@ namespace Moq
             Mock.Verify(mock, expression, times, failMessage);
         }
 
-        internal static void VerifySet(Mock mock, LambdaExpression expression, Times times, string failMessage)
+        internal static void VerifySet(
+            Mock mock,
+            LambdaExpression expression,
+            Times times,
+            string failMessage
+        )
         {
             Guard.NotNull(expression, nameof(expression));
             Guard.IsAssignmentToPropertyOrIndexer(expression, nameof(expression));
@@ -353,7 +391,12 @@ namespace Moq
             Mock.Verify(mock, expression, times, failMessage);
         }
 
-        internal static void VerifyAdd(Mock mock, LambdaExpression expression, Times times, string failMessage)
+        internal static void VerifyAdd(
+            Mock mock,
+            LambdaExpression expression,
+            Times times,
+            string failMessage
+        )
         {
             Guard.NotNull(expression, nameof(expression));
             Guard.IsEventAdd(expression, nameof(expression));
@@ -361,7 +404,12 @@ namespace Moq
             Mock.Verify(mock, expression, times, failMessage);
         }
 
-        internal static void VerifyRemove(Mock mock, LambdaExpression expression, Times times, string failMessage)
+        internal static void VerifyRemove(
+            Mock mock,
+            LambdaExpression expression,
+            Times times,
+            string failMessage
+        )
         {
             Guard.NotNull(expression, nameof(expression));
             Guard.IsEventRemove(expression, nameof(expression));
@@ -397,9 +445,12 @@ namespace Moq
 
         static void VerifyNoOtherCalls(Mock mock, HashSet<Mock> verifiedMocks)
         {
-            if (!verifiedMocks.Add(mock)) return;
+            if (!verifiedMocks.Add(mock))
+                return;
 
-            var unverifiedInvocations = mock.MutableInvocations.ToArray(invocation => !invocation.IsVerified);
+            var unverifiedInvocations = mock.MutableInvocations.ToArray(invocation =>
+                !invocation.IsVerified
+            );
 
             var innerMocks = mock.MutableSetups.FindAllInnerMocks();
 
@@ -417,8 +468,12 @@ namespace Moq
                         // In order for an invocation to be "transitive", its return value has to be a
                         // sub-object (inner mock); and that sub-object has to have received at least
                         // one call:
-                        var wasTransitiveInvocation = mock.MutableSetups.FindLastInnerMock(setup => setup.Matches(unverifiedInvocations[i])) is Mock innerMock
-                                                      && innerMock.MutableInvocations.Any();
+                        var wasTransitiveInvocation =
+                            mock.MutableSetups.FindLastInnerMock(setup =>
+                                setup.Matches(unverifiedInvocations[i])
+                            )
+                                is Mock innerMock
+                            && innerMock.MutableInvocations.Any();
                         if (wasTransitiveInvocation)
                         {
                             unverifiedInvocations[i] = null;
@@ -466,7 +521,8 @@ namespace Moq
         static int GetMatchingInvocationCount(
             Mock mock,
             LambdaExpression expression,
-            out List<Pair<Invocation, MethodExpectation>> invocationsToBeMarkedAsVerified)
+            out List<Pair<Invocation, MethodExpectation>> invocationsToBeMarkedAsVerified
+        )
         {
             Debug.Assert(mock != null);
             Debug.Assert(expression != null);
@@ -476,7 +532,8 @@ namespace Moq
                 mock,
                 new ImmutablePopOnlyStack<MethodExpectation>(expression.Split()),
                 new HashSet<Mock>(),
-                invocationsToBeMarkedAsVerified);
+                invocationsToBeMarkedAsVerified
+            );
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:
@@ -504,7 +561,8 @@ namespace Moq
             Mock mock,
             in ImmutablePopOnlyStack<MethodExpectation> parts,
             HashSet<Mock> visitedInnerMocks,
-            List<Pair<Invocation, MethodExpectation>> invocationsToBeMarkedAsVerified)
+            List<Pair<Invocation, MethodExpectation>> invocationsToBeMarkedAsVerified
+        )
         {
             Debug.Assert(mock != null);
             Debug.Assert(!parts.Empty);
@@ -521,9 +579,13 @@ namespace Moq
             var part = parts.Pop(out var remainingParts);
 
             var count = 0;
-            foreach (var matchingInvocation in mock.MutableInvocations.ToArray().Where(part.IsMatch))
+            foreach (
+                var matchingInvocation in mock.MutableInvocations.ToArray().Where(part.IsMatch)
+            )
             {
-                invocationsToBeMarkedAsVerified.Add(new Pair<Invocation, MethodExpectation>(matchingInvocation, part));
+                invocationsToBeMarkedAsVerified.Add(
+                    new Pair<Invocation, MethodExpectation>(matchingInvocation, part)
+                );
 
                 if (remainingParts.Empty)
                 {
@@ -541,9 +603,17 @@ namespace Moq
                     // Intermediate parts of a fluent expression do not contribute to the
                     // total count themselves. The matching invocation count of the rightmost
                     // expression gets "forwarded" towards the left:
-                    if (Awaitable.TryGetResultRecursive(matchingInvocation.ReturnValue) is IMocked mocked)
+                    if (
+                        Awaitable.TryGetResultRecursive(matchingInvocation.ReturnValue)
+                        is IMocked mocked
+                    )
                     {
-                        count += Mock.GetMatchingInvocationCount(mocked.Mock, remainingParts, visitedInnerMocks, invocationsToBeMarkedAsVerified);
+                        count += Mock.GetMatchingInvocationCount(
+                            mocked.Mock,
+                            remainingParts,
+                            visitedInnerMocks,
+                            invocationsToBeMarkedAsVerified
+                        );
                     }
                 }
             }
@@ -555,23 +625,40 @@ namespace Moq
 
         #region Setup
 
-        internal static MethodCall Setup(Mock mock, LambdaExpression expression, Condition condition)
+        internal static MethodCall Setup(
+            Mock mock,
+            LambdaExpression expression,
+            Condition condition
+        )
         {
             Guard.NotNull(expression, nameof(expression));
 
-            return Mock.SetupRecursive(mock, expression, setupLast: (targetMock, originalExpression, part) =>
-            {
-                var setup = new MethodCall(originalExpression, targetMock, condition, expectation: part);
-                targetMock.MutableSetups.Add(setup);
-                return setup;
-            });
+            return Mock.SetupRecursive(
+                mock,
+                expression,
+                setupLast: (targetMock, originalExpression, part) =>
+                {
+                    var setup = new MethodCall(
+                        originalExpression,
+                        targetMock,
+                        condition,
+                        expectation: part
+                    );
+                    targetMock.MutableSetups.Add(setup);
+                    return setup;
+                }
+            );
         }
 
-        internal static MethodCall SetupGet(Mock mock, LambdaExpression expression, Condition condition)
+        internal static MethodCall SetupGet(
+            Mock mock,
+            LambdaExpression expression,
+            Condition condition
+        )
         {
             Guard.NotNull(expression, nameof(expression));
 
-            if (!expression.IsPropertyIndexer())  // guard because `.ToPropertyInfo()` doesn't (yet) work for indexers
+            if (!expression.IsPropertyIndexer()) // guard because `.ToPropertyInfo()` doesn't (yet) work for indexers
             {
                 var property = expression.ToPropertyInfo();
                 Guard.CanRead(property);
@@ -580,7 +667,11 @@ namespace Moq
             return Mock.Setup(mock, expression, condition);
         }
 
-        internal static MethodCall SetupSet(Mock mock, LambdaExpression expression, Condition condition)
+        internal static MethodCall SetupSet(
+            Mock mock,
+            LambdaExpression expression,
+            Condition condition
+        )
         {
             Guard.NotNull(expression, nameof(expression));
             Guard.IsAssignmentToPropertyOrIndexer(expression, nameof(expression));
@@ -588,8 +679,10 @@ namespace Moq
             return Mock.Setup(mock, expression, condition);
         }
 
-        internal static readonly MethodInfo SetupReturnsMethod =
-            typeof(Mock).GetMethod(nameof(SetupReturns), BindingFlags.NonPublic | BindingFlags.Static);
+        internal static readonly MethodInfo SetupReturnsMethod = typeof(Mock).GetMethod(
+            nameof(SetupReturns),
+            BindingFlags.NonPublic | BindingFlags.Static
+        );
 
         // This specialized setup method is used to set up a single `Mock.Of` predicate.
         // Unlike other setup methods, LINQ to Mocks can set non-interceptable properties, which is handy when initializing DTOs.
@@ -597,55 +690,79 @@ namespace Moq
         {
             Guard.NotNull(expression, nameof(expression));
 
-            Mock.SetupRecursive<MethodCall>(mock, expression, setupLast: (targetMock, oe, part) =>
-            {
-                var originalExpression = (LambdaExpression)oe;
-
-                // There are two special cases involving settable properties where we do something other than creating a new setup:
-
-                if (originalExpression.IsProperty())
+            Mock.SetupRecursive<MethodCall>(
+                mock,
+                expression,
+                setupLast: (targetMock, oe, part) =>
                 {
-                    var pi = originalExpression.ToPropertyInfo();
-                    if (pi.CanWrite(out var setter))
+                    var originalExpression = (LambdaExpression)oe;
+
+                    // There are two special cases involving settable properties where we do something other than creating a new setup:
+
+                    if (originalExpression.IsProperty())
                     {
-                        if (pi.CanRead(out var getter) && getter.CanOverride() && ProxyFactory.Instance.IsMethodVisible(getter, out _))
+                        var pi = originalExpression.ToPropertyInfo();
+                        if (pi.CanWrite(out var setter))
                         {
-                            if (setter.CanOverride() && ProxyFactory.Instance.IsMethodVisible(setter, out _)
-                                && targetMock.MutableSetups.FindLast(s => s is StubbedPropertiesSetup) is StubbedPropertiesSetup sps)
+                            if (
+                                pi.CanRead(out var getter)
+                                && getter.CanOverride()
+                                && ProxyFactory.Instance.IsMethodVisible(getter, out _)
+                            )
                             {
-                                // (a) We have a mock where `SetupAllProperties` was called, and the property can be fully stubbed.
-                                //     (A property can be "fully stubbed" if both its accessors can be intercepted.)
-                                //     In this case, we set the property's internal backing field directly on the setup.
-                                sps.SetProperty(pi.Name, value);
+                                if (
+                                    setter.CanOverride()
+                                    && ProxyFactory.Instance.IsMethodVisible(setter, out _)
+                                    && targetMock.MutableSetups.FindLast(s =>
+                                        s is StubbedPropertiesSetup
+                                    )
+                                        is StubbedPropertiesSetup sps
+                                )
+                                {
+                                    // (a) We have a mock where `SetupAllProperties` was called, and the property can be fully stubbed.
+                                    //     (A property can be "fully stubbed" if both its accessors can be intercepted.)
+                                    //     In this case, we set the property's internal backing field directly on the setup.
+                                    sps.SetProperty(pi.Name, value);
+                                    return null;
+                                }
+                            }
+                            else
+                            {
+                                // (b) The property is settable, but Moq is unable to intercept the getter,
+                                //     so setting up the setter would be pointless and the property also cannot be fully stubbed.
+                                //     In this case, the best thing we can do is to simply invoke the setter.
+                                pi.SetValue(targetMock.Object, value, null);
                                 return null;
                             }
                         }
-                        else
-                        {
-                            // (b) The property is settable, but Moq is unable to intercept the getter,
-                            //     so setting up the setter would be pointless and the property also cannot be fully stubbed.
-                            //     In this case, the best thing we can do is to simply invoke the setter.
-                            pi.SetValue(targetMock.Object, value, null);
-                            return null;
-                        }
                     }
-                }
 
-                // For all other cases, we create a regular setup.
+                    // For all other cases, we create a regular setup.
 
-                Guard.IsOverridable(part.Method, part.Expression);
-                Guard.IsVisibleToProxyFactory(part.Method);
+                    Guard.IsOverridable(part.Method, part.Expression);
+                    Guard.IsVisibleToProxyFactory(part.Method);
 
-                var setup = new MethodCall(originalExpression, targetMock, condition: null, expectation: part);
-                setup.SetReturnValueBehavior(value);
-                targetMock.MutableSetups.Add(setup);
-                return null;
-            }, allowNonOverridableLastProperty: true);
+                    var setup = new MethodCall(
+                        originalExpression,
+                        targetMock,
+                        condition: null,
+                        expectation: part
+                    );
+                    setup.SetReturnValueBehavior(value);
+                    targetMock.MutableSetups.Add(setup);
+                    return null;
+                },
+                allowNonOverridableLastProperty: true
+            );
 
             return true;
         }
 
-        internal static MethodCall SetupAdd(Mock mock, LambdaExpression expression, Condition condition)
+        internal static MethodCall SetupAdd(
+            Mock mock,
+            LambdaExpression expression,
+            Condition condition
+        )
         {
             Guard.NotNull(expression, nameof(expression));
             Guard.IsEventAdd(expression, nameof(expression));
@@ -653,7 +770,11 @@ namespace Moq
             return Mock.Setup(mock, expression, condition);
         }
 
-        internal static MethodCall SetupRemove(Mock mock, LambdaExpression expression, Condition condition)
+        internal static MethodCall SetupRemove(
+            Mock mock,
+            LambdaExpression expression,
+            Condition condition
+        )
         {
             Guard.NotNull(expression, nameof(expression));
             Guard.IsEventRemove(expression, nameof(expression));
@@ -665,15 +786,27 @@ namespace Moq
         {
             Guard.NotNull(expression, nameof(expression));
 
-            return Mock.SetupRecursive(mock, expression, setupLast: (targetMock, originalExpression, part) =>
-            {
-                var setup = new SequenceSetup(originalExpression, targetMock, expectation: part);
-                targetMock.MutableSetups.Add(setup);
-                return setup;
-            });
+            return Mock.SetupRecursive(
+                mock,
+                expression,
+                setupLast: (targetMock, originalExpression, part) =>
+                {
+                    var setup = new SequenceSetup(
+                        originalExpression,
+                        targetMock,
+                        expectation: part
+                    );
+                    targetMock.MutableSetups.Add(setup);
+                    return setup;
+                }
+            );
         }
 
-        internal static StubbedPropertySetup SetupProperty(Mock mock, LambdaExpression expression, object initialValue)
+        internal static StubbedPropertySetup SetupProperty(
+            Mock mock,
+            LambdaExpression expression,
+            object initialValue
+        )
         {
             Guard.NotNull(expression, nameof(expression));
 
@@ -689,12 +822,22 @@ namespace Moq
                 Guard.CanWrite(pi);
             }
 
-            return Mock.SetupRecursive(mock, expression, (targetMock, _, _) =>
-            {
-                var setup = new StubbedPropertySetup(targetMock, expression, getter, setter, initialValue);
-                targetMock.MutableSetups.Add(setup);
-                return setup;
-            });
+            return Mock.SetupRecursive(
+                mock,
+                expression,
+                (targetMock, _, _) =>
+                {
+                    var setup = new StubbedPropertySetup(
+                        targetMock,
+                        expression,
+                        getter,
+                        setter,
+                        initialValue
+                    );
+                    targetMock.MutableSetups.Add(setup);
+                    return setup;
+                }
+            );
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:
@@ -718,7 +861,12 @@ namespace Moq
             */
         }
 
-        static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock, Expression, MethodExpectation, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
+        static TSetup SetupRecursive<TSetup>(
+            Mock mock,
+            LambdaExpression expression,
+            Func<Mock, Expression, MethodExpectation, TSetup> setupLast,
+            bool allowNonOverridableLastProperty = false
+        )
             where TSetup : ISetup
         {
             Debug.Assert(mock != null);
@@ -750,7 +898,12 @@ namespace Moq
             */
         }
 
-        static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression, Stack<MethodExpectation> parts, Func<Mock, Expression, MethodExpectation, TSetup> setupLast)
+        static TSetup SetupRecursive<TSetup>(
+            Mock mock,
+            LambdaExpression originalExpression,
+            Stack<MethodExpectation> parts,
+            Func<Mock, Expression, MethodExpectation, TSetup> setupLast
+        )
             where TSetup : ISetup
         {
             var part = parts.Pop();
@@ -765,16 +918,31 @@ namespace Moq
                 Mock innerMock = mock.MutableSetups.FindLastInnerMock(setup => setup.Matches(part));
                 if (innerMock == null)
                 {
-                    var returnValue = mock.GetDefaultValue(method, out innerMock, useAlternateProvider: DefaultValueProvider.Mock);
+                    var returnValue = mock.GetDefaultValue(
+                        method,
+                        out innerMock,
+                        useAlternateProvider: DefaultValueProvider.Mock
+                    );
                     if (innerMock == null)
                     {
                         throw new ArgumentException(
                             string.Format(
                                 CultureInfo.CurrentCulture,
                                 Resources.UnsupportedExpression,
-                                expr.ToStringFixed() + " in " + originalExpression.ToStringFixed() + ":\n" + Resources.TypeNotMockable));
+                                expr.ToStringFixed()
+                                    + " in "
+                                    + originalExpression.ToStringFixed()
+                                    + ":\n"
+                                    + Resources.TypeNotMockable
+                            )
+                        );
                     }
-                    var innerMockSetup = new InnerMockSetup(originalExpression, mock, expectation: part, returnValue);
+                    var innerMockSetup = new InnerMockSetup(
+                        originalExpression,
+                        mock,
+                        expectation: part,
+                        returnValue
+                    );
                     mock.MutableSetups.Add(innerMockSetup);
                 }
                 Debug.Assert(innerMock != null);
@@ -796,7 +964,10 @@ namespace Moq
         {
             Guard.NotNull(action, nameof(action));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(action, mock.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                action,
+                mock.ConstructorArguments
+            );
             var parts = expression.Split();
             Mock.RaiseEvent(mock, expression, parts, arguments);
         }
@@ -805,14 +976,26 @@ namespace Moq
         {
             Guard.NotNull(action, nameof(action));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(action, mock.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                action,
+                mock.ConstructorArguments
+            );
             var parts = expression.Split();
             return (Task)Mock.RaiseEvent(mock, expression, parts, arguments);
         }
 
-        internal static object RaiseEvent(Mock mock, LambdaExpression expression, Stack<MethodExpectation> parts, object[] arguments)
+        internal static object RaiseEvent(
+            Mock mock,
+            LambdaExpression expression,
+            Stack<MethodExpectation> parts,
+            object[] arguments
+        )
         {
-            const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly;
+            const BindingFlags bindingFlags =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.DeclaredOnly;
 
             var part = parts.Pop();
             var method = part.Method;
@@ -823,27 +1006,35 @@ namespace Moq
                 if (method.IsEventAddAccessor())
                 {
                     var implementingMethod = method.GetImplementingMethod(mock.Object.GetType());
-                    @event = implementingMethod.DeclaringType.GetEvents(bindingFlags).SingleOrDefault(e => e.GetAddMethod(true) == implementingMethod);
+                    @event = implementingMethod
+                        .DeclaringType.GetEvents(bindingFlags)
+                        .SingleOrDefault(e => e.GetAddMethod(true) == implementingMethod);
                     if (@event == null)
                     {
                         throw new ArgumentException(
                             string.Format(
                                 CultureInfo.CurrentCulture,
                                 Resources.SetupNotEventAdd,
-                                part.Expression));
+                                part.Expression
+                            )
+                        );
                     }
                 }
                 else if (method.IsEventRemoveAccessor())
                 {
                     var implementingMethod = method.GetImplementingMethod(mock.Object.GetType());
-                    @event = implementingMethod.DeclaringType.GetEvents(bindingFlags).SingleOrDefault(e => e.GetRemoveMethod(true) == implementingMethod);
+                    @event = implementingMethod
+                        .DeclaringType.GetEvents(bindingFlags)
+                        .SingleOrDefault(e => e.GetRemoveMethod(true) == implementingMethod);
                     if (@event == null)
                     {
                         throw new ArgumentException(
                             string.Format(
                                 CultureInfo.CurrentCulture,
                                 Resources.SetupNotEventRemove,
-                                part.Expression));
+                                part.Expression
+                            )
+                        );
                     }
                 }
                 else
@@ -852,7 +1043,9 @@ namespace Moq
                         string.Format(
                             CultureInfo.CurrentCulture,
                             Resources.UnsupportedExpression,
-                            expression));
+                            expression
+                        )
+                    );
                 }
 
                 if (mock.EventHandlers.TryGet(@event, out var handlers))
@@ -912,7 +1105,8 @@ namespace Moq
         /// <exception cref="InvalidOperationException">
         ///   The mock type has already been generated by accessing the <see cref="Object"/> property.
         /// </exception>
-        public abstract Mock<TInterface> As<TInterface>() where TInterface : class;
+        public abstract Mock<TInterface> As<TInterface>()
+            where TInterface : class;
 
         internal bool ImplementsInterface(Type interfaceType)
         {
@@ -939,19 +1133,31 @@ namespace Moq
             this.ConfiguredDefaultValues[typeof(TReturn)] = value;
         }
 
-        internal object GetDefaultValue(MethodInfo method, out Mock candidateInnerMock, DefaultValueProvider useAlternateProvider = null)
+        internal object GetDefaultValue(
+            MethodInfo method,
+            out Mock candidateInnerMock,
+            DefaultValueProvider useAlternateProvider = null
+        )
         {
             Debug.Assert(method != null);
             Debug.Assert(method.ReturnType != null);
             Debug.Assert(method.ReturnType != typeof(void));
 
-            if (this.ConfiguredDefaultValues.TryGetValue(method.ReturnType, out object configuredDefaultValue))
+            if (
+                this.ConfiguredDefaultValues.TryGetValue(
+                    method.ReturnType,
+                    out object configuredDefaultValue
+                )
+            )
             {
                 candidateInnerMock = null;
                 return configuredDefaultValue;
             }
 
-            var result = (useAlternateProvider ?? this.DefaultValueProvider).GetDefaultReturnValue(method, this);
+            var result = (useAlternateProvider ?? this.DefaultValueProvider).GetDefaultReturnValue(
+                method,
+                this
+            );
             var unwrappedResult = Awaitable.TryGetResultRecursive(result);
 
             candidateInnerMock = (unwrappedResult as IMocked)?.Mock;

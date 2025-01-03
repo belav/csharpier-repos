@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// </summary>
     public class AnalyzerOptions
     {
-        internal static readonly AnalyzerOptions Empty = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty);
+        internal static readonly AnalyzerOptions Empty = new AnalyzerOptions(
+            ImmutableArray<AdditionalText>.Empty
+        );
 
         /// <summary>
         /// A set of additional non-code text files that can be used by analyzers.
@@ -31,7 +33,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         /// <param name="additionalFiles">A set of additional non-code text files that can be used by analyzers.</param>
         /// <param name="optionsProvider">A set of per-tree options that can be used by analyzers.</param>
-        public AnalyzerOptions(ImmutableArray<AdditionalText> additionalFiles, AnalyzerConfigOptionsProvider optionsProvider)
+        public AnalyzerOptions(
+            ImmutableArray<AdditionalText> additionalFiles,
+            AnalyzerConfigOptionsProvider optionsProvider
+        )
         {
             if (optionsProvider is null)
             {
@@ -47,8 +52,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         /// <param name="additionalFiles">A set of additional non-code text files that can be used by analyzers.</param>
         public AnalyzerOptions(ImmutableArray<AdditionalText> additionalFiles)
-            : this(additionalFiles, CompilerAnalyzerConfigOptionsProvider.Empty)
-        { }
+            : this(additionalFiles, CompilerAnalyzerConfigOptionsProvider.Empty) { }
 
         /// <summary>
         /// Returns analyzer options with the given <paramref name="additionalFiles"/>.
@@ -71,9 +75,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             var other = obj as AnalyzerOptions;
-            return other != null &&
-                (this.AdditionalFiles == other.AdditionalFiles ||
-                this.AdditionalFiles.SequenceEqual(other.AdditionalFiles, ReferenceEquals));
+            return other != null
+                && (
+                    this.AdditionalFiles == other.AdditionalFiles
+                    || this.AdditionalFiles.SequenceEqual(other.AdditionalFiles, ReferenceEquals)
+                );
         }
 
         public override int GetHashCode()

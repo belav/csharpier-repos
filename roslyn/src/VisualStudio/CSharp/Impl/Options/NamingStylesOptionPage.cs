@@ -21,13 +21,21 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         private NamingStyleOptionPageControl _grid;
         private INotificationService _notificationService;
 
-        protected override AbstractOptionPageControl CreateOptionPage(IServiceProvider serviceProvider, OptionStore optionStore)
+        protected override AbstractOptionPageControl CreateOptionPage(
+            IServiceProvider serviceProvider,
+            OptionStore optionStore
+        )
         {
-            var componentModel = (IComponentModel)serviceProvider.GetService(typeof(SComponentModel));
+            var componentModel = (IComponentModel)
+                serviceProvider.GetService(typeof(SComponentModel));
             var workspace = componentModel.GetService<VisualStudioWorkspace>();
             _notificationService = workspace.Services.GetService<INotificationService>();
 
-            _grid = new NamingStyleOptionPageControl(optionStore, _notificationService, LanguageNames.CSharp);
+            _grid = new NamingStyleOptionPageControl(
+                optionStore,
+                _notificationService,
+                LanguageNames.CSharp
+            );
             return _grid;
         }
 
@@ -36,7 +44,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
             if (_grid.ContainsErrors())
             {
                 e.Cancel = true;
-                _notificationService.SendNotification(ServicesVSResources.Some_naming_rules_are_incomplete_Please_complete_or_remove_them);
+                _notificationService.SendNotification(
+                    ServicesVSResources.Some_naming_rules_are_incomplete_Please_complete_or_remove_them
+                );
             }
 
             base.OnDeactivate(e);

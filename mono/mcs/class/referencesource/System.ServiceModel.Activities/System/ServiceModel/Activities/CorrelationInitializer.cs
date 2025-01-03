@@ -14,22 +14,12 @@ namespace System.ServiceModel.Activities
         // internal ctor since we control the hierarchy
         // only supported subclasses are RequestReplyCorrelationInitializer, QueryCorrelationInitializer,
         // CallbackCorrelationInitializer and ContextCorrelationInitializer
-        internal CorrelationInitializer()
-        {
-        }
+        internal CorrelationInitializer() { }
 
         [DefaultValue(null)]
-        public InArgument<CorrelationHandle> CorrelationHandle
-        {
-            get;
-            set;
-        }
+        public InArgument<CorrelationHandle> CorrelationHandle { get; set; }
 
-        internal string ArgumentName
-        {
-            get;
-            set;
-        }
+        internal string ArgumentName { get; set; }
 
         internal abstract CorrelationInitializer CloneCore();
 
@@ -39,7 +29,9 @@ namespace System.ServiceModel.Activities
 
             if (this.CorrelationHandle != null)
             {
-                clone.CorrelationHandle = (InArgument<CorrelationHandle>)InArgument.CreateReference(this.CorrelationHandle, this.ArgumentName);
+                clone.CorrelationHandle =
+                    (InArgument<CorrelationHandle>)
+                        InArgument.CreateReference(this.CorrelationHandle, this.ArgumentName);
             }
 
             return clone;

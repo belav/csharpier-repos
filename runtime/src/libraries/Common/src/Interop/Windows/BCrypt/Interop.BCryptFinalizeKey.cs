@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
@@ -13,7 +12,8 @@ internal static partial class Interop
         [LibraryImport(Libraries.BCrypt)]
         private static unsafe partial NTSTATUS BCryptFinalizeKeyPair(
             SafeBCryptKeyHandle hKey,
-            uint dwFlags);
+            uint dwFlags
+        );
 
         internal static void BCryptFinalizeKeyPair(SafeBCryptKeyHandle key)
         {

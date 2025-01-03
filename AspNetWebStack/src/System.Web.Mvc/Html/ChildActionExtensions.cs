@@ -18,30 +18,80 @@ namespace System.Web.Mvc.Html
 
         public static MvcHtmlString Action(this HtmlHelper htmlHelper, string actionName)
         {
-            return Action(htmlHelper, actionName, null /* controllerName */, null /* routeValues */);
+            return Action(
+                htmlHelper,
+                actionName,
+                null /* controllerName */
+                ,
+                null /* routeValues */
+            );
         }
 
-        public static MvcHtmlString Action(this HtmlHelper htmlHelper, string actionName, object routeValues)
+        public static MvcHtmlString Action(
+            this HtmlHelper htmlHelper,
+            string actionName,
+            object routeValues
+        )
         {
-            return Action(htmlHelper, actionName, null /* controllerName */, TypeHelper.ObjectToDictionary(routeValues));
+            return Action(
+                htmlHelper,
+                actionName,
+                null /* controllerName */
+                ,
+                TypeHelper.ObjectToDictionary(routeValues)
+            );
         }
 
-        public static MvcHtmlString Action(this HtmlHelper htmlHelper, string actionName, RouteValueDictionary routeValues)
+        public static MvcHtmlString Action(
+            this HtmlHelper htmlHelper,
+            string actionName,
+            RouteValueDictionary routeValues
+        )
         {
-            return Action(htmlHelper, actionName, null /* controllerName */, routeValues);
+            return Action(
+                htmlHelper,
+                actionName,
+                null /* controllerName */
+                ,
+                routeValues
+            );
         }
 
-        public static MvcHtmlString Action(this HtmlHelper htmlHelper, string actionName, string controllerName)
+        public static MvcHtmlString Action(
+            this HtmlHelper htmlHelper,
+            string actionName,
+            string controllerName
+        )
         {
-            return Action(htmlHelper, actionName, controllerName, null /* routeValues */);
+            return Action(
+                htmlHelper,
+                actionName,
+                controllerName,
+                null /* routeValues */
+            );
         }
 
-        public static MvcHtmlString Action(this HtmlHelper htmlHelper, string actionName, string controllerName, object routeValues)
+        public static MvcHtmlString Action(
+            this HtmlHelper htmlHelper,
+            string actionName,
+            string controllerName,
+            object routeValues
+        )
         {
-            return Action(htmlHelper, actionName, controllerName, TypeHelper.ObjectToDictionary(routeValues));
+            return Action(
+                htmlHelper,
+                actionName,
+                controllerName,
+                TypeHelper.ObjectToDictionary(routeValues)
+            );
         }
 
-        public static MvcHtmlString Action(this HtmlHelper htmlHelper, string actionName, string controllerName, RouteValueDictionary routeValues)
+        public static MvcHtmlString Action(
+            this HtmlHelper htmlHelper,
+            string actionName,
+            string controllerName,
+            RouteValueDictionary routeValues
+        )
         {
             using (StringWriter writer = new StringWriter(CultureInfo.CurrentCulture))
             {
@@ -54,37 +104,99 @@ namespace System.Web.Mvc.Html
 
         public static void RenderAction(this HtmlHelper htmlHelper, string actionName)
         {
-            RenderAction(htmlHelper, actionName, null /* controllerName */, null /* routeValues */);
+            RenderAction(
+                htmlHelper,
+                actionName,
+                null /* controllerName */
+                ,
+                null /* routeValues */
+            );
         }
 
-        public static void RenderAction(this HtmlHelper htmlHelper, string actionName, object routeValues)
+        public static void RenderAction(
+            this HtmlHelper htmlHelper,
+            string actionName,
+            object routeValues
+        )
         {
-            RenderAction(htmlHelper, actionName, null /* controllerName */, TypeHelper.ObjectToDictionary(routeValues));
+            RenderAction(
+                htmlHelper,
+                actionName,
+                null /* controllerName */
+                ,
+                TypeHelper.ObjectToDictionary(routeValues)
+            );
         }
 
-        public static void RenderAction(this HtmlHelper htmlHelper, string actionName, RouteValueDictionary routeValues)
+        public static void RenderAction(
+            this HtmlHelper htmlHelper,
+            string actionName,
+            RouteValueDictionary routeValues
+        )
         {
-            RenderAction(htmlHelper, actionName, null /* controllerName */, routeValues);
+            RenderAction(
+                htmlHelper,
+                actionName,
+                null /* controllerName */
+                ,
+                routeValues
+            );
         }
 
-        public static void RenderAction(this HtmlHelper htmlHelper, string actionName, string controllerName)
+        public static void RenderAction(
+            this HtmlHelper htmlHelper,
+            string actionName,
+            string controllerName
+        )
         {
-            RenderAction(htmlHelper, actionName, controllerName, null /* routeValues */);
+            RenderAction(
+                htmlHelper,
+                actionName,
+                controllerName,
+                null /* routeValues */
+            );
         }
 
-        public static void RenderAction(this HtmlHelper htmlHelper, string actionName, string controllerName, object routeValues)
+        public static void RenderAction(
+            this HtmlHelper htmlHelper,
+            string actionName,
+            string controllerName,
+            object routeValues
+        )
         {
-            RenderAction(htmlHelper, actionName, controllerName, TypeHelper.ObjectToDictionary(routeValues));
+            RenderAction(
+                htmlHelper,
+                actionName,
+                controllerName,
+                TypeHelper.ObjectToDictionary(routeValues)
+            );
         }
 
-        public static void RenderAction(this HtmlHelper htmlHelper, string actionName, string controllerName, RouteValueDictionary routeValues)
+        public static void RenderAction(
+            this HtmlHelper htmlHelper,
+            string actionName,
+            string controllerName,
+            RouteValueDictionary routeValues
+        )
         {
-            ActionHelper(htmlHelper, actionName, controllerName, routeValues, htmlHelper.ViewContext.Writer);
+            ActionHelper(
+                htmlHelper,
+                actionName,
+                controllerName,
+                routeValues,
+                htmlHelper.ViewContext.Writer
+            );
         }
 
         // Helpers
 
-        internal static void ActionHelper(HtmlHelper htmlHelper, string actionName, string controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
+        internal static void ActionHelper(
+            HtmlHelper htmlHelper,
+            string actionName,
+            string controllerName,
+            RouteValueDictionary routeValues,
+            TextWriter textWriter
+        )
         {
             if (htmlHelper == null)
             {
@@ -105,7 +217,13 @@ namespace System.Web.Mvc.Html
             }
 
             bool usingAreas;
-            VirtualPathData vpd = htmlHelper.RouteCollection.GetVirtualPathForArea(htmlHelper.ViewContext.RequestContext, null /* name */, routeValues, out usingAreas);
+            VirtualPathData vpd = htmlHelper.RouteCollection.GetVirtualPathForArea(
+                htmlHelper.ViewContext.RequestContext,
+                null /* name */
+                ,
+                routeValues,
+                out usingAreas
+            );
             if (vpd == null)
             {
                 throw new InvalidOperationException(MvcResources.Common_NoRouteMatched);
@@ -122,17 +240,35 @@ namespace System.Web.Mvc.Html
 
             if (additionalRouteValues != null)
             {
-                routeValues[ChildActionValueProvider.ChildActionValuesKey] = new DictionaryValueProvider<object>(additionalRouteValues, CultureInfo.InvariantCulture);
+                routeValues[ChildActionValueProvider.ChildActionValuesKey] =
+                    new DictionaryValueProvider<object>(
+                        additionalRouteValues,
+                        CultureInfo.InvariantCulture
+                    );
             }
 
-            RouteData routeData = CreateRouteData(vpd.Route, routeValues, vpd.DataTokens, htmlHelper.ViewContext);
+            RouteData routeData = CreateRouteData(
+                vpd.Route,
+                routeValues,
+                vpd.DataTokens,
+                htmlHelper.ViewContext
+            );
             HttpContextBase httpContext = htmlHelper.ViewContext.HttpContext;
             RequestContext requestContext = new RequestContext(httpContext, routeData);
             ChildActionMvcHandler handler = new ChildActionMvcHandler(requestContext);
-            httpContext.Server.Execute(HttpHandlerUtil.WrapForServerExecute(handler), textWriter, true /* preserveForm */);
+            httpContext.Server.Execute(
+                HttpHandlerUtil.WrapForServerExecute(handler),
+                textWriter,
+                true /* preserveForm */
+            );
         }
 
-        private static RouteData CreateRouteData(RouteBase route, RouteValueDictionary routeValues, RouteValueDictionary dataTokens, ViewContext parentViewContext)
+        private static RouteData CreateRouteData(
+            RouteBase route,
+            RouteValueDictionary routeValues,
+            RouteValueDictionary dataTokens,
+            ViewContext parentViewContext
+        )
         {
             RouteData routeData = new RouteData();
 
@@ -147,10 +283,11 @@ namespace System.Web.Mvc.Html
             }
 
             routeData.Route = route;
-            routeData.DataTokens[ControllerContext.ParentActionViewContextToken] = parentViewContext;
+            routeData.DataTokens[ControllerContext.ParentActionViewContextToken] =
+                parentViewContext;
 
             // It's possible that the outgoing route is a direct route - in which case it's not possible to reach using
-            // the action name and controller name. We need to check for that case to determine if we need to create a 
+            // the action name and controller name. We need to check for that case to determine if we need to create a
             // 'direct route' routedata to reach it.
             if (route.IsDirectRoute())
             {
@@ -158,12 +295,16 @@ namespace System.Web.Mvc.Html
                 //
                 // We're constructing a 'temp' route data to wrap the route data for the match we're invoking via
                 // an attribute route. The ControllerContext will look at datatokens to see if it's being invoked
-                // as a child action. 
+                // as a child action.
                 //
                 // By sticking the view context on both route data ControllerContext will do the right thing
                 // at all parts of the pipeline.
-                var directRouteData = RouteCollectionRoute.CreateDirectRouteMatch(route, new List<RouteData>() { routeData });
-                directRouteData.DataTokens[ControllerContext.ParentActionViewContextToken] = parentViewContext;
+                var directRouteData = RouteCollectionRoute.CreateDirectRouteMatch(
+                    route,
+                    new List<RouteData>() { routeData }
+                );
+                directRouteData.DataTokens[ControllerContext.ParentActionViewContextToken] =
+                    parentViewContext;
                 return directRouteData;
             }
             else
@@ -172,7 +313,9 @@ namespace System.Web.Mvc.Html
             }
         }
 
-        private static RouteValueDictionary MergeDictionaries(params RouteValueDictionary[] dictionaries)
+        private static RouteValueDictionary MergeDictionaries(
+            params RouteValueDictionary[] dictionaries
+        )
         {
             // Merge existing route values with the user provided values
             var result = new RouteValueDictionary();
@@ -194,9 +337,7 @@ namespace System.Web.Mvc.Html
         internal class ChildActionMvcHandler : MvcHandler
         {
             public ChildActionMvcHandler(RequestContext context)
-                : base(context)
-            {
-            }
+                : base(context) { }
 
             protected internal override void AddVersionHeader(HttpContextBase httpContext)
             {

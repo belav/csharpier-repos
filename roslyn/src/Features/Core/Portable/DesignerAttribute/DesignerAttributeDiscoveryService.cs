@@ -27,15 +27,22 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
     [ExportWorkspaceService(typeof(IDesignerAttributeDiscoveryService)), Shared]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed partial class DesignerAttributeDiscoveryService(IAsynchronousOperationListenerProvider listenerProvider) : IDesignerAttributeDiscoveryService
+    internal sealed partial class DesignerAttributeDiscoveryService(
+        IAsynchronousOperationListenerProvider listenerProvider
+    ) : IDesignerAttributeDiscoveryService
     {
         /// <summary>
         /// Cache from the individual references a project has, to a boolean specifying if reference knows about the
         /// System.ComponentModel.DesignerCategoryAttribute attribute.
         /// </summary>
-        private static readonly ConditionalWeakTable<MetadataId, AsyncLazy<bool>> s_metadataIdToDesignerAttributeInfo = new();
+        private static readonly ConditionalWeakTable<
+            MetadataId,
+            AsyncLazy<bool>
+        > s_metadataIdToDesignerAttributeInfo = new();
 
-        private readonly IAsynchronousOperationListener _listener = listenerProvider.GetListener(FeatureAttribute.DesignerAttributes);
+        private readonly IAsynchronousOperationListener _listener = listenerProvider.GetListener(
+            FeatureAttribute.DesignerAttributes
+        );
 
         /// <summary>
         /// Protects mutable state in this type.
@@ -46,9 +53,15 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
         /// Keep track of the last information we reported.  We will avoid notifying the host if we recompute and these
         /// don't change.
         /// </summary>
-        private readonly ConcurrentDictionary<DocumentId, (string? category, VersionStamp projectVersion)> _documentToLastReportedInformation = new();
+        private readonly ConcurrentDictionary<
+            DocumentId,
+            (string? category, VersionStamp projectVersion)
+        > _documentToLastReportedInformation = new();
 
-        private static async ValueTask<bool> HasDesignerCategoryTypeAsync(Project project, CancellationToken cancellationToken)
+        private static async ValueTask<bool> HasDesignerCategoryTypeAsync(
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             var solutionServices = project.Solution.Services;
             var solutionKey = SolutionKey.ToSolutionKey(project.Solution);
@@ -56,8 +69,15 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             {
                 if (reference is PortableExecutableReference peReference)
                 {
-                    if (await HasDesignerCategoryTypeAsync(
-                            solutionServices, solutionKey, peReference, cancellationToken).ConfigureAwait(false))
+                    if (
+                        await HasDesignerCategoryTypeAsync(
+                                solutionServices,
+                                solutionKey,
+                                peReference,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
+                    )
                     {
                         return true;
                     }
@@ -67,10 +87,11 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             return false;
 
             static async Task<bool> HasDesignerCategoryTypeAsync(
-               SolutionServices solutionServices,
-               SolutionKey solutionKey,
-               PortableExecutableReference peReference,
-               CancellationToken cancellationToken)
+                SolutionServices solutionServices,
+                SolutionKey solutionKey,
+                PortableExecutableReference peReference,
+                CancellationToken cancellationToken
+            )
             {
                 MetadataId metadataId;
                 try
@@ -83,8 +104,17 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
                 }
 
                 var asyncLazy = s_metadataIdToDesignerAttributeInfo.GetValue(
-                    metadataId, _ => AsyncLazy.Create(cancellationToken =>
-                        ComputeHasDesignerCategoryTypeAsync(solutionServices, solutionKey, peReference, cancellationToken)));
+                    metadataId,
+                    _ =>
+                        AsyncLazy.Create(cancellationToken =>
+                            ComputeHasDesignerCategoryTypeAsync(
+                                solutionServices,
+                                solutionKey,
+                                peReference,
+                                cancellationToken
+                            )
+                        )
+                );
                 return await asyncLazy.GetValueAsync(cancellationToken).ConfigureAwait(false);
             }
 
@@ -92,14 +122,24 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
                 SolutionServices solutionServices,
                 SolutionKey solutionKey,
                 PortableExecutableReference peReference,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                var info = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                    solutionServices, solutionKey, peReference, checksum: null, cancellationToken).ConfigureAwait(false);
+                var info = await SymbolTreeInfo
+                    .GetInfoForMetadataReferenceAsync(
+                        solutionServices,
+                        solutionKey,
+                        peReference,
+                        checksum: null,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 var result =
-                    info.ContainsSymbolWithName(nameof(System)) &&
-                    info.ContainsSymbolWithName(nameof(System.ComponentModel)) &&
-                    info.ContainsSymbolWithName(nameof(System.ComponentModel.DesignerCategoryAttribute));
+                    info.ContainsSymbolWithName(nameof(System))
+                    && info.ContainsSymbolWithName(nameof(System.ComponentModel))
+                    && info.ContainsSymbolWithName(
+                        nameof(System.ComponentModel.DesignerCategoryAttribute)
+                    );
                 return result;
             }
         }
@@ -109,7 +149,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             DocumentId? priorityDocumentId,
             bool useFrozenSnapshots,
             IDesignerAttributeDiscoveryService.ICallback callback,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using (await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
@@ -123,18 +164,38 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
                 // Handle the priority doc first.
                 var priorityDocument = solution.GetDocument(priorityDocumentId);
                 if (priorityDocument != null)
-                    await ProcessProjectAsync(priorityDocument.Project, priorityDocument, useFrozenSnapshots, callback, cancellationToken).ConfigureAwait(false);
+                    await ProcessProjectAsync(
+                            priorityDocument.Project,
+                            priorityDocument,
+                            useFrozenSnapshots,
+                            callback,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                 // Wait a little after the priority document and process the rest at a lower priority.
-                await _listener.Delay(DelayTimeSpan.NonFocus, cancellationToken).ConfigureAwait(false);
+                await _listener
+                    .Delay(DelayTimeSpan.NonFocus, cancellationToken)
+                    .ConfigureAwait(false);
 
-                // Process the rest of the projects in dependency order so that their data is ready when we hit the 
+                // Process the rest of the projects in dependency order so that their data is ready when we hit the
                 // projects that depend on them.
                 var dependencyGraph = solution.GetProjectDependencyGraph();
-                foreach (var projectId in dependencyGraph.GetTopologicallySortedProjects(cancellationToken))
+                foreach (
+                    var projectId in dependencyGraph.GetTopologicallySortedProjects(
+                        cancellationToken
+                    )
+                )
                 {
                     if (projectId != priorityDocumentId?.ProjectId)
-                        await ProcessProjectAsync(solution.GetRequiredProject(projectId), specificDocument: null, useFrozenSnapshots, callback, cancellationToken).ConfigureAwait(false);
+                        await ProcessProjectAsync(
+                                solution.GetRequiredProject(projectId),
+                                specificDocument: null,
+                                useFrozenSnapshots,
+                                callback,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                 }
             }
         }
@@ -144,7 +205,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             Document? specificDocument,
             bool useFrozenSnapshots,
             IDesignerAttributeDiscoveryService.ICallback callback,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (!project.SupportsCompilation)
                 return;
@@ -167,15 +229,30 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
                     return;
 
                 project = document.WithFrozenPartialSemantics(cancellationToken).Project;
-                specificDocument = specificDocument is null ? null : project.GetRequiredDocument(specificDocument.Id);
+                specificDocument = specificDocument is null
+                    ? null
+                    : project.GetRequiredDocument(specificDocument.Id);
             }
 
             await ScanForDesignerCategoryUsageAsync(
-                project, specificDocument, callback, lazyProjectVersion, cancellationToken).ConfigureAwait(false);
+                    project,
+                    specificDocument,
+                    callback,
+                    lazyProjectVersion,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // If we scanned just a specific document in the project, now scan the rest of the files.
             if (specificDocument != null)
-                await ScanForDesignerCategoryUsageAsync(project, specificDocument: null, callback, lazyProjectVersion, cancellationToken).ConfigureAwait(false);
+                await ScanForDesignerCategoryUsageAsync(
+                        project,
+                        specificDocument: null,
+                        callback,
+                        lazyProjectVersion,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
         }
 
         private async Task ScanForDesignerCategoryUsageAsync(
@@ -183,30 +260,47 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             Document? specificDocument,
             IDesignerAttributeDiscoveryService.ICallback callback,
             AsyncLazy<VersionStamp> lazyProjectVersion,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Now get all the values that actually changed and notify VS about them. We don't need
             // to tell it about the ones that didn't change since that will have no effect on the
             // user experience.
             var changedData = await ComputeChangedDataAsync(
-                project, specificDocument, lazyProjectVersion, cancellationToken).ConfigureAwait(false);
+                    project,
+                    specificDocument,
+                    lazyProjectVersion,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // Only bother reporting non-empty information to save an unnecessary RPC.
             if (!changedData.IsEmpty)
-                await callback.ReportDesignerAttributeDataAsync(changedData.SelectAsArray(d => d.data), cancellationToken).ConfigureAwait(false);
+                await callback
+                    .ReportDesignerAttributeDataAsync(
+                        changedData.SelectAsArray(d => d.data),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
             // Now, keep track of what we've reported to the host so we won't report unchanged files in the future. We
             // do this after the report has gone through as we want to make sure that if it cancels for any reason we
             // don't hold onto values that may not have made it all the way to the project system.
             foreach (var (data, projectVersion) in changedData)
-                _documentToLastReportedInformation[data.DocumentId] = (data.Category, projectVersion);
+                _documentToLastReportedInformation[data.DocumentId] = (
+                    data.Category,
+                    projectVersion
+                );
         }
 
-        private async Task<ImmutableArray<(DesignerAttributeData data, VersionStamp version)>> ComputeChangedDataAsync(
+        private async Task<
+            ImmutableArray<(DesignerAttributeData data, VersionStamp version)>
+        > ComputeChangedDataAsync(
             Project project,
             Document? specificDocument,
             AsyncLazy<VersionStamp> lazyProjectVersion,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // NOTE: While we could potentially process the documents in a project in parallel, we intentionally do not.
             // That's because this runs automatically in the BG in response to *any* change in the workspace.  So it's
@@ -216,7 +310,10 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
 
             bool? hasDesignerCategoryType = null;
 
-            using var _ = ArrayBuilder<(DesignerAttributeData data, VersionStamp version)>.GetInstance(out var results);
+            using var _ = ArrayBuilder<(
+                DesignerAttributeData data,
+                VersionStamp version
+            )>.GetInstance(out var results);
 
             // Avoid realizing document instances until needed.
             foreach (var documentId in project.DocumentIds)
@@ -233,15 +330,29 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
 
                 // If nothing has changed at the top level between the last time we analyzed this document and now, then
                 // no need to analyze again.
-                var projectVersion = await lazyProjectVersion.GetValueAsync(cancellationToken).ConfigureAwait(false);
-                if (_documentToLastReportedInformation.TryGetValue(documentId, out var existingInfo) &&
-                    existingInfo.projectVersion == projectVersion)
+                var projectVersion = await lazyProjectVersion
+                    .GetValueAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                if (
+                    _documentToLastReportedInformation.TryGetValue(documentId, out var existingInfo)
+                    && existingInfo.projectVersion == projectVersion
+                )
                 {
                     continue;
                 }
 
-                hasDesignerCategoryType ??= await HasDesignerCategoryTypeAsync(project, cancellationToken).ConfigureAwait(false);
-                var data = await ComputeDesignerAttributeDataAsync(project, documentId, filePath, hasDesignerCategoryType.Value).ConfigureAwait(false);
+                hasDesignerCategoryType ??= await HasDesignerCategoryTypeAsync(
+                        project,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                var data = await ComputeDesignerAttributeDataAsync(
+                        project,
+                        documentId,
+                        filePath,
+                        hasDesignerCategoryType.Value
+                    )
+                    .ConfigureAwait(false);
                 if (data.Category != existingInfo.category)
                     results.Add((data, projectVersion));
             }
@@ -249,13 +360,22 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             return results.ToImmutable();
 
             async Task<DesignerAttributeData> ComputeDesignerAttributeDataAsync(
-                Project project, DocumentId documentId, string filePath, bool hasDesignerCategoryType)
+                Project project,
+                DocumentId documentId,
+                string filePath,
+                bool hasDesignerCategoryType
+            )
             {
                 // We either haven't computed the designer info, or our data was out of date.  We need
                 // So recompute here.  Figure out what the current category is, and if that's different
                 // from what we previously stored.
                 var category = await ComputeDesignerAttributeCategoryAsync(
-                    hasDesignerCategoryType, project, documentId, cancellationToken).ConfigureAwait(false);
+                        hasDesignerCategoryType,
+                        project,
+                        documentId,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return new DesignerAttributeData
                 {
@@ -267,7 +387,11 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
         }
 
         public static async Task<string?> ComputeDesignerAttributeCategoryAsync(
-            bool hasDesignerCategoryType, Project project, DocumentId documentId, CancellationToken cancellationToken)
+            bool hasDesignerCategoryType,
+            Project project,
+            DocumentId documentId,
+            CancellationToken cancellationToken
+        )
         {
             // simple case.  If there's no DesignerCategory type in this compilation, then there's definitely no
             // designable types.
@@ -277,7 +401,9 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             // Wait to realize the document to avoid unnecessary allocations when indexing documents.
             var document = project.GetRequiredDocument(documentId);
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
             // Legacy behavior.  We only register the designer info for the first non-nested class
@@ -286,30 +412,47 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
             if (firstClass == null)
                 return null;
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var firstClassType = (INamedTypeSymbol)semanticModel.GetRequiredDeclaredSymbol(firstClass, cancellationToken);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var firstClassType = (INamedTypeSymbol)
+                semanticModel.GetRequiredDeclaredSymbol(firstClass, cancellationToken);
 
             foreach (var type in firstClassType.GetBaseTypesAndThis())
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 // See if it has the designer attribute on it. Use symbol-equivalence instead of direct equality
-                // as the symbol we have 
-                var attribute = type.GetAttributes().FirstOrDefault(d => IsDesignerAttribute(d.AttributeClass));
-                if (attribute is { ConstructorArguments: [{ Type.SpecialType: SpecialType.System_String, Value: string stringValue }] })
+                // as the symbol we have
+                var attribute = type.GetAttributes()
+                    .FirstOrDefault(d => IsDesignerAttribute(d.AttributeClass));
+                if (
+                    attribute is
+                    {
+                        ConstructorArguments: [
+                            {
+                                Type.SpecialType: SpecialType.System_String,
+                                Value: string stringValue
+                            },
+                        ]
+                    }
+                )
                     return stringValue.Trim();
             }
 
             return null;
 
-            static bool IsDesignerAttribute(INamedTypeSymbol? attributeClass)
-                => attributeClass is
-                {
-                    Name: nameof(DesignerCategoryAttribute),
-                    ContainingNamespace.Name: nameof(System.ComponentModel),
-                    ContainingNamespace.ContainingNamespace.Name: nameof(System),
-                    ContainingNamespace.ContainingNamespace.ContainingNamespace.IsGlobalNamespace: true,
-                };
+            static bool IsDesignerAttribute(INamedTypeSymbol? attributeClass) =>
+                attributeClass
+                    is {
+                        Name: nameof(DesignerCategoryAttribute),
+                        ContainingNamespace.Name: nameof(System.ComponentModel),
+                        ContainingNamespace.ContainingNamespace.Name: nameof(System),
+                        ContainingNamespace
+                            .ContainingNamespace
+                            .ContainingNamespace
+                            .IsGlobalNamespace: true,
+                    };
 
             SyntaxNode? FindFirstNonNestedClass(SyntaxList<SyntaxNode> members)
             {
@@ -318,7 +461,9 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
                     cancellationToken.ThrowIfCancellationRequested();
                     if (syntaxFacts.IsBaseNamespaceDeclaration(member))
                     {
-                        var firstClass = FindFirstNonNestedClass(syntaxFacts.GetMembersOfBaseNamespaceDeclaration(member));
+                        var firstClass = FindFirstNonNestedClass(
+                            syntaxFacts.GetMembersOfBaseNamespaceDeclaration(member)
+                        );
                         if (firstClass != null)
                             return firstClass;
                     }

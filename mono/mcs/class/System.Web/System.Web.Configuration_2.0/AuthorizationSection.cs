@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,55 +32,57 @@ using System;
 using System.Configuration;
 using System.Security.Principal;
 
+namespace System.Web.Configuration
+{
+    public sealed class AuthorizationSection : ConfigurationSection
+    {
+        static ConfigurationProperty rulesProp;
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        static AuthorizationSection()
+        {
+            rulesProp = new ConfigurationProperty(
+                String.Empty,
+                typeof(AuthorizationRuleCollection),
+                null,
+                null,
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
+            properties = new ConfigurationPropertyCollection();
 
-	public sealed class AuthorizationSection : ConfigurationSection
-	{
-		static ConfigurationProperty rulesProp;
-		static ConfigurationPropertyCollection properties;
+            properties.Add(rulesProp);
+        }
 
-		static AuthorizationSection ()
-		{
-			rulesProp = new ConfigurationProperty (String.Empty, typeof (AuthorizationRuleCollection), null,
-							       null, PropertyHelper.DefaultValidator,
-							       ConfigurationPropertyOptions.IsDefaultCollection);
-			properties = new ConfigurationPropertyCollection ();
+        protected override void PostDeserialize()
+        {
+            base.PostDeserialize();
+        }
 
-			properties.Add (rulesProp);
-		}
+        [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public AuthorizationRuleCollection Rules
+        {
+            get { return (AuthorizationRuleCollection)base[rulesProp]; }
+        }
 
-		protected override void PostDeserialize()
-		{
-			base.PostDeserialize ();
-		}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public AuthorizationRuleCollection Rules {
-			get { return (AuthorizationRuleCollection) base [rulesProp];}
-		}
+        internal bool IsValidUser(IPrincipal user, string verb)
+        {
+            string username = (user == null) ? String.Empty : user.Identity.Name;
+            foreach (AuthorizationRule rule in Rules)
+            {
+                if (rule.Verbs.Count != 0 && !rule.CheckVerb(verb))
+                    continue;
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+                if (rule.CheckUser(username) || (user != null && rule.CheckRole(user)))
+                    return (rule.Action == AuthorizationRuleAction.Allow);
+            }
 
-
-		internal bool IsValidUser (IPrincipal user, string verb)
-		{
-			string username = (user == null) ? String.Empty : user.Identity.Name;
-			foreach (AuthorizationRule rule in Rules) {
-				if (rule.Verbs.Count != 0 && !rule.CheckVerb (verb))
-					continue;
-
-				if (rule.CheckUser (username) || (user != null && rule.CheckRole(user)))
-					return (rule.Action == AuthorizationRuleAction.Allow);
-			}
-
-			return true;
-		}
-
-	}
-
+            return true;
+        }
+    }
 }
-
-

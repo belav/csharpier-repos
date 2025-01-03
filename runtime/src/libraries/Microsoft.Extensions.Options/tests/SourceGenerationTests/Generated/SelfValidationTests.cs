@@ -16,10 +16,7 @@ public class SelfValidationTests
         var firstModel = new FirstModel
         {
             P1 = "1234",
-            P2 = new SecondModel
-            {
-                P3 = "5678"
-            }
+            P2 = new SecondModel { P3 = "5678" },
         };
 
         var validator = default(FirstValidator);
@@ -34,14 +31,14 @@ public class SelfValidationTests
         var firstModel = new FirstModel
         {
             P1 = "12345",
-            P2 = new SecondModel
-            {
-                P3 = "67890"
-            }
+            P2 = new SecondModel { P3 = "67890" },
         };
 
         var validator = default(FirstValidator);
-        Assert.Equal(ValidateOptionsResult.Success, validator.Validate("SelfValidation", firstModel));
+        Assert.Equal(
+            ValidateOptionsResult.Success,
+            validator.Validate("SelfValidation", firstModel)
+        );
     }
 
     [Fact]

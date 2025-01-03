@@ -17,9 +17,13 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             return typeInfo.DeclaredConstructors;
         }
 
-        public sealed override IEnumerable<ConstructorInfo> CoreGetDeclaredMembers(RuntimeTypeInfo type, NameFilter? filter, RuntimeTypeInfo reflectedType)
+        public sealed override IEnumerable<ConstructorInfo> CoreGetDeclaredMembers(
+            RuntimeTypeInfo type,
+            NameFilter? filter,
+            RuntimeTypeInfo reflectedType
+        )
         {
-            Debug.Assert(reflectedType.Equals(type));  // Constructor queries are always performed as if BindingFlags.DeclaredOnly are set so the reflectedType should always be the declaring type.
+            Debug.Assert(reflectedType.Equals(type)); // Constructor queries are always performed as if BindingFlags.DeclaredOnly are set so the reflectedType should always be the declaring type.
             return type.GetConstructorsCore(filter);
         }
 
@@ -31,7 +35,13 @@ namespace System.Reflection.Runtime.BindingFlagSupport
 
         public sealed override bool AlwaysTreatAsDeclaredOnly => true;
 
-        public sealed override void GetMemberAttributes(ConstructorInfo member, out MethodAttributes visibility, out bool isStatic, out bool isVirtual, out bool isNewSlot)
+        public sealed override void GetMemberAttributes(
+            ConstructorInfo member,
+            out MethodAttributes visibility,
+            out bool isStatic,
+            out bool isVirtual,
+            out bool isNewSlot
+        )
         {
             MethodAttributes methodAttributes = member.Attributes;
             visibility = methodAttributes & MethodAttributes.MemberAccessMask;
@@ -40,9 +50,17 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             isNewSlot = false;
         }
 
-        public sealed override bool ImplicitlyOverrides(ConstructorInfo? baseMember, ConstructorInfo? derivedMember) => false;
+        public sealed override bool ImplicitlyOverrides(
+            ConstructorInfo? baseMember,
+            ConstructorInfo? derivedMember
+        ) => false;
 
-        public sealed override bool IsSuppressedByMoreDerivedMember(ConstructorInfo member, ConstructorInfo[] priorMembers, int startIndex, int endIndex)
+        public sealed override bool IsSuppressedByMoreDerivedMember(
+            ConstructorInfo member,
+            ConstructorInfo[] priorMembers,
+            int startIndex,
+            int endIndex
+        )
         {
             return false;
         }

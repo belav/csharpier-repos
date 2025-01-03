@@ -27,14 +27,24 @@ namespace Microsoft.Win32.RegistryTests
 
             // Should throw if key length above 255 characters but prior to V4, the limit is 16383
             const int maxValueNameLength = 16383;
-            AssertExtensions.Throws<ArgumentException>("name", null, () => TestRegistryKey.SetValue(new string('a', maxValueNameLength + 1), 5));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                null,
+                () => TestRegistryKey.SetValue(new string('a', maxValueNameLength + 1), 5)
+            );
 
             // Should throw if passed value is array with uninitialized elements
-            AssertExtensions.Throws<ArgumentException>(null, () => TestRegistryKey.SetValue("StringArr", value: new string[1]));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => TestRegistryKey.SetValue("StringArr", value: new string[1])
+            );
 
             // Should throw because only String[] (REG_MULTI_SZ) and byte[] (REG_BINARY) are supported.
             // RegistryKey.SetValue does not support arrays of type UInt32[].
-            AssertExtensions.Throws<ArgumentException>(null, () => TestRegistryKey.SetValue("IntArray", value: new[] { 1, 2, 3 }));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => TestRegistryKey.SetValue("IntArray", value: new[] { 1, 2, 3 })
+            );
 
             // Should throw if RegistryKey closed
             Assert.Throws<ObjectDisposedException>(() =>
@@ -44,7 +54,10 @@ namespace Microsoft.Win32.RegistryTests
             });
         }
 
-        public static IEnumerable<object[]> TestValueTypes { get { return TestData.TestValueTypes; } }
+        public static IEnumerable<object[]> TestValueTypes
+        {
+            get { return TestData.TestValueTypes; }
+        }
 
         [Theory]
         [MemberData(nameof(TestValueTypes))]
@@ -99,7 +112,7 @@ namespace Microsoft.Win32.RegistryTests
             {
                 "This is a public",
                 "broadcast intend to test",
-                "lot of things. one of which"
+                "lot of things. one of which",
             };
 
             TestRegistryKey.SetValue(testValueName, expected);
@@ -107,11 +120,18 @@ namespace Microsoft.Win32.RegistryTests
             TestRegistryKey.DeleteValue(testValueName);
         }
 
-        public static IEnumerable<object[]> TestEnvironment { get { return TestData.TestEnvironment; } }
+        public static IEnumerable<object[]> TestEnvironment
+        {
+            get { return TestData.TestEnvironment; }
+        }
 
         [Theory]
         [MemberData(nameof(TestEnvironment))]
-        public void SetValueWithEnvironmentVariable(string valueName, string envVariableName, string expectedVariableValue)
+        public void SetValueWithEnvironmentVariable(
+            string valueName,
+            string envVariableName,
+            string expectedVariableValue
+        )
         {
             // ExpandEnvironmentStrings is converting "C:\Program Files (Arm)" to "C:\Program Files (x86)".
             if (envVariableName == "ProgramFiles" && PlatformDetection.IsArmProcess)

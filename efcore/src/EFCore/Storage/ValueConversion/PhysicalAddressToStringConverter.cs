@@ -22,9 +22,7 @@ public class PhysicalAddressToStringConverter : ValueConverter<PhysicalAddress?,
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
     public PhysicalAddressToStringConverter()
-        : this(null)
-    {
-    }
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -37,22 +35,21 @@ public class PhysicalAddressToStringConverter : ValueConverter<PhysicalAddress?,
     ///     facets for the converted data.
     /// </param>
     public PhysicalAddressToStringConverter(ConverterMappingHints? mappingHints)
-        : base(
-            ToString(),
-            ToPhysicalAddress(),
-            DefaultHints.With(mappingHints))
-    {
-    }
+        : base(ToString(), ToPhysicalAddress(), DefaultHints.With(mappingHints)) { }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(typeof(PhysicalAddress), typeof(string), i => new PhysicalAddressToStringConverter(i.MappingHints), DefaultHints);
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(
+            typeof(PhysicalAddress),
+            typeof(string),
+            i => new PhysicalAddressToStringConverter(i.MappingHints),
+            DefaultHints
+        );
 
-    private static new Expression<Func<PhysicalAddress?, string?>> ToString()
-        => v => v!.ToString();
+    private static new Expression<Func<PhysicalAddress?, string?>> ToString() => v => v!.ToString();
 
-    private static Expression<Func<string?, PhysicalAddress?>> ToPhysicalAddress()
-        => v => PhysicalAddress.Parse(v!);
+    private static Expression<Func<string?, PhysicalAddress?>> ToPhysicalAddress() =>
+        v => PhysicalAddress.Parse(v!);
 }

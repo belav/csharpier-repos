@@ -8,9 +8,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 
 internal abstract class ProjectCommandBase : HelpCommandBase
 {
-    public ProjectCommandBase(IConsole console) : base(console)
-    {
-    }
+    public ProjectCommandBase(IConsole console)
+        : base(console) { }
 
     public CommandOption AssemblyPath { get; private set; }
 
@@ -24,7 +23,10 @@ internal abstract class ProjectCommandBase : HelpCommandBase
 
         AssemblyPath = command.Option("--assembly <PATH>", Resources.AssemblyDescription);
         ProjectName = command.Option("--project <Name>", Resources.ProjectDescription);
-        ToolsDirectory = command.Option("--tools-directory <PATH>", Resources.ToolsDirectoryDescription);
+        ToolsDirectory = command.Option(
+            "--tools-directory <PATH>",
+            Resources.ToolsDirectoryDescription
+        );
     }
 
     protected override void Validate()

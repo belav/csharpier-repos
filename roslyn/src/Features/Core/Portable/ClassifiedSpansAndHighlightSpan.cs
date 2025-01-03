@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Classification
 {
     internal readonly struct ClassifiedSpansAndHighlightSpan(
         ImmutableArray<ClassifiedSpan> classifiedSpans,
-        TextSpan highlightSpan)
+        TextSpan highlightSpan
+    )
     {
         public const string Key = nameof(ClassifiedSpansAndHighlightSpan);
 

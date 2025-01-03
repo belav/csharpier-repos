@@ -32,8 +32,12 @@ namespace System.Web.Helpers
 ";
 
         private static readonly HtmlElement _nullSpan = HtmlElement.CreateSpan("(null)", "null");
+
         // List of chars to escape within strings
-        private static readonly Dictionary<char, string> _printableEscapeChars = new Dictionary<char, string>
+        private static readonly Dictionary<char, string> _printableEscapeChars = new Dictionary<
+            char,
+            string
+        >
         {
             { '\0', "\\0" },
             { '\\', "\\\\" },
@@ -53,9 +57,7 @@ namespace System.Web.Helpers
         private Stack<HtmlElement> _elementStack = new Stack<HtmlElement>();
 
         public HtmlObjectPrinter(int recursionLimit, int enumerationLimit)
-            : base(recursionLimit, enumerationLimit)
-        {
-        }
+            : base(recursionLimit, enumerationLimit) { }
 
         private HtmlElement Current
         {
@@ -82,7 +84,12 @@ namespace System.Web.Helpers
             rootElement.WriteTo(writer);
         }
 
-        public override void VisitKeyValues(object value, IEnumerable<object> keys, Func<object, object> valueSelector, int depth)
+        public override void VisitKeyValues(
+            object value,
+            IEnumerable<object> keys,
+            Func<object, object> valueSelector,
+            int depth
+        )
         {
             string id = GetObjectId(value);
             HtmlElement ul = new HtmlElement("ul");
@@ -157,7 +164,12 @@ namespace System.Web.Helpers
             Current.AppendChild(li);
         }
 
-        public override void VisitMembers(IEnumerable<string> names, Func<string, Type> typeSelector, Func<string, object> valueSelector, int depth)
+        public override void VisitMembers(
+            IEnumerable<string> names,
+            Func<string, Type> typeSelector,
+            Func<string, object> valueSelector,
+            int depth
+        )
         {
             HtmlElement ul = new HtmlElement("ul");
             ul.AddCssClass("typeProperties");
@@ -248,7 +260,11 @@ namespace System.Web.Helpers
             Current.AppendChild(CreateExceptionSpan(exception));
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Making the value lowercase has nothing to do with normalization. It's used to show true or false instead of the Title case version")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "Making the value lowercase has nothing to do with normalization. It's used to show true or false instead of the Title case version"
+        )]
         public override void VisitConvertedValue(object value, string convertedValue)
         {
             Type type = value.GetType();
@@ -272,10 +288,14 @@ namespace System.Web.Helpers
             if (valueAsType != null)
             {
                 // For types we're going to generate elements that print typeof(TypeName)
-                Current.AppendChild(CreateParentSpan(CreateTypeSpan("typeof"),
-                                                     CreateOperatorSpan("("),
-                                                     CreateTypeNameSpan(valueAsType),
-                                                     CreateOperatorSpan(")")));
+                Current.AppendChild(
+                    CreateParentSpan(
+                        CreateTypeSpan("typeof"),
+                        CreateOperatorSpan("("),
+                        CreateTypeNameSpan(valueAsType),
+                        CreateOperatorSpan(")")
+                    )
+                );
             }
             else
             {
@@ -335,7 +355,11 @@ namespace System.Web.Helpers
 
         private static HtmlElement CreateVisitedLink(string id)
         {
-            string text = String.Format(CultureInfo.InvariantCulture, "[{0}]", HelpersResources.ObjectInfo_PreviousDisplayed);
+            string text = String.Format(
+                CultureInfo.InvariantCulture,
+                "[{0}]",
+                HelpersResources.ObjectInfo_PreviousDisplayed
+            );
             return CreateLink("#" + id, text);
         }
 

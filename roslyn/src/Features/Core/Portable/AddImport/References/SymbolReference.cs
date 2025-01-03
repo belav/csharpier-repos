@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.AddImport
     {
         private abstract partial class SymbolReference(
             AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
-            SymbolResult<INamespaceOrTypeSymbol> symbolResult) : Reference(provider, new SearchResult(symbolResult))
+            SymbolResult<INamespaceOrTypeSymbol> symbolResult
+        ) : Reference(provider, new SearchResult(symbolResult))
         {
             public readonly SymbolResult<INamespaceOrTypeSymbol> SymbolResult = symbolResult;
 
@@ -42,13 +43,16 @@ namespace Microsoft.CodeAnalysis.AddImport
                 return StringComparer.Ordinal.Equals(name1, name2);
             }
 
-            public override int GetHashCode()
-                => Hash.Combine(SymbolResult.DesiredName, base.GetHashCode());
+            public override int GetHashCode() =>
+                Hash.Combine(SymbolResult.DesiredName, base.GetHashCode());
 
             private async Task<ImmutableArray<TextChange>> GetTextChangesAsync(
-                Document document, SyntaxNode contextNode,
-                CodeCleanupOptions options, bool hasExistingImport,
-                CancellationToken cancellationToken)
+                Document document,
+                SyntaxNode contextNode,
+                CodeCleanupOptions options,
+                bool hasExistingImport,
+                CancellationToken cancellationToken
+            )
             {
                 // Defer to the language to add the actual import/using.
                 if (hasExistingImport)
@@ -57,27 +61,50 @@ namespace Microsoft.CodeAnalysis.AddImport
                 }
 
                 (var newContextNode, var newDocument) = await ReplaceNameNodeAsync(
-                    contextNode, document, cancellationToken).ConfigureAwait(false);
+                        contextNode,
+                        document,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-                var updatedDocument = await provider.AddImportAsync(
-                    newContextNode, SymbolResult.Symbol, newDocument,
-                    options.AddImportOptions, cancellationToken).ConfigureAwait(false);
+                var updatedDocument = await provider
+                    .AddImportAsync(
+                        newContextNode,
+                        SymbolResult.Symbol,
+                        newDocument,
+                        options.AddImportOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-                var cleanedDocument = await CodeAction.CleanupDocumentAsync(
-                    updatedDocument, options, cancellationToken).ConfigureAwait(false);
+                var cleanedDocument = await CodeAction
+                    .CleanupDocumentAsync(updatedDocument, options, cancellationToken)
+                    .ConfigureAwait(false);
 
-                var textChanges = await cleanedDocument.GetTextChangesAsync(
-                    document, cancellationToken).ConfigureAwait(false);
+                var textChanges = await cleanedDocument
+                    .GetTextChangesAsync(document, cancellationToken)
+                    .ConfigureAwait(false);
 
                 return textChanges.ToImmutableArray();
             }
 
             public sealed override async Task<AddImportFixData> TryGetFixDataAsync(
-                Document document, SyntaxNode node,
-                CodeCleanupOptions options, CancellationToken cancellationToken)
+                Document document,
+                SyntaxNode node,
+                CodeCleanupOptions options,
+                CancellationToken cancellationToken
+            )
             {
-                var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                var (description, hasExistingImport) = GetDescription(document, options, node, semanticModel, cancellationToken);
+                var semanticModel = await document
+                    .GetSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var (description, hasExistingImport) = GetDescription(
+                    document,
+                    options,
+                    node,
+                    semanticModel,
+                    cancellationToken
+                );
                 if (description == null)
                 {
                     return null;
@@ -108,25 +135,43 @@ namespace Microsoft.CodeAnalysis.AddImport
                 }
 
                 var textChanges = await GetTextChangesAsync(
-                    document, node, options, hasExistingImport, cancellationToken).ConfigureAwait(false);
+                        document,
+                        node,
+                        options,
+                        hasExistingImport,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-                return GetFixData(
-                    document, textChanges, description,
-                    tags, GetPriority(document));
+                return GetFixData(document, textChanges, description, tags, GetPriority(document));
             }
 
             protected abstract AddImportFixData GetFixData(
-                Document document, ImmutableArray<TextChange> textChanges,
-                string description, ImmutableArray<string> tags, CodeActionPriority priority);
+                Document document,
+                ImmutableArray<TextChange> textChanges,
+                string description,
+                ImmutableArray<string> tags,
+                CodeActionPriority priority
+            );
 
             protected abstract CodeActionPriority GetPriority(Document document);
 
             protected virtual (string description, bool hasExistingImport) GetDescription(
-                Document document, CodeCleanupOptions options, SyntaxNode node,
-                SemanticModel semanticModel, CancellationToken cancellationToken)
+                Document document,
+                CodeCleanupOptions options,
+                SyntaxNode node,
+                SemanticModel semanticModel,
+                CancellationToken cancellationToken
+            )
             {
                 return provider.GetDescription(
-                    document, options.AddImportOptions, SymbolResult.Symbol, semanticModel, node, cancellationToken);
+                    document,
+                    options.AddImportOptions,
+                    SymbolResult.Symbol,
+                    semanticModel,
+                    node,
+                    cancellationToken
+                );
             }
         }
     }

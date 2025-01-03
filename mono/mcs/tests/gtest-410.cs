@@ -6,11 +6,12 @@ using System;
 
 class Program
 {
-	public static void Main()
-	{
-		unsafe {
-			int* a = (int*)null;
-			ulong* o = default (ulong*);
-		}
+    public static void Main()
+    {
+        unsafe
+        {
+            int* a = (int*)null;
+            ulong* o = default(ulong*);
+        }
     }
 }

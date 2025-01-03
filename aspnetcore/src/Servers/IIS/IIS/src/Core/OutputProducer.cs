@@ -88,9 +88,9 @@ internal sealed class OutputProducer
     {
         lock (_flushLock)
         {
-            _lastFlushTask = _lastFlushTask.IsCompleted ?
-                FlushNowAsync(pipeWriter, cancellationToken) :
-                AwaitLastFlushAndThenFlushAsync(_lastFlushTask, pipeWriter, cancellationToken);
+            _lastFlushTask = _lastFlushTask.IsCompleted
+                ? FlushNowAsync(pipeWriter, cancellationToken)
+                : AwaitLastFlushAndThenFlushAsync(_lastFlushTask, pipeWriter, cancellationToken);
 
             return _lastFlushTask;
         }
@@ -99,10 +99,15 @@ internal sealed class OutputProducer
     private Task FlushNowAsync(PipeWriter pipeWriter, CancellationToken cancellationToken)
     {
         var awaitable = pipeWriter.FlushAsync(cancellationToken);
-        return awaitable.IsCompleted ? Task.CompletedTask : FlushNowAsyncAwaited(awaitable, cancellationToken);
+        return awaitable.IsCompleted
+            ? Task.CompletedTask
+            : FlushNowAsyncAwaited(awaitable, cancellationToken);
     }
 
-    private async Task FlushNowAsyncAwaited(ValueTask<FlushResult> awaitable, CancellationToken cancellationToken)
+    private async Task FlushNowAsyncAwaited(
+        ValueTask<FlushResult> awaitable,
+        CancellationToken cancellationToken
+    )
     {
         try
         {
@@ -120,7 +125,11 @@ internal sealed class OutputProducer
         }
     }
 
-    private async Task AwaitLastFlushAndThenFlushAsync(Task lastFlushTask, PipeWriter pipeWriter, CancellationToken cancellationToken)
+    private async Task AwaitLastFlushAndThenFlushAsync(
+        Task lastFlushTask,
+        PipeWriter pipeWriter,
+        CancellationToken cancellationToken
+    )
     {
         await lastFlushTask;
         await FlushNowAsync(pipeWriter, cancellationToken);

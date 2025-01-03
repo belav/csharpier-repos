@@ -32,68 +32,69 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public sealed class AssemblyReferenceCollection : IEnumerable {
-	
-		List <AssemblyReference> list;
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public sealed class AssemblyReferenceCollection : IEnumerable
+    {
+        List<AssemblyReference> list;
 
-		AssemblyReferenceCollection ()
-		{
-			list = new List <AssemblyReference> ();
-		}
-	
-		public AssemblyReference Add (AssemblyReference assembly)
-		{
-			list.Add (assembly);
-			return assembly;
-		}
-		
-		public AssemblyReference Add (string path)
-		{
-			AssemblyReference ar = new AssemblyReference (path);
-			list.Add (ar);
-			return ar;
-		}
-		
-		public void Clear ()
-		{
-			list.Clear ();
-		}
-		
-		public AssemblyReference Find (AssemblyIdentity identity)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public AssemblyReference Find (string name)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public AssemblyReference FindTargetPath (string targetPath)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public IEnumerator GetEnumerator ()
-		{
-			return list.GetEnumerator ();
-		}
-		
-		public void Remove (AssemblyReference assemblyReference)
-		{
-			list.Remove (assemblyReference);
-		}
-		
-		public int Count {
-			get { return list.Count; }
-		}
-		
-		public AssemblyReference this [int index] {
-			get { return list [index]; }
-		}
-	}
+        AssemblyReferenceCollection()
+        {
+            list = new List<AssemblyReference>();
+        }
+
+        public AssemblyReference Add(AssemblyReference assembly)
+        {
+            list.Add(assembly);
+            return assembly;
+        }
+
+        public AssemblyReference Add(string path)
+        {
+            AssemblyReference ar = new AssemblyReference(path);
+            list.Add(ar);
+            return ar;
+        }
+
+        public void Clear()
+        {
+            list.Clear();
+        }
+
+        public AssemblyReference Find(AssemblyIdentity identity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AssemblyReference Find(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AssemblyReference FindTargetPath(string targetPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
+
+        public void Remove(AssemblyReference assemblyReference)
+        {
+            list.Remove(assemblyReference);
+        }
+
+        public int Count
+        {
+            get { return list.Count; }
+        }
+
+        public AssemblyReference this[int index]
+        {
+            get { return list[index]; }
+        }
+    }
 }
-

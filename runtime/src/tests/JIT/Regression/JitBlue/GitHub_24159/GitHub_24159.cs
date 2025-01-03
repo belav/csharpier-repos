@@ -7,7 +7,6 @@ using Xunit;
 
 namespace GitHub_24159
 {
-
     public struct Str1
     {
         public int i1;
@@ -56,7 +55,6 @@ namespace GitHub_24159
             Console.WriteLine(k);
 
             return k + 93;
-
         }
     }
 }

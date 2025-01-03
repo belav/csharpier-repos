@@ -4,25 +4,26 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.ComponentModel;
 
-    public abstract class WebPartTransformer {
-
+    public abstract class WebPartTransformer
+    {
         /// <devdoc>
         /// Overridden by derived classes.  Should return a Control that implements
         /// ITransformerConfigurationControl
         /// </devdoc>
-        public virtual Control CreateConfigurationControl() {
+        public virtual Control CreateConfigurationControl()
+        {
             return null;
         }
 
-        protected internal virtual void LoadConfigurationState(object savedState) {
-        }
+        protected internal virtual void LoadConfigurationState(object savedState) { }
 
-        protected internal virtual object SaveConfigurationState() {
+        protected internal virtual object SaveConfigurationState()
+        {
             return null;
         }
 

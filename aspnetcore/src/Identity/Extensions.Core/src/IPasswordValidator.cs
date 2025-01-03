@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for validating passwords.
 /// </summary>
 /// <typeparam name="TUser">The type that represents a user.</typeparam>
-public interface IPasswordValidator<TUser> where TUser : class
+public interface IPasswordValidator<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Validates a password as an asynchronous operation.

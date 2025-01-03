@@ -11,12 +11,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests;
 
 public class CollectionExpressionParsingTests : ParsingTests
 {
-    public CollectionExpressionParsingTests(ITestOutputHelper output) : base(output) { }
+    public CollectionExpressionParsingTests(ITestOutputHelper output)
+        : base(output) { }
 
     [Theory]
     [InlineData(LanguageVersion.CSharp11)]
     [InlineData(LanguageVersion.Preview)]
-    public void CollectionExpressionParsingDoesNotProduceLangVersionError(LanguageVersion languageVersion)
+    public void CollectionExpressionParsingDoesNotProduceLangVersionError(
+        LanguageVersion languageVersion
+    )
     {
         UsingExpression("[A, B]", TestOptions.Regular.WithLanguageVersion(languageVersion));
 
@@ -164,13 +167,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void TopLevelDotAccess_GlobalAttributeAmbiguity1()
     {
-        UsingTree("[assembly: A, B].C();",
+        UsingTree(
+            "[assembly: A, B].C();",
             // (1,10): error CS1003: Syntax error, ',' expected
             // [assembly: A, B].C();
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 10),
             // (1,12): error CS1003: Syntax error, ',' expected
             // [assembly: A, B].C();
-            Diagnostic(ErrorCode.ERR_SyntaxError, "A").WithArguments(",").WithLocation(1, 12));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "A").WithArguments(",").WithLocation(1, 12)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -233,7 +238,8 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void TopLevelDotAccess_AttributeAmbiguity2A()
     {
-        UsingTree("[return: A, B].C();",
+        UsingTree(
+            "[return: A, B].C();",
             // (1,2): error CS1003: Syntax error, ']' expected
             // [return: A, B].C();
             Diagnostic(ErrorCode.ERR_SyntaxError, "return").WithArguments("]").WithLocation(1, 2),
@@ -254,7 +260,8 @@ public class CollectionExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_IdentifierExpected, ",").WithLocation(1, 11),
             // (1,14): error CS1003: Syntax error, ',' expected
             // [return: A, B].C();
-            Diagnostic(ErrorCode.ERR_SyntaxError, "]").WithArguments(",").WithLocation(1, 14));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "]").WithArguments(",").WithLocation(1, 14)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -371,13 +378,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void TopLevelDotAccess_AttributeAmbiguity3A()
     {
-        UsingTree("[method: A, B].C();",
+        UsingTree(
+            "[method: A, B].C();",
             // (1,8): error CS1003: Syntax error, ',' expected
             // [method: A, B].C();
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 8),
             // (1,10): error CS1003: Syntax error, ',' expected
             // [method: A, B].C();
-            Diagnostic(ErrorCode.ERR_SyntaxError, "A").WithArguments(",").WithLocation(1, 10));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "A").WithArguments(",").WithLocation(1, 10)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -498,7 +507,8 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void TopLevelDotAccess_AttributeAmbiguity4A()
     {
-        UsingTree("[return: A].C();",
+        UsingTree(
+            "[return: A].C();",
             // (1,2): error CS1003: Syntax error, ']' expected
             // [return: A].C();
             Diagnostic(ErrorCode.ERR_SyntaxError, "return").WithArguments("]").WithLocation(1, 2),
@@ -519,7 +529,8 @@ public class CollectionExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_IdentifierExpected, "]").WithLocation(1, 11),
             // (1,11): error CS1003: Syntax error, ',' expected
             // [return: A].C();
-            Diagnostic(ErrorCode.ERR_SyntaxError, "]").WithArguments(",").WithLocation(1, 11));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "]").WithArguments(",").WithLocation(1, 11)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -623,13 +634,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void TopLevelDotAccess_GlobalAttributeAmbiguity2()
     {
-        UsingTree("[module: A, B].C();",
+        UsingTree(
+            "[module: A, B].C();",
             // (1,8): error CS1003: Syntax error, ',' expected
             // [module: A, B].C();
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 8),
             // (1,10): error CS1003: Syntax error, ',' expected
             // [module: A, B].C();
-            Diagnostic(ErrorCode.ERR_SyntaxError, "A").WithArguments(",").WithLocation(1, 10));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "A").WithArguments(",").WithLocation(1, 10)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -998,8 +1011,7 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void AttemptToImmediatelyIndexInTopLevelStatement()
     {
-        UsingTree(
-            """["A", "B"][0].C();""");
+        UsingTree("""["A", "B"][0].C();""");
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1069,16 +1081,18 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void AlwaysParsedAsAttributeInsideNamespace()
     {
-        UsingTree("""
-                namespace A;
-                [B].C();
-                """,
+        UsingTree(
+            """
+            namespace A;
+            [B].C();
+            """,
             // (2,3): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
             // [B].C();
             Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "]").WithLocation(2, 3),
             // (2,4): error CS1022: Type or namespace definition, or end-of-file expected
             // [B].C();
-            Diagnostic(ErrorCode.ERR_EOFExpected, ".").WithLocation(2, 4));
+            Diagnostic(ErrorCode.ERR_EOFExpected, ".").WithLocation(2, 4)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1309,8 +1323,7 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void TopLevelSwitch()
     {
-        UsingTree(
-            "[A, B] switch { _ => M() };");
+        UsingTree("[A, B] switch { _ => M() };");
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1375,7 +1388,8 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void StatementLevelSwitch()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -1383,7 +1397,8 @@ public class CollectionExpressionParsingTests : ParsingTests
                     [A, B] switch { _ => M() };
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1613,13 +1628,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void DictionaryOfEmptyCollections()
     {
-        UsingTree("_ = [[]: []];",
+        UsingTree(
+            "_ = [[]: []];",
             // (1,8): error CS1003: Syntax error, ',' expected
             // _ = [[]: []];
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 8),
             // (1,10): error CS1003: Syntax error, ',' expected
             // _ = [[]: []];
-            Diagnostic(ErrorCode.ERR_SyntaxError, "[").WithArguments(",").WithLocation(1, 10));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "[").WithArguments(",").WithLocation(1, 10)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1672,7 +1689,8 @@ public class CollectionExpressionParsingTests : ParsingTests
             "_ = [:B];",
             // (1,6): error CS1001: Identifier expected
             // _ = [:B];
-            Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 6));
+            Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 6)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1715,7 +1733,8 @@ public class CollectionExpressionParsingTests : ParsingTests
             "_ = [A:];",
             // (1,7): error CS1003: Syntax error, ',' expected
             // _ = [A:];
-            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 7));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 7)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1758,7 +1777,8 @@ public class CollectionExpressionParsingTests : ParsingTests
             "_ = [:];",
             // (1,6): error CS1001: Identifier expected
             // _ = [:];
-            Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 6));
+            Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 6)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1790,13 +1810,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void DictionaryWithTypeExpressions()
     {
-        UsingTree("_ = [A::B: C::D];",
+        UsingTree(
+            "_ = [A::B: C::D];",
             // (1,10): error CS1003: Syntax error, ',' expected
             // _ = [A::B: C::D];
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 10),
             // (1,12): error CS1003: Syntax error, ',' expected
             // _ = [A::B: C::D];
-            Diagnostic(ErrorCode.ERR_SyntaxError, "C").WithArguments(",").WithLocation(1, 12));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "C").WithArguments(",").WithLocation(1, 12)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1859,13 +1881,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void DictionaryWithConditional1()
     {
-        UsingExpression("[a ? b : c : d]",
+        UsingExpression(
+            "[a ? b : c : d]",
             // (1,12): error CS1003: Syntax error, ',' expected
             // [a ? b : c : d]
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 12),
             // (1,14): error CS1003: Syntax error, ',' expected
             // [a ? b : c : d]
-            Diagnostic(ErrorCode.ERR_SyntaxError, "d").WithArguments(",").WithLocation(1, 14));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "d").WithArguments(",").WithLocation(1, 14)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -1906,13 +1930,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void DictionaryWithConditional2()
     {
-        UsingExpression("[a : b ? c : d]",
+        UsingExpression(
+            "[a : b ? c : d]",
             // (1,4): error CS1003: Syntax error, ',' expected
             // [a : b ? c : d]
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 4),
             // (1,6): error CS1003: Syntax error, ',' expected
             // [a : b ? c : d]
-            Diagnostic(ErrorCode.ERR_SyntaxError, "b").WithArguments(",").WithLocation(1, 6));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "b").WithArguments(",").WithLocation(1, 6)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -1953,13 +1979,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void DictionaryWithConditional3()
     {
-        UsingExpression("[a ? b : c : d ? e : f]",
+        UsingExpression(
+            "[a ? b : c : d ? e : f]",
             // (1,12): error CS1003: Syntax error, ',' expected
             // [a ? b : c : d ? e : f]
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 12),
             // (1,14): error CS1003: Syntax error, ',' expected
             // [a ? b : c : d ? e : f]
-            Diagnostic(ErrorCode.ERR_SyntaxError, "d").WithArguments(",").WithLocation(1, 14));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "d").WithArguments(",").WithLocation(1, 14)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -2013,13 +2041,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void DictionaryWithNullCoalesce1()
     {
-        UsingExpression("[a ?? b : c]",
+        UsingExpression(
+            "[a ?? b : c]",
             // (1,9): error CS1003: Syntax error, ',' expected
             // [a ?? b : c]
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 9),
             // (1,11): error CS1003: Syntax error, ',' expected
             // [a ?? b : c]
-            Diagnostic(ErrorCode.ERR_SyntaxError, "c").WithArguments(",").WithLocation(1, 11));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "c").WithArguments(",").WithLocation(1, 11)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -2055,13 +2085,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void DictionaryWithNullCoalesce2()
     {
-        UsingExpression("[a : b ?? c]",
+        UsingExpression(
+            "[a : b ?? c]",
             // (1,4): error CS1003: Syntax error, ',' expected
             // [a : b ?? c]
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 4),
             // (1,6): error CS1003: Syntax error, ',' expected
             // [a : b ?? c]
-            Diagnostic(ErrorCode.ERR_SyntaxError, "b").WithArguments(",").WithLocation(1, 6));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "b").WithArguments(",").WithLocation(1, 6)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -2097,13 +2129,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void DictionaryWithNullCoalesce3()
     {
-        UsingExpression("[a ?? b : c ?? d]",
+        UsingExpression(
+            "[a ?? b : c ?? d]",
             // (1,9): error CS1003: Syntax error, ',' expected
             // [a ?? b : c ?? d]
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 9),
             // (1,11): error CS1003: Syntax error, ',' expected
             // [a ?? b : c ?? d]
-            Diagnostic(ErrorCode.ERR_SyntaxError, "c").WithArguments(",").WithLocation(1, 11));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "c").WithArguments(",").WithLocation(1, 11)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -2147,13 +2181,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void DictionaryWithQuery1()
     {
-        UsingExpression("[from x in y select x : c]",
+        UsingExpression(
+            "[from x in y select x : c]",
             // (1,23): error CS1003: Syntax error, ',' expected
             // [from x in y select x : c]
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 23),
             // (1,25): error CS1003: Syntax error, ',' expected
             // [from x in y select x : c]
-            Diagnostic(ErrorCode.ERR_SyntaxError, "c").WithArguments(",").WithLocation(1, 25));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "c").WithArguments(",").WithLocation(1, 25)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -2201,13 +2237,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void DictionaryWithQuery2()
     {
-        UsingExpression("[a : from x in y select x]",
+        UsingExpression(
+            "[a : from x in y select x]",
             // (1,4): error CS1003: Syntax error, ',' expected
             // [a : from x in y select x]
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 4),
             // (1,6): error CS1003: Syntax error, ',' expected
             // [a : from x in y select x]
-            Diagnostic(ErrorCode.ERR_SyntaxError, "from").WithArguments(",").WithLocation(1, 6));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "from").WithArguments(",").WithLocation(1, 6)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -2255,13 +2293,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void DictionaryWithQuery3()
     {
-        UsingExpression("[from a in b select a : from x in y select x]",
+        UsingExpression(
+            "[from a in b select a : from x in y select x]",
             // (1,23): error CS1003: Syntax error, ',' expected
             // [from a in b select a : from x in y select x]
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 23),
             // (1,25): error CS1003: Syntax error, ',' expected
             // [from a in b select a : from x in y select x]
-            Diagnostic(ErrorCode.ERR_SyntaxError, "from").WithArguments(",").WithLocation(1, 25));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "from").WithArguments(",").WithLocation(1, 25)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -2458,13 +2498,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void ConditionalAmbiguity2()
     {
-        UsingExpression("[(a ? [b]) : c]",
+        UsingExpression(
+            "[(a ? [b]) : c]",
             // (1,12): error CS1003: Syntax error, ',' expected
             // [(a ? [b]) : c]
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 12),
             // (1,14): error CS1003: Syntax error, ',' expected
             // [(a ? [b]) : c]
-            Diagnostic(ErrorCode.ERR_SyntaxError, "c").WithArguments(",").WithLocation(1, 14));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "c").WithArguments(",").WithLocation(1, 14)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -3084,7 +3126,10 @@ public class CollectionExpressionParsingTests : ParsingTests
                                                             {
                                                                 N(SyntaxKind.IdentifierName);
                                                                 {
-                                                                    N(SyntaxKind.IdentifierToken, "y");
+                                                                    N(
+                                                                        SyntaxKind.IdentifierToken,
+                                                                        "y"
+                                                                    );
                                                                 }
                                                             }
                                                             N(SyntaxKind.CloseBracketToken);
@@ -3177,7 +3222,10 @@ public class CollectionExpressionParsingTests : ParsingTests
                                                             {
                                                                 N(SyntaxKind.IdentifierName);
                                                                 {
-                                                                    N(SyntaxKind.IdentifierToken, "y");
+                                                                    N(
+                                                                        SyntaxKind.IdentifierToken,
+                                                                        "y"
+                                                                    );
                                                                 }
                                                             }
                                                             N(SyntaxKind.CloseBracketToken);
@@ -3363,13 +3411,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void ConditionalAmbiguity12()
     {
-        UsingExpression("a ? b?[c] : d ? e ? f?[g] : h",
+        UsingExpression(
+            "a ? b?[c] : d ? e ? f?[g] : h",
             // (1,30): error CS1003: Syntax error, ':' expected
             // a ? b?[c] : d ? e ? f?[g] : h
             Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 30),
             // (1,30): error CS1733: Expected expression
             // a ? b?[c] : d ? e ? f?[g] : h
-            Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 30));
+            Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 30)
+        );
 
         N(SyntaxKind.ConditionalExpression);
         {
@@ -3731,10 +3781,14 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void ConditionalAmbiguity15()
     {
-        UsingExpression("a ? b?[c] : d ? e ? f?[g] : h : i : j : k : m",
+        UsingExpression(
+            "a ? b?[c] : d ? e ? f?[g] : h : i : j : k : m",
             // (1,1): error CS1073: Unexpected token ':'
             // a ? b?[c] : d ? e ? f?[g] : h : i : j : k : m
-            Diagnostic(ErrorCode.ERR_UnexpectedToken, "a ? b?[c] : d ? e ? f?[g] : h : i : j : k").WithArguments(":").WithLocation(1, 1));
+            Diagnostic(ErrorCode.ERR_UnexpectedToken, "a ? b?[c] : d ? e ? f?[g] : h : i : j : k")
+                .WithArguments(":")
+                .WithLocation(1, 1)
+        );
 
         N(SyntaxKind.ConditionalExpression);
         {
@@ -5288,13 +5342,15 @@ public class CollectionExpressionParsingTests : ParsingTests
         //
         // 1. tell them we think this is an indexer, and `1:2` isn't a valid argument.
         // 2. tell them to parenthesize the brackets if they're trying to cast this as a list.
-        UsingExpression("(A)[1:2]",
+        UsingExpression(
+            "(A)[1:2]",
             // (1,6): error CS1003: Syntax error, ',' expected
             // (A)[1:2]
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 6),
             // (1,7): error CS1003: Syntax error, ',' expected
             // (A)[1:2]
-            Diagnostic(ErrorCode.ERR_SyntaxError, "2").WithArguments(",").WithLocation(1, 7));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "2").WithArguments(",").WithLocation(1, 7)
+        );
 
         N(SyntaxKind.ElementAccessExpression);
         {
@@ -5922,10 +5978,12 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void TestTrailingComma3()
     {
-        UsingExpression("[A,B,,]",
+        UsingExpression(
+            "[A,B,,]",
             // (1,6): error CS1525: Invalid expression term ','
             // [A,B,,]
-            Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 6));
+            Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 6)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -5962,13 +6020,15 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void TestTrailingComma4()
     {
-        UsingExpression("[A,B,,,]",
+        UsingExpression(
+            "[A,B,,,]",
             // (1,6): error CS1525: Invalid expression term ','
             // [A,B,,,]
             Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 6),
             // (1,7): error CS1525: Invalid expression term ','
             // [A,B,,,]
-            Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 7));
+            Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 7)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -6236,14 +6296,16 @@ public class CollectionExpressionParsingTests : ParsingTests
     [Fact]
     public void TestAwaitInAsyncContext()
     {
-        UsingTree(@"
+        UsingTree(
+            @"
 class C
 {
     async void F()
     {
         await [A];
     }
-}");
+}"
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -6301,14 +6363,16 @@ class C
     [Fact]
     public void TestAwaitInNonAsyncContext()
     {
-        UsingTree(@"
+        UsingTree(
+            @"
 class C
 {
     void F()
     {
         await [A];
     }
-}");
+}"
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -6874,10 +6938,12 @@ class C
     [Fact]
     public void TestError1()
     {
-        UsingExpression("[,]",
+        UsingExpression(
+            "[,]",
             // (1,2): error CS1525: Invalid expression term ','
             // [,]
-            Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 2));
+            Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 2)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -6898,10 +6964,12 @@ class C
     [Fact]
     public void TestError2()
     {
-        UsingExpression("[,A]",
+        UsingExpression(
+            "[,A]",
             // (1,2): error CS1525: Invalid expression term ','
             // [,A]
-            Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 2));
+            Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 2)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -6929,13 +6997,15 @@ class C
     [Fact]
     public void TestError3()
     {
-        UsingExpression("[,,]",
+        UsingExpression(
+            "[,,]",
             // (1,2): error CS1525: Invalid expression term ','
             // [,,]
             Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 2),
             // (1,3): error CS1525: Invalid expression term ','
             // [,,]
-            Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 3));
+            Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 3)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -6964,10 +7034,12 @@ class C
     [Fact]
     public void TestError4()
     {
-        UsingExpression("[..]",
+        UsingExpression(
+            "[..]",
             // (1,4): error CS1525: Invalid expression term ']'
             // [..]
-            Diagnostic(ErrorCode.ERR_InvalidExprTerm, "]").WithArguments("]").WithLocation(1, 4));
+            Diagnostic(ErrorCode.ERR_InvalidExprTerm, "]").WithArguments("]").WithLocation(1, 4)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -6988,13 +7060,15 @@ class C
     [Fact]
     public void TestError5()
     {
-        UsingExpression("[...e]",
+        UsingExpression(
+            "[...e]",
             // (1,2): error CS8635: Unexpected character sequence '...'
             // [...e]
             Diagnostic(ErrorCode.ERR_TripleDotNotAllowed, "").WithLocation(1, 2),
             // (1,4): error CS1525: Invalid expression term '.'
             // [...e]
-            Diagnostic(ErrorCode.ERR_InvalidExprTerm, ".").WithArguments(".").WithLocation(1, 4));
+            Diagnostic(ErrorCode.ERR_InvalidExprTerm, ".").WithArguments(".").WithLocation(1, 4)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -7023,10 +7097,12 @@ class C
     [Fact]
     public void TestError6()
     {
-        UsingExpression("[....]",
+        UsingExpression(
+            "[....]",
             // (1,2): error CS8635: Unexpected character sequence '...'
             // [....]
-            Diagnostic(ErrorCode.ERR_TripleDotNotAllowed, "").WithLocation(1, 2));
+            Diagnostic(ErrorCode.ERR_TripleDotNotAllowed, "").WithLocation(1, 2)
+        );
 
         N(SyntaxKind.CollectionExpression);
         {
@@ -7047,10 +7123,14 @@ class C
     [Fact]
     public void GenericNameWithBrackets1()
     {
-        UsingExpression("A < B?[] > D",
+        UsingExpression(
+            "A < B?[] > D",
             // (1,1): error CS1073: Unexpected token 'D'
             // A < B?[] > D
-            Diagnostic(ErrorCode.ERR_UnexpectedToken, "A < B?[] >").WithArguments("D").WithLocation(1, 1));
+            Diagnostic(ErrorCode.ERR_UnexpectedToken, "A < B?[] >")
+                .WithArguments("D")
+                .WithLocation(1, 1)
+        );
 
         N(SyntaxKind.GenericName);
         {
@@ -7087,10 +7167,12 @@ class C
     [Fact]
     public void GenericNameWithBrackets2()
     {
-        UsingStatement("A < B?[] > D",
+        UsingStatement(
+            "A < B?[] > D",
             // (1,13): error CS1002: ; expected
             // A < B?[] > D
-            Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 13));
+            Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 13)
+        );
 
         N(SyntaxKind.LocalDeclarationStatement);
         {
@@ -7138,10 +7220,12 @@ class C
     [Fact]
     public void GenericNameWithBrackets3()
     {
-        UsingExpression("nameof(A < B?[] > D)",
+        UsingExpression(
+            "nameof(A < B?[] > D)",
             // (1,19): error CS1003: Syntax error, ',' expected
             // nameof(A < B?[] > D)
-            Diagnostic(ErrorCode.ERR_SyntaxError, "D").WithArguments(",").WithLocation(1, 19));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "D").WithArguments(",").WithLocation(1, 19)
+        );
 
         N(SyntaxKind.InvocationExpression);
         {
@@ -7201,13 +7285,17 @@ class C
     [Fact]
     public void GenericNameWithBrackets4()
     {
-        UsingExpression("typeof(A < B?[] > D)",
+        UsingExpression(
+            "typeof(A < B?[] > D)",
             // (1,1): error CS1073: Unexpected token 'D'
             // typeof(A < B?[] > D)
-            Diagnostic(ErrorCode.ERR_UnexpectedToken, "typeof(A < B?[] > ").WithArguments("D").WithLocation(1, 1),
+            Diagnostic(ErrorCode.ERR_UnexpectedToken, "typeof(A < B?[] > ")
+                .WithArguments("D")
+                .WithLocation(1, 1),
             // (1,19): error CS1026: ) expected
             // typeof(A < B?[] > D)
-            Diagnostic(ErrorCode.ERR_CloseParenExpected, "D").WithLocation(1, 19));
+            Diagnostic(ErrorCode.ERR_CloseParenExpected, "D").WithLocation(1, 19)
+        );
 
         N(SyntaxKind.TypeOfExpression);
         {
@@ -7250,13 +7338,17 @@ class C
     [Fact]
     public void GenericNameWithBrackets5()
     {
-        UsingExpression("default(A < B?[] > D)",
+        UsingExpression(
+            "default(A < B?[] > D)",
             // (1,1): error CS1073: Unexpected token 'D'
             // default(A < B?[] > D)
-            Diagnostic(ErrorCode.ERR_UnexpectedToken, "default(A < B?[] > ").WithArguments("D").WithLocation(1, 1),
+            Diagnostic(ErrorCode.ERR_UnexpectedToken, "default(A < B?[] > ")
+                .WithArguments("D")
+                .WithLocation(1, 1),
             // (1,20): error CS1026: ) expected
             // default(A < B?[] > D)
-            Diagnostic(ErrorCode.ERR_CloseParenExpected, "D").WithLocation(1, 20));
+            Diagnostic(ErrorCode.ERR_CloseParenExpected, "D").WithLocation(1, 20)
+        );
 
         N(SyntaxKind.DefaultExpression);
         {
@@ -7333,13 +7425,15 @@ class C
     [Fact]
     public void Interpolation1()
     {
-        UsingExpression(""" $"{[A:B]}" """,
+        UsingExpression(
+            """ $"{[A:B]}" """,
             // (1,7): error CS1003: Syntax error, ',' expected
-            //  $"{[A:B]}" 
+            //  $"{[A:B]}"
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 7),
             // (1,8): error CS1003: Syntax error, ',' expected
-            //  $"{[A:B]}" 
-            Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",").WithLocation(1, 8));
+            //  $"{[A:B]}"
+            Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",").WithLocation(1, 8)
+        );
 
         N(SyntaxKind.InterpolatedStringExpression);
         {
@@ -7377,10 +7471,12 @@ class C
     [Fact]
     public void Interpolation2()
     {
-        UsingExpression(""" $"{[:]}" """,
+        UsingExpression(
+            """ $"{[:]}" """,
             // (1,6): error CS1001: Identifier expected
-            //  $"{[:]}" 
-            Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 6));
+            //  $"{[:]}"
+            Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 6)
+        );
 
         N(SyntaxKind.InterpolatedStringExpression);
         {
@@ -7506,13 +7602,15 @@ class C
     [Fact]
     public void Addressof4()
     {
-        UsingExpression("&[A:B]",
+        UsingExpression(
+            "&[A:B]",
             // (1,4): error CS1003: Syntax error, ',' expected
             // &[A:B]
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 4),
             // (1,5): error CS1003: Syntax error, ',' expected
             // &[A:B]
-            Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",").WithLocation(1, 5));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",").WithLocation(1, 5)
+        );
 
         N(SyntaxKind.AddressOfExpression);
         {
@@ -7664,13 +7762,15 @@ class C
     [Fact]
     public void Deref5()
     {
-        UsingExpression("*[A:B]",
+        UsingExpression(
+            "*[A:B]",
             // (1,4): error CS1003: Syntax error, ',' expected
             // *[A:B]
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 4),
             // (1,5): error CS1003: Syntax error, ',' expected
             // *[A:B]
-            Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",").WithLocation(1, 5));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",").WithLocation(1, 5)
+        );
 
         N(SyntaxKind.PointerIndirectionExpression);
         {
@@ -7702,7 +7802,8 @@ class C
     [Fact]
     public void New1()
     {
-        UsingExpression("new [A]",
+        UsingExpression(
+            "new [A]",
             // (1,6): error CS0178: Invalid rank specifier: expected ',' or ']'
             // new [A]
             Diagnostic(ErrorCode.ERR_InvalidArray, "A").WithLocation(1, 6),
@@ -7711,7 +7812,8 @@ class C
             Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 8),
             // (1,8): error CS1513: } expected
             // new [A]
-            Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 8));
+            Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 8)
+        );
 
         N(SyntaxKind.ImplicitArrayCreationExpression);
         {
@@ -7730,7 +7832,8 @@ class C
     [Fact]
     public void New2()
     {
-        UsingExpression("new [A, B]",
+        UsingExpression(
+            "new [A, B]",
             // (1,6): error CS0178: Invalid rank specifier: expected ',' or ']'
             // new [A, B]
             Diagnostic(ErrorCode.ERR_InvalidArray, "A").WithLocation(1, 6),
@@ -7742,7 +7845,8 @@ class C
             Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 11),
             // (1,11): error CS1513: } expected
             // new [A, B]
-            Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 11));
+            Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 11)
+        );
 
         N(SyntaxKind.ImplicitArrayCreationExpression);
         {
@@ -7762,7 +7866,8 @@ class C
     [Fact]
     public void New3()
     {
-        UsingExpression("new [A, B][C]",
+        UsingExpression(
+            "new [A, B][C]",
             // (1,6): error CS0178: Invalid rank specifier: expected ',' or ']'
             // new [A, B][C]
             Diagnostic(ErrorCode.ERR_InvalidArray, "A").WithLocation(1, 6),
@@ -7774,7 +7879,8 @@ class C
             Diagnostic(ErrorCode.ERR_LbraceExpected, "[").WithLocation(1, 11),
             // (1,14): error CS1513: } expected
             // new [A, B][C]
-            Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 14));
+            Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 14)
+        );
 
         N(SyntaxKind.ImplicitArrayCreationExpression);
         {
@@ -7954,7 +8060,8 @@ class C
     [Fact]
     public void LiteralContainingLambda4()
     {
-        UsingTree("""
+        UsingTree(
+            """
             using System;
             class Program
             {
@@ -7964,7 +8071,8 @@ class C
                     F([Main, () => { }]);
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -8099,7 +8207,8 @@ class C
     [Fact]
     public void LiteralContainingLambda5()
     {
-        UsingTree("""
+        UsingTree(
+            """
             using System;
             class Program
             {
@@ -8109,7 +8218,8 @@ class C
                     F([Main, Main, () => { }]);
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -8252,7 +8362,8 @@ class C
     [Fact]
     public void LiteralContainingLambda6()
     {
-        UsingTree("""
+        UsingTree(
+            """
             using System;
             class Program
             {
@@ -8262,7 +8373,8 @@ class C
                     F([Main(), () => { }]);
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -8405,7 +8517,8 @@ class C
     [Fact]
     public void LiteralContainingLambda7()
     {
-        UsingTree("""
+        UsingTree(
+            """
             using System;
             class Program
             {
@@ -8418,7 +8531,8 @@ class C
             """,
             // (7,22): error CS1003: Syntax error, ']' expected
             //         F([X () => {});
-            Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(7, 22));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(7, 22)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -8549,7 +8663,8 @@ class C
     [Fact]
     public void LiteralContainingLambda8()
     {
-        UsingTree("""
+        UsingTree(
+            """
             using System;
             class Program
             {
@@ -8562,7 +8677,8 @@ class C
             """,
             // (7,25): error CS1003: Syntax error, ']' expected
             //         F([X, Y () => {});
-            Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(7, 25));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(7, 25)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -8701,7 +8817,8 @@ class C
     [Fact]
     public void LiteralContainingLambda9()
     {
-        UsingTree("""
+        UsingTree(
+            """
             using System;
             class Program
             {
@@ -8717,7 +8834,8 @@ class C
             Diagnostic(ErrorCode.ERR_SyntaxError, "Y").WithArguments(",").WithLocation(7, 14),
             // (7,24): error CS1003: Syntax error, ']' expected
             //         F([X Y () => {});
-            Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(7, 24));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(7, 24)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -8856,7 +8974,8 @@ class C
     [Fact]
     public void MemberAccess1()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -8864,7 +8983,8 @@ class C
                     [1].GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -8934,7 +9054,8 @@ class C
     [Fact]
     public void MemberAccess1A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -8942,7 +9063,8 @@ class C
                     [Main].GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -9012,7 +9134,8 @@ class C
     [Fact]
     public void MemberAccess2()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -9020,7 +9143,8 @@ class C
                     [1]?.GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -9094,7 +9218,8 @@ class C
     [Fact]
     public void MemberAccess2A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -9102,7 +9227,8 @@ class C
                     [Main]?.GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -9176,9 +9302,11 @@ class C
     [Fact]
     public void MemberAccess3()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [1].GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -9225,9 +9353,11 @@ class C
     [Fact]
     public void MemberAccess3A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [Main].GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -9274,9 +9404,11 @@ class C
     [Fact]
     public void MemberAccess4()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [1]?.GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -9327,9 +9459,11 @@ class C
     [Fact]
     public void MemberAccess4A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [Main]?.GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -9380,7 +9514,8 @@ class C
     [Fact]
     public void MemberAccess5()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -9389,7 +9524,8 @@ class C
                     [1][0].GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -9474,10 +9610,12 @@ class C
     [Fact]
     public void MemberAccess5A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             // Indexing into collection, then invoking member.
             [1][0].GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -9539,7 +9677,8 @@ class C
     [Fact]
     public void MemberAccess6()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -9548,7 +9687,8 @@ class C
                     [1][Main].GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -9633,10 +9773,12 @@ class C
     [Fact]
     public void MemberAccess6A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             // Indexing into collection, then invoking member.
             [1][Main].GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -9698,7 +9840,8 @@ class C
     [Fact]
     public void MemberAccess7()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -9707,7 +9850,8 @@ class C
                     [Main][1].GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -9792,10 +9936,12 @@ class C
     [Fact]
     public void MemberAccess7A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             // Indexing into collection, then invoking member.
             [Main][1].GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -9857,7 +10003,8 @@ class C
     [Fact]
     public void MemberAccess8()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -9866,7 +10013,8 @@ class C
                     [Main][Main].GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -9951,10 +10099,12 @@ class C
     [Fact]
     public void MemberAccess8A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             // Indexing into collection, then invoking member.
             [Main][Main].GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10016,7 +10166,8 @@ class C
     [Fact]
     public void MemberAccess9()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -10024,7 +10175,8 @@ class C
                     [].GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10087,9 +10239,11 @@ class C
     [Fact]
     public void MemberAccess9A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [].GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10129,7 +10283,8 @@ class C
     [Fact]
     public void MemberAccess10()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -10137,7 +10292,8 @@ class C
                     []?.GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10204,9 +10360,11 @@ class C
     [Fact]
     public void MemberAccess10A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             []?.GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10250,7 +10408,8 @@ class C
     [Fact]
     public void MemberAccess11()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -10258,7 +10417,8 @@ class C
                     [][0].GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10336,9 +10496,11 @@ class C
     [Fact]
     public void MemberAccess11A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [][0].GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10393,7 +10555,8 @@ class C
     [Fact]
     public void MemberAccess12()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -10401,7 +10564,8 @@ class C
                     []!.GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10468,9 +10632,11 @@ class C
     [Fact]
     public void MemberAccess12A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             []!.GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10514,7 +10680,8 @@ class C
     [Fact]
     public void MemberAccess13()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -10522,7 +10689,8 @@ class C
                     [A]!.GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10596,9 +10764,11 @@ class C
     [Fact]
     public void MemberAccess13A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [A]!.GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10649,7 +10819,8 @@ class C
     [Fact]
     public void MemberAccess14()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -10663,7 +10834,8 @@ class C
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(5, 11),
             // (5,12): error CS1003: Syntax error, ',' expected
             //         [A:B]!.GetHashCode();
-            Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",").WithLocation(5, 12));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",").WithLocation(5, 12)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10745,7 +10917,8 @@ class C
     [Fact]
     public void MemberAccess14A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [A:B]!.GetHashCode();
             """,
             // (1,3): error CS1003: Syntax error, ',' expected
@@ -10753,7 +10926,8 @@ class C
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 3),
             // (1,4): error CS1003: Syntax error, ',' expected
             // [A:B]!.GetHashCode();
-            Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",").WithLocation(1, 4));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",").WithLocation(1, 4)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10812,7 +10986,8 @@ class C
     [Fact]
     public void MemberAccess15()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -10820,7 +10995,8 @@ class C
                     [A()]!.GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10902,9 +11078,11 @@ class C
     [Fact]
     public void MemberAccess15A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [A()]!.GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -10963,7 +11141,8 @@ class C
     [Fact]
     public void MemberAccess16()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -10971,7 +11150,8 @@ class C
                     [A()][0]!.GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -11068,9 +11248,11 @@ class C
     [Fact]
     public void MemberAccess16A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [A()][0]!.GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -11144,7 +11326,8 @@ class C
     [Fact]
     public void MemberAccess17()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -11152,7 +11335,8 @@ class C
                     [][0]!.GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -11234,9 +11418,11 @@ class C
     [Fact]
     public void MemberAccess17A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [][0]!.GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -11295,7 +11481,8 @@ class C
     [Fact]
     public void MemberAccess18()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -11309,7 +11496,8 @@ class C
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(5, 11),
             // (5,12): error CS1003: Syntax error, ',' expected
             //         [A:B][C:D].GetHashCode();
-            Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",").WithLocation(5, 12));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",").WithLocation(5, 12)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -11410,7 +11598,8 @@ class C
     [Fact]
     public void MemberAccess18A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [A:B][C:D].GetHashCode();
             """,
             // (1,3): error CS1003: Syntax error, ',' expected
@@ -11418,7 +11607,8 @@ class C
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 3),
             // (1,4): error CS1003: Syntax error, ',' expected
             // [A:B][C:D].GetHashCode();
-            Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",").WithLocation(1, 4));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",").WithLocation(1, 4)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -11496,7 +11686,8 @@ class C
     [Fact]
     public void MemberAccess19()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -11504,7 +11695,8 @@ class C
                     [..A][..B].GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -11594,9 +11786,11 @@ class C
     [Fact]
     public void MemberAccess19A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [..A][..B].GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -11663,7 +11857,8 @@ class C
     [Fact]
     public void MemberAccess20()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -11671,7 +11866,8 @@ class C
                     [[A]].GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -11749,9 +11945,11 @@ class C
     [Fact]
     public void MemberAccess20A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [[A]].GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -11806,7 +12004,8 @@ class C
     [Fact]
     public void MemberAccess21()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -11814,7 +12013,8 @@ class C
                     [A([B])].GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -11868,7 +12068,10 @@ class C
                                                             {
                                                                 N(SyntaxKind.IdentifierName);
                                                                 {
-                                                                    N(SyntaxKind.IdentifierToken, "B");
+                                                                    N(
+                                                                        SyntaxKind.IdentifierToken,
+                                                                        "B"
+                                                                    );
                                                                 }
                                                             }
                                                             N(SyntaxKind.CloseBracketToken);
@@ -11907,9 +12110,11 @@ class C
     [Fact]
     public void MemberAccess21A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [A([B])].GetHashCode();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -11979,7 +12184,8 @@ class C
     [Fact]
     public void MemberAccess22()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -11987,7 +12193,8 @@ class C
                     [A([B])] GetHashCode();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -12073,12 +12280,14 @@ class C
     [Fact]
     public void MemberAccess22A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [A([B])] GetHashCode();
             """,
             // (1,21): error CS1001: Identifier expected
             // [A([B])] GetHashCode();
-            Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(1, 21));
+            Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(1, 21)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -12139,7 +12348,8 @@ class C
     [Fact]
     public void MemberAccess23()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -12147,7 +12357,8 @@ class C
                     []++;
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -12198,9 +12409,11 @@ class C
     [Fact]
     public void MemberAccess23A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             []++;
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -12228,7 +12441,8 @@ class C
     [Fact]
     public void MemberAccess24()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -12236,7 +12450,8 @@ class C
                     []--;
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -12287,9 +12502,11 @@ class C
     [Fact]
     public void MemberAccess24A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             []--;
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -12317,7 +12534,8 @@ class C
     [Fact]
     public void MemberAccess25()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class Program
             {
                 static void Main()
@@ -12325,7 +12543,8 @@ class C
                     []->Goo();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -12388,9 +12607,11 @@ class C
     [Fact]
     public void MemberAccess25A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             []->Goo;
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -12422,9 +12643,11 @@ class C
     [Fact]
     public void AttributeOnTopLevelFunction1()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [A([B])] void Goo() { }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -12489,9 +12712,11 @@ class C
     [Fact]
     public void AttributeOnTopLevelFunction2()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [A([B])] A Goo() { }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -12556,9 +12781,11 @@ class C
     [Fact]
     public void AttributeOnTopLevelFunction3()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [A([B])] (A, B) Goo() { }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -12639,9 +12866,11 @@ class C
     [Fact]
     public void AttributeOnTopLevelFunction4()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [A([B])] (A, B) Goo<A,B>() { }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -12736,9 +12965,11 @@ class C
     [Fact]
     public void AttributeOnTopLevelFunction5()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [A([B])] (C, D) Goo<[E]F,[G([H])]I>() { }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -12877,10 +13108,12 @@ class C
     [Fact]
     public void LambdaAttributeVersusCollectionLookahead1()
     {
-        UsingExpression("[A, B]() =>",
+        UsingExpression(
+            "[A, B]() =>",
             // (1,12): error CS1733: Expected expression
             // [A, B]() =>
-            Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12));
+            Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12)
+        );
 
         N(SyntaxKind.ParenthesizedLambdaExpression);
         {
@@ -12921,13 +13154,15 @@ class C
     [Fact]
     public void LambdaAttributeVersusCollectionLookahead2()
     {
-        UsingExpression("[A][B] (C, D)? e => f",
+        UsingExpression(
+            "[A][B] (C, D)? e => f",
             // (1,22): error CS1003: Syntax error, ':' expected
             // [A][B] (C, D)? e => f
             Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 22),
             // (1,22): error CS1733: Expected expression
             // [A][B] (C, D)? e => f
-            Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 22));
+            Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 22)
+        );
 
         N(SyntaxKind.ConditionalExpression);
         {
@@ -13476,16 +13711,20 @@ class C
     [Fact]
     public void LambdaAttributeVersusCollectionLookahead5A()
     {
-        UsingExpression("[A][B](C, D) ? ([e] f) : g",
+        UsingExpression(
+            "[A][B](C, D) ? ([e] f) : g",
             // (1,1): error CS1073: Unexpected token ')'
             // [A][B](C, D) ? ([e] f) : g
-            Diagnostic(ErrorCode.ERR_UnexpectedToken, "[A][B](C, D) ? ([e] f").WithArguments(")").WithLocation(1, 1),
+            Diagnostic(ErrorCode.ERR_UnexpectedToken, "[A][B](C, D) ? ([e] f")
+                .WithArguments(")")
+                .WithLocation(1, 1),
             // (1,21): error CS1026: ) expected
             // [A][B](C, D) ? ([e] f) : g
             Diagnostic(ErrorCode.ERR_CloseParenExpected, "f").WithLocation(1, 21),
             // (1,21): error CS1003: Syntax error, ':' expected
             // [A][B](C, D) ? ([e] f) : g
-            Diagnostic(ErrorCode.ERR_SyntaxError, "f").WithArguments(":").WithLocation(1, 21));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "f").WithArguments(":").WithLocation(1, 21)
+        );
 
         N(SyntaxKind.ConditionalExpression);
         {
@@ -13662,16 +13901,20 @@ class C
     [Fact]
     public void LambdaAttributeVersusCollectionLookahead6A()
     {
-        UsingExpression("[A][B](C, D) ? ((e,f) g) : h",
+        UsingExpression(
+            "[A][B](C, D) ? ((e,f) g) : h",
             // (1,1): error CS1073: Unexpected token ')'
             // [A][B](C, D) ? ((e,f) g) : h
-            Diagnostic(ErrorCode.ERR_UnexpectedToken, "[A][B](C, D) ? ((e,f) g").WithArguments(")").WithLocation(1, 1),
+            Diagnostic(ErrorCode.ERR_UnexpectedToken, "[A][B](C, D) ? ((e,f) g")
+                .WithArguments(")")
+                .WithLocation(1, 1),
             // (1,23): error CS1026: ) expected
             // [A][B](C, D) ? ((e,f) g) : h
             Diagnostic(ErrorCode.ERR_CloseParenExpected, "g").WithLocation(1, 23),
             // (1,23): error CS1003: Syntax error, ':' expected
             // [A][B](C, D) ? ((e,f) g) : h
-            Diagnostic(ErrorCode.ERR_SyntaxError, "g").WithArguments(":").WithLocation(1, 23));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "g").WithArguments(":").WithLocation(1, 23)
+        );
 
         N(SyntaxKind.ConditionalExpression);
         {
@@ -13868,10 +14111,13 @@ class C
     [Fact]
     public void LambdaAttributeVersusCollectionLookahead7A()
     {
-        UsingExpression("[A][B](C, D) ? ((e,f)[] g) : h",
+        UsingExpression(
+            "[A][B](C, D) ? ((e,f)[] g) : h",
             // (1,1): error CS1073: Unexpected token ')'
             // [A][B](C, D) ? ((e,f)[] g) : h
-            Diagnostic(ErrorCode.ERR_UnexpectedToken, "[A][B](C, D) ? ((e,f)[] g").WithArguments(")").WithLocation(1, 1),
+            Diagnostic(ErrorCode.ERR_UnexpectedToken, "[A][B](C, D) ? ((e,f)[] g")
+                .WithArguments(")")
+                .WithLocation(1, 1),
             // (1,23): error CS0443: Syntax error; value expected
             // [A][B](C, D) ? ((e,f)[] g) : h
             Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(1, 23),
@@ -13880,7 +14126,8 @@ class C
             Diagnostic(ErrorCode.ERR_CloseParenExpected, "g").WithLocation(1, 25),
             // (1,25): error CS1003: Syntax error, ':' expected
             // [A][B](C, D) ? ((e,f)[] g) : h
-            Diagnostic(ErrorCode.ERR_SyntaxError, "g").WithArguments(":").WithLocation(1, 25));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "g").WithArguments(":").WithLocation(1, 25)
+        );
 
         N(SyntaxKind.ConditionalExpression);
         {
@@ -13987,7 +14234,8 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity1()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -13995,7 +14243,8 @@ class C
                     [() => {}][rand.Next()]();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -14097,9 +14346,11 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity1A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [() => {}][rand.Next()]();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -14179,7 +14430,8 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity2()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -14187,7 +14439,8 @@ class C
                     [() => {}][rand.Next()](A);
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -14296,9 +14549,11 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity2A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [() => {}][rand.Next()](A);
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -14385,7 +14640,8 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity3()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -14393,7 +14649,8 @@ class C
                     [() => {}][rand.Next()](A)[0];
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -14517,9 +14774,11 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity3A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [() => {}][rand.Next()](A)[0];
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -14621,7 +14880,8 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity4()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -14629,7 +14889,8 @@ class C
                     [() => {}][rand.Next()](A)(B);
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -14753,9 +15014,11 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity4A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [() => {}][rand.Next()](A)(B);
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -14857,7 +15120,8 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity5()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -14865,7 +15129,8 @@ class C
                     [() => {}][rand.Next()](A).B();
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -14932,12 +15197,18 @@ class C
                                                         {
                                                             N(SyntaxKind.IdentifierName);
                                                             {
-                                                                N(SyntaxKind.IdentifierToken, "rand");
+                                                                N(
+                                                                    SyntaxKind.IdentifierToken,
+                                                                    "rand"
+                                                                );
                                                             }
                                                             N(SyntaxKind.DotToken);
                                                             N(SyntaxKind.IdentifierName);
                                                             {
-                                                                N(SyntaxKind.IdentifierToken, "Next");
+                                                                N(
+                                                                    SyntaxKind.IdentifierToken,
+                                                                    "Next"
+                                                                );
                                                             }
                                                         }
                                                         N(SyntaxKind.ArgumentList);
@@ -14990,9 +15261,11 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity5A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [() => {}][rand.Next()](A).B();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -15095,7 +15368,8 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity6()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -15103,7 +15377,8 @@ class C
                     [() => {}][rand.Next()](A)++;
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -15216,9 +15491,11 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity6A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [() => {}][rand.Next()](A)++;
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -15309,7 +15586,8 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity7()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -15317,7 +15595,8 @@ class C
                     [() => {}][rand.Next()](A)[0] = 1;
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -15384,12 +15663,18 @@ class C
                                                         {
                                                             N(SyntaxKind.IdentifierName);
                                                             {
-                                                                N(SyntaxKind.IdentifierToken, "rand");
+                                                                N(
+                                                                    SyntaxKind.IdentifierToken,
+                                                                    "rand"
+                                                                );
                                                             }
                                                             N(SyntaxKind.DotToken);
                                                             N(SyntaxKind.IdentifierName);
                                                             {
-                                                                N(SyntaxKind.IdentifierToken, "Next");
+                                                                N(
+                                                                    SyntaxKind.IdentifierToken,
+                                                                    "Next"
+                                                                );
                                                             }
                                                         }
                                                         N(SyntaxKind.ArgumentList);
@@ -15449,9 +15734,11 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity7A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [() => {}][rand.Next()](A)[0] = 1;
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -15561,7 +15848,8 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity8()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -15569,7 +15857,8 @@ class C
                     [Attr] (A, B) LocalFunc() { }
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -15652,9 +15941,11 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity8A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [Attr] (A, B) LocalFunc() { }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -15715,7 +16006,8 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity9()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -15723,7 +16015,8 @@ class C
                     [Attr1][Attr2] (A, B) LocalFunc() { }
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -15818,9 +16111,11 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity9A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [Attr1][Attr2] (A, B) LocalFunc() { }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -15893,7 +16188,8 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity10()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -15901,7 +16197,8 @@ class C
                     [Attr1][Attr2] (A, B)? LocalFunc() { }
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -16000,9 +16297,11 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity10A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [Attr1][Attr2] (A, B)? LocalFunc() { }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -16079,7 +16378,8 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity11()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -16087,7 +16387,8 @@ class C
                     [Attr1][Attr2] (A, B)[] LocalFunc() { }
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -16194,9 +16495,11 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity11A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [Attr1][Attr2] (A, B)[] LocalFunc() { }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -16281,7 +16584,8 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity12()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -16289,7 +16593,8 @@ class C
                     [Attr1][Attr2] (A, B)[,] LocalFunc() { }
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -16401,9 +16706,11 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity12A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [Attr1][Attr2] (A, B)[,] LocalFunc() { }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -16493,7 +16800,8 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity13()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -16501,7 +16809,8 @@ class C
                     [Attr1][Attr2] (A, B)* LocalFunc() { }
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -16600,9 +16909,11 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity13A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [Attr1][Attr2] (A, B)* LocalFunc() { }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -16679,7 +16990,8 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity14()
     {
-        UsingTree("""
+        UsingTree(
+            """
             class C
             {
                 void M()
@@ -16687,7 +16999,8 @@ class C
                     [Attr1][Attr2] (A a, B b) LocalFunc() { }
                 }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -16784,9 +17097,11 @@ class C
     [Fact]
     public void InvokedCollectionExpressionVersusLocalFunctionAmbiguity14A()
     {
-        UsingTree("""
+        UsingTree(
+            """
             [Attr1][Attr2] (A a, B b) LocalFunc() { }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {

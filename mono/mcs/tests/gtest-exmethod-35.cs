@@ -4,11 +4,7 @@ using System;
 
 static class A
 {
-	public static void Test (this int v)
-	{
-	}
-	
-	public static void Main ()
-	{
-	}
+    public static void Test(this int v) { }
+
+    public static void Main() { }
 }

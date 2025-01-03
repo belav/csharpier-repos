@@ -7,7 +7,7 @@ using Xunit;
 
 public unsafe class test1
 {
-    static public int f(int i)
+    public static int f(int i)
     {
         byte* p = stackalloc byte[i];
         p[0] = 4;
@@ -28,7 +28,7 @@ public unsafe class test1
     }
 
     [Fact]
-    unsafe public static int TestEntryPoint()
+    public static unsafe int TestEntryPoint()
     {
         bool pass = true;
 
@@ -75,7 +75,7 @@ public unsafe class test1
             pass = false;
         }
 
-    output:
+        output:
         if (pass)
         {
             Console.WriteLine("PASSED");

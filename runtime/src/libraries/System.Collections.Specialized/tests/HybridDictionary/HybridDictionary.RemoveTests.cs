@@ -16,7 +16,10 @@ namespace System.Collections.Specialized.Tests
         [InlineData(50, false)]
         public void Remove(int count, bool caseInsensitive)
         {
-            HybridDictionary hybridDictionary = Helpers.CreateHybridDictionary(count, caseInsensitive);
+            HybridDictionary hybridDictionary = Helpers.CreateHybridDictionary(
+                count,
+                caseInsensitive
+            );
             hybridDictionary.Remove("no-such-object");
             Assert.Equal(count, hybridDictionary.Count);
             Assert.Equal(count, hybridDictionary.Keys.Count);
@@ -42,7 +45,10 @@ namespace System.Collections.Specialized.Tests
         [InlineData(50, false)]
         public void Remove_CaseSensitivity(int count, bool caseInsensitive)
         {
-            HybridDictionary hybridDictionary = Helpers.CreateHybridDictionary(count, caseInsensitive);
+            HybridDictionary hybridDictionary = Helpers.CreateHybridDictionary(
+                count,
+                caseInsensitive
+            );
 
             hybridDictionary.Add("key", "value");
             if (caseInsensitive)

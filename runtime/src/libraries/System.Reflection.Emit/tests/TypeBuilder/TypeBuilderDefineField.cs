@@ -12,30 +12,143 @@ namespace System.Reflection.Emit.Tests
     {
         public static IEnumerable<object[]> TestData()
         {
-            yield return new object[] { "TestName", typeof(object), FieldAttributes.Public, FieldAttributes.Public };
-            yield return new object[] { "A!?123C", typeof(int), FieldAttributes.Assembly, FieldAttributes.Assembly };
-            yield return new object[] { "a\0b\0c", typeof(string), FieldAttributes.FamANDAssem, FieldAttributes.FamANDAssem };
-            yield return new object[] { "\uD800\uDC00", Helpers.DynamicType(TypeAttributes.Public).AsType(), FieldAttributes.Family, FieldAttributes.Family };
-            yield return new object[] { "\u043F\u0440\u0438\u0432\u0435\u0442", typeof(EmptyNonGenericInterface1), FieldAttributes.FamORAssem, FieldAttributes.FamORAssem };
-            yield return new object[] { "Test Name With Spaces", typeof(EmptyEnum), FieldAttributes.Public, FieldAttributes.Public };
-            yield return new object[] { "TestName", typeof(EmptyNonGenericClass), FieldAttributes.HasDefault, FieldAttributes.PrivateScope };
-            yield return new object[] { "TestName", typeof(EmptyNonGenericStruct), FieldAttributes.HasFieldMarshal, FieldAttributes.PrivateScope };
-            yield return new object[] { "TestName", typeof(EmptyGenericClass<int>), FieldAttributes.HasFieldRVA, FieldAttributes.PrivateScope };
-            yield return new object[] { "TestName", typeof(EmptyGenericStruct<int>), FieldAttributes.Literal, FieldAttributes.Literal };
-            yield return new object[] { "TestName", typeof(int), FieldAttributes.NotSerialized, FieldAttributes.NotSerialized };
-            yield return new object[] { "TestName", typeof(int[]), FieldAttributes.PinvokeImpl, FieldAttributes.PinvokeImpl };
-            yield return new object[] { "TestName", typeof(int).MakePointerType(), FieldAttributes.Private, FieldAttributes.Private };
-            yield return new object[] { "TestName", typeof(EmptyGenericClass<>), FieldAttributes.PrivateScope, FieldAttributes.PrivateScope };
-            yield return new object[] { "TestName", typeof(int), FieldAttributes.Public, FieldAttributes.Public };
-            yield return new object[] { "TestName", typeof(int), FieldAttributes.RTSpecialName, FieldAttributes.PrivateScope };
-            yield return new object[] { "TestName", typeof(int), FieldAttributes.SpecialName, FieldAttributes.SpecialName };
-            yield return new object[] { "TestName", typeof(int), FieldAttributes.Public | FieldAttributes.Static, FieldAttributes.Public | FieldAttributes.Static };
+            yield return new object[]
+            {
+                "TestName",
+                typeof(object),
+                FieldAttributes.Public,
+                FieldAttributes.Public,
+            };
+            yield return new object[]
+            {
+                "A!?123C",
+                typeof(int),
+                FieldAttributes.Assembly,
+                FieldAttributes.Assembly,
+            };
+            yield return new object[]
+            {
+                "a\0b\0c",
+                typeof(string),
+                FieldAttributes.FamANDAssem,
+                FieldAttributes.FamANDAssem,
+            };
+            yield return new object[]
+            {
+                "\uD800\uDC00",
+                Helpers.DynamicType(TypeAttributes.Public).AsType(),
+                FieldAttributes.Family,
+                FieldAttributes.Family,
+            };
+            yield return new object[]
+            {
+                "\u043F\u0440\u0438\u0432\u0435\u0442",
+                typeof(EmptyNonGenericInterface1),
+                FieldAttributes.FamORAssem,
+                FieldAttributes.FamORAssem,
+            };
+            yield return new object[]
+            {
+                "Test Name With Spaces",
+                typeof(EmptyEnum),
+                FieldAttributes.Public,
+                FieldAttributes.Public,
+            };
+            yield return new object[]
+            {
+                "TestName",
+                typeof(EmptyNonGenericClass),
+                FieldAttributes.HasDefault,
+                FieldAttributes.PrivateScope,
+            };
+            yield return new object[]
+            {
+                "TestName",
+                typeof(EmptyNonGenericStruct),
+                FieldAttributes.HasFieldMarshal,
+                FieldAttributes.PrivateScope,
+            };
+            yield return new object[]
+            {
+                "TestName",
+                typeof(EmptyGenericClass<int>),
+                FieldAttributes.HasFieldRVA,
+                FieldAttributes.PrivateScope,
+            };
+            yield return new object[]
+            {
+                "TestName",
+                typeof(EmptyGenericStruct<int>),
+                FieldAttributes.Literal,
+                FieldAttributes.Literal,
+            };
+            yield return new object[]
+            {
+                "TestName",
+                typeof(int),
+                FieldAttributes.NotSerialized,
+                FieldAttributes.NotSerialized,
+            };
+            yield return new object[]
+            {
+                "TestName",
+                typeof(int[]),
+                FieldAttributes.PinvokeImpl,
+                FieldAttributes.PinvokeImpl,
+            };
+            yield return new object[]
+            {
+                "TestName",
+                typeof(int).MakePointerType(),
+                FieldAttributes.Private,
+                FieldAttributes.Private,
+            };
+            yield return new object[]
+            {
+                "TestName",
+                typeof(EmptyGenericClass<>),
+                FieldAttributes.PrivateScope,
+                FieldAttributes.PrivateScope,
+            };
+            yield return new object[]
+            {
+                "TestName",
+                typeof(int),
+                FieldAttributes.Public,
+                FieldAttributes.Public,
+            };
+            yield return new object[]
+            {
+                "TestName",
+                typeof(int),
+                FieldAttributes.RTSpecialName,
+                FieldAttributes.PrivateScope,
+            };
+            yield return new object[]
+            {
+                "TestName",
+                typeof(int),
+                FieldAttributes.SpecialName,
+                FieldAttributes.SpecialName,
+            };
+            yield return new object[]
+            {
+                "TestName",
+                typeof(int),
+                FieldAttributes.Public | FieldAttributes.Static,
+                FieldAttributes.Public | FieldAttributes.Static,
+            };
         }
 
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/2389", TestRuntimes.Mono)]
         [MemberData(nameof(TestData))]
-        public void DefineField(string name, Type fieldType, FieldAttributes attributes, FieldAttributes expectedAttributes)
+        public void DefineField(
+            string name,
+            Type fieldType,
+            FieldAttributes attributes,
+            FieldAttributes expectedAttributes
+        )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             FieldBuilder field = type.DefineField(name, fieldType, attributes);
@@ -46,7 +159,10 @@ namespace System.Reflection.Emit.Tests
             Assert.Equal(field.Module, field.Module);
 
             Type createdType = type.CreateType();
-            Assert.Equal(type.AsType().GetFields(Helpers.AllFlags), createdType.GetFields(Helpers.AllFlags));
+            Assert.Equal(
+                type.AsType().GetFields(Helpers.AllFlags),
+                createdType.GetFields(Helpers.AllFlags)
+            );
 
             FieldInfo fieldInfo = createdType.GetField(name, Helpers.AllFlags);
             Assert.Equal(type.AsType().GetField(name, Helpers.AllFlags), fieldInfo);
@@ -55,7 +171,8 @@ namespace System.Reflection.Emit.Tests
             {
                 // Verify MetadataToken
                 Assert.Equal(field.MetadataToken, fieldInfo.MetadataToken);
-                FieldInfo fieldFromToken = (FieldInfo)fieldInfo.Module.ResolveField(fieldInfo.MetadataToken);
+                FieldInfo fieldFromToken = (FieldInfo)
+                    fieldInfo.Module.ResolveField(fieldInfo.MetadataToken);
                 Assert.Equal(fieldInfo, fieldFromToken);
             }
         }
@@ -77,7 +194,10 @@ namespace System.Reflection.Emit.Tests
         public void DefineField_NullFieldName_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentNullException>("fieldName", () => type.DefineField(null, typeof(int), FieldAttributes.Public));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "fieldName",
+                () => type.DefineField(null, typeof(int), FieldAttributes.Public)
+            );
         }
 
         [Fact]
@@ -86,7 +206,9 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             type.CreateTypeInfo();
 
-            Assert.Throws<InvalidOperationException>(() => type.DefineField("Name", typeof(int), FieldAttributes.Public));
+            Assert.Throws<InvalidOperationException>(
+                () => type.DefineField("Name", typeof(int), FieldAttributes.Public)
+            );
         }
 
         [Theory]
@@ -96,21 +218,30 @@ namespace System.Reflection.Emit.Tests
         public void DefineField_InvalidFieldName_ThrowsArgumentException(string fieldName)
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentException>("fieldName", () => type.DefineField(fieldName, typeof(int), FieldAttributes.Public));
+            AssertExtensions.Throws<ArgumentException>(
+                "fieldName",
+                () => type.DefineField(fieldName, typeof(int), FieldAttributes.Public)
+            );
         }
 
         [Fact]
         public void DefineField_NullFieldType_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentNullException>("type", () => type.DefineField("Name", null, FieldAttributes.Public));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => type.DefineField("Name", null, FieldAttributes.Public)
+            );
         }
 
         [Fact]
         public void DefineField_VoidFieldType_ThrowsArgumentException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentException>(null, () => type.DefineField("Name", typeof(void), FieldAttributes.Public));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => type.DefineField("Name", typeof(void), FieldAttributes.Public)
+            );
         }
 
         [Theory]
@@ -118,7 +249,10 @@ namespace System.Reflection.Emit.Tests
         [InlineData((FieldAttributes)(-1), (FieldAttributes)(-38145))]
         [InlineData(FieldAttributes.FieldAccessMask, FieldAttributes.FieldAccessMask)]
         [InlineData((FieldAttributes)int.MaxValue, (FieldAttributes)2147445503)]
-        public void DefineField_InvalidFieldAttributes_ThrowsTypeLoadExceptionOnCreation(FieldAttributes attributes, FieldAttributes expected)
+        public void DefineField_InvalidFieldAttributes_ThrowsTypeLoadExceptionOnCreation(
+            FieldAttributes attributes,
+            FieldAttributes expected
+        )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             FieldBuilder field = type.DefineField("Name", typeof(int), attributes);
@@ -156,7 +290,10 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void DefineByRefField_ValueType_NonByRefLike_ThrowsTypeLoadExceptionOnCreation()
         {
-            TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public, baseType: typeof(ValueType));
+            TypeBuilder type = Helpers.DynamicType(
+                TypeAttributes.Public,
+                baseType: typeof(ValueType)
+            );
             type.DefineField("Name", typeof(int).MakeByRefType(), FieldAttributes.Public);
 
             Assert.Throws<TypeLoadException>(() => type.CreateTypeInfo());
@@ -165,10 +302,16 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void DefineByRefField_ValueType_ByRefLike()
         {
-            TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public, baseType: typeof(ValueType));
+            TypeBuilder type = Helpers.DynamicType(
+                TypeAttributes.Public,
+                baseType: typeof(ValueType)
+            );
 
             // Define type to be ByRefLike
-            CustomAttributeBuilder ca = new(typeof(IsByRefLikeAttribute).GetConstructors()[0], new object[] { });
+            CustomAttributeBuilder ca = new(
+                typeof(IsByRefLikeAttribute).GetConstructors()[0],
+                new object[] { }
+            );
             type.SetCustomAttribute(ca);
 
             type.DefineField("Name", typeof(int).MakeByRefType(), FieldAttributes.Public);
@@ -183,15 +326,29 @@ namespace System.Reflection.Emit.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/45152")]
         public void Instantiate_ValueType_With_ByRefField()
         {
-            TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public, baseType: typeof(ValueType));
+            TypeBuilder type = Helpers.DynamicType(
+                TypeAttributes.Public,
+                baseType: typeof(ValueType)
+            );
 
             // Define type to be ByRefLike
-            CustomAttributeBuilder ca = new(typeof(IsByRefLikeAttribute).GetConstructors()[0], new object[] { });
+            CustomAttributeBuilder ca = new(
+                typeof(IsByRefLikeAttribute).GetConstructors()[0],
+                new object[] { }
+            );
             type.SetCustomAttribute(ca);
 
-            var field = type.DefineField("Name", typeof(int).MakeByRefType(), FieldAttributes.Public);
+            var field = type.DefineField(
+                "Name",
+                typeof(int).MakeByRefType(),
+                FieldAttributes.Public
+            );
 
-            var ctor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.HasThis, new Type[] { typeof(string) });
+            var ctor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.HasThis,
+                new Type[] { typeof(string) }
+            );
             {
                 ILGenerator il = ctor.GetILGenerator();
                 il.Emit(OpCodes.Ldarg_0);
@@ -202,7 +359,10 @@ namespace System.Reflection.Emit.Tests
 
             Type createdType = type.CreateType();
 
-            var ctorToCall = createdType.GetConstructor(BindingFlags.Public | BindingFlags.Instance, new[] { typeof(string) });
+            var ctorToCall = createdType.GetConstructor(
+                BindingFlags.Public | BindingFlags.Instance,
+                new[] { typeof(string) }
+            );
             var str = "12345";
             ctorToCall.Invoke(new[] { str });
         }

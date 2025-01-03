@@ -15,9 +15,8 @@ namespace System.IO
         /// <summary>Gets the created file's path.</summary>
         public string Path { get; }
 
-        public TempFile(string path, long length = 0) : this(path, length > -1 ? new byte[length] : null)
-        {
-        }
+        public TempFile(string path, long length = 0)
+            : this(path, length > -1 ? new byte[length] : null) { }
 
         public TempFile(string path, byte[] data)
         {
@@ -31,12 +30,20 @@ namespace System.IO
 
         ~TempFile() => DeleteFile();
 
-        public static TempFile Create(byte[] bytes, [CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0)
+        public static TempFile Create(
+            byte[] bytes,
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        )
         {
             return new TempFile(GetFilePath(memberName, lineNumber), bytes);
         }
 
-        public static TempFile Create(long length = -1, [CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0)
+        public static TempFile Create(
+            long length = -1,
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        )
         {
             return new TempFile(GetFilePath(memberName, lineNumber), length);
         }
@@ -53,8 +60,13 @@ namespace System.IO
 
         private void DeleteFile()
         {
-            try { File.Delete(Path); }
-            catch { /* Ignore exceptions on disposal paths */ }
+            try
+            {
+                File.Delete(Path);
+            }
+            catch
+            { /* Ignore exceptions on disposal paths */
+            }
         }
 
         private static string GetFilePath(string memberName, int lineNumber)

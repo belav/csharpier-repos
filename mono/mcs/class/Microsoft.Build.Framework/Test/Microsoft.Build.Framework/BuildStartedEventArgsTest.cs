@@ -28,20 +28,22 @@
 using Microsoft.Build.Framework;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Framework {
-	[TestFixture]
-	public class BuildStartedEventArgsTest {
-		[Test]
-		public void AssignmentTest ()
-		{
-			BuildStartedEventArgs bsea;
-			string message = "message";
-			string helpKeyword = "helpKeyword";
-			
-			bsea = new BuildStartedEventArgs (message, helpKeyword);
-			
-			Assert.AreEqual (message, bsea.Message, "Message");
-			Assert.AreEqual (helpKeyword, bsea.HelpKeyword, "HelpKeyword");
-		}
-	}
+namespace MonoTests.Microsoft.Build.Framework
+{
+    [TestFixture]
+    public class BuildStartedEventArgsTest
+    {
+        [Test]
+        public void AssignmentTest()
+        {
+            BuildStartedEventArgs bsea;
+            string message = "message";
+            string helpKeyword = "helpKeyword";
+
+            bsea = new BuildStartedEventArgs(message, helpKeyword);
+
+            Assert.AreEqual(message, bsea.Message, "Message");
+            Assert.AreEqual(helpKeyword, bsea.HelpKeyword, "HelpKeyword");
+        }
+    }
 }

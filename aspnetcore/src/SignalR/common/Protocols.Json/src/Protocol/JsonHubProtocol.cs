@@ -24,27 +24,48 @@ namespace Microsoft.AspNetCore.SignalR.Protocol;
 public sealed class JsonHubProtocol : IHubProtocol
 {
     private const string ResultPropertyName = "result";
-    private static readonly JsonEncodedText ResultPropertyNameBytes = JsonEncodedText.Encode(ResultPropertyName);
+    private static readonly JsonEncodedText ResultPropertyNameBytes = JsonEncodedText.Encode(
+        ResultPropertyName
+    );
     private const string ItemPropertyName = "item";
-    private static readonly JsonEncodedText ItemPropertyNameBytes = JsonEncodedText.Encode(ItemPropertyName);
+    private static readonly JsonEncodedText ItemPropertyNameBytes = JsonEncodedText.Encode(
+        ItemPropertyName
+    );
     private const string InvocationIdPropertyName = "invocationId";
-    private static readonly JsonEncodedText InvocationIdPropertyNameBytes = JsonEncodedText.Encode(InvocationIdPropertyName);
+    private static readonly JsonEncodedText InvocationIdPropertyNameBytes = JsonEncodedText.Encode(
+        InvocationIdPropertyName
+    );
     private const string StreamIdsPropertyName = "streamIds";
-    private static readonly JsonEncodedText StreamIdsPropertyNameBytes = JsonEncodedText.Encode(StreamIdsPropertyName);
+    private static readonly JsonEncodedText StreamIdsPropertyNameBytes = JsonEncodedText.Encode(
+        StreamIdsPropertyName
+    );
     private const string TypePropertyName = "type";
-    private static readonly JsonEncodedText TypePropertyNameBytes = JsonEncodedText.Encode(TypePropertyName);
+    private static readonly JsonEncodedText TypePropertyNameBytes = JsonEncodedText.Encode(
+        TypePropertyName
+    );
     private const string ErrorPropertyName = "error";
-    private static readonly JsonEncodedText ErrorPropertyNameBytes = JsonEncodedText.Encode(ErrorPropertyName);
+    private static readonly JsonEncodedText ErrorPropertyNameBytes = JsonEncodedText.Encode(
+        ErrorPropertyName
+    );
     private const string AllowReconnectPropertyName = "allowReconnect";
-    private static readonly JsonEncodedText AllowReconnectPropertyNameBytes = JsonEncodedText.Encode(AllowReconnectPropertyName);
+    private static readonly JsonEncodedText AllowReconnectPropertyNameBytes =
+        JsonEncodedText.Encode(AllowReconnectPropertyName);
     private const string TargetPropertyName = "target";
-    private static readonly JsonEncodedText TargetPropertyNameBytes = JsonEncodedText.Encode(TargetPropertyName);
+    private static readonly JsonEncodedText TargetPropertyNameBytes = JsonEncodedText.Encode(
+        TargetPropertyName
+    );
     private const string ArgumentsPropertyName = "arguments";
-    private static readonly JsonEncodedText ArgumentsPropertyNameBytes = JsonEncodedText.Encode(ArgumentsPropertyName);
+    private static readonly JsonEncodedText ArgumentsPropertyNameBytes = JsonEncodedText.Encode(
+        ArgumentsPropertyName
+    );
     private const string HeadersPropertyName = "headers";
-    private static readonly JsonEncodedText HeadersPropertyNameBytes = JsonEncodedText.Encode(HeadersPropertyName);
+    private static readonly JsonEncodedText HeadersPropertyNameBytes = JsonEncodedText.Encode(
+        HeadersPropertyName
+    );
     private const string SequenceIdPropertyName = "sequenceId";
-    private static readonly JsonEncodedText SequenceIdPropertyNameBytes = JsonEncodedText.Encode(SequenceIdPropertyName);
+    private static readonly JsonEncodedText SequenceIdPropertyNameBytes = JsonEncodedText.Encode(
+        SequenceIdPropertyName
+    );
 
     private const string ProtocolName = "json";
     private const int ProtocolVersion = 2;
@@ -57,9 +78,8 @@ public sealed class JsonHubProtocol : IHubProtocol
     /// <summary>
     /// Initializes a new instance of the <see cref="JsonHubProtocol"/> class.
     /// </summary>
-    public JsonHubProtocol() : this(Options.Create(new JsonHubProtocolOptions()))
-    {
-    }
+    public JsonHubProtocol()
+        : this(Options.Create(new JsonHubProtocolOptions())) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="JsonHubProtocol"/> class.
@@ -86,7 +106,11 @@ public sealed class JsonHubProtocol : IHubProtocol
     }
 
     /// <inheritdoc />
-    public bool TryParseMessage(ref ReadOnlySequence<byte> input, IInvocationBinder binder, [NotNullWhen(true)] out HubMessage? message)
+    public bool TryParseMessage(
+        ref ReadOnlySequence<byte> input,
+        IInvocationBinder binder,
+        [NotNullWhen(true)] out HubMessage? message
+    )
     {
         if (!TextMessageParser.TryParseMessage(ref input, out var payload))
         {
@@ -161,21 +185,28 @@ public sealed class JsonHubProtocol : IHubProtocol
 
                             if (type == null)
                             {
-                                throw new InvalidDataException($"Expected '{TypePropertyName}' to be of type {JsonTokenType.Number}.");
+                                throw new InvalidDataException(
+                                    $"Expected '{TypePropertyName}' to be of type {JsonTokenType.Number}."
+                                );
                             }
                         }
-                        else if (reader.ValueTextEquals(InvocationIdPropertyNameBytes.EncodedUtf8Bytes))
+                        else if (
+                            reader.ValueTextEquals(InvocationIdPropertyNameBytes.EncodedUtf8Bytes)
+                        )
                         {
                             invocationId = reader.ReadAsString(InvocationIdPropertyName);
                         }
-                        else if (reader.ValueTextEquals(StreamIdsPropertyNameBytes.EncodedUtf8Bytes))
+                        else if (
+                            reader.ValueTextEquals(StreamIdsPropertyNameBytes.EncodedUtf8Bytes)
+                        )
                         {
                             reader.CheckRead();
 
                             if (reader.TokenType != JsonTokenType.StartArray)
                             {
                                 throw new InvalidDataException(
-                                    $"Expected '{StreamIdsPropertyName}' to be of type {SystemTextJsonExtensions.GetTokenString(JsonTokenType.StartArray)}.");
+                                    $"Expected '{StreamIdsPropertyName}' to be of type {SystemTextJsonExtensions.GetTokenString(JsonTokenType.StartArray)}."
+                                );
                             }
 
                             List<string>? newStreamIds = null;
@@ -183,7 +214,12 @@ public sealed class JsonHubProtocol : IHubProtocol
                             while (reader.TokenType != JsonTokenType.EndArray)
                             {
                                 newStreamIds ??= new();
-                                newStreamIds.Add(reader.GetString() ?? throw new InvalidDataException($"Null value for '{StreamIdsPropertyName}' is not valid."));
+                                newStreamIds.Add(
+                                    reader.GetString()
+                                        ?? throw new InvalidDataException(
+                                            $"Null value for '{StreamIdsPropertyName}' is not valid."
+                                        )
+                                );
                                 reader.Read();
                             }
 
@@ -196,7 +232,9 @@ public sealed class JsonHubProtocol : IHubProtocol
 
                             if (reader.TokenType != JsonTokenType.String)
                             {
-                                throw new InvalidDataException($"Expected '{TargetPropertyName}' to be of type {JsonTokenType.String}.");
+                                throw new InvalidDataException(
+                                    $"Expected '{TargetPropertyName}' to be of type {JsonTokenType.String}."
+                                );
                             }
 
                             if (!reader.HasValueSequence)
@@ -215,7 +253,9 @@ public sealed class JsonHubProtocol : IHubProtocol
                         {
                             error = reader.ReadAsString(ErrorPropertyName);
                         }
-                        else if (reader.ValueTextEquals(AllowReconnectPropertyNameBytes.EncodedUtf8Bytes))
+                        else if (
+                            reader.ValueTextEquals(AllowReconnectPropertyNameBytes.EncodedUtf8Bytes)
+                        )
                         {
                             allowReconnect = reader.ReadAsBoolean(AllowReconnectPropertyName);
                         }
@@ -233,7 +273,10 @@ public sealed class JsonHubProtocol : IHubProtocol
                             else
                             {
                                 // If we have an invocation id already we can parse the end result
-                                var returnType = ProtocolHelper.TryGetReturnType(binder, invocationId);
+                                var returnType = ProtocolHelper.TryGetReturnType(
+                                    binder,
+                                    invocationId
+                                );
                                 if (returnType is null)
                                 {
                                     reader.Skip();
@@ -247,7 +290,8 @@ public sealed class JsonHubProtocol : IHubProtocol
                                     }
                                     catch (Exception ex)
                                     {
-                                        error = $"Error trying to deserialize result to {returnType.Name}. {ex.Message}";
+                                        error =
+                                            $"Error trying to deserialize result to {returnType.Name}. {ex.Message}";
                                         hasResult = false;
                                     }
                                 }
@@ -280,17 +324,24 @@ public sealed class JsonHubProtocol : IHubProtocol
                             }
                             catch (Exception ex)
                             {
-                                return new StreamBindingFailureMessage(id, ExceptionDispatchInfo.Capture(ex));
+                                return new StreamBindingFailureMessage(
+                                    id,
+                                    ExceptionDispatchInfo.Capture(ex)
+                                );
                             }
                         }
-                        else if (reader.ValueTextEquals(ArgumentsPropertyNameBytes.EncodedUtf8Bytes))
+                        else if (
+                            reader.ValueTextEquals(ArgumentsPropertyNameBytes.EncodedUtf8Bytes)
+                        )
                         {
                             reader.CheckRead();
 
                             int initialDepth = reader.CurrentDepth;
                             if (reader.TokenType != JsonTokenType.StartArray)
                             {
-                                throw new InvalidDataException($"Expected '{ArgumentsPropertyName}' to be of type {SystemTextJsonExtensions.GetTokenString(JsonTokenType.StartArray)}.");
+                                throw new InvalidDataException(
+                                    $"Expected '{ArgumentsPropertyName}' to be of type {SystemTextJsonExtensions.GetTokenString(JsonTokenType.StartArray)}."
+                                );
                             }
 
                             hasArguments = true;
@@ -315,8 +366,11 @@ public sealed class JsonHubProtocol : IHubProtocol
 
                                     // Could be at any point in argument array JSON when an error is thrown
                                     // Read until the end of the argument JSON array
-                                    while (reader.CurrentDepth == initialDepth && reader.TokenType == JsonTokenType.StartArray ||
-                                            reader.CurrentDepth > initialDepth)
+                                    while (
+                                        reader.CurrentDepth == initialDepth
+                                            && reader.TokenType == JsonTokenType.StartArray
+                                        || reader.CurrentDepth > initialDepth
+                                    )
                                     {
                                         reader.CheckRead();
                                     }
@@ -328,7 +382,9 @@ public sealed class JsonHubProtocol : IHubProtocol
                             reader.CheckRead();
                             headers = ReadHeaders(ref reader);
                         }
-                        else if (reader.ValueTextEquals(SequenceIdPropertyNameBytes.EncodedUtf8Bytes))
+                        else if (
+                            reader.ValueTextEquals(SequenceIdPropertyNameBytes.EncodedUtf8Bytes)
+                        )
                         {
                             sequenceId = reader.ReadAsInt64(SequenceIdPropertyName);
                         }
@@ -342,8 +398,7 @@ public sealed class JsonHubProtocol : IHubProtocol
                         completed = true;
                         break;
                 }
-            }
-            while (!completed && reader.CheckRead());
+            } while (!completed && reader.CheckRead());
 
             HubMessage message;
 
@@ -353,7 +408,9 @@ public sealed class JsonHubProtocol : IHubProtocol
                     {
                         if (target is null)
                         {
-                            throw new InvalidDataException($"Missing required property '{TargetPropertyName}'.");
+                            throw new InvalidDataException(
+                                $"Missing required property '{TargetPropertyName}'."
+                            );
                         }
 
                         if (hasArgumentsToken)
@@ -370,16 +427,29 @@ public sealed class JsonHubProtocol : IHubProtocol
                             }
                         }
 
-                        message = argumentBindingException != null
-                            ? new InvocationBindingFailureMessage(invocationId, target, argumentBindingException)
-                            : BindInvocationMessage(invocationId, target, arguments, hasArguments, streamIds);
+                        message =
+                            argumentBindingException != null
+                                ? new InvocationBindingFailureMessage(
+                                    invocationId,
+                                    target,
+                                    argumentBindingException
+                                )
+                                : BindInvocationMessage(
+                                    invocationId,
+                                    target,
+                                    arguments,
+                                    hasArguments,
+                                    streamIds
+                                );
                     }
                     break;
                 case HubProtocolConstants.StreamInvocationMessageType:
                     {
                         if (target is null)
                         {
-                            throw new InvalidDataException($"Missing required property '{TargetPropertyName}'.");
+                            throw new InvalidDataException(
+                                $"Missing required property '{TargetPropertyName}'."
+                            );
                         }
 
                         if (hasArgumentsToken)
@@ -396,15 +466,28 @@ public sealed class JsonHubProtocol : IHubProtocol
                             }
                         }
 
-                        message = argumentBindingException != null
-                            ? new InvocationBindingFailureMessage(invocationId, target, argumentBindingException)
-                            : BindStreamInvocationMessage(invocationId, target, arguments, hasArguments, streamIds);
+                        message =
+                            argumentBindingException != null
+                                ? new InvocationBindingFailureMessage(
+                                    invocationId,
+                                    target,
+                                    argumentBindingException
+                                )
+                                : BindStreamInvocationMessage(
+                                    invocationId,
+                                    target,
+                                    arguments,
+                                    hasArguments,
+                                    streamIds
+                                );
                     }
                     break;
                 case HubProtocolConstants.StreamItemMessageType:
                     if (invocationId is null)
                     {
-                        throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+                        throw new InvalidDataException(
+                            $"Missing required property '{InvocationIdPropertyName}'."
+                        );
                     }
 
                     if (hasItemsToken)
@@ -416,7 +499,10 @@ public sealed class JsonHubProtocol : IHubProtocol
                         }
                         catch (JsonException ex)
                         {
-                            message = new StreamBindingFailureMessage(invocationId, ExceptionDispatchInfo.Capture(ex));
+                            message = new StreamBindingFailureMessage(
+                                invocationId,
+                                ExceptionDispatchInfo.Capture(ex)
+                            );
                             break;
                         }
                     }
@@ -426,7 +512,9 @@ public sealed class JsonHubProtocol : IHubProtocol
                 case HubProtocolConstants.CompletionMessageType:
                     if (invocationId is null)
                     {
-                        throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+                        throw new InvalidDataException(
+                            $"Missing required property '{InvocationIdPropertyName}'."
+                        );
                     }
 
                     if (hasResultToken)
@@ -444,7 +532,8 @@ public sealed class JsonHubProtocol : IHubProtocol
                             }
                             catch (Exception ex)
                             {
-                                error = $"Error trying to deserialize result to {returnType.Name}. {ex.Message}";
+                                error =
+                                    $"Error trying to deserialize result to {returnType.Name}. {ex.Message}";
                                 hasResult = false;
                             }
                         }
@@ -464,7 +553,9 @@ public sealed class JsonHubProtocol : IHubProtocol
                 case HubProtocolConstants.SequenceMessageType:
                     return BindSequenceMessage(sequenceId);
                 case null:
-                    throw new InvalidDataException($"Missing required property '{TypePropertyName}'.");
+                    throw new InvalidDataException(
+                        $"Missing required property '{TypePropertyName}'."
+                    );
                 default:
                     // Future protocol changes can add message types, old clients can ignore them
                     return null;
@@ -484,7 +575,9 @@ public sealed class JsonHubProtocol : IHubProtocol
 
         if (reader.TokenType != JsonTokenType.StartObject)
         {
-            throw new InvalidDataException($"Expected '{HeadersPropertyName}' to be of type {JsonTokenType.StartObject}.");
+            throw new InvalidDataException(
+                $"Expected '{HeadersPropertyName}' to be of type {JsonTokenType.StartObject}."
+            );
         }
 
         while (reader.Read())
@@ -498,7 +591,9 @@ public sealed class JsonHubProtocol : IHubProtocol
 
                     if (reader.TokenType != JsonTokenType.String)
                     {
-                        throw new InvalidDataException($"Expected header '{propertyName}' to be of type {JsonTokenType.String}.");
+                        throw new InvalidDataException(
+                            $"Expected header '{propertyName}' to be of type {JsonTokenType.String}."
+                        );
                     }
 
                     headers[propertyName] = reader.GetString()!;
@@ -564,7 +659,9 @@ public sealed class JsonHubProtocol : IHubProtocol
                     WriteSequenceMessage(m, writer);
                     break;
                 default:
-                    throw new InvalidOperationException($"Unsupported message type: {message.GetType().FullName}");
+                    throw new InvalidOperationException(
+                        $"Unsupported message type: {message.GetType().FullName}"
+                    );
             }
             writer.WriteEndObject();
             writer.Flush();
@@ -611,13 +708,21 @@ public sealed class JsonHubProtocol : IHubProtocol
                 }
                 else
                 {
-                    JsonSerializer.Serialize(writer, message.Result, message.Result.GetType(), _payloadSerializerOptions);
+                    JsonSerializer.Serialize(
+                        writer,
+                        message.Result,
+                        message.Result.GetType(),
+                        _payloadSerializerOptions
+                    );
                 }
             }
         }
     }
 
-    private static void WriteCancelInvocationMessage(CancelInvocationMessage message, Utf8JsonWriter writer)
+    private static void WriteCancelInvocationMessage(
+        CancelInvocationMessage message,
+        Utf8JsonWriter writer
+    )
     {
         WriteInvocationId(message, writer);
     }
@@ -633,7 +738,12 @@ public sealed class JsonHubProtocol : IHubProtocol
         }
         else
         {
-            JsonSerializer.Serialize(writer, message.Item, message.Item.GetType(), _payloadSerializerOptions);
+            JsonSerializer.Serialize(
+                writer,
+                message.Item,
+                message.Item.GetType(),
+                _payloadSerializerOptions
+            );
         }
     }
 
@@ -647,7 +757,10 @@ public sealed class JsonHubProtocol : IHubProtocol
         WriteStreamIds(message.StreamIds, writer);
     }
 
-    private void WriteStreamInvocationMessage(StreamInvocationMessage message, Utf8JsonWriter writer)
+    private void WriteStreamInvocationMessage(
+        StreamInvocationMessage message,
+        Utf8JsonWriter writer
+    )
     {
         WriteInvocationId(message, writer);
         writer.WriteString(TargetPropertyNameBytes, message.Target);
@@ -691,7 +804,12 @@ public sealed class JsonHubProtocol : IHubProtocol
             }
             else
             {
-                JsonSerializer.Serialize(writer, argument, argument.GetType(), _payloadSerializerOptions);
+                JsonSerializer.Serialize(
+                    writer,
+                    argument,
+                    argument.GetType(),
+                    _payloadSerializerOptions
+                );
             }
         }
         writer.WriteEndArray();
@@ -729,22 +847,33 @@ public sealed class JsonHubProtocol : IHubProtocol
     {
         if (string.IsNullOrEmpty(invocationId))
         {
-            throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+            throw new InvalidDataException(
+                $"Missing required property '{InvocationIdPropertyName}'."
+            );
         }
 
         return new CancelInvocationMessage(invocationId);
     }
 
-    private static HubMessage BindCompletionMessage(string invocationId, string? error, object? result, bool hasResult)
+    private static HubMessage BindCompletionMessage(
+        string invocationId,
+        string? error,
+        object? result,
+        bool hasResult
+    )
     {
         if (string.IsNullOrEmpty(invocationId))
         {
-            throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+            throw new InvalidDataException(
+                $"Missing required property '{InvocationIdPropertyName}'."
+            );
         }
 
         if (error != null && hasResult)
         {
-            throw new InvalidDataException("The 'error' and 'result' properties are mutually exclusive.");
+            throw new InvalidDataException(
+                "The 'error' and 'result' properties are mutually exclusive."
+            );
         }
 
         if (hasResult)
@@ -759,7 +888,9 @@ public sealed class JsonHubProtocol : IHubProtocol
     {
         if (string.IsNullOrEmpty(invocationId))
         {
-            throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+            throw new InvalidDataException(
+                $"Missing required property '{InvocationIdPropertyName}'."
+            );
         }
 
         if (!hasItem)
@@ -770,12 +901,19 @@ public sealed class JsonHubProtocol : IHubProtocol
         return new StreamItemMessage(invocationId, item);
     }
 
-    private static HubMessage BindStreamInvocationMessage(string? invocationId, string target,
-        object?[]? arguments, bool hasArguments, string[]? streamIds)
+    private static HubMessage BindStreamInvocationMessage(
+        string? invocationId,
+        string target,
+        object?[]? arguments,
+        bool hasArguments,
+        string[]? streamIds
+    )
     {
         if (string.IsNullOrEmpty(invocationId))
         {
-            throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+            throw new InvalidDataException(
+                $"Missing required property '{InvocationIdPropertyName}'."
+            );
         }
 
         if (!hasArguments)
@@ -793,8 +931,13 @@ public sealed class JsonHubProtocol : IHubProtocol
         return new StreamInvocationMessage(invocationId, target, arguments, streamIds);
     }
 
-    private static HubMessage BindInvocationMessage(string? invocationId, string target,
-        object?[]? arguments, bool hasArguments, string[]? streamIds)
+    private static HubMessage BindInvocationMessage(
+        string? invocationId,
+        string target,
+        object?[]? arguments,
+        bool hasArguments,
+        string[]? streamIds
+    )
     {
         if (string.IsNullOrEmpty(target))
         {
@@ -853,7 +996,10 @@ public sealed class JsonHubProtocol : IHubProtocol
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidDataException("Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.", ex);
+                    throw new InvalidDataException(
+                        "Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.",
+                        ex
+                    );
                 }
             }
             else
@@ -867,7 +1013,9 @@ public sealed class JsonHubProtocol : IHubProtocol
 
         if (paramIndex != paramCount)
         {
-            throw new InvalidDataException($"Invocation provides {paramIndex} argument(s) but target expects {paramCount}.");
+            throw new InvalidDataException(
+                $"Invocation provides {paramIndex} argument(s) but target expects {paramCount}."
+            );
         }
 
         return arguments ?? Array.Empty<object>();

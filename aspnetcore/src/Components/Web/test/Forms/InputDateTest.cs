@@ -15,9 +15,9 @@ public class InputDateTest
             EditContext = new EditContext(model),
             ValueExpression = () => model.DateProperty,
             AdditionalAttributes = new Dictionary<string, object>
-                {
-                    { "DisplayName", "Date property" }
-                }
+            {
+                { "DisplayName", "Date property" },
+            },
         };
         var fieldIdentifier = FieldIdentifier.Create(() => model.DateProperty);
         var inputComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
@@ -62,7 +62,10 @@ public class InputDateTest
             // (e.g., from @bind), except to simplify the test code there's an InvokeAsync
             // here. In production code it wouldn't normally be required because @bind
             // calls run on the sync context anyway.
-            await InvokeAsync(() => { base.CurrentValueAsString = value; });
+            await InvokeAsync(() =>
+            {
+                base.CurrentValueAsString = value;
+            });
         }
     }
 }

@@ -25,7 +25,9 @@ internal static class AlgorithmAssert
     {
         if (!IsValidCore(blockSizeInBits, SYMMETRIC_ALG_MIN_BLOCK_SIZE_IN_BITS))
         {
-            throw new InvalidOperationException(Resources.FormatAlgorithmAssert_BadBlockSize(blockSizeInBits));
+            throw new InvalidOperationException(
+                Resources.FormatAlgorithmAssert_BadBlockSize(blockSizeInBits)
+            );
         }
     }
 
@@ -33,7 +35,9 @@ internal static class AlgorithmAssert
     {
         if (!IsValidCore(keySizeInBits, SYMMETRIC_ALG_MIN_KEY_LENGTH_IN_BITS))
         {
-            throw new InvalidOperationException(Resources.FormatAlgorithmAssert_BadKeySize(keySizeInBits));
+            throw new InvalidOperationException(
+                Resources.FormatAlgorithmAssert_BadKeySize(keySizeInBits)
+            );
         }
     }
 
@@ -41,7 +45,9 @@ internal static class AlgorithmAssert
     {
         if (!IsValidCore(digestSizeInBits, HASH_ALG_MIN_DIGEST_LENGTH_IN_BITS))
         {
-            throw new InvalidOperationException(Resources.FormatAlgorithmAssert_BadDigestSize(digestSizeInBits));
+            throw new InvalidOperationException(
+                Resources.FormatAlgorithmAssert_BadDigestSize(digestSizeInBits)
+            );
         }
     }
 

@@ -8,7 +8,8 @@ namespace System.ServiceModel.Discovery.Configuration
     using System.ServiceModel.Configuration;
 
     [ConfigurationCollection(typeof(ScopeElement))]
-    public sealed class ScopeElementCollection : ServiceModelConfigurationElementCollection<ScopeElement>
+    public sealed class ScopeElementCollection
+        : ServiceModelConfigurationElementCollection<ScopeElement>
     {
         protected override object GetElementKey(ConfigurationElement element)
         {

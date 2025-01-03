@@ -20,7 +20,7 @@ namespace Newtonsoft.Json.Tests.Issues
             var jObject = new JObject { { "NullProperty", false ? "0" : null } };
 
             var jToken = JToken.FromObject(jObject);
-            
+
             Assert.AreEqual(JTokenType.Null, jToken.Children().Children().Single().Type);
 
             jObject = new JObject { { "NullProperty", (string)null } };

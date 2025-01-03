@@ -22,7 +22,9 @@ public class XmlDocumentationIntegrationTests
     public void ServiceDescription_ModelHasXmlDocs_UseXmlDocs()
     {
         // Arrange & Act
-        var swagger = OpenApiTestHelpers.GetOpenApiDocument<XmlDocServiceWithComments>(_testOutputHelper);
+        var swagger = OpenApiTestHelpers.GetOpenApiDocument<XmlDocServiceWithComments>(
+            _testOutputHelper
+        );
 
         // Assert
         Assert.Equal("XmlDoc", swagger.Tags[0].Name);
@@ -44,7 +46,9 @@ public class XmlDocumentationIntegrationTests
     public void RouteParameter_UseProtoDocs()
     {
         // Arrange & Act
-        var swagger = OpenApiTestHelpers.GetOpenApiDocument<XmlDocServiceWithComments>(_testOutputHelper);
+        var swagger = OpenApiTestHelpers.GetOpenApiDocument<XmlDocServiceWithComments>(
+            _testOutputHelper
+        );
 
         // Assert
         var path = swagger.Paths["/v1/greeter/{name}"];
@@ -55,7 +59,9 @@ public class XmlDocumentationIntegrationTests
     public void MethodDescription_ModelHasXmlDocs_UseXmlDocs()
     {
         // Arrange & Act
-        var swagger = OpenApiTestHelpers.GetOpenApiDocument<XmlDocServiceWithComments>(_testOutputHelper);
+        var swagger = OpenApiTestHelpers.GetOpenApiDocument<XmlDocServiceWithComments>(
+            _testOutputHelper
+        );
 
         // Assert
         var path = swagger.Paths["/v1/greeter/{name}"];
@@ -79,11 +85,16 @@ public class XmlDocumentationIntegrationTests
     public void RequestDescription_Root_ModelHasXmlDocs_UseXmlDocs()
     {
         // Arrange & Act
-        var swagger = OpenApiTestHelpers.GetOpenApiDocument<XmlDocServiceWithComments>(_testOutputHelper);
+        var swagger = OpenApiTestHelpers.GetOpenApiDocument<XmlDocServiceWithComments>(
+            _testOutputHelper
+        );
 
         // Assert
         var path = swagger.Paths["/v1/greeter"];
-        Assert.Equal("Request XML param!", path.Operations[OperationType.Post].RequestBody.Description);
+        Assert.Equal(
+            "Request XML param!",
+            path.Operations[OperationType.Post].RequestBody.Description
+        );
     }
 
     [Fact]
@@ -112,7 +123,9 @@ public class XmlDocumentationIntegrationTests
     public void Message_UseProtoDocs()
     {
         // Arrange & Act
-        var swagger = OpenApiTestHelpers.GetOpenApiDocument<XmlDocServiceWithComments>(_testOutputHelper);
+        var swagger = OpenApiTestHelpers.GetOpenApiDocument<XmlDocServiceWithComments>(
+            _testOutputHelper
+        );
 
         // Assert
         var helloReplyMessage = swagger.Components.Schemas["StringReply"];
@@ -120,7 +133,5 @@ public class XmlDocumentationIntegrationTests
         Assert.Equal("Message field!", helloReplyMessage.Properties["message"].Description);
     }
 
-    private class GreeterService : Greeter.GreeterBase
-    {
-    }
+    private class GreeterService : Greeter.GreeterBase { }
 }

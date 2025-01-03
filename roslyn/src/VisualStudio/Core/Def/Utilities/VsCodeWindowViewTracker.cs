@@ -26,7 +26,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
     /// <remarks>
     /// All members of this class are UI thread affinitized, including the constructor.
     /// </remarks>
-    internal sealed class VsCodeWindowViewTracker : ForegroundThreadAffinitizedObject, IDisposable, IVsCodeWindowEvents
+    internal sealed class VsCodeWindowViewTracker
+        : ForegroundThreadAffinitizedObject,
+            IDisposable,
+            IVsCodeWindowEvents
     {
         private readonly IVsCodeWindow _codeWindow;
         private readonly IVsEditorAdaptersFactoryService _editorAdaptersFactoryService;
@@ -38,7 +41,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
         /// </summary>
         private readonly Dictionary<IVsTextView, ITextView> _trackedTextViews = new();
 
-        public VsCodeWindowViewTracker(IVsCodeWindow codeWindow, IThreadingContext threadingContext, IVsEditorAdaptersFactoryService editorAdaptersFactoryService)
+        public VsCodeWindowViewTracker(
+            IVsCodeWindow codeWindow,
+            IThreadingContext threadingContext,
+            IVsEditorAdaptersFactoryService editorAdaptersFactoryService
+        )
             : base(threadingContext, assertIsForeground: true)
         {
             _codeWindow = codeWindow;
@@ -46,11 +53,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
 
             _codeWindowEventsSink = ComEventSink.Advise<IVsCodeWindowEvents>(codeWindow, this);
 
-            if (ErrorHandler.Succeeded(_codeWindow.GetPrimaryView(out var pTextView)) && pTextView != null)
+            if (
+                ErrorHandler.Succeeded(_codeWindow.GetPrimaryView(out var pTextView))
+                && pTextView != null
+            )
                 StartTrackingView(pTextView);
 
             // If there is no secondary view, GetSecondaryView will return null
-            if (ErrorHandler.Succeeded(_codeWindow.GetSecondaryView(out pTextView)) && pTextView != null)
+            if (
+                ErrorHandler.Succeeded(_codeWindow.GetSecondaryView(out pTextView))
+                && pTextView != null
+            )
                 StartTrackingView(pTextView);
         }
 
@@ -89,7 +102,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
             AssertIsForeground();
 
             ErrorHandler.ThrowOnFailure(_codeWindow.GetLastActiveView(out var pView));
-            Contract.ThrowIfNull(pView, $"{nameof(IVsCodeWindow.GetLastActiveView)} returned success, but did not provide a view.");
+            Contract.ThrowIfNull(
+                pView,
+                $"{nameof(IVsCodeWindow.GetLastActiveView)} returned success, but did not provide a view."
+            );
             var view = _editorAdaptersFactoryService.GetWpfTextView(pView);
             Contract.ThrowIfNull(view, "The active view should be initialized.");
             return view;
@@ -120,11 +136,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
         /// </remarks>
         public event EventHandler<EventArgs>? CaretMovedOrActiveViewChanged;
 
-        private void OnCaretPositionChanged(object sender, CaretPositionChangedEventArgs e)
-            => CaretMovedOrActiveViewChanged?.Invoke(this, e);
+        private void OnCaretPositionChanged(object sender, CaretPositionChangedEventArgs e) =>
+            CaretMovedOrActiveViewChanged?.Invoke(this, e);
 
-        private void OnViewGotAggregateFocus(object sender, EventArgs e)
-            => CaretMovedOrActiveViewChanged?.Invoke(this, e);
+        private void OnViewGotAggregateFocus(object sender, EventArgs e) =>
+            CaretMovedOrActiveViewChanged?.Invoke(this, e);
 
         public void Dispose()
         {

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,45 +31,54 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace System.Runtime.InteropServices {
-
-	[ComVisible(true)]
-	[AttributeUsage (AttributeTargets.Field | AttributeTargets.Parameter | 
-			 AttributeTargets.ReturnValue, Inherited=false)]
-	[StructLayout (LayoutKind.Sequential)]
-	public sealed class MarshalAsAttribute : Attribute {
-		/*keep these fields in sync with object-internals.h*/
+namespace System.Runtime.InteropServices
+{
+    [ComVisible(true)]
+    [AttributeUsage(
+        AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.ReturnValue,
+        Inherited = false
+    )]
+    [StructLayout(LayoutKind.Sequential)]
+    public sealed class MarshalAsAttribute : Attribute
+    {
+        /*keep these fields in sync with object-internals.h*/
 #pragma warning disable 169, 414
-		public string MarshalCookie;
-		[ComVisible(true)]
-		public string MarshalType;
+        public string MarshalCookie;
 
-		[ComVisible(true)]
-		[PreserveDependency ("GetCustomMarshalerInstance", "System.Runtime.InteropServices.Marshal")]
-		public Type MarshalTypeRef;
-		public Type SafeArrayUserDefinedSubType;
+        [ComVisible(true)]
+        public string MarshalType;
 
-		private UnmanagedType utype;
-		public UnmanagedType ArraySubType;		
-		public VarEnum SafeArraySubType;
-		public int SizeConst;
-		public int IidParameterIndex;
-		public short SizeParamIndex;
+        [ComVisible(true)]
+        [PreserveDependency("GetCustomMarshalerInstance", "System.Runtime.InteropServices.Marshal")]
+        public Type MarshalTypeRef;
+        public Type SafeArrayUserDefinedSubType;
+
+        private UnmanagedType utype;
+        public UnmanagedType ArraySubType;
+        public VarEnum SafeArraySubType;
+        public int SizeConst;
+        public int IidParameterIndex;
+        public short SizeParamIndex;
 #pragma warning disable 169, 414
 
-		public MarshalAsAttribute (short unmanagedType) {
-			utype = (UnmanagedType)unmanagedType;
-		}
-		public MarshalAsAttribute( UnmanagedType unmanagedType) {
-			utype = unmanagedType;
-		}
-		public UnmanagedType Value {
-			get {return utype;}
-		}
+        public MarshalAsAttribute(short unmanagedType)
+        {
+            utype = (UnmanagedType)unmanagedType;
+        }
 
-		internal MarshalAsAttribute Copy ()
-		{
-			return (MarshalAsAttribute)this.MemberwiseClone ();
-		}
-	}
+        public MarshalAsAttribute(UnmanagedType unmanagedType)
+        {
+            utype = unmanagedType;
+        }
+
+        public UnmanagedType Value
+        {
+            get { return utype; }
+        }
+
+        internal MarshalAsAttribute Copy()
+        {
+            return (MarshalAsAttribute)this.MemberwiseClone();
+        }
+    }
 }

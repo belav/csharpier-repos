@@ -9,7 +9,15 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_CopyFile", SetLastError = true)]
-        internal static partial int CopyFile(SafeFileHandle source, SafeFileHandle destination, long sourceLength);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_CopyFile",
+            SetLastError = true
+        )]
+        internal static partial int CopyFile(
+            SafeFileHandle source,
+            SafeFileHandle destination,
+            long sourceLength
+        );
     }
 }

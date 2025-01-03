@@ -35,186 +35,212 @@ using Microsoft.Build.BuildEngine;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
+namespace Microsoft.Build.Tasks
+{
+    [MonoTODO]
+    public class MSBuild : TaskExtension
+    {
+        ITaskItem[] projects;
+        string[] properties;
+        bool rebaseOutputs;
+        bool runEachTargetSeparately;
+        bool stopOnFirstFailure;
+        bool buildInParallel;
+        ITaskItem[] targetOutputs;
+        string[] targets;
 
-	[MonoTODO]
-	public class MSBuild : TaskExtension {
-	
-		ITaskItem []	projects;
-		string []	properties;
-		bool		rebaseOutputs;
-		bool		runEachTargetSeparately;
-		bool		stopOnFirstFailure;
-		bool		buildInParallel;
-		ITaskItem []	targetOutputs;
-		string []	targets;
-	
-		public MSBuild ()
-		{
-		}
+        public MSBuild() { }
 
-		public override bool Execute ()
-		{
-			if (projects.Length == 0)
-				return true;
+        public override bool Execute()
+        {
+            if (projects.Length == 0)
+                return true;
 
-			string filename;
-			bool result = true;
-			bool all_result = true;
-			stopOnFirstFailure = false;
-			List <ITaskItem > outputItems = new List <ITaskItem> ();
-			string currentDirectory = Environment.CurrentDirectory;
-			Hashtable outputs;
-		
-			var global_properties = SplitPropertiesToDictionary ();
+            string filename;
+            bool result = true;
+            bool all_result = true;
+            stopOnFirstFailure = false;
+            List<ITaskItem> outputItems = new List<ITaskItem>();
+            string currentDirectory = Environment.CurrentDirectory;
+            Hashtable outputs;
 
-			Log.LogMessage (MessageImportance.Low, "Global Properties:");
-			if (global_properties != null)
-				foreach (KeyValuePair<string, string> pair in global_properties)
-					Log.LogMessage (MessageImportance.Low, "\t{0} = {1}", pair.Key, pair.Value);
+            var global_properties = SplitPropertiesToDictionary();
 
-			foreach (ITaskItem project in projects) {
-				filename = project.GetMetadata ("FullPath");
-				if (!File.Exists (filename)) {
-					Log.LogError ("Could not find the project file '{0}'", filename);
-					if (stopOnFirstFailure)
-						break;
+            Log.LogMessage(MessageImportance.Low, "Global Properties:");
+            if (global_properties != null)
+                foreach (KeyValuePair<string, string> pair in global_properties)
+                    Log.LogMessage(MessageImportance.Low, "\t{0} = {1}", pair.Key, pair.Value);
 
-					continue;
-				}
+            foreach (ITaskItem project in projects)
+            {
+                filename = project.GetMetadata("FullPath");
+                if (!File.Exists(filename))
+                {
+                    Log.LogError("Could not find the project file '{0}'", filename);
+                    if (stopOnFirstFailure)
+                        break;
 
-				Directory.SetCurrentDirectory (Path.GetDirectoryName (filename));
-				outputs = new Hashtable ();
+                    continue;
+                }
 
-				try {
-					// Order of precedence:
-					// ToolsVersion property, %(Project.ToolsVersion)
-					string tv = ToolsVersion;
-					if (String.IsNullOrEmpty (tv))
-						// metadata on the Project item
-						tv = project.GetMetadata ("ToolsVersion");
+                Directory.SetCurrentDirectory(Path.GetDirectoryName(filename));
+                outputs = new Hashtable();
 
-					if (!String.IsNullOrEmpty (tv) && Engine.GlobalEngine.Toolsets [tv] == null)
-						throw new UnknownToolsVersionException (tv);
+                try
+                {
+                    // Order of precedence:
+                    // ToolsVersion property, %(Project.ToolsVersion)
+                    string tv = ToolsVersion;
+                    if (String.IsNullOrEmpty(tv))
+                        // metadata on the Project item
+                        tv = project.GetMetadata("ToolsVersion");
 
-					result = BuildEngine2.BuildProjectFile (filename, targets, global_properties, outputs, tv);
-				} catch (InvalidProjectFileException e) {
-					Log.LogError ("Error building project {0}: {1}", filename, e.Message);
-					result = false;
-				}
+                    if (!String.IsNullOrEmpty(tv) && Engine.GlobalEngine.Toolsets[tv] == null)
+                        throw new UnknownToolsVersionException(tv);
 
-				if (!result)
-					all_result = false;
+                    result = BuildEngine2.BuildProjectFile(
+                        filename,
+                        targets,
+                        global_properties,
+                        outputs,
+                        tv
+                    );
+                }
+                catch (InvalidProjectFileException e)
+                {
+                    Log.LogError("Error building project {0}: {1}", filename, e.Message);
+                    result = false;
+                }
 
-				if (result) {
-					foreach (DictionaryEntry de in outputs) {
-						ITaskItem [] array = (ITaskItem []) de.Value;
-						foreach (ITaskItem item in array) {
-							// DONT share items!
-							ITaskItem new_item = new TaskItem (item);
+                if (!result)
+                    all_result = false;
 
-							// copy the metadata from original @project to here
-							// CopyMetadataTo does _not_ overwrite
-							project.CopyMetadataTo (new_item);
+                if (result)
+                {
+                    foreach (DictionaryEntry de in outputs)
+                    {
+                        ITaskItem[] array = (ITaskItem[])de.Value;
+                        foreach (ITaskItem item in array)
+                        {
+                            // DONT share items!
+                            ITaskItem new_item = new TaskItem(item);
 
-							outputItems.Add (new_item);
+                            // copy the metadata from original @project to here
+                            // CopyMetadataTo does _not_ overwrite
+                            project.CopyMetadataTo(new_item);
 
-							//FIXME: Correctly rebase output paths to be relative to the
-							//	 calling project
-							//if (rebaseOutputs)
-							//	File.Copy (item.ItemSpec, Path.Combine (currentDirectory, item.ItemSpec), true);
-						}
-					}
-				} else {
-					if (stopOnFirstFailure)
-						break;
-				}
+                            outputItems.Add(new_item);
 
-				Directory.SetCurrentDirectory (currentDirectory);
-			}
+                            //FIXME: Correctly rebase output paths to be relative to the
+                            //	 calling project
+                            //if (rebaseOutputs)
+                            //	File.Copy (item.ItemSpec, Path.Combine (currentDirectory, item.ItemSpec), true);
+                        }
+                    }
+                }
+                else
+                {
+                    if (stopOnFirstFailure)
+                        break;
+                }
 
-			if (all_result)
-				targetOutputs = outputItems.ToArray ();
+                Directory.SetCurrentDirectory(currentDirectory);
+            }
 
-			Directory.SetCurrentDirectory (currentDirectory);
-			return all_result;
-		}
+            if (all_result)
+                targetOutputs = outputItems.ToArray();
 
-		void ThrowIfInvalidToolsVersion (string toolsVersion)
-		{
-			if (!String.IsNullOrEmpty (toolsVersion) && Engine.GlobalEngine.Toolsets [toolsVersion] == null)
-				throw new UnknownToolsVersionException (toolsVersion);
-		}
+            Directory.SetCurrentDirectory(currentDirectory);
+            return all_result;
+        }
 
-		[Required]
-		public ITaskItem [] Projects {
-			get { return projects; }
-			set { projects = value; }
-		}
+        void ThrowIfInvalidToolsVersion(string toolsVersion)
+        {
+            if (
+                !String.IsNullOrEmpty(toolsVersion)
+                && Engine.GlobalEngine.Toolsets[toolsVersion] == null
+            )
+                throw new UnknownToolsVersionException(toolsVersion);
+        }
 
-		[MonoTODO]
-		public string [] Properties {
-			get { return properties; }
-			set { properties = value; }
-		}
+        [Required]
+        public ITaskItem[] Projects
+        {
+            get { return projects; }
+            set { projects = value; }
+        }
 
-		public bool RebaseOutputs {
-			get { return rebaseOutputs; }
-			set { rebaseOutputs = value; }
-		}
+        [MonoTODO]
+        public string[] Properties
+        {
+            get { return properties; }
+            set { properties = value; }
+        }
 
-		[MonoTODO]
-		public bool RunEachTargetSeparately {
-			get { return runEachTargetSeparately; }
-			set { runEachTargetSeparately = value; }
-		}
+        public bool RebaseOutputs
+        {
+            get { return rebaseOutputs; }
+            set { rebaseOutputs = value; }
+        }
 
-		public bool StopOnFirstFailure {
-			get { return stopOnFirstFailure; }
-			set { stopOnFirstFailure = value; }
-		}
+        [MonoTODO]
+        public bool RunEachTargetSeparately
+        {
+            get { return runEachTargetSeparately; }
+            set { runEachTargetSeparately = value; }
+        }
 
-		[Output]
-		public ITaskItem [] TargetOutputs {
-			get { return targetOutputs; }
-		}
+        public bool StopOnFirstFailure
+        {
+            get { return stopOnFirstFailure; }
+            set { stopOnFirstFailure = value; }
+        }
 
-		public string [] Targets {
-			get { return targets; }
-			set { targets = value; }
-		}
+        [Output]
+        public ITaskItem[] TargetOutputs
+        {
+            get { return targetOutputs; }
+        }
 
-		public bool BuildInParallel {
-			get { return buildInParallel; }
-			set { buildInParallel = value; }
-		}
+        public string[] Targets
+        {
+            get { return targets; }
+            set { targets = value; }
+        }
 
-		public string ToolsVersion {
-			get; set;
-		}
+        public bool BuildInParallel
+        {
+            get { return buildInParallel; }
+            set { buildInParallel = value; }
+        }
 
-		SortedDictionary<string, string> SplitPropertiesToDictionary ()
-		{
-			if (properties == null)
-				return null;
+        public string ToolsVersion { get; set; }
 
-			var global_properties = new SortedDictionary<string, string> ();
-			foreach (string kvpair in properties) {
-				if (String.IsNullOrEmpty (kvpair))
-					continue;
+        SortedDictionary<string, string> SplitPropertiesToDictionary()
+        {
+            if (properties == null)
+                return null;
 
-				string [] parts = kvpair.Trim ().Split (new char [] {'='}, 2);
-				if (parts.Length != 2) {
-					Log.LogWarning ("Invalid key/value pairs ({0}) in Properties, ignoring.", kvpair);
-					continue;
-				}
+            var global_properties = new SortedDictionary<string, string>();
+            foreach (string kvpair in properties)
+            {
+                if (String.IsNullOrEmpty(kvpair))
+                    continue;
 
-				global_properties.Add (parts [0], parts [1]);
-			}
+                string[] parts = kvpair.Trim().Split(new char[] { '=' }, 2);
+                if (parts.Length != 2)
+                {
+                    Log.LogWarning(
+                        "Invalid key/value pairs ({0}) in Properties, ignoring.",
+                        kvpair
+                    );
+                    continue;
+                }
 
-			return global_properties;
-		}
+                global_properties.Add(parts[0], parts[1]);
+            }
 
-	}
+            return global_properties;
+        }
+    }
 }
-

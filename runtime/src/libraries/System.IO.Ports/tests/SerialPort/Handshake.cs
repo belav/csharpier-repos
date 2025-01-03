@@ -17,26 +17,38 @@ namespace System.IO.Ports.Tests
 
         //The number of bytes to send when send XOn or XOff, the actual XOn/XOff char will be inserted somewhere
         //in the array of bytes
-        private static readonly int s_DEFAULT_BYTE_SIZE_XON_XOFF = TCSupport.MinimumBlockingByteCount * 2;
+        private static readonly int s_DEFAULT_BYTE_SIZE_XON_XOFF =
+            TCSupport.MinimumBlockingByteCount * 2;
 
         //The default time to wait after writing some bytes
         private const int DEFAULT_WAIT_AFTER_READ_OR_WRITE = 500;
 
-        private enum ThrowAt { Set, Open };
+        private enum ThrowAt
+        {
+            Set,
+            Open,
+        };
 
         #region Test Cases
         [KnownFailure]
         [ConditionalFact(nameof(HasNullModem))]
         public void Handshake_Default()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default Handshake");
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 com1.Open();
 
                 serPortProp.VerifyPropertiesAndPrint(com1);
@@ -62,7 +74,6 @@ namespace System.IO.Ports.Tests
             Debug.WriteLine("Verifying XOnXOff Handshake before open");
             VerifyHandshakeBeforeOpen((int)Handshake.XOnXOff);
         }
-
 
         [ConditionalFact(nameof(HasNullModem), nameof(HasHardwareFlowControl))]
         public void Handshake_RequestToSend_BeforeOpen()
@@ -142,7 +153,11 @@ namespace System.IO.Ports.Tests
         #region Verification for Test Cases
         private void VerifyException(int handshake, ThrowAt throwAt, Type expectedException)
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 VerifyExceptionAtOpen(com, handshake, throwAt, expectedException);
 
@@ -153,15 +168,22 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
-        private void VerifyExceptionAtOpen(SerialPort com, int handshake, ThrowAt throwAt, Type expectedException)
+        private void VerifyExceptionAtOpen(
+            SerialPort com,
+            int handshake,
+            ThrowAt throwAt,
+            Type expectedException
+        )
         {
             int origHandshake = (int)com.Handshake;
 
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             serPortProp.SetAllPropertiesToDefaults();
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             if (ThrowAt.Open == throwAt)
                 serPortProp.SetProperty("Handshake", (Handshake)handshake);
@@ -175,18 +197,28 @@ namespace System.IO.Ports.Tests
 
                 if (null != expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() to throw {0} and nothing was thrown", expectedException);
+                    Fail(
+                        "ERROR!!! Expected Open() to throw {0} and nothing was thrown",
+                        expectedException
+                    );
                 }
             }
             catch (Exception e)
             {
                 if (null == expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() NOT to throw an exception and {0} was thrown", e.GetType());
+                    Fail(
+                        "ERROR!!! Expected Open() NOT to throw an exception and {0} was thrown",
+                        e.GetType()
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() throw {0} and {1} was thrown", expectedException, e.GetType());
+                    Fail(
+                        "ERROR!!! Expected Open() throw {0} and {1} was thrown",
+                        expectedException,
+                        e.GetType()
+                    );
                 }
             }
             serPortProp.VerifyPropertiesAndPrint(com);
@@ -199,25 +231,38 @@ namespace System.IO.Ports.Tests
 
             com.Open();
             serPortProp.SetAllPropertiesToOpenDefaults();
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             try
             {
                 com.Handshake = (Handshake)handshake;
                 if (null != expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the Handshake after Open() to throw {0} and nothing was thrown", expectedException);
+                    Fail(
+                        "ERROR!!! Expected setting the Handshake after Open() to throw {0} and nothing was thrown",
+                        expectedException
+                    );
                 }
             }
             catch (Exception e)
             {
                 if (null == expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the Handshake after Open() NOT to throw an exception and {0} was thrown", e.GetType());
+                    Fail(
+                        "ERROR!!! Expected setting the Handshake after Open() NOT to throw an exception and {0} was thrown",
+                        e.GetType()
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the Handshake after Open() throw {0} and {1} was thrown", expectedException, e.GetType());
+                    Fail(
+                        "ERROR!!! Expected setting the Handshake after Open() throw {0} and {1} was thrown",
+                        expectedException,
+                        e.GetType()
+                    );
                 }
             }
             serPortProp.VerifyPropertiesAndPrint(com);
@@ -225,12 +270,19 @@ namespace System.IO.Ports.Tests
 
         private void VerifyHandshakeBeforeOpen(int handshake)
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 com1.Handshake = (Handshake)handshake;
                 com1.Open();
@@ -245,12 +297,19 @@ namespace System.IO.Ports.Tests
 
         private void VerifyHandshakeAfterOpen(int handshake)
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 com1.Open();
                 com1.Handshake = (Handshake)handshake;
@@ -265,7 +324,11 @@ namespace System.IO.Ports.Tests
 
         private void VerifyHandshake(SerialPort com1)
         {
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 int origWriteTimeout = com1.WriteTimeout;
                 int origReadTimeout = com1.ReadTimeout;
@@ -299,7 +362,11 @@ namespace System.IO.Ports.Tests
                 }
                 catch (TimeoutException)
                 {
-                    Fail("Err_103948aooh!!! TimeoutException thrown when CtsHolding={0} with Handshake={1}", com1.CtsHolding, com1.Handshake);
+                    Fail(
+                        "Err_103948aooh!!! TimeoutException thrown when CtsHolding={0} with Handshake={1}",
+                        com1.CtsHolding,
+                        com1.Handshake
+                    );
                 }
 
                 com2.RtsEnable = false;
@@ -307,16 +374,30 @@ namespace System.IO.Ports.Tests
                 try
                 {
                     com1.Write(new byte[s_DEFAULT_BYTE_SIZE], 0, s_DEFAULT_BYTE_SIZE);
-                    if (Handshake.RequestToSend == com1.Handshake || Handshake.RequestToSendXOnXOff == com1.Handshake)
+                    if (
+                        Handshake.RequestToSend == com1.Handshake
+                        || Handshake.RequestToSendXOnXOff == com1.Handshake
+                    )
                     {
-                        Fail("Err_15397lkjh!!! TimeoutException NOT thrown when CtsHolding={0} with Handshake={1}", com1.CtsHolding, com1.Handshake);
+                        Fail(
+                            "Err_15397lkjh!!! TimeoutException NOT thrown when CtsHolding={0} with Handshake={1}",
+                            com1.CtsHolding,
+                            com1.Handshake
+                        );
                     }
                 }
                 catch (TimeoutException)
                 {
-                    if (Handshake.RequestToSend != com1.Handshake && Handshake.RequestToSendXOnXOff != com1.Handshake)
+                    if (
+                        Handshake.RequestToSend != com1.Handshake
+                        && Handshake.RequestToSendXOnXOff != com1.Handshake
+                    )
                     {
-                        Fail("Err_1341pawh!!! TimeoutException thrown when CtsHolding={0} with Handshake={1}", com1.CtsHolding, com1.Handshake);
+                        Fail(
+                            "Err_1341pawh!!! TimeoutException thrown when CtsHolding={0} with Handshake={1}",
+                            com1.CtsHolding,
+                            com1.Handshake
+                        );
                     }
                 }
 
@@ -328,7 +409,11 @@ namespace System.IO.Ports.Tests
                 }
                 catch (TimeoutException)
                 {
-                    Fail("Err_143987aqaih!!! TimeoutException thrown when CtsHolding={0} with Handshake={1}", com1.CtsHolding, com1.Handshake);
+                    Fail(
+                        "Err_143987aqaih!!! TimeoutException thrown when CtsHolding={0} with Handshake={1}",
+                        com1.CtsHolding,
+                        com1.Handshake
+                    );
                 }
             }
             finally
@@ -337,7 +422,6 @@ namespace System.IO.Ports.Tests
                 com2.DiscardInBuffer();
             }
         }
-
 
         private void VerifyRTSXOnXOffHandshake(SerialPort com1, SerialPort com2)
         {
@@ -394,16 +478,30 @@ namespace System.IO.Ports.Tests
                 try
                 {
                     com1.Write(new byte[s_DEFAULT_BYTE_SIZE], 0, s_DEFAULT_BYTE_SIZE);
-                    if (Handshake.RequestToSend == com1.Handshake || Handshake.RequestToSendXOnXOff == com1.Handshake)
+                    if (
+                        Handshake.RequestToSend == com1.Handshake
+                        || Handshake.RequestToSendXOnXOff == com1.Handshake
+                    )
                     {
-                        Fail("Err_1253aasyo!!! TimeoutException NOT thrown after XOff and XOn char sent when CtsHolding={0} with Handshake={1}", com1.CtsHolding, com1.Handshake);
+                        Fail(
+                            "Err_1253aasyo!!! TimeoutException NOT thrown after XOff and XOn char sent when CtsHolding={0} with Handshake={1}",
+                            com1.CtsHolding,
+                            com1.Handshake
+                        );
                     }
                 }
                 catch (TimeoutException)
                 {
-                    if (Handshake.RequestToSend != com1.Handshake && Handshake.RequestToSendXOnXOff != com1.Handshake)
+                    if (
+                        Handshake.RequestToSend != com1.Handshake
+                        && Handshake.RequestToSendXOnXOff != com1.Handshake
+                    )
                     {
-                        Fail("Err_51390awi!!! TimeoutException thrown after XOff and XOn char sent when CtsHolding={0} with Handshake={1}", com1.CtsHolding, com1.Handshake);
+                        Fail(
+                            "Err_51390awi!!! TimeoutException thrown after XOff and XOn char sent when CtsHolding={0} with Handshake={1}",
+                            com1.CtsHolding,
+                            com1.Handshake
+                        );
                     }
                 }
 
@@ -425,16 +523,30 @@ namespace System.IO.Ports.Tests
                 try
                 {
                     com1.Write(new byte[s_DEFAULT_BYTE_SIZE], 0, s_DEFAULT_BYTE_SIZE);
-                    if (Handshake.XOnXOff == com1.Handshake || Handshake.RequestToSendXOnXOff == com1.Handshake)
+                    if (
+                        Handshake.XOnXOff == com1.Handshake
+                        || Handshake.RequestToSendXOnXOff == com1.Handshake
+                    )
                     {
-                        Fail("Err_2457awez!!! TimeoutException NOT thrown after RTSEnable set to false then true when CtsHolding={0} with Handshake={1}", com1.CtsHolding, com1.Handshake);
+                        Fail(
+                            "Err_2457awez!!! TimeoutException NOT thrown after RTSEnable set to false then true when CtsHolding={0} with Handshake={1}",
+                            com1.CtsHolding,
+                            com1.Handshake
+                        );
                     }
                 }
                 catch (TimeoutException)
                 {
-                    if (Handshake.XOnXOff != com1.Handshake && Handshake.RequestToSendXOnXOff != com1.Handshake)
+                    if (
+                        Handshake.XOnXOff != com1.Handshake
+                        && Handshake.RequestToSendXOnXOff != com1.Handshake
+                    )
                     {
-                        Fail("Err_3240aw4er!!! TimeoutException thrown RTSEnable set to false then true when CtsHolding={0} with Handshake={1}", com1.CtsHolding, com1.Handshake);
+                        Fail(
+                            "Err_3240aw4er!!! TimeoutException thrown RTSEnable set to false then true when CtsHolding={0} with Handshake={1}",
+                            com1.CtsHolding,
+                            com1.Handshake
+                        );
                     }
                 }
 
@@ -457,7 +569,6 @@ namespace System.IO.Ports.Tests
                 com2.DiscardInBuffer();
             }
         }
-
 
         private void VerifyXOnXOffHandshake(SerialPort com1, SerialPort com2)
         {
@@ -524,7 +635,11 @@ namespace System.IO.Ports.Tests
                 }
                 catch (TimeoutException)
                 {
-                    Fail("Err_2357pquaz!!! TimeoutException thrown after XOn char sent and CtsHolding={0} with Handshake={1}", com1.CtsHolding, com1.Handshake);
+                    Fail(
+                        "Err_2357pquaz!!! TimeoutException thrown after XOn char sent and CtsHolding={0} with Handshake={1}",
+                        com1.CtsHolding,
+                        com1.Handshake
+                    );
                 }
 
                 com2.Write(xmitXOffBytes, 0, xmitXOffBytes.Length);
@@ -544,16 +659,30 @@ namespace System.IO.Ports.Tests
                 {
                     com1.Write(new byte[s_DEFAULT_BYTE_SIZE], 0, s_DEFAULT_BYTE_SIZE);
 
-                    if (Handshake.XOnXOff == com1.Handshake || Handshake.RequestToSendXOnXOff == com1.Handshake)
+                    if (
+                        Handshake.XOnXOff == com1.Handshake
+                        || Handshake.RequestToSendXOnXOff == com1.Handshake
+                    )
                     {
-                        Fail("Err_1349znpq!!! TimeoutException NOT thrown after XOff char sent and CtsHolding={0} with Handshake={1}", com1.CtsHolding, com1.Handshake);
+                        Fail(
+                            "Err_1349znpq!!! TimeoutException NOT thrown after XOff char sent and CtsHolding={0} with Handshake={1}",
+                            com1.CtsHolding,
+                            com1.Handshake
+                        );
                     }
                 }
                 catch (TimeoutException)
                 {
-                    if (Handshake.XOnXOff != com1.Handshake && Handshake.RequestToSendXOnXOff != com1.Handshake)
+                    if (
+                        Handshake.XOnXOff != com1.Handshake
+                        && Handshake.RequestToSendXOnXOff != com1.Handshake
+                    )
                     {
-                        Fail("Err_2507pqzhn!!! TimeoutException thrown after XOff char sent and CtsHolding={0} with Handshake={1}", com1.CtsHolding, com1.Handshake);
+                        Fail(
+                            "Err_2507pqzhn!!! TimeoutException thrown after XOff char sent and CtsHolding={0} with Handshake={1}",
+                            com1.CtsHolding,
+                            com1.Handshake
+                        );
                     }
                 }
 
@@ -576,7 +705,11 @@ namespace System.IO.Ports.Tests
                 }
                 catch (TimeoutException)
                 {
-                    Fail("Err_2570aqpa!!! TimeoutException thrown after XOn char sent and CtsHolding={0} with Handshake={1}", com1.CtsHolding, com1.Handshake);
+                    Fail(
+                        "Err_2570aqpa!!! TimeoutException thrown after XOn char sent and CtsHolding={0} with Handshake={1}",
+                        com1.CtsHolding,
+                        com1.Handshake
+                    );
                 }
             }
             finally
@@ -585,7 +718,6 @@ namespace System.IO.Ports.Tests
                 com2.DiscardInBuffer();
             }
         }
-
 
         private void VerirfyRTSBufferFull(SerialPort com1, SerialPort com2)
         {
@@ -684,7 +816,7 @@ namespace System.IO.Ports.Tests
                 com1.BaudRate = com1BaudRate;
                 com2.BaudRate = com2BaudRate;
 
-                com1.DiscardInBuffer();//This can cuase the XOn character to be sent to com2.
+                com1.DiscardInBuffer(); //This can cuase the XOn character to be sent to com2.
                 Thread.Sleep(DEFAULT_WAIT_AFTER_READ_OR_WRITE);
                 com2.DiscardInBuffer();
             }
@@ -730,7 +862,10 @@ namespace System.IO.Ports.Tests
                 {
                     if (com2.BytesToRead != 0)
                     {
-                        Fail("Err_5258aieodpo Did not expect anything to be sent com2.BytesToRead={0}", com2.BytesToRead);
+                        Fail(
+                            "Err_5258aieodpo Did not expect anything to be sent com2.BytesToRead={0}",
+                            com2.BytesToRead
+                        );
                     }
                 }
 
@@ -746,7 +881,10 @@ namespace System.IO.Ports.Tests
                     }
                     else if (XOnOff.XOFF != (byteRead = com2.ReadByte()))
                     {
-                        Fail("Err_0188598aoepad Expected XOff to be sent actually sent={0}", byteRead);
+                        Fail(
+                            "Err_0188598aoepad Expected XOff to be sent actually sent={0}",
+                            byteRead
+                        );
                     }
                 }
                 else
@@ -806,7 +944,6 @@ namespace System.IO.Ports.Tests
                 com1.BaudRate = com1BaudRate;
                 com2.BaudRate = com2BaudRate;
 
-
                 com1.DiscardInBuffer();
                 com2.DiscardInBuffer();
 
@@ -816,12 +953,14 @@ namespace System.IO.Ports.Tests
 
         private bool IsRequestToSend(SerialPort com)
         {
-            return com.Handshake == Handshake.RequestToSend || com.Handshake == Handshake.RequestToSendXOnXOff;
+            return com.Handshake == Handshake.RequestToSend
+                || com.Handshake == Handshake.RequestToSendXOnXOff;
         }
 
         private bool IsXOnXOff(SerialPort com)
         {
-            return com.Handshake == Handshake.XOnXOff || com.Handshake == Handshake.RequestToSendXOnXOff;
+            return com.Handshake == Handshake.XOnXOff
+                || com.Handshake == Handshake.RequestToSendXOnXOff;
         }
         #endregion
     }

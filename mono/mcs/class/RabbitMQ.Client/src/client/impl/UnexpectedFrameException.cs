@@ -55,7 +55,6 @@
 //
 //---------------------------------------------------------------------------
 using System;
-
 // We use spec version 0-9 for common constants such as frame types,
 // error codes, and the frame end byte, since they don't vary *within
 // the versions we support*. Obviously we may need to revisit this if
@@ -71,7 +70,10 @@ namespace RabbitMQ.Client.Impl
     {
         public Frame m_frame;
 
-        public Frame Frame { get { return m_frame; } }
+        public Frame Frame
+        {
+            get { return m_frame; }
+        }
 
         public UnexpectedFrameException(Frame frame)
             : base("A frame of this type was not expected at this time")
@@ -79,6 +81,9 @@ namespace RabbitMQ.Client.Impl
             m_frame = frame;
         }
 
-        public override ushort ReplyCode { get { return CommonFraming.Constants.CommandInvalid; } }
+        public override ushort ReplyCode
+        {
+            get { return CommonFraming.Constants.CommandInvalid; }
+        }
     }
 }

@@ -14,5 +14,7 @@ internal readonly record struct SolutionSnapshotId([property: DataMember] int Id
 // brokered service implemented by the client
 internal interface ISolutionSnapshotProvider
 {
-    ValueTask<SolutionSnapshotId> RegisterSolutionSnapshotAsync(CancellationToken cancellationToken);
+    ValueTask<SolutionSnapshotId> RegisterSolutionSnapshotAsync(
+        CancellationToken cancellationToken
+    );
 }

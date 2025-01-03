@@ -6,8 +6,7 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data { // MDAC 59437
-
+namespace System.Data
+{ // MDAC 59437
     public delegate void FillErrorEventHandler(object sender, FillErrorEventArgs e);
-
 }

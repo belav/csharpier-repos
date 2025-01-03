@@ -1,11 +1,11 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 ** Class:  ConditionalWeakTable
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 ** Description: Compiler support for runtime-generated "object fields."
@@ -67,9 +67,8 @@ namespace System.Runtime.CompilerServices
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Versioning;
     using System.Runtime.InteropServices;
-
+    using System.Runtime.Versioning;
 
     #region ConditionalWeakTable
     [System.Runtime.InteropServices.ComVisible(false)]
@@ -77,7 +76,6 @@ namespace System.Runtime.CompilerServices
         where TKey : class
         where TValue : class
     {
-
         #region Constructors
         [System.Security.SecuritySafeCritical]
         public ConditionalWeakTable()
@@ -87,7 +85,7 @@ namespace System.Runtime.CompilerServices
             _freeList = -1;
             _lock = new Object();
 
-            Resize();   // Resize at once (so won't need "if initialized" checks all over)
+            Resize(); // Resize at once (so won't need "if initialized" checks all over)
         }
         #endregion
 
@@ -109,7 +107,7 @@ namespace System.Runtime.CompilerServices
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.key);
             }
-            lock(_lock)
+            lock (_lock)
             {
                 VerifyIntegrity();
                 return TryGetValueWorker(key, out value);
@@ -134,7 +132,7 @@ namespace System.Runtime.CompilerServices
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.key);
             }
 
-            lock(_lock)
+            lock (_lock)
             {
                 VerifyIntegrity();
                 _invalid = true;
@@ -149,7 +147,6 @@ namespace System.Runtime.CompilerServices
                 CreateEntry(key, value);
                 _invalid = false;
             }
-
         }
 
         //--------------------------------------------------------------------------------------------
@@ -169,7 +166,7 @@ namespace System.Runtime.CompilerServices
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.key);
             }
 
-            lock(_lock)
+            lock (_lock)
             {
                 VerifyIntegrity();
                 _invalid = true;
@@ -177,9 +174,16 @@ namespace System.Runtime.CompilerServices
                 int hashCode = RuntimeHelpers.GetHashCode(key) & Int32.MaxValue;
                 int bucket = hashCode % _buckets.Length;
                 int last = -1;
-                for (int entriesIndex = _buckets[bucket]; entriesIndex != -1; entriesIndex = _entries[entriesIndex].next)
+                for (
+                    int entriesIndex = _buckets[bucket];
+                    entriesIndex != -1;
+                    entriesIndex = _entries[entriesIndex].next
+                )
                 {
-                    if (_entries[entriesIndex].hashCode == hashCode && _entries[entriesIndex].depHnd.GetPrimary() == key)
+                    if (
+                        _entries[entriesIndex].hashCode == hashCode
+                        && _entries[entriesIndex].depHnd.GetPrimary() == key
+                    )
                     {
                         if (last == -1)
                         {
@@ -189,7 +193,7 @@ namespace System.Runtime.CompilerServices
                         {
                             _entries[last].next = _entries[entriesIndex].next;
                         }
-    
+
                         _entries[entriesIndex].depHnd.Free();
                         _entries[entriesIndex].next = _freeList;
 
@@ -197,7 +201,6 @@ namespace System.Runtime.CompilerServices
 
                         _invalid = false;
                         return true;
-                        
                     }
                     last = entriesIndex;
                 }
@@ -205,7 +208,6 @@ namespace System.Runtime.CompilerServices
                 return false;
             }
         }
-
 
         //--------------------------------------------------------------------------------------------
         // key:                 key of the value to find. Cannot be null.
@@ -218,7 +220,7 @@ namespace System.Runtime.CompilerServices
         // If multiple threads ---- to initialize the same key, the table may invoke createValueCallback
         // multiple times with the same key. Exactly one of these calls will "win the ----" and the returned
         // value of that call will be the one added to the table and returned by all the racing GetValue() calls.
-        // 
+        //
         // This rule permits the table to invoke createValueCallback outside the internal table lock
         // to prevent deadlocks.
         //--------------------------------------------------------------------------------------------
@@ -244,14 +246,14 @@ namespace System.Runtime.CompilerServices
             }
 
             // If we got here, the key is not currently in table. Invoke the callback (outside the lock)
-            // to generate the new value for the key. 
+            // to generate the new value for the key.
             TValue newValue = createValueCallback(key);
 
-            lock(_lock)
+            lock (_lock)
             {
                 VerifyIntegrity();
                 _invalid = true;
-                
+
                 // Now that we've retaken the lock, must recheck in case we lost a ---- to add the key.
                 if (TryGetValueWorker(key, out existingValue))
                 {
@@ -281,11 +283,11 @@ namespace System.Runtime.CompilerServices
         }
 
         public delegate TValue CreateValueCallback(TKey key);
-        
+
         #endregion
 
         #region internal members
-        
+
         //--------------------------------------------------------------------------------------------
         // Find a key that equals (value equality) with the given key - don't use in perf critical path
         // Note that it calls out to Object.Equals which may calls the override version of Equals
@@ -302,23 +304,29 @@ namespace System.Runtime.CompilerServices
             {
                 for (int bucket = 0; bucket < _buckets.Length; ++bucket)
                 {
-                    for (int entriesIndex = _buckets[bucket]; entriesIndex != -1; entriesIndex = _entries[entriesIndex].next)
+                    for (
+                        int entriesIndex = _buckets[bucket];
+                        entriesIndex != -1;
+                        entriesIndex = _entries[entriesIndex].next
+                    )
                     {
-                        object thisKey, thisValue;
-                        _entries[entriesIndex].depHnd.GetPrimaryAndSecondary(out thisKey, out thisValue);
+                        object thisKey,
+                            thisValue;
+                        _entries[entriesIndex]
+                            .depHnd.GetPrimaryAndSecondary(out thisKey, out thisValue);
                         if (Object.Equals(thisKey, key))
                         {
-                            value = (TValue) thisValue;
-                            return (TKey) thisKey;
+                            value = (TValue)thisValue;
+                            return (TKey)thisKey;
                         }
                     }
                 }
             }
-            
+
             value = default(TValue);
-            return null;        
+            return null;
         }
-        
+
         //--------------------------------------------------------------------------------------------
         // Returns a collection of keys - don't use in perf critical path
         //--------------------------------------------------------------------------------------------
@@ -332,9 +340,13 @@ namespace System.Runtime.CompilerServices
                 {
                     for (int bucket = 0; bucket < _buckets.Length; ++bucket)
                     {
-                        for (int entriesIndex = _buckets[bucket]; entriesIndex != -1; entriesIndex = _entries[entriesIndex].next)
+                        for (
+                            int entriesIndex = _buckets[bucket];
+                            entriesIndex != -1;
+                            entriesIndex = _entries[entriesIndex].next
+                        )
                         {
-                            TKey thisKey = (TKey) _entries[entriesIndex].depHnd.GetPrimary();
+                            TKey thisKey = (TKey)_entries[entriesIndex].depHnd.GetPrimary();
                             if (thisKey != null)
                             {
                                 list.Add(thisKey);
@@ -342,8 +354,8 @@ namespace System.Runtime.CompilerServices
                         }
                     }
                 }
-                
-                return list;        
+
+                return list;
             }
         }
 
@@ -360,13 +372,18 @@ namespace System.Runtime.CompilerServices
                 {
                     for (int bucket = 0; bucket < _buckets.Length; ++bucket)
                     {
-                        for (int entriesIndex = _buckets[bucket]; entriesIndex != -1; entriesIndex = _entries[entriesIndex].next)
+                        for (
+                            int entriesIndex = _buckets[bucket];
+                            entriesIndex != -1;
+                            entriesIndex = _entries[entriesIndex].next
+                        )
                         {
                             Object primary = null;
                             Object secondary = null;
 
-                            _entries[entriesIndex].depHnd.GetPrimaryAndSecondary(out primary, out secondary);
-                            
+                            _entries[entriesIndex]
+                                .depHnd.GetPrimaryAndSecondary(out primary, out secondary);
+
                             // Now that we've secured a strong reference to the secondary, must check the primary again
                             // to ensure it didn't expire (otherwise, we open a ---- where TryGetValue misreports an
                             // expired key as a live key with a null value.)
@@ -377,11 +394,11 @@ namespace System.Runtime.CompilerServices
                         }
                     }
                 }
-                
-                return list;        
+
+                return list;
             }
         }
-        
+
         //--------------------------------------------------------------------------------------------
         // Clear all the key/value pairs
         //--------------------------------------------------------------------------------------------
@@ -410,11 +427,11 @@ namespace System.Runtime.CompilerServices
                 }
 
                 _freeList = entriesIndex - 1;
-            }            
+            }
         }
 
         #endregion
-        
+
         #region Private Members
         [System.Security.SecurityCritical]
         //----------------------------------------------------------------------------------------
@@ -472,7 +489,6 @@ namespace System.Runtime.CompilerServices
             _entries[newEntry].next = _buckets[bucket];
 
             _buckets[bucket] = newEntry;
-
         }
 
         //----------------------------------------------------------------------------------------
@@ -495,7 +511,10 @@ namespace System.Runtime.CompilerServices
             int entriesIndex;
             for (entriesIndex = 0; entriesIndex < _entries.Length; entriesIndex++)
             {
-                if ( _entries[entriesIndex].depHnd.IsAllocated && _entries[entriesIndex].depHnd.GetPrimary() == null)
+                if (
+                    _entries[entriesIndex].depHnd.IsAllocated
+                    && _entries[entriesIndex].depHnd.GetPrimary() == null
+                )
                 {
                     hasExpiredEntries = true;
                     break;
@@ -504,9 +523,10 @@ namespace System.Runtime.CompilerServices
 
             if (!hasExpiredEntries)
             {
-                newSize = System.Collections.HashHelpers.GetPrime(_buckets.Length == 0 ? _initialCapacity + 1 : _buckets.Length * 2);
+                newSize = System.Collections.HashHelpers.GetPrime(
+                    _buckets.Length == 0 ? _initialCapacity + 1 : _buckets.Length * 2
+                );
             }
-
 
             // Reallocate both buckets and entries and rebuild the bucket and freelists from scratch.
             // This serves both to scrub entries with expired keys and to put the new entries in the proper bucket.
@@ -567,9 +587,16 @@ namespace System.Runtime.CompilerServices
         private int FindEntry(TKey key)
         {
             int hashCode = RuntimeHelpers.GetHashCode(key) & Int32.MaxValue;
-            for (int entriesIndex = _buckets[hashCode % _buckets.Length]; entriesIndex != -1; entriesIndex = _entries[entriesIndex].next)
+            for (
+                int entriesIndex = _buckets[hashCode % _buckets.Length];
+                entriesIndex != -1;
+                entriesIndex = _entries[entriesIndex].next
+            )
             {
-                if (_entries[entriesIndex].hashCode == hashCode && _entries[entriesIndex].depHnd.GetPrimary() == key)
+                if (
+                    _entries[entriesIndex].hashCode == hashCode
+                    && _entries[entriesIndex].depHnd.GetPrimary() == key
+                )
                 {
                     return entriesIndex;
                 }
@@ -585,7 +612,9 @@ namespace System.Runtime.CompilerServices
         {
             if (_invalid)
             {
-                throw new InvalidOperationException(Environment.GetResourceString("CollectionCorrupted"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("CollectionCorrupted")
+                );
             }
         }
 
@@ -595,7 +624,6 @@ namespace System.Runtime.CompilerServices
         [System.Security.SecuritySafeCritical]
         ~ConditionalWeakTable()
         {
-
             // We're just freeing per-appdomain unmanaged handles here. If we're already shutting down the AD,
             // don't bother.
             //
@@ -607,7 +635,7 @@ namespace System.Runtime.CompilerServices
 
             if (_lock != null)
             {
-                lock(_lock)
+                lock (_lock)
                 {
                     if (_invalid)
                     {
@@ -642,12 +670,12 @@ namespace System.Runtime.CompilerServices
         //    - Used with live key (linked into a bucket list where _buckets[hashCode % _buckets.Length] points to first entry)
         //         depHnd.IsAllocated == true, depHnd.GetPrimary() != null
         //         hashCode == RuntimeHelpers.GetHashCode(depHnd.GetPrimary()) & Int32.MaxValue
-        //         next links to next Entry in bucket. 
-        //                          
+        //         next links to next Entry in bucket.
+        //
         //    - Used with dead key (linked into a bucket list where _buckets[hashCode % _buckets.Length] points to first entry)
         //         depHnd.IsAllocated == true, depHnd.GetPrimary() == null
-        //         hashCode == <notcare> 
-        //         next links to next Entry in bucket. 
+        //         hashCode == <notcare>
+        //         next links to next Entry in bucket.
         //
         // The only difference between "used with live key" and "used with dead key" is that
         // depHnd.GetPrimary() returns null. The transition from "used with live key" to "used with dead key"
@@ -659,18 +687,19 @@ namespace System.Runtime.CompilerServices
         //--------------------------------------------------------------------------------------------
         private struct Entry
         {
-            public DependentHandle depHnd;      // Holds key and value using a weak reference for the key and a strong reference
-                                                // for the value that is traversed only if the key is reachable without going through the value.
-            public int             hashCode;    // Cached copy of key's hashcode
-            public int             next;        // Index of next entry, -1 if last
+            public DependentHandle depHnd; // Holds key and value using a weak reference for the key and a strong reference
+
+            // for the value that is traversed only if the key is reachable without going through the value.
+            public int hashCode; // Cached copy of key's hashcode
+            public int next; // Index of next entry, -1 if last
         }
 
-        private int[]     _buckets;             // _buckets[hashcode & _buckets.Length] contains index of first entry in bucket (-1 if empty)
-        private Entry[]   _entries;              
-        private int       _freeList;            // -1 = empty, else index of first unused Entry
+        private int[] _buckets; // _buckets[hashcode & _buckets.Length] contains index of first entry in bucket (-1 if empty)
+        private Entry[] _entries;
+        private int _freeList; // -1 = empty, else index of first unused Entry
         private const int _initialCapacity = 5;
-        private readonly Object _lock;          // this could be a ReaderWriterLock but CoreCLR does not support RWLocks.
-        private bool      _invalid;             // flag detects if OOM or other background exception threw us out of the lock.
+        private readonly Object _lock; // this could be a ReaderWriterLock but CoreCLR does not support RWLocks.
+        private bool _invalid; // flag detects if OOM or other background exception threw us out of the lock.
         #endregion
     }
     #endregion
@@ -694,7 +723,7 @@ namespace System.Runtime.CompilerServices
     //        (! Right now, we get this guarantee for free because (IntPtr)0 == NULL unmanaged handle.
     //         ! If that assertion ever becomes false, we'll have to add an _isAllocated field
     //         ! to compensate.)
-    //        
+    //
     //
     //    IsAllocated == true
     //        There's a handle allocated underneath. You must call Free() on this eventually
@@ -707,11 +736,11 @@ namespace System.Runtime.CompilerServices
     struct DependentHandle
     {
         #region Constructors
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecuritySafeCritical] // auto-generated
-        #else
+#else
         [System.Security.SecurityCritical]
-        #endif
+#endif
         public DependentHandle(Object primary, Object secondary)
         {
             IntPtr handle = (IntPtr)0;
@@ -724,20 +753,17 @@ namespace System.Runtime.CompilerServices
         #region Public Members
         public bool IsAllocated
         {
-            get
-            {
-                return _handle != (IntPtr)0;
-            }
+            get { return _handle != (IntPtr)0; }
         }
 
         // Getting the secondary object is more expensive than getting the first so
         // we provide a separate primary-only accessor for those times we only want the
         // primary.
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecuritySafeCritical] // auto-generated
-        #else
+#else
         [System.Security.SecurityCritical]
-        #endif
+#endif
         public Object GetPrimary()
         {
             Object primary;
@@ -745,11 +771,11 @@ namespace System.Runtime.CompilerServices
             return primary;
         }
 
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecuritySafeCritical] // auto-generated
-        #else
+#else
         [System.Security.SecurityCritical]
-        #endif
+#endif
         public void GetPrimaryAndSecondary(out Object primary, out Object secondary)
         {
             nGetPrimaryAndSecondary(_handle, out primary, out secondary);
@@ -766,7 +792,7 @@ namespace System.Runtime.CompilerServices
             {
                 IntPtr handle = _handle;
                 _handle = (IntPtr)0;
-                 nFree(handle);
+                nFree(handle);
             }
         }
         #endregion
@@ -775,7 +801,11 @@ namespace System.Runtime.CompilerServices
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.AppDomain)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void nInitialize(Object primary, Object secondary, out IntPtr dependentHandle);
+        private static extern void nInitialize(
+            Object primary,
+            Object secondary,
+            out IntPtr dependentHandle
+        );
 
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
@@ -785,7 +815,11 @@ namespace System.Runtime.CompilerServices
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void nGetPrimaryAndSecondary(IntPtr dependentHandle, out Object primary, out Object secondary);
+        private static extern void nGetPrimaryAndSecondary(
+            IntPtr dependentHandle,
+            out Object primary,
+            out Object secondary
+        );
 
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
@@ -796,8 +830,6 @@ namespace System.Runtime.CompilerServices
         #region Private Data Member
         private IntPtr _handle;
         #endregion
-
     } // struct DependentHandle
     #endregion
 }
-

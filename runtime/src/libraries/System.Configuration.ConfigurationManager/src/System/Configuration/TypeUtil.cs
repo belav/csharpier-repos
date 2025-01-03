@@ -8,7 +8,8 @@ namespace System.Configuration
 {
     internal static class TypeUtil
     {
-        internal const string ConfigurationManagerAssemblyName = "System.Configuration.ConfigurationManager";
+        internal const string ConfigurationManagerAssemblyName =
+            "System.Configuration.ConfigurationManager";
 
         // Deliberately not being explicit about the versions to make
         // things simpler for consumers of System.Configuration.
@@ -143,12 +144,20 @@ namespace System.Configuration
             if (type == null)
                 return null;
 
-            const BindingFlags BindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+            const BindingFlags BindingFlags =
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
 
-            ConstructorInfo ctor = type.GetConstructor(BindingFlags, null, CallingConventions.HasThis, Type.EmptyTypes,
-                null);
+            ConstructorInfo ctor = type.GetConstructor(
+                BindingFlags,
+                null,
+                CallingConventions.HasThis,
+                Type.EmptyTypes,
+                null
+            );
             if ((ctor == null) && throwOnError)
-                throw new TypeLoadException(SR.Format(SR.TypeNotPublic, type.AssemblyQualifiedName));
+                throw new TypeLoadException(
+                    SR.Format(SR.TypeNotPublic, type.AssemblyQualifiedName)
+                );
 
             return ctor;
         }
@@ -161,7 +170,12 @@ namespace System.Configuration
             if (throwOnError)
             {
                 throw new TypeLoadException(
-                    SR.Format(SR.Config_type_doesnt_inherit_from_type, type.FullName, baseType.FullName));
+                    SR.Format(
+                        SR.Config_type_doesnt_inherit_from_type,
+                        type.FullName,
+                        baseType.FullName
+                    )
+                );
             }
 
             return null;

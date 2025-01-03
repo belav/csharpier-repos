@@ -18,18 +18,18 @@ public class AmbiguousActionException : InvalidOperationException
     /// </summary>
     /// <param name="message">The exception message.</param>
     public AmbiguousActionException(string? message)
-        : base(message)
-    {
-    }
+        : base(message) { }
 
     /// <summary>
     /// Framework infrastructure. Do not call directly.
     /// </summary>
     /// <param name="info"></param>
     /// <param name="context"></param>
-    [Obsolete("This API supports obsolete formatter-based serialization. It should not be called or extended by application code.", DiagnosticId = "SYSLIB0051", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
+    [Obsolete(
+        "This API supports obsolete formatter-based serialization. It should not be called or extended by application code.",
+        DiagnosticId = "SYSLIB0051",
+        UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+    )]
     protected AmbiguousActionException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-    {
-    }
+        : base(info, context) { }
 }

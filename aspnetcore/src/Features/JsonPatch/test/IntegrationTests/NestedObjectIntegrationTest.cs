@@ -17,10 +17,7 @@ public class NestedObjectIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObjectWithNullCheck()
         {
-            SimpleObjectWithNullCheck = new SimpleObjectWithNullCheck()
-            {
-                StringProperty = "A"
-            }
+            SimpleObjectWithNullCheck = new SimpleObjectWithNullCheck() { StringProperty = "A" },
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObjectWithNullCheck>();
@@ -37,17 +34,16 @@ public class NestedObjectIntegrationTest
     public void ReplaceNestedObject_WithSerialization()
     {
         // Arrange
-        var targetObject = new SimpleObjectWithNestedObject()
-        {
-            IntegerValue = 1
-        };
+        var targetObject = new SimpleObjectWithNestedObject() { IntegerValue = 1 };
 
         var newNested = new NestedObject() { StringProperty = "B" };
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
         patchDocument.Replace(o => o.NestedObject, newNested);
 
         var serialized = JsonConvert.SerializeObject(patchDocument);
-        var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument<SimpleObjectWithNestedObject>>(serialized);
+        var deserialized = JsonConvert.DeserializeObject<
+            JsonPatchDocument<SimpleObjectWithNestedObject>
+        >(serialized);
 
         // Act
         deserialized.ApplyTo(targetObject);
@@ -62,7 +58,7 @@ public class NestedObjectIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            NestedObject = new NestedObject() { StringProperty = "A" }
+            NestedObject = new NestedObject() { StringProperty = "A" },
         };
 
         var patchDocument = new JsonPatchDocument<NestedObject>();
@@ -81,7 +77,7 @@ public class NestedObjectIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            NestedObject = new NestedObject() { StringProperty = "B" }
+            NestedObject = new NestedObject() { StringProperty = "B" },
         };
 
         var testNested = new NestedObject() { StringProperty = "B" };
@@ -101,10 +97,7 @@ public class NestedObjectIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObject = new SimpleObject()
-            {
-                StringProperty = "A"
-            }
+            SimpleObject = new SimpleObject() { StringProperty = "A" },
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -120,10 +113,7 @@ public class NestedObjectIntegrationTest
     [Fact]
     public void AddNewProperty_ToExpandoOject_InTypedObject()
     {
-        var targetObject = new NestedObject()
-        {
-            DynamicProperty = new ExpandoObject()
-        };
+        var targetObject = new NestedObject() { DynamicProperty = new ExpandoObject() };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Add("DynamicProperty/NewInt", 1);
@@ -139,10 +129,7 @@ public class NestedObjectIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObject = new SimpleObject()
-            {
-                StringProperty = "A"
-            }
+            SimpleObject = new SimpleObject() { StringProperty = "A" },
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -161,15 +148,14 @@ public class NestedObjectIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObject = new SimpleObject()
-            {
-                StringProperty = "A",
-                AnotherStringProperty = "B"
-            }
+            SimpleObject = new SimpleObject() { StringProperty = "A", AnotherStringProperty = "B" },
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
-        patchDocument.Copy(o => o.SimpleObject.StringProperty, o => o.SimpleObject.AnotherStringProperty);
+        patchDocument.Copy(
+            o => o.SimpleObject.StringProperty,
+            o => o.SimpleObject.AnotherStringProperty
+        );
 
         // Act
         patchDocument.ApplyTo(targetObject);
@@ -187,12 +173,15 @@ public class NestedObjectIntegrationTest
             SimpleObject = new SimpleObject()
             {
                 StringProperty = null,
-                AnotherStringProperty = "B"
-            }
+                AnotherStringProperty = "B",
+            },
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
-        patchDocument.Copy(o => o.SimpleObject.StringProperty, o => o.SimpleObject.AnotherStringProperty);
+        patchDocument.Copy(
+            o => o.SimpleObject.StringProperty,
+            o => o.SimpleObject.AnotherStringProperty
+        );
 
         // Act
         patchDocument.ApplyTo(targetObject);
@@ -207,16 +196,12 @@ public class NestedObjectIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObject = new SimpleObject()
-            {
-                StringProperty = "A",
-                AnotherStringProperty = "B"
-            },
+            SimpleObject = new SimpleObject() { StringProperty = "A", AnotherStringProperty = "B" },
             InheritedObject = new InheritedObject()
             {
                 StringProperty = "C",
-                AnotherStringProperty = "D"
-            }
+                AnotherStringProperty = "D",
+            },
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -230,7 +215,10 @@ public class NestedObjectIntegrationTest
         Assert.Equal("D", targetObject.SimpleObject.AnotherStringProperty);
         Assert.Equal("C", targetObject.InheritedObject.StringProperty);
         Assert.Equal("D", targetObject.InheritedObject.AnotherStringProperty);
-        Assert.NotSame(targetObject.SimpleObject.StringProperty, targetObject.InheritedObject.StringProperty);
+        Assert.NotSame(
+            targetObject.SimpleObject.StringProperty,
+            targetObject.InheritedObject.StringProperty
+        );
     }
 
     [Fact]
@@ -240,7 +228,7 @@ public class NestedObjectIntegrationTest
         var targetObject = new SimpleObjectWithNestedObject()
         {
             SimpleObject = new SimpleObject(),
-            InheritedObject = new InheritedObject()
+            InheritedObject = new InheritedObject(),
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -260,7 +248,7 @@ public class NestedObjectIntegrationTest
         var targetObject = new SimpleObjectWithNestedObject()
         {
             SimpleObject = new SimpleObject(),
-            InheritedObject = new InheritedObject()
+            InheritedObject = new InheritedObject(),
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -279,15 +267,14 @@ public class NestedObjectIntegrationTest
         // Arrange
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObject = new SimpleObject()
-            {
-                IntegerValue = 2,
-                AnotherIntegerValue = 3
-            }
+            SimpleObject = new SimpleObject() { IntegerValue = 2, AnotherIntegerValue = 3 },
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
-        patchDocument.Move(o => o.SimpleObject.IntegerValue, o => o.SimpleObject.AnotherIntegerValue);
+        patchDocument.Move(
+            o => o.SimpleObject.IntegerValue,
+            o => o.SimpleObject.AnotherIntegerValue
+        );
 
         // Act
         patchDocument.ApplyTo(targetObject);
@@ -301,20 +288,12 @@ public class NestedObjectIntegrationTest
     public void Move_KeepsObjectReference()
     {
         // Arrange
-        var sDto = new SimpleObject()
-        {
-            StringProperty = "A",
-            AnotherStringProperty = "B"
-        };
-        var iDto = new InheritedObject()
-        {
-            StringProperty = "C",
-            AnotherStringProperty = "D"
-        };
+        var sDto = new SimpleObject() { StringProperty = "A", AnotherStringProperty = "B" };
+        var iDto = new InheritedObject() { StringProperty = "C", AnotherStringProperty = "D" };
         var targetObject = new SimpleObjectWithNestedObject()
         {
             SimpleObject = sDto,
-            InheritedObject = iDto
+            InheritedObject = iDto,
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -336,11 +315,7 @@ public class NestedObjectIntegrationTest
 
         public string StringProperty
         {
-            get
-            {
-                return stringProperty;
-            }
-
+            get { return stringProperty; }
             set
             {
                 ArgumentNullThrowHelper.ThrowIfNull(value);

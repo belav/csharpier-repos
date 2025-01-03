@@ -7,34 +7,36 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities;
 using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
-using Microsoft.AspNetCore.InternalTesting;
 using Xunit;
-
 #if !IIS_FUNCTIONALS
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
+
 #endif
 
 [Collection(PublishedSitesCollection.Name)]
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class GlobalVersionTests : IISFunctionalTestBase
 {
-    public GlobalVersionTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public GlobalVersionTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     private const string _handlerVersion20 = "2.0.0";
     private const string _helloWorldRequest = "HelloWorld";
@@ -65,10 +67,14 @@ public class GlobalVersionTests : IISFunctionalTestBase
             var deploymentParameters = GetGlobalVersionBaseDeploymentParameters();
             CopyShimToOutput(deploymentParameters);
             deploymentParameters.PublishApplicationBeforeDeployment = true;
-            deploymentParameters.EnvironmentVariables["ASPNETCORE_MODULE_OUTOFPROCESS_HANDLER"] = temporaryFile;
+            deploymentParameters.EnvironmentVariables["ASPNETCORE_MODULE_OUTOFPROCESS_HANDLER"] =
+                temporaryFile;
 
             var deploymentResult = await DeployAsync(deploymentParameters);
-            var requestHandlerPath = Path.Combine(GetANCMRequestHandlerPath(deploymentResult, _handlerVersion20), "aspnetcorev2_outofprocess.dll");
+            var requestHandlerPath = Path.Combine(
+                GetANCMRequestHandlerPath(deploymentResult, _handlerVersion20),
+                "aspnetcorev2_outofprocess.dll"
+            );
 
             File.Delete(temporaryFile);
             File.Move(requestHandlerPath, temporaryFile);
@@ -219,15 +225,20 @@ public class GlobalVersionTests : IISFunctionalTestBase
 
     private string GetANCMRequestHandlerPath(IISDeploymentResult deploymentResult, string version)
     {
-        return Path.Combine(deploymentResult.ContentRoot,
+        return Path.Combine(
+            deploymentResult.ContentRoot,
             deploymentResult.DeploymentParameters.RuntimeArchitecture.ToString(),
-            version);
+            version
+        );
     }
 
     private void AssertLoadedVersion(string version)
     {
         StopServer();
-        Assert.Contains(TestSink.Writes, context => context.Message.Contains(version + @"\aspnetcorev2_outofprocess.dll"));
+        Assert.Contains(
+            TestSink.Writes,
+            context => context.Message.Contains(version + @"\aspnetcorev2_outofprocess.dll")
+        );
     }
 
     private static void CopyShimToOutput(IISDeploymentParameters parameters)
@@ -235,23 +246,35 @@ public class GlobalVersionTests : IISFunctionalTestBase
         parameters.AddServerConfigAction(
             (config, contentRoot) =>
             {
-                var moduleNodes = config.DescendantNodesAndSelf()
+                var moduleNodes = config
+                    .DescendantNodesAndSelf()
                     .OfType<XElement>()
                     .Where(element =>
-                        element.Name == "add" &&
-                        element.Attribute("name")?.Value.StartsWith("AspNetCoreModule", StringComparison.Ordinal) == true &&
-                        element.Attribute("image") != null);
+                        element.Name == "add"
+                        && element
+                            .Attribute("name")
+                            ?.Value.StartsWith("AspNetCoreModule", StringComparison.Ordinal) == true
+                        && element.Attribute("image") != null
+                    );
 
-                var sourceDirectory = new DirectoryInfo(Path.GetDirectoryName(moduleNodes.First().Attribute("image").Value));
-                var destinationDirectory = new DirectoryInfo(Path.Combine(contentRoot, sourceDirectory.Name));
+                var sourceDirectory = new DirectoryInfo(
+                    Path.GetDirectoryName(moduleNodes.First().Attribute("image").Value)
+                );
+                var destinationDirectory = new DirectoryInfo(
+                    Path.Combine(contentRoot, sourceDirectory.Name)
+                );
                 destinationDirectory.Create();
                 foreach (var element in moduleNodes)
                 {
                     var imageAttribute = element.Attribute("image");
-                    imageAttribute.Value = imageAttribute.Value.Replace(sourceDirectory.FullName, destinationDirectory.FullName);
+                    imageAttribute.Value = imageAttribute.Value.Replace(
+                        sourceDirectory.FullName,
+                        destinationDirectory.FullName
+                    );
                 }
                 CopyFiles(sourceDirectory, destinationDirectory);
-            });
+            }
+        );
     }
 
     private static void CopyFiles(DirectoryInfo source, DirectoryInfo target)

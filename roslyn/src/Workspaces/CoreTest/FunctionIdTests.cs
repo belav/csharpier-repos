@@ -22,7 +22,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 var value = (FunctionId)Enum.Parse(typeof(FunctionId), name);
                 if (map.TryGetValue(value, out var existingName))
                 {
-                    Assert.True(false, $"'{nameof(FunctionId)}.{name}' cannot have the same value as '{nameof(FunctionId)}.{existingName}'");
+                    Assert.True(
+                        false,
+                        $"'{nameof(FunctionId)}.{name}' cannot have the same value as '{nameof(FunctionId)}.{existingName}'"
+                    );
                 }
 
                 map.Add(value, name);

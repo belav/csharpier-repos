@@ -5,9 +5,7 @@ namespace System.Reflection.Emit
 {
     public abstract class ConstructorBuilder : ConstructorInfo
     {
-        protected ConstructorBuilder()
-        {
-        }
+        protected ConstructorBuilder() { }
 
         public bool InitLocals
         {
@@ -17,16 +15,21 @@ namespace System.Reflection.Emit
 
         protected abstract bool InitLocalsCore { get; set; }
 
-        public ParameterBuilder DefineParameter(int iSequence, ParameterAttributes attributes, string strParamName)
-            => DefineParameterCore(iSequence, attributes, strParamName);
+        public ParameterBuilder DefineParameter(
+            int iSequence,
+            ParameterAttributes attributes,
+            string strParamName
+        ) => DefineParameterCore(iSequence, attributes, strParamName);
 
-        protected abstract ParameterBuilder DefineParameterCore(int iSequence, ParameterAttributes attributes, string strParamName);
+        protected abstract ParameterBuilder DefineParameterCore(
+            int iSequence,
+            ParameterAttributes attributes,
+            string strParamName
+        );
 
-        public ILGenerator GetILGenerator()
-            => GetILGeneratorCore(64);
+        public ILGenerator GetILGenerator() => GetILGeneratorCore(64);
 
-        public ILGenerator GetILGenerator(int streamSize)
-            => GetILGeneratorCore(streamSize);
+        public ILGenerator GetILGenerator(int streamSize) => GetILGeneratorCore(streamSize);
 
         protected abstract ILGenerator GetILGeneratorCore(int streamSize);
 
@@ -38,7 +41,10 @@ namespace System.Reflection.Emit
             SetCustomAttributeCore(con, binaryAttribute);
         }
 
-        protected abstract void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute);
+        protected abstract void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        );
 
         public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
         {
@@ -47,8 +53,8 @@ namespace System.Reflection.Emit
             SetCustomAttributeCore(customBuilder.Ctor, customBuilder.Data);
         }
 
-        public void SetImplementationFlags(MethodImplAttributes attributes)
-            => SetImplementationFlagsCore(attributes);
+        public void SetImplementationFlags(MethodImplAttributes attributes) =>
+            SetImplementationFlagsCore(attributes);
 
         protected abstract void SetImplementationFlagsCore(MethodImplAttributes attributes);
     }

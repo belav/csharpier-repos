@@ -44,7 +44,8 @@ namespace System.Buffers
         /// <param name="start">The offset to the element which the returned memory starts at.</param>
         /// <param name="length">The element count in the memory, starting at element offset <paramref name="start"/>.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected Memory<T> CreateMemory(int start, int length) => new Memory<T>(this, start, length);
+        protected Memory<T> CreateMemory(int start, int length) =>
+            new Memory<T>(this, start, length);
 
         /// <summary>
         /// Returns an array segment.

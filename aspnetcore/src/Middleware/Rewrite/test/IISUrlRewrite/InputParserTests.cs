@@ -46,7 +46,11 @@ public class InputParserTests
     public void EvaluateBackReferenceRule(string testString, string expected)
     {
         var middle = new InputParser().ParseInputString(testString, UriMatchPart.Path);
-        var result = middle.Evaluate(CreateTestRewriteContext(), CreateTestRuleBackReferences(), CreateTestCondBackReferences());
+        var result = middle.Evaluate(
+            CreateTestRewriteContext(),
+            CreateTestRuleBackReferences(),
+            CreateTestCondBackReferences()
+        );
         Assert.Equal(expected, result);
     }
 
@@ -59,44 +63,72 @@ public class InputParserTests
     public void EvaluatToLowerRule(string testString, string expected)
     {
         var middle = new InputParser().ParseInputString(testString, UriMatchPart.Path);
-        var result = middle.Evaluate(CreateTestRewriteContext(), CreateTestRuleBackReferences(), CreateTestCondBackReferences());
+        var result = middle.Evaluate(
+            CreateTestRewriteContext(),
+            CreateTestRuleBackReferences(),
+            CreateTestCondBackReferences()
+        );
         Assert.Equal(expected, result);
     }
 
     [Theory]
     [InlineData("hey/{UrlEncode:<hey>}", "hey/%3Chey%3E")]
-    [InlineData("hey/?returnUrl={UrlEncode:http://domain.com?query=résumé}", "hey/?returnUrl=http%3A%2F%2Fdomain.com%3Fquery%3Dr%C3%A9sum%C3%A9")]
+    [InlineData(
+        "hey/?returnUrl={UrlEncode:http://domain.com?query=résumé}",
+        "hey/?returnUrl=http%3A%2F%2Fdomain.com%3Fquery%3Dr%C3%A9sum%C3%A9"
+    )]
     public void EvaluatUriEncodeRule(string testString, string expected)
     {
         var middle = new InputParser().ParseInputString(testString, UriMatchPart.Path);
-        var result = middle.Evaluate(CreateTestRewriteContext(), CreateTestRuleBackReferences(), CreateTestCondBackReferences());
+        var result = middle.Evaluate(
+            CreateTestRewriteContext(),
+            CreateTestRuleBackReferences(),
+            CreateTestCondBackReferences()
+        );
         Assert.Equal(expected, result);
     }
+
     [Theory]
-    [InlineData("hey/{UrlDecode:%3Chey%3E}","hey/<hey>")]
-    [InlineData("{UrlDecode:http%3A%2F%2Fdomain.com%3Fquery%3Dr%C3%A9sum%C3%A9}", "http://domain.com?query=résumé")]
+    [InlineData("hey/{UrlDecode:%3Chey%3E}", "hey/<hey>")]
+    [InlineData(
+        "{UrlDecode:http%3A%2F%2Fdomain.com%3Fquery%3Dr%C3%A9sum%C3%A9}",
+        "http://domain.com?query=résumé"
+    )]
     public void EvaluateUriDecodeRule(string testString, string expected)
     {
         var middle = new InputParser().ParseInputString(testString, UriMatchPart.Path);
-        var result = middle.Evaluate(CreateTestRewriteContext(), CreateTestRuleBackReferences(), CreateTestCondBackReferences());
+        var result = middle.Evaluate(
+            CreateTestRewriteContext(),
+            CreateTestRuleBackReferences(),
+            CreateTestCondBackReferences()
+        );
         Assert.Equal(expected, result);
     }
 
     [Theory]
-    [InlineData("hey/{HTTP_URL}","hey/TEST_VARIABLE")]
-    public void ParseString_WithContextContainingServerVariableString_ShouldReturnResultContainingValueOfVariable(string testString, string expected)
+    [InlineData("hey/{HTTP_URL}", "hey/TEST_VARIABLE")]
+    public void ParseString_WithContextContainingServerVariableString_ShouldReturnResultContainingValueOfVariable(
+        string testString,
+        string expected
+    )
     {
-        var variablesDict = new Dictionary<string, string>()
-        {
-            { "HTTP_URL", "TEST_VARIABLE"}
-        };
+        var variablesDict = new Dictionary<string, string>() { { "HTTP_URL", "TEST_VARIABLE" } };
         var features = new FeatureCollection(1);
         features.Set<IServerVariablesFeature>(new TestServerVariablesFeature(variablesDict));
 
-        var rewriteContext= new RewriteContext { HttpContext = new DefaultHttpContext(features), StaticFileProvider = null, Logger = NullLogger.Instance };
+        var rewriteContext = new RewriteContext
+        {
+            HttpContext = new DefaultHttpContext(features),
+            StaticFileProvider = null,
+            Logger = NullLogger.Instance,
+        };
 
         var middle = new InputParser().ParseInputString(testString, UriMatchPart.Path);
-        var result = middle.Evaluate(rewriteContext, CreateTestRuleBackReferences(), CreateTestCondBackReferences());
+        var result = middle.Evaluate(
+            rewriteContext,
+            CreateTestRuleBackReferences(),
+            CreateTestCondBackReferences()
+        );
 
         Assert.Equal(expected, result);
     }
@@ -115,13 +147,17 @@ public class InputParserTests
     [InlineData("{HTTPS")]
     public void FormatExceptionsOnBadSyntax(string testString)
     {
-        Assert.Throws<FormatException>(() => new InputParser().ParseInputString(testString, UriMatchPart.Path));
+        Assert.Throws<FormatException>(
+            () => new InputParser().ParseInputString(testString, UriMatchPart.Path)
+        );
     }
 
     [Fact]
     public void Should_throw_FormatException_if_no_rewrite_maps_are_defined()
     {
-        Assert.Throws<FormatException>(() => new InputParser(null, false).ParseInputString("{apiMap:{R:1}}", UriMatchPart.Path));
+        Assert.Throws<FormatException>(
+            () => new InputParser(null, false).ParseInputString("{apiMap:{R:1}}", UriMatchPart.Path)
+        );
     }
 
     [Fact]
@@ -131,7 +167,13 @@ public class InputParserTests
         const string undefinedMapName = "apiMap";
         var map = new IISRewriteMap(definedMapName);
         var maps = new IISRewriteMapCollection { map };
-        Assert.Throws<FormatException>(() => new InputParser(maps, false).ParseInputString($"{{{undefinedMapName}:{{R:1}}}}", UriMatchPart.Path));
+        Assert.Throws<FormatException>(
+            () =>
+                new InputParser(maps, false).ParseInputString(
+                    $"{{{undefinedMapName}:{{R:1}}}}",
+                    UriMatchPart.Path
+                )
+        );
     }
 
     [Fact]
@@ -152,14 +194,23 @@ public class InputParserTests
         var rewriteMapSegment = segment as RewriteMapSegment;
         Assert.NotNull(rewriteMapSegment);
 
-        var result = rewriteMapSegment.Evaluate(CreateTestRewriteContext(), CreateRewriteMapRuleMatch(expectedKey).BackReferences, CreateRewriteMapConditionMatch(inputString).BackReferences);
+        var result = rewriteMapSegment.Evaluate(
+            CreateTestRewriteContext(),
+            CreateRewriteMapRuleMatch(expectedKey).BackReferences,
+            CreateRewriteMapConditionMatch(inputString).BackReferences
+        );
         Assert.Equal(expectedValue, result);
     }
 
     private static RewriteContext CreateTestRewriteContext()
     {
         var context = new DefaultHttpContext();
-        return new RewriteContext { HttpContext = context, StaticFileProvider = null, Logger = NullLogger.Instance };
+        return new RewriteContext
+        {
+            HttpContext = context,
+            StaticFileProvider = null,
+            Logger = NullLogger.Instance,
+        };
     }
 
     private static BackReferenceCollection CreateTestRuleBackReferences()

@@ -10,7 +10,12 @@ namespace System.DirectoryServices.Protocols.Tests
         [Theory]
         [InlineData("", null, false, false)]
         [InlineData("Type", new byte[] { 1, 2, 3 }, true, true)]
-        public void Ctor_Type_Value_IsCritical_ServerSide(string type, byte[] value, bool isCritical, bool serverSide)
+        public void Ctor_Type_Value_IsCritical_ServerSide(
+            string type,
+            byte[] value,
+            bool isCritical,
+            bool serverSide
+        )
         {
             var control = new DirectoryControl(type, value, isCritical, serverSide);
             Assert.Equal(type, control.Type);
@@ -25,7 +30,10 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new DirectoryControl(null, new byte[0], false, false));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new DirectoryControl(null, new byte[0], false, false)
+            );
         }
 
         [Fact]

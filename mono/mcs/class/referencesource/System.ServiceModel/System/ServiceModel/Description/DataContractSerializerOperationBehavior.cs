@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Description
 {
     using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
-    using System.IO;
-    using System.ServiceModel;
-    using System.Runtime.Serialization;
-    using System.Collections.Generic;
     using System.Xml;
 
     public class DataContractSerializerOperationBehavior : IOperationBehavior, IWsdlExportExtension
@@ -19,7 +19,8 @@ namespace System.ServiceModel.Description
 
         OperationDescription operation;
         DataContractFormatAttribute dataContractFormatAttribute;
-        internal bool ignoreExtensionDataObject = DataContractSerializerDefaults.IgnoreExtensionDataObject;
+        internal bool ignoreExtensionDataObject =
+            DataContractSerializerDefaults.IgnoreExtensionDataObject;
         bool ignoreExtensionDataObjectSetExplicit;
         internal int maxItemsInObjectGraph = DataContractSerializerDefaults.MaxItemsInObjectGraph;
         bool maxItemsInObjectGraphSetExplicit;
@@ -32,18 +33,23 @@ namespace System.ServiceModel.Description
         }
 
         public DataContractSerializerOperationBehavior(OperationDescription operation)
-            : this(operation, null)
-        {
-        }
+            : this(operation, null) { }
 
-        public DataContractSerializerOperationBehavior(OperationDescription operation, DataContractFormatAttribute dataContractFormatAttribute)
+        public DataContractSerializerOperationBehavior(
+            OperationDescription operation,
+            DataContractFormatAttribute dataContractFormatAttribute
+        )
         {
-            this.dataContractFormatAttribute = dataContractFormatAttribute ?? new DataContractFormatAttribute();
+            this.dataContractFormatAttribute =
+                dataContractFormatAttribute ?? new DataContractFormatAttribute();
             this.operation = operation;
         }
 
-        internal DataContractSerializerOperationBehavior(OperationDescription operation,
-            DataContractFormatAttribute dataContractFormatAttribute, bool builtInOperationBehavior)
+        internal DataContractSerializerOperationBehavior(
+            OperationDescription operation,
+            DataContractFormatAttribute dataContractFormatAttribute,
+            bool builtInOperationBehavior
+        )
             : this(operation, dataContractFormatAttribute)
         {
             this.builtInOperationBehavior = builtInOperationBehavior;
@@ -54,11 +60,11 @@ namespace System.ServiceModel.Description
             get { return this.builtInOperationBehavior; }
         }
 
-        public int MaxItemsInObjectGraph 
+        public int MaxItemsInObjectGraph
         {
             get { return maxItemsInObjectGraph; }
-            set 
-            { 
+            set
+            {
                 maxItemsInObjectGraph = value;
                 maxItemsInObjectGraphSetExplicit = true;
             }
@@ -70,11 +76,11 @@ namespace System.ServiceModel.Description
             set { maxItemsInObjectGraphSetExplicit = value; }
         }
 
-        public bool IgnoreExtensionDataObject 
+        public bool IgnoreExtensionDataObject
         {
             get { return ignoreExtensionDataObject; }
-            set 
-            { 
+            set
+            {
                 ignoreExtensionDataObject = value;
                 ignoreExtensionDataObjectSetExplicit = true;
             }
@@ -86,7 +92,7 @@ namespace System.ServiceModel.Description
             set { ignoreExtensionDataObjectSetExplicit = value; }
         }
 
-        public IDataContractSurrogate DataContractSurrogate 
+        public IDataContractSurrogate DataContractSurrogate
         {
             get { return dataContractSurrogate; }
             set { dataContractSurrogate = value; }
@@ -98,17 +104,54 @@ namespace System.ServiceModel.Description
             set { dataContractResolver = value; }
         }
 
-        public virtual XmlObjectSerializer CreateSerializer(Type type, string name, string ns, IList<Type> knownTypes)
+        public virtual XmlObjectSerializer CreateSerializer(
+            Type type,
+            string name,
+            string ns,
+            IList<Type> knownTypes
+        )
         {
-            return new DataContractSerializer(type, name, ns, knownTypes, MaxItemsInObjectGraph, IgnoreExtensionDataObject, false /*preserveObjectReferences*/, DataContractSurrogate, DataContractResolver);
+            return new DataContractSerializer(
+                type,
+                name,
+                ns,
+                knownTypes,
+                MaxItemsInObjectGraph,
+                IgnoreExtensionDataObject,
+                false /*preserveObjectReferences*/
+                ,
+                DataContractSurrogate,
+                DataContractResolver
+            );
         }
 
-        public virtual XmlObjectSerializer CreateSerializer(Type type, XmlDictionaryString name, XmlDictionaryString ns, IList<Type> knownTypes)
+        public virtual XmlObjectSerializer CreateSerializer(
+            Type type,
+            XmlDictionaryString name,
+            XmlDictionaryString ns,
+            IList<Type> knownTypes
+        )
         {
-            return new DataContractSerializer(type, name, ns, knownTypes, MaxItemsInObjectGraph, IgnoreExtensionDataObject, false /*preserveObjectReferences*/, DataContractSurrogate, DataContractResolver);
+            return new DataContractSerializer(
+                type,
+                name,
+                ns,
+                knownTypes,
+                MaxItemsInObjectGraph,
+                IgnoreExtensionDataObject,
+                false /*preserveObjectReferences*/
+                ,
+                DataContractSurrogate,
+                DataContractResolver
+            );
         }
 
-        internal object GetFormatter(OperationDescription operation, out bool formatRequest, out bool formatReply, bool isProxy)
+        internal object GetFormatter(
+            OperationDescription operation,
+            out bool formatRequest,
+            out bool formatReply,
+            bool isProxy
+        )
         {
             MessageDescription request = operation.Messages[0];
             MessageDescription response = null;
@@ -121,24 +164,32 @@ namespace System.ServiceModel.Description
             if (formatRequest || formatReply)
             {
                 if (PrimitiveOperationFormatter.IsContractSupported(operation))
-                    return new PrimitiveOperationFormatter(operation, dataContractFormatAttribute.Style == OperationFormatStyle.Rpc);
+                    return new PrimitiveOperationFormatter(
+                        operation,
+                        dataContractFormatAttribute.Style == OperationFormatStyle.Rpc
+                    );
                 else
-                    return new DataContractSerializerOperationFormatter(operation, dataContractFormatAttribute, this);
+                    return new DataContractSerializerOperationFormatter(
+                        operation,
+                        dataContractFormatAttribute,
+                        this
+                    );
             }
 
             return null;
         }
 
+        void IOperationBehavior.Validate(OperationDescription description) { }
 
-        void IOperationBehavior.Validate(OperationDescription description)
-        {
-        }
+        void IOperationBehavior.AddBindingParameters(
+            OperationDescription description,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IOperationBehavior.AddBindingParameters(OperationDescription description, BindingParameterCollection parameters)
-        {
-        }
-
-        void IOperationBehavior.ApplyDispatchBehavior(OperationDescription description, DispatchOperation dispatch)
+        void IOperationBehavior.ApplyDispatchBehavior(
+            OperationDescription description,
+            DispatchOperation dispatch
+        )
         {
             if (description == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("description");
@@ -151,12 +202,20 @@ namespace System.ServiceModel.Description
 
             bool formatRequest;
             bool formatReply;
-            dispatch.Formatter = (IDispatchMessageFormatter)GetFormatter(description, out formatRequest, out formatReply, false);
+            dispatch.Formatter = (IDispatchMessageFormatter)GetFormatter(
+                description,
+                out formatRequest,
+                out formatReply,
+                false
+            );
             dispatch.DeserializeRequest = formatRequest;
             dispatch.SerializeReply = formatReply;
         }
 
-        void IOperationBehavior.ApplyClientBehavior(OperationDescription description, ClientOperation proxy)
+        void IOperationBehavior.ApplyClientBehavior(
+            OperationDescription description,
+            ClientOperation proxy
+        )
         {
             if (description == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("description");
@@ -169,30 +228,50 @@ namespace System.ServiceModel.Description
 
             bool formatRequest;
             bool formatReply;
-            proxy.Formatter = (IClientMessageFormatter)GetFormatter(description, out formatRequest, out formatReply, true);
+            proxy.Formatter = (IClientMessageFormatter)GetFormatter(
+                description,
+                out formatRequest,
+                out formatReply,
+                true
+            );
             proxy.SerializeRequest = formatRequest;
             proxy.DeserializeReply = formatReply;
         }
 
-        void IWsdlExportExtension.ExportEndpoint(WsdlExporter exporter, WsdlEndpointConversionContext endpointContext)
+        void IWsdlExportExtension.ExportEndpoint(
+            WsdlExporter exporter,
+            WsdlEndpointConversionContext endpointContext
+        )
         {
             if (exporter == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("exporter");
             if (endpointContext == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointContext");
 
-            MessageContractExporter.ExportMessageBinding(exporter, endpointContext, typeof(DataContractSerializerMessageContractExporter), this.operation);
+            MessageContractExporter.ExportMessageBinding(
+                exporter,
+                endpointContext,
+                typeof(DataContractSerializerMessageContractExporter),
+                this.operation
+            );
         }
 
-        void IWsdlExportExtension.ExportContract(WsdlExporter exporter, WsdlContractConversionContext contractContext)
+        void IWsdlExportExtension.ExportContract(
+            WsdlExporter exporter,
+            WsdlContractConversionContext contractContext
+        )
         {
             if (exporter == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("exporter");
             if (contractContext == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contractContext");
 
-            new DataContractSerializerMessageContractExporter(exporter, contractContext, this.operation, this).ExportMessageContract();
+            new DataContractSerializerMessageContractExporter(
+                exporter,
+                contractContext,
+                this.operation,
+                this
+            ).ExportMessageContract();
         }
-
     }
 }

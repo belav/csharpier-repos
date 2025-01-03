@@ -9,7 +9,11 @@ namespace Microsoft.AspNetCore.Internal;
 
 internal static class ExecuteHandlerHelper
 {
-    public static Task ExecuteReturnAsync(object obj, HttpContext httpContext, JsonTypeInfo<object> jsonTypeInfo)
+    public static Task ExecuteReturnAsync(
+        object obj,
+        HttpContext httpContext,
+        JsonTypeInfo<object> jsonTypeInfo
+    )
     {
         // Terminal built ins
         if (obj is IResult result)
@@ -33,10 +37,21 @@ internal static class ExecuteHandlerHelper
         httpContext.Response.ContentType ??= "text/plain; charset=utf-8";
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2026:RequiresUnreferencedCode",
-        Justification = "The 'JsonSerializer.IsReflectionEnabledByDefault' feature switch, which is set to false by default for trimmed ASP.NET apps, ensures the JsonSerializer doesn't use Reflection.")]
-    [UnconditionalSuppressMessage("AOT", "IL3050:RequiresDynamicCode", Justification = "See above.")]
-    public static Task WriteJsonResponseAsync<T>(HttpResponse response, T? value, JsonTypeInfo<T> jsonTypeInfo)
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026:RequiresUnreferencedCode",
+        Justification = "The 'JsonSerializer.IsReflectionEnabledByDefault' feature switch, which is set to false by default for trimmed ASP.NET apps, ensures the JsonSerializer doesn't use Reflection."
+    )]
+    [UnconditionalSuppressMessage(
+        "AOT",
+        "IL3050:RequiresDynamicCode",
+        Justification = "See above."
+    )]
+    public static Task WriteJsonResponseAsync<T>(
+        HttpResponse response,
+        T? value,
+        JsonTypeInfo<T> jsonTypeInfo
+    )
     {
         var runtimeType = value?.GetType();
 
@@ -44,7 +59,12 @@ internal static class ExecuteHandlerHelper
         {
             // In this case the polymorphism is not
             // relevant for us and will be handled by STJ, if needed.
-            return HttpResponseJsonExtensions.WriteAsJsonAsync(response, value!, jsonTypeInfo, default);
+            return HttpResponseJsonExtensions.WriteAsJsonAsync(
+                response,
+                value!,
+                jsonTypeInfo,
+                default
+            );
         }
 
         // Since we don't know the type's polymorphic characteristics

@@ -138,7 +138,8 @@ public sealed class Virtualize<TItem> : ComponentBase, IVirtualizeJsCallbacks, I
         if (ItemSize <= 0)
         {
             throw new InvalidOperationException(
-                $"{GetType()} requires a positive value for parameter '{nameof(ItemSize)}'.");
+                $"{GetType()} requires a positive value for parameter '{nameof(ItemSize)}'."
+            );
         }
 
         if (_itemSize <= 0)
@@ -151,8 +152,9 @@ public sealed class Virtualize<TItem> : ComponentBase, IVirtualizeJsCallbacks, I
             if (Items != null)
             {
                 throw new InvalidOperationException(
-                    $"{GetType()} can only accept one item source from its parameters. " +
-                    $"Do not supply both '{nameof(Items)}' and '{nameof(ItemsProvider)}'.");
+                    $"{GetType()} can only accept one item source from its parameters. "
+                        + $"Do not supply both '{nameof(Items)}' and '{nameof(ItemsProvider)}'."
+                );
             }
 
             _itemsProvider = ItemsProvider;
@@ -172,8 +174,9 @@ public sealed class Virtualize<TItem> : ComponentBase, IVirtualizeJsCallbacks, I
         else
         {
             throw new InvalidOperationException(
-                $"{GetType()} requires either the '{nameof(Items)}' or '{nameof(ItemsProvider)}' parameters to be specified " +
-                $"and non-null.");
+                $"{GetType()} requires either the '{nameof(Items)}' or '{nameof(ItemsProvider)}' parameters to be specified "
+                    + $"and non-null."
+            );
         }
 
         _itemTemplate = ItemContent ?? ChildContent;
@@ -218,7 +221,11 @@ public sealed class Virtualize<TItem> : ComponentBase, IVirtualizeJsCallbacks, I
         {
             // This is a rare case where it's valid for the sequence number to be programmatically incremented.
             // This is only true because we know for certain that no other content will be alongside it.
-            builder.AddContent(renderIndex, _placeholder, new PlaceholderContext(renderIndex, _itemSize));
+            builder.AddContent(
+                renderIndex,
+                _placeholder,
+                new PlaceholderContext(renderIndex, _itemSize)
+            );
         }
 
         builder.CloseRegion();
@@ -249,14 +256,21 @@ public sealed class Virtualize<TItem> : ComponentBase, IVirtualizeJsCallbacks, I
             builder.CloseRegion();
         }
 
-        _lastRenderedPlaceholderCount = Math.Max(0, lastItemIndex - _itemsBefore - _lastRenderedItemCount);
+        _lastRenderedPlaceholderCount = Math.Max(
+            0,
+            lastItemIndex - _itemsBefore - _lastRenderedItemCount
+        );
 
         builder.OpenRegion(6);
 
         // Render the placeholders after the loaded items.
         for (; renderIndex < lastItemIndex; renderIndex++)
         {
-            builder.AddContent(renderIndex, _placeholder, new PlaceholderContext(renderIndex, _itemSize));
+            builder.AddContent(
+                renderIndex,
+                _placeholder,
+                new PlaceholderContext(renderIndex, _itemSize)
+            );
         }
 
         builder.CloseRegion();
@@ -270,12 +284,22 @@ public sealed class Virtualize<TItem> : ComponentBase, IVirtualizeJsCallbacks, I
         builder.CloseElement();
     }
 
-    private string GetSpacerStyle(int itemsInSpacer)
-        => $"height: {(itemsInSpacer * _itemSize).ToString(CultureInfo.InvariantCulture)}px; flex-shrink: 0;";
+    private string GetSpacerStyle(int itemsInSpacer) =>
+        $"height: {(itemsInSpacer * _itemSize).ToString(CultureInfo.InvariantCulture)}px; flex-shrink: 0;";
 
-    void IVirtualizeJsCallbacks.OnBeforeSpacerVisible(float spacerSize, float spacerSeparation, float containerSize)
+    void IVirtualizeJsCallbacks.OnBeforeSpacerVisible(
+        float spacerSize,
+        float spacerSeparation,
+        float containerSize
+    )
     {
-        CalcualteItemDistribution(spacerSize, spacerSeparation, containerSize, out var itemsBefore, out var visibleItemCapacity);
+        CalcualteItemDistribution(
+            spacerSize,
+            spacerSeparation,
+            containerSize,
+            out var itemsBefore,
+            out var visibleItemCapacity
+        );
 
         // Since we know the before spacer is now visible, we absolutely have to slide the window up
         // by at least one element. If we're not doing that, the previous item size info we had must
@@ -289,9 +313,19 @@ public sealed class Virtualize<TItem> : ComponentBase, IVirtualizeJsCallbacks, I
         UpdateItemDistribution(itemsBefore, visibleItemCapacity);
     }
 
-    void IVirtualizeJsCallbacks.OnAfterSpacerVisible(float spacerSize, float spacerSeparation, float containerSize)
+    void IVirtualizeJsCallbacks.OnAfterSpacerVisible(
+        float spacerSize,
+        float spacerSeparation,
+        float containerSize
+    )
     {
-        CalcualteItemDistribution(spacerSize, spacerSeparation, containerSize, out var itemsAfter, out var visibleItemCapacity);
+        CalcualteItemDistribution(
+            spacerSize,
+            spacerSeparation,
+            containerSize,
+            out var itemsAfter,
+            out var visibleItemCapacity
+        );
 
         var itemsBefore = Math.Max(0, _itemCount - itemsAfter - visibleItemCapacity);
 
@@ -312,11 +346,14 @@ public sealed class Virtualize<TItem> : ComponentBase, IVirtualizeJsCallbacks, I
         float spacerSeparation,
         float containerSize,
         out int itemsInSpacer,
-        out int visibleItemCapacity)
+        out int visibleItemCapacity
+    )
     {
         if (_lastRenderedItemCount > 0)
         {
-            _itemSize = (spacerSeparation - (_lastRenderedPlaceholderCount * _itemSize)) / _lastRenderedItemCount;
+            _itemSize =
+                (spacerSeparation - (_lastRenderedPlaceholderCount * _itemSize))
+                / _lastRenderedItemCount;
         }
 
         if (_itemSize <= 0)
@@ -373,7 +410,11 @@ public sealed class Virtualize<TItem> : ComponentBase, IVirtualizeJsCallbacks, I
             _loading = true;
         }
 
-        var request = new ItemsProviderRequest(_itemsBefore, _visibleItemCapacity, cancellationToken);
+        var request = new ItemsProviderRequest(
+            _itemsBefore,
+            _visibleItemCapacity,
+            cancellationToken
+        );
 
         try
         {
@@ -412,17 +453,25 @@ public sealed class Virtualize<TItem> : ComponentBase, IVirtualizeJsCallbacks, I
 
     private ValueTask<ItemsProviderResult<TItem>> DefaultItemsProvider(ItemsProviderRequest request)
     {
-        return ValueTask.FromResult(new ItemsProviderResult<TItem>(
-            Items!.Skip(request.StartIndex).Take(request.Count),
-            Items!.Count));
+        return ValueTask.FromResult(
+            new ItemsProviderResult<TItem>(
+                Items!.Skip(request.StartIndex).Take(request.Count),
+                Items!.Count
+            )
+        );
     }
 
-    private RenderFragment DefaultPlaceholder(PlaceholderContext context) => (builder) =>
-    {
-        builder.OpenElement(0, "div");
-        builder.AddAttribute(1, "style", $"height: {_itemSize.ToString(CultureInfo.InvariantCulture)}px; flex-shrink: 0;");
-        builder.CloseElement();
-    };
+    private RenderFragment DefaultPlaceholder(PlaceholderContext context) =>
+        (builder) =>
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(
+                1,
+                "style",
+                $"height: {_itemSize.ToString(CultureInfo.InvariantCulture)}px; flex-shrink: 0;"
+            );
+            builder.CloseElement();
+        };
 
     /// <inheritdoc />
     public async ValueTask DisposeAsync()

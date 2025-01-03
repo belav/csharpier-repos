@@ -4,9 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-
 using Moq.Tests.FSharpTypes;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -17,10 +15,24 @@ namespace Moq.Tests
         {
             get
             {
-                yield return new object[] { typeof(HasAbstractActionEvent).GetEvent(nameof(HasAbstractActionEvent.Event)) };
-                yield return new object[] { typeof(HasAbstractEventHandlerEvent).GetEvent(nameof(HasAbstractEventHandlerEvent.Event)) };
-                yield return new object[] { typeof(IHasActionEvent).GetEvent(nameof(IHasActionEvent.Event)) };
-                yield return new object[] { typeof(IHasEventHandlerEvent).GetEvent(nameof(IHasEventHandlerEvent.Event)) };
+                yield return new object[]
+                {
+                    typeof(HasAbstractActionEvent).GetEvent(nameof(HasAbstractActionEvent.Event)),
+                };
+                yield return new object[]
+                {
+                    typeof(HasAbstractEventHandlerEvent).GetEvent(
+                        nameof(HasAbstractEventHandlerEvent.Event)
+                    ),
+                };
+                yield return new object[]
+                {
+                    typeof(IHasActionEvent).GetEvent(nameof(IHasActionEvent.Event)),
+                };
+                yield return new object[]
+                {
+                    typeof(IHasEventHandlerEvent).GetEvent(nameof(IHasEventHandlerEvent.Event)),
+                };
             }
         }
 
@@ -28,7 +40,10 @@ namespace Moq.Tests
         {
             get
             {
-                yield return new object[] { typeof(HasActionEvent).GetEvent(nameof(HasActionEvent.Event)) };
+                yield return new object[]
+                {
+                    typeof(HasActionEvent).GetEvent(nameof(HasActionEvent.Event)),
+                };
             }
         }
 
@@ -37,7 +52,11 @@ namespace Moq.Tests
         public void Abstract_FSharp_event_has_accessors_marked_as_specialname(EventInfo @event)
         {
             Assert.All(@event.GetAccessors(), accessor => Assert.True(accessor.IsAbstract));
-            Assert.All(@event.GetAccessors(), accessor => Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`."));
+            Assert.All(
+                @event.GetAccessors(),
+                accessor =>
+                    Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`.")
+            );
         }
 
         [Theory]
@@ -45,7 +64,11 @@ namespace Moq.Tests
         public void Non_abstract_FSharp_event_has_accessors_marked_as_specialname(EventInfo @event)
         {
             Assert.All(@event.GetAccessors(), accessor => Assert.False(accessor.IsAbstract));
-            Assert.All(@event.GetAccessors(), accessor => Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`."));
+            Assert.All(
+                @event.GetAccessors(),
+                accessor =>
+                    Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`.")
+            );
         }
 
         [Fact]
@@ -91,7 +114,11 @@ namespace Moq.Tests
         [MemberData(nameof(FSharpIndexers))]
         public void All_FSharp_indexers_have_accessors_marked_as_specialname(PropertyInfo indexer)
         {
-            Assert.All(indexer.GetAccessors(), accessor => Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`."));
+            Assert.All(
+                indexer.GetAccessors(),
+                accessor =>
+                    Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`.")
+            );
         }
 
         [Theory]
@@ -114,17 +141,32 @@ namespace Moq.Tests
         {
             get
             {
-                yield return new object[] { typeof(IHasProperty).GetProperty(nameof(IHasProperty.Property)) };
-                yield return new object[] { typeof(HasAbstractProperty).GetProperty(nameof(HasAbstractProperty.Property)) };
-                yield return new object[] { typeof(HasProperty).GetProperty(nameof(HasProperty.Property)) };
+                yield return new object[]
+                {
+                    typeof(IHasProperty).GetProperty(nameof(IHasProperty.Property)),
+                };
+                yield return new object[]
+                {
+                    typeof(HasAbstractProperty).GetProperty(nameof(HasAbstractProperty.Property)),
+                };
+                yield return new object[]
+                {
+                    typeof(HasProperty).GetProperty(nameof(HasProperty.Property)),
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(FSharpProperties))]
-        public void All_FSharp_properties_have_accessors_marked_as_specialname(PropertyInfo property)
+        public void All_FSharp_properties_have_accessors_marked_as_specialname(
+            PropertyInfo property
+        )
         {
-            Assert.All(@property.GetAccessors(), accessor => Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`."));
+            Assert.All(
+                @property.GetAccessors(),
+                accessor =>
+                    Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`.")
+            );
         }
 
         [Theory]

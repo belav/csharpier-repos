@@ -8,7 +8,8 @@ namespace System.DirectoryServices.Protocols
 {
     public partial class LdapSessionOptions
     {
-        private static void PALCertFreeCRLContext(IntPtr certPtr) => Interop.Ldap.CertFreeCRLContext(certPtr);
+        private static void PALCertFreeCRLContext(IntPtr certPtr) =>
+            Interop.Ldap.CertFreeCRLContext(certPtr);
 
         public bool SecureSocketLayer
         {
@@ -41,7 +42,11 @@ namespace System.DirectoryServices.Protocols
             {
                 if (((value) & (~ReferralChasingOptions.All)) != 0)
                 {
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(ReferralChasingOptions));
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(ReferralChasingOptions)
+                    );
                 }
 
                 SetIntValueHelper(LdapOption.LDAP_OPT_REFERRALS, (int)value);

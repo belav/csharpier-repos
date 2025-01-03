@@ -10,6 +10,7 @@ namespace Microsoft.Extensions.Options.Tests
     {
         public bool ActiveChangeCallbacks { get; set; }
         public bool HasChanged { get; set; }
+
         public IDisposable RegisterChangeCallback(Action<object> callback, object state)
         {
             _callback = () => callback(state);

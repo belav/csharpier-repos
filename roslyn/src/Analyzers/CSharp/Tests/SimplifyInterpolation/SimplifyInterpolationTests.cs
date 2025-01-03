@@ -16,22 +16,30 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyInterpolation)]
-    public partial class SimplifyInterpolationTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class SimplifyInterpolationTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public SimplifyInterpolationTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpSimplifyInterpolationDiagnosticAnalyzer(), new CSharpSimplifyInterpolationCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpSimplifyInterpolationDiagnosticAnalyzer(),
+                new CSharpSimplifyInterpolationCodeFixProvider()
+            );
 
         [Fact]
         public async Task SubsequentUnnecessarySpansDoNotRepeatTheSmartTag()
         {
-            var parameters = new TestParameters(retainNonFixableDiagnostics: true, includeDiagnosticsOutsideSelection: true);
+            var parameters = new TestParameters(
+                retainNonFixableDiagnostics: true,
+                includeDiagnosticsOutsideSelection: true
+            );
 
-            using var workspace = CreateWorkspaceFromOptions("""
+            using var workspace = CreateWorkspaceFromOptions(
+                """
                 class C
                 {
                     void M(string someValue)
@@ -39,15 +47,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue{|Unnecessary:[||].ToString()|}{|Unnecessary:.PadLeft(|}3{|Unnecessary:)|}} suffix";
                     }
                 }
-                """, parameters);
+                """,
+                parameters
+            );
 
             var diagnostics = await GetDiagnosticsWorkerAsync(workspace, parameters);
 
             Assert.Equal(
-                new[] {
-                    ("IDE0071", DiagnosticSeverity.Info),
-                },
-                diagnostics.Select(d => (d.Descriptor.Id, d.Severity)));
+                new[] { ("IDE0071", DiagnosticSeverity.Info) },
+                diagnostics.Select(d => (d.Descriptor.Id, d.Severity))
+            );
         }
 
         [Fact]
@@ -71,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -95,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue:g} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -119,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue:\\d \"d\"} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -143,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $@"prefix {someValue:\d ""d""} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -167,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue:\\d \"d\"} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -191,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $@"prefix {someValue:\d ""d""} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -207,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue[||].ToString(someConst)} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -224,7 +240,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
 
                     public string ToString(object obj) => null;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -241,7 +258,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue[||].ToString("some format code", System.Globalization.CultureInfo.CurrentCulture)} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -267,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = System.FormattableString.Invariant($"prefix {someValue} suffix");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -291,7 +310,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = System.FormattableString.Invariant($"prefix {someValue} suffix");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -315,7 +335,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = System.FormattableString.Invariant($"prefix {someValue} suffix");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -330,7 +351,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue[||].ToString(System.Globalization.CultureInfo.InvariantCulture)} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -354,7 +376,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = System.FormattableString.Invariant($"prefix {someValue:some format code} suffix");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -369,7 +392,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue[||].ToString("some format code", System.Globalization.CultureInfo.InvariantCulture)} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -393,7 +417,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue,3} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -417,7 +442,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue,-3} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -443,7 +469,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue,(byte)3.3 + someConstant} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -467,7 +494,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue,3} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -491,7 +519,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue,-3} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -506,7 +535,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue[||].PadLeft(3, '\t')} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -521,7 +551,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue[||].PadRight(3, '\t')} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -547,7 +578,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue,-((byte)3.3 + someConstant)} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -562,7 +594,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue[||].ToString():goo} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -577,7 +610,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue[||].ToString("bar"):goo} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -601,7 +635,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue,3} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -616,7 +651,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue[||].ToString(),3:goo} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -631,7 +667,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue[||].ToString("some format code"),3:goo} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -655,7 +692,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue,3:goo} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -679,7 +717,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue,-3:goo} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -694,7 +733,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue[||].PadLeft(3),3} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -709,7 +749,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue[||].PadRight(3),3} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -724,7 +765,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue[||].PadLeft(3),3:goo} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -739,7 +781,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue[||].PadRight(3),3:goo} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -754,7 +797,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue{|Unnecessary:[||].ToString()|}{|Unnecessary:.PadLeft(|}3{|Unnecessary:)|}} suffix";
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M(string someValue)
@@ -762,7 +806,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue,3} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -777,7 +822,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue.PadLeft(3){|Unnecessary:[||].ToString()|}} suffix";
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M(string someValue)
@@ -785,7 +831,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue.PadLeft(3)} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -800,7 +847,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue.PadLeft(3){|Unnecessary:[||].ToString()|},3} suffix";
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M(string someValue)
@@ -808,7 +856,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue.PadLeft(3),3} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -823,7 +872,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue.PadLeft(3){|Unnecessary:[||].PadRight(|}3{|Unnecessary:)|}} suffix";
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M(string someValue)
@@ -831,7 +881,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue.PadLeft(3),-3} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -846,7 +897,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue.PadLeft(3)[||].PadRight(3),3} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41381")]
@@ -860,7 +912,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
 
                     string GetViaInterpolation() => $"Hello {ToString[||]()}";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41381")]
@@ -874,7 +927,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
 
                     string GetViaInterpolation() => $"Hello {ToString[||]("g")}";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41381")]
@@ -888,7 +942,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
 
                     string GetViaInterpolation() => $"Hello {ToString[||]()}";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41381")]
@@ -902,7 +957,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
 
                     string GetViaInterpolation() => $"Hello {ToString[||]("g")}";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41381")]
@@ -919,7 +975,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {[||]PadLeft(3)} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41381")]
@@ -936,7 +993,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {[||]PadLeft(3)} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42247")]
@@ -961,7 +1019,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                     }
                 }
                 """,
-
                 """
                 using System;
                 using System.Linq;
@@ -979,7 +1036,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42247")]
@@ -1003,7 +1061,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42669")]
@@ -1015,7 +1074,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                 {
                     public override string ToString() => $"Test: {base[||].ToString()}";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42669")]
@@ -1027,7 +1087,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                 {
                     string M() => $"Test: {base[||].ToString()}";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42669")]
@@ -1044,7 +1105,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                 {
                     public override string ToString() => $"Test: {base[||].ToString("a")}";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42669")]
@@ -1062,7 +1124,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                 {
                     public override string ToString() => $"Test: {base.ToString(),10}";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42887")]
@@ -1079,7 +1142,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                 {
                     public string ToString(string format) => "A";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42887")]
@@ -1115,7 +1179,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
 
                     string IFormattable.ToString(string format, IFormatProvider formatProvider) => "B";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42887")]
@@ -1143,7 +1208,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                 {
                     public string ToString(string format) => "A";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42887")]
@@ -1171,7 +1237,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                 {
                     public string ToString(string format) => "A";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42936")]
@@ -1188,7 +1255,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                 {
                     public override string ToString() => "A";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42936")]
@@ -1216,7 +1284,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                 {
                     public override string ToString() => "A";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46011")]
@@ -1229,7 +1298,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                     public new string ToString() => "Shadow";
                     static string M(C c) => $"{c[||].ToString()}";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46011")]
@@ -1247,7 +1317,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                     public override string ToString() => "OverrideShadow";
                     static string M(C c) => $"{c[||].ToString()}";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46011")]
@@ -1285,7 +1356,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"prefix {someValue} suffix";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49647")]
@@ -1309,7 +1381,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"{(cond ? 1 : 2)}";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49647")]
@@ -1333,7 +1406,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"{(cond ? 1 : 2):g}";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49647")]
@@ -1357,7 +1431,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
                         _ = $"{(cond ? "1" : "2"),3}";
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

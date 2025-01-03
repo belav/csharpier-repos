@@ -15,9 +15,8 @@ public class MapAllClaimsAction : ClaimAction
     /// <summary>
     /// Initializes a new instance of <see cref="MapAllClaimsAction"/>.
     /// </summary>
-    public MapAllClaimsAction() : base("All", ClaimValueTypes.String)
-    {
-    }
+    public MapAllClaimsAction()
+        : base("All", ClaimValueTypes.String) { }
 
     /// <inheritdoc />
     public override void Run(JsonElement userData, ClaimsIdentity identity, string issuer)
@@ -28,8 +27,11 @@ public class MapAllClaimsAction : ClaimAction
 
             // Avoid adding a claim if there's a duplicate name and value. This often happens in OIDC when claims are
             // retrieved both from the id_token and from the user-info endpoint.
-            var duplicate = identity.FindFirst(c => string.Equals(c.Type, pair.Name, StringComparison.OrdinalIgnoreCase)
-                    && string.Equals(c.Value, claimValue, StringComparison.Ordinal)) != null;
+            var duplicate =
+                identity.FindFirst(c =>
+                    string.Equals(c.Type, pair.Name, StringComparison.OrdinalIgnoreCase)
+                    && string.Equals(c.Value, claimValue, StringComparison.Ordinal)
+                ) != null;
 
             if (!duplicate)
             {

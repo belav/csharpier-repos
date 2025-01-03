@@ -38,42 +38,50 @@ internal sealed class KestrelMetrics
         _activeConnectionsCounter = _meter.CreateUpDownCounter<long>(
             "kestrel.active_connections",
             unit: "{connection}",
-            description: "Number of connections that are currently active on the server.");
+            description: "Number of connections that are currently active on the server."
+        );
 
         _connectionDuration = _meter.CreateHistogram<double>(
             "kestrel.connection.duration",
             unit: "s",
-            description: "The duration of connections on the server.");
+            description: "The duration of connections on the server."
+        );
 
         _rejectedConnectionsCounter = _meter.CreateCounter<long>(
-           "kestrel.rejected_connections",
+            "kestrel.rejected_connections",
             unit: "{connection}",
-            description: "Number of connections rejected by the server. Connections are rejected when the currently active count exceeds the value configured with MaxConcurrentConnections.");
+            description: "Number of connections rejected by the server. Connections are rejected when the currently active count exceeds the value configured with MaxConcurrentConnections."
+        );
 
         _queuedConnectionsCounter = _meter.CreateUpDownCounter<long>(
-           "kestrel.queued_connections",
+            "kestrel.queued_connections",
             unit: "{connection}",
-            description: "Number of connections that are currently queued and are waiting to start.");
+            description: "Number of connections that are currently queued and are waiting to start."
+        );
 
         _queuedRequestsCounter = _meter.CreateUpDownCounter<long>(
-           "kestrel.queued_requests",
+            "kestrel.queued_requests",
             unit: "{request}",
-            description: "Number of HTTP requests on multiplexed connections (HTTP/2 and HTTP/3) that are currently queued and are waiting to start.");
+            description: "Number of HTTP requests on multiplexed connections (HTTP/2 and HTTP/3) that are currently queued and are waiting to start."
+        );
 
         _currentUpgradedRequestsCounter = _meter.CreateUpDownCounter<long>(
-           "kestrel.upgraded_connections",
+            "kestrel.upgraded_connections",
             unit: "{connection}",
-            description: "Number of HTTP connections that are currently upgraded (WebSockets). The number only tracks HTTP/1.1 connections.");
+            description: "Number of HTTP connections that are currently upgraded (WebSockets). The number only tracks HTTP/1.1 connections."
+        );
 
         _tlsHandshakeDuration = _meter.CreateHistogram<double>(
             "kestrel.tls_handshake.duration",
             unit: "s",
-            description: "The duration of TLS handshakes on the server.");
+            description: "The duration of TLS handshakes on the server."
+        );
 
         _activeTlsHandshakesCounter = _meter.CreateUpDownCounter<long>(
-           "kestrel.active_tls_handshakes",
+            "kestrel.active_tls_handshakes",
             unit: "{handshake}",
-            description: "Number of TLS handshakes that are currently in progress on the server.");
+            description: "Number of TLS handshakes that are currently in progress on the server."
+        );
     }
 
     public void ConnectionStart(in ConnectionMetricsContext metricsContext)
@@ -92,16 +100,37 @@ internal sealed class KestrelMetrics
         _activeConnectionsCounter.Add(1, tags);
     }
 
-    public void ConnectionStop(in ConnectionMetricsContext metricsContext, Exception? exception, List<KeyValuePair<string, object?>>? customTags, long startTimestamp, long currentTimestamp)
+    public void ConnectionStop(
+        in ConnectionMetricsContext metricsContext,
+        Exception? exception,
+        List<KeyValuePair<string, object?>>? customTags,
+        long startTimestamp,
+        long currentTimestamp
+    )
     {
-        if (metricsContext.CurrentConnectionsCounterEnabled || metricsContext.ConnectionDurationEnabled)
+        if (
+            metricsContext.CurrentConnectionsCounterEnabled
+            || metricsContext.ConnectionDurationEnabled
+        )
         {
-            ConnectionStopCore(metricsContext, exception, customTags, startTimestamp, currentTimestamp);
+            ConnectionStopCore(
+                metricsContext,
+                exception,
+                customTags,
+                startTimestamp,
+                currentTimestamp
+            );
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private void ConnectionStopCore(in ConnectionMetricsContext metricsContext, Exception? exception, List<KeyValuePair<string, object?>>? customTags, long startTimestamp, long currentTimestamp)
+    private void ConnectionStopCore(
+        in ConnectionMetricsContext metricsContext,
+        Exception? exception,
+        List<KeyValuePair<string, object?>>? customTags,
+        long startTimestamp,
+        long currentTimestamp
+    )
     {
         var tags = new TagList();
         InitializeConnectionTags(ref tags, metricsContext);
@@ -191,7 +220,10 @@ internal sealed class KestrelMetrics
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private void RequestQueuedStartCore(in ConnectionMetricsContext metricsContext, string httpVersion)
+    private void RequestQueuedStartCore(
+        in ConnectionMetricsContext metricsContext,
+        string httpVersion
+    )
     {
         var tags = new TagList();
         InitializeConnectionTags(ref tags, metricsContext);
@@ -209,7 +241,10 @@ internal sealed class KestrelMetrics
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private void RequestQueuedStopCore(in ConnectionMetricsContext metricsContext, string httpVersion)
+    private void RequestQueuedStopCore(
+        in ConnectionMetricsContext metricsContext,
+        string httpVersion
+    )
     {
         var tags = new TagList();
         InitializeConnectionTags(ref tags, metricsContext);
@@ -267,16 +302,34 @@ internal sealed class KestrelMetrics
         _activeTlsHandshakesCounter.Add(1, tags);
     }
 
-    public void TlsHandshakeStop(in ConnectionMetricsContext metricsContext, long startTimestamp, long currentTimestamp, SslProtocols? protocol = null, Exception? exception = null)
+    public void TlsHandshakeStop(
+        in ConnectionMetricsContext metricsContext,
+        long startTimestamp,
+        long currentTimestamp,
+        SslProtocols? protocol = null,
+        Exception? exception = null
+    )
     {
         if (metricsContext.CurrentTlsHandshakesCounterEnabled || _tlsHandshakeDuration.Enabled)
         {
-            TlsHandshakeStopCore(metricsContext, startTimestamp, currentTimestamp, protocol, exception);
+            TlsHandshakeStopCore(
+                metricsContext,
+                startTimestamp,
+                currentTimestamp,
+                protocol,
+                exception
+            );
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private void TlsHandshakeStopCore(in ConnectionMetricsContext metricsContext, long startTimestamp, long currentTimestamp, SslProtocols? protocol = null, Exception? exception = null)
+    private void TlsHandshakeStopCore(
+        in ConnectionMetricsContext metricsContext,
+        long startTimestamp,
+        long currentTimestamp,
+        SslProtocols? protocol = null,
+        Exception? exception = null
+    )
     {
         var tags = new TagList();
         InitializeConnectionTags(ref tags, metricsContext);
@@ -287,7 +340,14 @@ internal sealed class KestrelMetrics
             _activeTlsHandshakesCounter.Add(-1, tags);
         }
 
-        if (protocol != null && TryGetHandshakeProtocol(protocol.Value, out var protocolName, out var protocolVersion))
+        if (
+            protocol != null
+            && TryGetHandshakeProtocol(
+                protocol.Value,
+                out var protocolName,
+                out var protocolVersion
+            )
+        )
         {
             // Protocol name should always be TLS. Have logic to a tls.protocol.name tag if not TLS just in case.
             if (protocolName != "tls")
@@ -305,7 +365,10 @@ internal sealed class KestrelMetrics
         _tlsHandshakeDuration.Record(duration.TotalSeconds, tags);
     }
 
-    private static void InitializeConnectionTags(ref TagList tags, in ConnectionMetricsContext metricsContext)
+    private static void InitializeConnectionTags(
+        ref TagList tags,
+        in ConnectionMetricsContext metricsContext
+    )
     {
         var localEndpoint = metricsContext.ConnectionContext.LocalEndPoint;
         if (localEndpoint is IPEndPoint localIPEndPoint)
@@ -326,7 +389,9 @@ internal sealed class KestrelMetrics
             // There isn't an easy way to detect whether QUIC is the underlying transport.
             // This code assumes that a multiplexed connection is QUIC.
             // Improve in the future if there are additional multiplexed connection types.
-            var transport = metricsContext.ConnectionContext is not MultiplexedConnectionContext ? "tcp" : "udp";
+            var transport = metricsContext.ConnectionContext is not MultiplexedConnectionContext
+                ? "tcp"
+                : "udp";
             tags.Add("network.transport", transport);
         }
         else if (localEndpoint is UnixDomainSocketEndPoint udsEndPoint)
@@ -349,12 +414,22 @@ internal sealed class KestrelMetrics
     public ConnectionMetricsContext CreateContext(BaseConnectionContext connection)
     {
         // Cache the state at the start of the connection so we produce consistent start/stop events.
-        return new ConnectionMetricsContext(connection,
-            _activeConnectionsCounter.Enabled, _connectionDuration.Enabled, _queuedConnectionsCounter.Enabled,
-            _queuedRequestsCounter.Enabled, _currentUpgradedRequestsCounter.Enabled, _activeTlsHandshakesCounter.Enabled);
+        return new ConnectionMetricsContext(
+            connection,
+            _activeConnectionsCounter.Enabled,
+            _connectionDuration.Enabled,
+            _queuedConnectionsCounter.Enabled,
+            _queuedRequestsCounter.Enabled,
+            _currentUpgradedRequestsCounter.Enabled,
+            _activeTlsHandshakesCounter.Enabled
+        );
     }
 
-    public static bool TryGetHandshakeProtocol(SslProtocols protocols, [NotNullWhen(true)] out string? name, [NotNullWhen(true)] out string? version)
+    public static bool TryGetHandshakeProtocol(
+        SslProtocols protocols,
+        [NotNullWhen(true)] out string? name,
+        [NotNullWhen(true)] out string? version
+    )
     {
         // Protocol should be either TLS 1.2 or 1.3. Many older SslProtocols are no longer supported.
         // Logic for resolving older known values is still here out of an abundence of caution.

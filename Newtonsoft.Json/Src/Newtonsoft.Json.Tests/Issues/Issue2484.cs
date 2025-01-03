@@ -47,8 +47,13 @@ namespace Newtonsoft.Json.Tests.Issues
         public void Test()
         {
             var json = "[]";
-            var ex = ExceptionAssert.Throws<JsonSerializationException>(() => JsonConvert.DeserializeObject(json, typeof(JObject)));
-            Assert.AreEqual("Deserialized JSON type 'Newtonsoft.Json.Linq.JArray' is not compatible with expected type 'Newtonsoft.Json.Linq.JObject'. Path '', line 1, position 2.", ex.Message);
+            var ex = ExceptionAssert.Throws<JsonSerializationException>(
+                () => JsonConvert.DeserializeObject(json, typeof(JObject))
+            );
+            Assert.AreEqual(
+                "Deserialized JSON type 'Newtonsoft.Json.Linq.JArray' is not compatible with expected type 'Newtonsoft.Json.Linq.JObject'. Path '', line 1, position 2.",
+                ex.Message
+            );
         }
     }
 }

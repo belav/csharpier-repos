@@ -8,44 +8,51 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.Common;
-using System.Data.Objects;
 using System.Data.Metadata.Edm;
-using System.Configuration;
+using System.Data.Objects;
+using System.Data.Objects.DataClasses;
 using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Security.Permissions;
+using System.Text;
 using System.Web;
+using System.Web.Configuration;
+using System.Web.DynamicData;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.DynamicData;
-using System.Data.Objects.DataClasses;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Security.Permissions;
-using System.Drawing;
-using System.Text;
-using System.Globalization;
-using System.Web.Configuration;
-    
-[assembly:TagPrefix("System.Web.UI.WebControls", "asp")]
+
+[assembly: TagPrefix("System.Web.UI.WebControls", "asp")]
+
 namespace System.Web.UI.WebControls
 {
     [
-    DefaultEvent("Selecting"),
-    DefaultProperty("EntitySetName"),
-    Designer("System.Web.UI.Design.WebControls.EntityDataSourceDesigner, " + AssemblyRef.SystemWebEntityDesign),
-    ParseChildren(true),
-    PersistChildren(false),
-    ResourceDescription(WebControlsRes.EntityDataSource_Description),
-    ResourceDisplayName(WebControlsRes.EntityDataSource_DisplayName),
-    ToolboxBitmap(typeof(EntityDataSource), "EntityDataSource.ico"),
+        DefaultEvent("Selecting"),
+        DefaultProperty("EntitySetName"),
+        Designer(
+            "System.Web.UI.Design.WebControls.EntityDataSourceDesigner, "
+                + AssemblyRef.SystemWebEntityDesign
+        ),
+        ParseChildren(true),
+        PersistChildren(false),
+        ResourceDescription(WebControlsRes.EntityDataSource_Description),
+        ResourceDisplayName(WebControlsRes.EntityDataSource_DisplayName),
+        ToolboxBitmap(typeof(EntityDataSource), "EntityDataSource.ico"),
     ]
-    public class EntityDataSource : DataSourceControl, System.Web.DynamicData.IDynamicDataSource, IQueryableDataSource
+    public class EntityDataSource
+        : DataSourceControl,
+            System.Web.DynamicData.IDynamicDataSource,
+            IQueryableDataSource
     {
         #region Constants
 
@@ -119,14 +126,14 @@ namespace System.Web.UI.WebControls
         #region Public Properties
 
         /// <summary>
-        /// Indicates whether the EntityDataSource is to automatically 
+        /// Indicates whether the EntityDataSource is to automatically
         /// generate an OrderBy expression using property name(s) and value(s) from
         /// the OrderByParameters.
         /// </summary>
         [
-        DefaultValue(false),
-        Category("Behavior"),
-        ResourceDescription(WebControlsRes.PropertyDescription_AutoGenerateOrderByClause)
+            DefaultValue(false),
+            Category("Behavior"),
+            ResourceDescription(WebControlsRes.PropertyDescription_AutoGenerateOrderByClause)
         ]
         public bool AutoGenerateOrderByClause
         {
@@ -138,16 +145,15 @@ namespace System.Web.UI.WebControls
             }
         }
 
-
         /// <summary>
-        /// Indicates whether the EntityDataSource is to automatically 
+        /// Indicates whether the EntityDataSource is to automatically
         /// generate a Where expression using property name(s) and value(s) from
         /// the WhereParameters.
         /// </summary>
         [
-        DefaultValue(false),
-        Category("Behavior"),
-        ResourceDescription(WebControlsRes.PropertyDescription_AutoGenerateWhereClause)
+            DefaultValue(false),
+            Category("Behavior"),
+            ResourceDescription(WebControlsRes.PropertyDescription_AutoGenerateWhereClause)
         ]
         public bool AutoGenerateWhereClause
         {
@@ -163,9 +169,9 @@ namespace System.Web.UI.WebControls
         /// Indicates to the EntityDataSource that the user wishes to perform paging.
         /// </summary>
         [
-        DefaultValue(true),
-        Category("Behavior"),
-        ResourceDescription(WebControlsRes.PropertyDescription_AutoPage)
+            DefaultValue(true),
+            Category("Behavior"),
+            ResourceDescription(WebControlsRes.PropertyDescription_AutoPage)
         ]
         public bool AutoPage
         {
@@ -181,9 +187,9 @@ namespace System.Web.UI.WebControls
         /// Indicates to the EntityDataSource that the user wishes to perform sorting.
         /// </summary>
         [
-        DefaultValue(true),
-        Category("Behavior"),
-        ResourceDescription(WebControlsRes.PropertyDescription_AutoSort)
+            DefaultValue(true),
+            Category("Behavior"),
+            ResourceDescription(WebControlsRes.PropertyDescription_AutoSort)
         ]
         public bool AutoSort
         {
@@ -197,7 +203,7 @@ namespace System.Web.UI.WebControls
 
         /// <summary>
         /// The name of the container. Required if DefaultConainerName is not set on the ObjectContext.
-        /// </summary>        
+        /// </summary>
         // devnote: Design-time attributes are not used here because this property is overridden by one in the designer
         public string DefaultContainerName
         {
@@ -228,12 +234,10 @@ namespace System.Web.UI.WebControls
             }
         }
 
-        
-        
         // devnote: Design-time attributes are not used here because this property is not visible in the designer (it is filtered out with PreFilterProperties)
         /// <summary>
         /// Defined by the IDynamicDataSource interface.
-        /// Provides a type to be used as the ObjectContext through which the EntityDataSource will 
+        /// Provides a type to be used as the ObjectContext through which the EntityDataSource will
         /// provide operations to the EntityFramework
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -255,15 +259,14 @@ namespace System.Web.UI.WebControls
             }
         }
 
-        
         /// <summary>
-        /// The fully-qualified type name for the ObjectContext through which the EntityDataSource will 
+        /// The fully-qualified type name for the ObjectContext through which the EntityDataSource will
         /// provide operations to the EntityFramework
         /// </summary>
         [
-        DefaultValue(null),
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_ContextTypeName)
+            DefaultValue(null),
+            Category("Data"),
+            ResourceDescription(WebControlsRes.PropertyDescription_ContextTypeName)
         ]
         public string ContextTypeName
         {
@@ -274,7 +277,11 @@ namespace System.Web.UI.WebControls
 
                 if (!String.IsNullOrEmpty(value) && System.Web.Hosting.HostingEnvironment.IsHosted)
                 {
-                    _contextType = System.Web.Compilation.BuildManager.GetType(value, /*throwOnError*/false, /*ignoreCase*/true);
+                    _contextType = System.Web.Compilation.BuildManager.GetType(
+                        value, /*throwOnError*/
+                        false, /*ignoreCase*/
+                        true
+                    );
                 }
                 else
                 {
@@ -288,9 +295,9 @@ namespace System.Web.UI.WebControls
         /// Indicates to the EntityDataSource that the user wishes entities to be flattened or not.
         /// </summary>
         [
-        DefaultValue(true),
-        Category("Behavior"),
-        ResourceDescription(WebControlsRes.PropertyDescription_EnableFlattening)
+            DefaultValue(true),
+            Category("Behavior"),
+            ResourceDescription(WebControlsRes.PropertyDescription_EnableFlattening)
         ]
         public bool EnableFlattening
         {
@@ -304,14 +311,14 @@ namespace System.Web.UI.WebControls
 
         /// <summary>
         /// Provides default values for entities that are to be deleted.
-        /// Sets the named properties to the provided values only if the properties are null 
+        /// Sets the named properties to the provided values only if the properties are null
         /// (not otherwise defined).
         /// </summary>
         [
-        DefaultValue(null),
-        MergableProperty(false),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        Browsable(false)
+            DefaultValue(null),
+            MergableProperty(false),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            Browsable(false)
         ]
         public ParameterCollection DeleteParameters
         {
@@ -322,7 +329,9 @@ namespace System.Web.UI.WebControls
                     _deleteParameters = new ParameterCollection();
                     if (UseNetFramework4Behavior)
                     {
-                        _deleteParameters.ParametersChanged += new EventHandler(this.OnParametersChanged);
+                        _deleteParameters.ParametersChanged += new EventHandler(
+                            this.OnParametersChanged
+                        );
                     }
                 }
                 return _deleteParameters;
@@ -333,9 +342,9 @@ namespace System.Web.UI.WebControls
         /// Indicates to the EntityDataSource that the user wishes to perform delete operations.
         /// </summary>
         [
-        DefaultValue(false),
-        Category("Behavior"),
-        ResourceDescription(WebControlsRes.PropertyDescription_EnableDelete)
+            DefaultValue(false),
+            Category("Behavior"),
+            ResourceDescription(WebControlsRes.PropertyDescription_EnableDelete)
         ]
         public bool EnableDelete
         {
@@ -351,9 +360,9 @@ namespace System.Web.UI.WebControls
         /// Indicates to the EntityDatSource that the user wishes to perform insert operations.
         /// </summary>
         [
-        DefaultValue(false),
-        Category("Behavior"),
-        ResourceDescription(WebControlsRes.PropertyDescription_EnableInsert)
+            DefaultValue(false),
+            Category("Behavior"),
+            ResourceDescription(WebControlsRes.PropertyDescription_EnableInsert)
         ]
         public bool EnableInsert
         {
@@ -369,9 +378,9 @@ namespace System.Web.UI.WebControls
         /// Indicates to the EntityDataSource that the user wishes to perform update operations
         /// </summary>
         [
-        DefaultValue(false),
-        Category("Behavior"),
-        ResourceDescription(WebControlsRes.PropertyDescription_EnableUpdate)
+            DefaultValue(false),
+            Category("Behavior"),
+            ResourceDescription(WebControlsRes.PropertyDescription_EnableUpdate)
         ]
         public bool EnableUpdate
         {
@@ -382,7 +391,6 @@ namespace System.Web.UI.WebControls
                 View.RaiseChangedEvent();
             }
         }
-
 
         /// <summary>
         /// The name of the EntitySet used by this instance of the EntityDataSource control.
@@ -421,10 +429,10 @@ namespace System.Web.UI.WebControls
         /// Null values are passed into the ObjectParameter collection as the Type of the Parameter.
         /// </summary>
         [
-        DefaultValue(null),
-        MergableProperty(false),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        Browsable(false)
+            DefaultValue(null),
+            MergableProperty(false),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            Browsable(false)
         ]
         public ParameterCollection CommandParameters
         {
@@ -433,7 +441,9 @@ namespace System.Web.UI.WebControls
                 if (null == _commandParameters)
                 {
                     _commandParameters = new ParameterCollection();
-                    _commandParameters.ParametersChanged += new EventHandler(this.OnParametersChanged);
+                    _commandParameters.ParametersChanged += new EventHandler(
+                        this.OnParametersChanged
+                    );
                 }
                 return _commandParameters;
             }
@@ -457,10 +467,10 @@ namespace System.Web.UI.WebControls
         /// These projections are not editable.
         /// </summary>
         [
-        Category("Data"),        
-        DefaultValue(null),
-        ResourceDescription(WebControlsRes.PropertyDescription_GroupBy),
-        ]        
+            Category("Data"),
+            DefaultValue(null),
+            ResourceDescription(WebControlsRes.PropertyDescription_GroupBy),
+        ]
         public string GroupBy
         {
             get { return _groupBy; }
@@ -478,16 +488,13 @@ namespace System.Web.UI.WebControls
         /// paths, use commas (e.g. "Orders.OrderDetails, Supplies").
         /// </summary>
         [
-        DefaultValue(null),
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_Include)
+            DefaultValue(null),
+            Category("Data"),
+            ResourceDescription(WebControlsRes.PropertyDescription_Include)
         ]
         public string Include
         {
-            get
-            {
-                return _include;
-            }
+            get { return _include; }
             set
             {
                 _include = value;
@@ -495,17 +502,16 @@ namespace System.Web.UI.WebControls
             }
         }
 
-
         /// <summary>
         /// Provides default values for inserted entities.
         /// Properties that are null (not otherwise defined) are set to the value specified
         /// by InsertParameters.
         /// </summary>
         [
-        DefaultValue(null),
-        MergableProperty(false),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        Browsable(false)
+            DefaultValue(null),
+            MergableProperty(false),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            Browsable(false)
         ]
         public ParameterCollection InsertParameters
         {
@@ -516,7 +522,9 @@ namespace System.Web.UI.WebControls
                     _insertParameters = new ParameterCollection();
                     if (UseNetFramework4Behavior)
                     {
-                        _insertParameters.ParametersChanged += new EventHandler(this.OnParametersChanged);
+                        _insertParameters.ParametersChanged += new EventHandler(
+                            this.OnParametersChanged
+                        );
                     }
                 }
                 return _insertParameters;
@@ -524,7 +532,7 @@ namespace System.Web.UI.WebControls
         }
 
         // devnote: Design-time attributes are not used here because this property is overridden by one in the designer
-        
+
         /// <summary>
         /// Provides a sort expression corresonding to the OrderBy method on the ObjectQuery<T>
         /// </summary>
@@ -544,10 +552,10 @@ namespace System.Web.UI.WebControls
         /// ObjectParameter.
         /// </summary>
         [
-        DefaultValue(null),
-        MergableProperty(false),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        Browsable(false)
+            DefaultValue(null),
+            MergableProperty(false),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            Browsable(false)
         ]
         public ParameterCollection OrderByParameters
         {
@@ -556,7 +564,9 @@ namespace System.Web.UI.WebControls
                 if (null == _orderByParameters)
                 {
                     _orderByParameters = new ParameterCollection();
-                    _orderByParameters.ParametersChanged += new EventHandler(this.OnParametersChanged);
+                    _orderByParameters.ParametersChanged += new EventHandler(
+                        this.OnParametersChanged
+                    );
                 }
                 return _orderByParameters;
             }
@@ -585,23 +595,24 @@ namespace System.Web.UI.WebControls
         // devnote: Design-time attributes are not used here because this property is overridden by one in the designer
         public string Select
         {
-            get  { return _select;  }
+            get { return _select; }
             set
             {
                 _select = value;
                 View.RaiseChangedEvent();
             }
         }
+
         /// <summary>
         /// Each Parameter is mapped to an ObjectParameter in the ObjectQuery<T>
         /// If a null value is set on the Parameter, then the Type is passed in as the
         /// named ObjectParameter.
         /// </summary>
         [
-        DefaultValue(null),
-        MergableProperty(false),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        Browsable(false)
+            DefaultValue(null),
+            MergableProperty(false),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            Browsable(false)
         ]
         public ParameterCollection SelectParameters
         {
@@ -610,7 +621,9 @@ namespace System.Web.UI.WebControls
                 if (null == _selectParameters)
                 {
                     _selectParameters = new ParameterCollection();
-                    _selectParameters.ParametersChanged += new EventHandler(this.OnParametersChanged);
+                    _selectParameters.ParametersChanged += new EventHandler(
+                        this.OnParametersChanged
+                    );
                 }
                 return _selectParameters;
             }
@@ -618,14 +631,14 @@ namespace System.Web.UI.WebControls
 
         /// <summary>
         /// Setting this value to false disables storing original values in ViewState.
-        /// Setting this value to false implies that the user understands the concurrency model in the 
-        /// EntityFramework and the update behavior of the EntityDataSource. Its use should be 
+        /// Setting this value to false implies that the user understands the concurrency model in the
+        /// EntityFramework and the update behavior of the EntityDataSource. Its use should be
         /// reserved for expert users only.
         /// </summary>
         [
-        DefaultValue(true),
-        Category("Behavior"),
-        ResourceDescription(WebControlsRes.PropertyDescription_StoreOriginalValuesInViewState)
+            DefaultValue(true),
+            Category("Behavior"),
+            ResourceDescription(WebControlsRes.PropertyDescription_StoreOriginalValuesInViewState)
         ]
         public bool StoreOriginalValuesInViewState
         {
@@ -642,10 +655,10 @@ namespace System.Web.UI.WebControls
         /// are used for properties on the entity when the properties are null
         /// </summary>
         [
-        DefaultValue(null),
-        MergableProperty(false),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        Browsable(false)
+            DefaultValue(null),
+            MergableProperty(false),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            Browsable(false)
         ]
         public ParameterCollection UpdateParameters
         {
@@ -656,7 +669,9 @@ namespace System.Web.UI.WebControls
                     _updateParameters = new ParameterCollection();
                     if (UseNetFramework4Behavior)
                     {
-                        _updateParameters.ParametersChanged += new EventHandler(this.OnParametersChanged);
+                        _updateParameters.ParametersChanged += new EventHandler(
+                            this.OnParametersChanged
+                        );
                     }
                 }
                 return _updateParameters;
@@ -669,7 +684,7 @@ namespace System.Web.UI.WebControls
         // devnote: Design-time attributes are not used here because this property is overridden by one in the designer
         public string Where
         {
-            get { return _where;  }
+            get { return _where; }
             set
             {
                 _where = value;
@@ -683,10 +698,10 @@ namespace System.Web.UI.WebControls
         /// named ObjectParameter.
         /// </summary>
         [
-        DefaultValue(null),
-        MergableProperty(false),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        Browsable(false)
+            DefaultValue(null),
+            MergableProperty(false),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            Browsable(false)
         ]
         public ParameterCollection WhereParameters
         {
@@ -695,7 +710,9 @@ namespace System.Web.UI.WebControls
                 if (null == _whereParameters)
                 {
                     _whereParameters = new ParameterCollection();
-                    _whereParameters.ParametersChanged += new EventHandler(this.OnParametersChanged);
+                    _whereParameters.ParametersChanged += new EventHandler(
+                        this.OnParametersChanged
+                    );
                 }
                 return _whereParameters;
             }
@@ -707,16 +724,22 @@ namespace System.Web.UI.WebControls
 
         #region Property Getters
 
-        private ObjectParameter[] CreateObjectParametersFromParameterCollection(ParameterCollection paramColl)
+        private ObjectParameter[] CreateObjectParametersFromParameterCollection(
+            ParameterCollection paramColl
+        )
         {
             IOrderedDictionary paramValues = paramColl.GetValues(HttpContext, this);
 
-            List<ObjectParameter>  objectParameters = new List<ObjectParameter>();
+            List<ObjectParameter> objectParameters = new List<ObjectParameter>();
             foreach (Parameter parameter in paramColl)
             {
                 if (!string.IsNullOrEmpty(parameter.Name))
                 {
-                    WebControlParameterProxy wcParam = new WebControlParameterProxy(parameter, paramColl, this);
+                    WebControlParameterProxy wcParam = new WebControlParameterProxy(
+                        parameter,
+                        paramColl,
+                        this
+                    );
 
                     if (wcParam.Value != null)
                     {
@@ -730,7 +753,6 @@ namespace System.Web.UI.WebControls
             }
             return objectParameters.ToArray();
         }
-
 
         internal ObjectParameter[] GetOrderByParameters()
         {
@@ -760,6 +782,7 @@ namespace System.Web.UI.WebControls
         {
             return View;
         }
+
         protected override ICollection GetViewNames()
         {
             return new string[] { this._viewName };
@@ -795,18 +818,12 @@ namespace System.Web.UI.WebControls
 
         internal HttpContext HttpContext
         {
-            get
-            {
-                return base.Context;
-            }
+            get { return base.Context; }
         }
 
         private bool UseNetFramework4Behavior
         {
-            get
-            {
-                return _targetFrameworkVersion == new Version(4, 0);
-            }
+            get { return _targetFrameworkVersion == new Version(4, 0); }
         }
 
         #endregion Private Properties
@@ -836,7 +853,7 @@ namespace System.Web.UI.WebControls
 
         private object SaveParametersViewState(ParameterCollection parameters)
         {
-            if (parameters != null) 
+            if (parameters != null)
             {
                 return ((IStateManager)parameters).SaveViewState();
             }
@@ -924,10 +941,7 @@ namespace System.Web.UI.WebControls
         /// An event that is fired just prior to the creation of the ObjectContext.
         /// The user can provide their own context here.
         /// </summary>
-        [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_ContextCreating)
-        ]
+        [Category("Data"), ResourceDescription(WebControlsRes.PropertyDescription_ContextCreating)]
         public event EventHandler<EntityDataSourceContextCreatingEventArgs> ContextCreating
         {
             add { View.ContextCreating += value; }
@@ -938,10 +952,7 @@ namespace System.Web.UI.WebControls
         /// An event that is fired just following the creation of the ObjectContext to provide
         /// the user with a reference to the created context.
         /// </summary>
-        [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_ContextCreated)
-        ]
+        [Category("Data"), ResourceDescription(WebControlsRes.PropertyDescription_ContextCreated)]
         public event EventHandler<EntityDataSourceContextCreatedEventArgs> ContextCreated
         {
             add { View.ContextCreated += value; }
@@ -953,8 +964,8 @@ namespace System.Web.UI.WebControls
         /// It is cancellable in case the user needs to hold onto a reference to the Context.
         /// </summary>
         [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_ContextDisposing)
+            Category("Data"),
+            ResourceDescription(WebControlsRes.PropertyDescription_ContextDisposing)
         ]
         public event EventHandler<EntityDataSourceContextDisposingEventArgs> ContextDisposing
         {
@@ -963,15 +974,12 @@ namespace System.Web.UI.WebControls
         }
 
         /// <summary>
-        /// An event fired prior to the execution of the query in the ExecuteSelect method. 
+        /// An event fired prior to the execution of the query in the ExecuteSelect method.
         /// The user can modify the properties of the
         /// EntityDataSource to modify its behavior.
         /// The user can cancel the execution of the query in this event.
         /// </summary>
-        [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_Selecting)
-        ]
+        [Category("Data"), ResourceDescription(WebControlsRes.PropertyDescription_Selecting)]
         public event EventHandler<EntityDataSourceSelectingEventArgs> Selecting
         {
             add { View.Selecting += value; }
@@ -982,10 +990,7 @@ namespace System.Web.UI.WebControls
         /// An event that is fired after the query has been executed in the ExecuteSelect method.
         /// The event provides the collection of returned entities for inspection or modification prior to display.
         /// </summary>
-        [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_Selected)
-        ]
+        [Category("Data"), ResourceDescription(WebControlsRes.PropertyDescription_Selected)]
         public event EventHandler<EntityDataSourceSelectedEventArgs> Selected
         {
             add { View.Selected += value; }
@@ -997,10 +1002,7 @@ namespace System.Web.UI.WebControls
         /// The object is provided so the user can inspect or modify it.
         /// The user can cancel the deletion.
         /// </summary>
-        [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_Deleting)
-        ]
+        [Category("Data"), ResourceDescription(WebControlsRes.PropertyDescription_Deleting)]
         public event EventHandler<EntityDataSourceChangingEventArgs> Deleting
         {
             add { View.Deleting += value; }
@@ -1010,10 +1012,7 @@ namespace System.Web.UI.WebControls
         /// <summary>
         /// An event fired just after the entity has been deleted from the database.
         /// </summary>
-        [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_Deleted)
-        ]
+        [Category("Data"), ResourceDescription(WebControlsRes.PropertyDescription_Deleted)]
         public event EventHandler<EntityDataSourceChangedEventArgs> Deleted
         {
             add { View.Deleted += value; }
@@ -1025,10 +1024,7 @@ namespace System.Web.UI.WebControls
         /// The user is provided with the entity for modification prior to insertion.
         /// The insertion is cancellable.
         /// </summary>
-        [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_Inserting)
-        ]
+        [Category("Data"), ResourceDescription(WebControlsRes.PropertyDescription_Inserting)]
         public event EventHandler<EntityDataSourceChangingEventArgs> Inserting
         {
             add { View.Inserting += value; }
@@ -1038,10 +1034,7 @@ namespace System.Web.UI.WebControls
         /// <summary>
         /// An event fired just after the entity has been inserted into the database.
         /// </summary>
-        [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_Inserted)
-        ]
+        [Category("Data"), ResourceDescription(WebControlsRes.PropertyDescription_Inserted)]
         public event EventHandler<EntityDataSourceChangedEventArgs> Inserted
         {
             add { View.Inserted += value; }
@@ -1051,10 +1044,7 @@ namespace System.Web.UI.WebControls
         /// <summary>
         /// An event fired just after a modified entity has been updated in the database.
         /// </summary>
-        [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_Updated)
-        ]
+        [Category("Data"), ResourceDescription(WebControlsRes.PropertyDescription_Updated)]
         public event EventHandler<EntityDataSourceChangedEventArgs> Updated
         {
             add { View.Updated += value; }
@@ -1066,10 +1056,7 @@ namespace System.Web.UI.WebControls
         /// The entity is provided to the event for modification.
         /// The update is cancellable.
         /// </summary>
-        [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_Updating)
-        ]
+        [Category("Data"), ResourceDescription(WebControlsRes.PropertyDescription_Updating)]
         public event EventHandler<EntityDataSourceChangingEventArgs> Updating
         {
             add { View.Updating += value; }
@@ -1078,10 +1065,7 @@ namespace System.Web.UI.WebControls
 
         #region IQueryableDataSource Members
 
-        [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_QueryCreated)
-        ]
+        [Category("Data"), ResourceDescription(WebControlsRes.PropertyDescription_QueryCreated)]
         public event EventHandler<QueryCreatedEventArgs> QueryCreated
         {
             add { View.QueryCreated += value; }
@@ -1094,8 +1078,12 @@ namespace System.Web.UI.WebControls
         }
 
         #endregion
-        
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA2109:ReviewVisibleEventHandlers",
+            MessageId = "0#"
+        )]
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
@@ -1108,7 +1096,11 @@ namespace System.Web.UI.WebControls
             Page.RegisterRequiresControlState(this);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA2109:ReviewVisibleEventHandlers",
+            MessageId = "0#"
+        )]
         protected override void OnUnload(EventArgs e)
         {
             base.OnUnload(e);
@@ -1143,27 +1135,31 @@ namespace System.Web.UI.WebControls
             // Cannot edit if Select has been set
             // Note that neither EntitySetName nor CommandText are strictly required if the user provides a query from OnSelecting.
             bool disableUpdatableness =
-                String.IsNullOrEmpty(EntitySetName) ||
-                !String.IsNullOrEmpty(CommandText) ||
-                !anyEditablesEnabled ||
-                !String.IsNullOrEmpty(Select) ||
-                !String.IsNullOrEmpty(GroupBy);
+                String.IsNullOrEmpty(EntitySetName)
+                || !String.IsNullOrEmpty(CommandText)
+                || !anyEditablesEnabled
+                || !String.IsNullOrEmpty(Select)
+                || !String.IsNullOrEmpty(GroupBy);
 
-            if (!String.IsNullOrEmpty(CommandText) &&
-                !String.IsNullOrEmpty(EntitySetName))
+            if (!String.IsNullOrEmpty(CommandText) && !String.IsNullOrEmpty(EntitySetName))
             {
-                throw new InvalidOperationException(Strings.EntityDataSource_CommandTextOrEntitySetName);
+                throw new InvalidOperationException(
+                    Strings.EntityDataSource_CommandTextOrEntitySetName
+                );
             }
 
-            if (String.IsNullOrEmpty(CommandText) && 
-                String.IsNullOrEmpty(EntitySetName))
+            if (String.IsNullOrEmpty(CommandText) && String.IsNullOrEmpty(EntitySetName))
             {
-                throw new InvalidOperationException(Strings.EntityDataSource_CommandTextOrEntitySetNameRequired);
+                throw new InvalidOperationException(
+                    Strings.EntityDataSource_CommandTextOrEntitySetNameRequired
+                );
             }
 
             if (anyEditablesEnabled && !String.IsNullOrEmpty(CommandText))
             {
-                throw new InvalidOperationException(Strings.EntityDataSource_CommandTextNotEditable);
+                throw new InvalidOperationException(
+                    Strings.EntityDataSource_CommandTextNotEditable
+                );
             }
 
             if (anyEditablesEnabled && !String.IsNullOrEmpty(Select))
@@ -1178,32 +1174,52 @@ namespace System.Web.UI.WebControls
 
             if (!String.IsNullOrEmpty(Where) && AutoGenerateWhereClause)
             {
-                throw new InvalidOperationException(Strings.EntityDataSource_AutoGenerateWhereNotAllowedIfWhereDefined);
+                throw new InvalidOperationException(
+                    Strings.EntityDataSource_AutoGenerateWhereNotAllowedIfWhereDefined
+                );
             }
 
             if (!String.IsNullOrEmpty(OrderBy) && AutoGenerateOrderByClause)
             {
-                throw new InvalidOperationException(Strings.EntityDataSource_AutoGenerateOrderByNotAllowedIfOrderByIsDefined);
+                throw new InvalidOperationException(
+                    Strings.EntityDataSource_AutoGenerateOrderByNotAllowedIfOrderByIsDefined
+                );
             }
 
-            if (0 < WhereParameters.Count && !AutoGenerateWhereClause && String.IsNullOrEmpty(Where))
+            if (
+                0 < WhereParameters.Count
+                && !AutoGenerateWhereClause
+                && String.IsNullOrEmpty(Where)
+            )
             {
-                throw new InvalidOperationException(Strings.EntityDataSource_WhereParametersNeedsWhereOrAutoGenerateWhere);
+                throw new InvalidOperationException(
+                    Strings.EntityDataSource_WhereParametersNeedsWhereOrAutoGenerateWhere
+                );
             }
 
-            if (0 < OrderByParameters.Count && !AutoGenerateOrderByClause && String.IsNullOrEmpty(OrderBy))
+            if (
+                0 < OrderByParameters.Count
+                && !AutoGenerateOrderByClause
+                && String.IsNullOrEmpty(OrderBy)
+            )
             {
-                throw new InvalidOperationException(Strings.EntityDataSource_OrderByParametersNeedsOrderByOrAutoGenerateOrderBy);
+                throw new InvalidOperationException(
+                    Strings.EntityDataSource_OrderByParametersNeedsOrderByOrAutoGenerateOrderBy
+                );
             }
 
             if (0 < CommandParameters.Count && String.IsNullOrEmpty(CommandText))
             {
-                throw new InvalidOperationException(Strings.EntityDataSource_CommandParametersNeedCommandText);
+                throw new InvalidOperationException(
+                    Strings.EntityDataSource_CommandParametersNeedCommandText
+                );
             }
 
             if (0 < SelectParameters.Count && String.IsNullOrEmpty(Select))
             {
-                throw new InvalidOperationException(Strings.EntityDataSource_SelectParametersNeedSelect);
+                throw new InvalidOperationException(
+                    Strings.EntityDataSource_SelectParametersNeedSelect
+                );
             }
 
             if (!String.IsNullOrEmpty(GroupBy) && String.IsNullOrEmpty(Select))
@@ -1213,7 +1229,9 @@ namespace System.Web.UI.WebControls
 
             if (!String.IsNullOrEmpty(EntityTypeFilter) && !String.IsNullOrEmpty(CommandText))
             {
-                throw new InvalidOperationException(Strings.EntityDataSource_CommandTextCantHaveEntityTypeFilter);
+                throw new InvalidOperationException(
+                    Strings.EntityDataSource_CommandTextCantHaveEntityTypeFilter
+                );
             }
 
             if (!String.IsNullOrEmpty(EntitySetName))
@@ -1226,9 +1244,7 @@ namespace System.Web.UI.WebControls
 
         internal bool ValidateWrappable()
         {
-            return
-                EnableFlattening &&
-                HasIdentity();
+            return EnableFlattening && HasIdentity();
         }
 
         /// <summary>
@@ -1237,10 +1253,9 @@ namespace System.Web.UI.WebControls
         /// </summary>
         internal bool HasIdentity()
         {
-            return
-                String.IsNullOrEmpty(CommandText) &&
-                String.IsNullOrEmpty(Select) &&
-                String.IsNullOrEmpty(GroupBy);
+            return String.IsNullOrEmpty(CommandText)
+                && String.IsNullOrEmpty(Select)
+                && String.IsNullOrEmpty(GroupBy);
         }
 
         #endregion Error Checking

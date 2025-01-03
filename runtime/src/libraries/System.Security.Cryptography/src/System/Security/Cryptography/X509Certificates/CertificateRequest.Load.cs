@@ -12,14 +12,15 @@ namespace System.Security.Cryptography.X509Certificates
     public sealed partial class CertificateRequest
     {
         private const CertificateRequestLoadOptions AllOptions =
-            CertificateRequestLoadOptions.SkipSignatureValidation |
-            CertificateRequestLoadOptions.UnsafeLoadCertificateExtensions;
+            CertificateRequestLoadOptions.SkipSignatureValidation
+            | CertificateRequestLoadOptions.UnsafeLoadCertificateExtensions;
 
         public static CertificateRequest LoadSigningRequestPem(
             string pkcs10Pem,
             HashAlgorithmName signerHashAlgorithm,
             CertificateRequestLoadOptions options = CertificateRequestLoadOptions.Default,
-            RSASignaturePadding? signerSignaturePadding = null)
+            RSASignaturePadding? signerSignaturePadding = null
+        )
         {
             ArgumentNullException.ThrowIfNull(pkcs10Pem);
 
@@ -27,30 +28,47 @@ namespace System.Security.Cryptography.X509Certificates
                 pkcs10Pem.AsSpan(),
                 signerHashAlgorithm,
                 options,
-                signerSignaturePadding);
+                signerSignaturePadding
+            );
         }
 
         public static CertificateRequest LoadSigningRequestPem(
             ReadOnlySpan<char> pkcs10Pem,
             HashAlgorithmName signerHashAlgorithm,
             CertificateRequestLoadOptions options = CertificateRequestLoadOptions.Default,
-            RSASignaturePadding? signerSignaturePadding = null)
+            RSASignaturePadding? signerSignaturePadding = null
+        )
         {
-            ArgumentException.ThrowIfNullOrEmpty(signerHashAlgorithm.Name, nameof(signerHashAlgorithm));
+            ArgumentException.ThrowIfNullOrEmpty(
+                signerHashAlgorithm.Name,
+                nameof(signerHashAlgorithm)
+            );
 
             if ((options & ~AllOptions) != 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(options), options, SR.Argument_InvalidFlag);
+                throw new ArgumentOutOfRangeException(
+                    nameof(options),
+                    options,
+                    SR.Argument_InvalidFlag
+                );
             }
 
-            foreach ((ReadOnlySpan<char> contents, PemFields fields) in new PemEnumerator(pkcs10Pem))
+            foreach (
+                (ReadOnlySpan<char> contents, PemFields fields) in new PemEnumerator(pkcs10Pem)
+            )
             {
                 if (contents[fields.Label].SequenceEqual(PemLabels.Pkcs10CertificateRequest))
                 {
                     byte[] rented = ArrayPool<byte>.Shared.Rent(fields.DecodedDataLength);
 
-                    if (!Convert.TryFromBase64Chars(contents[fields.Base64Data], rented, out int bytesWritten) ||
-                        bytesWritten != fields.DecodedDataLength)
+                    if (
+                        !Convert.TryFromBase64Chars(
+                            contents[fields.Base64Data],
+                            rented,
+                            out int bytesWritten
+                        )
+                        || bytesWritten != fields.DecodedDataLength
+                    )
                     {
                         Debug.Fail("Base64Decode failed, but PemEncoding said it was legal");
                         throw new UnreachableException();
@@ -64,7 +82,8 @@ namespace System.Security.Cryptography.X509Certificates
                             signerHashAlgorithm,
                             out _,
                             options,
-                            signerSignaturePadding);
+                            signerSignaturePadding
+                        );
                     }
                     finally
                     {
@@ -74,14 +93,16 @@ namespace System.Security.Cryptography.X509Certificates
             }
 
             throw new CryptographicException(
-                SR.Format(SR.Cryptography_NoPemOfLabel, PemLabels.Pkcs10CertificateRequest));
+                SR.Format(SR.Cryptography_NoPemOfLabel, PemLabels.Pkcs10CertificateRequest)
+            );
         }
 
         public static CertificateRequest LoadSigningRequest(
             byte[] pkcs10,
             HashAlgorithmName signerHashAlgorithm,
             CertificateRequestLoadOptions options = CertificateRequestLoadOptions.Default,
-            RSASignaturePadding? signerSignaturePadding = null)
+            RSASignaturePadding? signerSignaturePadding = null
+        )
         {
             ArgumentNullException.ThrowIfNull(pkcs10);
 
@@ -91,7 +112,8 @@ namespace System.Security.Cryptography.X509Certificates
                 signerHashAlgorithm,
                 out _,
                 options,
-                signerSignaturePadding);
+                signerSignaturePadding
+            );
         }
 
         public static CertificateRequest LoadSigningRequest(
@@ -99,7 +121,8 @@ namespace System.Security.Cryptography.X509Certificates
             HashAlgorithmName signerHashAlgorithm,
             out int bytesConsumed,
             CertificateRequestLoadOptions options = CertificateRequestLoadOptions.Default,
-            RSASignaturePadding? signerSignaturePadding = null)
+            RSASignaturePadding? signerSignaturePadding = null
+        )
         {
             return LoadSigningRequest(
                 pkcs10,
@@ -107,7 +130,8 @@ namespace System.Security.Cryptography.X509Certificates
                 signerHashAlgorithm,
                 out bytesConsumed,
                 options,
-                signerSignaturePadding);
+                signerSignaturePadding
+            );
         }
 
         private static unsafe CertificateRequest LoadSigningRequest(
@@ -116,13 +140,21 @@ namespace System.Security.Cryptography.X509Certificates
             HashAlgorithmName signerHashAlgorithm,
             out int bytesConsumed,
             CertificateRequestLoadOptions options,
-            RSASignaturePadding? signerSignaturePadding)
+            RSASignaturePadding? signerSignaturePadding
+        )
         {
-            ArgumentException.ThrowIfNullOrEmpty(signerHashAlgorithm.Name, nameof(signerHashAlgorithm));
+            ArgumentException.ThrowIfNullOrEmpty(
+                signerHashAlgorithm.Name,
+                nameof(signerHashAlgorithm)
+            );
 
             if ((options & ~AllOptions) != 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(options), options, SR.Argument_InvalidFlag);
+                throw new ArgumentOutOfRangeException(
+                    nameof(options),
+                    options,
+                    SR.Argument_InvalidFlag
+                );
             }
 
             bool skipSignatureValidation =
@@ -146,7 +178,12 @@ namespace System.Security.Cryptography.X509Certificates
 
                 fixed (byte* p10ptr = pkcs10)
                 {
-                    using (PointerMemoryManager<byte> manager = new PointerMemoryManager<byte>(p10ptr, encodedLength))
+                    using (
+                        PointerMemoryManager<byte> manager = new PointerMemoryManager<byte>(
+                            p10ptr,
+                            encodedLength
+                        )
+                    )
                     {
                         ReadOnlyMemory<byte> rebind = manager.Memory;
                         ReadOnlySpan<byte> encodedRequestInfo = pkcs10Asn.PeekEncodedValue();
@@ -156,9 +193,18 @@ namespace System.Security.Cryptography.X509Certificates
                         int signatureUnusedBitCount;
 
                         CertificationRequestInfoAsn.Decode(ref pkcs10Asn, rebind, out requestInfo);
-                        AlgorithmIdentifierAsn.Decode(ref pkcs10Asn, rebind, out algorithmIdentifier);
+                        AlgorithmIdentifierAsn.Decode(
+                            ref pkcs10Asn,
+                            rebind,
+                            out algorithmIdentifier
+                        );
 
-                        if (!pkcs10Asn.TryReadPrimitiveBitString(out signatureUnusedBitCount, out signature))
+                        if (
+                            !pkcs10Asn.TryReadPrimitiveBitString(
+                                out signatureUnusedBitCount,
+                                out signature
+                            )
+                        )
                         {
                             throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                         }
@@ -179,29 +225,45 @@ namespace System.Security.Cryptography.X509Certificates
                                 SR.Format(
                                     SR.Cryptography_CertReq_Load_VersionTooNew,
                                     requestInfo.Version,
-                                    MaxSupportedVersion));
+                                    MaxSupportedVersion
+                                )
+                            );
                         }
 
-                        PublicKey publicKey = PublicKey.DecodeSubjectPublicKeyInfo(ref requestInfo.SubjectPublicKeyInfo);
+                        PublicKey publicKey = PublicKey.DecodeSubjectPublicKeyInfo(
+                            ref requestInfo.SubjectPublicKeyInfo
+                        );
 
                         if (!skipSignatureValidation)
                         {
                             // None of the supported signature algorithms support signatures that are not full bytes.
                             // So, shortcut the verification on the bit length
-                            if (signatureUnusedBitCount != 0 ||
-                                !VerifyX509Signature(encodedRequestInfo, signature, publicKey, algorithmIdentifier))
+                            if (
+                                signatureUnusedBitCount != 0
+                                || !VerifyX509Signature(
+                                    encodedRequestInfo,
+                                    signature,
+                                    publicKey,
+                                    algorithmIdentifier
+                                )
+                            )
                             {
-                                throw new CryptographicException(SR.Cryptography_CertReq_SignatureVerificationFailed);
+                                throw new CryptographicException(
+                                    SR.Cryptography_CertReq_SignatureVerificationFailed
+                                );
                             }
                         }
 
-                        X500DistinguishedName subject = new X500DistinguishedName(requestInfo.Subject.Span);
+                        X500DistinguishedName subject = new X500DistinguishedName(
+                            requestInfo.Subject.Span
+                        );
 
                         req = new CertificateRequest(
                             subject,
                             publicKey,
                             signerHashAlgorithm,
-                            signerSignaturePadding);
+                            signerSignaturePadding
+                        );
 
                         if (requestInfo.Attributes is not null)
                         {
@@ -214,7 +276,8 @@ namespace System.Security.Cryptography.X509Certificates
                                     if (foundCertExt)
                                     {
                                         throw new CryptographicException(
-                                            SR.Cryptography_CertReq_Load_DuplicateExtensionRequests);
+                                            SR.Cryptography_CertReq_Load_DuplicateExtensionRequests
+                                        );
                                     }
 
                                     foundCertExt = true;
@@ -222,12 +285,14 @@ namespace System.Security.Cryptography.X509Certificates
                                     if (attr.AttrValues.Length != 1)
                                     {
                                         throw new CryptographicException(
-                                            SR.Cryptography_CertReq_Load_DuplicateExtensionRequests);
+                                            SR.Cryptography_CertReq_Load_DuplicateExtensionRequests
+                                        );
                                     }
 
                                     AsnValueReader extsReader = new AsnValueReader(
                                         attr.AttrValues[0].Span,
-                                        AsnEncodingRules.DER);
+                                        AsnEncodingRules.DER
+                                    );
 
                                     AsnValueReader exts = extsReader.ReadSequence();
                                     extsReader.ThrowIfNotEmpty();
@@ -235,17 +300,24 @@ namespace System.Security.Cryptography.X509Certificates
                                     // Minimum length is 1, so do..while
                                     do
                                     {
-                                        X509ExtensionAsn.Decode(ref exts, rebind, out X509ExtensionAsn extAsn);
+                                        X509ExtensionAsn.Decode(
+                                            ref exts,
+                                            rebind,
+                                            out X509ExtensionAsn extAsn
+                                        );
 
                                         if (unsafeLoadCertificateExtensions)
                                         {
                                             X509Extension ext = new X509Extension(
                                                 extAsn.ExtnId,
                                                 extAsn.ExtnValue.Span,
-                                                extAsn.Critical);
+                                                extAsn.Critical
+                                            );
 
                                             X509Extension? rich =
-                                                X509Certificate2.CreateCustomExtensionIfAny(extAsn.ExtnId);
+                                                X509Certificate2.CreateCustomExtensionIfAny(
+                                                    extAsn.ExtnId
+                                                );
 
                                             if (rich is not null)
                                             {
@@ -263,13 +335,16 @@ namespace System.Security.Cryptography.X509Certificates
                                 {
                                     if (attr.AttrValues.Length == 0)
                                     {
-                                        throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
+                                        throw new CryptographicException(
+                                            SR.Cryptography_Der_Invalid_Encoding
+                                        );
                                     }
 
                                     foreach (ReadOnlyMemory<byte> val in attr.AttrValues)
                                     {
                                         req.OtherRequestAttributes.Add(
-                                            new AsnEncodedData(attr.AttrType, val.Span));
+                                            new AsnEncodedData(attr.AttrType, val.Span)
+                                        );
                                     }
                                 }
                             }
@@ -290,7 +365,8 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<byte> toBeSigned,
             ReadOnlySpan<byte> signature,
             PublicKey publicKey,
-            AlgorithmIdentifierAsn algorithmIdentifier)
+            AlgorithmIdentifierAsn algorithmIdentifier
+        )
         {
             RSA? rsa = publicKey.GetRSAPublicKey();
             ECDsa? ecdsa = publicKey.GetECDsaPublicKey();
@@ -308,16 +384,13 @@ namespace System.Security.Cryptography.X509Certificates
 
                     PssParamsAsn pssParams = PssParamsAsn.Decode(
                         algorithmIdentifier.Parameters.GetValueOrDefault(),
-                        AsnEncodingRules.DER);
+                        AsnEncodingRules.DER
+                    );
 
                     RSASignaturePadding padding = pssParams.GetSignaturePadding();
                     hashAlg = HashAlgorithmName.FromOid(pssParams.HashAlgorithm.Algorithm);
 
-                    return rsa.VerifyData(
-                        toBeSigned,
-                        signature,
-                        hashAlg,
-                        padding);
+                    return rsa.VerifyData(toBeSigned, signature, hashAlg, padding);
                 }
 
                 switch (algorithmIdentifier.Algorithm)
@@ -340,7 +413,11 @@ namespace System.Security.Cryptography.X509Certificates
                         break;
                     default:
                         throw new NotSupportedException(
-                            SR.Format(SR.Cryptography_UnknownKeyAlgorithm, algorithmIdentifier.Algorithm));
+                            SR.Format(
+                                SR.Cryptography_UnknownKeyAlgorithm,
+                                algorithmIdentifier.Algorithm
+                            )
+                        );
                 }
 
                 // All remaining supported algorithms have no defined parameters
@@ -360,7 +437,12 @@ namespace System.Security.Cryptography.X509Certificates
                             return false;
                         }
 
-                        return rsa.VerifyData(toBeSigned, signature, hashAlg, RSASignaturePadding.Pkcs1);
+                        return rsa.VerifyData(
+                            toBeSigned,
+                            signature,
+                            hashAlg,
+                            RSASignaturePadding.Pkcs1
+                        );
                     case Oids.ECDsaWithSha256:
                     case Oids.ECDsaWithSha384:
                     case Oids.ECDsaWithSha512:
@@ -370,10 +452,16 @@ namespace System.Security.Cryptography.X509Certificates
                             return false;
                         }
 
-                        return ecdsa.VerifyData(toBeSigned, signature, hashAlg, DSASignatureFormat.Rfc3279DerSequence);
+                        return ecdsa.VerifyData(
+                            toBeSigned,
+                            signature,
+                            hashAlg,
+                            DSASignatureFormat.Rfc3279DerSequence
+                        );
                     default:
                         Debug.Fail(
-                            $"Algorithm ID {algorithmIdentifier.Algorithm} was in the first switch, but not the second");
+                            $"Algorithm ID {algorithmIdentifier.Algorithm} was in the first switch, but not the second"
+                        );
                         return false;
                 }
             }

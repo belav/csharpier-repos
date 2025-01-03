@@ -30,9 +30,6 @@ internal class MinimumAgeAuthorizeAttribute : AuthorizeAttribute
             }
             return default(int);
         }
-        set
-        {
-            Policy = $"{POLICY_PREFIX}{value}";
-        }
+        set { Policy = $"{POLICY_PREFIX}{value}"; }
     }
 }

@@ -59,29 +59,39 @@ namespace System.Reflection.Metadata
                     case ImportDefinitionKind.ImportType:
                         _current = new ImportDefinition(
                             kind,
-                            typeOrNamespace: _reader.ReadTypeHandle());
+                            typeOrNamespace: _reader.ReadTypeHandle()
+                        );
 
                         break;
 
                     case ImportDefinitionKind.ImportNamespace:
                         _current = new ImportDefinition(
                             kind,
-                            typeOrNamespace: MetadataTokens.BlobHandle(_reader.ReadCompressedInteger()));
+                            typeOrNamespace: MetadataTokens.BlobHandle(
+                                _reader.ReadCompressedInteger()
+                            )
+                        );
 
                         break;
 
                     case ImportDefinitionKind.ImportAssemblyNamespace:
                         _current = new ImportDefinition(
                             kind,
-                            assembly: MetadataTokens.AssemblyReferenceHandle(_reader.ReadCompressedInteger()),
-                            typeOrNamespace: MetadataTokens.BlobHandle(_reader.ReadCompressedInteger()));
+                            assembly: MetadataTokens.AssemblyReferenceHandle(
+                                _reader.ReadCompressedInteger()
+                            ),
+                            typeOrNamespace: MetadataTokens.BlobHandle(
+                                _reader.ReadCompressedInteger()
+                            )
+                        );
 
                         break;
 
                     case ImportDefinitionKind.ImportAssemblyReferenceAlias:
                         _current = new ImportDefinition(
                             kind,
-                            alias: MetadataTokens.BlobHandle(_reader.ReadCompressedInteger()));
+                            alias: MetadataTokens.BlobHandle(_reader.ReadCompressedInteger())
+                        );
 
                         break;
 
@@ -89,7 +99,10 @@ namespace System.Reflection.Metadata
                         _current = new ImportDefinition(
                             kind,
                             alias: MetadataTokens.BlobHandle(_reader.ReadCompressedInteger()),
-                            assembly: MetadataTokens.AssemblyReferenceHandle(_reader.ReadCompressedInteger()));
+                            assembly: MetadataTokens.AssemblyReferenceHandle(
+                                _reader.ReadCompressedInteger()
+                            )
+                        );
 
                         break;
 
@@ -97,7 +110,8 @@ namespace System.Reflection.Metadata
                         _current = new ImportDefinition(
                             kind,
                             alias: MetadataTokens.BlobHandle(_reader.ReadCompressedInteger()),
-                            typeOrNamespace: _reader.ReadTypeHandle());
+                            typeOrNamespace: _reader.ReadTypeHandle()
+                        );
 
                         break;
 
@@ -106,7 +120,10 @@ namespace System.Reflection.Metadata
                         _current = new ImportDefinition(
                             kind,
                             alias: MetadataTokens.BlobHandle(_reader.ReadCompressedInteger()),
-                            typeOrNamespace: MetadataTokens.BlobHandle(_reader.ReadCompressedInteger()));
+                            typeOrNamespace: MetadataTokens.BlobHandle(
+                                _reader.ReadCompressedInteger()
+                            )
+                        );
 
                         break;
 
@@ -114,13 +131,20 @@ namespace System.Reflection.Metadata
                         _current = new ImportDefinition(
                             kind,
                             alias: MetadataTokens.BlobHandle(_reader.ReadCompressedInteger()),
-                            assembly: MetadataTokens.AssemblyReferenceHandle(_reader.ReadCompressedInteger()),
-                            typeOrNamespace: MetadataTokens.BlobHandle(_reader.ReadCompressedInteger()));
+                            assembly: MetadataTokens.AssemblyReferenceHandle(
+                                _reader.ReadCompressedInteger()
+                            ),
+                            typeOrNamespace: MetadataTokens.BlobHandle(
+                                _reader.ReadCompressedInteger()
+                            )
+                        );
 
                         break;
 
                     default:
-                        throw new BadImageFormatException(SR.Format(SR.InvalidImportDefinitionKind, kind));
+                        throw new BadImageFormatException(
+                            SR.Format(SR.InvalidImportDefinitionKind, kind)
+                        );
                 }
 
                 return true;
@@ -142,9 +166,7 @@ namespace System.Reflection.Metadata
                 _current = default(ImportDefinition);
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 }

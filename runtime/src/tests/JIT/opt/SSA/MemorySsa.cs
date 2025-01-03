@@ -25,7 +25,7 @@ public class MemorySsaTests
             _intStatic = 1;
             _ = x[0];
             _intStatic = 2;
-        }        
+        }
         catch (Exception)
         {
             // Memory PHIs in handlers must consider all intermediate states

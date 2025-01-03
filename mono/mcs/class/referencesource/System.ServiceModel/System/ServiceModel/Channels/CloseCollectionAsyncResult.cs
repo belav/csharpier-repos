@@ -15,7 +15,12 @@ namespace System.ServiceModel
         static AsyncCallback nestedCallback = Fx.ThunkCallback(new AsyncCallback(Callback));
         int count;
 
-        public CloseCollectionAsyncResult(TimeSpan timeout, AsyncCallback otherCallback, object state, IList<ICommunicationObject> collection)
+        public CloseCollectionAsyncResult(
+            TimeSpan timeout,
+            AsyncCallback otherCallback,
+            object state,
+            IList<ICommunicationObject> collection
+        )
             : base(otherCallback, state)
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
@@ -34,7 +39,8 @@ namespace System.ServiceModel
                 IAsyncResult result;
                 try
                 {
-                    result = collection[index].BeginClose(timeoutHelper.RemainingTime(), nestedCallback, callbackState);
+                    result = collection[index]
+                        .BeginClose(timeoutHelper.RemainingTime(), nestedCallback, callbackState);
                 }
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)

@@ -5,7 +5,15 @@ using System.Collections.Generic;
 
 namespace System.Collections.Immutable
 {
-    public readonly partial struct ImmutableArray<T> : IReadOnlyList<T>, IList<T>, IEquatable<ImmutableArray<T>>, IList, IImmutableArray, IStructuralComparable, IStructuralEquatable, IImmutableList<T>
+    public readonly partial struct ImmutableArray<T>
+        : IReadOnlyList<T>,
+            IList<T>,
+            IEquatable<ImmutableArray<T>>,
+            IList,
+            IImmutableArray,
+            IStructuralComparable,
+            IStructuralEquatable,
+            IImmutableList<T>
     {
         /// <summary>
         /// Creates a <see cref="ReadOnlySpan{T}"/> over the portion of current <see cref="ImmutableArray{T}"/> based on specified <paramref name="range"/>

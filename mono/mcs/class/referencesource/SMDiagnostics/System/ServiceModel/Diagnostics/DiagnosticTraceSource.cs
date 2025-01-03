@@ -8,15 +8,12 @@ namespace System.ServiceModel.Diagnostics
     class DiagnosticTraceSource : PiiTraceSource
     {
         const string PropagateActivityValue = "propagateActivity";
+
         internal DiagnosticTraceSource(string name, string eventSourceName)
-            : base(name, eventSourceName)
-        {
-        }
+            : base(name, eventSourceName) { }
 
         internal DiagnosticTraceSource(string name, string eventSourceName, SourceLevels level)
-            : base(name, eventSourceName, level)
-        {
-        }
+            : base(name, eventSourceName, level) { }
 
         protected override string[] GetSupportedAttributes()
         {
@@ -26,7 +23,8 @@ namespace System.ServiceModel.Diagnostics
             {
                 supportedAttributes[i] = baseAttributes[i];
             }
-            supportedAttributes[baseAttributes.Length] = DiagnosticTraceSource.PropagateActivityValue;
+            supportedAttributes[baseAttributes.Length] =
+                DiagnosticTraceSource.PropagateActivityValue;
 
             return supportedAttributes;
         }
@@ -36,7 +34,9 @@ namespace System.ServiceModel.Diagnostics
             get
             {
                 bool retval = false;
-                string attributeValue = this.Attributes[DiagnosticTraceSource.PropagateActivityValue];
+                string attributeValue = this.Attributes[
+                    DiagnosticTraceSource.PropagateActivityValue
+                ];
                 if (!string.IsNullOrEmpty(attributeValue))
                 {
                     if (!bool.TryParse(attributeValue, out retval))

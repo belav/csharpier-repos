@@ -10,6 +10,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
     {
         // Deprecated.  Never exposed in the UI to users in any way.  Kept around to still support automation
         // getting/setting our storage values from the user's profile.
-        public static readonly PerLanguageOption2<bool> AllowBestEffort = new("dotnet_allow_best_effort_when_extracting_method", defaultValue: true);
+        public static readonly PerLanguageOption2<bool> AllowBestEffort = new(
+            "dotnet_allow_best_effort_when_extracting_method",
+            defaultValue: true
+        );
     }
 }

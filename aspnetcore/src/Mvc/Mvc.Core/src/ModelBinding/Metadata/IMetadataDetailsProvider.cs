@@ -10,6 +10,4 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 /// implement one or more of <see cref="IBindingMetadataProvider"/>, <see cref="IDisplayMetadataProvider"/>,
 /// and <see cref="IValidationMetadataProvider"/>.
 /// </summary>
-public interface IMetadataDetailsProvider
-{
-}
+public interface IMetadataDetailsProvider { }

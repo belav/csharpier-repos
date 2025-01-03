@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -13,11 +14,19 @@ namespace Test
         {
             return (int)0;
         }
-        object[] Method2(ref object[] param1, ref int[] param2, BB param3,
-                                BB param4, BB param5, ref float[] param6)
+
+        object[] Method2(
+            ref object[] param1,
+            ref int[] param2,
+            BB param3,
+            BB param4,
+            BB param5,
+            ref float[] param6
+        )
         {
             return null;
         }
+
         [Fact]
         public static int TestEntryPoint()
         {

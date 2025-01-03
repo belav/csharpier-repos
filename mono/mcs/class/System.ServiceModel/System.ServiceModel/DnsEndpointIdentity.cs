@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,33 +27,30 @@
 //
 using System;
 using System.Collections.Generic;
-#if !MOBILE && !XAMMAC_4_5
-using System.IdentityModel.Claims;
-#endif
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
-
+#if !MOBILE && !XAMMAC_4_5
+using System.IdentityModel.Claims;
+#endif
 
 namespace System.ServiceModel
 {
-	public class DnsEndpointIdentity : EndpointIdentity
-	{
+    public class DnsEndpointIdentity : EndpointIdentity
+    {
 #if !MOBILE && !XAMMAC_4_5
-		public DnsEndpointIdentity (Claim identity)
-		{
-			Initialize (identity);
-		}
+        public DnsEndpointIdentity(Claim identity)
+        {
+            Initialize(identity);
+        }
 
-		public DnsEndpointIdentity (string dnsName)
-			: this (Claim.CreateDnsClaim (dnsName))
-		{
-		}
+        public DnsEndpointIdentity(string dnsName)
+            : this(Claim.CreateDnsClaim(dnsName)) { }
 #else
-		public DnsEndpointIdentity (string dnsName)
-		{
-			throw new NotImplementedException ();
-		}
+        public DnsEndpointIdentity(string dnsName)
+        {
+            throw new NotImplementedException();
+        }
 #endif
-	}
+    }
 }

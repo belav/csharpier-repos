@@ -60,8 +60,15 @@ namespace System.Web.Mvc
             _instance.InnerSetResolver(commonServiceLocator);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types.")]
-        public static void SetResolver(Func<Type, object> getService, Func<Type, IEnumerable<object>> getServices)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types."
+        )]
+        public static void SetResolver(
+            Func<Type, object> getService,
+            Func<Type, IEnumerable<object>> getServices
+        )
         {
             _instance.InnerSetResolver(getService, getServices);
         }
@@ -86,29 +93,55 @@ namespace System.Web.Mvc
 
             Type locatorType = commonServiceLocator.GetType();
             MethodInfo getInstance = locatorType.GetMethod("GetInstance", new[] { typeof(Type) });
-            MethodInfo getInstances = locatorType.GetMethod("GetAllInstances", new[] { typeof(Type) });
+            MethodInfo getInstances = locatorType.GetMethod(
+                "GetAllInstances",
+                new[] { typeof(Type) }
+            );
 
-            if (getInstance == null ||
-                getInstance.ReturnType != typeof(object) ||
-                getInstances == null ||
-                getInstances.ReturnType != typeof(IEnumerable<object>))
+            if (
+                getInstance == null
+                || getInstance.ReturnType != typeof(object)
+                || getInstances == null
+                || getInstances.ReturnType != typeof(IEnumerable<object>)
+            )
             {
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.CurrentCulture,
                         MvcResources.DependencyResolver_DoesNotImplementICommonServiceLocator,
-                        locatorType.FullName),
-                    "commonServiceLocator");
+                        locatorType.FullName
+                    ),
+                    "commonServiceLocator"
+                );
             }
 
-            var getService = (Func<Type, object>)Delegate.CreateDelegate(typeof(Func<Type, object>), commonServiceLocator, getInstance);
-            var getServices = (Func<Type, IEnumerable<object>>)Delegate.CreateDelegate(typeof(Func<Type, IEnumerable<object>>), commonServiceLocator, getInstances);
+            var getService =
+                (Func<Type, object>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<Type, object>),
+                        commonServiceLocator,
+                        getInstance
+                    );
+            var getServices =
+                (Func<Type, IEnumerable<object>>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<Type, IEnumerable<object>>),
+                        commonServiceLocator,
+                        getInstances
+                    );
 
             InnerSetResolver(new DelegateBasedDependencyResolver(getService, getServices));
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types.")]
-        public void InnerSetResolver(Func<Type, object> getService, Func<Type, IEnumerable<object>> getServices)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types."
+        )]
+        public void InnerSetResolver(
+            Func<Type, object> getService,
+            Func<Type, IEnumerable<object>> getServices
+        )
         {
             if (getService == null)
             {
@@ -131,8 +164,10 @@ namespace System.Web.Mvc
         /// </remarks>
         private sealed class CacheDependencyResolver : IDependencyResolver
         {
-            private readonly ConcurrentDictionary<Type, object> _cache = new ConcurrentDictionary<Type, object>();
-            private readonly ConcurrentDictionary<Type, IEnumerable<object>> _cacheMultiple = new ConcurrentDictionary<Type, IEnumerable<object>>();
+            private readonly ConcurrentDictionary<Type, object> _cache =
+                new ConcurrentDictionary<Type, object>();
+            private readonly ConcurrentDictionary<Type, IEnumerable<object>> _cacheMultiple =
+                new ConcurrentDictionary<Type, IEnumerable<object>>();
             private readonly Func<Type, object> _getServiceDelegate;
             private readonly Func<Type, IEnumerable<object>> _getServicesDelegate;
 
@@ -160,7 +195,11 @@ namespace System.Web.Mvc
 
         private class DefaultDependencyResolver : IDependencyResolver
         {
-            [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This method might throw exceptions whose type we cannot strongly link against; namely, ActivationException from common service locator")]
+            [SuppressMessage(
+                "Microsoft.Design",
+                "CA1031:DoNotCatchGeneralExceptionTypes",
+                Justification = "This method might throw exceptions whose type we cannot strongly link against; namely, ActivationException from common service locator"
+            )]
             public object GetService(Type serviceType)
             {
                 // Since attempting to create an instance of an interface or an abstract type results in an exception, immediately return null
@@ -191,13 +230,20 @@ namespace System.Web.Mvc
             private Func<Type, object> _getService;
             private Func<Type, IEnumerable<object>> _getServices;
 
-            public DelegateBasedDependencyResolver(Func<Type, object> getService, Func<Type, IEnumerable<object>> getServices)
+            public DelegateBasedDependencyResolver(
+                Func<Type, object> getService,
+                Func<Type, IEnumerable<object>> getServices
+            )
             {
                 _getService = getService;
                 _getServices = getServices;
             }
 
-            [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This method might throw exceptions whose type we cannot strongly link against; namely, ActivationException from common service locator")]
+            [SuppressMessage(
+                "Microsoft.Design",
+                "CA1031:DoNotCatchGeneralExceptionTypes",
+                Justification = "This method might throw exceptions whose type we cannot strongly link against; namely, ActivationException from common service locator"
+            )]
             public object GetService(Type type)
             {
                 try

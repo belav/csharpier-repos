@@ -21,23 +21,34 @@ namespace System.ComponentModel
         /// </summary>
         public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         {
-            return sourceType == typeof(string) || sourceType == typeof(Version) || base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(string)
+                || sourceType == typeof(Version)
+                || base.CanConvertFrom(context, sourceType);
         }
 
         /// <summary>
         ///    <para>Gets a value indicating whether this converter can
         ///       convert an object to the given destination type using the context.</para>
         /// </summary>
-        public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
+        public override bool CanConvertTo(
+            ITypeDescriptorContext? context,
+            [NotNullWhen(true)] Type? destinationType
+        )
         {
-            return destinationType == typeof(Version) || destinationType == typeof(InstanceDescriptor) || base.CanConvertTo(context, destinationType);
+            return destinationType == typeof(Version)
+                || destinationType == typeof(InstanceDescriptor)
+                || base.CanConvertTo(context, destinationType);
         }
 
         /// <summary>
         ///    <para>Converts the given object to a Version.</para>
         /// </summary>
         /// <exception cref="FormatException"><paramref name="value"/> is not a valid version string</exception>
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        )
         {
             if (value is string versionString)
             {
@@ -47,7 +58,10 @@ namespace System.ComponentModel
                 }
                 catch (Exception e)
                 {
-                    throw new FormatException(SR.Format(SR.ConvertInvalidPrimitive, versionString, nameof(Version)), e);
+                    throw new FormatException(
+                        SR.Format(SR.ConvertInvalidPrimitive, versionString, nameof(Version)),
+                        e
+                    );
                 }
             }
 
@@ -63,7 +77,12 @@ namespace System.ComponentModel
         ///    <para>Converts the given value object to
         ///       the specified destination type using the specified context and arguments.</para>
         /// </summary>
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
@@ -71,9 +90,23 @@ namespace System.ComponentModel
             {
                 if (destinationType == typeof(InstanceDescriptor))
                 {
-                    ConstructorInfo? ctor = typeof(Version).GetConstructor(BindingFlags.Public | BindingFlags.Instance, null, new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) }, null);
+                    ConstructorInfo? ctor = typeof(Version).GetConstructor(
+                        BindingFlags.Public | BindingFlags.Instance,
+                        null,
+                        new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) },
+                        null
+                    );
                     Debug.Assert(ctor != null, "Couldn't find constructor");
-                    return new InstanceDescriptor(ctor, new object[] { version.Major, version.Minor, version.Build, version.Revision });
+                    return new InstanceDescriptor(
+                        ctor,
+                        new object[]
+                        {
+                            version.Major,
+                            version.Minor,
+                            version.Build,
+                            version.Revision,
+                        }
+                    );
                 }
 
                 if (destinationType == typeof(string))
@@ -83,7 +116,12 @@ namespace System.ComponentModel
 
                 if (destinationType == typeof(Version))
                 {
-                    return new Version(version.Major, version.Minor, version.Build, version.Revision);
+                    return new Version(
+                        version.Major,
+                        version.Minor,
+                        version.Build,
+                        version.Revision
+                    );
                 }
             }
 

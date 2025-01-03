@@ -14,47 +14,97 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             Binary,
             Text,
             WebData,
-            WrappedWebData
+            WrappedWebData,
         };
 
-        public static XmlReader CreateXmlReader(ReaderWriterType rwType, byte[] buffer, Encoding encoding, XmlDictionaryReaderQuotas quotas, IXmlDictionary dictionary, OnXmlDictionaryReaderClose onClose)
+        public static XmlReader CreateXmlReader(
+            ReaderWriterType rwType,
+            byte[] buffer,
+            Encoding encoding,
+            XmlDictionaryReaderQuotas quotas,
+            IXmlDictionary dictionary,
+            OnXmlDictionaryReaderClose onClose
+        )
         {
             XmlReader result = null;
             switch (rwType)
             {
                 case ReaderWriterType.Binary:
-                    result = XmlDictionaryReader.CreateBinaryReader(buffer, 0, buffer.Length, dictionary, quotas, null, onClose);
+                    result = XmlDictionaryReader.CreateBinaryReader(
+                        buffer,
+                        0,
+                        buffer.Length,
+                        dictionary,
+                        quotas,
+                        null,
+                        onClose
+                    );
                     break;
                 case ReaderWriterType.Text:
-                    result = XmlDictionaryReader.CreateTextReader(buffer, 0, buffer.Length, encoding, quotas, onClose);
+                    result = XmlDictionaryReader.CreateTextReader(
+                        buffer,
+                        0,
+                        buffer.Length,
+                        encoding,
+                        quotas,
+                        onClose
+                    );
                     break;
                 case ReaderWriterType.WebData:
                     if (quotas != XmlDictionaryReaderQuotas.Max)
                     {
-                        throw new InvalidOperationException("Cannot enforce quotas on the Webdata readers!");
+                        throw new InvalidOperationException(
+                            "Cannot enforce quotas on the Webdata readers!"
+                        );
                     }
 
                     if (onClose != null)
                     {
-                        throw new InvalidOperationException("Webdata readers do not support the OnClose callback!");
+                        throw new InvalidOperationException(
+                            "Webdata readers do not support the OnClose callback!"
+                        );
                     }
 
-                    XmlParserContext context = new XmlParserContext(null, null, null, XmlSpace.Default, encoding);
-                    result = XmlReader.Create(new MemoryStream(buffer), new XmlReaderSettings(), context);
+                    XmlParserContext context = new XmlParserContext(
+                        null,
+                        null,
+                        null,
+                        XmlSpace.Default,
+                        encoding
+                    );
+                    result = XmlReader.Create(
+                        new MemoryStream(buffer),
+                        new XmlReaderSettings(),
+                        context
+                    );
                     break;
                 case ReaderWriterType.WrappedWebData:
                     if (quotas != XmlDictionaryReaderQuotas.Max)
                     {
-                        throw new InvalidOperationException("There is no overload to create the webdata readers with quotas!");
+                        throw new InvalidOperationException(
+                            "There is no overload to create the webdata readers with quotas!"
+                        );
                     }
 
                     if (onClose != null)
                     {
-                        throw new InvalidOperationException("Webdata readers do not support the OnClose callback!");
+                        throw new InvalidOperationException(
+                            "Webdata readers do not support the OnClose callback!"
+                        );
                     }
 
-                    XmlParserContext context2 = new XmlParserContext(null, null, null, XmlSpace.Default, encoding);
-                    result = XmlReader.Create(new MemoryStream(buffer), new XmlReaderSettings(), context2);
+                    XmlParserContext context2 = new XmlParserContext(
+                        null,
+                        null,
+                        null,
+                        XmlSpace.Default,
+                        encoding
+                    );
+                    result = XmlReader.Create(
+                        new MemoryStream(buffer),
+                        new XmlReaderSettings(),
+                        context2
+                    );
                     result = XmlDictionaryReader.CreateDictionaryReader(result);
                     break;
                 default:
@@ -64,30 +114,58 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             return result;
         }
 
-        public static XmlReader CreateXmlReader(ReaderWriterType rwType, Stream stream, Encoding encoding, XmlDictionaryReaderQuotas quotas, IXmlDictionary dictionary, OnXmlDictionaryReaderClose onClose)
+        public static XmlReader CreateXmlReader(
+            ReaderWriterType rwType,
+            Stream stream,
+            Encoding encoding,
+            XmlDictionaryReaderQuotas quotas,
+            IXmlDictionary dictionary,
+            OnXmlDictionaryReaderClose onClose
+        )
         {
             XmlReader result = null;
             switch (rwType)
             {
                 case ReaderWriterType.Binary:
-                    result = XmlDictionaryReader.CreateBinaryReader(stream, dictionary, quotas, null, onClose);
+                    result = XmlDictionaryReader.CreateBinaryReader(
+                        stream,
+                        dictionary,
+                        quotas,
+                        null,
+                        onClose
+                    );
                     break;
                 case ReaderWriterType.Text:
-                    result = XmlDictionaryReader.CreateTextReader(stream, encoding, quotas, onClose);
+                    result = XmlDictionaryReader.CreateTextReader(
+                        stream,
+                        encoding,
+                        quotas,
+                        onClose
+                    );
                     break;
                 case ReaderWriterType.WebData:
                 case ReaderWriterType.WrappedWebData:
                     if (quotas != XmlDictionaryReaderQuotas.Max)
                     {
-                        throw new InvalidOperationException("Webdata readers do not support quotas!");
+                        throw new InvalidOperationException(
+                            "Webdata readers do not support quotas!"
+                        );
                     }
 
                     if (onClose != null)
                     {
-                        throw new InvalidOperationException("Webdata readers do not support the OnClose callback!");
+                        throw new InvalidOperationException(
+                            "Webdata readers do not support the OnClose callback!"
+                        );
                     }
 
-                    XmlParserContext context = new XmlParserContext(null, null, null, XmlSpace.Default, encoding);
+                    XmlParserContext context = new XmlParserContext(
+                        null,
+                        null,
+                        null,
+                        XmlSpace.Default,
+                        encoding
+                    );
                     result = XmlReader.Create(stream, new XmlReaderSettings(), context);
                     if (rwType == ReaderWriterType.WrappedWebData)
                     {
@@ -101,42 +179,81 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             return result;
         }
 
-        public static XmlReader CreateXmlReader(ReaderWriterType rwType, byte[] buffer, Encoding encoding, XmlDictionaryReaderQuotas quotas, IXmlDictionary dictionary)
+        public static XmlReader CreateXmlReader(
+            ReaderWriterType rwType,
+            byte[] buffer,
+            Encoding encoding,
+            XmlDictionaryReaderQuotas quotas,
+            IXmlDictionary dictionary
+        )
         {
             return CreateXmlReader(rwType, buffer, encoding, quotas, dictionary, null);
         }
 
-        public static XmlReader CreateXmlReader(ReaderWriterType rwType, Stream stream, Encoding encoding, XmlDictionaryReaderQuotas quotas, IXmlDictionary dictionary)
+        public static XmlReader CreateXmlReader(
+            ReaderWriterType rwType,
+            Stream stream,
+            Encoding encoding,
+            XmlDictionaryReaderQuotas quotas,
+            IXmlDictionary dictionary
+        )
         {
             return CreateXmlReader(rwType, stream, encoding, quotas, dictionary, null);
         }
 
-        public static XmlReader CreateXmlReader(ReaderWriterType rwType, byte[] buffer, Encoding encoding, XmlDictionaryReaderQuotas quotas)
+        public static XmlReader CreateXmlReader(
+            ReaderWriterType rwType,
+            byte[] buffer,
+            Encoding encoding,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return CreateXmlReader(rwType, buffer, encoding, quotas, null);
         }
 
-        public static XmlReader CreateXmlReader(ReaderWriterType rwType, Stream stream, Encoding encoding, XmlDictionaryReaderQuotas quotas)
+        public static XmlReader CreateXmlReader(
+            ReaderWriterType rwType,
+            Stream stream,
+            Encoding encoding,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return CreateXmlReader(rwType, stream, encoding, quotas, null);
         }
 
-        public static XmlReader CreateXmlReader(ReaderWriterType rwType, byte[] buffer, Encoding encoding)
+        public static XmlReader CreateXmlReader(
+            ReaderWriterType rwType,
+            byte[] buffer,
+            Encoding encoding
+        )
         {
             return CreateXmlReader(rwType, buffer, encoding, XmlDictionaryReaderQuotas.Max);
         }
 
-        public static XmlReader CreateXmlReader(ReaderWriterType rwType, Stream stream, Encoding encoding)
+        public static XmlReader CreateXmlReader(
+            ReaderWriterType rwType,
+            Stream stream,
+            Encoding encoding
+        )
         {
             return CreateXmlReader(rwType, stream, encoding, XmlDictionaryReaderQuotas.Max);
         }
 
-        public static XmlWriter CreateXmlWriter(ReaderWriterType rwType, Stream stream, Encoding encoding)
+        public static XmlWriter CreateXmlWriter(
+            ReaderWriterType rwType,
+            Stream stream,
+            Encoding encoding
+        )
         {
             return CreateXmlWriter(rwType, stream, encoding, null);
         }
 
-        public static XmlWriter CreateXmlWriter(ReaderWriterType rwType, Stream stream, Encoding encoding, IXmlDictionary dictionary)
+        public static XmlWriter CreateXmlWriter(
+            ReaderWriterType rwType,
+            Stream stream,
+            Encoding encoding,
+            IXmlDictionary dictionary
+        )
         {
             XmlWriter result = null;
             switch (rwType)

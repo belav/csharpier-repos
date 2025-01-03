@@ -16,7 +16,8 @@ public class AttributesShouldNotBeAppliedToPageModelAnalyzerTest
     [Fact]
     public Task NoDiagnosticsAreReturned_ForControllerBaseActions()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
@@ -36,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [Fact]
     public Task NoDiagnosticsAreReturned_ForControllerActions()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
@@ -56,7 +58,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [Fact]
     public Task NoDiagnosticsAreReturned_ForPageHandlersWithNonFilterAttributes()
     {
-        var source = @"
+        var source =
+            @"
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -77,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [Fact]
     public Task NoDiagnosticsAreReturned_IfFiltersAreAppliedToPageModel()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -97,7 +101,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [Fact]
     public Task NoDiagnosticsAreReturned_IfAuthorizeAttributeIsAppliedToPageModel()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -117,7 +122,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [Fact]
     public Task NoDiagnosticsAreReturned_IfAllowAnonymousIsAppliedToPageModel()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -137,7 +143,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [Fact]
     public Task NoDiagnosticsAreReturned_ForNonHandlerMethodsWithAttributes()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -164,7 +171,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [Fact]
     public Task DiagnosticsAreReturned_IfFiltersAreAppliedToPageHandlerMethod()
     {
-        var source = @"
+        var source =
+            @"
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -178,7 +186,9 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
         }
     }
 }";
-        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods)
+        var diagnosticResult = new DiagnosticResult(
+            DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods
+        )
             .WithLocation(0)
             .WithArguments("ServiceFilterAttribute");
 
@@ -188,7 +198,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [Fact]
     public Task DiagnosticsAreReturned_IfFiltersAreAppliedToPageHandlerMethodDerivingFromCustomModel()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
@@ -208,9 +219,11 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
         }
     }
 }";
-        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods)
-           .WithLocation(0)
-           .WithArguments("ServiceFilterAttribute");
+        var diagnosticResult = new DiagnosticResult(
+            DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods
+        )
+            .WithLocation(0)
+            .WithArguments("ServiceFilterAttribute");
 
         return VerifyAnalyzerAsync(source, diagnosticResult);
     }
@@ -218,7 +231,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [Fact]
     public Task DiagnosticsAreReturned_IfAuthorizeAttributeIsAppliedToPageHandlerMethod()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -232,9 +246,11 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
         }
     }
 }";
-        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods)
-           .WithLocation(0)
-           .WithArguments("AuthorizeAttribute");
+        var diagnosticResult = new DiagnosticResult(
+            DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods
+        )
+            .WithLocation(0)
+            .WithArguments("AuthorizeAttribute");
 
         return VerifyAnalyzerAsync(source, diagnosticResult);
     }
@@ -242,7 +258,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [Fact]
     public Task DiagnosticsAreReturned_IfFiltersAreAppliedToPageHandlerMethodForTypeWithPageModelAttribute()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
@@ -257,9 +274,11 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
         }
     }
 }";
-        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods)
-          .WithLocation(0)
-          .WithArguments("ServiceFilterAttribute");
+        var diagnosticResult = new DiagnosticResult(
+            DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods
+        )
+            .WithLocation(0)
+            .WithArguments("ServiceFilterAttribute");
 
         return VerifyAnalyzerAsync(source, diagnosticResult);
     }
@@ -267,7 +286,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [Fact]
     public Task DiagnosticsAreReturned_IfAttributeIsAppliedToBaseType()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
@@ -287,9 +307,11 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
 }
 ";
 
-        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods)
-         .WithLocation(0)
-         .WithArguments("AuthorizeAttribute");
+        var diagnosticResult = new DiagnosticResult(
+            DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods
+        )
+            .WithLocation(0)
+            .WithArguments("AuthorizeAttribute");
 
         return VerifyAnalyzerAsync(source, diagnosticResult);
     }
@@ -297,7 +319,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [Fact]
     public Task DiagnosticsAreReturned_IfRouteAttributesAreAppliedToPageHandlerMethod()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
@@ -311,9 +334,11 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     }
 }";
 
-        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptors.MVC1003_RouteAttributesShouldNotBeAppliedToPageModels)
-         .WithLocation(0)
-         .WithArguments("RouteAttribute");
+        var diagnosticResult = new DiagnosticResult(
+            DiagnosticDescriptors.MVC1003_RouteAttributesShouldNotBeAppliedToPageModels
+        )
+            .WithLocation(0)
+            .WithArguments("RouteAttribute");
 
         return VerifyAnalyzerAsync(source, diagnosticResult);
     }
@@ -321,7 +346,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [Fact]
     public Task DiagnosticsAreReturned_IfAllowAnonymousIsAppliedToPageHandlerMethod()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -340,9 +366,11 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         }
     }
 }";
-        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods)
-         .WithLocation(0)
-         .WithArguments("AllowAnonymousAttribute");
+        var diagnosticResult = new DiagnosticResult(
+            DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods
+        )
+            .WithLocation(0)
+            .WithArguments("AllowAnonymousAttribute");
 
         return VerifyAnalyzerAsync(source, diagnosticResult);
     }
@@ -350,7 +378,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
     [Fact]
     public Task DiagnosticsAreReturned_IfRouteAttribute_IsAppliedToPageModel()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
@@ -364,16 +393,20 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     }
 }";
 
-        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptors.MVC1002_RouteAttributesShouldNotBeAppliedToPageHandlerMethods)
-         .WithLocation(0)
-         .WithArguments("HttpHeadAttribute");
+        var diagnosticResult = new DiagnosticResult(
+            DiagnosticDescriptors.MVC1002_RouteAttributesShouldNotBeAppliedToPageHandlerMethods
+        )
+            .WithLocation(0)
+            .WithArguments("HttpHeadAttribute");
 
         return VerifyAnalyzerAsync(source, diagnosticResult);
     }
 
     private static Task VerifyAnalyzerAsync(string source, params DiagnosticResult[] expected)
     {
-        var test = new AttributesShouldNotBeAppliedToPageModelCSharpAnalzyerTest(TestReferences.MetadataReferences)
+        var test = new AttributesShouldNotBeAppliedToPageModelCSharpAnalzyerTest(
+            TestReferences.MetadataReferences
+        )
         {
             TestCode = source,
             ReferenceAssemblies = TestReferences.EmptyReferenceAssemblies,
@@ -383,13 +416,17 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
         return test.RunAsync();
     }
 
-    private sealed class AttributesShouldNotBeAppliedToPageModelCSharpAnalzyerTest : CSharpAnalyzerTest<AttributesShouldNotBeAppliedToPageModelAnalyzer, XUnitVerifier>
+    private sealed class AttributesShouldNotBeAppliedToPageModelCSharpAnalzyerTest
+        : CSharpAnalyzerTest<AttributesShouldNotBeAppliedToPageModelAnalyzer, XUnitVerifier>
     {
-        public AttributesShouldNotBeAppliedToPageModelCSharpAnalzyerTest(ImmutableArray<MetadataReference> metadataReferences)
+        public AttributesShouldNotBeAppliedToPageModelCSharpAnalzyerTest(
+            ImmutableArray<MetadataReference> metadataReferences
+        )
         {
             TestState.AdditionalReferences.AddRange(metadataReferences);
         }
 
-        protected override IEnumerable<DiagnosticAnalyzer> GetDiagnosticAnalyzers() => new[] { new AttributesShouldNotBeAppliedToPageModelAnalyzer() };
+        protected override IEnumerable<DiagnosticAnalyzer> GetDiagnosticAnalyzers() =>
+            new[] { new AttributesShouldNotBeAppliedToPageModelAnalyzer() };
     }
 }

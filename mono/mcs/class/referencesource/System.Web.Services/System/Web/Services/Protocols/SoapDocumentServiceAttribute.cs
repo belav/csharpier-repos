@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // <copyright file="SoapDocumentServiceAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
-
+namespace System.Web.Services.Protocols
+{
     using System;
-    using System.Web.Services.Description;
     using System.Reflection;
+    using System.Web.Services.Description;
     using System.Xml.Serialization;
 
     /// <include file='doc\SoapDocumentServiceAttribute.uex' path='docs/doc[@for="SoapDocumentServiceAttribute"]/*' />
@@ -16,7 +16,8 @@ namespace System.Web.Services.Protocols {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Class)]
-    public sealed class SoapDocumentServiceAttribute : Attribute {
+    public sealed class SoapDocumentServiceAttribute : Attribute
+    {
         SoapBindingUse use = SoapBindingUse.Default;
         SoapParameterStyle paramStyle = SoapParameterStyle.Default;
         SoapServiceRoutingStyle routingStyle = SoapServiceRoutingStyle.SoapAction;
@@ -25,14 +26,14 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapDocumentServiceAttribute() {
-        }
+        public SoapDocumentServiceAttribute() { }
 
         /// <include file='doc\SoapDocumentServiceAttribute.uex' path='docs/doc[@for="SoapDocumentServiceAttribute.SoapDocumentServiceAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapDocumentServiceAttribute(SoapBindingUse use) {
+        public SoapDocumentServiceAttribute(SoapBindingUse use)
+        {
             this.use = use;
         }
 
@@ -40,7 +41,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapDocumentServiceAttribute(SoapBindingUse use, SoapParameterStyle paramStyle) {
+        public SoapDocumentServiceAttribute(SoapBindingUse use, SoapParameterStyle paramStyle)
+        {
             this.use = use;
             this.paramStyle = paramStyle;
         }
@@ -49,7 +51,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapBindingUse Use {
+        public SoapBindingUse Use
+        {
             get { return use; }
             set { use = value; }
         }
@@ -58,16 +61,17 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapParameterStyle ParameterStyle {
+        public SoapParameterStyle ParameterStyle
+        {
             get { return paramStyle; }
             set { paramStyle = value; }
         }
 
         /// <include file='doc\SoapDocumentServiceAttribute.uex' path='docs/doc[@for="SoapDocumentServiceAttribute.RoutingStyle"]/*' />
-        public SoapServiceRoutingStyle RoutingStyle {
+        public SoapServiceRoutingStyle RoutingStyle
+        {
             get { return routingStyle; }
             set { routingStyle = value; }
         }
     }
-
 }

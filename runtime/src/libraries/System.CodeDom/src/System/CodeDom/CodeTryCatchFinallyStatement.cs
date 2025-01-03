@@ -7,13 +7,20 @@ namespace System.CodeDom
     {
         public CodeTryCatchFinallyStatement() { }
 
-        public CodeTryCatchFinallyStatement(CodeStatement[] tryStatements, CodeCatchClause[] catchClauses)
+        public CodeTryCatchFinallyStatement(
+            CodeStatement[] tryStatements,
+            CodeCatchClause[] catchClauses
+        )
         {
             TryStatements.AddRange(tryStatements);
             CatchClauses.AddRange(catchClauses);
         }
 
-        public CodeTryCatchFinallyStatement(CodeStatement[] tryStatements, CodeCatchClause[] catchClauses, CodeStatement[] finallyStatements)
+        public CodeTryCatchFinallyStatement(
+            CodeStatement[] tryStatements,
+            CodeCatchClause[] catchClauses,
+            CodeStatement[] finallyStatements
+        )
         {
             TryStatements.AddRange(tryStatements);
             CatchClauses.AddRange(catchClauses);

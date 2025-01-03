@@ -24,28 +24,43 @@ public class CngGcmAuthenticatedEncryptorDescriptorDeserializerTests
             {
                 EncryptionAlgorithm = Constants.BCRYPT_AES_ALGORITHM,
                 EncryptionAlgorithmKeySize = 192,
-                EncryptionAlgorithmProvider = null
+                EncryptionAlgorithmProvider = null,
             },
-            masterKey.ToSecret());
+            masterKey.ToSecret()
+        );
         var control = CreateEncryptorInstanceFromDescriptor(descriptor);
 
-        var xml = $@"
+        var xml =
+            $@"
                 <descriptor version='1' xmlns:enc='http://schemas.asp.net/2015/03/dataProtection'>
                   <encryption algorithm='AES' keyLength='192' />
                   <masterKey enc:requiresEncryption='true'>{masterKey}</masterKey>
                 </descriptor>";
-        var deserializedDescriptor = new CngGcmAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(XElement.Parse(xml));
-        var test = CreateEncryptorInstanceFromDescriptor(deserializedDescriptor as CngGcmAuthenticatedEncryptorDescriptor);
+        var deserializedDescriptor =
+            new CngGcmAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(
+                XElement.Parse(xml)
+            );
+        var test = CreateEncryptorInstanceFromDescriptor(
+            deserializedDescriptor as CngGcmAuthenticatedEncryptorDescriptor
+        );
 
         // Act & assert
         byte[] plaintext = new byte[] { 1, 2, 3, 4, 5 };
         byte[] aad = new byte[] { 2, 4, 6, 8, 0 };
-        byte[] ciphertext = control.Encrypt(new ArraySegment<byte>(plaintext), new ArraySegment<byte>(aad));
-        byte[] roundTripPlaintext = test.Decrypt(new ArraySegment<byte>(ciphertext), new ArraySegment<byte>(aad));
+        byte[] ciphertext = control.Encrypt(
+            new ArraySegment<byte>(plaintext),
+            new ArraySegment<byte>(aad)
+        );
+        byte[] roundTripPlaintext = test.Decrypt(
+            new ArraySegment<byte>(ciphertext),
+            new ArraySegment<byte>(aad)
+        );
         Assert.Equal(plaintext, roundTripPlaintext);
     }
 
-    private static IAuthenticatedEncryptor CreateEncryptorInstanceFromDescriptor(CngGcmAuthenticatedEncryptorDescriptor descriptor)
+    private static IAuthenticatedEncryptor CreateEncryptorInstanceFromDescriptor(
+        CngGcmAuthenticatedEncryptorDescriptor descriptor
+    )
     {
         var encryptorFactory = new CngGcmAuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
         var key = new Key(
@@ -54,7 +69,8 @@ public class CngGcmAuthenticatedEncryptorDescriptorDeserializerTests
             activationDate: DateTimeOffset.Now + TimeSpan.FromHours(1),
             expirationDate: DateTimeOffset.Now + TimeSpan.FromDays(30),
             descriptor: descriptor,
-            encryptorFactories: new[] { encryptorFactory });
+            encryptorFactories: new[] { encryptorFactory }
+        );
 
         return key.CreateEncryptor();
     }

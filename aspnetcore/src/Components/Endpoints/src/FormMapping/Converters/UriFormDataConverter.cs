@@ -21,7 +21,14 @@ internal class UriFormDataConverter : FormDataConverter<Uri>, ISingleValueConver
             // Using ParsableMappingError as ParsableConverter<T> will subsume this
             // converter in a future version.
             var segment = reader.GetLastPrefixSegment();
-            reader.AddMappingError(FormattableStringFactory.Create(FormDataResources.ParsableMappingError, value, segment), value);
+            reader.AddMappingError(
+                FormattableStringFactory.Create(
+                    FormDataResources.ParsableMappingError,
+                    value,
+                    segment
+                ),
+                value
+            );
             result = default!;
             return false;
         }
@@ -29,7 +36,13 @@ internal class UriFormDataConverter : FormDataConverter<Uri>, ISingleValueConver
 
     [RequiresDynamicCode(FormMappingHelpers.RequiresDynamicCodeMessage)]
     [RequiresUnreferencedCode(FormMappingHelpers.RequiresUnreferencedCodeMessage)]
-    internal override bool TryRead(ref FormDataReader context, Type type, FormDataMapperOptions options, out Uri? result, out bool found)
+    internal override bool TryRead(
+        ref FormDataReader context,
+        Type type,
+        FormDataMapperOptions options,
+        out Uri? result,
+        out bool found
+    )
     {
         found = context.TryGetValue(out var value);
         if (!found)

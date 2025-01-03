@@ -5,9 +5,6 @@ namespace Microsoft.Extensions.DependencyInjection.Tests.Fakes
 {
     public class NoCircularDependencySameTypeMultipleTimesC
     {
-        public NoCircularDependencySameTypeMultipleTimesC()
-        {
-
-        }
+        public NoCircularDependencySameTypeMultipleTimesC() { }
     }
 }

@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1016796")]
         public void NestedTypes()
         {
-            var source = @"
+            var source =
+                @"
 public class A
 {
     public class B { }
@@ -71,14 +72,27 @@ namespace N
             Assert.Equal("A.B", assembly.GetType("A+B").GetTypeName());
             Assert.Equal("N.A", assembly.GetType("N.A").GetTypeName());
             Assert.Equal("N.A.B", assembly.GetType("N.A+B").GetTypeName());
-            Assert.Equal("N.G1<int>.G2<float>.G3<double>", assembly.GetType("N.G1`1+G2`1+G3`1").MakeGenericType(typeof(int), typeof(float), typeof(double)).GetTypeName());
-            Assert.Equal("N.G1<int>.G2<float>.G4<double, ushort>", assembly.GetType("N.G1`1+G2`1+G4`2").MakeGenericType(typeof(int), typeof(float), typeof(double), typeof(ushort)).GetTypeName());
+            Assert.Equal(
+                "N.G1<int>.G2<float>.G3<double>",
+                assembly
+                    .GetType("N.G1`1+G2`1+G3`1")
+                    .MakeGenericType(typeof(int), typeof(float), typeof(double))
+                    .GetTypeName()
+            );
+            Assert.Equal(
+                "N.G1<int>.G2<float>.G4<double, ushort>",
+                assembly
+                    .GetType("N.G1`1+G2`1+G4`2")
+                    .MakeGenericType(typeof(int), typeof(float), typeof(double), typeof(ushort))
+                    .GetTypeName()
+            );
         }
 
         [Fact]
         public void GenericTypes()
         {
-            var source = @"
+            var source =
+                @"
 public class A
 {
     public class B { }
@@ -106,14 +120,21 @@ namespace N
             Assert.Equal("N.C<T, U>", typeC.GetTypeName());
             Assert.Equal("N.C<int, string>", typeCIntString.GetTypeName());
             Assert.Equal("N.C<A, A.B>", typeC.MakeGenericType(typeA, typeB).GetTypeName());
-            Assert.Equal("N.C<int, string>.D<A, A.B>", typeD.MakeGenericType(typeInt, typeString, typeA, typeB).GetTypeName());
-            Assert.Equal("N.C<A, N.C<int, string>>.D<N.C<int, string>, A.B>", typeD.MakeGenericType(typeA, typeCIntString, typeCIntString, typeB).GetTypeName());
+            Assert.Equal(
+                "N.C<int, string>.D<A, A.B>",
+                typeD.MakeGenericType(typeInt, typeString, typeA, typeB).GetTypeName()
+            );
+            Assert.Equal(
+                "N.C<A, N.C<int, string>>.D<N.C<int, string>, A.B>",
+                typeD.MakeGenericType(typeA, typeCIntString, typeCIntString, typeB).GetTypeName()
+            );
         }
 
         [Fact]
         public void NonGenericInGeneric()
         {
-            var source = @"
+            var source =
+                @"
 public class A<T>
 {
     public class B { }
@@ -136,7 +157,8 @@ public class A<T>
         [Fact]
         public void NullableTypes()
         {
-            var source = @"
+            var source =
+                @"
 namespace N
 {
     public struct A<T>
@@ -159,8 +181,14 @@ namespace N
             var typeC = assembly.GetType("N.C");
 
             Assert.Equal("N.C?", typeNullable.MakeGenericType(typeC).GetTypeName());
-            Assert.Equal("N.A<N.C>?", typeNullable.MakeGenericType(typeA.MakeGenericType(typeC)).GetTypeName());
-            Assert.Equal("N.A<N.C>.B<N.C>?", typeNullable.MakeGenericType(typeB.MakeGenericType(typeC, typeC)).GetTypeName());
+            Assert.Equal(
+                "N.A<N.C>?",
+                typeNullable.MakeGenericType(typeA.MakeGenericType(typeC)).GetTypeName()
+            );
+            Assert.Equal(
+                "N.A<N.C>.B<N.C>?",
+                typeNullable.MakeGenericType(typeB.MakeGenericType(typeC, typeC)).GetTypeName()
+            );
         }
 
         [Fact]
@@ -175,7 +203,8 @@ namespace N
         [Fact]
         public void ArrayTypes()
         {
-            var source = @"
+            var source =
+                @"
 namespace N
 {
     public class A<T>
@@ -199,14 +228,20 @@ namespace N
 
             Assert.Equal("N.C[]", typeC.MakeArrayType().GetTypeName());
             Assert.Equal("N.C[]", typeC.MakeArrayType(1).GetTypeName()); // NOTE: Multi-dimensional array that happens to exactly one dimension.
-            Assert.Equal("N.A<N.C>[,]", typeA.MakeGenericType(typeC).MakeArrayType(2).GetTypeName());
-            Assert.Equal("N.A<N.C[]>.B<N.C>[,,]", typeB.MakeGenericType(typeC.MakeArrayType(), typeC).MakeArrayType(3).GetTypeName());
+            Assert.Equal(
+                "N.A<N.C>[,]",
+                typeA.MakeGenericType(typeC).MakeArrayType(2).GetTypeName()
+            );
+            Assert.Equal(
+                "N.A<N.C[]>.B<N.C>[,,]",
+                typeB.MakeGenericType(typeC.MakeArrayType(), typeC).MakeArrayType(3).GetTypeName()
+            );
         }
 
         [Fact]
         public void CustomBoundsArrayTypes()
         {
-            Array instance = Array.CreateInstance(typeof(int), [1, 2, 3,], [4, 5, 6,]);
+            Array instance = Array.CreateInstance(typeof(int), [1, 2, 3], [4, 5, 6]);
 
             Assert.Equal("int[,,]", instance.GetType().GetTypeName());
             Assert.Equal("int[][,,]", instance.GetType().MakeArrayType().GetTypeName());
@@ -223,7 +258,8 @@ namespace N
         [Fact]
         public void PointerTypes()
         {
-            var source = @"
+            var source =
+                @"
 namespace N
 {
     public struct A<T>
@@ -245,7 +281,10 @@ namespace N
 
             Assert.Equal("N.C*", typeC.MakePointerType().GetTypeName());
             Assert.Equal("N.A<N.C>*", typeA.MakeGenericType(typeC).MakePointerType().GetTypeName());
-            Assert.Equal("N.A<N.C>.B<N.C>*", typeB.MakeGenericType(typeC, typeC).MakePointerType().GetTypeName());
+            Assert.Equal(
+                "N.A<N.C>.B<N.C>*",
+                typeB.MakeGenericType(typeC, typeC).MakePointerType().GetTypeName()
+            );
         }
 
         [Fact]
@@ -258,7 +297,8 @@ namespace N
         [Fact]
         public void KeywordIdentifiers()
         {
-            var source = @"
+            var source =
+                @"
 public class @object
 {
     public class @true { }
@@ -289,25 +329,61 @@ namespace @return
 
             Assert.Equal("object", objectType.GetTypeName(escapeKeywordIdentifiers: false));
             Assert.Equal("object.true", trueType.GetTypeName(escapeKeywordIdentifiers: false));
-            Assert.Equal("return.false.null", nullType.GetTypeName(escapeKeywordIdentifiers: false));
-            Assert.Equal("return.yield<async>", yieldType.GetTypeName(escapeKeywordIdentifiers: false));
-            Assert.Equal("return.yield<return.false.null>", constructedYieldType.GetTypeName(escapeKeywordIdentifiers: false));
-            Assert.Equal("return.yield<return.false.null>.await", constructedAwaitType.GetTypeName(escapeKeywordIdentifiers: false));
+            Assert.Equal(
+                "return.false.null",
+                nullType.GetTypeName(escapeKeywordIdentifiers: false)
+            );
+            Assert.Equal(
+                "return.yield<async>",
+                yieldType.GetTypeName(escapeKeywordIdentifiers: false)
+            );
+            Assert.Equal(
+                "return.yield<return.false.null>",
+                constructedYieldType.GetTypeName(escapeKeywordIdentifiers: false)
+            );
+            Assert.Equal(
+                "return.yield<return.false.null>.await",
+                constructedAwaitType.GetTypeName(escapeKeywordIdentifiers: false)
+            );
 
             Assert.Equal("@object", objectType.GetTypeName(escapeKeywordIdentifiers: true));
             Assert.Equal("@object.@true", trueType.GetTypeName(escapeKeywordIdentifiers: true));
-            Assert.Equal("@return.@false.@null", nullType.GetTypeName(escapeKeywordIdentifiers: true));
-            Assert.Equal("@return.@yield<@async>", yieldType.GetTypeName(escapeKeywordIdentifiers: true));
-            Assert.Equal("@return.@yield<@return.@false.@null>", constructedYieldType.GetTypeName(escapeKeywordIdentifiers: true));
-            Assert.Equal("@return.@yield<@return.@false.@null>.@await", constructedAwaitType.GetTypeName(escapeKeywordIdentifiers: true));
+            Assert.Equal(
+                "@return.@false.@null",
+                nullType.GetTypeName(escapeKeywordIdentifiers: true)
+            );
+            Assert.Equal(
+                "@return.@yield<@async>",
+                yieldType.GetTypeName(escapeKeywordIdentifiers: true)
+            );
+            Assert.Equal(
+                "@return.@yield<@return.@false.@null>",
+                constructedYieldType.GetTypeName(escapeKeywordIdentifiers: true)
+            );
+            Assert.Equal(
+                "@return.@yield<@return.@false.@null>.@await",
+                constructedAwaitType.GetTypeName(escapeKeywordIdentifiers: true)
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1087216")]
         public void DynamicAttribute_KeywordEscaping()
         {
             var attributes = new[] { true };
-            Assert.Equal("dynamic", typeof(object).GetTypeName(MakeCustomTypeInfo(attributes), escapeKeywordIdentifiers: false));
-            Assert.Equal("dynamic", typeof(object).GetTypeName(MakeCustomTypeInfo(attributes), escapeKeywordIdentifiers: true));
+            Assert.Equal(
+                "dynamic",
+                typeof(object).GetTypeName(
+                    MakeCustomTypeInfo(attributes),
+                    escapeKeywordIdentifiers: false
+                )
+            );
+            Assert.Equal(
+                "dynamic",
+                typeof(object).GetTypeName(
+                    MakeCustomTypeInfo(attributes),
+                    escapeKeywordIdentifiers: true
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1087216")]
@@ -317,13 +393,23 @@ namespace @return
             Assert.Equal("dynamic", typeof(object).GetTypeName(MakeCustomTypeInfo(true)));
 
             // Array element type.
-            Assert.Equal("dynamic[]", typeof(object[]).GetTypeName(MakeCustomTypeInfo(false, true)));
-            Assert.Equal("dynamic[][]", typeof(object[][]).GetTypeName(MakeCustomTypeInfo(false, false, true)));
+            Assert.Equal(
+                "dynamic[]",
+                typeof(object[]).GetTypeName(MakeCustomTypeInfo(false, true))
+            );
+            Assert.Equal(
+                "dynamic[][]",
+                typeof(object[][]).GetTypeName(MakeCustomTypeInfo(false, false, true))
+            );
 
             // Type argument of top-level type.
-            Assert.Equal("System.Func<dynamic>", typeof(Func<object>).GetTypeName(MakeCustomTypeInfo(false, true)));
+            Assert.Equal(
+                "System.Func<dynamic>",
+                typeof(Func<object>).GetTypeName(MakeCustomTypeInfo(false, true))
+            );
 
-            var source = @"
+            var source =
+                @"
 namespace N
 {
     public struct A<T>
@@ -344,9 +430,20 @@ namespace N
             var typeBConstructed = typeB.MakeGenericType(typeof(object), typeof(object));
 
             // Type argument of nested type.
-            Assert.Equal("N.A<object>.B<dynamic>", typeBConstructed.GetTypeName(MakeCustomTypeInfo(false, false, true)));
-            Assert.Equal("N.A<dynamic>.B<object>", typeBConstructed.GetTypeName(MakeCustomTypeInfo(false, true, false)));
-            Assert.Equal("N.A<dynamic>.B<dynamic>[]", typeBConstructed.MakeArrayType().GetTypeName(MakeCustomTypeInfo(false, false, true, true)));
+            Assert.Equal(
+                "N.A<object>.B<dynamic>",
+                typeBConstructed.GetTypeName(MakeCustomTypeInfo(false, false, true))
+            );
+            Assert.Equal(
+                "N.A<dynamic>.B<object>",
+                typeBConstructed.GetTypeName(MakeCustomTypeInfo(false, true, false))
+            );
+            Assert.Equal(
+                "N.A<dynamic>.B<dynamic>[]",
+                typeBConstructed
+                    .MakeArrayType()
+                    .GetTypeName(MakeCustomTypeInfo(false, false, true, true))
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1087216")]
@@ -365,9 +462,13 @@ namespace N
             Assert.Equal("object[]", typeof(object[]).GetTypeName(MakeCustomTypeInfo(false)));
 
             // Type argument of top-level type.
-            Assert.Equal("System.Func<object>", typeof(Func<object>).GetTypeName(MakeCustomTypeInfo(true)));
+            Assert.Equal(
+                "System.Func<object>",
+                typeof(Func<object>).GetTypeName(MakeCustomTypeInfo(true))
+            );
 
-            var source = @"
+            var source =
+                @"
 namespace N
 {
     public struct A<T>
@@ -388,15 +489,27 @@ namespace N
             var typeBConstructed = typeB.MakeGenericType(typeof(object), typeof(object));
 
             // Type argument of nested type.
-            Assert.Equal("N.A<object>.B<object>", typeBConstructed.GetTypeName(MakeCustomTypeInfo(false)));
-            Assert.Equal("N.A<dynamic>.B<object>", typeBConstructed.GetTypeName(MakeCustomTypeInfo(false, true)));
-            Assert.Equal("N.A<dynamic>.B<object>[]", typeBConstructed.MakeArrayType().GetTypeName(MakeCustomTypeInfo(false, false, true)));
+            Assert.Equal(
+                "N.A<object>.B<object>",
+                typeBConstructed.GetTypeName(MakeCustomTypeInfo(false))
+            );
+            Assert.Equal(
+                "N.A<dynamic>.B<object>",
+                typeBConstructed.GetTypeName(MakeCustomTypeInfo(false, true))
+            );
+            Assert.Equal(
+                "N.A<dynamic>.B<object>[]",
+                typeBConstructed.MakeArrayType().GetTypeName(MakeCustomTypeInfo(false, false, true))
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1087216")]
         public void DynamicAttribute_OtherGuid()
         {
-            var typeInfo = DkmClrCustomTypeInfo.Create(Guid.NewGuid(), new ReadOnlyCollection<byte>(new byte[] { 1 }));
+            var typeInfo = DkmClrCustomTypeInfo.Create(
+                Guid.NewGuid(),
+                new ReadOnlyCollection<byte>(new byte[] { 1 })
+            );
             Assert.Equal("object", typeof(object).GetTypeName(typeInfo));
             Assert.Equal("object[]", typeof(object[]).GetTypeName(typeInfo));
         }
@@ -404,7 +517,8 @@ namespace N
         [Fact]
         public void MangledTypeParameterName()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi beforefieldinit Type`1<'<>Mangled'>
        extends [mscorlib]System.Object
 {
@@ -420,7 +534,13 @@ namespace N
 
             ImmutableArray<byte> assemblyBytes;
             ImmutableArray<byte> pdbBytes;
-            CSharpTestBase.EmitILToArray(il, appendDefaultHeader: true, includePdb: false, assemblyBytes: out assemblyBytes, pdbBytes: out pdbBytes);
+            CSharpTestBase.EmitILToArray(
+                il,
+                appendDefaultHeader: true,
+                includePdb: false,
+                assemblyBytes: out assemblyBytes,
+                pdbBytes: out pdbBytes
+            );
             var assembly = ReflectionUtilities.Load(assemblyBytes);
             var type = assembly.GetType("Type`1");
             var typeName = type.GetTypeName();

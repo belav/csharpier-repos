@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -16,9 +15,24 @@ namespace System.Net.Http.Tests
             Assert.Equal("token", value.Value);
             Assert.Null(value.Quality);
 
-            AssertExtensions.Throws<ArgumentNullException>("value", () => { new StringWithQualityHeaderValue(null); });
-            AssertExtensions.Throws<ArgumentException>("value", () => { new StringWithQualityHeaderValue(""); });
-            Assert.Throws<FormatException>(() => { new StringWithQualityHeaderValue("in valid"); });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () =>
+                {
+                    new StringWithQualityHeaderValue(null);
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () =>
+                {
+                    new StringWithQualityHeaderValue("");
+                }
+            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new StringWithQualityHeaderValue("in valid");
+            });
         }
 
         [Fact]
@@ -28,12 +42,33 @@ namespace System.Net.Http.Tests
             Assert.Equal("token", value.Value);
             Assert.Equal(0.5, value.Quality);
 
-            AssertExtensions.Throws<ArgumentNullException>("value", () => { new StringWithQualityHeaderValue(null, 0.1); });
-            AssertExtensions.Throws<ArgumentException>("value", () => { new StringWithQualityHeaderValue("", 0.1); });
-            Assert.Throws<FormatException>(() => { new StringWithQualityHeaderValue("in valid", 0.1); });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () =>
+                {
+                    new StringWithQualityHeaderValue(null, 0.1);
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () =>
+                {
+                    new StringWithQualityHeaderValue("", 0.1);
+                }
+            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new StringWithQualityHeaderValue("in valid", 0.1);
+            });
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new StringWithQualityHeaderValue("t", 1.1); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new StringWithQualityHeaderValue("t", -0.1); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new StringWithQualityHeaderValue("t", 1.1);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new StringWithQualityHeaderValue("t", -0.1);
+            });
         }
 
         [Fact]
@@ -108,7 +143,8 @@ namespace System.Net.Http.Tests
         public void Clone_Call_CloneFieldsMatchSourceFields()
         {
             StringWithQualityHeaderValue source = new StringWithQualityHeaderValue("token", 0.123);
-            StringWithQualityHeaderValue clone = (StringWithQualityHeaderValue)((ICloneable)source).Clone();
+            StringWithQualityHeaderValue clone = (StringWithQualityHeaderValue)
+                ((ICloneable)source).Clone();
             Assert.Equal(source.Value, clone.Value);
             Assert.Equal(source.Quality, clone.Quality);
 
@@ -178,7 +214,10 @@ namespace System.Net.Http.Tests
             CheckValidParse("text ; q = 0.5", new StringWithQualityHeaderValue("text", 0.5));
             CheckValidParse(" text ; q = 0.5 ", new StringWithQualityHeaderValue("text", 0.5));
             CheckValidParse("  text  ", new StringWithQualityHeaderValue("text"));
-            CheckValidParse("  text  ;  q = 0.123", new StringWithQualityHeaderValue("text", 0.123));
+            CheckValidParse(
+                "  text  ;  q = 0.123",
+                new StringWithQualityHeaderValue("text", 0.123)
+            );
         }
 
         [Fact]
@@ -229,25 +268,46 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(() => { StringWithQualityHeaderValue.Parse(input); });
+            Assert.Throws<FormatException>(() =>
+            {
+                StringWithQualityHeaderValue.Parse(input);
+            });
 
-            Assert.False(StringWithQualityHeaderValue.TryParse(input, out StringWithQualityHeaderValue result));
+            Assert.False(
+                StringWithQualityHeaderValue.TryParse(
+                    input,
+                    out StringWithQualityHeaderValue result
+                )
+            );
             Assert.Null(result);
         }
 
-        private static void CallGetStringWithQualityLength(string input, int startIndex, int expectedLength,
-            out StringWithQualityHeaderValue result)
+        private static void CallGetStringWithQualityLength(
+            string input,
+            int startIndex,
+            int expectedLength,
+            out StringWithQualityHeaderValue result
+        )
         {
             object temp = null;
-            Assert.Equal(expectedLength, StringWithQualityHeaderValue.GetStringWithQualityLength(input,
-                startIndex, out temp));
+            Assert.Equal(
+                expectedLength,
+                StringWithQualityHeaderValue.GetStringWithQualityLength(input, startIndex, out temp)
+            );
             result = temp as StringWithQualityHeaderValue;
         }
 
         private static void CheckInvalidGetStringWithQualityLength(string input, int startIndex)
         {
             object result = null;
-            Assert.Equal(0, StringWithQualityHeaderValue.GetStringWithQualityLength(input, startIndex, out result));
+            Assert.Equal(
+                0,
+                StringWithQualityHeaderValue.GetStringWithQualityLength(
+                    input,
+                    startIndex,
+                    out result
+                )
+            );
             Assert.Null(result);
         }
         #endregion

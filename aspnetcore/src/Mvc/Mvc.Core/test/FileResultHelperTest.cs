@@ -34,10 +34,7 @@ public class FileResultTest
         var httpContext = GetHttpContext();
         var actionContext = CreateActionContext(httpContext);
 
-        var result = new EmptyFileResult("application/my-type")
-        {
-            FileDownloadName = @"some\file"
-        };
+        var result = new EmptyFileResult("application/my-type") { FileDownloadName = @"some\file" };
 
         // Act
         await result.ExecuteResultAsync(actionContext);
@@ -46,7 +43,10 @@ public class FileResultTest
         Assert.True(result.WasWriteFileCalled);
 
         Assert.Equal("application/my-type", httpContext.Response.Headers["Content-Type"]);
-        Assert.Equal(@"attachment; filename=""some\\file""; filename*=UTF-8''some%5Cfile", httpContext.Response.Headers["Content-Disposition"]);
+        Assert.Equal(
+            @"attachment; filename=""some\\file""; filename*=UTF-8''some%5Cfile",
+            httpContext.Response.Headers["Content-Disposition"]
+        );
     }
 
     [Fact]
@@ -58,7 +58,7 @@ public class FileResultTest
 
         var result = new EmptyFileResult("application/my-type")
         {
-            FileDownloadName = "ABCXYZabcxyz012789!@#$%^&*()-=_+.:~Δ"
+            FileDownloadName = "ABCXYZabcxyz012789!@#$%^&*()-=_+.:~Δ",
         };
 
         // Act
@@ -67,8 +67,10 @@ public class FileResultTest
         // Assert
         Assert.True(result.WasWriteFileCalled);
         Assert.Equal("application/my-type", httpContext.Response.Headers["Content-Type"]);
-        Assert.Equal(@"attachment; filename=""ABCXYZabcxyz012789!@#$%^&*()-=_+.:~_""; filename*=UTF-8''ABCXYZabcxyz012789!%40#$%25^&%2A%28%29-%3D_+.%3A~%CE%94",
-            httpContext.Response.Headers["Content-Disposition"]);
+        Assert.Equal(
+            @"attachment; filename=""ABCXYZabcxyz012789!@#$%^&*()-=_+.:~_""; filename*=UTF-8''ABCXYZabcxyz012789!%40#$%25^&%2A%28%29-%3D_+.%3A~%CE%94",
+            httpContext.Response.Headers["Content-Disposition"]
+        );
     }
 
     [Fact]
@@ -105,7 +107,7 @@ public class FileResultTest
 
         var result = new EmptyFileResult("application/my-type")
         {
-            FileDownloadName = "filename.ext"
+            FileDownloadName = "filename.ext",
         };
 
         // Act
@@ -114,7 +116,10 @@ public class FileResultTest
         // Assert
         Assert.True(result.WasWriteFileCalled);
         Assert.Equal("application/my-type", httpContext.Response.ContentType);
-        Assert.Equal("attachment; filename=filename.ext; filename*=UTF-8''filename.ext", httpContext.Response.Headers["Content-Disposition"]);
+        Assert.Equal(
+            "attachment; filename=filename.ext; filename*=UTF-8''filename.ext",
+            httpContext.Response.Headers["Content-Disposition"]
+        );
     }
 
     [Fact]
@@ -127,7 +132,9 @@ public class FileResultTest
         var result = new EmptyFileResult("application/my-type");
 
         // Act & Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(() => result.ExecuteResultAsync(actionContext));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => result.ExecuteResultAsync(actionContext)
+        );
     }
 
     public static TheoryData<string, string> ContentDispositionData
@@ -135,56 +142,58 @@ public class FileResultTest
         get
         {
             return new TheoryData<string, string>
+            {
+                // Non quoted values
+                { "09aAzZ", "attachment; filename=09aAzZ; filename*=UTF-8''09aAzZ" },
+                { "a.b", "attachment; filename=a.b; filename*=UTF-8''a.b" },
+                { "#", "attachment; filename=#; filename*=UTF-8''#" },
+                { "-", "attachment; filename=-; filename*=UTF-8''-" },
+                { "_", "attachment; filename=_; filename*=UTF-8''_" },
+                { "~", "attachment; filename=~; filename*=UTF-8''~" },
+                { "$", "attachment; filename=$; filename*=UTF-8''$" },
+                { "&", "attachment; filename=&; filename*=UTF-8''&" },
+                { "+", "attachment; filename=+; filename*=UTF-8''+" },
+                { "!", "attachment; filename=!; filename*=UTF-8''!" },
+                { "^", "attachment; filename=^; filename*=UTF-8''^" },
+                { "`", "attachment; filename=`; filename*=UTF-8''`" },
+                { "|", "attachment; filename=|; filename*=UTF-8''|" },
+                // Values that need to be quoted
+                { ": :", "attachment; filename=\": :\"; filename*=UTF-8''%3A%20%3A" },
+                { "(", "attachment; filename=\"(\"; filename*=UTF-8''%28" },
+                { ")", "attachment; filename=\")\"; filename*=UTF-8''%29" },
+                { "<", "attachment; filename=\"<\"; filename*=UTF-8''%3C" },
+                { ">", "attachment; filename=\">\"; filename*=UTF-8''%3E" },
+                { "@", "attachment; filename=\"@\"; filename*=UTF-8''%40" },
+                { ",", "attachment; filename=\",\"; filename*=UTF-8''%2C" },
+                { ";", "attachment; filename=\";\"; filename*=UTF-8''%3B" },
+                { ":", "attachment; filename=\":\"; filename*=UTF-8''%3A" },
+                { "/", "attachment; filename=\"/\"; filename*=UTF-8''%2F" },
+                { "[", "attachment; filename=\"[\"; filename*=UTF-8''%5B" },
+                { "]", "attachment; filename=\"]\"; filename*=UTF-8''%5D" },
+                { "?", "attachment; filename=\"?\"; filename*=UTF-8''%3F" },
+                { "=", "attachment; filename=\"=\"; filename*=UTF-8''%3D" },
+                { "{", "attachment; filename=\"{\"; filename*=UTF-8''%7B" },
+                { "}", "attachment; filename=\"}\"; filename*=UTF-8''%7D" },
+                { " ", "attachment; filename=\" \"; filename*=UTF-8''%20" },
+                { "a b", "attachment; filename=\"a b\"; filename*=UTF-8''a%20b" },
+                // Values that need to be escaped
+                { "\"", "attachment; filename=\"\\\"\"; filename*=UTF-8''%22" },
+                { "\\", "attachment; filename=\"\\\\\"; filename*=UTF-8''%5C" },
+                // Values that need to be specially encoded (Base64, see rfc2047)
+                { "a\tb", "attachment; filename=a_b; filename*=UTF-8''a%09b" },
+                { "a\nb", "attachment; filename=a_b; filename*=UTF-8''a%0Ab" },
+                // Values with non unicode characters
                 {
-                    // Non quoted values
-                    { "09aAzZ", "attachment; filename=09aAzZ; filename*=UTF-8''09aAzZ" },
-                    { "a.b", "attachment; filename=a.b; filename*=UTF-8''a.b" },
-                    { "#", "attachment; filename=#; filename*=UTF-8''#" },
-                    { "-", "attachment; filename=-; filename*=UTF-8''-" },
-                    { "_", "attachment; filename=_; filename*=UTF-8''_" },
-                    { "~", "attachment; filename=~; filename*=UTF-8''~" },
-                    { "$", "attachment; filename=$; filename*=UTF-8''$" },
-                    { "&", "attachment; filename=&; filename*=UTF-8''&" },
-                    { "+", "attachment; filename=+; filename*=UTF-8''+" },
-                    { "!", "attachment; filename=!; filename*=UTF-8''!" },
-                    { "^", "attachment; filename=^; filename*=UTF-8''^" },
-                    { "`", "attachment; filename=`; filename*=UTF-8''`" },
-                    { "|", "attachment; filename=|; filename*=UTF-8''|" },
-
-                    // Values that need to be quoted
-                    { ": :", "attachment; filename=\": :\"; filename*=UTF-8''%3A%20%3A" },
-                    { "(", "attachment; filename=\"(\"; filename*=UTF-8''%28" },
-                    { ")", "attachment; filename=\")\"; filename*=UTF-8''%29" },
-                    { "<", "attachment; filename=\"<\"; filename*=UTF-8''%3C" },
-                    { ">", "attachment; filename=\">\"; filename*=UTF-8''%3E" },
-                    { "@", "attachment; filename=\"@\"; filename*=UTF-8''%40" },
-                    { ",", "attachment; filename=\",\"; filename*=UTF-8''%2C" },
-                    { ";", "attachment; filename=\";\"; filename*=UTF-8''%3B" },
-                    { ":", "attachment; filename=\":\"; filename*=UTF-8''%3A" },
-                    { "/", "attachment; filename=\"/\"; filename*=UTF-8''%2F" },
-                    { "[", "attachment; filename=\"[\"; filename*=UTF-8''%5B" },
-                    { "]", "attachment; filename=\"]\"; filename*=UTF-8''%5D" },
-                    { "?", "attachment; filename=\"?\"; filename*=UTF-8''%3F" },
-                    { "=", "attachment; filename=\"=\"; filename*=UTF-8''%3D" },
-                    { "{", "attachment; filename=\"{\"; filename*=UTF-8''%7B" },
-                    { "}", "attachment; filename=\"}\"; filename*=UTF-8''%7D" },
-                    { " ", "attachment; filename=\" \"; filename*=UTF-8''%20" },
-                    { "a b", "attachment; filename=\"a b\"; filename*=UTF-8''a%20b" },
-
-                    // Values that need to be escaped
-                    { "\"", "attachment; filename=\"\\\"\"; filename*=UTF-8''%22" },
-                    { "\\", "attachment; filename=\"\\\\\"; filename*=UTF-8''%5C" },
-
-                    // Values that need to be specially encoded (Base64, see rfc2047)
-                    { "a\tb", "attachment; filename=a_b; filename*=UTF-8''a%09b" },
-                    { "a\nb", "attachment; filename=a_b; filename*=UTF-8''a%0Ab" },
-
-                    // Values with non unicode characters
-                    { "résumé.txt", "attachment; filename=r_sum_.txt; filename*=UTF-8''r%C3%A9sum%C3%A9.txt" },
-                    { "Δ", "attachment; filename=_; filename*=UTF-8''%CE%94" },
-                    { "Δ\t", "attachment; filename=__; filename*=UTF-8''%CE%94%09" },
-                    { "ABCXYZabcxyz012789!@#$%^&*()-=_+.:~Δ", @"attachment; filename=""ABCXYZabcxyz012789!@#$%^&*()-=_+.:~_""; filename*=UTF-8''ABCXYZabcxyz012789!%40#$%25^&%2A%28%29-%3D_+.%3A~%CE%94" },
-                };
+                    "résumé.txt",
+                    "attachment; filename=r_sum_.txt; filename*=UTF-8''r%C3%A9sum%C3%A9.txt"
+                },
+                { "Δ", "attachment; filename=_; filename*=UTF-8''%CE%94" },
+                { "Δ\t", "attachment; filename=__; filename*=UTF-8''%CE%94%09" },
+                {
+                    "ABCXYZabcxyz012789!@#$%^&*()-=_+.:~Δ",
+                    @"attachment; filename=""ABCXYZabcxyz012789!@#$%^&*()-=_+.:~_""; filename*=UTF-8''ABCXYZabcxyz012789!%40#$%25^&%2A%28%29-%3D_+.%3A~%CE%94"
+                },
+            };
         }
     }
 
@@ -195,7 +204,10 @@ public class FileResultTest
             var data = new TheoryData<string, string>();
             for (var i = 0; i < 32; i++)
             {
-                data.Add(char.ConvertFromUtf32(i), $"attachment; filename=_; filename*=UTF-8''%{i:X2}");
+                data.Add(
+                    char.ConvertFromUtf32(i),
+                    $"attachment; filename=_; filename*=UTF-8''%{i:X2}"
+                );
             }
 
             data.Add(char.ConvertFromUtf32(127), $"attachment; filename=_; filename*=UTF-8''%7F");
@@ -207,7 +219,10 @@ public class FileResultTest
     [Theory]
     [MemberData(nameof(ContentDispositionData))]
     [MemberData(nameof(ContentDispositionControlCharactersData))]
-    public void GetHeaderValue_Produces_Correct_ContentDisposition(string input, string expectedOutput)
+    public void GetHeaderValue_Produces_Correct_ContentDisposition(
+        string input,
+        string expectedOutput
+    )
     {
         // Arrange & Act
         var cd = new ContentDispositionHeaderValue("attachment");
@@ -240,7 +255,12 @@ public class FileResultTest
     [InlineData("\"Etag\"", null, false, null)]
     [InlineData(null, "\"NotEtag\"", true, "\"Etag\"")]
     [InlineData(null, "\"NotEtag\"", false, "\"Etag\"")]
-    public void GetPreconditionState_ShouldProcess(string ifMatch, string ifNoneMatch, bool isWeak, string ifRange)
+    public void GetPreconditionState_ShouldProcess(
+        string ifMatch,
+        string ifNoneMatch,
+        bool isWeak,
+        string ifRange
+    )
     {
         // Arrange
         var actionContext = new ActionContext();
@@ -248,18 +268,23 @@ public class FileResultTest
         httpContext.Request.Method = HttpMethods.Get;
         var httpRequestHeaders = httpContext.Request.GetTypedHeaders();
         var lastModified = DateTimeOffset.MinValue;
-        lastModified = new DateTimeOffset(lastModified.Year, lastModified.Month, lastModified.Day, lastModified.Hour, lastModified.Minute, lastModified.Second, TimeSpan.FromSeconds(0));
+        lastModified = new DateTimeOffset(
+            lastModified.Year,
+            lastModified.Month,
+            lastModified.Day,
+            lastModified.Hour,
+            lastModified.Minute,
+            lastModified.Second,
+            TimeSpan.FromSeconds(0)
+        );
         var etag = new EntityTagHeaderValue("\"Etag\"");
-        httpRequestHeaders.IfMatch = ifMatch == null ? null : new[]
-        {
-                new EntityTagHeaderValue(ifMatch),
-            };
+        httpRequestHeaders.IfMatch =
+            ifMatch == null ? null : new[] { new EntityTagHeaderValue(ifMatch) };
 
-        httpRequestHeaders.IfNoneMatch = ifNoneMatch == null ? null : new[]
-        {
-                new EntityTagHeaderValue(ifNoneMatch, isWeak),
-            };
-        httpRequestHeaders.IfRange = ifRange == null ? null : new RangeConditionHeaderValue(ifRange);
+        httpRequestHeaders.IfNoneMatch =
+            ifNoneMatch == null ? null : new[] { new EntityTagHeaderValue(ifNoneMatch, isWeak) };
+        httpRequestHeaders.IfRange =
+            ifRange == null ? null : new RangeConditionHeaderValue(ifRange);
         httpRequestHeaders.IfUnmodifiedSince = lastModified;
         httpRequestHeaders.IfModifiedSince = DateTimeOffset.MinValue.AddDays(1);
         actionContext.HttpContext = httpContext;
@@ -269,7 +294,8 @@ public class FileResultTest
             httpRequestHeaders,
             lastModified,
             etag,
-            NullLogger.Instance);
+            NullLogger.Instance
+        );
 
         // Assert
         Assert.Equal(FileResultHelper.PreconditionState.ShouldProcess, state);
@@ -281,7 +307,11 @@ public class FileResultTest
     [InlineData("\"Etag\"", "\"Etag\"", true)]
     [InlineData("\"Etag\"", "\"Etag\"", false)]
     [InlineData(null, null, false)]
-    public void GetPreconditionState_ShouldNotProcess_PreconditionFailed(string ifMatch, string ifNoneMatch, bool isWeak)
+    public void GetPreconditionState_ShouldNotProcess_PreconditionFailed(
+        string ifMatch,
+        string ifNoneMatch,
+        bool isWeak
+    )
     {
         // Arrange
         var actionContext = new ActionContext();
@@ -290,15 +320,11 @@ public class FileResultTest
         var httpRequestHeaders = httpContext.Request.GetTypedHeaders();
         var lastModified = DateTimeOffset.MinValue.AddDays(1);
         var etag = new EntityTagHeaderValue("\"Etag\"");
-        httpRequestHeaders.IfMatch = ifMatch == null ? null : new[]
-        {
-                new EntityTagHeaderValue(ifMatch),
-            };
+        httpRequestHeaders.IfMatch =
+            ifMatch == null ? null : new[] { new EntityTagHeaderValue(ifMatch) };
 
-        httpRequestHeaders.IfNoneMatch = ifNoneMatch == null ? null : new[]
-        {
-                new EntityTagHeaderValue(ifNoneMatch, isWeak),
-            };
+        httpRequestHeaders.IfNoneMatch =
+            ifNoneMatch == null ? null : new[] { new EntityTagHeaderValue(ifNoneMatch, isWeak) };
         httpRequestHeaders.IfUnmodifiedSince = DateTimeOffset.MinValue;
         httpRequestHeaders.IfModifiedSince = DateTimeOffset.MinValue.AddDays(2);
         actionContext.HttpContext = httpContext;
@@ -308,7 +334,8 @@ public class FileResultTest
             httpRequestHeaders,
             lastModified,
             etag,
-            NullLogger.Instance);
+            NullLogger.Instance
+        );
 
         // Assert
         Assert.Equal(FileResultHelper.PreconditionState.PreconditionFailed, state);
@@ -318,7 +345,11 @@ public class FileResultTest
     [InlineData(null, "\"Etag\"", true)]
     [InlineData(null, "\"Etag\"", false)]
     [InlineData(null, null, false)]
-    public void GetPreconditionState_ShouldNotProcess_NotModified(string ifMatch, string ifNoneMatch, bool isWeak)
+    public void GetPreconditionState_ShouldNotProcess_NotModified(
+        string ifMatch,
+        string ifNoneMatch,
+        bool isWeak
+    )
     {
         // Arrange
         var actionContext = new ActionContext();
@@ -326,17 +357,21 @@ public class FileResultTest
         httpContext.Request.Method = HttpMethods.Get;
         var httpRequestHeaders = httpContext.Request.GetTypedHeaders();
         var lastModified = DateTimeOffset.MinValue;
-        lastModified = new DateTimeOffset(lastModified.Year, lastModified.Month, lastModified.Day, lastModified.Hour, lastModified.Minute, lastModified.Second, TimeSpan.FromSeconds(0));
+        lastModified = new DateTimeOffset(
+            lastModified.Year,
+            lastModified.Month,
+            lastModified.Day,
+            lastModified.Hour,
+            lastModified.Minute,
+            lastModified.Second,
+            TimeSpan.FromSeconds(0)
+        );
         var etag = new EntityTagHeaderValue("\"Etag\"");
-        httpRequestHeaders.IfMatch = ifMatch == null ? null : new[]
-        {
-                new EntityTagHeaderValue(ifMatch),
-            };
+        httpRequestHeaders.IfMatch =
+            ifMatch == null ? null : new[] { new EntityTagHeaderValue(ifMatch) };
 
-        httpRequestHeaders.IfNoneMatch = ifNoneMatch == null ? null : new[]
-        {
-                new EntityTagHeaderValue(ifNoneMatch, isWeak),
-            };
+        httpRequestHeaders.IfNoneMatch =
+            ifNoneMatch == null ? null : new[] { new EntityTagHeaderValue(ifNoneMatch, isWeak) };
         httpRequestHeaders.IfModifiedSince = lastModified;
         actionContext.HttpContext = httpContext;
 
@@ -345,7 +380,8 @@ public class FileResultTest
             httpRequestHeaders,
             lastModified,
             etag,
-            NullLogger.Instance);
+            NullLogger.Instance
+        );
 
         // Assert
         Assert.Equal(FileResultHelper.PreconditionState.NotModified, state);
@@ -362,7 +398,15 @@ public class FileResultTest
         httpContext.Request.Method = HttpMethods.Get;
         var httpRequestHeaders = httpContext.Request.GetTypedHeaders();
         var lastModified = DateTimeOffset.MinValue;
-        lastModified = new DateTimeOffset(lastModified.Year, lastModified.Month, lastModified.Day, lastModified.Hour, lastModified.Minute, lastModified.Second, TimeSpan.FromSeconds(0));
+        lastModified = new DateTimeOffset(
+            lastModified.Year,
+            lastModified.Month,
+            lastModified.Day,
+            lastModified.Hour,
+            lastModified.Minute,
+            lastModified.Second,
+            TimeSpan.FromSeconds(0)
+        );
         var etag = new EntityTagHeaderValue("\"Etag\"");
         httpRequestHeaders.IfRange = new RangeConditionHeaderValue(ifRangeString);
         httpRequestHeaders.IfModifiedSince = lastModified;
@@ -373,7 +417,8 @@ public class FileResultTest
             httpRequestHeaders,
             lastModified,
             etag,
-            NullLogger.Instance);
+            NullLogger.Instance
+        );
 
         // Assert
         Assert.Equal(expected, ifRangeIsValid);
@@ -384,13 +429,13 @@ public class FileResultTest
         get
         {
             return new TheoryData<DateTimeOffset, int>()
-                {
-                    { new DateTimeOffset(2018, 4, 9, 11, 23, 22, TimeSpan.Zero), 200 },
-                    { new DateTimeOffset(2018, 4, 9, 11, 24, 21, TimeSpan.Zero), 200 },
-                    { new DateTimeOffset(2018, 4, 9, 11, 24, 22, TimeSpan.Zero), 304 },
-                    { new DateTimeOffset(2018, 4, 9, 11, 24, 23, TimeSpan.Zero), 304 },
-                    { new DateTimeOffset(2018, 4, 9, 11, 25, 22, TimeSpan.Zero), 304 },
-                };
+            {
+                { new DateTimeOffset(2018, 4, 9, 11, 23, 22, TimeSpan.Zero), 200 },
+                { new DateTimeOffset(2018, 4, 9, 11, 24, 21, TimeSpan.Zero), 200 },
+                { new DateTimeOffset(2018, 4, 9, 11, 24, 22, TimeSpan.Zero), 304 },
+                { new DateTimeOffset(2018, 4, 9, 11, 24, 23, TimeSpan.Zero), 304 },
+                { new DateTimeOffset(2018, 4, 9, 11, 25, 22, TimeSpan.Zero), 304 },
+            };
         }
     }
 
@@ -398,7 +443,8 @@ public class FileResultTest
     [MemberData(nameof(LastModifiedDateData))]
     public async Task IfModifiedSinceComparison_OnlyUsesWholeSeconds(
         DateTimeOffset ifModifiedSince,
-        int expectedStatusCode)
+        int expectedStatusCode
+    )
     {
         // Arrange
         var httpContext = GetHttpContext();
@@ -409,7 +455,7 @@ public class FileResultTest
         var ticks = 636588698625969382;
         var result = new EmptyFileResult("application/test")
         {
-            LastModified = new DateTimeOffset(ticks, TimeSpan.Zero)
+            LastModified = new DateTimeOffset(ticks, TimeSpan.Zero),
         };
 
         // Act
@@ -424,30 +470,35 @@ public class FileResultTest
         get
         {
             return new TheoryData<DateTimeOffset, int>()
-                {
-                    { new DateTimeOffset(2018, 4, 9, 11, 23, 22, TimeSpan.Zero), 412 },
-                    { new DateTimeOffset(2018, 4, 9, 11, 24, 21, TimeSpan.Zero), 412 },
-                    { new DateTimeOffset(2018, 4, 9, 11, 24, 22, TimeSpan.Zero), 200 },
-                    { new DateTimeOffset(2018, 4, 9, 11, 24, 23, TimeSpan.Zero), 200 },
-                    { new DateTimeOffset(2018, 4, 9, 11, 25, 22, TimeSpan.Zero), 200 },
-                };
+            {
+                { new DateTimeOffset(2018, 4, 9, 11, 23, 22, TimeSpan.Zero), 412 },
+                { new DateTimeOffset(2018, 4, 9, 11, 24, 21, TimeSpan.Zero), 412 },
+                { new DateTimeOffset(2018, 4, 9, 11, 24, 22, TimeSpan.Zero), 200 },
+                { new DateTimeOffset(2018, 4, 9, 11, 24, 23, TimeSpan.Zero), 200 },
+                { new DateTimeOffset(2018, 4, 9, 11, 25, 22, TimeSpan.Zero), 200 },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(IfUnmodifiedSinceDateData))]
-    public async Task IfUnmodifiedSinceComparison_OnlyUsesWholeSeconds(DateTimeOffset ifUnmodifiedSince, int expectedStatusCode)
+    public async Task IfUnmodifiedSinceComparison_OnlyUsesWholeSeconds(
+        DateTimeOffset ifUnmodifiedSince,
+        int expectedStatusCode
+    )
     {
         // Arrange
         var httpContext = GetHttpContext();
-        httpContext.Request.Headers.IfUnmodifiedSince = HeaderUtilities.FormatDate(ifUnmodifiedSince);
+        httpContext.Request.Headers.IfUnmodifiedSince = HeaderUtilities.FormatDate(
+            ifUnmodifiedSince
+        );
         var actionContext = CreateActionContext(httpContext);
         // Represents 4/9/2018 11:24:22 AM +00:00
         // Ticks rounded down to seconds: 636588698620000000
         var ticks = 636588698625969382;
         var result = new EmptyFileResult("application/test")
         {
-            LastModified = new DateTimeOffset(ticks, TimeSpan.Zero)
+            LastModified = new DateTimeOffset(ticks, TimeSpan.Zero),
         };
 
         // Act
@@ -485,18 +536,15 @@ public class FileResultTest
         public bool WasWriteFileCalled;
 
         public EmptyFileResult()
-            : base("application/octet")
-        {
-        }
+            : base("application/octet") { }
 
         public EmptyFileResult(string contentType)
-            : base(contentType)
-        {
-        }
+            : base(contentType) { }
 
         public override Task ExecuteResultAsync(ActionContext context)
         {
-            var executor = context.HttpContext.RequestServices.GetRequiredService<EmptyFileResultExecutor>();
+            var executor =
+                context.HttpContext.RequestServices.GetRequiredService<EmptyFileResultExecutor>();
             return executor.ExecuteAsync(context, this);
         }
     }
@@ -504,9 +552,7 @@ public class FileResultTest
     private class EmptyFileResultExecutor : FileResultExecutorBase
     {
         public EmptyFileResultExecutor(ILoggerFactory loggerFactory)
-            : base(CreateLogger<EmptyFileResultExecutor>(loggerFactory))
-        {
-        }
+            : base(CreateLogger<EmptyFileResultExecutor>(loggerFactory)) { }
 
         public Task ExecuteAsync(ActionContext context, EmptyFileResult result)
         {
@@ -515,7 +561,8 @@ public class FileResultTest
                 result,
                 fileLength: 0L,
                 enableRangeProcessing: true,
-                lastModified: result.LastModified);
+                lastModified: result.LastModified
+            );
             result.WasWriteFileCalled = true;
             return Task.FromResult(0);
         }

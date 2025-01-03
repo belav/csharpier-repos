@@ -17,38 +17,59 @@ public class BlazorTemplateTest : LoggedTest
     public ProjectFactoryFixture ProjectFactory { get; set; }
 
     public static TheoryData<string[]> ArgsData() =>
-    [
-        [],
-        [ArgConstants.UseProgramMain],
-        [ArgConstants.NoHttps],
-        [ArgConstants.Empty],
-        [ArgConstants.NoInteractivity],
-        [ArgConstants.WebAssemblyInteractivity],
-        [ArgConstants.AutoInteractivity],
-        [ArgConstants.GlobalInteractivity],
-        [ArgConstants.GlobalInteractivity, ArgConstants.WebAssemblyInteractivity],
-        [ArgConstants.GlobalInteractivity, ArgConstants.AutoInteractivity],
-        [ArgConstants.NoInteractivity, ArgConstants.UseProgramMain, ArgConstants.NoHttps, ArgConstants.Empty],
-    ];
+        [
+            [],
+            [ArgConstants.UseProgramMain],
+            [ArgConstants.NoHttps],
+            [ArgConstants.Empty],
+            [ArgConstants.NoInteractivity],
+            [ArgConstants.WebAssemblyInteractivity],
+            [ArgConstants.AutoInteractivity],
+            [ArgConstants.GlobalInteractivity],
+            [ArgConstants.GlobalInteractivity, ArgConstants.WebAssemblyInteractivity],
+            [ArgConstants.GlobalInteractivity, ArgConstants.AutoInteractivity],
+            [
+                ArgConstants.NoInteractivity,
+                ArgConstants.UseProgramMain,
+                ArgConstants.NoHttps,
+                ArgConstants.Empty,
+            ],
+        ];
 
     [ConditionalTheory]
     [MemberData(nameof(ArgsData))]
-    [SkipOnHelix("Cert failure, https://github.com/dotnet/aspnetcore/issues/28090", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
+    [SkipOnHelix(
+        "Cert failure, https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64
+    )]
     public Task BlazorWebTemplate_NoAuth(string[] args) => BlazorWebTemplate_Core(args);
 
     [ConditionalTheory]
     [MemberData(nameof(ArgsData))]
-    [SkipOnHelix("Cert failure, https://github.com/dotnet/aspnetcore/issues/28090", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
-    public Task BlazorWebTemplate_IndividualAuth(string[] args) => BlazorWebTemplate_Core([ArgConstants.IndividualAuth, ..args]);
+    [SkipOnHelix(
+        "Cert failure, https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64
+    )]
+    public Task BlazorWebTemplate_IndividualAuth(string[] args) =>
+        BlazorWebTemplate_Core([ArgConstants.IndividualAuth, .. args]);
 
     [ConditionalTheory]
     [InlineData(false)]
     [InlineData(true)]
-    [SkipOnHelix("Cert failure, https://github.com/dotnet/aspnetcore/issues/28090", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
-    [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX, SkipReason = "No LocalDb on non-Windows")]
-    public Task BlazorWebTemplate_IndividualAuth_LocalDb(bool useProgramMain) => useProgramMain
-        ? BlazorWebTemplate_Core([ArgConstants.IndividualAuth, ArgConstants.UseLocalDb, ArgConstants.UseProgramMain])
-        : BlazorWebTemplate_Core([ArgConstants.IndividualAuth, ArgConstants.UseLocalDb]);
+    [SkipOnHelix(
+        "Cert failure, https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64
+    )]
+    [OSSkipCondition(
+        OperatingSystems.Linux | OperatingSystems.MacOSX,
+        SkipReason = "No LocalDb on non-Windows"
+    )]
+    public Task BlazorWebTemplate_IndividualAuth_LocalDb(bool useProgramMain) =>
+        useProgramMain
+            ? BlazorWebTemplate_Core(
+                [ArgConstants.IndividualAuth, ArgConstants.UseLocalDb, ArgConstants.UseProgramMain]
+            )
+            : BlazorWebTemplate_Core([ArgConstants.IndividualAuth, ArgConstants.UseLocalDb]);
 
     private async Task BlazorWebTemplate_Core(string[] args)
     {
@@ -62,7 +83,10 @@ public class BlazorTemplateTest : LoggedTest
         await project.VerifyLaunchSettings(expectedLaunchProfileNames);
 
         var projectFileContents = await ReadProjectFileAsync(project);
-        Assert.DoesNotContain("Microsoft.VisualStudio.Web.CodeGeneration.Design", projectFileContents);
+        Assert.DoesNotContain(
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design",
+            projectFileContents
+        );
         Assert.DoesNotContain("Microsoft.EntityFrameworkCore.Tools.DotNet", projectFileContents);
         Assert.DoesNotContain("Microsoft.Extensions.SecretManager.Tools", projectFileContents);
 
@@ -100,7 +124,12 @@ public class BlazorTemplateTest : LoggedTest
         {
             Assert.False(
                 process.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, process.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run built project",
+                    project,
+                    process.Process
+                )
+            );
 
             await process.AssertPagesOk(expectedPages);
             await process.AssertPagesNotFound(unexpectedPages);
@@ -109,7 +138,10 @@ public class BlazorTemplateTest : LoggedTest
             {
                 var response = await process.SendRequest(BlazorTemplatePages.Auth);
                 response.EnsureSuccessStatusCode();
-                Assert.Equal("/Account/Login?ReturnUrl=%2Fauth", response.RequestMessage.RequestUri.PathAndQuery);
+                Assert.Equal(
+                    "/Account/Login?ReturnUrl=%2Fauth",
+                    response.RequestMessage.RequestUri.PathAndQuery
+                );
             }
         }
 
@@ -173,13 +205,20 @@ public class BlazorTemplateTest : LoggedTest
 
     private Task<string> ReadProjectFileAsync(Project project)
     {
-        var singleProjectPath = Path.Combine(project.TemplateOutputDir, $"{project.ProjectName}.csproj");
+        var singleProjectPath = Path.Combine(
+            project.TemplateOutputDir,
+            $"{project.ProjectName}.csproj"
+        );
         if (File.Exists(singleProjectPath))
         {
             return File.ReadAllTextAsync(singleProjectPath);
         }
 
-        var multiProjectPath = Path.Combine(project.TemplateOutputDir, project.ProjectName, $"{project.ProjectName}.csproj");
+        var multiProjectPath = Path.Combine(
+            project.TemplateOutputDir,
+            project.ProjectName,
+            $"{project.ProjectName}.csproj"
+        );
         if (File.Exists(multiProjectPath))
         {
             // Change the TemplateOutputDir to that of the main project.
@@ -194,7 +233,9 @@ public class BlazorTemplateTest : LoggedTest
     {
         var appRazorPath = Path.Combine(project.TemplateOutputDir, "Components", "App.razor");
         var appRazorText = await File.ReadAllTextAsync(appRazorPath);
-        appRazorText = appRazorText.Replace("IComponentRenderMode?", "IComponentRenderMode").Replace("? null", "? null!");
+        appRazorText = appRazorText
+            .Replace("IComponentRenderMode?", "IComponentRenderMode")
+            .Replace("? null", "? null!");
         await File.WriteAllTextAsync(appRazorPath, appRazorText);
     }
 

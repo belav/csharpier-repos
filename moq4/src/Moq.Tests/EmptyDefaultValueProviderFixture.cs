@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -179,7 +178,9 @@ namespace Moq.Tests
         [Fact]
         public void ProvidesDefaultValueTupleOfReferenceTypeArrayAndTaskOfReferenceType()
         {
-            var value = GetDefaultValueForProperty(nameof(IFoo.ValueTupleOfReferenceTypeArrayAndTaskOfReferenceType));
+            var value = GetDefaultValueForProperty(
+                nameof(IFoo.ValueTupleOfReferenceTypeArrayAndTaskOfReferenceType)
+            );
 
             var (bars, barTask) = ((IBar[], Task<IBar>))value;
             Assert.NotNull(bars);
@@ -199,7 +200,10 @@ namespace Moq.Tests
         static object GetDefaultValueForProperty(string propertyName)
         {
             var propertyGetter = typeof(IFoo).GetProperty(propertyName).GetGetMethod();
-            return DefaultValueProvider.Empty.GetDefaultReturnValue(propertyGetter, new Mock<IFoo>());
+            return DefaultValueProvider.Empty.GetDefaultReturnValue(
+                propertyGetter,
+                new Mock<IFoo>()
+            );
         }
 
         public interface IFoo

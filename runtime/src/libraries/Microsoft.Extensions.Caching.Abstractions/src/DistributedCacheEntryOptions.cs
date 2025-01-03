@@ -19,14 +19,8 @@ namespace Microsoft.Extensions.Caching.Distributed
         /// </summary>
         public DateTimeOffset? AbsoluteExpiration
         {
-            get
-            {
-                return _absoluteExpiration;
-            }
-            set
-            {
-                _absoluteExpiration = value;
-            }
+            get { return _absoluteExpiration; }
+            set { _absoluteExpiration = value; }
         }
 
         /// <summary>
@@ -34,10 +28,7 @@ namespace Microsoft.Extensions.Caching.Distributed
         /// </summary>
         public TimeSpan? AbsoluteExpirationRelativeToNow
         {
-            get
-            {
-                return _absoluteExpirationRelativeToNow;
-            }
+            get { return _absoluteExpirationRelativeToNow; }
             set
             {
                 if (value <= TimeSpan.Zero)
@@ -45,7 +36,8 @@ namespace Microsoft.Extensions.Caching.Distributed
                     throw new ArgumentOutOfRangeException(
                         nameof(AbsoluteExpirationRelativeToNow),
                         value,
-                        "The relative expiration value must be positive.");
+                        "The relative expiration value must be positive."
+                    );
                 }
 
                 _absoluteExpirationRelativeToNow = value;
@@ -58,10 +50,7 @@ namespace Microsoft.Extensions.Caching.Distributed
         /// </summary>
         public TimeSpan? SlidingExpiration
         {
-            get
-            {
-                return _slidingExpiration;
-            }
+            get { return _slidingExpiration; }
             set
             {
                 if (value <= TimeSpan.Zero)
@@ -69,7 +58,8 @@ namespace Microsoft.Extensions.Caching.Distributed
                     throw new ArgumentOutOfRangeException(
                         nameof(SlidingExpiration),
                         value,
-                        "The sliding expiration value must be positive.");
+                        "The sliding expiration value must be positive."
+                    );
                 }
                 _slidingExpiration = value;
             }

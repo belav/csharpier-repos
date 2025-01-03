@@ -7,12 +7,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.StackTraceExplorer;
+using Microsoft.CodeAnalysis.Editor.Host;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
+using Microsoft.CodeAnalysis.StackTraceExplorer;
 using Microsoft.VisualStudio.LanguageServices.Utilities;
 using Microsoft.VisualStudio.Text.Classification;
 using Roslyn.Utilities;
-using Microsoft.CodeAnalysis.Editor.Host;
 
 namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
 {
@@ -52,7 +52,12 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
         public string InstructionText => ServicesVSResources.Paste_valid_stack_trace;
         public string StackTrace => ServicesVSResources.Stack_Trace;
 
-        public StackTraceExplorerViewModel(IThreadingContext threadingContext, Workspace workspace, ClassificationTypeMap classificationTypeMap, IClassificationFormatMap formatMap)
+        public StackTraceExplorerViewModel(
+            IThreadingContext threadingContext,
+            Workspace workspace,
+            ClassificationTypeMap classificationTypeMap,
+            IClassificationFormatMap formatMap
+        )
         {
             _threadingContext = threadingContext;
             _workspace = workspace;
@@ -71,22 +76,32 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             IsLoading = true;
             Frames.Clear();
             var cancellationToken = _threadingContext.DisposalToken;
-            System.Threading.Tasks.Task.Run(async () =>
-            {
-                try
+            System.Threading.Tasks.Task.Run(
+                async () =>
                 {
-                    var result = await StackTraceAnalyzer.AnalyzeAsync(text, cancellationToken).ConfigureAwait(false);
-                    await SetStackTraceResultAsync(result, text, cancellationToken).ConfigureAwait(false);
-                }
-                finally
-                {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-                    IsLoading = false;
-                }
-            }, cancellationToken);
+                    try
+                    {
+                        var result = await StackTraceAnalyzer
+                            .AnalyzeAsync(text, cancellationToken)
+                            .ConfigureAwait(false);
+                        await SetStackTraceResultAsync(result, text, cancellationToken)
+                            .ConfigureAwait(false);
+                    }
+                    finally
+                    {
+                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                        IsLoading = false;
+                    }
+                },
+                cancellationToken
+            );
         }
 
-        public async System.Threading.Tasks.Task SetStackTraceResultAsync(StackTraceAnalysisResult result, string originalText, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task SetStackTraceResultAsync(
+            StackTraceAnalysisResult result,
+            string originalText,
+            System.Threading.CancellationToken cancellationToken
+        )
         {
             _id = originalText.GetHashCode();
             var viewModels = result.ParsedFrames.Select(l => GetViewModel(l));
@@ -102,7 +117,10 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
         }
 
-        private void CallstackLines_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void CallstackLines_CollectionChanged(
+            object sender,
+            System.Collections.Specialized.NotifyCollectionChangedEventArgs e
+        )
         {
             NotifyPropertyChanged(nameof(IsListVisible));
             NotifyPropertyChanged(nameof(IsInstructionTextVisible));
@@ -117,12 +135,22 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
         }
 
-        private FrameViewModel GetViewModel(ParsedFrame frame)
-            => frame switch
+        private FrameViewModel GetViewModel(ParsedFrame frame) =>
+            frame switch
             {
-                IgnoredFrame ignoredFrame => new IgnoredFrameViewModel(ignoredFrame, _formatMap, _classificationTypeMap),
-                ParsedStackFrame stackFrame => new StackFrameViewModel(stackFrame, _threadingContext, _workspace, _formatMap, _classificationTypeMap),
-                _ => throw ExceptionUtilities.UnexpectedValue(frame)
+                IgnoredFrame ignoredFrame => new IgnoredFrameViewModel(
+                    ignoredFrame,
+                    _formatMap,
+                    _classificationTypeMap
+                ),
+                ParsedStackFrame stackFrame => new StackFrameViewModel(
+                    stackFrame,
+                    _threadingContext,
+                    _workspace,
+                    _formatMap,
+                    _classificationTypeMap
+                ),
+                _ => throw ExceptionUtilities.UnexpectedValue(frame),
             };
     }
 }

@@ -28,13 +28,19 @@ namespace System.Globalization.Tests
         public void NaNSymbol_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", "NaNSymbol", () => format.NaNSymbol = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                "NaNSymbol",
+                () => format.NaNSymbol = null
+            );
         }
 
         [Fact]
         public void NaNSymbol_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.NaNSymbol = "");
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.NaNSymbol = ""
+            );
         }
     }
 }

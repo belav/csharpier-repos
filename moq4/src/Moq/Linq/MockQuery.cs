@@ -10,7 +10,6 @@ using System.Linq.Expressions;
 
 namespace Moq.Linq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal class MockQueryable<T> : IQueryable<T>, IQueryProvider
@@ -35,7 +34,6 @@ namespace Moq.Linq
     /// A default implementation of IQueryable for use with QueryProvider
     /// </summary>
     class MockQueryable<T> : IQueryable<T>, IQueryProvider
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private readonly Expression expression;
@@ -115,7 +113,10 @@ namespace Moq.Linq
 
         public override string ToString()
         {
-            if (this.Expression.NodeType == ExpressionType.Constant && ((ConstantExpression)this.Expression).Value == this)
+            if (
+                this.Expression.NodeType == ExpressionType.Constant
+                && ((ConstantExpression)this.Expression).Value == this
+            )
             {
                 return "Query(" + typeof(T) + ")";
             }

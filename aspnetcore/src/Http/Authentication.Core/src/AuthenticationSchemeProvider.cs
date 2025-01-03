@@ -18,9 +18,7 @@ public class AuthenticationSchemeProvider : IAuthenticationSchemeProvider
     /// </summary>
     /// <param name="options">The <see cref="AuthenticationOptions"/> options.</param>
     public AuthenticationSchemeProvider(IOptions<AuthenticationOptions> options)
-        : this(options, new Dictionary<string, AuthenticationScheme>(StringComparer.Ordinal))
-    {
-    }
+        : this(options, new Dictionary<string, AuthenticationScheme>(StringComparer.Ordinal)) { }
 
     /// <summary>
     /// Creates an instance of <see cref="AuthenticationSchemeProvider"/>
@@ -28,7 +26,10 @@ public class AuthenticationSchemeProvider : IAuthenticationSchemeProvider
     /// </summary>
     /// <param name="options">The <see cref="AuthenticationOptions"/> options.</param>
     /// <param name="schemes">The dictionary used to store authentication schemes.</param>
-    protected AuthenticationSchemeProvider(IOptions<AuthenticationOptions> options, IDictionary<string, AuthenticationScheme> schemes)
+    protected AuthenticationSchemeProvider(
+        IOptions<AuthenticationOptions> options,
+        IDictionary<string, AuthenticationScheme> schemes
+    )
     {
         _options = options.Value;
 
@@ -47,17 +48,19 @@ public class AuthenticationSchemeProvider : IAuthenticationSchemeProvider
 
     private readonly IDictionary<string, AuthenticationScheme> _schemes;
     private readonly List<AuthenticationScheme> _requestHandlers;
-    private static readonly Task<AuthenticationScheme?> _nullScheme = Task.FromResult<AuthenticationScheme?>(null);
+    private static readonly Task<AuthenticationScheme?> _nullScheme =
+        Task.FromResult<AuthenticationScheme?>(null);
     private Task<AuthenticationScheme?> _autoDefaultScheme = _nullScheme;
 
     // Used as a safe return value for enumeration apis
     private IEnumerable<AuthenticationScheme> _schemesCopy = Array.Empty<AuthenticationScheme>();
-    private IEnumerable<AuthenticationScheme> _requestHandlersCopy = Array.Empty<AuthenticationScheme>();
+    private IEnumerable<AuthenticationScheme> _requestHandlersCopy =
+        Array.Empty<AuthenticationScheme>();
 
-    private Task<AuthenticationScheme?> GetDefaultSchemeAsync()
-        => _options.DefaultScheme != null
-        ? GetSchemeAsync(_options.DefaultScheme)
-        : _autoDefaultScheme;
+    private Task<AuthenticationScheme?> GetDefaultSchemeAsync() =>
+        _options.DefaultScheme != null
+            ? GetSchemeAsync(_options.DefaultScheme)
+            : _autoDefaultScheme;
 
     /// <summary>
     /// Returns the scheme that will be used by default for <see cref="IAuthenticationService.AuthenticateAsync(HttpContext, string)"/>.
@@ -65,10 +68,10 @@ public class AuthenticationSchemeProvider : IAuthenticationSchemeProvider
     /// Otherwise, this will fallback to <see cref="AuthenticationOptions.DefaultScheme"/>.
     /// </summary>
     /// <returns>The scheme that will be used by default for <see cref="IAuthenticationService.AuthenticateAsync(HttpContext, string)"/>.</returns>
-    public virtual Task<AuthenticationScheme?> GetDefaultAuthenticateSchemeAsync()
-        => _options.DefaultAuthenticateScheme != null
-        ? GetSchemeAsync(_options.DefaultAuthenticateScheme)
-        : GetDefaultSchemeAsync();
+    public virtual Task<AuthenticationScheme?> GetDefaultAuthenticateSchemeAsync() =>
+        _options.DefaultAuthenticateScheme != null
+            ? GetSchemeAsync(_options.DefaultAuthenticateScheme)
+            : GetDefaultSchemeAsync();
 
     /// <summary>
     /// Returns the scheme that will be used by default for <see cref="IAuthenticationService.ChallengeAsync(HttpContext, string, AuthenticationProperties)"/>.
@@ -76,10 +79,10 @@ public class AuthenticationSchemeProvider : IAuthenticationSchemeProvider
     /// Otherwise, this will fallback to <see cref="AuthenticationOptions.DefaultScheme"/>.
     /// </summary>
     /// <returns>The scheme that will be used by default for <see cref="IAuthenticationService.ChallengeAsync(HttpContext, string, AuthenticationProperties)"/>.</returns>
-    public virtual Task<AuthenticationScheme?> GetDefaultChallengeSchemeAsync()
-        => _options.DefaultChallengeScheme != null
-        ? GetSchemeAsync(_options.DefaultChallengeScheme)
-        : GetDefaultSchemeAsync();
+    public virtual Task<AuthenticationScheme?> GetDefaultChallengeSchemeAsync() =>
+        _options.DefaultChallengeScheme != null
+            ? GetSchemeAsync(_options.DefaultChallengeScheme)
+            : GetDefaultSchemeAsync();
 
     /// <summary>
     /// Returns the scheme that will be used by default for <see cref="IAuthenticationService.ForbidAsync(HttpContext, string, AuthenticationProperties)"/>.
@@ -87,10 +90,10 @@ public class AuthenticationSchemeProvider : IAuthenticationSchemeProvider
     /// Otherwise, this will fallback to <see cref="GetDefaultChallengeSchemeAsync"/> .
     /// </summary>
     /// <returns>The scheme that will be used by default for <see cref="IAuthenticationService.ForbidAsync(HttpContext, string, AuthenticationProperties)"/>.</returns>
-    public virtual Task<AuthenticationScheme?> GetDefaultForbidSchemeAsync()
-        => _options.DefaultForbidScheme != null
-        ? GetSchemeAsync(_options.DefaultForbidScheme)
-        : GetDefaultChallengeSchemeAsync();
+    public virtual Task<AuthenticationScheme?> GetDefaultForbidSchemeAsync() =>
+        _options.DefaultForbidScheme != null
+            ? GetSchemeAsync(_options.DefaultForbidScheme)
+            : GetDefaultChallengeSchemeAsync();
 
     /// <summary>
     /// Returns the scheme that will be used by default for <see cref="IAuthenticationService.SignInAsync(HttpContext, string, System.Security.Claims.ClaimsPrincipal, AuthenticationProperties)"/>.
@@ -98,10 +101,10 @@ public class AuthenticationSchemeProvider : IAuthenticationSchemeProvider
     /// Otherwise, this will fallback to <see cref="AuthenticationOptions.DefaultScheme"/>.
     /// </summary>
     /// <returns>The scheme that will be used by default for <see cref="IAuthenticationService.SignInAsync(HttpContext, string, System.Security.Claims.ClaimsPrincipal, AuthenticationProperties)"/>.</returns>
-    public virtual Task<AuthenticationScheme?> GetDefaultSignInSchemeAsync()
-        => _options.DefaultSignInScheme != null
-        ? GetSchemeAsync(_options.DefaultSignInScheme)
-        : GetDefaultSchemeAsync();
+    public virtual Task<AuthenticationScheme?> GetDefaultSignInSchemeAsync() =>
+        _options.DefaultSignInScheme != null
+            ? GetSchemeAsync(_options.DefaultSignInScheme)
+            : GetDefaultSchemeAsync();
 
     /// <summary>
     /// Returns the scheme that will be used by default for <see cref="IAuthenticationService.SignOutAsync(HttpContext, string, AuthenticationProperties)"/>.
@@ -109,25 +112,25 @@ public class AuthenticationSchemeProvider : IAuthenticationSchemeProvider
     /// Otherwise this will fallback to <see cref="GetDefaultSignInSchemeAsync"/> if that supports sign out.
     /// </summary>
     /// <returns>The scheme that will be used by default for <see cref="IAuthenticationService.SignOutAsync(HttpContext, string, AuthenticationProperties)"/>.</returns>
-    public virtual Task<AuthenticationScheme?> GetDefaultSignOutSchemeAsync()
-        => _options.DefaultSignOutScheme != null
-        ? GetSchemeAsync(_options.DefaultSignOutScheme)
-        : GetDefaultSignInSchemeAsync();
+    public virtual Task<AuthenticationScheme?> GetDefaultSignOutSchemeAsync() =>
+        _options.DefaultSignOutScheme != null
+            ? GetSchemeAsync(_options.DefaultSignOutScheme)
+            : GetDefaultSignInSchemeAsync();
 
     /// <summary>
     /// Returns the <see cref="AuthenticationScheme"/> matching the name, or null.
     /// </summary>
     /// <param name="name">The name of the authenticationScheme.</param>
     /// <returns>The scheme or null if not found.</returns>
-    public virtual Task<AuthenticationScheme?> GetSchemeAsync(string name)
-        => Task.FromResult(_schemes.TryGetValue(name, out var scheme) ? scheme : null);
+    public virtual Task<AuthenticationScheme?> GetSchemeAsync(string name) =>
+        Task.FromResult(_schemes.TryGetValue(name, out var scheme) ? scheme : null);
 
     /// <summary>
     /// Returns the schemes in priority order for request handling.
     /// </summary>
     /// <returns>The schemes in priority order for request handling</returns>
-    public virtual Task<IEnumerable<AuthenticationScheme>> GetRequestHandlerSchemesAsync()
-        => Task.FromResult(_requestHandlersCopy);
+    public virtual Task<IEnumerable<AuthenticationScheme>> GetRequestHandlerSchemesAsync() =>
+        Task.FromResult(_requestHandlersCopy);
 
     /// <summary>
     /// Registers a scheme for use by <see cref="IAuthenticationService"/>.
@@ -204,8 +207,8 @@ public class AuthenticationSchemeProvider : IAuthenticationSchemeProvider
     }
 
     /// <inheritdoc />
-    public virtual Task<IEnumerable<AuthenticationScheme>> GetAllSchemesAsync()
-        => Task.FromResult(_schemesCopy);
+    public virtual Task<IEnumerable<AuthenticationScheme>> GetAllSchemesAsync() =>
+        Task.FromResult(_schemesCopy);
 
     private void CheckAutoDefaultScheme()
     {

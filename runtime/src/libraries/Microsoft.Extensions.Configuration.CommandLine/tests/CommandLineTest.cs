@@ -14,11 +14,7 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
         [Fact]
         public void IgnoresOnlyUnknownArgs()
         {
-            var args = new string[]
-                {
-                    "foo",
-                    "/bar=baz"
-                };
+            var args = new string[] { "foo", "/bar=baz" };
             var cmdLineConfig = new CommandLineConfigurationProvider(args);
             cmdLineConfig.Load();
             Assert.Single(cmdLineConfig.GetChildKeys(new string[0], null));
@@ -29,16 +25,18 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
         public void CanIgnoreValuesInMiddle()
         {
             var args = new string[]
-                {
-                    "Key1=Value1",
-                    "--Key2=Value2",
-                    "/Key3=Value3",
-                    "Bogus1",
-                    "--Key4", "Value4",
-                    "Bogus2",
-                    "/Key5", "Value5",
-                    "Bogus3"
-                };
+            {
+                "Key1=Value1",
+                "--Key2=Value2",
+                "/Key3=Value3",
+                "Bogus1",
+                "--Key4",
+                "Value4",
+                "Bogus2",
+                "/Key5",
+                "Value5",
+                "Bogus3",
+            };
             var cmdLineConfig = new CommandLineConfigurationProvider(args);
 
             cmdLineConfig.Load();
@@ -51,18 +49,19 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
             Assert.Equal(5, cmdLineConfig.GetChildKeys(new string[0], null).Count());
         }
 
-
         [Fact]
         public void LoadKeyValuePairsFromCommandLineArgumentsWithoutSwitchMappings()
         {
             var args = new string[]
-                {
-                    "Key1=Value1",
-                    "--Key2=Value2",
-                    "/Key3=Value3",
-                    "--Key4", "Value4",
-                    "/Key5", "Value5"
-                };
+            {
+                "Key1=Value1",
+                "--Key2=Value2",
+                "/Key3=Value3",
+                "--Key4",
+                "Value4",
+                "/Key5",
+                "Value5",
+            };
             var cmdLineConfig = new CommandLineConfigurationProvider(args);
 
             cmdLineConfig.Load();
@@ -78,20 +77,22 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
         public void LoadKeyValuePairsFromCommandLineArgumentsWithSwitchMappings()
         {
             var args = new string[]
-                {
-                    "-K1=Value1",
-                    "--Key2=Value2",
-                    "/Key3=Value3",
-                    "--Key4", "Value4",
-                    "/Key5", "Value5",
-                    "/Key6=Value6"
-                };
+            {
+                "-K1=Value1",
+                "--Key2=Value2",
+                "/Key3=Value3",
+                "--Key4",
+                "Value4",
+                "/Key5",
+                "Value5",
+                "/Key6=Value6",
+            };
             var switchMappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                {
-                    { "-K1", "LongKey1" },
-                    { "--Key2", "SuperLongKey2" },
-                    { "--Key6", "SuchALongKey6"}
-                };
+            {
+                { "-K1", "LongKey1" },
+                { "--Key2", "SuperLongKey2" },
+                { "--Key6", "SuchALongKey6" },
+            };
             var cmdLineConfig = new CommandLineConfigurationProvider(args, switchMappings);
 
             cmdLineConfig.Load();
@@ -109,20 +110,22 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
         {
             // Arrange
             var args = new string[]
-                {
-                    "-K1=Value1",
-                    "--Key2=Value2",
-                    "/Key3=Value3",
-                    "--Key4", "Value4",
-                    "/Key5", "Value5"
-                };
+            {
+                "-K1=Value1",
+                "--Key2=Value2",
+                "/Key3=Value3",
+                "--Key4",
+                "Value4",
+                "/Key5",
+                "Value5",
+            };
             var switchMappings = new Dictionary<string, string>(StringComparer.Ordinal)
-                {
-                    { "--KEY1", "LongKey1" },
-                    { "--key1", "SuperLongKey1" },
-                    { "-Key2", "LongKey2" },
-                    { "-KEY2", "LongKey2"}
-                };
+            {
+                { "--KEY1", "LongKey1" },
+                { "--key1", "SuperLongKey1" },
+                { "-Key2", "LongKey2" },
+                { "-KEY2", "LongKey2" },
+            };
 
             // Find out the duplicate expected be be reported
             var expectedDup = string.Empty;
@@ -138,12 +141,15 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
                 set.Add(mapping.Key);
             }
 
-            var expectedMsg = new ArgumentException(SR.
-                Format(SR.Error_DuplicatedKeyInSwitchMappings, expectedDup), "switchMappings").Message;
+            var expectedMsg = new ArgumentException(
+                SR.Format(SR.Error_DuplicatedKeyInSwitchMappings, expectedDup),
+                "switchMappings"
+            ).Message;
 
             // Act
             var exception = Assert.Throws<ArgumentException>(
-                () => new CommandLineConfigurationProvider(args, switchMappings));
+                () => new CommandLineConfigurationProvider(args, switchMappings)
+            );
 
             // Assert
             Assert.Equal(expectedMsg, exception.Message);
@@ -153,24 +159,29 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
         public void ThrowExceptionWhenSwitchMappingsContainInvalidKey()
         {
             var args = new string[]
-                {
-                    "-K1=Value1",
-                    "--Key2=Value2",
-                    "/Key3=Value3",
-                    "--Key4", "Value4",
-                    "/Key5", "Value5"
-                };
+            {
+                "-K1=Value1",
+                "--Key2=Value2",
+                "/Key3=Value3",
+                "--Key4",
+                "Value4",
+                "/Key5",
+                "Value5",
+            };
             var switchMappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                {
-                    { "-K1", "LongKey1" },
-                    { "--Key2", "SuperLongKey2" },
-                    { "/Key3", "AnotherSuperLongKey3" }
-                };
-            var expectedMsg = new ArgumentException(SR.Format(SR.Error_InvalidSwitchMapping,"/Key3"),
-                "switchMappings").Message;
+            {
+                { "-K1", "LongKey1" },
+                { "--Key2", "SuperLongKey2" },
+                { "/Key3", "AnotherSuperLongKey3" },
+            };
+            var expectedMsg = new ArgumentException(
+                SR.Format(SR.Error_InvalidSwitchMapping, "/Key3"),
+                "switchMappings"
+            ).Message;
 
             var exception = Assert.Throws<ArgumentException>(
-                () => new CommandLineConfigurationProvider(args, switchMappings));
+                () => new CommandLineConfigurationProvider(args, switchMappings)
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -181,7 +192,9 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
             string[] args = null;
             var expectedMsg = new ArgumentNullException("args").Message;
 
-            var exception = Assert.Throws<ArgumentNullException>(() => new CommandLineConfigurationProvider(args));
+            var exception = Assert.Throws<ArgumentNullException>(
+                () => new CommandLineConfigurationProvider(args)
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -189,11 +202,7 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
         [Fact]
         public void OverrideValueWhenKeyIsDuplicated()
         {
-            var args = new string[]
-                {
-                    "/Key1=Value1",
-                    "--Key1=Value2"
-                };
+            var args = new string[] { "/Key1=Value1", "--Key1=Value2" };
             var cmdLineConfig = new CommandLineConfigurationProvider(args);
 
             cmdLineConfig.Load();
@@ -206,8 +215,9 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
         {
             var args = new string[]
             {
-                "--Key1", "Value1",
-                "/Key2" /* The value for Key2 is missing here */
+                "--Key1",
+                "Value1",
+                "/Key2", /* The value for Key2 is missing here */
             };
 
             var cmdLineConfig = new CommandLineConfigurationProvider(args);
@@ -219,10 +229,7 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
         [Fact]
         public void IgnoreWhenAnArgumentCannotBeRecognized()
         {
-            var args = new string[]
-            {
-                "ArgWithoutPrefixAndEqualSign"
-            };
+            var args = new string[] { "ArgWithoutPrefixAndEqualSign" };
             var cmdLineConfig = new CommandLineConfigurationProvider(args);
             cmdLineConfig.Load();
             Assert.Empty(cmdLineConfig.GetChildKeys(new string[0], null));
@@ -231,13 +238,10 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
         [Fact]
         public void IgnoreWhenShortSwitchNotDefined()
         {
-            var args = new string[]
-            {
-                "-Key1", "Value1",
-            };
+            var args = new string[] { "-Key1", "Value1" };
             var switchMappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
-                { "-Key2", "LongKey2" }
+                { "-Key2", "LongKey2" },
             };
             var cmdLineConfig = new CommandLineConfigurationProvider(args, switchMappings);
             cmdLineConfig.Load();

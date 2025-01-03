@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,70 +26,70 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Drawing;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Drawing {
+namespace MonoCasTests.System.Drawing
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class RegionCas
+    {
+        private MethodInfo fromHdcInternal;
+        private MethodInfo fromHwndInternal;
+        private MethodInfo releaseHdcInternal;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class RegionCas {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            // this executes at fulltrust
+            fromHdcInternal = typeof(Graphics).GetMethod("FromHdcInternal");
+            fromHwndInternal = typeof(Graphics).GetMethod("FromHwndInternal");
+            releaseHdcInternal = typeof(Graphics).GetMethod("ReleaseHdcInternal");
+        }
 
-		private MethodInfo fromHdcInternal;
-		private MethodInfo fromHwndInternal;
-		private MethodInfo releaseHdcInternal;
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			// this executes at fulltrust
-			fromHdcInternal = typeof (Graphics).GetMethod ("FromHdcInternal");
-			fromHwndInternal = typeof (Graphics).GetMethod ("FromHwndInternal");
-			releaseHdcInternal = typeof (Graphics).GetMethod ("ReleaseHdcInternal");
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void FromHrgn_Deny_UnmanagedCode()
+        {
+            Region.FromHrgn(IntPtr.Zero);
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        [ExpectedException(typeof(ArgumentException))]
+        public void FromHrgn_PermitOnly_UnmanagedCode()
+        {
+            Region.FromHrgn(IntPtr.Zero);
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void FromHrgn_Deny_UnmanagedCode ()
-		{
-			Region.FromHrgn (IntPtr.Zero);
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void ReleaseHrgn_Deny_UnmanagedCode()
+        {
+            new Region().ReleaseHrgn(IntPtr.Zero);
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		[ExpectedException (typeof (ArgumentException))]
-		public void FromHrgn_PermitOnly_UnmanagedCode ()
-		{
-			Region.FromHrgn (IntPtr.Zero);
-		}
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void ReleaseHrgn_Deny_UnmanagedCode ()
-		{
-			new Region ().ReleaseHrgn (IntPtr.Zero);
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ReleaseHrgn_PermitOnly_UnmanagedCode ()
-		{
-			new Region ().ReleaseHrgn (IntPtr.Zero);
-		}
-	}
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ReleaseHrgn_PermitOnly_UnmanagedCode()
+        {
+            new Region().ReleaseHrgn(IntPtr.Zero);
+        }
+    }
 }

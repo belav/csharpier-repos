@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,49 +29,51 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace MonoTests.System.ComponentModel {
+namespace MonoTests.System.ComponentModel
+{
+    [TestFixture]
+    public class LookupBindingPropertiesAttributeTest
+    {
+        [Test]
+        public void CtorTest()
+        {
+            LookupBindingPropertiesAttribute a,
+                b,
+                c,
+                d;
 
-	[TestFixture]
-	public class LookupBindingPropertiesAttributeTest {
+            a = new LookupBindingPropertiesAttribute();
+            Assert.IsNull(a.DataSource, "#A1");
+            Assert.IsNull(a.DisplayMember, "#A2");
+            Assert.IsNull(a.ValueMember, "#A3");
+            Assert.IsNull(a.LookupMember, "#A4");
 
-		[Test]
-		public void CtorTest ()
-		{
-			LookupBindingPropertiesAttribute a, b, c, d;
+            b = new LookupBindingPropertiesAttribute("aa", "bb", "cc", "dd");
+            Assert.AreSame("aa", b.DataSource, "#B1");
+            Assert.AreSame("bb", b.DisplayMember, "#B2");
+            Assert.AreSame("cc", b.ValueMember, "#B3");
+            Assert.AreSame("dd", b.LookupMember, "#B4");
 
-			a = new LookupBindingPropertiesAttribute ();
-			Assert.IsNull (a.DataSource, "#A1");
-			Assert.IsNull (a.DisplayMember, "#A2");
-			Assert.IsNull (a.ValueMember, "#A3");
-			Assert.IsNull (a.LookupMember, "#A4");
+            c = new LookupBindingPropertiesAttribute("aa", "bb", "cc", "dd");
 
-			b = new LookupBindingPropertiesAttribute ("aa", "bb", "cc", "dd");
-			Assert.AreSame ("aa", b.DataSource, "#B1");
-			Assert.AreSame ("bb", b.DisplayMember, "#B2");
-			Assert.AreSame ("cc", b.ValueMember, "#B3");
-			Assert.AreSame ("dd", b.LookupMember, "#B4");
+            Assert.AreEqual("aa", c.DataSource, "#C1");
+            Assert.AreEqual("bb", c.DisplayMember, "#C2");
+            Assert.AreEqual("cc", c.ValueMember, "#C3");
+            Assert.AreEqual("dd", c.LookupMember, "#C4");
 
-			c = new LookupBindingPropertiesAttribute ("aa", "bb", "cc", "dd");
+            Assert.IsTrue(b.Equals(c), "#Eq1");
+            Assert.AreEqual(b.GetHashCode(), c.GetHashCode(), "#Hash");
 
-			Assert.AreEqual ("aa", c.DataSource, "#C1");
-			Assert.AreEqual ("bb", c.DisplayMember, "#C2");
-			Assert.AreEqual ("cc", c.ValueMember, "#C3");
-			Assert.AreEqual ("dd", c.LookupMember, "#C4");
+            d = LookupBindingPropertiesAttribute.Default;
+            Assert.IsNull(d.DataSource, "#D1");
+            Assert.IsNull(d.DisplayMember, "#D2");
+            Assert.IsNull(d.ValueMember, "#D3");
+            Assert.IsNull(d.LookupMember, "#D4");
 
-			Assert.IsTrue (b.Equals (c), "#Eq1");
-			Assert.AreEqual (b.GetHashCode (), c.GetHashCode (), "#Hash");
-
-			d = LookupBindingPropertiesAttribute.Default;
-			Assert.IsNull (d.DataSource, "#D1");
-			Assert.IsNull (d.DisplayMember, "#D2");
-			Assert.IsNull (d.ValueMember, "#D3");
-			Assert.IsNull (d.LookupMember, "#D4");
-
-			Assert.IsTrue (d.Equals (a), "#Eq2");
-			Assert.IsFalse (a.Equals (b), "#Eq3");
-		}
-	}
-
+            Assert.IsTrue(d.Equals(a), "#Eq2");
+            Assert.IsFalse(a.Equals(b), "#Eq3");
+        }
+    }
 }
 
 #endif

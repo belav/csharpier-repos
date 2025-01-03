@@ -7,20 +7,20 @@
 // HtmlForm.cs
 //
 
-namespace System.Web.UI.HtmlControls {
-    using System.ComponentModel;
+namespace System.Web.UI.HtmlControls
+{
     using System;
     using System.Collections;
+    using System.ComponentModel;
     using System.Globalization;
     using System.IO;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.Configuration;
-    using System.Web.Util;
+    using System.Web.Security;
     using System.Web.UI;
     using System.Web.UI.WebControls;
-    using System.Web.Security;
-    using System.Security.Permissions;
-
+    using System.Web.Util;
 
     /// <devdoc>
     ///    <para>
@@ -29,71 +29,65 @@ namespace System.Web.UI.HtmlControls {
     ///       HTML &lt;form&gt; element on the server.
     ///    </para>
     /// </devdoc>
-    public class HtmlForm : HtmlContainerControl {
+    public class HtmlForm : HtmlContainerControl
+    {
         private string _defaultFocus;
         private string _defaultButton;
         private bool _submitDisabledControls;
         private const string _aspnetFormID = "aspnetForm";
 
-
         /// <devdoc>
         /// </devdoc>
         public HtmlForm()
-            : base("form") {
-        }
+            : base("form") { }
 
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string Action {
-            get {
+        public string Action
+        {
+            get
+            {
                 string s = Attributes["action"];
                 return ((s != null) ? s : String.Empty);
             }
-            set {
-                Attributes["action"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["action"] = MapStringAttributeToString(value); }
         }
 
         /// <devdoc>
         ///     Gets or sets default button for the form
         /// </devdoc>
-        [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        ]
-        public string DefaultButton {
-            get {
-                if (_defaultButton == null) {
+        [WebCategory("Behavior"), DefaultValue("")]
+        public string DefaultButton
+        {
+            get
+            {
+                if (_defaultButton == null)
+                {
                     return String.Empty;
                 }
                 return _defaultButton;
             }
-            set {
-                _defaultButton = value;
-            }
+            set { _defaultButton = value; }
         }
-
 
         /// <devdoc>
         ///     Gets or sets default focused control for the form
         /// </devdoc>
-        [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        ]
-        public string DefaultFocus {
-            get {
-                if (_defaultFocus == null) {
+        [WebCategory("Behavior"), DefaultValue("")]
+        public string DefaultFocus
+        {
+            get
+            {
+                if (_defaultFocus == null)
+                {
                     return String.Empty;
                 }
                 return _defaultFocus;
             }
-            set {
-                _defaultFocus = value;
-            }
+            set { _defaultFocus = value; }
         }
 
         /*
@@ -108,18 +102,18 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string Enctype {
-            get {
+        public string Enctype
+        {
+            get
+            {
                 string s = Attributes["enctype"];
                 return ((s != null) ? s : String.Empty);
             }
-            set {
-                Attributes["enctype"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["enctype"] = MapStringAttributeToString(value); }
         }
 
         /*
@@ -134,18 +128,18 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string Method {
-            get {
+        public string Method
+        {
+            get
+            {
                 string s = Attributes["method"];
                 return ((s != null) ? s : "post");
             }
-            set {
-                Attributes["method"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["method"] = MapStringAttributeToString(value); }
         }
 
         /*
@@ -159,34 +153,27 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public virtual string Name {
-            get {
-                return UniqueID;
-            }
-            set {
+        public virtual string Name
+        {
+            get { return UniqueID; }
+            set
+            {
                 // no-op setter to prevent the name from being set
             }
         }
 
-
         /// <devdov>
         /// If true, forces controls disabled on the client to submit their values (thus preserving their previous postback state)
         /// </devdoc>
-        [
-        WebCategory("Behavior"),
-        DefaultValue(false)
-        ]
-        public virtual bool SubmitDisabledControls {
-            get {
-                return _submitDisabledControls;
-            }
-            set {
-                _submitDisabledControls = value;
-            }
+        [WebCategory("Behavior"), DefaultValue(false)]
+        public virtual bool SubmitDisabledControls
+        {
+            get { return _submitDisabledControls; }
+            set { _submitDisabledControls = value; }
         }
 
         /*
@@ -201,32 +188,34 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string Target {
-            get {
+        public string Target
+        {
+            get
+            {
                 string s = Attributes["target"];
                 return ((s != null) ? s : String.Empty);
             }
-
-            set {
-                Attributes["target"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["target"] = MapStringAttributeToString(value); }
         }
-
 
         /// <devdoc>
         /// Overridden to return a constant value or tack the ID onto the same constant value.
         /// This fixes a bug in PocketPC which doesn't allow the name and ID of a form to be different
         /// </devdoc>
-        public override string UniqueID {
-            get {
-                if (NamingContainer == Page) {
+        public override string UniqueID
+        {
+            get
+            {
+                if (NamingContainer == Page)
+                {
                     return base.UniqueID;
                 }
-                else if (this.EffectiveClientIDMode != ClientIDMode.AutoID) {
+                else if (this.EffectiveClientIDMode != ClientIDMode.AutoID)
+                {
                     return ID ?? _aspnetFormID;
                 }
 
@@ -234,28 +223,41 @@ namespace System.Web.UI.HtmlControls {
             }
         }
 
-        public override string ClientID {
-            get {
-                if (this.EffectiveClientIDMode != ClientIDMode.AutoID) {
+        public override string ClientID
+        {
+            get
+            {
+                if (this.EffectiveClientIDMode != ClientIDMode.AutoID)
+                {
                     return ID;
                 }
                 return base.ClientID;
             }
         }
 
-        protected internal override void Render(HtmlTextWriter output) {
+        protected internal override void Render(HtmlTextWriter output)
+        {
             Page p = Page;
             if (p == null)
                 throw new HttpException(SR.GetString(SR.Form_Needs_Page));
 
 #pragma warning disable 0618    // To avoid deprecation warning
-            if (p.SmartNavigation) {
+            if (p.SmartNavigation)
+            {
 #pragma warning restore 0618
                 ((IAttributeAccessor)this).SetAttribute("__smartNavEnabled", "true");
 
                 // Output the IFrame
-                StringBuilder sb = new StringBuilder("<IFRAME id=\"__hifSmartNav\" name=\"__hifSmartNav\" style=\"display:none\" src=\"");
-                sb.Append(HttpEncoderUtility.UrlEncodeSpaces(HttpUtility.HtmlAttributeEncode(Page.ClientScript.GetWebResourceUrl(typeof(HtmlForm), "SmartNav.htm"))));
+                StringBuilder sb = new StringBuilder(
+                    "<IFRAME id=\"__hifSmartNav\" name=\"__hifSmartNav\" style=\"display:none\" src=\""
+                );
+                sb.Append(
+                    HttpEncoderUtility.UrlEncodeSpaces(
+                        HttpUtility.HtmlAttributeEncode(
+                            Page.ClientScript.GetWebResourceUrl(typeof(HtmlForm), "SmartNav.htm")
+                        )
+                    )
+                );
                 sb.Append("\"></IFRAME>");
                 output.WriteLine(sb.ToString());
             }
@@ -263,11 +265,13 @@ namespace System.Web.UI.HtmlControls {
             base.Render(output);
         }
 
-        private string GetActionAttribute() {
+        private string GetActionAttribute()
+        {
             // If the Action property is nonempty, we use it instead of the current page.  This allows the developer
             // to support scenarios like PathInfo, UrlMapping, etc. (DevDiv Bugs 164390)
             string actionProperty = Action;
-            if (!String.IsNullOrEmpty(actionProperty)) {
+            if (!String.IsNullOrEmpty(actionProperty))
+            {
                 return actionProperty;
             }
 
@@ -280,18 +284,21 @@ namespace System.Web.UI.HtmlControls {
             // is used, the action will be set to the transferred/executed page, that is, the value of
             // CurrentExecutionFilePathObject.  This is because of ASURT 59970 and the document attached to
             // that bug, which indirectly states that things should behave this way when Transfer/Execute is used.
-            if (Context.ServerExecuteDepth == 0) {
+            if (Context.ServerExecuteDepth == 0)
+            {
                 // There hasn't been any Server.Transfer or RewritePath.
                 // ASURT 15979: need to use a relative path, not absolute
                 action = clientFilePath.VirtualPathString;
                 int iPos = action.LastIndexOf('/');
-                if (iPos >= 0) {
+                if (iPos >= 0)
+                {
                     // Ensure the segment is always a relative path, so prepend a dot-segment
                     // (RFC section 4.2 Relative Reference)
                     action = "./" + action.Substring(iPos + 1);
                 }
             }
-            else {
+            else
+            {
                 VirtualPath currentFilePath = Context.Request.CurrentExecutionFilePathObject;
                 // Server.Transfer or RewritePath case.  We need to make the form action relative
                 // to the original ClientFilePath (since that's where the browser thinks we are).
@@ -300,19 +307,25 @@ namespace System.Web.UI.HtmlControls {
             }
 
             // VSWhidbey 202380: If cookieless is on, we need to add the app path modifier to the form action
-            bool cookieless = CookielessHelperClass.UseCookieless(Context, false, FormsAuthentication.CookieMode);
-            if (cookieless && Context.Request != null && Context.Response != null) {
+            bool cookieless = CookielessHelperClass.UseCookieless(
+                Context,
+                false,
+                FormsAuthentication.CookieMode
+            );
+            if (cookieless && Context.Request != null && Context.Response != null)
+            {
                 action = Context.Response.ApplyAppPathModifier(action);
             }
 
             // Dev11 406986: <form> elements must have non-empty 'action' attributes to pass W3 validation.
             // The only time this might happen is that the current file path is "", which meant that the
             // incoming URL ended in a slash, so we can just point 'action' back to the current directory.
-            if (String.IsNullOrEmpty(action) && RenderingCompatibility >= VersionUtil.Framework45) {
+            if (String.IsNullOrEmpty(action) && RenderingCompatibility >= VersionUtil.Framework45)
+            {
                 action = "./";
             }
 
-            // Dev11 177096: The action may be empty if the RawUrl does not point to a file (for e.g. http://localhost:8080/) but is never null. 
+            // Dev11 177096: The action may be empty if the RawUrl does not point to a file (for e.g. http://localhost:8080/) but is never null.
             // Empty action values work fine since the form does not emit the action attribute.
             Debug.Assert(action != null);
 
@@ -320,19 +333,20 @@ namespace System.Web.UI.HtmlControls {
             // ASURT 15355: Don't lose the query string if there is one.
             // In scriptless mobile HTML, we prepend __EVENTTARGET, et. al. to the query string.  These have to be
             // removed from the form action.  Use new HttpValueCollection to leverage ToString(bool encoded).
-            if (!String.IsNullOrEmpty(queryString)) {
+            if (!String.IsNullOrEmpty(queryString))
+            {
                 action += "?" + queryString;
             }
 
             return action;
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         ///    <para> Call RegisterViewStateHandler().</para>
         /// </devdoc>
-        protected internal override void OnInit(EventArgs e) {
+        protected internal override void OnInit(EventArgs e)
+        {
             base.OnInit(e);
 
             Page.SetForm(this);
@@ -341,46 +355,57 @@ namespace System.Web.UI.HtmlControls {
             Page.RegisterViewStateHandler();
         }
 
-
         /// <devdoc>
         /// Overridden to handle focus stuff
         /// </devdoc>
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
 #pragma warning disable 0618    // To avoid deprecation warning
-            if (Page.SmartNavigation) {
+            if (Page.SmartNavigation)
+            {
 #pragma warning restore 0618
                 // Register the smartnav script file reference so it gets rendered
                 Page.ClientScript.RegisterClientScriptResource(typeof(HtmlForm), "SmartNav.js");
             }
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected override void RenderAttributes(HtmlTextWriter writer) {
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
             ArrayList invalidAttributes = new ArrayList();
-            foreach (String key in Attributes.Keys) {
-                if (!writer.IsValidFormAttribute(key)) {
+            foreach (String key in Attributes.Keys)
+            {
+                if (!writer.IsValidFormAttribute(key))
+                {
                     invalidAttributes.Add(key);
                 }
             }
 
-            foreach (String key in invalidAttributes) {
+            foreach (String key in invalidAttributes)
+            {
                 Attributes.Remove(key);
             }
 
             bool enableLegacyRendering = EnableLegacyRendering;
 
             Page page = Page;
-            if (writer.IsValidFormAttribute("name")) {
+            if (writer.IsValidFormAttribute("name"))
+            {
                 // DevDiv 27328 Do not render name attribute for uplevel browser
-                if (page != null && page.RequestInternal != null &&
-                    RenderingCompatibility < VersionUtil.Framework40 &&
-                    (page.RequestInternal.Browser.W3CDomVersion.Major == 0 ||
-                     page.XhtmlConformanceMode != XhtmlConformanceMode.Strict)) {
+                if (
+                    page != null
+                    && page.RequestInternal != null
+                    && RenderingCompatibility < VersionUtil.Framework40
+                    && (
+                        page.RequestInternal.Browser.W3CDomVersion.Major == 0
+                        || page.XhtmlConformanceMode != XhtmlConformanceMode.Strict
+                    )
+                )
+                {
                     writer.WriteAttribute("name", Name);
                 }
                 Attributes.Remove("name");
@@ -390,54 +415,89 @@ namespace System.Web.UI.HtmlControls {
             Attributes.Remove("method");
 
             // Encode the action attribute - ASURT 66784
-            writer.WriteAttribute("action", GetActionAttribute(), true /*encode*/);
+            writer.WriteAttribute(
+                "action",
+                GetActionAttribute(),
+                true /*encode*/
+            );
             Attributes.Remove("action");
 
             // see if the page has a submit event
-            if (page != null) {
+            if (page != null)
+            {
                 string onSubmit = page.ClientOnSubmitEvent;
-                if (!String.IsNullOrEmpty(onSubmit)) {
-                    if (Attributes["onsubmit"] != null) {
+                if (!String.IsNullOrEmpty(onSubmit))
+                {
+                    if (Attributes["onsubmit"] != null)
+                    {
                         // If there was an onsubmit on the form, register it as an onsubmit statement and remove it from the attribute collection
                         string formOnSubmit = Attributes["onsubmit"];
-                        if (formOnSubmit.Length > 0) {
-                            if (!StringUtil.StringEndsWith(formOnSubmit, ';')) {
+                        if (formOnSubmit.Length > 0)
+                        {
+                            if (!StringUtil.StringEndsWith(formOnSubmit, ';'))
+                            {
                                 formOnSubmit += ";";
                             }
-                            if (page.ClientSupportsJavaScript || !formOnSubmit.ToLower(CultureInfo.CurrentCulture).Contains("javascript")) {
-                                page.ClientScript.RegisterOnSubmitStatement(typeof(HtmlForm), "OnSubmitScript", formOnSubmit);
+                            if (
+                                page.ClientSupportsJavaScript
+                                || !formOnSubmit
+                                    .ToLower(CultureInfo.CurrentCulture)
+                                    .Contains("javascript")
+                            )
+                            {
+                                page.ClientScript.RegisterOnSubmitStatement(
+                                    typeof(HtmlForm),
+                                    "OnSubmitScript",
+                                    formOnSubmit
+                                );
                             }
                             Attributes.Remove("onsubmit");
                         }
                     }
 
                     // Don't render the on submit if it contains javascript and the page doesn't support it
-                    if (page.ClientSupportsJavaScript || !onSubmit.ToLower(CultureInfo.CurrentCulture).Contains("javascript")) {
-                        if (enableLegacyRendering) {
+                    if (
+                        page.ClientSupportsJavaScript
+                        || !onSubmit.ToLower(CultureInfo.CurrentCulture).Contains("javascript")
+                    )
+                    {
+                        if (enableLegacyRendering)
+                        {
                             writer.WriteAttribute("language", "javascript", false);
                         }
                         writer.WriteAttribute("onsubmit", onSubmit);
                     }
                 }
 
-                if ((page.RequestInternal != null) &&
-                    (page.RequestInternal.Browser.EcmaScriptVersion.Major > 0) &&
-                    (page.RequestInternal.Browser.W3CDomVersion.Major > 0)) {
-                    if (DefaultButton.Length > 0) {
+                if (
+                    (page.RequestInternal != null)
+                    && (page.RequestInternal.Browser.EcmaScriptVersion.Major > 0)
+                    && (page.RequestInternal.Browser.W3CDomVersion.Major > 0)
+                )
+                {
+                    if (DefaultButton.Length > 0)
+                    {
                         // Find control from the page if it's a hierarchical ID.
                         // Dev11 bug 19915
                         Control c = FindControlFromPageIfNecessary(DefaultButton);
 
-                        if (c is IButtonControl) {
-                            page.ClientScript.RegisterDefaultButtonScript(c, writer, false /* UseAddAttribute */);
+                        if (c is IButtonControl)
+                        {
+                            page.ClientScript.RegisterDefaultButtonScript(
+                                c,
+                                writer,
+                                false /* UseAddAttribute */
+                            );
                         }
-                        else {
-                            throw new InvalidOperationException(SR.GetString(SR.HtmlForm_OnlyIButtonControlCanBeDefaultButton, ID));
+                        else
+                        {
+                            throw new InvalidOperationException(
+                                SR.GetString(SR.HtmlForm_OnlyIButtonControlCanBeDefaultButton, ID)
+                            );
                         }
                     }
                 }
             }
-
 
             // We always want the form to have an id on the client
             // base.RenderAttributes takes care of actually rendering it.
@@ -446,22 +506,28 @@ namespace System.Web.UI.HtmlControls {
             base.RenderAttributes(writer);
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected internal override void RenderChildren(HtmlTextWriter writer) {
+        protected internal override void RenderChildren(HtmlTextWriter writer)
+        {
             // We need to register the script here since other controls might register
             // for focus during PreRender
             Page page = Page;
-            if (page != null) {
+            if (page != null)
+            {
                 page.OnFormRender();
                 page.BeginFormRender(writer, UniqueID);
             }
 
             // DevDiv Bugs 154630: move custom hidden fields to the begining of the form
             HttpWriter httpWriter = writer.InnerWriter as HttpWriter;
-            if (page != null && httpWriter != null && RuntimeConfig.GetConfig(Context).Pages.RenderAllHiddenFieldsAtTopOfForm) {
+            if (
+                page != null
+                && httpWriter != null
+                && RuntimeConfig.GetConfig(Context).Pages.RenderAllHiddenFieldsAtTopOfForm
+            )
+            {
                 // If the response is flushed or cleared during render, we won't be able
                 // to move the hidden fields.  Set HasBeenClearedRecently to false and
                 // then check again when we're ready to move the fields.
@@ -478,36 +544,47 @@ namespace System.Web.UI.HtmlControls {
                 page.EndFormRenderHiddenFields(writer, UniqueID);
 
                 // we can only move the hidden fields if the response has not been flushed or cleared
-                if (!httpWriter.HasBeenClearedRecently) {
+                if (!httpWriter.HasBeenClearedRecently)
+                {
                     int fieldsEndIndex = httpWriter.GetResponseBufferCountAfterFlush();
-                    httpWriter.MoveResponseBufferRangeForward(fieldsBeginIndex, fieldsEndIndex - fieldsBeginIndex, formBeginIndex);
+                    httpWriter.MoveResponseBufferRangeForward(
+                        fieldsBeginIndex,
+                        fieldsEndIndex - fieldsBeginIndex,
+                        formBeginIndex
+                    );
                 }
 
                 page.EndFormRenderArrayAndExpandoAttribute(writer, UniqueID);
                 page.EndFormRenderPostBackAndWebFormsScript(writer, UniqueID);
                 page.OnFormPostRender(writer);
             }
-            else {
+            else
+            {
                 base.RenderChildren(writer);
 
-                if (page != null) {
+                if (page != null)
+                {
                     page.EndFormRender(writer, UniqueID);
                     page.OnFormPostRender(writer);
                 }
             }
         }
 
-        public override void RenderControl(HtmlTextWriter writer) {
-            if (DesignMode) {
+        public override void RenderControl(HtmlTextWriter writer)
+        {
+            if (DesignMode)
+            {
                 // User Control Designer scenario
                 base.RenderChildren(writer);
             }
-            else {
+            else
+            {
                 base.RenderControl(writer);
             }
         }
 
-        protected override ControlCollection CreateControlCollection() {
+        protected override ControlCollection CreateControlCollection()
+        {
             return new ControlCollection(this, 100, 2);
         }
     }

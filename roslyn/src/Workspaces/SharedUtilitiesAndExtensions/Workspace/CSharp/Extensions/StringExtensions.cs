@@ -10,9 +10,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static class StringExtensions
     {
-        public static string EscapeIdentifier(
-            this string identifier,
-            bool isQueryContext = false)
+        public static string EscapeIdentifier(this string identifier, bool isQueryContext = false)
         {
             var nullIndex = identifier.IndexOf('\0');
             if (nullIndex >= 0)
@@ -23,14 +21,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             var needsEscaping = SyntaxFacts.GetKeywordKind(identifier) != SyntaxKind.None;
 
             // Check if we need to escape this contextual keyword
-            needsEscaping = needsEscaping || (isQueryContext && SyntaxFacts.IsQueryContextualKeyword(SyntaxFacts.GetContextualKeywordKind(identifier)));
+            needsEscaping =
+                needsEscaping
+                || (
+                    isQueryContext
+                    && SyntaxFacts.IsQueryContextualKeyword(
+                        SyntaxFacts.GetContextualKeywordKind(identifier)
+                    )
+                );
 
             return needsEscaping ? "@" + identifier : identifier;
         }
 
         public static SyntaxToken ToIdentifierToken(
             this string identifier,
-            bool isQueryContext = false)
+            bool isQueryContext = false
+        )
         {
             var escaped = identifier.EscapeIdentifier(isQueryContext);
 
@@ -44,7 +50,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 : identifier;
 
             var token = SyntaxFactory.Identifier(
-                default, SyntaxKind.None, "@" + unescaped, unescaped, default);
+                default,
+                SyntaxKind.None,
+                "@" + unescaped,
+                unescaped,
+                default
+            );
 
             if (!identifier.StartsWith("@", StringComparison.Ordinal))
             {
@@ -54,7 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return token;
         }
 
-        public static IdentifierNameSyntax ToIdentifierName(this string identifier)
-            => SyntaxFactory.IdentifierName(identifier.ToIdentifierToken());
+        public static IdentifierNameSyntax ToIdentifierName(this string identifier) =>
+            SyntaxFactory.IdentifierName(identifier.ToIdentifierToken());
     }
 }

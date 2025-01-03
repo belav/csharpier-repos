@@ -4,7 +4,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using SetTriad = System.Tuple<System.Collections.Generic.IEnumerable<int>, System.Collections.Generic.IEnumerable<int>, bool>;
+using SetTriad = System.Tuple<
+    System.Collections.Generic.IEnumerable<int>,
+    System.Collections.Generic.IEnumerable<int>,
+    bool
+>;
 
 namespace System.Collections.Immutable.Tests
 {
@@ -19,7 +23,10 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void AddDuplicatesTest()
         {
-            int[] arrayWithDuplicates = Enumerable.Range(1, 100).Concat(Enumerable.Range(1, 100)).ToArray();
+            int[] arrayWithDuplicates = Enumerable
+                .Range(1, 100)
+                .Concat(Enumerable.Range(1, 100))
+                .ToArray();
             this.AddTestHelper(this.Empty<int>(), arrayWithDuplicates);
         }
 
@@ -81,7 +88,16 @@ namespace System.Collections.Immutable.Tests
         public void ExceptDoesEnumerateSequenceIfThisIsEmpty()
         {
             bool enumerated = false;
-            Empty<int>().Except(Enumerable.Range(1, 1).Select(n => { enumerated = true; return n; }));
+            Empty<int>()
+                .Except(
+                    Enumerable
+                        .Range(1, 1)
+                        .Select(n =>
+                        {
+                            enumerated = true;
+                            return n;
+                        })
+                );
             Assert.True(enumerated);
         }
 
@@ -92,37 +108,61 @@ namespace System.Collections.Immutable.Tests
             IImmutableSet<int> nonEmptySet = this.Empty<int>().Add(5);
             Assert.True(nonEmptySet.SetEquals(nonEmptySet));
 
-            this.SetCompareTestHelper(s => s.SetEquals, s => s.SetEquals, this.GetSetEqualsScenarios());
+            this.SetCompareTestHelper(
+                s => s.SetEquals,
+                s => s.SetEquals,
+                this.GetSetEqualsScenarios()
+            );
         }
 
         [Fact]
         public void IsProperSubsetOfTest()
         {
-            this.SetCompareTestHelper(s => s.IsProperSubsetOf, s => s.IsProperSubsetOf, this.GetIsProperSubsetOfScenarios());
+            this.SetCompareTestHelper(
+                s => s.IsProperSubsetOf,
+                s => s.IsProperSubsetOf,
+                this.GetIsProperSubsetOfScenarios()
+            );
         }
 
         [Fact]
         public void IsProperSupersetOfTest()
         {
-            this.SetCompareTestHelper(s => s.IsProperSupersetOf, s => s.IsProperSupersetOf, this.GetIsProperSubsetOfScenarios().Select(Flip));
+            this.SetCompareTestHelper(
+                s => s.IsProperSupersetOf,
+                s => s.IsProperSupersetOf,
+                this.GetIsProperSubsetOfScenarios().Select(Flip)
+            );
         }
 
         [Fact]
         public void IsSubsetOfTest()
         {
-            this.SetCompareTestHelper(s => s.IsSubsetOf, s => s.IsSubsetOf, this.GetIsSubsetOfScenarios());
+            this.SetCompareTestHelper(
+                s => s.IsSubsetOf,
+                s => s.IsSubsetOf,
+                this.GetIsSubsetOfScenarios()
+            );
         }
 
         [Fact]
         public void IsSupersetOfTest()
         {
-            this.SetCompareTestHelper(s => s.IsSupersetOf, s => s.IsSupersetOf, this.GetIsSubsetOfScenarios().Select(Flip));
+            this.SetCompareTestHelper(
+                s => s.IsSupersetOf,
+                s => s.IsSupersetOf,
+                this.GetIsSubsetOfScenarios().Select(Flip)
+            );
         }
 
         [Fact]
         public void OverlapsTest()
         {
-            this.SetCompareTestHelper(s => s.Overlaps, s => s.Overlaps, this.GetOverlapsScenarios());
+            this.SetCompareTestHelper(
+                s => s.Overlaps,
+                s => s.Overlaps,
+                this.GetOverlapsScenarios()
+            );
         }
 
         [Fact]
@@ -141,7 +181,10 @@ namespace System.Collections.Immutable.Tests
         public void GetHashCodeTest()
         {
             // verify that get hash code is the default address based one.
-            Assert.Equal(EqualityComparer<object>.Default.GetHashCode(Empty<int>()), Empty<int>().GetHashCode());
+            Assert.Equal(
+                EqualityComparer<object>.Default.GetHashCode(Empty<int>()),
+                Empty<int>().GetHashCode()
+            );
         }
 
         [Fact]
@@ -242,7 +285,12 @@ namespace System.Collections.Immutable.Tests
             return this.Empty<T>().Union(items);
         }
 
-        protected void CustomSortTestHelper<T>(IImmutableSet<T> emptySet, bool matchOrder, T[] injectedValues, T[] expectedValues)
+        protected void CustomSortTestHelper<T>(
+            IImmutableSet<T> emptySet,
+            bool matchOrder,
+            T[] injectedValues,
+            T[] expectedValues
+        )
         {
             Assert.NotNull(emptySet);
             Assert.NotNull(injectedValues);
@@ -344,7 +392,11 @@ namespace System.Collections.Immutable.Tests
             };
         }
 
-        private void SetCompareTestHelper<T>(Func<IImmutableSet<T>, Func<IEnumerable<T>, bool>> operation, Func<ISet<T>, Func<IEnumerable<T>, bool>> baselineOperation, IEnumerable<Tuple<IEnumerable<T>, IEnumerable<T>, bool>> scenarios)
+        private void SetCompareTestHelper<T>(
+            Func<IImmutableSet<T>, Func<IEnumerable<T>, bool>> operation,
+            Func<ISet<T>, Func<IEnumerable<T>, bool>> baselineOperation,
+            IEnumerable<Tuple<IEnumerable<T>, IEnumerable<T>, bool>> scenarios
+        )
         {
             //const string message = "Scenario #{0}: Set 1: {1}, Set 2: {2}";
 
@@ -360,16 +412,29 @@ namespace System.Collections.Immutable.Tests
                 bool expected = expectedFunc(scenario.Item2);
                 Assert.Equal(expected, scenario.Item3); //, "Test scenario has an expected result that is inconsistent with BCL mutable collection behavior.");
 
-                Func<IEnumerable<T>, bool> actualFunc = operation(this.SetWith(scenario.Item1.ToArray()));
-                object[] args = new object[] { iteration, ToStringDeferred(scenario.Item1), ToStringDeferred(scenario.Item2) };
+                Func<IEnumerable<T>, bool> actualFunc = operation(
+                    this.SetWith(scenario.Item1.ToArray())
+                );
+                object[] args = new object[]
+                {
+                    iteration,
+                    ToStringDeferred(scenario.Item1),
+                    ToStringDeferred(scenario.Item2),
+                };
                 Assert.Equal(scenario.Item3, actualFunc(this.SetWith(scenario.Item2.ToArray()))); //, message, args);
                 Assert.Equal(scenario.Item3, actualFunc(scenario.Item2)); //, message, args);
             }
         }
 
-        private static Tuple<IEnumerable<T>, IEnumerable<T>, bool> Flip<T>(Tuple<IEnumerable<T>, IEnumerable<T>, bool> scenario)
+        private static Tuple<IEnumerable<T>, IEnumerable<T>, bool> Flip<T>(
+            Tuple<IEnumerable<T>, IEnumerable<T>, bool> scenario
+        )
         {
-            return new Tuple<IEnumerable<T>, IEnumerable<T>, bool>(scenario.Item2, scenario.Item1, scenario.Item3);
+            return new Tuple<IEnumerable<T>, IEnumerable<T>, bool>(
+                scenario.Item2,
+                scenario.Item1,
+                scenario.Item3
+            );
         }
 
         private void RemoveTestHelper<T>(IImmutableSet<T> set, params T[] values)
@@ -421,7 +486,11 @@ namespace System.Collections.Immutable.Tests
             }
         }
 
-        protected void EnumeratorTestHelper<T>(IImmutableSet<T> emptySet, IComparer<T> comparer, params T[] values)
+        protected void EnumeratorTestHelper<T>(
+            IImmutableSet<T> emptySet,
+            IComparer<T> comparer,
+            params T[] values
+        )
         {
             IImmutableSet<T> set = emptySet;
             foreach (T value in values)

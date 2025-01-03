@@ -16,5 +16,5 @@ public enum IISCapability
     ApplicationInitialization = 16,
     TracingModule = 32,
     FailedRequestTracingModule = 64,
-    BasicAuthentication = 128
+    BasicAuthentication = 128,
 }

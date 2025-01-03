@@ -20,15 +20,35 @@ namespace System.Web.Http.Tracing.Tracers
             HttpRequestMessage request = new HttpRequestMessage();
             HttpResponseMessage response = new HttpResponseMessage();
             Mock<IExceptionFilter> mockFilter = new Mock<IExceptionFilter>() { CallBase = true };
-            mockFilter.Setup(f => f.ExecuteExceptionFilterAsync(It.IsAny<HttpActionExecutedContext>(), It.IsAny<CancellationToken>()))
+            mockFilter
+                .Setup(f =>
+                    f.ExecuteExceptionFilterAsync(
+                        It.IsAny<HttpActionExecutedContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+                )
                 .Returns(TaskHelpers.Completed());
-            HttpActionExecutedContext actionExecutedContext = ContextUtil.GetActionExecutedContext(request, response);
+            HttpActionExecutedContext actionExecutedContext = ContextUtil.GetActionExecutedContext(
+                request,
+                response
+            );
             TestTraceWriter traceWriter = new TestTraceWriter();
-            ExceptionFilterTracer tracer = new ExceptionFilterTracer(mockFilter.Object, traceWriter);
+            ExceptionFilterTracer tracer = new ExceptionFilterTracer(
+                mockFilter.Object,
+                traceWriter
+            );
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(request, TraceCategories.FiltersCategory, TraceLevel.Info) { Kind = TraceKind.Begin, Operation = "ExecuteExceptionFilterAsync" },
-                new TraceRecord(request, TraceCategories.FiltersCategory, TraceLevel.Info) { Kind = TraceKind.End,  Operation = "ExecuteExceptionFilterAsync" },
+                new TraceRecord(request, TraceCategories.FiltersCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.Begin,
+                    Operation = "ExecuteExceptionFilterAsync",
+                },
+                new TraceRecord(request, TraceCategories.FiltersCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.End,
+                    Operation = "ExecuteExceptionFilterAsync",
+                },
             };
 
             // Act
@@ -36,7 +56,11 @@ namespace System.Web.Http.Tracing.Tracers
             await filter.ExecuteExceptionFilterAsync(actionExecutedContext, CancellationToken.None);
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
         }
 
         [Fact]
@@ -49,24 +73,52 @@ namespace System.Web.Http.Tracing.Tracers
             InvalidOperationException exception = new InvalidOperationException("test");
             TaskCompletionSource<object> tcs = new TaskCompletionSource<object>(null);
             tcs.TrySetException(exception);
-            mockFilter.Setup(a => a.ExecuteExceptionFilterAsync(It.IsAny<HttpActionExecutedContext>(), It.IsAny<CancellationToken>())).Returns(tcs.Task);
-            HttpActionExecutedContext actionExecutedContext = ContextUtil.GetActionExecutedContext(request, response);
+            mockFilter
+                .Setup(a =>
+                    a.ExecuteExceptionFilterAsync(
+                        It.IsAny<HttpActionExecutedContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+                )
+                .Returns(tcs.Task);
+            HttpActionExecutedContext actionExecutedContext = ContextUtil.GetActionExecutedContext(
+                request,
+                response
+            );
             TestTraceWriter traceWriter = new TestTraceWriter();
-            ExceptionFilterTracer tracer = new ExceptionFilterTracer(mockFilter.Object, traceWriter);
+            ExceptionFilterTracer tracer = new ExceptionFilterTracer(
+                mockFilter.Object,
+                traceWriter
+            );
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(request, TraceCategories.FiltersCategory, TraceLevel.Info) { Kind = TraceKind.Begin, Operation = "ExecuteExceptionFilterAsync" },
-                new TraceRecord(request, TraceCategories.FiltersCategory, TraceLevel.Error) { Kind = TraceKind.End,  Operation = "ExecuteExceptionFilterAsync" }
+                new TraceRecord(request, TraceCategories.FiltersCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.Begin,
+                    Operation = "ExecuteExceptionFilterAsync",
+                },
+                new TraceRecord(request, TraceCategories.FiltersCategory, TraceLevel.Error)
+                {
+                    Kind = TraceKind.End,
+                    Operation = "ExecuteExceptionFilterAsync",
+                },
             };
 
             // Act
-            Task task = ((IExceptionFilter)tracer).ExecuteExceptionFilterAsync(actionExecutedContext, CancellationToken.None);
+            Task task = ((IExceptionFilter)tracer).ExecuteExceptionFilterAsync(
+                actionExecutedContext,
+                CancellationToken.None
+            );
 
             // Assert
             Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() => task);
             Assert.Same(exception, thrown);
             Assert.Same(exception, traceWriter.Traces[1].Exception);
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
         }
 
         [Fact]
@@ -74,7 +126,10 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             IExceptionFilter expectedInner = new Mock<IExceptionFilter>().Object;
-            ExceptionFilterTracer productUnderTest = new ExceptionFilterTracer(expectedInner, new TestTraceWriter());
+            ExceptionFilterTracer productUnderTest = new ExceptionFilterTracer(
+                expectedInner,
+                new TestTraceWriter()
+            );
 
             // Act
             IExceptionFilter actualInner = productUnderTest.Inner as IExceptionFilter;
@@ -88,10 +143,15 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             IExceptionFilter expectedInner = new Mock<IExceptionFilter>().Object;
-            ExceptionFilterTracer productUnderTest = new ExceptionFilterTracer(expectedInner, new TestTraceWriter());
+            ExceptionFilterTracer productUnderTest = new ExceptionFilterTracer(
+                expectedInner,
+                new TestTraceWriter()
+            );
 
             // Act
-            IExceptionFilter actualInner = Decorator.GetInner(productUnderTest.Inner as IExceptionFilter);
+            IExceptionFilter actualInner = Decorator.GetInner(
+                productUnderTest.Inner as IExceptionFilter
+            );
 
             // Assert
             Assert.Same(expectedInner, actualInner);

@@ -32,8 +32,18 @@ public class ConnectionErrorEventData : ConnectionEndEventData, IErrorEventData
         Exception exception,
         bool async,
         DateTimeOffset startTime,
-        TimeSpan duration)
-        : base(eventDefinition, messageGenerator, connection, context, connectionId, async, startTime, duration)
+        TimeSpan duration
+    )
+        : base(
+            eventDefinition,
+            messageGenerator,
+            connection,
+            context,
+            connectionId,
+            async,
+            startTime,
+            duration
+        )
     {
         Exception = exception;
     }

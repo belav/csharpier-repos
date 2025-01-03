@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
     [ExportSnippetProvider(nameof(ISnippetProvider), LanguageNames.CSharp), Shared]
     internal sealed class CSharpInterfaceSnippetProvider : AbstractCSharpTypeSnippetProvider
     {
-        private static readonly ISet<SyntaxKind> s_validModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+        private static readonly ISet<SyntaxKind> s_validModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        )
         {
             SyntaxKind.InternalKeyword,
             SyntaxKind.PublicKeyword,
@@ -32,9 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpInterfaceSnippetProvider()
-        {
-        }
+        public CSharpInterfaceSnippetProvider() { }
 
         public override string Identifier => "interface";
 
@@ -42,16 +42,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
 
         protected override ISet<SyntaxKind> ValidModifiers => s_validModifiers;
 
-        protected override async Task<SyntaxNode> GenerateTypeDeclarationAsync(Document document, int position, CancellationToken cancellationToken)
+        protected override async Task<SyntaxNode> GenerateTypeDeclarationAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var generator = SyntaxGenerator.GetGenerator(document);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var name = NameGenerator.GenerateUniqueName("MyInterface", name => semanticModel.LookupSymbols(position, name: name).IsEmpty);
+            var name = NameGenerator.GenerateUniqueName(
+                "MyInterface",
+                name => semanticModel.LookupSymbols(position, name: name).IsEmpty
+            );
             return generator.InterfaceDeclaration(name);
         }
 
-        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(ISyntaxFacts syntaxFacts)
+        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(
+            ISyntaxFacts syntaxFacts
+        )
         {
             return syntaxFacts.IsInterfaceDeclaration;
         }

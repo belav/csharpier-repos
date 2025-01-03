@@ -17,7 +17,10 @@ internal class SupplyParameterFromFormValueProvider : ICascadingValueSupplier
 
     public FormMappingContext MappingContext => _mappingContext;
 
-    public SupplyParameterFromFormValueProvider(IFormValueMapper? formValueMapper, string mappingScopeName)
+    public SupplyParameterFromFormValueProvider(
+        IFormValueMapper? formValueMapper,
+        string mappingScopeName
+    )
     {
         _formValueMapper = formValueMapper;
         _mappingContext = new FormMappingContext(mappingScopeName);
@@ -32,15 +35,26 @@ internal class SupplyParameterFromFormValueProvider : ICascadingValueSupplier
     public bool CanSupplyValue(in CascadingParameterInfo parameterInfo)
     {
         // We supply a FormMappingContext
-        if (parameterInfo.Attribute is CascadingParameterAttribute && parameterInfo.PropertyType == typeof(FormMappingContext))
+        if (
+            parameterInfo.Attribute is CascadingParameterAttribute
+            && parameterInfo.PropertyType == typeof(FormMappingContext)
+        )
         {
             return true;
         }
 
         // We also supply values for [SupplyValueFromForm]
-        if (_formValueMapper is not null && parameterInfo.Attribute is SupplyParameterFromFormAttribute supplyParameterFromFormAttribute)
+        if (
+            _formValueMapper is not null
+            && parameterInfo.Attribute
+                is SupplyParameterFromFormAttribute supplyParameterFromFormAttribute
+        )
         {
-            return _formValueMapper.CanMap(parameterInfo.PropertyType, MappingScopeName, supplyParameterFromFormAttribute.FormName);
+            return _formValueMapper.CanMap(
+                parameterInfo.PropertyType,
+                MappingScopeName,
+                supplyParameterFromFormAttribute.FormName
+            );
         }
 
         return false;
@@ -49,41 +63,65 @@ internal class SupplyParameterFromFormValueProvider : ICascadingValueSupplier
     public object? GetCurrentValue(in CascadingParameterInfo parameterInfo)
     {
         // We supply a FormMappingContext
-        if (parameterInfo.Attribute is CascadingParameterAttribute && parameterInfo.PropertyType == typeof(FormMappingContext))
+        if (
+            parameterInfo.Attribute is CascadingParameterAttribute
+            && parameterInfo.PropertyType == typeof(FormMappingContext)
+        )
         {
             return _mappingContext;
         }
 
         // We also supply values for [SupplyValueFromForm]
-        if (_formValueMapper is { } valueMapper && parameterInfo.Attribute is SupplyParameterFromFormAttribute)
+        if (
+            _formValueMapper is { } valueMapper
+            && parameterInfo.Attribute is SupplyParameterFromFormAttribute
+        )
         {
             return GetFormPostValue(valueMapper, _mappingContext, parameterInfo);
         }
 
-        throw new InvalidOperationException($"Received an unexpected attribute type {parameterInfo.Attribute.GetType()}");
+        throw new InvalidOperationException(
+            $"Received an unexpected attribute type {parameterInfo.Attribute.GetType()}"
+        );
     }
 
-    void ICascadingValueSupplier.Subscribe(ComponentState subscriber, in CascadingParameterInfo parameterInfo)
-        => throw new NotSupportedException(); // IsFixed = true, so the framework won't call this
+    void ICascadingValueSupplier.Subscribe(
+        ComponentState subscriber,
+        in CascadingParameterInfo parameterInfo
+    ) => throw new NotSupportedException(); // IsFixed = true, so the framework won't call this
 
-    void ICascadingValueSupplier.Unsubscribe(ComponentState subscriber, in CascadingParameterInfo parameterInfo)
-        => throw new NotSupportedException(); // IsFixed = true, so the framework won't call this
+    void ICascadingValueSupplier.Unsubscribe(
+        ComponentState subscriber,
+        in CascadingParameterInfo parameterInfo
+    ) => throw new NotSupportedException(); // IsFixed = true, so the framework won't call this
 
-    internal static object? GetFormPostValue(IFormValueMapper formValueMapper, FormMappingContext? mappingContext, in CascadingParameterInfo parameterInfo)
+    internal static object? GetFormPostValue(
+        IFormValueMapper formValueMapper,
+        FormMappingContext? mappingContext,
+        in CascadingParameterInfo parameterInfo
+    )
     {
         Debug.Assert(mappingContext != null);
 
         var attribute = (SupplyParameterFromFormAttribute)parameterInfo.Attribute; // Must be a valid cast because we check in CanSupplyValue
         var parameterName = attribute.Name ?? parameterInfo.PropertyName;
         var restrictToFormName = attribute.FormName;
-        Action<string, FormattableString, string?> errorHandler = string.IsNullOrEmpty(restrictToFormName) ?
-            mappingContext.AddError :
-            (name, message, value) => mappingContext.AddError(restrictToFormName, parameterName, message, value);
+        Action<string, FormattableString, string?> errorHandler = string.IsNullOrEmpty(
+            restrictToFormName
+        )
+            ? mappingContext.AddError
+            : (name, message, value) =>
+                mappingContext.AddError(restrictToFormName, parameterName, message, value);
 
-        var context = new FormValueMappingContext(mappingContext.MappingScopeName, restrictToFormName, parameterInfo.PropertyType, parameterName)
+        var context = new FormValueMappingContext(
+            mappingContext.MappingScopeName,
+            restrictToFormName,
+            parameterInfo.PropertyType,
+            parameterName
+        )
         {
             OnError = errorHandler,
-            MapErrorToContainer = mappingContext.AttachParentValue
+            MapErrorToContainer = mappingContext.AttachParentValue,
         };
 
         formValueMapper.Map(context);

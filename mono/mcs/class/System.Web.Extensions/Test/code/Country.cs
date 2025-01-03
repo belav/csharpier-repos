@@ -15,28 +15,12 @@ namespace TestCode
             Population = population;
         }
 
-        public int ID
-        {
-            get;
-            set;
-        }
+        public int ID { get; set; }
 
-        public string Name
-        {
-            get;
-            set;
-        }
+        public string Name { get; set; }
 
-        public string Capital
-        {
-            get;
-            set;
-        }
+        public string Capital { get; set; }
 
-        public double Population
-        {
-            get;
-            set;
-        }
+        public double Population { get; set; }
     }
 }

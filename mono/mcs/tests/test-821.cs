@@ -2,23 +2,23 @@
 
 unsafe struct S
 {
-	T Test<T> ()
-	{
-		return default (T);
-	}
+    T Test<T>()
+    {
+        return default(T);
+    }
 
-	public void M ()
-	{
-		fixed (S* ptr = &this)
-			ptr->Test<string> ();
-	}
+    public void M()
+    {
+        fixed (S* ptr = &this)
+            ptr->Test<string>();
+    }
 }
 
 class A
 {
-	public static int Main ()
-	{
-		new S ().M ();
-		return 0;
-	}
+    public static int Main()
+    {
+        new S().M();
+        return 0;
+    }
 }

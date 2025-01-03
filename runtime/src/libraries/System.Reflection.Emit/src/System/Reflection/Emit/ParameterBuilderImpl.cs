@@ -16,7 +16,12 @@ namespace System.Reflection.Emit
         internal MarshallingData? _marshallingData;
         internal object? _defaultValue = DBNull.Value;
 
-        public ParameterBuilderImpl(MethodBuilderImpl methodBuilder, int sequence, ParameterAttributes attributes, string? paramName)
+        public ParameterBuilderImpl(
+            MethodBuilderImpl methodBuilder,
+            int sequence,
+            ParameterAttributes attributes,
+            string? paramName
+        )
         {
             _position = sequence;
             _name = paramName;
@@ -32,7 +37,10 @@ namespace System.Reflection.Emit
 
         public override void SetConstant(object? defaultValue) => _defaultValue = defaultValue;
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             switch (con.ReflectedType!.FullName)
             {
@@ -47,11 +55,18 @@ namespace System.Reflection.Emit
                     return;
                 case "System.Runtime.InteropServices.MarshalAsAttribute":
                     _attributes |= ParameterAttributes.HasFieldMarshal;
-                    _marshallingData = MarshallingData.CreateMarshallingData(con, binaryAttribute, isField: false);
+                    _marshallingData = MarshallingData.CreateMarshallingData(
+                        con,
+                        binaryAttribute,
+                        isField: false
+                    );
                     return;
                 case "System.Runtime.InteropServices.DefaultParameterValueAttribute":
                     // MS.NET doesn't handle this attribute but we handle it for consistency TODO: not sure if we need to handle this
-                    CustomAttributeInfo caInfo = CustomAttributeInfo.DecodeCustomAttribute(con, binaryAttribute);
+                    CustomAttributeInfo caInfo = CustomAttributeInfo.DecodeCustomAttribute(
+                        con,
+                        binaryAttribute
+                    );
                     SetConstant(caInfo._ctorArgs[0]);
                     return;
             }
@@ -64,8 +79,8 @@ namespace System.Reflection.Emit
     internal sealed class ParameterInfoWrapper : ParameterInfo
     {
         private readonly ParameterBuilderImpl _pb;
-        private readonly Type _type
-;
+        private readonly Type _type;
+
         public ParameterInfoWrapper(ParameterBuilderImpl pb, Type type)
         {
             _pb = pb;

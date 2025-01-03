@@ -16,9 +16,7 @@ namespace System.Security.Cryptography.Pkcs
         public ReadOnlyMemory<byte> SecretValue => _decoded.SecretValue;
 
         private Pkcs12SecretBag(ReadOnlyMemory<byte> encodedBagValue)
-            : base(Oids.Pkcs12SecretBag, encodedBagValue, skipCopy: true)
-        {
-        }
+            : base(Oids.Pkcs12SecretBag, encodedBagValue, skipCopy: true) { }
 
         internal Pkcs12SecretBag(Oid secretTypeOid, ReadOnlyMemory<byte> secretValue)
             : this(EncodeBagValue(secretTypeOid, secretValue))

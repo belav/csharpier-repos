@@ -9,10 +9,8 @@ public class CosmosNorthwindTestStoreFactory : CosmosTestStoreFactory
 
     public static new CosmosNorthwindTestStoreFactory Instance { get; } = new();
 
-    protected CosmosNorthwindTestStoreFactory()
-    {
-    }
+    protected CosmosNorthwindTestStoreFactory() { }
 
-    public override TestStore GetOrCreate(string storeName)
-        => CosmosTestStore.GetOrCreate(Name, "Northwind.json");
+    public override TestStore GetOrCreate(string storeName) =>
+        CosmosTestStore.GetOrCreate(Name, "Northwind.json");
 }

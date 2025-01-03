@@ -6,7 +6,11 @@ namespace Microsoft.AspNetCore.Routing;
 /// <summary>
 /// Specifies the endpoint group name in <see cref="Microsoft.AspNetCore.Http.Endpoint.Metadata"/>.
 /// </summary>
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Delegate | AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+[AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Delegate | AttributeTargets.Class,
+    Inherited = false,
+    AllowMultiple = false
+)]
 public sealed class EndpointGroupNameAttribute : Attribute, IEndpointGroupNameMetadata
 {
     /// <summary>

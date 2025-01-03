@@ -34,5 +34,6 @@ public interface IKeyPropagator
     Task<InternalEntityEntry?> PropagateValueAsync(
         InternalEntityEntry entry,
         IProperty property,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 }

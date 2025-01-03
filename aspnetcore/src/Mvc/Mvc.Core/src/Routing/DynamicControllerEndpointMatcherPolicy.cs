@@ -11,12 +11,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-internal sealed class DynamicControllerEndpointMatcherPolicy : MatcherPolicy, IEndpointSelectorPolicy
+internal sealed class DynamicControllerEndpointMatcherPolicy
+    : MatcherPolicy,
+        IEndpointSelectorPolicy
 {
     private readonly DynamicControllerEndpointSelectorCache _selectorCache;
     private readonly EndpointMetadataComparer _comparer;
 
-    public DynamicControllerEndpointMatcherPolicy(DynamicControllerEndpointSelectorCache selectorCache, EndpointMetadataComparer comparer)
+    public DynamicControllerEndpointMatcherPolicy(
+        DynamicControllerEndpointSelectorCache selectorCache,
+        EndpointMetadataComparer comparer
+    )
     {
         ArgumentNullException.ThrowIfNull(selectorCache);
         ArgumentNullException.ThrowIfNull(comparer);
@@ -45,7 +50,10 @@ internal sealed class DynamicControllerEndpointMatcherPolicy : MatcherPolicy, IE
                 return true;
             }
 
-            if (endpoints[i].Metadata.GetMetadata<DynamicControllerRouteValueTransformerMetadata>() != null)
+            if (
+                endpoints[i].Metadata.GetMetadata<DynamicControllerRouteValueTransformerMetadata>()
+                != null
+            )
             {
                 // Found a dynamic controller endpoint
                 return true;
@@ -80,8 +88,10 @@ internal sealed class DynamicControllerEndpointMatcherPolicy : MatcherPolicy, IE
 
             // We don't expect both of these to be provided, and they are internal so there's
             // no realistic way this could happen.
-            var dynamicControllerMetadata = endpoint.Metadata.GetMetadata<DynamicControllerMetadata>();
-            var transformerMetadata = endpoint.Metadata.GetMetadata<DynamicControllerRouteValueTransformerMetadata>();
+            var dynamicControllerMetadata =
+                endpoint.Metadata.GetMetadata<DynamicControllerMetadata>();
+            var transformerMetadata =
+                endpoint.Metadata.GetMetadata<DynamicControllerRouteValueTransformerMetadata>();
 
             DynamicRouteValueTransformer? transformer = null;
             if (dynamicControllerMetadata != null)
@@ -90,10 +100,17 @@ internal sealed class DynamicControllerEndpointMatcherPolicy : MatcherPolicy, IE
             }
             else if (transformerMetadata != null)
             {
-                transformer = (DynamicRouteValueTransformer)httpContext.RequestServices.GetRequiredService(transformerMetadata.SelectorType);
+                transformer = (DynamicRouteValueTransformer)
+                    httpContext.RequestServices.GetRequiredService(
+                        transformerMetadata.SelectorType
+                    );
                 if (transformer.State != null)
                 {
-                    throw new InvalidOperationException(Resources.FormatStateShouldBeNullForRouteValueTransformers(transformerMetadata.SelectorType.Name));
+                    throw new InvalidOperationException(
+                        Resources.FormatStateShouldBeNullForRouteValueTransformers(
+                            transformerMetadata.SelectorType.Name
+                        )
+                    );
                 }
                 transformer.State = transformerMetadata.State;
 
@@ -119,8 +136,11 @@ internal sealed class DynamicControllerEndpointMatcherPolicy : MatcherPolicy, IE
                 // Naving no match for a fallback is a configuration error. We can't really check
                 // during startup that the action you configured exists, so this is the best we can do.
                 throw new InvalidOperationException(
-                    "Cannot find the fallback endpoint specified by route values: " +
-                    "{ " + string.Join(", ", dynamicValues.Select(kvp => $"{kvp.Key}: {kvp.Value}")) + " }.");
+                    "Cannot find the fallback endpoint specified by route values: "
+                        + "{ "
+                        + string.Join(", ", dynamicValues.Select(kvp => $"{kvp.Key}: {kvp.Value}"))
+                        + " }."
+                );
             }
             else if (endpoints.Count == 0)
             {
@@ -159,7 +179,10 @@ internal sealed class DynamicControllerEndpointMatcherPolicy : MatcherPolicy, IE
         }
     }
 
-    private DynamicControllerEndpointSelector ResolveSelector(DynamicControllerEndpointSelector? currentSelector, Endpoint endpoint)
+    private DynamicControllerEndpointSelector ResolveSelector(
+        DynamicControllerEndpointSelector? currentSelector,
+        Endpoint endpoint
+    )
     {
         var selector = _selectorCache.GetEndpointSelector(endpoint);
 

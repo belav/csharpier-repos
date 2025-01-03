@@ -10,6 +10,10 @@ internal static partial class Interop
         internal const int LOCALE_NAME_MAX_LENGTH = 85;
 
         [LibraryImport("kernel32.dll", StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial int ResolveLocaleName(string lpNameToResolve, char* lpLocaleName, int cchLocaleName);
+        internal static partial int ResolveLocaleName(
+            string lpNameToResolve,
+            char* lpLocaleName,
+            int cchLocaleName
+        );
     }
 }

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security;
-
 using Xunit;
 
 namespace System.Threading.Tasks.Tests
@@ -19,27 +18,52 @@ namespace System.Threading.Tasks.Tests
         {
             // ParallelOptions tests
             ParallelOptions options = new ParallelOptions();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("MaxDegreeOfParallelism", () => options.MaxDegreeOfParallelism = 0);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("MaxDegreeOfParallelism", () => options.MaxDegreeOfParallelism = -2);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "MaxDegreeOfParallelism",
+                () => options.MaxDegreeOfParallelism = 0
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "MaxDegreeOfParallelism",
+                () => options.MaxDegreeOfParallelism = -2
+            );
 
             // Parallel.Invoke tests
             Action[] smallActionArray = new Action[] { () => { } };
             Action[] largeActionArray = new Action[15];
-            for (int i = 0; i < 15; i++) largeActionArray[i] = () => { };
+            for (int i = 0; i < 15; i++)
+                largeActionArray[i] = () => { };
 
-            AssertExtensions.Throws<ArgumentNullException>("actions", () => Parallel.Invoke((Action[])null));
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.Invoke((ParallelOptions)null, () => { }));
-            AssertExtensions.Throws<ArgumentNullException>("actions", () => Parallel.Invoke(options, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "actions",
+                () => Parallel.Invoke((Action[])null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () => Parallel.Invoke((ParallelOptions)null, () => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "actions",
+                () => Parallel.Invoke(options, null)
+            );
 
-            AssertExtensions.Throws<ArgumentException>(null, () => Parallel.Invoke(options, (Action)null));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Parallel.Invoke(options, (Action)null)
+            );
 
             CancellationTokenSource cts = new CancellationTokenSource();
             options.CancellationToken = cts.Token;
             cts.Cancel();
-            EnsureOperationCanceledExceptionThrown(() => Parallel.Invoke(options, smallActionArray), options.CancellationToken,
-                "RunParallelExceptionTests:  FAILED.  Expected CT on Parallel.Invoke(optionsWithPreCanceledToken, smallArray)");
-            EnsureOperationCanceledExceptionThrown(() => Parallel.Invoke(options, largeActionArray), options.CancellationToken,
-               "RunParallelExceptionTests:  FAILED.  Expected CT on Parallel.Invoke(optionsWithPreCanceledToken, largeArray)");
+            EnsureOperationCanceledExceptionThrown(
+                () => Parallel.Invoke(options, smallActionArray),
+                options.CancellationToken,
+                "RunParallelExceptionTests:  FAILED.  Expected CT on Parallel.Invoke(optionsWithPreCanceledToken, smallArray)"
+            );
+            EnsureOperationCanceledExceptionThrown(
+                () => Parallel.Invoke(options, largeActionArray),
+                options.CancellationToken,
+                "RunParallelExceptionTests:  FAILED.  Expected CT on Parallel.Invoke(optionsWithPreCanceledToken, largeArray)"
+            );
 
             //
             // Parallel.For(32) tests
@@ -47,65 +71,149 @@ namespace System.Threading.Tasks.Tests
             options = new ParallelOptions(); // Reset to get rid of CT
 
             // Test P.For(from, to, action<int>)
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.For(0, 10, (Action<int>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.For(0, 10, (Action<int>)null)
+            );
 
             // Test P.For(from, to, options, action<int>)
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.For(0, 10, null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.For(0, 10, options, (Action<int>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () => Parallel.For(0, 10, null, _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.For(0, 10, options, (Action<int>)null)
+            );
 
             // Test P.For(from, to, Action<int, ParallelLoopState>)
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.For(0, 10, (Action<int, ParallelLoopState>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.For(0, 10, (Action<int, ParallelLoopState>)null)
+            );
 
             // Test P.For(from, to, options, Action<int, ParallelLoopState>)
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.For(0, 10, null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.For(0, 10, options, (Action<int, ParallelLoopState>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () => Parallel.For(0, 10, null, _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.For(0, 10, options, (Action<int, ParallelLoopState>)null)
+            );
 
             // Test P.For<TLocal>(from, to, Func<TLocal>, Func<int, PLS, TLocal, TLocal>, Action<TLocal>)
-            AssertExtensions.Throws<ArgumentNullException>("localInit", () => Parallel.For(0, 10, (Func<string>)null, (a, b, c) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.For(0, 10, () => "", null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localFinally", () => Parallel.For(0, 10, () => "", (a, b, c) => "", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localInit",
+                () => Parallel.For(0, 10, (Func<string>)null, (a, b, c) => "", _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.For(0, 10, () => "", null, _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localFinally",
+                () => Parallel.For(0, 10, () => "", (a, b, c) => "", null)
+            );
 
             // Test P.For<TLocal>(from, to, options, Func<TLocal>, Func<int, PLS, TLocal, TLocal>, Action<TLocal>)
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.For(0, 10, null, () => "", (a, b, c) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localInit", () => Parallel.For(0, 10, options, (Func<string>)null, (a, b, c) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.For(0, 10, options, () => "", null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localFinally", () => Parallel.For(0, 10, options, () => "", (a, b, c) => "", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () => Parallel.For(0, 10, null, () => "", (a, b, c) => "", _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localInit",
+                () => Parallel.For(0, 10, options, (Func<string>)null, (a, b, c) => "", _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.For(0, 10, options, () => "", null, _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localFinally",
+                () => Parallel.For(0, 10, options, () => "", (a, b, c) => "", null)
+            );
 
             //
             // Parallel.For(64) tests
             //
 
             // Test P.For(from, to, Action<long>)
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.For(0L, 10L, (Action<long>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.For(0L, 10L, (Action<long>)null)
+            );
 
             // Test P.For(from, to, options, Action<long>)
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.For(0L, 10L, null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.For(0L, 10L, options, (Action<long>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () => Parallel.For(0L, 10L, null, _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.For(0L, 10L, options, (Action<long>)null)
+            );
 
             // Test P.For(from, to, Action<long, PLS>)
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.For(0L, 10L, (Action<long, ParallelLoopState>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.For(0L, 10L, (Action<long, ParallelLoopState>)null)
+            );
 
             // Test P.For(from, to, options, Action<long, PLS>)
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.For(0L, 10L, null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.For(0L, 10L, options, (Action<long, ParallelLoopState>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () => Parallel.For(0L, 10L, null, _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.For(0L, 10L, options, (Action<long, ParallelLoopState>)null)
+            );
 
             // Test P.For<TLocal>(from, to, Func<TLocal>, Func<long, PLS, TLocal, TLocal>, Action<TLocal>)
-            AssertExtensions.Throws<ArgumentNullException>("localInit", () => Parallel.For(0L, 10L, (Func<string>)null, (a, b, c) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.For(0L, 10L, () => "", null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localFinally", () => Parallel.For(0L, 10L, () => "", (a, b, c) => "", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localInit",
+                () => Parallel.For(0L, 10L, (Func<string>)null, (a, b, c) => "", _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.For(0L, 10L, () => "", null, _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localFinally",
+                () => Parallel.For(0L, 10L, () => "", (a, b, c) => "", null)
+            );
 
             // Test P.For<TLocal>(from, to, options, Func<TLocal>, Func<long, PLS, TLocal, TLocal>, Action<TLocal>)
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.For(0L, 10L, null, () => "", (a, b, c) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localInit", () => Parallel.For(0L, 10L, options, (Func<string>)null, (a, b, c) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.For(0L, 10L, options, () => "", null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localFinally", () => Parallel.For(0L, 10L, options, () => "", (a, b, c) => "", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () => Parallel.For(0L, 10L, null, () => "", (a, b, c) => "", _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localInit",
+                () => Parallel.For(0L, 10L, options, (Func<string>)null, (a, b, c) => "", _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.For(0L, 10L, options, () => "", null, _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localFinally",
+                () => Parallel.For(0L, 10L, options, () => "", (a, b, c) => "", null)
+            );
 
             // Check that we properly handle pre-canceled requests
             options.CancellationToken = cts.Token;
-            EnsureOperationCanceledExceptionThrown(() => Parallel.For(0, 10, options, _ => { }), options.CancellationToken,
-               "RunParallelExceptionTests:  FAILED.  Expected OCE on pre-canceled P.For(32)");
-            EnsureOperationCanceledExceptionThrown(() => Parallel.For(0L, 10L, options, _ => { }),options.CancellationToken,
-               "RunParallelExceptionTests:  FAILED.  Expected OCE on pre-canceled P.For(64)");
+            EnsureOperationCanceledExceptionThrown(
+                () => Parallel.For(0, 10, options, _ => { }),
+                options.CancellationToken,
+                "RunParallelExceptionTests:  FAILED.  Expected OCE on pre-canceled P.For(32)"
+            );
+            EnsureOperationCanceledExceptionThrown(
+                () => Parallel.For(0L, 10L, options, _ => { }),
+                options.CancellationToken,
+                "RunParallelExceptionTests:  FAILED.  Expected OCE on pre-canceled P.For(64)"
+            );
 
             //
             // Parallel.ForEach(IEnumerable) tests
@@ -114,57 +222,232 @@ namespace System.Threading.Tasks.Tests
 
             // Test P.FE<T>(IE<T>, Action<T>)
             string[] sArray = new string[] { "one", "two", "three" };
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((IEnumerable<string>)null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(sArray, (Action<string>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => Parallel.ForEach((IEnumerable<string>)null, _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.ForEach(sArray, (Action<string>)null)
+            );
 
             // Test P.FE<T>(IE<T>, options, Action<T>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((IEnumerable<string>)null, options, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.ForEach(sArray, null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(sArray, options, (Action<string>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => Parallel.ForEach((IEnumerable<string>)null, options, _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () => Parallel.ForEach(sArray, null, _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.ForEach(sArray, options, (Action<string>)null)
+            );
 
             // Test P.FE<T>(IE<T>, Action<T,ParallelLoopState>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((IEnumerable<string>)null, (_, state) => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(sArray, (Action<string, ParallelLoopState>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => Parallel.ForEach((IEnumerable<string>)null, (_, state) => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.ForEach(sArray, (Action<string, ParallelLoopState>)null)
+            );
 
             // Test P.FE<T>(IE<T>, options, Action<T,ParallelLoopState>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((IEnumerable<string>)null, options, (_, state) => { }));
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.ForEach(sArray, null, (_, state) => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(sArray, options, (Action<string, ParallelLoopState>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => Parallel.ForEach((IEnumerable<string>)null, options, (_, state) => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () => Parallel.ForEach(sArray, null, (_, state) => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.ForEach(sArray, options, (Action<string, ParallelLoopState>)null)
+            );
 
             // Test P.FE<T>(IE<T>, Action<T,ParallelLoopState,idx>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((IEnumerable<string>)null, (_, state, idx) => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(sArray, (Action<string, ParallelLoopState, long>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => Parallel.ForEach((IEnumerable<string>)null, (_, state, idx) => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.ForEach(sArray, (Action<string, ParallelLoopState, long>)null)
+            );
 
             // Test P.FE<T>(IE<T>, options, Action<T,ParallelLoopState,idx>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((IEnumerable<string>)null, options, (_, state, idx) => { }));
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.ForEach(sArray, null, (_, state, idx) => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(sArray, options, (Action<string, ParallelLoopState, long>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => Parallel.ForEach((IEnumerable<string>)null, options, (_, state, idx) => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () => Parallel.ForEach(sArray, null, (_, state, idx) => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () =>
+                    Parallel.ForEach(sArray, options, (Action<string, ParallelLoopState, long>)null)
+            );
 
             //Test P.FE<T,L>(IE<T>, Func<L>, Func<T,PLS,L,L>, Action<L>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((IEnumerable<string>)null, () => "", (_, state, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localInit", () => Parallel.ForEach(sArray, (Func<string>)null, (_, state, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(sArray, () => "", (Func<string, ParallelLoopState, string, string>)null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localFinally", () => Parallel.ForEach(sArray, () => "", (_, state, local) => "", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () =>
+                    Parallel.ForEach(
+                        (IEnumerable<string>)null,
+                        () => "",
+                        (_, state, local) => "",
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localInit",
+                () =>
+                    Parallel.ForEach(sArray, (Func<string>)null, (_, state, local) => "", _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () =>
+                    Parallel.ForEach(
+                        sArray,
+                        () => "",
+                        (Func<string, ParallelLoopState, string, string>)null,
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localFinally",
+                () => Parallel.ForEach(sArray, () => "", (_, state, local) => "", null)
+            );
 
             //Test P.FE<T,L>(IE<T>, options, Func<L>, Func<T,PLS,L,L>, Action<L>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((IEnumerable<string>)null, options, () => "", (_, state, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.ForEach(sArray, null, () => "", (_, state, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localInit", () => Parallel.ForEach(sArray, options, (Func<string>)null, (_, state, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(sArray, options, () => "", (Func<string, ParallelLoopState, string, string>)null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localFinally", () => Parallel.ForEach(sArray, options, () => "", (_, state, local) => "", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () =>
+                    Parallel.ForEach(
+                        (IEnumerable<string>)null,
+                        options,
+                        () => "",
+                        (_, state, local) => "",
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () => Parallel.ForEach(sArray, null, () => "", (_, state, local) => "", _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localInit",
+                () =>
+                    Parallel.ForEach(
+                        sArray,
+                        options,
+                        (Func<string>)null,
+                        (_, state, local) => "",
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () =>
+                    Parallel.ForEach(
+                        sArray,
+                        options,
+                        () => "",
+                        (Func<string, ParallelLoopState, string, string>)null,
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localFinally",
+                () => Parallel.ForEach(sArray, options, () => "", (_, state, local) => "", null)
+            );
 
             //Test P.FE<T,L>(IE<T>, Func<L>, Func<T,PLS,long,L,L>, Action<L>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((IEnumerable<string>)null, () => "", (_, state, idx, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localInit", () => Parallel.ForEach(sArray, (Func<string>)null, (_, state, idx, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(sArray, () => "", (Func<string, ParallelLoopState, long, string, string>)null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localFinally", () => Parallel.ForEach(sArray, () => "", (_, state, idx, local) => "", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () =>
+                    Parallel.ForEach(
+                        (IEnumerable<string>)null,
+                        () => "",
+                        (_, state, idx, local) => "",
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localInit",
+                () =>
+                    Parallel.ForEach(
+                        sArray,
+                        (Func<string>)null,
+                        (_, state, idx, local) => "",
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () =>
+                    Parallel.ForEach(
+                        sArray,
+                        () => "",
+                        (Func<string, ParallelLoopState, long, string, string>)null,
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localFinally",
+                () => Parallel.ForEach(sArray, () => "", (_, state, idx, local) => "", null)
+            );
 
             //Test P.FE<T,L>(IE<T>, options, Func<L>, Func<T,PLS,idx,L,L>, Action<L>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((IEnumerable<string>)null, options, () => "", (_, state, idx, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.ForEach(sArray, null, () => "", (_, state, idx, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localInit", () => Parallel.ForEach(sArray, options, (Func<string>)null, (_, state, idx, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(sArray, options, () => "", (Func<string, ParallelLoopState, long, string, string>)null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localFinally", () => Parallel.ForEach(sArray, options, () => "", (_, state, idx, local) => "", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () =>
+                    Parallel.ForEach(
+                        (IEnumerable<string>)null,
+                        options,
+                        () => "",
+                        (_, state, idx, local) => "",
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () =>
+                    Parallel.ForEach(sArray, null, () => "", (_, state, idx, local) => "", _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localInit",
+                () =>
+                    Parallel.ForEach(
+                        sArray,
+                        options,
+                        (Func<string>)null,
+                        (_, state, idx, local) => "",
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () =>
+                    Parallel.ForEach(
+                        sArray,
+                        options,
+                        () => "",
+                        (Func<string, ParallelLoopState, long, string, string>)null,
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localFinally",
+                () =>
+                    Parallel.ForEach(sArray, options, () => "", (_, state, idx, local) => "", null)
+            );
 
             //
             // Parallel.ForEach(Partitioner) tests
@@ -173,35 +456,160 @@ namespace System.Threading.Tasks.Tests
             var partitioner = Partitioner.Create(sArray);
 
             // Test P.FE<T>(Partitioner<T>, Action<T>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((Partitioner<string>)null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(Partitioner.Create(sArray), (Action<string>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => Parallel.ForEach((Partitioner<string>)null, _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.ForEach(Partitioner.Create(sArray), (Action<string>)null)
+            );
 
             // Test P.FE<T>(Partitioner<T>, options, Action<T>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((Partitioner<string>)null, options, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.ForEach(Partitioner.Create(sArray), null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(Partitioner.Create(sArray), options, (Action<string>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => Parallel.ForEach((Partitioner<string>)null, options, _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () => Parallel.ForEach(Partitioner.Create(sArray), null, _ => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () => Parallel.ForEach(Partitioner.Create(sArray), options, (Action<string>)null)
+            );
 
             // Test P.FE<T>(Partitioner<T>, Action<T,ParallelLoopState>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((Partitioner<string>)null, (_, state) => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(Partitioner.Create(sArray), (Action<string, ParallelLoopState>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => Parallel.ForEach((Partitioner<string>)null, (_, state) => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () =>
+                    Parallel.ForEach(
+                        Partitioner.Create(sArray),
+                        (Action<string, ParallelLoopState>)null
+                    )
+            );
 
             // Test P.FE<T>(Partitioner<T>, options, Action<T,ParallelLoopState>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((Partitioner<string>)null, options, (_, state) => { }));
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.ForEach(Partitioner.Create(sArray), null, (_, state) => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(Partitioner.Create(sArray), options, (Action<string, ParallelLoopState>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => Parallel.ForEach((Partitioner<string>)null, options, (_, state) => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () => Parallel.ForEach(Partitioner.Create(sArray), null, (_, state) => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () =>
+                    Parallel.ForEach(
+                        Partitioner.Create(sArray),
+                        options,
+                        (Action<string, ParallelLoopState>)null
+                    )
+            );
 
             //Test P.FE<T,L>(Partitioner<T>, Func<L>, Func<T,PLS,L,L>, Action<L>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((Partitioner<string>)null, () => "", (_, state, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localInit", () => Parallel.ForEach(Partitioner.Create(sArray), (Func<string>)null, (_, state, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(Partitioner.Create(sArray), () => "", (Func<string, ParallelLoopState, string, string>)null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localFinally", () => Parallel.ForEach(Partitioner.Create(sArray), () => "", (_, state, local) => "", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () =>
+                    Parallel.ForEach(
+                        (Partitioner<string>)null,
+                        () => "",
+                        (_, state, local) => "",
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localInit",
+                () =>
+                    Parallel.ForEach(
+                        Partitioner.Create(sArray),
+                        (Func<string>)null,
+                        (_, state, local) => "",
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () =>
+                    Parallel.ForEach(
+                        Partitioner.Create(sArray),
+                        () => "",
+                        (Func<string, ParallelLoopState, string, string>)null,
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localFinally",
+                () =>
+                    Parallel.ForEach(
+                        Partitioner.Create(sArray),
+                        () => "",
+                        (_, state, local) => "",
+                        null
+                    )
+            );
 
             //Test P.FE<T,L>(Partitioner<T>, options, Func<L>, Func<T,PLS,L,L>, Action<L>)
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Parallel.ForEach((Partitioner<string>)null, options, () => "", (_, state, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () => Parallel.ForEach(Partitioner.Create(sArray), null, () => "", (_, state, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localInit", () => Parallel.ForEach(Partitioner.Create(sArray), options, (Func<string>)null, (_, state, local) => "", _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("body", () => Parallel.ForEach(Partitioner.Create(sArray), options, () => "", (Func<string, ParallelLoopState, string, string>)null, _ => { }));
-            AssertExtensions.Throws<ArgumentNullException>("localFinally", () => Parallel.ForEach(Partitioner.Create(sArray), options, () => "", (_, state, local) => "", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () =>
+                    Parallel.ForEach(
+                        (Partitioner<string>)null,
+                        options,
+                        () => "",
+                        (_, state, local) => "",
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parallelOptions",
+                () =>
+                    Parallel.ForEach(
+                        Partitioner.Create(sArray),
+                        null,
+                        () => "",
+                        (_, state, local) => "",
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localInit",
+                () =>
+                    Parallel.ForEach(
+                        Partitioner.Create(sArray),
+                        options,
+                        (Func<string>)null,
+                        (_, state, local) => "",
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "body",
+                () =>
+                    Parallel.ForEach(
+                        Partitioner.Create(sArray),
+                        options,
+                        () => "",
+                        (Func<string, ParallelLoopState, string, string>)null,
+                        _ => { }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localFinally",
+                () =>
+                    Parallel.ForEach(
+                        Partitioner.Create(sArray),
+                        options,
+                        () => "",
+                        (_, state, local) => "",
+                        null
+                    )
+            );
         }
 
         // Cover converting P.ForEaches of arrays, lists to P.Fors
@@ -211,54 +619,138 @@ namespace System.Threading.Tasks.Tests
             ParallelOptions options = new ParallelOptions();
             int[] intArray = new int[] { 1, 3, 5, 7, 9, 2, 4, 6, 8, 0 };
             int targetSum = 0;
-            foreach (int item in intArray) targetSum += item;
+            foreach (int item in intArray)
+                targetSum += item;
 
             // Test Parallel.ForEach(array) => Parallel.For
             int sum = 0;
-            Parallel.ForEach(intArray, item => { Interlocked.Add(ref sum, item); });
+            Parallel.ForEach(
+                intArray,
+                item =>
+                {
+                    Interlocked.Add(ref sum, item);
+                }
+            );
             Assert.Equal(sum, targetSum);
 
             sum = 0;
-            Parallel.ForEach(intArray, (item, state) => { Interlocked.Add(ref sum, item); });
+            Parallel.ForEach(
+                intArray,
+                (item, state) =>
+                {
+                    Interlocked.Add(ref sum, item);
+                }
+            );
             Assert.Equal(sum, targetSum);
 
             sum = 0;
-            Parallel.ForEach(intArray, (item, state, index) => { Interlocked.Add(ref sum, item); });
+            Parallel.ForEach(
+                intArray,
+                (item, state, index) =>
+                {
+                    Interlocked.Add(ref sum, item);
+                }
+            );
             Assert.Equal(sum, targetSum);
 
             sum = 0;
-            Parallel.ForEach(intArray, () => 0, (item, state, local) => { return local + item; }, subSum => { Interlocked.Add(ref sum, subSum); });
+            Parallel.ForEach(
+                intArray,
+                () => 0,
+                (item, state, local) =>
+                {
+                    return local + item;
+                },
+                subSum =>
+                {
+                    Interlocked.Add(ref sum, subSum);
+                }
+            );
             Assert.Equal(sum, targetSum);
 
             sum = 0;
-            Parallel.ForEach(intArray, () => 0, (item, state, index, local) => { return local + item; }, subSum => { Interlocked.Add(ref sum, subSum); });
+            Parallel.ForEach(
+                intArray,
+                () => 0,
+                (item, state, index, local) =>
+                {
+                    return local + item;
+                },
+                subSum =>
+                {
+                    Interlocked.Add(ref sum, subSum);
+                }
+            );
             Assert.Equal(sum, targetSum);
 
             // Test Parallel.ForEach(list) => Parallel.For
             List<int> intList = new List<int>(intArray);
 
             sum = 0;
-            Parallel.ForEach(intList, item => { Interlocked.Add(ref sum, item); });
+            Parallel.ForEach(
+                intList,
+                item =>
+                {
+                    Interlocked.Add(ref sum, item);
+                }
+            );
             Assert.Equal(sum, targetSum);
 
             sum = 0;
-            Parallel.ForEach(intList, (item, state) => { Interlocked.Add(ref sum, item); });
+            Parallel.ForEach(
+                intList,
+                (item, state) =>
+                {
+                    Interlocked.Add(ref sum, item);
+                }
+            );
             Assert.Equal(sum, targetSum);
 
             sum = 0;
-            Parallel.ForEach(intList, (item, state, index) => { Interlocked.Add(ref sum, item); });
+            Parallel.ForEach(
+                intList,
+                (item, state, index) =>
+                {
+                    Interlocked.Add(ref sum, item);
+                }
+            );
             Assert.Equal(sum, targetSum);
 
             sum = 0;
-            Parallel.ForEach(intList, () => 0, (item, state, local) => { return local + item; }, subSum => { Interlocked.Add(ref sum, subSum); });
+            Parallel.ForEach(
+                intList,
+                () => 0,
+                (item, state, local) =>
+                {
+                    return local + item;
+                },
+                subSum =>
+                {
+                    Interlocked.Add(ref sum, subSum);
+                }
+            );
             Assert.Equal(sum, targetSum);
 
             sum = 0;
-            Parallel.ForEach(intList, () => 0, (item, state, index, local) => { return local + item; }, subSum => { Interlocked.Add(ref sum, subSum); });
+            Parallel.ForEach(
+                intList,
+                () => 0,
+                (item, state, index, local) =>
+                {
+                    return local + item;
+                },
+                subSum =>
+                {
+                    Interlocked.Add(ref sum, subSum);
+                }
+            );
             Assert.Equal(sum, targetSum);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(1024)]
@@ -274,15 +766,20 @@ namespace System.Threading.Tasks.Tests
                 {
                     var actions = new Action[increms];
                     Action a = () => Interlocked.Increment(ref counter);
-                    for (int i = 0; i < actions.Length; i++) actions[i] = a;
+                    for (int i = 0; i < actions.Length; i++)
+                        actions[i] = a;
 
                     Parallel.Invoke(actions);
-                });
+                }
+            );
             t.Wait();
             Assert.Equal(increms, counter);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(-1)]
         [InlineData(0)]
         [InlineData(1)]
@@ -299,7 +796,8 @@ namespace System.Threading.Tasks.Tests
                 delegate
                 {
                     Parallel.For(0, increms, (x) => Interlocked.Increment(ref counter));
-                });
+                }
+            );
             t.Wait();
 
             int expected = increms > 0 ? increms : 0;
@@ -318,7 +816,10 @@ namespace System.Threading.Tasks.Tests
             Assert.Equal(expectedValue, counter);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(-1)]
         [InlineData(0)]
         [InlineData(1)]
@@ -334,14 +835,18 @@ namespace System.Threading.Tasks.Tests
                 delegate
                 {
                     Parallel.For(0L, increms, (x) => Interlocked.Increment(ref counter));
-                });
+                }
+            );
             t.Wait();
 
             long expected = increms > 0 ? increms : 0;
             Assert.Equal(expected, counter);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(1024)]
@@ -362,13 +867,17 @@ namespace System.Threading.Tasks.Tests
                 delegate
                 {
                     Parallel.For(0, count, (x) => Interlocked.Add(ref counter, x));
-                });
+                }
+            );
             t.Wait();
 
             Assert.Equal(expectCounter, counter);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(1024)]
@@ -388,13 +897,17 @@ namespace System.Threading.Tasks.Tests
                 delegate
                 {
                     Parallel.For(0L, count, (x) => Interlocked.Add(ref counter, x));
-                });
+                }
+            );
             t.Wait();
 
             Assert.Equal(expectCounter, counter);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0, 100)]
         [InlineData(-100, 100)]
         [InlineData(int.MaxValue - 1, int.MaxValue)]
@@ -409,18 +922,25 @@ namespace System.Threading.Tasks.Tests
                 seqForIndices.Add(i);
             }
 
-            Parallel.For(inclusiveFrom, exclusiveTo, i =>
-            {
-                lock (parForIndices)
+            Parallel.For(
+                inclusiveFrom,
+                exclusiveTo,
+                i =>
                 {
-                    parForIndices.Add(i);
+                    lock (parForIndices)
+                    {
+                        parForIndices.Add(i);
+                    }
                 }
-            });
+            );
             parForIndices.Sort();
             Assert.Equal(seqForIndices, parForIndices);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0, 100)]
         [InlineData(-100, 100)]
         [InlineData((long)int.MaxValue - 100, (long)int.MaxValue + 100)]
@@ -439,19 +959,26 @@ namespace System.Threading.Tasks.Tests
                 seqForIndices.Add(i);
             }
 
-            Parallel.For(inclusiveFrom, exclusiveTo, i =>
-            {
-                lock (parForIndices)
+            Parallel.For(
+                inclusiveFrom,
+                exclusiveTo,
+                i =>
                 {
-                    parForIndices.Add(i);
+                    lock (parForIndices)
+                    {
+                        parForIndices.Add(i);
+                    }
                 }
-            });
+            );
             parForIndices.Sort();
 
             Assert.Equal(seqForIndices, parForIndices);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(1024)]
@@ -473,14 +1000,21 @@ namespace System.Threading.Tasks.Tests
             Task t = Task.Run(
                 delegate
                 {
-                    Parallel.ForEach(new SimpleParallelForeachAddTest_Enumerable<int>(data), (x) => Interlocked.Add(ref counter, x));
-                });
+                    Parallel.ForEach(
+                        new SimpleParallelForeachAddTest_Enumerable<int>(data),
+                        (x) => Interlocked.Add(ref counter, x)
+                    );
+                }
+            );
             t.Wait();
 
             Assert.Equal(expectCounter, counter);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(1024)]
@@ -504,13 +1038,17 @@ namespace System.Threading.Tasks.Tests
                 delegate
                 {
                     Parallel.ForEach(data, (x) => Interlocked.Add(ref counter, x));
-                });
+                }
+            );
             t.Wait();
 
             Assert.Equal(expectCounter, counter);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(1024)]
@@ -534,13 +1072,17 @@ namespace System.Threading.Tasks.Tests
                 delegate
                 {
                     Parallel.ForEach(data, (x) => Interlocked.Add(ref counter, x));
-                });
+                }
+            );
             t.Wait();
 
             Assert.Equal(expectCounter, counter);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(1024)]
@@ -561,7 +1103,8 @@ namespace System.Threading.Tasks.Tests
                         (i, state, local) => unchecked(local += i),
                         (local) => Interlocked.Add(ref sum, local)
                     );
-                });
+                }
+            );
             t.Wait();
 
             // check that the average is correct.  (if the totals are correct, the avgs will also be correct.)
@@ -571,7 +1114,10 @@ namespace System.Threading.Tasks.Tests
             Assert.Equal(expectedTotal, sum);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(1024)]
@@ -588,11 +1134,21 @@ namespace System.Threading.Tasks.Tests
                     Parallel.For(
                         0L,
                         count,
-                        delegate () { return 0L; },
-                        delegate (long i, ParallelLoopState state, long local) { return local + i; },
-                        delegate (long local) { Interlocked.Add(ref sum, local); }
+                        delegate()
+                        {
+                            return 0L;
+                        },
+                        delegate(long i, ParallelLoopState state, long local)
+                        {
+                            return local + i;
+                        },
+                        delegate(long local)
+                        {
+                            Interlocked.Add(ref sum, local);
+                        }
                     );
-                });
+                }
+            );
             t.Wait();
 
             // check that the average is correct.  (if the totals are correct, the avgs will also be correct.)
@@ -612,7 +1168,7 @@ namespace System.Threading.Tasks.Tests
             int desiredDOP = 1;
             bool exceededDOP = false;
 
-            Action<int> init = delegate (int DOP)
+            Action<int> init = delegate(int DOP)
             {
                 parallelOptions.MaxDegreeOfParallelism = DOP;
                 counter = 0;
@@ -624,72 +1180,124 @@ namespace System.Threading.Tasks.Tests
             // Test For32 loops
             //
             init(desiredDOP);
-            Parallel.For(0, 100000, parallelOptions, delegate (int i)
-            {
-                int newval = Interlocked.Increment(ref counter);
-                if (newval > desiredDOP)
+            Parallel.For(
+                0,
+                100000,
+                parallelOptions,
+                delegate(int i)
                 {
-                    exceededDOP = true;
-                    if (newval > maxDOP) maxDOP = newval;
+                    int newval = Interlocked.Increment(ref counter);
+                    if (newval > desiredDOP)
+                    {
+                        exceededDOP = true;
+                        if (newval > maxDOP)
+                            maxDOP = newval;
+                    }
+                    Interlocked.Decrement(ref counter);
                 }
-                Interlocked.Decrement(ref counter);
-            });
-            Assert.False(exceededDOP, string.Format("TestParallelForDOP:  FAILED!  For32-loop exceeded desired DOP ({0} > {1}).", maxDOP, desiredDOP));
+            );
+            Assert.False(
+                exceededDOP,
+                string.Format(
+                    "TestParallelForDOP:  FAILED!  For32-loop exceeded desired DOP ({0} > {1}).",
+                    maxDOP,
+                    desiredDOP
+                )
+            );
 
             //
             // Test For64 loops
             //
             init(desiredDOP);
-            Parallel.For(0L, 100000L, parallelOptions, delegate (long i)
-            {
-                int newval = Interlocked.Increment(ref counter);
-                if (newval > desiredDOP)
+            Parallel.For(
+                0L,
+                100000L,
+                parallelOptions,
+                delegate(long i)
                 {
-                    exceededDOP = true;
-                    if (newval > maxDOP) maxDOP = newval;
+                    int newval = Interlocked.Increment(ref counter);
+                    if (newval > desiredDOP)
+                    {
+                        exceededDOP = true;
+                        if (newval > maxDOP)
+                            maxDOP = newval;
+                    }
+                    Interlocked.Decrement(ref counter);
                 }
-                Interlocked.Decrement(ref counter);
-            });
-            Assert.False(exceededDOP, string.Format("TestParallelForDOP:  FAILED!  For64-loop exceeded desired DOP ({0} > {1}).", maxDOP, desiredDOP));
+            );
+            Assert.False(
+                exceededDOP,
+                string.Format(
+                    "TestParallelForDOP:  FAILED!  For64-loop exceeded desired DOP ({0} > {1}).",
+                    maxDOP,
+                    desiredDOP
+                )
+            );
 
             //
             // Test ForEach loops
             //
             Dictionary<int, int> dict = new Dictionary<int, int>();
-            for (int i = 0; i < 100000; i++) dict.Add(i, i);
+            for (int i = 0; i < 100000; i++)
+                dict.Add(i, i);
 
             init(desiredDOP);
-            Parallel.ForEach(dict, parallelOptions, delegate (KeyValuePair<int, int> kvp)
-            {
-                int newval = Interlocked.Increment(ref counter);
-                if (newval > desiredDOP)
+            Parallel.ForEach(
+                dict,
+                parallelOptions,
+                delegate(KeyValuePair<int, int> kvp)
                 {
-                    exceededDOP = true;
-                    if (newval > maxDOP) maxDOP = newval;
+                    int newval = Interlocked.Increment(ref counter);
+                    if (newval > desiredDOP)
+                    {
+                        exceededDOP = true;
+                        if (newval > maxDOP)
+                            maxDOP = newval;
+                    }
+                    Interlocked.Decrement(ref counter);
                 }
-                Interlocked.Decrement(ref counter);
-            });
-            Assert.False(exceededDOP, string.Format("TestParallelForDOP:  FAILED!  ForEach-loop exceeded desired DOP ({0} > {1}).", maxDOP, desiredDOP));
+            );
+            Assert.False(
+                exceededDOP,
+                string.Format(
+                    "TestParallelForDOP:  FAILED!  ForEach-loop exceeded desired DOP ({0} > {1}).",
+                    maxDOP,
+                    desiredDOP
+                )
+            );
 
             //
             // Test ForEach loops w/ Partitioner
             //
             List<int> baselist = new List<int>();
-            for (int i = 0; i < 100000; i++) baselist.Add(i);
+            for (int i = 0; i < 100000; i++)
+                baselist.Add(i);
             MyPartitioner<int> mp = new MyPartitioner<int>(baselist);
 
             init(desiredDOP);
-            Parallel.ForEach(mp, parallelOptions, delegate (int item)
-            {
-                int newval = Interlocked.Increment(ref counter);
-                if (newval > desiredDOP)
+            Parallel.ForEach(
+                mp,
+                parallelOptions,
+                delegate(int item)
                 {
-                    exceededDOP = true;
-                    if (newval > maxDOP) maxDOP = newval;
+                    int newval = Interlocked.Increment(ref counter);
+                    if (newval > desiredDOP)
+                    {
+                        exceededDOP = true;
+                        if (newval > maxDOP)
+                            maxDOP = newval;
+                    }
+                    Interlocked.Decrement(ref counter);
                 }
-                Interlocked.Decrement(ref counter);
-            });
-            Assert.False(exceededDOP, string.Format("TestParallelForDOP:  FAILED!  ForEach-loop w/ Partitioner exceeded desired DOP ({0} > {1}).", maxDOP, desiredDOP));
+            );
+            Assert.False(
+                exceededDOP,
+                string.Format(
+                    "TestParallelForDOP:  FAILED!  ForEach-loop w/ Partitioner exceeded desired DOP ({0} > {1}).",
+                    maxDOP,
+                    desiredDOP
+                )
+            );
 
             //
             // Test ForEach loops w/ OrderablePartitioner
@@ -697,17 +1305,29 @@ namespace System.Threading.Tasks.Tests
             OrderablePartitioner<int> mop = Partitioner.Create(baselist, true);
 
             init(desiredDOP);
-            Parallel.ForEach(mop, parallelOptions, delegate (int item, ParallelLoopState state, long index)
-            {
-                int newval = Interlocked.Increment(ref counter);
-                if (newval > desiredDOP)
+            Parallel.ForEach(
+                mop,
+                parallelOptions,
+                delegate(int item, ParallelLoopState state, long index)
                 {
-                    exceededDOP = true;
-                    if (newval > maxDOP) maxDOP = newval;
+                    int newval = Interlocked.Increment(ref counter);
+                    if (newval > desiredDOP)
+                    {
+                        exceededDOP = true;
+                        if (newval > maxDOP)
+                            maxDOP = newval;
+                    }
+                    Interlocked.Decrement(ref counter);
                 }
-                Interlocked.Decrement(ref counter);
-            });
-            Assert.False(exceededDOP, string.Format("TestParallelForDOP:  FAILED!  ForEach-loop w/ OrderablePartitioner exceeded desired DOP ({0} > {1}).", maxDOP, desiredDOP));
+            );
+            Assert.False(
+                exceededDOP,
+                string.Format(
+                    "TestParallelForDOP:  FAILED!  ForEach-loop w/ OrderablePartitioner exceeded desired DOP ({0} > {1}).",
+                    maxDOP,
+                    desiredDOP
+                )
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -718,14 +1338,15 @@ namespace System.Threading.Tasks.Tests
             int intSum = 0;
             long longSum = 0;
 
-            for (int i = 0; i < loopsize; i++) expSum += i;
+            for (int i = 0; i < loopsize; i++)
+                expSum += i;
 
-            Action<int, string> intSumCheck = delegate (int observed, string label)
+            Action<int, string> intSumCheck = delegate(int observed, string label)
             {
                 Assert.Equal(observed, expSum);
             };
 
-            Action<long, string> longSumCheck = delegate (long observed, string label)
+            Action<long, string> longSumCheck = delegate(long observed, string label)
             {
                 Assert.Equal(observed, expSum);
             };
@@ -734,141 +1355,254 @@ namespace System.Threading.Tasks.Tests
             // Test For w/ 32-bit indices
             //
             intSum = 0;
-            Parallel.For(0, loopsize, delegate (int i)
-            {
-                Interlocked.Add(ref intSum, i);
-            });
+            Parallel.For(
+                0,
+                loopsize,
+                delegate(int i)
+                {
+                    Interlocked.Add(ref intSum, i);
+                }
+            );
             intSumCheck(intSum, "For32(from, to, body(int))");
 
             intSum = 0;
-            Parallel.For(0, loopsize, delegate (int i, ParallelLoopState state)
-            {
-                Interlocked.Add(ref intSum, i);
-            });
+            Parallel.For(
+                0,
+                loopsize,
+                delegate(int i, ParallelLoopState state)
+                {
+                    Interlocked.Add(ref intSum, i);
+                }
+            );
             intSumCheck(intSum, "For32(from, to, body(int, state))");
 
             intSum = 0;
-            Parallel.For(0, loopsize,
-                delegate { return 0; },
-                delegate (int i, ParallelLoopState state, int local)
+            Parallel.For(
+                0,
+                loopsize,
+                delegate
+                {
+                    return 0;
+                },
+                delegate(int i, ParallelLoopState state, int local)
                 {
                     return local + i;
                 },
-                delegate (int local) { Interlocked.Add(ref intSum, local); });
-            intSumCheck(intSum, "For32(from, to, localInit, body(int, state, local), localFinally)");
-
+                delegate(int local)
+                {
+                    Interlocked.Add(ref intSum, local);
+                }
+            );
+            intSumCheck(
+                intSum,
+                "For32(from, to, localInit, body(int, state, local), localFinally)"
+            );
 
             //
             // Test For w/ 64-bit indices
             //
             longSum = 0;
-            Parallel.For(0L, loopsize, delegate (long i)
-            {
-                Interlocked.Add(ref longSum, i);
-            });
+            Parallel.For(
+                0L,
+                loopsize,
+                delegate(long i)
+                {
+                    Interlocked.Add(ref longSum, i);
+                }
+            );
             longSumCheck(longSum, "For64(from, to, body(long))");
 
             longSum = 0;
-            Parallel.For(0, loopsize, delegate (long i, ParallelLoopState state)
-            {
-                Interlocked.Add(ref longSum, i);
-            });
+            Parallel.For(
+                0,
+                loopsize,
+                delegate(long i, ParallelLoopState state)
+                {
+                    Interlocked.Add(ref longSum, i);
+                }
+            );
             longSumCheck(longSum, "For64(from, to, body(long, state))");
 
             longSum = 0;
-            Parallel.For(0, loopsize,
-                delegate { return 0L; },
-                delegate (long i, ParallelLoopState state, long local)
+            Parallel.For(
+                0,
+                loopsize,
+                delegate
+                {
+                    return 0L;
+                },
+                delegate(long i, ParallelLoopState state, long local)
                 {
                     return local + i;
                 },
-                delegate (long local) { Interlocked.Add(ref longSum, local); });
-            longSumCheck(longSum, "For64(from, to, localInit, body(long, state, local), localFinally)");
+                delegate(long local)
+                {
+                    Interlocked.Add(ref longSum, local);
+                }
+            );
+            longSumCheck(
+                longSum,
+                "For64(from, to, localInit, body(long, state, local), localFinally)"
+            );
 
             //
             // Test ForEach
             //
             Dictionary<long, long> dict = new Dictionary<long, long>(loopsize);
-            for (int i = 0; i < loopsize; i++) dict[i] = i;
+            for (int i = 0; i < loopsize; i++)
+                dict[i] = i;
 
             longSum = 0;
-            Parallel.ForEach(dict, delegate (KeyValuePair<long, long> kvp)
-            {
-                Interlocked.Add(ref longSum, kvp.Value);
-            });
+            Parallel.ForEach(
+                dict,
+                delegate(KeyValuePair<long, long> kvp)
+                {
+                    Interlocked.Add(ref longSum, kvp.Value);
+                }
+            );
             longSumCheck(longSum, "ForEach(enumerable, body(TSource))");
 
             longSum = 0;
-            Parallel.ForEach(dict, delegate (KeyValuePair<long, long> kvp, ParallelLoopState state)
-            {
-                Interlocked.Add(ref longSum, kvp.Value);
-            });
+            Parallel.ForEach(
+                dict,
+                delegate(KeyValuePair<long, long> kvp, ParallelLoopState state)
+                {
+                    Interlocked.Add(ref longSum, kvp.Value);
+                }
+            );
             longSumCheck(longSum, "ForEach(enumerable, body(TSource, state))");
 
             longSum = 0;
-            Parallel.ForEach(dict, delegate (KeyValuePair<long, long> kvp, ParallelLoopState state, long index)
-            {
-                Interlocked.Add(ref longSum, index);
-            });
+            Parallel.ForEach(
+                dict,
+                delegate(KeyValuePair<long, long> kvp, ParallelLoopState state, long index)
+                {
+                    Interlocked.Add(ref longSum, index);
+                }
+            );
             longSumCheck(longSum, "ForEach(enumerable, body(TSource, state, index))");
 
             longSum = 0;
-            Parallel.ForEach(dict,
-                delegate { return 0L; },
-                delegate (KeyValuePair<long, long> kvp, ParallelLoopState state, long local)
+            Parallel.ForEach(
+                dict,
+                delegate
+                {
+                    return 0L;
+                },
+                delegate(KeyValuePair<long, long> kvp, ParallelLoopState state, long local)
                 {
                     return local + kvp.Value;
                 },
-                delegate (long local) { Interlocked.Add(ref longSum, local); });
+                delegate(long local)
+                {
+                    Interlocked.Add(ref longSum, local);
+                }
+            );
             longSumCheck(longSum, "ForEach(enumerable, body(TSource, state, TLocal))");
 
             longSum = 0;
-            Parallel.ForEach(dict,
-                delegate { return 0L; },
-                delegate (KeyValuePair<long, long> kvp, ParallelLoopState state, long index, long local)
+            Parallel.ForEach(
+                dict,
+                delegate
+                {
+                    return 0L;
+                },
+                delegate(
+                    KeyValuePair<long, long> kvp,
+                    ParallelLoopState state,
+                    long index,
+                    long local
+                )
                 {
                     return local + index;
                 },
-                delegate (long local) { Interlocked.Add(ref longSum, local); });
+                delegate(long local)
+                {
+                    Interlocked.Add(ref longSum, local);
+                }
+            );
             longSumCheck(longSum, "ForEach(enumerable, body(TSource, state, index, TLocal))");
 
             //
             // Test ForEach w/ Partitioner
             //
             List<int> baselist = new List<int>();
-            for (int i = 0; i < loopsize; i++) baselist.Add(i);
+            for (int i = 0; i < loopsize; i++)
+                baselist.Add(i);
             MyPartitioner<int> mp = new MyPartitioner<int>(baselist);
             OrderablePartitioner<int> mop = Partitioner.Create(baselist, true);
 
             intSum = 0;
-            Parallel.ForEach(mp, delegate (int item) { Interlocked.Add(ref intSum, item); });
+            Parallel.ForEach(
+                mp,
+                delegate(int item)
+                {
+                    Interlocked.Add(ref intSum, item);
+                }
+            );
             intSumCheck(intSum, "ForEachP(enumerable, body(TSource))");
 
             intSum = 0;
-            Parallel.ForEach(mp, delegate (int item, ParallelLoopState state) { Interlocked.Add(ref intSum, item); });
+            Parallel.ForEach(
+                mp,
+                delegate(int item, ParallelLoopState state)
+                {
+                    Interlocked.Add(ref intSum, item);
+                }
+            );
             intSumCheck(intSum, "ForEachP(enumerable, body(TSource, state))");
 
             intSum = 0;
-            Parallel.ForEach(mop, delegate (int item, ParallelLoopState state, long index) { Interlocked.Add(ref intSum, item); });
+            Parallel.ForEach(
+                mop,
+                delegate(int item, ParallelLoopState state, long index)
+                {
+                    Interlocked.Add(ref intSum, item);
+                }
+            );
             intSumCheck(intSum, "ForEachOP(enumerable, body(TSource, state, index))");
 
             intSum = 0;
             Parallel.ForEach(
                 mp,
-                delegate { return 0; },
-                delegate (int item, ParallelLoopState state, int local) { return local + item; },
-                delegate (int local) { Interlocked.Add(ref intSum, local); }
+                delegate
+                {
+                    return 0;
+                },
+                delegate(int item, ParallelLoopState state, int local)
+                {
+                    return local + item;
+                },
+                delegate(int local)
+                {
+                    Interlocked.Add(ref intSum, local);
+                }
             );
-            intSumCheck(intSum, "ForEachP(enumerable, localInit, body(TSource, state, local), localFinally)");
+            intSumCheck(
+                intSum,
+                "ForEachP(enumerable, localInit, body(TSource, state, local), localFinally)"
+            );
 
             intSum = 0;
             Parallel.ForEach(
                 mop,
-                delegate { return 0; },
-                delegate (int item, ParallelLoopState state, long index, int local) { return local + item; },
-                delegate (int local) { Interlocked.Add(ref intSum, local); }
+                delegate
+                {
+                    return 0;
+                },
+                delegate(int item, ParallelLoopState state, long index, int local)
+                {
+                    return local + item;
+                },
+                delegate(int local)
+                {
+                    Interlocked.Add(ref intSum, local);
+                }
             );
-            intSumCheck(intSum, "ForEachOP(enumerable, localInit, body(TSource, state, index, local), localFinally)");
+            intSumCheck(
+                intSum,
+                "ForEachOP(enumerable, localInit, body(TSource, state, index, local), localFinally)"
+            );
         }
 
         [Fact]
@@ -881,119 +1615,205 @@ namespace System.Threading.Tasks.Tests
 
             // And check that the use of OrderablePartitioner w/o dynamic support is rejected
             var mop = Partitioner.Create(baselist, false);
-            Assert.Throws<InvalidOperationException>(() => Parallel.ForEach(mop, delegate (int item, ParallelLoopState state, long index) { }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Parallel.ForEach(
+                        mop,
+                        delegate(int item, ParallelLoopState state, long index) { }
+                    )
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91582", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91582",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public static void TestParallelScheduler()
         {
             ParallelOptions parallelOptions = new ParallelOptions();
 
             TaskScheduler myTaskScheduler = new ParallelTestsScheduler();
 
-            Task t1 = Task.Factory.StartNew(delegate ()
-            {
-                TaskScheduler usedScheduler = null;
-
-                do
+            Task t1 = Task.Factory.StartNew(
+                delegate()
                 {
-                    //
-                    // Parallel.For() testing.
-                    // Not, for now, testing all flavors (For(int), For(long), ForEach(), Partitioner ForEach()).
-                    // Assuming that all use ParallelOptions in the same fashion.
-                    //
+                    TaskScheduler usedScheduler = null;
 
-                    // Make sure that TaskScheduler is used by default (no ParallelOptions)
-                    Parallel.For(0, 1, delegate (int i)
+                    do
                     {
-                        usedScheduler = TaskScheduler.Current;
-                    });
-                    Assert.True(usedScheduler == TaskScheduler.Default, "TestParallelScheduler:    > FAILED.  PFor: TaskScheduler.Default not used when no ParallelOptions are specified.");
+                        //
+                        // Parallel.For() testing.
+                        // Not, for now, testing all flavors (For(int), For(long), ForEach(), Partitioner ForEach()).
+                        // Assuming that all use ParallelOptions in the same fashion.
+                        //
 
-                    // Make sure that TaskScheduler is used by default (with ParallelOptions)
-                    Parallel.For(0, 1, parallelOptions, delegate (int i)
-                    {
-                        usedScheduler = TaskScheduler.Current;
-                    });
-                    Assert.True(usedScheduler == TaskScheduler.Default, "TestParallelScheduler:    > FAILED.  PFor: TaskScheduler.Default not used when none specified in ParallelOptions.");
+                        // Make sure that TaskScheduler is used by default (no ParallelOptions)
+                        Parallel.For(
+                            0,
+                            1,
+                            delegate(int i)
+                            {
+                                usedScheduler = TaskScheduler.Current;
+                            }
+                        );
+                        Assert.True(
+                            usedScheduler == TaskScheduler.Default,
+                            "TestParallelScheduler:    > FAILED.  PFor: TaskScheduler.Default not used when no ParallelOptions are specified."
+                        );
 
-                    // Make sure that specified scheduler is actually used
-                    parallelOptions.TaskScheduler = myTaskScheduler;
-                    Parallel.For(0, 1, parallelOptions, delegate (int i)
-                    {
-                        usedScheduler = TaskScheduler.Current;
-                    });
-                    Assert.True(usedScheduler == myTaskScheduler, "TestParallelScheduler:    > FAILED.  PFor: Failed to run with specified scheduler.");
+                        // Make sure that TaskScheduler is used by default (with ParallelOptions)
+                        Parallel.For(
+                            0,
+                            1,
+                            parallelOptions,
+                            delegate(int i)
+                            {
+                                usedScheduler = TaskScheduler.Current;
+                            }
+                        );
+                        Assert.True(
+                            usedScheduler == TaskScheduler.Default,
+                            "TestParallelScheduler:    > FAILED.  PFor: TaskScheduler.Default not used when none specified in ParallelOptions."
+                        );
 
-                    // Make sure that current scheduler is used when null is specified
-                    parallelOptions.TaskScheduler = null;
-                    Parallel.For(0, 1, parallelOptions, delegate (int i)
-                    {
-                        usedScheduler = TaskScheduler.Current;
-                    });
-                    Assert.True(usedScheduler == myTaskScheduler, "TestParallelScheduler:    > FAILED.  PFor: Failed to run with TS.Current when null was specified.");
+                        // Make sure that specified scheduler is actually used
+                        parallelOptions.TaskScheduler = myTaskScheduler;
+                        Parallel.For(
+                            0,
+                            1,
+                            parallelOptions,
+                            delegate(int i)
+                            {
+                                usedScheduler = TaskScheduler.Current;
+                            }
+                        );
+                        Assert.True(
+                            usedScheduler == myTaskScheduler,
+                            "TestParallelScheduler:    > FAILED.  PFor: Failed to run with specified scheduler."
+                        );
 
-                    //
-                    // Parallel.Invoke testing.
-                    //
-                    parallelOptions = new ParallelOptions();
+                        // Make sure that current scheduler is used when null is specified
+                        parallelOptions.TaskScheduler = null;
+                        Parallel.For(
+                            0,
+                            1,
+                            parallelOptions,
+                            delegate(int i)
+                            {
+                                usedScheduler = TaskScheduler.Current;
+                            }
+                        );
+                        Assert.True(
+                            usedScheduler == myTaskScheduler,
+                            "TestParallelScheduler:    > FAILED.  PFor: Failed to run with TS.Current when null was specified."
+                        );
 
-                    // Make sure that TaskScheduler is used by default (w/o ParallelOptions)
-                    Parallel.Invoke(
-                        delegate { usedScheduler = TaskScheduler.Current; }
-                    );
-                    Assert.True(usedScheduler == TaskScheduler.Default, "TestParallelScheduler:    > FAILED.  PInvoke: TaskScheduler.Default not used when no ParallelOptions are specified.");
+                        //
+                        // Parallel.Invoke testing.
+                        //
+                        parallelOptions = new ParallelOptions();
 
-                    // Make sure that TaskScheduler is used by default (with ParallelOptions)
-                    Parallel.Invoke(
-                        parallelOptions,
-                        delegate { usedScheduler = TaskScheduler.Current; }
-                    );
-                    Assert.True(usedScheduler == TaskScheduler.Default, "TestParallelScheduler:    > FAILED.  PInvoke: TaskScheduler.Default not used when none specified in ParallelOptions.");
+                        // Make sure that TaskScheduler is used by default (w/o ParallelOptions)
+                        Parallel.Invoke(
+                            delegate
+                            {
+                                usedScheduler = TaskScheduler.Current;
+                            }
+                        );
+                        Assert.True(
+                            usedScheduler == TaskScheduler.Default,
+                            "TestParallelScheduler:    > FAILED.  PInvoke: TaskScheduler.Default not used when no ParallelOptions are specified."
+                        );
 
-                    // Make sure that specified scheduler is actually used
-                    parallelOptions.TaskScheduler = myTaskScheduler;
-                    Parallel.Invoke(
-                        parallelOptions,
-                        delegate { usedScheduler = TaskScheduler.Current; }
-                    );
-                    Assert.True(usedScheduler == myTaskScheduler, "TestParallelScheduler:    > FAILED.  PInvoke: Failed to run with specified scheduler.");
+                        // Make sure that TaskScheduler is used by default (with ParallelOptions)
+                        Parallel.Invoke(
+                            parallelOptions,
+                            delegate
+                            {
+                                usedScheduler = TaskScheduler.Current;
+                            }
+                        );
+                        Assert.True(
+                            usedScheduler == TaskScheduler.Default,
+                            "TestParallelScheduler:    > FAILED.  PInvoke: TaskScheduler.Default not used when none specified in ParallelOptions."
+                        );
 
-                    // Make sure that current scheduler is used when null is specified
-                    parallelOptions.TaskScheduler = null;
-                    Parallel.Invoke(
-                        parallelOptions,
-                        delegate { usedScheduler = TaskScheduler.Current; }
-                    );
-                    Assert.True(usedScheduler == myTaskScheduler, "TestParallelScheduler:    > FAILED.  PInvoke: Failed to run with TS.Current when null was specified.");
+                        // Make sure that specified scheduler is actually used
+                        parallelOptions.TaskScheduler = myTaskScheduler;
+                        Parallel.Invoke(
+                            parallelOptions,
+                            delegate
+                            {
+                                usedScheduler = TaskScheduler.Current;
+                            }
+                        );
+                        Assert.True(
+                            usedScheduler == myTaskScheduler,
+                            "TestParallelScheduler:    > FAILED.  PInvoke: Failed to run with specified scheduler."
+                        );
 
-                    // Some tests for wonky behavior seen before fixes
-                    TaskCompletionSource tcs = new TaskCompletionSource();
-                    bool timeExpired = false;
-                    Task continuation = tcs.Task.ContinueWith(delegate
-                    {
-                        Assert.True(timeExpired, "TestParallelScheduler:    > FAILED.  WaitAll() started/inlined a continuation task!");
-                    });
+                        // Make sure that current scheduler is used when null is specified
+                        parallelOptions.TaskScheduler = null;
+                        Parallel.Invoke(
+                            parallelOptions,
+                            delegate
+                            {
+                                usedScheduler = TaskScheduler.Current;
+                            }
+                        );
+                        Assert.True(
+                            usedScheduler == myTaskScheduler,
+                            "TestParallelScheduler:    > FAILED.  PInvoke: Failed to run with TS.Current when null was specified."
+                        );
 
-                    // Arrange for another task to complete the tcs.
-                    Task delayedOperation = Task.Factory.StartNew(delegate
-                    {
-                        timeExpired = true;
-                        tcs.SetResult();
-                    });
+                        // Some tests for wonky behavior seen before fixes
+                        TaskCompletionSource tcs = new TaskCompletionSource();
+                        bool timeExpired = false;
+                        Task continuation = tcs.Task.ContinueWith(
+                            delegate
+                            {
+                                Assert.True(
+                                    timeExpired,
+                                    "TestParallelScheduler:    > FAILED.  WaitAll() started/inlined a continuation task!"
+                                );
+                            }
+                        );
 
-                    Task.WaitAll(tcs.Task, continuation);
-                    Assert.True(timeExpired,
-                            string.Format("TestParallelScheduler:    > FAILED.  WaitAll() completed for unstarted continuation task or TCS.task! -- continuation status: {0}", continuation.Status));
-                } while (false);
-            }, CancellationToken.None, TaskCreationOptions.None, myTaskScheduler);
+                        // Arrange for another task to complete the tcs.
+                        Task delayedOperation = Task.Factory.StartNew(
+                            delegate
+                            {
+                                timeExpired = true;
+                                tcs.SetResult();
+                            }
+                        );
+
+                        Task.WaitAll(tcs.Task, continuation);
+                        Assert.True(
+                            timeExpired,
+                            string.Format(
+                                "TestParallelScheduler:    > FAILED.  WaitAll() completed for unstarted continuation task or TCS.task! -- continuation status: {0}",
+                                continuation.Status
+                            )
+                        );
+                    } while (false);
+                },
+                CancellationToken.None,
+                TaskCreationOptions.None,
+                myTaskScheduler
+            );
 
             t1.Wait();
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91541", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91541",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public static void TestInvokeDOPAndCancel()
         {
             ParallelOptions parallelOptions = null;
@@ -1015,12 +1835,12 @@ namespace System.Threading.Tasks.Tests
 
             int numActions = 100;
             Action[] actions = new Action[numActions];
-            for (int i = 0; i < numActions; i++) actions[i] = a1;
+            for (int i = 0; i < numActions; i++)
+                actions[i] = a1;
             exceededDOP = false;
 
             Parallel.Invoke(parallelOptions, actions);
-            Assert.False( exceededDOP, "TestInvokeDOPAndCancel:    > FAILED!  DOP not respected.");
-
+            Assert.False(exceededDOP, "TestInvokeDOPAndCancel:    > FAILED!  DOP not respected.");
 
             //
             // Test cancellation
@@ -1038,20 +1858,28 @@ namespace System.Threading.Tasks.Tests
                 // May make more sense just to lock(counter) for this whole delegate but I'm trying to maintain the spirit of the test
                 // in case there is some intrinsic value in using Interlocked.Increment() here.
                 int incrementedValue = Interlocked.Increment(ref counter);
-                if (incrementedValue >= 1) cts.Cancel();
+                if (incrementedValue >= 1)
+                    cts.Cancel();
             };
-            for (int i = 0; i < numActions; i++) actions[i] = a2;
+            for (int i = 0; i < numActions; i++)
+                actions[i] = a2;
 
             Assert.Throws<OperationCanceledException>(() =>
             {
                 Parallel.Invoke(parallelOptions, actions);
             });
 
-            Debug.WriteLine("Saw counter get incremented to " + counter + " with 2 degrees of parallelism");
+            Debug.WriteLine(
+                "Saw counter get incremented to " + counter + " with 2 degrees of parallelism"
+            );
 
-            Assert.False((counter == numActions) || (counter > 2),
-                    string.Format("TestInvokeDOPAndCancel:    > FAILED!  Cancellation was not correctly effected.  Saw {0} calls to the Action delegate", counter));
-
+            Assert.False(
+                (counter == numActions) || (counter > 2),
+                string.Format(
+                    "TestInvokeDOPAndCancel:    > FAILED!  Cancellation was not correctly effected.  Saw {0} calls to the Action delegate",
+                    counter
+                )
+            );
 
             //
             // Make sure that cancellation + "regular" exception results in AggregateException
@@ -1062,34 +1890,48 @@ namespace System.Threading.Tasks.Tests
             Action a3 = delegate
             {
                 int newVal = Interlocked.Increment(ref counter);
-                if (newVal == 1) throw new Exception("some non-cancellation-related exception");
-                if (newVal >= 2) cts.Cancel();
+                if (newVal == 1)
+                    throw new Exception("some non-cancellation-related exception");
+                if (newVal >= 2)
+                    cts.Cancel();
             };
-            for (int i = 0; i < numActions; i++) actions[i] = a3;
+            for (int i = 0; i < numActions; i++)
+                actions[i] = a3;
 
             Assert.Throws<AggregateException>(() =>
             {
                 Parallel.Invoke(parallelOptions, actions);
             });
 
-            Assert.False(counter == numActions, "TestInvokeDOPAndCancel:    > FAILED!  Cancellation+exception not effected.");
+            Assert.False(
+                counter == numActions,
+                "TestInvokeDOPAndCancel:    > FAILED!  Cancellation+exception not effected."
+            );
 
             // Test that exceptions do not prevent other actions from running
             counter = 0;
             Action a4 = delegate
             {
                 int newVal = Interlocked.Increment(ref counter);
-                if (newVal == 1) throw new Exception("a singleton exception");
+                if (newVal == 1)
+                    throw new Exception("a singleton exception");
             };
-            for (int i = 0; i < numActions; i++) actions[i] = a4;
+            for (int i = 0; i < numActions; i++)
+                actions[i] = a4;
 
-            Assert.Throws<AggregateException>(()=>
+            Assert.Throws<AggregateException>(() =>
             {
                 Parallel.Invoke(actions);
             });
 
-            Assert.True(counter == numActions,
-                    string.Format("TestInvokeDOPAndCancel:    > FAILED!  exception prevented actions from executing ({0}/{1} executed).", counter, numActions));
+            Assert.True(
+                counter == numActions,
+                string.Format(
+                    "TestInvokeDOPAndCancel:    > FAILED!  exception prevented actions from executing ({0}/{1} executed).",
+                    counter,
+                    numActions
+                )
+            );
 
             // Test that simple example doesn't deadlock
             ManualResetEvent mres = new ManualResetEvent(false);
@@ -1104,10 +1946,15 @@ namespace System.Threading.Tasks.Tests
                 () => { },
                 () => { },
                 () => { },
-                () => { mres.WaitOne(); },
-                () => { mres.Set(); }
+                () =>
+                {
+                    mres.WaitOne();
+                },
+                () =>
+                {
+                    mres.Set();
+                }
             );
-
         }
 
         [Fact]
@@ -1136,98 +1983,154 @@ namespace System.Threading.Tasks.Tests
             };
 
             // Common logic for running a test
-            Action<Action> runtest = delegate (Action body)
+            Action<Action> runtest = delegate(Action body)
             {
                 Assert.Throws<OperationCanceledException>(() =>
                 {
                     body();
                 });
 
-                Assert.False(counter == iterations, "RunParallelLoopCancellationTests:      > FAILED! Loop does not appear to have been canceled.");
+                Assert.False(
+                    counter == iterations,
+                    "RunParallelLoopCancellationTests:      > FAILED! Loop does not appear to have been canceled."
+                );
             };
 
             iterations = 100000000; // Lots of iterations when we want to verify that something got canceled.
 
             init();
-            runtest(delegate
-            {
-                Parallel.For(0, iterations, parallelOptions, delegate (int i)
+            runtest(
+                delegate
                 {
-                    int myOrder = Interlocked.Increment(ref counter) - 1;
-                    if (myOrder == 10) cts.Cancel();
-                });
-            });
+                    Parallel.For(
+                        0,
+                        iterations,
+                        parallelOptions,
+                        delegate(int i)
+                        {
+                            int myOrder = Interlocked.Increment(ref counter) - 1;
+                            if (myOrder == 10)
+                                cts.Cancel();
+                        }
+                    );
+                }
+            );
 
             init();
-            runtest(delegate
-            {
-                Parallel.For(0L, iterations, parallelOptions, delegate (long i)
+            runtest(
+                delegate
                 {
-                    int myOrder = Interlocked.Increment(ref counter) - 1;
-                    if (myOrder == 10) cts.Cancel();
-                });
-            });
+                    Parallel.For(
+                        0L,
+                        iterations,
+                        parallelOptions,
+                        delegate(long i)
+                        {
+                            int myOrder = Interlocked.Increment(ref counter) - 1;
+                            if (myOrder == 10)
+                                cts.Cancel();
+                        }
+                    );
+                }
+            );
 
             // Something smaller for the ForEach() test, because we need to construct an equivalent-sized
             // data structure.
             iterations = 10000;
 
             Dictionary<int, int> dict = new Dictionary<int, int>(iterations);
-            for (int i = 0; i < iterations; i++) dict[i] = i;
+            for (int i = 0; i < iterations; i++)
+                dict[i] = i;
             init();
-            runtest(delegate
-            {
-                Parallel.ForEach(dict, parallelOptions, delegate (KeyValuePair<int, int> kvp)
+            runtest(
+                delegate
                 {
-                    int myOrder = Interlocked.Increment(ref counter) - 1;
-                    if (myOrder == 10) cts.Cancel();
-                });
-            });
+                    Parallel.ForEach(
+                        dict,
+                        parallelOptions,
+                        delegate(KeyValuePair<int, int> kvp)
+                        {
+                            int myOrder = Interlocked.Increment(ref counter) - 1;
+                            if (myOrder == 10)
+                                cts.Cancel();
+                        }
+                    );
+                }
+            );
 
             List<int> baselist = new List<int>();
-            for (int i = 0; i < iterations; i++) baselist.Add(i);
+            for (int i = 0; i < iterations; i++)
+                baselist.Add(i);
             MyPartitioner<int> mp = new MyPartitioner<int>(baselist);
             init();
-            runtest(delegate
-            {
-                Parallel.ForEach(mp, parallelOptions, delegate (int i)
+            runtest(
+                delegate
                 {
-                    int myOrder = Interlocked.Increment(ref counter) - 1;
-                    if (myOrder == 10) cts.Cancel();
-                });
-            });
+                    Parallel.ForEach(
+                        mp,
+                        parallelOptions,
+                        delegate(int i)
+                        {
+                            int myOrder = Interlocked.Increment(ref counter) - 1;
+                            if (myOrder == 10)
+                                cts.Cancel();
+                        }
+                    );
+                }
+            );
 
             OrderablePartitioner<int> mop = Partitioner.Create(baselist, true);
             init();
-            runtest(delegate
-            {
-                Parallel.ForEach(mop, parallelOptions, delegate (int i, ParallelLoopState state, long index)
+            runtest(
+                delegate
                 {
-                    int myOrder = Interlocked.Increment(ref counter) - 1;
-                    if (myOrder == 10) cts.Cancel();
-                });
-            });
+                    Parallel.ForEach(
+                        mop,
+                        parallelOptions,
+                        delegate(int i, ParallelLoopState state, long index)
+                        {
+                            int myOrder = Interlocked.Increment(ref counter) - 1;
+                            if (myOrder == 10)
+                                cts.Cancel();
+                        }
+                    );
+                }
+            );
         }
 
         /// <summary>
         /// Test to ensure that the task ID can be accessed from inside the task
         /// </summary>
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91583", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91583",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public static void TaskIDFromExternalContextTest()
         {
             int? withinTaskId = int.MinValue;
             Task t1 = Task.Run(() => withinTaskId = Task.CurrentId);
 
-            Parallel.For(0, 10, (i) =>
-            {
-                Assert.False(Task.CurrentId == null || Task.CurrentId < 0, "Task within Parallel.For must have non-negative Id");
-            });
+            Parallel.For(
+                0,
+                10,
+                (i) =>
+                {
+                    Assert.False(
+                        Task.CurrentId == null || Task.CurrentId < 0,
+                        "Task within Parallel.For must have non-negative Id"
+                    );
+                }
+            );
 
             t1.Wait();
 
             // Verification
-            Assert.False(withinTaskId == null || withinTaskId < 0, "Task.CurrentId called from within a Task must be non-negative");
+            Assert.False(
+                withinTaskId == null || withinTaskId < 0,
+                "Task.CurrentId called from within a Task must be non-negative"
+            );
         }
 
         private const int CancelForTestLoopIterations = 500;
@@ -1235,7 +2138,8 @@ namespace System.Threading.Tasks.Tests
         private static void VerifyCancelTestState(
             bool gotCancellationException,
             bool reportedAsCompleted,
-            int actuallyCompletedCount)
+            int actuallyCompletedCount
+        )
         {
             Assert.Equal(reportedAsCompleted, !gotCancellationException);
             if (reportedAsCompleted)
@@ -1252,12 +2156,15 @@ namespace System.Threading.Tasks.Tests
                 var cancellationTokenSource = new CancellationTokenSource();
                 bool gotCancellationException = false;
                 bool reportedAsCompleted = false;
-                var parallelOptions = new ParallelOptions { CancellationToken = cancellationTokenSource.Token };
+                var parallelOptions = new ParallelOptions
+                {
+                    CancellationToken = cancellationTokenSource.Token,
+                };
                 int completedCount = 0;
                 try
                 {
-                    reportedAsCompleted =
-                        Parallel.For(
+                    reportedAsCompleted = Parallel
+                        .For(
                             0,
                             CancelForTestLoopIterations,
                             parallelOptions,
@@ -1266,7 +2173,9 @@ namespace System.Threading.Tasks.Tests
                                 Interlocked.Increment(ref completedCount);
 
                                 _ = cancellationTokenSource.CancelAsync();
-                            }).IsCompleted;
+                            }
+                        )
+                        .IsCompleted;
                 }
                 catch (OperationCanceledException)
                 {
@@ -1274,7 +2183,11 @@ namespace System.Threading.Tasks.Tests
                 }
                 int actuallyCompletedCount = Interlocked.CompareExchange(ref completedCount, 0, 0);
 
-                VerifyCancelTestState(gotCancellationException, reportedAsCompleted, actuallyCompletedCount);
+                VerifyCancelTestState(
+                    gotCancellationException,
+                    reportedAsCompleted,
+                    actuallyCompletedCount
+                );
             }
         }
 
@@ -1286,12 +2199,15 @@ namespace System.Threading.Tasks.Tests
                 var cancellationTokenSource = new CancellationTokenSource();
                 bool gotCancellationException = false;
                 bool reportedAsCompleted = false;
-                var parallelOptions = new ParallelOptions { CancellationToken = cancellationTokenSource.Token };
+                var parallelOptions = new ParallelOptions
+                {
+                    CancellationToken = cancellationTokenSource.Token,
+                };
                 int completedCount = 0;
                 try
                 {
-                    reportedAsCompleted =
-                        Parallel.For(
+                    reportedAsCompleted = Parallel
+                        .For(
                             (long)0,
                             (long)CancelForTestLoopIterations,
                             parallelOptions,
@@ -1300,7 +2216,9 @@ namespace System.Threading.Tasks.Tests
                                 Interlocked.Increment(ref completedCount);
 
                                 _ = cancellationTokenSource.CancelAsync();
-                            }).IsCompleted;
+                            }
+                        )
+                        .IsCompleted;
                 }
                 catch (OperationCanceledException)
                 {
@@ -1308,7 +2226,11 @@ namespace System.Threading.Tasks.Tests
                 }
                 int actuallyCompletedCount = Interlocked.CompareExchange(ref completedCount, 0, 0);
 
-                VerifyCancelTestState(gotCancellationException, reportedAsCompleted, actuallyCompletedCount);
+                VerifyCancelTestState(
+                    gotCancellationException,
+                    reportedAsCompleted,
+                    actuallyCompletedCount
+                );
             }
         }
 
@@ -1319,7 +2241,10 @@ namespace System.Threading.Tasks.Tests
             yield return new object[] { array.Select(i => i) };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [MemberData(nameof(CancelForEachTest_MemberData))]
         public static void CancelForEachTest(IEnumerable<int> enumerable)
         {
@@ -1328,12 +2253,15 @@ namespace System.Threading.Tasks.Tests
                 var cancellationTokenSource = new CancellationTokenSource();
                 bool gotCancellationException = false;
                 bool reportedAsCompleted = false;
-                var parallelOptions = new ParallelOptions { CancellationToken = cancellationTokenSource.Token };
+                var parallelOptions = new ParallelOptions
+                {
+                    CancellationToken = cancellationTokenSource.Token,
+                };
                 int completedCount = 0;
                 try
                 {
-                    reportedAsCompleted =
-                        Parallel.ForEach(
+                    reportedAsCompleted = Parallel
+                        .ForEach(
                             enumerable,
                             parallelOptions,
                             value =>
@@ -1341,7 +2269,9 @@ namespace System.Threading.Tasks.Tests
                                 Interlocked.Increment(ref completedCount);
 
                                 _ = cancellationTokenSource.CancelAsync();
-                            }).IsCompleted;
+                            }
+                        )
+                        .IsCompleted;
                 }
                 catch (OperationCanceledException)
                 {
@@ -1349,7 +2279,11 @@ namespace System.Threading.Tasks.Tests
                 }
                 int actuallyCompletedCount = Interlocked.CompareExchange(ref completedCount, 0, 0);
 
-                VerifyCancelTestState(gotCancellationException, reportedAsCompleted, actuallyCompletedCount);
+                VerifyCancelTestState(
+                    gotCancellationException,
+                    reportedAsCompleted,
+                    actuallyCompletedCount
+                );
             }
         }
 
@@ -1360,14 +2294,17 @@ namespace System.Threading.Tasks.Tests
         private class SimpleParallelForeachAddTest_Enumerable<T> : IEnumerable<T>
         {
             private IEnumerable<T> _source;
+
             internal SimpleParallelForeachAddTest_Enumerable(IEnumerable<T> source)
             {
                 _source = source;
             }
+
             public IEnumerator<T> GetEnumerator()
             {
                 return _source.GetEnumerator();
             }
+
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
                 return ((IEnumerable<T>)this).GetEnumerator();
@@ -1417,9 +2354,10 @@ namespace System.Threading.Tasks.Tests
                 {
                     throw new ArgumentOutOfRangeException(nameof(partitionCount));
                 }
-                IEnumerator<TSource>[] partitions
-                    = new IEnumerator<TSource>[partitionCount];
-                IEnumerable<KeyValuePair<long, TSource>> partitionEnumerable = Partitioner.Create(_data, true).GetOrderableDynamicPartitions();
+                IEnumerator<TSource>[] partitions = new IEnumerator<TSource>[partitionCount];
+                IEnumerable<KeyValuePair<long, TSource>> partitionEnumerable = Partitioner
+                    .Create(_data, true)
+                    .GetOrderableDynamicPartitions();
                 for (int i = 0; i < partitionCount; i++)
                 {
                     partitions[i] = DropIndices(partitionEnumerable.GetEnumerator());
@@ -1432,7 +2370,9 @@ namespace System.Threading.Tasks.Tests
                 return DropIndices(Partitioner.Create(_data, true).GetOrderableDynamicPartitions());
             }
 
-            private static IEnumerable<TSource> DropIndices(IEnumerable<KeyValuePair<long, TSource>> source)
+            private static IEnumerable<TSource> DropIndices(
+                IEnumerable<KeyValuePair<long, TSource>> source
+            )
             {
                 foreach (KeyValuePair<long, TSource> pair in source)
                 {
@@ -1440,7 +2380,9 @@ namespace System.Threading.Tasks.Tests
                 }
             }
 
-            private static IEnumerator<TSource> DropIndices(IEnumerator<KeyValuePair<long, TSource>> source)
+            private static IEnumerator<TSource> DropIndices(
+                IEnumerator<KeyValuePair<long, TSource>> source
+            )
             {
                 while (source.MoveNext())
                 {
@@ -1454,12 +2396,19 @@ namespace System.Threading.Tasks.Tests
             }
         }
 
-        private static void EnsureOperationCanceledExceptionThrown(Action action, CancellationToken token, string message)
+        private static void EnsureOperationCanceledExceptionThrown(
+            Action action,
+            CancellationToken token,
+            string message
+        )
         {
             OperationCanceledException operationCanceledEx =
                 Assert.Throws<OperationCanceledException>(action);
 
-            Assert.True(operationCanceledEx.CancellationToken == token, string.Format("BarrierCancellationTests: Failed.  " + message));
+            Assert.True(
+                operationCanceledEx.CancellationToken == token,
+                string.Format("BarrierCancellationTests: Failed.  " + message)
+            );
         }
 
         #endregion

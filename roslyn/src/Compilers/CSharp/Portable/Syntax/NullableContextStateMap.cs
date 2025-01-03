@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             Unknown,
             Disabled,
             Enabled,
-            ExplicitlyRestored
+            ExplicitlyRestored,
         }
     }
 
@@ -58,16 +58,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             _contexts = contexts;
         }
 
-        private static NullableContextState GetContextForFileStart()
-            => new NullableContextState(
+        private static NullableContextState GetContextForFileStart() =>
+            new NullableContextState(
                 position: 0,
                 warningsState: NullableContextState.State.Unknown,
-                annotationsState: NullableContextState.State.Unknown);
+                annotationsState: NullableContextState.State.Unknown
+            );
 
         private int GetContextStateIndex(int position)
         {
             // PositionComparer only checks the position, not the states
-            var searchContext = new NullableContextState(position, warningsState: NullableContextState.State.Unknown, annotationsState: NullableContextState.State.Unknown);
+            var searchContext = new NullableContextState(
+                position,
+                warningsState: NullableContextState.State.Unknown,
+                annotationsState: NullableContextState.State.Unknown
+            );
             int index = _contexts.BinarySearch(searchContext, PositionComparer.Instance);
             if (index < 0)
             {
@@ -82,7 +87,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             if (index >= 0)
             {
                 Debug.Assert(_contexts[index].Position <= position);
-                Debug.Assert(index == _contexts.Length - 1 || position < _contexts[index + 1].Position);
+                Debug.Assert(
+                    index == _contexts.Length - 1 || position < _contexts[index + 1].Position
+                );
             }
 #endif
             return index;
@@ -162,9 +169,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 var context = nn.TargetToken.Kind() switch
                 {
                     SyntaxKind.None => new NullableContextState(position, setting, setting),
-                    SyntaxKind.WarningsKeyword => new NullableContextState(position, warningsState: setting, annotationsState: previousContext.AnnotationsState),
-                    SyntaxKind.AnnotationsKeyword => new NullableContextState(position, warningsState: previousContext.WarningsState, annotationsState: setting),
-                    var kind => throw ExceptionUtilities.UnexpectedValue(kind)
+                    SyntaxKind.WarningsKeyword => new NullableContextState(
+                        position,
+                        warningsState: setting,
+                        annotationsState: previousContext.AnnotationsState
+                    ),
+                    SyntaxKind.AnnotationsKeyword => new NullableContextState(
+                        position,
+                        warningsState: previousContext.WarningsState,
+                        annotationsState: setting
+                    ),
+                    var kind => throw ExceptionUtilities.UnexpectedValue(kind),
                 };
 
                 builder.Add(context);

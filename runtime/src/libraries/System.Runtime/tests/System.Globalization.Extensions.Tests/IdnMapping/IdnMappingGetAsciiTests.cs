@@ -32,14 +32,56 @@ namespace System.Globalization.Tests
             yield return new object[] { "\u0061\u0101\u0062", 0, 3, "xn--ab-dla" };
             yield return new object[] { "\u0061\u0062\u0101", 0, 3, "xn--ab-ela" };
 
-            yield return new object[] { "\uD800\uDF00\uD800\uDF01\uD800\uDF02", 0, 6, "xn--097ccd" }; // Surrogate pairs
-            yield return new object[] { "\uD800\uDF00\u0061\uD800\uDF01\u0042\uD800\uDF02", 0, 8, "xn--ab-ic6nfag" }; // Surrogate pairs separated by ASCII
-            yield return new object[] { "\uD800\uDF00\u0101\uD800\uDF01\u305D\uD800\uDF02", 0, 8, "xn--yda263v6b6kfag" }; // Surrogate pairs separated by non-ASCII
-            yield return new object[] { "\uD800\uDF00\u0101\uD800\uDF01\u0061\uD800\uDF02", 0, 8, "xn--a-nha4529qfag" }; // Surrogate pairs separated by ASCII and non-ASCII
+            yield return new object[]
+            {
+                "\uD800\uDF00\uD800\uDF01\uD800\uDF02",
+                0,
+                6,
+                "xn--097ccd",
+            }; // Surrogate pairs
+            yield return new object[]
+            {
+                "\uD800\uDF00\u0061\uD800\uDF01\u0042\uD800\uDF02",
+                0,
+                8,
+                "xn--ab-ic6nfag",
+            }; // Surrogate pairs separated by ASCII
+            yield return new object[]
+            {
+                "\uD800\uDF00\u0101\uD800\uDF01\u305D\uD800\uDF02",
+                0,
+                8,
+                "xn--yda263v6b6kfag",
+            }; // Surrogate pairs separated by non-ASCII
+            yield return new object[]
+            {
+                "\uD800\uDF00\u0101\uD800\uDF01\u0061\uD800\uDF02",
+                0,
+                8,
+                "xn--a-nha4529qfag",
+            }; // Surrogate pairs separated by ASCII and non-ASCII
             yield return new object[] { "\u0061\u0062\u0063", 0, 3, "\u0061\u0062\u0063" }; // ASCII only code points
-            yield return new object[] { "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067", 0, 7, "xn--d9juau41awczczp" }; // Non-ASCII only code points
-            yield return new object[] { "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 0, 9, "xn--de-jg4avhby1noc0d" }; // ASCII and non-ASCII code points
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 0, 21, "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d" }; // Fully qualified domain name
+            yield return new object[]
+            {
+                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067",
+                0,
+                7,
+                "xn--d9juau41awczczp",
+            }; // Non-ASCII only code points
+            yield return new object[]
+            {
+                "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                0,
+                9,
+                "xn--de-jg4avhby1noc0d",
+            }; // ASCII and non-ASCII code points
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                0,
+                21,
+                "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
+            }; // Fully qualified domain name
 
             // Embedded domain name conversion (NLS + only)(Priority 1)
             // Per the spec [7], "The index and count parameters (when provided) allow the
@@ -48,13 +90,55 @@ namespace System.Globalization.Tests
             // label, not the whole input string (if the input string contains more
             // character than the substring to convert)."
             // Fully Qualified Domain Name (Label1.Label2.Label3)
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 0, 21, "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d" };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 0, 11, "abc.xn--d9juau41awczczp" };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 0, 12, "abc.xn--d9juau41awczczp." };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 4, 17, "xn--d9juau41awczczp.xn--de-jg4avhby1noc0d" };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 4, 7, "xn--d9juau41awczczp" };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 4, 8, "xn--d9juau41awczczp." };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 12, 9, "xn--de-jg4avhby1noc0d" };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                0,
+                21,
+                "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                0,
+                11,
+                "abc.xn--d9juau41awczczp",
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                0,
+                12,
+                "abc.xn--d9juau41awczczp.",
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                4,
+                17,
+                "xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                4,
+                7,
+                "xn--d9juau41awczczp",
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                4,
+                8,
+                "xn--d9juau41awczczp.",
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                12,
+                9,
+                "xn--de-jg4avhby1noc0d",
+            };
         }
 
         [Theory]
@@ -86,7 +170,7 @@ namespace System.Globalization.Tests
         public void TestGetAsciiWithDot()
         {
             string result = "";
-            Exception ex = Record.Exception(()=> result = new IdnMapping().GetAscii("."));
+            Exception ex = Record.Exception(() => result = new IdnMapping().GetAscii("."));
             if (ex == null)
             {
                 // Windows and OSX always throw exception. some versions of Linux succeed and others throw exception
@@ -115,12 +199,36 @@ namespace System.Globalization.Tests
             yield return new object[] { "abc", 3, 0, typeof(ArgumentException) };
 
             // An FQDN/label must not begin with a label separator (it may end with one)
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 3, 18, typeof(ArgumentException) };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 3, 8, typeof(ArgumentException) };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 3, 9, typeof(ArgumentException) };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 11, 10, typeof(ArgumentException) };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                3,
+                18,
+                typeof(ArgumentException),
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                3,
+                8,
+                typeof(ArgumentException),
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                3,
+                9,
+                typeof(ArgumentException),
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                11,
+                10,
+                typeof(ArgumentException),
+            };
 
-            if (!OperatingSystem.IsWindows())  // expected platform differences, see https://github.com/dotnet/runtime/issues/17190
+            if (!OperatingSystem.IsWindows()) // expected platform differences, see https://github.com/dotnet/runtime/issues/17190
             {
                 if (OperatingSystem.IsMacOS())
                 {
@@ -136,22 +244,46 @@ namespace System.Globalization.Tests
             // Null containing strings
             yield return new object[] { "\u0101\u0000", 0, 2, typeof(ArgumentException) };
             yield return new object[] { "\u0101\u0000\u0101", 0, 3, typeof(ArgumentException) };
-            yield return new object[] { "\u0101\u0000\u0101\u0000", 0, 4, typeof(ArgumentException) };
+            yield return new object[]
+            {
+                "\u0101\u0000\u0101\u0000",
+                0,
+                4,
+                typeof(ArgumentException),
+            };
 
             // Invalid unicode strings
             for (int i = 0; i <= 0x1F; i++)
             {
-                yield return new object[] { "abc" + (char)i + "def", 0, 7, typeof(ArgumentException) };
+                yield return new object[]
+                {
+                    "abc" + (char)i + "def",
+                    0,
+                    7,
+                    typeof(ArgumentException),
+                };
             }
 
-            yield return new object[] { "abc" + (char)0x7F + "def", 0, 7, typeof(ArgumentException) };
+            yield return new object[]
+            {
+                "abc" + (char)0x7F + "def",
+                0,
+                7,
+                typeof(ArgumentException),
+            };
         }
 
         [Theory]
         [MemberData(nameof(GetAscii_Invalid_TestData))]
         public void GetAscii_Invalid(string unicode, int index, int count, Type exceptionType)
         {
-            static void getAscii_Invalid(IdnMapping idnMapping, string unicode, int index, int count, Type exceptionType)
+            static void getAscii_Invalid(
+                IdnMapping idnMapping,
+                string unicode,
+                int index,
+                int count,
+                Type exceptionType
+            )
             {
                 if (unicode == null || index + count == unicode.Length)
                 {
@@ -164,8 +296,20 @@ namespace System.Globalization.Tests
                 Assert.Throws(exceptionType, () => idnMapping.GetAscii(unicode, index, count));
             }
 
-            getAscii_Invalid(new IdnMapping() { UseStd3AsciiRules = false }, unicode, index, count, exceptionType);
-            getAscii_Invalid(new IdnMapping() { UseStd3AsciiRules = true }, unicode, index, count, exceptionType);
+            getAscii_Invalid(
+                new IdnMapping() { UseStd3AsciiRules = false },
+                unicode,
+                index,
+                count,
+                exceptionType
+            );
+            getAscii_Invalid(
+                new IdnMapping() { UseStd3AsciiRules = true },
+                unicode,
+                index,
+                count,
+                exceptionType
+            );
         }
 
         [Fact]

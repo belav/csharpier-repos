@@ -8,7 +8,5 @@ namespace System.Data.ProviderBase
     internal abstract partial class DbConnectionClosed : DbConnectionInternal
     {
         protected override void Activate() => throw ADP.ClosedConnectionError();
-
     }
-
 }

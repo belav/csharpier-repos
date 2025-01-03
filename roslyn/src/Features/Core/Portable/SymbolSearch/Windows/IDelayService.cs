@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         TimeSpan UpdateSucceededDelay { get; }
 
         /// <summary>
-        /// The time to wait after a simple expected sort of failure (i.e. IO exceptions, 
-        /// network exceptions, etc).  Things we can recover from and would expect would 
+        /// The time to wait after a simple expected sort of failure (i.e. IO exceptions,
+        /// network exceptions, etc).  Things we can recover from and would expect would
         /// be transient.
         /// </summary>
         TimeSpan ExpectedFailureDelay { get; }

@@ -53,7 +53,10 @@ public class GitHub_11816
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static void DoSomeWorkWithAStructAggressiveInlining(ref Vector<float> source, out Vector<float> result)
+    static void DoSomeWorkWithAStructAggressiveInlining(
+        ref Vector<float> source,
+        out Vector<float> result
+    )
     {
         StructType u;
         u.A = new Vector<float>(2) * source;

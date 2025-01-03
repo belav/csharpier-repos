@@ -15,7 +15,12 @@ public readonly struct DotNetInvocationInfo
     /// <param name="methodIdentifier">The identifier of the method to be invoked.</param>
     /// <param name="dotNetObjectId">The object identifier for instance method calls.</param>
     /// <param name="callId">The call identifier.</param>
-    public DotNetInvocationInfo(string? assemblyName, string methodIdentifier, long dotNetObjectId, string? callId)
+    public DotNetInvocationInfo(
+        string? assemblyName,
+        string methodIdentifier,
+        long dotNetObjectId,
+        string? callId
+    )
     {
         CallId = callId;
         AssemblyName = assemblyName;

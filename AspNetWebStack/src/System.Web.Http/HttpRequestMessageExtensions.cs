@@ -59,7 +59,10 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="request">The HTTP request.</param>
         /// <param name="configuration">The <see cref="HttpConfiguration"/> to set.</param>
-        public static void SetConfiguration(this HttpRequestMessage request, HttpConfiguration configuration)
+        public static void SetConfiguration(
+            this HttpRequestMessage request,
+            HttpConfiguration configuration
+        )
         {
             if (request == null)
             {
@@ -95,13 +98,23 @@ namespace System.Net.Http
             }
 
             IDependencyScope result;
-            if (!request.Properties.TryGetValue<IDependencyScope>(HttpPropertyKeys.DependencyScope, out result))
+            if (
+                !request.Properties.TryGetValue<IDependencyScope>(
+                    HttpPropertyKeys.DependencyScope,
+                    out result
+                )
+            )
             {
-                IDependencyResolver dependencyResolver = request.GetConfiguration().DependencyResolver;
+                IDependencyResolver dependencyResolver = request
+                    .GetConfiguration()
+                    .DependencyResolver;
                 result = dependencyResolver.BeginScope();
                 if (result == null)
                 {
-                    throw Error.InvalidOperation(SRResources.DependencyResolver_BeginScopeReturnsNull, dependencyResolver.GetType().Name);
+                    throw Error.InvalidOperation(
+                        SRResources.DependencyResolver_BeginScopeReturnsNull,
+                        dependencyResolver.GetType().Name
+                    );
                 }
                 request.Properties[HttpPropertyKeys.DependencyScope] = result;
                 request.RegisterForDispose(result);
@@ -126,7 +139,10 @@ namespace System.Net.Http
         /// <summary>Gets an <see cref="HttpRequestContext"/> associated with this request.</summary>
         /// <param name="request">The HTTP request.</param>
         /// <param name="context">The <see cref="HttpRequestContext"/> to associate with this request.</param>
-        public static void SetRequestContext(this HttpRequestMessage request, HttpRequestContext context)
+        public static void SetRequestContext(
+            this HttpRequestMessage request,
+            HttpRequestContext context
+        )
         {
             if (request == null)
             {
@@ -146,17 +162,24 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="request">The HTTP request.</param>
         /// <returns>The <see cref="System.Threading.SynchronizationContext"/> or null.</returns>
-        public static SynchronizationContext GetSynchronizationContext(this HttpRequestMessage request)
+        public static SynchronizationContext GetSynchronizationContext(
+            this HttpRequestMessage request
+        )
         {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
             }
 
-            return request.GetProperty<SynchronizationContext>(HttpPropertyKeys.SynchronizationContextKey);
+            return request.GetProperty<SynchronizationContext>(
+                HttpPropertyKeys.SynchronizationContextKey
+            );
         }
 
-        internal static void SetSynchronizationContext(this HttpRequestMessage request, SynchronizationContext synchronizationContext)
+        internal static void SetSynchronizationContext(
+            this HttpRequestMessage request,
+            SynchronizationContext synchronizationContext
+        )
         {
             if (request == null)
             {
@@ -197,7 +220,12 @@ namespace System.Net.Http
                 // now let us get out the delegate and try to invoke it
                 Func<HttpRequestMessage, X509Certificate2> retrieveCertificate;
 
-                if (request.Properties.TryGetValue(HttpPropertyKeys.RetrieveClientCertificateDelegateKey, out retrieveCertificate))
+                if (
+                    request.Properties.TryGetValue(
+                        HttpPropertyKeys.RetrieveClientCertificateDelegateKey,
+                        out retrieveCertificate
+                    )
+                )
                 {
                     result = retrieveCertificate(request);
 
@@ -277,10 +305,15 @@ namespace System.Net.Http
                 throw Error.ArgumentNull("request");
             }
 
-            return request.GetProperty<HttpActionDescriptor>(HttpPropertyKeys.HttpActionDescriptorKey);
+            return request.GetProperty<HttpActionDescriptor>(
+                HttpPropertyKeys.HttpActionDescriptorKey
+            );
         }
 
-        internal static void SetActionDescriptor(this HttpRequestMessage request, HttpActionDescriptor actionDescriptor)
+        internal static void SetActionDescriptor(
+            this HttpRequestMessage request,
+            HttpActionDescriptor actionDescriptor
+        )
         {
             if (request == null)
             {
@@ -307,16 +340,27 @@ namespace System.Net.Http
         /// <param name="invalidByteRangeException">An <see cref="InvalidByteRangeException"/> instance, typically thrown by a
         /// <see cref="ByteRangeStreamContent"/> instance.</param>
         /// <returns>An 416 (Requested Range Not Satisfiable) error response with a Content-Range header indicating the valid range.</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller will dispose")]
-        public static HttpResponseMessage CreateErrorResponse(this HttpRequestMessage request, InvalidByteRangeException invalidByteRangeException)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller will dispose"
+        )]
+        public static HttpResponseMessage CreateErrorResponse(
+            this HttpRequestMessage request,
+            InvalidByteRangeException invalidByteRangeException
+        )
         {
             if (invalidByteRangeException == null)
             {
                 throw Error.ArgumentNull("invalidByteRangeException");
             }
 
-            HttpResponseMessage rangeNotSatisfiableResponse = request.CreateErrorResponse(HttpStatusCode.RequestedRangeNotSatisfiable, invalidByteRangeException);
-            rangeNotSatisfiableResponse.Content.Headers.ContentRange = invalidByteRangeException.ContentRange;
+            HttpResponseMessage rangeNotSatisfiableResponse = request.CreateErrorResponse(
+                HttpStatusCode.RequestedRangeNotSatisfiable,
+                invalidByteRangeException
+            );
+            rangeNotSatisfiableResponse.Content.Headers.ContentRange =
+                invalidByteRangeException.ContentRange;
             return rangeNotSatisfiableResponse;
         }
 
@@ -333,7 +377,11 @@ namespace System.Net.Http
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="message">The error message.</param>
         /// <returns>An error response with error message <paramref name="message"/> and status code <paramref name="statusCode"/>.</returns>
-        public static HttpResponseMessage CreateErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string message)
+        public static HttpResponseMessage CreateErrorResponse(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode,
+            string message
+        )
         {
             return request.CreateErrorResponse(statusCode, new HttpError(message));
         }
@@ -354,9 +402,20 @@ namespace System.Net.Http
         /// <param name="messageDetail">The error message detail. This message will only be seen by clients if we should include error detail.</param>
         /// <returns>An error response with error message <paramref name="message"/> and message detail <paramref name="messageDetail"/>
         /// and status code <paramref name="statusCode"/>.</returns>
-        internal static HttpResponseMessage CreateErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string message, string messageDetail)
+        internal static HttpResponseMessage CreateErrorResponse(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode,
+            string message,
+            string messageDetail
+        )
         {
-            return request.CreateErrorResponse(statusCode, includeErrorDetail => includeErrorDetail ? new HttpError(message, messageDetail) : new HttpError(message));
+            return request.CreateErrorResponse(
+                statusCode,
+                includeErrorDetail =>
+                    includeErrorDetail
+                        ? new HttpError(message, messageDetail)
+                        : new HttpError(message)
+            );
         }
 
         /// <summary>
@@ -374,14 +433,25 @@ namespace System.Net.Http
         /// <param name="exception">The exception.</param>
         /// <returns>An error response for <paramref name="exception"/> with error message <paramref name="message"/>
         /// and status code <paramref name="statusCode"/>.</returns>
-        public static HttpResponseMessage CreateErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, string message, Exception exception)
+        public static HttpResponseMessage CreateErrorResponse(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode,
+            string message,
+            Exception exception
+        )
         {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
             }
 
-            return request.CreateErrorResponse(statusCode, includeErrorDetail => new HttpError(exception, includeErrorDetail) { Message = message });
+            return request.CreateErrorResponse(
+                statusCode,
+                includeErrorDetail => new HttpError(exception, includeErrorDetail)
+                {
+                    Message = message,
+                }
+            );
         }
 
         /// <summary>
@@ -397,14 +467,21 @@ namespace System.Net.Http
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="exception">The exception.</param>
         /// <returns>An error response for <paramref name="exception"/> with status code <paramref name="statusCode"/>.</returns>
-        public static HttpResponseMessage CreateErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, Exception exception)
+        public static HttpResponseMessage CreateErrorResponse(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode,
+            Exception exception
+        )
         {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
             }
 
-            return request.CreateErrorResponse(statusCode, includeErrorDetail => new HttpError(exception, includeErrorDetail));
+            return request.CreateErrorResponse(
+                statusCode,
+                includeErrorDetail => new HttpError(exception, includeErrorDetail)
+            );
         }
 
         /// <summary>
@@ -420,14 +497,21 @@ namespace System.Net.Http
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="modelState">The model state.</param>
         /// <returns>An error response for <paramref name="modelState"/> with status code <paramref name="statusCode"/>.</returns>
-        public static HttpResponseMessage CreateErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, ModelStateDictionary modelState)
+        public static HttpResponseMessage CreateErrorResponse(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode,
+            ModelStateDictionary modelState
+        )
         {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
             }
 
-            return request.CreateErrorResponse(statusCode, includeErrorDetail => new HttpError(modelState, includeErrorDetail));
+            return request.CreateErrorResponse(
+                statusCode,
+                includeErrorDetail => new HttpError(modelState, includeErrorDetail)
+            );
         }
 
         /// <summary>
@@ -443,7 +527,11 @@ namespace System.Net.Http
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="error">The error to wrap.</param>
         /// <returns>An error response wrapping <paramref name="error"/> with status code <paramref name="statusCode"/>.</returns>
-        public static HttpResponseMessage CreateErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, HttpError error)
+        public static HttpResponseMessage CreateErrorResponse(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode,
+            HttpError error
+        )
         {
             if (request == null)
             {
@@ -453,7 +541,11 @@ namespace System.Net.Http
             return request.CreateErrorResponse(statusCode, includeErrorDetail => error);
         }
 
-        private static HttpResponseMessage CreateErrorResponse(this HttpRequestMessage request, HttpStatusCode statusCode, Func<bool, HttpError> errorCreator)
+        private static HttpResponseMessage CreateErrorResponse(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode,
+            Func<bool, HttpError> errorCreator
+        )
         {
             HttpConfiguration configuration = request.GetConfiguration();
 
@@ -489,7 +581,10 @@ namespace System.Net.Http
         /// <param name="request">The request.</param>
         /// <param name="value">The value to wrap. Can be <c>null</c>.</param>
         /// <returns>A response wrapping <paramref name="value"/> with <see cref="System.Net.HttpStatusCode.OK"/> status code.</returns>
-        public static HttpResponseMessage CreateResponse<T>(this HttpRequestMessage request, T value)
+        public static HttpResponseMessage CreateResponse<T>(
+            this HttpRequestMessage request,
+            T value
+        )
         {
             return request.CreateResponse<T>(HttpStatusCode.OK, value, configuration: null);
         }
@@ -510,7 +605,11 @@ namespace System.Net.Http
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="value">The value to wrap. Can be <c>null</c>.</param>
         /// <returns>A response wrapping <paramref name="value"/> with <paramref name="statusCode"/>.</returns>
-        public static HttpResponseMessage CreateResponse<T>(this HttpRequestMessage request, HttpStatusCode statusCode, T value)
+        public static HttpResponseMessage CreateResponse<T>(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode,
+            T value
+        )
         {
             return request.CreateResponse<T>(statusCode, value, configuration: null);
         }
@@ -530,7 +629,12 @@ namespace System.Net.Http
         /// <param name="value">The value to wrap. Can be <c>null</c>.</param>
         /// <param name="configuration">The configuration to use. Can be <c>null</c>.</param>
         /// <returns>A response wrapping <paramref name="value"/> with <paramref name="statusCode"/>.</returns>
-        public static HttpResponseMessage CreateResponse<T>(this HttpRequestMessage request, HttpStatusCode statusCode, T value, HttpConfiguration configuration)
+        public static HttpResponseMessage CreateResponse<T>(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode,
+            T value,
+            HttpConfiguration configuration
+        )
         {
             if (request == null)
             {
@@ -540,18 +644,29 @@ namespace System.Net.Http
             configuration = configuration ?? request.GetConfiguration();
             if (configuration == null)
             {
-                throw Error.InvalidOperation(SRResources.HttpRequestMessageExtensions_NoConfiguration);
+                throw Error.InvalidOperation(
+                    SRResources.HttpRequestMessageExtensions_NoConfiguration
+                );
             }
 
             IContentNegotiator contentNegotiator = configuration.Services.GetContentNegotiator();
             if (contentNegotiator == null)
             {
-                throw Error.InvalidOperation(SRResources.HttpRequestMessageExtensions_NoContentNegotiator, typeof(IContentNegotiator).FullName);
+                throw Error.InvalidOperation(
+                    SRResources.HttpRequestMessageExtensions_NoContentNegotiator,
+                    typeof(IContentNegotiator).FullName
+                );
             }
 
             IEnumerable<MediaTypeFormatter> formatters = configuration.Formatters;
 
-            return NegotiatedContentResult<T>.Execute(statusCode, value, contentNegotiator, request, formatters);
+            return NegotiatedContentResult<T>.Execute(
+                statusCode,
+                value,
+                contentNegotiator,
+                request,
+                formatters
+            );
         }
 
         /// <summary>
@@ -566,7 +681,12 @@ namespace System.Net.Http
         /// <exception cref="InvalidOperationException">Thrown if the <paramref name="request"/> does not have an associated
         /// <see cref="HttpConfiguration"/> instance or if the configuration does not have a formatter matching <paramref name="mediaType"/>.</exception>
         /// <returns>A response wrapping <paramref name="value"/> with <paramref name="statusCode"/>.</returns>
-        public static HttpResponseMessage CreateResponse<T>(this HttpRequestMessage request, HttpStatusCode statusCode, T value, string mediaType)
+        public static HttpResponseMessage CreateResponse<T>(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode,
+            T value,
+            string mediaType
+        )
         {
             return request.CreateResponse(statusCode, value, new MediaTypeHeaderValue(mediaType));
         }
@@ -583,7 +703,12 @@ namespace System.Net.Http
         /// <exception cref="InvalidOperationException">Thrown if the <paramref name="request"/> does not have an associated
         /// <see cref="HttpConfiguration"/> instance or if the configuration does not have a formatter matching <paramref name="mediaType"/>.</exception>
         /// <returns>A response wrapping <paramref name="value"/> with <paramref name="statusCode"/>.</returns>
-        public static HttpResponseMessage CreateResponse<T>(this HttpRequestMessage request, HttpStatusCode statusCode, T value, MediaTypeHeaderValue mediaType)
+        public static HttpResponseMessage CreateResponse<T>(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode,
+            T value,
+            MediaTypeHeaderValue mediaType
+        )
         {
             if (request == null)
             {
@@ -597,13 +722,22 @@ namespace System.Net.Http
             HttpConfiguration configuration = request.GetConfiguration();
             if (configuration == null)
             {
-                throw Error.InvalidOperation(SRResources.HttpRequestMessageExtensions_NoConfiguration);
+                throw Error.InvalidOperation(
+                    SRResources.HttpRequestMessageExtensions_NoConfiguration
+                );
             }
 
-            MediaTypeFormatter formatter = configuration.Formatters.FindWriter(typeof(T), mediaType);
+            MediaTypeFormatter formatter = configuration.Formatters.FindWriter(
+                typeof(T),
+                mediaType
+            );
             if (formatter == null)
             {
-                throw Error.InvalidOperation(SRResources.HttpRequestMessageExtensions_NoMatchingFormatter, mediaType, typeof(T).Name);
+                throw Error.InvalidOperation(
+                    SRResources.HttpRequestMessageExtensions_NoMatchingFormatter,
+                    mediaType,
+                    typeof(T).Name
+                );
             }
 
             return request.CreateResponse(statusCode, value, formatter, mediaType);
@@ -619,7 +753,12 @@ namespace System.Net.Http
         /// <param name="value">The value to wrap. Can be <c>null</c>.</param>
         /// <param name="formatter">The formatter to use.</param>
         /// <returns>A response wrapping <paramref name="value"/> with <paramref name="statusCode"/>.</returns>
-        public static HttpResponseMessage CreateResponse<T>(this HttpRequestMessage request, HttpStatusCode statusCode, T value, MediaTypeFormatter formatter)
+        public static HttpResponseMessage CreateResponse<T>(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode,
+            T value,
+            MediaTypeFormatter formatter
+        )
         {
             return request.CreateResponse(statusCode, value, formatter, (MediaTypeHeaderValue)null);
         }
@@ -635,9 +774,16 @@ namespace System.Net.Http
         /// <param name="formatter">The formatter to use.</param>
         /// <param name="mediaType">The media type override to set on the response's content. Can be <c>null</c>.</param>
         /// <returns>A response wrapping <paramref name="value"/> with <paramref name="statusCode"/>.</returns>
-        public static HttpResponseMessage CreateResponse<T>(this HttpRequestMessage request, HttpStatusCode statusCode, T value, MediaTypeFormatter formatter, string mediaType)
+        public static HttpResponseMessage CreateResponse<T>(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode,
+            T value,
+            MediaTypeFormatter formatter,
+            string mediaType
+        )
         {
-            MediaTypeHeaderValue mediaTypeHeader = mediaType != null ? new MediaTypeHeaderValue(mediaType) : null;
+            MediaTypeHeaderValue mediaTypeHeader =
+                mediaType != null ? new MediaTypeHeaderValue(mediaType) : null;
             return request.CreateResponse(statusCode, value, formatter, mediaTypeHeader);
         }
 
@@ -652,7 +798,13 @@ namespace System.Net.Http
         /// <param name="formatter">The formatter to use.</param>
         /// <param name="mediaType">The media type override to set on the response's content. Can be <c>null</c>.</param>
         /// <returns>A response wrapping <paramref name="value"/> with <paramref name="statusCode"/>.</returns>
-        public static HttpResponseMessage CreateResponse<T>(this HttpRequestMessage request, HttpStatusCode statusCode, T value, MediaTypeFormatter formatter, MediaTypeHeaderValue mediaType)
+        public static HttpResponseMessage CreateResponse<T>(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode,
+            T value,
+            MediaTypeFormatter formatter,
+            MediaTypeHeaderValue mediaType
+        )
         {
             if (request == null)
             {
@@ -663,7 +815,13 @@ namespace System.Net.Http
                 throw Error.ArgumentNull("formatter");
             }
 
-            return FormattedContentResult<T>.Execute(statusCode, value, formatter, mediaType, request);
+            return FormattedContentResult<T>.Execute(
+                statusCode,
+                value,
+                formatter,
+                mediaType,
+                request
+            );
         }
 
         /// <summary>
@@ -695,7 +853,10 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="request">The request controlling the lifecycle of <paramref name="resources"/>.</param>
         /// <param name="resources">The resources to dispose when <paramref name="request"/> is being disposed. Can be <c>null</c>.</param>
-        public static void RegisterForDispose(this HttpRequestMessage request, IEnumerable<IDisposable> resources)
+        public static void RegisterForDispose(
+            this HttpRequestMessage request,
+            IEnumerable<IDisposable> resources
+        )
         {
             if (request == null)
             {
@@ -723,7 +884,11 @@ namespace System.Net.Http
         /// <see cref="RegisterForDispose(HttpRequestMessage, IDisposable)"/> method.
         /// </summary>
         /// <param name="request">The request.</param>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We want to ignore all exceptions.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We want to ignore all exceptions."
+        )]
         public static void DisposeRequestResources(this HttpRequestMessage request)
         {
             if (request == null)
@@ -732,7 +897,12 @@ namespace System.Net.Http
             }
 
             List<IDisposable> resourcesToDispose;
-            if (request.Properties.TryGetValue(HttpPropertyKeys.DisposableRequestResourcesKey, out resourcesToDispose))
+            if (
+                request.Properties.TryGetValue(
+                    HttpPropertyKeys.DisposableRequestResourcesKey,
+                    out resourcesToDispose
+                )
+            )
             {
                 foreach (IDisposable resource in resourcesToDispose)
                 {
@@ -764,7 +934,12 @@ namespace System.Net.Http
             }
 
             Guid correlationId;
-            if (!request.Properties.TryGetValue<Guid>(HttpPropertyKeys.RequestCorrelationKey, out correlationId))
+            if (
+                !request.Properties.TryGetValue<Guid>(
+                    HttpPropertyKeys.RequestCorrelationKey,
+                    out correlationId
+                )
+            )
             {
                 // Check if the Correlation Manager ID is set; otherwise fallback to creating a new GUID
                 correlationId = Trace.CorrelationManager.ActivityId;
@@ -784,8 +959,14 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="request">The <see cref="HttpRequestMessage"/></param>
         /// <returns>The query string as a collection of key-value pairs.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "NameValuePairsValueProvider takes an IEnumerable<KeyValuePair<string, string>>")]
-        public static IEnumerable<KeyValuePair<string, string>> GetQueryNameValuePairs(this HttpRequestMessage request)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "NameValuePairsValueProvider takes an IEnumerable<KeyValuePair<string, string>>"
+        )]
+        public static IEnumerable<KeyValuePair<string, string>> GetQueryNameValuePairs(
+            this HttpRequestMessage request
+        )
         {
             if (request == null)
             {
@@ -803,19 +984,32 @@ namespace System.Net.Http
             IEnumerable<KeyValuePair<string, string>> queryStringData;
             string cachedQueryString;
 
-            request.Properties.TryGetValue<IEnumerable<KeyValuePair<string, string>>>(HttpPropertyKeys.RequestQueryNameValuePairsKey, out queryStringData);
-            request.Properties.TryGetValue<string>(HttpPropertyKeys.CachedRequestQueryKey, out cachedQueryString);
+            request.Properties.TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
+                HttpPropertyKeys.RequestQueryNameValuePairsKey,
+                out queryStringData
+            );
+            request.Properties.TryGetValue<string>(
+                HttpPropertyKeys.CachedRequestQueryKey,
+                out cachedQueryString
+            );
 
-            if (queryStringData == null ||
-               (cachedQueryString != null && !Object.ReferenceEquals(cachedQueryString, uri.Query ?? String.Empty)))
+            if (
+                queryStringData == null
+                || (
+                    cachedQueryString != null
+                    && !Object.ReferenceEquals(cachedQueryString, uri.Query ?? String.Empty)
+                )
+            )
             {
                 FormDataCollection formData = new FormDataCollection(uri);
 
                 // The ToArray call here avoids reparsing the query string, and avoids storing an Enumerator state
                 // machine in the request state.
                 queryStringData = formData.GetJQueryNameValuePairs().ToArray();
-                request.Properties[HttpPropertyKeys.RequestQueryNameValuePairsKey] = queryStringData;
-                request.Properties[HttpPropertyKeys.CachedRequestQueryKey] = uri.Query ?? String.Empty;
+                request.Properties[HttpPropertyKeys.RequestQueryNameValuePairsKey] =
+                    queryStringData;
+                request.Properties[HttpPropertyKeys.CachedRequestQueryKey] =
+                    uri.Query ?? String.Empty;
             }
 
             return queryStringData;
@@ -920,7 +1114,9 @@ namespace System.Net.Http
             switch (includeErrorDetailPolicy)
             {
                 case IncludeErrorDetailPolicy.Default:
-                    Lazy<bool> includeErrorDetail = request.GetProperty<Lazy<bool>>(HttpPropertyKeys.IncludeErrorDetailKey);
+                    Lazy<bool> includeErrorDetail = request.GetProperty<Lazy<bool>>(
+                        HttpPropertyKeys.IncludeErrorDetailKey
+                    );
                     if (includeErrorDetail != null)
                     {
                         // If we are on webhost and the user hasn't changed the IncludeErrorDetailPolicy
@@ -947,7 +1143,9 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="request">The request.</param>
         /// <returns>A collection of resources registered for dispose.</returns>
-        public static IEnumerable<IDisposable> GetResourcesForDisposal(this HttpRequestMessage request)
+        public static IEnumerable<IDisposable> GetResourcesForDisposal(
+            this HttpRequestMessage request
+        )
         {
             if (request == null)
             {
@@ -957,13 +1155,21 @@ namespace System.Net.Http
             return GetRegisteredResourcesForDispose(request);
         }
 
-        private static List<IDisposable> GetRegisteredResourcesForDispose(HttpRequestMessage request)
+        private static List<IDisposable> GetRegisteredResourcesForDispose(
+            HttpRequestMessage request
+        )
         {
             List<IDisposable> registeredResourcesForDispose;
-            if (!request.Properties.TryGetValue(HttpPropertyKeys.DisposableRequestResourcesKey, out registeredResourcesForDispose))
+            if (
+                !request.Properties.TryGetValue(
+                    HttpPropertyKeys.DisposableRequestResourcesKey,
+                    out registeredResourcesForDispose
+                )
+            )
             {
                 registeredResourcesForDispose = new List<IDisposable>();
-                request.Properties[HttpPropertyKeys.DisposableRequestResourcesKey] = registeredResourcesForDispose;
+                request.Properties[HttpPropertyKeys.DisposableRequestResourcesKey] =
+                    registeredResourcesForDispose;
             }
             return registeredResourcesForDispose;
         }

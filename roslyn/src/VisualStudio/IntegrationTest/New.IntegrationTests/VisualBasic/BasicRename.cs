@@ -25,18 +25,22 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicRename()
-            : base(nameof(BasicRename))
-        {
-        }
+            : base(nameof(BasicRename)) { }
 
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync();
 
             // reset relevant global options to default values:
-            var globalOptions = await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(HangMitigatingCancellationToken);
+            var globalOptions =
+                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+                    HangMitigatingCancellationToken
+                );
             globalOptions.SetGlobalOption(InlineRenameUIOptionsStorage.UseInlineAdornment, false);
-            globalOptions.SetGlobalOption(InlineRenameSessionOptionsStorage.RenameInComments, false);
+            globalOptions.SetGlobalOption(
+                InlineRenameSessionOptionsStorage.RenameInComments,
+                false
+            );
             globalOptions.SetGlobalOption(InlineRenameSessionOptionsStorage.RenameInStrings, false);
             globalOptions.SetGlobalOption(InlineRenameSessionOptionsStorage.RenameOverloads, false);
             globalOptions.SetGlobalOption(InlineRenameSessionOptionsStorage.RenameFile, true);
@@ -46,7 +50,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         [IdeFact]
         public async Task VerifyLocalVariableRename()
         {
-            var markup = @"
+            var markup =
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -65,13 +70,19 @@ End Module";
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices.Editor.GetRenameTagsAsync(HangMitigatingCancellationToken);
+            var tags = await TestServices.Editor.GetRenameTagsAsync(
+                HangMitigatingCancellationToken
+            );
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices.Input.SendWithoutActivateAsync([VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN], HangMitigatingCancellationToken);
+            await TestServices.Input.SendWithoutActivateAsync(
+                [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
+                HangMitigatingCancellationToken
+            );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextEqualsAsync(@"
+            await TestServices.EditorVerifier.TextEqualsAsync(
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -85,7 +96,9 @@ Module Program
     Sub TestMethod(y As Integer)
 
     End Sub
-End Module", HangMitigatingCancellationToken);
+End Module",
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
@@ -94,7 +107,8 @@ End Module", HangMitigatingCancellationToken);
             // "variable" is intentionally misspelled as "varixable" and "this" is misspelled as
             // "thix" below to ensure we don't change instances of "x" in comments that are part of
             // larger words
-            var markup = @"
+            var markup =
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -112,16 +126,24 @@ Module Program
 End Module";
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices.InlineRename.ToggleIncludeCommentsAsync(HangMitigatingCancellationToken);
+            await TestServices.InlineRename.ToggleIncludeCommentsAsync(
+                HangMitigatingCancellationToken
+            );
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices.Editor.GetRenameTagsAsync(HangMitigatingCancellationToken);
+            var tags = await TestServices.Editor.GetRenameTagsAsync(
+                HangMitigatingCancellationToken
+            );
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices.Input.SendWithoutActivateAsync([VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN], HangMitigatingCancellationToken);
+            await TestServices.Input.SendWithoutActivateAsync(
+                [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
+                HangMitigatingCancellationToken
+            );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextEqualsAsync(@"
+            await TestServices.EditorVerifier.TextEqualsAsync(
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -136,13 +158,16 @@ Module Program
         Dim y$$ As Integer = 0
         y = 5
         TestMethod(y)
-End Module", HangMitigatingCancellationToken);
+End Module",
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task VerifyLocalVariableRenameWithStringsUpdated()
         {
-            var markup = @"
+            var markup =
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -157,16 +182,24 @@ End Module";
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
 
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices.InlineRename.ToggleIncludeStringsAsync(HangMitigatingCancellationToken);
+            await TestServices.InlineRename.ToggleIncludeStringsAsync(
+                HangMitigatingCancellationToken
+            );
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices.Editor.GetRenameTagsAsync(HangMitigatingCancellationToken);
+            var tags = await TestServices.Editor.GetRenameTagsAsync(
+                HangMitigatingCancellationToken
+            );
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices.Input.SendWithoutActivateAsync([VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN], HangMitigatingCancellationToken);
+            await TestServices.Input.SendWithoutActivateAsync(
+                [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
+                HangMitigatingCancellationToken
+            );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextEqualsAsync(@"
+            await TestServices.EditorVerifier.TextEqualsAsync(
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -177,13 +210,16 @@ Module Program
         y = 5
         Dim s = ""y xx y""
     End Sub
-End Module", HangMitigatingCancellationToken);
+End Module",
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task VerifyOverloadsUpdated()
         {
-            var markup = @"
+            var markup =
+                @"
 Interface I
     Sub [|TestMethod|]$$(y As Integer)
     Sub [|TestMethod|](y As String)
@@ -197,16 +233,24 @@ End Class";
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
 
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices.InlineRename.ToggleIncludeOverloadsAsync(HangMitigatingCancellationToken);
+            await TestServices.InlineRename.ToggleIncludeOverloadsAsync(
+                HangMitigatingCancellationToken
+            );
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices.Editor.GetRenameTagsAsync(HangMitigatingCancellationToken);
+            var tags = await TestServices.Editor.GetRenameTagsAsync(
+                HangMitigatingCancellationToken
+            );
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices.Input.SendWithoutActivateAsync([VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN], HangMitigatingCancellationToken);
+            await TestServices.Input.SendWithoutActivateAsync(
+                [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
+                HangMitigatingCancellationToken
+            );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextEqualsAsync(@"
+            await TestServices.EditorVerifier.TextEqualsAsync(
+                @"
 Interface I
     Sub y$$(y As Integer)
     Sub y(y As String)
@@ -216,13 +260,16 @@ Public MustInherit Class A
     Implements I
     Public MustOverride Sub y(y As Integer) Implements I.y
     Public MustOverride Sub y(y As String) Implements I.y
-End Class", HangMitigatingCancellationToken);
+End Class",
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact, WorkItem("https://github.com/dotnet/roslyn/issues/21657")]
         public async Task VerifyAttributeRename()
         {
-            var markup = @"
+            var markup =
+                @"
 Imports System
 
 Public Class [|$$ustom|]Attribute 
@@ -232,24 +279,33 @@ End Class";
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices.Editor.GetRenameTagsAsync(HangMitigatingCancellationToken);
+            var tags = await TestServices.Editor.GetRenameTagsAsync(
+                HangMitigatingCancellationToken
+            );
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices.Input.SendWithoutActivateAsync(["Custom", VirtualKeyCode.RETURN], HangMitigatingCancellationToken);
+            await TestServices.Input.SendWithoutActivateAsync(
+                ["Custom", VirtualKeyCode.RETURN],
+                HangMitigatingCancellationToken
+            );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextEqualsAsync(@"
+            await TestServices.EditorVerifier.TextEqualsAsync(
+                @"
 Imports System
 
 Public Class Custom$$Attribute
     Inherits Attribute
-End Class", HangMitigatingCancellationToken);
+End Class",
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact, WorkItem("https://github.com/dotnet/roslyn/issues/21657")]
         public async Task VerifyAttributeRenameWhileRenameClasss()
         {
-            var markup = @"
+            var markup =
+                @"
 Imports System
 
 Public Class [|$$ustom|]Attribute 
@@ -260,24 +316,33 @@ End Class";
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices.Editor.GetRenameTagsAsync(HangMitigatingCancellationToken);
+            var tags = await TestServices.Editor.GetRenameTagsAsync(
+                HangMitigatingCancellationToken
+            );
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices.Input.SendWithoutActivateAsync("Custom", HangMitigatingCancellationToken);
+            await TestServices.Input.SendWithoutActivateAsync(
+                "Custom",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextEqualsAsync(@"
+            await TestServices.EditorVerifier.TextEqualsAsync(
+                @"
 Imports System
 
 Public Class Custom$$Attribute 
         Inherits Attribute
-End Class", HangMitigatingCancellationToken);
+End Class",
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact, WorkItem("https://github.com/dotnet/roslyn/issues/21657")]
         public async Task VerifyAttributeRenameWhileRenameAttribute()
         {
-            var markup = @"
+            var markup =
+                @"
 Imports System
 
 <[|$$ustom|]>
@@ -291,13 +356,19 @@ End Class";
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out _, out var renameSpans);
-            var tags = await TestServices.Editor.GetRenameTagsAsync(HangMitigatingCancellationToken);
+            var tags = await TestServices.Editor.GetRenameTagsAsync(
+                HangMitigatingCancellationToken
+            );
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices.Input.SendWithoutActivateAsync("Custom", HangMitigatingCancellationToken);
+            await TestServices.Input.SendWithoutActivateAsync(
+                "Custom",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextEqualsAsync(@"
+            await TestServices.EditorVerifier.TextEqualsAsync(
+                @"
 Imports System
 
 <Custom$$>
@@ -306,13 +377,16 @@ End Class
 
 Public Class CustomAttribute 
         Inherits Attribute
-End Class", HangMitigatingCancellationToken);
+End Class",
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact, WorkItem("https://github.com/dotnet/roslyn/issues/21657")]
         public async Task VerifyAttributeRenameWhileRenameAttributeClass()
         {
-            var markup = @"
+            var markup =
+                @"
 Imports System
 
 <[|ustom|]>
@@ -326,13 +400,19 @@ End Class";
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out _, out var renameSpans);
-            var tags = await TestServices.Editor.GetRenameTagsAsync(HangMitigatingCancellationToken);
+            var tags = await TestServices.Editor.GetRenameTagsAsync(
+                HangMitigatingCancellationToken
+            );
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices.Input.SendWithoutActivateAsync("Custom", HangMitigatingCancellationToken);
+            await TestServices.Input.SendWithoutActivateAsync(
+                "Custom",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextEqualsAsync(@"
+            await TestServices.EditorVerifier.TextEqualsAsync(
+                @"
 Imports System
 
 <Custom>
@@ -341,13 +421,16 @@ End Class
 
 Public Class Custom$$Attribute 
         Inherits Attribute
-End Class", HangMitigatingCancellationToken);
+End Class",
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact, WorkItem("https://github.com/dotnet/roslyn/issues/21657")]
         public async Task VerifyAttributeCapitalizedRename()
         {
-            var markup = @"
+            var markup =
+                @"
 Imports System
 
 Public Class [|$$ustom|]ATTRIBUTE
@@ -357,24 +440,33 @@ End Class";
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices.Editor.GetRenameTagsAsync(HangMitigatingCancellationToken);
+            var tags = await TestServices.Editor.GetRenameTagsAsync(
+                HangMitigatingCancellationToken
+            );
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices.Input.SendWithoutActivateAsync(["Custom", VirtualKeyCode.RETURN], HangMitigatingCancellationToken);
+            await TestServices.Input.SendWithoutActivateAsync(
+                ["Custom", VirtualKeyCode.RETURN],
+                HangMitigatingCancellationToken
+            );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextEqualsAsync(@"
+            await TestServices.EditorVerifier.TextEqualsAsync(
+                @"
 Imports System
 
 Public Class CustomAttribute$$
     Inherits Attribute
-End Class", HangMitigatingCancellationToken);
+End Class",
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact, WorkItem("https://github.com/dotnet/roslyn/issues/21657")]
         public async Task VerifyAttributeNotCapitalizedRename()
         {
-            var markup = @"
+            var markup =
+                @"
 Imports System
 
 Public Class [|$$ustom|]attribute
@@ -384,31 +476,42 @@ End Class";
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices.Editor.GetRenameTagsAsync(HangMitigatingCancellationToken);
+            var tags = await TestServices.Editor.GetRenameTagsAsync(
+                HangMitigatingCancellationToken
+            );
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices.Input.SendWithoutActivateAsync(["Custom", VirtualKeyCode.RETURN], HangMitigatingCancellationToken);
+            await TestServices.Input.SendWithoutActivateAsync(
+                ["Custom", VirtualKeyCode.RETURN],
+                HangMitigatingCancellationToken
+            );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
             try
             {
                 // This is the expected behavior
-                await TestServices.EditorVerifier.TextEqualsAsync(@"
+                await TestServices.EditorVerifier.TextEqualsAsync(
+                    @"
 Imports System
 
 Public Class CustomAttribute$$
     Inherits Attribute
-End Class", HangMitigatingCancellationToken);
+End Class",
+                    HangMitigatingCancellationToken
+                );
             }
             catch (XunitException)
             {
                 // But sometimes we get this instead
-                await TestServices.EditorVerifier.TextEqualsAsync(@"
+                await TestServices.EditorVerifier.TextEqualsAsync(
+                    @"
 Imports System
 
 Public Class CustomA$$ttribute
     Inherits Attribute
-End Class", HangMitigatingCancellationToken);
+End Class",
+                    HangMitigatingCancellationToken
+                );
             }
         }
     }

@@ -32,7 +32,7 @@ namespace System.Linq.Expressions.Tests
             // we'd therefore end up with multiple copies of the last result.
             foreach (object[] received in delegatedTo.GetData(testMethod))
             {
-                object[] withFalse = null;                
+                object[] withFalse = null;
                 if (PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
                 {
                     withFalse = new object[received.Length + 1];

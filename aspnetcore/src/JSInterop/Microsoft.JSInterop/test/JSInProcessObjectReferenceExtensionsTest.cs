@@ -15,7 +15,9 @@ public class JSInProcessObjectReferenceExtensionsTest
         var method = "someMethod";
         var args = new[] { "a", "b" };
         var jsInProcessObjectReference = new Mock<IJSInProcessObjectReference>(MockBehavior.Strict);
-        jsInProcessObjectReference.Setup(s => s.Invoke<IJSVoidResult>(method, args)).Returns(Mock.Of<IJSVoidResult>());
+        jsInProcessObjectReference
+            .Setup(s => s.Invoke<IJSVoidResult>(method, args))
+            .Returns(Mock.Of<IJSVoidResult>());
 
         // Act
         jsInProcessObjectReference.Object.InvokeVoid(method, args);

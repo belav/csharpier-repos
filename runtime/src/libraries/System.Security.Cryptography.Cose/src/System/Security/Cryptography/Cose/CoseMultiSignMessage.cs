@@ -29,7 +29,14 @@ namespace System.Security.Cryptography.Cose
         /// <value>A read-only collection of signatures associated with this message.</value>
         public ReadOnlyCollection<CoseSignature> Signatures { get; }
 
-        internal CoseMultiSignMessage(CoseHeaderMap protectedHeader, CoseHeaderMap unprotectedHeader, byte[]? content, List<CoseSignature> signatures, byte[] encodedProtectedHeader, bool isTagged)
+        internal CoseMultiSignMessage(
+            CoseHeaderMap protectedHeader,
+            CoseHeaderMap unprotectedHeader,
+            byte[]? content,
+            List<CoseSignature> signatures,
+            byte[] encodedProtectedHeader,
+            bool isTagged
+        )
             : base(protectedHeader, unprotectedHeader, content, encodedProtectedHeader, isTagged)
         {
             foreach (CoseSignature s in signatures)
@@ -64,12 +71,26 @@ namespace System.Security.Cryptography.Cose
         ///     One or more of the labels specified in a <see cref="CoseHeaderLabel.CriticalHeaders"/> header is missing.
         ///   </para>
         /// </exception>
-        public static byte[] SignDetached(byte[] detachedContent, CoseSigner signer, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, byte[]? associatedData = null)
+        public static byte[] SignDetached(
+            byte[] detachedContent,
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            byte[]? associatedData = null
+        )
         {
             if (detachedContent is null)
                 throw new ArgumentNullException(nameof(detachedContent));
 
-            return SignCore(detachedContent, null, signer, protectedHeaders, unprotectedHeaders, associatedData, isDetached: true);
+            return SignCore(
+                detachedContent,
+                null,
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                associatedData,
+                isDetached: true
+            );
         }
 
         /// <summary>
@@ -95,12 +116,26 @@ namespace System.Security.Cryptography.Cose
         ///     One or more of the labels specified in a <see cref="CoseHeaderLabel.CriticalHeaders"/> header is missing.
         ///   </para>
         /// </exception>
-        public static byte[] SignEmbedded(byte[] embeddedContent, CoseSigner signer, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, byte[]? associatedData = null)
+        public static byte[] SignEmbedded(
+            byte[] embeddedContent,
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            byte[]? associatedData = null
+        )
         {
             if (embeddedContent is null)
                 throw new ArgumentNullException(nameof(embeddedContent));
 
-            return SignCore(embeddedContent, null, signer, protectedHeaders, unprotectedHeaders, associatedData, isDetached: false);
+            return SignCore(
+                embeddedContent,
+                null,
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                associatedData,
+                isDetached: false
+            );
         }
 
         /// <summary>
@@ -126,9 +161,22 @@ namespace System.Security.Cryptography.Cose
         ///     One or more of the labels specified in a <see cref="CoseHeaderLabel.CriticalHeaders"/> header is missing.
         ///   </para>
         /// </exception>
-        public static byte[] SignDetached(ReadOnlySpan<byte> detachedContent, CoseSigner signer, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, ReadOnlySpan<byte> associatedData = default)
-            => SignCore(detachedContent, null, signer, protectedHeaders, unprotectedHeaders, associatedData, isDetached: true);
-
+        public static byte[] SignDetached(
+            ReadOnlySpan<byte> detachedContent,
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            ReadOnlySpan<byte> associatedData = default
+        ) =>
+            SignCore(
+                detachedContent,
+                null,
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                associatedData,
+                isDetached: true
+            );
 
         /// <summary>
         /// Signs the specified content and encodes it as a COSE_Sign message with detached content.
@@ -153,8 +201,22 @@ namespace System.Security.Cryptography.Cose
         ///     One or more of the labels specified in a <see cref="CoseHeaderLabel.CriticalHeaders"/> header is missing.
         ///   </para>
         /// </exception>
-        public static byte[] SignEmbedded(ReadOnlySpan<byte> embeddedContent, CoseSigner signer, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, ReadOnlySpan<byte> associatedData = default)
-            => SignCore(embeddedContent, null, signer, protectedHeaders, unprotectedHeaders, associatedData, isDetached: false);
+        public static byte[] SignEmbedded(
+            ReadOnlySpan<byte> embeddedContent,
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            ReadOnlySpan<byte> associatedData = default
+        ) =>
+            SignCore(
+                embeddedContent,
+                null,
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                associatedData,
+                isDetached: false
+            );
 
         /// <summary>
         /// Signs the specified content and encodes it as a COSE_Sign message with detached content.
@@ -184,18 +246,38 @@ namespace System.Security.Cryptography.Cose
         ///   </para>
         /// </exception>
         /// <seealso cref="SignDetachedAsync"/>
-        public static byte[] SignDetached(Stream detachedContent, CoseSigner signer, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, ReadOnlySpan<byte> associatedData = default)
+        public static byte[] SignDetached(
+            Stream detachedContent,
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             if (detachedContent is null)
                 throw new ArgumentNullException(nameof(detachedContent));
 
             if (!detachedContent.CanRead)
-                throw new ArgumentException(SR.Sign1ArgumentStreamNotReadable, nameof(detachedContent));
+                throw new ArgumentException(
+                    SR.Sign1ArgumentStreamNotReadable,
+                    nameof(detachedContent)
+                );
 
             if (!detachedContent.CanSeek)
-                throw new ArgumentException(SR.Sign1ArgumentStreamNotSeekable, nameof(detachedContent));
+                throw new ArgumentException(
+                    SR.Sign1ArgumentStreamNotSeekable,
+                    nameof(detachedContent)
+                );
 
-            return SignCore(default, detachedContent, signer, protectedHeaders, unprotectedHeaders, associatedData, isDetached: true);
+            return SignCore(
+                default,
+                detachedContent,
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                associatedData,
+                isDetached: true
+            );
         }
 
         private static byte[] SignCore(
@@ -205,17 +287,33 @@ namespace System.Security.Cryptography.Cose
             CoseHeaderMap? protectedHeaders,
             CoseHeaderMap? unprotectedHeaders,
             ReadOnlySpan<byte> associatedData,
-            bool isDetached)
+            bool isDetached
+        )
         {
             if (signer is null)
                 throw new ArgumentNullException(nameof(signer));
 
             ValidateBeforeSign(signer, protectedHeaders, unprotectedHeaders);
 
-            int expectedSize = ComputeEncodedSize(signer, protectedHeaders, unprotectedHeaders, content.Length, isDetached);
+            int expectedSize = ComputeEncodedSize(
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                content.Length,
+                isDetached
+            );
             var buffer = new byte[expectedSize];
 
-            int bytesWritten = CreateCoseMultiSignMessage(content, contentStream, buffer, signer, protectedHeaders, unprotectedHeaders, associatedData, isDetached);
+            int bytesWritten = CreateCoseMultiSignMessage(
+                content,
+                contentStream,
+                buffer,
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                associatedData,
+                isDetached
+            );
             Debug.Assert(expectedSize == bytesWritten);
 
             return buffer;
@@ -255,7 +353,8 @@ namespace System.Security.Cryptography.Cose
             CoseHeaderMap? protectedHeaders = null,
             CoseHeaderMap? unprotectedHeaders = null,
             ReadOnlyMemory<byte> associatedData = default,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (detachedContent is null)
                 throw new ArgumentNullException(nameof(detachedContent));
@@ -264,15 +363,35 @@ namespace System.Security.Cryptography.Cose
                 throw new ArgumentNullException(nameof(signer));
 
             if (!detachedContent.CanRead)
-                throw new ArgumentException(SR.Sign1ArgumentStreamNotReadable, nameof(detachedContent));
+                throw new ArgumentException(
+                    SR.Sign1ArgumentStreamNotReadable,
+                    nameof(detachedContent)
+                );
 
             if (!detachedContent.CanSeek)
-                throw new ArgumentException(SR.Sign1ArgumentStreamNotSeekable, nameof(detachedContent));
+                throw new ArgumentException(
+                    SR.Sign1ArgumentStreamNotSeekable,
+                    nameof(detachedContent)
+                );
 
             ValidateBeforeSign(signer, protectedHeaders, unprotectedHeaders);
 
-            int expectedSize = ComputeEncodedSize(signer, protectedHeaders, unprotectedHeaders, contentLength: 0, isDetached: true);
-            return SignAsyncCore(expectedSize, detachedContent, signer, protectedHeaders, unprotectedHeaders, associatedData, cancellationToken);
+            int expectedSize = ComputeEncodedSize(
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                contentLength: 0,
+                isDetached: true
+            );
+            return SignAsyncCore(
+                expectedSize,
+                detachedContent,
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                associatedData,
+                cancellationToken
+            );
         }
 
         private static async Task<byte[]> SignAsyncCore(
@@ -282,10 +401,20 @@ namespace System.Security.Cryptography.Cose
             CoseHeaderMap? protectedHeaders,
             CoseHeaderMap? unprotectedHeaders,
             ReadOnlyMemory<byte> associatedData,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             byte[] buffer = new byte[expectedSize];
-            int bytesWritten = await CreateCoseMultiSignMessageAsync(content, buffer, signer, protectedHeaders, unprotectedHeaders, associatedData, cancellationToken).ConfigureAwait(false);
+            int bytesWritten = await CreateCoseMultiSignMessageAsync(
+                    content,
+                    buffer,
+                    signer,
+                    protectedHeaders,
+                    unprotectedHeaders,
+                    associatedData,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             Debug.Assert(buffer.Length == bytesWritten);
             return buffer;
@@ -316,8 +445,25 @@ namespace System.Security.Cryptography.Cose
         ///     One or more of the labels specified in a <see cref="CoseHeaderLabel.CriticalHeaders"/> header is missing.
         ///   </para>
         /// </exception>
-        public static bool TrySignDetached(ReadOnlySpan<byte> detachedContent, Span<byte> destination, CoseSigner signer, out int bytesWritten, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, ReadOnlySpan<byte> associatedData = default)
-            => TrySign(detachedContent, destination, signer, protectedHeaders, unprotectedHeaders, out bytesWritten, associatedData, isDetached: true);
+        public static bool TrySignDetached(
+            ReadOnlySpan<byte> detachedContent,
+            Span<byte> destination,
+            CoseSigner signer,
+            out int bytesWritten,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            ReadOnlySpan<byte> associatedData = default
+        ) =>
+            TrySign(
+                detachedContent,
+                destination,
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                out bytesWritten,
+                associatedData,
+                isDetached: true
+            );
 
         /// <summary>
         /// Signs the specified content and encodes it as a COSE_Sign message with embedded content.
@@ -344,24 +490,65 @@ namespace System.Security.Cryptography.Cose
         ///     One or more of the labels specified in a <see cref="CoseHeaderLabel.CriticalHeaders"/> header is missing.
         ///   </para>
         /// </exception>
-        public static bool TrySignEmbedded(ReadOnlySpan<byte> embeddedContent, Span<byte> destination, CoseSigner signer, out int bytesWritten, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, ReadOnlySpan<byte> associatedData = default)
-            => TrySign(embeddedContent, destination, signer, protectedHeaders, unprotectedHeaders, out bytesWritten, associatedData, isDetached: false);
+        public static bool TrySignEmbedded(
+            ReadOnlySpan<byte> embeddedContent,
+            Span<byte> destination,
+            CoseSigner signer,
+            out int bytesWritten,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            ReadOnlySpan<byte> associatedData = default
+        ) =>
+            TrySign(
+                embeddedContent,
+                destination,
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                out bytesWritten,
+                associatedData,
+                isDetached: false
+            );
 
-        private static bool TrySign(ReadOnlySpan<byte> content, Span<byte> destination, CoseSigner signer, CoseHeaderMap? protectedHeaders, CoseHeaderMap? unprotectedHeaders, out int bytesWritten, ReadOnlySpan<byte> associatedData, bool isDetached)
+        private static bool TrySign(
+            ReadOnlySpan<byte> content,
+            Span<byte> destination,
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders,
+            CoseHeaderMap? unprotectedHeaders,
+            out int bytesWritten,
+            ReadOnlySpan<byte> associatedData,
+            bool isDetached
+        )
         {
             if (signer is null)
                 throw new ArgumentNullException(nameof(signer));
 
             ValidateBeforeSign(signer, protectedHeaders, unprotectedHeaders);
 
-            int expectedSize = ComputeEncodedSize(signer, protectedHeaders, unprotectedHeaders, content.Length, isDetached);
+            int expectedSize = ComputeEncodedSize(
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                content.Length,
+                isDetached
+            );
             if (expectedSize > destination.Length)
             {
                 bytesWritten = 0;
                 return false;
             }
 
-            bytesWritten = CreateCoseMultiSignMessage(content, null, destination, signer, protectedHeaders, unprotectedHeaders, associatedData, isDetached);
+            bytesWritten = CreateCoseMultiSignMessage(
+                content,
+                null,
+                destination,
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                associatedData,
+                isDetached
+            );
             Debug.Assert(expectedSize == bytesWritten);
 
             return true;
@@ -375,20 +562,41 @@ namespace System.Security.Cryptography.Cose
             CoseHeaderMap? protectedHeaders,
             CoseHeaderMap? unprotectedHeaders,
             ReadOnlySpan<byte> associatedData,
-            bool isDetached)
+            bool isDetached
+        )
         {
             var writer = new CborWriter();
             writer.WriteTag(MultiSignTag);
             writer.WriteStartArray(MultiSignArrayLength);
 
-            int protectedMapBytesWritten = CoseHelpers.WriteHeaderMap(buffer, writer, protectedHeaders, isProtected: true, null);
+            int protectedMapBytesWritten = CoseHelpers.WriteHeaderMap(
+                buffer,
+                writer,
+                protectedHeaders,
+                isProtected: true,
+                null
+            );
             // We're going to use the encoded protected headers again after this step (for the toBeSigned construction),
             // so don't overwrite them yet.
-            CoseHelpers.WriteHeaderMap(buffer.Slice(protectedMapBytesWritten), writer, unprotectedHeaders, isProtected: false, null);
+            CoseHelpers.WriteHeaderMap(
+                buffer.Slice(protectedMapBytesWritten),
+                writer,
+                unprotectedHeaders,
+                isProtected: false,
+                null
+            );
 
             CoseHelpers.WriteContent(writer, content, isDetached);
 
-            WriteCoseSignaturesArray(writer, signer, buffer.Slice(protectedMapBytesWritten), buffer.Slice(0, protectedMapBytesWritten), associatedData, content, contentStream);
+            WriteCoseSignaturesArray(
+                writer,
+                signer,
+                buffer.Slice(protectedMapBytesWritten),
+                buffer.Slice(0, protectedMapBytesWritten),
+                associatedData,
+                content,
+                contentStream
+            );
 
             writer.WriteEndArray();
             return writer.Encode(buffer);
@@ -401,25 +609,51 @@ namespace System.Security.Cryptography.Cose
             CoseHeaderMap? protectedHeaders,
             CoseHeaderMap? unprotectedHeaders,
             ReadOnlyMemory<byte> associatedData,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var writer = new CborWriter();
             writer.WriteTag(MultiSignTag);
             writer.WriteStartArray(MultiSignArrayLength);
 
-            int protectedMapBytesWritten = CoseHelpers.WriteHeaderMap(buffer, writer, protectedHeaders, isProtected: true, null);
+            int protectedMapBytesWritten = CoseHelpers.WriteHeaderMap(
+                buffer,
+                writer,
+                protectedHeaders,
+                isProtected: true,
+                null
+            );
             // We're going to use the encoded protected headers again after this step (for the toBeSigned construction),
             // so don't overwrite them yet.
-            CoseHelpers.WriteHeaderMap(buffer.AsSpan(protectedMapBytesWritten), writer, unprotectedHeaders, isProtected: false, null);
+            CoseHelpers.WriteHeaderMap(
+                buffer.AsSpan(protectedMapBytesWritten),
+                writer,
+                unprotectedHeaders,
+                isProtected: false,
+                null
+            );
             CoseHelpers.WriteContent(writer, default, isDetached: true);
 
-            await WriteSignatureAsync(writer, signer, buffer, buffer.AsMemory(0, protectedMapBytesWritten), associatedData, content, cancellationToken).ConfigureAwait(false);
+            await WriteSignatureAsync(
+                    writer,
+                    signer,
+                    buffer,
+                    buffer.AsMemory(0, protectedMapBytesWritten),
+                    associatedData,
+                    content,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             writer.WriteEndArray();
             return writer.Encode(buffer);
         }
 
-        private static void ValidateBeforeSign(CoseSigner signer, CoseHeaderMap? protectedHeaders, CoseHeaderMap? unprotectedHeaders)
+        private static void ValidateBeforeSign(
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders,
+            CoseHeaderMap? unprotectedHeaders
+        )
         {
             if (ContainDuplicateLabels(signer._protectedHeaders, signer._unprotectedHeaders))
             {
@@ -433,12 +667,18 @@ namespace System.Security.Cryptography.Cose
 
             if (MissingCriticalHeaders(signer._protectedHeaders, out string? labelName))
             {
-                throw new ArgumentException(SR.Format(SR.CriticalHeaderMissing, labelName), nameof(signer));
+                throw new ArgumentException(
+                    SR.Format(SR.CriticalHeaderMissing, labelName),
+                    nameof(signer)
+                );
             }
 
             if (MissingCriticalHeaders(protectedHeaders, out labelName))
             {
-                throw new ArgumentException(SR.Format(SR.CriticalHeaderMissing, labelName), nameof(protectedHeaders));
+                throw new ArgumentException(
+                    SR.Format(SR.CriticalHeaderMissing, labelName),
+                    nameof(protectedHeaders)
+                );
             }
         }
 
@@ -449,18 +689,40 @@ namespace System.Security.Cryptography.Cose
             ReadOnlySpan<byte> bodyProtected,
             ReadOnlySpan<byte> associatedData,
             ReadOnlySpan<byte> content,
-            Stream? contentStream)
+            Stream? contentStream
+        )
         {
             writer.WriteStartArray(1);
             writer.WriteStartArray(CoseSignatureArrayLength);
 
-            int signProtectedBytesWritten = CoseHelpers.WriteHeaderMap(buffer, writer, signer._protectedHeaders, isProtected: true, signer._algHeaderValueToSlip);
+            int signProtectedBytesWritten = CoseHelpers.WriteHeaderMap(
+                buffer,
+                writer,
+                signer._protectedHeaders,
+                isProtected: true,
+                signer._algHeaderValueToSlip
+            );
 
-            CoseHelpers.WriteHeaderMap(buffer.Slice(signProtectedBytesWritten), writer, signer.UnprotectedHeaders, isProtected: false, null);
+            CoseHelpers.WriteHeaderMap(
+                buffer.Slice(signProtectedBytesWritten),
+                writer,
+                signer.UnprotectedHeaders,
+                isProtected: false,
+                null
+            );
 
             using (IncrementalHash hasher = IncrementalHash.CreateHash(signer.HashAlgorithm))
             {
-                AppendToBeSigned(buffer, hasher, SigStructureContext.Signature, bodyProtected, buffer.Slice(0, signProtectedBytesWritten), associatedData, content, contentStream);
+                AppendToBeSigned(
+                    buffer,
+                    hasher,
+                    SigStructureContext.Signature,
+                    bodyProtected,
+                    buffer.Slice(0, signProtectedBytesWritten),
+                    associatedData,
+                    content,
+                    contentStream
+                );
                 CoseHelpers.WriteSignature(buffer, hasher, writer, signer);
             }
 
@@ -475,22 +737,45 @@ namespace System.Security.Cryptography.Cose
             ReadOnlyMemory<byte> bodyProtected,
             ReadOnlyMemory<byte> associatedData,
             Stream contentStream,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             int start = bodyProtected.Length;
 
             writer.WriteStartArray(1);
             writer.WriteStartArray(CoseSignatureArrayLength);
 
-            int signProtectedBytesWritten = CoseHelpers.WriteHeaderMap(buffer.AsSpan(start), writer, signer._protectedHeaders, isProtected: true, signer._algHeaderValueToSlip);
+            int signProtectedBytesWritten = CoseHelpers.WriteHeaderMap(
+                buffer.AsSpan(start),
+                writer,
+                signer._protectedHeaders,
+                isProtected: true,
+                signer._algHeaderValueToSlip
+            );
 
-            CoseHelpers.WriteHeaderMap(buffer.AsSpan(start + signProtectedBytesWritten), writer, signer.UnprotectedHeaders, isProtected: false, null);
+            CoseHelpers.WriteHeaderMap(
+                buffer.AsSpan(start + signProtectedBytesWritten),
+                writer,
+                signer.UnprotectedHeaders,
+                isProtected: false,
+                null
+            );
 
             HashAlgorithmName hashAlgorithm = signer.HashAlgorithm;
             using (IncrementalHash hasher = IncrementalHash.CreateHash(hashAlgorithm))
             {
                 // We can use the whole buffer at this point as the space for bodyProtected and signProtected is consumed.
-                await AppendToBeSignedAsync(buffer, hasher, SigStructureContext.Signature, bodyProtected, buffer.AsMemory(start, signProtectedBytesWritten), associatedData, contentStream, cancellationToken).ConfigureAwait(false);
+                await AppendToBeSignedAsync(
+                        buffer,
+                        hasher,
+                        SigStructureContext.Signature,
+                        bodyProtected,
+                        buffer.AsMemory(start, signProtectedBytesWritten),
+                        associatedData,
+                        contentStream,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 CoseHelpers.WriteSignature(buffer, hasher, writer, signer);
             }
 
@@ -498,7 +783,13 @@ namespace System.Security.Cryptography.Cose
             writer.WriteEndArray();
         }
 
-        private static int ComputeEncodedSize(CoseSigner signer, CoseHeaderMap? protectedHeaders, CoseHeaderMap? unprotectedHeaders, int contentLength, bool isDetached)
+        private static int ComputeEncodedSize(
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders,
+            CoseHeaderMap? unprotectedHeaders,
+            int contentLength,
+            bool isDetached
+        )
         {
             // tag + array(4) + encoded protected header map + unprotected header map + content + [+COSE_Signature].
             int encodedSize = MultiSignSizeOfCborTag + CoseHelpers.SizeOfArrayOfLessThan24;
@@ -527,9 +818,16 @@ namespace System.Security.Cryptography.Cose
 
             encodedSize += CoseHelpers.SizeOfArrayOfLessThan24;
             encodedSize += CoseHelpers.SizeOfArrayOfLessThan24;
-            encodedSize += CoseHelpers.GetByteStringEncodedSize(CoseHeaderMap.ComputeEncodedSize(signer._protectedHeaders, signer._algHeaderValueToSlip));
+            encodedSize += CoseHelpers.GetByteStringEncodedSize(
+                CoseHeaderMap.ComputeEncodedSize(
+                    signer._protectedHeaders,
+                    signer._algHeaderValueToSlip
+                )
+            );
             encodedSize += CoseHeaderMap.ComputeEncodedSize(signer._unprotectedHeaders);
-            encodedSize += CoseHelpers.GetByteStringEncodedSize(CoseHelpers.ComputeSignatureSize(signer));
+            encodedSize += CoseHelpers.GetByteStringEncodedSize(
+                CoseHelpers.ComputeSignatureSize(signer)
+            );
 
             return encodedSize;
         }
@@ -540,13 +838,21 @@ namespace System.Security.Cryptography.Cose
         /// <returns>The number of bytes produced by encoding this message.</returns>
         public override int GetEncodedLength()
         {
-            int encodedLength = CoseHelpers.GetCoseSignEncodedLengthMinusSignature(_isTagged, MultiSignSizeOfCborTag, _protectedHeaderAsBstr.Length, UnprotectedHeaders, _content);
+            int encodedLength = CoseHelpers.GetCoseSignEncodedLengthMinusSignature(
+                _isTagged,
+                MultiSignSizeOfCborTag,
+                _protectedHeaderAsBstr.Length,
+                UnprotectedHeaders,
+                _content
+            );
             encodedLength += CoseHelpers.GetIntegerEncodedSize(Signatures.Count);
 
             foreach (CoseSignature signature in Signatures)
             {
                 encodedLength += CoseHelpers.SizeOfArrayOfLessThan24;
-                encodedLength += CoseHelpers.GetByteStringEncodedSize(signature._encodedSignProtectedHeaders.Length);
+                encodedLength += CoseHelpers.GetByteStringEncodedSize(
+                    signature._encodedSignProtectedHeaders.Length
+                );
                 encodedLength += CoseHeaderMap.ComputeEncodedSize(signature.UnprotectedHeaders);
                 encodedLength += CoseHelpers.GetByteStringEncodedSize(signature._signature.Length);
             }
@@ -580,7 +886,9 @@ namespace System.Security.Cryptography.Cose
 
             if (Signatures.Count < 1)
             {
-                throw new InvalidOperationException(SR.MultiSignMessageMustCarryAtLeastOneSignature);
+                throw new InvalidOperationException(
+                    SR.MultiSignMessageMustCarryAtLeastOneSignature
+                );
             }
 
             if (destination.Length < GetEncodedLength())
@@ -600,14 +908,22 @@ namespace System.Security.Cryptography.Cose
 
             writer.WriteByteString(_protectedHeaderAsBstr);
 
-            CoseHelpers.WriteHeaderMap(destination, writer, UnprotectedHeaders, isProtected: false, null);
+            CoseHelpers.WriteHeaderMap(
+                destination,
+                writer,
+                UnprotectedHeaders,
+                isProtected: false,
+                null
+            );
 
             CoseHelpers.WriteContent(writer, Content.GetValueOrDefault().Span, !Content.HasValue);
 
             writer.WriteStartArray(Signatures.Count);
             foreach (CoseSignature signature in Signatures)
             {
-                if (ContainDuplicateLabels(signature.ProtectedHeaders, signature.UnprotectedHeaders))
+                if (
+                    ContainDuplicateLabels(signature.ProtectedHeaders, signature.UnprotectedHeaders)
+                )
                 {
                     throw new InvalidOperationException(SR.Sign1SignHeaderDuplicateLabels);
                 }
@@ -615,7 +931,13 @@ namespace System.Security.Cryptography.Cose
                 writer.WriteStartArray(CoseSignatureArrayLength);
                 writer.WriteByteString(signature._encodedSignProtectedHeaders);
 
-                CoseHelpers.WriteHeaderMap(destination, writer, signature.UnprotectedHeaders, false, null);
+                CoseHelpers.WriteHeaderMap(
+                    destination,
+                    writer,
+                    signature.UnprotectedHeaders,
+                    false,
+                    null
+                );
 
                 writer.WriteByteString(signature._signature);
                 writer.WriteEndArray();
@@ -646,8 +968,8 @@ namespace System.Security.Cryptography.Cose
         ///   </para>
         /// </exception>
         /// <exception cref="InvalidOperationException">The content is detached from this message, use an overload that accepts a detached content.</exception>
-        public void AddSignatureForEmbedded(CoseSigner signer, byte[]? associatedData = null)
-            => AddSignatureForEmbedded(signer, associatedData.AsSpan());
+        public void AddSignatureForEmbedded(CoseSigner signer, byte[]? associatedData = null) =>
+            AddSignatureForEmbedded(signer, associatedData.AsSpan());
 
         /// <summary>
         /// Adds a signature for the content embedded in this message.
@@ -697,7 +1019,11 @@ namespace System.Security.Cryptography.Cose
         ///   </para>
         /// </exception>
         /// <exception cref="InvalidOperationException">The content is embedded on this message, use an overload that uses embedded content.</exception>
-        public void AddSignatureForDetached(byte[] detachedContent, CoseSigner signer, byte[]? associatedData = null)
+        public void AddSignatureForDetached(
+            byte[] detachedContent,
+            CoseSigner signer,
+            byte[]? associatedData = null
+        )
         {
             if (detachedContent == null)
             {
@@ -724,7 +1050,11 @@ namespace System.Security.Cryptography.Cose
         ///   </para>
         /// </exception>
         /// <exception cref="InvalidOperationException">The content is embedded on this message, use an overload that uses embedded content.</exception>
-        public void AddSignatureForDetached(ReadOnlySpan<byte> detachedContent, CoseSigner signer, ReadOnlySpan<byte> associatedData = default)
+        public void AddSignatureForDetached(
+            ReadOnlySpan<byte> detachedContent,
+            CoseSigner signer,
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             if (signer == null)
             {
@@ -760,7 +1090,11 @@ namespace System.Security.Cryptography.Cose
         ///   </para>
         /// </exception>
         /// <exception cref="InvalidOperationException">The content is embedded on this message, use an overload that uses embedded content.</exception>
-        public void AddSignatureForDetached(Stream detachedContent, CoseSigner signer, ReadOnlySpan<byte> associatedData = default)
+        public void AddSignatureForDetached(
+            Stream detachedContent,
+            CoseSigner signer,
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             if (detachedContent == null)
             {
@@ -775,36 +1109,69 @@ namespace System.Security.Cryptography.Cose
             AddSignatureCore(default, detachedContent, signer, associatedData);
         }
 
-        private void AddSignatureCore(ReadOnlySpan<byte> contentBytes, Stream? contentStream, CoseSigner signer, ReadOnlySpan<byte> associatedData)
+        private void AddSignatureCore(
+            ReadOnlySpan<byte> contentBytes,
+            Stream? contentStream,
+            CoseSigner signer,
+            ReadOnlySpan<byte> associatedData
+        )
         {
             ValidateBeforeSign(signer, null, null);
 
             CoseHeaderMap signProtectedHeaders = signer.ProtectedHeaders;
             int? algHeaderValueToSlip = signer._algHeaderValueToSlip;
-            int signProtectedEncodedLength = CoseHeaderMap.ComputeEncodedSize(signProtectedHeaders, algHeaderValueToSlip);
+            int signProtectedEncodedLength = CoseHeaderMap.ComputeEncodedSize(
+                signProtectedHeaders,
+                algHeaderValueToSlip
+            );
 
             int toBeSignedLength = ComputeToBeSignedEncodedSize(
                 SigStructureContext.Signature,
                 _protectedHeaderAsBstr.Length,
                 signProtectedEncodedLength,
                 associatedData.Length,
-                contentLength: 0);
+                contentLength: 0
+            );
 
-            byte[] buffer = ArrayPool<byte>.Shared.Rent(Math.Max(toBeSignedLength, CoseHelpers.ComputeSignatureSize(signer)));
+            byte[] buffer = ArrayPool<byte>.Shared.Rent(
+                Math.Max(toBeSignedLength, CoseHelpers.ComputeSignatureSize(signer))
+            );
 
             try
             {
                 Span<byte> bufferSpan = buffer;
-                int bytesWritten = CoseHeaderMap.Encode(signProtectedHeaders, bufferSpan, isProtected: true, algHeaderValueToSlip);
+                int bytesWritten = CoseHeaderMap.Encode(
+                    signProtectedHeaders,
+                    bufferSpan,
+                    isProtected: true,
+                    algHeaderValueToSlip
+                );
                 byte[] encodedSignProtected = bufferSpan.Slice(0, bytesWritten).ToArray();
 
                 using (IncrementalHash hasher = IncrementalHash.CreateHash(signer.HashAlgorithm))
                 {
-                    AppendToBeSigned(bufferSpan, hasher, SigStructureContext.Signature, _protectedHeaderAsBstr, encodedSignProtected, associatedData, contentBytes, contentStream);
+                    AppendToBeSigned(
+                        bufferSpan,
+                        hasher,
+                        SigStructureContext.Signature,
+                        _protectedHeaderAsBstr,
+                        encodedSignProtected,
+                        associatedData,
+                        contentBytes,
+                        contentStream
+                    );
                     bytesWritten = CoseHelpers.SignHash(signer, hasher, buffer);
 
                     byte[] signature = bufferSpan.Slice(0, bytesWritten).ToArray();
-                    _signatures.Add(new CoseSignature(this, signProtectedHeaders, signer.UnprotectedHeaders, encodedSignProtected, signature));
+                    _signatures.Add(
+                        new CoseSignature(
+                            this,
+                            signProtectedHeaders,
+                            signer.UnprotectedHeaders,
+                            encodedSignProtected,
+                            signature
+                        )
+                    );
                 }
             }
             finally
@@ -836,7 +1203,12 @@ namespace System.Security.Cryptography.Cose
         ///   </para>
         /// </exception>
         /// <exception cref="InvalidOperationException">The content is embedded on this message, use an overload that uses embedded content.</exception>
-        public Task AddSignatureForDetachedAsync(Stream detachedContent, CoseSigner signer, ReadOnlyMemory<byte> associatedData = default, CancellationToken cancellationToken = default)
+        public Task AddSignatureForDetachedAsync(
+            Stream detachedContent,
+            CoseSigner signer,
+            ReadOnlyMemory<byte> associatedData = default,
+            CancellationToken cancellationToken = default
+        )
         {
             if (detachedContent == null)
             {
@@ -848,36 +1220,75 @@ namespace System.Security.Cryptography.Cose
                 throw new InvalidOperationException(SR.ContentWasEmbedded);
             }
 
-            return AddSignatureCoreAsync(detachedContent, signer, associatedData, cancellationToken);
+            return AddSignatureCoreAsync(
+                detachedContent,
+                signer,
+                associatedData,
+                cancellationToken
+            );
         }
 
-        private async Task AddSignatureCoreAsync(Stream content, CoseSigner signer, ReadOnlyMemory<byte> associatedData, CancellationToken cancellationToken)
+        private async Task AddSignatureCoreAsync(
+            Stream content,
+            CoseSigner signer,
+            ReadOnlyMemory<byte> associatedData,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBeforeSign(signer, null, null);
 
             CoseHeaderMap signProtectedHeaders = signer.ProtectedHeaders;
             int? algHeaderValueToSlip = signer._algHeaderValueToSlip;
-            int signProtectedEncodedLength = CoseHeaderMap.ComputeEncodedSize(signProtectedHeaders, algHeaderValueToSlip);
+            int signProtectedEncodedLength = CoseHeaderMap.ComputeEncodedSize(
+                signProtectedHeaders,
+                algHeaderValueToSlip
+            );
 
             int toBeSignedLength = ComputeToBeSignedEncodedSize(
                 SigStructureContext.Signature,
                 _protectedHeaderAsBstr.Length,
                 signProtectedEncodedLength,
                 associatedData.Length,
-                contentLength: 0);
+                contentLength: 0
+            );
 
-            byte[] buffer = ArrayPool<byte>.Shared.Rent(Math.Max(toBeSignedLength, CoseHelpers.ComputeSignatureSize(signer)));
+            byte[] buffer = ArrayPool<byte>.Shared.Rent(
+                Math.Max(toBeSignedLength, CoseHelpers.ComputeSignatureSize(signer))
+            );
 
-            int bytesWritten = CoseHeaderMap.Encode(signProtectedHeaders, buffer, isProtected: true, algHeaderValueToSlip);
+            int bytesWritten = CoseHeaderMap.Encode(
+                signProtectedHeaders,
+                buffer,
+                isProtected: true,
+                algHeaderValueToSlip
+            );
             byte[] encodedSignProtected = buffer.AsSpan(0, bytesWritten).ToArray();
 
             using (IncrementalHash hasher = IncrementalHash.CreateHash(signer.HashAlgorithm))
             {
-                await AppendToBeSignedAsync(buffer, hasher, SigStructureContext.Signature, _protectedHeaderAsBstr, encodedSignProtected, associatedData, content, cancellationToken).ConfigureAwait(false);
+                await AppendToBeSignedAsync(
+                        buffer,
+                        hasher,
+                        SigStructureContext.Signature,
+                        _protectedHeaderAsBstr,
+                        encodedSignProtected,
+                        associatedData,
+                        content,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 bytesWritten = CoseHelpers.SignHash(signer, hasher, buffer);
 
                 byte[] signature = buffer.AsSpan(0, bytesWritten).ToArray();
-                _signatures.Add(new CoseSignature(this, signProtectedHeaders, signer.UnprotectedHeaders, encodedSignProtected, signature));
+                _signatures.Add(
+                    new CoseSignature(
+                        this,
+                        signProtectedHeaders,
+                        signer.UnprotectedHeaders,
+                        encodedSignProtected,
+                        signature
+                    )
+                );
             }
 
             ArrayPool<byte>.Shared.Return(buffer, clearArray: true);
@@ -913,7 +1324,6 @@ namespace System.Security.Cryptography.Cose
         ///   </para>
         /// </exception>
         /// <seealso cref="Signatures"/>
-        public void RemoveSignature(int index)
-            => _signatures.RemoveAt(index);
+        public void RemoveSignature(int index) => _signatures.RemoveAt(index);
     }
 }

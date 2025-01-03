@@ -26,7 +26,16 @@ namespace System.Security.AccessControl.Tests
             // case 1, only one ACE, get at index 0
             rawAcl = new RawAcl(1, 1);
             index = 0;
-            gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)), false, null);
+            gAce = new CommonAce(
+                AceFlags.SuccessfulAccess,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             systemAcl = new SystemAcl(false, false, rawAcl);
             verifierGAce = systemAcl[index];
@@ -35,10 +44,28 @@ namespace System.Security.AccessControl.Tests
             //case 2, two ACEs, index at Count -1
             rawAcl = new RawAcl(1, 2);
             //208 has SuccessfulAccess, FailedAccess and Inherited
-            gAce = new CommonAce((AceFlags)208, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)), false, null);
+            gAce = new CommonAce(
+                (AceFlags)208,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             //gAce = new CommonAce(AceFlags.FailedAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(owner2), false, null);
-            gAce = new CommonAce(AceFlags.FailedAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)), false, null);
+            gAce = new CommonAce(
+                AceFlags.FailedAccess,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(1, gAce);
             systemAcl = new SystemAcl(false, false, rawAcl);
             gAce = rawAcl[1];
@@ -50,13 +77,46 @@ namespace System.Security.AccessControl.Tests
             //case 3, only three ACEs, index at Count/2
             rawAcl = new RawAcl(1, 3);
             //215 has all AceFlags except InheritOnly
-            gAce = new CommonAce((AceFlags)(FlagsForAce.AuditFlags | FlagsForAce.OI | FlagsForAce.CI | FlagsForAce.NP | FlagsForAce.IH), AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner2)), false, null);
+            gAce = new CommonAce(
+                (AceFlags)(
+                    FlagsForAce.AuditFlags
+                    | FlagsForAce.OI
+                    | FlagsForAce.CI
+                    | FlagsForAce.NP
+                    | FlagsForAce.IH
+                ),
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner2)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             //208 has SuccessfulAccess, FailedAccess and Inherited
-            gAce = new CommonAce((AceFlags)(FlagsForAce.AuditFlags | FlagsForAce.IH), AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)), false, null);
+            gAce = new CommonAce(
+                (AceFlags)(FlagsForAce.AuditFlags | FlagsForAce.IH),
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(1, gAce);
 
-            gAce = new CommonAce(AceFlags.FailedAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner3)), false, null);
+            gAce = new CommonAce(
+                AceFlags.FailedAccess,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner3)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(2, gAce);
             systemAcl = new SystemAcl(false, false, rawAcl);
             gAce = rawAcl[1];
@@ -65,11 +125,38 @@ namespace System.Security.AccessControl.Tests
             Assert.True(TestIndex(gAce, verifierGAce));
             //case 4, 3 ACEs, test merge, index at Count -1
             rawAcl = new RawAcl(1, 2);
-            gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                AceFlags.SuccessfulAccess,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
-            gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")), false, null);
+            gAce = new CommonAce(
+                AceFlags.SuccessfulAccess,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(1, gAce);
-            gAce = new CommonAce(AceFlags.FailedAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")), false, null);
+            gAce = new CommonAce(
+                AceFlags.FailedAccess,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(2, gAce);
             systemAcl = new SystemAcl(false, false, rawAcl);
             gAce = rawAcl[1];
@@ -89,7 +176,6 @@ namespace System.Security.AccessControl.Tests
             GenericAce verifierGAce = null;
             string owner = null;
             int index = 0;
-
 
             // case 1, no ACE, get index at -1
 
@@ -122,7 +208,16 @@ namespace System.Security.AccessControl.Tests
                 systemAcl = new SystemAcl(false, false, rawAcl);
                 index = -1;
                 owner = "BA";
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
                 systemAcl[index] = gAce;
             });
 
@@ -135,7 +230,16 @@ namespace System.Security.AccessControl.Tests
                 systemAcl = new SystemAcl(true, false, rawAcl);
                 index = systemAcl.Count;
                 owner = "BA";
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
                 systemAcl[index] = gAce;
             });
             //case 5, set null Ace
@@ -143,7 +247,16 @@ namespace System.Security.AccessControl.Tests
             Assert.Throws<NotSupportedException>(() =>
             {
                 rawAcl = new RawAcl(1, 1);
-                gAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)), false, null);
+                gAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
                 rawAcl.InsertAce(0, gAce);
                 systemAcl = new SystemAcl(false, false, rawAcl);
                 index = 0;
@@ -157,13 +270,31 @@ namespace System.Security.AccessControl.Tests
             {
                 rawAcl = new RawAcl(1, 1);
                 owner = "BA";
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
                 rawAcl.InsertAce(0, gAce);
 
                 systemAcl = new SystemAcl(false, false, rawAcl);
                 index = 0;
                 owner = "BA";
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
                 systemAcl[index] = gAce;
             });
         }
@@ -171,7 +302,7 @@ namespace System.Security.AccessControl.Tests
         private static bool TestIndex(GenericAce gAce, GenericAce verifierGAce)
         {
             if (Utils.IsAceEqual(gAce, verifierGAce))
-            {//as operator == and != are overridden to by value, can not use != to test these two are not same object any more
+            { //as operator == and != are overridden to by value, can not use != to test these two are not same object any more
                 gAce.AceFlags = AceFlags.InheritanceFlags | AceFlags.Inherited | AceFlags.AuditFlags;
                 if (gAce != verifierGAce)
                     return true;
@@ -183,6 +314,5 @@ namespace System.Security.AccessControl.Tests
                 return false;
             }
         }
-
     }
 }

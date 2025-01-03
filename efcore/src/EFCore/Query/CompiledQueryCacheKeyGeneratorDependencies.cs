@@ -48,7 +48,8 @@ public sealed record CompiledQueryCacheKeyGeneratorDependencies
     public CompiledQueryCacheKeyGeneratorDependencies(
         IModel model,
         ICurrentDbContext currentContext,
-        IExecutionStrategy executionStrategy)
+        IExecutionStrategy executionStrategy
+    )
     {
         Model = model;
         CurrentContext = currentContext;

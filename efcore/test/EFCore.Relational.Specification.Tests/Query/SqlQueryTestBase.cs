@@ -29,13 +29,23 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         var query = context.Database.SqlQueryRaw<UnmappedProduct>(
             NormalizeDelimitersInRawString(
                 @"SELECT [ProductName] AS [ProductID], [ProductID] AS [ProductName], [SupplierID], [UnitPrice], [UnitsInStock], [Discontinued]
-                      FROM [Products]"));
+                      FROM [Products]"
+            )
+        );
 
         Assert.Equal(
-            CoreStrings.ErrorMaterializingPropertyInvalidCast("UnmappedProduct", "ProductID", typeof(int), typeof(string)),
-            (async
-                ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
-                : Assert.Throws<InvalidOperationException>(() => query.ToList())).Message);
+            CoreStrings.ErrorMaterializingPropertyInvalidCast(
+                "UnmappedProduct",
+                "ProductID",
+                typeof(int),
+                typeof(string)
+            ),
+            (
+                async
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+                    : Assert.Throws<InvalidOperationException>(() => query.ToList())
+            ).Message
+        );
     }
 
     [ConditionalTheory]
@@ -46,13 +56,23 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         var query = context.Database.SqlQueryRaw<UnmappedProduct>(
             NormalizeDelimitersInRawString(
                 @"SELECT [ProductID], [ProductName] AS [UnitPrice], [ProductName], [SupplierID], [UnitsInStock], [Discontinued]
-                      FROM [Products]"));
+                      FROM [Products]"
+            )
+        );
 
         Assert.Equal(
-            CoreStrings.ErrorMaterializingPropertyInvalidCast("UnmappedProduct", "UnitPrice", typeof(decimal?), typeof(string)),
-            (async
-                ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
-                : Assert.Throws<InvalidOperationException>(() => query.ToList())).Message);
+            CoreStrings.ErrorMaterializingPropertyInvalidCast(
+                "UnmappedProduct",
+                "UnitPrice",
+                typeof(decimal?),
+                typeof(string)
+            ),
+            (
+                async
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+                    : Assert.Throws<InvalidOperationException>(() => query.ToList())
+            ).Message
+        );
     }
 
     [ConditionalTheory]
@@ -60,17 +80,23 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual async Task Bad_data_error_handling_invalid_cast_projection(bool async)
     {
         using var context = CreateContext();
-        var query = context.Database.SqlQueryRaw<UnmappedProduct>(
+        var query = context
+            .Database.SqlQueryRaw<UnmappedProduct>(
                 NormalizeDelimitersInRawString(
                     @"SELECT [ProductID], [ProductName] AS [UnitPrice], [ProductName], [UnitsInStock], [Discontinued]
-                      FROM [Products]"))
+                      FROM [Products]"
+                )
+            )
             .Select(p => p.UnitPrice);
 
         Assert.Equal(
             RelationalStrings.ErrorMaterializingValueInvalidCast(typeof(decimal?), typeof(string)),
-            (async
-                ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
-                : Assert.Throws<InvalidOperationException>(() => query.ToList())).Message);
+            (
+                async
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+                    : Assert.Throws<InvalidOperationException>(() => query.ToList())
+            ).Message
+        );
     }
 
     [ConditionalTheory]
@@ -78,16 +104,28 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual async Task Bad_data_error_handling_invalid_cast_no_tracking(bool async)
     {
         using var context = CreateContext();
-        var query = context.Database.SqlQueryRaw<UnmappedProduct>(
-            NormalizeDelimitersInRawString(
-                @"SELECT [ProductName] AS [ProductID], [ProductID] AS [ProductName], [SupplierID], [UnitPrice], [UnitsInStock], [Discontinued]
-                    FROM [Products]")).AsNoTracking();
+        var query = context
+            .Database.SqlQueryRaw<UnmappedProduct>(
+                NormalizeDelimitersInRawString(
+                    @"SELECT [ProductName] AS [ProductID], [ProductID] AS [ProductName], [SupplierID], [UnitPrice], [UnitsInStock], [Discontinued]
+                    FROM [Products]"
+                )
+            )
+            .AsNoTracking();
 
         Assert.Equal(
-            CoreStrings.ErrorMaterializingPropertyInvalidCast("UnmappedProduct", "ProductID", typeof(int), typeof(string)),
-            (async
-                ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
-                : Assert.Throws<InvalidOperationException>(() => query.ToList())).Message);
+            CoreStrings.ErrorMaterializingPropertyInvalidCast(
+                "UnmappedProduct",
+                "ProductID",
+                typeof(int),
+                typeof(string)
+            ),
+            (
+                async
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+                    : Assert.Throws<InvalidOperationException>(() => query.ToList())
+            ).Message
+        );
     }
 
     [ConditionalTheory]
@@ -98,13 +136,22 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         var query = context.Database.SqlQueryRaw<UnmappedProduct>(
             NormalizeDelimitersInRawString(
                 @"SELECT [ProductID], [ProductName], [SupplierID], [UnitPrice], [UnitsInStock], NULL AS [Discontinued]
-                FROM [Products]"));
+                FROM [Products]"
+            )
+        );
 
         Assert.Equal(
-            RelationalStrings.ErrorMaterializingPropertyNullReference("UnmappedProduct", "Discontinued", typeof(bool)),
-            (async
-                ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
-                : Assert.Throws<InvalidOperationException>(() => query.ToList())).Message);
+            RelationalStrings.ErrorMaterializingPropertyNullReference(
+                "UnmappedProduct",
+                "Discontinued",
+                typeof(bool)
+            ),
+            (
+                async
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+                    : Assert.Throws<InvalidOperationException>(() => query.ToList())
+            ).Message
+        );
     }
 
     [ConditionalTheory]
@@ -112,17 +159,23 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual async Task Bad_data_error_handling_null_projection(bool async)
     {
         using var context = CreateContext();
-        var query = context.Database.SqlQueryRaw<UnmappedProduct>(
+        var query = context
+            .Database.SqlQueryRaw<UnmappedProduct>(
                 NormalizeDelimitersInRawString(
                     @"SELECT [ProductID], [ProductName], [SupplierID], [UnitPrice], [UnitsInStock], NULL AS [Discontinued]
-                          FROM [Products]"))
+                          FROM [Products]"
+                )
+            )
             .Select(p => p.Discontinued);
 
         Assert.Equal(
             RelationalStrings.ErrorMaterializingValueNullReference(typeof(bool)),
-            (async
-                ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
-                : Assert.Throws<InvalidOperationException>(() => query.ToList())).Message);
+            (
+                async
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+                    : Assert.Throws<InvalidOperationException>(() => query.ToList())
+            ).Message
+        );
     }
 
     [ConditionalTheory]
@@ -130,102 +183,175 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual async Task Bad_data_error_handling_null_no_tracking(bool async)
     {
         using var context = CreateContext();
-        var query = context.Database.SqlQueryRaw<UnmappedProduct>(
-            NormalizeDelimitersInRawString(
-                @"SELECT [ProductID], [ProductName], [SupplierID], [UnitPrice], [UnitsInStock], NULL AS [Discontinued]
-                          FROM [Products]")).AsNoTracking();
+        var query = context
+            .Database.SqlQueryRaw<UnmappedProduct>(
+                NormalizeDelimitersInRawString(
+                    @"SELECT [ProductID], [ProductName], [SupplierID], [UnitPrice], [UnitsInStock], NULL AS [Discontinued]
+                          FROM [Products]"
+                )
+            )
+            .AsNoTracking();
 
         Assert.Equal(
-            RelationalStrings.ErrorMaterializingPropertyNullReference("UnmappedProduct", "Discontinued", typeof(bool)),
-            (async
-                ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
-                : Assert.Throws<InvalidOperationException>(() => query.ToList())).Message);
+            RelationalStrings.ErrorMaterializingPropertyNullReference(
+                "UnmappedProduct",
+                "Discontinued",
+                typeof(bool)
+            ),
+            (
+                async
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+                    : Assert.Throws<InvalidOperationException>(() => query.ToList())
+            ).Message
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQueryRaw_queryable_simple(bool async)
-        => AssertQuery(
+    public virtual Task SqlQueryRaw_queryable_simple(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>
-                (NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [ContactName] LIKE '%z%'")),
-            ss => ss.Set<Customer>().Where(x => x.ContactName.Contains("z")).Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            "SELECT * FROM [Customers] WHERE [ContactName] LIKE '%z%'"
+                        )
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.ContactName.Contains("z"))
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQueryRaw_queryable_simple_mapped_type(bool async)
-        => AssertQuery(
+    public virtual Task SqlQueryRaw_queryable_simple_mapped_type(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<CustomerQuery>
-                (NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [ContactName] LIKE '%z%'")),
-            ss => ss.Set<CustomerQuery>().Where(x => x.ContactName.Contains("z")));
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<CustomerQuery>(
+                        NormalizeDelimitersInRawString(
+                            "SELECT * FROM [Customers] WHERE [ContactName] LIKE '%z%'"
+                        )
+                    ),
+            ss => ss.Set<CustomerQuery>().Where(x => x.ContactName.Contains("z"))
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQueryRaw_queryable_simple_columns_out_of_order(bool async)
-        => AssertQuery(
+    public virtual Task SqlQueryRaw_queryable_simple_columns_out_of_order(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                NormalizeDelimitersInRawString(
-                    "SELECT [Region], [PostalCode], [Phone], [Fax], [CustomerID], [Country], [ContactTitle], [ContactName], [CompanyName], [City], [Address] FROM [Customers]")),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            "SELECT [Region], [PostalCode], [Phone], [Fax], [CustomerID], [Country], [ContactTitle], [ContactName], [CompanyName], [City], [Address] FROM [Customers]"
+                        )
+                    ),
             ss => ss.Set<Customer>().Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQueryRaw_queryable_simple_columns_out_of_order_and_extra_columns(bool async)
-        => AssertQuery(
+    public virtual Task SqlQueryRaw_queryable_simple_columns_out_of_order_and_extra_columns(
+        bool async
+    ) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                NormalizeDelimitersInRawString(
-                    "SELECT [Region], [PostalCode], [PostalCode] AS [Foo], [Phone], [Fax], [CustomerID], [Country], [ContactTitle], [ContactName], [CompanyName], [City], [Address] FROM [Customers]")),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            "SELECT [Region], [PostalCode], [PostalCode] AS [Foo], [Phone], [Fax], [CustomerID], [Country], [ContactTitle], [ContactName], [CompanyName], [City], [Address] FROM [Customers]"
+                        )
+                    ),
             ss => ss.Set<Customer>().Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task SqlQueryRaw_queryable_simple_columns_out_of_order_and_not_enough_columns_throws(bool async)
+    public virtual async Task SqlQueryRaw_queryable_simple_columns_out_of_order_and_not_enough_columns_throws(
+        bool async
+    )
     {
         using var context = CreateContext();
         var query = context.Database.SqlQueryRaw<UnmappedCustomer>(
             NormalizeDelimitersInRawString(
-                "SELECT [PostalCode], [Phone], [Fax], [CustomerID], [Country], [ContactTitle], [ContactName], [CompanyName], [City], [Address] FROM [Customers]"));
+                "SELECT [PostalCode], [Phone], [Fax], [CustomerID], [Country], [ContactTitle], [ContactName], [CompanyName], [City], [Address] FROM [Customers]"
+            )
+        );
 
         Assert.Equal(
             RelationalStrings.FromSqlMissingColumn("Region"),
-            (async
-                ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
-                : Assert.Throws<InvalidOperationException>(() => query.ToList())).Message);
+            (
+                async
+                    ? await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+                    : Assert.Throws<InvalidOperationException>(() => query.ToList())
+            ).Message
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQueryRaw_queryable_composed(bool async)
-        => AssertQuery(
+    public virtual Task SqlQueryRaw_queryable_composed(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                    NormalizeDelimitersInRawString("SELECT * FROM [Customers]"))
-                .Where(c => c.ContactName.Contains("z")),
-            ss => ss.Set<Customer>().Where(c => c.ContactName.Contains("z")).Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
+                    )
+                    .Where(c => c.ContactName.Contains("z")),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(c => c.ContactName.Contains("z"))
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQueryRaw_queryable_composed_after_removing_whitespaces(bool async)
-        => AssertQuery(
+    public virtual Task SqlQueryRaw_queryable_composed_after_removing_whitespaces(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                    NormalizeDelimitersInRawString(
-                        _eol + "    " + _eol + _eol + _eol + "SELECT" + _eol + "* FROM [Customers]"))
-                .Where(c => c.ContactName.Contains("z")),
-            ss => ss.Set<Customer>().Where(c => c.ContactName.Contains("z")).Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            _eol
+                                + "    "
+                                + _eol
+                                + _eol
+                                + _eol
+                                + "SELECT"
+                                + _eol
+                                + "* FROM [Customers]"
+                        )
+                    )
+                    .Where(c => c.ContactName.Contains("z")),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(c => c.ContactName.Contains("z"))
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -234,9 +360,13 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         if (async)
         {
             var query = EF.CompileAsyncQuery(
-                (NorthwindContext context) => context.Database.SqlQueryRaw<UnmappedCustomer>(
-                        NormalizeDelimitersInRawString("SELECT * FROM [Customers]"))
-                    .Where(c => c.ContactName.Contains("z")));
+                (NorthwindContext context) =>
+                    context
+                        .Database.SqlQueryRaw<UnmappedCustomer>(
+                            NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
+                        )
+                        .Where(c => c.ContactName.Contains("z"))
+            );
 
             using (var context = CreateContext())
             {
@@ -248,9 +378,13 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         else
         {
             var query = EF.CompileQuery(
-                (NorthwindContext context) => context.Database.SqlQueryRaw<UnmappedCustomer>(
-                        NormalizeDelimitersInRawString("SELECT * FROM [Customers]"))
-                    .Where(c => c.ContactName.Contains("z")));
+                (NorthwindContext context) =>
+                    context
+                        .Database.SqlQueryRaw<UnmappedCustomer>(
+                            NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
+                        )
+                        .Where(c => c.ContactName.Contains("z"))
+            );
 
             using (var context = CreateContext())
             {
@@ -268,9 +402,16 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         if (async)
         {
             var query = EF.CompileAsyncQuery(
-                (NorthwindContext context) => context.Database.SqlQueryRaw<UnmappedCustomer>(
-                        NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [CustomerID] = {0}"), "CONSH")
-                    .Where(c => c.ContactName.Contains("z")));
+                (NorthwindContext context) =>
+                    context
+                        .Database.SqlQueryRaw<UnmappedCustomer>(
+                            NormalizeDelimitersInRawString(
+                                "SELECT * FROM [Customers] WHERE [CustomerID] = {0}"
+                            ),
+                            "CONSH"
+                        )
+                        .Where(c => c.ContactName.Contains("z"))
+            );
 
             using (var context = CreateContext())
             {
@@ -282,9 +423,16 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         else
         {
             var query = EF.CompileQuery(
-                (NorthwindContext context) => context.Database.SqlQueryRaw<UnmappedCustomer>(
-                        NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [CustomerID] = {0}"), "CONSH")
-                    .Where(c => c.ContactName.Contains("z")));
+                (NorthwindContext context) =>
+                    context
+                        .Database.SqlQueryRaw<UnmappedCustomer>(
+                            NormalizeDelimitersInRawString(
+                                "SELECT * FROM [Customers] WHERE [CustomerID] = {0}"
+                            ),
+                            "CONSH"
+                        )
+                        .Where(c => c.ContactName.Contains("z"))
+            );
 
             using (var context = CreateContext())
             {
@@ -302,10 +450,16 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         if (async)
         {
             var query = EF.CompileAsyncQuery(
-                (NorthwindContext context) => context.Database.SqlQueryRaw<UnmappedCustomer>(
-                        NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [CustomerID] = @customer"),
-                        CreateDbParameter("customer", "CONSH"))
-                    .Where(c => c.ContactName.Contains("z")));
+                (NorthwindContext context) =>
+                    context
+                        .Database.SqlQueryRaw<UnmappedCustomer>(
+                            NormalizeDelimitersInRawString(
+                                "SELECT * FROM [Customers] WHERE [CustomerID] = @customer"
+                            ),
+                            CreateDbParameter("customer", "CONSH")
+                        )
+                        .Where(c => c.ContactName.Contains("z"))
+            );
 
             using (var context = CreateContext())
             {
@@ -317,10 +471,16 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         else
         {
             var query = EF.CompileQuery(
-                (NorthwindContext context) => context.Database.SqlQueryRaw<UnmappedCustomer>(
-                        NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [CustomerID] = @customer"),
-                        CreateDbParameter("customer", "CONSH"))
-                    .Where(c => c.ContactName.Contains("z")));
+                (NorthwindContext context) =>
+                    context
+                        .Database.SqlQueryRaw<UnmappedCustomer>(
+                            NormalizeDelimitersInRawString(
+                                "SELECT * FROM [Customers] WHERE [CustomerID] = @customer"
+                            ),
+                            CreateDbParameter("customer", "CONSH")
+                        )
+                        .Where(c => c.ContactName.Contains("z"))
+            );
 
             using (var context = CreateContext())
             {
@@ -333,15 +493,23 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task SqlQueryRaw_queryable_composed_compiled_with_nameless_DbParameter(bool async)
+    public virtual async Task SqlQueryRaw_queryable_composed_compiled_with_nameless_DbParameter(
+        bool async
+    )
     {
         if (async)
         {
             var query = EF.CompileAsyncQuery(
-                (NorthwindContext context) => context.Database.SqlQueryRaw<UnmappedCustomer>(
-                        NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [CustomerID] = {0}"),
-                        CreateDbParameter(null, "CONSH"))
-                    .Where(c => c.ContactName.Contains("z")));
+                (NorthwindContext context) =>
+                    context
+                        .Database.SqlQueryRaw<UnmappedCustomer>(
+                            NormalizeDelimitersInRawString(
+                                "SELECT * FROM [Customers] WHERE [CustomerID] = {0}"
+                            ),
+                            CreateDbParameter(null, "CONSH")
+                        )
+                        .Where(c => c.ContactName.Contains("z"))
+            );
 
             using (var context = CreateContext())
             {
@@ -353,10 +521,16 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         else
         {
             var query = EF.CompileQuery(
-                (NorthwindContext context) => context.Database.SqlQueryRaw<UnmappedCustomer>(
-                        NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [CustomerID] = {0}"),
-                        CreateDbParameter(null, "CONSH"))
-                    .Where(c => c.ContactName.Contains("z")));
+                (NorthwindContext context) =>
+                    context
+                        .Database.SqlQueryRaw<UnmappedCustomer>(
+                            NormalizeDelimitersInRawString(
+                                "SELECT * FROM [Customers] WHERE [CustomerID] = {0}"
+                            ),
+                            CreateDbParameter(null, "CONSH")
+                        )
+                        .Where(c => c.ContactName.Contains("z"))
+            );
 
             using (var context = CreateContext())
             {
@@ -374,18 +548,25 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         var context = Fixture.CreateContext();
         return AssertQuery(
             async,
-            ss => from c in context.Database.SqlQueryRaw<UnmappedCustomer>(NormalizeDelimitersInRawString("SELECT * FROM [Customers]"))
-                  where context.Database.SqlQueryRaw<UnmappedOrder>(NormalizeDelimitersInRawString("SELECT * FROM [Orders]"))
-                      .Select(o => o.CustomerID)
-                      .Contains(c.CustomerID)
-                  select c,
-            ss => from c in ss.Set<Customer>()
-                  where ss.Set<Order>()
-                      .Select(o => o.CustomerID)
-                      .Contains(c.CustomerID)
-                  select UnmappedCustomer.FromCustomer(c),
+            ss =>
+                from c in context.Database.SqlQueryRaw<UnmappedCustomer>(
+                    NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
+                )
+                where
+                    context
+                        .Database.SqlQueryRaw<UnmappedOrder>(
+                            NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
+                        )
+                        .Select(o => o.CustomerID)
+                        .Contains(c.CustomerID)
+                select c,
+            ss =>
+                from c in ss.Set<Customer>()
+                where ss.Set<Order>().Select(o => o.CustomerID).Contains(c.CustomerID)
+                select UnmappedCustomer.FromCustomer(c),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
     }
 
     [ConditionalTheory]
@@ -396,22 +577,27 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
 
         return AssertQuery(
             async,
-            _ => from c in context.Database
-                     .SqlQueryRaw<UnmappedCustomer>(NormalizeDelimitersInRawString("SELECT * FROM [Customers]"))
-                 from o in context.Database
-                     .SqlQueryRaw<UnmappedOrder>(NormalizeDelimitersInRawString("SELECT * FROM [Orders]"))
-                 where c.CustomerID == o.CustomerID
-                 select new { c, o },
-            ss => from c in ss.Set<Customer>()
-                  from o in ss.Set<Order>()
-                  where c.CustomerID == o.CustomerID
-                  select new { c = UnmappedCustomer.FromCustomer(c), o = UnmappedOrder.FromOrder(o) },
+            _ =>
+                from c in context.Database.SqlQueryRaw<UnmappedCustomer>(
+                    NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
+                )
+                from o in context.Database.SqlQueryRaw<UnmappedOrder>(
+                    NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
+                )
+                where c.CustomerID == o.CustomerID
+                select new { c, o },
+            ss =>
+                from c in ss.Set<Customer>()
+                from o in ss.Set<Order>()
+                where c.CustomerID == o.CustomerID
+                select new { c = UnmappedCustomer.FromCustomer(c), o = UnmappedOrder.FromOrder(o) },
             elementSorter: e => (e.c.CustomerID, e.o.OrderID),
             elementAsserter: (l, r) =>
             {
                 AssertUnmappedCustomers(l.c, r.c);
                 AssertUnmappedOrders(l.o, r.o);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -424,28 +610,39 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
 
         return AssertQuery(
             async,
-            _ => from c in context.Database.SqlQueryRaw<UnmappedCustomer>(NormalizeDelimitersInRawString("SELECT * FROM [Customers]"))
-                 from o in context.Database.SqlQueryRaw<UnmappedOrder>(
-                     NormalizeDelimitersInRawString("SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {0} AND {1}"),
-                     startDate,
-                     endDate)
-                 where c.CustomerID == o.CustomerID
-                 select new { c, o },
-            ss => from c in ss.Set<Customer>()
-                  from o in ss.Set<Order>().Where(x => x.OrderDate >= startDate && x.OrderDate <= endDate)
-                  where c.CustomerID == o.CustomerID
-                  select new { c = UnmappedCustomer.FromCustomer(c), o = UnmappedOrder.FromOrder(o) },
+            _ =>
+                from c in context.Database.SqlQueryRaw<UnmappedCustomer>(
+                    NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
+                )
+                from o in context.Database.SqlQueryRaw<UnmappedOrder>(
+                    NormalizeDelimitersInRawString(
+                        "SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {0} AND {1}"
+                    ),
+                    startDate,
+                    endDate
+                )
+                where c.CustomerID == o.CustomerID
+                select new { c, o },
+            ss =>
+                from c in ss.Set<Customer>()
+                from o in ss.Set<Order>()
+                    .Where(x => x.OrderDate >= startDate && x.OrderDate <= endDate)
+                where c.CustomerID == o.CustomerID
+                select new { c = UnmappedCustomer.FromCustomer(c), o = UnmappedOrder.FromOrder(o) },
             elementSorter: e => (e.c.CustomerID, e.o.OrderID),
             elementAsserter: (l, r) =>
             {
                 AssertUnmappedCustomers(l.c, r.c);
                 AssertUnmappedOrders(l.o, r.o);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task SqlQueryRaw_queryable_multiple_composed_with_parameters_and_closure_parameters(bool async)
+    public virtual async Task SqlQueryRaw_queryable_multiple_composed_with_parameters_and_closure_parameters(
+        bool async
+    )
     {
         var city = "London";
         var startDate = new DateTime(1997, 1, 1);
@@ -454,24 +651,33 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
 
         await AssertQuery(
             async,
-            _ => from c in context.Database.SqlQueryRaw<UnmappedCustomer>(
-                     NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = {0}"), city)
-                 from o in context.Database.SqlQueryRaw<UnmappedOrder>(
-                     NormalizeDelimitersInRawString("SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {0} AND {1}"),
-                     startDate,
-                     endDate)
-                 where c.CustomerID == o.CustomerID
-                 select new { c, o },
-            ss => from c in ss.Set<Customer>().Where(x => x.City == city)
-                  from o in ss.Set<Order>().Where(x => x.OrderDate >= startDate && x.OrderDate <= endDate)
-                  where c.CustomerID == o.CustomerID
-                  select new { c = UnmappedCustomer.FromCustomer(c), o = UnmappedOrder.FromOrder(o) },
+            _ =>
+                from c in context.Database.SqlQueryRaw<UnmappedCustomer>(
+                    NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = {0}"),
+                    city
+                )
+                from o in context.Database.SqlQueryRaw<UnmappedOrder>(
+                    NormalizeDelimitersInRawString(
+                        "SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {0} AND {1}"
+                    ),
+                    startDate,
+                    endDate
+                )
+                where c.CustomerID == o.CustomerID
+                select new { c, o },
+            ss =>
+                from c in ss.Set<Customer>().Where(x => x.City == city)
+                from o in ss.Set<Order>()
+                    .Where(x => x.OrderDate >= startDate && x.OrderDate <= endDate)
+                where c.CustomerID == o.CustomerID
+                select new { c = UnmappedCustomer.FromCustomer(c), o = UnmappedOrder.FromOrder(o) },
             elementSorter: e => (e.c.CustomerID, e.o.OrderID),
             elementAsserter: (l, r) =>
             {
                 AssertUnmappedCustomers(l.c, r.c);
                 AssertUnmappedOrders(l.o, r.o);
-            });
+            }
+        );
 
         city = "Berlin";
         startDate = new DateTime(1998, 4, 1);
@@ -479,53 +685,80 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
 
         await AssertQuery(
             async,
-            _ => from c in context.Database.SqlQueryRaw<UnmappedCustomer>(
-                     NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = {0}"), city)
-                 from o in context.Database.SqlQueryRaw<UnmappedOrder>(
-                     NormalizeDelimitersInRawString("SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {0} AND {1}"),
-                     startDate,
-                     endDate)
-                 where c.CustomerID == o.CustomerID
-                 select new { c, o },
-            ss => from c in ss.Set<Customer>().Where(x => x.City == city)
-                  from o in ss.Set<Order>().Where(x => x.OrderDate >= startDate && x.OrderDate <= endDate)
-                  where c.CustomerID == o.CustomerID
-                  select new { c = UnmappedCustomer.FromCustomer(c), o = UnmappedOrder.FromOrder(o) },
+            _ =>
+                from c in context.Database.SqlQueryRaw<UnmappedCustomer>(
+                    NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = {0}"),
+                    city
+                )
+                from o in context.Database.SqlQueryRaw<UnmappedOrder>(
+                    NormalizeDelimitersInRawString(
+                        "SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {0} AND {1}"
+                    ),
+                    startDate,
+                    endDate
+                )
+                where c.CustomerID == o.CustomerID
+                select new { c, o },
+            ss =>
+                from c in ss.Set<Customer>().Where(x => x.City == city)
+                from o in ss.Set<Order>()
+                    .Where(x => x.OrderDate >= startDate && x.OrderDate <= endDate)
+                where c.CustomerID == o.CustomerID
+                select new { c = UnmappedCustomer.FromCustomer(c), o = UnmappedOrder.FromOrder(o) },
             elementSorter: e => (e.c.CustomerID, e.o.OrderID),
             elementAsserter: (l, r) =>
             {
                 AssertUnmappedCustomers(l.c, r.c);
                 AssertUnmappedOrders(l.o, r.o);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQueryRaw_queryable_multiple_line_query(bool async)
-        => AssertQuery(
+    public virtual Task SqlQueryRaw_queryable_multiple_line_query(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                NormalizeDelimitersInRawString(
-                    @"SELECT *
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            @"SELECT *
 FROM [Customers]
-WHERE [City] = 'London'")),
-            ss => ss.Set<Customer>().Where(x => x.City == "London").Select(e => UnmappedCustomer.FromCustomer(e)),
+WHERE [City] = 'London'"
+                        )
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == "London")
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQueryRaw_queryable_composed_multiple_line_query(bool async)
-        => AssertQuery(
+    public virtual Task SqlQueryRaw_queryable_composed_multiple_line_query(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                    NormalizeDelimitersInRawString(
-                        @"SELECT *
-FROM [Customers]"))
-                .Where(c => c.City == "London"),
-            ss => ss.Set<Customer>().Where(x => x.City == "London").Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            @"SELECT *
+FROM [Customers]"
+                        )
+                    )
+                    .Where(c => c.City == "London"),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == "London")
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -536,27 +769,47 @@ FROM [Customers]"))
 
         return AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = {0} AND [ContactTitle] = {1}"), city,
-                contactTitle),
-            ss => ss.Set<Customer>().Where(x => x.City == city && x.ContactTitle == contactTitle)
-                .Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            "SELECT * FROM [Customers] WHERE [City] = {0} AND [ContactTitle] = {1}"
+                        ),
+                        city,
+                        contactTitle
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == city && x.ContactTitle == contactTitle)
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQueryRaw_queryable_with_parameters_inline(bool async)
-        => AssertQuery(
+    public virtual Task SqlQueryRaw_queryable_with_parameters_inline(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = {0} AND [ContactTitle] = {1}"), "London",
-                "Sales Representative"),
-            ss => ss.Set<Customer>().Where(x => x.City == "London" && x.ContactTitle == "Sales Representative")
-                .Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            "SELECT * FROM [Customers] WHERE [City] = {0} AND [ContactTitle] = {1}"
+                        ),
+                        "London",
+                        "Sales Representative"
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == "London" && x.ContactTitle == "Sales Representative")
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -567,32 +820,49 @@ FROM [Customers]"))
 
         return AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQuery<UnmappedCustomer>(
-                NormalizeDelimitersInInterpolatedString(
-                    $"SELECT * FROM [Customers] WHERE [City] = {city} AND [ContactTitle] = {contactTitle}")),
-            ss => ss.Set<Customer>().Where(x => x.City == city && x.ContactTitle == contactTitle)
-                .Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQuery<UnmappedCustomer>(
+                        NormalizeDelimitersInInterpolatedString(
+                            $"SELECT * FROM [Customers] WHERE [City] = {city} AND [ContactTitle] = {contactTitle}"
+                        )
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == city && x.ContactTitle == contactTitle)
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQuery_queryable_with_parameters_inline_interpolated(bool async)
-        => AssertQuery(
+    public virtual Task SqlQuery_queryable_with_parameters_inline_interpolated(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQuery<UnmappedCustomer>(
-                NormalizeDelimitersInInterpolatedString(
-                    $"SELECT * FROM [Customers] WHERE [City] = {"London"} AND [ContactTitle] = {"Sales Representative"}")),
-            ss => ss.Set<Customer>().Where(x => x.City == "London" && x.ContactTitle == "Sales Representative")
-                .Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQuery<UnmappedCustomer>(
+                        NormalizeDelimitersInInterpolatedString(
+                            $"SELECT * FROM [Customers] WHERE [City] = {"London"} AND [ContactTitle] = {"Sales Representative"}"
+                        )
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == "London" && x.ContactTitle == "Sales Representative")
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task SqlQuery_queryable_multiple_composed_with_parameters_and_closure_parameters_interpolated(
-        bool async)
+        bool async
+    )
     {
         var city = "London";
         var startDate = new DateTime(1997, 1, 1);
@@ -601,23 +871,31 @@ FROM [Customers]"))
 
         await AssertQuery(
             async,
-            _ => from c in context.Database.SqlQueryRaw<UnmappedCustomer>(
-                     NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = {0}"), city)
-                 from o in context.Database.SqlQuery<UnmappedOrder>(
-                     NormalizeDelimitersInInterpolatedString(
-                         $"SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {startDate} AND {endDate}"))
-                 where c.CustomerID == o.CustomerID
-                 select new { c, o },
-            ss => from c in ss.Set<Customer>().Where(x => x.City == city)
-                  from o in ss.Set<Order>().Where(x => x.OrderDate >= startDate && x.OrderDate <= endDate)
-                  where c.CustomerID == o.CustomerID
-                  select new { c = UnmappedCustomer.FromCustomer(c), o = UnmappedOrder.FromOrder(o) },
+            _ =>
+                from c in context.Database.SqlQueryRaw<UnmappedCustomer>(
+                    NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = {0}"),
+                    city
+                )
+                from o in context.Database.SqlQuery<UnmappedOrder>(
+                    NormalizeDelimitersInInterpolatedString(
+                        $"SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {startDate} AND {endDate}"
+                    )
+                )
+                where c.CustomerID == o.CustomerID
+                select new { c, o },
+            ss =>
+                from c in ss.Set<Customer>().Where(x => x.City == city)
+                from o in ss.Set<Order>()
+                    .Where(x => x.OrderDate >= startDate && x.OrderDate <= endDate)
+                where c.CustomerID == o.CustomerID
+                select new { c = UnmappedCustomer.FromCustomer(c), o = UnmappedOrder.FromOrder(o) },
             elementSorter: e => (e.c.CustomerID, e.o.OrderID),
             elementAsserter: (l, r) =>
             {
                 AssertUnmappedCustomers(l.c, r.c);
                 AssertUnmappedOrders(l.o, r.o);
-            });
+            }
+        );
 
         city = "Berlin";
         startDate = new DateTime(1998, 4, 1);
@@ -625,23 +903,31 @@ FROM [Customers]"))
 
         await AssertQuery(
             async,
-            _ => from c in context.Database.SqlQueryRaw<UnmappedCustomer>(
-                     NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = {0}"), city)
-                 from o in context.Database.SqlQuery<UnmappedOrder>(
-                     NormalizeDelimitersInInterpolatedString(
-                         $"SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {startDate} AND {endDate}"))
-                 where c.CustomerID == o.CustomerID
-                 select new { c, o },
-            ss => from c in ss.Set<Customer>().Where(x => x.City == city)
-                  from o in ss.Set<Order>().Where(x => x.OrderDate >= startDate && x.OrderDate <= endDate)
-                  where c.CustomerID == o.CustomerID
-                  select new { c = UnmappedCustomer.FromCustomer(c), o = UnmappedOrder.FromOrder(o) },
+            _ =>
+                from c in context.Database.SqlQueryRaw<UnmappedCustomer>(
+                    NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = {0}"),
+                    city
+                )
+                from o in context.Database.SqlQuery<UnmappedOrder>(
+                    NormalizeDelimitersInInterpolatedString(
+                        $"SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {startDate} AND {endDate}"
+                    )
+                )
+                where c.CustomerID == o.CustomerID
+                select new { c, o },
+            ss =>
+                from c in ss.Set<Customer>().Where(x => x.City == city)
+                from o in ss.Set<Order>()
+                    .Where(x => x.OrderDate >= startDate && x.OrderDate <= endDate)
+                where c.CustomerID == o.CustomerID
+                select new { c = UnmappedCustomer.FromCustomer(c), o = UnmappedOrder.FromOrder(o) },
             elementSorter: e => (e.c.CustomerID, e.o.OrderID),
             elementAsserter: (l, r) =>
             {
                 AssertUnmappedCustomers(l.c, r.c);
                 AssertUnmappedOrders(l.o, r.o);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -652,13 +938,23 @@ FROM [Customers]"))
 
         return AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedEmployee>(
-                NormalizeDelimitersInRawString(
-                    // ReSharper disable once ExpressionIsAlwaysNull
-                    "SELECT * FROM [Employees] WHERE [ReportsTo] = {0} OR ([ReportsTo] IS NULL AND {0} IS NULL)"), reportsTo),
-            ss => ss.Set<Employee>().Where(x => x.ReportsTo == reportsTo).Select(e => UnmappedEmployee.FromEmployee(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedEmployee>(
+                        NormalizeDelimitersInRawString(
+                            // ReSharper disable once ExpressionIsAlwaysNull
+                            "SELECT * FROM [Employees] WHERE [ReportsTo] = {0} OR ([ReportsTo] IS NULL AND {0} IS NULL)"
+                        ),
+                        reportsTo
+                    ),
+            ss =>
+                ss.Set<Employee>()
+                    .Where(x => x.ReportsTo == reportsTo)
+                    .Select(e => UnmappedEmployee.FromEmployee(e)),
             elementSorter: e => e.EmployeeID,
-            elementAsserter: AssertUnmappedEmployees);
+            elementAsserter: AssertUnmappedEmployees
+        );
     }
 
     [ConditionalTheory]
@@ -669,14 +965,15 @@ FROM [Customers]"))
         var contactTitle = "Sales Representative";
 
         using var context = CreateContext();
-        var query = context.Database.SqlQueryRaw<UnmappedCustomer>(
-                NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = {0}"), city)
+        var query = context
+            .Database.SqlQueryRaw<UnmappedCustomer>(
+                NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = {0}"),
+                city
+            )
             .Where(c => c.ContactTitle == contactTitle);
         var queryString = query.ToQueryString();
 
-        var actual = async
-            ? await query.ToArrayAsync()
-            : query.ToArray();
+        var actual = async ? await query.ToArrayAsync() : query.ToArray();
 
         Assert.Equal(3, actual.Length);
         Assert.True(actual.All(c => c.City == "London"));
@@ -687,28 +984,52 @@ FROM [Customers]"))
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task SqlQueryRaw_queryable_simple_cache_key_includes_query_string(bool async)
+    public virtual async Task SqlQueryRaw_queryable_simple_cache_key_includes_query_string(
+        bool async
+    )
     {
         await AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = 'London'")),
-            ss => ss.Set<Customer>().Where(x => x.City == "London").Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            "SELECT * FROM [Customers] WHERE [City] = 'London'"
+                        )
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == "London")
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
         await AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = 'Seattle'")),
-            ss => ss.Set<Customer>().Where(x => x.City == "Seattle").Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            "SELECT * FROM [Customers] WHERE [City] = 'Seattle'"
+                        )
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == "Seattle")
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task SqlQueryRaw_queryable_with_parameters_cache_key_includes_parameters(bool async)
+    public virtual async Task SqlQueryRaw_queryable_with_parameters_cache_key_includes_parameters(
+        bool async
+    )
     {
         var city = "London";
         var contactTitle = "Sales Representative";
@@ -716,58 +1037,93 @@ FROM [Customers]"))
 
         await AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(NormalizeDelimitersInRawString(sql), city, contactTitle),
-            ss => ss.Set<Customer>().Where(x => x.City == city && x.ContactTitle == contactTitle)
-                .Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(sql),
+                        city,
+                        contactTitle
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == city && x.ContactTitle == contactTitle)
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
         city = "Madrid";
         contactTitle = "Accounting Manager";
 
         await AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(NormalizeDelimitersInRawString(sql), city, contactTitle),
-            ss => ss.Set<Customer>().Where(x => x.City == city && x.ContactTitle == contactTitle)
-                .Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(sql),
+                        city,
+                        contactTitle
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == city && x.ContactTitle == contactTitle)
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQueryRaw_queryable_simple_as_no_tracking_not_composed(bool async)
-        => AssertQuery(
+    public virtual Task SqlQueryRaw_queryable_simple_as_no_tracking_not_composed(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                    NormalizeDelimitersInRawString("SELECT * FROM [Customers]"))
-                .AsNoTracking(),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
+                    )
+                    .AsNoTracking(),
             ss => ss.Set<Customer>().Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task SqlQueryRaw_queryable_simple_projection_composed(bool async)
     {
         using var context = CreateContext();
-        var boolMapping = (RelationalTypeMapping)context.GetService<ITypeMappingSource>().FindMapping(typeof(bool));
+        var boolMapping = (RelationalTypeMapping)
+            context.GetService<ITypeMappingSource>().FindMapping(typeof(bool));
         var boolLiteral = boolMapping.GenerateSqlLiteral(true);
 
         await AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedProduct>(
-                    NormalizeDelimitersInRawString(
-                        @"SELECT *
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedProduct>(
+                        NormalizeDelimitersInRawString(
+                            @"SELECT *
 FROM [Products]
 WHERE [Discontinued] <> "
-                        + boolLiteral
-                        + @"
-AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
-                .Select(p => p.ProductName),
-            ss => ss.Set<Product>()
-                .Where(x => x.Discontinued != true && (x.UnitsInStock + x.UnitsOnOrder) < x.ReorderLevel)
-                .Select(x => x.ProductName));
+                                + boolLiteral
+                                + @"
+AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
+                        )
+                    )
+                    .Select(p => p.ProductName),
+            ss =>
+                ss.Set<Product>()
+                    .Where(x =>
+                        x.Discontinued != true && (x.UnitsInStock + x.UnitsOnOrder) < x.ReorderLevel
+                    )
+                    .Select(x => x.ProductName)
+        );
     }
 
     [ConditionalTheory]
@@ -776,44 +1132,61 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
     {
         using var context = CreateContext();
         var query = context.Database.SqlQueryRaw<UnmappedCustomer>(
-            NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [ContactName] LIKE '%z%'"));
+            NormalizeDelimitersInRawString(
+                "SELECT * FROM [Customers] WHERE [ContactName] LIKE '%z%'"
+            )
+        );
 
-        var actual = async
-            ? await query.ToArrayAsync()
-            : query.ToArray();
+        var actual = async ? await query.ToArrayAsync() : query.ToArray();
 
         Assert.Equal(14, actual.Length);
 
-        query = context.Database.SqlQueryRaw<UnmappedCustomer>(NormalizeDelimitersInRawString("SELECT * FROM [Customers]"));
-        actual = async
-            ? await query.ToArrayAsync()
-            : query.ToArray();
+        query = context.Database.SqlQueryRaw<UnmappedCustomer>(
+            NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
+        );
+        actual = async ? await query.ToArrayAsync() : query.ToArray();
 
         Assert.Equal(91, actual.Length);
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQueryRaw_composed_with_predicate(bool async)
-        => AssertQuery(
+    public virtual Task SqlQueryRaw_composed_with_predicate(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                    NormalizeDelimitersInRawString("SELECT * FROM [Customers]"))
-                .Where(c => c.ContactName.Substring(0, 1) == c.CompanyName.Substring(0, 1)),
-            ss => ss.Set<Customer>().Where(c => c.ContactName.Substring(0, 1) == c.CompanyName.Substring(0, 1)).Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
+                    )
+                    .Where(c => c.ContactName.Substring(0, 1) == c.CompanyName.Substring(0, 1)),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(c => c.ContactName.Substring(0, 1) == c.CompanyName.Substring(0, 1))
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQueryRaw_composed_with_empty_predicate(bool async)
-        => AssertQuery(
+    public virtual Task SqlQueryRaw_composed_with_empty_predicate(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                    NormalizeDelimitersInRawString("SELECT * FROM [Customers]"))
-                .Where(c => c.ContactName == c.CompanyName),
-            ss => ss.Set<Customer>().Where(c => c.ContactName == c.CompanyName).Select(e => UnmappedCustomer.FromCustomer(e)),
-            assertEmpty: true);
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
+                    )
+                    .Where(c => c.ContactName == c.CompanyName),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(c => c.ContactName == c.CompanyName)
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
+            assertEmpty: true
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -823,11 +1196,22 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
 
         await AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = @city"), parameter),
-            ss => ss.Set<Customer>().Where(x => x.City == "London").Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            "SELECT * FROM [Customers] WHERE [City] = @city"
+                        ),
+                        parameter
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == "London")
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
     }
 
     [ConditionalTheory]
@@ -838,11 +1222,22 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
 
         await AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = @city"), parameter),
-            ss => ss.Set<Customer>().Where(x => x.City == "London").Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            "SELECT * FROM [Customers] WHERE [City] = @city"
+                        ),
+                        parameter
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == "London")
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
     }
 
     [ConditionalTheory]
@@ -856,23 +1251,45 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
 
         await AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                NormalizeDelimitersInRawString(
-                    "SELECT * FROM [Customers] WHERE [City] = {0} AND [ContactTitle] = @title"), city, titleParameter),
-            ss => ss.Set<Customer>().Where(x => x.City == city && x.ContactTitle == title).Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            "SELECT * FROM [Customers] WHERE [City] = {0} AND [ContactTitle] = @title"
+                        ),
+                        city,
+                        titleParameter
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == city && x.ContactTitle == title)
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
         var cityParameter = CreateDbParameter("@city", city);
 
         await AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                NormalizeDelimitersInRawString(
-                    "SELECT * FROM [Customers] WHERE [City] = @city AND [ContactTitle] = {1}"), cityParameter, title),
-            ss => ss.Set<Customer>().Where(x => x.City == city && x.ContactTitle == title).Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            "SELECT * FROM [Customers] WHERE [City] = @city AND [ContactTitle] = {1}"
+                        ),
+                        cityParameter,
+                        title
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == city && x.ContactTitle == title)
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
     }
 
     [ConditionalTheory]
@@ -883,18 +1300,16 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
         var parameter = CreateDbParameter("@id", "ALFKI");
 
         var query = context.Database.SqlQueryRaw<UnmappedCustomer>(
-            NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [CustomerID] = @id"), parameter);
+            NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [CustomerID] = @id"),
+            parameter
+        );
 
         // ReSharper disable PossibleMultipleEnumeration
-        var result1 = async
-            ? await query.ToArrayAsync()
-            : query.ToArray();
+        var result1 = async ? await query.ToArrayAsync() : query.ToArray();
 
         Assert.Single(result1);
 
-        var result2 = async
-            ? await query.ToArrayAsync()
-            : query.ToArray();
+        var result2 = async ? await query.ToArrayAsync() : query.ToArray();
         // ReSharper restore PossibleMultipleEnumeration
 
         Assert.Single(result2);
@@ -908,11 +1323,21 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
 
         await AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQuery<UnmappedCustomer>(
-                NormalizeDelimitersInInterpolatedString($"SELECT * FROM [Customers] WHERE [CustomerID] = {parameter}")),
-            ss => ss.Set<Customer>().Where(x => x.CustomerID == "ALFKI").Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQuery<UnmappedCustomer>(
+                        NormalizeDelimitersInInterpolatedString(
+                            $"SELECT * FROM [Customers] WHERE [CustomerID] = {parameter}"
+                        )
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.CustomerID == "ALFKI")
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
     }
 
     [ConditionalTheory]
@@ -923,11 +1348,21 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
 
         await AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQuery<UnmappedCustomer>(
-                NormalizeDelimitersInInterpolatedString($"SELECT * FROM [Customers] WHERE [CustomerID] = {parameter}")),
-            ss => ss.Set<Customer>().Where(x => x.CustomerID == "ALFKI").Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQuery<UnmappedCustomer>(
+                        NormalizeDelimitersInInterpolatedString(
+                            $"SELECT * FROM [Customers] WHERE [CustomerID] = {parameter}"
+                        )
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.CustomerID == "ALFKI")
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
     }
 
     [ConditionalTheory]
@@ -938,34 +1373,43 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
         var min = 10300;
         var max = 10400;
 
-        var query1 = context.Database.SqlQuery<UnmappedOrder>(
-                NormalizeDelimitersInInterpolatedString($"SELECT * FROM [Orders] WHERE [OrderID] >= {min}"))
+        var query1 = context
+            .Database.SqlQuery<UnmappedOrder>(
+                NormalizeDelimitersInInterpolatedString(
+                    $"SELECT * FROM [Orders] WHERE [OrderID] >= {min}"
+                )
+            )
             .Select(i => i.OrderID);
 
-        var actual1 = async
-            ? await query1.ToArrayAsync()
-            : query1.ToArray();
+        var actual1 = async ? await query1.ToArrayAsync() : query1.ToArray();
 
-        var query2 = context.Database.SqlQueryRaw<UnmappedOrder>(NormalizeDelimitersInRawString("SELECT * FROM [Orders]"))
+        var query2 = context
+            .Database.SqlQueryRaw<UnmappedOrder>(
+                NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
+            )
             .Where(o => o.OrderID <= max && query1.Contains(o.OrderID))
             .Select(o => o.OrderID);
 
-        var actual2 = async
-            ? await query2.ToArrayAsync()
-            : query2.ToArray();
+        var actual2 = async ? await query2.ToArrayAsync() : query2.ToArray();
 
-        var query3 = context.Database.SqlQueryRaw<UnmappedOrder>(NormalizeDelimitersInRawString("SELECT * FROM [Orders]"))
-            .Where(
-                o => o.OrderID <= max
-                    && context.Database.SqlQuery<UnmappedOrder>(
-                            NormalizeDelimitersInInterpolatedString($"SELECT * FROM [Orders] WHERE [OrderID] >= {min}"))
-                        .Select(i => i.OrderID)
-                        .Contains(o.OrderID))
+        var query3 = context
+            .Database.SqlQueryRaw<UnmappedOrder>(
+                NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
+            )
+            .Where(o =>
+                o.OrderID <= max
+                && context
+                    .Database.SqlQuery<UnmappedOrder>(
+                        NormalizeDelimitersInInterpolatedString(
+                            $"SELECT * FROM [Orders] WHERE [OrderID] >= {min}"
+                        )
+                    )
+                    .Select(i => i.OrderID)
+                    .Contains(o.OrderID)
+            )
             .Select(o => o.OrderID);
 
-        var actual3 = async
-            ? await query3.ToArrayAsync()
-            : query3.ToArray();
+        var actual3 = async ? await query3.ToArrayAsync() : query3.ToArray();
     }
 
     [ConditionalTheory]
@@ -977,11 +1421,20 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
 
         await AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedOrder>(
-                NormalizeDelimitersInRawString($"SELECT * FROM [{tableName}] WHERE [OrderID] < {{0}}"), max),
-            ss => ss.Set<Order>().Where(x => x.OrderID < max).Select(e => UnmappedOrder.FromOrder(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedOrder>(
+                        NormalizeDelimitersInRawString(
+                            $"SELECT * FROM [{tableName}] WHERE [OrderID] < {{0}}"
+                        ),
+                        max
+                    ),
+            ss =>
+                ss.Set<Order>().Where(x => x.OrderID < max).Select(e => UnmappedOrder.FromOrder(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedOrders);
+            elementAsserter: AssertUnmappedOrders
+        );
     }
 
     [ConditionalTheory]
@@ -992,45 +1445,73 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
 
         return AssertQuery(
             async,
-            _ => context.Database.SqlQueryRaw<UnmappedCustomer>(
-                    NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = 'London'"))
-                .Concat(
-                    context.Database.SqlQueryRaw<UnmappedCustomer>(
-                        NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = 'Berlin'"))),
-            ss => ss.Set<Customer>().Where(x => x.City == "London")
-                .Concat(ss.Set<Customer>().Where(x => x.City == "Berlin")).Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                context
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            "SELECT * FROM [Customers] WHERE [City] = 'London'"
+                        )
+                    )
+                    .Concat(
+                        context.Database.SqlQueryRaw<UnmappedCustomer>(
+                            NormalizeDelimitersInRawString(
+                                "SELECT * FROM [Customers] WHERE [City] = 'Berlin'"
+                            )
+                        )
+                    ),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == "London")
+                    .Concat(ss.Set<Customer>().Where(x => x.City == "Berlin"))
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Line_endings_after_Select(bool async)
-        => AssertQuery(
+    public virtual Task Line_endings_after_Select(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                    NormalizeDelimitersInRawString("SELECT" + Environment.NewLine + "* FROM [Customers]"))
-                .Where(e => e.City == "Seattle"),
-            ss => ss.Set<Customer>().Where(x => x.City == "Seattle").Select(e => UnmappedCustomer.FromCustomer(e)),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            "SELECT" + Environment.NewLine + "* FROM [Customers]"
+                        )
+                    )
+                    .Where(e => e.City == "Seattle"),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(x => x.City == "Seattle")
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQueryRaw_queryable_simple_projection_not_composed(bool async)
-        => AssertQuery(
+    public virtual Task SqlQueryRaw_queryable_simple_projection_not_composed(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                    NormalizeDelimitersInRawString("SELECT * FROM [Customers]"))
-                .Select(c => new { c.CustomerID, c.City })
-                .AsNoTracking(),
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
+                    )
+                    .Select(c => new { c.CustomerID, c.City })
+                    .AsNoTracking(),
             ss => ss.Set<Customer>().Select(c => new { c.CustomerID, c.City }),
             elementSorter: e => e.CustomerID,
             elementAsserter: (e, a) =>
             {
                 Assert.Equal(e.CustomerID, a.CustomerID);
                 Assert.Equal(e.City, a.City);
-            });
+            }
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1040,20 +1521,36 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
 
         return AssertQuery(
             async,
-            _ => context.Database.SqlQueryRaw<UnmappedOrder>(
-                NormalizeDelimitersInRawString("SELECT * FROM [Orders]")).Where(
-                o => context.Database.SqlQueryRaw<UnmappedCustomer>(
-                        NormalizeDelimitersInRawString(@"SELECT * FROM [Customers] WHERE [City] = @city"),
-                        // ReSharper disable once FormatStringProblem
-                        CreateDbParameter("@city", "London"))
-                    .Select(c => c.CustomerID)
-                    .Contains(o.CustomerID)),
-            ss => ss.Set<Order>().Select(e => UnmappedOrder.FromOrder(e)).Where(
-                o => ss.Set<Customer>().Select(e => UnmappedCustomer.FromCustomer(e)).Where(x => x.City == "London")
-                    .Select(c => c.CustomerID)
-                    .Contains(o.CustomerID)),
+            _ =>
+                context
+                    .Database.SqlQueryRaw<UnmappedOrder>(
+                        NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
+                    )
+                    .Where(o =>
+                        context
+                            .Database.SqlQueryRaw<UnmappedCustomer>(
+                                NormalizeDelimitersInRawString(
+                                    @"SELECT * FROM [Customers] WHERE [City] = @city"
+                                ),
+                                // ReSharper disable once FormatStringProblem
+                                CreateDbParameter("@city", "London")
+                            )
+                            .Select(c => c.CustomerID)
+                            .Contains(o.CustomerID)
+                    ),
+            ss =>
+                ss.Set<Order>()
+                    .Select(e => UnmappedOrder.FromOrder(e))
+                    .Where(o =>
+                        ss.Set<Customer>()
+                            .Select(e => UnmappedCustomer.FromCustomer(e))
+                            .Where(x => x.City == "London")
+                            .Select(c => c.CustomerID)
+                            .Contains(o.CustomerID)
+                    ),
             elementSorter: e => e.OrderID,
-            elementAsserter: AssertUnmappedOrders);
+            elementAsserter: AssertUnmappedOrders
+        );
     }
 
     [ConditionalTheory]
@@ -1064,20 +1561,36 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
 
         return AssertQuery(
             async,
-            _ => context.Database.SqlQueryRaw<UnmappedOrder>(
-                NormalizeDelimitersInRawString("SELECT * FROM [Orders]")).Where(
-                o => context.Database.SqlQueryRaw<UnmappedCustomer>(
-                        NormalizeDelimitersInRawString(@"SELECT * FROM [Customers] WHERE [City] = {0}"),
-                        // ReSharper disable once FormatStringProblem
-                        CreateDbParameter(null, "London"))
-                    .Select(c => c.CustomerID)
-                    .Contains(o.CustomerID)),
-            ss => ss.Set<Order>().Select(e => UnmappedOrder.FromOrder(e)).Where(
-                o => ss.Set<Customer>().Select(e => UnmappedCustomer.FromCustomer(e)).Where(x => x.City == "London")
-                    .Select(c => c.CustomerID)
-                    .Contains(o.CustomerID)),
+            _ =>
+                context
+                    .Database.SqlQueryRaw<UnmappedOrder>(
+                        NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
+                    )
+                    .Where(o =>
+                        context
+                            .Database.SqlQueryRaw<UnmappedCustomer>(
+                                NormalizeDelimitersInRawString(
+                                    @"SELECT * FROM [Customers] WHERE [City] = {0}"
+                                ),
+                                // ReSharper disable once FormatStringProblem
+                                CreateDbParameter(null, "London")
+                            )
+                            .Select(c => c.CustomerID)
+                            .Contains(o.CustomerID)
+                    ),
+            ss =>
+                ss.Set<Order>()
+                    .Select(e => UnmappedOrder.FromOrder(e))
+                    .Where(o =>
+                        ss.Set<Customer>()
+                            .Select(e => UnmappedCustomer.FromCustomer(e))
+                            .Where(x => x.City == "London")
+                            .Select(c => c.CustomerID)
+                            .Contains(o.CustomerID)
+                    ),
             elementSorter: e => e.OrderID,
-            elementAsserter: AssertUnmappedOrders);
+            elementAsserter: AssertUnmappedOrders
+        );
     }
 
     [ConditionalTheory]
@@ -1088,20 +1601,36 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
 
         return AssertQuery(
             async,
-            _ => context.Database.SqlQueryRaw<UnmappedOrder>(
-                NormalizeDelimitersInRawString("SELECT * FROM [Orders]")).Where(
-                o => context.Database.SqlQueryRaw<UnmappedCustomer>(
-                        NormalizeDelimitersInRawString(@"SELECT * FROM [Customers] WHERE [City] = {0}"),
-                        // ReSharper disable once FormatStringProblem
-                        CreateDbParameter("@city", "London"))
-                    .Select(c => c.CustomerID)
-                    .Contains(o.CustomerID)),
-            ss => ss.Set<Order>().Select(e => UnmappedOrder.FromOrder(e)).Where(
-                o => ss.Set<Customer>().Select(e => UnmappedCustomer.FromCustomer(e)).Where(x => x.City == "London")
-                    .Select(c => c.CustomerID)
-                    .Contains(o.CustomerID)),
+            _ =>
+                context
+                    .Database.SqlQueryRaw<UnmappedOrder>(
+                        NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
+                    )
+                    .Where(o =>
+                        context
+                            .Database.SqlQueryRaw<UnmappedCustomer>(
+                                NormalizeDelimitersInRawString(
+                                    @"SELECT * FROM [Customers] WHERE [City] = {0}"
+                                ),
+                                // ReSharper disable once FormatStringProblem
+                                CreateDbParameter("@city", "London")
+                            )
+                            .Select(c => c.CustomerID)
+                            .Contains(o.CustomerID)
+                    ),
+            ss =>
+                ss.Set<Order>()
+                    .Select(e => UnmappedOrder.FromOrder(e))
+                    .Where(o =>
+                        ss.Set<Customer>()
+                            .Select(e => UnmappedCustomer.FromCustomer(e))
+                            .Where(x => x.City == "London")
+                            .Select(c => c.CustomerID)
+                            .Contains(o.CustomerID)
+                    ),
             elementSorter: e => e.OrderID,
-            elementAsserter: AssertUnmappedOrders);
+            elementAsserter: AssertUnmappedOrders
+        );
     }
 
     [ConditionalTheory]
@@ -1114,74 +1643,116 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"))
 
         await AssertQuery(
             async,
-            _ => context.Database.SqlQueryRaw<UnmappedOrder>(
-                NormalizeDelimitersInRawString("SELECT * FROM [Orders]")).Where(
-                o => context.Database.SqlQueryRaw<UnmappedCustomer>(
-                        NormalizeDelimitersInRawString(@"SELECT * FROM [Customers] WHERE [City] = {0} AND [ContactTitle] = @title"),
-                        city,
-                        // ReSharper disable once FormatStringProblem
-                        CreateDbParameter("@title", title))
-                    .Select(c => c.CustomerID)
-                    .Contains(o.CustomerID)),
-            ss => ss.Set<Order>().Select(e => UnmappedOrder.FromOrder(e)).Where(
-                o => ss.Set<Customer>().Select(e => UnmappedCustomer.FromCustomer(e)).Where(x => x.City == city && x.ContactTitle == title)
-                    .Select(c => c.CustomerID)
-                    .Contains(o.CustomerID)),
+            _ =>
+                context
+                    .Database.SqlQueryRaw<UnmappedOrder>(
+                        NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
+                    )
+                    .Where(o =>
+                        context
+                            .Database.SqlQueryRaw<UnmappedCustomer>(
+                                NormalizeDelimitersInRawString(
+                                    @"SELECT * FROM [Customers] WHERE [City] = {0} AND [ContactTitle] = @title"
+                                ),
+                                city,
+                                // ReSharper disable once FormatStringProblem
+                                CreateDbParameter("@title", title)
+                            )
+                            .Select(c => c.CustomerID)
+                            .Contains(o.CustomerID)
+                    ),
+            ss =>
+                ss.Set<Order>()
+                    .Select(e => UnmappedOrder.FromOrder(e))
+                    .Where(o =>
+                        ss.Set<Customer>()
+                            .Select(e => UnmappedCustomer.FromCustomer(e))
+                            .Where(x => x.City == city && x.ContactTitle == title)
+                            .Select(c => c.CustomerID)
+                            .Contains(o.CustomerID)
+                    ),
             elementSorter: e => e.OrderID,
-            elementAsserter: AssertUnmappedOrders);
+            elementAsserter: AssertUnmappedOrders
+        );
 
         await AssertQuery(
             async,
-            _ => context.Database.SqlQueryRaw<UnmappedOrder>(
-                NormalizeDelimitersInRawString("SELECT * FROM [Orders]")).Where(
-                o => context.Database.SqlQueryRaw<UnmappedCustomer>(
-                        NormalizeDelimitersInRawString(@"SELECT * FROM [Customers] WHERE [City] = @city AND [ContactTitle] = {1}"),
-                        // ReSharper disable once FormatStringProblem
-                        CreateDbParameter("@city", city),
-                        title)
-                    .Select(c => c.CustomerID)
-                    .Contains(o.CustomerID)),
-            ss => ss.Set<Order>().Select(e => UnmappedOrder.FromOrder(e)).Where(
-                o => ss.Set<Customer>().Select(e => UnmappedCustomer.FromCustomer(e)).Where(x => x.City == city && x.ContactTitle == title)
-                    .Select(c => c.CustomerID)
-                    .Contains(o.CustomerID)),
+            _ =>
+                context
+                    .Database.SqlQueryRaw<UnmappedOrder>(
+                        NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
+                    )
+                    .Where(o =>
+                        context
+                            .Database.SqlQueryRaw<UnmappedCustomer>(
+                                NormalizeDelimitersInRawString(
+                                    @"SELECT * FROM [Customers] WHERE [City] = @city AND [ContactTitle] = {1}"
+                                ),
+                                // ReSharper disable once FormatStringProblem
+                                CreateDbParameter("@city", city),
+                                title
+                            )
+                            .Select(c => c.CustomerID)
+                            .Contains(o.CustomerID)
+                    ),
+            ss =>
+                ss.Set<Order>()
+                    .Select(e => UnmappedOrder.FromOrder(e))
+                    .Where(o =>
+                        ss.Set<Customer>()
+                            .Select(e => UnmappedCustomer.FromCustomer(e))
+                            .Where(x => x.City == city && x.ContactTitle == title)
+                            .Select(c => c.CustomerID)
+                            .Contains(o.CustomerID)
+                    ),
             elementSorter: e => e.OrderID,
-            elementAsserter: AssertUnmappedOrders);
+            elementAsserter: AssertUnmappedOrders
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SqlQueryRaw_composed_with_common_table_expression(bool async)
-        => AssertQuery(
+    public virtual Task SqlQueryRaw_composed_with_common_table_expression(bool async) =>
+        AssertQuery(
             async,
-            _ => Fixture.CreateContext().Database.SqlQueryRaw<UnmappedCustomer>(
-                    NormalizeDelimitersInRawString(
-                        """
+            _ =>
+                Fixture
+                    .CreateContext()
+                    .Database.SqlQueryRaw<UnmappedCustomer>(
+                        NormalizeDelimitersInRawString(
+                            """
 WITH [Customers2] AS (
     SELECT * FROM [Customers]
 )
 SELECT * FROM [Customers2]
-"""))
-                .Where(c => c.ContactName.Contains("z")),
-            ss => ss.Set<Customer>().Where(c => c.ContactName.Contains("z")).Select(e => UnmappedCustomer.FromCustomer(e)),
+"""
+                        )
+                    )
+                    .Where(c => c.ContactName.Contains("z")),
+            ss =>
+                ss.Set<Customer>()
+                    .Where(c => c.ContactName.Contains("z"))
+                    .Select(e => UnmappedCustomer.FromCustomer(e)),
             elementSorter: e => e.CustomerID,
-            elementAsserter: AssertUnmappedCustomers);
+            elementAsserter: AssertUnmappedCustomers
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task Multiple_occurrences_of_SqlQuery_with_db_parameter_adds_parameter_only_once(bool async)
+    public virtual async Task Multiple_occurrences_of_SqlQuery_with_db_parameter_adds_parameter_only_once(
+        bool async
+    )
     {
         using var context = CreateContext();
         var city = "Seattle";
         var qqlQuery = context.Database.SqlQueryRaw<UnmappedCustomer>(
             NormalizeDelimitersInRawString(@"SELECT * FROM [Customers] WHERE [City] = {0}"),
-            CreateDbParameter("city", city));
+            CreateDbParameter("city", city)
+        );
 
         var query = qqlQuery.Intersect(qqlQuery);
 
-        var actual = async
-            ? await query.ToArrayAsync()
-            : query.ToArray();
+        var actual = async ? await query.ToArrayAsync() : query.ToArray();
 
         Assert.Single(actual);
     }
@@ -1193,8 +1764,15 @@ SELECT * FROM [Customers2]
 
         Assert.Equal(
             CoreStrings.NavigationNotAddedAdHoc("Post", "Blog", "Blog"),
-            Assert.Throws<InvalidOperationException>(
-                () => context.Database.SqlQueryRaw<Post>(NormalizeDelimitersInRawString(@"SELECT * FROM [Posts]"))).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () =>
+                        context.Database.SqlQueryRaw<Post>(
+                            NormalizeDelimitersInRawString(@"SELECT * FROM [Posts]")
+                        )
+                )
+                .Message
+        );
     }
 
     [ConditionalFact] // Issue #30056
@@ -1204,8 +1782,15 @@ SELECT * FROM [Customers2]
 
         Assert.Equal(
             CoreStrings.NavigationNotAddedAdHoc("Blog", "Posts", "List<Post>"),
-            Assert.Throws<InvalidOperationException>(
-                () => context.Database.SqlQueryRaw<Blog>(NormalizeDelimitersInRawString(@"SELECT * FROM [Blogs]"))).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () =>
+                        context.Database.SqlQueryRaw<Blog>(
+                            NormalizeDelimitersInRawString(@"SELECT * FROM [Blogs]")
+                        )
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1215,8 +1800,15 @@ SELECT * FROM [Customers2]
 
         Assert.Equal(
             CoreStrings.PropertyNotAddedAdHoc("Person", "Contact", "ContactInfo"),
-            Assert.Throws<InvalidOperationException>(
-                () => context.Database.SqlQueryRaw<Person>(NormalizeDelimitersInRawString(@"SELECT * FROM [People]"))).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () =>
+                        context.Database.SqlQueryRaw<Person>(
+                            NormalizeDelimitersInRawString(@"SELECT * FROM [People]")
+                        )
+                )
+                .Message
+        );
     }
 
     protected class Blog
@@ -1298,14 +1890,13 @@ SELECT * FROM [Customers2]
         Assert.Equal(l.PhotoPath, r.PhotoPath);
     }
 
-    protected string NormalizeDelimitersInRawString(string sql)
-        => Fixture.TestStore.NormalizeDelimitersInRawString(sql);
+    protected string NormalizeDelimitersInRawString(string sql) =>
+        Fixture.TestStore.NormalizeDelimitersInRawString(sql);
 
-    protected FormattableString NormalizeDelimitersInInterpolatedString(FormattableString sql)
-        => Fixture.TestStore.NormalizeDelimitersInInterpolatedString(sql);
+    protected FormattableString NormalizeDelimitersInInterpolatedString(FormattableString sql) =>
+        Fixture.TestStore.NormalizeDelimitersInInterpolatedString(sql);
 
     protected abstract DbParameter CreateDbParameter(string name, object value);
 
-    protected NorthwindContext CreateContext()
-        => Fixture.CreateContext();
+    protected NorthwindContext CreateContext() => Fixture.CreateContext();
 }

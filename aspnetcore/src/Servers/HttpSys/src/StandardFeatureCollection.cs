@@ -11,26 +11,30 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 internal sealed class StandardFeatureCollection : IFeatureCollection
 {
     private static readonly Func<RequestContext, object> _identityFunc = ReturnIdentity;
-    private static readonly Dictionary<Type, Func<RequestContext, object?>> _featureFuncLookup = new()
-    {
-        { typeof(IHttpRequestFeature), _identityFunc },
-        { typeof(IHttpRequestBodyDetectionFeature), _identityFunc },
-        { typeof(IHttpConnectionFeature), _identityFunc },
-        { typeof(IHttpResponseFeature), _identityFunc },
-        { typeof(IHttpResponseBodyFeature), _identityFunc },
-        { typeof(ITlsConnectionFeature), ctx => ctx.GetTlsConnectionFeature() },
-        { typeof(IHttpRequestLifetimeFeature), _identityFunc },
-        { typeof(IHttpAuthenticationFeature), _identityFunc },
-        { typeof(IHttpRequestIdentifierFeature), _identityFunc },
-        { typeof(RequestContext), ctx => ctx },
-        { typeof(IHttpMaxRequestBodySizeFeature), _identityFunc },
-        { typeof(IHttpBodyControlFeature), _identityFunc },
-        { typeof(IHttpSysRequestInfoFeature), _identityFunc },
-        { typeof(IHttpSysRequestTimingFeature), _identityFunc },
-        { typeof(IHttpResponseTrailersFeature), ctx => ctx.GetResponseTrailersFeature() },
-        { typeof(IHttpResetFeature), ctx => ctx.GetResetFeature() },
-        { typeof(IConnectionLifetimeNotificationFeature), ctx => ctx.GetConnectionLifetimeNotificationFeature() },
-    };
+    private static readonly Dictionary<Type, Func<RequestContext, object?>> _featureFuncLookup =
+        new()
+        {
+            { typeof(IHttpRequestFeature), _identityFunc },
+            { typeof(IHttpRequestBodyDetectionFeature), _identityFunc },
+            { typeof(IHttpConnectionFeature), _identityFunc },
+            { typeof(IHttpResponseFeature), _identityFunc },
+            { typeof(IHttpResponseBodyFeature), _identityFunc },
+            { typeof(ITlsConnectionFeature), ctx => ctx.GetTlsConnectionFeature() },
+            { typeof(IHttpRequestLifetimeFeature), _identityFunc },
+            { typeof(IHttpAuthenticationFeature), _identityFunc },
+            { typeof(IHttpRequestIdentifierFeature), _identityFunc },
+            { typeof(RequestContext), ctx => ctx },
+            { typeof(IHttpMaxRequestBodySizeFeature), _identityFunc },
+            { typeof(IHttpBodyControlFeature), _identityFunc },
+            { typeof(IHttpSysRequestInfoFeature), _identityFunc },
+            { typeof(IHttpSysRequestTimingFeature), _identityFunc },
+            { typeof(IHttpResponseTrailersFeature), ctx => ctx.GetResponseTrailersFeature() },
+            { typeof(IHttpResetFeature), ctx => ctx.GetResetFeature() },
+            {
+                typeof(IConnectionLifetimeNotificationFeature),
+                ctx => ctx.GetConnectionLifetimeNotificationFeature()
+            },
+        };
 
     private readonly RequestContext _featureContext;
 
@@ -75,10 +79,7 @@ internal sealed class StandardFeatureCollection : IFeatureCollection
             _featureFuncLookup.TryGetValue(key, out lookupFunc);
             return lookupFunc?.Invoke(_featureContext);
         }
-        set
-        {
-            throw new InvalidOperationException("The collection is read-only");
-        }
+        set { throw new InvalidOperationException("The collection is read-only"); }
     }
 
     private static object ReturnIdentity(RequestContext featureContext)

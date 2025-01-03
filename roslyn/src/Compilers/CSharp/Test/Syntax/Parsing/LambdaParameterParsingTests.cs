@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class LambdaParameterParsingTests : ParsingTests
     {
-        public LambdaParameterParsingTests(ITestOutputHelper output) : base(output) { }
+        public LambdaParameterParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {
@@ -30,29 +31,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void EndOfFileAfterOut()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C {
      void Goo() {
           System.Func<int, int> f = (out 
 ",
                 // (4,38): error CS1525: Invalid expression term 'out'
-                //           System.Func<int, int> f = (out 
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out").WithArguments("out").WithLocation(4, 38),
+                //           System.Func<int, int> f = (out
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out")
+                    .WithArguments("out")
+                    .WithLocation(4, 38),
                 // (4,38): error CS1026: ) expected
-                //           System.Func<int, int> f = (out 
+                //           System.Func<int, int> f = (out
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "out").WithLocation(4, 38),
                 // (4,38): error CS1003: Syntax error, ',' expected
-                //           System.Func<int, int> f = (out 
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(4, 38),
+                //           System.Func<int, int> f = (out
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
+                    .WithArguments(",")
+                    .WithLocation(4, 38),
                 // (4,41): error CS1002: ; expected
-                //           System.Func<int, int> f = (out 
+                //           System.Func<int, int> f = (out
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(4, 41),
                 // (4,41): error CS1513: } expected
-                //           System.Func<int, int> f = (out 
+                //           System.Func<int, int> f = (out
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 41),
                 // (4,41): error CS1513: } expected
-                //           System.Func<int, int> f = (out 
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 41));
+                //           System.Func<int, int> f = (out
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 41)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -138,20 +145,25 @@ class C {
         [Fact]
         public void EndOfFileAfterOutType()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C {
      void Goo() {
           System.Func<int, int> f = (out C
 ",
                 // (4,38): error CS1525: Invalid expression term 'out'
                 //           System.Func<int, int> f = (out C
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out").WithArguments("out").WithLocation(4, 38),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out")
+                    .WithArguments("out")
+                    .WithLocation(4, 38),
                 // (4,38): error CS1026: ) expected
                 //           System.Func<int, int> f = (out C
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "out").WithLocation(4, 38),
                 // (4,38): error CS1003: Syntax error, ',' expected
                 //           System.Func<int, int> f = (out C
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(4, 38),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
+                    .WithArguments(",")
+                    .WithLocation(4, 38),
                 // (4,42): error CS1002: ; expected
                 //           System.Func<int, int> f = (out C
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "C").WithLocation(4, 42),
@@ -163,7 +175,8 @@ class C {
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 43),
                 // (4,43): error CS1513: } expected
                 //           System.Func<int, int> f = (out C
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 43));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 43)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -257,20 +270,25 @@ class C {
         [Fact]
         public void EndOfFileAfterOutTypeIdentifier()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C {
      void Goo() {
           System.Func<int, int> f = (out C c
 ",
                 // (4,38): error CS1525: Invalid expression term 'out'
                 //           System.Func<int, int> f = (out C c
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out").WithArguments("out").WithLocation(4, 38),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out")
+                    .WithArguments("out")
+                    .WithLocation(4, 38),
                 // (4,38): error CS1026: ) expected
                 //           System.Func<int, int> f = (out C c
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "out").WithLocation(4, 38),
                 // (4,38): error CS1003: Syntax error, ',' expected
                 //           System.Func<int, int> f = (out C c
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(4, 38),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
+                    .WithArguments(",")
+                    .WithLocation(4, 38),
                 // (4,42): error CS1002: ; expected
                 //           System.Func<int, int> f = (out C c
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "C").WithLocation(4, 42),
@@ -282,7 +300,8 @@ class C {
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 45),
                 // (4,45): error CS1513: } expected
                 //           System.Func<int, int> f = (out C c
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 45));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 45)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -383,20 +402,25 @@ class C {
         [Fact]
         public void EndOfFileAfterOutTypeIdentifierParen()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C {
      void Goo() {
           System.Func<int, int> f = (out C c
 ",
                 // (4,38): error CS1525: Invalid expression term 'out'
                 //           System.Func<int, int> f = (out C c
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out").WithArguments("out").WithLocation(4, 38),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out")
+                    .WithArguments("out")
+                    .WithLocation(4, 38),
                 // (4,38): error CS1026: ) expected
                 //           System.Func<int, int> f = (out C c
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "out").WithLocation(4, 38),
                 // (4,38): error CS1003: Syntax error, ',' expected
                 //           System.Func<int, int> f = (out C c
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(4, 38),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
+                    .WithArguments(",")
+                    .WithLocation(4, 38),
                 // (4,42): error CS1002: ; expected
                 //           System.Func<int, int> f = (out C c
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "C").WithLocation(4, 42),
@@ -408,7 +432,8 @@ class C {
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 45),
                 // (4,45): error CS1513: } expected
                 //           System.Func<int, int> f = (out C c
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 45));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 45)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -509,20 +534,25 @@ class C {
         [Fact]
         public void EndOfFileAfterOutTypeIdentifierComma()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C {
      void Goo() {
           System.Func<int, int> f = (out C c,
 ",
                 // (4,38): error CS1525: Invalid expression term 'out'
                 //           System.Func<int, int> f = (out C c,
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out").WithArguments("out").WithLocation(4, 38),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out")
+                    .WithArguments("out")
+                    .WithLocation(4, 38),
                 // (4,38): error CS1026: ) expected
                 //           System.Func<int, int> f = (out C c,
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "out").WithLocation(4, 38),
                 // (4,38): error CS1003: Syntax error, ',' expected
                 //           System.Func<int, int> f = (out C c,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(4, 38),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
+                    .WithArguments(",")
+                    .WithLocation(4, 38),
                 // (4,42): error CS1002: ; expected
                 //           System.Func<int, int> f = (out C c,
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "C").WithLocation(4, 42),
@@ -537,7 +567,8 @@ class C {
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 46),
                 // (4,46): error CS1513: } expected
                 //           System.Func<int, int> f = (out C c,
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 46));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 46)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -644,16 +675,21 @@ class C {
         public void HangingLambdaParsing_Bug14167()
         {
             var tree = UsingNode(@"(int a, int b Main();");
-            tree.GetDiagnostics().Verify(
-                // (1,1): error CS1073: Unexpected token 'b'
-                // (int a, int b Main();
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int a, int ").WithArguments("b").WithLocation(1, 1),
-                // (1,9): error CS1525: Invalid expression term 'int'
-                // (int a, int b Main();
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int").WithArguments("int").WithLocation(1, 9),
-                // (1,13): error CS1026: ) expected
-                // (int a, int b Main();
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, "b").WithLocation(1, 13)
+            tree.GetDiagnostics()
+                .Verify(
+                    // (1,1): error CS1073: Unexpected token 'b'
+                    // (int a, int b Main();
+                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int a, int ")
+                        .WithArguments("b")
+                        .WithLocation(1, 1),
+                    // (1,9): error CS1525: Invalid expression term 'int'
+                    // (int a, int b Main();
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                        .WithArguments("int")
+                        .WithLocation(1, 9),
+                    // (1,13): error CS1026: ) expected
+                    // (int a, int b Main();
+                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "b").WithLocation(1, 13)
                 );
             N(SyntaxKind.TupleExpression);
             {
@@ -689,10 +725,14 @@ class C {
         public void Arglist_01()
         {
             string source = "(__arglist) => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token '=>'
                 // (__arglist) => { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(__arglist)").WithArguments("=>").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(__arglist)")
+                    .WithArguments("=>")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.ParenthesizedExpression);
             {
@@ -710,10 +750,14 @@ class C {
         public void Arglist_02()
         {
             string source = "(int x, __arglist) => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token '=>'
                 // (int x, __arglist) => { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int x, __arglist)").WithArguments("=>").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int x, __arglist)")
+                    .WithArguments("=>")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.TupleExpression);
             {
@@ -749,10 +793,14 @@ class C {
         public void Arglist_03()
         {
             string source = "static (__arglist) => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,9): error CS1041: Identifier expected; '__arglist' is a keyword
                 // static (__arglist) => { }
-                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "__arglist").WithArguments("", "__arglist").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "__arglist")
+                    .WithArguments("", "__arglist")
+                    .WithLocation(1, 9)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -775,10 +823,14 @@ class C {
         [Fact]
         public void TestLambdaWithNullValidation()
         {
-            UsingDeclaration("Func<string, string> func1 = x!! => x + \"1\";", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func1 = x!! => x + \"1\";",
+                options: TestOptions.RegularPreview,
                 // (1,31): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func1 = x!! => x + "1";
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 31));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 31)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -835,10 +887,14 @@ class C {
         [Fact]
         public void TestLambdaWithNullValidationParams()
         {
-            UsingDeclaration("Func<int, int, bool> func1 = (x!!, y) => x == y;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<int, int, bool> func1 = (x!!, y) => x == y;",
+                options: TestOptions.RegularPreview,
                 // (1,32): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int, bool> func1 = (x!!, y) => x == y;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 32));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 32)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -910,10 +966,14 @@ class C {
         [Fact]
         public void TestNullCheckedSingleParamInParens()
         {
-            UsingDeclaration("Func<int, int> func1 = (x!!) => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<int, int> func1 = (x!!) => x;",
+                options: TestOptions.RegularPreview,
                 // (1,26): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int> func1 = (x!!) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 26));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 26)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -967,10 +1027,14 @@ class C {
         [Fact]
         public void TestNullCheckedSingleParamNoSpaces()
         {
-            UsingDeclaration("Func<int, int> func1 = x!!=>x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<int, int> func1 = x!!=>x;",
+                options: TestOptions.RegularPreview,
                 // (1,25): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int> func1 = x!!=>x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 25));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 25)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1019,10 +1083,14 @@ class C {
         [Fact]
         public void TestNullCheckedTypedSingleParamInParen()
         {
-            UsingDeclaration("Func<int, int> func1 = (int x!!) => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<int, int> func1 = (int x!!) => x;",
+                options: TestOptions.RegularPreview,
                 // (1,30): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int> func1 = (int x!!) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 30));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 30)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1080,10 +1148,14 @@ class C {
         [Fact]
         public void TestNullCheckedTypedManyParams()
         {
-            UsingDeclaration("Func<int, int, int> func1 = (int x!!, int y) => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<int, int, int> func1 = (int x!!, int y) => x;",
+                options: TestOptions.RegularPreview,
                 // (1,35): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int, int> func1 = (int x!!, int y) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 35));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 35)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1155,13 +1227,18 @@ class C {
         [Fact]
         public void TestManyNullCheckedTypedParams()
         {
-            UsingDeclaration("Func<int, int, int> func1 = (int x!!, int y!!) => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<int, int, int> func1 = (int x!!, int y!!) => x;",
+                options: TestOptions.RegularPreview,
                 // (1,35): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int, int> func1 = (int x!!, int y!!) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 35),
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 35),
                 // (1,44): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int, int> func1 = (int x!!, int y!!) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 44));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 44)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1233,12 +1310,16 @@ class C {
         [Fact]
         public void TestNullCheckedNoParams()
         {
-            UsingDeclaration("Func<int> func1 = (!!) => 42;", options: TestOptions.RegularPreview, expectedErrors: new DiagnosticDescription[]
-            {
-                // (1,20): error CS1001: Identifier expected
-                // Func<int> func1 = (!!) => 42;
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "!").WithLocation(1, 20)
-            });
+            UsingDeclaration(
+                "Func<int> func1 = (!!) => 42;",
+                options: TestOptions.RegularPreview,
+                expectedErrors: new DiagnosticDescription[]
+                {
+                    // (1,20): error CS1001: Identifier expected
+                    // Func<int> func1 = (!!) => 42;
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "!").WithLocation(1, 20),
+                }
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1285,10 +1366,14 @@ class C {
         [Fact]
         public void TestNullCheckedDiscard()
         {
-            UsingDeclaration("Func<int, int> func1 = (_!!) => 42;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<int, int> func1 = (_!!) => 42;",
+                options: TestOptions.RegularPreview,
                 // (1,26): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<int, int> func1 = (_!!) => 42;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 26));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 26)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1342,10 +1427,14 @@ class C {
         [Fact]
         public void TestNullCheckedSyntaxCorrection0()
         {
-            UsingDeclaration("Func<string, string> func0 = x!=> x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func0 = x!=> x;",
+                options: TestOptions.RegularPreview,
                 // (1,31): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = x!=> x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 31));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 31)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1397,10 +1486,14 @@ class C {
         [Fact]
         public void TestNullCheckedSyntaxCorrection1()
         {
-            UsingDeclaration("Func<string, string> func1 = x !=> x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func1 = x !=> x;",
+                options: TestOptions.RegularPreview,
                 // (1,32): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func1 = x !=> x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 32));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 32)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1452,13 +1545,17 @@ class C {
         [Fact]
         public void TestNullCheckedSyntaxCorrection2()
         {
-            UsingDeclaration("Func<string, string> func2 = x != > x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func2 = x != > x;",
+                options: TestOptions.RegularPreview,
                 // (1,32): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func2 = x != > x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 32),
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 32),
                 // (1,33): error CS1003: Syntax error, '=>' expected
                 // Func<string, string> func2 = x != > x;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=").WithArguments("=>").WithLocation(1, 33));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=").WithArguments("=>").WithLocation(1, 33)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1510,10 +1607,13 @@ class C {
         [Fact]
         public void TestNullCheckedSyntaxCorrection3()
         {
-            UsingDeclaration("Func<string, string> func3 = x! => x;", options: TestOptions.RegularPreview,
-                    // (1,33): error CS1003: Syntax error, ',' expected
-                    // Func<string, string> func3 = x! => x;
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 33));
+            UsingDeclaration(
+                "Func<string, string> func3 = x! => x;",
+                options: TestOptions.RegularPreview,
+                // (1,33): error CS1003: Syntax error, ',' expected
+                // Func<string, string> func3 = x! => x;
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 33)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1560,10 +1660,13 @@ class C {
         [Fact]
         public void TestNullCheckedSyntaxCorrection4()
         {
-            UsingDeclaration("Func<string, string> func4 = x ! => x;", options: TestOptions.RegularPreview,
-                    // (1,34): error CS1003: Syntax error, ',' expected
-                    // Func<string, string> func4 = x ! => x;
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 34));
+            UsingDeclaration(
+                "Func<string, string> func4 = x ! => x;",
+                options: TestOptions.RegularPreview,
+                // (1,34): error CS1003: Syntax error, ',' expected
+                // Func<string, string> func4 = x ! => x;
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 34)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1610,10 +1713,14 @@ class C {
         [Fact]
         public void TestNullCheckedSyntaxCorrection5()
         {
-            UsingDeclaration("Func<string, string> func5 = x !!=> x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func5 = x !!=> x;",
+                options: TestOptions.RegularPreview,
                 // (1,32): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func5 = x !!=> x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 32));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 32)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1664,13 +1771,17 @@ class C {
         [Fact]
         public void TestNullCheckedSyntaxCorrection6()
         {
-            UsingDeclaration("Func<string, string> func6 = x !!= > x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func6 = x !!= > x;",
+                options: TestOptions.RegularPreview,
                 // (1,32): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func6 = x !!= > x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 32),
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 32),
                 // (1,34): error CS1003: Syntax error, '=>' expected
                 // Func<string, string> func6 = x !!= > x;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=").WithArguments("=>").WithLocation(1, 34));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=").WithArguments("=>").WithLocation(1, 34)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1722,10 +1833,14 @@ class C {
         [Fact]
         public void TestNullCheckedSyntaxCorrection7()
         {
-            UsingDeclaration("Func<string, string> func7 = x!! => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func7 = x!! => x;",
+                options: TestOptions.RegularPreview,
                 // (1,31): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func7 = x!! => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 31));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 31)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1776,10 +1891,14 @@ class C {
         [Fact]
         public void TestNullCheckedSyntaxCorrection8()
         {
-            UsingDeclaration("Func<string, string> func8 = x! !=> x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func8 = x! !=> x;",
+                options: TestOptions.RegularPreview,
                 // (1,31): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func8 = x! !=> x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 31));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 31)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1831,10 +1950,14 @@ class C {
         [Fact]
         public void TestNullCheckedSyntaxCorrection9()
         {
-            UsingDeclaration("Func<string, string> func9 = x! ! => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func9 = x! ! => x;",
+                options: TestOptions.RegularPreview,
                 // (1,31): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func9 = x! ! => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 31));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 31)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1886,13 +2009,16 @@ class C {
         [Fact]
         public void TestBracesAfterSimpleLambdaName()
         {
-            UsingDeclaration("Func<string[], string> func0 = x[] => x;", options: TestOptions.RegularPreview,
-                    // (1,34): error CS0443: Syntax error; value expected
-                    // Func<string[], string> func0 = x[] => x;
-                    Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(1, 34),
-                    // (1,36): error CS1003: Syntax error, ',' expected
-                    // Func<string[], string> func0 = x[] => x;
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 36));
+            UsingDeclaration(
+                "Func<string[], string> func0 = x[] => x;",
+                options: TestOptions.RegularPreview,
+                // (1,34): error CS0443: Syntax error; value expected
+                // Func<string[], string> func0 = x[] => x;
+                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(1, 34),
+                // (1,36): error CS1003: Syntax error, ',' expected
+                // Func<string[], string> func0 = x[] => x;
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 36)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1963,10 +2089,13 @@ class C {
         [Fact]
         public void TestBracesAfterParenthesizedLambdaName()
         {
-            UsingDeclaration("Func<string[], string> func0 = (x[]) => x;", options: TestOptions.RegularPreview,
-                    // (1,36): error CS1001: Identifier expected
-                    // Func<string[], string> func0 = (x[]) => x;
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(1, 36));
+            UsingDeclaration(
+                "Func<string[], string> func0 = (x[]) => x;",
+                options: TestOptions.RegularPreview,
+                // (1,36): error CS1001: Identifier expected
+                // Func<string[], string> func0 = (x[]) => x;
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(1, 36)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -2051,16 +2180,21 @@ class C {
         [Fact]
         public void TestBracesAfterParenthesizedLambdaTypeAndName()
         {
-            UsingDeclaration("Func<string[], string> func0 = (string x[]) => x;", options: TestOptions.RegularPreview,
-                    // (1,33): error CS1525: Invalid expression term 'string'
-                    // Func<string[], string> func0 = (string x[]) => x;
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "string").WithArguments("string").WithLocation(1, 33),
-                    // (1,40): error CS1026: ) expected
-                    // Func<string[], string> func0 = (string x[]) => x;
-                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "x").WithLocation(1, 40),
-                    // (1,40): error CS1003: Syntax error, ',' expected
-                    // Func<string[], string> func0 = (string x[]) => x;
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "x").WithArguments(",").WithLocation(1, 40));
+            UsingDeclaration(
+                "Func<string[], string> func0 = (string x[]) => x;",
+                options: TestOptions.RegularPreview,
+                // (1,33): error CS1525: Invalid expression term 'string'
+                // Func<string[], string> func0 = (string x[]) => x;
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "string")
+                    .WithArguments("string")
+                    .WithLocation(1, 33),
+                // (1,40): error CS1026: ) expected
+                // Func<string[], string> func0 = (string x[]) => x;
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "x").WithLocation(1, 40),
+                // (1,40): error CS1003: Syntax error, ',' expected
+                // Func<string[], string> func0 = (string x[]) => x;
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x").WithArguments(",").WithLocation(1, 40)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -2121,10 +2255,13 @@ class C {
         [Fact]
         public void TestDefaultValueSimpleLambda()
         {
-            UsingDeclaration("Func<string, string> func0 = x = null => x;", options: TestOptions.RegularPreview,
-                    // (1,39): error CS1003: Syntax error, ',' expected
-                    // Func<string, string> func0 = x = null => x;
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 39));
+            UsingDeclaration(
+                "Func<string, string> func0 = x = null => x;",
+                options: TestOptions.RegularPreview,
+                // (1,39): error CS1003: Syntax error, ',' expected
+                // Func<string, string> func0 = x = null => x;
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 39)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -2176,14 +2313,18 @@ class C {
         [Fact]
         public void TestDefaultValue_TypedSimpleLambda()
         {
-            UsingDeclaration("var f = int x = 3 => x;",
+            UsingDeclaration(
+                "var f = int x = 3 => x;",
                 null,
                 // (1,9): error CS1525: Invalid expression term 'int'
                 // var f = int x = 3 => x;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int").WithArguments("int").WithLocation(1, 9),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                    .WithArguments("int")
+                    .WithLocation(1, 9),
                 // (1,13): error CS1003: Syntax error, ',' expected
                 // var f = int x = 3 => x;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x").WithArguments(",").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x").WithArguments(",").WithLocation(1, 13)
+            );
 
             N(SyntaxKind.FieldDeclaration);
             {
@@ -2279,10 +2420,12 @@ class C {
         [Fact]
         public void TestImplicitDefaultValue_DelegateSyntax()
         {
-            UsingExpression("delegate(x = 3) { return x; }",
+            UsingExpression(
+                "delegate(x = 3) { return x; }",
                 // (1,12): error CS1001: Identifier expected
                 // delegate(x = 3) { return x; }
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(1, 12)
+            );
             N(SyntaxKind.AnonymousMethodExpression);
             {
                 N(SyntaxKind.DelegateKeyword);
@@ -2522,7 +2665,6 @@ class C {
                                         N(SyntaxKind.IdentifierToken, "x");
                                         N(SyntaxKind.EqualsValueClause);
                                         {
-
                                             N(SyntaxKind.EqualsToken);
                                             N(SyntaxKind.NullLiteralExpression);
                                             {
@@ -2603,10 +2745,14 @@ class C {
         public void TestDefaultMissingValueClause1()
         {
             string source = "(string a, double b = ) => double.Parse(a) + b";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,23): error CS1525: Invalid expression term ')'
                 // (string a, double b = ) => double.Parse(a) + b
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(1, 23));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(1, 23)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -2683,10 +2829,14 @@ class C {
         [Fact]
         public void TestDefaultMissingValueClauseSyntax_DelegateSyntax1()
         {
-            UsingExpression("delegate(int x = , int y) { return x; }",
+            UsingExpression(
+                "delegate(int x = , int y) { return x; }",
                 // (1,18): error CS1525: Invalid expression term ','
                 // delegate(int x = , int y) { return x; }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 18));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(1, 18)
+            );
             N(SyntaxKind.AnonymousMethodExpression);
             {
                 N(SyntaxKind.DelegateKeyword);
@@ -2742,10 +2892,14 @@ class C {
         public void TestDefaultMissingValueClause2()
         {
             string source = "(int x = , int y) => x + y";
-            UsingExpression(source,
-                    // (1,10): error CS1525: Invalid expression term ','
-                    // (int x = , int y) => x + y
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 10));
+            UsingExpression(
+                source,
+                // (1,10): error CS1525: Invalid expression term ','
+                // (int x = , int y) => x + y
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(1, 10)
+            );
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
                 N(SyntaxKind.ParameterList);
@@ -2798,10 +2952,14 @@ class C {
         [Fact]
         public void TestDefaultMissingValueClause_DelegateSyntax2()
         {
-            UsingExpression("delegate(int x = , int y) { return x; }",
+            UsingExpression(
+                "delegate(int x = , int y) { return x; }",
                 // (1,18): error CS1525: Invalid expression term ','
                 // delegate(int x = , int y) { return x; }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 18));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(1, 18)
+            );
             N(SyntaxKind.AnonymousMethodExpression);
             {
                 N(SyntaxKind.DelegateKeyword);
@@ -2848,7 +3006,6 @@ class C {
                         N(SyntaxKind.SemicolonToken);
                     }
                     N(SyntaxKind.CloseBraceToken);
-
                 }
             }
             EOF();
@@ -2858,16 +3015,22 @@ class C {
         public void TestDefaultValueMissingRestOfLambda1()
         {
             string source = "(int x =";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token 'x'
                 // (int x =
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int ").WithArguments("x").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int ")
+                    .WithArguments("x")
+                    .WithLocation(1, 1),
                 // (1,2): error CS1525: Invalid expression term 'int'
                 // (int x =
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int").WithArguments("int").WithLocation(1, 2),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                    .WithArguments("int")
+                    .WithLocation(1, 2),
                 // (1,6): error CS1026: ) expected
                 // (int x =
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, "x").WithLocation(1, 6));
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "x").WithLocation(1, 6)
+            );
 
             N(SyntaxKind.ParenthesizedExpression);
             {
@@ -2885,7 +3048,8 @@ class C {
         public void TestDefaultValueMissingRestOfLambda_DelegateSyntax1()
         {
             string source = "delegate (int x =";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,18): error CS1733: Expected expression
                 // delegate (int x =
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 18),
@@ -2894,7 +3058,8 @@ class C {
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 18),
                 // (1,18): error CS1514: { expected
                 // delegate (int x =
-                Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 18));
+                Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 18)
+            );
             N(SyntaxKind.AnonymousMethodExpression);
             {
                 N(SyntaxKind.DelegateKeyword);
@@ -2932,16 +3097,22 @@ class C {
         public void TestDefaultValueMissingRestOfLambda2()
         {
             string source = "(int x = 5";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token 'x'
                 // (int x =
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int ").WithArguments("x").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int ")
+                    .WithArguments("x")
+                    .WithLocation(1, 1),
                 // (1,2): error CS1525: Invalid expression term 'int'
                 // (int x =
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int").WithArguments("int").WithLocation(1, 2),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                    .WithArguments("int")
+                    .WithLocation(1, 2),
                 // (1,6): error CS1026: ) expected
                 // (int x =
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, "x").WithLocation(1, 6));
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "x").WithLocation(1, 6)
+            );
 
             N(SyntaxKind.ParenthesizedExpression);
             {
@@ -2959,13 +3130,15 @@ class C {
         public void TestDefaultValueMissingRestOfLambda_DelegateSyntax2()
         {
             string source = "delegate (int x = 5";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,20): error CS1026: ) expected
                 // delegate (int x = 5
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 20),
                 // (1,20): error CS1514: { expected
                 // delegate (int x = 5
-                Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 20));
+                Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 20)
+            );
 
             N(SyntaxKind.AnonymousMethodExpression);
             {
@@ -3004,16 +3177,22 @@ class C {
         public void TestDefaultValueMissingRestOfLambda3()
         {
             string source = "(int x = 3,";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token 'x'
                 // (int x =
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int ").WithArguments("x").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int ")
+                    .WithArguments("x")
+                    .WithLocation(1, 1),
                 // (1,2): error CS1525: Invalid expression term 'int'
                 // (int x =
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int").WithArguments("int").WithLocation(1, 2),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                    .WithArguments("int")
+                    .WithLocation(1, 2),
                 // (1,6): error CS1026: ) expected
                 // (int x =
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, "x").WithLocation(1, 6));
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "x").WithLocation(1, 6)
+            );
 
             N(SyntaxKind.ParenthesizedExpression);
             {
@@ -3031,7 +3210,8 @@ class C {
         public void TestDefaultValueMissingRestOfLambda_DelegateSyntax3()
         {
             string source = "delegate (int x = 3,";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,21): error CS1031: Type expected
                 // delegate (int x = 3,
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(1, 21),
@@ -3043,7 +3223,8 @@ class C {
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 21),
                 // (1,21): error CS1514: { expected
                 // delegate (int x = 3,
-                Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 21));
+                Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 21)
+            );
 
             N(SyntaxKind.AnonymousMethodExpression);
             {
@@ -3092,10 +3273,12 @@ class C {
         public void TestDefaultValueNoIdentifier()
         {
             string source = "(int = 3) => 4";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,6): error CS1001: Identifier expected
                 // (int = 3) => 4
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(1, 6));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(1, 6)
+            );
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
                 N(SyntaxKind.ParameterList);
@@ -3132,10 +3315,12 @@ class C {
         public void TestDefaultValueNoIdentifier_DelegateSyntax()
         {
             string source = "delegate(int = 3) { return 4; }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,14): error CS1001: Identifier expected
                 // delegate(int = 3) { return 4; }
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(1, 14));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(1, 14)
+            );
 
             N(SyntaxKind.AnonymousMethodExpression);
             {
@@ -3229,16 +3414,22 @@ class C {
         public void TestDefaultValueEqualsEquals()
         {
             string source = "(int x == 4) => x";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token 'x'
                 // (int x == 4) => x
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int ").WithArguments("x").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int ")
+                    .WithArguments("x")
+                    .WithLocation(1, 1),
                 // (1,2): error CS1525: Invalid expression term 'int'
                 // (int x == 4) => x
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int").WithArguments("int").WithLocation(1, 2),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                    .WithArguments("int")
+                    .WithLocation(1, 2),
                 // (1,6): error CS1026: ) expected
                 // (int x == 4) => x
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, "x").WithLocation(1, 6));
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "x").WithLocation(1, 6)
+            );
 
             N(SyntaxKind.ParenthesizedExpression);
             {
@@ -3444,7 +3635,6 @@ class C {
                             N(SyntaxKind.EqualsToken);
                             N(SyntaxKind.UnaryMinusExpression);
                             {
-
                                 N(SyntaxKind.MinusToken);
                                 N(SyntaxKind.NumericLiteralExpression);
                                 {
@@ -3752,8 +3942,8 @@ class C {
         [Fact]
         public void TestDefaultValueWithSwitchLambdaAsValue()
         {
-
-            string source = @"(int arg,
+            string source =
+                @"(int arg,
                             Func<int, Color> colorFunc = (Color c = Color.Red) => c switch 
                                                                            { 1 => Color.Green, 2 => Color.Red, 3 => Color.Blue }) =>
             { return colorFunc(arg); }";
@@ -3987,29 +4177,48 @@ class C {
                                                         N(SyntaxKind.EqualsValueClause);
                                                         {
                                                             N(SyntaxKind.EqualsToken);
-                                                            N(SyntaxKind.ParenthesizedLambdaExpression);
+                                                            N(
+                                                                SyntaxKind.ParenthesizedLambdaExpression
+                                                            );
                                                             {
                                                                 N(SyntaxKind.ParameterList);
                                                                 {
                                                                     N(SyntaxKind.OpenParenToken);
                                                                     N(SyntaxKind.Parameter);
                                                                     {
-                                                                        N(SyntaxKind.IdentifierToken, "d");
-                                                                        N(SyntaxKind.EqualsValueClause);
+                                                                        N(
+                                                                            SyntaxKind.IdentifierToken,
+                                                                            "d"
+                                                                        );
+                                                                        N(
+                                                                            SyntaxKind.EqualsValueClause
+                                                                        );
                                                                         {
-                                                                            N(SyntaxKind.EqualsToken);
-                                                                            N(SyntaxKind.NumericLiteralExpression);
+                                                                            N(
+                                                                                SyntaxKind.EqualsToken
+                                                                            );
+                                                                            N(
+                                                                                SyntaxKind.NumericLiteralExpression
+                                                                            );
                                                                             {
-                                                                                N(SyntaxKind.NumericLiteralToken, "3");
+                                                                                N(
+                                                                                    SyntaxKind.NumericLiteralToken,
+                                                                                    "3"
+                                                                                );
                                                                             }
                                                                         }
                                                                     }
                                                                     N(SyntaxKind.CloseParenToken);
                                                                 }
-                                                                N(SyntaxKind.EqualsGreaterThanToken);
+                                                                N(
+                                                                    SyntaxKind.EqualsGreaterThanToken
+                                                                );
                                                                 N(SyntaxKind.IdentifierName);
                                                                 {
-                                                                    N(SyntaxKind.IdentifierToken, "d");
+                                                                    N(
+                                                                        SyntaxKind.IdentifierToken,
+                                                                        "d"
+                                                                    );
                                                                 }
                                                             }
                                                         }
@@ -4049,13 +4258,17 @@ class C {
         public void TestDefaultValueNestedLambdaIncomplete()
         {
             var source = "(Func<int, int> l1 = (int a = 1) =>";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token 'l1'
                 // (Func<int, int> l1 = (int a = 1) =>
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(Func<int, int> ").WithArguments("l1").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(Func<int, int> ")
+                    .WithArguments("l1")
+                    .WithLocation(1, 1),
                 // (1,17): error CS1026: ) expected
                 // (Func<int, int> l1 = (int a = 1) =>
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, "l1").WithLocation(1, 17));
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "l1").WithLocation(1, 17)
+            );
 
             N(SyntaxKind.ParenthesizedExpression);
             {
@@ -4240,10 +4453,13 @@ class C {
         [Fact]
         public void TestNullCheckedDefaultValueSimpleLambda()
         {
-            UsingDeclaration("Func<string, string> func0 = x!! = null => x;", options: TestOptions.RegularPreview,
-                    // (1,41): error CS1003: Syntax error, ',' expected
-                    // Func<string, string> func0 = x!! = null => x;
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 41));
+            UsingDeclaration(
+                "Func<string, string> func0 = x!! = null => x;",
+                options: TestOptions.RegularPreview,
+                // (1,41): error CS1003: Syntax error, ',' expected
+                // Func<string, string> func0 = x!! = null => x;
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 41)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -4303,10 +4519,14 @@ class C {
         [Fact]
         public void TestNullCheckedDefaultValueParenthesizedLambda1()
         {
-            UsingDeclaration("Func<string, string> func0 = (x!! = null) => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func0 = (x!! = null) => x;",
+                options: TestOptions.RegularPreview,
                 // (1,32): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (x!! = null) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 32));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 32)
+            );
 
             N(SyntaxKind.FieldDeclaration);
             {
@@ -4372,10 +4592,14 @@ class C {
         [Fact]
         public void TestNullCheckedDefaultValueParenthesizedLambda2()
         {
-            UsingDeclaration("Func<string, string> func0 = (y, x!! = null) => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func0 = (y, x!! = null) => x;",
+                options: TestOptions.RegularPreview,
                 // (1,35): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (y, x!! = null) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 35));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 35)
+            );
 
             N(SyntaxKind.FieldDeclaration);
             {
@@ -4446,10 +4670,14 @@ class C {
         [Fact]
         public void TestNullCheckedDefaultValueParenthesizedLambdaWithType1()
         {
-            UsingDeclaration("Func<string, string> func0 = (string x!! = null) => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func0 = (string x!! = null) => x;",
+                options: TestOptions.RegularPreview,
                 // (1,39): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (string x!! = null) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 39));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 39)
+            );
 
             N(SyntaxKind.FieldDeclaration);
             {
@@ -4519,10 +4747,14 @@ class C {
         [Fact]
         public void TestNullCheckedDefaultValueParenthesizedLambdaWithType2()
         {
-            UsingDeclaration("Func<string, string> func0 = (string y, string x!! = null) => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func0 = (string y, string x!! = null) => x;",
+                options: TestOptions.RegularPreview,
                 // (1,49): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (string y, string x!! = null) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 49));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 49)
+            );
 
             N(SyntaxKind.FieldDeclaration);
             {
@@ -4601,13 +4833,19 @@ class C {
         [Fact]
         public void TestGreaterThanTokenInEqualsValueClause()
         {
-            UsingExpression("(int x = > 0) => x;",
+            UsingExpression(
+                "(int x = > 0) => x;",
                 // (1,1): error CS1073: Unexpected token ';'
                 // (int x = > 0) => x;
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int x = > 0) => x").WithArguments(";").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(int x = > 0) => x")
+                    .WithArguments(";")
+                    .WithLocation(1, 1),
                 // (1,10): error CS1525: Invalid expression term '>'
                 // (int x = > 0) => x;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ">").WithArguments(">").WithLocation(1, 10));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ">")
+                    .WithArguments(">")
+                    .WithLocation(1, 10)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -4652,10 +4890,14 @@ class C {
         [Fact]
         public void TestArgListWithDefaultParameterValue()
         {
-            UsingExpression("(__arglist = null) => { }",
+            UsingExpression(
+                "(__arglist = null) => { }",
                 // (1,1): error CS1073: Unexpected token '=>'
                 // (__arglist = null) => { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(__arglist = null)").WithArguments("=>").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(__arglist = null)")
+                    .WithArguments("=>")
+                    .WithLocation(1, 1)
+            );
             N(SyntaxKind.ParenthesizedExpression);
             {
                 N(SyntaxKind.OpenParenToken);
@@ -4679,10 +4921,14 @@ class C {
         [Fact]
         public void TestNullCheckedSpaceBetweenSimpleLambda()
         {
-            UsingDeclaration("Func<string, string> func0 = x! ! => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func0 = x! ! => x;",
+                options: TestOptions.RegularPreview,
                 // (1,31): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = x! ! => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 31));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 31)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -4734,10 +4980,14 @@ class C {
         [Fact]
         public void TestNullCheckedSpaceBetweenParenthesizedLambda1()
         {
-            UsingDeclaration("Func<string, string> func0 = (x! !) => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func0 = (x! !) => x;",
+                options: TestOptions.RegularPreview,
                 // (1,32): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (x! !) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 32));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 32)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -4794,10 +5044,14 @@ class C {
         [Fact]
         public void TestNullCheckedSpaceBetweenParenthesizedLambda2()
         {
-            UsingDeclaration("Func<string, string> func0 = (y, x! !) => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func0 = (y, x! !) => x;",
+                options: TestOptions.RegularPreview,
                 // (1,35): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (y, x! !) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 35));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 35)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -4859,10 +5113,14 @@ class C {
         [Fact]
         public void TestNullCheckedSpaceBetweenLambdaWithType1()
         {
-            UsingDeclaration("Func<string, string> func0 = (string x! !) => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func0 = (string x! !) => x;",
+                options: TestOptions.RegularPreview,
                 // (1,39): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (string x! !) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 39));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 39)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -4923,10 +5181,14 @@ class C {
         [Fact]
         public void TestNullCheckedSpaceBetweenLambdaWithType2()
         {
-            UsingDeclaration("Func<string, string> func0 = (string y, string x! !) => x;", options: TestOptions.RegularPreview,
+            UsingDeclaration(
+                "Func<string, string> func0 = (string y, string x! !) => x;",
+                options: TestOptions.RegularPreview,
                 // (1,49): error CS8989: The 'parameter null-checking' feature is not supported.
                 // Func<string, string> func0 = (string y, string x! !) => x;
-                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!").WithLocation(1, 49));
+                Diagnostic(ErrorCode.ERR_ParameterNullCheckingNotSupported, "!")
+                    .WithLocation(1, 49)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -5067,13 +5329,18 @@ class C {
         public void KeywordParameterName_01(LanguageVersion languageVersion)
         {
             string source = "int =>";
-            UsingExpression(source, TestOptions.Regular.WithLanguageVersion(languageVersion),
+            UsingExpression(
+                source,
+                TestOptions.Regular.WithLanguageVersion(languageVersion),
                 // (1,1): error CS1041: Identifier expected; 'int' is a keyword
                 // int =>
-                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "int").WithArguments("", "int").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "int")
+                    .WithArguments("", "int")
+                    .WithLocation(1, 1),
                 // (1,7): error CS1733: Expected expression
                 // int =>
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 7));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 7)
+            );
 
             N(SyntaxKind.SimpleLambdaExpression);
             {
@@ -5097,10 +5364,15 @@ class C {
         public void KeywordParameterName_02(LanguageVersion languageVersion)
         {
             string source = "ref => { }";
-            UsingExpression(source, TestOptions.Regular.WithLanguageVersion(languageVersion),
+            UsingExpression(
+                source,
+                TestOptions.Regular.WithLanguageVersion(languageVersion),
                 // (1,1): error CS1041: Identifier expected; 'ref' is a keyword
                 // ref => { }
-                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "ref").WithArguments("", "ref").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "ref")
+                    .WithArguments("", "ref")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.SimpleLambdaExpression);
             {
@@ -5125,13 +5397,20 @@ class C {
         public void KeywordParameterName_03(LanguageVersion languageVersion)
         {
             string source = "ref int => { }";
-            UsingExpression(source, TestOptions.Regular.WithLanguageVersion(languageVersion),
+            UsingExpression(
+                source,
+                TestOptions.Regular.WithLanguageVersion(languageVersion),
                 // (1,1): error CS1525: Invalid expression term 'ref'
                 // ref int => { }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref int => { }").WithArguments("ref").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref int => { }")
+                    .WithArguments("ref")
+                    .WithLocation(1, 1),
                 // (1,5): error CS1041: Identifier expected; 'int' is a keyword
                 // ref int => { }
-                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "int").WithArguments("", "int").WithLocation(1, 5));
+                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "int")
+                    .WithArguments("", "int")
+                    .WithLocation(1, 5)
+            );
 
             N(SyntaxKind.RefExpression);
             {
@@ -5158,10 +5437,14 @@ class C {
         public void KeywordParameterName_04()
         {
             string source = "delegate => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1041: Identifier expected; 'delegate' is a keyword
                 // delegate => { }
-                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "delegate").WithArguments("", "delegate").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "delegate")
+                    .WithArguments("", "delegate")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.SimpleLambdaExpression);
             {
@@ -5183,10 +5466,12 @@ class C {
         public void KeywordParameterName_05()
         {
             string source = "static => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,8): error CS1001: Identifier expected
                 // static => { }
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=>").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=>").WithLocation(1, 8)
+            );
 
             N(SyntaxKind.SimpleLambdaExpression);
             {
@@ -5209,13 +5494,19 @@ class C {
         public void KeywordParameterName_06()
         {
             string source = "static int => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1525: Invalid expression term 'static'
                 // static int => { }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "static").WithArguments("static").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "static")
+                    .WithArguments("static")
+                    .WithLocation(1, 1),
                 // (1,1): error CS1073: Unexpected token 'static'
                 // static int => { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "").WithArguments("static").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "")
+                    .WithArguments("static")
+                    .WithLocation(1, 1)
+            );
 
             M(SyntaxKind.IdentifierName);
             {
@@ -5228,10 +5519,14 @@ class C {
         public void KeywordParameterName_07()
         {
             string source = "f = [A] int => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token 'int'
                 // f = [A] int => { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "f = [A]").WithArguments("int").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "f = [A]")
+                    .WithArguments("int")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.SimpleAssignmentExpression);
             {
@@ -5304,10 +5599,12 @@ class C {
         public void KeywordParameterName_10()
         {
             string source = "(int) => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,5): error CS1001: Identifier expected
                 // (int) => { }
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(1, 5));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(1, 5)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -5338,13 +5635,15 @@ class C {
         public void KeywordParameterName_11()
         {
             string source = "(int, int) => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,5): error CS1001: Identifier expected
                 // (int, int) => { }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ",").WithLocation(1, 5),
                 // (1,10): error CS1001: Identifier expected
                 // (int, int) => { }
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(1, 10));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(1, 10)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -5384,10 +5683,13 @@ class C {
         public void KeywordParameterName_12()
         {
             string source = "Action<object> a = public => { };";
-            var tree = UsingTree(source,
+            var tree = UsingTree(
+                source,
                 // (1,20): error CS1525: Invalid expression term 'public'
                 // Action<object> a = public => { };
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "public").WithArguments("public").WithLocation(1, 20),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "public")
+                    .WithArguments("public")
+                    .WithLocation(1, 20),
                 // (1,20): error CS1002: ; expected
                 // Action<object> a = public => { };
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "public").WithLocation(1, 20),
@@ -5396,7 +5698,8 @@ class C {
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "public").WithLocation(1, 20),
                 // (1,27): error CS1022: Type or namespace definition, or end-of-file expected
                 // Action<object> a = public => { };
-                Diagnostic(ErrorCode.ERR_EOFExpected, "=>").WithLocation(1, 27));
+                Diagnostic(ErrorCode.ERR_EOFExpected, "=>").WithLocation(1, 27)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -5638,10 +5941,12 @@ class C {
         public void MissingParameterName_01()
         {
             string source = "=> { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1001: Identifier expected
                 // => { }
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=>").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=>").WithLocation(1, 1)
+            );
 
             N(SyntaxKind.SimpleLambdaExpression);
             {
@@ -5663,7 +5968,8 @@ class C {
         public void MissingParameterName_02()
         {
             string source = "[ => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,3): error CS1001: Identifier expected
                 // [ => { }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "=>").WithLocation(1, 3),
@@ -5681,7 +5987,8 @@ class C {
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("=>").WithLocation(1, 9),
                 // (1,9): error CS1733: Expected expression
                 // [ => { }
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9)
+            );
 
             N(SyntaxKind.SimpleLambdaExpression);
             {
@@ -5714,7 +6021,8 @@ class C {
         public void MissingParameterName_03()
         {
             string source = "( => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,3): error CS1001: Identifier expected
                 // ( => { }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "=>").WithLocation(1, 3),
@@ -5726,7 +6034,8 @@ class C {
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("=>").WithLocation(1, 9),
                 // (1,9): error CS1733: Expected expression
                 // ( => { }
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -5743,7 +6052,5 @@ class C {
             }
             EOF();
         }
-
     }
-
 }

@@ -9,9 +9,16 @@ namespace System.Reflection.TypeLoading
 {
     internal partial class RoType
     {
-        public sealed override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr) => Query<ConstructorInfo>(bindingAttr).ToArray();
+        public sealed override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr) =>
+            Query<ConstructorInfo>(bindingAttr).ToArray();
 
-        protected sealed override ConstructorInfo? GetConstructorImpl(BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers)
+        protected sealed override ConstructorInfo? GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
             Debug.Assert(types != null);
 
@@ -36,32 +43,80 @@ namespace System.Reflection.TypeLoading
             }
 
             if ((bindingAttr & BindingFlags.ExactBinding) != 0)
-                return System.DefaultBinder.ExactBinding(candidates.ToArray(), types) as ConstructorInfo;
+                return System.DefaultBinder.ExactBinding(candidates.ToArray(), types)
+                    as ConstructorInfo;
 
             binder ??= Loader.GetDefaultBinder();
 
-            return binder.SelectMethod(bindingAttr, candidates.ToArray(), types, modifiers) as ConstructorInfo;
+            return binder.SelectMethod(bindingAttr, candidates.ToArray(), types, modifiers)
+                as ConstructorInfo;
         }
 
-        public sealed override EventInfo[] GetEvents(BindingFlags bindingAttr) => Query<EventInfo>(bindingAttr).ToArray();
-        public sealed override EventInfo? GetEvent(string name, BindingFlags bindingAttr) => Query<EventInfo>(name, bindingAttr).Disambiguate();
+        public sealed override EventInfo[] GetEvents(BindingFlags bindingAttr) =>
+            Query<EventInfo>(bindingAttr).ToArray();
 
-        public sealed override FieldInfo[] GetFields(BindingFlags bindingAttr) => Query<FieldInfo>(bindingAttr).ToArray();
-        public sealed override FieldInfo? GetField(string name, BindingFlags bindingAttr) => Query<FieldInfo>(name, bindingAttr).Disambiguate();
+        public sealed override EventInfo? GetEvent(string name, BindingFlags bindingAttr) =>
+            Query<EventInfo>(name, bindingAttr).Disambiguate();
 
-        public sealed override MethodInfo[] GetMethods(BindingFlags bindingAttr) => Query<MethodInfo>(bindingAttr).ToArray();
+        public sealed override FieldInfo[] GetFields(BindingFlags bindingAttr) =>
+            Query<FieldInfo>(bindingAttr).ToArray();
 
-        protected sealed override MethodInfo? GetMethodImpl(string name, BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers)
+        public sealed override FieldInfo? GetField(string name, BindingFlags bindingAttr) =>
+            Query<FieldInfo>(name, bindingAttr).Disambiguate();
+
+        public sealed override MethodInfo[] GetMethods(BindingFlags bindingAttr) =>
+            Query<MethodInfo>(bindingAttr).ToArray();
+
+        protected sealed override MethodInfo? GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
-            return GetMethodImplCommon(name, GenericParameterCountAny, bindingAttr, binder, callConvention, types, modifiers);
+            return GetMethodImplCommon(
+                name,
+                GenericParameterCountAny,
+                bindingAttr,
+                binder,
+                callConvention,
+                types,
+                modifiers
+            );
         }
 
-        protected sealed override MethodInfo? GetMethodImpl(string name, int genericParameterCount, BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers)
+        protected sealed override MethodInfo? GetMethodImpl(
+            string name,
+            int genericParameterCount,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
-            return GetMethodImplCommon(name, genericParameterCount, bindingAttr, binder, callConvention, types, modifiers);
+            return GetMethodImplCommon(
+                name,
+                genericParameterCount,
+                bindingAttr,
+                binder,
+                callConvention,
+                types,
+                modifiers
+            );
         }
 
-        private MethodInfo? GetMethodImplCommon(string name, int genericParameterCount, BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers)
+        private MethodInfo? GetMethodImplCommon(
+            string name,
+            int genericParameterCount,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
             Debug.Assert(name != null);
 
@@ -82,9 +137,14 @@ namespace System.Reflection.TypeLoading
                 ListBuilder<MethodInfo> candidates = default;
                 foreach (MethodInfo candidate in queryResult)
                 {
-                    if (genericParameterCount != GenericParameterCountAny && genericParameterCount != candidate.GetGenericParameterCount())
+                    if (
+                        genericParameterCount != GenericParameterCountAny
+                        && genericParameterCount != candidate.GetGenericParameterCount()
+                    )
                         continue;
-                    if (candidate.QualifiesBasedOnParameterCount(bindingAttr, callConvention, types))
+                    if (
+                        candidate.QualifiesBasedOnParameterCount(bindingAttr, callConvention, types)
+                    )
                         candidates.Add(candidate);
                 }
 
@@ -96,16 +156,28 @@ namespace System.Reflection.TypeLoading
                     return candidates[0];
 
                 binder ??= Loader.GetDefaultBinder();
-                return binder.SelectMethod(bindingAttr, candidates.ToArray(), types, modifiers) as MethodInfo;
+                return binder.SelectMethod(bindingAttr, candidates.ToArray(), types, modifiers)
+                    as MethodInfo;
             }
         }
 
-        public sealed override Type[] GetNestedTypes(BindingFlags bindingAttr) => Query<Type>(bindingAttr).ToArray();
-        public sealed override Type? GetNestedType(string name, BindingFlags bindingAttr) => Query<Type>(name, bindingAttr).Disambiguate();
+        public sealed override Type[] GetNestedTypes(BindingFlags bindingAttr) =>
+            Query<Type>(bindingAttr).ToArray();
 
-        public sealed override PropertyInfo[] GetProperties(BindingFlags bindingAttr) => Query<PropertyInfo>(bindingAttr).ToArray();
+        public sealed override Type? GetNestedType(string name, BindingFlags bindingAttr) =>
+            Query<Type>(name, bindingAttr).Disambiguate();
 
-        protected sealed override PropertyInfo? GetPropertyImpl(string name, BindingFlags bindingAttr, Binder? binder, Type? returnType, Type[]? types, ParameterModifier[]? modifiers)
+        public sealed override PropertyInfo[] GetProperties(BindingFlags bindingAttr) =>
+            Query<PropertyInfo>(bindingAttr).ToArray();
+
+        protected sealed override PropertyInfo? GetPropertyImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            Type? returnType,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
             Debug.Assert(name != null);
 
@@ -141,7 +213,10 @@ namespace System.Reflection.TypeLoading
                     // no arguments
                     if (candidates.Count == 1)
                     {
-                        if (!(returnType is null) && !returnType.IsEquivalentTo(firstCandidate.PropertyType))
+                        if (
+                            !(returnType is null)
+                            && !returnType.IsEquivalentTo(firstCandidate.PropertyType)
+                        )
                             return null;
                         return firstCandidate;
                     }
@@ -154,20 +229,32 @@ namespace System.Reflection.TypeLoading
                 }
 
                 if ((bindingAttr & BindingFlags.ExactBinding) != 0)
-                    return System.DefaultBinder.ExactPropertyBinding(candidates.ToArray(), returnType, types);
+                    return System.DefaultBinder.ExactPropertyBinding(
+                        candidates.ToArray(),
+                        returnType,
+                        types
+                    );
 
                 binder ??= Loader.GetDefaultBinder();
 
-                return binder.SelectProperty(bindingAttr, candidates.ToArray(), returnType, types, modifiers);
+                return binder.SelectProperty(
+                    bindingAttr,
+                    candidates.ToArray(),
+                    returnType,
+                    types,
+                    modifiers
+                );
             }
         }
 
-        private QueryResult<M> Query<M>(BindingFlags bindingAttr) where M : MemberInfo
+        private QueryResult<M> Query<M>(BindingFlags bindingAttr)
+            where M : MemberInfo
         {
             return Query<M>(null, bindingAttr, null);
         }
 
-        private QueryResult<M> Query<M>(string name, BindingFlags bindingAttr) where M : MemberInfo
+        private QueryResult<M> Query<M>(string name, BindingFlags bindingAttr)
+            where M : MemberInfo
         {
             if (name is null)
             {
@@ -177,7 +264,12 @@ namespace System.Reflection.TypeLoading
             return Query<M>(name, bindingAttr, null);
         }
 
-        private QueryResult<M> Query<M>(string? optionalName, BindingFlags bindingAttr, Func<M, bool>? optionalPredicate) where M : MemberInfo
+        private QueryResult<M> Query<M>(
+            string? optionalName,
+            BindingFlags bindingAttr,
+            Func<M, bool>? optionalPredicate
+        )
+            where M : MemberInfo
         {
             MemberPolicies<M> policies = MemberPolicies<M>.Default;
             bindingAttr = policies.ModifyBindingFlags(bindingAttr);
@@ -189,7 +281,11 @@ namespace System.Reflection.TypeLoading
             if (optionalName == null)
                 queriedMembers = cache.GetQueriedMembers<M>(immediateTypeOnly);
             else
-                queriedMembers = cache.GetQueriedMembers<M>(optionalName, ignoreCase: ignoreCase, immediateTypeOnly: immediateTypeOnly);
+                queriedMembers = cache.GetQueriedMembers<M>(
+                    optionalName,
+                    ignoreCase: ignoreCase,
+                    immediateTypeOnly: immediateTypeOnly
+                );
 
             if (optionalPredicate != null)
                 queriedMembers = queriedMembers.Filter(optionalPredicate);
@@ -198,7 +294,10 @@ namespace System.Reflection.TypeLoading
 
         private static bool NeedToSearchImmediateTypeOnly(BindingFlags bf)
         {
-            if ((bf & (BindingFlags.Static | BindingFlags.FlattenHierarchy)) == (BindingFlags.Static | BindingFlags.FlattenHierarchy))
+            if (
+                (bf & (BindingFlags.Static | BindingFlags.FlattenHierarchy))
+                == (BindingFlags.Static | BindingFlags.FlattenHierarchy)
+            )
                 return false;
 
             if ((bf & (BindingFlags.Instance | BindingFlags.DeclaredOnly)) == BindingFlags.Instance)

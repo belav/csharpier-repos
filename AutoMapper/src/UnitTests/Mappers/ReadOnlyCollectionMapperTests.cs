@@ -14,23 +14,18 @@
                 public IReadOnlyCollection<int> Values { get; set; }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(config =>
-            {
-                config.CreateMap<Source, Destination>();
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(config =>
+                {
+                    config.CreateMap<Source, Destination>();
+                });
 
             [Fact]
             public void Should_map_readonly_values()
             {
                 var source = new Source
                 {
-                    Values = new List<int>
-                    {
-                        1,
-                        2,
-                        3,
-                        4,
-                    }
+                    Values = new List<int> { 1, 2, 3, 4 },
                 };
 
                 var dest = Mapper.Map<Destination>(source);
@@ -51,23 +46,18 @@
                 public ReadOnlyCollection<int> Values { get; set; }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(config =>
-            {
-                config.CreateMap<Source, Destination>();
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(config =>
+                {
+                    config.CreateMap<Source, Destination>();
+                });
 
             [Fact]
             public void Should_map_readonly_values()
             {
                 var source = new Source
                 {
-                    Values = new ReadOnlyCollection<int>(new List<int>
-                    {
-                        1,
-                        2,
-                        3,
-                        4,
-                    })
+                    Values = new ReadOnlyCollection<int>(new List<int> { 1, 2, 3, 4 }),
                 };
 
                 var dest = Mapper.Map<Destination>(source);
@@ -88,23 +78,18 @@
                 public IReadOnlyList<int> Values { get; set; }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(config =>
-            {
-                config.CreateMap<Source, Destination>();
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(config =>
+                {
+                    config.CreateMap<Source, Destination>();
+                });
 
             [Fact]
             public void Should_map_readonly_values()
             {
                 var source = new Source
                 {
-                    Values = new List<int>
-                    {
-                        1,
-                        2,
-                        3,
-                        4,
-                    }
+                    Values = new List<int> { 1, 2, 3, 4 },
                 };
 
                 var dest = Mapper.Map<Destination>(source);
@@ -122,10 +107,14 @@
             {
                 _sourceAsEnumerable = new SourceAsEnumerable()
                 {
-                    ValueInt = new List<int>() {1, 2, 3},
-                    ValueString = new List<string>() {"a", "b", "c"},
-                    ValueIUser = new List<IUser>() {new UserSource("z", 21)},
-                    ValueUser = new List<UserSource>() {new UserSource("y", 20), new UserSource("x", 19)},
+                    ValueInt = new List<int>() { 1, 2, 3 },
+                    ValueString = new List<string>() { "a", "b", "c" },
+                    ValueIUser = new List<IUser>() { new UserSource("z", 21) },
+                    ValueUser = new List<UserSource>()
+                    {
+                        new UserSource("y", 20),
+                        new UserSource("x", 19),
+                    },
                 };
                 var config = new MapperConfiguration(cfg =>
                 {
@@ -139,8 +128,10 @@
             [Fact]
             public void should_map_to_ReadOnlyCollection_when_destination_properties_are_null()
             {
-                var destination =
-                    _mapper.Map<SourceAsEnumerable, DestinationAsReadOnlyCollectionNull>(_sourceAsEnumerable);
+                var destination = _mapper.Map<
+                    SourceAsEnumerable,
+                    DestinationAsReadOnlyCollectionNull
+                >(_sourceAsEnumerable);
 
                 destination.ShouldNotBeNull();
                 _sourceAsEnumerable.ValueInt.Count().ShouldBe(destination.ValueInt.Count());
@@ -158,23 +149,30 @@
                 _sourceAsEnumerable.ValueUser.Count().ShouldBe(destination.ValueUser.Count());
                 for (int i = 0; i < _sourceAsEnumerable.ValueUser.Count(); i++)
                 {
-                    _sourceAsEnumerable.ValueUser.ElementAt(i).Name.ShouldBe(destination.ValueUser.ElementAt(i).Name);
+                    _sourceAsEnumerable
+                        .ValueUser.ElementAt(i)
+                        .Name.ShouldBe(destination.ValueUser.ElementAt(i).Name);
                 }
 
                 _sourceAsEnumerable.ValueIUser.Count().ShouldBe(destination.ValueIUser.Count());
                 for (int i = 0; i < _sourceAsEnumerable.ValueIUser.Count(); i++)
                 {
-                    _sourceAsEnumerable.ValueIUser.ElementAt(i).Name.ShouldBe(destination.ValueIUser.ElementAt(i).Name);
-                    _sourceAsEnumerable.ValueIUser.ElementAt(i).Age.ShouldBe(destination.ValueIUser.ElementAt(i).Age);
+                    _sourceAsEnumerable
+                        .ValueIUser.ElementAt(i)
+                        .Name.ShouldBe(destination.ValueIUser.ElementAt(i).Name);
+                    _sourceAsEnumerable
+                        .ValueIUser.ElementAt(i)
+                        .Age.ShouldBe(destination.ValueIUser.ElementAt(i).Age);
                 }
-
             }
 
             [Fact]
             public void should_replace_ReadOnlyCollection_when_destination_properties_are_not_null()
             {
-                var destination =
-                    _mapper.Map<SourceAsEnumerable, DestinationAsReadOnlyCollectionNotNull>(_sourceAsEnumerable);
+                var destination = _mapper.Map<
+                    SourceAsEnumerable,
+                    DestinationAsReadOnlyCollectionNotNull
+                >(_sourceAsEnumerable);
 
                 destination.ShouldNotBeNull();
                 _sourceAsEnumerable.ValueInt.Count().ShouldBe(destination.ValueInt.Count());
@@ -191,22 +189,30 @@
 
                 for (int i = 0; i < _sourceAsEnumerable.ValueUser.Count(); i++)
                 {
-                    _sourceAsEnumerable.ValueUser.ElementAt(i).Name.ShouldBe(destination.ValueUser.ElementAt(i).Name);
+                    _sourceAsEnumerable
+                        .ValueUser.ElementAt(i)
+                        .Name.ShouldBe(destination.ValueUser.ElementAt(i).Name);
                 }
 
                 _sourceAsEnumerable.ValueIUser.Count().ShouldBe(destination.ValueIUser.Count());
                 for (int i = 0; i < _sourceAsEnumerable.ValueIUser.Count(); i++)
                 {
-                    _sourceAsEnumerable.ValueIUser.ElementAt(i).Name.ShouldBe(destination.ValueIUser.ElementAt(i).Name);
-                    _sourceAsEnumerable.ValueIUser.ElementAt(i).Age.ShouldBe(destination.ValueIUser.ElementAt(i).Age);
+                    _sourceAsEnumerable
+                        .ValueIUser.ElementAt(i)
+                        .Name.ShouldBe(destination.ValueIUser.ElementAt(i).Name);
+                    _sourceAsEnumerable
+                        .ValueIUser.ElementAt(i)
+                        .Age.ShouldBe(destination.ValueIUser.ElementAt(i).Age);
                 }
             }
 
             [Fact]
             public void should_set_ReadOnlyCollection_underlying_all_IReadOnlyList()
             {
-                var destination =
-                    _mapper.Map<SourceAsEnumerable, DestinationAsReadOnlyCollectionNull>(_sourceAsEnumerable);
+                var destination = _mapper.Map<
+                    SourceAsEnumerable,
+                    DestinationAsReadOnlyCollectionNull
+                >(_sourceAsEnumerable);
 
                 destination.ShouldNotBeNull();
                 destination.ValueIUser.ShouldBeOfType<ReadOnlyCollection<IUser>>();
@@ -215,13 +221,14 @@
             [Fact]
             public void should_set_ReadOnlyCollection_underlying_all_IReadOnlyCollection()
             {
-                var destination =
-                    _mapper.Map<SourceAsEnumerable, DestinationAsReadOnlyCollectionNull>(_sourceAsEnumerable);
+                var destination = _mapper.Map<
+                    SourceAsEnumerable,
+                    DestinationAsReadOnlyCollectionNull
+                >(_sourceAsEnumerable);
 
                 destination.ShouldNotBeNull();
                 destination.ValueUser.ShouldBeOfType<ReadOnlyCollection<UserDestination>>();
             }
-
 
             public class SourceAsEnumerable
             {
@@ -245,7 +252,9 @@
                 {
                     ValueInt = new ReadOnlyCollection<int>(new List<int>());
                     ValueString = new ReadOnlyCollection<string>(new List<string>());
-                    ValueUser = new ReadOnlyCollection<UserDestination>(new List<UserDestination>());
+                    ValueUser = new ReadOnlyCollection<UserDestination>(
+                        new List<UserDestination>()
+                    );
                     ValueIUser = new ReadOnlyCollection<IUser>(new List<IUser>());
                 }
 
@@ -263,15 +272,12 @@
 
             public class UserSource : IUser
             {
-                public UserSource()
-                {
-
-                }
+                public UserSource() { }
 
                 public UserSource(string name, int age)
                 {
                     Name = name;
-                    ((IUser) this).Age = age;
+                    ((IUser)this).Age = age;
                 }
 
                 public string Name { get; set; }

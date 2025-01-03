@@ -10,7 +10,9 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Security;
     using SR = System.ServiceModel.SR;
 
-    sealed class TransactionChannelFactory<TChannel> : LayeredChannelFactory<TChannel>, ITransactionChannelManager
+    sealed class TransactionChannelFactory<TChannel>
+        : LayeredChannelFactory<TChannel>,
+            ITransactionChannelManager
     {
         TransactionFlowOption flowIssuedTokens;
         SecurityStandardsManager standardsManager;
@@ -22,26 +24,27 @@ namespace System.ServiceModel.Channels
             TransactionProtocol transactionProtocol,
             BindingContext context,
             Dictionary<DirectionalAction, TransactionFlowOption> dictionary,
-            bool allowWildcardAction)
+            bool allowWildcardAction
+        )
             : base(context.Binding, context.BuildInnerChannelFactory<TChannel>())
         {
             this.dictionary = dictionary;
             this.TransactionProtocol = transactionProtocol;
             this.allowWildcardAction = allowWildcardAction;
-            this.standardsManager = SecurityStandardsHelper.CreateStandardsManager(this.TransactionProtocol);
+            this.standardsManager = SecurityStandardsHelper.CreateStandardsManager(
+                this.TransactionProtocol
+            );
         }
 
         public TransactionProtocol TransactionProtocol
         {
-            get
-            {
-                return this.transactionProtocol;
-            }
+            get { return this.transactionProtocol; }
             set
             {
                 if (!TransactionProtocol.IsDefined(value))
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.SFxBadTransactionProtocols)));
+                        new ArgumentException(SR.GetString(SR.SFxBadTransactionProtocols))
+                    );
                 this.transactionProtocol = value;
             }
         }
@@ -57,7 +60,11 @@ namespace System.ServiceModel.Channels
             get { return this.standardsManager; }
             set
             {
-                this.standardsManager = (value != null ? value : SecurityStandardsHelper.CreateStandardsManager(this.transactionProtocol));
+                this.standardsManager = (
+                    value != null
+                        ? value
+                        : SecurityStandardsHelper.CreateStandardsManager(this.transactionProtocol)
+                );
             }
         }
 
@@ -72,21 +79,29 @@ namespace System.ServiceModel.Channels
             if (!dictionary.TryGetValue(new DirectionalAction(direction, action), out txOption))
             {
                 //Fixinng this for clients that opted in for lesser validation before flowing out a transaction
-                if (this.allowWildcardAction && dictionary.TryGetValue(new DirectionalAction(direction, MessageHeaders.WildcardAction), out txOption))
+                if (
+                    this.allowWildcardAction
+                    && dictionary.TryGetValue(
+                        new DirectionalAction(direction, MessageHeaders.WildcardAction),
+                        out txOption
+                    )
+                )
                 {
                     return txOption;
                 }
                 else
                     return TransactionFlowOption.NotAllowed;
             }
-
             else
                 return txOption;
         }
 
         protected override TChannel OnCreateChannel(EndpointAddress remoteAddress, Uri via)
         {
-            TChannel innerChannel = ((IChannelFactory<TChannel>)InnerChannelFactory).CreateChannel(remoteAddress, via);
+            TChannel innerChannel = ((IChannelFactory<TChannel>)InnerChannelFactory).CreateChannel(
+                remoteAddress,
+                via
+            );
             return CreateTransactionChannel(innerChannel);
         }
 
@@ -94,31 +109,54 @@ namespace System.ServiceModel.Channels
         {
             if (typeof(TChannel) == typeof(IDuplexSessionChannel))
             {
-                return (TChannel)(object)new TransactionDuplexSessionChannel(this, (IDuplexSessionChannel)(object)innerChannel);
+                return (TChannel)
+                    (object)
+                        new TransactionDuplexSessionChannel(
+                            this,
+                            (IDuplexSessionChannel)(object)innerChannel
+                        );
             }
             else if (typeof(TChannel) == typeof(IRequestSessionChannel))
             {
-                return (TChannel)(object)new TransactionRequestSessionChannel(this, (IRequestSessionChannel)(object)innerChannel);
+                return (TChannel)
+                    (object)
+                        new TransactionRequestSessionChannel(
+                            this,
+                            (IRequestSessionChannel)(object)innerChannel
+                        );
             }
             else if (typeof(TChannel) == typeof(IOutputSessionChannel))
             {
-                return (TChannel)(object)new TransactionOutputSessionChannel(this, (IOutputSessionChannel)(object)innerChannel);
+                return (TChannel)
+                    (object)
+                        new TransactionOutputSessionChannel(
+                            this,
+                            (IOutputSessionChannel)(object)innerChannel
+                        );
             }
             else if (typeof(TChannel) == typeof(IOutputChannel))
             {
-                return (TChannel)(object)new TransactionOutputChannel(this, (IOutputChannel)(object)innerChannel);
+                return (TChannel)
+                    (object)
+                        new TransactionOutputChannel(this, (IOutputChannel)(object)innerChannel);
             }
             else if (typeof(TChannel) == typeof(IRequestChannel))
             {
-                return (TChannel)(object)new TransactionRequestChannel(this, (IRequestChannel)(object)innerChannel);
+                return (TChannel)
+                    (object)
+                        new TransactionRequestChannel(this, (IRequestChannel)(object)innerChannel);
             }
             else if (typeof(TChannel) == typeof(IDuplexChannel))
             {
-                return (TChannel)(object)new TransactionDuplexChannel(this, (IDuplexChannel)(object)innerChannel);
+                return (TChannel)
+                    (object)
+                        new TransactionDuplexChannel(this, (IDuplexChannel)(object)innerChannel);
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateChannelTypeNotSupportedException(typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateChannelTypeNotSupportedException(typeof(TChannel))
+                );
             }
         }
 
@@ -128,78 +166,113 @@ namespace System.ServiceModel.Channels
 
         sealed class TransactionOutputChannel : TransactionOutputChannelGeneric<IOutputChannel>
         {
-            public TransactionOutputChannel(ChannelManagerBase channelManager, IOutputChannel innerChannel)
-                : base(channelManager, innerChannel)
-            {
-            }
+            public TransactionOutputChannel(
+                ChannelManagerBase channelManager,
+                IOutputChannel innerChannel
+            )
+                : base(channelManager, innerChannel) { }
         }
 
         sealed class TransactionRequestChannel : TransactionRequestChannelGeneric<IRequestChannel>
         {
-            public TransactionRequestChannel(ChannelManagerBase channelManager, IRequestChannel innerChannel)
-                : base(channelManager, innerChannel)
-            {
-            }
-
+            public TransactionRequestChannel(
+                ChannelManagerBase channelManager,
+                IRequestChannel innerChannel
+            )
+                : base(channelManager, innerChannel) { }
         }
 
-        sealed class TransactionDuplexChannel : TransactionOutputDuplexChannelGeneric<IDuplexChannel>
+        sealed class TransactionDuplexChannel
+            : TransactionOutputDuplexChannelGeneric<IDuplexChannel>
         {
-            public TransactionDuplexChannel(ChannelManagerBase channelManager, IDuplexChannel innerChannel)
-                : base(channelManager, innerChannel)
+            public TransactionDuplexChannel(
+                ChannelManagerBase channelManager,
+                IDuplexChannel innerChannel
+            )
+                : base(channelManager, innerChannel) { }
+        }
+
+        sealed class TransactionOutputSessionChannel
+            : TransactionOutputChannelGeneric<IOutputSessionChannel>,
+                IOutputSessionChannel
+        {
+            public TransactionOutputSessionChannel(
+                ChannelManagerBase channelManager,
+                IOutputSessionChannel innerChannel
+            )
+                : base(channelManager, innerChannel) { }
+
+            public IOutputSession Session
             {
+                get { return InnerChannel.Session; }
             }
         }
 
-        sealed class TransactionOutputSessionChannel : TransactionOutputChannelGeneric<IOutputSessionChannel>, IOutputSessionChannel
+        sealed class TransactionRequestSessionChannel
+            : TransactionRequestChannelGeneric<IRequestSessionChannel>,
+                IRequestSessionChannel
         {
-            public TransactionOutputSessionChannel(ChannelManagerBase channelManager, IOutputSessionChannel innerChannel)
-                : base(channelManager, innerChannel)
+            public TransactionRequestSessionChannel(
+                ChannelManagerBase channelManager,
+                IRequestSessionChannel innerChannel
+            )
+                : base(channelManager, innerChannel) { }
+
+            public IOutputSession Session
             {
+                get { return InnerChannel.Session; }
             }
-
-            public IOutputSession Session { get { return InnerChannel.Session; } }
-
         }
 
-        sealed class TransactionRequestSessionChannel : TransactionRequestChannelGeneric<IRequestSessionChannel>, IRequestSessionChannel
+        sealed class TransactionDuplexSessionChannel
+            : TransactionOutputDuplexChannelGeneric<IDuplexSessionChannel>,
+                IDuplexSessionChannel
         {
-            public TransactionRequestSessionChannel(ChannelManagerBase channelManager, IRequestSessionChannel innerChannel)
-                : base(channelManager, innerChannel)
+            public TransactionDuplexSessionChannel(
+                ChannelManagerBase channelManager,
+                IDuplexSessionChannel innerChannel
+            )
+                : base(channelManager, innerChannel) { }
+
+            public IDuplexSession Session
             {
+                get { return InnerChannel.Session; }
             }
-
-            public IOutputSession Session { get { return InnerChannel.Session; } }
-
-        }
-
-        sealed class TransactionDuplexSessionChannel : TransactionOutputDuplexChannelGeneric<IDuplexSessionChannel>, IDuplexSessionChannel
-        {
-            public TransactionDuplexSessionChannel(ChannelManagerBase channelManager, IDuplexSessionChannel innerChannel)
-                : base(channelManager, innerChannel)
-            {
-            }
-
-            public IDuplexSession Session { get { return InnerChannel.Session; } }
         }
     }
 
     static class SecurityStandardsHelper
     {
-        static SecurityStandardsManager SecurityStandardsManager2007 =
-            CreateStandardsManager(MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12);
+        static SecurityStandardsManager SecurityStandardsManager2007 = CreateStandardsManager(
+            MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12
+        );
 
-        static SecurityStandardsManager CreateStandardsManager(MessageSecurityVersion securityVersion)
+        static SecurityStandardsManager CreateStandardsManager(
+            MessageSecurityVersion securityVersion
+        )
         {
             return new SecurityStandardsManager(
                 securityVersion,
-                new WSSecurityTokenSerializer(securityVersion.SecurityVersion, securityVersion.TrustVersion, securityVersion.SecureConversationVersion, false, null, null, null));
+                new WSSecurityTokenSerializer(
+                    securityVersion.SecurityVersion,
+                    securityVersion.TrustVersion,
+                    securityVersion.SecureConversationVersion,
+                    false,
+                    null,
+                    null,
+                    null
+                )
+            );
         }
 
-        public static SecurityStandardsManager CreateStandardsManager(TransactionProtocol transactionProtocol)
+        public static SecurityStandardsManager CreateStandardsManager(
+            TransactionProtocol transactionProtocol
+        )
         {
-            if (transactionProtocol == TransactionProtocol.WSAtomicTransactionOctober2004 ||
-                transactionProtocol == TransactionProtocol.OleTransactions)
+            if (
+                transactionProtocol == TransactionProtocol.WSAtomicTransactionOctober2004
+                || transactionProtocol == TransactionProtocol.OleTransactions
+            )
             {
                 return SecurityStandardsManager.DefaultInstance;
             }
@@ -217,25 +290,20 @@ namespace System.ServiceModel.Channels
     class TransactionOutputChannelGeneric<TChannel> : TransactionChannel<TChannel>, IOutputChannel
         where TChannel : class, IOutputChannel
     {
-        public TransactionOutputChannelGeneric(ChannelManagerBase channelManager, TChannel innerChannel)
-            : base(channelManager, innerChannel)
-        {
-        }
+        public TransactionOutputChannelGeneric(
+            ChannelManagerBase channelManager,
+            TChannel innerChannel
+        )
+            : base(channelManager, innerChannel) { }
 
         public EndpointAddress RemoteAddress
         {
-            get
-            {
-                return InnerChannel.RemoteAddress;
-            }
+            get { return InnerChannel.RemoteAddress; }
         }
 
         public Uri Via
         {
-            get
-            {
-                return InnerChannel.Via;
-            }
+            get { return InnerChannel.Via; }
         }
 
         public IAsyncResult BeginSend(Message message, AsyncCallback callback, object state)
@@ -243,12 +311,21 @@ namespace System.ServiceModel.Channels
             return this.BeginSend(message, this.DefaultSendTimeout, callback, state);
         }
 
-        public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback asyncCallback, object state)
+        public IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback asyncCallback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             WriteTransactionDataToMessage(message, MessageDirection.Input);
-            return InnerChannel.BeginSend(message, timeoutHelper.RemainingTime(), asyncCallback, state);
-
+            return InnerChannel.BeginSend(
+                message,
+                timeoutHelper.RemainingTime(),
+                asyncCallback,
+                state
+            );
         }
 
         public void EndSend(IAsyncResult result)
@@ -269,30 +346,23 @@ namespace System.ServiceModel.Channels
         }
     }
 
-
-
     class TransactionRequestChannelGeneric<TChannel> : TransactionChannel<TChannel>, IRequestChannel
         where TChannel : class, IRequestChannel
     {
-        public TransactionRequestChannelGeneric(ChannelManagerBase channelManager, TChannel innerChannel)
-            : base(channelManager, innerChannel)
-        {
-        }
+        public TransactionRequestChannelGeneric(
+            ChannelManagerBase channelManager,
+            TChannel innerChannel
+        )
+            : base(channelManager, innerChannel) { }
 
         public EndpointAddress RemoteAddress
         {
-            get
-            {
-                return InnerChannel.RemoteAddress;
-            }
+            get { return InnerChannel.RemoteAddress; }
         }
 
         public Uri Via
         {
-            get
-            {
-                return InnerChannel.Via;
-            }
+            get { return InnerChannel.Via; }
         }
 
         public IAsyncResult BeginRequest(Message message, AsyncCallback callback, object state)
@@ -300,11 +370,21 @@ namespace System.ServiceModel.Channels
             return this.BeginRequest(message, this.DefaultSendTimeout, callback, state);
         }
 
-        public IAsyncResult BeginRequest(Message message, TimeSpan timeout, AsyncCallback asyncCallback, object state)
+        public IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback asyncCallback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             WriteTransactionDataToMessage(message, MessageDirection.Input);
-            return InnerChannel.BeginRequest(message, timeoutHelper.RemainingTime(), asyncCallback, state);
+            return InnerChannel.BeginRequest(
+                message,
+                timeoutHelper.RemainingTime(),
+                asyncCallback,
+                state
+            );
         }
 
         public Message EndRequest(IAsyncResult result)
@@ -331,12 +411,14 @@ namespace System.ServiceModel.Channels
         }
     }
 
-    class TransactionOutputDuplexChannelGeneric<TChannel> : TransactionDuplexChannelGeneric<TChannel>
+    class TransactionOutputDuplexChannelGeneric<TChannel>
+        : TransactionDuplexChannelGeneric<TChannel>
         where TChannel : class, IDuplexChannel
     {
-        public TransactionOutputDuplexChannelGeneric(ChannelManagerBase channelManager, TChannel innerChannel)
-            : base(channelManager, innerChannel, MessageDirection.Output)
-        {
-        }
+        public TransactionOutputDuplexChannelGeneric(
+            ChannelManagerBase channelManager,
+            TChannel innerChannel
+        )
+            : base(channelManager, innerChannel, MessageDirection.Output) { }
     }
 }

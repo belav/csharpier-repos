@@ -4,14 +4,16 @@
 
 namespace System.Runtime
 {
-    using System.Security;
     using System.Runtime.Interop;
+    using System.Security;
 
     static class Ticks
     {
         public static long Now
         {
-            [Fx.Tag.SecurityNote(Miscellaneous = "Why isn't the SuppressUnmanagedCodeSecurity attribute working in this case?")]
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "Why isn't the SuppressUnmanagedCodeSecurity attribute working in this case?"
+            )]
             [SecuritySafeCritical]
             get
             {

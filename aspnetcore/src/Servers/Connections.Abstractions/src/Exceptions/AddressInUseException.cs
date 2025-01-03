@@ -14,16 +14,14 @@ public class AddressInUseException : InvalidOperationException
     /// Initializes a new instance of <see cref="AddressInUseException"/>.
     /// </summary>
     /// <param name="message">The exception message.</param>
-    public AddressInUseException(string message) : base(message)
-    {
-    }
+    public AddressInUseException(string message)
+        : base(message) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="AddressInUseException"/>.
     /// </summary>
     /// <param name="message">The exception message.</param>
     /// <param name="inner">The underlying <see cref="Exception"/>.</param>
-    public AddressInUseException(string message, Exception inner) : base(message, inner)
-    {
-    }
+    public AddressInUseException(string message, Exception inner)
+        : base(message, inner) { }
 }

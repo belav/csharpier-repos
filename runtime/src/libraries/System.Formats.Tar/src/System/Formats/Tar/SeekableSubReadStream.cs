@@ -18,7 +18,10 @@ namespace System.Formats.Tar
         {
             if (!superStream.CanSeek)
             {
-                throw new ArgumentException(SR.IO_NotSupported_UnseekableStream, nameof(superStream));
+                throw new ArgumentException(
+                    SR.IO_NotSupported_UnseekableStream,
+                    nameof(superStream)
+                );
             }
         }
 
@@ -67,7 +70,10 @@ namespace System.Formats.Tar
             return 0;
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {

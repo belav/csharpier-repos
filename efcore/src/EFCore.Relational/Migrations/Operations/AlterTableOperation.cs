@@ -18,6 +18,5 @@ public class AlterTableOperation : TableOperation, IAlterMigrationOperation
     public virtual TableOperation OldTable { get; set; } = new CreateTableOperation();
 
     /// <inheritdoc />
-    IMutableAnnotatable IAlterMigrationOperation.OldAnnotations
-        => OldTable;
+    IMutableAnnotatable IAlterMigrationOperation.OldAnnotations => OldTable;
 }

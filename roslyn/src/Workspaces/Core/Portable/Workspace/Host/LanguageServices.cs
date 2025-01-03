@@ -12,8 +12,11 @@ namespace Microsoft.CodeAnalysis.Host
     public sealed class LanguageServices
     {
         private readonly HostLanguageServices _services;
+
         // This ensures a single instance of this type associated with each HostLanguageServices.
-        [Obsolete("Do not call directly.  Use HostLanguageServices.ProjectServices to acquire an instance")]
+        [Obsolete(
+            "Do not call directly.  Use HostLanguageServices.ProjectServices to acquire an instance"
+        )]
         internal LanguageServices(HostLanguageServices services)
         {
             _services = services;
@@ -25,15 +28,15 @@ namespace Microsoft.CodeAnalysis.Host
         internal HostLanguageServices HostLanguageServices => _services;
 
         /// <inheritdoc cref="HostLanguageServices.Language"/>
-        public string Language
-            => _services.Language;
+        public string Language => _services.Language;
 
         /// <inheritdoc cref="HostLanguageServices.GetService"/>
-        public TLanguageService? GetService<TLanguageService>() where TLanguageService : ILanguageService
-            => _services.GetService<TLanguageService>();
+        public TLanguageService? GetService<TLanguageService>()
+            where TLanguageService : ILanguageService => _services.GetService<TLanguageService>();
 
         /// <inheritdoc cref="HostLanguageServices.GetRequiredService"/>
-        public TLanguageService GetRequiredService<TLanguageService>() where TLanguageService : ILanguageService
-            => _services.GetRequiredService<TLanguageService>();
+        public TLanguageService GetRequiredService<TLanguageService>()
+            where TLanguageService : ILanguageService =>
+            _services.GetRequiredService<TLanguageService>();
     }
 }

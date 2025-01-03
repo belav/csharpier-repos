@@ -39,11 +39,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             int argumentCount,
             string argumentName,
             int? selectedParameter,
-            bool userSelected)
+            bool userSelected
+        )
         {
             Contract.ThrowIfNull(selectedItem);
             Contract.ThrowIfFalse(items.Count != 0, "Must have at least one item.");
-            Contract.ThrowIfFalse(items.Contains(selectedItem), "Selected item must be in list of items.");
+            Contract.ThrowIfFalse(
+                items.Contains(selectedItem),
+                "Selected item must be in list of items."
+            );
 
             _disconnectedBufferGraph = disconnectedBufferGraph;
             this.TextSpan = textSpan;
@@ -61,27 +65,57 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         {
             return selectedItem == this.SelectedItem && userSelected == this.UserSelected
                 ? this
-                : new Model(_disconnectedBufferGraph, TextSpan, Provider, Items, selectedItem, ArgumentIndex, ArgumentCount, ArgumentName, SelectedParameter, userSelected);
+                : new Model(
+                    _disconnectedBufferGraph,
+                    TextSpan,
+                    Provider,
+                    Items,
+                    selectedItem,
+                    ArgumentIndex,
+                    ArgumentCount,
+                    ArgumentName,
+                    SelectedParameter,
+                    userSelected
+                );
         }
 
         public Model WithSelectedParameter(int? selectedParameter)
         {
             return selectedParameter == this.SelectedParameter
                 ? this
-                : new Model(_disconnectedBufferGraph, TextSpan, Provider, Items, SelectedItem, ArgumentIndex, ArgumentCount, ArgumentName, selectedParameter, UserSelected);
+                : new Model(
+                    _disconnectedBufferGraph,
+                    TextSpan,
+                    Provider,
+                    Items,
+                    SelectedItem,
+                    ArgumentIndex,
+                    ArgumentCount,
+                    ArgumentName,
+                    selectedParameter,
+                    UserSelected
+                );
         }
 
         public SnapshotSpan GetCurrentSpanInSubjectBuffer(ITextSnapshot bufferSnapshot)
         {
-            return _disconnectedBufferGraph.SubjectBufferSnapshot
-                .CreateTrackingSpan(this.TextSpan.ToSpan(), SpanTrackingMode.EdgeInclusive)
+            return _disconnectedBufferGraph
+                .SubjectBufferSnapshot.CreateTrackingSpan(
+                    this.TextSpan.ToSpan(),
+                    SpanTrackingMode.EdgeInclusive
+                )
                 .GetSpan(bufferSnapshot);
         }
 
         public SnapshotSpan GetCurrentSpanInView(ITextSnapshot textSnapshot)
         {
-            var originalSpan = _disconnectedBufferGraph.GetSubjectBufferTextSpanInViewBuffer(this.TextSpan);
-            var trackingSpan = _disconnectedBufferGraph.ViewSnapshot.CreateTrackingSpan(originalSpan.TextSpan.ToSpan(), SpanTrackingMode.EdgeInclusive);
+            var originalSpan = _disconnectedBufferGraph.GetSubjectBufferTextSpanInViewBuffer(
+                this.TextSpan
+            );
+            var trackingSpan = _disconnectedBufferGraph.ViewSnapshot.CreateTrackingSpan(
+                originalSpan.TextSpan.ToSpan(),
+                SpanTrackingMode.EdgeInclusive
+            );
             return trackingSpan.GetSpan(textSnapshot);
         }
     }

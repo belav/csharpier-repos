@@ -16,7 +16,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         private readonly int _position;
         private readonly int _virtualSpaces;
 
-        public VirtualTreePoint(SyntaxTree tree, SourceText text, int position, int virtualSpaces = 0)
+        public VirtualTreePoint(
+            SyntaxTree tree,
+            SourceText text,
+            int position,
+            int virtualSpaces = 0
+        )
         {
             Contract.ThrowIfNull(tree);
             Contract.ThrowIfFalse(position >= 0 && position <= tree.Length);
@@ -28,17 +33,17 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             _virtualSpaces = virtualSpaces;
         }
 
-        public static bool operator <(VirtualTreePoint left, VirtualTreePoint right)
-            => left.CompareTo(right) < 0;
+        public static bool operator <(VirtualTreePoint left, VirtualTreePoint right) =>
+            left.CompareTo(right) < 0;
 
-        public static bool operator <=(VirtualTreePoint left, VirtualTreePoint right)
-            => left.CompareTo(right) <= 0;
+        public static bool operator <=(VirtualTreePoint left, VirtualTreePoint right) =>
+            left.CompareTo(right) <= 0;
 
-        public static bool operator >(VirtualTreePoint left, VirtualTreePoint right)
-            => left.CompareTo(right) > 0;
+        public static bool operator >(VirtualTreePoint left, VirtualTreePoint right) =>
+            left.CompareTo(right) > 0;
 
-        public static bool operator >=(VirtualTreePoint left, VirtualTreePoint right)
-            => left.CompareTo(right) >= 0;
+        public static bool operator >=(VirtualTreePoint left, VirtualTreePoint right) =>
+            left.CompareTo(right) >= 0;
 
         public bool IsInVirtualSpace
         {
@@ -57,25 +62,28 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         {
             if (Text != other.Text)
             {
-                throw new InvalidOperationException(EditorFeaturesResources.Can_t_compare_positions_from_different_text_snapshots);
+                throw new InvalidOperationException(
+                    EditorFeaturesResources.Can_t_compare_positions_from_different_text_snapshots
+                );
             }
 
             return ComparerWithState.CompareTo(this, other, s_comparers);
         }
 
         private static readonly ImmutableArray<Func<VirtualTreePoint, IComparable>> s_comparers =
-            ImmutableArray.Create<Func<VirtualTreePoint, IComparable>>(p => p.Position, prop => prop.VirtualSpaces);
+            ImmutableArray.Create<Func<VirtualTreePoint, IComparable>>(
+                p => p.Position,
+                prop => prop.VirtualSpaces
+            );
 
-        public bool Equals(VirtualTreePoint other)
-            => CompareTo(other) == 0;
+        public bool Equals(VirtualTreePoint other) => CompareTo(other) == 0;
 
-        public override int GetHashCode()
-            => Text.GetHashCode() ^ Position.GetHashCode() ^ VirtualSpaces.GetHashCode();
+        public override int GetHashCode() =>
+            Text.GetHashCode() ^ Position.GetHashCode() ^ VirtualSpaces.GetHashCode();
 
-        public override string ToString()
-            => $"VirtualTreePoint {{ Tree: '{Tree}', Text: '{Text}', Position: '{Position}', VirtualSpaces '{VirtualSpaces}' }}";
+        public override string ToString() =>
+            $"VirtualTreePoint {{ Tree: '{Tree}', Text: '{Text}', Position: '{Position}', VirtualSpaces '{VirtualSpaces}' }}";
 
-        public TextLine GetContainingLine()
-            => Text.Lines.GetLineFromPosition(Position);
+        public TextLine GetContainingLine() => Text.Lines.GetLineFromPosition(Position);
     }
 }

@@ -4,14 +4,15 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
-
+namespace System.Net
+{
     //
     // The NestedAsyncResult - used to wrap async requests
     //      this is used to hold another async result made
     //      through a call to another Begin call within.
     //
-    internal class NestedMultipleAsyncResult : LazyAsyncResult {
+    internal class NestedMultipleAsyncResult : LazyAsyncResult
+    {
         //
         // this is usually for operations on streams/buffers,
         // we save information passed in on the Begin call:
@@ -24,14 +25,20 @@ namespace System.Net {
         //
         // Constructor:
         //
-        internal NestedMultipleAsyncResult(Object asyncObject, Object asyncState, AsyncCallback asyncCallback, BufferOffsetSize[] buffers)
-        : base( asyncObject, asyncState, asyncCallback ) {
+        internal NestedMultipleAsyncResult(
+            Object asyncObject,
+            Object asyncState,
+            AsyncCallback asyncCallback,
+            BufferOffsetSize[] buffers
+        )
+            : base(asyncObject, asyncState, asyncCallback)
+        {
             Buffers = buffers;
             Size = 0;
-            for (int i = 0; i < Buffers.Length; i++) {
+            for (int i = 0; i < Buffers.Length; i++)
+            {
                 Size += Buffers[i].Size;
             }
         }
-
     }; // class NestedMultipleAsyncResult
 } // namespace System.Net

@@ -20,7 +20,10 @@ namespace System.Reflection.Tests
         [Fact]
         public void Ctor_NullVersion_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("version", () => new AssemblyFileVersionAttribute(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "version",
+                () => new AssemblyFileVersionAttribute(null)
+            );
         }
     }
 }

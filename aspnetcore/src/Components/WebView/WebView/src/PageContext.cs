@@ -34,11 +34,13 @@ internal sealed class PageContext : IAsyncDisposable
         IpcSender ipcSender,
         JSComponentConfigurationStore jsComponentsConfiguration,
         string baseUrl,
-        string startUrl)
+        string startUrl
+    )
     {
         _serviceScope = serviceScope;
 
-        NavigationManager = (WebViewNavigationManager)ServiceProvider.GetRequiredService<NavigationManager>();
+        NavigationManager = (WebViewNavigationManager)
+            ServiceProvider.GetRequiredService<NavigationManager>();
         NavigationManager.AttachToWebView(ipcSender, baseUrl, startUrl);
 
         JSRuntime = (WebViewJSRuntime)ServiceProvider.GetRequiredService<IJSRuntime>();
@@ -46,9 +48,17 @@ internal sealed class PageContext : IAsyncDisposable
 
         var loggerFactory = ServiceProvider.GetRequiredService<ILoggerFactory>();
         var jsComponents = new JSComponentInterop(jsComponentsConfiguration);
-        Renderer = new WebViewRenderer(ServiceProvider, dispatcher, ipcSender, loggerFactory, JSRuntime, jsComponents);
+        Renderer = new WebViewRenderer(
+            ServiceProvider,
+            dispatcher,
+            ipcSender,
+            loggerFactory,
+            JSRuntime,
+            jsComponents
+        );
 
-        var webViewScrollToLocationHash = (WebViewScrollToLocationHash)ServiceProvider.GetRequiredService<IScrollToLocationHash>();
+        var webViewScrollToLocationHash = (WebViewScrollToLocationHash)
+            ServiceProvider.GetRequiredService<IScrollToLocationHash>();
         webViewScrollToLocationHash.AttachJSRuntime(JSRuntime);
     }
 

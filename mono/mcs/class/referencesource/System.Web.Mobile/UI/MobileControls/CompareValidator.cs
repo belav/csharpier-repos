@@ -1,22 +1,22 @@
 //------------------------------------------------------------------------------
 // <copyright file="CompareValidator.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Globalization;
 using System.Drawing;
+using System.Globalization;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.Design.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using WebCntrls = System.Web.UI.WebControls;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
@@ -32,12 +32,22 @@ namespace System.Web.UI.MobileControls
      */
     /// <include file='doc\CompareValidator.uex' path='docs/doc[@for="CompareValidator"]/*' />
     [
-        ToolboxData("<{0}:CompareValidator runat=\"server\" ErrorMessage=\"CompareValidator\"></{0}:CompareValidator>"),
+        ToolboxData(
+            "<{0}:CompareValidator runat=\"server\" ErrorMessage=\"CompareValidator\"></{0}:CompareValidator>"
+        ),
         ToolboxItem("System.Web.UI.Design.WebControlToolboxItem, " + AssemblyRef.SystemDesign)
-    ]    
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    ]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class CompareValidator : BaseValidator
     {
         private WebCntrls.CompareValidator _webCompareValidator;
@@ -60,18 +70,14 @@ namespace System.Web.UI.MobileControls
             DefaultValue(""),
             MobileCategory(SR.Category_Behavior),
             MobileSysDescription(SR.CompareValidator_ControlToCompare),
-            TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.ValidatedMobileControlConverter))
+            TypeConverter(
+                typeof(System.Web.UI.Design.MobileControls.Converters.ValidatedMobileControlConverter)
+            )
         ]
         public String ControlToCompare
         {
-            get
-            {
-                return _webCompareValidator.ControlToCompare;
-            }
-            set
-            {
-                _webCompareValidator.ControlToCompare = value;
-            }
+            get { return _webCompareValidator.ControlToCompare; }
+            set { _webCompareValidator.ControlToCompare = value; }
         }
 
         /// <include file='doc\CompareValidator.uex' path='docs/doc[@for="CompareValidator.Operator"]/*' />
@@ -83,14 +89,8 @@ namespace System.Web.UI.MobileControls
         ]
         public ValidationCompareOperator Operator
         {
-            get
-            {
-                return _webCompareValidator.Operator;
-            }
-            set
-            {
-                _webCompareValidator.Operator = value;
-            }
+            get { return _webCompareValidator.Operator; }
+            set { _webCompareValidator.Operator = value; }
         }
 
         /// <include file='doc\CompareValidator.uex' path='docs/doc[@for="CompareValidator.Type"]/*' />
@@ -102,14 +102,8 @@ namespace System.Web.UI.MobileControls
         ]
         public ValidationDataType Type
         {
-            get
-            {
-                return _webCompareValidator.Type;
-            }
-            set
-            {
-                _webCompareValidator.Type = value;
-            }
+            get { return _webCompareValidator.Type; }
+            set { _webCompareValidator.Type = value; }
         }
 
         /// <include file='doc\CompareValidator.uex' path='docs/doc[@for="CompareValidator.ValueToCompare"]/*' />
@@ -121,14 +115,8 @@ namespace System.Web.UI.MobileControls
         ]
         public String ValueToCompare
         {
-            get
-            {
-                return _webCompareValidator.ValueToCompare;
-            }
-            set
-            {
-                _webCompareValidator.ValueToCompare = value;
-            }
+            get { return _webCompareValidator.ValueToCompare; }
+            set { _webCompareValidator.ValueToCompare = value; }
         }
 
         /// <include file='doc\CompareValidator.uex' path='docs/doc[@for="CompareValidator.EvaluateIsValid"]/*' />
@@ -144,30 +132,40 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\CompareValidator.uex' path='docs/doc[@for="CompareValidator.ControlPropertiesValid"]/*' />
         protected override bool ControlPropertiesValid()
         {
-            // Check the control id references 
+            // Check the control id references
             if (ControlToCompare.Length > 0)
             {
                 CheckControlValidationProperty(ControlToCompare, "ControlToCompare");
-                if (String.Compare(ControlToValidate, ControlToCompare, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    String.Compare(
+                        ControlToValidate,
+                        ControlToCompare,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
-                    throw new ArgumentException(SR.GetString(
-                        SR.CompareValidator_BadCompareControl, ID, ControlToCompare));
+                    throw new ArgumentException(
+                        SR.GetString(SR.CompareValidator_BadCompareControl, ID, ControlToCompare)
+                    );
                 }
-            }   
+            }
             else
             {
                 // Check Values
-                if (Operator != ValidationCompareOperator.DataTypeCheck && 
-                    !WebCntrls.BaseCompareValidator.CanConvert(ValueToCompare, Type))
+                if (
+                    Operator != ValidationCompareOperator.DataTypeCheck
+                    && !WebCntrls.BaseCompareValidator.CanConvert(ValueToCompare, Type)
+                )
                 {
-                    throw new ArgumentException(SR.GetString(
-                        SR.Validator_ValueBadType,
-                        ValueToCompare,
-                        "ValueToCompare",
-                        ID,
-                        PropertyConverter.EnumToString(
-                            typeof(ValidationDataType), Type)
-                    ));
+                    throw new ArgumentException(
+                        SR.GetString(
+                            SR.Validator_ValueBadType,
+                            ValueToCompare,
+                            "ValueToCompare",
+                            ID,
+                            PropertyConverter.EnumToString(typeof(ValidationDataType), Type)
+                        )
+                    );
                 }
             }
             return base.ControlPropertiesValid();

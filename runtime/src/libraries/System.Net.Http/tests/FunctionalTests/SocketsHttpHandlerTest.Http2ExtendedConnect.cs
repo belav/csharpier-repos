@@ -13,7 +13,8 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(SocketsHttpHandler), nameof(SocketsHttpHandler.IsSupported))]
     public sealed class SocketsHttpHandler_Http2ExtendedConnect_Test : HttpClientHandlerTestBase
     {
-        public SocketsHttpHandler_Http2ExtendedConnect_Test(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_Http2ExtendedConnect_Test(ITestOutputHelper output)
+            : base(output) { }
 
         protected override Version UseVersion => HttpVersion.Version20;
 
@@ -34,80 +35,119 @@ namespace System.Net.Http.Functional.Tests
             byte[] clientMessage = new byte[] { 1, 2, 3 };
             byte[] serverMessage = new byte[] { 4, 5, 6, 7 };
 
-            TaskCompletionSource clientCompleted = new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource clientCompleted = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
-            await Http2LoopbackServerFactory.Singleton.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpClient client = CreateHttpClient();
+            await Http2LoopbackServerFactory.Singleton.CreateClientAndServerAsync(
+                async uri =>
+                {
+                    using HttpClient client = CreateHttpClient();
 
-                HttpRequestMessage request = CreateRequest(HttpMethod.Connect, uri, UseVersion, exactVersion: true);
-                request.Headers.Protocol = "foo";
+                    HttpRequestMessage request = CreateRequest(
+                        HttpMethod.Connect,
+                        uri,
+                        UseVersion,
+                        exactVersion: true
+                    );
+                    request.Headers.Protocol = "foo";
 
-                using HttpResponseMessage response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                    using HttpResponseMessage response = await client.SendAsync(
+                        request,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
-                using Stream responseStream = await response.Content.ReadAsStreamAsync();
+                    using Stream responseStream = await response.Content.ReadAsStreamAsync();
 
-                await responseStream.WriteAsync(clientMessage);
-                await responseStream.FlushAsync();
+                    await responseStream.WriteAsync(clientMessage);
+                    await responseStream.FlushAsync();
 
-                byte[] readBuffer = new byte[serverMessage.Length];
-                await responseStream.ReadExactlyAsync(readBuffer);
-                Assert.Equal(serverMessage, readBuffer);
+                    byte[] readBuffer = new byte[serverMessage.Length];
+                    await responseStream.ReadExactlyAsync(readBuffer);
+                    Assert.Equal(serverMessage, readBuffer);
 
-                // Receive server's EOS
-                Assert.Equal(0, await responseStream.ReadAsync(readBuffer));
+                    // Receive server's EOS
+                    Assert.Equal(0, await responseStream.ReadAsync(readBuffer));
 
-                clientCompleted.SetResult();
-            },
-            async server =>
-            {
-                await using Http2LoopbackConnection connection = await ((Http2LoopbackServer)server).EstablishConnectionAsync(new SettingsEntry { SettingId = SettingId.EnableConnect, Value = 1 });
+                    clientCompleted.SetResult();
+                },
+                async server =>
+                {
+                    await using Http2LoopbackConnection connection = await (
+                        (Http2LoopbackServer)server
+                    ).EstablishConnectionAsync(
+                        new SettingsEntry { SettingId = SettingId.EnableConnect, Value = 1 }
+                    );
 
-                (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(
+                        readBody: false
+                    );
 
-                await connection.SendResponseHeadersAsync(streamId, endStream: false).ConfigureAwait(false);
+                    await connection
+                        .SendResponseHeadersAsync(streamId, endStream: false)
+                        .ConfigureAwait(false);
 
-                DataFrame dataFrame = await connection.ReadDataFrameAsync();
-                Assert.Equal(clientMessage, dataFrame.Data.ToArray());
+                    DataFrame dataFrame = await connection.ReadDataFrameAsync();
+                    Assert.Equal(clientMessage, dataFrame.Data.ToArray());
 
-                await connection.SendResponseDataAsync(streamId, serverMessage, endStream: true);
+                    await connection.SendResponseDataAsync(
+                        streamId,
+                        serverMessage,
+                        endStream: true
+                    );
 
-                await clientCompleted.Task.WaitAsync(TestHelper.PassingTestTimeout);
-            }, options: new GenericLoopbackOptions { UseSsl = useSsl });
+                    await clientCompleted.Task.WaitAsync(TestHelper.PassingTestTimeout);
+                },
+                options: new GenericLoopbackOptions { UseSsl = useSsl }
+            );
         }
 
         [Theory]
         [MemberData(nameof(UseSsl_MemberData))]
-        public async Task Connect_ServerDoesNotSupportExtendedConnect_ClientIncludesExceptionData(bool useSsl)
+        public async Task Connect_ServerDoesNotSupportExtendedConnect_ClientIncludesExceptionData(
+            bool useSsl
+        )
         {
-            TaskCompletionSource clientCompleted = new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource clientCompleted = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpClient client = CreateHttpClient();
-
-                HttpRequestMessage request = CreateRequest(HttpMethod.Connect, uri, UseVersion, exactVersion: true);
-                request.Headers.Protocol = "foo";
-
-                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() => client.SendAsync(request));
-                Assert.Equal(HttpRequestError.ExtendedConnectNotSupported, ex.HttpRequestError);
-
-                clientCompleted.SetResult();
-            },
-            async server =>
-            {
-                try
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    await server.AcceptConnectionAsync(async connection =>
+                    using HttpClient client = CreateHttpClient();
+
+                    HttpRequestMessage request = CreateRequest(
+                        HttpMethod.Connect,
+                        uri,
+                        UseVersion,
+                        exactVersion: true
+                    );
+                    request.Headers.Protocol = "foo";
+
+                    HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
+                        () => client.SendAsync(request)
+                    );
+                    Assert.Equal(HttpRequestError.ExtendedConnectNotSupported, ex.HttpRequestError);
+
+                    clientCompleted.SetResult();
+                },
+                async server =>
+                {
+                    try
                     {
-                        await clientCompleted.Task.WaitAsync(TestHelper.PassingTestTimeout);
-                    });
-                }
-                catch (Exception ex)
-                {
-                    _output.WriteLine($"Ignoring exception {ex}");
-                }
-            }, options: new GenericLoopbackOptions { UseSsl = useSsl });
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            await clientCompleted.Task.WaitAsync(TestHelper.PassingTestTimeout);
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        _output.WriteLine($"Ignoring exception {ex}");
+                    }
+                },
+                options: new GenericLoopbackOptions { UseSsl = useSsl }
+            );
         }
 
         [Theory]
@@ -115,14 +155,13 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task Connect_Http11Endpoint_Throws(bool useSsl)
         {
-            using var server = new LoopbackServer(new LoopbackServer.Options
-            {
-                UseSsl = useSsl
-            });
+            using var server = new LoopbackServer(new LoopbackServer.Options { UseSsl = useSsl });
 
             await server.ListenAsync();
 
-            TaskCompletionSource clientCompleted = new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource clientCompleted = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             Task serverTask = Task.Run(async () =>
             {
@@ -132,7 +171,26 @@ namespace System.Net.Http.Functional.Tests
                     {
                         if (!useSsl)
                         {
-                            byte[] http2GoAwayHttp11RequiredBytes = new byte[17] { 0, 0, 8, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13 };
+                            byte[] http2GoAwayHttp11RequiredBytes = new byte[17]
+                            {
+                                0,
+                                0,
+                                8,
+                                7,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                13,
+                            };
 
                             await connection.SendResponseAsync(http2GoAwayHttp11RequiredBytes);
 
@@ -150,10 +208,17 @@ namespace System.Net.Http.Functional.Tests
             {
                 using HttpClient client = CreateHttpClient();
 
-                HttpRequestMessage request = CreateRequest(HttpMethod.Connect, server.Address, UseVersion, exactVersion: true);
+                HttpRequestMessage request = CreateRequest(
+                    HttpMethod.Connect,
+                    server.Address,
+                    UseVersion,
+                    exactVersion: true
+                );
                 request.Headers.Protocol = "foo";
 
-                Exception ex = await Assert.ThrowsAnyAsync<Exception>(() => client.SendAsync(request));
+                Exception ex = await Assert.ThrowsAnyAsync<Exception>(
+                    () => client.SendAsync(request)
+                );
                 clientCompleted.SetResult();
                 if (useSsl)
                 {
@@ -161,7 +226,9 @@ namespace System.Net.Http.Functional.Tests
                 }
             });
 
-            await new[] { serverTask, clientTask }.WhenAllOrAnyFailed().WaitAsync(TestHelper.PassingTestTimeout);
+            await new[] { serverTask, clientTask }
+                .WhenAllOrAnyFailed()
+                .WaitAsync(TestHelper.PassingTestTimeout);
         }
     }
 }

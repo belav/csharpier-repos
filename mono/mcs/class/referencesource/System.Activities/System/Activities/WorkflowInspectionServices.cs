@@ -5,10 +5,10 @@
 namespace System.Activities
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections;
-    using System.Runtime;
     using System.Activities.Validation;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Runtime;
 
     public static class WorkflowInspectionServices
     {
@@ -17,7 +17,10 @@ namespace System.Activities
             CacheMetadata(rootActivity, null);
         }
 
-        public static void CacheMetadata(Activity rootActivity, LocationReferenceEnvironment hostEnvironment)
+        public static void CacheMetadata(
+            Activity rootActivity,
+            LocationReferenceEnvironment hostEnvironment
+        )
         {
             if (rootActivity == null)
             {
@@ -26,7 +29,11 @@ namespace System.Activities
 
             if (rootActivity.HasBeenAssociatedWithAnInstance)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.RootActivityAlreadyAssociatedWithInstance(rootActivity.DisplayName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.RootActivityAlreadyAssociatedWithInstance(rootActivity.DisplayName)
+                    )
+                );
             }
 
             IList<ValidationError> validationErrors = null;
@@ -36,7 +43,13 @@ namespace System.Activities
                 hostEnvironment = new ActivityLocationReferenceEnvironment();
             }
 
-            ActivityUtilities.CacheRootMetadata(rootActivity, hostEnvironment, ProcessActivityTreeOptions.FullCachingOptions, null, ref validationErrors);
+            ActivityUtilities.CacheRootMetadata(
+                rootActivity,
+                hostEnvironment,
+                ProcessActivityTreeOptions.FullCachingOptions,
+                null,
+                ref validationErrors
+            );
 
             ActivityValidationServices.ThrowIfViolationsExist(validationErrors);
         }
@@ -57,7 +70,13 @@ namespace System.Activities
             {
                 IList<ValidationError> validationErrors = null;
 
-                ActivityUtilities.CacheRootMetadata(root, new ActivityLocationReferenceEnvironment(), ProcessActivityTreeOptions.FullCachingOptions, null, ref validationErrors);
+                ActivityUtilities.CacheRootMetadata(
+                    root,
+                    new ActivityLocationReferenceEnvironment(),
+                    ProcessActivityTreeOptions.FullCachingOptions,
+                    null,
+                    ref validationErrors
+                );
 
                 ActivityValidationServices.ThrowIfViolationsExist(validationErrors);
             }
@@ -84,11 +103,17 @@ namespace System.Activities
             {
                 IList<ValidationError> validationErrors = null;
 
-                ActivityUtilities.CacheRootMetadata(activity, new ActivityLocationReferenceEnvironment(), ProcessActivityTreeOptions.FullCachingOptions, null, ref validationErrors);
+                ActivityUtilities.CacheRootMetadata(
+                    activity,
+                    new ActivityLocationReferenceEnvironment(),
+                    ProcessActivityTreeOptions.FullCachingOptions,
+                    null,
+                    ref validationErrors
+                );
 
                 ActivityValidationServices.ThrowIfViolationsExist(validationErrors);
             }
-            
+
             int i = 0;
             for (; i < activity.RuntimeArguments.Count; i++)
             {
@@ -187,7 +212,13 @@ namespace System.Activities
             {
                 IList<ValidationError> validationErrors = null;
 
-                ActivityUtilities.CacheRootMetadata(activity, new ActivityLocationReferenceEnvironment(), ProcessActivityTreeOptions.FullCachingOptions, null, ref validationErrors);
+                ActivityUtilities.CacheRootMetadata(
+                    activity,
+                    new ActivityLocationReferenceEnvironment(),
+                    ProcessActivityTreeOptions.FullCachingOptions,
+                    null,
+                    ref validationErrors
+                );
 
                 ActivityValidationServices.ThrowIfViolationsExist(validationErrors);
             }

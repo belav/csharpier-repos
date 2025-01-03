@@ -24,7 +24,11 @@ public class CookiePolicyMiddleware
     /// <param name="next">A reference to the next item in the application pipeline.</param>
     /// <param name="options">Accessor to <see cref="CookiePolicyOptions"/>.</param>
     /// <param name="factory">The <see cref="ILoggerFactory"/>.</param>
-    public CookiePolicyMiddleware(RequestDelegate next, IOptions<CookiePolicyOptions> options, ILoggerFactory factory)
+    public CookiePolicyMiddleware(
+        RequestDelegate next,
+        IOptions<CookiePolicyOptions> options,
+        ILoggerFactory factory
+    )
     {
         Options = options.Value;
         _next = next ?? throw new ArgumentNullException(nameof(next));
@@ -54,7 +58,9 @@ public class CookiePolicyMiddleware
     /// <param name="context">The <see cref="HttpContext" />.</param>
     public Task Invoke(HttpContext context)
     {
-        var feature = context.Features.Get<IResponseCookiesFeature>() ?? new ResponseCookiesFeature(context.Features);
+        var feature =
+            context.Features.Get<IResponseCookiesFeature>()
+            ?? new ResponseCookiesFeature(context.Features);
         var wrapper = new ResponseCookiesWrapper(context, Options, feature, _logger);
         context.Features.Set<IResponseCookiesFeature>(new CookiesWrapperFeature(wrapper));
         context.Features.Set<ITrackingConsentFeature>(wrapper);

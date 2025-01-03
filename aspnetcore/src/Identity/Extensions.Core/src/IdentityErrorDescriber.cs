@@ -22,7 +22,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(DefaultError),
-            Description = Resources.DefaultError
+            Description = Resources.DefaultError,
         };
     }
 
@@ -35,7 +35,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(ConcurrencyFailure),
-            Description = Resources.ConcurrencyFailure
+            Description = Resources.ConcurrencyFailure,
         };
     }
 
@@ -48,7 +48,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(PasswordMismatch),
-            Description = Resources.PasswordMismatch
+            Description = Resources.PasswordMismatch,
         };
     }
 
@@ -61,7 +61,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(InvalidToken),
-            Description = Resources.InvalidToken
+            Description = Resources.InvalidToken,
         };
     }
 
@@ -74,7 +74,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(RecoveryCodeRedemptionFailed),
-            Description = Resources.RecoveryCodeRedemptionFailed
+            Description = Resources.RecoveryCodeRedemptionFailed,
         };
     }
 
@@ -87,7 +87,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(LoginAlreadyAssociated),
-            Description = Resources.LoginAlreadyAssociated
+            Description = Resources.LoginAlreadyAssociated,
         };
     }
 
@@ -101,7 +101,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(InvalidUserName),
-            Description = Resources.FormatInvalidUserName(userName)
+            Description = Resources.FormatInvalidUserName(userName),
         };
     }
 
@@ -115,7 +115,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(InvalidEmail),
-            Description = Resources.FormatInvalidEmail(email)
+            Description = Resources.FormatInvalidEmail(email),
         };
     }
 
@@ -129,7 +129,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(DuplicateUserName),
-            Description = Resources.FormatDuplicateUserName(userName)
+            Description = Resources.FormatDuplicateUserName(userName),
         };
     }
 
@@ -143,7 +143,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(DuplicateEmail),
-            Description = Resources.FormatDuplicateEmail(email)
+            Description = Resources.FormatDuplicateEmail(email),
         };
     }
 
@@ -157,7 +157,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(InvalidRoleName),
-            Description = Resources.FormatInvalidRoleName(role)
+            Description = Resources.FormatInvalidRoleName(role),
         };
     }
 
@@ -171,7 +171,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(DuplicateRoleName),
-            Description = Resources.FormatDuplicateRoleName(role)
+            Description = Resources.FormatDuplicateRoleName(role),
         };
     }
 
@@ -184,7 +184,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(UserAlreadyHasPassword),
-            Description = Resources.UserAlreadyHasPassword
+            Description = Resources.UserAlreadyHasPassword,
         };
     }
 
@@ -197,7 +197,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(UserLockoutNotEnabled),
-            Description = Resources.UserLockoutNotEnabled
+            Description = Resources.UserLockoutNotEnabled,
         };
     }
 
@@ -211,7 +211,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(UserAlreadyInRole),
-            Description = Resources.FormatUserAlreadyInRole(role)
+            Description = Resources.FormatUserAlreadyInRole(role),
         };
     }
 
@@ -225,7 +225,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(UserNotInRole),
-            Description = Resources.FormatUserNotInRole(role)
+            Description = Resources.FormatUserNotInRole(role),
         };
     }
 
@@ -239,7 +239,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(PasswordTooShort),
-            Description = Resources.FormatPasswordTooShort(length)
+            Description = Resources.FormatPasswordTooShort(length),
         };
     }
 
@@ -253,7 +253,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(PasswordRequiresUniqueChars),
-            Description = Resources.FormatPasswordRequiresUniqueChars(uniqueChars)
+            Description = Resources.FormatPasswordRequiresUniqueChars(uniqueChars),
         };
     }
 
@@ -266,7 +266,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(PasswordRequiresNonAlphanumeric),
-            Description = Resources.PasswordRequiresNonAlphanumeric
+            Description = Resources.PasswordRequiresNonAlphanumeric,
         };
     }
 
@@ -279,7 +279,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(PasswordRequiresDigit),
-            Description = Resources.PasswordRequiresDigit
+            Description = Resources.PasswordRequiresDigit,
         };
     }
 
@@ -292,7 +292,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(PasswordRequiresLower),
-            Description = Resources.PasswordRequiresLower
+            Description = Resources.PasswordRequiresLower,
         };
     }
 
@@ -305,7 +305,7 @@ public class IdentityErrorDescriber
         return new IdentityError
         {
             Code = nameof(PasswordRequiresUpper),
-            Description = Resources.PasswordRequiresUpper
+            Description = Resources.PasswordRequiresUpper,
         };
     }
 }

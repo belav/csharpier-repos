@@ -1,5 +1,5 @@
 //
-// IntranetZoneCredentialPolicyCas.cs 
+// IntranetZoneCredentialPolicyCas.cs
 //	- CAS unit tests for Microsoft.Win32.IntranetZoneCredentialPolicy
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,88 +28,86 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using Microsoft.Win32;
-
 using MonoTests.Microsoft.Win32;
+using NUnit.Framework;
 
-namespace MonoCasTests.Microsoft.Win32 {
+namespace MonoCasTests.Microsoft.Win32
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class IntranetZoneCredentialPolicyCas
+    {
+        private IntranetZoneCredentialPolicyTest unit;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class IntranetZoneCredentialPolicyCas {
+        [SetUp]
+        public virtual void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
 
-		private IntranetZoneCredentialPolicyTest unit;
+            // execute IntranetZoneCredentialPolicy ctor at fulltrust
+            unit = new IntranetZoneCredentialPolicyTest();
+            unit.FixtureSetUp();
+        }
 
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlPolicy = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Constructor_Deny_ControlPolicy()
+        {
+            new IntranetZoneCredentialPolicy();
+        }
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, ControlPolicy = true)]
+        public void Constructor_PermitOnly_ControlPolicy()
+        {
+            new IntranetZoneCredentialPolicy();
+        }
 
-			// execute IntranetZoneCredentialPolicy ctor at fulltrust
-			unit = new IntranetZoneCredentialPolicyTest ();
-			unit.FixtureSetUp ();
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlPolicy = true)]
+        public void UnitTestReuse()
+        {
+            unit.NullRequest();
+            unit.NullCredential();
+            unit.NullModule();
+            unit.Localhost();
+            unit.LocalhostWithoutWebRequest();
+            unit.LocalhostWithoutCredentials();
+            unit.LocalhostWithoutModule();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Constructor_Deny_ControlPolicy ()
-		{
-			new IntranetZoneCredentialPolicy ();
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlPolicy = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void LinkDemand_Deny_ControlPolicy()
+        {
+            ConstructorInfo ci = typeof(IntranetZoneCredentialPolicy).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            try
+            {
+                ci.Invoke(null);
+            }
+            catch (TargetInvocationException tie)
+            {
+                // same as directly calling the ctor
+                throw tie.InnerException;
+            }
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, ControlPolicy = true)]
-		public void Constructor_PermitOnly_ControlPolicy ()
-		{
-			new IntranetZoneCredentialPolicy ();
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
-		public void UnitTestReuse ()
-		{
-			unit.NullRequest ();
-			unit.NullCredential ();
-			unit.NullModule ();
-			unit.Localhost ();
-			unit.LocalhostWithoutWebRequest ();
-			unit.LocalhostWithoutCredentials ();
-			unit.LocalhostWithoutModule ();
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_Deny_ControlPolicy ()
-		{
-			ConstructorInfo ci = typeof (IntranetZoneCredentialPolicy).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			try {
-				ci.Invoke (null);
-			}
-			catch (TargetInvocationException tie) {
-				// same as directly calling the ctor
-				throw tie.InnerException;
-			}
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, ControlPolicy = true)]
-		public void LinkDemand_PermitOnly_ControlPolicy ()
-		{
-			ConstructorInfo ci = typeof (IntranetZoneCredentialPolicy).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, ControlPolicy = true)]
+        public void LinkDemand_PermitOnly_ControlPolicy()
+        {
+            ConstructorInfo ci = typeof(IntranetZoneCredentialPolicy).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }
-

@@ -23,7 +23,13 @@ public static class MsalWebAssemblyServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
     /// <param name="configure">A callback to configure the <see cref="RemoteAuthenticationOptions{MsalProviderOptions}"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
-    public static IRemoteAuthenticationBuilder<RemoteAuthenticationState, RemoteUserAccount> AddMsalAuthentication(this IServiceCollection services, Action<RemoteAuthenticationOptions<MsalProviderOptions>> configure)
+    public static IRemoteAuthenticationBuilder<
+        RemoteAuthenticationState,
+        RemoteUserAccount
+    > AddMsalAuthentication(
+        this IServiceCollection services,
+        Action<RemoteAuthenticationOptions<MsalProviderOptions>> configure
+    )
     {
         return AddMsalAuthentication<RemoteAuthenticationState>(services, configure);
     }
@@ -35,12 +41,21 @@ public static class MsalWebAssemblyServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
     /// <param name="configure">A callback to configure the <see cref="RemoteAuthenticationOptions{MsalProviderOptions}"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
-    public static IRemoteAuthenticationBuilder<TRemoteAuthenticationState, RemoteUserAccount> AddMsalAuthentication<
-    [DynamicallyAccessedMembers(JsonSerialized)] TRemoteAuthenticationState>(
-        this IServiceCollection services, Action<RemoteAuthenticationOptions<MsalProviderOptions>> configure)
+    public static IRemoteAuthenticationBuilder<
+        TRemoteAuthenticationState,
+        RemoteUserAccount
+    > AddMsalAuthentication<
+        [DynamicallyAccessedMembers(JsonSerialized)] TRemoteAuthenticationState
+    >(
+        this IServiceCollection services,
+        Action<RemoteAuthenticationOptions<MsalProviderOptions>> configure
+    )
         where TRemoteAuthenticationState : RemoteAuthenticationState, new()
     {
-        return AddMsalAuthentication<TRemoteAuthenticationState, RemoteUserAccount>(services, configure);
+        return AddMsalAuthentication<TRemoteAuthenticationState, RemoteUserAccount>(
+            services,
+            configure
+        );
     }
 
     /// <summary>
@@ -51,24 +66,40 @@ public static class MsalWebAssemblyServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
     /// <param name="configure">A callback to configure the <see cref="RemoteAuthenticationOptions{MsalProviderOptions}"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
-    public static IRemoteAuthenticationBuilder<TRemoteAuthenticationState, TAccount> AddMsalAuthentication<
-        [DynamicallyAccessedMembers(JsonSerialized)] TRemoteAuthenticationState, [DynamicallyAccessedMembers(JsonSerialized)] TAccount>(
-        this IServiceCollection services, Action<RemoteAuthenticationOptions<MsalProviderOptions>> configure)
+    public static IRemoteAuthenticationBuilder<
+        TRemoteAuthenticationState,
+        TAccount
+    > AddMsalAuthentication<
+        [DynamicallyAccessedMembers(JsonSerialized)] TRemoteAuthenticationState,
+        [DynamicallyAccessedMembers(JsonSerialized)] TAccount
+    >(
+        this IServiceCollection services,
+        Action<RemoteAuthenticationOptions<MsalProviderOptions>> configure
+    )
         where TRemoteAuthenticationState : RemoteAuthenticationState, new()
         where TAccount : RemoteUserAccount
     {
-        services.AddRemoteAuthentication<TRemoteAuthenticationState, TAccount, MsalProviderOptions>(configure);
-        services.TryAddEnumerable(ServiceDescriptor.Scoped<IPostConfigureOptions<RemoteAuthenticationOptions<MsalProviderOptions>>, MsalDefaultOptionsConfiguration>());
+        services.AddRemoteAuthentication<TRemoteAuthenticationState, TAccount, MsalProviderOptions>(
+            configure
+        );
+        services.TryAddEnumerable(
+            ServiceDescriptor.Scoped<
+                IPostConfigureOptions<RemoteAuthenticationOptions<MsalProviderOptions>>,
+                MsalDefaultOptionsConfiguration
+            >()
+        );
 
         return new MsalRemoteAuthenticationBuilder<TRemoteAuthenticationState, TAccount>(services);
     }
 }
 
-internal sealed class MsalRemoteAuthenticationBuilder<TRemoteAuthenticationState, TRemoteUserAccount> : IRemoteAuthenticationBuilder<TRemoteAuthenticationState, TRemoteUserAccount>
+internal sealed class MsalRemoteAuthenticationBuilder<
+    TRemoteAuthenticationState,
+    TRemoteUserAccount
+> : IRemoteAuthenticationBuilder<TRemoteAuthenticationState, TRemoteUserAccount>
     where TRemoteAuthenticationState : RemoteAuthenticationState, new()
     where TRemoteUserAccount : RemoteUserAccount
 {
-
     public MsalRemoteAuthenticationBuilder(IServiceCollection services) => Services = services;
 
     public IServiceCollection Services { get; }

@@ -15,10 +15,15 @@ using System.Web.Http.Validation.Validators;
 namespace System.Web.Http.Validation.Providers
 {
     // A factory for validators based on ValidationAttribute
-    public delegate ModelValidator DataAnnotationsModelValidationFactory(IEnumerable<ModelValidatorProvider> validatorProviders, ValidationAttribute attribute);
+    public delegate ModelValidator DataAnnotationsModelValidationFactory(
+        IEnumerable<ModelValidatorProvider> validatorProviders,
+        ValidationAttribute attribute
+    );
 
     // A factory for validators based on IValidatableObject
-    public delegate ModelValidator DataAnnotationsValidatableObjectAdapterFactory(IEnumerable<ModelValidatorProvider> validatorProviders);
+    public delegate ModelValidator DataAnnotationsValidatableObjectAdapterFactory(
+        IEnumerable<ModelValidatorProvider> validatorProviders
+    );
 
     /// <summary>
     /// An implementation of <see cref="ModelValidatorProvider"/> which providers validators
@@ -29,47 +34,57 @@ namespace System.Web.Http.Validation.Providers
     {
         // Factories for validation attributes
 
-        internal DataAnnotationsModelValidationFactory DefaultAttributeFactory =
-            (validationProviders, attribute) => new DataAnnotationsModelValidator(validationProviders, attribute);
+        internal DataAnnotationsModelValidationFactory DefaultAttributeFactory = (
+            validationProviders,
+            attribute
+        ) => new DataAnnotationsModelValidator(validationProviders, attribute);
 
         internal Dictionary<Type, DataAnnotationsModelValidationFactory> AttributeFactories =
             new Dictionary<Type, DataAnnotationsModelValidationFactory>();
 
         // Factories for IValidatableObject models
-        internal DataAnnotationsValidatableObjectAdapterFactory DefaultValidatableFactory =
-            (validationProviders) => new ValidatableObjectAdapter(validationProviders);
+        internal DataAnnotationsValidatableObjectAdapterFactory DefaultValidatableFactory = (
+            validationProviders
+        ) => new ValidatableObjectAdapter(validationProviders);
 
-        internal Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory> ValidatableFactories =
+        internal Dictionary<
+            Type,
+            DataAnnotationsValidatableObjectAdapterFactory
+        > ValidatableFactories =
             new Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory>();
 
-        protected override IEnumerable<ModelValidator> GetValidators(ModelMetadata metadata, IEnumerable<ModelValidatorProvider> validatorProviders, IEnumerable<Attribute> attributes)
+        protected override IEnumerable<ModelValidator> GetValidators(
+            ModelMetadata metadata,
+            IEnumerable<ModelValidatorProvider> validatorProviders,
+            IEnumerable<Attribute> attributes
+        )
         {
-                List<ModelValidator> results = new List<ModelValidator>();
+            List<ModelValidator> results = new List<ModelValidator>();
 
-                // Produce a validator for each validation attribute we find
-                foreach (ValidationAttribute attribute in attributes.OfType<ValidationAttribute>())
+            // Produce a validator for each validation attribute we find
+            foreach (ValidationAttribute attribute in attributes.OfType<ValidationAttribute>())
+            {
+                DataAnnotationsModelValidationFactory factory;
+                if (!AttributeFactories.TryGetValue(attribute.GetType(), out factory))
                 {
-                    DataAnnotationsModelValidationFactory factory;
-                    if (!AttributeFactories.TryGetValue(attribute.GetType(), out factory))
-                    {
-                        factory = DefaultAttributeFactory;
-                    }
-                    results.Add(factory(validatorProviders, attribute));
+                    factory = DefaultAttributeFactory;
                 }
-
-                // Produce a validator if the type supports IValidatableObject
-                if (typeof(IValidatableObject).IsAssignableFrom(metadata.ModelType))
-                {
-                    DataAnnotationsValidatableObjectAdapterFactory factory;
-                    if (!ValidatableFactories.TryGetValue(metadata.ModelType, out factory))
-                    {
-                        factory = DefaultValidatableFactory;
-                    }
-                    results.Add(factory(validatorProviders));
-                }
-
-                return results;
+                results.Add(factory(validatorProviders, attribute));
             }
+
+            // Produce a validator if the type supports IValidatableObject
+            if (typeof(IValidatableObject).IsAssignableFrom(metadata.ModelType))
+            {
+                DataAnnotationsValidatableObjectAdapterFactory factory;
+                if (!ValidatableFactories.TryGetValue(metadata.ModelType, out factory))
+                {
+                    factory = DefaultValidatableFactory;
+                }
+                results.Add(factory(validatorProviders));
+            }
+
+            return results;
+        }
 
         #region Validation attribute adapter registration
 
@@ -77,25 +92,36 @@ namespace System.Web.Http.Validation.Providers
         {
             ValidateAttributeType(attributeType);
             ValidateAttributeAdapterType(adapterType);
-            ConstructorInfo constructor = GetAttributeAdapterConstructor(attributeType, adapterType);
+            ConstructorInfo constructor = GetAttributeAdapterConstructor(
+                attributeType,
+                adapterType
+            );
 
-                AttributeFactories[attributeType] = (context, attribute) => (ModelValidator)constructor.Invoke(new object[] { context, attribute });
-            }
+            AttributeFactories[attributeType] = (context, attribute) =>
+                (ModelValidator)constructor.Invoke(new object[] { context, attribute });
+        }
 
-        public void RegisterAdapterFactory(Type attributeType, DataAnnotationsModelValidationFactory factory)
+        public void RegisterAdapterFactory(
+            Type attributeType,
+            DataAnnotationsModelValidationFactory factory
+        )
         {
             ValidateAttributeType(attributeType);
             ValidateAttributeFactory(factory);
 
-                AttributeFactories[attributeType] = factory;
-            }
+            AttributeFactories[attributeType] = factory;
+        }
 
         public void RegisterDefaultAdapter(Type adapterType)
         {
             ValidateAttributeAdapterType(adapterType);
-            ConstructorInfo constructor = GetAttributeAdapterConstructor(typeof(ValidationAttribute), adapterType);
+            ConstructorInfo constructor = GetAttributeAdapterConstructor(
+                typeof(ValidationAttribute),
+                adapterType
+            );
 
-            DefaultAttributeFactory = (context, attribute) => (ModelValidator)constructor.Invoke(new object[] { context, attribute });
+            DefaultAttributeFactory = (context, attribute) =>
+                (ModelValidator)constructor.Invoke(new object[] { context, attribute });
         }
 
         public void RegisterDefaultAdapterFactory(DataAnnotationsModelValidationFactory factory)
@@ -105,14 +131,26 @@ namespace System.Web.Http.Validation.Providers
             DefaultAttributeFactory = factory;
         }
 
-        // Helpers 
+        // Helpers
 
-        private static ConstructorInfo GetAttributeAdapterConstructor(Type attributeType, Type adapterType)
+        private static ConstructorInfo GetAttributeAdapterConstructor(
+            Type attributeType,
+            Type adapterType
+        )
         {
-            ConstructorInfo constructor = adapterType.GetConstructor(new[] { typeof(IEnumerable<ModelValidatorProvider>), attributeType });
+            ConstructorInfo constructor = adapterType.GetConstructor(
+                new[] { typeof(IEnumerable<ModelValidatorProvider>), attributeType }
+            );
             if (constructor == null)
             {
-                throw Error.Argument("adapterType", SRResources.DataAnnotationsModelValidatorProvider_ConstructorRequirements, adapterType.Name, typeof(ModelMetadata).Name, "IEnumerable<" + typeof(ModelValidatorProvider).Name + ">", attributeType.Name);
+                throw Error.Argument(
+                    "adapterType",
+                    SRResources.DataAnnotationsModelValidatorProvider_ConstructorRequirements,
+                    adapterType.Name,
+                    typeof(ModelMetadata).Name,
+                    "IEnumerable<" + typeof(ModelValidatorProvider).Name + ">",
+                    attributeType.Name
+                );
             }
 
             return constructor;
@@ -127,7 +165,12 @@ namespace System.Web.Http.Validation.Providers
 
             if (!typeof(ModelValidator).IsAssignableFrom(adapterType))
             {
-                throw Error.Argument("adapterType", SRResources.Common_TypeMustDriveFromType, adapterType.Name, typeof(ModelValidator).Name);
+                throw Error.Argument(
+                    "adapterType",
+                    SRResources.Common_TypeMustDriveFromType,
+                    adapterType.Name,
+                    typeof(ModelValidator).Name
+                );
             }
         }
 
@@ -140,7 +183,12 @@ namespace System.Web.Http.Validation.Providers
 
             if (!typeof(ValidationAttribute).IsAssignableFrom(attributeType))
             {
-                throw Error.Argument("attributeType", SRResources.Common_TypeMustDriveFromType, attributeType.Name, typeof(ValidationAttribute).Name);
+                throw Error.Argument(
+                    "attributeType",
+                    SRResources.Common_TypeMustDriveFromType,
+                    attributeType.Name,
+                    typeof(ValidationAttribute).Name
+                );
             }
         }
 
@@ -169,20 +217,24 @@ namespace System.Web.Http.Validation.Providers
             ValidateValidatableAdapterType(adapterType);
             ConstructorInfo constructor = GetValidatableAdapterConstructor(adapterType);
 
-                ValidatableFactories[modelType] = context => (ModelValidator)constructor.Invoke(new object[] { context });
-            }
+            ValidatableFactories[modelType] = context =>
+                (ModelValidator)constructor.Invoke(new object[] { context });
+        }
 
         /// <summary>
         /// Registers an adapter factory for the given <paramref name="modelType"/>, which must
         /// implement <see cref="IValidatableObject"/>.
         /// </summary>
-        public void RegisterValidatableObjectAdapterFactory(Type modelType, DataAnnotationsValidatableObjectAdapterFactory factory)
+        public void RegisterValidatableObjectAdapterFactory(
+            Type modelType,
+            DataAnnotationsValidatableObjectAdapterFactory factory
+        )
         {
             ValidateValidatableModelType(modelType);
             ValidateValidatableFactory(factory);
 
-                ValidatableFactories[modelType] = factory;
-            }
+            ValidatableFactories[modelType] = factory;
+        }
 
         /// <summary>
         /// Registers the default adapter type for objects which implement
@@ -196,28 +248,39 @@ namespace System.Web.Http.Validation.Providers
             ValidateValidatableAdapterType(adapterType);
             ConstructorInfo constructor = GetValidatableAdapterConstructor(adapterType);
 
-            DefaultValidatableFactory = context => (ModelValidator)constructor.Invoke(new object[] { context });
+            DefaultValidatableFactory = context =>
+                (ModelValidator)constructor.Invoke(new object[] { context });
         }
 
         /// <summary>
         /// Registers the default adapter factory for objects which implement
         /// <see cref="IValidatableObject"/>.
         /// </summary>
-        public void RegisterDefaultValidatableObjectAdapterFactory(DataAnnotationsValidatableObjectAdapterFactory factory)
+        public void RegisterDefaultValidatableObjectAdapterFactory(
+            DataAnnotationsValidatableObjectAdapterFactory factory
+        )
         {
             ValidateValidatableFactory(factory);
 
             DefaultValidatableFactory = factory;
         }
 
-        // Helpers 
+        // Helpers
 
         private static ConstructorInfo GetValidatableAdapterConstructor(Type adapterType)
         {
-            ConstructorInfo constructor = adapterType.GetConstructor(new[] { typeof(IEnumerable<ModelValidatorProvider>) });
+            ConstructorInfo constructor = adapterType.GetConstructor(
+                new[] { typeof(IEnumerable<ModelValidatorProvider>) }
+            );
             if (constructor == null)
             {
-                throw Error.Argument("adapterType", SRResources.DataAnnotationsModelValidatorProvider_ValidatableConstructorRequirements, adapterType.Name, typeof(ModelMetadata).Name, "IEnumerable<" + typeof(ModelValidatorProvider).Name + ">");
+                throw Error.Argument(
+                    "adapterType",
+                    SRResources.DataAnnotationsModelValidatorProvider_ValidatableConstructorRequirements,
+                    adapterType.Name,
+                    typeof(ModelMetadata).Name,
+                    "IEnumerable<" + typeof(ModelValidatorProvider).Name + ">"
+                );
             }
 
             return constructor;
@@ -231,7 +294,12 @@ namespace System.Web.Http.Validation.Providers
             }
             if (!typeof(ModelValidator).IsAssignableFrom(adapterType))
             {
-                throw Error.Argument("adapterType", SRResources.Common_TypeMustDriveFromType, adapterType.Name, typeof(ModelValidator).Name);
+                throw Error.Argument(
+                    "adapterType",
+                    SRResources.Common_TypeMustDriveFromType,
+                    adapterType.Name,
+                    typeof(ModelValidator).Name
+                );
             }
         }
 
@@ -243,11 +311,18 @@ namespace System.Web.Http.Validation.Providers
             }
             if (!typeof(IValidatableObject).IsAssignableFrom(modelType))
             {
-                throw Error.Argument("modelType", SRResources.Common_TypeMustDriveFromType, modelType.Name, typeof(IValidatableObject).Name);
+                throw Error.Argument(
+                    "modelType",
+                    SRResources.Common_TypeMustDriveFromType,
+                    modelType.Name,
+                    typeof(IValidatableObject).Name
+                );
             }
         }
 
-        private static void ValidateValidatableFactory(DataAnnotationsValidatableObjectAdapterFactory factory)
+        private static void ValidateValidatableFactory(
+            DataAnnotationsValidatableObjectAdapterFactory factory
+        )
         {
             if (factory == null)
             {

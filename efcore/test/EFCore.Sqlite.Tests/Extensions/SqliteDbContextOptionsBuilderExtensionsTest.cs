@@ -45,7 +45,9 @@ public class SqliteDbContextOptionsBuilderExtensionsTest
     [ConditionalTheory]
     [InlineData(false)]
     [InlineData(true)]
-    public void Can_add_extension_with_connection_string_using_generic_options(bool nullConnectionString)
+    public void Can_add_extension_with_connection_string_using_generic_options(
+        bool nullConnectionString
+    )
     {
         var optionsBuilder = new DbContextOptionsBuilder<DbContext>();
         optionsBuilder.UseSqlite(nullConnectionString ? null : "Database=Whisper");
@@ -132,7 +134,9 @@ public class SqliteDbContextOptionsBuilderExtensionsTest
     [ConditionalTheory]
     [InlineData(false)]
     [InlineData(true)]
-    public void Service_collection_extension_method_can_configure_sqlite_options(bool nullConnectionString)
+    public void Service_collection_extension_method_can_configure_sqlite_options(
+        bool nullConnectionString
+    )
     {
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSqlite<ApplicationDbContext>(
@@ -145,33 +149,35 @@ public class SqliteDbContextOptionsBuilderExtensionsTest
             dbContextOption =>
             {
                 dbContextOption.EnableDetailedErrors();
-            });
+            }
+        );
 
         var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
-        using (var serviceScope = services
-                   .GetRequiredService<IServiceScopeFactory>()
-                   .CreateScope())
+        using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
-            var coreOptions = serviceScope.ServiceProvider
-                .GetRequiredService<DbContextOptions<ApplicationDbContext>>().GetExtension<CoreOptionsExtension>();
+            var coreOptions = serviceScope
+                .ServiceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()
+                .GetExtension<CoreOptionsExtension>();
 
             Assert.True(coreOptions.DetailedErrorsEnabled);
 
-            var sqliteOptions = serviceScope.ServiceProvider
-                .GetRequiredService<DbContextOptions<ApplicationDbContext>>().GetExtension<SqliteOptionsExtension>();
+            var sqliteOptions = serviceScope
+                .ServiceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()
+                .GetExtension<SqliteOptionsExtension>();
 
             Assert.Equal(123, sqliteOptions.MaxBatchSize);
             Assert.Equal(30, sqliteOptions.CommandTimeout);
-            Assert.Equal(nullConnectionString ? null : "Database=Crunchie", sqliteOptions.ConnectionString);
+            Assert.Equal(
+                nullConnectionString ? null : "Database=Crunchie",
+                sqliteOptions.ConnectionString
+            );
         }
     }
 
     private class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
+            : base(options) { }
     }
 }

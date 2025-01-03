@@ -54,7 +54,8 @@ namespace System.Reflection.Metadata
         /// The caller is responsible for keeping the memory alive and unmodified throughout the lifetime of the <see cref="MetadataReaderProvider"/>.
         /// The content of the blob is not read during the construction of the <see cref="MetadataReaderProvider"/>
         /// </remarks>
-        public static unsafe MetadataReaderProvider FromPortablePdbImage(byte* start, int size) => FromMetadataImage(start, size);
+        public static unsafe MetadataReaderProvider FromPortablePdbImage(byte* start, int size) =>
+            FromMetadataImage(start, size);
 
         /// <summary>
         /// Creates a metadata provider over an image stored in memory.
@@ -91,7 +92,8 @@ namespace System.Reflection.Metadata
         /// The content of the image is not read during the construction of the <see cref="MetadataReaderProvider"/>
         /// </remarks>
         /// <exception cref="ArgumentNullException"><paramref name="image"/> is null.</exception>
-        public static MetadataReaderProvider FromPortablePdbImage(ImmutableArray<byte> image) => FromMetadataImage(image);
+        public static MetadataReaderProvider FromPortablePdbImage(ImmutableArray<byte> image) =>
+            FromMetadataImage(image);
 
         /// <summary>
         /// Creates a provider over a byte array.
@@ -134,7 +136,11 @@ namespace System.Reflection.Metadata
         /// <exception cref="ArgumentNullException"><paramref name="stream"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="stream"/> doesn't support read and seek operations.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Size is negative or extends past the end of the stream.</exception>
-        public static MetadataReaderProvider FromPortablePdbStream(Stream stream, MetadataStreamOptions options = MetadataStreamOptions.Default, int size = 0) => FromMetadataStream(stream, options, size);
+        public static MetadataReaderProvider FromPortablePdbStream(
+            Stream stream,
+            MetadataStreamOptions options = MetadataStreamOptions.Default,
+            int size = 0
+        ) => FromMetadataStream(stream, options, size);
 
         /// <summary>
         /// Creates a provider for a stream of the specified size beginning at its current position.
@@ -160,7 +166,11 @@ namespace System.Reflection.Metadata
         /// <exception cref="ArgumentException"><paramref name="stream"/> doesn't support read and seek operations.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Size is negative or extends past the end of the stream.</exception>
         /// <exception cref="IOException">Error reading from the stream (only when <see cref="MetadataStreamOptions.PrefetchMetadata"/> is specified).</exception>
-        public static MetadataReaderProvider FromMetadataStream(Stream stream, MetadataStreamOptions options = MetadataStreamOptions.Default, int size = 0)
+        public static MetadataReaderProvider FromMetadataStream(
+            Stream stream,
+            MetadataStreamOptions options = MetadataStreamOptions.Default,
+            int size = 0
+        )
         {
             if (stream is null)
             {
@@ -186,13 +196,22 @@ namespace System.Reflection.Metadata
             {
                 if ((options & MetadataStreamOptions.PrefetchMetadata) == 0)
                 {
-                    result = new MetadataReaderProvider(new StreamMemoryBlockProvider(stream, start, actualSize, (options & MetadataStreamOptions.LeaveOpen) != 0));
+                    result = new MetadataReaderProvider(
+                        new StreamMemoryBlockProvider(
+                            stream,
+                            start,
+                            actualSize,
+                            (options & MetadataStreamOptions.LeaveOpen) != 0
+                        )
+                    );
                     closeStream = false;
                 }
                 else
                 {
                     // Read in the entire image or metadata blob:
-                    result = new MetadataReaderProvider(StreamMemoryBlockProvider.ReadMemoryBlockNoLock(stream, start, actualSize));
+                    result = new MetadataReaderProvider(
+                        StreamMemoryBlockProvider.ReadMemoryBlockNoLock(stream, start, actualSize)
+                    );
 
                     // We read all we need, the stream is going to be closed.
                 }
@@ -240,7 +259,10 @@ namespace System.Reflection.Metadata
         /// <exception cref="PlatformNotSupportedException">The current platform is big-endian.</exception>
         /// <exception cref="IOException">IO error while reading from the underlying stream.</exception>
         /// <exception cref="ObjectDisposedException">Provider has been disposed.</exception>
-        public unsafe MetadataReader GetMetadataReader(MetadataReaderOptions options = MetadataReaderOptions.Default, MetadataStringDecoder? utf8Decoder = null)
+        public unsafe MetadataReader GetMetadataReader(
+            MetadataReaderOptions options = MetadataReaderOptions.Default,
+            MetadataStringDecoder? utf8Decoder = null
+        )
         {
             var cachedReader = _lazyMetadataReader;
 
@@ -263,15 +285,30 @@ namespace System.Reflection.Metadata
                 }
 
                 AbstractMemoryBlock metadata = GetMetadataBlock();
-                var newReader = new MetadataReader(metadata.Pointer, metadata.Size, options, utf8Decoder, memoryOwner: this);
+                var newReader = new MetadataReader(
+                    metadata.Pointer,
+                    metadata.Size,
+                    options,
+                    utf8Decoder,
+                    memoryOwner: this
+                );
                 _lazyMetadataReader = newReader;
                 return newReader;
             }
         }
 
-        private static bool CanReuseReader(MetadataReader? reader, MetadataReaderOptions options, MetadataStringDecoder? utf8DecoderOpt)
+        private static bool CanReuseReader(
+            MetadataReader? reader,
+            MetadataReaderOptions options,
+            MetadataStringDecoder? utf8DecoderOpt
+        )
         {
-            return reader != null && reader.Options == options && ReferenceEquals(reader.UTF8Decoder, utf8DecoderOpt ?? MetadataStringDecoder.DefaultUTF8);
+            return reader != null
+                && reader.Options == options
+                && ReferenceEquals(
+                    reader.UTF8Decoder,
+                    utf8DecoderOpt ?? MetadataStringDecoder.DefaultUTF8
+                );
         }
 
         /// <exception cref="IOException">IO error while reading from the underlying stream.</exception>

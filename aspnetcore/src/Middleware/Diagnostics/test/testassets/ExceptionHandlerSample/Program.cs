@@ -10,10 +10,7 @@ public class Program
         var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder
-                .UseKestrel()
-                .UseIISIntegration()
-                .UseStartup<Startup>();
+                webHostBuilder.UseKestrel().UseIISIntegration().UseStartup<Startup>();
             })
             .Build();
 

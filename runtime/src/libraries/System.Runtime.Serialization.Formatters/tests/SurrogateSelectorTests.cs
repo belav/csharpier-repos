@@ -11,15 +11,30 @@ namespace System.Runtime.Serialization.Formatters.Tests
         public void AddSurrogate_InvalidArguments_ThrowExceptions()
         {
             var s = new SurrogateSelector();
-            AssertExtensions.Throws<ArgumentNullException>("type", () => s.AddSurrogate(null, new StreamingContext(), new NonSerializablePairSurrogate()));
-            AssertExtensions.Throws<ArgumentNullException>("surrogate", () => s.AddSurrogate(typeof(NonSerializablePair<int, string>), new StreamingContext(), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () =>
+                    s.AddSurrogate(null, new StreamingContext(), new NonSerializablePairSurrogate())
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "surrogate",
+                () =>
+                    s.AddSurrogate(
+                        typeof(NonSerializablePair<int, string>),
+                        new StreamingContext(),
+                        null
+                    )
+            );
         }
 
         [Fact]
         public void ChainSelector_InvalidArguments_ThrowExceptions()
         {
             var s1 = new SurrogateSelector();
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => s1.ChainSelector(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => s1.ChainSelector(null)
+            );
             Assert.Throws<SerializationException>(() => s1.ChainSelector(s1));
 
             var s2 = new SurrogateSelector();
@@ -47,7 +62,10 @@ namespace System.Runtime.Serialization.Formatters.Tests
             var s = new SurrogateSelector();
             var c = new StreamingContext();
             ISurrogateSelector selector;
-            AssertExtensions.Throws<ArgumentNullException>("type", () => s.GetSurrogate(null, c, out selector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => s.GetSurrogate(null, c, out selector)
+            );
         }
 
         [Fact]
@@ -62,19 +80,35 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.Null(s1.GetSurrogate(typeof(NonSerializablePair<int, string>), c, out selector));
             Assert.Same(s1, selector);
 
-            s1.AddSurrogate(typeof(NonSerializablePair<int, string>), c, new NonSerializablePairSurrogate());
-            Assert.NotNull(s1.GetSurrogate(typeof(NonSerializablePair<int, string>), c, out selector));
+            s1.AddSurrogate(
+                typeof(NonSerializablePair<int, string>),
+                c,
+                new NonSerializablePairSurrogate()
+            );
+            Assert.NotNull(
+                s1.GetSurrogate(typeof(NonSerializablePair<int, string>), c, out selector)
+            );
             Assert.Same(s1, selector);
 
-            Assert.NotNull(s2.GetSurrogate(typeof(NonSerializablePair<int, string>), c, out selector));
+            Assert.NotNull(
+                s2.GetSurrogate(typeof(NonSerializablePair<int, string>), c, out selector)
+            );
             Assert.Same(s1, selector);
 
-            s2.AddSurrogate(typeof(NonSerializablePair<int, string>), c, new NonSerializablePairSurrogate());
-            Assert.NotNull(s2.GetSurrogate(typeof(NonSerializablePair<int, string>), c, out selector));
+            s2.AddSurrogate(
+                typeof(NonSerializablePair<int, string>),
+                c,
+                new NonSerializablePairSurrogate()
+            );
+            Assert.NotNull(
+                s2.GetSurrogate(typeof(NonSerializablePair<int, string>), c, out selector)
+            );
             Assert.Same(s2, selector);
 
             s2.RemoveSurrogate(typeof(NonSerializablePair<int, string>), c);
-            Assert.NotNull(s2.GetSurrogate(typeof(NonSerializablePair<int, string>), c, out selector));
+            Assert.NotNull(
+                s2.GetSurrogate(typeof(NonSerializablePair<int, string>), c, out selector)
+            );
             Assert.Same(s1, selector);
 
             s1.RemoveSurrogate(typeof(NonSerializablePair<int, string>), c);
@@ -87,7 +121,10 @@ namespace System.Runtime.Serialization.Formatters.Tests
         {
             var s = new SurrogateSelector();
             var c = new StreamingContext();
-            AssertExtensions.Throws<ArgumentNullException>("type", () => s.RemoveSurrogate(null, c));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => s.RemoveSurrogate(null, c)
+            );
             s.RemoveSurrogate(typeof(string), c); // no exception even if removal fails
         }
     }

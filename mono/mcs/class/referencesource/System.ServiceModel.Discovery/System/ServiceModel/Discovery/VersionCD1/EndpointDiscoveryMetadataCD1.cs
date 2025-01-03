@@ -25,7 +25,9 @@ namespace System.ServiceModel.Discovery.VersionCD1
             this.endpointDiscoveryMetadata = endpointDiscoveryMetadata;
         }
 
-        public static EndpointDiscoveryMetadataCD1 FromEndpointDiscoveryMetadata(EndpointDiscoveryMetadata endpointDiscoveryMetadata)
+        public static EndpointDiscoveryMetadataCD1 FromEndpointDiscoveryMetadata(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata
+        )
         {
             if (endpointDiscoveryMetadata == null)
             {
@@ -55,7 +57,10 @@ namespace System.ServiceModel.Discovery.VersionCD1
             return null;
         }
 
-        [Fx.Tag.InheritThrows(From = "ReadFrom", FromDeclaringType = typeof(EndpointDiscoveryMetadata))]
+        [Fx.Tag.InheritThrows(
+            From = "ReadFrom",
+            FromDeclaringType = typeof(EndpointDiscoveryMetadata)
+        )]
         public void ReadXml(XmlReader reader)
         {
             this.endpointDiscoveryMetadata.ReadFrom(DiscoveryVersion.WSDiscoveryCD1, reader);

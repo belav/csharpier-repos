@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 {
     /// <summary>
     /// Also known as "rename smart tag," this watches text changes in open buffers, determines
-    /// whether they can be interpreted as an identifier rename, and if so displays a smart tag 
+    /// whether they can be interpreted as an identifier rename, and if so displays a smart tag
     /// that can perform a rename on that symbol. Each text buffer is tracked independently.
     /// </summary>
     [Export(typeof(ITaggerProvider))]
@@ -39,54 +39,85 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
     [ContentType(ContentTypeNames.XamlContentType)]
     [TextViewRole(PredefinedTextViewRoles.Editable)]
     [method: ImportingConstructor]
-    [method: SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+    [method: SuppressMessage(
+        "RoslynDiagnosticsReliability",
+        "RS0033:Importing constructor should be [Obsolete]",
+        Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+    )]
     internal sealed partial class RenameTrackingTaggerProvider(
         IThreadingContext threadingContext,
         IInlineRenameService inlineRenameService,
         IDiagnosticAnalyzerService diagnosticAnalyzerService,
         IGlobalOptionService globalOptions,
-        IAsynchronousOperationListenerProvider listenerProvider) : ITaggerProvider
+        IAsynchronousOperationListenerProvider listenerProvider
+    ) : ITaggerProvider
     {
         private readonly IThreadingContext _threadingContext = threadingContext;
-        private readonly IAsynchronousOperationListener _asyncListener = listenerProvider.GetListener(FeatureAttribute.RenameTracking);
+        private readonly IAsynchronousOperationListener _asyncListener =
+            listenerProvider.GetListener(FeatureAttribute.RenameTracking);
         private readonly IInlineRenameService _inlineRenameService = inlineRenameService;
-        private readonly IDiagnosticAnalyzerService _diagnosticAnalyzerService = diagnosticAnalyzerService;
+        private readonly IDiagnosticAnalyzerService _diagnosticAnalyzerService =
+            diagnosticAnalyzerService;
         private readonly IGlobalOptionService _globalOptions = globalOptions;
 
-        public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
+        public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag
         {
-            var stateMachine = buffer.Properties.GetOrCreateSingletonProperty(() => new StateMachine(_threadingContext, buffer, _inlineRenameService, _diagnosticAnalyzerService, _globalOptions, _asyncListener));
+            var stateMachine = buffer.Properties.GetOrCreateSingletonProperty(
+                () =>
+                    new StateMachine(
+                        _threadingContext,
+                        buffer,
+                        _inlineRenameService,
+                        _diagnosticAnalyzerService,
+                        _globalOptions,
+                        _asyncListener
+                    )
+            );
             return new Tagger(stateMachine) as ITagger<T>;
         }
 
-        internal static void ResetRenameTrackingState(Workspace workspace, DocumentId documentId)
-            => ResetRenameTrackingStateWorker(workspace, documentId, visible: false);
+        internal static void ResetRenameTrackingState(Workspace workspace, DocumentId documentId) =>
+            ResetRenameTrackingStateWorker(workspace, documentId, visible: false);
 
-        internal static bool ResetVisibleRenameTrackingState(Workspace workspace, DocumentId documentId)
-            => ResetRenameTrackingStateWorker(workspace, documentId, visible: true);
+        internal static bool ResetVisibleRenameTrackingState(
+            Workspace workspace,
+            DocumentId documentId
+        ) => ResetRenameTrackingStateWorker(workspace, documentId, visible: true);
 
-        internal static bool ResetRenameTrackingStateWorker(Workspace workspace, DocumentId documentId, bool visible)
+        internal static bool ResetRenameTrackingStateWorker(
+            Workspace workspace,
+            DocumentId documentId,
+            bool visible
+        )
         {
             if (workspace.IsDocumentOpen(documentId))
             {
                 var document = workspace.CurrentSolution.GetDocument(documentId);
                 ITextBuffer textBuffer;
-                if (document != null &&
-                    document.TryGetText(out var text))
+                if (document != null && document.TryGetText(out var text))
                 {
                     textBuffer = text.Container.TryGetTextBuffer();
                     if (textBuffer == null)
                     {
-                        var ex = new InvalidOperationException(string.Format(
-                            "document with name {0} is open but textBuffer is null. Textcontainer is of type {1}. SourceText is: {2}",
-                            document.Name,
-                            text.Container.GetType().FullName,
-                            text.ToString()));
+                        var ex = new InvalidOperationException(
+                            string.Format(
+                                "document with name {0} is open but textBuffer is null. Textcontainer is of type {1}. SourceText is: {2}",
+                                document.Name,
+                                text.Container.GetType().FullName,
+                                text.ToString()
+                            )
+                        );
                         FatalError.ReportAndCatch(ex);
                         return false;
                     }
 
-                    if (textBuffer.Properties.TryGetProperty(typeof(StateMachine), out StateMachine stateMachine))
+                    if (
+                        textBuffer.Properties.TryGetProperty(
+                            typeof(StateMachine),
+                            out StateMachine stateMachine
+                        )
+                    )
                     {
                         if (visible)
                         {
@@ -104,36 +135,62 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
         }
 
         public static (CodeAction action, TextSpan renameSpan) TryGetCodeAction(
-            Document document, TextSpan textSpan,
-                IEnumerable<IRefactorNotifyService> refactorNotifyServices,
-                ITextUndoHistoryRegistry undoHistoryRegistry,
-                CancellationToken cancellationToken)
+            Document document,
+            TextSpan textSpan,
+            IEnumerable<IRefactorNotifyService> refactorNotifyServices,
+            ITextUndoHistoryRegistry undoHistoryRegistry,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 if (document != null && document.TryGetText(out var text))
                 {
                     var textBuffer = text.Container.TryGetTextBuffer();
-                    if (textBuffer != null &&
-                        textBuffer.Properties.TryGetProperty(typeof(StateMachine), out StateMachine stateMachine) &&
-                        stateMachine.CanInvokeRename(out _, cancellationToken: cancellationToken))
+                    if (
+                        textBuffer != null
+                        && textBuffer.Properties.TryGetProperty(
+                            typeof(StateMachine),
+                            out StateMachine stateMachine
+                        )
+                        && stateMachine.CanInvokeRename(out _, cancellationToken: cancellationToken)
+                    )
                     {
                         return stateMachine.TryGetCodeAction(
-                            document, text, textSpan, refactorNotifyServices, undoHistoryRegistry, cancellationToken);
+                            document,
+                            text,
+                            textSpan,
+                            refactorNotifyServices,
+                            undoHistoryRegistry,
+                            cancellationToken
+                        );
                     }
                 }
 
                 return default;
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken, ErrorSeverity.General))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(
+                        e,
+                        cancellationToken,
+                        ErrorSeverity.General
+                    )
+                )
             {
                 throw ExceptionUtilities.Unreachable();
             }
         }
 
-        internal static bool IsRenamableIdentifier(Task<TriggerIdentifierKind> isRenamableIdentifierTask, bool waitForResult, CancellationToken cancellationToken)
+        internal static bool IsRenamableIdentifier(
+            Task<TriggerIdentifierKind> isRenamableIdentifierTask,
+            bool waitForResult,
+            CancellationToken cancellationToken
+        )
         {
-            if (isRenamableIdentifierTask.Status == TaskStatus.RanToCompletion && isRenamableIdentifierTask.Result != TriggerIdentifierKind.NotRenamable)
+            if (
+                isRenamableIdentifierTask.Status == TaskStatus.RanToCompletion
+                && isRenamableIdentifierTask.Result != TriggerIdentifierKind.NotRenamable
+            )
             {
                 return true;
             }
@@ -151,15 +208,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             }
         }
 
-        internal static bool WaitForIsRenamableIdentifier(Task<TriggerIdentifierKind> isRenamableIdentifierTask, CancellationToken cancellationToken)
+        internal static bool WaitForIsRenamableIdentifier(
+            Task<TriggerIdentifierKind> isRenamableIdentifierTask,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                return isRenamableIdentifierTask.WaitAndGetResult_CanCallOnBackground(cancellationToken) != TriggerIdentifierKind.NotRenamable;
+                return isRenamableIdentifierTask.WaitAndGetResult_CanCallOnBackground(
+                        cancellationToken
+                    ) != TriggerIdentifierKind.NotRenamable;
             }
-            catch (OperationCanceledException e) when (e.CancellationToken != cancellationToken || cancellationToken == CancellationToken.None)
+            catch (OperationCanceledException e)
+                when (e.CancellationToken != cancellationToken
+                    || cancellationToken == CancellationToken.None
+                )
             {
-                // We passed in a different cancellationToken, so if there's a race and 
+                // We passed in a different cancellationToken, so if there's a race and
                 // isRenamableIdentifierTask was cancelled, we'll get a OperationCanceledException
                 return false;
             }

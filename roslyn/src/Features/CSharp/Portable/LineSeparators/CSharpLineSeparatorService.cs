@@ -24,9 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpLineSeparatorService()
-        {
-        }
+        public CSharpLineSeparatorService() { }
 
         /// <summary>
         /// Given a tree returns line separator spans.
@@ -35,9 +33,12 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
         public async Task<ImmutableArray<TextSpan>> GetLineSeparatorsAsync(
             Document document,
             TextSpan textSpan,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var tree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             var node = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
             using var _ = ArrayBuilder<TextSpan>.GetInstance(out var spans);
 
@@ -94,15 +95,17 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
         }
 
         /// <summary>Node types that may contain separable blocks.</summary>
-        private static bool IsSeparableContainer(SyntaxNode node)
-            => node is TypeDeclarationSyntax or BaseNamespaceDeclarationSyntax or CompilationUnitSyntax;
+        private static bool IsSeparableContainer(SyntaxNode node) =>
+            node
+                is TypeDeclarationSyntax
+                    or BaseNamespaceDeclarationSyntax
+                    or CompilationUnitSyntax;
 
         private static bool IsBadType(SyntaxNode node)
         {
             if (node is TypeDeclarationSyntax typeDecl)
             {
-                if (typeDecl.OpenBraceToken.IsMissing ||
-                    typeDecl.CloseBraceToken.IsMissing)
+                if (typeDecl.OpenBraceToken.IsMissing || typeDecl.CloseBraceToken.IsMissing)
                 {
                     return true;
                 }
@@ -115,8 +118,7 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
         {
             if (node is EnumDeclarationSyntax enumDecl)
             {
-                if (enumDecl.OpenBraceToken.IsMissing ||
-                    enumDecl.CloseBraceToken.IsMissing)
+                if (enumDecl.OpenBraceToken.IsMissing || enumDecl.CloseBraceToken.IsMissing)
                 {
                     return true;
                 }
@@ -129,9 +131,13 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
         {
             if (node is MethodDeclarationSyntax methodDecl)
             {
-                if (methodDecl.Body != null &&
-                   (methodDecl.Body.OpenBraceToken.IsMissing ||
-                    methodDecl.Body.CloseBraceToken.IsMissing))
+                if (
+                    methodDecl.Body != null
+                    && (
+                        methodDecl.Body.OpenBraceToken.IsMissing
+                        || methodDecl.Body.CloseBraceToken.IsMissing
+                    )
+                )
                 {
                     return true;
                 }
@@ -140,31 +146,35 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
             return false;
         }
 
-        private static bool IsBadProperty(SyntaxNode node)
-            => IsBadAccessorList(node as PropertyDeclarationSyntax);
+        private static bool IsBadProperty(SyntaxNode node) =>
+            IsBadAccessorList(node as PropertyDeclarationSyntax);
 
-        private static bool IsBadEvent(SyntaxNode node)
-            => IsBadAccessorList(node as EventDeclarationSyntax);
+        private static bool IsBadEvent(SyntaxNode node) =>
+            IsBadAccessorList(node as EventDeclarationSyntax);
 
-        private static bool IsBadIndexer(SyntaxNode node)
-            => IsBadAccessorList(node as IndexerDeclarationSyntax);
+        private static bool IsBadIndexer(SyntaxNode node) =>
+            IsBadAccessorList(node as IndexerDeclarationSyntax);
 
         private static bool IsBadAccessorList(BasePropertyDeclarationSyntax? baseProperty)
         {
             if (baseProperty?.AccessorList == null)
                 return false;
 
-            return baseProperty.AccessorList.OpenBraceToken.IsMissing ||
-                baseProperty.AccessorList.CloseBraceToken.IsMissing;
+            return baseProperty.AccessorList.OpenBraceToken.IsMissing
+                || baseProperty.AccessorList.CloseBraceToken.IsMissing;
         }
 
         private static bool IsBadConstructor(SyntaxNode node)
         {
             if (node is ConstructorDeclarationSyntax constructorDecl)
             {
-                if (constructorDecl.Body != null &&
-                   (constructorDecl.Body.OpenBraceToken.IsMissing ||
-                    constructorDecl.Body.CloseBraceToken.IsMissing))
+                if (
+                    constructorDecl.Body != null
+                    && (
+                        constructorDecl.Body.OpenBraceToken.IsMissing
+                        || constructorDecl.Body.CloseBraceToken.IsMissing
+                    )
+                )
                 {
                     return true;
                 }
@@ -177,9 +187,13 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
         {
             if (node is DestructorDeclarationSyntax destructorDecl)
             {
-                if (destructorDecl.Body != null &&
-                   (destructorDecl.Body.OpenBraceToken.IsMissing ||
-                    destructorDecl.Body.CloseBraceToken.IsMissing))
+                if (
+                    destructorDecl.Body != null
+                    && (
+                        destructorDecl.Body.OpenBraceToken.IsMissing
+                        || destructorDecl.Body.CloseBraceToken.IsMissing
+                    )
+                )
                 {
                     return true;
                 }
@@ -192,9 +206,13 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
         {
             if (node is OperatorDeclarationSyntax operatorDecl)
             {
-                if (operatorDecl.Body != null &&
-                   (operatorDecl.Body.OpenBraceToken.IsMissing ||
-                    operatorDecl.Body.CloseBraceToken.IsMissing))
+                if (
+                    operatorDecl.Body != null
+                    && (
+                        operatorDecl.Body.OpenBraceToken.IsMissing
+                        || operatorDecl.Body.CloseBraceToken.IsMissing
+                    )
+                )
                 {
                     return true;
                 }
@@ -207,9 +225,13 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
         {
             if (node is ConversionOperatorDeclarationSyntax conversionDecl)
             {
-                if (conversionDecl.Body != null &&
-                   (conversionDecl.Body.OpenBraceToken.IsMissing ||
-                    conversionDecl.Body.CloseBraceToken.IsMissing))
+                if (
+                    conversionDecl.Body != null
+                    && (
+                        conversionDecl.Body.OpenBraceToken.IsMissing
+                        || conversionDecl.Body.CloseBraceToken.IsMissing
+                    )
+                )
                 {
                     return true;
                 }
@@ -225,16 +247,18 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
                 return true;
             }
 
-            if (IsBadType(node) ||
-                IsBadEnum(node) ||
-                IsBadMethod(node) ||
-                IsBadProperty(node) ||
-                IsBadEvent(node) ||
-                IsBadIndexer(node) ||
-                IsBadConstructor(node) ||
-                IsBadDestructor(node) ||
-                IsBadOperator(node) ||
-                IsBadConversionOperator(node))
+            if (
+                IsBadType(node)
+                || IsBadEnum(node)
+                || IsBadMethod(node)
+                || IsBadProperty(node)
+                || IsBadEvent(node)
+                || IsBadIndexer(node)
+                || IsBadConstructor(node)
+                || IsBadDestructor(node)
+                || IsBadOperator(node)
+                || IsBadConversionOperator(node)
+            )
             {
                 return true;
             }
@@ -242,7 +266,11 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
             return false;
         }
 
-        private static void ProcessUsings(SyntaxList<UsingDirectiveSyntax> usings, ArrayBuilder<TextSpan> spans, CancellationToken cancellationToken)
+        private static void ProcessUsings(
+            SyntaxList<UsingDirectiveSyntax> usings,
+            ArrayBuilder<TextSpan> spans,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(spans);
 
@@ -257,7 +285,12 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
         /// If node is separable and not the first in its container => ensure separator before the node
         /// last separable node in Program needs separator after it.
         /// </summary>
-        private static void ProcessNodeList<T>(SyntaxList<T> children, ArrayBuilder<TextSpan> spans, CancellationToken cancellationToken) where T : SyntaxNode
+        private static void ProcessNodeList<T>(
+            SyntaxList<T> children,
+            ArrayBuilder<TextSpan> spans,
+            CancellationToken cancellationToken
+        )
+            where T : SyntaxNode
         {
             Contract.ThrowIfNull(spans);
 
@@ -310,7 +343,11 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
             }
         }
 
-        private static void AddLineSeparatorSpanForNode(SyntaxNode node, ArrayBuilder<TextSpan> spans, CancellationToken cancellationToken)
+        private static void AddLineSeparatorSpanForNode(
+            SyntaxNode node,
+            ArrayBuilder<TextSpan> spans,
+            CancellationToken cancellationToken
+        )
         {
             if (IsBadNode(node))
             {
@@ -325,9 +362,13 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
             }
         }
 
-        private static bool IsLegalSpanForLineSeparator(SyntaxTree syntaxTree, TextSpan textSpan, CancellationToken cancellationToken)
+        private static bool IsLegalSpanForLineSeparator(
+            SyntaxTree syntaxTree,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        )
         {
-            // A span is a legal location for a line separator if the following line 
+            // A span is a legal location for a line separator if the following line
             // contains only whitespace or the span is the last line in the buffer.
 
             var line = syntaxTree.GetText(cancellationToken).Lines.IndexOf(textSpan.End);
@@ -336,7 +377,11 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
                 return true;
             }
 
-            if (string.IsNullOrWhiteSpace(syntaxTree.GetText(cancellationToken).Lines[line + 1].ToString()))
+            if (
+                string.IsNullOrWhiteSpace(
+                    syntaxTree.GetText(cancellationToken).Lines[line + 1].ToString()
+                )
+            )
             {
                 return true;
             }
@@ -347,7 +392,7 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
         private static TextSpan GetLineSeparatorSpanForNode(SyntaxNode node)
         {
             // we only want to underline the node with a long line
-            // for this purpose the last token is as good as the whole node, but has 
+            // for this purpose the last token is as good as the whole node, but has
             // simpler and typically single line geometry (so it will be easier to find "bottom")
             return node.GetLastToken().Span;
         }

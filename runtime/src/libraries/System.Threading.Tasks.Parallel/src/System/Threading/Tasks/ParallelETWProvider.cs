@@ -20,7 +20,9 @@ namespace System.Threading.Tasks
     [EventSource(Name = "System.Threading.Tasks.Parallel.EventSource")]
     internal sealed class ParallelEtwProvider : EventSource
     {
-        private const string EventSourceSuppressMessage = "Parameters to this method are primitive and are trimmer safe";
+        private const string EventSourceSuppressMessage =
+            "Parameters to this method are primitive and are trimmer safe";
+
         /// <summary>
         /// Defines the singleton instance for the Task.Parallel ETW provider.
         /// </summary>
@@ -34,17 +36,20 @@ namespace System.Threading.Tasks
         {
             /// <summary>Parallel.Invoke.</summary>
             ParallelInvoke = 1,
+
             /// <summary>Parallel.For.</summary>
             ParallelFor = 2,
+
             /// <summary>Parallel.ForEach.</summary>
-            ParallelForEach = 3
+            ParallelForEach = 3,
         }
 
         /// <summary>ETW tasks that have start/stop events.</summary>
         public static class Tasks
-        {  // this name is important for EventSource
-           /// <summary>A parallel loop.</summary>
+        { // this name is important for EventSource
+            /// <summary>A parallel loop.</summary>
             public const EventTask Loop = (EventTask)1;
+
             /// <summary>A parallel invoke.</summary>
             public const EventTask Invoke = (EventTask)2;
 
@@ -55,10 +60,8 @@ namespace System.Threading.Tasks
             public const EventTask ForkJoin = (EventTask)5;
         }
 
-
         /// <summary>Enabled for all keywords.</summary>
         private const EventKeywords ALL_KEYWORDS = (EventKeywords)(-1);
-
 
         //-----------------------------------------------------------------------------------
         //
@@ -83,7 +86,6 @@ namespace System.Threading.Tasks
         /// <summary>A task leaving a fork/join construct.</summary>
         private const int PARALLELJOIN_ID = 6;
 
-
         //-----------------------------------------------------------------------------------
         //
         // Parallel Events
@@ -99,12 +101,25 @@ namespace System.Threading.Tasks
         /// <param name="OperationType">The kind of fork/join operation.</param>
         /// <param name="InclusiveFrom">The lower bound of the loop.</param>
         /// <param name="ExclusiveTo">The upper bound of the loop.</param>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
-        [Event(PARALLELLOOPBEGIN_ID, Level = EventLevel.Informational, Task = ParallelEtwProvider.Tasks.Loop, Opcode = EventOpcode.Start)]
-        public void ParallelLoopBegin(int OriginatingTaskSchedulerID, int OriginatingTaskID,      // PFX_COMMON_EVENT_HEADER
-                                      int ForkJoinContextID, ForkJoinOperationType OperationType, // PFX_FORKJOIN_COMMON_EVENT_HEADER
-                                      long InclusiveFrom, long ExclusiveTo)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
+        [Event(
+            PARALLELLOOPBEGIN_ID,
+            Level = EventLevel.Informational,
+            Task = ParallelEtwProvider.Tasks.Loop,
+            Opcode = EventOpcode.Start
+        )]
+        public void ParallelLoopBegin(
+            int OriginatingTaskSchedulerID,
+            int OriginatingTaskID, // PFX_COMMON_EVENT_HEADER
+            int ForkJoinContextID,
+            ForkJoinOperationType OperationType, // PFX_FORKJOIN_COMMON_EVENT_HEADER
+            long InclusiveFrom,
+            long ExclusiveTo
+        )
         {
             if (IsEnabled(EventLevel.Informational, ALL_KEYWORDS))
             {
@@ -119,32 +134,32 @@ namespace System.Threading.Tasks
                     eventPayload[0] = new EventData
                     {
                         Size = sizeof(int),
-                        DataPointer = ((IntPtr)(&OriginatingTaskSchedulerID))
+                        DataPointer = ((IntPtr)(&OriginatingTaskSchedulerID)),
                     };
                     eventPayload[1] = new EventData
                     {
                         Size = sizeof(int),
-                        DataPointer = ((IntPtr)(&OriginatingTaskID))
+                        DataPointer = ((IntPtr)(&OriginatingTaskID)),
                     };
                     eventPayload[2] = new EventData
                     {
                         Size = sizeof(int),
-                        DataPointer = ((IntPtr)(&ForkJoinContextID))
+                        DataPointer = ((IntPtr)(&ForkJoinContextID)),
                     };
                     eventPayload[3] = new EventData
                     {
                         Size = sizeof(int),
-                        DataPointer = ((IntPtr)(&OperationType))
+                        DataPointer = ((IntPtr)(&OperationType)),
                     };
                     eventPayload[4] = new EventData
                     {
                         Size = sizeof(long),
-                        DataPointer = ((IntPtr)(&InclusiveFrom))
+                        DataPointer = ((IntPtr)(&InclusiveFrom)),
                     };
                     eventPayload[5] = new EventData
                     {
                         Size = sizeof(long),
-                        DataPointer = ((IntPtr)(&ExclusiveTo))
+                        DataPointer = ((IntPtr)(&ExclusiveTo)),
                     };
 
                     WriteEventCore(PARALLELLOOPBEGIN_ID, 6, eventPayload);
@@ -161,11 +176,23 @@ namespace System.Threading.Tasks
         /// <param name="OriginatingTaskID">The task ID.</param>
         /// <param name="ForkJoinContextID">The loop ID.</param>
         /// <param name="TotalIterations">the total number of iterations processed.</param>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
-        [Event(PARALLELLOOPEND_ID, Level = EventLevel.Informational, Task = ParallelEtwProvider.Tasks.Loop, Opcode = EventOpcode.Stop)]
-        public void ParallelLoopEnd(int OriginatingTaskSchedulerID, int OriginatingTaskID,  // PFX_COMMON_EVENT_HEADER
-                                    int ForkJoinContextID, long TotalIterations)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
+        [Event(
+            PARALLELLOOPEND_ID,
+            Level = EventLevel.Informational,
+            Task = ParallelEtwProvider.Tasks.Loop,
+            Opcode = EventOpcode.Stop
+        )]
+        public void ParallelLoopEnd(
+            int OriginatingTaskSchedulerID,
+            int OriginatingTaskID, // PFX_COMMON_EVENT_HEADER
+            int ForkJoinContextID,
+            long TotalIterations
+        )
         {
             if (IsEnabled(EventLevel.Informational, ALL_KEYWORDS))
             {
@@ -179,22 +206,22 @@ namespace System.Threading.Tasks
                     eventPayload[0] = new EventData
                     {
                         Size = sizeof(int),
-                        DataPointer = ((IntPtr)(&OriginatingTaskSchedulerID))
+                        DataPointer = ((IntPtr)(&OriginatingTaskSchedulerID)),
                     };
                     eventPayload[1] = new EventData
                     {
                         Size = sizeof(int),
-                        DataPointer = ((IntPtr)(&OriginatingTaskID))
+                        DataPointer = ((IntPtr)(&OriginatingTaskID)),
                     };
                     eventPayload[2] = new EventData
                     {
                         Size = sizeof(int),
-                        DataPointer = ((IntPtr)(&ForkJoinContextID))
+                        DataPointer = ((IntPtr)(&ForkJoinContextID)),
                     };
                     eventPayload[3] = new EventData
                     {
                         Size = sizeof(long),
-                        DataPointer = ((IntPtr)(&TotalIterations))
+                        DataPointer = ((IntPtr)(&TotalIterations)),
                     };
 
                     WriteEventCore(PARALLELLOOPEND_ID, 4, eventPayload);
@@ -210,12 +237,24 @@ namespace System.Threading.Tasks
         /// <param name="ForkJoinContextID">The invoke ID.</param>
         /// <param name="OperationType">The kind of fork/join operation.</param>
         /// <param name="ActionCount">The number of actions being invoked.</param>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
-        [Event(PARALLELINVOKEBEGIN_ID, Level = EventLevel.Informational, Task = ParallelEtwProvider.Tasks.Invoke, Opcode = EventOpcode.Start)]
-        public void ParallelInvokeBegin(int OriginatingTaskSchedulerID, int OriginatingTaskID,      // PFX_COMMON_EVENT_HEADER
-                                        int ForkJoinContextID, ForkJoinOperationType OperationType, // PFX_FORKJOIN_COMMON_EVENT_HEADER
-                                        int ActionCount)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
+        [Event(
+            PARALLELINVOKEBEGIN_ID,
+            Level = EventLevel.Informational,
+            Task = ParallelEtwProvider.Tasks.Invoke,
+            Opcode = EventOpcode.Start
+        )]
+        public void ParallelInvokeBegin(
+            int OriginatingTaskSchedulerID,
+            int OriginatingTaskID, // PFX_COMMON_EVENT_HEADER
+            int ForkJoinContextID,
+            ForkJoinOperationType OperationType, // PFX_FORKJOIN_COMMON_EVENT_HEADER
+            int ActionCount
+        )
         {
             if (IsEnabled(EventLevel.Informational, ALL_KEYWORDS))
             {
@@ -229,27 +268,27 @@ namespace System.Threading.Tasks
                     eventPayload[0] = new EventData
                     {
                         Size = sizeof(int),
-                        DataPointer = ((IntPtr)(&OriginatingTaskSchedulerID))
+                        DataPointer = ((IntPtr)(&OriginatingTaskSchedulerID)),
                     };
                     eventPayload[1] = new EventData
                     {
                         Size = sizeof(int),
-                        DataPointer = ((IntPtr)(&OriginatingTaskID))
+                        DataPointer = ((IntPtr)(&OriginatingTaskID)),
                     };
                     eventPayload[2] = new EventData
                     {
                         Size = sizeof(int),
-                        DataPointer = ((IntPtr)(&ForkJoinContextID))
+                        DataPointer = ((IntPtr)(&ForkJoinContextID)),
                     };
                     eventPayload[3] = new EventData
                     {
                         Size = sizeof(int),
-                        DataPointer = ((IntPtr)(&OperationType))
+                        DataPointer = ((IntPtr)(&OperationType)),
                     };
                     eventPayload[4] = new EventData
                     {
                         Size = sizeof(int),
-                        DataPointer = ((IntPtr)(&ActionCount))
+                        DataPointer = ((IntPtr)(&ActionCount)),
                     };
 
                     WriteEventCore(PARALLELINVOKEBEGIN_ID, 5, eventPayload);
@@ -265,12 +304,25 @@ namespace System.Threading.Tasks
         /// <param name="OriginatingTaskSchedulerID">The scheduler ID.</param>
         /// <param name="OriginatingTaskID">The task ID.</param>
         /// <param name="ForkJoinContextID">The invoke ID.</param>
-        [Event(PARALLELINVOKEEND_ID, Level = EventLevel.Informational, Task = ParallelEtwProvider.Tasks.Invoke, Opcode = EventOpcode.Stop)]
-        public void ParallelInvokeEnd(int OriginatingTaskSchedulerID, int OriginatingTaskID,  // PFX_COMMON_EVENT_HEADER
-                                      int ForkJoinContextID)
+        [Event(
+            PARALLELINVOKEEND_ID,
+            Level = EventLevel.Informational,
+            Task = ParallelEtwProvider.Tasks.Invoke,
+            Opcode = EventOpcode.Stop
+        )]
+        public void ParallelInvokeEnd(
+            int OriginatingTaskSchedulerID,
+            int OriginatingTaskID, // PFX_COMMON_EVENT_HEADER
+            int ForkJoinContextID
+        )
         {
             if (IsEnabled(EventLevel.Informational, ALL_KEYWORDS))
-                WriteEvent(PARALLELINVOKEEND_ID, OriginatingTaskSchedulerID, OriginatingTaskID, ForkJoinContextID);
+                WriteEvent(
+                    PARALLELINVOKEEND_ID,
+                    OriginatingTaskSchedulerID,
+                    OriginatingTaskID,
+                    ForkJoinContextID
+                );
         }
         #endregion ParallelInvokeEnd
 
@@ -283,12 +335,25 @@ namespace System.Threading.Tasks
         /// <param name="OriginatingTaskSchedulerID">The scheduler ID.</param>
         /// <param name="OriginatingTaskID">The task ID.</param>
         /// <param name="ForkJoinContextID">The invoke ID.</param>
-        [Event(PARALLELFORK_ID, Level = EventLevel.Verbose, Task = ParallelEtwProvider.Tasks.ForkJoin, Opcode = EventOpcode.Start)]
-        public void ParallelFork(int OriginatingTaskSchedulerID, int OriginatingTaskID,  // PFX_COMMON_EVENT_HEADER
-                                 int ForkJoinContextID)
+        [Event(
+            PARALLELFORK_ID,
+            Level = EventLevel.Verbose,
+            Task = ParallelEtwProvider.Tasks.ForkJoin,
+            Opcode = EventOpcode.Start
+        )]
+        public void ParallelFork(
+            int OriginatingTaskSchedulerID,
+            int OriginatingTaskID, // PFX_COMMON_EVENT_HEADER
+            int ForkJoinContextID
+        )
         {
             if (IsEnabled(EventLevel.Verbose, ALL_KEYWORDS))
-                WriteEvent(PARALLELFORK_ID, OriginatingTaskSchedulerID, OriginatingTaskID, ForkJoinContextID);
+                WriteEvent(
+                    PARALLELFORK_ID,
+                    OriginatingTaskSchedulerID,
+                    OriginatingTaskID,
+                    ForkJoinContextID
+                );
         }
         #endregion ParallelFork
 
@@ -300,14 +365,26 @@ namespace System.Threading.Tasks
         /// <param name="OriginatingTaskSchedulerID">The scheduler ID.</param>
         /// <param name="OriginatingTaskID">The task ID.</param>
         /// <param name="ForkJoinContextID">The invoke ID.</param>
-        [Event(PARALLELJOIN_ID, Level = EventLevel.Verbose, Task = ParallelEtwProvider.Tasks.ForkJoin, Opcode = EventOpcode.Stop)]
-        public void ParallelJoin(int OriginatingTaskSchedulerID, int OriginatingTaskID,  // PFX_COMMON_EVENT_HEADER
-                                 int ForkJoinContextID)
+        [Event(
+            PARALLELJOIN_ID,
+            Level = EventLevel.Verbose,
+            Task = ParallelEtwProvider.Tasks.ForkJoin,
+            Opcode = EventOpcode.Stop
+        )]
+        public void ParallelJoin(
+            int OriginatingTaskSchedulerID,
+            int OriginatingTaskID, // PFX_COMMON_EVENT_HEADER
+            int ForkJoinContextID
+        )
         {
             if (IsEnabled(EventLevel.Verbose, ALL_KEYWORDS))
-                WriteEvent(PARALLELJOIN_ID, OriginatingTaskSchedulerID, OriginatingTaskID, ForkJoinContextID);
+                WriteEvent(
+                    PARALLELJOIN_ID,
+                    OriginatingTaskSchedulerID,
+                    OriginatingTaskID,
+                    ForkJoinContextID
+                );
         }
         #endregion ParallelJoin
-
-    }  // class ParallelEtwProvider
-}  // namespace
+    } // class ParallelEtwProvider
+} // namespace

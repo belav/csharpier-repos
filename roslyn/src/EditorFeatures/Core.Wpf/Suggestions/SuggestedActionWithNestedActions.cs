@@ -32,8 +32,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             ITextBuffer subjectBuffer,
             object provider,
             CodeAction codeAction,
-            ImmutableArray<SuggestedActionSet> nestedActionSets)
-            : base(threadingContext, sourceProvider, workspace, originalSolution, subjectBuffer, provider, codeAction)
+            ImmutableArray<SuggestedActionSet> nestedActionSets
+        )
+            : base(
+                threadingContext,
+                sourceProvider,
+                workspace,
+                originalSolution,
+                subjectBuffer,
+                provider,
+                codeAction
+            )
         {
             Debug.Assert(!nestedActionSets.IsDefaultOrEmpty);
             NestedActionSets = nestedActionSets;
@@ -47,23 +56,42 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             ITextBuffer subjectBuffer,
             object provider,
             CodeAction codeAction,
-            SuggestedActionSet nestedActionSet)
-            : this(threadingContext, sourceProvider, workspace, originalSolution, subjectBuffer, provider, codeAction, ImmutableArray.Create(nestedActionSet))
-        {
-        }
+            SuggestedActionSet nestedActionSet
+        )
+            : this(
+                threadingContext,
+                sourceProvider,
+                workspace,
+                originalSolution,
+                subjectBuffer,
+                provider,
+                codeAction,
+                ImmutableArray.Create(nestedActionSet)
+            ) { }
 
         public override bool HasActionSets => true;
 
-        public sealed override Task<IEnumerable<SuggestedActionSet>> GetActionSetsAsync(CancellationToken cancellationToken)
-            => Task.FromResult<IEnumerable<SuggestedActionSet>>(NestedActionSets);
+        public sealed override Task<IEnumerable<SuggestedActionSet>> GetActionSetsAsync(
+            CancellationToken cancellationToken
+        ) => Task.FromResult<IEnumerable<SuggestedActionSet>>(NestedActionSets);
 
-        protected override Task InnerInvokeAsync(IProgress<CodeAnalysisProgress> progress, CancellationToken cancellationToken)
+        protected override Task InnerInvokeAsync(
+            IProgress<CodeAnalysisProgress> progress,
+            CancellationToken cancellationToken
+        )
         {
             // A code action with nested actions is itself never invokable.  So just do nothing if this ever gets asked.
             // Report a message in debug and log a watson exception so that if this is hit we can try to narrow down how
             // this happened.
-            Debug.Fail($"{nameof(InnerInvokeAsync)} should not be called on a {nameof(SuggestedActionWithNestedActions)}");
-            FatalError.ReportAndCatch(new InvalidOperationException($"{nameof(InnerInvokeAsync)} should not be called on a {nameof(SuggestedActionWithNestedActions)}"), ErrorSeverity.Critical);
+            Debug.Fail(
+                $"{nameof(InnerInvokeAsync)} should not be called on a {nameof(SuggestedActionWithNestedActions)}"
+            );
+            FatalError.ReportAndCatch(
+                new InvalidOperationException(
+                    $"{nameof(InnerInvokeAsync)} should not be called on a {nameof(SuggestedActionWithNestedActions)}"
+                ),
+                ErrorSeverity.Critical
+            );
 
             return Task.CompletedTask;
         }

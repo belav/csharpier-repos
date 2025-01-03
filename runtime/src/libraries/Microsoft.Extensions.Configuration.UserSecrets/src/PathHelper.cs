@@ -39,7 +39,10 @@ namespace Microsoft.Extensions.Configuration.UserSecrets
         /// <param name="userSecretsId">The user secret ID.</param>
         /// <param name="throwIfNoRoot">specifies if an exception should be thrown when no root for user secrets is found</param>
         /// <returns>The full path to the secret file.</returns>
-        internal static string InternalGetSecretsPathFromSecretsId(string userSecretsId, bool throwIfNoRoot)
+        internal static string InternalGetSecretsPathFromSecretsId(
+            string userSecretsId,
+            bool throwIfNoRoot
+        )
         {
             if (string.IsNullOrEmpty(userSecretsId))
             {
@@ -53,24 +56,29 @@ namespace Microsoft.Extensions.Configuration.UserSecrets
                     string.Format(
                         SR.Error_Invalid_Character_In_UserSecrets_Id,
                         userSecretsId[badCharIndex],
-                        badCharIndex));
+                        badCharIndex
+                    )
+                );
             }
 
             const string userSecretsFallbackDir = "DOTNET_USER_SECRETS_FALLBACK_DIR";
 
             // For backwards compat, this checks env vars first before using Env.GetFolderPath
             string? appData = Environment.GetEnvironmentVariable("APPDATA");
-            string? root = appData                                                                   // On Windows it goes to %APPDATA%\Microsoft\UserSecrets\
-                       ?? Environment.GetEnvironmentVariable("HOME")                             // On Mac/Linux it goes to ~/.microsoft/usersecrets/
-                       ?? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                       ?? Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
-                       ?? Environment.GetEnvironmentVariable(userSecretsFallbackDir);            // this fallback is an escape hatch if everything else fails
+            string? root =
+                appData // On Windows it goes to %APPDATA%\Microsoft\UserSecrets\
+                ?? Environment.GetEnvironmentVariable("HOME") // On Mac/Linux it goes to ~/.microsoft/usersecrets/
+                ?? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+                ?? Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+                ?? Environment.GetEnvironmentVariable(userSecretsFallbackDir); // this fallback is an escape hatch if everything else fails
 
             if (string.IsNullOrEmpty(root))
             {
                 if (throwIfNoRoot)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.Error_Missing_UserSecretsLocation, userSecretsFallbackDir));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Error_Missing_UserSecretsLocation, userSecretsFallbackDir)
+                    );
                 }
 
                 return string.Empty;

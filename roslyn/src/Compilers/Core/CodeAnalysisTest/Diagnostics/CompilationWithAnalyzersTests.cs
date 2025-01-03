@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 
     public class CompilationWithAnalyzersTests : TestBase
     {
-        private static readonly CSharpCompilationOptions s_dllWithMaxWarningLevel = new(OutputKind.DynamicallyLinkedLibrary, warningLevel: CodeAnalysis.Diagnostic.MaxWarningLevel);
+        private static readonly CSharpCompilationOptions s_dllWithMaxWarningLevel = new(
+            OutputKind.DynamicallyLinkedLibrary,
+            warningLevel: CodeAnalysis.Diagnostic.MaxWarningLevel
+        );
 
         [Fact]
         public void GetEffectiveDiagnostics_Errors()
@@ -28,20 +31,48 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             var c = CSharpCompilation.Create("c");
             var ds = new[] { (Diagnostic)null };
 
-            Assert.Throws<ArgumentNullException>(() => CompilationWithAnalyzers.GetEffectiveDiagnostics(default(ImmutableArray<Diagnostic>), c));
-            Assert.Throws<ArgumentNullException>(() => CompilationWithAnalyzers.GetEffectiveDiagnostics(null, c));
-            Assert.Throws<ArgumentNullException>(() => CompilationWithAnalyzers.GetEffectiveDiagnostics(ds, null));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    CompilationWithAnalyzers.GetEffectiveDiagnostics(
+                        default(ImmutableArray<Diagnostic>),
+                        c
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => CompilationWithAnalyzers.GetEffectiveDiagnostics(null, c)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => CompilationWithAnalyzers.GetEffectiveDiagnostics(ds, null)
+            );
         }
 
         [Fact]
         public void GetEffectiveDiagnostics()
         {
-            var c = CSharpCompilation.Create("c", options: s_dllWithMaxWarningLevel.
-                WithSpecificDiagnosticOptions(
-                    new[] { KeyValuePairUtil.Create($"CS{(int)ErrorCode.WRN_AlwaysNull:D4}", ReportDiagnostic.Suppress) }));
+            var c = CSharpCompilation.Create(
+                "c",
+                options: s_dllWithMaxWarningLevel.WithSpecificDiagnosticOptions(
+                    new[]
+                    {
+                        KeyValuePairUtil.Create(
+                            $"CS{(int)ErrorCode.WRN_AlwaysNull:D4}",
+                            ReportDiagnostic.Suppress
+                        ),
+                    }
+                )
+            );
 
-            var d1 = SimpleDiagnostic.Create(MessageProvider.Instance, (int)ErrorCode.WRN_AlignmentMagnitude, "1", "2");
-            var d2 = SimpleDiagnostic.Create(MessageProvider.Instance, (int)ErrorCode.WRN_AlwaysNull, "1");
+            var d1 = SimpleDiagnostic.Create(
+                MessageProvider.Instance,
+                (int)ErrorCode.WRN_AlignmentMagnitude,
+                "1",
+                "2"
+            );
+            var d2 = SimpleDiagnostic.Create(
+                MessageProvider.Instance,
+                (int)ErrorCode.WRN_AlwaysNull,
+                "1"
+            );
             var ds = new[] { null, d1, d2 };
 
             var filtered = CompilationWithAnalyzers.GetEffectiveDiagnostics(ds, c);
@@ -59,13 +90,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             DiagnosticAnalyzer analyzer = new AnalyzerWithDisabledRules();
             var analyzers = ImmutableArray.Create(analyzer);
             var analyzerOptions = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty);
-            var compWithAnalyzers = new CompilationWithAnalyzers(compilation, analyzers, analyzerOptions);
+            var compWithAnalyzers = new CompilationWithAnalyzers(
+                compilation,
+                analyzers,
+                analyzerOptions
+            );
 
-            var analysisResult = compWithAnalyzers.GetAnalysisResultAsync(CancellationToken.None).Result;
+            var analysisResult = compWithAnalyzers
+                .GetAnalysisResultAsync(CancellationToken.None)
+                .Result;
             Assert.Empty(analysisResult.CompilationDiagnostics);
 
             // Even though the analyzer registers a symbol action, it should never be invoked because all of its rules are disabled.
-            var analyzerTelemetry = compWithAnalyzers.GetAnalyzerTelemetryInfoAsync(analyzer, CancellationToken.None).Result;
+            var analyzerTelemetry = compWithAnalyzers
+                .GetAnalyzerTelemetryInfoAsync(analyzer, CancellationToken.None)
+                .Result;
             Assert.Equal(0, analyzerTelemetry.SymbolActionsCount);
         }
 
@@ -74,7 +113,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
         {
             // Verify IsDiagnosticAnalyzerSuppressed does not throw an exception when 'onAnalyzerException' is null.
             var analyzer = new AnalyzerThatThrowsInSupportedDiagnostics();
-            _ = CompilationWithAnalyzers.IsDiagnosticAnalyzerSuppressed(analyzer, s_dllWithMaxWarningLevel, onAnalyzerException: null);
+            _ = CompilationWithAnalyzers.IsDiagnosticAnalyzerSuppressed(
+                analyzer,
+                s_dllWithMaxWarningLevel,
+                onAnalyzerException: null
+            );
         }
     }
 }

@@ -54,8 +54,8 @@ public interface IMutableAnnotatable : IReadOnlyAnnotatable
     ///     Adds annotations to an object.
     /// </summary>
     /// <param name="annotations">The annotations to be added.</param>
-    void AddAnnotations(IEnumerable<IAnnotation> annotations)
-        => AnnotatableBase.AddAnnotations((AnnotatableBase)this, annotations);
+    void AddAnnotations(IEnumerable<IAnnotation> annotations) =>
+        AnnotatableBase.AddAnnotations((AnnotatableBase)this, annotations);
 
     /// <summary>
     ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an

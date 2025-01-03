@@ -21,15 +21,19 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Xaml.CodeFixes.RemoveUnusedUsings
 {
-    [ExportCodeFixProvider(StringConstants.XamlLanguageName, Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryImports), Shared]
+    [
+        ExportCodeFixProvider(
+            StringConstants.XamlLanguageName,
+            Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryImports
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.AddMissingReference)]
     internal class RemoveUnnecessaryUsingsCodeFixProvider : CodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoveUnnecessaryUsingsCodeFixProvider()
-        {
-        }
+        public RemoveUnnecessaryUsingsCodeFixProvider() { }
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
@@ -48,16 +52,22 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.CodeFixes.RemoveUnusedUsings
                 CodeAction.Create(
                     Resources.RemoveUnnecessaryNamespaces,
                     c => RemoveUnnecessaryImportsAsync(context.Document, c),
-                    nameof(Resources.RemoveUnnecessaryNamespaces)),
-                context.Diagnostics);
+                    nameof(Resources.RemoveUnnecessaryNamespaces)
+                ),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
         private static async Task<Document> RemoveUnnecessaryImportsAsync(
-            Document document, CancellationToken cancellationToken)
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var service = document.GetLanguageService<IRemoveUnnecessaryImportsService>();
-            return await service.RemoveUnnecessaryImportsAsync(document, formattingOptions: null, cancellationToken).ConfigureAwait(false);
+            return await service
+                .RemoveUnnecessaryImportsAsync(document, formattingOptions: null, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

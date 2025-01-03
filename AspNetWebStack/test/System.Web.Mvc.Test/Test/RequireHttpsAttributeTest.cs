@@ -54,8 +54,12 @@ namespace System.Web.Mvc.Test
             Mock<AuthorizationContext> mockAuthContext = new Mock<AuthorizationContext>();
             mockAuthContext.Setup(c => c.HttpContext.Request.HttpMethod).Returns("get");
             mockAuthContext.Setup(c => c.HttpContext.Request.IsSecureConnection).Returns(false);
-            mockAuthContext.Setup(c => c.HttpContext.Request.RawUrl).Returns("/alpha/bravo/charlie?q=quux");
-            mockAuthContext.Setup(c => c.HttpContext.Request.Url).Returns(new Uri("http://www.example.com:8080/foo/bar/baz"));
+            mockAuthContext
+                .Setup(c => c.HttpContext.Request.RawUrl)
+                .Returns("/alpha/bravo/charlie?q=quux");
+            mockAuthContext
+                .Setup(c => c.HttpContext.Request.Url)
+                .Returns(new Uri("http://www.example.com:8080/foo/bar/baz"));
             AuthorizationContext authContext = mockAuthContext.Object;
 
             RequireHttpsAttribute attr = new RequireHttpsAttribute();
@@ -74,14 +78,20 @@ namespace System.Web.Mvc.Test
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public void OnAuthorizationRedirectsIfPermanentConstructorParameterIsAndRequestIsNotSecureAndMethodIsGet(bool permanent)
+        public void OnAuthorizationRedirectsIfPermanentConstructorParameterIsAndRequestIsNotSecureAndMethodIsGet(
+            bool permanent
+        )
         {
             // Arrange
             Mock<AuthorizationContext> mockAuthContext = new Mock<AuthorizationContext>();
             mockAuthContext.Setup(c => c.HttpContext.Request.HttpMethod).Returns("get");
             mockAuthContext.Setup(c => c.HttpContext.Request.IsSecureConnection).Returns(false);
-            mockAuthContext.Setup(c => c.HttpContext.Request.RawUrl).Returns("/alpha/bravo/charlie?q=quux");
-            mockAuthContext.Setup(c => c.HttpContext.Request.Url).Returns(new Uri("http://www.example.com:8080/foo/bar/baz"));
+            mockAuthContext
+                .Setup(c => c.HttpContext.Request.RawUrl)
+                .Returns("/alpha/bravo/charlie?q=quux");
+            mockAuthContext
+                .Setup(c => c.HttpContext.Request.Url)
+                .Returns(new Uri("http://www.example.com:8080/foo/bar/baz"));
             AuthorizationContext authContext = mockAuthContext.Object;
 
             RequireHttpsAttribute attr = new RequireHttpsAttribute(permanent);
@@ -105,7 +115,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { attr.OnAuthorization(null); }, "filterContext");
+                delegate
+                {
+                    attr.OnAuthorization(null);
+                },
+                "filterContext"
+            );
         }
 
         [Fact]
@@ -121,15 +136,22 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { attr.OnAuthorization(authContext); },
-                @"The requested resource can only be accessed via SSL.");
+                delegate
+                {
+                    attr.OnAuthorization(authContext);
+                },
+                @"The requested resource can only be accessed via SSL."
+            );
         }
 
         private class MyRequireHttpsAttribute : RequireHttpsAttribute
         {
             protected override void HandleNonHttpsRequest(AuthorizationContext filterContext)
             {
-                filterContext.Result = new ContentResult() { Content = "Custom HandleNonHttpsRequest" };
+                filterContext.Result = new ContentResult()
+                {
+                    Content = "Custom HandleNonHttpsRequest",
+                };
             }
         }
     }

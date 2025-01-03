@@ -19,7 +19,11 @@ public class ShortCircuitAtAuthFilterPageModel : PageModel
     private static bool ShouldShortCircuit(HttpContext httpContext, string currentTargetName)
     {
         return httpContext.Request.Query.TryGetValue("target", out var expectedTargetName)
-            && string.Equals(expectedTargetName, currentTargetName, StringComparison.OrdinalIgnoreCase);
+            && string.Equals(
+                expectedTargetName,
+                currentTargetName,
+                StringComparison.OrdinalIgnoreCase
+            );
     }
 
     private class AsyncTestAuthorizationFilterAttribute : Attribute, IAsyncAuthorizationFilter

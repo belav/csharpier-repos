@@ -14,7 +14,12 @@ namespace System.IO.Tests
             File.Replace(source, dest, destBackup);
         }
 
-        protected virtual void Replace(string source, string dest, string destBackup, bool ignoreMetadataErrors)
+        protected virtual void Replace(
+            string source,
+            string dest,
+            string destBackup,
+            bool ignoreMetadataErrors
+        )
         {
             File.Replace(source, dest, destBackup, ignoreMetadataErrors);
         }
@@ -26,8 +31,14 @@ namespace System.IO.Tests
         [Fact]
         public void NullFileName()
         {
-            AssertExtensions.Throws<ArgumentNullException>("sourceFileName", () => File.Replace(null, "", ""));
-            AssertExtensions.Throws<ArgumentNullException>("destinationFileName", () => File.Replace("", null, ""));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "sourceFileName",
+                () => File.Replace(null, "", "")
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "destinationFileName",
+                () => File.Replace("", null, "")
+            );
         }
 
         [Fact]
@@ -52,7 +63,10 @@ namespace System.IO.Tests
         [InlineData(false, false)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void Backup_FileCopiedAndDeleted_DestCopied(bool backupExists, bool ignoreMetadataErrors)
+        public void Backup_FileCopiedAndDeleted_DestCopied(
+            bool backupExists,
+            bool ignoreMetadataErrors
+        )
         {
             string srcPath = GetTestFilePath();
             string destPath = GetTestFilePath();

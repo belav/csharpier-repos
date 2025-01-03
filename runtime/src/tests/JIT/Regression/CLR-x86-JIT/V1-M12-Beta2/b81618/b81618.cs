@@ -3,6 +3,7 @@
 
 using System;
 using Xunit;
+
 public class test
 {
     [Fact]
@@ -16,11 +17,13 @@ public class test
 
         if (flag)
         {
-            Console.WriteLine("FAIL"); return 101;
+            Console.WriteLine("FAIL");
+            return 101;
         }
         else
         {
-            Console.WriteLine("PASS"); return 100;
+            Console.WriteLine("PASS");
+            return 100;
         }
     }
 }

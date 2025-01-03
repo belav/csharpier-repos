@@ -14,15 +14,15 @@ namespace System.ComponentModel.Composition
     public sealed class PartMetadataAttribute : Attribute
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PartMetadataAttribute"/> with the 
+        ///     Initializes a new instance of the <see cref="PartMetadataAttribute"/> with the
         ///     specified name and metadata value.
         /// </summary>
         /// <param name="name">
-        ///     A <see cref="String"/> containing the name of the metadata value; or 
+        ///     A <see cref="String"/> containing the name of the metadata value; or
         ///     <see langword="null"/> to use an empty string ("").
         /// </param>
         /// <param name="value">
-        ///     An <see cref="object"/> containing the metadata value. This can be 
+        ///     An <see cref="object"/> containing the metadata value. This can be
         ///     <see langword="null"/>.
         /// </param>
         public PartMetadataAttribute(string name, object value)
@@ -37,11 +37,7 @@ namespace System.ComponentModel.Composition
         /// <value>
         ///     A <see cref="String"/> containing the name of the metadata value.
         /// </value>
-        public string Name
-        {
-            get;
-            private set;
-        }
+        public string Name { get; private set; }
 
         /// <summary>
         ///     Gets the metadata value.
@@ -49,10 +45,6 @@ namespace System.ComponentModel.Composition
         /// <value>
         ///     An <see cref="object"/> containing the metadata value.
         /// </value>
-        public object Value
-        {
-            get;
-            private set;
-        }
+        public object Value { get; private set; }
     }
 }

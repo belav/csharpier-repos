@@ -15,9 +15,10 @@ namespace System.Security.Cryptography
         internal Utf8DataEncoding(ReadOnlySpan<char> data, Span<byte> stackBuffer)
         {
             int maxLength = ThrowingUtf8Encoding.GetMaxByteCount(data.Length);
-            _buffer = (uint)maxLength <= stackBuffer.Length ?
-                stackBuffer :
-                (_rented = CryptoPool.Rent(maxLength));
+            _buffer =
+                (uint)maxLength <= stackBuffer.Length
+                    ? stackBuffer
+                    : (_rented = CryptoPool.Rent(maxLength));
 
             int written = ThrowingUtf8Encoding.GetBytes(data, _buffer);
             _buffer = _buffer.Slice(0, written);
@@ -35,5 +36,4 @@ namespace System.Security.Cryptography
             }
         }
     }
-
 }

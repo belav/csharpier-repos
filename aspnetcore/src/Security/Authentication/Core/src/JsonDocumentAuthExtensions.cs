@@ -18,7 +18,10 @@ public static class JsonDocumentAuthExtensions
     /// <returns>The property value.</returns>
     public static string? GetString(this JsonElement element, string key)
     {
-        if (element.TryGetProperty(key, out var property) && property.ValueKind != JsonValueKind.Null)
+        if (
+            element.TryGetProperty(key, out var property)
+            && property.ValueKind != JsonValueKind.Null
+        )
         {
             return property.ToString();
         }

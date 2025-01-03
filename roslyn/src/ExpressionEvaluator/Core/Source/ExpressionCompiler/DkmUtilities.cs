@@ -23,10 +23,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
     internal static class DkmUtilities
     {
-        internal unsafe delegate IntPtr GetMetadataBytesPtrFunction(AssemblyIdentity assemblyIdentity, out uint uSize);
+        internal unsafe delegate IntPtr GetMetadataBytesPtrFunction(
+            AssemblyIdentity assemblyIdentity,
+            out uint uSize
+        );
 
         // Return the set of managed module instances from the AppDomain.
-        private static IEnumerable<DkmClrModuleInstance> GetModulesInAppDomain(this DkmClrRuntimeInstance runtime, DkmClrAppDomain appDomain)
+        private static IEnumerable<DkmClrModuleInstance> GetModulesInAppDomain(
+            this DkmClrRuntimeInstance runtime,
+            DkmClrAppDomain appDomain
+        )
         {
             if (appDomain.IsUnloaded)
             {
@@ -38,9 +44,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             // which are containers of managed module instances (see GetEmbeddedModules())
             // but not managed modules themselves. Since GetModuleInstances() will include the
             // embedded modules, we can simply ignore DkmClrNcContainerModuleInstances.
-            return runtime.GetModuleInstances().
-                OfType<DkmClrModuleInstance>().
-                Where(module =>
+            return runtime
+                .GetModuleInstances()
+                .OfType<DkmClrModuleInstance>()
+                .Where(module =>
                 {
                     var moduleAppDomain = module.AppDomain;
                     return !moduleAppDomain.IsUnloaded && (moduleAppDomain.Id == appDomainId);
@@ -50,13 +57,17 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static ImmutableArray<MetadataBlock> GetMetadataBlocks(
             this DkmClrRuntimeInstance runtime,
             DkmClrAppDomain appDomain,
-            ImmutableArray<MetadataBlock> previousMetadataBlocks)
+            ImmutableArray<MetadataBlock> previousMetadataBlocks
+        )
         {
             // Add a dummy data item to the appdomain to add it to the disposal queue when the debugged process is shutting down.
             // This should prevent from attempts to use the Metadata pointer for dead debugged processes.
             if (appDomain.GetDataItem<AppDomainLifetimeDataItem>() == null)
             {
-                appDomain.SetDataItem(DkmDataCreationDisposition.CreateNew, new AppDomainLifetimeDataItem());
+                appDomain.SetDataItem(
+                    DkmDataCreationDisposition.CreateNew,
+                    new AppDomainLifetimeDataItem()
+                );
             }
 
             var builder = ArrayBuilder<MetadataBlock>.GetInstance();
@@ -93,7 +104,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
             // Include "intrinsic method" assembly.
             ptr = runtime.GetIntrinsicAssemblyMetaDataBytesPtr(out size);
-            if (!TryGetMetadataBlock(previousMetadataBlocks, index, ptr, size, out var intrinsicsBlock))
+            if (
+                !TryGetMetadataBlock(
+                    previousMetadataBlocks,
+                    index,
+                    ptr,
+                    size,
+                    out var intrinsicsBlock
+                )
+            )
             {
                 throw ExceptionUtilities.Unreachable();
             }
@@ -102,7 +121,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return builder.ToImmutableAndFree();
         }
 
-        internal static ImmutableArray<MetadataBlock> GetMetadataBlocks(GetMetadataBytesPtrFunction getMetaDataBytesPtrFunction, ImmutableArray<AssemblyIdentity> missingAssemblyIdentities)
+        internal static ImmutableArray<MetadataBlock> GetMetadataBlocks(
+            GetMetadataBytesPtrFunction getMetaDataBytesPtrFunction,
+            ImmutableArray<AssemblyIdentity> missingAssemblyIdentities
+        )
         {
             ArrayBuilder<MetadataBlock>? builder = null;
             foreach (var missingAssemblyIdentity in missingAssemblyIdentities)
@@ -129,13 +151,21 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 builder.Add(block);
             }
 
-            return builder == null ? ImmutableArray<MetadataBlock>.Empty : builder.ToImmutableAndFree();
+            return builder == null
+                ? ImmutableArray<MetadataBlock>.Empty
+                : builder.ToImmutableAndFree();
         }
 
-        internal static unsafe ImmutableArray<AssemblyReaders> MakeAssemblyReaders(this DkmClrInstructionAddress instructionAddress)
+        internal static unsafe ImmutableArray<AssemblyReaders> MakeAssemblyReaders(
+            this DkmClrInstructionAddress instructionAddress
+        )
         {
             var builder = ArrayBuilder<AssemblyReaders>.GetInstance();
-            foreach (DkmClrModuleInstance module in instructionAddress.RuntimeInstance.GetModulesInAppDomain(instructionAddress.ModuleInstance.AppDomain))
+            foreach (
+                DkmClrModuleInstance module in instructionAddress.RuntimeInstance.GetModulesInAppDomain(
+                    instructionAddress.ModuleInstance.AppDomain
+                )
+            )
             {
                 var symReader = module.GetSymReader();
                 if (symReader == null)
@@ -171,7 +201,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return builder.ToImmutableAndFree();
         }
 
-        private static unsafe bool TryGetMetadataBlock(IntPtr ptr, uint size, out MetadataBlock block)
+        private static unsafe bool TryGetMetadataBlock(
+            IntPtr ptr,
+            uint size,
+            out MetadataBlock block
+        )
         {
             try
             {
@@ -189,7 +223,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             }
         }
 
-        private static bool TryGetMetadataBlock(ImmutableArray<MetadataBlock> previousMetadataBlocks, int index, IntPtr ptr, uint size, out MetadataBlock block)
+        private static bool TryGetMetadataBlock(
+            ImmutableArray<MetadataBlock> previousMetadataBlocks,
+            int index,
+            IntPtr ptr,
+            uint size,
+            out MetadataBlock block
+        )
         {
             if (!previousMetadataBlocks.IsDefault && index < previousMetadataBlocks.Length)
             {
@@ -221,7 +261,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             this CompileResult? compResult,
             DkmCompilerId languageId,
             ResultProperties resultProperties,
-            DkmClrRuntimeInstance runtimeInstance)
+            DkmClrRuntimeInstance runtimeInstance
+        )
         {
             if (compResult == null)
             {
@@ -246,26 +287,39 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 Access: resultProperties.AccessType,
                 StorageType: resultProperties.StorageType,
                 TypeModifierFlags: resultProperties.ModifierFlags,
-                CustomTypeInfo: customTypeInfo.ToCustomTypeInfo(customTypeInfoId));
+                CustomTypeInfo: customTypeInfo.ToCustomTypeInfo(customTypeInfoId)
+            );
         }
 
-        internal static DkmClrCustomTypeInfo? ToCustomTypeInfo(this ReadOnlyCollection<byte>? payload, Guid payloadTypeId)
+        internal static DkmClrCustomTypeInfo? ToCustomTypeInfo(
+            this ReadOnlyCollection<byte>? payload,
+            Guid payloadTypeId
+        )
         {
             return (payload == null) ? null : DkmClrCustomTypeInfo.Create(payloadTypeId, payload);
         }
 
-        internal static ResultProperties GetResultProperties<TSymbol>(this TSymbol? symbol, DkmClrCompilationResultFlags flags, bool isConstant)
+        internal static ResultProperties GetResultProperties<TSymbol>(
+            this TSymbol? symbol,
+            DkmClrCompilationResultFlags flags,
+            bool isConstant
+        )
             where TSymbol : class, ISymbolInternal
         {
-            var category = (symbol != null) ? GetResultCategory(symbol.Kind)
-                : DkmEvaluationResultCategory.Data;
+            var category =
+                (symbol != null)
+                    ? GetResultCategory(symbol.Kind)
+                    : DkmEvaluationResultCategory.Data;
 
-            var accessType = (symbol != null) ? GetResultAccessType(symbol.DeclaredAccessibility)
-                : DkmEvaluationResultAccessType.None;
+            var accessType =
+                (symbol != null)
+                    ? GetResultAccessType(symbol.DeclaredAccessibility)
+                    : DkmEvaluationResultAccessType.None;
 
-            var storageType = (symbol != null) && symbol.IsStatic
-                ? DkmEvaluationResultStorageType.Static
-                : DkmEvaluationResultStorageType.None;
+            var storageType =
+                (symbol != null) && symbol.IsStatic
+                    ? DkmEvaluationResultStorageType.Static
+                    : DkmEvaluationResultStorageType.None;
 
             var modifierFlags = DkmEvaluationResultTypeModifierFlags.None;
             if (isConstant)
@@ -305,7 +359,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             }
         }
 
-        private static DkmEvaluationResultAccessType GetResultAccessType(Accessibility accessibility)
+        private static DkmEvaluationResultAccessType GetResultAccessType(
+            Accessibility accessibility
+        )
         {
             switch (accessibility)
             {
@@ -331,14 +387,22 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return (flags & desired) == desired;
         }
 
-        internal static MetadataContext<TAssemblyContext> GetMetadataContext<TAssemblyContext>(this DkmClrAppDomain appDomain)
+        internal static MetadataContext<TAssemblyContext> GetMetadataContext<TAssemblyContext>(
+            this DkmClrAppDomain appDomain
+        )
             where TAssemblyContext : struct
         {
-            var dataItem = appDomain.GetDataItem<MetadataContextItem<MetadataContext<TAssemblyContext>>>();
+            var dataItem = appDomain.GetDataItem<
+                MetadataContextItem<MetadataContext<TAssemblyContext>>
+            >();
             return (dataItem == null) ? default : dataItem.MetadataContext;
         }
 
-        internal static void SetMetadataContext<TAssemblyContext>(this DkmClrAppDomain appDomain, MetadataContext<TAssemblyContext> context, bool report)
+        internal static void SetMetadataContext<TAssemblyContext>(
+            this DkmClrAppDomain appDomain,
+            MetadataContext<TAssemblyContext> context,
+            bool report
+        )
             where TAssemblyContext : struct
         {
             if (report)
@@ -348,12 +412,17 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     process.Connection,
                     process,
                     DkmUserMessageOutputKind.UnfilteredOutputWindowMessage,
-                    $"EE: AppDomain {appDomain.Id}, blocks {context.MetadataBlocks.Length}, contexts {context.AssemblyContexts.Count}" + Environment.NewLine,
+                    $"EE: AppDomain {appDomain.Id}, blocks {context.MetadataBlocks.Length}, contexts {context.AssemblyContexts.Count}"
+                        + Environment.NewLine,
                     MessageBoxFlags.MB_OK,
-                    0);
+                    0
+                );
                 message.Post();
             }
-            appDomain.SetDataItem(DkmDataCreationDisposition.CreateAlways, new MetadataContextItem<MetadataContext<TAssemblyContext>>(context));
+            appDomain.SetDataItem(
+                DkmDataCreationDisposition.CreateAlways,
+                new MetadataContextItem<MetadataContext<TAssemblyContext>>(context)
+            );
         }
 
         internal static void RemoveMetadataContext<TAssemblyContext>(this DkmClrAppDomain appDomain)

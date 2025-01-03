@@ -14,5 +14,6 @@ public sealed class NoOpEmailSender : IEmailSender
     /// This method does nothing other return <see cref="Task.CompletedTask"/>. It should be replaced by a custom implementation
     /// in production.
     /// </summary>
-    public Task SendEmailAsync(string email, string subject, string htmlMessage) => Task.CompletedTask;
+    public Task SendEmailAsync(string email, string subject, string htmlMessage) =>
+        Task.CompletedTask;
 }

@@ -19,9 +19,7 @@ namespace Microsoft.Extensions.Options
         /// Using this constructor for a field/property tells the code generator to
         /// generate validation for the individual members of the field/property's type.
         /// </remarks>
-        public ValidateObjectMembersAttribute()
-        {
-        }
+        public ValidateObjectMembersAttribute() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidateObjectMembersAttribute"/> class.

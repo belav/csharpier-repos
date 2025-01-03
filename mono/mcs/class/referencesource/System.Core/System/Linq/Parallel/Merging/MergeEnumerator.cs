@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -18,7 +18,7 @@ using System.Diagnostics.Contracts;
 namespace System.Linq.Parallel
 {
     /// <summary>
-    /// Convenience class used by enumerators that merge many partitions into one. 
+    /// Convenience class used by enumerators that merge many partitions into one.
     /// </summary>
     /// <typeparam name="TInputOutput"></typeparam>
     internal abstract class MergeEnumerator<TInputOutput> : IEnumerator<TInputOutput>
@@ -40,7 +40,7 @@ namespace System.Linq.Parallel
         //
 
         public abstract TInputOutput Current { get; }
-        
+
         public abstract bool MoveNext();
 
         //-----------------------------------------------------------------------------------

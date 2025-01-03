@@ -12,16 +12,23 @@ using Microsoft.CodeAnalysis.MoveStaticMembers;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.MoveStaticMembers
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.MoveStaticMembers), Shared]
-    internal class CSharpMoveStaticMembersRefactoringProvider : AbstractMoveStaticMembersRefactoringProvider
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.MoveStaticMembers
+        ),
+        Shared
+    ]
+    internal class CSharpMoveStaticMembersRefactoringProvider
+        : AbstractMoveStaticMembersRefactoringProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMoveStaticMembersRefactoringProvider() : base()
-        {
-        }
+        public CSharpMoveStaticMembersRefactoringProvider()
+            : base() { }
 
-        protected override Task<ImmutableArray<SyntaxNode>> GetSelectedNodesAsync(CodeRefactoringContext context)
-            => NodeSelectionHelpers.GetSelectedDeclarationsOrVariablesAsync(context);
+        protected override Task<ImmutableArray<SyntaxNode>> GetSelectedNodesAsync(
+            CodeRefactoringContext context
+        ) => NodeSelectionHelpers.GetSelectedDeclarationsOrVariablesAsync(context);
     }
 }

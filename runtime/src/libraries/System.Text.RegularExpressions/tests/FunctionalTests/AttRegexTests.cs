@@ -44,8 +44,23 @@ namespace System.Text.RegularExpressions.Tests
         {
             foreach (RegexEngine engine in RegexHelpers.AvailableEngines)
             {
-                (RegexOptions Options, string Pattern, string Input, string Expected)[] cases = Match_MemberData_Cases(engine).ToArray();
-                Regex[] regexes = RegexHelpers.GetRegexesAsync(engine, cases.Select(c => (c.Pattern, (CultureInfo?)null, (RegexOptions?)c.Options, (TimeSpan?)null)).ToArray()).Result;
+                (RegexOptions Options, string Pattern, string Input, string Expected)[] cases =
+                    Match_MemberData_Cases(engine).ToArray();
+                Regex[] regexes = RegexHelpers
+                    .GetRegexesAsync(
+                        engine,
+                        cases
+                            .Select(c =>
+                                (
+                                    c.Pattern,
+                                    (CultureInfo?)null,
+                                    (RegexOptions?)c.Options,
+                                    (TimeSpan?)null
+                                )
+                            )
+                            .ToArray()
+                    )
+                    .Result;
                 for (int i = 0; i < regexes.Length; i++)
                 {
                     yield return new object[] { regexes[i], cases[i].Input, cases[i].Expected };
@@ -53,7 +68,12 @@ namespace System.Text.RegularExpressions.Tests
             }
         }
 
-        private static IEnumerable<(RegexOptions Options, string Pattern, string Input, string Expected)> Match_MemberData_Cases(RegexEngine engine)
+        private static IEnumerable<(
+            RegexOptions Options,
+            string Pattern,
+            string Input,
+            string Expected
+        )> Match_MemberData_Cases(RegexEngine engine)
         {
             foreach (RegexOptions options in new[] { RegexOptions.None, RegexOptions.Multiline })
             {
@@ -83,7 +103,12 @@ namespace System.Text.RegularExpressions.Tests
                 yield return (options, "(ab)c|abc", "abc", "(0,3)(0,2)");
                 yield return (options, "a{0}b", "ab", "(1,2)");
                 yield return (options, "(a*)(b?)(b+)b{3}", "aaabbbbbbb", "(0,10)(0,3)(3,4)(4,7)");
-                yield return (options, "(a*)(b{0,1})(b{1,})b{3}", "aaabbbbbbb", "(0,10)(0,3)(3,4)(4,7)");
+                yield return (
+                    options,
+                    "(a*)(b{0,1})(b{1,})b{3}",
+                    "aaabbbbbbb",
+                    "(0,10)(0,3)(3,4)(4,7)"
+                );
                 yield return (options, "((a|a)|a)", "a", "(0,1)(0,1)(0,1)");
                 yield return (options, "(a*)(a|aa)", "aaaa", "(0,4)(0,3)(3,4)");
                 yield return (options, "a*(a.|aa)", "aaaa", "(0,4)(2,4)");
@@ -112,18 +137,73 @@ namespace System.Text.RegularExpressions.Tests
                 yield return (options, "\na", "\na", "(0,2)");
                 yield return (options, "(a)(b)(c)", "abc", "(0,3)(0,1)(1,2)(2,3)");
                 yield return (options, "xxx", "xxx", "(0,3)");
-                yield return (options, "(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)", "feb 6,", "(0,6)");
-                yield return (options, "(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)", "2/7", "(0,3)");
-                yield return (options, "(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)", "feb 1,Feb 6", "(5,11)");
-                yield return (options, "((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))", "x", "(0,1)(0,1)(0,1)");
-                yield return (options, "((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))*", "xx", "(0,2)(1,2)(1,2)");
-                yield return (options, "a?(ab|ba)*", "ababababababababababababababababababababababababababababababababababababababababa", "(0,81)(79,81)");
-                yield return (options, "abaa|abbaa|abbbaa|abbbbaa", "ababbabbbabbbabbbbabbbbaa", "(18,25)");
-                yield return (options, "abaa|abbaa|abbbaa|abbbbaa", "ababbabbbabbbabbbbabaa", "(18,22)");
-                yield return (options, "aaac|aabc|abac|abbc|baac|babc|bbac|bbbc", "baaabbbabac", "(7,11)");
+                yield return (
+                    options,
+                    "(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)",
+                    "feb 6,",
+                    "(0,6)"
+                );
+                yield return (
+                    options,
+                    "(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)",
+                    "2/7",
+                    "(0,3)"
+                );
+                yield return (
+                    options,
+                    "(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)",
+                    "feb 1,Feb 6",
+                    "(5,11)"
+                );
+                yield return (
+                    options,
+                    "((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))",
+                    "x",
+                    "(0,1)(0,1)(0,1)"
+                );
+                yield return (
+                    options,
+                    "((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))*",
+                    "xx",
+                    "(0,2)(1,2)(1,2)"
+                );
+                yield return (
+                    options,
+                    "a?(ab|ba)*",
+                    "ababababababababababababababababababababababababababababababababababababababababa",
+                    "(0,81)(79,81)"
+                );
+                yield return (
+                    options,
+                    "abaa|abbaa|abbbaa|abbbbaa",
+                    "ababbabbbabbbabbbbabbbbaa",
+                    "(18,25)"
+                );
+                yield return (
+                    options,
+                    "abaa|abbaa|abbbaa|abbbbaa",
+                    "ababbabbbabbbabbbbabaa",
+                    "(18,22)"
+                );
+                yield return (
+                    options,
+                    "aaac|aabc|abac|abbc|baac|babc|bbac|bbbc",
+                    "baaabbbabac",
+                    "(7,11)"
+                );
                 yield return (options, ".*", "\x0001\x00ff", "(0,2)");
-                yield return (options, "aaaa|bbbb|cccc|ddddd|eeeeee|fffffff|gggg|hhhh|iiiii|jjjjj|kkkkk|llll", "XaaaXbbbXcccXdddXeeeXfffXgggXhhhXiiiXjjjXkkkXlllXcbaXaaaa", "(53,57)");
-                yield return (options, "aaaa\nbbbb\ncccc\nddddd\neeeeee\nfffffff\ngggg\nhhhh\niiiii\njjjjj\nkkkkk\nllll", "XaaaXbbbXcccXdddXeeeXfffXgggXhhhXiiiXjjjXkkkXlllXcbaXaaaa", "NOMATCH");
+                yield return (
+                    options,
+                    "aaaa|bbbb|cccc|ddddd|eeeeee|fffffff|gggg|hhhh|iiiii|jjjjj|kkkkk|llll",
+                    "XaaaXbbbXcccXdddXeeeXfffXgggXhhhXiiiXjjjXkkkXlllXcbaXaaaa",
+                    "(53,57)"
+                );
+                yield return (
+                    options,
+                    "aaaa\nbbbb\ncccc\nddddd\neeeeee\nfffffff\ngggg\nhhhh\niiiii\njjjjj\nkkkkk\nllll",
+                    "XaaaXbbbXcccXdddXeeeXfffXgggXhhhXiiiXjjjXkkkXlllXcbaXaaaa",
+                    "NOMATCH"
+                );
                 yield return (options, "a*a*a*a*a*b", "aaaaaaaaab", "(0,10)");
                 yield return (options, "^", "", "(0,0)");
                 yield return (options, "$", "", "(0,0)");
@@ -200,7 +280,12 @@ namespace System.Text.RegularExpressions.Tests
                 yield return (options, "(bc+d$|ef*g.|h?i(j|k))", "effgz", "(0,5)(0,5)");
                 yield return (options, "(bc+d$|ef*g.|h?i(j|k))", "ij", "(0,2)(0,2)(1,2)");
                 yield return (options, "(bc+d$|ef*g.|h?i(j|k))", "reffgz", "(1,6)(1,6)");
-                yield return (options, "(((((((((a)))))))))", "a", "(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)");
+                yield return (
+                    options,
+                    "(((((((((a)))))))))",
+                    "a",
+                    "(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)"
+                );
                 yield return (options, "multiple words", "multiple words yeah", "(0,14)");
                 yield return (options, "(.*)c(.*)", "abcde", "(0,5)(0,2)(3,5)");
                 yield return (options, "abcd", "abcd", "(0,4)");
@@ -209,7 +294,12 @@ namespace System.Text.RegularExpressions.Tests
                 yield return (options, "a+(b|c)*d+", "aabcdd", "(0,6)(3,4)");
                 yield return (options, "^.+$", "vivi", "(0,4)");
                 yield return (options, "^(.+)$", "vivi", "(0,4)(0,4)");
-                yield return (options, "^([^!.]+).att.com!(.+)$", "gryphon.att.com!eby", "(0,19)(0,7)(16,19)");
+                yield return (
+                    options,
+                    "^([^!.]+).att.com!(.+)$",
+                    "gryphon.att.com!eby",
+                    "(0,19)(0,7)(16,19)"
+                );
                 yield return (options, "^([^!]+!)?([^!]+)$", "bar!bas", "(0,7)(0,4)(4,7)");
                 yield return (options, "^([^!]+!)?([^!]+)$", "foo!bas", "(0,7)(0,4)(4,7)");
                 yield return (options, "^.+!([^!]+!)([^!]+)$", "foo!bar!bas", "(0,11)(4,8)(8,11)");
@@ -223,10 +313,30 @@ namespace System.Text.RegularExpressions.Tests
                 yield return (options, "(foo|bar)!bas", "bar!bas", "(0,7)(0,3)");
                 yield return (options, "(foo|bar)!bas", "foo!bar!bas", "(4,11)(4,7)");
                 yield return (options, "(foo|bar)!bas", "foo!bas", "(0,7)(0,3)");
-                yield return (options, "^([^!]+!)?([^!]+)$|^.+!([^!]+!)([^!]+)$", "bar!bas", "(0,7)(0,4)(4,7)");
-                yield return (options, "^([^!]+!)?([^!]+)$|^.+!([^!]+!)([^!]+)$", "foo!bas", "(0,7)(0,4)(4,7)");
-                yield return (options, "^(([^!]+!)?([^!]+)|.+!([^!]+!)([^!]+))$", "bar!bas", "(0,7)(0,7)(0,4)(4,7)");
-                yield return (options, "^(([^!]+!)?([^!]+)|.+!([^!]+!)([^!]+))$", "foo!bas", "(0,7)(0,7)(0,4)(4,7)");
+                yield return (
+                    options,
+                    "^([^!]+!)?([^!]+)$|^.+!([^!]+!)([^!]+)$",
+                    "bar!bas",
+                    "(0,7)(0,4)(4,7)"
+                );
+                yield return (
+                    options,
+                    "^([^!]+!)?([^!]+)$|^.+!([^!]+!)([^!]+)$",
+                    "foo!bas",
+                    "(0,7)(0,4)(4,7)"
+                );
+                yield return (
+                    options,
+                    "^(([^!]+!)?([^!]+)|.+!([^!]+!)([^!]+))$",
+                    "bar!bas",
+                    "(0,7)(0,7)(0,4)(4,7)"
+                );
+                yield return (
+                    options,
+                    "^(([^!]+!)?([^!]+)|.+!([^!]+!)([^!]+))$",
+                    "foo!bas",
+                    "(0,7)(0,7)(0,4)(4,7)"
+                );
                 yield return (options, ".*(/XXX).*", "/XXX", "(0,4)(0,4)");
                 yield return (options, ".*(\\\\XXX).*", "\\XXX", "(0,4)(0,4)");
                 yield return (options, "\\\\XXX", "\\XXX", "(0,4)");
@@ -369,19 +479,21 @@ namespace System.Text.RegularExpressions.Tests
 
             var expectedSet = new HashSet<(int start, int end)>(
                 expected
-                .Split(new[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(s => s.Split(','))
-                .Select(s => (start: int.Parse(s[0]), end: int.Parse(s[1]))));
+                    .Split(new[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => s.Split(','))
+                    .Select(s => (start: int.Parse(s[0]), end: int.Parse(s[1])))
+            );
 
             var actualSet = new HashSet<(int start, int end)>(
-                match.Groups
-                .Cast<Group>()
-                .Select(g => (start: g.Index, end: g.Index + g.Length)));
+                match.Groups.Cast<Group>().Select(g => (start: g.Index, end: g.Index + g.Length))
+            );
 
             // The .NET implementation sometimes has extra captures beyond what the original data specifies, so we assert a subset.
             if (!expectedSet.IsSubsetOf(actualSet))
             {
-                throw new Xunit.Sdk.XunitException($"Actual: {string.Join(", ", actualSet)}{Environment.NewLine}Expected: {string.Join(", ", expected)}");
+                throw new Xunit.Sdk.XunitException(
+                    $"Actual: {string.Join(", ", actualSet)}{Environment.NewLine}Expected: {string.Join(", ", expected)}"
+                );
             }
         }
     }

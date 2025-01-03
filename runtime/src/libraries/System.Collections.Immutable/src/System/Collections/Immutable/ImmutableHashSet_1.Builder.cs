@@ -104,18 +104,22 @@ namespace System.Collections.Immutable
             /// </value>
             public IEqualityComparer<T> KeyComparer
             {
-                get
-                {
-                    return _equalityComparer;
-                }
-
+                get { return _equalityComparer; }
                 set
                 {
                     Requires.NotNull(value, nameof(value));
 
                     if (value != _equalityComparer)
                     {
-                        ImmutableHashSet<T>.MutationResult result = Union(this, new MutationInput(SortedInt32KeyNode<HashBucket>.EmptyNode, value, _hashBucketEqualityComparer, 0));
+                        ImmutableHashSet<T>.MutationResult result = Union(
+                            this,
+                            new MutationInput(
+                                SortedInt32KeyNode<HashBucket>.EmptyNode,
+                                value,
+                                _hashBucketEqualityComparer,
+                                0
+                            )
+                        );
 
                         _immutable = null;
                         _equalityComparer = value;
@@ -138,7 +142,15 @@ namespace System.Collections.Immutable
             /// </summary>
             private MutationInput Origin
             {
-                get { return new MutationInput(this.Root, _equalityComparer, _hashBucketEqualityComparer, _count); }
+                get
+                {
+                    return new MutationInput(
+                        this.Root,
+                        _equalityComparer,
+                        _hashBucketEqualityComparer,
+                        _count
+                    );
+                }
             }
 
             /// <summary>
@@ -146,11 +158,7 @@ namespace System.Collections.Immutable
             /// </summary>
             private SortedInt32KeyNode<HashBucket> Root
             {
-                get
-                {
-                    return _root;
-                }
-
+                get { return _root; }
                 set
                 {
                     // We *always* increment the version number because some mutations
@@ -226,7 +234,10 @@ namespace System.Collections.Immutable
             /// <returns>True if the item did not already belong to the collection.</returns>
             public bool Add(T item)
             {
-                ImmutableHashSet<T>.MutationResult result = ImmutableHashSet<T>.Add(item, this.Origin);
+                ImmutableHashSet<T>.MutationResult result = ImmutableHashSet<T>.Add(
+                    item,
+                    this.Origin
+                );
                 this.Apply(result);
                 return result.Count != 0;
             }
@@ -241,7 +252,10 @@ namespace System.Collections.Immutable
             /// <exception cref="NotSupportedException">The <see cref="ICollection{T}"/> is read-only.</exception>
             public bool Remove(T item)
             {
-                ImmutableHashSet<T>.MutationResult result = ImmutableHashSet<T>.Remove(item, this.Origin);
+                ImmutableHashSet<T>.MutationResult result = ImmutableHashSet<T>.Remove(
+                    item,
+                    this.Origin
+                );
                 this.Apply(result);
                 return result.Count != 0;
             }
@@ -274,7 +288,12 @@ namespace System.Collections.Immutable
             /// <param name="other">The collection of items to remove from the set.</param>
             public void ExceptWith(IEnumerable<T> other)
             {
-                ImmutableHashSet<T>.MutationResult result = ImmutableHashSet<T>.Except(other, _equalityComparer, _hashBucketEqualityComparer, _root);
+                ImmutableHashSet<T>.MutationResult result = ImmutableHashSet<T>.Except(
+                    other,
+                    _equalityComparer,
+                    _hashBucketEqualityComparer,
+                    _root
+                );
                 this.Apply(result);
             }
 
@@ -284,7 +303,10 @@ namespace System.Collections.Immutable
             /// <param name="other">The collection to compare to the current set.</param>
             public void IntersectWith(IEnumerable<T> other)
             {
-                ImmutableHashSet<T>.MutationResult result = ImmutableHashSet<T>.Intersect(other, this.Origin);
+                ImmutableHashSet<T>.MutationResult result = ImmutableHashSet<T>.Intersect(
+                    other,
+                    this.Origin
+                );
                 this.Apply(result);
             }
 
@@ -359,7 +381,10 @@ namespace System.Collections.Immutable
             /// <param name="other">The collection to compare to the current set.</param>
             public void SymmetricExceptWith(IEnumerable<T> other)
             {
-                ImmutableHashSet<T>.MutationResult result = ImmutableHashSet<T>.SymmetricExcept(other, this.Origin);
+                ImmutableHashSet<T>.MutationResult result = ImmutableHashSet<T>.SymmetricExcept(
+                    other,
+                    this.Origin
+                );
                 this.Apply(result);
             }
 
@@ -369,7 +394,10 @@ namespace System.Collections.Immutable
             /// <param name="other">The collection to compare to the current set.</param>
             public void UnionWith(IEnumerable<T> other)
             {
-                ImmutableHashSet<T>.MutationResult result = ImmutableHashSet<T>.Union(other, this.Origin);
+                ImmutableHashSet<T>.MutationResult result = ImmutableHashSet<T>.Union(
+                    other,
+                    this.Origin
+                );
                 this.Apply(result);
             }
 

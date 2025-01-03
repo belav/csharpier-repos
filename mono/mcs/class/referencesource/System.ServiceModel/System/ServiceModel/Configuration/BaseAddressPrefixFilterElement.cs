@@ -10,9 +10,7 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class BaseAddressPrefixFilterElement : ConfigurationElement
     {
-        public BaseAddressPrefixFilterElement()
-        {
-        }
+        public BaseAddressPrefixFilterElement() { }
 
         public BaseAddressPrefixFilterElement(Uri prefix)
             : this()
@@ -24,7 +22,10 @@ namespace System.ServiceModel.Configuration
             this.Prefix = prefix;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Prefix, Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Prefix,
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
         public Uri Prefix
         {
             get { return (Uri)base[ConfigurationStrings.Prefix]; }

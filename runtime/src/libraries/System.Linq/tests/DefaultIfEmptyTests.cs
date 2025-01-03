@@ -11,9 +11,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsNonEmptyQuery()
         {
-            var q = from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                    where x > int.MinValue
-                    select x;
+            var q =
+                from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                where x > int.MinValue
+                select x;
 
             Assert.Equal(q.DefaultIfEmpty(5), q.DefaultIfEmpty(5));
         }
@@ -21,22 +22,30 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsEmptyQuery()
         {
-            var q = from x in NumberRangeGuaranteedNotCollectionType(0, 0)
-                    select x;
+            var q = from x in NumberRangeGuaranteedNotCollectionType(0, 0) select x;
 
             Assert.Equal(q.DefaultIfEmpty(88), q.DefaultIfEmpty(88));
-
         }
 
         public static IEnumerable<object[]> TestData()
         {
             yield return new object[] { new int[0], 0, new int[] { 0 } };
             yield return new object[] { new int[] { 3 }, 0, new int[] { 3 } };
-            yield return new object[] { new int[] { 3, -1, 0, 10, 15 }, 0, new int[] { 3, -1, 0, 10, 15 } };
+            yield return new object[]
+            {
+                new int[] { 3, -1, 0, 10, 15 },
+                0,
+                new int[] { 3, -1, 0, 10, 15 },
+            };
 
             yield return new object[] { new int[0], -10, new int[] { -10 } };
             yield return new object[] { new int[] { 3 }, 9, new int[] { 3 } };
-            yield return new object[] { new int[] { 3, -1, 0, 10, 15 }, 9, new int[] { 3, -1, 0, 10, 15 } };
+            yield return new object[]
+            {
+                new int[] { 3, -1, 0, 10, 15 },
+                9,
+                new int[] { 3, -1, 0, 10, 15 },
+            };
             yield return new object[] { Enumerable.Empty<int>(), 0, new int[] { 0 } };
         }
 
@@ -63,7 +72,11 @@ namespace System.Linq.Tests
         }
 
         [Theory, MemberData(nameof(TestData))]
-        public static void DefaultIfEmptyRunOnce(IEnumerable<int> source, int defaultValue, int[] expected)
+        public static void DefaultIfEmptyRunOnce(
+            IEnumerable<int> source,
+            int defaultValue,
+            int[] expected
+        )
         {
             if (defaultValue == 0)
             {
@@ -94,7 +107,10 @@ namespace System.Linq.Tests
             IEnumerable<int> source = null;
 
             AssertExtensions.Throws<ArgumentNullException>("source", () => source.DefaultIfEmpty());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.DefaultIfEmpty(42));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.DefaultIfEmpty(42)
+            );
         }
 
         [Fact]

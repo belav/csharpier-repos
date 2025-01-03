@@ -5,97 +5,120 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Xsl.XsltOld {
-    using Res = System.Xml.Utils.Res;
+namespace System.Xml.Xsl.XsltOld
+{
     using System;
+    using System.Collections;
     using System.Diagnostics;
-    using System.Text;
     using System.Globalization;
+    using System.Runtime.Versioning;
+    using System.Text;
     using System.Xml;
     using System.Xml.XPath;
     using System.Xml.Xsl.Runtime;
     using MS.Internal.Xml.XPath;
-    using System.Collections;
-    using System.Runtime.Versioning;
+    using Res = System.Xml.Utils.Res;
 
-    internal class NamespaceInfo {
+    internal class NamespaceInfo
+    {
         internal String prefix;
         internal String nameSpace;
         internal int stylesheetId;
 
-        internal NamespaceInfo(String prefix, String nameSpace, int stylesheetId) {
+        internal NamespaceInfo(String prefix, String nameSpace, int stylesheetId)
+        {
             this.prefix = prefix;
             this.nameSpace = nameSpace;
             this.stylesheetId = stylesheetId;
         }
     }
 
-    internal class ContainerAction : CompiledAction {
-        internal ArrayList      containedActions;
+    internal class ContainerAction : CompiledAction
+    {
+        internal ArrayList containedActions;
         internal CopyCodeAction lastCopyCodeAction; // non null if last action is CopyCodeAction;
 
-        private  int  maxid = 0;
+        private int maxid = 0;
 
         // Local execution states
         protected const int ProcessingChildren = 1;
 
-        internal override void Compile(Compiler compiler) {
+        internal override void Compile(Compiler compiler)
+        {
             throw new NotImplementedException();
         }
 
-        internal void CompileStylesheetAttributes(Compiler compiler) {
-            NavigatorInput input        = compiler.Input;
-            string         element      = input.LocalName;
-            string         badAttribute = null;
-            string         version      = null;
+        internal void CompileStylesheetAttributes(Compiler compiler)
+        {
+            NavigatorInput input = compiler.Input;
+            string element = input.LocalName;
+            string badAttribute = null;
+            string version = null;
 
-            if (input.MoveToFirstAttribute()) {
-                do {
+            if (input.MoveToFirstAttribute())
+            {
+                do
+                {
                     string nspace = input.NamespaceURI;
-                    string name   = input.LocalName;
+                    string name = input.LocalName;
 
-                    if (nspace.Length != 0) continue;
+                    if (nspace.Length != 0)
+                        continue;
 
-                    if (Ref.Equal(name, input.Atoms.Version)) {
+                    if (Ref.Equal(name, input.Atoms.Version))
+                    {
                         version = input.Value;
-                        if (1 <= XmlConvert.ToXPathDouble(version)) {
+                        if (1 <= XmlConvert.ToXPathDouble(version))
+                        {
                             compiler.ForwardCompatibility = (version != "1.0");
                         }
-                        else {
+                        else
+                        {
                             // XmlConvert.ToXPathDouble(version) an be NaN!
-                            if (! compiler.ForwardCompatibility) {
-                                throw XsltException.Create(Res.Xslt_InvalidAttrValue, "version", version);
+                            if (!compiler.ForwardCompatibility)
+                            {
+                                throw XsltException.Create(
+                                    Res.Xslt_InvalidAttrValue,
+                                    "version",
+                                    version
+                                );
                             }
                         }
                     }
-                    else if (Ref.Equal(name, input.Atoms.ExtensionElementPrefixes)) {
+                    else if (Ref.Equal(name, input.Atoms.ExtensionElementPrefixes))
+                    {
                         compiler.InsertExtensionNamespace(input.Value);
                     }
-                    else if (Ref.Equal(name, input.Atoms.ExcludeResultPrefixes)) {
+                    else if (Ref.Equal(name, input.Atoms.ExcludeResultPrefixes))
+                    {
                         compiler.InsertExcludedNamespace(input.Value);
                     }
-                    else if (Ref.Equal(name, input.Atoms.Id)) {
+                    else if (Ref.Equal(name, input.Atoms.Id))
+                    {
                         // Do nothing here.
                     }
-                    else {
+                    else
+                    {
                         // We can have version atribute later. For now remember this attribute and continue
                         badAttribute = name;
                     }
-                }
-                while( input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
 
-            if (version == null) {
+            if (version == null)
+            {
                 throw XsltException.Create(Res.Xslt_MissingAttribute, "version");
             }
 
-            if (badAttribute != null && ! compiler.ForwardCompatibility) {
+            if (badAttribute != null && !compiler.ForwardCompatibility)
+            {
                 throw XsltException.Create(Res.Xslt_InvalidAttribute, badAttribute, element);
             }
         }
 
-        internal void CompileSingleTemplate(Compiler compiler) {
+        internal void CompileSingleTemplate(Compiler compiler)
+        {
             NavigatorInput input = compiler.Input;
 
             //
@@ -104,23 +127,31 @@ namespace System.Xml.Xsl.XsltOld {
 
             string version = null;
 
-            if (input.MoveToFirstAttribute()) {
-                do {
+            if (input.MoveToFirstAttribute())
+            {
+                do
+                {
                     string nspace = input.NamespaceURI;
-                    string name   = input.LocalName;
+                    string name = input.LocalName;
 
-                    if (Ref.Equal(nspace, input.Atoms.UriXsl) &&
-                        Ref.Equal(name,   input.Atoms.Version)) {
+                    if (
+                        Ref.Equal(nspace, input.Atoms.UriXsl)
+                        && Ref.Equal(name, input.Atoms.Version)
+                    )
+                    {
                         version = input.Value;
                     }
-                }
-                while(input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
 
-            if (version == null) {
-                if (Ref.Equal(input.LocalName, input.Atoms.Stylesheet) &&
-                    input.NamespaceURI == XmlReservedNs.NsWdXsl) {
+            if (version == null)
+            {
+                if (
+                    Ref.Equal(input.LocalName, input.Atoms.Stylesheet)
+                    && input.NamespaceURI == XmlReservedNs.NsWdXsl
+                )
+                {
                     throw XsltException.Create(Res.Xslt_WdXslNamespace);
                 }
                 throw XsltException.Create(Res.Xslt_WrongStylesheetElement);
@@ -132,32 +163,39 @@ namespace System.Xml.Xsl.XsltOld {
         /*
          * CompileTopLevelElements
          */
-        protected void CompileDocument(Compiler compiler, bool inInclude) {
+        protected void CompileDocument(Compiler compiler, bool inInclude)
+        {
             NavigatorInput input = compiler.Input;
 
             // SkipToElement :
-            while (input.NodeType != XPathNodeType.Element) {
-                if (! compiler.Advance()) {
+            while (input.NodeType != XPathNodeType.Element)
+            {
+                if (!compiler.Advance())
+                {
                     throw XsltException.Create(Res.Xslt_WrongStylesheetElement);
                 }
             }
 
             Debug.Assert(compiler.Input.NodeType == XPathNodeType.Element);
-            if (Ref.Equal(input.NamespaceURI, input.Atoms.UriXsl)) {
+            if (Ref.Equal(input.NamespaceURI, input.Atoms.UriXsl))
+            {
                 if (
-                    ! Ref.Equal(input.LocalName, input.Atoms.Stylesheet) &&
-                    ! Ref.Equal(input.LocalName, input.Atoms.Transform)
-                ) {
+                    !Ref.Equal(input.LocalName, input.Atoms.Stylesheet)
+                    && !Ref.Equal(input.LocalName, input.Atoms.Transform)
+                )
+                {
                     throw XsltException.Create(Res.Xslt_WrongStylesheetElement);
                 }
                 compiler.PushNamespaceScope();
                 CompileStylesheetAttributes(compiler);
                 CompileTopLevelElements(compiler);
-                if (! inInclude) {
+                if (!inInclude)
+                {
                     CompileImports(compiler);
                 }
             }
-            else {
+            else
+            {
                 // single template
                 compiler.PushLiteralScope();
                 CompileSingleTemplate(compiler);
@@ -166,35 +204,50 @@ namespace System.Xml.Xsl.XsltOld {
             compiler.PopScope();
         }
 
-        internal Stylesheet CompileImport(Compiler compiler, Uri uri, int id) {
+        internal Stylesheet CompileImport(Compiler compiler, Uri uri, int id)
+        {
             NavigatorInput input = compiler.ResolveDocument(uri);
             compiler.PushInputDocument(input);
 
-            try {
+            try
+            {
                 compiler.PushStylesheet(new Stylesheet());
                 compiler.Stylesheetid = id;
-                CompileDocument(compiler, /*inInclude*/ false);
+                CompileDocument(
+                    compiler, /*inInclude*/
+                    false
+                );
             }
-            catch (XsltCompileException) {
+            catch (XsltCompileException)
+            {
                 throw;
             }
-            catch (Exception e) {
-                throw new XsltCompileException(e, input.BaseURI, input.LineNumber, input.LinePosition);
+            catch (Exception e)
+            {
+                throw new XsltCompileException(
+                    e,
+                    input.BaseURI,
+                    input.LineNumber,
+                    input.LinePosition
+                );
             }
-            finally {
+            finally
+            {
                 compiler.PopInputDocument();
             }
             return compiler.PopStylesheet();
         }
 
-        private void CompileImports(Compiler compiler) {
+        private void CompileImports(Compiler compiler)
+        {
             ArrayList imports = compiler.CompiledStylesheet.Imports;
             // We can't reverce imports order. Template lookup relyes on it after compilation
             int saveStylesheetId = compiler.Stylesheetid;
-            for (int i = imports.Count - 1; 0 <= i; i --) {   // Imports should be compiled in reverse order
+            for (int i = imports.Count - 1; 0 <= i; i--)
+            { // Imports should be compiled in reverse order
                 Uri uri = imports[i] as Uri;
                 Debug.Assert(uri != null);
-                imports[i] = CompileImport(compiler, uri, ++ this.maxid);
+                imports[i] = CompileImport(compiler, uri, ++this.maxid);
             }
             compiler.Stylesheetid = saveStylesheetId;
         }
@@ -203,208 +256,293 @@ namespace System.Xml.Xsl.XsltOld {
         // It's OK to suppress the SxS warning.
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.None)]
-        void CompileInclude(Compiler compiler) {
+        void CompileInclude(Compiler compiler)
+        {
             Uri uri = compiler.ResolveUri(compiler.GetSingleAttribute(compiler.Input.Atoms.Href));
             string resolved = uri.ToString();
-            if (compiler.IsCircularReference(resolved)) {
+            if (compiler.IsCircularReference(resolved))
+            {
                 throw XsltException.Create(Res.Xslt_CircularInclude, resolved);
             }
 
             NavigatorInput input = compiler.ResolveDocument(uri);
             compiler.PushInputDocument(input);
 
-            try {
-                CompileDocument(compiler, /*inInclude*/ true);
+            try
+            {
+                CompileDocument(
+                    compiler, /*inInclude*/
+                    true
+                );
             }
-            catch (XsltCompileException) {
+            catch (XsltCompileException)
+            {
                 throw;
             }
-            catch (Exception e) {
-                throw new XsltCompileException(e, input.BaseURI, input.LineNumber, input.LinePosition);
+            catch (Exception e)
+            {
+                throw new XsltCompileException(
+                    e,
+                    input.BaseURI,
+                    input.LineNumber,
+                    input.LinePosition
+                );
             }
-            finally {
+            finally
+            {
                 compiler.PopInputDocument();
             }
             CheckEmpty(compiler);
         }
 
-        internal void CompileNamespaceAlias(Compiler compiler) {
-            NavigatorInput input   = compiler.Input;
-            string         element = input.LocalName;
-            string namespace1 = null, namespace2 = null;
-            string prefix1 = null   , prefix2 = null;
-            if (input.MoveToFirstAttribute()) {
-                do {
+        internal void CompileNamespaceAlias(Compiler compiler)
+        {
+            NavigatorInput input = compiler.Input;
+            string element = input.LocalName;
+            string namespace1 = null,
+                namespace2 = null;
+            string prefix1 = null,
+                prefix2 = null;
+            if (input.MoveToFirstAttribute())
+            {
+                do
+                {
                     string nspace = input.NamespaceURI;
-                    string name   = input.LocalName;
+                    string name = input.LocalName;
 
-                    if (nspace.Length != 0) continue;
+                    if (nspace.Length != 0)
+                        continue;
 
-                    if (Ref.Equal(name,input.Atoms.StylesheetPrefix)) {
-                        prefix1    = input.Value;
+                    if (Ref.Equal(name, input.Atoms.StylesheetPrefix))
+                    {
+                        prefix1 = input.Value;
                         namespace1 = compiler.GetNsAlias(ref prefix1);
                     }
-                    else if (Ref.Equal(name,input.Atoms.ResultPrefix)){
-                        prefix2    = input.Value;
+                    else if (Ref.Equal(name, input.Atoms.ResultPrefix))
+                    {
+                        prefix2 = input.Value;
                         namespace2 = compiler.GetNsAlias(ref prefix2);
                     }
-                    else {
-                        if (! compiler.ForwardCompatibility) {
+                    else
+                    {
+                        if (!compiler.ForwardCompatibility)
+                        {
                             throw XsltException.Create(Res.Xslt_InvalidAttribute, name, element);
                         }
                     }
-                }
-                while(input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
 
             CheckRequiredAttribute(compiler, namespace1, "stylesheet-prefix");
-            CheckRequiredAttribute(compiler, namespace2, "result-prefix"    );
+            CheckRequiredAttribute(compiler, namespace2, "result-prefix");
             CheckEmpty(compiler);
 
             //String[] resultarray = { prefix2, namespace2 };
-            compiler.AddNamespaceAlias( namespace1, new NamespaceInfo(prefix2, namespace2, compiler.Stylesheetid));
+            compiler.AddNamespaceAlias(
+                namespace1,
+                new NamespaceInfo(prefix2, namespace2, compiler.Stylesheetid)
+            );
         }
 
-        internal void CompileKey(Compiler compiler){
-            NavigatorInput input    = compiler.Input;
-            string         element  = input.LocalName;
-            int            MatchKey = Compiler.InvalidQueryKey;
-            int            UseKey   = Compiler.InvalidQueryKey;
+        internal void CompileKey(Compiler compiler)
+        {
+            NavigatorInput input = compiler.Input;
+            string element = input.LocalName;
+            int MatchKey = Compiler.InvalidQueryKey;
+            int UseKey = Compiler.InvalidQueryKey;
 
             XmlQualifiedName Name = null;
-            if (input.MoveToFirstAttribute()) {
-                do {
+            if (input.MoveToFirstAttribute())
+            {
+                do
+                {
                     string nspace = input.NamespaceURI;
-                    string name   = input.LocalName;
-                    string value  = input.Value;
+                    string name = input.LocalName;
+                    string value = input.Value;
 
-                    if (nspace.Length != 0) continue;
+                    if (nspace.Length != 0)
+                        continue;
 
-					if (Ref.Equal(name, input.Atoms.Name)) {
+                    if (Ref.Equal(name, input.Atoms.Name))
+                    {
                         Name = compiler.CreateXPathQName(value);
                     }
-                    else if (Ref.Equal(name, input.Atoms.Match)) {
-                        MatchKey = compiler.AddQuery(value, /*allowVars:*/false, /*allowKey*/false, /*pattern*/true);
+                    else if (Ref.Equal(name, input.Atoms.Match))
+                    {
+                        MatchKey = compiler.AddQuery(
+                            value, /*allowVars:*/
+                            false, /*allowKey*/
+                            false, /*pattern*/
+                            true
+                        );
                     }
-                    else if (Ref.Equal(name, input.Atoms.Use)) {
-                        UseKey = compiler.AddQuery(value, /*allowVars:*/false, /*allowKey*/false, /*pattern*/false);
+                    else if (Ref.Equal(name, input.Atoms.Use))
+                    {
+                        UseKey = compiler.AddQuery(
+                            value, /*allowVars:*/
+                            false, /*allowKey*/
+                            false, /*pattern*/
+                            false
+                        );
                     }
-                    else {
-                        if (! compiler.ForwardCompatibility) {
+                    else
+                    {
+                        if (!compiler.ForwardCompatibility)
+                        {
                             throw XsltException.Create(Res.Xslt_InvalidAttribute, name, element);
                         }
                     }
-                }
-                while(input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
 
             CheckRequiredAttribute(compiler, MatchKey != Compiler.InvalidQueryKey, "match");
-            CheckRequiredAttribute(compiler, UseKey   != Compiler.InvalidQueryKey, "use"  );
-            CheckRequiredAttribute(compiler, Name     != null                    , "name" );
+            CheckRequiredAttribute(compiler, UseKey != Compiler.InvalidQueryKey, "use");
+            CheckRequiredAttribute(compiler, Name != null, "name");
             // It is a breaking change to check for emptiness, SQLBUDT 324364
             //CheckEmpty(compiler);
 
             compiler.InsertKey(Name, MatchKey, UseKey);
         }
 
-        protected void CompileDecimalFormat(Compiler compiler){
-            NumberFormatInfo info   = new NumberFormatInfo();
-            DecimalFormat    format = new DecimalFormat(info, '#', '0', ';');
-            XmlQualifiedName  Name  = null;
-            NavigatorInput   input  = compiler.Input;
-            if (input.MoveToFirstAttribute()) {
-                do {
-                    if (input.Prefix.Length != 0) continue;
+        protected void CompileDecimalFormat(Compiler compiler)
+        {
+            NumberFormatInfo info = new NumberFormatInfo();
+            DecimalFormat format = new DecimalFormat(info, '#', '0', ';');
+            XmlQualifiedName Name = null;
+            NavigatorInput input = compiler.Input;
+            if (input.MoveToFirstAttribute())
+            {
+                do
+                {
+                    if (input.Prefix.Length != 0)
+                        continue;
 
-                    string name   = input.LocalName;
-                    string value  = input.Value;
+                    string name = input.LocalName;
+                    string value = input.Value;
 
-                    if (Ref.Equal(name, input.Atoms.Name)) {
+                    if (Ref.Equal(name, input.Atoms.Name))
+                    {
                         Name = compiler.CreateXPathQName(value);
                     }
-                    else if (Ref.Equal(name, input.Atoms.DecimalSeparator)) {
+                    else if (Ref.Equal(name, input.Atoms.DecimalSeparator))
+                    {
                         info.NumberDecimalSeparator = value;
                     }
-                    else if (Ref.Equal(name, input.Atoms.GroupingSeparator)) {
+                    else if (Ref.Equal(name, input.Atoms.GroupingSeparator))
+                    {
                         info.NumberGroupSeparator = value;
                     }
-                    else if (Ref.Equal(name, input.Atoms.Infinity)) {
+                    else if (Ref.Equal(name, input.Atoms.Infinity))
+                    {
                         info.PositiveInfinitySymbol = value;
                     }
-                    else if (Ref.Equal(name, input.Atoms.MinusSign)) {
+                    else if (Ref.Equal(name, input.Atoms.MinusSign))
+                    {
                         info.NegativeSign = value;
                     }
-                    else if (Ref.Equal(name, input.Atoms.NaN)) {
+                    else if (Ref.Equal(name, input.Atoms.NaN))
+                    {
                         info.NaNSymbol = value;
                     }
-                    else if (Ref.Equal(name, input.Atoms.Percent)) {
+                    else if (Ref.Equal(name, input.Atoms.Percent))
+                    {
                         info.PercentSymbol = value;
                     }
-                    else if (Ref.Equal(name, input.Atoms.PerMille)) {
+                    else if (Ref.Equal(name, input.Atoms.PerMille))
+                    {
                         info.PerMilleSymbol = value;
                     }
-                    else if (Ref.Equal(name, input.Atoms.Digit)) {
-                        if (CheckAttribute(value.Length == 1, compiler)) {
+                    else if (Ref.Equal(name, input.Atoms.Digit))
+                    {
+                        if (CheckAttribute(value.Length == 1, compiler))
+                        {
                             format.digit = value[0];
                         }
                     }
-                    else if (Ref.Equal(name, input.Atoms.ZeroDigit)) {
-                        if (CheckAttribute(value.Length == 1, compiler)) {
+                    else if (Ref.Equal(name, input.Atoms.ZeroDigit))
+                    {
+                        if (CheckAttribute(value.Length == 1, compiler))
+                        {
                             format.zeroDigit = value[0];
                         }
                     }
-                    else if (Ref.Equal(name, input.Atoms.PatternSeparator)) {
-                        if (CheckAttribute(value.Length == 1, compiler)) {
+                    else if (Ref.Equal(name, input.Atoms.PatternSeparator))
+                    {
+                        if (CheckAttribute(value.Length == 1, compiler))
+                        {
                             format.patternSeparator = value[0];
                         }
                     }
-                }
-                while(input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
-            info.NegativeInfinitySymbol = String.Concat(info.NegativeSign, info.PositiveInfinitySymbol);
-            if (Name == null) {
+            info.NegativeInfinitySymbol = String.Concat(
+                info.NegativeSign,
+                info.PositiveInfinitySymbol
+            );
+            if (Name == null)
+            {
                 Name = new XmlQualifiedName();
             }
             compiler.AddDecimalFormat(Name, format);
             CheckEmpty(compiler);
         }
 
-        internal bool CheckAttribute(bool valid, Compiler compiler) {
-            if (! valid) {
-                if (! compiler.ForwardCompatibility) {
-                    throw XsltException.Create(Res.Xslt_InvalidAttrValue, compiler.Input.LocalName, compiler.Input.Value);
+        internal bool CheckAttribute(bool valid, Compiler compiler)
+        {
+            if (!valid)
+            {
+                if (!compiler.ForwardCompatibility)
+                {
+                    throw XsltException.Create(
+                        Res.Xslt_InvalidAttrValue,
+                        compiler.Input.LocalName,
+                        compiler.Input.Value
+                    );
                 }
                 return false;
             }
             return true;
         }
 
-        protected void CompileSpace(Compiler compiler, bool preserve){
+        protected void CompileSpace(Compiler compiler, bool preserve)
+        {
             String value = compiler.GetSingleAttribute(compiler.Input.Atoms.Elements);
             String[] elements = XmlConvert.SplitString(value);
-            for (int i = 0; i < elements.Length; i++){
+            for (int i = 0; i < elements.Length; i++)
+            {
                 double defaultPriority = NameTest(elements[i]);
-                compiler.CompiledStylesheet.AddSpace(compiler, elements[i], defaultPriority, preserve);
+                compiler.CompiledStylesheet.AddSpace(
+                    compiler,
+                    elements[i],
+                    defaultPriority,
+                    preserve
+                );
             }
             CheckEmpty(compiler);
         }
 
-        double NameTest(String name) {
-            if (name == "*") {
+        double NameTest(String name)
+        {
+            if (name == "*")
+            {
                 return -0.5;
             }
             int idx = name.Length - 2;
-            if (0 <= idx && name[idx] == ':' && name[idx + 1] == '*') {
-                if (! PrefixQName.ValidatePrefix(name.Substring(0, idx))) {
+            if (0 <= idx && name[idx] == ':' && name[idx + 1] == '*')
+            {
+                if (!PrefixQName.ValidatePrefix(name.Substring(0, idx)))
+                {
                     throw XsltException.Create(Res.Xslt_InvalidAttrValue, "elements", name);
                 }
                 return -0.25;
             }
-            else {
-                string prefix, localname;
+            else
+            {
+                string prefix,
+                    localname;
                 PrefixQName.ParseQualifiedName(name, out prefix, out localname);
                 return 0;
             }
@@ -414,212 +552,272 @@ namespace System.Xml.Xsl.XsltOld {
         // It's OK to suppress the SxS warning.
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.None)]
-        protected void CompileTopLevelElements(Compiler compiler) {
+        protected void CompileTopLevelElements(Compiler compiler)
+        {
             // Navigator positioned at parent root, need to move to child and then back
-            if (compiler.Recurse() == false) {
+            if (compiler.Recurse() == false)
+            {
                 return;
             }
 
-            NavigatorInput input    = compiler.Input;
-            bool notFirstElement    = false;
-            do {
-                switch (input.NodeType) {
-                case XPathNodeType.Element:
-                    string name   = input.LocalName;
-                    string nspace = input.NamespaceURI;
+            NavigatorInput input = compiler.Input;
+            bool notFirstElement = false;
+            do
+            {
+                switch (input.NodeType)
+                {
+                    case XPathNodeType.Element:
+                        string name = input.LocalName;
+                        string nspace = input.NamespaceURI;
 
-                    if (Ref.Equal(nspace, input.Atoms.UriXsl)) {
-                        if (Ref.Equal(name, input.Atoms.Import)) {
-                            if (notFirstElement) {
-                                throw XsltException.Create(Res.Xslt_NotFirstImport);
-                            }
-                            // We should compile imports in reverse order after all toplevel elements.
-                            // remember it now and return to it in CompileImpoorts();
-                            Uri uri = compiler.ResolveUri(compiler.GetSingleAttribute(compiler.Input.Atoms.Href));
-                            string resolved = uri.ToString();
-                            if (compiler.IsCircularReference(resolved)) {
-                                throw XsltException.Create(Res.Xslt_CircularInclude, resolved);
-                            }
-                            compiler.CompiledStylesheet.Imports.Add(uri);
-                            CheckEmpty(compiler);
-                        }
-                        else if (Ref.Equal(name, input.Atoms.Include)) {
-                            notFirstElement = true;
-                            CompileInclude(compiler);
-                        }
-                        else {
-                            notFirstElement = true;
-                            compiler.PushNamespaceScope();
-                            if (Ref.Equal(name, input.Atoms.StripSpace)) {
-                                CompileSpace(compiler, false);
-                            }
-                            else if (Ref.Equal(name, input.Atoms.PreserveSpace)) {
-                                CompileSpace(compiler, true);
-                            }
-                            else if (Ref.Equal(name, input.Atoms.Output)) {
-                                CompileOutput(compiler);
-                            }
-                            else if (Ref.Equal(name, input.Atoms.Key)) {
-                                CompileKey(compiler);
-                            }
-                            else if (Ref.Equal(name, input.Atoms.DecimalFormat)) {
-                                CompileDecimalFormat(compiler);
-                            }
-                            else if (Ref.Equal(name, input.Atoms.NamespaceAlias)) {
-                                CompileNamespaceAlias(compiler);
-                            }
-                            else if (Ref.Equal(name, input.Atoms.AttributeSet)) {
-                                compiler.AddAttributeSet(compiler.CreateAttributeSetAction());
-                            }
-                            else if (Ref.Equal(name, input.Atoms.Variable)) {
-                                VariableAction action = compiler.CreateVariableAction(VariableType.GlobalVariable);
-                                if (action != null) {
-                                    AddAction(action);
+                        if (Ref.Equal(nspace, input.Atoms.UriXsl))
+                        {
+                            if (Ref.Equal(name, input.Atoms.Import))
+                            {
+                                if (notFirstElement)
+                                {
+                                    throw XsltException.Create(Res.Xslt_NotFirstImport);
                                 }
-                            }
-                            else if (Ref.Equal(name, input.Atoms.Param)) {
-                                VariableAction action = compiler.CreateVariableAction(VariableType.GlobalParameter);
-                                if (action != null) {
-                                    AddAction(action);
+                                // We should compile imports in reverse order after all toplevel elements.
+                                // remember it now and return to it in CompileImpoorts();
+                                Uri uri = compiler.ResolveUri(
+                                    compiler.GetSingleAttribute(compiler.Input.Atoms.Href)
+                                );
+                                string resolved = uri.ToString();
+                                if (compiler.IsCircularReference(resolved))
+                                {
+                                    throw XsltException.Create(Res.Xslt_CircularInclude, resolved);
                                 }
+                                compiler.CompiledStylesheet.Imports.Add(uri);
+                                CheckEmpty(compiler);
                             }
-                            else if (Ref.Equal(name, input.Atoms.Template)) {
-                                compiler.AddTemplate(compiler.CreateTemplateAction());
+                            else if (Ref.Equal(name, input.Atoms.Include))
+                            {
+                                notFirstElement = true;
+                                CompileInclude(compiler);
                             }
-                            else {
-                                if (!compiler.ForwardCompatibility) {
-                                    throw compiler.UnexpectedKeyword();
+                            else
+                            {
+                                notFirstElement = true;
+                                compiler.PushNamespaceScope();
+                                if (Ref.Equal(name, input.Atoms.StripSpace))
+                                {
+                                    CompileSpace(compiler, false);
                                 }
+                                else if (Ref.Equal(name, input.Atoms.PreserveSpace))
+                                {
+                                    CompileSpace(compiler, true);
+                                }
+                                else if (Ref.Equal(name, input.Atoms.Output))
+                                {
+                                    CompileOutput(compiler);
+                                }
+                                else if (Ref.Equal(name, input.Atoms.Key))
+                                {
+                                    CompileKey(compiler);
+                                }
+                                else if (Ref.Equal(name, input.Atoms.DecimalFormat))
+                                {
+                                    CompileDecimalFormat(compiler);
+                                }
+                                else if (Ref.Equal(name, input.Atoms.NamespaceAlias))
+                                {
+                                    CompileNamespaceAlias(compiler);
+                                }
+                                else if (Ref.Equal(name, input.Atoms.AttributeSet))
+                                {
+                                    compiler.AddAttributeSet(compiler.CreateAttributeSetAction());
+                                }
+                                else if (Ref.Equal(name, input.Atoms.Variable))
+                                {
+                                    VariableAction action = compiler.CreateVariableAction(
+                                        VariableType.GlobalVariable
+                                    );
+                                    if (action != null)
+                                    {
+                                        AddAction(action);
+                                    }
+                                }
+                                else if (Ref.Equal(name, input.Atoms.Param))
+                                {
+                                    VariableAction action = compiler.CreateVariableAction(
+                                        VariableType.GlobalParameter
+                                    );
+                                    if (action != null)
+                                    {
+                                        AddAction(action);
+                                    }
+                                }
+                                else if (Ref.Equal(name, input.Atoms.Template))
+                                {
+                                    compiler.AddTemplate(compiler.CreateTemplateAction());
+                                }
+                                else
+                                {
+                                    if (!compiler.ForwardCompatibility)
+                                    {
+                                        throw compiler.UnexpectedKeyword();
+                                    }
+                                }
+                                compiler.PopScope();
                             }
-                            compiler.PopScope();
                         }
-                    }
 #if !DISABLE_XSLT_SCRIPT
-                    else if (nspace == input.Atoms.UrnMsxsl && name == input.Atoms.Script) {
-                        AddScript(compiler);
-                    }
-#endif
-                    else {
-                        if (nspace.Length == 0) {
-                            throw XsltException.Create(Res.Xslt_NullNsAtTopLevel, input.Name);
+                        else if (nspace == input.Atoms.UrnMsxsl && name == input.Atoms.Script)
+                        {
+                            AddScript(compiler);
                         }
-                        // Ignoring non-recognized namespace per XSLT spec 2.2
-                    }
-                    break;
+#endif
+                        else
+                        {
+                            if (nspace.Length == 0)
+                            {
+                                throw XsltException.Create(Res.Xslt_NullNsAtTopLevel, input.Name);
+                            }
+                            // Ignoring non-recognized namespace per XSLT spec 2.2
+                        }
+                        break;
 
-                case XPathNodeType.ProcessingInstruction:
-                case XPathNodeType.Comment:
-                case XPathNodeType.Whitespace:
-                case XPathNodeType.SignificantWhitespace:
-                    break;
+                    case XPathNodeType.ProcessingInstruction:
+                    case XPathNodeType.Comment:
+                    case XPathNodeType.Whitespace:
+                    case XPathNodeType.SignificantWhitespace:
+                        break;
 
-                default:
-                    throw XsltException.Create(Res.Xslt_InvalidContents, "stylesheet");
+                    default:
+                        throw XsltException.Create(Res.Xslt_InvalidContents, "stylesheet");
                 }
-            }
-            while (compiler.Advance());
+            } while (compiler.Advance());
 
             compiler.ToParent();
         }
 
-        protected void CompileTemplate(Compiler compiler) {
-            do {
+        protected void CompileTemplate(Compiler compiler)
+        {
+            do
+            {
                 CompileOnceTemplate(compiler);
-            }
-            while (compiler.Advance());
+            } while (compiler.Advance());
         }
 
-        protected void CompileOnceTemplate(Compiler compiler) {
+        protected void CompileOnceTemplate(Compiler compiler)
+        {
             NavigatorInput input = compiler.Input;
 
-            if (input.NodeType == XPathNodeType.Element) {
+            if (input.NodeType == XPathNodeType.Element)
+            {
                 string nspace = input.NamespaceURI;
 
-                if (Ref.Equal(nspace, input.Atoms.UriXsl)) {
+                if (Ref.Equal(nspace, input.Atoms.UriXsl))
+                {
                     compiler.PushNamespaceScope();
                     CompileInstruction(compiler);
                     compiler.PopScope();
                 }
-                else {
+                else
+                {
                     compiler.PushLiteralScope();
                     compiler.InsertExtensionNamespace();
-                    if (compiler.IsExtensionNamespace(nspace)) {
+                    if (compiler.IsExtensionNamespace(nspace))
+                    {
                         AddAction(compiler.CreateNewInstructionAction());
                     }
-                    else {
+                    else
+                    {
                         CompileLiteral(compiler);
                     }
                     compiler.PopScope();
                 }
             }
-            else {
+            else
+            {
                 CompileLiteral(compiler);
             }
         }
 
-        void CompileInstruction(Compiler compiler) {
-            NavigatorInput input  = compiler.Input;
+        void CompileInstruction(Compiler compiler)
+        {
+            NavigatorInput input = compiler.Input;
             CompiledAction action = null;
 
             Debug.Assert(Ref.Equal(input.NamespaceURI, input.Atoms.UriXsl));
 
             string name = input.LocalName;
 
-            if (Ref.Equal(name, input.Atoms.ApplyImports)) {
+            if (Ref.Equal(name, input.Atoms.ApplyImports))
+            {
                 action = compiler.CreateApplyImportsAction();
             }
-            else if (Ref.Equal(name, input.Atoms.ApplyTemplates)) {
+            else if (Ref.Equal(name, input.Atoms.ApplyTemplates))
+            {
                 action = compiler.CreateApplyTemplatesAction();
             }
-            else if (Ref.Equal(name, input.Atoms.Attribute)) {
+            else if (Ref.Equal(name, input.Atoms.Attribute))
+            {
                 action = compiler.CreateAttributeAction();
             }
-            else if (Ref.Equal(name, input.Atoms.CallTemplate)) {
+            else if (Ref.Equal(name, input.Atoms.CallTemplate))
+            {
                 action = compiler.CreateCallTemplateAction();
             }
-            else if (Ref.Equal(name, input.Atoms.Choose)) {
+            else if (Ref.Equal(name, input.Atoms.Choose))
+            {
                 action = compiler.CreateChooseAction();
             }
-            else if (Ref.Equal(name, input.Atoms.Comment)) {
+            else if (Ref.Equal(name, input.Atoms.Comment))
+            {
                 action = compiler.CreateCommentAction();
             }
-            else if (Ref.Equal(name, input.Atoms.Copy)) {
+            else if (Ref.Equal(name, input.Atoms.Copy))
+            {
                 action = compiler.CreateCopyAction();
             }
-            else if (Ref.Equal(name, input.Atoms.CopyOf)) {
+            else if (Ref.Equal(name, input.Atoms.CopyOf))
+            {
                 action = compiler.CreateCopyOfAction();
             }
-            else if (Ref.Equal(name, input.Atoms.Element)) {
+            else if (Ref.Equal(name, input.Atoms.Element))
+            {
                 action = compiler.CreateElementAction();
             }
-            else if (Ref.Equal(name, input.Atoms.Fallback)) {
+            else if (Ref.Equal(name, input.Atoms.Fallback))
+            {
                 return;
             }
-            else if (Ref.Equal(name, input.Atoms.ForEach)) {
+            else if (Ref.Equal(name, input.Atoms.ForEach))
+            {
                 action = compiler.CreateForEachAction();
             }
-            else if (Ref.Equal(name, input.Atoms.If)) {
+            else if (Ref.Equal(name, input.Atoms.If))
+            {
                 action = compiler.CreateIfAction(IfAction.ConditionType.ConditionIf);
             }
-            else if (Ref.Equal(name, input.Atoms.Message)) {
+            else if (Ref.Equal(name, input.Atoms.Message))
+            {
                 action = compiler.CreateMessageAction();
             }
-            else if (Ref.Equal(name, input.Atoms.Number)) {
+            else if (Ref.Equal(name, input.Atoms.Number))
+            {
                 action = compiler.CreateNumberAction();
             }
-            else if (Ref.Equal(name, input.Atoms.ProcessingInstruction)) {
+            else if (Ref.Equal(name, input.Atoms.ProcessingInstruction))
+            {
                 action = compiler.CreateProcessingInstructionAction();
             }
-            else if (Ref.Equal(name, input.Atoms.Text)) {
+            else if (Ref.Equal(name, input.Atoms.Text))
+            {
                 action = compiler.CreateTextAction();
             }
-            else if (Ref.Equal(name, input.Atoms.ValueOf)) {
+            else if (Ref.Equal(name, input.Atoms.ValueOf))
+            {
                 action = compiler.CreateValueOfAction();
             }
-            else if (Ref.Equal(name, input.Atoms.Variable)) {
+            else if (Ref.Equal(name, input.Atoms.Variable))
+            {
                 action = compiler.CreateVariableAction(VariableType.LocalVariable);
             }
-            else {
+            else
+            {
                 if (compiler.ForwardCompatibility)
                     action = compiler.CreateNewInstructionAction();
                 else
@@ -631,221 +829,286 @@ namespace System.Xml.Xsl.XsltOld {
             AddAction(action);
         }
 
-        void CompileLiteral(Compiler compiler) {
+        void CompileLiteral(Compiler compiler)
+        {
             NavigatorInput input = compiler.Input;
 
-            switch (input.NodeType) {
-            case XPathNodeType.Element:
-                this.AddEvent(compiler.CreateBeginEvent());
-                CompileLiteralAttributesAndNamespaces(compiler);
+            switch (input.NodeType)
+            {
+                case XPathNodeType.Element:
+                    this.AddEvent(compiler.CreateBeginEvent());
+                    CompileLiteralAttributesAndNamespaces(compiler);
 
-                if (compiler.Recurse()) {
-                    CompileTemplate(compiler);
-                    compiler.ToParent();
-                }
+                    if (compiler.Recurse())
+                    {
+                        CompileTemplate(compiler);
+                        compiler.ToParent();
+                    }
 
-                this.AddEvent(new EndEvent(XPathNodeType.Element));
-                break;
+                    this.AddEvent(new EndEvent(XPathNodeType.Element));
+                    break;
 
-            case XPathNodeType.Text:
-            case XPathNodeType.SignificantWhitespace:
-                this.AddEvent(compiler.CreateTextEvent());
-                break;
-            case XPathNodeType.Whitespace:
-            case XPathNodeType.ProcessingInstruction:
-            case XPathNodeType.Comment:
-                break;
+                case XPathNodeType.Text:
+                case XPathNodeType.SignificantWhitespace:
+                    this.AddEvent(compiler.CreateTextEvent());
+                    break;
+                case XPathNodeType.Whitespace:
+                case XPathNodeType.ProcessingInstruction:
+                case XPathNodeType.Comment:
+                    break;
 
-            default:
-                Debug.Assert(false, "Unexpected node type.");
-                break;
+                default:
+                    Debug.Assert(false, "Unexpected node type.");
+                    break;
             }
         }
 
-        void CompileLiteralAttributesAndNamespaces(Compiler compiler) {
+        void CompileLiteralAttributesAndNamespaces(Compiler compiler)
+        {
             NavigatorInput input = compiler.Input;
 
-            if (input.Navigator.MoveToAttribute("use-attribute-sets", input.Atoms.UriXsl)) {
+            if (input.Navigator.MoveToAttribute("use-attribute-sets", input.Atoms.UriXsl))
+            {
                 AddAction(compiler.CreateUseAttributeSetsAction());
                 input.Navigator.MoveToParent();
             }
             compiler.InsertExcludedNamespace();
 
-            if (input.MoveToFirstNamespace()) {
-                do {
+            if (input.MoveToFirstNamespace())
+            {
+                do
+                {
                     string uri = input.Value;
 
-                    if (uri == XmlReservedNs.NsXslt) {
+                    if (uri == XmlReservedNs.NsXslt)
+                    {
                         continue;
                     }
                     if (
-                        compiler.IsExcludedNamespace(uri) ||
-                        compiler.IsExtensionNamespace(uri) ||
-                        compiler.IsNamespaceAlias(uri)
-                    ) {
-                            continue;
+                        compiler.IsExcludedNamespace(uri)
+                        || compiler.IsExtensionNamespace(uri)
+                        || compiler.IsNamespaceAlias(uri)
+                    )
+                    {
+                        continue;
                     }
                     this.AddEvent(new NamespaceEvent(input));
-                }
-                while (input.MoveToNextNamespace());
+                } while (input.MoveToNextNamespace());
                 input.ToParent();
             }
 
-            if (input.MoveToFirstAttribute()) {
-                do {
-
+            if (input.MoveToFirstAttribute())
+            {
+                do
+                {
                     // Skip everything from Xslt namespace
-                    if (Ref.Equal(input.NamespaceURI, input.Atoms.UriXsl)) {
+                    if (Ref.Equal(input.NamespaceURI, input.Atoms.UriXsl))
+                    {
                         continue;
                     }
 
                     // Add attribute events
-                    this.AddEvent (compiler.CreateBeginEvent());
+                    this.AddEvent(compiler.CreateBeginEvent());
                     this.AddEvents(compiler.CompileAvt(input.Value));
-                    this.AddEvent (new EndEvent(XPathNodeType.Attribute));
-                }
-                while (input.MoveToNextAttribute());
+                    this.AddEvent(new EndEvent(XPathNodeType.Attribute));
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
         }
 
-        void CompileOutput(Compiler compiler) {
-            Debug.Assert((object) this == (object) compiler.RootAction);
+        void CompileOutput(Compiler compiler)
+        {
+            Debug.Assert((object)this == (object)compiler.RootAction);
             compiler.RootAction.Output.Compile(compiler);
         }
 
-        internal void AddAction(Action action) {
-            if (this.containedActions == null) {
+        internal void AddAction(Action action)
+        {
+            if (this.containedActions == null)
+            {
                 this.containedActions = new ArrayList();
             }
             this.containedActions.Add(action);
             lastCopyCodeAction = null;
         }
 
-        private void EnsureCopyCodeAction() {
-            if(lastCopyCodeAction == null) {
+        private void EnsureCopyCodeAction()
+        {
+            if (lastCopyCodeAction == null)
+            {
                 CopyCodeAction copyCode = new CopyCodeAction();
                 AddAction(copyCode);
                 lastCopyCodeAction = copyCode;
             }
         }
 
-        protected void AddEvent(Event copyEvent) {
+        protected void AddEvent(Event copyEvent)
+        {
             EnsureCopyCodeAction();
             lastCopyCodeAction.AddEvent(copyEvent);
         }
 
-        protected void AddEvents(ArrayList copyEvents) {
+        protected void AddEvents(ArrayList copyEvents)
+        {
             EnsureCopyCodeAction();
             lastCopyCodeAction.AddEvents(copyEvents);
         }
 
 #if !DISABLE_XSLT_SCRIPT
-        private void AddScript(Compiler compiler) {
+        private void AddScript(Compiler compiler)
+        {
             NavigatorInput input = compiler.Input;
 
             ScriptingLanguage lang = ScriptingLanguage.JScript;
             string implementsNamespace = null;
-            if (input.MoveToFirstAttribute()) {
-                do {
-                    if (input.LocalName == input.Atoms.Language) {
+            if (input.MoveToFirstAttribute())
+            {
+                do
+                {
+                    if (input.LocalName == input.Atoms.Language)
+                    {
                         string langName = input.Value;
                         if (
-                            String.Compare(langName, "jscript"   , StringComparison.OrdinalIgnoreCase) == 0 ||
-                            String.Compare(langName, "javascript", StringComparison.OrdinalIgnoreCase) == 0
-                        ) {
+                            String.Compare(langName, "jscript", StringComparison.OrdinalIgnoreCase)
+                                == 0
+                            || String.Compare(
+                                langName,
+                                "javascript",
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                        {
                             lang = ScriptingLanguage.JScript;
-                        } else if (
-                            String.Compare(langName, "c#"    , StringComparison.OrdinalIgnoreCase) == 0 ||
-                            String.Compare(langName, "csharp", StringComparison.OrdinalIgnoreCase) == 0
-                        ) {
+                        }
+                        else if (
+                            String.Compare(langName, "c#", StringComparison.OrdinalIgnoreCase) == 0
+                            || String.Compare(
+                                langName,
+                                "csharp",
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                        {
                             lang = ScriptingLanguage.CSharp;
                         }
 #if !FEATURE_PAL // visualbasic
                         else if (
-                            String.Compare(langName, "vb"         , StringComparison.OrdinalIgnoreCase) == 0 ||
-                            String.Compare(langName, "visualbasic", StringComparison.OrdinalIgnoreCase) == 0
-                        ) {
+                            String.Compare(langName, "vb", StringComparison.OrdinalIgnoreCase) == 0
+                            || String.Compare(
+                                langName,
+                                "visualbasic",
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                        {
                             lang = ScriptingLanguage.VisualBasic;
                         }
 #endif // !FEATURE_PAL
-                        else {
+                        else
+                        {
                             throw XsltException.Create(Res.Xslt_ScriptInvalidLanguage, langName);
                         }
                     }
-                    else if (input.LocalName == input.Atoms.ImplementsPrefix) {
-                        if(! PrefixQName.ValidatePrefix(input.Value))  {
-                            throw XsltException.Create(Res.Xslt_InvalidAttrValue, input.LocalName, input.Value);
+                    else if (input.LocalName == input.Atoms.ImplementsPrefix)
+                    {
+                        if (!PrefixQName.ValidatePrefix(input.Value))
+                        {
+                            throw XsltException.Create(
+                                Res.Xslt_InvalidAttrValue,
+                                input.LocalName,
+                                input.Value
+                            );
                         }
                         implementsNamespace = compiler.ResolveXmlNamespace(input.Value);
                     }
-                }
-                while (input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
-            if (implementsNamespace == null) {
+            if (implementsNamespace == null)
+            {
                 throw XsltException.Create(Res.Xslt_MissingAttribute, input.Atoms.ImplementsPrefix);
             }
-            if (!input.Recurse() || input.NodeType != XPathNodeType.Text) {
+            if (!input.Recurse() || input.NodeType != XPathNodeType.Text)
+            {
                 throw XsltException.Create(Res.Xslt_ScriptEmpty);
             }
-            compiler.AddScript(input.Value, lang, implementsNamespace, input.BaseURI, input.LineNumber);
+            compiler.AddScript(
+                input.Value,
+                lang,
+                implementsNamespace,
+                input.BaseURI,
+                input.LineNumber
+            );
             input.ToParent();
         }
 #endif
 
-        internal override void Execute(Processor processor, ActionFrame frame) {
+        internal override void Execute(Processor processor, ActionFrame frame)
+        {
             Debug.Assert(processor != null && frame != null);
 
-            switch (frame.State) {
-            case Initialized:
-                if (this.containedActions != null && this.containedActions.Count > 0) {
-                    processor.PushActionFrame(frame);
-                    frame.State = ProcessingChildren;
-                }
-                else {
+            switch (frame.State)
+            {
+                case Initialized:
+                    if (this.containedActions != null && this.containedActions.Count > 0)
+                    {
+                        processor.PushActionFrame(frame);
+                        frame.State = ProcessingChildren;
+                    }
+                    else
+                    {
+                        frame.Finished();
+                    }
+                    break; // Allow children to run
+
+                case ProcessingChildren:
                     frame.Finished();
-                }
-                break;                              // Allow children to run
+                    break;
 
-            case ProcessingChildren:
-                frame.Finished();
-                break;
-
-            default:
-                Debug.Fail("Invalid Container action execution state");
-                break;
+                default:
+                    Debug.Fail("Invalid Container action execution state");
+                    break;
             }
         }
 
-        internal Action GetAction(int actionIndex) {
+        internal Action GetAction(int actionIndex)
+        {
             Debug.Assert(actionIndex == 0 || this.containedActions != null);
 
-            if (this.containedActions != null && actionIndex < this.containedActions.Count) {
-                return (Action) this.containedActions[actionIndex];
+            if (this.containedActions != null && actionIndex < this.containedActions.Count)
+            {
+                return (Action)this.containedActions[actionIndex];
             }
-            else {
+            else
+            {
                 return null;
             }
         }
 
-        internal void CheckDuplicateParams(XmlQualifiedName name) {
-            if (this.containedActions != null) {
-                foreach(CompiledAction action in this.containedActions) {
+        internal void CheckDuplicateParams(XmlQualifiedName name)
+        {
+            if (this.containedActions != null)
+            {
+                foreach (CompiledAction action in this.containedActions)
+                {
                     WithParamAction param = action as WithParamAction;
-                    if (param != null && param.Name == name) {
+                    if (param != null && param.Name == name)
+                    {
                         throw XsltException.Create(Res.Xslt_DuplicateWithParam, name.ToString());
                     }
                 }
             }
         }
 
-        internal override void ReplaceNamespaceAlias(Compiler compiler){
-            if (this.containedActions == null) {
+        internal override void ReplaceNamespaceAlias(Compiler compiler)
+        {
+            if (this.containedActions == null)
+            {
                 return;
             }
             int count = this.containedActions.Count;
-            for(int i= 0; i < this.containedActions.Count; i++) {
+            for (int i = 0; i < this.containedActions.Count; i++)
+            {
                 ((Action)this.containedActions[i]).ReplaceNamespaceAlias(compiler);
             }
         }

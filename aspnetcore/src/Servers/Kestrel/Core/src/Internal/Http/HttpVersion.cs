@@ -37,5 +37,5 @@ public enum HttpVersion : sbyte
     /// This API supports framework infrastructure and is not intended to be used
     /// directly from application code.
     /// </summary>
-    Http3 = 3
+    Http3 = 3,
 }

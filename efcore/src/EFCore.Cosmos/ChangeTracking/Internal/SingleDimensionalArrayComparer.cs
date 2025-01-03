@@ -13,8 +13,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ChangeTracking.Internal;
 /// </summary>
 public sealed class SingleDimensionalArrayComparer<TElement> : ValueComparer<TElement[]>
 {
-    internal static readonly PropertyInfo ArrayLengthProperty
-        = typeof(Array).GetRuntimeProperty(nameof(Array.Length))!;
+    internal static readonly PropertyInfo ArrayLengthProperty = typeof(Array).GetRuntimeProperty(
+        nameof(Array.Length)
+    )!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -26,9 +27,8 @@ public sealed class SingleDimensionalArrayComparer<TElement> : ValueComparer<TEl
         : base(
             CreateEqualsExpression(elementComparer),
             CreateHashCodeExpression(elementComparer),
-            CreateSnapshotExpression(elementComparer))
-    {
-    }
+            CreateSnapshotExpression(elementComparer)
+        ) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -36,10 +36,11 @@ public sealed class SingleDimensionalArrayComparer<TElement> : ValueComparer<TEl
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override Type Type
-        => typeof(TElement[]);
+    public override Type Type => typeof(TElement[]);
 
-    private static Expression<Func<TElement[]?, TElement[]?, bool>> CreateEqualsExpression(ValueComparer elementComparer)
+    private static Expression<Func<TElement[]?, TElement[]?, bool>> CreateEqualsExpression(
+        ValueComparer elementComparer
+    )
     {
         var type = typeof(TElement[]);
         var param1 = Parameter(type, "v1");
@@ -52,23 +53,40 @@ public sealed class SingleDimensionalArrayComparer<TElement> : ValueComparer<TEl
                 AndAlso(
                     NotEqual(param2, Constant(null, type)),
                     AndAlso(
-                        Equal(MakeMemberAccess(param1, ArrayLengthProperty), MakeMemberAccess(param2, ArrayLengthProperty)),
+                        Equal(
+                            MakeMemberAccess(param1, ArrayLengthProperty),
+                            MakeMemberAccess(param2, ArrayLengthProperty)
+                        ),
                         OrElse(
                             ReferenceEqual(param1, param2),
                             Call(
                                 EnumerableMethods.All.MakeGenericMethod(typeof(bool)),
                                 Call(
-                                    EnumerableMethods.ZipWithSelector.MakeGenericMethod(typeof(TElement), typeof(TElement), typeof(bool)),
+                                    EnumerableMethods.ZipWithSelector.MakeGenericMethod(
+                                        typeof(TElement),
+                                        typeof(TElement),
+                                        typeof(bool)
+                                    ),
                                     param1,
                                     param2,
-                                    elementComparer.EqualsExpression),
+                                    elementComparer.EqualsExpression
+                                ),
 #pragma warning disable EF1001 // Internal EF Core API usage.
-                                BoolIdentity))))),
+                                BoolIdentity
+                            )
+                        )
+                    )
+                )
+            ),
 #pragma warning restore EF1001 // Internal EF Core API usage.
-            param1, param2);
+            param1,
+            param2
+        );
     }
 
-    private static Expression<Func<TElement[], int>> CreateHashCodeExpression(ValueComparer elementComparer)
+    private static Expression<Func<TElement[], int>> CreateHashCodeExpression(
+        ValueComparer elementComparer
+    )
     {
         var elementType = typeof(TElement);
         var param = Parameter(typeof(TElement[]), "v");
@@ -77,25 +95,40 @@ public sealed class SingleDimensionalArrayComparer<TElement> : ValueComparer<TEl
         var aggregateElementParam = Parameter(elementType, "e");
 #pragma warning disable EF1001 // Internal EF Core API usage.
         var aggregateFunc = Lambda<Func<HashCode, TElement, HashCode>>(
-            Call(HashCodeAddMethod, aggregateParam, elementComparer.ExtractHashCodeBody(aggregateElementParam)),
-            aggregateParam, aggregateElementParam);
+            Call(
+                HashCodeAddMethod,
+                aggregateParam,
+                elementComparer.ExtractHashCodeBody(aggregateElementParam)
+            ),
+            aggregateParam,
+            aggregateElementParam
+        );
 
         var selector = Lambda<Func<HashCode, int>>(
             Call(aggregateParam, ToHashCodeMethod),
-            aggregateParam);
+            aggregateParam
+        );
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
         return Lambda<Func<TElement[], int>>(
             Call(
-                EnumerableMethods.AggregateWithSeedSelector.MakeGenericMethod(elementType, typeof(HashCode), typeof(int)),
+                EnumerableMethods.AggregateWithSeedSelector.MakeGenericMethod(
+                    elementType,
+                    typeof(HashCode),
+                    typeof(int)
+                ),
                 param,
                 New(typeof(HashCode)),
                 aggregateFunc,
-                selector),
-            param);
+                selector
+            ),
+            param
+        );
     }
 
-    private static Expression<Func<TElement[], TElement[]>> CreateSnapshotExpression(ValueComparer elementComparer)
+    private static Expression<Func<TElement[], TElement[]>> CreateSnapshotExpression(
+        ValueComparer elementComparer
+    )
     {
         var elementType = typeof(TElement);
         var param = Parameter(typeof(TElement[]), "v");
@@ -108,8 +141,10 @@ public sealed class SingleDimensionalArrayComparer<TElement> : ValueComparer<TEl
                 Condition(
                     Equal(elementParam, Constant(null, elementType)),
                     Constant(null, elementType),
-                    elementComparer.ExtractSnapshotBody(elementParam)),
-                elementParam);
+                    elementComparer.ExtractSnapshotBody(elementParam)
+                ),
+                elementParam
+            );
 
         return Lambda<Func<TElement[], TElement[]>>(
             Call(
@@ -117,7 +152,10 @@ public sealed class SingleDimensionalArrayComparer<TElement> : ValueComparer<TEl
                 Call(
                     EnumerableMethods.Select.MakeGenericMethod(elementType, elementType),
                     param,
-                    selector)),
-            param);
+                    selector
+                )
+            ),
+            param
+        );
     }
 }

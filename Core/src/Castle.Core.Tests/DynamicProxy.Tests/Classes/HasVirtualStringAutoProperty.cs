@@ -14,8 +14,8 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	public class HasVirtualStringAutoProperty
-	{
-		public virtual string Property { get; set; }
-	}
+    public class HasVirtualStringAutoProperty
+    {
+        public virtual string Property { get; set; }
+    }
 }

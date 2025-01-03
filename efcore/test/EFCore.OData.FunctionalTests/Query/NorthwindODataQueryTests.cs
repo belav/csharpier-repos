@@ -7,12 +7,12 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindODataQueryTests : ODataQueryTestBase, IClassFixture<NorthwindODataQueryTestFixture>
+public class NorthwindODataQueryTests
+    : ODataQueryTestBase,
+        IClassFixture<NorthwindODataQueryTestFixture>
 {
     public NorthwindODataQueryTests(NorthwindODataQueryTestFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task Basic_query_customers()
@@ -47,7 +47,10 @@ public class NorthwindODataQueryTests : ODataQueryTestBase, IClassFixture<Northw
     [ConditionalFact]
     public async Task Query_for_alfki_expand_orders()
     {
-        var requestUri = string.Format(@"{0}/odata/Customers?$filter=CustomerID eq 'ALFKI'&$expand=Orders", BaseAddress);
+        var requestUri = string.Format(
+            @"{0}/odata/Customers?$filter=CustomerID eq 'ALFKI'&$expand=Orders",
+            BaseAddress
+        );
         var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
         var response = await Client.SendAsync(request);
 

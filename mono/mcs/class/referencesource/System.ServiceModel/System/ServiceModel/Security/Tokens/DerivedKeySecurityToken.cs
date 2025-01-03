@@ -5,30 +5,67 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System.Collections;
-    using System.ServiceModel;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
-    using System.IO;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
-    using System.IdentityModel.Tokens;
     using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.IO;
     using System.Security.Cryptography;
+    using System.ServiceModel;
     using System.Text;
     using System.Xml;
-
 
     sealed class DerivedKeySecurityToken : SecurityToken
     {
         //        public const string DefaultLabel = "WS-SecureConversationWS-SecureConversation";
         static readonly byte[] DefaultLabel = new byte[]
-            {
-                (byte)'W', (byte)'S', (byte)'-', (byte)'S', (byte)'e', (byte)'c', (byte)'u', (byte)'r', (byte)'e',
-                (byte)'C', (byte)'o', (byte)'n', (byte)'v', (byte)'e', (byte)'r', (byte)'s', (byte)'a', (byte)'t', (byte)'i', (byte)'o', (byte)'n',
-                (byte)'W', (byte)'S', (byte)'-', (byte)'S', (byte)'e', (byte)'c', (byte)'u', (byte)'r', (byte)'e',
-                (byte)'C', (byte)'o', (byte)'n', (byte)'v', (byte)'e', (byte)'r', (byte)'s', (byte)'a', (byte)'t', (byte)'i', (byte)'o', (byte)'n'
-            };
+        {
+            (byte)'W',
+            (byte)'S',
+            (byte)'-',
+            (byte)'S',
+            (byte)'e',
+            (byte)'c',
+            (byte)'u',
+            (byte)'r',
+            (byte)'e',
+            (byte)'C',
+            (byte)'o',
+            (byte)'n',
+            (byte)'v',
+            (byte)'e',
+            (byte)'r',
+            (byte)'s',
+            (byte)'a',
+            (byte)'t',
+            (byte)'i',
+            (byte)'o',
+            (byte)'n',
+            (byte)'W',
+            (byte)'S',
+            (byte)'-',
+            (byte)'S',
+            (byte)'e',
+            (byte)'c',
+            (byte)'u',
+            (byte)'r',
+            (byte)'e',
+            (byte)'C',
+            (byte)'o',
+            (byte)'n',
+            (byte)'v',
+            (byte)'e',
+            (byte)'r',
+            (byte)'s',
+            (byte)'a',
+            (byte)'t',
+            (byte)'i',
+            (byte)'o',
+            (byte)'n',
+        };
 
         public const int DefaultNonceLength = 16;
         public const int DefaultDerivedKeyLength = 32;
@@ -39,6 +76,7 @@ namespace System.ServiceModel.Security.Tokens
         string label;
         int length = -1;
         byte[] nonce;
+
         // either offset or generation must be specified.
         int offset = -1;
         int generation = -1;
@@ -47,42 +85,96 @@ namespace System.ServiceModel.Security.Tokens
         ReadOnlyCollection<SecurityKey> securityKeys;
 
         // create from scratch
-        public DerivedKeySecurityToken(SecurityToken tokenToDerive, SecurityKeyIdentifierClause tokenToDeriveIdentifier, int length)
-            : this(tokenToDerive, tokenToDeriveIdentifier, length, SecurityUtils.GenerateId())
-        {
-        }
+        public DerivedKeySecurityToken(
+            SecurityToken tokenToDerive,
+            SecurityKeyIdentifierClause tokenToDeriveIdentifier,
+            int length
+        )
+            : this(tokenToDerive, tokenToDeriveIdentifier, length, SecurityUtils.GenerateId()) { }
 
-        internal DerivedKeySecurityToken(SecurityToken tokenToDerive, SecurityKeyIdentifierClause tokenToDeriveIdentifier,
-            int length, string id)
+        internal DerivedKeySecurityToken(
+            SecurityToken tokenToDerive,
+            SecurityKeyIdentifierClause tokenToDeriveIdentifier,
+            int length,
+            string id
+        )
         {
             if (length != 16 && length != 24 && length != 32)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.Psha1KeyLengthInvalid, length * 8)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.Psha1KeyLengthInvalid, length * 8))
+                );
 
             byte[] nonce = new byte[DefaultNonceLength];
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
             rng.GetBytes(nonce);
 
-            Initialize(id, -1, 0, length, null, nonce, tokenToDerive, tokenToDeriveIdentifier, SecurityAlgorithms.Psha1KeyDerivation);
+            Initialize(
+                id,
+                -1,
+                0,
+                length,
+                null,
+                nonce,
+                tokenToDerive,
+                tokenToDeriveIdentifier,
+                SecurityAlgorithms.Psha1KeyDerivation
+            );
         }
 
-        internal DerivedKeySecurityToken(int generation, int offset, int length,
-            string label, int minNonceLength, SecurityToken tokenToDerive,
+        internal DerivedKeySecurityToken(
+            int generation,
+            int offset,
+            int length,
+            string label,
+            int minNonceLength,
+            SecurityToken tokenToDerive,
             SecurityKeyIdentifierClause tokenToDeriveIdentifier,
-            string derivationAlgorithm, string id)
+            string derivationAlgorithm,
+            string id
+        )
         {
             byte[] nonce = new byte[minNonceLength];
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
             rng.GetBytes(nonce);
 
-            Initialize(id, generation, offset, length, label, nonce, tokenToDerive, tokenToDeriveIdentifier, derivationAlgorithm);
+            Initialize(
+                id,
+                generation,
+                offset,
+                length,
+                label,
+                nonce,
+                tokenToDerive,
+                tokenToDeriveIdentifier,
+                derivationAlgorithm
+            );
         }
 
         // create from xml
-        internal DerivedKeySecurityToken(int generation, int offset, int length,
-            string label, byte[] nonce, SecurityToken tokenToDerive,
-            SecurityKeyIdentifierClause tokenToDeriveIdentifier, string derivationAlgorithm, string id)
+        internal DerivedKeySecurityToken(
+            int generation,
+            int offset,
+            int length,
+            string label,
+            byte[] nonce,
+            SecurityToken tokenToDerive,
+            SecurityKeyIdentifierClause tokenToDeriveIdentifier,
+            string derivationAlgorithm,
+            string id
+        )
         {
-            Initialize(id, generation, offset, length, label, nonce, tokenToDerive, tokenToDeriveIdentifier, derivationAlgorithm, false);
+            Initialize(
+                id,
+                generation,
+                offset,
+                length,
+                label,
+                nonce,
+                tokenToDerive,
+                tokenToDeriveIdentifier,
+                derivationAlgorithm,
+                false
+            );
         }
 
         public override string Id
@@ -147,7 +239,9 @@ namespace System.ServiceModel.Security.Tokens
                 if (this.securityKeys == null)
                 {
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.DerivedKeyNotInitialized)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.DerivedKeyNotInitialized))
+                    );
                 }
                 return this.securityKeys;
             }
@@ -182,20 +276,52 @@ namespace System.ServiceModel.Security.Tokens
             using (XmlTextWriter xmlWriter = new XmlTextWriter(writer))
             {
                 xmlWriter.Formatting = Formatting.Indented;
-                SecurityStandardsManager.DefaultInstance.SecurityTokenSerializer.WriteKeyIdentifierClause(XmlDictionaryWriter.CreateDictionaryWriter(xmlWriter), this.TokenToDeriveIdentifier);
+                SecurityStandardsManager.DefaultInstance.SecurityTokenSerializer.WriteKeyIdentifierClause(
+                    XmlDictionaryWriter.CreateDictionaryWriter(xmlWriter),
+                    this.TokenToDeriveIdentifier
+                );
             }
             return writer.ToString();
         }
 
-        void Initialize(string id, int generation, int offset, int length, string label, byte[] nonce,
-            SecurityToken tokenToDerive, SecurityKeyIdentifierClause tokenToDeriveIdentifier, string derivationAlgorithm)
+        void Initialize(
+            string id,
+            int generation,
+            int offset,
+            int length,
+            string label,
+            byte[] nonce,
+            SecurityToken tokenToDerive,
+            SecurityKeyIdentifierClause tokenToDeriveIdentifier,
+            string derivationAlgorithm
+        )
         {
-            Initialize(id, generation, offset, length, label, nonce, tokenToDerive, tokenToDeriveIdentifier, derivationAlgorithm, true);
+            Initialize(
+                id,
+                generation,
+                offset,
+                length,
+                label,
+                nonce,
+                tokenToDerive,
+                tokenToDeriveIdentifier,
+                derivationAlgorithm,
+                true
+            );
         }
 
-        void Initialize(string id, int generation, int offset, int length, string label, byte[] nonce,
-            SecurityToken tokenToDerive, SecurityKeyIdentifierClause tokenToDeriveIdentifier, string derivationAlgorithm,
-            bool initializeDerivedKey)
+        void Initialize(
+            string id,
+            int generation,
+            int offset,
+            int length,
+            string label,
+            byte[] nonce,
+            SecurityToken tokenToDerive,
+            SecurityKeyIdentifierClause tokenToDeriveIdentifier,
+            string derivationAlgorithm,
+            bool initializeDerivedKey
+        )
         {
             if (id == null)
             {
@@ -207,11 +333,15 @@ namespace System.ServiceModel.Security.Tokens
             }
             if (tokenToDeriveIdentifier == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tokentoDeriveIdentifier");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "tokentoDeriveIdentifier"
+                );
             }
             if (!SecurityUtils.IsSupportedAlgorithm(derivationAlgorithm, tokenToDerive))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.DerivedKeyCannotDeriveFromSecret)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.DerivedKeyCannotDeriveFromSecret))
+                );
             }
             if (nonce == null)
             {
@@ -219,15 +349,21 @@ namespace System.ServiceModel.Security.Tokens
             }
             if (length == -1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("length"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("length")
+                );
             }
             if (offset == -1 && generation == -1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.DerivedKeyPosAndGenNotSpecified));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.DerivedKeyPosAndGenNotSpecified)
+                );
             }
             if (offset >= 0 && generation >= 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.DerivedKeyPosAndGenBothSpecified));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.DerivedKeyPosAndGenBothSpecified)
+                );
             }
 
             this.id = id;
@@ -254,15 +390,24 @@ namespace System.ServiceModel.Security.Tokens
             }
             if (this.length > maxKeyLength)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.DerivedKeyLengthTooLong, this.length, maxKeyLength));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.DerivedKeyLengthTooLong, this.length, maxKeyLength)
+                );
             }
 
-            this.key = SecurityUtils.GenerateDerivedKey(this.tokenToDerive, this.keyDerivationAlgorithm,
-                (this.label != null ? Encoding.UTF8.GetBytes(this.label) : DefaultLabel), this.nonce, this.length * 8,
-                ((this.offset >= 0) ? this.offset : this.generation * this.length));
+            this.key = SecurityUtils.GenerateDerivedKey(
+                this.tokenToDerive,
+                this.keyDerivationAlgorithm,
+                (this.label != null ? Encoding.UTF8.GetBytes(this.label) : DefaultLabel),
+                this.nonce,
+                this.length * 8,
+                ((this.offset >= 0) ? this.offset : this.generation * this.length)
+            );
             if ((this.key == null) || (this.key.Length == 0))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.DerivedKeyCannotDeriveFromSecret));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.DerivedKeyCannotDeriveFromSecret)
+                );
             }
             List<SecurityKey> temp = new List<SecurityKey>(1);
             temp.Add(new InMemorySymmetricSecurityKey(this.key, false));
@@ -275,21 +420,42 @@ namespace System.ServiceModel.Security.Tokens
             this.securityKeys = securityKeys;
         }
 
-        internal static void EnsureAcceptableOffset(int offset, int generation, int length, int maxOffset)
+        internal static void EnsureAcceptableOffset(
+            int offset,
+            int generation,
+            int length,
+            int maxOffset
+        )
         {
             if (offset != -1)
             {
                 if (offset > maxOffset)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new MessageSecurityException(SR.GetString(SR.DerivedKeyTokenOffsetTooHigh, offset, maxOffset)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new MessageSecurityException(
+                            SR.GetString(SR.DerivedKeyTokenOffsetTooHigh, offset, maxOffset)
+                        )
+                    );
                 }
             }
             else
             {
                 int effectiveOffset = generation * length;
-                if ((effectiveOffset < generation && effectiveOffset < length) || effectiveOffset > maxOffset)
+                if (
+                    (effectiveOffset < generation && effectiveOffset < length)
+                    || effectiveOffset > maxOffset
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new MessageSecurityException(SR.GetString(SR.DerivedKeyTokenGenerationAndLengthTooHigh, generation, length, maxOffset)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.DerivedKeyTokenGenerationAndLengthTooHigh,
+                                generation,
+                                length,
+                                maxOffset
+                            )
+                        )
+                    );
                 }
             }
         }

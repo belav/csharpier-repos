@@ -18,23 +18,39 @@ namespace System.Web.Razor.Generator
         public override void GenerateCode(Span target, CodeGeneratorContext context)
         {
             context.GeneratedClass.BaseTypes.Clear();
-            context.GeneratedClass.BaseTypes.Add(new CodeTypeReference(ResolveType(context, BaseType.Trim())));
+            context.GeneratedClass.BaseTypes.Add(
+                new CodeTypeReference(ResolveType(context, BaseType.Trim()))
+            );
 
             if (context.Host.DesignTimeMode)
             {
                 int generatedCodeStart = 0;
                 string code = context.BuildCodeString(cw =>
                 {
-                    generatedCodeStart = cw.WriteVariableDeclaration(target.Content, "__inheritsHelper", null);
+                    generatedCodeStart = cw.WriteVariableDeclaration(
+                        target.Content,
+                        "__inheritsHelper",
+                        null
+                    );
                     cw.WriteEndStatement();
                 });
 
                 int paddingCharCount;
 
                 CodeSnippetStatement stmt = new CodeSnippetStatement(
-                    CodeGeneratorPaddingHelper.Pad(context.Host, code, target, generatedCodeStart, out paddingCharCount))
+                    CodeGeneratorPaddingHelper.Pad(
+                        context.Host,
+                        code,
+                        target,
+                        generatedCodeStart,
+                        out paddingCharCount
+                    )
+                )
                 {
-                    LinePragma = context.GenerateLinePragma(target, generatedCodeStart + paddingCharCount)
+                    LinePragma = context.GenerateLinePragma(
+                        target,
+                        generatedCodeStart + paddingCharCount
+                    ),
                 };
                 context.AddDesignTimeHelperStatement(stmt);
             }
@@ -53,8 +69,8 @@ namespace System.Web.Razor.Generator
         public override bool Equals(object obj)
         {
             SetBaseTypeCodeGenerator other = obj as SetBaseTypeCodeGenerator;
-            return other != null &&
-                   String.Equals(BaseType, other.BaseType, StringComparison.Ordinal);
+            return other != null
+                && String.Equals(BaseType, other.BaseType, StringComparison.Ordinal);
         }
 
         public override int GetHashCode()

@@ -11,23 +11,28 @@ namespace ShiftTest
     {
         public ulong clm_data = 0xFFFFFFFFFFFFFFFF;
     }
+
     public struct VT
     {
         public ulong vtm_data;
     }
+
     public class ulong32Test
     {
         private static ulong s_data = 0xFFFFFFFFFFFFFFFF;
+
         public static ulong f1(ulong arg_data)
         {
             arg_data >>= 8;
             return arg_data;
         }
+
         public static ulong f2(ulong arg_data)
         {
             arg_data <<= 8;
             return arg_data;
         }
+
         [Fact]
         public static int TestEntryPoint()
         {
@@ -46,10 +51,16 @@ namespace ShiftTest
 
             // Test >>
 
-            Console.WriteLine("The expected result of (0xFFFFFFFFFFFFFFFF>>8) is: {0}", (0xFFFFFFFFFFFFFFFF >> 8));
+            Console.WriteLine(
+                "The expected result of (0xFFFFFFFFFFFFFFFF>>8) is: {0}",
+                (0xFFFFFFFFFFFFFFFF >> 8)
+            );
             Console.WriteLine();
 
-            Console.WriteLine("The actual result for function argument is: {0}", f1(0xFFFFFFFFFFFFFFFF));
+            Console.WriteLine(
+                "The actual result for function argument is: {0}",
+                f1(0xFFFFFFFFFFFFFFFF)
+            );
             loc_data >>= 8;
             Console.WriteLine("The actual result for local variable is: {0}", loc_data);
             s_data >>= 8;

@@ -6,19 +6,18 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.ProviderBase {
-
+namespace System.Data.ProviderBase
+{
     using System;
-    internal class DbConnectionPoolGroupProviderInfo {
+
+    internal class DbConnectionPoolGroupProviderInfo
+    {
         private DbConnectionPoolGroup _poolGroup;
 
-        internal DbConnectionPoolGroup PoolGroup {
-            get {
-                return _poolGroup;
-            }
-            set {
-                _poolGroup = value;
-            }
+        internal DbConnectionPoolGroup PoolGroup
+        {
+            get { return _poolGroup; }
+            set { _poolGroup = value; }
         }
     }
 }

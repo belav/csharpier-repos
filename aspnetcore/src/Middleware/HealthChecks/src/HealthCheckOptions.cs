@@ -22,13 +22,16 @@ public class HealthCheckOptions
     /// </remarks>
     public Func<HealthCheckRegistration, bool>? Predicate { get; set; }
 
-    private IDictionary<HealthStatus, int> _resultStatusCodes = new Dictionary<HealthStatus, int>(DefaultStatusCodesMapping);
+    private IDictionary<HealthStatus, int> _resultStatusCodes = new Dictionary<HealthStatus, int>(
+        DefaultStatusCodesMapping
+    );
 
-    private static readonly IReadOnlyDictionary<HealthStatus, int> DefaultStatusCodesMapping = new Dictionary<HealthStatus, int>
+    private static readonly IReadOnlyDictionary<HealthStatus, int> DefaultStatusCodesMapping =
+        new Dictionary<HealthStatus, int>
         {
-            {HealthStatus.Healthy, StatusCodes.Status200OK},
-            {HealthStatus.Degraded, StatusCodes.Status200OK},
-            {HealthStatus.Unhealthy, StatusCodes.Status503ServiceUnavailable},
+            { HealthStatus.Healthy, StatusCodes.Status200OK },
+            { HealthStatus.Degraded, StatusCodes.Status200OK },
+            { HealthStatus.Unhealthy, StatusCodes.Status503ServiceUnavailable },
         };
 
     /// <summary>
@@ -44,18 +47,27 @@ public class HealthCheckOptions
     public IDictionary<HealthStatus, int> ResultStatusCodes
     {
         get => _resultStatusCodes;
-        set => _resultStatusCodes = value != null ? ValidateStatusCodesMapping(value) : new Dictionary<HealthStatus, int>(DefaultStatusCodesMapping);
+        set =>
+            _resultStatusCodes =
+                value != null
+                    ? ValidateStatusCodesMapping(value)
+                    : new Dictionary<HealthStatus, int>(DefaultStatusCodesMapping);
     }
 
-    private static IDictionary<HealthStatus, int> ValidateStatusCodesMapping(IDictionary<HealthStatus, int> mapping)
+    private static IDictionary<HealthStatus, int> ValidateStatusCodesMapping(
+        IDictionary<HealthStatus, int> mapping
+    )
     {
         var missingHealthStatus = Enum.GetValues<HealthStatus>().Except(mapping.Keys).ToList();
         if (missingHealthStatus.Count > 0)
         {
-            var missing = string.Join(", ", missingHealthStatus.Select(status => $"{nameof(HealthStatus)}.{status}"));
+            var missing = string.Join(
+                ", ",
+                missingHealthStatus.Select(status => $"{nameof(HealthStatus)}.{status}")
+            );
             var message =
-                $"The {nameof(ResultStatusCodes)} dictionary must include an entry for all possible " +
-                $"{nameof(HealthStatus)} values. Missing: {missing}";
+                $"The {nameof(ResultStatusCodes)} dictionary must include an entry for all possible "
+                + $"{nameof(HealthStatus)} values. Missing: {missing}";
             throw new InvalidOperationException(message);
         }
         return mapping;
@@ -68,7 +80,8 @@ public class HealthCheckOptions
     /// The default value is a delegate that will write a minimal <c>text/plain</c> response with the value
     /// of <see cref="HealthReport.Status"/> as a string.
     /// </remarks>
-    public Func<HttpContext, HealthReport, Task> ResponseWriter { get; set; } = HealthCheckResponseWriters.WriteMinimalPlaintext;
+    public Func<HttpContext, HealthReport, Task> ResponseWriter { get; set; } =
+        HealthCheckResponseWriters.WriteMinimalPlaintext;
 
     /// <summary>
     /// Gets or sets a value that controls whether responses from the health check middleware can be cached.

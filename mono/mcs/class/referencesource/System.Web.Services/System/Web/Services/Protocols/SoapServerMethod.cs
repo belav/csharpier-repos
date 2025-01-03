@@ -1,24 +1,26 @@
 //------------------------------------------------------------------------------
 // <copyright file="SoapServerMethod.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
+namespace System.Web.Services.Protocols
+{
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-    using System.Web.Services;
-    using System.Web.Services.Description;
-    using System.Xml;
-    using System.Xml.Serialization;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Policy;
+    using System.Web.Services;
+    using System.Web.Services.Description;
     using System.Web.Services.Diagnostics;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
-    public sealed class SoapServerMethod {
+    public sealed class SoapServerMethod
+    {
         //
         // Internal field visibility is maintained for
         // compatibility with existing code.
@@ -39,10 +41,10 @@ namespace System.Web.Services.Protocols {
         internal SoapParameterStyle paramStyle;
         internal WsiProfiles wsiClaims;
 
-        public SoapServerMethod() {
-        }
+        public SoapServerMethod() { }
 
-        public SoapServerMethod(Type serverType, LogicalMethodInfo methodInfo) {
+        public SoapServerMethod(Type serverType, LogicalMethodInfo methodInfo)
+        {
             this.methodInfo = methodInfo;
 
             //
@@ -54,8 +56,14 @@ namespace System.Web.Services.Protocols {
             string serviceNamespace = serviceAttribute.Namespace;
             bool serviceDefaultIsEncoded = SoapReflector.ServiceDefaultIsEncoded(serverType);
 
-            SoapReflectionImporter soapImporter = SoapReflector.CreateSoapImporter(serviceNamespace, serviceDefaultIsEncoded);
-            XmlReflectionImporter xmlImporter = SoapReflector.CreateXmlImporter(serviceNamespace, serviceDefaultIsEncoded);
+            SoapReflectionImporter soapImporter = SoapReflector.CreateSoapImporter(
+                serviceNamespace,
+                serviceDefaultIsEncoded
+            );
+            XmlReflectionImporter xmlImporter = SoapReflector.CreateXmlImporter(
+                serviceNamespace,
+                serviceDefaultIsEncoded
+            );
 
             //
             // Add some types relating to the methodInfo into the two importers
@@ -67,7 +75,13 @@ namespace System.Web.Services.Protocols {
             // Create a SoapReflectedMethod by reflecting on the
             // LogicalMethodInfo passed to us.
             //
-            SoapReflectedMethod soapMethod = SoapReflector.ReflectMethod(methodInfo, false, xmlImporter, soapImporter, serviceNamespace);
+            SoapReflectedMethod soapMethod = SoapReflector.ReflectMethod(
+                methodInfo,
+                false,
+                xmlImporter,
+                soapImporter,
+                serviceNamespace
+            );
 
             //
             // Most of the fields in this class are ----ed in from the reflected information
@@ -77,52 +91,45 @@ namespace System.Web.Services.Protocols {
             ImportHeaderSerializers(soapMethod);
         }
 
-        public LogicalMethodInfo MethodInfo {
-            get {
-                return methodInfo;
-            }
+        public LogicalMethodInfo MethodInfo
+        {
+            get { return methodInfo; }
         }
 
-        public XmlSerializer ReturnSerializer {
-            get {
-                return returnSerializer;
-            }
+        public XmlSerializer ReturnSerializer
+        {
+            get { return returnSerializer; }
         }
 
-        public XmlSerializer ParameterSerializer {
-            get {
-                return parameterSerializer;
-            }
+        public XmlSerializer ParameterSerializer
+        {
+            get { return parameterSerializer; }
         }
 
-        public XmlSerializer InHeaderSerializer {
-            get {
-                return inHeaderSerializer;
-            }
+        public XmlSerializer InHeaderSerializer
+        {
+            get { return inHeaderSerializer; }
         }
 
-        public XmlSerializer OutHeaderSerializer {
-            get {
-                return outHeaderSerializer;
-            }
+        public XmlSerializer OutHeaderSerializer
+        {
+            get { return outHeaderSerializer; }
         }
 
         //
-        // 
+        //
 
-        public SoapHeaderMapping[] InHeaderMappings {
-            get {
-                return inHeaderMappings;
-            }
+        public SoapHeaderMapping[] InHeaderMappings
+        {
+            get { return inHeaderMappings; }
         }
 
         //
-        // 
+        //
 
-        public SoapHeaderMapping[] OutHeaderMappings {
-            get {
-                return outHeaderMappings;
-            }
+        public SoapHeaderMapping[] OutHeaderMappings
+        {
+            get { return outHeaderMappings; }
         }
 
         /*
@@ -145,77 +152,82 @@ namespace System.Web.Services.Protocols {
         }
         */
 
-        public string Action {
-            get {
-                return action;
-            }
+        public string Action
+        {
+            get { return action; }
         }
 
-        public bool OneWay {
-            get {
-                return oneWay;
-            }
+        public bool OneWay
+        {
+            get { return oneWay; }
         }
 
-        public bool Rpc {
-            get {
-                return rpc;
-            }
+        public bool Rpc
+        {
+            get { return rpc; }
         }
 
-        public SoapBindingUse BindingUse {
-            get {
-                return use;
-            }
+        public SoapBindingUse BindingUse
+        {
+            get { return use; }
         }
 
-        public SoapParameterStyle ParameterStyle {
-            get {
-                return paramStyle;
-            }
+        public SoapParameterStyle ParameterStyle
+        {
+            get { return paramStyle; }
         }
 
-        public WsiProfiles WsiClaims {
-            get {
-                return wsiClaims;
-            }
+        public WsiProfiles WsiClaims
+        {
+            get { return wsiClaims; }
         }
 
         [SecurityPermission(SecurityAction.Assert, ControlEvidence = true)]
-        private Evidence GetServerTypeEvidence(Type type) {
+        private Evidence GetServerTypeEvidence(Type type)
+        {
             return type.Assembly.Evidence;
         }
 
-        private List<XmlMapping> GetXmlMappingsForMethod(SoapReflectedMethod soapMethod) {
+        private List<XmlMapping> GetXmlMappingsForMethod(SoapReflectedMethod soapMethod)
+        {
             List<XmlMapping> mappings = new List<XmlMapping>();
             mappings.Add(soapMethod.requestMappings);
-            if (soapMethod.responseMappings != null) {
+            if (soapMethod.responseMappings != null)
+            {
                 mappings.Add(soapMethod.responseMappings);
             }
             mappings.Add(soapMethod.inHeaderMappings);
-            if (soapMethod.outHeaderMappings != null) {
+            if (soapMethod.outHeaderMappings != null)
+            {
                 mappings.Add(soapMethod.outHeaderMappings);
             }
 
             return mappings;
         }
 
-        private void ImportReflectedMethod(SoapReflectedMethod soapMethod) {
+        private void ImportReflectedMethod(SoapReflectedMethod soapMethod)
+        {
             this.action = soapMethod.action;
             this.extensions = soapMethod.extensions;
-            this.extensionInitializers = SoapReflectedExtension.GetInitializers(this.methodInfo, soapMethod.extensions);
+            this.extensionInitializers = SoapReflectedExtension.GetInitializers(
+                this.methodInfo,
+                soapMethod.extensions
+            );
             this.oneWay = soapMethod.oneWay;
             this.rpc = soapMethod.rpc;
             this.use = soapMethod.use;
             this.paramStyle = soapMethod.paramStyle;
-            this.wsiClaims = soapMethod.binding == null ? WsiProfiles.None : soapMethod.binding.ConformsTo;
+            this.wsiClaims =
+                soapMethod.binding == null ? WsiProfiles.None : soapMethod.binding.ConformsTo;
         }
 
-        private void ImportHeaderSerializers(SoapReflectedMethod soapMethod) {
+        private void ImportHeaderSerializers(SoapReflectedMethod soapMethod)
+        {
             List<SoapHeaderMapping> inHeaders = new List<SoapHeaderMapping>();
             List<SoapHeaderMapping> outHeaders = new List<SoapHeaderMapping>();
 
-            for (int j = 0; j < soapMethod.headers.Length; j++) {
+            for (int j = 0; j < soapMethod.headers.Length; j++)
+            {
                 SoapHeaderMapping mapping = new SoapHeaderMapping();
                 SoapReflectedHeader soapHeader = soapMethod.headers[j];
                 mapping.memberInfo = soapHeader.memberInfo;
@@ -227,7 +239,8 @@ namespace System.Web.Services.Protocols {
                     inHeaders.Add(mapping);
                 else if (mapping.direction == SoapHeaderDirection.Out)
                     outHeaders.Add(mapping);
-                else {
+                else
+                {
                     inHeaders.Add(mapping);
                     outHeaders.Add(mapping);
                 }
@@ -238,7 +251,8 @@ namespace System.Web.Services.Protocols {
                 this.outHeaderMappings = outHeaders.ToArray();
         }
 
-        private void ImportSerializers(SoapReflectedMethod soapMethod, Evidence serverEvidence) {
+        private void ImportSerializers(SoapReflectedMethod soapMethod, Evidence serverEvidence)
+        {
             //
             // Keep track of all XmlMapping instances we need for this method.
             //
@@ -250,25 +264,40 @@ namespace System.Web.Services.Protocols {
 
             XmlMapping[] xmlMappings = mappings.ToArray();
             TraceMethod caller = Tracing.On ? new TraceMethod(this, "ImportSerializers") : null;
-            if (Tracing.On) Tracing.Enter(Tracing.TraceId(Res.TraceCreateSerializer), caller, new TraceMethod(typeof(XmlSerializer), "FromMappings", xmlMappings, serverEvidence));
+            if (Tracing.On)
+                Tracing.Enter(
+                    Tracing.TraceId(Res.TraceCreateSerializer),
+                    caller,
+                    new TraceMethod(
+                        typeof(XmlSerializer),
+                        "FromMappings",
+                        xmlMappings,
+                        serverEvidence
+                    )
+                );
             XmlSerializer[] serializers = null;
-            if (AppDomain.CurrentDomain.IsHomogenous) {
+            if (AppDomain.CurrentDomain.IsHomogenous)
+            {
                 serializers = XmlSerializer.FromMappings(xmlMappings);
             }
-            else {
+            else
+            {
 #pragma warning disable 618 // If we're in a non-homogenous domain, legacy CAS mode is enabled, so passing through evidence will not fail
                 serializers = XmlSerializer.FromMappings(xmlMappings, serverEvidence);
 #pragma warning restore 618
             }
-            if (Tracing.On) Tracing.Exit(Tracing.TraceId(Res.TraceCreateSerializer), caller);
+            if (Tracing.On)
+                Tracing.Exit(Tracing.TraceId(Res.TraceCreateSerializer), caller);
 
             int i = 0;
             this.parameterSerializer = serializers[i++];
-            if (soapMethod.responseMappings != null) {
+            if (soapMethod.responseMappings != null)
+            {
                 this.returnSerializer = serializers[i++];
             }
             this.inHeaderSerializer = serializers[i++];
-            if (soapMethod.outHeaderMappings != null) {
+            if (soapMethod.outHeaderMappings != null)
+            {
                 this.outHeaderSerializer = serializers[i++];
             }
         }

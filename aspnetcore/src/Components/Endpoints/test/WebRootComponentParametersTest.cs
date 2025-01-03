@@ -72,7 +72,9 @@ public class WebRootComponentParametersTest
 
     [Theory]
     [MemberData(nameof(DefinitelyEqualParameterValues))]
-    public void WebRootComponentParameters_DefinitelyEquals_ReturnsTrue_ForSameParameterValues(object value)
+    public void WebRootComponentParameters_DefinitelyEquals_ReturnsTrue_ForSameParameterValues(
+        object value
+    )
     {
         // Arrange
         var parameters1 = CreateParameters(new() { ["First"] = value });
@@ -132,10 +134,14 @@ public class WebRootComponentParametersTest
         Assert.Throws<InvalidCastException>(() => parameters1.DefinitelyEquals(parameters2));
     }
 
-    private static WebRootComponentParameters CreateParameters(Dictionary<string, object> parameters)
+    private static WebRootComponentParameters CreateParameters(
+        Dictionary<string, object> parameters
+    )
     {
         var parameterView = ParameterView.FromDictionary(parameters);
-        var (parameterDefinitions, parameterValues) = ComponentParameter.FromParameterView(parameterView);
+        var (parameterDefinitions, parameterValues) = ComponentParameter.FromParameterView(
+            parameterView
+        );
         for (var i = 0; i < parameterValues.Count; i++)
         {
             // WebRootComponentParameters expects parameter values to be JsonElements.
@@ -145,10 +151,14 @@ public class WebRootComponentParametersTest
         return new(parameterView, parameterDefinitions.AsReadOnly(), parameterValues.AsReadOnly());
     }
 
-    private static WebRootComponentParameters CreateParametersWithNonJsonElements(Dictionary<string, object> parameters)
+    private static WebRootComponentParameters CreateParametersWithNonJsonElements(
+        Dictionary<string, object> parameters
+    )
     {
         var parameterView = ParameterView.FromDictionary(parameters);
-        var (parameterDefinitions, parameterValues) = ComponentParameter.FromParameterView(parameterView);
+        var (parameterDefinitions, parameterValues) = ComponentParameter.FromParameterView(
+            parameterView
+        );
         return new(parameterView, parameterDefinitions.AsReadOnly(), parameterValues.AsReadOnly());
     }
 }

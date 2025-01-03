@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Newtonsoft.Json.Linq;
 #if DNXCORE50
 using Xunit;
@@ -33,7 +34,7 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System.IO;
+
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -84,11 +85,14 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void SetValueWithInvalidIndex()
         {
-            ExceptionAssert.Throws<ArgumentException>(() =>
-            {
-                JConstructor c = new JConstructor();
-                c["badvalue"] = new JValue(3);
-            }, @"Set JConstructor values with invalid key value: ""badvalue"". Argument position index expected.");
+            ExceptionAssert.Throws<ArgumentException>(
+                () =>
+                {
+                    JConstructor c = new JConstructor();
+                    c["badvalue"] = new JValue(3);
+                },
+                @"Set JConstructor values with invalid key value: ""badvalue"". Argument position index expected."
+            );
         }
 
         [Test]

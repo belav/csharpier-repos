@@ -31,7 +31,11 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("browser")]
         public static partial ECDiffieHellman Create(ECParameters parameters);
 
-        [Obsolete(Obsoletions.CryptoStringFactoryMessage, DiagnosticId = Obsoletions.CryptoStringFactoryDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.CryptoStringFactoryMessage,
+            DiagnosticId = Obsoletions.CryptoStringFactoryDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresUnreferencedCode(CryptoConfig.CreateFromNameUnreferencedCodeMessage)]
         public static new ECDiffieHellman? Create(string algorithm)
         {
@@ -55,7 +59,10 @@ namespace System.Security.Cryptography
         /// <param name="hashAlgorithm">The identifier for the hash algorithm to use.</param>
         /// <returns>A hashed output suitable for key material</returns>
         /// <exception cref="ArgumentException"><paramref name="otherPartyPublicKey"/> is over a different curve than this key</exception>
-        public byte[] DeriveKeyFromHash(ECDiffieHellmanPublicKey otherPartyPublicKey, HashAlgorithmName hashAlgorithm)
+        public byte[] DeriveKeyFromHash(
+            ECDiffieHellmanPublicKey otherPartyPublicKey,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             return DeriveKeyFromHash(otherPartyPublicKey, hashAlgorithm, null, null);
         }
@@ -74,7 +81,8 @@ namespace System.Security.Cryptography
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             HashAlgorithmName hashAlgorithm,
             byte[]? secretPrepend,
-            byte[]? secretAppend)
+            byte[]? secretAppend
+        )
         {
             throw DerivedClassMustOverride();
         }
@@ -91,7 +99,8 @@ namespace System.Security.Cryptography
         public byte[] DeriveKeyFromHmac(
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             HashAlgorithmName hashAlgorithm,
-            byte[]? hmacKey)
+            byte[]? hmacKey
+        )
         {
             return DeriveKeyFromHmac(otherPartyPublicKey, hashAlgorithm, hmacKey, null, null);
         }
@@ -112,7 +121,8 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             byte[]? hmacKey,
             byte[]? secretPrepend,
-            byte[]? secretAppend)
+            byte[]? secretAppend
+        )
         {
             throw DerivedClassMustOverride();
         }
@@ -128,7 +138,11 @@ namespace System.Security.Cryptography
         /// <exception cref="ArgumentNullException"><paramref name="prfLabel"/> is null</exception>
         /// <exception cref="ArgumentNullException"><paramref name="prfSeed"/> is null</exception>
         /// <exception cref="CryptographicException"><paramref name="prfSeed"/> is not exactly 64 bytes in length</exception>
-        public virtual byte[] DeriveKeyTls(ECDiffieHellmanPublicKey otherPartyPublicKey, byte[] prfLabel, byte[] prfSeed)
+        public virtual byte[] DeriveKeyTls(
+            ECDiffieHellmanPublicKey otherPartyPublicKey,
+            byte[] prfLabel,
+            byte[] prfSeed
+        )
         {
             throw DerivedClassMustOverride();
         }

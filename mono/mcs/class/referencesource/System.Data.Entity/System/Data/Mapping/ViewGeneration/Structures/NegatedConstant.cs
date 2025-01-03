@@ -30,7 +30,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <param name="values">must have no <see cref=" NegatedConstant"/> items</param>
         internal NegatedConstant(IEnumerable<Constant> values)
         {
-            Debug.Assert(!values.Any(v => v is NegatedConstant), "Negated constant values must not contain another negated constant.");
+            Debug.Assert(
+                !values.Any(v => v is NegatedConstant),
+                "Negated constant values must not contain another negated constant."
+            );
             m_negatedDomain = new Set<Constant>(values, Constant.EqualityComparer);
         }
         #endregion
@@ -112,7 +115,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Not supported in this class.
         /// </summary>
-        internal override StringBuilder AsEsql(StringBuilder builder, MemberPath outputMember, string blockAlias)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            MemberPath outputMember,
+            string blockAlias
+        )
         {
             Debug.Fail("Should not be called.");
             return null; // To keep the compiler happy
@@ -127,12 +134,30 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             return null; // To keep the compiler happy
         }
 
-        internal StringBuilder AsEsql(StringBuilder builder, string blockAlias, IEnumerable<Constant> constants, MemberPath outputMember, bool skipIsNotNull)
+        internal StringBuilder AsEsql(
+            StringBuilder builder,
+            string blockAlias,
+            IEnumerable<Constant> constants,
+            MemberPath outputMember,
+            bool skipIsNotNull
+        )
         {
-            return ToStringHelper(builder, blockAlias, constants, outputMember, skipIsNotNull, false);
+            return ToStringHelper(
+                builder,
+                blockAlias,
+                constants,
+                outputMember,
+                skipIsNotNull,
+                false
+            );
         }
 
-        internal DbExpression AsCqt(DbExpression row, IEnumerable<Constant> constants, MemberPath outputMember, bool skipIsNotNull)
+        internal DbExpression AsCqt(
+            DbExpression row,
+            IEnumerable<Constant> constants,
+            MemberPath outputMember,
+            bool skipIsNotNull
+        )
         {
             DbExpression cqt = null;
 
@@ -144,7 +169,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 // varNotEqualsTo action
                 (constant) =>
                 {
-                    DbExpression notEqualsExpr = outputMember.AsCqt(row).NotEqual(constant.AsCqt(row, outputMember));
+                    DbExpression notEqualsExpr = outputMember
+                        .AsCqt(row)
+                        .NotEqual(constant.AsCqt(row, outputMember));
                     if (cqt != null)
                     {
                         cqt = cqt.And(notEqualsExpr);
@@ -154,14 +181,30 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                         cqt = notEqualsExpr;
                     }
                 },
-                constants, outputMember, skipIsNotNull);
+                constants,
+                outputMember,
+                skipIsNotNull
+            );
 
             return cqt;
         }
 
-        internal StringBuilder AsUserString(StringBuilder builder, string blockAlias, IEnumerable<Constant> constants, MemberPath outputMember, bool skipIsNotNull)
+        internal StringBuilder AsUserString(
+            StringBuilder builder,
+            string blockAlias,
+            IEnumerable<Constant> constants,
+            MemberPath outputMember,
+            bool skipIsNotNull
+        )
         {
-            return ToStringHelper(builder, blockAlias, constants, outputMember, skipIsNotNull, true);
+            return ToStringHelper(
+                builder,
+                blockAlias,
+                constants,
+                outputMember,
+                skipIsNotNull,
+                true
+            );
         }
 
         /// <summary>
@@ -170,15 +213,31 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         ///     - 7, NOT(7, NULL) means NOT(NULL)
         ///     - 7, 8, NOT(7, 8, 9, 10) means NOT(9, 10)
         /// </summary>
-        private void AsCql(Action trueLiteral, Action varIsNotNull, Action<Constant> varNotEqualsTo, IEnumerable<Constant> constants, MemberPath outputMember, bool skipIsNotNull)
+        private void AsCql(
+            Action trueLiteral,
+            Action varIsNotNull,
+            Action<Constant> varNotEqualsTo,
+            IEnumerable<Constant> constants,
+            MemberPath outputMember,
+            bool skipIsNotNull
+        )
         {
             bool isNullable = outputMember.IsNullable;
             // Remove all the constants from negated and then print "x <> C1 .. AND x <> C2 .. AND x <> C3 ..."
-            Set<Constant> negatedConstants = new Set<Constant>(this.Elements, Constant.EqualityComparer);
+            Set<Constant> negatedConstants = new Set<Constant>(
+                this.Elements,
+                Constant.EqualityComparer
+            );
             foreach (Constant constant in constants)
             {
-                if (constant.Equals(this)) { continue; }
-                Debug.Assert(negatedConstants.Contains(constant), "Negated constant must contain all positive constants");
+                if (constant.Equals(this))
+                {
+                    continue;
+                }
+                Debug.Assert(
+                    negatedConstants.Contains(constant),
+                    "Negated constant must contain all positive constants"
+                );
                 negatedConstants.Remove(constant);
             }
 
@@ -194,7 +253,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
                 // We always add IS NOT NULL if the property is nullable (and we cannot skip IS NOT NULL).
                 // Also, if the domain contains NOT NULL, we must add it.
-                
+
                 if (hasNull || (isNullable && !skipIsNotNull))
                 {
                     varIsNotNull();
@@ -207,7 +266,14 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             }
         }
 
-        private StringBuilder ToStringHelper(StringBuilder builder, string blockAlias, IEnumerable<Constant> constants, MemberPath outputMember, bool skipIsNotNull, bool userString)
+        private StringBuilder ToStringHelper(
+            StringBuilder builder,
+            string blockAlias,
+            IEnumerable<Constant> constants,
+            MemberPath outputMember,
+            bool skipIsNotNull,
+            bool userString
+        )
         {
             bool anyAdded = false;
             AsCql(
@@ -250,7 +316,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                         constant.AsEsql(builder, outputMember, blockAlias);
                     }
                 },
-                constants, outputMember, skipIsNotNull);
+                constants,
+                outputMember,
+                skipIsNotNull
+            );
             return builder;
         }
 

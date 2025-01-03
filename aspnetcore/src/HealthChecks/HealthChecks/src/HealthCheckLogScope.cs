@@ -35,7 +35,9 @@ internal sealed class HealthCheckLogScope : IReadOnlyList<KeyValuePair<string, o
         HealthCheckName = healthCheckName;
     }
 
-    IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator()
+    IEnumerator<KeyValuePair<string, object>> IEnumerable<
+        KeyValuePair<string, object>
+    >.GetEnumerator()
     {
         yield return new KeyValuePair<string, object>(nameof(HealthCheckName), HealthCheckName);
     }

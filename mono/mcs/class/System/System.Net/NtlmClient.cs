@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,39 +35,44 @@ using System.Reflection;
 
 namespace System.Net
 {
-	class NtlmClient : IAuthenticationModule
-	{
-		IAuthenticationModule authObject;
+    class NtlmClient : IAuthenticationModule
+    {
+        IAuthenticationModule authObject;
 
-		public NtlmClient ()
-		{
+        public NtlmClient()
+        {
 #if SECURITY_DEP
-			authObject = new Mono.Http.NtlmClient ();
+            authObject = new Mono.Http.NtlmClient();
 #else
-			authObject = null;
+            authObject = null;
 #endif
-		}
-	
-		public Authorization Authenticate (string challenge, WebRequest webRequest, ICredentials credentials) 
-		{
-			if (authObject == null)
-				return null;
+        }
 
-			return authObject.Authenticate (challenge, webRequest, credentials);
-		}
+        public Authorization Authenticate(
+            string challenge,
+            WebRequest webRequest,
+            ICredentials credentials
+        )
+        {
+            if (authObject == null)
+                return null;
 
-		public Authorization PreAuthenticate (WebRequest webRequest, ICredentials credentials) 
-		{
-			return null;
-		}
-	
-		public string AuthenticationType { 
-			get { return "NTLM"; }
-		}
-	
-		public bool CanPreAuthenticate { 
-			get { return false; }
-		}
-	}
+            return authObject.Authenticate(challenge, webRequest, credentials);
+        }
+
+        public Authorization PreAuthenticate(WebRequest webRequest, ICredentials credentials)
+        {
+            return null;
+        }
+
+        public string AuthenticationType
+        {
+            get { return "NTLM"; }
+        }
+
+        public bool CanPreAuthenticate
+        {
+            get { return false; }
+        }
+    }
 }
-

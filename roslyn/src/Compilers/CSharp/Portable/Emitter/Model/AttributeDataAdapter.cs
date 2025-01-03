@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal abstract partial class CSharpAttributeData : Cci.ICustomAttribute
     {
-        ImmutableArray<Cci.IMetadataExpression> Cci.ICustomAttribute.GetArguments(EmitContext context)
+        ImmutableArray<Cci.IMetadataExpression> Cci.ICustomAttribute.GetArguments(
+            EmitContext context
+        )
         {
             var commonArgs = this.CommonConstructorArguments;
             if (commonArgs.IsEmpty)
@@ -33,7 +35,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return builder.ToImmutableAndFree();
         }
 
-        Cci.IMethodReference Cci.ICustomAttribute.Constructor(EmitContext context, bool reportDiagnostics)
+        Cci.IMethodReference Cci.ICustomAttribute.Constructor(
+            EmitContext context,
+            bool reportDiagnostics
+        )
         {
             if (this.AttributeConstructor.IsDefaultValueTypeConstructor())
             {
@@ -43,17 +48,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (reportDiagnostics)
                 {
-                    context.Diagnostics.Add(ErrorCode.ERR_NotAnAttributeClass, context.Location ?? NoLocation.Singleton, this.AttributeClass);
+                    context.Diagnostics.Add(
+                        ErrorCode.ERR_NotAnAttributeClass,
+                        context.Location ?? NoLocation.Singleton,
+                        this.AttributeClass
+                    );
                 }
 
                 return null;
             }
 
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
-            return (Cci.IMethodReference)moduleBeingBuilt.Translate(this.AttributeConstructor, (CSharpSyntaxNode)context.SyntaxNode, context.Diagnostics);
+            return (Cci.IMethodReference)
+                moduleBeingBuilt.Translate(
+                    this.AttributeConstructor,
+                    (CSharpSyntaxNode)context.SyntaxNode,
+                    context.Diagnostics
+                );
         }
 
-        ImmutableArray<Cci.IMetadataNamedArgument> Cci.ICustomAttribute.GetNamedArguments(EmitContext context)
+        ImmutableArray<Cci.IMetadataNamedArgument> Cci.ICustomAttribute.GetNamedArguments(
+            EmitContext context
+        )
         {
             var commonArgs = this.CommonNamedArguments;
             if (commonArgs.IsEmpty)
@@ -64,31 +80,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var builder = ArrayBuilder<Cci.IMetadataNamedArgument>.GetInstance();
             foreach (var namedArgument in commonArgs)
             {
-                builder.Add(CreateMetadataNamedArgument(namedArgument.Key, namedArgument.Value, context));
+                builder.Add(
+                    CreateMetadataNamedArgument(namedArgument.Key, namedArgument.Value, context)
+                );
             }
             return builder.ToImmutableAndFree();
         }
 
         int Cci.ICustomAttribute.ArgumentCount
         {
-            get
-            {
-                return this.CommonConstructorArguments.Length;
-            }
+            get { return this.CommonConstructorArguments.Length; }
         }
 
         ushort Cci.ICustomAttribute.NamedArgumentCount
         {
-            get
-            {
-                return (ushort)this.CommonNamedArguments.Length;
-            }
+            get { return (ushort)this.CommonNamedArguments.Length; }
         }
 
         Cci.ITypeReference Cci.ICustomAttribute.GetType(EmitContext context)
         {
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
-            return moduleBeingBuilt.Translate(this.AttributeClass, syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode, diagnostics: context.Diagnostics);
+            return moduleBeingBuilt.Translate(
+                this.AttributeClass,
+                syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
+                diagnostics: context.Diagnostics
+            );
         }
 
         bool Cci.ICustomAttribute.AllowMultiple
@@ -96,7 +112,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return this.AttributeClass.GetAttributeUsageInfo().AllowMultiple; }
         }
 
-        private Cci.IMetadataExpression CreateMetadataExpression(TypedConstant argument, EmitContext context)
+        private Cci.IMetadataExpression CreateMetadataExpression(
+            TypedConstant argument,
+            EmitContext context
+        )
         {
             if (argument.IsNull)
             {
@@ -112,7 +131,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return CreateType(argument, context);
 
                 default:
-                    return CreateMetadataConstant(argument.TypeInternal, argument.ValueInternal, context);
+                    return CreateMetadataConstant(
+                        argument.TypeInternal,
+                        argument.ValueInternal,
+                        context
+                    );
             }
         }
 
@@ -120,13 +143,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             Debug.Assert(!argument.Values.IsDefault);
             var values = argument.Values;
-            var arrayType = ((PEModuleBuilder)context.Module).Translate((ArrayTypeSymbol)argument.TypeInternal);
+            var arrayType = ((PEModuleBuilder)context.Module).Translate(
+                (ArrayTypeSymbol)argument.TypeInternal
+            );
 
             if (values.Length == 0)
             {
-                return new MetadataCreateArray(arrayType,
-                                               arrayType.GetElementType(context),
-                                               ImmutableArray<Cci.IMetadataExpression>.Empty);
+                return new MetadataCreateArray(
+                    arrayType,
+                    arrayType.GetElementType(context),
+                    ImmutableArray<Cci.IMetadataExpression>.Empty
+                );
             }
 
             var metadataExprs = new Cci.IMetadataExpression[values.Length];
@@ -135,9 +162,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 metadataExprs[i] = CreateMetadataExpression(values[i], context);
             }
 
-            return new MetadataCreateArray(arrayType,
-                                           arrayType.GetElementType(context),
-                                           metadataExprs.AsImmutableOrNull());
+            return new MetadataCreateArray(
+                arrayType,
+                arrayType.GetElementType(context),
+                metadataExprs.AsImmutableOrNull()
+            );
         }
 
         private static MetadataTypeOf CreateType(TypedConstant argument, EmitContext context)
@@ -146,17 +175,40 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var moduleBeingBuilt = (PEModuleBuilder)context.Module;
             var syntaxNodeOpt = (CSharpSyntaxNode)context.SyntaxNode;
             var diagnostics = context.Diagnostics;
-            return new MetadataTypeOf(moduleBeingBuilt.Translate((TypeSymbol)argument.ValueInternal, syntaxNodeOpt, diagnostics),
-                                      moduleBeingBuilt.Translate((TypeSymbol)argument.TypeInternal, syntaxNodeOpt, diagnostics));
+            return new MetadataTypeOf(
+                moduleBeingBuilt.Translate(
+                    (TypeSymbol)argument.ValueInternal,
+                    syntaxNodeOpt,
+                    diagnostics
+                ),
+                moduleBeingBuilt.Translate(
+                    (TypeSymbol)argument.TypeInternal,
+                    syntaxNodeOpt,
+                    diagnostics
+                )
+            );
         }
 
-        private static MetadataConstant CreateMetadataConstant(ITypeSymbolInternal type, object value, EmitContext context)
+        private static MetadataConstant CreateMetadataConstant(
+            ITypeSymbolInternal type,
+            object value,
+            EmitContext context
+        )
         {
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
-            return moduleBeingBuilt.CreateConstant((TypeSymbol)type, value, syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode, diagnostics: context.Diagnostics);
+            return moduleBeingBuilt.CreateConstant(
+                (TypeSymbol)type,
+                value,
+                syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
+                diagnostics: context.Diagnostics
+            );
         }
 
-        private Cci.IMetadataNamedArgument CreateMetadataNamedArgument(string name, TypedConstant argument, EmitContext context)
+        private Cci.IMetadataNamedArgument CreateMetadataNamedArgument(
+            string name,
+            TypedConstant argument,
+            EmitContext context
+        )
         {
             var symbol = LookupName(name);
             var value = CreateMetadataExpression(argument, context);
@@ -172,7 +224,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
-            return new MetadataNamedArgument(symbol, moduleBeingBuilt.Translate(type, syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode, diagnostics: context.Diagnostics), value);
+            return new MetadataNamedArgument(
+                symbol,
+                moduleBeingBuilt.Translate(
+                    type,
+                    syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
+                    diagnostics: context.Diagnostics
+                ),
+                value
+            );
         }
 
         private Symbol LookupName(string name)
@@ -190,7 +250,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 type = type.BaseTypeNoUseSiteDiagnostics;
             }
 
-            Debug.Assert(false, "Name does not match an attribute field or a property.  How can that be?");
+            Debug.Assert(
+                false,
+                "Name does not match an attribute field or a property.  How can that be?"
+            );
             return null;
         }
     }

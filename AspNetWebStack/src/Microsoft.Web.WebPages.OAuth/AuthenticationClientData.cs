@@ -18,7 +18,11 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <param name="authenticationClient">The authentication client.</param>
         /// <param name="displayName">The display name.</param>
         /// <param name="extraData">The data bag used to store extra data about this client</param>
-        public AuthenticationClientData(IAuthenticationClient authenticationClient, string displayName, IDictionary<string, object> extraData)
+        public AuthenticationClientData(
+            IAuthenticationClient authenticationClient,
+            string displayName,
+            IDictionary<string, object> extraData
+        )
         {
             if (authenticationClient == null)
             {

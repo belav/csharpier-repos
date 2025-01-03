@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
             Overrides = Schema.Categories.AddNewCategory(
                 "Overrides",
-                () => new GraphMetadata(GraphMetadataOptions.Sharable));
+                () => new GraphMetadata(GraphMetadataOptions.Sharable)
+            );
         }
     }
 }

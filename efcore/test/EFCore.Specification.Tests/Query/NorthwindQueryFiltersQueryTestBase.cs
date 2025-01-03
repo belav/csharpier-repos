@@ -14,26 +14,20 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
     where TFixture : NorthwindQueryFixtureBase<NorthwindQueryFiltersCustomizer>, new()
 {
     protected NorthwindQueryFiltersQueryTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Count_query(bool async)
     {
-        return AssertFilteredCount(
-            async,
-            ss => ss.Set<Customer>());
+        return AssertFilteredCount(async, ss => ss.Set<Customer>());
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Materialized_query(bool async)
     {
-        return AssertFilteredQuery(
-            async,
-            ss => ss.Set<Customer>());
+        return AssertFilteredQuery(async, ss => ss.Set<Customer>());
     }
 
     [ConditionalTheory]
@@ -56,12 +50,17 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
     public virtual async Task Client_eval(bool async)
     {
         Assert.Equal(
-            CoreStrings.TranslationFailed("DbSet<Product>()    .Where(p => NorthwindContext.ClientMethod(p))"),
+            CoreStrings.TranslationFailed(
+                "DbSet<Product>()    .Where(p => NorthwindContext.ClientMethod(p))"
+            ),
             RemoveNewLines(
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => AssertFilteredQuery(
-                        async,
-                        ss => ss.Set<Product>()))).Message));
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => AssertFilteredQuery(async, ss => ss.Set<Product>())
+                    )
+                ).Message
+            )
+        );
     }
 
     [ConditionalTheory]
@@ -110,9 +109,7 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Projection_query(bool async)
     {
-        return AssertFilteredQuery(
-            async,
-            ss => ss.Set<Customer>().Select(c => c.CustomerID));
+        return AssertFilteredQuery(async, ss => ss.Set<Customer>().Select(c => c.CustomerID));
     }
 
     [ConditionalTheory]
@@ -124,7 +121,10 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
         {
             context.TenantPrefix = "F";
 
-            Assert.Equal(8, (await context.Customers.Select(c => c.CustomerID).ToListAsync()).Count);
+            Assert.Equal(
+                8,
+                (await context.Customers.Select(c => c.CustomerID).ToListAsync()).Count
+            );
         }
         else
         {
@@ -141,7 +141,9 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
         return AssertFilteredQuery(
             async,
             ss => ss.Set<Customer>().Include(c => c.Orders),
-            elementAsserter: (e, a) => AssertInclude(e, a, new ExpectedInclude<Customer>(x => x.Orders)));
+            elementAsserter: (e, a) =>
+                AssertInclude(e, a, new ExpectedInclude<Customer>(x => x.Orders))
+        );
     }
 
     [ConditionalTheory]
@@ -151,16 +153,16 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
         return AssertQuery(
             async,
             ss => ss.Set<Customer>().Include(c => c.Orders).IgnoreQueryFilters(),
-            elementAsserter: (e, a) => AssertInclude(e, a, new ExpectedInclude<Customer>(x => x.Orders)));
+            elementAsserter: (e, a) =>
+                AssertInclude(e, a, new ExpectedInclude<Customer>(x => x.Orders))
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Included_many_to_one_query2(bool async)
     {
-        return AssertFilteredQuery(
-            async,
-            ss => ss.Set<Order>().Include(o => o.Customer));
+        return AssertFilteredQuery(async, ss => ss.Set<Order>().Include(o => o.Customer));
     }
 
     [ConditionalTheory]
@@ -170,16 +172,18 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
         return AssertFilteredQuery(
             async,
             ss => ss.Set<Order>().Include(o => o.Customer),
-            elementAsserter: (e, a) => AssertInclude(e, a, new ExpectedInclude<Order>(x => x.Customer)));
+            elementAsserter: (e, a) =>
+                AssertInclude(e, a, new ExpectedInclude<Order>(x => x.Customer))
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Project_reference_that_itself_has_query_filter_with_another_reference(bool async)
+    public virtual Task Project_reference_that_itself_has_query_filter_with_another_reference(
+        bool async
+    )
     {
-        return AssertFilteredQuery(
-            async,
-            ss => ss.Set<OrderDetail>().Select(od => od.Order));
+        return AssertFilteredQuery(async, ss => ss.Set<OrderDetail>().Select(od => od.Order));
     }
 
     [ConditionalTheory]
@@ -187,12 +191,21 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
     public virtual async Task Included_one_to_many_query_with_client_eval(bool async)
     {
         Assert.Equal(
-            CoreStrings.TranslationFailed("DbSet<Product>()    .Where(p => NorthwindContext.ClientMethod(p))"),
+            CoreStrings.TranslationFailed(
+                "DbSet<Product>()    .Where(p => NorthwindContext.ClientMethod(p))"
+            ),
             RemoveNewLines(
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => AssertFilteredQuery(
-                        async,
-                        ss => ss.Set<Product>().Include(p => p.OrderDetails)))).Message));
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () =>
+                            AssertFilteredQuery(
+                                async,
+                                ss => ss.Set<Product>().Include(p => p.OrderDetails)
+                            )
+                    )
+                ).Message
+            )
+        );
     }
 
     [ConditionalTheory]
@@ -201,19 +214,22 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
     {
         return AssertFilteredQuery(
             async,
-            ss => from c in ss.Set<Customer>()
-                  from o in c.Orders
-                  from od in o.OrderDetails
-                  where od.Discount < 10
-                  select c);
+            ss =>
+                from c in ss.Set<Customer>()
+                from o in c.Orders
+                from od in o.OrderDetails
+                where od.Discount < 10
+                select c
+        );
     }
 
     [ConditionalFact]
     public virtual void Compiled_query()
     {
         var query = EF.CompileQuery(
-            (NorthwindContext context, string customerID)
-                => context.Customers.Where(c => c.CustomerID == customerID));
+            (NorthwindContext context, string customerID) =>
+                context.Customers.Where(c => c.CustomerID == customerID)
+        );
 
         using var context1 = Fixture.CreateContext();
         Assert.Equal("BERGS", query(context1, "BERGS").First().CustomerID);
@@ -226,11 +242,8 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Entity_Equality(bool async)
     {
-        return AssertFilteredQuery(
-            async,
-            ss => ss.Set<Order>());
+        return AssertFilteredQuery(async, ss => ss.Set<Order>());
     }
 
-    private string RemoveNewLines(string message)
-        => message.Replace("\n", "").Replace("\r", "");
+    private string RemoveNewLines(string message) => message.Replace("\n", "").Replace("\r", "");
 }

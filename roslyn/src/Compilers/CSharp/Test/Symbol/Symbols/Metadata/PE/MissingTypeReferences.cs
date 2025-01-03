@@ -21,16 +21,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         [Fact]
         public void Test1()
         {
-            var assembly = MetadataTestHelpers.GetSymbolForReference(TestReferences.SymbolsTests.MDTestLib2);
+            var assembly = MetadataTestHelpers.GetSymbolForReference(
+                TestReferences.SymbolsTests.MDTestLib2
+            );
 
             TestMissingTypeReferencesHelper1(assembly);
 
-            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(mrefs: new[]
-                                    {
-                                        TestReferences.SymbolsTests.MissingTypes.MDMissingType,
-                                        TestReferences.SymbolsTests.MissingTypes.MDMissingTypeLib,
-                                        TestMetadata.Net40.mscorlib
-                                    });
+            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
+                mrefs: new[]
+                {
+                    TestReferences.SymbolsTests.MissingTypes.MDMissingType,
+                    TestReferences.SymbolsTests.MissingTypes.MDMissingTypeLib,
+                    TestMetadata.Net40.mscorlib,
+                }
+            );
 
             TestMissingTypeReferencesHelper2(assemblies);
         }
@@ -76,16 +80,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             genericBase = (ErrorTypeSymbol)localTC7.BaseType();
             @base = (MissingMetadataTypeSymbol)genericBase.OriginalDefinition;
 
-            Assert.Equal("C1<TC7_T1>[missing].C3[missing].C4<TC7_T2>[missing]", genericBase.ToTestDisplayString());
+            Assert.Equal(
+                "C1<TC7_T1>[missing].C3[missing].C4<TC7_T2>[missing]",
+                genericBase.ToTestDisplayString()
+            );
             Assert.True(genericBase.ContainingAssembly.IsMissing);
             Assert.True(@base.ContainingAssembly.IsMissing);
-            Assert.Equal(@base.GetUseSiteDiagnostic().ToString(), genericBase.GetUseSiteDiagnostic().ToString());
+            Assert.Equal(
+                @base.GetUseSiteDiagnostic().ToString(),
+                genericBase.GetUseSiteDiagnostic().ToString()
+            );
             Assert.Equal(@base.ErrorInfo.ToString(), genericBase.ErrorInfo.ToString());
 
             var constructedFrom = genericBase.ConstructedFrom;
-            Assert.Equal("C1<TC7_T1>[missing].C3[missing].C4<>[missing]", constructedFrom.ToTestDisplayString());
+            Assert.Equal(
+                "C1<TC7_T1>[missing].C3[missing].C4<>[missing]",
+                constructedFrom.ToTestDisplayString()
+            );
 
-            Assert.Same(constructedFrom, constructedFrom.Construct(constructedFrom.TypeParameters.ToArray()));
+            Assert.Same(
+                constructedFrom,
+                constructedFrom.Construct(constructedFrom.TypeParameters.ToArray())
+            );
             Assert.Equal(genericBase, constructedFrom.Construct(genericBase.TypeArguments()));
 
             genericBase = (ErrorTypeSymbol)genericBase.ContainingSymbol;
@@ -114,10 +130,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             Assert.Equal(SymbolKind.ErrorType, @base.ContainingSymbol.ContainingSymbol.Kind);
             Assert.NotNull(@base.ContainingSymbol.ContainingSymbol.ContainingAssembly);
-            Assert.Same(@base.ContainingAssembly, @base.ContainingSymbol.ContainingSymbol.ContainingAssembly);
+            Assert.Same(
+                @base.ContainingAssembly,
+                @base.ContainingSymbol.ContainingSymbol.ContainingAssembly
+            );
         }
 
-        private void TestMissingTypeReferencesHelper2(AssemblySymbol[] assemblies, bool reflectionOnly = false)
+        private void TestMissingTypeReferencesHelper2(
+            AssemblySymbol[] assemblies,
+            bool reflectionOnly = false
+        )
         {
             var module1 = assemblies[0].Modules[0];
             var module2 = assemblies[1].Modules[0];
@@ -150,7 +172,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Same(@base.ContainingAssembly, module2.ContainingAssembly);
             Assert.Equal("MissingNS3", @base.ContainingNamespace.Name);
             Assert.Equal("MissingNS2", @base.ContainingNamespace.ContainingNamespace.Name);
-            Assert.Equal("", @base.ContainingNamespace.ContainingNamespace.ContainingNamespace.Name);
+            Assert.Equal(
+                "",
+                @base.ContainingNamespace.ContainingNamespace.ContainingNamespace.Name
+            );
             Assert.NotNull(@base.ContainingSymbol);
             Assert.NotNull(@base.ContainingAssembly);
 
@@ -187,7 +212,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             localTC = module1.GlobalNamespace.GetTypeMembers("TC5").Single();
             genericBase = localTC.BaseType();
-            Assert.Equal("MissingC4<T1, S1>[missing].MissingC5<U1, V1, W1>[missing]", genericBase.ToTestDisplayString());
+            Assert.Equal(
+                "MissingC4<T1, S1>[missing].MissingC5<U1, V1, W1>[missing]",
+                genericBase.ToTestDisplayString()
+            );
 
             @base = (MissingMetadataTypeSymbol)genericBase.OriginalDefinition;
             Assert.Equal(SymbolKind.ErrorType, @base.Kind);
@@ -195,7 +223,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.True(@base.IsType);
             Assert.Equal("MissingC5", @base.Name);
             Assert.Equal(3, @base.Arity);
-            Assert.Equal("MissingC4<,>[missing].MissingC5<,,>[missing]", @base.ToTestDisplayString());
+            Assert.Equal(
+                "MissingC4<,>[missing].MissingC5<,,>[missing]",
+                @base.ToTestDisplayString()
+            );
             Assert.Same(@base.ContainingAssembly, module2.ContainingAssembly);
             Assert.True(@base.ContainingNamespace.IsGlobalNamespace);
             Assert.Same(@base.ContainingSymbol, missingC4);
@@ -223,7 +254,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             localTC = module1.GlobalNamespace.GetTypeMembers("TC7").Single();
             genericBase = localTC.BaseType();
-            Assert.Equal("C6.MissingC7<U, V>[missing].MissingC8[missing]", genericBase.ToTestDisplayString());
+            Assert.Equal(
+                "C6.MissingC7<U, V>[missing].MissingC8[missing]",
+                genericBase.ToTestDisplayString()
+            );
             Assert.Equal(SymbolKind.ErrorType, genericBase.ContainingSymbol.Kind);
 
             @base = (MissingMetadataTypeSymbol)genericBase.OriginalDefinition;
@@ -232,20 +266,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.True(@base.IsType);
             Assert.Equal("MissingC8", @base.Name);
             Assert.Equal(0, @base.Arity);
-            Assert.Equal("C6.MissingC7<,>[missing].MissingC8[missing]", @base.ToTestDisplayString());
+            Assert.Equal(
+                "C6.MissingC7<,>[missing].MissingC8[missing]",
+                @base.ToTestDisplayString()
+            );
             Assert.Same(@base.ContainingAssembly, module2.ContainingAssembly);
             if (!reflectionOnly)
             {
                 Assert.Same(@base.ContainingSymbol, missingC7);
             }
-            Assert.Equal(missingC7.ToTestDisplayString(), @base.ContainingSymbol.ToTestDisplayString());
+            Assert.Equal(
+                missingC7.ToTestDisplayString(),
+                @base.ContainingSymbol.ToTestDisplayString()
+            );
             Assert.Same(@base.ContainingNamespace, localC6.ContainingNamespace);
 
             var missingC8 = @base;
 
             localTC = module1.GlobalNamespace.GetTypeMembers("TC8").Single();
             genericBase = localTC.BaseType();
-            Assert.Equal("C6.MissingC7<U, V>[missing].MissingC8[missing].MissingC9[missing]", genericBase.ToTestDisplayString());
+            Assert.Equal(
+                "C6.MissingC7<U, V>[missing].MissingC8[missing].MissingC9[missing]",
+                genericBase.ToTestDisplayString()
+            );
             Assert.Equal(SymbolKind.ErrorType, genericBase.ContainingSymbol.Kind);
 
             @base = (MissingMetadataTypeSymbol)genericBase.OriginalDefinition;
@@ -254,31 +297,47 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.True(@base.IsType);
             Assert.Equal("MissingC9", @base.Name);
             Assert.Equal(0, @base.Arity);
-            Assert.Equal("C6.MissingC7<,>[missing].MissingC8[missing].MissingC9[missing]", @base.ToTestDisplayString());
+            Assert.Equal(
+                "C6.MissingC7<,>[missing].MissingC8[missing].MissingC9[missing]",
+                @base.ToTestDisplayString()
+            );
             Assert.Same(@base.ContainingAssembly, module2.ContainingAssembly);
             if (!reflectionOnly)
             {
                 Assert.Same(@base.ContainingSymbol, missingC8);
             }
-            Assert.Equal(missingC8.ToTestDisplayString(), @base.ContainingSymbol.ToTestDisplayString());
+            Assert.Equal(
+                missingC8.ToTestDisplayString(),
+                @base.ContainingSymbol.ToTestDisplayString()
+            );
             Assert.Same(@base.ContainingNamespace, localC6.ContainingNamespace);
 
-            Assert.IsAssignableFrom<MissingMetadataTypeSymbol>(assembly2.CachedTypeByEmittedName("MissingNS1.MissingC1"));
-            Assert.IsAssignableFrom<MissingMetadataTypeSymbol>(assembly2.CachedTypeByEmittedName("MissingNS2.MissingNS3.MissingC2"));
-            Assert.IsAssignableFrom<MissingMetadataTypeSymbol>(assembly2.CachedTypeByEmittedName("NS4.MissingNS5.MissingC3"));
-            Assert.IsAssignableFrom<MissingMetadataTypeSymbol>(assembly2.CachedTypeByEmittedName("MissingC4`2"));
+            Assert.IsAssignableFrom<MissingMetadataTypeSymbol>(
+                assembly2.CachedTypeByEmittedName("MissingNS1.MissingC1")
+            );
+            Assert.IsAssignableFrom<MissingMetadataTypeSymbol>(
+                assembly2.CachedTypeByEmittedName("MissingNS2.MissingNS3.MissingC2")
+            );
+            Assert.IsAssignableFrom<MissingMetadataTypeSymbol>(
+                assembly2.CachedTypeByEmittedName("NS4.MissingNS5.MissingC3")
+            );
+            Assert.IsAssignableFrom<MissingMetadataTypeSymbol>(
+                assembly2.CachedTypeByEmittedName("MissingC4`2")
+            );
         }
 
         [Fact]
         public void Equality()
         {
-            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(new[]
-            {
-                TestReferences.SymbolsTests.MissingTypes.MissingTypesEquality1,
-                TestReferences.SymbolsTests.MissingTypes.MissingTypesEquality2,
-                TestReferences.SymbolsTests.MDTestLib1,
-                TestReferences.SymbolsTests.MDTestLib2
-            });
+            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
+                new[]
+                {
+                    TestReferences.SymbolsTests.MissingTypes.MissingTypesEquality1,
+                    TestReferences.SymbolsTests.MissingTypes.MissingTypesEquality2,
+                    TestReferences.SymbolsTests.MDTestLib1,
+                    TestReferences.SymbolsTests.MDTestLib2,
+                }
+            );
 
             var asm1 = assemblies[0];
 
@@ -315,41 +374,179 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.NotSame(asm1m4.ReturnType, asm2m4.ReturnType);
             Assert.Equal(asm2m4.ReturnType, asm1m4.ReturnType);
 
-            Assert.Equal(asm1.GetSpecialType(SpecialType.System_Boolean), asm1.GetSpecialType(SpecialType.System_Boolean));
-            Assert.Equal(asm1.GetSpecialType(SpecialType.System_Boolean), asm2.GetSpecialType(SpecialType.System_Boolean));
+            Assert.Equal(
+                asm1.GetSpecialType(SpecialType.System_Boolean),
+                asm1.GetSpecialType(SpecialType.System_Boolean)
+            );
+            Assert.Equal(
+                asm1.GetSpecialType(SpecialType.System_Boolean),
+                asm2.GetSpecialType(SpecialType.System_Boolean)
+            );
 
             MissingMetadataTypeSymbol[] missingTypes1 = new MissingMetadataTypeSymbol[15];
             MissingMetadataTypeSymbol[] missingTypes2 = new MissingMetadataTypeSymbol[15];
 
             var defaultName = new AssemblyIdentity("missing");
 
-            missingTypes1[0] = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(defaultName).Modules[0], "", "test1", 0, true);
-            missingTypes1[1] = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(defaultName).Modules[0], "", "test1", 1, true);
-            missingTypes1[2] = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(defaultName).Modules[0], "", "test2", 0, true);
-            missingTypes1[3] = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(new AssemblyIdentity("asm1")).Modules[0], "", "test1", 0, true);
-            missingTypes1[4] = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(new AssemblyIdentity("asm1")).Modules[0], "", "test1", 1, true);
-            missingTypes1[5] = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(new AssemblyIdentity("asm1")).Modules[0], "", "test2", 0, true);
-            missingTypes1[6] = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(new AssemblyIdentity("asm2")).Modules[0], "", "test1", 0, true);
-            missingTypes1[7] = new MissingMetadataTypeSymbol.TopLevel(asm1.Modules[0], "", "test1", 0, true);
-            missingTypes1[8] = new MissingMetadataTypeSymbol.TopLevel(asm1.Modules[0], "", "test1", 1, true);
-            missingTypes1[9] = new MissingMetadataTypeSymbol.TopLevel(asm1.Modules[0], "", "test2", 0, true);
-            missingTypes1[10] = new MissingMetadataTypeSymbol.TopLevel(asm2.Modules[0], "", "test1", 0, true);
+            missingTypes1[0] = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(defaultName).Modules[0],
+                "",
+                "test1",
+                0,
+                true
+            );
+            missingTypes1[1] = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(defaultName).Modules[0],
+                "",
+                "test1",
+                1,
+                true
+            );
+            missingTypes1[2] = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(defaultName).Modules[0],
+                "",
+                "test2",
+                0,
+                true
+            );
+            missingTypes1[3] = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(new AssemblyIdentity("asm1")).Modules[0],
+                "",
+                "test1",
+                0,
+                true
+            );
+            missingTypes1[4] = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(new AssemblyIdentity("asm1")).Modules[0],
+                "",
+                "test1",
+                1,
+                true
+            );
+            missingTypes1[5] = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(new AssemblyIdentity("asm1")).Modules[0],
+                "",
+                "test2",
+                0,
+                true
+            );
+            missingTypes1[6] = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(new AssemblyIdentity("asm2")).Modules[0],
+                "",
+                "test1",
+                0,
+                true
+            );
+            missingTypes1[7] = new MissingMetadataTypeSymbol.TopLevel(
+                asm1.Modules[0],
+                "",
+                "test1",
+                0,
+                true
+            );
+            missingTypes1[8] = new MissingMetadataTypeSymbol.TopLevel(
+                asm1.Modules[0],
+                "",
+                "test1",
+                1,
+                true
+            );
+            missingTypes1[9] = new MissingMetadataTypeSymbol.TopLevel(
+                asm1.Modules[0],
+                "",
+                "test2",
+                0,
+                true
+            );
+            missingTypes1[10] = new MissingMetadataTypeSymbol.TopLevel(
+                asm2.Modules[0],
+                "",
+                "test1",
+                0,
+                true
+            );
             missingTypes1[11] = new MissingMetadataTypeSymbol.Nested(asm1classC, "test1", 0, true);
             missingTypes1[12] = new MissingMetadataTypeSymbol.Nested(asm1classC, "test1", 1, true);
             missingTypes1[13] = new MissingMetadataTypeSymbol.Nested(asm1classC, "test2", 0, true);
             missingTypes1[14] = new MissingMetadataTypeSymbol.Nested(asm2classC, "test1", 0, true);
 
-            missingTypes2[0] = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(defaultName).Modules[0], "", "test1", 0, true);
-            missingTypes2[1] = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(defaultName).Modules[0], "", "test1", 1, true);
-            missingTypes2[2] = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(defaultName).Modules[0], "", "test2", 0, true);
-            missingTypes2[3] = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(new AssemblyIdentity("asm1")).Modules[0], "", "test1", 0, true);
-            missingTypes2[4] = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(new AssemblyIdentity("asm1")).Modules[0], "", "test1", 1, true);
-            missingTypes2[5] = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(new AssemblyIdentity("asm1")).Modules[0], "", "test2", 0, true);
-            missingTypes2[6] = new MissingMetadataTypeSymbol.TopLevel(new MissingAssemblySymbol(new AssemblyIdentity("asm2")).Modules[0], "", "test1", 0, true);
-            missingTypes2[7] = new MissingMetadataTypeSymbol.TopLevel(asm1.Modules[0], "", "test1", 0, true);
-            missingTypes2[8] = new MissingMetadataTypeSymbol.TopLevel(asm1.Modules[0], "", "test1", 1, true);
-            missingTypes2[9] = new MissingMetadataTypeSymbol.TopLevel(asm1.Modules[0], "", "test2", 0, true);
-            missingTypes2[10] = new MissingMetadataTypeSymbol.TopLevel(asm2.Modules[0], "", "test1", 0, true);
+            missingTypes2[0] = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(defaultName).Modules[0],
+                "",
+                "test1",
+                0,
+                true
+            );
+            missingTypes2[1] = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(defaultName).Modules[0],
+                "",
+                "test1",
+                1,
+                true
+            );
+            missingTypes2[2] = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(defaultName).Modules[0],
+                "",
+                "test2",
+                0,
+                true
+            );
+            missingTypes2[3] = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(new AssemblyIdentity("asm1")).Modules[0],
+                "",
+                "test1",
+                0,
+                true
+            );
+            missingTypes2[4] = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(new AssemblyIdentity("asm1")).Modules[0],
+                "",
+                "test1",
+                1,
+                true
+            );
+            missingTypes2[5] = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(new AssemblyIdentity("asm1")).Modules[0],
+                "",
+                "test2",
+                0,
+                true
+            );
+            missingTypes2[6] = new MissingMetadataTypeSymbol.TopLevel(
+                new MissingAssemblySymbol(new AssemblyIdentity("asm2")).Modules[0],
+                "",
+                "test1",
+                0,
+                true
+            );
+            missingTypes2[7] = new MissingMetadataTypeSymbol.TopLevel(
+                asm1.Modules[0],
+                "",
+                "test1",
+                0,
+                true
+            );
+            missingTypes2[8] = new MissingMetadataTypeSymbol.TopLevel(
+                asm1.Modules[0],
+                "",
+                "test1",
+                1,
+                true
+            );
+            missingTypes2[9] = new MissingMetadataTypeSymbol.TopLevel(
+                asm1.Modules[0],
+                "",
+                "test2",
+                0,
+                true
+            );
+            missingTypes2[10] = new MissingMetadataTypeSymbol.TopLevel(
+                asm2.Modules[0],
+                "",
+                "test1",
+                0,
+                true
+            );
             missingTypes2[11] = new MissingMetadataTypeSymbol.Nested(asm1classC, "test1", 0, true);
             missingTypes2[12] = new MissingMetadataTypeSymbol.Nested(asm1classC, "test1", 1, true);
             missingTypes2[13] = new MissingMetadataTypeSymbol.Nested(asm1classC, "test2", 0, true);

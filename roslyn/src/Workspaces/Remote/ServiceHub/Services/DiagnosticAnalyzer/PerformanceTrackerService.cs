@@ -19,13 +19,14 @@ using Microsoft.CodeAnalysis.Telemetry;
 namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 {
     /// <summary>
-    /// Track diagnostic performance 
+    /// Track diagnostic performance
     /// </summary>
     [ExportWorkspaceService(typeof(IPerformanceTrackerService), WorkspaceKind.Host), Shared]
     internal class PerformanceTrackerService : IPerformanceTrackerService
     {
         // We require at least 100 samples for background document analysis result to be stable.
         private const int MinSampleSizeForDocumentAnalysis = 100;
+
         // We require at least 20 samples for span/lightbulb analysis result to be stable.
         // Note that each lightbulb invocation produces 4 samples, one for each of the below diagnostic computaion:
         //      1. Compiler syntax diagnostics
@@ -34,33 +35,51 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         //      4. Analyzer semantic diagnostics
         private const int MinSampleSizeForSpanAnalysis = 20;
 
-        private static readonly Func<IEnumerable<AnalyzerPerformanceInfo>, int, bool, string> s_snapshotLogger = SnapshotLogger;
+        private static readonly Func<
+            IEnumerable<AnalyzerPerformanceInfo>,
+            int,
+            bool,
+            string
+        > s_snapshotLogger = SnapshotLogger;
 
-        private readonly PerformanceQueue _queueForDocumentAnalysis, _queueForSpanAnalysis;
-        private readonly ConcurrentDictionary<string, bool> _builtInMap = new ConcurrentDictionary<string, bool>(concurrencyLevel: 2, capacity: 10);
+        private readonly PerformanceQueue _queueForDocumentAnalysis,
+            _queueForSpanAnalysis;
+        private readonly ConcurrentDictionary<string, bool> _builtInMap = new ConcurrentDictionary<
+            string,
+            bool
+        >(concurrencyLevel: 2, capacity: 10);
 
         public event EventHandler SnapshotAdded;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public PerformanceTrackerService()
-            : this(MinSampleSizeForDocumentAnalysis, MinSampleSizeForSpanAnalysis)
-        {
-        }
+            : this(MinSampleSizeForDocumentAnalysis, MinSampleSizeForSpanAnalysis) { }
 
         // internal for testing
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0034:Exported parts should have [ImportingConstructor]", Justification = "Used incorrectly by tests")]
-        internal PerformanceTrackerService(int minSampleSizeForDocumentAnalysis, int minSampleSizeForSpanAnalysis)
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0034:Exported parts should have [ImportingConstructor]",
+            Justification = "Used incorrectly by tests"
+        )]
+        internal PerformanceTrackerService(
+            int minSampleSizeForDocumentAnalysis,
+            int minSampleSizeForSpanAnalysis
+        )
         {
             _queueForDocumentAnalysis = new PerformanceQueue(minSampleSizeForDocumentAnalysis);
 
             _queueForSpanAnalysis = new PerformanceQueue(minSampleSizeForSpanAnalysis);
         }
 
-        private PerformanceQueue GetQueue(bool forSpanAnalysis)
-            => forSpanAnalysis ? _queueForSpanAnalysis : _queueForDocumentAnalysis;
+        private PerformanceQueue GetQueue(bool forSpanAnalysis) =>
+            forSpanAnalysis ? _queueForSpanAnalysis : _queueForDocumentAnalysis;
 
-        public void AddSnapshot(IEnumerable<AnalyzerPerformanceInfo> snapshot, int unitCount, bool forSpanAnalysis)
+        public void AddSnapshot(
+            IEnumerable<AnalyzerPerformanceInfo> snapshot,
+            int unitCount,
+            bool forSpanAnalysis
+        )
         {
             foreach (var perfInfo in snapshot)
             {
@@ -68,7 +87,11 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 
                 var delay = (int)perfInfo.TimeSpan.TotalMilliseconds;
 
-                TelemetryLogging.LogAggregated(FunctionId.PerformAnalysis_Summary, $"IndividualTimes", delay);
+                TelemetryLogging.LogAggregated(
+                    FunctionId.PerformAnalysis_Summary,
+                    $"IndividualTimes",
+                    delay
+                );
 
                 if (delay > PerformAnalysisTelemetryDelay)
                 {
@@ -76,7 +99,9 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                     const string Delay = nameof(Delay);
                     const string ForSpanAnalysis = nameof(ForSpanAnalysis);
 
-                    var analyzerId = perfInfo.BuiltIn ? perfInfo.AnalyzerId : perfInfo.BuiltIn.GetHashCode().ToString();
+                    var analyzerId = perfInfo.BuiltIn
+                        ? perfInfo.AnalyzerId
+                        : perfInfo.BuiltIn.GetHashCode().ToString();
 
                     var logMessage = KeyValueLogMessage.Create(m =>
                     {
@@ -89,7 +114,13 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 }
             }
 
-            Logger.Log(FunctionId.PerformanceTrackerService_AddSnapshot, s_snapshotLogger, snapshot, unitCount, forSpanAnalysis);
+            Logger.Log(
+                FunctionId.PerformanceTrackerService_AddSnapshot,
+                s_snapshotLogger,
+                snapshot,
+                unitCount,
+                forSpanAnalysis
+            );
 
             RecordBuiltInAnalyzers(snapshot);
 
@@ -102,9 +133,14 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             OnSnapshotAdded();
         }
 
-        public void GenerateReport(List<AnalyzerInfoForPerformanceReporting> analyzerInfos, bool forSpanAnalysis)
+        public void GenerateReport(
+            List<AnalyzerInfoForPerformanceReporting> analyzerInfos,
+            bool forSpanAnalysis
+        )
         {
-            using var pooledRaw = SharedPools.Default<List<(string analyzerId, double average, double stddev)>>().GetPooledObject();
+            using var pooledRaw = SharedPools
+                .Default<List<(string analyzerId, double average, double stddev)>>()
+                .GetPooledObject();
 
             var rawPerformanceData = pooledRaw.Object;
 
@@ -121,9 +157,20 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 return;
             }
 
-            foreach (var (analyzerId, average, stddev) in rawPerformanceData.OrderByDescending(k => k.average))
+            foreach (
+                var (analyzerId, average, stddev) in rawPerformanceData.OrderByDescending(k =>
+                    k.average
+                )
+            )
             {
-                analyzerInfos.Add(new AnalyzerInfoForPerformanceReporting(AllowTelemetry(analyzerId), analyzerId, average, stddev));
+                analyzerInfos.Add(
+                    new AnalyzerInfoForPerformanceReporting(
+                        AllowTelemetry(analyzerId),
+                        analyzerId,
+                        average,
+                        stddev
+                    )
+                );
             }
         }
 
@@ -145,10 +192,13 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             return false;
         }
 
-        private void OnSnapshotAdded()
-            => SnapshotAdded?.Invoke(this, EventArgs.Empty);
+        private void OnSnapshotAdded() => SnapshotAdded?.Invoke(this, EventArgs.Empty);
 
-        private static string SnapshotLogger(IEnumerable<AnalyzerPerformanceInfo> snapshots, int unitCount, bool forSpan)
+        private static string SnapshotLogger(
+            IEnumerable<AnalyzerPerformanceInfo> snapshots,
+            int unitCount,
+            bool forSpan
+        )
         {
             using var pooledObject = SharedPools.Default<StringBuilder>().GetPooledObject();
             var sb = pooledObject.Object;

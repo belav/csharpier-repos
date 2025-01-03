@@ -5,30 +5,30 @@ using System;
 using System.Threading;
 using Xunit;
 
-public class Stop {
-
+public class Stop
+{
     [Fact]
-    public static int TestEntryPoint() {              
-
-        Stop tm = new Stop();
-	try
-	{
-
-		ThreadPool.QueueUserWorkItem(new WaitCallback(tm.RunTest));
-		Thread.Sleep(3000);
-	}
-	catch
-	{
-		return -1;
-	}
-	return 100;
-    }
-    public void RunTest(object foo)
+    public static int TestEntryPoint()
     {
-        try{
-	    throw new Exception();
+        Stop tm = new Stop();
+        try
+        {
+            ThreadPool.QueueUserWorkItem(new WaitCallback(tm.RunTest));
+            Thread.Sleep(3000);
         }
         catch
-        {}        
+        {
+            return -1;
+        }
+        return 100;
+    }
+
+    public void RunTest(object foo)
+    {
+        try
+        {
+            throw new Exception();
+        }
+        catch { }
     }
 }

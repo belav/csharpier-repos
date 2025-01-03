@@ -81,10 +81,7 @@ public class CorsPolicy
     /// </summary>
     public Func<string, bool> IsOriginAllowed
     {
-        get
-        {
-            return _isOriginAllowed;
-        }
+        get { return _isOriginAllowed; }
         set
         {
             _isOriginAllowed = value;
@@ -117,15 +114,15 @@ public class CorsPolicy
     /// </summary>
     public TimeSpan? PreflightMaxAge
     {
-        get
-        {
-            return _preflightMaxAge;
-        }
+        get { return _preflightMaxAge; }
         set
         {
             if (value < TimeSpan.Zero)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), Resources.PreflightMaxAgeOutOfRange);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    Resources.PreflightMaxAgeOutOfRange
+                );
             }
 
             _preflightMaxAge = value;
@@ -153,8 +150,11 @@ public class CorsPolicy
         builder.Append(", AllowAnyOrigin: ");
         builder.Append(AllowAnyOrigin);
         builder.Append(", PreflightMaxAge: ");
-        builder.Append(PreflightMaxAge.HasValue ?
-            PreflightMaxAge.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture) : "null");
+        builder.Append(
+            PreflightMaxAge.HasValue
+                ? PreflightMaxAge.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture)
+                : "null"
+        );
         builder.Append(", SupportsCredentials: ");
         builder.Append(SupportsCredentials);
         builder.Append(", Origins: {");

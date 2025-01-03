@@ -23,18 +23,12 @@ namespace Internal.TypeSystem
         /// </summary>
         public IReadOnlyList<string> Arguments
         {
-            get
-            {
-                return _arguments;
-            }
+            get { return _arguments; }
         }
 
         public override string Message
         {
-            get
-            {
-                return GetExceptionString(StringID, _arguments);
-            }
+            get { return GetExceptionString(StringID, _arguments); }
         }
 
         internal TypeSystemException(ExceptionStringID id, params string[] args)
@@ -53,9 +47,12 @@ namespace Internal.TypeSystem
                     return string.Format(formatString, (object[])args);
                 }
             }
-            catch {}
+            catch { }
 
-            return "[TEMPORARY EXCEPTION MESSAGE] " + id.ToString() + ": " + string.Join(", ", args);
+            return "[TEMPORARY EXCEPTION MESSAGE] "
+                + id.ToString()
+                + ": "
+                + string.Join(", ", args);
         }
 
         /// <summary>
@@ -67,7 +64,12 @@ namespace Internal.TypeSystem
 
             public string AssemblyName { get; }
 
-            internal TypeLoadException(ExceptionStringID id, string typeName, string assemblyName, string messageArg)
+            internal TypeLoadException(
+                ExceptionStringID id,
+                string typeName,
+                string assemblyName,
+                string messageArg
+            )
                 : base(id, new string[] { typeName, assemblyName, messageArg })
             {
                 TypeName = typeName;
@@ -89,9 +91,7 @@ namespace Internal.TypeSystem
         public abstract class MissingMemberException : TypeSystemException
         {
             protected internal MissingMemberException(ExceptionStringID id, params string[] args)
-                : base(id, args)
-            {
-            }
+                : base(id, args) { }
         }
 
         /// <summary>
@@ -100,9 +100,7 @@ namespace Internal.TypeSystem
         public class MissingMethodException : MissingMemberException
         {
             internal MissingMethodException(ExceptionStringID id, params string[] args)
-                : base(id, args)
-            {
-            }
+                : base(id, args) { }
         }
 
         /// <summary>
@@ -111,9 +109,7 @@ namespace Internal.TypeSystem
         public class MissingFieldException : MissingMemberException
         {
             internal MissingFieldException(ExceptionStringID id, params string[] args)
-                : base(id, args)
-            {
-            }
+                : base(id, args) { }
         }
 
         /// <summary>
@@ -122,9 +118,7 @@ namespace Internal.TypeSystem
         public class FileNotFoundException : TypeSystemException
         {
             internal FileNotFoundException(ExceptionStringID id, string fileName)
-                : base(id, fileName)
-            {
-            }
+                : base(id, fileName) { }
         }
 
         /// <summary>
@@ -134,35 +128,25 @@ namespace Internal.TypeSystem
         public class InvalidProgramException : TypeSystemException
         {
             internal InvalidProgramException(ExceptionStringID id, string method)
-                : base(id, method)
-            {
-            }
+                : base(id, method) { }
 
             internal InvalidProgramException(ExceptionStringID id)
-                : base(id)
-            {
-            }
+                : base(id) { }
 
             internal InvalidProgramException()
-                : base(ExceptionStringID.InvalidProgramDefault)
-            {
-            }
+                : base(ExceptionStringID.InvalidProgramDefault) { }
         }
 
         public class BadImageFormatException : TypeSystemException
         {
             internal BadImageFormatException()
-                : base(ExceptionStringID.BadImageFormatGeneric)
-            {
-            }
+                : base(ExceptionStringID.BadImageFormatGeneric) { }
         }
 
         public class MarshalDirectiveException : TypeSystemException
         {
             internal MarshalDirectiveException(ExceptionStringID id)
-                : base(id)
-            {
-            }
+                : base(id) { }
         }
     }
 }

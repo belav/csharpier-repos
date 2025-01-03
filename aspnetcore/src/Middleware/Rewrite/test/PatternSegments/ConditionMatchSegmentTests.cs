@@ -8,7 +8,6 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.PatternSegments;
 
 public class ConditionMatchSegmentTests
 {
-
     [Theory]
     [InlineData(1, "foo")]
     [InlineData(2, "bar")]

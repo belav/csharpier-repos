@@ -24,7 +24,10 @@ public partial class ContentResultExecutor : IActionResultExecutor<ContentResult
     /// </summary>
     /// <param name="logger">The logger to use.</param>
     /// <param name="httpResponseStreamWriterFactory">The stream writer factory.</param>
-    public ContentResultExecutor(ILogger<ContentResultExecutor> logger, IHttpResponseStreamWriterFactory httpResponseStreamWriterFactory)
+    public ContentResultExecutor(
+        ILogger<ContentResultExecutor> logger,
+        IHttpResponseStreamWriterFactory httpResponseStreamWriterFactory
+    )
     {
         _logger = logger;
         _httpResponseStreamWriterFactory = httpResponseStreamWriterFactory;
@@ -44,7 +47,8 @@ public partial class ContentResultExecutor : IActionResultExecutor<ContentResult
             (DefaultContentType, Encoding.UTF8),
             MediaType.GetEncoding,
             out var resolvedContentType,
-            out var resolvedContentTypeEncoding);
+            out var resolvedContentTypeEncoding
+        );
 
         response.ContentType = resolvedContentType;
 
@@ -59,7 +63,12 @@ public partial class ContentResultExecutor : IActionResultExecutor<ContentResult
         {
             response.ContentLength = resolvedContentTypeEncoding.GetByteCount(result.Content);
 
-            await using (var textWriter = _httpResponseStreamWriterFactory.CreateWriter(response.Body, resolvedContentTypeEncoding))
+            await using (
+                var textWriter = _httpResponseStreamWriterFactory.CreateWriter(
+                    response.Body,
+                    resolvedContentTypeEncoding
+                )
+            )
             {
                 await textWriter.WriteAsync(result.Content);
 
@@ -74,7 +83,12 @@ public partial class ContentResultExecutor : IActionResultExecutor<ContentResult
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Executing ContentResult with HTTP Response ContentType of {ContentType}", EventName = "ContentResultExecuting")]
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing ContentResult with HTTP Response ContentType of {ContentType}",
+            EventName = "ContentResultExecuting"
+        )]
         public static partial void ContentResultExecuting(ILogger logger, string contentType);
     }
 }

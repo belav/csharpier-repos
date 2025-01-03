@@ -8,9 +8,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Loader;
 using System.Runtime.InteropServices;
-
+using System.Runtime.Loader;
 using Xunit;
 
 namespace BinderTracingTests
@@ -40,11 +39,15 @@ namespace BinderTracingTests
                 {
                     new ProbedPath()
                     {
-                        FilePath = Helpers.GetProbingFilePath(ProbedPath.PathSource.AppPaths, assemblyName.Name, isExe: false),
+                        FilePath = Helpers.GetProbingFilePath(
+                            ProbedPath.PathSource.AppPaths,
+                            assemblyName.Name,
+                            isExe: false
+                        ),
                         Source = ProbedPath.PathSource.AppPaths,
-                        Result = S_OK
-                    }
-                }
+                        Result = S_OK,
+                    },
+                },
             };
         }
 
@@ -75,17 +78,25 @@ namespace BinderTracingTests
                 {
                     new ProbedPath()
                     {
-                        FilePath = Helpers.GetProbingFilePath(ProbedPath.PathSource.AppPaths, assemblyName, isExe: false),
+                        FilePath = Helpers.GetProbingFilePath(
+                            ProbedPath.PathSource.AppPaths,
+                            assemblyName,
+                            isExe: false
+                        ),
                         Source = ProbedPath.PathSource.AppPaths,
-                        Result = COR_E_FILENOTFOUND
+                        Result = COR_E_FILENOTFOUND,
                     },
                     new ProbedPath()
                     {
-                        FilePath = Helpers.GetProbingFilePath(ProbedPath.PathSource.AppPaths, assemblyName, isExe: true),
+                        FilePath = Helpers.GetProbingFilePath(
+                            ProbedPath.PathSource.AppPaths,
+                            assemblyName,
+                            isExe: true
+                        ),
                         Source = ProbedPath.PathSource.AppPaths,
-                        Result = COR_E_FILENOTFOUND
-                    }
-                }
+                        Result = COR_E_FILENOTFOUND,
+                    },
+                },
             };
         }
 
@@ -112,11 +123,15 @@ namespace BinderTracingTests
                 {
                     new ProbedPath()
                     {
-                        FilePath = Helpers.GetProbingFilePath(ProbedPath.PathSource.AppPaths, assemblyName.Name, SatelliteCulture.Name),
+                        FilePath = Helpers.GetProbingFilePath(
+                            ProbedPath.PathSource.AppPaths,
+                            assemblyName.Name,
+                            SatelliteCulture.Name
+                        ),
                         Source = ProbedPath.PathSource.AppPaths,
-                        Result = S_OK
-                    }
-                }
+                        Result = S_OK,
+                    },
+                },
             };
         }
 
@@ -128,7 +143,9 @@ namespace BinderTracingTests
             AssemblyName assemblyName = new AssemblyName($"{SubdirectoryAssemblyName}.resources");
             assemblyName.CultureInfo = SatelliteCulture;
             CustomALC alc = new CustomALC(nameof(SatelliteAssembly_CultureSubdirectory));
-            alc.LoadFromAssemblyPath(Helpers.GetAssemblyInSubdirectoryPath(SubdirectoryAssemblyName));
+            alc.LoadFromAssemblyPath(
+                Helpers.GetAssemblyInSubdirectoryPath(SubdirectoryAssemblyName)
+            );
             Assembly asm = alc.LoadFromAssemblyName(assemblyName);
 
             return new BindOperation()
@@ -143,11 +160,16 @@ namespace BinderTracingTests
                 {
                     new ProbedPath()
                     {
-                        FilePath = Helpers.GetProbingFilePath(ProbedPath.PathSource.SatelliteSubdirectory, assemblyName.Name, SatelliteCulture.Name, Helpers.GetSubdirectoryPath()),
+                        FilePath = Helpers.GetProbingFilePath(
+                            ProbedPath.PathSource.SatelliteSubdirectory,
+                            assemblyName.Name,
+                            SatelliteCulture.Name,
+                            Helpers.GetSubdirectoryPath()
+                        ),
                         Source = ProbedPath.PathSource.SatelliteSubdirectory,
-                        Result = S_OK
-                    }
-                }
+                        Result = S_OK,
+                    },
+                },
             };
         }
 
@@ -166,9 +188,12 @@ namespace BinderTracingTests
             {
                 AssemblyName requested = new AssemblyName(args.Name);
                 return requested.Name == SubdirectoryAssemblyName
-                    ? Assembly.LoadFile(Helpers.GetAssemblyInSubdirectoryPath(SubdirectoryAssemblyName))
+                    ? Assembly.LoadFile(
+                        Helpers.GetAssemblyInSubdirectoryPath(SubdirectoryAssemblyName)
+                    )
                     : null;
-            };
+            }
+            ;
 
             AppDomain.CurrentDomain.AssemblyResolve += OnAppDomainAssemblyResolve;
             Assembly asm = Assembly.Load(assemblyName);
@@ -188,17 +213,26 @@ namespace BinderTracingTests
                 {
                     new ProbedPath()
                     {
-                        FilePath = Helpers.GetProbingFilePath(ProbedPath.PathSource.AppPaths, assemblyName.Name, SatelliteCulture.Name),
+                        FilePath = Helpers.GetProbingFilePath(
+                            ProbedPath.PathSource.AppPaths,
+                            assemblyName.Name,
+                            SatelliteCulture.Name
+                        ),
                         Source = ProbedPath.PathSource.AppPaths,
-                        Result = COR_E_FILENOTFOUND
+                        Result = COR_E_FILENOTFOUND,
                     },
                     new ProbedPath()
                     {
-                        FilePath = Helpers.GetProbingFilePath(ProbedPath.PathSource.SatelliteSubdirectory, assemblyName.Name, SatelliteCulture.Name, Helpers.GetSubdirectoryPath()),
+                        FilePath = Helpers.GetProbingFilePath(
+                            ProbedPath.PathSource.SatelliteSubdirectory,
+                            assemblyName.Name,
+                            SatelliteCulture.Name,
+                            Helpers.GetSubdirectoryPath()
+                        ),
                         Source = ProbedPath.PathSource.SatelliteSubdirectory,
-                        Result = S_OK
-                    }
-                }
+                        Result = S_OK,
+                    },
+                },
             };
         }
 
@@ -214,12 +248,17 @@ namespace BinderTracingTests
             AssemblyName assemblyName = new AssemblyName($"{SubdirectoryAssemblyName}.resources");
             assemblyName.CultureInfo = SatelliteCulture;
             CustomALC alc = new CustomALC(nameof(SatelliteAssembly_CultureSubdirectory));
-            alc.LoadFromAssemblyPath(Helpers.GetAssemblyInSubdirectoryPath(SubdirectoryAssemblyName));
+            alc.LoadFromAssemblyPath(
+                Helpers.GetAssemblyInSubdirectoryPath(SubdirectoryAssemblyName)
+            );
 
             Assembly asm;
             string subdirectoryPath = Helpers.GetSubdirectoryPath();
             string cultureSubdirectory = Path.Combine(subdirectoryPath, SatelliteCulture.Name);
-            string cultureSubdirectoryLower = Path.Combine(subdirectoryPath, SatelliteCulture.Name.ToLowerInvariant());
+            string cultureSubdirectoryLower = Path.Combine(
+                subdirectoryPath,
+                SatelliteCulture.Name.ToLowerInvariant()
+            );
             try
             {
                 Directory.Move(cultureSubdirectory, cultureSubdirectoryLower);
@@ -234,21 +273,33 @@ namespace BinderTracingTests
             {
                 new ProbedPath()
                 {
-                    FilePath = Helpers.GetProbingFilePath(ProbedPath.PathSource.SatelliteSubdirectory, assemblyName.Name, SatelliteCulture.Name, subdirectoryPath),
+                    FilePath = Helpers.GetProbingFilePath(
+                        ProbedPath.PathSource.SatelliteSubdirectory,
+                        assemblyName.Name,
+                        SatelliteCulture.Name,
+                        subdirectoryPath
+                    ),
                     Source = ProbedPath.PathSource.SatelliteSubdirectory,
-                    Result = OperatingSystem.IsLinux() ? COR_E_FILENOTFOUND : S_OK
-                }
+                    Result = OperatingSystem.IsLinux() ? COR_E_FILENOTFOUND : S_OK,
+                },
             };
 
             // On Linux, the path with a lower-case culture name should also be probed
             if (OperatingSystem.IsLinux())
             {
-                probedPaths.Add(new ProbedPath()
+                probedPaths.Add(
+                    new ProbedPath()
                     {
-                        FilePath = Helpers.GetProbingFilePath(ProbedPath.PathSource.SatelliteSubdirectory, assemblyName.Name, SatelliteCulture.Name.ToLowerInvariant(), subdirectoryPath),
+                        FilePath = Helpers.GetProbingFilePath(
+                            ProbedPath.PathSource.SatelliteSubdirectory,
+                            assemblyName.Name,
+                            SatelliteCulture.Name.ToLowerInvariant(),
+                            subdirectoryPath
+                        ),
                         Source = ProbedPath.PathSource.SatelliteSubdirectory,
-                        Result = S_OK
-                    });
+                        Result = S_OK,
+                    }
+                );
             }
 
             return new BindOperation()
@@ -259,7 +310,7 @@ namespace BinderTracingTests
                 ResultAssemblyName = asm.GetName(),
                 ResultAssemblyPath = asm.Location,
                 Cached = false,
-                ProbedPaths = probedPaths
+                ProbedPaths = probedPaths,
             };
         }
 
@@ -276,28 +327,42 @@ namespace BinderTracingTests
             AssemblyName assemblyName = new AssemblyName($"{SubdirectoryAssemblyName}.resources");
             assemblyName.CultureInfo = new CultureInfo(cultureName);
             CustomALC alc = new CustomALC(nameof(SatelliteAssembly_CultureSubdirectory));
-            alc.LoadFromAssemblyPath(Helpers.GetAssemblyInSubdirectoryPath(SubdirectoryAssemblyName));
+            alc.LoadFromAssemblyPath(
+                Helpers.GetAssemblyInSubdirectoryPath(SubdirectoryAssemblyName)
+            );
             Assert.Throws<FileNotFoundException>(() => alc.LoadFromAssemblyName(assemblyName));
 
             var probedPaths = new List<ProbedPath>()
             {
                 new ProbedPath()
                 {
-                    FilePath = Helpers.GetProbingFilePath(ProbedPath.PathSource.SatelliteSubdirectory, assemblyName.Name, cultureName, Helpers.GetSubdirectoryPath()),
+                    FilePath = Helpers.GetProbingFilePath(
+                        ProbedPath.PathSource.SatelliteSubdirectory,
+                        assemblyName.Name,
+                        cultureName,
+                        Helpers.GetSubdirectoryPath()
+                    ),
                     Source = ProbedPath.PathSource.SatelliteSubdirectory,
-                    Result = COR_E_FILENOTFOUND
-                }
+                    Result = COR_E_FILENOTFOUND,
+                },
             };
 
             // On Linux (case-sensitive), the path with a lower-case culture name should also be probed
             if (OperatingSystem.IsLinux())
             {
-                probedPaths.Add(new ProbedPath()
+                probedPaths.Add(
+                    new ProbedPath()
                     {
-                        FilePath = Helpers.GetProbingFilePath(ProbedPath.PathSource.SatelliteSubdirectory, assemblyName.Name, cultureName.ToLowerInvariant(), Helpers.GetSubdirectoryPath()),
+                        FilePath = Helpers.GetProbingFilePath(
+                            ProbedPath.PathSource.SatelliteSubdirectory,
+                            assemblyName.Name,
+                            cultureName.ToLowerInvariant(),
+                            Helpers.GetSubdirectoryPath()
+                        ),
                         Source = ProbedPath.PathSource.SatelliteSubdirectory,
-                        Result = COR_E_FILENOTFOUND
-                    });
+                        Result = COR_E_FILENOTFOUND,
+                    }
+                );
             }
 
             return new BindOperation()
@@ -306,7 +371,7 @@ namespace BinderTracingTests
                 AssemblyLoadContext = alc.ToString(),
                 Success = false,
                 Cached = false,
-                ProbedPaths = probedPaths
+                ProbedPaths = probedPaths,
             };
         }
     }

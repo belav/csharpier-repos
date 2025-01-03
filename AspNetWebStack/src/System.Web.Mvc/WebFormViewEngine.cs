@@ -6,18 +6,12 @@ namespace System.Web.Mvc
     public class WebFormViewEngine : BuildManagerViewEngine
     {
         public WebFormViewEngine()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         public WebFormViewEngine(IViewPageActivator viewPageActivator)
             : base(viewPageActivator)
         {
-            MasterLocationFormats = new[]
-            {
-                "~/Views/{1}/{0}.master",
-                "~/Views/Shared/{0}.master"
-            };
+            MasterLocationFormats = new[] { "~/Views/{1}/{0}.master", "~/Views/Shared/{0}.master" };
 
             AreaMasterLocationFormats = new[]
             {
@@ -30,7 +24,7 @@ namespace System.Web.Mvc
                 "~/Views/{1}/{0}.aspx",
                 "~/Views/{1}/{0}.ascx",
                 "~/Views/Shared/{0}.aspx",
-                "~/Views/Shared/{0}.ascx"
+                "~/Views/Shared/{0}.ascx",
             };
 
             AreaViewLocationFormats = new[]
@@ -44,20 +38,22 @@ namespace System.Web.Mvc
             PartialViewLocationFormats = ViewLocationFormats;
             AreaPartialViewLocationFormats = AreaViewLocationFormats;
 
-            FileExtensions = new[]
-            {
-                "aspx",
-                "ascx",
-                "master",
-            };
+            FileExtensions = new[] { "aspx", "ascx", "master" };
         }
 
-        protected override IView CreatePartialView(ControllerContext controllerContext, string partialPath)
+        protected override IView CreatePartialView(
+            ControllerContext controllerContext,
+            string partialPath
+        )
         {
             return new WebFormView(controllerContext, partialPath, null, ViewPageActivator);
         }
 
-        protected override IView CreateView(ControllerContext controllerContext, string viewPath, string masterPath)
+        protected override IView CreateView(
+            ControllerContext controllerContext,
+            string viewPath,
+            string masterPath
+        )
         {
             return new WebFormView(controllerContext, viewPath, masterPath, ViewPageActivator);
         }

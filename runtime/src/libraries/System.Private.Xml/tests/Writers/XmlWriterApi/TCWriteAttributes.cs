@@ -55,7 +55,11 @@ namespace System.Xml.XmlWriterApiTests
                 catch (ArgumentNullException e)
                 {
                     CError.WriteLineIgnore("Exception: " + e.ToString());
-                    CError.Compare(w.WriteState, WriteState.Element, "WriteState should be Element");
+                    CError.Compare(
+                        w.WriteState,
+                        WriteState.Element,
+                        "WriteState should be Element"
+                    );
                     return;
                 }
             }
@@ -77,7 +81,9 @@ namespace System.Xml.XmlWriterApiTests
                         if (xr.LocalName == "AttributesGeneric")
                         {
                             do
-                            { xr.Read(); } while (xr.LocalName != "node");
+                            {
+                                xr.Read();
+                            } while (xr.LocalName != "node");
                             break;
                         }
                     }
@@ -111,7 +117,9 @@ namespace System.Xml.XmlWriterApiTests
                         if (xr.LocalName == "AttributesGeneric")
                         {
                             do
-                            { xr.Read(); } while (xr.LocalName != "node");
+                            {
+                                xr.Read();
+                            } while (xr.LocalName != "node");
                             xr.MoveToAttribute(1);
                             break;
                         }
@@ -146,7 +154,9 @@ namespace System.Xml.XmlWriterApiTests
                         if (xr.LocalName == "AttributesGeneric")
                         {
                             do
-                            { xr.Read(); } while (xr.LocalName != "node");
+                            {
+                                xr.Read();
+                            } while (xr.LocalName != "node");
                             xr.MoveToNextAttribute();
                             xr.MoveToNextAttribute();
                             xr.MoveToNextAttribute();
@@ -264,8 +274,11 @@ namespace System.Xml.XmlWriterApiTests
             xr = CreateReader(new StringReader(strxml));
 
             do
-            { xr.Read(); }
-            while ((xr.NodeType.ToString() != tokenType) && (xr.ReadState != ReadState.EndOfFile));
+            {
+                xr.Read();
+            } while (
+                (xr.NodeType.ToString() != tokenType) && (xr.ReadState != ReadState.EndOfFile)
+            );
 
             if (xr.ReadState == ReadState.EndOfFile || xr.NodeType.ToString() != tokenType)
             {
@@ -287,7 +300,11 @@ namespace System.Xml.XmlWriterApiTests
                 catch (XmlException e)
                 {
                     CError.WriteLineIgnore(e.ToString());
-                    CError.Compare(w.WriteState, (tokenType == "DocumentType") ? WriteState.Start : WriteState.Element, "WriteState should be Element");
+                    CError.Compare(
+                        w.WriteState,
+                        (tokenType == "DocumentType") ? WriteState.Start : WriteState.Element,
+                        "WriteState should be Element"
+                    );
                     return;
                 }
                 finally
@@ -313,7 +330,9 @@ namespace System.Xml.XmlWriterApiTests
                         if (xr.LocalName == "QuoteChar")
                         {
                             do
-                            { xr.Read(); } while (xr.LocalName != "node");
+                            {
+                                xr.Read();
+                            } while (xr.LocalName != "node");
                             xr.MoveToFirstAttribute();
                             break;
                         }
@@ -340,9 +359,13 @@ namespace System.Xml.XmlWriterApiTests
                         if (xr.LocalName == "QuoteChar")
                         {
                             do
-                            { xr.Read(); } while (xr.LocalName != "node");
+                            {
+                                xr.Read();
+                            } while (xr.LocalName != "node");
                             do
-                            { xr.Read(); } while (xr.LocalName != "node");
+                            {
+                                xr.Read();
+                            } while (xr.LocalName != "node");
                             xr.MoveToFirstAttribute();
                             break;
                         }

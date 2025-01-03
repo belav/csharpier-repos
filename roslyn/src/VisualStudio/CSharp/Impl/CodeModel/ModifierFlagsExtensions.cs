@@ -33,7 +33,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             { ModifierFlags.Volatile, SyntaxKind.VolatileKeyword },
             { ModifierFlags.Unsafe, SyntaxKind.UnsafeKeyword },
             { ModifierFlags.Async, SyntaxKind.AsyncKeyword },
-            { ModifierFlags.Partial, SyntaxKind.PartialKeyword }
+            { ModifierFlags.Partial, SyntaxKind.PartialKeyword },
         };
 
         public static ModifierFlags GetModifierFlags(this MemberDeclarationSyntax member)
@@ -101,7 +101,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             return result;
         }
 
-        public static MemberDeclarationSyntax UpdateModifiers(this MemberDeclarationSyntax member, ModifierFlags flags)
+        public static MemberDeclarationSyntax UpdateModifiers(
+            this MemberDeclarationSyntax member,
+            ModifierFlags flags
+        )
         {
             // The starting token for this member may change, so we need to save
             // the leading trivia and reattach it after updating the modifiers.

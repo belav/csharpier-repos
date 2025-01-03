@@ -20,7 +20,11 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties(typeof(MediaTypeFormatterCollection), TypeAssert.TypeProperties.IsPublicVisibleClass, typeof(Collection<MediaTypeFormatter>));
+            Assert.Type.HasProperties(
+                typeof(MediaTypeFormatterCollection),
+                TypeAssert.TypeProperties.IsPublicVisibleClass,
+                typeof(Collection<MediaTypeFormatter>)
+            );
         }
 
         [Fact]
@@ -37,7 +41,9 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void Constructor1_AcceptsEmptyList()
         {
-            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(new MediaTypeFormatter[0]);
+            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(
+                new MediaTypeFormatter[0]
+            );
             Assert.Empty(collection);
         }
 
@@ -45,7 +51,9 @@ namespace System.Net.Http.Formatting
         [TestDataSet(typeof(HttpTestData), "AllFormatterCollections")]
         public void Constructor1_SetsProperties(IEnumerable<MediaTypeFormatter> formatterCollection)
         {
-            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(formatterCollection);
+            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(
+                formatterCollection
+            );
             if (collection.OfType<XmlMediaTypeFormatter>().Any())
             {
                 Assert.NotNull(collection.XmlFormatter);
@@ -70,7 +78,9 @@ namespace System.Net.Http.Formatting
         {
             // force to array to get stable instances
             MediaTypeFormatter[] derivedFormatters = HttpTestData.DerivedFormatters.ToArray();
-            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(derivedFormatters);
+            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(
+                derivedFormatters
+            );
             Assert.True(derivedFormatters.SequenceEqual(collection));
         }
 
@@ -84,9 +94,13 @@ namespace System.Net.Http.Formatting
         public void Constructor1_ThrowsWithNullFormatterInCollection()
         {
             Assert.ThrowsArgument(
-                () => new MediaTypeFormatterCollection(new MediaTypeFormatter[] { null }), "formatters",
-                Error.Format(Properties.Resources.CannotHaveNullInList,
-                typeof(MediaTypeFormatter).Name));
+                () => new MediaTypeFormatterCollection(new MediaTypeFormatter[] { null }),
+                "formatters",
+                Error.Format(
+                    Properties.Resources.CannotHaveNullInList,
+                    typeof(MediaTypeFormatter).Name
+                )
+            );
         }
 
         [Fact]
@@ -97,7 +111,6 @@ namespace System.Net.Http.Formatting
                 new XmlMediaTypeFormatter(),
                 new JsonMediaTypeFormatter(),
                 new FormUrlEncodedMediaTypeFormatter(),
-
                 new XmlMediaTypeFormatter(),
                 new JsonMediaTypeFormatter(),
                 new FormUrlEncodedMediaTypeFormatter(),
@@ -131,14 +144,22 @@ namespace System.Net.Http.Formatting
             TestChanging((collection) => collection[0] = new XmlMediaTypeFormatter(), 1);
         }
 
-        private static void TestChanging(Action<MediaTypeFormatterCollection> mutation, int expectedCount)
+        private static void TestChanging(
+            Action<MediaTypeFormatterCollection> mutation,
+            int expectedCount
+        )
         {
             // Arrange
             MediaTypeFormatter formatter1 = new XmlMediaTypeFormatter();
             MediaTypeFormatter formatter2 = new JsonMediaTypeFormatter();
-            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(new MediaTypeFormatter[] { formatter1, formatter2 });
+            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(
+                new MediaTypeFormatter[] { formatter1, formatter2 }
+            );
             int changeCount = 0;
-            collection.Changing += (source, args) => { changeCount++; };
+            collection.Changing += (source, args) =>
+            {
+                changeCount++;
+            };
 
             // Act
             mutation(collection);
@@ -151,14 +172,18 @@ namespace System.Net.Http.Formatting
         public void XmlFormatter_SetByCtor()
         {
             XmlMediaTypeFormatter formatter = new XmlMediaTypeFormatter();
-            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(new MediaTypeFormatter[] { formatter });
+            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(
+                new MediaTypeFormatter[] { formatter }
+            );
             Assert.Same(formatter, collection.XmlFormatter);
         }
 
         [Fact]
         public void XmlFormatter_ClearedByCtor()
         {
-            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(new MediaTypeFormatter[0]);
+            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(
+                new MediaTypeFormatter[0]
+            );
             Assert.Null(collection.XmlFormatter);
         }
 
@@ -166,14 +191,18 @@ namespace System.Net.Http.Formatting
         public void JsonFormatter_SetByCtor()
         {
             JsonMediaTypeFormatter formatter = new JsonMediaTypeFormatter();
-            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(new MediaTypeFormatter[] { formatter });
+            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(
+                new MediaTypeFormatter[] { formatter }
+            );
             Assert.Same(formatter, collection.JsonFormatter);
         }
 
         [Fact]
         public void JsonFormatter_ClearedByCtor()
         {
-            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(new MediaTypeFormatter[0]);
+            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(
+                new MediaTypeFormatter[0]
+            );
             Assert.Null(collection.JsonFormatter);
         }
 
@@ -181,14 +210,18 @@ namespace System.Net.Http.Formatting
         public void FormUrlEncodedFormatter_SetByCtor()
         {
             FormUrlEncodedMediaTypeFormatter formatter = new FormUrlEncodedMediaTypeFormatter();
-            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(new MediaTypeFormatter[] { formatter });
+            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(
+                new MediaTypeFormatter[] { formatter }
+            );
             Assert.Same(formatter, collection.FormUrlEncodedFormatter);
         }
 
         [Fact]
         public void FormUrlEncodedFormatter_ClearedByCtor()
         {
-            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(new MediaTypeFormatter[0]);
+            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(
+                new MediaTypeFormatter[0]
+            );
             Assert.Null(collection.FormUrlEncodedFormatter);
         }
 
@@ -239,14 +272,20 @@ namespace System.Net.Http.Formatting
         {
             MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection();
             MediaTypeHeaderValue mediaType = new MediaTypeHeaderValue("text/test");
-            Assert.ThrowsArgumentNull(() => collection.FindReader(type: null, mediaType: mediaType), "type");
+            Assert.ThrowsArgumentNull(
+                () => collection.FindReader(type: null, mediaType: mediaType),
+                "type"
+            );
         }
 
         [Fact]
         public void FindReader_ThrowsOnNullMediaType()
         {
             MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection();
-            Assert.ThrowsArgumentNull(() => collection.FindReader(type: typeof(object), mediaType: null), "mediaType");
+            Assert.ThrowsArgumentNull(
+                () => collection.FindReader(type: typeof(object), mediaType: null),
+                "mediaType"
+            );
         }
 
         [Fact]
@@ -270,9 +309,16 @@ namespace System.Net.Http.Formatting
 
         [Theory]
         [TestDataSet(
-            typeof(CommonUnitTestDataSets), "RepresentativeValueAndRefTypeTestDataCollection",
-            typeof(HttpTestData), "LegalMediaTypeStrings")]
-        public void FindReader_ReturnsFormatterOnMatch(Type variationType, object testData, string mediaType)
+            typeof(CommonUnitTestDataSets),
+            "RepresentativeValueAndRefTypeTestDataCollection",
+            typeof(HttpTestData),
+            "LegalMediaTypeStrings"
+        )]
+        public void FindReader_ReturnsFormatterOnMatch(
+            Type variationType,
+            object testData,
+            string mediaType
+        )
         {
             // Arrange
             GC.KeepAlive(testData); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
@@ -300,14 +346,20 @@ namespace System.Net.Http.Formatting
         {
             MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection();
             MediaTypeHeaderValue mediaType = new MediaTypeHeaderValue("text/test");
-            Assert.ThrowsArgumentNull(() => collection.FindWriter(type: null, mediaType: mediaType), "type");
+            Assert.ThrowsArgumentNull(
+                () => collection.FindWriter(type: null, mediaType: mediaType),
+                "type"
+            );
         }
 
         [Fact]
         public void FindWriter_ThrowsOnNullMediaType()
         {
             MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection();
-            Assert.ThrowsArgumentNull(() => collection.FindWriter(type: typeof(object), mediaType: null), "mediaType");
+            Assert.ThrowsArgumentNull(
+                () => collection.FindWriter(type: typeof(object), mediaType: null),
+                "mediaType"
+            );
         }
 
         [Fact]
@@ -331,9 +383,16 @@ namespace System.Net.Http.Formatting
 
         [Theory]
         [TestDataSet(
-            typeof(CommonUnitTestDataSets), "RepresentativeValueAndRefTypeTestDataCollection",
-            typeof(HttpTestData), "LegalMediaTypeStrings")]
-        public void FindWriter_ReturnsFormatterOnMatch(Type variationType, object testData, string mediaType)
+            typeof(CommonUnitTestDataSets),
+            "RepresentativeValueAndRefTypeTestDataCollection",
+            typeof(HttpTestData),
+            "LegalMediaTypeStrings"
+        )]
+        public void FindWriter_ReturnsFormatterOnMatch(
+            Type variationType,
+            object testData,
+            string mediaType
+        )
         {
             // Arrange
             GC.KeepAlive(testData); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
@@ -373,15 +432,25 @@ namespace System.Net.Http.Formatting
         {
             // Arrange
             MockMediaTypeFormatter writableFormatter = new MockMediaTypeFormatter();
-            MockMediaTypeFormatter readOnlyFormatter = new MockMediaTypeFormatter() { CanWriteAnyTypesReturn = false };
-            List<MediaTypeFormatter> formatters = new List<MediaTypeFormatter>() { writableFormatter, readOnlyFormatter };
+            MockMediaTypeFormatter readOnlyFormatter = new MockMediaTypeFormatter()
+            {
+                CanWriteAnyTypesReturn = false,
+            };
+            List<MediaTypeFormatter> formatters = new List<MediaTypeFormatter>()
+            {
+                writableFormatter,
+                readOnlyFormatter,
+            };
             MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(formatters);
 
             // Act
             MediaTypeFormatter[] writableFormatters = collection.WritingFormatters;
 
             // Assert
-            MediaTypeFormatter[] expectedFormatters = new MediaTypeFormatter[] { writableFormatter };
+            MediaTypeFormatter[] expectedFormatters = new MediaTypeFormatter[]
+            {
+                writableFormatter,
+            };
             Assert.Equal(expectedFormatters, writableFormatters);
         }
 
@@ -390,7 +459,10 @@ namespace System.Net.Http.Formatting
         {
             // Arrange
             MockMediaTypeFormatter writableFormatter = new MockMediaTypeFormatter();
-            List<MediaTypeFormatter> formatters = new List<MediaTypeFormatter>() { writableFormatter };
+            List<MediaTypeFormatter> formatters = new List<MediaTypeFormatter>()
+            {
+                writableFormatter,
+            };
             MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(formatters);
             collection.Add(null);
 
@@ -398,7 +470,10 @@ namespace System.Net.Http.Formatting
             MediaTypeFormatter[] writableFormatters = collection.WritingFormatters;
 
             // Assert
-            MediaTypeFormatter[] expectedFormatters = new MediaTypeFormatter[] { writableFormatter };
+            MediaTypeFormatter[] expectedFormatters = new MediaTypeFormatter[]
+            {
+                writableFormatter,
+            };
             Assert.Equal(expectedFormatters, writableFormatters);
         }
 
@@ -408,7 +483,11 @@ namespace System.Net.Http.Formatting
             // Arrange
             MockMediaTypeFormatter formatter1 = new MockMediaTypeFormatter();
             MockMediaTypeFormatter formatter2 = new MockMediaTypeFormatter();
-            List<MediaTypeFormatter> formatters = new List<MediaTypeFormatter>() { formatter1, formatter2 };
+            List<MediaTypeFormatter> formatters = new List<MediaTypeFormatter>()
+            {
+                formatter1,
+                formatter2,
+            };
             MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(formatters);
 
             // Act
@@ -424,7 +503,9 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void WritingFormatters_Insert_ResetsCache()
         {
-            TestWritingFormattersCacheReset((collection) => collection.Insert(0, new MockMediaTypeFormatter()));
+            TestWritingFormattersCacheReset(
+                (collection) => collection.Insert(0, new MockMediaTypeFormatter())
+            );
         }
 
         [Fact]
@@ -433,12 +514,18 @@ namespace System.Net.Http.Formatting
             TestWritingFormattersCacheReset((collection) => collection.RemoveAt(0));
         }
 
-        private static void TestWritingFormattersCacheReset(Action<MediaTypeFormatterCollection> mutation)
+        private static void TestWritingFormattersCacheReset(
+            Action<MediaTypeFormatterCollection> mutation
+        )
         {
             // Arrange
             MockMediaTypeFormatter formatter1 = new MockMediaTypeFormatter();
             MockMediaTypeFormatter formatter2 = new MockMediaTypeFormatter();
-            List<MediaTypeFormatter> formatters = new List<MediaTypeFormatter>() { formatter1, formatter2 };
+            List<MediaTypeFormatter> formatters = new List<MediaTypeFormatter>()
+            {
+                formatter1,
+                formatter2,
+            };
             MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(formatters);
 
             // Act

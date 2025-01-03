@@ -27,7 +27,10 @@ namespace System.Xml.XmlResolverTests
         public void XmlResolverResolveUriWithRss091DTD()
         {
             var resolver = new XmlPreloadedResolver(XmlKnownDtds.Rss091);
-            Uri result = resolver.ResolveUri(new Uri("https://JustAUri"), "-//Netscape Communications//DTD RSS 0.91//EN");
+            Uri result = resolver.ResolveUri(
+                new Uri("https://JustAUri"),
+                "-//Netscape Communications//DTD RSS 0.91//EN"
+            );
             Assert.Equal("-//Netscape Communications//DTD RSS 0.91//EN", result.OriginalString);
 
             result = resolver.ResolveUri(new Uri("https://JustAUri"), "-//Invalid//Uri");
@@ -38,7 +41,10 @@ namespace System.Xml.XmlResolverTests
         public void XmlResolverResolveUriWithXhtml10DTD()
         {
             var resolver = new XmlPreloadedResolver(XmlKnownDtds.Xhtml10);
-            Uri result = resolver.ResolveUri(new Uri("https://JustAUri"), "-//W3C//DTD XHTML 1.0 Frameset//EN");
+            Uri result = resolver.ResolveUri(
+                new Uri("https://JustAUri"),
+                "-//W3C//DTD XHTML 1.0 Frameset//EN"
+            );
             Assert.Equal("-//W3C//DTD XHTML 1.0 Frameset//EN", result.OriginalString);
 
             result = resolver.ResolveUri(new Uri("https://JustAUri"), "-//Invalid//Uri");

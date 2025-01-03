@@ -16,6 +16,5 @@ namespace ILCompiler.DependencyAnalysis
                 return _initialInterfaceDispatchStubNode;
             }
         }
-
     }
 }

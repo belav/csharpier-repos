@@ -7,17 +7,16 @@ using System;
 namespace System.Workflow.Runtime.Tracking
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class PreviousTrackingServiceAttribute : Attribute
     {
         string assemblyQualifiedName;
 
         public string AssemblyQualifiedName
         {
-            get
-            {
-                return this.assemblyQualifiedName;
-            }
+            get { return this.assemblyQualifiedName; }
         }
 
         // The parameter must be the exact TypeOfPreviousTrackingService.AssemblyQualifiedTypeName.
@@ -29,5 +28,4 @@ namespace System.Workflow.Runtime.Tracking
             this.assemblyQualifiedName = assemblyQualifiedName;
         }
     }
-    
 }

@@ -21,26 +21,40 @@ namespace Microsoft.CodeAnalysis.CSharp.ExternalAccess.Pythia
     [ExtensionOrder(Before = nameof(DeclarationNameRecommender))]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class PythiaDeclarationNameRecommender([Import(AllowDefault = true)] Lazy<IPythiaDeclarationNameRecommenderImplementation>? implementation) : IDeclarationNameRecommender
+    internal sealed class PythiaDeclarationNameRecommender(
+        [Import(AllowDefault = true)]
+            Lazy<IPythiaDeclarationNameRecommenderImplementation>? implementation
+    ) : IDeclarationNameRecommender
     {
-        private readonly Lazy<IPythiaDeclarationNameRecommenderImplementation>? _lazyImplementation = implementation;
+        private readonly Lazy<IPythiaDeclarationNameRecommenderImplementation>? _lazyImplementation =
+            implementation;
 
         public async Task<ImmutableArray<(string name, Glyph glyph)>> ProvideRecommendedNamesAsync(
             CompletionContext completionContext,
             Document document,
             CSharpSyntaxContext syntaxContext,
             NameDeclarationInfo nameInfo,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (_lazyImplementation is null || nameInfo.PossibleSymbolKinds.IsEmpty)
                 return ImmutableArray<(string, Glyph)>.Empty;
 
             var context = new PythiaDeclarationNameContext(syntaxContext);
-            var result = await _lazyImplementation.Value.ProvideRecommendationsAsync(context, cancellationToken).ConfigureAwait(false);
+            var result = await _lazyImplementation
+                .Value.ProvideRecommendationsAsync(context, cancellationToken)
+                .ConfigureAwait(false);
 
             // We just pick the first possible symbol kind for glyph.
-            return result.SelectAsArray(
-                name => (name, NameDeclarationInfo.GetGlyph(NameDeclarationInfo.GetSymbolKind(nameInfo.PossibleSymbolKinds[0]), nameInfo.DeclaredAccessibility)));
+            return result.SelectAsArray(name =>
+                (
+                    name,
+                    NameDeclarationInfo.GetGlyph(
+                        NameDeclarationInfo.GetSymbolKind(nameInfo.PossibleSymbolKinds[0]),
+                        nameInfo.DeclaredAccessibility
+                    )
+                )
+            );
         }
     }
 }

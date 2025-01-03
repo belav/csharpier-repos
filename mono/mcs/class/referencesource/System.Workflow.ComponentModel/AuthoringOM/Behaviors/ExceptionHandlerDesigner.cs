@@ -1,13 +1,13 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
     using System.Workflow.ComponentModel.Design;
 
     #region Class FaultHandlerDesigner
@@ -19,8 +19,18 @@ namespace System.Workflow.ComponentModel.Design
         {
             base.PreFilterProperties(properties);
             if (properties["InitializeField"] == null)
-                properties["InitializeField"] = TypeDescriptor.CreateProperty(GetType(), "InitializeField", typeof(bool), new Attribute[] { DesignerSerializationVisibilityAttribute.Hidden, BrowsableAttribute.No });
+                properties["InitializeField"] = TypeDescriptor.CreateProperty(
+                    GetType(),
+                    "InitializeField",
+                    typeof(bool),
+                    new Attribute[]
+                    {
+                        DesignerSerializationVisibilityAttribute.Hidden,
+                        BrowsableAttribute.No,
+                    }
+                );
         }
+
         public override ReadOnlyCollection<DesignerView> Views
         {
             get
@@ -29,10 +39,7 @@ namespace System.Workflow.ComponentModel.Design
                 foreach (DesignerView view in base.Views)
                 {
                     // disable the fault handlers, cancellation handler and compensation handler
-                    if ((view.ViewId != 2) &&
-                            (view.ViewId != 3) &&
-                            (view.ViewId != 4)
-                        )
+                    if ((view.ViewId != 2) && (view.ViewId != 3) && (view.ViewId != 4))
                         views.Add(view);
                 }
                 return new ReadOnlyCollection<DesignerView>(views);
@@ -43,26 +50,22 @@ namespace System.Workflow.ComponentModel.Design
         #region Properties and Methods
         private bool InitializeField
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
-
 
         public override bool CanExpandCollapse
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         protected override void OnActivityChanged(ActivityChangedEventArgs e)
         {
             base.OnActivityChanged(e);
 
-            if (e.Member != null && string.Equals(e.Member.Name, "FaultType", StringComparison.Ordinal))
+            if (
+                e.Member != null
+                && string.Equals(e.Member.Name, "FaultType", StringComparison.Ordinal)
+            )
                 TypeDescriptor.Refresh(e.Activity);
         }
 

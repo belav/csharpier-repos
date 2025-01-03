@@ -10,58 +10,58 @@
  * Copyright (c) 1999 Microsoft Corporation
  */
 
-namespace System.Web.Security {
-    using System.Runtime.Serialization;
-    using System.Web;
-    using System.Web.Util;
+namespace System.Web.Security
+{
     using System.Collections;
-    using System.Web.Configuration;
-    using System.IO;
-    using System.Security.Principal;
-    using System.Security.Permissions;
-    using System.Web.Management;
-    using System.Web.Hosting;
     using System.Collections.Generic;
-
-
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Web;
+    using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Management;
+    using System.Web.Util;
 
     /// <devdoc>
     ///    This module provides URL based
     ///    authorization services for allowing or denying access to specified resources
     /// </devdoc>
-    public sealed class UrlAuthorizationModule : IHttpModule {
-
-
+    public sealed class UrlAuthorizationModule : IHttpModule
+    {
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of the <see cref='System.Web.Security.UrlAuthorizationModule'/>
         ///       class.
         ///     </para>
         /// </devdoc>
-        [SecurityPermission(SecurityAction.Demand, Unrestricted=true)]
-        public UrlAuthorizationModule() {
-        }
-
+        [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
+        public UrlAuthorizationModule() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Init(HttpApplication app) {
+        public void Init(HttpApplication app)
+        {
             app.AuthorizeRequest += new EventHandler(this.OnEnter);
         }
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Dispose() {
-        }
+        public void Dispose() { }
 
         private static bool s_EnabledDetermined;
         private static bool s_Enabled;
 
-        [SecurityPermission(SecurityAction.Demand, Unrestricted=true)]
-        public static bool CheckUrlAccessForPrincipal(String virtualPath, IPrincipal user, string verb) {
+        [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
+        public static bool CheckUrlAccessForPrincipal(
+            String virtualPath,
+            IPrincipal user,
+            string verb
+        )
+        {
             if (virtualPath == null)
                 throw new ArgumentNullException("virtualPath");
             if (user == null)
@@ -73,24 +73,34 @@ namespace System.Web.Security {
             VirtualPath vPath = VirtualPath.Create(virtualPath);
 
             if (!vPath.IsWithinAppRoot)
-                throw new ArgumentException(SR.GetString(SR.Virtual_path_outside_application_not_supported), "virtualPath");
+                throw new ArgumentException(
+                    SR.GetString(SR.Virtual_path_outside_application_not_supported),
+                    "virtualPath"
+                );
 
-            if (!s_EnabledDetermined) {
-                if( !HttpRuntime.UseIntegratedPipeline) {
+            if (!s_EnabledDetermined)
+            {
+                if (!HttpRuntime.UseIntegratedPipeline)
+                {
                     HttpModulesSection modulesSection = RuntimeConfig.GetConfig().HttpModules;
                     int len = modulesSection.Modules.Count;
-                    for (int iter = 0; iter < len; iter++) {
+                    for (int iter = 0; iter < len; iter++)
+                    {
                         HttpModuleAction module = modulesSection.Modules[iter];
-                        if (Type.GetType(module.Type, false) == typeof(UrlAuthorizationModule)) {
+                        if (Type.GetType(module.Type, false) == typeof(UrlAuthorizationModule))
+                        {
                             s_Enabled = true;
                             break;
                         }
                     }
                 }
-                else {
+                else
+                {
                     List<ModuleConfigurationInfo> modules = HttpApplication.IntegratedModuleList;
-                    foreach (ModuleConfigurationInfo mod in modules) {
-                        if (Type.GetType(mod.Type, false) == typeof(UrlAuthorizationModule)) {
+                    foreach (ModuleConfigurationInfo mod in modules)
+                    {
+                        if (Type.GetType(mod.Type, false) == typeof(UrlAuthorizationModule))
+                        {
                             s_Enabled = true;
                             break;
                         }
@@ -106,14 +116,22 @@ namespace System.Web.Security {
             return settings.EveryoneAllowed || settings.IsUserAllowed(user, verb);
         }
 
-        internal static void ReportUrlAuthorizationFailure(HttpContext context, object webEventSource) {
+        internal static void ReportUrlAuthorizationFailure(
+            HttpContext context,
+            object webEventSource
+        )
+        {
             // Deny access
             context.Response.StatusCode = 401;
             WriteErrorMessage(context);
 
-            if (context.User != null && context.User.Identity.IsAuthenticated) {
+            if (context.User != null && context.User.Identity.IsAuthenticated)
+            {
                 // We don't raise failure audit event for anonymous user
-                WebBaseEvent.RaiseSystemEvent(webEventSource, WebEventCodes.AuditUrlAuthorizationFailure);
+                WebBaseEvent.RaiseSystemEvent(
+                    webEventSource,
+                    WebEventCodes.AuditUrlAuthorizationFailure
+                );
             }
             context.ApplicationInstance.CompleteRequest();
         }
@@ -123,9 +141,10 @@ namespace System.Web.Security {
         ////////////////////////////////////////////////////////////
         // Module Enter: Get the authorization configuration section
         //    and see if this user is allowed or not
-        void OnEnter(Object source, EventArgs eventArgs) {
-            HttpApplication    app;
-            HttpContext        context;
+        void OnEnter(Object source, EventArgs eventArgs)
+        {
+            HttpApplication app;
+            HttpContext context;
 
             app = (HttpApplication)source;
             context = app.Context;
@@ -140,10 +159,12 @@ namespace System.Web.Security {
             AuthorizationSection settings = RuntimeConfig.GetConfig(context).Authorization;
 
             // Check if the user is allowed, or the request is for the login page
-            if (!settings.EveryoneAllowed && !settings.IsUserAllowed(context.User, context.Request.RequestType))
+            if (
+                !settings.EveryoneAllowed
+                && !settings.IsUserAllowed(context.User, context.Request.RequestType)
+            )
             {
                 ReportUrlAuthorizationFailure(context, this);
-
             }
             else
             {
@@ -155,14 +176,16 @@ namespace System.Web.Security {
         }
 
         /////////////////////////////////////////////////////////////////////////////
-        static void WriteErrorMessage(HttpContext context) {
+        static void WriteErrorMessage(HttpContext context)
+        {
             context.Response.Write(UrlAuthFailedErrorFormatter.GetErrorText());
             // In Integrated pipeline, ask for handler headers to be generated.  This would be unnecessary
             // if we just threw an access denied exception, and used the standard error mechanism
             context.Response.GenerateResponseHeadersForHandler();
         }
 
-        static internal bool RequestRequiresAuthorization(HttpContext context) {
+        internal static bool RequestRequiresAuthorization(HttpContext context)
+        {
             if (context.SkipAuthorization)
                 return false;
 
@@ -170,22 +193,24 @@ namespace System.Web.Security {
 
             // Check if the anonymous user is allowed
             if (_AnonUser == null)
-                _AnonUser = new GenericPrincipal(new GenericIdentity(String.Empty, String.Empty), new String[0]);
+                _AnonUser = new GenericPrincipal(
+                    new GenericIdentity(String.Empty, String.Empty),
+                    new String[0]
+                );
 
             return !settings.IsUserAllowed(_AnonUser, context.Request.RequestType);
         }
 
         internal static bool IsUserAllowedToPath(HttpContext context, VirtualPath virtualPath)
         {
-            AuthorizationSection settings = RuntimeConfig.GetConfig(context, virtualPath).Authorization;
+            AuthorizationSection settings = RuntimeConfig
+                .GetConfig(context, virtualPath)
+                .Authorization;
 
-            return settings.EveryoneAllowed || settings.IsUserAllowed(context.User, context.Request.RequestType);
+            return settings.EveryoneAllowed
+                || settings.IsUserAllowed(context.User, context.Request.RequestType);
         }
 
         static GenericPrincipal _AnonUser;
     }
 }
-
-
-
-

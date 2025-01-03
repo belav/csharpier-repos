@@ -16,12 +16,10 @@ namespace System.Buffers
         public AnyByteSearchValues(ReadOnlySpan<byte> values) =>
             IndexOfAnyAsciiSearcher.ComputeAnyByteState(values, out _state);
 
-        internal override byte[] GetValues() =>
-            _state.Lookup.GetByteValues();
+        internal override byte[] GetValues() => _state.Lookup.GetByteValues();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal override bool ContainsCore(byte value) =>
-            _state.Lookup.Contains(value);
+        internal override bool ContainsCore(byte value) => _state.Lookup.Contains(value);
 
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd))]
@@ -29,7 +27,10 @@ namespace System.Buffers
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal override int IndexOfAny(ReadOnlySpan<byte> span) =>
             IndexOfAnyAsciiSearcher.IndexOfAnyVectorizedAnyByte<IndexOfAnyAsciiSearcher.DontNegate>(
-                ref MemoryMarshal.GetReference(span), span.Length, ref _state);
+                ref MemoryMarshal.GetReference(span),
+                span.Length,
+                ref _state
+            );
 
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd))]
@@ -37,7 +38,10 @@ namespace System.Buffers
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal override int IndexOfAnyExcept(ReadOnlySpan<byte> span) =>
             IndexOfAnyAsciiSearcher.IndexOfAnyVectorizedAnyByte<IndexOfAnyAsciiSearcher.Negate>(
-                ref MemoryMarshal.GetReference(span), span.Length, ref _state);
+                ref MemoryMarshal.GetReference(span),
+                span.Length,
+                ref _state
+            );
 
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd))]
@@ -45,7 +49,10 @@ namespace System.Buffers
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal override int LastIndexOfAny(ReadOnlySpan<byte> span) =>
             IndexOfAnyAsciiSearcher.LastIndexOfAnyVectorizedAnyByte<IndexOfAnyAsciiSearcher.DontNegate>(
-                ref MemoryMarshal.GetReference(span), span.Length, ref _state);
+                ref MemoryMarshal.GetReference(span),
+                span.Length,
+                ref _state
+            );
 
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd))]
@@ -53,6 +60,9 @@ namespace System.Buffers
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal override int LastIndexOfAnyExcept(ReadOnlySpan<byte> span) =>
             IndexOfAnyAsciiSearcher.LastIndexOfAnyVectorizedAnyByte<IndexOfAnyAsciiSearcher.Negate>(
-                ref MemoryMarshal.GetReference(span), span.Length, ref _state);
+                ref MemoryMarshal.GetReference(span),
+                span.Length,
+                ref _state
+            );
     }
 }

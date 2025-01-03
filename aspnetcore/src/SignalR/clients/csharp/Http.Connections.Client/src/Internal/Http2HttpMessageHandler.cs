@@ -15,9 +15,13 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
 internal class Http2HttpMessageHandler : DelegatingHandler
 {
-    public Http2HttpMessageHandler(HttpMessageHandler inner) : base(inner) { }
+    public Http2HttpMessageHandler(HttpMessageHandler inner)
+        : base(inner) { }
 
-    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
 #if NETSTANDARD2_1_OR_GREATER || NET7_0_OR_GREATER
         // Check just in case HttpRequestMessage defaults to 3 or higher for some reason

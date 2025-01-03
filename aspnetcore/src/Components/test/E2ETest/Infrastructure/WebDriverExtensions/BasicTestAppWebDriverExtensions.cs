@@ -9,12 +9,14 @@ namespace Microsoft.AspNetCore.Components.E2ETest;
 
 internal static class BasicTestAppWebDriverExtensions
 {
-    public static IWebElement MountTestComponent<TComponent>(this IWebDriver browser) where TComponent : IComponent
+    public static IWebElement MountTestComponent<TComponent>(this IWebDriver browser)
+        where TComponent : IComponent
     {
         var componentType = typeof(TComponent);
-        var componentTypeName = componentType.Assembly == typeof(BasicTestApp.Program).Assembly ?
-            componentType.FullName :
-            componentType.AssemblyQualifiedName;
+        var componentTypeName =
+            componentType.Assembly == typeof(BasicTestApp.Program).Assembly
+                ? componentType.FullName
+                : componentType.AssemblyQualifiedName;
         var testSelector = browser.WaitUntilTestSelectorReady();
         testSelector.SelectByValue("none");
         testSelector.SelectByValue(componentTypeName);

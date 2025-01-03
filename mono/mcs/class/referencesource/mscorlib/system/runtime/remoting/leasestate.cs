@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //+----------------------------------------------------------------------------
 //
@@ -28,4 +28,4 @@ namespace System.Runtime.Remoting.Lifetime
         Renewing = 3,
         Expired = 4,
     }
-} 
+}

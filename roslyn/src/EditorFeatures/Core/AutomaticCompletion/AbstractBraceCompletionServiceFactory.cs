@@ -15,16 +15,29 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
         private readonly ImmutableArray<IBraceCompletionService> _braceCompletionServices;
 
         protected AbstractBraceCompletionServiceFactory(
-            IEnumerable<IBraceCompletionService> braceCompletionServices)
+            IEnumerable<IBraceCompletionService> braceCompletionServices
+        )
         {
             _braceCompletionServices = braceCompletionServices.ToImmutableArray();
         }
 
-        public IBraceCompletionService? TryGetService(ParsedDocument document, int openingPosition, char openingBrace, CancellationToken cancellationToken)
+        public IBraceCompletionService? TryGetService(
+            ParsedDocument document,
+            int openingPosition,
+            char openingBrace,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var service in _braceCompletionServices)
             {
-                if (service.CanProvideBraceCompletion(openingBrace, openingPosition, document, cancellationToken))
+                if (
+                    service.CanProvideBraceCompletion(
+                        openingBrace,
+                        openingPosition,
+                        document,
+                        cancellationToken
+                    )
+                )
                 {
                     return service;
                 }

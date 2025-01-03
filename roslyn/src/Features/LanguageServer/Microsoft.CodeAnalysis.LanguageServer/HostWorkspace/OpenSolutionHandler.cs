@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.HostWorkspace;
 
 [ExportCSharpVisualBasicStatelessLspService(typeof(OpenSolutionHandler)), Shared]
 [Method("solution/open")]
-internal class OpenSolutionHandler : ILspServiceNotificationHandler<OpenSolutionHandler.NotificationParams>
+internal class OpenSolutionHandler
+    : ILspServiceNotificationHandler<OpenSolutionHandler.NotificationParams>
 {
     private readonly LanguageServerProjectSystem _projectSystem;
 
@@ -26,7 +27,11 @@ internal class OpenSolutionHandler : ILspServiceNotificationHandler<OpenSolution
     public bool MutatesSolutionState => false;
     public bool RequiresLSPSolution => false;
 
-    Task INotificationHandler<NotificationParams, RequestContext>.HandleNotificationAsync(NotificationParams request, RequestContext requestContext, CancellationToken cancellationToken)
+    Task INotificationHandler<NotificationParams, RequestContext>.HandleNotificationAsync(
+        NotificationParams request,
+        RequestContext requestContext,
+        CancellationToken cancellationToken
+    )
     {
         return _projectSystem.OpenSolutionAsync(request.Solution.LocalPath);
     }

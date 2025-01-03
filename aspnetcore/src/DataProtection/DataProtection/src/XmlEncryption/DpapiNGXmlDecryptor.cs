@@ -24,9 +24,7 @@ public sealed class DpapiNGXmlDecryptor : IXmlDecryptor
     /// Creates a new instance of a <see cref="DpapiNGXmlDecryptor"/>.
     /// </summary>
     public DpapiNGXmlDecryptor()
-        : this(services: null)
-    {
-    }
+        : this(services: null) { }
 
     /// <summary>
     /// Creates a new instance of a <see cref="DpapiNGXmlDecryptor"/>.
@@ -56,13 +54,18 @@ public sealed class DpapiNGXmlDecryptor : IXmlDecryptor
             //   <value>{base64}</value>
             // </encryptedKey>
 
-            var protectedSecret = Convert.FromBase64String((string)encryptedElement.Element("value")!);
+            var protectedSecret = Convert.FromBase64String(
+                (string)encryptedElement.Element("value")!
+            );
             if (_logger.IsDebugLevelEnabled())
             {
                 string? protectionDescriptorRule;
                 try
                 {
-                    protectionDescriptorRule = DpapiSecretSerializerHelper.GetRuleFromDpapiNGProtectedPayload(protectedSecret);
+                    protectionDescriptorRule =
+                        DpapiSecretSerializerHelper.GetRuleFromDpapiNGProtectedPayload(
+                            protectedSecret
+                        );
                 }
                 catch
                 {

@@ -21,23 +21,27 @@ namespace System.Web.Mvc.Html
             new Dictionary<DataBoundControlMode, string>
             {
                 { DataBoundControlMode.ReadOnly, "DisplayTemplates" },
-                { DataBoundControlMode.Edit, "EditorTemplates" }
+                { DataBoundControlMode.Edit, "EditorTemplates" },
             };
 
-        private static readonly Dictionary<string, Func<HtmlHelper, string>> _defaultDisplayActions =
-            new Dictionary<string, Func<HtmlHelper, string>>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "EmailAddress", DefaultDisplayTemplates.EmailAddressTemplate },
-                { "HiddenInput", DefaultDisplayTemplates.HiddenInputTemplate },
-                { "Html", DefaultDisplayTemplates.HtmlTemplate },
-                { "Text", DefaultDisplayTemplates.StringTemplate },
-                { "Url", DefaultDisplayTemplates.UrlTemplate },
-                { "Collection", DefaultDisplayTemplates.CollectionTemplate },
-                { typeof(bool).Name, DefaultDisplayTemplates.BooleanTemplate },
-                { typeof(decimal).Name, DefaultDisplayTemplates.DecimalTemplate },
-                { typeof(string).Name, DefaultDisplayTemplates.StringTemplate },
-                { typeof(object).Name, DefaultDisplayTemplates.ObjectTemplate },
-            };
+        private static readonly Dictionary<
+            string,
+            Func<HtmlHelper, string>
+        > _defaultDisplayActions = new Dictionary<string, Func<HtmlHelper, string>>(
+            StringComparer.OrdinalIgnoreCase
+        )
+        {
+            { "EmailAddress", DefaultDisplayTemplates.EmailAddressTemplate },
+            { "HiddenInput", DefaultDisplayTemplates.HiddenInputTemplate },
+            { "Html", DefaultDisplayTemplates.HtmlTemplate },
+            { "Text", DefaultDisplayTemplates.StringTemplate },
+            { "Url", DefaultDisplayTemplates.UrlTemplate },
+            { "Collection", DefaultDisplayTemplates.CollectionTemplate },
+            { typeof(bool).Name, DefaultDisplayTemplates.BooleanTemplate },
+            { typeof(decimal).Name, DefaultDisplayTemplates.DecimalTemplate },
+            { typeof(string).Name, DefaultDisplayTemplates.StringTemplate },
+            { typeof(object).Name, DefaultDisplayTemplates.ObjectTemplate },
+        };
 
         private static readonly Dictionary<string, Func<HtmlHelper, string>> _defaultEditorActions =
             new Dictionary<string, Func<HtmlHelper, string>>(StringComparer.OrdinalIgnoreCase)
@@ -69,24 +73,54 @@ namespace System.Web.Mvc.Html
 
         internal static string CacheItemId = Guid.NewGuid().ToString();
 
-        internal delegate string ExecuteTemplateDelegate(HtmlHelper html, ViewDataDictionary viewData, string templateName,
-                                                         DataBoundControlMode mode, GetViewNamesDelegate getViewNames,
-                                                         GetDefaultActionsDelegate getDefaultActions);
+        internal delegate string ExecuteTemplateDelegate(
+            HtmlHelper html,
+            ViewDataDictionary viewData,
+            string templateName,
+            DataBoundControlMode mode,
+            GetViewNamesDelegate getViewNames,
+            GetDefaultActionsDelegate getDefaultActions
+        );
 
-        internal delegate Dictionary<string, Func<HtmlHelper, string>> GetDefaultActionsDelegate(DataBoundControlMode mode);
+        internal delegate Dictionary<string, Func<HtmlHelper, string>> GetDefaultActionsDelegate(
+            DataBoundControlMode mode
+        );
 
-        internal delegate IEnumerable<string> GetViewNamesDelegate(ModelMetadata metadata, params string[] templateHints);
+        internal delegate IEnumerable<string> GetViewNamesDelegate(
+            ModelMetadata metadata,
+            params string[] templateHints
+        );
 
-        internal delegate string TemplateHelperDelegate(HtmlHelper html, ModelMetadata metadata, string htmlFieldName,
-                                                        string templateName, DataBoundControlMode mode, object additionalViewData);
+        internal delegate string TemplateHelperDelegate(
+            HtmlHelper html,
+            ModelMetadata metadata,
+            string htmlFieldName,
+            string templateName,
+            DataBoundControlMode mode,
+            object additionalViewData
+        );
 
-        internal static string ExecuteTemplate(HtmlHelper html, ViewDataDictionary viewData, string templateName, DataBoundControlMode mode, GetViewNamesDelegate getViewNames, GetDefaultActionsDelegate getDefaultActions)
+        internal static string ExecuteTemplate(
+            HtmlHelper html,
+            ViewDataDictionary viewData,
+            string templateName,
+            DataBoundControlMode mode,
+            GetViewNamesDelegate getViewNames,
+            GetDefaultActionsDelegate getDefaultActions
+        )
         {
             Dictionary<string, ActionCacheItem> actionCache = GetActionCache(html);
             Dictionary<string, Func<HtmlHelper, string>> defaultActions = getDefaultActions(mode);
             string modeViewPath = _modeViewPaths[mode];
 
-            foreach (string viewName in getViewNames(viewData.ModelMetadata, templateName, viewData.ModelMetadata.TemplateHint, viewData.ModelMetadata.DataTypeName))
+            foreach (
+                string viewName in getViewNames(
+                    viewData.ModelMetadata,
+                    templateName,
+                    viewData.ModelMetadata.TemplateHint,
+                    viewData.ModelMetadata.DataTypeName
+                )
+            )
             {
                 string fullViewName = modeViewPath + "/" + viewName;
                 ActionCacheItem cacheItem;
@@ -100,14 +134,29 @@ namespace System.Web.Mvc.Html
                 }
                 else
                 {
-                    ViewEngineResult viewEngineResult = ViewEngines.Engines.FindPartialView(html.ViewContext, fullViewName);
+                    ViewEngineResult viewEngineResult = ViewEngines.Engines.FindPartialView(
+                        html.ViewContext,
+                        fullViewName
+                    );
                     if (viewEngineResult.View != null)
                     {
-                        actionCache[fullViewName] = new ActionCacheViewItem { ViewName = fullViewName };
+                        actionCache[fullViewName] = new ActionCacheViewItem
+                        {
+                            ViewName = fullViewName,
+                        };
 
                         using (StringWriter writer = new StringWriter(CultureInfo.InvariantCulture))
                         {
-                            viewEngineResult.View.Render(new ViewContext(html.ViewContext, viewEngineResult.View, viewData, html.ViewContext.TempData, writer), writer);
+                            viewEngineResult.View.Render(
+                                new ViewContext(
+                                    html.ViewContext,
+                                    viewEngineResult.View,
+                                    viewData,
+                                    html.ViewContext.TempData,
+                                    writer
+                                ),
+                                writer
+                            );
                             return writer.ToString();
                         }
                     }
@@ -115,7 +164,10 @@ namespace System.Web.Mvc.Html
                     Func<HtmlHelper, string> defaultAction;
                     if (defaultActions.TryGetValue(viewName, out defaultAction))
                     {
-                        actionCache[fullViewName] = new ActionCacheCodeItem { Action = defaultAction };
+                        actionCache[fullViewName] = new ActionCacheCodeItem
+                        {
+                            Action = defaultAction,
+                        };
                         return defaultAction(MakeHtmlHelper(html, viewData));
                     }
 
@@ -127,7 +179,9 @@ namespace System.Web.Mvc.Html
                 String.Format(
                     CultureInfo.CurrentCulture,
                     MvcResources.TemplateHelpers_NoTemplate,
-                    viewData.ModelMetadata.RealModelType.FullName));
+                    viewData.ModelMetadata.RealModelType.FullName
+                )
+            );
         }
 
         internal static Dictionary<string, ActionCacheItem> GetActionCache(HtmlHelper html)
@@ -148,12 +202,19 @@ namespace System.Web.Mvc.Html
             return result;
         }
 
-        internal static Dictionary<string, Func<HtmlHelper, string>> GetDefaultActions(DataBoundControlMode mode)
+        internal static Dictionary<string, Func<HtmlHelper, string>> GetDefaultActions(
+            DataBoundControlMode mode
+        )
         {
-            return mode == DataBoundControlMode.ReadOnly ? _defaultDisplayActions : _defaultEditorActions;
+            return mode == DataBoundControlMode.ReadOnly
+                ? _defaultDisplayActions
+                : _defaultEditorActions;
         }
 
-        internal static IEnumerable<string> GetViewNames(ModelMetadata metadata, params string[] templateHints)
+        internal static IEnumerable<string> GetViewNames(
+            ModelMetadata metadata,
+            params string[] templateHints
+        )
         {
             foreach (string templateHint in templateHints.Where(s => !String.IsNullOrEmpty(s)))
             {
@@ -161,7 +222,8 @@ namespace System.Web.Mvc.Html
             }
 
             // We don't want to search for Nullable<T>, we want to search for T (which should handle both T and Nullable<T>)
-            Type fieldType = Nullable.GetUnderlyingType(metadata.RealModelType) ?? metadata.RealModelType;
+            Type fieldType =
+                Nullable.GetUnderlyingType(metadata.RealModelType) ?? metadata.RealModelType;
 
             // TODO: Make better string names for generic types
             yield return fieldType.Name;
@@ -217,49 +279,121 @@ namespace System.Web.Mvc.Html
             }
         }
 
-        internal static MvcHtmlString Template(HtmlHelper html, string expression, string templateName, string htmlFieldName, DataBoundControlMode mode, object additionalViewData)
+        internal static MvcHtmlString Template(
+            HtmlHelper html,
+            string expression,
+            string templateName,
+            string htmlFieldName,
+            DataBoundControlMode mode,
+            object additionalViewData
+        )
         {
-            return MvcHtmlString.Create(Template(html, expression, templateName, htmlFieldName, mode, additionalViewData, TemplateHelper));
+            return MvcHtmlString.Create(
+                Template(
+                    html,
+                    expression,
+                    templateName,
+                    htmlFieldName,
+                    mode,
+                    additionalViewData,
+                    TemplateHelper
+                )
+            );
         }
 
         // Unit testing version
-        internal static string Template(HtmlHelper html, string expression, string templateName, string htmlFieldName,
-                                        DataBoundControlMode mode, object additionalViewData, TemplateHelperDelegate templateHelper)
+        internal static string Template(
+            HtmlHelper html,
+            string expression,
+            string templateName,
+            string htmlFieldName,
+            DataBoundControlMode mode,
+            object additionalViewData,
+            TemplateHelperDelegate templateHelper
+        )
         {
-            return templateHelper(html,
-                                  ModelMetadata.FromStringExpression(expression, html.ViewData),
-                                  htmlFieldName ?? ExpressionHelper.GetExpressionText(expression),
-                                  templateName,
-                                  mode,
-                                  additionalViewData);
+            return templateHelper(
+                html,
+                ModelMetadata.FromStringExpression(expression, html.ViewData),
+                htmlFieldName ?? ExpressionHelper.GetExpressionText(expression),
+                templateName,
+                mode,
+                additionalViewData
+            );
         }
 
-        internal static MvcHtmlString TemplateFor<TContainer, TValue>(this HtmlHelper<TContainer> html, Expression<Func<TContainer, TValue>> expression,
-                                                                      string templateName, string htmlFieldName, DataBoundControlMode mode,
-                                                                      object additionalViewData)
+        internal static MvcHtmlString TemplateFor<TContainer, TValue>(
+            this HtmlHelper<TContainer> html,
+            Expression<Func<TContainer, TValue>> expression,
+            string templateName,
+            string htmlFieldName,
+            DataBoundControlMode mode,
+            object additionalViewData
+        )
         {
-            return MvcHtmlString.Create(TemplateFor(html, expression, templateName, htmlFieldName, mode, additionalViewData, TemplateHelper));
+            return MvcHtmlString.Create(
+                TemplateFor(
+                    html,
+                    expression,
+                    templateName,
+                    htmlFieldName,
+                    mode,
+                    additionalViewData,
+                    TemplateHelper
+                )
+            );
         }
 
         // Unit testing version
-        internal static string TemplateFor<TContainer, TValue>(this HtmlHelper<TContainer> html, Expression<Func<TContainer, TValue>> expression,
-                                                               string templateName, string htmlFieldName, DataBoundControlMode mode,
-                                                               object additionalViewData, TemplateHelperDelegate templateHelper)
+        internal static string TemplateFor<TContainer, TValue>(
+            this HtmlHelper<TContainer> html,
+            Expression<Func<TContainer, TValue>> expression,
+            string templateName,
+            string htmlFieldName,
+            DataBoundControlMode mode,
+            object additionalViewData,
+            TemplateHelperDelegate templateHelper
+        )
         {
-            return templateHelper(html,
-                                  ModelMetadata.FromLambdaExpression(expression, html.ViewData),
-                                  htmlFieldName ?? ExpressionHelper.GetExpressionText(expression),
-                                  templateName,
-                                  mode,
-                                  additionalViewData);
+            return templateHelper(
+                html,
+                ModelMetadata.FromLambdaExpression(expression, html.ViewData),
+                htmlFieldName ?? ExpressionHelper.GetExpressionText(expression),
+                templateName,
+                mode,
+                additionalViewData
+            );
         }
 
-        internal static string TemplateHelper(HtmlHelper html, ModelMetadata metadata, string htmlFieldName, string templateName, DataBoundControlMode mode, object additionalViewData)
+        internal static string TemplateHelper(
+            HtmlHelper html,
+            ModelMetadata metadata,
+            string htmlFieldName,
+            string templateName,
+            DataBoundControlMode mode,
+            object additionalViewData
+        )
         {
-            return TemplateHelper(html, metadata, htmlFieldName, templateName, mode, additionalViewData, ExecuteTemplate);
+            return TemplateHelper(
+                html,
+                metadata,
+                htmlFieldName,
+                templateName,
+                mode,
+                additionalViewData,
+                ExecuteTemplate
+            );
         }
 
-        internal static string TemplateHelper(HtmlHelper html, ModelMetadata metadata, string htmlFieldName, string templateName, DataBoundControlMode mode, object additionalViewData, ExecuteTemplateDelegate executeTemplate)
+        internal static string TemplateHelper(
+            HtmlHelper html,
+            ModelMetadata metadata,
+            string htmlFieldName,
+            string templateName,
+            DataBoundControlMode mode,
+            object additionalViewData,
+            ExecuteTemplateDelegate executeTemplate
+        )
         {
             // TODO: Convert Editor into Display if model.IsReadOnly is true? Need to be careful about this because
             // the Model property on the ViewPage/ViewUserControl is get-only, so the type descriptor automatically
@@ -276,16 +410,27 @@ namespace System.Web.Mvc.Html
                 formattedModelValue = metadata.NullDisplayText;
             }
 
-            string formatString = mode == DataBoundControlMode.ReadOnly ? metadata.DisplayFormatString : metadata.EditFormatString;
+            string formatString =
+                mode == DataBoundControlMode.ReadOnly
+                    ? metadata.DisplayFormatString
+                    : metadata.EditFormatString;
             if (metadata.Model != null && !String.IsNullOrEmpty(formatString))
             {
-                formattedModelValue = String.Format(CultureInfo.CurrentCulture, formatString, metadata.Model);
+                formattedModelValue = String.Format(
+                    CultureInfo.CurrentCulture,
+                    formatString,
+                    metadata.Model
+                );
             }
 
             // Normally this shouldn't happen, unless someone writes their own custom Object templates which
             // don't check to make sure that the object hasn't already been displayed
             object visitedObjectsKey = metadata.Model ?? metadata.RealModelType;
-            if (html.ViewDataContainer.ViewData.TemplateInfo.VisitedObjects.Contains(visitedObjectsKey))
+            if (
+                html.ViewDataContainer.ViewData.TemplateInfo.VisitedObjects.Contains(
+                    visitedObjectsKey
+                )
+            )
             {
                 // DDB #224750
                 return String.Empty;
@@ -298,14 +443,22 @@ namespace System.Web.Mvc.Html
                 TemplateInfo = new TemplateInfo
                 {
                     FormattedModelValue = formattedModelValue,
-                    HtmlFieldPrefix = html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(htmlFieldName),
-                    VisitedObjects = new HashSet<object>(html.ViewContext.ViewData.TemplateInfo.VisitedObjects), // DDB #224750
-                }
+                    HtmlFieldPrefix = html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
+                        htmlFieldName
+                    ),
+                    VisitedObjects = new HashSet<object>(
+                        html.ViewContext.ViewData.TemplateInfo.VisitedObjects
+                    ), // DDB #224750
+                },
             };
 
             if (additionalViewData != null)
             {
-                foreach (KeyValuePair<string, object> kvp in TypeHelper.ObjectToDictionary(additionalViewData))
+                foreach (
+                    KeyValuePair<string, object> kvp in TypeHelper.ObjectToDictionary(
+                        additionalViewData
+                    )
+                )
                 {
                     viewData[kvp.Key] = kvp.Value;
                 }
@@ -313,7 +466,14 @@ namespace System.Web.Mvc.Html
 
             viewData.TemplateInfo.VisitedObjects.Add(visitedObjectsKey); // DDB #224750
 
-            return executeTemplate(html, viewData, templateName, mode, GetViewNames, GetDefaultActions);
+            return executeTemplate(
+                html,
+                viewData,
+                templateName,
+                mode,
+                GetViewNames,
+                GetDefaultActions
+            );
         }
 
         // Helpers
@@ -321,8 +481,15 @@ namespace System.Web.Mvc.Html
         private static HtmlHelper MakeHtmlHelper(HtmlHelper html, ViewDataDictionary viewData)
         {
             var newHelper = new HtmlHelper(
-                new ViewContext(html.ViewContext, html.ViewContext.View, viewData, html.ViewContext.TempData, html.ViewContext.Writer),
-                new ViewDataContainer(viewData));
+                new ViewContext(
+                    html.ViewContext,
+                    html.ViewContext.View,
+                    viewData,
+                    html.ViewContext.TempData,
+                    html.ViewContext.Writer
+                ),
+                new ViewDataContainer(viewData)
+            );
             newHelper.Html5DateRenderingMode = html.Html5DateRenderingMode;
             return newHelper;
         }
@@ -348,10 +515,22 @@ namespace System.Web.Mvc.Html
 
             public override string Execute(HtmlHelper html, ViewDataDictionary viewData)
             {
-                ViewEngineResult viewEngineResult = ViewEngines.Engines.FindPartialView(html.ViewContext, ViewName);
+                ViewEngineResult viewEngineResult = ViewEngines.Engines.FindPartialView(
+                    html.ViewContext,
+                    ViewName
+                );
                 using (StringWriter writer = new StringWriter(CultureInfo.InvariantCulture))
                 {
-                    viewEngineResult.View.Render(new ViewContext(html.ViewContext, viewEngineResult.View, viewData, html.ViewContext.TempData, writer), writer);
+                    viewEngineResult.View.Render(
+                        new ViewContext(
+                            html.ViewContext,
+                            viewEngineResult.View,
+                            viewData,
+                            html.ViewContext.TempData,
+                            writer
+                        ),
+                        writer
+                    );
                     return writer.ToString();
                 }
             }

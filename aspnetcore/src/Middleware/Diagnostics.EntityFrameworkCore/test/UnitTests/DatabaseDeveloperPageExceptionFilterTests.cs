@@ -20,7 +20,8 @@ public class DatabaseDeveloperPageExceptionFilterTests
     {
         var filter = new DatabaseDeveloperPageExceptionFilter(
             NullLogger<DatabaseDeveloperPageExceptionFilter>.Instance,
-            Options.Create(new DatabaseErrorPageOptions()));
+            Options.Create(new DatabaseErrorPageOptions())
+        );
         var response = new Mock<HttpResponse>();
         response.Setup(r => r.HasStarted).Returns(false);
         var context = new Mock<HttpContext>();
@@ -33,7 +34,8 @@ public class DatabaseDeveloperPageExceptionFilterTests
             {
                 nextFilterInvoked = true;
                 return Task.CompletedTask;
-            });
+            }
+        );
 
         Assert.True(nextFilterInvoked);
     }
@@ -44,7 +46,8 @@ public class DatabaseDeveloperPageExceptionFilterTests
         var sink = new TestSink();
         var filter = new DatabaseDeveloperPageExceptionFilter(
             new TestLogger<DatabaseDeveloperPageExceptionFilter>(new TestLoggerFactory(sink, true)),
-            Options.Create(new DatabaseErrorPageOptions()));
+            Options.Create(new DatabaseErrorPageOptions())
+        );
         var context = new DefaultHttpContext();
         var exception = new InvalidOperationException("Bang!", new Mock<DbException>().Object);
         var nextFilterInvoked = false;
@@ -55,13 +58,17 @@ public class DatabaseDeveloperPageExceptionFilterTests
             {
                 nextFilterInvoked = true;
                 return Task.CompletedTask;
-            });
+            }
+        );
 
         Assert.True(nextFilterInvoked);
         Assert.Equal(1, sink.Writes.Count);
         var message = sink.Writes.Single();
         Assert.Equal(LogLevel.Error, message.LogLevel);
-        Assert.Contains("An exception occurred while calculating the database error page content.", message.Message);
+        Assert.Contains(
+            "An exception occurred while calculating the database error page content.",
+            message.Message
+        );
     }
 
     [Fact]
@@ -70,7 +77,8 @@ public class DatabaseDeveloperPageExceptionFilterTests
         var sink = new TestSink();
         var filter = new DatabaseDeveloperPageExceptionFilter(
             new TestLogger<DatabaseDeveloperPageExceptionFilter>(new TestLoggerFactory(sink, true)),
-            Options.Create(new DatabaseErrorPageOptions()));
+            Options.Create(new DatabaseErrorPageOptions())
+        );
         var context = new DefaultHttpContext();
         var exception = new Mock<DbException>();
         var nextFilterInvoked = false;
@@ -81,13 +89,17 @@ public class DatabaseDeveloperPageExceptionFilterTests
             {
                 nextFilterInvoked = true;
                 return Task.CompletedTask;
-            });
+            }
+        );
 
         Assert.True(nextFilterInvoked);
         Assert.Equal(1, sink.Writes.Count);
         var message = sink.Writes.Single();
         Assert.Equal(LogLevel.Error, message.LogLevel);
-        Assert.Contains("An exception occurred while calculating the database error page content.", message.Message);
+        Assert.Contains(
+            "An exception occurred while calculating the database error page content.",
+            message.Message
+        );
     }
 
     [Fact]
@@ -96,7 +108,8 @@ public class DatabaseDeveloperPageExceptionFilterTests
         var sink = new TestSink();
         var filter = new DatabaseDeveloperPageExceptionFilter(
             new TestLogger<DatabaseDeveloperPageExceptionFilter>(new TestLoggerFactory(sink, true)),
-            Options.Create(new DatabaseErrorPageOptions()));
+            Options.Create(new DatabaseErrorPageOptions())
+        );
         var response = new Mock<HttpResponse>();
         response.Setup(r => r.HasStarted).Returns(true);
         var context = new Mock<HttpContext>();
@@ -110,9 +123,15 @@ public class DatabaseDeveloperPageExceptionFilterTests
             {
                 nextFilterInvoked = true;
                 return Task.CompletedTask;
-            });
+            }
+        );
 
         Assert.False(nextFilterInvoked);
-        Assert.Contains(sink.Writes, w => w.Message == "The response has already started, the next developer page exception filter will not be executed.");
+        Assert.Contains(
+            sink.Writes,
+            w =>
+                w.Message
+                == "The response has already started, the next developer page exception filter will not be executed."
+        );
     }
 }

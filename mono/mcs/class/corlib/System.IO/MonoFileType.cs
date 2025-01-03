@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,12 +32,12 @@
 
 namespace System.IO
 {
-	internal enum MonoFileType {
-		Unknown=0x0000,
-		Disk=0x0001,
-		Char=0x0002,
-		Pipe=0x0003,
-		Remote=0x8000,
-	}
+    internal enum MonoFileType
+    {
+        Unknown = 0x0000,
+        Disk = 0x0001,
+        Char = 0x0002,
+        Pipe = 0x0003,
+        Remote = 0x8000,
+    }
 }
-

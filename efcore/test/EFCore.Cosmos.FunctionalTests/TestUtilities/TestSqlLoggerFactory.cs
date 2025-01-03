@@ -5,15 +5,14 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class TestSqlLoggerFactory : ListLoggerFactory
 {
-    private const string FileNewLine = @"
+    private const string FileNewLine =
+        @"
 ";
 
     private static readonly string _eol = Environment.NewLine;
 
     public TestSqlLoggerFactory()
-        : this(_ => true)
-    {
-    }
+        : this(_ => true) { }
 
     public TestSqlLoggerFactory(Func<string, bool> shouldLogCategory)
         : base(c => shouldLogCategory(c) || c == DbLoggerCategory.Database.Command.Name)
@@ -21,14 +20,11 @@ public class TestSqlLoggerFactory : ListLoggerFactory
         Logger = new TestSqlLogger();
     }
 
-    public IReadOnlyList<string> SqlStatements
-        => ((TestSqlLogger)Logger).SqlStatements;
+    public IReadOnlyList<string> SqlStatements => ((TestSqlLogger)Logger).SqlStatements;
 
-    public IReadOnlyList<string> Parameters
-        => ((TestSqlLogger)Logger).Parameters;
+    public IReadOnlyList<string> Parameters => ((TestSqlLogger)Logger).Parameters;
 
-    public string Sql
-        => string.Join(_eol + _eol, SqlStatements);
+    public string Sql => string.Join(_eol + _eol, SqlStatements);
 
     public void AssertBaseline(string[] expected, bool assertOrder = true)
     {
@@ -47,10 +43,10 @@ public class TestSqlLoggerFactory : ListLoggerFactory
             {
                 foreach (var expectedFragment in expected)
                 {
-                    var normalizedExpectedFragment = expectedFragment.Replace("\r", string.Empty).Replace("\n", _eol);
-                    Assert.Contains(
-                        normalizedExpectedFragment,
-                        SqlStatements);
+                    var normalizedExpectedFragment = expectedFragment
+                        .Replace("\r", string.Empty)
+                        .Replace("\n", _eol);
+                    Assert.Contains(normalizedExpectedFragment, SqlStatements);
                 }
             }
         }
@@ -58,31 +54,38 @@ public class TestSqlLoggerFactory : ListLoggerFactory
         {
             var methodCallLine = Environment.StackTrace.Split(
                 new[] { _eol },
-                StringSplitOptions.RemoveEmptyEntries)[3][6..];
+                StringSplitOptions.RemoveEmptyEntries
+            )[3][6..];
 
             var indexMethodEnding = methodCallLine.IndexOf(')') + 1;
             var testName = methodCallLine.Substring(0, indexMethodEnding);
-            var parts = methodCallLine[indexMethodEnding..].Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            var parts = methodCallLine[indexMethodEnding..]
+                .Split(" ", StringSplitOptions.RemoveEmptyEntries);
             var fileName = parts[1][..^5];
             var lineNumber = int.Parse(parts[2]);
 
             var currentDirectory = Directory.GetCurrentDirectory();
-            var logFile = currentDirectory.Substring(
+            var logFile =
+                currentDirectory.Substring(
                     0,
                     currentDirectory.LastIndexOf(
                         $"{Path.DirectorySeparatorChar}artifacts{Path.DirectorySeparatorChar}",
-                        StringComparison.Ordinal)
-                    + 1)
-                + "QueryBaseline.txt";
+                        StringComparison.Ordinal
+                    ) + 1
+                ) + "QueryBaseline.txt";
 
             var testInfo = testName + " : " + lineNumber + FileNewLine;
             const string indent = FileNewLine + "                ";
 
             var sql = string.Join(
                 "," + indent + "//" + indent,
-                SqlStatements.Take(9).Select(sql => "\"\"\"" + FileNewLine + sql + FileNewLine + "\"\"\""));
+                SqlStatements
+                    .Take(9)
+                    .Select(sql => "\"\"\"" + FileNewLine + sql + FileNewLine + "\"\"\"")
+            );
 
-            var newBaseLine = $@"        AssertSql(
+            var newBaseLine =
+                $@"        AssertSql(
 {sql});
 
 ";
@@ -92,10 +95,13 @@ public class TestSqlLoggerFactory : ListLoggerFactory
                 newBaseLine += "Output truncated.";
             }
 
-            Logger.TestOutputHelper?.WriteLine("---- New Baseline -------------------------------------------------------------------");
+            Logger.TestOutputHelper?.WriteLine(
+                "---- New Baseline -------------------------------------------------------------------"
+            );
             Logger.TestOutputHelper?.WriteLine(newBaseLine);
 
-            var contents = testInfo + newBaseLine + FileNewLine + "--------------------" + FileNewLine;
+            var contents =
+                testInfo + newBaseLine + FileNewLine + "--------------------" + FileNewLine;
 
             File.AppendAllText(logFile, contents);
 
@@ -123,7 +129,8 @@ public class TestSqlLoggerFactory : ListLoggerFactory
             EventId eventId,
             string message,
             TState state,
-            Exception exception)
+            Exception exception
+        )
         {
             if (eventId.Id == CosmosEventId.ExecutingSqlQuery)
             {
@@ -131,8 +138,14 @@ public class TestSqlLoggerFactory : ListLoggerFactory
                 {
                     var structure = (IReadOnlyList<KeyValuePair<string, object>>)state;
 
-                    var parameters = structure.Where(i => i.Key == "parameters").Select(i => (string)i.Value).First();
-                    var commandText = structure.Where(i => i.Key == "commandText").Select(i => (string)i.Value).First();
+                    var parameters = structure
+                        .Where(i => i.Key == "parameters")
+                        .Select(i => (string)i.Value)
+                        .First();
+                    var commandText = structure
+                        .Where(i => i.Key == "commandText")
+                        .Select(i => (string)i.Value)
+                        .First();
 
                     if (!string.IsNullOrWhiteSpace(parameters))
                     {
@@ -150,8 +163,14 @@ public class TestSqlLoggerFactory : ListLoggerFactory
                 {
                     var structure = (IReadOnlyList<KeyValuePair<string, object>>)state;
 
-                    var partitionKey = structure.Where(i => i.Key == "partitionKey").Select(i => (string)i.Value).First();
-                    var resourceId = structure.Where(i => i.Key == "resourceId").Select(i => (string)i.Value).First();
+                    var partitionKey = structure
+                        .Where(i => i.Key == "partitionKey")
+                        .Select(i => (string)i.Value)
+                        .First();
+                    var resourceId = structure
+                        .Where(i => i.Key == "resourceId")
+                        .Select(i => (string)i.Value)
+                        .First();
 
                     SqlStatements.Add($"ReadItem({partitionKey}, {resourceId})");
                 }

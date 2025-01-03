@@ -30,7 +30,12 @@ namespace System.DirectoryServices.AccountManagement
         // Principal.UnderlyingObject), then pushes any changes into the underlying object.
         internal override object PushChangesToNative(Principal p)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "Entering PushChangesToNative, type={0}", p.GetType());
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "ADStoreCtx",
+                "Entering PushChangesToNative, type={0}",
+                p.GetType()
+            );
 
             try
             {
@@ -69,15 +74,24 @@ namespace System.DirectoryServices.AccountManagement
                         // derived object.  This is only done for classes that derive from User, Computer or Group.  If a user derives their own class from AuthPrincipal
                         // they are responsible for setting all required base class properties.
 
-                        if (principalType.IsSubclassOf(typeof(GroupPrincipal)) ||
-                             principalType.IsSubclassOf(typeof(UserPrincipal)) ||
-                             principalType.IsSubclassOf(typeof(ComputerPrincipal)))
+                        if (
+                            principalType.IsSubclassOf(typeof(GroupPrincipal))
+                            || principalType.IsSubclassOf(typeof(UserPrincipal))
+                            || principalType.IsSubclassOf(typeof(ComputerPrincipal))
+                        )
                         {
                             DirectoryRdnPrefixAttribute[] MyAttribute =
-                            (DirectoryRdnPrefixAttribute[])Attribute.GetCustomAttributes(principalType.BaseType, typeof(DirectoryRdnPrefixAttribute), false);
+                                (DirectoryRdnPrefixAttribute[])
+                                    Attribute.GetCustomAttributes(
+                                        principalType.BaseType,
+                                        typeof(DirectoryRdnPrefixAttribute),
+                                        false
+                                    );
 
                             if (MyAttribute == null)
-                                throw new InvalidOperationException(SR.ExtensionInvalidClassAttributes);
+                                throw new InvalidOperationException(
+                                    SR.ExtensionInvalidClassAttributes
+                                );
 
                             string defaultRdn = null;
 
@@ -85,8 +99,10 @@ namespace System.DirectoryServices.AccountManagement
                             // that matches the principals context or the first rdnPrefix that has a null context type
                             for (int i = 0; i < MyAttribute.Length; i++)
                             {
-                                if ((MyAttribute[i].Context == null && null == defaultRdn) ||
-                                    (p.ContextType == MyAttribute[i].Context))
+                                if (
+                                    (MyAttribute[i].Context == null && null == defaultRdn)
+                                    || (p.ContextType == MyAttribute[i].Context)
+                                )
                                 {
                                     defaultRdn = MyAttribute[i].RdnPrefix;
                                 }
@@ -121,14 +137,18 @@ namespace System.DirectoryServices.AccountManagement
                         {
                             // They set a sAMAccountName.  If it's an invalid claim, we'll just ignore it here.
                             // The error will get picked up in IdentClaimToLdapConverter.
-                            string samAccountName = (string)p.GetValueForProperty(PropertyNames.PrincipalSamAccountName);
+                            string samAccountName = (string)
+                                p.GetValueForProperty(PropertyNames.PrincipalSamAccountName);
 
                             int index = samAccountName.IndexOf('\\');
 
                             if (index != samAccountName.Length - 1)
                             {
-                                samAccountName = (index != -1) ? samAccountName.Substring(index + 1) :    // +1 to skip the '/'
-                                                                     samAccountName;
+                                samAccountName =
+                                    (index != -1)
+                                        ? samAccountName.Substring(index + 1)
+                                        : // +1 to skip the '/'
+                                        samAccountName;
                             }
 
                             if ((samAccountName != null) && (samAccountName.Length > 0))
@@ -173,15 +193,20 @@ namespace System.DirectoryServices.AccountManagement
                     }
 
                     GlobalDebug.WriteLineIf(
-                        GlobalDebug.Info, "ADStoreCtx", "PushChangesToNative: created fresh DE, oc={0}, path={1}",
-                        objectClass, de.Path);
+                        GlobalDebug.Info,
+                        "ADStoreCtx",
+                        "PushChangesToNative: created fresh DE, oc={0}, path={1}",
+                        objectClass,
+                        de.Path
+                    );
                 }
 
                 // propertyMappingTableByProperty only has entries for writable properties,
                 // including writable properties which we don't support in AD.
                 // If we don't support the property, the PropertyMappingTableEntry will map
                 // it to a converter which will throw an appropriate exception.
-                Hashtable mappingTableByProp = (Hashtable)s_propertyMappingTableByProperty[this.MappingTableIndex];
+                Hashtable mappingTableByProp = (Hashtable)
+                    s_propertyMappingTableByProperty[this.MappingTableIndex];
 
                 foreach (DictionaryEntry dictEntry in mappingTableByProp)
                 {
@@ -194,9 +219,19 @@ namespace System.DirectoryServices.AccountManagement
                             // The property was set.  Write it to the DirectoryEntry.
                             Debug.Assert(propertyEntry.propertyName == (string)dictEntry.Key);
 
-                            GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "PushChangesToNative: pushing {0}", propertyEntry.propertyName);
+                            GlobalDebug.WriteLineIf(
+                                GlobalDebug.Info,
+                                "ADStoreCtx",
+                                "PushChangesToNative: pushing {0}",
+                                propertyEntry.propertyName
+                            );
 
-                            propertyEntry.papiToLdapConverter(p, propertyEntry.propertyName, de, propertyEntry.suggestedADPropertyName);
+                            propertyEntry.papiToLdapConverter(
+                                p,
+                                propertyEntry.propertyName,
+                                de,
+                                propertyEntry.suggestedADPropertyName
+                            );
                         }
                     }
                 }
@@ -253,7 +288,12 @@ namespace System.DirectoryServices.AccountManagement
                 distinguishedName = (string)sr.Properties["distinguishedName"][0];
             }
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "GetAsPrincipal: using path={0}", (null != de ? de.Path : "searchResult"));
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "ADStoreCtx",
+                "GetAsPrincipal: using path={0}",
+                (null != de ? de.Path : "searchResult")
+            );
 
             // Construct an appropriate Principal object.
 
@@ -271,15 +311,32 @@ namespace System.DirectoryServices.AccountManagement
                 if (targetIsFromGC || OwningContext.ContextType == ContextType.Domain)
                 {
                     string dnsDomainName = SDSUtils.ConstructDnsDomainNameFromDn(distinguishedName);
-                    if (targetIsFromGC ||
-                        (!string.IsNullOrEmpty(this.domainDnsName) && !string.Equals(this.DnsDomainName, dnsDomainName, StringComparison.OrdinalIgnoreCase)))
+                    if (
+                        targetIsFromGC
+                        || (
+                            !string.IsNullOrEmpty(this.domainDnsName)
+                            && !string.Equals(
+                                this.DnsDomainName,
+                                dnsDomainName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                    )
                     {
-                        constructedContext = SDSCache.Domain.GetContext(dnsDomainName, this.Credentials, this.OwningContext.Options);
+                        constructedContext = SDSCache.Domain.GetContext(
+                            dnsDomainName,
+                            this.Credentials,
+                            this.OwningContext.Options
+                        );
                     }
 
                     if (targetIsFromGC)
                     {
-                        dcEntry = SDSUtils.BuildDirectoryEntry("LDAP://" + dnsDomainName + "/" + GetEscapedDN(distinguishedName), this.Credentials, this.authTypes);
+                        dcEntry = SDSUtils.BuildDirectoryEntry(
+                            "LDAP://" + dnsDomainName + "/" + GetEscapedDN(distinguishedName),
+                            this.Credentials,
+                            this.authTypes
+                        );
                         this.InitializeNewDirectoryOptions(dcEntry);
                     }
                 }
@@ -287,12 +344,20 @@ namespace System.DirectoryServices.AccountManagement
                 if (de != null)
                 {
                     //NOTE: If target is GC then we do NOT use variable "de". So, need to dispose this at the end.
-                    p = SDSUtils.DirectoryEntryToPrincipal((targetIsFromGC ? dcEntry : de), constructedContext ?? this.OwningContext, (Type)discriminant);
+                    p = SDSUtils.DirectoryEntryToPrincipal(
+                        (targetIsFromGC ? dcEntry : de),
+                        constructedContext ?? this.OwningContext,
+                        (Type)discriminant
+                    );
                 }
                 else
                 {
                     //NOTE: If input storeObject is searchResult then variable "de" gets used in all cases.
-                    p = SDSUtils.SearchResultToPrincipal(sr, constructedContext ?? this.OwningContext, (Type)discriminant);
+                    p = SDSUtils.SearchResultToPrincipal(
+                        sr,
+                        constructedContext ?? this.OwningContext,
+                        (Type)discriminant
+                    );
                     p.UnderlyingObject = (targetIsFromGC ? dcEntry : sr.GetDirectoryEntry());
                 }
 
@@ -335,16 +400,24 @@ namespace System.DirectoryServices.AccountManagement
         private string GetEscapedDN(string dn)
         {
             UnsafeNativeMethods.Pathname pathNameObj = new UnsafeNativeMethods.Pathname();
-            UnsafeNativeMethods.IADsPathname pathCracker = (UnsafeNativeMethods.IADsPathname)pathNameObj;
+            UnsafeNativeMethods.IADsPathname pathCracker =
+                (UnsafeNativeMethods.IADsPathname)pathNameObj;
 
             // Set the Escape mode On
-            pathCracker.EscapedMode = 2 /* ADS_ESCAPEDMODE_ON */;
+            pathCracker.EscapedMode =
+                2 /* ADS_ESCAPEDMODE_ON */
+            ;
 
             // Set the type of path to DN
-            pathCracker.Set(dn, 4 /* ADS_SETTYPE_DN */);
+            pathCracker.Set(
+                dn,
+                4 /* ADS_SETTYPE_DN */
+            );
 
             // Get back the escaped DN
-            return pathCracker.Retrieve(7 /* ADS_FORMAT_X500_DN */);
+            return pathCracker.Retrieve(
+                7 /* ADS_FORMAT_X500_DN */
+            );
         }
 
         internal override void Load(Principal p, string principalPropertyName)
@@ -369,7 +442,8 @@ namespace System.DirectoryServices.AccountManagement
                 props = new dSPropertyCollection(sr.Properties);
             }
 
-            Hashtable propertyMappingTable = (Hashtable)s_propertyMappingTableByPropertyFull[this.MappingTableIndex];
+            Hashtable propertyMappingTable = (Hashtable)
+                s_propertyMappingTableByPropertyFull[this.MappingTableIndex];
 
             ArrayList entries = (ArrayList)propertyMappingTable[principalPropertyName];
 
@@ -385,8 +459,18 @@ namespace System.DirectoryServices.AccountManagement
                 {
                     if (null != entry.ldapToPapiConverter)
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "Load_PropertyName: loading {0}", entry.propertyName);
-                        entry.ldapToPapiConverter(props, entry.suggestedADPropertyName, p, entry.propertyName);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "ADStoreCtx",
+                            "Load_PropertyName: loading {0}",
+                            entry.propertyName
+                        );
+                        entry.ldapToPapiConverter(
+                            props,
+                            entry.suggestedADPropertyName,
+                            p,
+                            entry.propertyName
+                        );
                     }
                 }
             }
@@ -406,9 +490,16 @@ namespace System.DirectoryServices.AccountManagement
             DirectoryEntry de = (DirectoryEntry)p.UnderlyingObject;
             Debug.Assert(de != null);
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "Entering Load, type={0}, path={1}", p.GetType(), de.Path);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "ADStoreCtx",
+                "Entering Load, type={0}, path={1}",
+                p.GetType(),
+                de.Path
+            );
 
-            Hashtable ldapMappingTable = (Hashtable)s_propertyMappingTableByLDAP[this.MappingTableIndex];
+            Hashtable ldapMappingTable = (Hashtable)
+                s_propertyMappingTableByLDAP[this.MappingTableIndex];
             foreach (DictionaryEntry Dictentry in ldapMappingTable)
             {
                 ArrayList entries = (ArrayList)Dictentry.Value;
@@ -416,8 +507,18 @@ namespace System.DirectoryServices.AccountManagement
                 {
                     foreach (PropertyMappingTableEntry entry in entries)
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "Load: loading {0}", entry.propertyName);
-                        entry.ldapToPapiConverter(new dSPropertyCollection(de.Properties), entry.suggestedADPropertyName, p, entry.propertyName);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "ADStoreCtx",
+                            "Load: loading {0}",
+                            entry.propertyName
+                        );
+                        entry.ldapToPapiConverter(
+                            new dSPropertyCollection(de.Properties),
+                            entry.suggestedADPropertyName,
+                            p,
+                            entry.propertyName
+                        );
                     }
                 }
                 catch (System.Runtime.InteropServices.COMException e)
@@ -434,38 +535,56 @@ namespace System.DirectoryServices.AccountManagement
         // principalType can be used to scope the search to principals of a specified type, e.g., users or groups.
         // Specify typeof(Principal) to search all principal types.
         internal override Principal FindPrincipalByIdentRef(
-                                    Type principalType, string urnScheme, string urnValue, DateTime referenceDate)
+            Type principalType,
+            string urnScheme,
+            string urnValue,
+            DateTime referenceDate
+        )
         {
-            return FindPrincipalByIdentRefHelper(principalType, urnScheme, urnValue, referenceDate, false);
+            return FindPrincipalByIdentRefHelper(
+                principalType,
+                urnScheme,
+                urnValue,
+                referenceDate,
+                false
+            );
         }
 
         // Normally, doing a FindByIdentity for a SID doesn't include the SID History.  This method provides a
         // means to include the sidHistory as well as the objectSid in the search.
         internal Principal FindPrincipalBySID(
-                                    Type principalType, IdentityReference ir, bool useSidHistory)
+            Type principalType,
+            IdentityReference ir,
+            bool useSidHistory
+        )
         {
-            return FindPrincipalByIdentRefHelper(principalType,
-                                                 ir.UrnScheme,
-                                                 ir.UrnValue,
-                                                 DateTime.UtcNow,
-                                                 useSidHistory);
+            return FindPrincipalByIdentRefHelper(
+                principalType,
+                ir.UrnScheme,
+                ir.UrnValue,
+                DateTime.UtcNow,
+                useSidHistory
+            );
         }
 
         // Handles all the work required to implement FindPrincipalByIdentRef (and FindPrincipalBySID).
         private Principal FindPrincipalByIdentRefHelper(
-                                    Type principalType,
-                                    string urnScheme,
-                                    string urnValue,
-                                    DateTime referenceDate,
-                                    bool useSidHistory)
+            Type principalType,
+            string urnScheme,
+            string urnValue,
+            DateTime referenceDate,
+            bool useSidHistory
+        )
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info,
-                                    "ADStoreCtx",
-                                    "FindPrincipalByIdentRefHelper: type={0}, scheme={1}, value={2}, useSidHistory={3}",
-                                    principalType.ToString(),
-                                    urnScheme ?? "NULL",
-                                    urnValue ?? "NULL",
-                                    useSidHistory);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "ADStoreCtx",
+                "FindPrincipalByIdentRefHelper: type={0}, scheme={1}, value={2}, useSidHistory={3}",
+                principalType.ToString(),
+                urnScheme ?? "NULL",
+                urnValue ?? "NULL",
+                useSidHistory
+            );
 
             //
             // Set up a DirectorySearcher
@@ -475,13 +594,16 @@ namespace System.DirectoryServices.AccountManagement
 
             try
             {
-                ds.SizeLimit = 2;   // so we can efficiently check for duplicates
+                ds.SizeLimit = 2; // so we can efficiently check for duplicates
 
                 // If we are searching for AuthPrincpal or Principal in the end we will construct the actual type
                 // i.e. if the objects objectClass is User we will construct a UserPrincipal even though they searched for Principal.FindByIdentity
                 // At this time we don't know the actual object type so we have to ask AD for all the attributes of the derived types so they are there
                 // when we go to load the principal.
-                if (principalType == typeof(Principal) || principalType == typeof(AuthenticablePrincipal))
+                if (
+                    principalType == typeof(Principal)
+                    || principalType == typeof(AuthenticablePrincipal)
+                )
                 {
                     BuildPropertySet(typeof(UserPrincipal), ds.PropertiesToLoad);
                     BuildPropertySet(typeof(GroupPrincipal), ds.PropertiesToLoad);
@@ -509,8 +631,14 @@ namespace System.DirectoryServices.AccountManagement
                 {
                     // If they're searching by SID for a SID corresponding to a fake group, construct
                     // and return the fake group
-                    if ((urnScheme == UrnScheme.SidScheme) &&
-                         (principalType == typeof(Principal) || principalType == typeof(GroupPrincipal) || principalType.IsSubclassOf(typeof(GroupPrincipal))))
+                    if (
+                        (urnScheme == UrnScheme.SidScheme)
+                        && (
+                            principalType == typeof(Principal)
+                            || principalType == typeof(GroupPrincipal)
+                            || principalType.IsSubclassOf(typeof(GroupPrincipal))
+                        )
+                    )
                     {
                         SecurityIdentifier sid = new SecurityIdentifier(urnValue);
                         byte[] sidb = new byte[sid.BinaryLength];
@@ -526,12 +654,17 @@ namespace System.DirectoryServices.AccountManagement
                         {
                             pSid = Utils.ConvertByteArrayToIntPtr(sidb);
 
-                            if (Interop.Advapi32.IsValidSid(pSid) && (Utils.ClassifySID(pSid) == SidType.FakeObject))
+                            if (
+                                Interop.Advapi32.IsValidSid(pSid)
+                                && (Utils.ClassifySID(pSid) == SidType.FakeObject)
+                            )
                             {
-                                GlobalDebug.WriteLineIf(GlobalDebug.Info,
-                                                        "ADStoreCtx",
-                                                        "FindPrincipalByIdentRefHelper: fake principal, SID Scheme, {0}",
-                                                        sid.ToString());
+                                GlobalDebug.WriteLineIf(
+                                    GlobalDebug.Info,
+                                    "ADStoreCtx",
+                                    "FindPrincipalByIdentRefHelper: fake principal, SID Scheme, {0}",
+                                    sid.ToString()
+                                );
 
                                 return ConstructFakePrincipalFromSID(sidb);
                             }
@@ -548,7 +681,13 @@ namespace System.DirectoryServices.AccountManagement
 
                     // Ignore referenceDate --- all IdentityClaims in AD are forever
                     string innerLdapFilter = null;
-                    BuildLdapFilterFromIdentityClaim(urnValue, urnScheme, ref innerLdapFilter, useSidHistory, true);
+                    BuildLdapFilterFromIdentityClaim(
+                        urnValue,
+                        urnScheme,
+                        ref innerLdapFilter,
+                        useSidHistory,
+                        true
+                    );
 
                     ldapFilter.Append(innerLdapFilter);
                 }
@@ -557,7 +696,11 @@ namespace System.DirectoryServices.AccountManagement
                     // Are they perhaps searching for a fake group?
                     // If they passed in a valid SID for a fake group, construct and return the fake
                     // group.
-                    if (principalType == typeof(Principal) || principalType == typeof(GroupPrincipal) || principalType.IsSubclassOf(typeof(GroupPrincipal)))
+                    if (
+                        principalType == typeof(Principal)
+                        || principalType == typeof(GroupPrincipal)
+                        || principalType.IsSubclassOf(typeof(GroupPrincipal))
+                    )
                     {
                         SecurityIdentifier sid = null;
                         byte[] sidb = null;
@@ -567,9 +710,7 @@ namespace System.DirectoryServices.AccountManagement
                             sidb = new byte[sid.BinaryLength];
                             sid.GetBinaryForm(sidb, 0);
                         }
-                        catch (ArgumentException)
-                        {
-                        }
+                        catch (ArgumentException) { }
 
                         if (sidb != null)
                         {
@@ -581,12 +722,17 @@ namespace System.DirectoryServices.AccountManagement
                             {
                                 pSid = Utils.ConvertByteArrayToIntPtr(sidb);
 
-                                if (Interop.Advapi32.IsValidSid(pSid) && (Utils.ClassifySID(pSid) == SidType.FakeObject))
+                                if (
+                                    Interop.Advapi32.IsValidSid(pSid)
+                                    && (Utils.ClassifySID(pSid) == SidType.FakeObject)
+                                )
                                 {
-                                    GlobalDebug.WriteLineIf(GlobalDebug.Info,
-                                                            "ADStoreCtx",
-                                                            "FindPrincipalByIdentRefHelper: fake principal, null Scheme, {0}",
-                                                            sid.ToString());
+                                    GlobalDebug.WriteLineIf(
+                                        GlobalDebug.Info,
+                                        "ADStoreCtx",
+                                        "FindPrincipalByIdentRefHelper: fake principal, null Scheme, {0}",
+                                        sid.ToString()
+                                    );
 
                                     return ConstructFakePrincipalFromSID(sidb);
                                 }
@@ -609,7 +755,7 @@ namespace System.DirectoryServices.AccountManagement
                         UrnScheme.DistinguishedNameScheme,
                         UrnScheme.SidScheme,
                         UrnScheme.GuidScheme,
-                        UrnScheme.NameScheme
+                        UrnScheme.NameScheme,
                     };
 
                     StringBuilder innerLdapFilter = new StringBuilder();
@@ -620,7 +766,15 @@ namespace System.DirectoryServices.AccountManagement
 
                     foreach (string urnSchemeToTry in urnSchemesToTry)
                     {
-                        if (BuildLdapFilterFromIdentityClaim(urnValue, urnSchemeToTry, ref filterVal, useSidHistory, false))
+                        if (
+                            BuildLdapFilterFromIdentityClaim(
+                                urnValue,
+                                urnSchemeToTry,
+                                ref filterVal,
+                                useSidHistory,
+                                false
+                            )
+                        )
                             if (null != filterVal)
                                 innerLdapFilter.Append(filterVal);
                     }
@@ -634,7 +788,12 @@ namespace System.DirectoryServices.AccountManagement
                 ldapFilter.Append(')');
 
                 ds.Filter = ldapFilter.ToString();
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "FindPrincipalByIdentRefHelper: using LDAP filter {0}", ds.Filter);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "ADStoreCtx",
+                    "FindPrincipalByIdentRefHelper: using LDAP filter {0}",
+                    ds.Filter
+                );
 
                 //
                 // Perform the actual search
@@ -649,7 +808,12 @@ namespace System.DirectoryServices.AccountManagement
                 // Did we find a match?
                 int count = src.Count;
 
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "FindPrincipalByIdentRefHelper: found {0} matches", count);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "ADStoreCtx",
+                    "FindPrincipalByIdentRefHelper: found {0} matches",
+                    count
+                );
 
                 // Did we find more than one match?
                 if (count > 1)
@@ -694,52 +858,242 @@ namespace System.DirectoryServices.AccountManagement
         private static readonly object[,] s_propertyMappingTableRaw =
         {
             // PropertyName                          AD property             Converter(LDAP->PAPI)                                    Converter(PAPI->LDAP)
-            {PropertyNames.PrincipalDisplayName,     "displayname",          new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.PrincipalDescription,     "description",          new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.PrincipalDistinguishedName,  "distinguishedname",    new FromLdapConverterDelegate(StringFromLdapConverter), new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.PrincipalSid,  "objectsid",            new FromLdapConverterDelegate(SidFromLdapConverter),  null},
-            {PropertyNames.PrincipalSamAccountName,  "samaccountname",       new FromLdapConverterDelegate(StringFromLdapConverter), new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.PrincipalUserPrincipalName,  "userprincipalname",    new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.PrincipalGuid,  "objectguid",           new FromLdapConverterDelegate(GuidFromLdapConverter),   null},
-            {PropertyNames.PrincipalStructuralObjectClass,  "objectclass",           new FromLdapConverterDelegate(ObjectClassFromLdapConverter),   null},
-            {PropertyNames.PrincipalName,  "name",           new FromLdapConverterDelegate(StringFromLdapConverter), new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.PrincipalExtensionCache,  null,  null, new ToLdapConverterDelegate(ExtensionCacheToLdapConverter)},
-
-            {PropertyNames.AuthenticablePrincipalEnabled,      "useraccountcontrol", new FromLdapConverterDelegate(UACFromLdapConverter),  new ToLdapConverterDelegate(UACToLdapConverter)},
-            {PropertyNames.AuthenticablePrincipalCertificates, "usercertificate",    new FromLdapConverterDelegate(CertFromLdapConverter), new ToLdapConverterDelegate(CertToLdap)},
-
-            {PropertyNames.GroupIsSecurityGroup,   "grouptype", new FromLdapConverterDelegate(GroupTypeFromLdapConverter), new ToLdapConverterDelegate(GroupTypeToLdapConverter)},
-            {PropertyNames.GroupGroupScope, "grouptype", new FromLdapConverterDelegate(GroupTypeFromLdapConverter), new ToLdapConverterDelegate(GroupTypeToLdapConverter)},
-
-            {PropertyNames.UserGivenName,             "givenname",        new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.UserMiddleName,            "middlename",       new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.UserSurname,               "sn",               new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.UserEmailAddress,          "mail",             new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.UserVoiceTelephoneNumber,  "telephonenumber",  new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.UserEmployeeID,            "employeeid",       new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-
-            {PropertyNames.ComputerServicePrincipalNames, "serviceprincipalname", new FromLdapConverterDelegate(MultiStringFromLdapConverter), new ToLdapConverterDelegate(MultiStringToLdapConverter)},
-
-            {PropertyNames.AcctInfoAcctLockoutTime,       "lockouttime",        new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter), null},
-            {PropertyNames.AcctInfoLastLogon,             "lastlogon",          new FromLdapConverterDelegate(LastLogonFromLdapConverter),       null},
-            {PropertyNames.AcctInfoLastLogon,             "lastlogontimestamp", new FromLdapConverterDelegate(LastLogonFromLdapConverter),       null},
-            {PropertyNames.AcctInfoPermittedWorkstations, "userworkstations",   new FromLdapConverterDelegate(CommaStringFromLdapConverter),     new ToLdapConverterDelegate(CommaStringToLdapConverter)},
-            {PropertyNames.AcctInfoPermittedLogonTimes,   "logonhours",         new FromLdapConverterDelegate(BinaryFromLdapConverter),          new ToLdapConverterDelegate(BinaryToLdapConverter)},
-            {PropertyNames.AcctInfoExpirationDate,        "accountexpires",     new FromLdapConverterDelegate(AcctExpirFromLdapConverter),       new ToLdapConverterDelegate(AcctExpirToLdapConverter)},
-            {PropertyNames.AcctInfoSmartcardRequired,     "useraccountcontrol", new FromLdapConverterDelegate(UACFromLdapConverter),             new ToLdapConverterDelegate(UACToLdapConverter)},
-            {PropertyNames.AcctInfoDelegationPermitted,   "useraccountcontrol", new FromLdapConverterDelegate(UACFromLdapConverter),             new ToLdapConverterDelegate(UACToLdapConverter)},
-            {PropertyNames.AcctInfoBadLogonCount,         "badpwdcount",        new FromLdapConverterDelegate(IntFromLdapConverter),             null},
-            {PropertyNames.AcctInfoHomeDirectory,         "homedirectory",      new FromLdapConverterDelegate(StringFromLdapConverter),          new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.AcctInfoHomeDrive,             "homedrive",          new FromLdapConverterDelegate(StringFromLdapConverter),          new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.AcctInfoScriptPath,            "scriptpath",         new FromLdapConverterDelegate(StringFromLdapConverter),          new ToLdapConverterDelegate(StringToLdapConverter)},
-
-            {PropertyNames.PwdInfoLastPasswordSet,        "pwdlastset",           new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter),     null},
-            {PropertyNames.PwdInfoLastBadPasswordAttempt, "badpasswordtime",      new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter),     null},
-            {PropertyNames.PwdInfoPasswordNotRequired,    "useraccountcontrol",   new FromLdapConverterDelegate(UACFromLdapConverter),                 new ToLdapConverterDelegate(UACToLdapConverter)},
-            {PropertyNames.PwdInfoPasswordNeverExpires,   "useraccountcontrol",   new FromLdapConverterDelegate(UACFromLdapConverter),                 new ToLdapConverterDelegate(UACToLdapConverter)},
-            {PropertyNames.PwdInfoCannotChangePassword,   null, null,     new ToLdapConverterDelegate(CannotChangePwdToLdapConverter)},
-            {PropertyNames.PwdInfoAllowReversiblePasswordEncryption,     "useraccountcontrol",    new FromLdapConverterDelegate(UACFromLdapConverter), new ToLdapConverterDelegate(UACToLdapConverter)}
+            {
+                PropertyNames.PrincipalDisplayName,
+                "displayname",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.PrincipalDescription,
+                "description",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.PrincipalDistinguishedName,
+                "distinguishedname",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.PrincipalSid,
+                "objectsid",
+                new FromLdapConverterDelegate(SidFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.PrincipalSamAccountName,
+                "samaccountname",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.PrincipalUserPrincipalName,
+                "userprincipalname",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.PrincipalGuid,
+                "objectguid",
+                new FromLdapConverterDelegate(GuidFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.PrincipalStructuralObjectClass,
+                "objectclass",
+                new FromLdapConverterDelegate(ObjectClassFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.PrincipalName,
+                "name",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.PrincipalExtensionCache,
+                null,
+                null,
+                new ToLdapConverterDelegate(ExtensionCacheToLdapConverter),
+            },
+            {
+                PropertyNames.AuthenticablePrincipalEnabled,
+                "useraccountcontrol",
+                new FromLdapConverterDelegate(UACFromLdapConverter),
+                new ToLdapConverterDelegate(UACToLdapConverter),
+            },
+            {
+                PropertyNames.AuthenticablePrincipalCertificates,
+                "usercertificate",
+                new FromLdapConverterDelegate(CertFromLdapConverter),
+                new ToLdapConverterDelegate(CertToLdap),
+            },
+            {
+                PropertyNames.GroupIsSecurityGroup,
+                "grouptype",
+                new FromLdapConverterDelegate(GroupTypeFromLdapConverter),
+                new ToLdapConverterDelegate(GroupTypeToLdapConverter),
+            },
+            {
+                PropertyNames.GroupGroupScope,
+                "grouptype",
+                new FromLdapConverterDelegate(GroupTypeFromLdapConverter),
+                new ToLdapConverterDelegate(GroupTypeToLdapConverter),
+            },
+            {
+                PropertyNames.UserGivenName,
+                "givenname",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.UserMiddleName,
+                "middlename",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.UserSurname,
+                "sn",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.UserEmailAddress,
+                "mail",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.UserVoiceTelephoneNumber,
+                "telephonenumber",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.UserEmployeeID,
+                "employeeid",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.ComputerServicePrincipalNames,
+                "serviceprincipalname",
+                new FromLdapConverterDelegate(MultiStringFromLdapConverter),
+                new ToLdapConverterDelegate(MultiStringToLdapConverter),
+            },
+            {
+                PropertyNames.AcctInfoAcctLockoutTime,
+                "lockouttime",
+                new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.AcctInfoLastLogon,
+                "lastlogon",
+                new FromLdapConverterDelegate(LastLogonFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.AcctInfoLastLogon,
+                "lastlogontimestamp",
+                new FromLdapConverterDelegate(LastLogonFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.AcctInfoPermittedWorkstations,
+                "userworkstations",
+                new FromLdapConverterDelegate(CommaStringFromLdapConverter),
+                new ToLdapConverterDelegate(CommaStringToLdapConverter),
+            },
+            {
+                PropertyNames.AcctInfoPermittedLogonTimes,
+                "logonhours",
+                new FromLdapConverterDelegate(BinaryFromLdapConverter),
+                new ToLdapConverterDelegate(BinaryToLdapConverter),
+            },
+            {
+                PropertyNames.AcctInfoExpirationDate,
+                "accountexpires",
+                new FromLdapConverterDelegate(AcctExpirFromLdapConverter),
+                new ToLdapConverterDelegate(AcctExpirToLdapConverter),
+            },
+            {
+                PropertyNames.AcctInfoSmartcardRequired,
+                "useraccountcontrol",
+                new FromLdapConverterDelegate(UACFromLdapConverter),
+                new ToLdapConverterDelegate(UACToLdapConverter),
+            },
+            {
+                PropertyNames.AcctInfoDelegationPermitted,
+                "useraccountcontrol",
+                new FromLdapConverterDelegate(UACFromLdapConverter),
+                new ToLdapConverterDelegate(UACToLdapConverter),
+            },
+            {
+                PropertyNames.AcctInfoBadLogonCount,
+                "badpwdcount",
+                new FromLdapConverterDelegate(IntFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.AcctInfoHomeDirectory,
+                "homedirectory",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.AcctInfoHomeDrive,
+                "homedrive",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.AcctInfoScriptPath,
+                "scriptpath",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.PwdInfoLastPasswordSet,
+                "pwdlastset",
+                new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.PwdInfoLastBadPasswordAttempt,
+                "badpasswordtime",
+                new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.PwdInfoPasswordNotRequired,
+                "useraccountcontrol",
+                new FromLdapConverterDelegate(UACFromLdapConverter),
+                new ToLdapConverterDelegate(UACToLdapConverter),
+            },
+            {
+                PropertyNames.PwdInfoPasswordNeverExpires,
+                "useraccountcontrol",
+                new FromLdapConverterDelegate(UACFromLdapConverter),
+                new ToLdapConverterDelegate(UACToLdapConverter),
+            },
+            {
+                PropertyNames.PwdInfoCannotChangePassword,
+                null,
+                null,
+                new ToLdapConverterDelegate(CannotChangePwdToLdapConverter),
+            },
+            {
+                PropertyNames.PwdInfoAllowReversiblePasswordEncryption,
+                "useraccountcontrol",
+                new FromLdapConverterDelegate(UACFromLdapConverter),
+                new ToLdapConverterDelegate(UACToLdapConverter),
+            },
         };
+
         /*/
         ///*******  Mapping table for perf testing...
                 static object[,] propertyMappingTableRaw =
@@ -802,8 +1156,8 @@ namespace System.DirectoryServices.AccountManagement
 
         private sealed class PropertyMappingTableEntry
         {
-            internal string propertyName;               // PAPI name
-            internal string suggestedADPropertyName;    // LDAP attribute name
+            internal string propertyName; // PAPI name
+            internal string suggestedADPropertyName; // LDAP attribute name
             internal FromLdapConverterDelegate ldapToPapiConverter;
             internal ToLdapConverterDelegate papiToLdapConverter;
         }
@@ -813,17 +1167,32 @@ namespace System.DirectoryServices.AccountManagement
         //
 
         // Loads the specified attribute of the DirectoryEntry into the specified property of the Principal
-        protected delegate void FromLdapConverterDelegate(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName);
+        protected delegate void FromLdapConverterDelegate(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        );
 
         // Loads the specified property of the Principal into the specified attribute of the DirectoryEntry.
         // For multivalued attributes, must test to make sure the value hasn't already been loaded into the DirectoryEntry
         // (to maintain idempotency when PushChangesToNative is called multiple times).
-        protected delegate void ToLdapConverterDelegate(Principal p, string propertyName, DirectoryEntry de, string suggestedAdProperty);
+        protected delegate void ToLdapConverterDelegate(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedAdProperty
+        );
 
         //
         // Conversion: LDAP --> PAPI
         //
-        protected static void SidFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void SidFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
             if (properties["objectSid"].Count > 0)
             {
@@ -839,7 +1208,12 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        protected static void GuidFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void GuidFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
             Debug.Assert(properties["objectGuid"].Count == 1);
 
@@ -857,25 +1231,60 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        protected static void StringFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void StringFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
-            SDSUtils.SingleScalarFromDirectoryEntry<string>(properties, suggestedAdProperty, p, propertyName);
+            SDSUtils.SingleScalarFromDirectoryEntry<string>(
+                properties,
+                suggestedAdProperty,
+                p,
+                propertyName
+            );
         }
 
-        protected static void MultiStringFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void MultiStringFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
             // ValueCollection<string> is Load'ed from a List<string>
-            SDSUtils.MultiScalarFromDirectoryEntry<string>(properties, suggestedAdProperty, p, propertyName);
+            SDSUtils.MultiScalarFromDirectoryEntry<string>(
+                properties,
+                suggestedAdProperty,
+                p,
+                propertyName
+            );
         }
 
-        protected static void BoolFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void BoolFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
-            SDSUtils.SingleScalarFromDirectoryEntry<bool>(properties, suggestedAdProperty, p, propertyName);
+            SDSUtils.SingleScalarFromDirectoryEntry<bool>(
+                properties,
+                suggestedAdProperty,
+                p,
+                propertyName
+            );
         }
 
         // This function is converting the disabled directory status into the enabled principal property
         // the boolan value needs to be negated
-        protected static void AcctDisabledFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void AcctDisabledFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
             if (properties[suggestedAdProperty].Count > 0)
             {
@@ -887,9 +1296,20 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        protected static void CommaStringFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void CommaStringFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
-            Debug.Assert(string.Equals(suggestedAdProperty, "userWorkstations", StringComparison.OrdinalIgnoreCase));
+            Debug.Assert(
+                string.Equals(
+                    suggestedAdProperty,
+                    "userWorkstations",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
 
             // The userWorkstations attribute is odd.  Rather than being a multivalued string attribute, it's a single-valued
             // string of comma-separated values.
@@ -916,35 +1336,92 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        protected static void IntFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void IntFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
-            SDSUtils.SingleScalarFromDirectoryEntry<int>(properties, suggestedAdProperty, p, propertyName);
+            SDSUtils.SingleScalarFromDirectoryEntry<int>(
+                properties,
+                suggestedAdProperty,
+                p,
+                propertyName
+            );
         }
 
-        protected static void BinaryFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void BinaryFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
-            SDSUtils.SingleScalarFromDirectoryEntry<byte[]>(properties, suggestedAdProperty, p, propertyName);
+            SDSUtils.SingleScalarFromDirectoryEntry<byte[]>(
+                properties,
+                suggestedAdProperty,
+                p,
+                propertyName
+            );
         }
 
-        protected static void CertFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void CertFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
             // Cert collection is Load'ed via a list of byte[], each representing a cert
-            SDSUtils.MultiScalarFromDirectoryEntry<byte[]>(properties, suggestedAdProperty, p, propertyName);
+            SDSUtils.MultiScalarFromDirectoryEntry<byte[]>(
+                properties,
+                suggestedAdProperty,
+                p,
+                propertyName
+            );
         }
 
-        protected static void UACFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void UACFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
-            Debug.Assert(string.Equals(suggestedAdProperty, "userAccountControl", StringComparison.OrdinalIgnoreCase));
+            Debug.Assert(
+                string.Equals(
+                    suggestedAdProperty,
+                    "userAccountControl",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
 
-            SDSUtils.AccountControlFromDirectoryEntry(properties, suggestedAdProperty, p, propertyName, false);
+            SDSUtils.AccountControlFromDirectoryEntry(
+                properties,
+                suggestedAdProperty,
+                p,
+                propertyName,
+                false
+            );
         }
 
-        protected static void GenericDateTimeFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void GenericDateTimeFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
             DateTimeFromLdapConverter(properties, suggestedAdProperty, p, propertyName, false);
         }
 
-        protected static void ObjectClassFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void ObjectClassFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
             dSPropertyValueCollection values = properties[suggestedAdProperty];
 
@@ -956,7 +1433,12 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        protected static void LastLogonFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void LastLogonFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
             // W2k DCs support just "lastLogon".  W2k3 DCs also support "lastLogonTimestamp".  The latter is replicated, and
             // preferred over the former.
@@ -966,7 +1448,11 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (properties["lastLogonTimestamp"].Count != 0)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "LastLogonFromLdapConverter: found lastLogonTimestamp");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "ADStoreCtx",
+                        "LastLogonFromLdapConverter: found lastLogonTimestamp"
+                    );
 
                     // "lastLogonTimestamp" is available.  So ignore "lastLogon" and do nothing.  We'll be called again
                     // when Load() gets to the "lastLogonTimestamp" attribute (or it may already have).
@@ -979,12 +1465,23 @@ namespace System.DirectoryServices.AccountManagement
             DateTimeFromLdapConverter(properties, suggestedAdProperty, p, propertyName, false);
         }
 
-        protected static void AcctExpirFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void AcctExpirFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
             DateTimeFromLdapConverter(properties, suggestedAdProperty, p, propertyName, true);
         }
 
-        protected static void DateTimeFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName, bool useAcctExpLogic)
+        protected static void DateTimeFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName,
+            bool useAcctExpLogic
+        )
         {
             dSPropertyValueCollection values = properties[suggestedAdProperty];
 
@@ -997,7 +1494,9 @@ namespace System.DirectoryServices.AccountManagement
                 if (values[0] is long)
                     filetime = (long)values[0];
                 else
-                    filetime = ADUtils.LargeIntToInt64((UnsafeNativeMethods.IADsLargeInteger)values[0]);
+                    filetime = ADUtils.LargeIntToInt64(
+                        (UnsafeNativeMethods.IADsLargeInteger)values[0]
+                    );
 
                 Nullable<DateTime> dt;
 
@@ -1014,9 +1513,16 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        protected static void GroupTypeFromLdapConverter(dSPropertyCollection properties, string suggestedAdProperty, Principal p, string propertyName)
+        protected static void GroupTypeFromLdapConverter(
+            dSPropertyCollection properties,
+            string suggestedAdProperty,
+            Principal p,
+            string propertyName
+        )
         {
-            Debug.Assert(string.Equals(suggestedAdProperty, "groupType", StringComparison.OrdinalIgnoreCase));
+            Debug.Assert(
+                string.Equals(suggestedAdProperty, "groupType", StringComparison.OrdinalIgnoreCase)
+            );
 
             dSPropertyValueCollection values = properties[suggestedAdProperty];
 
@@ -1056,7 +1562,10 @@ namespace System.DirectoryServices.AccountManagement
                         break;
 
                     default:
-                        Debug.Fail("ADStoreCtx.GroupTypeFromLdapConverter: Fell off end looking for " + propertyName);
+                        Debug.Fail(
+                            "ADStoreCtx.GroupTypeFromLdapConverter: Fell off end looking for "
+                                + propertyName
+                        );
                         break;
                 }
             }
@@ -1086,7 +1595,13 @@ namespace System.DirectoryServices.AccountManagement
             bool allowWorldFound;
 
             // Perform the scan
-            ScanACLForChangePasswordRight(adsSecurity, out denySelfFound, out denyWorldFound, out allowSelfFound, out allowWorldFound);
+            ScanACLForChangePasswordRight(
+                adsSecurity,
+                out denySelfFound,
+                out denyWorldFound,
+                out allowSelfFound,
+                out allowWorldFound
+            );
 
             // Map the ACEs found to "user cannot change password" status
             bool userCannotChangePassword;
@@ -1106,22 +1621,29 @@ namespace System.DirectoryServices.AccountManagement
                 // As with the AD U&C snapin, if the explitic ACEs don't tell us anything, we
                 // fallback to assuming the user can change their password
                 userCannotChangePassword = false;
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "ADStoreCtx", "CannotChangePwdFromLdapConverter: fallback, assume user can change pwd");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "ADStoreCtx",
+                    "CannotChangePwdFromLdapConverter: fallback, assume user can change pwd"
+                );
             }
 
             return userCannotChangePassword;
         }
 
-        private const string SelfSddl = "S-1-5-10";  // NT AUTHORITY\SELF
-        private const string WorldSddl = "S-1-1-0";   // EVERYONE
-        private static readonly Guid s_changePasswordGuid = new Guid("{ab721a53-1e2f-11d0-9819-00aa0040529b}");
+        private const string SelfSddl = "S-1-5-10"; // NT AUTHORITY\SELF
+        private const string WorldSddl = "S-1-1-0"; // EVERYONE
+        private static readonly Guid s_changePasswordGuid = new Guid(
+            "{ab721a53-1e2f-11d0-9819-00aa0040529b}"
+        );
 
         protected static void ScanACLForChangePasswordRight(
-                                        ActiveDirectorySecurity adsSecurity,
-                                        out bool denySelfFound,
-                                        out bool denyWorldFound,
-                                        out bool allowSelfFound,
-                                        out bool allowWorldFound)
+            ActiveDirectorySecurity adsSecurity,
+            out bool denySelfFound,
+            out bool denyWorldFound,
+            out bool allowSelfFound,
+            out bool allowWorldFound
+        )
         {
             denySelfFound = false;
             denyWorldFound = false;
@@ -1130,7 +1652,13 @@ namespace System.DirectoryServices.AccountManagement
 
             MACLPrinc.SecurityIdentifier trustee;
 
-            foreach (ActiveDirectoryAccessRule rule in adsSecurity.GetAccessRules(true, true, typeof(MACLPrinc.SecurityIdentifier)))
+            foreach (
+                ActiveDirectoryAccessRule rule in adsSecurity.GetAccessRules(
+                    true,
+                    true,
+                    typeof(MACLPrinc.SecurityIdentifier)
+                )
+            )
             {
                 trustee = (MACLPrinc.SecurityIdentifier)rule.IdentityReference;
                 string sidSddl = trustee.Value;
@@ -1167,7 +1695,12 @@ namespace System.DirectoryServices.AccountManagement
         // Conversion: PAPI --> LDAP
         //
 
-        protected static void StringToLdapConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedAdProperty)
+        protected static void StringToLdapConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedAdProperty
+        )
         {
             string value = (string)p.GetValueForProperty(propertyName);
 
@@ -1180,7 +1713,12 @@ namespace System.DirectoryServices.AccountManagement
                 throw new ArgumentException(SR.Format(SR.InvalidStringValueForStore, propertyName));
         }
 
-        protected static void BinaryToLdapConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedAdProperty)
+        protected static void BinaryToLdapConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedAdProperty
+        )
         {
             byte[] value = (byte[])p.GetValueForProperty(propertyName);
 
@@ -1193,12 +1731,22 @@ namespace System.DirectoryServices.AccountManagement
                 de.Properties[suggestedAdProperty].Value = null;
         }
 
-        protected static void MultiStringToLdapConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedAdProperty)
+        protected static void MultiStringToLdapConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedAdProperty
+        )
         {
             SDSUtils.MultiStringToDirectoryEntryConverter(p, propertyName, de, suggestedAdProperty);
         }
 
-        protected static void BoolToLdapConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedAdProperty)
+        protected static void BoolToLdapConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedAdProperty
+        )
         {
             object value = (bool)p.GetValueForProperty(propertyName);
 
@@ -1213,7 +1761,12 @@ namespace System.DirectoryServices.AccountManagement
 
         // This function is converting the disabled directory status into the enabled principal property
         // the boolan value needs to be negated
-        protected static void AcctDisabledToLdapConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedAdProperty)
+        protected static void AcctDisabledToLdapConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedAdProperty
+        )
         {
             // Only modify disabled property if we are talking to an already persisted user.
             // We need to set the password before we can enable the user on new objects.
@@ -1227,9 +1780,15 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        protected static void CommaStringToLdapConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedAdProperty)
+        protected static void CommaStringToLdapConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedAdProperty
+        )
         {
-            PrincipalValueCollection<string> trackingList = (PrincipalValueCollection<string>)p.GetValueForProperty(propertyName);
+            PrincipalValueCollection<string> trackingList =
+                (PrincipalValueCollection<string>)p.GetValueForProperty(propertyName);
 
             StringBuilder sb = new StringBuilder();
 
@@ -1253,9 +1812,15 @@ namespace System.DirectoryServices.AccountManagement
             de.Properties[suggestedAdProperty].Value = s;
         }
 
-        protected static void CertToLdap(Principal p, string propertyName, DirectoryEntry de, string suggestedAdProperty)
+        protected static void CertToLdap(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedAdProperty
+        )
         {
-            X509Certificate2Collection certificates = (X509Certificate2Collection)p.GetValueForProperty(propertyName);
+            X509Certificate2Collection certificates = (X509Certificate2Collection)
+                p.GetValueForProperty(propertyName);
 
             if (certificates.Count == 0)
             {
@@ -1273,27 +1838,52 @@ namespace System.DirectoryServices.AccountManagement
                     rawCerts[i] = certificates[i].RawData;
                 }
 
-                de.Properties[suggestedAdProperty].Value = null;        // remove the old
-                de.Properties[suggestedAdProperty].Value = rawCerts;    // and put in the new
+                de.Properties[suggestedAdProperty].Value = null; // remove the old
+                de.Properties[suggestedAdProperty].Value = rawCerts; // and put in the new
             }
         }
 
-        protected static void UACToLdapConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedAdProperty)
+        protected static void UACToLdapConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedAdProperty
+        )
         {
-            Debug.Assert(string.Equals(suggestedAdProperty, "userAccountControl", StringComparison.OrdinalIgnoreCase));
+            Debug.Assert(
+                string.Equals(
+                    suggestedAdProperty,
+                    "userAccountControl",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
 
-            SDSUtils.AccountControlToDirectoryEntry(p, propertyName, de, suggestedAdProperty, false, p.unpersisted);
+            SDSUtils.AccountControlToDirectoryEntry(
+                p,
+                propertyName,
+                de,
+                suggestedAdProperty,
+                false,
+                p.unpersisted
+            );
         }
 
-        protected static void AcctExpirToLdapConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedAdProperty)
+        protected static void AcctExpirToLdapConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedAdProperty
+        )
         {
             Nullable<DateTime> dt = (Nullable<DateTime>)p.GetValueForProperty(propertyName);
 
             if (p.unpersisted && dt == null)
                 return;
 
-            UnsafeNativeMethods.ADsLargeInteger largeIntObj = new UnsafeNativeMethods.ADsLargeInteger();
-            UnsafeNativeMethods.IADsLargeInteger largeInt = (UnsafeNativeMethods.IADsLargeInteger)largeIntObj;
+            UnsafeNativeMethods.ADsLargeInteger largeIntObj =
+                new UnsafeNativeMethods.ADsLargeInteger();
+            UnsafeNativeMethods.IADsLargeInteger largeInt =
+                (UnsafeNativeMethods.IADsLargeInteger)largeIntObj;
 
             if (!dt.HasValue)
             {
@@ -1319,10 +1909,19 @@ namespace System.DirectoryServices.AccountManagement
         // ICollection where an item of the collection is not an ICollection or IList
         // object[]
         // object
-        protected static void ExtensionCacheToLdapConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedAdProperty)
+        protected static void ExtensionCacheToLdapConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedAdProperty
+        )
         {
             ExtensionCache cacheValues = (ExtensionCache)p.GetValueForProperty(propertyName);
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionCacheToLdapConverter");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "ADStoreCtx",
+                "ExtensionCacheToLdapConverter"
+            );
 
             foreach (KeyValuePair<string, ExtensionCacheValue> kvp in cacheValues.properties)
             {
@@ -1331,19 +1930,35 @@ namespace System.DirectoryServices.AccountManagement
                     // array of objects   ( .Length > 1 && typeof(array[0] != ICollection or IList )
                     // Single collection ( .Length == 1 ) &&  typeof(array[0] == ICollection ) && typeof(array[0][0] != ICollection or IList )
 
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionCacheToLdapConverter - Value Type " + kvp.Value.Value.GetType().ToString());
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "ADStoreCtx",
+                        "ExtensionCacheToLdapConverter - Value Type "
+                            + kvp.Value.Value.GetType().ToString()
+                    );
 
-                    if ((kvp.Value.Value.Length == 1 && kvp.Value.Value[0] is ICollection) || (kvp.Value.Value.Length > 1))
+                    if (
+                        (kvp.Value.Value.Length == 1 && kvp.Value.Value[0] is ICollection)
+                        || (kvp.Value.Value.Length > 1)
+                    )
                     {
                         if (kvp.Value.Value.Length > 1 && (kvp.Value.Value[0] is ICollection))
                             throw new ArgumentException(SR.InvalidExtensionCollectionType);
 
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionCacheToLdapConverter - Value implements ICollection");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "ADStoreCtx",
+                            "ExtensionCacheToLdapConverter - Value implements ICollection"
+                        );
 
                         ICollection valueCollection;
 
                         // byte[] gets special treatment (following S.DS and ADSI) - we don't treat it as ICollection but rather as a whole
-                        if (kvp.Value.Value.Length == 1 && kvp.Value.Value[0] is ICollection && !(kvp.Value.Value[0] is byte[]))
+                        if (
+                            kvp.Value.Value.Length == 1
+                            && kvp.Value.Value[0] is ICollection
+                            && !(kvp.Value.Value[0] is byte[])
+                        )
                         {
                             valueCollection = (ICollection)kvp.Value.Value[0];
                         }
@@ -1365,8 +1980,18 @@ namespace System.DirectoryServices.AccountManagement
                                 if ((oVal is ICollection || oVal is IList) && !(oVal is byte[]))
                                     throw new ArgumentException(SR.InvalidExtensionCollectionType);
 
-                                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionCacheToLdapConverter - Element Value Type " + oVal.GetType().ToString());
-                                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionCacheToLdapConverter - Adding  Element " + oVal.ToString());
+                                GlobalDebug.WriteLineIf(
+                                    GlobalDebug.Info,
+                                    "ADStoreCtx",
+                                    "ExtensionCacheToLdapConverter - Element Value Type "
+                                        + oVal.GetType().ToString()
+                                );
+                                GlobalDebug.WriteLineIf(
+                                    GlobalDebug.Info,
+                                    "ADStoreCtx",
+                                    "ExtensionCacheToLdapConverter - Adding  Element "
+                                        + oVal.ToString()
+                                );
                             }
 
                             // Do nothing if we are not persisted and the value is null.  We can't delete a property that
@@ -1379,11 +2004,19 @@ namespace System.DirectoryServices.AccountManagement
 
                         de.Properties[kvp.Key].Value = propertyValueList.ToArray();
 
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionCacheToLdapConverter - Collection complete");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "ADStoreCtx",
+                            "ExtensionCacheToLdapConverter - Collection complete"
+                        );
                     }
                     else
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionCacheToLdapConverter - Adding " + kvp.Value.Value.ToString());
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "ADStoreCtx",
+                            "ExtensionCacheToLdapConverter - Adding " + kvp.Value.Value.ToString()
+                        );
                         // Do nothing if we are not persisted and the value is null.  We can't delete a property that
                         // has not already been set.
                         if (p.unpersisted && (null == kvp.Value.Value[0]))
@@ -1395,9 +2028,17 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        protected static void GroupTypeToLdapConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedAdProperty)
+        protected static void GroupTypeToLdapConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedAdProperty
+        )
         {
-            Debug.Assert(propertyName == PropertyNames.GroupIsSecurityGroup || propertyName == PropertyNames.GroupGroupScope);
+            Debug.Assert(
+                propertyName == PropertyNames.GroupIsSecurityGroup
+                    || propertyName == PropertyNames.GroupGroupScope
+            );
 
             int groupTypeCombined;
 
@@ -1417,11 +2058,12 @@ namespace System.DirectoryServices.AccountManagement
                     // It's not an unpersisted principal, so we should have the property.  Perhaps we don't have access
                     // to it.  In that case, we don't want to blindly overwrite whatever other bits might be there.
                     throw new PrincipalOperationException(
-                                    SR.ADStoreCtxUnableToReadExistingGroupTypeFlagsForUpdate);
+                        SR.ADStoreCtxUnableToReadExistingGroupTypeFlagsForUpdate
+                    );
                 }
 
                 // initial default value
-                groupTypeCombined = unchecked((int)(0x80000000 | 0x00000002));  //  GROUP_TYPE_SECURITY_ENABLED | GROUP_TYPE_ACCOUNT_GROUP
+                groupTypeCombined = unchecked((int)(0x80000000 | 0x00000002)); //  GROUP_TYPE_SECURITY_ENABLED | GROUP_TYPE_ACCOUNT_GROUP
             }
 
             switch (propertyName)
@@ -1431,9 +2073,9 @@ namespace System.DirectoryServices.AccountManagement
 
                     // Flip the bit without touching the other bits.
                     if (!groupEnabled)
-                        Utils.ClearBit(ref groupTypeCombined, 0x80000000);   // disabled --> clear GROUP_TYPE_SECURITY_ENABLED
+                        Utils.ClearBit(ref groupTypeCombined, 0x80000000); // disabled --> clear GROUP_TYPE_SECURITY_ENABLED
                     else
-                        Utils.SetBit(ref groupTypeCombined, 0x80000000);     // enabled --> set GROUP_TYPE_SECURITY_ENABLED
+                        Utils.SetBit(ref groupTypeCombined, 0x80000000); // enabled --> set GROUP_TYPE_SECURITY_ENABLED
 
                     break;
 
@@ -1464,7 +2106,10 @@ namespace System.DirectoryServices.AccountManagement
                     break;
 
                 default:
-                    Debug.Fail("ADStoreCtx.GroupTypeToLdapConverter: Fell off end looking for " + propertyName);
+                    Debug.Fail(
+                        "ADStoreCtx.GroupTypeToLdapConverter: Fell off end looking for "
+                            + propertyName
+                    );
                     break;
             }
 
@@ -1473,11 +2118,17 @@ namespace System.DirectoryServices.AccountManagement
 
         // {PropertyNames.GroupMembers,  "members",   null,                                                      new ToLdapConverterDelegate(GroupMembersToLdapConverter)},
 
-        protected static void UpdateGroupMembership(Principal group, DirectoryEntry de, NetCred credentials, AuthenticationTypes authTypes)
+        protected static void UpdateGroupMembership(
+            Principal group,
+            DirectoryEntry de,
+            NetCred credentials,
+            AuthenticationTypes authTypes
+        )
         {
             Debug.Assert(group.fakePrincipal == false);
 
-            PrincipalCollection members = (PrincipalCollection)group.GetValueForProperty(PropertyNames.GroupMembers);
+            PrincipalCollection members = (PrincipalCollection)
+                group.GetValueForProperty(PropertyNames.GroupMembers);
 
             DirectoryEntry groupDe = null;
 
@@ -1492,12 +2143,14 @@ namespace System.DirectoryServices.AccountManagement
 
                     try
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "UpdateGroupMembership: clearing {0}", de.Path);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "ADStoreCtx",
+                            "UpdateGroupMembership: clearing {0}",
+                            de.Path
+                        );
 
-                        copyOfDe = SDSUtils.BuildDirectoryEntry(
-                                                de.Path,
-                                                credentials,
-                                                authTypes);
+                        copyOfDe = SDSUtils.BuildDirectoryEntry(de.Path, credentials, authTypes);
 
                         Debug.Assert(copyOfDe != null);
                         copyOfDe.Properties["member"].Clear();
@@ -1518,33 +2171,40 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (insertedMembers.Count > 0 || removedMembers.Count > 0)
                 {
-                    groupDe = SDSUtils.BuildDirectoryEntry(
-                                            de.Path,
-                                            credentials,
-                                            authTypes);
+                    groupDe = SDSUtils.BuildDirectoryEntry(de.Path, credentials, authTypes);
                 }
 
                 // First, validate the members to be added
                 foreach (Principal member in insertedMembers)
                 {
                     Type memberType = member.GetType();
-                    if ((memberType != typeof(UserPrincipal)) && (!memberType.IsSubclassOf(typeof(UserPrincipal))) &&
-                        (memberType != typeof(ComputerPrincipal)) && (!memberType.IsSubclassOf(typeof(ComputerPrincipal))) &&
-                        (memberType != typeof(GroupPrincipal)) && (!memberType.IsSubclassOf(typeof(GroupPrincipal))) &&
-                        (!memberType.IsSubclassOf(typeof(AuthenticablePrincipal))))
+                    if (
+                        (memberType != typeof(UserPrincipal))
+                        && (!memberType.IsSubclassOf(typeof(UserPrincipal)))
+                        && (memberType != typeof(ComputerPrincipal))
+                        && (!memberType.IsSubclassOf(typeof(ComputerPrincipal)))
+                        && (memberType != typeof(GroupPrincipal))
+                        && (!memberType.IsSubclassOf(typeof(GroupPrincipal)))
+                        && (!memberType.IsSubclassOf(typeof(AuthenticablePrincipal)))
+                    )
                     {
                         throw new InvalidOperationException(
-                                        SR.Format(SR.StoreCtxUnsupportedPrincipalTypeForGroupInsert, memberType));
+                            SR.Format(SR.StoreCtxUnsupportedPrincipalTypeForGroupInsert, memberType)
+                        );
                     }
                     // Can't inserted unpersisted principal
                     if (member.unpersisted)
-                        throw new InvalidOperationException(SR.StoreCtxGroupHasUnpersistedInsertedPrincipal);
+                        throw new InvalidOperationException(
+                            SR.StoreCtxGroupHasUnpersistedInsertedPrincipal
+                        );
 
                     Debug.Assert(member.Context != null);
 
                     // Can only insert AD principals (no reg-SAM/MSAM principals)
                     if (member.ContextType == ContextType.Machine)
-                        throw new InvalidOperationException(SR.ADStoreCtxUnsupportedPrincipalContextForGroupInsert);
+                        throw new InvalidOperationException(
+                            SR.ADStoreCtxUnsupportedPrincipalContextForGroupInsert
+                        );
                 }
 
                 // Now add each member to the group
@@ -1556,7 +2216,12 @@ namespace System.DirectoryServices.AccountManagement
                     // It also works in the "fake principal" case (which are always represented as FPOs).
                     if (!member.fakePrincipal && ADUtils.ArePrincipalsInSameForest(group, member))
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "UpdateGroupMembership: add {0}", member.DistinguishedName);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "ADStoreCtx",
+                            "UpdateGroupMembership: add {0}",
+                            member.DistinguishedName
+                        );
 
                         groupDe.Properties["member"].Add(member.DistinguishedName);
                     }
@@ -1566,9 +2231,16 @@ namespace System.DirectoryServices.AccountManagement
                         string memberSidDN = GetSidPathFromPrincipal(member);
 
                         if (memberSidDN == null)
-                            throw new PrincipalOperationException(SR.ADStoreCtxCouldntGetSIDForGroupMember);
+                            throw new PrincipalOperationException(
+                                SR.ADStoreCtxCouldntGetSIDForGroupMember
+                            );
 
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "UpdateGroupMembership: add {0}", memberSidDN);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "ADStoreCtx",
+                            "UpdateGroupMembership: add {0}",
+                            memberSidDN
+                        );
 
                         // Add the member to the group
                         groupDe.Properties["member"].Add(memberSidDN);
@@ -1588,7 +2260,10 @@ namespace System.DirectoryServices.AccountManagement
                     // Since we don't allow any of these to be inserted, none of them should ever
                     // show up in the removal list
                     Debug.Assert(member.unpersisted == false);
-                    Debug.Assert(member.ContextType == ContextType.Domain || member.ContextType == ContextType.ApplicationDirectory);
+                    Debug.Assert(
+                        member.ContextType == ContextType.Domain
+                            || member.ContextType == ContextType.ApplicationDirectory
+                    );
 
                     // If the collection was cleared, there should be no original members to remove
                     Debug.Assert(members.Cleared == false);
@@ -1598,7 +2273,12 @@ namespace System.DirectoryServices.AccountManagement
                     // For foreign principals we must represent them with their SID binding string since they are locally represented by an FSP object.
                     if (!member.fakePrincipal && ADUtils.ArePrincipalsInSameForest(group, member))
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "UpdateGroupMembership: remove via DN {0}", member.DistinguishedName);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "ADStoreCtx",
+                            "UpdateGroupMembership: remove via DN {0}",
+                            member.DistinguishedName
+                        );
 
                         // Remove the member from the group
 
@@ -1612,9 +2292,16 @@ namespace System.DirectoryServices.AccountManagement
                         string memberSidDN = GetSidPathFromPrincipal(member);
 
                         if (memberSidDN == null)
-                            throw new PrincipalOperationException(SR.ADStoreCtxCouldntGetSIDForGroupMember);
+                            throw new PrincipalOperationException(
+                                SR.ADStoreCtxCouldntGetSIDForGroupMember
+                            );
 
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "UpdateGroupMembership: remove via SID {0}", memberSidDN);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "ADStoreCtx",
+                            "UpdateGroupMembership: remove via SID {0}",
+                            memberSidDN
+                        );
 
                         // Remove the member from the group
                         groupDe.Properties["member"].Remove(memberSidDN);
@@ -1647,8 +2334,14 @@ namespace System.DirectoryServices.AccountManagement
                 SecurityIdentifier Sid = p.Sid;
                 if (Sid == null)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Warn, "ADStoreCtx", "GetSidADsPathFromPrincipal: no SID IC (fake principal)");
-                    throw new InvalidOperationException(SR.StoreCtxNeedValueSecurityIdentityClaimToQuery);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Warn,
+                        "ADStoreCtx",
+                        "GetSidADsPathFromPrincipal: no SID IC (fake principal)"
+                    );
+                    throw new InvalidOperationException(
+                        SR.StoreCtxNeedValueSecurityIdentityClaimToQuery
+                    );
                 }
 
                 return @"<SID=" + Utils.SecurityIdentifierToLdapHexBindingString(Sid) + ">";
@@ -1667,7 +2360,11 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (sid == null)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Warn, "ADStoreCtx", "GetSidADsPathFromPrincipal: no SID");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Warn,
+                        "ADStoreCtx",
+                        "GetSidADsPathFromPrincipal: no SID"
+                    );
                     return null;
                 }
 
@@ -1676,7 +2373,12 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        protected static void CannotChangePwdToLdapConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedAdProperty)
+        protected static void CannotChangePwdToLdapConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedAdProperty
+        )
         {
             Debug.Assert(propertyName == PropertyNames.PwdInfoCannotChangePassword);
 
@@ -1691,7 +2393,13 @@ namespace System.DirectoryServices.AccountManagement
             SetCannotChangePasswordStatus(p, (bool)p.GetValueForProperty(propertyName), false);
         }
 
-        protected bool BuildLdapFilterFromIdentityClaim(string urnValue, string urnScheme, ref string filter, bool useSidHistory, bool throwOnFail)
+        protected bool BuildLdapFilterFromIdentityClaim(
+            string urnValue,
+            string urnScheme,
+            ref string filter,
+            bool useSidHistory,
+            bool throwOnFail
+        )
         {
             // To build the filter, we'll use the same IdentityClaimConverter routine as the QBE mechanism.
             // This routine takes an IdentityClaimFilter as input, which in turn wraps an IdentityClaim.
@@ -1709,7 +2417,15 @@ namespace System.DirectoryServices.AccountManagement
                 // Special handling if we want to include the SID History in the search
                 Debug.Assert(urnScheme == UrnScheme.SidScheme);
                 StringBuilder sb = new StringBuilder();
-                if (false == SecurityIdentityClaimConverterHelper(urnValue, useSidHistory, sb, throwOnFail))
+                if (
+                    false
+                    == SecurityIdentityClaimConverterHelper(
+                        urnValue,
+                        useSidHistory,
+                        sb,
+                        throwOnFail
+                    )
+                )
                 {
                     return false;
                 }

@@ -11,7 +11,10 @@ namespace System.Web.Razor.Test.Framework
     {
         protected abstract ISet<string> KeywordSet { get; }
 
-        protected override ParserBase SelectActiveParser(ParserBase codeParser, ParserBase markupParser)
+        protected override ParserBase SelectActiveParser(
+            ParserBase codeParser,
+            ParserBase markupParser
+        )
         {
             return codeParser;
         }
@@ -21,57 +24,141 @@ namespace System.Web.Razor.Test.Framework
             ImplicitExpressionTest(input, AcceptedCharacters.NonWhiteSpace, errors);
         }
 
-        protected void ImplicitExpressionTest(string input, AcceptedCharacters acceptedCharacters, params RazorError[] errors)
+        protected void ImplicitExpressionTest(
+            string input,
+            AcceptedCharacters acceptedCharacters,
+            params RazorError[] errors
+        )
         {
             ImplicitExpressionTest(input, input, acceptedCharacters, errors);
         }
 
-        protected void ImplicitExpressionTest(string input, string expected, params RazorError[] errors)
+        protected void ImplicitExpressionTest(
+            string input,
+            string expected,
+            params RazorError[] errors
+        )
         {
             ImplicitExpressionTest(input, expected, AcceptedCharacters.NonWhiteSpace, errors);
         }
 
-        protected override void SingleSpanBlockTest(string document, BlockType blockType, SpanKind spanType, AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any)
+        protected override void SingleSpanBlockTest(
+            string document,
+            BlockType blockType,
+            SpanKind spanType,
+            AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any
+        )
         {
-            SingleSpanBlockTest(document, blockType, spanType, acceptedCharacters, expectedError: null);
+            SingleSpanBlockTest(
+                document,
+                blockType,
+                spanType,
+                acceptedCharacters,
+                expectedError: null
+            );
         }
 
-        protected override void SingleSpanBlockTest(string document, string spanContent, BlockType blockType, SpanKind spanType, AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any)
+        protected override void SingleSpanBlockTest(
+            string document,
+            string spanContent,
+            BlockType blockType,
+            SpanKind spanType,
+            AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any
+        )
         {
-            SingleSpanBlockTest(document, spanContent, blockType, spanType, acceptedCharacters, expectedErrors: null);
+            SingleSpanBlockTest(
+                document,
+                spanContent,
+                blockType,
+                spanType,
+                acceptedCharacters,
+                expectedErrors: null
+            );
         }
 
-        protected override void SingleSpanBlockTest(string document, BlockType blockType, SpanKind spanType, params RazorError[] expectedError)
+        protected override void SingleSpanBlockTest(
+            string document,
+            BlockType blockType,
+            SpanKind spanType,
+            params RazorError[] expectedError
+        )
         {
             SingleSpanBlockTest(document, document, blockType, spanType, expectedError);
         }
 
-        protected override void SingleSpanBlockTest(string document, string spanContent, BlockType blockType, SpanKind spanType, params RazorError[] expectedErrors)
+        protected override void SingleSpanBlockTest(
+            string document,
+            string spanContent,
+            BlockType blockType,
+            SpanKind spanType,
+            params RazorError[] expectedErrors
+        )
         {
-            SingleSpanBlockTest(document, spanContent, blockType, spanType, AcceptedCharacters.Any, expectedErrors ?? new RazorError[0]);
+            SingleSpanBlockTest(
+                document,
+                spanContent,
+                blockType,
+                spanType,
+                AcceptedCharacters.Any,
+                expectedErrors ?? new RazorError[0]
+            );
         }
 
-        protected override void SingleSpanBlockTest(string document, BlockType blockType, SpanKind spanType, AcceptedCharacters acceptedCharacters, params RazorError[] expectedError)
+        protected override void SingleSpanBlockTest(
+            string document,
+            BlockType blockType,
+            SpanKind spanType,
+            AcceptedCharacters acceptedCharacters,
+            params RazorError[] expectedError
+        )
         {
-            SingleSpanBlockTest(document, document, blockType, spanType, acceptedCharacters, expectedError);
+            SingleSpanBlockTest(
+                document,
+                document,
+                blockType,
+                spanType,
+                acceptedCharacters,
+                expectedError
+            );
         }
 
-        protected override void SingleSpanBlockTest(string document, string spanContent, BlockType blockType, SpanKind spanType, AcceptedCharacters acceptedCharacters, params RazorError[] expectedErrors)
+        protected override void SingleSpanBlockTest(
+            string document,
+            string spanContent,
+            BlockType blockType,
+            SpanKind spanType,
+            AcceptedCharacters acceptedCharacters,
+            params RazorError[] expectedErrors
+        )
         {
-            Block b = CreateSimpleBlockAndSpan(spanContent, blockType, spanType, acceptedCharacters);
+            Block b = CreateSimpleBlockAndSpan(
+                spanContent,
+                blockType,
+                spanType,
+                acceptedCharacters
+            );
             ParseBlockTest(document, b, expectedErrors ?? new RazorError[0]);
         }
 
-        protected void ImplicitExpressionTest(string input, string expected, AcceptedCharacters acceptedCharacters, params RazorError[] errors)
+        protected void ImplicitExpressionTest(
+            string input,
+            string expected,
+            AcceptedCharacters acceptedCharacters,
+            params RazorError[] errors
+        )
         {
             var factory = CreateSpanFactory();
-            ParseBlockTest(SyntaxConstants.TransitionString + input,
-                           new ExpressionBlock(
-                               factory.CodeTransition(),
-                               factory.Code(expected)
-                                   .AsImplicitExpression(KeywordSet)
-                                   .Accepts(acceptedCharacters)),
-                           errors);
+            ParseBlockTest(
+                SyntaxConstants.TransitionString + input,
+                new ExpressionBlock(
+                    factory.CodeTransition(),
+                    factory
+                        .Code(expected)
+                        .AsImplicitExpression(KeywordSet)
+                        .Accepts(acceptedCharacters)
+                ),
+                errors
+            );
         }
     }
 }

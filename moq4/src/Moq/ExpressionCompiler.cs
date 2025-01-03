@@ -13,7 +13,6 @@ namespace Moq
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     public abstract class ExpressionCompiler
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
@@ -55,9 +54,7 @@ namespace Moq
         /// <summary>
         ///   Initializes a new instance of the <see cref="ExpressionCompiler"/> class.
         /// </summary>
-        protected ExpressionCompiler()
-        {
-        }
+        protected ExpressionCompiler() { }
 
         /// <summary>
         ///   Compiles the specified LINQ expression tree.
@@ -70,6 +67,7 @@ namespace Moq
         /// </summary>
         /// <typeparam name="TDelegate">The type of delegate to which the expression will be compiled.</typeparam>
         /// <param name="expression">The LINQ expression tree that should be compiled.</param>
-        public abstract TDelegate Compile<TDelegate>(Expression<TDelegate> expression) where TDelegate : Delegate;
+        public abstract TDelegate Compile<TDelegate>(Expression<TDelegate> expression)
+            where TDelegate : Delegate;
     }
 }

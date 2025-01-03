@@ -12,13 +12,15 @@ namespace System
     /// Represents a boolean (<see langword="true"/> or <see langword="false"/>) value.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public readonly struct Boolean
         : IComparable,
-          IConvertible,
-          IComparable<bool>,
-          IEquatable<bool>,
-          ISpanParsable<bool>
+            IConvertible,
+            IComparable<bool>,
+            IEquatable<bool>,
+            ISpanParsable<bool>
     {
         //
         // Member Variables
@@ -98,7 +100,9 @@ namespace System
             {
                 if (destination.Length > 3)
                 {
-                    ulong true_val = BitConverter.IsLittleEndian ? 0x65007500720054ul : 0x54007200750065ul; // "True"
+                    ulong true_val = BitConverter.IsLittleEndian
+                        ? 0x65007500720054ul
+                        : 0x54007200750065ul; // "True"
                     MemoryMarshal.Write(MemoryMarshal.AsBytes(destination), in true_val);
                     charsWritten = 4;
                     return true;
@@ -108,7 +112,9 @@ namespace System
             {
                 if (destination.Length > 4)
                 {
-                    ulong fals_val = BitConverter.IsLittleEndian ? 0x73006C00610046ul : 0x460061006C0073ul; // "Fals"
+                    ulong fals_val = BitConverter.IsLittleEndian
+                        ? 0x73006C00610046ul
+                        : 0x460061006C0073ul; // "Fals"
                     MemoryMarshal.Write(MemoryMarshal.AsBytes(destination), in fals_val);
                     destination[4] = 'e';
                     charsWritten = 5;
@@ -195,17 +201,24 @@ namespace System
         {
             // "true" as a ulong, each char |'d with 0x0020 for case-insensitivity
             ulong true_val = BitConverter.IsLittleEndian ? 0x65007500720074ul : 0x74007200750065ul;
-            return value.Length == 4 &&
-                   (MemoryMarshal.Read<ulong>(MemoryMarshal.AsBytes(value)) | 0x0020002000200020) == true_val;
+            return value.Length == 4
+                && (MemoryMarshal.Read<ulong>(MemoryMarshal.AsBytes(value)) | 0x0020002000200020)
+                    == true_val;
         }
 
         internal static bool IsFalseStringIgnoreCase(ReadOnlySpan<char> value)
         {
             // "fals" as a ulong, each char |'d with 0x0020 for case-insensitivity
             ulong fals_val = BitConverter.IsLittleEndian ? 0x73006C00610066ul : 0x660061006C0073ul;
-            return value.Length == 5 &&
-                   (((MemoryMarshal.Read<ulong>(MemoryMarshal.AsBytes(value)) | 0x0020002000200020) == fals_val) &
-                    ((value[4] | 0x20) == 'e'));
+            return value.Length == 5
+                && (
+                    (
+                        (
+                            MemoryMarshal.Read<ulong>(MemoryMarshal.AsBytes(value))
+                            | 0x0020002000200020
+                        ) == fals_val
+                    ) & ((value[4] | 0x20) == 'e')
+                );
         }
 #else
         internal static bool IsTrueStringIgnoreCase(ReadOnlySpan<char> value)
@@ -409,14 +422,23 @@ namespace System
 
         static bool IParsable<bool>.Parse(string s, IFormatProvider? provider) => Parse(s);
 
-        static bool IParsable<bool>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out bool result) => TryParse(s, out result);
+        static bool IParsable<bool>.TryParse(
+            [NotNullWhen(true)] string? s,
+            IFormatProvider? provider,
+            out bool result
+        ) => TryParse(s, out result);
 
         //
         // ISpanParsable
         //
 
-        static bool ISpanParsable<bool>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s);
+        static bool ISpanParsable<bool>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
+            Parse(s);
 
-        static bool ISpanParsable<bool>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out bool result) => TryParse(s, out result);
+        static bool ISpanParsable<bool>.TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out bool result
+        ) => TryParse(s, out result);
     }
 }

@@ -17,13 +17,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE80.CodeFunction2))]
-    public partial class CodeFunction : AbstractCodeMember, ICodeElementContainer<CodeParameter>, ICodeElementContainer<CodeAttribute>, EnvDTE.CodeFunction, EnvDTE80.CodeFunction2, IMethodXML, IMethodXML2
+    public partial class CodeFunction
+        : AbstractCodeMember,
+            ICodeElementContainer<CodeParameter>,
+            ICodeElementContainer<CodeAttribute>,
+            EnvDTE.CodeFunction,
+            EnvDTE80.CodeFunction2,
+            IMethodXML,
+            IMethodXML2
     {
         internal static EnvDTE.CodeFunction Create(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
+            int? nodeKind
+        )
         {
             var element = new CodeFunction(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeFunction)ComAggregate.CreateAggregatedObject(element);
@@ -37,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
+            string name
+        )
         {
             var element = new CodeFunction(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeFunction)ComAggregate.CreateAggregatedObject(element);
@@ -47,39 +56,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKey, nodeKind)
-        {
-        }
+            int? nodeKind
+        )
+            : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         internal CodeFunction(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind, name)
-        {
-        }
+            string name
+        )
+            : base(state, fileCodeModel, nodeKind, name) { }
 
-        EnvDTE.CodeElements ICodeElementContainer<CodeParameter>.GetCollection()
-            => this.Parameters;
+        EnvDTE.CodeElements ICodeElementContainer<CodeParameter>.GetCollection() => this.Parameters;
 
-        EnvDTE.CodeElements ICodeElementContainer<CodeAttribute>.GetCollection()
-            => this.Attributes;
+        EnvDTE.CodeElements ICodeElementContainer<CodeAttribute>.GetCollection() => this.Attributes;
 
         private IMethodSymbol MethodSymbol
         {
             get { return (IMethodSymbol)LookupSymbol(); }
         }
 
-        internal override ImmutableArray<SyntaxNode> GetParameters()
-            => ImmutableArray.CreateRange(CodeModelService.GetParameterNodes(LookupNode()));
+        internal override ImmutableArray<SyntaxNode> GetParameters() =>
+            ImmutableArray.CreateRange(CodeModelService.GetParameterNodes(LookupNode()));
 
-        protected override object GetExtenderNames()
-            => CodeModelService.GetFunctionExtenderNames();
+        protected override object GetExtenderNames() => CodeModelService.GetFunctionExtenderNames();
 
-        protected override object GetExtender(string name)
-            => CodeModelService.GetFunctionExtender(name, LookupNode(), LookupSymbol());
+        protected override object GetExtender(string name) =>
+            CodeModelService.GetFunctionExtender(name, LookupNode(), LookupSymbol());
 
         public override EnvDTE.vsCMElement Kind
         {
@@ -88,15 +92,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public bool CanOverride
         {
-            get
-            {
-                return CodeModelService.GetCanOverride(LookupNode());
-            }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateCanOverride, value);
-            }
+            get { return CodeModelService.GetCanOverride(LookupNode()); }
+            set { UpdateNode(FileCodeModel.UpdateCanOverride, value); }
         }
 
         public EnvDTE.vsCMFunction FunctionKind
@@ -119,14 +116,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var symbol = (IMethodSymbol)LookupSymbol();
 
                 // Only methods and constructors can be overloaded
-                if (symbol.MethodKind is not MethodKind.Ordinary and
-                    not MethodKind.Constructor)
+                if (symbol.MethodKind is not MethodKind.Ordinary and not MethodKind.Constructor)
                 {
                     return false;
                 }
 
-                var methodsOfName = symbol.ContainingType.GetMembers(symbol.Name)
-                                                         .Where(m => m.Kind == SymbolKind.Method);
+                var methodsOfName = symbol
+                    .ContainingType.GetMembers(symbol.Name)
+                    .Where(m => m.Kind == SymbolKind.Method);
 
                 return methodsOfName.Count() > 1;
             }
@@ -134,24 +131,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public EnvDTE.CodeElements Overloads
         {
-            get
-            {
-                return OverloadsCollection.Create(this.FileCodeModel.State, this);
-            }
+            get { return OverloadsCollection.Create(this.FileCodeModel.State, this); }
         }
 
         public override EnvDTE.CodeElements Children
         {
-            get { return UnionCollection.Create(this.State, this, (ICodeElements)this.Attributes, (ICodeElements)this.Parameters); }
+            get
+            {
+                return UnionCollection.Create(
+                    this.State,
+                    this,
+                    (ICodeElements)this.Attributes,
+                    (ICodeElements)this.Parameters
+                );
+            }
         }
 
         public EnvDTE.CodeTypeRef Type
         {
             get
             {
-                return CodeTypeRef.Create(this.State, this, GetProjectId(), MethodSymbol.ReturnType);
+                return CodeTypeRef.Create(
+                    this.State,
+                    this,
+                    GetProjectId(),
+                    MethodSymbol.ReturnType
+                );
             }
-
             set
             {
                 // The type is sometimes part of the node key, so we should be sure to reacquire

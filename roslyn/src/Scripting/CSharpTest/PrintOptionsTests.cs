@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
         [Fact]
         public void NullOptions()
         {
-            Assert.Throws<ArgumentNullException>(() => s_formatter.FormatObject("hello", options: null));
+            Assert.Throws<ArgumentNullException>(
+                () => s_formatter.FormatObject("hello", options: null)
+            );
         }
 
         [Fact]
@@ -30,14 +32,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
         [Fact]
         public void InvalidMemberDisplayFormat()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new PrintOptions().MemberDisplayFormat = (MemberDisplayFormat)(-1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new PrintOptions().MemberDisplayFormat = (MemberDisplayFormat)(-1)
+            );
         }
 
         [Fact]
         public void InvalidMaximumOutputLength()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new PrintOptions().MaximumOutputLength = -1);
-            Assert.Throws<ArgumentOutOfRangeException>(() => new PrintOptions().MaximumOutputLength = 0);
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new PrintOptions().MaximumOutputLength = -1
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new PrintOptions().MaximumOutputLength = 0
+            );
         }
 
         [Fact]
@@ -48,12 +56,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
 
             options.NumberRadix = 10;
             Assert.Equal("10", formatter.FormatObject(10, options));
-            Assert.Equal("int[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }", formatter.FormatObject(new int[10], options));
+            Assert.Equal(
+                "int[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }",
+                formatter.FormatObject(new int[10], options)
+            );
             Assert.Equal(@"16 '\u0010'", formatter.FormatObject('\u0010', options));
 
             options.NumberRadix = 16;
             Assert.Equal("0x0000000a", formatter.FormatObject(10, options));
-            Assert.Equal("int[0x0000000a] { 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 }", formatter.FormatObject(new int[10], options));
+            Assert.Equal(
+                "int[0x0000000a] { 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 }",
+                formatter.FormatObject(new int[10], options)
+            );
             Assert.Equal(@"0x0010 '\u0010'", formatter.FormatObject('\u0010', options));
         }
 
@@ -66,10 +80,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
             Assert.Equal("PrintOptions", s_formatter.FormatObject(options, options));
 
             options.MemberDisplayFormat = MemberDisplayFormat.SingleLine;
-            Assert.Equal("PrintOptions { Ellipsis=\"...\", EscapeNonPrintableCharacters=true, MaximumOutputLength=1024, MemberDisplayFormat=SingleLine, NumberRadix=10 }", s_formatter.FormatObject(options, options));
+            Assert.Equal(
+                "PrintOptions { Ellipsis=\"...\", EscapeNonPrintableCharacters=true, MaximumOutputLength=1024, MemberDisplayFormat=SingleLine, NumberRadix=10 }",
+                s_formatter.FormatObject(options, options)
+            );
 
             options.MemberDisplayFormat = MemberDisplayFormat.SeparateLines;
-            Assert.Equal(@"PrintOptions {
+            Assert.Equal(
+                @"PrintOptions {
   Ellipsis: ""..."",
   EscapeNonPrintableCharacters: true,
   MaximumOutputLength: 1024,
@@ -79,7 +97,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
   _memberDisplayFormat: SeparateLines,
   _numberRadix: 10
 }
-", s_formatter.FormatObject(options, options));
+",
+                s_formatter.FormatObject(options, options)
+            );
         }
 
         [Fact]

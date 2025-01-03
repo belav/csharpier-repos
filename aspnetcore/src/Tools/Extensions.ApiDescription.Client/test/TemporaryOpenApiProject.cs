@@ -8,12 +8,10 @@ namespace Microsoft.Extensions.Tools.Internal;
 public class TemporaryOpenApiProject : TemporaryCSharpProject
 {
     public TemporaryOpenApiProject(string name, TemporaryDirectory directory, string sdk)
-        : base(name, directory, sdk)
-    {
-    }
+        : base(name, directory, sdk) { }
 
     protected override string Template =>
-@"<Project Sdk=""{2}"">
+        @"<Project Sdk=""{2}"">
   <Import Project=""build/Microsoft.Extensions.ApiDescription.Client.props"" />
 
   <PropertyGroup>
@@ -38,7 +36,10 @@ public class TemporaryOpenApiProject : TemporaryCSharpProject
   <Import Project=""build/Fakes.targets"" />
 </Project>";
 
-    protected override void AddAdditionalAttributes(StringBuilder sb, TemporaryCSharpProject.ItemSpec item)
+    protected override void AddAdditionalAttributes(
+        StringBuilder sb,
+        TemporaryCSharpProject.ItemSpec item
+    )
     {
         var openApiItem = item as ItemSpec;
         if (openApiItem.ClassName != null)
@@ -69,7 +70,8 @@ public class TemporaryOpenApiProject : TemporaryCSharpProject
 
     public new class ItemSpec : TemporaryCSharpProject.ItemSpec
     {
-        public ItemSpec() : base()
+        public ItemSpec()
+            : base()
         {
             Name = "OpenApiReference";
         }

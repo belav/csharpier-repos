@@ -14,10 +14,10 @@ namespace System.ServiceModel.Security
     using System.Xml;
     using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
 
-    class AcceleratedTokenProvider : 
-        NegotiationTokenProvider<AcceleratedTokenProviderState>
+    class AcceleratedTokenProvider : NegotiationTokenProvider<AcceleratedTokenProviderState>
     {
-        internal const SecurityKeyEntropyMode defaultKeyEntropyMode = SecurityKeyEntropyMode.CombinedEntropy;
+        internal const SecurityKeyEntropyMode defaultKeyEntropyMode =
+            SecurityKeyEntropyMode.CombinedEntropy;
         SecurityKeyEntropyMode keyEntropyMode = defaultKeyEntropyMode;
         SecurityBindingElement bootstrapSecurityBindingElement;
         Uri privacyNoticeUri;
@@ -34,10 +34,7 @@ namespace System.ServiceModel.Security
 
         public SecurityKeyEntropyMode KeyEntropyMode
         {
-            get
-            {
-                return this.keyEntropyMode;
-            }
+            get { return this.keyEntropyMode; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -56,7 +53,7 @@ namespace System.ServiceModel.Security
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
                 }
-                this.bootstrapSecurityBindingElement = (SecurityBindingElement) value.Clone();
+                this.bootstrapSecurityBindingElement = (SecurityBindingElement)value.Clone();
             }
         }
 
@@ -90,8 +87,6 @@ namespace System.ServiceModel.Security
             }
         }
 
-
-
         // SC/Trust workshop change to turn off context
         protected override bool IsMultiLegNegotiation
         {
@@ -100,25 +95,23 @@ namespace System.ServiceModel.Security
 
         public override XmlDictionaryString RequestSecurityTokenAction
         {
-            get 
-            {
-                return this.StandardsManager.SecureConversationDriver.IssueAction;
-            }
+            get { return this.StandardsManager.SecureConversationDriver.IssueAction; }
         }
 
         public override XmlDictionaryString RequestSecurityTokenResponseAction
         {
-            get 
-            {
-                return this.StandardsManager.SecureConversationDriver.IssueResponseAction;
-            }
+            get { return this.StandardsManager.SecureConversationDriver.IssueResponseAction; }
         }
 
         public override void OnOpen(TimeSpan timeout)
         {
             if (this.BootstrapSecurityBindingElement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.BootstrapSecurityBindingElementNotSet, this.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.BootstrapSecurityBindingElementNotSet, this.GetType())
+                    )
+                );
             }
             base.OnOpen(timeout);
         }
@@ -130,9 +123,16 @@ namespace System.ServiceModel.Security
             {
                 if (this.BootstrapSecurityBindingElement == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.BootstrapSecurityBindingElementNotSet, this.GetType())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.BootstrapSecurityBindingElementNotSet, this.GetType())
+                        )
+                    );
                 }
-                this.credentialsHandle = SecurityUtils.GetCredentialsHandle(this.BootstrapSecurityBindingElement, this.IssuerBindingContext);
+                this.credentialsHandle = SecurityUtils.GetCredentialsHandle(
+                    this.BootstrapSecurityBindingElement,
+                    this.IssuerBindingContext
+                );
                 this.ownCredentialsHandle = true;
             }
         }
@@ -161,43 +161,84 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected override IChannelFactory<IRequestChannel> GetNegotiationChannelFactory(IChannelFactory<IRequestChannel> transportChannelFactory, ChannelBuilder channelBuilder)
+        protected override IChannelFactory<IRequestChannel> GetNegotiationChannelFactory(
+            IChannelFactory<IRequestChannel> transportChannelFactory,
+            ChannelBuilder channelBuilder
+        )
         {
-            ISecurityCapabilities securityCapabilities = this.bootstrapSecurityBindingElement.GetProperty<ISecurityCapabilities>(this.IssuerBindingContext);
-            SecurityCredentialsManager securityCredentials = this.IssuerBindingContext.BindingParameters.Find<SecurityCredentialsManager>();
+            ISecurityCapabilities securityCapabilities =
+                this.bootstrapSecurityBindingElement.GetProperty<ISecurityCapabilities>(
+                    this.IssuerBindingContext
+                );
+            SecurityCredentialsManager securityCredentials =
+                this.IssuerBindingContext.BindingParameters.Find<SecurityCredentialsManager>();
             if (securityCredentials == null)
             {
                 securityCredentials = ClientCredentials.CreateDefaultCredentials();
             }
 
-            this.bootstrapSecurityBindingElement.ReaderQuotas = this.IssuerBindingContext.GetInnerProperty<XmlDictionaryReaderQuotas>();
+            this.bootstrapSecurityBindingElement.ReaderQuotas =
+                this.IssuerBindingContext.GetInnerProperty<XmlDictionaryReaderQuotas>();
             if (this.bootstrapSecurityBindingElement.ReaderQuotas == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)
+                    )
+                );
             }
 
-            TransportBindingElement transportBindingElement = this.IssuerBindingContext.RemainingBindingElements.Find<TransportBindingElement>();
+            TransportBindingElement transportBindingElement =
+                this.IssuerBindingContext.RemainingBindingElements.Find<TransportBindingElement>();
             if (transportBindingElement != null)
-                this.bootstrapSecurityBindingElement.MaxReceivedMessageSize = transportBindingElement.MaxReceivedMessageSize;
+                this.bootstrapSecurityBindingElement.MaxReceivedMessageSize =
+                    transportBindingElement.MaxReceivedMessageSize;
 
-            SecurityProtocolFactory securityProtocolFactory = this.bootstrapSecurityBindingElement.CreateSecurityProtocolFactory<IRequestChannel>(this.IssuerBindingContext.Clone(), securityCredentials, false, this.IssuerBindingContext.Clone());
-            MessageSecurityProtocolFactory soapBindingFactory = (securityProtocolFactory as MessageSecurityProtocolFactory);
+            SecurityProtocolFactory securityProtocolFactory =
+                this.bootstrapSecurityBindingElement.CreateSecurityProtocolFactory<IRequestChannel>(
+                    this.IssuerBindingContext.Clone(),
+                    securityCredentials,
+                    false,
+                    this.IssuerBindingContext.Clone()
+                );
+            MessageSecurityProtocolFactory soapBindingFactory = (
+                securityProtocolFactory as MessageSecurityProtocolFactory
+            );
             if (soapBindingFactory != null)
             {
-                soapBindingFactory.ApplyConfidentiality = soapBindingFactory.ApplyIntegrity
-                    = soapBindingFactory.RequireConfidentiality = soapBindingFactory.RequireIntegrity = true;
+                soapBindingFactory.ApplyConfidentiality =
+                    soapBindingFactory.ApplyIntegrity =
+                    soapBindingFactory.RequireConfidentiality =
+                    soapBindingFactory.RequireIntegrity =
+                        true;
 
                 MessagePartSpecification bodyPart = new MessagePartSpecification(true);
-                soapBindingFactory.ProtectionRequirements.IncomingSignatureParts.AddParts(bodyPart, RequestSecurityTokenAction);
-                soapBindingFactory.ProtectionRequirements.IncomingEncryptionParts.AddParts(bodyPart, RequestSecurityTokenAction);
-                soapBindingFactory.ProtectionRequirements.OutgoingSignatureParts.AddParts(bodyPart, RequestSecurityTokenResponseAction);
-                soapBindingFactory.ProtectionRequirements.OutgoingEncryptionParts.AddParts(bodyPart, RequestSecurityTokenResponseAction);
+                soapBindingFactory.ProtectionRequirements.IncomingSignatureParts.AddParts(
+                    bodyPart,
+                    RequestSecurityTokenAction
+                );
+                soapBindingFactory.ProtectionRequirements.IncomingEncryptionParts.AddParts(
+                    bodyPart,
+                    RequestSecurityTokenAction
+                );
+                soapBindingFactory.ProtectionRequirements.OutgoingSignatureParts.AddParts(
+                    bodyPart,
+                    RequestSecurityTokenResponseAction
+                );
+                soapBindingFactory.ProtectionRequirements.OutgoingEncryptionParts.AddParts(
+                    bodyPart,
+                    RequestSecurityTokenResponseAction
+                );
             }
             securityProtocolFactory.PrivacyNoticeUri = this.PrivacyNoticeUri;
             securityProtocolFactory.PrivacyNoticeVersion = this.PrivacyNoticeVersion;
             return new SecurityChannelFactory<IRequestChannel>(
-                securityCapabilities, this.IssuerBindingContext, channelBuilder, securityProtocolFactory, transportChannelFactory);
-
+                securityCapabilities,
+                this.IssuerBindingContext,
+                channelBuilder,
+                securityProtocolFactory,
+                transportChannelFactory
+            );
         }
 
         protected override IRequestChannel CreateClientChannel(EndpointAddress target, Uri via)
@@ -209,24 +250,37 @@ namespace System.ServiceModel.Security
             }
             if (this.ownCredentialsHandle)
             {
-                ChannelParameterCollection newParameters = result.GetProperty<ChannelParameterCollection>();
+                ChannelParameterCollection newParameters =
+                    result.GetProperty<ChannelParameterCollection>();
                 if (newParameters != null)
                 {
-                    newParameters.Add(new SspiIssuanceChannelParameter(true, this.credentialsHandle));
+                    newParameters.Add(
+                        new SspiIssuanceChannelParameter(true, this.credentialsHandle)
+                    );
                 }
             }
             return result;
         }
 
-        protected override bool CreateNegotiationStateCompletesSynchronously(EndpointAddress target, Uri via)
+        protected override bool CreateNegotiationStateCompletesSynchronously(
+            EndpointAddress target,
+            Uri via
+        )
         {
             return true;
         }
 
-        protected override AcceleratedTokenProviderState CreateNegotiationState(EndpointAddress target, Uri via, TimeSpan timeout)
+        protected override AcceleratedTokenProviderState CreateNegotiationState(
+            EndpointAddress target,
+            Uri via,
+            TimeSpan timeout
+        )
         {
             byte[] keyEntropy;
-            if (this.keyEntropyMode == SecurityKeyEntropyMode.ClientEntropy || this.keyEntropyMode == SecurityKeyEntropyMode.CombinedEntropy)
+            if (
+                this.keyEntropyMode == SecurityKeyEntropyMode.ClientEntropy
+                || this.keyEntropyMode == SecurityKeyEntropyMode.CombinedEntropy
+            )
             {
                 keyEntropy = new byte[this.SecurityAlgorithmSuite.DefaultSymmetricKeyLength / 8];
                 CryptoHelper.FillRandomBytes(keyEntropy);
@@ -238,17 +292,32 @@ namespace System.ServiceModel.Security
             return new AcceleratedTokenProviderState(keyEntropy);
         }
 
-        protected override IAsyncResult BeginCreateNegotiationState(EndpointAddress target, Uri via, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginCreateNegotiationState(
+            EndpointAddress target,
+            Uri via,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new CompletedAsyncResult<AcceleratedTokenProviderState>(CreateNegotiationState(target, via, timeout), callback, state);
+            return new CompletedAsyncResult<AcceleratedTokenProviderState>(
+                CreateNegotiationState(target, via, timeout),
+                callback,
+                state
+            );
         }
 
-        protected override AcceleratedTokenProviderState EndCreateNegotiationState(IAsyncResult result)
+        protected override AcceleratedTokenProviderState EndCreateNegotiationState(
+            IAsyncResult result
+        )
         {
             return CompletedAsyncResult<AcceleratedTokenProviderState>.End(result);
         }
 
-        protected override BodyWriter GetFirstOutgoingMessageBody(AcceleratedTokenProviderState negotiationState, out MessageProperties messageProperties)
+        protected override BodyWriter GetFirstOutgoingMessageBody(
+            AcceleratedTokenProviderState negotiationState,
+            out MessageProperties messageProperties
+        )
         {
             messageProperties = null;
             RequestSecurityToken rst = new RequestSecurityToken(this.StandardsManager);
@@ -264,19 +333,35 @@ namespace System.ServiceModel.Security
             return rst;
         }
 
-        protected override BodyWriter GetNextOutgoingMessageBody(Message incomingMessage, AcceleratedTokenProviderState negotiationState)
+        protected override BodyWriter GetNextOutgoingMessageBody(
+            Message incomingMessage,
+            AcceleratedTokenProviderState negotiationState
+        )
         {
             ThrowIfFault(incomingMessage, this.TargetAddress);
             if (incomingMessage.Headers.Action != RequestSecurityTokenResponseAction.Value)
             {
-                throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.InvalidActionForNegotiationMessage, incomingMessage.Headers.Action)), incomingMessage);
+                throw TraceUtility.ThrowHelperError(
+                    new SecurityNegotiationException(
+                        SR.GetString(
+                            SR.InvalidActionForNegotiationMessage,
+                            incomingMessage.Headers.Action
+                        )
+                    ),
+                    incomingMessage
+                );
             }
             // get the claims corresponding to the server
             SecurityMessageProperty serverContextProperty = incomingMessage.Properties.Security;
             ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies;
-            if (serverContextProperty != null && serverContextProperty.ServiceSecurityContext != null)
+            if (
+                serverContextProperty != null
+                && serverContextProperty.ServiceSecurityContext != null
+            )
             {
-                authorizationPolicies = serverContextProperty.ServiceSecurityContext.AuthorizationPolicies;
+                authorizationPolicies = serverContextProperty
+                    .ServiceSecurityContext
+                    .AuthorizationPolicies;
             }
             else
             {
@@ -286,35 +371,67 @@ namespace System.ServiceModel.Security
             XmlDictionaryReader bodyReader = incomingMessage.GetReaderAtBodyContents();
             using (bodyReader)
             {
-                if (this.StandardsManager.MessageSecurityVersion.TrustVersion == TrustVersion.WSTrustFeb2005)
-                    rstr = RequestSecurityTokenResponse.CreateFrom(this.StandardsManager, bodyReader);
-                else if (this.StandardsManager.MessageSecurityVersion.TrustVersion == TrustVersion.WSTrust13)
+                if (
+                    this.StandardsManager.MessageSecurityVersion.TrustVersion
+                    == TrustVersion.WSTrustFeb2005
+                )
+                    rstr = RequestSecurityTokenResponse.CreateFrom(
+                        this.StandardsManager,
+                        bodyReader
+                    );
+                else if (
+                    this.StandardsManager.MessageSecurityVersion.TrustVersion
+                    == TrustVersion.WSTrust13
+                )
                 {
-                    RequestSecurityTokenResponseCollection rstrc = this.StandardsManager.TrustDriver.CreateRequestSecurityTokenResponseCollection(bodyReader);
+                    RequestSecurityTokenResponseCollection rstrc =
+                        this.StandardsManager.TrustDriver.CreateRequestSecurityTokenResponseCollection(
+                            bodyReader
+                        );
 
                     foreach (RequestSecurityTokenResponse rstrItem in rstrc.RstrCollection)
                     {
                         if (rstr != null)
                         {
                             // More than one RSTR is found. So throw an exception.
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.MoreThanOneRSTRInRSTRC)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new MessageSecurityException(
+                                    SR.GetString(SR.MoreThanOneRSTRInRSTRC)
+                                )
+                            );
                         }
                         rstr = rstrItem;
                     }
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
                 }
 
                 incomingMessage.ReadFromBodyContentsToEnd(bodyReader);
             }
             if (rstr.Context != negotiationState.Context)
             {
-                throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.BadSecurityNegotiationContext)), incomingMessage);
+                throw TraceUtility.ThrowHelperError(
+                    new SecurityNegotiationException(
+                        SR.GetString(SR.BadSecurityNegotiationContext)
+                    ),
+                    incomingMessage
+                );
             }
             byte[] keyEntropy = negotiationState.GetRequestorEntropy();
-            GenericXmlSecurityToken serviceToken = rstr.GetIssuedToken(null, null, this.keyEntropyMode, keyEntropy, this.SecurityContextTokenUri, authorizationPolicies, this.SecurityAlgorithmSuite.DefaultSymmetricKeyLength, false);
+            GenericXmlSecurityToken serviceToken = rstr.GetIssuedToken(
+                null,
+                null,
+                this.keyEntropyMode,
+                keyEntropy,
+                this.SecurityContextTokenUri,
+                authorizationPolicies,
+                this.SecurityAlgorithmSuite.DefaultSymmetricKeyLength,
+                false
+            );
             negotiationState.SetServiceToken(serviceToken);
             return null;
         }

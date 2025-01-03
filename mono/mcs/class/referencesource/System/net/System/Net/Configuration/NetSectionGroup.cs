@@ -13,31 +13,46 @@ namespace System.Net.Configuration
     /// </summary>
     public sealed class NetSectionGroup : ConfigurationSectionGroup
     {
-        public NetSectionGroup() {}
+        public NetSectionGroup() { }
 
         // public properties
         [ConfigurationProperty(ConfigurationStrings.AuthenticationModulesSectionName)]
         public AuthenticationModulesSection AuthenticationModules
         {
-            get { return (AuthenticationModulesSection)Sections[ConfigurationStrings.AuthenticationModulesSectionName]; }
+            get
+            {
+                return (AuthenticationModulesSection)
+                    Sections[ConfigurationStrings.AuthenticationModulesSectionName];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.ConnectionManagementSectionName)]
         public ConnectionManagementSection ConnectionManagement
         {
-            get { return (ConnectionManagementSection)Sections[ConfigurationStrings.ConnectionManagementSectionName]; }
+            get
+            {
+                return (ConnectionManagementSection)
+                    Sections[ConfigurationStrings.ConnectionManagementSectionName];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.DefaultProxySectionName)]
         public DefaultProxySection DefaultProxy
         {
-            get { return (DefaultProxySection)Sections[ConfigurationStrings.DefaultProxySectionName]; }
+            get
+            {
+                return (DefaultProxySection)Sections[ConfigurationStrings.DefaultProxySectionName];
+            }
         }
 
 #if !FEATURE_PAL
         public MailSettingsSectionGroup MailSettings
         {
-            get { return (MailSettingsSectionGroup)SectionGroups[ConfigurationStrings.MailSettingsSectionName]; }
+            get
+            {
+                return (MailSettingsSectionGroup)
+                    SectionGroups[ConfigurationStrings.MailSettingsSectionName];
+            }
         }
 #endif // !FEATURE_PAL
 
@@ -51,7 +66,11 @@ namespace System.Net.Configuration
         [ConfigurationProperty(ConfigurationStrings.RequestCachingSectionName)]
         public RequestCachingSection RequestCaching
         {
-            get { return (RequestCachingSection)Sections[ConfigurationStrings.RequestCachingSectionName]; }
+            get
+            {
+                return (RequestCachingSection)
+                    Sections[ConfigurationStrings.RequestCachingSectionName];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.SettingsSectionName)]
@@ -63,8 +82,11 @@ namespace System.Net.Configuration
         [ConfigurationProperty(ConfigurationStrings.WebRequestModulesSectionName)]
         public WebRequestModulesSection WebRequestModules
         {
-            get { return (WebRequestModulesSection)Sections[ConfigurationStrings.WebRequestModulesSectionName]; }
+            get
+            {
+                return (WebRequestModulesSection)
+                    Sections[ConfigurationStrings.WebRequestModulesSectionName];
+            }
         }
-
     }
 }

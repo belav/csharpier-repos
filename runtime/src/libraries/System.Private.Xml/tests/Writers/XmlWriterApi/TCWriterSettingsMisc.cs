@@ -34,7 +34,11 @@ namespace System.Xml.XmlWriterApiTests
             CError.Equals(wSettings.NewLineOnAttributes, false, "NewLineOnAttributes");
             CError.Equals(wSettings.CloseOutput, false, "CloseOutput");
             CError.Equals(wSettings.CheckCharacters, true, "CheckCharacters");
-            CError.Equals(wSettings.ConformanceLevel, ConformanceLevel.Document, "ConformanceLevel");
+            CError.Equals(
+                wSettings.ConformanceLevel,
+                ConformanceLevel.Document,
+                "ConformanceLevel"
+            );
             CError.Equals(wSettings.WriteEndDocumentOnClose, true, "WriteEndDocumentOnClose");
         }
 
@@ -56,16 +60,40 @@ namespace System.Xml.XmlWriterApiTests
             XmlWriterSettings newSettings = wSettings.Clone();
 
             CError.Equals(wSettings.Encoding, newSettings.Encoding, "Encoding");
-            CError.Equals(wSettings.OmitXmlDeclaration, newSettings.OmitXmlDeclaration, "OmitXmlDeclaration");
-            CError.Equals(wSettings.NewLineHandling, newSettings.NewLineHandling, "NewLineHandling");
+            CError.Equals(
+                wSettings.OmitXmlDeclaration,
+                newSettings.OmitXmlDeclaration,
+                "OmitXmlDeclaration"
+            );
+            CError.Equals(
+                wSettings.NewLineHandling,
+                newSettings.NewLineHandling,
+                "NewLineHandling"
+            );
             CError.Equals(wSettings.NewLineChars, newSettings.NewLineChars, "NewLineChars");
             CError.Equals(wSettings.Indent, newSettings.Indent, "Indent");
             CError.Equals(wSettings.IndentChars, newSettings.IndentChars, "IndentChars");
-            CError.Equals(wSettings.NewLineOnAttributes, newSettings.NewLineOnAttributes, "NewLineOnAttributes");
+            CError.Equals(
+                wSettings.NewLineOnAttributes,
+                newSettings.NewLineOnAttributes,
+                "NewLineOnAttributes"
+            );
             CError.Equals(wSettings.CloseOutput, newSettings.CloseOutput, "CloseOutput");
-            CError.Equals(wSettings.CheckCharacters, newSettings.CheckCharacters, "CheckCharacters");
-            CError.Equals(wSettings.ConformanceLevel, newSettings.ConformanceLevel, "ConformanceLevel");
-            CError.Equals(wSettings.WriteEndDocumentOnClose, newSettings.WriteEndDocumentOnClose, "WriteEndDocumentOnClose");
+            CError.Equals(
+                wSettings.CheckCharacters,
+                newSettings.CheckCharacters,
+                "CheckCharacters"
+            );
+            CError.Equals(
+                wSettings.ConformanceLevel,
+                newSettings.ConformanceLevel,
+                "ConformanceLevel"
+            );
+            CError.Equals(
+                wSettings.WriteEndDocumentOnClose,
+                newSettings.WriteEndDocumentOnClose,
+                "WriteEndDocumentOnClose"
+            );
         }
     }
 }

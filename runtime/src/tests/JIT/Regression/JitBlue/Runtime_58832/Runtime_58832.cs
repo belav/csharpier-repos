@@ -24,7 +24,11 @@ public class Runtime_58832
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void Test(double x)
     {
-        try { Console.WriteLine(checked((ulong)x)); } catch { }
+        try
+        {
+            Console.WriteLine(checked((ulong)x));
+        }
+        catch { }
 
         if ((ulong)x == checked((ulong)x))
             Console.WriteLine("Should not be invoked");

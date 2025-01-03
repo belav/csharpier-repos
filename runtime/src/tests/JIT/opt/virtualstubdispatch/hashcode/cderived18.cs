@@ -7,6 +7,9 @@ namespace VirtFunc
 {
     public class CDerived18
     {
-        public override int GetHashCode() { return 18; }
+        public override int GetHashCode()
+        {
+            return 18;
+        }
     }
 }

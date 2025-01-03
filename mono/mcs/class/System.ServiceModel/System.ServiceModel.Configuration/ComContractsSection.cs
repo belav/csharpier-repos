@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,49 +49,51 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class ComContractsSection
-		 : ConfigurationSection
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty com_contracts;
+    [MonoTODO]
+    public sealed partial class ComContractsSection : ConfigurationSection
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty com_contracts;
 
-		static ComContractsSection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			com_contracts = new ConfigurationProperty ("",
-				typeof (ComContractElementCollection), null, null/* FIXME: get converter for ComContractElementCollection*/, null,
-				ConfigurationPropertyOptions.IsDefaultCollection);
+        static ComContractsSection()
+        {
+            properties = new ConfigurationPropertyCollection();
+            com_contracts = new ConfigurationProperty(
+                "",
+                typeof(ComContractElementCollection),
+                null,
+                null /* FIXME: get converter for ComContractElementCollection*/
+                ,
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
-			properties.Add (com_contracts);
-		}
+            properties.Add(com_contracts);
+        }
 
-		public ComContractsSection ()
-		{
-		}
+        public ComContractsSection() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "",
+            Options = ConfigurationPropertyOptions.IsDefaultCollection,
+            IsDefaultCollection = true
+        )]
+        public ComContractElementCollection ComContracts
+        {
+            get { return (ComContractElementCollection)base[com_contracts]; }
+        }
 
-		[ConfigurationProperty ("",
-			 Options = ConfigurationPropertyOptions.IsDefaultCollection,
-			IsDefaultCollection = true)]
-		public ComContractElementCollection ComContracts {
-			get { return (ComContractElementCollection) base [com_contracts]; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-
-	}
-
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

@@ -5,15 +5,15 @@
 namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
-    using System.Collections;        
+    using System.Collections;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;    
-    using System.Runtime;
+    using System.Collections.ObjectModel;
     using System.Reflection;
+    using System.Runtime;
     using System.Xml.Linq;
     using Microsoft.Build.Framework;
-    using Microsoft.Build.Utilities;        
-        
+    using Microsoft.Build.Utilities;
+
     public sealed class XamlBuildTypeInspectionExtensionContext : BuildExtensionContext
     {
         Dictionary<string, ITaskItem> markupItemsByTypeName;
@@ -27,15 +27,22 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-        internal void AddApplicationMarkupWithTypeName(IDictionary<string, ITaskItem> markupItemsByTypeName)
+        internal void AddApplicationMarkupWithTypeName(
+            IDictionary<string, ITaskItem> markupItemsByTypeName
+        )
         {
             if (markupItemsByTypeName != null)
             {
                 this.InitializeMarkupItemsByTypeName();
 
-                foreach (KeyValuePair<string, ITaskItem> markupItemByTypeName in markupItemsByTypeName)
+                foreach (
+                    KeyValuePair<string, ITaskItem> markupItemByTypeName in markupItemsByTypeName
+                )
                 {
-                    this.markupItemsByTypeName.Add(markupItemByTypeName.Key, markupItemByTypeName.Value);
+                    this.markupItemsByTypeName.Add(
+                        markupItemByTypeName.Key,
+                        markupItemByTypeName.Value
+                    );
                 }
             }
         }

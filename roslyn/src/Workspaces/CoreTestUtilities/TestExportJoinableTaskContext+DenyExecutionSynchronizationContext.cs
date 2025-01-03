@@ -51,11 +51,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             /// <param name="underlyingContext">The fallback synchronization context to use for scheduling operations
             /// posted to this synchronization context.</param>
             public DenyExecutionSynchronizationContext(SynchronizationContext? underlyingContext)
-                : this(underlyingContext, mainThread: null, failedTransfer: null)
-            {
-            }
+                : this(underlyingContext, mainThread: null, failedTransfer: null) { }
 
-            private DenyExecutionSynchronizationContext(SynchronizationContext? underlyingContext, Thread? mainThread, StrongBox<ExceptionDispatchInfo>? failedTransfer)
+            private DenyExecutionSynchronizationContext(
+                SynchronizationContext? underlyingContext,
+                Thread? mainThread,
+                StrongBox<ExceptionDispatchInfo>? failedTransfer
+            )
             {
                 UnderlyingContext = underlyingContext ?? new SynchronizationContext();
                 MainThread = mainThread ?? new Thread(MainThreadStart);
@@ -64,10 +66,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             internal event EventHandler? InvalidSwitch;
 
-            private SynchronizationContext UnderlyingContext
-            {
-                get;
-            }
+            private SynchronizationContext UnderlyingContext { get; }
 
             /// <summary>
             /// Gets the <see cref="Thread"/> to treat as the main thread.
@@ -77,10 +76,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             /// used for checking if <see cref="Thread.CurrentThread"/> matches a known "main thread", and ensures that
             /// the comparison will always result in a failure (not currently on the main thread).</para>
             /// </remarks>
-            internal Thread MainThread
-            {
-                get;
-            }
+            internal Thread MainThread { get; }
 
             private void MainThreadStart() => throw ExceptionUtilities.Unreachable();
 
@@ -138,12 +134,18 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 #pragma warning restore VSTHRD001 // Avoid legacy thread switching APIs
             }
 
-            public override SynchronizationContext CreateCopy()
-                => new DenyExecutionSynchronizationContext(UnderlyingContext.CreateCopy(), MainThread, _failedTransfer);
+            public override SynchronizationContext CreateCopy() =>
+                new DenyExecutionSynchronizationContext(
+                    UnderlyingContext.CreateCopy(),
+                    MainThread,
+                    _failedTransfer
+                );
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            private static void ThrowFailedTransferExceptionForCapture()
-                => throw new InvalidOperationException($"Code cannot switch to the main thread without configuring the {nameof(IThreadingContext)}.");
+            private static void ThrowFailedTransferExceptionForCapture() =>
+                throw new InvalidOperationException(
+                    $"Code cannot switch to the main thread without configuring the {nameof(IThreadingContext)}."
+                );
         }
     }
 }

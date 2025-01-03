@@ -12,15 +12,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void TestEmpty()
         {
-            Test(@"""""", expected: null,
-        @"",
-        @"", runLooseSubTreeCheck: false);
+            Test(@"""""", expected: null, @"", @"", runLooseSubTreeCheck: false);
         }
 
         [Fact]
         public void TestOneSpace()
         {
-            Test(@""" """, @"<Tree>
+            Test(
+                @""" """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence />
     <EndOfFile>
@@ -30,18 +30,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     </EndOfFile>
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Syntax error"" Start=""9"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Syntax error"" Start=""9"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestTwoSpaces()
         {
-            Test(@"""  """, @"<Tree>
+            Test(
+                @"""  """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence />
     <EndOfFile>
@@ -51,18 +54,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     </EndOfFile>
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Syntax error"" Start=""9"" Length=""2"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Syntax error"" Start=""9"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestTabSpace()
         {
-            Test(@"""\t""", @"<Tree>
+            Test(
+                @"""\t""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence />
     <EndOfFile>
@@ -72,18 +78,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     </EndOfFile>
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Syntax error"" Start=""9"" Length=""2"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Syntax error"" Start=""9"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestFormFeed()
         {
-            Test(@"""\f""", @"<Tree>
+            Test(
+                @"""\f""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence />
     <EndOfFile>
@@ -93,18 +102,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     </EndOfFile>
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Syntax error"" Start=""9"" Length=""2"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Syntax error"" Start=""9"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestFormFeed2()
         {
-            Test(@"""[\f1,0]""", @"<Tree>
+            Test(
+                @"""[\f1,0]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -126,10 +138,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Illegal whitespace character"" Start=""10"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
@@ -137,7 +150,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         {
             // .net strict parsers don't report the problem with the trailing \f.  we do as it's
             // per the ecma spec.
-            Test(@"""[0\f,1]""", @"<Tree>
+            Test(
+                @"""[0\f,1]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -159,16 +174,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Illegal whitespace character"" Start=""11"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestSingleLineComment()
         {
-            Test(@"""//""", @"<Tree>
+            Test(
+                @"""//""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence />
     <EndOfFile>
@@ -178,18 +196,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     </EndOfFile>
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Unterminated comment"" Start=""9"" Length=""2"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Unterminated comment"" Start=""9"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestSingleLineCommentWithContent()
         {
-            Test(@"""// """, @"<Tree>
+            Test(
+                @"""// """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence />
     <EndOfFile>
@@ -199,16 +220,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     </EndOfFile>
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Comments not allowed"" Start=""9"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestEmptyMultiLineComment()
         {
-            Test(@"""/**/""", @"<Tree>
+            Test(
+                @"""/**/""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence />
     <EndOfFile>
@@ -218,16 +242,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     </EndOfFile>
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Comments not allowed"" Start=""9"" Length=""4"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestMultiLineCommentWithStar()
         {
-            Test(@"""/***/""", @"<Tree>
+            Test(
+                @"""/***/""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence />
     <EndOfFile>
@@ -237,16 +264,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     </EndOfFile>
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Comments not allowed"" Start=""9"" Length=""5"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestArray1()
         {
-            Test(@"""[]""", @"<Tree>
+            Test(
+                @"""[]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -258,14 +288,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestArray2()
         {
-            Test(@""" [ ] """, @"<Tree>
+            Test(
+                @""" [ ] """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -280,14 +313,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestArray3()
         {
-            Test(@"""[""", @"<Tree>
+            Test(
+                @"""[""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -299,18 +335,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""']' expected"" Start=""10"" Length=""0"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""']' expected"" Start=""10"" Length=""0"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestArray4()
         {
-            Test(@"""]""", @"<Tree>
+            Test(
+                @"""]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Text>
@@ -320,18 +359,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""']' unexpected"" Start=""9"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""']' unexpected"" Start=""9"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestArray5()
         {
-            Test(@"""[,]""", @"<Tree>
+            Test(
+                @"""[,]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -347,16 +389,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""',' unexpected"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestArray6()
         {
-            Test(@"""[true,]""", @"<Tree>
+            Test(
+                @"""[true,]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -375,16 +420,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Trailing comma not allowed"" Start=""14"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestArray7()
         {
-            Test(@"""[true]""", @"<Tree>
+            Test(
+                @"""[true]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -400,14 +448,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestArray8()
         {
-            Test(@"""[,,]""", @"<Tree>
+            Test(
+                @"""[,,]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -426,16 +477,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""',' unexpected"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestArray9()
         {
-            Test(@"""[true,,]""", @"<Tree>
+            Test(
+                @"""[true,,]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -457,16 +511,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""',' unexpected"" Start=""15"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestArray10()
         {
-            Test(@"""[,true,]""", @"<Tree>
+            Test(
+                @"""[,true,]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -488,16 +545,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""',' unexpected"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestArray11()
         {
-            Test(@"""[,,true]""", @"<Tree>
+            Test(
+                @"""[,,true]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -519,16 +579,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""',' unexpected"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestTrueLiteral1()
         {
-            Test(@"""true""", @"<Tree>
+            Test(
+                @"""true""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -538,14 +601,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestTrueLiteral2()
         {
-            Test(@""" true """, @"<Tree>
+            Test(
+                @""" true """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -558,14 +624,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestFalseLiteral1()
         {
-            Test(@"""false""", @"<Tree>
+            Test(
+                @"""false""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -575,14 +644,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestFalseLiteral2()
         {
-            Test(@""" false """, @"<Tree>
+            Test(
+                @""" false """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -595,14 +667,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestNullLiteral1()
         {
-            Test(@"""null""", @"<Tree>
+            Test(
+                @"""null""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -612,14 +687,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestNullLiteral2()
         {
-            Test(@""" null """, @"<Tree>
+            Test(
+                @""" null """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -632,14 +710,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestUndefinedLiteral1()
         {
-            Test(@"""undefined""", @"<Tree>
+            Test(
+                @"""undefined""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -649,16 +730,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""'undefined' literal not allowed"" Start=""9"" Length=""9"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNaNLiteral1()
         {
-            Test(@"""NaN""", @"<Tree>
+            Test(
+                @"""NaN""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -668,16 +752,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""'NaN' literal not allowed"" Start=""9"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNaNLiteral2()
         {
-            Test(@""" NaN """, @"<Tree>
+            Test(
+                @""" NaN """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -690,16 +777,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""'NaN' literal not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNaNLiteral3()
         {
-            Test(@"""nan""", @"<Tree>
+            Test(
+                @"""nan""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Text>
@@ -709,18 +799,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'n' unexpected"" Start=""9"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'n' unexpected"" Start=""9"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestInfinity1()
         {
-            Test(@"""Infinity""", @"<Tree>
+            Test(
+                @"""Infinity""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -730,16 +823,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""'Infinity' literal not allowed"" Start=""9"" Length=""8"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNegativeInfinity1()
         {
-            Test(@"""-Infinity""", @"<Tree>
+            Test(
+                @"""-Infinity""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <NegativeLiteral>
@@ -750,16 +846,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""'-Infinity' literal not allowed"" Start=""9"" Length=""9"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNegativeInfinity2()
         {
-            Test(@"""- Infinity""", @"<Tree>
+            Test(
+                @"""- Infinity""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -772,18 +871,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""9"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""9"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestArrayWithMissingCommas()
         {
-            Test(@"""[0 1 2]""", @"<Tree>
+            Test(
+                @"""[0 1 2]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -805,18 +907,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""',' expected"" Start=""12"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""',' expected"" Start=""12"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestIncompleteNull1()
         {
-            Test(@"""n""", @"<Tree>
+            Test(
+                @"""n""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Text>
@@ -826,18 +931,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'n' unexpected"" Start=""9"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'n' unexpected"" Start=""9"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestIncompleteNull2()
         {
-            Test(@"""nu""", @"<Tree>
+            Test(
+                @"""nu""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Text>
@@ -847,18 +955,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'n' unexpected"" Start=""9"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'n' unexpected"" Start=""9"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestIncompleteUnicode1()
         {
-            Test(@"@""'h\u123'""", @"<Tree>
+            Test(
+                @"@""'h\u123'""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -868,18 +979,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid escape sequence"" Start=""12"" Length=""6"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestIncompleteEscape()
         {
-            Test(@"@""'h\u'""", @"<Tree>
+            Test(
+                @"@""'h\u'""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -889,18 +1003,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid escape sequence"" Start=""12"" Length=""3"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestIncompleteUnicode2()
         {
-            Test(@"@""""""h\u123""""""", @"<Tree>
+            Test(
+                @"@""""""h\u123""""""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -910,18 +1027,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid escape sequence"" Start=""13"" Length=""7"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid escape sequence"" Start=""13"" Length=""7"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestIncompleteEscape2()
         {
-            Test(@"@""""""h\u""""""", @"<Tree>
+            Test(
+                @"@""""""h\u""""""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -931,18 +1051,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid escape sequence"" Start=""13"" Length=""4"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid escape sequence"" Start=""13"" Length=""4"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestInvalidNonBase10()
         {
-            Test(@"""0aq2dun13.hod""", @"<Tree>
+            Test(
+                @"""0aq2dun13.hod""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -952,18 +1075,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""9"" Length=""13"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""9"" Length=""13"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestUnterminatedString()
         {
-            Test(@"""'hi""", @"<Tree>
+            Test(
+                @"""'hi""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -973,18 +1099,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Unterminated string"" Start=""9"" Length=""3"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Unterminated string"" Start=""9"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestUnterminatedString2()
         {
-            Test(@"""\""hi""", @"<Tree>
+            Test(
+                @"""\""hi""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -994,18 +1123,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Unterminated string"" Start=""9"" Length=""4"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Unterminated string"" Start=""9"" Length=""4"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestExtraEndToken()
         {
-            Test(@"""{}}""", @"<Tree>
+            Test(
+                @"""{}}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1020,18 +1152,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'}' unexpected"" Start=""11"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'}' unexpected"" Start=""11"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestMultiObject1()
         {
-            Test(@"""{'first':1,'second':2,'third':3}""", @"<Tree>
+            Test(
+                @"""{'first':1,'second':2,'third':3}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1067,16 +1202,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestMultiObject2()
         {
-            Test(@"""{\""first\"":1,\""second\"":2,\""third\"":3}""", @"<Tree>
+            Test(
+                @"""{\""first\"":1,\""second\"":2,\""third\"":3}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1112,14 +1250,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestExtraChar()
         {
-            Test(@"""nullz""", @"<Tree>
+            Test(
+                @"""nullz""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Text>
@@ -1129,18 +1270,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'n' unexpected"" Start=""9"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'n' unexpected"" Start=""9"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestMissingColon()
         {
-            Test(@"@""{ 'a': 0, 'b' 0 }""", @"<Tree>
+            Test(
+                @"@""{ 'a': 0, 'b' 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1168,18 +1312,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be followed by a ':'"" Start=""20"" Length=""3"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""12"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNestedPropertyMissingColon()
         {
-            Test(@"@""
+            Test(
+                @"@""
 {
   """"description"""": """"A person"""",
   """"type"""": """"object"""",
@@ -1191,7 +1337,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
       """"items"""": {""""type"""":""""string""""}
     }
   }
-}""", @"<Tree>
+}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1328,18 +1475,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be followed by a ':'"" Start=""102"" Length=""8"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be followed by a ':'"" Start=""102"" Length=""8"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestMissingColon2()
         {
-            Test(@"@""{ """"a"""": 0, """"b"""" 0 }""", @"<Tree>
+            Test(
+                @"@""{ """"a"""": 0, """"b"""" 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1367,22 +1517,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be followed by a ':'"" Start=""22"" Length=""5"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be followed by a ':'"" Start=""22"" Length=""5"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestAdditionalContentComma()
         {
-            Test(@"@""[
+            Test(
+                @"@""[
 """"Small"""",
 """"Medium"""",
 """"Large""""
-],""", @"<Tree>
+],""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -1417,22 +1570,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""',' unexpected"" Start=""50"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""',' unexpected"" Start=""50"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestAdditionalContentText()
         {
-            Test(@"@""[
+            Test(
+                @"@""[
 """"Small"""",
 """"Medium"""",
 """"Large""""
-]content""", @"<Tree>
+]content""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -1467,18 +1623,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'c' unexpected"" Start=""50"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'c' unexpected"" Start=""50"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestAdditionalContentWhitespaceText()
         {
-            Test(@"@""'hi' a""", @"<Tree>
+            Test(
+                @"@""'hi' a""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -1491,18 +1650,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'a' unexpected"" Start=""15"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestAdditionalContentWhitespaceText2()
         {
-            Test(@"@""""""hi"""" a""", @"<Tree>
+            Test(
+                @"@""""""hi"""" a""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -1515,18 +1677,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'a' unexpected"" Start=""17"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'a' unexpected"" Start=""17"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestTrailingCommentStart()
         {
-            Test(@"@""true/""", @"<Tree>
+            Test(
+                @"@""true/""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -1536,18 +1701,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Error parsing comment"" Start=""14"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Error parsing comment"" Start=""14"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestBadCharInArray()
         {
-            Test(@"@""[}""", @"<Tree>
+            Test(
+                @"@""[}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -1563,18 +1731,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'}' unexpected"" Start=""11"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'}' unexpected"" Start=""11"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestIncompleteObject()
         {
-            Test(@"@""{""", @"<Tree>
+            Test(
+                @"@""{""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1586,18 +1757,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'}' expected"" Start=""11"" Length=""0"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'}' expected"" Start=""11"" Length=""0"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestEmptyObject()
         {
-            Test(@"@""{}""", @"<Tree>
+            Test(
+                @"@""{}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1609,14 +1783,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestLargeInt()
         {
-            Test(@"@""3333333333333333333333333333333333333""", @"<Tree>
+            Test(
+                @"@""3333333333333333333333333333333333333""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -1626,14 +1803,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestIdentifierProperty()
         {
-            Test(@"@""{ a: 0 }""", @"<Tree>
+            Test(
+                @"@""{ a: 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1653,16 +1833,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumericProperty()
         {
-            Test(@"@""{ 1: 0 }""", @"<Tree>
+            Test(
+                @"@""{ 1: 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1682,16 +1865,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNegativeNumericProperty()
         {
-            Test(@"@""{ -1: 0 }""", @"<Tree>
+            Test(
+                @"@""{ -1: 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1711,18 +1897,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid property name"" Start=""12"" Length=""2"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestArrayPropertyName()
         {
-            Test(@"@""{ []: 0 }""", @"<Tree>
+            Test(
+                @"@""{ []: 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1748,18 +1937,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Only properties allowed in an object"" Start=""12"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Only properties allowed in an object"" Start=""12"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNaNPropertyName()
         {
-            Test(@"@""{ NaN: 0 }""", @"<Tree>
+            Test(
+                @"@""{ NaN: 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1779,16 +1971,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestInfinityPropertyName()
         {
-            Test(@"@""{ Infinity: 0 }""", @"<Tree>
+            Test(
+                @"@""{ Infinity: 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1808,16 +2003,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""8"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNullPropertyName()
         {
-            Test(@"@""{ null: 0 }""", @"<Tree>
+            Test(
+                @"@""{ null: 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1837,16 +2035,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""4"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestUndefinedPropertyName()
         {
-            Test(@"@""{ undefined: 0 }""", @"<Tree>
+            Test(
+                @"@""{ undefined: 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1866,16 +2067,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""9"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNameWithSpace()
         {
-            Test(@"@""{ a b : 0 }""", @"<Tree>
+            Test(
+                @"@""{ a b : 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1899,18 +2103,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'a' unexpected"" Start=""12"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'a' unexpected"" Start=""12"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNameWithNumber()
         {
-            Test(@"@""{ a0 : 0 }""", @"<Tree>
+            Test(
+                @"@""{ a0 : 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1930,16 +2137,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumberWithHexName()
         {
-            Test(@"@""{ 0a : 0 }""", @"<Tree>
+            Test(
+                @"@""{ 0a : 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1959,16 +2169,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumberWithNonHexName()
         {
-            Test(@"@""{ 0z : 0 }""", @"<Tree>
+            Test(
+                @"@""{ 0z : 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -1988,16 +2201,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestDollarPropName()
         {
-            Test(@"@""{ $ : 0 }""", @"<Tree>
+            Test(
+                @"@""{ $ : 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2017,16 +2233,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestUnderscorePropName()
         {
-            Test(@"@""{ _ : 0 }""", @"<Tree>
+            Test(
+                @"@""{ _ : 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2046,16 +2265,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestStrangeLegalPropName()
         {
-            Test(@"@""{ 0$0 : 0 }""", @"<Tree>
+            Test(
+                @"@""{ 0$0 : 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2075,16 +2297,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestStrangeIllegalPropName()
         {
-            Test(@"@""{ 0(0 : 0 }""", @"<Tree>
+            Test(
+                @"@""{ 0(0 : 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2112,18 +2337,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Only properties allowed in an object"" Start=""12"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Only properties allowed in an object"" Start=""12"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestStrangeIllegalPropName2()
         {
-            Test(@"@""{ 0%0 : 0 }""", @"<Tree>
+            Test(
+                @"@""{ 0%0 : 0 }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2143,18 +2371,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid property name"" Start=""12"" Length=""3"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestObjectWithEmptyPropValue1()
         {
-            Test(@"""{'first': , }""", @"<Tree>
+            Test(
+                @"""{'first': , }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2175,16 +2406,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Value required"" Start=""18"" Length=""0"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestObjectWithEmptyPropValue2()
         {
-            Test(@"""{\""first\"": , }""", @"<Tree>
+            Test(
+                @"""{\""first\"": , }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2205,16 +2439,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Value required"" Start=""20"" Length=""0"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestObjectWithEmptyPropValue3()
         {
-            Test(@"""{'first': }""", @"<Tree>
+            Test(
+                @"""{'first': }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2234,18 +2471,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'}' unexpected"" Start=""19"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestObjectWithEmptyPropValue4()
         {
-            Test(@"""{\""first\"": }""", @"<Tree>
+            Test(
+                @"""{\""first\"": }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2265,18 +2505,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'}' unexpected"" Start=""21"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'}' unexpected"" Start=""21"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestObjectWithEmptyPropValue5()
         {
-            Test(@"""{'first': """, @"<Tree>
+            Test(
+                @"""{'first': """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2296,18 +2539,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Missing property value"" Start=""19"" Length=""0"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Value required"" Start=""18"" Length=""0"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestObjectWithEmptyPropValue6()
         {
-            Test(@"""{\""first\"": """, @"<Tree>
+            Test(
+                @"""{\""first\"": """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2327,18 +2573,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Missing property value"" Start=""21"" Length=""0"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Value required"" Start=""20"" Length=""0"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNestedProp1()
         {
-            Test(@"""{'first': 'second': 'third' }""", @"<Tree>
+            Test(
+                @"""{'first': 'second': 'third' }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2362,18 +2611,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Nested properties not allowed"" Start=""27"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNestedProp2()
         {
-            Test(@"""{\""first\"": \""second\"": \""third\"" }""", @"<Tree>
+            Test(
+                @"""{\""first\"": \""second\"": \""third\"" }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2397,18 +2649,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Nested properties not allowed"" Start=""31"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Nested properties not allowed"" Start=""31"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestMultiItemList()
         {
-            Test(@"""[{ 'name': 'Admin' },{ 'name': 'Publisher' },1,null,[],,'string']""", @"<Tree>
+            Test(
+                @"""[{ 'name': 'Admin' },{ 'name': 'Publisher' },1,null,[],,'string']""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -2479,16 +2734,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""12"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestMultiItemList2()
         {
-            Test(@"""[{ \""name\"": \""Admin\"" },{ \""name\"": \""Publisher\"" },1,null,[],,\""string\""]""", @"<Tree>
+            Test(
+                @"""[{ \""name\"": \""Admin\"" },{ \""name\"": \""Publisher\"" },1,null,[],,\""string\""]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -2559,19 +2817,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""',' unexpected"" Start=""72"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestMultiLine1()
         {
-            Test(@"@""
+            Test(
+                @"@""
 {'a':
 'bc','d':true
-}""", @"<Tree>
+}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2605,19 +2866,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""13"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestMultiLine2()
         {
-            Test(@"@""
+            Test(
+                @"@""
 {""""a"""":
 """"bc"""",""""d"""":true
-}""", @"<Tree>
+}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2651,14 +2915,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestNestedObject()
         {
-            Test(@"@""
+            Test(
+                @"@""
 {
   'description': 'A person',
   'type': 'object',
@@ -2670,7 +2936,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
       'items': {'type':'string'}
     }
   }
-}""", @"<Tree>
+}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2807,16 +3074,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""17"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNestedObject1()
         {
-            Test(@"@""
+            Test(
+                @"@""
 {
   """"description"""": """"A person"""",
   """"type"""": """"object"""",
@@ -2828,7 +3097,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
       """"items"""": {""""type"""":""""string""""}
     }
   }
-}""", @"<Tree>
+}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -2965,14 +3235,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestLiterals1()
         {
-            Test(@"@""{ A: '', B: 1, C: , D: 1.23, E: 3.45, F: null }""", @"<Tree>
+            Test(
+                @"@""{ A: '', B: 1, C: , D: 1.23, E: 3.45, F: null }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -3032,16 +3305,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""12"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestLiterals2()
         {
-            Test(@"@""{ """"A"""": """""""", """"B"""": 1, """"D"""": 1.23, """"E"""": 3.45, """"F"""": null }""", @"<Tree>
+            Test(
+                @"@""{ """"A"""": """""""", """"B"""": 1, """"D"""": 1.23, """"E"""": 3.45, """"F"""": null }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -3093,14 +3369,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestLiterals3()
         {
-            Test(@"@""[
+            Test(
+                @"@""[
   1,
   0,
   1.1,
@@ -3118,7 +3396,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
   /* comment! */
   '',
   null
-]""", @"<Tree>
+]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -3287,16 +3566,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""244"" Length=""1"" />
-</Diagnostics>", runLooseSubTreeCheck: false);
+</Diagnostics>",
+                runLooseSubTreeCheck: false
+            );
         }
 
         [Fact]
         public void TestCommentsInArray()
         {
-            Test(@"@""[/*hi*/1/*hi*/,2/*hi*/]""", @"<Tree>
+            Test(
+                @"@""[/*hi*/1/*hi*/,2/*hi*/]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -3318,16 +3601,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Comments not allowed"" Start=""11"" Length=""6"" />
-</Diagnostics>", runLooseSubTreeCheck: false);
+</Diagnostics>",
+                runLooseSubTreeCheck: false
+            );
         }
 
         [Fact]
         public void TestUnicode2()
         {
-            Test(@"@""{'text':0xabcdef12345}""", @"<Tree>
+            Test(
+                @"@""{'text':0xabcdef12345}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -3347,16 +3634,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""11"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestUnicode3()
         {
-            Test(@"@""{""""text"""":0xabcdef12345}""", @"<Tree>
+            Test(
+                @"@""{""""text"""":0xabcdef12345}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -3376,16 +3666,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""20"" Length=""13"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestOctal1()
         {
-            Test(@"@""[0372, 0xFA, 0XFA]""", @"<Tree>
+            Test(
+                @"@""[0372, 0xFA, 0XFA]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -3413,16 +3706,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""11"" Length=""4"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestObjectLiteralComments()
         {
-            Test(@"@""/*comment*/ { /*comment*/
+            Test(
+                @"@""/*comment*/ { /*comment*/
         'Name': /*comment*/ 'Apple' /*comment*/, /*comment*/
         'ExpiryDate': '1',
         'Price': 3.99,
@@ -3431,7 +3726,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
           'Medium' /*comment*/,
           /*comment*/ 'Large'
         /*comment*/ ] /*comment*/
-      } /*comment*/""", @"<Tree>
+      } /*comment*/""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -3537,16 +3833,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Comments not allowed"" Start=""10"" Length=""11"" />
-</Diagnostics>", runLooseSubTreeCheck: false);
+</Diagnostics>",
+                runLooseSubTreeCheck: false
+            );
         }
 
         [Fact]
         public void TestEmptyStrings()
         {
-            Test(@"@""['','','','','','','']""", @"<Tree>
+            Test(
+                @"@""['','','','','','','']""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -3598,16 +3898,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""11"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestEmptyStrings2()
         {
-            Test(@"@""["""""""","""""""","""""""","""""""","""""""","""""""",""""""""]""", @"<Tree>
+            Test(
+                @"@""["""""""","""""""","""""""","""""""","""""""","""""""",""""""""]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -3659,14 +3962,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestInvalidNumber()
         {
-            Test(@"@""0-10""", @"<Tree>
+            Test(
+                @"@""0-10""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -3676,18 +3982,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""4"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""4"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestSimpleEscapes()
         {
-            Test(@"@""[false, true, true, false, 'test!', 1.11, 0e-10, 0E-10, 0.25e-5, 0.3e10, 6.0221418e23, 'Purple\r \n monkey\'s:\tdishwasher']""", @"<Tree>
+            Test(
+                @"@""[false, true, true, false, 'test!', 1.11, 0e-10, 0E-10, 0.25e-5, 0.3e10, 6.0221418e23, 'Purple\r \n monkey\'s:\tdishwasher']""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -3769,16 +4078,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""37"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestSimpleEscapes2()
         {
-            Test(@"@""[false, true, true, false, """"test!"""", 1.11, 0e-10, 0E-10, 0.25e-5, 0.3e10, 6.0221418e23, """"Purple\r \n monkey\'s:\tdishwasher""""]""", @"<Tree>
+            Test(
+                @"@""[false, true, true, false, """"test!"""", 1.11, 0e-10, 0E-10, 0.25e-5, 0.3e10, 6.0221418e23, """"Purple\r \n monkey\'s:\tdishwasher""""]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -3860,16 +4172,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid escape sequence"" Start=""119"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestDoubleQuoteInSingleQuote()
         {
-            Test(@"@""'a""""b'""", @"<Tree>
+            Test(
+                @"@""'a""""b'""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -3879,17 +4194,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestMultiLineString()
         {
-            Test(@"@""'a
-b'""", @"<Tree>
+            Test(
+                @"@""'a
+b'""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -3900,17 +4218,20 @@ b'</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestMultiLineString2()
         {
-            Test(@"@""""""a
-b""""""", @"<Tree>
+            Test(
+                @"@""""""a
+b""""""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -3921,16 +4242,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Illegal string character"" Start=""13"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestConstructor1()
         {
-            Test(@"@""new""", @"<Tree>
+            Test(
+                @"@""new""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -3944,18 +4268,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Name expected"" Start=""13"" Length=""0"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestConstructor2()
         {
-            Test(@"@""new A""", @"<Tree>
+            Test(
+                @"@""new A""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -3969,18 +4296,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'(' expected"" Start=""15"" Length=""0"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestConstructor3()
         {
-            Test(@"@""new A(""", @"<Tree>
+            Test(
+                @"@""new A(""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -3994,18 +4324,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""')' expected"" Start=""16"" Length=""0"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestConstructor4()
         {
-            Test(@"@""new A()""", @"<Tree>
+            Test(
+                @"@""new A()""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -4019,16 +4352,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestConstructor5()
         {
-            Test(@"@""new A(1)""", @"<Tree>
+            Test(
+                @"@""new A(1)""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -4046,16 +4382,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestConstructor6()
         {
-            Test(@"@""new A(1, 2)""", @"<Tree>
+            Test(
+                @"@""new A(1, 2)""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -4079,16 +4418,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestConstructor7()
         {
-            Test(@"@""new A([new B()])""", @"<Tree>
+            Test(
+                @"@""new A([new B()])""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -4116,16 +4458,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestConstructor8()
         {
-            Test(@"@""new A(,)""", @"<Tree>
+            Test(
+                @"@""new A(,)""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -4143,16 +4488,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestConstructor9()
         {
-            Test(@"@""new A(1,)""", @"<Tree>
+            Test(
+                @"@""new A(1,)""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -4173,16 +4521,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestConstructor10()
         {
-            Test(@"@""new A(,1)""", @"<Tree>
+            Test(
+                @"@""new A(,1)""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -4203,16 +4554,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestConstructor11()
         {
-            Test(@"@""new A(1,1)""", @"<Tree>
+            Test(
+                @"@""new A(1,1)""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -4236,16 +4590,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestConstructor12()
         {
-            Test(@"@""new A(1,,1)""", @"<Tree>
+            Test(
+                @"@""new A(1,,1)""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -4272,16 +4629,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestConstructor13()
         {
-            Test(@"@""new %()""", @"<Tree>
+            Test(
+                @"@""new %()""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -4295,18 +4655,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid constructor name"" Start=""14"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestConstructor14()
         {
-            Test(@"@""new A(1 2)""", @"<Tree>
+            Test(
+                @"@""new A(1 2)""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -4327,18 +4690,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""',' expected"" Start=""18"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestMultipleCommasInObject()
         {
-            Test(@"@""{0:0,,1:1}""", @"<Tree>
+            Test(
+                @"@""{0:0,,1:1}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -4370,18 +4736,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Only properties allowed in an object"" Start=""15"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""11"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestSimpleEscapes3()
         {
-            Test(@"@"" """"\r\n\f\t\b"""" """, @"<Tree>
+            Test(
+                @"@"" """"\r\n\f\t\b"""" """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4394,14 +4763,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestSimpleEscapes4()
         {
-            Test(@"@"" """"\m"""" """, @"<Tree>
+            Test(
+                @"@"" """"\m"""" """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4414,18 +4786,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid escape sequence"" Start=""13"" Length=""2"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid escape sequence"" Start=""13"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestSimpleEscapes5()
         {
-            Test(@"@"" """"\\\/\"""""""" """, @"<Tree>
+            Test(
+                @"@"" """"\\\/\"""""""" """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4438,14 +4813,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestSimpleEscapes6()
         {
-            Test(@"@"" """"\'"""" """, @"<Tree>
+            Test(
+                @"@"" """"\'"""" """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4458,16 +4836,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid escape sequence"" Start=""13"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestSimpleEscapes7()
         {
-            Test(@"@"" '\'' """, @"<Tree>
+            Test(
+                @"@"" '\'' """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4480,16 +4861,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""11"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestSimpleEscapes8()
         {
-            Test(@"@"" '\""""' """, @"<Tree>
+            Test(
+                @"@"" '\""""' """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4502,16 +4886,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""11"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestPropertyInArray1()
         {
-            Test(@"@"" [""""a"""": 0] """, @"<Tree>
+            Test(
+                @"@"" [""""a"""": 0] """,
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -4534,18 +4921,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Properties not allowed in an array"" Start=""17"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Properties not allowed in an array"" Start=""17"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestSimpleNumber1()
         {
-            Test(@"@""0.0""", @"<Tree>
+            Test(
+                @"@""0.0""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4555,14 +4945,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestSimpleNumber2()
         {
-            Test(@"@""-0.0""", @"<Tree>
+            Test(
+                @"@""-0.0""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4572,14 +4965,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestSimpleNumber3()
         {
-            Test(@"@"".0""", @"<Tree>
+            Test(
+                @"@"".0""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4589,16 +4985,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestSimpleNumber4()
         {
-            Test(@"@""-.0""", @"<Tree>
+            Test(
+                @"@""-.0""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4608,16 +5007,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestStandaloneMinus()
         {
-            Test(@"@""-""", @"<Tree>
+            Test(
+                @"@""-""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4627,18 +5029,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestMinusDot()
         {
-            Test(@"@""-.""", @"<Tree>
+            Test(
+                @"@""-.""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4648,18 +5053,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""2"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber1()
         {
-            Test(@"@""0""", @"<Tree>
+            Test(
+                @"@""0""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4669,14 +5077,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestNumber2()
         {
-            Test(@"@""-0""", @"<Tree>
+            Test(
+                @"@""-0""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4686,14 +5097,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestNumber3()
         {
-            Test(@"@""00""", @"<Tree>
+            Test(
+                @"@""00""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4703,16 +5117,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber4()
         {
-            Test(@"@""-00""", @"<Tree>
+            Test(
+                @"@""-00""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4722,16 +5139,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber5()
         {
-            Test(@"@""0.""", @"<Tree>
+            Test(
+                @"@""0.""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4741,16 +5161,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber6()
         {
-            Test(@"@""-0.""", @"<Tree>
+            Test(
+                @"@""-0.""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4760,16 +5183,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber7()
         {
-            Test(@"@""0e""", @"<Tree>
+            Test(
+                @"@""0e""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4779,18 +5205,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""2"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""2"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber8()
         {
-            Test(@"@""-0e""", @"<Tree>
+            Test(
+                @"@""-0e""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4800,18 +5229,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""3"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber9()
         {
-            Test(@"@""0e0""", @"<Tree>
+            Test(
+                @"@""0e0""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4821,14 +5253,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestNumber10()
         {
-            Test(@"@""-0e0""", @"<Tree>
+            Test(
+                @"@""-0e0""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4838,14 +5273,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestNumber11()
         {
-            Test(@"@""0e1""", @"<Tree>
+            Test(
+                @"@""0e1""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4855,14 +5293,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestNumber12()
         {
-            Test(@"@""-0e1""", @"<Tree>
+            Test(
+                @"@""-0e1""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4872,14 +5313,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestNumber13()
         {
-            Test(@"@""0e-1""", @"<Tree>
+            Test(
+                @"@""0e-1""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4889,14 +5333,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestNumber14()
         {
-            Test(@"@""-0e-1""", @"<Tree>
+            Test(
+                @"@""-0e-1""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4906,14 +5353,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestNumber15()
         {
-            Test(@"@""0e+1""", @"<Tree>
+            Test(
+                @"@""0e+1""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4923,14 +5373,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestNumber16()
         {
-            Test(@"@""-0e+1""", @"<Tree>
+            Test(
+                @"@""-0e+1""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4940,14 +5393,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestNumber17()
         {
-            Test(@"@""--0""", @"<Tree>
+            Test(
+                @"@""--0""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4957,18 +5413,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""3"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber18()
         {
-            Test(@"@""+0""", @"<Tree>
+            Test(
+                @"@""+0""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Text>
@@ -4978,18 +5437,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'+' unexpected"" Start=""10"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'+' unexpected"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber19()
         {
-            Test(@"@""0..0""", @"<Tree>
+            Test(
+                @"@""0..0""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -4999,18 +5461,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""4"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""4"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber20()
         {
-            Test(@"@""0ee0""", @"<Tree>
+            Test(
+                @"@""0ee0""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -5020,18 +5485,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""4"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""4"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber21()
         {
-            Test(@"@""1e++1""", @"<Tree>
+            Test(
+                @"@""1e++1""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -5041,18 +5509,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""5"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""5"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber22()
         {
-            Test(@"@""1e--1""", @"<Tree>
+            Test(
+                @"@""1e--1""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -5062,18 +5533,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""5"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""5"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber23()
         {
-            Test(@"@""1e+-1""", @"<Tree>
+            Test(
+                @"@""1e+-1""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -5083,18 +5557,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""5"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""5"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber24()
         {
-            Test(@"@""1e-+1""", @"<Tree>
+            Test(
+                @"@""1e-+1""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -5104,18 +5581,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""5"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""5"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber25()
         {
-            Test(@"@""1e1.0""", @"<Tree>
+            Test(
+                @"@""1e1.0""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -5125,18 +5605,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""5"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""5"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber26()
         {
-            Test(@"@""1e+1.1""", @"<Tree>
+            Test(
+                @"@""1e+1.1""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -5146,18 +5629,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""6"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""6"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber27()
         {
-            Test(@"@""1-1""", @"<Tree>
+            Test(
+                @"@""1-1""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -5167,18 +5653,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""3"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNumber28()
         {
-            Test(@"@""1+1""", @"<Tree>
+            Test(
+                @"@""1+1""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Literal>
@@ -5188,18 +5677,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""3"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid number"" Start=""10"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestIncompleteProperty()
         {
-            Test(@"""{ 'a': }""", @"<Tree>
+            Test(
+                @"""{ 'a': }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -5219,18 +5711,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'}' unexpected"" Start=""16"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""11"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestPropertyWithCommaFollowedByComma()
         {
-            Test(@"""{ 'a': , , }""", @"<Tree>
+            Test(
+                @"""{ 'a': , , }""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -5254,18 +5749,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Only properties allowed in an object"" Start=""18"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Value required"" Start=""15"" Length=""0"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestTopLevelProperty()
         {
-            Test(@"""'a': 0""", @"<Tree>
+            Test(
+                @"""'a': 0""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Property>
@@ -5279,18 +5777,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""':' unexpected"" Start=""12"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Strings must start with &quot; not '"" Start=""9"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestTopLevelConstructor()
         {
-            Test(@"""new Date()""", @"<Tree>
+            Test(
+                @"""new Date()""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Constructor>
@@ -5304,16 +5805,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Constructors not allowed"" Start=""9"" Length=""3"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestTopLevelText()
         {
-            Test(@"""Date""", @"<Tree>
+            Test(
+                @"""Date""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Text>
@@ -5323,18 +5827,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'D' unexpected"" Start=""9"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'D' unexpected"" Start=""9"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestNestedArrays1()
         {
-            Test(@"""[1, [2, [3, [4]]]]""", @"<Tree>
+            Test(
+                @"""[1, [2, [3, [4]]]]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -5386,14 +5893,17 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"");
+                @"",
+                @""
+            );
         }
 
         [Fact]
         public void TestNestedArraysTrailingCommas1()
         {
-            Test(@"""[1, [2, [3, [4,],],],]""", @"<Tree>
+            Test(
+                @"""[1, [2, [3, [4,],],],]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -5457,16 +5967,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Trailing comma not allowed"" Start=""23"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestBogusNesting1()
         {
-            Test(@"""[1, [2, [3, [4}}}}""", @"<Tree>
+            Test(
+                @"""[1, [2, [3, [4}}}}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -5530,18 +6043,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'}' unexpected"" Start=""23"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'}' unexpected"" Start=""23"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestBogusNesting2()
         {
-            Test(@"""[1, [2, [3, [4}]}]""", @"<Tree>
+            Test(
+                @"""[1, [2, [3, [4}]}]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -5599,18 +6115,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'}' unexpected"" Start=""23"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""'}' unexpected"" Start=""23"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestBogusNesting3()
         {
-            Test(@"""{1, {2, {3, {4]]]]""", @"<Tree>
+            Test(
+                @"""{1, {2, {3, {4]]]]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -5672,18 +6191,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Only properties allowed in an object"" Start=""10"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Only properties allowed in an object"" Start=""10"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestBogusNesting4()
         {
-            Test(@"""[1, {2, [3, {4]]]]""", @"<Tree>
+            Test(
+                @"""[1, {2, [3, {4]]]]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -5739,18 +6261,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Only properties allowed in an object"" Start=""14"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Only properties allowed in an object"" Start=""14"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestBogusNesting5()
         {
-            Test(@"""[1, {2, [3, {4]}]}""", @"<Tree>
+            Test(
+                @"""[1, {2, [3, {4]}]}""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -5803,18 +6328,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Only properties allowed in an object"" Start=""14"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Only properties allowed in an object"" Start=""14"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestBogusNesting6()
         {
-            Test(@"""[1, {2, [3, {4}]}]""", @"<Tree>
+            Test(
+                @"""[1, {2, [3, {4}]}]""",
+                @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Array>
@@ -5864,18 +6392,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Only properties allowed in an object"" Start=""14"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Only properties allowed in an object"" Start=""14"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestIntegerPropertyName()
         {
-            Test(@"""{ 0: true }""", expected: @"<Tree>
+            Test(
+                @"""{ 0: true }""",
+                expected: @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -5895,16 +6426,19 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"",
-        @"<Diagnostics>
+                @"",
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""11"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact]
         public void TestColonPropertyName()
         {
-            Test(@"""{ :: true }""", expected: @"<Tree>
+            Test(
+                @"""{ :: true }""",
+                expected: @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Object>
@@ -5924,18 +6458,21 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid property name"" Start=""11"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""11"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
 
         [Fact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_queries/edit/1691963")]
         public void TestAllColons_BecomesNestedProperties()
         {
-            Test(@"""::::::::""", expected: @"<Tree>
+            Test(
+                @"""::::::::""",
+                expected: @"<Tree>
   <CompilationUnit>
     <Sequence>
       <Property>
@@ -5961,12 +6498,13 @@ b""</StringToken>
     <EndOfFile />
   </CompilationUnit>
 </Tree>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Invalid property name"" Start=""9"" Length=""1"" />
 </Diagnostics>",
-        @"<Diagnostics>
+                @"<Diagnostics>
   <Diagnostic Message=""Property name must be a string"" Start=""9"" Length=""1"" />
-</Diagnostics>");
+</Diagnostics>"
+            );
         }
     }
 }

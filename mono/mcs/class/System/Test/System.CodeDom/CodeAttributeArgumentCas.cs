@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,69 +27,68 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.CodeDom {
+namespace MonoCasTests.System.CodeDom
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class CodeAttributeArgumentCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeAttributeArgumentCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted()
+        {
+            CodeAttributeArgument caa = new CodeAttributeArgument();
+            Assert.AreEqual(String.Empty, caa.Name, "Name");
+            caa.Name = null;
+            Assert.IsNull(caa.Value, "Value");
+            caa.Value = new CodeExpression();
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted()
+        {
+            CodeExpression value = new CodeExpression();
+            CodeAttributeArgument caa = new CodeAttributeArgument(value);
+            Assert.AreEqual(String.Empty, caa.Name, "Name");
+            caa.Name = null;
+            Assert.AreSame(value, caa.Value, "Value");
+            caa.Value = new CodeExpression();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeAttributeArgument caa = new CodeAttributeArgument ();
-			Assert.AreEqual (String.Empty, caa.Name, "Name");
-			caa.Name = null;
-			Assert.IsNull (caa.Value, "Value");
-			caa.Value = new CodeExpression ();
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted()
+        {
+            CodeExpression value = new CodeExpression();
+            CodeAttributeArgument caa = new CodeAttributeArgument("mono", value);
+            Assert.AreEqual("mono", caa.Name, "Name");
+            caa.Name = String.Empty;
+            Assert.AreSame(value, caa.Value, "Value");
+            caa.Value = new CodeExpression();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeExpression value = new CodeExpression ();
-			CodeAttributeArgument caa = new CodeAttributeArgument (value);
-			Assert.AreEqual (String.Empty, caa.Name, "Name");
-			caa.Name = null;
-			Assert.AreSame (value, caa.Value, "Value");
-			caa.Value = new CodeExpression ();
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			CodeExpression value = new CodeExpression ();
-			CodeAttributeArgument caa = new CodeAttributeArgument ("mono", value);
-			Assert.AreEqual ("mono", caa.Name, "Name");
-			caa.Name = String.Empty;
-			Assert.AreSame (value, caa.Value, "Value");
-			caa.Value = new CodeExpression ();
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeAttributeArgument).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(CodeAttributeArgument).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }

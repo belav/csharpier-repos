@@ -10,16 +10,16 @@ namespace System.ServiceModel.Configuration
     using System.Security;
     using System.ServiceModel;
 
-    public sealed partial class ChannelEndpointElement : ConfigurationElement, IConfigurationContextProviderInternal
+    public sealed partial class ChannelEndpointElement
+        : ConfigurationElement,
+            IConfigurationContextProviderInternal
     {
         [Fx.Tag.SecurityNote(Critical = "Stores information used in a security decision.")]
         [SecurityCritical]
         EvaluationContextHelper contextHelper;
 
         public ChannelEndpointElement()
-            : base()
-        {
-        }
+            : base() { }
 
         public ChannelEndpointElement(EndpointAddress address, string contractType)
             : this()
@@ -48,7 +48,10 @@ namespace System.ServiceModel.Configuration
             {
                 this.Address = source.Address;
             }
-            if (properties[ConfigurationStrings.BehaviorConfiguration].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.BehaviorConfiguration].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.BehaviorConfiguration = source.BehaviorConfiguration;
             }
@@ -56,7 +59,10 @@ namespace System.ServiceModel.Configuration
             {
                 this.Binding = source.Binding;
             }
-            if (properties[ConfigurationStrings.BindingConfiguration].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.BindingConfiguration].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.BindingConfiguration = source.BindingConfiguration;
             }
@@ -64,17 +70,23 @@ namespace System.ServiceModel.Configuration
             {
                 this.Name = source.Name;
             }
-            if (properties[ConfigurationStrings.Contract].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.Contract].ValueOrigin != PropertyValueOrigin.Default
+            )
             {
                 this.Contract = source.Contract;
             }
-            if (properties[ConfigurationStrings.Headers].ValueOrigin != PropertyValueOrigin.Default
-                && source.Headers != null)
+            if (
+                properties[ConfigurationStrings.Headers].ValueOrigin != PropertyValueOrigin.Default
+                && source.Headers != null
+            )
             {
                 this.Headers.Copy(source.Headers);
             }
-            if (properties[ConfigurationStrings.Identity].ValueOrigin != PropertyValueOrigin.Default
-                && source.Identity != null)
+            if (
+                properties[ConfigurationStrings.Identity].ValueOrigin != PropertyValueOrigin.Default
+                && source.Identity != null
+            )
             {
                 this.Identity.Copy(source.Identity);
             }
@@ -82,13 +94,19 @@ namespace System.ServiceModel.Configuration
             {
                 this.Kind = source.Kind;
             }
-            if (properties[ConfigurationStrings.EndpointConfiguration].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.EndpointConfiguration].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.EndpointConfiguration = source.EndpointConfiguration;
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Address, Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Address,
+            Options = ConfigurationPropertyOptions.None
+        )]
         public Uri Address
         {
             get { return (Uri)base[ConfigurationStrings.Address]; }
@@ -140,7 +158,11 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Contract, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Contract,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 0)]
         public string Contract
         {
@@ -167,7 +189,11 @@ namespace System.ServiceModel.Configuration
             get { return (IdentityElement)base[ConfigurationStrings.Identity]; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Name, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Name,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 0)]
         public string Name
         {
@@ -182,7 +208,11 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Kind, DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Kind,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.None
+        )]
         [StringValidator(MinLength = 0)]
         public string Kind
         {
@@ -197,7 +227,11 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.EndpointConfiguration, DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.EndpointConfiguration,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.None
+        )]
         [StringValidator(MinLength = 0)]
         public string EndpointConfiguration
         {
@@ -226,8 +260,10 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses critical field contextHelper.",
-            Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses critical field contextHelper.",
+            Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition."
+        )]
         [SecurityCritical]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {
@@ -235,6 +271,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

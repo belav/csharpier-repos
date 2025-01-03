@@ -13,7 +13,11 @@ namespace System.Diagnostics.Tests
     {
         public const int PassingTestTimeoutMilliseconds = 60_000;
 
-        public static async Task RetryWithBackoff(Action action, int delayInMilliseconds = 10, int times = 10)
+        public static async Task RetryWithBackoff(
+            Action action,
+            int delayInMilliseconds = 10,
+            int times = 10
+        )
         {
             // Guards against delay growing to an exceptionally large value. No special technical significance to
             // the value chosen--just seemed like a good balancing point between allowing the delay to increase
@@ -21,7 +25,10 @@ namespace System.Diagnostics.Tests
             const int maxDelayInMilliseconds = 10000;
 
             if (delayInMilliseconds > maxDelayInMilliseconds)
-                throw new ArgumentOutOfRangeException(nameof(delayInMilliseconds), $"Exceeds maximum allowed delay of {maxDelayInMilliseconds}");
+                throw new ArgumentOutOfRangeException(
+                    nameof(delayInMilliseconds),
+                    $"Exceeds maximum allowed delay of {maxDelayInMilliseconds}"
+                );
 
             for (; times > 0; times--)
             {

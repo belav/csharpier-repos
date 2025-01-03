@@ -1,15 +1,15 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.CodeAnalysis;
 using System.Runtime.InteropServices.JavaScript;
+using Microsoft.CodeAnalysis;
 
 namespace Microsoft.Interop.JavaScript
 {
     internal record JSMarshallingInfo(MarshallingInfo Inner, JSTypeInfo TypeInfo) : MarshallingInfo
     {
         protected JSMarshallingInfo()
-            :this(NoMarshallingInfo.Instance, new JSInvalidTypeInfo())
+            : this(NoMarshallingInfo.Instance, new JSInvalidTypeInfo())
         {
             Inner = null;
         }

@@ -7,10 +7,8 @@ using Xunit;
 
 namespace test
 {
-
     public class Class1
     {
-
         [Fact]
         public static void TestEntryPoint()
         {
@@ -27,10 +25,10 @@ namespace test
                 {
                     Console.WriteLine("\t catch 1.1");
                     goto inner_try;
-                throw_exception:
+                    throw_exception:
                     Console.WriteLine("\t throwing another exception here!");
                     throw new System.ArithmeticException("My ArithmeticException");
-                inner_try:
+                    inner_try:
                     try
                     {
                         Console.WriteLine("\t\t try 1.1.1");

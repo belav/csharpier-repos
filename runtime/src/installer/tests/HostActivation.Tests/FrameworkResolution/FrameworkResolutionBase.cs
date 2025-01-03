@@ -24,9 +24,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             TestApp app,
             TestSettings settings,
             Action<CommandResult> resultAction = null,
-            bool? multiLevelLookup = false)
+            bool? multiLevelLookup = false
+        )
         {
-            using (DotNetCliExtensions.DotNetCliCustomizer dotnetCustomizer = settings.DotnetCustomizer == null ? null : dotnet.Customize())
+            using (
+                DotNetCliExtensions.DotNetCliCustomizer dotnetCustomizer =
+                    settings.DotnetCustomizer == null ? null : dotnet.Customize()
+            )
             {
                 settings.DotnetCustomizer?.Invoke(dotnetCustomizer);
 
@@ -34,13 +38,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 {
                     if (settings.RuntimeConfigCustomizer != null)
                     {
-                        settings.RuntimeConfigCustomizer(RuntimeConfig.Path(app.RuntimeConfigJson)).Save();
+                        settings
+                            .RuntimeConfigCustomizer(RuntimeConfig.Path(app.RuntimeConfigJson))
+                            .Save();
                     }
 
                     settings.WithCommandLine(app.AppDll);
                 }
 
-                Command command = dotnet.Exec(settings.CommandLine.First(), settings.CommandLine.Skip(1).ToArray());
+                Command command = dotnet.Exec(
+                    settings.CommandLine.First(),
+                    settings.CommandLine.Skip(1).ToArray()
+                );
 
                 if (settings.WorkingDirectory != null)
                 {
@@ -59,9 +68,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             }
         }
 
-        protected CommandResult RunSelfContainedTest(
-            TestApp app,
-            TestSettings settings)
+        protected CommandResult RunSelfContainedTest(TestApp app, TestSettings settings)
         {
             if (settings.RuntimeConfigCustomizer != null)
             {
@@ -93,9 +100,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 
             public SharedTestStateBase()
             {
-                _builtDotnet = Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish");
+                _builtDotnet = Path.Combine(
+                    TestArtifact.TestArtifactsPath,
+                    "sharedFrameworkPublish"
+                );
 
-                string baseDir = Path.Combine(TestArtifact.TestArtifactsPath, "frameworkResolution");
+                string baseDir = Path.Combine(
+                    TestArtifact.TestArtifactsPath,
+                    "frameworkResolution"
+                );
                 _baseDir = SharedFramework.CalculateUniqueTestDirectory(baseDir);
                 _baseDirArtifact = new TestArtifact(_baseDir);
             }
@@ -112,10 +125,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 Directory.CreateDirectory(testAppDir);
 
                 // ./FrameworkReferenceApp.dll
-                File.WriteAllText(Path.Combine(testAppDir, "FrameworkReferenceApp.dll"), string.Empty);
+                File.WriteAllText(
+                    Path.Combine(testAppDir, "FrameworkReferenceApp.dll"),
+                    string.Empty
+                );
 
                 // ./FrameworkReferenceApp.runtimeconfig.json
-                File.WriteAllText(Path.Combine(testAppDir, "FrameworkReferenceApp.runtimeconfig.json"), "{}");
+                File.WriteAllText(
+                    Path.Combine(testAppDir, "FrameworkReferenceApp.runtimeconfig.json"),
+                    "{}"
+                );
 
                 return new TestApp(testAppDir);
             }

@@ -99,7 +99,10 @@ public class DefaultHttpResponseTests
         // the original response body in the OnCompleted callback after the response body was disposed.
         // However, since now there's no longer an OnCompleted registration at all, it's easier to verify that.
         // https://github.com/dotnet/aspnetcore/issues/25342
-        responseMock.Verify(m => m.OnCompleted(It.IsAny<Func<object, Task>>(), It.IsAny<object>()), Times.Never);
+        responseMock.Verify(
+            m => m.OnCompleted(It.IsAny<Func<object, Task>>(), It.IsAny<object>()),
+            Times.Never
+        );
     }
 
     [Fact]
@@ -127,7 +130,8 @@ public class DefaultHttpResponseTests
 
         var mock = new Mock<IHttpResponseBodyFeature>();
         var ct = new CancellationToken();
-        mock.Setup(o => o.StartAsync(It.Is<CancellationToken>((localCt) => localCt.Equals(ct)))).Returns(Task.CompletedTask);
+        mock.Setup(o => o.StartAsync(It.Is<CancellationToken>((localCt) => localCt.Equals(ct))))
+            .Returns(Task.CompletedTask);
         features.Set(mock.Object);
 
         var responseMock = new Mock<IHttpResponseFeature>();
@@ -146,7 +150,9 @@ public class DefaultHttpResponseTests
         var features = new FeatureCollection();
 
         var startMock = new Mock<IHttpResponseBodyFeature>();
-        startMock.Setup(o => o.StartAsync(It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
+        startMock
+            .Setup(o => o.StartAsync(It.IsAny<CancellationToken>()))
+            .Returns(Task.CompletedTask);
         features.Set(startMock.Object);
 
         var responseMock = new Mock<IHttpResponseFeature>();

@@ -41,9 +41,8 @@ namespace System.Collections.Generic
 
             // Workaround for https://github.com/dotnet/runtime/issues/72004
             Span<int> span = _span;
-            return
-                bitArrayIndex < (uint)span.Length &&
-                (span[(int)bitArrayIndex] & (1 << ((int)((uint)bitPosition % IntSize)))) != 0;
+            return bitArrayIndex < (uint)span.Length
+                && (span[(int)bitArrayIndex] & (1 << ((int)((uint)bitPosition % IntSize)))) != 0;
         }
 
         /// <summary>How many ints must be allocated to represent n bits. Returns (n+31)/32, but avoids overflow.</summary>

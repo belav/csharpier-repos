@@ -10,7 +10,11 @@ namespace System.Threading.Tasks.Tests
     public static class RangePartitionerTests
     {
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91541", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91541",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public static void RunPartitionerStaticTest_SingleChunking()
         {
             CountdownEvent cde = new CountdownEvent(2);
@@ -21,23 +25,47 @@ namespace System.Threading.Tasks.Tests
             // NoBuffering option, the Parallel.ForEach below is certain to deadlock.
             // Somewhere a Signal() is going to be after a Wait() in the same chunk, and
             // the loop will deadlock.
-            for (int i = 0; i < 252; i++) actions[i] = () => { };
-            actions[252] = () => { cde.Wait(); };
-            actions[253] = () => { cde.Signal(); };
-            actions[254] = () => { cde.Wait(); };
-            actions[255] = () => { cde.Signal(); };
-
-            Debug.WriteLine("    * We'll hang here if EnumerablePartitionerOptions.NoBuffering is not working properly");
-            Parallel.ForEach(Partitioner.Create(actions, EnumerablePartitionerOptions.NoBuffering), item =>
+            for (int i = 0; i < 252; i++)
+                actions[i] = () => { };
+            actions[252] = () =>
             {
-                item();
-            });
+                cde.Wait();
+            };
+            actions[253] = () =>
+            {
+                cde.Signal();
+            };
+            actions[254] = () =>
+            {
+                cde.Wait();
+            };
+            actions[255] = () =>
+            {
+                cde.Signal();
+            };
+
+            Debug.WriteLine(
+                "    * We'll hang here if EnumerablePartitionerOptions.NoBuffering is not working properly"
+            );
+            Parallel.ForEach(
+                Partitioner.Create(actions, EnumerablePartitionerOptions.NoBuffering),
+                item =>
+                {
+                    item();
+                }
+            );
         }
 
         [Fact]
         public static void RunPartitionerStaticTest_SingleChunking_Negative()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => Partitioner.Create(new int[] { 1, 2, 3, 4, 5 }, (EnumerablePartitionerOptions)1000));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Partitioner.Create(
+                        new int[] { 1, 2, 3, 4, 5 },
+                        (EnumerablePartitionerOptions)1000
+                    )
+            );
         }
 
         // Test proper range coverage
@@ -109,21 +137,33 @@ namespace System.Threading.Tasks.Tests
             int numLess = 0;
             int numMore = 0;
 
-            Parallel.ForEach(Partitioner.Create(from, to, rangeSize), tuple =>
-            {
-                int range = tuple.Item2 - tuple.Item1;
-                if (range > rangeSize)
+            Parallel.ForEach(
+                Partitioner.Create(from, to, rangeSize),
+                tuple =>
                 {
-                    Assert.False(range > rangeSize, string.Format("    > FAILED.  Observed chunk size of {0}", range));
-                    Interlocked.Increment(ref numMore);
+                    int range = tuple.Item2 - tuple.Item1;
+                    if (range > rangeSize)
+                    {
+                        Assert.False(
+                            range > rangeSize,
+                            string.Format("    > FAILED.  Observed chunk size of {0}", range)
+                        );
+                        Interlocked.Increment(ref numMore);
+                    }
+                    else if (range < rangeSize)
+                        Interlocked.Increment(ref numLess);
                 }
-                else if (range < rangeSize)
-                    Interlocked.Increment(ref numLess);
-            });
+            );
 
-            Assert.False(numMore > 0, string.Format("    > FAILED.  {0} chunks larger than desired range size.", numMore));
+            Assert.False(
+                numMore > 0,
+                string.Format("    > FAILED.  {0} chunks larger than desired range size.", numMore)
+            );
 
-            Assert.False(numLess > 1, string.Format("    > FAILED.  {0} chunks smaller than desired range size.", numLess));
+            Assert.False(
+                numLess > 1,
+                string.Format("    > FAILED.  {0} chunks smaller than desired range size.", numLess)
+            );
 
             RangePartitionerChunkTest_HelperLong((long)from, (long)to, (long)rangeSize);
         }
@@ -134,67 +174,106 @@ namespace System.Threading.Tasks.Tests
             int numLess = 0;
             int numMore = 0;
 
-            Parallel.ForEach(Partitioner.Create(from, to, rangeSize), tuple =>
-            {
-                long range = tuple.Item2 - tuple.Item1;
-                if (range > rangeSize)
+            Parallel.ForEach(
+                Partitioner.Create(from, to, rangeSize),
+                tuple =>
                 {
-                    Assert.False(range > rangeSize, string.Format("    > FAILED.  Observed chunk size of {0}", range));
-                    Interlocked.Increment(ref numMore);
+                    long range = tuple.Item2 - tuple.Item1;
+                    if (range > rangeSize)
+                    {
+                        Assert.False(
+                            range > rangeSize,
+                            string.Format("    > FAILED.  Observed chunk size of {0}", range)
+                        );
+                        Interlocked.Increment(ref numMore);
+                    }
+                    else if (range < rangeSize)
+                        Interlocked.Increment(ref numLess);
                 }
-                else if (range < rangeSize) Interlocked.Increment(ref numLess);
-            });
+            );
 
-            Assert.False(numMore > 0, string.Format("    > FAILED.  {0} chunks larger than desired range size.", numMore));
+            Assert.False(
+                numMore > 0,
+                string.Format("    > FAILED.  {0} chunks larger than desired range size.", numMore)
+            );
 
-            Assert.False(numLess > 1, string.Format("    > FAILED.  {0} chunks smaller than desired range size.", numLess));
+            Assert.False(
+                numLess > 1,
+                string.Format("    > FAILED.  {0} chunks smaller than desired range size.", numLess)
+            );
         }
 
         private static void RangePartitionerCoverageTest_HelperInt(int from, int to, int rangeSize)
         {
-            Debug.WriteLine("    RangePartitionCoverageTest[int]({0},{1},{2})", from, to, rangeSize);
+            Debug.WriteLine(
+                "    RangePartitionCoverageTest[int]({0},{1},{2})",
+                from,
+                to,
+                rangeSize
+            );
 
             int range = to - from;
             int[] visits = new int[range];
 
-            Action<Tuple<int, int>> myDelegate = delegate (Tuple<int, int> myRange)
+            Action<Tuple<int, int>> myDelegate = delegate(Tuple<int, int> myRange)
             {
                 int _from = myRange.Item1;
                 int _to = myRange.Item2;
-                for (int i = _from; i < _to; i++) Interlocked.Increment(ref visits[i - from]);
+                for (int i = _from; i < _to; i++)
+                    Interlocked.Increment(ref visits[i - from]);
             };
 
-            if (rangeSize == -1) Parallel.ForEach(Partitioner.Create(from, to), myDelegate);
-            else Parallel.ForEach(Partitioner.Create(from, to, rangeSize), myDelegate);
+            if (rangeSize == -1)
+                Parallel.ForEach(Partitioner.Create(from, to), myDelegate);
+            else
+                Parallel.ForEach(Partitioner.Create(from, to, rangeSize), myDelegate);
 
             for (int i = 0; i < range; i++)
             {
-                Assert.False(visits[i] != 1, string.Format("    > FAILED.  Visits[{0}] = {1}", i, visits[i]));
+                Assert.False(
+                    visits[i] != 1,
+                    string.Format("    > FAILED.  Visits[{0}] = {1}", i, visits[i])
+                );
             }
 
             RangePartitionerCoverageTest_HelperLong((long)from, (long)to, (long)rangeSize);
         }
 
-        private static void RangePartitionerCoverageTest_HelperLong(long from, long to, long rangeSize)
+        private static void RangePartitionerCoverageTest_HelperLong(
+            long from,
+            long to,
+            long rangeSize
+        )
         {
-            Debug.WriteLine("    RangePartitionCoverageTest[long]({0},{1},{2})", from, to, rangeSize);
+            Debug.WriteLine(
+                "    RangePartitionCoverageTest[long]({0},{1},{2})",
+                from,
+                to,
+                rangeSize
+            );
 
             long range = to - from;
             long[] visits = new long[range];
 
-            Action<Tuple<long, long>> myDelegate = delegate (Tuple<long, long> myRange)
+            Action<Tuple<long, long>> myDelegate = delegate(Tuple<long, long> myRange)
             {
                 long _from = myRange.Item1;
                 long _to = myRange.Item2;
-                for (long i = _from; i < _to; i++) Interlocked.Increment(ref visits[i - from]);
+                for (long i = _from; i < _to; i++)
+                    Interlocked.Increment(ref visits[i - from]);
             };
 
-            if (rangeSize == -1) Parallel.ForEach(Partitioner.Create(from, to), myDelegate);
-            else Parallel.ForEach(Partitioner.Create(from, to, rangeSize), myDelegate);
+            if (rangeSize == -1)
+                Parallel.ForEach(Partitioner.Create(from, to), myDelegate);
+            else
+                Parallel.ForEach(Partitioner.Create(from, to, rangeSize), myDelegate);
 
             for (long i = 0; i < range; i++)
             {
-                Assert.False(visits[i] != 1, string.Format("    > FAILED.  Visits[{0}] = {1}", i, visits[i]));
+                Assert.False(
+                    visits[i] != 1,
+                    string.Format("    > FAILED.  Visits[{0}] = {1}", i, visits[i])
+                );
             }
         }
     }

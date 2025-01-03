@@ -11,16 +11,16 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// <summary>
 /// A <see cref="IActionResultExecutor{FileContentResult}"/>
 /// </summary>
-public partial class FileContentResultExecutor : FileResultExecutorBase, IActionResultExecutor<FileContentResult>
+public partial class FileContentResultExecutor
+    : FileResultExecutorBase,
+        IActionResultExecutor<FileContentResult>
 {
     /// <summary>
     /// Intializes a new <see cref="FileContentResultExecutor"/>.
     /// </summary>
     /// <param name="loggerFactory">The factory used to create loggers.</param>
     public FileContentResultExecutor(ILoggerFactory loggerFactory)
-        : base(CreateLogger<FileContentResultExecutor>(loggerFactory))
-    {
-    }
+        : base(CreateLogger<FileContentResultExecutor>(loggerFactory)) { }
 
     /// <inheritdoc />
     public virtual Task ExecuteAsync(ActionContext context, FileContentResult result)
@@ -36,7 +36,8 @@ public partial class FileContentResultExecutor : FileResultExecutorBase, IAction
             result.FileContents.Length,
             result.EnableRangeProcessing,
             result.LastModified,
-            result.EntityTag);
+            result.EntityTag
+        );
 
         if (!serveBody)
         {
@@ -53,7 +54,12 @@ public partial class FileContentResultExecutor : FileResultExecutorBase, IAction
     /// <param name="result">The <see cref="FileContentResult"/>.</param>
     /// <param name="range">The <see cref="RangeItemHeaderValue"/>.</param>
     /// <param name="rangeLength">The length of the range.</param>
-    protected virtual Task WriteFileAsync(ActionContext context, FileContentResult result, RangeItemHeaderValue? range, long rangeLength)
+    protected virtual Task WriteFileAsync(
+        ActionContext context,
+        FileContentResult result,
+        RangeItemHeaderValue? range,
+        long rangeLength
+    )
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(result);
@@ -79,14 +85,33 @@ public partial class FileContentResultExecutor : FileResultExecutorBase, IAction
             if (logger.IsEnabled(LogLevel.Information))
             {
                 var fileResultType = fileResult.GetType().Name;
-                ExecutingFileResultWithNoFileName(logger, fileResultType, fileResult.FileDownloadName);
+                ExecutingFileResultWithNoFileName(
+                    logger,
+                    fileResultType,
+                    fileResult.FileDownloadName
+                );
             }
         }
 
-        [LoggerMessage(2, LogLevel.Information, "Executing {FileResultType}, sending file with download name '{FileDownloadName}' ...", EventName = "ExecutingFileResultWithNoFileName", SkipEnabledCheck = true)]
-        private static partial void ExecutingFileResultWithNoFileName(ILogger logger, string fileResultType, string fileDownloadName);
+        [LoggerMessage(
+            2,
+            LogLevel.Information,
+            "Executing {FileResultType}, sending file with download name '{FileDownloadName}' ...",
+            EventName = "ExecutingFileResultWithNoFileName",
+            SkipEnabledCheck = true
+        )]
+        private static partial void ExecutingFileResultWithNoFileName(
+            ILogger logger,
+            string fileResultType,
+            string fileDownloadName
+        );
 
-        [LoggerMessage(17, LogLevel.Debug, "Writing the requested range of bytes to the body...", EventName = "WritingRangeToBody")]
+        [LoggerMessage(
+            17,
+            LogLevel.Debug,
+            "Writing the requested range of bytes to the body...",
+            EventName = "WritingRangeToBody"
+        )]
         public static partial void WritingRangeToBody(ILogger logger);
     }
 }

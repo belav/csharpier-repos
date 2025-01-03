@@ -8,17 +8,46 @@ namespace System.Reflection.Emit.Tests
     public class PropertyBuilderTest15
     {
         [Theory]
-        [InlineData(MethodAttributes.Private | MethodAttributes.SpecialName | MethodAttributes.HideBySig)]
-        [InlineData(MethodAttributes.Family | MethodAttributes.SpecialName | MethodAttributes.HideBySig)]
-        [InlineData(MethodAttributes.FamORAssem | MethodAttributes.SpecialName | MethodAttributes.HideBySig)]
-        [InlineData(MethodAttributes.Static | MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig)]
-        [InlineData(MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig)]
+        [InlineData(
+            MethodAttributes.Private | MethodAttributes.SpecialName | MethodAttributes.HideBySig
+        )]
+        [InlineData(
+            MethodAttributes.Family | MethodAttributes.SpecialName | MethodAttributes.HideBySig
+        )]
+        [InlineData(
+            MethodAttributes.FamORAssem | MethodAttributes.SpecialName | MethodAttributes.HideBySig
+        )]
+        [InlineData(
+            MethodAttributes.Static
+                | MethodAttributes.Public
+                | MethodAttributes.SpecialName
+                | MethodAttributes.HideBySig
+        )]
+        [InlineData(
+            MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
+        )]
         public void SetSetMethod(MethodAttributes methodAttributes)
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            FieldBuilder field = type.DefineField("TestField", typeof(int), FieldAttributes.Private);
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.None, typeof(int), null);
-            MethodBuilder method = ImplementMethod( type, "TestMethod", methodAttributes, null, new Type[] { typeof(int) }, field);
+            FieldBuilder field = type.DefineField(
+                "TestField",
+                typeof(int),
+                FieldAttributes.Private
+            );
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.None,
+                typeof(int),
+                null
+            );
+            MethodBuilder method = ImplementMethod(
+                type,
+                "TestMethod",
+                methodAttributes,
+                null,
+                new Type[] { typeof(int) },
+                field
+            );
 
             property.SetSetMethod(method);
             MethodInfo actualMethod = property.GetSetMethod(true);
@@ -29,8 +58,16 @@ namespace System.Reflection.Emit.Tests
         public void SetSetMethod_NullMethodBuilder_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.None, typeof(int), null);
-            AssertExtensions.Throws<ArgumentNullException>("mdBuilder", () => property.SetSetMethod(null));
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.None,
+                typeof(int),
+                null
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "mdBuilder",
+                () => property.SetSetMethod(null)
+            );
         }
 
         [Fact]
@@ -38,19 +75,51 @@ namespace System.Reflection.Emit.Tests
         public void TestThrowsExceptionForCreateTypeCalled()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            FieldBuilder field = type.DefineField("TestField", typeof(int), FieldAttributes.Private);
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.None, typeof(int), null);
+            FieldBuilder field = type.DefineField(
+                "TestField",
+                typeof(int),
+                FieldAttributes.Private
+            );
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.None,
+                typeof(int),
+                null
+            );
 
-            MethodAttributes setMethodAttributes = MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig;
-            MethodBuilder method = ImplementMethod(type, "TestMethod", setMethodAttributes, null, new Type[] { typeof(int) }, field);
+            MethodAttributes setMethodAttributes =
+                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig;
+            MethodBuilder method = ImplementMethod(
+                type,
+                "TestMethod",
+                setMethodAttributes,
+                null,
+                new Type[] { typeof(int) },
+                field
+            );
 
             type.CreateType();
-            Assert.Throws<InvalidOperationException>(() => { property.SetSetMethod(method); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                property.SetSetMethod(method);
+            });
         }
 
-        private MethodBuilder ImplementMethod(TypeBuilder type, string methodName, MethodAttributes methodAttr, Type returnType, Type[] paramTypes, FieldBuilder field)
+        private MethodBuilder ImplementMethod(
+            TypeBuilder type,
+            string methodName,
+            MethodAttributes methodAttr,
+            Type returnType,
+            Type[] paramTypes,
+            FieldBuilder field
+        )
         {
-            MethodBuilder method = type.DefineMethod(methodName, methodAttr, returnType, paramTypes);
+            MethodBuilder method = type.DefineMethod(
+                methodName,
+                methodAttr,
+                returnType,
+                paramTypes
+            );
 
             ILGenerator methodILGenerator = method.GetILGenerator();
             methodILGenerator.Emit(OpCodes.Ldarg_0);

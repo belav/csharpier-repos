@@ -23,7 +23,10 @@ namespace System.Speech.Internal
                 }
                 else
                 {
-                    throw new ArgumentException(SR.Get(SRID.StringCanNotBeEmpty, paramName), paramName);
+                    throw new ArgumentException(
+                        SR.Get(SRID.StringCanNotBeEmpty, paramName),
+                        paramName
+                    );
                 }
             }
         }

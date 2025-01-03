@@ -13,17 +13,27 @@ namespace System.Activities.Runtime
     class BookmarkCallbackWrapper : CallbackWrapper
     {
         static readonly Type bookmarkCallbackType = typeof(BookmarkCallback);
-        static readonly Type[] bookmarkCallbackParameters = new Type[] { typeof(NativeActivityContext), typeof(Bookmark), typeof(object) };
+        static readonly Type[] bookmarkCallbackParameters = new Type[]
+        {
+            typeof(NativeActivityContext),
+            typeof(Bookmark),
+            typeof(object),
+        };
 
         public BookmarkCallbackWrapper(BookmarkCallback callback, ActivityInstance owningInstance)
-            : this(callback, owningInstance, BookmarkOptions.None)
-        {           
-        }
+            : this(callback, owningInstance, BookmarkOptions.None) { }
 
-        public BookmarkCallbackWrapper(BookmarkCallback callback, ActivityInstance owningInstance, BookmarkOptions bookmarkOptions)
+        public BookmarkCallbackWrapper(
+            BookmarkCallback callback,
+            ActivityInstance owningInstance,
+            BookmarkOptions bookmarkOptions
+        )
             : base(callback, owningInstance)
         {
-            Fx.Assert(callback != null || bookmarkOptions == BookmarkOptions.None, "Either we have a callback or we only allow SingleFire, Blocking bookmarks.");
+            Fx.Assert(
+                callback != null || bookmarkOptions == BookmarkOptions.None,
+                "Either we have a callback or we only allow SingleFire, Blocking bookmarks."
+            );
 
             this.Options = bookmarkOptions;
         }
@@ -31,22 +41,12 @@ namespace System.Activities.Runtime
         BookmarkOptions options;
         public BookmarkOptions Options
         {
-            get
-            {
-                return this.options;
-            }
-            private set
-            {
-                this.options = value;
-            }
+            get { return this.options; }
+            private set { this.options = value; }
         }
 
         [DataMember(EmitDefaultValue = false)]
-        public Bookmark Bookmark
-        {
-            get;
-            set;
-        }
+        public Bookmark Bookmark { get; set; }
 
         [DataMember(EmitDefaultValue = false, Name = "Options")]
         internal BookmarkOptions SerializedOptions
@@ -55,8 +55,10 @@ namespace System.Activities.Runtime
             set { this.Options = value; }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Because we are calling EnsureCallback",
-            Safe = "Safe because the method needs to be part of an Activity and we are casting to the callback type and it has a very specific signature. The author of the callback is buying into being invoked from PT.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Because we are calling EnsureCallback",
+            Safe = "Safe because the method needs to be part of an Activity and we are casting to the callback type and it has a very specific signature. The author of the callback is buying into being invoked from PT."
+        )]
         [SecuritySafeCritical]
         public void Invoke(NativeActivityContext context, Bookmark bookmark, object value)
         {
@@ -65,7 +67,12 @@ namespace System.Activities.Runtime
             bookmarkCallback(context, bookmark, value);
         }
 
-        public ActivityExecutionWorkItem CreateWorkItem(ActivityExecutor executor, bool isExternal, Bookmark bookmark, object value)
+        public ActivityExecutionWorkItem CreateWorkItem(
+            ActivityExecutor executor,
+            bool isExternal,
+            Bookmark bookmark,
+            object value
+        )
         {
             if (this.IsCallbackNull)
             {

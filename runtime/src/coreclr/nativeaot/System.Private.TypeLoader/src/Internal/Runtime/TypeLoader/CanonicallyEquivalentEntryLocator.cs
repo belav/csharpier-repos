@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
 using Internal.Runtime.Augments;
 using Internal.TypeSystem;
 
@@ -19,11 +18,17 @@ namespace Internal.Runtime.TypeLoader
         private DefType _defType;
         private CanonicalFormKind _canonKind;
 
-        public CanonicallyEquivalentEntryLocator(RuntimeTypeHandle typeToFind, CanonicalFormKind kind)
+        public CanonicallyEquivalentEntryLocator(
+            RuntimeTypeHandle typeToFind,
+            CanonicalFormKind kind
+        )
         {
             if (RuntimeAugments.IsGenericType(typeToFind))
             {
-                _genericDefinition = RuntimeAugments.GetGenericInstantiation(typeToFind, out _genericArgs);
+                _genericDefinition = RuntimeAugments.GetGenericInstantiation(
+                    typeToFind,
+                    out _genericArgs
+                );
             }
             else
             {
@@ -53,7 +58,10 @@ namespace Internal.Runtime.TypeLoader
                     return _defType.ConvertToCanonForm(_canonKind).GetHashCode();
 
                 if (!_genericDefinition.IsNull())
-                    return TypeLoaderEnvironment.Instance.GetCanonicalHashCode(_typeToFind, _canonKind);
+                    return TypeLoaderEnvironment.Instance.GetCanonicalHashCode(
+                        _typeToFind,
+                        _canonKind
+                    );
                 else
                     return _typeToFind.GetHashCode();
             }
@@ -75,9 +83,17 @@ namespace Internal.Runtime.TypeLoader
                 {
                     RuntimeTypeHandle otherGenericDefinition;
                     RuntimeTypeHandle[] otherGenericArgs;
-                    otherGenericDefinition = RuntimeAugments.GetGenericInstantiation(other, out otherGenericArgs);
+                    otherGenericDefinition = RuntimeAugments.GetGenericInstantiation(
+                        other,
+                        out otherGenericArgs
+                    );
 
-                    return _genericDefinition.Equals(otherGenericDefinition) && TypeLoaderEnvironment.Instance.CanInstantiationsShareCode(_genericArgs, otherGenericArgs, _canonKind);
+                    return _genericDefinition.Equals(otherGenericDefinition)
+                        && TypeLoaderEnvironment.Instance.CanInstantiationsShareCode(
+                            _genericArgs,
+                            otherGenericArgs,
+                            _canonKind
+                        );
                 }
                 else
                     return false;
@@ -94,7 +110,10 @@ namespace Internal.Runtime.TypeLoader
             }
 
             if (_genericArgs != null)
-                return TypeLoaderEnvironment.Instance.ConversionToCanonFormIsAChange(_genericArgs, _canonKind);
+                return TypeLoaderEnvironment.Instance.ConversionToCanonFormIsAChange(
+                    _genericArgs,
+                    _canonKind
+                );
 
             return false;
         }

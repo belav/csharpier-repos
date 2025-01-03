@@ -9,8 +9,18 @@ internal static partial class Interop
     {
         // NOTE: The out parameters are PULARGE_INTEGERs and may require
         // some byte munging magic.
-        [LibraryImport(Libraries.Kernel32, EntryPoint = "GetDiskFreeSpaceExW",  SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Kernel32,
+            EntryPoint = "GetDiskFreeSpaceExW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool GetDiskFreeSpaceEx(string drive, out long freeBytesForUser, out long totalBytes, out long freeBytes);
+        internal static partial bool GetDiskFreeSpaceEx(
+            string drive,
+            out long freeBytesForUser,
+            out long totalBytes,
+            out long freeBytes
+        );
     }
 }

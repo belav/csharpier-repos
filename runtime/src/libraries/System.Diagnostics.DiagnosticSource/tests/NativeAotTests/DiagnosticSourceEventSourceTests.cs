@@ -22,10 +22,18 @@ internal class Program
         {
             if (eventSource.Name == "Microsoft-Diagnostics-DiagnosticSource")
             {
-                EnableEvents(eventSource, EventLevel.Verbose, EventKeywords.All, new Dictionary<string, string>
-                {
-                    { "FilterAndPayloadSpecs", "TestDiagnosticListener/Test.Start@Activity2Start:-Id;Ints.*Enumerate"}
-                });
+                EnableEvents(
+                    eventSource,
+                    EventLevel.Verbose,
+                    EventKeywords.All,
+                    new Dictionary<string, string>
+                    {
+                        {
+                            "FilterAndPayloadSpecs",
+                            "TestDiagnosticListener/Test.Start@Activity2Start:-Id;Ints.*Enumerate"
+                        },
+                    }
+                );
             }
 
             base.OnEventSourceCreated(eventSource);
@@ -47,16 +55,17 @@ internal class Program
         DiagnosticSource diagnosticSource = new DiagnosticListener("TestDiagnosticListener");
         using (var listener = new TestEventListener())
         {
-            var data = new EventData()
-            {
-                Id = Guid.NewGuid(),
-            };
+            var data = new EventData() { Id = Guid.NewGuid() };
 
             Write(diagnosticSource, "Test.Start", data);
 
-            if (!(listener.LogDataPayload?.Count == 3 &&
-                (string)listener.LogDataPayload[0] == "TestDiagnosticListener" &&
-                (string)listener.LogDataPayload[1] == "Test.Start"))
+            if (
+                !(
+                    listener.LogDataPayload?.Count == 3
+                    && (string)listener.LogDataPayload[0] == "TestDiagnosticListener"
+                    && (string)listener.LogDataPayload[1] == "Test.Start"
+                )
+            )
             {
                 return -1;
             }
@@ -83,12 +92,14 @@ internal class Program
         }
     }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-        Justification = "The value being passed into Write has the necessary properties being preserved with DynamicallyAccessedMembers.")]
-    private static void Write<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(
-        DiagnosticSource diagnosticSource,
-        string name,
-        T value)
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2026:RequiresUnreferencedCode",
+        Justification = "The value being passed into Write has the necessary properties being preserved with DynamicallyAccessedMembers."
+    )]
+    private static void Write<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
+    >(DiagnosticSource diagnosticSource, string name, T value)
     {
         diagnosticSource.Write(name, value);
     }

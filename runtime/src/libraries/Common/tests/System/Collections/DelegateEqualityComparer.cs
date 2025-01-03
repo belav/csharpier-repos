@@ -16,12 +16,41 @@ namespace System.Collections.Tests
             Func<T, T, bool> equals = null,
             Func<T, int> getHashCode = null,
             Func<object, object, bool> objectEquals = null,
-            Func<object, int> objectGetHashCode = null)
+            Func<object, int> objectGetHashCode = null
+        )
         {
-            _equals = equals ?? ((x, y) => { throw new NotImplementedException(); });
-            _getHashCode = getHashCode ?? (obj => { throw new NotImplementedException(); });
-            _objectEquals = objectEquals ?? ((x, y) => { throw new NotImplementedException(); });
-            _objectGetHashCode = objectGetHashCode ?? (obj => { throw new NotImplementedException(); });
+            _equals =
+                equals
+                ?? (
+                    (x, y) =>
+                    {
+                        throw new NotImplementedException();
+                    }
+                );
+            _getHashCode =
+                getHashCode
+                ?? (
+                    obj =>
+                    {
+                        throw new NotImplementedException();
+                    }
+                );
+            _objectEquals =
+                objectEquals
+                ?? (
+                    (x, y) =>
+                    {
+                        throw new NotImplementedException();
+                    }
+                );
+            _objectGetHashCode =
+                objectGetHashCode
+                ?? (
+                    obj =>
+                    {
+                        throw new NotImplementedException();
+                    }
+                );
         }
 
         public bool Equals(T x, T y) => _equals(x, y);

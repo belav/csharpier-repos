@@ -26,243 +26,233 @@ using SCG = System.Collections.Generic;
 
 namespace C5UnitTests.SortingTests
 {
-	[TestFixture]
-	public class SortRandom
-	{
-		IC ic;
+    [TestFixture]
+    public class SortRandom
+    {
+        IC ic;
 
-		Random ran;
+        Random ran;
 
-		int[] a;
+        int[] a;
 
-		int length;
+        int length;
 
+        [SetUp]
+        public void Init()
+        {
+            ic = new IC();
+            ran = new Random(3456);
+            length = 100000;
+            a = new int[length];
+            for (int i = 0; i < length; i++)
+                a[i] = ran.Next();
+        }
 
-		[SetUp]
-		public void Init()
-		{
-			ic = new IC();
-			ran = new Random(3456);
-			length = 100000;
-			a = new int[length];
-			for (int i = 0; i < length; i++)
-				a[i] = ran.Next();
-		}
+        [Test]
+        public void HeapSort()
+        {
+            Sorting.HeapSort<int>(a, 0, length, ic);
+            for (int i = 1; i < length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
+        }
 
+        [Test]
+        public void IntroSort()
+        {
+            Sorting.IntroSort<int>(a, 0, length, ic);
+            for (int i = 1; i < length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
+        }
 
-		[Test]
-		public void HeapSort()
-		{
-			Sorting.HeapSort<int>(a, 0, length, ic);
-			for (int i = 1; i < length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
-		}
+        [Test]
+        public void InsertionSort()
+        {
+            length = 1000;
+            Sorting.InsertionSort<int>(a, 0, length, ic);
+            for (int i = 1; i < length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
 
+            Sorting.InsertionSort<int>(a, length, 2 * length, ic);
+            for (int i = length + 1; i < 2 * length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
+        }
 
-		[Test]
-		public void IntroSort()
-		{
-			Sorting.IntroSort<int>(a, 0, length, ic);
-			for (int i = 1; i < length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
-		}
+        [TearDown]
+        public void Dispose()
+        {
+            ic = null;
+        }
+    }
 
+    [TestFixture]
+    public class SortRandomDuplicates
+    {
+        IC ic;
 
-		[Test]
-		public void InsertionSort()
-		{
-			length = 1000;
-			Sorting.InsertionSort<int>(a, 0, length, ic);
-			for (int i = 1; i < length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
+        Random ran;
 
-			Sorting.InsertionSort<int>(a, length, 2 * length, ic);
-			for (int i = length + 1; i < 2 * length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
-		}
+        int[] a;
 
+        int length;
 
-		[TearDown]
-		public void Dispose() { ic = null; }
-	}
+        [SetUp]
+        public void Init()
+        {
+            ic = new IC();
+            ran = new Random(3456);
+            length = 100000;
+            a = new int[length];
+            for (int i = 0; i < length; i++)
+                a[i] = ran.Next(3, 23);
+        }
 
+        [Test]
+        public void HeapSort()
+        {
+            Sorting.HeapSort<int>(a, 0, length, ic);
+            for (int i = 1; i < length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
+        }
 
+        [Test]
+        public void IntroSort()
+        {
+            Sorting.IntroSort<int>(a, 0, length, ic);
+            for (int i = 1; i < length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
+        }
 
-	[TestFixture]
-	public class SortRandomDuplicates
-	{
-		IC ic;
+        [Test]
+        public void InsertionSort()
+        {
+            length = 1000;
+            Sorting.InsertionSort<int>(a, 0, length, ic);
+            for (int i = 1; i < length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
 
-		Random ran;
+            Sorting.InsertionSort<int>(a, length, 2 * length, ic);
+            for (int i = length + 1; i < 2 * length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
+        }
 
-		int[] a;
+        [TearDown]
+        public void Dispose()
+        {
+            ic = null;
+            a = null;
+            ran = null;
+        }
+    }
 
-		int length;
+    [TestFixture]
+    public class SortIncreasing
+    {
+        IC ic;
 
+        int[] a;
 
-		[SetUp]
-		public void Init()
-		{
-			ic = new IC();
-			ran = new Random(3456);
-			length = 100000;
-			a = new int[length];
-			for (int i = 0; i < length; i++)
-				a[i] = ran.Next(3, 23);
-		}
+        int length;
 
+        [SetUp]
+        public void Init()
+        {
+            ic = new IC();
+            length = 100000;
+            a = new int[length];
+            for (int i = 0; i < length; i++)
+                a[i] = i;
+        }
 
-		[Test]
-		public void HeapSort()
-		{
-			Sorting.HeapSort<int>(a, 0, length, ic);
-			for (int i = 1; i < length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
-		}
+        [Test]
+        public void HeapSort()
+        {
+            Sorting.HeapSort<int>(a, 0, length, ic);
+            for (int i = 1; i < length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
+        }
 
+        [Test]
+        public void IntroSort()
+        {
+            Sorting.IntroSort<int>(a, 0, length, ic);
+            for (int i = 1; i < length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
+        }
 
-		[Test]
-		public void IntroSort()
-		{
-			Sorting.IntroSort<int>(a, 0, length, ic);
-			for (int i = 1; i < length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
-		}
+        [Test]
+        public void InsertionSort()
+        {
+            length = 1000;
+            Sorting.InsertionSort<int>(a, 0, length, ic);
+            for (int i = 1; i < length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
 
+            Sorting.InsertionSort<int>(a, length, 2 * length, ic);
+            for (int i = length + 1; i < 2 * length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
+        }
 
-		[Test]
-		public void InsertionSort()
-		{
-			length = 1000;
-			Sorting.InsertionSort<int>(a, 0, length, ic);
-			for (int i = 1; i < length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
+        [TearDown]
+        public void Dispose()
+        {
+            ic = null;
+            a = null;
+        }
+    }
 
-			Sorting.InsertionSort<int>(a, length, 2 * length, ic);
-			for (int i = length + 1; i < 2 * length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
-		}
+    [TestFixture]
+    public class SortDecreasing
+    {
+        IC ic;
 
+        int[] a;
 
-		[TearDown]
-		public void Dispose() { ic = null; a = null; ran = null; }
-	}
+        int length;
 
+        [SetUp]
+        public void Init()
+        {
+            ic = new IC();
+            length = 100000;
+            a = new int[length];
+            for (int i = 0; i < length; i++)
+                a[i] = -i;
+        }
 
+        [Test]
+        public void HeapSort()
+        {
+            Sorting.HeapSort<int>(a, 0, length, ic);
+            for (int i = 1; i < length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
+        }
 
-	[TestFixture]
-	public class SortIncreasing
-	{
-		IC ic;
+        [Test]
+        public void IntroSort()
+        {
+            Sorting.IntroSort<int>(a, 0, length, ic);
+            for (int i = 1; i < length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
+        }
 
-		int[] a;
+        [Test]
+        public void InsertionSort()
+        {
+            length = 1000;
+            Sorting.InsertionSort<int>(a, 0, length, ic);
+            for (int i = 1; i < length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
 
-		int length;
+            Sorting.InsertionSort<int>(a, length, 2 * length, ic);
+            for (int i = length + 1; i < 2 * length; i++)
+                Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
+        }
 
-
-		[SetUp]
-		public void Init()
-		{
-			ic = new IC();
-			length = 100000;
-			a = new int[length];
-			for (int i = 0; i < length; i++)
-				a[i] = i;
-		}
-
-
-		[Test]
-		public void HeapSort()
-		{
-			Sorting.HeapSort<int>(a, 0, length, ic);
-			for (int i = 1; i < length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
-		}
-
-
-		[Test]
-		public void IntroSort()
-		{
-			Sorting.IntroSort<int>(a, 0, length, ic);
-			for (int i = 1; i < length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
-		}
-
-
-		[Test]
-		public void InsertionSort()
-		{
-			length = 1000;
-			Sorting.InsertionSort<int>(a, 0, length, ic);
-			for (int i = 1; i < length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
-
-			Sorting.InsertionSort<int>(a, length, 2 * length, ic);
-			for (int i = length + 1; i < 2 * length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
-		}
-
-
-		[TearDown]
-		public void Dispose() { ic = null; a = null; }
-	}
-
-
-
-	[TestFixture]
-	public class SortDecreasing
-	{
-		IC ic;
-
-		int[] a;
-
-		int length;
-
-
-		[SetUp]
-		public void Init()
-		{
-			ic = new IC();
-			length = 100000;
-			a = new int[length];
-			for (int i = 0; i < length; i++)
-				a[i] = -i;
-		}
-
-
-		[Test]
-		public void HeapSort()
-		{
-			Sorting.HeapSort<int>(a, 0, length, ic);
-			for (int i = 1; i < length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
-		}
-
-
-		[Test]
-		public void IntroSort()
-		{
-			Sorting.IntroSort<int>(a, 0, length, ic);
-			for (int i = 1; i < length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
-		}
-
-
-		[Test]
-		public void InsertionSort()
-		{
-			length = 1000;
-			Sorting.InsertionSort<int>(a, 0, length, ic);
-			for (int i = 1; i < length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
-
-			Sorting.InsertionSort<int>(a, length, 2 * length, ic);
-			for (int i = length + 1; i < 2 * length; i++)
-				Assert.IsTrue(a[i - 1] <= a[i], "Inversion at " + i);
-		}
-
-
-		[TearDown]
-		public void Dispose() { ic = null; a = null; }
-	}
+        [TearDown]
+        public void Dispose()
+        {
+            ic = null;
+            a = null;
+        }
+    }
 }

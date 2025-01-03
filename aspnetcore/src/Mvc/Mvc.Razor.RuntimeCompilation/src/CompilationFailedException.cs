@@ -8,8 +8,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 internal sealed class CompilationFailedException : Exception, ICompilationException
 {
-    public CompilationFailedException(
-            IEnumerable<CompilationFailure> compilationFailures)
+    public CompilationFailedException(IEnumerable<CompilationFailure> compilationFailures)
         : base(FormatMessage(compilationFailures))
     {
         ArgumentNullException.ThrowIfNull(compilationFailures);
@@ -21,9 +20,13 @@ internal sealed class CompilationFailedException : Exception, ICompilationExcept
 
     private static string FormatMessage(IEnumerable<CompilationFailure> compilationFailures)
     {
-        return Resources.CompilationFailed + Environment.NewLine +
-            string.Join(
+        return Resources.CompilationFailed
+            + Environment.NewLine
+            + string.Join(
                 Environment.NewLine,
-                compilationFailures.SelectMany(f => f.Messages!).Select(message => message!.FormattedMessage));
+                compilationFailures
+                    .SelectMany(f => f.Messages!)
+                    .Select(message => message!.FormattedMessage)
+            );
     }
 }

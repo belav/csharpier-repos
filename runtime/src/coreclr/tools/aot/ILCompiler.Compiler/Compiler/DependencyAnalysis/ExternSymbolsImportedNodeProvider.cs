@@ -13,22 +13,35 @@ namespace ILCompiler.DependencyAnalysis
             return new ExternEETypeSymbolNode(factory, type);
         }
 
-        public override ISortableSymbolNode ImportedGCStaticNode(NodeFactory factory, MetadataType type)
+        public override ISortableSymbolNode ImportedGCStaticNode(
+            NodeFactory factory,
+            MetadataType type
+        )
         {
             return new ExternSymbolNode(GCStaticsNode.GetMangledName(type, factory.NameMangler));
         }
 
-        public override ISortableSymbolNode ImportedNonGCStaticNode(NodeFactory factory, MetadataType type)
+        public override ISortableSymbolNode ImportedNonGCStaticNode(
+            NodeFactory factory,
+            MetadataType type
+        )
         {
             return new ExternSymbolNode(NonGCStaticsNode.GetMangledName(type, factory.NameMangler));
         }
 
-        public override ISortableSymbolNode ImportedMethodDictionaryNode(NodeFactory factory, MethodDesc method)
+        public override ISortableSymbolNode ImportedMethodDictionaryNode(
+            NodeFactory factory,
+            MethodDesc method
+        )
         {
             throw new NotImplementedException();
         }
 
-        public override IMethodNode ImportedMethodCodeNode(NodeFactory factory, MethodDesc method, bool unboxingStub)
+        public override IMethodNode ImportedMethodCodeNode(
+            NodeFactory factory,
+            MethodDesc method,
+            bool unboxingStub
+        )
         {
             return new ExternMethodSymbolNode(factory, method, unboxingStub);
         }

@@ -3,14 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Immutable;
-using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Microsoft.CodeAnalysis.PooledObjects;
-using Microsoft.CodeAnalysis.Operations;
-using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.CSharp.CodeGen;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Microsoft.CodeAnalysis.Operations;
+using Microsoft.CodeAnalysis.PooledObjects;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -21,7 +21,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return VisitDynamicInvocation(node, resultDiscarded: false);
         }
 
-        public BoundExpression VisitDynamicInvocation(BoundDynamicInvocation node, bool resultDiscarded)
+        public BoundExpression VisitDynamicInvocation(
+            BoundDynamicInvocation node,
+            bool resultDiscarded
+        )
         {
             // Dynamic can't have created handler conversions because we don't know target types.
             AssertNoImplicitInterpolatedStringHandlerConversions(node.Arguments);
@@ -38,24 +41,50 @@ namespace Microsoft.CodeAnalysis.CSharp
                     BoundMethodGroup methodGroup = (BoundMethodGroup)node.Expression;
                     typeArguments = methodGroup.TypeArgumentsOpt;
                     name = methodGroup.Name;
-                    hasImplicitReceiver = (methodGroup.Flags & BoundMethodGroupFlags.HasImplicitReceiver) != 0;
+                    hasImplicitReceiver =
+                        (methodGroup.Flags & BoundMethodGroupFlags.HasImplicitReceiver) != 0;
 
                     // Should have been eliminated during binding of dynamic invocation:
-                    Debug.Assert(methodGroup.ReceiverOpt == null || methodGroup.ReceiverOpt.Kind != BoundKind.TypeOrValueExpression);
+                    Debug.Assert(
+                        methodGroup.ReceiverOpt == null
+                            || methodGroup.ReceiverOpt.Kind != BoundKind.TypeOrValueExpression
+                    );
 
                     if (methodGroup.ReceiverOpt == null)
                     {
                         // Calling a static method defined on an outer class via its simple name.
-                        NamedTypeSymbol firstContainer = node.ApplicableMethods.First().ContainingType;
-                        Debug.Assert(node.ApplicableMethods.All(m => !m.RequiresInstanceReceiver && TypeSymbol.Equals(m.ContainingType, firstContainer, TypeCompareKind.ConsiderEverything2)));
+                        NamedTypeSymbol firstContainer = node
+                            .ApplicableMethods.First()
+                            .ContainingType;
+                        Debug.Assert(
+                            node.ApplicableMethods.All(m =>
+                                !m.RequiresInstanceReceiver
+                                && TypeSymbol.Equals(
+                                    m.ContainingType,
+                                    firstContainer,
+                                    TypeCompareKind.ConsiderEverything2
+                                )
+                            )
+                        );
 
-                        loweredReceiver = new BoundTypeExpression(node.Syntax, null, firstContainer);
+                        loweredReceiver = new BoundTypeExpression(
+                            node.Syntax,
+                            null,
+                            firstContainer
+                        );
                     }
-                    else if (hasImplicitReceiver && _factory.TopLevelMethod is { RequiresInstanceReceiver: false })
+                    else if (
+                        hasImplicitReceiver
+                        && _factory.TopLevelMethod is { RequiresInstanceReceiver: false }
+                    )
                     {
                         // Calling a static method defined on the current class via its simple name.
                         Debug.Assert(_factory.CurrentType is { });
-                        loweredReceiver = new BoundTypeExpression(node.Syntax, null, _factory.CurrentType);
+                        loweredReceiver = new BoundTypeExpression(
+                            node.Syntax,
+                            null,
+                            _factory.CurrentType
+                        );
                     }
                     else
                     {
@@ -80,22 +109,37 @@ namespace Microsoft.CodeAnalysis.CSharp
                 default:
                     // delegate invocation
                     var loweredExpression = VisitExpression(node.Expression);
-                    return _dynamicFactory.MakeDynamicInvocation(loweredExpression, loweredArguments, node.ArgumentNamesOpt, node.ArgumentRefKindsOpt, resultDiscarded).ToExpression();
+                    return _dynamicFactory
+                        .MakeDynamicInvocation(
+                            loweredExpression,
+                            loweredArguments,
+                            node.ArgumentNamesOpt,
+                            node.ArgumentRefKindsOpt,
+                            resultDiscarded
+                        )
+                        .ToExpression();
             }
 
             Debug.Assert(loweredReceiver != null);
-            return _dynamicFactory.MakeDynamicMemberInvocation(
-                name,
-                loweredReceiver,
-                typeArguments,
-                loweredArguments,
-                node.ArgumentNamesOpt,
-                node.ArgumentRefKindsOpt,
-                hasImplicitReceiver,
-                resultDiscarded).ToExpression();
+            return _dynamicFactory
+                .MakeDynamicMemberInvocation(
+                    name,
+                    loweredReceiver,
+                    typeArguments,
+                    loweredArguments,
+                    node.ArgumentNamesOpt,
+                    node.ArgumentRefKindsOpt,
+                    hasImplicitReceiver,
+                    resultDiscarded
+                )
+                .ToExpression();
         }
 
-        private void EmbedIfNeedTo(BoundExpression receiver, ImmutableArray<MethodSymbol> methods, SyntaxNode syntaxNode)
+        private void EmbedIfNeedTo(
+            BoundExpression receiver,
+            ImmutableArray<MethodSymbol> methods,
+            SyntaxNode syntaxNode
+        )
         {
             // If we are calling a method on a NoPIA type, we need to embed all methods/properties
             // with the matching name of this dynamic invocation.
@@ -108,13 +152,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     foreach (var m in methods)
                     {
-                        module.EmbeddedTypesManagerOpt.EmbedMethodIfNeedTo(m.OriginalDefinition.GetCciAdapter(), syntaxNode, _diagnostics.DiagnosticBag);
+                        module.EmbeddedTypesManagerOpt.EmbedMethodIfNeedTo(
+                            m.OriginalDefinition.GetCciAdapter(),
+                            syntaxNode,
+                            _diagnostics.DiagnosticBag
+                        );
                     }
                 }
             }
         }
 
-        private void EmbedIfNeedTo(BoundExpression receiver, ImmutableArray<PropertySymbol> properties, SyntaxNode syntaxNode)
+        private void EmbedIfNeedTo(
+            BoundExpression receiver,
+            ImmutableArray<PropertySymbol> properties,
+            SyntaxNode syntaxNode
+        )
         {
             // If we are calling a method on a NoPIA type, we need to embed all methods/properties
             // with the matching name of this dynamic invocation.
@@ -127,7 +179,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     foreach (var p in properties)
                     {
-                        module.EmbeddedTypesManagerOpt.EmbedPropertyIfNeedTo(p.OriginalDefinition.GetCciAdapter(), syntaxNode, _diagnostics.DiagnosticBag);
+                        module.EmbeddedTypesManagerOpt.EmbedPropertyIfNeedTo(
+                            p.OriginalDefinition.GetCciAdapter(),
+                            syntaxNode,
+                            _diagnostics.DiagnosticBag
+                        );
                     }
                 }
             }
@@ -139,10 +195,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref ImmutableArray<BoundExpression> arguments,
             ref ImmutableArray<RefKind> argumentRefKindsOpt,
             bool invokedAsExtensionMethod,
-            Syntax.SimpleNameSyntax? nameSyntax)
+            Syntax.SimpleNameSyntax? nameSyntax
+        )
         {
             var interceptableLocation = nameSyntax?.Location;
-            if (this._compilation.TryGetInterceptor(interceptableLocation) is not var (attributeLocation, interceptor))
+            if (
+                this._compilation.TryGetInterceptor(interceptableLocation)
+                is not var (attributeLocation, interceptor)
+            )
             {
                 // The call was not intercepted.
                 return;
@@ -162,19 +222,40 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var netArity = typeArgumentsBuilder.Count;
                 if (netArity == 0)
                 {
-                    this._diagnostics.Add(ErrorCode.ERR_InterceptorCannotBeGeneric, attributeLocation, interceptor, method);
+                    this._diagnostics.Add(
+                        ErrorCode.ERR_InterceptorCannotBeGeneric,
+                        attributeLocation,
+                        interceptor,
+                        method
+                    );
                     typeArgumentsBuilder.Free();
                     return;
                 }
                 else if (interceptor.Arity != netArity)
                 {
-                    this._diagnostics.Add(ErrorCode.ERR_InterceptorArityNotCompatible, attributeLocation, interceptor, netArity, method);
+                    this._diagnostics.Add(
+                        ErrorCode.ERR_InterceptorArityNotCompatible,
+                        attributeLocation,
+                        interceptor,
+                        netArity,
+                        method
+                    );
                     typeArgumentsBuilder.Free();
                     return;
                 }
 
                 interceptor = interceptor.Construct(typeArgumentsBuilder.ToImmutableAndFree());
-                if (!interceptor.CheckConstraints(new ConstraintsHelper.CheckConstraintsArgs(this._compilation, this._compilation.Conversions, includeNullability: true, attributeLocation, this._diagnostics)))
+                if (
+                    !interceptor.CheckConstraints(
+                        new ConstraintsHelper.CheckConstraintsArgs(
+                            this._compilation,
+                            this._compilation.Conversions,
+                            includeNullability: true,
+                            attributeLocation,
+                            this._diagnostics
+                        )
+                    )
+                )
                 {
                     return;
                 }
@@ -182,7 +263,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (method.MethodKind is not MethodKind.Ordinary)
             {
-                this._diagnostics.Add(ErrorCode.ERR_InterceptableMethodMustBeOrdinary, attributeLocation, nameSyntax.Identifier.ValueText);
+                this._diagnostics.Add(
+                    ErrorCode.ERR_InterceptableMethodMustBeOrdinary,
+                    attributeLocation,
+                    nameSyntax.Identifier.ValueText
+                );
                 return;
             }
 
@@ -190,23 +275,45 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(containingMethod is not null);
 
             var useSiteInfo = this.GetNewCompoundUseSiteInfo();
-            var isAccessible = AccessCheck.IsSymbolAccessible(interceptor, containingMethod.ContainingType, ref useSiteInfo);
+            var isAccessible = AccessCheck.IsSymbolAccessible(
+                interceptor,
+                containingMethod.ContainingType,
+                ref useSiteInfo
+            );
             this._diagnostics.Add(attributeLocation, useSiteInfo);
             if (!isAccessible)
             {
-                this._diagnostics.Add(ErrorCode.ERR_InterceptorNotAccessible, attributeLocation, interceptor, containingMethod);
+                this._diagnostics.Add(
+                    ErrorCode.ERR_InterceptorNotAccessible,
+                    attributeLocation,
+                    interceptor,
+                    containingMethod
+                );
                 return;
             }
 
             // When the original call is to an instance method, and the interceptor is an extension method,
             // we need to take special care to intercept with the extension method as though it is being called in reduced form.
             Debug.Assert(receiverOpt is not BoundTypeExpression || method.IsStatic);
-            var needToReduce = receiverOpt is not (null or BoundTypeExpression) && interceptor.IsExtensionMethod;
-            var symbolForCompare = needToReduce ? ReducedExtensionMethodSymbol.Create(interceptor, receiverOpt!.Type, _compilation, out _) : interceptor;
+            var needToReduce =
+                receiverOpt is not (null or BoundTypeExpression) && interceptor.IsExtensionMethod;
+            var symbolForCompare = needToReduce
+                ? ReducedExtensionMethodSymbol.Create(
+                    interceptor,
+                    receiverOpt!.Type,
+                    _compilation,
+                    out _
+                )
+                : interceptor;
 
             if (!MemberSignatureComparer.InterceptorsComparer.Equals(method, symbolForCompare))
             {
-                this._diagnostics.Add(ErrorCode.ERR_InterceptorSignatureMismatch, attributeLocation, method, interceptor);
+                this._diagnostics.Add(
+                    ErrorCode.ERR_InterceptorSignatureMismatch,
+                    attributeLocation,
+                    method,
+                    interceptor
+                );
                 return;
             }
 
@@ -217,17 +324,41 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _diagnostics,
                 static (diagnostics, method, interceptor, topLevel, attributeLocation) =>
                 {
-                    diagnostics.Add(ErrorCode.WRN_NullabilityMismatchInReturnTypeOnInterceptor, attributeLocation, method);
+                    diagnostics.Add(
+                        ErrorCode.WRN_NullabilityMismatchInReturnTypeOnInterceptor,
+                        attributeLocation,
+                        method
+                    );
                 },
-                static (diagnostics, method, interceptor, implementingParameter, blameAttributes, attributeLocation) =>
+                static (
+                    diagnostics,
+                    method,
+                    interceptor,
+                    implementingParameter,
+                    blameAttributes,
+                    attributeLocation
+                ) =>
                 {
-                    diagnostics.Add(ErrorCode.WRN_NullabilityMismatchInParameterTypeOnInterceptor, attributeLocation, new FormattedSymbol(implementingParameter, SymbolDisplayFormat.ShortFormat), method);
+                    diagnostics.Add(
+                        ErrorCode.WRN_NullabilityMismatchInParameterTypeOnInterceptor,
+                        attributeLocation,
+                        new FormattedSymbol(implementingParameter, SymbolDisplayFormat.ShortFormat),
+                        method
+                    );
                 },
-                extraArgument: attributeLocation);
+                extraArgument: attributeLocation
+            );
 
-            if (!MemberSignatureComparer.InterceptorsStrictComparer.Equals(method, symbolForCompare))
+            if (
+                !MemberSignatureComparer.InterceptorsStrictComparer.Equals(method, symbolForCompare)
+            )
             {
-                this._diagnostics.Add(ErrorCode.WRN_InterceptorSignatureMismatch, attributeLocation, method, interceptor);
+                this._diagnostics.Add(
+                    ErrorCode.WRN_InterceptorSignatureMismatch,
+                    attributeLocation,
+                    method,
+                    interceptor
+                );
             }
 
             method.TryGetThisParameter(out var methodThisParameter);
@@ -235,12 +366,26 @@ namespace Microsoft.CodeAnalysis.CSharp
             switch (methodThisParameter, interceptorThisParameterForCompare)
             {
                 case (not null, null):
-                case (not null, not null) when !methodThisParameter.Type.Equals(interceptorThisParameterForCompare.Type, TypeCompareKind.ObliviousNullableModifierMatchesAny)
-                        || methodThisParameter.RefKind != interceptorThisParameterForCompare.RefKind:
-                    this._diagnostics.Add(ErrorCode.ERR_InterceptorMustHaveMatchingThisParameter, attributeLocation, methodThisParameter, method);
+                case (not null, not null)
+                    when !methodThisParameter.Type.Equals(
+                        interceptorThisParameterForCompare.Type,
+                        TypeCompareKind.ObliviousNullableModifierMatchesAny
+                    )
+                        || methodThisParameter.RefKind
+                            != interceptorThisParameterForCompare.RefKind:
+                    this._diagnostics.Add(
+                        ErrorCode.ERR_InterceptorMustHaveMatchingThisParameter,
+                        attributeLocation,
+                        methodThisParameter,
+                        method
+                    );
                     return;
                 case (null, not null):
-                    this._diagnostics.Add(ErrorCode.ERR_InterceptorMustNotHaveThisParameter, attributeLocation, method);
+                    this._diagnostics.Add(
+                        ErrorCode.ERR_InterceptorMustNotHaveThisParameter,
+                        attributeLocation,
+                        method
+                    );
                     return;
                 default:
                     break;
@@ -249,22 +394,42 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (invokedAsExtensionMethod && interceptor.IsStatic && !interceptor.IsExtensionMethod)
             {
                 // Special case when intercepting an extension method call in reduced form with a non-extension.
-                this._diagnostics.Add(ErrorCode.ERR_InterceptorMustHaveMatchingThisParameter, attributeLocation, method.Parameters[0], method);
+                this._diagnostics.Add(
+                    ErrorCode.ERR_InterceptorMustHaveMatchingThisParameter,
+                    attributeLocation,
+                    method.Parameters[0],
+                    method
+                );
                 return;
             }
 
-            if (SourceMemberContainerTypeSymbol.CheckValidScopedOverride(
-                method,
-                symbolForCompare,
-                this._diagnostics,
-                static (diagnostics, method, symbolForCompare, implementingParameter, blameAttributes, attributeLocation) =>
-                {
-                    diagnostics.Add(ErrorCode.ERR_InterceptorScopedMismatch, attributeLocation, method, symbolForCompare);
-                },
-                extraArgument: attributeLocation,
-                allowVariance: true,
-                // Since we've already reduced 'symbolForCompare', we compare as though it is not an extension.
-                invokedAsExtensionMethod: false))
+            if (
+                SourceMemberContainerTypeSymbol.CheckValidScopedOverride(
+                    method,
+                    symbolForCompare,
+                    this._diagnostics,
+                    static (
+                        diagnostics,
+                        method,
+                        symbolForCompare,
+                        implementingParameter,
+                        blameAttributes,
+                        attributeLocation
+                    ) =>
+                    {
+                        diagnostics.Add(
+                            ErrorCode.ERR_InterceptorScopedMismatch,
+                            attributeLocation,
+                            method,
+                            symbolForCompare
+                        );
+                    },
+                    extraArgument: attributeLocation,
+                    allowVariance: true,
+                    // Since we've already reduced 'symbolForCompare', we compare as though it is not an extension.
+                    invokedAsExtensionMethod: false
+                )
+            )
             {
                 return;
             }
@@ -279,7 +444,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var thisRefKind = methodThisParameter.RefKind;
                 if (argumentRefKindsOpt.IsDefault && thisRefKind != RefKind.None)
                 {
-                    argumentRefKindsOpt = method.Parameters.SelectAsArray(static param => param.RefKind);
+                    argumentRefKindsOpt = method.Parameters.SelectAsArray(static param =>
+                        param.RefKind
+                    );
                 }
 
                 if (!argumentRefKindsOpt.IsDefault)
@@ -320,8 +487,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     rewrittenCall = visitArgumentsAndFinishRewrite(node, rewrittenReceiver);
                     rewrittenReceiver = rewrittenCall;
-                }
-                while (calls.TryPop(out node!));
+                } while (calls.TryPop(out node!));
 
                 calls.Free();
             }
@@ -335,7 +501,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return rewrittenCall;
 
             // Gets the instance or extension invocation receiver if any.
-            static bool tryGetReceiver(BoundCall node, [MaybeNullWhen(returnValue: false)] out BoundCall receiver)
+            static bool tryGetReceiver(
+                BoundCall node,
+                [MaybeNullWhen(returnValue: false)] out BoundCall receiver
+            )
             {
                 if (node.ReceiverOpt is BoundCall instanceReceiver)
                 {
@@ -343,7 +512,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return true;
                 }
 
-                if (node.InvokedAsExtensionMethod && node.Arguments is [BoundCall extensionReceiver, ..])
+                if (
+                    node.InvokedAsExtensionMethod
+                    && node.Arguments is [BoundCall extensionReceiver, ..]
+                )
                 {
                     Debug.Assert(node.ReceiverOpt is null);
                     receiver = extensionReceiver;
@@ -354,7 +526,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            BoundExpression visitArgumentsAndFinishRewrite(BoundCall node, BoundExpression? rewrittenReceiver)
+            BoundExpression visitArgumentsAndFinishRewrite(
+                BoundCall node,
+                BoundExpression? rewrittenReceiver
+            )
             {
                 MethodSymbol method = node.Method;
                 ImmutableArray<int> argsToParamsOpt = node.ArgsToParamsOpt;
@@ -381,7 +556,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     argRefKindsOpt,
                     storesOpt: null,
                     ref temps,
-                    firstRewrittenArgument: firstRewrittenArgument);
+                    firstRewrittenArgument: firstRewrittenArgument
+                );
 
                 rewrittenArguments = MakeArguments(
                     rewrittenArguments,
@@ -390,10 +566,28 @@ namespace Microsoft.CodeAnalysis.CSharp
                     argsToParamsOpt,
                     ref argRefKindsOpt,
                     ref temps,
-                    invokedAsExtensionMethod);
+                    invokedAsExtensionMethod
+                );
 
-                InterceptCallAndAdjustArguments(ref method, ref rewrittenReceiver, ref rewrittenArguments, ref argRefKindsOpt, invokedAsExtensionMethod, node.InterceptableNameSyntax);
-                var rewrittenCall = MakeCall(node, node.Syntax, rewrittenReceiver, method, rewrittenArguments, argRefKindsOpt, node.ResultKind, node.Type, temps.ToImmutableAndFree());
+                InterceptCallAndAdjustArguments(
+                    ref method,
+                    ref rewrittenReceiver,
+                    ref rewrittenArguments,
+                    ref argRefKindsOpt,
+                    invokedAsExtensionMethod,
+                    node.InterceptableNameSyntax
+                );
+                var rewrittenCall = MakeCall(
+                    node,
+                    node.Syntax,
+                    rewrittenReceiver,
+                    method,
+                    rewrittenArguments,
+                    argRefKindsOpt,
+                    node.ResultKind,
+                    node.Type,
+                    temps.ToImmutableAndFree()
+                );
 
                 if (Instrument)
                 {
@@ -415,7 +609,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupResultKind resultKind,
             TypeSymbol type,
             ArrayBuilder<LocalSymbol>? temps,
-            BoundCall? nodeOpt = null)
+            BoundCall? nodeOpt = null
+        )
         {
             arguments = MakeArguments(
                 arguments,
@@ -424,9 +619,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                 argsToParamsOpt: default,
                 ref argumentRefKindsOpt,
                 ref temps,
-                invokedAsExtensionMethod);
+                invokedAsExtensionMethod
+            );
 
-            return MakeCall(nodeOpt, syntax, rewrittenReceiver, method, arguments, argumentRefKindsOpt, resultKind, type, temps.ToImmutableAndFree());
+            return MakeCall(
+                nodeOpt,
+                syntax,
+                rewrittenReceiver,
+                method,
+                arguments,
+                argumentRefKindsOpt,
+                resultKind,
+                type,
+                temps.ToImmutableAndFree()
+            );
         }
 
         private BoundExpression MakeCall(
@@ -438,14 +644,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<RefKind> argumentRefKinds,
             LookupResultKind resultKind,
             TypeSymbol type,
-            ImmutableArray<LocalSymbol> temps)
+            ImmutableArray<LocalSymbol> temps
+        )
         {
             BoundExpression rewrittenBoundCall;
 
-            if (method.IsStatic &&
-                method.ContainingType.IsObjectType() &&
-                !_inExpressionLambda &&
-                (object)method == (object)_compilation.GetSpecialTypeMember(SpecialMember.System_Object__ReferenceEquals))
+            if (
+                method.IsStatic
+                && method.ContainingType.IsObjectType()
+                && !_inExpressionLambda
+                && (object)method
+                    == (object)
+                        _compilation.GetSpecialTypeMember(
+                            SpecialMember.System_Object__ReferenceEquals
+                        )
+            )
             {
                 Debug.Assert(rewrittenArguments.Length == 2);
 
@@ -462,7 +675,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     resultKind,
                     rewrittenArguments[0],
                     rewrittenArguments[1],
-                    type);
+                    type
+                );
             }
             else if (node == null)
             {
@@ -480,7 +694,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     argsToParamsOpt: default(ImmutableArray<int>),
                     defaultArguments: default(BitVector),
                     resultKind: resultKind,
-                    type: type);
+                    type: type
+                );
             }
             else
             {
@@ -497,7 +712,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     argsToParamsOpt: default(ImmutableArray<int>),
                     defaultArguments: default(BitVector),
                     node.ResultKind,
-                    node.Type);
+                    node.Type
+                );
             }
 
             if (!temps.IsDefaultOrEmpty)
@@ -507,13 +723,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                     locals: temps,
                     sideEffects: ImmutableArray<BoundExpression>.Empty,
                     value: rewrittenBoundCall,
-                    type: type);
+                    type: type
+                );
             }
 
             return rewrittenBoundCall;
         }
 
-        private BoundExpression MakeCall(SyntaxNode syntax, BoundExpression? rewrittenReceiver, MethodSymbol method, ImmutableArray<BoundExpression> rewrittenArguments, TypeSymbol type)
+        private BoundExpression MakeCall(
+            SyntaxNode syntax,
+            BoundExpression? rewrittenReceiver,
+            MethodSymbol method,
+            ImmutableArray<BoundExpression> rewrittenArguments,
+            TypeSymbol type
+        )
         {
             return MakeCall(
                 node: null,
@@ -524,7 +747,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 argumentRefKinds: default(ImmutableArray<RefKind>),
                 resultKind: LookupResultKind.Viable,
                 type: type,
-                temps: default);
+                temps: default
+            );
         }
 
         private static bool IsSafeForReordering(BoundExpression expression, RefKind kind)
@@ -557,66 +781,74 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case BoundKind.PassByCopy:
                         return IsSafeForReordering(((BoundPassByCopy)current).Expression, kind);
                     case BoundKind.Conversion:
+                    {
+                        BoundConversion conv = (BoundConversion)current;
+                        switch (conv.ConversionKind)
                         {
-                            BoundConversion conv = (BoundConversion)current;
-                            switch (conv.ConversionKind)
-                            {
-                                case ConversionKind.AnonymousFunction:
-                                case ConversionKind.ImplicitConstant:
-                                case ConversionKind.MethodGroup:
-                                case ConversionKind.NullLiteral:
-                                case ConversionKind.DefaultLiteral:
-                                    return true;
+                            case ConversionKind.AnonymousFunction:
+                            case ConversionKind.ImplicitConstant:
+                            case ConversionKind.MethodGroup:
+                            case ConversionKind.NullLiteral:
+                            case ConversionKind.DefaultLiteral:
+                                return true;
 
-                                case ConversionKind.Boxing:
-                                case ConversionKind.ImplicitDynamic:
-                                case ConversionKind.ExplicitDynamic:
-                                case ConversionKind.ExplicitEnumeration:
-                                case ConversionKind.ExplicitNullable:
-                                case ConversionKind.ExplicitNumeric:
-                                case ConversionKind.ExplicitReference:
-                                case ConversionKind.Identity:
-                                case ConversionKind.ImplicitEnumeration:
-                                case ConversionKind.ImplicitNullable:
-                                case ConversionKind.ImplicitNumeric:
-                                case ConversionKind.ImplicitReference:
-                                case ConversionKind.Unboxing:
-                                case ConversionKind.ExplicitPointerToInteger:
-                                case ConversionKind.ExplicitPointerToPointer:
-                                case ConversionKind.ImplicitPointerToVoid:
-                                case ConversionKind.ImplicitNullToPointer:
-                                case ConversionKind.ExplicitIntegerToPointer:
-                                    current = conv.Operand;
-                                    break;
+                            case ConversionKind.Boxing:
+                            case ConversionKind.ImplicitDynamic:
+                            case ConversionKind.ExplicitDynamic:
+                            case ConversionKind.ExplicitEnumeration:
+                            case ConversionKind.ExplicitNullable:
+                            case ConversionKind.ExplicitNumeric:
+                            case ConversionKind.ExplicitReference:
+                            case ConversionKind.Identity:
+                            case ConversionKind.ImplicitEnumeration:
+                            case ConversionKind.ImplicitNullable:
+                            case ConversionKind.ImplicitNumeric:
+                            case ConversionKind.ImplicitReference:
+                            case ConversionKind.Unboxing:
+                            case ConversionKind.ExplicitPointerToInteger:
+                            case ConversionKind.ExplicitPointerToPointer:
+                            case ConversionKind.ImplicitPointerToVoid:
+                            case ConversionKind.ImplicitNullToPointer:
+                            case ConversionKind.ExplicitIntegerToPointer:
+                                current = conv.Operand;
+                                break;
 
-                                case ConversionKind.ExplicitUserDefined:
-                                case ConversionKind.ImplicitUserDefined:
-                                // expression trees rewrite this later.
-                                // it is a kind of user defined conversions on IntPtr and in some cases can fail
-                                case ConversionKind.IntPtr:
-                                case ConversionKind.ImplicitThrow:
-                                    return false;
+                            case ConversionKind.ExplicitUserDefined:
+                            case ConversionKind.ImplicitUserDefined:
+                            // expression trees rewrite this later.
+                            // it is a kind of user defined conversions on IntPtr and in some cases can fail
+                            case ConversionKind.IntPtr:
+                            case ConversionKind.ImplicitThrow:
+                                return false;
 
-                                default:
-                                    // when this assert is hit, examine whether such conversion kind is 
-                                    // 1) actually expected to get this far
-                                    // 2) figure if it is possibly not producing or consuming any sideeffects (rare case)
-                                    // 3) add a case for it
-                                    Debug.Assert(false, "Unexpected conversion kind" + conv.ConversionKind);
+                            default:
+                                // when this assert is hit, examine whether such conversion kind is
+                                // 1) actually expected to get this far
+                                // 2) figure if it is possibly not producing or consuming any sideeffects (rare case)
+                                // 3) add a case for it
+                                Debug.Assert(
+                                    false,
+                                    "Unexpected conversion kind" + conv.ConversionKind
+                                );
 
-                                    // it is safe to assume that conversion is not reorderable
-                                    return false;
-                            }
-                            break;
+                                // it is safe to assume that conversion is not reorderable
+                                return false;
                         }
+                        break;
+                    }
                 }
             }
         }
 
         internal static bool IsCapturedPrimaryConstructorParameter(BoundExpression expression)
         {
-            return expression is BoundParameter { ParameterSymbol: { ContainingSymbol: SynthesizedPrimaryConstructor primaryCtor } parameter } &&
-                   primaryCtor.GetCapturedParameters().ContainsKey(parameter);
+            return expression
+                    is BoundParameter
+                    {
+                        ParameterSymbol:
+                        { ContainingSymbol: SynthesizedPrimaryConstructor primaryCtor } parameter
+                    }
+                && primaryCtor.GetCapturedParameters().ContainsKey(parameter);
         }
 
         private enum ReceiverCaptureMode
@@ -630,7 +862,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// <summary>
             /// Used for a regular indexer compound assignment rewrite.
             /// Everything is going to be in a single setter call with a getter call inside its value argument.
-            /// Only receiver and the indexes can be evaluated prior to evaluating the setter call. 
+            /// Only receiver and the indexes can be evaluated prior to evaluating the setter call.
             /// </summary>
             CompoundAssignment,
 
@@ -638,7 +870,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// Used for situations when additional arbitrary side-effects are possibly involved.
             /// Think about deconstruction, etc.
             /// </summary>
-            UseTwiceComplex
+            UseTwiceComplex,
         }
 
         /// <summary>
@@ -654,18 +886,34 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<RefKind> argumentRefKindsOpt,
             ArrayBuilder<BoundExpression>? storesOpt,
             ref ArrayBuilder<LocalSymbol>? tempsOpt,
-            BoundExpression? firstRewrittenArgument = null)
+            BoundExpression? firstRewrittenArgument = null
+        )
         {
-            Debug.Assert(argumentRefKindsOpt.IsDefault || argumentRefKindsOpt.Length == arguments.Length);
-            var requiresInstanceReceiver = methodOrIndexer.RequiresInstanceReceiver() && methodOrIndexer is not MethodSymbol { MethodKind: MethodKind.Constructor } and not FunctionPointerMethodSymbol;
-            Debug.Assert(!requiresInstanceReceiver || rewrittenReceiver != null || _inExpressionLambda);
-            Debug.Assert(captureReceiverMode == ReceiverCaptureMode.Default || (requiresInstanceReceiver && rewrittenReceiver != null && storesOpt is object));
+            Debug.Assert(
+                argumentRefKindsOpt.IsDefault || argumentRefKindsOpt.Length == arguments.Length
+            );
+            var requiresInstanceReceiver =
+                methodOrIndexer.RequiresInstanceReceiver()
+                && methodOrIndexer
+                    is not MethodSymbol { MethodKind: MethodKind.Constructor }
+                        and not FunctionPointerMethodSymbol;
+            Debug.Assert(
+                !requiresInstanceReceiver || rewrittenReceiver != null || _inExpressionLambda
+            );
+            Debug.Assert(
+                captureReceiverMode == ReceiverCaptureMode.Default
+                    || (
+                        requiresInstanceReceiver && rewrittenReceiver != null && storesOpt is object
+                    )
+            );
 
             BoundLocal? receiverTemp = null;
             BoundAssignmentOperator? assignmentToTemp = null;
 
-            if (captureReceiverMode != ReceiverCaptureMode.Default ||
-                (requiresInstanceReceiver && arguments.Any(a => usesReceiver(a))))
+            if (
+                captureReceiverMode != ReceiverCaptureMode.Default
+                || (requiresInstanceReceiver && arguments.Any(a => usesReceiver(a)))
+            )
             {
                 Debug.Assert(!_inExpressionLambda);
                 Debug.Assert(rewrittenReceiver is object);
@@ -677,31 +925,43 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     // SPEC VIOLATION: It is not very clear when receiver of constrained callvirt is dereferenced - when pushed (in lexical order),
                     // SPEC VIOLATION: or when actual call is executed. The actual behavior seems to be implementation specific in different JITs.
-                    // SPEC VIOLATION: To not depend on that, the right thing to do here is to store the value of the variable 
+                    // SPEC VIOLATION: To not depend on that, the right thing to do here is to store the value of the variable
                     // SPEC VIOLATION: when variable has reference type (regular temp), and store variable's location when it has a value type. (ref temp)
                     // SPEC VIOLATION: in a case of unconstrained generic type parameter a runtime test (default(T) == null) would be needed
                     // SPEC VIOLATION: However, for compatibility with Dev12 we will continue treating all generic type parameters, constrained or not,
                     // SPEC VIOLATION: as value types.
 
-                    refKind = rewrittenReceiver.Type.IsValueType || rewrittenReceiver.Type.Kind == SymbolKind.TypeParameter ? RefKind.Ref : RefKind.None;
+                    refKind =
+                        rewrittenReceiver.Type.IsValueType
+                        || rewrittenReceiver.Type.Kind == SymbolKind.TypeParameter
+                            ? RefKind.Ref
+                            : RefKind.None;
                 }
                 else
                 {
                     refKind = rewrittenReceiver.GetRefKind();
 
-                    if (refKind == RefKind.None &&
-                        !rewrittenReceiver.Type.IsReferenceType &&
-                        Binder.HasHome(rewrittenReceiver,
-                                       Binder.AddressKind.Constrained,
-                                       _factory.CurrentFunction,
-                                       peVerifyCompatEnabled: false,
-                                       stackLocalsOpt: null))
+                    if (
+                        refKind == RefKind.None
+                        && !rewrittenReceiver.Type.IsReferenceType
+                        && Binder.HasHome(
+                            rewrittenReceiver,
+                            Binder.AddressKind.Constrained,
+                            _factory.CurrentFunction,
+                            peVerifyCompatEnabled: false,
+                            stackLocalsOpt: null
+                        )
+                    )
                     {
                         refKind = RefKind.Ref;
                     }
                 }
 
-                receiverTemp = _factory.StoreToTemp(rewrittenReceiver, out assignmentToTemp, refKind);
+                receiverTemp = _factory.StoreToTemp(
+                    rewrittenReceiver,
+                    out assignmentToTemp,
+                    refKind
+                );
 
                 tempsOpt ??= ArrayBuilder<LocalSymbol>.GetInstance();
                 tempsOpt.Add(receiverTemp.LocalSymbol);
@@ -716,7 +976,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 var argumentsAssignedToTemp = BitVector.Null;
-                var visitedArgumentsBuilder = ArrayBuilder<BoundExpression>.GetInstance(arguments.Length);
+                var visitedArgumentsBuilder = ArrayBuilder<BoundExpression>.GetInstance(
+                    arguments.Length
+                );
                 var parameters = methodOrIndexer.GetParameters();
 
 #if DEBUG
@@ -734,22 +996,29 @@ namespace Microsoft.CodeAnalysis.CSharp
                         continue;
                     }
 
-                    ImmutableArray<BoundInterpolatedStringArgumentPlaceholder> argumentPlaceholders = addInterpolationPlaceholderReplacements(
-                        parameters,
-                        visitedArgumentsBuilder,
-                        i,
-                        receiverTemp,
-                        ref tempsOpt,
-                        ref argumentsAssignedToTemp);
+                    ImmutableArray<BoundInterpolatedStringArgumentPlaceholder> argumentPlaceholders =
+                        addInterpolationPlaceholderReplacements(
+                            parameters,
+                            visitedArgumentsBuilder,
+                            i,
+                            receiverTemp,
+                            ref tempsOpt,
+                            ref argumentsAssignedToTemp
+                        );
 
-                    visitedArgumentsBuilder.Add(i == 0 && firstRewrittenArgument is not null
-                        ? firstRewrittenArgument
-                        : VisitExpression(argument));
+                    visitedArgumentsBuilder.Add(
+                        i == 0 && firstRewrittenArgument is not null
+                            ? firstRewrittenArgument
+                            : VisitExpression(argument)
+                    );
 
                     foreach (var placeholder in argumentPlaceholders)
                     {
                         // We didn't set this one up, so we can't remove it.
-                        if (placeholder.ArgumentIndex == BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter)
+                        if (
+                            placeholder.ArgumentIndex
+                            == BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter
+                        )
                         {
                             continue;
                         }
@@ -771,13 +1040,24 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 BoundAssignmentOperator? extraRefInitialization = null;
 
-                if (receiverTemp.LocalSymbol.IsRef &&
-                    CodeGenerator.IsPossibleReferenceTypeReceiverOfConstrainedCall(receiverTemp) &&
-                    !CodeGenerator.ReceiverIsKnownToReferToTempIfReferenceType(receiverTemp) &&
-                    (captureReceiverMode == ReceiverCaptureMode.UseTwiceComplex ||
-                     !CodeGenerator.IsSafeToDereferenceReceiverRefAfterEvaluatingArguments(rewrittenArguments)))
+                if (
+                    receiverTemp.LocalSymbol.IsRef
+                    && CodeGenerator.IsPossibleReferenceTypeReceiverOfConstrainedCall(receiverTemp)
+                    && !CodeGenerator.ReceiverIsKnownToReferToTempIfReferenceType(receiverTemp)
+                    && (
+                        captureReceiverMode == ReceiverCaptureMode.UseTwiceComplex
+                        || !CodeGenerator.IsSafeToDereferenceReceiverRefAfterEvaluatingArguments(
+                            rewrittenArguments
+                        )
+                    )
+                )
                 {
-                    ReferToTempIfReferenceTypeReceiver(receiverTemp, ref assignmentToTemp, out extraRefInitialization, tempsOpt);
+                    ReferToTempIfReferenceTypeReceiver(
+                        receiverTemp,
+                        ref assignmentToTemp,
+                        out extraRefInitialization,
+                        tempsOpt
+                    );
                 }
 
                 if (storesOpt is object)
@@ -794,14 +1074,23 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     rewrittenReceiver = _factory.Sequence(
                         ImmutableArray<LocalSymbol>.Empty,
-                        extraRefInitialization is object ? ImmutableArray.Create<BoundExpression>(extraRefInitialization, assignmentToTemp) : ImmutableArray.Create<BoundExpression>(assignmentToTemp),
-                        receiverTemp);
+                        extraRefInitialization is object
+                            ? ImmutableArray.Create<BoundExpression>(
+                                extraRefInitialization,
+                                assignmentToTemp
+                            )
+                            : ImmutableArray.Create<BoundExpression>(assignmentToTemp),
+                        receiverTemp
+                    );
                 }
             }
 
             return rewrittenArguments;
 
-            void ensureTempTrackingSetup([NotNull] ref ArrayBuilder<LocalSymbol>? tempsOpt, ref BitVector positionsAssignedToTemp)
+            void ensureTempTrackingSetup(
+                [NotNull] ref ArrayBuilder<LocalSymbol>? tempsOpt,
+                ref BitVector positionsAssignedToTemp
+            )
             {
                 tempsOpt ??= ArrayBuilder<LocalSymbol>.GetInstance();
 
@@ -817,17 +1106,27 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int argumentIndex,
                 BoundLocal? receiverTemp,
                 ref ArrayBuilder<LocalSymbol>? tempsOpt,
-                ref BitVector argumentsAssignedToTemp)
+                ref BitVector argumentsAssignedToTemp
+            )
             {
                 var argument = arguments[argumentIndex];
 
-                if (argument is BoundConversion { ConversionKind: ConversionKind.InterpolatedStringHandler, Operand: BoundInterpolatedString or BoundBinaryOperator } conversion)
+                if (
+                    argument is BoundConversion
+                    {
+                        ConversionKind: ConversionKind.InterpolatedStringHandler,
+                        Operand: BoundInterpolatedString or BoundBinaryOperator
+                    } conversion
+                )
                 {
                     // Handler conversions are not supported in expression lambdas.
                     Debug.Assert(!_inExpressionLambda);
                     var interpolationData = conversion.Operand.GetInterpolatedStringHandlerData();
 
-                    if (interpolationData.ArgumentPlaceholders.Length > (interpolationData.HasTrailingHandlerValidityParameter ? 1 : 0))
+                    if (
+                        interpolationData.ArgumentPlaceholders.Length
+                        > (interpolationData.HasTrailingHandlerValidityParameter ? 1 : 0)
+                    )
                     {
                         Debug.Assert(!((BoundConversion)argument).ExplicitCastInCode);
 
@@ -858,19 +1157,33 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     {
                                         BoundSequence { Value: BoundLocal l } => l,
                                         BoundLocal l => l, // Can happen for discard arguments
-                                        var u => throw ExceptionUtilities.UnexpectedValue(u.Kind)
+                                        var u => throw ExceptionUtilities.UnexpectedValue(u.Kind),
                                     };
                                     break;
 
                                 case >= 0:
                                     Debug.Assert(visitedArgumentsBuilder[argIndex] != null);
-                                    var paramIndex = argsToParamsOpt.IsDefault ? argIndex : argsToParamsOpt[argIndex];
+                                    var paramIndex = argsToParamsOpt.IsDefault
+                                        ? argIndex
+                                        : argsToParamsOpt[argIndex];
                                     RefKind argRefKind = argumentRefKindsOpt.RefKinds(argIndex);
                                     RefKind paramRefKind = parameters[paramIndex].RefKind;
                                     var visitedArgument = visitedArgumentsBuilder[argIndex];
-                                    local = _factory.StoreToTemp(visitedArgument, out var store, refKind: paramRefKind is RefKind.In or RefKind.RefReadOnlyParameter ? RefKind.In : argRefKind);
+                                    local = _factory.StoreToTemp(
+                                        visitedArgument,
+                                        out var store,
+                                        refKind: paramRefKind
+                                            is RefKind.In
+                                                or RefKind.RefReadOnlyParameter
+                                            ? RefKind.In
+                                            : argRefKind
+                                    );
                                     tempsOpt.Add(local.LocalSymbol);
-                                    visitedArgumentsBuilder[argIndex] = _factory.Sequence(ImmutableArray<LocalSymbol>.Empty, ImmutableArray.Create<BoundExpression>(store), local);
+                                    visitedArgumentsBuilder[argIndex] = _factory.Sequence(
+                                        ImmutableArray<LocalSymbol>.Empty,
+                                        ImmutableArray.Create<BoundExpression>(store),
+                                        local
+                                    );
                                     argumentsAssignedToTemp[argIndex] = true;
                                     break;
 
@@ -894,17 +1207,29 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             static bool usesReceiver(BoundExpression argument)
             {
-                if (argument is BoundConversion { ConversionKind: ConversionKind.InterpolatedStringHandler, Operand: BoundInterpolatedString or BoundBinaryOperator } conversion)
+                if (
+                    argument is BoundConversion
+                    {
+                        ConversionKind: ConversionKind.InterpolatedStringHandler,
+                        Operand: BoundInterpolatedString or BoundBinaryOperator
+                    } conversion
+                )
                 {
                     var interpolationData = conversion.Operand.GetInterpolatedStringHandlerData();
 
-                    if (interpolationData.ArgumentPlaceholders.Length > (interpolationData.HasTrailingHandlerValidityParameter ? 1 : 0))
+                    if (
+                        interpolationData.ArgumentPlaceholders.Length
+                        > (interpolationData.HasTrailingHandlerValidityParameter ? 1 : 0)
+                    )
                     {
                         Debug.Assert(!((BoundConversion)argument).ExplicitCastInCode);
 
                         foreach (var placeholder in interpolationData.ArgumentPlaceholders)
                         {
-                            if (placeholder.ArgumentIndex == BoundInterpolatedStringArgumentPlaceholder.InstanceParameter)
+                            if (
+                                placeholder.ArgumentIndex
+                                == BoundInterpolatedStringArgumentPlaceholder.InstanceParameter
+                            )
                             {
                                 return true;
                             }
@@ -916,7 +1241,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private void ReferToTempIfReferenceTypeReceiver(BoundLocal receiverTemp, ref BoundAssignmentOperator assignmentToTemp, out BoundAssignmentOperator? extraRefInitialization, ArrayBuilder<LocalSymbol> temps)
+        private void ReferToTempIfReferenceTypeReceiver(
+            BoundLocal receiverTemp,
+            ref BoundAssignmentOperator assignmentToTemp,
+            out BoundAssignmentOperator? extraRefInitialization,
+            ArrayBuilder<LocalSymbol> temps
+        )
         {
             Debug.Assert(assignmentToTemp.IsRef);
 
@@ -924,7 +1254,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(receiverType is object);
 
             // A case where T is actually a class must be handled specially.
-            // Taking a reference to a class instance is fragile because the value behind the 
+            // Taking a reference to a class instance is fragile because the value behind the
             // reference might change while arguments are evaluated. However, the call should be
             // performed on the instance that is behind reference at the time we push the
             // reference to the stack. So, for a class we need to emit a reference to a temporary
@@ -937,40 +1267,72 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (!receiverType.IsReferenceType)
             {
                 // Store receiver ref to a different ref local - intermediate ref
-                var intermediateRef = _factory.Local(_factory.SynthesizedLocal(receiverType, refKind: RefKind.Ref));
+                var intermediateRef = _factory.Local(
+                    _factory.SynthesizedLocal(receiverType, refKind: RefKind.Ref)
+                );
                 temps.Add(intermediateRef.LocalSymbol);
-                extraRefInitialization = assignmentToTemp.Update(intermediateRef, assignmentToTemp.Right, assignmentToTemp.IsRef, assignmentToTemp.Type);
+                extraRefInitialization = assignmentToTemp.Update(
+                    intermediateRef,
+                    assignmentToTemp.Right,
+                    assignmentToTemp.IsRef,
+                    assignmentToTemp.Type
+                );
 
                 // `receiverTemp` initialization is adjusted as follows:
                 // If we are dealing with a value type, use value of the intermediate ref.
                 // Otherwise, use an address of a temp where we store the underlying reference type instance.
-                assignmentToTemp =
-                    assignmentToTemp.Update(
-                        assignmentToTemp.Left,
+                assignmentToTemp = assignmentToTemp.Update(
+                    assignmentToTemp.Left,
 #pragma warning disable format
-                        new BoundComplexConditionalReceiver(receiverTemp.Syntax,
-                                                            intermediateRef,
-                                                            _factory.Sequence(new BoundExpression[] { _factory.AssignmentExpression(cache, intermediateRef) }, cache),
-                                                            receiverType) { WasCompilerGenerated = true },
+                    new BoundComplexConditionalReceiver(
+                        receiverTemp.Syntax,
+                        intermediateRef,
+                        _factory.Sequence(
+                            new BoundExpression[]
+                            {
+                                _factory.AssignmentExpression(cache, intermediateRef),
+                            },
+                            cache
+                        ),
+                        receiverType
+                    )
+                    {
+                        WasCompilerGenerated = true,
+                    },
 #pragma warning restore format
-                        assignmentToTemp.IsRef,
-                        assignmentToTemp.Type);
+                    assignmentToTemp.IsRef,
+                    assignmentToTemp.Type
+                );
 
-                // SpillSequenceSpiller should be able to recognize this node in order to handle its spilling. 
-                Debug.Assert(SpillSequenceSpiller.IsComplexConditionalInitializationOfReceiverRef(assignmentToTemp, out _, out _, out _, out _));
+                // SpillSequenceSpiller should be able to recognize this node in order to handle its spilling.
+                Debug.Assert(
+                    SpillSequenceSpiller.IsComplexConditionalInitializationOfReceiverRef(
+                        assignmentToTemp,
+                        out _,
+                        out _,
+                        out _,
+                        out _
+                    )
+                );
             }
             else
             {
                 extraRefInitialization = null;
 
-                // We are dealing with a reference type. We can simply copy the instance into a temp and 
-                // use its address instead.  
-                assignmentToTemp =
-                    assignmentToTemp.Update(
-                        assignmentToTemp.Left,
-                        _factory.Sequence(new BoundExpression[] { _factory.AssignmentExpression(cache, assignmentToTemp.Right) }, cache),
-                        assignmentToTemp.IsRef,
-                        assignmentToTemp.Type);
+                // We are dealing with a reference type. We can simply copy the instance into a temp and
+                // use its address instead.
+                assignmentToTemp = assignmentToTemp.Update(
+                    assignmentToTemp.Left,
+                    _factory.Sequence(
+                        new BoundExpression[]
+                        {
+                            _factory.AssignmentExpression(cache, assignmentToTemp.Right),
+                        },
+                        cache
+                    ),
+                    assignmentToTemp.IsRef,
+                    assignmentToTemp.Type
+                );
             }
 
             ((SynthesizedLocal)receiverTemp.LocalSymbol).SetIsKnownToReferToTempIfReferenceType();
@@ -990,31 +1352,55 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<int> argsToParamsOpt,
             ref ImmutableArray<RefKind> argumentRefKindsOpt,
             [NotNull] ref ArrayBuilder<LocalSymbol>? temps,
-            bool invokedAsExtensionMethod = false)
+            bool invokedAsExtensionMethod = false
+        )
         {
-
             // We need to do a fancy rewrite under the following circumstances:
             // (1) there were named arguments that reordered the arguments; we might
-            //     have to generate temporaries to ensure that the arguments are 
+            //     have to generate temporaries to ensure that the arguments are
             //     evaluated in source code order, not the actual call order.
             //
             // If none of those are the case then we can just take an early out.
 
-            Debug.Assert(rewrittenArguments.All(arg => arg is not BoundDiscardExpression), "Discards should have been substituted by VisitArguments");
+            Debug.Assert(
+                rewrittenArguments.All(arg => arg is not BoundDiscardExpression),
+                "Discards should have been substituted by VisitArguments"
+            );
             temps ??= ArrayBuilder<LocalSymbol>.GetInstance();
             ImmutableArray<ParameterSymbol> parameters = methodOrIndexer.GetParameters();
             BoundExpression? optimized;
 
-            Debug.Assert(expanded ? rewrittenArguments.Length == parameters.Length : rewrittenArguments.Length >= parameters.Length);
+            Debug.Assert(
+                expanded
+                    ? rewrittenArguments.Length == parameters.Length
+                    : rewrittenArguments.Length >= parameters.Length
+            );
             Debug.Assert(rewrittenArguments.Count(a => a.IsParamsArray) == (expanded ? 1 : 0));
 
-            if (CanSkipRewriting(rewrittenArguments, methodOrIndexer, argsToParamsOpt, invokedAsExtensionMethod, false, out var isComReceiver))
+            if (
+                CanSkipRewriting(
+                    rewrittenArguments,
+                    methodOrIndexer,
+                    argsToParamsOpt,
+                    invokedAsExtensionMethod,
+                    false,
+                    out var isComReceiver
+                )
+            )
             {
                 argumentRefKindsOpt = GetEffectiveArgumentRefKinds(argumentRefKindsOpt, parameters);
 
-                Debug.Assert(!expanded || rewrittenArguments[rewrittenArguments.Length - 1].IsParamsArray);
+                Debug.Assert(
+                    !expanded || rewrittenArguments[rewrittenArguments.Length - 1].IsParamsArray
+                );
 
-                if (expanded && TryOptimizeParamsArray(rewrittenArguments[rewrittenArguments.Length - 1], out optimized))
+                if (
+                    expanded
+                    && TryOptimizeParamsArray(
+                        rewrittenArguments[rewrittenArguments.Length - 1],
+                        out optimized
+                    )
+                )
                 {
                     return rewrittenArguments.SetItem(rewrittenArguments.Length - 1, optimized);
                 }
@@ -1023,7 +1409,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // We have:
-            // * a list of arguments, already converted to their proper types, 
+            // * a list of arguments, already converted to their proper types,
             //   in source code order. Some optional arguments might be missing.
             // * a map showing which parameter each argument corresponds to. If
             //   this is null, then the argument to parameter mapping is one-to-one.
@@ -1043,10 +1429,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             // This will be created as a call with receiver A(), symbol M, argument list ( B()[C()], D() ),
             // name list ( y, x ) and ref list ( ref, out ).  We can rewrite this into temporaries:
             //
-            // A().M( 
+            // A().M(
             //    seq ( ref int temp_y = ref B()[C()], out D() ),
             //    temp_y );
-            // 
+            //
             // Now we have a call with receiver A(), symbol M, argument list as shown, no name list,
             // and ref list ( out, value ). We do not want to pass a *ref* to temp_y; the temporary
             // storage is not the thing being ref'd! We want to pass the *value* of temp_y, which
@@ -1066,14 +1452,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Goo(z: this.p, y: this.Q(), x: (object)10)
             //
             // The boxing of 10 can be reordered, but the fetch of this.p has to happen before the
-            // call to this.Q() because the call could change the value of this.p. 
+            // call to this.Q() because the call could change the value of this.p.
             //
             // We start by binding everything that is not obviously reorderable as a temporary, and
             // then run an optimizer to remove unnecessary temporaries.
 
             BoundExpression[] actualArguments = new BoundExpression[parameters.Length]; // The actual arguments that will be passed; one actual argument per formal parameter.
-            ArrayBuilder<BoundAssignmentOperator> storesToTemps = ArrayBuilder<BoundAssignmentOperator>.GetInstance(rewrittenArguments.Length);
-            ArrayBuilder<RefKind> refKinds = ArrayBuilder<RefKind>.GetInstance(parameters.Length, RefKind.None);
+            ArrayBuilder<BoundAssignmentOperator> storesToTemps =
+                ArrayBuilder<BoundAssignmentOperator>.GetInstance(rewrittenArguments.Length);
+            ArrayBuilder<RefKind> refKinds = ArrayBuilder<RefKind>.GetInstance(
+                parameters.Length,
+                RefKind.None
+            );
 
             // Step one: Store everything that is non-trivial into a temporary; record the
             // stores in storesToTemps and make the actual argument a reference to the temp.
@@ -1086,9 +1476,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 forceLambdaSpilling: false, // lambda conversions can be re-ordered in calls without side affects
                 actualArguments,
                 refKinds,
-                storesToTemps);
+                storesToTemps
+            );
 
-            // all the formal arguments are now in place. 
+            // all the formal arguments are now in place.
             // Optimize away unnecessary temporaries.
             // Necessary temporaries have their store instructions merged into the appropriate
             // argument expression.
@@ -1098,7 +1489,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(!expanded || actualArguments[actualArguments.Length - 1].IsParamsArray);
 
-            if (expanded && TryOptimizeParamsArray(actualArguments[actualArguments.Length - 1], out optimized))
+            if (
+                expanded
+                && TryOptimizeParamsArray(
+                    actualArguments[actualArguments.Length - 1],
+                    out optimized
+                )
+            )
             {
                 actualArguments[actualArguments.Length - 1] = optimized;
             }
@@ -1120,11 +1517,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             return actualArguments.AsImmutableOrNull();
         }
 
-        private bool TryOptimizeParamsArray(BoundExpression possibleParamsArray, [NotNullWhen(true)] out BoundExpression? optimized)
+        private bool TryOptimizeParamsArray(
+            BoundExpression possibleParamsArray,
+            [NotNullWhen(true)] out BoundExpression? optimized
+        )
         {
-            if (possibleParamsArray.IsParamsArray && !_inExpressionLambda && ((BoundArrayCreation)possibleParamsArray).Bounds is [BoundLiteral { ConstantValueOpt.Value: 0 }])
+            if (
+                possibleParamsArray.IsParamsArray
+                && !_inExpressionLambda
+                && ((BoundArrayCreation)possibleParamsArray).Bounds
+                    is [BoundLiteral { ConstantValueOpt.Value: 0 }]
+            )
             {
-                optimized = CreateArrayEmptyCallIfAvailable(possibleParamsArray.Syntax, ((ArrayTypeSymbol)possibleParamsArray.Type!).ElementType);
+                optimized = CreateArrayEmptyCallIfAvailable(
+                    possibleParamsArray.Syntax,
+                    ((ArrayTypeSymbol)possibleParamsArray.Type!).ElementType
+                );
                 if (optimized is { })
                 {
                     return true;
@@ -1145,7 +1553,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Here and in the layers after the lowering we only care about None/notNone differences for the arguments
         /// Except for async stack spilling which needs to know whether arguments were originally passed as "In" and must obey "no copying" rule.
         /// </summary>
-        private static ImmutableArray<RefKind> GetEffectiveArgumentRefKinds(ImmutableArray<RefKind> argumentRefKindsOpt, ImmutableArray<ParameterSymbol> parameters)
+        private static ImmutableArray<RefKind> GetEffectiveArgumentRefKinds(
+            ImmutableArray<RefKind> argumentRefKindsOpt,
+            ImmutableArray<ParameterSymbol> parameters
+        )
         {
             ArrayBuilder<RefKind>? refKindsBuilder = null;
             for (int i = 0; i < parameters.Length; i++)
@@ -1153,17 +1564,29 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var paramRefKind = parameters[i].RefKind;
                 if (paramRefKind is RefKind.In or RefKind.RefReadOnlyParameter)
                 {
-                    var argRefKind = argumentRefKindsOpt.IsDefault ? RefKind.None : argumentRefKindsOpt[i];
+                    var argRefKind = argumentRefKindsOpt.IsDefault
+                        ? RefKind.None
+                        : argumentRefKindsOpt[i];
                     fillRefKindsBuilder(argumentRefKindsOpt, parameters, ref refKindsBuilder);
-                    refKindsBuilder[i] = argRefKind == RefKind.None ? RefKind.In : RefKindExtensions.StrictIn;
+                    refKindsBuilder[i] =
+                        argRefKind == RefKind.None ? RefKind.In : RefKindExtensions.StrictIn;
                 }
                 else if (paramRefKind == RefKind.Ref)
                 {
-                    var argRefKind = argumentRefKindsOpt.IsDefault ? RefKind.None : argumentRefKindsOpt[i];
+                    var argRefKind = argumentRefKindsOpt.IsDefault
+                        ? RefKind.None
+                        : argumentRefKindsOpt[i];
                     if (argRefKind == RefKind.None)
                     {
                         // Interpolated strings used as interpolated string handlers are allowed to match ref parameters without `ref`
-                        Debug.Assert(parameters[i].Type is NamedTypeSymbol { IsInterpolatedStringHandlerType: true, IsValueType: true });
+                        Debug.Assert(
+                            parameters[i].Type
+                                is NamedTypeSymbol
+                                {
+                                    IsInterpolatedStringHandlerType: true,
+                                    IsValueType: true
+                                }
+                        );
 
                         fillRefKindsBuilder(argumentRefKindsOpt, parameters, ref refKindsBuilder);
                         refKindsBuilder[i] = RefKind.Ref;
@@ -1177,10 +1600,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // NOTE: we may have more arguments than parameters in a case of arglist. That is ok.
-            Debug.Assert(argumentRefKindsOpt.IsDefault || argumentRefKindsOpt.Length >= parameters.Length);
+            Debug.Assert(
+                argumentRefKindsOpt.IsDefault || argumentRefKindsOpt.Length >= parameters.Length
+            );
             return argumentRefKindsOpt;
 
-            static void fillRefKindsBuilder(ImmutableArray<RefKind> argumentRefKindsOpt, ImmutableArray<ParameterSymbol> parameters, [NotNull] ref ArrayBuilder<RefKind>? refKindsBuilder)
+            static void fillRefKindsBuilder(
+                ImmutableArray<RefKind> argumentRefKindsOpt,
+                ImmutableArray<ParameterSymbol> parameters,
+                [NotNull] ref ArrayBuilder<RefKind>? refKindsBuilder
+            )
             {
                 if (refKindsBuilder == null)
                 {
@@ -1192,7 +1621,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else
                     {
-                        refKindsBuilder = ArrayBuilder<RefKind>.GetInstance(parameters.Length, fillWithValue: RefKind.None);
+                        refKindsBuilder = ArrayBuilder<RefKind>.GetInstance(
+                            parameters.Length,
+                            fillWithValue: RefKind.None
+                        );
                     }
                 }
             }
@@ -1205,13 +1637,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<int> argsToParamsOpt,
             bool invokedAsExtensionMethod,
             bool ignoreComReceiver,
-            out bool isComReceiver)
+            out bool isComReceiver
+        )
         {
             isComReceiver = false;
 
             // An applicable "vararg" method could not possibly be applicable in its expanded
-            // form, and cannot possibly have named arguments or used optional parameters, 
-            // because the __arglist() argument has to be positional and in the last position. 
+            // form, and cannot possibly have named arguments or used optional parameters,
+            // because the __arglist() argument has to be positional and in the last position.
 
             if (methodOrIndexer.GetIsVararg())
             {
@@ -1222,15 +1655,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (!ignoreComReceiver)
             {
-                var receiverNamedType = invokedAsExtensionMethod ?
-                                        ((MethodSymbol)methodOrIndexer).Parameters[0].Type as NamedTypeSymbol :
-                                        methodOrIndexer.ContainingType;
+                var receiverNamedType = invokedAsExtensionMethod
+                    ? ((MethodSymbol)methodOrIndexer).Parameters[0].Type as NamedTypeSymbol
+                    : methodOrIndexer.ContainingType;
                 isComReceiver = receiverNamedType is { IsComImport: true };
             }
 
-            return rewrittenArguments.Length == methodOrIndexer.GetParameterCount() &&
-                argsToParamsOpt.IsDefault &&
-                !isComReceiver;
+            return rewrittenArguments.Length == methodOrIndexer.GetParameterCount()
+                && argsToParamsOpt.IsDefault
+                && !isComReceiver;
         }
 
         private static ImmutableArray<RefKind> GetRefKindsOrNull(ArrayBuilder<RefKind> refKinds)
@@ -1245,12 +1678,29 @@ namespace Microsoft.CodeAnalysis.CSharp
             return default(ImmutableArray<RefKind>);
         }
 
-        private delegate BoundExpression ParamsArrayElementRewriter<TArg>(BoundExpression element, ref TArg arg);
-        private static BoundExpression RewriteParamsArray<TArg>(BoundExpression paramsArray, ParamsArrayElementRewriter<TArg> elementRewriter, ref TArg arg)
+        private delegate BoundExpression ParamsArrayElementRewriter<TArg>(
+            BoundExpression element,
+            ref TArg arg
+        );
+
+        private static BoundExpression RewriteParamsArray<TArg>(
+            BoundExpression paramsArray,
+            ParamsArrayElementRewriter<TArg> elementRewriter,
+            ref TArg arg
+        )
         {
             Debug.Assert(paramsArray.IsParamsArray);
 
-            if (paramsArray is BoundArrayCreation { Bounds: [BoundLiteral] bounds, InitializerOpt: BoundArrayInitialization { Initializers: var elements } initialization } creation)
+            if (
+                paramsArray is BoundArrayCreation
+                {
+                    Bounds: [BoundLiteral] bounds,
+                    InitializerOpt: BoundArrayInitialization
+                    {
+                        Initializers: var elements
+                    } initialization
+                } creation
+            )
             {
                 ArrayBuilder<BoundExpression>? elementsBuilder = null;
 
@@ -1263,7 +1713,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (elementsBuilder == null)
                         {
-                            elementsBuilder = ArrayBuilder<BoundExpression>.GetInstance(elements.Length);
+                            elementsBuilder = ArrayBuilder<BoundExpression>.GetInstance(
+                                elements.Length
+                            );
                             elementsBuilder.AddRange(elements, i);
                         }
 
@@ -1277,7 +1729,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (elementsBuilder is { })
                 {
-                    return creation.Update(bounds, initialization.Update(elementsBuilder.ToImmutableAndFree()), creation.Type);
+                    return creation.Update(
+                        bounds,
+                        initialization.Update(elementsBuilder.ToImmutableAndFree()),
+                        creation.Type
+                    );
                 }
                 else
                 {
@@ -1298,9 +1754,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<RefKind> argumentRefKinds,
             ImmutableArray<BoundExpression> rewrittenArguments,
             bool forceLambdaSpilling,
-            /* out */ BoundExpression[] arguments,
-            /* out */ ArrayBuilder<RefKind> refKinds,
-            /* out */ ArrayBuilder<BoundAssignmentOperator> storesToTemps)
+            /* out */BoundExpression[] arguments,
+            /* out */ArrayBuilder<RefKind> refKinds,
+            /* out */ArrayBuilder<BoundAssignmentOperator> storesToTemps
+        )
         {
             Debug.Assert(refKinds.Count == arguments.Length);
             Debug.Assert(storesToTemps.Count == 0);
@@ -1332,12 +1789,30 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // Storing the array creation instead changes IL for
                         // Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen.CodeGenTests.NamedParamsOptimizationAndParams002​
                         // unit test.
-                        (LocalRewriter rewriter, bool forceLambdaSpilling, ArrayBuilder<BoundAssignmentOperator> storesToTemps) arg = (rewriter: this, forceLambdaSpilling, storesToTemps);
+                        (
+                            LocalRewriter rewriter,
+                            bool forceLambdaSpilling,
+                            ArrayBuilder<BoundAssignmentOperator> storesToTemps
+                        ) arg = (rewriter: this, forceLambdaSpilling, storesToTemps);
                         arguments[p] = RewriteParamsArray(
-                                           argument,
-                                           static (BoundExpression element, ref (LocalRewriter rewriter, bool forceLambdaSpilling, ArrayBuilder<BoundAssignmentOperator> storesToTemps) arg) =>
-                                               arg.rewriter.StoreArgumentToTempIfNecessary(arg.forceLambdaSpilling, arg.storesToTemps, element, RefKind.None, RefKind.None),
-                                           ref arg);
+                            argument,
+                            static (
+                                BoundExpression element,
+                                ref (
+                                    LocalRewriter rewriter,
+                                    bool forceLambdaSpilling,
+                                    ArrayBuilder<BoundAssignmentOperator> storesToTemps
+                                ) arg
+                            ) =>
+                                arg.rewriter.StoreArgumentToTempIfNecessary(
+                                    arg.forceLambdaSpilling,
+                                    arg.storesToTemps,
+                                    element,
+                                    RefKind.None,
+                                    RefKind.None
+                                ),
+                            ref arg
+                        );
 
                         Debug.Assert(arguments[p].IsParamsArray);
                     }
@@ -1345,7 +1820,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     continue;
                 }
 
-                arguments[p] = StoreArgumentToTempIfNecessary(forceLambdaSpilling, storesToTemps, argument, argRefKind, paramRefKind);
+                arguments[p] = StoreArgumentToTempIfNecessary(
+                    forceLambdaSpilling,
+                    storesToTemps,
+                    argument,
+                    argRefKind,
+                    paramRefKind
+                );
 
                 // Patch refKinds for arguments that match 'in' or 'ref readonly' parameters to have effective RefKind
                 // For the purpose of further analysis we will mark the arguments as -
@@ -1356,7 +1837,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (paramRefKind is RefKind.In or RefKind.RefReadOnlyParameter)
                 {
                     Debug.Assert(argRefKind is RefKind.None or RefKind.In or RefKind.Ref);
-                    argRefKind = argRefKind == RefKind.None ? RefKind.In : RefKindExtensions.StrictIn;
+                    argRefKind =
+                        argRefKind == RefKind.None ? RefKind.In : RefKindExtensions.StrictIn;
                 }
 
                 refKinds[p] = argRefKind;
@@ -1365,10 +1847,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             return;
         }
 
-        private BoundExpression StoreArgumentToTempIfNecessary(bool forceLambdaSpilling, ArrayBuilder<BoundAssignmentOperator> storesToTemps, BoundExpression argument, RefKind argRefKind, RefKind paramRefKind)
+        private BoundExpression StoreArgumentToTempIfNecessary(
+            bool forceLambdaSpilling,
+            ArrayBuilder<BoundAssignmentOperator> storesToTemps,
+            BoundExpression argument,
+            RefKind argRefKind,
+            RefKind paramRefKind
+        )
         {
-            if ((!forceLambdaSpilling || !isLambdaConversion(argument)) &&
-                IsSafeForReordering(argument, argRefKind))
+            if (
+                (!forceLambdaSpilling || !isLambdaConversion(argument))
+                && IsSafeForReordering(argument, argRefKind)
+            )
             {
                 return argument;
             }
@@ -1379,18 +1869,23 @@ namespace Microsoft.CodeAnalysis.CSharp
                     out BoundAssignmentOperator assignment,
                     refKind: paramRefKind is RefKind.In or RefKind.RefReadOnlyParameter
                         ? (argRefKind == RefKind.None ? RefKind.In : RefKindExtensions.StrictIn)
-                        : argRefKind);
+                        : argRefKind
+                );
                 storesToTemps.Add(assignment);
                 return temp;
             }
 
-            bool isLambdaConversion(BoundExpression expr)
-                => expr is BoundConversion conv && conv.ConversionKind == ConversionKind.AnonymousFunction;
+            bool isLambdaConversion(BoundExpression expr) =>
+                expr is BoundConversion conv
+                && conv.ConversionKind == ConversionKind.AnonymousFunction;
         }
 
         private BoundExpression CreateEmptyArray(SyntaxNode syntax, ArrayTypeSymbol arrayType)
         {
-            BoundExpression? arrayEmpty = CreateArrayEmptyCallIfAvailable(syntax, arrayType.ElementType);
+            BoundExpression? arrayEmpty = CreateArrayEmptyCallIfAvailable(
+                syntax,
+                arrayType.ElementType
+            );
             if (arrayEmpty is { })
             {
                 return arrayEmpty;
@@ -1402,13 +1897,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                     new BoundLiteral(
                         syntax,
                         ConstantValue.Create(0),
-                        _compilation.GetSpecialType(SpecialType.System_Int32))),
+                        _compilation.GetSpecialType(SpecialType.System_Int32)
+                    )
+                ),
                 initializerOpt: null,
-                arrayType)
-            { WasCompilerGenerated = true };
+                arrayType
+            )
+            {
+                WasCompilerGenerated = true,
+            };
         }
 
-        private BoundExpression? CreateArrayEmptyCallIfAvailable(SyntaxNode syntax, TypeSymbol elementType)
+        private BoundExpression? CreateArrayEmptyCallIfAvailable(
+            SyntaxNode syntax,
+            TypeSymbol elementType
+        )
         {
             if (elementType.IsPointerOrFunctionPointer())
             {
@@ -1416,7 +1919,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null;
             }
 
-            MethodSymbol? arrayEmpty = _compilation.GetWellKnownTypeMember(WellKnownMember.System_Array__Empty) as MethodSymbol;
+            MethodSymbol? arrayEmpty =
+                _compilation.GetWellKnownTypeMember(WellKnownMember.System_Array__Empty)
+                as MethodSymbol;
             if (arrayEmpty is null) // will be null if Array.Empty<T> doesn't exist in reference assemblies
             {
                 return null;
@@ -1428,7 +1933,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new BoundCall(
                 syntax,
                 receiverOpt: null,
-                        initialBindingReceiverIsSubjectToCloning: ThreeState.Unknown,
+                initialBindingReceiverIsSubjectToCloning: ThreeState.Unknown,
                 arrayEmpty,
                 ImmutableArray<BoundExpression>.Empty,
                 default(ImmutableArray<string?>),
@@ -1439,13 +1944,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 argsToParamsOpt: default(ImmutableArray<int>),
                 defaultArguments: default(BitVector),
                 resultKind: LookupResultKind.Viable,
-                type: arrayEmpty.ReturnType);
+                type: arrayEmpty.ReturnType
+            );
         }
 
         private static void OptimizeTemporaries(
             BoundExpression[] arguments,
             ArrayBuilder<BoundAssignmentOperator> storesToTemps,
-            ArrayBuilder<LocalSymbol> temporariesBuilder)
+            ArrayBuilder<LocalSymbol> temporariesBuilder
+        )
         {
             Debug.Assert(arguments != null);
             Debug.Assert(storesToTemps != null);
@@ -1474,7 +1981,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private static int MergeArgumentsAndSideEffects(
             BoundExpression[] arguments,
-            ArrayBuilder<BoundAssignmentOperator> tempStores)
+            ArrayBuilder<BoundAssignmentOperator> tempStores
+        )
         {
             Debug.Assert(arguments != null);
             Debug.Assert(tempStores != null);
@@ -1502,25 +2010,55 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (argument.IsParamsArray)
                 {
-                    (ArrayBuilder<BoundAssignmentOperator> tempStores, int tempsRemainedInUse, int firstUnclaimedStore) arg = (tempStores, tempsRemainedInUse, firstUnclaimedStore);
+                    (
+                        ArrayBuilder<BoundAssignmentOperator> tempStores,
+                        int tempsRemainedInUse,
+                        int firstUnclaimedStore
+                    ) arg = (tempStores, tempsRemainedInUse, firstUnclaimedStore);
                     arguments[a] = RewriteParamsArray(
-                                       argument,
-                                       static (BoundExpression element, ref (ArrayBuilder<BoundAssignmentOperator> tempStores, int tempsRemainedInUse, int firstUnclaimedStore) arg) =>
-                                           mergeArgumentAndSideEffect(element, arg.tempStores, ref arg.tempsRemainedInUse, ref arg.firstUnclaimedStore),
-                                       ref arg);
+                        argument,
+                        static (
+                            BoundExpression element,
+                            ref (
+                                ArrayBuilder<BoundAssignmentOperator> tempStores,
+                                int tempsRemainedInUse,
+                                int firstUnclaimedStore
+                            ) arg
+                        ) =>
+                            mergeArgumentAndSideEffect(
+                                element,
+                                arg.tempStores,
+                                ref arg.tempsRemainedInUse,
+                                ref arg.firstUnclaimedStore
+                            ),
+                        ref arg
+                    );
                     tempsRemainedInUse = arg.tempsRemainedInUse;
                     firstUnclaimedStore = arg.firstUnclaimedStore;
                 }
                 else
                 {
-                    arguments[a] = mergeArgumentAndSideEffect(argument, tempStores, ref tempsRemainedInUse, ref firstUnclaimedStore);
+                    arguments[a] = mergeArgumentAndSideEffect(
+                        argument,
+                        tempStores,
+                        ref tempsRemainedInUse,
+                        ref firstUnclaimedStore
+                    );
                 }
             }
 
-            Debug.Assert(firstUnclaimedStore == tempStores.Count, "not all side-effects were claimed");
+            Debug.Assert(
+                firstUnclaimedStore == tempStores.Count,
+                "not all side-effects were claimed"
+            );
             return tempsRemainedInUse;
 
-            static BoundExpression mergeArgumentAndSideEffect(BoundExpression argument, ArrayBuilder<BoundAssignmentOperator> tempStores, ref int tempsRemainedInUse, ref int firstUnclaimedStore)
+            static BoundExpression mergeArgumentAndSideEffect(
+                BoundExpression argument,
+                ArrayBuilder<BoundAssignmentOperator> tempStores,
+                ref int tempsRemainedInUse,
+                ref int firstUnclaimedStore
+            )
             {
                 // if argument is a load, search for corresponding store. if store is found, extract
                 // the actual expression we were storing and add it as an argument - this one does
@@ -1558,21 +2096,24 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                         else
                         {
-                            var sideeffects = new BoundExpression[correspondingStore - firstUnclaimedStore];
+                            var sideeffects = new BoundExpression[
+                                correspondingStore - firstUnclaimedStore
+                            ];
                             for (int s = 0; s < sideeffects.Length; s++)
                             {
                                 sideeffects[s] = tempStores[firstUnclaimedStore + s];
                             }
 
                             argument = new BoundSequence(
-                                        value.Syntax,
-                                        // this sequence does not own locals. Note that temps that
-                                        // we use for the rewrite are stored in one arg and loaded
-                                        // in another so they must live in a scope above.
-                                        ImmutableArray<LocalSymbol>.Empty,
-                                        sideeffects.AsImmutableOrNull(),
-                                        value,
-                                        value.Type);
+                                value.Syntax,
+                                // this sequence does not own locals. Note that temps that
+                                // we use for the rewrite are stored in one arg and loaded
+                                // in another so they must live in a scope above.
+                                ImmutableArray<LocalSymbol>.Empty,
+                                sideeffects.AsImmutableOrNull(),
+                                value,
+                                value.Type
+                            );
                         }
 
                         firstUnclaimedStore = correspondingStore + 1;
@@ -1593,7 +2134,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<ParameterSymbol> parameters,
             BoundExpression[] actualArguments, //already re-ordered to match parameters
             ArrayBuilder<RefKind> argsRefKindsBuilder,
-            ArrayBuilder<LocalSymbol> temporariesBuilder)
+            ArrayBuilder<LocalSymbol> temporariesBuilder
+        )
         {
             Debug.Assert(actualArguments != null);
             Debug.Assert(actualArguments.Length == parameters.Length);
@@ -1609,7 +2151,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 RefKind argRefKind = argsRefKindsBuilder[argIndex];
 
                 // Rewrite only if the argument was passed with no ref/out and the
-                // parameter was declared ref. 
+                // parameter was declared ref.
                 if (argRefKind != RefKind.None || paramRefKind != RefKind.Ref)
                 {
                     continue;
@@ -1636,7 +2178,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     locals: ImmutableArray<LocalSymbol>.Empty,
                     sideEffects: ImmutableArray.Create<BoundExpression>(boundAssignmentToTemp),
                     value: boundTemp,
-                    type: boundTemp.Type);
+                    type: boundTemp.Type
+                );
                 argsRefKindsBuilder[argIndex] = RefKind.Ref;
 
                 temporariesBuilder.Add(boundTemp.LocalSymbol);
@@ -1654,7 +2197,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // GetMember operation:
             Debug.Assert(node.TypeArgumentsOpt.IsDefault);
             var loweredReceiver = VisitExpression(node.Receiver);
-            return _dynamicFactory.MakeDynamicGetMember(loweredReceiver, node.Name, node.Indexed).ToExpression();
+            return _dynamicFactory
+                .MakeDynamicGetMember(loweredReceiver, node.Name, node.Indexed)
+                .ToExpression();
         }
     }
 }

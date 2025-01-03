@@ -11,9 +11,15 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 public class PageViewLocationExpander : IViewLocationExpander
 {
     /// <inheritdoc/>
-    public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable<string> viewLocations)
+    public IEnumerable<string> ExpandViewLocations(
+        ViewLocationExpanderContext context,
+        IEnumerable<string> viewLocations
+    )
     {
-        if ((context.ActionContext.ActionDescriptor is PageActionDescriptor) && !string.IsNullOrEmpty(context.PageName))
+        if (
+            (context.ActionContext.ActionDescriptor is PageActionDescriptor)
+            && !string.IsNullOrEmpty(context.PageName)
+        )
         {
             return ExpandPageHierarchy();
         }

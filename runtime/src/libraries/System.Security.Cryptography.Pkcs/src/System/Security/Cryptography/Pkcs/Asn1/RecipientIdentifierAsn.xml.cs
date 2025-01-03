@@ -22,7 +22,9 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             {
                 if (usedTags.TryGetValue(tag, out string? existing))
                 {
-                    throw new InvalidOperationException($"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'");
+                    throw new InvalidOperationException(
+                        $"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'"
+                    );
                 }
 
                 usedTags.Add(tag, fieldName);
@@ -51,7 +53,10 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 if (wroteValue)
                     throw new CryptographicException();
 
-                writer.WriteOctetString(SubjectKeyIdentifier.Value.Span, new Asn1Tag(TagClass.ContextSpecific, 0));
+                writer.WriteOctetString(
+                    SubjectKeyIdentifier.Value.Span,
+                    new Asn1Tag(TagClass.ContextSpecific, 0)
+                );
                 wroteValue = true;
             }
 
@@ -61,7 +66,10 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        internal static RecipientIdentifierAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static RecipientIdentifierAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -77,7 +85,11 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out RecipientIdentifierAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out RecipientIdentifierAsn decoded
+        )
         {
             try
             {
@@ -89,7 +101,11 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out RecipientIdentifierAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out RecipientIdentifierAsn decoded
+        )
         {
             decoded = default;
             Asn1Tag tag = reader.PeekTag();
@@ -100,22 +116,32 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             if (tag.HasSameClassAndValue(Asn1Tag.Sequence))
             {
                 System.Security.Cryptography.Pkcs.Asn1.IssuerAndSerialNumberAsn tmpIssuerAndSerialNumber;
-                System.Security.Cryptography.Pkcs.Asn1.IssuerAndSerialNumberAsn.Decode(ref reader, rebind, out tmpIssuerAndSerialNumber);
+                System.Security.Cryptography.Pkcs.Asn1.IssuerAndSerialNumberAsn.Decode(
+                    ref reader,
+                    rebind,
+                    out tmpIssuerAndSerialNumber
+                );
                 decoded.IssuerAndSerialNumber = tmpIssuerAndSerialNumber;
-
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0)))
             {
-
-                if (reader.TryReadPrimitiveOctetString(out tmpSpan, new Asn1Tag(TagClass.ContextSpecific, 0)))
+                if (
+                    reader.TryReadPrimitiveOctetString(
+                        out tmpSpan,
+                        new Asn1Tag(TagClass.ContextSpecific, 0)
+                    )
+                )
                 {
-                    decoded.SubjectKeyIdentifier = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                    decoded.SubjectKeyIdentifier = rebindSpan.Overlaps(tmpSpan, out offset)
+                        ? rebind.Slice(offset, tmpSpan.Length)
+                        : tmpSpan.ToArray();
                 }
                 else
                 {
-                    decoded.SubjectKeyIdentifier = reader.ReadOctetString(new Asn1Tag(TagClass.ContextSpecific, 0));
+                    decoded.SubjectKeyIdentifier = reader.ReadOctetString(
+                        new Asn1Tag(TagClass.ContextSpecific, 0)
+                    );
                 }
-
             }
             else
             {

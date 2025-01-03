@@ -11,7 +11,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal delegate void TopologicalSortAddSuccessors<TNode>(ref TemporaryArray<TNode> builder, TNode node);
+    internal delegate void TopologicalSortAddSuccessors<TNode>(
+        ref TemporaryArray<TNode> builder,
+        TNode node
+    );
 
     /// <summary>
     /// A helper class that contains a topological sort algorithm.
@@ -21,10 +24,15 @@ namespace Microsoft.CodeAnalysis
         public static bool TryIterativeSort<TNode>(
             TNode node,
             TopologicalSortAddSuccessors<TNode> addSuccessors,
-            out ImmutableArray<TNode> result)
+            out ImmutableArray<TNode> result
+        )
             where TNode : notnull
         {
-            return TryIterativeSort(SpecializedCollections.SingletonEnumerable(node), addSuccessors, out result);
+            return TryIterativeSort(
+                SpecializedCollections.SingletonEnumerable(node),
+                addSuccessors,
+                out result
+            );
         }
 
         /// <summary>
@@ -41,11 +49,16 @@ namespace Microsoft.CodeAnalysis
         public static bool TryIterativeSort<TNode>(
             IEnumerable<TNode> nodes,
             TopologicalSortAddSuccessors<TNode> addSuccessors,
-            out ImmutableArray<TNode> result)
+            out ImmutableArray<TNode> result
+        )
             where TNode : notnull
         {
             // First, count the predecessors of each node
-            PooledDictionary<TNode, int> predecessorCounts = PredecessorCounts(nodes, addSuccessors, out ImmutableArray<TNode> allNodes);
+            PooledDictionary<TNode, int> predecessorCounts = PredecessorCounts(
+                nodes,
+                addSuccessors,
+                out ImmutableArray<TNode> allNodes
+            );
 
             using var successors = TemporaryArray<TNode>.Empty;
 
@@ -95,7 +108,8 @@ namespace Microsoft.CodeAnalysis
         private static PooledDictionary<TNode, int> PredecessorCounts<TNode>(
             IEnumerable<TNode> nodes,
             TopologicalSortAddSuccessors<TNode> addSuccessors,
-            out ImmutableArray<TNode> allNodes)
+            out ImmutableArray<TNode> allNodes
+        )
             where TNode : notnull
         {
             var predecessorCounts = PooledDictionary<TNode, int>.GetInstance();

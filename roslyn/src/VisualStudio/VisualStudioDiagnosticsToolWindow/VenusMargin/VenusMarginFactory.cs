@@ -31,7 +31,10 @@ namespace Roslyn.Hosting.Diagnostics.VenusMargin
             _textEditorFactory = textEditorFactory;
         }
 
-        public IWpfTextViewMargin CreateMargin(IWpfTextViewHost textViewHost, IWpfTextViewMargin containerMargin)
+        public IWpfTextViewMargin CreateMargin(
+            IWpfTextViewHost textViewHost,
+            IWpfTextViewMargin containerMargin
+        )
         {
             if (textViewHost.TextView.TextBuffer is not IProjectionBuffer)
             {

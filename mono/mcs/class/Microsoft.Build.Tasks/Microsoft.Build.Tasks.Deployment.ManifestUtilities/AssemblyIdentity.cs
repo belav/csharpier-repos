@@ -30,211 +30,233 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public sealed class AssemblyIdentity {
-	
-		string	culture;
-		bool	isFrameworkAssembly;
-		bool	isNeutralPlatform;
-		bool	isStrongName;
-		string	name;
-		string	processorArchitecture;
-		string	publicKeyToken;
-		string	type;
-		string	version;
-		string	xmlCulture;
-		string	xmlName;
-		string	xmlProcessorArchitecture;
-		string	xmlPublicKeyToken;
-		string	xmlType;
-		string	xmlVersion;
-	
-		[MonoTODO]
-		public AssemblyIdentity ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public AssemblyIdentity (AssemblyIdentity identity)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public AssemblyIdentity (string name)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public AssemblyIdentity (string name, string version)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public AssemblyIdentity (string name, string version,
-					 string publicKeyToken, string culture)
-		{
-			throw new NotImplementedException ();
-		}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public sealed class AssemblyIdentity
+    {
+        string culture;
+        bool isFrameworkAssembly;
+        bool isNeutralPlatform;
+        bool isStrongName;
+        string name;
+        string processorArchitecture;
+        string publicKeyToken;
+        string type;
+        string version;
+        string xmlCulture;
+        string xmlName;
+        string xmlProcessorArchitecture;
+        string xmlPublicKeyToken;
+        string xmlType;
+        string xmlVersion;
 
-		[MonoTODO]
-		public AssemblyIdentity (string name, string version,
-					 string publicKeyToken, string culture,
-					 string processorArchitecture)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public AssemblyIdentity()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public AssemblyIdentity (string name, string version,
-					 string publicKeyToken, string culture,
-					 string processorArchitecture,
-					 string type)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static AssemblyIdentity FromAssemblyName (string assemblyName)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static AssemblyIdentity FromFile (string path)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static AssemblyIdentity FromManagedAssembly (string path)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static AssemblyIdentity FromManifest (string path)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static AssemblyIdentity FromNativeAssembly (string path)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public string GetFullName (FullNameFlags flags)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public override string ToString ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public string Culture {
-			get { return culture; }
-			set { culture = value; }
-		}
-		
-		[MonoTODO]
-		public bool IsFrameworkAssembly {
-			get { return isFrameworkAssembly; }
-		}
-		
-		[MonoTODO]
-		public bool IsNeutralPlatform {
-			get { return isNeutralPlatform; }
-		}
-		
-		[MonoTODO]
-		public bool IsStrongName {
-			get { return isStrongName; }
-		}
-		
-		[MonoTODO]
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
-		
-		[MonoTODO]
-		public string ProcessorArchitecture {
-			get { return processorArchitecture; }
-			set { processorArchitecture = value; }
-		}
-		
-		[MonoTODO]
-		public string PublicKeyToken {
-			get { return publicKeyToken; }
-			set { publicKeyToken = value; }
-		}
-		
-		[MonoTODO]
-		public string Type {
-			get { return type; }
-			set { type = value; }
-		}
-		
-		[MonoTODO]
-		public string Version {
-			get { return version; }
-			set { version = value; }
-		}
-		
-		[MonoTODO]
-		public string XmlCulture {
-			get { return xmlCulture; }
-			set { xmlCulture = value; }
-		}
-		
-		[MonoTODO]
-		public string XmlName {
-			get { return xmlName; }
-			set { xmlName = value; }
-		}
-		
-		[MonoTODO]
-		public string XmlProcessorArchitecture {
-			get { return xmlProcessorArchitecture; }
-			set { xmlProcessorArchitecture = value; }
-		}
-		
-		[MonoTODO]
-		public string XmlPublicKeyToken {
-			get { return xmlPublicKeyToken; }
-			set { xmlPublicKeyToken = value; }
-		}
-		
-		[MonoTODO]
-		public string XmlType {
-			get { return xmlType; }
-			set { xmlType = value; }
-		}
-		
-		[MonoTODO]
-		public string XmlVersion {
-			get { return xmlVersion; }
-			set { xmlVersion = value; }
-		}
-		
-		[Flags]
-		public enum FullNameFlags {
-			Default,
-			ProcessorArchitecture,
-			Type,
-			All
-		}
-	}
+        [MonoTODO]
+        public AssemblyIdentity(AssemblyIdentity identity)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public AssemblyIdentity(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public AssemblyIdentity(string name, string version)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public AssemblyIdentity(string name, string version, string publicKeyToken, string culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public AssemblyIdentity(
+            string name,
+            string version,
+            string publicKeyToken,
+            string culture,
+            string processorArchitecture
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public AssemblyIdentity(
+            string name,
+            string version,
+            string publicKeyToken,
+            string culture,
+            string processorArchitecture,
+            string type
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public static AssemblyIdentity FromAssemblyName(string assemblyName)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public static AssemblyIdentity FromFile(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public static AssemblyIdentity FromManagedAssembly(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public static AssemblyIdentity FromManifest(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public static AssemblyIdentity FromNativeAssembly(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public string GetFullName(FullNameFlags flags)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public string Culture
+        {
+            get { return culture; }
+            set { culture = value; }
+        }
+
+        [MonoTODO]
+        public bool IsFrameworkAssembly
+        {
+            get { return isFrameworkAssembly; }
+        }
+
+        [MonoTODO]
+        public bool IsNeutralPlatform
+        {
+            get { return isNeutralPlatform; }
+        }
+
+        [MonoTODO]
+        public bool IsStrongName
+        {
+            get { return isStrongName; }
+        }
+
+        [MonoTODO]
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        [MonoTODO]
+        public string ProcessorArchitecture
+        {
+            get { return processorArchitecture; }
+            set { processorArchitecture = value; }
+        }
+
+        [MonoTODO]
+        public string PublicKeyToken
+        {
+            get { return publicKeyToken; }
+            set { publicKeyToken = value; }
+        }
+
+        [MonoTODO]
+        public string Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
+
+        [MonoTODO]
+        public string Version
+        {
+            get { return version; }
+            set { version = value; }
+        }
+
+        [MonoTODO]
+        public string XmlCulture
+        {
+            get { return xmlCulture; }
+            set { xmlCulture = value; }
+        }
+
+        [MonoTODO]
+        public string XmlName
+        {
+            get { return xmlName; }
+            set { xmlName = value; }
+        }
+
+        [MonoTODO]
+        public string XmlProcessorArchitecture
+        {
+            get { return xmlProcessorArchitecture; }
+            set { xmlProcessorArchitecture = value; }
+        }
+
+        [MonoTODO]
+        public string XmlPublicKeyToken
+        {
+            get { return xmlPublicKeyToken; }
+            set { xmlPublicKeyToken = value; }
+        }
+
+        [MonoTODO]
+        public string XmlType
+        {
+            get { return xmlType; }
+            set { xmlType = value; }
+        }
+
+        [MonoTODO]
+        public string XmlVersion
+        {
+            get { return xmlVersion; }
+            set { xmlVersion = value; }
+        }
+
+        [Flags]
+        public enum FullNameFlags
+        {
+            Default,
+            ProcessorArchitecture,
+            Type,
+            All,
+        }
+    }
 }
-

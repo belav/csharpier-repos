@@ -17,15 +17,17 @@ namespace System.Activities.DurableInstancing
         public static readonly Version Version40 = new Version(4, 0, 0, 0);
         public static readonly Version Version45 = new Version(4, 5, 0, 0);
 
-        public static Exception CheckRemainingResultSetForErrors(XName commandName, SqlDataReader reader)
+        public static Exception CheckRemainingResultSetForErrors(
+            XName commandName,
+            SqlDataReader reader
+        )
         {
             Exception returnException = null;
 
             do
             {
                 returnException = StoreUtilities.GetNextResultSet(commandName, reader);
-            }
-            while (returnException == null && reader.NextResult());
+            } while (returnException == null && reader.NextResult());
 
             return returnException;
         }
@@ -34,7 +36,7 @@ namespace System.Activities.DurableInstancing
         {
             Exception returnValue = null;
 
-            CommandResult result = (CommandResult) reader.GetInt32(0);
+            CommandResult result = (CommandResult)reader.GetInt32(0);
             if (result != CommandResult.Success)
             {
                 returnValue = StoreUtilities.GetError(commandName, result, reader);
@@ -50,7 +52,11 @@ namespace System.Activities.DurableInstancing
             return connection;
         }
 
-        public static Exception GetError(XName commandName, CommandResult result, SqlDataReader reader)
+        public static Exception GetError(
+            XName commandName,
+            CommandResult result,
+            SqlDataReader reader
+        )
         {
             Exception returnValue = null;
 
@@ -59,20 +65,35 @@ namespace System.Activities.DurableInstancing
                 switch (result)
                 {
                     case CommandResult.InstanceAlreadyExists:
-                        returnValue = new InstanceCollisionException(commandName, reader.GetGuid(1));
+                        returnValue = new InstanceCollisionException(
+                            commandName,
+                            reader.GetGuid(1)
+                        );
                         break;
                     case CommandResult.InstanceLockNotAcquired:
-                        returnValue = new InstanceLockedException(commandName, reader.GetGuid(1), reader.GetGuid(2), ReadLockOwnerMetadata(reader));
+                        returnValue = new InstanceLockedException(
+                            commandName,
+                            reader.GetGuid(1),
+                            reader.GetGuid(2),
+                            ReadLockOwnerMetadata(reader)
+                        );
                         break;
                     case CommandResult.InstanceNotFound:
                         returnValue = new InstanceNotReadyException(commandName, reader.GetGuid(1));
                         break;
                     case CommandResult.KeyAlreadyExists:
-                        returnValue = new InstanceKeyCollisionException(commandName, Guid.Empty,
-                            new InstanceKey(reader.GetGuid(1)), Guid.Empty);
+                        returnValue = new InstanceKeyCollisionException(
+                            commandName,
+                            Guid.Empty,
+                            new InstanceKey(reader.GetGuid(1)),
+                            Guid.Empty
+                        );
                         break;
                     case CommandResult.KeyNotFound:
-                        returnValue = new InstanceKeyNotReadyException(commandName, new InstanceKey(reader.GetGuid(1)));
+                        returnValue = new InstanceKeyNotReadyException(
+                            commandName,
+                            new InstanceKey(reader.GetGuid(1))
+                        );
                         break;
                     case CommandResult.InstanceLockLost:
                         returnValue = new InstanceLockLostException(commandName, reader.GetGuid(1));
@@ -81,7 +102,10 @@ namespace System.Activities.DurableInstancing
                         returnValue = new InstanceCompleteException(commandName, reader.GetGuid(1));
                         break;
                     case CommandResult.KeyDisassociated:
-                        returnValue = new InstanceKeyCompleteException(commandName, new InstanceKey(reader.GetGuid(1)));
+                        returnValue = new InstanceKeyCompleteException(
+                            commandName,
+                            new InstanceKey(reader.GetGuid(1))
+                        );
                         break;
                     case CommandResult.StaleInstanceVersion:
                         returnValue = new InstanceLockLostException(commandName, reader.GetGuid(1));
@@ -96,10 +120,16 @@ namespace System.Activities.DurableInstancing
                         returnValue = new InstancePersistenceCommandException(SR.CleanupInProgress);
                         break;
                     case CommandResult.InstanceAlreadyLockedToOwner:
-                        returnValue = new InstanceAlreadyLockedToOwnerException(commandName, reader.GetGuid(1), reader.GetInt64(2));
+                        returnValue = new InstanceAlreadyLockedToOwnerException(
+                            commandName,
+                            reader.GetGuid(1),
+                            reader.GetInt64(2)
+                        );
                         break;
                     default:
-                        returnValue = new InstancePersistenceCommandException(SR.UnknownSprocResult(result));
+                        returnValue = new InstancePersistenceCommandException(
+                            SR.UnknownSprocResult(result)
+                        );
                         break;
                 }
             }
@@ -126,21 +156,26 @@ namespace System.Activities.DurableInstancing
                         {
                             return StoreUtilities.CheckResult(commandName, reader);
                         }
-                    }
-                    while (reader.Read());
+                    } while (reader.Read());
                 }
-            }
-            while (reader.NextResult());
+            } while (reader.NextResult());
 
             return null;
         }
 
         public static void TraceSqlCommand(SqlCommand command, bool isStarting)
         {
-            if (((isStarting && TD.StartSqlCommandExecuteIsEnabled()) ||
-                (!isStarting && TD.EndSqlCommandExecuteIsEnabled())) && command != null)
+            if (
+                (
+                    (isStarting && TD.StartSqlCommandExecuteIsEnabled())
+                    || (!isStarting && TD.EndSqlCommandExecuteIsEnabled())
+                )
+                && command != null
+            )
             {
-                StringBuilder traceString = new StringBuilder(SqlWorkflowInstanceStoreConstants.DefaultStringBuilderCapacity);
+                StringBuilder traceString = new StringBuilder(
+                    SqlWorkflowInstanceStoreConstants.DefaultStringBuilderCapacity
+                );
                 bool firstItem = false;
 
                 foreach (SqlParameter sqlParameter in command.Parameters)
@@ -161,12 +196,22 @@ namespace System.Activities.DurableInstancing
 
                     if (firstItem)
                     {
-                        traceString.AppendFormat(CultureInfo.InvariantCulture, "{0}='{1}'", sqlParameter.ParameterName, value);
+                        traceString.AppendFormat(
+                            CultureInfo.InvariantCulture,
+                            "{0}='{1}'",
+                            sqlParameter.ParameterName,
+                            value
+                        );
                         firstItem = false;
                     }
                     else
                     {
-                        traceString.AppendFormat(CultureInfo.InvariantCulture, ", {0}='{1}'", sqlParameter.ParameterName, value);
+                        traceString.AppendFormat(
+                            CultureInfo.InvariantCulture,
+                            ", {0}='{1}'",
+                            sqlParameter.ParameterName,
+                            value
+                        );
                     }
 
                     traceString.AppendLine(command.CommandText);
@@ -187,19 +232,29 @@ namespace System.Activities.DurableInstancing
         {
             Dictionary<XName, object> lockOwnerProperties = new Dictionary<XName, object>();
             InstanceEncodingOption encodingOption = (InstanceEncodingOption)(reader.GetByte(3));
-            byte[] serializedPrimitiveLockOwnerData = reader.IsDBNull(4) ? null : (byte[]) reader.GetValue(4);
-            byte[] serializedComplexLockOwnerData = reader.IsDBNull(5) ? null : (byte[]) reader.GetValue(5);
-            IObjectSerializer serializer = ObjectSerializerFactory.GetObjectSerializer(encodingOption);
+            byte[] serializedPrimitiveLockOwnerData = reader.IsDBNull(4)
+                ? null
+                : (byte[])reader.GetValue(4);
+            byte[] serializedComplexLockOwnerData = reader.IsDBNull(5)
+                ? null
+                : (byte[])reader.GetValue(5);
+            IObjectSerializer serializer = ObjectSerializerFactory.GetObjectSerializer(
+                encodingOption
+            );
             Dictionary<XName, object>[] lockOwnerPropertyBags = new Dictionary<XName, object>[2];
 
             if (serializedPrimitiveLockOwnerData != null)
             {
-                lockOwnerPropertyBags[0] = (Dictionary<XName, object>)serializer.DeserializeValue(serializedPrimitiveLockOwnerData);
+                lockOwnerPropertyBags[0] =
+                    (Dictionary<XName, object>)
+                        serializer.DeserializeValue(serializedPrimitiveLockOwnerData);
             }
 
             if (serializedComplexLockOwnerData != null)
             {
-                lockOwnerPropertyBags[1] = serializer.DeserializePropertyBag(serializedComplexLockOwnerData);
+                lockOwnerPropertyBags[1] = serializer.DeserializePropertyBag(
+                    serializedComplexLockOwnerData
+                );
             }
 
             foreach (Dictionary<XName, object> propertyBag in lockOwnerPropertyBags)

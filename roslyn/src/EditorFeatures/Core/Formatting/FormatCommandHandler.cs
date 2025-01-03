@@ -41,28 +41,58 @@ namespace Microsoft.CodeAnalysis.Formatting
     internal partial class FormatCommandHandler(
         ITextUndoHistoryRegistry undoHistoryRegistry,
         IEditorOperationsFactoryService editorOperationsFactoryService,
-        IGlobalOptionService globalOptions) :
-        ICommandHandler<FormatDocumentCommandArgs>,
-        ICommandHandler<FormatSelectionCommandArgs>,
-        IChainedCommandHandler<PasteCommandArgs>,
-        IChainedCommandHandler<TypeCharCommandArgs>,
-        IChainedCommandHandler<ReturnKeyCommandArgs>
+        IGlobalOptionService globalOptions
+    )
+        : ICommandHandler<FormatDocumentCommandArgs>,
+            ICommandHandler<FormatSelectionCommandArgs>,
+            IChainedCommandHandler<PasteCommandArgs>,
+            IChainedCommandHandler<TypeCharCommandArgs>,
+            IChainedCommandHandler<ReturnKeyCommandArgs>
     {
         private readonly ITextUndoHistoryRegistry _undoHistoryRegistry = undoHistoryRegistry;
-        private readonly IEditorOperationsFactoryService _editorOperationsFactoryService = editorOperationsFactoryService;
+        private readonly IEditorOperationsFactoryService _editorOperationsFactoryService =
+            editorOperationsFactoryService;
         private readonly IGlobalOptionService _globalOptions = globalOptions;
 
         public string DisplayName => EditorFeaturesResources.Automatic_Formatting;
 
-        private void Format(ITextView textView, ITextBuffer textBuffer, Document document, TextSpan? selectionOpt, CancellationToken cancellationToken)
+        private void Format(
+            ITextView textView,
+            ITextBuffer textBuffer,
+            Document document,
+            TextSpan? selectionOpt,
+            CancellationToken cancellationToken
+        )
         {
-            var formattingService = document.GetRequiredLanguageService<IFormattingInteractionService>();
+            var formattingService =
+                document.GetRequiredLanguageService<IFormattingInteractionService>();
 
-            using (Logger.LogBlock(FunctionId.CommandHandler_FormatCommand, KeyValueLogMessage.Create(LogType.UserAction, m => m["Span"] = selectionOpt?.Length ?? -1), cancellationToken))
-            using (var transaction = CreateEditTransaction(textView, EditorFeaturesResources.Formatting))
+            using (
+                Logger.LogBlock(
+                    FunctionId.CommandHandler_FormatCommand,
+                    KeyValueLogMessage.Create(
+                        LogType.UserAction,
+                        m => m["Span"] = selectionOpt?.Length ?? -1
+                    ),
+                    cancellationToken
+                )
+            )
+            using (
+                var transaction = CreateEditTransaction(
+                    textView,
+                    EditorFeaturesResources.Formatting
+                )
+            )
             {
                 // Note: C# always completes synchronously, TypeScript is async
-                var changes = formattingService.GetFormattingChangesAsync(document, textBuffer, selectionOpt, cancellationToken).WaitAndGetResult(cancellationToken);
+                var changes = formattingService
+                    .GetFormattingChangesAsync(
+                        document,
+                        textBuffer,
+                        selectionOpt,
+                        cancellationToken
+                    )
+                    .WaitAndGetResult(cancellationToken);
                 if (changes.IsEmpty)
                 {
                     return;
@@ -70,13 +100,21 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 if (selectionOpt.HasValue)
                 {
-                    var ruleFactory = document.Project.Solution.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
-                    changes = ruleFactory.FilterFormattedChanges(document.Id, selectionOpt.Value, changes).ToImmutableArray();
+                    var ruleFactory =
+                        document.Project.Solution.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
+                    changes = ruleFactory
+                        .FilterFormattedChanges(document.Id, selectionOpt.Value, changes)
+                        .ToImmutableArray();
                 }
 
                 if (!changes.IsEmpty)
                 {
-                    using (Logger.LogBlock(FunctionId.Formatting_ApplyResultToBuffer, cancellationToken))
+                    using (
+                        Logger.LogBlock(
+                            FunctionId.Formatting_ApplyResultToBuffer,
+                            cancellationToken
+                        )
+                    )
                     {
                         textBuffer.ApplyChanges(changes);
                     }
@@ -86,13 +124,17 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
         }
 
-        private static bool CanExecuteCommand(ITextBuffer buffer)
-            => buffer.CanApplyChangeDocumentToWorkspace();
+        private static bool CanExecuteCommand(ITextBuffer buffer) =>
+            buffer.CanApplyChangeDocumentToWorkspace();
 
-        private static CommandState GetCommandState(ITextBuffer buffer)
-            => CanExecuteCommand(buffer) ? CommandState.Available : CommandState.Unspecified;
+        private static CommandState GetCommandState(ITextBuffer buffer) =>
+            CanExecuteCommand(buffer) ? CommandState.Available : CommandState.Unspecified;
 
-        public void ExecuteReturnOrTypeCommand(EditorCommandArgs args, Action nextHandler, CancellationToken cancellationToken)
+        public void ExecuteReturnOrTypeCommand(
+            EditorCommandArgs args,
+            Action nextHandler,
+            CancellationToken cancellationToken
+        )
         {
             // run next handler first so that editor has chance to put the return into the buffer first.
             nextHandler();
@@ -113,7 +155,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
         }
 
-        private void ExecuteReturnOrTypeCommandWorker(EditorCommandArgs args, CancellationToken cancellationToken)
+        private void ExecuteReturnOrTypeCommandWorker(
+            EditorCommandArgs args,
+            CancellationToken cancellationToken
+        )
         {
             var textView = args.TextView;
             var subjectBuffer = args.SubjectBuffer;
@@ -128,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return;
             }
 
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return;
@@ -151,7 +197,13 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
 
                 // Note: C# always completes synchronously, TypeScript is async
-                textChanges = service.GetFormattingChangesOnReturnAsync(document, caretPosition.Value, cancellationToken).WaitAndGetResult(cancellationToken);
+                textChanges = service
+                    .GetFormattingChangesOnReturnAsync(
+                        document,
+                        caretPosition.Value,
+                        cancellationToken
+                    )
+                    .WaitAndGetResult(cancellationToken);
             }
             else if (args is TypeCharCommandArgs typeCharArgs)
             {
@@ -161,8 +213,15 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
 
                 // Note: C# always completes synchronously, TypeScript is async
-                textChanges = service.GetFormattingChangesAsync(
-                    document, typeCharArgs.SubjectBuffer, typeCharArgs.TypedChar, caretPosition.Value, cancellationToken).WaitAndGetResult(cancellationToken);
+                textChanges = service
+                    .GetFormattingChangesAsync(
+                        document,
+                        typeCharArgs.SubjectBuffer,
+                        typeCharArgs.TypedChar,
+                        caretPosition.Value,
+                        cancellationToken
+                    )
+                    .WaitAndGetResult(cancellationToken);
             }
             else
             {
@@ -174,7 +233,12 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return;
             }
 
-            using (var transaction = CreateEditTransaction(textView, EditorFeaturesResources.Automatic_Formatting))
+            using (
+                var transaction = CreateEditTransaction(
+                    textView,
+                    EditorFeaturesResources.Automatic_Formatting
+                )
+            )
             {
                 transaction.MergePolicy = AutomaticCodeChangeMergePolicy.Instance;
                 subjectBuffer.ApplyChanges(textChanges);
@@ -190,8 +254,14 @@ namespace Microsoft.CodeAnalysis.Formatting
 
             var snapshotAfterFormatting = subjectBuffer.CurrentSnapshot;
 
-            var oldCaretPosition = caretPosition.Value.TranslateTo(snapshotAfterFormatting, PointTrackingMode.Negative);
-            var newCaretPosition = newCaretPositionMarker.Value.TranslateTo(snapshotAfterFormatting, PointTrackingMode.Negative);
+            var oldCaretPosition = caretPosition.Value.TranslateTo(
+                snapshotAfterFormatting,
+                PointTrackingMode.Negative
+            );
+            var newCaretPosition = newCaretPositionMarker.Value.TranslateTo(
+                snapshotAfterFormatting,
+                PointTrackingMode.Negative
+            );
             if (oldCaretPosition.Position == newCaretPosition.Position)
             {
                 return;
@@ -201,7 +271,9 @@ namespace Microsoft.CodeAnalysis.Formatting
             args.TextView.TryMoveCaretToAndEnsureVisible(oldCaretPosition);
         }
 
-        private CaretPreservingEditTransaction CreateEditTransaction(ITextView view, string description)
-            => new(description, view, _undoHistoryRegistry, _editorOperationsFactoryService);
+        private CaretPreservingEditTransaction CreateEditTransaction(
+            ITextView view,
+            string description
+        ) => new(description, view, _undoHistoryRegistry, _editorOperationsFactoryService);
     }
 }

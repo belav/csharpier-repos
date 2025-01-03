@@ -11,17 +11,21 @@ internal sealed class UrlSegment : PatternSegment
     private readonly UriMatchPart _uriMatchPart;
 
     public UrlSegment()
-        : this(UriMatchPart.Path)
-    {
-    }
+        : this(UriMatchPart.Path) { }
 
     public UrlSegment(UriMatchPart uriMatchPart)
     {
         _uriMatchPart = uriMatchPart;
     }
 
-    public override string? Evaluate(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public override string? Evaluate(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
-        return _uriMatchPart == UriMatchPart.Full ? context.HttpContext.Request.GetEncodedUrl() : (string)context.HttpContext.Request.Path;
+        return _uriMatchPart == UriMatchPart.Full
+            ? context.HttpContext.Request.GetEncodedUrl()
+            : (string)context.HttpContext.Request.Path;
     }
 }

@@ -10,10 +10,17 @@ namespace Microsoft.CodeAnalysis.Formatting;
 
 internal static class DocumentFormattingOptionsStorage
 {
-    public static ValueTask<DocumentFormattingOptions> GetDocumentFormattingOptionsAsync(this Document document, IGlobalOptionService globalOptions, CancellationToken cancellationToken)
-        => document.GetDocumentFormattingOptionsAsync(globalOptions.GetDocumentFormattingOptions(), cancellationToken);
+    public static ValueTask<DocumentFormattingOptions> GetDocumentFormattingOptionsAsync(
+        this Document document,
+        IGlobalOptionService globalOptions,
+        CancellationToken cancellationToken
+    ) =>
+        document.GetDocumentFormattingOptionsAsync(
+            globalOptions.GetDocumentFormattingOptions(),
+            cancellationToken
+        );
 
-    public static DocumentFormattingOptions GetDocumentFormattingOptions(this IGlobalOptionService globalOptions)
-        => globalOptions.GetDocumentFormattingOptions(fallbackOptions: null);
+    public static DocumentFormattingOptions GetDocumentFormattingOptions(
+        this IGlobalOptionService globalOptions
+    ) => globalOptions.GetDocumentFormattingOptions(fallbackOptions: null);
 }
-

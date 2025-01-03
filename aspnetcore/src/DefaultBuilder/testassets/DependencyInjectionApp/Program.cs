@@ -14,13 +14,16 @@ public class Program
 {
     static void Main(string[] args)
     {
-        WebHost.CreateDefaultBuilder()
+        WebHost
+            .CreateDefaultBuilder()
             .UseUrls("http://127.0.0.1:0")
-            .ConfigureServices((context, services) =>
-            {
-                services.AddSingleton(typeof(IService<>), typeof(Service<>));
-                services.AddScoped<IAnotherService, AnotherService>();
-            })
+            .ConfigureServices(
+                (context, services) =>
+                {
+                    services.AddSingleton(typeof(IService<>), typeof(Service<>));
+                    services.AddScoped<IAnotherService, AnotherService>();
+                }
+            )
             .Configure(app =>
             {
                 app.Run(context =>
@@ -36,25 +39,18 @@ public class Program
                     }
                 });
             })
-            .Build().Run();
+            .Build()
+            .Run();
     }
 
-    interface IService<T>
-    {
-    }
+    interface IService<T> { }
 
-    interface IAnotherService
-    {
-    }
+    interface IAnotherService { }
 
     class Service<T> : IService<T>
     {
-        public Service(T t)
-        {
-        }
+        public Service(T t) { }
     }
 
-    class AnotherService : IAnotherService
-    {
-    }
+    class AnotherService : IAnotherService { }
 }

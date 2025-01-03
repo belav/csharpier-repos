@@ -15,7 +15,10 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 /// <summary>
 /// Constrains a route parameter to represent only decimal values.
 /// </summary>
-public class DecimalRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchingPolicy, ICachableParameterPolicy
+public class DecimalRouteConstraint
+    : IRouteConstraint,
+        IParameterLiteralNodeMatchingPolicy,
+        ICachableParameterPolicy
 #else
 internal class DecimalRouteConstraint : IRouteConstraint
 #endif
@@ -27,10 +30,10 @@ internal class DecimalRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
 #else
-        string routeKey,
-        RouteValueDictionary values)
+        string routeKey, RouteValueDictionary values)
 #endif
     {
         ArgumentNullException.ThrowIfNull(routeKey);
@@ -52,7 +55,12 @@ internal class DecimalRouteConstraint : IRouteConstraint
 
     private static bool CheckConstraintCore(string? valueString)
     {
-        return decimal.TryParse(valueString, NumberStyles.Number, CultureInfo.InvariantCulture, out _);
+        return decimal.TryParse(
+            valueString,
+            NumberStyles.Number,
+            CultureInfo.InvariantCulture,
+            out _
+        );
     }
 
 #if !COMPONENTS

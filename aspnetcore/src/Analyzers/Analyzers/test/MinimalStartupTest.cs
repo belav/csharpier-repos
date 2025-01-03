@@ -21,7 +21,8 @@ public class MinimalStartupTest
         StartupAnalyzer.ServicesAnalysisCompleted += (sender, analysis) => Analyses.Add(analysis);
         StartupAnalyzer.OptionsAnalysisCompleted += (sender, analysis) => Analyses.Add(analysis);
         StartupAnalyzer.MiddlewareAnalysisCompleted += (sender, analysis) => Analyses.Add(analysis);
-        StartupAnalyzer.ConfigureServicesMethodFound += (sender, method) => ConfigureServicesMethods.Add(method);
+        StartupAnalyzer.ConfigureServicesMethodFound += (sender, method) =>
+            ConfigureServicesMethods.Add(method);
         StartupAnalyzer.ConfigureMethodFound += (sender, method) => ConfigureMethods.Add(method);
     }
 
@@ -37,7 +38,8 @@ public class MinimalStartupTest
     public async Task StartupAnalyzer_FindsStartupMethods_StartupSignatures_Standard()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
@@ -52,7 +54,8 @@ app.Run();";
     public async Task StartupAnalyzer_FindsStartupMethods_StartupSignatures_MoreVariety()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create(args);
 app.MapGet(""/"", () => ""Hello World!"");
@@ -66,7 +69,8 @@ app.Run();";
     public async Task StartupAnalyzer_MvcOptionsAnalysis_UseMvc_FindsEndpointRoutingDisabled()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
@@ -91,7 +95,8 @@ app.Run();";
     public async Task StartupAnalyzer_MvcOptionsAnalysis_AddMvcOptions_FindsEndpointRoutingDisabled()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
@@ -115,7 +120,8 @@ app.Run();";
     [Fact]
     public Task StartupAnalyzer_MvcOptionsAnalysis_UseMvc_FindsEndpointRoutingEnabled()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
@@ -123,7 +129,9 @@ builder.Services.AddMvc();
 var app = builder.Build();
 {|#0:app.UseMvc()|};
 app.Run();";
-        var diagnosticResult = new DiagnosticResult(StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting)
+        var diagnosticResult = new DiagnosticResult(
+            StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting
+        )
             .WithArguments("UseMvc", TopLevelMainName)
             .WithLocation(0);
 
@@ -133,7 +141,8 @@ app.Run();";
     [Fact]
     public Task StartupAnalyzer_MvcOptionsAnalysis_UseMvcAndConfiguredRoutes_FindsEndpointRoutingEnabled()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
@@ -144,7 +153,9 @@ var app = builder.Build();
     routes.MapRoute(""Name"", ""Template"");
 })|};
 app.Run();";
-        var diagnosticResult = new DiagnosticResult(StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting)
+        var diagnosticResult = new DiagnosticResult(
+            StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting
+        )
             .WithArguments("UseMvc", TopLevelMainName)
             .WithLocation(0);
 
@@ -154,7 +165,8 @@ app.Run();";
     [Fact]
     public Task StartupAnalyzer_MvcOptionsAnalysis_MvcOptions_UseMvcWithDefaultRoute_FindsEndpointRoutingEnabled()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
@@ -163,14 +175,20 @@ var app = builder.Build();
 {|#0:app.UseMvcWithDefaultRoute()|};
 app.Run();";
 
-        var diagnosticResult = new DiagnosticResult(StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting)
+        var diagnosticResult = new DiagnosticResult(
+            StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting
+        )
             .WithArguments("UseMvcWithDefaultRoute", TopLevelMainName)
             .WithLocation(0);
 
         return VerifyMvcOptionsAnalysis(source, "UseMvcWithDefaultRoute", diagnosticResult);
     }
 
-    private async Task VerifyMvcOptionsAnalysis(string source, string mvcMiddlewareName, params DiagnosticResult[] diagnosticResults)
+    private async Task VerifyMvcOptionsAnalysis(
+        string source,
+        string mvcMiddlewareName,
+        params DiagnosticResult[] diagnosticResults
+    )
     {
         // Arrange
         await VerifyAnalyzerAsync(source, diagnosticResults);
@@ -188,7 +206,8 @@ app.Run();";
     public async Task StartupAnalyzer_MvcOptionsAnalysis_MultipleMiddleware()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
@@ -203,7 +222,9 @@ app.UseEndpoints(endpoints =>
 {
 });
 app.Run();";
-        var diagnosticResult = new DiagnosticResult(StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting)
+        var diagnosticResult = new DiagnosticResult(
+            StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting
+        )
             .WithLocation(0)
             .WithArguments("UseMvc", TopLevelMainName);
 
@@ -222,14 +243,16 @@ app.Run();";
             item => Assert.Equal("UseMiddleware", item.UseMethod.Name),
             item => Assert.Equal("UseMvc", item.UseMethod.Name),
             item => Assert.Equal("UseRouting", item.UseMethod.Name),
-            item => Assert.Equal("UseEndpoints", item.UseMethod.Name));
+            item => Assert.Equal("UseEndpoints", item.UseMethod.Name)
+        );
     }
 
     [Fact]
     public async Task StartupAnalyzer_MvcOptionsAnalysis_MultipleUseMvc()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
@@ -251,11 +274,9 @@ app.Run();";
             new DiagnosticResult(StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting)
                 .WithLocation(0)
                 .WithArguments("UseMvcWithDefaultRoute", TopLevelMainName),
-
             new DiagnosticResult(StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting)
                 .WithLocation(1)
                 .WithArguments("UseMvc", TopLevelMainName),
-
             new DiagnosticResult(StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting)
                 .WithLocation(2)
                 .WithArguments("UseMvc", TopLevelMainName),
@@ -273,7 +294,8 @@ app.Run();";
     public async Task StartupAnalyzer_ServicesAnalysis_CallBuildServiceProvider()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
@@ -281,8 +303,9 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 app.Run();";
 
-        var diagnosticResult = new DiagnosticResult(StartupAnalyzer.Diagnostics.BuildServiceProviderShouldNotCalledInConfigureServicesMethod)
-            .WithLocation(0);
+        var diagnosticResult = new DiagnosticResult(
+            StartupAnalyzer.Diagnostics.BuildServiceProviderShouldNotCalledInConfigureServicesMethod
+        ).WithLocation(0);
 
         // Act
         await VerifyAnalyzerAsync(source, diagnosticResult);
@@ -296,7 +319,8 @@ app.Run();";
     public async Task StartupAnalyzer_UseAuthorizationConfiguredCorrectly_ReportsNoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
@@ -321,7 +345,8 @@ app.Run();";
     {
         // Regression test for https://github.com/dotnet/aspnetcore/issues/15203
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
@@ -345,7 +370,8 @@ app.Run();";
     public async Task StartupAnalyzer_UseAuthorizationInvokedMultipleTimesInEndpointRoutingBlock_ReportsNoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
@@ -370,7 +396,8 @@ app.Run();";
     public async Task StartupAnalyzer_UseAuthorizationConfiguredBeforeUseRouting_ReportsDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
@@ -383,8 +410,9 @@ app.UseRouting();
 app.UseEndpoints(r => {});
 app.Run();";
 
-        var diagnosticResult = new DiagnosticResult(StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware)
-            .WithLocation(0);
+        var diagnosticResult = new DiagnosticResult(
+            StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware
+        ).WithLocation(0);
 
         // Act
         await VerifyAnalyzerAsync(source, diagnosticResult);
@@ -396,7 +424,8 @@ app.Run();";
         // This one asserts a false negative for https://github.com/dotnet/aspnetcore/issues/15203.
         // We don't correctly identify chained calls, this test verifies the behavior.
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
@@ -421,7 +450,8 @@ app.Run();";
     public async Task StartupAnalyzer_UseAuthorizationConfiguredAfterUseEndpoints_ReportsDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
@@ -433,8 +463,9 @@ app.UseEndpoints(r => { });
 {|#0:app.UseAuthorization()|};
 app.Run();";
 
-        var diagnosticResult = new DiagnosticResult(StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware)
-            .WithLocation(0);
+        var diagnosticResult = new DiagnosticResult(
+            StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware
+        ).WithLocation(0);
 
         // Act
         await VerifyAnalyzerAsync(source, diagnosticResult);
@@ -448,7 +479,8 @@ app.Run();";
     public async Task StartupAnalyzer_MultipleUseAuthorization_ReportsNoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
@@ -485,7 +517,8 @@ app.Run();";
     public async Task StartupAnalyzer_AuthNoRouting()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
@@ -507,7 +540,8 @@ app.Run();";
     public async Task StartupAnalyzer_WorksWithNonImplicitMain()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
@@ -532,7 +566,9 @@ public class Program
         app.Run();
     }
 }";
-        var diagnosticResult = new DiagnosticResult(StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting)
+        var diagnosticResult = new DiagnosticResult(
+            StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting
+        )
             .WithLocation(0)
             .WithArguments("UseMvc", "Main");
 
@@ -551,14 +587,16 @@ public class Program
             item => Assert.Equal("UseMiddleware", item.UseMethod.Name),
             item => Assert.Equal("UseMvc", item.UseMethod.Name),
             item => Assert.Equal("UseRouting", item.UseMethod.Name),
-            item => Assert.Equal("UseEndpoints", item.UseMethod.Name));
+            item => Assert.Equal("UseEndpoints", item.UseMethod.Name)
+        );
     }
 
     [Fact]
     public async Task StartupAnalyzer_WorksWithOtherMethodsInProgram()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
@@ -588,7 +626,9 @@ public class Program
     {
     }
 }";
-        var diagnosticResult = new DiagnosticResult(StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting)
+        var diagnosticResult = new DiagnosticResult(
+            StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting
+        )
             .WithLocation(0)
             .WithArguments("UseMvc", "Main");
 
@@ -607,6 +647,7 @@ public class Program
             item => Assert.Equal("UseMiddleware", item.UseMethod.Name),
             item => Assert.Equal("UseMvc", item.UseMethod.Name),
             item => Assert.Equal("UseRouting", item.UseMethod.Name),
-            item => Assert.Equal("UseEndpoints", item.UseMethod.Name));
+            item => Assert.Equal("UseEndpoints", item.UseMethod.Name)
+        );
     }
 }

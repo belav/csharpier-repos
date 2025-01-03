@@ -24,19 +24,16 @@ public class StringToBytesConverter : ValueConverter<string?, byte[]?>
     ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with appropriate
     ///     facets for the converted data.
     /// </param>
-    public StringToBytesConverter(
-        Encoding encoding,
-        ConverterMappingHints? mappingHints = null)
-        : base(
-            v => encoding.GetBytes(v!),
-            v => encoding.GetString(v!),
-            mappingHints)
-    {
-    }
+    public StringToBytesConverter(Encoding encoding, ConverterMappingHints? mappingHints = null)
+        : base(v => encoding.GetBytes(v!), v => encoding.GetString(v!), mappingHints) { }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(typeof(string), typeof(byte[]), i => new StringToBytesConverter(Encoding.UTF8, i.MappingHints));
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(
+            typeof(string),
+            typeof(byte[]),
+            i => new StringToBytesConverter(Encoding.UTF8, i.MappingHints)
+        );
 }

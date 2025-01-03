@@ -28,7 +28,8 @@ public class BoundsCheck
 
             if (length == 7)
             {
-                key |= (ulong)propertyName[6] << (6 * BitsInByte)
+                key |=
+                    (ulong)propertyName[6] << (6 * BitsInByte)
                     | (ulong)propertyName[5] << (5 * BitsInByte)
                     | (ulong)propertyName[4] << (4 * BitsInByte)
                     | (ulong)7 << (7 * BitsInByte);

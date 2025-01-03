@@ -6,7 +6,11 @@ namespace Microsoft.AspNetCore.HttpLogging;
 /// <summary>
 /// Metadata that provides endpoint-specific settings for the HttpLogging middleware.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public sealed class HttpLoggingAttribute : Attribute
 {
     /// <summary>
@@ -45,7 +49,9 @@ public sealed class HttpLoggingAttribute : Attribute
                 return _requestBodyLogLimit;
             }
 
-            throw new InvalidOperationException($"{nameof(RequestBodyLogLimit)} was not set. Check {nameof(IsRequestBodyLogLimitSet)} before accessing this property.");
+            throw new InvalidOperationException(
+                $"{nameof(RequestBodyLogLimit)} was not set. Check {nameof(IsRequestBodyLogLimitSet)} before accessing this property."
+            );
         }
         set
         {
@@ -73,7 +79,9 @@ public sealed class HttpLoggingAttribute : Attribute
             {
                 return _responseBodyLogLimit;
             }
-            throw new InvalidOperationException($"{nameof(ResponseBodyLogLimit)} was not set. Check {nameof(IsResponseBodyLogLimitSet)} before accessing this property.");
+            throw new InvalidOperationException(
+                $"{nameof(ResponseBodyLogLimit)} was not set. Check {nameof(IsResponseBodyLogLimitSet)} before accessing this property."
+            );
         }
         set
         {

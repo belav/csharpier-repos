@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// A structure for enumerating a <see cref="SyntaxTokenList"/>
         /// </summary>
-        [SuppressMessage("Performance", "CA1067", Justification = "Equality not actually implemented")]
+        [SuppressMessage(
+            "Performance",
+            "CA1067",
+            Justification = "Equality not actually implemented"
+        )]
         [StructLayout(LayoutKind.Auto)]
         public struct Enumerator
         {
@@ -41,7 +45,7 @@ namespace Microsoft.CodeAnalysis
             // I.e. in the single child case, we optimize and store the child
             // directly (without any list parent).
             //
-            // Enumerating over the single child case is simple.  We just 
+            // Enumerating over the single child case is simple.  We just
             // return it and we're done.
             //
             // In the multi child case, things are a bit more difficult.  We need
@@ -110,7 +114,7 @@ namespace Microsoft.CodeAnalysis
                         throw new InvalidOperationException();
                     }
 
-                    // In both the list and the single node case we want to 
+                    // In both the list and the single node case we want to
                     // return the original root parent as the parent of this
                     // token.
                     return new SyntaxToken(_parent, _current, _position, _baseIndex + _index);
@@ -152,9 +156,7 @@ namespace Microsoft.CodeAnalysis
                 throw new NotSupportedException();
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

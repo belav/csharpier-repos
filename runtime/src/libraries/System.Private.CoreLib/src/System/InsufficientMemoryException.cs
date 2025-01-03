@@ -15,14 +15,17 @@ namespace System
     /// want to recover from these errors.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class InsufficientMemoryException : OutOfMemoryException
     {
-        public InsufficientMemoryException() : base(
+        public InsufficientMemoryException()
+            : base(
 #if CORECLR
-            GetMessageFromNativeResources(ExceptionMessageKind.OutOfMemory)
+                GetMessageFromNativeResources(ExceptionMessageKind.OutOfMemory)
 #else
-            SR.Arg_OutOfMemoryException
+                SR.Arg_OutOfMemoryException
 #endif
             )
         {
@@ -41,9 +44,12 @@ namespace System
             HResult = HResults.COR_E_INSUFFICIENTMEMORY;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        private InsufficientMemoryException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        private InsufficientMemoryException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

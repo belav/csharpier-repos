@@ -18,8 +18,9 @@ public class PersistentComponentState
     private readonly List<PersistComponentStateRegistration> _registeredCallbacks;
 
     internal PersistentComponentState(
-        IDictionary<string , byte[]> currentState,
-        List<PersistComponentStateRegistration> pauseCallbacks)
+        IDictionary<string, byte[]> currentState,
+        List<PersistComponentStateRegistration> pauseCallbacks
+    )
     {
         _currentState = currentState;
         _registeredCallbacks = pauseCallbacks;
@@ -42,8 +43,8 @@ public class PersistentComponentState
     /// </summary>
     /// <param name="callback">The callback to invoke when the application is being paused.</param>
     /// <returns>A subscription that can be used to unregister the callback when disposed.</returns>
-    public PersistingComponentStateSubscription RegisterOnPersisting(Func<Task> callback)
-        => RegisterOnPersisting(callback, null);
+    public PersistingComponentStateSubscription RegisterOnPersisting(Func<Task> callback) =>
+        RegisterOnPersisting(callback, null);
 
     /// <summary>
     /// Register a callback to persist the component state when the application is about to be paused.
@@ -52,7 +53,10 @@ public class PersistentComponentState
     /// <param name="callback">The callback to invoke when the application is being paused.</param>
     /// <param name="renderMode"></param>
     /// <returns>A subscription that can be used to unregister the callback when disposed.</returns>
-    public PersistingComponentStateSubscription RegisterOnPersisting(Func<Task> callback, IComponentRenderMode? renderMode)
+    public PersistingComponentStateSubscription RegisterOnPersisting(
+        Func<Task> callback,
+        IComponentRenderMode? renderMode
+    )
     {
         ArgumentNullException.ThrowIfNull(callback);
 
@@ -69,22 +73,34 @@ public class PersistentComponentState
     /// <typeparam name="TValue">The <paramref name="instance"/> type.</typeparam>
     /// <param name="key">The key to use to persist the state.</param>
     /// <param name="instance">The instance to persist.</param>
-    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
-    public void PersistAsJson<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(string key, TValue instance)
+    [RequiresUnreferencedCode(
+        "JSON serialization and deserialization might require types that cannot be statically analyzed."
+    )]
+    public void PersistAsJson<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
+        string key,
+        TValue instance
+    )
     {
         ArgumentNullException.ThrowIfNull(key);
 
         if (!PersistingState)
         {
-            throw new InvalidOperationException("Persisting state is only allowed during an OnPersisting callback.");
+            throw new InvalidOperationException(
+                "Persisting state is only allowed during an OnPersisting callback."
+            );
         }
 
         if (_currentState.ContainsKey(key))
         {
-            throw new ArgumentException($"There is already a persisted object under the same key '{key}'");
+            throw new ArgumentException(
+                $"There is already a persisted object under the same key '{key}'"
+            );
         }
 
-        _currentState.Add(key, JsonSerializer.SerializeToUtf8Bytes(instance, JsonSerializerOptionsProvider.Options));
+        _currentState.Add(
+            key,
+            JsonSerializer.SerializeToUtf8Bytes(instance, JsonSerializerOptionsProvider.Options)
+        );
     }
 
     /// <summary>
@@ -96,15 +112,23 @@ public class PersistentComponentState
     /// <param name="key">The key used to persist the instance.</param>
     /// <param name="instance">The persisted instance.</param>
     /// <returns><c>true</c> if the state was found; <c>false</c> otherwise.</returns>
-    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
-    public bool TryTakeFromJson<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(string key, [MaybeNullWhen(false)] out TValue? instance)
+    [RequiresUnreferencedCode(
+        "JSON serialization and deserialization might require types that cannot be statically analyzed."
+    )]
+    public bool TryTakeFromJson<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
+        string key,
+        [MaybeNullWhen(false)] out TValue? instance
+    )
     {
         ArgumentNullException.ThrowIfNull(key);
 
         if (TryTake(key, out var data))
         {
             var reader = new Utf8JsonReader(data);
-            instance = JsonSerializer.Deserialize<TValue>(ref reader, JsonSerializerOptionsProvider.Options)!;
+            instance = JsonSerializer.Deserialize<TValue>(
+                ref reader,
+                JsonSerializerOptionsProvider.Options
+            )!;
             return true;
         }
         else

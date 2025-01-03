@@ -16,6 +16,7 @@ namespace System.ServiceModel.Diagnostics
     class MessageTraceRecord : TraceRecord
     {
         Message message;
+
         internal MessageTraceRecord(Message message)
         {
             this.message = message;
@@ -33,9 +34,11 @@ namespace System.ServiceModel.Diagnostics
 
         internal override void WriteTo(XmlWriter xml)
         {
-            if ((this.message != null) &&
-                (this.message.State != MessageState.Closed) &&
-                (this.message.Headers != null))
+            if (
+                (this.message != null)
+                && (this.message.State != MessageState.Closed)
+                && (this.message.Headers != null)
+            )
             {
                 try
                 {
@@ -44,23 +47,51 @@ namespace System.ServiceModel.Diagnostics
                     {
                         xml.WriteElementString("Encoder", message.Properties.Encoder.ToString());
                     }
-                    xml.WriteElementString("AllowOutputBatching", message.Properties.AllowOutputBatching.ToString());
-                    if (message.Properties.Security != null && message.Properties.Security.ServiceSecurityContext != null)
+                    xml.WriteElementString(
+                        "AllowOutputBatching",
+                        message.Properties.AllowOutputBatching.ToString()
+                    );
+                    if (
+                        message.Properties.Security != null
+                        && message.Properties.Security.ServiceSecurityContext != null
+                    )
                     {
                         xml.WriteStartElement("Security");
-                        xml.WriteElementString("IsAnonymous", message.Properties.Security.ServiceSecurityContext.IsAnonymous.ToString());
-                        bool windowsIdentityUsed = message.Properties.Security.ServiceSecurityContext.WindowsIdentity != null &&
-                            !string.IsNullOrEmpty(message.Properties.Security.ServiceSecurityContext.WindowsIdentity.Name);
-                        xml.WriteElementString("WindowsIdentityUsed", windowsIdentityUsed.ToString());
+                        xml.WriteElementString(
+                            "IsAnonymous",
+                            message.Properties.Security.ServiceSecurityContext.IsAnonymous.ToString()
+                        );
+                        bool windowsIdentityUsed =
+                            message.Properties.Security.ServiceSecurityContext.WindowsIdentity
+                                != null
+                            && !string.IsNullOrEmpty(
+                                message
+                                    .Properties
+                                    .Security
+                                    .ServiceSecurityContext
+                                    .WindowsIdentity
+                                    .Name
+                            );
+                        xml.WriteElementString(
+                            "WindowsIdentityUsed",
+                            windowsIdentityUsed.ToString()
+                        );
                         if (DiagnosticUtility.ShouldTraceVerbose)
                         {
                             xml.WriteStartElement("Claims");
-                            AuthorizationContext authContext = message.Properties.Security.ServiceSecurityContext.AuthorizationContext;
+                            AuthorizationContext authContext = message
+                                .Properties
+                                .Security
+                                .ServiceSecurityContext
+                                .AuthorizationContext;
                             for (int i = 0; i < authContext.ClaimSets.Count; ++i)
                             {
                                 ClaimSet claimSet = authContext.ClaimSets[i];
                                 xml.WriteStartElement("ClaimSet");
-                                xml.WriteAttributeString("ClrType", base.XmlEncode(claimSet.GetType().AssemblyQualifiedName));
+                                xml.WriteAttributeString(
+                                    "ClrType",
+                                    base.XmlEncode(claimSet.GetType().AssemblyQualifiedName)
+                                );
 
                                 for (int j = 0; j < claimSet.Count; ++j)
                                 {
@@ -93,8 +124,13 @@ namespace System.ServiceModel.Diagnostics
                 {
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.DiagnosticsFailedMessageTrace,
-                            SR.GetString(SR.TraceCodeDiagnosticsFailedMessageTrace), e, message);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
+                            TraceCode.DiagnosticsFailedMessageTrace,
+                            SR.GetString(SR.TraceCodeDiagnosticsFailedMessageTrace),
+                            e,
+                            message
+                        );
                     }
                 }
             }

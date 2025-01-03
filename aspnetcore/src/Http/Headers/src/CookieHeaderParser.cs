@@ -8,15 +8,25 @@ namespace Microsoft.Net.Http.Headers;
 internal sealed class CookieHeaderParser : HttpHeaderParser<CookieHeaderValue>
 {
     internal CookieHeaderParser(bool supportsMultipleValues)
-        : base(supportsMultipleValues)
-    {
-    }
+        : base(supportsMultipleValues) { }
 
-    public override bool TryParseValue(StringSegment value, ref int index, out CookieHeaderValue? cookieValue)
+    public override bool TryParseValue(
+        StringSegment value,
+        ref int index,
+        out CookieHeaderValue? cookieValue
+    )
     {
         cookieValue = null;
 
-        if (!CookieHeaderParserShared.TryParseValue(value, ref index, SupportsMultipleValues, out var parsedName, out var parsedValue))
+        if (
+            !CookieHeaderParserShared.TryParseValue(
+                value,
+                ref index,
+                SupportsMultipleValues,
+                out var parsedName,
+                out var parsedValue
+            )
+        )
         {
             return false;
         }

@@ -24,12 +24,14 @@ internal sealed class HostingMetrics : IDisposable
         _activeRequestsCounter = _meter.CreateUpDownCounter<long>(
             "http.server.active_requests",
             unit: "{request}",
-            description: "Number of active HTTP server requests.");
+            description: "Number of active HTTP server requests."
+        );
 
         _requestDuration = _meter.CreateHistogram<double>(
             "http.server.request.duration",
             unit: "s",
-            description: "Duration of HTTP server requests.");
+            description: "Duration of HTTP server requests."
+        );
     }
 
     // Note: Calling code checks whether counter is enabled.
@@ -41,7 +43,20 @@ internal sealed class HostingMetrics : IDisposable
         _activeRequestsCounter.Add(1, tags);
     }
 
-    public void RequestEnd(string protocol, bool isHttps, string scheme, string method, HostString host, string? route, int statusCode, bool unhandledRequest, Exception? exception, List<KeyValuePair<string, object?>>? customTags, long startTimestamp, long currentTimestamp)
+    public void RequestEnd(
+        string protocol,
+        bool isHttps,
+        string scheme,
+        string method,
+        HostString host,
+        string? route,
+        int statusCode,
+        bool unhandledRequest,
+        Exception? exception,
+        List<KeyValuePair<string, object?>>? customTags,
+        long startTimestamp,
+        long currentTimestamp
+    )
     {
         var tags = new TagList();
         InitializeRequestTags(ref tags, isHttps, scheme, method, host);
@@ -95,7 +110,13 @@ internal sealed class HostingMetrics : IDisposable
 
     public bool IsEnabled() => _activeRequestsCounter.Enabled || _requestDuration.Enabled;
 
-    private static void InitializeRequestTags(ref TagList tags, bool isHttps, string scheme, string method, HostString host)
+    private static void InitializeRequestTags(
+        ref TagList tags,
+        bool isHttps,
+        string scheme,
+        string method,
+        HostString host
+    )
     {
         tags.Add("url.scheme", scheme);
         tags.Add("http.request.method", ResolveHttpMethod(method));
@@ -131,18 +152,22 @@ internal sealed class HostingMetrics : IDisposable
             : statusCode;
     }
 
-    private static readonly FrozenDictionary<string, string> KnownMethods = FrozenDictionary.ToFrozenDictionary(new[]
-    {
-        KeyValuePair.Create(HttpMethods.Connect, HttpMethods.Connect),
-        KeyValuePair.Create(HttpMethods.Delete, HttpMethods.Delete),
-        KeyValuePair.Create(HttpMethods.Get, HttpMethods.Get),
-        KeyValuePair.Create(HttpMethods.Head, HttpMethods.Head),
-        KeyValuePair.Create(HttpMethods.Options, HttpMethods.Options),
-        KeyValuePair.Create(HttpMethods.Patch, HttpMethods.Patch),
-        KeyValuePair.Create(HttpMethods.Post, HttpMethods.Post),
-        KeyValuePair.Create(HttpMethods.Put, HttpMethods.Put),
-        KeyValuePair.Create(HttpMethods.Trace, HttpMethods.Trace)
-    }, StringComparer.OrdinalIgnoreCase);
+    private static readonly FrozenDictionary<string, string> KnownMethods =
+        FrozenDictionary.ToFrozenDictionary(
+            new[]
+            {
+                KeyValuePair.Create(HttpMethods.Connect, HttpMethods.Connect),
+                KeyValuePair.Create(HttpMethods.Delete, HttpMethods.Delete),
+                KeyValuePair.Create(HttpMethods.Get, HttpMethods.Get),
+                KeyValuePair.Create(HttpMethods.Head, HttpMethods.Head),
+                KeyValuePair.Create(HttpMethods.Options, HttpMethods.Options),
+                KeyValuePair.Create(HttpMethods.Patch, HttpMethods.Patch),
+                KeyValuePair.Create(HttpMethods.Post, HttpMethods.Post),
+                KeyValuePair.Create(HttpMethods.Put, HttpMethods.Put),
+                KeyValuePair.Create(HttpMethods.Trace, HttpMethods.Trace),
+            },
+            StringComparer.OrdinalIgnoreCase
+        );
 
     private static string ResolveHttpMethod(string method)
     {

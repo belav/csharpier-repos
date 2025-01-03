@@ -1,5 +1,5 @@
 //
-// PkitsTest.cs - NUnit tests for 
+// PkitsTest.cs - NUnit tests for
 //	NIST Public Key Interoperability Test Suite (PKITS)
 //	Certificate Path Validation, Version 1.0, September 2, 2004
 //
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,89 +29,98 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Collections;
 using System.IO;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Reflection;
+using NUnit.Framework;
 
-namespace MonoTests.System.Security.Cryptography.X509Certificates {
+namespace MonoTests.System.Security.Cryptography.X509Certificates
+{
+    /*
+     *	PKITS home page
+     *	http://csrs.nist.gov/pki/testing/x509paths.html
+     *
+     *	Documentation is available at
+     *	http://csrc.nist.gov/pki/testing/PKITS.pdf
+     *
+     *	Test data is available at
+     *	http://csrc.nist.gov/pki/testing/PKITS_data.zip
+     *
+     *	License information are available at
+     *	http://cio.nist.gov/esd/emaildir/lists/pkits/msg00048.html
+     */
 
-	/*
-	 *	PKITS home page
-	 *	http://csrs.nist.gov/pki/testing/x509paths.html
-	 *
-	 *	Documentation is available at
-	 *	http://csrc.nist.gov/pki/testing/PKITS.pdf
-	 *
-	 *	Test data is available at
-	 *	http://csrc.nist.gov/pki/testing/PKITS_data.zip
-	 *
-	 *	License information are available at
-	 *	http://cio.nist.gov/esd/emaildir/lists/pkits/msg00048.html
-	 */
+    [Category("PKITS")]
+    public class PkitsTest
+    {
+        private string base_dir;
+        private Hashtable cache;
 
-	[Category ("PKITS")]
-	public class PkitsTest {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            base_dir = String.Format(
+                "{0}{1}Test{1}System.Security.Cryptography.X509Certificates{1}pkits{1}certs",
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                Path.DirectorySeparatorChar
+            );
+            if (!Directory.Exists(base_dir))
+                Assert.Ignore("PKITS tests data not found under '{0}'.", new object[] { base_dir });
 
-		private string base_dir;
-		private Hashtable cache;
+            cache = new Hashtable();
+            // prepare the environment
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			base_dir = String.Format ("{0}{1}Test{1}System.Security.Cryptography.X509Certificates{1}pkits{1}certs",
-				Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location), Path.DirectorySeparatorChar);
-			if (!Directory.Exists (base_dir))
-				Assert.Ignore ("PKITS tests data not found under '{0}'.", new object[] { base_dir });
+        [TestFixtureTearDown]
+        public void FixtureTearDown()
+        {
+            if (cache != null)
+                cache.Clear();
+            // clean-up, as best as possible, the stores
+        }
 
-			cache = new Hashtable ();
-			// prepare the environment
-		}
+        public X509Certificate2 GetCertificate(string filename)
+        {
+            X509Certificate2 result = (cache[filename] as X509Certificate2);
+            if (result == null)
+            {
+                string full_path = Path.Combine(base_dir, filename);
+                result = new X509Certificate2(full_path);
+                cache[filename] = result;
+            }
+            return result;
+        }
 
-		[TestFixtureTearDown]
-		public void FixtureTearDown ()
-		{
-			if (cache != null)
-				cache.Clear ();
-			// clean-up, as best as possible, the stores
-		}
+        public X509Certificate2 TrustAnchorRoot
+        {
+            get { return GetCertificate("TrustAnchorRootCertificate.crt"); }
+        }
 
-		public X509Certificate2 GetCertificate (string filename)
-		{
-			X509Certificate2 result = (cache[filename] as X509Certificate2);
-			if (result == null) {
-				string full_path = Path.Combine (base_dir, filename);
-				result = new X509Certificate2 (full_path);
-				cache[filename] = result;
-			}
-			return result;
-		}
+        public X509Certificate2 GoodCACert
+        {
+            get { return GetCertificate("GoodCACert.crt"); }
+        }
 
-		public X509Certificate2 TrustAnchorRoot {
-			get { return GetCertificate ("TrustAnchorRootCertificate.crt"); }
-		}
+        // this method avoid having a dependance on the order of status
+        public void CheckChainStatus(
+            X509ChainStatusFlags expected,
+            X509ChainStatus[] status,
+            string msg
+        )
+        {
+            if ((expected == X509ChainStatusFlags.NoError) && (status.Length == 0))
+                return;
 
-		public X509Certificate2 GoodCACert {
-			get { return GetCertificate ("GoodCACert.crt"); }
-		}
-
-		// this method avoid having a dependance on the order of status
-		public void CheckChainStatus (X509ChainStatusFlags expected, X509ChainStatus[] status, string msg)
-		{
-			if ((expected == X509ChainStatusFlags.NoError) && (status.Length == 0))
-				return;
-
-			X509ChainStatusFlags actual = X509ChainStatusFlags.NoError;
-			foreach (X509ChainStatus s in status) {
-				actual |= s.Status;
-			}
-			Assert.AreEqual (expected, actual, msg);
-		}
-	}
+            X509ChainStatusFlags actual = X509ChainStatusFlags.NoError;
+            foreach (X509ChainStatus s in status)
+            {
+                actual |= s.Status;
+            }
+            Assert.AreEqual(expected, actual, msg);
+        }
+    }
 }
-

@@ -7,13 +7,20 @@ namespace System.CodeDom
     {
         public CodeConditionStatement() { }
 
-        public CodeConditionStatement(CodeExpression condition, params CodeStatement[] trueStatements)
+        public CodeConditionStatement(
+            CodeExpression condition,
+            params CodeStatement[] trueStatements
+        )
         {
             Condition = condition;
             TrueStatements.AddRange(trueStatements);
         }
 
-        public CodeConditionStatement(CodeExpression condition, CodeStatement[] trueStatements, CodeStatement[] falseStatements)
+        public CodeConditionStatement(
+            CodeExpression condition,
+            CodeStatement[] trueStatements,
+            CodeStatement[] falseStatements
+        )
         {
             Condition = condition;
             TrueStatements.AddRange(trueStatements);

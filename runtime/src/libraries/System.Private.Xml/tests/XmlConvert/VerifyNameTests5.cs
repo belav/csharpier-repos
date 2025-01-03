@@ -9,30 +9,219 @@ namespace System.Xml.XmlConvertTests
     {
         public override void AddChildren()
         {
-            AddChild(new CVariation(v6) { Attribute = new Variation("VerifyPublicId.two underscores") { Params = new object[] { 6, false } } });
-            AddChild(new CVariation(v6) { Attribute = new Variation("VerifyXmlChars.two underscores") { Params = new object[] { 5, false } } });
-            AddChild(new CVariation(v6) { Attribute = new Variation("VerifyNMTOKEN.two underscores") { Params = new object[] { 1, false } } });
-            AddChild(new CVariation(v6) { Attribute = new Variation("VerifyWhitespace.two underscores") { Params = new object[] { 7, true } } });
-            AddChild(new CVariation(v6) { Attribute = new Variation("VerifyName.two underscores") { Params = new object[] { 2, false } } });
-            AddChild(new CVariation(v6) { Attribute = new Variation("VerifyNCName.two underscores") { Params = new object[] { 3, false } } });
-            AddChild(new CVariation(v7) { Attribute = new Variation("VerifyPublicId.multiple non letter characters with .") { Params = new object[] { 6, false } } });
-            AddChild(new CVariation(v7) { Attribute = new Variation("VerifyWhitespace.multiple non letter characters with .") { Params = new object[] { 7, true } } });
-            AddChild(new CVariation(v7) { Attribute = new Variation("VerifyName.multiple non letter characters with .") { Params = new object[] { 2, false } } });
-            AddChild(new CVariation(v7) { Attribute = new Variation("VerifyNCName.multiple non letter characters with .") { Params = new object[] { 3, false } } });
-            AddChild(new CVariation(v7) { Attribute = new Variation("VerifyXmlChars.multiple non letter characters with .") { Params = new object[] { 5, false } } });
-            AddChild(new CVariation(v7) { Attribute = new Variation("VerifyNMTOKEN.multiple non letter characters with .") { Params = new object[] { 1, false } } });
-            AddChild(new CVariation(v8) { Attribute = new Variation("VerifyPublicId.valid surrogate pair") { Params = new object[] { 6, true } } });
-            AddChild(new CVariation(v8) { Attribute = new Variation("VerifyNMTOKEN.valid surrogate pair") { Params = new object[] { 1, true } } });
-            AddChild(new CVariation(v8) { Attribute = new Variation("VerifyWhitespace.valid surrogate pair") { Params = new object[] { 7, true } } });
-            AddChild(new CVariation(v8) { Attribute = new Variation("VerifyName.valid surrogate pair") { Params = new object[] { 2, true } } });
-            AddChild(new CVariation(v8) { Attribute = new Variation("VerifyNCName.valid surrogate pair") { Params = new object[] { 3, true } } });
-            AddChild(new CVariation(v8) { Attribute = new Variation("VerifyXmlChars.valid surrogate pair") { Params = new object[] { 5, false } } });
-            AddChild(new CVariation(v9) { Attribute = new Variation("VerifyPublicId.invalid surrogate pair") { Param = 6 } });
-            AddChild(new CVariation(v9) { Attribute = new Variation("VerifyWhitespace.invalid surrogate pair") { Param = 7 } });
-            AddChild(new CVariation(v9) { Attribute = new Variation("VerifyName.invalid surrogate pair") { Param = 2 } });
-            AddChild(new CVariation(v9) { Attribute = new Variation("VerifyNCName.invalid surrogate pair") { Param = 3 } });
-            AddChild(new CVariation(v9) { Attribute = new Variation("VerifyXmlChars.invalid surrogate pair") { Param = 5 } });
-            AddChild(new CVariation(v9) { Attribute = new Variation("VerifyNMTOKEN.invalid surrogate pair") { Param = 1 } });
+            AddChild(
+                new CVariation(v6)
+                {
+                    Attribute = new Variation("VerifyPublicId.two underscores")
+                    {
+                        Params = new object[] { 6, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v6)
+                {
+                    Attribute = new Variation("VerifyXmlChars.two underscores")
+                    {
+                        Params = new object[] { 5, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v6)
+                {
+                    Attribute = new Variation("VerifyNMTOKEN.two underscores")
+                    {
+                        Params = new object[] { 1, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v6)
+                {
+                    Attribute = new Variation("VerifyWhitespace.two underscores")
+                    {
+                        Params = new object[] { 7, true },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v6)
+                {
+                    Attribute = new Variation("VerifyName.two underscores")
+                    {
+                        Params = new object[] { 2, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v6)
+                {
+                    Attribute = new Variation("VerifyNCName.two underscores")
+                    {
+                        Params = new object[] { 3, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v7)
+                {
+                    Attribute = new Variation(
+                        "VerifyPublicId.multiple non letter characters with ."
+                    )
+                    {
+                        Params = new object[] { 6, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v7)
+                {
+                    Attribute = new Variation(
+                        "VerifyWhitespace.multiple non letter characters with ."
+                    )
+                    {
+                        Params = new object[] { 7, true },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v7)
+                {
+                    Attribute = new Variation("VerifyName.multiple non letter characters with .")
+                    {
+                        Params = new object[] { 2, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v7)
+                {
+                    Attribute = new Variation("VerifyNCName.multiple non letter characters with .")
+                    {
+                        Params = new object[] { 3, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v7)
+                {
+                    Attribute = new Variation(
+                        "VerifyXmlChars.multiple non letter characters with ."
+                    )
+                    {
+                        Params = new object[] { 5, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v7)
+                {
+                    Attribute = new Variation("VerifyNMTOKEN.multiple non letter characters with .")
+                    {
+                        Params = new object[] { 1, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v8)
+                {
+                    Attribute = new Variation("VerifyPublicId.valid surrogate pair")
+                    {
+                        Params = new object[] { 6, true },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v8)
+                {
+                    Attribute = new Variation("VerifyNMTOKEN.valid surrogate pair")
+                    {
+                        Params = new object[] { 1, true },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v8)
+                {
+                    Attribute = new Variation("VerifyWhitespace.valid surrogate pair")
+                    {
+                        Params = new object[] { 7, true },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v8)
+                {
+                    Attribute = new Variation("VerifyName.valid surrogate pair")
+                    {
+                        Params = new object[] { 2, true },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v8)
+                {
+                    Attribute = new Variation("VerifyNCName.valid surrogate pair")
+                    {
+                        Params = new object[] { 3, true },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v8)
+                {
+                    Attribute = new Variation("VerifyXmlChars.valid surrogate pair")
+                    {
+                        Params = new object[] { 5, false },
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v9)
+                {
+                    Attribute = new Variation("VerifyPublicId.invalid surrogate pair")
+                    {
+                        Param = 6,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v9)
+                {
+                    Attribute = new Variation("VerifyWhitespace.invalid surrogate pair")
+                    {
+                        Param = 7,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v9)
+                {
+                    Attribute = new Variation("VerifyName.invalid surrogate pair") { Param = 2 },
+                }
+            );
+            AddChild(
+                new CVariation(v9)
+                {
+                    Attribute = new Variation("VerifyNCName.invalid surrogate pair") { Param = 3 },
+                }
+            );
+            AddChild(
+                new CVariation(v9)
+                {
+                    Attribute = new Variation("VerifyXmlChars.invalid surrogate pair")
+                    {
+                        Param = 5,
+                    },
+                }
+            );
+            AddChild(
+                new CVariation(v9)
+                {
+                    Attribute = new Variation("VerifyNMTOKEN.invalid surrogate pair") { Param = 1 },
+                }
+            );
         }
 
         /// <summary>
@@ -177,7 +366,6 @@ namespace System.Xml.XmlConvertTests
                 return shouldThrow ? TEST_PASS : TEST_FAIL;
             }
         }
-
 
         private int v9()
         {

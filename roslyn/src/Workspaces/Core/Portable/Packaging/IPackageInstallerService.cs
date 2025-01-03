@@ -21,14 +21,23 @@ namespace Microsoft.CodeAnalysis.Packaging
         bool IsInstalled(ProjectId projectId, string packageName);
 
         Task<bool> TryInstallPackageAsync(
-            Workspace workspace, DocumentId documentId,
-            string? source, string packageName,
-            string? version, bool includePrerelease,
-            IProgress<CodeAnalysisProgress> progressTracker, CancellationToken cancellationToken);
+            Workspace workspace,
+            DocumentId documentId,
+            string? source,
+            string packageName,
+            string? version,
+            bool includePrerelease,
+            IProgress<CodeAnalysisProgress> progressTracker,
+            CancellationToken cancellationToken
+        );
 
         ImmutableArray<string> GetInstalledVersions(string packageName);
 
-        ImmutableArray<Project> GetProjectsWithInstalledPackage(Solution solution, string packageName, string version);
+        ImmutableArray<Project> GetProjectsWithInstalledPackage(
+            Solution solution,
+            string packageName,
+            string version
+        );
         bool CanShowManagePackagesDialog();
         void ShowManagePackagesDialog(string packageName);
 
@@ -54,13 +63,10 @@ namespace Microsoft.CodeAnalysis.Packaging
         [DataMember(Order = 1)]
         public readonly string Source = source;
 
-        public override bool Equals(object? obj)
-            => obj is PackageSource source && Equals(source);
+        public override bool Equals(object? obj) => obj is PackageSource source && Equals(source);
 
-        public bool Equals(PackageSource other)
-            => Name == other.Name && Source == other.Source;
+        public bool Equals(PackageSource other) => Name == other.Name && Source == other.Source;
 
-        public override int GetHashCode()
-            => Hash.Combine(Name, Source.GetHashCode());
+        public override int GetHashCode() => Hash.Combine(Name, Source.GetHashCode());
     }
 }

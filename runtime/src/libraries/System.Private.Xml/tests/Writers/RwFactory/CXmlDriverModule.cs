@@ -38,22 +38,13 @@ namespace System.Xml.RwFactoryWriterTests
                     throw new CXmlDriverException("No control file is specified.");
                 return _xmlDriverParams[0];
             }
-            set
-            {
-                _xmlDriverParams = new CXmlDriverParam[] { value };
-            }
+            set { _xmlDriverParams = new CXmlDriverParam[] { value }; }
         }
 
         public CXmlDriverParam[] XmlDriverParams
         {
-            get
-            {
-                return _xmlDriverParams;
-            }
-            set
-            {
-                _xmlDriverParams = value;
-            }
+            get { return _xmlDriverParams; }
+            set { _xmlDriverParams = value; }
         }
     }
 }

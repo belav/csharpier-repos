@@ -30,41 +30,44 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
+namespace Microsoft.Build.Tasks.Deployment.Bootstrapper
+{
+    [ClassInterface(ClassInterfaceType.None)]
+    [Guid("1D9FE38A-0226-4b95-9C6B-6DFFA2236270")]
+    [ComVisible(true)]
+    public class BootstrapperBuilder : IBootstrapperBuilder
+    {
+        string path;
+        ProductCollection products;
 
-	[ClassInterface (ClassInterfaceType.None)]
-	[Guid ("1D9FE38A-0226-4b95-9C6B-6DFFA2236270")]
-	[ComVisible (true)]
-	public class BootstrapperBuilder : IBootstrapperBuilder {
-		
-		string			path;
-		ProductCollection	products;
+        public BootstrapperBuilder() { }
 
-		public BootstrapperBuilder ()
-		{
-		}
-		
-		[MonoTODO]
-		public BuildResults Build (BuildSettings settings)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public string [] GetOutputFolders (string [] productCodes, string culture, string fallbackCulture,
-						   ComponentsLocation componentsLocation)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public BuildResults Build(BuildSettings settings)
+        {
+            throw new NotImplementedException();
+        }
 
-		public string Path {
-			get { return path; }
-			set { path = value; }
-		}
-		
-		public ProductCollection Products {
-			get { return products; }
-		}
-	}
+        [MonoTODO]
+        public string[] GetOutputFolders(
+            string[] productCodes,
+            string culture,
+            string fallbackCulture,
+            ComponentsLocation componentsLocation
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Path
+        {
+            get { return path; }
+            set { path = value; }
+        }
+
+        public ProductCollection Products
+        {
+            get { return products; }
+        }
+    }
 }
-

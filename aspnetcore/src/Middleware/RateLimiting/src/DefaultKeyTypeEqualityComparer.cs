@@ -20,7 +20,8 @@ internal sealed class DefaultKeyTypeEqualityComparer : IEqualityComparer<Default
             return false;
         }
 
-        return string.Equals(x.PolicyName, y.PolicyName, StringComparison.Ordinal) && xKey.Equals(yKey);
+        return string.Equals(x.PolicyName, y.PolicyName, StringComparison.Ordinal)
+            && xKey.Equals(yKey);
     }
 
     public int GetHashCode([DisallowNull] DefaultKeyType obj)

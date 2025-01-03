@@ -9,11 +9,9 @@ public class MetadataTest
     public void DataTokensMetadata_ToString()
     {
         // Arrange
-        var metadata = new DataTokensMetadata(new Dictionary<string, object>
-        {
-            ["key1"] = 1,
-            ["key2"] = 2
-        });
+        var metadata = new DataTokensMetadata(
+            new Dictionary<string, object> { ["key1"] = 1, ["key2"] = 2 }
+        );
 
         // Act
         var value = metadata.ToString();

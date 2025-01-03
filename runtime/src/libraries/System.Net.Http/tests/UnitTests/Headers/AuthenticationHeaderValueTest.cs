@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -12,15 +11,39 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_SetBothSchemeAndParameters_MatchExpectation()
         {
-            AuthenticationHeaderValue auth = new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\"");
+            AuthenticationHeaderValue auth = new AuthenticationHeaderValue(
+                "Basic",
+                "realm=\"contoso.com\""
+            );
             Assert.Equal("Basic", auth.Scheme);
             Assert.Equal("realm=\"contoso.com\"", auth.Parameter);
 
-            AssertExtensions.Throws<ArgumentNullException>("scheme", () => { new AuthenticationHeaderValue(null, "x"); });
-            AssertExtensions.Throws<ArgumentException>("scheme", () => { new AuthenticationHeaderValue("", "x"); });
-            Assert.Throws<FormatException>(() => { new AuthenticationHeaderValue(" x", "x"); });
-            Assert.Throws<FormatException>(() => { new AuthenticationHeaderValue("x ", "x"); });
-            Assert.Throws<FormatException>(() => { new AuthenticationHeaderValue("x y", "x"); });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "scheme",
+                () =>
+                {
+                    new AuthenticationHeaderValue(null, "x");
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "scheme",
+                () =>
+                {
+                    new AuthenticationHeaderValue("", "x");
+                }
+            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new AuthenticationHeaderValue(" x", "x");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new AuthenticationHeaderValue("x ", "x");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new AuthenticationHeaderValue("x y", "x");
+            });
         }
 
         [Fact]
@@ -39,12 +62,15 @@ namespace System.Net.Http.Tests
             {
                 string input = string.Empty;
 
-                AuthenticationHeaderValue auth = new AuthenticationHeaderValue("Digest",
-                    "qop=\"auth\",algorithm=MD5-sess,nonce=\"+Upgraded+v109e309640b\",charset=utf-8,realm=\"Digest\"");
+                AuthenticationHeaderValue auth = new AuthenticationHeaderValue(
+                    "Digest",
+                    "qop=\"auth\",algorithm=MD5-sess,nonce=\"+Upgraded+v109e309640b\",charset=utf-8,realm=\"Digest\""
+                );
 
                 Assert.Equal(
                     "Digest qop=\"auth\",algorithm=MD5-sess,nonce=\"+Upgraded+v109e309640b\",charset=utf-8,realm=\"Digest\"",
-                    auth.ToString());
+                    auth.ToString()
+                );
                 response.Headers.ProxyAuthenticate.Add(auth);
                 input += auth.ToString();
 
@@ -68,7 +94,8 @@ namespace System.Net.Http.Tests
         {
             HttpRequestMessage request = new HttpRequestMessage();
 
-            string input = " Digest qop=\"auth\",algorithm=MD5-sess,nonce=\"+Upgraded+v109e309640b\",charset=utf-8 ";
+            string input =
+                " Digest qop=\"auth\",algorithm=MD5-sess,nonce=\"+Upgraded+v109e309640b\",charset=utf-8 ";
 
             request.Headers.Authorization = AuthenticationHeaderValue.Parse(input);
             Assert.Equal(input.Trim(), request.Headers.Authorization.ToString());
@@ -79,7 +106,8 @@ namespace System.Net.Http.Tests
         {
             HttpRequestMessage request = new HttpRequestMessage();
 
-            string input = " Digest qop=\"auth\",algorithm=MD5-sess,nonce=\"+Upgraded+v109e309640b\",realm=\"Digest\" ";
+            string input =
+                " Digest qop=\"auth\",algorithm=MD5-sess,nonce=\"+Upgraded+v109e309640b\",realm=\"Digest\" ";
 
             AuthenticationHeaderValue parsedValue;
             Assert.True(AuthenticationHeaderValue.TryParse(input, out parsedValue));
@@ -90,15 +118,20 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Parse_BadValues_Throws()
         {
-            string input = "D\rigest qop=\"auth\",algorithm=MD5-sess,charset=utf-8,realm=\"Digest\"";
+            string input =
+                "D\rigest qop=\"auth\",algorithm=MD5-sess,charset=utf-8,realm=\"Digest\"";
 
-            Assert.Throws<FormatException>(() => { AuthenticationHeaderValue.Parse(input); });
+            Assert.Throws<FormatException>(() =>
+            {
+                AuthenticationHeaderValue.Parse(input);
+            });
         }
 
         [Fact]
         public void TryParse_BadValues_False()
         {
-            string input = ", Digest qop=\"auth\",nonce=\"+Upgraded+v109e309640b\",charset=utf-8,realm=\"Digest\"";
+            string input =
+                ", Digest qop=\"auth\",nonce=\"+Upgraded+v109e309640b\",charset=utf-8,realm=\"Digest\"";
 
             AuthenticationHeaderValue parsedValue;
             Assert.False(AuthenticationHeaderValue.TryParse(input, out parsedValue));
@@ -108,10 +141,14 @@ namespace System.Net.Http.Tests
         public void Add_BadValues_Throws()
         {
             string x = SR.net_http_message_not_success_statuscode_reason;
-            string input = "Digest algorithm=MD5-sess,nonce=\"+Upgraded+v109e309640b\",charset=utf-8,realm=\"Digest\", ";
+            string input =
+                "Digest algorithm=MD5-sess,nonce=\"+Upgraded+v109e309640b\",charset=utf-8,realm=\"Digest\", ";
 
             HttpRequestMessage request = new HttpRequestMessage();
-            Assert.Throws<FormatException>(() => { request.Headers.Add(HttpKnownHeaderNames.Authorization, input); });
+            Assert.Throws<FormatException>(() =>
+            {
+                request.Headers.Add(HttpKnownHeaderNames.Authorization, input);
+            });
         }
 
         [Fact]
@@ -156,8 +193,12 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Clone_Call_CloneFieldsMatchSourceFields()
         {
-            AuthenticationHeaderValue source = new AuthenticationHeaderValue("Basic", "QWxhZGRpbjpvcGVuIHNlc2FtZQ==");
-            AuthenticationHeaderValue clone = (AuthenticationHeaderValue)((ICloneable)source).Clone();
+            AuthenticationHeaderValue source = new AuthenticationHeaderValue(
+                "Basic",
+                "QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            );
+            AuthenticationHeaderValue clone = (AuthenticationHeaderValue)
+                ((ICloneable)source).Clone();
             Assert.Equal(source.Scheme, clone.Scheme);
             Assert.Equal(source.Parameter, clone.Parameter);
 
@@ -170,46 +211,124 @@ namespace System.Net.Http.Tests
         [Fact]
         public void GetAuthenticationLength_DifferentValidScenarios_AllReturnNonZero()
         {
-            CallGetAuthenticationLength(" Basic  QWxhZGRpbjpvcGVuIHNlc2FtZQ==  ", 1, 37,
-                new AuthenticationHeaderValue("Basic", "QWxhZGRpbjpvcGVuIHNlc2FtZQ=="));
-            CallGetAuthenticationLength(" Basic  QWxhZGRpbjpvcGVuIHNlc2FtZQ==  , ", 1, 37,
-                new AuthenticationHeaderValue("Basic", "QWxhZGRpbjpvcGVuIHNlc2FtZQ=="));
-            CallGetAuthenticationLength(" Basic realm=\"example.com\"", 1, 25,
-                new AuthenticationHeaderValue("Basic", "realm=\"example.com\""));
-            CallGetAuthenticationLength(" Basic realm=\"exam,,ple.com\",", 1, 27,
-                new AuthenticationHeaderValue("Basic", "realm=\"exam,,ple.com\""));
-            CallGetAuthenticationLength(" Basic realm=\"exam,ple.com\",", 1, 26,
-                new AuthenticationHeaderValue("Basic", "realm=\"exam,ple.com\""));
+            CallGetAuthenticationLength(
+                " Basic  QWxhZGRpbjpvcGVuIHNlc2FtZQ==  ",
+                1,
+                37,
+                new AuthenticationHeaderValue("Basic", "QWxhZGRpbjpvcGVuIHNlc2FtZQ==")
+            );
+            CallGetAuthenticationLength(
+                " Basic  QWxhZGRpbjpvcGVuIHNlc2FtZQ==  , ",
+                1,
+                37,
+                new AuthenticationHeaderValue("Basic", "QWxhZGRpbjpvcGVuIHNlc2FtZQ==")
+            );
+            CallGetAuthenticationLength(
+                " Basic realm=\"example.com\"",
+                1,
+                25,
+                new AuthenticationHeaderValue("Basic", "realm=\"example.com\"")
+            );
+            CallGetAuthenticationLength(
+                " Basic realm=\"exam,,ple.com\",",
+                1,
+                27,
+                new AuthenticationHeaderValue("Basic", "realm=\"exam,,ple.com\"")
+            );
+            CallGetAuthenticationLength(
+                " Basic realm=\"exam,ple.com\",",
+                1,
+                26,
+                new AuthenticationHeaderValue("Basic", "realm=\"exam,ple.com\"")
+            );
             CallGetAuthenticationLength("NTLM   ", 0, 7, new AuthenticationHeaderValue("NTLM"));
             CallGetAuthenticationLength("Digest", 0, 6, new AuthenticationHeaderValue("Digest"));
             CallGetAuthenticationLength("Digest,,", 0, 6, new AuthenticationHeaderValue("Digest"));
-            CallGetAuthenticationLength("Digest a=b, c=d,,", 0, 15, new AuthenticationHeaderValue("Digest", "a=b, c=d"));
-            CallGetAuthenticationLength("Kerberos,", 0, 8, new AuthenticationHeaderValue("Kerberos"));
+            CallGetAuthenticationLength(
+                "Digest a=b, c=d,,",
+                0,
+                15,
+                new AuthenticationHeaderValue("Digest", "a=b, c=d")
+            );
+            CallGetAuthenticationLength(
+                "Kerberos,",
+                0,
+                8,
+                new AuthenticationHeaderValue("Kerberos")
+            );
             CallGetAuthenticationLength("Basic,NTLM", 0, 5, new AuthenticationHeaderValue("Basic"));
-            CallGetAuthenticationLength("Digest a=b,c=\"d\", e=f, NTLM", 0, 21,
-                new AuthenticationHeaderValue("Digest", "a=b,c=\"d\", e=f"));
-            CallGetAuthenticationLength("Digest a = b , c = \"d\" ,  e = f ,NTLM", 0, 32,
-                new AuthenticationHeaderValue("Digest", "a = b , c = \"d\" ,  e = f"));
-            CallGetAuthenticationLength("Digest a = b , c = \"d\" ,  e = f , NTLM AbCdEf==", 0, 32,
-                new AuthenticationHeaderValue("Digest", "a = b , c = \"d\" ,  e = f"));
-            CallGetAuthenticationLength("Digest a = \"b\", c= \"d\" ,  e = f,NTLM AbC=,", 0, 31,
-                new AuthenticationHeaderValue("Digest", "a = \"b\", c= \"d\" ,  e = f"));
-            CallGetAuthenticationLength("Digest a=\"b\", c=d", 0, 17,
-                new AuthenticationHeaderValue("Digest", "a=\"b\", c=d"));
-            CallGetAuthenticationLength("Digest a=\"b\", c=d,", 0, 17,
-                new AuthenticationHeaderValue("Digest", "a=\"b\", c=d"));
-            CallGetAuthenticationLength("Digest a=\"b\", c=d ,", 0, 18,
-                new AuthenticationHeaderValue("Digest", "a=\"b\", c=d"));
-            CallGetAuthenticationLength("Digest a=\"b\", c=d  ", 0, 19,
-                new AuthenticationHeaderValue("Digest", "a=\"b\", c=d"));
-            CallGetAuthenticationLength("Custom \"blob\", c=d,Custom2 \"blob\"", 0, 18,
-                new AuthenticationHeaderValue("Custom", "\"blob\", c=d"));
-            CallGetAuthenticationLength("Custom \"blob\", a=b,,,c=d,Custom2 \"blob\"", 0, 24,
-                new AuthenticationHeaderValue("Custom", "\"blob\", a=b,,,c=d"));
-            CallGetAuthenticationLength("Custom \"blob\", a=b,c=d,,,Custom2 \"blob\"", 0, 22,
-                new AuthenticationHeaderValue("Custom", "\"blob\", a=b,c=d"));
-            CallGetAuthenticationLength("Custom a=b, c=d,,,InvalidNextScheme\u670D", 0, 15,
-                new AuthenticationHeaderValue("Custom", "a=b, c=d"));
+            CallGetAuthenticationLength(
+                "Digest a=b,c=\"d\", e=f, NTLM",
+                0,
+                21,
+                new AuthenticationHeaderValue("Digest", "a=b,c=\"d\", e=f")
+            );
+            CallGetAuthenticationLength(
+                "Digest a = b , c = \"d\" ,  e = f ,NTLM",
+                0,
+                32,
+                new AuthenticationHeaderValue("Digest", "a = b , c = \"d\" ,  e = f")
+            );
+            CallGetAuthenticationLength(
+                "Digest a = b , c = \"d\" ,  e = f , NTLM AbCdEf==",
+                0,
+                32,
+                new AuthenticationHeaderValue("Digest", "a = b , c = \"d\" ,  e = f")
+            );
+            CallGetAuthenticationLength(
+                "Digest a = \"b\", c= \"d\" ,  e = f,NTLM AbC=,",
+                0,
+                31,
+                new AuthenticationHeaderValue("Digest", "a = \"b\", c= \"d\" ,  e = f")
+            );
+            CallGetAuthenticationLength(
+                "Digest a=\"b\", c=d",
+                0,
+                17,
+                new AuthenticationHeaderValue("Digest", "a=\"b\", c=d")
+            );
+            CallGetAuthenticationLength(
+                "Digest a=\"b\", c=d,",
+                0,
+                17,
+                new AuthenticationHeaderValue("Digest", "a=\"b\", c=d")
+            );
+            CallGetAuthenticationLength(
+                "Digest a=\"b\", c=d ,",
+                0,
+                18,
+                new AuthenticationHeaderValue("Digest", "a=\"b\", c=d")
+            );
+            CallGetAuthenticationLength(
+                "Digest a=\"b\", c=d  ",
+                0,
+                19,
+                new AuthenticationHeaderValue("Digest", "a=\"b\", c=d")
+            );
+            CallGetAuthenticationLength(
+                "Custom \"blob\", c=d,Custom2 \"blob\"",
+                0,
+                18,
+                new AuthenticationHeaderValue("Custom", "\"blob\", c=d")
+            );
+            CallGetAuthenticationLength(
+                "Custom \"blob\", a=b,,,c=d,Custom2 \"blob\"",
+                0,
+                24,
+                new AuthenticationHeaderValue("Custom", "\"blob\", a=b,,,c=d")
+            );
+            CallGetAuthenticationLength(
+                "Custom \"blob\", a=b,c=d,,,Custom2 \"blob\"",
+                0,
+                22,
+                new AuthenticationHeaderValue("Custom", "\"blob\", a=b,c=d")
+            );
+            CallGetAuthenticationLength(
+                "Custom a=b, c=d,,,InvalidNextScheme\u670D",
+                0,
+                15,
+                new AuthenticationHeaderValue("Custom", "a=b, c=d")
+            );
         }
 
         [Fact]
@@ -231,18 +350,28 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private static void CallGetAuthenticationLength(string input, int startIndex, int expectedLength,
-            AuthenticationHeaderValue expectedResult)
+        private static void CallGetAuthenticationLength(
+            string input,
+            int startIndex,
+            int expectedLength,
+            AuthenticationHeaderValue expectedResult
+        )
         {
             object result = null;
-            Assert.Equal(expectedLength, AuthenticationHeaderValue.GetAuthenticationLength(input, startIndex, out result));
+            Assert.Equal(
+                expectedLength,
+                AuthenticationHeaderValue.GetAuthenticationLength(input, startIndex, out result)
+            );
             Assert.Equal(expectedResult, result);
         }
 
         private static void CheckInvalidGetAuthenticationLength(string input, int startIndex)
         {
             object result = null;
-            Assert.Equal(0, AuthenticationHeaderValue.GetAuthenticationLength(input, startIndex, out result));
+            Assert.Equal(
+                0,
+                AuthenticationHeaderValue.GetAuthenticationLength(input, startIndex, out result)
+            );
             Assert.Null(result);
         }
         #endregion

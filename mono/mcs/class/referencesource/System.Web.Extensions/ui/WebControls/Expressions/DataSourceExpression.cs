@@ -1,4 +1,5 @@
-﻿namespace System.Web.UI.WebControls.Expressions {
+﻿namespace System.Web.UI.WebControls.Expressions
+{
     using System;
     using System.ComponentModel;
     using System.Linq;
@@ -6,42 +7,35 @@
     using System.Web;
     using System.Web.UI;
     using System.Web.UI.WebControls;
-    
-  
-    public abstract class DataSourceExpression : IStateManager {
+
+    public abstract class DataSourceExpression : IStateManager
+    {
         private bool _tracking;
         private StateBag _viewState;
 
-        protected HttpContext Context {
-            get;
-            private set;
-        }
+        protected HttpContext Context { get; private set; }
 
-        protected Control Owner {
-            get;
-            private set;
-        }     
+        protected Control Owner { get; private set; }
 
-        public IQueryableDataSource DataSource {
+        public IQueryableDataSource DataSource
+        {
             get;
             // Internal set for unit testing
             internal set;
         }
 
+        protected bool IsTrackingViewState
+        {
+            get { return _tracking; }
+        }
 
-        protected bool IsTrackingViewState {
-            get {
-                return _tracking;
-            }
-        }        
-
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
-        protected StateBag ViewState {
-            get {
-                if (_viewState == null) {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        protected StateBag ViewState
+        {
+            get
+            {
+                if (_viewState == null)
+                {
                     _viewState = new StateBag();
                     if (_tracking)
                         ((IStateManager)_viewState).TrackViewState();
@@ -50,48 +44,62 @@
             }
         }
 
-        protected DataSourceExpression() {
-        }
+        protected DataSourceExpression() { }
 
         // internal for unit testing
-        internal DataSourceExpression(Control owner) {
+        internal DataSourceExpression(Control owner)
+        {
             Owner = owner;
         }
 
-        public void SetDirty() {
+        public void SetDirty()
+        {
             ViewState.SetDirty(true);
         }
 
-        protected virtual void LoadViewState(object savedState) {
-            if (savedState != null) {
+        protected virtual void LoadViewState(object savedState)
+        {
+            if (savedState != null)
+            {
                 ((IStateManager)ViewState).LoadViewState(savedState);
             }
         }
 
-        protected virtual object SaveViewState() {
+        protected virtual object SaveViewState()
+        {
             return (_viewState != null) ? ((IStateManager)_viewState).SaveViewState() : null;
         }
 
-        protected virtual void TrackViewState() {
+        protected virtual void TrackViewState()
+        {
             _tracking = true;
 
-            if (_viewState != null) {
+            if (_viewState != null)
+            {
                 ((IStateManager)_viewState).TrackViewState();
             }
         }
 
         public abstract IQueryable GetQueryable(IQueryable source);
 
-        public virtual void SetContext(Control owner, HttpContext context, IQueryableDataSource dataSource) {
-            if (owner == null) {
+        public virtual void SetContext(
+            Control owner,
+            HttpContext context,
+            IQueryableDataSource dataSource
+        )
+        {
+            if (owner == null)
+            {
                 throw new ArgumentNullException("owner");
             }
 
-            if (context == null) {
+            if (context == null)
+            {
                 throw new ArgumentNullException("context");
             }
 
-            if (dataSource == null) {
+            if (dataSource == null)
+            {
                 throw new ArgumentNullException("dataSource");
             }
 
@@ -102,21 +110,23 @@
 
         #region IStateManager Members
 
-        bool IStateManager.IsTrackingViewState {
-            get {
-                return IsTrackingViewState;
-            }
+        bool IStateManager.IsTrackingViewState
+        {
+            get { return IsTrackingViewState; }
         }
 
-        void IStateManager.LoadViewState(object state) {
+        void IStateManager.LoadViewState(object state)
+        {
             LoadViewState(state);
         }
 
-        object IStateManager.SaveViewState() {
+        object IStateManager.SaveViewState()
+        {
             return SaveViewState();
         }
 
-        void IStateManager.TrackViewState() {
+        void IStateManager.TrackViewState()
+        {
             TrackViewState();
         }
 

@@ -10,8 +10,7 @@ namespace FormatterWebSite.Controllers;
 public class AsyncEnumerableController : ControllerBase
 {
     [HttpGet]
-    public IAsyncEnumerable<Project> GetAllProjects()
-        => GetAllProjectsCore();
+    public IAsyncEnumerable<Project> GetAllProjects() => GetAllProjectsCore();
 
     [HttpGet]
     public async Task<IAsyncEnumerable<Project>> GetAllProjectsAsTask()
@@ -21,8 +20,7 @@ public class AsyncEnumerableController : ControllerBase
     }
 
     [HttpGet]
-    public IAsyncEnumerable<Project> GetAllProjectsWithError()
-        => GetAllProjectsCore(true);
+    public IAsyncEnumerable<Project> GetAllProjectsWithError() => GetAllProjectsCore(true);
 
     public async IAsyncEnumerable<Project> GetAllProjectsCore(bool throwError = false)
     {
@@ -34,11 +32,7 @@ public class AsyncEnumerableController : ControllerBase
                 throw new InvalidTimeZoneException();
             }
 
-            yield return new Project
-            {
-                Id = i,
-                Name = $"Project{i}",
-            };
+            yield return new Project { Id = i, Name = $"Project{i}" };
         }
     }
 }

@@ -28,7 +28,11 @@ internal static class FormatWeekHelper
                 date = date.AddDays(3);
             }
 
-            var week = calendar.GetWeekOfYear(date, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            var week = calendar.GetWeekOfYear(
+                date,
+                CalendarWeekRule.FirstFourDayWeek,
+                DayOfWeek.Monday
+            );
             var year = calendar.GetYear(date);
             var month = calendar.GetMonth(date);
 

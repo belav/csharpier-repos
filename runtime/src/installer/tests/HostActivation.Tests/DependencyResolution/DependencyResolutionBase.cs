@@ -19,16 +19,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             }
 
             public SharedTestStateBase()
-                : base(GetBaseDir("dependencyResolution"))
-            {
-            }
+                : base(GetBaseDir("dependencyResolution")) { }
 
             public DotNetBuilder DotNet(string name)
             {
                 return new DotNetBuilder(Location, TestContext.BuiltDotNet.BinPath, name);
             }
 
-            public TestApp CreateFrameworkReferenceApp(string fxName, string fxVersion, Action<NetCoreAppBuilder> customizer = null)
+            public TestApp CreateFrameworkReferenceApp(
+                string fxName,
+                string fxVersion,
+                Action<NetCoreAppBuilder> customizer = null
+            )
             {
                 // Prepare the app mock - we're not going to run anything really, so we just need the basic files
                 TestApp testApp = CreateTestApp(Location, "FrameworkReferenceApp");
@@ -53,17 +55,27 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 return testApp;
             }
 
-            public TestApp CreateComponentWithNoDependencies(Action<NetCoreAppBuilder> customizer = null, string location = null)
+            public TestApp CreateComponentWithNoDependencies(
+                Action<NetCoreAppBuilder> customizer = null,
+                string location = null
+            )
             {
-                TestApp componentWithNoDependencies = CreateTestApp(location, "ComponentWithNoDependencies");
-                NetCoreAppBuilder builder = NetCoreAppBuilder.PortableForNETCoreApp(componentWithNoDependencies)
+                TestApp componentWithNoDependencies = CreateTestApp(
+                    location,
+                    "ComponentWithNoDependencies"
+                );
+                NetCoreAppBuilder builder = NetCoreAppBuilder
+                    .PortableForNETCoreApp(componentWithNoDependencies)
                     .WithProject(p => p.WithAssemblyGroup(null, g => g.WithMainAssembly()));
                 customizer?.Invoke(builder);
 
                 return builder.Build(componentWithNoDependencies);
             }
 
-            public TestApp CreateSelfContainedAppWithMockCoreClr(string name, Action<NetCoreAppBuilder> customizer = null)
+            public TestApp CreateSelfContainedAppWithMockCoreClr(
+                string name,
+                Action<NetCoreAppBuilder> customizer = null
+            )
             {
                 TestApp testApp = CreateTestApp(null, name);
                 testApp.PopulateSelfContained(TestApp.MockedComponent.CoreClr, customizer);

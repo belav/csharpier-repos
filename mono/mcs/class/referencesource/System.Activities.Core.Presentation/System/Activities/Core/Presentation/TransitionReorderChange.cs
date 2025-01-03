@@ -12,10 +12,7 @@ namespace System.Activities.Core.Presentation
     {
         public override string Description
         {
-            get 
-            { 
-                return null; 
-            }
+            get { return null; }
         }
 
         public override bool Apply()

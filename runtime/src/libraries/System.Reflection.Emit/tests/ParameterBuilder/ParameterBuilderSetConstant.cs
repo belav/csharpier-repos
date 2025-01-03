@@ -64,8 +64,16 @@ namespace System.Reflection.Emit.Tests
 
         [Theory]
         [InlineData(typeof(AttributeTargets?), AttributeTargets.All, (int)AttributeTargets.All)]
-        [InlineData(typeof(AttributeTargets?), (int)AttributeTargets.All, (int)AttributeTargets.All)]
-        public void SetConstant_NonNull_on_nullable_enum(Type parameterType, object valueToWrite, object expectedValueWhenRead)
+        [InlineData(
+            typeof(AttributeTargets?),
+            (int)AttributeTargets.All,
+            (int)AttributeTargets.All
+        )]
+        public void SetConstant_NonNull_on_nullable_enum(
+            Type parameterType,
+            object valueToWrite,
+            object expectedValueWhenRead
+        )
         {
             SetConstant(parameterType, valueToWrite, expectedValueWhenRead);
         }
@@ -75,11 +83,26 @@ namespace System.Reflection.Emit.Tests
             SetConstant(parameterType, null, null);
         }
 
-        private void SetConstant(Type parameterType, object valueToWrite, object expectedValueWhenRead)
+        private void SetConstant(
+            Type parameterType,
+            object valueToWrite,
+            object expectedValueWhenRead
+        )
         {
-            TypeBuilder type = Helpers.DynamicType(TypeAttributes.Interface | TypeAttributes.Abstract);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual, typeof(void), new Type[] { parameterType });
-            ParameterBuilder parameter = method.DefineParameter(1, ParameterAttributes.Optional | ParameterAttributes.HasDefault, "arg");
+            TypeBuilder type = Helpers.DynamicType(
+                TypeAttributes.Interface | TypeAttributes.Abstract
+            );
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual,
+                typeof(void),
+                new Type[] { parameterType }
+            );
+            ParameterBuilder parameter = method.DefineParameter(
+                1,
+                ParameterAttributes.Optional | ParameterAttributes.HasDefault,
+                "arg"
+            );
 
             parameter.SetConstant(valueToWrite);
 
@@ -88,7 +111,11 @@ namespace System.Reflection.Emit.Tests
             Assert.Equal(expectedValueWhenRead, createdParameter.DefaultValue);
         }
 
-        private static ParameterInfo GetCreatedParameter(TypeBuilder type, string methodName, int parameterIndex)
+        private static ParameterInfo GetCreatedParameter(
+            TypeBuilder type,
+            string methodName,
+            int parameterIndex
+        )
         {
             Type createdType = type.CreateType();
             MethodInfo createdMethod = createdType.GetMethod(methodName);
@@ -102,12 +129,8 @@ namespace System.Reflection.Emit.Tests
             }
         }
 
-        private class UserDefinedClass
-        {
-        }
+        private class UserDefinedClass { }
 
-        private struct UserDefinedStruct
-        {
-        }
+        private struct UserDefinedStruct { }
     }
 }

@@ -43,19 +43,22 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
                         switch (message.Command.ToLowerInvariant())
                         {
                             case "ping":
-                                await _worker.PingAsync(
-                                    message.Value["Value"].ToObject<int>());
+                                await _worker.PingAsync(message.Value["Value"].ToObject<int>());
                                 break;
                             case "connect":
                                 await _worker.ConnectAsync(
                                     message.Value["TargetAddress"].ToObject<string>(),
                                     message.Value["TransportType"].ToObject<HttpTransportType>(),
-                                    message.Value["NumberOfConnections"].ToObject<int>());
+                                    message.Value["NumberOfConnections"].ToObject<int>()
+                                );
                                 break;
                             case "starttest":
                                 await _worker.StartTestAsync(
-                                    TimeSpan.FromMilliseconds(message.Value.Value<double>("SendInterval")),
-                                    message.Value["SendBytes"].ToObject<int>());
+                                    TimeSpan.FromMilliseconds(
+                                        message.Value.Value<double>("SendInterval")
+                                    ),
+                                    message.Value["SendBytes"].ToObject<int>()
+                                );
                                 break;
                             case "stop":
                                 await _worker.StopAsync();

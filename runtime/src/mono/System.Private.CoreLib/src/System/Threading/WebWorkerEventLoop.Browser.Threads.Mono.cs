@@ -15,6 +15,7 @@ internal static class WebWorkerEventLoop
     // FIXME: these keepalive calls could be qcalls with a SuppressGCTransitionAttribute
     [MethodImpl(MethodImplOptions.InternalCall)]
     private static extern void KeepalivePushInternal();
+
     [MethodImpl(MethodImplOptions.InternalCall)]
     private static extern void KeepalivePopInternal();
 
@@ -25,16 +26,20 @@ internal static class WebWorkerEventLoop
     /// </summary>
     internal sealed class KeepaliveToken
     {
-        public bool Valid {get; private set; }
+        public bool Valid { get; private set; }
 
-        private KeepaliveToken() { Valid = true; }
+        private KeepaliveToken()
+        {
+            Valid = true;
+        }
 
         /// <summary>
         ///  Decrement the Emscripten keepalive count.  A thread with a zero keepalive count will
         ///  terminate when it returns from its start function or from an async invocation from the
         ///  JS event loop.
         /// </summary>
-        internal void Pop() {
+        internal void Pop()
+        {
             if (!Valid)
                 throw new InvalidOperationException();
             Valid = false;

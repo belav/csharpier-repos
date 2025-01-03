@@ -32,8 +32,10 @@ internal static class NormalizedRouteValue
         var actionDescriptor = context.ActionDescriptor;
         string? normalizedValue = null;
 
-        if (actionDescriptor.RouteValues.TryGetValue(key, out var value) &&
-            !string.IsNullOrEmpty(value))
+        if (
+            actionDescriptor.RouteValues.TryGetValue(key, out var value)
+            && !string.IsNullOrEmpty(value)
+        )
         {
             normalizedValue = value;
         }

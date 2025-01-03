@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,51 +34,51 @@ using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.WebControls {
+namespace MonoTests.System.Web.UI.WebControls
+{
+    public class TestTableHeaderRow : TableHeaderRow, ITableRowTest
+    {
+        public string Tag
+        {
+            get { return base.TagName; }
+        }
 
-	public class TestTableHeaderRow : TableHeaderRow, ITableRowTest {
+        public StateBag StateBag
+        {
+            get { return base.ViewState; }
+        }
 
-		public string Tag {
-			get { return base.TagName; }
-		}
+        public string Render()
+        {
+            StringWriter sw = new StringWriter();
+            sw.NewLine = "\n";
+            HtmlTextWriter writer = new HtmlTextWriter(sw);
+            base.Render(writer);
+            return writer.InnerWriter.ToString();
+        }
 
-		public StateBag StateBag {
-			get { return base.ViewState; }
-		}
+        public Style GetStyle()
+        {
+            return base.CreateControlStyle();
+        }
+    }
 
-		public string Render ()
-		{
-			StringWriter sw = new StringWriter ();
-			sw.NewLine = "\n";
-			HtmlTextWriter writer = new HtmlTextWriter (sw);
-			base.Render (writer);
-			return writer.InnerWriter.ToString ();
-		}
+    [TestFixture]
+    public class TableHeaderRowTest : TableRowTest
+    {
+        // note: strangely TableSection defaults to TableRowSection.TableBody
+        // so all TableRowTest tests should be identical
 
-		public Style GetStyle ()
-		{
-			return base.CreateControlStyle ();
-		}
-	}
+        public override TableRow GetNewTableRow()
+        {
+            return new TableHeaderRow();
+        }
 
-	[TestFixture]
-	public class TableHeaderRowTest : TableRowTest {
-
-		// note: strangely TableSection defaults to TableRowSection.TableBody
-		// so all TableRowTest tests should be identical
-
-		public override TableRow GetNewTableRow ()
-		{
-			return new TableHeaderRow ();
-		}
-
-		public override ITableRowTest GetNewTestTableRow ()
-		{
-			return new TestTableHeaderRow ();
-		}
-	}
+        public override ITableRowTest GetNewTestTableRow()
+        {
+            return new TestTableHeaderRow();
+        }
+    }
 }
-

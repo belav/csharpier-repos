@@ -16,7 +16,7 @@ namespace System.Text.Json.Tests
             var expectedOption = new JsonReaderOptions
             {
                 CommentHandling = JsonCommentHandling.Disallow,
-                MaxDepth = 0
+                MaxDepth = 0,
             };
             Assert.Equal(expectedOption, state.Options);
         }
@@ -29,7 +29,7 @@ namespace System.Text.Json.Tests
             var expectedOption = new JsonReaderOptions
             {
                 CommentHandling = JsonCommentHandling.Disallow,
-                MaxDepth = 0
+                MaxDepth = 0,
             };
             Assert.Equal(expectedOption, state.Options);
         }
@@ -42,17 +42,23 @@ namespace System.Text.Json.Tests
             var expectedOption = new JsonReaderOptions
             {
                 CommentHandling = JsonCommentHandling.Disallow,
-                MaxDepth = 0
+                MaxDepth = 0,
             };
             Assert.Equal(expectedOption, state.Options);
 
-            state = new JsonReaderState(new JsonReaderOptions { CommentHandling = JsonCommentHandling.Disallow, MaxDepth = 0 });
+            state = new JsonReaderState(
+                new JsonReaderOptions
+                {
+                    CommentHandling = JsonCommentHandling.Disallow,
+                    MaxDepth = 0,
+                }
+            );
             Assert.Equal(expectedOption, state.Options);
 
             expectedOption = new JsonReaderOptions
             {
                 CommentHandling = JsonCommentHandling.Disallow,
-                MaxDepth = 32
+                MaxDepth = 32,
             };
             state = new JsonReaderState(new JsonReaderOptions { MaxDepth = 32 });
             Assert.Equal(32, state.Options.MaxDepth);
@@ -66,16 +72,31 @@ namespace System.Text.Json.Tests
         [InlineData(byte.MaxValue + 4)] // Other values, like byte.MaxValue + 1 overflows to 0 (i.e. JsonCommentHandling.Disallow), which is valid.
         public static void TestCommentHandlingInvalid(int enumValue)
         {
-            Assert.Throws<ArgumentOutOfRangeException>("value", () => new JsonReaderOptions { CommentHandling = (JsonCommentHandling)enumValue });
-            Assert.Throws<ArgumentOutOfRangeException>("value", () => new JsonReaderState(new JsonReaderOptions { CommentHandling = (JsonCommentHandling)enumValue }));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => new JsonReaderOptions { CommentHandling = (JsonCommentHandling)enumValue }
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () =>
+                    new JsonReaderState(
+                        new JsonReaderOptions { CommentHandling = (JsonCommentHandling)enumValue }
+                    )
+            );
         }
 
         [Theory]
         [InlineData(-1)]
         public static void TestDepthInvalid(int depth)
         {
-            Assert.Throws<ArgumentOutOfRangeException>("value", () => new JsonReaderOptions { MaxDepth = depth });
-            Assert.Throws<ArgumentOutOfRangeException>("value", () => new JsonReaderState(new JsonReaderOptions { MaxDepth = depth }));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => new JsonReaderOptions { MaxDepth = depth }
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => new JsonReaderState(new JsonReaderOptions { MaxDepth = depth })
+            );
         }
 
         [Fact]
@@ -86,7 +107,7 @@ namespace System.Text.Json.Tests
             var expectedOption = new JsonReaderOptions
             {
                 CommentHandling = JsonCommentHandling.Disallow,
-                MaxDepth = 0
+                MaxDepth = 0,
             };
             Assert.Equal(expectedOption, options);
 
@@ -96,7 +117,11 @@ namespace System.Text.Json.Tests
             options = new JsonReaderOptions { MaxDepth = 0 };
             Assert.Equal(expectedOption, options);
 
-            options = new JsonReaderOptions { CommentHandling = JsonCommentHandling.Disallow, MaxDepth = 0 };
+            options = new JsonReaderOptions
+            {
+                CommentHandling = JsonCommentHandling.Disallow,
+                MaxDepth = 0,
+            };
             Assert.Equal(expectedOption, options);
         }
 
@@ -109,13 +134,22 @@ namespace System.Text.Json.Tests
             var firstSegment = new BufferSegment<byte>(dataMemory.Slice(0, 1));
             ReadOnlyMemory<byte> secondMem = dataMemory.Slice(1);
             BufferSegment<byte> secondSegment = firstSegment.Append(secondMem);
-            var sequence = new ReadOnlySequence<byte>(firstSegment, 0, secondSegment, secondMem.Length);
+            var sequence = new ReadOnlySequence<byte>(
+                firstSegment,
+                0,
+                secondSegment,
+                secondMem.Length
+            );
 
             var state = new JsonReaderState();
             var reader = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
             Assert.Equal(64, reader.CurrentState.Options.MaxDepth);
 
-            JsonReaderOptions options = new JsonReaderOptions { CommentHandling = JsonCommentHandling.Disallow, MaxDepth = 0 };
+            JsonReaderOptions options = new JsonReaderOptions
+            {
+                CommentHandling = JsonCommentHandling.Disallow,
+                MaxDepth = 0,
+            };
             state = new JsonReaderState(options);
             reader = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
             Assert.Equal(0, options.MaxDepth);
@@ -140,9 +174,18 @@ namespace System.Text.Json.Tests
             var firstSegment = new BufferSegment<byte>(dataMemory.Slice(0, 1));
             ReadOnlyMemory<byte> secondMem = dataMemory.Slice(1);
             BufferSegment<byte> secondSegment = firstSegment.Append(secondMem);
-            var sequence = new ReadOnlySequence<byte>(firstSegment, 0, secondSegment, secondMem.Length);
+            var sequence = new ReadOnlySequence<byte>(
+                firstSegment,
+                0,
+                secondSegment,
+                secondMem.Length
+            );
 
-            JsonReaderOptions options = new JsonReaderOptions { CommentHandling = JsonCommentHandling.Disallow, MaxDepth = 64 };
+            JsonReaderOptions options = new JsonReaderOptions
+            {
+                CommentHandling = JsonCommentHandling.Disallow,
+                MaxDepth = 64,
+            };
             var state = new JsonReaderState(options);
             var reader = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
             Assert.Equal(64, options.MaxDepth);
@@ -153,7 +196,11 @@ namespace System.Text.Json.Tests
             Assert.Equal(64, options.MaxDepth);
             Assert.Equal(64, reader.CurrentState.Options.MaxDepth);
 
-            options = new JsonReaderOptions { CommentHandling = JsonCommentHandling.Disallow, MaxDepth = 32 };
+            options = new JsonReaderOptions
+            {
+                CommentHandling = JsonCommentHandling.Disallow,
+                MaxDepth = 32,
+            };
             state = new JsonReaderState(options);
             reader = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
             Assert.Equal(32, options.MaxDepth);

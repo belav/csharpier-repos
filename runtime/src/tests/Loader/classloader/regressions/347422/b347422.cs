@@ -11,40 +11,43 @@
 using System;
 using Xunit;
 
-public interface IFoo{}
+public interface IFoo { }
 
 public class Casting
 {
-	[Fact]
-	public static int TestEntryPoint()
-	{
-            Object obj = new Object();
-            try
-            {
-            		IFoo f = (IFoo) obj;
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        Object obj = new Object();
+        try
+        {
+            IFoo f = (IFoo)obj;
 
-			Console.WriteLine("FAIL: Did not catch expected InvalidCastException");
-			return 101;
-		
-            }
-            catch(InvalidCastException e)
-            {
-            		string msg ="Unable to cast object of type 'System.Object' to type 'IFoo'.";
-				
-                	
-			if (e.Message.Equals(msg) || e.Message.Contains("Debugging resource strings are unavailable"))
-			{
-				Console.WriteLine("PASS");
-				return 100;
-			}
-			else
-			{
-				Console.WriteLine("FAIL: Caught expected exception, but error message is incorrect");
-				Console.WriteLine("Expected: " + msg);
-				Console.WriteLine("Actual: " + e.Message);
+            Console.WriteLine("FAIL: Did not catch expected InvalidCastException");
+            return 101;
+        }
+        catch (InvalidCastException e)
+        {
+            string msg = "Unable to cast object of type 'System.Object' to type 'IFoo'.";
 
-				return 102;
-			}
+            if (
+                e.Message.Equals(msg)
+                || e.Message.Contains("Debugging resource strings are unavailable")
+            )
+            {
+                Console.WriteLine("PASS");
+                return 100;
             }
-	}
+            else
+            {
+                Console.WriteLine(
+                    "FAIL: Caught expected exception, but error message is incorrect"
+                );
+                Console.WriteLine("Expected: " + msg);
+                Console.WriteLine("Actual: " + e.Message);
+
+                return 102;
+            }
+        }
+    }
 }

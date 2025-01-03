@@ -17,9 +17,12 @@ public class ProblemDetailsServiceTest
                 new MetadataBasedWriter("FirstWriter", canWrite: false),
                 new MetadataBasedWriter("SecondWriter"),
                 new MetadataBasedWriter("FirstWriter"),
-            });
+            }
+        );
 
-        var metadata = new EndpointMetadataCollection(new SampleMetadata() { ContentType = "application/problem+json" });
+        var metadata = new EndpointMetadataCollection(
+            new SampleMetadata() { ContentType = "application/problem+json" }
+        );
         var stream = new MemoryStream();
         var context = new DefaultHttpContext()
         {
@@ -43,9 +46,12 @@ public class ProblemDetailsServiceTest
                 new MetadataBasedWriter("FirstWriter", canWrite: false),
                 new MetadataBasedWriter("SecondWriter"),
                 new MetadataBasedWriter("FirstWriter"),
-            });
+            }
+        );
 
-        var metadata = new EndpointMetadataCollection(new SampleMetadata() { ContentType = "application/problem+json" });
+        var metadata = new EndpointMetadataCollection(
+            new SampleMetadata() { ContentType = "application/problem+json" }
+        );
         var stream = new MemoryStream();
         var context = new DefaultHttpContext()
         {
@@ -53,7 +59,9 @@ public class ProblemDetailsServiceTest
         };
 
         // Act
-        var result = await service.TryWriteAsync(new() { HttpContext = context, AdditionalMetadata = metadata });
+        var result = await service.TryWriteAsync(
+            new() { HttpContext = context, AdditionalMetadata = metadata }
+        );
 
         // Assert
         Assert.True(result);
@@ -72,7 +80,9 @@ public class ProblemDetailsServiceTest
         };
 
         // Act
-        await Assert.ThrowsAsync<InvalidOperationException>(async () => await service.WriteAsync(new() { HttpContext = context }));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await service.WriteAsync(new() { HttpContext = context })
+        );
     }
 
     [Fact]
@@ -80,7 +90,8 @@ public class ProblemDetailsServiceTest
     {
         // Arrange
         var service = CreateService(
-            writers: new List<IProblemDetailsWriter> { new MetadataBasedWriter() });
+            writers: new List<IProblemDetailsWriter> { new MetadataBasedWriter() }
+        );
         var stream = new MemoryStream();
         var context = new DefaultHttpContext()
         {
@@ -88,7 +99,9 @@ public class ProblemDetailsServiceTest
         };
 
         // Act & Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(async () => await service.WriteAsync(new() { HttpContext = context }));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await service.WriteAsync(new() { HttpContext = context })
+        );
     }
 
     [Fact]
@@ -115,7 +128,8 @@ public class ProblemDetailsServiceTest
     {
         // Arrange
         var service = CreateService(
-            writers: new List<IProblemDetailsWriter> { new MetadataBasedWriter() });
+            writers: new List<IProblemDetailsWriter> { new MetadataBasedWriter() }
+        );
         var stream = new MemoryStream();
         var context = new DefaultHttpContext()
         {
@@ -130,7 +144,8 @@ public class ProblemDetailsServiceTest
     }
 
     private static ProblemDetailsService CreateService(
-        IEnumerable<IProblemDetailsWriter> writers = null)
+        IEnumerable<IProblemDetailsWriter> writers = null
+    )
     {
         writers ??= Array.Empty<IProblemDetailsWriter>();
         return new ProblemDetailsService(writers);
@@ -154,14 +169,14 @@ public class ProblemDetailsServiceTest
 
         public bool CanWrite(ProblemDetailsContext context)
         {
-            var metadata = context.AdditionalMetadata?.GetMetadata<SampleMetadata>() ??
-                context.HttpContext.GetEndpoint()?.Metadata.GetMetadata<SampleMetadata>();
+            var metadata =
+                context.AdditionalMetadata?.GetMetadata<SampleMetadata>()
+                ?? context.HttpContext.GetEndpoint()?.Metadata.GetMetadata<SampleMetadata>();
 
             return metadata != null && _canWrite;
-
         }
 
-        public ValueTask WriteAsync(ProblemDetailsContext context)
-            => new(context.HttpContext.Response.WriteAsJsonAsync(_content));
+        public ValueTask WriteAsync(ProblemDetailsContext context) =>
+            new(context.HttpContext.Response.WriteAsJsonAsync(_content));
     }
 }

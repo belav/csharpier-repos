@@ -27,20 +27,43 @@ internal static class Utilities
     internal static IServer CreateHttpServer(out string baseAddress, RequestDelegate app)
     {
         string root;
-        return CreateDynamicHttpServer(string.Empty, out root, out baseAddress, options => { }, app);
+        return CreateDynamicHttpServer(
+            string.Empty,
+            out root,
+            out baseAddress,
+            options => { },
+            app
+        );
     }
 
-    internal static MessagePump CreatePump(ILoggerFactory loggerFactory = null)
-        => new MessagePump(Options.Create(new HttpSysOptions()), loggerFactory ?? new LoggerFactory(), new AuthenticationSchemeProvider(Options.Create(new AuthenticationOptions())));
+    internal static MessagePump CreatePump(ILoggerFactory loggerFactory = null) =>
+        new MessagePump(
+            Options.Create(new HttpSysOptions()),
+            loggerFactory ?? new LoggerFactory(),
+            new AuthenticationSchemeProvider(Options.Create(new AuthenticationOptions()))
+        );
 
-    internal static MessagePump CreatePump(Action<HttpSysOptions> configureOptions, ILoggerFactory loggerFactory = null)
+    internal static MessagePump CreatePump(
+        Action<HttpSysOptions> configureOptions,
+        ILoggerFactory loggerFactory = null
+    )
     {
         var options = new HttpSysOptions();
         configureOptions(options);
-        return new MessagePump(Options.Create(options), loggerFactory ?? new LoggerFactory(), new AuthenticationSchemeProvider(Options.Create(new AuthenticationOptions())));
+        return new MessagePump(
+            Options.Create(options),
+            loggerFactory ?? new LoggerFactory(),
+            new AuthenticationSchemeProvider(Options.Create(new AuthenticationOptions()))
+        );
     }
 
-    internal static IServer CreateDynamicHttpServer(string basePath, out string root, out string baseAddress, Action<HttpSysOptions> configureOptions, RequestDelegate app)
+    internal static IServer CreateDynamicHttpServer(
+        string basePath,
+        out string root,
+        out string baseAddress,
+        Action<HttpSysOptions> configureOptions,
+        RequestDelegate app
+    )
     {
         var prefix = UrlPrefix.Create("http", "localhost", "0", basePath);
 

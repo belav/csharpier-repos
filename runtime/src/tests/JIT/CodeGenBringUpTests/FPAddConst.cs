@@ -6,20 +6,26 @@
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_FPAddConst
 {
     const int Pass = 100;
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static float FPAddConst(float x) { return x+1; }
+    public static float FPAddConst(float x)
+    {
+        return x + 1;
+    }
 
     [Fact]
     public static int TestEntryPoint()
     {
         float y = FPAddConst(1f);
         Console.WriteLine(y);
-        if (System.Math.Abs(y-2f) <= Single.Epsilon) return Pass;
-        else return Fail;
+        if (System.Math.Abs(y - 2f) <= Single.Epsilon)
+            return Pass;
+        else
+            return Fail;
     }
 }

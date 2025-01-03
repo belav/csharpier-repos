@@ -27,7 +27,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-namespace Microsoft.Build.Framework {
-	public delegate void AnyEventHandler (object sender, BuildEventArgs e);
+namespace Microsoft.Build.Framework
+{
+    public delegate void AnyEventHandler(object sender, BuildEventArgs e);
 }
-

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,19 +35,25 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.DynamicData
 {
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public interface IDynamicDataSource : IDataSource
-	{
-		bool AutoGenerateWhereClause { get; set; }
-		Type ContextType { get; set; }
-		bool EnableDelete { get; set; }
-		bool EnableInsert { get; set; }
-		bool EnableUpdate { get; set; }
-		string EntitySetName { get; set; }
-		string Where { get; set; }
-		ParameterCollection WhereParameters { get; }
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public interface IDynamicDataSource : IDataSource
+    {
+        bool AutoGenerateWhereClause { get; set; }
+        Type ContextType { get; set; }
+        bool EnableDelete { get; set; }
+        bool EnableInsert { get; set; }
+        bool EnableUpdate { get; set; }
+        string EntitySetName { get; set; }
+        string Where { get; set; }
+        ParameterCollection WhereParameters { get; }
 
-		event EventHandler<DynamicValidatorEventArgs> Exception;
-	}
+        event EventHandler<DynamicValidatorEventArgs> Exception;
+    }
 }

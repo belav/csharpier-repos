@@ -124,7 +124,10 @@ namespace System.Xml.Linq.Tests
             ValidateAnnotations(xo, new Dictionary<string, string>[] { d });
 
             Assert.Equal(d, xo.Annotation<Dictionary<string, string>>());
-            Assert.Equal(d, (Dictionary<string, string>)xo.Annotation(typeof(Dictionary<string, string>)));
+            Assert.Equal(
+                d,
+                (Dictionary<string, string>)xo.Annotation(typeof(Dictionary<string, string>))
+            );
             Assert.Equal(d, xo.Annotation<object>());
             Assert.Equal(d, xo.Annotation(typeof(object)));
         }
@@ -184,17 +187,29 @@ namespace System.Xml.Linq.Tests
         [MemberData(nameof(GetXObjects))]
         public void AddNull(XObject xo)
         {
-            AssertExtensions.Throws<ArgumentNullException>("annotation", () => xo.AddAnnotation(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "annotation",
+                () => xo.AddAnnotation(null)
+            );
             Assert.Null(xo.Annotation<object>());
-            AssertExtensions.Throws<ArgumentNullException>("annotation", () => xo.AddAnnotation(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "annotation",
+                () => xo.AddAnnotation(null)
+            );
         }
 
         [Theory]
         [MemberData(nameof(GetXObjects))]
         public void RemoveNull(XObject xo)
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => xo.RemoveAnnotations(null));
-            AssertExtensions.Throws<ArgumentNullException>("type", () => xo.RemoveAnnotations(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => xo.RemoveAnnotations(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => xo.RemoveAnnotations(null)
+            );
         }
 
         [Theory]
@@ -217,9 +232,15 @@ namespace System.Xml.Linq.Tests
         [MemberData(nameof(GetXObjects))]
         public void AddNullString(XObject xo)
         {
-            AssertExtensions.Throws<ArgumentNullException>("annotation", () => xo.AddAnnotation((string)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "annotation",
+                () => xo.AddAnnotation((string)null)
+            );
             Assert.Null(xo.Annotation<object>());
-            AssertExtensions.Throws<ArgumentNullException>("annotation", () => xo.AddAnnotation((string)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "annotation",
+                () => xo.AddAnnotation((string)null)
+            );
         }
 
         [Theory]
@@ -342,7 +363,7 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public void AddAnnotationToParentAndChildAndValIdate()
         {
-              // Add annotation to parent and child, valIdate annotations for each XObjects
+            // Add annotation to parent and child, valIdate annotations for each XObjects
             string str1 = "root 1111";
             string str2 = "element 1111";
 
@@ -412,26 +433,41 @@ namespace System.Xml.Linq.Tests
             yield return new object[] { new XComment("comment1") };
             yield return new object[] { new XProcessingInstruction("pi1", "pi1pi1pi1pi1pi1") };
             yield return new object[] { new XCData("cdata cdata") };
-            yield return new object[] { new XDocumentType("dtd1", "dtd1dtd1dtd1", "dtd1dtd1", "dtd1dtd1dtd1dtd1") };
+            yield return new object[]
+            {
+                new XDocumentType("dtd1", "dtd1dtd1dtd1", "dtd1dtd1", "dtd1dtd1dtd1dtd1"),
+            };
         }
 
         public static object[] GetObjects()
         {
             object[] aObject = new object[]
             {
-                new A(), new B(), new DifferentNamespace.A(), new DifferentNamespace.B(), "stringstring", 12345,
-                new Dictionary<string, string>(), new XDocument(), new XAttribute("attr", "val"), new XElement("elem1"),
-                new XText("text1 text1"), new XComment("comment1 comment1"),
-                new XProcessingInstruction("pi1", "pi1pi1pi1pi1pi1"), new XCData("cdata cdata"),
-                new XDeclaration("234", "UTF-8", "yes"), XNamespace.Xmlns,
+                new A(),
+                new B(),
+                new DifferentNamespace.A(),
+                new DifferentNamespace.B(),
+                "stringstring",
+                12345,
+                new Dictionary<string, string>(),
+                new XDocument(),
+                new XAttribute("attr", "val"),
+                new XElement("elem1"),
+                new XText("text1 text1"),
+                new XComment("comment1 comment1"),
+                new XProcessingInstruction("pi1", "pi1pi1pi1pi1pi1"),
+                new XCData("cdata cdata"),
+                new XDeclaration("234", "UTF-8", "yes"),
+                XNamespace.Xmlns,
                 //new XStreamingElement("elementSequence"),
-                new XDocumentType("dtd1", "dtd1dtd1dtd1", "dtd1 dtd1", "dtd1 dtd1 dtd1 ")
+                new XDocumentType("dtd1", "dtd1dtd1dtd1", "dtd1 dtd1", "dtd1 dtd1 dtd1 "),
             };
 
             return aObject;
         }
 
-        private static void ValidateAnnotations<T>(XObject xo, T[] values) where T : class
+        private static void ValidateAnnotations<T>(XObject xo, T[] values)
+            where T : class
         {
             //
             // use inefficient n^2 algorithm, which is OK for our testing purposes
@@ -476,7 +512,8 @@ namespace System.Xml.Linq.Tests
             }
         }
 
-        private static int CountAnnotations<T>(XObject xo) where T : class
+        private static int CountAnnotations<T>(XObject xo)
+            where T : class
         {
             int count = xo.Annotations(typeof(T)).Count();
             Assert.Equal(count, xo.Annotations<T>().Count());
@@ -498,7 +535,8 @@ namespace System.Xml.Linq.Tests
             xo.RemoveAnnotations(type);
         }
 
-        private static void RemoveAnnotations<T>(XObject xo) where T : class
+        private static void RemoveAnnotations<T>(XObject xo)
+            where T : class
         {
             xo.RemoveAnnotations<T>();
         }
@@ -507,29 +545,40 @@ namespace System.Xml.Linq.Tests
         {
             Type[] types = new Type[]
             {
-                typeof(string), typeof(int), typeof(Dictionary<string, string>), typeof(A), typeof(B),
-                typeof(DifferentNamespace.A), typeof(DifferentNamespace.B), typeof(XAttribute), typeof(XElement),
-                typeof(Extensions), typeof(XDocument), typeof(XText), typeof(XName), typeof(XComment),
-                typeof(XProcessingInstruction), typeof(XCData), typeof(XDeclaration), typeof(XNamespace),
+                typeof(string),
+                typeof(int),
+                typeof(Dictionary<string, string>),
+                typeof(A),
+                typeof(B),
+                typeof(DifferentNamespace.A),
+                typeof(DifferentNamespace.B),
+                typeof(XAttribute),
+                typeof(XElement),
+                typeof(Extensions),
+                typeof(XDocument),
+                typeof(XText),
+                typeof(XName),
+                typeof(XComment),
+                typeof(XProcessingInstruction),
+                typeof(XCData),
+                typeof(XDeclaration),
+                typeof(XNamespace),
                 //typeof(XStreamingElement),
-                typeof(XDocumentType)
+                typeof(XDocumentType),
             };
 
             return types;
         }
 
-        public class A
-        {
-        }
+        public class A { }
 
-        public class B : A
-        {
-        }
+        public class B : A { }
     }
 
     namespace DifferentNamespace
     {
         public class A { }
+
         public class B : A { }
     }
 }

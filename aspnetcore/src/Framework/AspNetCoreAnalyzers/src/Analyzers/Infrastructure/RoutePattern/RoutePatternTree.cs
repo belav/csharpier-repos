@@ -10,7 +10,8 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.RoutePattern;
 
-internal sealed class RoutePatternTree : EmbeddedSyntaxTree<RoutePatternKind, RoutePatternNode, RoutePatternCompilationUnit>
+internal sealed class RoutePatternTree
+    : EmbeddedSyntaxTree<RoutePatternKind, RoutePatternNode, RoutePatternCompilationUnit>
 {
     public readonly ImmutableArray<RouteParameter> RouteParameters;
 
@@ -18,7 +19,8 @@ internal sealed class RoutePatternTree : EmbeddedSyntaxTree<RoutePatternKind, Ro
         VirtualCharSequence text,
         RoutePatternCompilationUnit root,
         ImmutableArray<EmbeddedDiagnostic> diagnostics,
-        ImmutableArray<RouteParameter> routeParameters)
+        ImmutableArray<RouteParameter> routeParameters
+    )
         : base(text, root, diagnostics)
     {
         RouteParameters = routeParameters;
@@ -52,7 +54,15 @@ internal sealed class RoutePatternTree : EmbeddedSyntaxTree<RoutePatternKind, Ro
 
 internal readonly struct RouteParameter
 {
-    public RouteParameter(string name, bool encodeSlashes, string? defaultValue, bool isOptional, bool isCatchAll, ImmutableArray<string> policies, TextSpan span)
+    public RouteParameter(
+        string name,
+        bool encodeSlashes,
+        string? defaultValue,
+        bool isOptional,
+        bool isCatchAll,
+        ImmutableArray<string> policies,
+        TextSpan span
+    )
     {
         Name = name;
         EncodeSlashes = encodeSlashes;

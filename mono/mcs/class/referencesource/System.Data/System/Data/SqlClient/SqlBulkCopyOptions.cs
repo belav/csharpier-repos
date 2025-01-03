@@ -6,21 +6,18 @@
 // <owner current="true" primary="false">blained</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.SqlClient {
-
+namespace System.Data.SqlClient
+{
     [Flags]
-    public enum SqlBulkCopyOptions {
-        Default             = 0,
-        KeepIdentity        = 1 << 0,
-        CheckConstraints    = 1 << 1,
-        TableLock           = 1 << 2,
-        KeepNulls           = 1 << 3,
-        FireTriggers        = 1 << 4,
+    public enum SqlBulkCopyOptions
+    {
+        Default = 0,
+        KeepIdentity = 1 << 0,
+        CheckConstraints = 1 << 1,
+        TableLock = 1 << 2,
+        KeepNulls = 1 << 3,
+        FireTriggers = 1 << 4,
         UseInternalTransaction = 1 << 5,
         AllowEncryptedValueModifications = 1 << 6,
     }
 }
-
-
-
-

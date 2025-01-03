@@ -15,18 +15,22 @@ public interface ICustomService
 public class OkCustomService : ICustomService
 {
     public string Process() => "OK";
+
     public override string ToString() => Process();
 }
 
 public class BadCustomService : ICustomService
 {
     public string Process() => "NOT OK";
+
     public override string ToString() => Process();
 }
 
 public class DefaultCustomService : ICustomService
 {
     public string Process() => "DEFAULT";
+
     public override string ToString() => Process();
+
     public static DefaultCustomService Instance => new DefaultCustomService();
 }

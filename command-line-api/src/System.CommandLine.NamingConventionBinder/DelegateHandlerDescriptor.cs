@@ -17,17 +17,15 @@ internal class DelegateHandlerDescriptor : HandlerDescriptor
 
     public override BindingHandler GetCommandHandler()
     {
-        return new ModelBindingCommandHandler(
-            _handlerDelegate,
-            this);
+        return new ModelBindingCommandHandler(_handlerDelegate, this);
     }
 
     public override ModelDescriptor? Parent => null;
 
     private protected override IEnumerable<ParameterDescriptor> InitializeParameterDescriptors()
     {
-        return _handlerDelegate.Method
-                               .GetParameters()
-                               .Select(p => new ParameterDescriptor(p, this));
+        return _handlerDelegate
+            .Method.GetParameters()
+            .Select(p => new ParameterDescriptor(p, this));
     }
 }

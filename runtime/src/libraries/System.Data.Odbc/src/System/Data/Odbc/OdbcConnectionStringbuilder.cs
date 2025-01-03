@@ -23,12 +23,15 @@ namespace System.Data.Odbc
         private static readonly string[] s_validKeywords = new string[2]
         {
             DbConnectionStringKeywords.Dsn, // (int)Keywords.Dsn
-            DbConnectionStringKeywords.Driver // (int)Keywords.Driver
+            DbConnectionStringKeywords.Driver, // (int)Keywords.Driver
         };
-        private static readonly Dictionary<string, Keywords> s_keywords = new Dictionary<string, Keywords>(2, StringComparer.OrdinalIgnoreCase)
+        private static readonly Dictionary<string, Keywords> s_keywords = new Dictionary<
+            string,
+            Keywords
+        >(2, StringComparer.OrdinalIgnoreCase)
         {
             { DbConnectionStringKeywords.Driver, Keywords.Driver },
-            { DbConnectionStringKeywords.Dsn, Keywords.Dsn }
+            { DbConnectionStringKeywords.Dsn, Keywords.Dsn },
         };
 
         private string[]? _knownKeywords;
@@ -36,11 +39,11 @@ namespace System.Data.Odbc
         private string _dsn = DbConnectionStringDefaults.Dsn;
         private string _driver = DbConnectionStringDefaults.Driver;
 
-        public OdbcConnectionStringBuilder() : this(null)
-        {
-        }
+        public OdbcConnectionStringBuilder()
+            : this(null) { }
 
-        public OdbcConnectionStringBuilder(string? connectionString) : base(true)
+        public OdbcConnectionStringBuilder(string? connectionString)
+            : base(true)
         {
             if (!string.IsNullOrEmpty(connectionString))
             {
@@ -74,8 +77,12 @@ namespace System.Data.Odbc
                     {
                         switch (index)
                         {
-                            case Keywords.Driver: Driver = ConvertToString(value); break;
-                            case Keywords.Dsn: Dsn = ConvertToString(value); break;
+                            case Keywords.Driver:
+                                Driver = ConvertToString(value);
+                                break;
+                            case Keywords.Dsn:
+                                Dsn = ConvertToString(value);
+                                break;
                             default:
                                 Debug.Fail("unexpected keyword");
                                 throw ADP.KeywordNotSupported(keyword);
@@ -198,8 +205,10 @@ namespace System.Data.Odbc
         {
             switch (index)
             {
-                case Keywords.Driver: return Driver;
-                case Keywords.Dsn: return Dsn;
+                case Keywords.Driver:
+                    return Driver;
+                case Keywords.Dsn:
+                    return Dsn;
                 default:
                     Debug.Fail("unexpected keyword");
                     throw ADP.KeywordNotSupported(s_validKeywords[(int)index]);
@@ -225,6 +234,7 @@ namespace System.Data.Odbc
             }
             return false;
         }
+
         private void Reset(Keywords index)
         {
             switch (index)

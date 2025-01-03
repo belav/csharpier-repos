@@ -4,7 +4,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -31,19 +31,12 @@ using System;
 
 namespace Microsoft.Build.Framework
 {
-	public interface ITask
-	{
-		bool Execute ();
+    public interface ITask
+    {
+        bool Execute();
 
-		IBuildEngine BuildEngine {
-			get;
-			set;
-		}
+        IBuildEngine BuildEngine { get; set; }
 
-		ITaskHost HostObject {
-			get;
-			set;
-		}
-	}
+        ITaskHost HostObject { get; set; }
+    }
 }
-

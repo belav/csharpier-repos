@@ -8,7 +8,7 @@ using System.ComponentModel.Composition.Primitives;
 using System.Linq;
 
 namespace System.Diagnostics.Contracts
-{ 
+{
 #if CONTRACTS_FULL
     [ContractClassFor(typeof(ComposablePart))]
     internal abstract class ComposablePartContract : ComposablePart
@@ -57,7 +57,12 @@ namespace System.Diagnostics.Contracts
             get
             {
                 Contract.Ensures(Contract.Result<IEnumerable<ExportDefinition>>() != null);
-                Contract.Ensures(Contract.ForAll(Contract.Result<IEnumerable<ExportDefinition>>(), e => e != null));
+                Contract.Ensures(
+                    Contract.ForAll(
+                        Contract.Result<IEnumerable<ExportDefinition>>(),
+                        e => e != null
+                    )
+                );
 
                 throw new NotImplementedException();
             }
@@ -68,7 +73,12 @@ namespace System.Diagnostics.Contracts
             get
             {
                 Contract.Ensures(Contract.Result<IEnumerable<ImportDefinition>>() != null);
-                Contract.Ensures(Contract.ForAll(Contract.Result<IEnumerable<ImportDefinition>>(), i => i != null));
+                Contract.Ensures(
+                    Contract.ForAll(
+                        Contract.Result<IEnumerable<ImportDefinition>>(),
+                        i => i != null
+                    )
+                );
 
                 throw new NotImplementedException();
             }
@@ -86,11 +96,11 @@ namespace System.Diagnostics.Contracts
     {
         public string DisplayName
         {
-            get 
+            get
             {
                 Contract.Ensures(!string.IsNullOrEmpty(Contract.Result<string>()));
-                
-                throw new NotImplementedException(); 
+
+                throw new NotImplementedException();
             }
         }
 

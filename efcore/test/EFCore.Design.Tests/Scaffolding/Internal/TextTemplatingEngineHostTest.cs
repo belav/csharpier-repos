@@ -9,7 +9,10 @@ using Engine = Mono.TextTemplating.TemplatingEngine;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
-[PlatformSkipCondition(TestUtilities.Xunit.TestPlatform.Linux | TestUtilities.Xunit.TestPlatform.Mac, SkipReason = "CI time out")]
+[PlatformSkipCondition(
+    TestUtilities.Xunit.TestPlatform.Linux | TestUtilities.Xunit.TestPlatform.Mac,
+    SkipReason = "CI time out"
+)]
 public class TextTemplatingEngineHostTest
 {
     public static readonly Engine _engine = new();
@@ -18,13 +21,13 @@ public class TextTemplatingEngineHostTest
     public void Service_works()
     {
         var host = new TextTemplatingEngineHost(
-            new ServiceCollection()
-                .AddSingleton("Hello, Services!")
-                .BuildServiceProvider());
+            new ServiceCollection().AddSingleton("Hello, Services!").BuildServiceProvider()
+        );
 
         var result = _engine.ProcessTemplate(
             @"<#@ template hostSpecific=""true"" #><#= ((IServiceProvider)Host).GetService(typeof(string)) #>",
-            host);
+            host
+        );
 
         Assert.Empty(host.Errors);
         Assert.Equal("Hello, Services!", result);
@@ -33,11 +36,12 @@ public class TextTemplatingEngineHostTest
     [ConditionalFact]
     public void Session_works()
     {
-        var host = new TextTemplatingEngineHost { Session = new TextTemplatingSession { ["Value"] = "Hello, Session!" } };
+        var host = new TextTemplatingEngineHost
+        {
+            Session = new TextTemplatingSession { ["Value"] = "Hello, Session!" },
+        };
 
-        var result = _engine.ProcessTemplate(
-            @"<#= Session[""Value""] #>",
-            host);
+        var result = _engine.ProcessTemplate(@"<#= Session[""Value""] #>", host);
 
         Assert.Empty(host.Errors);
         Assert.Equal("Hello, Session!", result);
@@ -46,11 +50,15 @@ public class TextTemplatingEngineHostTest
     [ConditionalFact]
     public void Session_works_with_parameter()
     {
-        var host = new TextTemplatingEngineHost { Session = new TextTemplatingSession { ["Value"] = "Hello, Session!" } };
+        var host = new TextTemplatingEngineHost
+        {
+            Session = new TextTemplatingSession { ["Value"] = "Hello, Session!" },
+        };
 
         var result = _engine.ProcessTemplate(
             @"<#@ parameter name=""Value"" type=""System.String"" #><#= Value #>",
-            host);
+            host
+        );
 
         Assert.Empty(host.Errors);
         Assert.Equal("Hello, Session!", result);
@@ -60,15 +68,11 @@ public class TextTemplatingEngineHostTest
     public void Include_works()
     {
         using var dir = new TempDirectory();
-        File.WriteAllText(
-            Path.Combine(dir, "test.ttinclude"),
-            "Hello, Include!");
+        File.WriteAllText(Path.Combine(dir, "test.ttinclude"), "Hello, Include!");
 
         var host = new TextTemplatingEngineHost { TemplateFile = Path.Combine(dir, "test.tt") };
 
-        var result = _engine.ProcessTemplate(
-            @"<#@ include file=""test.ttinclude"" #>",
-            host);
+        var result = _engine.ProcessTemplate(@"<#@ include file=""test.ttinclude"" #>", host);
 
         Assert.Empty(host.Errors);
         Assert.Equal("Hello, Include!", result);
@@ -79,9 +83,7 @@ public class TextTemplatingEngineHostTest
     {
         var host = new TextTemplatingEngineHost();
 
-        _engine.ProcessTemplate(
-            @"<# Error(""Hello, Error!""); #>",
-            host);
+        _engine.ProcessTemplate(@"<# Error(""Hello, Error!""); #>", host);
 
         var error = Assert.Single(host.Errors.Cast<CompilerError>());
         Assert.Equal("Hello, Error!", error.ErrorText);
@@ -93,9 +95,8 @@ public class TextTemplatingEngineHostTest
         var host = new TextTemplatingEngineHost();
 
         var ex = Assert.Throws<FileNotFoundException>(
-            () => _engine.ProcessTemplate(
-                @"<#@ test processor=""TestDirectiveProcessor"" #>",
-                host));
+            () => _engine.ProcessTemplate(@"<#@ test processor=""TestDirectiveProcessor"" #>", host)
+        );
 
         Assert.Equal(DesignStrings.UnknownDirectiveProcessor("TestDirectiveProcessor"), ex.Message);
     }
@@ -109,7 +110,8 @@ public class TextTemplatingEngineHostTest
 
         var result = _engine.ProcessTemplate(
             @"<#@ template hostSpecific=""true"" #><#= Host.ResolvePath(""data.json"") #>",
-            host);
+            host
+        );
 
         Assert.Empty(host.Errors);
         Assert.Equal(Path.Combine(dir, "data.json"), result);
@@ -120,9 +122,7 @@ public class TextTemplatingEngineHostTest
     {
         var host = new TextTemplatingEngineHost();
 
-        _engine.ProcessTemplate(
-            @"<#@ output extension="".txt"" encoding=""us-ascii"" #>",
-            host);
+        _engine.ProcessTemplate(@"<#@ output extension="".txt"" encoding=""us-ascii"" #>", host);
 
         Assert.Empty(host.Errors);
         Assert.Equal(".txt", host.Extension);
@@ -136,7 +136,8 @@ public class TextTemplatingEngineHostTest
 
         var result = _engine.ProcessTemplate(
             @"<#@ assembly name=""Microsoft.EntityFrameworkCore"" #><#= nameof(Microsoft.EntityFrameworkCore.DbContext) #>",
-            host);
+            host
+        );
 
         Assert.Empty(host.Errors);
         Assert.Equal("DbContext", result);

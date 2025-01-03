@@ -19,10 +19,10 @@ namespace System.ServiceModel.Channels
         /// from an <see cref="HttpResponseMessage"/> instance.
         /// </summary>
         /// <remarks>
-        /// The <see cref="Message"/> instance can be read, written and copied 
+        /// The <see cref="Message"/> instance can be read, written and copied
         /// just as a traditional <see cref="ByteStreamMessage"/> instance. The
         /// <see cref="Message"/> instance can also "read" to retrieve the original
-        /// <see cref="HttpResponseMessage"/> instance by calling the 
+        /// <see cref="HttpResponseMessage"/> instance by calling the
         /// <see cref="MessageExtensionMethods.ToHttpResponseMessage">
         /// Message.ToHttpResponseMessage()</see> extension method.
         /// </remarks>
@@ -38,7 +38,7 @@ namespace System.ServiceModel.Channels
 
             Message message = ByteStreamMessage.CreateMessage(httpResponseMessage, null);
             message.ConfigureAsHttpMessage(httpResponseMessage);
-            
+
             return message;
         }
     }

@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class SimpleNullableDependentKeyValueFactory<TKey> : DependentKeyValueFactory<TKey>, IDependentKeyValueFactory<TKey>
+public class SimpleNullableDependentKeyValueFactory<TKey>
+    : DependentKeyValueFactory<TKey>,
+        IDependentKeyValueFactory<TKey>
     where TKey : struct
 {
     private readonly PropertyAccessors _propertyAccessors;
@@ -24,7 +26,8 @@ public class SimpleNullableDependentKeyValueFactory<TKey> : DependentKeyValueFac
     /// </summary>
     public SimpleNullableDependentKeyValueFactory(
         IForeignKey foreignKey,
-        IPrincipalKeyValueFactory<TKey> principalKeyValueFactory)
+        IPrincipalKeyValueFactory<TKey> principalKeyValueFactory
+    )
         : base(foreignKey, principalKeyValueFactory)
     {
         var property = foreignKey.Properties.Single();
@@ -66,9 +69,13 @@ public class SimpleNullableDependentKeyValueFactory<TKey> : DependentKeyValueFac
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool TryCreateFromCurrentValues(IUpdateEntry entry, out TKey key)
-        => HandleNullableValue(
-            ((Func<InternalEntityEntry, TKey?>)_propertyAccessors.CurrentValueGetter)((InternalEntityEntry)entry), out key);
+    public override bool TryCreateFromCurrentValues(IUpdateEntry entry, out TKey key) =>
+        HandleNullableValue(
+            ((Func<InternalEntityEntry, TKey?>)_propertyAccessors.CurrentValueGetter)(
+                (InternalEntityEntry)entry
+            ),
+            out key
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -76,10 +83,17 @@ public class SimpleNullableDependentKeyValueFactory<TKey> : DependentKeyValueFac
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromPreStoreGeneratedCurrentValues(IUpdateEntry entry, out TKey key)
-        => HandleNullableValue(
-            ((Func<InternalEntityEntry, TKey?>)_propertyAccessors.PreStoreGeneratedCurrentValueGetter)((InternalEntityEntry)entry),
-            out key);
+    public virtual bool TryCreateFromPreStoreGeneratedCurrentValues(
+        IUpdateEntry entry,
+        out TKey key
+    ) =>
+        HandleNullableValue(
+            (
+                (Func<InternalEntityEntry, TKey?>)
+                    _propertyAccessors.PreStoreGeneratedCurrentValueGetter
+            )((InternalEntityEntry)entry),
+            out key
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -87,9 +101,13 @@ public class SimpleNullableDependentKeyValueFactory<TKey> : DependentKeyValueFac
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool TryCreateFromOriginalValues(IUpdateEntry entry, out TKey key)
-        => HandleNullableValue(
-            ((Func<InternalEntityEntry, TKey?>)_propertyAccessors.OriginalValueGetter!)((InternalEntityEntry)entry), out key);
+    public override bool TryCreateFromOriginalValues(IUpdateEntry entry, out TKey key) =>
+        HandleNullableValue(
+            ((Func<InternalEntityEntry, TKey?>)_propertyAccessors.OriginalValueGetter!)(
+                (InternalEntityEntry)entry
+            ),
+            out key
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -97,9 +115,13 @@ public class SimpleNullableDependentKeyValueFactory<TKey> : DependentKeyValueFac
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromRelationshipSnapshot(IUpdateEntry entry, out TKey key)
-        => HandleNullableValue(
-            ((Func<InternalEntityEntry, TKey?>)_propertyAccessors.RelationshipSnapshotGetter)((InternalEntityEntry)entry), out key);
+    public virtual bool TryCreateFromRelationshipSnapshot(IUpdateEntry entry, out TKey key) =>
+        HandleNullableValue(
+            ((Func<InternalEntityEntry, TKey?>)_propertyAccessors.RelationshipSnapshotGetter)(
+                (InternalEntityEntry)entry
+            ),
+            out key
+        );
 
     private static bool HandleNullableValue(TKey? value, out TKey key)
     {

@@ -30,7 +30,9 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
     [ExportWorkspaceService(typeof(ISymbolNavigationService), ServiceLayer.Host), Shared]
-    internal partial class VisualStudioSymbolNavigationService : ForegroundThreadAffinitizedObject, ISymbolNavigationService
+    internal partial class VisualStudioSymbolNavigationService
+        : ForegroundThreadAffinitizedObject,
+            ISymbolNavigationService
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IGlobalOptionService _globalOptions;
@@ -46,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IThreadingContext threadingContext,
             IVsEditorAdaptersFactoryService editorAdaptersFactory,
             IMetadataAsSourceFileService metadataAsSourceFileService,
-            VisualStudioWorkspace workspace)
+            VisualStudioWorkspace workspace
+        )
             : base(threadingContext)
         {
             _serviceProvider = serviceProvider;
@@ -57,7 +60,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         }
 
         public async Task<INavigableLocation?> GetNavigableLocationAsync(
-            ISymbol symbol, Project project, CancellationToken cancellationToken)
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             if (project == null || symbol == null)
                 return null;
@@ -67,18 +73,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             // Prefer visible source locations if possible.
             var sourceLocations = symbol.Locations.Where(loc => loc.IsInSource);
-            var visibleSourceLocations = sourceLocations.Where(loc => loc.IsVisibleSourceLocation());
-            var sourceLocation = visibleSourceLocations.FirstOrDefault() ?? sourceLocations.FirstOrDefault();
+            var visibleSourceLocations = sourceLocations.Where(loc =>
+                loc.IsVisibleSourceLocation()
+            );
+            var sourceLocation =
+                visibleSourceLocations.FirstOrDefault() ?? sourceLocations.FirstOrDefault();
 
             if (sourceLocation != null)
             {
                 var targetDocument = solution.GetDocument(sourceLocation.SourceTree);
                 if (targetDocument != null)
                 {
-                    var navigationService = solution.Services.GetRequiredService<IDocumentNavigationService>();
-                    return await navigationService.GetLocationForSpanAsync(
-                        solution.Workspace, targetDocument.Id, sourceLocation.SourceSpan,
-                        allowInvalidSpan: false, cancellationToken).ConfigureAwait(false);
+                    var navigationService =
+                        solution.Services.GetRequiredService<IDocumentNavigationService>();
+                    return await navigationService
+                        .GetLocationForSpanAsync(
+                            solution.Workspace,
+                            targetDocument.Id,
+                            sourceLocation.SourceSpan,
+                            allowInvalidSpan: false,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
 
@@ -94,18 +110,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             var assemblyName = symbol.ContainingAssembly.Identity.Name;
             if (docCommentId != null && assemblyName != null)
             {
-                foreach (var lazyService in solution.Services.ExportProvider.GetExports<ICrossLanguageSymbolNavigationService>())
+                foreach (
+                    var lazyService in solution.Services.ExportProvider.GetExports<ICrossLanguageSymbolNavigationService>()
+                )
                 {
                     var crossLanguageService = lazyService.Value;
-                    var crossLanguageLocation = await crossLanguageService.TryGetNavigableLocationAsync(
-                        assemblyName, docCommentId, cancellationToken).ConfigureAwait(false);
+                    var crossLanguageLocation = await crossLanguageService
+                        .TryGetNavigableLocationAsync(assemblyName, docCommentId, cancellationToken)
+                        .ConfigureAwait(false);
                     if (crossLanguageLocation != null)
                         return crossLanguageLocation;
                 }
             }
 
             // Should we prefer navigating to the Object Browser over metadata-as-source?
-            if (_globalOptions.GetOption(VisualStudioNavigationOptionsStorage.NavigateToObjectBrowser, project.Language))
+            if (
+                _globalOptions.GetOption(
+                    VisualStudioNavigationOptionsStorage.NavigateToObjectBrowser,
+                    project.Language
+                )
+            )
             {
                 var libraryService = project.Services.GetService<ILibraryService>();
                 if (libraryService == null)
@@ -113,88 +137,168 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     return null;
                 }
 
-                var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
-                var navInfo = libraryService.NavInfoFactory.CreateForSymbol(symbol, project, compilation);
+                var compilation = await project
+                    .GetCompilationAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var navInfo = libraryService.NavInfoFactory.CreateForSymbol(
+                    symbol,
+                    project,
+                    compilation
+                );
                 navInfo ??= libraryService.NavInfoFactory.CreateForProject(project);
 
                 if (navInfo != null)
                 {
-                    var navigationTool = _serviceProvider.GetServiceOnMainThread<SVsObjBrowser, IVsNavigationTool>();
-                    return new NavigableLocation(async (options, cancellationToken) =>
-                    {
-                        await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-                        return navigationTool.NavigateToNavInfo(navInfo) == VSConstants.S_OK;
-                    });
+                    var navigationTool = _serviceProvider.GetServiceOnMainThread<
+                        SVsObjBrowser,
+                        IVsNavigationTool
+                    >();
+                    return new NavigableLocation(
+                        async (options, cancellationToken) =>
+                        {
+                            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                                cancellationToken
+                            );
+                            return navigationTool.NavigateToNavInfo(navInfo) == VSConstants.S_OK;
+                        }
+                    );
                 }
 
                 // Note: we'll fallback to Metadata-As-Source if we fail to get IVsNavInfo, but that should never happen.
             }
 
             // Generate new source or retrieve existing source for the symbol in question
-            return await GetNavigableLocationForMetadataAsync(project, symbol, cancellationToken).ConfigureAwait(false);
+            return await GetNavigableLocationForMetadataAsync(project, symbol, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         private async Task<INavigableLocation?> GetNavigableLocationForMetadataAsync(
-            Project project, ISymbol symbol, CancellationToken cancellationToken)
+            Project project,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             var masOptions = _globalOptions.GetMetadataAsSourceOptions(project.Services);
 
-            var result = await _metadataAsSourceFileService.GetGeneratedFileAsync(_workspace, project, symbol, signaturesOnly: false, masOptions, cancellationToken).ConfigureAwait(false);
+            var result = await _metadataAsSourceFileService
+                .GetGeneratedFileAsync(
+                    _workspace,
+                    project,
+                    symbol,
+                    signaturesOnly: false,
+                    masOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            return new NavigableLocation(async (options, cancellationToken) =>
-            {
-                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-
-                var vsRunningDocumentTable4 = _serviceProvider.GetServiceOnMainThread<SVsRunningDocumentTable, IVsRunningDocumentTable4>();
-                var fileAlreadyOpen = vsRunningDocumentTable4.IsMonikerValid(result.FilePath);
-
-                var openDocumentService = _serviceProvider.GetServiceOnMainThread<SVsUIShellOpenDocument, IVsUIShellOpenDocument>();
-                openDocumentService.OpenDocumentViaProject(result.FilePath, VSConstants.LOGVIEWID.TextView_guid, out _, out _, out _, out var windowFrame);
-
-                var documentCookie = vsRunningDocumentTable4.GetDocumentCookie(result.FilePath);
-
-                var vsTextBuffer = (IVsTextBuffer)vsRunningDocumentTable4.GetDocumentData(documentCookie);
-
-                var textBuffer = _editorAdaptersFactory.GetDataBuffer(vsTextBuffer);
-
-                if (!fileAlreadyOpen)
+            return new NavigableLocation(
+                async (options, cancellationToken) =>
                 {
-                    ErrorHandler.ThrowOnFailure(windowFrame.SetProperty((int)__VSFPROPID5.VSFPROPID_IsProvisional, true));
-                    ErrorHandler.ThrowOnFailure(windowFrame.SetProperty((int)__VSFPROPID5.VSFPROPID_OverrideCaption, result.DocumentTitle));
-                    ErrorHandler.ThrowOnFailure(windowFrame.SetProperty((int)__VSFPROPID5.VSFPROPID_OverrideToolTip, result.DocumentTooltip));
+                    await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationToken
+                    );
+
+                    var vsRunningDocumentTable4 = _serviceProvider.GetServiceOnMainThread<
+                        SVsRunningDocumentTable,
+                        IVsRunningDocumentTable4
+                    >();
+                    var fileAlreadyOpen = vsRunningDocumentTable4.IsMonikerValid(result.FilePath);
+
+                    var openDocumentService = _serviceProvider.GetServiceOnMainThread<
+                        SVsUIShellOpenDocument,
+                        IVsUIShellOpenDocument
+                    >();
+                    openDocumentService.OpenDocumentViaProject(
+                        result.FilePath,
+                        VSConstants.LOGVIEWID.TextView_guid,
+                        out _,
+                        out _,
+                        out _,
+                        out var windowFrame
+                    );
+
+                    var documentCookie = vsRunningDocumentTable4.GetDocumentCookie(result.FilePath);
+
+                    var vsTextBuffer = (IVsTextBuffer)
+                        vsRunningDocumentTable4.GetDocumentData(documentCookie);
+
+                    var textBuffer = _editorAdaptersFactory.GetDataBuffer(vsTextBuffer);
+
+                    if (!fileAlreadyOpen)
+                    {
+                        ErrorHandler.ThrowOnFailure(
+                            windowFrame.SetProperty((int)__VSFPROPID5.VSFPROPID_IsProvisional, true)
+                        );
+                        ErrorHandler.ThrowOnFailure(
+                            windowFrame.SetProperty(
+                                (int)__VSFPROPID5.VSFPROPID_OverrideCaption,
+                                result.DocumentTitle
+                            )
+                        );
+                        ErrorHandler.ThrowOnFailure(
+                            windowFrame.SetProperty(
+                                (int)__VSFPROPID5.VSFPROPID_OverrideToolTip,
+                                result.DocumentTooltip
+                            )
+                        );
+                    }
+
+                    windowFrame.Show();
+
+                    var openedDocument = textBuffer
+                        ?.AsTextContainer()
+                        .GetRelatedDocuments()
+                        .FirstOrDefault();
+                    if (openedDocument != null)
+                    {
+                        var editorWorkspace = openedDocument.Project.Solution.Workspace;
+                        var navigationService =
+                            editorWorkspace.Services.GetRequiredService<IDocumentNavigationService>();
+
+                        await navigationService
+                            .TryNavigateToSpanAsync(
+                                this.ThreadingContext,
+                                editorWorkspace,
+                                openedDocument.Id,
+                                result.IdentifierLocation.SourceSpan,
+                                options with
+                                {
+                                    PreferProvisionalTab = true,
+                                },
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
+                    }
+
+                    return true;
                 }
-
-                windowFrame.Show();
-
-                var openedDocument = textBuffer?.AsTextContainer().GetRelatedDocuments().FirstOrDefault();
-                if (openedDocument != null)
-                {
-                    var editorWorkspace = openedDocument.Project.Solution.Workspace;
-                    var navigationService = editorWorkspace.Services.GetRequiredService<IDocumentNavigationService>();
-
-                    await navigationService.TryNavigateToSpanAsync(
-                        this.ThreadingContext,
-                        editorWorkspace,
-                        openedDocument.Id,
-                        result.IdentifierLocation.SourceSpan,
-                        options with { PreferProvisionalTab = true },
-                        cancellationToken).ConfigureAwait(false);
-                }
-
-                return true;
-            });
+            );
         }
 
-        public async Task<bool> TrySymbolNavigationNotifyAsync(ISymbol symbol, Project project, CancellationToken cancellationToken)
+        public async Task<bool> TrySymbolNavigationNotifyAsync(
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
             AssertIsForeground();
 
-            var definitionItem = symbol.ToNonClassifiedDefinitionItem(project.Solution, includeHiddenLocations: true);
+            var definitionItem = symbol.ToNonClassifiedDefinitionItem(
+                project.Solution,
+                includeHiddenLocations: true
+            );
             definitionItem.Properties.TryGetValue(DefinitionItem.RQNameKey1, out var rqName);
 
-            var result = await TryGetNavigationAPIRequiredArgumentsAsync(definitionItem, rqName, cancellationToken).ConfigureAwait(true);
+            var result = await TryGetNavigationAPIRequiredArgumentsAsync(
+                    definitionItem,
+                    rqName,
+                    cancellationToken
+                )
+                .ConfigureAwait(true);
             if (result is not var (hierarchy, itemID, navigationNotify))
                 return false;
 
@@ -202,35 +306,63 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 hierarchy,
                 itemID,
                 rqName,
-                out var navigationHandled);
+                out var navigationHandled
+            );
 
             return returnCode == VSConstants.S_OK && navigationHandled == 1;
         }
 
-        public async Task<(string filePath, LinePosition linePosition)?> GetExternalNavigationSymbolLocationAsync(
-            DefinitionItem definitionItem, CancellationToken cancellationToken)
+        public async Task<(
+            string filePath,
+            LinePosition linePosition
+        )?> GetExternalNavigationSymbolLocationAsync(
+            DefinitionItem definitionItem,
+            CancellationToken cancellationToken
+        )
         {
             definitionItem.Properties.TryGetValue(DefinitionItem.RQNameKey1, out var rqName1);
             definitionItem.Properties.TryGetValue(DefinitionItem.RQNameKey2, out var rqName2);
 
-            return await GetExternalNavigationLocationForSpecificSymbolAsync(definitionItem, rqName1, cancellationToken).ConfigureAwait(false) ??
-                   await GetExternalNavigationLocationForSpecificSymbolAsync(definitionItem, rqName2, cancellationToken).ConfigureAwait(false);
+            return await GetExternalNavigationLocationForSpecificSymbolAsync(
+                        definitionItem,
+                        rqName1,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+                ?? await GetExternalNavigationLocationForSpecificSymbolAsync(
+                        definitionItem,
+                        rqName2,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
         }
 
-        public async Task<(string filePath, LinePosition linePosition)?> GetExternalNavigationLocationForSpecificSymbolAsync(
-            DefinitionItem definitionItem, string? rqName, CancellationToken cancellationToken)
+        public async Task<(
+            string filePath,
+            LinePosition linePosition
+        )?> GetExternalNavigationLocationForSpecificSymbolAsync(
+            DefinitionItem definitionItem,
+            string? rqName,
+            CancellationToken cancellationToken
+        )
         {
             if (rqName == null)
                 return null;
 
             var values = await TryGetNavigationAPIRequiredArgumentsAsync(
-                definitionItem, rqName, cancellationToken).ConfigureAwait(false);
+                    definitionItem,
+                    rqName,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (values is not var (hierarchy, itemID, navigationNotify))
                 return null;
 
             var navigateToTextSpan = new Microsoft.VisualStudio.TextManager.Interop.TextSpan[1];
 
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
             var queryNavigateStatusCode = navigationNotify.QueryNavigateToSymbol(
                 hierarchy,
@@ -239,7 +371,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 out var navigateToHierarchy,
                 out var navigateToItem,
                 navigateToTextSpan,
-                out var wouldNavigate);
+                out var wouldNavigate
+            );
 
             if (queryNavigateStatusCode != VSConstants.S_OK || wouldNavigate != 1)
                 return null;
@@ -251,10 +384,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return (filePath, new LinePosition(lineNumber, charOffset));
         }
 
-        private async Task<(IVsHierarchy hierarchy, uint itemId, IVsSymbolicNavigationNotify navigationNotify)?> TryGetNavigationAPIRequiredArgumentsAsync(
+        private async Task<(
+            IVsHierarchy hierarchy,
+            uint itemId,
+            IVsSymbolicNavigationNotify navigationNotify
+        )?> TryGetNavigationAPIRequiredArgumentsAsync(
             DefinitionItem definitionItem,
             string? rqName,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (rqName == null)
                 return null;
@@ -273,11 +411,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // documents we consider to be "generated" to give external language services the best
             // chance of participating.
 
-            var generatedDocuments = documents.WhereAsArray(d => d.IsGeneratedCode(cancellationToken));
+            var generatedDocuments = documents.WhereAsArray(d =>
+                d.IsGeneratedCode(cancellationToken)
+            );
 
             var documentToUse = generatedDocuments.FirstOrDefault() ?? documents.First();
 
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
             if (!TryGetVsHierarchyAndItemId(documentToUse, out var hierarchy, out var itemID))
                 return null;
@@ -289,12 +431,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return (hierarchy, itemID, navigationNotify);
         }
 
-        private bool TryGetVsHierarchyAndItemId(Document document, [NotNullWhen(true)] out IVsHierarchy? hierarchy, out uint itemID)
+        private bool TryGetVsHierarchyAndItemId(
+            Document document,
+            [NotNullWhen(true)] out IVsHierarchy? hierarchy,
+            out uint itemID
+        )
         {
             AssertIsForeground();
 
-            if (document.Project.Solution.Workspace is VisualStudioWorkspace visualStudioWorkspace
-                && document.FilePath is object)
+            if (
+                document.Project.Solution.Workspace is VisualStudioWorkspace visualStudioWorkspace
+                && document.FilePath is object
+            )
             {
                 hierarchy = visualStudioWorkspace.GetHierarchy(document.Project.Id);
                 if (hierarchy is object)

@@ -12,13 +12,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE80.CodeInterface2))]
-    public sealed class CodeInterface : AbstractCodeType, EnvDTE.CodeInterface, EnvDTE80.CodeInterface2
+    public sealed class CodeInterface
+        : AbstractCodeType,
+            EnvDTE.CodeInterface,
+            EnvDTE80.CodeInterface2
     {
         internal static EnvDTE.CodeInterface Create(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
+            int? nodeKind
+        )
         {
             var element = new CodeInterface(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeInterface)ComAggregate.CreateAggregatedObject(element);
@@ -32,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
+            string name
+        )
         {
             var element = new CodeInterface(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeInterface)ComAggregate.CreateAggregatedObject(element);
@@ -42,26 +47,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKey, nodeKind)
-        {
-        }
+            int? nodeKind
+        )
+            : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         private CodeInterface(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind, name)
-        {
-        }
+            string name
+        )
+            : base(state, fileCodeModel, nodeKind, name) { }
 
         public override EnvDTE.vsCMElement Kind
         {
             get { return EnvDTE.vsCMElement.vsCMElementInterface; }
         }
 
-        public EnvDTE.CodeFunction AddFunction(string name, EnvDTE.vsCMFunction kind, object type, object position, EnvDTE.vsCMAccess access)
+        public EnvDTE.CodeFunction AddFunction(
+            string name,
+            EnvDTE.vsCMFunction kind,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
@@ -69,20 +78,47 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             });
         }
 
-        public EnvDTE.CodeProperty AddProperty(string getterName, string putterName, object type, object position, EnvDTE.vsCMAccess access, object location)
+        public EnvDTE.CodeProperty AddProperty(
+            string getterName,
+            string putterName,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access,
+            object location
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
-                return FileCodeModel.AddProperty(LookupNode(), getterName, putterName, type, position, access);
+                return FileCodeModel.AddProperty(
+                    LookupNode(),
+                    getterName,
+                    putterName,
+                    type,
+                    position,
+                    access
+                );
             });
         }
 
-        public EnvDTE80.CodeEvent AddEvent(string name, string fullDelegateName, bool createPropertyStyleEvent, object position, EnvDTE.vsCMAccess access)
+        public EnvDTE80.CodeEvent AddEvent(
+            string name,
+            string fullDelegateName,
+            bool createPropertyStyleEvent,
+            object position,
+            EnvDTE.vsCMAccess access
+        )
         {
             return FileCodeModel.EnsureEditor(() =>
             {
                 // Note: C# always creates field-like events in interfaces
-                return FileCodeModel.AddEvent(LookupNode(), name, fullDelegateName, false, position, access);
+                return FileCodeModel.AddEvent(
+                    LookupNode(),
+                    name,
+                    fullDelegateName,
+                    false,
+                    position,
+                    access
+                );
             });
         }
 

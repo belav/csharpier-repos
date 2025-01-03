@@ -7,19 +7,20 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Text;
-using System.Data.Metadata.Edm;
 using System.Data.Mapping.ViewGeneration.Utils;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Text;
 
-namespace System.Data.Mapping {
+namespace System.Data.Mapping
+{
     /// <summary>
     /// Mapping metadata for scalar properties.
     /// </summary>
     /// <example>
     /// For Example if conceptually you could represent the CS MSL file as following
-    /// --Mapping 
+    /// --Mapping
     ///   --EntityContainerMapping ( CNorthwind-->SNorthwind )
     ///     --EntitySetMapping
     ///       --EntityTypeMapping
@@ -35,7 +36,7 @@ namespace System.Data.Mapping {
     ///             --ScalarPropertyMap ( CMemberMetadata-->SMemberMetadata )
     ///             --ScalarProperyMap ( CMemberMetadata-->SMemberMetadata )
     ///           --ScalarPropertyMap ( CMemberMetadata-->SMemberMetadata )
-    ///     --AssociationSetMapping 
+    ///     --AssociationSetMapping
     ///       --AssociationTypeMapping
     ///         --MappingFragment
     ///           --EndPropertyMap
@@ -43,10 +44,11 @@ namespace System.Data.Mapping {
     ///             --ScalarProperyMap ( CMemberMetadata-->SMemberMetadata )
     ///           --EndPropertyMap
     ///             --ScalarPropertyMap ( CMemberMetadata-->SMemberMetadata )
-    /// This class represents the metadata for all the scalar property map elements in the 
+    /// This class represents the metadata for all the scalar property map elements in the
     /// above example.
     /// </example>
-    internal class StorageScalarPropertyMapping : StoragePropertyMapping {
+    internal class StorageScalarPropertyMapping : StoragePropertyMapping
+    {
         #region Constructors
         /// <summary>
         /// Construct a new Scalar EdmProperty mapping object
@@ -54,12 +56,17 @@ namespace System.Data.Mapping {
         /// <param name="member"></param>
         /// <param name="columnMember"></param>
         internal StorageScalarPropertyMapping(EdmProperty member, EdmProperty columnMember)
-            : base(member) {
+            : base(member)
+        {
             Debug.Assert(columnMember != null);
             Debug.Assert(
-                Helper.IsScalarType(member.TypeUsage.EdmType), 
-                "StorageScalarPropertyMapping must only map primitive or enum types");
-            Debug.Assert(Helper.IsPrimitiveType(columnMember.TypeUsage.EdmType), "StorageScalarPropertyMapping must only map primitive types");
+                Helper.IsScalarType(member.TypeUsage.EdmType),
+                "StorageScalarPropertyMapping must only map primitive or enum types"
+            );
+            Debug.Assert(
+                Helper.IsPrimitiveType(columnMember.TypeUsage.EdmType),
+                "StorageScalarPropertyMapping must only map primitive types"
+            );
             this.m_columnMember = columnMember;
         }
         #endregion
@@ -78,9 +85,7 @@ namespace System.Data.Mapping {
         /// </summary>
         internal EdmProperty ColumnProperty
         {
-            get {
-                return this.m_columnMember;
-            }
+            get { return this.m_columnMember; }
         }
         #endregion
 
@@ -90,17 +95,20 @@ namespace System.Data.Mapping {
         /// Will be removed shortly.
         /// </summary>
         /// <param name="index"></param>
-        internal override void Print(int index) {
+        internal override void Print(int index)
+        {
             StorageEntityContainerMapping.GetPrettyPrintString(ref index);
             StringBuilder sb = new StringBuilder();
             sb.Append("ScalarPropertyMapping");
             sb.Append("   ");
-            if (this.EdmProperty != null) {
+            if (this.EdmProperty != null)
+            {
                 sb.Append("Name:");
                 sb.Append(this.EdmProperty.Name);
                 sb.Append("   ");
             }
-            if (this.ColumnProperty != null) {
+            if (this.ColumnProperty != null)
+            {
                 sb.Append("Column Name:");
                 sb.Append(this.ColumnProperty.Name);
             }
@@ -108,5 +116,4 @@ namespace System.Data.Mapping {
         }
         #endregion
     }
-
 }

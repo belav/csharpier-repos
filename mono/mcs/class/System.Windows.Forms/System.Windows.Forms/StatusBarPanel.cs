@@ -25,248 +25,261 @@
 // COMPLETE
 
 using System;
-using System.Drawing;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace System.Windows.Forms {
-	[ToolboxItem (false)]
-	[DefaultProperty("Text")]
-	[DesignTimeVisible(false)]
-	public class StatusBarPanel : Component, ISupportInitialize {
-		#region Local Variables
-		private StatusBar parent;
+namespace System.Windows.Forms
+{
+    [ToolboxItem(false)]
+    [DefaultProperty("Text")]
+    [DesignTimeVisible(false)]
+    public class StatusBarPanel : Component, ISupportInitialize
+    {
+        #region Local Variables
+        private StatusBar parent;
 
-		private bool initializing;
-		private string text = String.Empty;
-		private string tool_tip_text = String.Empty;
+        private bool initializing;
+        private string text = String.Empty;
+        private string tool_tip_text = String.Empty;
 
-		private Icon icon;
-		private HorizontalAlignment alignment = HorizontalAlignment.Left;
-		private StatusBarPanelAutoSize auto_size = StatusBarPanelAutoSize.None;
-		private StatusBarPanelBorderStyle border_style = StatusBarPanelBorderStyle.Sunken;
-		private StatusBarPanelStyle style = StatusBarPanelStyle.Text;
-		private int width = 100;
-		private int min_width = 10;
-		internal int X;
-		
-		private string name;
-		private object tag;
-		#endregion	// Local Variables
+        private Icon icon;
+        private HorizontalAlignment alignment = HorizontalAlignment.Left;
+        private StatusBarPanelAutoSize auto_size = StatusBarPanelAutoSize.None;
+        private StatusBarPanelBorderStyle border_style = StatusBarPanelBorderStyle.Sunken;
+        private StatusBarPanelStyle style = StatusBarPanelStyle.Text;
+        private int width = 100;
+        private int min_width = 10;
+        internal int X;
 
-		#region UIA Framework Events
-		static object UIATextChangedEvent = new object ();
+        private string name;
+        private object tag;
+        #endregion	// Local Variables
 
-		internal event EventHandler UIATextChanged {
-			add { Events.AddHandler (UIATextChangedEvent, value); }
-			remove { Events.RemoveHandler (UIATextChangedEvent, value); }
-		}
+        #region UIA Framework Events
+        static object UIATextChangedEvent = new object();
 
-		internal void OnUIATextChanged (EventArgs e)
-		{
-			EventHandler eh = (EventHandler) Events [UIATextChangedEvent];
-			if (eh != null)
-				eh (this, e);
-		}
-		#endregion
+        internal event EventHandler UIATextChanged
+        {
+            add { Events.AddHandler(UIATextChangedEvent, value); }
+            remove { Events.RemoveHandler(UIATextChangedEvent, value); }
+        }
 
-		#region Constructors
-		public StatusBarPanel ()
-		{
-		}
-		#endregion	// Constructors
+        internal void OnUIATextChanged(EventArgs e)
+        {
+            EventHandler eh = (EventHandler)Events[UIATextChangedEvent];
+            if (eh != null)
+                eh(this, e);
+        }
+        #endregion
 
-		[DefaultValue(HorizontalAlignment.Left)]
-		[Localizable(true)]
-		public HorizontalAlignment Alignment {
-			get { return alignment; }
-			set { 
-				alignment = value; 
-				InvalidateContents ();
-			}
-		}
+        #region Constructors
+        public StatusBarPanel() { }
+        #endregion	// Constructors
 
-		[RefreshProperties (RefreshProperties.All)]
-		[DefaultValue(StatusBarPanelAutoSize.None)]
-		public StatusBarPanelAutoSize AutoSize {
-			get { return auto_size; }
-			set { 
-				auto_size = value; 
-				Invalidate ();
-			}
-		}
+        [DefaultValue(HorizontalAlignment.Left)]
+        [Localizable(true)]
+        public HorizontalAlignment Alignment
+        {
+            get { return alignment; }
+            set
+            {
+                alignment = value;
+                InvalidateContents();
+            }
+        }
 
-		[DefaultValue(StatusBarPanelBorderStyle.Sunken)]
-		[DispId(-504)]
-		public StatusBarPanelBorderStyle BorderStyle {
-			get { return border_style; }
-			set { 
-				border_style = value; 
-				Invalidate ();
-			}
-		}
+        [RefreshProperties(RefreshProperties.All)]
+        [DefaultValue(StatusBarPanelAutoSize.None)]
+        public StatusBarPanelAutoSize AutoSize
+        {
+            get { return auto_size; }
+            set
+            {
+                auto_size = value;
+                Invalidate();
+            }
+        }
 
-		[DefaultValue(null)]
-		[Localizable(true)]
-		public Icon Icon {
-			get { return icon; }
-			set { 
-				icon = value; 
-				InvalidateContents ();
-			}
-		}
+        [DefaultValue(StatusBarPanelBorderStyle.Sunken)]
+        [DispId(-504)]
+        public StatusBarPanelBorderStyle BorderStyle
+        {
+            get { return border_style; }
+            set
+            {
+                border_style = value;
+                Invalidate();
+            }
+        }
 
-		[DefaultValue(10)]
-		[Localizable(true)]
-		[RefreshProperties(RefreshProperties.All)]
-		public int MinWidth {
-			get {
-			/*
-				MSDN says that when AutoSize = None then MinWidth is automatically
-				set to Width, but neither v1.1 nor v2.0 behave that way.
-			*/
-				return min_width;
-			}
-			set {
-				if (value < 0)
-					throw new ArgumentOutOfRangeException ("value");
+        [DefaultValue(null)]
+        [Localizable(true)]
+        public Icon Icon
+        {
+            get { return icon; }
+            set
+            {
+                icon = value;
+                InvalidateContents();
+            }
+        }
 
-				min_width = value;
-				if (min_width > width)
-					width = min_width;
-				
-				Invalidate ();
-			}
-		}
+        [DefaultValue(10)]
+        [Localizable(true)]
+        [RefreshProperties(RefreshProperties.All)]
+        public int MinWidth
+        {
+            get
+            {
+                /*
+                    MSDN says that when AutoSize = None then MinWidth is automatically
+                    set to Width, but neither v1.1 nor v2.0 behave that way.
+                */
+                return min_width;
+            }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("value");
 
-		[Localizable (true)]
-		public string Name {
-			get {
-				if (name == null)
-					return string.Empty;
-				return name;
-			}
-			set {
-				name = value;
-			}
-		}
-		
-		[DefaultValue(100)]
-		[Localizable(true)]
-		public int Width {
-			get { return width; }
-			set {
-				if (value < 0)
-					throw new ArgumentException ("value");
+                min_width = value;
+                if (min_width > width)
+                    width = min_width;
 
-				if (initializing)
-					width = value;
-				else
-					SetWidth(value);
-				
-				Invalidate ();
-			}
-		}
-		
-		[DefaultValue(StatusBarPanelStyle.Text)]
-		public StatusBarPanelStyle Style {
-			get { return style; }
-			set { 
-				style = value; 
-				Invalidate ();
-			}
-		}
+                Invalidate();
+            }
+        }
 
-		[TypeConverter (typeof (StringConverter))]
-		[Localizable (false)]
-		[Bindable (true)]
-		[DefaultValue (null)]
-		public object Tag {
-			get {
-				return tag;
-			}
-			set {
-				tag = value;
-			}
-		}
+        [Localizable(true)]
+        public string Name
+        {
+            get
+            {
+                if (name == null)
+                    return string.Empty;
+                return name;
+            }
+            set { name = value; }
+        }
 
-		[DefaultValue("")]
-		[Localizable(true)]
-		public string Text {
-			get { return text; }
-			set { 
-				text = value; 
-				InvalidateContents ();
+        [DefaultValue(100)]
+        [Localizable(true)]
+        public int Width
+        {
+            get { return width; }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException("value");
 
-				// UIA Framework Event: Text Changed
-				OnUIATextChanged (EventArgs.Empty);
-			}
-		}
+                if (initializing)
+                    width = value;
+                else
+                    SetWidth(value);
 
-		[DefaultValue("")]
-		[Localizable(true)]
-		public string ToolTipText {
-			get { return tool_tip_text; }
-			set { tool_tip_text = value; }
-		}
+                Invalidate();
+            }
+        }
 
-		[Browsable(false)]
-		public StatusBar Parent {
-			get { return parent; }
-		}
+        [DefaultValue(StatusBarPanelStyle.Text)]
+        public StatusBarPanelStyle Style
+        {
+            get { return style; }
+            set
+            {
+                style = value;
+                Invalidate();
+            }
+        }
 
-		private void Invalidate ()
-		{
-			if (parent == null)
-				return;
-			parent.UpdatePanel (this);
-		}
+        [TypeConverter(typeof(StringConverter))]
+        [Localizable(false)]
+        [Bindable(true)]
+        [DefaultValue(null)]
+        public object Tag
+        {
+            get { return tag; }
+            set { tag = value; }
+        }
 
-		private void InvalidateContents ()
-		{
-			if (parent == null)
-				return;
-			parent.UpdatePanelContents (this);
-		}
+        [DefaultValue("")]
+        [Localizable(true)]
+        public string Text
+        {
+            get { return text; }
+            set
+            {
+                text = value;
+                InvalidateContents();
 
-		internal void SetParent (StatusBar parent)
-		{
-			this.parent = parent;
-		}
+                // UIA Framework Event: Text Changed
+                OnUIATextChanged(EventArgs.Empty);
+            }
+        }
 
-		internal void SetWidth (int width)
-		{
-			this.width = width;
-			if (min_width > this.width)
-				this.width = min_width;
-		}
+        [DefaultValue("")]
+        [Localizable(true)]
+        public string ToolTipText
+        {
+            get { return tool_tip_text; }
+            set { tool_tip_text = value; }
+        }
 
-		public override string ToString ()
-		{
-			return "StatusBarPanel: {" + Text +"}";
-		}
+        [Browsable(false)]
+        public StatusBar Parent
+        {
+            get { return parent; }
+        }
 
-		protected override void Dispose (bool disposing)
-		{
-		}
+        private void Invalidate()
+        {
+            if (parent == null)
+                return;
+            parent.UpdatePanel(this);
+        }
 
-		public void BeginInit ()
-		{
-			initializing = true;
-		}
+        private void InvalidateContents()
+        {
+            if (parent == null)
+                return;
+            parent.UpdatePanelContents(this);
+        }
 
-		public void EndInit ()
-		{
-			if (!initializing)
-				return;
-			
-			if (min_width > width)
-				width = min_width;
-			
-			initializing = false;
-		}
-	}
+        internal void SetParent(StatusBar parent)
+        {
+            this.parent = parent;
+        }
+
+        internal void SetWidth(int width)
+        {
+            this.width = width;
+            if (min_width > this.width)
+                this.width = min_width;
+        }
+
+        public override string ToString()
+        {
+            return "StatusBarPanel: {" + Text + "}";
+        }
+
+        protected override void Dispose(bool disposing) { }
+
+        public void BeginInit()
+        {
+            initializing = true;
+        }
+
+        public void EndInit()
+        {
+            if (!initializing)
+                return;
+
+            if (min_width > width)
+                width = min_width;
+
+            initializing = false;
+        }
+    }
 }
-
-

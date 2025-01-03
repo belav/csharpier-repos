@@ -17,11 +17,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSymbolDisplayServiceFactory()
-        {
-        }
+        public CSharpSymbolDisplayServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices provider)
-            => new CSharpSymbolDisplayService(provider.LanguageServices);
+        public ILanguageService CreateLanguageService(HostLanguageServices provider) =>
+            new CSharpSymbolDisplayService(provider.LanguageServices);
     }
 }

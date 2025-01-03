@@ -25,7 +25,9 @@ namespace System.Diagnostics
     /// Public static (Shared in Visual Basic) members of this type are thread safe. Any instance members are not guaranteed to be thread safe.
     /// </remarks>
     [StructLayout(LayoutKind.Sequential)]
-    public struct TagList : IList<KeyValuePair<string, object?>>, IReadOnlyList<KeyValuePair<string, object?>>
+    public struct TagList
+        : IList<KeyValuePair<string, object?>>,
+            IReadOnlyList<KeyValuePair<string, object?>>
     {
         internal KeyValuePair<string, object?> Tag1;
         internal KeyValuePair<string, object?> Tag2;
@@ -43,7 +45,8 @@ namespace System.Diagnostics
         /// Initializes a new instance of the TagList structure using the specified <paramref name="tagList" />.
         /// </summary>
         /// <param name="tagList">A span of tags to initialize the list with.</param>
-        public TagList(ReadOnlySpan<KeyValuePair<string, object?>> tagList) : this()
+        public TagList(ReadOnlySpan<KeyValuePair<string, object?>> tagList)
+            : this()
         {
             _tagsCount = tagList.Length;
             switch (_tagsCount)
@@ -80,11 +83,14 @@ namespace System.Diagnostics
                     Tag1 = tagList[0];
                     break;
 
-                case 0: return;
+                case 0:
+                    return;
 
                 default:
                     Debug.Assert(_tagsCount > 8);
-                    _overflowTags = new KeyValuePair<string, object?>[_tagsCount + OverflowAdditionalCapacity]; // Add extra slots for more tags to add if needed
+                    _overflowTags = new KeyValuePair<string, object?>[
+                        _tagsCount + OverflowAdditionalCapacity
+                    ]; // Add extra slots for more tags to add if needed
                     tagList.CopyTo(_overflowTags);
                     break;
             }
@@ -134,7 +140,6 @@ namespace System.Diagnostics
                     _ => default, // we shouldn't come here anyway.
                 };
             }
-
             set
             {
                 if ((uint)index >= (uint)_tagsCount)
@@ -151,14 +156,30 @@ namespace System.Diagnostics
 
                 switch (index)
                 {
-                    case 0: Tag1 = value; break;
-                    case 1: Tag2 = value; break;
-                    case 2: Tag3 = value; break;
-                    case 3: Tag4 = value; break;
-                    case 4: Tag5 = value; break;
-                    case 5: Tag6 = value; break;
-                    case 6: Tag7 = value; break;
-                    case 7: Tag8 = value; break;
+                    case 0:
+                        Tag1 = value;
+                        break;
+                    case 1:
+                        Tag2 = value;
+                        break;
+                    case 2:
+                        Tag3 = value;
+                        break;
+                    case 3:
+                        Tag4 = value;
+                        break;
+                    case 4:
+                        Tag5 = value;
+                        break;
+                    case 5:
+                        Tag6 = value;
+                        break;
+                    case 6:
+                        Tag7 = value;
+                        break;
+                    case 7:
+                        Tag8 = value;
+                        break;
                     default:
                         Debug.Assert(false);
                         break;
@@ -171,7 +192,8 @@ namespace System.Diagnostics
         /// </summary>
         /// <param name="key">The tag key.</param>
         /// <param name="value">The tag value.</param>
-        public void Add(string key, object? value) => Add(new KeyValuePair<string, object?>(key, value));
+        public void Add(string key, object? value) =>
+            Add(new KeyValuePair<string, object?>(key, value));
 
         /// <summary>
         /// Adds a tag to the list.
@@ -194,14 +216,30 @@ namespace System.Diagnostics
 
             switch (_tagsCount)
             {
-                case 0: Tag1 = tag; break;
-                case 1: Tag2 = tag; break;
-                case 2: Tag3 = tag; break;
-                case 3: Tag4 = tag; break;
-                case 4: Tag5 = tag; break;
-                case 5: Tag6 = tag; break;
-                case 6: Tag7 = tag; break;
-                case 7: Tag8 = tag; break;
+                case 0:
+                    Tag1 = tag;
+                    break;
+                case 1:
+                    Tag2 = tag;
+                    break;
+                case 2:
+                    Tag3 = tag;
+                    break;
+                case 3:
+                    Tag4 = tag;
+                    break;
+                case 4:
+                    Tag5 = tag;
+                    break;
+                case 5:
+                    Tag6 = tag;
+                    break;
+                case 6:
+                    Tag7 = tag;
+                    break;
+                case 7:
+                    Tag8 = tag;
+                    break;
                 case 8:
                     Debug.Assert(_overflowTags is null);
                     MoveTagsToTheArray();
@@ -239,15 +277,32 @@ namespace System.Diagnostics
 
             switch (_tagsCount)
             {
-                case 0: break;
-                case 8: tags[7] = Tag8; goto case 7;
-                case 7: tags[6] = Tag7; goto case 6;
-                case 6: tags[5] = Tag6; goto case 5;
-                case 5: tags[4] = Tag5; goto case 4;
-                case 4: tags[3] = Tag4; goto case 3;
-                case 3: tags[2] = Tag3; goto case 2;
-                case 2: tags[1] = Tag2; goto case 1;
-                case 1: tags[0] = Tag1; break;
+                case 0:
+                    break;
+                case 8:
+                    tags[7] = Tag8;
+                    goto case 7;
+                case 7:
+                    tags[6] = Tag7;
+                    goto case 6;
+                case 6:
+                    tags[5] = Tag6;
+                    goto case 5;
+                case 5:
+                    tags[4] = Tag5;
+                    goto case 4;
+                case 4:
+                    tags[3] = Tag4;
+                    goto case 3;
+                case 3:
+                    tags[2] = Tag3;
+                    goto case 2;
+                case 2:
+                    tags[1] = Tag2;
+                    goto case 1;
+                case 1:
+                    tags[0] = Tag1;
+                    break;
             }
         }
 
@@ -318,13 +373,55 @@ namespace System.Diagnostics
 
             switch (index)
             {
-                case 0: Tag8 = Tag7; Tag7 = Tag6; Tag6 = Tag5; Tag5 = Tag4; Tag4 = Tag3; Tag3 = Tag2; Tag2 = Tag1; Tag1 = item; break;
-                case 1: Tag8 = Tag7; Tag7 = Tag6; Tag6 = Tag5; Tag5 = Tag4; Tag4 = Tag3; Tag3 = Tag2; Tag2 = item; break;
-                case 2: Tag8 = Tag7; Tag7 = Tag6; Tag6 = Tag5; Tag5 = Tag4; Tag4 = Tag3; Tag3 = item; break;
-                case 3: Tag8 = Tag7; Tag7 = Tag6; Tag6 = Tag5; Tag5 = Tag4; Tag4 = item; break;
-                case 4: Tag8 = Tag7; Tag7 = Tag6; Tag6 = Tag5; Tag5 = item; break;
-                case 5: Tag8 = Tag7; Tag7 = Tag6; Tag6 = item; break;
-                case 6: Tag8 = Tag7; Tag7 = item; break;
+                case 0:
+                    Tag8 = Tag7;
+                    Tag7 = Tag6;
+                    Tag6 = Tag5;
+                    Tag5 = Tag4;
+                    Tag4 = Tag3;
+                    Tag3 = Tag2;
+                    Tag2 = Tag1;
+                    Tag1 = item;
+                    break;
+                case 1:
+                    Tag8 = Tag7;
+                    Tag7 = Tag6;
+                    Tag6 = Tag5;
+                    Tag5 = Tag4;
+                    Tag4 = Tag3;
+                    Tag3 = Tag2;
+                    Tag2 = item;
+                    break;
+                case 2:
+                    Tag8 = Tag7;
+                    Tag7 = Tag6;
+                    Tag6 = Tag5;
+                    Tag5 = Tag4;
+                    Tag4 = Tag3;
+                    Tag3 = item;
+                    break;
+                case 3:
+                    Tag8 = Tag7;
+                    Tag7 = Tag6;
+                    Tag6 = Tag5;
+                    Tag5 = Tag4;
+                    Tag4 = item;
+                    break;
+                case 4:
+                    Tag8 = Tag7;
+                    Tag7 = Tag6;
+                    Tag6 = Tag5;
+                    Tag5 = item;
+                    break;
+                case 5:
+                    Tag8 = Tag7;
+                    Tag7 = Tag6;
+                    Tag6 = item;
+                    break;
+                case 6:
+                    Tag8 = Tag7;
+                    Tag7 = item;
+                    break;
                 default:
                     Debug.Assert(false); // we shouldn't come here
                     return;
@@ -359,14 +456,29 @@ namespace System.Diagnostics
 
             switch (index)
             {
-                case 0: Tag1 = Tag2; goto case 1;
-                case 1: Tag2 = Tag3; goto case 2;
-                case 2: Tag3 = Tag4; goto case 3;
-                case 3: Tag4 = Tag5; goto case 4;
-                case 4: Tag5 = Tag6; goto case 5;
-                case 5: Tag6 = Tag7; goto case 6;
-                case 6: Tag7 = Tag8; break;
-                case 7: break;
+                case 0:
+                    Tag1 = Tag2;
+                    goto case 1;
+                case 1:
+                    Tag2 = Tag3;
+                    goto case 2;
+                case 2:
+                    Tag3 = Tag4;
+                    goto case 3;
+                case 3:
+                    Tag4 = Tag5;
+                    goto case 4;
+                case 4:
+                    Tag5 = Tag6;
+                    goto case 5;
+                case 5:
+                    Tag6 = Tag7;
+                    goto case 6;
+                case 6:
+                    Tag7 = Tag8;
+                    break;
+                case 7:
+                    break;
             }
             _tagsCount--;
         }
@@ -404,13 +516,14 @@ namespace System.Diagnostics
         /// Returns an enumerator that iterates through the <see cref="T:System.Diagnostics.TagList" />.
         /// </summary>
         /// <returns>Returns an enumerator that iterates through the <see cref="T:System.Diagnostics.TagList" />.</returns>
-        public readonly IEnumerator<KeyValuePair<string, object?>> GetEnumerator() => new Enumerator(in this);
+        public readonly IEnumerator<KeyValuePair<string, object?>> GetEnumerator() =>
+            new Enumerator(in this);
 
         /// <summary>
         /// Returns an enumerator that iterates through the <see cref="T:System.Diagnostics.TagList" />.
         /// </summary>
         /// <returns>Returns an enumerator that iterates through the <see cref="T:System.Diagnostics.TagList" />.</returns>
-        readonly IEnumerator IEnumerable.GetEnumerator()  => new Enumerator(in this);
+        readonly IEnumerator IEnumerable.GetEnumerator() => new Enumerator(in this);
 
         /// <summary>
         /// Searches for the specified tag and returns the zero-based index of the first occurrence within the entire <see cref="T:System.Diagnostics.TagList" />.
@@ -434,50 +547,195 @@ namespace System.Diagnostics
 
             switch (_tagsCount)
             {
-                case 1: if (TagsEqual(Tag1, item)) { return 0; };
-                        break;
-                case 2: if (TagsEqual(Tag1, item)) { return 0; }
-                        if (TagsEqual(Tag2, item)) { return 1; };
-                        break;
-                case 3: if (TagsEqual(Tag1, item)) { return 0; }
-                        if (TagsEqual(Tag2, item)) { return 1; };
-                        if (TagsEqual(Tag3, item)) { return 2; };
-                        break;
-                case 4: if (TagsEqual(Tag1, item)) { return 0; }
-                        if (TagsEqual(Tag2, item)) { return 1; };
-                        if (TagsEqual(Tag3, item)) { return 2; };
-                        if (TagsEqual(Tag4, item)) { return 3; };
-                        break;
-                case 5: if (TagsEqual(Tag1, item)) { return 0; }
-                        if (TagsEqual(Tag2, item)) { return 1; };
-                        if (TagsEqual(Tag3, item)) { return 2; };
-                        if (TagsEqual(Tag4, item)) { return 3; };
-                        if (TagsEqual(Tag5, item)) { return 4; };
-                        break;
-                case 6: if (TagsEqual(Tag1, item)) { return 0; }
-                        if (TagsEqual(Tag2, item)) { return 1; };
-                        if (TagsEqual(Tag3, item)) { return 2; };
-                        if (TagsEqual(Tag4, item)) { return 3; };
-                        if (TagsEqual(Tag5, item)) { return 4; };
-                        if (TagsEqual(Tag6, item)) { return 5; };
-                        break;
-                case 7: if (TagsEqual(Tag1, item)) { return 0; }
-                        if (TagsEqual(Tag2, item)) { return 1; };
-                        if (TagsEqual(Tag3, item)) { return 2; };
-                        if (TagsEqual(Tag4, item)) { return 3; };
-                        if (TagsEqual(Tag5, item)) { return 4; };
-                        if (TagsEqual(Tag6, item)) { return 5; };
-                        if (TagsEqual(Tag7, item)) { return 6; };
-                        break;
-                case 8: if (TagsEqual(Tag1, item)) { return 0; }
-                        if (TagsEqual(Tag2, item)) { return 1; };
-                        if (TagsEqual(Tag3, item)) { return 2; };
-                        if (TagsEqual(Tag4, item)) { return 3; };
-                        if (TagsEqual(Tag5, item)) { return 4; };
-                        if (TagsEqual(Tag6, item)) { return 5; };
-                        if (TagsEqual(Tag7, item)) { return 6; };
-                        if (TagsEqual(Tag8, item)) { return 7; };
-                        break;
+                case 1:
+                    if (TagsEqual(Tag1, item))
+                    {
+                        return 0;
+                    }
+                    ;
+                    break;
+                case 2:
+                    if (TagsEqual(Tag1, item))
+                    {
+                        return 0;
+                    }
+                    if (TagsEqual(Tag2, item))
+                    {
+                        return 1;
+                    }
+                    ;
+                    break;
+                case 3:
+                    if (TagsEqual(Tag1, item))
+                    {
+                        return 0;
+                    }
+                    if (TagsEqual(Tag2, item))
+                    {
+                        return 1;
+                    }
+                    ;
+                    if (TagsEqual(Tag3, item))
+                    {
+                        return 2;
+                    }
+                    ;
+                    break;
+                case 4:
+                    if (TagsEqual(Tag1, item))
+                    {
+                        return 0;
+                    }
+                    if (TagsEqual(Tag2, item))
+                    {
+                        return 1;
+                    }
+                    ;
+                    if (TagsEqual(Tag3, item))
+                    {
+                        return 2;
+                    }
+                    ;
+                    if (TagsEqual(Tag4, item))
+                    {
+                        return 3;
+                    }
+                    ;
+                    break;
+                case 5:
+                    if (TagsEqual(Tag1, item))
+                    {
+                        return 0;
+                    }
+                    if (TagsEqual(Tag2, item))
+                    {
+                        return 1;
+                    }
+                    ;
+                    if (TagsEqual(Tag3, item))
+                    {
+                        return 2;
+                    }
+                    ;
+                    if (TagsEqual(Tag4, item))
+                    {
+                        return 3;
+                    }
+                    ;
+                    if (TagsEqual(Tag5, item))
+                    {
+                        return 4;
+                    }
+                    ;
+                    break;
+                case 6:
+                    if (TagsEqual(Tag1, item))
+                    {
+                        return 0;
+                    }
+                    if (TagsEqual(Tag2, item))
+                    {
+                        return 1;
+                    }
+                    ;
+                    if (TagsEqual(Tag3, item))
+                    {
+                        return 2;
+                    }
+                    ;
+                    if (TagsEqual(Tag4, item))
+                    {
+                        return 3;
+                    }
+                    ;
+                    if (TagsEqual(Tag5, item))
+                    {
+                        return 4;
+                    }
+                    ;
+                    if (TagsEqual(Tag6, item))
+                    {
+                        return 5;
+                    }
+                    ;
+                    break;
+                case 7:
+                    if (TagsEqual(Tag1, item))
+                    {
+                        return 0;
+                    }
+                    if (TagsEqual(Tag2, item))
+                    {
+                        return 1;
+                    }
+                    ;
+                    if (TagsEqual(Tag3, item))
+                    {
+                        return 2;
+                    }
+                    ;
+                    if (TagsEqual(Tag4, item))
+                    {
+                        return 3;
+                    }
+                    ;
+                    if (TagsEqual(Tag5, item))
+                    {
+                        return 4;
+                    }
+                    ;
+                    if (TagsEqual(Tag6, item))
+                    {
+                        return 5;
+                    }
+                    ;
+                    if (TagsEqual(Tag7, item))
+                    {
+                        return 6;
+                    }
+                    ;
+                    break;
+                case 8:
+                    if (TagsEqual(Tag1, item))
+                    {
+                        return 0;
+                    }
+                    if (TagsEqual(Tag2, item))
+                    {
+                        return 1;
+                    }
+                    ;
+                    if (TagsEqual(Tag3, item))
+                    {
+                        return 2;
+                    }
+                    ;
+                    if (TagsEqual(Tag4, item))
+                    {
+                        return 3;
+                    }
+                    ;
+                    if (TagsEqual(Tag5, item))
+                    {
+                        return 4;
+                    }
+                    ;
+                    if (TagsEqual(Tag6, item))
+                    {
+                        return 5;
+                    }
+                    ;
+                    if (TagsEqual(Tag7, item))
+                    {
+                        return 6;
+                    }
+                    ;
+                    if (TagsEqual(Tag8, item))
+                    {
+                        return 7;
+                    }
+                    ;
+                    break;
             }
 
             return -1;
@@ -485,7 +743,10 @@ namespace System.Diagnostics
 
         internal readonly KeyValuePair<string, object?>[]? Tags => _overflowTags;
 
-        private static bool TagsEqual(KeyValuePair<string, object?> tag1, KeyValuePair<string, object?> tag2)
+        private static bool TagsEqual(
+            KeyValuePair<string, object?> tag1,
+            KeyValuePair<string, object?> tag2
+        )
         {
             // Keys always of string type so using equality operator would be enough.
             if (tag1.Key != tag2.Key)
@@ -529,6 +790,7 @@ namespace System.Diagnostics
         {
             private TagList _tagList;
             private int _index;
+
             internal Enumerator(in TagList tagList)
             {
                 _index = -1;
@@ -539,7 +801,10 @@ namespace System.Diagnostics
 
             object IEnumerator.Current => _tagList[_index];
 
-            public void Dispose() { _index = _tagList.Count; }
+            public void Dispose()
+            {
+                _index = _tagList.Count;
+            }
 
             public bool MoveNext()
             {

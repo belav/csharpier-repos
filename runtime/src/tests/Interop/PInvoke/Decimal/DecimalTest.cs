@@ -13,74 +13,149 @@ public class DecimalTest
     [Fact]
     public static void RunDecimalTests()
     {
-        Assert.Equal((decimal)StartingIntValue, DecimalTestNative.CreateDecimalFromInt(StartingIntValue));
+        Assert.Equal(
+            (decimal)StartingIntValue,
+            DecimalTestNative.CreateDecimalFromInt(StartingIntValue)
+        );
 
-        Assert.True(DecimalTestNative.DecimalEqualToInt((decimal)StartingIntValue, StartingIntValue));
+        Assert.True(
+            DecimalTestNative.DecimalEqualToInt((decimal)StartingIntValue, StartingIntValue)
+        );
 
         decimal localDecimal = (decimal)StartingIntValue;
-        Assert.True(DecimalTestNative.ValidateAndChangeDecimal(ref localDecimal, StartingIntValue, NewIntValue));
+        Assert.True(
+            DecimalTestNative.ValidateAndChangeDecimal(
+                ref localDecimal,
+                StartingIntValue,
+                NewIntValue
+            )
+        );
         Assert.Equal((decimal)NewIntValue, localDecimal);
 
         DecimalTestNative.GetDecimalForInt(NewIntValue, out var dec);
         Assert.Equal((decimal)NewIntValue, dec);
 
-        Assert.Equal((decimal)StartingIntValue, DecimalTestNative.CreateWrappedDecimalFromInt(StartingIntValue).dec);
+        Assert.Equal(
+            (decimal)StartingIntValue,
+            DecimalTestNative.CreateWrappedDecimalFromInt(StartingIntValue).dec
+        );
 
-        Assert.True(DecimalTestNative.WrappedDecimalEqualToInt(new DecimalTestNative.DecimalWrapper { dec = (decimal)StartingIntValue }, StartingIntValue));
+        Assert.True(
+            DecimalTestNative.WrappedDecimalEqualToInt(
+                new DecimalTestNative.DecimalWrapper { dec = (decimal)StartingIntValue },
+                StartingIntValue
+            )
+        );
 
-        var localDecimalWrapper = new DecimalTestNative.DecimalWrapper { dec = (decimal)StartingIntValue };
-        Assert.True(DecimalTestNative.ValidateAndChangeWrappedDecimal(ref localDecimalWrapper, StartingIntValue, NewIntValue));
+        var localDecimalWrapper = new DecimalTestNative.DecimalWrapper
+        {
+            dec = (decimal)StartingIntValue,
+        };
+        Assert.True(
+            DecimalTestNative.ValidateAndChangeWrappedDecimal(
+                ref localDecimalWrapper,
+                StartingIntValue,
+                NewIntValue
+            )
+        );
         Assert.Equal((decimal)NewIntValue, localDecimalWrapper.dec);
 
         DecimalTestNative.GetWrappedDecimalForInt(NewIntValue, out var decWrapper);
         Assert.Equal((decimal)NewIntValue, decWrapper.dec);
 
-        DecimalTestNative.PassThroughDecimalToCallback((decimal)NewIntValue, d => Assert.Equal((decimal)NewIntValue, d));
+        DecimalTestNative.PassThroughDecimalToCallback(
+            (decimal)NewIntValue,
+            d => Assert.Equal((decimal)NewIntValue, d)
+        );
     }
 
     [Fact]
     public static void RunLPDecimalTests()
     {
-        Assert.Equal((decimal)StartingIntValue, DecimalTestNative.CreateLPDecimalFromInt(StartingIntValue));
+        Assert.Equal(
+            (decimal)StartingIntValue,
+            DecimalTestNative.CreateLPDecimalFromInt(StartingIntValue)
+        );
 
-        Assert.True(DecimalTestNative.LPDecimalEqualToInt((decimal)StartingIntValue, StartingIntValue));
+        Assert.True(
+            DecimalTestNative.LPDecimalEqualToInt((decimal)StartingIntValue, StartingIntValue)
+        );
 
         decimal localDecimal = (decimal)StartingIntValue;
-        Assert.True(DecimalTestNative.ValidateAndChangeLPDecimal(ref localDecimal, StartingIntValue, NewIntValue));
+        Assert.True(
+            DecimalTestNative.ValidateAndChangeLPDecimal(
+                ref localDecimal,
+                StartingIntValue,
+                NewIntValue
+            )
+        );
         Assert.Equal((decimal)NewIntValue, localDecimal);
 
         DecimalTestNative.GetLPDecimalForInt(NewIntValue, out var dec);
         Assert.Equal((decimal)NewIntValue, dec);
 
-        DecimalTestNative.PassThroughLPDecimalToCallback((decimal)NewIntValue, d => Assert.Equal((decimal)NewIntValue, d));
+        DecimalTestNative.PassThroughLPDecimalToCallback(
+            (decimal)NewIntValue,
+            d => Assert.Equal((decimal)NewIntValue, d)
+        );
     }
 
     [Fact]
     [PlatformSpecific(TestPlatforms.Windows)]
     public static void RunCurrencyTests()
     {
-        Assert.Throws<MarshalDirectiveException>(() => DecimalTestNative.CreateCurrencyFromInt(StartingIntValue));
+        Assert.Throws<MarshalDirectiveException>(
+            () => DecimalTestNative.CreateCurrencyFromInt(StartingIntValue)
+        );
 
-        Assert.True(DecimalTestNative.CurrencyEqualToInt((decimal)StartingIntValue, StartingIntValue));
+        Assert.True(
+            DecimalTestNative.CurrencyEqualToInt((decimal)StartingIntValue, StartingIntValue)
+        );
 
         decimal localCurrency = (decimal)StartingIntValue;
-        Assert.True(DecimalTestNative.ValidateAndChangeCurrency(ref localCurrency, StartingIntValue, NewIntValue));
+        Assert.True(
+            DecimalTestNative.ValidateAndChangeCurrency(
+                ref localCurrency,
+                StartingIntValue,
+                NewIntValue
+            )
+        );
         Assert.Equal((decimal)NewIntValue, localCurrency);
 
         DecimalTestNative.GetCurrencyForInt(NewIntValue, out var cy);
         Assert.Equal((decimal)NewIntValue, cy);
 
-        Assert.Equal((decimal)StartingIntValue, DecimalTestNative.CreateWrappedCurrencyFromInt(StartingIntValue).currency);
+        Assert.Equal(
+            (decimal)StartingIntValue,
+            DecimalTestNative.CreateWrappedCurrencyFromInt(StartingIntValue).currency
+        );
 
-        Assert.True(DecimalTestNative.WrappedCurrencyEqualToInt(new DecimalTestNative.CurrencyWrapper { currency = (decimal)StartingIntValue }, StartingIntValue));
+        Assert.True(
+            DecimalTestNative.WrappedCurrencyEqualToInt(
+                new DecimalTestNative.CurrencyWrapper { currency = (decimal)StartingIntValue },
+                StartingIntValue
+            )
+        );
 
-        var localCurrencyWrapper = new DecimalTestNative.CurrencyWrapper { currency = (decimal)StartingIntValue };
-        Assert.True(DecimalTestNative.ValidateAndChangeWrappedCurrency(ref localCurrencyWrapper, StartingIntValue, NewIntValue));
+        var localCurrencyWrapper = new DecimalTestNative.CurrencyWrapper
+        {
+            currency = (decimal)StartingIntValue,
+        };
+        Assert.True(
+            DecimalTestNative.ValidateAndChangeWrappedCurrency(
+                ref localCurrencyWrapper,
+                StartingIntValue,
+                NewIntValue
+            )
+        );
         Assert.Equal((decimal)NewIntValue, localCurrencyWrapper.currency);
 
         DecimalTestNative.GetWrappedCurrencyForInt(NewIntValue, out var currencyWrapper);
         Assert.Equal((decimal)NewIntValue, currencyWrapper.currency);
 
-        DecimalTestNative.PassThroughCurrencyToCallback((decimal)NewIntValue, d => Assert.Equal((decimal)NewIntValue, d));
+        DecimalTestNative.PassThroughCurrencyToCallback(
+            (decimal)NewIntValue,
+            d => Assert.Equal((decimal)NewIntValue, d)
+        );
     }
 }

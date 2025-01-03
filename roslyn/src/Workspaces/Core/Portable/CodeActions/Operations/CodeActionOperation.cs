@@ -23,15 +23,18 @@ namespace Microsoft.CodeAnalysis.CodeActions
         /// Called by the host environment to apply the effect of the operation.
         /// This method is guaranteed to be called on the UI thread.
         /// </summary>
-        public virtual void Apply(Workspace workspace, CancellationToken cancellationToken)
-        {
-        }
+        public virtual void Apply(Workspace workspace, CancellationToken cancellationToken) { }
 
         /// <summary>
         /// Called by the host environment to apply the effect of the operation.
         /// This method is guaranteed to be called on the UI thread.
         /// </summary>
-        internal virtual Task<bool> TryApplyAsync(Workspace workspace, Solution originalSolution, IProgress<CodeAnalysisProgress> progressTracker, CancellationToken cancellationToken)
+        internal virtual Task<bool> TryApplyAsync(
+            Workspace workspace,
+            Solution originalSolution,
+            IProgress<CodeAnalysisProgress> progressTracker,
+            CancellationToken cancellationToken
+        )
         {
             // It is a requirement that this method be called on the UI thread.  So it's safe for us to call
             // into .Apply without any threading operations here.

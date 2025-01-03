@@ -17,7 +17,10 @@ namespace Roslyn.Test.Utilities
             get
             {
                 var currentUICultureName = CultureInfo.CurrentUICulture.Name;
-                if (currentUICultureName.Length == 0 || currentUICultureName.StartsWith("en", StringComparison.OrdinalIgnoreCase))
+                if (
+                    currentUICultureName.Length == 0
+                    || currentUICultureName.StartsWith("en", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     return null;
                 }

@@ -4,17 +4,18 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration;
+    using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Text;
-    using System.Diagnostics;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Xml;
 
     /*             <!-- sqlCacheDependency Attributes:
                 enabled="[true|false]" - Enable or disable SQL cache dependency polling
@@ -43,55 +44,64 @@ namespace System.Web.Configuration {
                 </databases>
             </sqlCacheDependency>
 */
-    public sealed class SqlCacheDependencySection : ConfigurationSection {
-        private static readonly ConfigurationElementProperty s_elemProperty = 
-            new ConfigurationElementProperty(new CallbackValidator(typeof(SqlCacheDependencySection), Validate));
+    public sealed class SqlCacheDependencySection : ConfigurationSection
+    {
+        private static readonly ConfigurationElementProperty s_elemProperty =
+            new ConfigurationElementProperty(
+                new CallbackValidator(typeof(SqlCacheDependencySection), Validate)
+            );
 
         private static ConfigurationPropertyCollection _properties;
         private static readonly ConfigurationProperty _propEnabled;
         private static readonly ConfigurationProperty _propPollTime;
         private static readonly ConfigurationProperty _propDatabases;
 
-        static SqlCacheDependencySection() {
+        static SqlCacheDependencySection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
 
-            _propEnabled = new ConfigurationProperty("enabled", 
-                                            typeof(bool), 
-                                            true, 
-                                            ConfigurationPropertyOptions.None);
-            
-            _propPollTime = new ConfigurationProperty("pollTime", 
-                                            typeof(int), 
-                                            60000, 
-                                            ConfigurationPropertyOptions.None);
+            _propEnabled = new ConfigurationProperty(
+                "enabled",
+                typeof(bool),
+                true,
+                ConfigurationPropertyOptions.None
+            );
 
-            _propDatabases = new ConfigurationProperty("databases", 
-                                            typeof(SqlCacheDependencyDatabaseCollection), 
-                                            null,
-                                            ConfigurationPropertyOptions.IsDefaultCollection);
+            _propPollTime = new ConfigurationProperty(
+                "pollTime",
+                typeof(int),
+                60000,
+                ConfigurationPropertyOptions.None
+            );
+
+            _propDatabases = new ConfigurationProperty(
+                "databases",
+                typeof(SqlCacheDependencyDatabaseCollection),
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
             _properties.Add(_propEnabled);
             _properties.Add(_propPollTime);
             _properties.Add(_propDatabases);
         }
 
-        public SqlCacheDependencySection() {
+        public SqlCacheDependencySection() { }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
+        }
+        protected override ConfigurationElementProperty ElementProperty
+        {
+            get { return s_elemProperty; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
-        }
-        protected override ConfigurationElementProperty ElementProperty {
-            get {
-                return s_elemProperty;
-            }
-        }
-        
-        private static void Validate(object value) {
-            if (value == null) {
+        private static void Validate(object value)
+        {
+            if (value == null)
+            {
                 throw new ArgumentNullException("sqlCacheDependency");
             }
             Debug.Assert(value is SqlCacheDependencySection);
@@ -100,47 +110,44 @@ namespace System.Web.Configuration {
 
             int defaultPollTime = elem.PollTime;
 
-            if (defaultPollTime != 0 && defaultPollTime < 500) {
+            if (defaultPollTime != 0 && defaultPollTime < 500)
+            {
                 throw new ConfigurationErrorsException(
                     SR.GetString(SR.Invalid_sql_cache_dep_polltime),
-                    elem.ElementInformation.Properties["pollTime"].Source, 
-                    elem.ElementInformation.Properties["pollTime"].LineNumber);
+                    elem.ElementInformation.Properties["pollTime"].Source,
+                    elem.ElementInformation.Properties["pollTime"].LineNumber
+                );
             }
         }
-        
-        protected override void PostDeserialize() {
+
+        protected override void PostDeserialize()
+        {
             int defaultPollTime = PollTime;
 
-            foreach (SqlCacheDependencyDatabase dbase in Databases) {
+            foreach (SqlCacheDependencyDatabase dbase in Databases)
+            {
                 dbase.CheckDefaultPollTime(defaultPollTime);
             }
         }
 
         [ConfigurationProperty("enabled", DefaultValue = true)]
-        public bool Enabled {
-            get {
-                return (bool)base[_propEnabled];
-            }
-            set {
-                base[_propEnabled] = value;
-            }
+        public bool Enabled
+        {
+            get { return (bool)base[_propEnabled]; }
+            set { base[_propEnabled] = value; }
         }
 
         [ConfigurationProperty("pollTime", DefaultValue = 60000)]
-        public int PollTime {
-            get {
-                return (int)base[_propPollTime];
-            }
-            set {
-                base[_propPollTime] = value;
-            }
+        public int PollTime
+        {
+            get { return (int)base[_propPollTime]; }
+            set { base[_propPollTime] = value; }
         }
 
         [ConfigurationProperty("databases")]
-        public SqlCacheDependencyDatabaseCollection Databases {
-            get {
-                return (SqlCacheDependencyDatabaseCollection)base[_propDatabases];
-            }
+        public SqlCacheDependencyDatabaseCollection Databases
+        {
+            get { return (SqlCacheDependencyDatabaseCollection)base[_propDatabases]; }
         }
     }
 }

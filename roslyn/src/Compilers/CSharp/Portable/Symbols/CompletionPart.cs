@@ -55,10 +55,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         All = (1 << 18) - 1,
 
         // This is the work we can do if ForceComplete is scoped to a particular SyntaxTree.
-        NamedTypeSymbolWithLocationAll = Attributes | StartBaseType | FinishBaseType | StartInterfaces | FinishInterfaces | EnumUnderlyingType |
-            TypeArguments | TypeParameters | Members | TypeMembers | SynthesizedExplicitImplementations | StartMemberChecks | FinishMemberChecks,
+        NamedTypeSymbolWithLocationAll =
+            Attributes
+            | StartBaseType
+            | FinishBaseType
+            | StartInterfaces
+            | FinishInterfaces
+            | EnumUnderlyingType
+            | TypeArguments
+            | TypeParameters
+            | Members
+            | TypeMembers
+            | SynthesizedExplicitImplementations
+            | StartMemberChecks
+            | FinishMemberChecks,
 
-        NamedTypeSymbolAll = NamedTypeSymbolWithLocationAll | MembersCompletedChecksStarted | MembersCompleted,
+        NamedTypeSymbolAll =
+            NamedTypeSymbolWithLocationAll | MembersCompletedChecksStarted | MembersCompleted,
 
         // For Usings
         StartValidatingImports = 1 << 4,
@@ -79,13 +92,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         FinishAsyncMethodChecks = 1 << 12,
         StartMethodChecks = 1 << 13,
         FinishMethodChecks = 1 << 14,
-        MethodSymbolAll = Attributes | ReturnTypeAttributes | Parameters | Type | TypeParameters | StartMethodChecks | FinishMethodChecks | StartAsyncMethodChecks | FinishAsyncMethodChecks,
+        MethodSymbolAll =
+            Attributes
+            | ReturnTypeAttributes
+            | Parameters
+            | Type
+            | TypeParameters
+            | StartMethodChecks
+            | FinishMethodChecks
+            | StartAsyncMethodChecks
+            | FinishAsyncMethodChecks,
 
         // For complex parameter symbols
         StartDefaultSyntaxValue = 1 << 11,
         EndDefaultSyntaxValue = 1 << 12,
         EndDefaultSyntaxValueDiagnostics = 1 << 13,
-        ComplexParameterSymbolAll = Attributes | StartDefaultSyntaxValue | EndDefaultSyntaxValue | EndDefaultSyntaxValueDiagnostics,
+        ComplexParameterSymbolAll =
+            Attributes
+            | StartDefaultSyntaxValue
+            | EndDefaultSyntaxValue
+            | EndDefaultSyntaxValueDiagnostics,
 
         // For type parameter symbols
         TypeParameterConstraints = 1 << 11,
@@ -98,8 +124,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         FinishPropertyParameters = 1 << 7,
         StartPropertyType = 1 << 8,
         FinishPropertyType = 1 << 9,
-        PropertySymbolAll = Attributes | StartPropertyEnsureSignature | FinishPropertyEnsureSignature | StartPropertyParameters | FinishPropertyParameters |
-                            StartPropertyType | FinishPropertyType,
+        PropertySymbolAll =
+            Attributes
+            | StartPropertyEnsureSignature
+            | FinishPropertyEnsureSignature
+            | StartPropertyParameters
+            | FinishPropertyParameters
+            | StartPropertyType
+            | FinishPropertyType,
 
         // For alias symbols
         AliasTarget = 1 << 4,
@@ -110,7 +142,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         Module = 1 << 6,
         StartValidatingAddedModules = 1 << 8,
         FinishValidatingAddedModules = 1 << 9,
-        AssemblySymbolAll = Attributes | StartAttributeChecks | FinishAttributeChecks | Module | StartValidatingAddedModules | FinishValidatingAddedModules,
+        AssemblySymbolAll =
+            Attributes
+            | StartAttributeChecks
+            | FinishAttributeChecks
+            | Module
+            | StartValidatingAddedModules
+            | FinishValidatingAddedModules,
 
         // For module symbol
         StartValidatingReferencedAssemblies = 1 << 4,

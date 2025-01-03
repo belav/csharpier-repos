@@ -48,6 +48,9 @@ namespace Internal.TypeSystem
         public abstract override MethodDesc GetTypicalMethodDefinition();
 
         // For this method, delegating to the wrapped MethodDesc would likely be the wrong thing.
-        public abstract override MethodDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation);
+        public abstract override MethodDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        );
     }
 }

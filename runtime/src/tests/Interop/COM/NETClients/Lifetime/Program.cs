@@ -2,16 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace NetClient
 {
     using System;
-    using System.Threading;
     using System.Runtime.InteropServices;
-
-    using TestLibrary;
-    using Xunit;
+    using System.Threading;
     using Server.Contract;
     using Server.Contract.Servers;
+    using TestLibrary;
+    using Xunit;
 
     public unsafe class Program
     {

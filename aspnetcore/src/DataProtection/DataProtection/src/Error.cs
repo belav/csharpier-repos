@@ -9,7 +9,9 @@ namespace Microsoft.AspNetCore.DataProtection;
 
 internal static class Error
 {
-    public static InvalidOperationException CertificateXmlEncryptor_CertificateNotFound(string thumbprint)
+    public static InvalidOperationException CertificateXmlEncryptor_CertificateNotFound(
+        string thumbprint
+    )
     {
         var message = Resources.FormatCertificateXmlEncryptor_CertificateNotFound(thumbprint);
         return new InvalidOperationException(message);
@@ -20,7 +22,11 @@ internal static class Error
         return new ArgumentException(Resources.Common_ArgumentCannotBeNullOrEmpty, parameterName);
     }
 
-    public static ArgumentException Common_BufferIncorrectlySized(string parameterName, int actualSize, int expectedSize)
+    public static ArgumentException Common_BufferIncorrectlySized(
+        string parameterName,
+        int actualSize,
+        int expectedSize
+    )
     {
         var message = Resources.FormatCommon_BufferIncorrectlySized(actualSize, expectedSize);
         return new ArgumentException(message, parameterName);
@@ -39,13 +45,21 @@ internal static class Error
 
     public static InvalidOperationException Common_PropertyCannotBeNullOrEmpty(string propertyName)
     {
-        var message = string.Format(CultureInfo.CurrentCulture, Resources.Common_PropertyCannotBeNullOrEmpty, propertyName);
+        var message = string.Format(
+            CultureInfo.CurrentCulture,
+            Resources.Common_PropertyCannotBeNullOrEmpty,
+            propertyName
+        );
         return new InvalidOperationException(message);
     }
 
     public static InvalidOperationException Common_PropertyMustBeNonNegative(string propertyName)
     {
-        var message = string.Format(CultureInfo.CurrentCulture, Resources.Common_PropertyMustBeNonNegative, propertyName);
+        var message = string.Format(
+            CultureInfo.CurrentCulture,
+            Resources.Common_PropertyMustBeNonNegative,
+            propertyName
+        );
         return new InvalidOperationException(message);
     }
 
@@ -88,7 +102,11 @@ internal static class Error
 
     public static InvalidOperationException XmlKeyManager_DuplicateKey(Guid keyId)
     {
-        var message = string.Format(CultureInfo.CurrentCulture, Resources.XmlKeyManager_DuplicateKey, keyId);
+        var message = string.Format(
+            CultureInfo.CurrentCulture,
+            Resources.XmlKeyManager_DuplicateKey,
+            keyId
+        );
         return new InvalidOperationException(message);
     }
 }

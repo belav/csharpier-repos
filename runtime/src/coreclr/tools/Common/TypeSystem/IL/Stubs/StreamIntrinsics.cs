@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
@@ -21,7 +20,10 @@ namespace Internal.IL.Stubs
                 return null;
 
             TypeDesc streamClass = method.OwningType;
-            MethodDesc beginMethod = streamClass.GetMethod(isRead ? "BeginRead" : "BeginWrite", null);
+            MethodDesc beginMethod = streamClass.GetMethod(
+                isRead ? "BeginRead" : "BeginWrite",
+                null
+            );
             MethodDesc endMethod = streamClass.GetMethod(isRead ? "EndRead" : "EndWrite", null);
 
             ILEmitter emitter = new ILEmitter();

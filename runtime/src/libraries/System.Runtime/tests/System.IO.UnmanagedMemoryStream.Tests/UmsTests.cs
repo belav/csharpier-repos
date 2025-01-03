@@ -28,16 +28,26 @@ namespace System.IO.Tests
                 IntPtr ptr = Marshal.AllocHGlobal(initialData.Length);
                 _pointers.Add(ptr);
                 Marshal.Copy(initialData, 0, ptr, initialData.Length);
-                stream =  new UnmanagedMemoryStream((byte*)ptr, initialData.Length, initialData.Length, access);
+                stream = new UnmanagedMemoryStream(
+                    (byte*)ptr,
+                    initialData.Length,
+                    initialData.Length,
+                    access
+                );
             }
             return Task.FromResult(stream);
         }
 
         protected override bool CanSetLengthGreaterThanCapacity => false;
 
-        protected override Task<Stream> CreateReadOnlyStreamCore(byte[] initialData) => CreateStream(initialData, FileAccess.Read);
-        protected override Task<Stream> CreateWriteOnlyStreamCore(byte[] initialData) => CreateStream(initialData, FileAccess.Write);
-        protected override Task<Stream> CreateReadWriteStreamCore(byte[] initialData) => CreateStream(initialData, FileAccess.ReadWrite);
+        protected override Task<Stream> CreateReadOnlyStreamCore(byte[] initialData) =>
+            CreateStream(initialData, FileAccess.Read);
+
+        protected override Task<Stream> CreateWriteOnlyStreamCore(byte[] initialData) =>
+            CreateStream(initialData, FileAccess.Write);
+
+        protected override Task<Stream> CreateReadWriteStreamCore(byte[] initialData) =>
+            CreateStream(initialData, FileAccess.ReadWrite);
     }
 
     public class DerivedUmsTests : StandaloneStreamConformanceTests, IDisposable
@@ -61,15 +71,25 @@ namespace System.IO.Tests
                 IntPtr ptr = Marshal.AllocHGlobal(initialData.Length);
                 _pointers.Add(ptr);
                 Marshal.Copy(initialData, 0, ptr, initialData.Length);
-                stream = new DerivedUnmanagedMemoryStream((byte*)ptr, initialData.Length, initialData.Length, access);
+                stream = new DerivedUnmanagedMemoryStream(
+                    (byte*)ptr,
+                    initialData.Length,
+                    initialData.Length,
+                    access
+                );
             }
             return Task.FromResult(stream);
         }
 
         protected override bool CanSetLengthGreaterThanCapacity => false;
 
-        protected override Task<Stream> CreateReadOnlyStreamCore(byte[] initialData) => CreateStream(initialData, FileAccess.Read);
-        protected override Task<Stream> CreateWriteOnlyStreamCore(byte[] initialData) => CreateStream(initialData, FileAccess.Write);
-        protected override Task<Stream> CreateReadWriteStreamCore(byte[] initialData) => CreateStream(initialData, FileAccess.ReadWrite);
+        protected override Task<Stream> CreateReadOnlyStreamCore(byte[] initialData) =>
+            CreateStream(initialData, FileAccess.Read);
+
+        protected override Task<Stream> CreateWriteOnlyStreamCore(byte[] initialData) =>
+            CreateStream(initialData, FileAccess.Write);
+
+        protected override Task<Stream> CreateReadWriteStreamCore(byte[] initialData) =>
+            CreateStream(initialData, FileAccess.ReadWrite);
     }
 }

@@ -20,7 +20,17 @@ public struct S0
 
 public class SevenByteStruct
 {
-    public static S0 s_4 = new S0 { F0 = 1, F1 = 2, F2 = 3, F3 = 4, F4 = 5, F5 = 6, F6 = 7 };
+    public static S0 s_4 = new S0
+    {
+        F0 = 1,
+        F1 = 2,
+        F2 = 3,
+        F3 = 4,
+        F4 = 5,
+        F5 = 6,
+        F6 = 7,
+    };
+
     [Fact]
     public static int TestEntryPoint()
     {

@@ -22,39 +22,71 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     internal sealed class SynthesizedRecordToString : SynthesizedRecordObjectMethod
     {
         private readonly MethodSymbol _printMethod;
-        public SynthesizedRecordToString(SourceMemberContainerTypeSymbol containingType, MethodSymbol printMethod, int memberOffset)
+
+        public SynthesizedRecordToString(
+            SourceMemberContainerTypeSymbol containingType,
+            MethodSymbol printMethod,
+            int memberOffset
+        )
             : base(
-                  containingType,
-                  WellKnownMemberNames.ObjectToString,
-                  memberOffset,
-                  isReadOnly: printMethod.IsEffectivelyReadOnly)
+                containingType,
+                WellKnownMemberNames.ObjectToString,
+                memberOffset,
+                isReadOnly: printMethod.IsEffectivelyReadOnly
+            )
         {
             Debug.Assert(printMethod is object);
             _printMethod = printMethod;
         }
 
-        protected override SpecialMember OverriddenSpecialMember => SpecialMember.System_Object__ToString;
+        protected override SpecialMember OverriddenSpecialMember =>
+            SpecialMember.System_Object__ToString;
 
-        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
+        protected override (
+            TypeWithAnnotations ReturnType,
+            ImmutableArray<ParameterSymbol> Parameters
+        ) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
         {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
-            var annotation = ContainingType.IsRecordStruct ? NullableAnnotation.Oblivious : NullableAnnotation.NotAnnotated;
-            return (ReturnType: TypeWithAnnotations.Create(Binder.GetSpecialType(compilation, SpecialType.System_String, location, diagnostics), annotation),
-                    Parameters: ImmutableArray<ParameterSymbol>.Empty);
+            var annotation = ContainingType.IsRecordStruct
+                ? NullableAnnotation.Oblivious
+                : NullableAnnotation.NotAnnotated;
+            return (
+                ReturnType: TypeWithAnnotations.Create(
+                    Binder.GetSpecialType(
+                        compilation,
+                        SpecialType.System_String,
+                        location,
+                        diagnostics
+                    ),
+                    annotation
+                ),
+                Parameters: ImmutableArray<ParameterSymbol>.Empty
+            );
         }
 
         protected override int GetParameterCountFromSyntax() => 0;
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            var F = new SyntheticBoundNodeFactory(this, this.SyntaxNode, compilationState, diagnostics);
+            var F = new SyntheticBoundNodeFactory(
+                this,
+                this.SyntaxNode,
+                compilationState,
+                diagnostics
+            );
 
             try
             {
                 CSharpCompilation compilation = ContainingType.DeclaringCompilation;
                 var stringBuilder = F.WellKnownType(WellKnownType.System_Text_StringBuilder);
-                var stringBuilderCtor = F.WellKnownMethod(WellKnownMember.System_Text_StringBuilder__ctor);
+                var stringBuilderCtor = F.WellKnownMethod(
+                    WellKnownMember.System_Text_StringBuilder__ctor
+                );
 
                 var builderLocalSymbol = F.SynthesizedLocal(stringBuilder);
                 BoundLocal builderLocal = F.Local(builderLocalSymbol);
@@ -69,15 +101,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 block.Add(makeAppendString(F, builderLocal, " { "));
 
                 // if (this.PrintMembers(builder)) builder.Append(' ');
-                block.Add(F.If(F.Call(F.This(), _printMethod, builderLocal), makeAppendChar(F, builderLocal, ' ')));
+                block.Add(
+                    F.If(
+                        F.Call(F.This(), _printMethod, builderLocal),
+                        makeAppendChar(F, builderLocal, ' ')
+                    )
+                );
 
                 // builder.Append('}');
                 block.Add(makeAppendChar(F, builderLocal, '}'));
 
                 // return builder.ToString();
-                block.Add(F.Return(F.Call(builderLocal, F.SpecialMethod(SpecialMember.System_Object__ToString))));
+                block.Add(
+                    F.Return(
+                        F.Call(builderLocal, F.SpecialMethod(SpecialMember.System_Object__ToString))
+                    )
+                );
 
-                F.CloseMethod(F.Block(ImmutableArray.Create(builderLocalSymbol), block.ToImmutableAndFree()));
+                F.CloseMethod(
+                    F.Block(ImmutableArray.Create(builderLocalSymbol), block.ToImmutableAndFree())
+                );
             }
             catch (SyntheticBoundNodeFactory.MissingPredefinedMember ex)
             {
@@ -85,14 +128,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 F.CloseMethod(F.ThrowNull());
             }
 
-            static BoundStatement makeAppendString(SyntheticBoundNodeFactory F, BoundLocal builder, string value)
+            static BoundStatement makeAppendString(
+                SyntheticBoundNodeFactory F,
+                BoundLocal builder,
+                string value
+            )
             {
-                return F.ExpressionStatement(F.Call(receiver: builder, F.WellKnownMethod(WellKnownMember.System_Text_StringBuilder__AppendString), F.StringLiteral(value)));
+                return F.ExpressionStatement(
+                    F.Call(
+                        receiver: builder,
+                        F.WellKnownMethod(WellKnownMember.System_Text_StringBuilder__AppendString),
+                        F.StringLiteral(value)
+                    )
+                );
             }
 
-            static BoundStatement makeAppendChar(SyntheticBoundNodeFactory F, BoundLocal builder, char value)
+            static BoundStatement makeAppendChar(
+                SyntheticBoundNodeFactory F,
+                BoundLocal builder,
+                char value
+            )
             {
-                return F.ExpressionStatement(F.Call(receiver: builder, F.WellKnownMethod(WellKnownMember.System_Text_StringBuilder__AppendChar), F.CharLiteral(value)));
+                return F.ExpressionStatement(
+                    F.Call(
+                        receiver: builder,
+                        F.WellKnownMethod(WellKnownMember.System_Text_StringBuilder__AppendChar),
+                        F.CharLiteral(value)
+                    )
+                );
             }
         }
     }

@@ -21,7 +21,14 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
 {
     using static CodeGenerationSymbolFactory;
 
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, LanguageNames.VisualBasic, Name = PredefinedCodeRefactoringProviderNames.GenerateComparisonOperators), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeRefactoringProviderNames.GenerateComparisonOperators
+        ),
+        Shared
+    ]
     internal class GenerateComparisonOperatorsCodeRefactoringProvider : CodeRefactoringProvider
     {
         private const string LeftName = "left";
@@ -32,42 +39,67 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
                 CodeGenerationOperatorKind.LessThan,
                 CodeGenerationOperatorKind.LessThanOrEqual,
                 CodeGenerationOperatorKind.GreaterThan,
-                CodeGenerationOperatorKind.GreaterThanOrEqual);
+                CodeGenerationOperatorKind.GreaterThanOrEqual
+            );
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public GenerateComparisonOperatorsCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public GenerateComparisonOperatorsCodeRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
             var (document, textSpan, cancellationToken) = context;
 
             var helpers = document.GetRequiredLanguageService<IRefactoringHelpersService>();
-            var sourceText = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var sourceText = await document
+                .GetValueTextAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // We offer the refactoring when the user is either on the header of a class/struct,
             // or if they're between any members of a class/struct and are on a blank line.
-            if (!helpers.IsOnTypeHeader(root, textSpan.Start, fullHeader: true, out var typeDeclaration) &&
-                !helpers.IsBetweenTypeMembers(sourceText, root, textSpan.Start, out typeDeclaration))
+            if (
+                !helpers.IsOnTypeHeader(
+                    root,
+                    textSpan.Start,
+                    fullHeader: true,
+                    out var typeDeclaration
+                )
+                && !helpers.IsBetweenTypeMembers(
+                    sourceText,
+                    root,
+                    textSpan.Start,
+                    out typeDeclaration
+                )
+            )
             {
                 return;
             }
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var compilation = semanticModel.Compilation;
 
             var comparableType = compilation.GetTypeByMetadataName(typeof(IComparable<>).FullName!);
             if (comparableType == null)
                 return;
 
-            var containingType = semanticModel.GetDeclaredSymbol(typeDeclaration, cancellationToken) as INamedTypeSymbol;
+            var containingType =
+                semanticModel.GetDeclaredSymbol(typeDeclaration, cancellationToken)
+                as INamedTypeSymbol;
             if (containingType == null)
                 return;
 
-            using var _1 = ArrayBuilder<INamedTypeSymbol>.GetInstance(out var missingComparableTypes);
+            using var _1 = ArrayBuilder<INamedTypeSymbol>.GetInstance(
+                out var missingComparableTypes
+            );
 
             foreach (var iface in containingType.Interfaces)
             {
@@ -94,10 +126,20 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             if (missingComparableTypes.Count == 1)
             {
                 var missingType = missingComparableTypes[0];
-                context.RegisterRefactoring(CodeAction.Create(
-                    FeaturesResources.Generate_comparison_operators,
-                    c => GenerateComparisonOperatorsAsync(document, typeDeclaration, missingType, context.Options, c),
-                    nameof(FeaturesResources.Generate_comparison_operators)));
+                context.RegisterRefactoring(
+                    CodeAction.Create(
+                        FeaturesResources.Generate_comparison_operators,
+                        c =>
+                            GenerateComparisonOperatorsAsync(
+                                document,
+                                typeDeclaration,
+                                missingType,
+                                context.Options,
+                                c
+                            ),
+                        nameof(FeaturesResources.Generate_comparison_operators)
+                    )
+                );
                 return;
             }
 
@@ -107,24 +149,41 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             {
                 var typeArg = missingType.TypeArguments[0];
                 var displayString = typeArg.ToMinimalDisplayString(semanticModel, textSpan.Start);
-                nestedActions.Add(CodeAction.Create(
-                    string.Format(FeaturesResources.Generate_for_0, displayString),
-                    c => GenerateComparisonOperatorsAsync(document, typeDeclaration, missingType, context.Options, c),
-                    nameof(FeaturesResources.Generate_for_0) + "_" + displayString));
+                nestedActions.Add(
+                    CodeAction.Create(
+                        string.Format(FeaturesResources.Generate_for_0, displayString),
+                        c =>
+                            GenerateComparisonOperatorsAsync(
+                                document,
+                                typeDeclaration,
+                                missingType,
+                                context.Options,
+                                c
+                            ),
+                        nameof(FeaturesResources.Generate_for_0) + "_" + displayString
+                    )
+                );
             }
 
-            context.RegisterRefactoring(CodeAction.Create(
-                FeaturesResources.Generate_comparison_operators,
-                nestedActions.ToImmutable(),
-                isInlinable: false));
+            context.RegisterRefactoring(
+                CodeAction.Create(
+                    FeaturesResources.Generate_comparison_operators,
+                    nestedActions.ToImmutable(),
+                    isInlinable: false
+                )
+            );
         }
 
-        private static IMethodSymbol? TryGetCompareMethodImpl(INamedTypeSymbol containingType, ITypeSymbol comparableType)
+        private static IMethodSymbol? TryGetCompareMethodImpl(
+            INamedTypeSymbol containingType,
+            ITypeSymbol comparableType
+        )
         {
             foreach (var member in comparableType.GetMembers(nameof(IComparable<int>.CompareTo)))
             {
                 if (member is IMethodSymbol method)
-                    return (IMethodSymbol?)containingType.FindImplementationForInterfaceMember(method);
+                    return (IMethodSymbol?)
+                        containingType.FindImplementationForInterfaceMember(method);
             }
 
             return null;
@@ -135,38 +194,50 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             SyntaxNode typeDeclaration,
             INamedTypeSymbol comparableType,
             CodeAndImportGenerationOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var containingType = (INamedTypeSymbol)semanticModel.GetRequiredDeclaredSymbol(typeDeclaration, cancellationToken);
+            var containingType = (INamedTypeSymbol)
+                semanticModel.GetRequiredDeclaredSymbol(typeDeclaration, cancellationToken);
             var compareMethod = TryGetCompareMethodImpl(containingType, comparableType)!;
 
             var generator = document.GetRequiredLanguageService<SyntaxGenerator>();
 
             var codeGenService = document.GetRequiredLanguageService<ICodeGenerationService>();
             var operators = GenerateComparisonOperators(
-                generator, semanticModel.Compilation, containingType, comparableType,
-                GenerateLeftExpression(generator, comparableType, compareMethod));
+                generator,
+                semanticModel.Compilation,
+                containingType,
+                comparableType,
+                GenerateLeftExpression(generator, comparableType, compareMethod)
+            );
 
             var solutionContext = new CodeGenerationSolutionContext(
                 document.Project.Solution,
                 new CodeGenerationContext(contextLocation: typeDeclaration.GetLocation()),
-                fallbackOptions);
+                fallbackOptions
+            );
 
-            return await codeGenService.AddMembersAsync(solutionContext, containingType, operators, cancellationToken).ConfigureAwait(false);
+            return await codeGenService
+                .AddMembersAsync(solutionContext, containingType, operators, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         private static SyntaxNode GenerateLeftExpression(
             SyntaxGenerator generator,
             INamedTypeSymbol comparableType,
-            IMethodSymbol compareMethod)
+            IMethodSymbol compareMethod
+        )
         {
             var thisExpression = generator.IdentifierName(LeftName);
             var generateCast =
-                compareMethod != null &&
-                compareMethod.DeclaredAccessibility != Accessibility.Public &&
-                compareMethod.Name != nameof(IComparable.CompareTo);
+                compareMethod != null
+                && compareMethod.DeclaredAccessibility != Accessibility.Public
+                && compareMethod.Name != nameof(IComparable.CompareTo);
 
             return generateCast
                 ? generator.CastExpression(comparableType, thisExpression)
@@ -178,7 +249,8 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             Compilation compilation,
             INamedTypeSymbol containingType,
             INamedTypeSymbol comparableType,
-            SyntaxNode thisExpression)
+            SyntaxNode thisExpression
+        )
         {
             using var _ = ArrayBuilder<IMethodSymbol>.GetInstance(out var operators);
 
@@ -187,20 +259,26 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
 
             var parameters = ImmutableArray.Create(
                 CreateParameterSymbol(containingType, LeftName),
-                CreateParameterSymbol(comparedType, RightName));
+                CreateParameterSymbol(comparedType, RightName)
+            );
 
             foreach (var kind in s_operatorKinds)
             {
                 if (!HasComparisonOperator(containingType, comparedType, kind))
                 {
-                    operators.Add(CreateOperatorSymbol(
-                        attributes: default,
-                        Accessibility.Public,
-                        DeclarationModifiers.Static,
-                        boolType,
-                        kind,
-                        parameters,
-                        ImmutableArray.Create(GenerateStatement(generator, kind, thisExpression))));
+                    operators.Add(
+                        CreateOperatorSymbol(
+                            attributes: default,
+                            Accessibility.Public,
+                            DeclarationModifiers.Static,
+                            boolType,
+                            kind,
+                            parameters,
+                            ImmutableArray.Create(
+                                GenerateStatement(generator, kind, thisExpression)
+                            )
+                        )
+                    );
                 }
             }
 
@@ -208,27 +286,44 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
         }
 
         private static SyntaxNode GenerateStatement(
-            SyntaxGenerator generator, CodeGenerationOperatorKind kind, SyntaxNode leftExpression)
+            SyntaxGenerator generator,
+            CodeGenerationOperatorKind kind,
+            SyntaxNode leftExpression
+        )
         {
             var zero = generator.LiteralExpression(0);
 
             var compareToCall = generator.InvocationExpression(
                 generator.MemberAccessExpression(leftExpression, nameof(IComparable.CompareTo)),
-                generator.IdentifierName(RightName));
+                generator.IdentifierName(RightName)
+            );
 
             var comparison = kind switch
             {
-                CodeGenerationOperatorKind.LessThan => generator.LessThanExpression(compareToCall, zero),
-                CodeGenerationOperatorKind.LessThanOrEqual => generator.LessThanOrEqualExpression(compareToCall, zero),
-                CodeGenerationOperatorKind.GreaterThan => generator.GreaterThanExpression(compareToCall, zero),
-                CodeGenerationOperatorKind.GreaterThanOrEqual => generator.GreaterThanOrEqualExpression(compareToCall, zero),
+                CodeGenerationOperatorKind.LessThan => generator.LessThanExpression(
+                    compareToCall,
+                    zero
+                ),
+                CodeGenerationOperatorKind.LessThanOrEqual => generator.LessThanOrEqualExpression(
+                    compareToCall,
+                    zero
+                ),
+                CodeGenerationOperatorKind.GreaterThan => generator.GreaterThanExpression(
+                    compareToCall,
+                    zero
+                ),
+                CodeGenerationOperatorKind.GreaterThanOrEqual =>
+                    generator.GreaterThanOrEqualExpression(compareToCall, zero),
                 _ => throw ExceptionUtilities.Unreachable(),
             };
 
             return generator.ReturnStatement(comparison);
         }
 
-        private static bool HasAllComparisonOperators(INamedTypeSymbol containingType, ITypeSymbol comparedType)
+        private static bool HasAllComparisonOperators(
+            INamedTypeSymbol containingType,
+            ITypeSymbol comparedType
+        )
         {
             foreach (var op in s_operatorKinds)
             {
@@ -239,14 +334,20 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             return true;
         }
 
-        private static bool HasComparisonOperator(INamedTypeSymbol containingType, ITypeSymbol comparedType, CodeGenerationOperatorKind kind)
+        private static bool HasComparisonOperator(
+            INamedTypeSymbol containingType,
+            ITypeSymbol comparedType,
+            CodeGenerationOperatorKind kind
+        )
         {
             // Look for an `operator <(... c1, ComparedType c2)` member.
             foreach (var member in containingType.GetMembers(GetOperatorName(kind)))
             {
-                if (member is IMethodSymbol method &&
-                    method.Parameters.Length >= 2 &&
-                    comparedType.Equals(method.Parameters[1].Type))
+                if (
+                    member is IMethodSymbol method
+                    && method.Parameters.Length >= 2
+                    && comparedType.Equals(method.Parameters[1].Type)
+                )
                 {
                     return true;
                 }
@@ -255,13 +356,16 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             return false;
         }
 
-        private static string GetOperatorName(CodeGenerationOperatorKind kind)
-            => kind switch
+        private static string GetOperatorName(CodeGenerationOperatorKind kind) =>
+            kind switch
             {
                 CodeGenerationOperatorKind.LessThan => WellKnownMemberNames.LessThanOperatorName,
-                CodeGenerationOperatorKind.LessThanOrEqual => WellKnownMemberNames.LessThanOrEqualOperatorName,
-                CodeGenerationOperatorKind.GreaterThan => WellKnownMemberNames.GreaterThanOperatorName,
-                CodeGenerationOperatorKind.GreaterThanOrEqual => WellKnownMemberNames.GreaterThanOrEqualOperatorName,
+                CodeGenerationOperatorKind.LessThanOrEqual =>
+                    WellKnownMemberNames.LessThanOrEqualOperatorName,
+                CodeGenerationOperatorKind.GreaterThan =>
+                    WellKnownMemberNames.GreaterThanOperatorName,
+                CodeGenerationOperatorKind.GreaterThanOrEqual =>
+                    WellKnownMemberNames.GreaterThanOrEqualOperatorName,
                 _ => throw ExceptionUtilities.Unreachable(),
             };
     }

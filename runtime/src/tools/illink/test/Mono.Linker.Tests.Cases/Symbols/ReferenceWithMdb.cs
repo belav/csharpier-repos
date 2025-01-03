@@ -4,33 +4,29 @@ using Mono.Linker.Tests.Cases.Symbols.Dependencies;
 
 namespace Mono.Linker.Tests.Cases.Symbols
 {
-	[IgnoreTestCase ("Test relies on checked-in binaries: https://github.com/dotnet/runtime/issues/78344")]
-	[SetupLinkerArgument ("--skip-unresolved", "true")]
-	[Reference ("Dependencies/LibraryWithMdb/LibraryWithMdb.dll")]
-	[ReferenceDependency ("Dependencies/LibraryWithMdb/LibraryWithMdb.dll.mdb")]
-	[SetupLinkerLinkSymbols ("false")]
+    [IgnoreTestCase(
+        "Test relies on checked-in binaries: https://github.com/dotnet/runtime/issues/78344"
+    )]
+    [SetupLinkerArgument("--skip-unresolved", "true")]
+    [Reference("Dependencies/LibraryWithMdb/LibraryWithMdb.dll")]
+    [ReferenceDependency("Dependencies/LibraryWithMdb/LibraryWithMdb.dll.mdb")]
+    [SetupLinkerLinkSymbols("false")]
+    [RemovedSymbols("LibraryWithMdb.dll")]
+    [KeptMemberInAssembly("LibraryWithMdb.dll", typeof(LibraryWithMdb), "SomeMethod()")]
+    [RemovedMemberInAssembly("LibraryWithMdb.dll", typeof(LibraryWithMdb), "NotUsed()")]
+    public class ReferenceWithMdb
+    {
+        static void Main()
+        {
+            // Use some stuff so that we can verify that the trimmer output correct results
+            SomeMethod();
 
-	[RemovedSymbols ("LibraryWithMdb.dll")]
+            LibraryWithMdb.SomeMethod();
+        }
 
-	[KeptMemberInAssembly ("LibraryWithMdb.dll", typeof (LibraryWithMdb), "SomeMethod()")]
-	[RemovedMemberInAssembly ("LibraryWithMdb.dll", typeof (LibraryWithMdb), "NotUsed()")]
-	public class ReferenceWithMdb
-	{
-		static void Main ()
-		{
-			// Use some stuff so that we can verify that the trimmer output correct results
-			SomeMethod ();
+        [Kept]
+        static void SomeMethod() { }
 
-			LibraryWithMdb.SomeMethod ();
-		}
-
-		[Kept]
-		static void SomeMethod ()
-		{
-		}
-
-		static void NotUsed ()
-		{
-		}
-	}
+        static void NotUsed() { }
+    }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,30 +26,26 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.ComponentModel;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.ComponentModel;
 
 namespace System.Web.UI.WebControls.Adapters
 {
-	public class HideDisabledControlAdapter : WebControlAdapter
-	{
-		public HideDisabledControlAdapter ()
-		{
-		}
+    public class HideDisabledControlAdapter : WebControlAdapter
+    {
+        public HideDisabledControlAdapter() { }
 
-		internal HideDisabledControlAdapter (WebControl c) : base (c)
-		{
-		}
+        internal HideDisabledControlAdapter(WebControl c)
+            : base(c) { }
 
-		protected internal override void Render(HtmlTextWriter writer)
-		{
-			if (!Control.IsEnabled)
-				return;
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            if (!Control.IsEnabled)
+                return;
 
-			base.Render (writer);
-		}
-	}
+            base.Render(writer);
+        }
+    }
 }
-

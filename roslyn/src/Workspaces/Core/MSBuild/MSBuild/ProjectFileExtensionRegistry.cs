@@ -18,14 +18,19 @@ namespace Microsoft.CodeAnalysis.MSBuild
         private readonly Dictionary<string, string> _extensionToLanguageMap;
         private readonly NonReentrantLock _dataGuard;
 
-        public ProjectFileExtensionRegistry(SolutionServices solutionServices, DiagnosticReporter diagnosticReporter)
+        public ProjectFileExtensionRegistry(
+            SolutionServices solutionServices,
+            DiagnosticReporter diagnosticReporter
+        )
         {
             _solutionServices = solutionServices;
             _diagnosticReporter = diagnosticReporter;
-            _extensionToLanguageMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            _extensionToLanguageMap = new Dictionary<string, string>(
+                StringComparer.OrdinalIgnoreCase
+            )
             {
                 { "csproj", LanguageNames.CSharp },
-                { "vbproj", LanguageNames.VisualBasic }
+                { "vbproj", LanguageNames.VisualBasic },
             };
 
             _dataGuard = new NonReentrantLock();
@@ -42,7 +47,11 @@ namespace Microsoft.CodeAnalysis.MSBuild
             }
         }
 
-        public bool TryGetLanguageNameFromProjectPath(string? projectFilePath, DiagnosticReportingMode mode, [NotNullWhen(true)] out string? languageName)
+        public bool TryGetLanguageNameFromProjectPath(
+            string? projectFilePath,
+            DiagnosticReportingMode mode,
+            [NotNullWhen(true)] out string? languageName
+        )
         {
             using (_dataGuard.DisposableWait())
             {
@@ -59,22 +68,41 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
                 if (_extensionToLanguageMap.TryGetValue(extension, out var language))
                 {
-                    if (_solutionServices.SupportedLanguages.Contains(language) &&
-                        _solutionServices.GetLanguageServices(language).GetService<ICommandLineParserService>() is not null)
+                    if (
+                        _solutionServices.SupportedLanguages.Contains(language)
+                        && _solutionServices
+                            .GetLanguageServices(language)
+                            .GetService<ICommandLineParserService>()
+                            is not null
+                    )
                     {
                         languageName = language;
                         return true;
                     }
                     else
                     {
-                        _diagnosticReporter.Report(mode, string.Format(WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported, projectFilePath, language));
+                        _diagnosticReporter.Report(
+                            mode,
+                            string.Format(
+                                WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported,
+                                projectFilePath,
+                                language
+                            )
+                        );
                         languageName = null;
                         return false;
                     }
                 }
                 else
                 {
-                    _diagnosticReporter.Report(mode, string.Format(WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language, projectFilePath, Path.GetExtension(projectFilePath)));
+                    _diagnosticReporter.Report(
+                        mode,
+                        string.Format(
+                            WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
+                            projectFilePath,
+                            Path.GetExtension(projectFilePath)
+                        )
+                    );
                     languageName = null;
                     return false;
                 }

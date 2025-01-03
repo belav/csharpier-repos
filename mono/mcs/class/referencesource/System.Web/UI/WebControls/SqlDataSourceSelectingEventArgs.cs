@@ -1,36 +1,38 @@
 //------------------------------------------------------------------------------
 // <copyright file="SqlDataSourceSelectingEventArgs.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.ComponentModel;
     using System.Data;
     using System.Data.Common;
 
-    public class SqlDataSourceSelectingEventArgs : SqlDataSourceCommandEventArgs {
-
+    public class SqlDataSourceSelectingEventArgs : SqlDataSourceCommandEventArgs
+    {
         private DataSourceSelectArguments _arguments;
+
         /*private bool _executingSelectCount;*/
 
 
 
-        public SqlDataSourceSelectingEventArgs(DbCommand command, DataSourceSelectArguments arguments /*, bool executingSelectCount*/) : base(command) {
+        public SqlDataSourceSelectingEventArgs(
+            DbCommand command,
+            DataSourceSelectArguments arguments /*, bool executingSelectCount*/
+        )
+            : base(command)
+        {
             _arguments = arguments;
             //_executingSelectCount = executingSelectCount;
         }
 
-
-
-        public DataSourceSelectArguments Arguments {
-            get {
-                return _arguments;
-            }
+        public DataSourceSelectArguments Arguments
+        {
+            get { return _arguments; }
         }
-
 
         /*public bool ExecutingSelectCount {
             get {
@@ -39,4 +41,3 @@ namespace System.Web.UI.WebControls {
         }*/
     }
 }
-

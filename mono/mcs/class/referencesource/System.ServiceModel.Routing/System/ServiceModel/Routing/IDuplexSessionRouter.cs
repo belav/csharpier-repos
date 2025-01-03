@@ -8,7 +8,11 @@ namespace System.ServiceModel.Routing
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    [ServiceContract(Namespace = RoutingUtilities.RoutingNamespace, SessionMode = SessionMode.Required, CallbackContract = typeof(IDuplexRouterCallback))]
+    [ServiceContract(
+        Namespace = RoutingUtilities.RoutingNamespace,
+        SessionMode = SessionMode.Required,
+        CallbackContract = typeof(IDuplexRouterCallback)
+    )]
     public interface IDuplexSessionRouter
     {
         [OperationContract(AsyncPattern = true, IsOneWay = true, Action = "*")]

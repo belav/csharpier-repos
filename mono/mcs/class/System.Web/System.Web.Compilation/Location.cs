@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,75 +30,89 @@
 
 namespace System.Web.Compilation
 {
-	class Location : ILocation
-	{
-		int beginLine, endLine, beginColumn, endColumn;
-		string fileName, plainText;
-		ILocation location;
-		
-		public Location (ILocation location)
-		{
-			Init (location);
-		}
+    class Location : ILocation
+    {
+        int beginLine,
+            endLine,
+            beginColumn,
+            endColumn;
+        string fileName,
+            plainText;
+        ILocation location;
 
-		public void Init (ILocation location)
-		{
-			if (location == null) {
-				beginLine = 0;
-				endLine = 0;
-				beginColumn = 0;
-				endColumn = 0;
-				fileName = null;
-				plainText = null;
-			} else {
-				beginLine = location.BeginLine;
-				endLine = location.EndLine;
-				beginColumn = location.BeginColumn;
-				endColumn = location.EndColumn;
-				fileName = location.Filename;
-				plainText = location.PlainText;
-			}
-			this.location = location;
-		}
+        public Location(ILocation location)
+        {
+            Init(location);
+        }
 
-		public string Filename {
-			get { return fileName; }
-			set { fileName = value; }
-		}
+        public void Init(ILocation location)
+        {
+            if (location == null)
+            {
+                beginLine = 0;
+                endLine = 0;
+                beginColumn = 0;
+                endColumn = 0;
+                fileName = null;
+                plainText = null;
+            }
+            else
+            {
+                beginLine = location.BeginLine;
+                endLine = location.EndLine;
+                beginColumn = location.BeginColumn;
+                endColumn = location.EndColumn;
+                fileName = location.Filename;
+                plainText = location.PlainText;
+            }
+            this.location = location;
+        }
 
-		public int BeginLine {
-			get { return beginLine; }
-			set { beginLine = value; }
-		}
+        public string Filename
+        {
+            get { return fileName; }
+            set { fileName = value; }
+        }
 
-		public int EndLine {
-			get { return endLine; }
-			set { endLine = value; }
-		}
+        public int BeginLine
+        {
+            get { return beginLine; }
+            set { beginLine = value; }
+        }
 
-		public int BeginColumn {
-			get { return beginColumn; }
-			set { beginColumn = value; }
-		}
+        public int EndLine
+        {
+            get { return endLine; }
+            set { endLine = value; }
+        }
 
-		public int EndColumn {
-			get { return endColumn; }
-			set { endColumn = value; }
-		}
+        public int BeginColumn
+        {
+            get { return beginColumn; }
+            set { beginColumn = value; }
+        }
 
-		public string PlainText {
-			get { return plainText; }
-			set { plainText = value; }
-		}
+        public int EndColumn
+        {
+            get { return endColumn; }
+            set { endColumn = value; }
+        }
 
-		public string FileText {
-			get {
-				if (location != null)
-					return location.FileText;
+        public string PlainText
+        {
+            get { return plainText; }
+            set { plainText = value; }
+        }
 
-				return null;
-			}
-		}
-	}
+        public string FileText
+        {
+            get
+            {
+                if (location != null)
+                    return location.FileText;
+
+                return null;
+            }
+        }
+    }
 }
-

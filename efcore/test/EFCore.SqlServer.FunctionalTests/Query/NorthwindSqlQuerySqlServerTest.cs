@@ -5,17 +5,21 @@ using Microsoft.Data.SqlClient;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindSqlQuerySqlServerTest : NorthwindSqlQueryTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
+public class NorthwindSqlQuerySqlServerTest
+    : NorthwindSqlQueryTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
 {
-    public NorthwindSqlQuerySqlServerTest(NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture, ITestOutputHelper testOutputHelper)
+    public NorthwindSqlQuerySqlServerTest(
+        NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture,
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task SqlQueryRaw_over_int(bool async)
     {
@@ -24,7 +28,8 @@ public class NorthwindSqlQuerySqlServerTest : NorthwindSqlQueryTestBase<Northwin
         AssertSql(
             """
 SELECT "ProductID" FROM "Products"
-""");
+"""
+        );
     }
 
     public override async Task SqlQuery_composed_Contains(bool async)
@@ -41,7 +46,8 @@ WHERE [o].[OrderID] IN (
         SELECT "ProductID" AS "Value" FROM "Products"
     ) AS [t]
 )
-""");
+"""
+        );
     }
 
     public override async Task SqlQuery_composed_Join(bool async)
@@ -55,7 +61,8 @@ FROM [Orders] AS [o]
 INNER JOIN (
     SELECT "ProductID" AS "Value" FROM "Products"
 ) AS [t] ON [o].[OrderID] = CAST([t].[Value] AS int)
-""");
+"""
+        );
     }
 
     public override async Task SqlQuery_over_int_with_parameter(bool async)
@@ -67,12 +74,13 @@ INNER JOIN (
 p0='10'
 
 SELECT "ProductID" FROM "Products" WHERE "ProductID" = @p0
-""");
+"""
+        );
     }
 
-    protected override DbParameter CreateDbParameter(string name, object value)
-        => new SqlParameter { ParameterName = name, Value = value };
+    protected override DbParameter CreateDbParameter(string name, object value) =>
+        new SqlParameter { ParameterName = name, Value = value };
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

@@ -12,18 +12,35 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal abstract class AbstractLinkedFileMergeConflictCommentAdditionService : IMergeConflictHandler, ILanguageService, ILinkedFileMergeConflictCommentAdditionService
+    internal abstract class AbstractLinkedFileMergeConflictCommentAdditionService
+        : IMergeConflictHandler,
+            ILanguageService,
+            ILinkedFileMergeConflictCommentAdditionService
     {
-        internal abstract string GetConflictCommentText(string header, string beforeString, string afterString);
+        internal abstract string GetConflictCommentText(
+            string header,
+            string beforeString,
+            string afterString
+        );
 
-        public IEnumerable<TextChange> CreateEdits(SourceText originalSourceText, IEnumerable<UnmergedDocumentChanges> unmergedChanges)
+        public IEnumerable<TextChange> CreateEdits(
+            SourceText originalSourceText,
+            IEnumerable<UnmergedDocumentChanges> unmergedChanges
+        )
         {
             var commentChanges = new List<TextChange>();
 
             foreach (var documentWithChanges in unmergedChanges)
             {
-                var partitionedChanges = PartitionChangesForDocument(documentWithChanges.UnmergedChanges, originalSourceText);
-                var comments = GetCommentChangesForDocument(partitionedChanges, documentWithChanges.ProjectName, originalSourceText);
+                var partitionedChanges = PartitionChangesForDocument(
+                    documentWithChanges.UnmergedChanges,
+                    originalSourceText
+                );
+                var comments = GetCommentChangesForDocument(
+                    partitionedChanges,
+                    documentWithChanges.ProjectName,
+                    originalSourceText
+                );
 
                 commentChanges.AddRange(comments);
             }
@@ -31,18 +48,25 @@ namespace Microsoft.CodeAnalysis
             return commentChanges;
         }
 
-        private static IEnumerable<IEnumerable<TextChange>> PartitionChangesForDocument(IEnumerable<TextChange> changes, SourceText originalSourceText)
+        private static IEnumerable<IEnumerable<TextChange>> PartitionChangesForDocument(
+            IEnumerable<TextChange> changes,
+            SourceText originalSourceText
+        )
         {
             var partitionedChanges = new List<IEnumerable<TextChange>>();
             var currentPartition = new List<TextChange>();
 
             currentPartition.Add(changes.First());
-            var currentPartitionEndLine = originalSourceText.Lines.GetLineFromPosition(changes.First().Span.End);
+            var currentPartitionEndLine = originalSourceText.Lines.GetLineFromPosition(
+                changes.First().Span.End
+            );
 
             foreach (var change in changes.Skip(1))
             {
                 // If changes are on adjacent lines, consider them part of the same change.
-                var changeStartLine = originalSourceText.Lines.GetLineFromPosition(change.Span.Start);
+                var changeStartLine = originalSourceText.Lines.GetLineFromPosition(
+                    change.Span.Start
+                );
                 if (changeStartLine.LineNumber >= currentPartitionEndLine.LineNumber + 2)
                 {
                     partitionedChanges.Add(currentPartition);
@@ -50,7 +74,9 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 currentPartition.Add(change);
-                currentPartitionEndLine = originalSourceText.Lines.GetLineFromPosition(change.Span.End);
+                currentPartitionEndLine = originalSourceText.Lines.GetLineFromPosition(
+                    change.Span.End
+                );
             }
 
             if (currentPartition.Any())
@@ -61,7 +87,11 @@ namespace Microsoft.CodeAnalysis
             return partitionedChanges;
         }
 
-        private List<TextChange> GetCommentChangesForDocument(IEnumerable<IEnumerable<TextChange>> partitionedChanges, string projectName, SourceText oldDocumentText)
+        private List<TextChange> GetCommentChangesForDocument(
+            IEnumerable<IEnumerable<TextChange>> partitionedChanges,
+            string projectName,
+            SourceText oldDocumentText
+        )
         {
             var commentChanges = new List<TextChange>();
 
@@ -70,21 +100,37 @@ namespace Microsoft.CodeAnalysis
                 var startPosition = changePartition.First().Span.Start;
                 var endPosition = changePartition.Last().Span.End;
 
-                var startLineStartPosition = oldDocumentText.Lines.GetLineFromPosition(startPosition).Start;
+                var startLineStartPosition = oldDocumentText
+                    .Lines.GetLineFromPosition(startPosition)
+                    .Start;
                 var endLineEndPosition = oldDocumentText.Lines.GetLineFromPosition(endPosition).End;
 
-                var oldText = oldDocumentText.GetSubText(TextSpan.FromBounds(startLineStartPosition, endLineEndPosition));
-                var adjustedChanges = changePartition.Select(c => new TextChange(TextSpan.FromBounds(c.Span.Start - startLineStartPosition, c.Span.End - startLineStartPosition), c.NewText));
+                var oldText = oldDocumentText.GetSubText(
+                    TextSpan.FromBounds(startLineStartPosition, endLineEndPosition)
+                );
+                var adjustedChanges = changePartition.Select(c => new TextChange(
+                    TextSpan.FromBounds(
+                        c.Span.Start - startLineStartPosition,
+                        c.Span.End - startLineStartPosition
+                    ),
+                    c.NewText
+                ));
                 var newText = oldText.WithChanges(adjustedChanges);
 
                 var warningText = GetConflictCommentText(
                     string.Format(WorkspacesResources.Unmerged_change_from_project_0, projectName),
                     TrimBlankLines(oldText),
-                    TrimBlankLines(newText));
+                    TrimBlankLines(newText)
+                );
 
                 if (warningText != null)
                 {
-                    commentChanges.Add(new TextChange(TextSpan.FromBounds(startLineStartPosition, startLineStartPosition), warningText));
+                    commentChanges.Add(
+                        new TextChange(
+                            TextSpan.FromBounds(startLineStartPosition, startLineStartPosition),
+                            warningText
+                        )
+                    );
                 }
             }
 
@@ -93,7 +139,8 @@ namespace Microsoft.CodeAnalysis
 
         private static string TrimBlankLines(SourceText text)
         {
-            int startLine, endLine;
+            int startLine,
+                endLine;
             for (startLine = 0; startLine < text.Lines.Count; startLine++)
             {
                 if (!text.Lines[startLine].IsEmptyOrWhitespace())
@@ -111,7 +158,10 @@ namespace Microsoft.CodeAnalysis
             }
 
             return startLine <= endLine
-                ? text.GetSubText(TextSpan.FromBounds(text.Lines[startLine].Start, text.Lines[endLine].End)).ToString()
+                ? text.GetSubText(
+                        TextSpan.FromBounds(text.Lines[startLine].Start, text.Lines[endLine].End)
+                    )
+                    .ToString()
                 : null;
         }
     }

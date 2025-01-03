@@ -35,9 +35,8 @@ namespace System.Configuration
                 ConfigSource = ConfigSource,
                 StreamName = StreamName,
                 IsMonitored = IsMonitored,
-                Version = Version
+                Version = Version,
             };
-
 
             return clone;
         }

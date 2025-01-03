@@ -21,8 +21,13 @@ namespace System.ServiceModel.Channels
         ChannelManagerBase channelManager;
         PeerMessageDispatcher<IDuplexChannel, PeerDuplexChannel> messageDispatcher;
 
-        public PeerDuplexChannel(PeerNodeImplementation peerNode, PeerNodeImplementation.Registration registration, ChannelManagerBase channelManager,
-                                 EndpointAddress localAddress, Uri via)
+        public PeerDuplexChannel(
+            PeerNodeImplementation peerNode,
+            PeerNodeImplementation.Registration registration,
+            ChannelManagerBase channelManager,
+            EndpointAddress localAddress,
+            Uri via
+        )
             : base(channelManager, localAddress)
         {
             PeerNodeImplementation.ValidateVia(via);
@@ -53,13 +58,13 @@ namespace System.ServiceModel.Channels
 
         internal PeerMessageDispatcher<IDuplexChannel, PeerDuplexChannel> Dispatcher
         {
-            get
-            {
-                return this.messageDispatcher;
-            }
+            get { return this.messageDispatcher; }
             set
             {
-                Fx.Assert(this.State < CommunicationState.Opened, "Can not change the dispatcher on DuplexChannel after Open.");
+                Fx.Assert(
+                    this.State < CommunicationState.Opened,
+                    "Can not change the dispatcher on DuplexChannel after Open."
+                );
                 this.messageDispatcher = value;
             }
         }
@@ -91,7 +96,11 @@ namespace System.ServiceModel.Channels
             }
             else if (typeof(T) == typeof(FaultConverter))
             {
-                return (T)(object)FaultConverter.GetDefaultFaultConverter(MessageVersion.Soap12WSAddressing10);
+                return (T)
+                    (object)
+                        FaultConverter.GetDefaultFaultConverter(
+                            MessageVersion.Soap12WSAddressing10
+                        );
             }
             return base.GetProperty<T>();
         }
@@ -107,18 +116,27 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                 }
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.peerNode.InnerNode.BeginClose(timeout, callback, state);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             IAsyncResult result = this.peerNode.InnerNode.BeginOpen(timeout, callback, state, true);
             return result;
@@ -175,8 +193,13 @@ namespace System.ServiceModel.Channels
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerChannelMessageReceived,
-                    SR.GetString(SR.TraceCodePeerChannelMessageReceived), this, message);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.PeerChannelMessageReceived,
+                    SR.GetString(SR.TraceCodePeerChannelMessageReceived),
+                    this,
+                    message
+                );
             }
         }
 
@@ -197,10 +220,18 @@ namespace System.ServiceModel.Channels
             EndSend(BeginSend(message, timeout, null, null));
         }
 
-        protected override IAsyncResult OnBeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-            Fx.Assert(message.Headers.Action != message.Version.Addressing.DefaultFaultAction, "fault action in duplex.send");
+            Fx.Assert(
+                message.Headers.Action != message.Version.Addressing.DefaultFaultAction,
+                "fault action in duplex.send"
+            );
 
             if (this.securityProtocol == null)
             {
@@ -208,12 +239,25 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.securityProtocol == null)
                     {
-                        this.securityProtocol = ((IPeerFactory)channelManager).SecurityManager.CreateSecurityProtocol<IDuplexChannel>(this.to, timeoutHelper.RemainingTime());
+                        this.securityProtocol = (
+                            (IPeerFactory)channelManager
+                        ).SecurityManager.CreateSecurityProtocol<IDuplexChannel>(
+                            this.to,
+                            timeoutHelper.RemainingTime()
+                        );
                     }
                 }
             }
-            return this.peerNode.InnerNode.BeginSend(this, message, this.via, (ITransportFactorySettings)Manager,
-                timeoutHelper.RemainingTime(), callback, state, this.securityProtocol);
+            return this.peerNode.InnerNode.BeginSend(
+                this,
+                message,
+                this.via,
+                (ITransportFactorySettings)Manager,
+                timeoutHelper.RemainingTime(),
+                callback,
+                state,
+                this.securityProtocol
+            );
         }
 
         protected override void OnEndSend(IAsyncResult result)

@@ -10,7 +10,7 @@ using System.Diagnostics;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// Represents a reference to another C# compilation. 
+    /// Represents a reference to another C# compilation.
     /// </summary>
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
     internal sealed class CSharpCompilationReference : CompilationReference
@@ -34,19 +34,25 @@ namespace Microsoft.CodeAnalysis.CSharp
         public CSharpCompilationReference(
             CSharpCompilation compilation,
             ImmutableArray<string> aliases = default(ImmutableArray<string>),
-            bool embedInteropTypes = false)
+            bool embedInteropTypes = false
+        )
             : base(GetProperties(compilation, aliases, embedInteropTypes))
         {
             this.Compilation = compilation;
         }
 
-        private CSharpCompilationReference(CSharpCompilation compilation, MetadataReferenceProperties properties)
+        private CSharpCompilationReference(
+            CSharpCompilation compilation,
+            MetadataReferenceProperties properties
+        )
             : base(properties)
         {
             this.Compilation = compilation;
         }
 
-        internal override CompilationReference WithPropertiesImpl(MetadataReferenceProperties properties)
+        internal override CompilationReference WithPropertiesImpl(
+            MetadataReferenceProperties properties
+        )
         {
             return new CSharpCompilationReference(Compilation, properties);
         }

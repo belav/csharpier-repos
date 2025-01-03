@@ -10,7 +10,7 @@ namespace System.Activities.Statements
     using System.Activities.Statements;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    
+
     /// <summary>
     /// InternalTransition is internal representation of transition.
     /// Its difference from transition is that if several transition share the same trigger, all of them belongs to the same internal transition.
@@ -23,11 +23,7 @@ namespace System.Activities.Statements
         /// <summary>
         /// Gets or sets the index of this InternalTransition in internalTransitions list of its parent state.
         /// </summary>
-        public int InternalTransitionIndex
-        {
-            get;
-            set;
-        }
+        public int InternalTransitionIndex { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether this transition is unconditional.
@@ -36,7 +32,8 @@ namespace System.Activities.Statements
         {
             get
             {
-                return this.transitionDataList.Count == 1 && this.transitionDataList[0].Condition == null;
+                return this.transitionDataList.Count == 1
+                    && this.transitionDataList[0].Condition == null;
             }
         }
 
@@ -59,10 +56,6 @@ namespace System.Activities.Statements
         /// <summary>
         /// Gets or sets trigger object of this internal transition.
         /// </summary>
-        public Activity Trigger
-        {
-            get;
-            set;
-        }
+        public Activity Trigger { get; set; }
     }
 }

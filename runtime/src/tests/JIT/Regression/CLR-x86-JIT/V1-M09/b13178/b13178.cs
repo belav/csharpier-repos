@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     //@BEGINRENAME; Verify this renames
@@ -35,7 +36,6 @@ namespace DefaultNamespace
             oo = (m_rr != -1) ? m_rr : ((uu + m_cc - 1) / m_cc);
             Console.WriteLine("Ternary Logic A1: == " + oo);
 
-
             if (m_rr != -1)
             {
                 pp = m_rr;
@@ -45,7 +45,6 @@ namespace DefaultNamespace
                 pp = ((uu + m_cc - 1) / m_cc);
             }
             Console.WriteLine("IfElse Logic A1: == " + pp);
-
 
             if (oo == pp)
             {
@@ -57,7 +56,6 @@ namespace DefaultNamespace
             }
         }
     }
-
 
     /**  RESULTS PASTED IN FROM CMD.EXE SCREEN... Show error only when JIT ON...
 

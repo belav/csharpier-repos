@@ -18,25 +18,25 @@ namespace System.Formats.Asn1.Tests.Writer
         internal abstract Asn1Tag StandardTag { get; }
 
         protected const string GettysburgAddress =
-            "Four score and seven years ago our fathers brought forth on this continent, a new nation, " +
-            "conceived in Liberty, and dedicated to the proposition that all men are created equal.\r\n" +
-            "\r\n" +
-            "Now we are engaged in a great civil war, testing whether that nation, or any nation so " +
-            "conceived and so dedicated, can long endure. We are met on a great battle-field of that " +
-            "war. We have come to dedicate a portion of that field, as a final resting place for those " +
-            "who here gave their lives that that nation might live. It is altogether fitting and proper " +
-            "that we should do this.\r\n" +
-            "\r\n" +
-            "But, in a larger sense, we can not dedicate-we can not consecrate-we can not hallow-this " +
-            "ground. The brave men, living and dead, who struggled here, have consecrated it, far above " +
-            "our poor power to add or detract. The world will little note, nor long remember what we say " +
-            "here, but it can never forget what they did here. It is for us the living, rather, to be " +
-            "dedicated here to the unfinished work which they who fought here have thus far so nobly " +
-            "advanced. It is rather for us to be here dedicated to the great task remaining before " +
-            "us-that from these honored dead we take increased devotion to that cause for which they " +
-            "gave the last full measure of devotion-that we here highly resolve that these dead shall " +
-            "not have died in vain-that this nation, under God, shall have a new birth of freedom-and " +
-            "that government of the people, by the people, for the people, shall not perish from the earth.";
+            "Four score and seven years ago our fathers brought forth on this continent, a new nation, "
+            + "conceived in Liberty, and dedicated to the proposition that all men are created equal.\r\n"
+            + "\r\n"
+            + "Now we are engaged in a great civil war, testing whether that nation, or any nation so "
+            + "conceived and so dedicated, can long endure. We are met on a great battle-field of that "
+            + "war. We have come to dedicate a portion of that field, as a final resting place for those "
+            + "who here gave their lives that that nation might live. It is altogether fitting and proper "
+            + "that we should do this.\r\n"
+            + "\r\n"
+            + "But, in a larger sense, we can not dedicate-we can not consecrate-we can not hallow-this "
+            + "ground. The brave men, living and dead, who struggled here, have consecrated it, far above "
+            + "our poor power to add or detract. The world will little note, nor long remember what we say "
+            + "here, but it can never forget what they did here. It is for us the living, rather, to be "
+            + "dedicated here to the unfinished work which they who fought here have thus far so nobly "
+            + "advanced. It is rather for us to be here dedicated to the great task remaining before "
+            + "us-that from these honored dead we take increased devotion to that cause for which they "
+            + "gave the last full measure of devotion-that we here highly resolve that these dead shall "
+            + "not have died in vain-that this nation, under God, shall have a new birth of freedom-and "
+            + "that government of the people, by the people, for the people, shall not perish from the earth.";
 
         protected void VerifyWrite_BER_String_Helper(string input, string expectedPayloadHex)
         {
@@ -46,7 +46,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(StandardTag) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_BER_String_CustomTag_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_BER_String_CustomTag_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.ContextSpecific, 14);
@@ -63,7 +66,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(StandardTag) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_CER_String_CustomTag_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_CER_String_CustomTag_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.Private, 19);
@@ -80,7 +86,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(StandardTag) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_DER_String_CustomTag_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_DER_String_CustomTag_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.Application, 2);
@@ -97,7 +106,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(StandardTag) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_BER_Span_CustomTag_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_BER_Span_CustomTag_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.Private, int.MaxValue >> 1);
@@ -114,7 +126,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(StandardTag) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_CER_Span_CustomTag_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_CER_Span_CustomTag_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.Application, 30);
@@ -131,7 +146,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(StandardTag) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_DER_Span_CustomTag_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_DER_Span_CustomTag_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.ContextSpecific, 31);
@@ -140,7 +158,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(tag) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_BER_String_ClearsConstructed_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_BER_String_ClearsConstructed_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag standard = StandardTag;
@@ -150,7 +171,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(standard) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_BER_String_CustomTag_ClearsConstructed_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_BER_String_CustomTag_ClearsConstructed_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.Application, 19, isConstructed: true);
@@ -160,7 +184,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(expected) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_BER_Span_ClearsConstructed_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_BER_Span_ClearsConstructed_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag standard = StandardTag;
@@ -170,7 +197,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(standard) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_BER_Span_CustomTag_ClearsConstructed_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_BER_Span_CustomTag_ClearsConstructed_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.Private, 24601, isConstructed: true);
@@ -180,7 +210,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(expected) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_CER_String_ClearsConstructed_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_CER_String_ClearsConstructed_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             Asn1Tag standard = StandardTag;
@@ -190,7 +223,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(standard) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_CER_String_CustomTag_ClearsConstructed_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_CER_String_CustomTag_ClearsConstructed_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             Asn1Tag tag = new Asn1Tag(TagClass.ContextSpecific, 1701, isConstructed: true);
@@ -200,7 +236,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(expected) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_CER_Span_ClearsConstructed_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_CER_Span_ClearsConstructed_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             Asn1Tag standard = StandardTag;
@@ -210,7 +249,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(standard) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_CER_Span_CustomTag_ClearsConstructed_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_CER_Span_CustomTag_ClearsConstructed_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             Asn1Tag tag = new Asn1Tag(TagClass.Application, 11, isConstructed: true);
@@ -220,7 +262,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(expected) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_DER_String_ClearsConstructed_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_DER_String_ClearsConstructed_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
             Asn1Tag standard = StandardTag;
@@ -230,7 +275,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(standard) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_DER_String_CustomTag_ClearsConstructed_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_DER_String_CustomTag_ClearsConstructed_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
             Asn1Tag tag = new Asn1Tag(TagClass.Application, 19, isConstructed: true);
@@ -240,7 +288,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(expected) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_DER_Span_ClearsConstructed_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_DER_Span_ClearsConstructed_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
             Asn1Tag standard = StandardTag;
@@ -250,7 +301,10 @@ namespace System.Formats.Asn1.Tests.Writer
             Verify(writer, Stringify(standard) + expectedPayloadHex);
         }
 
-        protected void VerifyWrite_DER_Span_CustomTag_ClearsConstructed_Helper(string input, string expectedPayloadHex)
+        protected void VerifyWrite_DER_Span_CustomTag_ClearsConstructed_Helper(
+            string input,
+            string expectedPayloadHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
             Asn1Tag tag = new Asn1Tag(TagClass.Private, 24601, isConstructed: true);
@@ -265,7 +319,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
             AssertExtensions.Throws<ArgumentNullException>(
                 "value",
-                () => WriteString(writer, null));
+                () => WriteString(writer, null)
+            );
         }
 
         protected void VerifyWrite_String_Null_CustomTag_Helper(AsnEncodingRules ruleSet)
@@ -273,7 +328,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
             AssertExtensions.Throws<ArgumentNullException>(
                 "value",
-                () => WriteString(writer, new Asn1Tag(TagClass.ContextSpecific, 3), null));
+                () => WriteString(writer, new Asn1Tag(TagClass.ContextSpecific, 3), null)
+            );
         }
 
         protected void VerifyWrite_Null_String_Helper(AsnEncodingRules ruleSet)
@@ -281,7 +337,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => WriteString(writer, Asn1Tag.Null, "hi"));
+                () => WriteString(writer, Asn1Tag.Null, "hi")
+            );
         }
 
         protected void VerifyWrite_Null_Span_Helper(AsnEncodingRules ruleSet)
@@ -289,10 +346,15 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => WriteSpan(writer, Asn1Tag.Null, "hi".AsSpan()));
+                () => WriteSpan(writer, Asn1Tag.Null, "hi".AsSpan())
+            );
         }
 
-        private void VerifyWrite_CERSegmented_Helper(AsnWriter writer, string tagHex, int contentByteCount)
+        private void VerifyWrite_CERSegmented_Helper(
+            AsnWriter writer,
+            string tagHex,
+            int contentByteCount
+        )
         {
             int div = Math.DivRem(contentByteCount, 1000, out int rem);
 
@@ -330,7 +392,10 @@ namespace System.Formats.Asn1.Tests.Writer
             VerifyWrite_CERSegmented_Helper(writer, tagHex, contentByteCount);
         }
 
-        protected void VerifyWrite_CERSegmented_String_CustomTag_Helper(string input, int contentByteCount)
+        protected void VerifyWrite_CERSegmented_String_CustomTag_Helper(
+            string input,
+            int contentByteCount
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             Asn1Tag tag = new Asn1Tag(TagClass.Private, 7, true);
@@ -340,7 +405,10 @@ namespace System.Formats.Asn1.Tests.Writer
             VerifyWrite_CERSegmented_Helper(writer, tagHex, contentByteCount);
         }
 
-        protected void VerifyWrite_CERSegmented_String_ConstructedTag_Helper(string input, int contentByteCount)
+        protected void VerifyWrite_CERSegmented_String_ConstructedTag_Helper(
+            string input,
+            int contentByteCount
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             Asn1Tag standard = StandardTag;
@@ -351,7 +419,10 @@ namespace System.Formats.Asn1.Tests.Writer
             VerifyWrite_CERSegmented_Helper(writer, tagHex, contentByteCount);
         }
 
-        protected void VerifyWrite_CERSegmented_String_CustomPrimitiveTag_Helper(string input, int contentByteCount)
+        protected void VerifyWrite_CERSegmented_String_CustomPrimitiveTag_Helper(
+            string input,
+            int contentByteCount
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             Asn1Tag prim = new Asn1Tag(TagClass.Application, 42);
@@ -373,7 +444,10 @@ namespace System.Formats.Asn1.Tests.Writer
             VerifyWrite_CERSegmented_Helper(writer, tagHex, contentByteCount);
         }
 
-        protected void VerifyWrite_CERSegmented_Span_CustomTag_Helper(string input, int contentByteCount)
+        protected void VerifyWrite_CERSegmented_Span_CustomTag_Helper(
+            string input,
+            int contentByteCount
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             Asn1Tag tag = new Asn1Tag(TagClass.Private, 7, true);
@@ -383,7 +457,10 @@ namespace System.Formats.Asn1.Tests.Writer
             VerifyWrite_CERSegmented_Helper(writer, tagHex, contentByteCount);
         }
 
-        protected void VerifyWrite_CERSegmented_Span_ConstructedTag_Helper(string input, int contentByteCount)
+        protected void VerifyWrite_CERSegmented_Span_ConstructedTag_Helper(
+            string input,
+            int contentByteCount
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             Asn1Tag standard = StandardTag;
@@ -394,7 +471,10 @@ namespace System.Formats.Asn1.Tests.Writer
             VerifyWrite_CERSegmented_Helper(writer, tagHex, contentByteCount);
         }
 
-        protected void VerifyWrite_CERSegmented_Span_CustomPrimitiveTag_Helper(string input, int contentByteCount)
+        protected void VerifyWrite_CERSegmented_Span_CustomPrimitiveTag_Helper(
+            string input,
+            int contentByteCount
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             Asn1Tag prim = new Asn1Tag(TagClass.Application, 42);

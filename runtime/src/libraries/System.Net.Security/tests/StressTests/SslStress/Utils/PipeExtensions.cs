@@ -13,22 +13,28 @@ namespace SslStress.Utils
     public static class PipeExtensions
     {
         // Adapted from https://devblogs.microsoft.com/dotnet/system-io-pipelines-high-performance-io-in-net/
-        public static async Task ReadLinesUsingPipesAsync(this Stream stream, Func<ReadOnlySequence<byte>, Task> callback, CancellationToken token = default, char separator = '\n')
+        public static async Task ReadLinesUsingPipesAsync(
+            this Stream stream,
+            Func<ReadOnlySequence<byte>, Task> callback,
+            CancellationToken token = default,
+            char separator = '\n'
+        )
         {
             var pipe = new Pipe();
 
             try
             {
-                await StressTaskExtensions.WhenAllThrowOnFirstException(token, FillPipeAsync, ReadPipeAsync);
+                await StressTaskExtensions.WhenAllThrowOnFirstException(
+                    token,
+                    FillPipeAsync,
+                    ReadPipeAsync
+                );
             }
-            catch (OperationCanceledException) when (token.IsCancellationRequested)
-            {
-
-            }
+            catch (OperationCanceledException) when (token.IsCancellationRequested) { }
 
             async Task FillPipeAsync(CancellationToken token)
             {
-                try 
+                try
                 {
                     await stream.CopyToAsync(pipe.Writer, token);
                 }
@@ -58,8 +64,7 @@ namespace SslStress.Utils
                             await callback(buffer.Slice(0, position.Value));
                             buffer = buffer.Slice(buffer.GetPosition(1, position.Value));
                         }
-                    }
-                    while (position != null);
+                    } while (position != null);
 
                     pipe.Reader.AdvanceTo(buffer.Start, buffer.End);
 

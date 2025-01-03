@@ -55,11 +55,22 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int startIndex,
             int count,
             bool visitAll,
-            ref int index)
+            ref int index
+        )
         {
             foreach (var expansion in _expansions)
             {
-                expansion.GetRows(resultProvider, rows, inspectionContext, parent, value, startIndex, count, visitAll, ref index);
+                expansion.GetRows(
+                    resultProvider,
+                    rows,
+                    inspectionContext,
+                    parent,
+                    value,
+                    startIndex,
+                    count,
+                    visitAll,
+                    ref index
+                );
                 if (!visitAll && (index >= startIndex + count))
                 {
                     return;

@@ -18,12 +18,20 @@ public class ClaimsIdentityExtensionsTest
 
     private static ClaimsPrincipal CreateTestExternalIdentity()
     {
-        return new ClaimsPrincipal(new ClaimsIdentity(
-            new[]
-            {
-                    new Claim(ClaimTypes.NameIdentifier, "NameIdentifier", null, ExternalAuthenticationScheme),
-                    new Claim(ClaimTypes.Name, "Name")
-            },
-            ExternalAuthenticationScheme));
+        return new ClaimsPrincipal(
+            new ClaimsIdentity(
+                new[]
+                {
+                    new Claim(
+                        ClaimTypes.NameIdentifier,
+                        "NameIdentifier",
+                        null,
+                        ExternalAuthenticationScheme
+                    ),
+                    new Claim(ClaimTypes.Name, "Name"),
+                },
+                ExternalAuthenticationScheme
+            )
+        );
     }
 }

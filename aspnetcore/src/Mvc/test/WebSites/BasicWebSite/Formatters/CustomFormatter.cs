@@ -31,7 +31,10 @@ public class CustomFormatter : TextOutputFormatter
         return false;
     }
 
-    public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+    public override async Task WriteResponseBodyAsync(
+        OutputFormatterWriteContext context,
+        Encoding selectedEncoding
+    )
     {
         var response = context.HttpContext.Response;
         response.ContentType = ContentType + ";charset=utf-8";

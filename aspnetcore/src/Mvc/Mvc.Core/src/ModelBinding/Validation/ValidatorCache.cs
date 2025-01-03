@@ -21,7 +21,10 @@ public class ValidatorCache
     /// <param name="metadata">The model metadata.</param>
     /// <param name="validatorProvider">The validator provider.</param>
     /// <returns>A list of model validators.</returns>
-    public IReadOnlyList<IModelValidator> GetValidators(ModelMetadata metadata, IModelValidatorProvider validatorProvider)
+    public IReadOnlyList<IModelValidator> GetValidators(
+        ModelMetadata metadata,
+        IModelValidatorProvider validatorProvider
+    )
     {
         if (_cacheEntries.TryGetValue(metadata, out var entry))
         {
@@ -63,7 +66,11 @@ public class ValidatorCache
         return validators;
     }
 
-    private static IReadOnlyList<IModelValidator> GetValidatorsFromEntry(CacheEntry entry, ModelMetadata metadata, IModelValidatorProvider validationProvider)
+    private static IReadOnlyList<IModelValidator> GetValidatorsFromEntry(
+        CacheEntry entry,
+        ModelMetadata metadata,
+        IModelValidatorProvider validationProvider
+    )
     {
         if (entry.Validators != null)
         {
@@ -91,7 +98,11 @@ public class ValidatorCache
         return ExtractValidators(items);
     }
 
-    private static void ExecuteProvider(IModelValidatorProvider validatorProvider, ModelMetadata metadata, List<ValidatorItem> items)
+    private static void ExecuteProvider(
+        IModelValidatorProvider validatorProvider,
+        ModelMetadata metadata,
+        List<ValidatorItem> items
+    )
     {
         var context = new ModelValidatorProviderContext(metadata, items);
         validatorProvider.CreateValidators(context);

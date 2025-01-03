@@ -21,12 +21,10 @@ public class SqliteSharedTableConvention : SharedTableConvention
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public SqliteSharedTableConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
-        : base(dependencies, relationalDependencies)
-    {
-    }
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
+        : base(dependencies, relationalDependencies) { }
 
     /// <inheritdoc />
-    protected override bool CheckConstraintsUniqueAcrossTables
-        => false;
+    protected override bool CheckConstraintsUniqueAcrossTables => false;
 }

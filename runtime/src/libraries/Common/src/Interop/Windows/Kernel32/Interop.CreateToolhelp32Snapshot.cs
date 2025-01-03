@@ -18,7 +18,7 @@ internal static partial class Interop
             Module32 = 0x00000010,
             All = (HeapList | Process | Thread | Module),
             Inherit = 0x80000000,
-            NoHeaps = 0x40000000
+            NoHeaps = 0x40000000,
         }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
@@ -38,7 +38,10 @@ internal static partial class Interop
 
         // https://docs.microsoft.com/windows/desktop/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        internal static partial nint CreateToolhelp32Snapshot(SnapshotFlags dwFlags, uint th32ProcessID);
+        internal static partial nint CreateToolhelp32Snapshot(
+            SnapshotFlags dwFlags,
+            uint th32ProcessID
+        );
 
         // https://docs.microsoft.com/windows/desktop/api/tlhelp32/nf-tlhelp32-process32first
         [LibraryImport(Libraries.Kernel32, EntryPoint = "Process32FirstW", SetLastError = true)]

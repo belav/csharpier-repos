@@ -13,7 +13,7 @@ namespace Microsoft.Web.WebPages.OAuth
     public static class PreApplicationStartCode
     {
         /// <summary>
-        /// Register global namepace imports for this assembly 
+        /// Register global namepace imports for this assembly
         /// </summary>
         public static void Start()
         {

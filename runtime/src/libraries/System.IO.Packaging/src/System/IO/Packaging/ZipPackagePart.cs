@@ -22,7 +22,10 @@ namespace System.IO.Packaging
         /// <param name="streamFileMode">Mode in which the stream should be opened</param>
         /// <param name="streamFileAccess">Access with which the stream should be opened</param>
         /// <returns>Stream Corresponding to this part</returns>
-        protected override Stream? GetStreamCore(FileMode streamFileMode, FileAccess streamFileAccess)
+        protected override Stream? GetStreamCore(
+            FileMode streamFileMode,
+            FileAccess streamFileAccess
+        )
         {
             if (_zipArchiveEntry != null)
             {
@@ -31,9 +34,14 @@ namespace System.IO.Packaging
                 // calling SetLength since the stream returned won't be seekable. You could still open
                 // an archive in Update mode then call part.GetStream(FileMode.Create), in which case
                 // we'll want this call to SetLength.
-                if (streamFileMode == FileMode.Create && _zipArchiveEntry.Archive.Mode != ZipArchiveMode.Create)
+                if (
+                    streamFileMode == FileMode.Create
+                    && _zipArchiveEntry.Archive.Mode != ZipArchiveMode.Create
+                )
                 {
-                    using (var tempStream = _zipStreamManager.Open(_zipArchiveEntry, streamFileAccess))
+                    using (
+                        var tempStream = _zipStreamManager.Open(_zipArchiveEntry, streamFileAccess)
+                    )
                     {
                         tempStream.SetLength(0);
                     }
@@ -61,13 +69,15 @@ namespace System.IO.Packaging
         /// <param name="partUri"></param>
         /// <param name="compressionOption"></param>
         /// <param name="contentType"></param>
-        internal ZipPackagePart(ZipPackage zipPackage,
+        internal ZipPackagePart(
+            ZipPackage zipPackage,
             ZipArchive zipArchive,
             ZipArchiveEntry zipArchiveEntry,
             ZipStreamManager zipStreamManager,
             PackUriHelper.ValidatedPartUri partUri,
             string contentType,
-            CompressionOption compressionOption)
+            CompressionOption compressionOption
+        )
             : base(zipPackage, partUri, contentType, compressionOption)
         {
             _zipPackage = zipPackage;
@@ -85,10 +95,7 @@ namespace System.IO.Packaging
         /// </summary>
         internal ZipArchiveEntry ZipArchiveEntry
         {
-            get
-            {
-                return _zipArchiveEntry;
-            }
+            get { return _zipArchiveEntry; }
         }
 
         #endregion Internal Properties

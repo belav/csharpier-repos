@@ -11,18 +11,19 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class ServiceTimeoutsElement : BehaviorExtensionElement
     {
-        public ServiceTimeoutsElement()
-        {
-        }
+        public ServiceTimeoutsElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.TransactionTimeout, DefaultValue = ServiceDefaults.TransactionTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TransactionTimeout,
+            DefaultValue = ServiceDefaults.TransactionTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan TransactionTimeout
         {
             get { return (TimeSpan)base[ConfigurationStrings.TransactionTimeout]; }
             set { base[ConfigurationStrings.TransactionTimeout] = value; }
-        }                
+        }
 
         public override void CopyFrom(ServiceModelExtensionElement from)
         {
@@ -44,4 +45,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-

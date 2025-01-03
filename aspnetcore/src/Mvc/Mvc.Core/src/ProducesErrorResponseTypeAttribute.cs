@@ -15,7 +15,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// Use this <see cref="Attribute"/> to configure the default error type if your application uses a custom error type to respond.
 /// </para>
 /// </summary>
-[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public sealed class ProducesErrorResponseTypeAttribute : Attribute
 {
     /// <summary>

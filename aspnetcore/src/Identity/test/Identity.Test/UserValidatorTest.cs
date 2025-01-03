@@ -14,8 +14,14 @@ public class UserValidatorTest
 
         // Act
         // Assert
-        await Assert.ThrowsAsync<ArgumentNullException>("manager", () => validator.ValidateAsync(null, null));
-        await Assert.ThrowsAsync<ArgumentNullException>("user", () => validator.ValidateAsync(manager, null));
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "manager",
+            () => validator.ValidateAsync(null, null)
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "user",
+            () => validator.ValidateAsync(manager, null)
+        );
     }
 
     [Theory]

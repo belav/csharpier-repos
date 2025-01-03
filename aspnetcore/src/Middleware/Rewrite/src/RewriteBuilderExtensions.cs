@@ -33,7 +33,10 @@ public static class RewriteBuilderExtensions
     /// <param name="app">The <see cref="IApplicationBuilder"/></param>
     /// <param name="options">Options for rewrite.</param>
     /// <returns></returns>
-    public static IApplicationBuilder UseRewriter(this IApplicationBuilder app, RewriteOptions options)
+    public static IApplicationBuilder UseRewriter(
+        this IApplicationBuilder app,
+        RewriteOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(options);
@@ -42,16 +45,24 @@ public static class RewriteBuilderExtensions
         return AddRewriteMiddleware(app, Options.Create(options));
     }
 
-    private static IApplicationBuilder AddRewriteMiddleware(IApplicationBuilder app, IOptions<RewriteOptions>? options)
+    private static IApplicationBuilder AddRewriteMiddleware(
+        IApplicationBuilder app,
+        IOptions<RewriteOptions>? options
+    )
     {
         // Only use this path if there's a global router (in the 'WebApplication' case).
-        if (app.Properties.TryGetValue(RerouteHelper.GlobalRouteBuilderKey, out var routeBuilder) && routeBuilder is not null)
+        if (
+            app.Properties.TryGetValue(RerouteHelper.GlobalRouteBuilderKey, out var routeBuilder)
+            && routeBuilder is not null
+        )
         {
             return app.Use(next =>
             {
                 if (options is null)
                 {
-                    options = app.ApplicationServices.GetRequiredService<IOptions<RewriteOptions>>();
+                    options = app.ApplicationServices.GetRequiredService<
+                        IOptions<RewriteOptions>
+                    >();
                 }
 
                 var webHostEnv = app.ApplicationServices.GetRequiredService<IWebHostEnvironment>();

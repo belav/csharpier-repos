@@ -17,7 +17,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ViewDataDictionary((ViewDataDictionary)null); }, "dictionary");
+                delegate
+                {
+                    new ViewDataDictionary((ViewDataDictionary)null);
+                },
+                "dictionary"
+            );
         }
 
         [Fact]
@@ -63,8 +68,15 @@ namespace System.Web.Mvc.Test
                 Creator = () => new ViewDataDictionary(),
                 Comparer = StringComparer.OrdinalIgnoreCase,
                 SampleKeys = new string[] { "foo", "bar", "baz", "quux", "QUUX" },
-                SampleValues = new object[] { 42, "string value", new DateTime(2001, 1, 1), new object(), 32m },
-                ThrowOnKeyNotFound = false
+                SampleValues = new object[]
+                {
+                    42,
+                    "string value",
+                    new DateTime(2001, 1, 1),
+                    new object(),
+                    32m,
+                },
+                ThrowOnKeyNotFound = false,
             };
 
             // Act & assert
@@ -209,7 +221,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { vdd.Eval(String.Empty); }, "expression");
+                delegate
+                {
+                    vdd.Eval(String.Empty);
+                },
+                "expression"
+            );
         }
 
         [Fact]
@@ -220,7 +237,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { vdd.Eval(null); }, "expression");
+                delegate
+                {
+                    vdd.Eval(null);
+                },
+                "expression"
+            );
         }
 
         [Fact]
@@ -246,7 +268,16 @@ namespace System.Web.Mvc.Test
         public void EvalWithNestedDictionariesEvalCorrectly()
         {
             ViewDataDictionary vdd = new ViewDataDictionary();
-            vdd.Add("Foo", new Dictionary<string, object> { { "Bar", new Hashtable { { "Baz", "Quux" } } } });
+            vdd.Add(
+                "Foo",
+                new Dictionary<string, object>
+                {
+                    {
+                        "Bar",
+                        new Hashtable { { "Baz", "Quux" } }
+                    },
+                }
+            );
 
             Assert.Equal("Quux", vdd.Eval("Foo.Bar.Baz"));
         }
@@ -338,14 +369,8 @@ namespace System.Web.Mvc.Test
         public void GetViewDataInfoFromDictionary()
         {
             // Arrange
-            ViewDataDictionary fooVdd = new ViewDataDictionary()
-            {
-                { "Bar", "barValue" }
-            };
-            ViewDataDictionary vdd = new ViewDataDictionary()
-            {
-                { "Foo", fooVdd }
-            };
+            ViewDataDictionary fooVdd = new ViewDataDictionary() { { "Bar", "barValue" } };
+            ViewDataDictionary vdd = new ViewDataDictionary() { { "Foo", fooVdd } };
 
             // Act
             ViewDataInfo info = vdd.GetViewDataInfo("foo.bar");
@@ -373,10 +398,7 @@ namespace System.Web.Mvc.Test
         public void GetViewDataInfoFromDictionaryWithNullEntry()
         {
             // Arrange
-            ViewDataDictionary vdd = new ViewDataDictionary()
-            {
-                { "Foo", null }
-            };
+            ViewDataDictionary vdd = new ViewDataDictionary() { { "Foo", null } };
 
             // Act
             ViewDataInfo info = vdd.GetViewDataInfo("foo");
@@ -394,7 +416,12 @@ namespace System.Web.Mvc.Test
             object model = new { foo = "fooValue" };
             ViewDataDictionary vdd = new ViewDataDictionary(model);
 
-            PropertyDescriptor propDesc = TypeDescriptor.GetProperties(model).Find("foo", true /* ignoreCase */);
+            PropertyDescriptor propDesc = TypeDescriptor
+                .GetProperties(model)
+                .Find(
+                    "foo",
+                    true /* ignoreCase */
+                );
 
             // Act
             ViewDataInfo info = vdd.GetViewDataInfo("foo");
@@ -426,8 +453,14 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             object model = new { foo = "fooValue", bar = "barValue" };
-            ModelMetadata originalMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => model, model.GetType());
-            ViewDataDictionary vdd = new ViewDataDictionary(model) { ModelMetadata = originalMetadata };
+            ModelMetadata originalMetadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => model,
+                model.GetType()
+            );
+            ViewDataDictionary vdd = new ViewDataDictionary(model)
+            {
+                ModelMetadata = originalMetadata,
+            };
 
             // Act
             ModelMetadata metadata = vdd.ModelMetadata;
@@ -471,8 +504,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { vdd.Model = null; },
-                @"The model item passed into the dictionary is null, but this dictionary requires a non-null model item of type 'System.Int32'.");
+                delegate
+                {
+                    vdd.Model = null;
+                },
+                @"The model item passed into the dictionary is null, but this dictionary requires a non-null model item of type 'System.Int32'."
+            );
         }
 
         [Fact]
@@ -500,16 +537,16 @@ namespace System.Web.Mvc.Test
         {
             public override PropertyDescriptorCollection GetProperties()
             {
-                return new PropertyDescriptorCollection(new PersonPropertyDescriptor[] { new PersonPropertyDescriptor() });
+                return new PropertyDescriptorCollection(
+                    new PersonPropertyDescriptor[] { new PersonPropertyDescriptor() }
+                );
             }
         }
 
         public class PersonPropertyDescriptor : PropertyDescriptor
         {
             public PersonPropertyDescriptor()
-                : base("Bar.Baz", null)
-            {
-            }
+                : base("Bar.Baz", null) { }
 
             public override object GetValue(object component)
             {
@@ -536,13 +573,9 @@ namespace System.Web.Mvc.Test
                 get { return typeof(string); }
             }
 
-            public override void ResetValue(object component)
-            {
-            }
+            public override void ResetValue(object component) { }
 
-            public override void SetValue(object component, object value)
-            {
-            }
+            public override void SetValue(object component, object value) { }
 
             public override bool ShouldSerializeValue(object component)
             {

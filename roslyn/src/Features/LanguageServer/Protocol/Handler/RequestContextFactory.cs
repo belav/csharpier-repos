@@ -19,7 +19,11 @@ internal class RequestContextFactory : IRequestContextFactory<RequestContext>, I
         _lspServices = lspServices;
     }
 
-    public Task<RequestContext> CreateRequestContextAsync<TRequestParam>(IQueueItem<RequestContext> queueItem, TRequestParam requestParam, CancellationToken cancellationToken)
+    public Task<RequestContext> CreateRequestContextAsync<TRequestParam>(
+        IQueueItem<RequestContext> queueItem,
+        TRequestParam requestParam,
+        CancellationToken cancellationToken
+    )
     {
         var clientCapabilitiesManager = _lspServices.GetRequiredService<IInitializeManager>();
         var clientCapabilities = clientCapabilitiesManager.TryGetClientCapabilities();
@@ -28,26 +32,35 @@ internal class RequestContextFactory : IRequestContextFactory<RequestContext>, I
 
         if (clientCapabilities is null && queueItem.MethodName != Methods.InitializeName)
         {
-            throw new InvalidOperationException($"ClientCapabilities was null for a request other than {Methods.InitializeName}.");
+            throw new InvalidOperationException(
+                $"ClientCapabilities was null for a request other than {Methods.InitializeName}."
+            );
         }
 
         TextDocumentIdentifier? textDocumentIdentifier;
-        var textDocumentIdentifierHandler = queueItem.MethodHandler as ITextDocumentIdentifierHandler;
-        if (textDocumentIdentifierHandler is ITextDocumentIdentifierHandler<TRequestParam, TextDocumentIdentifier> tHandler)
+        var textDocumentIdentifierHandler =
+            queueItem.MethodHandler as ITextDocumentIdentifierHandler;
+        if (
+            textDocumentIdentifierHandler
+            is ITextDocumentIdentifierHandler<TRequestParam, TextDocumentIdentifier> tHandler
+        )
         {
             textDocumentIdentifier = tHandler.GetTextDocumentIdentifier(requestParam);
         }
-        else if (textDocumentIdentifierHandler is ITextDocumentIdentifierHandler<TRequestParam, TextDocumentIdentifier?> nullHandler)
+        else if (
+            textDocumentIdentifierHandler
+            is ITextDocumentIdentifierHandler<TRequestParam, TextDocumentIdentifier?> nullHandler
+        )
         {
             textDocumentIdentifier = nullHandler.GetTextDocumentIdentifier(requestParam);
         }
-        else if (textDocumentIdentifierHandler is ITextDocumentIdentifierHandler<TRequestParam, Uri> uHandler)
+        else if (
+            textDocumentIdentifierHandler
+            is ITextDocumentIdentifierHandler<TRequestParam, Uri> uHandler
+        )
         {
             var uri = uHandler.GetTextDocumentIdentifier(requestParam);
-            textDocumentIdentifier = new TextDocumentIdentifier
-            {
-                Uri = uri,
-            };
+            textDocumentIdentifier = new TextDocumentIdentifier { Uri = uri };
         }
         else if (textDocumentIdentifierHandler is null)
         {
@@ -55,7 +68,9 @@ internal class RequestContextFactory : IRequestContextFactory<RequestContext>, I
         }
         else
         {
-            throw new NotImplementedException($"TextDocumentIdentifier in an unrecognized type for method: {queueItem.MethodName}");
+            throw new NotImplementedException(
+                $"TextDocumentIdentifier in an unrecognized type for method: {queueItem.MethodName}"
+            );
         }
 
         bool requiresLSPSolution;
@@ -65,7 +80,9 @@ internal class RequestContextFactory : IRequestContextFactory<RequestContext>, I
         }
         else
         {
-            throw new InvalidOperationException($"{nameof(IMethodHandler)} implementation {queueItem.MethodHandler.GetType()} does not implement {nameof(ISolutionRequiredHandler)}");
+            throw new InvalidOperationException(
+                $"{nameof(IMethodHandler)} implementation {queueItem.MethodHandler.GetType()} does not implement {nameof(ISolutionRequiredHandler)}"
+            );
         }
 
         return RequestContext.CreateAsync(
@@ -78,6 +95,7 @@ internal class RequestContextFactory : IRequestContextFactory<RequestContext>, I
             _lspServices,
             logger,
             queueItem.MethodName,
-            cancellationToken);
+            cancellationToken
+        );
     }
 }

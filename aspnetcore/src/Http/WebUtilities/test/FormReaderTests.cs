@@ -81,7 +81,8 @@ public class FormReaderTests
         var body = MakeStream(bufferRequest, "foo=1&baz=2&bar=3&baz=4&baf=5");
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(
-            () => ReadFormAsync(new FormReader(body) { ValueCountLimit = 3 }));
+            () => ReadFormAsync(new FormReader(body) { ValueCountLimit = 3 })
+        );
         Assert.Equal("Form value count limit 3 exceeded.", exception.Message);
     }
 
@@ -93,7 +94,8 @@ public class FormReaderTests
         var body = MakeStream(bufferRequest, "baz=1&baz=2&baz=3&baz=4");
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(
-            () => ReadFormAsync(new FormReader(body) { ValueCountLimit = 3 }));
+            () => ReadFormAsync(new FormReader(body) { ValueCountLimit = 3 })
+        );
         Assert.Equal("Form value count limit 3 exceeded.", exception.Message);
     }
 
@@ -120,7 +122,8 @@ public class FormReaderTests
         var body = MakeStream(bufferRequest, "foo=1&baz1234567890=2");
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(
-            () => ReadFormAsync(new FormReader(body) { KeyLengthLimit = 10 }));
+            () => ReadFormAsync(new FormReader(body) { KeyLengthLimit = 10 })
+        );
         Assert.Equal("Form key or value length limit 10 exceeded.", exception.Message);
     }
 
@@ -147,7 +150,8 @@ public class FormReaderTests
         var body = MakeStream(bufferRequest, "foo=1&baz=1234567890123");
 
         var exception = await Assert.ThrowsAsync<InvalidDataException>(
-            () => ReadFormAsync(new FormReader(body) { ValueLengthLimit = 10 }));
+            () => ReadFormAsync(new FormReader(body) { ValueLengthLimit = 10 })
+        );
         Assert.Equal("Form key or value length limit 10 exceeded.", exception.Message);
     }
 
@@ -189,7 +193,11 @@ public class FormReaderTests
     [Theory]
     [InlineData("++=hello", "  ", "hello")]
     [InlineData("a=1+1", "a", "1 1")]
-    [InlineData("%22%25%2D%2E%3C%3E%5C%5E%5F%60%7B%7C%7D%7E=%22%25%2D%2E%3C%3E%5C%5E%5F%60%7B%7C%7D%7E", "\"%-.<>\\^_`{|}~", "\"%-.<>\\^_`{|}~")]
+    [InlineData(
+        "%22%25%2D%2E%3C%3E%5C%5E%5F%60%7B%7C%7D%7E=%22%25%2D%2E%3C%3E%5C%5E%5F%60%7B%7C%7D%7E",
+        "\"%-.<>\\^_`{|}~",
+        "\"%-.<>\\^_`{|}~"
+    )]
     [InlineData("a=%41", "a", "A")] // ascii encoded hex
     [InlineData("a=%C3%A1", "a", "\u00e1")] // utf8 code points
     [InlineData("a=%u20AC", "a", "%u20AC")] // utf16 not supported

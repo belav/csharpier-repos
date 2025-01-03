@@ -48,7 +48,8 @@ namespace System.Globalization
         private const int MinAdvancedHijri = -2;
         private const int MaxAdvancedHijri = 2;
 
-        private static ReadOnlySpan<int> HijriMonthDays => [0, 30, 59, 89, 118, 148, 177, 207, 236, 266, 295, 325, 355];
+        private static ReadOnlySpan<int> HijriMonthDays =>
+            [0, 30, 59, 89, 118, 148, 177, 207, 236, 266, 295, 325, 355];
 
         private int _hijriAdvance = int.MinValue;
 
@@ -67,9 +68,7 @@ namespace System.Globalization
 
         public override CalendarAlgorithmType AlgorithmType => CalendarAlgorithmType.LunarCalendar;
 
-        public HijriCalendar()
-        {
-        }
+        public HijriCalendar() { }
 
         internal override CalendarId ID => CalendarId.HIJRI;
 
@@ -116,7 +115,6 @@ namespace System.Globalization
 
                 return _hijriAdvance;
             }
-
             set
             {
                 if (value < MinAdvancedHijri || value > MaxAdvancedHijri)
@@ -124,7 +122,12 @@ namespace System.Globalization
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        SR.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, MinAdvancedHijri, MaxAdvancedHijri));
+                        SR.Format(
+                            SR.ArgumentOutOfRange_Bounds_Lower_Upper,
+                            MinAdvancedHijri,
+                            MaxAdvancedHijri
+                        )
+                    );
                 }
 
                 VerifyWritable();
@@ -143,7 +146,9 @@ namespace System.Globalization
                         CultureInfo.InvariantCulture,
                         SR.ArgumentOutOfRange_CalendarRange,
                         s_calendarMinValue,
-                        s_calendarMaxValue));
+                        s_calendarMaxValue
+                    )
+                );
             }
         }
 
@@ -151,7 +156,11 @@ namespace System.Globalization
         {
             if (era != CurrentEra && era != HijriEra)
             {
-                throw new ArgumentOutOfRangeException(nameof(era), era, SR.ArgumentOutOfRange_InvalidEraValue);
+                throw new ArgumentOutOfRangeException(
+                    nameof(era),
+                    era,
+                    SR.ArgumentOutOfRange_InvalidEraValue
+                );
             }
         }
 
@@ -161,8 +170,9 @@ namespace System.Globalization
             if (year < 1 || year > MaxCalendarYear)
             {
                 throw new ArgumentOutOfRangeException(
-                            nameof(year),
-                            SR.Format(SR.ArgumentOutOfRange_Range, 1, MaxCalendarYear));
+                    nameof(year),
+                    SR.Format(SR.ArgumentOutOfRange_Range, 1, MaxCalendarYear)
+                );
             }
         }
 
@@ -176,7 +186,8 @@ namespace System.Globalization
                     throw new ArgumentOutOfRangeException(
                         nameof(month),
                         month,
-                        SR.Format(SR.ArgumentOutOfRange_Range, 1, MaxCalendarMonth));
+                        SR.Format(SR.ArgumentOutOfRange_Range, 1, MaxCalendarMonth)
+                    );
                 }
             }
 
@@ -206,8 +217,8 @@ namespace System.Globalization
             // Calculate the appromixate Hijri Year from this magic formula.
             int hijriYear = (int)(((numDays - 227013) * 30) / 10631) + 1;
 
-            long daysToHijriYear = DaysUpToHijriYear(hijriYear);            // The absolute date for HijriYear
-            long daysOfHijriYear = GetDaysInYear(hijriYear, CurrentEra);    // The number of days for (HijriYear+1) year.
+            long daysToHijriYear = DaysUpToHijriYear(hijriYear); // The absolute date for HijriYear
+            long daysOfHijriYear = GetDaysInYear(hijriYear, CurrentEra); // The number of days for (HijriYear+1) year.
 
             if (numDays < daysToHijriYear)
             {
@@ -271,7 +282,8 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(
                     nameof(months),
                     months,
-                    SR.Format(SR.ArgumentOutOfRange_Range, -120000, 120000));
+                    SR.Format(SR.ArgumentOutOfRange_Range, -120000, 120000)
+                );
             }
 
             // Get the date in Hijri calendar.
@@ -371,7 +383,8 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(
                     nameof(day),
                     day,
-                    SR.Format(SR.ArgumentOutOfRange_Day, daysInMonth, month));
+                    SR.Format(SR.ArgumentOutOfRange_Day, daysInMonth, month)
+                );
             }
 
             return IsLeapYear(year, era) && month == 12 && day == 30;
@@ -395,7 +408,16 @@ namespace System.Globalization
             return (((year * 11) + 14) % 30) < 11;
         }
 
-        public override DateTime ToDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond, int era)
+        public override DateTime ToDateTime(
+            int year,
+            int month,
+            int day,
+            int hour,
+            int minute,
+            int second,
+            int millisecond,
+            int era
+        )
         {
             // The year/month/era checking is done in GetDaysInMonth().
             int daysInMonth = GetDaysInMonth(year, month, era);
@@ -404,7 +426,8 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(
                     nameof(day),
                     day,
-                    SR.Format(SR.ArgumentOutOfRange_Day, daysInMonth, month));
+                    SR.Format(SR.ArgumentOutOfRange_Day, daysInMonth, month)
+                );
             }
 
             long lDate = GetAbsoluteDateHijri(year, month, day);
@@ -413,7 +436,9 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(null, SR.ArgumentOutOfRange_BadYearMonthDay);
             }
 
-            return new DateTime(lDate * TicksPerDay + TimeToTicks(hour, minute, second, millisecond));
+            return new DateTime(
+                lDate * TicksPerDay + TimeToTicks(hour, minute, second, millisecond)
+            );
         }
 
         private const int DefaultTwoDigitYearMax = 1451;
@@ -437,7 +462,8 @@ namespace System.Globalization
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        SR.Format(SR.ArgumentOutOfRange_Range, 99, MaxCalendarYear));
+                        SR.Format(SR.ArgumentOutOfRange_Range, 99, MaxCalendarYear)
+                    );
                 }
 
                 _twoDigitYearMax = value;
@@ -458,7 +484,8 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(
                     nameof(year),
                     year,
-                    SR.Format(SR.ArgumentOutOfRange_Range, 1, MaxCalendarYear));
+                    SR.Format(SR.ArgumentOutOfRange_Range, 1, MaxCalendarYear)
+                );
             }
             return year;
         }

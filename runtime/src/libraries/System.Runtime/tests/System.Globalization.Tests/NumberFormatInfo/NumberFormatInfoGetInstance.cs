@@ -13,7 +13,11 @@ namespace System.Globalization.Tests
             CultureInfo frFRCulture = CultureInfo.GetCultureInfo("fr-FR");
             yield return new object[] { frFRCulture, frFRCulture.NumberFormat };
             yield return new object[] { frFRCulture.NumberFormat, frFRCulture.NumberFormat };
-            yield return new object[] { new CustomFormatProvider(), CustomFormatProvider.CustomFormat };
+            yield return new object[]
+            {
+                new CustomFormatProvider(),
+                CustomFormatProvider.CustomFormat,
+            };
 
             yield return new object[] { new InvalidFormatProvider(), NumberFormatInfo.CurrentInfo };
             yield return new object[] { null, NumberFormatInfo.CurrentInfo };
@@ -54,7 +58,8 @@ namespace System.Globalization.Tests
 
         private class CustomFormatProvider : IFormatProvider
         {
-            public static NumberFormatInfo CustomFormat { get; } = CultureInfo.GetCultureInfo("fr-FR").NumberFormat;
+            public static NumberFormatInfo CustomFormat { get; } =
+                CultureInfo.GetCultureInfo("fr-FR").NumberFormat;
 
             public object GetFormat(Type formatType) => CustomFormat;
         }

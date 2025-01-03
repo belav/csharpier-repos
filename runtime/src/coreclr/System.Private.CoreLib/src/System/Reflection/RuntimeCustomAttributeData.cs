@@ -17,47 +17,78 @@ namespace System.Reflection
         {
             Debug.Assert(target is not null);
 
-            IList<CustomAttributeData> cad = GetCustomAttributes(target.GetRuntimeModule(), target.MetadataToken);
+            IList<CustomAttributeData> cad = GetCustomAttributes(
+                target.GetRuntimeModule(),
+                target.MetadataToken
+            );
             ListBuilder<Attribute> pcas = default;
-            PseudoCustomAttribute.GetCustomAttributes(target, (RuntimeType)typeof(object), ref pcas);
+            PseudoCustomAttribute.GetCustomAttributes(
+                target,
+                (RuntimeType)typeof(object),
+                ref pcas
+            );
             return pcas.Count > 0 ? GetCombinedList(cad, ref pcas) : cad;
         }
 
-        internal static IList<CustomAttributeData> GetCustomAttributesInternal(RuntimeFieldInfo target)
+        internal static IList<CustomAttributeData> GetCustomAttributesInternal(
+            RuntimeFieldInfo target
+        )
         {
             Debug.Assert(target is not null);
 
-            IList<CustomAttributeData> cad = GetCustomAttributes(target.GetRuntimeModule(), target.MetadataToken);
+            IList<CustomAttributeData> cad = GetCustomAttributes(
+                target.GetRuntimeModule(),
+                target.MetadataToken
+            );
             ListBuilder<Attribute> pcas = default;
-            PseudoCustomAttribute.GetCustomAttributes(target, (RuntimeType)typeof(object), ref pcas);
+            PseudoCustomAttribute.GetCustomAttributes(
+                target,
+                (RuntimeType)typeof(object),
+                ref pcas
+            );
             return pcas.Count > 0 ? GetCombinedList(cad, ref pcas) : cad;
         }
 
-        internal static IList<CustomAttributeData> GetCustomAttributesInternal(RuntimeMethodInfo target)
+        internal static IList<CustomAttributeData> GetCustomAttributesInternal(
+            RuntimeMethodInfo target
+        )
         {
             Debug.Assert(target is not null);
 
-            IList<CustomAttributeData> cad = GetCustomAttributes(target.GetRuntimeModule(), target.MetadataToken);
+            IList<CustomAttributeData> cad = GetCustomAttributes(
+                target.GetRuntimeModule(),
+                target.MetadataToken
+            );
             ListBuilder<Attribute> pcas = default;
-            PseudoCustomAttribute.GetCustomAttributes(target, (RuntimeType)typeof(object), ref pcas);
+            PseudoCustomAttribute.GetCustomAttributes(
+                target,
+                (RuntimeType)typeof(object),
+                ref pcas
+            );
             return pcas.Count > 0 ? GetCombinedList(cad, ref pcas) : cad;
         }
 
-        internal static IList<CustomAttributeData> GetCustomAttributesInternal(RuntimeConstructorInfo target)
+        internal static IList<CustomAttributeData> GetCustomAttributesInternal(
+            RuntimeConstructorInfo target
+        )
         {
             Debug.Assert(target is not null);
 
             return GetCustomAttributes(target.GetRuntimeModule(), target.MetadataToken);
         }
 
-        internal static IList<CustomAttributeData> GetCustomAttributesInternal(RuntimeEventInfo target)
+        internal static IList<CustomAttributeData> GetCustomAttributesInternal(
+            RuntimeEventInfo target
+        )
         {
             Debug.Assert(target is not null);
 
             return GetCustomAttributes(target.GetRuntimeModule(), target.MetadataToken);
         }
 
-        internal static IList<CustomAttributeData> GetCustomAttributesInternal(RuntimePropertyInfo target)
+        internal static IList<CustomAttributeData> GetCustomAttributesInternal(
+            RuntimePropertyInfo target
+        )
         {
             Debug.Assert(target is not null);
 
@@ -74,30 +105,49 @@ namespace System.Reflection
             return GetCustomAttributes(target, target.MetadataToken);
         }
 
-        internal static IList<CustomAttributeData> GetCustomAttributesInternal(RuntimeAssembly target)
+        internal static IList<CustomAttributeData> GetCustomAttributesInternal(
+            RuntimeAssembly target
+        )
         {
             Debug.Assert(target is not null);
 
             // No pseudo attributes for RuntimeAssembly
 
-            return GetCustomAttributes((RuntimeModule)target.ManifestModule, RuntimeAssembly.GetToken(target.GetNativeHandle()));
+            return GetCustomAttributes(
+                (RuntimeModule)target.ManifestModule,
+                RuntimeAssembly.GetToken(target.GetNativeHandle())
+            );
         }
 
-        internal static IList<CustomAttributeData> GetCustomAttributesInternal(RuntimeParameterInfo target)
+        internal static IList<CustomAttributeData> GetCustomAttributesInternal(
+            RuntimeParameterInfo target
+        )
         {
             Debug.Assert(target is not null);
 
             ListBuilder<Attribute> pcas = default;
-            IList<CustomAttributeData> cad = GetCustomAttributes(target.GetRuntimeModule()!, target.MetadataToken);
-            PseudoCustomAttribute.GetCustomAttributes(target, (RuntimeType)typeof(object), ref pcas);
+            IList<CustomAttributeData> cad = GetCustomAttributes(
+                target.GetRuntimeModule()!,
+                target.MetadataToken
+            );
+            PseudoCustomAttribute.GetCustomAttributes(
+                target,
+                (RuntimeType)typeof(object),
+                ref pcas
+            );
             return pcas.Count > 0 ? GetCombinedList(cad, ref pcas) : cad;
         }
 
-        private static ReadOnlyCollection<CustomAttributeData> GetCombinedList(IList<CustomAttributeData> customAttributes, ref ListBuilder<Attribute> pseudoAttributes)
+        private static ReadOnlyCollection<CustomAttributeData> GetCombinedList(
+            IList<CustomAttributeData> customAttributes,
+            ref ListBuilder<Attribute> pseudoAttributes
+        )
         {
             Debug.Assert(pseudoAttributes.Count != 0);
 
-            CustomAttributeData[] pca = new CustomAttributeData[customAttributes.Count + pseudoAttributes.Count];
+            CustomAttributeData[] pca = new CustomAttributeData[
+                customAttributes.Count + pseudoAttributes.Count
+            ];
             customAttributes.CopyTo(pca, pseudoAttributes.Count);
             for (int i = 0; i < pseudoAttributes.Count; i++)
             {
@@ -177,6 +227,7 @@ namespace System.Reflection
 
             throw new ArgumentException(SR.Argument_InvalidKindOfTypeForCA, nameof(type));
         }
+
         private static CustomAttributeType InitCustomAttributeType(RuntimeType parameterType)
         {
             CustomAttributeEncoding encodedType = TypeToCustomAttributeEncoding(parameterType);
@@ -190,15 +241,29 @@ namespace System.Reflection
                 encodedArrayType = TypeToCustomAttributeEncoding(parameterType);
             }
 
-            if (encodedType == CustomAttributeEncoding.Enum || encodedArrayType == CustomAttributeEncoding.Enum)
+            if (
+                encodedType == CustomAttributeEncoding.Enum
+                || encodedArrayType == CustomAttributeEncoding.Enum
+            )
             {
-                encodedEnumType = TypeToCustomAttributeEncoding((RuntimeType)Enum.GetUnderlyingType(parameterType));
+                encodedEnumType = TypeToCustomAttributeEncoding(
+                    (RuntimeType)Enum.GetUnderlyingType(parameterType)
+                );
                 enumName = parameterType.AssemblyQualifiedName;
             }
 
-            return new CustomAttributeType(encodedType, encodedArrayType, encodedEnumType, enumName);
+            return new CustomAttributeType(
+                encodedType,
+                encodedArrayType,
+                encodedEnumType,
+                enumName
+            );
         }
-        private static IList<CustomAttributeData> GetCustomAttributes(RuntimeModule module, int tkTarget)
+
+        private static IList<CustomAttributeData> GetCustomAttributes(
+            RuntimeModule module,
+            int tkTarget
+        )
         {
             CustomAttributeRecord[] records = GetCustomAttributeRecords(module, tkTarget);
             if (records.Length == 0)
@@ -208,14 +273,21 @@ namespace System.Reflection
 
             CustomAttributeData[] customAttributes = new CustomAttributeData[records.Length];
             for (int i = 0; i < records.Length; i++)
-                customAttributes[i] = new RuntimeCustomAttributeData(module, records[i].tkCtor, in records[i].blob);
+                customAttributes[i] = new RuntimeCustomAttributeData(
+                    module,
+                    records[i].tkCtor,
+                    in records[i].blob
+                );
 
             return Array.AsReadOnly(customAttributes);
         }
         #endregion
 
         #region Internal Static Members
-        internal static CustomAttributeRecord[] GetCustomAttributeRecords(RuntimeModule module, int targetToken)
+        internal static CustomAttributeRecord[] GetCustomAttributeRecords(
+            RuntimeModule module,
+            int targetToken
+        )
         {
             MetadataImport scope = module.MetadataImport;
 
@@ -226,18 +298,27 @@ namespace System.Reflection
                 return Array.Empty<CustomAttributeRecord>();
             }
 
-            CustomAttributeRecord[] records = new CustomAttributeRecord[tkCustomAttributeTokens.Length];
+            CustomAttributeRecord[] records = new CustomAttributeRecord[
+                tkCustomAttributeTokens.Length
+            ];
 
             for (int i = 0; i < records.Length; i++)
             {
-                scope.GetCustomAttributeProps(tkCustomAttributeTokens[i],
-                    out records[i].tkCtor.Value, out records[i].blob);
+                scope.GetCustomAttributeProps(
+                    tkCustomAttributeTokens[i],
+                    out records[i].tkCtor.Value,
+                    out records[i].blob
+                );
             }
 
             return records;
         }
 
-        internal static CustomAttributeTypedArgument Filter(IList<CustomAttributeData> attrs, Type? caType, int parameter)
+        internal static CustomAttributeTypedArgument Filter(
+            IList<CustomAttributeData> attrs,
+            Type? caType,
+            int parameter
+        )
         {
             for (int i = 0; i < attrs.Count; i++)
             {
@@ -260,13 +341,23 @@ namespace System.Reflection
         private IList<CustomAttributeNamedArgument> m_namedArgs = null!;
 
         #region Constructor
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "Property setters and fields which are accessed by any attribute instantiation which is present in the code linker has analyzed." +
-                            "As such enumerating all fields and properties may return different results after trimming" +
-                            "but all those which are needed to actually have data will be there.")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-            Justification = "We're getting a MethodBase of a constructor that we found in the metadata. The attribute constructor won't be trimmed.")]
-        private RuntimeCustomAttributeData(RuntimeModule scope, MetadataToken caCtorToken, in ConstArray blob)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "Property setters and fields which are accessed by any attribute instantiation which is present in the code linker has analyzed."
+                + "As such enumerating all fields and properties may return different results after trimming"
+                + "but all those which are needed to actually have data will be there."
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = "We're getting a MethodBase of a constructor that we found in the metadata. The attribute constructor won't be trimmed."
+        )]
+        private RuntimeCustomAttributeData(
+            RuntimeModule scope,
+            MetadataToken caCtorToken,
+            in ConstArray blob
+        )
         {
             m_scope = scope;
             m_ctor = (RuntimeConstructorInfo)RuntimeType.GetMethodBase(scope, caCtorToken)!;
@@ -274,8 +365,15 @@ namespace System.Reflection
             if (m_ctor!.DeclaringType!.IsGenericType)
             {
                 MetadataImport metadataScope = scope.MetadataImport;
-                var attributeType = scope.ResolveType(metadataScope.GetParentToken(caCtorToken), null, null)!;
-                m_ctor = (RuntimeConstructorInfo)scope.ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)!.MethodHandle.GetMethodInfo();
+                var attributeType = scope.ResolveType(
+                    metadataScope.GetParentToken(caCtorToken),
+                    null,
+                    null
+                )!;
+                m_ctor = (RuntimeConstructorInfo)
+                    scope
+                        .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)!
+                        .MethodHandle.GetMethodInfo();
             }
 
             ReadOnlySpan<ParameterInfo> parameters = m_ctor.GetParametersAsSpan();
@@ -283,28 +381,45 @@ namespace System.Reflection
             {
                 m_ctorParams = new CustomAttributeCtorParameter[parameters.Length];
                 for (int i = 0; i < parameters.Length; i++)
-                    m_ctorParams[i] = new CustomAttributeCtorParameter(InitCustomAttributeType((RuntimeType)parameters[i].ParameterType));
+                    m_ctorParams[i] = new CustomAttributeCtorParameter(
+                        InitCustomAttributeType((RuntimeType)parameters[i].ParameterType)
+                    );
             }
             else
             {
                 m_ctorParams = Array.Empty<CustomAttributeCtorParameter>();
             }
 
-            FieldInfo[] fields = m_ctor.DeclaringType!.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            PropertyInfo[] properties = m_ctor.DeclaringType.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            FieldInfo[] fields = m_ctor.DeclaringType!.GetFields(
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
+            PropertyInfo[] properties = m_ctor.DeclaringType.GetProperties(
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
             m_namedParams = new CustomAttributeNamedParameter[properties.Length + fields.Length];
             for (int i = 0; i < fields.Length; i++)
                 m_namedParams[i] = new CustomAttributeNamedParameter(
-                    fields[i].Name, CustomAttributeEncoding.Field, InitCustomAttributeType((RuntimeType)fields[i].FieldType));
+                    fields[i].Name,
+                    CustomAttributeEncoding.Field,
+                    InitCustomAttributeType((RuntimeType)fields[i].FieldType)
+                );
             for (int i = 0; i < properties.Length; i++)
                 m_namedParams[i + fields.Length] = new CustomAttributeNamedParameter(
-                    properties[i].Name, CustomAttributeEncoding.Property, InitCustomAttributeType((RuntimeType)properties[i].PropertyType));
+                    properties[i].Name,
+                    CustomAttributeEncoding.Property,
+                    InitCustomAttributeType((RuntimeType)properties[i].PropertyType)
+                );
 
             m_members = new MemberInfo[fields.Length + properties.Length];
             fields.CopyTo(m_members, 0);
             properties.CopyTo(m_members, fields.Length);
 
-            CustomAttributeEncodedArgument.ParseAttributeArguments(blob, ref m_ctorParams, ref m_namedParams, m_scope);
+            CustomAttributeEncodedArgument.ParseAttributeArguments(
+                blob,
+                ref m_ctorParams,
+                ref m_namedParams,
+                m_scope
+            );
         }
         #endregion
 
@@ -322,78 +437,150 @@ namespace System.Reflection
             else
                 Init(attribute);
         }
+
         private void Init(DllImportAttribute dllImport)
         {
             Type type = typeof(DllImportAttribute);
             m_ctor = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance)[0];
-            m_typedCtorArgs = Array.AsReadOnly(new CustomAttributeTypedArgument[]
-            {
-                new CustomAttributeTypedArgument(dllImport.Value),
-            });
+            m_typedCtorArgs = Array.AsReadOnly(
+                new CustomAttributeTypedArgument[]
+                {
+                    new CustomAttributeTypedArgument(dllImport.Value),
+                }
+            );
 
-            m_namedArgs = Array.AsReadOnly(new CustomAttributeNamedArgument[]
-            {
-                new CustomAttributeNamedArgument(type.GetField("EntryPoint")!, dllImport.EntryPoint),
-                new CustomAttributeNamedArgument(type.GetField("CharSet")!, dllImport.CharSet),
-                new CustomAttributeNamedArgument(type.GetField("ExactSpelling")!, dllImport.ExactSpelling),
-                new CustomAttributeNamedArgument(type.GetField("SetLastError")!, dllImport.SetLastError),
-                new CustomAttributeNamedArgument(type.GetField("PreserveSig")!, dllImport.PreserveSig),
-                new CustomAttributeNamedArgument(type.GetField("CallingConvention")!, dllImport.CallingConvention),
-                new CustomAttributeNamedArgument(type.GetField("BestFitMapping")!, dllImport.BestFitMapping),
-                new CustomAttributeNamedArgument(type.GetField("ThrowOnUnmappableChar")!, dllImport.ThrowOnUnmappableChar)
-            });
+            m_namedArgs = Array.AsReadOnly(
+                new CustomAttributeNamedArgument[]
+                {
+                    new CustomAttributeNamedArgument(
+                        type.GetField("EntryPoint")!,
+                        dllImport.EntryPoint
+                    ),
+                    new CustomAttributeNamedArgument(type.GetField("CharSet")!, dllImport.CharSet),
+                    new CustomAttributeNamedArgument(
+                        type.GetField("ExactSpelling")!,
+                        dllImport.ExactSpelling
+                    ),
+                    new CustomAttributeNamedArgument(
+                        type.GetField("SetLastError")!,
+                        dllImport.SetLastError
+                    ),
+                    new CustomAttributeNamedArgument(
+                        type.GetField("PreserveSig")!,
+                        dllImport.PreserveSig
+                    ),
+                    new CustomAttributeNamedArgument(
+                        type.GetField("CallingConvention")!,
+                        dllImport.CallingConvention
+                    ),
+                    new CustomAttributeNamedArgument(
+                        type.GetField("BestFitMapping")!,
+                        dllImport.BestFitMapping
+                    ),
+                    new CustomAttributeNamedArgument(
+                        type.GetField("ThrowOnUnmappableChar")!,
+                        dllImport.ThrowOnUnmappableChar
+                    ),
+                }
+            );
         }
+
         private void Init(FieldOffsetAttribute fieldOffset)
         {
-            m_ctor = typeof(FieldOffsetAttribute).GetConstructors(BindingFlags.Public | BindingFlags.Instance)[0];
-            m_typedCtorArgs = Array.AsReadOnly(new CustomAttributeTypedArgument[] {
-                new CustomAttributeTypedArgument(fieldOffset.Value)
-            });
+            m_ctor = typeof(FieldOffsetAttribute).GetConstructors(
+                BindingFlags.Public | BindingFlags.Instance
+            )[0];
+            m_typedCtorArgs = Array.AsReadOnly(
+                new CustomAttributeTypedArgument[]
+                {
+                    new CustomAttributeTypedArgument(fieldOffset.Value),
+                }
+            );
             m_namedArgs = Array.Empty<CustomAttributeNamedArgument>();
         }
+
         private void Init(MarshalAsAttribute marshalAs)
         {
             Type type = typeof(MarshalAsAttribute);
             m_ctor = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance)[0];
-            m_typedCtorArgs = Array.AsReadOnly(new CustomAttributeTypedArgument[]
-            {
-                new CustomAttributeTypedArgument(marshalAs.Value),
-            });
+            m_typedCtorArgs = Array.AsReadOnly(
+                new CustomAttributeTypedArgument[]
+                {
+                    new CustomAttributeTypedArgument(marshalAs.Value),
+                }
+            );
 
             int i = 3; // ArraySubType, SizeParamIndex, SizeConst
-            if (marshalAs.MarshalType is not null) i++;
-            if (marshalAs.MarshalTypeRef is not null) i++;
-            if (marshalAs.MarshalCookie is not null) i++;
+            if (marshalAs.MarshalType is not null)
+                i++;
+            if (marshalAs.MarshalTypeRef is not null)
+                i++;
+            if (marshalAs.MarshalCookie is not null)
+                i++;
             i++; // IidParameterIndex
             i++; // SafeArraySubType
-            if (marshalAs.SafeArrayUserDefinedSubType is not null) i++;
+            if (marshalAs.SafeArrayUserDefinedSubType is not null)
+                i++;
             CustomAttributeNamedArgument[] namedArgs = new CustomAttributeNamedArgument[i];
 
             // For compatibility with previous runtimes, we always include the following 5 attributes, regardless
             // of if they apply to the UnmanagedType being marshaled or not.
             i = 0;
-            namedArgs[i++] = new CustomAttributeNamedArgument(type.GetField("ArraySubType")!, marshalAs.ArraySubType);
-            namedArgs[i++] = new CustomAttributeNamedArgument(type.GetField("SizeParamIndex")!, marshalAs.SizeParamIndex);
-            namedArgs[i++] = new CustomAttributeNamedArgument(type.GetField("SizeConst")!, marshalAs.SizeConst);
-            namedArgs[i++] = new CustomAttributeNamedArgument(type.GetField("IidParameterIndex")!, marshalAs.IidParameterIndex);
-            namedArgs[i++] = new CustomAttributeNamedArgument(type.GetField("SafeArraySubType")!, marshalAs.SafeArraySubType);
+            namedArgs[i++] = new CustomAttributeNamedArgument(
+                type.GetField("ArraySubType")!,
+                marshalAs.ArraySubType
+            );
+            namedArgs[i++] = new CustomAttributeNamedArgument(
+                type.GetField("SizeParamIndex")!,
+                marshalAs.SizeParamIndex
+            );
+            namedArgs[i++] = new CustomAttributeNamedArgument(
+                type.GetField("SizeConst")!,
+                marshalAs.SizeConst
+            );
+            namedArgs[i++] = new CustomAttributeNamedArgument(
+                type.GetField("IidParameterIndex")!,
+                marshalAs.IidParameterIndex
+            );
+            namedArgs[i++] = new CustomAttributeNamedArgument(
+                type.GetField("SafeArraySubType")!,
+                marshalAs.SafeArraySubType
+            );
             if (marshalAs.MarshalType is not null)
-                namedArgs[i++] = new CustomAttributeNamedArgument(type.GetField("MarshalType")!, marshalAs.MarshalType);
+                namedArgs[i++] = new CustomAttributeNamedArgument(
+                    type.GetField("MarshalType")!,
+                    marshalAs.MarshalType
+                );
             if (marshalAs.MarshalTypeRef is not null)
-                namedArgs[i++] = new CustomAttributeNamedArgument(type.GetField("MarshalTypeRef")!, marshalAs.MarshalTypeRef);
+                namedArgs[i++] = new CustomAttributeNamedArgument(
+                    type.GetField("MarshalTypeRef")!,
+                    marshalAs.MarshalTypeRef
+                );
             if (marshalAs.MarshalCookie is not null)
-                namedArgs[i++] = new CustomAttributeNamedArgument(type.GetField("MarshalCookie")!, marshalAs.MarshalCookie);
+                namedArgs[i++] = new CustomAttributeNamedArgument(
+                    type.GetField("MarshalCookie")!,
+                    marshalAs.MarshalCookie
+                );
             if (marshalAs.SafeArrayUserDefinedSubType is not null)
-                namedArgs[i++] = new CustomAttributeNamedArgument(type.GetField("SafeArrayUserDefinedSubType")!, marshalAs.SafeArrayUserDefinedSubType);
+                namedArgs[i++] = new CustomAttributeNamedArgument(
+                    type.GetField("SafeArrayUserDefinedSubType")!,
+                    marshalAs.SafeArrayUserDefinedSubType
+                );
 
             m_namedArgs = Array.AsReadOnly(namedArgs);
         }
+
         private void Init(TypeForwardedToAttribute forwardedTo)
         {
             Type type = typeof(TypeForwardedToAttribute);
 
             Type[] sig = new Type[] { typeof(Type) };
-            m_ctor = type.GetConstructor(BindingFlags.Public | BindingFlags.Instance, null, sig, null)!;
+            m_ctor = type.GetConstructor(
+                BindingFlags.Public | BindingFlags.Instance,
+                null,
+                sig,
+                null
+            )!;
 
             CustomAttributeTypedArgument[] typedArgs = new CustomAttributeTypedArgument[1];
             typedArgs[0] = new CustomAttributeTypedArgument(typeof(Type), forwardedTo.Destination);
@@ -402,15 +589,20 @@ namespace System.Reflection
             m_namedArgs = Array.Empty<CustomAttributeNamedArgument>();
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "The pca object had to be created by the single ctor on the Type. So the ctor couldn't have been trimmed.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "The pca object had to be created by the single ctor on the Type. So the ctor couldn't have been trimmed."
+        )]
         private void Init(object pca)
         {
             Type type = pca.GetType();
 
 #if DEBUG
             // Ensure there is only a single constructor for 'pca', so it is safe to suppress IL2075
-            ConstructorInfo[] allCtors = type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            ConstructorInfo[] allCtors = type.GetConstructors(
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            );
             Debug.Assert(allCtors.Length == 1);
             Debug.Assert(allCtors[0].GetParametersAsSpan().Length == 0);
 #endif
@@ -432,13 +624,19 @@ namespace System.Reflection
                 {
                     if (m_ctorParams.Length != 0)
                     {
-                        CustomAttributeTypedArgument[] typedCtorArgs = new CustomAttributeTypedArgument[m_ctorParams.Length];
+                        CustomAttributeTypedArgument[] typedCtorArgs =
+                            new CustomAttributeTypedArgument[m_ctorParams.Length];
 
                         for (int i = 0; i < typedCtorArgs.Length; i++)
                         {
-                            CustomAttributeEncodedArgument encodedArg = m_ctorParams[i].CustomAttributeEncodedArgument;
+                            CustomAttributeEncodedArgument encodedArg = m_ctorParams[
+                                i
+                            ].CustomAttributeEncodedArgument;
 
-                            typedCtorArgs[i] = new CustomAttributeTypedArgument(m_scope, encodedArg);
+                            typedCtorArgs[i] = new CustomAttributeTypedArgument(
+                                m_scope,
+                                encodedArg
+                            );
                         }
 
                         m_typedCtorArgs = Array.AsReadOnly(typedCtorArgs);
@@ -464,20 +662,33 @@ namespace System.Reflection
                     {
                         for (int i = 0; i < m_namedParams.Length; i++)
                         {
-                            if (m_namedParams[i].EncodedArgument.CustomAttributeType.EncodedType != CustomAttributeEncoding.Undefined)
+                            if (
+                                m_namedParams[i].EncodedArgument.CustomAttributeType.EncodedType
+                                != CustomAttributeEncoding.Undefined
+                            )
                                 cNamedArgs++;
                         }
                     }
 
                     if (cNamedArgs != 0)
                     {
-                        CustomAttributeNamedArgument[] namedArgs = new CustomAttributeNamedArgument[cNamedArgs];
+                        CustomAttributeNamedArgument[] namedArgs = new CustomAttributeNamedArgument[
+                            cNamedArgs
+                        ];
 
                         for (int i = 0, j = 0; i < m_namedParams!.Length; i++)
                         {
-                            if (m_namedParams[i].EncodedArgument.CustomAttributeType.EncodedType != CustomAttributeEncoding.Undefined)
+                            if (
+                                m_namedParams[i].EncodedArgument.CustomAttributeType.EncodedType
+                                != CustomAttributeEncoding.Undefined
+                            )
                                 namedArgs[j++] = new CustomAttributeNamedArgument(
-                                    m_members[i], new CustomAttributeTypedArgument(m_scope, m_namedParams[i].EncodedArgument));
+                                    m_members[i],
+                                    new CustomAttributeTypedArgument(
+                                        m_scope,
+                                        m_namedParams[i].EncodedArgument
+                                    )
+                                );
                         }
 
                         m_namedArgs = Array.AsReadOnly(namedArgs);
@@ -518,7 +729,10 @@ namespace System.Reflection
                 CustomAttributeEncoding.Float => typeof(float),
                 CustomAttributeEncoding.Double => typeof(double),
                 CustomAttributeEncoding.Object => typeof(object),
-                _ => throw new ArgumentException(SR.Format(SR.Arg_EnumIllegalVal, (int)encodedType), nameof(encodedType)),
+                _ => throw new ArgumentException(
+                    SR.Format(SR.Arg_EnumIllegalVal, (int)encodedType),
+                    nameof(encodedType)
+                ),
             };
         }
 
@@ -557,15 +771,25 @@ namespace System.Reflection
                     return (ulong)val;
 
                 case CustomAttributeEncoding.Float:
-                    unsafe { return *(float*)&val; }
+                    unsafe
+                    {
+                        return *(float*)&val;
+                    }
 
                 case CustomAttributeEncoding.Double:
-                    unsafe { return *(double*)&val; }
+                    unsafe
+                    {
+                        return *(double*)&val;
+                    }
 
                 default:
-                    throw new ArgumentException(SR.Format(SR.Arg_EnumIllegalVal, (int)val), nameof(val));
+                    throw new ArgumentException(
+                        SR.Format(SR.Arg_EnumIllegalVal, (int)val),
+                        nameof(val)
+                    );
             }
         }
+
         private static RuntimeType ResolveType(RuntimeModule scope, string typeName)
         {
             RuntimeType type = TypeNameParser.GetTypeReferencedByCustomAttribute(typeName, scope);
@@ -574,7 +798,10 @@ namespace System.Reflection
         }
         #endregion
 
-        internal CustomAttributeTypedArgument(RuntimeModule scope, CustomAttributeEncodedArgument encodedArg)
+        internal CustomAttributeTypedArgument(
+            RuntimeModule scope,
+            CustomAttributeEncodedArgument encodedArg
+        )
         {
             CustomAttributeEncoding encodedType = encodedArg.CustomAttributeType.EncodedType;
 
@@ -584,7 +811,10 @@ namespace System.Reflection
             if (encodedType == CustomAttributeEncoding.Enum)
             {
                 _argumentType = ResolveType(scope, encodedArg.CustomAttributeType.EnumName!);
-                _value = EncodedValueToRawValue(encodedArg.PrimitiveValue, encodedArg.CustomAttributeType.EncodedEnumType);
+                _value = EncodedValueToRawValue(
+                    encodedArg.PrimitiveValue,
+                    encodedArg.CustomAttributeType.EncodedEnumType
+                );
             }
             else if (encodedType == CustomAttributeEncoding.String)
             {
@@ -622,9 +852,14 @@ namespace System.Reflection
                 }
                 else
                 {
-                    CustomAttributeTypedArgument[] arrayValue = new CustomAttributeTypedArgument[encodedArg.ArrayValue.Length];
+                    CustomAttributeTypedArgument[] arrayValue = new CustomAttributeTypedArgument[
+                        encodedArg.ArrayValue.Length
+                    ];
                     for (int i = 0; i < arrayValue.Length; i++)
-                        arrayValue[i] = new CustomAttributeTypedArgument(scope, encodedArg.ArrayValue[i]);
+                        arrayValue[i] = new CustomAttributeTypedArgument(
+                            scope,
+                            encodedArg.ArrayValue[i]
+                        );
 
                     _value = Array.AsReadOnly(arrayValue);
                 }
@@ -671,7 +906,7 @@ namespace System.Reflection
         Object = 0x51,
         Field = 0x53,
         Property = 0x54,
-        Enum = 0x55
+        Enum = 0x55,
     }
 
     [StructLayout(LayoutKind.Auto)]
@@ -688,26 +923,33 @@ namespace System.Reflection
             int cCa,
             ref CustomAttributeCtorParameter[] CustomAttributeCtorParameters,
             ref CustomAttributeNamedParameter[] CustomAttributeTypedArgument,
-            RuntimeAssembly assembly);
+            RuntimeAssembly assembly
+        );
 
-        internal static void ParseAttributeArguments(ConstArray attributeBlob,
+        internal static void ParseAttributeArguments(
+            ConstArray attributeBlob,
             ref CustomAttributeCtorParameter[] customAttributeCtorParameters,
             ref CustomAttributeNamedParameter[] customAttributeNamedParameters,
-            RuntimeModule customAttributeModule)
+            RuntimeModule customAttributeModule
+        )
         {
             ArgumentNullException.ThrowIfNull(customAttributeModule);
 
             Debug.Assert(customAttributeCtorParameters is not null);
             Debug.Assert(customAttributeNamedParameters is not null);
 
-            if (customAttributeCtorParameters.Length != 0 || customAttributeNamedParameters.Length != 0)
+            if (
+                customAttributeCtorParameters.Length != 0
+                || customAttributeNamedParameters.Length != 0
+            )
             {
                 ParseAttributeArguments(
                     attributeBlob.Signature,
                     (int)attributeBlob.Length,
                     ref customAttributeCtorParameters,
                     ref customAttributeNamedParameters,
-                    (RuntimeAssembly)customAttributeModule.Assembly);
+                    (RuntimeAssembly)customAttributeModule.Assembly
+                );
             }
         }
 
@@ -726,7 +968,11 @@ namespace System.Reflection
         private readonly CustomAttributeType m_type;
         private readonly CustomAttributeEncodedArgument m_encodedArgument;
 
-        public CustomAttributeNamedParameter(string argumentName, CustomAttributeEncoding fieldOrProperty, CustomAttributeType type)
+        public CustomAttributeNamedParameter(
+            string argumentName,
+            CustomAttributeEncoding fieldOrProperty,
+            CustomAttributeType type
+        )
         {
             ArgumentNullException.ThrowIfNull(argumentName);
 
@@ -765,8 +1011,12 @@ namespace System.Reflection
         private readonly CustomAttributeEncoding m_encodedArrayType; // ...enum type
         private readonly CustomAttributeEncoding m_padding;
 
-        public CustomAttributeType(CustomAttributeEncoding encodedType, CustomAttributeEncoding encodedArrayType,
-            CustomAttributeEncoding encodedEnumType, string? enumName)
+        public CustomAttributeType(
+            CustomAttributeEncoding encodedType,
+            CustomAttributeEncoding encodedArrayType,
+            CustomAttributeEncoding encodedEnumType,
+            string? enumName
+        )
         {
             m_encodedType = encodedType;
             m_encodedArrayType = encodedArrayType;
@@ -804,7 +1054,15 @@ namespace System.Reflection
 
             while (type is not null)
             {
-                if (IsCustomAttributeDefined(type.GetRuntimeModule(), type.MetadataToken, caType, 0, inherit))
+                if (
+                    IsCustomAttributeDefined(
+                        type.GetRuntimeModule(),
+                        type.MetadataToken,
+                        caType,
+                        0,
+                        inherit
+                    )
+                )
                     return true;
 
                 type = (type.BaseType as RuntimeType)!;
@@ -831,7 +1089,15 @@ namespace System.Reflection
 
             while (method is not null)
             {
-                if (IsCustomAttributeDefined(method.GetRuntimeModule(), method.MetadataToken, caType, 0, inherit))
+                if (
+                    IsCustomAttributeDefined(
+                        method.GetRuntimeModule(),
+                        method.MetadataToken,
+                        caType,
+                        0,
+                        inherit
+                    )
+                )
                     return true;
 
                 method = method.GetParentDefinition()!;
@@ -857,7 +1123,11 @@ namespace System.Reflection
 
             // No pseudo attributes for RuntimePropertyInfo
 
-            return IsCustomAttributeDefined(property.GetRuntimeModule(), property.MetadataToken, caType);
+            return IsCustomAttributeDefined(
+                property.GetRuntimeModule(),
+                property.MetadataToken,
+                caType
+            );
         }
 
         internal static bool IsDefined(RuntimeEventInfo e, RuntimeType caType)
@@ -889,7 +1159,11 @@ namespace System.Reflection
             if (PseudoCustomAttribute.IsDefined(parameter, caType))
                 return true;
 
-            return IsCustomAttributeDefined(parameter.GetRuntimeModule()!, parameter.MetadataToken, caType);
+            return IsCustomAttributeDefined(
+                parameter.GetRuntimeModule()!,
+                parameter.MetadataToken,
+                caType
+            );
         }
 
         internal static bool IsDefined(RuntimeAssembly assembly, RuntimeType caType)
@@ -898,7 +1172,11 @@ namespace System.Reflection
             Debug.Assert(caType is not null);
 
             // No pseudo attributes for RuntimeAssembly
-            return IsCustomAttributeDefined((assembly.ManifestModule as RuntimeModule)!, RuntimeAssembly.GetToken(assembly.GetNativeHandle()), caType);
+            return IsCustomAttributeDefined(
+                (assembly.ManifestModule as RuntimeModule)!,
+                RuntimeAssembly.GetToken(assembly.GetNativeHandle()),
+                caType
+            );
         }
 
         internal static bool IsDefined(RuntimeModule module, RuntimeType caType)
@@ -911,7 +1189,11 @@ namespace System.Reflection
             return IsCustomAttributeDefined(module, module.MetadataToken, caType);
         }
 
-        internal static object[] GetCustomAttributes(RuntimeType type, RuntimeType caType, bool inherit)
+        internal static object[] GetCustomAttributes(
+            RuntimeType type,
+            RuntimeType caType,
+            bool inherit
+        )
         {
             Debug.Assert(type is not null);
             Debug.Assert(caType is not null);
@@ -930,8 +1212,14 @@ namespace System.Reflection
             // ... however if the attribute is sealed we can rely on the attribute usage
             if (!inherit || (caType.IsSealed && !GetAttributeUsage(caType).Inherited))
             {
-                object[] attributes = GetCustomAttributes(type.GetRuntimeModule(), type.MetadataToken, pcas.Count, caType);
-                if (pcas.Count > 0) pcas.CopyTo(attributes, attributes.Length - pcas.Count);
+                object[] attributes = GetCustomAttributes(
+                    type.GetRuntimeModule(),
+                    type.MetadataToken,
+                    pcas.Count,
+                    caType
+                );
+                if (pcas.Count > 0)
+                    pcas.CopyTo(attributes, attributes.Length - pcas.Count);
                 return attributes;
             }
 
@@ -943,7 +1231,14 @@ namespace System.Reflection
 
             while (type != (RuntimeType)typeof(object) && type != null)
             {
-                AddCustomAttributes(ref result, type.GetRuntimeModule(), type.MetadataToken, caType, mustBeInheritable, result);
+                AddCustomAttributes(
+                    ref result,
+                    type.GetRuntimeModule(),
+                    type.MetadataToken,
+                    caType,
+                    mustBeInheritable,
+                    result
+                );
                 mustBeInheritable = true;
                 type = (type.BaseType as RuntimeType)!;
             }
@@ -956,7 +1251,11 @@ namespace System.Reflection
             return typedResult;
         }
 
-        internal static object[] GetCustomAttributes(RuntimeMethodInfo method, RuntimeType caType, bool inherit)
+        internal static object[] GetCustomAttributes(
+            RuntimeMethodInfo method,
+            RuntimeType caType,
+            bool inherit
+        )
         {
             Debug.Assert(method is not null);
             Debug.Assert(caType is not null);
@@ -972,8 +1271,14 @@ namespace System.Reflection
             // ... however if the attribute is sealed we can rely on the attribute usage
             if (!inherit || (caType.IsSealed && !GetAttributeUsage(caType).Inherited))
             {
-                object[] attributes = GetCustomAttributes(method.GetRuntimeModule(), method.MetadataToken, pcas.Count, caType);
-                if (pcas.Count > 0) pcas.CopyTo(attributes, attributes.Length - pcas.Count);
+                object[] attributes = GetCustomAttributes(
+                    method.GetRuntimeModule(),
+                    method.MetadataToken,
+                    pcas.Count,
+                    caType
+                );
+                if (pcas.Count > 0)
+                    pcas.CopyTo(attributes, attributes.Length - pcas.Count);
                 return attributes;
             }
 
@@ -985,7 +1290,14 @@ namespace System.Reflection
 
             while (method != null)
             {
-                AddCustomAttributes(ref result, method.GetRuntimeModule(), method.MetadataToken, caType, mustBeInheritable, result);
+                AddCustomAttributes(
+                    ref result,
+                    method.GetRuntimeModule(),
+                    method.MetadataToken,
+                    caType,
+                    mustBeInheritable,
+                    result
+                );
                 mustBeInheritable = true;
                 method = method.GetParentDefinition()!;
             }
@@ -998,7 +1310,10 @@ namespace System.Reflection
             return typedResult;
         }
 
-        internal static object[] GetCustomAttributes(RuntimeConstructorInfo ctor, RuntimeType caType)
+        internal static object[] GetCustomAttributes(
+            RuntimeConstructorInfo ctor,
+            RuntimeType caType
+        )
         {
             Debug.Assert(ctor != null);
             Debug.Assert(caType != null);
@@ -1008,14 +1323,22 @@ namespace System.Reflection
             return GetCustomAttributes(ctor.GetRuntimeModule(), ctor.MetadataToken, 0, caType);
         }
 
-        internal static object[] GetCustomAttributes(RuntimePropertyInfo property, RuntimeType caType)
+        internal static object[] GetCustomAttributes(
+            RuntimePropertyInfo property,
+            RuntimeType caType
+        )
         {
             Debug.Assert(property is not null);
             Debug.Assert(caType is not null);
 
             // No pseudo attributes for RuntimePropertyInfo
 
-            return GetCustomAttributes(property.GetRuntimeModule(), property.MetadataToken, 0, caType);
+            return GetCustomAttributes(
+                property.GetRuntimeModule(),
+                property.MetadataToken,
+                0,
+                caType
+            );
         }
 
         internal static object[] GetCustomAttributes(RuntimeEventInfo e, RuntimeType caType)
@@ -1035,20 +1358,35 @@ namespace System.Reflection
 
             ListBuilder<Attribute> pcas = default;
             PseudoCustomAttribute.GetCustomAttributes(field, caType, ref pcas);
-            object[] attributes = GetCustomAttributes(field.GetRuntimeModule(), field.MetadataToken, pcas.Count, caType);
-            if (pcas.Count > 0) pcas.CopyTo(attributes, attributes.Length - pcas.Count);
+            object[] attributes = GetCustomAttributes(
+                field.GetRuntimeModule(),
+                field.MetadataToken,
+                pcas.Count,
+                caType
+            );
+            if (pcas.Count > 0)
+                pcas.CopyTo(attributes, attributes.Length - pcas.Count);
             return attributes;
         }
 
-        internal static object[] GetCustomAttributes(RuntimeParameterInfo parameter, RuntimeType caType)
+        internal static object[] GetCustomAttributes(
+            RuntimeParameterInfo parameter,
+            RuntimeType caType
+        )
         {
             Debug.Assert(parameter is not null);
             Debug.Assert(caType is not null);
 
             ListBuilder<Attribute> pcas = default;
             PseudoCustomAttribute.GetCustomAttributes(parameter, caType, ref pcas);
-            object[] attributes = GetCustomAttributes(parameter.GetRuntimeModule()!, parameter.MetadataToken, pcas.Count, caType);
-            if (pcas.Count > 0) pcas.CopyTo(attributes, attributes.Length - pcas.Count);
+            object[] attributes = GetCustomAttributes(
+                parameter.GetRuntimeModule()!,
+                parameter.MetadataToken,
+                pcas.Count,
+                caType
+            );
+            if (pcas.Count > 0)
+                pcas.CopyTo(attributes, attributes.Length - pcas.Count);
             return attributes;
         }
 
@@ -1060,7 +1398,12 @@ namespace System.Reflection
             // No pseudo attributes for RuntimeAssembly
 
             int assemblyToken = RuntimeAssembly.GetToken(assembly.GetNativeHandle());
-            return GetCustomAttributes((assembly.ManifestModule as RuntimeModule)!, assemblyToken, 0, caType);
+            return GetCustomAttributes(
+                (assembly.ManifestModule as RuntimeModule)!,
+                assemblyToken,
+                0,
+                caType
+            );
         }
 
         internal static object[] GetCustomAttributes(RuntimeModule module, RuntimeType caType)
@@ -1073,23 +1416,50 @@ namespace System.Reflection
             return GetCustomAttributes(module, module.MetadataToken, 0, caType);
         }
 
-        internal static bool IsAttributeDefined(RuntimeModule decoratedModule, int decoratedMetadataToken, int attributeCtorToken)
+        internal static bool IsAttributeDefined(
+            RuntimeModule decoratedModule,
+            int decoratedMetadataToken,
+            int attributeCtorToken
+        )
         {
-            return IsCustomAttributeDefined(decoratedModule, decoratedMetadataToken, null, attributeCtorToken, false);
+            return IsCustomAttributeDefined(
+                decoratedModule,
+                decoratedMetadataToken,
+                null,
+                attributeCtorToken,
+                false
+            );
         }
 
         private static bool IsCustomAttributeDefined(
-            RuntimeModule decoratedModule, int decoratedMetadataToken, RuntimeType? attributeFilterType)
+            RuntimeModule decoratedModule,
+            int decoratedMetadataToken,
+            RuntimeType? attributeFilterType
+        )
         {
-            return IsCustomAttributeDefined(decoratedModule, decoratedMetadataToken, attributeFilterType, 0, false);
+            return IsCustomAttributeDefined(
+                decoratedModule,
+                decoratedMetadataToken,
+                attributeFilterType,
+                0,
+                false
+            );
         }
 
         private static bool IsCustomAttributeDefined(
-            RuntimeModule decoratedModule, int decoratedMetadataToken, RuntimeType? attributeFilterType, int attributeCtorToken, bool mustBeInheritable)
+            RuntimeModule decoratedModule,
+            int decoratedMetadataToken,
+            RuntimeType? attributeFilterType,
+            int attributeCtorToken,
+            bool mustBeInheritable
+        )
         {
             MetadataImport scope = decoratedModule.MetadataImport;
 
-            scope.EnumCustomAttributes(decoratedMetadataToken, out MetadataEnumResult attributeTokens);
+            scope.EnumCustomAttributes(
+                decoratedMetadataToken,
+                out MetadataEnumResult attributeTokens
+            );
 
             if (attributeTokens.Length == 0)
             {
@@ -1105,12 +1475,26 @@ namespace System.Reflection
 
                 for (int i = 0; i < attributeTokens.Length; i++)
                 {
-                    scope.GetCustomAttributeProps(attributeTokens[i],
-                        out record.tkCtor.Value, out record.blob);
+                    scope.GetCustomAttributeProps(
+                        attributeTokens[i],
+                        out record.tkCtor.Value,
+                        out record.blob
+                    );
 
-                    if (FilterCustomAttributeRecord(record.tkCtor, in scope,
-                        decoratedModule, decoratedMetadataToken, attributeFilterType, mustBeInheritable, ref derivedAttributes,
-                        out _, out _, out _))
+                    if (
+                        FilterCustomAttributeRecord(
+                            record.tkCtor,
+                            in scope,
+                            decoratedModule,
+                            decoratedMetadataToken,
+                            attributeFilterType,
+                            mustBeInheritable,
+                            ref derivedAttributes,
+                            out _,
+                            out _,
+                            out _
+                        )
+                    )
                     {
                         return true;
                     }
@@ -1123,8 +1507,11 @@ namespace System.Reflection
 
                 for (int i = 0; i < attributeTokens.Length; i++)
                 {
-                    scope.GetCustomAttributeProps(attributeTokens[i],
-                        out record.tkCtor.Value, out record.blob);
+                    scope.GetCustomAttributeProps(
+                        attributeTokens[i],
+                        out record.tkCtor.Value,
+                        out record.blob
+                    );
 
                     if (record.tkCtor == attributeCtorToken)
                     {
@@ -1137,13 +1524,27 @@ namespace System.Reflection
         }
 
         private static object[] GetCustomAttributes(
-            RuntimeModule decoratedModule, int decoratedMetadataToken, int pcaCount, RuntimeType attributeFilterType)
+            RuntimeModule decoratedModule,
+            int decoratedMetadataToken,
+            int pcaCount,
+            RuntimeType attributeFilterType
+        )
         {
             ListBuilder<object> attributes = default;
 
-            AddCustomAttributes(ref attributes, decoratedModule, decoratedMetadataToken, attributeFilterType, false, default);
+            AddCustomAttributes(
+                ref attributes,
+                decoratedModule,
+                decoratedMetadataToken,
+                attributeFilterType,
+                false,
+                default
+            );
 
-            object[] result = CreateAttributeArrayHelper(attributeFilterType, attributes.Count + pcaCount);
+            object[] result = CreateAttributeArrayHelper(
+                attributeFilterType,
+                attributes.Count + pcaCount
+            );
             for (int i = 0; i < attributes.Count; i++)
             {
                 result[i] = attributes[i];
@@ -1151,18 +1552,27 @@ namespace System.Reflection
             return result;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:MethodParameterDoesntMeetThisParameterRequirements",
-            Justification = "Linker guarantees presence of all the constructor parameters, property setters and fields which are accessed by any " +
-                            "attribute instantiation which is present in the code linker has analyzed." +
-                            "As such the reflection usage in this method will never fail as those methods/fields will be present.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:MethodParameterDoesntMeetThisParameterRequirements",
+            Justification = "Linker guarantees presence of all the constructor parameters, property setters and fields which are accessed by any "
+                + "attribute instantiation which is present in the code linker has analyzed."
+                + "As such the reflection usage in this method will never fail as those methods/fields will be present."
+        )]
         private static void AddCustomAttributes(
             ref ListBuilder<object> attributes,
-            RuntimeModule decoratedModule, int decoratedMetadataToken,
-            RuntimeType? attributeFilterType, bool mustBeInheritable,
+            RuntimeModule decoratedModule,
+            int decoratedMetadataToken,
+            RuntimeType? attributeFilterType,
+            bool mustBeInheritable,
             // The derivedAttributes list must be passed by value so that it is not modified with the discovered attributes
-            ListBuilder<object> derivedAttributes)
+            ListBuilder<object> derivedAttributes
+        )
         {
-            CustomAttributeRecord[] car = RuntimeCustomAttributeData.GetCustomAttributeRecords(decoratedModule, decoratedMetadataToken);
+            CustomAttributeRecord[] car = RuntimeCustomAttributeData.GetCustomAttributeRecords(
+                decoratedModule,
+                decoratedMetadataToken
+            );
 
             if (attributeFilterType is null && car.Length == 0)
             {
@@ -1177,10 +1587,20 @@ namespace System.Reflection
                 IntPtr blobStart = caRecord.blob.Signature;
                 IntPtr blobEnd = (IntPtr)((byte*)blobStart + caRecord.blob.Length);
 
-                if (!FilterCustomAttributeRecord(caRecord.tkCtor, in scope,
-                                                 decoratedModule, decoratedMetadataToken, attributeFilterType!, mustBeInheritable,
-                                                 ref derivedAttributes,
-                                                 out RuntimeType attributeType, out IRuntimeMethodInfo? ctorWithParameters, out bool isVarArg))
+                if (
+                    !FilterCustomAttributeRecord(
+                        caRecord.tkCtor,
+                        in scope,
+                        decoratedModule,
+                        decoratedMetadataToken,
+                        attributeFilterType!,
+                        mustBeInheritable,
+                        ref derivedAttributes,
+                        out RuntimeType attributeType,
+                        out IRuntimeMethodInfo? ctorWithParameters,
+                        out bool isVarArg
+                    )
+                )
                 {
                     continue;
                 }
@@ -1193,11 +1613,21 @@ namespace System.Reflection
                 object attribute;
                 if (ctorWithParameters is not null)
                 {
-                    attribute = CreateCaObject(decoratedModule, attributeType, ctorWithParameters, ref blobStart, blobEnd, out cNamedArgs);
+                    attribute = CreateCaObject(
+                        decoratedModule,
+                        attributeType,
+                        ctorWithParameters,
+                        ref blobStart,
+                        blobEnd,
+                        out cNamedArgs
+                    );
                 }
                 else
                 {
-                    attribute = attributeType.CreateInstanceDefaultCtor(publicOnly: false, wrapExceptions: false)!;
+                    attribute = attributeType.CreateInstanceDefaultCtor(
+                        publicOnly: false,
+                        wrapExceptions: false
+                    )!;
 
                     // It is allowed by the ECMA spec to have an empty signature blob
                     int blobLen = (int)((byte*)blobEnd - (byte*)blobStart);
@@ -1226,7 +1656,15 @@ namespace System.Reflection
 
                 for (int j = 0; j < cNamedArgs; j++)
                 {
-                    GetPropertyOrFieldData(decoratedModule, ref blobStart, blobEnd, out string name, out bool isProperty, out RuntimeType? type, out object? value);
+                    GetPropertyOrFieldData(
+                        decoratedModule,
+                        ref blobStart,
+                        blobEnd,
+                        out string name,
+                        out bool isProperty,
+                        out RuntimeType? type,
+                        out object? value
+                    );
 
                     try
                     {
@@ -1241,14 +1679,18 @@ namespace System.Reflection
                                 }
                             }
 
-                            RuntimePropertyInfo? property = (RuntimePropertyInfo?)(type is null ?
-                                attributeType.GetProperty(name) :
-                                attributeType.GetProperty(name, type, Type.EmptyTypes));
+                            RuntimePropertyInfo? property = (RuntimePropertyInfo?)(
+                                type is null
+                                    ? attributeType.GetProperty(name)
+                                    : attributeType.GetProperty(name, type, Type.EmptyTypes)
+                            );
 
                             // Did we get a valid property reference?
                             if (property is null)
                             {
-                                throw new CustomAttributeFormatException(SR.Format(SR.RFLCT_InvalidPropFail, name));
+                                throw new CustomAttributeFormatException(
+                                    SR.Format(SR.RFLCT_InvalidPropFail, name)
+                                );
                             }
 
                             RuntimeMethodInfo setMethod = property.GetSetMethod(true)!;
@@ -1259,18 +1701,35 @@ namespace System.Reflection
                                 continue;
                             }
 
-                            setMethod.InvokePropertySetter(attribute, BindingFlags.Default, null, value, null);
+                            setMethod.InvokePropertySetter(
+                                attribute,
+                                BindingFlags.Default,
+                                null,
+                                value,
+                                null
+                            );
                         }
                         else
                         {
                             FieldInfo field = attributeType.GetField(name)!;
-                            field.SetValue(attribute, value, BindingFlags.Default, Type.DefaultBinder, null);
+                            field.SetValue(
+                                attribute,
+                                value,
+                                BindingFlags.Default,
+                                Type.DefaultBinder,
+                                null
+                            );
                         }
                     }
                     catch (Exception e)
                     {
                         throw new CustomAttributeFormatException(
-                            SR.Format(isProperty ? SR.RFLCT_InvalidPropFail : SR.RFLCT_InvalidFieldFail, name), e);
+                            SR.Format(
+                                isProperty ? SR.RFLCT_InvalidPropFail : SR.RFLCT_InvalidFieldFail,
+                                name
+                            ),
+                            e
+                        );
                     }
                 }
 
@@ -1283,11 +1742,14 @@ namespace System.Reflection
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Module.ResolveMethod and Module.ResolveType are marked as RequiresUnreferencedCode because they rely on tokens" +
-                            "which are not guaranteed to be stable across trimming. So if somebody hardcodes a token it could break." +
-                            "The usage here is not like that as all these tokens come from existing metadata loaded from some IL" +
-                            "and so trimming has no effect (the tokens are read AFTER trimming occurred).")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Module.ResolveMethod and Module.ResolveType are marked as RequiresUnreferencedCode because they rely on tokens"
+                + "which are not guaranteed to be stable across trimming. So if somebody hardcodes a token it could break."
+                + "The usage here is not like that as all these tokens come from existing metadata loaded from some IL"
+                + "and so trimming has no effect (the tokens are read AFTER trimming occurred)."
+        )]
         private static bool FilterCustomAttributeRecord(
             MetadataToken caCtorToken,
             in MetadataImport scope,
@@ -1298,13 +1760,17 @@ namespace System.Reflection
             ref ListBuilder<object> derivedAttributes,
             out RuntimeType attributeType,
             out IRuntimeMethodInfo? ctorWithParameters,
-            out bool isVarArg)
+            out bool isVarArg
+        )
         {
             ctorWithParameters = null;
             isVarArg = false;
 
             // Resolve attribute type from ctor parent token found in decorated decoratedModule scope
-            attributeType = (decoratedModule.ResolveType(scope.GetParentToken(caCtorToken), null, null) as RuntimeType)!;
+            attributeType = (
+                decoratedModule.ResolveType(scope.GetParentToken(caCtorToken), null, null)
+                as RuntimeType
+            )!;
 
             // Test attribute type against user provided attribute type filter
             if (!MatchesTypeFilter(attributeType, attributeFilterType))
@@ -1317,7 +1783,10 @@ namespace System.Reflection
 
             // Windows Runtime attributes aren't real types - they exist to be read as metadata only, and as such
             // should be filtered out of the GetCustomAttributes path.
-            if ((attributeType.Attributes & TypeAttributes.WindowsRuntime) == TypeAttributes.WindowsRuntime)
+            if (
+                (attributeType.Attributes & TypeAttributes.WindowsRuntime)
+                == TypeAttributes.WindowsRuntime
+            )
             {
                 return false;
             }
@@ -1333,11 +1802,15 @@ namespace System.Reflection
                 // See https://github.com/dotnet/runtime/issues/11637 for why we fast-path non-generics here (fewer allocations)
                 if (attributeType.IsGenericType)
                 {
-                    ctorWithParameters = decoratedModule.ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)!.MethodHandle.GetMethodInfo();
+                    ctorWithParameters = decoratedModule
+                        .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)!
+                        .MethodHandle.GetMethodInfo();
                 }
                 else
                 {
-                    ctorWithParameters = new ModuleHandle(decoratedModule).ResolveMethodHandle(caCtorToken).GetMethodInfo();
+                    ctorWithParameters = new ModuleHandle(decoratedModule)
+                        .ResolveMethodHandle(caCtorToken)
+                        .GetMethodInfo();
                 }
             }
 
@@ -1349,7 +1822,12 @@ namespace System.Reflection
                 tkParent = new MetadataToken(scope.GetParentToken(decoratedToken));
                 tkParent = new MetadataToken(scope.GetParentToken(tkParent));
             }
-            else if (decoratedToken.IsMethodDef || decoratedToken.IsProperty || decoratedToken.IsEvent || decoratedToken.IsFieldDef)
+            else if (
+                decoratedToken.IsMethodDef
+                || decoratedToken.IsProperty
+                || decoratedToken.IsEvent
+                || decoratedToken.IsFieldDef
+            )
             {
                 tkParent = new MetadataToken(scope.GetParentToken(decoratedToken));
             }
@@ -1368,34 +1846,51 @@ namespace System.Reflection
             else
             {
                 // We need to relax this when we add support for other types of decorated tokens.
-                Debug.Assert(decoratedToken.IsModule || decoratedToken.IsAssembly,
-                                "The decoratedToken must be either an assembly, a module, a type, or a member.");
+                Debug.Assert(
+                    decoratedToken.IsModule || decoratedToken.IsAssembly,
+                    "The decoratedToken must be either an assembly, a module, a type, or a member."
+                );
             }
 
             // If the attribute is on a type, member, or parameter we check access against the (declaring) type,
             // otherwise we check access against the module.
-            RuntimeTypeHandle parentTypeHandle = tkParent.IsTypeDef ?
-                                                    decoratedModule.ModuleHandle.ResolveTypeHandle(tkParent) :
-                                                    default;
+            RuntimeTypeHandle parentTypeHandle = tkParent.IsTypeDef
+                ? decoratedModule.ModuleHandle.ResolveTypeHandle(tkParent)
+                : default;
 
             RuntimeTypeHandle attributeTypeHandle = attributeType.TypeHandle;
 
-            bool result = RuntimeMethodHandle.IsCAVisibleFromDecoratedType(new QCallTypeHandle(ref attributeTypeHandle),
-                                                                    ctorWithParameters is not null ? ctorWithParameters.Value : RuntimeMethodHandleInternal.EmptyHandle,
-                                                                    new QCallTypeHandle(ref parentTypeHandle),
-                                                                    new QCallModule(ref decoratedModule)) != Interop.BOOL.FALSE;
+            bool result =
+                RuntimeMethodHandle.IsCAVisibleFromDecoratedType(
+                    new QCallTypeHandle(ref attributeTypeHandle),
+                    ctorWithParameters is not null
+                        ? ctorWithParameters.Value
+                        : RuntimeMethodHandleInternal.EmptyHandle,
+                    new QCallTypeHandle(ref parentTypeHandle),
+                    new QCallModule(ref decoratedModule)
+                ) != Interop.BOOL.FALSE;
 
             GC.KeepAlive(ctorWithParameters);
             return result;
         }
 
-        private static bool MatchesTypeFilter(RuntimeType attributeType, RuntimeType attributeFilterType)
+        private static bool MatchesTypeFilter(
+            RuntimeType attributeType,
+            RuntimeType attributeFilterType
+        )
         {
             if (attributeFilterType.IsGenericTypeDefinition)
             {
-                for (RuntimeType? type = attributeType; type != null; type = (RuntimeType?)type.BaseType)
+                for (
+                    RuntimeType? type = attributeType;
+                    type != null;
+                    type = (RuntimeType?)type.BaseType
+                )
                 {
-                    if (type.IsConstructedGenericType && type.GetGenericTypeDefinition() == attributeFilterType)
+                    if (
+                        type.IsConstructedGenericType
+                        && type.GetGenericTypeDefinition() == attributeFilterType
+                    )
                     {
                         return true;
                     }
@@ -1409,7 +1904,10 @@ namespace System.Reflection
 
         #region Private Static Methods
         private static bool AttributeUsageCheck(
-            RuntimeType attributeType, bool mustBeInheritable, ref ListBuilder<object> derivedAttributes)
+            RuntimeType attributeType,
+            bool mustBeInheritable,
+            ref ListBuilder<object> derivedAttributes
+        )
         {
             AttributeUsageAttribute? attributeUsageAttribute = null;
 
@@ -1437,23 +1935,31 @@ namespace System.Reflection
             return true;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Module.ResolveType is marked as RequiresUnreferencedCode because it relies on tokens" +
-                            "which are not guaranteed to be stable across trimming. So if somebody hardcodes a token it could break." +
-                            "The usage here is not like that as all these tokens come from existing metadata loaded from some IL" +
-                            "and so trimming has no effect (the tokens are read AFTER trimming occurred).")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Module.ResolveType is marked as RequiresUnreferencedCode because it relies on tokens"
+                + "which are not guaranteed to be stable across trimming. So if somebody hardcodes a token it could break."
+                + "The usage here is not like that as all these tokens come from existing metadata loaded from some IL"
+                + "and so trimming has no effect (the tokens are read AFTER trimming occurred)."
+        )]
         internal static AttributeUsageAttribute GetAttributeUsage(RuntimeType decoratedAttribute)
         {
             RuntimeModule decoratedModule = decoratedAttribute.GetRuntimeModule();
             MetadataImport scope = decoratedModule.MetadataImport;
-            CustomAttributeRecord[] car = RuntimeCustomAttributeData.GetCustomAttributeRecords(decoratedModule, decoratedAttribute.MetadataToken);
+            CustomAttributeRecord[] car = RuntimeCustomAttributeData.GetCustomAttributeRecords(
+                decoratedModule,
+                decoratedAttribute.MetadataToken
+            );
 
             AttributeUsageAttribute? attributeUsageAttribute = null;
 
             for (int i = 0; i < car.Length; i++)
             {
                 ref CustomAttributeRecord caRecord = ref car[i];
-                RuntimeType? attributeType = decoratedModule.ResolveType(scope.GetParentToken(caRecord.tkCtor), null, null) as RuntimeType;
+                RuntimeType? attributeType =
+                    decoratedModule.ResolveType(scope.GetParentToken(caRecord.tkCtor), null, null)
+                    as RuntimeType;
 
                 if (attributeType != (RuntimeType)typeof(AttributeUsageAttribute))
                     continue;
@@ -1461,8 +1967,17 @@ namespace System.Reflection
                 if (attributeUsageAttribute is not null)
                     throw new FormatException(SR.Format(SR.Format_AttributeUsage, attributeType));
 
-                ParseAttributeUsageAttribute(caRecord.blob, out AttributeTargets targets, out bool inherited, out bool allowMultiple);
-                attributeUsageAttribute = new AttributeUsageAttribute(targets, allowMultiple, inherited);
+                ParseAttributeUsageAttribute(
+                    caRecord.blob,
+                    out AttributeTargets targets,
+                    out bool inherited,
+                    out bool allowMultiple
+                );
+                attributeUsageAttribute = new AttributeUsageAttribute(
+                    targets,
+                    allowMultiple,
+                    inherited
+                );
             }
 
             return attributeUsageAttribute ?? AttributeUsageAttribute.Default;
@@ -1501,24 +2016,57 @@ namespace System.Reflection
             {
                 return elementCount == 0 ? Array.Empty<object>() : new object[elementCount];
             }
-            return elementCount == 0 ? caType.GetEmptyArray() : (object[])Array.CreateInstance(caType, elementCount);
+            return elementCount == 0
+                ? caType.GetEmptyArray()
+                : (object[])Array.CreateInstance(caType, elementCount);
         }
         #endregion
 
         #region Private Static FCalls
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern void _ParseAttributeUsageAttribute(
-            IntPtr pCa, int cCa, out int targets, out bool inherited, out bool allowMultiple);
+            IntPtr pCa,
+            int cCa,
+            out int targets,
+            out bool inherited,
+            out bool allowMultiple
+        );
+
         private static void ParseAttributeUsageAttribute(
-            ConstArray ca, out AttributeTargets targets, out bool inherited, out bool allowMultiple)
+            ConstArray ca,
+            out AttributeTargets targets,
+            out bool inherited,
+            out bool allowMultiple
+        )
         {
-            _ParseAttributeUsageAttribute(ca.Signature, ca.Length, out int _targets, out inherited, out allowMultiple);
+            _ParseAttributeUsageAttribute(
+                ca.Signature,
+                ca.Length,
+                out int _targets,
+                out inherited,
+                out allowMultiple
+            );
             targets = (AttributeTargets)_targets;
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern object _CreateCaObject(RuntimeModule pModule, RuntimeType type, IRuntimeMethodInfo pCtor, byte** ppBlob, byte* pEndBlob, int* pcNamedArgs);
-        private static object CreateCaObject(RuntimeModule module, RuntimeType type, IRuntimeMethodInfo ctor, ref IntPtr blob, IntPtr blobEnd, out int namedArgs)
+        private static extern object _CreateCaObject(
+            RuntimeModule pModule,
+            RuntimeType type,
+            IRuntimeMethodInfo pCtor,
+            byte** ppBlob,
+            byte* pEndBlob,
+            int* pcNamedArgs
+        );
+
+        private static object CreateCaObject(
+            RuntimeModule module,
+            RuntimeType type,
+            IRuntimeMethodInfo ctor,
+            ref IntPtr blob,
+            IntPtr blobEnd,
+            out int namedArgs
+        )
         {
             byte* pBlob = (byte*)blob;
             byte* pBlobEnd = (byte*)blobEnd;
@@ -1531,13 +2079,35 @@ namespace System.Reflection
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern void _GetPropertyOrFieldData(
-            RuntimeModule pModule, byte** ppBlobStart, byte* pBlobEnd, out string name, out bool bIsProperty, out RuntimeType type, out object value);
+            RuntimeModule pModule,
+            byte** ppBlobStart,
+            byte* pBlobEnd,
+            out string name,
+            out bool bIsProperty,
+            out RuntimeType type,
+            out object value
+        );
+
         private static void GetPropertyOrFieldData(
-            RuntimeModule module, ref IntPtr blobStart, IntPtr blobEnd, out string name, out bool isProperty, out RuntimeType? type, out object? value)
+            RuntimeModule module,
+            ref IntPtr blobStart,
+            IntPtr blobEnd,
+            out string name,
+            out bool isProperty,
+            out RuntimeType? type,
+            out object? value
+        )
         {
             byte* pBlobStart = (byte*)blobStart;
             _GetPropertyOrFieldData(
-                module, &pBlobStart, (byte*)blobEnd, out name, out isProperty, out type, out value);
+                module,
+                &pBlobStart,
+                (byte*)blobEnd,
+                out name,
+                out isProperty,
+                out type,
+                out value
+            );
             blobStart = (IntPtr)pBlobStart;
         }
         #endregion
@@ -1595,7 +2165,11 @@ namespace System.Reflection
         #endregion
 
         #region Internal Static
-        internal static void GetCustomAttributes(RuntimeType type, RuntimeType caType, ref ListBuilder<Attribute> pcas)
+        internal static void GetCustomAttributes(
+            RuntimeType type,
+            RuntimeType caType,
+            ref ListBuilder<Attribute> pcas
+        )
         {
             Debug.Assert(type is not null);
             Debug.Assert(caType is not null);
@@ -1617,6 +2191,7 @@ namespace System.Reflection
                     pcas.Add(new ComImportAttribute());
             }
         }
+
         internal static bool IsDefined(RuntimeType type, RuntimeType? caType)
         {
             bool all = caType == typeof(object) || caType == typeof(Attribute);
@@ -1639,7 +2214,11 @@ namespace System.Reflection
             return false;
         }
 
-        internal static void GetCustomAttributes(RuntimeMethodInfo method, RuntimeType caType, ref ListBuilder<Attribute> pcas)
+        internal static void GetCustomAttributes(
+            RuntimeMethodInfo method,
+            RuntimeType caType,
+            ref ListBuilder<Attribute> pcas
+        )
         {
             Debug.Assert(method is not null);
             Debug.Assert(caType is not null);
@@ -1651,7 +2230,8 @@ namespace System.Reflection
             if (all || caType == typeof(DllImportAttribute))
             {
                 Attribute? pca = GetDllImportCustomAttribute(method);
-                if (pca is not null) pcas.Add(pca);
+                if (pca is not null)
+                    pcas.Add(pca);
             }
             if (all || caType == typeof(PreserveSigAttribute))
             {
@@ -1659,6 +2239,7 @@ namespace System.Reflection
                     pcas.Add(new PreserveSigAttribute());
             }
         }
+
         internal static bool IsDefined(RuntimeMethodInfo method, RuntimeType? caType)
         {
             bool all = caType == typeof(object) || caType == typeof(Attribute);
@@ -1679,7 +2260,11 @@ namespace System.Reflection
             return false;
         }
 
-        internal static void GetCustomAttributes(RuntimeParameterInfo parameter, RuntimeType caType, ref ListBuilder<Attribute> pcas)
+        internal static void GetCustomAttributes(
+            RuntimeParameterInfo parameter,
+            RuntimeType caType,
+            ref ListBuilder<Attribute> pcas
+        )
         {
             Debug.Assert(parameter is not null);
             Debug.Assert(caType is not null);
@@ -1706,9 +2291,11 @@ namespace System.Reflection
             if (all || caType == typeof(MarshalAsAttribute))
             {
                 Attribute? pca = GetMarshalAsCustomAttribute(parameter);
-                if (pca is not null) pcas.Add(pca);
+                if (pca is not null)
+                    pcas.Add(pca);
             }
         }
+
         internal static bool IsDefined(RuntimeParameterInfo parameter, RuntimeType? caType)
         {
             bool all = caType == typeof(object) || caType == typeof(Attribute);
@@ -1717,25 +2304,33 @@ namespace System.Reflection
 
             if (all || caType == typeof(InAttribute))
             {
-                if (parameter.IsIn) return true;
+                if (parameter.IsIn)
+                    return true;
             }
             if (all || caType == typeof(OutAttribute))
             {
-                if (parameter.IsOut) return true;
+                if (parameter.IsOut)
+                    return true;
             }
             if (all || caType == typeof(OptionalAttribute))
             {
-                if (parameter.IsOptional) return true;
+                if (parameter.IsOptional)
+                    return true;
             }
             if (all || caType == typeof(MarshalAsAttribute))
             {
-                if (GetMarshalAsCustomAttribute(parameter) is not null) return true;
+                if (GetMarshalAsCustomAttribute(parameter) is not null)
+                    return true;
             }
 
             return false;
         }
 
-        internal static void GetCustomAttributes(RuntimeFieldInfo field, RuntimeType caType, ref ListBuilder<Attribute> pcas)
+        internal static void GetCustomAttributes(
+            RuntimeFieldInfo field,
+            RuntimeType caType,
+            ref ListBuilder<Attribute> pcas
+        )
         {
             Debug.Assert(field is not null);
             Debug.Assert(caType is not null);
@@ -1749,12 +2344,14 @@ namespace System.Reflection
             if (all || caType == typeof(MarshalAsAttribute))
             {
                 pca = GetMarshalAsCustomAttribute(field);
-                if (pca is not null) pcas.Add(pca);
+                if (pca is not null)
+                    pcas.Add(pca);
             }
             if (all || caType == typeof(FieldOffsetAttribute))
             {
                 pca = GetFieldOffsetCustomAttribute(field);
-                if (pca is not null) pcas.Add(pca);
+                if (pca is not null)
+                    pcas.Add(pca);
             }
 #pragma warning disable SYSLIB0050 // Legacy serialization infrastructure is obsolete
             if (all || caType == typeof(NonSerializedAttribute))
@@ -1764,6 +2361,7 @@ namespace System.Reflection
             }
 #pragma warning restore SYSLIB0050
         }
+
         internal static bool IsDefined(RuntimeFieldInfo field, RuntimeType? caType)
         {
             bool all = caType == typeof(object) || caType == typeof(Attribute);
@@ -1772,11 +2370,13 @@ namespace System.Reflection
 
             if (all || caType == typeof(MarshalAsAttribute))
             {
-                if (GetMarshalAsCustomAttribute(field) is not null) return true;
+                if (GetMarshalAsCustomAttribute(field) is not null)
+                    return true;
             }
             if (all || caType == typeof(FieldOffsetAttribute))
             {
-                if (GetFieldOffsetCustomAttribute(field) is not null) return true;
+                if (GetFieldOffsetCustomAttribute(field) is not null)
+                    return true;
             }
 #pragma warning disable SYSLIB0050 // Legacy serialization infrastructure is obsolete
             if (all || caType == typeof(NonSerializedAttribute))
@@ -1795,36 +2395,63 @@ namespace System.Reflection
             if ((method.Attributes & MethodAttributes.PinvokeImpl) == 0)
                 return null;
 
-            MetadataImport scope = ModuleHandle.GetMetadataImport(method.Module.ModuleHandle.GetRuntimeModule());
+            MetadataImport scope = ModuleHandle.GetMetadataImport(
+                method.Module.ModuleHandle.GetRuntimeModule()
+            );
             int token = method.MetadataToken;
 
-            scope.GetPInvokeMap(token, out PInvokeAttributes flags, out string entryPoint, out string dllName);
+            scope.GetPInvokeMap(
+                token,
+                out PInvokeAttributes flags,
+                out string entryPoint,
+                out string dllName
+            );
 
             CharSet charSet = CharSet.None;
 
             switch (flags & PInvokeAttributes.CharSetMask)
             {
-                case PInvokeAttributes.CharSetNotSpec: charSet = CharSet.None; break;
-                case PInvokeAttributes.CharSetAnsi: charSet = CharSet.Ansi; break;
-                case PInvokeAttributes.CharSetUnicode: charSet = CharSet.Unicode; break;
-                case PInvokeAttributes.CharSetAuto: charSet = CharSet.Auto; break;
+                case PInvokeAttributes.CharSetNotSpec:
+                    charSet = CharSet.None;
+                    break;
+                case PInvokeAttributes.CharSetAnsi:
+                    charSet = CharSet.Ansi;
+                    break;
+                case PInvokeAttributes.CharSetUnicode:
+                    charSet = CharSet.Unicode;
+                    break;
+                case PInvokeAttributes.CharSetAuto:
+                    charSet = CharSet.Auto;
+                    break;
 
                 // Invalid: default to CharSet.None
-                default: break;
+                default:
+                    break;
             }
 
             CallingConvention callingConvention = CallingConvention.Cdecl;
 
             switch (flags & PInvokeAttributes.CallConvMask)
             {
-                case PInvokeAttributes.CallConvWinapi: callingConvention = CallingConvention.Winapi; break;
-                case PInvokeAttributes.CallConvCdecl: callingConvention = CallingConvention.Cdecl; break;
-                case PInvokeAttributes.CallConvStdcall: callingConvention = CallingConvention.StdCall; break;
-                case PInvokeAttributes.CallConvThiscall: callingConvention = CallingConvention.ThisCall; break;
-                case PInvokeAttributes.CallConvFastcall: callingConvention = CallingConvention.FastCall; break;
+                case PInvokeAttributes.CallConvWinapi:
+                    callingConvention = CallingConvention.Winapi;
+                    break;
+                case PInvokeAttributes.CallConvCdecl:
+                    callingConvention = CallingConvention.Cdecl;
+                    break;
+                case PInvokeAttributes.CallConvStdcall:
+                    callingConvention = CallingConvention.StdCall;
+                    break;
+                case PInvokeAttributes.CallConvThiscall:
+                    callingConvention = CallingConvention.ThisCall;
+                    break;
+                case PInvokeAttributes.CallConvFastcall:
+                    callingConvention = CallingConvention.FastCall;
+                    break;
 
                 // Invalid: default to CallingConvention.Cdecl
-                default: break;
+                default:
+                    break;
             }
 
             DllImportAttribute attribute = new DllImportAttribute(dllName);
@@ -1833,17 +2460,26 @@ namespace System.Reflection
             attribute.CharSet = charSet;
             attribute.SetLastError = (flags & PInvokeAttributes.SupportsLastError) != 0;
             attribute.ExactSpelling = (flags & PInvokeAttributes.NoMangle) != 0;
-            attribute.PreserveSig = (method.GetMethodImplementationFlags() & MethodImplAttributes.PreserveSig) != 0;
+            attribute.PreserveSig =
+                (method.GetMethodImplementationFlags() & MethodImplAttributes.PreserveSig) != 0;
             attribute.CallingConvention = callingConvention;
-            attribute.BestFitMapping = (flags & PInvokeAttributes.BestFitMask) == PInvokeAttributes.BestFitEnabled;
-            attribute.ThrowOnUnmappableChar = (flags & PInvokeAttributes.ThrowOnUnmappableCharMask) == PInvokeAttributes.ThrowOnUnmappableCharEnabled;
+            attribute.BestFitMapping =
+                (flags & PInvokeAttributes.BestFitMask) == PInvokeAttributes.BestFitEnabled;
+            attribute.ThrowOnUnmappableChar =
+                (flags & PInvokeAttributes.ThrowOnUnmappableCharMask)
+                == PInvokeAttributes.ThrowOnUnmappableCharEnabled;
 
             return attribute;
         }
 
-        private static MarshalAsAttribute? GetMarshalAsCustomAttribute(RuntimeParameterInfo parameter)
+        private static MarshalAsAttribute? GetMarshalAsCustomAttribute(
+            RuntimeParameterInfo parameter
+        )
         {
-            return GetMarshalAsCustomAttribute(parameter.MetadataToken, parameter.GetRuntimeModule()!);
+            return GetMarshalAsCustomAttribute(
+                parameter.MetadataToken,
+                parameter.GetRuntimeModule()!
+            );
         }
 
         private static MarshalAsAttribute? GetMarshalAsCustomAttribute(RuntimeFieldInfo field)
@@ -1851,24 +2487,44 @@ namespace System.Reflection
             return GetMarshalAsCustomAttribute(field.MetadataToken, field.GetRuntimeModule());
         }
 
-        private static MarshalAsAttribute? GetMarshalAsCustomAttribute(int token, RuntimeModule scope)
+        private static MarshalAsAttribute? GetMarshalAsCustomAttribute(
+            int token,
+            RuntimeModule scope
+        )
         {
             ConstArray nativeType = ModuleHandle.GetMetadataImport(scope).GetFieldMarshal(token);
 
             if (nativeType.Length == 0)
                 return null;
 
-            MetadataImport.GetMarshalAs(nativeType,
-                out UnmanagedType unmanagedType, out VarEnum safeArraySubType, out string? safeArrayUserDefinedTypeName, out UnmanagedType arraySubType, out int sizeParamIndex,
-                out int sizeConst, out string? marshalTypeName, out string? marshalCookie, out int iidParamIndex);
+            MetadataImport.GetMarshalAs(
+                nativeType,
+                out UnmanagedType unmanagedType,
+                out VarEnum safeArraySubType,
+                out string? safeArrayUserDefinedTypeName,
+                out UnmanagedType arraySubType,
+                out int sizeParamIndex,
+                out int sizeConst,
+                out string? marshalTypeName,
+                out string? marshalCookie,
+                out int iidParamIndex
+            );
 
-            RuntimeType? safeArrayUserDefinedType = string.IsNullOrEmpty(safeArrayUserDefinedTypeName) ? null :
-                TypeNameParser.GetTypeReferencedByCustomAttribute(safeArrayUserDefinedTypeName, scope);
+            RuntimeType? safeArrayUserDefinedType = string.IsNullOrEmpty(
+                safeArrayUserDefinedTypeName
+            )
+                ? null
+                : TypeNameParser.GetTypeReferencedByCustomAttribute(
+                    safeArrayUserDefinedTypeName,
+                    scope
+                );
             RuntimeType? marshalTypeRef = null;
 
             try
             {
-                marshalTypeRef = marshalTypeName is null ? null : TypeNameParser.GetTypeReferencedByCustomAttribute(marshalTypeName, scope);
+                marshalTypeRef = marshalTypeName is null
+                    ? null
+                    : TypeNameParser.GetTypeReferencedByCustomAttribute(marshalTypeName, scope);
             }
             catch (TypeLoadException)
             {
@@ -1894,8 +2550,16 @@ namespace System.Reflection
 
         private static FieldOffsetAttribute? GetFieldOffsetCustomAttribute(RuntimeFieldInfo field)
         {
-            if (field.DeclaringType is not null &&
-                field.GetRuntimeModule().MetadataImport.GetFieldOffset(field.DeclaringType.MetadataToken, field.MetadataToken, out int fieldOffset))
+            if (
+                field.DeclaringType is not null
+                && field
+                    .GetRuntimeModule()
+                    .MetadataImport.GetFieldOffset(
+                        field.DeclaringType.MetadataToken,
+                        field.MetadataToken,
+                        out int fieldOffset
+                    )
+            )
                 return new FieldOffsetAttribute(fieldOffset);
 
             return null;
@@ -1909,21 +2573,38 @@ namespace System.Reflection
             LayoutKind layoutKind = LayoutKind.Auto;
             switch (type.Attributes & TypeAttributes.LayoutMask)
             {
-                case TypeAttributes.ExplicitLayout: layoutKind = LayoutKind.Explicit; break;
-                case TypeAttributes.AutoLayout: layoutKind = LayoutKind.Auto; break;
-                case TypeAttributes.SequentialLayout: layoutKind = LayoutKind.Sequential; break;
-                default: Debug.Fail("Unreachable code"); break;
+                case TypeAttributes.ExplicitLayout:
+                    layoutKind = LayoutKind.Explicit;
+                    break;
+                case TypeAttributes.AutoLayout:
+                    layoutKind = LayoutKind.Auto;
+                    break;
+                case TypeAttributes.SequentialLayout:
+                    layoutKind = LayoutKind.Sequential;
+                    break;
+                default:
+                    Debug.Fail("Unreachable code");
+                    break;
             }
 
             CharSet charSet = CharSet.None;
             switch (type.Attributes & TypeAttributes.StringFormatMask)
             {
-                case TypeAttributes.AnsiClass: charSet = CharSet.Ansi; break;
-                case TypeAttributes.AutoClass: charSet = CharSet.Auto; break;
-                case TypeAttributes.UnicodeClass: charSet = CharSet.Unicode; break;
-                default: Debug.Fail("Unreachable code"); break;
+                case TypeAttributes.AnsiClass:
+                    charSet = CharSet.Ansi;
+                    break;
+                case TypeAttributes.AutoClass:
+                    charSet = CharSet.Auto;
+                    break;
+                case TypeAttributes.UnicodeClass:
+                    charSet = CharSet.Unicode;
+                    break;
+                default:
+                    Debug.Fail("Unreachable code");
+                    break;
             }
-            type.GetRuntimeModule().MetadataImport.GetClassLayout(type.MetadataToken, out int pack, out int size);
+            type.GetRuntimeModule()
+                .MetadataImport.GetClassLayout(type.MetadataToken, out int pack, out int size);
 
             StructLayoutAttribute attribute = new StructLayoutAttribute(layoutKind);
 

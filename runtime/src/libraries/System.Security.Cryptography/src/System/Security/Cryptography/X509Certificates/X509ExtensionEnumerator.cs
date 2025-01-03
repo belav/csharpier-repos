@@ -37,9 +37,7 @@ namespace System.Security.Cryptography.X509Certificates
             _current = -1;
         }
 
-        void IDisposable.Dispose()
-        {
-        }
+        void IDisposable.Dispose() { }
 
         private readonly X509ExtensionCollection _extensions;
         private int _current;

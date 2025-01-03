@@ -10,36 +10,37 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Routing.Configuration
 {
-	[ConfigurationCollection (typeof (FilterTableEntryCollection), AddItemName = "filterTable")]
-	public class FilterTableCollection : ConfigurationElementCollection
-	{
-		public void Add (FilterTableEntryCollection element)
-		{
-			BaseAdd (element);
-		}
+    [ConfigurationCollection(typeof(FilterTableEntryCollection), AddItemName = "filterTable")]
+    public class FilterTableCollection : ConfigurationElementCollection
+    {
+        public void Add(FilterTableEntryCollection element)
+        {
+            BaseAdd(element);
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        public void Clear()
+        {
+            BaseClear();
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new FilterTableEntryCollection ();
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new FilterTableEntryCollection();
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((FilterTableEntryCollection) element).Name;
-		}
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((FilterTableEntryCollection)element).Name;
+        }
 
-		public void Remove (FilterTableEntryCollection element)
-		{
-			BaseRemove (element);
-		}
+        public void Remove(FilterTableEntryCollection element)
+        {
+            BaseRemove(element);
+        }
 
-		public new FilterTableEntryCollection this [string name] {
-			get { return (FilterTableEntryCollection) BaseGet (name); }
-		}
-	}
+        public new FilterTableEntryCollection this[string name]
+        {
+            get { return (FilterTableEntryCollection)BaseGet(name); }
+        }
+    }
 }

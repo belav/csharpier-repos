@@ -11,19 +11,26 @@ namespace Microsoft.AspNetCore.SignalR.Tests;
 public class VerifyMethodFilter : IHubFilter
 {
     private readonly TcsService _service;
+
     public VerifyMethodFilter(TcsService tcsService)
     {
         _service = tcsService;
     }
 
-    public async Task OnConnectedAsync(HubLifetimeContext context, Func<HubLifetimeContext, Task> next)
+    public async Task OnConnectedAsync(
+        HubLifetimeContext context,
+        Func<HubLifetimeContext, Task> next
+    )
     {
         _service.StartedMethod.TrySetResult(null);
         await next(context);
         _service.EndMethod.TrySetResult(null);
     }
 
-    public async ValueTask<object> InvokeMethodAsync(HubInvocationContext invocationContext, Func<HubInvocationContext, ValueTask<object>> next)
+    public async ValueTask<object> InvokeMethodAsync(
+        HubInvocationContext invocationContext,
+        Func<HubInvocationContext, ValueTask<object>> next
+    )
     {
         _service.StartedMethod.TrySetResult(null);
         var result = await next(invocationContext);
@@ -32,7 +39,11 @@ public class VerifyMethodFilter : IHubFilter
         return result;
     }
 
-    public async Task OnDisconnectedAsync(HubLifetimeContext context, Exception exception, Func<HubLifetimeContext, Exception, Task> next)
+    public async Task OnDisconnectedAsync(
+        HubLifetimeContext context,
+        Exception exception,
+        Func<HubLifetimeContext, Exception, Task> next
+    )
     {
         _service.StartedMethod.TrySetResult(null);
         await next(context, exception);
@@ -43,19 +54,26 @@ public class VerifyMethodFilter : IHubFilter
 public class SyncPointFilter : IHubFilter
 {
     private readonly SyncPoint[] _syncPoint;
+
     public SyncPointFilter(SyncPoint[] syncPoints)
     {
         Debug.Assert(syncPoints.Length == 3);
         _syncPoint = syncPoints;
     }
 
-    public async Task OnConnectedAsync(HubLifetimeContext context, Func<HubLifetimeContext, Task> next)
+    public async Task OnConnectedAsync(
+        HubLifetimeContext context,
+        Func<HubLifetimeContext, Task> next
+    )
     {
         await _syncPoint[0].WaitToContinue();
         await next(context);
     }
 
-    public async ValueTask<object> InvokeMethodAsync(HubInvocationContext invocationContext, Func<HubInvocationContext, ValueTask<object>> next)
+    public async ValueTask<object> InvokeMethodAsync(
+        HubInvocationContext invocationContext,
+        Func<HubInvocationContext, ValueTask<object>> next
+    )
     {
         await _syncPoint[1].WaitToContinue();
         var result = await next(invocationContext);
@@ -63,7 +81,11 @@ public class SyncPointFilter : IHubFilter
         return result;
     }
 
-    public async Task OnDisconnectedAsync(HubLifetimeContext context, Exception exception, Func<HubLifetimeContext, Exception, Task> next)
+    public async Task OnDisconnectedAsync(
+        HubLifetimeContext context,
+        Exception exception,
+        Func<HubLifetimeContext, Exception, Task> next
+    )
     {
         await _syncPoint[2].WaitToContinue();
         await next(context, exception);
@@ -80,6 +102,7 @@ public class FilterCounter
 public class CounterFilter : IHubFilter
 {
     private readonly FilterCounter _counter;
+
     public CounterFilter(FilterCounter counter)
     {
         _counter = counter;
@@ -94,13 +117,20 @@ public class CounterFilter : IHubFilter
         return next(context);
     }
 
-    public Task OnDisconnectedAsync(HubLifetimeContext context, Exception exception, Func<HubLifetimeContext, Exception, Task> next)
+    public Task OnDisconnectedAsync(
+        HubLifetimeContext context,
+        Exception exception,
+        Func<HubLifetimeContext, Exception, Task> next
+    )
     {
         _counter.OnDisconnectedAsyncCount++;
         return next(context, exception);
     }
 
-    public ValueTask<object> InvokeMethodAsync(HubInvocationContext invocationContext, Func<HubInvocationContext, ValueTask<object>> next)
+    public ValueTask<object> InvokeMethodAsync(
+        HubInvocationContext invocationContext,
+        Func<HubInvocationContext, ValueTask<object>> next
+    )
     {
         _counter.InvokeMethodAsyncCount++;
         return next(invocationContext);
@@ -109,7 +139,10 @@ public class CounterFilter : IHubFilter
 
 public class NoExceptionFilter : IHubFilter
 {
-    public async Task OnConnectedAsync(HubLifetimeContext context, Func<HubLifetimeContext, Task> next)
+    public async Task OnConnectedAsync(
+        HubLifetimeContext context,
+        Func<HubLifetimeContext, Task> next
+    )
     {
         try
         {
@@ -118,7 +151,11 @@ public class NoExceptionFilter : IHubFilter
         catch { }
     }
 
-    public async Task OnDisconnectedAsync(HubLifetimeContext context, Exception exception, Func<HubLifetimeContext, Exception, Task> next)
+    public async Task OnDisconnectedAsync(
+        HubLifetimeContext context,
+        Exception exception,
+        Func<HubLifetimeContext, Exception, Task> next
+    )
     {
         try
         {
@@ -127,7 +164,10 @@ public class NoExceptionFilter : IHubFilter
         catch { }
     }
 
-    public async ValueTask<object> InvokeMethodAsync(HubInvocationContext invocationContext, Func<HubInvocationContext, ValueTask<object>> next)
+    public async ValueTask<object> InvokeMethodAsync(
+        HubInvocationContext invocationContext,
+        Func<HubInvocationContext, ValueTask<object>> next
+    )
     {
         try
         {
@@ -145,7 +185,11 @@ public class SkipNextFilter : IHubFilter
     private readonly bool _skipInvoke;
     private readonly bool _skipOnDisconnected;
 
-    public SkipNextFilter(bool skipOnConnected = false, bool skipInvoke = false, bool skipOnDisconnected = false)
+    public SkipNextFilter(
+        bool skipOnConnected = false,
+        bool skipInvoke = false,
+        bool skipOnDisconnected = false
+    )
     {
         _skipOnConnected = skipOnConnected;
         _skipInvoke = skipInvoke;
@@ -162,7 +206,11 @@ public class SkipNextFilter : IHubFilter
         return next(context);
     }
 
-    public Task OnDisconnectedAsync(HubLifetimeContext context, Exception exception, Func<HubLifetimeContext, Exception, Task> next)
+    public Task OnDisconnectedAsync(
+        HubLifetimeContext context,
+        Exception exception,
+        Func<HubLifetimeContext, Exception, Task> next
+    )
     {
         if (_skipOnDisconnected)
         {
@@ -172,7 +220,10 @@ public class SkipNextFilter : IHubFilter
         return next(context, exception);
     }
 
-    public ValueTask<object> InvokeMethodAsync(HubInvocationContext invocationContext, Func<HubInvocationContext, ValueTask<object>> next)
+    public ValueTask<object> InvokeMethodAsync(
+        HubInvocationContext invocationContext,
+        Func<HubInvocationContext, ValueTask<object>> next
+    )
     {
         if (_skipInvoke)
         {
@@ -197,7 +248,10 @@ public class DisposableFilter : IHubFilter, IDisposable
         _tcsService.StartedMethod.SetResult(null);
     }
 
-    public ValueTask<object> InvokeMethodAsync(HubInvocationContext invocationContext, Func<HubInvocationContext, ValueTask<object>> next)
+    public ValueTask<object> InvokeMethodAsync(
+        HubInvocationContext invocationContext,
+        Func<HubInvocationContext, ValueTask<object>> next
+    )
     {
         return next(invocationContext);
     }
@@ -218,7 +272,10 @@ public class AsyncDisposableFilter : IHubFilter, IAsyncDisposable
         return default;
     }
 
-    public ValueTask<object> InvokeMethodAsync(HubInvocationContext invocationContext, Func<HubInvocationContext, ValueTask<object>> next)
+    public ValueTask<object> InvokeMethodAsync(
+        HubInvocationContext invocationContext,
+        Func<HubInvocationContext, ValueTask<object>> next
+    )
     {
         return next(invocationContext);
     }
@@ -226,10 +283,19 @@ public class AsyncDisposableFilter : IHubFilter, IAsyncDisposable
 
 public class ChangeMethodFilter : IHubFilter
 {
-    public ValueTask<object> InvokeMethodAsync(HubInvocationContext invocationContext, Func<HubInvocationContext, ValueTask<object>> next)
+    public ValueTask<object> InvokeMethodAsync(
+        HubInvocationContext invocationContext,
+        Func<HubInvocationContext, ValueTask<object>> next
+    )
     {
         var methodInfo = typeof(BaseHub).GetMethod(nameof(BaseHub.BaseMethod));
-        var context = new HubInvocationContext(invocationContext.Context, invocationContext.ServiceProvider, invocationContext.Hub, methodInfo, invocationContext.HubMethodArguments);
+        var context = new HubInvocationContext(
+            invocationContext.Context,
+            invocationContext.ServiceProvider,
+            invocationContext.Hub,
+            methodInfo,
+            invocationContext.HubMethodArguments
+        );
         return next(context);
     }
 }

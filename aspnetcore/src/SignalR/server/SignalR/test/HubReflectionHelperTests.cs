@@ -42,39 +42,27 @@ public class HubReflectionHelperTests
         Assert.Contains(hubMethods, m => m == hubType.GetMethod("ArgMethod"));
     }
 
-    private class EmptyHub : Hub
-    {
-    }
+    private class EmptyHub : Hub { }
 
     private class BaseMethodHub : Hub
     {
-        public void VoidMethod()
-        {
-        }
+        public void VoidMethod() { }
 
         public int IntMethod()
         {
             return 0;
         }
 
-        public void ArgMethod(string str)
-        {
-        }
+        public void ArgMethod(string str) { }
 
         // static is not supported as a Hub method
-        public static void StaticMethod()
-        {
-        }
+        public static void StaticMethod() { }
 
         // internal is not a Hub method
-        internal void InternalMethod()
-        {
-        }
+        internal void InternalMethod() { }
 
         // private is not a Hub method
-        private void PrivateMethod()
-        {
-        }
+        private void PrivateMethod() { }
     }
 
     private class InheritedMethodHub : BaseMethodHub

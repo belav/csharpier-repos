@@ -5,11 +5,10 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class OperatorsQuerySqliteTest : OperatorsQueryTestBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqliteTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
-    protected void AssertSql(params string[] expected)
-        => TestSqlLoggerFactory.AssertBaseline(expected);
+    protected void AssertSql(params string[] expected) =>
+        TestSqlLoggerFactory.AssertBaseline(expected);
 
     public override async Task Bitwise_and_on_expression_with_like_and_null_check_being_compared_to_false()
     {
@@ -46,7 +45,8 @@ CROSS JOIN "OperatorEntityString" AS "o2"
 CROSS JOIN "OperatorEntityInt" AS "o3"
 WHERE ("o"."Value" = 'A' AND "o"."Value" IS NOT NULL AND "o0"."Value" = 'A' AND "o0"."Value" IS NOT NULL) | ("o1"."Value" = 'B' AND "o1"."Value" IS NOT NULL AND "o2"."Value" = 'B' AND "o2"."Value" IS NOT NULL) AND "o3"."Value" = 2
 ORDER BY "o"."Id", "o0"."Id", "o1"."Id", "o2"."Id", "o3"."Id"
-""");
+"""
+        );
     }
 
     public override async Task Projection_with_not_and_negation_on_integer()
@@ -60,7 +60,8 @@ FROM "OperatorEntityLong" AS "o"
 CROSS JOIN "OperatorEntityLong" AS "o0"
 CROSS JOIN "OperatorEntityLong" AS "o1"
 ORDER BY "o"."Id", "o0"."Id", "o1"."Id"
-""");
+"""
+        );
     }
 
     public override async Task Negate_on_column(bool async)
@@ -72,7 +73,8 @@ ORDER BY "o"."Id", "o0"."Id", "o1"."Id"
 SELECT "o"."Id"
 FROM "OperatorEntityInt" AS "o"
 WHERE "o"."Id" = -"o"."Value"
-""");
+"""
+        );
     }
 
     public override async Task Double_negate_on_column()
@@ -84,7 +86,8 @@ WHERE "o"."Id" = -"o"."Value"
 SELECT "o"."Id"
 FROM "OperatorEntityInt" AS "o"
 WHERE -(-"o"."Value") = "o"."Value"
-""");
+"""
+        );
     }
 
     public override async Task Negate_on_binary_expression(bool async)
@@ -97,7 +100,8 @@ SELECT "o"."Id" AS "Id1", "o0"."Id" AS "Id2"
 FROM "OperatorEntityInt" AS "o"
 CROSS JOIN "OperatorEntityInt" AS "o0"
 WHERE -"o"."Value" = -("o"."Id" + "o0"."Value")
-""");
+"""
+        );
     }
 
     public override async Task Negate_on_like_expression(bool async)
@@ -109,7 +113,8 @@ WHERE -"o"."Value" = -("o"."Id" + "o0"."Value")
 SELECT "o"."Id"
 FROM "OperatorEntityString" AS "o"
 WHERE "o"."Value" NOT LIKE 'A%' OR "o"."Value" IS NULL
-""");
+"""
+        );
     }
 
     public override async Task Concat_and_json_scalar(bool async)
@@ -122,6 +127,7 @@ SELECT "o"."Id", "o"."Owned"
 FROM "Owner" AS "o"
 WHERE 'Foo' || ("o"."Owned" ->> 'SomeProperty') = 'FooBar'
 LIMIT 2
-""");
+"""
+        );
     }
 }

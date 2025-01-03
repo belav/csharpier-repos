@@ -1,16 +1,16 @@
 #pragma warning disable 1634, 1691
 using System;
-using System.Diagnostics;
-using System.Transactions;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Transactions;
 using System.Workflow.Runtime.Hosting;
 
 namespace System.Workflow.Runtime
 {
     /// <summary>
     /// Volatile Resource Manager
-    /// </summary>    
+    /// </summary>
     internal sealed class VolatileResourceManager
     {
         // members
@@ -18,17 +18,12 @@ namespace System.Workflow.Runtime
         private WorkBatch _mergedBatch = null;
 
         // constructor
-        internal VolatileResourceManager()
-        {
-        }
+        internal VolatileResourceManager() { }
 
         // properties
         internal WorkBatchCollection BatchCollection
         {
-            get
-            {
-                return _workCollection;
-            }
+            get { return _workCollection; }
         }
 
         internal bool IsBatchDirty

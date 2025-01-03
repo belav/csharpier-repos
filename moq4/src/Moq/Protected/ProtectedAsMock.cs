@@ -6,14 +6,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using Moq.Language;
 using Moq.Language.Flow;
 using Moq.Properties;
 
 namespace Moq.Protected
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class ProtectedAsMock<T, TAnalog> : IProtectedAsMock<T, TAnalog>
@@ -37,30 +35,28 @@ namespace Moq.Protected
     sealed class ProtectedAsMock<T, TAnalog> : IProtectedAsMock<T, TAnalog>
         where T : class
         where TAnalog : class
+    /* Unmerged change from project 'Moq(netstandard2.0)'
+    Before:
+            private Mock<T> mock;
+    After:
+            Mock<T> mock;
+    */
 
-        /* Unmerged change from project 'Moq(netstandard2.0)'
-        Before:
-                private Mock<T> mock;
-        After:
-                Mock<T> mock;
-        */
+    /* Unmerged change from project 'Moq(netstandard2.1)'
+    Before:
+            private Mock<T> mock;
+    After:
+            Mock<T> mock;
+    */
 
-        /* Unmerged change from project 'Moq(netstandard2.1)'
-        Before:
-                private Mock<T> mock;
-        After:
-                Mock<T> mock;
-        */
-
-        /* Unmerged change from project 'Moq(net6.0)'
-        Before:
-                private Mock<T> mock;
-        After:
-                Mock<T> mock;
-        */
+    /* Unmerged change from project 'Moq(net6.0)'
+    Before:
+            private Mock<T> mock;
+    After:
+            Mock<T> mock;
+    */
     {
         Mock<T> mock;
-
 
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
@@ -145,7 +141,9 @@ namespace Moq.Protected
             return new VoidSetupPhrase<T>(setup);
         }
 
-        public ISetupGetter<T, TProperty> SetupGet<TProperty>(Expression<Func<TAnalog, TProperty>> expression)
+        public ISetupGetter<T, TProperty> SetupGet<TProperty>(
+            Expression<Func<TAnalog, TProperty>> expression
+        )
         {
             Guard.NotNull(expression, nameof(expression));
 
@@ -163,7 +161,10 @@ namespace Moq.Protected
             return new NonVoidSetupPhrase<T, TProperty>(setup);
         }
 
-        public Mock<T> SetupProperty<TProperty>(Expression<Func<TAnalog, TProperty>> expression, TProperty initialValue = default(TProperty))
+        public Mock<T> SetupProperty<TProperty>(
+            Expression<Func<TAnalog, TProperty>> expression,
+            TProperty initialValue = default(TProperty)
+        )
         {
             Guard.NotNull(expression, nameof(expression));
 
@@ -180,7 +181,9 @@ namespace Moq.Protected
             return this.mock.SetupProperty<TProperty>(rewrittenExpression, initialValue);
         }
 
-        public ISetupSequentialResult<TResult> SetupSequence<TResult>(Expression<Func<TAnalog, TResult>> expression)
+        public ISetupSequentialResult<TResult> SetupSequence<TResult>(
+            Expression<Func<TAnalog, TResult>> expression
+        )
         {
             Guard.NotNull(expression, nameof(expression));
 
@@ -216,7 +219,11 @@ namespace Moq.Protected
             return new SetupSequencePhrase(setup);
         }
 
-        public void Verify(Expression<Action<TAnalog>> expression, Times? times = null, string failMessage = null)
+        public void Verify(
+            Expression<Action<TAnalog>> expression,
+            Times? times = null,
+            string failMessage = null
+        )
         {
             Guard.NotNull(expression, nameof(expression));
 
@@ -233,7 +240,11 @@ namespace Moq.Protected
             Mock.Verify(this.mock, rewrittenExpression, times ?? Times.AtLeastOnce(), failMessage);
         }
 
-        public void Verify<TResult>(Expression<Func<TAnalog, TResult>> expression, Times? times = null, string failMessage = null)
+        public void Verify<TResult>(
+            Expression<Func<TAnalog, TResult>> expression,
+            Times? times = null,
+            string failMessage = null
+        )
         {
             Guard.NotNull(expression, nameof(expression));
 
@@ -250,15 +261,28 @@ namespace Moq.Protected
             Mock.Verify(this.mock, rewrittenExpression, times ?? Times.AtLeastOnce(), failMessage);
         }
 
-        public void VerifySet(Action<TAnalog> setterExpression, Times? times = null, string failMessage = null)
+        public void VerifySet(
+            Action<TAnalog> setterExpression,
+            Times? times = null,
+            string failMessage = null
+        )
         {
             Guard.NotNull(setterExpression, nameof(setterExpression));
 
             var rewrittenExpression = ReconstructAndReplaceSetter(setterExpression);
-            Mock.VerifySet(mock, rewrittenExpression, times.HasValue ? times.Value : Times.AtLeastOnce(), failMessage);
+            Mock.VerifySet(
+                mock,
+                rewrittenExpression,
+                times.HasValue ? times.Value : Times.AtLeastOnce(),
+                failMessage
+            );
         }
 
-        public void VerifyGet<TProperty>(Expression<Func<TAnalog, TProperty>> expression, Times? times = null, string failMessage = null)
+        public void VerifyGet<TProperty>(
+            Expression<Func<TAnalog, TProperty>> expression,
+            Times? times = null,
+            string failMessage = null
+        )
         {
             Guard.NotNull(expression, nameof(expression));
 
@@ -272,7 +296,12 @@ namespace Moq.Protected
                 throw new ArgumentException(ex.Message, nameof(expression));
             }
 
-            Mock.VerifyGet(this.mock, rewrittenExpression, times ?? Times.AtLeastOnce(), failMessage);
+            Mock.VerifyGet(
+                this.mock,
+                rewrittenExpression,
+                times ?? Times.AtLeastOnce(),
+                failMessage
+            );
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:
@@ -298,7 +327,10 @@ namespace Moq.Protected
 
         LambdaExpression ReconstructAndReplaceSetter(Action<TAnalog> setterExpression)
         {
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, mock.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                mock.ConstructorArguments
+            );
             return ReplaceDuck(expression);
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
@@ -356,7 +388,6 @@ namespace Moq.Protected
         /// <see cref="ExpressionVisitor"/> used to replace occurrences of `TAnalog.Member` sub-expressions with `T.Member`.
         /// </summary>
         sealed class DuckReplacer : ExpressionVisitor
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                     private Type duckType;
@@ -398,7 +429,11 @@ namespace Moq.Protected
                 if (node.Object is ParameterExpression left && left.Type == this.duckType)
                 {
                     var targetParameter = Expression.Parameter(this.targetType, left.Name);
-                    return Expression.Call(targetParameter, FindCorrespondingMethod(node.Method), node.Arguments);
+                    return Expression.Call(
+                        targetParameter,
+                        FindCorrespondingMethod(node.Method),
+                        node.Arguments
+                    );
                 }
                 else
                 {
@@ -411,7 +446,11 @@ namespace Moq.Protected
                 if (node.Object is ParameterExpression left && left.Type == this.duckType)
                 {
                     var targetParameter = Expression.Parameter(this.targetType, left.Name);
-                    return Expression.MakeIndex(targetParameter, FindCorrespondingProperty(node.Indexer), node.Arguments);
+                    return Expression.MakeIndex(
+                        targetParameter,
+                        FindCorrespondingProperty(node.Indexer),
+                        node.Arguments
+                    );
                 }
                 return base.VisitIndex(node);
             }
@@ -421,7 +460,10 @@ namespace Moq.Protected
                 if (node.Expression is ParameterExpression left && left.Type == this.duckType)
                 {
                     var targetParameter = Expression.Parameter(this.targetType, left.Name);
-                    return Expression.MakeMemberAccess(targetParameter, FindCorrespondingMember(node.Member));
+                    return Expression.MakeMemberAccess(
+                        targetParameter,
+                        FindCorrespondingMember(node.Member)
+                    );
                 }
                 else
                 {
@@ -489,15 +531,20 @@ namespace Moq.Protected
 
             MethodInfo FindCorrespondingMethod(MethodInfo duckMethod)
             {
-                var candidateTargetMethods =
-                    this.targetType
-                    .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+                var candidateTargetMethods = this
+                    .targetType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
                     .Where(ctm => IsCorrespondingMethod(duckMethod, ctm))
                     .ToArray();
 
                 if (candidateTargetMethods.Length == 0)
                 {
-                    throw new ArgumentException(string.Format(Resources.ProtectedMemberNotFound, this.targetType, duckMethod));
+                    throw new ArgumentException(
+                        string.Format(
+                            Resources.ProtectedMemberNotFound,
+                            this.targetType,
+                            duckMethod
+                        )
+                    );
                 }
 
                 Debug.Assert(candidateTargetMethods.Length == 1);
@@ -536,15 +583,22 @@ namespace Moq.Protected
 
             PropertyInfo FindCorrespondingProperty(PropertyInfo duckProperty)
             {
-                var candidateTargetProperties =
-                    this.targetType
-                    .GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                var candidateTargetProperties = this
+                    .targetType.GetProperties(
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                    )
                     .Where(ctp => IsCorrespondingProperty(duckProperty, ctp))
                     .ToArray();
 
                 if (candidateTargetProperties.Length == 0)
                 {
-                    throw new ArgumentException(string.Format(Resources.ProtectedMemberNotFound, this.targetType, duckProperty));
+                    throw new ArgumentException(
+                        string.Format(
+                            Resources.ProtectedMemberNotFound,
+                            this.targetType,
+                            duckProperty
+                        )
+                    );
                 }
 
                 Debug.Assert(candidateTargetProperties.Length == 1);
@@ -573,7 +627,10 @@ namespace Moq.Protected
                 */
             }
 
-            static bool IsCorrespondingMethod(MethodInfo duckMethod, MethodInfo candidateTargetMethod)
+            static bool IsCorrespondingMethod(
+                MethodInfo duckMethod,
+                MethodInfo candidateTargetMethod
+            )
             {
                 if (candidateTargetMethod.Name != duckMethod.Name)
                 {
@@ -605,7 +662,9 @@ namespace Moq.Protected
                     // go wrong, then obviously the duck-type method doesn't correspond to the candidate.
                     try
                     {
-                        candidateTargetMethod = candidateTargetMethod.MakeGenericMethod(duckGenericArgs);
+                        candidateTargetMethod = candidateTargetMethod.MakeGenericMethod(
+                            duckGenericArgs
+                        );
                     }
                     catch
                     {
@@ -653,7 +712,10 @@ namespace Moq.Protected
                 */
             }
 
-            static bool IsCorrespondingProperty(PropertyInfo duckProperty, PropertyInfo candidateTargetProperty)
+            static bool IsCorrespondingProperty(
+                PropertyInfo duckProperty,
+                PropertyInfo candidateTargetProperty
+            )
             {
                 return candidateTargetProperty.Name == duckProperty.Name
                     && candidateTargetProperty.PropertyType == duckProperty.PropertyType

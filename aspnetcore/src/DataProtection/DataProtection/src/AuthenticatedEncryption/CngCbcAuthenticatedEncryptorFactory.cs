@@ -48,7 +48,8 @@ public sealed class CngCbcAuthenticatedEncryptorFactory : IAuthenticatedEncrypto
     [return: NotNullIfNotNull("configuration")]
     internal CbcAuthenticatedEncryptor? CreateAuthenticatedEncryptorInstance(
         ISecret secret,
-        CngCbcAuthenticatedEncryptorConfiguration? configuration)
+        CngCbcAuthenticatedEncryptorConfiguration? configuration
+    )
     {
         if (configuration == null)
         {
@@ -60,11 +61,14 @@ public sealed class CngCbcAuthenticatedEncryptorFactory : IAuthenticatedEncrypto
             keyDerivationKey: key,
             symmetricAlgorithmHandle: GetSymmetricBlockCipherAlgorithmHandle(configuration),
             symmetricAlgorithmKeySizeInBytes: (uint)(configuration.EncryptionAlgorithmKeySize / 8),
-            hmacAlgorithmHandle: GetHmacAlgorithmHandle(configuration));
+            hmacAlgorithmHandle: GetHmacAlgorithmHandle(configuration)
+        );
     }
 
     [SupportedOSPlatform("windows")]
-    private BCryptAlgorithmHandle GetHmacAlgorithmHandle(CngCbcAuthenticatedEncryptorConfiguration configuration)
+    private BCryptAlgorithmHandle GetHmacAlgorithmHandle(
+        CngCbcAuthenticatedEncryptorConfiguration configuration
+    )
     {
         // basic argument checking
         if (String.IsNullOrEmpty(configuration.HashAlgorithm))
@@ -72,21 +76,37 @@ public sealed class CngCbcAuthenticatedEncryptorFactory : IAuthenticatedEncrypto
             throw Error.Common_PropertyCannotBeNullOrEmpty(nameof(configuration.HashAlgorithm));
         }
 
-        _logger.OpeningCNGAlgorithmFromProviderWithHMAC(configuration.HashAlgorithm, configuration.HashAlgorithmProvider);
+        _logger.OpeningCNGAlgorithmFromProviderWithHMAC(
+            configuration.HashAlgorithm,
+            configuration.HashAlgorithmProvider
+        );
         BCryptAlgorithmHandle? algorithmHandle = null;
 
         // Special-case cached providers
         if (configuration.HashAlgorithmProvider == null)
         {
-            if (configuration.HashAlgorithm == Constants.BCRYPT_SHA1_ALGORITHM) { algorithmHandle = CachedAlgorithmHandles.HMAC_SHA1; }
-            else if (configuration.HashAlgorithm == Constants.BCRYPT_SHA256_ALGORITHM) { algorithmHandle = CachedAlgorithmHandles.HMAC_SHA256; }
-            else if (configuration.HashAlgorithm == Constants.BCRYPT_SHA512_ALGORITHM) { algorithmHandle = CachedAlgorithmHandles.HMAC_SHA512; }
+            if (configuration.HashAlgorithm == Constants.BCRYPT_SHA1_ALGORITHM)
+            {
+                algorithmHandle = CachedAlgorithmHandles.HMAC_SHA1;
+            }
+            else if (configuration.HashAlgorithm == Constants.BCRYPT_SHA256_ALGORITHM)
+            {
+                algorithmHandle = CachedAlgorithmHandles.HMAC_SHA256;
+            }
+            else if (configuration.HashAlgorithm == Constants.BCRYPT_SHA512_ALGORITHM)
+            {
+                algorithmHandle = CachedAlgorithmHandles.HMAC_SHA512;
+            }
         }
 
         // Look up the provider dynamically if we couldn't fetch a cached instance
         if (algorithmHandle == null)
         {
-            algorithmHandle = BCryptAlgorithmHandle.OpenAlgorithmHandle(configuration.HashAlgorithm, configuration.HashAlgorithmProvider, hmac: true);
+            algorithmHandle = BCryptAlgorithmHandle.OpenAlgorithmHandle(
+                configuration.HashAlgorithm,
+                configuration.HashAlgorithmProvider,
+                hmac: true
+            );
         }
 
         // Make sure we're using a hash algorithm. We require a minimum 128-bit digest.
@@ -98,7 +118,9 @@ public sealed class CngCbcAuthenticatedEncryptorFactory : IAuthenticatedEncrypto
     }
 
     [SupportedOSPlatform("windows")]
-    private BCryptAlgorithmHandle GetSymmetricBlockCipherAlgorithmHandle(CngCbcAuthenticatedEncryptorConfiguration configuration)
+    private BCryptAlgorithmHandle GetSymmetricBlockCipherAlgorithmHandle(
+        CngCbcAuthenticatedEncryptorConfiguration configuration
+    )
     {
         // basic argument checking
         if (String.IsNullOrEmpty(configuration.EncryptionAlgorithm))
@@ -107,32 +129,49 @@ public sealed class CngCbcAuthenticatedEncryptorFactory : IAuthenticatedEncrypto
         }
         if (configuration.EncryptionAlgorithmKeySize < 0)
         {
-            throw Error.Common_PropertyMustBeNonNegative(nameof(configuration.EncryptionAlgorithmKeySize));
+            throw Error.Common_PropertyMustBeNonNegative(
+                nameof(configuration.EncryptionAlgorithmKeySize)
+            );
         }
 
-        _logger.OpeningCNGAlgorithmFromProviderWithChainingModeCBC(configuration.EncryptionAlgorithm, configuration.EncryptionAlgorithmProvider);
+        _logger.OpeningCNGAlgorithmFromProviderWithChainingModeCBC(
+            configuration.EncryptionAlgorithm,
+            configuration.EncryptionAlgorithmProvider
+        );
 
         BCryptAlgorithmHandle? algorithmHandle = null;
 
         // Special-case cached providers
         if (configuration.EncryptionAlgorithmProvider == null)
         {
-            if (configuration.EncryptionAlgorithm == Constants.BCRYPT_AES_ALGORITHM) { algorithmHandle = CachedAlgorithmHandles.AES_CBC; }
+            if (configuration.EncryptionAlgorithm == Constants.BCRYPT_AES_ALGORITHM)
+            {
+                algorithmHandle = CachedAlgorithmHandles.AES_CBC;
+            }
         }
 
         // Look up the provider dynamically if we couldn't fetch a cached instance
         if (algorithmHandle == null)
         {
-            algorithmHandle = BCryptAlgorithmHandle.OpenAlgorithmHandle(configuration.EncryptionAlgorithm, configuration.EncryptionAlgorithmProvider);
+            algorithmHandle = BCryptAlgorithmHandle.OpenAlgorithmHandle(
+                configuration.EncryptionAlgorithm,
+                configuration.EncryptionAlgorithmProvider
+            );
             algorithmHandle.SetChainingMode(Constants.BCRYPT_CHAIN_MODE_CBC);
         }
 
         // make sure we're using a block cipher with an appropriate key size & block size
-        AlgorithmAssert.IsAllowableSymmetricAlgorithmBlockSize(checked(algorithmHandle.GetCipherBlockLength() * 8));
-        AlgorithmAssert.IsAllowableSymmetricAlgorithmKeySize(checked((uint)configuration.EncryptionAlgorithmKeySize));
+        AlgorithmAssert.IsAllowableSymmetricAlgorithmBlockSize(
+            checked(algorithmHandle.GetCipherBlockLength() * 8)
+        );
+        AlgorithmAssert.IsAllowableSymmetricAlgorithmKeySize(
+            checked((uint)configuration.EncryptionAlgorithmKeySize)
+        );
 
         // make sure the provided key length is valid
-        algorithmHandle.GetSupportedKeyLengths().EnsureValidKeyLength((uint)configuration.EncryptionAlgorithmKeySize);
+        algorithmHandle
+            .GetSupportedKeyLengths()
+            .EnsureValidKeyLength((uint)configuration.EncryptionAlgorithmKeySize);
 
         // all good!
         return algorithmHandle;

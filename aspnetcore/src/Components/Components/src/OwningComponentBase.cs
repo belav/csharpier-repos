@@ -18,7 +18,8 @@ public abstract class OwningComponentBase : ComponentBase, IDisposable
 {
     private AsyncServiceScope? _scope;
 
-    [Inject] IServiceScopeFactory ScopeFactory { get; set; } = default!;
+    [Inject]
+    IServiceScopeFactory ScopeFactory { get; set; } = default!;
 
     /// <summary>
     /// Gets a value determining if the component and associated services have been disposed.
@@ -34,7 +35,9 @@ public abstract class OwningComponentBase : ComponentBase, IDisposable
         {
             if (ScopeFactory == null)
             {
-                throw new InvalidOperationException("Services cannot be accessed before the component is initialized.");
+                throw new InvalidOperationException(
+                    "Services cannot be accessed before the component is initialized."
+                );
             }
 
             ObjectDisposedException.ThrowIf(IsDisposed, this);
@@ -56,9 +59,7 @@ public abstract class OwningComponentBase : ComponentBase, IDisposable
     }
 
     /// <inheritdoc />
-    protected virtual void Dispose(bool disposing)
-    {
-    }
+    protected virtual void Dispose(bool disposing) { }
 }
 
 /// <summary>
@@ -71,7 +72,8 @@ public abstract class OwningComponentBase : ComponentBase, IDisposable
 /// requires disposal such as a repository or database abstraction. Using <see cref="OwningComponentBase{TService}"/>
 /// as a base class ensures that the service and relates services that share its scope are disposed with the component.
 /// </remarks>
-public abstract class OwningComponentBase<TService> : OwningComponentBase, IDisposable where TService : notnull
+public abstract class OwningComponentBase<TService> : OwningComponentBase, IDisposable
+    where TService : notnull
 {
     private TService _item = default!;
 

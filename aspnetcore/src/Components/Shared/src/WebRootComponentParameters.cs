@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Components;
 internal readonly struct WebRootComponentParameters(
     ParameterView parameterView,
     IReadOnlyList<ComponentParameter> parameterDefinitions,
-    IReadOnlyList<object> serializedParameterValues)
+    IReadOnlyList<object> serializedParameterValues
+)
 {
     public static readonly WebRootComponentParameters Empty = new(ParameterView.Empty, [], []);
 
@@ -38,9 +39,19 @@ internal readonly struct WebRootComponentParameters(
             // are usually rendered in a deterministic order.
             var definition = _parameterDefinitions[i];
             var otherDefinition = other._parameterDefinitions[i];
-            if (!string.Equals(definition.Name, otherDefinition.Name, StringComparison.Ordinal) ||
-                !string.Equals(definition.TypeName, otherDefinition.TypeName, StringComparison.Ordinal) ||
-                !string.Equals(definition.Assembly, otherDefinition.Assembly, StringComparison.Ordinal))
+            if (
+                !string.Equals(definition.Name, otherDefinition.Name, StringComparison.Ordinal)
+                || !string.Equals(
+                    definition.TypeName,
+                    otherDefinition.TypeName,
+                    StringComparison.Ordinal
+                )
+                || !string.Equals(
+                    definition.Assembly,
+                    otherDefinition.Assembly,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 return false;
             }

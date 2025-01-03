@@ -7,21 +7,21 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class InheritanceQueryInMemoryFixture : InheritanceQueryFixtureBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => InMemoryTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
 
-    public override bool EnableComplexTypes
-        => false;
+    public override bool EnableComplexTypes => false;
 
-    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder).ConfigureWarnings(
-            c => c.Log(InMemoryEventId.TransactionIgnoredWarning));
+    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(builder)
+            .ConfigureWarnings(c => c.Log(InMemoryEventId.TransactionIgnoredWarning));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {
         base.OnModelCreating(modelBuilder, context);
 
-        modelBuilder.Entity<AnimalQuery>().ToInMemoryQuery(() => context.Set<Bird>().Select(b => MaterializeView(b)));
+        modelBuilder
+            .Entity<AnimalQuery>()
+            .ToInMemoryQuery(() => context.Set<Bird>().Select(b => MaterializeView(b)));
     }
 
     private static AnimalQuery MaterializeView(Bird bird)
@@ -35,7 +35,7 @@ public class InheritanceQueryInMemoryFixture : InheritanceQueryFixtureBase
                     CountryId = kiwi.CountryId,
                     EagleId = kiwi.EagleId,
                     FoundOn = kiwi.FoundOn,
-                    IsFlightless = kiwi.IsFlightless
+                    IsFlightless = kiwi.IsFlightless,
                 };
             case Eagle eagle:
                 return new EagleQuery
@@ -44,7 +44,7 @@ public class InheritanceQueryInMemoryFixture : InheritanceQueryFixtureBase
                     CountryId = eagle.CountryId,
                     EagleId = eagle.EagleId,
                     Group = eagle.Group,
-                    IsFlightless = eagle.IsFlightless
+                    IsFlightless = eagle.IsFlightless,
                 };
         }
 

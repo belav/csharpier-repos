@@ -15,7 +15,6 @@ namespace Microsoft.Extensions.Configuration.Test
         public static IFileProvider StringToFileProvider(string str)
         {
             return new TestFileProvider(str);
-
         }
 
         private class TestFile : IFileInfo
@@ -29,50 +28,32 @@ namespace Microsoft.Extensions.Configuration.Test
 
             public bool Exists
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public bool IsDirectory
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public DateTimeOffset LastModified
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public long Length
             {
-                get
-                {
-                    return 0;
-                }
+                get { return 0; }
             }
 
             public string Name
             {
-                get
-                {
-                    return null;
-                }
+                get { return null; }
             }
 
             public string PhysicalPath
             {
-                get
-                {
-                    return null;
-                }
+                get { return null; }
             }
 
             public Stream CreateReadStream()
@@ -84,6 +65,7 @@ namespace Microsoft.Extensions.Configuration.Test
         private class TestFileProvider : IFileProvider
         {
             private string _data;
+
             public TestFileProvider(string str)
             {
                 _data = str;

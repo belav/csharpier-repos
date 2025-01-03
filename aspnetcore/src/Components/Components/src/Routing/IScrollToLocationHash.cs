@@ -11,7 +11,7 @@ public interface IScrollToLocationHash
     /// <summary>
     /// Refreshes scroll position for hash on the client.
     /// </summary>
-    /// <param name="locationAbsolute">Absolute URL of location</param> 
+    /// <param name="locationAbsolute">Absolute URL of location</param>
     /// <returns>A <see cref="Task" /> that represents the asynchronous operation.</returns>
     Task RefreshScrollPositionForHash(string locationAbsolute);
 }

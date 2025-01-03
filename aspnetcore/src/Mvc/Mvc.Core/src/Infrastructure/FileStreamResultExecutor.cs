@@ -11,16 +11,16 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// <summary>
 /// An <see cref="IActionResultExecutor{FileStreamResult}"/> for a file stream result.
 /// </summary>
-public partial class FileStreamResultExecutor : FileResultExecutorBase, IActionResultExecutor<FileStreamResult>
+public partial class FileStreamResultExecutor
+    : FileResultExecutorBase,
+        IActionResultExecutor<FileStreamResult>
 {
     /// <summary>
     /// Initializes a new <see cref="FileStreamResultExecutor"/>.
     /// </summary>
     /// <param name="loggerFactory">The factory used to create loggers.</param>
     public FileStreamResultExecutor(ILoggerFactory loggerFactory)
-        : base(CreateLogger<FileStreamResultExecutor>(loggerFactory))
-    {
-    }
+        : base(CreateLogger<FileStreamResultExecutor>(loggerFactory)) { }
 
     /// <inheritdoc />
     public virtual async Task ExecuteAsync(ActionContext context, FileStreamResult result)
@@ -44,7 +44,8 @@ public partial class FileStreamResultExecutor : FileResultExecutorBase, IActionR
                 fileLength,
                 result.EnableRangeProcessing,
                 result.LastModified,
-                result.EntityTag);
+                result.EntityTag
+            );
 
             if (!serveBody)
             {
@@ -66,7 +67,8 @@ public partial class FileStreamResultExecutor : FileResultExecutorBase, IActionR
         ActionContext context,
         FileStreamResult result,
         RangeItemHeaderValue? range,
-        long rangeLength)
+        long rangeLength
+    )
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(result);
@@ -91,14 +93,33 @@ public partial class FileStreamResultExecutor : FileResultExecutorBase, IActionR
             if (logger.IsEnabled(LogLevel.Information))
             {
                 var fileResultType = fileResult.GetType().Name;
-                ExecutingFileResultWithNoFileName(logger, fileResultType, fileResult.FileDownloadName);
+                ExecutingFileResultWithNoFileName(
+                    logger,
+                    fileResultType,
+                    fileResult.FileDownloadName
+                );
             }
         }
 
-        [LoggerMessage(1, LogLevel.Information, "Executing {FileResultType}, sending file with download name '{FileDownloadName}' ...", EventName = "ExecutingFileResultWithNoFileName", SkipEnabledCheck = true)]
-        private static partial void ExecutingFileResultWithNoFileName(ILogger logger, string fileResultType, string fileDownloadName);
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing {FileResultType}, sending file with download name '{FileDownloadName}' ...",
+            EventName = "ExecutingFileResultWithNoFileName",
+            SkipEnabledCheck = true
+        )]
+        private static partial void ExecutingFileResultWithNoFileName(
+            ILogger logger,
+            string fileResultType,
+            string fileDownloadName
+        );
 
-        [LoggerMessage(17, LogLevel.Debug, "Writing the requested range of bytes to the body...", EventName = "WritingRangeToBody")]
+        [LoggerMessage(
+            17,
+            LogLevel.Debug,
+            "Writing the requested range of bytes to the body...",
+            EventName = "WritingRangeToBody"
+        )]
         public static partial void WritingRangeToBody(ILogger logger);
     }
 }

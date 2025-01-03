@@ -2,7 +2,8 @@
 
 namespace System.Web.Instrumentation
 {
-    public sealed class PageInstrumentationService {
+    public sealed class PageInstrumentationService
+    {
         /// <summary>
         /// Gets or sets a boolean indicating if instrumentation is active for the entire application
         /// </summary>
@@ -12,7 +13,8 @@ namespace System.Web.Instrumentation
         /// </remarks>
         public static bool IsEnabled { get; set; }
 
-        private IList<PageExecutionListener> _executionListeners = new List<PageExecutionListener>();
+        private IList<PageExecutionListener> _executionListeners =
+            new List<PageExecutionListener>();
 
         /// <summary>
         /// Gets a list of listeners which are subscribed to the page execution process.
@@ -20,6 +22,9 @@ namespace System.Web.Instrumentation
         /// <remarks>
         /// Guaranteed not to be null, but MAY be an empty list.
         /// </remarks>
-        public IList<PageExecutionListener> ExecutionListeners { get { return _executionListeners; } }
+        public IList<PageExecutionListener> ExecutionListeners
+        {
+            get { return _executionListeners; }
+        }
     }
 }

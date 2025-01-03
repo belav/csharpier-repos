@@ -90,6 +90,7 @@ public class DefaultObjectPoolTest
     {
         public int ResetCallCount { get; set; }
         public bool ResetReturnValue { get; set; }
+
         public bool TryReset()
         {
             ResetCallCount++;

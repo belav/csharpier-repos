@@ -23,7 +23,10 @@ namespace System.ComponentModel
         /// <summary>
         /// An empty AttributeCollection that can used instead of creating a new one with no items.
         /// </summary>
-        public static readonly EventDescriptorCollection Empty = new EventDescriptorCollection(null, true);
+        public static readonly EventDescriptorCollection Empty = new EventDescriptorCollection(
+            null,
+            true
+        );
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptorCollection'/> class.
@@ -46,12 +49,18 @@ namespace System.ComponentModel
         /// Initializes a new instance of an event descriptor collection, and allows you to mark the
         /// collection as read-only so it cannot be modified.
         /// </summary>
-        public EventDescriptorCollection(EventDescriptor[]? events, bool readOnly) : this(events)
+        public EventDescriptorCollection(EventDescriptor[]? events, bool readOnly)
+            : this(events)
         {
             _readOnly = readOnly;
         }
 
-        private EventDescriptorCollection(EventDescriptor?[] events, int eventCount, string[]? namedSort, IComparer? comparer)
+        private EventDescriptorCollection(
+            EventDescriptor?[] events,
+            int eventCount,
+            string[]? namedSort,
+            IComparer? comparer
+        )
         {
             _eventsOwned = false;
             if (namedSort != null)
@@ -346,7 +355,10 @@ namespace System.ComponentModel
                     }
                 }
 
-                Debug.Assert(foundCount == eventCount, "We did not completely fill our event array");
+                Debug.Assert(
+                    foundCount == eventCount,
+                    "We did not completely fill our event array"
+                );
             }
         }
 
@@ -419,7 +431,10 @@ namespace System.ComponentModel
             public ArraySubsetEnumerator(Array? array, int count)
             {
                 Debug.Assert(count == 0 || array != null, "if array is null, count should be 0");
-                Debug.Assert(array == null || count <= array.Length, "Trying to enumerate more than the array contains");
+                Debug.Assert(
+                    array == null || count <= array.Length,
+                    "Trying to enumerate more than the array contains"
+                );
 
                 _array = array;
                 _total = count;

@@ -35,14 +35,16 @@ public class AdapterFactoryTests
         AdapterFactory factory = new AdapterFactory();
 
         //Act:
-        IAdapter adapter = factory.Create(new Dictionary<string, string>(), new DefaultContractResolver());
+        IAdapter adapter = factory.Create(
+            new Dictionary<string, string>(),
+            new DefaultContractResolver()
+        );
 
         // Assert
         Assert.Equal(typeof(DictionaryAdapter<string, string>), adapter.GetType());
     }
 
-    private class PocoModel
-    { }
+    private class PocoModel { }
 
     [Fact]
     public void GetPocoAdapterForGenericObjects()

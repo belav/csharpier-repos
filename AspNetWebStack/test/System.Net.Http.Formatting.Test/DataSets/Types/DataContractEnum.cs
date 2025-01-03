@@ -14,6 +14,6 @@ namespace System.Net.Http.Formatting.DataSets.Types
         [EnumMember]
         Second,
 
-        Third
+        Third,
     }
 }

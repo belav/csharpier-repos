@@ -17,7 +17,21 @@ public class Burgers
 {
     private static double BurgersAnalytical(double t, double x, double nu)
     {
-        return -2 * nu * (-(-8 * t + 2 * x) * Math.Exp(-Math.Pow((-4 * t + x), 2) / (4 * nu * (t + 1))) / (4 * nu * (t + 1)) - (-8 * t + 2 * x - 12.5663706143592) * Math.Exp(-Math.Pow(-4 * t + x - 6.28318530717959, 2) / (4 * nu * (t + 1))) / (4 * nu * (t + 1))) / (Math.Exp(-Math.Pow(-4 * t + x - 6.28318530717959, 2) / (4 * nu * (t + 1))) + Math.Exp(-Math.Pow(-4 * t + x, 2) / (4 * nu * (t + 1)))) + 4;
+        return -2
+                * nu
+                * (
+                    -(-8 * t + 2 * x)
+                        * Math.Exp(-Math.Pow((-4 * t + x), 2) / (4 * nu * (t + 1)))
+                        / (4 * nu * (t + 1))
+                    - (-8 * t + 2 * x - 12.5663706143592)
+                        * Math.Exp(-Math.Pow(-4 * t + x - 6.28318530717959, 2) / (4 * nu * (t + 1)))
+                        / (4 * nu * (t + 1))
+                )
+                / (
+                    Math.Exp(-Math.Pow(-4 * t + x - 6.28318530717959, 2) / (4 * nu * (t + 1)))
+                    + Math.Exp(-Math.Pow(-4 * t + x, 2) / (4 * nu * (t + 1)))
+                )
+            + 4;
     }
 
     private static double[] linspace(double first, double last, int num)
@@ -38,7 +52,14 @@ public class Burgers
         return u;
     }
 
-    private static double[] GetCalculated0(int nt, int nx, double dx, double dt, double nu, double[] initial)
+    private static double[] GetCalculated0(
+        int nt,
+        int nx,
+        double dx,
+        double dt,
+        double nu,
+        double[] initial
+    )
     {
         double[] u = new double[nx];
         Array.Copy(initial, u, u.Length);
@@ -50,22 +71,35 @@ public class Burgers
 
             for (int i = 1; i < nx - 1; i++)
             {
-                u[i] = un[i] - un[i] * dt / dx * (un[i] - un[i - 1]) + Math.Pow(nu * dt / dx, 2.0) *
-                        (un[i + 1] - 2 * un[i] + un[i - 1]);
+                u[i] =
+                    un[i]
+                    - un[i] * dt / dx * (un[i] - un[i - 1])
+                    + Math.Pow(nu * dt / dx, 2.0) * (un[i + 1] - 2 * un[i] + un[i - 1]);
             }
 
-            u[0] = un[0] - un[0] * dt / dx * (un[0] - un[nx - 1]) + Math.Pow(nu * dt / dx, 2.0) *
-                        (un[1] - 2 * un[0] + un[nx - 1]);
+            u[0] =
+                un[0]
+                - un[0] * dt / dx * (un[0] - un[nx - 1])
+                + Math.Pow(nu * dt / dx, 2.0) * (un[1] - 2 * un[0] + un[nx - 1]);
 
-            u[nx - 1] = un[nx - 1] - un[nx - 1] * dt / dx * (un[nx - 1] - un[nx - 2]) + Math.Pow(nu * dt / dx, 2.0) *
-                        (un[0] - 2 * un[nx - 1] + un[nx - 2]);
+            u[nx - 1] =
+                un[nx - 1]
+                - un[nx - 1] * dt / dx * (un[nx - 1] - un[nx - 2])
+                + Math.Pow(nu * dt / dx, 2.0) * (un[0] - 2 * un[nx - 1] + un[nx - 2]);
         }
 
         return u;
     }
 
     // Reduce new array allocation and copying, ping-pong between them
-    private static double[] GetCalculated1(int nt, int nx, double dx, double dt, double nu, double[] initial)
+    private static double[] GetCalculated1(
+        int nt,
+        int nx,
+        double dx,
+        double dt,
+        double nu,
+        double[] initial
+    )
     {
         double[] u = new double[nx];
         double[] un = new double[nx];
@@ -75,15 +109,21 @@ public class Burgers
         {
             for (int i = 1; i < nx - 1; i++)
             {
-                u[i] = un[i] - un[i] * dt / dx * (un[i] - un[i - 1]) + Math.Pow(nu * dt / dx, 2.0) *
-                        (un[i + 1] - 2 * un[i] + un[i - 1]);
+                u[i] =
+                    un[i]
+                    - un[i] * dt / dx * (un[i] - un[i - 1])
+                    + Math.Pow(nu * dt / dx, 2.0) * (un[i + 1] - 2 * un[i] + un[i - 1]);
             }
 
-            u[0] = un[0] - un[0] * dt / dx * (un[0] - un[nx - 1]) + Math.Pow(nu * dt / dx, 2.0) *
-                        (un[1] - 2 * un[0] + un[nx - 1]);
+            u[0] =
+                un[0]
+                - un[0] * dt / dx * (un[0] - un[nx - 1])
+                + Math.Pow(nu * dt / dx, 2.0) * (un[1] - 2 * un[0] + un[nx - 1]);
 
-            u[nx - 1] = un[nx - 1] - un[nx - 1] * dt / dx * (un[nx - 1] - un[nx - 2]) + Math.Pow(nu * dt / dx, 2.0) *
-                        (un[0] - 2 * un[nx - 1] + un[nx - 2]);
+            u[nx - 1] =
+                un[nx - 1]
+                - un[nx - 1] * dt / dx * (un[nx - 1] - un[nx - 2])
+                + Math.Pow(nu * dt / dx, 2.0) * (un[0] - 2 * un[nx - 1] + un[nx - 2]);
 
             double[] swap = u;
             u = un;
@@ -94,7 +134,14 @@ public class Burgers
     }
 
     // Pull calculation of (nu * dt / dx)^2 out into a variable
-    private static double[] GetCalculated2(int nt, int nx, double dx, double dt, double nu, double[] initial)
+    private static double[] GetCalculated2(
+        int nt,
+        int nx,
+        double dx,
+        double dt,
+        double nu,
+        double[] initial
+    )
     {
         double[] u = new double[nx];
         double[] un = new double[nx];
@@ -106,15 +153,21 @@ public class Burgers
         {
             for (int i = 1; i < nx - 1; i++)
             {
-                u[i] = un[i] - un[i] * dt / dx * (un[i] - un[i - 1]) + factor *
-                        (un[i + 1] - 2 * un[i] + un[i - 1]);
+                u[i] =
+                    un[i]
+                    - un[i] * dt / dx * (un[i] - un[i - 1])
+                    + factor * (un[i + 1] - 2 * un[i] + un[i - 1]);
             }
 
-            u[0] = un[0] - un[0] * dt / dx * (un[0] - un[nx - 1]) + factor *
-                        (un[1] - 2 * un[0] + un[nx - 1]);
+            u[0] =
+                un[0]
+                - un[0] * dt / dx * (un[0] - un[nx - 1])
+                + factor * (un[1] - 2 * un[0] + un[nx - 1]);
 
-            u[nx - 1] = un[nx - 1] - un[nx - 1] * dt / dx * (un[nx - 1] - un[nx - 2]) + factor *
-                        (un[0] - 2 * un[nx - 1] + un[nx - 2]);
+            u[nx - 1] =
+                un[nx - 1]
+                - un[nx - 1] * dt / dx * (un[nx - 1] - un[nx - 2])
+                + factor * (un[0] - 2 * un[nx - 1] + un[nx - 2]);
 
             double[] swap = u;
             u = un;
@@ -125,7 +178,14 @@ public class Burgers
     }
 
     // SIMD
-    private static double[] GetCalculated3(int nt, int nx, double dx, double dt, double nu, double[] initial)
+    private static double[] GetCalculated3(
+        int nt,
+        int nx,
+        double dx,
+        double dt,
+        double nu,
+        double[] initial
+    )
     {
         var nx2 = nx + (Vector<double>.Count - (nx % Vector<double>.Count));
 
@@ -143,17 +203,23 @@ public class Burgers
                 var vectorInPrev = new Vector<double>(un, i - 1);
                 var vectorInNext = new Vector<double>(un, i + 1);
 
-                var vectorOut = vectorIn0 - vectorIn0 * (dt / dx) * (vectorIn0 - vectorInPrev) + factor *
-                    (vectorInNext - 2.0 * vectorIn0 + vectorInPrev);
+                var vectorOut =
+                    vectorIn0
+                    - vectorIn0 * (dt / dx) * (vectorIn0 - vectorInPrev)
+                    + factor * (vectorInNext - 2.0 * vectorIn0 + vectorInPrev);
 
                 vectorOut.CopyTo(u, i);
             }
 
-            u[0] = un[0] - un[0] * dt / dx * (un[0] - un[nx - 1]) + factor *
-                        (un[1] - 2 * un[0] + un[nx - 1]);
+            u[0] =
+                un[0]
+                - un[0] * dt / dx * (un[0] - un[nx - 1])
+                + factor * (un[1] - 2 * un[0] + un[nx - 1]);
 
-            u[nx - 1] = un[nx - 1] - un[nx - 1] * dt / dx * (un[nx - 1] - un[nx - 2]) + factor *
-                        (un[0] - 2 * un[nx - 1] + un[nx - 2]);
+            u[nx - 1] =
+                un[nx - 1]
+                - un[nx - 1] * dt / dx * (un[nx - 1] - un[nx - 2])
+                + factor * (un[0] - 2 * un[nx - 1] + un[nx - 2]);
 
             double[] swap = u;
             u = un;
@@ -241,4 +307,3 @@ public class Burgers
         return 100;
     }
 }
-

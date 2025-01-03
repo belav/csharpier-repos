@@ -13,8 +13,10 @@ namespace Microsoft.Extensions.DependencyInjection
     /// </summary>
     public static class OptionsBuilderConfigurationExtensions
     {
-        internal const string RequiresDynamicCodeMessage = "Binding strongly typed objects to configuration values may require generating dynamic code at runtime.";
-        internal const string TrimmingRequiredUnreferencedCodeMessage = "TOptions's dependent types may have their members trimmed. Ensure all required members are preserved.";
+        internal const string RequiresDynamicCodeMessage =
+            "Binding strongly typed objects to configuration values may require generating dynamic code at runtime.";
+        internal const string TrimmingRequiredUnreferencedCodeMessage =
+            "TOptions's dependent types may have their members trimmed. Ensure all required members are preserved.";
 
         /// <summary>
         /// Registers a configuration instance which <typeparamref name="TOptions"/> will bind against.
@@ -25,8 +27,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="OptionsBuilder{TOptions}"/> so that additional calls can be chained.</returns>
         [RequiresDynamicCode(RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(TrimmingRequiredUnreferencedCodeMessage)]
-        public static OptionsBuilder<TOptions> Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions>(this OptionsBuilder<TOptions> optionsBuilder, IConfiguration config) where TOptions : class
-            => optionsBuilder.Bind(config, _ => { });
+        public static OptionsBuilder<TOptions> Bind<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions
+        >(this OptionsBuilder<TOptions> optionsBuilder, IConfiguration config)
+            where TOptions : class => optionsBuilder.Bind(config, _ => { });
 
         /// <summary>
         /// Registers a configuration instance which <typeparamref name="TOptions"/> will bind against.
@@ -38,11 +42,22 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="OptionsBuilder{TOptions}"/> so that additional calls can be chained.</returns>
         [RequiresDynamicCode(RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(TrimmingRequiredUnreferencedCodeMessage)]
-        public static OptionsBuilder<TOptions> Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions>(this OptionsBuilder<TOptions> optionsBuilder, IConfiguration config, Action<BinderOptions>? configureBinder) where TOptions : class
+        public static OptionsBuilder<TOptions> Bind<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions
+        >(
+            this OptionsBuilder<TOptions> optionsBuilder,
+            IConfiguration config,
+            Action<BinderOptions>? configureBinder
+        )
+            where TOptions : class
         {
             ThrowHelper.ThrowIfNull(optionsBuilder);
 
-            optionsBuilder.Services.Configure<TOptions>(optionsBuilder.Name, config, configureBinder);
+            optionsBuilder.Services.Configure<TOptions>(
+                optionsBuilder.Name,
+                config,
+                configureBinder
+            );
             return optionsBuilder;
         }
 
@@ -61,26 +76,41 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <seealso cref="Bind{TOptions}(OptionsBuilder{TOptions}, IConfiguration, Action{BinderOptions})"/>
         [RequiresDynamicCode(RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(TrimmingRequiredUnreferencedCodeMessage)]
-        public static OptionsBuilder<TOptions> BindConfiguration<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions>(
+        public static OptionsBuilder<TOptions> BindConfiguration<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions
+        >(
             this OptionsBuilder<TOptions> optionsBuilder,
             string configSectionPath,
-            Action<BinderOptions>? configureBinder = null)
+            Action<BinderOptions>? configureBinder = null
+        )
             where TOptions : class
         {
             ThrowHelper.ThrowIfNull(optionsBuilder);
             ThrowHelper.ThrowIfNull(configSectionPath);
 
-            optionsBuilder.Configure<IConfiguration>((opts, config) =>
-            {
-                IConfiguration section = string.Equals("", configSectionPath, StringComparison.OrdinalIgnoreCase)
-                    ? config
-                    : config.GetSection(configSectionPath);
-                section.Bind(opts, configureBinder);
-            });
+            optionsBuilder.Configure<IConfiguration>(
+                (opts, config) =>
+                {
+                    IConfiguration section = string.Equals(
+                        "",
+                        configSectionPath,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                        ? config
+                        : config.GetSection(configSectionPath);
+                    section.Bind(opts, configureBinder);
+                }
+            );
 
-            optionsBuilder.Services.AddSingleton<IOptionsChangeTokenSource<TOptions>, ConfigurationChangeTokenSource<TOptions>>(sp =>
+            optionsBuilder.Services.AddSingleton<
+                IOptionsChangeTokenSource<TOptions>,
+                ConfigurationChangeTokenSource<TOptions>
+            >(sp =>
             {
-                return new ConfigurationChangeTokenSource<TOptions>(optionsBuilder.Name, sp.GetRequiredService<IConfiguration>());
+                return new ConfigurationChangeTokenSource<TOptions>(
+                    optionsBuilder.Name,
+                    sp.GetRequiredService<IConfiguration>()
+                );
             });
 
             return optionsBuilder;

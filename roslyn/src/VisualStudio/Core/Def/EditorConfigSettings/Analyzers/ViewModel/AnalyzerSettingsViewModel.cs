@@ -12,37 +12,48 @@ using Microsoft.VisualStudio.Shell.TableManager;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers.ViewModel
 {
-
-    internal partial class AnalyzerSettingsViewModel : SettingsViewModelBase<
-        AnalyzerSetting,
-        AnalyzerSettingsViewModel.SettingsSnapshotFactory,
-        AnalyzerSettingsViewModel.SettingsEntriesSnapshot>
+    internal partial class AnalyzerSettingsViewModel
+        : SettingsViewModelBase<
+            AnalyzerSetting,
+            AnalyzerSettingsViewModel.SettingsSnapshotFactory,
+            AnalyzerSettingsViewModel.SettingsEntriesSnapshot
+        >
     {
-
-        public AnalyzerSettingsViewModel(ISettingsProvider<AnalyzerSetting> data,
-                                         IWpfTableControlProvider controlProvider,
-                                         ITableManagerProvider tableMangerProvider)
-            : base(data, controlProvider, tableMangerProvider)
-        { }
+        public AnalyzerSettingsViewModel(
+            ISettingsProvider<AnalyzerSetting> data,
+            IWpfTableControlProvider controlProvider,
+            ITableManagerProvider tableMangerProvider
+        )
+            : base(data, controlProvider, tableMangerProvider) { }
 
         public override string Identifier => "AnalyzerSettings";
 
-        protected override SettingsSnapshotFactory CreateSnapshotFactory(ISettingsProvider<AnalyzerSetting> data)
-            => new(data);
+        protected override SettingsSnapshotFactory CreateSnapshotFactory(
+            ISettingsProvider<AnalyzerSetting> data
+        ) => new(data);
 
-        protected override IEnumerable<ColumnState2> GetInitialColumnStates()
-            => new[]
+        protected override IEnumerable<ColumnState2> GetInitialColumnStates() =>
+            new[]
             {
                 new ColumnState2(ColumnDefinitions.Analyzer.Id, isVisible: true, width: 0),
                 new ColumnState2(ColumnDefinitions.Analyzer.Title, isVisible: true, width: 0),
-                new ColumnState2(ColumnDefinitions.Analyzer.Description, isVisible: false, width: 0),
-                new ColumnState2(ColumnDefinitions.Analyzer.Category, isVisible: true, width: 0, groupingPriority: 1),
+                new ColumnState2(
+                    ColumnDefinitions.Analyzer.Description,
+                    isVisible: false,
+                    width: 0
+                ),
+                new ColumnState2(
+                    ColumnDefinitions.Analyzer.Category,
+                    isVisible: true,
+                    width: 0,
+                    groupingPriority: 1
+                ),
                 new ColumnState2(ColumnDefinitions.Analyzer.Severity, isVisible: true, width: 0),
-                new ColumnState2(ColumnDefinitions.Analyzer.Location, isVisible: true, width: 0)
+                new ColumnState2(ColumnDefinitions.Analyzer.Location, isVisible: true, width: 0),
             };
 
-        protected override string[] GetFixedColumns()
-            => new[]
+        protected override string[] GetFixedColumns() =>
+            new[]
             {
                 ColumnDefinitions.Analyzer.Category,
                 ColumnDefinitions.Analyzer.Id,

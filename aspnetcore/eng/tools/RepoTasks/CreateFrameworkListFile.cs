@@ -41,21 +41,27 @@ public class CreateFrameworkListFile : Microsoft.Build.Utilities.Task
 
         var usedFileProfiles = new HashSet<string>();
 
-        foreach (var f in Files
-            .Select(item => new
-            {
-                Item = item,
-                Filename = Path.GetFileName(item.ItemSpec),
-                AssemblyName = FileUtilities.GetAssemblyName(item.ItemSpec),
-                FileVersion = FileUtilities.GetFileVersion(item.ItemSpec),
-                IsNative = item.GetMetadata("IsNativeImage") == "true",
-                IsSymbolFile = item.GetMetadata("IsSymbolFile") == "true",
-                PackagePath = GetPackagePath(item)
-            })
-            .Where(f =>
-                !f.IsSymbolFile &&
-                (f.Filename.EndsWith(".dll", StringComparison.OrdinalIgnoreCase) || f.IsNative))
-            .OrderBy(f => f.Filename, StringComparer.Ordinal))
+        foreach (
+            var f in Files
+                .Select(item => new
+                {
+                    Item = item,
+                    Filename = Path.GetFileName(item.ItemSpec),
+                    AssemblyName = FileUtilities.GetAssemblyName(item.ItemSpec),
+                    FileVersion = FileUtilities.GetFileVersion(item.ItemSpec),
+                    IsNative = item.GetMetadata("IsNativeImage") == "true",
+                    IsSymbolFile = item.GetMetadata("IsSymbolFile") == "true",
+                    PackagePath = GetPackagePath(item),
+                })
+                .Where(f =>
+                    !f.IsSymbolFile
+                    && (
+                        f.Filename.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)
+                        || f.IsNative
+                    )
+                )
+                .OrderBy(f => f.Filename, StringComparer.Ordinal)
+        )
         {
             string path = Path.Combine(f.PackagePath, f.Filename).Replace('\\', '/');
             string type = f.IsNative ? "Native" : "Managed";
@@ -73,9 +79,15 @@ public class CreateFrameworkListFile : Microsoft.Build.Utilities.Task
 
                 var pathParts = path.Split('/');
 
-                if (pathParts.Length < 3 || !pathParts[1].Equals("dotnet", StringComparison.Ordinal) || pathParts.Length > 5)
+                if (
+                    pathParts.Length < 3
+                    || !pathParts[1].Equals("dotnet", StringComparison.Ordinal)
+                    || pathParts.Length > 5
+                )
                 {
-                    Log.LogError($"Unexpected analyzer path format {path}.  Expected  'analyzers/dotnet(/roslyn<version>)(/language)/analyzer.dll");
+                    Log.LogError(
+                        $"Unexpected analyzer path format {path}.  Expected  'analyzers/dotnet(/roslyn<version>)(/language)/analyzer.dll"
+                    );
                 }
 
                 // Check if we have enough parts for language directory and include it.
@@ -98,7 +110,8 @@ public class CreateFrameworkListFile : Microsoft.Build.Utilities.Task
 
                 if (publicKeyToken != null)
                 {
-                    publicKeyTokenHex = BitConverter.ToString(publicKeyToken)
+                    publicKeyTokenHex = BitConverter
+                        .ToString(publicKeyToken)
                         .ToLowerInvariant()
                         .Replace("-", "");
                 }
@@ -111,7 +124,8 @@ public class CreateFrameworkListFile : Microsoft.Build.Utilities.Task
                 element.Add(
                     new XAttribute("AssemblyName", f.AssemblyName.Name),
                     new XAttribute("PublicKeyToken", publicKeyTokenHex),
-                    new XAttribute("AssemblyVersion", f.AssemblyName.Version));
+                    new XAttribute("AssemblyVersion", f.AssemblyName.Version)
+                );
             }
             else if (!f.IsNative)
             {
@@ -129,15 +143,19 @@ public class CreateFrameworkListFile : Microsoft.Build.Utilities.Task
 
         return !Log.HasLoggedErrors;
     }
+
     private static string GetPackagePath(ITaskItem item)
     {
         string packagePath = item.GetMetadata("PackagePath");
 
         // replicate the logic used by PackTask https://github.com/NuGet/NuGet.Client/blob/f24bad0668193ce21a1db8cabd1ce95ba509c7f0/src/NuGet.Core/NuGet.Build.Tasks.Pack/PackTaskLogic.cs#L644-L647
         string recursiveDir = item.GetMetadata("RecursiveDir");
-        recursiveDir = string.IsNullOrEmpty(recursiveDir) ? item.GetMetadata("NuGetRecursiveDir") : recursiveDir;
+        recursiveDir = string.IsNullOrEmpty(recursiveDir)
+            ? item.GetMetadata("NuGetRecursiveDir")
+            : recursiveDir;
 
-        return string.IsNullOrEmpty(recursiveDir) ? packagePath :
-            Path.Combine(packagePath, recursiveDir);
+        return string.IsNullOrEmpty(recursiveDir)
+            ? packagePath
+            : Path.Combine(packagePath, recursiveDir);
     }
 }

@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  File
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
@@ -17,22 +17,23 @@
 ===========================================================*/
 
 using System;
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
+using System.Security;
 using System.Security.Permissions;
+using System.Text;
+using Microsoft.Win32.SafeHandles;
 using PermissionSet = System.Security.PermissionSet;
 using Win32Native = Microsoft.Win32.Win32Native;
-using System.Runtime.InteropServices;
-using System.Security;
 #if FEATURE_MACL
 using System.Security.AccessControl;
 #endif
-using System.Text;
-using Microsoft.Win32.SafeHandles;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
-    
-namespace System.IO {    
+
+namespace System.IO
+{
     // Class for creating FileStream objects, and some basic file management
     // routines such as Delete, etc.
     [ComVisible(true)]
@@ -57,7 +58,7 @@ namespace System.IO {
             if (path == null)
                 throw new ArgumentNullException("path");
             Contract.EndContractBlock();
-            return new StreamWriter(path,false);
+            return new StreamWriter(path, false);
         }
 
         [ResourceExposure(ResourceScope.Machine)]
@@ -67,55 +68,80 @@ namespace System.IO {
             if (path == null)
                 throw new ArgumentNullException("path");
             Contract.EndContractBlock();
-            return new StreamWriter(path,true);
+            return new StreamWriter(path, true);
         }
 
-
         // Copies an existing file to a new file. An exception is raised if the
-        // destination file already exists. Use the 
-        // Copy(String, String, boolean) method to allow 
+        // destination file already exists. Use the
+        // Copy(String, String, boolean) method to allow
         // overwriting an existing file.
         //
         // The caller must have certain FileIOPermissions.  The caller must have
         // Read permission to sourceFileName and Create
         // and Write permissions to destFileName.
-        // 
+        //
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static void Copy(String sourceFileName, String destFileName) {
+        public static void Copy(String sourceFileName, String destFileName)
+        {
             if (sourceFileName == null)
-                throw new ArgumentNullException("sourceFileName", Environment.GetResourceString("ArgumentNull_FileName"));
+                throw new ArgumentNullException(
+                    "sourceFileName",
+                    Environment.GetResourceString("ArgumentNull_FileName")
+                );
             if (destFileName == null)
-                throw new ArgumentNullException("destFileName", Environment.GetResourceString("ArgumentNull_FileName"));
+                throw new ArgumentNullException(
+                    "destFileName",
+                    Environment.GetResourceString("ArgumentNull_FileName")
+                );
             if (sourceFileName.Length == 0)
-                throw new ArgumentException(Environment.GetResourceString("Argument_EmptyFileName"), "sourceFileName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_EmptyFileName"),
+                    "sourceFileName"
+                );
             if (destFileName.Length == 0)
-                throw new ArgumentException(Environment.GetResourceString("Argument_EmptyFileName"), "destFileName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_EmptyFileName"),
+                    "destFileName"
+                );
             Contract.EndContractBlock();
 
             InternalCopy(sourceFileName, destFileName, false, true);
         }
-    
-        // Copies an existing file to a new file. If overwrite is 
-        // false, then an IOException is thrown if the destination file 
-        // already exists.  If overwrite is true, the file is 
+
+        // Copies an existing file to a new file. If overwrite is
+        // false, then an IOException is thrown if the destination file
+        // already exists.  If overwrite is true, the file is
         // overwritten.
         //
         // The caller must have certain FileIOPermissions.  The caller must have
-        // Read permission to sourceFileName 
+        // Read permission to sourceFileName
         // and Write permissions to destFileName.
-        // 
+        //
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static void Copy(String sourceFileName, String destFileName, bool overwrite) {
+        public static void Copy(String sourceFileName, String destFileName, bool overwrite)
+        {
             if (sourceFileName == null)
-                throw new ArgumentNullException("sourceFileName", Environment.GetResourceString("ArgumentNull_FileName"));
+                throw new ArgumentNullException(
+                    "sourceFileName",
+                    Environment.GetResourceString("ArgumentNull_FileName")
+                );
             if (destFileName == null)
-                throw new ArgumentNullException("destFileName", Environment.GetResourceString("ArgumentNull_FileName"));
+                throw new ArgumentNullException(
+                    "destFileName",
+                    Environment.GetResourceString("ArgumentNull_FileName")
+                );
             if (sourceFileName.Length == 0)
-                throw new ArgumentException(Environment.GetResourceString("Argument_EmptyFileName"), "sourceFileName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_EmptyFileName"),
+                    "sourceFileName"
+                );
             if (destFileName.Length == 0)
-                throw new ArgumentException(Environment.GetResourceString("Argument_EmptyFileName"), "destFileName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_EmptyFileName"),
+                    "destFileName"
+                );
             Contract.EndContractBlock();
 
             InternalCopy(sourceFileName, destFileName, overwrite, true);
@@ -124,15 +150,28 @@ namespace System.IO {
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal static void UnsafeCopy(String sourceFileName, String destFileName, bool overwrite) {
+        internal static void UnsafeCopy(String sourceFileName, String destFileName, bool overwrite)
+        {
             if (sourceFileName == null)
-                throw new ArgumentNullException("sourceFileName", Environment.GetResourceString("ArgumentNull_FileName"));
+                throw new ArgumentNullException(
+                    "sourceFileName",
+                    Environment.GetResourceString("ArgumentNull_FileName")
+                );
             if (destFileName == null)
-                throw new ArgumentNullException("destFileName", Environment.GetResourceString("ArgumentNull_FileName"));
+                throw new ArgumentNullException(
+                    "destFileName",
+                    Environment.GetResourceString("ArgumentNull_FileName")
+                );
             if (sourceFileName.Length == 0)
-                throw new ArgumentException(Environment.GetResourceString("Argument_EmptyFileName"), "sourceFileName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_EmptyFileName"),
+                    "sourceFileName"
+                );
             if (destFileName.Length == 0)
-                throw new ArgumentException(Environment.GetResourceString("Argument_EmptyFileName"), "destFileName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_EmptyFileName"),
+                    "destFileName"
+                );
             Contract.EndContractBlock();
 
             InternalCopy(sourceFileName, destFileName, overwrite, false);
@@ -144,7 +183,13 @@ namespace System.IO {
         [System.Security.SecuritySafeCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal static String InternalCopy(String sourceFileName, String destFileName, bool overwrite, bool checkHost) {
+        internal static String InternalCopy(
+            String sourceFileName,
+            String destFileName,
+            bool overwrite,
+            bool checkHost
+        )
+        {
             Contract.Requires(sourceFileName != null);
             Contract.Requires(destFileName != null);
             Contract.Requires(sourceFileName.Length > 0);
@@ -152,125 +197,197 @@ namespace System.IO {
 
             String fullSourceFileName = Path.GetFullPathInternal(sourceFileName);
             String fullDestFileName = Path.GetFullPathInternal(destFileName);
-            
+
 #if FEATURE_CORECLR
-            if (checkHost) {
-                FileSecurityState sourceState = new FileSecurityState(FileSecurityStateAccess.Read, sourceFileName, fullSourceFileName);
-                FileSecurityState destState = new FileSecurityState(FileSecurityStateAccess.Write, destFileName, fullDestFileName);
+            if (checkHost)
+            {
+                FileSecurityState sourceState = new FileSecurityState(
+                    FileSecurityStateAccess.Read,
+                    sourceFileName,
+                    fullSourceFileName
+                );
+                FileSecurityState destState = new FileSecurityState(
+                    FileSecurityStateAccess.Write,
+                    destFileName,
+                    fullDestFileName
+                );
                 sourceState.EnsureState();
                 destState.EnsureState();
             }
 #else
-            FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, fullSourceFileName, false, false);
-            FileIOPermission.QuickDemand(FileIOPermissionAccess.Write, fullDestFileName, false, false);
+            FileIOPermission.QuickDemand(
+                FileIOPermissionAccess.Read,
+                fullSourceFileName,
+                false,
+                false
+            );
+            FileIOPermission.QuickDemand(
+                FileIOPermissionAccess.Write,
+                fullDestFileName,
+                false,
+                false
+            );
 #endif
-       
             bool r = Win32Native.CopyFile(fullSourceFileName, fullDestFileName, !overwrite);
-            if (!r) {
+            if (!r)
+            {
                 // Save Win32 error because subsequent checks will overwrite this HRESULT.
                 int errorCode = Marshal.GetLastWin32Error();
                 String fileName = destFileName;
 
-                if (errorCode != Win32Native.ERROR_FILE_EXISTS) {
-                    // For a number of error codes (sharing violation, path 
+                if (errorCode != Win32Native.ERROR_FILE_EXISTS)
+                {
+                    // For a number of error codes (sharing violation, path
                     // not found, etc) we don't know if the problem was with
                     // the source or dest file.  Try reading the source file.
-                    using(SafeFileHandle handle = Win32Native.UnsafeCreateFile(fullSourceFileName, FileStream.GENERIC_READ, FileShare.Read, null, FileMode.Open, 0, IntPtr.Zero)) {
+                    using (
+                        SafeFileHandle handle = Win32Native.UnsafeCreateFile(
+                            fullSourceFileName,
+                            FileStream.GENERIC_READ,
+                            FileShare.Read,
+                            null,
+                            FileMode.Open,
+                            0,
+                            IntPtr.Zero
+                        )
+                    )
+                    {
                         if (handle.IsInvalid)
                             fileName = sourceFileName;
                     }
 
-                    if (errorCode == Win32Native.ERROR_ACCESS_DENIED) {
+                    if (errorCode == Win32Native.ERROR_ACCESS_DENIED)
+                    {
                         if (Directory.InternalExists(fullDestFileName))
-                            throw new IOException(Environment.GetResourceString("Arg_FileIsDirectory_Name", destFileName), Win32Native.ERROR_ACCESS_DENIED, fullDestFileName);
+                            throw new IOException(
+                                Environment.GetResourceString(
+                                    "Arg_FileIsDirectory_Name",
+                                    destFileName
+                                ),
+                                Win32Native.ERROR_ACCESS_DENIED,
+                                fullDestFileName
+                            );
                     }
                 }
 
                 __Error.WinIOError(errorCode, fileName);
             }
-                
+
             return fullDestFileName;
         }
 
-
         // Creates a file in a particular path.  If the file exists, it is replaced.
-        // The file is opened with ReadWrite accessand cannot be opened by another 
-        // application until it has been closed.  An IOException is thrown if the 
+        // The file is opened with ReadWrite accessand cannot be opened by another
+        // application until it has been closed.  An IOException is thrown if the
         // directory specified doesn't exist.
         //
         // Your application must have Create, Read, and Write permissions to
         // the file.
-        // 
+        //
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static FileStream Create(String path) {
+        public static FileStream Create(String path)
+        {
             return Create(path, FileStream.DefaultBufferSize);
         }
-        
+
         // Creates a file in a particular path.  If the file exists, it is replaced.
-        // The file is opened with ReadWrite access and cannot be opened by another 
-        // application until it has been closed.  An IOException is thrown if the 
+        // The file is opened with ReadWrite access and cannot be opened by another
+        // application until it has been closed.  An IOException is thrown if the
         // directory specified doesn't exist.
         //
         // Your application must have Create, Read, and Write permissions to
         // the file.
-        // 
+        //
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static FileStream Create(String path, int bufferSize) {
-            return new FileStream(path, FileMode.Create, FileAccess.ReadWrite, FileShare.None, bufferSize);
+        public static FileStream Create(String path, int bufferSize)
+        {
+            return new FileStream(
+                path,
+                FileMode.Create,
+                FileAccess.ReadWrite,
+                FileShare.None,
+                bufferSize
+            );
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static FileStream Create(String path, int bufferSize, FileOptions options) {
-            return new FileStream(path, FileMode.Create, FileAccess.ReadWrite,
-                                  FileShare.None, bufferSize, options);
+        public static FileStream Create(String path, int bufferSize, FileOptions options)
+        {
+            return new FileStream(
+                path,
+                FileMode.Create,
+                FileAccess.ReadWrite,
+                FileShare.None,
+                bufferSize,
+                options
+            );
         }
 
 #if FEATURE_MACL
-        public static FileStream Create(String path, int bufferSize, FileOptions options, FileSecurity fileSecurity) {
-            return new FileStream(path, FileMode.Create, FileSystemRights.Read | FileSystemRights.Write,
-                                  FileShare.None, bufferSize, options, fileSecurity);
+        public static FileStream Create(
+            String path,
+            int bufferSize,
+            FileOptions options,
+            FileSecurity fileSecurity
+        )
+        {
+            return new FileStream(
+                path,
+                FileMode.Create,
+                FileSystemRights.Read | FileSystemRights.Write,
+                FileShare.None,
+                bufferSize,
+                options,
+                fileSecurity
+            );
         }
 #endif
 
         // Deletes a file. The file specified by the designated path is deleted.
         // If the file does not exist, Delete succeeds without throwing
         // an exception.
-        // 
+        //
         // On NT, Delete will fail for a file that is open for normal I/O
-        // or a file that is memory mapped.  
-        // 
+        // or a file that is memory mapped.
+        //
         // Your application must have Delete permission to the target file.
-        // 
+        //
         [System.Security.SecuritySafeCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static void Delete(String path) {
+        public static void Delete(String path)
+        {
             if (path == null)
                 throw new ArgumentNullException("path");
             Contract.EndContractBlock();
 
 #if FEATURE_LEGACYNETCF
-            if(CompatibilitySwitches.IsAppEarlierThanWindowsPhone8) {
-                System.Reflection.Assembly callingAssembly = System.Reflection.Assembly.GetCallingAssembly();
-                if(callingAssembly != null && !callingAssembly.IsProfileAssembly) {
+            if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
+            {
+                System.Reflection.Assembly callingAssembly =
+                    System.Reflection.Assembly.GetCallingAssembly();
+                if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
+                {
                     string caller = new System.Diagnostics.StackFrame(1).GetMethod().FullName;
                     string callee = System.Reflection.MethodBase.GetCurrentMethod().FullName;
-                    throw new MethodAccessException(String.Format(
-                        CultureInfo.CurrentCulture,
-                        Environment.GetResourceString("Arg_MethodAccessException_WithCaller"),
-                        caller,
-                        callee));
+                    throw new MethodAccessException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Arg_MethodAccessException_WithCaller"),
+                            caller,
+                            callee
+                        )
+                    );
                 }
             }
 #endif // FEATURE_LEGACYNETCF
-            
             InternalDelete(path, true);
         }
 
-        [System.Security.SecurityCritical] 
+        [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         internal static void UnsafeDelete(String path)
@@ -282,7 +399,7 @@ namespace System.IO {
             InternalDelete(path, false);
         }
 
-        [System.Security.SecurityCritical] 
+        [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         internal static void InternalDelete(String path, bool checkHost)
@@ -292,7 +409,11 @@ namespace System.IO {
 #if FEATURE_CORECLR
             if (checkHost)
             {
-                FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Write, path, fullPath);
+                FileSecurityState state = new FileSecurityState(
+                    FileSecurityStateAccess.Write,
+                    path,
+                    fullPath
+                );
                 state.EnsureState();
             }
 #else
@@ -301,17 +422,17 @@ namespace System.IO {
 
 #endif
             bool r = Win32Native.DeleteFile(fullPath);
-            if (!r) {
+            if (!r)
+            {
                 int hr = Marshal.GetLastWin32Error();
-                if (hr==Win32Native.ERROR_FILE_NOT_FOUND)
+                if (hr == Win32Native.ERROR_FILE_NOT_FOUND)
                     return;
                 else
                     __Error.WinIOError(hr, fullPath);
             }
         }
 
-
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static void Decrypt(String path)
@@ -321,28 +442,39 @@ namespace System.IO {
             Contract.EndContractBlock();
 
 #if FEATURE_PAL
-            throw new PlatformNotSupportedException(Environment.GetResourceString("PlatformNotSupported_RequiresNT"));
+            throw new PlatformNotSupportedException(
+                Environment.GetResourceString("PlatformNotSupported_RequiresNT")
+            );
 #else
 
             String fullPath = Path.GetFullPathInternal(path);
-            FileIOPermission.QuickDemand(FileIOPermissionAccess.Read | FileIOPermissionAccess.Write, fullPath, false, false);
+            FileIOPermission.QuickDemand(
+                FileIOPermissionAccess.Read | FileIOPermissionAccess.Write,
+                fullPath,
+                false,
+                false
+            );
 
             bool r = Win32Native.DecryptFile(fullPath, 0);
-            if (!r) {
+            if (!r)
+            {
                 int errorCode = Marshal.GetLastWin32Error();
-                if (errorCode == Win32Native.ERROR_ACCESS_DENIED) {
+                if (errorCode == Win32Native.ERROR_ACCESS_DENIED)
+                {
                     // Check to see if the file system is not NTFS.  If so,
                     // throw a different exception.
                     DriveInfo di = new DriveInfo(Path.GetPathRoot(fullPath));
                     if (!String.Equals("NTFS", di.DriveFormat))
-                        throw new NotSupportedException(Environment.GetResourceString("NotSupported_EncryptionNeedsNTFS"));
+                        throw new NotSupportedException(
+                            Environment.GetResourceString("NotSupported_EncryptionNeedsNTFS")
+                        );
                 }
                 __Error.WinIOError(errorCode, fullPath);
             }
 #endif
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static void Encrypt(String path)
@@ -352,21 +484,32 @@ namespace System.IO {
             Contract.EndContractBlock();
 
 #if FEATURE_PAL
-            throw new PlatformNotSupportedException(Environment.GetResourceString("PlatformNotSupported_RequiresNT"));
+            throw new PlatformNotSupportedException(
+                Environment.GetResourceString("PlatformNotSupported_RequiresNT")
+            );
 #else
 
             String fullPath = Path.GetFullPathInternal(path);
-            FileIOPermission.QuickDemand(FileIOPermissionAccess.Read | FileIOPermissionAccess.Write, fullPath, false, false);
+            FileIOPermission.QuickDemand(
+                FileIOPermissionAccess.Read | FileIOPermissionAccess.Write,
+                fullPath,
+                false,
+                false
+            );
 
             bool r = Win32Native.EncryptFile(fullPath);
-            if (!r) {
+            if (!r)
+            {
                 int errorCode = Marshal.GetLastWin32Error();
-                if (errorCode == Win32Native.ERROR_ACCESS_DENIED) {
+                if (errorCode == Win32Native.ERROR_ACCESS_DENIED)
+                {
                     // Check to see if the file system is not NTFS.  If so,
                     // throw a different exception.
                     DriveInfo di = new DriveInfo(Path.GetPathRoot(fullPath));
                     if (!String.Equals("NTFS", di.DriveFormat))
-                        throw new NotSupportedException(Environment.GetResourceString("NotSupported_EncryptionNeedsNTFS"));
+                        throw new NotSupportedException(
+                            Environment.GetResourceString("NotSupported_EncryptionNeedsNTFS")
+                        );
                 }
                 __Error.WinIOError(errorCode, fullPath);
             }
@@ -379,23 +522,29 @@ namespace System.IO {
         // Exists will return true.
         //
         // Your application must have Read permission for the target directory.
-        // 
+        //
         [System.Security.SecuritySafeCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static bool Exists(String path)
         {
 #if FEATURE_LEGACYNETCF
-            if(CompatibilitySwitches.IsAppEarlierThanWindowsPhone8) {
-                System.Reflection.Assembly callingAssembly = System.Reflection.Assembly.GetCallingAssembly();
-                if(callingAssembly != null && !callingAssembly.IsProfileAssembly) {
+            if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
+            {
+                System.Reflection.Assembly callingAssembly =
+                    System.Reflection.Assembly.GetCallingAssembly();
+                if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
+                {
                     string caller = new System.Diagnostics.StackFrame(1).GetMethod().FullName;
                     string callee = System.Reflection.MethodBase.GetCurrentMethod().FullName;
-                    throw new MethodAccessException(String.Format(
-                        CultureInfo.CurrentCulture,
-                        Environment.GetResourceString("Arg_MethodAccessException_WithCaller"),
-                        caller,
-                        callee));
+                    throw new MethodAccessException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Arg_MethodAccessException_WithCaller"),
+                            caller,
+                            callee
+                        )
+                    );
                 }
             }
 #endif // FEATURE_LEGACYNETCF
@@ -413,7 +562,7 @@ namespace System.IO {
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private static bool InternalExistsHelper(String path, bool checkHost) 
+        private static bool InternalExistsHelper(String path, bool checkHost)
         {
             try
             {
@@ -435,7 +584,11 @@ namespace System.IO {
 #if FEATURE_CORECLR
                 if (checkHost)
                 {
-                    FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Read, String.Empty, path);
+                    FileSecurityState state = new FileSecurityState(
+                        FileSecurityStateAccess.Read,
+                        String.Empty,
+                        path
+                    );
                     state.EnsureState();
                 }
 #else
@@ -453,30 +606,46 @@ namespace System.IO {
             return false;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static bool InternalExists(String path) {
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+        [System.Security.SecurityCritical] // auto-generated
+        internal static bool InternalExists(String path)
+        {
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
+                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
             int dataInitialised = FillAttributeInfo(path, ref data, false, true);
 
-            return (dataInitialised == 0) && (data.fileAttributes != -1) 
-                    && ((data.fileAttributes  & Win32Native.FILE_ATTRIBUTE_DIRECTORY) == 0);
+            return (dataInitialised == 0)
+                && (data.fileAttributes != -1)
+                && ((data.fileAttributes & Win32Native.FILE_ATTRIBUTE_DIRECTORY) == 0);
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static FileStream Open(String path, FileMode mode) {
-            return Open(path, mode, (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite), FileShare.None);
+        public static FileStream Open(String path, FileMode mode)
+        {
+            return Open(
+                path,
+                mode,
+                (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite),
+                FileShare.None
+            );
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static FileStream Open(String path, FileMode mode, FileAccess access) {
-            return Open(path,mode, access, FileShare.None);
+        public static FileStream Open(String path, FileMode mode, FileAccess access)
+        {
+            return Open(path, mode, access, FileShare.None);
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static FileStream Open(String path, FileMode mode, FileAccess access, FileShare share) {
+        public static FileStream Open(
+            String path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share
+        )
+        {
             return new FileStream(path, mode, access, share);
         }
 
@@ -487,18 +656,21 @@ namespace System.IO {
             SetCreationTimeUtc(path, creationTime.ToUniversalTime());
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public unsafe static void SetCreationTimeUtc(String path, DateTime creationTimeUtc)
+        public static unsafe void SetCreationTimeUtc(String path, DateTime creationTimeUtc)
         {
             SafeFileHandle handle;
-            using(OpenFile(path, FileAccess.Write, out handle)) {
-                Win32Native.FILE_TIME fileTime = new Win32Native.FILE_TIME(creationTimeUtc.ToFileTimeUtc());
+            using (OpenFile(path, FileAccess.Write, out handle))
+            {
+                Win32Native.FILE_TIME fileTime = new Win32Native.FILE_TIME(
+                    creationTimeUtc.ToFileTimeUtc()
+                );
                 bool r = Win32Native.SetFileTime(handle, &fileTime, null, null);
                 if (!r)
                 {
-                     int errorCode = Marshal.GetLastWin32Error();
+                    int errorCode = Marshal.GetLastWin32Error();
                     __Error.WinIOError(errorCode, path);
                 }
             }
@@ -512,7 +684,7 @@ namespace System.IO {
             return InternalGetCreationTimeUtc(path, true).ToLocalTime();
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static DateTime GetCreationTimeUtc(String path)
@@ -527,16 +699,21 @@ namespace System.IO {
         {
             String fullPath = Path.GetFullPathInternal(path);
 #if FEATURE_CORECLR
-            if (checkHost) 
+            if (checkHost)
             {
-                FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Read, path, fullPath);
+                FileSecurityState state = new FileSecurityState(
+                    FileSecurityStateAccess.Read,
+                    path,
+                    fullPath
+                );
                 state.EnsureState();
             }
 #else
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, fullPath, false, false);
 #endif
 
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
+                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
             int dataInitialised = FillAttributeInfo(fullPath, ref data, false, false);
             if (dataInitialised != 0)
                 __Error.WinIOError(dataInitialised, fullPath);
@@ -546,24 +723,27 @@ namespace System.IO {
         }
 
         [ResourceExposure(ResourceScope.Machine)]
-        [ResourceConsumption(ResourceScope.Machine)]      
+        [ResourceConsumption(ResourceScope.Machine)]
         public static void SetLastAccessTime(String path, DateTime lastAccessTime)
         {
             SetLastAccessTimeUtc(path, lastAccessTime.ToUniversalTime());
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public unsafe static void SetLastAccessTimeUtc(String path, DateTime lastAccessTimeUtc)
+        public static unsafe void SetLastAccessTimeUtc(String path, DateTime lastAccessTimeUtc)
         {
             SafeFileHandle handle;
-            using(OpenFile(path, FileAccess.Write, out handle)) {
-                Win32Native.FILE_TIME fileTime = new Win32Native.FILE_TIME(lastAccessTimeUtc.ToFileTimeUtc());
-                bool r = Win32Native.SetFileTime(handle, null, &fileTime,  null);
+            using (OpenFile(path, FileAccess.Write, out handle))
+            {
+                Win32Native.FILE_TIME fileTime = new Win32Native.FILE_TIME(
+                    lastAccessTimeUtc.ToFileTimeUtc()
+                );
+                bool r = Win32Native.SetFileTime(handle, null, &fileTime, null);
                 if (!r)
                 {
-                     int errorCode = Marshal.GetLastWin32Error();
+                    int errorCode = Marshal.GetLastWin32Error();
                     __Error.WinIOError(errorCode, path);
                 }
             }
@@ -577,7 +757,7 @@ namespace System.IO {
             return InternalGetLastAccessTimeUtc(path, true).ToLocalTime();
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static DateTime GetLastAccessTimeUtc(String path)
@@ -589,19 +769,24 @@ namespace System.IO {
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         private static DateTime InternalGetLastAccessTimeUtc(String path, bool checkHost)
-        {       
+        {
             String fullPath = Path.GetFullPathInternal(path);
 #if FEATURE_CORECLR
-            if (checkHost) 
+            if (checkHost)
             {
-                FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Read, path, fullPath);
+                FileSecurityState state = new FileSecurityState(
+                    FileSecurityStateAccess.Read,
+                    path,
+                    fullPath
+                );
                 state.EnsureState();
             }
 #else
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, fullPath, false, false);
 #endif
 
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
+                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
             int dataInitialised = FillAttributeInfo(fullPath, ref data, false, false);
             if (dataInitialised != 0)
                 __Error.WinIOError(dataInitialised, fullPath);
@@ -617,18 +802,21 @@ namespace System.IO {
             SetLastWriteTimeUtc(path, lastWriteTime.ToUniversalTime());
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public unsafe static void SetLastWriteTimeUtc(String path, DateTime lastWriteTimeUtc)
+        public static unsafe void SetLastWriteTimeUtc(String path, DateTime lastWriteTimeUtc)
         {
             SafeFileHandle handle;
-            using(OpenFile(path, FileAccess.Write, out handle)) {
-                Win32Native.FILE_TIME fileTime = new Win32Native.FILE_TIME(lastWriteTimeUtc.ToFileTimeUtc());
+            using (OpenFile(path, FileAccess.Write, out handle))
+            {
+                Win32Native.FILE_TIME fileTime = new Win32Native.FILE_TIME(
+                    lastWriteTimeUtc.ToFileTimeUtc()
+                );
                 bool r = Win32Native.SetFileTime(handle, null, null, &fileTime);
                 if (!r)
                 {
-                     int errorCode = Marshal.GetLastWin32Error();
+                    int errorCode = Marshal.GetLastWin32Error();
                     __Error.WinIOError(errorCode, path);
                 }
             }
@@ -642,7 +830,7 @@ namespace System.IO {
             return InternalGetLastWriteTimeUtc(path, true).ToLocalTime();
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static DateTime GetLastWriteTimeUtc(String path)
@@ -659,14 +847,19 @@ namespace System.IO {
 #if FEATURE_CORECLR
             if (checkHost)
             {
-                FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Read, path, fullPath);
+                FileSecurityState state = new FileSecurityState(
+                    FileSecurityStateAccess.Read,
+                    path,
+                    fullPath
+                );
                 state.EnsureState();
             }
 #else
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, fullPath, false, false);
 #endif
 
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
+                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
             int dataInitialised = FillAttributeInfo(fullPath, ref data, false, false);
             if (dataInitialised != 0)
                 __Error.WinIOError(dataInitialised, fullPath);
@@ -678,43 +871,51 @@ namespace System.IO {
         [System.Security.SecuritySafeCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static FileAttributes GetAttributes(String path) 
+        public static FileAttributes GetAttributes(String path)
         {
             String fullPath = Path.GetFullPathInternal(path);
 #if FEATURE_CORECLR
-            FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Read, path, fullPath);
+            FileSecurityState state = new FileSecurityState(
+                FileSecurityStateAccess.Read,
+                path,
+                fullPath
+            );
             state.EnsureState();
 #else
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, fullPath, false, false);
 #endif
 
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
+                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
             int dataInitialised = FillAttributeInfo(fullPath, ref data, false, true);
             if (dataInitialised != 0)
                 __Error.WinIOError(dataInitialised, fullPath);
 
-            return (FileAttributes) data.fileAttributes;
+            return (FileAttributes)data.fileAttributes;
         }
 
-        #if FEATURE_CORECLR
-        [System.Security.SecurityCritical] 
-        #else
+#if FEATURE_CORECLR
+        [System.Security.SecurityCritical]
+#else
         [System.Security.SecuritySafeCritical]
-        #endif
+#endif
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static void SetAttributes(String path, FileAttributes fileAttributes) 
+        public static void SetAttributes(String path, FileAttributes fileAttributes)
         {
             String fullPath = Path.GetFullPathInternal(path);
 #if !FEATURE_CORECLR
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Write, fullPath, false, false);
 #endif
-            bool r = Win32Native.SetFileAttributes(fullPath, (int) fileAttributes);
-            if (!r) {
+            bool r = Win32Native.SetFileAttributes(fullPath, (int)fileAttributes);
+            if (!r)
+            {
                 int hr = Marshal.GetLastWin32Error();
-                if (hr==ERROR_INVALID_PARAMETER)
-                    throw new ArgumentException(Environment.GetResourceString("Arg_InvalidFileAttrs"));
-                 __Error.WinIOError(hr, fullPath);
+                if (hr == ERROR_INVALID_PARAMETER)
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Arg_InvalidFileAttrs")
+                    );
+                __Error.WinIOError(hr, fullPath);
             }
         }
 
@@ -723,18 +924,26 @@ namespace System.IO {
         [ResourceConsumption(ResourceScope.Machine)]
         public static FileSecurity GetAccessControl(String path)
         {
-            return GetAccessControl(path, AccessControlSections.Access | AccessControlSections.Owner | AccessControlSections.Group);
+            return GetAccessControl(
+                path,
+                AccessControlSections.Access
+                    | AccessControlSections.Owner
+                    | AccessControlSections.Group
+            );
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static FileSecurity GetAccessControl(String path, AccessControlSections includeSections)
+        public static FileSecurity GetAccessControl(
+            String path,
+            AccessControlSections includeSections
+        )
         {
             // Appropriate security check should be done for us by FileSecurity.
             return new FileSecurity(path, includeSections);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static void SetAccessControl(String path, FileSecurity fileSecurity)
@@ -754,33 +963,39 @@ namespace System.IO {
 #endif // FEATURE_LEGACYNETCF
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static FileStream OpenRead(String path) {
+        public static FileStream OpenRead(String path)
+        {
 #if FEATURE_LEGACYNETCF
-            if(CompatibilitySwitches.IsAppEarlierThanWindowsPhone8) {
-                System.Reflection.Assembly callingAssembly = System.Reflection.Assembly.GetCallingAssembly();
-                if(callingAssembly != null && !callingAssembly.IsProfileAssembly) {
+            if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
+            {
+                System.Reflection.Assembly callingAssembly =
+                    System.Reflection.Assembly.GetCallingAssembly();
+                if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
+                {
                     string caller = new System.Diagnostics.StackFrame(1).GetMethod().FullName;
                     string callee = System.Reflection.MethodBase.GetCurrentMethod().FullName;
-                    throw new MethodAccessException(String.Format(
-                        CultureInfo.CurrentCulture,
-                        Environment.GetResourceString("Arg_MethodAccessException_WithCaller"),
-                        caller,
-                        callee));
+                    throw new MethodAccessException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Arg_MethodAccessException_WithCaller"),
+                            caller,
+                            callee
+                        )
+                    );
                 }
             }
 #endif // FEATURE_LEGACYNETCF
-                                                           return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
         }
-
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static FileStream OpenWrite(String path) {
-            return new FileStream(path, FileMode.OpenOrCreate, 
-                                  FileAccess.Write, FileShare.None);
+        public static FileStream OpenWrite(String path)
+        {
+            return new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static String ReadAllText(String path)
@@ -794,7 +1009,7 @@ namespace System.IO {
             return InternalReadAllText(path, Encoding.UTF8, true);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static String ReadAllText(String path, Encoding encoding)
@@ -833,11 +1048,19 @@ namespace System.IO {
             Contract.Requires(encoding != null);
             Contract.Requires(path.Length > 0);
 
-            using (StreamReader sr = new StreamReader(path, encoding, true, StreamReader.DefaultBufferSize, checkHost))
+            using (
+                StreamReader sr = new StreamReader(
+                    path,
+                    encoding,
+                    true,
+                    StreamReader.DefaultBufferSize,
+                    checkHost
+                )
+            )
                 return sr.ReadToEnd();
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static void WriteAllText(String path, String contents)
@@ -851,7 +1074,7 @@ namespace System.IO {
             InternalWriteAllText(path, contents, StreamWriter.UTF8NoBOM, true);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static void WriteAllText(String path, String contents, Encoding encoding)
@@ -866,7 +1089,7 @@ namespace System.IO {
 
             InternalWriteAllText(path, contents, encoding, true);
         }
-        
+
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
@@ -884,17 +1107,30 @@ namespace System.IO {
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private static void InternalWriteAllText(String path, String contents, Encoding encoding, bool checkHost)
+        private static void InternalWriteAllText(
+            String path,
+            String contents,
+            Encoding encoding,
+            bool checkHost
+        )
         {
             Contract.Requires(path != null);
             Contract.Requires(encoding != null);
             Contract.Requires(path.Length > 0);
 
-            using (StreamWriter sw = new StreamWriter(path, false, encoding, StreamWriter.DefaultBufferSize, checkHost))
+            using (
+                StreamWriter sw = new StreamWriter(
+                    path,
+                    false,
+                    encoding,
+                    StreamWriter.DefaultBufferSize,
+                    checkHost
+                )
+            )
                 sw.Write(contents);
-        } 
+        }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static byte[] ReadAllBytes(String path)
@@ -910,23 +1146,36 @@ namespace System.IO {
             return InternalReadAllBytes(path, false);
         }
 
-        
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         private static byte[] InternalReadAllBytes(String path, bool checkHost)
         {
             byte[] bytes;
-            using(FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 
-                FileStream.DefaultBufferSize, FileOptions.None, Path.GetFileName(path), false, false, checkHost)) {
+            using (
+                FileStream fs = new FileStream(
+                    path,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read,
+                    FileStream.DefaultBufferSize,
+                    FileOptions.None,
+                    Path.GetFileName(path),
+                    false,
+                    false,
+                    checkHost
+                )
+            )
+            {
                 // Do a blocking read
                 int index = 0;
                 long fileLength = fs.Length;
                 if (fileLength > Int32.MaxValue)
                     throw new IOException(Environment.GetResourceString("IO.IO_FileTooLong2GB"));
-                int count = (int) fileLength;
+                int count = (int)fileLength;
                 bytes = new byte[count];
-                while(count > 0) {
+                while (count > 0)
+                {
                     int n = fs.Read(bytes, index, count);
                     if (n == 0)
                         __Error.EndOfFile();
@@ -937,13 +1186,16 @@ namespace System.IO {
             return bytes;
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static void WriteAllBytes(String path, byte[] bytes)
         {
             if (path == null)
-                throw new ArgumentNullException("path", Environment.GetResourceString("ArgumentNull_Path"));
+                throw new ArgumentNullException(
+                    "path",
+                    Environment.GetResourceString("ArgumentNull_Path")
+                );
             if (path.Length == 0)
                 throw new ArgumentException(Environment.GetResourceString("Argument_EmptyPath"));
             if (bytes == null)
@@ -959,7 +1211,10 @@ namespace System.IO {
         internal static void UnsafeWriteAllBytes(String path, byte[] bytes)
         {
             if (path == null)
-                throw new ArgumentNullException("path", Environment.GetResourceString("ArgumentNull_Path"));
+                throw new ArgumentNullException(
+                    "path",
+                    Environment.GetResourceString("ArgumentNull_Path")
+                );
             if (path.Length == 0)
                 throw new ArgumentException(Environment.GetResourceString("Argument_EmptyPath"));
             if (bytes == null)
@@ -978,8 +1233,20 @@ namespace System.IO {
             Contract.Requires(path.Length != 0);
             Contract.Requires(bytes != null);
 
-            using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Read,
-                    FileStream.DefaultBufferSize, FileOptions.None, Path.GetFileName(path), false, false, checkHost))
+            using (
+                FileStream fs = new FileStream(
+                    path,
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileShare.Read,
+                    FileStream.DefaultBufferSize,
+                    FileOptions.None,
+                    Path.GetFileName(path),
+                    false,
+                    false,
+                    checkHost
+                )
+            )
             {
                 fs.Write(bytes, 0, bytes.Length);
             }
@@ -1038,7 +1305,10 @@ namespace System.IO {
             if (path == null)
                 throw new ArgumentNullException("path");
             if (path.Length == 0)
-                throw new ArgumentException(Environment.GetResourceString("Argument_EmptyPath"), "path");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_EmptyPath"),
+                    "path"
+                );
             Contract.EndContractBlock();
 
             return ReadLinesIterator.CreateIterator(path, Encoding.UTF8);
@@ -1053,7 +1323,10 @@ namespace System.IO {
             if (encoding == null)
                 throw new ArgumentNullException("encoding");
             if (path.Length == 0)
-                throw new ArgumentException(Environment.GetResourceString("Argument_EmptyPath"), "path");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_EmptyPath"),
+                    "path"
+                );
             Contract.EndContractBlock();
 
             return ReadLinesIterator.CreateIterator(path, encoding);
@@ -1108,7 +1381,11 @@ namespace System.IO {
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static void WriteAllLines(String path, IEnumerable<String> contents, Encoding encoding)
+        public static void WriteAllLines(
+            String path,
+            IEnumerable<String> contents,
+            Encoding encoding
+        )
         {
             if (path == null)
                 throw new ArgumentNullException("path");
@@ -1196,7 +1473,11 @@ namespace System.IO {
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static void AppendAllLines(String path, IEnumerable<String> contents, Encoding encoding)
+        public static void AppendAllLines(
+            String path,
+            IEnumerable<String> contents,
+            Encoding encoding
+        )
         {
             if (path == null)
                 throw new ArgumentNullException("path");
@@ -1215,66 +1496,103 @@ namespace System.IO {
         // This method does work across volumes.
         //
         // The caller must have certain FileIOPermissions.  The caller must
-        // have Read and Write permission to 
-        // sourceFileName and Write 
+        // have Read and Write permission to
+        // sourceFileName and Write
         // permissions to destFileName.
-        // 
+        //
         [System.Security.SecuritySafeCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static void Move(String sourceFileName, String destFileName) {
+        public static void Move(String sourceFileName, String destFileName)
+        {
             InternalMove(sourceFileName, destFileName, true);
         }
 
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal static void UnsafeMove(String sourceFileName, String destFileName) {
+        internal static void UnsafeMove(String sourceFileName, String destFileName)
+        {
             InternalMove(sourceFileName, destFileName, false);
         }
 
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private static void InternalMove(String sourceFileName, String destFileName, bool checkHost) {
+        private static void InternalMove(String sourceFileName, String destFileName, bool checkHost)
+        {
             if (sourceFileName == null)
-                throw new ArgumentNullException("sourceFileName", Environment.GetResourceString("ArgumentNull_FileName"));
+                throw new ArgumentNullException(
+                    "sourceFileName",
+                    Environment.GetResourceString("ArgumentNull_FileName")
+                );
             if (destFileName == null)
-                throw new ArgumentNullException("destFileName", Environment.GetResourceString("ArgumentNull_FileName"));
+                throw new ArgumentNullException(
+                    "destFileName",
+                    Environment.GetResourceString("ArgumentNull_FileName")
+                );
             if (sourceFileName.Length == 0)
-                throw new ArgumentException(Environment.GetResourceString("Argument_EmptyFileName"), "sourceFileName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_EmptyFileName"),
+                    "sourceFileName"
+                );
             if (destFileName.Length == 0)
-                throw new ArgumentException(Environment.GetResourceString("Argument_EmptyFileName"), "destFileName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_EmptyFileName"),
+                    "destFileName"
+                );
             Contract.EndContractBlock();
-            
+
             String fullSourceFileName = Path.GetFullPathInternal(sourceFileName);
             String fullDestFileName = Path.GetFullPathInternal(destFileName);
 
 #if FEATURE_CORECLR
-            if (checkHost) {
-                FileSecurityState sourceState = new FileSecurityState(FileSecurityStateAccess.Write | FileSecurityStateAccess.Read, sourceFileName, fullSourceFileName);
-                FileSecurityState destState = new FileSecurityState(FileSecurityStateAccess.Write, destFileName, fullDestFileName);
+            if (checkHost)
+            {
+                FileSecurityState sourceState = new FileSecurityState(
+                    FileSecurityStateAccess.Write | FileSecurityStateAccess.Read,
+                    sourceFileName,
+                    fullSourceFileName
+                );
+                FileSecurityState destState = new FileSecurityState(
+                    FileSecurityStateAccess.Write,
+                    destFileName,
+                    fullDestFileName
+                );
                 sourceState.EnsureState();
                 destState.EnsureState();
             }
 #else
-            FileIOPermission.QuickDemand(FileIOPermissionAccess.Write | FileIOPermissionAccess.Read, fullSourceFileName, false, false);
-            FileIOPermission.QuickDemand(FileIOPermissionAccess.Write, fullDestFileName, false, false);
+            FileIOPermission.QuickDemand(
+                FileIOPermissionAccess.Write | FileIOPermissionAccess.Read,
+                fullSourceFileName,
+                false,
+                false
+            );
+            FileIOPermission.QuickDemand(
+                FileIOPermissionAccess.Write,
+                fullDestFileName,
+                false,
+                false
+            );
 #endif
 
             if (!InternalExists(fullSourceFileName))
                 __Error.WinIOError(Win32Native.ERROR_FILE_NOT_FOUND, fullSourceFileName);
-            
+
             if (!Win32Native.MoveFile(fullSourceFileName, fullDestFileName))
             {
                 __Error.WinIOError();
             }
         }
 
-
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static void Replace(String sourceFileName, String destinationFileName, String destinationBackupFileName)
+        public static void Replace(
+            String sourceFileName,
+            String destinationFileName,
+            String destinationBackupFileName
+        )
         {
             if (sourceFileName == null)
                 throw new ArgumentNullException("sourceFileName");
@@ -1287,7 +1605,12 @@ namespace System.IO {
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static void Replace(String sourceFileName, String destinationFileName, String destinationBackupFileName, bool ignoreMetadataErrors)
+        public static void Replace(
+            String sourceFileName,
+            String destinationFileName,
+            String destinationBackupFileName,
+            bool ignoreMetadataErrors
+        )
         {
             if (sourceFileName == null)
                 throw new ArgumentNullException("sourceFileName");
@@ -1295,18 +1618,28 @@ namespace System.IO {
                 throw new ArgumentNullException("destinationFileName");
             Contract.EndContractBlock();
 
-            InternalReplace(sourceFileName, destinationFileName, destinationBackupFileName, ignoreMetadataErrors);
+            InternalReplace(
+                sourceFileName,
+                destinationFileName,
+                destinationBackupFileName,
+                ignoreMetadataErrors
+            );
         }
 
         [System.Security.SecuritySafeCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private static void InternalReplace(String sourceFileName, String destinationFileName, String destinationBackupFileName, bool ignoreMetadataErrors)
+        private static void InternalReplace(
+            String sourceFileName,
+            String destinationFileName,
+            String destinationBackupFileName,
+            bool ignoreMetadataErrors
+        )
         {
             Contract.Requires(sourceFileName != null);
             Contract.Requires(destinationFileName != null);
 
-            // Write permission to all three files, read permission to source 
+            // Write permission to all three files, read permission to source
             // and dest.
             String fullSrcPath = Path.GetFullPathInternal(sourceFileName);
             String fullDestPath = Path.GetFullPathInternal(destinationFileName);
@@ -1315,9 +1648,21 @@ namespace System.IO {
                 fullBackupPath = Path.GetFullPathInternal(destinationBackupFileName);
 
 #if FEATURE_CORECLR
-            FileSecurityState sourceState = new FileSecurityState(FileSecurityStateAccess.Read | FileSecurityStateAccess.Write, sourceFileName, fullSrcPath);
-            FileSecurityState destState = new FileSecurityState(FileSecurityStateAccess.Read | FileSecurityStateAccess.Write, destinationFileName, fullDestPath);
-            FileSecurityState backupState = new FileSecurityState(FileSecurityStateAccess.Read | FileSecurityStateAccess.Write, destinationBackupFileName, fullBackupPath);
+            FileSecurityState sourceState = new FileSecurityState(
+                FileSecurityStateAccess.Read | FileSecurityStateAccess.Write,
+                sourceFileName,
+                fullSrcPath
+            );
+            FileSecurityState destState = new FileSecurityState(
+                FileSecurityStateAccess.Read | FileSecurityStateAccess.Write,
+                destinationFileName,
+                fullDestPath
+            );
+            FileSecurityState backupState = new FileSecurityState(
+                FileSecurityStateAccess.Read | FileSecurityStateAccess.Write,
+                destinationBackupFileName,
+                fullBackupPath
+            );
             sourceState.EnsureState();
             destState.EnsureState();
             backupState.EnsureState();
@@ -1334,7 +1679,10 @@ namespace System.IO {
             else
 #endif
             {
-                FileIOPermission perm = new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.Write, new String[] { fullSrcPath, fullDestPath });
+                FileIOPermission perm = new FileIOPermission(
+                    FileIOPermissionAccess.Read | FileIOPermissionAccess.Write,
+                    new String[] { fullSrcPath, fullDestPath }
+                );
                 if (fullBackupPath != null)
                     perm.AddPathList(FileIOPermissionAccess.Write, fullBackupPath);
                 perm.Demand();
@@ -1345,46 +1693,65 @@ namespace System.IO {
             if (ignoreMetadataErrors)
                 flags |= Win32Native.REPLACEFILE_IGNORE_MERGE_ERRORS;
 
-            bool r = Win32Native.ReplaceFile(fullDestPath, fullSrcPath, fullBackupPath, flags, IntPtr.Zero, IntPtr.Zero);
+            bool r = Win32Native.ReplaceFile(
+                fullDestPath,
+                fullSrcPath,
+                fullBackupPath,
+                flags,
+                IntPtr.Zero,
+                IntPtr.Zero
+            );
             if (!r)
                 __Error.WinIOError();
         }
 
-
         // Returns 0 on success, otherwise a Win32 error code.  Note that
         // classes should use -1 as the uninitialized state for dataInitialized.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal static int FillAttributeInfo(String path, ref Win32Native.WIN32_FILE_ATTRIBUTE_DATA data, bool tryagain, bool returnErrorOnNotFound)
+        internal static int FillAttributeInfo(
+            String path,
+            ref Win32Native.WIN32_FILE_ATTRIBUTE_DATA data,
+            bool tryagain,
+            bool returnErrorOnNotFound
+        )
         {
             int dataInitialised = 0;
             if (tryagain) // someone has a handle to the file open, or other error
             {
                 Win32Native.WIN32_FIND_DATA findData;
-                findData =  new Win32Native.WIN32_FIND_DATA (); 
-                
+                findData = new Win32Native.WIN32_FIND_DATA();
+
                 // Remove trialing slash since this can cause grief to FindFirstFile. You will get an invalid argument error
-                String tempPath = path.TrimEnd(new char [] {Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar});
+                String tempPath = path.TrimEnd(
+                    new char[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }
+                );
 
                 // For floppy drives, normally the OS will pop up a dialog saying
                 // there is no disk in drive A:, please insert one.  We don't want that.
                 // SetErrorMode will let us disable this, but we should set the error
                 // mode back, since this may have wide-ranging effects.
                 int oldMode = Win32Native.SetErrorMode(Win32Native.SEM_FAILCRITICALERRORS);
-                try {
+                try
+                {
                     bool error = false;
-                    SafeFindHandle handle = Win32Native.FindFirstFile(tempPath,findData);
-                    try {
-                        if (handle.IsInvalid) {
+                    SafeFindHandle handle = Win32Native.FindFirstFile(tempPath, findData);
+                    try
+                    {
+                        if (handle.IsInvalid)
+                        {
                             error = true;
                             dataInitialised = Marshal.GetLastWin32Error();
-                            
-                            if (dataInitialised == Win32Native.ERROR_FILE_NOT_FOUND ||
-                                dataInitialised == Win32Native.ERROR_PATH_NOT_FOUND ||
-                                dataInitialised == Win32Native.ERROR_NOT_READY)  // floppy device not ready
+
+                            if (
+                                dataInitialised == Win32Native.ERROR_FILE_NOT_FOUND
+                                || dataInitialised == Win32Native.ERROR_PATH_NOT_FOUND
+                                || dataInitialised == Win32Native.ERROR_NOT_READY
+                            ) // floppy device not ready
                             {
-                                if (!returnErrorOnNotFound) {
+                                if (!returnErrorOnNotFound)
+                                {
                                     // Return default value for backward compatibility
                                     dataInitialised = 0;
                                     data.fileAttributes = -1;
@@ -1393,21 +1760,29 @@ namespace System.IO {
                             return dataInitialised;
                         }
                     }
-                    finally {
+                    finally
+                    {
                         // Close the Win32 handle
-                        try {
+                        try
+                        {
                             handle.Close();
                         }
-                        catch {
-                            // if we're already returning an error, don't throw another one. 
-                            if (!error) {
-                                Contract.Assert(false, "File::FillAttributeInfo - FindClose failed!");
+                        catch
+                        {
+                            // if we're already returning an error, don't throw another one.
+                            if (!error)
+                            {
+                                Contract.Assert(
+                                    false,
+                                    "File::FillAttributeInfo - FindClose failed!"
+                                );
                                 __Error.WinIOError();
                             }
                         }
                     }
                 }
-                finally {
+                finally
+                {
                     Win32Native.SetErrorMode(oldMode);
                 }
 
@@ -1415,32 +1790,42 @@ namespace System.IO {
                 data.PopulateFrom(findData);
             }
             else
-            {   
-                                  
-                 // For floppy drives, normally the OS will pop up a dialog saying
+            {
+                // For floppy drives, normally the OS will pop up a dialog saying
                 // there is no disk in drive A:, please insert one.  We don't want that.
                 // SetErrorMode will let us disable this, but we should set the error
                 // mode back, since this may have wide-ranging effects.
                 bool success = false;
                 int oldMode = Win32Native.SetErrorMode(Win32Native.SEM_FAILCRITICALERRORS);
-                try {
-                    success = Win32Native.GetFileAttributesEx(path, GetFileExInfoStandard, ref data);
+                try
+                {
+                    success = Win32Native.GetFileAttributesEx(
+                        path,
+                        GetFileExInfoStandard,
+                        ref data
+                    );
                 }
-                finally {
+                finally
+                {
                     Win32Native.SetErrorMode(oldMode);
                 }
 
-                if (!success) {
+                if (!success)
+                {
                     dataInitialised = Marshal.GetLastWin32Error();
-                    if (dataInitialised != Win32Native.ERROR_FILE_NOT_FOUND &&
-                        dataInitialised != Win32Native.ERROR_PATH_NOT_FOUND &&
-                        dataInitialised != Win32Native.ERROR_NOT_READY)  // floppy device not ready
+                    if (
+                        dataInitialised != Win32Native.ERROR_FILE_NOT_FOUND
+                        && dataInitialised != Win32Native.ERROR_PATH_NOT_FOUND
+                        && dataInitialised != Win32Native.ERROR_NOT_READY
+                    ) // floppy device not ready
                     {
-                     // In case someone latched onto the file. Take the perf hit only for failure
+                        // In case someone latched onto the file. Take the perf hit only for failure
                         return FillAttributeInfo(path, ref data, true, returnErrorOnNotFound);
                     }
-                    else {
-                        if (!returnErrorOnNotFound) {
+                    else
+                    {
+                        if (!returnErrorOnNotFound)
+                        {
                             // Return default value for backward compbatibility
                             dataInitialised = 0;
                             data.fileAttributes = -1;
@@ -1452,35 +1837,41 @@ namespace System.IO {
             return dataInitialised;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private static FileStream OpenFile(String path, FileAccess access, out SafeFileHandle handle)
+        private static FileStream OpenFile(
+            String path,
+            FileAccess access,
+            out SafeFileHandle handle
+        )
         {
             FileStream fs = new FileStream(path, FileMode.Open, access, FileShare.ReadWrite, 1);
             handle = fs.SafeFileHandle;
 
-            if (handle.IsInvalid) {
+            if (handle.IsInvalid)
+            {
                 // Return a meaningful error, using the RELATIVE path to
                 // the file to avoid returning extra information to the caller.
-            
+
                 // NT5 oddity - when trying to open "C:\" as a FileStream,
                 // we usually get ERROR_PATH_NOT_FOUND from the OS.  We should
                 // probably be consistent w/ every other directory.
                 int hr = Marshal.GetLastWin32Error();
                 String FullPath = Path.GetFullPathInternal(path);
-                if (hr==__Error.ERROR_PATH_NOT_FOUND && FullPath.Equals(Directory.GetDirectoryRoot(FullPath)))
+                if (
+                    hr == __Error.ERROR_PATH_NOT_FOUND
+                    && FullPath.Equals(Directory.GetDirectoryRoot(FullPath))
+                )
                     hr = __Error.ERROR_ACCESS_DENIED;
-
 
                 __Error.WinIOError(hr, path);
             }
             return fs;
         }
 
-
-         // Defined in WinError.h
+        // Defined in WinError.h
         private const int ERROR_INVALID_PARAMETER = 87;
-        private const int ERROR_ACCESS_DENIED = 0x5;     
+        private const int ERROR_ACCESS_DENIED = 0x5;
     }
 }

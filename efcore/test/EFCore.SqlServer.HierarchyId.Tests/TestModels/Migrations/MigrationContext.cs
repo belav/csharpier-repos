@@ -16,17 +16,16 @@ internal abstract class MigrationContext<TEntity1, TEntity2> : DbContext
 
     private Type _thisType;
 
-    protected Type ThisType
-        => _thisType ??= GetType();
+    protected Type ThisType => _thisType ??= GetType();
 
     public DbSet<TEntity1> TestModels { get; set; }
     public DbSet<TEntity2> ConvertedTestModels { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options
-            .UseSqlServer(
-                @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=HierarchyIdMigrationTests",
-                x => x.UseHierarchyId());
+    protected override void OnConfiguring(DbContextOptionsBuilder options) =>
+        options.UseSqlServer(
+            @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=HierarchyIdMigrationTests",
+            x => x.UseHierarchyId()
+        );
 
     /// <summary>
     ///     Removes annotations from the model that can

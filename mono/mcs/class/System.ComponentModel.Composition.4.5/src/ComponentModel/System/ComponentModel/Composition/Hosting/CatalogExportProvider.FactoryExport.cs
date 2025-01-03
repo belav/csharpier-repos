@@ -18,11 +18,16 @@ namespace System.ComponentModel.Composition.Hosting
             private ExportDefinition _factoryExportDefinition;
             private FactoryExportPartDefinition _factoryExportPartDefinition;
 
-            public FactoryExport(ComposablePartDefinition partDefinition, ExportDefinition exportDefinition)
+            public FactoryExport(
+                ComposablePartDefinition partDefinition,
+                ExportDefinition exportDefinition
+            )
             {
                 this._partDefinition = partDefinition;
                 this._exportDefinition = exportDefinition;
-                this._factoryExportDefinition = new PartCreatorExportDefinition(this._exportDefinition);
+                this._factoryExportDefinition = new PartCreatorExportDefinition(
+                    this._exportDefinition
+                );
             }
 
             public override ExportDefinition Definition
@@ -41,18 +46,12 @@ namespace System.ComponentModel.Composition.Hosting
 
             protected ComposablePartDefinition UnderlyingPartDefinition
             {
-                get
-                {
-                    return this._partDefinition;
-                }
+                get { return this._partDefinition; }
             }
 
             protected ExportDefinition UnderlyingExportDefinition
             {
-                get
-                {
-                    return this._exportDefinition;
-                }
+                get { return this._exportDefinition; }
             }
 
             public abstract Export CreateExportProduct();
@@ -117,15 +116,22 @@ namespace System.ComponentModel.Composition.Hosting
                 {
                     if (definition != this._definition.FactoryExportDefinition)
                     {
-                        throw ExceptionBuilder.CreateExportDefinitionNotOnThisComposablePart("definition");
+                        throw ExceptionBuilder.CreateExportDefinitionNotOnThisComposablePart(
+                            "definition"
+                        );
                     }
 
                     return this._export.Value;
                 }
 
-                public override void SetImport(ImportDefinition definition, IEnumerable<Export> exports)
+                public override void SetImport(
+                    ImportDefinition definition,
+                    IEnumerable<Export> exports
+                )
                 {
-                    throw ExceptionBuilder.CreateImportDefinitionNotOnThisComposablePart("definition");
+                    throw ExceptionBuilder.CreateImportDefinitionNotOnThisComposablePart(
+                        "definition"
+                    );
                 }
 
                 public void Dispose()

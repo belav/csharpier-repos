@@ -18,9 +18,7 @@ public class SpaOptions
     /// <summary>
     /// Constructs a new instance of <see cref="SpaOptions"/>.
     /// </summary>
-    public SpaOptions()
-    {
-    }
+    public SpaOptions() { }
 
     /// <summary>
     /// Constructs a new instance of <see cref="SpaOptions"/>.
@@ -46,7 +44,9 @@ public class SpaOptions
         {
             if (string.IsNullOrEmpty(value.Value))
             {
-                throw new ArgumentException($"The value for {nameof(DefaultPage)} cannot be null or empty.");
+                throw new ArgumentException(
+                    $"The value for {nameof(DefaultPage)} cannot be null or empty."
+                );
             }
 
             _defaultPage = value;
@@ -88,7 +88,9 @@ public class SpaOptions
         {
             if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentException($"The value for {nameof(PackageManagerCommand)} cannot be null or empty.");
+                throw new ArgumentException(
+                    $"The value for {nameof(PackageManagerCommand)} cannot be null or empty."
+                );
             }
 
             _packageManagerCommand = value;

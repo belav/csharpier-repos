@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis
 {
     internal sealed class ArrayBuilder<T>
     {
-        private static readonly ObjectPool<ArrayBuilder<T>> s_poolInstance = new ObjectPool<ArrayBuilder<T>>(() => new ArrayBuilder<T>(), 16);
+        private static readonly ObjectPool<ArrayBuilder<T>> s_poolInstance = new ObjectPool<
+            ArrayBuilder<T>
+        >(() => new ArrayBuilder<T>(), 16);
         private static readonly ReadOnlyCollection<T> s_empty = new ReadOnlyCollection<T>(new T[0]);
 
         private readonly List<T> _items;

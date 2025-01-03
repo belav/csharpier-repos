@@ -6,16 +6,19 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Xml.Serialization
 {
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue
+    )]
     public class SoapAttributeAttribute : System.Attribute
     {
         private string? _attributeName;
         private string? _ns;
         private string? _dataType;
 
-        public SoapAttributeAttribute()
-        {
-        }
+        public SoapAttributeAttribute() { }
 
         public SoapAttributeAttribute(string attributeName)
         {

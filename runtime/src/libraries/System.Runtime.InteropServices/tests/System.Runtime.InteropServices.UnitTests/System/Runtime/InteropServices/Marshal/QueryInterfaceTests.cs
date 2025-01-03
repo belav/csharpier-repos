@@ -22,7 +22,12 @@ namespace System.Runtime.InteropServices.Tests
         [Theory]
         [MemberData(nameof(QueryInterface_ValidInterface_TestData))]
         [SkipOnMono("ComWrappers are not supported on Mono")]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/76005", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot), nameof(PlatformDetection.IsNotWindows))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/76005",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot),
+            nameof(PlatformDetection.IsNotWindows)
+        )]
         public void QueryInterface_ValidInterface_Success(object o, string iidString)
         {
             var cw = new ComWrappersImpl();
@@ -56,7 +61,12 @@ namespace System.Runtime.InteropServices.Tests
         [Theory]
         [MemberData(nameof(QueryInterface_NoSuchInterface_TestData))]
         [SkipOnMono("ComWrappers are not supported on Mono")]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/76005", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot), nameof(PlatformDetection.IsNotWindows))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/76005",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot),
+            nameof(PlatformDetection.IsNotWindows)
+        )]
         public void QueryInterface_NoSuchInterface_Success(object o, string iidString)
         {
             var cw = new ComWrappersImpl();
@@ -78,7 +88,10 @@ namespace System.Runtime.InteropServices.Tests
         public void QueryInterface_ZeroPointer_ThrowsArgumentNullException()
         {
             Guid iid = Guid.Empty;
-            AssertExtensions.Throws<ArgumentNullException>("pUnk", () => Marshal.QueryInterface(IntPtr.Zero, in iid, out IntPtr ppv));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pUnk",
+                () => Marshal.QueryInterface(IntPtr.Zero, in iid, out IntPtr ppv)
+            );
         }
     }
 }

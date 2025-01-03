@@ -24,9 +24,18 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Equal(expectedEvent.GetRaiseMethod(), attribute.GetRaiseMethod());
             Assert.Equal(expectedEvent.GetRemoveMethod(), attribute.GetRemoveMethod());
 
-            Assert.Equal(expectedEvent.GetCustomAttributes(typeof(ExcludeFromCodeCoverageAttribute), true), attribute.GetCustomAttributes(typeof(ExcludeFromCodeCoverageAttribute), true));
-            Assert.Equal(expectedEvent.GetCustomAttributes(true), attribute.GetCustomAttributes(true));
-            Assert.Equal(expectedEvent.IsDefined(typeof(ExcludeFromCodeCoverageAttribute)), attribute.IsDefined(typeof(ExcludeFromCodeCoverageAttribute)));
+            Assert.Equal(
+                expectedEvent.GetCustomAttributes(typeof(ExcludeFromCodeCoverageAttribute), true),
+                attribute.GetCustomAttributes(typeof(ExcludeFromCodeCoverageAttribute), true)
+            );
+            Assert.Equal(
+                expectedEvent.GetCustomAttributes(true),
+                attribute.GetCustomAttributes(true)
+            );
+            Assert.Equal(
+                expectedEvent.IsDefined(typeof(ExcludeFromCodeCoverageAttribute)),
+                attribute.IsDefined(typeof(ExcludeFromCodeCoverageAttribute))
+            );
         }
 
         [Fact]
@@ -38,7 +47,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Ctor_NullEventName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("name", () => new ComAwareEventInfo(typeof(NonComObject), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => new ComAwareEventInfo(typeof(NonComObject), null)
+            );
         }
 
         [Fact]
@@ -55,14 +67,22 @@ namespace System.Runtime.InteropServices.Tests
         public void Methods_NoSuchEvent_ThrowsNullReferenceException()
         {
             var attribute = new ComAwareEventInfo(typeof(NonComObject), string.Empty);
-            Assert.Throws<NullReferenceException>(() => attribute.AddEventHandler(new object(), new EventHandler(EventHandler)));
-            Assert.Throws<NullReferenceException>(() => attribute.RemoveEventHandler(new object(), new EventHandler(EventHandler)));
+            Assert.Throws<NullReferenceException>(
+                () => attribute.AddEventHandler(new object(), new EventHandler(EventHandler))
+            );
+            Assert.Throws<NullReferenceException>(
+                () => attribute.RemoveEventHandler(new object(), new EventHandler(EventHandler))
+            );
             Assert.Throws<NullReferenceException>(() => attribute.GetAddMethod(false));
             Assert.Throws<NullReferenceException>(() => attribute.GetRaiseMethod(false));
             Assert.Throws<NullReferenceException>(() => attribute.GetRemoveMethod(false));
-            Assert.Throws<NullReferenceException>(() => attribute.GetCustomAttributes(typeof(ComVisibleAttribute), false));
+            Assert.Throws<NullReferenceException>(
+                () => attribute.GetCustomAttributes(typeof(ComVisibleAttribute), false)
+            );
             Assert.Throws<NullReferenceException>(() => attribute.GetCustomAttributes(false));
-            Assert.Throws<NullReferenceException>(() => attribute.IsDefined(typeof(ComVisibleAttribute), false));
+            Assert.Throws<NullReferenceException>(
+                () => attribute.IsDefined(typeof(ComVisibleAttribute), false)
+            );
         }
 
         [Fact]
@@ -85,7 +105,10 @@ namespace System.Runtime.InteropServices.Tests
         public void AddEventHandler_NullTarget_ThrowsArgumentNullException()
         {
             var attribute = new ComAwareEventInfo(typeof(NonComObject), nameof(NonComObject.Event));
-            AssertExtensions.Throws<ArgumentNullException>("o", () => attribute.AddEventHandler(null, new EventHandler(EventHandler)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "o",
+                () => attribute.AddEventHandler(null, new EventHandler(EventHandler))
+            );
         }
 
         public bool CalledEventHandler { get; set; }

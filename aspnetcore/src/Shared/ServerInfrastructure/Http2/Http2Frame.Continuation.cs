@@ -18,7 +18,9 @@ internal partial class Http2Frame
         set => Flags = (byte)value;
     }
 
-    public bool ContinuationEndHeaders => (ContinuationFlags & Http2ContinuationFrameFlags.END_HEADERS) == Http2ContinuationFrameFlags.END_HEADERS;
+    public bool ContinuationEndHeaders =>
+        (ContinuationFlags & Http2ContinuationFrameFlags.END_HEADERS)
+        == Http2ContinuationFrameFlags.END_HEADERS;
 
     public void PrepareContinuation(Http2ContinuationFrameFlags flags, int streamId)
     {

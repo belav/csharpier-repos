@@ -80,11 +80,36 @@ namespace System.Reflection.Tests
 
         public static IEnumerable<object[]> AddRemove_TestData()
         {
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.PublicEvent), new BaseClass() };
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.PublicStaticEvent), null };
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.PublicVirtualEvent), new BaseClass() };
-            yield return new object[] { typeof(SubClass), nameof(SubClass.EventPublicNew), new SubClass() };
-            yield return new object[] { typeof(SubClass), nameof(SubClass.PublicEvent), new SubClass() };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.PublicEvent),
+                new BaseClass(),
+            };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.PublicStaticEvent),
+                null,
+            };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.PublicVirtualEvent),
+                new BaseClass(),
+            };
+            yield return new object[]
+            {
+                typeof(SubClass),
+                nameof(SubClass.EventPublicNew),
+                new SubClass(),
+            };
+            yield return new object[]
+            {
+                typeof(SubClass),
+                nameof(SubClass.PublicEvent),
+                new SubClass(),
+            };
         }
 
         [Theory]
@@ -100,16 +125,43 @@ namespace System.Reflection.Tests
         public static IEnumerable<object[]> AddEventHandler_Invalid_TestData()
         {
             // Target is null
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.PublicEvent), null, new EventHandler(ObjectEventArgsHandler), typeof(TargetException) };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.PublicEvent),
+                null,
+                new EventHandler(ObjectEventArgsHandler),
+                typeof(TargetException),
+            };
 
             // Handler is incorrect
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.PublicEvent), "hello", new EventHandler(ObjectEventArgsHandler), typeof(TargetException) };
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.PublicEvent), new BaseClass(), new ObjectDelegate(ObjectHandler), typeof(ArgumentException) };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.PublicEvent),
+                "hello",
+                new EventHandler(ObjectEventArgsHandler),
+                typeof(TargetException),
+            };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.PublicEvent),
+                new BaseClass(),
+                new ObjectDelegate(ObjectHandler),
+                typeof(ArgumentException),
+            };
         }
 
         [Theory]
         [MemberData(nameof(AddEventHandler_Invalid_TestData))]
-        public void AddEventHandler_Invalid(Type type, string name, object target, Delegate handler, Type exceptionType)
+        public void AddEventHandler_Invalid(
+            Type type,
+            string name,
+            object target,
+            Delegate handler,
+            Type exceptionType
+        )
         {
             EventInfo eventInfo = GetEventInfo(type, name);
             Assert.Throws(exceptionType, () => eventInfo.AddEventHandler(target, handler));
@@ -118,29 +170,85 @@ namespace System.Reflection.Tests
         public static IEnumerable<object[]> RemoveEventHandler_Invalid_TestData()
         {
             // Target is null
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.PublicEvent), new BaseClass(), new EventHandler(ObjectEventArgsHandler), null, new EventHandler(ObjectEventArgsHandler), typeof(TargetException) };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.PublicEvent),
+                new BaseClass(),
+                new EventHandler(ObjectEventArgsHandler),
+                null,
+                new EventHandler(ObjectEventArgsHandler),
+                typeof(TargetException),
+            };
 
             // Target is incorrect
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.PublicEvent), new BaseClass(), new EventHandler(ObjectEventArgsHandler), "hello", new EventHandler(ObjectEventArgsHandler), typeof(TargetException) };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.PublicEvent),
+                new BaseClass(),
+                new EventHandler(ObjectEventArgsHandler),
+                "hello",
+                new EventHandler(ObjectEventArgsHandler),
+                typeof(TargetException),
+            };
 
             // Handler is incorrect
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.PublicEvent), new BaseClass(), new EventHandler(ObjectEventArgsHandler), new BaseClass(), new ObjectDelegate(ObjectHandler), typeof(ArgumentException) };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.PublicEvent),
+                new BaseClass(),
+                new EventHandler(ObjectEventArgsHandler),
+                new BaseClass(),
+                new ObjectDelegate(ObjectHandler),
+                typeof(ArgumentException),
+            };
         }
 
         [Theory]
         [MemberData(nameof(RemoveEventHandler_Invalid_TestData))]
-        public void RemovEventHandler_Invalid(Type type, string name, object addTarget, Delegate addHandler, object removeTarget, Delegate removeHandler, Type exceptionType)
+        public void RemovEventHandler_Invalid(
+            Type type,
+            string name,
+            object addTarget,
+            Delegate addHandler,
+            object removeTarget,
+            Delegate removeHandler,
+            Type exceptionType
+        )
         {
             EventInfo eventInfo = GetEventInfo(type, name);
             eventInfo.AddEventHandler(addTarget, addHandler);
 
-            Assert.Throws(exceptionType, () => eventInfo.RemoveEventHandler(removeTarget, removeHandler));
+            Assert.Throws(
+                exceptionType,
+                () => eventInfo.RemoveEventHandler(removeTarget, removeHandler)
+            );
         }
 
         [Theory]
-        [InlineData(typeof(BaseClass), nameof(BaseClass.PublicEvent), typeof(BaseClass), nameof(BaseClass.PublicEvent), true)]
-        [InlineData(typeof(BaseClass), nameof(BaseClass.PublicEvent), typeof(SubClass), nameof(SubClass.PublicEvent), false)]
-        [InlineData(typeof(BaseClass), nameof(BaseClass.PublicEvent), typeof(BaseClass), nameof(BaseClass.PublicStaticEvent), false)]
+        [InlineData(
+            typeof(BaseClass),
+            nameof(BaseClass.PublicEvent),
+            typeof(BaseClass),
+            nameof(BaseClass.PublicEvent),
+            true
+        )]
+        [InlineData(
+            typeof(BaseClass),
+            nameof(BaseClass.PublicEvent),
+            typeof(SubClass),
+            nameof(SubClass.PublicEvent),
+            false
+        )]
+        [InlineData(
+            typeof(BaseClass),
+            nameof(BaseClass.PublicEvent),
+            typeof(BaseClass),
+            nameof(BaseClass.PublicStaticEvent),
+            false
+        )]
         public void EqualsTest(Type type1, string name1, Type type2, string name2, bool expected)
         {
             EventInfo eventInfo1 = GetEventInfo(type1, name1);
@@ -177,7 +285,9 @@ namespace System.Reflection.Tests
         }
 
         private static void ObjectEventArgsHandler(object o, EventArgs e) { }
+
         private static void ObjectHandler(object o) { }
+
         public delegate void ObjectDelegate(object o);
 
         private static EventInfo GetEventInfo(Type declaringType, string eventName)

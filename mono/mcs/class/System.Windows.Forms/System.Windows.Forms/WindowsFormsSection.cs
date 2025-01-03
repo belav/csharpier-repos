@@ -25,27 +25,29 @@ using System.Configuration;
 
 namespace System.Windows.Forms
 {
-	public sealed class WindowsFormsSection : ConfigurationSection
-	{
-		private ConfigurationPropertyCollection properties;
-		private ConfigurationProperty jit_debugging;
+    public sealed class WindowsFormsSection : ConfigurationSection
+    {
+        private ConfigurationPropertyCollection properties;
+        private ConfigurationProperty jit_debugging;
 
-		public WindowsFormsSection ()
-		{
-			properties = new ConfigurationPropertyCollection();
-			jit_debugging = new ConfigurationProperty ("jitDebugging", typeof (bool), false);
+        public WindowsFormsSection()
+        {
+            properties = new ConfigurationPropertyCollection();
+            jit_debugging = new ConfigurationProperty("jitDebugging", typeof(bool), false);
 
-			properties.Add (jit_debugging);
-		}
+            properties.Add(jit_debugging);
+        }
 
-		[ConfigurationProperty("jitDebugging", DefaultValue = "False")]
-		public bool JitDebugging {
-			get { return (bool)base[jit_debugging]; }
-			set { base[jit_debugging] = value; }
-		}
+        [ConfigurationProperty("jitDebugging", DefaultValue = "False")]
+        public bool JitDebugging
+        {
+            get { return (bool)base[jit_debugging]; }
+            set { base[jit_debugging] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

@@ -11,6 +11,11 @@ namespace Microsoft.CodeAnalysis.Formatting
     internal interface INewDocumentFormattingProvider
     {
         /// <inheritdoc cref="INewDocumentFormattingService.FormatNewDocumentAsync(Document, Document, CodeCleanupOptions, CancellationToken)"/>
-        Task<Document> FormatNewDocumentAsync(Document document, Document? hintDocument, CodeCleanupOptions options, CancellationToken cancellationToken);
+        Task<Document> FormatNewDocumentAsync(
+            Document document,
+            Document? hintDocument,
+            CodeCleanupOptions options,
+            CancellationToken cancellationToken
+        );
     }
 }

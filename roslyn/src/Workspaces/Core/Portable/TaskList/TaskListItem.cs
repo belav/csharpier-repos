@@ -17,4 +17,5 @@ internal readonly record struct TaskListItem(
     [property: DataMember(Order = 1)] string Message,
     [property: DataMember(Order = 2)] DocumentId DocumentId,
     [property: DataMember(Order = 3)] FileLinePositionSpan Span,
-    [property: DataMember(Order = 4)] FileLinePositionSpan MappedSpan);
+    [property: DataMember(Order = 4)] FileLinePositionSpan MappedSpan
+);

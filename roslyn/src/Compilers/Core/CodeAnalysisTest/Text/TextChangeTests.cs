@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var text = SourceText.From("Hello World");
             var newText = text.WithChanges(
                 new TextChange(new TextSpan(0, 5), "Halo"),
-                new TextChange(new TextSpan(6, 5), "Universe"));
+                new TextChange(new TextSpan(6, 5), "Universe")
+            );
 
             Assert.Equal("Halo Universe", newText.ToString());
         }
@@ -98,7 +99,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var changes = new[]
             {
                 new TextChange(new TextSpan(0, 5), "Halo"),
-                new TextChange(new TextSpan(3, 5), "Universe")
+                new TextChange(new TextSpan(3, 5), "Universe"),
             };
 
             Assert.Throws<ArgumentException>(() => text.WithChanges(changes));
@@ -111,7 +112,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var changes = new[]
             {
                 new TextChange(new TextSpan(6, 5), "Universe"),
-                new TextChange(new TextSpan(0, 5), "Halo")
+                new TextChange(new TextSpan(0, 5), "Halo"),
             };
 
             var newText = text.WithChanges(changes);
@@ -125,7 +126,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var changes = new[]
             {
                 new TextChange(new TextSpan(6, 7), "Universe"),
-                new TextChange(new TextSpan(0, 5), "Halo")
+                new TextChange(new TextSpan(0, 5), "Halo"),
             };
             Assert.ThrowsAny<ArgumentException>(() =>
             {
@@ -140,7 +141,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var newText = text.WithChanges(
                 new TextChange(new TextSpan(6, 0), "Super "),
-                new TextChange(new TextSpan(6, 0), "Spectacular "));
+                new TextChange(new TextSpan(6, 0), "Spectacular ")
+            );
 
             Assert.Equal("Hello Super Spectacular World", newText.ToString());
         }
@@ -152,7 +154,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var newText = text.WithChanges(
                 new TextChange(new TextSpan(6, 0), "Super "),
-                new TextChange(new TextSpan(6, 2), "Vu"));
+                new TextChange(new TextSpan(6, 2), "Vu")
+            );
 
             Assert.Equal("Hello Super Vurld", newText.ToString());
         }
@@ -164,7 +167,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var changes = new[]
             {
                 new TextChange(new TextSpan(6, 2), "Vu"),
-                new TextChange(new TextSpan(6, 0), "Super ")
+                new TextChange(new TextSpan(6, 0), "Super "),
             };
 
             var newText = text.WithChanges(changes);
@@ -178,7 +181,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var newText = text.WithChanges(
                 new TextChange(new TextSpan(4, 1), string.Empty),
-                new TextChange(new TextSpan(5, 1), string.Empty));
+                new TextChange(new TextSpan(5, 1), string.Empty)
+            );
 
             Assert.Equal("HellWorld", newText.ToString());
         }
@@ -186,10 +190,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestSubTextAfterMultipleChanges()
         {
-            var text = SourceText.From("Hello World", Encoding.Unicode, SourceHashAlgorithms.Default);
+            var text = SourceText.From(
+                "Hello World",
+                Encoding.Unicode,
+                SourceHashAlgorithms.Default
+            );
             var newText = text.WithChanges(
                 new TextChange(new TextSpan(4, 1), string.Empty),
-                new TextChange(new TextSpan(6, 5), "Universe"));
+                new TextChange(new TextSpan(6, 5), "Universe")
+            );
 
             var subText = newText.GetSubText(new TextSpan(3, 4));
             Assert.Equal("l Un", subText.ToString());
@@ -202,8 +211,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void TestLinesInChangedText()
         {
             var text = SourceText.From("Hello World");
-            var newText = text.WithChanges(
-                new TextChange(new TextSpan(4, 1), string.Empty));
+            var newText = text.WithChanges(new TextChange(new TextSpan(4, 1), string.Empty));
 
             Assert.Equal(1, newText.Lines.Count);
         }
@@ -212,28 +220,36 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void TestCopyTo()
         {
             var text = SourceText.From("Hello World");
-            var newText = text.WithChanges(
-                new TextChange(new TextSpan(6, 5), "Universe"));
+            var newText = text.WithChanges(new TextChange(new TextSpan(6, 5), "Universe"));
 
             var destination = new char[32];
-            newText.CopyTo(0, destination, 0, 0);   //should copy nothing and not throw.
+            newText.CopyTo(0, destination, 0, 0); //should copy nothing and not throw.
             Assert.Throws<ArgumentOutOfRangeException>(() => newText.CopyTo(-1, destination, 0, 2));
             Assert.Throws<ArgumentOutOfRangeException>(() => newText.CopyTo(0, destination, -1, 2));
             Assert.Throws<ArgumentOutOfRangeException>(() => newText.CopyTo(0, destination, 0, -1));
             Assert.Throws<ArgumentNullException>(() => newText.CopyTo(0, null, 0, 2));
-            Assert.Throws<ArgumentOutOfRangeException>(() => newText.CopyTo(newText.Length - 1, destination, 0, 2));
-            Assert.Throws<ArgumentOutOfRangeException>(() => newText.CopyTo(0, destination, destination.Length - 1, 2));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => newText.CopyTo(newText.Length - 1, destination, 0, 2)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => newText.CopyTo(0, destination, destination.Length - 1, 2)
+            );
         }
 
         [Fact]
         public void TestGetTextChangesToChangedText()
         {
-            var text = SourceText.From(new string('.', 2048), Encoding.Unicode, SourceHashAlgorithms.Default); // start bigger than GetText() copy buffer
-            var changes = new TextChange[] {
+            var text = SourceText.From(
+                new string('.', 2048),
+                Encoding.Unicode,
+                SourceHashAlgorithms.Default
+            ); // start bigger than GetText() copy buffer
+            var changes = new TextChange[]
+            {
                 new TextChange(new TextSpan(0, 1), "[1]"),
                 new TextChange(new TextSpan(1, 1), "[2]"),
                 new TextChange(new TextSpan(5, 0), "[3]"),
-                new TextChange(new TextSpan(25, 2), "[4]")
+                new TextChange(new TextSpan(25, 2), "[4]"),
             };
 
             var newText = text.WithChanges(changes);
@@ -265,80 +281,105 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
         }
 
-        private static void AssertChangedTextLinesHelper(string originalText, params TextChange[] changes)
+        private static void AssertChangedTextLinesHelper(
+            string originalText,
+            params TextChange[] changes
+        )
         {
             var changedText = SourceText.From(originalText).WithChanges(changes);
-            Assert.Equal(SourceText.From(changedText.ToString()).Lines, changedText.Lines, new TextLineEqualityComparer());
+            Assert.Equal(
+                SourceText.From(changedText.ToString()).Lines,
+                changedText.Lines,
+                new TextLineEqualityComparer()
+            );
         }
 
         [Fact]
         public void TestOptimizedSourceTextLinesSimpleSubstitution()
         {
-            AssertChangedTextLinesHelper("Line1\r\nLine2\r\nLine3",
+            AssertChangedTextLinesHelper(
+                "Line1\r\nLine2\r\nLine3",
                 new TextChange(new TextSpan(8, 2), "IN"),
-                new TextChange(new TextSpan(15, 2), "IN"));
+                new TextChange(new TextSpan(15, 2), "IN")
+            );
         }
 
         [Fact]
         public void TestOptimizedSourceTextLinesSubstitutionWithLongerText()
         {
-            AssertChangedTextLinesHelper("Line1\r\nLine2\r\nLine3",
+            AssertChangedTextLinesHelper(
+                "Line1\r\nLine2\r\nLine3",
                 new TextChange(new TextSpan(8, 2), new string('a', 10)),
-                new TextChange(new TextSpan(15, 2), new string('a', 10)));
+                new TextChange(new TextSpan(15, 2), new string('a', 10))
+            );
         }
 
         [Fact]
         public void TestOptimizedSourceTextLinesInsertCrLf()
         {
-            AssertChangedTextLinesHelper("Line1\r\nLine2\r\nLine3",
+            AssertChangedTextLinesHelper(
+                "Line1\r\nLine2\r\nLine3",
                 new TextChange(new TextSpan(8, 2), "\r\n"),
-                new TextChange(new TextSpan(15, 2), "\r\n"));
+                new TextChange(new TextSpan(15, 2), "\r\n")
+            );
         }
 
         [Fact]
         public void TestOptimizedSourceTextLinesSimpleCr()
         {
-            AssertChangedTextLinesHelper("Line1\rLine2\rLine3",
+            AssertChangedTextLinesHelper(
+                "Line1\rLine2\rLine3",
                 new TextChange(new TextSpan(6, 0), "aa\r"),
-                new TextChange(new TextSpan(11, 0), "aa\r"));
+                new TextChange(new TextSpan(11, 0), "aa\r")
+            );
         }
 
         [Fact]
         public void TestOptimizedSourceTextLinesSimpleLf()
         {
-            AssertChangedTextLinesHelper("Line1\nLine2\nLine3",
+            AssertChangedTextLinesHelper(
+                "Line1\nLine2\nLine3",
                 new TextChange(new TextSpan(6, 0), "aa\n"),
-                new TextChange(new TextSpan(11, 0), "aa\n"));
+                new TextChange(new TextSpan(11, 0), "aa\n")
+            );
         }
 
         [Fact]
         public void TestOptimizedSourceTextLinesRemoveCrLf()
         {
-            AssertChangedTextLinesHelper("Line1\r\nLine2\r\nLine3",
+            AssertChangedTextLinesHelper(
+                "Line1\r\nLine2\r\nLine3",
                 new TextChange(new TextSpan(4, 4), "aaaaaa"),
-                new TextChange(new TextSpan(15, 4), "aaaaaa"));
+                new TextChange(new TextSpan(15, 4), "aaaaaa")
+            );
         }
 
         [Fact]
         public void TestOptimizedSourceTextLinesBrakeCrLf()
         {
-            AssertChangedTextLinesHelper("Test\r\nMessage",
-                new TextChange(new TextSpan(5, 0), "aaaaaa"));
+            AssertChangedTextLinesHelper(
+                "Test\r\nMessage",
+                new TextChange(new TextSpan(5, 0), "aaaaaa")
+            );
         }
 
         [Fact]
         public void TestOptimizedSourceTextLinesBrakeCrLfWithLfPrefixedAndCrSuffixed()
         {
-            AssertChangedTextLinesHelper("Test\r\nMessage",
-                new TextChange(new TextSpan(5, 0), "\naaaaaa\r"));
+            AssertChangedTextLinesHelper(
+                "Test\r\nMessage",
+                new TextChange(new TextSpan(5, 0), "\naaaaaa\r")
+            );
         }
 
         [Fact]
         public void TestOptimizedSourceTextLineInsertAtEnd()
         {
-            AssertChangedTextLinesHelper("Line1\r\nLine2\r\nLine3\r\n",
+            AssertChangedTextLinesHelper(
+                "Line1\r\nLine2\r\nLine3\r\n",
                 new TextChange(new TextSpan(21, 0), "Line4\r\n"),
-                new TextChange(new TextSpan(21, 0), "Line5\r\n"));
+                new TextChange(new TextSpan(21, 0), "Line5\r\n")
+            );
         }
 
         [Fact]
@@ -500,8 +541,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             {
                 segs = t.Segments.Length;
                 t = t.Replace(t.Length, 0, "c");
-            }
-            while (t.Segments.Length > segs);
+            } while (t.Segments.Length > segs);
 
             // this should compact all the 'c' segments into one
             Assert.Equal(3, t.Segments.Length);
@@ -529,11 +569,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             do
             {
                 segs = t.Segments.Length;
-                t = t.Replace(t.Length, 0, c);  // add c's that are the same segment size as the a's and b's
-            }
-            while (t.Segments.Length > segs);
+                t = t.Replace(t.Length, 0, c); // add c's that are the same segment size as the a's and b's
+            } while (t.Segments.Length > segs);
 
-            // this should compact all the segments since they all were the same size and 
+            // this should compact all the segments since they all were the same size and
             // compress at the same time
             Assert.Equal(0, t.Segments.Length);
         }
@@ -587,7 +626,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         private SourceText CreateLargeText(params char[][] chunks)
         {
-            return new LargeText(ImmutableArray.Create(chunks), Encoding.UTF8, default(ImmutableArray<byte>), SourceHashAlgorithms.Default, default(ImmutableArray<byte>));
+            return new LargeText(
+                ImmutableArray.Create(chunks),
+                Encoding.UTF8,
+                default(ImmutableArray<byte>),
+                SourceHashAlgorithms.Default,
+                default(ImmutableArray<byte>)
+            );
         }
 
         private ImmutableArray<char[]> GetChunks(SourceText text)
@@ -595,7 +640,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var largeText = text as LargeText;
             if (largeText != null)
             {
-                var chunkField = text.GetType().GetField("_chunks", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                var chunkField = text.GetType()
+                    .GetField(
+                        "_chunks",
+                        System.Reflection.BindingFlags.Instance
+                            | System.Reflection.BindingFlags.NonPublic
+                    );
                 return (ImmutableArray<char[]>)chunkField.GetValue(text);
             }
             else
@@ -612,7 +662,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var largeText = CreateLargeText(chunk1);
 
             // chunks are considered small because they fit within the buffer (which is the expected length for this test)
-            var writer = new LargeTextWriter(largeText.Encoding, largeText.ChecksumAlgorithm, chunk1.Length * 4);
+            var writer = new LargeTextWriter(
+                largeText.Encoding,
+                largeText.ChecksumAlgorithm,
+                chunk1.Length * 4
+            );
 
             // write preamble so buffer is allocated and has contents.
             text.Write(writer);
@@ -909,7 +963,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var final = GetChangesWithoutMiddle(
                 original,
                 c => c.WithChanges(new TextChange(new TextSpan(4, 0), "o ")),
-                c => c.WithChanges(new TextChange(new TextSpan(6, 0), "World")));
+                c => c.WithChanges(new TextChange(new TextSpan(6, 0), "World"))
+            );
 
             Assert.Equal("Hello World", final.ToString());
 
@@ -927,13 +982,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 new TextChangeRange(new TextSpan(936, 33), 29),
                 new TextChangeRange(new TextSpan(1098, 0), 70),
                 new TextChangeRange(new TextSpan(1125, 4), 34),
-                new TextChangeRange(new TextSpan(1138, 0), 47));
+                new TextChangeRange(new TextSpan(1138, 0), 47)
+            );
             var newChanges = ImmutableArray.Create(
                 new TextChangeRange(new TextSpan(997, 0), 2),
                 new TextChangeRange(new TextSpan(1414, 0), 2),
                 new TextChangeRange(new TextSpan(1419, 0), 2),
                 new TextChangeRange(new TextSpan(1671, 5), 5),
-                new TextChangeRange(new TextSpan(1681, 0), 4));
+                new TextChangeRange(new TextSpan(1681, 0), 4)
+            );
 
             var merged = ChangedText.TestAccessor.Merge(oldChanges, newChanges);
 
@@ -942,7 +999,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 new TextChangeRange(new TextSpan(936, 33), 33),
                 new TextChangeRange(new TextSpan(1098, 0), 70),
                 new TextChangeRange(new TextSpan(1125, 4), 38),
-                new TextChangeRange(new TextSpan(1138, 0), 47));
+                new TextChangeRange(new TextSpan(1138, 0), 47)
+            );
             Assert.Equal<TextChangeRange>(expected, merged);
         }
 
@@ -950,9 +1008,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [WorkItem(47234, "https://github.com/dotnet/roslyn/issues/47234")]
         public void DebuggerDisplay()
         {
-            Assert.Equal("new TextChange(new TextSpan(0, 0), null)", default(TextChange).GetDebuggerDisplay());
-            Assert.Equal("new TextChange(new TextSpan(0, 1), \"abc\")", new TextChange(new TextSpan(0, 1), "abc").GetDebuggerDisplay());
-            Assert.Equal("new TextChange(new TextSpan(0, 1), (NewLength = 10))", new TextChange(new TextSpan(0, 1), "0123456789").GetDebuggerDisplay());
+            Assert.Equal(
+                "new TextChange(new TextSpan(0, 0), null)",
+                default(TextChange).GetDebuggerDisplay()
+            );
+            Assert.Equal(
+                "new TextChange(new TextSpan(0, 1), \"abc\")",
+                new TextChange(new TextSpan(0, 1), "abc").GetDebuggerDisplay()
+            );
+            Assert.Equal(
+                "new TextChange(new TextSpan(0, 1), (NewLength = 10))",
+                new TextChange(new TextSpan(0, 1), "0123456789").GetDebuggerDisplay()
+            );
         }
 
         [Fact]
@@ -962,7 +1029,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var random = new Random();
 
             // Adjust upper bound as needed to generate a simpler reproducer for an error scenario
-            var originalText = SourceText.From(string.Join("", Enumerable.Range(0, random.Next(10))));
+            var originalText = SourceText.From(
+                string.Join("", Enumerable.Range(0, random.Next(10)))
+            );
 
             for (var iteration = 0; iteration < 100000; iteration++)
             {
@@ -975,15 +1044,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 // generate sequence of "old edits" which meet invariants
                 for (int i = 0; i < originalText.Length; i += random.Next(maxSkipLength))
                 {
-                    var newText = string.Join("", Enumerable.Repeat('a', random.Next(oldMaxInsertLength)));
-                    var newChange = new TextChange(new TextSpan(i, length: random.Next(originalText.Length - i)), newText);
+                    var newText = string.Join(
+                        "",
+                        Enumerable.Repeat('a', random.Next(oldMaxInsertLength))
+                    );
+                    var newChange = new TextChange(
+                        new TextSpan(i, length: random.Next(originalText.Length - i)),
+                        newText
+                    );
                     i = newChange.Span.End;
 
                     editedLength = editedLength - newChange.Span.Length + newChange.NewText.Length;
                     oldChangesBuilder.Add(newChange);
 
                     // Adjust as needed to generate a simpler reproducer for an error scenario
-                    if (oldChangesBuilder.Count == 5) break;
+                    if (oldChangesBuilder.Count == 5)
+                        break;
                 }
 
                 var change1 = originalText.WithChanges(oldChangesBuilder);
@@ -995,25 +1071,36 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 // generate sequence of "new edits" which meet invariants
                 for (int i = 0; i < editedLength; i += random.Next(maxSkipLength))
                 {
-                    var newText = string.Join("", Enumerable.Repeat('b', random.Next(newMaxInsertLength)));
-                    var newChange = new TextChange(new TextSpan(i, length: random.Next(editedLength - i)), newText);
+                    var newText = string.Join(
+                        "",
+                        Enumerable.Repeat('b', random.Next(newMaxInsertLength))
+                    );
+                    var newChange = new TextChange(
+                        new TextSpan(i, length: random.Next(editedLength - i)),
+                        newText
+                    );
                     i = newChange.Span.End;
 
                     newChangesBuilder.Add(newChange);
 
                     // Adjust as needed to generate a simpler reproducer for an error scenario
-                    if (newChangesBuilder.Count == 5) break;
+                    if (newChangesBuilder.Count == 5)
+                        break;
                 }
 
                 var change2 = change1.WithChanges(newChangesBuilder);
                 try
                 {
                     var textChanges = change2.GetTextChanges(originalText);
-                    Assert.Equal(originalText.WithChanges(textChanges).ToString(), change2.ToString());
+                    Assert.Equal(
+                        originalText.WithChanges(textChanges).ToString(),
+                        change2.ToString()
+                    );
                 }
                 catch
                 {
-                    _output.WriteLine($@"
+                    _output.WriteLine(
+                        $@"
     [Fact]
     public void Fuzz_{iteration}()
     {{
@@ -1026,7 +1113,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         var changes = change2.GetTextChanges(originalText);
         Assert.Equal(""{change2}"", originalText.WithChanges(changes).ToString());
     }}
-");
+"
+                    );
                     throw;
                 }
                 finally
@@ -1058,8 +1146,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void Fuzz_1()
         {
             var original = SourceText.From("01234");
-            var change1 = original.WithChanges(new TextChange(new TextSpan(0, 0), "aa"), new TextChange(new TextSpan(1, 1), "aa"));
-            var change2 = change1.WithChanges(new TextChange(new TextSpan(0, 1), "b"), new TextChange(new TextSpan(2, 2), ""));
+            var change1 = original.WithChanges(
+                new TextChange(new TextSpan(0, 0), "aa"),
+                new TextChange(new TextSpan(1, 1), "aa")
+            );
+            var change2 = change1.WithChanges(
+                new TextChange(new TextSpan(0, 1), "b"),
+                new TextChange(new TextSpan(2, 2), "")
+            );
 
             var changes = change2.GetTextChanges(original);
             Assert.Equal("aa0aa234", change1.ToString());
@@ -1073,7 +1167,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var originalText = SourceText.From("01234");
             var change1 = originalText.WithChanges(new TextChange(new TextSpan(0, 0), "a"));
-            var change2 = change1.WithChanges(new TextChange(new TextSpan(0, 2), ""), new TextChange(new TextSpan(2, 0), "bb"));
+            var change2 = change1.WithChanges(
+                new TextChange(new TextSpan(0, 2), ""),
+                new TextChange(new TextSpan(2, 0), "bb")
+            );
             Assert.Equal("a01234", change1.ToString());
             Assert.Equal("bb1234", change2.ToString());
 
@@ -1086,7 +1183,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void Fuzz_3()
         {
             var originalText = SourceText.From("01234");
-            var change1 = originalText.WithChanges(new TextChange(new TextSpan(0, 1), "aa"), new TextChange(new TextSpan(3, 1), "aa"));
+            var change1 = originalText.WithChanges(
+                new TextChange(new TextSpan(0, 1), "aa"),
+                new TextChange(new TextSpan(3, 1), "aa")
+            );
             var change2 = change1.WithChanges(new TextChange(new TextSpan(0, 0), "bbb"));
             Assert.Equal("aa12aa4", change1.ToString());
             Assert.Equal("bbbaa12aa4", change2.ToString());
@@ -1099,8 +1199,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void Fuzz_4()
         {
             var originalText = SourceText.From("012345");
-            var change1 = originalText.WithChanges(new TextChange(new TextSpan(0, 3), "a"), new TextChange(new TextSpan(5, 0), "aaa"));
-            var change2 = change1.WithChanges(new TextChange(new TextSpan(0, 2), ""), new TextChange(new TextSpan(3, 1), "bb"));
+            var change1 = originalText.WithChanges(
+                new TextChange(new TextSpan(0, 3), "a"),
+                new TextChange(new TextSpan(5, 0), "aaa")
+            );
+            var change2 = change1.WithChanges(
+                new TextChange(new TextSpan(0, 2), ""),
+                new TextChange(new TextSpan(3, 1), "bb")
+            );
             Assert.Equal("a34aaa5", change1.ToString());
             Assert.Equal("4bbaa5", change2.ToString());
 
@@ -1113,8 +1219,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void Fuzz_7()
         {
             var originalText = SourceText.From("01234567");
-            var change1 = originalText.WithChanges(new TextChange(new TextSpan(0, 1), "aaaaa"), new TextChange(new TextSpan(3, 1), "aaaa"), new TextChange(new TextSpan(6, 1), "aaaaa"));
-            var change2 = change1.WithChanges(new TextChange(new TextSpan(0, 0), "b"), new TextChange(new TextSpan(2, 0), "b"), new TextChange(new TextSpan(3, 4), "bbbbb"), new TextChange(new TextSpan(9, 5), "bbbbb"), new TextChange(new TextSpan(15, 3), ""));
+            var change1 = originalText.WithChanges(
+                new TextChange(new TextSpan(0, 1), "aaaaa"),
+                new TextChange(new TextSpan(3, 1), "aaaa"),
+                new TextChange(new TextSpan(6, 1), "aaaaa")
+            );
+            var change2 = change1.WithChanges(
+                new TextChange(new TextSpan(0, 0), "b"),
+                new TextChange(new TextSpan(2, 0), "b"),
+                new TextChange(new TextSpan(3, 4), "bbbbb"),
+                new TextChange(new TextSpan(9, 5), "bbbbb"),
+                new TextChange(new TextSpan(15, 3), "")
+            );
             Assert.Equal("aaaaa12aaaa45aaaaa7", change1.ToString());
             Assert.Equal("baababbbbbaabbbbba7", change2.ToString());
 
@@ -1128,7 +1244,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var originalText = SourceText.From("01234");
             var change1 = originalText.WithChanges(new TextChange(new TextSpan(0, 1), "a"));
-            var change2 = change1.WithChanges(new TextChange(new TextSpan(0, 1), "b"), new TextChange(new TextSpan(2, 2), "b"));
+            var change2 = change1.WithChanges(
+                new TextChange(new TextSpan(0, 1), "b"),
+                new TextChange(new TextSpan(2, 2), "b")
+            );
             Assert.Equal("a1234", change1.ToString());
             Assert.Equal("b1b4", change2.ToString());
 
@@ -1142,7 +1261,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var originalText = SourceText.From("01234");
             var change1 = originalText.WithChanges(new TextChange(new TextSpan(0, 1), "aa"));
-            var change2 = change1.WithChanges(new TextChange(new TextSpan(0, 0), "b"), new TextChange(new TextSpan(1, 2), "b"));
+            var change2 = change1.WithChanges(
+                new TextChange(new TextSpan(0, 0), "b"),
+                new TextChange(new TextSpan(1, 2), "b")
+            );
             Assert.Equal("aa1234", change1.ToString());
             Assert.Equal("bab234", change2.ToString());
 
@@ -1155,7 +1277,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void Fuzz_32()
         {
             var originalText = SourceText.From("012345");
-            var change1 = originalText.WithChanges(new TextChange(new TextSpan(0, 2), "a"), new TextChange(new TextSpan(3, 2), "a"));
+            var change1 = originalText.WithChanges(
+                new TextChange(new TextSpan(0, 2), "a"),
+                new TextChange(new TextSpan(3, 2), "a")
+            );
             var change2 = change1.WithChanges(new TextChange(new TextSpan(0, 3), "bbb"));
             Assert.Equal("a2a5", change1.ToString());
             Assert.Equal("bbb5", change2.ToString());
@@ -1169,8 +1294,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void Fuzz_39()
         {
             var originalText = SourceText.From("0123456");
-            var change1 = originalText.WithChanges(new TextChange(new TextSpan(0, 4), ""), new TextChange(new TextSpan(5, 1), ""));
-            var change2 = change1.WithChanges(new TextChange(new TextSpan(0, 1), ""), new TextChange(new TextSpan(1, 0), ""));
+            var change1 = originalText.WithChanges(
+                new TextChange(new TextSpan(0, 4), ""),
+                new TextChange(new TextSpan(5, 1), "")
+            );
+            var change2 = change1.WithChanges(
+                new TextChange(new TextSpan(0, 1), ""),
+                new TextChange(new TextSpan(1, 0), "")
+            );
             Assert.Equal("46", change1.ToString());
             Assert.Equal("6", change2.ToString());
 
@@ -1183,8 +1314,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void Fuzz_55()
         {
             var originalText = SourceText.From("012345");
-            var change1 = originalText.WithChanges(new TextChange(new TextSpan(0, 2), ""), new TextChange(new TextSpan(3, 1), ""), new TextChange(new TextSpan(4, 0), ""), new TextChange(new TextSpan(4, 0), ""), new TextChange(new TextSpan(4, 0), ""));
-            var change2 = change1.WithChanges(new TextChange(new TextSpan(0, 1), ""), new TextChange(new TextSpan(1, 1), ""), new TextChange(new TextSpan(2, 0), ""));
+            var change1 = originalText.WithChanges(
+                new TextChange(new TextSpan(0, 2), ""),
+                new TextChange(new TextSpan(3, 1), ""),
+                new TextChange(new TextSpan(4, 0), ""),
+                new TextChange(new TextSpan(4, 0), ""),
+                new TextChange(new TextSpan(4, 0), "")
+            );
+            var change2 = change1.WithChanges(
+                new TextChange(new TextSpan(0, 1), ""),
+                new TextChange(new TextSpan(1, 1), ""),
+                new TextChange(new TextSpan(2, 0), "")
+            );
             Assert.Equal("245", change1.ToString());
             Assert.Equal("5", change2.ToString());
 
@@ -1197,8 +1338,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void Fuzz_110()
         {
             var originalText = SourceText.From("01234");
-            var change1 = originalText.WithChanges(new TextChange(new TextSpan(0, 1), ""), new TextChange(new TextSpan(2, 1), ""));
-            var change2 = change1.WithChanges(new TextChange(new TextSpan(0, 0), ""), new TextChange(new TextSpan(1, 1), ""));
+            var change1 = originalText.WithChanges(
+                new TextChange(new TextSpan(0, 1), ""),
+                new TextChange(new TextSpan(2, 1), "")
+            );
+            var change2 = change1.WithChanges(
+                new TextChange(new TextSpan(0, 0), ""),
+                new TextChange(new TextSpan(1, 1), "")
+            );
             Assert.Equal("134", change1.ToString());
             Assert.Equal("14", change2.ToString());
 
@@ -1210,7 +1357,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [WorkItem(41413, "https://github.com/dotnet/roslyn/issues/41413")]
         public void GetTextChanges_NonOverlappingSpans()
         {
-            var content = @"@functions{
+            var content =
+                @"@functions{
     public class Foo
     {
 void Method()
@@ -1252,14 +1400,22 @@ void Method()
                 position = change.Span.End;
             }
         }
+
         private SourceText GetChangesWithoutMiddle(
             SourceText original,
             Func<SourceText, SourceText> fnChange1,
-            Func<SourceText, SourceText> fnChange2)
+            Func<SourceText, SourceText> fnChange2
+        )
         {
             WeakReference change1;
             SourceText change2;
-            GetChangesWithoutMiddle_Helper(original, fnChange1, fnChange2, out change1, out change2);
+            GetChangesWithoutMiddle_Helper(
+                original,
+                fnChange1,
+                fnChange2,
+                out change1,
+                out change2
+            );
 
             while (change1.IsAlive)
             {
@@ -1275,7 +1431,8 @@ void Method()
             Func<SourceText, SourceText> fnChange1,
             Func<SourceText, SourceText> fnChange2,
             out WeakReference change1,
-            out SourceText change2)
+            out SourceText change2
+        )
         {
             var c1 = fnChange1(original);
             change1 = new WeakReference(c1);

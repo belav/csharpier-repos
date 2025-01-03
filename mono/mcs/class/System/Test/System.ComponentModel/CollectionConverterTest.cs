@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,113 +27,118 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.IO;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.IO;
 using System.Xml.Serialization;
+using NUnit.Framework;
 
-namespace MonoTests.System.ComponentModel {
+namespace MonoTests.System.ComponentModel
+{
+    [TestFixture]
+    public class CollectionConverterTest
+    {
+        private CollectionConverter cc;
+        private StringCollection sc;
 
-	[TestFixture]
-	public class CollectionConverterTest {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            cc = new CollectionConverter();
+            sc = new StringCollection();
+        }
 
-		private CollectionConverter cc;
-		private StringCollection sc;
+        [Test]
+        public void ApplicableTypes()
+        {
+            Type t = cc.GetType();
+            Assert.AreEqual(
+                t,
+                TypeDescriptor.GetConverter(typeof(StringCollection)).GetType(),
+                "StringCollection"
+            );
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			cc = new CollectionConverter ();
-			sc = new StringCollection ();
-		}
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertFromString_Null()
+        {
+            cc.ConvertFromString(null);
+        }
 
-		[Test]
-		public void ApplicableTypes ()
-		{
-			Type t = cc.GetType ();
-			Assert.AreEqual (t, TypeDescriptor.GetConverter (typeof (StringCollection)).GetType (), "StringCollection");
-		}
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertFromString_Empty()
+        {
+            cc.ConvertFromString(String.Empty);
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ConvertFromString_Null ()
-		{
-			cc.ConvertFromString (null);
-		}
+        private const string array_of_strings =
+            "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <string>go</string>\r\n  <string>mono</string>\r\n  </ArrayOfString>";
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ConvertFromString_Empty ()
-		{
-			cc.ConvertFromString (String.Empty);
-		}
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertFromString()
+        {
+            cc.ConvertFromString(array_of_strings);
+        }
 
-		private const string array_of_strings  = "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <string>go</string>\r\n  <string>mono</string>\r\n  </ArrayOfString>";
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertFrom()
+        {
+            cc.ConvertFrom(array_of_strings);
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ConvertFromString ()
-		{
-			cc.ConvertFromString (array_of_strings);
-		}
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertFrom_XmlSerializer()
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(string[]));
+            object o = xs.Deserialize(new StringReader(array_of_strings));
+            cc.ConvertFrom(o);
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ConvertFrom ()
-		{
-			cc.ConvertFrom (array_of_strings);
-		}
+        [Test]
+        public void ConvertTo()
+        {
+            Assert.AreEqual(String.Empty, cc.ConvertTo(null, null, null, typeof(string)), "null");
+            Assert.AreEqual("(Collection)", cc.ConvertTo(null, null, sc, typeof(string)), "0");
+            sc.Add("some string value");
+            Assert.AreEqual("(Collection)", cc.ConvertTo(null, null, sc, typeof(string)), "1");
+            sc.Clear();
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ConvertFrom_XmlSerializer ()
-		{
-			XmlSerializer xs = new XmlSerializer (typeof (string[]));
-			object o = xs.Deserialize (new StringReader (array_of_strings));
-			cc.ConvertFrom (o);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConvertTo_TypeNull()
+        {
+            cc.ConvertTo(null, null, sc, null);
+        }
 
-		[Test]
-		public void ConvertTo ()
-		{
-			Assert.AreEqual (String.Empty, cc.ConvertTo (null, null, null, typeof (string)), "null");
-			Assert.AreEqual ("(Collection)", cc.ConvertTo (null, null, sc, typeof (string)), "0");
-			sc.Add ("some string value");
-			Assert.AreEqual ("(Collection)", cc.ConvertTo (null, null, sc, typeof (string)), "1");
-			sc.Clear ();
-		}
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertTo_TypeNotString()
+        {
+            cc.ConvertTo(null, null, sc, typeof(int));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConvertTo_TypeNull ()
-		{
-			cc.ConvertTo (null, null, sc, null);
-		}
+        [Test]
+        public void GetProperties()
+        {
+            // documented to always return null
+            Assert.IsNull(cc.GetProperties(null), "null");
+            Assert.IsNull(cc.GetProperties(null, null), "null,null");
+            Assert.IsNull(cc.GetProperties(null, null, null), "null,null,null");
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ConvertTo_TypeNotString ()
-		{
-			cc.ConvertTo (null, null, sc, typeof (int));
-		}
-
-		[Test]
-		public void GetProperties ()
-		{
-			// documented to always return null
-			Assert.IsNull (cc.GetProperties (null), "null");
-			Assert.IsNull (cc.GetProperties (null, null), "null,null");
-			Assert.IsNull (cc.GetProperties (null, null, null), "null,null,null");
-		}
-
-		[Test]
-		public void GetPropertiesSupported ()
-		{
-			// documented to always return false
-			Assert.IsFalse (cc.GetPropertiesSupported (), "empty");
-			Assert.IsFalse (cc.GetPropertiesSupported (null), "null");
-		}
-	}
+        [Test]
+        public void GetPropertiesSupported()
+        {
+            // documented to always return false
+            Assert.IsFalse(cc.GetPropertiesSupported(), "empty");
+            Assert.IsFalse(cc.GetPropertiesSupported(null), "null");
+        }
+    }
 }

@@ -18,7 +18,9 @@ public class EnumerableWrapperProviderFactory : IWrapperProviderFactory
     /// <see cref="IWrapperProviderFactory"/>.
     /// </summary>
     /// <param name="wrapperProviderFactories">List of <see cref="IWrapperProviderFactory"/>.</param>
-    public EnumerableWrapperProviderFactory(IEnumerable<IWrapperProviderFactory> wrapperProviderFactories)
+    public EnumerableWrapperProviderFactory(
+        IEnumerable<IWrapperProviderFactory> wrapperProviderFactories
+    )
     {
         ArgumentNullException.ThrowIfNull(wrapperProviderFactories);
 
@@ -46,14 +48,19 @@ public class EnumerableWrapperProviderFactory : IWrapperProviderFactory
             {
                 var enumerableOfT = ClosedGenericMatcher.ExtractGenericInterface(
                     declaredType,
-                    typeof(IEnumerable<>));
+                    typeof(IEnumerable<>)
+                );
                 if (enumerableOfT != null)
                 {
                     var elementType = enumerableOfT.GenericTypeArguments[0];
-                    var wrapperProviderContext = new WrapperProviderContext(elementType, context.IsSerialization);
+                    var wrapperProviderContext = new WrapperProviderContext(
+                        elementType,
+                        context.IsSerialization
+                    );
 
-                    var elementWrapperProvider =
-                        _wrapperProviderFactories.GetWrapperProvider(wrapperProviderContext);
+                    var elementWrapperProvider = _wrapperProviderFactories.GetWrapperProvider(
+                        wrapperProviderContext
+                    );
 
                     return new EnumerableWrapperProvider(enumerableOfT, elementWrapperProvider);
                 }

@@ -16,9 +16,7 @@ namespace System.Data.Common
         private SqlBytes[] _values = default!; // Late-initialized
 
         public SqlBytesStorage(DataColumn column)
-        : base(column, typeof(SqlBytes), SqlBytes.Null, SqlBytes.Null, StorageType.SqlBytes)
-        {
-        }
+            : base(column, typeof(SqlBytes), SqlBytes.Null, SqlBytes.Null, StorageType.SqlBytes) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -128,7 +126,12 @@ namespace System.Data.Common
             return new SqlBytes[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             SqlBytes[] typedStore = (SqlBytes[])store;
             typedStore[storeIndex] = _values[record];

@@ -14,13 +14,15 @@ internal static partial class Interop
         internal static partial bool ClearCommError(
             SafeFileHandle hFile,
             ref int lpErrors,
-            ref COMSTAT lpStat);
+            ref COMSTAT lpStat
+        );
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool ClearCommError(
             SafeFileHandle hFile,
             ref int lpErrors,
-            IntPtr lpStat);
+            IntPtr lpStat
+        );
     }
 }

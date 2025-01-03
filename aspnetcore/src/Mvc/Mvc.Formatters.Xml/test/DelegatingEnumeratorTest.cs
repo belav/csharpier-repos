@@ -12,11 +12,11 @@ public class DelegatingEnumeratorTest
     {
         // Arrange
         var innerEnumerator = new Mock<IEnumerator<int>>();
-        innerEnumerator.Setup(innerEnum => innerEnum.Dispose())
-                        .Verifiable();
+        innerEnumerator.Setup(innerEnum => innerEnum.Dispose()).Verifiable();
         var delegatingEnumerator = new DelegatingEnumerator<int, int>(
-                                                    innerEnumerator.Object,
-                                                    wrapperProvider: null);
+            innerEnumerator.Object,
+            wrapperProvider: null
+        );
 
         // Act
         delegatingEnumerator.Dispose();
@@ -30,11 +30,11 @@ public class DelegatingEnumeratorTest
     {
         // Arrange
         var innerEnumerator = new Mock<IEnumerator<int>>();
-        innerEnumerator.Setup(innerEnum => innerEnum.MoveNext())
-                        .Verifiable();
+        innerEnumerator.Setup(innerEnum => innerEnum.MoveNext()).Verifiable();
         var delegatingEnumerator = new DelegatingEnumerator<int, int>(
-                                                    innerEnumerator.Object,
-                                                    wrapperProvider: null);
+            innerEnumerator.Object,
+            wrapperProvider: null
+        );
 
         // Act
         var available = delegatingEnumerator.MoveNext();
@@ -48,11 +48,11 @@ public class DelegatingEnumeratorTest
     {
         // Arrange
         var innerEnumerator = new Mock<IEnumerator<int>>();
-        innerEnumerator.Setup(innerEnum => innerEnum.Reset())
-                        .Verifiable();
+        innerEnumerator.Setup(innerEnum => innerEnum.Reset()).Verifiable();
         var delegatingEnumerator = new DelegatingEnumerator<int, int>(
-                                                    innerEnumerator.Object,
-                                                    wrapperProvider: null);
+            innerEnumerator.Object,
+            wrapperProvider: null
+        );
 
         // Act
         delegatingEnumerator.Reset();
@@ -66,11 +66,11 @@ public class DelegatingEnumeratorTest
     {
         // Arrange
         var innerEnumerator = new Mock<IEnumerator<int>>();
-        innerEnumerator.SetupGet(innerEnum => innerEnum.Current)
-                        .Verifiable();
+        innerEnumerator.SetupGet(innerEnum => innerEnum.Current).Verifiable();
         var delegatingEnumerator = new DelegatingEnumerator<int, int>(
-                                                    innerEnumerator.Object,
-                                                    wrapperProvider: null);
+            innerEnumerator.Object,
+            wrapperProvider: null
+        );
 
         // Act
         var obj = delegatingEnumerator.Current;

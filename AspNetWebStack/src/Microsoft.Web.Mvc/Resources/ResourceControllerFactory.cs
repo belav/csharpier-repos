@@ -59,7 +59,10 @@ namespace Microsoft.Web.Mvc.Resources
             return ic;
         }
 
-        public SessionStateBehavior GetControllerSessionBehavior(RequestContext requestContext, string controllerName)
+        public SessionStateBehavior GetControllerSessionBehavior(
+            RequestContext requestContext,
+            string controllerName
+        )
         {
             return _inner.GetControllerSessionBehavior(requestContext, controllerName);
         }
@@ -73,7 +76,11 @@ namespace Microsoft.Web.Mvc.Resources
         // infrastructure, but the information is available in the request's HTTP verb (GET/PUT/POST/DELETE)
         private class ResourceControllerActionInvoker : ControllerActionInvoker
         {
-            protected override ActionDescriptor FindAction(ControllerContext controllerContext, ControllerDescriptor controllerDescriptor, string actionName)
+            protected override ActionDescriptor FindAction(
+                ControllerContext controllerContext,
+                ControllerDescriptor controllerDescriptor,
+                string actionName
+            )
             {
                 if (actionName == RestActionToken)
                 {
@@ -83,7 +90,10 @@ namespace Microsoft.Web.Mvc.Resources
                     List<ActionDescriptor> matches = new List<ActionDescriptor>();
                     foreach (ActionDescriptor ad in controllerDescriptor.GetCanonicalActions())
                     {
-                        object[] acceptVerbs = ad.GetCustomAttributes(typeof(AcceptVerbsAttribute), false);
+                        object[] acceptVerbs = ad.GetCustomAttributes(
+                            typeof(AcceptVerbsAttribute),
+                            false
+                        );
                         if (acceptVerbs.Length > 0)
                         {
                             foreach (object o in acceptVerbs)
@@ -91,7 +101,13 @@ namespace Microsoft.Web.Mvc.Resources
                                 AcceptVerbsAttribute ava = o as AcceptVerbsAttribute;
                                 if (ava != null)
                                 {
-                                    if (ava.Verbs.Contains(controllerContext.HttpContext.Request.GetHttpMethodOverride().ToUpperInvariant()))
+                                    if (
+                                        ava.Verbs.Contains(
+                                            controllerContext
+                                                .HttpContext.Request.GetHttpMethodOverride()
+                                                .ToUpperInvariant()
+                                        )
+                                    )
                                     {
                                         matches.Add(ad);
                                     }
@@ -106,7 +122,8 @@ namespace Microsoft.Web.Mvc.Resources
                         case 1:
                             ActionDescriptor ad = matches[0];
                             actionName = ad.ActionName;
-                            controllerContext.RequestContext.RouteData.Values["action"] = actionName;
+                            controllerContext.RequestContext.RouteData.Values["action"] =
+                                actionName;
                             return ad;
                         default:
                             StringBuilder matchesString = new StringBuilder(matches[0].ActionName);
@@ -122,17 +139,21 @@ namespace Microsoft.Web.Mvc.Resources
                                     CultureInfo.CurrentCulture,
                                     MvcResources.ResourceControllerFactory_ConflictingActions,
                                     controllerDescriptor.ControllerName,
-                                    matchesString));
+                                    matchesString
+                                )
+                            );
                     }
                 }
-                return base.FindAction(controllerContext, controllerDescriptor, actionName) ??
-                       new ResourceErrorActionDescriptor(
-                           controllerDescriptor,
-                           HttpStatusCode.NotFound,
-                           String.Format(
-                               CultureInfo.CurrentCulture,
-                               MvcResources.ResourceControllerFactory_NoActions,
-                               controllerDescriptor.ControllerName));
+                return base.FindAction(controllerContext, controllerDescriptor, actionName)
+                    ?? new ResourceErrorActionDescriptor(
+                        controllerDescriptor,
+                        HttpStatusCode.NotFound,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            MvcResources.ResourceControllerFactory_NoActions,
+                            controllerDescriptor.ControllerName
+                        )
+                    );
             }
 
             // This class is used when we don't find an ActionDescriptor or find multiple matches
@@ -144,7 +165,11 @@ namespace Microsoft.Web.Mvc.Resources
                 private string message;
                 private HttpStatusCode statusCode;
 
-                public ResourceErrorActionDescriptor(ControllerDescriptor controllerDescriptor, HttpStatusCode statusCode, string message)
+                public ResourceErrorActionDescriptor(
+                    ControllerDescriptor controllerDescriptor,
+                    HttpStatusCode statusCode,
+                    string message
+                )
                 {
                     this.message = message;
                     this.statusCode = statusCode;
@@ -161,13 +186,25 @@ namespace Microsoft.Web.Mvc.Resources
                     get { return this.controllerDescriptor; }
                 }
 
-                public override object Execute(ControllerContext controllerContext, IDictionary<string, object> parameters)
+                public override object Execute(
+                    ControllerContext controllerContext,
+                    IDictionary<string, object> parameters
+                )
                 {
                     HttpException he = new HttpException((int)this.statusCode, this.message);
                     ResourceErrorActionResult rear;
-                    if (!WebApiEnabledAttribute.TryGetErrorResult2(controllerContext.RequestContext, he, out rear))
+                    if (
+                        !WebApiEnabledAttribute.TryGetErrorResult2(
+                            controllerContext.RequestContext,
+                            he,
+                            out rear
+                        )
+                    )
                     {
-                        rear = new ResourceErrorActionResult(new HttpException((int)this.statusCode, this.message), new ContentType("text/plain"));
+                        rear = new ResourceErrorActionResult(
+                            new HttpException((int)this.statusCode, this.message),
+                            new ContentType("text/plain")
+                        );
                     }
                     return rear;
                 }

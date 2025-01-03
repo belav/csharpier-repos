@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.QuickGrid.Infrastructure;
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 using Microsoft.JSInterop;
-using Microsoft.AspNetCore.Components.Forms;
 
 namespace Microsoft.AspNetCore.Components.QuickGrid;
 
@@ -25,30 +25,35 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     ///
     /// You should supply either <see cref="Items"/> or <see cref="ItemsProvider"/>, but not both.
     /// </summary>
-    [Parameter] public IQueryable<TGridItem>? Items { get; set; }
+    [Parameter]
+    public IQueryable<TGridItem>? Items { get; set; }
 
     /// <summary>
     /// A callback that supplies data for the grid.
     ///
     /// You should supply either <see cref="Items"/> or <see cref="ItemsProvider"/>, but not both.
     /// </summary>
-    [Parameter] public GridItemsProvider<TGridItem>? ItemsProvider { get; set; }
+    [Parameter]
+    public GridItemsProvider<TGridItem>? ItemsProvider { get; set; }
 
     /// <summary>
     /// An optional CSS class name. If given, this will be included in the class attribute of the rendered table.
     /// </summary>
-    [Parameter] public string? Class { get; set; }
+    [Parameter]
+    public string? Class { get; set; }
 
     /// <summary>
     /// A theme name, with default value "default". This affects which styling rules match the table.
     /// </summary>
-    [Parameter] public string? Theme { get; set; } = "default";
+    [Parameter]
+    public string? Theme { get; set; } = "default";
 
     /// <summary>
     /// Defines the child components of this instance. For example, you may define columns by adding
     /// components derived from the <see cref="ColumnBase{TGridItem}"/> base class.
     /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// If true, the grid will be rendered with virtualization. This is normally used in conjunction with
@@ -61,14 +66,16 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     /// Generally it's preferable not to use <see cref="Virtualize"/> if the amount of data being rendered
     /// is small or if you are using pagination.
     /// </summary>
-    [Parameter] public bool Virtualize { get; set; }
+    [Parameter]
+    public bool Virtualize { get; set; }
 
     /// <summary>
     /// This is applicable only when using <see cref="Virtualize"/>. It defines an expected height in pixels for
     /// each row, allowing the virtualization mechanism to fetch the correct number of items to match the display
     /// size and to ensure accurate scrolling.
     /// </summary>
-    [Parameter] public float ItemSize { get; set; } = 50;
+    [Parameter]
+    public float ItemSize { get; set; } = 50;
 
     /// <summary>
     /// Optionally defines a value for @key on each rendered row. Typically this should be used to specify a
@@ -80,7 +87,8 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     ///
     /// If not set, the @key will be the TGridItem instance itself.
     /// </summary>
-    [Parameter] public Func<TGridItem, object> ItemKey { get; set; } = x => x!;
+    [Parameter]
+    public Func<TGridItem, object> ItemKey { get; set; } = x => x!;
 
     /// <summary>
     /// Optionally links this <see cref="QuickGrid{TGridItem}"/> instance with a <see cref="PaginationState"/> model,
@@ -89,15 +97,20 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     /// This is normally used in conjunction with a <see cref="Paginator"/> component or some other UI logic
     /// that displays and updates the supplied <see cref="PaginationState"/> instance.
     /// </summary>
-    [Parameter] public PaginationState? Pagination { get; set; }
+    [Parameter]
+    public PaginationState? Pagination { get; set; }
 
     /// <summary>
     /// Gets or sets a collection of additional attributes that will be applied to the created element.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
 
-    [Inject] private IServiceProvider Services { get; set; } = default!;
-    [Inject] private IJSRuntime JS { get; set; } = default!;
+    [Inject]
+    private IServiceProvider Services { get; set; } = default!;
+
+    [Inject]
+    private IJSRuntime JS { get; set; } = default!;
 
     private ElementReference _tableReference;
     private Virtualize<(int, TGridItem)>? _virtualizeComponent;
@@ -146,7 +159,9 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     {
         _columns = new();
         _internalGridContext = new(this);
-        _currentPageItemsChanged = new(EventCallback.Factory.Create<PaginationState>(this, RefreshDataCoreAsync));
+        _currentPageItemsChanged = new(
+            EventCallback.Factory.Create<PaginationState>(this, RefreshDataCoreAsync)
+        );
         _renderColumnHeaders = RenderColumnHeaders;
         _renderNonVirtualizedRows = RenderNonVirtualizedRows;
 
@@ -154,7 +169,8 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
         // This is so we can apply default sort order (or any future per-column options) before loading data
         // We use EventCallbackSubscriber to safely hook this async operation into the synchronous rendering flow
         var columnsFirstCollectedSubscriber = new EventCallbackSubscriber<object?>(
-            EventCallback.Factory.Create<object?>(this, RefreshDataCoreAsync));
+            EventCallback.Factory.Create<object?>(this, RefreshDataCoreAsync)
+        );
         columnsFirstCollectedSubscriber.SubscribeOrMove(_internalGridContext.ColumnsFirstCollected);
     }
 
@@ -166,7 +182,9 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
 
         if (Items is not null && ItemsProvider is not null)
         {
-            throw new InvalidOperationException($"{nameof(QuickGrid)} requires one of {nameof(Items)} or {nameof(ItemsProvider)}, but both were specified.");
+            throw new InvalidOperationException(
+                $"{nameof(QuickGrid)} requires one of {nameof(Items)} or {nameof(ItemsProvider)}, but both were specified."
+            );
         }
 
         // Perform a re-query only if the data source or something else has changed
@@ -178,13 +196,16 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
             _asyncQueryExecutor = AsyncQueryExecutorSupplier.GetAsyncQueryExecutor(Services, Items);
         }
 
-        var mustRefreshData = dataSourceHasChanged
+        var mustRefreshData =
+            dataSourceHasChanged
             || (Pagination?.GetHashCode() != _lastRefreshedPaginationStateHash);
 
         // We don't want to trigger the first data load until we've collected the initial set of columns,
         // because they might perform some action like setting the default sort order, so it would be wasteful
         // to have to re-query immediately
-        return (_columns.Count > 0 && mustRefreshData) ? RefreshDataCoreAsync() : Task.CompletedTask;
+        return (_columns.Count > 0 && mustRefreshData)
+            ? RefreshDataCoreAsync()
+            : Task.CompletedTask;
     }
 
     /// <inheritdoc />
@@ -192,8 +213,14 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     {
         if (firstRender)
         {
-            _jsModule = await JS.InvokeAsync<IJSObjectReference>("import", "./_content/Microsoft.AspNetCore.Components.QuickGrid/QuickGrid.razor.js");
-            _jsEventDisposable = await _jsModule.InvokeAsync<IJSObjectReference>("init", _tableReference);
+            _jsModule = await JS.InvokeAsync<IJSObjectReference>(
+                "import",
+                "./_content/Microsoft.AspNetCore.Components.QuickGrid/QuickGrid.razor.js"
+            );
+            _jsEventDisposable = await _jsModule.InvokeAsync<IJSObjectReference>(
+                "init",
+                _tableReference
+            );
         }
 
         if (_checkColumnOptionsPosition && _displayOptionsForColumn is not null)
@@ -204,7 +231,11 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     }
 
     // Invoked by descendant columns at a special time during rendering
-    internal void AddColumn(ColumnBase<TGridItem> column, SortDirection? initialSortDirection, bool isDefaultSortColumn)
+    internal void AddColumn(
+        ColumnBase<TGridItem> column,
+        SortDirection? initialSortDirection,
+        bool isDefaultSortColumn
+    )
     {
         if (_collectingColumns)
         {
@@ -235,7 +266,10 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     /// <param name="column">The column that defines the new sort order.</param>
     /// <param name="direction">The direction of sorting. If the value is <see cref="SortDirection.Auto"/>, then it will toggle the direction on each call.</param>
     /// <returns>A <see cref="Task"/> representing the completion of the operation.</returns>
-    public Task SortByColumnAsync(ColumnBase<TGridItem> column, SortDirection direction = SortDirection.Auto)
+    public Task SortByColumnAsync(
+        ColumnBase<TGridItem> column,
+        SortDirection direction = SortDirection.Auto
+    )
     {
         _sortByAscending = direction switch
         {
@@ -295,9 +329,16 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
         {
             // If we're not using Virtualize, we build and execute a request against the items provider directly
             _lastRefreshedPaginationStateHash = Pagination?.GetHashCode();
-            var startIndex = Pagination is null ? 0 : (Pagination.CurrentPageIndex * Pagination.ItemsPerPage);
+            var startIndex = Pagination is null
+                ? 0
+                : (Pagination.CurrentPageIndex * Pagination.ItemsPerPage);
             var request = new GridItemsProviderRequest<TGridItem>(
-                startIndex, Pagination?.ItemsPerPage, _sortByColumn, _sortByAscending, thisLoadCts.Token);
+                startIndex,
+                Pagination?.ItemsPerPage,
+                _sortByColumn,
+                _sortByAscending,
+                thisLoadCts.Token
+            );
             var result = await ResolveItemsRequestAsync(request);
             if (!thisLoadCts.IsCancellationRequested)
             {
@@ -310,7 +351,9 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     }
 
     // Gets called both by RefreshDataCoreAsync and directly by the Virtualize child component during scrolling
-    private async ValueTask<ItemsProviderResult<(int, TGridItem)>> ProvideVirtualizedItems(ItemsProviderRequest request)
+    private async ValueTask<ItemsProviderResult<(int, TGridItem)>> ProvideVirtualizedItems(
+        ItemsProviderRequest request
+    )
     {
         _lastRefreshedPaginationStateHash = Pagination?.GetHashCode();
 
@@ -333,7 +376,12 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
         }
 
         var providerRequest = new GridItemsProviderRequest<TGridItem>(
-            startIndex, count, _sortByColumn, _sortByAscending, request.CancellationToken);
+            startIndex,
+            count,
+            _sortByColumn,
+            _sortByAscending,
+            request.CancellationToken
+        );
         var providerResult = await ResolveItemsRequestAsync(providerRequest);
 
         if (!request.CancellationToken.IsCancellationRequested)
@@ -343,7 +391,9 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
             // the current viewport. In the case where you're also paginating then it means what's conceptually on the current page.
             // TODO: This currently assumes we always want to expand the last page to have ItemsPerPage rows, but the experience might
             //       be better if we let the last page only be as big as its number of actual rows.
-            _ariaBodyRowCount = Pagination is null ? providerResult.TotalItemCount : Pagination.ItemsPerPage;
+            _ariaBodyRowCount = Pagination is null
+                ? providerResult.TotalItemCount
+                : Pagination.ItemsPerPage;
 
             Pagination?.SetTotalItemCountAsync(providerResult.TotalItemCount);
 
@@ -351,15 +401,20 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
             // the virtualized start index. It might be more performant just to have some _latestQueryRowStartIndex field, but we'd have
             // to make sure it doesn't get out of sync with the rows being rendered.
             return new ItemsProviderResult<(int, TGridItem)>(
-                 items: providerResult.Items.Select((x, i) => ValueTuple.Create(i + request.StartIndex + 2, x)),
-                 totalItemCount: _ariaBodyRowCount);
+                items: providerResult.Items.Select(
+                    (x, i) => ValueTuple.Create(i + request.StartIndex + 2, x)
+                ),
+                totalItemCount: _ariaBodyRowCount
+            );
         }
 
         return default;
     }
 
     // Normalizes all the different ways of configuring a data source so they have common GridItemsProvider-shaped API
-    private async ValueTask<GridItemsProviderResult<TGridItem>> ResolveItemsRequestAsync(GridItemsProviderRequest<TGridItem> request)
+    private async ValueTask<GridItemsProviderResult<TGridItem>> ResolveItemsRequestAsync(
+        GridItemsProviderRequest<TGridItem> request
+    )
     {
         if (ItemsProvider is not null)
         {
@@ -367,13 +422,17 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
         }
         else if (Items is not null)
         {
-            var totalItemCount = _asyncQueryExecutor is null ? Items.Count() : await _asyncQueryExecutor.CountAsync(Items);
+            var totalItemCount = _asyncQueryExecutor is null
+                ? Items.Count()
+                : await _asyncQueryExecutor.CountAsync(Items);
             var result = request.ApplySorting(Items).Skip(request.StartIndex);
             if (request.Count.HasValue)
             {
                 result = result.Take(request.Count.Value);
             }
-            var resultArray = _asyncQueryExecutor is null ? result.ToArray() : await _asyncQueryExecutor.ToArrayAsync(result);
+            var resultArray = _asyncQueryExecutor is null
+                ? result.ToArray()
+                : await _asyncQueryExecutor.ToArrayAsync(result);
             return GridItemsProviderResult.From(resultArray, totalItemCount);
         }
         else
@@ -382,31 +441,32 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
         }
     }
 
-    private string AriaSortValue(ColumnBase<TGridItem> column)
-        => _sortByColumn == column
-            ? (_sortByAscending ? "ascending" : "descending")
-            : "none";
+    private string AriaSortValue(ColumnBase<TGridItem> column) =>
+        _sortByColumn == column ? (_sortByAscending ? "ascending" : "descending") : "none";
 
-    private string? ColumnHeaderClass(ColumnBase<TGridItem> column)
-        => _sortByColumn == column
-        ? $"{ColumnClass(column)} {(_sortByAscending ? "col-sort-asc" : "col-sort-desc")}"
-        : ColumnClass(column);
+    private string? ColumnHeaderClass(ColumnBase<TGridItem> column) =>
+        _sortByColumn == column
+            ? $"{ColumnClass(column)} {(_sortByAscending ? "col-sort-asc" : "col-sort-desc")}"
+            : ColumnClass(column);
 
     private string GridClass()
     {
-        var gridClass = $"quickgrid {Class} {(_pendingDataLoadCancellationTokenSource is null ? null : "loading")}";
-        return AttributeUtilities.CombineClassNames(AdditionalAttributes, gridClass) ?? string.Empty;
+        var gridClass =
+            $"quickgrid {Class} {(_pendingDataLoadCancellationTokenSource is null ? null : "loading")}";
+        return AttributeUtilities.CombineClassNames(AdditionalAttributes, gridClass)
+            ?? string.Empty;
     }
 
-    private static string? ColumnClass(ColumnBase<TGridItem> column) => column.Align switch
-    {
-        Align.Start => $"col-justify-start {column.Class}",
-        Align.Center => $"col-justify-center {column.Class}",
-        Align.End => $"col-justify-end {column.Class}",
-        Align.Left => $"col-justify-left {column.Class}",
-        Align.Right => $"col-justify-right {column.Class}",
-        _ => column.Class,
-    };
+    private static string? ColumnClass(ColumnBase<TGridItem> column) =>
+        column.Align switch
+        {
+            Align.Start => $"col-justify-start {column.Class}",
+            Align.Center => $"col-justify-center {column.Class}",
+            Align.End => $"col-justify-end {column.Class}",
+            Align.Left => $"col-justify-left {column.Class}",
+            Align.Right => $"col-justify-right {column.Class}",
+            _ => column.Class,
+        };
 
     /// <inheritdoc />
     public async ValueTask DisposeAsync()

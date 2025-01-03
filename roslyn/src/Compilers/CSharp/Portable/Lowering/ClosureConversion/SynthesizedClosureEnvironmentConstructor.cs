@@ -9,16 +9,19 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed class SynthesizedClosureEnvironmentConstructor : SynthesizedInstanceConstructor, ISynthesizedMethodBodyImplementationSymbol
+    internal sealed class SynthesizedClosureEnvironmentConstructor
+        : SynthesizedInstanceConstructor,
+            ISynthesizedMethodBodyImplementationSymbol
     {
         internal SynthesizedClosureEnvironmentConstructor(SynthesizedClosureEnvironment frame)
-            : base(frame)
-        {
-        }
+            : base(frame) { }
 
         IMethodSymbolInternal ISynthesizedMethodBodyImplementationSymbol.Method
         {
-            get { return ((ISynthesizedMethodBodyImplementationSymbol)this.ContainingSymbol).Method; }
+            get
+            {
+                return ((ISynthesizedMethodBodyImplementationSymbol)this.ContainingSymbol).Method;
+            }
         }
 
         bool ISynthesizedMethodBodyImplementationSymbol.HasMethodBodyDependency

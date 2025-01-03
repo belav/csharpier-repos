@@ -18,7 +18,9 @@ public class SkipOnArchitectureAttribute : Attribute, ITestCondition
         _excludedArchitectures = excludedArchitectures;
     }
 
-    public bool IsMet => (Array.IndexOf(_excludedArchitectures, RuntimeInformation.OSArchitecture) == -1);
+    public bool IsMet =>
+        (Array.IndexOf(_excludedArchitectures, RuntimeInformation.OSArchitecture) == -1);
 
-    public string SkipReason => $"This test is running on {RuntimeInformation.OSArchitecture} which is marked as to be skipped.";
+    public string SkipReason =>
+        $"This test is running on {RuntimeInformation.OSArchitecture} which is marked as to be skipped.";
 }

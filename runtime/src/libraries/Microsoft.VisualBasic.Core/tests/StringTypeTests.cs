@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.VisualBasic.CompilerServices;
-using Microsoft.VisualBasic.Tests;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Microsoft.VisualBasic.CompilerServices;
+using Microsoft.VisualBasic.Tests;
 using Xunit;
 
 namespace Microsoft.VisualBasic.CompilerServices.Tests
@@ -254,8 +254,16 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (double)(-1), "-1" };
             yield return new object[] { (double)0, "0" };
             yield return new object[] { (double)1, "1" };
-            yield return new object[] { double.PositiveInfinity, double.PositiveInfinity.ToString() };
-            yield return new object[] { double.NegativeInfinity, double.NegativeInfinity.ToString() };
+            yield return new object[]
+            {
+                double.PositiveInfinity,
+                double.PositiveInfinity.ToString(),
+            };
+            yield return new object[]
+            {
+                double.NegativeInfinity,
+                double.NegativeInfinity.ToString(),
+            };
             yield return new object[] { double.NaN, double.NaN.ToString() };
         }
 
@@ -313,19 +321,34 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public static IEnumerable<object[]> FromSingle_Format_TestData()
         {
             yield return new object[] { (float)(-1), default(NumberFormatInfo), "-1" };
-            yield return new object[] { (float)(-1), new NumberFormatInfo() { NegativeSign = "#" }, "#1" };
+            yield return new object[]
+            {
+                (float)(-1),
+                new NumberFormatInfo() { NegativeSign = "#" },
+                "#1",
+            };
         }
 
         public static IEnumerable<object[]> FromDouble_Format_TestData()
         {
             yield return new object[] { (double)(-1), default(NumberFormatInfo), "-1" };
-            yield return new object[] { (double)(-1), new NumberFormatInfo() { NegativeSign = "#" }, "#1" };
+            yield return new object[]
+            {
+                (double)(-1),
+                new NumberFormatInfo() { NegativeSign = "#" },
+                "#1",
+            };
         }
 
         public static IEnumerable<object[]> FromDecimal_Format_TestData()
         {
             yield return new object[] { (decimal)(-1), default(NumberFormatInfo), "-1" };
-            yield return new object[] { (decimal)(-1), new NumberFormatInfo() { NegativeSign = "#" }, "#1" };
+            yield return new object[]
+            {
+                (decimal)(-1),
+                new NumberFormatInfo() { NegativeSign = "#" },
+                "#1",
+            };
         }
 
         [Theory]
@@ -360,12 +383,19 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [InlineData("abc", 1, -3, "")]
         public void MidStmtStr_ArgumentException(string str, int start, int length, string insert)
         {
-            Assert.Throws<ArgumentException>(() => StringType.MidStmtStr(ref str, start, length, insert));
+            Assert.Throws<ArgumentException>(
+                () => StringType.MidStmtStr(ref str, start, length, insert)
+            );
         }
 
         [Theory]
         [MemberData(nameof(StrCmp_TestData))]
-        public void StrCmp(string left, string right, int expectedBinaryCompare, int expectedTextCompare)
+        public void StrCmp(
+            string left,
+            string right,
+            int expectedBinaryCompare,
+            int expectedTextCompare
+        )
         {
             Assert.Equal(expectedBinaryCompare, StringType.StrCmp(left, right, TextCompare: false));
             Assert.Equal(expectedTextCompare, StringType.StrCmp(left, right, TextCompare: true));
@@ -383,8 +413,20 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { "a", "a", 0, 0 };
             yield return new object[] { "a", "b", -1, -1 };
             yield return new object[] { "b", "a", 1, 1 };
-            yield return new object[] { "a", "ABC", 32, PlatformDetection.IsInvariantGlobalization ? -2 : -1 };
-            yield return new object[] { "ABC", "a", -32, PlatformDetection.IsInvariantGlobalization ? 2 : 1 };
+            yield return new object[]
+            {
+                "a",
+                "ABC",
+                32,
+                PlatformDetection.IsInvariantGlobalization ? -2 : -1,
+            };
+            yield return new object[]
+            {
+                "ABC",
+                "a",
+                -32,
+                PlatformDetection.IsInvariantGlobalization ? 2 : 1,
+            };
             yield return new object[] { "abc", "ABC", 32, 0 };
         }
 
@@ -396,10 +438,21 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [InlineData("a", "?", true, true)]
         [InlineData("a3", "[A-Z]#", false, true)]
         [InlineData("A3", "[a-z]#", false, true)]
-        public void StrLike(string source, string pattern, bool expectedBinaryCompare, bool expectedTextCompare)
+        public void StrLike(
+            string source,
+            string pattern,
+            bool expectedBinaryCompare,
+            bool expectedTextCompare
+        )
         {
-            Assert.Equal(expectedBinaryCompare, StringType.StrLike(source, pattern, CompareMethod.Binary));
-            Assert.Equal(expectedTextCompare, StringType.StrLike(source, pattern, CompareMethod.Text));
+            Assert.Equal(
+                expectedBinaryCompare,
+                StringType.StrLike(source, pattern, CompareMethod.Binary)
+            );
+            Assert.Equal(
+                expectedTextCompare,
+                StringType.StrLike(source, pattern, CompareMethod.Text)
+            );
             Assert.Equal(expectedBinaryCompare, StringType.StrLikeBinary(source, pattern));
             Assert.Equal(expectedTextCompare, StringType.StrLikeText(source, pattern));
         }
@@ -408,8 +461,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [InlineData(null, "*")]
         public void StrLike_NullReferenceException(string source, string pattern)
         {
-            Assert.Throws<NullReferenceException>(() => StringType.StrLike(source, pattern, CompareMethod.Binary));
-            Assert.Throws<NullReferenceException>(() => StringType.StrLike(source, pattern, CompareMethod.Text));
+            Assert.Throws<NullReferenceException>(
+                () => StringType.StrLike(source, pattern, CompareMethod.Binary)
+            );
+            Assert.Throws<NullReferenceException>(
+                () => StringType.StrLike(source, pattern, CompareMethod.Text)
+            );
             Assert.Throws<NullReferenceException>(() => StringType.StrLikeBinary(source, pattern));
             Assert.Throws<NullReferenceException>(() => StringType.StrLikeText(source, pattern));
         }

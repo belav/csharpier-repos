@@ -51,10 +51,15 @@ internal sealed class XmlDataContractSerializerMvcOptionsSetup : IConfigureOptio
         {
             options.FormatterMappings.SetMediaTypeMappingForFormat(
                 key,
-                MediaTypeHeaderValues.ApplicationXml);
+                MediaTypeHeaderValues.ApplicationXml
+            );
         }
 
-        options.ModelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider("System.Xml.Linq.XObject"));
-        options.ModelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider("System.Xml.XmlNode"));
+        options.ModelMetadataDetailsProviders.Add(
+            new SuppressChildValidationMetadataProvider("System.Xml.Linq.XObject")
+        );
+        options.ModelMetadataDetailsProviders.Add(
+            new SuppressChildValidationMetadataProvider("System.Xml.XmlNode")
+        );
     }
 }

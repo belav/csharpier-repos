@@ -21,12 +21,15 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             _flushQueue.AddWork();
         }
 
-        private async ValueTask FlushInMemoryDataToDiskIfNotShutdownAsync(CancellationToken cancellationToken)
+        private async ValueTask FlushInMemoryDataToDiskIfNotShutdownAsync(
+            CancellationToken cancellationToken
+        )
         {
             // When we are asked to flush, go actually acquire the write-scheduler and perform the actual writes from
             // it. Note: this is only called max every FlushAllDelayMS.  So we don't bother trying to avoid the delegate
             // allocation here.
-            await PerformWriteAsync(_flushInMemoryDataToDisk, cancellationToken).ConfigureAwait(false);
+            await PerformWriteAsync(_flushInMemoryDataToDisk, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         private Task FlushWritesOnCloseAsync()
@@ -56,13 +59,17 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                     // has released their ref on us. In that case, it would be an error on their part to ever try to
                     // read/write after releasing us.
                     _shutdownTokenSource.Cancel();
-                }, CancellationToken.None);
+                },
+                CancellationToken.None
+            );
         }
 
         private void FlushInMemoryDataToDisk()
         {
             // We're writing.  This better always be under the exclusive scheduler.
-            Contract.ThrowIfFalse(TaskScheduler.Current == _connectionPoolService.Scheduler.ExclusiveScheduler);
+            Contract.ThrowIfFalse(
+                TaskScheduler.Current == _connectionPoolService.Scheduler.ExclusiveScheduler
+            );
 
             // Don't flush from a bg task if we've been asked to shutdown.  The shutdown logic in the storage service
             // will take care of the final writes to the main db.
@@ -71,14 +78,22 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
             using var _ = _connectionPool.Target.GetPooledConnection(out var connection);
 
-            var exception = connection.RunInTransaction(static state =>
-            {
-                state.self._solutionAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(state.connection);
-                state.self._projectAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(state.connection);
-                state.self._documentAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(state.connection);
-            },
-            (self: this, connection),
-            throwOnSqlException: false);
+            var exception = connection.RunInTransaction(
+                static state =>
+                {
+                    state.self._solutionAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(
+                        state.connection
+                    );
+                    state.self._projectAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(
+                        state.connection
+                    );
+                    state.self._documentAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(
+                        state.connection
+                    );
+                },
+                (self: this, connection),
+                throwOnSqlException: false
+            );
 
             if (exception != null)
             {

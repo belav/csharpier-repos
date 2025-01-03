@@ -39,10 +39,16 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Xml.XmlDecryptionTransform))]
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Xml.XmlDsigBase64Transform))]
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Xml.XmlDsigC14NTransform))]
-[assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Xml.XmlDsigC14NWithCommentsTransform))]
-[assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform))]
+[assembly: TypeForwardedTo(
+    typeof(System.Security.Cryptography.Xml.XmlDsigC14NWithCommentsTransform)
+)]
+[assembly: TypeForwardedTo(
+    typeof(System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform)
+)]
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Xml.XmlDsigExcC14NTransform))]
-[assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Xml.XmlDsigExcC14NWithCommentsTransform))]
+[assembly: TypeForwardedTo(
+    typeof(System.Security.Cryptography.Xml.XmlDsigExcC14NWithCommentsTransform)
+)]
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Xml.XmlDsigXPathTransform))]
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Xml.XmlDsigXsltTransform))]
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Xml.XmlLicenseTransform))]

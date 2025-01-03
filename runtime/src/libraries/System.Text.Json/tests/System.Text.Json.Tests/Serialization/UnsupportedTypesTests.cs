@@ -5,10 +5,7 @@ namespace System.Text.Json.Serialization.Tests
 {
     public sealed partial class UnsupportedTypesTestsDynamic : UnsupportedTypesTests
     {
-        public UnsupportedTypesTestsDynamic() : base(
-            JsonSerializerWrapper.StringSerializer,
-            supportsJsonPathOnSerialize: true)
-        {
-        }
+        public UnsupportedTypesTestsDynamic()
+            : base(JsonSerializerWrapper.StringSerializer, supportsJsonPathOnSerialize: true) { }
     }
 }

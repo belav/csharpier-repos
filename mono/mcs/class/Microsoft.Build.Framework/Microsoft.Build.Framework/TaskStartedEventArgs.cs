@@ -29,46 +29,44 @@
 
 using System;
 
-namespace Microsoft.Build.Framework {
-	[Serializable]
-	public class TaskStartedEventArgs : BuildStatusEventArgs {
-	
-		string projectFile;
-		string taskFile;
-		string taskName;
+namespace Microsoft.Build.Framework
+{
+    [Serializable]
+    public class TaskStartedEventArgs : BuildStatusEventArgs
+    {
+        string projectFile;
+        string taskFile;
+        string taskName;
 
-		protected TaskStartedEventArgs ()
-		{
-		}
+        protected TaskStartedEventArgs() { }
 
-		public TaskStartedEventArgs (string message, string helpKeyword,
-					     string projectFile,
-					     string taskFile, string taskName)
-			: base (message, helpKeyword, null)
-		{
-			this.projectFile = projectFile;
-			this.taskFile = taskFile;
-			this.taskName = taskName;
-		}
+        public TaskStartedEventArgs(
+            string message,
+            string helpKeyword,
+            string projectFile,
+            string taskFile,
+            string taskName
+        )
+            : base(message, helpKeyword, null)
+        {
+            this.projectFile = projectFile;
+            this.taskFile = taskFile;
+            this.taskName = taskName;
+        }
 
-		public string ProjectFile {
-			get {
-				return projectFile;
-			}
-		}
+        public string ProjectFile
+        {
+            get { return projectFile; }
+        }
 
-		public string TaskFile {
-			get {
-				return taskFile;
-				
-			}
-		}
+        public string TaskFile
+        {
+            get { return taskFile; }
+        }
 
-		public string TaskName {
-			get {
-				return taskName;
-			}
-		}
-	}
+        public string TaskName
+        {
+            get { return taskName; }
+        }
+    }
 }
-

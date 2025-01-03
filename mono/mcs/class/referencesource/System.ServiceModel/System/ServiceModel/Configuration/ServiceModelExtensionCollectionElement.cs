@@ -15,7 +15,10 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Diagnostics;
     using System.Xml;
 
-    public abstract class ServiceModelExtensionCollectionElement<TServiceModelExtensionElement> : ConfigurationElement, ICollection<TServiceModelExtensionElement>, IConfigurationContextProviderInternal
+    public abstract class ServiceModelExtensionCollectionElement<TServiceModelExtensionElement>
+        : ConfigurationElement,
+            ICollection<TServiceModelExtensionElement>,
+            IConfigurationContextProviderInternal
         where TServiceModelExtensionElement : ServiceModelExtensionElement
     {
         [Fx.Tag.SecurityNote(Critical = "Stores information used in a security decision.")]
@@ -43,17 +46,23 @@ namespace System.ServiceModel.Configuration
             {
                 if (extensionType == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("extensionType");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "extensionType"
+                    );
                 }
 
                 if (!this.CollectionElementBaseType.IsAssignableFrom(extensionType))
                 {
 #pragma warning disable 56506 //Microsoft; Variable 'extensionType' checked for null previously
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("extensionType",
-                        SR.GetString(SR.ConfigInvalidExtensionType,
-                        extensionType.ToString(),
-                        this.CollectionElementBaseType.FullName,
-                        this.extensionCollectionName));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "extensionType",
+                        SR.GetString(
+                            SR.ConfigInvalidExtensionType,
+                            extensionType.ToString(),
+                            this.CollectionElementBaseType.FullName,
+                            this.extensionCollectionName
+                        )
+                    );
 #pragma warning restore
                 }
                 TServiceModelExtensionElement retval = null;
@@ -111,7 +120,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (element == null)
             {
@@ -122,19 +133,32 @@ namespace System.ServiceModel.Configuration
 
             if (this.Contains(element))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("element", SR.GetString(SR.ConfigDuplicateKey, element.ConfigurationElementName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "element",
+                    SR.GetString(SR.ConfigDuplicateKey, element.ConfigurationElementName)
+                );
             }
             else if (!this.CanAdd(element))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("element",
-                    SR.GetString(SR.ConfigElementTypeNotAllowed,
-                    element.ConfigurationElementName,
-                    this.extensionCollectionName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "element",
+                    SR.GetString(
+                        SR.ConfigElementTypeNotAllowed,
+                        element.ConfigurationElementName,
+                        this.extensionCollectionName
+                    )
+                );
             }
             else
             {
-                element.ContainingEvaluationContext = ConfigurationHelpers.GetEvaluationContext(this);
-                ConfigurationProperty configProperty = new ConfigurationProperty(element.ConfigurationElementName, element.GetType(), null);
+                element.ContainingEvaluationContext = ConfigurationHelpers.GetEvaluationContext(
+                    this
+                );
+                ConfigurationProperty configProperty = new ConfigurationProperty(
+                    element.ConfigurationElementName,
+                    element.GetType(),
+                    null
+                );
                 this.Properties.Add(configProperty);
                 this[configProperty] = element;
                 this.Items.Add(element);
@@ -146,7 +170,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             element.ExtensionCollectionName = this.extensionCollectionName;
             element.ContainingEvaluationContext = ConfigurationHelpers.GetEvaluationContext(this);
@@ -168,22 +194,33 @@ namespace System.ServiceModel.Configuration
             {
                 if (!this.ContainsKey(elementType))
                 {
-                    retval = element.CanAdd(this.extensionCollectionName, ConfigurationHelpers.GetEvaluationContext(this));
+                    retval = element.CanAdd(
+                        this.extensionCollectionName,
+                        ConfigurationHelpers.GetEvaluationContext(this)
+                    );
                 }
                 else if (DiagnosticUtility.ShouldTraceWarning)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Warning,
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Warning,
                         TraceCode.ExtensionElementAlreadyExistsInCollection,
                         SR.GetString(SR.TraceCodeExtensionElementAlreadyExistsInCollection),
-                        this.CreateCanAddRecord(this[elementType]), this, null);
+                        this.CreateCanAddRecord(this[elementType]),
+                        this,
+                        null
+                    );
                 }
             }
             else if (DiagnosticUtility.ShouldTraceWarning)
             {
-                TraceUtility.TraceEvent(TraceEventType.Warning,
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
                     TraceCode.ConfigurationIsReadOnly,
                     SR.GetString(SR.TraceCodeConfigurationIsReadOnly),
-                    null, this, null);
+                    null,
+                    this,
+                    null
+                );
             }
             return retval;
         }
@@ -193,11 +230,17 @@ namespace System.ServiceModel.Configuration
             return this.CreateCanAddRecord(element, new Dictionary<string, string>(3));
         }
 
-        DictionaryTraceRecord CreateCanAddRecord(TServiceModelExtensionElement element, Dictionary<string, string> values)
+        DictionaryTraceRecord CreateCanAddRecord(
+            TServiceModelExtensionElement element,
+            Dictionary<string, string> values
+        )
         {
-            values["ElementType"] = System.Runtime.Diagnostics.DiagnosticTraceBase.XmlEncode(typeof(TServiceModelExtensionElement).AssemblyQualifiedName);
+            values["ElementType"] = System.Runtime.Diagnostics.DiagnosticTraceBase.XmlEncode(
+                typeof(TServiceModelExtensionElement).AssemblyQualifiedName
+            );
             values["ConfiguredSectionName"] = element.ConfigurationElementName;
-            values["CollectionName"] = ConfigurationStrings.ExtensionsSectionPath + "/" + this.extensionCollectionName;
+            values["CollectionName"] =
+                ConfigurationStrings.ExtensionsSectionPath + "/" + this.extensionCollectionName;
             return new DictionaryTraceRecord(values);
         }
 
@@ -205,7 +248,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (this.Properties.Count > 0)
             {
@@ -279,10 +324,10 @@ namespace System.ServiceModel.Configuration
             }
             if (start < 0 || start >= elements.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("start",
-                    SR.GetString(SR.ConfigInvalidStartValue,
-                    elements.Length - 1,
-                    start));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "start",
+                    SR.GetString(SR.ConfigInvalidStartValue, elements.Length - 1, start)
+                );
             }
 
             foreach (TServiceModelExtensionElement element in this)
@@ -291,7 +336,9 @@ namespace System.ServiceModel.Configuration
                 {
                     string configuredSectionName = element.ConfigurationElementName;
 
-                    TServiceModelExtensionElement copiedElement = this.CreateNewSection(configuredSectionName);
+                    TServiceModelExtensionElement copiedElement = this.CreateNewSection(
+                        configuredSectionName
+                    );
                     if ((copiedElement != null) && (start < elements.Length))
                     {
                         copiedElement.CopyFrom(element);
@@ -307,13 +354,18 @@ namespace System.ServiceModel.Configuration
         /// </summary>
         TServiceModelExtensionElement CreateNewSection(string name)
         {
-            if (this.ContainsKey(name) && !(name == ConfigurationStrings.Clear || name == ConfigurationStrings.Remove))
+            if (
+                this.ContainsKey(name)
+                && !(name == ConfigurationStrings.Clear || name == ConfigurationStrings.Remove)
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigDuplicateItem,
-                    name,
-                    this.GetType().Name),
-                    this.ElementInformation.Source,
-                    this.ElementInformation.LineNumber));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(SR.ConfigDuplicateItem, name, this.GetType().Name),
+                        this.ElementInformation.Source,
+                        this.ElementInformation.LineNumber
+                    )
+                );
             }
 
             TServiceModelExtensionElement retval = null;
@@ -326,9 +378,12 @@ namespace System.ServiceModel.Configuration
             }
             catch (ConfigurationErrorsException e)
             {
-                // Work-around for bug 219506@CSDMain: if the extension type cannot be loaded, we'll ignore 
+                // Work-around for bug 219506@CSDMain: if the extension type cannot be loaded, we'll ignore
                 // the exception when running in win8 app container and reading from machine.config.
-                if (System.ServiceModel.Channels.AppContainerInfo.IsRunningInAppContainer && evaluationContext.IsMachineLevel)
+                if (
+                    System.ServiceModel.Channels.AppContainerInfo.IsRunningInAppContainer
+                    && evaluationContext.IsMachineLevel
+                )
                 {
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                     return null;
@@ -350,40 +405,61 @@ namespace System.ServiceModel.Configuration
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidExtensionElement,
-                        name,
-                        this.CollectionElementBaseType.FullName),
-                        this.ElementInformation.Source,
-                        this.ElementInformation.LineNumber));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidExtensionElement,
+                                name,
+                                this.CollectionElementBaseType.FullName
+                            ),
+                            this.ElementInformation.Source,
+                            this.ElementInformation.LineNumber
+                        )
+                    );
                 }
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidExtensionElementName,
-                    name,
-                    this.extensionCollectionName),
-                    this.ElementInformation.Source,
-                    this.ElementInformation.LineNumber));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigInvalidExtensionElementName,
+                            name,
+                            this.extensionCollectionName
+                        ),
+                        this.ElementInformation.Source,
+                        this.ElementInformation.LineNumber
+                    )
+                );
             }
 
             return retval;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method UnsafeLookupCollection which elevates in order to load config.",
-            Safe = "Does not leak any config objects.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method UnsafeLookupCollection which elevates in order to load config.",
+            Safe = "Does not leak any config objects."
+        )]
         [SecuritySafeCritical]
         Type GetExtensionType(ContextInformation evaluationContext, string name)
         {
-            ExtensionElementCollection collection = ExtensionsSection.UnsafeLookupCollection(this.extensionCollectionName, evaluationContext);
+            ExtensionElementCollection collection = ExtensionsSection.UnsafeLookupCollection(
+                this.extensionCollectionName,
+                evaluationContext
+            );
             if (collection.ContainsKey(name))
             {
                 ExtensionElement element = collection[name];
                 Type elementType = Type.GetType(element.Type, false);
                 if (null == elementType)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidType, element.Type, element.Name),
-                        this.ElementInformation.Source,
-                        this.ElementInformation.LineNumber));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.ConfigInvalidType, element.Type, element.Name),
+                            this.ElementInformation.Source,
+                            this.ElementInformation.LineNumber
+                        )
+                    );
                 }
                 return elementType;
             }
@@ -392,15 +468,23 @@ namespace System.ServiceModel.Configuration
 
         internal void MergeWith(List<TServiceModelExtensionElement> parentExtensionElements)
         {
-            ServiceModelExtensionCollectionElement<TServiceModelExtensionElement>.Merge(parentExtensionElements, this);
+            ServiceModelExtensionCollectionElement<TServiceModelExtensionElement>.Merge(
+                parentExtensionElements,
+                this
+            );
             this.Clear();
-            foreach (TServiceModelExtensionElement parentExtensionElement in parentExtensionElements)
+            foreach (
+                TServiceModelExtensionElement parentExtensionElement in parentExtensionElements
+            )
             {
                 this.Add(parentExtensionElement);
             }
         }
 
-        static void Merge(List<TServiceModelExtensionElement> parentExtensionElements, IEnumerable<TServiceModelExtensionElement> childExtensionElements)
+        static void Merge(
+            List<TServiceModelExtensionElement> parentExtensionElements,
+            IEnumerable<TServiceModelExtensionElement> childExtensionElements
+        )
         {
             foreach (TServiceModelExtensionElement childExtensionElement in childExtensionElements)
             {
@@ -410,23 +494,32 @@ namespace System.ServiceModel.Configuration
                 }
                 else if (childExtensionElement is RemoveBehaviorElement)
                 {
-                    string childExtensionElementName = (childExtensionElement as RemoveBehaviorElement).Name;
+                    string childExtensionElementName = (
+                        childExtensionElement as RemoveBehaviorElement
+                    ).Name;
                     if (!string.IsNullOrEmpty(childExtensionElementName))
                     {
-                        parentExtensionElements.RemoveAll(element => element != null && element.ConfigurationElementName == childExtensionElementName);
+                        parentExtensionElements.RemoveAll(element =>
+                            element != null
+                            && element.ConfigurationElementName == childExtensionElementName
+                        );
                     }
                 }
                 else
                 {
                     Type childExtensionElementType = childExtensionElement.GetType();
-                    parentExtensionElements.RemoveAll(element => element != null && element.GetType() == childExtensionElementType);
+                    parentExtensionElements.RemoveAll(element =>
+                        element != null && element.GetType() == childExtensionElementType
+                    );
                     parentExtensionElements.Add(childExtensionElement);
                 }
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses the critical helper SetIsPresent.",
-            Safe = "Controls how/when SetIsPresent is used, not arbitrarily callable from PT (method is protected and class is sealed).")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses the critical helper SetIsPresent.",
+            Safe = "Controls how/when SetIsPresent is used, not arbitrarily callable from PT (method is protected and class is sealed)."
+        )]
         [SecuritySafeCritical]
         protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
         {
@@ -442,7 +535,8 @@ namespace System.ServiceModel.Configuration
                 {
                     if (this.Properties.Contains(reader.Name))
                     {
-                        this[reader.Name] = this.Properties[reader.Name].Converter.ConvertFromString(reader.Value);
+                        this[reader.Name] = this.Properties[reader.Name]
+                            .Converter.ConvertFromString(reader.Value);
                     }
                     else
                     {
@@ -466,7 +560,9 @@ namespace System.ServiceModel.Configuration
                         // Create new child element and add it to the property collection to
                         // associate the element with an EvaluationContext.  Then deserialize
                         // XML further to set actual values.
-                        TServiceModelExtensionElement collectionElement = this.CreateNewSection(subTree.Name);
+                        TServiceModelExtensionElement collectionElement = this.CreateNewSection(
+                            subTree.Name
+                        );
                         if (collectionElement != null)
                         {
                             this.Add(collectionElement);
@@ -477,7 +573,9 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls ConfigurationHelpers.SetIsPresent which elevates in order to set a property.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls ConfigurationHelpers.SetIsPresent which elevates in order to set a property."
+        )]
         [SecurityCritical]
         void SetIsPresent()
         {
@@ -511,7 +609,10 @@ namespace System.ServiceModel.Configuration
             return retval;
         }
 
-        protected override bool OnDeserializeUnrecognizedElement(string elementName, XmlReader reader)
+        protected override bool OnDeserializeUnrecognizedElement(
+            string elementName,
+            XmlReader reader
+        )
         {
             // When this is used as a DefaultCollection (i.e. CommonBehaviors)
             // the element names are unrecognized by the parent tag, which delegates
@@ -534,7 +635,8 @@ namespace System.ServiceModel.Configuration
             {
                 string configuredSectionName = element.ConfigurationElementName;
 
-                TServiceModelExtensionElement existingElement = (TServiceModelExtensionElement)this[element.GetType()];
+                TServiceModelExtensionElement existingElement = (TServiceModelExtensionElement)
+                    this[element.GetType()];
                 this.Items.Remove(existingElement);
                 this.Properties.Remove(configuredSectionName);
                 this.modified = true;
@@ -548,7 +650,8 @@ namespace System.ServiceModel.Configuration
         protected override void Reset(ConfigurationElement parentElement)
         {
             ServiceModelExtensionCollectionElement<TServiceModelExtensionElement> collection =
-                (ServiceModelExtensionCollectionElement<TServiceModelExtensionElement>)parentElement;
+                (ServiceModelExtensionCollectionElement<TServiceModelExtensionElement>)
+                    parentElement;
             foreach (TServiceModelExtensionElement collectionElement in collection.Items)
             {
                 this.Items.Add(collectionElement);
@@ -592,20 +695,28 @@ namespace System.ServiceModel.Configuration
             return this.GetEnumerator();
         }
 
-        protected override void Unmerge(ConfigurationElement sourceElement, ConfigurationElement parentElement, ConfigurationSaveMode saveMode)
+        protected override void Unmerge(
+            ConfigurationElement sourceElement,
+            ConfigurationElement parentElement,
+            ConfigurationSaveMode saveMode
+        )
         {
             if (sourceElement == null)
             {
                 return;
             }
 
-            ServiceModelExtensionCollectionElement<TServiceModelExtensionElement> sourceCollectionElement = (ServiceModelExtensionCollectionElement<TServiceModelExtensionElement>)sourceElement;
+            ServiceModelExtensionCollectionElement<TServiceModelExtensionElement> sourceCollectionElement =
+                (ServiceModelExtensionCollectionElement<TServiceModelExtensionElement>)
+                    sourceElement;
 
             this.UpdateProperties(sourceCollectionElement);
             base.Unmerge(sourceElement, parentElement, saveMode);
         }
 
-        void UpdateProperties(ServiceModelExtensionCollectionElement<TServiceModelExtensionElement> sourceElement)
+        void UpdateProperties(
+            ServiceModelExtensionCollectionElement<TServiceModelExtensionElement> sourceElement
+        )
         {
             foreach (ConfigurationProperty property in sourceElement.Properties)
             {
@@ -622,7 +733,11 @@ namespace System.ServiceModel.Configuration
                 string configuredSectionName = extension.ConfigurationElementName;
                 if (!this.Properties.Contains(configuredSectionName))
                 {
-                    ConfigurationProperty configProperty = new ConfigurationProperty(configuredSectionName, extension.GetType(), null);
+                    ConfigurationProperty configProperty = new ConfigurationProperty(
+                        configuredSectionName,
+                        extension.GetType(),
+                        null
+                    );
                     this.Properties.Add(configProperty);
                 }
             }
@@ -633,8 +748,10 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses critical field contextHelper.",
-            Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses critical field contextHelper.",
+            Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition."
+        )]
         [SecurityCritical]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {
@@ -642,4 +759,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-

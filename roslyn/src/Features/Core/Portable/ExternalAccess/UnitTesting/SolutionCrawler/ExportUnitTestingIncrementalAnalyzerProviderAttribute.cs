@@ -19,7 +19,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
         public string Name { get; }
         public string[] WorkspaceKinds { get; }
 
-        public ExportUnitTestingIncrementalAnalyzerProviderAttribute(string name, string[] workspaceKinds)
+        public ExportUnitTestingIncrementalAnalyzerProviderAttribute(
+            string name,
+            string[] workspaceKinds
+        )
             : base(typeof(IUnitTestingIncrementalAnalyzerProvider))
         {
             this.WorkspaceKinds = workspaceKinds;

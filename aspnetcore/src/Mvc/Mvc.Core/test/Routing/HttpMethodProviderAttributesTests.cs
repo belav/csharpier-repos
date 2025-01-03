@@ -9,13 +9,17 @@ public class HttpMethodProviderAttributesTests
     [MemberData(nameof(HttpMethodProviderTestData))]
     public void HttpMethodProviderAttributes_ReturnsCorrectHttpMethodSequence(
         IActionHttpMethodProvider httpMethodProvider,
-        IEnumerable<string> expectedHttpMethods)
+        IEnumerable<string> expectedHttpMethods
+    )
     {
         // Act & Assert
         Assert.Equal(expectedHttpMethods, httpMethodProvider.HttpMethods);
     }
 
-    public static TheoryData<IActionHttpMethodProvider, IEnumerable<string>> HttpMethodProviderTestData
+    public static TheoryData<
+        IActionHttpMethodProvider,
+        IEnumerable<string>
+    > HttpMethodProviderTestData
     {
         get
         {

@@ -17,12 +17,54 @@ public class UrlSegmentTests
     [InlineData("http", "localhost", 80, "/foo bar", (int)UriMatchPart.Path, "/foo%20bar")]
     [InlineData("http", "localhost", 80, null, (int)UriMatchPart.Full, "http://localhost:80/")]
     [InlineData("http", "localhost", 80, "", (int)UriMatchPart.Full, "http://localhost:80/")]
-    [InlineData("http", "localhost", 80, "/foo:bar", (int)UriMatchPart.Full, "http://localhost:80/foo:bar")]
-    [InlineData("http", "localhost", 80, "/foo bar", (int)UriMatchPart.Full, "http://localhost:80/foo%20bar")]
-    [InlineData("http", "localhost", 80, "/foo/bar", (int)UriMatchPart.Full, "http://localhost:80/foo/bar")]
-    [InlineData("http", "localhost", 81, "/foo/bar", (int)UriMatchPart.Full, "http://localhost:81/foo/bar")]
-    [InlineData("https", "localhost", 443, "/foo/bar", (int)UriMatchPart.Full, "https://localhost:443/foo/bar")]
-    public void AssertSegmentIsCorrect(string scheme, string host, int port, string path, int uriMatchPart, string expectedResult)
+    [InlineData(
+        "http",
+        "localhost",
+        80,
+        "/foo:bar",
+        (int)UriMatchPart.Full,
+        "http://localhost:80/foo:bar"
+    )]
+    [InlineData(
+        "http",
+        "localhost",
+        80,
+        "/foo bar",
+        (int)UriMatchPart.Full,
+        "http://localhost:80/foo%20bar"
+    )]
+    [InlineData(
+        "http",
+        "localhost",
+        80,
+        "/foo/bar",
+        (int)UriMatchPart.Full,
+        "http://localhost:80/foo/bar"
+    )]
+    [InlineData(
+        "http",
+        "localhost",
+        81,
+        "/foo/bar",
+        (int)UriMatchPart.Full,
+        "http://localhost:81/foo/bar"
+    )]
+    [InlineData(
+        "https",
+        "localhost",
+        443,
+        "/foo/bar",
+        (int)UriMatchPart.Full,
+        "https://localhost:443/foo/bar"
+    )]
+    public void AssertSegmentIsCorrect(
+        string scheme,
+        string host,
+        int port,
+        string path,
+        int uriMatchPart,
+        string expectedResult
+    )
     {
         // Arrange
         var httpContext = new DefaultHttpContext();

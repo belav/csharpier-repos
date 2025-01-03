@@ -67,29 +67,52 @@ namespace System.ServiceModel.Channels
         public static ActionHeader Create(string action, AddressingVersion addressingVersion)
         {
             if (action == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("action"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("action")
+                );
             if (addressingVersion == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("addressingVersion");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "addressingVersion"
+                );
             return new ActionHeader(action, addressingVersion);
         }
 
-        public static ActionHeader Create(XmlDictionaryString dictionaryAction, AddressingVersion addressingVersion)
+        public static ActionHeader Create(
+            XmlDictionaryString dictionaryAction,
+            AddressingVersion addressingVersion
+        )
         {
             if (dictionaryAction == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("action"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("action")
+                );
             if (addressingVersion == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("addressingVersion");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "addressingVersion"
+                );
             return new DictionaryActionHeader(dictionaryAction, addressingVersion);
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             writer.WriteString(action);
         }
 
-        public static string ReadHeaderValue(XmlDictionaryReader reader, AddressingVersion addressingVersion)
+        public static string ReadHeaderValue(
+            XmlDictionaryReader reader,
+            AddressingVersion addressingVersion
+        )
         {
-            Fx.Assert(reader.IsStartElement(XD.AddressingDictionary.Action, addressingVersion.DictionaryNamespace), "");
+            Fx.Assert(
+                reader.IsStartElement(
+                    XD.AddressingDictionary.Action,
+                    addressingVersion.DictionaryNamespace
+                ),
+                ""
+            );
             string act = reader.ReadElementContentAsString();
 
             if (act.Length > 0 && (act[0] <= 32 || act[act.Length - 1] <= 32))
@@ -98,8 +121,13 @@ namespace System.ServiceModel.Channels
             return act;
         }
 
-        public static ActionHeader ReadHeader(XmlDictionaryReader reader, AddressingVersion version,
-            string actor, bool mustUnderstand, bool relay)
+        public static ActionHeader ReadHeader(
+            XmlDictionaryReader reader,
+            AddressingVersion version,
+            string actor,
+            bool mustUnderstand,
+            bool relay
+        )
         {
             string action = ReadHeaderValue(reader, version);
 
@@ -117,13 +145,19 @@ namespace System.ServiceModel.Channels
         {
             XmlDictionaryString dictionaryAction;
 
-            public DictionaryActionHeader(XmlDictionaryString dictionaryAction, AddressingVersion version)
+            public DictionaryActionHeader(
+                XmlDictionaryString dictionaryAction,
+                AddressingVersion version
+            )
                 : base(dictionaryAction.Value, version)
             {
                 this.dictionaryAction = dictionaryAction;
             }
 
-            protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+            protected override void OnWriteHeaderContents(
+                XmlDictionaryWriter writer,
+                MessageVersion messageVersion
+            )
             {
                 writer.WriteString(dictionaryAction);
             }
@@ -135,7 +169,13 @@ namespace System.ServiceModel.Channels
             bool mustUnderstand;
             bool relay;
 
-            public FullActionHeader(string action, string actor, bool mustUnderstand, bool relay, AddressingVersion version)
+            public FullActionHeader(
+                string action,
+                string actor,
+                bool mustUnderstand,
+                bool relay,
+                AddressingVersion version
+            )
                 : base(action, version)
             {
                 this.actor = actor;
@@ -189,19 +229,31 @@ namespace System.ServiceModel.Channels
         public static FromHeader Create(EndpointAddress from, AddressingVersion addressingVersion)
         {
             if (from == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("from"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("from")
+                );
             if (addressingVersion == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("addressingVersion");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "addressingVersion"
+                );
             return new FromHeader(from, addressingVersion);
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             from.WriteContentsTo(this.Version, writer);
         }
 
-        public static FromHeader ReadHeader(XmlDictionaryReader reader, AddressingVersion version,
-            string actor, bool mustUnderstand, bool relay)
+        public static FromHeader ReadHeader(
+            XmlDictionaryReader reader,
+            AddressingVersion version,
+            string actor,
+            bool mustUnderstand,
+            bool relay
+        )
         {
             EndpointAddress from = ReadHeaderValue(reader, version);
 
@@ -215,9 +267,18 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public static EndpointAddress ReadHeaderValue(XmlDictionaryReader reader, AddressingVersion addressingVersion)
+        public static EndpointAddress ReadHeaderValue(
+            XmlDictionaryReader reader,
+            AddressingVersion addressingVersion
+        )
         {
-            Fx.Assert(reader.IsStartElement(XD.AddressingDictionary.From, addressingVersion.DictionaryNamespace), "");
+            Fx.Assert(
+                reader.IsStartElement(
+                    XD.AddressingDictionary.From,
+                    addressingVersion.DictionaryNamespace
+                ),
+                ""
+            );
             return EndpointAddress.ReadFrom(addressingVersion, reader);
         }
 
@@ -227,7 +288,13 @@ namespace System.ServiceModel.Channels
             bool mustUnderstand;
             bool relay;
 
-            public FullFromHeader(EndpointAddress from, string actor, bool mustUnderstand, bool relay, AddressingVersion version)
+            public FullFromHeader(
+                EndpointAddress from,
+                string actor,
+                bool mustUnderstand,
+                bool relay,
+                AddressingVersion version
+            )
                 : base(from, version)
             {
                 this.actor = actor;
@@ -278,22 +345,37 @@ namespace System.ServiceModel.Channels
             get { return mustUnderstandValue; }
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             faultTo.WriteContentsTo(this.Version, writer);
         }
 
-        public static FaultToHeader Create(EndpointAddress faultTo, AddressingVersion addressingVersion)
+        public static FaultToHeader Create(
+            EndpointAddress faultTo,
+            AddressingVersion addressingVersion
+        )
         {
             if (faultTo == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("faultTo"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("faultTo")
+                );
             if (addressingVersion == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("addressingVersion");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "addressingVersion"
+                );
             return new FaultToHeader(faultTo, addressingVersion);
         }
 
-        public static FaultToHeader ReadHeader(XmlDictionaryReader reader, AddressingVersion version,
-            string actor, bool mustUnderstand, bool relay)
+        public static FaultToHeader ReadHeader(
+            XmlDictionaryReader reader,
+            AddressingVersion version,
+            string actor,
+            bool mustUnderstand,
+            bool relay
+        )
         {
             EndpointAddress faultTo = ReadHeaderValue(reader, version);
 
@@ -307,9 +389,15 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public static EndpointAddress ReadHeaderValue(XmlDictionaryReader reader, AddressingVersion version)
+        public static EndpointAddress ReadHeaderValue(
+            XmlDictionaryReader reader,
+            AddressingVersion version
+        )
         {
-            Fx.Assert(reader.IsStartElement(XD.AddressingDictionary.FaultTo, version.DictionaryNamespace), "");
+            Fx.Assert(
+                reader.IsStartElement(XD.AddressingDictionary.FaultTo, version.DictionaryNamespace),
+                ""
+            );
             return EndpointAddress.ReadFrom(version, reader);
         }
 
@@ -319,7 +407,13 @@ namespace System.ServiceModel.Channels
             bool mustUnderstand;
             bool relay;
 
-            public FullFaultToHeader(EndpointAddress faultTo, string actor, bool mustUnderstand, bool relay, AddressingVersion version)
+            public FullFaultToHeader(
+                EndpointAddress faultTo,
+                string actor,
+                bool mustUnderstand,
+                bool relay,
+                AddressingVersion version
+            )
                 : base(faultTo, version)
             {
                 this.actor = actor;
@@ -373,7 +467,9 @@ namespace System.ServiceModel.Channels
             get
             {
                 if (anonymousToHeader200408 == null)
-                    anonymousToHeader200408 = new AnonymousToHeader(AddressingVersion.WSAddressingAugust2004);
+                    anonymousToHeader200408 = new AnonymousToHeader(
+                        AddressingVersion.WSAddressingAugust2004
+                    );
                 return anonymousToHeader200408;
             }
         }
@@ -393,10 +489,16 @@ namespace System.ServiceModel.Channels
             get { return to; }
         }
 
-        public static ToHeader Create(Uri toUri, XmlDictionaryString dictionaryTo, AddressingVersion addressingVersion)
+        public static ToHeader Create(
+            Uri toUri,
+            XmlDictionaryString dictionaryTo,
+            AddressingVersion addressingVersion
+        )
         {
             if (addressingVersion == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("addressingVersion");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "addressingVersion"
+                );
 
             if (((object)toUri == (object)addressingVersion.AnonymousUri))
             {
@@ -415,7 +517,9 @@ namespace System.ServiceModel.Channels
         {
             if ((object)to == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("to"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("to")
+                );
             }
             else if ((object)to == (object)addressingVersion.AnonymousUri)
             {
@@ -430,7 +534,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             writer.WriteString(to.AbsoluteUri);
         }
@@ -440,9 +547,16 @@ namespace System.ServiceModel.Channels
             return ReadHeaderValue(reader, version, null);
         }
 
-        public static Uri ReadHeaderValue(XmlDictionaryReader reader, AddressingVersion version, UriCache uriCache)
+        public static Uri ReadHeaderValue(
+            XmlDictionaryReader reader,
+            AddressingVersion version,
+            UriCache uriCache
+        )
         {
-            Fx.Assert(reader.IsStartElement(XD.AddressingDictionary.To, version.DictionaryNamespace), "");
+            Fx.Assert(
+                reader.IsStartElement(XD.AddressingDictionary.To, version.DictionaryNamespace),
+                ""
+            );
 
             string toString = reader.ReadElementContentAsString();
 
@@ -459,8 +573,14 @@ namespace System.ServiceModel.Channels
             return uriCache.CreateUri(toString);
         }
 
-        public static ToHeader ReadHeader(XmlDictionaryReader reader, AddressingVersion version, UriCache uriCache,
-            string actor, bool mustUnderstand, bool relay)
+        public static ToHeader ReadHeader(
+            XmlDictionaryReader reader,
+            AddressingVersion version,
+            UriCache uriCache,
+            string actor,
+            bool mustUnderstand,
+            bool relay
+        )
         {
             Uri to = ReadHeaderValue(reader, version, uriCache);
 
@@ -487,11 +607,12 @@ namespace System.ServiceModel.Channels
         class AnonymousToHeader : ToHeader
         {
             public AnonymousToHeader(AddressingVersion version)
-                : base(version.AnonymousUri, version)
-            {
-            }
+                : base(version.AnonymousUri, version) { }
 
-            protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+            protected override void OnWriteHeaderContents(
+                XmlDictionaryWriter writer,
+                MessageVersion messageVersion
+            )
             {
                 writer.WriteString(this.Version.DictionaryAnonymous);
             }
@@ -501,13 +622,20 @@ namespace System.ServiceModel.Channels
         {
             XmlDictionaryString dictionaryTo;
 
-            public DictionaryToHeader(Uri to, XmlDictionaryString dictionaryTo, AddressingVersion version)
+            public DictionaryToHeader(
+                Uri to,
+                XmlDictionaryString dictionaryTo,
+                AddressingVersion version
+            )
                 : base(to, version)
             {
                 this.dictionaryTo = dictionaryTo;
             }
 
-            protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+            protected override void OnWriteHeaderContents(
+                XmlDictionaryWriter writer,
+                MessageVersion messageVersion
+            )
             {
                 writer.WriteString(dictionaryTo);
             }
@@ -519,7 +647,13 @@ namespace System.ServiceModel.Channels
             bool mustUnderstand;
             bool relay;
 
-            public FullToHeader(Uri to, string actor, bool mustUnderstand, bool relay, AddressingVersion version)
+            public FullToHeader(
+                Uri to,
+                string actor,
+                bool mustUnderstand,
+                bool relay,
+                AddressingVersion version
+            )
                 : base(to, version)
             {
                 this.actor = actor;
@@ -577,7 +711,10 @@ namespace System.ServiceModel.Channels
             get
             {
                 if (anonymousReplyToHeader10 == null)
-                    anonymousReplyToHeader10 = new ReplyToHeader(EndpointAddress.AnonymousAddress, AddressingVersion.WSAddressing10);
+                    anonymousReplyToHeader10 = new ReplyToHeader(
+                        EndpointAddress.AnonymousAddress,
+                        AddressingVersion.WSAddressing10
+                    );
                 return anonymousReplyToHeader10;
             }
         }
@@ -587,27 +724,45 @@ namespace System.ServiceModel.Channels
             get
             {
                 if (anonymousReplyToHeader200408 == null)
-                    anonymousReplyToHeader200408 = new ReplyToHeader(EndpointAddress.AnonymousAddress, AddressingVersion.WSAddressingAugust2004);
+                    anonymousReplyToHeader200408 = new ReplyToHeader(
+                        EndpointAddress.AnonymousAddress,
+                        AddressingVersion.WSAddressingAugust2004
+                    );
                 return anonymousReplyToHeader200408;
             }
         }
 
-        public static ReplyToHeader Create(EndpointAddress replyTo, AddressingVersion addressingVersion)
+        public static ReplyToHeader Create(
+            EndpointAddress replyTo,
+            AddressingVersion addressingVersion
+        )
         {
             if (replyTo == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("replyTo"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("replyTo")
+                );
             if (addressingVersion == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("addressingVersion"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("addressingVersion")
+                );
             return new ReplyToHeader(replyTo, addressingVersion);
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             replyTo.WriteContentsTo(this.Version, writer);
         }
 
-        public static ReplyToHeader ReadHeader(XmlDictionaryReader reader, AddressingVersion version,
-            string actor, bool mustUnderstand, bool relay)
+        public static ReplyToHeader ReadHeader(
+            XmlDictionaryReader reader,
+            AddressingVersion version,
+            string actor,
+            bool mustUnderstand,
+            bool relay
+        )
         {
             EndpointAddress replyTo = ReadHeaderValue(reader, version);
 
@@ -628,9 +783,15 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public static EndpointAddress ReadHeaderValue(XmlDictionaryReader reader, AddressingVersion version)
+        public static EndpointAddress ReadHeaderValue(
+            XmlDictionaryReader reader,
+            AddressingVersion version
+        )
         {
-            Fx.Assert(reader.IsStartElement(XD.AddressingDictionary.ReplyTo, version.DictionaryNamespace), "");
+            Fx.Assert(
+                reader.IsStartElement(XD.AddressingDictionary.ReplyTo, version.DictionaryNamespace),
+                ""
+            );
             return EndpointAddress.ReadFrom(version, reader);
         }
 
@@ -640,7 +801,13 @@ namespace System.ServiceModel.Channels
             bool mustUnderstand;
             bool relay;
 
-            public FullReplyToHeader(EndpointAddress replyTo, string actor, bool mustUnderstand, bool relay, AddressingVersion version)
+            public FullReplyToHeader(
+                EndpointAddress replyTo,
+                string actor,
+                bool mustUnderstand,
+                bool relay,
+                AddressingVersion version
+            )
                 : base(replyTo, version)
             {
                 this.actor = actor;
@@ -691,28 +858,52 @@ namespace System.ServiceModel.Channels
             get { return mustUnderstandValue; }
         }
 
-        public static MessageIDHeader Create(UniqueId messageId, AddressingVersion addressingVersion)
+        public static MessageIDHeader Create(
+            UniqueId messageId,
+            AddressingVersion addressingVersion
+        )
         {
             if (object.ReferenceEquals(messageId, null))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("messageId"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("messageId")
+                );
             if (addressingVersion == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("addressingVersion"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("addressingVersion")
+                );
             return new MessageIDHeader(messageId, addressingVersion);
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             writer.WriteValue(messageId);
         }
 
-        public static UniqueId ReadHeaderValue(XmlDictionaryReader reader, AddressingVersion version)
+        public static UniqueId ReadHeaderValue(
+            XmlDictionaryReader reader,
+            AddressingVersion version
+        )
         {
-            Fx.Assert(reader.IsStartElement(XD.AddressingDictionary.MessageId, version.DictionaryNamespace), "");
+            Fx.Assert(
+                reader.IsStartElement(
+                    XD.AddressingDictionary.MessageId,
+                    version.DictionaryNamespace
+                ),
+                ""
+            );
             return reader.ReadElementContentAsUniqueId();
         }
 
-        public static MessageIDHeader ReadHeader(XmlDictionaryReader reader, AddressingVersion version,
-            string actor, bool mustUnderstand, bool relay)
+        public static MessageIDHeader ReadHeader(
+            XmlDictionaryReader reader,
+            AddressingVersion version,
+            string actor,
+            bool mustUnderstand,
+            bool relay
+        )
         {
             UniqueId messageId = ReadHeaderValue(reader, version);
 
@@ -732,7 +923,13 @@ namespace System.ServiceModel.Channels
             bool mustUnderstand;
             bool relay;
 
-            public FullMessageIDHeader(UniqueId messageId, string actor, bool mustUnderstand, bool relay, AddressingVersion version)
+            public FullMessageIDHeader(
+                UniqueId messageId,
+                string actor,
+                bool mustUnderstand,
+                bool relay,
+                AddressingVersion version
+            )
                 : base(messageId, version)
             {
                 this.actor = actor;
@@ -761,7 +958,9 @@ namespace System.ServiceModel.Channels
     {
         UniqueId messageId;
         const bool mustUnderstandValue = false;
-        internal static readonly Uri ReplyRelationshipType = new Uri(Addressing10Strings.ReplyRelationship);
+        internal static readonly Uri ReplyRelationshipType = new Uri(
+            Addressing10Strings.ReplyRelationship
+        );
 
         RelatesToHeader(UniqueId messageId, AddressingVersion version)
             : base(version)
@@ -789,23 +988,40 @@ namespace System.ServiceModel.Channels
             get { return ReplyRelationshipType; }
         }
 
-        public static RelatesToHeader Create(UniqueId messageId, AddressingVersion addressingVersion)
+        public static RelatesToHeader Create(
+            UniqueId messageId,
+            AddressingVersion addressingVersion
+        )
         {
             if (object.ReferenceEquals(messageId, null))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("messageId"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("messageId")
+                );
             if (addressingVersion == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("addressingVersion"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("addressingVersion")
+                );
             return new RelatesToHeader(messageId, addressingVersion);
         }
 
-        public static RelatesToHeader Create(UniqueId messageId, AddressingVersion addressingVersion, Uri relationshipType)
+        public static RelatesToHeader Create(
+            UniqueId messageId,
+            AddressingVersion addressingVersion,
+            Uri relationshipType
+        )
         {
             if (object.ReferenceEquals(messageId, null))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("messageId"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("messageId")
+                );
             if (addressingVersion == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("addressingVersion"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("addressingVersion")
+                );
             if (relationshipType == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("relationshipType"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("relationshipType")
+                );
             if (relationshipType == ReplyRelationshipType)
             {
                 return new RelatesToHeader(messageId, addressingVersion);
@@ -816,12 +1032,20 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             writer.WriteValue(messageId);
         }
 
-        public static void ReadHeaderValue(XmlDictionaryReader reader, AddressingVersion version, out Uri relationshipType, out UniqueId messageId)
+        public static void ReadHeaderValue(
+            XmlDictionaryReader reader,
+            AddressingVersion version,
+            out Uri relationshipType,
+            out UniqueId messageId
+        )
         {
             AddressingDictionary addressingDictionary = XD.AddressingDictionary;
 
@@ -838,18 +1062,31 @@ namespace System.ServiceModel.Channels
                 relationshipType = new Uri(relation);
             }
             */
-            Fx.Assert(reader.IsStartElement(addressingDictionary.RelatesTo, version.DictionaryNamespace), "");
+            Fx.Assert(
+                reader.IsStartElement(addressingDictionary.RelatesTo, version.DictionaryNamespace),
+                ""
+            );
             messageId = reader.ReadElementContentAsUniqueId();
         }
 
-        public static RelatesToHeader ReadHeader(XmlDictionaryReader reader, AddressingVersion version,
-            string actor, bool mustUnderstand, bool relay)
+        public static RelatesToHeader ReadHeader(
+            XmlDictionaryReader reader,
+            AddressingVersion version,
+            string actor,
+            bool mustUnderstand,
+            bool relay
+        )
         {
             UniqueId messageId;
             Uri relationship;
             ReadHeaderValue(reader, version, out relationship, out messageId);
 
-            if (actor.Length == 0 && mustUnderstand == mustUnderstandValue && !relay && (object)relationship == (object)ReplyRelationshipType)
+            if (
+                actor.Length == 0
+                && mustUnderstand == mustUnderstandValue
+                && !relay
+                && (object)relationship == (object)ReplyRelationshipType
+            )
             {
                 return new RelatesToHeader(messageId, version);
             }
@@ -864,9 +1101,16 @@ namespace System.ServiceModel.Channels
             string actor;
             bool mustUnderstand;
             bool relay;
+
             //Uri relationship;
 
-            public FullRelatesToHeader(UniqueId messageId, string actor, bool mustUnderstand, bool relay, AddressingVersion version)
+            public FullRelatesToHeader(
+                UniqueId messageId,
+                string actor,
+                bool mustUnderstand,
+                bool relay,
+                AddressingVersion version
+            )
                 : base(messageId, version)
             {
                 //this.relationship = relationship;
@@ -897,7 +1141,10 @@ namespace System.ServiceModel.Channels
                 get { return relay; }
             }
 
-            protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+            protected override void OnWriteHeaderContents(
+                XmlDictionaryWriter writer,
+                MessageVersion messageVersion
+            )
             {
                 /*
                 if ((object)relationship != (object)ReplyRelationshipType)

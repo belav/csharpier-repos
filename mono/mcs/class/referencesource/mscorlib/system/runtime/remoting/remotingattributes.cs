@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 **  File:    RemotingAttributes.cs
-** 
+**
 **  Purpose: Custom attributes for modifying remoting interactions.
 **
 **
@@ -14,16 +14,16 @@
 
 namespace System.Runtime.Remoting.Metadata
 {
+    using System.Reflection;
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Remoting.Metadata;
-    using System.Reflection;
-    using System.Threading;
     using System.Runtime.Serialization;
+    using System.Threading;
     using TypeInfo = System.Runtime.Remoting.TypeInfo;
 
     // This is the data we store in MemberInfo.CachedData, mainly to cache custom
     //   attributes.
-    internal abstract class RemotingCachedData 
+    internal abstract class RemotingCachedData
     {
         private SoapAttribute _soapAttr = null; // Soap related attributes derive from SoapAttribute
 
@@ -44,18 +44,18 @@ namespace System.Runtime.Remoting.Metadata
             return _soapAttr;
         } // GetSoapAttribute
 
-        abstract internal SoapAttribute GetSoapAttributeNoLock();
+        internal abstract SoapAttribute GetSoapAttributeNoLock();
     } // class RemotingCachedData
-
 
     internal class RemotingFieldCachedData : RemotingCachedData
     {
-        private FieldInfo RI;  // reflection structure on which this data structure is stored
+        private FieldInfo RI; // reflection structure on which this data structure is stored
 
         internal RemotingFieldCachedData(RuntimeFieldInfo ri)
         {
             RI = ri;
         }
+
         internal RemotingFieldCachedData(SerializationFieldInfo ri)
         {
             RI = ri;
@@ -80,10 +80,9 @@ namespace System.Runtime.Remoting.Metadata
         }
     }
 
-
     internal class RemotingParameterCachedData : RemotingCachedData
     {
-        private RuntimeParameterInfo RI;  // reflection structure on which this data structure is stored
+        private RuntimeParameterInfo RI; // reflection structure on which this data structure is stored
 
         internal RemotingParameterCachedData(RuntimeParameterInfo ri)
         {
@@ -108,22 +107,21 @@ namespace System.Runtime.Remoting.Metadata
         }
     }
 
-
     internal class RemotingTypeCachedData : RemotingCachedData
     {
         private RuntimeType RI;
+
         private class LastCalledMethodClass
         {
-            public String      methodName;
-            public MethodBase  MB;
+            public String methodName;
+            public MethodBase MB;
         }
 
         private LastCalledMethodClass _lastMethodCalled; // cache for last method that was called
         private TypeInfo _typeInfo; // type info to be used for ObjRef's of this type
         private String _qualifiedTypeName;
-        private String _assemblyName; 
+        private String _assemblyName;
         private String _simpleAssemblyName; // (no strong name, version, etc.)
-
 
         internal RemotingTypeCachedData(RuntimeType ri)
         {
@@ -149,14 +147,14 @@ namespace System.Runtime.Remoting.Metadata
 
         internal MethodBase GetLastCalledMethod(String newMeth)
         {
-            LastCalledMethodClass lastMeth = _lastMethodCalled;                        
+            LastCalledMethodClass lastMeth = _lastMethodCalled;
             if (lastMeth == null)
                 return null;
 
             String methodName = lastMeth.methodName;
             MethodBase mbToReturn = lastMeth.MB;
 
-            if (mbToReturn==null || methodName==null)
+            if (mbToReturn == null || methodName == null)
                 return null;
 
             if (methodName.Equals(newMeth))
@@ -167,31 +165,29 @@ namespace System.Runtime.Remoting.Metadata
 
         internal void SetLastCalledMethod(String newMethName, MethodBase newMB)
         {
-            LastCalledMethodClass lastMeth = new LastCalledMethodClass();           
+            LastCalledMethodClass lastMeth = new LastCalledMethodClass();
             lastMeth.methodName = newMethName;
             lastMeth.MB = newMB;
 
             _lastMethodCalled = lastMeth;
         } // SetLastCalledMethod
 
-
         // Retrieve TypeInfo object to be used in ObjRef.
         internal TypeInfo TypeInfo
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
-            {   
+            {
                 if (_typeInfo == null)
                     _typeInfo = new TypeInfo(RI);
-                    
+
                 return _typeInfo;
             }
         } // TypeInfo
 
-
         internal String QualifiedTypeName
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_qualifiedTypeName == null)
@@ -200,7 +196,6 @@ namespace System.Runtime.Remoting.Metadata
                 return _qualifiedTypeName;
             }
         } // QualifiedTypeName
-
 
         internal String AssemblyName
         {
@@ -212,11 +207,10 @@ namespace System.Runtime.Remoting.Metadata
                 return _assemblyName;
             }
         } // AssemblyName
-            
 
         internal String SimpleAssemblyName
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_simpleAssemblyName == null)
@@ -225,26 +219,25 @@ namespace System.Runtime.Remoting.Metadata
                 return _simpleAssemblyName;
             }
         } // SimpleAssemblyName
-
     } // class RemotingTypeCachedData
-
 
     internal class RemotingMethodCachedData : RemotingCachedData
     {
         private MethodBase RI;
         private ParameterInfo[] _parameters = null; // list of parameters (cached because reflection always
-                                                    //   generates a new copy of this array)
+
+        //   generates a new copy of this array)
 
         [Serializable]
         [Flags]
         private enum MethodCacheFlags
         {
-            None                 = 0x00,
-            CheckedOneWay        = 0x01, // Have we checked for OneWay attribute?
-            IsOneWay             = 0x02, // Is the OneWay attribute present?
-            CheckedOverloaded    = 0x04, // Have we checked to see if this method is overloaded
-            IsOverloaded         = 0x08, // Is the method overloaded?
-            CheckedForAsync      = 0x10, // Have we looked for async versions of this method?
+            None = 0x00,
+            CheckedOneWay = 0x01, // Have we checked for OneWay attribute?
+            IsOneWay = 0x02, // Is the OneWay attribute present?
+            CheckedOverloaded = 0x04, // Have we checked to see if this method is overloaded
+            IsOverloaded = 0x08, // Is the method overloaded?
+            CheckedForAsync = 0x10, // Have we looked for async versions of this method?
             CheckedForReturnType = 0x20, // Have we looked for the return type?
         }
 
@@ -256,15 +249,15 @@ namespace System.Runtime.Remoting.Metadata
         private Type _returnType = null; // null if return type is void or .ctor
 
         // parameter maps
-        // NOTE: these fields are all initialized at the same time however access to 
-        // the internal property of each field is locked only on that specific field 
+        // NOTE: these fields are all initialized at the same time however access to
+        // the internal property of each field is locked only on that specific field
         // having been initialized. - Microsoft
-        private int[] _inRefArgMap = null;     // parameter map of input and ref parameters
-        private int[] _outRefArgMap = null;     // parameter map of out and ref parameters (exactly all byref parameters)
-        private int[] _outOnlyArgMap = null;   // parameter map of only output parameters
+        private int[] _inRefArgMap = null; // parameter map of input and ref parameters
+        private int[] _outRefArgMap = null; // parameter map of out and ref parameters (exactly all byref parameters)
+        private int[] _outOnlyArgMap = null; // parameter map of only output parameters
         private int[] _nonRefOutArgMap = null; // parameter map of non byref parameters marked with [In, Out] (or [Out])
 
-        private int[] _marshalRequestMap = null;  // map of parameters that should be marshaled in
+        private int[] _marshalRequestMap = null; // map of parameters that should be marshaled in
         private int[] _marshalResponseMap = null; // map of parameters that should be marshaled out
 
         internal RemotingMethodCachedData(RuntimeMethodInfo ri)
@@ -296,7 +289,7 @@ namespace System.Runtime.Remoting.Metadata
 
         internal String TypeAndAssemblyName
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_typeAndAssemblyName == null)
@@ -307,7 +300,7 @@ namespace System.Runtime.Remoting.Metadata
 
         internal String MethodName
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_methodName == null)
@@ -316,16 +309,19 @@ namespace System.Runtime.Remoting.Metadata
             }
         } // MethodName
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private void UpdateNames()
         {
             MethodBase mb = RI;
             _methodName = mb.Name;
-            if (mb.DeclaringType != null) {
-                _typeAndAssemblyName = RemotingServices.GetDefaultQualifiedTypeName((RuntimeType)mb.DeclaringType);       
+            if (mb.DeclaringType != null)
+            {
+                _typeAndAssemblyName = RemotingServices.GetDefaultQualifiedTypeName(
+                    (RuntimeType)mb.DeclaringType
+                );
             }
         } // UpdateNames
-        
+
         internal ParameterInfo[] Parameters
         {
             get
@@ -336,11 +332,10 @@ namespace System.Runtime.Remoting.Metadata
             }
         } // Parameters
 
-
         // contains index of all byref parameters (marked as "out" or "ref")
         internal int[] OutRefArgMap
         {
-            get 
+            get
             {
                 if (_outRefArgMap == null)
                     GetArgMaps();
@@ -370,7 +365,7 @@ namespace System.Runtime.Remoting.Metadata
             }
         } // NonRefOutArgMap
 
-        // contains index of parameters that should be marshalled for a request        
+        // contains index of parameters that should be marshalled for a request
         internal int[] MarshalRequestArgMap
         {
             get
@@ -392,7 +387,6 @@ namespace System.Runtime.Remoting.Metadata
             }
         } // MarshalResponseArgMap
 
-
         private void GetArgMaps()
         {
             lock (this)
@@ -405,11 +399,16 @@ namespace System.Runtime.Remoting.Metadata
                     int[] nonRefOutArgMap = null;
                     int[] marshalRequestMap = null;
                     int[] marshalResponseMap = null;
-                
-                    ArgMapper.GetParameterMaps(Parameters,
-                        out inRefArgMap, out outRefArgMap, out outOnlyArgMap, 
+
+                    ArgMapper.GetParameterMaps(
+                        Parameters,
+                        out inRefArgMap,
+                        out outRefArgMap,
+                        out outOnlyArgMap,
                         out nonRefOutArgMap,
-                        out marshalRequestMap, out marshalResponseMap);
+                        out marshalRequestMap,
+                        out marshalResponseMap
+                    );
 
                     _inRefArgMap = inRefArgMap;
                     _outRefArgMap = outRefArgMap;
@@ -417,26 +416,25 @@ namespace System.Runtime.Remoting.Metadata
                     _nonRefOutArgMap = nonRefOutArgMap;
                     _marshalRequestMap = marshalRequestMap;
                     _marshalResponseMap = marshalResponseMap;
-                    
                 }
             }
         } // GetArgMaps
-                                
+
         internal bool IsOneWayMethod()
         {
             // We are not protecting against a ----
             // If there is a ---- while setting flags
-            // we will have to compute the result again, 
+            // we will have to compute the result again,
             // but we will always return the correct result
-            // 
+            //
             if ((flags & MethodCacheFlags.CheckedOneWay) == 0)
             {
                 MethodCacheFlags isOneWay = MethodCacheFlags.CheckedOneWay;
                 Object[] attrs = RI.GetCustomAttributes(typeof(OneWayAttribute), true);
-                    
+
                 if ((attrs != null) && (attrs.Length > 0))
                     isOneWay |= MethodCacheFlags.IsOneWay;
-                
+
                 flags |= isOneWay;
                 return (isOneWay & MethodCacheFlags.IsOneWay) != 0;
             }
@@ -447,9 +445,9 @@ namespace System.Runtime.Remoting.Metadata
         {
             // We are not protecting against a ----
             // If there is a ---- while setting flags
-            // we will have to compute the result again, 
+            // we will have to compute the result again,
             // but we will always return the correct result
-            // 
+            //
             if ((flags & MethodCacheFlags.CheckedOverloaded) == 0)
             {
                 MethodCacheFlags isOverloaded = MethodCacheFlags.CheckedOverloaded;
@@ -470,7 +468,9 @@ namespace System.Runtime.Remoting.Metadata
                 }
                 else
                 {
-                    throw new NotSupportedException(Environment.GetResourceString("InvalidOperation_Method"));
+                    throw new NotSupportedException(
+                        Environment.GetResourceString("InvalidOperation_Method")
+                    );
                 }
 
                 flags |= isOverloaded;
@@ -478,7 +478,6 @@ namespace System.Runtime.Remoting.Metadata
 
             return (flags & MethodCacheFlags.IsOverloaded) != 0;
         } // IsOverloaded
-
 
         // This will return the return type of the method, or null
         // if the return type is void or this is a .ctor.
@@ -495,20 +494,18 @@ namespace System.Runtime.Remoting.Metadata
                         if (returnType != typeof(void))
                             _returnType = returnType;
                     }
-                
+
                     flags |= MethodCacheFlags.CheckedForReturnType;
                 }
-               
+
                 return _returnType;
             } // get
         } // ReturnType
-
     } // class RemotingMethodCachedData
-
 
     //
     // SOAP ATTRIBUTES
-    // 
+    //
 
     // Options for use with SoapOptionAttribute (combine with OR to get any combination)
     [Serializable]
@@ -518,10 +515,12 @@ namespace System.Runtime.Remoting.Metadata
     {
         None = 0x0,
         AlwaysIncludeTypes = 0x1, // xsi:type always included on SOAP elements
-        XsdString = 0x2, // xsi:type always included on SOAP elements    
+        XsdString = 0x2, // xsi:type always included on SOAP elements
         EmbedAll = 0x4, // Soap will be generated without references
+
         /// <internalonly/>
         Option1 = 0x8, // Option for temporary interop conditions, the use will change over time
+
         /// <internalonly/>
         Option2 = 0x10, // Option for temporary interop conditions, the use will change over time
     } // SoapOption
@@ -533,13 +532,18 @@ namespace System.Runtime.Remoting.Metadata
     {
         All,
         Sequence,
-        Choice
-    } // XmlFieldOrderOption 
+        Choice,
+    } // XmlFieldOrderOption
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Enum)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Interface
+            | AttributeTargets.Enum
+    )]
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class SoapTypeAttribute : SoapAttribute
-    {    
+    {
         // Used to track which values have been explicitly set. Information needed
         // by SoapServices.
         [Serializable]
@@ -550,31 +554,30 @@ namespace System.Runtime.Remoting.Metadata
             XmlElementName = 0x1,
             XmlNamespace = 0x2,
             XmlTypeName = 0x4,
-            XmlTypeNamespace = 0x8
+            XmlTypeNamespace = 0x8,
         }
 
-        private ExplicitlySet _explicitlySet = ExplicitlySet.None;        
-    
-        private SoapOption           _SoapOptions = SoapOption.None;
-        private String               _XmlElementName = null;
-        private String               _XmlTypeName = null;
-        private String               _XmlTypeNamespace = null;
-        private XmlFieldOrderOption  _XmlFieldOrder = XmlFieldOrderOption.All;
+        private ExplicitlySet _explicitlySet = ExplicitlySet.None;
 
+        private SoapOption _SoapOptions = SoapOption.None;
+        private String _XmlElementName = null;
+        private String _XmlTypeName = null;
+        private String _XmlTypeNamespace = null;
+        private XmlFieldOrderOption _XmlFieldOrder = XmlFieldOrderOption.All;
 
         // Returns true if this attribute specifies interop xml element values.
         internal bool IsInteropXmlElement()
         {
-            return (_explicitlySet & (ExplicitlySet.XmlElementName | ExplicitlySet.XmlNamespace)) != 0;
-        } // IsInteropXmlElement       
+            return (_explicitlySet & (ExplicitlySet.XmlElementName | ExplicitlySet.XmlNamespace))
+                != 0;
+        } // IsInteropXmlElement
 
         internal bool IsInteropXmlType()
         {
-            return (_explicitlySet & (ExplicitlySet.XmlTypeName | ExplicitlySet.XmlTypeNamespace)) != 0;
+            return (_explicitlySet & (ExplicitlySet.XmlTypeName | ExplicitlySet.XmlTypeNamespace))
+                != 0;
         } // IsInteropXmlType
-        
 
-        
         public SoapOption SoapOptions
         {
             get { return _SoapOptions; }
@@ -583,24 +586,23 @@ namespace System.Runtime.Remoting.Metadata
 
         public String XmlElementName
         {
-            get 
+            get
             {
                 // generate this if it hasn't been set yet
                 if ((_XmlElementName == null) && (ReflectInfo != null))
                     _XmlElementName = GetTypeName((Type)ReflectInfo);
-                return _XmlElementName; 
+                return _XmlElementName;
             }
-            
-            set 
+            set
             {
-                _XmlElementName = value; 
+                _XmlElementName = value;
                 _explicitlySet |= ExplicitlySet.XmlElementName;
             }
         } // XmlElementName
 
         public override String XmlNamespace
         {
-            get 
+            get
             {
                 // generate this if it hasn't been set
                 if ((ProtXmlNamespace == null) && (ReflectInfo != null))
@@ -609,48 +611,47 @@ namespace System.Runtime.Remoting.Metadata
                 }
                 return ProtXmlNamespace;
             }
-            
-            set 
-            { 
-                ProtXmlNamespace = value; 
+            set
+            {
+                ProtXmlNamespace = value;
                 _explicitlySet |= ExplicitlySet.XmlNamespace;
             }
         } // XmlNamespace
 
         public String XmlTypeName // value for xml type name (this should always be valid)
         {
-            get 
-            { 
+            get
+            {
                 // generate this if it hasn't been set yet
                 if ((_XmlTypeName == null) && (ReflectInfo != null))
                     _XmlTypeName = GetTypeName((Type)ReflectInfo);
-                return _XmlTypeName; 
+                return _XmlTypeName;
             }
-            
-            set 
+            set
             {
-                _XmlTypeName = value; 
+                _XmlTypeName = value;
                 _explicitlySet |= ExplicitlySet.XmlTypeName;
             }
         } // XmlTypeName
 
         public String XmlTypeNamespace // value for xml type namespace (this should always be valid)
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get 
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get
             {
                 // generate this if it hasn't been set yet
                 if ((_XmlTypeNamespace == null) && (ReflectInfo != null))
                 {
-                    _XmlTypeNamespace = 
-                        XmlNamespaceEncoder.GetXmlNamespaceForTypeNamespace((RuntimeType)ReflectInfo, null);
+                    _XmlTypeNamespace = XmlNamespaceEncoder.GetXmlNamespaceForTypeNamespace(
+                        (RuntimeType)ReflectInfo,
+                        null
+                    );
                 }
-                return _XmlTypeNamespace; 
+                return _XmlTypeNamespace;
             }
-            
-            set 
-            { 
-                _XmlTypeNamespace = value; 
+            set
+            {
+                _XmlTypeNamespace = value;
                 _explicitlySet |= ExplicitlySet.XmlTypeNamespace;
             }
         } // XmlTypeNamespace
@@ -665,32 +666,38 @@ namespace System.Runtime.Remoting.Metadata
         public override bool UseAttribute
         {
             get { return false; }
-            set { throw new RemotingException(
-                                Environment.GetResourceString("Remoting_Attribute_UseAttributeNotsettable")); }
+            set
+            {
+                throw new RemotingException(
+                    Environment.GetResourceString("Remoting_Attribute_UseAttributeNotsettable")
+                );
+            }
         } // UseAttribute
-        
-        private static string GetTypeName(Type t) {
-            if (t.IsNested) {
+
+        private static string GetTypeName(Type t)
+        {
+            if (t.IsNested)
+            {
                 string name = t.FullName;
                 string ns = t.Namespace;
-                if (ns == null || ns.Length == 0) {
+                if (ns == null || ns.Length == 0)
+                {
                     return name;
                 }
-                else {
+                else
+                {
                     name = name.Substring(ns.Length + 1);
                     return name;
                 }
             }
             return t.Name;
         }
-
     } // class SoapTypeAttribute
-
 
     [AttributeUsage(AttributeTargets.Method)]
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class SoapMethodAttribute : SoapAttribute
-    {       
+    {
         private String _SoapAction = null;
 
         private String _responseXmlElementName = null;
@@ -698,29 +705,32 @@ namespace System.Runtime.Remoting.Metadata
         private String _returnXmlElementName = null;
 
         private bool _bSoapActionExplicitySet = false; // Needed by SoapServices to determine if
-                                                       // SoapAction was actually set (otherwise,
-                                                       // accessing it will return a generated
-                                                       // value)    
 
-        internal bool SoapActionExplicitySet { get { return _bSoapActionExplicitySet; } }
+        // SoapAction was actually set (otherwise,
+        // accessing it will return a generated
+        // value)
+
+        internal bool SoapActionExplicitySet
+        {
+            get { return _bSoapActionExplicitySet; }
+        }
 
         public String SoapAction // SoapAction value to place in protocol headers.
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get 
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get
             {
                 // generate this if it hasn't been set
                 if (_SoapAction == null)
                 {
-                    _SoapAction = XmlTypeNamespaceOfDeclaringType + "#" +
-                        ((MemberInfo)ReflectInfo).Name; // This will be the method name.
+                    _SoapAction =
+                        XmlTypeNamespaceOfDeclaringType + "#" + ((MemberInfo)ReflectInfo).Name; // This will be the method name.
                 }
-                return _SoapAction; 
+                return _SoapAction;
             }
-                
-            set 
+            set
             {
-                _SoapAction = value; 
+                _SoapAction = value;
                 _bSoapActionExplicitySet = true;
             }
         }
@@ -728,14 +738,18 @@ namespace System.Runtime.Remoting.Metadata
         public override bool UseAttribute
         {
             get { return false; }
-            set { throw new RemotingException(
-                                Environment.GetResourceString("Remoting_Attribute_UseAttributeNotsettable")); }
+            set
+            {
+                throw new RemotingException(
+                    Environment.GetResourceString("Remoting_Attribute_UseAttributeNotsettable")
+                );
+            }
         }
 
         public override String XmlNamespace
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get 
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get
             {
                 // generate this if it hasn't been set
                 if (ProtXmlNamespace == null)
@@ -744,70 +758,63 @@ namespace System.Runtime.Remoting.Metadata
                 }
                 return ProtXmlNamespace;
             }
-            
             set { ProtXmlNamespace = value; }
         } // XmlNamespace
 
-
         public String ResponseXmlElementName
         {
-            get 
+            get
             {
                 // generate this if it hasn't been set yet
-                if ((_responseXmlElementName == null) && (ReflectInfo != null))                
+                if ((_responseXmlElementName == null) && (ReflectInfo != null))
                     _responseXmlElementName = ((MemberInfo)ReflectInfo).Name + "Response";
-                return _responseXmlElementName; 
+                return _responseXmlElementName;
             }
-            
             set { _responseXmlElementName = value; }
         } // ResponseXmlElementName
-        
 
         public String ResponseXmlNamespace
         {
-            get 
+            get
             {
                 // generate this if it hasn't been set
                 if (_responseXmlNamespace == null)
                     _responseXmlNamespace = XmlNamespace;
                 return _responseXmlNamespace;
             }
-            
             set { _responseXmlNamespace = value; }
         } // ResponseXmlNamespace
 
-
         public String ReturnXmlElementName
         {
-            get 
+            get
             {
                 // generate this if it hasn't been set yet
-                if (_returnXmlElementName == null)                
+                if (_returnXmlElementName == null)
                     _returnXmlElementName = "return";
-                return _returnXmlElementName; 
+                return _returnXmlElementName;
             }
-            
             set { _returnXmlElementName = value; }
         } // ReturnXmlElementName
 
-
-        private String XmlTypeNamespaceOfDeclaringType 
-        { 
-            [System.Security.SecurityCritical]  // auto-generated
-            get 
-            { 
+        private String XmlTypeNamespaceOfDeclaringType
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get
+            {
                 if (ReflectInfo != null)
                 {
                     Type declaringType = ((MemberInfo)ReflectInfo).DeclaringType;
-                    return XmlNamespaceEncoder.GetXmlNamespaceForType((RuntimeType)declaringType, null);
+                    return XmlNamespaceEncoder.GetXmlNamespaceForType(
+                        (RuntimeType)declaringType,
+                        null
+                    );
                 }
                 else
                     return null;
             }
         } // XmlTypeNamespaceOfDeclaringType
-
     } // class SoapMethodAttribute
-
 
     [AttributeUsage(AttributeTargets.Field)]
     [System.Runtime.InteropServices.ComVisible(true)]
@@ -820,41 +827,38 @@ namespace System.Runtime.Remoting.Metadata
         private enum ExplicitlySet
         {
             None = 0x0,
-            XmlElementName = 0x1
+            XmlElementName = 0x1,
         }
 
         private ExplicitlySet _explicitlySet = ExplicitlySet.None;
-    
 
-        private String _xmlElementName = null;  
-        private int _order; // order in which fields should be serialized 
-                            //  (if Sequence is specified on containing type's SoapTypeAttribute
+        private String _xmlElementName = null;
+        private int _order; // order in which fields should be serialized
+
+        //  (if Sequence is specified on containing type's SoapTypeAttribute
 
 
         // Returns true if this attribute specifies interop xml element values.
         public bool IsInteropXmlElement()
         {
             return (_explicitlySet & ExplicitlySet.XmlElementName) != 0;
-        } // GetInteropXmlElement        
-
+        } // GetInteropXmlElement
 
         public String XmlElementName
         {
-            get 
+            get
             {
                 // generate this if it hasn't been set yet
-                if ((_xmlElementName == null) && (ReflectInfo != null))                
+                if ((_xmlElementName == null) && (ReflectInfo != null))
                     _xmlElementName = ((FieldInfo)ReflectInfo).Name;
-                return _xmlElementName; 
+                return _xmlElementName;
             }
-            
-            set 
+            set
             {
-                _xmlElementName = value; 
+                _xmlElementName = value;
                 _explicitlySet |= ExplicitlySet.XmlElementName;
             }
         } // XmlElementName
-
 
         /// <internalonly/>
         public int Order
@@ -862,29 +866,23 @@ namespace System.Runtime.Remoting.Metadata
             get { return _order; }
             set { _order = value; }
         }
-        
     } // class SoapFieldAttribute
-
 
     [AttributeUsage(AttributeTargets.Parameter)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class SoapParameterAttribute : SoapAttribute
-    {
-    } // SoapParameterAttribute
-
-
+    public sealed class SoapParameterAttribute : SoapAttribute { } // SoapParameterAttribute
 
     // Not actually used as an attribute (just the base for the rest of them)
     [System.Runtime.InteropServices.ComVisible(true)]
     public class SoapAttribute : Attribute
     {
         /// <internalonly/>
-        protected String  ProtXmlNamespace = null;
-        private   bool    _bUseAttribute = false;
-        private   bool    _bEmbedded = false;
-        
+        protected String ProtXmlNamespace = null;
+        private bool _bUseAttribute = false;
+        private bool _bEmbedded = false;
+
         /// <internalonly/>
-        protected Object  ReflectInfo = null; // Reflection structure on which this attribute was defined
+        protected Object ReflectInfo = null; // Reflection structure on which this attribute was defined
 
         // IMPORTANT: The caching mechanism is required to set this value before
         //   handing back a SoapAttribute, so that certain values can be automatically
@@ -899,8 +897,8 @@ namespace System.Runtime.Remoting.Metadata
             get { return ProtXmlNamespace; }
             set { ProtXmlNamespace = value; }
         }
-            
-        public virtual bool UseAttribute 
+
+        public virtual bool UseAttribute
         {
             get { return _bUseAttribute; }
             set { _bUseAttribute = value; }
@@ -911,14 +909,9 @@ namespace System.Runtime.Remoting.Metadata
             get { return _bEmbedded; }
             set { _bEmbedded = value; }
         }
-        
     } // class SoapAttribute
-
 
     //
     // END OF SOAP ATTRIBUTES
     //
-    
-
 } // namespace System.Runtime.Remoting
-

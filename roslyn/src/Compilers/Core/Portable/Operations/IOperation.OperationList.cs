@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis
                 return new EnumeratorImpl(new Enumerator(_operation));
             }
 
-            IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<IOperation>)this).GetEnumerator();
+            IEnumerator IEnumerable.GetEnumerator() =>
+                ((IEnumerable<IOperation>)this).GetEnumerator();
 
             public bool Any() => Count > 0;
 
@@ -105,8 +106,9 @@ namespace Microsoft.CodeAnalysis
                 /// <see cref="Operation.GetCurrent(int, int)"/> methods, respectively.
                 /// </summary>
                 private readonly Operation _operation;
+
                 /// <summary>
-                /// 
+                ///
                 /// </summary>
                 private int _currentSlot;
                 private int _currentIndex;
@@ -130,7 +132,10 @@ namespace Microsoft.CodeAnalysis
                 public bool MoveNext()
                 {
                     bool result;
-                    (result, _currentSlot, _currentIndex) = _operation.MoveNext(_currentSlot, _currentIndex);
+                    (result, _currentSlot, _currentIndex) = _operation.MoveNext(
+                        _currentSlot,
+                        _currentIndex
+                    );
                     return result;
                 }
 
@@ -152,8 +157,11 @@ namespace Microsoft.CodeAnalysis
 
                 public IOperation Current => _enumerator.Current;
                 object? IEnumerator.Current => _enumerator.Current;
+
                 public void Dispose() { }
+
                 public bool MoveNext() => _enumerator.MoveNext();
+
                 public void Reset() => _enumerator.Reset();
             }
         }

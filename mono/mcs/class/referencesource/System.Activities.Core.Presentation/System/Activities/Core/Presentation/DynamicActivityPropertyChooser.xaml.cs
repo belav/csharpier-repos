@@ -22,7 +22,9 @@ namespace System.Activities.Core.Presentation
 
             this.InitializeComponent();
 
-            this.Model.PropertyChanged += new PropertyChangedEventHandler(this.OnModelPropertyChanged);
+            this.Model.PropertyChanged += new PropertyChangedEventHandler(
+                this.OnModelPropertyChanged
+            );
             this.comboBox.DropDownOpened += new EventHandler(this.OnComboBoxDropDownOpened);
         }
 
@@ -30,52 +32,29 @@ namespace System.Activities.Core.Presentation
 
         public DynamicActivityPropertyChooserViewModel Model
         {
-            get
-            {
-                return this.model;
-            }
-
-            set
-            {
-                this.model = value;
-            }
+            get { return this.model; }
+            set { this.model = value; }
         }
 
         public ModelItemCollection Properties
         {
-            set
-            {
-                this.Model.Properties = value;
-            }
+            set { this.Model.Properties = value; }
         }
 
         public Predicate<DynamicActivityProperty> Filter
         {
-            set
-            {
-                this.Model.Filter = value;
-            }
+            set { this.Model.Filter = value; }
         }
 
         public string SelectedPropertyName
         {
-            get
-            {
-                return this.Model.SelectedPropertyName;
-            }
-
-            set
-            {
-                this.Model.SelectedPropertyName = value;
-            }
+            get { return this.Model.SelectedPropertyName; }
+            set { this.Model.SelectedPropertyName = value; }
         }
 
         public bool IsUpdatingDropDownItems
         {
-            get
-            {
-                return this.Model.IsUpdatingDropDownItems;
-            }
+            get { return this.Model.IsUpdatingDropDownItems; }
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -95,7 +74,10 @@ namespace System.Activities.Core.Presentation
             {
                 if (this.SelectedPropertyNameChanged != null)
                 {
-                    this.SelectedPropertyNameChanged(this, new SelectedPropertyNameChangedEventArgs(this.Model.SelectedPropertyName));
+                    this.SelectedPropertyNameChanged(
+                        this,
+                        new SelectedPropertyNameChangedEventArgs(this.Model.SelectedPropertyName)
+                    );
                 }
             }
         }

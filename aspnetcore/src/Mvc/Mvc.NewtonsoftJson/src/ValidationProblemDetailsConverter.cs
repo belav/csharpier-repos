@@ -17,15 +17,23 @@ public sealed class ValidationProblemDetailsConverter : JsonConverter
     }
 
     /// <inheritdoc />
-    public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+    public override object? ReadJson(
+        JsonReader reader,
+        Type objectType,
+        object? existingValue,
+        JsonSerializer serializer
+    )
     {
-        var annotatedProblemDetails = serializer.Deserialize<AnnotatedValidationProblemDetails>(reader);
+        var annotatedProblemDetails = serializer.Deserialize<AnnotatedValidationProblemDetails>(
+            reader
+        );
         if (annotatedProblemDetails == null)
         {
             return null;
         }
 
-        var problemDetails = (ValidationProblemDetails?)existingValue ?? new ValidationProblemDetails();
+        var problemDetails =
+            (ValidationProblemDetails?)existingValue ?? new ValidationProblemDetails();
         annotatedProblemDetails.CopyTo(problemDetails);
 
         return problemDetails;
@@ -63,7 +71,8 @@ public sealed class ValidationProblemDetailsConverter : JsonConverter
         }
 
         [JsonProperty(PropertyName = "errors")]
-        public IDictionary<string, string[]> Errors { get; } = new Dictionary<string, string[]>(StringComparer.Ordinal);
+        public IDictionary<string, string[]> Errors { get; } =
+            new Dictionary<string, string[]>(StringComparer.Ordinal);
 
         public void CopyTo(ValidationProblemDetails problemDetails)
         {

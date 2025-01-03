@@ -35,7 +35,8 @@ public interface IProviderConfigurationCodeGenerator
     /// <returns>The code fragment.</returns>
     MethodCallCodeFragment GenerateUseProvider(
         string connectionString,
-        MethodCallCodeFragment? providerOptions);
+        MethodCallCodeFragment? providerOptions
+    );
 
     /// <summary>
     ///     Generates a method chain to configure additional context options.
@@ -49,15 +50,13 @@ public interface IProviderConfigurationCodeGenerator
     /// </summary>
     /// <param name="connectionString">The connection string to include in the code fragment.</param>
     /// <returns>The code fragment.</returns>
-    MethodCallCodeFragment GenerateUseProvider(string connectionString)
-        => GenerateUseProviderInternal(connectionString);
+    MethodCallCodeFragment GenerateUseProvider(string connectionString) =>
+        GenerateUseProviderInternal(connectionString);
 
     // Issue #28537.
     internal sealed MethodCallCodeFragment GenerateUseProviderInternal(string connectionString)
     {
-        var useProviderCall = GenerateUseProvider(
-            connectionString,
-            GenerateProviderOptions());
+        var useProviderCall = GenerateUseProvider(connectionString, GenerateProviderOptions());
         var contextOptions = GenerateContextOptions();
         if (contextOptions != null)
         {

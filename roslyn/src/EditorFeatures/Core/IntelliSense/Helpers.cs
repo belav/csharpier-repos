@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
     {
         internal static IReadOnlyCollection<object> BuildInteractiveTextElements(
             ImmutableArray<TaggedText> taggedTexts,
-            IntellisenseQuickInfoBuilderContext? context)
+            IntellisenseQuickInfoBuilderContext? context
+        )
         {
             var index = 0;
             return BuildInteractiveTextElements(taggedTexts, ref index, context);
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
         private static IReadOnlyCollection<object> BuildInteractiveTextElements(
             ImmutableArray<TaggedText> taggedTexts,
             ref int index,
-            IntellisenseQuickInfoBuilderContext? context)
+            IntellisenseQuickInfoBuilderContext? context
+        )
         {
             // This method produces a sequence of zero or more paragraphs
             var paragraphs = new List<object>();
@@ -67,25 +69,42 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                     }
 
                     index++;
-                    var nestedElements = BuildInteractiveTextElements(taggedTexts, ref index, context);
+                    var nestedElements = BuildInteractiveTextElements(
+                        taggedTexts,
+                        ref index,
+                        context
+                    );
                     if (nestedElements.Count <= 1)
                     {
-                        currentParagraph.Add(new ContainerElement(
-                            ContainerElementStyle.Wrapped,
-                            new ClassifiedTextElement(new ClassifiedTextRun(ClassificationTypeNames.Text, part.Text)),
-                            new ContainerElement(ContainerElementStyle.Stacked, nestedElements)));
+                        currentParagraph.Add(
+                            new ContainerElement(
+                                ContainerElementStyle.Wrapped,
+                                new ClassifiedTextElement(
+                                    new ClassifiedTextRun(ClassificationTypeNames.Text, part.Text)
+                                ),
+                                new ContainerElement(ContainerElementStyle.Stacked, nestedElements)
+                            )
+                        );
                     }
                     else
                     {
-                        currentParagraph.Add(new ContainerElement(
-                            ContainerElementStyle.Wrapped,
-                            new ClassifiedTextElement(new ClassifiedTextRun(ClassificationTypeNames.Text, part.Text)),
+                        currentParagraph.Add(
                             new ContainerElement(
-                                ContainerElementStyle.Stacked,
-                                nestedElements.First(),
+                                ContainerElementStyle.Wrapped,
+                                new ClassifiedTextElement(
+                                    new ClassifiedTextRun(ClassificationTypeNames.Text, part.Text)
+                                ),
                                 new ContainerElement(
-                                    ContainerElementStyle.Stacked | ContainerElementStyle.VerticalPadding,
-                                    nestedElements.Skip(1)))));
+                                    ContainerElementStyle.Stacked,
+                                    nestedElements.First(),
+                                    new ContainerElement(
+                                        ContainerElementStyle.Stacked
+                                            | ContainerElementStyle.VerticalPadding,
+                                        nestedElements.Skip(1)
+                                    )
+                                )
+                            )
+                        );
                     }
 
                     index++;
@@ -97,8 +116,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                     break;
                 }
 
-                if (part.Tag is TextTags.ContainerStart
-                    or TextTags.ContainerEnd)
+                if (part.Tag is TextTags.ContainerStart or TextTags.ContainerEnd)
                 {
                     index++;
                     continue;
@@ -136,18 +154,37 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                 {
                     // This is tagged text getting added to the current line we are building.
                     var style = GetClassifiedTextRunStyle(part.Style);
-                    if (part.NavigationTarget is not null &&
-                        context?.ThreadingContext is { } threadingContext &&
-                        context?.OperationExecutor is { } operationExecutor &&
-                        context?.AsynchronousOperationListener is { } asyncListener &&
-                        context?.StreamingPresenter is { } streamingPresenter)
+                    if (
+                        part.NavigationTarget is not null
+                        && context?.ThreadingContext is { } threadingContext
+                        && context?.OperationExecutor is { } operationExecutor
+                        && context?.AsynchronousOperationListener is { } asyncListener
+                        && context?.StreamingPresenter is { } streamingPresenter
+                    )
                     {
                         var document = context.Document;
-                        if (Uri.TryCreate(part.NavigationTarget, UriKind.Absolute, out var absoluteUri))
+                        if (
+                            Uri.TryCreate(
+                                part.NavigationTarget,
+                                UriKind.Absolute,
+                                out var absoluteUri
+                            )
+                        )
                         {
-                            var target = new QuickInfoHyperLink(document.Project.Solution.Workspace, absoluteUri);
+                            var target = new QuickInfoHyperLink(
+                                document.Project.Solution.Workspace,
+                                absoluteUri
+                            );
                             var tooltip = part.NavigationHint;
-                            currentRuns.Add(new ClassifiedTextRun(part.Tag.ToClassificationTypeName(), part.Text, target.NavigationAction, tooltip, style));
+                            currentRuns.Add(
+                                new ClassifiedTextRun(
+                                    part.Tag.ToClassificationTypeName(),
+                                    part.Text,
+                                    target.NavigationAction,
+                                    tooltip,
+                                    style
+                                )
+                            );
                         }
                         else
                         {
@@ -157,15 +194,35 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                             var tooltip = part.NavigationHint;
                             var documentId = document.Id;
                             var workspace = document.Project.Solution.Workspace;
-                            currentRuns.Add(new ClassifiedTextRun(
-                                part.Tag.ToClassificationTypeName(), part.Text,
-                                () => _ = NavigateToQuickInfoTargetAsync(target, workspace, documentId, threadingContext, operationExecutor, asyncListener, streamingPresenter.Value),
-                                tooltip, style));
+                            currentRuns.Add(
+                                new ClassifiedTextRun(
+                                    part.Tag.ToClassificationTypeName(),
+                                    part.Text,
+                                    () =>
+                                        _ = NavigateToQuickInfoTargetAsync(
+                                            target,
+                                            workspace,
+                                            documentId,
+                                            threadingContext,
+                                            operationExecutor,
+                                            asyncListener,
+                                            streamingPresenter.Value
+                                        ),
+                                    tooltip,
+                                    style
+                                )
+                            );
                         }
                     }
                     else
                     {
-                        currentRuns.Add(new ClassifiedTextRun(part.Tag.ToClassificationTypeName(), part.Text, style));
+                        currentRuns.Add(
+                            new ClassifiedTextRun(
+                                part.Tag.ToClassificationTypeName(),
+                                part.Text,
+                                style
+                            )
+                        );
                     }
                 }
 
@@ -194,12 +251,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             IThreadingContext threadingContext,
             IUIThreadOperationExecutor operationExecutor,
             IAsynchronousOperationListener asyncListener,
-            IStreamingFindUsagesPresenter streamingPresenter)
+            IStreamingFindUsagesPresenter streamingPresenter
+        )
         {
             try
             {
-                using var token = asyncListener.BeginAsyncOperation(nameof(NavigateToQuickInfoTargetAsync));
-                using var context = operationExecutor.BeginExecute(EditorFeaturesResources.IntelliSense, EditorFeaturesResources.Navigating, allowCancellation: true, showProgress: false);
+                using var token = asyncListener.BeginAsyncOperation(
+                    nameof(NavigateToQuickInfoTargetAsync)
+                );
+                using var context = operationExecutor.BeginExecute(
+                    EditorFeaturesResources.IntelliSense,
+                    EditorFeaturesResources.Navigating,
+                    allowCancellation: true,
+                    showProgress: false
+                );
 
                 var cancellationToken = context.UserCancellationToken;
                 var solution = workspace.CurrentSolution;
@@ -207,8 +272,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                 try
                 {
                     var project = solution.GetRequiredProject(documentId.ProjectId);
-                    var compilation = await project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-                    resolvedSymbolKey = SymbolKey.ResolveString(navigationTarget, compilation, cancellationToken: cancellationToken);
+                    var compilation = await project
+                        .GetRequiredCompilationAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    resolvedSymbolKey = SymbolKey.ResolveString(
+                        navigationTarget,
+                        compilation,
+                        cancellationToken: cancellationToken
+                    );
                 }
                 catch
                 {
@@ -218,17 +289,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
 
                 if (resolvedSymbolKey.GetAnySymbol() is { } symbol)
                 {
-                    var location = await GoToDefinitionHelpers.GetDefinitionLocationAsync(
-                        symbol, solution, threadingContext, streamingPresenter, cancellationToken).ConfigureAwait(false);
-                    await location.TryNavigateToAsync(threadingContext, new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true), cancellationToken).ConfigureAwait(false);
+                    var location = await GoToDefinitionHelpers
+                        .GetDefinitionLocationAsync(
+                            symbol,
+                            solution,
+                            threadingContext,
+                            streamingPresenter,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                    await location
+                        .TryNavigateToAsync(
+                            threadingContext,
+                            new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
-            {
-            }
+            catch (OperationCanceledException) { }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical)) { }
         }
 
         private static ClassifiedTextRunStyle GetClassifiedTextRunStyle(TaggedTextStyle style)

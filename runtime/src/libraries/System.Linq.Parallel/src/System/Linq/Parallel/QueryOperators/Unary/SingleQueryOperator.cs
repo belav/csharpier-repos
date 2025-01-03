@@ -45,24 +45,34 @@ namespace System.Linq.Parallel
         // partitions as needed.
         //
 
-        internal override QueryResults<TSource> Open(
-            QuerySettings settings, bool preferStriping)
+        internal override QueryResults<TSource> Open(QuerySettings settings, bool preferStriping)
         {
             QueryResults<TSource> childQueryResults = Child.Open(settings, false);
             return new UnaryQueryOperatorResults(childQueryResults, this, settings, preferStriping);
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TSource, TKey> inputStream, IPartitionedStreamRecipient<TSource> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TSource, TKey> inputStream,
+            IPartitionedStreamRecipient<TSource> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             int partitionCount = inputStream.PartitionCount;
             PartitionedStream<TSource, int> outputStream = new PartitionedStream<TSource, int>(
-                partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Shuffled);
+                partitionCount,
+                Util.GetDefaultComparer<int>(),
+                OrdinalIndexState.Shuffled
+            );
 
             Shared<int> totalElementCount = new Shared<int>(0);
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new SingleQueryOperatorEnumerator<TKey>(inputStream[i], _predicate, totalElementCount);
+                outputStream[i] = new SingleQueryOperatorEnumerator<TKey>(
+                    inputStream[i],
+                    _predicate,
+                    totalElementCount
+                );
             }
 
             recipient.Receive(outputStream);
@@ -72,10 +82,14 @@ namespace System.Linq.Parallel
         // Returns an enumerable that represents the query executing sequentially.
         //
 
-        [ExcludeFromCodeCoverage(Justification = "This method should never be called as it is an ending operator with LimitsParallelism=false")]
+        [ExcludeFromCodeCoverage(
+            Justification = "This method should never be called as it is an ending operator with LimitsParallelism=false"
+        )]
         internal override IEnumerable<TSource> AsSequentialQuery(CancellationToken token)
         {
-            Debug.Fail("This method should never be called as it is an ending operator with LimitsParallelism=false.");
+            Debug.Fail(
+                "This method should never be called as it is an ending operator with LimitsParallelism=false."
+            );
             throw new NotSupportedException();
         }
 
@@ -93,7 +107,8 @@ namespace System.Linq.Parallel
         // The enumerator type responsible for executing the Single operation.
         //
 
-        private sealed class SingleQueryOperatorEnumerator<TKey> : QueryOperatorEnumerator<TSource, int>
+        private sealed class SingleQueryOperatorEnumerator<TKey>
+            : QueryOperatorEnumerator<TSource, int>
         {
             private readonly QueryOperatorEnumerator<TSource, TKey> _source; // The data source to enumerate.
             private readonly Func<TSource, bool>? _predicate; // The optional predicate used during the search.
@@ -107,8 +122,11 @@ namespace System.Linq.Parallel
             // Instantiates a new enumerator.
             //
 
-            internal SingleQueryOperatorEnumerator(QueryOperatorEnumerator<TSource, TKey> source,
-                                                   Func<TSource, bool>? predicate, Shared<int> totalElementCount)
+            internal SingleQueryOperatorEnumerator(
+                QueryOperatorEnumerator<TSource, TKey> source,
+                Func<TSource, bool>? predicate,
+                Shared<int> totalElementCount
+            )
             {
                 Debug.Assert(source != null);
                 Debug.Assert(totalElementCount != null);
@@ -122,7 +140,10 @@ namespace System.Linq.Parallel
             // Straightforward IEnumerator<T> methods.
             //
 
-            internal override bool MoveNext([AllowNull] ref TSource currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [AllowNull] ref TSource currentElement,
+                ref int currentKey
+            )
             {
                 Debug.Assert(_source != null);
 

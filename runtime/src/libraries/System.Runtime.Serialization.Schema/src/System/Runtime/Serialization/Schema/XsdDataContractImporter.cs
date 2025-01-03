@@ -9,7 +9,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization.DataContracts;
 using System.Xml;
 using System.Xml.Schema;
-
 using ExceptionUtil = System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility;
 
 namespace System.Runtime.Serialization
@@ -29,19 +28,18 @@ namespace System.Runtime.Serialization
     /// </remarks>
     public class XsdDataContractImporter
     {
-        private CodeCompileUnit _codeCompileUnit = null!;   // Not directly referenced. Always lazy initialized by property getter.
+        private CodeCompileUnit _codeCompileUnit = null!; // Not directly referenced. Always lazy initialized by property getter.
         private DataContractSet? _dataContractSet;
 
-        private static readonly XmlQualifiedName[] s_emptyTypeNameArray = Array.Empty<XmlQualifiedName>();
-        private XmlQualifiedName[] _singleTypeNameArray = null!;   // Not directly referenced. Always lazy initialized by property getter.
-        private XmlSchemaElement[] _singleElementArray = null!;   // Not directly referenced. Always lazy initialized by property getter.
+        private static readonly XmlQualifiedName[] s_emptyTypeNameArray =
+            Array.Empty<XmlQualifiedName>();
+        private XmlQualifiedName[] _singleTypeNameArray = null!; // Not directly referenced. Always lazy initialized by property getter.
+        private XmlSchemaElement[] _singleElementArray = null!; // Not directly referenced. Always lazy initialized by property getter.
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XsdDataContractImporter"/> class.
         /// </summary>
-        public XsdDataContractImporter()
-        {
-        }
+        public XsdDataContractImporter() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XsdDataContractImporter"/> class with the <see cref="System.CodeDom.CodeCompileUnit"/> that will be used to generate CLR code.
@@ -66,8 +64,14 @@ namespace System.Runtime.Serialization
         {
             get
             {
-                return _dataContractSet ??= Options == null ? new DataContractSet(null, null, null) :
-                                                            new DataContractSet(Options.DataContractSurrogate, Options.ReferencedTypes, Options.ReferencedCollectionTypes);
+                return _dataContractSet ??=
+                    Options == null
+                        ? new DataContractSet(null, null, null)
+                        : new DataContractSet(
+                            Options.DataContractSurrogate,
+                            Options.ReferencedTypes,
+                            Options.ReferencedCollectionTypes
+                        );
             }
         }
 
@@ -136,7 +140,11 @@ namespace System.Runtime.Serialization
                 throw ExceptionUtil.ThrowHelperError(new ArgumentNullException(nameof(element)));
 
             SingleElementArray[0] = element;
-            IList<XmlQualifiedName>? elementNames = InternalImport(schemas, s_emptyTypeNameArray, SingleElementArray);
+            IList<XmlQualifiedName>? elementNames = InternalImport(
+                schemas,
+                s_emptyTypeNameArray,
+                SingleElementArray
+            );
             Debug.Assert(elementNames != null && elementNames.Count > 0);
             return elementNames[0];
         }
@@ -230,7 +238,10 @@ namespace System.Runtime.Serialization
         /// <param name="element">An <see cref="XmlSchemaElement"/> that specifies an element in an XML schema.</param>
         /// <returns>A <see cref="CodeTypeReference"/> that represents the type that was generated for the specified schema type.</returns>
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        public CodeTypeReference GetCodeTypeReference(XmlQualifiedName typeName, XmlSchemaElement element)
+        public CodeTypeReference GetCodeTypeReference(
+            XmlQualifiedName typeName,
+            XmlSchemaElement element
+        )
         {
             if (element == null)
                 throw ExceptionUtil.ThrowHelperError(new ArgumentNullException(nameof(element)));
@@ -247,12 +258,19 @@ namespace System.Runtime.Serialization
             if (typeName == null)
                 throw ExceptionUtil.ThrowHelperError(new ArgumentNullException(nameof(typeName)));
 
-            DataContract? dataContract = DataContract.GetBuiltInDataContract(typeName.Name, typeName.Namespace);
+            DataContract? dataContract = DataContract.GetBuiltInDataContract(
+                typeName.Name,
+                typeName.Namespace
+            );
             if (dataContract == null)
             {
                 dataContract = DataContractSet.GetDataContract(typeName);
                 if (dataContract == null)
-                    throw ExceptionUtil.ThrowHelperError(new InvalidOperationException(SR.Format(SR.TypeHasNotBeenImported, typeName.Name, typeName.Namespace)));
+                    throw ExceptionUtil.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.Format(SR.TypeHasNotBeenImported, typeName.Name, typeName.Namespace)
+                        )
+                    );
             }
             return dataContract;
         }
@@ -268,12 +286,19 @@ namespace System.Runtime.Serialization
             if (typeName == null)
                 throw ExceptionUtil.ThrowHelperError(new ArgumentNullException(nameof(typeName)));
 
-            DataContract? dataContract = DataContract.GetBuiltInDataContract(typeName.Name, typeName.Namespace);
+            DataContract? dataContract = DataContract.GetBuiltInDataContract(
+                typeName.Name,
+                typeName.Namespace
+            );
             if (dataContract == null)
             {
                 dataContract = DataContractSet.GetDataContract(typeName);
                 if (dataContract == null)
-                    throw ExceptionUtil.ThrowHelperError(new InvalidOperationException(SR.Format(SR.TypeHasNotBeenImported, typeName.Name, typeName.Namespace)));
+                    throw ExceptionUtil.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.Format(SR.TypeHasNotBeenImported, typeName.Name, typeName.Namespace)
+                        )
+                    );
             }
 
             CodeExporter codeExporter = new CodeExporter(DataContractSet, Options, CodeCompileUnit);
@@ -282,33 +307,40 @@ namespace System.Runtime.Serialization
 
         private XmlQualifiedName[] SingleTypeNameArray
         {
-            get
-            {
-                return _singleTypeNameArray ??= new XmlQualifiedName[1];
-            }
+            get { return _singleTypeNameArray ??= new XmlQualifiedName[1]; }
         }
 
         private XmlSchemaElement[] SingleElementArray
         {
-            get
-            {
-                return _singleElementArray ??= new XmlSchemaElement[1];
-            }
+            get { return _singleElementArray ??= new XmlSchemaElement[1]; }
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private IList<XmlQualifiedName>? InternalImport(XmlSchemaSet schemas, ICollection<XmlQualifiedName>? typeNames, ICollection<XmlSchemaElement>? elements)
+        private IList<XmlQualifiedName>? InternalImport(
+            XmlSchemaSet schemas,
+            ICollection<XmlQualifiedName>? typeNames,
+            ICollection<XmlSchemaElement>? elements
+        )
         {
-            DataContractSet? oldValue = (_dataContractSet == null) ? null : new DataContractSet(_dataContractSet);
+            DataContractSet? oldValue =
+                (_dataContractSet == null) ? null : new DataContractSet(_dataContractSet);
             IList<XmlQualifiedName>? elementTypeNames = null;
             try
             {
                 if (elements != null)
-                    elementTypeNames = DataContractSet.ImportSchemaSet(schemas, elements, ImportXmlDataType);
+                    elementTypeNames = DataContractSet.ImportSchemaSet(
+                        schemas,
+                        elements,
+                        ImportXmlDataType
+                    );
                 else
                     DataContractSet.ImportSchemaSet(schemas, typeNames, ImportXmlDataType);
 
-                CodeExporter codeExporter = new CodeExporter(DataContractSet, Options, CodeCompileUnit);
+                CodeExporter codeExporter = new CodeExporter(
+                    DataContractSet,
+                    Options,
+                    CodeCompileUnit
+                );
                 codeExporter.Export();
 
                 return elementTypeNames;
@@ -325,16 +357,18 @@ namespace System.Runtime.Serialization
 
         private bool ImportXmlDataType
         {
-            get
-            {
-                return Options == null ? false : Options.ImportXmlType;
-            }
+            get { return Options == null ? false : Options.ImportXmlType; }
         }
 
         [RequiresUnreferencedCode(ImportGlobals.SerializerTrimmerWarning)]
-        private bool InternalCanImport(XmlSchemaSet schemas, ICollection<XmlQualifiedName>? typeNames, ICollection<XmlSchemaElement>? elements)
+        private bool InternalCanImport(
+            XmlSchemaSet schemas,
+            ICollection<XmlQualifiedName>? typeNames,
+            ICollection<XmlSchemaElement>? elements
+        )
         {
-            DataContractSet? oldValue = (_dataContractSet == null) ? null : new DataContractSet(_dataContractSet);
+            DataContractSet? oldValue =
+                (_dataContractSet == null) ? null : new DataContractSet(_dataContractSet);
             try
             {
                 if (elements != null)
@@ -359,26 +393,66 @@ namespace System.Runtime.Serialization
         }
 
         private static XmlQualifiedName? s_actualTypeAnnotationName;
-        internal static XmlQualifiedName ActualTypeAnnotationName => s_actualTypeAnnotationName ??= new XmlQualifiedName(ImportGlobals.ActualTypeLocalName, ImportGlobals.SerializationNamespace);
+        internal static XmlQualifiedName ActualTypeAnnotationName =>
+            s_actualTypeAnnotationName ??= new XmlQualifiedName(
+                ImportGlobals.ActualTypeLocalName,
+                ImportGlobals.SerializationNamespace
+            );
 
-        internal static XmlQualifiedName ImportActualType(XmlSchemaAnnotation? annotation, XmlQualifiedName defaultTypeName, XmlQualifiedName typeName)
+        internal static XmlQualifiedName ImportActualType(
+            XmlSchemaAnnotation? annotation,
+            XmlQualifiedName defaultTypeName,
+            XmlQualifiedName typeName
+        )
         {
             XmlElement? actualTypeElement = ImportAnnotation(annotation, ActualTypeAnnotationName);
             if (actualTypeElement == null)
                 return defaultTypeName;
 
-            XmlNode? nameAttribute = actualTypeElement.Attributes.GetNamedItem(ImportGlobals.ActualTypeNameAttribute);
+            XmlNode? nameAttribute = actualTypeElement.Attributes.GetNamedItem(
+                ImportGlobals.ActualTypeNameAttribute
+            );
             if (nameAttribute?.Value == null)
-                throw ExceptionUtil.ThrowHelperError(new InvalidDataContractException(SR.Format(SR.AnnotationAttributeNotFound, ActualTypeAnnotationName.Name, typeName.Name, typeName.Namespace, ImportGlobals.ActualTypeNameAttribute)));
-            XmlNode? nsAttribute = actualTypeElement.Attributes.GetNamedItem(ImportGlobals.ActualTypeNamespaceAttribute);
+                throw ExceptionUtil.ThrowHelperError(
+                    new InvalidDataContractException(
+                        SR.Format(
+                            SR.AnnotationAttributeNotFound,
+                            ActualTypeAnnotationName.Name,
+                            typeName.Name,
+                            typeName.Namespace,
+                            ImportGlobals.ActualTypeNameAttribute
+                        )
+                    )
+                );
+            XmlNode? nsAttribute = actualTypeElement.Attributes.GetNamedItem(
+                ImportGlobals.ActualTypeNamespaceAttribute
+            );
             if (nsAttribute?.Value == null)
-                throw ExceptionUtil.ThrowHelperError(new InvalidDataContractException(SR.Format(SR.AnnotationAttributeNotFound, ActualTypeAnnotationName.Name, typeName.Name, typeName.Namespace, ImportGlobals.ActualTypeNamespaceAttribute)));
+                throw ExceptionUtil.ThrowHelperError(
+                    new InvalidDataContractException(
+                        SR.Format(
+                            SR.AnnotationAttributeNotFound,
+                            ActualTypeAnnotationName.Name,
+                            typeName.Name,
+                            typeName.Namespace,
+                            ImportGlobals.ActualTypeNamespaceAttribute
+                        )
+                    )
+                );
             return new XmlQualifiedName(nameAttribute.Value, nsAttribute.Value);
         }
 
-        private static XmlElement? ImportAnnotation(XmlSchemaAnnotation? annotation, XmlQualifiedName annotationQualifiedName)
+        private static XmlElement? ImportAnnotation(
+            XmlSchemaAnnotation? annotation,
+            XmlQualifiedName annotationQualifiedName
+        )
         {
-            if (annotation != null && annotation.Items != null && annotation.Items.Count > 0 && annotation.Items[0] is XmlSchemaAppInfo)
+            if (
+                annotation != null
+                && annotation.Items != null
+                && annotation.Items.Count > 0
+                && annotation.Items[0] is XmlSchemaAppInfo
+            )
             {
                 XmlSchemaAppInfo appInfo = (XmlSchemaAppInfo)annotation.Items[0];
                 XmlNode?[]? markup = appInfo.Markup;
@@ -387,7 +461,11 @@ namespace System.Runtime.Serialization
                     for (int i = 0; i < markup.Length; i++)
                     {
                         XmlElement? annotationElement = markup[i] as XmlElement;
-                        if (annotationElement != null && annotationElement.LocalName == annotationQualifiedName.Name && annotationElement.NamespaceURI == annotationQualifiedName.Namespace)
+                        if (
+                            annotationElement != null
+                            && annotationElement.LocalName == annotationQualifiedName.Name
+                            && annotationElement.NamespaceURI == annotationQualifiedName.Namespace
+                        )
                             return annotationElement;
                     }
                 }

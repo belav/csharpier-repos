@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,82 +36,106 @@ using System.Web.Compilation;
 using System.Web.Configuration;
 using _Configuration = System.Configuration.Configuration;
 
-namespace System.Web.UI.Design {
+namespace System.Web.UI.Design
+{
+    public abstract class ExpressionEditor
+    {
+        Type expressionBuilderType;
+        string prefixFromReflection;
 
-	public abstract class ExpressionEditor
-	{
-		Type expressionBuilderType;
-		string prefixFromReflection;
+        protected ExpressionEditor() { }
 
-		protected ExpressionEditor ()
-		{
-		}
+        public string ExpressionPrefix
+        {
+            get { return prefixFromReflection; }
+        }
 
-		public string ExpressionPrefix {
-			get { return prefixFromReflection; }
-		}
+        Type ExpressionBuilderType
+        {
+            set
+            {
+                expressionBuilderType = value;
 
-		Type ExpressionBuilderType {
-			set {
-				expressionBuilderType = value;
+                prefixFromReflection = "";
+                object[] attrs = expressionBuilderType.GetCustomAttributes(
+                    typeof(ExpressionPrefixAttribute),
+                    false
+                );
+                if (attrs != null && attrs.Length > 0)
+                {
+                    ExpressionPrefixAttribute pa = (ExpressionPrefixAttribute)attrs[0];
 
-				prefixFromReflection = "";
-				object[] attrs = expressionBuilderType.GetCustomAttributes (typeof (ExpressionPrefixAttribute), false);
-				if (attrs != null && attrs.Length > 0) {
-					ExpressionPrefixAttribute pa = (ExpressionPrefixAttribute)attrs[0];
+                    prefixFromReflection = pa.ExpressionPrefix;
+                }
+            }
+        }
 
-					prefixFromReflection = pa.ExpressionPrefix;
-				}
-			}
-		}
+        public abstract object EvaluateExpression(
+            string expression,
+            object parseTimeData,
+            Type propertyType,
+            IServiceProvider serviceProvider
+        );
 
-		public abstract object EvaluateExpression (string expression, object parseTimeData, Type propertyType, IServiceProvider serviceProvider);
+        public static ExpressionEditor GetExpressionEditor(
+            string expressionPrefix,
+            IServiceProvider serviceProvider
+        )
+        {
+            if (serviceProvider == null)
+                return null;
 
-		public static ExpressionEditor GetExpressionEditor (string expressionPrefix, IServiceProvider serviceProvider)
-		{
-			if (serviceProvider == null)
-				return null;
+            IWebApplication webApp = (IWebApplication)
+                serviceProvider.GetService(typeof(IWebApplication));
+            if (webApp == null)
+                return null;
 
-			IWebApplication webApp = (IWebApplication)serviceProvider.GetService(typeof(IWebApplication));
-			if (webApp == null)
-				return null;
+            _Configuration config = webApp.OpenWebConfiguration(true);
+            if (config == null)
+                return null;
 
-			_Configuration config = webApp.OpenWebConfiguration(true);
-			if (config == null)
-				return null;
+            CompilationSection sec = (CompilationSection)
+                config.GetSection("system.web/compilation");
+            System.Web.Configuration.ExpressionBuilder builder = sec.ExpressionBuilders[
+                expressionPrefix
+            ];
 
-			CompilationSection sec = (CompilationSection) config.GetSection ("system.web/compilation");
-			System.Web.Configuration.ExpressionBuilder builder = sec.ExpressionBuilders [expressionPrefix];
+            if (builder == null)
+                return null;
 
-			if (builder == null)
-				return null;
+            return GetExpressionEditor(Type.GetType(builder.Type), serviceProvider);
+        }
 
-			return GetExpressionEditor (Type.GetType (builder.Type), serviceProvider);
-		}
+        [MonoTODO("the docs make it sound like this still requires accessing <expressionBuilders>")]
+        public static ExpressionEditor GetExpressionEditor(
+            Type expressionBuilderType,
+            IServiceProvider serviceProvider
+        )
+        {
+            object[] attrs = expressionBuilderType.GetCustomAttributes(
+                typeof(ExpressionEditorAttribute),
+                false
+            );
 
-		[MonoTODO ("the docs make it sound like this still requires accessing <expressionBuilders>")]
-		public static ExpressionEditor GetExpressionEditor (Type expressionBuilderType, IServiceProvider serviceProvider)
-		{
-			object[] attrs = expressionBuilderType.GetCustomAttributes (typeof (ExpressionEditorAttribute), false);
+            if (attrs == null || attrs.Length == 0)
+                return null;
 
-			if (attrs == null || attrs.Length == 0)
-				return null;
+            ExpressionEditorAttribute ee = (ExpressionEditorAttribute)attrs[0];
 
-			ExpressionEditorAttribute ee = (ExpressionEditorAttribute) attrs[0];
+            Type editor_type = Type.GetType(ee.EditorTypeName);
+            ExpressionEditor editor = (ExpressionEditor)Activator.CreateInstance(editor_type);
 
-			Type editor_type = Type.GetType (ee.EditorTypeName);
-			ExpressionEditor editor = (ExpressionEditor) Activator.CreateInstance (editor_type);
+            editor.ExpressionBuilderType = expressionBuilderType;
 
-			editor.ExpressionBuilderType = expressionBuilderType;
+            return editor;
+        }
 
-			return editor;
-		}
-
-		public virtual ExpressionEditorSheet GetExpressionEditorSheet (string expression, IServiceProvider serviceProvider)
-		{
-			throw new NotImplementedException ();
-		}
-	}
-
+        public virtual ExpressionEditorSheet GetExpressionEditorSheet(
+            string expression,
+            IServiceProvider serviceProvider
+        )
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
-

@@ -27,7 +27,14 @@ namespace System.IO.Tests
             string name = Path.GetFileName(path);
             string dir = Path.GetDirectoryName(path);
 
-            string fileName = dir + Path.DirectorySeparatorChar + "." + Path.AltDirectorySeparatorChar + "." + Path.DirectorySeparatorChar + name;
+            string fileName =
+                dir
+                + Path.DirectorySeparatorChar
+                + "."
+                + Path.AltDirectorySeparatorChar
+                + "."
+                + Path.DirectorySeparatorChar
+                + name;
 
             using (FileStream fs = new FileStream(fileName, FileMode.Create))
             {
@@ -57,7 +64,10 @@ namespace System.IO.Tests
             using FileStream fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
             Assert.Equal(path, fs.Name);
 
-            using FileStream fsh = new FileStream(new SafeFileHandle(fs.SafeFileHandle.DangerousGetHandle(), ownsHandle: false), FileAccess.ReadWrite);
+            using FileStream fsh = new FileStream(
+                new SafeFileHandle(fs.SafeFileHandle.DangerousGetHandle(), ownsHandle: false),
+                FileAccess.ReadWrite
+            );
             Assert.Equal("[Unknown]", fsh.Name);
         }
     }

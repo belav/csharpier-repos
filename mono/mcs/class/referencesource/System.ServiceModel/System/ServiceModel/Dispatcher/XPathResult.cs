@@ -23,34 +23,32 @@ namespace System.ServiceModel.Dispatcher
             this.resultType = XPathResultType.NodeSet;
         }
 
-        internal XPathResult(string stringResult) : this()
+        internal XPathResult(string stringResult)
+            : this()
         {
             this.stringResult = stringResult;
             this.resultType = XPathResultType.String;
         }
 
-        internal XPathResult(bool boolResult) : this()
+        internal XPathResult(bool boolResult)
+            : this()
         {
             this.boolResult = boolResult;
             this.resultType = XPathResultType.Boolean;
         }
 
-        internal XPathResult(double numberResult) : this()
+        internal XPathResult(double numberResult)
+            : this()
         {
             this.numberResult = numberResult;
             this.resultType = XPathResultType.Number;
         }
 
-        XPathResult()
-        {
-        }
+        XPathResult() { }
 
         public XPathResultType ResultType
         {
-            get
-            {
-                return this.resultType;
-            }
+            get { return this.resultType; }
         }
 
         public void Dispose()
@@ -86,7 +84,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.resultType != XPathResultType.NodeSet)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CannotRepresentResultAsNodeset)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.CannotRepresentResultAsNodeset))
+                );
             }
 
             return this.nodeSetResult;

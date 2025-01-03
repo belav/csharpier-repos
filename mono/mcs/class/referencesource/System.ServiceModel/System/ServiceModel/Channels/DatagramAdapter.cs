@@ -10,57 +10,73 @@ namespace System.ServiceModel.Channels
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
-    using System.ServiceModel.Diagnostics.Application;
 
     class DatagramAdapter
     {
         internal delegate T Source<T>();
 
-        internal static IOutputChannel GetOutputChannel(Source<IOutputSessionChannel> channelSource, IDefaultCommunicationTimeouts timeouts)
+        internal static IOutputChannel GetOutputChannel(
+            Source<IOutputSessionChannel> channelSource,
+            IDefaultCommunicationTimeouts timeouts
+        )
         {
             return new OutputDatagramAdapterChannel(channelSource, timeouts);
         }
 
-        internal static IRequestChannel GetRequestChannel(Source<IRequestSessionChannel> channelSource, IDefaultCommunicationTimeouts timeouts)
+        internal static IRequestChannel GetRequestChannel(
+            Source<IRequestSessionChannel> channelSource,
+            IDefaultCommunicationTimeouts timeouts
+        )
         {
             return new RequestDatagramAdapterChannel(channelSource, timeouts);
         }
 
-        internal static IChannelListener<IInputChannel> GetInputListener(IChannelListener<IInputSessionChannel> inner,
-                                                                         ServiceThrottle throttle,
-                                                                         IDefaultCommunicationTimeouts timeouts)
+        internal static IChannelListener<IInputChannel> GetInputListener(
+            IChannelListener<IInputSessionChannel> inner,
+            ServiceThrottle throttle,
+            IDefaultCommunicationTimeouts timeouts
+        )
         {
             return new InputDatagramAdapterListener(inner, throttle, timeouts);
         }
 
-        internal static IChannelListener<IReplyChannel> GetReplyListener(IChannelListener<IReplySessionChannel> inner,
-                                                                         ServiceThrottle throttle,
-                                                                         IDefaultCommunicationTimeouts timeouts)
+        internal static IChannelListener<IReplyChannel> GetReplyListener(
+            IChannelListener<IReplySessionChannel> inner,
+            ServiceThrottle throttle,
+            IDefaultCommunicationTimeouts timeouts
+        )
         {
             return new ReplyDatagramAdapterListener(inner, throttle, timeouts);
         }
 
         abstract class DatagramAdapterListenerBase<TChannel, TSessionChannel, ItemType>
             : DelegatingChannelListener<TChannel>,
-            ISessionThrottleNotification
+                ISessionThrottleNotification
             where TChannel : class, IChannel
             where TSessionChannel : class, IChannel
             where ItemType : class
         {
-            static AsyncCallback acceptCallbackDelegate = Fx.ThunkCallback(new AsyncCallback(AcceptCallbackStatic));
+            static AsyncCallback acceptCallbackDelegate = Fx.ThunkCallback(
+                new AsyncCallback(AcceptCallbackStatic)
+            );
             static Action<object> channelPumpDelegate = new Action<object>(ChannelPump);
 
             Action channelPumpAfterExceptionDelegate;
             SessionChannelCollection channels;
             IChannelListener<TSessionChannel> listener;
             ServiceThrottle throttle;
-            int usageCount;  // When this goes to zero we Abort all the session channels.
+            int usageCount; // When this goes to zero we Abort all the session channels.
             bool acceptLoopDone;
             IWaiter waiter;
 
-            protected DatagramAdapterListenerBase(IChannelListener<TSessionChannel> listener, ServiceThrottle throttle, IDefaultCommunicationTimeouts timeouts)
+            protected DatagramAdapterListenerBase(
+                IChannelListener<TSessionChannel> listener,
+                ServiceThrottle throttle,
+                IDefaultCommunicationTimeouts timeouts
+            )
                 : base(timeouts, listener)
             {
                 if (listener == null)
@@ -79,19 +95,29 @@ namespace System.ServiceModel.Channels
                 get { return this.channels; }
             }
 
-            new internal object ThisLock
+            internal new object ThisLock
             {
                 get { return base.ThisLock; }
             }
 
-            protected abstract IAsyncResult CallBeginReceive(TSessionChannel channel, AsyncCallback callback, object state);
-            protected abstract ItemType CallEndReceive(TSessionChannel channel, IAsyncResult result);
+            protected abstract IAsyncResult CallBeginReceive(
+                TSessionChannel channel,
+                AsyncCallback callback,
+                object state
+            );
+            protected abstract ItemType CallEndReceive(
+                TSessionChannel channel,
+                IAsyncResult result
+            );
             protected abstract void Enqueue(ItemType item, Action callback);
             protected abstract void Enqueue(Exception exception, Action callback);
 
             static void AcceptCallbackStatic(IAsyncResult result)
             {
-                ((DatagramAdapterListenerBase<TChannel, TSessionChannel, ItemType>)result.AsyncState).AcceptCallback(result);
+                (
+                    (DatagramAdapterListenerBase<TChannel, TSessionChannel, ItemType>)
+                        result.AsyncState
+                ).AcceptCallback(result);
             }
 
             void AcceptCallback(IAsyncResult result)
@@ -122,7 +148,9 @@ namespace System.ServiceModel.Channels
 
             static void ChannelPump(object state)
             {
-                ((DatagramAdapterListenerBase<TChannel, TSessionChannel, ItemType>)state).ChannelPump();
+                (
+                    (DatagramAdapterListenerBase<TChannel, TSessionChannel, ItemType>)state
+                ).ChannelPump();
             }
 
             void ChannelPump()
@@ -134,7 +162,11 @@ namespace System.ServiceModel.Channels
 
                     try
                     {
-                        result = this.listener.BeginAcceptChannel(TimeSpan.MaxValue, acceptCallbackDelegate, this);
+                        result = this.listener.BeginAcceptChannel(
+                            TimeSpan.MaxValue,
+                            acceptCallbackDelegate,
+                            this
+                        );
                     }
                     catch (ObjectDisposedException e)
                     {
@@ -279,7 +311,14 @@ namespace System.ServiceModel.Channels
 
             public void ThrottleAcquired()
             {
-                ActionItem.Schedule(DatagramAdapterListenerBase<TChannel, TSessionChannel, ItemType>.channelPumpDelegate, this);
+                ActionItem.Schedule(
+                    DatagramAdapterListenerBase<
+                        TChannel,
+                        TSessionChannel,
+                        ItemType
+                    >.channelPumpDelegate,
+                    this
+                );
             }
 
             protected override void OnClose(TimeSpan timeout)
@@ -289,11 +328,21 @@ namespace System.ServiceModel.Channels
                 this.WaitForAcceptLoop(timeoutHelper.RemainingTime());
             }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                return new ChainedAsyncResult(timeout, callback, state,
-                                              base.OnBeginClose, base.OnEndClose,
-                                              this.BeginWaitForAcceptLoop, this.EndWaitForAcceptLoop);
+                return new ChainedAsyncResult(
+                    timeout,
+                    callback,
+                    state,
+                    base.OnBeginClose,
+                    base.OnEndClose,
+                    this.BeginWaitForAcceptLoop,
+                    this.EndWaitForAcceptLoop
+                );
             }
 
             protected override void OnEndClose(IAsyncResult result)
@@ -320,7 +369,11 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            IAsyncResult BeginWaitForAcceptLoop(TimeSpan timeout, AsyncCallback callback, object state)
+            IAsyncResult BeginWaitForAcceptLoop(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 AsyncWaiter waiter = null;
 
@@ -357,8 +410,12 @@ namespace System.ServiceModel.Channels
 
             class DatagramAdapterReceiver
             {
-                static AsyncCallback receiveCallbackDelegate = Fx.ThunkCallback(new AsyncCallback(ReceiveCallbackStatic));
-                static Action<object> startNextReceiveDelegate = new Action<object>(StartNextReceive);
+                static AsyncCallback receiveCallbackDelegate = Fx.ThunkCallback(
+                    new AsyncCallback(ReceiveCallbackStatic)
+                );
+                static Action<object> startNextReceiveDelegate = new Action<object>(
+                    StartNextReceive
+                );
                 static EventHandler faultedDelegate;
 
                 DatagramAdapterListenerBase<TChannel, TSessionChannel, ItemType> parent;
@@ -366,8 +423,10 @@ namespace System.ServiceModel.Channels
                 Action itemDequeuedDelegate;
                 ServiceModelActivity activity;
 
-                DatagramAdapterReceiver(DatagramAdapterListenerBase<TChannel, TSessionChannel, ItemType> parent,
-                                        TSessionChannel channel)
+                DatagramAdapterReceiver(
+                    DatagramAdapterListenerBase<TChannel, TSessionChannel, ItemType> parent,
+                    TSessionChannel channel
+                )
                 {
                     this.parent = parent;
                     this.channel = channel;
@@ -412,8 +471,11 @@ namespace System.ServiceModel.Channels
 
                         if (DiagnosticUtility.ShouldTraceWarning)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.FailedToOpenIncomingChannel,
-                                SR.GetString(SR.TraceCodeFailedToOpenIncomingChannel));
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Warning,
+                                TraceCode.FailedToOpenIncomingChannel,
+                                SR.GetString(SR.TraceCodeFailedToOpenIncomingChannel)
+                            );
                         }
                         channel.Abort();
                         this.parent.Enqueue(e, null);
@@ -447,15 +509,25 @@ namespace System.ServiceModel.Channels
                             Exception exception = null;
                             try
                             {
-                                result = this.parent.CallBeginReceive(this.channel, receiveCallbackDelegate, this);
+                                result = this.parent.CallBeginReceive(
+                                    this.channel,
+                                    receiveCallbackDelegate,
+                                    this
+                                );
                             }
                             catch (ObjectDisposedException e)
                             {
-                                DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
+                                DiagnosticUtility.TraceHandledException(
+                                    e,
+                                    TraceEventType.Information
+                                );
                             }
                             catch (CommunicationException e)
                             {
-                                DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
+                                DiagnosticUtility.TraceHandledException(
+                                    e,
+                                    TraceEventType.Information
+                                );
                             }
                             catch (Exception e)
                             {
@@ -478,10 +550,15 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                internal static void Pump(DatagramAdapterListenerBase<TChannel, TSessionChannel, ItemType> listener,
-                                          TSessionChannel channel)
+                internal static void Pump(
+                    DatagramAdapterListenerBase<TChannel, TSessionChannel, ItemType> listener,
+                    TSessionChannel channel
+                )
                 {
-                    DatagramAdapterReceiver receiver = new DatagramAdapterReceiver(listener, channel);
+                    DatagramAdapterReceiver receiver = new DatagramAdapterReceiver(
+                        listener,
+                        channel
+                    );
                     ActionItem.Schedule(startNextReceiveDelegate, receiver);
                 }
 
@@ -751,26 +828,35 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        class InputDatagramAdapterListener : DatagramAdapterListenerBase<IInputChannel, IInputSessionChannel, Message>
+        class InputDatagramAdapterListener
+            : DatagramAdapterListenerBase<IInputChannel, IInputSessionChannel, Message>
         {
             SingletonChannelAcceptor<IInputChannel, InputChannel, Message> acceptor;
 
-            internal InputDatagramAdapterListener(IChannelListener<IInputSessionChannel> listener,
-                                                  ServiceThrottle throttle,
-                                                  IDefaultCommunicationTimeouts timeouts)
+            internal InputDatagramAdapterListener(
+                IChannelListener<IInputSessionChannel> listener,
+                ServiceThrottle throttle,
+                IDefaultCommunicationTimeouts timeouts
+            )
                 : base(listener, throttle, timeouts)
             {
                 this.acceptor = new InputDatagramAdapterAcceptor(this);
                 this.Acceptor = this.acceptor;
             }
 
-            protected override IAsyncResult CallBeginReceive(IInputSessionChannel channel,
-                                                             AsyncCallback callback, object state)
+            protected override IAsyncResult CallBeginReceive(
+                IInputSessionChannel channel,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return channel.BeginReceive(TimeSpan.MaxValue, callback, state);
             }
 
-            protected override Message CallEndReceive(IInputSessionChannel channel, IAsyncResult result)
+            protected override Message CallEndReceive(
+                IInputSessionChannel channel,
+                IAsyncResult result
+            )
             {
                 return channel.EndReceive(result);
             }
@@ -840,26 +926,35 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        class ReplyDatagramAdapterListener : DatagramAdapterListenerBase<IReplyChannel, IReplySessionChannel, RequestContext>
+        class ReplyDatagramAdapterListener
+            : DatagramAdapterListenerBase<IReplyChannel, IReplySessionChannel, RequestContext>
         {
             SingletonChannelAcceptor<IReplyChannel, ReplyChannel, RequestContext> acceptor;
 
-            internal ReplyDatagramAdapterListener(IChannelListener<IReplySessionChannel> listener,
-                                                  ServiceThrottle throttle,
-                                                  IDefaultCommunicationTimeouts timeouts)
+            internal ReplyDatagramAdapterListener(
+                IChannelListener<IReplySessionChannel> listener,
+                ServiceThrottle throttle,
+                IDefaultCommunicationTimeouts timeouts
+            )
                 : base(listener, throttle, timeouts)
             {
                 this.acceptor = new ReplyDatagramAdapterAcceptor(this);
                 this.Acceptor = this.acceptor;
             }
 
-            protected override IAsyncResult CallBeginReceive(IReplySessionChannel channel,
-                                                             AsyncCallback callback, object state)
+            protected override IAsyncResult CallBeginReceive(
+                IReplySessionChannel channel,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return channel.BeginReceiveRequest(TimeSpan.MaxValue, callback, state);
             }
 
-            protected override RequestContext CallEndReceive(IReplySessionChannel channel, IAsyncResult result)
+            protected override RequestContext CallEndReceive(
+                IReplySessionChannel channel,
+                IAsyncResult result
+            )
             {
                 return channel.EndReceiveRequest(result);
             }
@@ -940,13 +1035,17 @@ namespace System.ServiceModel.Channels
             TimeSpan defaultSendTimeout;
             List<TSessionChannel> activeChannels;
 
-            protected DatagramAdapterChannelBase(Source<TSessionChannel> channelSource,
-                                                 IDefaultCommunicationTimeouts timeouts)
+            protected DatagramAdapterChannelBase(
+                Source<TSessionChannel> channelSource,
+                IDefaultCommunicationTimeouts timeouts
+            )
             {
                 if (channelSource == null)
                 {
                     Fx.Assert("DatagramAdapterChannelBase.ctor: (channelSource == null)");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("channelSource");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "channelSource"
+                    );
                 }
                 this.channelParameters = new ChannelParameterCollection(this);
                 this.channelSource = channelSource;
@@ -976,11 +1075,13 @@ namespace System.ServiceModel.Channels
                 get { return this.defaultSendTimeout; }
             }
 
-            protected override void OnOpen(TimeSpan timeout)
-            {
-            }
+            protected override void OnOpen(TimeSpan timeout) { }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new CompletedAsyncResult(callback, state);
             }
@@ -1037,7 +1138,8 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            public T GetProperty<T>() where T : class
+            public T GetProperty<T>()
+                where T : class
             {
                 if (typeof(T) == typeof(ChannelParameterCollection))
                 {
@@ -1089,7 +1191,11 @@ namespace System.ServiceModel.Channels
                     currentChannel.Close(helper.RemainingTime());
             }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 TSessionChannel channel;
                 TSessionChannel[] activeChannels;
@@ -1104,7 +1210,14 @@ namespace System.ServiceModel.Channels
                 if (this.channel == null)
                     return new CloseCollectionAsyncResult(timeout, callback, state, activeChannels);
                 else
-                    return new ChainedCloseAsyncResult(timeout, callback, state, channel.BeginClose, channel.EndClose, activeChannels);
+                    return new ChainedCloseAsyncResult(
+                        timeout,
+                        callback,
+                        state,
+                        channel.BeginClose,
+                        channel.EndClose,
+                        activeChannels
+                    );
             }
 
             protected override void OnEndClose(IAsyncResult result)
@@ -1116,13 +1229,17 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        class OutputDatagramAdapterChannel : DatagramAdapterChannelBase<IOutputSessionChannel>, IOutputChannel
+        class OutputDatagramAdapterChannel
+            : DatagramAdapterChannelBase<IOutputSessionChannel>,
+                IOutputChannel
         {
             EndpointAddress remoteAddress;
             Uri via;
 
-            internal OutputDatagramAdapterChannel(Source<IOutputSessionChannel> channelSource,
-                                                   IDefaultCommunicationTimeouts timeouts)
+            internal OutputDatagramAdapterChannel(
+                Source<IOutputSessionChannel> channelSource,
+                IDefaultCommunicationTimeouts timeouts
+            )
                 : base(channelSource, timeouts)
             {
                 IOutputSessionChannel inner = channelSource();
@@ -1201,7 +1318,12 @@ namespace System.ServiceModel.Channels
                 return this.BeginSend(message, this.DefaultSendTimeout, callback, state);
             }
 
-            public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginSend(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new SendAsyncResult(this, message, timeout, callback, state);
             }
@@ -1218,7 +1340,13 @@ namespace System.ServiceModel.Channels
                 TimeoutHelper timeoutHelper;
                 bool hasCompletedAsynchronously = true;
 
-                public SendAsyncResult(OutputDatagramAdapterChannel adapter, Message message, TimeSpan timeout, AsyncCallback callback, object state)
+                public SendAsyncResult(
+                    OutputDatagramAdapterChannel adapter,
+                    Message message,
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.adapter = adapter;
@@ -1232,11 +1360,20 @@ namespace System.ServiceModel.Channels
                         if (channel.State == CommunicationState.Created)
                         {
                             this.adapter.ChannelParameters.PropagateChannelParameters(channel);
-                            channel.BeginOpen(this.timeoutHelper.RemainingTime(), Fx.ThunkCallback(new AsyncCallback(OnOpenComplete)), channel);
+                            channel.BeginOpen(
+                                this.timeoutHelper.RemainingTime(),
+                                Fx.ThunkCallback(new AsyncCallback(OnOpenComplete)),
+                                channel
+                            );
                         }
                         else
                         {
-                            channel.BeginSend(message, this.timeoutHelper.RemainingTime(), Fx.ThunkCallback(new AsyncCallback(OnSendComplete)), channel);
+                            channel.BeginSend(
+                                message,
+                                this.timeoutHelper.RemainingTime(),
+                                Fx.ThunkCallback(new AsyncCallback(OnSendComplete)),
+                                channel
+                            );
                         }
                     }
                     catch
@@ -1255,7 +1392,12 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         channel.EndOpen(result);
-                        channel.BeginSend(this.message, this.timeoutHelper.RemainingTime(), Fx.ThunkCallback(new AsyncCallback(OnSendComplete)), channel);
+                        channel.BeginSend(
+                            this.message,
+                            this.timeoutHelper.RemainingTime(),
+                            Fx.ThunkCallback(new AsyncCallback(OnSendComplete)),
+                            channel
+                        );
                     }
                     catch (Exception exception)
                     {
@@ -1300,7 +1442,11 @@ namespace System.ServiceModel.Channels
 
                     try
                     {
-                        channel.BeginClose(this.timeoutHelper.RemainingTime(), Fx.ThunkCallback(new AsyncCallback(OnCloseComplete)), channel);
+                        channel.BeginClose(
+                            this.timeoutHelper.RemainingTime(),
+                            Fx.ThunkCallback(new AsyncCallback(OnCloseComplete)),
+                            channel
+                        );
                     }
                     catch (Exception exception)
                     {
@@ -1346,13 +1492,17 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        class RequestDatagramAdapterChannel : DatagramAdapterChannelBase<IRequestSessionChannel>, IRequestChannel
+        class RequestDatagramAdapterChannel
+            : DatagramAdapterChannelBase<IRequestSessionChannel>,
+                IRequestChannel
         {
             EndpointAddress remoteAddress;
             Uri via;
 
-            internal RequestDatagramAdapterChannel(Source<IRequestSessionChannel> channelSource,
-                                                   IDefaultCommunicationTimeouts timeouts)
+            internal RequestDatagramAdapterChannel(
+                Source<IRequestSessionChannel> channelSource,
+                IDefaultCommunicationTimeouts timeouts
+            )
                 : base(channelSource, timeouts)
             {
                 IRequestSessionChannel inner = channelSource();
@@ -1434,7 +1584,12 @@ namespace System.ServiceModel.Channels
                 return this.BeginRequest(message, this.DefaultSendTimeout, callback, state);
             }
 
-            public IAsyncResult BeginRequest(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginRequest(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new RequestAsyncResult(this, message, timeout, callback, state);
             }
@@ -1452,7 +1607,13 @@ namespace System.ServiceModel.Channels
                 TimeoutHelper timeoutHelper;
                 bool hasCompletedAsynchronously = true;
 
-                public RequestAsyncResult(RequestDatagramAdapterChannel adapter, Message message, TimeSpan timeout, AsyncCallback callback, object state)
+                public RequestAsyncResult(
+                    RequestDatagramAdapterChannel adapter,
+                    Message message,
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.adapter = adapter;
@@ -1466,11 +1627,20 @@ namespace System.ServiceModel.Channels
                         if (channel.State == CommunicationState.Created)
                         {
                             this.adapter.ChannelParameters.PropagateChannelParameters(channel);
-                            channel.BeginOpen(this.timeoutHelper.RemainingTime(), Fx.ThunkCallback(new AsyncCallback(OnOpenComplete)), channel);
+                            channel.BeginOpen(
+                                this.timeoutHelper.RemainingTime(),
+                                Fx.ThunkCallback(new AsyncCallback(OnOpenComplete)),
+                                channel
+                            );
                         }
                         else
                         {
-                            channel.BeginRequest(message, this.timeoutHelper.RemainingTime(), Fx.ThunkCallback(new AsyncCallback(OnRequestComplete)), channel);
+                            channel.BeginRequest(
+                                message,
+                                this.timeoutHelper.RemainingTime(),
+                                Fx.ThunkCallback(new AsyncCallback(OnRequestComplete)),
+                                channel
+                            );
                         }
                     }
                     catch
@@ -1489,7 +1659,12 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         channel.EndOpen(result);
-                        channel.BeginRequest(this.message, this.timeoutHelper.RemainingTime(), Fx.ThunkCallback(new AsyncCallback(OnRequestComplete)), channel);
+                        channel.BeginRequest(
+                            this.message,
+                            this.timeoutHelper.RemainingTime(),
+                            Fx.ThunkCallback(new AsyncCallback(OnRequestComplete)),
+                            channel
+                        );
                     }
                     catch (Exception exception)
                     {
@@ -1534,7 +1709,11 @@ namespace System.ServiceModel.Channels
 
                     try
                     {
-                        channel.BeginClose(this.timeoutHelper.RemainingTime(), Fx.ThunkCallback(new AsyncCallback(OnCloseComplete)), channel);
+                        channel.BeginClose(
+                            this.timeoutHelper.RemainingTime(),
+                            Fx.ThunkCallback(new AsyncCallback(OnCloseComplete)),
+                            channel
+                        );
                     }
                     catch (Exception exception)
                     {

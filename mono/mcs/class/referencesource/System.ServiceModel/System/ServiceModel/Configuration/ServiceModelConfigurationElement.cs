@@ -21,14 +21,23 @@ namespace System.ServiceModel.Configuration
         protected void SetPropertyValueIfNotDefaultValue<T>(string propertyName, T value)
         {
             var configurationProperty = this.Properties[propertyName];
-            Contract.Assert(configurationProperty != null, "Parameter 'propertyName' should be the name of a configuration property of type T");
-            Contract.Assert(configurationProperty.Type.IsAssignableFrom(typeof(T)), "Parameter 'propertyName' should be the name of a configuration property of type T");
+            Contract.Assert(
+                configurationProperty != null,
+                "Parameter 'propertyName' should be the name of a configuration property of type T"
+            );
+            Contract.Assert(
+                configurationProperty.Type.IsAssignableFrom(typeof(T)),
+                "Parameter 'propertyName' should be the name of a configuration property of type T"
+            );
 
             if (!object.Equals(value, configurationProperty.DefaultValue))
             {
-                SetPropertyValue(configurationProperty, value, /*ignoreLocks = */ false);
+                SetPropertyValue(
+                    configurationProperty,
+                    value, /*ignoreLocks = */
+                    false
+                );
             }
         }
-
     }
 }

@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -53,7 +53,7 @@ namespace DbLinq.Factory.Implementation
             {
                 if (implementations == null)
                 {
-                    lock (lockObject)   // Strong lock, since run only at statup
+                    lock (lockObject) // Strong lock, since run only at statup
                     {
                         if (implementations == null)
                             implementations = ParseAppDomain();
@@ -66,7 +66,8 @@ namespace DbLinq.Factory.Implementation
         /// <summary>
         /// Singletons table per Type
         /// </summary>
-        protected readonly IThreadSafeDictionary<Type, object> Singletons = new ThreadSafeDictionary<Type, object>();
+        protected readonly IThreadSafeDictionary<Type, object> Singletons =
+            new ThreadSafeDictionary<Type, object>();
 
         /// <summary>
         /// Gets the assemblies to avoid.
@@ -75,13 +76,13 @@ namespace DbLinq.Factory.Implementation
         protected virtual IList<Assembly> GetAssembliesToAvoid()
         {
             return new[]
-                       {
-                           typeof(object).Assembly,         // mscorlib
-                           typeof(Uri).Assembly,            // System
-                           typeof(Action).Assembly,         // System.Core
-                           typeof(IDbConnection).Assembly,  // System.Data
-                           typeof(XmlDocument).Assembly     // System.Xml
-                       };
+            {
+                typeof(object).Assembly, // mscorlib
+                typeof(Uri).Assembly, // System
+                typeof(Action).Assembly, // System.Core
+                typeof(IDbConnection).Assembly, // System.Data
+                typeof(XmlDocument).Assembly, // System.Xml
+            };
         }
 
         /// <summary>
@@ -107,7 +108,10 @@ namespace DbLinq.Factory.Implementation
         /// </summary>
         /// <param name="assembly">The assembly.</param>
         /// <param name="interfaceImplementations">The interface implementations.</param>
-        protected virtual void Parse(Assembly assembly, IDictionary<Type, IList<Type>> interfaceImplementations)
+        protected virtual void Parse(
+            Assembly assembly,
+            IDictionary<Type, IList<Type>> interfaceImplementations
+        )
         {
             try
             {
@@ -117,9 +121,7 @@ namespace DbLinq.Factory.Implementation
                     Register(type, interfaceImplementations);
                 }
             }
-            catch (ReflectionTypeLoadException)
-            {
-            }
+            catch (ReflectionTypeLoadException) { }
         }
 
         private void Register(Type type, IDictionary<Type, IList<Type>> interfaceImplementations)
@@ -180,9 +182,13 @@ namespace DbLinq.Factory.Implementation
             {
                 IList<Type> types;
                 if (!Implementations.TryGetValue(t, out types))
-                    throw new ArgumentException(string.Format("Type '{0}' has no implementation", t));
+                    throw new ArgumentException(
+                        string.Format("Type '{0}' has no implementation", t)
+                    );
                 if (types.Count > 1)
-                    throw new ArgumentException(string.Format("Type '{0}' has too many implementations", t));
+                    throw new ArgumentException(
+                        string.Format("Type '{0}' has too many implementations", t)
+                    );
                 return Activator.CreateInstance(types[0]);
             }
             return Activator.CreateInstance(t);

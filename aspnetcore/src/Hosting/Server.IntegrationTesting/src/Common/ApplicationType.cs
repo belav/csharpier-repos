@@ -13,5 +13,5 @@ public enum ApplicationType
     /// <summary>
     /// All dlls are published with the app for x-copy deploy. Net462 requires this because ASP.NET Core is not in the GAC.
     /// </summary>
-    Standalone
+    Standalone,
 }

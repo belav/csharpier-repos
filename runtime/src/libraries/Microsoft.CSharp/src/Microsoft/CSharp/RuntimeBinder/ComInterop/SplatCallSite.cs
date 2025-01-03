@@ -32,7 +32,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             Debug.Assert(args != null);
 
             // Create a CallSite and invoke it.
-            _site ??= CallSite<Func<CallSite, object, object[], object>>.Create(SplatInvokeBinder.Instance);
+            _site ??= CallSite<Func<CallSite, object, object[], object>>.Create(
+                SplatInvokeBinder.Instance
+            );
 
             return _site.Target(_site, _callable, args);
         }

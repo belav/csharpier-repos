@@ -131,30 +131,48 @@ namespace Microsoft.CodeAnalysis.Syntax
                 switch (_count)
                 {
                     case 1:
-                        return new SyntaxTriviaList(default(SyntaxToken), _nodes[0].UnderlyingNode, position: 0, index: 0);
+                        return new SyntaxTriviaList(
+                            default(SyntaxToken),
+                            _nodes[0].UnderlyingNode,
+                            position: 0,
+                            index: 0
+                        );
                     case 2:
-                        return new SyntaxTriviaList(default(SyntaxToken),
+                        return new SyntaxTriviaList(
+                            default(SyntaxToken),
                             InternalSyntax.SyntaxList.List(
-                            _nodes[0].UnderlyingNode!,
-                            _nodes[1].UnderlyingNode!), position: 0, index: 0);
+                                _nodes[0].UnderlyingNode!,
+                                _nodes[1].UnderlyingNode!
+                            ),
+                            position: 0,
+                            index: 0
+                        );
                     case 3:
-                        return new SyntaxTriviaList(default(SyntaxToken),
+                        return new SyntaxTriviaList(
+                            default(SyntaxToken),
                             InternalSyntax.SyntaxList.List(
                                 _nodes[0].UnderlyingNode!,
                                 _nodes[1].UnderlyingNode!,
-                                _nodes[2].UnderlyingNode!),
-                            position: 0, index: 0);
+                                _nodes[2].UnderlyingNode!
+                            ),
+                            position: 0,
+                            index: 0
+                        );
                     default:
+                    {
+                        var tmp = new ArrayElement<GreenNode>[_count];
+                        for (int i = 0; i < _count; i++)
                         {
-                            var tmp = new ArrayElement<GreenNode>[_count];
-                            for (int i = 0; i < _count; i++)
-                            {
-                                tmp[i].Value = _nodes[i].UnderlyingNode!;
-                            }
-
-                            return new SyntaxTriviaList(default(SyntaxToken),
-                                InternalSyntax.SyntaxList.List(tmp), position: 0, index: 0);
+                            tmp[i].Value = _nodes[i].UnderlyingNode!;
                         }
+
+                        return new SyntaxTriviaList(
+                            default(SyntaxToken),
+                            InternalSyntax.SyntaxList.List(tmp),
+                            position: 0,
+                            index: 0
+                        );
+                    }
                 }
             }
             else

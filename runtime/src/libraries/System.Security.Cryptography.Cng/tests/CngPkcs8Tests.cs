@@ -5,7 +5,8 @@ using Xunit;
 
 namespace System.Security.Cryptography.Cng.Tests
 {
-    public abstract class CngPkcs8Tests<T> where T : AsymmetricAlgorithm
+    public abstract class CngPkcs8Tests<T>
+        where T : AsymmetricAlgorithm
     {
         protected abstract T CreateKey(out CngKey cngKey);
         protected abstract void VerifyMatch(T exported, T imported);
@@ -17,11 +18,11 @@ namespace System.Security.Cryptography.Cng.Tests
             {
                 SetExportPolicy(cngKey, CngExportPolicies.AllowExport);
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.ExportPkcs8PrivateKey());
+                Assert.ThrowsAny<CryptographicException>(() => key.ExportPkcs8PrivateKey());
 
                 Assert.ThrowsAny<CryptographicException>(
-                    () => key.TryExportPkcs8PrivateKey(Span<byte>.Empty, out _));
+                    () => key.TryExportPkcs8PrivateKey(Span<byte>.Empty, out _)
+                );
             }
         }
 
@@ -33,7 +34,8 @@ namespace System.Security.Cryptography.Cng.Tests
             PbeParameters pbeParameters = new PbeParameters(
                 algorithm,
                 HashAlgorithmName.SHA1,
-                2048);
+                2048
+            );
 
             using (T key = CreateKey(out CngKey cngKey))
             {
@@ -41,14 +43,17 @@ namespace System.Security.Cryptography.Cng.Tests
 
                 byte[] data = key.ExportEncryptedPkcs8PrivateKey(
                     (ReadOnlySpan<char>)nameof(NoPlaintextExportAllowsEncryptedPkcs8),
-                    pbeParameters);
+                    pbeParameters
+                );
 
                 Assert.False(
                     key.TryExportEncryptedPkcs8PrivateKey(
                         (ReadOnlySpan<char>)nameof(NoPlaintextExportAllowsEncryptedPkcs8),
                         pbeParameters,
                         data.AsSpan(0, data.Length - 1),
-                        out int bytesWritten));
+                        out int bytesWritten
+                    )
+                );
 
                 Assert.Equal(0, bytesWritten);
 
@@ -57,7 +62,9 @@ namespace System.Security.Cryptography.Cng.Tests
                         (ReadOnlySpan<char>)nameof(NoPlaintextExportAllowsEncryptedPkcs8),
                         pbeParameters,
                         data.AsSpan(),
-                        out bytesWritten));
+                        out bytesWritten
+                    )
+                );
 
                 Assert.Equal(data.Length, bytesWritten);
 
@@ -66,7 +73,8 @@ namespace System.Security.Cryptography.Cng.Tests
                     key2.ImportEncryptedPkcs8PrivateKey(
                         (ReadOnlySpan<char>)nameof(NoPlaintextExportAllowsEncryptedPkcs8),
                         data,
-                        out int bytesRead);
+                        out int bytesRead
+                    );
 
                     Assert.Equal(data.Length, bytesRead);
 
@@ -81,7 +89,9 @@ namespace System.Security.Cryptography.Cng.Tests
                 new CngProperty(
                     "Export Policy",
                     BitConverter.GetBytes((int)policy),
-                    CngPropertyOptions.Persist));
+                    CngPropertyOptions.Persist
+                )
+            );
         }
     }
 }

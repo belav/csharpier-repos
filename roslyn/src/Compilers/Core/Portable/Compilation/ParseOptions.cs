@@ -76,23 +76,38 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal abstract void ValidateOptions(ArrayBuilder<Diagnostic> builder);
 
-        internal void ValidateOptions(ArrayBuilder<Diagnostic> builder, CommonMessageProvider messageProvider)
+        internal void ValidateOptions(
+            ArrayBuilder<Diagnostic> builder,
+            CommonMessageProvider messageProvider
+        )
         {
             // Validate SpecifiedKind not Kind, to catch deprecated specified kinds:
             if (!SpecifiedKind.IsValid())
             {
-                builder.Add(messageProvider.CreateDiagnostic(messageProvider.ERR_BadSourceCodeKind, Location.None, SpecifiedKind.ToString()));
+                builder.Add(
+                    messageProvider.CreateDiagnostic(
+                        messageProvider.ERR_BadSourceCodeKind,
+                        Location.None,
+                        SpecifiedKind.ToString()
+                    )
+                );
             }
 
             if (!DocumentationMode.IsValid())
             {
-                builder.Add(messageProvider.CreateDiagnostic(messageProvider.ERR_BadDocumentationMode, Location.None, DocumentationMode.ToString()));
+                builder.Add(
+                    messageProvider.CreateDiagnostic(
+                        messageProvider.ERR_BadDocumentationMode,
+                        Location.None,
+                        DocumentationMode.ToString()
+                    )
+                );
             }
         }
 
-        // It was supposed to be a protected implementation detail. 
-        // The "pattern" we have for these is the public With* method is the only public callable one, 
-        // and that forwards to the protected Common* like all the other methods in the class. 
+        // It was supposed to be a protected implementation detail.
+        // The "pattern" we have for these is the public With* method is the only public callable one,
+        // and that forwards to the protected Common* like all the other methods in the class.
         [EditorBrowsable(EditorBrowsableState.Never)]
         public abstract ParseOptions CommonWithKind(SourceCodeKind kind);
 
@@ -104,7 +119,9 @@ namespace Microsoft.CodeAnalysis
             return CommonWithDocumentationMode(documentationMode);
         }
 
-        protected abstract ParseOptions CommonWithDocumentationMode(DocumentationMode documentationMode);
+        protected abstract ParseOptions CommonWithDocumentationMode(
+            DocumentationMode documentationMode
+        );
 
         /// <summary>
         /// Enable some experimental language features for testing.
@@ -114,15 +131,14 @@ namespace Microsoft.CodeAnalysis
             return CommonWithFeatures(features);
         }
 
-        protected abstract ParseOptions CommonWithFeatures(IEnumerable<KeyValuePair<string, string>> features);
+        protected abstract ParseOptions CommonWithFeatures(
+            IEnumerable<KeyValuePair<string, string>> features
+        );
 
         /// <summary>
         /// Returns the experimental features.
         /// </summary>
-        public abstract IReadOnlyDictionary<string, string> Features
-        {
-            get;
-        }
+        public abstract IReadOnlyDictionary<string, string> Features { get; }
 
         /// <summary>
         /// Names of defined preprocessor symbols.
@@ -138,22 +154,39 @@ namespace Microsoft.CodeAnalysis
                 return false;
             }
 
-            return
-                this.SpecifiedKind == other.SpecifiedKind &&
-                this.DocumentationMode == other.DocumentationMode &&
-                this.Features.SequenceEqual(other.Features) &&
-                (this.PreprocessorSymbolNames == null ? other.PreprocessorSymbolNames == null : this.PreprocessorSymbolNames.SequenceEqual(other.PreprocessorSymbolNames, StringComparer.Ordinal));
+            return this.SpecifiedKind == other.SpecifiedKind
+                && this.DocumentationMode == other.DocumentationMode
+                && this.Features.SequenceEqual(other.Features)
+                && (
+                    this.PreprocessorSymbolNames == null
+                        ? other.PreprocessorSymbolNames == null
+                        : this.PreprocessorSymbolNames.SequenceEqual(
+                            other.PreprocessorSymbolNames,
+                            StringComparer.Ordinal
+                        )
+                );
         }
 
         public abstract override int GetHashCode();
 
         protected int GetHashCodeHelper()
         {
-            return
-                Hash.Combine((int)this.SpecifiedKind,
-                Hash.Combine((int)this.DocumentationMode,
-                Hash.Combine(HashFeatures(this.Features),
-                Hash.Combine(Hash.CombineValues(this.PreprocessorSymbolNames, StringComparer.Ordinal), 0))));
+            return Hash.Combine(
+                (int)this.SpecifiedKind,
+                Hash.Combine(
+                    (int)this.DocumentationMode,
+                    Hash.Combine(
+                        HashFeatures(this.Features),
+                        Hash.Combine(
+                            Hash.CombineValues(
+                                this.PreprocessorSymbolNames,
+                                StringComparer.Ordinal
+                            ),
+                            0
+                        )
+                    )
+                )
+            );
         }
 
         private static int HashFeatures(IReadOnlyDictionary<string, string> features)
@@ -161,8 +194,10 @@ namespace Microsoft.CodeAnalysis
             int value = 0;
             foreach (var kv in features)
             {
-                value = Hash.Combine(kv.Key.GetHashCode(),
-                        Hash.Combine(kv.Value.GetHashCode(), value));
+                value = Hash.Combine(
+                    kv.Key.GetHashCode(),
+                    Hash.Combine(kv.Value.GetHashCode(), value)
+                );
             }
 
             return value;

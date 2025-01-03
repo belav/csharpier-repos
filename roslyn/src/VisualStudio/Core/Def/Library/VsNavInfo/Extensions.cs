@@ -11,7 +11,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
 {
     internal static class Extensions
     {
-        public static void Add(this ImmutableArray<NavInfoNode>.Builder builder, string name, _LIB_LISTTYPE type, bool expandDottedNames)
+        public static void Add(
+            this ImmutableArray<NavInfoNode>.Builder builder,
+            string name,
+            _LIB_LISTTYPE type,
+            bool expandDottedNames
+        )
         {
             if (name == null)
             {
@@ -43,7 +48,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             }
         }
 
-        public static void Add(this ImmutableArray<NavInfoNode>.Builder builder, string name, _LIB_LISTTYPE type)
+        public static void Add(
+            this ImmutableArray<NavInfoNode>.Builder builder,
+            string name,
+            _LIB_LISTTYPE type
+        )
         {
             if (string.IsNullOrEmpty(name))
             {

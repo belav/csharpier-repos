@@ -20,7 +20,10 @@ namespace System.CodeDom.Tests
         public void Ctor_CodeTypeReference_CodeExpression(CodeTypeReference type)
         {
             var typeofExpression = new CodeTypeOfExpression(type);
-            Assert.Equal((type ?? new CodeTypeReference("")).BaseType, typeofExpression.Type.BaseType);
+            Assert.Equal(
+                (type ?? new CodeTypeReference("")).BaseType,
+                typeofExpression.Type.BaseType
+            );
         }
 
         public static IEnumerable<object[]> Ctor_TypeString_TestData()
@@ -56,7 +59,10 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new CodeTypeOfExpression((Type)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new CodeTypeOfExpression((Type)null)
+            );
         }
 
         [Theory]
@@ -65,7 +71,10 @@ namespace System.CodeDom.Tests
         {
             var typeofExpression = new CodeTypeOfExpression();
             typeofExpression.Type = value;
-            Assert.Equal((value ?? new CodeTypeReference("")).BaseType, typeofExpression.Type.BaseType);
+            Assert.Equal(
+                (value ?? new CodeTypeReference("")).BaseType,
+                typeofExpression.Type.BaseType
+            );
         }
     }
 }

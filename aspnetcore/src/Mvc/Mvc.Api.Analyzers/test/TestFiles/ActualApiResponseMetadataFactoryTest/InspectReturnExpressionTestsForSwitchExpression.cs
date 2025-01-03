@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.InspectReturnExpressi
         {
             return true switch
             {
-                _ => new TestModel()
+                _ => new TestModel(),
             };
         }
 
@@ -19,7 +19,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.InspectReturnExpressi
         {
             return true switch
             {
-                _ => Unauthorized()
+                _ => Unauthorized(),
             };
         }
 
@@ -27,7 +27,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.InspectReturnExpressi
         {
             return true switch
             {
-                _ => new ObjectResult(new object()) { StatusCode = 201 }
+                _ => new ObjectResult(new object()) { StatusCode = 201 },
             };
         }
 
@@ -35,7 +35,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.InspectReturnExpressi
         {
             return true switch
             {
-                _ => new StatusCodeResult(204)
+                _ => new StatusCodeResult(204),
             };
         }
 
@@ -43,7 +43,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.InspectReturnExpressi
         {
             return true switch
             {
-                _ => StatusCode(302)
+                _ => StatusCode(302),
             };
         }
 
@@ -54,7 +54,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.InspectReturnExpressi
                 _ => new BadRequestObjectResult(new object())
                 {
                     StatusCode = StatusCodes.Status422UnprocessableEntity,
-                }
+                },
             };
         }
 
@@ -62,7 +62,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.InspectReturnExpressi
         {
             return true switch
             {
-                _ => StatusCode(StatusCodes.Status423Locked)
+                _ => StatusCode(StatusCodes.Status423Locked),
             };
         }
 
@@ -72,7 +72,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.InspectReturnExpressi
 
             return true switch
             {
-                _ => StatusCode(statusCode)
+                _ => StatusCode(statusCode),
             };
         }
 
@@ -82,7 +82,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.InspectReturnExpressi
 
             return true switch
             {
-                _ => new BadRequestObjectResult(new object()) { StatusCode = statusCode }
+                _ => new BadRequestObjectResult(new object()) { StatusCode = statusCode },
             };
         }
 
@@ -90,7 +90,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.InspectReturnExpressi
         {
             return true switch
             {
-                _ => new BadRequestObjectResult(new TestModel())
+                _ => new BadRequestObjectResult(new TestModel()),
             };
         }
 
@@ -100,7 +100,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.InspectReturnExpressi
 
             return true switch
             {
-                _ => new BadRequestObjectResult(local)
+                _ => new BadRequestObjectResult(local),
             };
         }
 
@@ -108,7 +108,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.InspectReturnExpressi
         {
             return true switch
             {
-                _ => NotFound()
+                _ => NotFound(),
             };
         }
 
@@ -118,7 +118,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.InspectReturnExpressi
 
             return true switch
             {
-                _ => local
+                _ => local,
             };
         }
     }

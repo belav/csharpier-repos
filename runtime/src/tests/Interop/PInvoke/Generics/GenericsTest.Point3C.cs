@@ -20,7 +20,10 @@ unsafe partial class GenericsNative
     public static extern Point3<char> AddPoint3C(Point3<char> lhs, Point3<char> rhs);
 
     [DllImport(nameof(GenericsNative))]
-    public static extern Point3<char> AddPoint3Cs([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point3<char>[] pValues, int count);
+    public static extern Point3<char> AddPoint3Cs(
+        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point3<char>[] pValues,
+        int count
+    );
 
     [DllImport(nameof(GenericsNative))]
     public static extern Point3<char> AddPoint3Cs(in Point3<char> pValues, int count);
@@ -32,22 +35,30 @@ unsafe partial class GenericsTest
     {
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint3C('1', '2', '3'));
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint3COut('1', '2', '3', out GenericsNative.Point3<char> value3));
+        Assert.Throws<MarshalDirectiveException>(
+            () =>
+                GenericsNative.GetPoint3COut('1', '2', '3', out GenericsNative.Point3<char> value3)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint3CRef('1', '2', '3'));
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint3C(default, default));
 
-        GenericsNative.Point3<char>[] values = new GenericsNative.Point3<char>[] {
+        GenericsNative.Point3<char>[] values = new GenericsNative.Point3<char>[]
+        {
             default,
             default,
             default,
             default,
-            default
+            default,
         };
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint3Cs(values, values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddPoint3Cs(values, values.Length)
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint3Cs(in values[0], values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddPoint3Cs(in values[0], values.Length)
+        );
     }
 }

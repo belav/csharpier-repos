@@ -13,24 +13,48 @@ namespace System.StubHelpers
     {
         // The length of the returned array is an approximation based on the length of the input string and the system
         // character set. It is only guaranteed to be larger or equal to cbLength, don't depend on the exact value.
-        internal static unsafe byte[] DoAnsiConversion(string str, bool fBestFit, bool fThrowOnUnmappableChar, out int cbLength)
+        internal static unsafe byte[] DoAnsiConversion(
+            string str,
+            bool fBestFit,
+            bool fThrowOnUnmappableChar,
+            out int cbLength
+        )
         {
             byte[] buffer = new byte[checked((str.Length + 1) * Marshal.SystemMaxDBCSCharSize)];
             fixed (byte* bufferPtr = &buffer[0])
             {
-                cbLength = Marshal.StringToAnsiString(str, bufferPtr, buffer.Length, fBestFit, fThrowOnUnmappableChar);
+                cbLength = Marshal.StringToAnsiString(
+                    str,
+                    bufferPtr,
+                    buffer.Length,
+                    fBestFit,
+                    fThrowOnUnmappableChar
+                );
             }
             return buffer;
         }
 
-        internal static unsafe byte ConvertToNative(char managedChar, bool fBestFit, bool fThrowOnUnmappableChar)
+        internal static unsafe byte ConvertToNative(
+            char managedChar,
+            bool fBestFit,
+            bool fThrowOnUnmappableChar
+        )
         {
             int cbAllocLength = (1 + 1) * Marshal.SystemMaxDBCSCharSize;
             byte* bufferPtr = stackalloc byte[cbAllocLength];
 
-            int cbLength = Marshal.StringToAnsiString(managedChar.ToString(), bufferPtr, cbAllocLength, fBestFit, fThrowOnUnmappableChar);
+            int cbLength = Marshal.StringToAnsiString(
+                managedChar.ToString(),
+                bufferPtr,
+                cbAllocLength,
+                fBestFit,
+                fThrowOnUnmappableChar
+            );
 
-            Debug.Assert(cbLength > 0, "Zero bytes returned from DoAnsiConversion in AnsiCharMarshaler.ConvertToNative");
+            Debug.Assert(
+                cbLength > 0,
+                "Zero bytes returned from DoAnsiConversion in AnsiCharMarshaler.ConvertToNative"
+            );
             return bufferPtr[0];
         }
 
@@ -40,11 +64,15 @@ namespace System.StubHelpers
             string str = Encoding.Default.GetString(bytes);
             return str[0];
         }
-    }  // class AnsiCharMarshaler
+    } // class AnsiCharMarshaler
 
     internal static class CSTRMarshaler
     {
-        internal static unsafe IntPtr ConvertToNative(int flags, string strManaged, IntPtr pNativeBuffer)
+        internal static unsafe IntPtr ConvertToNative(
+            int flags,
+            string strManaged,
+            IntPtr pNativeBuffer
+        )
         {
             if (null == strManaged)
             {
@@ -74,8 +102,13 @@ namespace System.StubHelpers
 
                 try
                 {
-                    nb = Marshal.StringToAnsiString(strManaged, pbNativeBuffer, nb,
-                        bestFit: 0 != (flags & 0xFF), throwOnUnmappableChar: 0 != (flags >> 8));
+                    nb = Marshal.StringToAnsiString(
+                        strManaged,
+                        pbNativeBuffer,
+                        nb,
+                        bestFit: 0 != (flags & 0xFF),
+                        throwOnUnmappableChar: 0 != (flags >> 8)
+                    );
                 }
                 catch (Exception) when (didAlloc)
                 {
@@ -97,13 +130,21 @@ namespace System.StubHelpers
                     // wasting memory on systems with multibyte character sets where the buffer we end up with is often much
                     // smaller than the upper bound for the given managed string.
 
-                    byte[] bytes = AnsiCharMarshaler.DoAnsiConversion(strManaged,
-                        fBestFit: 0 != (flags & 0xFF), fThrowOnUnmappableChar: 0 != (flags >> 8), out nb);
+                    byte[] bytes = AnsiCharMarshaler.DoAnsiConversion(
+                        strManaged,
+                        fBestFit: 0 != (flags & 0xFF),
+                        fThrowOnUnmappableChar: 0 != (flags >> 8),
+                        out nb
+                    );
 
                     // + 1 for the null character from the user.  + 1 for the null character we put in.
                     pbNativeBuffer = (byte*)Marshal.AllocCoTaskMem(nb + 2);
 
-                    Buffer.Memmove(ref *pbNativeBuffer, ref MemoryMarshal.GetArrayDataReference(bytes), (nuint)nb);
+                    Buffer.Memmove(
+                        ref *pbNativeBuffer,
+                        ref MemoryMarshal.GetArrayDataReference(bytes),
+                        (nuint)nb
+                    );
                 }
             }
 
@@ -121,7 +162,12 @@ namespace System.StubHelpers
                 return new string((sbyte*)cstr);
         }
 
-        internal static unsafe void ConvertFixedToNative(int flags, string strManaged, IntPtr pNativeBuffer, int length)
+        internal static unsafe void ConvertFixedToNative(
+            int flags,
+            string strManaged,
+            IntPtr pNativeBuffer,
+            int length
+        )
         {
             if (strManaged == null)
             {
@@ -156,7 +202,8 @@ namespace System.StubHelpers
                     buffer,
                     length,
                     null,
-                    throwOnUnmappableChar ? &defaultCharUsed : null);
+                    throwOnUnmappableChar ? &defaultCharUsed : null
+                );
 #else
                 cbWritten = Encoding.UTF8.GetBytes(pwzChar, numChars, buffer, length);
 #endif
@@ -185,11 +232,15 @@ namespace System.StubHelpers
 
             return new string((sbyte*)cstr, 0, length);
         }
-    }  // class CSTRMarshaler
+    } // class CSTRMarshaler
 
     internal static class UTF8BufferMarshaler
     {
-        internal static unsafe IntPtr ConvertToNative(StringBuilder sb, IntPtr pNativeBuffer, int flags)
+        internal static unsafe IntPtr ConvertToNative(
+            StringBuilder sb,
+            IntPtr pNativeBuffer,
+            int flags
+        )
         {
             if (null == sb)
             {
@@ -249,7 +300,10 @@ namespace System.StubHelpers
                     // of the buffer must be at least (lengthInBytes + 6) bytes.
 #if DEBUG
                     uint length = *((uint*)pNativeBuffer);
-                    Debug.Assert(length >= lengthInBytes + 6, "BSTR localloc'ed buffer is too small");
+                    Debug.Assert(
+                        length >= lengthInBytes + 6,
+                        "BSTR localloc'ed buffer is too small"
+                    );
 #endif
 
                     // set length
@@ -265,7 +319,11 @@ namespace System.StubHelpers
                 }
 
                 // copy characters from the managed string
-                Buffer.Memmove(ref *(char*)ptrToFirstChar, ref strManaged.GetRawStringData(), (nuint)strManaged.Length + 1);
+                Buffer.Memmove(
+                    ref *(char*)ptrToFirstChar,
+                    ref strManaged.GetRawStringData(),
+                    (nuint)strManaged.Length + 1
+                );
 
                 // copy the trail byte if present
                 if (hasTrailByte)
@@ -326,11 +384,16 @@ namespace System.StubHelpers
         {
             Marshal.FreeBSTR(pNative);
         }
-    }  // class BSTRMarshaler
+    } // class BSTRMarshaler
 
     internal static class VBByValStrMarshaler
     {
-        internal static unsafe IntPtr ConvertToNative(string strManaged, bool fBestFit, bool fThrowOnUnmappableChar, ref int cch)
+        internal static unsafe IntPtr ConvertToNative(
+            string strManaged,
+            bool fBestFit,
+            bool fThrowOnUnmappableChar,
+            ref int cch
+        )
         {
             if (null == strManaged)
             {
@@ -356,11 +419,23 @@ namespace System.StubHelpers
             }
             else
             {
-                byte[] bytes = AnsiCharMarshaler.DoAnsiConversion(strManaged, fBestFit, fThrowOnUnmappableChar, out int nbytesused);
+                byte[] bytes = AnsiCharMarshaler.DoAnsiConversion(
+                    strManaged,
+                    fBestFit,
+                    fThrowOnUnmappableChar,
+                    out int nbytesused
+                );
 
-                Debug.Assert(nbytesused >= 0 && nbytesused < nbytes, "Insufficient buffer allocated in VBByValStrMarshaler.ConvertToNative");
+                Debug.Assert(
+                    nbytesused >= 0 && nbytesused < nbytes,
+                    "Insufficient buffer allocated in VBByValStrMarshaler.ConvertToNative"
+                );
 
-                Buffer.Memmove(ref *pNative, ref MemoryMarshal.GetArrayDataReference(bytes), (nuint)nbytesused);
+                Buffer.Memmove(
+                    ref *pNative,
+                    ref MemoryMarshal.GetArrayDataReference(bytes),
+                    (nuint)nbytesused
+                );
 
                 pNative[nbytesused] = 0;
                 *pLength = nbytesused;
@@ -386,7 +461,7 @@ namespace System.StubHelpers
                 Marshal.FreeCoTaskMem(pNative - sizeof(uint));
             }
         }
-    }  // class VBByValStrMarshaler
+    } // class VBByValStrMarshaler
 
     internal static class AnsiBSTRMarshaler
     {
@@ -402,14 +477,23 @@ namespace System.StubHelpers
 
             if (strManaged.Length > 0)
             {
-                bytes = AnsiCharMarshaler.DoAnsiConversion(strManaged, 0 != (flags & 0xFF), 0 != (flags >> 8), out nb);
+                bytes = AnsiCharMarshaler.DoAnsiConversion(
+                    strManaged,
+                    0 != (flags & 0xFF),
+                    0 != (flags >> 8),
+                    out nb
+                );
             }
 
             uint length = (uint)nb;
             IntPtr bstr = Marshal.AllocBSTRByteLen(length);
             if (bytes != null)
             {
-                Buffer.Memmove(ref *(byte*)bstr, ref MemoryMarshal.GetArrayDataReference(bytes), length);
+                Buffer.Memmove(
+                    ref *(byte*)bstr,
+                    ref MemoryMarshal.GetArrayDataReference(bytes),
+                    length
+                );
             }
 
             return bstr;
@@ -434,11 +518,15 @@ namespace System.StubHelpers
         {
             Marshal.FreeBSTR(pNative);
         }
-    }  // class AnsiBSTRMarshaler
+    } // class AnsiBSTRMarshaler
 
     internal static class FixedWSTRMarshaler
     {
-        internal static unsafe void ConvertToNative(string? strManaged, IntPtr nativeHome, int length)
+        internal static unsafe void ConvertToNative(
+            string? strManaged,
+            IntPtr nativeHome,
+            int length
+        )
         {
             ReadOnlySpan<char> managed = strManaged;
             Span<char> native = new Span<char>((char*)nativeHome, length);
@@ -459,7 +547,7 @@ namespace System.StubHelpers
 
             return new string((char*)nativeHome, 0, length);
         }
-    }  // class WSTRBufferMarshaler
+    } // class WSTRBufferMarshaler
 #if FEATURE_COMINTEROP
 
     internal static partial class ObjectMarshaler
@@ -480,7 +568,10 @@ namespace System.StubHelpers
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ObjectMarshaler_ConvertToManaged")]
-        private static partial void ConvertToManaged(IntPtr pSrcVariant, ObjectHandleOnStack retObject);
+        private static partial void ConvertToManaged(
+            IntPtr pSrcVariant,
+            ObjectHandleOnStack retObject
+        );
 
         internal static unsafe void ClearNative(IntPtr pVariant)
         {
@@ -493,13 +584,15 @@ namespace System.StubHelpers
                 *(ComVariant*)pVariant = default;
             }
         }
-    }  // class ObjectMarshaler
-
+    } // class ObjectMarshaler
 #endif // FEATURE_COMINTEROP
 
     internal sealed class HandleMarshaler
     {
-        internal static unsafe IntPtr ConvertSafeHandleToNative(SafeHandle? handle, ref CleanupWorkListElement? cleanupWorkList)
+        internal static unsafe IntPtr ConvertSafeHandleToNative(
+            SafeHandle? handle,
+            ref CleanupWorkListElement? cleanupWorkList
+        )
         {
             if (Unsafe.IsNullRef(ref cleanupWorkList))
             {
@@ -533,12 +626,16 @@ namespace System.StubHelpers
         {
             return DateTime.DoubleDateToTicks(nativeDate);
         }
-    }  // class DateMarshaler
-
+    } // class DateMarshaler
 #if FEATURE_COMINTEROP
     internal static partial class InterfaceMarshaler
     {
-        internal static IntPtr ConvertToNative(object? objSrc, IntPtr itfMT, IntPtr classMT, int flags)
+        internal static IntPtr ConvertToNative(
+            object? objSrc,
+            IntPtr itfMT,
+            IntPtr classMT,
+            int flags
+        )
         {
             if (objSrc == null)
                 return IntPtr.Zero;
@@ -547,20 +644,42 @@ namespace System.StubHelpers
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "InterfaceMarshaler_ConvertToNative")]
-        private static partial IntPtr ConvertToNative(ObjectHandleOnStack objSrc, IntPtr itfMT, IntPtr classMT, int flag);
+        private static partial IntPtr ConvertToNative(
+            ObjectHandleOnStack objSrc,
+            IntPtr itfMT,
+            IntPtr classMT,
+            int flag
+        );
 
-        internal static object? ConvertToManaged(ref IntPtr ppUnk, IntPtr itfMT, IntPtr classMT, int flags)
+        internal static object? ConvertToManaged(
+            ref IntPtr ppUnk,
+            IntPtr itfMT,
+            IntPtr classMT,
+            int flags
+        )
         {
             if (ppUnk == IntPtr.Zero)
                 return null;
 
             object? retObject = null;
-            ConvertToManaged(ref ppUnk, itfMT, classMT, flags, ObjectHandleOnStack.Create(ref retObject));
+            ConvertToManaged(
+                ref ppUnk,
+                itfMT,
+                classMT,
+                flags,
+                ObjectHandleOnStack.Create(ref retObject)
+            );
             return retObject;
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "InterfaceMarshaler_ConvertToManaged")]
-        private static partial void ConvertToManaged(ref IntPtr ppUnk, IntPtr itfMT, IntPtr classMT, int flags, ObjectHandleOnStack retObject);
+        private static partial void ConvertToManaged(
+            ref IntPtr ppUnk,
+            IntPtr itfMT,
+            IntPtr classMT,
+            int flags,
+            ObjectHandleOnStack retObject
+        );
 
         internal static void ClearNative(IntPtr pUnk)
         {
@@ -569,7 +688,7 @@ namespace System.StubHelpers
                 Marshal.Release(pUnk);
             }
         }
-    }  // class InterfaceMarshaler
+    } // class InterfaceMarshaler
 #endif // FEATURE_COMINTEROP
 
     internal static class MngdNativeArrayMarshaler
@@ -589,70 +708,153 @@ namespace System.StubHelpers
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void CreateMarshaler(IntPtr pMarshalState, IntPtr pMT, int dwFlags, IntPtr pManagedMarshaler);
+        internal static extern void CreateMarshaler(
+            IntPtr pMarshalState,
+            IntPtr pMT,
+            int dwFlags,
+            IntPtr pManagedMarshaler
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ConvertSpaceToNative(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
+        internal static extern void ConvertSpaceToNative(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ConvertContentsToNative(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
+        internal static extern void ConvertContentsToNative(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ConvertSpaceToManaged(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome,
-                                                          int cElements);
+        internal static extern void ConvertSpaceToManaged(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome,
+            int cElements
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ConvertContentsToManaged(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
+        internal static extern void ConvertContentsToManaged(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ClearNative(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome, int cElements);
+        internal static extern void ClearNative(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome,
+            int cElements
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ClearNativeContents(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome, int cElements);
-    }  // class MngdNativeArrayMarshaler
+        internal static extern void ClearNativeContents(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome,
+            int cElements
+        );
+    } // class MngdNativeArrayMarshaler
 
     internal static class MngdFixedArrayMarshaler
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void CreateMarshaler(IntPtr pMarshalState, IntPtr pMT, int dwFlags, int cElements, IntPtr pManagedMarshaler);
+        internal static extern void CreateMarshaler(
+            IntPtr pMarshalState,
+            IntPtr pMT,
+            int dwFlags,
+            int cElements,
+            IntPtr pManagedMarshaler
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ConvertSpaceToNative(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
+        internal static extern void ConvertSpaceToNative(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ConvertContentsToNative(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
+        internal static extern void ConvertContentsToNative(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ConvertSpaceToManaged(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
+        internal static extern void ConvertSpaceToManaged(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ConvertContentsToManaged(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
+        internal static extern void ConvertContentsToManaged(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ClearNativeContents(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
-    }  // class MngdFixedArrayMarshaler
-
+        internal static extern void ClearNativeContents(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
+    } // class MngdFixedArrayMarshaler
 #if FEATURE_COMINTEROP
     internal static class MngdSafeArrayMarshaler
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void CreateMarshaler(IntPtr pMarshalState, IntPtr pMT, int iRank, int dwFlags, IntPtr pManagedMarshaler);
+        internal static extern void CreateMarshaler(
+            IntPtr pMarshalState,
+            IntPtr pMT,
+            int iRank,
+            int dwFlags,
+            IntPtr pManagedMarshaler
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ConvertSpaceToNative(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
+        internal static extern void ConvertSpaceToNative(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ConvertContentsToNative(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome, object pOriginalManaged);
+        internal static extern void ConvertContentsToNative(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome,
+            object pOriginalManaged
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ConvertSpaceToManaged(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
+        internal static extern void ConvertSpaceToManaged(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ConvertContentsToManaged(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
+        internal static extern void ConvertContentsToManaged(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ClearNative(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
-    }  // class MngdSafeArrayMarshaler
+        internal static extern void ClearNative(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
+    } // class MngdSafeArrayMarshaler
 #endif // FEATURE_COMINTEROP
 
     internal static class MngdRefCustomMarshaler
@@ -661,17 +863,33 @@ namespace System.StubHelpers
         internal static extern void CreateMarshaler(IntPtr pMarshalState, IntPtr pCMHelper);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ConvertContentsToNative(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
+        internal static extern void ConvertContentsToNative(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ConvertContentsToManaged(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
+        internal static extern void ConvertContentsToManaged(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ClearNative(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
+        internal static extern void ClearNative(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void ClearManaged(IntPtr pMarshalState, ref object pManagedHome, IntPtr pNativeHome);
-    }  // class MngdRefCustomMarshaler
+        internal static extern void ClearManaged(
+            IntPtr pMarshalState,
+            ref object pManagedHome,
+            IntPtr pNativeHome
+        );
+    } // class MngdRefCustomMarshaler
 
     internal struct AsAnyMarshaler
     {
@@ -684,7 +902,7 @@ namespace System.StubHelpers
             Array,
             Layout,
             StringBuilderAnsi,
-            StringBuilderUnicode
+            StringBuilderUnicode,
         }
 
         // Pointer to MngdNativeArrayMarshaler, ownership not assumed.
@@ -706,13 +924,17 @@ namespace System.StubHelpers
             Out = 0x20000000,
             IsAnsi = 0x00FF0000,
             IsThrowOn = 0x0000FF00,
-            IsBestFit = 0x000000FF
+            IsBestFit = 0x000000FF,
         }
 
         private static bool IsIn(int dwFlags) => (dwFlags & (int)AsAnyFlags.In) != 0;
+
         private static bool IsOut(int dwFlags) => (dwFlags & (int)AsAnyFlags.Out) != 0;
+
         private static bool IsAnsi(int dwFlags) => (dwFlags & (int)AsAnyFlags.IsAnsi) != 0;
+
         private static bool IsThrowOn(int dwFlags) => (dwFlags & (int)AsAnyFlags.IsThrowOn) != 0;
+
         private static bool IsBestFit(int dwFlags) => (dwFlags & (int)AsAnyFlags.IsBestFit) != 0;
 
         internal AsAnyMarshaler(IntPtr pvArrayMarshaler)
@@ -735,32 +957,57 @@ namespace System.StubHelpers
 
             switch (Type.GetTypeCode(elementType))
             {
-                case TypeCode.SByte: vt = VarEnum.VT_I1; break;
-                case TypeCode.Byte: vt = VarEnum.VT_UI1; break;
-                case TypeCode.Int16: vt = VarEnum.VT_I2; break;
-                case TypeCode.UInt16: vt = VarEnum.VT_UI2; break;
-                case TypeCode.Int32: vt = VarEnum.VT_I4; break;
-                case TypeCode.UInt32: vt = VarEnum.VT_UI4; break;
-                case TypeCode.Int64: vt = VarEnum.VT_I8; break;
-                case TypeCode.UInt64: vt = VarEnum.VT_UI8; break;
-                case TypeCode.Single: vt = VarEnum.VT_R4; break;
-                case TypeCode.Double: vt = VarEnum.VT_R8; break;
-                case TypeCode.Char: vt = (IsAnsi(dwFlags) ? (VarEnum)VTHACK_ANSICHAR : VarEnum.VT_UI2); break;
-                case TypeCode.Boolean: vt = (VarEnum)VTHACK_WINBOOL; break;
+                case TypeCode.SByte:
+                    vt = VarEnum.VT_I1;
+                    break;
+                case TypeCode.Byte:
+                    vt = VarEnum.VT_UI1;
+                    break;
+                case TypeCode.Int16:
+                    vt = VarEnum.VT_I2;
+                    break;
+                case TypeCode.UInt16:
+                    vt = VarEnum.VT_UI2;
+                    break;
+                case TypeCode.Int32:
+                    vt = VarEnum.VT_I4;
+                    break;
+                case TypeCode.UInt32:
+                    vt = VarEnum.VT_UI4;
+                    break;
+                case TypeCode.Int64:
+                    vt = VarEnum.VT_I8;
+                    break;
+                case TypeCode.UInt64:
+                    vt = VarEnum.VT_UI8;
+                    break;
+                case TypeCode.Single:
+                    vt = VarEnum.VT_R4;
+                    break;
+                case TypeCode.Double:
+                    vt = VarEnum.VT_R8;
+                    break;
+                case TypeCode.Char:
+                    vt = (IsAnsi(dwFlags) ? (VarEnum)VTHACK_ANSICHAR : VarEnum.VT_UI2);
+                    break;
+                case TypeCode.Boolean:
+                    vt = (VarEnum)VTHACK_WINBOOL;
+                    break;
 
                 case TypeCode.Object:
+                {
+                    if (elementType == typeof(IntPtr))
                     {
-                        if (elementType == typeof(IntPtr))
-                        {
-                            vt = (IntPtr.Size == 4 ? VarEnum.VT_I4 : VarEnum.VT_I8);
-                        }
-                        else if (elementType == typeof(UIntPtr))
-                        {
-                            vt = (IntPtr.Size == 4 ? VarEnum.VT_UI4 : VarEnum.VT_UI8);
-                        }
-                        else goto default;
-                        break;
+                        vt = (IntPtr.Size == 4 ? VarEnum.VT_I4 : VarEnum.VT_I8);
                     }
+                    else if (elementType == typeof(UIntPtr))
+                    {
+                        vt = (IntPtr.Size == 4 ? VarEnum.VT_UI4 : VarEnum.VT_UI8);
+                    }
+                    else
+                        goto default;
+                    break;
+                }
 
                 default:
                     throw new ArgumentException(SR.Arg_NDirectBadObject);
@@ -768,14 +1015,17 @@ namespace System.StubHelpers
 
             // marshal the object as C-style array (UnmanagedType.LPArray)
             int dwArrayMarshalerFlags = (int)vt;
-            if (IsBestFit(dwFlags)) dwArrayMarshalerFlags |= (1 << 16);
-            if (IsThrowOn(dwFlags)) dwArrayMarshalerFlags |= (1 << 24);
+            if (IsBestFit(dwFlags))
+                dwArrayMarshalerFlags |= (1 << 16);
+            if (IsThrowOn(dwFlags))
+                dwArrayMarshalerFlags |= (1 << 24);
 
             MngdNativeArrayMarshaler.CreateMarshaler(
                 pvArrayMarshaler,
-                IntPtr.Zero,      // not needed as we marshal primitive VTs only
+                IntPtr.Zero, // not needed as we marshal primitive VTs only
                 dwArrayMarshalerFlags,
-                IntPtr.Zero);     // not needed as we marshal primitive VTs only
+                IntPtr.Zero
+            ); // not needed as we marshal primitive VTs only
 
             IntPtr pNativeHome;
             IntPtr pNativeHomeAddr = new IntPtr(&pNativeHome);
@@ -783,14 +1033,16 @@ namespace System.StubHelpers
             MngdNativeArrayMarshaler.ConvertSpaceToNative(
                 pvArrayMarshaler,
                 ref pManagedHome,
-                pNativeHomeAddr);
+                pNativeHomeAddr
+            );
 
             if (IsIn(dwFlags))
             {
                 MngdNativeArrayMarshaler.ConvertContentsToNative(
                     pvArrayMarshaler,
                     ref pManagedHome,
-                    pNativeHomeAddr);
+                    pNativeHomeAddr
+                );
             }
             if (IsOut(dwFlags))
             {
@@ -810,8 +1062,9 @@ namespace System.StubHelpers
                 // marshal the object as Ansi string (UnmanagedType.LPStr)
                 pNativeHome = CSTRMarshaler.ConvertToNative(
                     dwFlags & 0xFFFF, // (throw on unmappable char << 8 | best fit)
-                    pManagedHome,     //
-                    IntPtr.Zero);     // unmanaged buffer will be allocated
+                    pManagedHome, //
+                    IntPtr.Zero
+                ); // unmanaged buffer will be allocated
             }
             else
             {
@@ -820,7 +1073,11 @@ namespace System.StubHelpers
                 pNativeHome = Marshal.AllocCoTaskMem(allocSize);
                 unsafe
                 {
-                    Buffer.Memmove(ref *(char*)pNativeHome, ref pManagedHome.GetRawStringData(), (nuint)pManagedHome.Length + 1);
+                    Buffer.Memmove(
+                        ref *(char*)pNativeHome,
+                        ref pManagedHome.GetRawStringData(),
+                        (nuint)pManagedHome.Length + 1
+                    );
                 }
             }
 
@@ -870,11 +1127,17 @@ namespace System.StubHelpers
 
                 if (IsIn(dwFlags))
                 {
-                    int length = Marshal.StringToAnsiString(pManagedHome.ToString(),
-                        ptr, allocSize,
+                    int length = Marshal.StringToAnsiString(
+                        pManagedHome.ToString(),
+                        ptr,
+                        allocSize,
                         IsBestFit(dwFlags),
-                        IsThrowOn(dwFlags));
-                    Debug.Assert(length < allocSize, "Expected a length less than the allocated size");
+                        IsThrowOn(dwFlags)
+                    );
+                    Debug.Assert(
+                        length < allocSize,
+                        "Expected a length less than the allocated size"
+                    );
                 }
                 if (IsOut(dwFlags))
                 {
@@ -921,7 +1184,11 @@ namespace System.StubHelpers
             // marshal the object as class with layout (UnmanagedType.LPStruct)
             if (IsIn(dwFlags))
             {
-                StubHelpers.FmtClassUpdateNativeInternal(pManagedHome, (byte*)pNativeHome, ref cleanupWorkList);
+                StubHelpers.FmtClassUpdateNativeInternal(
+                    pManagedHome,
+                    (byte*)pNativeHome,
+                    ref cleanupWorkList
+                );
             }
             if (IsOut(dwFlags))
             {
@@ -961,7 +1228,10 @@ namespace System.StubHelpers
                     // StringBuilder (LPStr or LPWStr)
                     pNativeHome = ConvertStringBuilderToNative(sbValue, dwFlags);
                 }
-                else if (pManagedHome.GetType().IsLayoutSequential || pManagedHome.GetType().IsExplicitLayout)
+                else if (
+                    pManagedHome.GetType().IsLayoutSequential
+                    || pManagedHome.GetType().IsExplicitLayout
+                )
                 {
                     // layout (LPStruct)
                     pNativeHome = ConvertLayoutToNative(pManagedHome, dwFlags);
@@ -981,53 +1251,57 @@ namespace System.StubHelpers
             switch (backPropAction)
             {
                 case BackPropAction.Array:
-                    {
-                        MngdNativeArrayMarshaler.ConvertContentsToManaged(
-                            pvArrayMarshaler,
-                            ref pManagedHome,
-                            new IntPtr(&pNativeHome));
-                        break;
-                    }
+                {
+                    MngdNativeArrayMarshaler.ConvertContentsToManaged(
+                        pvArrayMarshaler,
+                        ref pManagedHome,
+                        new IntPtr(&pNativeHome)
+                    );
+                    break;
+                }
 
                 case BackPropAction.Layout:
-                    {
-                        StubHelpers.FmtClassUpdateCLRInternal(pManagedHome, (byte*)pNativeHome);
-                        break;
-                    }
+                {
+                    StubHelpers.FmtClassUpdateCLRInternal(pManagedHome, (byte*)pNativeHome);
+                    break;
+                }
 
                 case BackPropAction.StringBuilderAnsi:
+                {
+                    int length;
+                    if (pNativeHome == IntPtr.Zero)
                     {
-                        int length;
-                        if (pNativeHome == IntPtr.Zero)
-                        {
-                            length = 0;
-                        }
-                        else
-                        {
-                            length = string.strlen((byte*)pNativeHome);
-                        }
-
-                        ((StringBuilder)pManagedHome).ReplaceBufferAnsiInternal((sbyte*)pNativeHome, length);
-                        break;
+                        length = 0;
                     }
+                    else
+                    {
+                        length = string.strlen((byte*)pNativeHome);
+                    }
+
+                    ((StringBuilder)pManagedHome).ReplaceBufferAnsiInternal(
+                        (sbyte*)pNativeHome,
+                        length
+                    );
+                    break;
+                }
 
                 case BackPropAction.StringBuilderUnicode:
+                {
+                    int length;
+                    if (pNativeHome == IntPtr.Zero)
                     {
-                        int length;
-                        if (pNativeHome == IntPtr.Zero)
-                        {
-                            length = 0;
-                        }
-                        else
-                        {
-                            length = string.wcslen((char*)pNativeHome);
-                        }
-
-                        ((StringBuilder)pManagedHome).ReplaceBufferInternal((char*)pNativeHome, length);
-                        break;
+                        length = 0;
+                    }
+                    else
+                    {
+                        length = string.wcslen((char*)pNativeHome);
                     }
 
-                    // nothing to do for BackPropAction.None
+                    ((StringBuilder)pManagedHome).ReplaceBufferInternal((char*)pNativeHome, length);
+                    break;
+                }
+
+                // nothing to do for BackPropAction.None
             }
         }
 
@@ -1044,7 +1318,7 @@ namespace System.StubHelpers
             }
             StubHelpers.DestroyCleanupList(ref cleanupWorkList);
         }
-    }  // struct AsAnyMarshaler
+    } // struct AsAnyMarshaler
 
     // Constants for direction argument of struct marshalling stub.
     internal static class MarshalOperation
@@ -1070,7 +1344,10 @@ namespace System.StubHelpers
             }
         }
 
-        public static void AddToCleanupList(ref CleanupWorkListElement? list, CleanupWorkListElement newElement)
+        public static void AddToCleanupList(
+            ref CleanupWorkListElement? list,
+            CleanupWorkListElement newElement
+        )
         {
             if (list == null)
             {
@@ -1129,7 +1406,7 @@ namespace System.StubHelpers
             // element.m_owned will be true iff the AddRef succeeded
             return StubHelpers.SafeHandleAddRef(m_handle, ref m_owned);
         }
-    }  // class CleanupWorkListElement
+    } // class CleanupWorkListElement
 
     internal static partial class StubHelpers
     {
@@ -1145,14 +1422,20 @@ namespace System.StubHelpers
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern void ThrowInteropParamException(int resID, int paramIdx);
 
-        internal static IntPtr AddToCleanupList(ref CleanupWorkListElement? pCleanupWorkList, SafeHandle handle)
+        internal static IntPtr AddToCleanupList(
+            ref CleanupWorkListElement? pCleanupWorkList,
+            SafeHandle handle
+        )
         {
             SafeHandleCleanupWorkListElement element = new SafeHandleCleanupWorkListElement(handle);
             CleanupWorkListElement.AddToCleanupList(ref pCleanupWorkList, element);
             return element.AddRef();
         }
 
-        internal static void KeepAliveViaCleanupList(ref CleanupWorkListElement? pCleanupWorkList, object obj)
+        internal static void KeepAliveViaCleanupList(
+            ref CleanupWorkListElement? pCleanupWorkList,
+            object obj
+        )
         {
             KeepAliveCleanupWorkListElement element = new KeepAliveCleanupWorkListElement(obj);
             CleanupWorkListElement.AddToCleanupList(ref pCleanupWorkList, element);
@@ -1186,8 +1469,11 @@ namespace System.StubHelpers
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern Exception InternalGetCOMHRExceptionObject(int hr, IntPtr pCPCMD, object? pThis);
-
+        internal static extern Exception InternalGetCOMHRExceptionObject(
+            int hr,
+            IntPtr pCPCMD,
+            object? pThis
+        );
 #endif // FEATURE_COMINTEROP
 
         [ThreadStatic]
@@ -1210,8 +1496,15 @@ namespace System.StubHelpers
             s_pendingExceptionObject = exception;
         }
 
-        [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "StubHelpers_CreateCustomMarshalerHelper")]
-        internal static partial IntPtr CreateCustomMarshalerHelper(IntPtr pMD, int paramToken, IntPtr hndManagedType);
+        [LibraryImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "StubHelpers_CreateCustomMarshalerHelper"
+        )]
+        internal static partial IntPtr CreateCustomMarshalerHelper(
+            IntPtr pMD,
+            int paramToken,
+            IntPtr hndManagedType
+        );
 
         //-------------------------------------------------------
         // SafeHandle Helpers
@@ -1222,7 +1515,10 @@ namespace System.StubHelpers
         {
             if (pHandle == null)
             {
-                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.pHandle, ExceptionResource.ArgumentNull_SafeHandle);
+                ThrowHelper.ThrowArgumentNullException(
+                    ExceptionArgument.pHandle,
+                    ExceptionResource.ArgumentNull_SafeHandle
+                );
             }
 
             pHandle.DangerousAddRef(ref success);
@@ -1234,7 +1530,10 @@ namespace System.StubHelpers
         {
             if (pHandle == null)
             {
-                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.pHandle, ExceptionResource.ArgumentNull_SafeHandle);
+                ThrowHelper.ThrowArgumentNullException(
+                    ExceptionArgument.pHandle,
+                    ExceptionResource.ArgumentNull_SafeHandle
+                );
             }
 
             pHandle.DangerousRelease();
@@ -1242,7 +1541,12 @@ namespace System.StubHelpers
 
 #if FEATURE_COMINTEROP
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern IntPtr GetCOMIPFromRCW(object objSrc, IntPtr pCPCMD, out IntPtr ppTarget, out bool pfNeedsRelease);
+        internal static extern IntPtr GetCOMIPFromRCW(
+            object objSrc,
+            IntPtr pCPCMD,
+            out IntPtr ppTarget,
+            out bool pfNeedsRelease
+        );
 #endif // FEATURE_COMINTEROP
 
         //-------------------------------------------------------
@@ -1250,7 +1554,11 @@ namespace System.StubHelpers
         //-------------------------------------------------------
 #if PROFILING_SUPPORTED
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern IntPtr ProfilerBeginTransitionCallback(IntPtr pSecretParam, IntPtr pThread, object pThis);
+        internal static extern IntPtr ProfilerBeginTransitionCallback(
+            IntPtr pSecretParam,
+            IntPtr pThread,
+            object pThis
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern void ProfilerEndTransitionCallback(IntPtr pMD, IntPtr pThread);
@@ -1273,19 +1581,33 @@ namespace System.StubHelpers
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe void FmtClassUpdateNativeInternal(object obj, byte* pNative, ref CleanupWorkListElement? pCleanupWorkList);
+        internal static extern unsafe void FmtClassUpdateNativeInternal(
+            object obj,
+            byte* pNative,
+            ref CleanupWorkListElement? pCleanupWorkList
+        );
+
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern unsafe void FmtClassUpdateCLRInternal(object obj, byte* pNative);
+
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern unsafe void LayoutDestroyNativeInternal(object obj, byte* pNative);
+
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern object AllocateInternal(IntPtr typeHandle);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void MarshalToUnmanagedVaListInternal(IntPtr va_list, uint vaListSize, IntPtr pArgIterator);
+        internal static extern void MarshalToUnmanagedVaListInternal(
+            IntPtr va_list,
+            uint vaListSize,
+            IntPtr pArgIterator
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void MarshalToManagedVaListInternal(IntPtr va_list, IntPtr pArgIterator);
+        internal static extern void MarshalToManagedVaListInternal(
+            IntPtr va_list,
+            IntPtr pArgIterator
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern uint CalcVaListSize(IntPtr va_list);
@@ -1316,5 +1638,5 @@ namespace System.StubHelpers
         [Intrinsic]
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern IntPtr NextCallReturnAddress();
-    }  // class StubHelpers
+    } // class StubHelpers
 }

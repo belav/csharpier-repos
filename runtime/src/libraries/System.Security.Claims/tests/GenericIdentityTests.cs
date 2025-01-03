@@ -40,7 +40,10 @@ namespace System.Security.Claims
         public void Ctor_ArgumentValidation()
         {
             AssertExtensions.Throws<ArgumentNullException>("name", () => new GenericIdentity(null));
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new GenericIdentity("user", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new GenericIdentity("user", null)
+            );
         }
     }
 }

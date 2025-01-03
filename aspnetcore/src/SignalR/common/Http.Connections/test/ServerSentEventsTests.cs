@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http.Connections.Internal.Transports;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.SignalR.Tests;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.SignalR.Tests;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
@@ -25,7 +25,11 @@ public class ServerSentEventsTests : VerifiableLoggedTest
             var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
             var context = new DefaultHttpContext();
 
-            var sse = new ServerSentEventsServerTransport(connection.Application.Input, connectionId: string.Empty, LoggerFactory);
+            var sse = new ServerSentEventsServerTransport(
+                connection.Application.Input,
+                connectionId: string.Empty,
+                LoggerFactory
+            );
 
             connection.Transport.Output.Complete();
 
@@ -48,7 +52,11 @@ public class ServerSentEventsTests : VerifiableLoggedTest
 
             var feature = new HttpBufferingFeature(new MemoryStream());
             context.Features.Set<IHttpResponseBodyFeature>(feature);
-            var sse = new ServerSentEventsServerTransport(connection.Application.Input, connectionId: connection.ConnectionId, LoggerFactory);
+            var sse = new ServerSentEventsServerTransport(
+                connection.Application.Input,
+                connectionId: connection.ConnectionId,
+                LoggerFactory
+            );
 
             connection.Transport.Output.Complete();
 
@@ -63,13 +71,20 @@ public class ServerSentEventsTests : VerifiableLoggedTest
     {
         using (StartVerifiableLog())
         {
-            var pair = DuplexPipe.CreateConnectionPair(PipeOptions.Default, new PipeOptions(readerScheduler: PipeScheduler.Inline));
+            var pair = DuplexPipe.CreateConnectionPair(
+                PipeOptions.Default,
+                new PipeOptions(readerScheduler: PipeScheduler.Inline)
+            );
             var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
             var context = new DefaultHttpContext();
 
             var ms = new MemoryStream();
             context.Response.Body = ms;
-            var sse = new ServerSentEventsServerTransport(connection.Application.Input, connectionId: string.Empty, LoggerFactory);
+            var sse = new ServerSentEventsServerTransport(
+                connection.Application.Input,
+                connectionId: string.Empty,
+                LoggerFactory
+            );
 
             var task = sse.ProcessRequestAsync(context, context.RequestAborted);
 
@@ -85,13 +100,20 @@ public class ServerSentEventsTests : VerifiableLoggedTest
     {
         using (StartVerifiableLog())
         {
-            var pair = DuplexPipe.CreateConnectionPair(PipeOptions.Default, new PipeOptions(readerScheduler: PipeScheduler.Inline));
+            var pair = DuplexPipe.CreateConnectionPair(
+                PipeOptions.Default,
+                new PipeOptions(readerScheduler: PipeScheduler.Inline)
+            );
             var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
             var context = new DefaultHttpContext();
 
             var ms = new MemoryStream();
             context.Response.Body = ms;
-            var sse = new ServerSentEventsServerTransport(connection.Application.Input, connectionId: string.Empty, LoggerFactory);
+            var sse = new ServerSentEventsServerTransport(
+                connection.Application.Input,
+                connectionId: string.Empty,
+                LoggerFactory
+            );
 
             var task = sse.ProcessRequestAsync(context, context.RequestAborted);
 
@@ -101,7 +123,10 @@ public class ServerSentEventsTests : VerifiableLoggedTest
             await connection.Transport.Output.WriteAsync(Encoding.ASCII.GetBytes(hText + wText));
             connection.Transport.Output.Complete();
             await task.DefaultTimeout();
-            Assert.Equal(":\r\ndata: " + hText + wText + "\r\n\r\n", Encoding.ASCII.GetString(ms.ToArray()));
+            Assert.Equal(
+                ":\r\ndata: " + hText + wText + "\r\n\r\n",
+                Encoding.ASCII.GetString(ms.ToArray())
+            );
         }
     }
 
@@ -117,7 +142,11 @@ public class ServerSentEventsTests : VerifiableLoggedTest
             var connection = new DefaultConnectionContext("foo", pair.Transport, pair.Application);
             var context = new DefaultHttpContext();
 
-            var sse = new ServerSentEventsServerTransport(connection.Application.Input, connectionId: string.Empty, LoggerFactory);
+            var sse = new ServerSentEventsServerTransport(
+                connection.Application.Input,
+                connectionId: string.Empty,
+                LoggerFactory
+            );
             var ms = new MemoryStream();
             context.Response.Body = ms;
 
@@ -135,7 +164,8 @@ public class ServerSentEventsTests : VerifiableLoggedTest
     {
         public bool ResponseBufferingDisabled { get; set; }
 
-        public HttpBufferingFeature(Stream stream) : base(stream) { }
+        public HttpBufferingFeature(Stream stream)
+            : base(stream) { }
 
         public override void DisableBuffering()
         {

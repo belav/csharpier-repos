@@ -25,7 +25,9 @@ public static class RazorComponentsEndpointRouteBuilderExtensions
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/>.</param>
     /// <returns>An <see cref="RazorComponentsEndpointConventionBuilder"/> that can be used to further configure the API.</returns>
-    public static RazorComponentsEndpointConventionBuilder MapRazorComponents<[DynamicallyAccessedMembers(Component)] TRootComponent>(this IEndpointRouteBuilder endpoints)
+    public static RazorComponentsEndpointConventionBuilder MapRazorComponents<
+        [DynamicallyAccessedMembers(Component)] TRootComponent
+    >(this IEndpointRouteBuilder endpoints)
     {
         ArgumentNullException.ThrowIfNull(endpoints);
 
@@ -40,42 +42,53 @@ public static class RazorComponentsEndpointRouteBuilderExtensions
     {
         var options = new StaticFileOptions
         {
-            FileProvider = new ManifestEmbeddedFileProvider(typeof(RazorComponentsEndpointRouteBuilderExtensions).Assembly),
-            OnPrepareResponse = CacheHeaderSettings.SetCacheHeaders
+            FileProvider = new ManifestEmbeddedFileProvider(
+                typeof(RazorComponentsEndpointRouteBuilderExtensions).Assembly
+            ),
+            OnPrepareResponse = CacheHeaderSettings.SetCacheHeaders,
         };
 
         var app = endpoints.CreateApplicationBuilder();
-        app.Use(next => context =>
-        {
-            // Set endpoint to null so the static files middleware will handle the request.
-            context.SetEndpoint(null);
+        app.Use(next =>
+            context =>
+            {
+                // Set endpoint to null so the static files middleware will handle the request.
+                context.SetEndpoint(null);
 
-            return next(context);
-        });
+                return next(context);
+            }
+        );
         app.UseStaticFiles(options);
 
-        var blazorEndpoint = endpoints.Map("/_framework/blazor.web.js", app.Build())
+        var blazorEndpoint = endpoints
+            .Map("/_framework/blazor.web.js", app.Build())
             .WithDisplayName("Blazor web static files");
 
         blazorEndpoint.Add((builder) => ((RouteEndpointBuilder)builder).Order = int.MinValue);
 
 #if DEBUG
         // We only need to serve the sourcemap when working on the framework, not in the distributed packages
-        endpoints.Map("/_framework/blazor.web.js.map", app.Build())
+        endpoints
+            .Map("/_framework/blazor.web.js.map", app.Build())
             .WithDisplayName("Blazor web static files sourcemap")
             .Add((builder) => ((RouteEndpointBuilder)builder).Order = int.MinValue);
 #endif
     }
 
-    private static RazorComponentEndpointDataSource<TRootComponent> GetOrCreateDataSource<[DynamicallyAccessedMembers(Component)] TRootComponent>(IEndpointRouteBuilder endpoints)
+    private static RazorComponentEndpointDataSource<TRootComponent> GetOrCreateDataSource<
+        [DynamicallyAccessedMembers(Component)] TRootComponent
+    >(IEndpointRouteBuilder endpoints)
     {
-        var dataSource = endpoints.DataSources.OfType<RazorComponentEndpointDataSource<TRootComponent>>().FirstOrDefault();
+        var dataSource = endpoints
+            .DataSources.OfType<RazorComponentEndpointDataSource<TRootComponent>>()
+            .FirstOrDefault();
         if (dataSource == null)
         {
             // Very likely this needs to become a factory and we might need to have multiple endpoint data
             // sources, once we figure out the exact scenarios for
             // https://github.com/dotnet/aspnetcore/issues/46992
-            var factory = endpoints.ServiceProvider.GetRequiredService<RazorComponentEndpointDataSourceFactory>();
+            var factory =
+                endpoints.ServiceProvider.GetRequiredService<RazorComponentEndpointDataSourceFactory>();
             dataSource = factory.CreateDataSource<TRootComponent>(endpoints);
             endpoints.DataSources.Add(dataSource);
         }
@@ -89,9 +102,12 @@ public static class RazorComponentsEndpointRouteBuilderExtensions
         var marker = endpoints.ServiceProvider.GetService<RazorComponentsMarkerService>();
         if (marker == null)
         {
-            throw new InvalidOperationException(Resources.FormatUnableToFindServices(
-                nameof(IServiceCollection),
-                nameof(RazorComponentsServiceCollectionExtensions.AddRazorComponents)));
+            throw new InvalidOperationException(
+                Resources.FormatUnableToFindServices(
+                    nameof(IServiceCollection),
+                    nameof(RazorComponentsServiceCollectionExtensions.AddRazorComponents)
+                )
+            );
         }
     }
 }

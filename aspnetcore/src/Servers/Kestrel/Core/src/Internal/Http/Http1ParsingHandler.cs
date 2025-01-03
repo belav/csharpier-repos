@@ -44,8 +44,11 @@ internal readonly struct Http1ParsingHandler : IHttpRequestLineHandler, IHttpHea
         }
     }
 
-    public void OnStartLine(HttpVersionAndMethod versionAndMethod, TargetOffsetPathLength targetPath, Span<byte> startLine)
-        => Connection.OnStartLine(versionAndMethod, targetPath, startLine);
+    public void OnStartLine(
+        HttpVersionAndMethod versionAndMethod,
+        TargetOffsetPathLength targetPath,
+        Span<byte> startLine
+    ) => Connection.OnStartLine(versionAndMethod, targetPath, startLine);
 
     public void OnStaticIndexedHeader(int index)
     {

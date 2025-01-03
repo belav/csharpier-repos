@@ -10,7 +10,9 @@ namespace System.DirectoryServices.Design
     internal sealed class DirectoryEntryConverter : TypeConverter
     {
         private static StandardValuesCollection? s_values;
-        private static readonly Hashtable s_componentsCreated = new Hashtable(StringComparer.OrdinalIgnoreCase);
+        private static readonly Hashtable s_componentsCreated = new Hashtable(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         {
@@ -22,7 +24,11 @@ namespace System.DirectoryServices.Design
             return base.CanConvertFrom(context, sourceType);
         }
 
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value
+        )
         {
             if (value != null && value is string)
             {
@@ -48,7 +54,12 @@ namespace System.DirectoryServices.Design
             return null;
         }
 
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             if (destinationType != null && destinationType == typeof(string))
             {
@@ -61,8 +72,9 @@ namespace System.DirectoryServices.Design
             return base.ConvertTo(context, culture, value, destinationType!);
         }
 
-        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context) =>
-            s_values ??= new StandardValuesCollection(new object?[] { null });
+        public override StandardValuesCollection GetStandardValues(
+            ITypeDescriptorContext? context
+        ) => s_values ??= new StandardValuesCollection(new object?[] { null });
 
         internal static DirectoryEntry? GetFromCache(string path)
         {

@@ -81,7 +81,8 @@ public class RequestDecompressionMiddlewareBenchmark
             Endpoint = new Endpoint(
                 requestDelegate: null,
                 metadata: metadataCollection,
-                displayName: null);
+                displayName: null
+            );
         }
     }
 

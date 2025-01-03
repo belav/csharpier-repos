@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Win32.SafeHandles;
-using Microsoft.DotNet.RemoteExecutor;
-using Xunit;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.DotNet.RemoteExecutor;
+using Microsoft.Win32.SafeHandles;
+using Xunit;
 
 namespace System.IO.Tests
 {
@@ -27,10 +27,14 @@ namespace System.IO.Tests
         private class MyFileStream : FileStream
         {
             public MyFileStream(string path, FileMode mode)
-                : base(path, mode)
-            { }
+                : base(path, mode) { }
 
-            public MyFileStream(SafeFileHandle handle, FileAccess access, Action<bool> disposeMethod) : base(handle, access)
+            public MyFileStream(
+                SafeFileHandle handle,
+                FileAccess access,
+                Action<bool> disposeMethod
+            )
+                : base(handle, access)
             {
                 DisposeMethod = disposeMethod;
             }
@@ -51,85 +55,115 @@ namespace System.IO.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void Dispose_CallsVirtualDisposeTrueArg_ThrowsDuringFlushWriteBuffer_DisposeThrows()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                string fileName = GetTestFilePath();
-                using (FileStream fscreate = new FileStream(fileName, FileMode.Create))
+            RemoteExecutor
+                .Invoke(() =>
                 {
-                    fscreate.WriteByte(0);
-                }
-                bool writeDisposeInvoked = false;
-                Action<bool> writeDisposeMethod = _ => writeDisposeInvoked = true;
-                using (var fsread = new FileStream(fileName, FileMode.Open, FileAccess.Read))
-                {
-                    Action act = () => // separate method to avoid JIT lifetime-extension issues
+                    string fileName = GetTestFilePath();
+                    using (FileStream fscreate = new FileStream(fileName, FileMode.Create))
                     {
-                        using (var fswrite = new MyFileStream(fsread.SafeFileHandle, FileAccess.Write, writeDisposeMethod))
-                        {
-                            fswrite.WriteByte(0);
-
-                            // Normal dispose should call Dispose(true). Throws due to FS trying to flush write buffer
-                            Assert.Throws<UnauthorizedAccessException>(() => fswrite.Dispose());
-                            Assert.True(writeDisposeInvoked, "Expected Dispose(true) to be called from Dispose()");
-                            writeDisposeInvoked = false;
-
-                            // Only throws on first Dispose call
-                            fswrite.Dispose();
-                            Assert.True(writeDisposeInvoked, "Expected Dispose(true) to be called from Dispose()");
-                            writeDisposeInvoked = false;
-                        }
-                        Assert.True(writeDisposeInvoked, "Expected Dispose(true) to be called from Dispose() again");
-                        writeDisposeInvoked = false;
-                    };
-                    act();
-
-                    for (int i = 0; i < 2; i++)
-                    {
-                        GC.Collect();
-                        GC.WaitForPendingFinalizers();
+                        fscreate.WriteByte(0);
                     }
-                    Assert.False(writeDisposeInvoked, "Expected finalizer to have been suppressed");
-                }
-            }).Dispose();
+                    bool writeDisposeInvoked = false;
+                    Action<bool> writeDisposeMethod = _ => writeDisposeInvoked = true;
+                    using (var fsread = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+                    {
+                        Action act = () => // separate method to avoid JIT lifetime-extension issues
+                        {
+                            using (
+                                var fswrite = new MyFileStream(
+                                    fsread.SafeFileHandle,
+                                    FileAccess.Write,
+                                    writeDisposeMethod
+                                )
+                            )
+                            {
+                                fswrite.WriteByte(0);
+
+                                // Normal dispose should call Dispose(true). Throws due to FS trying to flush write buffer
+                                Assert.Throws<UnauthorizedAccessException>(() => fswrite.Dispose());
+                                Assert.True(
+                                    writeDisposeInvoked,
+                                    "Expected Dispose(true) to be called from Dispose()"
+                                );
+                                writeDisposeInvoked = false;
+
+                                // Only throws on first Dispose call
+                                fswrite.Dispose();
+                                Assert.True(
+                                    writeDisposeInvoked,
+                                    "Expected Dispose(true) to be called from Dispose()"
+                                );
+                                writeDisposeInvoked = false;
+                            }
+                            Assert.True(
+                                writeDisposeInvoked,
+                                "Expected Dispose(true) to be called from Dispose() again"
+                            );
+                            writeDisposeInvoked = false;
+                        };
+                        act();
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
+                        }
+                        Assert.False(
+                            writeDisposeInvoked,
+                            "Expected finalizer to have been suppressed"
+                        );
+                    }
+                })
+                .Dispose();
         }
 
-        private static bool IsPreciseGcSupportedAndRemoteExecutorSupported => PlatformDetection.IsPreciseGcSupported && RemoteExecutor.IsSupported;
+        private static bool IsPreciseGcSupportedAndRemoteExecutorSupported =>
+            PlatformDetection.IsPreciseGcSupported && RemoteExecutor.IsSupported;
 
         [ConditionalFact(nameof(IsPreciseGcSupportedAndRemoteExecutorSupported))]
         public void NoDispose_CallsVirtualDisposeFalseArg_ThrowsDuringFlushWriteBuffer_FinalizerWontThrow()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                string fileName = GetTestFilePath();
-                using (FileStream fscreate = new FileStream(fileName, FileMode.Create))
+            RemoteExecutor
+                .Invoke(() =>
                 {
-                    fscreate.WriteByte(0);
-                }
-                bool writeDisposeInvoked = false;
-                Action<bool> writeDisposeMethod = (disposing) =>
-                {
-                    writeDisposeInvoked = true;
-                    Assert.False(disposing, "Expected false arg to Dispose(bool)");
-                };
-                using (var fsread = new FileStream(fileName, FileMode.Open, FileAccess.Read))
-                {
-                    Action act = () => // separate method to avoid JIT lifetime-extension issues
+                    string fileName = GetTestFilePath();
+                    using (FileStream fscreate = new FileStream(fileName, FileMode.Create))
                     {
-                        var fswrite = new MyFileStream(fsread.SafeFileHandle, FileAccess.Write, writeDisposeMethod);
-                        fswrite.WriteByte(0);
-                    };
-                    act();
-
-                    // Dispose is not getting called here.
-                    // instead, make sure finalizer gets called and doesnt throw exception
-                    for (int i = 0; i < 2; i++)
-                    {
-                        GC.Collect();
-                        GC.WaitForPendingFinalizers();
+                        fscreate.WriteByte(0);
                     }
-                    Assert.True(writeDisposeInvoked, "Expected finalizer to be invoked but not throw exception");
-                }
-            }).Dispose();
+                    bool writeDisposeInvoked = false;
+                    Action<bool> writeDisposeMethod = (disposing) =>
+                    {
+                        writeDisposeInvoked = true;
+                        Assert.False(disposing, "Expected false arg to Dispose(bool)");
+                    };
+                    using (var fsread = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+                    {
+                        Action act = () => // separate method to avoid JIT lifetime-extension issues
+                        {
+                            var fswrite = new MyFileStream(
+                                fsread.SafeFileHandle,
+                                FileAccess.Write,
+                                writeDisposeMethod
+                            );
+                            fswrite.WriteByte(0);
+                        };
+                        act();
+
+                        // Dispose is not getting called here.
+                        // instead, make sure finalizer gets called and doesnt throw exception
+                        for (int i = 0; i < 2; i++)
+                        {
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
+                        }
+                        Assert.True(
+                            writeDisposeInvoked,
+                            "Expected finalizer to be invoked but not throw exception"
+                        );
+                    }
+                })
+                .Dispose();
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
@@ -149,13 +183,19 @@ namespace System.IO.Tests
 
                     // Normal dispose should call Dispose(true)
                     fs.Dispose();
-                    Assert.True(disposeInvoked, "Expected Dispose(true) to be called from Dispose()");
+                    Assert.True(
+                        disposeInvoked,
+                        "Expected Dispose(true) to be called from Dispose()"
+                    );
 
                     disposeInvoked = false;
                 }
 
                 // Second dispose leaving the using should still call dispose
-                Assert.True(disposeInvoked, "Expected Dispose(true) to be called from Dispose() again");
+                Assert.True(
+                    disposeInvoked,
+                    "Expected Dispose(true) to be called from Dispose() again"
+                );
                 disposeInvoked = false;
             };
             act();
@@ -182,7 +222,7 @@ namespace System.IO.Tests
                     {
                         disposeInvoked = true;
                         Assert.False(disposing, "Expected false arg to Dispose(bool)");
-                    }
+                    },
                 };
             };
             act();
@@ -204,7 +244,14 @@ namespace System.IO.Tests
                 fs.Write(TestBuffer, 0, TestBuffer.Length);
             }
 
-            using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
+            using (
+                FileStream fs = new FileStream(
+                    fileName,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.ReadWrite | FileShare.Delete
+                )
+            )
             {
                 byte[] buffer = new byte[TestBuffer.Length];
                 Assert.Equal(buffer.Length, fs.Length);
@@ -216,7 +263,10 @@ namespace System.IO.Tests
         [Fact]
         public void DerivedFileStream_PropertiesDontThrow_OnDispose()
         {
-            var fs = new DerivedFileStreamAccessingPropertiesOnDispose(GetTestFilePath(), FileMode.Create);
+            var fs = new DerivedFileStreamAccessingPropertiesOnDispose(
+                GetTestFilePath(),
+                FileMode.Create
+            );
             fs.Dispose();
             fs.VerifyAfterDispose();
         }
@@ -226,22 +276,29 @@ namespace System.IO.Tests
             public static int DisposeTrueCalled = 0;
             public static int DisposeFalseCalled = 0;
 
-            public DerivedFileStreamWithFinalizer(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options)
-                : base(path, mode, access, share, bufferSize, options)
-            {
-            }
+            public DerivedFileStreamWithFinalizer(
+                string path,
+                FileMode mode,
+                FileAccess access,
+                FileShare share,
+                int bufferSize,
+                FileOptions options
+            )
+                : base(path, mode, access, share, bufferSize, options) { }
 
-            public DerivedFileStreamWithFinalizer(SafeFileHandle handle, FileAccess access, int bufferSize, bool isAsync)
-                : base(handle, access, bufferSize, isAsync)
-            {
-            }
+            public DerivedFileStreamWithFinalizer(
+                SafeFileHandle handle,
+                FileAccess access,
+                int bufferSize,
+                bool isAsync
+            )
+                : base(handle, access, bufferSize, isAsync) { }
 
             public DerivedFileStreamWithFinalizer(IntPtr handle, FileAccess access, bool ownsHandle)
 #pragma warning disable CS0618 // Type or member is obsolete
                 : base(handle, access, ownsHandle)
 #pragma warning restore CS0618 // Type or member is obsolete
-            {
-            }
+            { }
 
             ~DerivedFileStreamWithFinalizer() => Dispose(false);
 
@@ -265,22 +322,33 @@ namespace System.IO.Tests
             public static int DisposeTrueCalled = 0;
             public static int DisposeFalseCalled = 0;
 
-            public DerivedFileStreamWithoutFinalizer(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options)
-                : base(path, mode, access, share, bufferSize, options)
-            {
-            }
+            public DerivedFileStreamWithoutFinalizer(
+                string path,
+                FileMode mode,
+                FileAccess access,
+                FileShare share,
+                int bufferSize,
+                FileOptions options
+            )
+                : base(path, mode, access, share, bufferSize, options) { }
 
-            public DerivedFileStreamWithoutFinalizer(SafeFileHandle handle, FileAccess access, int bufferSize, bool isAsync)
-                : base(handle, access, bufferSize, isAsync)
-            {
-            }
+            public DerivedFileStreamWithoutFinalizer(
+                SafeFileHandle handle,
+                FileAccess access,
+                int bufferSize,
+                bool isAsync
+            )
+                : base(handle, access, bufferSize, isAsync) { }
 
-            public DerivedFileStreamWithoutFinalizer(IntPtr handle, FileAccess access, bool ownsHandle)
+            public DerivedFileStreamWithoutFinalizer(
+                IntPtr handle,
+                FileAccess access,
+                bool ownsHandle
+            )
 #pragma warning disable CS0618 // Type or member is obsolete
                 : base(handle, access, ownsHandle)
 #pragma warning restore CS0618 // Type or member is obsolete
-            {
-            }
+            { }
 
             protected override void Dispose(bool disposing)
             {
@@ -302,7 +370,8 @@ namespace System.IO.Tests
             private readonly string _name;
             private bool _disposed;
 
-            public DerivedFileStreamAccessingPropertiesOnDispose(string path, FileMode mode) : base(path, mode, FileAccess.ReadWrite)
+            public DerivedFileStreamAccessingPropertiesOnDispose(string path, FileMode mode)
+                : base(path, mode, FileAccess.ReadWrite)
             {
                 _name = path;
             }
@@ -331,7 +400,10 @@ namespace System.IO.Tests
 
             public void VerifyAfterDispose()
             {
-                Assert.True(_disposed, "This method must be called only after the object has been disposed.");
+                Assert.True(
+                    _disposed,
+                    "This method must be called only after the object has been disposed."
+                );
                 Assert.Throws<ObjectDisposedException>(() => Length);
                 Assert.Throws<ObjectDisposedException>(() => Position);
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -346,49 +418,97 @@ namespace System.IO.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
-        public void FinalizeFlushesWriteBuffer()
-            => VerifyFlushedBufferOnFinalization(
-                filePath => new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, bufferSize: 4096, useAsync: false));
+        public void FinalizeFlushesWriteBuffer() =>
+            VerifyFlushedBufferOnFinalization(filePath => new FileStream(
+                filePath,
+                FileMode.Create,
+                FileAccess.Write,
+                FileShare.ReadWrite | FileShare.Delete,
+                bufferSize: 4096,
+                useAsync: false
+            ));
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
-        public void FinalizeFlushesWriteBufferForDerivedFileStreamWithFinalizerCreatedFromPath()
-            => VerifyFlushedBufferOnFinalization(
-                filePath => new DerivedFileStreamWithFinalizer(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, bufferSize: 4096, FileOptions.None));
+        public void FinalizeFlushesWriteBufferForDerivedFileStreamWithFinalizerCreatedFromPath() =>
+            VerifyFlushedBufferOnFinalization(filePath => new DerivedFileStreamWithFinalizer(
+                filePath,
+                FileMode.Create,
+                FileAccess.Write,
+                FileShare.ReadWrite | FileShare.Delete,
+                bufferSize: 4096,
+                FileOptions.None
+            ));
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
-        public void FinalizeFlushesWriteBufferForDerivedFileStreamWithFinalizerCreatedFromSafeFileHandle()
-            => VerifyFlushedBufferOnFinalization(
-                filePath => new DerivedFileStreamWithFinalizer(
-                    File.OpenHandle(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, FileOptions.None),
-                    FileAccess.Write, bufferSize: 4096, isAsync: false));
-
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
-        public void FinalizeFlushesWriteBufferForDerivedFileStreamWithFinalizerCreatedFromIntPtr()
-             => VerifyFlushedBufferOnFinalization(
-                filePath => new DerivedFileStreamWithFinalizer(
-                    File.OpenHandle(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, FileOptions.None).DangerousGetHandle(),
+        public void FinalizeFlushesWriteBufferForDerivedFileStreamWithFinalizerCreatedFromSafeFileHandle() =>
+            VerifyFlushedBufferOnFinalization(filePath => new DerivedFileStreamWithFinalizer(
+                File.OpenHandle(
+                    filePath,
+                    FileMode.Create,
                     FileAccess.Write,
-                    ownsHandle: true));
+                    FileShare.ReadWrite | FileShare.Delete,
+                    FileOptions.None
+                ),
+                FileAccess.Write,
+                bufferSize: 4096,
+                isAsync: false
+            ));
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
-        public void FinalizeFlushesWriteBufferForDerivedFileStreamWithoutFinalizerCreatedFromPath()
-            => VerifyFlushedBufferOnFinalization(
-                filePath => new DerivedFileStreamWithoutFinalizer(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, bufferSize: 4096, FileOptions.None));
+        public void FinalizeFlushesWriteBufferForDerivedFileStreamWithFinalizerCreatedFromIntPtr() =>
+            VerifyFlushedBufferOnFinalization(filePath => new DerivedFileStreamWithFinalizer(
+                File.OpenHandle(
+                        filePath,
+                        FileMode.Create,
+                        FileAccess.Write,
+                        FileShare.ReadWrite | FileShare.Delete,
+                        FileOptions.None
+                    )
+                    .DangerousGetHandle(),
+                FileAccess.Write,
+                ownsHandle: true
+            ));
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
-        public void FinalizeFlushesWriteBufferForDerivedFileStreamWithoutFinalizerCreatedFromSafeFileHandle()
-            => VerifyFlushedBufferOnFinalization(
-                filePath => new DerivedFileStreamWithoutFinalizer(
-                    File.OpenHandle(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, FileOptions.None),
-                    FileAccess.Write, bufferSize: 4096, isAsync: false));
+        public void FinalizeFlushesWriteBufferForDerivedFileStreamWithoutFinalizerCreatedFromPath() =>
+            VerifyFlushedBufferOnFinalization(filePath => new DerivedFileStreamWithoutFinalizer(
+                filePath,
+                FileMode.Create,
+                FileAccess.Write,
+                FileShare.ReadWrite | FileShare.Delete,
+                bufferSize: 4096,
+                FileOptions.None
+            ));
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
-        public void FinalizeFlushesWriteBufferForDerivedFileStreamWithoutFinalizerCreatedFromIntPtr()
-             => VerifyFlushedBufferOnFinalization(
-                filePath => new DerivedFileStreamWithoutFinalizer(
-                    File.OpenHandle(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, FileOptions.None).DangerousGetHandle(),
+        public void FinalizeFlushesWriteBufferForDerivedFileStreamWithoutFinalizerCreatedFromSafeFileHandle() =>
+            VerifyFlushedBufferOnFinalization(filePath => new DerivedFileStreamWithoutFinalizer(
+                File.OpenHandle(
+                    filePath,
+                    FileMode.Create,
                     FileAccess.Write,
-                    ownsHandle: true));
+                    FileShare.ReadWrite | FileShare.Delete,
+                    FileOptions.None
+                ),
+                FileAccess.Write,
+                bufferSize: 4096,
+                isAsync: false
+            ));
+
+        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
+        public void FinalizeFlushesWriteBufferForDerivedFileStreamWithoutFinalizerCreatedFromIntPtr() =>
+            VerifyFlushedBufferOnFinalization(filePath => new DerivedFileStreamWithoutFinalizer(
+                File.OpenHandle(
+                        filePath,
+                        FileMode.Create,
+                        FileAccess.Write,
+                        FileShare.ReadWrite | FileShare.Delete,
+                        FileOptions.None
+                    )
+                    .DangerousGetHandle(),
+                FileAccess.Write,
+                ownsHandle: true
+            ));
 
         private void VerifyFlushedBufferOnFinalization(Func<string, FileStream> factory)
         {
@@ -410,7 +530,14 @@ namespace System.IO.Tests
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
-            using (FileStream fsr = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
+            using (
+                FileStream fsr = new FileStream(
+                    fileName,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.ReadWrite | FileShare.Delete
+                )
+            )
             {
                 byte[] buffer = new byte[TestBuffer.Length];
                 Assert.Equal(buffer.Length, fsr.Length);
@@ -421,12 +548,18 @@ namespace System.IO.Tests
             if (type == typeof(DerivedFileStreamWithFinalizer))
             {
                 // derived type finalizer implicitly calls base type finalizer, hence +2
-                Assert.Equal(beforeWithFinalizer + 2, DerivedFileStreamWithFinalizer.DisposeFalseCalled);
+                Assert.Equal(
+                    beforeWithFinalizer + 2,
+                    DerivedFileStreamWithFinalizer.DisposeFalseCalled
+                );
                 Assert.Equal(0, DerivedFileStreamWithFinalizer.DisposeTrueCalled);
             }
             else if (type == typeof(DerivedFileStreamWithoutFinalizer))
             {
-                Assert.Equal(beforeWithoutFinalizer + 1, DerivedFileStreamWithoutFinalizer.DisposeFalseCalled);
+                Assert.Equal(
+                    beforeWithoutFinalizer + 1,
+                    DerivedFileStreamWithoutFinalizer.DisposeFalseCalled
+                );
                 Assert.Equal(0, DerivedFileStreamWithoutFinalizer.DisposeTrueCalled);
             }
         }
@@ -434,52 +567,119 @@ namespace System.IO.Tests
         // this type exists so DerivedFileStreamStrategy can be tested as well
         public class DerivedFileStream : FileStream
         {
-            public DerivedFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options)
-                : base(path, mode, access, share, bufferSize, options)
-            {
-            }
+            public DerivedFileStream(
+                string path,
+                FileMode mode,
+                FileAccess access,
+                FileShare share,
+                int bufferSize,
+                FileOptions options
+            )
+                : base(path, mode, access, share, bufferSize, options) { }
         }
 
         public static IEnumerable<object[]> GetFileStreamDisposeSuppressesStrategyFinalizationArgs()
         {
             foreach (int bufferSize in new[] { 1, 4096 })
             {
-                foreach (FileOptions fileOptions in new[] { FileOptions.Asynchronous, FileOptions.None })
+                foreach (
+                    FileOptions fileOptions in new[] { FileOptions.Asynchronous, FileOptions.None }
+                )
                 {
                     yield return new object[] { bufferSize, fileOptions };
                 }
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsPreciseGcSupported)
+        )]
         [MemberData(nameof(GetFileStreamDisposeSuppressesStrategyFinalizationArgs))]
-        public Task DisposeSuppressesStrategyFinalization(int bufferSize, FileOptions options)
-            => VerifyStrategyFinalization(
-                () => new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.Write, FileShare.None, bufferSize, options | FileOptions.DeleteOnClose),
-                false);
+        public Task DisposeSuppressesStrategyFinalization(int bufferSize, FileOptions options) =>
+            VerifyStrategyFinalization(
+                () =>
+                    new FileStream(
+                        GetTestFilePath(),
+                        FileMode.Create,
+                        FileAccess.Write,
+                        FileShare.None,
+                        bufferSize,
+                        options | FileOptions.DeleteOnClose
+                    ),
+                false
+            );
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsPreciseGcSupported)
+        )]
         [MemberData(nameof(GetFileStreamDisposeSuppressesStrategyFinalizationArgs))]
-        public Task DisposeSuppressesStrategyFinalizationAsync(int bufferSize, FileOptions options)
-            => VerifyStrategyFinalization(
-                () => new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.Write, FileShare.None, bufferSize, options | FileOptions.DeleteOnClose),
-                true);
+        public Task DisposeSuppressesStrategyFinalizationAsync(
+            int bufferSize,
+            FileOptions options
+        ) =>
+            VerifyStrategyFinalization(
+                () =>
+                    new FileStream(
+                        GetTestFilePath(),
+                        FileMode.Create,
+                        FileAccess.Write,
+                        FileShare.None,
+                        bufferSize,
+                        options | FileOptions.DeleteOnClose
+                    ),
+                true
+            );
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsPreciseGcSupported)
+        )]
         [MemberData(nameof(GetFileStreamDisposeSuppressesStrategyFinalizationArgs))]
-        public Task DerivedFileStreamDisposeSuppressesStrategyFinalization(int bufferSize, FileOptions options)
-            => VerifyStrategyFinalization(
-                () => new DerivedFileStream(GetTestFilePath(), FileMode.Create, FileAccess.Write, FileShare.None, bufferSize, options | FileOptions.DeleteOnClose),
-                false);
+        public Task DerivedFileStreamDisposeSuppressesStrategyFinalization(
+            int bufferSize,
+            FileOptions options
+        ) =>
+            VerifyStrategyFinalization(
+                () =>
+                    new DerivedFileStream(
+                        GetTestFilePath(),
+                        FileMode.Create,
+                        FileAccess.Write,
+                        FileShare.None,
+                        bufferSize,
+                        options | FileOptions.DeleteOnClose
+                    ),
+                false
+            );
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsPreciseGcSupported)
+        )]
         [MemberData(nameof(GetFileStreamDisposeSuppressesStrategyFinalizationArgs))]
-        public Task DerivedFileStreamDisposeSuppressesStrategyFinalizationAsync(int bufferSize, FileOptions options)
-            => VerifyStrategyFinalization(
-                () => new DerivedFileStream(GetTestFilePath(), FileMode.Create, FileAccess.Write, FileShare.None, bufferSize, options | FileOptions.DeleteOnClose),
-                true);
+        public Task DerivedFileStreamDisposeSuppressesStrategyFinalizationAsync(
+            int bufferSize,
+            FileOptions options
+        ) =>
+            VerifyStrategyFinalization(
+                () =>
+                    new DerivedFileStream(
+                        GetTestFilePath(),
+                        FileMode.Create,
+                        FileAccess.Write,
+                        FileShare.None,
+                        bufferSize,
+                        options | FileOptions.DeleteOnClose
+                    ),
+                true
+            );
 
-        private static async Task VerifyStrategyFinalization(Func<FileStream> factory, bool useAsync)
+        private static async Task VerifyStrategyFinalization(
+            Func<FileStream> factory,
+            bool useAsync
+        )
         {
             WeakReference weakReference = await EnsureFileStreamIsNotRooted(factory, useAsync);
             Assert.True(weakReference.IsAlive);
@@ -487,14 +687,22 @@ namespace System.IO.Tests
             Assert.False(weakReference.IsAlive);
 
             // separate method to avoid JIT lifetime-extension issues
-            static async Task<WeakReference> EnsureFileStreamIsNotRooted(Func<FileStream> factory, bool useAsync)
+            static async Task<WeakReference> EnsureFileStreamIsNotRooted(
+                Func<FileStream> factory,
+                bool useAsync
+            )
             {
                 FileStream fs = factory();
                 WeakReference weakReference = new WeakReference(
-                    (Stream)typeof(FileStream)
-                        .GetField("_strategy", Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Instance)
-                        .GetValue(fs),
-                    trackResurrection: true);
+                    (Stream)
+                        typeof(FileStream)
+                            .GetField(
+                                "_strategy",
+                                Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Instance
+                            )
+                            .GetValue(fs),
+                    trackResurrection: true
+                );
 
                 Assert.True(weakReference.IsAlive);
 

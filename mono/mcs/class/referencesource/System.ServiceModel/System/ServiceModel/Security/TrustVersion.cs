@@ -22,18 +22,12 @@ namespace System.ServiceModel.Security
 
         public XmlDictionaryString Namespace
         {
-            get
-            {
-                return this.trustNamespace;
-            }
+            get { return this.trustNamespace; }
         }
 
         public XmlDictionaryString Prefix
         {
-            get
-            {
-                return this.prefix;
-            }
+            get { return this.prefix; }
         }
 
         public static TrustVersion Default
@@ -56,16 +50,11 @@ namespace System.ServiceModel.Security
             static readonly WSTrustVersionFeb2005 instance = new WSTrustVersionFeb2005();
 
             protected WSTrustVersionFeb2005()
-                : base(XD.TrustFeb2005Dictionary.Namespace, XD.TrustFeb2005Dictionary.Prefix)
-            {
-            }
+                : base(XD.TrustFeb2005Dictionary.Namespace, XD.TrustFeb2005Dictionary.Prefix) { }
 
             public static TrustVersion Instance
             {
-                get
-                {
-                    return instance;
-                }
+                get { return instance; }
             }
         }
 
@@ -74,18 +63,12 @@ namespace System.ServiceModel.Security
             static readonly WSTrustVersion13 instance = new WSTrustVersion13();
 
             protected WSTrustVersion13()
-                : base(DXD.TrustDec2005Dictionary.Namespace, DXD.TrustDec2005Dictionary.Prefix)
-            {
-            }
+                : base(DXD.TrustDec2005Dictionary.Namespace, DXD.TrustDec2005Dictionary.Prefix) { }
 
             public static TrustVersion Instance
             {
-                get
-                {
-                    return instance;
-                }
+                get { return instance; }
             }
         }
-
     }
 }

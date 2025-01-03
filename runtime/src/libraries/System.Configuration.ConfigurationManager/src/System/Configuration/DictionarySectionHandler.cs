@@ -39,7 +39,6 @@ namespace System.Configuration
 
             foreach (XmlNode child in section.ChildNodes)
             {
-
                 // skip whitespace and comments, throws if non-element
                 if (HandlerBase.IsIgnorableAlsoCheckForNonElement(child))
                     continue;
@@ -49,9 +48,9 @@ namespace System.Configuration
                 {
                     HandlerBase.CheckForChildNodes(child);
                     string key = HandlerBase.RemoveRequiredAttribute(child, KeyAttributeName);
-                    string value = ValueRequired ?
-                        HandlerBase.RemoveRequiredAttribute(child, ValueAttributeName) :
-                        HandlerBase.RemoveAttribute(child, ValueAttributeName);
+                    string value = ValueRequired
+                        ? HandlerBase.RemoveRequiredAttribute(child, ValueAttributeName)
+                        : HandlerBase.RemoveAttribute(child, ValueAttributeName);
                     HandlerBase.CheckForUnrecognizedAttributes(child);
 
                     res[key] = value ?? "";
@@ -100,5 +99,4 @@ namespace System.Configuration
             get { return false; }
         }
     }
-
 }

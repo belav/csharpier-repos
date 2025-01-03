@@ -29,8 +29,8 @@ public interface ISqlQueryColumn : IColumnBase
     /// </summary>
     /// <param name="entityType">An entity type.</param>
     /// <returns>The property mapping or <see langword="null" /> if not found.</returns>
-    new ISqlQueryColumnMapping? FindColumnMapping(IReadOnlyEntityType entityType)
-        => (ISqlQueryColumnMapping?)((IColumnBase)this).FindColumnMapping(entityType);
+    new ISqlQueryColumnMapping? FindColumnMapping(IReadOnlyEntityType entityType) =>
+        (ISqlQueryColumnMapping?)((IColumnBase)this).FindColumnMapping(entityType);
 
     /// <summary>
     ///     <para>

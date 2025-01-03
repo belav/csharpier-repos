@@ -15,9 +15,7 @@ namespace System.Net
             }
 
             string hostString = host.Host;
-            return
-                !IPAddress.TryParse(hostString, out _) &&
-                !hostString.Contains('.');
+            return !IPAddress.TryParse(hostString, out _) && !hostString.Contains('.');
         }
     }
 }

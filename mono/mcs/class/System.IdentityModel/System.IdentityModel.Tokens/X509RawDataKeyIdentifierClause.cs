@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,53 +27,56 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using System.IdentityModel.Policy;
+using System.Security.Cryptography.X509Certificates;
 
 namespace System.IdentityModel.Tokens
 {
-	public class X509RawDataKeyIdentifierClause : BinaryKeyIdentifierClause
-	{
-		public X509RawDataKeyIdentifierClause (byte [] certificateRawData)
-			: base (null, certificateRawData, true)
-		{
-		}
+    public class X509RawDataKeyIdentifierClause : BinaryKeyIdentifierClause
+    {
+        public X509RawDataKeyIdentifierClause(byte[] certificateRawData)
+            : base(null, certificateRawData, true) { }
 
-		public X509RawDataKeyIdentifierClause (X509Certificate2 certificate)
-			: base (null, certificate.RawData, true)
-		{
-			this.cert = certificate;
-		}
+        public X509RawDataKeyIdentifierClause(X509Certificate2 certificate)
+            : base(null, certificate.RawData, true)
+        {
+            this.cert = certificate;
+        }
 
-		X509Certificate2 cert;
+        X509Certificate2 cert;
 
-		public override bool CanCreateKey {
-			get { return true; }
-		}
+        public override bool CanCreateKey
+        {
+            get { return true; }
+        }
 
-		public override SecurityKey CreateKey ()
-		{
-			if (cert == null)
-				cert = new X509Certificate2 (GetX509RawData ());
-			return new X509AsymmetricSecurityKey (cert);
-		}
+        public override SecurityKey CreateKey()
+        {
+            if (cert == null)
+                cert = new X509Certificate2(GetX509RawData());
+            return new X509AsymmetricSecurityKey(cert);
+        }
 
-		[MonoTODO ("Not sure what should be returned when there are public/private pair key and public-only key")]
-		public byte [] GetX509RawData ()
-		{
-			return GetRawBuffer ();
-		}
+        [MonoTODO(
+            "Not sure what should be returned when there are public/private pair key and public-only key"
+        )]
+        public byte[] GetX509RawData()
+        {
+            return GetRawBuffer();
+        }
 
-		[MonoTODO ("Not sure what should be returned when there are public/private pair key and public-only key")]
-		public bool Matches (X509Certificate2 certificate)
-		{
-			return Matches (certificate.RawData);
-		}
+        [MonoTODO(
+            "Not sure what should be returned when there are public/private pair key and public-only key"
+        )]
+        public bool Matches(X509Certificate2 certificate)
+        {
+            return Matches(certificate.RawData);
+        }
 
-		[MonoTODO]
-		public override string ToString ()
-		{
-			return base.ToString ();
-		}
-	}
+        [MonoTODO]
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+    }
 }

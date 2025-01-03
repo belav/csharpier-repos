@@ -24,9 +24,13 @@ public static class HubConnectionBuilderHttpExtensions
     /// </summary>
     /// <param name="hubConnectionBuilder">The <see cref="IHubConnectionBuilder" /> to configure.</param>
     /// <returns>The same instance of the <see cref="IHubConnectionBuilder"/> for chaining.</returns>
-    public static IHubConnectionBuilder WithStatefulReconnect(this IHubConnectionBuilder hubConnectionBuilder)
+    public static IHubConnectionBuilder WithStatefulReconnect(
+        this IHubConnectionBuilder hubConnectionBuilder
+    )
     {
-        hubConnectionBuilder.Services.Configure<HttpConnectionOptions>(options => options.UseStatefulReconnect = true);
+        hubConnectionBuilder.Services.Configure<HttpConnectionOptions>(options =>
+            options.UseStatefulReconnect = true
+        );
 
         return hubConnectionBuilder;
     }
@@ -37,7 +41,10 @@ public static class HubConnectionBuilderHttpExtensions
     /// <param name="hubConnectionBuilder">The <see cref="IHubConnectionBuilder" /> to configure.</param>
     /// <param name="url">The URL the <see cref="HttpConnection"/> will use.</param>
     /// <returns>The same instance of the <see cref="IHubConnectionBuilder"/> for chaining.</returns>
-    public static IHubConnectionBuilder WithUrl(this IHubConnectionBuilder hubConnectionBuilder, [StringSyntax(StringSyntaxAttribute.Uri)] string url)
+    public static IHubConnectionBuilder WithUrl(
+        this IHubConnectionBuilder hubConnectionBuilder,
+        [StringSyntax(StringSyntaxAttribute.Uri)] string url
+    )
     {
         hubConnectionBuilder.WithUrlCore(new Uri(url), null, null);
         return hubConnectionBuilder;
@@ -50,7 +57,11 @@ public static class HubConnectionBuilderHttpExtensions
     /// <param name="url">The URL the <see cref="HttpConnection"/> will use.</param>
     /// <param name="configureHttpConnection">The delegate that configures the <see cref="HttpConnection"/>.</param>
     /// <returns>The same instance of the <see cref="IHubConnectionBuilder"/> for chaining.</returns>
-    public static IHubConnectionBuilder WithUrl(this IHubConnectionBuilder hubConnectionBuilder, [StringSyntax(StringSyntaxAttribute.Uri)] string url, Action<HttpConnectionOptions> configureHttpConnection)
+    public static IHubConnectionBuilder WithUrl(
+        this IHubConnectionBuilder hubConnectionBuilder,
+        [StringSyntax(StringSyntaxAttribute.Uri)] string url,
+        Action<HttpConnectionOptions> configureHttpConnection
+    )
     {
         hubConnectionBuilder.WithUrlCore(new Uri(url), null, configureHttpConnection);
         return hubConnectionBuilder;
@@ -63,7 +74,11 @@ public static class HubConnectionBuilderHttpExtensions
     /// <param name="url">The URL the <see cref="HttpConnection"/> will use.</param>
     /// <param name="transports">A bitmask combining one or more <see cref="HttpTransportType"/> values that specify what transports the client should use.</param>
     /// <returns>The same instance of the <see cref="IHubConnectionBuilder"/> for chaining.</returns>
-    public static IHubConnectionBuilder WithUrl(this IHubConnectionBuilder hubConnectionBuilder, [StringSyntax(StringSyntaxAttribute.Uri)] string url, HttpTransportType transports)
+    public static IHubConnectionBuilder WithUrl(
+        this IHubConnectionBuilder hubConnectionBuilder,
+        [StringSyntax(StringSyntaxAttribute.Uri)] string url,
+        HttpTransportType transports
+    )
     {
         hubConnectionBuilder.WithUrlCore(new Uri(url), transports, null);
         return hubConnectionBuilder;
@@ -77,7 +92,12 @@ public static class HubConnectionBuilderHttpExtensions
     /// <param name="transports">A bitmask combining one or more <see cref="HttpTransportType"/> values that specify what transports the client should use.</param>
     /// <param name="configureHttpConnection">The delegate that configures the <see cref="HttpConnection"/>.</param>
     /// <returns>The same instance of the <see cref="IHubConnectionBuilder"/> for chaining.</returns>
-    public static IHubConnectionBuilder WithUrl(this IHubConnectionBuilder hubConnectionBuilder, [StringSyntax(StringSyntaxAttribute.Uri)] string url, HttpTransportType transports, Action<HttpConnectionOptions> configureHttpConnection)
+    public static IHubConnectionBuilder WithUrl(
+        this IHubConnectionBuilder hubConnectionBuilder,
+        [StringSyntax(StringSyntaxAttribute.Uri)] string url,
+        HttpTransportType transports,
+        Action<HttpConnectionOptions> configureHttpConnection
+    )
     {
         hubConnectionBuilder.WithUrlCore(new Uri(url), transports, configureHttpConnection);
         return hubConnectionBuilder;
@@ -89,7 +109,10 @@ public static class HubConnectionBuilderHttpExtensions
     /// <param name="hubConnectionBuilder">The <see cref="IHubConnectionBuilder" /> to configure.</param>
     /// <param name="url">The URL the <see cref="HttpConnection"/> will use.</param>
     /// <returns>The same instance of the <see cref="IHubConnectionBuilder"/> for chaining.</returns>
-    public static IHubConnectionBuilder WithUrl(this IHubConnectionBuilder hubConnectionBuilder, Uri url)
+    public static IHubConnectionBuilder WithUrl(
+        this IHubConnectionBuilder hubConnectionBuilder,
+        Uri url
+    )
     {
         hubConnectionBuilder.WithUrlCore(url, null, null);
         return hubConnectionBuilder;
@@ -102,7 +125,11 @@ public static class HubConnectionBuilderHttpExtensions
     /// <param name="url">The URL the <see cref="HttpConnection"/> will use.</param>
     /// <param name="configureHttpConnection">The delegate that configures the <see cref="HttpConnection"/>.</param>
     /// <returns>The same instance of the <see cref="IHubConnectionBuilder"/> for chaining.</returns>
-    public static IHubConnectionBuilder WithUrl(this IHubConnectionBuilder hubConnectionBuilder, Uri url, Action<HttpConnectionOptions> configureHttpConnection)
+    public static IHubConnectionBuilder WithUrl(
+        this IHubConnectionBuilder hubConnectionBuilder,
+        Uri url,
+        Action<HttpConnectionOptions> configureHttpConnection
+    )
     {
         hubConnectionBuilder.WithUrlCore(url, null, configureHttpConnection);
         return hubConnectionBuilder;
@@ -115,7 +142,11 @@ public static class HubConnectionBuilderHttpExtensions
     /// <param name="url">The URL the <see cref="HttpConnection"/> will use.</param>
     /// <param name="transports">A bitmask combining one or more <see cref="HttpTransportType"/> values that specify what transports the client should use.</param>
     /// <returns>The same instance of the <see cref="IHubConnectionBuilder"/> for chaining.</returns>
-    public static IHubConnectionBuilder WithUrl(this IHubConnectionBuilder hubConnectionBuilder, Uri url, HttpTransportType transports)
+    public static IHubConnectionBuilder WithUrl(
+        this IHubConnectionBuilder hubConnectionBuilder,
+        Uri url,
+        HttpTransportType transports
+    )
     {
         hubConnectionBuilder.WithUrlCore(url, transports, null);
         return hubConnectionBuilder;
@@ -129,13 +160,23 @@ public static class HubConnectionBuilderHttpExtensions
     /// <param name="transports">A bitmask combining one or more <see cref="HttpTransportType"/> values that specify what transports the client should use.</param>
     /// <param name="configureHttpConnection">The delegate that configures the <see cref="HttpConnection"/>.</param>
     /// <returns>The same instance of the <see cref="IHubConnectionBuilder"/> for chaining.</returns>
-    public static IHubConnectionBuilder WithUrl(this IHubConnectionBuilder hubConnectionBuilder, Uri url, HttpTransportType transports, Action<HttpConnectionOptions> configureHttpConnection)
+    public static IHubConnectionBuilder WithUrl(
+        this IHubConnectionBuilder hubConnectionBuilder,
+        Uri url,
+        HttpTransportType transports,
+        Action<HttpConnectionOptions> configureHttpConnection
+    )
     {
         hubConnectionBuilder.WithUrlCore(url, transports, configureHttpConnection);
         return hubConnectionBuilder;
     }
 
-    private static IHubConnectionBuilder WithUrlCore(this IHubConnectionBuilder hubConnectionBuilder, Uri url, HttpTransportType? transports, Action<HttpConnectionOptions>? configureHttpConnection)
+    private static IHubConnectionBuilder WithUrlCore(
+        this IHubConnectionBuilder hubConnectionBuilder,
+        Uri url,
+        HttpTransportType? transports,
+        Action<HttpConnectionOptions>? configureHttpConnection
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnectionBuilder);
 
@@ -155,10 +196,16 @@ public static class HubConnectionBuilderHttpExtensions
 
         // Add HttpConnectionOptionsDerivedHttpEndPoint so HubConnection can read the Url from HttpConnectionOptions
         // without the Signal.Client.Core project taking a new dependency on Http.Connections.Client.
-        hubConnectionBuilder.Services.AddSingleton<EndPoint, HttpConnectionOptionsDerivedHttpEndPoint>();
+        hubConnectionBuilder.Services.AddSingleton<
+            EndPoint,
+            HttpConnectionOptionsDerivedHttpEndPoint
+        >();
 
         // Configure the HttpConnection so that it uses the correct transfer format for the configured IHubProtocol.
-        hubConnectionBuilder.Services.AddSingleton<IConfigureOptions<HttpConnectionOptions>, HubProtocolDerivedHttpOptionsConfigurer>();
+        hubConnectionBuilder.Services.AddSingleton<
+            IConfigureOptions<HttpConnectionOptions>,
+            HubProtocolDerivedHttpOptionsConfigurer
+        >();
 
         // If and when HttpConnectionFactory is made public, it can be moved out of this assembly and into Http.Connections.Client.
         hubConnectionBuilder.Services.AddSingleton<IConnectionFactory, HttpConnectionFactory>();
@@ -167,13 +214,14 @@ public static class HubConnectionBuilderHttpExtensions
 
     private sealed class HttpConnectionOptionsDerivedHttpEndPoint : UriEndPoint
     {
-        public HttpConnectionOptionsDerivedHttpEndPoint(IOptions<HttpConnectionOptions> httpConnectionOptions)
-            : base(httpConnectionOptions.Value.Url!)
-        {
-        }
+        public HttpConnectionOptionsDerivedHttpEndPoint(
+            IOptions<HttpConnectionOptions> httpConnectionOptions
+        )
+            : base(httpConnectionOptions.Value.Url!) { }
     }
 
-    private sealed class HubProtocolDerivedHttpOptionsConfigurer : IConfigureNamedOptions<HttpConnectionOptions>
+    private sealed class HubProtocolDerivedHttpOptionsConfigurer
+        : IConfigureNamedOptions<HttpConnectionOptions>
     {
         private readonly TransferFormat _defaultTransferFormat;
 

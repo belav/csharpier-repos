@@ -14,9 +14,24 @@ public class RoleManagerTest
         var normalizer = MockHelpers.MockLookupNormalizer();
         var store = new Mock<IRoleStore<PocoRole>>();
         var role = new PocoRole { Name = "Foo" };
-        store.Setup(s => s.CreateAsync(role, CancellationToken.None)).ReturnsAsync(IdentityResult.Success).Verifiable();
-        store.Setup(s => s.GetRoleNameAsync(role, CancellationToken.None)).Returns(Task.FromResult(role.Name)).Verifiable();
-        store.Setup(s => s.SetNormalizedRoleNameAsync(role, normalizer.NormalizeName(role.Name), CancellationToken.None)).Returns(Task.FromResult(0)).Verifiable();
+        store
+            .Setup(s => s.CreateAsync(role, CancellationToken.None))
+            .ReturnsAsync(IdentityResult.Success)
+            .Verifiable();
+        store
+            .Setup(s => s.GetRoleNameAsync(role, CancellationToken.None))
+            .Returns(Task.FromResult(role.Name))
+            .Verifiable();
+        store
+            .Setup(s =>
+                s.SetNormalizedRoleNameAsync(
+                    role,
+                    normalizer.NormalizeName(role.Name),
+                    CancellationToken.None
+                )
+            )
+            .Returns(Task.FromResult(0))
+            .Verifiable();
         var roleManager = MockHelpers.TestRoleManager(store.Object);
 
         // Act
@@ -34,9 +49,24 @@ public class RoleManagerTest
         var normalizer = MockHelpers.MockLookupNormalizer();
         var store = new Mock<IRoleStore<PocoRole>>();
         var role = new PocoRole { Name = "Foo" };
-        store.Setup(s => s.UpdateAsync(role, CancellationToken.None)).ReturnsAsync(IdentityResult.Success).Verifiable();
-        store.Setup(s => s.GetRoleNameAsync(role, CancellationToken.None)).Returns(Task.FromResult(role.Name)).Verifiable();
-        store.Setup(s => s.SetNormalizedRoleNameAsync(role, normalizer.NormalizeName(role.Name), CancellationToken.None)).Returns(Task.FromResult(0)).Verifiable();
+        store
+            .Setup(s => s.UpdateAsync(role, CancellationToken.None))
+            .ReturnsAsync(IdentityResult.Success)
+            .Verifiable();
+        store
+            .Setup(s => s.GetRoleNameAsync(role, CancellationToken.None))
+            .Returns(Task.FromResult(role.Name))
+            .Verifiable();
+        store
+            .Setup(s =>
+                s.SetNormalizedRoleNameAsync(
+                    role,
+                    normalizer.NormalizeName(role.Name),
+                    CancellationToken.None
+                )
+            )
+            .Returns(Task.FromResult(0))
+            .Verifiable();
         var roleManager = MockHelpers.TestRoleManager(store.Object);
 
         // Act
@@ -62,7 +92,10 @@ public class RoleManagerTest
         var normalizer = MockHelpers.MockLookupNormalizer();
         var store = new Mock<IRoleStore<PocoRole>>();
         var role = new PocoRole { Name = "Foo" };
-        store.Setup(s => s.FindByNameAsync(normalizer.NormalizeName("Foo"), CancellationToken.None)).Returns(Task.FromResult(role)).Verifiable();
+        store
+            .Setup(s => s.FindByNameAsync(normalizer.NormalizeName("Foo"), CancellationToken.None))
+            .Returns(Task.FromResult(role))
+            .Verifiable();
         var manager = MockHelpers.TestRoleManager(store.Object);
 
         // Act
@@ -79,7 +112,10 @@ public class RoleManagerTest
         // Setup
         var store = new Mock<IRoleStore<PocoRole>>();
         var role = new PocoRole { Name = "Foo" };
-        store.Setup(s => s.FindByNameAsync(role.Name, CancellationToken.None)).Returns(Task.FromResult(role)).Verifiable();
+        store
+            .Setup(s => s.FindByNameAsync(role.Name, CancellationToken.None))
+            .Returns(Task.FromResult(role))
+            .Verifiable();
         var manager = MockHelpers.TestRoleManager(store.Object);
         manager.KeyNormalizer = null;
 
@@ -98,7 +134,10 @@ public class RoleManagerTest
         var normalizer = MockHelpers.MockLookupNormalizer();
         var store = new Mock<IRoleStore<PocoRole>>();
         var role = new PocoRole { Name = "Foo" };
-        store.Setup(s => s.FindByNameAsync(normalizer.NormalizeName("Foo"), CancellationToken.None)).Returns(Task.FromResult(role)).Verifiable();
+        store
+            .Setup(s => s.FindByNameAsync(normalizer.NormalizeName("Foo"), CancellationToken.None))
+            .Returns(Task.FromResult(role))
+            .Verifiable();
         var manager = MockHelpers.TestRoleManager(store.Object);
 
         // Act
@@ -120,14 +159,31 @@ public class RoleManagerTest
     [Fact]
     public async Task RoleManagerPublicNullChecks()
     {
-        Assert.Throws<ArgumentNullException>("store",
-            () => new RoleManager<PocoRole>(null, null, null, null, null));
+        Assert.Throws<ArgumentNullException>(
+            "store",
+            () => new RoleManager<PocoRole>(null, null, null, null, null)
+        );
         var manager = CreateRoleManager(new NotImplementedStore());
-        await Assert.ThrowsAsync<ArgumentNullException>("role", async () => await manager.CreateAsync(null));
-        await Assert.ThrowsAsync<ArgumentNullException>("role", async () => await manager.UpdateAsync(null));
-        await Assert.ThrowsAsync<ArgumentNullException>("role", async () => await manager.DeleteAsync(null));
-        await Assert.ThrowsAsync<ArgumentNullException>("roleName", async () => await manager.FindByNameAsync(null));
-        await Assert.ThrowsAsync<ArgumentNullException>("roleName", async () => await manager.RoleExistsAsync(null));
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "role",
+            async () => await manager.CreateAsync(null)
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "role",
+            async () => await manager.UpdateAsync(null)
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "role",
+            async () => await manager.DeleteAsync(null)
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "roleName",
+            async () => await manager.FindByNameAsync(null)
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "roleName",
+            async () => await manager.RoleExistsAsync(null)
+        );
     }
 
     [Fact]
@@ -150,42 +206,67 @@ public class RoleManagerTest
 
     private class NotImplementedStore : IRoleStore<PocoRole>
     {
-        public Task<IdentityResult> CreateAsync(PocoRole role, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<IdentityResult> CreateAsync(
+            PocoRole role,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             throw new NotImplementedException();
         }
 
-        public Task<IdentityResult> UpdateAsync(PocoRole role, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<IdentityResult> UpdateAsync(
+            PocoRole role,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             throw new NotImplementedException();
         }
 
-        public Task<IdentityResult> DeleteAsync(PocoRole role, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<IdentityResult> DeleteAsync(
+            PocoRole role,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             throw new NotImplementedException();
         }
 
-        public Task<string> GetRoleIdAsync(PocoRole role, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<string> GetRoleIdAsync(
+            PocoRole role,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             throw new NotImplementedException();
         }
 
-        public Task<string> GetRoleNameAsync(PocoRole role, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<string> GetRoleNameAsync(
+            PocoRole role,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             throw new NotImplementedException();
         }
 
-        public Task SetRoleNameAsync(PocoRole role, string roleName, CancellationToken cancellationToken = default(CancellationToken))
+        public Task SetRoleNameAsync(
+            PocoRole role,
+            string roleName,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             throw new NotImplementedException();
         }
 
-        public Task<PocoRole> FindByIdAsync(string roleId, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<PocoRole> FindByIdAsync(
+            string roleId,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             throw new NotImplementedException();
         }
 
-        public Task<PocoRole> FindByNameAsync(string roleName, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<PocoRole> FindByNameAsync(
+            string roleName,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             throw new NotImplementedException();
         }
@@ -195,12 +276,19 @@ public class RoleManagerTest
             throw new NotImplementedException();
         }
 
-        public Task<string> GetNormalizedRoleNameAsync(PocoRole role, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<string> GetNormalizedRoleNameAsync(
+            PocoRole role,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             throw new NotImplementedException();
         }
 
-        public Task SetNormalizedRoleNameAsync(PocoRole role, string normalizedName, CancellationToken cancellationToken = default(CancellationToken))
+        public Task SetNormalizedRoleNameAsync(
+            PocoRole role,
+            string normalizedName,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             throw new NotImplementedException();
         }

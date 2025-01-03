@@ -6,7 +6,7 @@ using Xunit;
 
 public class OVFTest
 {
-    static public volatile bool rtv;
+    public static volatile bool rtv;
 
     static OVFTest()
     {
@@ -18,13 +18,13 @@ public class OVFTest
         checked
         {
 #if OP_DIV
-			return Test_sbyte((sbyte)(a / 0.5));
+            return Test_sbyte((sbyte)(a / 0.5));
 #elif OP_ADD
-			return Test_sbyte((sbyte)(a + a));
+            return Test_sbyte((sbyte)(a + a));
 #elif OP_SUB
             return Test_sbyte((sbyte)(-1 - a - a));
 #else
-			return Test_sbyte((sbyte)(a * 2));
+            return Test_sbyte((sbyte)(a * 2));
 #endif
         }
     }
@@ -34,13 +34,13 @@ public class OVFTest
         checked
         {
 #if OP_DIV
-			return Test_byte((byte)(a / 0.5));
+            return Test_byte((byte)(a / 0.5));
 #elif OP_ADD
-			return Test_byte((byte)(a + a));
+            return Test_byte((byte)(a + a));
 #elif OP_SUB
             return Test_byte((byte)(0 - a - a));
 #else
-			return Test_byte((byte)(a * 2));
+            return Test_byte((byte)(a * 2));
 #endif
         }
     }
@@ -50,13 +50,13 @@ public class OVFTest
         checked
         {
 #if OP_DIV
-			return Test_short((short)(a / 0.5));
+            return Test_short((short)(a / 0.5));
 #elif OP_ADD
-			return Test_short((short)(a + a));
+            return Test_short((short)(a + a));
 #elif OP_SUB
             return Test_short((short)(-1 - a - a));
 #else
-			return Test_short((short)(a * 2));
+            return Test_short((short)(a * 2));
 #endif
         }
     }
@@ -66,13 +66,13 @@ public class OVFTest
         checked
         {
 #if OP_DIV
-			return Test_ushort((ushort)(a / 0.5));
+            return Test_ushort((ushort)(a / 0.5));
 #elif OP_ADD
-			return Test_ushort((ushort)(a + a));
+            return Test_ushort((ushort)(a + a));
 #elif OP_SUB
             return Test_ushort((ushort)(0 - a - a));
 #else
-			return Test_ushort((ushort)(a * 2));
+            return Test_ushort((ushort)(a * 2));
 #endif
         }
     }
@@ -82,13 +82,13 @@ public class OVFTest
         checked
         {
 #if OP_DIV
-			return Test_int((int)(a / 0.5));
+            return Test_int((int)(a / 0.5));
 #elif OP_ADD
-			return Test_int(a + a);
+            return Test_int(a + a);
 #elif OP_SUB
             return Test_int(-1 - a - a);
 #else
-			return Test_int(a * 2);
+            return Test_int(a * 2);
 #endif
         }
     }
@@ -98,13 +98,13 @@ public class OVFTest
         checked
         {
 #if OP_DIV
-			return Test_uint((uint)(a / 0.5));
+            return Test_uint((uint)(a / 0.5));
 #elif OP_ADD
-			return Test_uint(a + a);
+            return Test_uint(a + a);
 #elif OP_SUB
             return Test_uint(0U - a - a);
 #else
-			return Test_uint(a * 2U);
+            return Test_uint(a * 2U);
 #endif
         }
     }
@@ -114,13 +114,13 @@ public class OVFTest
         checked
         {
 #if OP_DIV
-			return Test_long((long)(a / 0.5));
+            return Test_long((long)(a / 0.5));
 #elif OP_ADD
-			return Test_long(a + a);
+            return Test_long(a + a);
 #elif OP_SUB
             return Test_long(-1L - a - a);
 #else
-			return Test_long(a * 2L);
+            return Test_long(a * 2L);
 #endif
         }
     }
@@ -130,29 +130,28 @@ public class OVFTest
         checked
         {
 #if OP_DIV
-			return Test_ulong((ulong)(a / 0.5));
+            return Test_ulong((ulong)(a / 0.5));
 #elif OP_ADD
-			return Test_ulong(a + a);
+            return Test_ulong(a + a);
 #elif OP_SUB
             return Test_ulong(0UL - a - a);
 #else
-			return Test_ulong(a * 2UL);
+            return Test_ulong(a * 2UL);
 #endif
         }
     }
-
 
     [Fact]
     public static int TestEntryPoint()
     {
 #if OP_DIV
-		const string op = "div.ovf";
+        const string op = "div.ovf";
 #elif OP_ADD
-		const string op = "add.ovf";
+        const string op = "add.ovf";
 #elif OP_SUB
         const string op = "sub.ovf";
 #else
-		const string op = "mul.ovf";
+        const string op = "mul.ovf";
 #endif
 
         Console.WriteLine("Runtime Checks [OP: {0}]", op);

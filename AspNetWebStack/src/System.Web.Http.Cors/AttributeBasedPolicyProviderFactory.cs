@@ -34,7 +34,11 @@ namespace System.Web.Http.Cors
         /// The <see cref="ICorsPolicyProvider" />.
         /// </returns>
         /// <exception cref="System.ArgumentNullException">request</exception>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The object is registered for disposal when the request message is disposed.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The object is registered for disposal when the request message is disposed."
+        )]
         public virtual ICorsPolicyProvider GetCorsPolicyProvider(HttpRequestMessage request)
         {
             if (request == null)
@@ -46,7 +50,10 @@ namespace System.Web.Http.Cors
             HttpActionDescriptor actionDescriptor = null;
             if (corsRequestContext.IsPreflight)
             {
-                HttpRequestMessage targetRequest = new HttpRequestMessage(new HttpMethod(corsRequestContext.AccessControlRequestMethod), request.RequestUri);
+                HttpRequestMessage targetRequest = new HttpRequestMessage(
+                    new HttpMethod(corsRequestContext.AccessControlRequestMethod),
+                    request.RequestUri
+                );
 
                 request.RegisterForDispose(targetRequest);
 
@@ -56,8 +63,10 @@ namespace System.Web.Http.Cors
                     {
                         // The RouteData and HttpContext from the preflight request properties contain information
                         // relevant to the preflight request and not the actual request, therefore we need to exclude them.
-                        if (property.Key != HttpPropertyKeys.HttpRouteDataKey &&
-                            property.Key != HttpContextBaseKey)
+                        if (
+                            property.Key != HttpPropertyKeys.HttpRouteDataKey
+                            && property.Key != HttpContextBaseKey
+                        )
                         {
                             targetRequest.Properties.Add(property.Key, property.Value);
                         }
@@ -101,11 +110,16 @@ namespace System.Web.Http.Cors
             ICorsPolicyProvider policyProvider = null;
             if (actionDescriptor != null)
             {
-                HttpControllerDescriptor controllerDescriptor = actionDescriptor.ControllerDescriptor;
-                policyProvider = actionDescriptor.GetCustomAttributes<ICorsPolicyProvider>().FirstOrDefault();
+                HttpControllerDescriptor controllerDescriptor =
+                    actionDescriptor.ControllerDescriptor;
+                policyProvider = actionDescriptor
+                    .GetCustomAttributes<ICorsPolicyProvider>()
+                    .FirstOrDefault();
                 if (policyProvider == null && controllerDescriptor != null)
                 {
-                    policyProvider = controllerDescriptor.GetCustomAttributes<ICorsPolicyProvider>().FirstOrDefault();
+                    policyProvider = controllerDescriptor
+                        .GetCustomAttributes<ICorsPolicyProvider>()
+                        .FirstOrDefault();
                 }
             }
 
@@ -117,13 +131,19 @@ namespace System.Web.Http.Cors
             return policyProvider;
         }
 
-        private static HttpActionDescriptor SelectAction(HttpRequestMessage request, IHttpRouteData routeData, HttpConfiguration config)
+        private static HttpActionDescriptor SelectAction(
+            HttpRequestMessage request,
+            IHttpRouteData routeData,
+            HttpConfiguration config
+        )
         {
             request.SetRouteData(routeData);
 
             routeData.RemoveOptionalRoutingParameters();
 
-            HttpControllerDescriptor controllerDescriptor = config.Services.GetHttpControllerSelector().SelectController(request);
+            HttpControllerDescriptor controllerDescriptor = config
+                .Services.GetHttpControllerSelector()
+                .SelectController(request);
 
             // Get the per-controller configuration
             config = controllerDescriptor.Configuration;
@@ -137,14 +157,19 @@ namespace System.Web.Http.Cors
                     Configuration = config,
                     RouteData = routeData,
                     Url = new UrlHelper(request),
-                    VirtualPathRoot = config.VirtualPathRoot
+                    VirtualPathRoot = config.VirtualPathRoot,
                 };
             }
 
             IHttpController controller = controllerDescriptor.CreateController(request);
             using (controller as IDisposable)
             {
-                HttpControllerContext controllerContext = new HttpControllerContext(requestContext, request, controllerDescriptor, controller);
+                HttpControllerContext controllerContext = new HttpControllerContext(
+                    requestContext,
+                    request,
+                    controllerDescriptor,
+                    controller
+                );
                 return config.Services.GetActionSelector().SelectAction(controllerContext);
             }
         }

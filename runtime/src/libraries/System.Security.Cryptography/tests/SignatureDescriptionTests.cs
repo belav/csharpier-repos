@@ -24,7 +24,10 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public void Constructor_Null()
         {
-            AssertExtensions.Throws<ArgumentNullException>("el", () => new SignatureDescription(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "el",
+                () => new SignatureDescription(null)
+            );
         }
 
         [Fact]
@@ -39,36 +42,91 @@ namespace System.Security.Cryptography.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst, "Not supported on iOS/tvOS/MacCatalyst")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
+            "Not supported on iOS/tvOS/MacCatalyst"
+        )]
         public void Constructor_SecurityElement_DSA()
         {
             SecurityElement se = new SecurityElement("DSASignature");
-            se.AddChild(new SecurityElement("Key", "System.Security.Cryptography.DSACryptoServiceProvider"));
-            se.AddChild(new SecurityElement("Digest", "System.Security.Cryptography.SHA1CryptoServiceProvider"));
-            se.AddChild(new SecurityElement("Formatter", "System.Security.Cryptography.DSASignatureFormatter"));
-            se.AddChild(new SecurityElement("Deformatter", "System.Security.Cryptography.DSASignatureDeformatter"));
+            se.AddChild(
+                new SecurityElement("Key", "System.Security.Cryptography.DSACryptoServiceProvider")
+            );
+            se.AddChild(
+                new SecurityElement(
+                    "Digest",
+                    "System.Security.Cryptography.SHA1CryptoServiceProvider"
+                )
+            );
+            se.AddChild(
+                new SecurityElement(
+                    "Formatter",
+                    "System.Security.Cryptography.DSASignatureFormatter"
+                )
+            );
+            se.AddChild(
+                new SecurityElement(
+                    "Deformatter",
+                    "System.Security.Cryptography.DSASignatureDeformatter"
+                )
+            );
 
             SignatureDescription sig = new SignatureDescription(se);
             Assert.Equal("System.Security.Cryptography.DSACryptoServiceProvider", sig.KeyAlgorithm);
-            Assert.Equal("System.Security.Cryptography.SHA1CryptoServiceProvider", sig.DigestAlgorithm);
-            Assert.Equal("System.Security.Cryptography.DSASignatureFormatter", sig.FormatterAlgorithm);
-            Assert.Equal("System.Security.Cryptography.DSASignatureDeformatter", sig.DeformatterAlgorithm);
+            Assert.Equal(
+                "System.Security.Cryptography.SHA1CryptoServiceProvider",
+                sig.DigestAlgorithm
+            );
+            Assert.Equal(
+                "System.Security.Cryptography.DSASignatureFormatter",
+                sig.FormatterAlgorithm
+            );
+            Assert.Equal(
+                "System.Security.Cryptography.DSASignatureDeformatter",
+                sig.DeformatterAlgorithm
+            );
         }
 
         [Fact]
         public void Constructor_SecurityElement_RSA()
         {
             SecurityElement se = new SecurityElement("RSASignature");
-            se.AddChild(new SecurityElement("Key", "System.Security.Cryptography.RSACryptoServiceProvider"));
-            se.AddChild(new SecurityElement("Digest", "System.Security.Cryptography.SHA1CryptoServiceProvider"));
-            se.AddChild(new SecurityElement("Formatter", "System.Security.Cryptography.RSAPKCS1SignatureFormatter"));
-            se.AddChild(new SecurityElement("Deformatter", "System.Security.Cryptography.RSAPKCS1SignatureDeformatter"));
+            se.AddChild(
+                new SecurityElement("Key", "System.Security.Cryptography.RSACryptoServiceProvider")
+            );
+            se.AddChild(
+                new SecurityElement(
+                    "Digest",
+                    "System.Security.Cryptography.SHA1CryptoServiceProvider"
+                )
+            );
+            se.AddChild(
+                new SecurityElement(
+                    "Formatter",
+                    "System.Security.Cryptography.RSAPKCS1SignatureFormatter"
+                )
+            );
+            se.AddChild(
+                new SecurityElement(
+                    "Deformatter",
+                    "System.Security.Cryptography.RSAPKCS1SignatureDeformatter"
+                )
+            );
 
             SignatureDescription sig = new SignatureDescription(se);
             Assert.Equal("System.Security.Cryptography.RSACryptoServiceProvider", sig.KeyAlgorithm);
-            Assert.Equal("System.Security.Cryptography.SHA1CryptoServiceProvider", sig.DigestAlgorithm);
-            Assert.Equal("System.Security.Cryptography.RSAPKCS1SignatureFormatter", sig.FormatterAlgorithm);
-            Assert.Equal("System.Security.Cryptography.RSAPKCS1SignatureDeformatter", sig.DeformatterAlgorithm);
+            Assert.Equal(
+                "System.Security.Cryptography.SHA1CryptoServiceProvider",
+                sig.DigestAlgorithm
+            );
+            Assert.Equal(
+                "System.Security.Cryptography.RSAPKCS1SignatureFormatter",
+                sig.FormatterAlgorithm
+            );
+            Assert.Equal(
+                "System.Security.Cryptography.RSAPKCS1SignatureDeformatter",
+                sig.DeformatterAlgorithm
+            );
         }
 
         [Fact]
@@ -103,7 +161,10 @@ namespace System.Security.Cryptography.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst, "Not supported on iOS/tvOS/MacCatalyst")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
+            "Not supported on iOS/tvOS/MacCatalyst"
+        )]
         public void Deformatter()
         {
             AsymmetricSignatureDeformatter def;
@@ -111,7 +172,10 @@ namespace System.Security.Cryptography.Tests
             DSA dsa = DSA.Create();
 
             // Deformatter with all properties null
-            AssertExtensions.Throws<ArgumentNullException>("name", () => sig.CreateDeformatter(dsa));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => sig.CreateDeformatter(dsa)
+            );
 
             // Deformatter with invalid DeformatterAlgorithm property
             sig.DeformatterAlgorithm = "DSA";
@@ -128,8 +192,11 @@ namespace System.Security.Cryptography.Tests
             Assert.Throws<NullReferenceException>(() => def = sig.CreateDeformatter(dsa));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Operation is not supported on Unix
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming)
+        )]
+        [PlatformSpecific(TestPlatforms.Windows)] // Operation is not supported on Unix
         public void Digest()
         {
             bool rightClass = false;
@@ -154,7 +221,10 @@ namespace System.Security.Cryptography.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst, "Not supported on iOS/tvOS/MacCatalyst")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
+            "Not supported on iOS/tvOS/MacCatalyst"
+        )]
         public void Formatter()
         {
             SignatureDescription sig = new SignatureDescription();

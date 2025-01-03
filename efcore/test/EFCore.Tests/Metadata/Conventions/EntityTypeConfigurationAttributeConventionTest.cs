@@ -35,8 +35,12 @@ public class EntityTypeConfigurationAttributeConventionTest
         var builder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
         Assert.Equal(
-            CoreStrings.InvalidEntityTypeConfigurationAttribute(nameof(UserConfiguration), nameof(User)),
-            Assert.Throws<InvalidOperationException>(() => builder.Entity<User>()).Message);
+            CoreStrings.InvalidEntityTypeConfigurationAttribute(
+                nameof(UserConfiguration),
+                nameof(User)
+            ),
+            Assert.Throws<InvalidOperationException>(() => builder.Entity<User>()).Message
+        );
     }
 
     [ConditionalFact]
@@ -45,16 +49,19 @@ public class EntityTypeConfigurationAttributeConventionTest
         var builder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
         Assert.Equal(
-            CoreStrings.InvalidEntityTypeConfigurationAttribute(nameof(CustomerConfiguration), nameof(InvalidCustomer)),
-            Assert.Throws<InvalidOperationException>(() => builder.Entity<InvalidCustomer>()).Message);
+            CoreStrings.InvalidEntityTypeConfigurationAttribute(
+                nameof(CustomerConfiguration),
+                nameof(InvalidCustomer)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => builder.Entity<InvalidCustomer>())
+                .Message
+        );
     }
 
-    private static IMutableModel CreateModel()
-        => new Model();
+    private static IMutableModel CreateModel() => new Model();
 
-    private class UserConfiguration
-    {
-    }
+    private class UserConfiguration { }
 
     [EntityTypeConfiguration(typeof(UserConfiguration))]
     private class User
@@ -66,14 +73,14 @@ public class EntityTypeConfigurationAttributeConventionTest
 
     private class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
-        public void Configure(EntityTypeBuilder<Customer> builder)
-            => builder.Property(c => c.Name).HasMaxLength(1000);
+        public void Configure(EntityTypeBuilder<Customer> builder) =>
+            builder.Property(c => c.Name).HasMaxLength(1000);
     }
 
     private class CustomerGenericConfiguration : IEntityTypeConfiguration<CustomerGeneric>
     {
-        public void Configure(EntityTypeBuilder<CustomerGeneric> builder)
-            => builder.Property(c => c.Name).HasMaxLength(1000);
+        public void Configure(EntityTypeBuilder<CustomerGeneric> builder) =>
+            builder.Property(c => c.Name).HasMaxLength(1000);
     }
 
     [EntityTypeConfiguration(typeof(CustomerConfiguration))]

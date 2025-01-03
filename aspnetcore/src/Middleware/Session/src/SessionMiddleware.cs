@@ -37,7 +37,8 @@ public class SessionMiddleware
         ILoggerFactory loggerFactory,
         IDataProtectionProvider dataProtectionProvider,
         ISessionStore sessionStore,
-        IOptions<SessionOptions> options)
+        IOptions<SessionOptions> options
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(loggerFactory);
@@ -82,7 +83,13 @@ public class SessionMiddleware
         }
 
         var feature = new SessionFeature();
-        feature.Session = _sessionStore.Create(sessionKey, _options.IdleTimeout, _options.IOTimeout, tryEstablishSession, isNewSessionKey);
+        feature.Session = _sessionStore.Create(
+            sessionKey,
+            _options.IdleTimeout,
+            _options.IOTimeout,
+            tryEstablishSession,
+            isNewSessionKey
+        );
         context.Features.Set<ISessionFeature>(feature);
 
         try

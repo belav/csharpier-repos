@@ -7,7 +7,7 @@ namespace System.IdentityModel.Tokens
     using System.IdentityModel.Policy;
 
     /// <summary>
-    /// Implementation of IAuthorizationPolicy that contains endpoint specific 
+    /// Implementation of IAuthorizationPolicy that contains endpoint specific
     /// AuthorizationPolicy.
     /// </summary>
     internal class EndpointAuthorizationPolicy : IAuthorizationPolicy
@@ -19,11 +19,11 @@ namespace System.IdentityModel.Tokens
         /// Creates an instance of <see cref="EndpointAuthorizationPolicy"/>
         /// </summary>
         /// <param name="endpointId">Identifier of the Endpoint to which the token should be restricted.</param>
-        public EndpointAuthorizationPolicy( string endpointId )
+        public EndpointAuthorizationPolicy(string endpointId)
         {
-            if ( endpointId == null )
+            if (endpointId == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "endpointId" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointId");
             }
 
             _endpointId = endpointId;
@@ -45,7 +45,7 @@ namespace System.IdentityModel.Tokens
         /// <param name="evaluationContext">The current evaluationContext</param>
         /// <param name="state">Any custom state.</param>
         /// <returns>Returns true by default.</returns>
-        bool IAuthorizationPolicy.Evaluate( EvaluationContext evaluationContext, ref object state )
+        bool IAuthorizationPolicy.Evaluate(EvaluationContext evaluationContext, ref object state)
         {
             return true;
         }
@@ -55,10 +55,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         ClaimSet IAuthorizationPolicy.Issuer
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         #endregion
@@ -70,12 +67,8 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         string IAuthorizationComponent.Id
         {
-            get
-            {
-                return _id;
-            }
+            get { return _id; }
         }
         #endregion
     }
-
 }

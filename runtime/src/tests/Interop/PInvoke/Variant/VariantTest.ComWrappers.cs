@@ -15,7 +15,7 @@ public partial class Test_VariantTest
     [Fact]
     public static int TestEntryPoint()
     {
-        bool testComMarshal=true;
+        bool testComMarshal = true;
         ComWrappers.RegisterForMarshalling(new ComWrappersImpl());
         try
         {
@@ -40,20 +40,45 @@ internal unsafe class ComWrappersImpl : ComWrappers
 
     static ComWrappersImpl()
     {
-        var vtblRaw = (IntPtr*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(IDispatchVtbl), sizeof(IntPtr) * 7);
+        var vtblRaw = (IntPtr*)
+            RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(IDispatchVtbl), sizeof(IntPtr) * 7);
         GetIUnknownImpl(out vtblRaw[0], out vtblRaw[1], out vtblRaw[2]);
 
-        vtblRaw[3] = (IntPtr)(delegate* unmanaged<IntPtr, IntPtr, int>)&IDispatchVtbl.GetTypeInfoCountInternal;
-        vtblRaw[4] = (IntPtr)(delegate* unmanaged<IntPtr, int, int, IntPtr, int>)&IDispatchVtbl.GetTypeInfoInternal;
-        vtblRaw[5] = (IntPtr)(delegate* unmanaged<IntPtr, IntPtr, IntPtr, int, int, IntPtr, int>)&IDispatchVtbl.GetIDsOfNamesInternal;
-        vtblRaw[6] = (IntPtr)(delegate* unmanaged<IntPtr, int, IntPtr, int, ComTypes.INVOKEKIND, IntPtr, IntPtr, IntPtr, IntPtr, int>)&IDispatchVtbl.InvokeInternal;
+        vtblRaw[3] = (IntPtr)
+            (delegate* unmanaged<IntPtr, IntPtr, int>)&IDispatchVtbl.GetTypeInfoCountInternal;
+        vtblRaw[4] = (IntPtr)
+            (delegate* unmanaged<IntPtr, int, int, IntPtr, int>)&IDispatchVtbl.GetTypeInfoInternal;
+        vtblRaw[5] = (IntPtr)
+            (delegate* unmanaged<IntPtr, IntPtr, IntPtr, int, int, IntPtr, int>)
+                &IDispatchVtbl.GetIDsOfNamesInternal;
+        vtblRaw[6] = (IntPtr)
+            (delegate* unmanaged<
+                IntPtr,
+                int,
+                IntPtr,
+                int,
+                ComTypes.INVOKEKIND,
+                IntPtr,
+                IntPtr,
+                IntPtr,
+                IntPtr,
+                int>)
+                &IDispatchVtbl.InvokeInternal;
 
-        wrapperEntry = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(IDispatchVtbl), sizeof(ComInterfaceEntry));
+        wrapperEntry = (ComInterfaceEntry*)
+            RuntimeHelpers.AllocateTypeAssociatedMemory(
+                typeof(IDispatchVtbl),
+                sizeof(ComInterfaceEntry)
+            );
         wrapperEntry->IID = IDispatchVtbl.IID_IDispatch;
         wrapperEntry->Vtable = (IntPtr)vtblRaw;
     }
 
-    protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+    protected override unsafe ComInterfaceEntry* ComputeVtables(
+        object obj,
+        CreateComInterfaceFlags flags,
+        out int count
+    )
     {
         // Always return the same table mappings.
         count = 1;
@@ -70,6 +95,7 @@ internal unsafe class ComWrappersImpl : ComWrappers
         throw new NotImplementedException();
     }
 }
+
 public struct IDispatchVtbl
 {
     internal static readonly Guid IID_IDispatch = new Guid("00020400-0000-0000-C000-000000000046");
@@ -93,7 +119,8 @@ public struct IDispatchVtbl
         IntPtr names,
         int namesCount,
         int lcid,
-        IntPtr dispIds)
+        IntPtr dispIds
+    )
     {
         return 0; // S_OK;
     }
@@ -108,7 +135,8 @@ public struct IDispatchVtbl
         IntPtr pDispParams,
         IntPtr VarResult,
         IntPtr pExcepInfo,
-        IntPtr puArgErr)
+        IntPtr puArgErr
+    )
     {
         return 0; // S_OK;
     }

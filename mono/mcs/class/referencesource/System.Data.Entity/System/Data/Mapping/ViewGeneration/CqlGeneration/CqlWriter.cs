@@ -7,21 +7,22 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Text.RegularExpressions;
-using System.Text;
 using System.Data.Common.Utils;
 using System.Data.Mapping.ViewGeneration.Utils;
 using System.Data.Metadata.Edm;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 {
-
     // This class contains helper methods needed for generating Cql
     internal static class CqlWriter
     {
-
         #region Fields
-        private static readonly Regex s_wordIdentifierRegex = new Regex(@"^[_A-Za-z]\w*$", RegexOptions.ECMAScript | RegexOptions.Compiled);
+        private static readonly Regex s_wordIdentifierRegex = new Regex(
+            @"^[_A-Za-z]\w*$",
+            RegexOptions.ECMAScript | RegexOptions.Compiled
+        );
         #endregion
 
         #region Helper Methods
@@ -40,7 +41,11 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
         }
 
         // effects: Modifies builder to contain an escaped version of "name1.name2" as "[name1].[name2]"
-        internal static void AppendEscapedQualifiedName(StringBuilder builder, string name1, string name2)
+        internal static void AppendEscapedQualifiedName(
+            StringBuilder builder,
+            string name1,
+            string name2
+        )
         {
             AppendEscapedName(builder, name1);
             builder.Append('.');
@@ -50,7 +55,10 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
         // effects: Modifies builder to contain an escaped version of "name"
         internal static void AppendEscapedName(StringBuilder builder, string name)
         {
-            if (s_wordIdentifierRegex.IsMatch(name) && false == ExternalCalls.IsReservedKeyword(name))
+            if (
+                s_wordIdentifierRegex.IsMatch(name)
+                && false == ExternalCalls.IsReservedKeyword(name)
+            )
             {
                 // We do not need to escape the name if it is a simple name and it is not a keyword
                 builder.Append(name);
@@ -58,9 +66,7 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
             else
             {
                 string newName = name.Replace("]", "]]");
-                builder.Append('[')
-                       .Append(newName)
-                       .Append(']');
+                builder.Append('[').Append(newName).Append(']');
             }
         }
         #endregion

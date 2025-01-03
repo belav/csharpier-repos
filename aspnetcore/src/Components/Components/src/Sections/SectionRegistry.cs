@@ -30,14 +30,18 @@ internal sealed class SectionRegistry
     {
         if (!_providersByIdentifier.TryGetValue(identifier, out var providers))
         {
-            throw new InvalidOperationException($"There are no content providers with the given section ID '{identifier}'.");
+            throw new InvalidOperationException(
+                $"There are no content providers with the given section ID '{identifier}'."
+            );
         }
 
         var index = providers.LastIndexOf(provider);
 
         if (index < 0)
         {
-            throw new InvalidOperationException($"The provider was not found in the providers list of the given section ID '{identifier}'.");
+            throw new InvalidOperationException(
+                $"The provider was not found in the providers list of the given section ID '{identifier}'."
+            );
         }
 
         providers.RemoveAt(index);
@@ -55,7 +59,9 @@ internal sealed class SectionRegistry
     {
         if (_subscribersByIdentifier.ContainsKey(identifier))
         {
-            throw new InvalidOperationException($"There is already a subscriber to the content with the given section ID '{identifier}'.");
+            throw new InvalidOperationException(
+                $"There is already a subscriber to the content with the given section ID '{identifier}'."
+            );
         }
 
         // Notify the new subscriber with any existing content.
@@ -69,7 +75,9 @@ internal sealed class SectionRegistry
     {
         if (!_subscribersByIdentifier.Remove(identifier))
         {
-            throw new InvalidOperationException($"The subscriber with the given section ID '{identifier}' is already unsubscribed.");
+            throw new InvalidOperationException(
+                $"The subscriber with the given section ID '{identifier}' is already unsubscribed."
+            );
         }
     }
 
@@ -77,7 +85,9 @@ internal sealed class SectionRegistry
     {
         if (!_providersByIdentifier.TryGetValue(identifier, out var providers))
         {
-            throw new InvalidOperationException($"There are no content providers with the given section ID '{identifier}'.");
+            throw new InvalidOperationException(
+                $"There are no content providers with the given section ID '{identifier}'."
+            );
         }
 
         // We only notify content changed for subscribers when the content of the
@@ -88,13 +98,12 @@ internal sealed class SectionRegistry
         }
     }
 
-    private static SectionContent? GetCurrentProviderContentOrDefault(List<SectionContent> providers)
-        => providers.Count != 0
-            ? providers[^1]
-            : null;
+    private static SectionContent? GetCurrentProviderContentOrDefault(
+        List<SectionContent> providers
+    ) => providers.Count != 0 ? providers[^1] : null;
 
-    private SectionContent? GetCurrentProviderContentOrDefault(object identifier)
-        => _providersByIdentifier.TryGetValue(identifier, out var existingList)
+    private SectionContent? GetCurrentProviderContentOrDefault(object identifier) =>
+        _providersByIdentifier.TryGetValue(identifier, out var existingList)
             ? GetCurrentProviderContentOrDefault(existingList)
             : null;
 

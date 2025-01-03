@@ -9,14 +9,12 @@ namespace System.Net.Test.Common
     internal class EventSourceTestLogging : EventSource
     {
         private static EventSourceTestLogging s_log = new EventSourceTestLogging();
+
         private EventSourceTestLogging() { }
 
         public static EventSourceTestLogging Log
         {
-            get
-            {
-                return s_log;
-            }
+            get { return s_log; }
         }
 
         [Event(1, Keywords = Keywords.Default, Level = EventLevel.Informational)]

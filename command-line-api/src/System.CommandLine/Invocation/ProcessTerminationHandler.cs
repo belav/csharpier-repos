@@ -11,33 +11,40 @@ internal sealed class ProcessTerminationHandler : IDisposable
 {
     private const int SIGINT_EXIT_CODE = 130;
     private const int SIGTERM_EXIT_CODE = 143;
-        
+
     internal readonly TaskCompletionSource<int> ProcessTerminationCompletionSource;
     private readonly CancellationTokenSource _handlerCancellationTokenSource;
     private readonly Task<int> _startedHandler;
     private readonly TimeSpan _processTerminationTimeout;
 #if NET7_0_OR_GREATER
-    private readonly IDisposable? _sigIntRegistration, _sigTermRegistration;
+    private readonly IDisposable? _sigIntRegistration,
+        _sigTermRegistration;
 #endif
-        
+
     internal ProcessTerminationHandler(
-        CancellationTokenSource handlerCancellationTokenSource, 
+        CancellationTokenSource handlerCancellationTokenSource,
         Task<int> startedHandler,
-        TimeSpan processTerminationTimeout)
+        TimeSpan processTerminationTimeout
+    )
     {
-        ProcessTerminationCompletionSource = new ();
+        ProcessTerminationCompletionSource = new();
         _handlerCancellationTokenSource = handlerCancellationTokenSource;
         _startedHandler = startedHandler;
         _processTerminationTimeout = processTerminationTimeout;
 
 #if NET7_0_OR_GREATER // we prefer the new API as they allow for cancelling SIGTERM
-        if (!OperatingSystem.IsAndroid() 
-            && !OperatingSystem.IsIOS() 
+        if (
+            !OperatingSystem.IsAndroid()
+            && !OperatingSystem.IsIOS()
             && !OperatingSystem.IsTvOS()
-            && !OperatingSystem.IsBrowser())
+            && !OperatingSystem.IsBrowser()
+        )
         {
             _sigIntRegistration = PosixSignalRegistration.Create(PosixSignal.SIGINT, OnPosixSignal);
-            _sigTermRegistration = PosixSignalRegistration.Create(PosixSignal.SIGTERM, OnPosixSignal);
+            _sigTermRegistration = PosixSignalRegistration.Create(
+                PosixSignal.SIGTERM,
+                OnPosixSignal
+            );
             return;
         }
 #endif
@@ -58,14 +65,14 @@ internal sealed class ProcessTerminationHandler : IDisposable
 #endif
 
         Console.CancelKeyPress -= OnCancelKeyPress;
-        AppDomain.CurrentDomain.ProcessExit -= OnProcessExit;    
+        AppDomain.CurrentDomain.ProcessExit -= OnProcessExit;
     }
-        
+
 #if NET7_0_OR_GREATER
     void OnPosixSignal(PosixSignalContext context)
     {
         context.Cancel = true;
-            
+
         Cancel(context.Signal == PosixSignal.SIGINT ? SIGINT_EXIT_CODE : SIGTERM_EXIT_CODE);
     }
 #endif

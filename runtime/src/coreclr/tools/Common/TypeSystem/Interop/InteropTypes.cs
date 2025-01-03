@@ -14,12 +14,18 @@ namespace Internal.TypeSystem.Interop
 
         public static MetadataType GetSafeHandle(TypeSystemContext context)
         {
-            return context.SystemModule.GetKnownType("System.Runtime.InteropServices", "SafeHandle");
+            return context.SystemModule.GetKnownType(
+                "System.Runtime.InteropServices",
+                "SafeHandle"
+            );
         }
 
         public static MetadataType GetCriticalHandle(TypeSystemContext context)
         {
-            return context.SystemModule.GetKnownType("System.Runtime.InteropServices", "CriticalHandle");
+            return context.SystemModule.GetKnownType(
+                "System.Runtime.InteropServices",
+                "CriticalHandle"
+            );
         }
 
         public static MetadataType GetHandleRef(TypeSystemContext context)
@@ -29,7 +35,10 @@ namespace Internal.TypeSystem.Interop
 
         public static MetadataType GetPInvokeMarshal(TypeSystemContext context)
         {
-            return context.SystemModule.GetKnownType("System.Runtime.InteropServices", "PInvokeMarshal");
+            return context.SystemModule.GetKnownType(
+                "System.Runtime.InteropServices",
+                "PInvokeMarshal"
+            );
         }
 
         public static MetadataType GetMarshal(TypeSystemContext context)
@@ -39,22 +48,34 @@ namespace Internal.TypeSystem.Interop
 
         public static MetadataType GetMemoryMarshal(TypeSystemContext context)
         {
-            return context.SystemModule.GetKnownType("System.Runtime.InteropServices", "MemoryMarshal");
+            return context.SystemModule.GetKnownType(
+                "System.Runtime.InteropServices",
+                "MemoryMarshal"
+            );
         }
 
         public static MetadataType GetNativeFunctionPointerWrapper(TypeSystemContext context)
         {
-            return context.SystemModule.GetKnownType("System.Runtime.InteropServices", "NativeFunctionPointerWrapper");
+            return context.SystemModule.GetKnownType(
+                "System.Runtime.InteropServices",
+                "NativeFunctionPointerWrapper"
+            );
         }
 
         public static MetadataType GetMarshalDirectiveException(TypeSystemContext context)
         {
-            return context.SystemModule.GetKnownType("System.Runtime.InteropServices", "MarshalDirectiveException");
+            return context.SystemModule.GetKnownType(
+                "System.Runtime.InteropServices",
+                "MarshalDirectiveException"
+            );
         }
 
         public static MetadataType GetVariant(TypeSystemContext context)
         {
-            return context.SystemModule.GetKnownType("System.Runtime.InteropServices.Marshalling", "ComVariant");
+            return context.SystemModule.GetKnownType(
+                "System.Runtime.InteropServices.Marshalling",
+                "ComVariant"
+            );
         }
 
         public static bool IsSafeHandle(TypeSystemContext context, TypeDesc type)
@@ -67,12 +88,17 @@ namespace Internal.TypeSystem.Interop
             return IsOrDerivesFromType(type, GetCriticalHandle(context));
         }
 
-        private static bool IsCoreNamedType(TypeSystemContext context, TypeDesc type, string @namespace, string name)
+        private static bool IsCoreNamedType(
+            TypeSystemContext context,
+            TypeDesc type,
+            string @namespace,
+            string name
+        )
         {
-            return type is MetadataType mdType &&
-                mdType.Name == name &&
-                mdType.Namespace == @namespace &&
-                mdType.Module == context.SystemModule;
+            return type is MetadataType mdType
+                && mdType.Name == name
+                && mdType.Namespace == @namespace
+                && mdType.Module == context.SystemModule;
         }
 
         public static bool IsHandleRef(TypeSystemContext context, TypeDesc type)
@@ -130,22 +156,34 @@ namespace Internal.TypeSystem.Interop
             return IsCoreNamedType(context, type, "System", "Nullable`1");
         }
 
-        public static bool IsSystemRuntimeIntrinsicsVector64T(TypeSystemContext context, TypeDesc type)
+        public static bool IsSystemRuntimeIntrinsicsVector64T(
+            TypeSystemContext context,
+            TypeDesc type
+        )
         {
             return IsCoreNamedType(context, type, "System.Runtime.Intrinsics", "Vector64`1");
         }
 
-        public static bool IsSystemRuntimeIntrinsicsVector128T(TypeSystemContext context, TypeDesc type)
+        public static bool IsSystemRuntimeIntrinsicsVector128T(
+            TypeSystemContext context,
+            TypeDesc type
+        )
         {
             return IsCoreNamedType(context, type, "System.Runtime.Intrinsics", "Vector128`1");
         }
 
-        public static bool IsSystemRuntimeIntrinsicsVector256T(TypeSystemContext context, TypeDesc type)
+        public static bool IsSystemRuntimeIntrinsicsVector256T(
+            TypeSystemContext context,
+            TypeDesc type
+        )
         {
             return IsCoreNamedType(context, type, "System.Runtime.Intrinsics", "Vector256`1");
         }
 
-        public static bool IsSystemRuntimeIntrinsicsVector512T(TypeSystemContext context, TypeDesc type)
+        public static bool IsSystemRuntimeIntrinsicsVector512T(
+            TypeSystemContext context,
+            TypeDesc type
+        )
         {
             return IsCoreNamedType(context, type, "System.Runtime.Intrinsics", "Vector512`1");
         }

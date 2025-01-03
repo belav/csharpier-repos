@@ -66,207 +66,133 @@ namespace System.Xml.CustomReaderTests
                 return new CustomReader(filename);
             }
 
-            throw new
-                CTestFailedException("CustomReader not created");
+            throw new CTestFailedException("CustomReader not created");
         }
     }
 
     [TestCase(Name = "InvalidXML", Desc = "CustomInheritedReader")]
-    internal class TCInvalidXMLReader : TCInvalidXML
-    {
-    }
+    internal class TCInvalidXMLReader : TCInvalidXML { }
 
     [TestCase(Name = "ErrorCondition", Desc = "CustomInheritedReader")]
-    internal class TCErrorConditionReader : TCErrorCondition
-    {
-    }
+    internal class TCErrorConditionReader : TCErrorCondition { }
 
     [TestCase(Name = "XMLException", Desc = "CustomInheritedReader")]
-    public class TCXMLExceptionReader : TCXMLException
-    {
-    }
+    public class TCXMLExceptionReader : TCXMLException { }
 
     [TestCase(Name = "LinePos", Desc = "CustomInheritedReader")]
-    public class TCLinePosReader : TCLinePos
-    {
-    }
+    public class TCLinePosReader : TCLinePos { }
 
     [TestCase(Name = "ReadOuterXml", Desc = "CustomInheritedReader")]
-    internal class TCReadOuterXmlReader : TCReadOuterXml
-    {
-    }
+    internal class TCReadOuterXmlReader : TCReadOuterXml { }
 
     [TestCase(Name = "AttributeAccess", Desc = "CustomInheritedReader")]
-    internal class TCAttributeAccessReader : TCAttributeAccess
-    {
-    }
+    internal class TCAttributeAccessReader : TCAttributeAccess { }
 
     [TestCase(Name = "This(Name) and This(Name, Namespace)", Desc = "CustomInheritedReader")]
-    internal class TCThisNameReader : TCThisName
-    {
-    }
+    internal class TCThisNameReader : TCThisName { }
 
-    [TestCase(Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)", Desc = "CustomInheritedReader")]
-    internal class TCMoveToAttributeReader : TCMoveToAttribute
-    {
-    }
+    [TestCase(
+        Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)",
+        Desc = "CustomInheritedReader"
+    )]
+    internal class TCMoveToAttributeReader : TCMoveToAttribute { }
 
     [TestCase(Name = "GetAttribute (Ordinal)", Desc = "CustomInheritedReader")]
-    internal class TCGetAttributeOrdinalReader : TCGetAttributeOrdinal
-    {
-    }
+    internal class TCGetAttributeOrdinalReader : TCGetAttributeOrdinal { }
 
-    [TestCase(Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)", Desc = "CustomInheritedReader")]
-    internal class TCGetAttributeNameReader : TCGetAttributeName
-    {
-    }
+    [TestCase(
+        Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)",
+        Desc = "CustomInheritedReader"
+    )]
+    internal class TCGetAttributeNameReader : TCGetAttributeName { }
 
     [TestCase(Name = "This [Ordinal]", Desc = "CustomInheritedReader")]
-    internal class TCThisOrdinalReader : TCThisOrdinal
-    {
-    }
+    internal class TCThisOrdinalReader : TCThisOrdinal { }
 
     [TestCase(Name = "MoveToAttribute(Ordinal)", Desc = "CustomInheritedReader")]
-    internal class TCMoveToAttributeOrdinalReader : TCMoveToAttributeOrdinal
-    {
-    }
+    internal class TCMoveToAttributeOrdinalReader : TCMoveToAttributeOrdinal { }
 
     [TestCase(Name = "MoveToFirstAttribute()", Desc = "CustomInheritedReader")]
-    internal class TCMoveToFirstAttributeReader : TCMoveToFirstAttribute
-    {
-    }
+    internal class TCMoveToFirstAttributeReader : TCMoveToFirstAttribute { }
 
     [TestCase(Name = "MoveToNextAttribute()", Desc = "CustomInheritedReader")]
-    internal class TCMoveToNextAttributeReader : TCMoveToNextAttribute
-    {
-    }
+    internal class TCMoveToNextAttributeReader : TCMoveToNextAttribute { }
 
     [TestCase(Name = "Attribute Test when NodeType != Attributes", Desc = "CustomInheritedReader")]
-    internal class TCAttributeTestReader : TCAttributeTest
-    {
-    }
+    internal class TCAttributeTestReader : TCAttributeTest { }
 
     [TestCase(Name = "Attributes test on XmlDeclaration DCR52258", Desc = "CustomInheritedReader")]
-    internal class TCAttributeXmlDeclarationReader : TCAttributeXmlDeclaration
-    {
-    }
+    internal class TCAttributeXmlDeclarationReader : TCAttributeXmlDeclaration { }
 
     [TestCase(Name = "xmlns as local name DCR50345", Desc = "CustomInheritedReader")]
-    internal class TCXmlnsReader : TCXmlns
-    {
-    }
+    internal class TCXmlnsReader : TCXmlns { }
 
     [TestCase(Name = "bounded namespace to xmlns prefix DCR50881", Desc = "CustomInheritedReader")]
-    internal class TCXmlnsPrefixReader : TCXmlnsPrefix
-    {
-    }
+    internal class TCXmlnsPrefixReader : TCXmlnsPrefix { }
 
     [TestCase(Name = "ReadState", Desc = "CustomInheritedReader")]
-    internal class TCReadStateReader : TCReadState
-    {
-    }
+    internal class TCReadStateReader : TCReadState { }
 
     [TestCase(Name = "ReadInnerXml", Desc = "CustomInheritedReader")]
-    internal class TCReadInnerXmlReader : TCReadInnerXml
-    {
-    }
+    internal class TCReadInnerXmlReader : TCReadInnerXml { }
 
     [TestCase(Name = "MoveToContent", Desc = "CustomInheritedReader")]
-    internal class TCMoveToContentReader : TCMoveToContent
-    {
-    }
+    internal class TCMoveToContentReader : TCMoveToContent { }
 
     [TestCase(Name = "IsStartElement", Desc = "CustomInheritedReader")]
-    internal class TCIsStartElementReader : TCIsStartElement
-    {
-    }
+    internal class TCIsStartElementReader : TCIsStartElement { }
 
     [TestCase(Name = "ReadStartElement", Desc = "CustomInheritedReader")]
-    internal class TCReadStartElementReader : TCReadStartElement
-    {
-    }
+    internal class TCReadStartElementReader : TCReadStartElement { }
 
     [TestCase(Name = "ReadEndElement", Desc = "CustomInheritedReader")]
-    internal class TCReadEndElementReader : TCReadEndElement
-    {
-    }
+    internal class TCReadEndElementReader : TCReadEndElement { }
 
     [TestCase(Name = "ResolveEntity and ReadAttributeValue", Desc = "CustomInheritedReader")]
-    internal class TCResolveEntityReader : TCResolveEntity
-    {
-    }
+    internal class TCResolveEntityReader : TCResolveEntity { }
 
     [TestCase(Name = "ReadAttributeValue", Desc = "CustomInheritedReader")]
-    internal class TCReadAttributeValueReader : TCReadAttributeValue
-    {
-    }
+    internal class TCReadAttributeValueReader : TCReadAttributeValue { }
 
     [TestCase(Name = "Read", Desc = "CustomInheritedReader")]
-    internal class TCReadReader : TCRead2
-    {
-    }
+    internal class TCReadReader : TCRead2 { }
 
     [TestCase(Name = "Read Subtree", Desc = "CustomInheritedReader")]
-    internal class TCReadSubtreeReader : TCReadSubtree
-    {
-    }
+    internal class TCReadSubtreeReader : TCReadSubtree { }
+
     [TestCase(Name = "ReadToDescendant", Desc = "CustomInheritedReader")]
-    internal class TCReadToDescendantReader : TCReadToDescendant
-    {
-    }
+    internal class TCReadToDescendantReader : TCReadToDescendant { }
 
     [TestCase(Name = "ReadToNextSibling", Desc = "CustomInheritedReader")]
-    internal class TCReadToNextSiblingReader : TCReadToNextSibling
-    {
-    }
+    internal class TCReadToNextSiblingReader : TCReadToNextSibling { }
 
     [TestCase(Name = "ReadToFollowing", Desc = "CustomInheritedReader")]
-    internal class TCReadToFollowingReader : TCReadToFollowing
-    {
-    }
+    internal class TCReadToFollowingReader : TCReadToFollowing { }
 
     [TestCase(Name = "MoveToElement", Desc = "CustomInheritedReader")]
-    internal class TCMoveToElementReader : TCMoveToElement
-    {
-    }
+    internal class TCMoveToElementReader : TCMoveToElement { }
 
     [TestCase(Name = "Buffer Boundary", Desc = "CustomInheritedReader")]
-    internal class TCBufferBoundariesReader : TCBufferBoundaries
-    {
-    }
+    internal class TCBufferBoundariesReader : TCBufferBoundaries { }
 
     [TestCase(Name = "Dispose", Desc = "CustomInheritedReader")]
-    internal class TCDisposeReader : TCDispose
-    {
-    }
+    internal class TCDisposeReader : TCDispose { }
 
     [TestCase(Name = "TCXmlNodeIntegrityTestFile", Desc = "TCXmlNodeIntegrityTestFile")]
-    internal class TCXmlNodeIntegrityTestFile : TCXMLIntegrityBase
-    {
-    }
+    internal class TCXmlNodeIntegrityTestFile : TCXMLIntegrityBase { }
 
     [TestCase(Name = "ReadValue", Desc = "CustomInheritedReader")]
-    internal class TCReadValueReader : TCReadValue
-    {
-    }
+    internal class TCReadValueReader : TCReadValue { }
 
     [TestCase(Name = "ReadContentAsBase64", Desc = "CustomInheritedReader")]
-    internal class TCReadContentAsBase64Reader : TCReadContentAsBase64
-    {
-    }
+    internal class TCReadContentAsBase64Reader : TCReadContentAsBase64 { }
 
     [TestCase(Name = "ReadElementContentAsBase64", Desc = "CustomInheritedReader")]
-    internal class TCReadElementContentAsBase64Reader : TCReadElementContentAsBase64
-    {
-    }
+    internal class TCReadElementContentAsBase64Reader : TCReadElementContentAsBase64 { }
 
     [TestCase(Name = "ReadContentAsBinHex", Desc = "CustomInheritedReader")]
-    internal class TCReadContentAsBinHexReader : TCReadContentAsBinHex
-    {
-    }
+    internal class TCReadContentAsBinHexReader : TCReadContentAsBinHex { }
 
     [TestCase(Name = "ReadElementContentAsBinHex", Desc = "CustomInheritedReader")]
-    internal class TCReadElementContentAsBinHexReader : TCReadElementContentAsBinHex
-    {
-    }
+    internal class TCReadElementContentAsBinHexReader : TCReadElementContentAsBinHex { }
 }

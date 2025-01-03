@@ -14,7 +14,13 @@ namespace System.Xml.Xsl.XPath
         public int startChar;
         public int endChar;
 
-        internal XPathCompileException(string queryString, int startChar, int endChar, string resId, params string?[]? args)
+        internal XPathCompileException(
+            string queryString,
+            int startChar,
+            int endChar,
+            string resId,
+            params string?[]? args
+        )
             : base(resId, args)
         {
             this.queryString = queryString;
@@ -23,10 +29,13 @@ namespace System.Xml.Xsl.XPath
         }
 
         internal XPathCompileException(string resId, params string[] args)
-            : base(resId, args)
-        { } // queryString will be set later
+            : base(resId, args) { } // queryString will be set later
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         internal XPathCompileException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
@@ -35,7 +44,11 @@ namespace System.Xml.Xsl.XPath
             endChar = (int)info.GetValue("EndChar", typeof(int))!;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -53,7 +66,13 @@ namespace System.Xml.Xsl.XPath
         }
 
         // This function is used to prevent long quotations in error messages, SQLBUDT 222626
-        private static void AppendTrimmed(StringBuilder sb, string value, int startIndex, int count, TrimType trimType)
+        private static void AppendTrimmed(
+            StringBuilder sb,
+            string value,
+            int startIndex,
+            int count,
+            TrimType trimType
+        )
         {
             const int TrimSize = 32;
             const string TrimMarker = "...";

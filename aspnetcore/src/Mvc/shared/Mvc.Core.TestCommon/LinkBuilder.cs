@@ -11,10 +11,7 @@ public class LinkBuilder
     {
         Url = url;
 
-        Values = new Dictionary<string, object>
-            {
-                { "link", string.Empty }
-            };
+        Values = new Dictionary<string, object> { { "link", string.Empty } };
     }
 
     public string Url { get; set; }

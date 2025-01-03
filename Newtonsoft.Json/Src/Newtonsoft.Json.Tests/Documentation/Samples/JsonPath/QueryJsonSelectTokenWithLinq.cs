@@ -23,15 +23,16 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Text;
+using Newtonsoft.Json.Linq;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Text;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -50,7 +51,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
         public void Example()
         {
             #region Usage
-            JObject o = JObject.Parse(@"{
+            JObject o = JObject.Parse(
+                @"{
               'Stores': [
                 'Lambton Quay',
                 'Willis Street'
@@ -79,20 +81,24 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
                   ]
                 }
               ]
-            }");
+            }"
+            );
 
             string[] storeNames = o.SelectToken("Stores").Select(s => (string)s).ToArray();
 
             Console.WriteLine(string.Join(", ", storeNames));
             // Lambton Quay, Willis Street
 
-            string[] firstProductNames = o["Manufacturers"].Select(m => (string)m.SelectToken("Products[1].Name"))
-                .Where(n => n != null).ToArray();
+            string[] firstProductNames = o["Manufacturers"]
+                .Select(m => (string)m.SelectToken("Products[1].Name"))
+                .Where(n => n != null)
+                .ToArray();
 
             Console.WriteLine(string.Join(", ", firstProductNames));
             // Headlight Fluid
 
-            decimal totalPrice = o["Manufacturers"].Sum(m => (decimal)m.SelectToken("Products[0].Price"));
+            decimal totalPrice = o["Manufacturers"]
+                .Sum(m => (decimal)m.SelectToken("Products[0].Price"));
 
             Console.WriteLine(totalPrice);
             // 149.95

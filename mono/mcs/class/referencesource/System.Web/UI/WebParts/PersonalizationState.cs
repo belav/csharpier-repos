@@ -4,23 +4,25 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Web;
     using System.Web.Util;
 
     /// <devdoc>
     /// </devdoc>
-    public abstract class PersonalizationState {
-
+    public abstract class PersonalizationState
+    {
         private WebPartManager _webPartManager;
         private bool _dirty;
 
         /// <devdoc>
         /// </devdoc>
-        protected PersonalizationState(WebPartManager webPartManager) {
-            if (webPartManager == null) {
+        protected PersonalizationState(WebPartManager webPartManager)
+        {
+            if (webPartManager == null)
+            {
                 throw new ArgumentNullException("webPartManager");
             }
 
@@ -29,24 +31,20 @@ namespace System.Web.UI.WebControls.WebParts {
 
         /// <devdoc>
         /// </devdoc>
-        public bool IsDirty {
-            get {
-                return _dirty;
-            }
+        public bool IsDirty
+        {
+            get { return _dirty; }
         }
 
         /// <devdoc>
         /// </devdoc>
-        public abstract bool IsEmpty {
-            get;
-        }
+        public abstract bool IsEmpty { get; }
 
         /// <devdoc>
         /// </devdoc>
-        public WebPartManager WebPartManager {
-            get {
-                return _webPartManager;
-            }
+        public WebPartManager WebPartManager
+        {
+            get { return _webPartManager; }
         }
 
         /// <devdoc>
@@ -71,7 +69,8 @@ namespace System.Web.UI.WebControls.WebParts {
 
         /// <devdoc>
         /// </devdoc>
-        protected void SetDirty() {
+        protected void SetDirty()
+        {
             _dirty = true;
         }
 
@@ -85,12 +84,15 @@ namespace System.Web.UI.WebControls.WebParts {
 
         /// <devdoc>
         /// </devdoc>
-        protected void ValidateWebPart(WebPart webPart) {
-            if (webPart == null) {
+        protected void ValidateWebPart(WebPart webPart)
+        {
+            if (webPart == null)
+            {
                 throw new ArgumentNullException("webPart");
             }
 
-            if (_webPartManager.WebParts.Contains(webPart) == false) {
+            if (_webPartManager.WebParts.Contains(webPart) == false)
+            {
                 throw new ArgumentException(SR.GetString(SR.UnknownWebPart), "webPart");
             }
         }

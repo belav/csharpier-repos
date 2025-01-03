@@ -1,23 +1,24 @@
 //------------------------------------------------------------------------------
 // <copyright file="IDesignerFilter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
-    using System.Diagnostics;
+namespace System.ComponentModel.Design
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Provides access to, and
     ///       an interface for filtering, the dictionaries that store the properties, attributes, or events of a component.</para>
     /// </devdoc>
-    public interface IDesignerFilter {
-
+    public interface IDesignerFilter
+    {
         /// <devdoc>
         ///    <para> Allows a designer to filter the set of
         ///       attributes the component being designed will expose through the <see cref='System.ComponentModel.TypeDescriptor'/> object.</para>
@@ -60,4 +61,3 @@ namespace System.ComponentModel.Design {
         void PreFilterProperties(IDictionary properties);
     }
 }
-

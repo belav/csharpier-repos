@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.UI.WebControls.AdRotator
 //
 // Author:
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,285 +26,286 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Xml;
 using System.Collections;
 using System.ComponentModel;
 using System.Security.Permissions;
 using System.Web.Util;
+using System.Xml;
 
 namespace System.Web.UI.WebControls
 {
-	// CAS
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[DefaultEvent("AdCreated")]
-	[DefaultProperty("AdvertisementFile")]
-	[Designer("System.Web.UI.Design.WebControls.AdRotatorDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-	[ToolboxData("<{0}:AdRotator runat=\"server\"></{0}:AdRotator>")]
-	public class AdRotator : DataBoundControl
-	{
-		AdCreatedEventArgs createdargs;
-		ArrayList ads = new ArrayList ();
-		string ad_file = String.Empty;
+    // CAS
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [DefaultEvent("AdCreated")]
+    [DefaultProperty("AdvertisementFile")]
+    [Designer(
+        "System.Web.UI.Design.WebControls.AdRotatorDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    [ToolboxData("<{0}:AdRotator runat=\"server\"></{0}:AdRotator>")]
+    public class AdRotator : DataBoundControl
+    {
+        AdCreatedEventArgs createdargs;
+        ArrayList ads = new ArrayList();
+        string ad_file = String.Empty;
 
-		protected internal override void OnInit (EventArgs e)
-		{
-			base.OnInit(e);
-		}
+        protected internal override void OnInit(EventArgs e)
+        {
+            base.OnInit(e);
+        }
 
-		protected internal override void OnPreRender (EventArgs e)
-		{
-			Hashtable ht = null;
-			
-			if (!String.IsNullOrEmpty (ad_file)) {
-				ReadAdsFromFile (GetPhysicalFilePath (ad_file));
-				ht = ChooseAd ();
-			}
+        protected internal override void OnPreRender(EventArgs e)
+        {
+            Hashtable ht = null;
 
-		 	AdCreatedEventArgs ev = new AdCreatedEventArgs (ht);
-			OnAdCreated (ev);
-			createdargs = ev;
-			
-		}
+            if (!String.IsNullOrEmpty(ad_file))
+            {
+                ReadAdsFromFile(GetPhysicalFilePath(ad_file));
+                ht = ChooseAd();
+            }
 
-		[MonoTODO ("Not implemented")]
-		protected internal override void PerformDataBinding (IEnumerable data)
-		{
-			throw new NotImplementedException ();
-		}
+            AdCreatedEventArgs ev = new AdCreatedEventArgs(ht);
+            OnAdCreated(ev);
+            createdargs = ev;
+        }
 
-		[MonoTODO ("Not implemented")]
-		protected override void PerformSelect ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO("Not implemented")]
+        protected internal override void PerformDataBinding(IEnumerable data)
+        {
+            throw new NotImplementedException();
+        }
 
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			AdCreatedEventArgs e = createdargs;
+        [MonoTODO("Not implemented")]
+        protected override void PerformSelect()
+        {
+            throw new NotImplementedException();
+        }
 
-			base.AddAttributesToRender (writer);
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            AdCreatedEventArgs e = createdargs;
 
-			if (e.NavigateUrl != null && e.NavigateUrl.Length > 0)
-				writer.AddAttribute (HtmlTextWriterAttribute.Href, ResolveAdUrl (e.NavigateUrl));
-			if (Target != null && Target.Length > 0)
-				writer.AddAttribute (HtmlTextWriterAttribute.Target, Target);
-			
-			writer.RenderBeginTag (HtmlTextWriterTag.A);
+            base.AddAttributesToRender(writer);
 
-			if (e.ImageUrl != null && e.ImageUrl.Length > 0)
-				writer.AddAttribute (HtmlTextWriterAttribute.Src, ResolveAdUrl (e.ImageUrl));
+            if (e.NavigateUrl != null && e.NavigateUrl.Length > 0)
+                writer.AddAttribute(HtmlTextWriterAttribute.Href, ResolveAdUrl(e.NavigateUrl));
+            if (Target != null && Target.Length > 0)
+                writer.AddAttribute(HtmlTextWriterAttribute.Target, Target);
 
-			writer.AddAttribute (HtmlTextWriterAttribute.Alt, e.AlternateText == null ? String.Empty : e.AlternateText);
-			writer.AddAttribute (HtmlTextWriterAttribute.Border, "0", false);
-			writer.RenderBeginTag (HtmlTextWriterTag.Img);
-			writer.RenderEndTag (); // img
-			writer.RenderEndTag (); // a
-		}
+            writer.RenderBeginTag(HtmlTextWriterTag.A);
 
-		string ResolveAdUrl (string url)
-		{
-			string path = url;
+            if (e.ImageUrl != null && e.ImageUrl.Length > 0)
+                writer.AddAttribute(HtmlTextWriterAttribute.Src, ResolveAdUrl(e.ImageUrl));
 
-			if (AdvertisementFile != null && AdvertisementFile.Length > 0 && path [0] != '/' && path [0] != '~')
-				try {
-					new Uri (path);
-				}
-				catch {
-					return UrlUtils.Combine (UrlUtils.GetDirectory (ResolveUrl (AdvertisementFile)), path);
-				}
-			
-			return ResolveUrl (path);
-		}
+            writer.AddAttribute(
+                HtmlTextWriterAttribute.Alt,
+                e.AlternateText == null ? String.Empty : e.AlternateText
+            );
+            writer.AddAttribute(HtmlTextWriterAttribute.Border, "0", false);
+            writer.RenderBeginTag(HtmlTextWriterTag.Img);
+            writer.RenderEndTag(); // img
+            writer.RenderEndTag(); // a
+        }
 
-		//
-		// We take all the ads in the ad file and add up their
-		// impression weight. We then take a random number [0,
-		// TotalImpressions). We then choose the ad that is
-		// that number or less impressions for the beginning
-		// of the file. This lets us respect the weights
-		// given.
-		//
-		Hashtable ChooseAd ()
-		{
-			// cache for performance
-			string KeywordFilter = this.KeywordFilter;
-			
-			int total_imp = 0;
-			int cur_imp = 0;
-			bool keywordFilterEmpty = KeywordFilter.Length == 0;
-			
-			foreach (Hashtable a in ads) {
-				if (keywordFilterEmpty || KeywordFilter == (string) a ["Keyword"])
-					total_imp += a ["Impressions"] != null ? int.Parse ((string) a ["Impressions"]) : 1;
-			}
+        string ResolveAdUrl(string url)
+        {
+            string path = url;
 
-			int r = new Random ().Next (total_imp);
+            if (
+                AdvertisementFile != null
+                && AdvertisementFile.Length > 0
+                && path[0] != '/'
+                && path[0] != '~'
+            )
+                try
+                {
+                    new Uri(path);
+                }
+                catch
+                {
+                    return UrlUtils.Combine(
+                        UrlUtils.GetDirectory(ResolveUrl(AdvertisementFile)),
+                        path
+                    );
+                }
 
-			foreach (Hashtable a in ads) {
-				if (!keywordFilterEmpty && KeywordFilter != (string) a ["Keyword"])
-					continue;
-				cur_imp += a ["Impressions"] != null ? int.Parse ((string) a ["Impressions"]) : 1;
-				
-				if (cur_imp > r)
-					return a;
-			}
+            return ResolveUrl(path);
+        }
 
-			if (total_imp != 0)
-				throw new Exception ("I should only get here if no ads matched");
-			
-			return null;
-		}
-		
-		void ReadAdsFromFile (string s)
-		{
-			XmlDocument d = new XmlDocument ();
-			try {
-				d.Load (s);
-			} catch (Exception e) {
-				throw new HttpException ("AdRotator could not parse the xml file", e);
-			}
-			
-			ads.Clear ();
-			
-			foreach (XmlNode n in d.DocumentElement.ChildNodes) {
+        //
+        // We take all the ads in the ad file and add up their
+        // impression weight. We then take a random number [0,
+        // TotalImpressions). We then choose the ad that is
+        // that number or less impressions for the beginning
+        // of the file. This lets us respect the weights
+        // given.
+        //
+        Hashtable ChooseAd()
+        {
+            // cache for performance
+            string KeywordFilter = this.KeywordFilter;
 
-				Hashtable ad = new Hashtable ();
-				
-				foreach (XmlNode nn in n.ChildNodes)
-					ad.Add (nn.Name, nn.InnerText);
-				
-				ads.Add (ad);
-			}
-		}
+            int total_imp = 0;
+            int cur_imp = 0;
+            bool keywordFilterEmpty = KeywordFilter.Length == 0;
 
+            foreach (Hashtable a in ads)
+            {
+                if (keywordFilterEmpty || KeywordFilter == (string)a["Keyword"])
+                    total_imp += a["Impressions"] != null ? int.Parse((string)a["Impressions"]) : 1;
+            }
 
-		[UrlProperty]
-		[Bindable(true)]
-		[DefaultValue("")]
-		[Editor("System.Web.UI.Design.XmlUrlEditor, " + Consts.AssemblySystem_Design, typeof(System.Drawing.Design.UITypeEditor))]
-		[WebSysDescription("")]
-		[WebCategory("Behavior")]
-		public string AdvertisementFile {
-			get {
-				return ad_file;
-			}
-			set {
-				ad_file = value;
-			}
-			
-		}
+            int r = new Random().Next(total_imp);
 
-		[DefaultValue ("AlternateText")]
-		[WebSysDescriptionAttribute ("")]
-		[WebCategoryAttribute ("Behavior")]
-		[MonoTODO ("Not implemented")]
-		public string AlternateTextField 
-		{
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
-		
-		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		public override FontInfo Font {
-			get {
-				return base.Font;
-			}
-		}
+            foreach (Hashtable a in ads)
+            {
+                if (!keywordFilterEmpty && KeywordFilter != (string)a["Keyword"])
+                    continue;
+                cur_imp += a["Impressions"] != null ? int.Parse((string)a["Impressions"]) : 1;
 
-		[DefaultValue ("ImageUrl")]
-		[MonoTODO ("Not implemented")]
-		[WebSysDescriptionAttribute ("")]
-		[WebCategoryAttribute ("Behavior")]
-		public string ImageUrlField 
-		{
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+                if (cur_imp > r)
+                    return a;
+            }
 
-		[Bindable(true)]
-		[DefaultValue("")]
-		[WebSysDescription("")]
-		[WebCategory("Behavior")]
-		public string KeywordFilter {
-			get {
-				return ViewState.GetString ("KeywordFilter", String.Empty);
-			}
-			set {
-				ViewState ["KeywordFilter"] = value;
-			}
-			
-		}
+            if (total_imp != 0)
+                throw new Exception("I should only get here if no ads matched");
 
-		[DefaultValue ("NavigateUrl")]
-		[MonoTODO ("Not implemented")]
-		[WebSysDescriptionAttribute ("")]
-		[WebCategoryAttribute ("Behavior")]
-		public string NavigateUrlField 
-		{
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
-		
-		[Bindable(true)]
-		[DefaultValue("_top")]
-		[TypeConverter(typeof(System.Web.UI.WebControls.TargetConverter))]
-		[WebSysDescription("")]
-		[WebCategory("Behavior")]
-		public string Target {
-			get {
-				return ViewState.GetString ("Target", "_top");
-			}
-			set {
-				ViewState ["Target"] = value;
-			}
-			
-		}
+            return null;
+        }
 
-		/* all these are listed in corcompare */
-		public override string UniqueID
-		{
-			get {
-				return base.UniqueID;
-			}
-		}
+        void ReadAdsFromFile(string s)
+        {
+            XmlDocument d = new XmlDocument();
+            try
+            {
+                d.Load(s);
+            }
+            catch (Exception e)
+            {
+                throw new HttpException("AdRotator could not parse the xml file", e);
+            }
 
-		protected override HtmlTextWriterTag TagKey 
-		{
-			get {
-				return base.TagKey;
-			}
-		}
-	
-		protected virtual void OnAdCreated (AdCreatedEventArgs e)
-		{
-			AdCreatedEventHandler h = (AdCreatedEventHandler) Events [AdCreatedEvent];
-			if (h != null)
-				h (this, e);
-		}
+            ads.Clear();
 
-		static readonly object AdCreatedEvent = new object ();
+            foreach (XmlNode n in d.DocumentElement.ChildNodes)
+            {
+                Hashtable ad = new Hashtable();
 
-		[WebSysDescription("")]
-		[WebCategory("Action")]
-		public event AdCreatedEventHandler AdCreated {
-			add { Events.AddHandler (AdCreatedEvent, value); }
-			remove { Events.RemoveHandler (AdCreatedEvent, value); }
-		}
-	}
+                foreach (XmlNode nn in n.ChildNodes)
+                    ad.Add(nn.Name, nn.InnerText);
+
+                ads.Add(ad);
+            }
+        }
+
+        [UrlProperty]
+        [Bindable(true)]
+        [DefaultValue("")]
+        [Editor(
+            "System.Web.UI.Design.XmlUrlEditor, " + Consts.AssemblySystem_Design,
+            typeof(System.Drawing.Design.UITypeEditor)
+        )]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        public string AdvertisementFile
+        {
+            get { return ad_file; }
+            set { ad_file = value; }
+        }
+
+        [DefaultValue("AlternateText")]
+        [WebSysDescriptionAttribute("")]
+        [WebCategoryAttribute("Behavior")]
+        [MonoTODO("Not implemented")]
+        public string AlternateTextField
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override FontInfo Font
+        {
+            get { return base.Font; }
+        }
+
+        [DefaultValue("ImageUrl")]
+        [MonoTODO("Not implemented")]
+        [WebSysDescriptionAttribute("")]
+        [WebCategoryAttribute("Behavior")]
+        public string ImageUrlField
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+
+        [Bindable(true)]
+        [DefaultValue("")]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        public string KeywordFilter
+        {
+            get { return ViewState.GetString("KeywordFilter", String.Empty); }
+            set { ViewState["KeywordFilter"] = value; }
+        }
+
+        [DefaultValue("NavigateUrl")]
+        [MonoTODO("Not implemented")]
+        [WebSysDescriptionAttribute("")]
+        [WebCategoryAttribute("Behavior")]
+        public string NavigateUrlField
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+
+        [Bindable(true)]
+        [DefaultValue("_top")]
+        [TypeConverter(typeof(System.Web.UI.WebControls.TargetConverter))]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        public string Target
+        {
+            get { return ViewState.GetString("Target", "_top"); }
+            set { ViewState["Target"] = value; }
+        }
+
+        /* all these are listed in corcompare */
+        public override string UniqueID
+        {
+            get { return base.UniqueID; }
+        }
+
+        protected override HtmlTextWriterTag TagKey
+        {
+            get { return base.TagKey; }
+        }
+
+        protected virtual void OnAdCreated(AdCreatedEventArgs e)
+        {
+            AdCreatedEventHandler h = (AdCreatedEventHandler)Events[AdCreatedEvent];
+            if (h != null)
+                h(this, e);
+        }
+
+        static readonly object AdCreatedEvent = new object();
+
+        [WebSysDescription("")]
+        [WebCategory("Action")]
+        public event AdCreatedEventHandler AdCreated
+        {
+            add { Events.AddHandler(AdCreatedEvent, value); }
+            remove { Events.RemoveHandler(AdCreatedEvent, value); }
+        }
+    }
 }

@@ -23,7 +23,8 @@ internal class DefaultObjectValidator : ObjectModelValidator
     public DefaultObjectValidator(
         IModelMetadataProvider modelMetadataProvider,
         IList<IModelValidatorProvider> validatorProviders,
-        MvcOptions mvcOptions)
+        MvcOptions mvcOptions
+    )
         : base(modelMetadataProvider, validatorProviders)
     {
         _mvcOptions = mvcOptions;
@@ -34,17 +35,20 @@ internal class DefaultObjectValidator : ObjectModelValidator
         IModelValidatorProvider validatorProvider,
         ValidatorCache validatorCache,
         IModelMetadataProvider metadataProvider,
-        ValidationStateDictionary? validationState)
+        ValidationStateDictionary? validationState
+    )
     {
         var visitor = new ValidationVisitor(
             actionContext,
             validatorProvider,
             validatorCache,
             metadataProvider,
-            validationState)
+            validationState
+        )
         {
             MaxValidationDepth = _mvcOptions.MaxValidationDepth,
-            ValidateComplexTypesIfChildValidationFails = _mvcOptions.ValidateComplexTypesIfChildValidationFails,
+            ValidateComplexTypesIfChildValidationFails =
+                _mvcOptions.ValidateComplexTypesIfChildValidationFails,
         };
 
         return visitor;

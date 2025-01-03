@@ -1,15 +1,15 @@
 ﻿#region Using directives
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Messaging;
-using System.Workflow.Runtime.Hosting;
+using System.Text;
 using System.Workflow.ComponentModel;
 using System.Workflow.Runtime;
+using System.Workflow.Runtime.Hosting;
 
 #endregion
 
@@ -17,11 +17,22 @@ namespace System.Workflow.Activities
 {
     internal static class InboundActivityHelper
     {
-        internal static ActivityExecutionStatus ExecuteForActivity(HandleExternalEventActivity activity, ActivityExecutionContext context, Type interfaceType, string operation, out object[] args)
+        internal static ActivityExecutionStatus ExecuteForActivity(
+            HandleExternalEventActivity activity,
+            ActivityExecutionContext context,
+            Type interfaceType,
+            string operation,
+            out object[] args
+        )
         {
-            WorkflowQueuingService queueSvcs = (WorkflowQueuingService)context.GetService(typeof(WorkflowQueuingService));
+            WorkflowQueuingService queueSvcs = (WorkflowQueuingService)
+                context.GetService(typeof(WorkflowQueuingService));
             args = null;
-            IComparable queueName = CorrelationService.ResolveQueueName(activity, interfaceType, operation);
+            IComparable queueName = CorrelationService.ResolveQueueName(
+                activity,
+                interfaceType,
+                operation
+            );
             if (queueName != null)
             {
                 WorkflowQueue queue;
@@ -37,7 +48,12 @@ namespace System.Workflow.Activities
             return ActivityExecutionStatus.Executing;
         }
 
-        internal static object DequeueMessage(IComparable queueId, WorkflowQueuingService queueSvcs, Activity activity, out WorkflowQueue queue)
+        internal static object DequeueMessage(
+            IComparable queueId,
+            WorkflowQueuingService queueSvcs,
+            Activity activity,
+            out WorkflowQueue queue
+        )
         {
             object message = null;
             queue = queueSvcs.GetWorkflowQueue(queueId);
@@ -46,12 +62,20 @@ namespace System.Workflow.Activities
             {
                 message = queue.Dequeue();
                 if (message == null)
-                    throw new ArgumentException(SR.GetString(SR.Error_InvalidEventMessage, activity.QualifiedName));
+                    throw new ArgumentException(
+                        SR.GetString(SR.Error_InvalidEventMessage, activity.QualifiedName)
+                    );
             }
             return message;
         }
 
-        private static object[] ProcessEvent(HandleExternalEventActivity activity, ActivityExecutionContext context, object msg, Type interfaceType, string operation)
+        private static object[] ProcessEvent(
+            HandleExternalEventActivity activity,
+            ActivityExecutionContext context,
+            object msg,
+            Type interfaceType,
+            string operation
+        )
         {
             IMethodMessage message = msg as IMethodMessage;
             if (message == null)
@@ -59,22 +83,41 @@ namespace System.Workflow.Activities
                 Exception excp = msg as Exception;
                 if (excp != null)
                     throw excp;
-                throw new InvalidOperationException(SR.GetString(SR.Error_InvalidLocalServiceMessage));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_InvalidLocalServiceMessage)
+                );
             }
 
-            CorrelationService.InvalidateCorrelationToken(activity, interfaceType, operation, message.Args);
+            CorrelationService.InvalidateCorrelationToken(
+                activity,
+                interfaceType,
+                operation,
+                message.Args
+            );
 
-            IdentityContextData identityData =
-                (IdentityContextData)message.LogicalCallContext.GetData(IdentityContextData.IdentityContext);
+            IdentityContextData identityData = (IdentityContextData)
+                message.LogicalCallContext.GetData(IdentityContextData.IdentityContext);
             ValidateRoles(activity, identityData.Identity);
 
-            if (ProcessEventParameters(activity.ParameterBindings, message, interfaceType, operation))
+            if (
+                ProcessEventParameters(
+                    activity.ParameterBindings,
+                    message,
+                    interfaceType,
+                    operation
+                )
+            )
                 return message.Args;
 
             return null;
         }
 
-        private static bool ProcessEventParameters(WorkflowParameterBindingCollection parameters, IMethodMessage message, Type interfaceType, string operation)
+        private static bool ProcessEventParameters(
+            WorkflowParameterBindingCollection parameters,
+            IMethodMessage message,
+            Type interfaceType,
+            string operation
+        )
         {
             bool isKnownSignature = false;
             if (parameters == null)
@@ -104,7 +147,10 @@ namespace System.Workflow.Activities
 
         internal static void ValidateRoles(Activity activity, string identity)
         {
-            DependencyProperty dependencyProperty = DependencyProperty.FromName("Roles", activity.GetType().BaseType);
+            DependencyProperty dependencyProperty = DependencyProperty.FromName(
+                "Roles",
+                activity.GetType().BaseType
+            );
             if (dependencyProperty == null)
                 dependencyProperty = DependencyProperty.FromName("Roles", activity.GetType());
 
@@ -115,7 +161,8 @@ namespace System.Workflow.Activities
             if (rolesBind == null)
                 return;
 
-            WorkflowRoleCollection roles = rolesBind.GetRuntimeValue(activity) as WorkflowRoleCollection;
+            WorkflowRoleCollection roles =
+                rolesBind.GetRuntimeValue(activity) as WorkflowRoleCollection;
             if (roles == null)
                 return;
 
@@ -123,5 +170,4 @@ namespace System.Workflow.Activities
                 throw new WorkflowAuthorizationException(activity.Name, identity);
         }
     }
-
 }

@@ -43,17 +43,19 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("Marshal.WriteInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.WriteInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteInt64_BlittableObject_Roundtrips()
         {
-            int offset1 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1)).ToInt32();
-            int offset2 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2)).ToInt32();
+            int offset1 = Marshal
+                .OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1))
+                .ToInt32();
+            int offset2 = Marshal
+                .OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2))
+                .ToInt32();
 
-            object structure = new BlittableStruct
-            {
-                value1 = 10,
-                value2 = 20
-            };
+            object structure = new BlittableStruct { value1 = 10, value2 = 20 };
 
             Marshal.WriteInt64(structure, offset1, 11);
             Marshal.WriteInt64(structure, offset2, 21);
@@ -65,18 +67,26 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("Marshal.WriteInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.WriteInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteInt64_StructWithReferenceTypes_ReturnsExpected()
         {
-            int pointerOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.pointerValue)).ToInt32();
-            int stringOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.stringValue)).ToInt32();
-            int arrayOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.byValueArray)).ToInt32();
+            int pointerOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.pointerValue))
+                .ToInt32();
+            int stringOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.stringValue))
+                .ToInt32();
+            int arrayOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.byValueArray))
+                .ToInt32();
 
             object structure = new StructWithReferenceTypes
             {
                 pointerValue = (IntPtr)100,
                 stringValue = "ABC",
-                byValueArray = new long[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+                byValueArray = new long[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
             };
 
             if (IntPtr.Size == 8)
@@ -90,7 +100,10 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal((IntPtr)200, ((StructWithReferenceTypes)structure).pointerValue);
             }
             Assert.Equal("ABC", ((StructWithReferenceTypes)structure).stringValue);
-            Assert.Equal(new long[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 100 }, ((StructWithReferenceTypes)structure).byValueArray);
+            Assert.Equal(
+                new long[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 100 },
+                ((StructWithReferenceTypes)structure).byValueArray
+            );
             if (IntPtr.Size == 8)
             {
                 Assert.Equal(200, Marshal.ReadInt64(structure, pointerOffset));
@@ -100,35 +113,45 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadInt64_BlittableObject_ReturnsExpected()
         {
-            int offset1 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1)).ToInt32();
-            int offset2 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2)).ToInt32();
+            int offset1 = Marshal
+                .OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1))
+                .ToInt32();
+            int offset2 = Marshal
+                .OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2))
+                .ToInt32();
 
-            object structure = new BlittableStruct
-            {
-                value1 = 10,
-                value2 = 20
-            };
+            object structure = new BlittableStruct { value1 = 10, value2 = 20 };
 
             Assert.Equal(10, Marshal.ReadInt64(structure, offset1));
             Assert.Equal(20, Marshal.ReadInt64(structure, offset2));
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadInt64_StructWithReferenceTypes_ReturnsExpected()
         {
-            int pointerOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.pointerValue)).ToInt32();
-            int stringOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.stringValue)).ToInt32();
-            int arrayOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.byValueArray)).ToInt32();
+            int pointerOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.pointerValue))
+                .ToInt32();
+            int stringOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.stringValue))
+                .ToInt32();
+            int arrayOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.byValueArray))
+                .ToInt32();
 
             object structure = new StructWithReferenceTypes
             {
                 pointerValue = (IntPtr)100,
                 stringValue = "ABC",
-                byValueArray = new long[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+                byValueArray = new long[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
             };
 
             if (IntPtr.Size == 8)
@@ -140,59 +163,97 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadInt64_ZeroPointer_ThrowsException()
         {
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.ReadInt64(IntPtr.Zero));
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.ReadInt64(IntPtr.Zero, 2));
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.ReadInt64(IntPtr.Zero)
+            );
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.ReadInt64(IntPtr.Zero, 2)
+            );
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadInt64_NullObject_ThrowsAccessViolationException()
         {
             Assert.Throws<AccessViolationException>(() => Marshal.ReadInt64(null, 2));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
-        [SkipOnMono("Marshal.ReadInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
+        [SkipOnMono(
+            "Marshal.ReadInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadInt64_NotReadable_ThrowsArgumentException()
         {
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             Type collectibleType = typeBuilder.CreateType();
             object collectibleObject = Activator.CreateInstance(collectibleType);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => Marshal.ReadInt64(collectibleObject, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Marshal.ReadInt64(collectibleObject, 0)
+            );
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteInt64_ZeroPointer_ThrowsException()
         {
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.WriteInt64(IntPtr.Zero, 0));
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.WriteInt64(IntPtr.Zero, 2, 0));
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.WriteInt64(IntPtr.Zero, 0)
+            );
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.WriteInt64(IntPtr.Zero, 2, 0)
+            );
         }
 
         [Fact]
-        [SkipOnMono("Marshal.WriteInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.WriteInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteInt64_NullObject_ThrowsAccessViolationException()
         {
             Assert.Throws<AccessViolationException>(() => Marshal.WriteInt64(null, 2, 0));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
-        [SkipOnMono("Marshal.WriteInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
+        [SkipOnMono(
+            "Marshal.WriteInt64 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteInt64_NotReadable_ThrowsArgumentException()
         {
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             Type collectibleType = typeBuilder.CreateType();
             object collectibleObject = Activator.CreateInstance(collectibleType);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => Marshal.WriteInt64(collectibleObject, 0, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Marshal.WriteInt64(collectibleObject, 0, 0)
+            );
         }
 
         public struct BlittableStruct
@@ -206,6 +267,7 @@ namespace System.Runtime.InteropServices.Tests
         {
             public IntPtr pointerValue;
             public string stringValue;
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 10)]
             public long[] byValueArray;
         }

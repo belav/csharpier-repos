@@ -5,12 +5,11 @@
 namespace System.ServiceModel.Security
 {
     using System.Diagnostics;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.Globalization;    
-    using System.Xml;
+    using System.Globalization;
     using System.IO;
-
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Xml;
     using ISecurityElement = System.IdentityModel.ISecurityElement;
 
     sealed class EncryptedHeader : DelegatingHeader
@@ -20,12 +19,20 @@ namespace System.ServiceModel.Security
         string namespaceUri;
         MessageVersion version;
 
-        public EncryptedHeader(MessageHeader plainTextHeader, EncryptedHeaderXml headerXml, string name, string namespaceUri, MessageVersion version)
+        public EncryptedHeader(
+            MessageHeader plainTextHeader,
+            EncryptedHeaderXml headerXml,
+            string name,
+            string namespaceUri,
+            MessageVersion version
+        )
             : base(plainTextHeader)
         {
             if (!headerXml.HasId || headerXml.Id == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.EncryptedHeaderXmlMustHaveId)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(SR.GetString(SR.EncryptedHeaderXmlMustHaveId))
+                );
             }
             this.headerXml = headerXml;
             this.name = name;
@@ -50,26 +57,17 @@ namespace System.ServiceModel.Security
 
         public override string Actor
         {
-            get
-            {
-                return this.headerXml.Actor;
-            }
+            get { return this.headerXml.Actor; }
         }
 
         public override bool MustUnderstand
         {
-            get
-            {
-                return this.headerXml.MustUnderstand;
-            }
+            get { return this.headerXml.MustUnderstand; }
         }
 
         public override bool Relay
         {
-            get
-            {
-                return this.headerXml.Relay;
-            }
+            get { return this.headerXml.Relay; }
         }
 
         internal MessageHeader OriginalHeader
@@ -79,14 +77,31 @@ namespace System.ServiceModel.Security
 
         public override bool IsMessageVersionSupported(MessageVersion messageVersion)
         {
-            return this.version.Equals( messageVersion );
+            return this.version.Equals(messageVersion);
         }
 
-        protected override void OnWriteStartHeader(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteStartHeader(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             if (!IsMessageVersionSupported(messageVersion))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MessageHeaderVersionNotSupported, String.Format(CultureInfo.InvariantCulture, "{0}:{1}", this.Namespace, this.Name), version.ToString()), "version"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(
+                            SR.MessageHeaderVersionNotSupported,
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}:{1}",
+                                this.Namespace,
+                                this.Name
+                            ),
+                            version.ToString()
+                        ),
+                        "version"
+                    )
+                );
             }
 
             this.headerXml.WriteHeaderElement(writer);
@@ -94,7 +109,10 @@ namespace System.ServiceModel.Security
             this.headerXml.WriteHeaderId(writer);
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             this.headerXml.WriteHeaderContents(writer);
         }

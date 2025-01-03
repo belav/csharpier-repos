@@ -14,13 +14,14 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var attributes = new object[]
         {
-                new ModelBinderAttribute() { BinderType = typeof(HeaderModelBinder) },
-                new ModelBinderAttribute() { BinderType = typeof(ArrayModelBinder<string>) },
+            new ModelBinderAttribute() { BinderType = typeof(HeaderModelBinder) },
+            new ModelBinderAttribute() { BinderType = typeof(ArrayModelBinder<string>) },
         };
 
         var context = new BindingMetadataProviderContext(
             ModelMetadataIdentity.ForType(typeof(string)),
-            new ModelAttributes(attributes, null, null));
+            new ModelAttributes(attributes, null, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -37,14 +38,15 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var attributes = new object[]
         {
-                new ModelBinderAttribute(),
-                new ModelBinderAttribute() { BinderType = typeof(HeaderModelBinder) },
-                new ModelBinderAttribute() { BinderType = typeof(ArrayModelBinder<string>) },
+            new ModelBinderAttribute(),
+            new ModelBinderAttribute() { BinderType = typeof(HeaderModelBinder) },
+            new ModelBinderAttribute() { BinderType = typeof(ArrayModelBinder<string>) },
         };
 
         var context = new BindingMetadataProviderContext(
             ModelMetadataIdentity.ForType(typeof(string)),
-            new ModelAttributes(attributes, null, null));
+            new ModelAttributes(attributes, null, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -61,13 +63,14 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var attributes = new object[]
         {
-                new ModelBinderAttribute() { Name = "Product" },
-                new ModelBinderAttribute() { Name = "Order" },
+            new ModelBinderAttribute() { Name = "Product" },
+            new ModelBinderAttribute() { Name = "Order" },
         };
 
         var context = new BindingMetadataProviderContext(
             ModelMetadataIdentity.ForType(typeof(string)),
-            new ModelAttributes(attributes, null, null));
+            new ModelAttributes(attributes, null, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -84,14 +87,15 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var attributes = new object[]
         {
-                new ModelBinderAttribute(),
-                new ModelBinderAttribute() { Name = "Product" },
-                new ModelBinderAttribute() { Name = "Order" },
+            new ModelBinderAttribute(),
+            new ModelBinderAttribute() { Name = "Product" },
+            new ModelBinderAttribute() { Name = "Order" },
         };
 
         var context = new BindingMetadataProviderContext(
             ModelMetadataIdentity.ForType(typeof(string)),
-            new ModelAttributes(attributes, null, null));
+            new ModelAttributes(attributes, null, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -108,13 +112,14 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var attributes = new object[]
         {
-                new BindingSourceModelBinderAttribute(BindingSource.Body),
-                new BindingSourceModelBinderAttribute(BindingSource.Query),
+            new BindingSourceModelBinderAttribute(BindingSource.Body),
+            new BindingSourceModelBinderAttribute(BindingSource.Query),
         };
 
         var context = new BindingMetadataProviderContext(
             ModelMetadataIdentity.ForType(typeof(string)),
-            new ModelAttributes(attributes, null, null));
+            new ModelAttributes(attributes, null, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -131,14 +136,15 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var attributes = new object[]
         {
-                new ModelBinderAttribute(),
-                new BindingSourceModelBinderAttribute(BindingSource.Body),
-                new BindingSourceModelBinderAttribute(BindingSource.Query),
+            new ModelBinderAttribute(),
+            new BindingSourceModelBinderAttribute(BindingSource.Body),
+            new BindingSourceModelBinderAttribute(BindingSource.Query),
         };
 
         var context = new BindingMetadataProviderContext(
             ModelMetadataIdentity.ForType(typeof(string)),
-            new ModelAttributes(attributes, null, null));
+            new ModelAttributes(attributes, null, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -155,12 +161,17 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var propertyAttributes = new object[]
         {
-                new BindingBehaviorAttribute(BindingBehavior.Never),
+            new BindingBehaviorAttribute(BindingBehavior.Never),
         };
 
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(string).GetProperty(nameof(string.Length)), typeof(int), typeof(string)),
-            new ModelAttributes(new object[0], propertyAttributes, null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(string).GetProperty(nameof(string.Length)),
+                typeof(int),
+                typeof(string)
+            ),
+            new ModelAttributes(new object[0], propertyAttributes, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -176,14 +187,16 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     public void CreateBindingDetails_FindsBindNever_OnProperty()
     {
         // Arrange
-        var propertyAttributes = new object[]
-        {
-                new BindNeverAttribute(),
-        };
+        var propertyAttributes = new object[] { new BindNeverAttribute() };
 
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(string).GetProperty(nameof(string.Length)), typeof(int), typeof(string)),
-            new ModelAttributes(new object[0], propertyAttributes, null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(string).GetProperty(nameof(string.Length)),
+                typeof(int),
+                typeof(string)
+            ),
+            new ModelAttributes(new object[0], propertyAttributes, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -201,12 +214,17 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var propertyAttributes = new object[]
         {
-                new BindingBehaviorAttribute(BindingBehavior.Optional),
+            new BindingBehaviorAttribute(BindingBehavior.Optional),
         };
 
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(string).GetProperty(nameof(string.Length)), typeof(int), typeof(string)),
-            new ModelAttributes(new object[0], propertyAttributes, null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(string).GetProperty(nameof(string.Length)),
+                typeof(int),
+                typeof(string)
+            ),
+            new ModelAttributes(new object[0], propertyAttributes, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -224,12 +242,17 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var propertyAttributes = new object[]
         {
-                new BindingBehaviorAttribute(BindingBehavior.Required),
+            new BindingBehaviorAttribute(BindingBehavior.Required),
         };
 
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(string).GetProperty(nameof(string.Length)), typeof(int), typeof(string)),
-            new ModelAttributes(new object[0], propertyAttributes, null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(string).GetProperty(nameof(string.Length)),
+                typeof(int),
+                typeof(string)
+            ),
+            new ModelAttributes(new object[0], propertyAttributes, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -245,14 +268,16 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     public void CreateBindingDetails_FindsBindRequired_OnProperty()
     {
         // Arrange
-        var propertyAttributes = new object[]
-        {
-                new BindRequiredAttribute(),
-        };
+        var propertyAttributes = new object[] { new BindRequiredAttribute() };
 
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(string).GetProperty(nameof(string.Length)), typeof(int), typeof(string)),
-            new ModelAttributes(new object[0], propertyAttributes, null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(string).GetProperty(nameof(string.Length)),
+                typeof(int),
+                typeof(string)
+            ),
+            new ModelAttributes(new object[0], propertyAttributes, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -270,12 +295,13 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var parameterAttributes = new object[]
         {
-                new BindingBehaviorAttribute(BindingBehavior.Never),
+            new BindingBehaviorAttribute(BindingBehavior.Never),
         };
 
         var context = new BindingMetadataProviderContext(
             ModelMetadataIdentity.ForParameter(ParameterInfos.SampleParameterInfo),
-            new ModelAttributes(Array.Empty<object>(), null, parameterAttributes));
+            new ModelAttributes(Array.Empty<object>(), null, parameterAttributes)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -291,14 +317,12 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     public void CreateBindingDetails_FindsBindNever_OnParameter()
     {
         // Arrange
-        var parameterAttributes = new object[]
-        {
-                new BindNeverAttribute(),
-        };
+        var parameterAttributes = new object[] { new BindNeverAttribute() };
 
         var context = new BindingMetadataProviderContext(
             ModelMetadataIdentity.ForParameter(ParameterInfos.SampleParameterInfo),
-            new ModelAttributes(Array.Empty<object>(), null, parameterAttributes));
+            new ModelAttributes(Array.Empty<object>(), null, parameterAttributes)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -316,12 +340,13 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var parameterAttributes = new object[]
         {
-                new BindingBehaviorAttribute(BindingBehavior.Optional),
+            new BindingBehaviorAttribute(BindingBehavior.Optional),
         };
 
         var context = new BindingMetadataProviderContext(
             ModelMetadataIdentity.ForParameter(ParameterInfos.SampleParameterInfo),
-            new ModelAttributes(Array.Empty<object>(), null, parameterAttributes));
+            new ModelAttributes(Array.Empty<object>(), null, parameterAttributes)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -339,12 +364,13 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var parameterAttributes = new object[]
         {
-                new BindingBehaviorAttribute(BindingBehavior.Required),
+            new BindingBehaviorAttribute(BindingBehavior.Required),
         };
 
         var context = new BindingMetadataProviderContext(
             ModelMetadataIdentity.ForParameter(ParameterInfos.SampleParameterInfo),
-            new ModelAttributes(Array.Empty<object>(), null, parameterAttributes));
+            new ModelAttributes(Array.Empty<object>(), null, parameterAttributes)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -360,14 +386,12 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     public void CreateBindingDetails_FindsBindRequired_OnParameter()
     {
         // Arrange
-        var parameterAttributes = new object[]
-        {
-                new BindRequiredAttribute(),
-        };
+        var parameterAttributes = new object[] { new BindRequiredAttribute() };
 
         var context = new BindingMetadataProviderContext(
             ModelMetadataIdentity.ForParameter(ParameterInfos.SampleParameterInfo),
-            new ModelAttributes(Array.Empty<object>(), null, parameterAttributes));
+            new ModelAttributes(Array.Empty<object>(), null, parameterAttributes)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -385,13 +409,14 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var parameterAttributes = new object[]
         {
-                new CustomAttribute { Identifier = "Instance1" },
-                new CustomAttribute { Identifier = "Instance2" }
+            new CustomAttribute { Identifier = "Instance1" },
+            new CustomAttribute { Identifier = "Instance2" },
         };
 
         var context = new BindingMetadataProviderContext(
             ModelMetadataIdentity.ForParameter(ParameterInfos.SampleParameterInfo),
-            new ModelAttributes(Array.Empty<object>(), null, parameterAttributes));
+            new ModelAttributes(Array.Empty<object>(), null, parameterAttributes)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -399,9 +424,11 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         provider.CreateBindingMetadata(context);
 
         // Assert
-        Assert.Collection(context.Attributes,
+        Assert.Collection(
+            context.Attributes,
             a => Assert.Equal("Instance1", ((CustomAttribute)a).Identifier),
-            a => Assert.Equal("Instance2", ((CustomAttribute)a).Identifier));
+            a => Assert.Equal("Instance2", ((CustomAttribute)a).Identifier)
+        );
         Assert.Equal(2, context.ParameterAttributes.Count);
     }
 
@@ -413,13 +440,18 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var propertyAttributes = new object[]
         {
-                new BindingBehaviorAttribute(BindingBehavior.Required),
-                new BindNeverAttribute(),
+            new BindingBehaviorAttribute(BindingBehavior.Required),
+            new BindNeverAttribute(),
         };
 
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(string).GetProperty(nameof(string.Length)), typeof(int), typeof(string)),
-            new ModelAttributes(new object[0], propertyAttributes, null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(string).GetProperty(nameof(string.Length)),
+                typeof(int),
+                typeof(string)
+            ),
+            new ModelAttributes(new object[0], propertyAttributes, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -436,8 +468,13 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     {
         // Arrange
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(BindRequiredOnClass).GetProperty(nameof(BindRequiredOnClass.Property)), typeof(int), typeof(BindRequiredOnClass)),
-            new ModelAttributes(new object[0], new object[0], null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(BindRequiredOnClass).GetProperty(nameof(BindRequiredOnClass.Property)),
+                typeof(int),
+                typeof(BindRequiredOnClass)
+            ),
+            new ModelAttributes(new object[0], new object[0], null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -454,8 +491,13 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     {
         // Arrange
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(BindNeverOnClass).GetProperty(nameof(BindNeverOnClass.Property)), typeof(int), typeof(BindNeverOnClass)),
-            new ModelAttributes(new object[0], new object[0], null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(BindNeverOnClass).GetProperty(nameof(BindNeverOnClass.Property)),
+                typeof(int),
+                typeof(BindNeverOnClass)
+            ),
+            new ModelAttributes(new object[0], new object[0], null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -472,8 +514,13 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     {
         // Arrange
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(BindNeverOnClass).GetProperty(nameof(BindNeverOnClass.Property)), typeof(int), typeof(BindNeverOnClass)),
-            new ModelAttributes(new object[0], new object[0], null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(BindNeverOnClass).GetProperty(nameof(BindNeverOnClass.Property)),
+                typeof(int),
+                typeof(BindNeverOnClass)
+            ),
+            new ModelAttributes(new object[0], new object[0], null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -491,12 +538,17 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         // Arrange
         var propertyAttributes = new object[]
         {
-                new BindingBehaviorAttribute(BindingBehavior.Optional)
+            new BindingBehaviorAttribute(BindingBehavior.Optional),
         };
 
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(BindNeverOnClass).GetProperty(nameof(BindNeverOnClass.Property)), typeof(int), typeof(BindNeverOnClass)),
-            new ModelAttributes(new object[0], propertyAttributes, null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(BindNeverOnClass).GetProperty(nameof(BindNeverOnClass.Property)),
+                typeof(int),
+                typeof(BindNeverOnClass)
+            ),
+            new ModelAttributes(new object[0], propertyAttributes, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -512,14 +564,16 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     public void CreateBindingDetails_OverrideBehaviorOnClass_OverrideWithRequired()
     {
         // Arrange
-        var propertyAttributes = new object[]
-        {
-                new BindRequiredAttribute()
-        };
+        var propertyAttributes = new object[] { new BindRequiredAttribute() };
 
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(BindNeverOnClass).GetProperty(nameof(BindNeverOnClass.Property)), typeof(int), typeof(BindNeverOnClass)),
-            new ModelAttributes(new object[0], propertyAttributes, null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(BindNeverOnClass).GetProperty(nameof(BindNeverOnClass.Property)),
+                typeof(int),
+                typeof(BindNeverOnClass)
+            ),
+            new ModelAttributes(new object[0], propertyAttributes, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -535,14 +589,18 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     public void CreateBindingDetails_OverrideInheritedBehaviorOnClass_OverrideWithRequired()
     {
         // Arrange
-        var propertyAttributes = new object[]
-        {
-                new BindRequiredAttribute()
-        };
+        var propertyAttributes = new object[] { new BindRequiredAttribute() };
 
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(InheritedBindNeverOnClass).GetProperty(nameof(InheritedBindNeverOnClass.Property)), typeof(int), typeof(InheritedBindNeverOnClass)),
-            new ModelAttributes(new object[0], propertyAttributes, null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(InheritedBindNeverOnClass).GetProperty(
+                    nameof(InheritedBindNeverOnClass.Property)
+                ),
+                typeof(int),
+                typeof(InheritedBindNeverOnClass)
+            ),
+            new ModelAttributes(new object[0], propertyAttributes, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -558,14 +616,16 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     public void CreateBindingDetails_OverrideBehaviorOnClass_OverrideWithNever()
     {
         // Arrange
-        var propertyAttributes = new object[]
-        {
-                new BindNeverAttribute(),
-        };
+        var propertyAttributes = new object[] { new BindNeverAttribute() };
 
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(BindRequiredOnClass).GetProperty(nameof(BindRequiredOnClass.Property)), typeof(int), typeof(BindRequiredOnClass)),
-            new ModelAttributes(new object[0], propertyAttributes, null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(BindRequiredOnClass).GetProperty(nameof(BindRequiredOnClass.Property)),
+                typeof(int),
+                typeof(BindRequiredOnClass)
+            ),
+            new ModelAttributes(new object[0], propertyAttributes, null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -583,8 +643,15 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     {
         // Arrange
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(BindRequiredOverridesInheritedBindNever).GetProperty(nameof(BindRequiredOverridesInheritedBindNever.Property)), typeof(int), typeof(BindRequiredOverridesInheritedBindNever)),
-            new ModelAttributes(new object[0], new object[0], null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(BindRequiredOverridesInheritedBindNever).GetProperty(
+                    nameof(BindRequiredOverridesInheritedBindNever.Property)
+                ),
+                typeof(int),
+                typeof(BindRequiredOverridesInheritedBindNever)
+            ),
+            new ModelAttributes(new object[0], new object[0], null)
+        );
 
         var provider = CreateBindingMetadataProvider();
 
@@ -602,14 +669,12 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     public void CreateBindingDetails_BindingBehaviorLeftAlone_ForTypeMetadata(bool initialValue)
     {
         // Arrange
-        var attributes = new object[]
-        {
-                new BindingBehaviorAttribute(BindingBehavior.Required),
-        };
+        var attributes = new object[] { new BindingBehaviorAttribute(BindingBehavior.Required) };
 
         var context = new BindingMetadataProviderContext(
             ModelMetadataIdentity.ForType(typeof(string)),
-            new ModelAttributes(attributes, null, null));
+            new ModelAttributes(attributes, null, null)
+        );
 
         // These values shouldn't be changed since this is a Type-Metadata
         context.BindingMetadata.IsBindingAllowed = initialValue;
@@ -630,17 +695,24 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void CreateBindingDetails_BindingBehaviorLeftAlone_ForAttributeOnPropertyType(bool initialValue)
+    public void CreateBindingDetails_BindingBehaviorLeftAlone_ForAttributeOnPropertyType(
+        bool initialValue
+    )
     {
         // Arrange
         var typeAttributes = new object[]
         {
-                new BindingBehaviorAttribute(BindingBehavior.Required),
+            new BindingBehaviorAttribute(BindingBehavior.Required),
         };
 
         var context = new BindingMetadataProviderContext(
-            ModelMetadataIdentity.ForProperty(typeof(string).GetProperty(nameof(string.Length)), typeof(int), typeof(string)),
-            new ModelAttributes(typeAttributes, new object[0], null));
+            ModelMetadataIdentity.ForProperty(
+                typeof(string).GetProperty(nameof(string.Length)),
+                typeof(int),
+                typeof(string)
+            ),
+            new ModelAttributes(typeAttributes, new object[0], null)
+        );
 
         // These values shouldn't be changed since this is a Type-Metadata
         context.BindingMetadata.IsBindingAllowed = initialValue;
@@ -710,6 +782,7 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     private class MultipleConstructorType
     {
         public MultipleConstructorType() { }
+
         public MultipleConstructorType(string prop) { }
     }
 
@@ -726,9 +799,7 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         Assert.Null(result);
     }
 
-    private record RecordTypeWithPrimaryConstructor(string name)
-    {
-    }
+    private record RecordTypeWithPrimaryConstructor(string name) { }
 
     [Fact]
     public void GetBoundConstructor_ReturnsPrimaryConstructor_ForRecordType()
@@ -741,9 +812,7 @@ public class DefaultModelMetadataBindingDetailsProviderTest
 
         // Assert
         Assert.NotNull(result);
-        Assert.Collection(
-            result.GetParameters(),
-            p => Assert.Equal("name", p.Name));
+        Assert.Collection(result.GetParameters(), p => Assert.Equal("name", p.Name));
     }
 
     private record RecordTypeWithDefaultConstructor
@@ -776,9 +845,11 @@ public class DefaultModelMetadataBindingDetailsProviderTest
 
     private record RecordTypeWithMultipleConstructors(string Name)
     {
-        public RecordTypeWithMultipleConstructors(string Name, int age) : this(Name) => Age = age;
+        public RecordTypeWithMultipleConstructors(string Name, int age)
+            : this(Name) => Age = age;
 
-        public RecordTypeWithMultipleConstructors(int age) : this(string.Empty, age) { }
+        public RecordTypeWithMultipleConstructors(int age)
+            : this(string.Empty, age) { }
 
         public int Age { get; set; }
     }
@@ -810,17 +881,17 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         Assert.Collection(
             result.GetParameters(),
             p => Assert.Equal("Name", p.Name),
-            p => Assert.Equal("Value", p.Name));
+            p => Assert.Equal("Value", p.Name)
+        );
     }
 
     public record BaseModel(int Value);
+
     public record Model(string Name, int Value) : BaseModel(Value);
 
     private record RecordTypeWithConformingSynthesizedConstructor
     {
-        public RecordTypeWithConformingSynthesizedConstructor(string Name, int Age)
-        {
-        }
+        public RecordTypeWithConformingSynthesizedConstructor(string Name, int Age) { }
 
         public string Name { get; set; }
 
@@ -841,14 +912,13 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         Assert.Collection(
             result.GetParameters(),
             p => Assert.Equal("Name", p.Name),
-            p => Assert.Equal("Age", p.Name));
+            p => Assert.Equal("Age", p.Name)
+        );
     }
 
     private record RecordTypeWithNonConformingSynthesizedConstructor
     {
-        public RecordTypeWithNonConformingSynthesizedConstructor(string name, string age)
-        {
-        }
+        public RecordTypeWithNonConformingSynthesizedConstructor(string name, string age) { }
 
         public string Name { get; set; }
 
@@ -874,9 +944,7 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         public string Property { get; set; }
     }
 
-    private class InheritedBindNeverOnClass : BindNeverOnClass
-    {
-    }
+    private class InheritedBindNeverOnClass : BindNeverOnClass { }
 
     [BindRequired]
     private class BindRequiredOnClass
@@ -885,9 +953,7 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     }
 
     [BindRequired]
-    private class BindRequiredOverridesInheritedBindNever : BindNeverOnClass
-    {
-    }
+    private class BindRequiredOverridesInheritedBindNever : BindNeverOnClass { }
 
     private class BindingSourceModelBinderAttribute : ModelBinderAttribute
     {
@@ -899,14 +965,11 @@ public class DefaultModelMetadataBindingDetailsProviderTest
 
     private class ParameterInfos
     {
-        public void Method(object param1)
-        {
-        }
+        public void Method(object param1) { }
 
-        public static ParameterInfo SampleParameterInfo
-            = typeof(ParameterInfos)
-                .GetMethod(nameof(ParameterInfos.Method))
-                .GetParameters()[0];
+        public static ParameterInfo SampleParameterInfo = typeof(ParameterInfos)
+            .GetMethod(nameof(ParameterInfos.Method))
+            .GetParameters()[0];
     }
 
     private class CustomAttribute : Attribute
@@ -914,6 +977,6 @@ public class DefaultModelMetadataBindingDetailsProviderTest
         public string Identifier { get; set; }
     }
 
-    private DefaultBindingMetadataProvider CreateBindingMetadataProvider()
-        => new DefaultBindingMetadataProvider();
+    private DefaultBindingMetadataProvider CreateBindingMetadataProvider() =>
+        new DefaultBindingMetadataProvider();
 }

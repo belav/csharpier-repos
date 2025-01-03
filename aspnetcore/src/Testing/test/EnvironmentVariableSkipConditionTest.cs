@@ -8,8 +8,9 @@ namespace Microsoft.AspNetCore.InternalTesting;
 
 public class EnvironmentVariableSkipConditionTest
 {
-    private readonly string _skipReason = "Test skipped on environment variable with name '{0}' and value '{1}'" +
-        $" for the '{nameof(EnvironmentVariableSkipConditionAttribute.RunOnMatch)}' value of '{{2}}'.";
+    private readonly string _skipReason =
+        "Test skipped on environment variable with name '{0}' and value '{1}'"
+        + $" for the '{nameof(EnvironmentVariableSkipConditionAttribute.RunOnMatch)}' value of '{{2}}'.";
 
     [Theory]
     [InlineData("false")]
@@ -21,7 +22,8 @@ public class EnvironmentVariableSkipConditionTest
         var attribute = new EnvironmentVariableSkipConditionAttribute(
             new TestEnvironmentVariable("Run", environmentVariableValue),
             "Run",
-            "true");
+            "true"
+        );
 
         // Act
         var isMet = attribute.IsMet;
@@ -40,7 +42,8 @@ public class EnvironmentVariableSkipConditionTest
         var attribute = new EnvironmentVariableSkipConditionAttribute(
             new TestEnvironmentVariable("Run", environmentVariableValue),
             "Run",
-            "true");
+            "true"
+        );
 
         // Act
         var isMet = attribute.IsMet;
@@ -48,8 +51,15 @@ public class EnvironmentVariableSkipConditionTest
         // Assert
         Assert.True(isMet);
         Assert.Equal(
-            string.Format(CultureInfo.InvariantCulture, _skipReason, "Run", environmentVariableValue, attribute.RunOnMatch),
-            attribute.SkipReason);
+            string.Format(
+                CultureInfo.InvariantCulture,
+                _skipReason,
+                "Run",
+                environmentVariableValue,
+                attribute.RunOnMatch
+            ),
+            attribute.SkipReason
+        );
     }
 
     [Fact]
@@ -59,7 +69,9 @@ public class EnvironmentVariableSkipConditionTest
         var attribute = new EnvironmentVariableSkipConditionAttribute(
             new TestEnvironmentVariable("Run", null),
             "Run",
-            "true", null); // skip the test when the variable 'Run' is explicitly set to 'true' or is null (default)
+            "true",
+            null
+        ); // skip the test when the variable 'Run' is explicitly set to 'true' or is null (default)
 
         // Act
         var isMet = attribute.IsMet;
@@ -67,8 +79,15 @@ public class EnvironmentVariableSkipConditionTest
         // Assert
         Assert.True(isMet);
         Assert.Equal(
-            string.Format(CultureInfo.InvariantCulture, _skipReason, "Run", "(null)", attribute.RunOnMatch),
-            attribute.SkipReason);
+            string.Format(
+                CultureInfo.InvariantCulture,
+                _skipReason,
+                "Run",
+                "(null)",
+                attribute.RunOnMatch
+            ),
+            attribute.SkipReason
+        );
     }
 
     [Theory]
@@ -81,7 +100,10 @@ public class EnvironmentVariableSkipConditionTest
         var attribute = new EnvironmentVariableSkipConditionAttribute(
             new TestEnvironmentVariable("Run", environmentVariableValue),
             "Run",
-            "false", "", null);
+            "false",
+            "",
+            null
+        );
 
         // Act
         var isMet = attribute.IsMet;
@@ -97,7 +119,9 @@ public class EnvironmentVariableSkipConditionTest
         var attribute = new EnvironmentVariableSkipConditionAttribute(
             new TestEnvironmentVariable("Build", "100"),
             "Build",
-            "125", "126");
+            "125",
+            "126"
+        );
 
         // Act
         var isMet = attribute.IsMet;
@@ -116,10 +140,11 @@ public class EnvironmentVariableSkipConditionTest
         var attribute = new EnvironmentVariableSkipConditionAttribute(
             new TestEnvironmentVariable("LinuxFlavor", environmentVariableValue),
             "LinuxFlavor",
-            "Ubuntu14.04")
+            "Ubuntu14.04"
+        )
         {
             // Example: Run this test on all OSes except on "Ubuntu14.04"
-            RunOnMatch = false
+            RunOnMatch = false,
         };
 
         // Act
@@ -136,10 +161,11 @@ public class EnvironmentVariableSkipConditionTest
         var attribute = new EnvironmentVariableSkipConditionAttribute(
             new TestEnvironmentVariable("LinuxFlavor", "Ubuntu14.04"),
             "LinuxFlavor",
-            "Ubuntu14.04")
+            "Ubuntu14.04"
+        )
         {
             // Example: Run this test on all OSes except on "Ubuntu14.04"
-            RunOnMatch = false
+            RunOnMatch = false,
         };
 
         // Act

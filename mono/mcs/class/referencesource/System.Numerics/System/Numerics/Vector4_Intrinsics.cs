@@ -8,7 +8,7 @@ namespace System.Numerics
     // This file contains the definitions for all of the JIT intrinsic methods and properties that are recognized by the current x64 JIT compiler.
     // The implementation defined here is used in any circumstance where the JIT fails to recognize these members as intrinsic.
     // The JIT recognizes these methods and properties by name and signature: if either is changed, the JIT will no longer recognize the member.
-    // Some methods declared here are not strictly intrinsic, but delegate to an intrinsic method. For example, only one overload of CopyTo() 
+    // Some methods declared here are not strictly intrinsic, but delegate to an intrinsic method. For example, only one overload of CopyTo()
 
     public partial struct Vector4
     {
@@ -16,14 +16,17 @@ namespace System.Numerics
         /// The X component of the vector.
         /// </summary>
         public Single X;
+
         /// <summary>
         /// The Y component of the vector.
         /// </summary>
         public Single Y;
+
         /// <summary>
         /// The Z component of the vector.
         /// </summary>
         public Single Z;
+
         /// <summary>
         /// The W component of the vector.
         /// </summary>
@@ -37,9 +40,8 @@ namespace System.Numerics
         /// <param name="value">The element to fill the vector with.</param>
         [JitIntrinsic]
         public Vector4(Single value)
-            : this(value, value, value, value)
-        {
-        }
+            : this(value, value, value, value) { }
+
         /// <summary>
         /// Constructs a vector with the given individual elements.
         /// </summary>
@@ -112,11 +114,15 @@ namespace System.Numerics
             }
             if (index < 0 || index >= array.Length)
             {
-                throw new ArgumentOutOfRangeException(SR.GetString("Arg_ArgumentOutOfRangeException", index));
+                throw new ArgumentOutOfRangeException(
+                    SR.GetString("Arg_ArgumentOutOfRangeException", index)
+                );
             }
             if ((array.Length - index) < 4)
             {
-                throw new ArgumentException(SR.GetString("Arg_ElementsInSourceIsGreaterThanDestination", index));
+                throw new ArgumentException(
+                    SR.GetString("Arg_ElementsInSourceIsGreaterThanDestination", index)
+                );
             }
             array[index] = X;
             array[index + 1] = Y;
@@ -132,10 +138,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public bool Equals(Vector4 other)
         {
-            return this.X == other.X
-                && this.Y == other.Y
-                && this.Z == other.Z
-                && this.W == other.W;
+            return this.X == other.X && this.Y == other.Y && this.Z == other.Z && this.W == other.W;
         }
         #endregion Public Instance Methods
 
@@ -150,10 +153,10 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Dot(Vector4 vector1, Vector4 vector2)
         {
-            return vector1.X * vector2.X +
-                   vector1.Y * vector2.Y +
-                   vector1.Z * vector2.Z +
-                   vector1.W * vector2.W;
+            return vector1.X * vector2.X
+                + vector1.Y * vector2.Y
+                + vector1.Z * vector2.Z
+                + vector1.W * vector2.W;
         }
 
         /// <summary>
@@ -170,7 +173,8 @@ namespace System.Numerics
                 (value1.X < value2.X) ? value1.X : value2.X,
                 (value1.Y < value2.Y) ? value1.Y : value2.Y,
                 (value1.Z < value2.Z) ? value1.Z : value2.Z,
-                (value1.W < value2.W) ? value1.W : value2.W);
+                (value1.W < value2.W) ? value1.W : value2.W
+            );
         }
 
         /// <summary>
@@ -187,7 +191,8 @@ namespace System.Numerics
                 (value1.X > value2.X) ? value1.X : value2.X,
                 (value1.Y > value2.Y) ? value1.Y : value2.Y,
                 (value1.Z > value2.Z) ? value1.Z : value2.Z,
-                (value1.W > value2.W) ? value1.W : value2.W);
+                (value1.W > value2.W) ? value1.W : value2.W
+            );
         }
 
         /// <summary>
@@ -199,7 +204,12 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Abs(Vector4 value)
         {
-            return new Vector4(Math.Abs(value.X), Math.Abs(value.Y), Math.Abs(value.Z), Math.Abs(value.W));
+            return new Vector4(
+                Math.Abs(value.X),
+                Math.Abs(value.Y),
+                Math.Abs(value.Z),
+                Math.Abs(value.W)
+            );
         }
 
         /// <summary>
@@ -211,7 +221,12 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 SquareRoot(Vector4 value)
         {
-            return new Vector4((Single)Math.Sqrt(value.X), (Single)Math.Sqrt(value.Y), (Single)Math.Sqrt(value.Z), (Single)Math.Sqrt(value.W));
+            return new Vector4(
+                (Single)Math.Sqrt(value.X),
+                (Single)Math.Sqrt(value.Y),
+                (Single)Math.Sqrt(value.Z),
+                (Single)Math.Sqrt(value.W)
+            );
         }
         #endregion Public Static Methods
 
@@ -226,7 +241,12 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 operator +(Vector4 left, Vector4 right)
         {
-            return new Vector4(left.X + right.X, left.Y + right.Y, left.Z + right.Z, left.W + right.W);
+            return new Vector4(
+                left.X + right.X,
+                left.Y + right.Y,
+                left.Z + right.Z,
+                left.W + right.W
+            );
         }
 
         /// <summary>
@@ -239,7 +259,12 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 operator -(Vector4 left, Vector4 right)
         {
-            return new Vector4(left.X - right.X, left.Y - right.Y, left.Z - right.Z, left.W - right.W);
+            return new Vector4(
+                left.X - right.X,
+                left.Y - right.Y,
+                left.Z - right.Z,
+                left.W - right.W
+            );
         }
 
         /// <summary>
@@ -252,7 +277,12 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 operator *(Vector4 left, Vector4 right)
         {
-            return new Vector4(left.X * right.X, left.Y * right.Y, left.Z * right.Z, left.W * right.W);
+            return new Vector4(
+                left.X * right.X,
+                left.Y * right.Y,
+                left.Z * right.Z,
+                left.W * right.W
+            );
         }
 
         /// <summary>
@@ -291,7 +321,12 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 operator /(Vector4 left, Vector4 right)
         {
-            return new Vector4(left.X / right.X, left.Y / right.Y, left.Z / right.Z, left.W / right.W);
+            return new Vector4(
+                left.X / right.X,
+                left.Y / right.Y,
+                left.Z / right.Z,
+                left.W / right.W
+            );
         }
 
         /// <summary>
@@ -310,7 +345,8 @@ namespace System.Numerics
                 value1.X * invDiv,
                 value1.Y * invDiv,
                 value1.Z * invDiv,
-                value1.W * invDiv);
+                value1.W * invDiv
+            );
         }
 
         /// <summary>

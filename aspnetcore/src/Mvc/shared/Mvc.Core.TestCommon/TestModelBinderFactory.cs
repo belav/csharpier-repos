@@ -16,7 +16,8 @@ public class TestModelBinderFactory : ModelBinderFactory
         return new TestModelBinderFactory(
             TestModelMetadataProvider.CreateDefaultProvider(),
             options,
-            serviceProvider);
+            serviceProvider
+        );
     }
 
     public static TestModelBinderFactory Create(params IModelBinderProvider[] providers)
@@ -26,7 +27,8 @@ public class TestModelBinderFactory : ModelBinderFactory
 
     public static TestModelBinderFactory Create(
         IModelMetadataProvider metadataProvider,
-        params IModelBinderProvider[] providers)
+        params IModelBinderProvider[] providers
+    )
     {
         if (metadataProvider == null)
         {
@@ -48,7 +50,8 @@ public class TestModelBinderFactory : ModelBinderFactory
 
     public static TestModelBinderFactory CreateDefault(
         IModelMetadataProvider metadataProvider,
-        params IModelBinderProvider[] providers)
+        params IModelBinderProvider[] providers
+    )
     {
         if (metadataProvider == null)
         {
@@ -60,22 +63,24 @@ public class TestModelBinderFactory : ModelBinderFactory
         {
             options.Value.ModelBinderProviders.Add(provider);
         }
-        new MvcCoreMvcOptionsSetup(new TestHttpRequestStreamReaderFactory()).Configure(options.Value);
+        new MvcCoreMvcOptionsSetup(new TestHttpRequestStreamReaderFactory()).Configure(
+            options.Value
+        );
         return new TestModelBinderFactory(metadataProvider, options);
-    }
-
-    protected TestModelBinderFactory(IModelMetadataProvider metadataProvider, IOptions<MvcOptions> options)
-        : this(metadataProvider, options, GetServices(options))
-    {
     }
 
     protected TestModelBinderFactory(
         IModelMetadataProvider metadataProvider,
+        IOptions<MvcOptions> options
+    )
+        : this(metadataProvider, options, GetServices(options)) { }
+
+    protected TestModelBinderFactory(
+        IModelMetadataProvider metadataProvider,
         IOptions<MvcOptions> options,
-        IServiceProvider serviceProvider)
-        : base(metadataProvider, options, serviceProvider)
-    {
-    }
+        IServiceProvider serviceProvider
+    )
+        : base(metadataProvider, options, serviceProvider) { }
 
     private static IServiceProvider GetServices(IOptions<MvcOptions> options)
     {

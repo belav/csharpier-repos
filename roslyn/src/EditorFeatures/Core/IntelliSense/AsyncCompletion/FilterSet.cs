@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
     /// <summary>
     /// Provides an efficient way to compute a set of completion filters associated with a collection of completion items.
     /// Presence of expander and filter in the set have different meanings. Set contains a filter means the filter is
-    /// available but unselected, whereas it means available and selected for an expander. Note that even though VS supports 
+    /// available but unselected, whereas it means available and selected for an expander. Note that even though VS supports
     /// having multiple expanders, we only support one.
     /// </summary>
     internal sealed class FilterSet(bool supportExpander)
@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         private static readonly ImmutableDictionary<string, FilterWithMask> s_filterMap;
 
         // Distinct list of all filters.
-        // Need to iterate over a distinct list of filters 
+        // Need to iterate over a distinct list of filters
         // to create a filter list covering a completion session.
         private static readonly ImmutableArray<FilterWithMask> s_filters;
 
@@ -71,38 +71,122 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             var previousMask = 0;
 
             // Filters will show up in the VS completion list in the same order. 'a' is used as access key for expander button.
-            NamespaceFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Namespaces, 'n', WellKnownTags.Namespace);
-            ClassFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Classes, 'c', WellKnownTags.Class);
-            ModuleFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Modules, 'u', WellKnownTags.Module);
-            StructureFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Structures, 's', WellKnownTags.Structure);
-            InterfaceFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Interfaces, 'i', WellKnownTags.Interface);
-            EnumFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Enums, 'e', WellKnownTags.Enum);
-            EnumMemberFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Enum_members, 'b', WellKnownTags.EnumMember);
-            DelegateFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Delegates, 'd', WellKnownTags.Delegate);
-            ConstantFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Constants, 'o', WellKnownTags.Constant);
-            FieldFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Fields, 'f', WellKnownTags.Field);
-            EventFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Events, 'v', WellKnownTags.Event);
-            PropertyFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Properties, 'p', WellKnownTags.Property);
-            MethodFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Methods, 'm', WellKnownTags.Method);
-            ExtensionMethodFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Extension_methods, 'x', WellKnownTags.ExtensionMethod);
-            OperatorFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Operators, 'r', WellKnownTags.Operator);
-            LocalAndParameterFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Locals_and_parameters, 'l', WellKnownTags.Local, WellKnownTags.Parameter);
-            KeywordFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Keywords, 'k', WellKnownTags.Keyword);
-            SnippetFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Snippets, 't', WellKnownTags.Snippet);
-            TargetTypedFilter = CreateCompletionFilterAndAddToBuilder(FeaturesResources.Target_type_matches, 'j', WellKnownTags.TargetTypeMatch);
+            NamespaceFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Namespaces,
+                'n',
+                WellKnownTags.Namespace
+            );
+            ClassFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Classes,
+                'c',
+                WellKnownTags.Class
+            );
+            ModuleFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Modules,
+                'u',
+                WellKnownTags.Module
+            );
+            StructureFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Structures,
+                's',
+                WellKnownTags.Structure
+            );
+            InterfaceFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Interfaces,
+                'i',
+                WellKnownTags.Interface
+            );
+            EnumFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Enums,
+                'e',
+                WellKnownTags.Enum
+            );
+            EnumMemberFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Enum_members,
+                'b',
+                WellKnownTags.EnumMember
+            );
+            DelegateFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Delegates,
+                'd',
+                WellKnownTags.Delegate
+            );
+            ConstantFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Constants,
+                'o',
+                WellKnownTags.Constant
+            );
+            FieldFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Fields,
+                'f',
+                WellKnownTags.Field
+            );
+            EventFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Events,
+                'v',
+                WellKnownTags.Event
+            );
+            PropertyFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Properties,
+                'p',
+                WellKnownTags.Property
+            );
+            MethodFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Methods,
+                'm',
+                WellKnownTags.Method
+            );
+            ExtensionMethodFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Extension_methods,
+                'x',
+                WellKnownTags.ExtensionMethod
+            );
+            OperatorFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Operators,
+                'r',
+                WellKnownTags.Operator
+            );
+            LocalAndParameterFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Locals_and_parameters,
+                'l',
+                WellKnownTags.Local,
+                WellKnownTags.Parameter
+            );
+            KeywordFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Keywords,
+                'k',
+                WellKnownTags.Keyword
+            );
+            SnippetFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Snippets,
+                't',
+                WellKnownTags.Snippet
+            );
+            TargetTypedFilter = CreateCompletionFilterAndAddToBuilder(
+                FeaturesResources.Target_type_matches,
+                'j',
+                WellKnownTags.TargetTypeMatch
+            );
 
             s_filterMap = mapBuilder.ToImmutable();
             s_filters = arrayBuilder.ToImmutable();
 
             s_expanderMask = BitVector32.CreateMask(previousMask);
 
-            var addImageId = Shared.Extensions.GlyphExtensions.GetImageCatalogImageId(KnownImageIds.ExpandScope);
+            var addImageId = Shared.Extensions.GlyphExtensions.GetImageCatalogImageId(
+                KnownImageIds.ExpandScope
+            );
             Expander = new CompletionExpander(
                 EditorFeaturesResources.Expander_display_text,
                 accessKey: "a",
-                new ImageElement(addImageId, EditorFeaturesResources.Expander_image_element));
+                new ImageElement(addImageId, EditorFeaturesResources.Expander_image_element)
+            );
 
-            CompletionFilter CreateCompletionFilterAndAddToBuilder(string displayText, char accessKey, params string[] tags)
+            CompletionFilter CreateCompletionFilterAndAddToBuilder(
+                string displayText,
+                char accessKey,
+                params string[] tags
+            )
             {
                 var filter = CreateCompletionFilter(displayText, tags, accessKey);
                 previousMask = BitVector32.CreateMask(previousMask);
@@ -120,16 +204,25 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         }
 
         private static CompletionFilter CreateCompletionFilter(
-            string displayText, string[] tags, char accessKey)
+            string displayText,
+            string[] tags,
+            char accessKey
+        )
         {
             var imageId = tags.ToImmutableArray().GetFirstGlyph().GetImageId();
             return new CompletionFilter(
                 displayText,
                 accessKey.ToString(),
-                new ImageElement(new ImageId(imageId.Guid, imageId.Id), EditorFeaturesResources.Filter_image_element));
+                new ImageElement(
+                    new ImageId(imageId.Guid, imageId.Id),
+                    EditorFeaturesResources.Filter_image_element
+                )
+            );
         }
 
-        public (ImmutableArray<CompletionFilter> filters, int data) GetFiltersAndAddToSet(RoslynCompletionItem item)
+        public (ImmutableArray<CompletionFilter> filters, int data) GetFiltersAndAddToSet(
+            RoslynCompletionItem item
+        )
         {
             var listBuilder = new ArrayBuilder<CompletionFilter>();
             var vectorForSingleItem = new BitVector32();
@@ -181,13 +274,25 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             // We always show expander if supported but its selection state depends on whether it is in the set.
             if (_supportExpander)
-                builder.Add(new CompletionFilterWithState(Expander, isAvailable: true, isSelected: _vector[s_expanderMask]));
+                builder.Add(
+                    new CompletionFilterWithState(
+                        Expander,
+                        isAvailable: true,
+                        isSelected: _vector[s_expanderMask]
+                    )
+                );
 
             foreach (var filterWithMask in s_filters)
             {
                 if (_vector[filterWithMask.Mask])
                 {
-                    builder.Add(new CompletionFilterWithState(filterWithMask.Filter, isAvailable: true, isSelected: false));
+                    builder.Add(
+                        new CompletionFilterWithState(
+                            filterWithMask.Filter,
+                            isAvailable: true,
+                            isSelected: false
+                        )
+                    );
                 }
             }
 
@@ -197,24 +302,41 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         /// <summary>
         /// Combine two filter lists while preserving the order as defined in <see cref="FilterSet"/>.
         /// </summary>
-        public static ImmutableArray<CompletionFilterWithState> CombineFilterStates(ImmutableArray<CompletionFilterWithState> filters1, ImmutableArray<CompletionFilterWithState> filters2)
+        public static ImmutableArray<CompletionFilterWithState> CombineFilterStates(
+            ImmutableArray<CompletionFilterWithState> filters1,
+            ImmutableArray<CompletionFilterWithState> filters2
+        )
         {
-            using var _1 = PooledDictionary<CompletionFilter, bool>.GetInstance(out var filterStateMap);
+            using var _1 = PooledDictionary<CompletionFilter, bool>.GetInstance(
+                out var filterStateMap
+            );
             AddFilterState(filters1);
             AddFilterState(filters2);
 
             using var _2 = ArrayBuilder<CompletionFilterWithState>.GetInstance(out var builder);
             if (filterStateMap.TryGetValue(Expander, out var isSelected))
             {
-                builder.Add(new CompletionFilterWithState(Expander, isAvailable: true, isSelected: isSelected));
+                builder.Add(
+                    new CompletionFilterWithState(
+                        Expander,
+                        isAvailable: true,
+                        isSelected: isSelected
+                    )
+                );
             }
 
-            // Make sure filters are kept in the relative order of their declaration above. 
+            // Make sure filters are kept in the relative order of their declaration above.
             foreach (var filterWithMask in s_filters)
             {
                 if (filterStateMap.TryGetValue(filterWithMask.Filter, out isSelected))
                 {
-                    builder.Add(new CompletionFilterWithState(filterWithMask.Filter, isAvailable: true, isSelected: isSelected));
+                    builder.Add(
+                        new CompletionFilterWithState(
+                            filterWithMask.Filter,
+                            isAvailable: true,
+                            isSelected: isSelected
+                        )
+                    );
                 }
             }
 

@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.InternalTesting;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
@@ -19,28 +19,28 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                DisplayName = "A2",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A2",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "About" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "About" },
                 },
+            },
         };
 
         var table = CreateTableWithActionDescriptors(actions);
-        var values = new RouteValueDictionary(new { controller = "Home", action = "Index", });
+        var values = new RouteValueDictionary(new { controller = "Home", action = "Index" });
 
         // Act
         var matches = table.Select(values);
@@ -55,32 +55,30 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" },
-                        { "date", "10/31/2018 07:37:38 -07:00" },
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                    { "date", "10/31/2018 07:37:38 -07:00" },
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                DisplayName = "A2",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A2",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "About" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "About" },
                 },
+            },
         };
 
         var table = CreateTableWithActionDescriptors(actions);
-        var values = new RouteValueDictionary(new { controller = "Home", action = "Index", });
-        values.Add(
-            "date",
-            new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)));
+        var values = new RouteValueDictionary(new { controller = "Home", action = "Index" });
+        values.Add("date", new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)));
 
         // Act
         var matches = table.Select(values);
@@ -95,38 +93,39 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" },
-                        { "date", "10/31/2018 07:37:38 -07:00" },
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                    { "date", "10/31/2018 07:37:38 -07:00" },
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                DisplayName = "A2",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A2",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "About" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "About" },
                 },
+            },
         };
 
         var table = CreateTableWithEndpoints(actions);
-        var values = new RouteValueDictionary(new { controller = "Home", action = "Index", });
-        values.Add(
-            "date",
-            new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)));
+        var values = new RouteValueDictionary(new { controller = "Home", action = "Index" });
+        values.Add("date", new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)));
 
         // Act
         var matches = table.Select(values);
 
         // Assert
-        Assert.Collection(matches, (e) => Assert.Same(actions[0], e.Metadata.GetMetadata<ActionDescriptor>()));
+        Assert.Collection(
+            matches,
+            (e) => Assert.Same(actions[0], e.Metadata.GetMetadata<ActionDescriptor>())
+        );
     }
 
     [Fact]
@@ -134,28 +133,28 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                DisplayName = "A2",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A2",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
+            },
         };
 
         var table = CreateTableWithActionDescriptors(actions);
-        var values = new RouteValueDictionary(new { controller = "Home", action = "Index", });
+        var values = new RouteValueDictionary(new { controller = "Home", action = "Index" });
 
         // Act
         var matches = table.Select(values);
@@ -169,34 +168,37 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                DisplayName = "A2",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A2",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
+            },
         };
 
         var table = CreateTableWithEndpoints(actions);
-        var values = new RouteValueDictionary(new { controller = "Home", action = "Index", });
+        var values = new RouteValueDictionary(new { controller = "Home", action = "Index" });
 
         // Act
         var matches = table.Select(values);
 
         // Assert
-        Assert.Equal(actions.ToArray(), matches.Select(e => e.Metadata.GetMetadata<ActionDescriptor>()).ToArray());
+        Assert.Equal(
+            actions.ToArray(),
+            matches.Select(e => e.Metadata.GetMetadata<ActionDescriptor>()).ToArray()
+        );
     }
 
     [Fact]
@@ -204,28 +206,28 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                DisplayName = "A2",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A2",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "About" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "About" },
                 },
+            },
         };
 
         var table = CreateTableWithActionDescriptors(actions);
-        var values = new RouteValueDictionary(new { controller = "Foo", action = "Index", });
+        var values = new RouteValueDictionary(new { controller = "Foo", action = "Index" });
 
         // Act
         var matches = table.Select(values);
@@ -239,23 +241,20 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "/Home",
-                    }
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
+                AttributeRouteInfo = new AttributeRouteInfo() { Template = "/Home" },
+            },
         };
 
         var table = CreateTableWithActionDescriptors(actions);
-        var values = new RouteValueDictionary(new { controller = "Home", action = "Index", });
+        var values = new RouteValueDictionary(new { controller = "Home", action = "Index" });
 
         // Act
         var matches = table.Select(values);
@@ -269,23 +268,20 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "/Home",
-                    }
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
+                AttributeRouteInfo = new AttributeRouteInfo() { Template = "/Home" },
+            },
         };
 
         var table = CreateTableWithEndpoints(actions);
-        var values = new RouteValueDictionary(new { controller = "Home", action = "Index", });
+        var values = new RouteValueDictionary(new { controller = "Home", action = "Index" });
 
         // Act
         var matches = table.Select(values);
@@ -302,39 +298,39 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                DisplayName = "A2",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A2",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor() // This won't match the request
+            },
+            new ActionDescriptor() // This won't match the request
+            {
+                DisplayName = "A3",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A3",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "About" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "About" },
                 },
+            },
         };
 
         var expected = actions.Take(2).ToArray();
 
         var table = CreateTableWithActionDescriptors(actions);
-        var values = new RouteValueDictionary(new { controller = "Home", action = "Index", });
+        var values = new RouteValueDictionary(new { controller = "Home", action = "Index" });
 
         // Act
         var matches = table.Select(values);
@@ -351,39 +347,39 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                DisplayName = "A2",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A2",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor() // This won't match the request
+            },
+            new ActionDescriptor() // This won't match the request
+            {
+                DisplayName = "A3",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A3",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "About" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "About" },
                 },
+            },
         };
 
         var expected = actions.Take(2).ToArray();
 
         var table = CreateTableWithActionDescriptors(actions);
-        var values = new RouteValueDictionary(new { controller = "HOME", action = "iNDex", });
+        var values = new RouteValueDictionary(new { controller = "HOME", action = "iNDex" });
 
         // Act
         var matches = table.Select(values);
@@ -397,23 +393,30 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "area", null },
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                }
+                    { "area", null },
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+            },
         };
 
         var table = CreateTableWithActionDescriptors(actions);
 
         // Example: In conventional route, one could set non-inline defaults
         // new { area = "", controller = "Home", action = "Index" }
-        var values = new RouteValueDictionary(new { area = "", controller = "Home", action = "Index", });
+        var values = new RouteValueDictionary(
+            new
+            {
+                area = "",
+                controller = "Home",
+                action = "Index",
+            }
+        );
 
         // Act
         var matches = table.Select(values);
@@ -428,23 +431,30 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "area", null },
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                }
+                    { "area", null },
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+            },
         };
 
         var table = CreateTableWithActionDescriptors(actions);
 
         // Example: In conventional route, one could set non-inline defaults
         // new { area = "", controller = "Home", action = "Index" }
-        var values = new RouteValueDictionary(new { area = "", controller = "HoMe", action = "InDeX", });
+        var values = new RouteValueDictionary(
+            new
+            {
+                area = "",
+                controller = "HoMe",
+                action = "InDeX",
+            }
+        );
 
         // Act
         var matches = table.Select(values);
@@ -459,23 +469,30 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "area", null },
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                }
+                    { "area", null },
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+            },
         };
 
         var table = CreateTableWithActionDescriptors(actions);
 
         // Example: In conventional route, one could set non-inline defaults
         // new { area = (string)null, controller = "Foo", action = "Index" }
-        var values = new RouteValueDictionary(new { area = (string)null, controller = "Home", action = "Index", });
+        var values = new RouteValueDictionary(
+            new
+            {
+                area = (string)null,
+                controller = "Home",
+                action = "Index",
+            }
+        );
 
         // Act
         var matches = table.Select(values);
@@ -490,21 +507,28 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "foo", "" },
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                }
+                    { "foo", "" },
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+            },
         };
 
         var table = CreateTableWithActionDescriptors(actions);
 
-        var values = new RouteValueDictionary(new { foo = "", controller = "Home", action = "Index", });
+        var values = new RouteValueDictionary(
+            new
+            {
+                foo = "",
+                controller = "Home",
+                action = "Index",
+            }
+        );
 
         // Act
         var matches = table.Select(values);
@@ -519,21 +543,28 @@ public class ActionSelectionTableTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "foo", "" },
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                }
+                    { "foo", "" },
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+            },
         };
 
         var table = CreateTableWithActionDescriptors(actions);
 
-        var values = new RouteValueDictionary(new { foo = (string)null, controller = "Home", action = "Index", });
+        var values = new RouteValueDictionary(
+            new
+            {
+                foo = (string)null,
+                controller = "Home",
+                action = "Index",
+            }
+        );
 
         // Act
         var matches = table.Select(values);
@@ -543,12 +574,18 @@ public class ActionSelectionTableTest
         Assert.Same(actions[0], action);
     }
 
-    private static ActionSelectionTable<ActionDescriptor> CreateTableWithActionDescriptors(IReadOnlyList<ActionDescriptor> actions)
+    private static ActionSelectionTable<ActionDescriptor> CreateTableWithActionDescriptors(
+        IReadOnlyList<ActionDescriptor> actions
+    )
     {
-        return ActionSelectionTable<ActionDescriptor>.Create(new ActionDescriptorCollection(actions, 0));
+        return ActionSelectionTable<ActionDescriptor>.Create(
+            new ActionDescriptorCollection(actions, 0)
+        );
     }
 
-    private static ActionSelectionTable<Endpoint> CreateTableWithEndpoints(IReadOnlyList<ActionDescriptor> actions)
+    private static ActionSelectionTable<Endpoint> CreateTableWithEndpoints(
+        IReadOnlyList<ActionDescriptor> actions
+    )
     {
         var endpoints = actions.Select(a =>
         {
@@ -557,7 +594,8 @@ public class ActionSelectionTableTest
             return new Endpoint(
                 requestDelegate: context => Task.CompletedTask,
                 metadata: new EndpointMetadataCollection(metadata),
-                displayName: a.DisplayName);
+                displayName: a.DisplayName
+            );
         });
 
         return ActionSelectionTable<ActionDescriptor>.Create(endpoints);

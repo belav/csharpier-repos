@@ -15,27 +15,81 @@ public abstract partial class RequestDelegateCreationTests
         get
         {
             return new List<object[]>
+            {
+                new object[] { @"(string name) => $""Hello {name}!""", "name", null, true, null },
+                new object[]
                 {
-                    new object[] { @"(string name) => $""Hello {name}!""", "name", null, true, null},
-                    new object[] { @"(string name) => $""Hello {name}!""", "name", "TestName", false, "Hello TestName!" },
-                    new object[] { @"(string name = ""DefaultName"") => $""Hello {name}!""", "name", null, false, "Hello DefaultName!" },
-                    new object[] { @"(string name = ""DefaultName"") => $""Hello {name}!""", "name", "TestName", false, "Hello TestName!" },
-                    new object[] { @"(string? name) => $""Hello {name}!""", "name", null, false, "Hello !" },
-                    new object[] { @"(string? name) => $""Hello {name}!""", "name", "TestName", false, "Hello TestName!"},
-
-                    new object[] { @"(int age) => $""Age: {age}""", "age", null, true, null},
-                    new object[] { @"(int age) => $""Age: {age}""", "age", "42", false, "Age: 42" },
-                    new object[] { @"(int age = 12) => $""Age: {age}""", "age", null, false, "Age: 12" },
-                    new object[] { @"(int age = 12) => $""Age: {age}""", "age", "42", false, "Age: 42" },
-                    new object[] { @"(int? age) => $""Age: {age}""", "age", null, false, "Age: " },
-                    new object[] { @"(int? age) => $""Age: {age}""", "age", "42", false, "Age: 42"},
-                };
+                    @"(string name) => $""Hello {name}!""",
+                    "name",
+                    "TestName",
+                    false,
+                    "Hello TestName!",
+                },
+                new object[]
+                {
+                    @"(string name = ""DefaultName"") => $""Hello {name}!""",
+                    "name",
+                    null,
+                    false,
+                    "Hello DefaultName!",
+                },
+                new object[]
+                {
+                    @"(string name = ""DefaultName"") => $""Hello {name}!""",
+                    "name",
+                    "TestName",
+                    false,
+                    "Hello TestName!",
+                },
+                new object[]
+                {
+                    @"(string? name) => $""Hello {name}!""",
+                    "name",
+                    null,
+                    false,
+                    "Hello !",
+                },
+                new object[]
+                {
+                    @"(string? name) => $""Hello {name}!""",
+                    "name",
+                    "TestName",
+                    false,
+                    "Hello TestName!",
+                },
+                new object[] { @"(int age) => $""Age: {age}""", "age", null, true, null },
+                new object[] { @"(int age) => $""Age: {age}""", "age", "42", false, "Age: 42" },
+                new object[]
+                {
+                    @"(int age = 12) => $""Age: {age}""",
+                    "age",
+                    null,
+                    false,
+                    "Age: 12",
+                },
+                new object[]
+                {
+                    @"(int age = 12) => $""Age: {age}""",
+                    "age",
+                    "42",
+                    false,
+                    "Age: 42",
+                },
+                new object[] { @"(int? age) => $""Age: {age}""", "age", null, false, "Age: " },
+                new object[] { @"(int? age) => $""Age: {age}""", "age", "42", false, "Age: 42" },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(QueryParamOptionalityData))]
-    public async Task RequestDelegateHandlesQueryParamOptionality(string innerSource, string paramName, string queryParam, bool isInvalid, string expectedResponse)
+    public async Task RequestDelegateHandlesQueryParamOptionality(
+        string innerSource,
+        string paramName,
+        string queryParam,
+        bool isInvalid,
+        string expectedResponse
+    )
     {
         var source = $"""
 string handler{innerSource};
@@ -51,10 +105,9 @@ app.MapGet("/", handler);
 
         if (queryParam is not null)
         {
-            httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-            {
-                [paramName] = queryParam
-            });
+            httpContext.Request.Query = new QueryCollection(
+                new Dictionary<string, StringValues> { [paramName] = queryParam }
+            );
         }
 
         await endpoint.RequestDelegate(httpContext);
@@ -69,7 +122,10 @@ app.MapGet("/", handler);
             Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), log.EventId);
             var expectedType = paramName == "age" ? "int age" : $"string name";
             var parameterSource = IsGeneratorEnabled ? "route or query string" : "query string";
-            Assert.Equal($@"Required parameter ""{expectedType}"" was not provided from {parameterSource}.", log.Message);
+            Assert.Equal(
+                $@"Required parameter ""{expectedType}"" was not provided from {parameterSource}.",
+                log.Message
+            );
         }
         else
         {
@@ -83,18 +139,23 @@ app.MapGet("/", handler);
     [Fact]
     public async Task MapAction_SingleNullableStringParam_WithEmptyQueryStringValueProvided_StringReturn()
     {
-        var (results, compilation) = await RunGeneratorAsync("""
+        var (results, compilation) = await RunGeneratorAsync(
+            """
 app.MapGet("/hello", ([FromQuery]string? p) => p == string.Empty ? "No value, but not null!" : "Was null!");
-""");
+"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(results, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-            var p = Assert.Single(endpointModel.Parameters);
-            Assert.Equal(EndpointParameterSource.Query, p.Source);
-            Assert.Equal("p", p.SymbolName);
-        });
+        VerifyStaticEndpointModel(
+            results,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+                var p = Assert.Single(endpointModel.Parameters);
+                Assert.Equal(EndpointParameterSource.Query, p.Source);
+                Assert.Equal("p", p.SymbolName);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         httpContext.Request.QueryString = new QueryString("?p=");
@@ -107,15 +168,20 @@ app.MapGet("/hello", ([FromQuery]string? p) => p == string.Empty ? "No value, bu
     [Fact]
     public async Task MapAction_MultipleStringParam_StringReturn()
     {
-        var (results, compilation) = await RunGeneratorAsync("""
+        var (results, compilation) = await RunGeneratorAsync(
+            """
 app.MapGet("/hello", ([FromQuery]string p1, [FromQuery]string p2) => $"{p1} {p2}");
-""");
+"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(results, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-        });
+        VerifyStaticEndpointModel(
+            results,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         httpContext.Request.QueryString = new QueryString("?p1=Hello&p2=world!");
@@ -137,10 +203,10 @@ app.MapGet("/hello", ([FromQuery]string p1, [FromQuery]string p2) => $"{p1} {p2}
                 new object[] { "123", "123" },
                 new object[] { "💩", "💩" },
                 new object[] { "\r", "\\r" },
-                new object[] { "\x00E7" , "\x00E7" },
-                new object[] { "!!" , "!!" },
-                new object[] { "\\" , "\\\\" },
-                new object[] { "\'" , "\'" },
+                new object[] { "\x00E7", "\x00E7" },
+                new object[] { "!!", "!!" },
+                new object[] { "\\", "\\\\" },
+                new object[] { "\'", "\'" },
             };
         }
     }
@@ -149,16 +215,21 @@ app.MapGet("/hello", ([FromQuery]string p1, [FromQuery]string p2) => $"{p1} {p2}
     [MemberData(nameof(MapAction_ExplicitQueryParam_NameTest_Data))]
     public async Task MapAction_ExplicitQueryParam_NameTest(string name, string lookupName)
     {
-        var (results, compilation) = await RunGeneratorAsync($"""app.MapGet("/", ([FromQuery(Name = @"{name}")] string queryValue) => queryValue);""");
+        var (results, compilation) = await RunGeneratorAsync(
+            $"""app.MapGet("/", ([FromQuery(Name = @"{name}")] string queryValue) => queryValue);"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(results, (endpointModel) =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-            var p = Assert.Single(endpointModel.Parameters);
-            Assert.Equal(EndpointParameterSource.Query, p.Source);
-            Assert.Equal(lookupName, p.LookupName);
-        });
+        VerifyStaticEndpointModel(
+            results,
+            (endpointModel) =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+                var p = Assert.Single(endpointModel.Parameters);
+                Assert.Equal(EndpointParameterSource.Query, p.Source);
+                Assert.Equal(lookupName, p.LookupName);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         httpContext.Request.QueryString = new QueryString($"?{name}=test");

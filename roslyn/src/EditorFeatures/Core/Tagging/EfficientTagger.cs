@@ -17,26 +17,31 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging;
 /// garbage by allowing us to pool intermediary lists (especially as some high-level aggregating taggers defer to
 /// intermediary taggers).
 /// </summary>
-internal abstract class EfficientTagger<TTag> : ITagger<TTag>, IDisposable where TTag : ITag
+internal abstract class EfficientTagger<TTag> : ITagger<TTag>, IDisposable
+    where TTag : ITag
 {
     /// <summary>
     /// Produce the set of tags with the requested <paramref name="spans"/>, adding those tags to <paramref name="tags"/>.
     /// </summary>
-    public abstract void AddTags(NormalizedSnapshotSpanCollection spans, SegmentedList<ITagSpan<TTag>> tags);
+    public abstract void AddTags(
+        NormalizedSnapshotSpanCollection spans,
+        SegmentedList<ITagSpan<TTag>> tags
+    );
 
     public abstract void Dispose();
 
     /// <summary>
     /// Default impl of the core <see cref="ITagger{T}"/> interface.  Forces an allocation.
     /// </summary>
-    public IEnumerable<ITagSpan<TTag>> GetTags(NormalizedSnapshotSpanCollection spans)
-        => SegmentedListPool.ComputeList(
+    public IEnumerable<ITagSpan<TTag>> GetTags(NormalizedSnapshotSpanCollection spans) =>
+        SegmentedListPool.ComputeList(
             static (args, tags) => args.@this.AddTags(args.spans, tags),
             (@this: this, spans),
-            _: (ITagSpan<TTag>?)null);
+            _: (ITagSpan<TTag>?)null
+        );
 
     public virtual event EventHandler<SnapshotSpanEventArgs>? TagsChanged;
 
-    protected void OnTagsChanged(object? sender, SnapshotSpanEventArgs e)
-        => TagsChanged?.Invoke(this, e);
+    protected void OnTagsChanged(object? sender, SnapshotSpanEventArgs e) =>
+        TagsChanged?.Invoke(this, e);
 }

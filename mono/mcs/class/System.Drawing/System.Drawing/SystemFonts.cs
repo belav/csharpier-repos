@@ -26,78 +26,81 @@
 //
 
 
-namespace System.Drawing {
+namespace System.Drawing
+{
+    public sealed class SystemFonts
+    {
+        static SystemFonts() { }
 
-	public sealed class SystemFonts {
-		
-		static SystemFonts ()
-		{
-		}
+        private SystemFonts() { }
 
-		private SystemFonts()
-		{
-		}
+        public static Font GetFontByName(string systemFontName)
+        {
+            if (systemFontName == "CaptionFont")
+                return CaptionFont;
 
-		public static Font GetFontByName (string systemFontName)
-		{
-			if (systemFontName == "CaptionFont")
-				return CaptionFont;
+            if (systemFontName == "DefaultFont")
+                return DefaultFont;
 
-			if (systemFontName == "DefaultFont")
-				return DefaultFont;
+            if (systemFontName == "DialogFont")
+                return DialogFont;
 
-			if (systemFontName == "DialogFont")
-				return DialogFont;	
+            if (systemFontName == "IconTitleFont")
+                return IconTitleFont;
 
-			if (systemFontName == "IconTitleFont")
-				return IconTitleFont;
+            if (systemFontName == "MenuFont")
+                return MenuFont;
 
-			if (systemFontName == "MenuFont")
-				return MenuFont;
+            if (systemFontName == "MessageBoxFont")
+                return MessageBoxFont;
 
-			if (systemFontName == "MessageBoxFont")
-				return MessageBoxFont;
+            if (systemFontName == "SmallCaptionFont")
+                return SmallCaptionFont;
 
-			if (systemFontName == "SmallCaptionFont")
-				return SmallCaptionFont;
+            if (systemFontName == "StatusFont")
+                return StatusFont;
 
-			if (systemFontName == "StatusFont")
-				return StatusFont;			
-			
-			return null;
-		}
+            return null;
+        }
 
-		public static Font CaptionFont { 
-			get { return new Font ("Microsoft Sans Serif", 11, "CaptionFont"); }
-		}
+        public static Font CaptionFont
+        {
+            get { return new Font("Microsoft Sans Serif", 11, "CaptionFont"); }
+        }
 
-		public static Font DefaultFont  { 
-			get { return new Font ("Microsoft Sans Serif", 8.25f, "DefaultFont"); }
-		}
+        public static Font DefaultFont
+        {
+            get { return new Font("Microsoft Sans Serif", 8.25f, "DefaultFont"); }
+        }
 
-		public static Font DialogFont  { 
-			get { return new Font ("Tahoma", 8, "DialogFont"); }
-		}
+        public static Font DialogFont
+        {
+            get { return new Font("Tahoma", 8, "DialogFont"); }
+        }
 
-		public static Font IconTitleFont  { 
-			get { return new Font ("Microsoft Sans Serif", 11, "IconTitleFont"); }
-		}
+        public static Font IconTitleFont
+        {
+            get { return new Font("Microsoft Sans Serif", 11, "IconTitleFont"); }
+        }
 
-		public static Font MenuFont  { 
-			get { return new Font ("Microsoft Sans Serif", 11, "MenuFont"); }
-		}
+        public static Font MenuFont
+        {
+            get { return new Font("Microsoft Sans Serif", 11, "MenuFont"); }
+        }
 
-		public static Font MessageBoxFont  { 
-			get { return new Font ("Microsoft Sans Serif", 11, "MessageBoxFont"); }
-		}
+        public static Font MessageBoxFont
+        {
+            get { return new Font("Microsoft Sans Serif", 11, "MessageBoxFont"); }
+        }
 
-		public static Font SmallCaptionFont  { 
-			get { return new Font ("Microsoft Sans Serif", 11, "SmallCaptionFont"); }
-		}
+        public static Font SmallCaptionFont
+        {
+            get { return new Font("Microsoft Sans Serif", 11, "SmallCaptionFont"); }
+        }
 
-		public static Font StatusFont  { 
-			get { return new Font ("Microsoft Sans Serif", 11, "StatusFont"); }
-		}	      
-	}
+        public static Font StatusFont
+        {
+            get { return new Font("Microsoft Sans Serif", 11, "StatusFont"); }
+        }
+    }
 }
-

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             IMethodSymbol sliceLikeMethod,
             MemberInfo memberInfo,
             IOperation op1,
-            IOperation? op2)
+            IOperation? op2
+        )
         {
             public readonly ResultKind Kind = kind;
             public readonly IInvocationOperation InvocationOperation = invocationOperation;

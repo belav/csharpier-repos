@@ -11,17 +11,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Diagnostics;
-using System.Xml;
 using System.Data;
 using System.Data.Metadata.Edm;
-using System.Reflection;
-using System.IO;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Xml;
 
 namespace System.Data.EntityModel.SchemaObjectModel
 {
-
     internal abstract class Property : SchemaElement
     {
         /// <summary>
@@ -29,14 +28,12 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         /// <param name="parentElement">The parent element</param>
         internal Property(StructuredType parentElement)
-            : base(parentElement)
-        {
-        }
+            : base(parentElement) { }
 
         /// <summary>
         /// Gets the Type of the property
         /// </summary>
-        public abstract SchemaType Type { get;}
+        public abstract SchemaType Type { get; }
 
         protected override bool HandleElement(XmlReader reader)
         {

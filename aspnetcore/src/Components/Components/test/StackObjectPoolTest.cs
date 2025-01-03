@@ -113,6 +113,9 @@ public class StackObjectPoolTest
         {
             stackObjectPool.Return(instance1);
         });
-        Assert.Equal("Attempting to return wrong pooled instance. Get/Return calls must form a stack.", ex.Message);
+        Assert.Equal(
+            "Attempting to return wrong pooled instance. Get/Return calls must form a stack.",
+            ex.Message
+        );
     }
 }

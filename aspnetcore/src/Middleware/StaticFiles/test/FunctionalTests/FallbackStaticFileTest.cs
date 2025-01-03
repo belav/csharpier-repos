@@ -6,9 +6,9 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.Server.IntegrationTesting.Common;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
@@ -24,32 +24,42 @@ public class FallbackStaticFileTest : LoggedTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .ConfigureServices(services =>
-                {
-                    services.AddRouting();
-                    services.AddSingleton(LoggerFactory);
-                })
-                .UseKestrel()
-                .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
-                .UseWebRoot(AppContext.BaseDirectory)
-                .Configure(app =>
-                {
-                    var environment = app.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
-                    app.UseRouting();
-                    app.UseEndpoints(endpoints =>
+                    .ConfigureServices(services =>
                     {
-                        endpoints.Map("/hello", context =>
+                        services.AddRouting();
+                        services.AddSingleton(LoggerFactory);
+                    })
+                    .UseKestrel()
+                    .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
+                    .UseWebRoot(AppContext.BaseDirectory)
+                    .Configure(app =>
+                    {
+                        var environment =
+                            app.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
+                        app.UseRouting();
+                        app.UseEndpoints(endpoints =>
                         {
-                            return context.Response.WriteAsync("Hello, world!");
-                        });
+                            endpoints.Map(
+                                "/hello",
+                                context =>
+                                {
+                                    return context.Response.WriteAsync("Hello, world!");
+                                }
+                            );
 
-                        endpoints.MapFallbackToFile("default.html", new StaticFileOptions()
-                        {
-                            FileProvider = new PhysicalFileProvider(Path.Combine(environment.WebRootPath, "SubFolder")),
+                            endpoints.MapFallbackToFile(
+                                "default.html",
+                                new StaticFileOptions()
+                                {
+                                    FileProvider = new PhysicalFileProvider(
+                                        Path.Combine(environment.WebRootPath, "SubFolder")
+                                    ),
+                                }
+                            );
                         });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -77,28 +87,35 @@ public class FallbackStaticFileTest : LoggedTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .ConfigureServices(services =>
-                {
-                    services.AddRouting();
-                    services.AddSingleton(LoggerFactory);
-                })
-                .UseKestrel()
-                .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
-                .UseWebRoot(AppContext.BaseDirectory)
-                .Configure(app =>
-                {
-                    app.UseRouting();
-                    app.UseEndpoints(endpoints =>
+                    .ConfigureServices(services =>
                     {
-                        endpoints.Map("/hello", context =>
+                        services.AddRouting();
+                        services.AddSingleton(LoggerFactory);
+                    })
+                    .UseKestrel()
+                    .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
+                    .UseWebRoot(AppContext.BaseDirectory)
+                    .Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseEndpoints(endpoints =>
                         {
-                            return context.Response.WriteAsync("Hello, world!");
-                        });
+                            endpoints.Map(
+                                "/hello",
+                                context =>
+                                {
+                                    return context.Response.WriteAsync("Hello, world!");
+                                }
+                            );
 
-                        endpoints.MapFallbackToFile("/prefix/{*path:nonfile}", "TestDocument.txt");
+                            endpoints.MapFallbackToFile(
+                                "/prefix/{*path:nonfile}",
+                                "TestDocument.txt"
+                            );
+                        });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -119,7 +136,11 @@ public class FallbackStaticFileTest : LoggedTest
         }
     }
 
-    private static void AssertFileEquals(IWebHostEnvironment environment, string filePath, byte[] responseContent)
+    private static void AssertFileEquals(
+        IWebHostEnvironment environment,
+        string filePath,
+        byte[] responseContent
+    )
     {
         var fileInfo = environment.WebRootFileProvider.GetFileInfo(filePath);
         Assert.NotNull(fileInfo);

@@ -6,7 +6,8 @@ using Xunit;
 
 namespace System.CodeDom.Tests
 {
-    public abstract class CodeStatementTestBase<T> : CodeObjectTestBase<T> where T : CodeStatement, new()
+    public abstract class CodeStatementTestBase<T> : CodeObjectTestBase<T>
+        where T : CodeStatement, new()
     {
         [Fact]
         public void Ctor_Default_StatementBase()
@@ -31,13 +32,25 @@ namespace System.CodeDom.Tests
         {
             CodeStatement statement = new T();
 
-            CodeRegionDirective directive1 = new CodeRegionDirective(CodeRegionMode.None, "Region1");
+            CodeRegionDirective directive1 = new CodeRegionDirective(
+                CodeRegionMode.None,
+                "Region1"
+            );
             statement.StartDirectives.Add(directive1);
-            Assert.Equal(new CodeRegionDirective[] { directive1 }, statement.StartDirectives.Cast<CodeDirective>());
+            Assert.Equal(
+                new CodeRegionDirective[] { directive1 },
+                statement.StartDirectives.Cast<CodeDirective>()
+            );
 
-            CodeRegionDirective directive2 = new CodeRegionDirective(CodeRegionMode.None, "Region2");
+            CodeRegionDirective directive2 = new CodeRegionDirective(
+                CodeRegionMode.None,
+                "Region2"
+            );
             statement.StartDirectives.Add(directive2);
-            Assert.Equal(new CodeRegionDirective[] { directive1, directive2 }, statement.StartDirectives.Cast<CodeDirective>());
+            Assert.Equal(
+                new CodeRegionDirective[] { directive1, directive2 },
+                statement.StartDirectives.Cast<CodeDirective>()
+            );
         }
 
         [Fact]
@@ -45,13 +58,25 @@ namespace System.CodeDom.Tests
         {
             CodeStatement statement = new T();
 
-            CodeRegionDirective directive1 = new CodeRegionDirective(CodeRegionMode.None, "Region1");
+            CodeRegionDirective directive1 = new CodeRegionDirective(
+                CodeRegionMode.None,
+                "Region1"
+            );
             statement.EndDirectives.Add(directive1);
-            Assert.Equal(new CodeRegionDirective[] { directive1 }, statement.EndDirectives.Cast<CodeDirective>());
+            Assert.Equal(
+                new CodeRegionDirective[] { directive1 },
+                statement.EndDirectives.Cast<CodeDirective>()
+            );
 
-            CodeRegionDirective directive2 = new CodeRegionDirective(CodeRegionMode.None, "Region2");
+            CodeRegionDirective directive2 = new CodeRegionDirective(
+                CodeRegionMode.None,
+                "Region2"
+            );
             statement.EndDirectives.Add(directive2);
-            Assert.Equal(new CodeRegionDirective[] { directive1, directive2 }, statement.EndDirectives.Cast<CodeDirective>());
+            Assert.Equal(
+                new CodeRegionDirective[] { directive1, directive2 },
+                statement.EndDirectives.Cast<CodeDirective>()
+            );
         }
     }
 }

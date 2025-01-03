@@ -26,13 +26,19 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             Assert.Equal(1, cms.SignerInfos[0].UnsignedAttributes.Count);
             Assert.Equal(1, cms.SignerInfos[0].UnsignedAttributes[0].Values.Count);
-            VerifyAttributesAreEqual(cms.SignerInfos[0].UnsignedAttributes[0].Values[0], attribute1);
+            VerifyAttributesAreEqual(
+                cms.SignerInfos[0].UnsignedAttributes[0].Values[0],
+                attribute1
+            );
 
             ReReadSignedCms(ref cms);
 
             Assert.Equal(1, cms.SignerInfos[0].UnsignedAttributes.Count);
             Assert.Equal(1, cms.SignerInfos[0].UnsignedAttributes[0].Values.Count);
-            VerifyAttributesAreEqual(cms.SignerInfos[0].UnsignedAttributes[0].Values[0], attribute1);
+            VerifyAttributesAreEqual(
+                cms.SignerInfos[0].UnsignedAttributes[0].Values[0],
+                attribute1
+            );
 
             AsnEncodedData attribute2 = CreateTimestampToken(2);
 
@@ -61,19 +67,28 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             Assert.Equal(2, cms.SignerInfos[0].UnsignedAttributes.Count);
             Assert.Equal(2, cms.SignerInfos[0].CounterSignerInfos.Count);
-            byte[] secondSignerCounterSignature = cms.SignerInfos[0].CounterSignerInfos[1].GetSignature();
+            byte[] secondSignerCounterSignature = cms.SignerInfos[0]
+                .CounterSignerInfos[1]
+                .GetSignature();
 
-            cms.SignerInfos[0].RemoveUnsignedAttribute(cms.SignerInfos[0].UnsignedAttributes[0].Values[0]);
+            cms.SignerInfos[0]
+                .RemoveUnsignedAttribute(cms.SignerInfos[0].UnsignedAttributes[0].Values[0]);
 
             Assert.Equal(1, cms.SignerInfos[0].UnsignedAttributes.Count);
             Assert.Equal(1, cms.SignerInfos[0].CounterSignerInfos.Count);
-            Assert.Equal(secondSignerCounterSignature, cms.SignerInfos[0].CounterSignerInfos[0].GetSignature());
+            Assert.Equal(
+                secondSignerCounterSignature,
+                cms.SignerInfos[0].CounterSignerInfos[0].GetSignature()
+            );
 
             ReReadSignedCms(ref cms);
 
             Assert.Equal(1, cms.SignerInfos[0].UnsignedAttributes.Count);
             Assert.Equal(1, cms.SignerInfos[0].CounterSignerInfos.Count);
-            Assert.Equal(secondSignerCounterSignature, cms.SignerInfos[0].CounterSignerInfos[0].GetSignature());
+            Assert.Equal(
+                secondSignerCounterSignature,
+                cms.SignerInfos[0].CounterSignerInfos[0].GetSignature()
+            );
         }
 
         [Fact]
@@ -113,7 +128,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             // We did modify the state
             Assert.Equal(1, cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes.Count);
-            Assert.Equal(1, cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes[0].Values.Count);
+            Assert.Equal(
+                1,
+                cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes[0].Values.Count
+            );
 
             ReReadSignedCms(ref cms);
 
@@ -132,12 +150,16 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
         [Theory]
         [MemberData(nameof(SignedDocumentsWithAttributesTestData))]
-        public static void SignerInfo_RemoveUnsignedAttributes_RemoveAllAttributesFromBeginning(byte[] document)
+        public static void SignerInfo_RemoveUnsignedAttributes_RemoveAllAttributesFromBeginning(
+            byte[] document
+        )
         {
             SignedCms cms = new SignedCms();
             cms.Decode(document);
 
-            List<AsnEncodedData> attributes = GetAllAsnEncodedDataFromAttributes(cms.SignerInfos[0].UnsignedAttributes);
+            List<AsnEncodedData> attributes = GetAllAsnEncodedDataFromAttributes(
+                cms.SignerInfos[0].UnsignedAttributes
+            );
             Assert.True(attributes.Count > 0);
 
             for (int i = 0; i < attributes.Count; i++)
@@ -155,12 +177,16 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
         [Theory]
         [MemberData(nameof(SignedDocumentsWithAttributesTestData))]
-        public static void SignerInfo_RemoveUnsignedAttributes_RemoveAllAttributesFromEnd(byte[] document)
+        public static void SignerInfo_RemoveUnsignedAttributes_RemoveAllAttributesFromEnd(
+            byte[] document
+        )
         {
             SignedCms cms = new SignedCms();
             cms.Decode(document);
 
-            List<AsnEncodedData> attributes = GetAllAsnEncodedDataFromAttributes(cms.SignerInfos[0].UnsignedAttributes);
+            List<AsnEncodedData> attributes = GetAllAsnEncodedDataFromAttributes(
+                cms.SignerInfos[0].UnsignedAttributes
+            );
             Assert.True(attributes.Count > 0);
 
             for (int i = attributes.Count - 1; i >= 0; i--)
@@ -185,8 +211,13 @@ namespace System.Security.Cryptography.Pkcs.Tests
             int numberOfAttributes = cms.SignerInfos[0].UnsignedAttributes.Count;
             Assert.NotEqual(0, numberOfAttributes);
 
-            AsnEncodedData fakeAttribute = new AsnEncodedData(new Oid("1.2.3.4", "1.2.3.4"), cms.SignerInfos[0].UnsignedAttributes[0].Values[0].RawData);
-            Assert.Throws<CryptographicException>(() => cms.SignerInfos[0].RemoveUnsignedAttribute(fakeAttribute));
+            AsnEncodedData fakeAttribute = new AsnEncodedData(
+                new Oid("1.2.3.4", "1.2.3.4"),
+                cms.SignerInfos[0].UnsignedAttributes[0].Values[0].RawData
+            );
+            Assert.Throws<CryptographicException>(
+                () => cms.SignerInfos[0].RemoveUnsignedAttribute(fakeAttribute)
+            );
 
             Assert.Equal(numberOfAttributes, cms.SignerInfos[0].UnsignedAttributes.Count);
         }
@@ -202,8 +233,11 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             AsnEncodedData fakeAttribute = new AsnEncodedData(
                 cms.SignerInfos[0].UnsignedAttributes[0].Oid,
-                cms.SignerInfos[0].UnsignedAttributes[0].Values[0].RawData.Skip(1).ToArray());
-            Assert.Throws<CryptographicException>(() => cms.SignerInfos[0].RemoveUnsignedAttribute(fakeAttribute));
+                cms.SignerInfos[0].UnsignedAttributes[0].Values[0].RawData.Skip(1).ToArray()
+            );
+            Assert.Throws<CryptographicException>(
+                () => cms.SignerInfos[0].RemoveUnsignedAttribute(fakeAttribute)
+            );
 
             Assert.Equal(numberOfAttributes, cms.SignerInfos[0].UnsignedAttributes.Count);
         }
@@ -227,7 +261,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             cms.SignerInfos[0].RemoveUnsignedAttribute(attribute1);
             Assert.Equal(1, cms.SignerInfos[0].UnsignedAttributes.Count);
             Assert.Equal(1, cms.SignerInfos[0].UnsignedAttributes[0].Values.Count);
-            Assert.True(AsnEncodedDataEqual(attribute2, cms.SignerInfos[0].UnsignedAttributes[0].Values[0]));
+            Assert.True(
+                AsnEncodedDataEqual(attribute2, cms.SignerInfos[0].UnsignedAttributes[0].Values[0])
+            );
 
             cms.SignerInfos[0].RemoveUnsignedAttribute(attribute2);
             Assert.Equal(0, cms.SignerInfos[0].UnsignedAttributes.Count);
@@ -240,29 +276,43 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ContentInfo content = new ContentInfo(message);
             SignedCms cms = new SignedCms(content);
 
-            using (X509Certificate2 signerCert = Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 signerCert =
+                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+            )
             {
-                CmsSigner signer = new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, signerCert);
+                CmsSigner signer = new CmsSigner(
+                    SubjectIdentifierType.IssuerAndSerialNumber,
+                    signerCert
+                );
                 cms.ComputeSignature(signer);
             }
 
             // DSA is not supported on mobile Apple platforms, so use ECDsa key instead
-            X509Certificate2 counterSigner1cert =
-                PlatformDetection.UsesMobileAppleCrypto ?
-                Certificates.ECDsaP521Win.TryGetCertificateWithPrivateKey() :
-                Certificates.Dsa1024.TryGetCertificateWithPrivateKey();
+            X509Certificate2 counterSigner1cert = PlatformDetection.UsesMobileAppleCrypto
+                ? Certificates.ECDsaP521Win.TryGetCertificateWithPrivateKey()
+                : Certificates.Dsa1024.TryGetCertificateWithPrivateKey();
 
             using (counterSigner1cert)
             {
-                CmsSigner counterSigner = new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, counterSigner1cert);
+                CmsSigner counterSigner = new CmsSigner(
+                    SubjectIdentifierType.IssuerAndSerialNumber,
+                    counterSigner1cert
+                );
                 counterSigner.IncludeOption = X509IncludeOption.EndCertOnly;
                 counterSigner.DigestAlgorithm = new Oid(Oids.Sha1, Oids.Sha1);
                 cms.SignerInfos[0].ComputeCounterSignature(counterSigner);
             }
 
-            using (X509Certificate2 counterSigner2cert = Certificates.ECDsaP256Win.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 counterSigner2cert =
+                    Certificates.ECDsaP256Win.TryGetCertificateWithPrivateKey()
+            )
             {
-                CmsSigner counterSigner = new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, counterSigner2cert);
+                CmsSigner counterSigner = new CmsSigner(
+                    SubjectIdentifierType.IssuerAndSerialNumber,
+                    counterSigner2cert
+                );
                 cms.SignerInfos[0].ComputeCounterSignature(counterSigner);
             }
 
@@ -291,8 +341,12 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             AsnEncodedData fakeAttribute = new AsnEncodedData(
                 cms.SignerInfos[0].UnsignedAttributes[0].Oid,
-                cms.SignerInfos[0].UnsignedAttributes[0].Values[0].RawData.Skip(1).ToArray());
-            Assert.Throws<CryptographicException>(() => cms.SignerInfos[0].CounterSignerInfos[0].RemoveUnsignedAttribute(fakeAttribute));
+                cms.SignerInfos[0].UnsignedAttributes[0].Values[0].RawData.Skip(1).ToArray()
+            );
+            Assert.Throws<CryptographicException>(
+                () =>
+                    cms.SignerInfos[0].CounterSignerInfos[0].RemoveUnsignedAttribute(fakeAttribute)
+            );
 
             Assert.Equal(numberOfAttributes, cms.SignerInfos[0].UnsignedAttributes.Count);
         }
@@ -334,8 +388,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
             // note: counter signers got sorted when encoded
             Assert.Equal(0, cms.SignerInfos[0].CounterSignerInfos[0].UnsignedAttributes.Count);
             Assert.Equal(1, cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes.Count);
-            Assert.Equal(1, cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes[0].Values.Count);
-            VerifyAttributesAreEqual(cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes[0].Values[0], attribute);
+            Assert.Equal(
+                1,
+                cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes[0].Values.Count
+            );
+            VerifyAttributesAreEqual(
+                cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes[0].Values[0],
+                attribute
+            );
 
             ReReadSignedCms(ref cms);
 
@@ -343,8 +403,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(2, cms.SignerInfos[0].CounterSignerInfos.Count);
             Assert.Equal(0, cms.SignerInfos[0].CounterSignerInfos[0].UnsignedAttributes.Count);
             Assert.Equal(1, cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes.Count);
-            Assert.Equal(1, cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes[0].Values.Count);
-            VerifyAttributesAreEqual(cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes[0].Values[0], attribute);
+            Assert.Equal(
+                1,
+                cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes[0].Values.Count
+            );
+            VerifyAttributesAreEqual(
+                cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes[0].Values[0],
+                attribute
+            );
         }
 
         [Fact]
@@ -374,7 +440,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             List<AsnEncodedData> expectedAttributes = new List<AsnEncodedData>()
             {
                 attribute1,
-                attribute2
+                attribute2,
             };
 
             // we didn't modify existing instances
@@ -389,13 +455,22 @@ namespace System.Security.Cryptography.Pkcs.Tests
             //   - on first Add call we update the parent so the `signer` gets updated
             //   - on second Add call we also update the parent but `signer` is not actually the parent anymore
             Assert.Equal(1, signer.CounterSignerInfos[0].UnsignedAttributes[0].Values.Count);
-            VerifyAttributesAreEqual(signer.CounterSignerInfos[0].UnsignedAttributes[0].Values[0], attribute1);
+            VerifyAttributesAreEqual(
+                signer.CounterSignerInfos[0].UnsignedAttributes[0].Values[0],
+                attribute1
+            );
             Assert.Equal(0, signer.CounterSignerInfos[1].UnsignedAttributes.Count);
 
             Assert.Equal(0, signerAfterFirstCall.CounterSignerInfos[0].UnsignedAttributes.Count);
             Assert.Equal(1, signerAfterFirstCall.CounterSignerInfos[1].UnsignedAttributes.Count);
-            Assert.Equal(2, signerAfterFirstCall.CounterSignerInfos[1].UnsignedAttributes[0].Values.Count);
-            VerifyAttributesContainsAll(signerAfterFirstCall.CounterSignerInfos[1].UnsignedAttributes, expectedAttributes);
+            Assert.Equal(
+                2,
+                signerAfterFirstCall.CounterSignerInfos[1].UnsignedAttributes[0].Values.Count
+            );
+            VerifyAttributesContainsAll(
+                signerAfterFirstCall.CounterSignerInfos[1].UnsignedAttributes,
+                expectedAttributes
+            );
 
             // verify we didn't modify anything we shouldn't
             Assert.Equal(1, cms.SignerInfos.Count);
@@ -420,8 +495,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(2, cms.SignerInfos[0].CounterSignerInfos.Count);
             Assert.Equal(0, cms.SignerInfos[0].CounterSignerInfos[0].UnsignedAttributes.Count);
             Assert.Equal(1, cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes.Count);
-            Assert.Equal(2, cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes[0].Values.Count);
-            VerifyAttributesContainsAll(cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes, expectedAttributes);
+            Assert.Equal(
+                2,
+                cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes[0].Values.Count
+            );
+            VerifyAttributesContainsAll(
+                cms.SignerInfos[0].CounterSignerInfos[1].UnsignedAttributes,
+                expectedAttributes
+            );
         }
 
         [Fact]
@@ -438,8 +519,12 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(0, counterSigner.UnsignedAttributes.Count);
 
             AsnEncodedData attribute = CreateTimestampToken(1);
-            Assert.Throws<CryptographicException>(() => counterSigner.AddUnsignedAttribute(attribute));
-            Assert.Throws<CryptographicException>(() => counterSigner.RemoveUnsignedAttribute(attribute));
+            Assert.Throws<CryptographicException>(
+                () => counterSigner.AddUnsignedAttribute(attribute)
+            );
+            Assert.Throws<CryptographicException>(
+                () => counterSigner.RemoveUnsignedAttribute(attribute)
+            );
         }
 
         [Fact]
@@ -456,11 +541,18 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(0, counterSigner.UnsignedAttributes.Count);
 
             AsnEncodedData attribute = CreateTimestampToken(1);
-            Assert.Throws<CryptographicException>(() => counterSigner.AddUnsignedAttribute(attribute));
-            Assert.Throws<CryptographicException>(() => counterSigner.RemoveUnsignedAttribute(attribute));
+            Assert.Throws<CryptographicException>(
+                () => counterSigner.AddUnsignedAttribute(attribute)
+            );
+            Assert.Throws<CryptographicException>(
+                () => counterSigner.RemoveUnsignedAttribute(attribute)
+            );
         }
 
-        private static void VerifyAttributesContainsAll(CryptographicAttributeObjectCollection attributes, List<AsnEncodedData> expectedAttributes)
+        private static void VerifyAttributesContainsAll(
+            CryptographicAttributeObjectCollection attributes,
+            List<AsnEncodedData> expectedAttributes
+        )
         {
             var indices = new HashSet<int>();
             foreach (CryptographicAttributeObject attribute in attributes)
@@ -489,7 +581,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             return -1;
         }
 
-        private static List<AsnEncodedData> GetAllAsnEncodedDataFromAttributes(CryptographicAttributeObjectCollection attributes)
+        private static List<AsnEncodedData> GetAllAsnEncodedDataFromAttributes(
+            CryptographicAttributeObjectCollection attributes
+        )
         {
             var ret = new List<AsnEncodedData>();
             foreach (CryptographicAttributeObject attribute in attributes)
@@ -528,7 +622,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 hashAlgorithmId,
                 new byte[256 / 8],
                 new byte[] { (byte)serial },
-                DateTimeOffset.UtcNow);
+                DateTimeOffset.UtcNow
+            );
 
             return new AsnEncodedData(tokenOid, tokenInfo.Encode());
         }
@@ -540,12 +635,19 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             // We need to decode bytes because DER and BER may encode the same information slightly differently
             Rfc3161TimestampTokenInfo expectedToken;
-            Assert.True(Rfc3161TimestampTokenInfo.TryDecode(expected.RawData, out expectedToken, out _));
+            Assert.True(
+                Rfc3161TimestampTokenInfo.TryDecode(expected.RawData, out expectedToken, out _)
+            );
 
             Rfc3161TimestampTokenInfo actualToken;
-            Assert.True(Rfc3161TimestampTokenInfo.TryDecode(actual.RawData, out actualToken, out _));
+            Assert.True(
+                Rfc3161TimestampTokenInfo.TryDecode(actual.RawData, out actualToken, out _)
+            );
 
-            Assert.Equal(expectedToken.GetSerialNumber().ByteArrayToHex(), actualToken.GetSerialNumber().ByteArrayToHex());
+            Assert.Equal(
+                expectedToken.GetSerialNumber().ByteArrayToHex(),
+                actualToken.GetSerialNumber().ByteArrayToHex()
+            );
             Assert.Equal(expectedToken.Timestamp, actualToken.Timestamp);
             Assert.Equal(Oids.Sha256, expectedToken.HashAlgorithmId.Value);
             Assert.Equal(expectedToken.HashAlgorithmId.Value, actualToken.HashAlgorithmId.Value);
@@ -554,10 +656,13 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static IEnumerable<object[]> SignedDocumentsWithAttributesTestData()
         {
             yield return new object[] { SignedDocuments.CounterSignedRsaPkcs1OneSigner };
-            yield return new object[] { SignedDocuments.NoSignatureSignedWithAttributesAndCounterSignature };
+            yield return new object[]
+            {
+                SignedDocuments.NoSignatureSignedWithAttributesAndCounterSignature,
+            };
             yield return new object[] { SignedDocuments.OneRsaSignerTwoRsaCounterSigners };
             yield return new object[] { SignedDocuments.RsaPkcs1CounterSignedWithNoSignature };
-            yield return new object[] { SignedDocuments.UnsortedSignerInfos};
+            yield return new object[] { SignedDocuments.UnsortedSignerInfos };
         }
     }
 }

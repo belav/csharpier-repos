@@ -73,7 +73,8 @@ namespace System.Runtime.InteropServices
     {
         private nuint _numBytes;
 
-        protected SafeBuffer(bool ownsHandle) : base(ownsHandle)
+        protected SafeBuffer(bool ownsHandle)
+            : base(ownsHandle)
         {
             _numBytes = Uninitialized;
         }
@@ -89,10 +90,16 @@ namespace System.Runtime.InteropServices
         public void Initialize(ulong numBytes)
         {
             if (IntPtr.Size == 4 && numBytes > uint.MaxValue)
-                throw new ArgumentOutOfRangeException(nameof(numBytes), SR.ArgumentOutOfRange_AddressSpace);
+                throw new ArgumentOutOfRangeException(
+                    nameof(numBytes),
+                    SR.ArgumentOutOfRange_AddressSpace
+                );
 
             if (numBytes >= (ulong)Uninitialized)
-                throw new ArgumentOutOfRangeException(nameof(numBytes), SR.ArgumentOutOfRange_UIntPtrMax);
+                throw new ArgumentOutOfRangeException(
+                    nameof(numBytes),
+                    SR.ArgumentOutOfRange_UIntPtrMax
+                );
 
             _numBytes = (nuint)numBytes;
         }
@@ -112,7 +119,8 @@ namespace System.Runtime.InteropServices
         /// elements in an array.  Must be called before using the SafeBuffer.
         /// </summary>
         [CLSCompliant(false)]
-        public void Initialize<T>(uint numElements) where T : struct
+        public void Initialize<T>(uint numElements)
+            where T : struct
         {
             Initialize(numElements, AlignedSizeOf<T>());
         }
@@ -178,7 +186,8 @@ namespace System.Runtime.InteropServices
         /// may have to consider alignment.</param>
         /// <returns>An instance of T read from memory.</returns>
         [CLSCompliant(false)]
-        public T Read<T>(ulong byteOffset) where T : struct
+        public T Read<T>(ulong byteOffset)
+            where T : struct
         {
             if (_numBytes == Uninitialized)
                 throw NotInitialized();
@@ -248,7 +257,11 @@ namespace System.Runtime.InteropServices
 
                 ref T structure = ref MemoryMarshal.GetReference(buffer);
                 for (int i = 0; i < buffer.Length; i++)
-                    Buffer.Memmove(ref Unsafe.Add(ref structure, i), ref Unsafe.AsRef<T>(ptr + alignedSizeofT * i), 1);
+                    Buffer.Memmove(
+                        ref Unsafe.Add(ref structure, i),
+                        ref Unsafe.AsRef<T>(ptr + alignedSizeofT * i),
+                        1
+                    );
             }
             finally
             {
@@ -266,7 +279,8 @@ namespace System.Runtime.InteropServices
         /// may have to consider alignment.</param>
         /// <param name="value">The value type to write to memory.</param>
         [CLSCompliant(false)]
-        public void Write<T>(ulong byteOffset, T value) where T : struct
+        public void Write<T>(ulong byteOffset, T value)
+            where T : struct
         {
             if (_numBytes == Uninitialized)
                 throw NotInitialized();
@@ -336,7 +350,11 @@ namespace System.Runtime.InteropServices
 
                 ref T structure = ref MemoryMarshal.GetReference(data);
                 for (int i = 0; i < data.Length; i++)
-                    Buffer.Memmove(ref Unsafe.AsRef<T>(ptr + alignedSizeofT * i), ref Unsafe.Add(ref structure, i), 1);
+                    Buffer.Memmove(
+                        ref Unsafe.AsRef<T>(ptr + alignedSizeofT * i),
+                        ref Unsafe.Add(ref structure, i),
+                        1
+                    );
             }
             finally
             {
@@ -386,7 +404,8 @@ namespace System.Runtime.InteropServices
         /// value that sizeof(T) returns! Since the primary use case is to parse memory mapped files, we cannot change this algorithm as this defines a de-facto serialization format.
         /// Throws if T contains GC references.
         /// </summary>
-        internal static uint AlignedSizeOf<T>() where T : struct
+        internal static uint AlignedSizeOf<T>()
+            where T : struct
         {
             uint size = SizeOf<T>();
             if (size == 1 || size == 2)
@@ -400,7 +419,8 @@ namespace System.Runtime.InteropServices
         /// <summary>
         /// Returns same value as sizeof(T) but throws if T contains GC references.
         /// </summary>
-        internal static uint SizeOf<T>() where T : struct
+        internal static uint SizeOf<T>()
+            where T : struct
         {
             if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
                 throw new ArgumentException(SR.Argument_NeedStructWithNoRefs);
