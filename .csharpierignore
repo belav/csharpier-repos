@@ -62,6 +62,16 @@
 /runtime/src/tests/Interop/PInvoke/BestFitMapping/LPStr/ATF_PFT/ATF_PFT.cs
 /runtime/src/tests/Interop/PInvoke/BestFitMapping/LPStr/AFF_PFT/AFF_PFT.cs
 /runtime/src/tests/Interop/PInvoke/BestFitMapping/LPStr/AFT_PFT/AFT_PFT.cs
+/mono/mcs/class/System/Mono.Net.Security/SystemCertificateValidator.cs
+/mono/mcs/class/System/Mono.Net.Security/MobileTlsContext.cs
+/mono/mcs/class/System/Mono.Net.Security/CallbackHelpers.cs
+/mono/mcs/class/System/Mono.Btls/X509CertificateImplBtls.cs
+/mono/mcs/class/System/Mono.Net.Security/ChainValidationHelper.cs
+/mono/mcs/class/System/Mono.Net.Security/MobileAuthenticatedStream.cs
+/mono/mcs/class/System/Mono.Net.Security/MobileTlsProvider.cs
+/mono/mcs/class/System/Mono.Btls/X509PalImpl.Btls.cs
+/mono/mcs/class/System/Mono.Net.Security/NoReflectionHelper.cs
+/mono/mcs/class/referencesource/System.Web.DataVisualization/Common/General/SubAxis.cs
 /mono/mcs/tools/sqlmetal/src/DbLinq/Test/Providers/Linq_101_Samples/ExsistIn_Any_All.cs
 /mono/mcs/tools/sqlmetal/src/DbLinq/Test/Providers/Linq_101_Samples/Object Loading.cs
 /mono/mcs/tools/sqlmetal/src/DbLinq/Test/Providers/Linq_101_Samples/Advanced.cs
