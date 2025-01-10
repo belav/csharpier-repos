@@ -13,5 +13,6 @@ public sealed class HealthCheckServiceOptions
     /// <summary>
     /// Gets the health check registrations.
     /// </summary>
-    public ICollection<HealthCheckRegistration> Registrations { get; } = new List<HealthCheckRegistration>();
+    public ICollection<HealthCheckRegistration> Registrations { get; } =
+        new List<HealthCheckRegistration>();
 }

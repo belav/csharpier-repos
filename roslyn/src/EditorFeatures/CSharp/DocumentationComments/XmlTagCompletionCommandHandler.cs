@@ -20,27 +20,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
     [Order(Before = PredefinedCompletionNames.CompletionCommandHandler)]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class XmlTagCompletionCommandHandler(ITextUndoHistoryRegistry undoHistory) : AbstractXmlTagCompletionCommandHandler<
-        XmlNameSyntax,
-        XmlTextSyntax,
-        XmlElementSyntax,
-        XmlElementStartTagSyntax,
-        XmlElementEndTagSyntax,
-        DocumentationCommentTriviaSyntax>(undoHistory)
+    internal sealed class XmlTagCompletionCommandHandler(ITextUndoHistoryRegistry undoHistory)
+        : AbstractXmlTagCompletionCommandHandler<
+            XmlNameSyntax,
+            XmlTextSyntax,
+            XmlElementSyntax,
+            XmlElementStartTagSyntax,
+            XmlElementEndTagSyntax,
+            DocumentationCommentTriviaSyntax
+        >(undoHistory)
     {
-        protected override XmlElementStartTagSyntax GetStartTag(XmlElementSyntax xmlElement)
-            => xmlElement.StartTag;
+        protected override XmlElementStartTagSyntax GetStartTag(XmlElementSyntax xmlElement) =>
+            xmlElement.StartTag;
 
-        protected override XmlElementEndTagSyntax GetEndTag(XmlElementSyntax xmlElement)
-            => xmlElement.EndTag;
+        protected override XmlElementEndTagSyntax GetEndTag(XmlElementSyntax xmlElement) =>
+            xmlElement.EndTag;
 
-        protected override XmlNameSyntax GetName(XmlElementEndTagSyntax endTag)
-            => endTag.Name;
+        protected override XmlNameSyntax GetName(XmlElementEndTagSyntax endTag) => endTag.Name;
 
-        protected override XmlNameSyntax GetName(XmlElementStartTagSyntax startTag)
-            => startTag.Name;
+        protected override XmlNameSyntax GetName(XmlElementStartTagSyntax startTag) =>
+            startTag.Name;
 
-        protected override SyntaxToken GetLocalName(XmlNameSyntax name)
-            => name.LocalName;
+        protected override SyntaxToken GetLocalName(XmlNameSyntax name) => name.LocalName;
     }
 }

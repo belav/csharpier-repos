@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -29,10 +29,11 @@ namespace System.Linq.Parallel
     //
 
     /// <summary>
-    /// A class with some shared implementation between all aggregation enumerators. 
+    /// A class with some shared implementation between all aggregation enumerators.
     /// </summary>
     /// <typeparam name="TIntermediate"></typeparam>
-    internal abstract class InlinedAggregationOperatorEnumerator<TIntermediate> : QueryOperatorEnumerator<TIntermediate, int>
+    internal abstract class InlinedAggregationOperatorEnumerator<TIntermediate>
+        : QueryOperatorEnumerator<TIntermediate, int>
     {
         private int m_partitionIndex; // This partition's unique index.
         private bool m_done = false;
@@ -42,7 +43,10 @@ namespace System.Linq.Parallel
         // Instantiates a new aggregation operator.
         //
 
-        internal InlinedAggregationOperatorEnumerator(int partitionIndex, CancellationToken cancellationToken)
+        internal InlinedAggregationOperatorEnumerator(
+            int partitionIndex,
+            CancellationToken cancellationToken
+        )
         {
             m_partitionIndex = partitionIndex;
             m_cancellationToken = cancellationToken;
@@ -68,6 +72,5 @@ namespace System.Linq.Parallel
         }
 
         protected abstract bool MoveNextCore(ref TIntermediate currentElement);
-
     }
 }

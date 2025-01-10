@@ -45,10 +45,20 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { 1, typeof(int), typeof(object) };
             yield return new object[] { 42, typeof(int), typeof(object) };
             yield return new object[] { DateTime.MinValue, typeof(DateTime), typeof(object) };
-            yield return new object[] { DateTimeOffset.MinValue, typeof(DateTimeOffset), typeof(object) };
+            yield return new object[]
+            {
+                DateTimeOffset.MinValue,
+                typeof(DateTimeOffset),
+                typeof(object),
+            };
             yield return new object[] { 42L, typeof(long), typeof(object) };
             yield return new object[] { 13m, typeof(decimal), typeof(object) };
-            yield return new object[] { ExpressionType.Unbox, typeof(ExpressionType), typeof(object) };
+            yield return new object[]
+            {
+                ExpressionType.Unbox,
+                typeof(ExpressionType),
+                typeof(object),
+            };
         }
 
         public static IEnumerable<object[]> NullableUnboxableFromObject()
@@ -56,10 +66,20 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { 1, typeof(int?), typeof(object) };
             yield return new object[] { 42, typeof(int?), typeof(object) };
             yield return new object[] { DateTime.MinValue, typeof(DateTime?), typeof(object) };
-            yield return new object[] { DateTimeOffset.MinValue, typeof(DateTimeOffset?), typeof(object) };
+            yield return new object[]
+            {
+                DateTimeOffset.MinValue,
+                typeof(DateTimeOffset?),
+                typeof(object),
+            };
             yield return new object[] { 42L, typeof(long?), typeof(object) };
             yield return new object[] { 13m, typeof(decimal?), typeof(object) };
-            yield return new object[] { ExpressionType.Unbox, typeof(ExpressionType?), typeof(object) };
+            yield return new object[]
+            {
+                ExpressionType.Unbox,
+                typeof(ExpressionType?),
+                typeof(object),
+            };
         }
 
         public static IEnumerable<object[]> UnboxableFromIComparable()
@@ -67,10 +87,20 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { 1, typeof(int), typeof(IComparable) };
             yield return new object[] { 42, typeof(int), typeof(IComparable) };
             yield return new object[] { DateTime.MinValue, typeof(DateTime), typeof(IComparable) };
-            yield return new object[] { DateTimeOffset.MinValue, typeof(DateTimeOffset), typeof(IComparable) };
+            yield return new object[]
+            {
+                DateTimeOffset.MinValue,
+                typeof(DateTimeOffset),
+                typeof(IComparable),
+            };
             yield return new object[] { 42L, typeof(long), typeof(IComparable) };
             yield return new object[] { 13m, typeof(decimal), typeof(IComparable) };
-            yield return new object[] { ExpressionType.Unbox, typeof(ExpressionType), typeof(IComparable) };
+            yield return new object[]
+            {
+                ExpressionType.Unbox,
+                typeof(ExpressionType),
+                typeof(IComparable),
+            };
         }
 
         public static IEnumerable<object[]> NullableUnboxableFromIComparable()
@@ -78,18 +108,38 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { 1, typeof(int?), typeof(IComparable) };
             yield return new object[] { 42, typeof(int?), typeof(IComparable) };
             yield return new object[] { DateTime.MinValue, typeof(DateTime?), typeof(IComparable) };
-            yield return new object[] { DateTimeOffset.MinValue, typeof(DateTimeOffset?), typeof(IComparable) };
+            yield return new object[]
+            {
+                DateTimeOffset.MinValue,
+                typeof(DateTimeOffset?),
+                typeof(IComparable),
+            };
             yield return new object[] { 42L, typeof(long?), typeof(IComparable) };
             yield return new object[] { 13m, typeof(decimal?), typeof(IComparable) };
-            yield return new object[] { ExpressionType.Unbox, typeof(ExpressionType?), typeof(IComparable) };
+            yield return new object[]
+            {
+                ExpressionType.Unbox,
+                typeof(ExpressionType?),
+                typeof(IComparable),
+            };
         }
 
         public static IEnumerable<object[]> UnboxableFromIComparableT()
         {
             yield return new object[] { 1, typeof(int), typeof(IComparable<int>) };
             yield return new object[] { 42, typeof(int), typeof(IComparable<int>) };
-            yield return new object[] { DateTime.MinValue, typeof(DateTime), typeof(IComparable<DateTime>) };
-            yield return new object[] { DateTimeOffset.MinValue, typeof(DateTimeOffset), typeof(IComparable<DateTimeOffset>) };
+            yield return new object[]
+            {
+                DateTime.MinValue,
+                typeof(DateTime),
+                typeof(IComparable<DateTime>),
+            };
+            yield return new object[]
+            {
+                DateTimeOffset.MinValue,
+                typeof(DateTimeOffset),
+                typeof(IComparable<DateTimeOffset>),
+            };
             yield return new object[] { 42L, typeof(long), typeof(IComparable<long>) };
             yield return new object[] { 13m, typeof(decimal), typeof(IComparable<decimal>) };
         }
@@ -98,8 +148,18 @@ namespace System.Linq.Expressions.Tests
         {
             yield return new object[] { 1, typeof(int?), typeof(IComparable<int>) };
             yield return new object[] { 42, typeof(int?), typeof(IComparable<int>) };
-            yield return new object[] { DateTime.MinValue, typeof(DateTime?), typeof(IComparable<DateTime>) };
-            yield return new object[] { DateTimeOffset.MinValue, typeof(DateTimeOffset?), typeof(IComparable<DateTimeOffset>) };
+            yield return new object[]
+            {
+                DateTime.MinValue,
+                typeof(DateTime?),
+                typeof(IComparable<DateTime>),
+            };
+            yield return new object[]
+            {
+                DateTimeOffset.MinValue,
+                typeof(DateTimeOffset?),
+                typeof(IComparable<DateTimeOffset>),
+            };
             yield return new object[] { 42L, typeof(long?), typeof(IComparable<long>) };
             yield return new object[] { 13m, typeof(decimal?), typeof(IComparable<decimal>) };
         }
@@ -119,7 +179,9 @@ namespace System.Linq.Expressions.Tests
         public void NullNullable(Type type, bool useInterpreter)
         {
             UnaryExpression unbox = Expression.Unbox(Expression.Default(typeof(object)), type);
-            Func<bool> isNull = Expression.Lambda<Func<bool>>(Expression.Equal(Expression.Default(type), unbox)).Compile(useInterpreter);
+            Func<bool> isNull = Expression
+                .Lambda<Func<bool>>(Expression.Equal(Expression.Default(type), unbox))
+                .Compile(useInterpreter);
             Assert.True(isNull());
         }
 
@@ -127,14 +189,20 @@ namespace System.Linq.Expressions.Tests
         public void CannotUnboxToNonInterfaceExceptObject()
         {
             Expression value = Expression.Constant(0);
-            AssertExtensions.Throws<ArgumentException>("expression", () => Expression.Unbox(value, typeof(int)));
+            AssertExtensions.Throws<ArgumentException>(
+                "expression",
+                () => Expression.Unbox(value, typeof(int))
+            );
         }
 
         [Fact]
         public void CannotUnboxReferenceType()
         {
             Expression value = Expression.Constant("", typeof(IComparable<string>));
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Unbox(value, typeof(string)));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Unbox(value, typeof(string))
+            );
         }
 
         private static class Unreadable
@@ -149,27 +217,39 @@ namespace System.Linq.Expressions.Tests
         public void CannotUnboxUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>("expression", () => Expression.Unbox(value, typeof(int)));
+            AssertExtensions.Throws<ArgumentException>(
+                "expression",
+                () => Expression.Unbox(value, typeof(int))
+            );
         }
 
         [Fact]
         public void ExpressionNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("expression", () => Expression.Unbox(null, typeof(int)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "expression",
+                () => Expression.Unbox(null, typeof(int))
+            );
         }
 
         [Fact]
         public void TypeNull()
         {
             Expression value = Expression.Constant(0, typeof(object));
-            AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.Unbox(value, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => Expression.Unbox(value, null)
+            );
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
         public void MistmatchFailsOnRuntime(bool useInterpreter)
         {
-            Expression unbox = Expression.Unbox(Expression.Constant(0, typeof(object)), typeof(long));
+            Expression unbox = Expression.Unbox(
+                Expression.Constant(0, typeof(object)),
+                typeof(long)
+            );
             Func<long> del = Expression.Lambda<Func<long>>(unbox).Compile(useInterpreter);
             Assert.Throws<InvalidCastException>(() => del());
         }
@@ -177,7 +257,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void CannotReduce()
         {
-            Expression unbox = Expression.Unbox(Expression.Constant(0, typeof(object)), typeof(int));
+            Expression unbox = Expression.Unbox(
+                Expression.Constant(0, typeof(object)),
+                typeof(int)
+            );
             Assert.False(unbox.CanReduce);
             Assert.Same(unbox, unbox.Reduce());
             AssertExtensions.Throws<ArgumentException>(null, () => unbox.ReduceAndCheck());
@@ -187,14 +270,20 @@ namespace System.Linq.Expressions.Tests
         public static void PointerType()
         {
             Type pointerType = typeof(int).MakePointerType();
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Unbox(Expression.Constant(new object()), pointerType));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Unbox(Expression.Constant(new object()), pointerType)
+            );
         }
 
         [Fact]
         public static void ByRefType()
         {
             Type byRefType = typeof(int).MakeByRefType();
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Unbox(Expression.Constant(new object()), byRefType));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Unbox(Expression.Constant(new object()), byRefType)
+            );
         }
 
         private struct GenericValueType<T>
@@ -206,15 +295,24 @@ namespace System.Linq.Expressions.Tests
         public static void GenericType()
         {
             Type genType = typeof(GenericValueType<>);
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Unbox(Expression.Constant(new object()), genType));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Unbox(Expression.Constant(new object()), genType)
+            );
         }
-
 
         [Fact]
         public static void GenericTypeParameters()
         {
             Type genType = typeof(GenericValueType<>);
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Unbox(Expression.Constant(new object()), genType.MakeGenericType(genType)));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () =>
+                    Expression.Unbox(
+                        Expression.Constant(new object()),
+                        genType.MakeGenericType(genType)
+                    )
+            );
         }
     }
 }

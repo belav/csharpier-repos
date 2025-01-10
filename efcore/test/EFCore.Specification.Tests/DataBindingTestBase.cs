@@ -61,23 +61,26 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
                 Id = 43,
                 Name = "Pedro de la Rosa",
                 TeamId = AddedTeam,
-                CarNumber = 13
-            });
+                CarNumber = 13,
+            }
+        );
         drivers.Add(
             new Driver
             {
                 Id = 44,
                 Name = "Kamui Kobayashi",
                 TeamId = AddedTeam,
-                CarNumber = null
-            });
+                CarNumber = null,
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(false)]
     [InlineData(true)]
     public virtual void DbSet_Local_contains_Unchanged_Modified_and_Added_entities_but_not_Deleted_entities(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         SetupContext(context);
@@ -98,7 +101,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Adding_entity_to_context_is_reflected_in_local_view(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         var localView = context.Drivers.Local;
@@ -112,7 +116,7 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
         {
             Name = "Larry David",
             TeamId = Team.Ferrari,
-            CarNumber = 13
+            CarNumber = 13,
         };
         context.Drivers.Add(larry);
 
@@ -124,7 +128,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Attaching_entity_to_context_is_reflected_in_local_view(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         var localView = context.Drivers.Local;
@@ -138,7 +143,7 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
         {
             Name = "Larry David",
             TeamId = Team.Ferrari,
-            CarNumber = 13
+            CarNumber = 13,
         };
         context.Drivers.Attach(larry);
 
@@ -150,7 +155,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Entities_materialized_into_context_are_reflected_in_local_view(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         var localView = context.Drivers.Local;
@@ -169,7 +175,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Entities_detached_from_context_are_removed_from_local_view(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         SetupContext(context);
@@ -194,7 +201,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Entities_deleted_from_context_are_removed_from_local_view(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         SetupContext(context);
@@ -219,7 +227,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Entities_with_state_changed_to_deleted_are_removed_from_local_view(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         SetupContext(context);
@@ -244,7 +253,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Entities_with_state_changed_to_detached_are_removed_from_local_view(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         SetupContext(context);
@@ -287,7 +297,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Entities_with_state_changed_from_deleted_to_added_are_added_to_local_view(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         SetupContext(context);
@@ -312,7 +323,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Entities_with_state_changed_from_deleted_to_unchanged_are_added_to_local_view(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         SetupContext(context);
@@ -337,7 +349,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Entities_added_to_local_view_are_added_to_state_manager(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         var localView = context.Drivers.Local;
@@ -352,7 +365,7 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
             Id = -1,
             Name = "Larry David",
             TeamId = Team.Ferrari,
-            CarNumber = 13
+            CarNumber = 13,
         };
 
         local.Add(larry);
@@ -369,7 +382,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Entities_and_owned_children_added_to_local_view_are_added_to_state_manager(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         var localView = context.Teams.Local;
@@ -383,14 +397,14 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
         {
             Id = -1,
             Name = "Larry David",
-            CarNumber = 13
+            CarNumber = 13,
         };
 
         var teamCosmos = new Team
         {
             Id = 66,
             Name = "Cosmos Racing",
-            Drivers = { larry }
+            Drivers = { larry },
         };
 
         local.Add(teamCosmos);
@@ -410,7 +424,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Entities_removed_from_the_local_view_are_marked_deleted_in_the_state_manager(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         SetupContext(context);
@@ -457,7 +472,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Adding_entity_to_local_view_that_is_Deleted_in_the_state_manager_makes_entity_Added(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         SetupContext(context);
@@ -492,7 +508,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Adding_entity_to_state_manager_of_different_type_than_local_keyless_type_has_no_effect_on_local_view(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         SetupContext(context);
@@ -504,8 +521,7 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
 
         Assert.Equal(TotalCount, local.Count);
 
-        context.Teams.Add(
-            new Team { Id = -1, Name = "Wubbsy Racing" });
+        context.Teams.Add(new Team { Id = -1, Name = "Wubbsy Racing" });
 
         Assert.Equal(TotalCount, local.Count);
     }
@@ -514,7 +530,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false)]
     [InlineData(true)]
     public virtual void Adding_entity_to_state_manager_of_subtype_still_shows_up_in_local_view(
-        bool toObservableCollection)
+        bool toObservableCollection
+    )
     {
         using var context = CreateF1Context();
         context.Drivers.Load();
@@ -575,8 +592,7 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalTheory]
     [InlineData(false)]
     [InlineData(true)]
-    public void LocalView_is_initialized_with_entities_from_the_context(
-        bool toObservableCollection)
+    public void LocalView_is_initialized_with_entities_from_the_context(bool toObservableCollection)
     {
         using var context = CreateF1Context();
         context.Drivers.Load();
@@ -599,14 +615,27 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(20, testDriversLocal.Count);
         Assert.Equal(12, teamsLocal.Count);
 
-        Assert.All(context.ChangeTracker.Entries<Driver>().Select(e => e.Entity), e => Assert.True(driversLocal.Contains(e)));
-        Assert.All(context.ChangeTracker.Entries<TestDriver>().Select(e => e.Entity), e => Assert.True(driversLocal.Contains(e)));
         Assert.All(
-            context.ChangeTracker.Entries<TestDriver>().Select(e => e.Entity), e => Assert.True(testDriversLocal.Contains(e)));
-        Assert.All(context.ChangeTracker.Entries<Team>().Select(e => e.Entity), e => Assert.True(teamsLocal.Contains(e)));
+            context.ChangeTracker.Entries<Driver>().Select(e => e.Entity),
+            e => Assert.True(driversLocal.Contains(e))
+        );
+        Assert.All(
+            context.ChangeTracker.Entries<TestDriver>().Select(e => e.Entity),
+            e => Assert.True(driversLocal.Contains(e))
+        );
+        Assert.All(
+            context.ChangeTracker.Entries<TestDriver>().Select(e => e.Entity),
+            e => Assert.True(testDriversLocal.Contains(e))
+        );
+        Assert.All(
+            context.ChangeTracker.Entries<Team>().Select(e => e.Entity),
+            e => Assert.True(teamsLocal.Contains(e))
+        );
 
         Assert.All(
-            context.ChangeTracker.Entries<Driver>().Select(e => e.Entity), e => Assert.DoesNotContain((object)e, teamsLocal));
+            context.ChangeTracker.Entries<Driver>().Select(e => e.Entity),
+            e => Assert.DoesNotContain((object)e, teamsLocal)
+        );
     }
 
     [ConditionalFact]
@@ -635,7 +664,7 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
         {
             Name = "Larry David",
             TeamId = Team.Ferrari,
-            CarNumber = 13
+            CarNumber = 13,
         };
         context.Drivers.Add(larry);
 
@@ -707,7 +736,7 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
             Id = -1,
             Name = "Larry David",
             TeamId = Team.Ferrari,
-            CarNumber = 13
+            CarNumber = 13,
         };
 
         bindingList.Add(larry);
@@ -787,8 +816,7 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
         var bindingList = context.Drivers.Local.ToBindingList();
         var count = bindingList.Count;
 
-        context.Teams.Add(
-            new Team { Id = -1, Name = "Wubbsy Racing" });
+        context.Teams.Add(new Team { Id = -1, Name = "Wubbsy Racing" });
 
         Assert.Equal(count, bindingList.Count);
     }
@@ -811,18 +839,16 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateF1Context();
         var testDrivers = context.Set<TestDriver>();
-        testDrivers.Attach(
-            new TestDriver { Id = 3 });
-        testDrivers.Attach(
-            new TestDriver { Id = 1 });
-        testDrivers.Attach(
-            new TestDriver { Id = 4 });
+        testDrivers.Attach(new TestDriver { Id = 3 });
+        testDrivers.Attach(new TestDriver { Id = 1 });
+        testDrivers.Attach(new TestDriver { Id = 4 });
 
         var bindingList = testDrivers.Local.ToBindingList();
 
         ((IBindingList)bindingList).ApplySort(
             TypeDescriptor.GetProperties(typeof(Driver))["Id"],
-            ListSortDirection.Ascending);
+            ListSortDirection.Ascending
+        );
 
         Assert.Equal(1, bindingList[0].Id);
         Assert.Equal(3, bindingList[1].Id);
@@ -833,18 +859,16 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     public virtual void Sets_containing_instances_of_subtypes_can_still_be_sorted()
     {
         using var context = CreateF1Context();
-        context.Drivers.Attach(
-            new TestDriver { Id = 3 });
-        context.Drivers.Attach(
-            new TestDriver { Id = 1 });
-        context.Drivers.Attach(
-            new TestDriver { Id = 4 });
+        context.Drivers.Attach(new TestDriver { Id = 3 });
+        context.Drivers.Attach(new TestDriver { Id = 1 });
+        context.Drivers.Attach(new TestDriver { Id = 4 });
 
         var bindingList = context.Drivers.Local.ToBindingList();
 
         ((IBindingList)bindingList).ApplySort(
             TypeDescriptor.GetProperties(typeof(Driver))["Id"],
-            ListSortDirection.Ascending);
+            ListSortDirection.Ascending
+        );
 
         Assert.Equal(1, bindingList[0].Id);
         Assert.Equal(3, bindingList[1].Id);
@@ -871,7 +895,7 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
         {
             Name = "Larry David",
             TeamId = Team.Ferrari,
-            CarNumber = 13
+            CarNumber = 13,
         };
         context.Drivers.Add(larry);
 
@@ -891,7 +915,7 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
             Id = -1,
             Name = "Larry David",
             TeamId = Team.Ferrari,
-            CarNumber = 13
+            CarNumber = 13,
         };
         navBindingList.Add(larry);
 
@@ -908,7 +932,8 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(CascadeTiming.OnSaveChanges)]
     [InlineData(CascadeTiming.Never)]
     public virtual void Entity_removed_from_navigation_property_binding_list_is_removed_from_nav_property_but_not_marked_Deleted(
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateF1Context();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;

@@ -3,8 +3,8 @@
 
 using System.Net.Http;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
@@ -22,12 +22,11 @@ public class TestFixture<TStartup> : IDisposable
         using (new CultureReplacer())
         {
             _host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .UseStartup(typeof(TStartup));
-            }).Build();
+                .ConfigureWebHost(webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().UseStartup(typeof(TStartup));
+                })
+                .Build();
 
             _host.Start();
             _server = _host.GetTestServer();

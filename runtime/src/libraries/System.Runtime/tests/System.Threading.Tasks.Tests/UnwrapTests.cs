@@ -13,9 +13,18 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void ArgumentValidation()
         {
-            Assert.Throws<ArgumentNullException>(() => { ((Task<Task>)null).Unwrap(); });
-            Assert.Throws<ArgumentNullException>(() => { ((Task<Task<int>>)null).Unwrap(); });
-            Assert.Throws<ArgumentNullException>(() => { ((Task<Task<string>>)null).Unwrap(); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ((Task<Task>)null).Unwrap();
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ((Task<Task<int>>)null).Unwrap();
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ((Task<Task<string>>)null).Unwrap();
+            });
         }
 
         /// <summary>
@@ -188,7 +197,10 @@ namespace System.Threading.Tasks.Tests
         [InlineData(false, TaskStatus.RanToCompletion)]
         [InlineData(false, TaskStatus.Canceled)]
         [InlineData(false, TaskStatus.Faulted)]
-        public void NonGeneric_NotCompleted_NotCompleted(bool outerCompletesFirst, TaskStatus innerStatus)
+        public void NonGeneric_NotCompleted_NotCompleted(
+            bool outerCompletesFirst,
+            TaskStatus innerStatus
+        )
         {
             var innerTcs = new TaskCompletionSource();
             Task inner = innerTcs.Task;
@@ -239,7 +251,10 @@ namespace System.Threading.Tasks.Tests
         [InlineData(false, TaskStatus.RanToCompletion)]
         [InlineData(false, TaskStatus.Canceled)]
         [InlineData(false, TaskStatus.Faulted)]
-        public void Generic_NotCompleted_NotCompleted(bool outerCompletesFirst, TaskStatus innerStatus)
+        public void Generic_NotCompleted_NotCompleted(
+            bool outerCompletesFirst,
+            TaskStatus innerStatus
+        )
         {
             var innerTcs = new TaskCompletionSource<int>();
             Task<int> inner = innerTcs.Task;
@@ -290,7 +305,10 @@ namespace System.Threading.Tasks.Tests
         [InlineData(false, TaskStatus.RanToCompletion)]
         [InlineData(false, TaskStatus.Faulted)]
         [InlineData(false, TaskStatus.Canceled)]
-        public void NonGeneric_UnsuccessfulOuter(bool outerCompletesBeforeUnwrap, TaskStatus outerStatus)
+        public void NonGeneric_UnsuccessfulOuter(
+            bool outerCompletesBeforeUnwrap,
+            TaskStatus outerStatus
+        )
         {
             var outerTcs = new TaskCompletionSource<Task>();
             Task<Task> outer = outerTcs.Task;
@@ -341,7 +359,10 @@ namespace System.Threading.Tasks.Tests
         [InlineData(false, TaskStatus.RanToCompletion)]
         [InlineData(false, TaskStatus.Faulted)]
         [InlineData(false, TaskStatus.Canceled)]
-        public void Generic_UnsuccessfulOuter(bool outerCompletesBeforeUnwrap, TaskStatus outerStatus)
+        public void Generic_UnsuccessfulOuter(
+            bool outerCompletesBeforeUnwrap,
+            TaskStatus outerStatus
+        )
         {
             var outerTcs = new TaskCompletionSource<Task<int>>();
             Task<Task<int>> outer = outerTcs.Task;
@@ -387,19 +408,29 @@ namespace System.Threading.Tasks.Tests
         public void NonGeneric_AttachedToParent()
         {
             Exception error = new InvalidTimeZoneException();
-            Task parent = Task.Factory.StartNew(() =>
-            {
-                var outerTcs = new TaskCompletionSource<Task>(TaskCreationOptions.AttachedToParent);
-                Task<Task> outer = outerTcs.Task;
+            Task parent = Task.Factory.StartNew(
+                () =>
+                {
+                    var outerTcs = new TaskCompletionSource<Task>(
+                        TaskCreationOptions.AttachedToParent
+                    );
+                    Task<Task> outer = outerTcs.Task;
 
-                Task inner = Task.FromException(error);
+                    Task inner = Task.FromException(error);
 
-                Task unwrappedInner = outer.Unwrap();
-                Assert.Equal(TaskCreationOptions.AttachedToParent, unwrappedInner.CreationOptions);
+                    Task unwrappedInner = outer.Unwrap();
+                    Assert.Equal(
+                        TaskCreationOptions.AttachedToParent,
+                        unwrappedInner.CreationOptions
+                    );
 
-                outerTcs.SetResult(inner);
-                AssertTasksAreEqual(inner, unwrappedInner);
-            }, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
+                    outerTcs.SetResult(inner);
+                    AssertTasksAreEqual(inner, unwrappedInner);
+                },
+                CancellationToken.None,
+                TaskCreationOptions.None,
+                TaskScheduler.Default
+            );
             WaitNoThrow(parent);
             Assert.Equal(TaskStatus.Faulted, parent.Status);
             Assert.Same(error, parent.Exception.Flatten().InnerException);
@@ -412,19 +443,29 @@ namespace System.Threading.Tasks.Tests
         public void Generic_AttachedToParent()
         {
             Exception error = new InvalidTimeZoneException();
-            Task parent = Task.Factory.StartNew(() =>
-            {
-                var outerTcs = new TaskCompletionSource<Task<object>>(TaskCreationOptions.AttachedToParent);
-                Task<Task<object>> outer = outerTcs.Task;
+            Task parent = Task.Factory.StartNew(
+                () =>
+                {
+                    var outerTcs = new TaskCompletionSource<Task<object>>(
+                        TaskCreationOptions.AttachedToParent
+                    );
+                    Task<Task<object>> outer = outerTcs.Task;
 
-                Task<object> inner = Task.FromException<object>(error);
+                    Task<object> inner = Task.FromException<object>(error);
 
-                Task<object> unwrappedInner = outer.Unwrap();
-                Assert.Equal(TaskCreationOptions.AttachedToParent, unwrappedInner.CreationOptions);
+                    Task<object> unwrappedInner = outer.Unwrap();
+                    Assert.Equal(
+                        TaskCreationOptions.AttachedToParent,
+                        unwrappedInner.CreationOptions
+                    );
 
-                outerTcs.SetResult(inner);
-                AssertTasksAreEqual(inner, unwrappedInner);
-            }, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
+                    outerTcs.SetResult(inner);
+                    AssertTasksAreEqual(inner, unwrappedInner);
+                },
+                CancellationToken.None,
+                TaskCreationOptions.None,
+                TaskScheduler.Default
+            );
             WaitNoThrow(parent);
             Assert.Equal(TaskStatus.Faulted, parent.Status);
             Assert.Same(error, parent.Exception.Flatten().InnerException);
@@ -437,17 +478,28 @@ namespace System.Threading.Tasks.Tests
         public void NonGeneric_DefaultSchedulerUsed()
         {
             var scheduler = new CountingScheduler();
-            Task.Factory.StartNew(() =>
-            {
-                int initialCallCount = scheduler.QueueTaskCalls;
+            Task.Factory.StartNew(
+                    () =>
+                    {
+                        int initialCallCount = scheduler.QueueTaskCalls;
 
-                Task<Task> outer = Task.Factory.StartNew(() => Task.Run(() => { }),
-                    CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
-                Task unwrappedInner = outer.Unwrap();
-                unwrappedInner.Wait();
+                        Task<Task> outer = Task.Factory.StartNew(
+                            () => Task.Run(() => { }),
+                            CancellationToken.None,
+                            TaskCreationOptions.None,
+                            TaskScheduler.Default
+                        );
+                        Task unwrappedInner = outer.Unwrap();
+                        unwrappedInner.Wait();
 
-                Assert.Equal(initialCallCount, scheduler.QueueTaskCalls);
-            }, CancellationToken.None, TaskCreationOptions.None, scheduler).GetAwaiter().GetResult();
+                        Assert.Equal(initialCallCount, scheduler.QueueTaskCalls);
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    scheduler
+                )
+                .GetAwaiter()
+                .GetResult();
         }
 
         /// <summary>
@@ -457,17 +509,28 @@ namespace System.Threading.Tasks.Tests
         public void Generic_DefaultSchedulerUsed()
         {
             var scheduler = new CountingScheduler();
-            Task.Factory.StartNew(() =>
-            {
-                int initialCallCount = scheduler.QueueTaskCalls;
+            Task.Factory.StartNew(
+                    () =>
+                    {
+                        int initialCallCount = scheduler.QueueTaskCalls;
 
-                Task<Task<int>> outer = Task.Factory.StartNew(() => Task.Run(() => 42),
-                    CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
-                Task<int> unwrappedInner = outer.Unwrap();
-                unwrappedInner.Wait();
+                        Task<Task<int>> outer = Task.Factory.StartNew(
+                            () => Task.Run(() => 42),
+                            CancellationToken.None,
+                            TaskCreationOptions.None,
+                            TaskScheduler.Default
+                        );
+                        Task<int> unwrappedInner = outer.Unwrap();
+                        unwrappedInner.Wait();
 
-                Assert.Equal(initialCallCount, scheduler.QueueTaskCalls);
-            }, CancellationToken.None, TaskCreationOptions.None, scheduler).GetAwaiter().GetResult();
+                        Assert.Equal(initialCallCount, scheduler.QueueTaskCalls);
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    scheduler
+                )
+                .GetAwaiter()
+                .GetResult();
         }
 
         /// <summary>
@@ -480,9 +543,16 @@ namespace System.Threading.Tasks.Tests
 
             Func<int, Task<int>> func = null;
             func = count =>
-                ++count < DiveDepth ?
-                    Task.Factory.StartNew(() => func(count), CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap() :
-                    Task.FromResult(count);
+                ++count < DiveDepth
+                    ? Task
+                        .Factory.StartNew(
+                            () => func(count),
+                            CancellationToken.None,
+                            TaskCreationOptions.None,
+                            TaskScheduler.Default
+                        )
+                        .Unwrap()
+                    : Task.FromResult(count);
 
             // This test will overflow if it fails.
             Assert.Equal(DiveDepth, func(0).Result);
@@ -528,7 +598,10 @@ namespace System.Threading.Tasks.Tests
             switch (expected.Status)
             {
                 case TaskStatus.Faulted:
-                    Assert.Equal((IEnumerable<Exception>)expected.Exception.InnerExceptions, actual.Exception.InnerExceptions);
+                    Assert.Equal(
+                        (IEnumerable<Exception>)expected.Exception.InnerExceptions,
+                        actual.Exception.InnerExceptions
+                    );
                     break;
                 case TaskStatus.Canceled:
                     Assert.Equal(GetCanceledTaskToken(expected), GetCanceledTaskToken(actual));
@@ -594,10 +667,15 @@ namespace System.Threading.Tasks.Tests
                 Task.Run(() => TryExecuteTask(task));
             }
 
-            protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) { return false; }
+            protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
+            {
+                return false;
+            }
 
-            protected override IEnumerable<Task> GetScheduledTasks() { return null; }
+            protected override IEnumerable<Task> GetScheduledTasks()
+            {
+                return null;
+            }
         }
-
     }
 }

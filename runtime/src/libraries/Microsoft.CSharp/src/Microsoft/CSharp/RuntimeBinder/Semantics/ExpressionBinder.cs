@@ -38,27 +38,28 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal enum ConstCastResult
     {
-        Success,      // Constant can be cast to type
-        Failure,      // Constant cannot be cast to type
-        CheckFailure  // Constant cannot be cast to type because of overflow in checked context
-                      // (Note that this only happens when the conversion is explicit; implicit
-                      // conversions never overflow, that's why they're implicit.)
+        Success, // Constant can be cast to type
+        Failure, // Constant cannot be cast to type
+        CheckFailure // Constant cannot be cast to type because of overflow in checked context
+        ,
+        // (Note that this only happens when the conversion is explicit; implicit
+        // conversions never overflow, that's why they're implicit.)
     }
 
     internal enum AggCastResult
     {
         Success, // We found a conversion, stop looking
         Failure, // This conversion doesn't work, keep looking
-        Abort    // No possible conversion can work, stop looking
+        Abort // No possible conversion can work, stop looking
+        ,
     }
 
     internal enum UnaryOperatorSignatureFindResult
     {
         Match,
         Continue,
-        Return
+        Return,
     }
-
 
     internal enum UnaOpKind
     {
@@ -67,7 +68,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         Tilde,
         Bang,
         IncDec,
-        Lim
+        Lim,
     }
 
     [Flags]
@@ -79,6 +80,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         Tilde = 1 << UnaOpKind.Tilde,
         Bang = 1 << UnaOpKind.Bang,
         IncDec = 1 << UnaOpKind.IncDec,
+
         // The different combinations needed in operators.cs
         Signed = Plus | Minus | Tilde,
         Unsigned = Plus | Tilde,
@@ -90,9 +92,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     internal enum OpSigFlags
     {
         None = 0,
-        Convert = 0x01,    // Convert the operands before calling the bind method
-        CanLift = 0x02,    // Operator has a lifted form
-        AutoLift = 0x04,   // Standard nullable lifting
+        Convert = 0x01, // Convert the operands before calling the bind method
+        CanLift = 0x02, // Operator has a lifted form
+        AutoLift = 0x04, // Standard nullable lifting
+
         // The different combinations needed in operators.cs
         Value = Convert | CanLift | AutoLift,
         Reference = Convert,
@@ -112,7 +115,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     internal enum CheckLvalueKind
     {
         Assignment,
-        Increment
+        Increment,
     }
 
     internal enum BinOpFuncKind
@@ -128,7 +131,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         ShiftOp,
         StrBinOp,
         StrCmpOp,
-        None
+        None,
     }
 
     internal enum UnaOpFuncKind
@@ -139,7 +142,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         IntUnaOp,
         RealUnaOp,
         LiftedIncOpCore,
-        None
+        None,
     }
 
     internal readonly partial struct ExpressionBinder
@@ -259,8 +262,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // Factory method sets the "Do Children have Errors?" bit - not done manually.
         // Once constructed Expression trees are not mutated - doesn't work easily for statements unfortunately.
 
-        private delegate Expr PfnBindBinOp(ExpressionBinder binder, ExpressionKind ek, EXPRFLAG flags, Expr op1, Expr op2);
-        private delegate Expr PfnBindUnaOp(ExpressionBinder binder, ExpressionKind ek, EXPRFLAG flags, Expr op);
+        private delegate Expr PfnBindBinOp(
+            ExpressionBinder binder,
+            ExpressionKind ek,
+            EXPRFLAG flags,
+            Expr op1,
+            Expr op2
+        );
+        private delegate Expr PfnBindUnaOp(
+            ExpressionBinder binder,
+            ExpressionKind ek,
+            EXPRFLAG flags,
+            Expr op
+        );
 
         public BindingContext Context { get; }
 
@@ -287,12 +301,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public Expr BindAssignment(Expr op1, Expr op2, bool allowExplicit)
         {
-            Debug.Assert(op1 is ExprCast
-                || op1 is ExprArrayIndex
-                || op1 is ExprCall
-                || op1 is ExprProperty
-                || op1 is ExprClass
-                || op1 is ExprField);
+            Debug.Assert(
+                op1 is ExprCast
+                    || op1 is ExprArrayIndex
+                    || op1 is ExprCall
+                    || op1 is ExprProperty
+                    || op1 is ExprClass
+                    || op1 is ExprField
+            );
 
             CheckLvalue(op1, CheckLvalueKind.Assignment);
             op2 = GenerateAssignmentConversion(op1, op2, allowExplicit);
@@ -313,29 +329,41 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             CType pDestType = ChooseArrayIndexType(pOp2);
             ExpressionBinder binder = this;
-            Expr transformedIndices = pOp2.Map(
-                x =>
-                {
-                    Expr pTemp = binder.MustConvertWithSuppressedMessage(x, pDestType);
-                    return pDestType == pIntType
-                        ? pTemp
-                        : ExprFactoryCreateCastWithSuppressedMessage(EXPRFLAG.EXF_INDEXEXPR, pDestType, pTemp);
-                });
+            Expr transformedIndices = pOp2.Map(x =>
+            {
+                Expr pTemp = binder.MustConvertWithSuppressedMessage(x, pDestType);
+                return pDestType == pIntType
+                    ? pTemp
+                    : ExprFactoryCreateCastWithSuppressedMessage(
+                        EXPRFLAG.EXF_INDEXEXPR,
+                        pDestType,
+                        pTemp
+                    );
+            });
 
             // Allocate a new expression, the type is the element type of the array.
             // Array index operations are always lvalues.
             return ExprFactory.CreateArrayIndex(elementType, pOp1, transformedIndices);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Workarounds https://github.com/mono/linker/issues/1416. All usages are marked as unsafe.")]
-        private Expr MustConvertWithSuppressedMessage(Expr x, CType pDestType)
-            => mustConvert(x, pDestType);
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Workarounds https://github.com/mono/linker/issues/1416. All usages are marked as unsafe."
+        )]
+        private Expr MustConvertWithSuppressedMessage(Expr x, CType pDestType) =>
+            mustConvert(x, pDestType);
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Workarounds https://github.com/mono/linker/issues/1416. All usages are marked as unsafe.")]
-        private static ExprCast ExprFactoryCreateCastWithSuppressedMessage(EXPRFLAG flags, CType type, Expr argument)
-            => ExprFactory.CreateCast(flags, type, argument);
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Workarounds https://github.com/mono/linker/issues/1416. All usages are marked as unsafe."
+        )]
+        private static ExprCast ExprFactoryCreateCastWithSuppressedMessage(
+            EXPRFLAG flags,
+            CType type,
+            Expr argument
+        ) => ExprFactory.CreateCast(flags, type, argument);
 
         ////////////////////////////////////////////////////////////////////////////////
         // Create a cast node with the given expression flags.
@@ -344,7 +372,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             bindSimpleCast(exprSrc, typeDest, out pexprDest, 0);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private void bindSimpleCast(Expr exprSrc, CType typeDest, out Expr pexprDest, EXPRFLAG exprFlags)
+        private void bindSimpleCast(
+            Expr exprSrc,
+            CType typeDest,
+            out Expr pexprDest,
+            EXPRFLAG exprFlags
+        )
         {
             Debug.Assert(typeDest != null);
             // If the source is a constant, and cast is really simple (no change in fundamental
@@ -364,9 +397,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // Check if we have a compile time constant. If we do, create a constant for it and set the
             // original tree to the cast.
 
-            if (exprConst is ExprConstant constant && exprFlags == 0 &&
-                exprSrc.Type.FundamentalType == typeDest.FundamentalType &&
-                (!exprSrc.Type.IsPredefType(PredefinedType.PT_STRING) || constant.Val.IsNullRef))
+            if (
+                exprConst is ExprConstant constant
+                && exprFlags == 0
+                && exprSrc.Type.FundamentalType == typeDest.FundamentalType
+                && (!exprSrc.Type.IsPredefType(PredefinedType.PT_STRING) || constant.Val.IsNullRef)
+            )
             {
                 ExprConstant expr = ExprFactory.CreateConstant(typeDest, constant.Val);
                 pexprDest = expr;
@@ -387,9 +423,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // exprFlags - Flags to put on the generated expr
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private ExprCall BindToMethod(MethWithInst mwi, Expr pArguments, ExprMemberGroup pMemGroup, MemLookFlags flags)
+        private ExprCall BindToMethod(
+            MethWithInst mwi,
+            Expr pArguments,
+            ExprMemberGroup pMemGroup,
+            MemLookFlags flags
+        )
         {
-            Debug.Assert(mwi.Sym is MethodSymbol && (!mwi.Meth().isOverride || mwi.Meth().isHideByName));
+            Debug.Assert(
+                mwi.Sym is MethodSymbol && (!mwi.Meth().isOverride || mwi.Meth().isHideByName)
+            );
             Debug.Assert(pMemGroup != null);
 
             Expr pObject = pMemGroup.OptionalObject;
@@ -399,13 +442,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             pMemGroup.OptionalObject = pObject;
 
             CType pReturnType;
-            if ((flags & (MemLookFlags.Ctor | MemLookFlags.NewObj)) == (MemLookFlags.Ctor | MemLookFlags.NewObj))
+            if (
+                (flags & (MemLookFlags.Ctor | MemLookFlags.NewObj))
+                == (MemLookFlags.Ctor | MemLookFlags.NewObj)
+            )
             {
                 pReturnType = mwi.Ats;
             }
             else
             {
-                pReturnType = TypeManager.SubstType(mwi.Meth().RetType, mwi.GetType(), mwi.TypeArgs);
+                pReturnType = TypeManager.SubstType(
+                    mwi.Meth().RetType,
+                    mwi.GetType(),
+                    mwi.TypeArgs
+                );
             }
 
             ExprCall pResult = ExprFactory.CreateCall(0, pReturnType, pArguments, pMemGroup, mwi);
@@ -434,7 +484,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         internal Expr BindToField(Expr pOptionalObject, FieldWithType fwt, BindingFlag bindFlags)
         {
-            Debug.Assert(fwt.GetType() != null && fwt.Field().getClass() == fwt.GetType().OwningAggregate);
+            Debug.Assert(
+                fwt.GetType() != null && fwt.Field().getClass() == fwt.GetType().OwningAggregate
+            );
 
             CType pFieldType = TypeManager.SubstType(fwt.Field().GetType(), fwt.GetType());
             pOptionalObject = AdjustMemberObject(fwt, pOptionalObject);
@@ -458,11 +510,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         ////////////////////////////////////////////////////////////////////////////////
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        internal ExprProperty BindToProperty(Expr pObject, PropWithType pwt, BindingFlag bindFlags, Expr args, ExprMemberGroup pMemGroup)
+        internal ExprProperty BindToProperty(
+            Expr pObject,
+            PropWithType pwt,
+            BindingFlag bindFlags,
+            Expr args,
+            ExprMemberGroup pMemGroup
+        )
         {
-            Debug.Assert(pwt.Sym is PropertySymbol &&
-                    pwt.GetType() != null &&
-                    pwt.Prop().getClass() == pwt.GetType().OwningAggregate);
+            Debug.Assert(
+                pwt.Sym is PropertySymbol
+                    && pwt.GetType() != null
+                    && pwt.Prop().getClass() == pwt.GetType().OwningAggregate
+            );
             Debug.Assert(pwt.Prop().Params.Count == 0 || pwt.Prop() is IndexerSymbol);
 
             // We keep track of the type of the pObject which we're doing the call through so that we can report
@@ -472,12 +532,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             PostBindProperty(pwt, out MethWithType mwtGet, out MethWithType mwtSet);
 
-            if (mwtGet &&
-                    (!mwtSet ||
-                     mwtSet.GetType() == mwtGet.GetType() ||
-                     SymbolLoader.HasBaseConversion(mwtGet.GetType(), mwtSet.GetType())
-                     )
+            if (
+                mwtGet
+                && (
+                    !mwtSet
+                    || mwtSet.GetType() == mwtGet.GetType()
+                    || SymbolLoader.HasBaseConversion(mwtGet.GetType(), mwtSet.GetType())
                 )
+            )
             {
                 pObject = AdjustMemberObject(mwtGet, pObject);
             }
@@ -509,20 +571,37 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     type = pObjectThrough.Type;
                 }
 
-                ACCESSERROR error = CSemanticChecker.CheckAccess2(mwtGet.Meth(), mwtGet.GetType(), ContextForMemberLookup, type);
+                ACCESSERROR error = CSemanticChecker.CheckAccess2(
+                    mwtGet.Meth(),
+                    mwtGet.GetType(),
+                    ContextForMemberLookup,
+                    type
+                );
                 if (error != ACCESSERROR.ACCESSERROR_NOERROR)
                 {
                     // if the get exists, but is not accessible, give an error.
                     if (error == ACCESSERROR.ACCESSERROR_NOACCESSTHRU)
                     {
-                        throw ErrorHandling.Error(ErrorCode.ERR_BadProtectedAccess, pwt, type, ContextForMemberLookup);
+                        throw ErrorHandling.Error(
+                            ErrorCode.ERR_BadProtectedAccess,
+                            pwt,
+                            type,
+                            ContextForMemberLookup
+                        );
                     }
 
                     throw ErrorHandling.Error(ErrorCode.ERR_InaccessibleGetter, pwt);
                 }
             }
 
-            ExprProperty result = ExprFactory.CreateProperty(pReturnType, pObjectThrough, args, pMemGroup, pwt, mwtSet);
+            ExprProperty result = ExprFactory.CreateProperty(
+                pReturnType,
+                pObjectThrough,
+                args,
+                pMemGroup,
+                pwt,
+                mwtSet
+            );
             if (result.OptionalArguments != null)
             {
                 verifyMethodArgs(result, pObjectThrough?.Type);
@@ -541,14 +620,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             CType typeSrc = arg.Type;
 
-        LAgain:
+            LAgain:
             switch (typeSrc.TypeKind)
             {
                 case TypeKind.TK_NullableType:
                     typeSrc = typeSrc.StripNubs();
                     goto LAgain;
                 case TypeKind.TK_AggregateType:
-                    if (!typeSrc.IsClassType && !typeSrc.IsStructType || ((AggregateType)typeSrc).OwningAggregate.IsSkipUDOps())
+                    if (
+                        !typeSrc.IsClassType && !typeSrc.IsStructType
+                        || ((AggregateType)typeSrc).OwningAggregate.IsSkipUDOps()
+                    )
                         return null;
                     break;
                 default:
@@ -567,9 +649,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             while (true)
             {
                 // Find the next operator.
-                methCur = (methCur == null
-                    ? SymbolLoader.LookupAggMember(pName, atsCur.OwningAggregate, symbmask_t.MASK_MethodSymbol)
-                    : methCur.LookupNext(symbmask_t.MASK_MethodSymbol)) as MethodSymbol;
+                methCur =
+                    (
+                        methCur == null
+                            ? SymbolLoader.LookupAggMember(
+                                pName,
+                                atsCur.OwningAggregate,
+                                symbmask_t.MASK_MethodSymbol
+                            )
+                            : methCur.LookupNext(symbmask_t.MASK_MethodSymbol)
+                    ) as MethodSymbol;
 
                 if (methCur == null)
                 {
@@ -603,21 +692,29 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                 if (canConvert(arg, typeParam))
                 {
-                    methFirstList.Add(new CandidateFunctionMember(
-                                    new MethPropWithInst(methCur, atsCur, TypeArray.Empty),
-                                    paramsCur,
-                                    0,
-                                    false));
+                    methFirstList.Add(
+                        new CandidateFunctionMember(
+                            new MethPropWithInst(methCur, atsCur, TypeArray.Empty),
+                            paramsCur,
+                            0,
+                            false
+                        )
+                    );
                 }
-                else if (typeParam.IsNonNullableValueType &&
-                         TypeManager.SubstType(methCur.RetType, atsCur).IsNonNullableValueType &&
-                         canConvert(arg, nubParam = TypeManager.GetNullable(typeParam)))
+                else if (
+                    typeParam.IsNonNullableValueType
+                    && TypeManager.SubstType(methCur.RetType, atsCur).IsNonNullableValueType
+                    && canConvert(arg, nubParam = TypeManager.GetNullable(typeParam))
+                )
                 {
-                    methFirstList.Add(new CandidateFunctionMember(
-                                    new MethPropWithInst(methCur, atsCur, TypeArray.Empty),
-                                    TypeArray.Allocate(nubParam),
-                                    1,
-                                    false));
+                    methFirstList.Add(
+                        new CandidateFunctionMember(
+                            new MethPropWithInst(methCur, atsCur, TypeArray.Empty),
+                            TypeArray.Allocate(nubParam),
+                            1,
+                            false
+                        )
+                    );
                 }
             }
 
@@ -626,12 +723,22 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             CandidateFunctionMember pmethAmbig1;
             CandidateFunctionMember pmethAmbig2;
-            CandidateFunctionMember pmethBest = FindBestMethod(methFirstList, null, info, out pmethAmbig1, out pmethAmbig2);
+            CandidateFunctionMember pmethBest = FindBestMethod(
+                methFirstList,
+                null,
+                info,
+                out pmethAmbig1,
+                out pmethAmbig2
+            );
 
             if (pmethBest == null)
             {
                 // No winner, so its an ambiguous call...
-                throw ErrorHandling.Error(ErrorCode.ERR_AmbigCall, pmethAmbig1.mpwi, pmethAmbig2.mpwi);
+                throw ErrorHandling.Error(
+                    ErrorCode.ERR_AmbigCall,
+                    pmethAmbig1.mpwi,
+                    pmethAmbig2.mpwi
+                );
             }
 
             ExprCall call;
@@ -645,14 +752,23 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 call = BindUDUnopCall(arg, pmethBest.@params[0], pmethBest.mpwi);
             }
 
-            return ExprFactory.CreateUserDefinedUnaryOperator(ek, call.Type, arg, call, pmethBest.mpwi);
+            return ExprFactory.CreateUserDefinedUnaryOperator(
+                ek,
+                call.Type,
+                arg,
+                call,
+                pmethBest.mpwi
+            );
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private ExprCall BindLiftedUDUnop(Expr arg, CType typeArg, MethPropWithInst mpwi)
         {
             CType typeRaw = typeArg.StripNubs();
-            if (!(arg.Type is NullableType) || !canConvert(arg.Type.StripNubs(), typeRaw, CONVERTTYPE.NOUDC))
+            if (
+                !(arg.Type is NullableType)
+                || !canConvert(arg.Type.StripNubs(), typeRaw, CONVERTTYPE.NOUDC)
+            )
             {
                 // Convert then lift.
                 arg = mustConvert(arg, typeArg);
@@ -683,7 +799,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType typeRet = TypeManager.SubstType(mpwi.Meth().RetType, mpwi.GetType());
             CheckUnsafe(typeRet); // added to the binder so we don't bind to pointer ops
             ExprMemberGroup pMemGroup = ExprFactory.CreateMemGroup(null, mpwi);
-            ExprCall call = ExprFactory.CreateCall(0, typeRet, mustConvert(arg, typeArg), pMemGroup, null);
+            ExprCall call = ExprFactory.CreateCall(
+                0,
+                typeRet,
+                mustConvert(arg, typeArg),
+                pMemGroup,
+                null
+            );
             call.MethWithInst = new MethWithInst(mpwi);
             verifyMethodArgs(call, mpwi.GetType());
             return call;
@@ -693,7 +815,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // Given a method group or indexer group, bind it to the arguments for an
         // invocation.
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private GroupToArgsBinderResult BindMethodGroupToArgumentsCore(BindingFlag bindFlags, ExprMemberGroup grp, Expr args, int carg, NamedArgumentsKind namedArgumentsKind)
+        private GroupToArgsBinderResult BindMethodGroupToArgumentsCore(
+            BindingFlag bindFlags,
+            ExprMemberGroup grp,
+            Expr args,
+            int carg,
+            NamedArgumentsKind namedArgumentsKind
+        )
         {
             ArgInfos pargInfo = new ArgInfos { carg = carg };
             FillInArgInfoFromArgList(pargInfo, args);
@@ -701,7 +829,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             ArgInfos pOriginalArgInfo = new ArgInfos { carg = carg };
             FillInArgInfoFromArgList(pOriginalArgInfo, args);
 
-            GroupToArgsBinder binder = new GroupToArgsBinder(this, bindFlags, grp, pargInfo, pOriginalArgInfo, namedArgumentsKind);
+            GroupToArgsBinder binder = new GroupToArgsBinder(
+                this,
+                bindFlags,
+                grp,
+                pargInfo,
+                pOriginalArgInfo,
+                namedArgumentsKind
+            );
             binder.Bind();
 
             return binder.GetResultsOfBind();
@@ -711,9 +846,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // Given a method group or indexer group, bind it to the arguments for an
         // invocation.
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        internal ExprWithArgs BindMethodGroupToArguments(BindingFlag bindFlags, ExprMemberGroup grp, Expr args)
+        internal ExprWithArgs BindMethodGroupToArguments(
+            BindingFlag bindFlags,
+            ExprMemberGroup grp,
+            Expr args
+        )
         {
-            Debug.Assert(grp.SymKind == SYMKIND.SK_MethodSymbol || grp.SymKind == SYMKIND.SK_PropertySymbol && ((grp.Flags & EXPRFLAG.EXF_INDEXER) != 0));
+            Debug.Assert(
+                grp.SymKind == SYMKIND.SK_MethodSymbol
+                    || grp.SymKind == SYMKIND.SK_PropertySymbol
+                        && ((grp.Flags & EXPRFLAG.EXF_INDEXER) != 0)
+            );
 
             // Count the args.
             int carg = CountArguments(args);
@@ -724,11 +867,23 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // non-trailing (can rule out methods only).
             NamedArgumentsKind namedKind = FindNamedArgumentsType(args);
 
-            MethPropWithInst mpwiBest = BindMethodGroupToArgumentsCore(bindFlags, grp, args, carg, namedKind).BestResult;
+            MethPropWithInst mpwiBest = BindMethodGroupToArgumentsCore(
+                bindFlags,
+                grp,
+                args,
+                carg,
+                namedKind
+            ).BestResult;
             if (grp.SymKind == SYMKIND.SK_PropertySymbol)
             {
                 Debug.Assert((grp.Flags & EXPRFLAG.EXF_INDEXER) != 0);
-                return BindToProperty(grp.OptionalObject, new PropWithType(mpwiBest), bindFlags, args, grp);
+                return BindToProperty(
+                    grp.OptionalObject,
+                    new PropWithType(mpwiBest),
+                    bindFlags,
+                    args,
+                    grp
+                );
             }
 
             return BindToMethod(new MethWithInst(mpwiBest), args, grp, (MemLookFlags)grp.Flags);
@@ -740,7 +895,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             None,
             Positioning,
-            NonTrailing
+            NonTrailing,
         }
 
         private static NamedArgumentsKind FindNamedArgumentsType(Expr args)
@@ -803,7 +958,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (pOperand2 != null)
             {
                 Debug.Assert(pOperand2.Type != null);
-                return ErrorHandling.Error(ErrorCode.ERR_BadBinaryOps, strOp, pOperand1.Type, pOperand2.Type);
+                return ErrorHandling.Error(
+                    ErrorCode.ERR_BadBinaryOps,
+                    strOp,
+                    pOperand1.Type,
+                    pOperand2.Type
+                );
             }
 
             return ErrorHandling.Error(ErrorCode.ERR_BadUnaryOp, strOp, pOperand1.Type);
@@ -837,12 +997,29 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private void CheckPropertyAccess(MethWithType mwt, PropWithType pwtSlot, CType type)
         {
-            switch (CSemanticChecker.CheckAccess2(mwt.Meth(), mwt.GetType(), ContextForMemberLookup, type))
+            switch (
+                CSemanticChecker.CheckAccess2(
+                    mwt.Meth(),
+                    mwt.GetType(),
+                    ContextForMemberLookup,
+                    type
+                )
+            )
             {
                 case ACCESSERROR.ACCESSERROR_NOACCESSTHRU:
-                    throw ErrorHandling.Error(ErrorCode.ERR_BadProtectedAccess, pwtSlot, type, ContextForMemberLookup);
+                    throw ErrorHandling.Error(
+                        ErrorCode.ERR_BadProtectedAccess,
+                        pwtSlot,
+                        type,
+                        ContextForMemberLookup
+                    );
                 case ACCESSERROR.ACCESSERROR_NOACCESS:
-                    throw ErrorHandling.Error(mwt.Meth().isSetAccessor() ? ErrorCode.ERR_InaccessibleSetter : ErrorCode.ERR_InaccessibleGetter, pwtSlot);
+                    throw ErrorHandling.Error(
+                        mwt.Meth().isSetAccessor()
+                            ? ErrorCode.ERR_InaccessibleSetter
+                            : ErrorCode.ERR_InaccessibleGetter,
+                        pwtSlot
+                    );
             }
         }
 
@@ -869,7 +1046,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             {
                 case ExpressionKind.Property:
                     ExprProperty prop = (ExprProperty)expr;
-                    Debug.Assert(!prop.MethWithTypeSet || ExprProperty.HasIsExternalInitModifier(prop.MethWithTypeSet));
+                    Debug.Assert(
+                        !prop.MethWithTypeSet
+                            || ExprProperty.HasIsExternalInitModifier(prop.MethWithTypeSet)
+                    );
                     // Assigning to a property without a setter.
                     // If we have
                     // bool? b = true; (bool)b = false;
@@ -893,7 +1073,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     // SPEC VIOLATION: would be a breaking change.  We currently discard "no op" casts
                     // SPEC VIOLATION: very aggressively rather than generating an ExpressionKind.EK_CAST node.
 
-                    throw ErrorHandling.Error(ErrorCode.ERR_AssgReadonlyProp, prop.PropWithTypeSlot);
+                    throw ErrorHandling.Error(
+                        ErrorCode.ERR_AssgReadonlyProp,
+                        prop.PropWithTypeSlot
+                    );
 
                 case ExpressionKind.Field:
                     ExprField field = (ExprField)expr;
@@ -901,7 +1084,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     throw ErrorHandling.Error(
                         field.FieldWithType.Field().isStatic
                             ? ErrorCode.ERR_AssgReadonlyStatic
-                            : ErrorCode.ERR_AssgReadonly);
+                            : ErrorCode.ERR_AssgReadonly
+                    );
 
                 default:
                     throw ErrorHandling.Error(GetStandardLvalueError(kind));
@@ -923,17 +1107,23 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             }
         }
 
-        private static void PostBindProperty(PropWithType pwt, out MethWithType pmwtGet, out MethWithType pmwtSet)
+        private static void PostBindProperty(
+            PropWithType pwt,
+            out MethWithType pmwtGet,
+            out MethWithType pmwtSet
+        )
         {
             PropertySymbol prop = pwt.Prop();
             Debug.Assert(prop != null);
             // Get the accessors.
-            pmwtGet = prop.GetterMethod != null
-                ? new MethWithType(prop.GetterMethod, pwt.GetType())
-                : new MethWithType();
-            pmwtSet = prop.SetterMethod != null
-                ? new MethWithType(prop.SetterMethod, pwt.GetType())
-                : new MethWithType();
+            pmwtGet =
+                prop.GetterMethod != null
+                    ? new MethWithType(prop.GetterMethod, pwt.GetType())
+                    : new MethWithType();
+            pmwtSet =
+                prop.SetterMethod != null
+                    ? new MethWithType(prop.SetterMethod, pwt.GetType())
+                    : new MethWithType();
 
             if (prop.RetType != null)
             {
@@ -945,7 +1135,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private Expr AdjustMemberObject(SymWithType swt, Expr pObject)
         {
             // Assert that the type is present and is an instantiation of the member's parent.
-            Debug.Assert(swt.GetType() != null && swt.GetType().OwningAggregate == swt.Sym.parent as AggregateSymbol);
+            Debug.Assert(
+                swt.GetType() != null
+                    && swt.GetType().OwningAggregate == swt.Sym.parent as AggregateSymbol
+            );
             bool bIsMatchingStatic = IsMatchingStatic(swt, pObject);
             bool isStatic = swt.Sym.isStatic;
 
@@ -989,7 +1182,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType typeObj = pObject.Type;
             CType typeTmp;
 
-            if (typeObj is NullableType nubTypeObj && (typeTmp = nubTypeObj.GetAts()) != swt.GetType())
+            if (
+                typeObj is NullableType nubTypeObj
+                && (typeTmp = nubTypeObj.GetAts()) != swt.GetType()
+            )
             {
                 typeObj = typeTmp;
             }
@@ -1005,6 +1201,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             return pObject;
         }
+
         /////////////////////////////////////////////////////////////////////////////////
 
         private static bool IsMatchingStatic(SymWithType swt, Expr pObject)
@@ -1048,14 +1245,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private static void AssertObjectIsLvalue(Expr pObject)
         {
             Debug.Assert(
-                       pObject == null ||  // statics are always lvalues
-                       (((pObject.Flags & EXPRFLAG.EXF_LVALUE) != 0) && (pObject.Kind != ExpressionKind.Property)) ||
-                       // things marked as lvalues have props/fields which are lvalues, with one exception:  props of structs
-                       // do not have fields/structs as lvalues
+                pObject == null
+                    || // statics are always lvalues
+                    (
+                        ((pObject.Flags & EXPRFLAG.EXF_LVALUE) != 0)
+                        && (pObject.Kind != ExpressionKind.Property)
+                    )
+                    ||
+                    // things marked as lvalues have props/fields which are lvalues, with one exception:  props of structs
+                    // do not have fields/structs as lvalues
 
-                       !pObject.Type.IsStructOrEnum
-                   // non-struct types are lvalues (such as non-struct method returns)
-                   );
+                    !pObject.Type.IsStructOrEnum
+            // non-struct types are lvalues (such as non-struct method returns)
+            );
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -1067,19 +1269,36 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             MethodOrPropertySymbol mp = swt.Sym as MethodOrPropertySymbol;
             TypeArray pTypeArgs = (call as ExprCall)?.MethWithInst.TypeArgs;
             Expr newArgs;
-            AdjustCallArgumentsForParams(callingObjectType, swt.GetType(), mp, pTypeArgs, argsPtr, out newArgs);
+            AdjustCallArgumentsForParams(
+                callingObjectType,
+                swt.GetType(),
+                mp,
+                pTypeArgs,
+                argsPtr,
+                out newArgs
+            );
             call.OptionalArguments = newArgs;
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private void AdjustCallArgumentsForParams(CType callingObjectType, CType type, MethodOrPropertySymbol mp, TypeArray pTypeArgs, Expr argsPtr, out Expr newArgs)
+        private void AdjustCallArgumentsForParams(
+            CType callingObjectType,
+            CType type,
+            MethodOrPropertySymbol mp,
+            TypeArray pTypeArgs,
+            Expr argsPtr,
+            out Expr newArgs
+        )
         {
             Debug.Assert(mp != null);
             Debug.Assert(mp.Params != null);
             newArgs = null;
             Expr newArgsTail = null;
 
-            MethodOrPropertySymbol mostDerivedMethod = GroupToArgsBinder.FindMostDerivedMethod(mp, callingObjectType);
+            MethodOrPropertySymbol mostDerivedMethod = GroupToArgsBinder.FindMostDerivedMethod(
+                mp,
+                callingObjectType
+            );
 
             int paramCount = mp.Params.Count;
             TypeArray @params = mp.Params;
@@ -1134,11 +1353,18 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         }
 
                         Debug.Assert(index != mp.Params.Count);
-                        CType substDestType = TypeManager.SubstType(@params[index], type, pTypeArgs);
+                        CType substDestType = TypeManager.SubstType(
+                            @params[index],
+                            type,
+                            pTypeArgs
+                        );
 
                         // If we cant convert the argument and we're the param array argument, then deal with it.
-                        if (!canConvert(named.Value, substDestType) &&
-                            mp.isParamArray && index == mp.Params.Count - 1)
+                        if (
+                            !canConvert(named.Value, substDestType)
+                            && mp.isParamArray
+                            && index == mp.Params.Count - 1
+                        )
                         {
                             // We have a param array, but we're not at the end yet. This will happen
                             // with named arguments when the user specifies a name for the param array,
@@ -1148,10 +1374,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             // void Foo(int y, params int[] x);
                             // ...
                             // Foo(x:1, y:1);
-                            CType arrayType = (ArrayType)TypeManager.SubstType(mp.Params[mp.Params.Count - 1], type, pTypeArgs);
+                            CType arrayType = (ArrayType)
+                                TypeManager.SubstType(
+                                    mp.Params[mp.Params.Count - 1],
+                                    type,
+                                    pTypeArgs
+                                );
 
                             // Use an EK_ARRINIT even in the empty case so empty param arrays in attributes work.
-                            ExprArrayInit arrayInit = ExprFactory.CreateArrayInit(arrayType, null, null, s_zero);
+                            ExprArrayInit arrayInit = ExprFactory.CreateArrayInit(
+                                arrayType,
+                                null,
+                                null,
+                                s_zero
+                            );
                             arrayInit.GeneratedForParamArray = true;
                             arrayInit.OptionalArguments = named.Value;
 
@@ -1207,7 +1443,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             return;
 
-        FIXUPPARAMLIST:
+            FIXUPPARAMLIST:
             if (bDontFixParamArray)
             {
                 // We've already fixed the param array for named arguments.
@@ -1215,7 +1451,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             }
 
             // we need to create an array and put it as the last arg...
-            CType substitutedArrayType = TypeManager.SubstType(mp.Params[mp.Params.Count - 1], type, pTypeArgs);
+            CType substitutedArrayType = TypeManager.SubstType(
+                mp.Params[mp.Params.Count - 1],
+                type,
+                pTypeArgs
+            );
             if (!(substitutedArrayType is ArrayType subArr) || !subArr.IsSZArray)
             {
                 // Invalid type for params array parameter. Happens in LAF scenarios, e.g.
@@ -1229,7 +1469,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType elementType = subArr.ElementType;
 
             // Use an EK_ARRINIT even in the empty case so empty param arrays in attributes work.
-            ExprArrayInit exprArrayInit = ExprFactory.CreateArrayInit(substitutedArrayType, null, null, s_zero);
+            ExprArrayInit exprArrayInit = ExprFactory.CreateArrayInit(
+                substitutedArrayType,
+                null,
+                null,
+                s_zero
+            );
             exprArrayInit.GeneratedForParamArray = true;
 
             if (it.AtEnd())
@@ -1280,7 +1525,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             PredefinedType.PT_INT,
             PredefinedType.PT_UINT,
             PredefinedType.PT_LONG,
-            PredefinedType.PT_ULONG
+            PredefinedType.PT_ULONG,
         };
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -1300,7 +1545,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                 return type;
 
-            NEXTI:
+                NEXTI:
                 ;
             }
 
@@ -1339,7 +1584,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             argInfo.types = TypeArray.Allocate(prgtype);
         }
 
-        private static bool TryGetExpandedParams(TypeArray @params, int count, out TypeArray ppExpandedParams)
+        private static bool TryGetExpandedParams(
+            TypeArray @params,
+            int count,
+            out TypeArray ppExpandedParams
+        )
         {
             CType[] prgtype;
             if (count < @params.Count - 1)
@@ -1386,14 +1635,22 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             return (!sym.isOverride || sym.isHideByName) && (!requireUC || sym.isUserCallable());
         }
 
-        private static bool IsConvInTable(List<UdConvInfo> convTable, MethodSymbol meth, AggregateType ats, bool fSrc, bool fDst)
+        private static bool IsConvInTable(
+            List<UdConvInfo> convTable,
+            MethodSymbol meth,
+            AggregateType ats,
+            bool fSrc,
+            bool fDst
+        )
         {
             foreach (UdConvInfo conv in convTable)
             {
-                if (conv.Meth.Meth() == meth &&
-                    conv.Meth.GetType() == ats &&
-                    conv.SrcImplicit == fSrc &&
-                    conv.DstImplicit == fDst)
+                if (
+                    conv.Meth.Meth() == meth
+                    && conv.Meth.GetType() == ats
+                    && conv.SrcImplicit == fSrc
+                    && conv.DstImplicit == fDst
+                )
                 {
                     return true;
                 }
@@ -1604,7 +1861,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         private static Name ExpressionKindName(ExpressionKind ek)
         {
-            Debug.Assert(ek >= ExpressionKind.FirstOp && (ek - ExpressionKind.FirstOp) < (int)s_EK2NAME.Length);
+            Debug.Assert(
+                ek >= ExpressionKind.FirstOp
+                    && (ek - ExpressionKind.FirstOp) < (int)s_EK2NAME.Length
+            );
             return NameManager.GetPredefinedName(s_EK2NAME[ek - ExpressionKind.FirstOp]);
         }
 
@@ -1622,7 +1882,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         private static ExprWrap WrapShortLivedExpression(Expr expr) => ExprFactory.CreateWrap(expr);
 
-        private static ExprAssignment GenerateOptimizedAssignment(Expr op1, Expr op2) => ExprFactory.CreateAssignment(op1, op2);
+        private static ExprAssignment GenerateOptimizedAssignment(Expr op1, Expr op2) =>
+            ExprFactory.CreateAssignment(op1, op2);
 
         internal static int CountArguments(Expr args)
         {

@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace Moq.Matchers
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal class ParamArrayMatcher : IMatcher
@@ -28,7 +27,6 @@ namespace Moq.Matchers
         class ParamArrayMatcher : IMatcher
     */
     class ParamArrayMatcher : IMatcher
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private IMatcher[] matchers;
@@ -60,7 +58,6 @@ namespace Moq.Matchers
         }
 
         public bool Matches(object argument, Type parameterType)
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                     Array values = argument as Array;

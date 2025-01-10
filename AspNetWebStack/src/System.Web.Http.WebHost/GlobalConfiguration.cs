@@ -72,32 +72,49 @@ namespace System.Web.Http
             _defaultServer = CreateDefaultServer();
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000",
-            Justification = "It does not appear possible for this construction code to throw.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000",
+            Justification = "It does not appear possible for this construction code to throw."
+        )]
         private static Lazy<HttpConfiguration> CreateConfiguration()
         {
             return new Lazy<HttpConfiguration>(() =>
             {
-                HttpConfiguration config = new HttpConfiguration(new HostedHttpRouteCollection(RouteTable.Routes));
+                HttpConfiguration config = new HttpConfiguration(
+                    new HostedHttpRouteCollection(RouteTable.Routes)
+                );
                 ServicesContainer services = config.Services;
                 Contract.Assert(services != null);
                 services.Replace(typeof(IAssembliesResolver), new WebHostAssembliesResolver());
-                services.Replace(typeof(IHttpControllerTypeResolver), new WebHostHttpControllerTypeResolver());
-                services.Replace(typeof(IHostBufferPolicySelector), new WebHostBufferPolicySelector());
-                services.Replace(typeof(IExceptionHandler),
-                    new WebHostExceptionHandler(services.GetExceptionHandler()));
+                services.Replace(
+                    typeof(IHttpControllerTypeResolver),
+                    new WebHostHttpControllerTypeResolver()
+                );
+                services.Replace(
+                    typeof(IHostBufferPolicySelector),
+                    new WebHostBufferPolicySelector()
+                );
+                services.Replace(
+                    typeof(IExceptionHandler),
+                    new WebHostExceptionHandler(services.GetExceptionHandler())
+                );
                 return config;
             });
         }
 
         private static Lazy<HttpMessageHandler> CreateDefaultHandler()
         {
-            return new Lazy<HttpMessageHandler>(() => new HttpRoutingDispatcher(_configuration.Value));
+            return new Lazy<HttpMessageHandler>(
+                () => new HttpRoutingDispatcher(_configuration.Value)
+            );
         }
 
         private static Lazy<HttpServer> CreateDefaultServer()
         {
-            return new Lazy<HttpServer>(() => new HttpServer(_configuration.Value, _defaultHandler.Value));
+            return new Lazy<HttpServer>(
+                () => new HttpServer(_configuration.Value, _defaultHandler.Value)
+            );
         }
     }
 }

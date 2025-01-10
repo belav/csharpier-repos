@@ -11,20 +11,21 @@ namespace System.ServiceModel.Security
 
     public sealed class WindowsClientCredential
     {
-        internal const TokenImpersonationLevel DefaultImpersonationLevel = TokenImpersonationLevel.Identification;
+        internal const TokenImpersonationLevel DefaultImpersonationLevel =
+            TokenImpersonationLevel.Identification;
         TokenImpersonationLevel allowedImpersonationLevel = DefaultImpersonationLevel;
         NetworkCredential windowsCredentials;
         bool allowNtlm = SspiSecurityTokenProvider.DefaultAllowNtlm;
         bool isReadOnly;
 
-        internal WindowsClientCredential()
-        {
-        }
+        internal WindowsClientCredential() { }
 
         internal WindowsClientCredential(WindowsClientCredential other)
         {
             if (other.windowsCredentials != null)
-                this.windowsCredentials = SecurityUtils.GetNetworkCredentialsCopy(other.windowsCredentials);
+                this.windowsCredentials = SecurityUtils.GetNetworkCredentialsCopy(
+                    other.windowsCredentials
+                );
             this.allowedImpersonationLevel = other.allowedImpersonationLevel;
             this.allowNtlm = other.allowNtlm;
             this.isReadOnly = other.isReadOnly;
@@ -32,17 +33,28 @@ namespace System.ServiceModel.Security
 
         public TokenImpersonationLevel AllowedImpersonationLevel
         {
-            get
-            {
-                return this.allowedImpersonationLevel;
-            }
+            get { return this.allowedImpersonationLevel; }
             set
             {
                 ThrowIfImmutable();
 
-                if (((value == TokenImpersonationLevel.None) || (value == TokenImpersonationLevel.Anonymous)) && System.ServiceModel.Channels.UnsafeNativeMethods.IsTailoredApplication.Value)
+                if (
+                    (
+                        (value == TokenImpersonationLevel.None)
+                        || (value == TokenImpersonationLevel.Anonymous)
+                    )
+                    && System.ServiceModel.Channels.UnsafeNativeMethods.IsTailoredApplication.Value
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.UnsupportedTokenImpersonationLevel, "AllowedImpersonationLevel", value.ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.UnsupportedTokenImpersonationLevel,
+                                "AllowedImpersonationLevel",
+                                value.ToString()
+                            )
+                        )
+                    );
                 }
 
                 this.allowedImpersonationLevel = value;
@@ -64,13 +76,12 @@ namespace System.ServiceModel.Security
             }
         }
 
-        [ObsoleteAttribute("This property is deprecated and is maintained for backward compatibility only. The local machine policy will be used to determine if NTLM should be used.")]
+        [ObsoleteAttribute(
+            "This property is deprecated and is maintained for backward compatibility only. The local machine policy will be used to determine if NTLM should be used."
+        )]
         public bool AllowNtlm
         {
-            get
-            {
-                return this.allowNtlm;
-            }
+            get { return this.allowNtlm; }
             set
             {
                 ThrowIfImmutable();
@@ -87,7 +98,9 @@ namespace System.ServiceModel.Security
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
         }
     }

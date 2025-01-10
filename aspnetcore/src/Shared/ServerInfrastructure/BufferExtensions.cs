@@ -67,7 +67,12 @@ internal static class BufferExtensions
     /// Returns position of first occurrence of item in the <see cref="ReadOnlySequence{T}"/>
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static SequencePosition? PositionOfAny<T>(in this ReadOnlySequence<T> source, T value0, T value1) where T : IEquatable<T>
+    public static SequencePosition? PositionOfAny<T>(
+        in this ReadOnlySequence<T> source,
+        T value0,
+        T value1
+    )
+        where T : IEquatable<T>
     {
         if (source.IsSingleSegment)
         {
@@ -85,7 +90,12 @@ internal static class BufferExtensions
         }
     }
 
-    private static SequencePosition? PositionOfAnyMultiSegment<T>(in ReadOnlySequence<T> source, T value0, T value1) where T : IEquatable<T>
+    private static SequencePosition? PositionOfAnyMultiSegment<T>(
+        in ReadOnlySequence<T> source,
+        T value0,
+        T value1
+    )
+        where T : IEquatable<T>
     {
         SequencePosition position = source.Start;
         SequencePosition result = position;
@@ -179,7 +189,10 @@ internal static class BufferExtensions
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void WriteNumericMultiWrite(ref this BufferWriter<PipeWriter> buffer, ulong number)
+    private static void WriteNumericMultiWrite(
+        ref this BufferWriter<PipeWriter> buffer,
+        ulong number
+    )
     {
         const byte AsciiDigitStart = (byte)'0';
 
@@ -192,14 +205,17 @@ internal static class BufferExtensions
             var quotient = value / 10;
             byteBuffer[--position] = (byte)(AsciiDigitStart + (value - quotient * 10)); // 0x30 = '0'
             value = quotient;
-        }
-        while (value != 0);
+        } while (value != 0);
 
         var length = _maxULongByteLength - position;
         buffer.Write(new ReadOnlySpan<byte>(byteBuffer, position, length));
     }
 
-    internal static void WriteEncoded(ref this BufferWriter<PipeWriter> buffer, string data, Encoding encoding)
+    internal static void WriteEncoded(
+        ref this BufferWriter<PipeWriter> buffer,
+        string data,
+        Encoding encoding
+    )
     {
         if (string.IsNullOrEmpty(data))
         {
@@ -221,7 +237,12 @@ internal static class BufferExtensions
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void WriteEncodedMultiWrite(ref this BufferWriter<PipeWriter> buffer, string data, int encodedLength, Encoding encoding)
+    private static void WriteEncodedMultiWrite(
+        ref this BufferWriter<PipeWriter> buffer,
+        string data,
+        int encodedLength,
+        Encoding encoding
+    )
     {
         var source = data.AsSpan();
         var totalBytesUsed = 0;
@@ -237,7 +258,14 @@ internal static class BufferExtensions
         {
             // Zero length spans are possible, though unlikely.
             // encoding.Convert and .Advance will both handle them so we won't special case for them.
-            encoder.Convert(source, bytes, flush: true, out var charsUsed, out var bytesUsed, out completed);
+            encoder.Convert(
+                source,
+                bytes,
+                flush: true,
+                out var charsUsed,
+                out var bytesUsed,
+                out completed
+            );
             buffer.Advance(bytesUsed);
 
             totalBytesUsed += bytesUsed;
@@ -256,7 +284,8 @@ internal static class BufferExtensions
         }
     }
 
-    private static byte[] NumericBytesScratch => _numericBytesScratch ?? CreateNumericBytesScratch();
+    private static byte[] NumericBytesScratch =>
+        _numericBytesScratch ?? CreateNumericBytesScratch();
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static byte[] CreateNumericBytesScratch()

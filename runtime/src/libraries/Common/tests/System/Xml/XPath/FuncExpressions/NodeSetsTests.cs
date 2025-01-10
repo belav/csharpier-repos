@@ -25,7 +25,8 @@ namespace XPathTests.FunctionalTests.Expressions
             var xml = "xp001.xml";
             var startingNodePath = "/Doc";
             var testExpression = @"child::Title | child::Chap";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -33,7 +34,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Title",
                     Name = "Title",
                     HasNameTable = true,
-                    Value = "XPath test"
+                    Value = "XPath test",
                 },
                 new XPathResultToken
                 {
@@ -43,7 +44,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "Chap",
                     HasNameTable = true,
                     Value =
-                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n "
+                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n ",
                 },
                 new XPathResultToken
                 {
@@ -52,10 +53,17 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Chap",
                     Name = "Chap",
                     HasNameTable = true,
-                    Value = "\n   XPath test\n   Direct content\n "
-                });
+                    Value = "\n   XPath test\n   Direct content\n ",
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -71,7 +79,8 @@ namespace XPathTests.FunctionalTests.Expressions
             var xml = "xp001.xml";
             var startingNodePath = "/Doc";
             var testExpression = @"child::Title | child::Chap | child::Summary";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -79,7 +88,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Title",
                     Name = "Title",
                     HasNameTable = true,
-                    Value = "XPath test"
+                    Value = "XPath test",
                 },
                 new XPathResultToken
                 {
@@ -88,7 +97,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Summary",
                     Name = "Summary",
                     HasNameTable = true,
-                    Value = "This shall test XPath test"
+                    Value = "This shall test XPath test",
                 },
                 new XPathResultToken
                 {
@@ -98,7 +107,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "Chap",
                     HasNameTable = true,
                     Value =
-                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n "
+                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n ",
                 },
                 new XPathResultToken
                 {
@@ -107,10 +116,17 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Chap",
                     Name = "Chap",
                     HasNameTable = true,
-                    Value = "\n   XPath test\n   Direct content\n "
-                });
+                    Value = "\n   XPath test\n   Direct content\n ",
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -126,7 +142,8 @@ namespace XPathTests.FunctionalTests.Expressions
             var xml = "xp001.xml";
             var startingNodePath = "/Doc";
             var testExpression = @"self::Doc | child::Chap";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -135,7 +152,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "Doc",
                     HasNameTable = true,
                     Value =
-                        "\n XPath test\n This shall test XPath test\n \n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n \n \n   XPath test\n   Direct content\n \n"
+                        "\n XPath test\n This shall test XPath test\n \n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n \n \n   XPath test\n   Direct content\n \n",
                 },
                 new XPathResultToken
                 {
@@ -145,7 +162,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "Chap",
                     HasNameTable = true,
                     Value =
-                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n "
+                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n ",
                 },
                 new XPathResultToken
                 {
@@ -154,10 +171,17 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Chap",
                     Name = "Chap",
                     HasNameTable = true,
-                    Value = "\n   XPath test\n   Direct content\n "
-                });
+                    Value = "\n   XPath test\n   Direct content\n ",
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -173,7 +197,8 @@ namespace XPathTests.FunctionalTests.Expressions
             var xml = "xp001.xml";
             var startingNodePath = "/Doc";
             var testExpression = @"Chap//Para";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -181,7 +206,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = "First paragraph  Nested  Paragraph  End of first paragraph "
+                    Value = "First paragraph  Nested  Paragraph  End of first paragraph ",
                 },
                 new XPathResultToken
                 {
@@ -190,7 +215,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = " Nested  Paragraph "
+                    Value = " Nested  Paragraph ",
                 },
                 new XPathResultToken
                 {
@@ -199,10 +224,17 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = "Second paragraph "
-                });
+                    Value = "Second paragraph ",
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -218,7 +250,8 @@ namespace XPathTests.FunctionalTests.Expressions
             var xml = "xp001.xml";
             var startingNodePath = "/Doc";
             var testExpression = @"//Doc//Para";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -226,7 +259,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = "First paragraph  Nested  Paragraph  End of first paragraph "
+                    Value = "First paragraph  Nested  Paragraph  End of first paragraph ",
                 },
                 new XPathResultToken
                 {
@@ -235,7 +268,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = " Nested  Paragraph "
+                    Value = " Nested  Paragraph ",
                 },
                 new XPathResultToken
                 {
@@ -244,10 +277,17 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = "Second paragraph "
-                });
+                    Value = "Second paragraph ",
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -263,7 +303,8 @@ namespace XPathTests.FunctionalTests.Expressions
             var xml = "xp001.xml";
             var startingNodePath = "/Doc";
             var testExpression = @"Chap/Para";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -271,7 +312,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = "First paragraph  Nested  Paragraph  End of first paragraph "
+                    Value = "First paragraph  Nested  Paragraph  End of first paragraph ",
                 },
                 new XPathResultToken
                 {
@@ -280,10 +321,17 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = "Second paragraph "
-                });
+                    Value = "Second paragraph ",
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -299,7 +347,8 @@ namespace XPathTests.FunctionalTests.Expressions
             var xml = "xp001.xml";
             var startingNodePath = "/Doc";
             var testExpression = @"/Doc/Chap";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -308,7 +357,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "Chap",
                     HasNameTable = true,
                     Value =
-                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n "
+                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n ",
                 },
                 new XPathResultToken
                 {
@@ -317,10 +366,17 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Chap",
                     Name = "Chap",
                     HasNameTable = true,
-                    Value = "\n   XPath test\n   Direct content\n "
-                });
+                    Value = "\n   XPath test\n   Direct content\n ",
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -336,7 +392,8 @@ namespace XPathTests.FunctionalTests.Expressions
             var xml = "xp001.xml";
             var startingNodePath = "/Doc";
             var testExpression = @"Chap/Para[Para/Origin]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -344,10 +401,17 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = "First paragraph  Nested  Paragraph  End of first paragraph "
-                });
+                    Value = "First paragraph  Nested  Paragraph  End of first paragraph ",
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
     }
 }

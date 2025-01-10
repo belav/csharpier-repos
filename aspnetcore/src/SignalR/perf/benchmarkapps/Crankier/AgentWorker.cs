@@ -38,7 +38,7 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
                 ConnectedCount = StatusInformation.ConnectedCount,
                 DisconnectedCount = StatusInformation.DisconnectedCount,
                 ReconnectingCount = StatusInformation.ReconnectingCount,
-                TargetConnectionCount = StatusInformation.TargetConnectionCount
+                TargetConnectionCount = StatusInformation.TargetConnectionCount,
             };
         }
 

@@ -9,15 +9,16 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel.DataAnnotations
 {
     [TestFixture]
-    public class UIHintAttributeTest {
+    public class UIHintAttributeTest
+    {
         [Test]
-        public void UIHintAttribute_Simple_Ctors_Set_Properties() {
+        public void UIHintAttribute_Simple_Ctors_Set_Properties()
+        {
             var attr = new UIHintAttribute(null, null);
             Assert.IsNull(attr.UIHint);
             Assert.IsNull(attr.PresentationLayer);
@@ -40,58 +41,76 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
         }
 
         [Test]
-        public void ConstructorControlParameters() {
-            Assert.AreEqual(2, new UIHintAttribute("", "", "a", 1, "b", 2).ControlParameters.Keys.Count);
+        public void ConstructorControlParameters()
+        {
+            Assert.AreEqual(
+                2,
+                new UIHintAttribute("", "", "a", 1, "b", 2).ControlParameters.Keys.Count
+            );
         }
 
         [Test]
-        public void ConstructorControlParameters_NoParams() {
-            Assert.AreEqual(0, new UIHintAttribute("", "", new object[0]).ControlParameters.Keys.Count);
-            Assert.AreEqual(0, new UIHintAttribute("", "", (object[])null).ControlParameters.Keys.Count);
+        public void ConstructorControlParameters_NoParams()
+        {
+            Assert.AreEqual(
+                0,
+                new UIHintAttribute("", "", new object[0]).ControlParameters.Keys.Count
+            );
+            Assert.AreEqual(
+                0,
+                new UIHintAttribute("", "", (object[])null).ControlParameters.Keys.Count
+            );
             Assert.AreEqual(0, new UIHintAttribute("", "").ControlParameters.Keys.Count);
             Assert.AreEqual(0, new UIHintAttribute("").ControlParameters.Keys.Count);
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ConstructorControlParameters_UnevenNumber() {
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ConstructorControlParameters_UnevenNumber()
+        {
             var attr = new UIHintAttribute("", "", "");
-                var v = attr.ControlParameters;
+            var v = attr.ControlParameters;
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ConstructorControlParameters_NonStringKey() {
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ConstructorControlParameters_NonStringKey()
+        {
             var attr = new UIHintAttribute("", "", 1, "value");
-                var v = attr.ControlParameters;
+            var v = attr.ControlParameters;
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ConstructorControlParameters_NullKey() {
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ConstructorControlParameters_NullKey()
+        {
             var attr = new UIHintAttribute("", "", null, "value");
-                var v = attr.ControlParameters;
+            var v = attr.ControlParameters;
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ConstructorControlParameters_DuplicateKey() {
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ConstructorControlParameters_DuplicateKey()
+        {
             var attr = new UIHintAttribute("", "", "key", "value1", "key", "value2");
-                var v = attr.ControlParameters;
+            var v = attr.ControlParameters;
         }
 
         [Test]
-        public void Equals_DifferentObjectType() {
+        public void Equals_DifferentObjectType()
+        {
             Assert.IsFalse(new UIHintAttribute("foo", "bar").Equals(new object()));
         }
 
         [Test]
-        public void Equals_NullObject() {
+        public void Equals_NullObject()
+        {
             Assert.IsFalse(new UIHintAttribute("foo").Equals(null));
         }
 
         [Test]
-        public void Equals_SameObjectType() {
+        public void Equals_SameObjectType()
+        {
             var a1 = new UIHintAttribute("foo");
             var a2 = new UIHintAttribute("foo");
             var b1 = new UIHintAttribute("foo", "bar");
@@ -108,7 +127,8 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
         }
 
         [Test]
-        public void Equals_SameObjectType_WithParamsDictionary() {
+        public void Equals_SameObjectType_WithParamsDictionary()
+        {
             var a1 = new UIHintAttribute("foo", "bar", "a", 1, "b", false);
             var a2 = new UIHintAttribute("foo", "bar", "b", false, "a", 1);
 
@@ -117,7 +137,8 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
         }
 
         [Test]
-        public void Equals_DoesNotThrow() {
+        public void Equals_DoesNotThrow()
+        {
             var a1 = new UIHintAttribute("foo", "bar");
             var a2 = new UIHintAttribute("foo", "bar", 1);
 
@@ -129,9 +150,11 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
         [Test]
         public void TypeId_ReturnsDifferentValuesForDifferentInstances()
         {
-            Assert.AreNotEqual(new UIHintAttribute("foo").TypeId, new UIHintAttribute("bar").TypeId);
+            Assert.AreNotEqual(
+                new UIHintAttribute("foo").TypeId,
+                new UIHintAttribute("bar").TypeId
+            );
         }
 #endif
     }
 }
-

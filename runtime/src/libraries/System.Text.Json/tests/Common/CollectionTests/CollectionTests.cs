@@ -23,7 +23,7 @@ namespace System.Text.Json.Serialization.Tests
                 List = new() { new() },
                 Dictionary = new Dictionary<string, ClassWithRecursiveCollectionTypes>
                 {
-                    ["key"] = new()
+                    ["key"] = new(),
                 },
             };
 

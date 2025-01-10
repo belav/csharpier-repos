@@ -19,9 +19,7 @@ namespace System.Workflow.Activities.Rules
         private int errorNumber;
 
         #region Constructors
-        internal RuleSyntaxException()
-        {
-        }
+        internal RuleSyntaxException() { }
 
         internal RuleSyntaxException(int errorNumber, string message, int position)
             : base(message)
@@ -32,9 +30,7 @@ namespace System.Workflow.Activities.Rules
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
         private RuleSyntaxException(SerializationInfo serializeInfo, StreamingContext context)
-            : base(serializeInfo, context)
-        {
-        }
+            : base(serializeInfo, context) { }
         #endregion
 
         internal int Position

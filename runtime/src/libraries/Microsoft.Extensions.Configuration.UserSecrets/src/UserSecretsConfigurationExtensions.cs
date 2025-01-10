@@ -27,9 +27,11 @@ namespace Microsoft.Extensions.Configuration
         /// <typeparam name="T">The type from the assembly to search for an instance of <see cref="UserSecretsIdAttribute"/>.</typeparam>
         /// <exception cref="InvalidOperationException">Thrown when the assembly containing <typeparamref name="T"/> does not have <see cref="UserSecretsIdAttribute"/>.</exception>
         /// <returns>The configuration builder.</returns>
-        public static IConfigurationBuilder AddUserSecrets<T>(this IConfigurationBuilder configuration)
-            where T : class
-            => configuration.AddUserSecrets(typeof(T).Assembly, optional: true, reloadOnChange: false);
+        public static IConfigurationBuilder AddUserSecrets<T>(
+            this IConfigurationBuilder configuration
+        )
+            where T : class =>
+            configuration.AddUserSecrets(typeof(T).Assembly, optional: true, reloadOnChange: false);
 
         /// <summary>
         /// <para>
@@ -45,9 +47,12 @@ namespace Microsoft.Extensions.Configuration
         /// <exception cref="InvalidOperationException">Thrown when <paramref name="optional"/> is false and the assembly containing <typeparamref name="T"/> does not have a valid <see cref="UserSecretsIdAttribute"/>.</exception>
         /// <typeparam name="T">The type from the assembly to search for an instance of <see cref="UserSecretsIdAttribute"/>.</typeparam>
         /// <returns>The configuration builder.</returns>
-        public static IConfigurationBuilder AddUserSecrets<T>(this IConfigurationBuilder configuration, bool optional)
-            where T : class
-            => configuration.AddUserSecrets(typeof(T).Assembly, optional, reloadOnChange: false);
+        public static IConfigurationBuilder AddUserSecrets<T>(
+            this IConfigurationBuilder configuration,
+            bool optional
+        )
+            where T : class =>
+            configuration.AddUserSecrets(typeof(T).Assembly, optional, reloadOnChange: false);
 
         /// <summary>
         /// <para>
@@ -64,9 +69,13 @@ namespace Microsoft.Extensions.Configuration
         /// <exception cref="InvalidOperationException">Thrown when <paramref name="optional"/> is false and the assembly containing <typeparamref name="T"/> does not have a valid <see cref="UserSecretsIdAttribute"/>.</exception>
         /// <typeparam name="T">The type from the assembly to search for an instance of <see cref="UserSecretsIdAttribute"/>.</typeparam>
         /// <returns>The configuration builder.</returns>
-        public static IConfigurationBuilder AddUserSecrets<T>(this IConfigurationBuilder configuration, bool optional, bool reloadOnChange)
-            where T : class
-            => configuration.AddUserSecrets(typeof(T).Assembly, optional, reloadOnChange);
+        public static IConfigurationBuilder AddUserSecrets<T>(
+            this IConfigurationBuilder configuration,
+            bool optional,
+            bool reloadOnChange
+        )
+            where T : class =>
+            configuration.AddUserSecrets(typeof(T).Assembly, optional, reloadOnChange);
 
         /// <summary>
         /// <para>
@@ -81,8 +90,10 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="assembly">The assembly with the <see cref="UserSecretsIdAttribute" />.</param>
         /// <exception cref="InvalidOperationException">Thrown when <paramref name="assembly"/> does not have a valid <see cref="UserSecretsIdAttribute"/></exception>
         /// <returns>The configuration builder.</returns>
-        public static IConfigurationBuilder AddUserSecrets(this IConfigurationBuilder configuration, Assembly assembly)
-            => configuration.AddUserSecrets(assembly, optional: true, reloadOnChange: false);
+        public static IConfigurationBuilder AddUserSecrets(
+            this IConfigurationBuilder configuration,
+            Assembly assembly
+        ) => configuration.AddUserSecrets(assembly, optional: true, reloadOnChange: false);
 
         /// <summary>
         /// <para>
@@ -98,8 +109,11 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="optional">Whether loading secrets is optional. When false, this method may throw.</param>
         /// <exception cref="InvalidOperationException">Thrown when <paramref name="optional"/> is false and <paramref name="assembly"/> does not have a valid <see cref="UserSecretsIdAttribute"/>.</exception>
         /// <returns>The configuration builder.</returns>
-        public static IConfigurationBuilder AddUserSecrets(this IConfigurationBuilder configuration, Assembly assembly, bool optional)
-            => configuration.AddUserSecrets(assembly, optional, reloadOnChange: false);
+        public static IConfigurationBuilder AddUserSecrets(
+            this IConfigurationBuilder configuration,
+            Assembly assembly,
+            bool optional
+        ) => configuration.AddUserSecrets(assembly, optional, reloadOnChange: false);
 
         /// <summary>
         /// <para>
@@ -116,20 +130,33 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="reloadOnChange">Whether the configuration should be reloaded if the file changes.</param>
         /// <exception cref="InvalidOperationException">Thrown when <paramref name="optional"/> is false and <paramref name="assembly"/> does not have a valid <see cref="UserSecretsIdAttribute"/>.</exception>
         /// <returns>The configuration builder.</returns>
-        public static IConfigurationBuilder AddUserSecrets(this IConfigurationBuilder configuration, Assembly assembly, bool optional, bool reloadOnChange)
+        public static IConfigurationBuilder AddUserSecrets(
+            this IConfigurationBuilder configuration,
+            Assembly assembly,
+            bool optional,
+            bool reloadOnChange
+        )
         {
             ThrowHelper.ThrowIfNull(configuration);
             ThrowHelper.ThrowIfNull(assembly);
 
-            UserSecretsIdAttribute? attribute = assembly.GetCustomAttribute<UserSecretsIdAttribute>();
+            UserSecretsIdAttribute? attribute =
+                assembly.GetCustomAttribute<UserSecretsIdAttribute>();
             if (attribute != null)
             {
-                return AddUserSecretsInternal(configuration, attribute.UserSecretsId, optional, reloadOnChange);
+                return AddUserSecretsInternal(
+                    configuration,
+                    attribute.UserSecretsId,
+                    optional,
+                    reloadOnChange
+                );
             }
 
             if (!optional)
             {
-                throw new InvalidOperationException(SR.Format(SR.Error_Missing_UserSecretsIdAttribute, assembly.GetName().Name));
+                throw new InvalidOperationException(
+                    SR.Format(SR.Error_Missing_UserSecretsIdAttribute, assembly.GetName().Name)
+                );
             }
 
             return configuration;
@@ -146,8 +173,10 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="configuration">The configuration builder.</param>
         /// <param name="userSecretsId">The user secrets ID.</param>
         /// <returns>The configuration builder.</returns>
-        public static IConfigurationBuilder AddUserSecrets(this IConfigurationBuilder configuration, string userSecretsId)
-            => configuration.AddUserSecrets(userSecretsId, reloadOnChange: false);
+        public static IConfigurationBuilder AddUserSecrets(
+            this IConfigurationBuilder configuration,
+            string userSecretsId
+        ) => configuration.AddUserSecrets(userSecretsId, reloadOnChange: false);
 
         /// <summary>
         /// <para>
@@ -161,18 +190,39 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="userSecretsId">The user secrets ID.</param>
         /// <param name="reloadOnChange">Whether the configuration should be reloaded if the file changes.</param>
         /// <returns>The configuration builder.</returns>
-        public static IConfigurationBuilder AddUserSecrets(this IConfigurationBuilder configuration, string userSecretsId, bool reloadOnChange)
-            => AddUserSecretsInternal(configuration, userSecretsId, true, reloadOnChange);
+        public static IConfigurationBuilder AddUserSecrets(
+            this IConfigurationBuilder configuration,
+            string userSecretsId,
+            bool reloadOnChange
+        ) => AddUserSecretsInternal(configuration, userSecretsId, true, reloadOnChange);
 
-        private static IConfigurationBuilder AddUserSecretsInternal(IConfigurationBuilder configuration, string userSecretsId, bool optional, bool reloadOnChange)
+        private static IConfigurationBuilder AddUserSecretsInternal(
+            IConfigurationBuilder configuration,
+            string userSecretsId,
+            bool optional,
+            bool reloadOnChange
+        )
         {
             ThrowHelper.ThrowIfNull(configuration);
             ThrowHelper.ThrowIfNull(userSecretsId);
 
-            return AddSecretsFile(configuration, PathHelper.InternalGetSecretsPathFromSecretsId(userSecretsId, throwIfNoRoot: !optional), optional, reloadOnChange);
+            return AddSecretsFile(
+                configuration,
+                PathHelper.InternalGetSecretsPathFromSecretsId(
+                    userSecretsId,
+                    throwIfNoRoot: !optional
+                ),
+                optional,
+                reloadOnChange
+            );
         }
 
-        private static IConfigurationBuilder AddSecretsFile(IConfigurationBuilder configuration, string secretPath, bool optional, bool reloadOnChange)
+        private static IConfigurationBuilder AddSecretsFile(
+            IConfigurationBuilder configuration,
+            string secretPath,
+            bool optional,
+            bool reloadOnChange
+        )
         {
             if (string.IsNullOrEmpty(secretPath))
             {
@@ -183,7 +233,12 @@ namespace Microsoft.Extensions.Configuration
             PhysicalFileProvider? fileProvider = Directory.Exists(directoryPath)
                 ? new PhysicalFileProvider(directoryPath)
                 : null;
-            return configuration.AddJsonFile(fileProvider, PathHelper.SecretsFileName, optional, reloadOnChange);
+            return configuration.AddJsonFile(
+                fileProvider,
+                PathHelper.SecretsFileName,
+                optional,
+                reloadOnChange
+            );
         }
     }
 }

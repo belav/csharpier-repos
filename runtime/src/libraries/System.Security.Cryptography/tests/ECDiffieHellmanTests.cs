@@ -12,19 +12,25 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public static void ECCurve_ctor()
         {
-            using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256))
+            using (
+                ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP256)
+            )
             {
                 Assert.Equal(256, ecdh.KeySize);
                 ecdh.Exercise();
             }
 
-            using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP384))
+            using (
+                ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP384)
+            )
             {
                 Assert.Equal(384, ecdh.KeySize);
                 ecdh.Exercise();
             }
 
-            using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP521))
+            using (
+                ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create(ECCurve.NamedCurves.nistP521)
+            )
             {
                 Assert.Equal(521, ecdh.KeySize);
                 ecdh.Exercise();
@@ -49,7 +55,9 @@ namespace System.Security.Cryptography.Tests
         public void Create_InvalidECCurveFriendlyName_ThrowsPlatformNotSupportedException()
         {
             ECCurve curve = ECCurve.CreateFromFriendlyName("bad potato");
-            PlatformNotSupportedException pnse = Assert.Throws<PlatformNotSupportedException>(() => ECDiffieHellman.Create(curve));
+            PlatformNotSupportedException pnse = Assert.Throws<PlatformNotSupportedException>(
+                () => ECDiffieHellman.Create(curve)
+            );
             Assert.Contains("'bad potato'", pnse.Message);
         }
 
@@ -59,7 +67,12 @@ namespace System.Security.Cryptography.Tests
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
             {
-                byte[] newWay = ecdh.DeriveKeyFromHash(publicKey, HashAlgorithmName.SHA256, null, null);
+                byte[] newWay = ecdh.DeriveKeyFromHash(
+                    publicKey,
+                    HashAlgorithmName.SHA256,
+                    null,
+                    null
+                );
                 byte[] oldWay = ecdh.DeriveKeyMaterial(publicKey);
                 Assert.Equal(newWay, oldWay);
             }

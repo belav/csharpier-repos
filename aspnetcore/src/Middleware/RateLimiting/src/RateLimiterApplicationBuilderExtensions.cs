@@ -33,7 +33,10 @@ public static class RateLimiterApplicationBuilderExtensions
     /// <param name="app"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseRateLimiter(this IApplicationBuilder app, RateLimiterOptions options)
+    public static IApplicationBuilder UseRateLimiter(
+        this IApplicationBuilder app,
+        RateLimiterOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(options);
@@ -45,12 +48,19 @@ public static class RateLimiterApplicationBuilderExtensions
 
     private static void VerifyServicesAreRegistered(IApplicationBuilder app)
     {
-        var serviceProviderIsService = app.ApplicationServices.GetService<IServiceProviderIsService>();
-        if (serviceProviderIsService != null && !serviceProviderIsService.IsService(typeof(RateLimitingMetrics)))
+        var serviceProviderIsService =
+            app.ApplicationServices.GetService<IServiceProviderIsService>();
+        if (
+            serviceProviderIsService != null
+            && !serviceProviderIsService.IsService(typeof(RateLimitingMetrics))
+        )
         {
-            throw new InvalidOperationException(Resources.FormatUnableToFindServices(
-                nameof(IServiceCollection),
-                nameof(RateLimiterServiceCollectionExtensions.AddRateLimiter)));
+            throw new InvalidOperationException(
+                Resources.FormatUnableToFindServices(
+                    nameof(IServiceCollection),
+                    nameof(RateLimiterServiceCollectionExtensions.AddRateLimiter)
+                )
+            );
         }
     }
 }

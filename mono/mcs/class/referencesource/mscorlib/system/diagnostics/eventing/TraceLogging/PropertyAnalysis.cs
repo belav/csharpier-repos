@@ -22,7 +22,8 @@ namespace System.Diagnostics.Tracing
             string name,
             MethodInfo getterInfo,
             TraceLoggingTypeInfo typeInfo,
-            EventFieldAttribute fieldAttribute)
+            EventFieldAttribute fieldAttribute
+        )
         {
             this.name = name;
             this.getterInfo = getterInfo;

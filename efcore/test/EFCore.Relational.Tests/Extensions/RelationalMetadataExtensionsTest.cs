@@ -10,10 +10,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var property = modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Name)
-            .Metadata;
+        var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
         Assert.Null(property.IsFixedLength());
 
@@ -53,10 +50,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var property = modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Name)
-            .Metadata;
+        var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
         Assert.Equal("Name", property.GetColumnName());
 
@@ -75,9 +69,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>()
-            .Metadata;
+        var entityType = modelBuilder.Entity<Customer>().Metadata;
 
         Assert.Equal("Customer", entityType.GetTableName());
 
@@ -96,9 +88,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>()
-            .Metadata;
+        var entityType = modelBuilder.Entity<Customer>().Metadata;
 
         Assert.Null(entityType.GetSchema());
 
@@ -116,9 +106,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>()
-            .Metadata;
+        var entityType = modelBuilder.Entity<Customer>().Metadata;
 
         Assert.Null(entityType.GetSchema());
 
@@ -136,9 +124,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>()
-            .Metadata;
+        var entityType = modelBuilder.Entity<Customer>().Metadata;
 
         Assert.Null(entityType.GetViewSchema());
 
@@ -172,10 +158,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var property = modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Name)
-            .Metadata;
+        var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
         Assert.Null(property.GetColumnType());
 
@@ -193,10 +176,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var property = modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Name)
-            .Metadata;
+        var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
         Assert.Null(property.GetDefaultValueSql());
 
@@ -214,10 +194,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var property = modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Name)
-            .Metadata;
+        var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
         Assert.Null(property.GetComputedColumnSql());
 
@@ -235,10 +212,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var property = modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.AlternateId)
-            .Metadata;
+        var property = modelBuilder.Entity<Customer>().Property(e => e.AlternateId).Metadata;
 
         Assert.Equal(Guid.Empty, property.GetDefaultValue());
 
@@ -258,10 +232,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var property = modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.EnumValue)
-            .Metadata;
+        var property = modelBuilder.Entity<Customer>().Property(e => e.EnumValue).Metadata;
 
         Assert.Null(property.GetDefaultValue());
 
@@ -280,10 +251,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var property = modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Name)
-            .Metadata;
+        var property = modelBuilder.Entity<Customer>().Property(e => e.Name).Metadata;
 
         Assert.Null(property.GetDefaultValue());
 
@@ -291,8 +259,14 @@ public class RelationalMetadataExtensionsTest
 
         Assert.Equal(
             RelationalStrings.IncorrectDefaultValueType(
-                guid, typeof(Guid).Name, property.Name, property.ClrType, property.DeclaringType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => property.SetDefaultValue(guid)).Message);
+                guid,
+                typeof(Guid).Name,
+                property.Name,
+                property.ClrType,
+                property.DeclaringType.DisplayName()
+            ),
+            Assert.Throws<InvalidOperationException>(() => property.SetDefaultValue(guid)).Message
+        );
     }
 
     [ConditionalFact]
@@ -300,10 +274,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var key = modelBuilder
-            .Entity<Customer>()
-            .HasKey(e => e.Id)
-            .Metadata;
+        var key = modelBuilder.Entity<Customer>().HasKey(e => e.Id).Metadata;
 
         Assert.Equal("PK_Customer", key.GetName());
 
@@ -321,9 +292,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .HasKey(e => e.Id);
+        modelBuilder.Entity<Customer>().HasKey(e => e.Id);
 
         var foreignKey = modelBuilder
             .Entity<Order>()
@@ -348,10 +317,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var index = modelBuilder
-            .Entity<Customer>()
-            .HasIndex(e => e.Id)
-            .Metadata;
+        var index = modelBuilder.Entity<Customer>().HasIndex(e => e.Id).Metadata;
 
         Assert.Equal("IX_Customer_Id", index.GetDatabaseName());
 
@@ -369,9 +335,7 @@ public class RelationalMetadataExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>()
-            .Metadata;
+        var entityType = modelBuilder.Entity<Customer>().Metadata;
 
         Assert.Null(entityType.FindDiscriminatorProperty());
 
@@ -406,7 +370,9 @@ public class RelationalMetadataExtensionsTest
     [ConditionalFact]
     public void Can_get_and_set_dbfunction()
     {
-        var testMethod = typeof(TestDbFunctions).GetTypeInfo().GetDeclaredMethod(nameof(TestDbFunctions.MethodA));
+        var testMethod = typeof(TestDbFunctions)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(TestDbFunctions.MethodA));
 
         var modelBuilder = new ModelBuilder();
         var model = modelBuilder.Model;
@@ -592,9 +558,18 @@ public class RelationalMetadataExtensionsTest
         entityType.AddCheckConstraint("CK_Customer_AlternateId", "AlternateId > Id");
 
         Assert.Equal(
-            RelationalStrings.DuplicateCheckConstraint("CK_Customer_AlternateId", entityType.DisplayName(), entityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(
-                () => entityType.AddCheckConstraint("CK_Customer_AlternateId", "AlternateId < Id")).Message);
+            RelationalStrings.DuplicateCheckConstraint(
+                "CK_Customer_AlternateId",
+                entityType.DisplayName(),
+                entityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () =>
+                        entityType.AddCheckConstraint("CK_Customer_AlternateId", "AlternateId < Id")
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -603,7 +578,10 @@ public class RelationalMetadataExtensionsTest
         var entityTypeBuilder = CreateConventionModelBuilder().Entity<Customer>();
         var entityType = entityTypeBuilder.Metadata;
 
-        var constraint = entityType.AddCheckConstraint("CK_Customer_AlternateId", "AlternateId > Id");
+        var constraint = entityType.AddCheckConstraint(
+            "CK_Customer_AlternateId",
+            "AlternateId > Id"
+        );
 
         Assert.Same(constraint, entityType.RemoveCheckConstraint("CK_Customer_AlternateId"));
     }
@@ -617,14 +595,14 @@ public class RelationalMetadataExtensionsTest
         Assert.Null(entityType.RemoveCheckConstraint("CK_Customer_AlternateId"));
     }
 
-    protected virtual ModelBuilder CreateConventionModelBuilder()
-        => FakeRelationalTestHelpers.Instance.CreateConventionBuilder();
+    protected virtual ModelBuilder CreateConventionModelBuilder() =>
+        FakeRelationalTestHelpers.Instance.CreateConventionBuilder();
 
     private enum MyEnum : byte
     {
         Son,
         Mon,
-        Tue
+        Tue,
     }
 
     private class Customer
@@ -635,9 +613,7 @@ public class RelationalMetadataExtensionsTest
         public MyEnum? EnumValue { get; set; }
     }
 
-    private class SpecialCustomer : Customer
-    {
-    }
+    private class SpecialCustomer : Customer { }
 
     private class Order
     {

@@ -15,8 +15,14 @@ namespace Microsoft.CodeAnalysis.Xaml.Diagnostics.Analyzers
     {
         ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
-        Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(Document document, CancellationToken cancellationToken);
+        Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
 
-        Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(Document document, CancellationToken cancellationToken);
+        Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
     }
 }

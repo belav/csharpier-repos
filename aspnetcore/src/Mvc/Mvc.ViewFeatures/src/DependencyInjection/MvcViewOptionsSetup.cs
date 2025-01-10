@@ -19,7 +19,8 @@ internal sealed class MvcViewOptionsSetup : IConfigureOptions<MvcViewOptions>
 
     public MvcViewOptionsSetup(
         IOptions<MvcDataAnnotationsLocalizationOptions> dataAnnotationLocalizationOptions,
-        IValidationAttributeAdapterProvider validationAttributeAdapterProvider)
+        IValidationAttributeAdapterProvider validationAttributeAdapterProvider
+    )
     {
         ArgumentNullException.ThrowIfNull(dataAnnotationLocalizationOptions);
         ArgumentNullException.ThrowIfNull(validationAttributeAdapterProvider);
@@ -31,7 +32,8 @@ internal sealed class MvcViewOptionsSetup : IConfigureOptions<MvcViewOptions>
     public MvcViewOptionsSetup(
         IOptions<MvcDataAnnotationsLocalizationOptions> dataAnnotationOptions,
         IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
-        IStringLocalizerFactory stringLocalizerFactory)
+        IStringLocalizerFactory stringLocalizerFactory
+    )
         : this(dataAnnotationOptions, validationAttributeAdapterProvider)
     {
         ArgumentNullException.ThrowIfNull(stringLocalizerFactory);
@@ -43,10 +45,13 @@ internal sealed class MvcViewOptionsSetup : IConfigureOptions<MvcViewOptions>
     {
         // Set up client validators
         options.ClientModelValidatorProviders.Add(new DefaultClientModelValidatorProvider());
-        options.ClientModelValidatorProviders.Add(new DataAnnotationsClientModelValidatorProvider(
-            _validationAttributeAdapterProvider,
-            _dataAnnotationsLocalizationOptions,
-            _stringLocalizerFactory));
+        options.ClientModelValidatorProviders.Add(
+            new DataAnnotationsClientModelValidatorProvider(
+                _validationAttributeAdapterProvider,
+                _dataAnnotationsLocalizationOptions,
+                _stringLocalizerFactory
+            )
+        );
         options.ClientModelValidatorProviders.Add(new NumericClientModelValidatorProvider());
     }
 }

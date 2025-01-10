@@ -14,26 +14,29 @@ namespace Microsoft.Extensions.DependencyInjection;
 internal class DefaultRazorComponentsServiceOptionsConfiguration(
     IConfiguration configuration,
     ILoggerFactory loggerFactory,
-    IWebHostEnvironment environment)
-    : IPostConfigureOptions<RazorComponentsServiceOptions>
+    IWebHostEnvironment environment
+) : IPostConfigureOptions<RazorComponentsServiceOptions>
 {
     public IConfiguration Configuration { get; } = configuration;
 
     public void PostConfigure(string? name, RazorComponentsServiceOptions options)
     {
         var value = Configuration[WebHostDefaults.DetailedErrorsKey];
-        options.DetailedErrors = string.Equals(value, "true", StringComparison.OrdinalIgnoreCase) ||
-            string.Equals(value, "1", StringComparison.OrdinalIgnoreCase);
+        options.DetailedErrors =
+            string.Equals(value, "true", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(value, "1", StringComparison.OrdinalIgnoreCase);
 
         options._formMappingOptions = new FormDataMapperOptions(loggerFactory)
         {
             MaxRecursionDepth = options.MaxFormMappingRecursionDepth,
             MaxErrorCount = options.MaxFormMappingErrorCount,
             MaxCollectionSize = options.MaxFormMappingCollectionSize,
-            MaxKeyBufferSize = options.MaxFormMappingKeySize
+            MaxKeyBufferSize = options.MaxFormMappingKeySize,
         };
 
-        var file = environment.WebRootFileProvider.GetFileInfo($"{environment.ApplicationName}.modules.json");
+        var file = environment.WebRootFileProvider.GetFileInfo(
+            $"{environment.ApplicationName}.modules.json"
+        );
 
         if (file.Exists)
         {
@@ -54,7 +57,9 @@ internal class DefaultRazorComponentsServiceOptionsConfiguration(
                 {
                     if (options.JavaScriptInitializers != null)
                     {
-                        var initializers = JsonSerializer.Deserialize<string[]>(options.JavaScriptInitializers);
+                        var initializers = JsonSerializer.Deserialize<string[]>(
+                            options.JavaScriptInitializers
+                        );
                         if (initializers == null || initializers.Length == 0)
                         {
                             options.JavaScriptInitializers = null;
@@ -68,7 +73,6 @@ internal class DefaultRazorComponentsServiceOptionsConfiguration(
                     // and continue, letting the failure happen on the client.
                 }
             }
-
         }
     }
 }

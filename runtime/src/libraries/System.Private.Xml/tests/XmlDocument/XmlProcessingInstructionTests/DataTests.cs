@@ -11,7 +11,9 @@ namespace System.Xml.XmlDocumentTests
         public static void DataTest1()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<?PI1 processing instruction?><root><?PI2 processinginstruction?></root>");
+            xmlDocument.LoadXml(
+                "<?PI1 processing instruction?><root><?PI2 processinginstruction?></root>"
+            );
 
             var pi1 = (XmlProcessingInstruction)xmlDocument.FirstChild;
             var pi2 = (XmlProcessingInstruction)xmlDocument.DocumentElement.FirstChild;
@@ -20,7 +22,10 @@ namespace System.Xml.XmlDocumentTests
             Assert.Equal("processinginstruction", pi2.Data);
 
             pi1.Data = "new pi value";
-            Assert.Equal("<?PI1 new pi value?><root><?PI2 processinginstruction?></root>", xmlDocument.OuterXml);
+            Assert.Equal(
+                "<?PI1 new pi value?><root><?PI2 processinginstruction?></root>",
+                xmlDocument.OuterXml
+            );
         }
     }
 }

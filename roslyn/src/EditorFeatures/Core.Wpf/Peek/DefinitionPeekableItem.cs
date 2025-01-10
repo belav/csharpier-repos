@@ -25,11 +25,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
         private readonly IThreadingContext _threadingContext;
 
         public DefinitionPeekableItem(
-            Workspace workspace, ProjectId projectId, SymbolKey symbolKey,
+            Workspace workspace,
+            ProjectId projectId,
+            SymbolKey symbolKey,
             IPeekResultFactory peekResultFactory,
             IMetadataAsSourceFileService metadataAsSourceService,
             IGlobalOptionService globalOptions,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
             : base(peekResultFactory)
         {
             _workspace = workspace;
@@ -40,32 +43,46 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             _threadingContext = threadingContext;
         }
 
-        public override IEnumerable<IPeekRelationship> Relationships
-            => SpecializedCollections.SingletonEnumerable(PredefinedPeekRelationships.Definitions);
+        public override IEnumerable<IPeekRelationship> Relationships =>
+            SpecializedCollections.SingletonEnumerable(PredefinedPeekRelationships.Definitions);
 
-        public override IPeekResultSource GetOrCreateResultSource(string relationshipName)
-            => new ResultSource(this);
+        public override IPeekResultSource GetOrCreateResultSource(string relationshipName) =>
+            new ResultSource(this);
 
         private sealed class ResultSource : IPeekResultSource
         {
             private readonly DefinitionPeekableItem _peekableItem;
 
-            public ResultSource(DefinitionPeekableItem peekableItem)
-                => _peekableItem = peekableItem;
+            public ResultSource(DefinitionPeekableItem peekableItem) =>
+                _peekableItem = peekableItem;
 
-            public void FindResults(string relationshipName, IPeekResultCollection resultCollection, CancellationToken cancellationToken, IFindPeekResultsCallback callback)
+            public void FindResults(
+                string relationshipName,
+                IPeekResultCollection resultCollection,
+                CancellationToken cancellationToken,
+                IFindPeekResultsCallback callback
+            )
             {
                 if (relationshipName != PredefinedPeekRelationships.Definitions.Name)
                     return;
 
                 // Note: this is called on a background thread, but we must block the thread since the API doesn't support proper asynchrony.
-                var success = _peekableItem._threadingContext.JoinableTaskFactory.Run(async () => await FindResultsAsync(
-                    resultCollection, callback, cancellationToken).ConfigureAwait(false));
+                var success = _peekableItem._threadingContext.JoinableTaskFactory.Run(
+                    async () =>
+                        await FindResultsAsync(resultCollection, callback, cancellationToken)
+                            .ConfigureAwait(false)
+                );
                 if (!success)
-                    callback.ReportFailure(new Exception(EditorFeaturesResources.No_information_found));
+                    callback.ReportFailure(
+                        new Exception(EditorFeaturesResources.No_information_found)
+                    );
             }
 
-            private async Task<bool> FindResultsAsync(IPeekResultCollection resultCollection, IFindPeekResultsCallback callback, CancellationToken cancellationToken)
+            private async Task<bool> FindResultsAsync(
+                IPeekResultCollection resultCollection,
+                IFindPeekResultsCallback callback,
+                CancellationToken cancellationToken
+            )
             {
                 var workspace = _peekableItem._workspace;
                 var solution = workspace.CurrentSolution;
@@ -73,11 +90,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 if (project is null)
                     return false;
 
-                var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+                var compilation = await project
+                    .GetCompilationAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 if (compilation is null)
                     return false;
 
-                var symbol = _peekableItem._symbolKey.Resolve(compilation, ignoreAssemblyKey: true, cancellationToken: cancellationToken).Symbol;
+                var symbol = _peekableItem
+                    ._symbolKey.Resolve(
+                        compilation,
+                        ignoreAssemblyKey: true,
+                        cancellationToken: cancellationToken
+                    )
+                    .Symbol;
                 if (symbol == null)
                     return false;
 
@@ -86,12 +111,42 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 if (sourceLocations.Count == 0)
                 {
                     // It's a symbol from metadata, so we want to go produce it from metadata
-                    var options = _peekableItem._globalOptions.GetMetadataAsSourceOptions(project.Services);
-                    var declarationFile = await _peekableItem._metadataAsSourceFileService.GetGeneratedFileAsync(workspace, project, symbol, signaturesOnly: false, options, cancellationToken).ConfigureAwait(false);
-                    var peekDisplayInfo = new PeekResultDisplayInfo(declarationFile.DocumentTitle, declarationFile.DocumentTooltip, declarationFile.DocumentTitle, declarationFile.DocumentTooltip);
+                    var options = _peekableItem._globalOptions.GetMetadataAsSourceOptions(
+                        project.Services
+                    );
+                    var declarationFile = await _peekableItem
+                        ._metadataAsSourceFileService.GetGeneratedFileAsync(
+                            workspace,
+                            project,
+                            symbol,
+                            signaturesOnly: false,
+                            options,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                    var peekDisplayInfo = new PeekResultDisplayInfo(
+                        declarationFile.DocumentTitle,
+                        declarationFile.DocumentTooltip,
+                        declarationFile.DocumentTitle,
+                        declarationFile.DocumentTooltip
+                    );
                     var identifierSpan = declarationFile.IdentifierLocation.GetLineSpan().Span;
-                    var entityOfInterestSpan = PeekHelpers.GetEntityOfInterestSpan(symbol, workspace, declarationFile.IdentifierLocation, cancellationToken);
-                    resultCollection.Add(PeekHelpers.CreateDocumentPeekResult(declarationFile.FilePath, identifierSpan, entityOfInterestSpan, peekDisplayInfo, _peekableItem.PeekResultFactory, isReadOnly: true));
+                    var entityOfInterestSpan = PeekHelpers.GetEntityOfInterestSpan(
+                        symbol,
+                        workspace,
+                        declarationFile.IdentifierLocation,
+                        cancellationToken
+                    );
+                    resultCollection.Add(
+                        PeekHelpers.CreateDocumentPeekResult(
+                            declarationFile.FilePath,
+                            identifierSpan,
+                            entityOfInterestSpan,
+                            peekDisplayInfo,
+                            _peekableItem.PeekResultFactory,
+                            isReadOnly: true
+                        )
+                    );
                 }
 
                 var processedSourceLocations = 0;
@@ -99,9 +154,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 {
                     var declarationLocation = declaration.GetMappedLineSpan();
 
-                    var entityOfInterestSpan = PeekHelpers.GetEntityOfInterestSpan(symbol, workspace, declaration, cancellationToken);
-                    resultCollection.Add(PeekHelpers.CreateDocumentPeekResult(declarationLocation.Path, declarationLocation.Span, entityOfInterestSpan, _peekableItem.PeekResultFactory));
-                    callback.ReportProgress(100 * ++processedSourceLocations / sourceLocations.Count);
+                    var entityOfInterestSpan = PeekHelpers.GetEntityOfInterestSpan(
+                        symbol,
+                        workspace,
+                        declaration,
+                        cancellationToken
+                    );
+                    resultCollection.Add(
+                        PeekHelpers.CreateDocumentPeekResult(
+                            declarationLocation.Path,
+                            declarationLocation.Span,
+                            entityOfInterestSpan,
+                            _peekableItem.PeekResultFactory
+                        )
+                    );
+                    callback.ReportProgress(
+                        100 * ++processedSourceLocations / sourceLocations.Count
+                    );
                 }
 
                 return true;

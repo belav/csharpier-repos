@@ -17,12 +17,27 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public void Constructor()
         {
             Lazy<ParameterInfo> parameter = CreateLazyParameter();
-            IEnumerable<KeyValuePair<string, Type>> requiredMetadata = new KeyValuePair<string, Type>[] { new KeyValuePair<string, Type>("Foo", typeof(object)) };
+            IEnumerable<KeyValuePair<string, Type>> requiredMetadata = new KeyValuePair<
+                string,
+                Type
+            >[]
+            {
+                new KeyValuePair<string, Type>("Foo", typeof(object)),
+            };
             IDictionary<string, object> metadata = new Dictionary<string, object>();
             metadata["Key"] = "value";
 
-            ReflectionParameterImportDefinition definition = new ReflectionParameterImportDefinition(
-                            parameter, "Contract", (string)null, requiredMetadata, ImportCardinality.ZeroOrMore, CreationPolicy.NonShared, metadata, null);
+            ReflectionParameterImportDefinition definition =
+                new ReflectionParameterImportDefinition(
+                    parameter,
+                    "Contract",
+                    (string)null,
+                    requiredMetadata,
+                    ImportCardinality.ZeroOrMore,
+                    CreationPolicy.NonShared,
+                    metadata,
+                    null
+                );
 
             Assert.Same(parameter, definition.ImportingLazyParameter);
             Assert.Equal("Contract", definition.ContractName);
@@ -40,8 +55,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             Lazy<ParameterInfo> parameter = CreateLazyParameter();
 
-            ReflectionParameterImportDefinition definition = new ReflectionParameterImportDefinition(
-                parameter, "Contract", (string)null, null, ImportCardinality.ZeroOrMore, CreationPolicy.NonShared, null, null);
+            ReflectionParameterImportDefinition definition =
+                new ReflectionParameterImportDefinition(
+                    parameter,
+                    "Contract",
+                    (string)null,
+                    null,
+                    ImportCardinality.ZeroOrMore,
+                    CreationPolicy.NonShared,
+                    null,
+                    null
+                );
 
             Assert.NotNull(definition.RequiredMetadata);
             Assert.Equal(0, definition.RequiredMetadata.Count());
@@ -53,8 +77,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
             Lazy<ParameterInfo> parameter = CreateLazyParameter();
             var expectedPartDefinition = PartDefinitionFactory.CreateAttributed(typeof(object));
 
-            ReflectionParameterImportDefinition definition = new ReflectionParameterImportDefinition(
-                parameter, "Contract", (string)null, null, ImportCardinality.ZeroOrMore, CreationPolicy.NonShared, null, expectedPartDefinition);
+            ReflectionParameterImportDefinition definition =
+                new ReflectionParameterImportDefinition(
+                    parameter,
+                    "Contract",
+                    (string)null,
+                    null,
+                    ImportCardinality.ZeroOrMore,
+                    CreationPolicy.NonShared,
+                    null,
+                    expectedPartDefinition
+                );
 
             Assert.Same(expectedPartDefinition, ((ICompositionElement)definition).Origin);
         }
@@ -64,14 +97,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             var names = Expectations.GetContractNamesWithEmpty();
 
-            Assert.All(names, name =>
-            {
-                var definition = CreateReflectionParameterImportDefinition(name);
+            Assert.All(
+                names,
+                name =>
+                {
+                    var definition = CreateReflectionParameterImportDefinition(name);
 
-                var e = CreateDisplayNameExpectationFromParameterName(definition, name);
+                    var e = CreateDisplayNameExpectationFromParameterName(definition, name);
 
-                Assert.Equal(e, ((ICompositionElement)definition).DisplayName);
-            });
+                    Assert.Equal(e, ((ICompositionElement)definition).DisplayName);
+                }
+            );
         }
 
         [Fact]
@@ -79,51 +115,87 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             var types = Expectations.GetTypes();
 
-            Assert.All(types, type =>
-            {
-                var definition = CreateReflectionParameterImportDefinition(type);
+            Assert.All(
+                types,
+                type =>
+                {
+                    var definition = CreateReflectionParameterImportDefinition(type);
 
-                var e = CreateDisplayNameExpectationFromContractName(definition, type);
+                    var e = CreateDisplayNameExpectationFromContractName(definition, type);
 
-                Assert.Equal(e, ((ICompositionElement)definition).DisplayName);
-            });
+                    Assert.Equal(e, ((ICompositionElement)definition).DisplayName);
+                }
+            );
         }
 
         private Lazy<ParameterInfo> CreateLazyParameter()
         {
-            return typeof(SimpleConstructorInjectedObject).GetConstructors().First().GetParameters().First().AsLazy();
+            return typeof(SimpleConstructorInjectedObject)
+                .GetConstructors()
+                .First()
+                .GetParameters()
+                .First()
+                .AsLazy();
         }
 
-        private static string CreateDisplayNameExpectationFromContractName(ReflectionParameterImportDefinition definition, Type type)
+        private static string CreateDisplayNameExpectationFromContractName(
+            ReflectionParameterImportDefinition definition,
+            Type type
+        )
         {
             string contractName = AttributedModelServices.GetContractName(type);
 
-            return string.Format("{0} (Parameter=\"\", ContractName=\"{1}\")", definition.ImportingLazyParameter.Value.Member.GetDisplayName(), contractName);
+            return string.Format(
+                "{0} (Parameter=\"\", ContractName=\"{1}\")",
+                definition.ImportingLazyParameter.Value.Member.GetDisplayName(),
+                contractName
+            );
         }
 
-        private static string CreateDisplayNameExpectationFromParameterName(ReflectionParameterImportDefinition definition, string name)
+        private static string CreateDisplayNameExpectationFromParameterName(
+            ReflectionParameterImportDefinition definition,
+            string name
+        )
         {
-            return string.Format("{0} (Parameter=\"{1}\", ContractName=\"System.String\")", definition.ImportingLazyParameter.Value.Member.GetDisplayName(), name);
+            return string.Format(
+                "{0} (Parameter=\"{1}\", ContractName=\"System.String\")",
+                definition.ImportingLazyParameter.Value.Member.GetDisplayName(),
+                name
+            );
         }
 
-        private static ReflectionParameterImportDefinition CreateReflectionParameterImportDefinition(Type parameterType)
+        private static ReflectionParameterImportDefinition CreateReflectionParameterImportDefinition(
+            Type parameterType
+        )
         {
             var parameter = ReflectionFactory.CreateParameter(parameterType);
 
             return CreateReflectionParameterImportDefinition(parameter);
         }
 
-        private static ReflectionParameterImportDefinition CreateReflectionParameterImportDefinition(string name)
+        private static ReflectionParameterImportDefinition CreateReflectionParameterImportDefinition(
+            string name
+        )
         {
             var parameter = ReflectionFactory.CreateParameter(name);
 
             return CreateReflectionParameterImportDefinition(parameter);
         }
 
-        private static ReflectionParameterImportDefinition CreateReflectionParameterImportDefinition(ParameterInfo parameter)
+        private static ReflectionParameterImportDefinition CreateReflectionParameterImportDefinition(
+            ParameterInfo parameter
+        )
         {
             return new ReflectionParameterImportDefinition(
-                parameter.AsLazy(), AttributedModelServices.GetContractName(parameter.ParameterType), (string)null, null, ImportCardinality.ZeroOrMore, CreationPolicy.NonShared, null, null);
+                parameter.AsLazy(),
+                AttributedModelServices.GetContractName(parameter.ParameterType),
+                (string)null,
+                null,
+                ImportCardinality.ZeroOrMore,
+                CreationPolicy.NonShared,
+                null,
+                null
+            );
         }
     }
 }

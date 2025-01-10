@@ -28,25 +28,30 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Initializes a new instance of the <see cref="ComposablePartExportProvider"/> class.
         /// </summary>
-        public ComposablePartExportProvider() : 
-            this(false)
-        {
-        }
+        public ComposablePartExportProvider()
+            : this(false) { }
 
         public ComposablePartExportProvider(bool isThreadSafe)
-            :this(isThreadSafe ? CompositionOptions.IsThreadSafe : CompositionOptions.Default)
-        {
-        }
+            : this(isThreadSafe ? CompositionOptions.IsThreadSafe : CompositionOptions.Default) { }
 
         public ComposablePartExportProvider(CompositionOptions compositionOptions)
         {
-            if (compositionOptions > (CompositionOptions.DisableSilentRejection | CompositionOptions.IsThreadSafe | CompositionOptions.ExportCompositionService))
+            if (
+                compositionOptions
+                > (
+                    CompositionOptions.DisableSilentRejection
+                    | CompositionOptions.IsThreadSafe
+                    | CompositionOptions.ExportCompositionService
+                )
+            )
             {
                 throw new ArgumentOutOfRangeException("compositionOptions");
             }
 
             this._compositionOptions = compositionOptions;
-            this._lock = new CompositionLock(compositionOptions.HasFlag(CompositionOptions.IsThreadSafe));
+            this._lock = new CompositionLock(
+                compositionOptions.HasFlag(CompositionOptions.IsThreadSafe)
+            );
         }
 
         /// <summary>
@@ -106,8 +111,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     exports.
         /// </summary>
         /// <value>
-        ///     The <see cref="ExportProvider"/> which provides the 
-        ///     <see cref="ComposablePartExportProvider"/> access to <see cref="Export"/> objects. 
+        ///     The <see cref="ExportProvider"/> which provides the
+        ///     <see cref="ComposablePartExportProvider"/> access to <see cref="Export"/> objects.
         ///     The default is <see langword="null"/>.
         /// </value>
         /// <exception cref="ArgumentNullException">
@@ -118,17 +123,21 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <para>
         ///         -or-
         ///     </para>
-        ///     The methods on the <see cref="ComposablePartExportProvider"/> 
+        ///     The methods on the <see cref="ComposablePartExportProvider"/>
         ///     have already been accessed.
         /// </exception>
         /// <exception cref="ObjectDisposedException">
         ///     The <see cref="ComposablePartExportProvider"/> has been disposed of.
         /// </exception>
         /// <remarks>
-        ///     This property must be set before accessing any methods on the 
+        ///     This property must be set before accessing any methods on the
         ///     <see cref="ComposablePartExportProvider"/>.
         /// </remarks>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "EnsureCanSet ensures that the property is set only once, Dispose is not required")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "EnsureCanSet ensures that the property is set only once, Dispose is not required"
+        )]
         public ExportProvider SourceProvider
         {
             get
@@ -157,7 +166,10 @@ namespace System.ComponentModel.Composition.Hosting
                 if (this._importEngine == null)
                 {
                     Assumes.NotNull(this._sourceProvider);
-                    ImportEngine importEngine = new ImportEngine(this._sourceProvider, this._compositionOptions);
+                    ImportEngine importEngine = new ImportEngine(
+                        this._sourceProvider,
+                        this._compositionOptions
+                    );
                     using (this._lock.LockStateForWrite())
                     {
                         if (this._importEngine == null)
@@ -179,7 +191,6 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-
         /// <summary>
         /// Returns all exports that match the conditions of the specified import.
         /// </summary>
@@ -199,7 +210,10 @@ namespace System.ComponentModel.Composition.Hosting
         /// it should return an empty <see cref="IEnumerable{T}"/> of <see cref="Export"/>.
         /// </note>
         /// </remarks>
-        protected override IEnumerable<Export> GetExportsCore(ImportDefinition definition, AtomicComposition atomicComposition)
+        protected override IEnumerable<Export> GetExportsCore(
+            ImportDefinition definition,
+            AtomicComposition atomicComposition
+        )
         {
             this.ThrowIfDisposed();
             this.EnsureRunning();
@@ -231,7 +245,7 @@ namespace System.ComponentModel.Composition.Hosting
                 }
             }
             return exports;
-        }    
+        }
 
         public void Compose(CompositionBatch batch)
         {
@@ -309,8 +323,9 @@ namespace System.ComponentModel.Composition.Hosting
             // - Satisfy imports on all newly added component parts
             foreach (ComposablePart part in batch.PartsToAdd)
             {
-                result = result.MergeResult(CompositionServices.TryInvoke(() =>
-                    this.ImportEngine.SatisfyImports(part)));
+                result = result.MergeResult(
+                    CompositionServices.TryInvoke(() => this.ImportEngine.SatisfyImports(part))
+                );
             }
 
             // return errors
@@ -350,7 +365,7 @@ namespace System.ComponentModel.Composition.Hosting
             }
 
             // Clone the batch, so that the external changes wouldn't happen half-way thorugh compose
-            // NOTE : this does not guarantee the atomicity of cloning, which is not the goal anyway, 
+            // NOTE : this does not guarantee the atomicity of cloning, which is not the goal anyway,
             // rather the fact that all subsequent calls will deal with an unchanging batch
             batch = new CompositionBatch(batch.PartsToAdd, partsToRemove);
 
@@ -370,19 +385,26 @@ namespace System.ComponentModel.Composition.Hosting
             // Recompose any imports effected by the these changes (the changes are
             // observable through GetExports in the appropriate atomicComposition, thus we can fire
             // the event
-            IEnumerable<ExportDefinition> addedExports = batch.PartsToAdd.Count != 0 ?
-                batch.PartsToAdd.SelectMany(part => part.ExportDefinitions).ToArray() :
-                new ExportDefinition[0];
+            IEnumerable<ExportDefinition> addedExports =
+                batch.PartsToAdd.Count != 0
+                    ? batch.PartsToAdd.SelectMany(part => part.ExportDefinitions).ToArray()
+                    : new ExportDefinition[0];
 
-            IEnumerable<ExportDefinition> removedExports = batch.PartsToRemove.Count != 0 ?
-                batch.PartsToRemove.SelectMany(part => part.ExportDefinitions).ToArray() :
-                new ExportDefinition[0];
+            IEnumerable<ExportDefinition> removedExports =
+                batch.PartsToRemove.Count != 0
+                    ? batch.PartsToRemove.SelectMany(part => part.ExportDefinitions).ToArray()
+                    : new ExportDefinition[0];
 
             this.OnExportsChanging(
-                new ExportsChangeEventArgs(addedExports, removedExports, atomicComposition));
+                new ExportsChangeEventArgs(addedExports, removedExports, atomicComposition)
+            );
 
-            atomicComposition.AddCompleteAction(() => this.OnExportsChanged(
-                new ExportsChangeEventArgs(addedExports, removedExports, null)));
+            atomicComposition.AddCompleteAction(
+                () =>
+                    this.OnExportsChanged(
+                        new ExportsChangeEventArgs(addedExports, removedExports, null)
+                    )
+            );
         }
 
         private Export CreateExport(ComposablePart part, ExportDefinition export)
@@ -395,12 +417,20 @@ namespace System.ComponentModel.Composition.Hosting
             this.ThrowIfDisposed();
             this.EnsureRunning();
 
-            return CompositionServices.GetExportedValueFromComposedPart(this.ImportEngine, part, export);
+            return CompositionServices.GetExportedValueFromComposedPart(
+                this.ImportEngine,
+                part,
+                export
+            );
         }
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Contracts", "CC1053", Justification = "Suppressing warning because this validator has no public contract")]
+        [SuppressMessage(
+            "Microsoft.Contracts",
+            "CC1053",
+            Justification = "Suppressing warning because this validator has no public contract"
+        )]
         private void ThrowIfDisposed()
         {
             if (this._isDisposed)
@@ -414,13 +444,23 @@ namespace System.ComponentModel.Composition.Hosting
         {
             if (this._sourceProvider == null)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Strings.ObjectMustBeInitialized, "SourceProvider")); // NOLOC
+                throw new InvalidOperationException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Strings.ObjectMustBeInitialized,
+                        "SourceProvider"
+                    )
+                ); // NOLOC
             }
         }
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Contracts", "CC1053", Justification = "Suppressing warning because this validator has no public contract")]
+        [SuppressMessage(
+            "Microsoft.Contracts",
+            "CC1053",
+            Justification = "Suppressing warning because this validator has no public contract"
+        )]
         private void EnsureRunning()
         {
             if (!this._isRunning)
@@ -442,7 +482,9 @@ namespace System.ComponentModel.Composition.Hosting
         {
             if ((this._isRunning) || (currentValue != null))
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Strings.ObjectAlreadyInitialized));
+                throw new InvalidOperationException(
+                    string.Format(CultureInfo.CurrentCulture, Strings.ObjectAlreadyInitialized)
+                );
             }
         }
     }

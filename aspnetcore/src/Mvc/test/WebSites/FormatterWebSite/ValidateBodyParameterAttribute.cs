@@ -14,23 +14,25 @@ public class ValidateBodyParameterAttribute : ActionFilterAttribute
     {
         if (!context.ModelState.IsValid)
         {
-            var bodyParameter = context.ActionDescriptor
-                                      .Parameters
-                                      .FirstOrDefault(parameter => IsBodyBindingSource(
-                                          parameter.BindingInfo?.BindingSource));
+            var bodyParameter = context.ActionDescriptor.Parameters.FirstOrDefault(parameter =>
+                IsBodyBindingSource(parameter.BindingInfo?.BindingSource)
+            );
             if (bodyParameter != null)
             {
                 // Body model binder normally reports errors for parameters using the empty name.
-                var parameterBindingErrors = context.ModelState[bodyParameter.Name]?.Errors ??
-                    context.ModelState[string.Empty]?.Errors;
+                var parameterBindingErrors =
+                    context.ModelState[bodyParameter.Name]?.Errors
+                    ?? context.ModelState[string.Empty]?.Errors;
                 if (parameterBindingErrors != null && parameterBindingErrors.Count != 0)
                 {
                     var errorInfo = new ErrorInfo
                     {
-                        ActionName = ((ControllerActionDescriptor)context.ActionDescriptor).ActionName,
+                        ActionName = (
+                            (ControllerActionDescriptor)context.ActionDescriptor
+                        ).ActionName,
                         ParameterName = bodyParameter.Name,
                         Errors = parameterBindingErrors.Select(x => x.ErrorMessage).ToList(),
-                        Source = "filter"
+                        Source = "filter",
                     };
 
                     context.Result = new ObjectResult(errorInfo);

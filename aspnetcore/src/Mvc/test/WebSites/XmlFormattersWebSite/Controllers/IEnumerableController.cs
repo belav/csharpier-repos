@@ -25,10 +25,11 @@ public class IEnumerableController : Controller
 
     public IEnumerable<Person> WrappedTypes()
     {
-        return new[] {
-                new Person() { Id = 10, Name = "Mike" },
-                new Person() { Id = 11, Name = "Jimmy" }
-            };
+        return new[]
+        {
+            new Person() { Id = 10, Name = "Mike" },
+            new Person() { Id = 11, Name = "Jimmy" },
+        };
     }
 
     public IEnumerable<Person> WrappedTypes_Empty()

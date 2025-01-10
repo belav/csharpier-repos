@@ -17,7 +17,9 @@ internal class RazorInitializeHandler : ILspServiceNotificationHandler<object>
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public RazorInitializeHandler(Lazy<RazorWorkspaceListenerInitializer> razorWorkspaceListenerInitializer)
+    public RazorInitializeHandler(
+        Lazy<RazorWorkspaceListenerInitializer> razorWorkspaceListenerInitializer
+    )
     {
         _razorWorkspaceListenerInitializer = razorWorkspaceListenerInitializer;
     }
@@ -25,7 +27,11 @@ internal class RazorInitializeHandler : ILspServiceNotificationHandler<object>
     public bool MutatesSolutionState => false;
     public bool RequiresLSPSolution => false;
 
-    Task INotificationHandler<object, RequestContext>.HandleNotificationAsync(object request, RequestContext requestContext, CancellationToken cancellationToken)
+    Task INotificationHandler<object, RequestContext>.HandleNotificationAsync(
+        object request,
+        RequestContext requestContext,
+        CancellationToken cancellationToken
+    )
     {
         _razorWorkspaceListenerInitializer.Value.Initialize();
 

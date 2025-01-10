@@ -34,11 +34,29 @@ namespace System.Diagnostics
                 if (Interop.procfs.TryReadStatFile(pid, out Interop.procfs.ParsedStat parsedStat))
                 {
                     string actualProcessName = GetUntruncatedProcessName(ref parsedStat);
-                    if ((processName == "" || string.Equals(processName, actualProcessName, StringComparison.OrdinalIgnoreCase)) &&
-                        Interop.procfs.TryReadStatusFile(pid, out Interop.procfs.ParsedStatus parsedStatus))
+                    if (
+                        (
+                            processName == ""
+                            || string.Equals(
+                                processName,
+                                actualProcessName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                        && Interop.procfs.TryReadStatusFile(
+                            pid,
+                            out Interop.procfs.ParsedStatus parsedStatus
+                        )
+                    )
                     {
-                        ProcessInfo processInfo = ProcessManager.CreateProcessInfo(ref parsedStat, ref parsedStatus, actualProcessName);
-                        processes.Add(new Process(machineName, isRemoteMachine: false, pid, processInfo));
+                        ProcessInfo processInfo = ProcessManager.CreateProcessInfo(
+                            ref parsedStat,
+                            ref parsedStatus,
+                            actualProcessName
+                        );
+                        processes.Add(
+                            new Process(machineName, isRemoteMachine: false, pid, processInfo)
+                        );
                     }
                 }
             }
@@ -52,19 +70,13 @@ namespace System.Diagnostics
         [SupportedOSPlatform("maccatalyst")]
         public TimeSpan PrivilegedProcessorTime
         {
-            get
-            {
-                return TicksToTimeSpan(GetStat().stime);
-            }
+            get { return TicksToTimeSpan(GetStat().stime); }
         }
 
         /// <summary>Gets the time the associated process was started.</summary>
         internal DateTime StartTimeCore
         {
-            get
-            {
-                return BootTimeToDateTime(TicksToTimeSpan(GetStat().starttime));
-            }
+            get { return BootTimeToDateTime(TicksToTimeSpan(GetStat().starttime)); }
         }
 
         /// <summary>Computes a time based on a number of ticks since boot.</summary>
@@ -81,28 +93,32 @@ namespace System.Diagnostics
         }
 
         private static long s_bootTimeTicks;
+
         /// <summary>Gets the system boot time.</summary>
         private static DateTime BootTime
         {
             get
             {
-               long bootTimeTicks = Interlocked.Read(ref s_bootTimeTicks);
-               if (bootTimeTicks == 0)
-               {
+                long bootTimeTicks = Interlocked.Read(ref s_bootTimeTicks);
+                if (bootTimeTicks == 0)
+                {
                     bootTimeTicks = Interop.Sys.GetBootTimeTicks();
-                    long oldValue = Interlocked.CompareExchange(ref s_bootTimeTicks, bootTimeTicks, 0);
+                    long oldValue = Interlocked.CompareExchange(
+                        ref s_bootTimeTicks,
+                        bootTimeTicks,
+                        0
+                    );
                     if (oldValue != 0) // a different thread has managed to update the ticks first
                     {
                         bootTimeTicks = oldValue; // consistency
                     }
-               }
-               return new DateTime(bootTimeTicks);
-           }
-       }
+                }
+                return new DateTime(bootTimeTicks);
+            }
+        }
 
         /// <summary>Gets the parent process ID</summary>
-        private int ParentProcessId =>
-            GetStat().ppid;
+        private int ParentProcessId => GetStat().ppid;
 
         /// <summary>Gets execution path</summary>
         private static string? GetPathToOpenFile()
@@ -145,10 +161,7 @@ namespace System.Diagnostics
         [SupportedOSPlatform("maccatalyst")]
         public TimeSpan UserProcessorTime
         {
-            get
-            {
-                return TicksToTimeSpan(GetStat().utime);
-            }
+            get { return TicksToTimeSpan(GetStat().utime); }
         }
 
         partial void EnsureHandleCountPopulated()
@@ -165,11 +178,12 @@ namespace System.Diagnostics
                 {
                     try
                     {
-                        _processInfo.HandleCount = Directory.GetFiles(path, "*", SearchOption.TopDirectoryOnly).Length;
+                        _processInfo.HandleCount = Directory
+                            .GetFiles(path, "*", SearchOption.TopDirectoryOnly)
+                            .Length;
                     }
                     catch (DirectoryNotFoundException) // Occurs when the process is deleted between the Exists check and the GetFiles call.
-                    {
-                    }
+                    { }
                 }
             }
         }
@@ -242,7 +256,12 @@ namespace System.Diagnostics
         /// <param name="resultingMin">The resulting minimum working set limit after any changes applied.</param>
         /// <param name="resultingMax">The resulting maximum working set limit after any changes applied.</param>
 #pragma warning disable IDE0060
-        private static void SetWorkingSetLimitsCore(IntPtr? newMin, IntPtr? newMax, out IntPtr resultingMin, out IntPtr resultingMax)
+        private static void SetWorkingSetLimitsCore(
+            IntPtr? newMin,
+            IntPtr? newMax,
+            out IntPtr resultingMin,
+            out IntPtr resultingMax
+        )
         {
             // RLIMIT_RSS with setrlimit not supported on Linux > 2.4.30.
             throw new PlatformNotSupportedException(SR.MinimumWorkingSetNotSupported);
@@ -253,8 +272,9 @@ namespace System.Diagnostics
         /// <param name="processId">The pid for the target process, or -1 for the current process.</param>
         internal static string? GetExePath(int processId = -1)
         {
-            return processId == -1 ? Environment.ProcessPath :
-                Interop.Sys.ReadLink(Interop.procfs.GetExeFilePathForProcess(processId));
+            return processId == -1
+                ? Environment.ProcessPath
+                : Interop.Sys.ReadLink(Interop.procfs.GetExeFilePathForProcess(processId));
         }
 
         /// <summary>Gets the name that was used to start the process, or null if it could not be retrieved.</summary>
@@ -267,7 +287,16 @@ namespace System.Diagnostics
             try
             {
                 // bufferSize == 1 used to avoid unnecessary buffer in FileStream
-                using (var fs = new FileStream(cmdLineFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1, useAsync: false))
+                using (
+                    var fs = new FileStream(
+                        cmdLineFilePath,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read,
+                        bufferSize: 1,
+                        useAsync: false
+                    )
+                )
                 {
                     Span<byte> buffer = stackalloc byte[512];
                     int bytesRead = 0;
@@ -301,7 +330,10 @@ namespace System.Diagnostics
                         if (argEnd != -1)
                         {
                             // Check if argv[0] has the process name.
-                            string? name = GetUntruncatedNameFromArg(argRemainder.Slice(0, argEnd), prefix: stat.comm);
+                            string? name = GetUntruncatedNameFromArg(
+                                argRemainder.Slice(0, argEnd),
+                                prefix: stat.comm
+                            );
                             if (name != null)
                             {
                                 return name;
@@ -312,7 +344,10 @@ namespace System.Diagnostics
                             argEnd = argRemainder.IndexOf((byte)'\0');
                             if (argEnd != -1)
                             {
-                                name = GetUntruncatedNameFromArg(argRemainder.Slice(0, argEnd), prefix: stat.comm);
+                                name = GetUntruncatedNameFromArg(
+                                    argRemainder.Slice(0, argEnd),
+                                    prefix: stat.comm
+                                );
                                 return name ?? stat.comm;
                             }
                         }

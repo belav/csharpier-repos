@@ -37,133 +37,163 @@ using Mono.XBuild.Framework;
 
 namespace Mono.XBuild.CommandLine
 {
-	internal class LoggerInfo : AssemblyLoadInfo
-	{
-		static readonly Regex assemblyInfoRegEx = new Regex(@"(?<assemblyName>[\w\.]+)(,\s?Version=(?<assemblyVersion>\d+\.\d+\.\d+\.\d+))?(,\s?Culture=(?<assemblyCulture>\w+))?(,\s?PublicKeyToken=(?<publicKeyToken>\w+))?",
-			RegexOptions.Compiled | RegexOptions.CultureInvariant);
+    internal class LoggerInfo : AssemblyLoadInfo
+    {
+        static readonly Regex assemblyInfoRegEx = new Regex(
+            @"(?<assemblyName>[\w\.]+)(,\s?Version=(?<assemblyVersion>\d+\.\d+\.\d+\.\d+))?(,\s?Culture=(?<assemblyCulture>\w+))?(,\s?PublicKeyToken=(?<publicKeyToken>\w+))?",
+            RegexOptions.Compiled | RegexOptions.CultureInvariant
+        );
 
-		string loggerAssemblyName;
-		string loggerType;
-		string loggerArgs;
+        string loggerAssemblyName;
+        string loggerType;
+        string loggerArgs;
 
-		string assemblyInfoName;
-		string assemblyInfoVersion;
-		string assemblyInfoCulture;
-		string assemblyInfoPublicKeyToken;
+        string assemblyInfoName;
+        string assemblyInfoVersion;
+        string assemblyInfoCulture;
+        string assemblyInfoPublicKeyToken;
 
-		internal LoggerInfo (string value)
-		{
-			if (!Parse (value))
-				return;
+        internal LoggerInfo(string value)
+        {
+            if (!Parse(value))
+                return;
 
-			if (string.IsNullOrEmpty (loggerType))
-				loggerType = GetLoggerTypeName (loggerAssemblyName);
+            if (string.IsNullOrEmpty(loggerType))
+                loggerType = GetLoggerTypeName(loggerAssemblyName);
 
-			if (assemblyInfoName != null)
-				SetAssemblyName (LoadInfoType.AssemblyName, null, assemblyInfoName, assemblyInfoVersion, assemblyInfoCulture, assemblyInfoPublicKeyToken, loggerType);
+            if (assemblyInfoName != null)
+                SetAssemblyName(
+                    LoadInfoType.AssemblyName,
+                    null,
+                    assemblyInfoName,
+                    assemblyInfoVersion,
+                    assemblyInfoCulture,
+                    assemblyInfoPublicKeyToken,
+                    loggerType
+                );
+            else
+                SetAssemblyName(
+                    LoadInfoType.AssemblyFilename,
+                    loggerAssemblyName,
+                    null,
+                    null,
+                    null,
+                    null,
+                    loggerType
+                );
+        }
 
-			else
-				SetAssemblyName (LoadInfoType.AssemblyFilename, loggerAssemblyName, null, null, null, null, loggerType);
-		}
+        internal string Parameters
+        {
+            get { return loggerArgs; }
+        }
 
-		internal string Parameters {
-			get { return loggerArgs; }
-		}
+        static string GetLoggerTypeName(string assemblyName)
+        {
+            Assembly loggerAssembly = null;
 
-		static string GetLoggerTypeName (string assemblyName)
-		{
-			Assembly loggerAssembly = null;
+            // try to load assembly that contains the logger
+            if (HasAssemblyInfo(assemblyName))
+                loggerAssembly = Assembly.Load(assemblyName);
+            else if (File.Exists(assemblyName))
+                loggerAssembly = Assembly.LoadFrom(assemblyName);
 
-			// try to load assembly that contains the logger
-			if (HasAssemblyInfo (assemblyName))
-				loggerAssembly = Assembly.Load (assemblyName);
-			else if (File.Exists (assemblyName))
-				loggerAssembly = Assembly.LoadFrom (assemblyName);
+            if (loggerAssembly == null)
+                return null;
 
-			if (loggerAssembly == null)
-				return null;
+            // search for a class thats implement ILogger
+            var loggerClass = (
+                from t in loggerAssembly.GetTypes()
+                where
+                    t.IsClass
+                    && t.GetInterface("Microsoft.Build.Framework.ILogger") != null
+                    && t.IsPublic
+                select t
+            ).FirstOrDefault();
 
-			// search for a class thats implement ILogger
-			var loggerClass = (from t in loggerAssembly.GetTypes ()
-						where t.IsClass &&
-						t.GetInterface ("Microsoft.Build.Framework.ILogger") != null &&
-						t.IsPublic
-						select t).FirstOrDefault ();
+            if (loggerClass != null)
+                return loggerClass.FullName;
 
-			if (loggerClass != null)
-				return loggerClass.FullName;
+            return null;
+        }
 
-			return null;
-		}
+        bool Parse(string arg)
+        {
+            // Wipe all the existing values, just in case
+            loggerAssemblyName = null;
+            loggerType = null;
+            loggerArgs = null;
+            assemblyInfoName = null;
+            assemblyInfoVersion = null;
+            assemblyInfoCulture = null;
+            assemblyInfoPublicKeyToken = null;
 
-		bool Parse (string arg)
-		{
-			// Wipe all the existing values, just in case
-			loggerAssemblyName = null;
-			loggerType = null;
-			loggerArgs = null;
-			assemblyInfoName = null;
-			assemblyInfoVersion = null;
-			assemblyInfoCulture = null;
-			assemblyInfoPublicKeyToken = null;
+            if (string.IsNullOrEmpty(arg))
+                return false;
 
-			if (string.IsNullOrEmpty (arg))
-				return false;
+            string[] parts = arg.Split(new char[] { ':' }, 2);
+            if (parts.Length != 2)
+                return false;
 
-			string [] parts = arg.Split (new char [] {':'}, 2);
-			if (parts.Length != 2)
-				return false;
+            if (
+                string.Compare("/l", parts[0], StringComparison.OrdinalIgnoreCase) != 0
+                && string.Compare("/logger", parts[0], StringComparison.OrdinalIgnoreCase) != 0
+            )
+                return false;
 
-			if (string.Compare ("/l", parts [0], StringComparison.OrdinalIgnoreCase) != 0 &&
-				string.Compare ("/logger", parts [0], StringComparison.OrdinalIgnoreCase) != 0)
-				return false;
+            arg = parts[1];
 
-			arg = parts [1];
+            // We have a logger arg, now get the various parts
+            parts = arg.Split(new char[] { ';' }, 2);
+            string firstPart = parts[0];
+            if (parts.Length > 1)
+                loggerArgs = parts[1];
 
-			// We have a logger arg, now get the various parts
-			parts = arg.Split (new char [] {';'}, 2);
-			string firstPart = parts [0];
-			if (parts.Length > 1)
-				loggerArgs = parts [1];
+            // Next see if there is a type name
+            parts = firstPart.Split(new char[] { ',' }, 2);
+            if (parts.Length == 1)
+            {
+                loggerAssemblyName = firstPart;
+            }
+            else
+            {
+                if (HasAssemblyInfo(parts[1]))
+                {
+                    loggerAssemblyName = firstPart;
+                    GetAssemblyInfo(loggerAssemblyName);
+                }
+                else
+                {
+                    loggerType = parts[0];
+                    parts[0] = string.Empty;
+                    loggerAssemblyName = string.Join(",", parts).Substring(1).Trim();
+                }
+            }
 
-			// Next see if there is a type name
-			parts = firstPart.Split (new char [] {','}, 2);
-			if (parts.Length == 1) {
-				loggerAssemblyName = firstPart;
-			} else {
-				if (HasAssemblyInfo (parts [1])) {
-					loggerAssemblyName = firstPart;
-					GetAssemblyInfo (loggerAssemblyName);
-				} else {
-					loggerType = parts [0];
-					parts [0] = string.Empty;
-					loggerAssemblyName = string.Join (",", parts).Substring (1).Trim ();
-				}
-			}
-			
-			return true;
-		}
+            return true;
+        }
 
-		static bool HasAssemblyInfo (string part)
-		{
-			var containsInfo = (part.IndexOf ("version=", StringComparison.OrdinalIgnoreCase) >= 0) ||
-				(part.IndexOf ("culture=", StringComparison.OrdinalIgnoreCase) >= 0) ||
-				(part.IndexOf ("publickeytoken=", StringComparison.OrdinalIgnoreCase) >= 0);
+        static bool HasAssemblyInfo(string part)
+        {
+            var containsInfo =
+                (part.IndexOf("version=", StringComparison.OrdinalIgnoreCase) >= 0)
+                || (part.IndexOf("culture=", StringComparison.OrdinalIgnoreCase) >= 0)
+                || (part.IndexOf("publickeytoken=", StringComparison.OrdinalIgnoreCase) >= 0);
 
-			return containsInfo;
-		}
+            return containsInfo;
+        }
 
-		void GetAssemblyInfo (string assemblyName)
-		{
-			var match = assemblyInfoRegEx.Match (assemblyName);
+        void GetAssemblyInfo(string assemblyName)
+        {
+            var match = assemblyInfoRegEx.Match(assemblyName);
 
-			if(match == null)
-				return;
+            if (match == null)
+                return;
 
-			assemblyInfoName = match.Groups ["assemblyName"].Value;
-			assemblyInfoVersion = match.Groups ["assemblyVersion"].Value;
-			assemblyInfoCulture = match.Groups ["assemblyCulture"].Value;
-			assemblyInfoPublicKeyToken = match.Groups ["publicKeyToken"].Value;
-		}
-	}
+            assemblyInfoName = match.Groups["assemblyName"].Value;
+            assemblyInfoVersion = match.Groups["assemblyVersion"].Value;
+            assemblyInfoCulture = match.Groups["assemblyCulture"].Value;
+            assemblyInfoPublicKeyToken = match.Groups["publicKeyToken"].Value;
+        }
+    }
 }

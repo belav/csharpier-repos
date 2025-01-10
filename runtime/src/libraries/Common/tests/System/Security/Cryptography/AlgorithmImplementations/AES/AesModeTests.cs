@@ -74,24 +74,23 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 // aes.CreateEncryptor() (with an invalid Mode value)
                 // transform.Transform[Final]Block() (with an invalid Mode value)
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
+                Assert.ThrowsAny<CryptographicException>(() =>
+                {
+                    aes.Mode = mode;
+
+                    if (feedbackSize.HasValue)
                     {
-                        aes.Mode = mode;
+                        aes.FeedbackSize = feedbackSize.Value;
+                    }
 
-                        if (feedbackSize.HasValue)
-                        {
-                            aes.FeedbackSize = feedbackSize.Value;
-                        }
+                    // If assigning the Mode property did not fail, then it should reflect what we asked for.
+                    Assert.Equal(mode, aes.Mode);
 
-                        // If assigning the Mode property did not fail, then it should reflect what we asked for.
-                        Assert.Equal(mode, aes.Mode);
-
-                        using (ICryptoTransform transform = aes.CreateEncryptor())
-                        {
-                            transform.TransformFinalBlock(Array.Empty<byte>(), 0, 0);
-                        }
-                    });
+                    using (ICryptoTransform transform = aes.CreateEncryptor())
+                    {
+                        transform.TransformFinalBlock(Array.Empty<byte>(), 0, 0);
+                    }
+                });
             }
         }
     }

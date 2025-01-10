@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="MobileErrorInfo.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -9,8 +9,8 @@ using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Globalization;
-using System.Text.RegularExpressions;
 using System.Security.Permissions;
+using System.Text.RegularExpressions;
 
 namespace System.Web.Mobile
 {
@@ -19,16 +19,24 @@ namespace System.Web.Mobile
      * Contains information about an error that occurs in a mobile application.
      * This information can be used to format the error for the target device.
      *
-     * 
+     *
 
 
 
 
 */
 
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class MobileErrorInfo
     {
         /// <include file='doc\MobileErrorInfo.uex' path='docs/doc[@for="MobileErrorInfo.ContextKey"]/*' />
@@ -53,18 +61,17 @@ namespace System.Web.Mobile
             try
             {
                 // For some reason, the compile exception lives in the
-                // InnerException. 
-                HttpCompileException compileException =
-                    e.InnerException as HttpCompileException;
+                // InnerException.
+                HttpCompileException compileException = e.InnerException as HttpCompileException;
 
                 if (compileException != null)
                 {
                     this.Type = SR.GetString(SR.MobileErrorInfo_CompilationErrorType);
-                    this.Description = SR.GetString(SR.MobileErrorInfo_CompilationErrorDescription);                
+                    this.Description = SR.GetString(SR.MobileErrorInfo_CompilationErrorDescription);
                     this.MiscTitle = SR.GetString(SR.MobileErrorInfo_CompilationErrorMiscTitle);
-                    
+
                     CompilerErrorCollection errors = compileException.Results.Errors;
-                
+
                     if (errors != null && errors.Count >= 1)
                     {
                         CompilerError error = errors[0];
@@ -82,11 +89,11 @@ namespace System.Web.Mobile
                     return;
                 }
 
-                HttpParseException parseException = e as HttpParseException; 
+                HttpParseException parseException = e as HttpParseException;
                 if (parseException != null)
                 {
                     this.Type = SR.GetString(SR.MobileErrorInfo_ParserErrorType);
-                    this.Description = SR.GetString(SR.MobileErrorInfo_ParserErrorDescription);                
+                    this.Description = SR.GetString(SR.MobileErrorInfo_ParserErrorDescription);
                     this.MiscTitle = SR.GetString(SR.MobileErrorInfo_ParserErrorMiscTitle);
                     this.LineNumber = parseException.Line.ToString(CultureInfo.InvariantCulture);
                     this.File = parseException.FileName;
@@ -101,20 +108,20 @@ namespace System.Web.Mobile
                 {
                     return;
                 }
-                
             }
             catch
             {
                 // Don't need to do anything here, just continue to base case
-                // below. 
+                // below.
             }
-            
+
             // Default to the most basic if none of the above succeed.
             this.Type = e.GetType().FullName;
             this.Description = e.Message;
             this.MiscTitle = SR.GetString(SR.MobileErrorInfo_SourceObject);
             String s = e.StackTrace;
-            if(s != null) {
+            if (s != null)
+            {
                 int i = s.IndexOf('\r');
                 if (i != -1)
                 {
@@ -124,7 +131,6 @@ namespace System.Web.Mobile
             }
         }
 
-
         /// <include file='doc\MobileErrorInfo.uex' path='docs/doc[@for="MobileErrorInfo.this"]/*' />
         public String this[String key]
         {
@@ -133,88 +139,49 @@ namespace System.Web.Mobile
                 String s = _dictionary[key];
                 return (s == null) ? String.Empty : s;
             }
-            set
-            {
-                _dictionary[key] = value;
-            }
+            set { _dictionary[key] = value; }
         }
 
         /// <include file='doc\MobileErrorInfo.uex' path='docs/doc[@for="MobileErrorInfo.Type"]/*' />
         public String Type
         {
-            get
-            {
-                return this[_errorType];
-            }
-            set
-            {
-                this[_errorType] = value;
-            }
+            get { return this[_errorType]; }
+            set { this[_errorType] = value; }
         }
 
         /// <include file='doc\MobileErrorInfo.uex' path='docs/doc[@for="MobileErrorInfo.Description"]/*' />
         public String Description
         {
-            get
-            {
-                return this[_errorDescription];
-            }
-            set
-            {
-                this[_errorDescription] = value;
-            }
+            get { return this[_errorDescription]; }
+            set { this[_errorDescription] = value; }
         }
 
         /// <include file='doc\MobileErrorInfo.uex' path='docs/doc[@for="MobileErrorInfo.MiscTitle"]/*' />
         public String MiscTitle
         {
-            get
-            {
-                return this[_errorMiscTitle];
-            }
-            set
-            {
-                this[_errorMiscTitle] = value;
-            }
+            get { return this[_errorMiscTitle]; }
+            set { this[_errorMiscTitle] = value; }
         }
 
         /// <include file='doc\MobileErrorInfo.uex' path='docs/doc[@for="MobileErrorInfo.MiscText"]/*' />
         public String MiscText
         {
-            get
-            {
-                return this[_errorMiscText];
-            }
-            set
-            {                  
-                this[_errorMiscText] = value;
-            }
+            get { return this[_errorMiscText]; }
+            set { this[_errorMiscText] = value; }
         }
 
         /// <include file='doc\MobileErrorInfo.uex' path='docs/doc[@for="MobileErrorInfo.File"]/*' />
         public String File
         {
-            get
-            {
-                return this[_errorFile];
-            }
-            set
-            {
-                this[_errorFile] = value;
-            }
+            get { return this[_errorFile]; }
+            set { this[_errorFile] = value; }
         }
 
         /// <include file='doc\MobileErrorInfo.uex' path='docs/doc[@for="MobileErrorInfo.LineNumber"]/*' />
         public String LineNumber
         {
-            get
-            {
-                return this[_errorLineNumber];
-            }
-            set
-            {
-                this[_errorLineNumber] = value;
-            }
+            get { return this[_errorLineNumber]; }
+            set { this[_errorLineNumber] = value; }
         }
 
         // Return true if we succeed
@@ -230,7 +197,7 @@ namespace System.Web.Mobile
             }
 
             // Use regular expressions to scrape the message output
-            // for meaningful data. One problem: Some parts of the 
+            // for meaningful data. One problem: Some parts of the
             // output are optional, and any regular expression that
             // uses the ()? syntax doesn't pick it up. So, we have
             // to have all the different combinations of expressions,
@@ -251,21 +218,21 @@ namespace System.Web.Mobile
                 return false;
             }
 
-            this.Type        = TrimAndClean(match.Result("${title}"));
+            this.Type = TrimAndClean(match.Result("${title}"));
             this.Description = TrimAndClean(match.Result("${description}"));
             if (i <= 1)
             {
                 // These expressions were able to match the miscellaneous
                 // title/text section.
                 this.MiscTitle = TrimAndClean(match.Result("${misctitle}"));
-                this.MiscText  = TrimAndClean(match.Result("${misctext}"));
+                this.MiscText = TrimAndClean(match.Result("${misctext}"));
             }
             if (i == 0)
             {
-                // This expression was able to match the file/line # 
+                // This expression was able to match the file/line #
                 // section.
-                this.File        = TrimAndClean(match.Result("${file}"));
-                this.LineNumber  = TrimAndClean(match.Result("${linenumber}"));
+                this.File = TrimAndClean(match.Result("${file}"));
+                this.LineNumber = TrimAndClean(match.Result("${linenumber}"));
             }
 
             return true;
@@ -280,11 +247,11 @@ namespace System.Web.Mobile
 
             if (!_searchExpressionsBuilt)
             {
-                lock(_lockObject)
+                lock (_lockObject)
                 {
                     if (!_searchExpressionsBuilt)
                     {
-                        // 
+                        //
 
 
 
@@ -296,30 +263,33 @@ namespace System.Web.Mobile
                         _searchExpressions = new Regex[_expressionCount];
 
                         _searchExpressions[0] = new Regex(
-                            "<title>(?'title'.*?)</title>.*?" +
-                                ": </b>(?'description'.*?)<br>.*?" + 
-                                "(<b>(?'misctitle'.*?): </b>(?'misctext'.*?)<br)+.*?" +
-                                "(Source File:</b>(?'file'.*?)&nbsp;&nbsp; <b>Line:</b>(?'linenumber'.*?)<br)+",
-                            RegexOptions.Singleline | 
-                                RegexOptions.IgnoreCase | 
-                                RegexOptions.CultureInvariant |
-                                RegexOptions.Compiled);
+                            "<title>(?'title'.*?)</title>.*?"
+                                + ": </b>(?'description'.*?)<br>.*?"
+                                + "(<b>(?'misctitle'.*?): </b>(?'misctext'.*?)<br)+.*?"
+                                + "(Source File:</b>(?'file'.*?)&nbsp;&nbsp; <b>Line:</b>(?'linenumber'.*?)<br)+",
+                            RegexOptions.Singleline
+                                | RegexOptions.IgnoreCase
+                                | RegexOptions.CultureInvariant
+                                | RegexOptions.Compiled
+                        );
 
                         _searchExpressions[1] = new Regex(
-                            "<title>(?'title'.*?)</title>.*?" +
-                                ": </b>(?'description'.*?)<br>.*?" + 
-                                "(<b>(?'misctitle'.*?): </b>(?'misctext'.*?)<br)+.*?",
-                            RegexOptions.Singleline | 
-                                RegexOptions.IgnoreCase | 
-                                RegexOptions.CultureInvariant |
-                                RegexOptions.Compiled);
+                            "<title>(?'title'.*?)</title>.*?"
+                                + ": </b>(?'description'.*?)<br>.*?"
+                                + "(<b>(?'misctitle'.*?): </b>(?'misctext'.*?)<br)+.*?",
+                            RegexOptions.Singleline
+                                | RegexOptions.IgnoreCase
+                                | RegexOptions.CultureInvariant
+                                | RegexOptions.Compiled
+                        );
 
                         _searchExpressions[2] = new Regex(
                             "<title>(?'title'.*?)</title>.*?: </b>(?'description'.*?)<br>",
-                            RegexOptions.Singleline | 
-                            RegexOptions.IgnoreCase | 
-                            RegexOptions.CultureInvariant |
-                                RegexOptions.Compiled);
+                            RegexOptions.Singleline
+                                | RegexOptions.IgnoreCase
+                                | RegexOptions.CultureInvariant
+                                | RegexOptions.Compiled
+                        );
 
                         _searchExpressionsBuilt = true;
                     }
@@ -333,5 +303,3 @@ namespace System.Web.Mobile
         }
     }
 }
-    
-

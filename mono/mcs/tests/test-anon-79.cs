@@ -1,26 +1,23 @@
 class Test
 {
-	delegate void D ();
-	event D E;
-	D proxy;
+    delegate void D();
+    event D E;
+    D proxy;
 
-	event D Changed
-	{
-		add
-		{
-			if (proxy == null)
-				proxy = delegate () { Foo (); };
-		}
-		remove
-		{
-		}
-	}
+    event D Changed
+    {
+        add
+        {
+            if (proxy == null)
+                proxy = delegate()
+                {
+                    Foo();
+                };
+        }
+        remove { }
+    }
 
-	void Foo ()
-	{
-	}
+    void Foo() { }
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

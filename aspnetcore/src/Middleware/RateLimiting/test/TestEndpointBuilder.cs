@@ -21,7 +21,8 @@ internal class TestEndpointBuilder : EndpointBuilder
 
 internal class TestEndpointConventionBuilder : IEndpointConventionBuilder
 {
-    public IList<Action<EndpointBuilder>> Conventions { get; } = new List<Action<EndpointBuilder>>();
+    public IList<Action<EndpointBuilder>> Conventions { get; } =
+        new List<Action<EndpointBuilder>>();
 
     public void Add(Action<EndpointBuilder> convention)
     {

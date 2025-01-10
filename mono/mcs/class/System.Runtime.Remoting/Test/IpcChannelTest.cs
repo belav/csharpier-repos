@@ -15,102 +15,105 @@ using NUnit.Framework;
 
 namespace MonoTests.Remoting
 {
-	[TestFixture]
-	public class IpcChannelTest
-	{
-		[Test]
-		public void Bug81653 ()
-		{
-			IpcClientChannel c = new IpcClientChannel ();
-			ChannelDataStore cd = new ChannelDataStore (new string[] { "foo" });
-			string objectUri;
-			c.CreateMessageSink (null, cd, out objectUri);
-		}
+    [TestFixture]
+    public class IpcChannelTest
+    {
+        [Test]
+        public void Bug81653()
+        {
+            IpcClientChannel c = new IpcClientChannel();
+            ChannelDataStore cd = new ChannelDataStore(new string[] { "foo" });
+            string objectUri;
+            c.CreateMessageSink(null, cd, out objectUri);
+        }
 
-		[Test]
-		public void Bug609381 ()
-		{
-			string portName = "ipc" + Guid.NewGuid ().ToString ("N");
-			string objUri = "ipcserver609381.rem";
-			string url = String.Format ("ipc://{0}/{1}", portName, objUri);
+        [Test]
+        public void Bug609381()
+        {
+            string portName = "ipc" + Guid.NewGuid().ToString("N");
+            string objUri = "ipcserver609381.rem";
+            string url = String.Format("ipc://{0}/{1}", portName, objUri);
 
-			IpcChannel serverChannel = new IpcChannel (portName);
-			ChannelServices.RegisterChannel (serverChannel);
+            IpcChannel serverChannel = new IpcChannel(portName);
+            ChannelServices.RegisterChannel(serverChannel);
 
-			RemotingServices.Marshal (new Server (), objUri);
+            RemotingServices.Marshal(new Server(), objUri);
 
-			Server client = (Server) RemotingServices.Connect (typeof (Server), url);
-			
-			int count = 10 * 1024 * 1024;
-			byte[] sendBuf = new byte[count];
-			sendBuf [sendBuf.Length - 1] = 41;
-			
-			byte[] recvBuf = client.Send (sendBuf);
+            Server client = (Server)RemotingServices.Connect(typeof(Server), url);
 
-			Assert.IsNotNull (recvBuf);
-			Assert.AreNotSame (sendBuf, recvBuf);
-			Assert.AreEqual (count, recvBuf.Length);
-			Assert.AreEqual (42, recvBuf [recvBuf.Length - 1]);
+            int count = 10 * 1024 * 1024;
+            byte[] sendBuf = new byte[count];
+            sendBuf[sendBuf.Length - 1] = 41;
 
-			sendBuf = null;
-			recvBuf = null;
+            byte[] recvBuf = client.Send(sendBuf);
 
-			ChannelServices.UnregisterChannel (serverChannel);
-		}
+            Assert.IsNotNull(recvBuf);
+            Assert.AreNotSame(sendBuf, recvBuf);
+            Assert.AreEqual(count, recvBuf.Length);
+            Assert.AreEqual(42, recvBuf[recvBuf.Length - 1]);
 
-		class Server : MarshalByRefObject
-		{
-			public byte[] Send (byte[] payload)
-			{
-				payload [payload.Length - 1]++;
-				return payload;
-			}
-		}
+            sendBuf = null;
+            recvBuf = null;
 
-                [Test]
-		public void TestCtor2 ()
-		{
-			string channelName = Guid.NewGuid ().ToString ("N");
-			string portName = "ipc" + Guid.NewGuid ().ToString ("N");
-			string url = String.Format ("ipc://{0}/server.rem", portName);
+            ChannelServices.UnregisterChannel(serverChannel);
+        }
 
-			IpcServerChannel chan = new IpcServerChannel (channelName, portName);
-			string[] uris = chan.GetUrlsForUri ("server.rem");
-			Assert.IsNotNull (uris);
-			AssertHelper.Greater (uris.Length, 0);
+        class Server : MarshalByRefObject
+        {
+            public byte[] Send(byte[] payload)
+            {
+                payload[payload.Length - 1]++;
+                return payload;
+            }
+        }
 
-			bool found = false;
-			foreach (string s in uris) {
-				if (s == url) {
-					found = true;
-					break;
-				}
-			}
-			Assert.IsTrue (found);
-		}
+        [Test]
+        public void TestCtor2()
+        {
+            string channelName = Guid.NewGuid().ToString("N");
+            string portName = "ipc" + Guid.NewGuid().ToString("N");
+            string url = String.Format("ipc://{0}/server.rem", portName);
 
-		[Test]
-		public void TestCtor3 ()
-		{
-			string portName = "ipc" + Guid.NewGuid ().ToString ("N");
-			string url = String.Format ("ipc://{0}/server.rem", portName);
+            IpcServerChannel chan = new IpcServerChannel(channelName, portName);
+            string[] uris = chan.GetUrlsForUri("server.rem");
+            Assert.IsNotNull(uris);
+            AssertHelper.Greater(uris.Length, 0);
 
-			Hashtable props = new Hashtable ();
-			props ["portName"] = portName;
-			IpcChannel chan = new IpcChannel (props, null, null);
-			string[] uris = chan.GetUrlsForUri ("server.rem");
-			Assert.IsNotNull (uris);
-			AssertHelper.Greater (uris.Length, 0);
+            bool found = false;
+            foreach (string s in uris)
+            {
+                if (s == url)
+                {
+                    found = true;
+                    break;
+                }
+            }
+            Assert.IsTrue(found);
+        }
 
-			bool found = false;
-			foreach (string s in uris) {
-				if (s == url) {
-					found = true;
-					break;
-				}
-			}
-			Assert.IsTrue (found);
-		}
-	}
+        [Test]
+        public void TestCtor3()
+        {
+            string portName = "ipc" + Guid.NewGuid().ToString("N");
+            string url = String.Format("ipc://{0}/server.rem", portName);
+
+            Hashtable props = new Hashtable();
+            props["portName"] = portName;
+            IpcChannel chan = new IpcChannel(props, null, null);
+            string[] uris = chan.GetUrlsForUri("server.rem");
+            Assert.IsNotNull(uris);
+            AssertHelper.Greater(uris.Length, 0);
+
+            bool found = false;
+            foreach (string s in uris)
+            {
+                if (s == url)
+                {
+                    found = true;
+                    break;
+                }
+            }
+            Assert.IsTrue(found);
+        }
+    }
 }
-

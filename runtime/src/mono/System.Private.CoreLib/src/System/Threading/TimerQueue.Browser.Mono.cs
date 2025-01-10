@@ -24,19 +24,21 @@ namespace System.Threading
         // this means that it's in the s_scheduledTimers collection, not that it's the one which would run on the next TimeoutCallback
         private bool _isScheduled;
         private long _scheduledDueTimeMs;
-        private TimerQueue(int _)
-        {
-        }
+
+        private TimerQueue(int _) { }
 
         // This replaces the current pending setTimeout with shorter one
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern unsafe void MainThreadScheduleTimer(void* callback, int shortestDueTimeMs);
+        private static extern unsafe void MainThreadScheduleTimer(
+            void* callback,
+            int shortestDueTimeMs
+        );
 
 #pragma warning disable CS3016 // Arrays as attribute arguments is not CLS-compliant
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
 #pragma warning restore CS3016
         // this callback will arrive on the main thread, called from mono_wasm_execute_timer
-        private static void TimerHandler ()
+        private static void TimerHandler()
         {
             try
             {
@@ -86,7 +88,10 @@ namespace System.Threading
                 s_shortestDueTimeMs = shortestDueTimeMs;
                 int shortestWait = Math.Max((int)(shortestDueTimeMs - currentTimeMs), 0);
                 // this would cancel the previous schedule and create shorter one, it is expensive callback
-                MainThreadScheduleTimer((void*)(delegate* unmanaged[Cdecl]<void>)&TimerHandler, shortestWait);
+                MainThreadScheduleTimer(
+                    (void*)(delegate* unmanaged[Cdecl]<void>)&TimerHandler,
+                    shortestWait
+                );
             }
         }
 

@@ -26,30 +26,39 @@ public sealed class RequestDelegateGeneratorSuppressor : DiagnosticSuppressor
     private static readonly SuppressionDescriptor SuppressRUCDiagnostic = new(
         id: "RDGS001",
         suppressedDiagnosticId: "IL2026",
-        justification: "The target method has been intercepted by a statically generated variant.");
+        justification: "The target method has been intercepted by a statically generated variant."
+    );
 
     private static readonly SuppressionDescriptor SuppressRDCDiagnostic = new(
         id: "RDGS002",
         suppressedDiagnosticId: "IL3050",
-        justification: "The target method has been intercepted by a statically generated variant.");
+        justification: "The target method has been intercepted by a statically generated variant."
+    );
 
     public override void ReportSuppressions(SuppressionAnalysisContext context)
     {
         foreach (var diagnostic in context.ReportedDiagnostics)
         {
-            if (diagnostic.Id != SuppressRDCDiagnostic.SuppressedDiagnosticId && diagnostic.Id != SuppressRUCDiagnostic.SuppressedDiagnosticId)
+            if (
+                diagnostic.Id != SuppressRDCDiagnostic.SuppressedDiagnosticId
+                && diagnostic.Id != SuppressRUCDiagnostic.SuppressedDiagnosticId
+            )
             {
                 continue;
             }
 
-            var location = diagnostic.AdditionalLocations.Count > 0
-                ? diagnostic.AdditionalLocations[0]
-                : diagnostic.Location;
+            var location =
+                diagnostic.AdditionalLocations.Count > 0
+                    ? diagnostic.AdditionalLocations[0]
+                    : diagnostic.Location;
 
-            if (location.SourceTree is not { } sourceTree
-                || sourceTree.GetRoot().FindNode(location.SourceSpan) is not InvocationExpressionSyntax node
+            if (
+                location.SourceTree is not { } sourceTree
+                || sourceTree.GetRoot().FindNode(location.SourceSpan)
+                    is not InvocationExpressionSyntax node
                 || !node.TryGetMapMethodName(out var method)
-                || !InvocationOperationExtensions.KnownMethods.Contains(method))
+                || !InvocationOperationExtensions.KnownMethods.Contains(method)
+            )
             {
                 continue;
             }
@@ -62,13 +71,16 @@ public sealed class RequestDelegateGeneratorSuppressor : DiagnosticSuppressor
                 var endpoint = new Endpoint(invocationOperation, wellKnownTypes, semanticModel);
                 if (endpoint.Diagnostics.Count == 0)
                 {
-                    var targetSuppression = diagnostic.Id == SuppressRUCDiagnostic.SuppressedDiagnosticId
-                        ? SuppressRUCDiagnostic
-                        : SuppressRDCDiagnostic;
+                    var targetSuppression =
+                        diagnostic.Id == SuppressRUCDiagnostic.SuppressedDiagnosticId
+                            ? SuppressRUCDiagnostic
+                            : SuppressRDCDiagnostic;
                     context.ReportSuppression(Suppression.Create(targetSuppression, diagnostic));
                 }
             }
         }
     }
-    public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions => ImmutableArray.Create(SuppressRUCDiagnostic, SuppressRDCDiagnostic);
+
+    public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
+        ImmutableArray.Create(SuppressRUCDiagnostic, SuppressRDCDiagnostic);
 }

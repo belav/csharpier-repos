@@ -19,10 +19,12 @@ internal static class ErrorPageModelBuilder
         IFileProvider contentRootFileProvider,
         ILogger? logger,
         bool showDetailedErrors,
-        Exception exception)
+        Exception exception
+    )
     {
         var systemRuntimeAssembly = typeof(System.ComponentModel.DefaultValueAttribute).Assembly;
-        var assemblyVersion = new AssemblyName(systemRuntimeAssembly.FullName!).Version?.ToString() ?? string.Empty;
+        var assemblyVersion =
+            new AssemblyName(systemRuntimeAssembly.FullName!).Version?.ToString() ?? string.Empty;
         var clrVersion = assemblyVersion;
         var currentAssembly = typeof(ErrorPage).Assembly;
         var currentAssemblyVesion = currentAssembly
@@ -35,7 +37,8 @@ internal static class ErrorPageModelBuilder
             var exceptionDetailProvider = new ExceptionDetailsProvider(
                 contentRootFileProvider,
                 logger,
-                sourceCodeLineCount: 6);
+                sourceCodeLineCount: 6
+            );
 
             errorDetails = exceptionDetailProvider.GetDetails(exception);
         }
@@ -51,7 +54,8 @@ internal static class ErrorPageModelBuilder
             RuntimeInformation.ProcessArchitecture.ToString(),
             clrVersion,
             currentAssemblyVesion,
-            RuntimeInformation.OSDescription);
+            RuntimeInformation.OSDescription
+        );
         return model;
     }
 }

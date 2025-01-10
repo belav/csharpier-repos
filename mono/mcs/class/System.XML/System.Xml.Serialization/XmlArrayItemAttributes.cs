@@ -1,5 +1,5 @@
 //
-// XmlArrayItemAttributes.cs: 
+// XmlArrayItemAttributes.cs:
 //
 // Author:
 //   John Donagher (john@webmeta.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,59 +33,57 @@ using System.Collections.Generic;
 
 namespace System.Xml.Serialization
 {
-	/// <summary>
-	/// Summary description for XmlArrayItemAttributes.
-	/// </summary>
+    /// <summary>
+    /// Summary description for XmlArrayItemAttributes.
+    /// </summary>
 
-	public class XmlArrayItemAttributes : CollectionBase {
+    public class XmlArrayItemAttributes : CollectionBase
+    {
+        public XmlArrayItemAttribute this[int index]
+        {
+            get { return (XmlArrayItemAttribute)List[index]; }
+            set { List[index] = value; }
+        }
 
-		public XmlArrayItemAttribute this [int index] {
-			get {
-				return (XmlArrayItemAttribute)List [index];
-			}
-			set {
-				List [index] = value;
-			}	
-		}
+        public int Add(XmlArrayItemAttribute attribute)
+        {
+            return (List as IList).Add(attribute);
+        }
 
-		public int Add (XmlArrayItemAttribute attribute)
-		{
-			return (List as IList).Add (attribute);
-		}
+        public bool Contains(XmlArrayItemAttribute attribute)
+        {
+            return List.Contains(attribute);
+        }
 
-		public bool Contains(XmlArrayItemAttribute attribute)
-		{
-			return List.Contains(attribute);
-		}
+        public void CopyTo(XmlArrayItemAttribute[] array, int index)
+        {
+            List.CopyTo(array, index);
+        }
 
-		public void CopyTo(XmlArrayItemAttribute[] array, int index)
-		{
-			List.CopyTo(array, index);
-		}
+        public int IndexOf(XmlArrayItemAttribute attribute)
+        {
+            return List.IndexOf(attribute);
+        }
 
-		public int IndexOf(XmlArrayItemAttribute attribute)
-		{
-			return List.IndexOf(attribute);
-		}
+        public void Insert(int index, XmlArrayItemAttribute attribute)
+        {
+            List.Insert(index, attribute);
+        }
 
-		public void Insert(int index, XmlArrayItemAttribute attribute)
-		{
-			List.Insert(index, attribute);
-		}
+        public void Remove(XmlArrayItemAttribute attribute)
+        {
+            List.Remove(attribute);
+        }
 
-		public void Remove(XmlArrayItemAttribute attribute)
-		{
-			List.Remove(attribute);
-		}
-		
-		internal void AddKeyHash (System.Text.StringBuilder sb)
-		{
-			if (Count == 0) return;
-			
-			sb.Append ("XAIAS ");
-			for (int n=0; n<Count; n++)
-				this[n].AddKeyHash (sb);
-			sb.Append ('|');
-		}
-	}
+        internal void AddKeyHash(System.Text.StringBuilder sb)
+        {
+            if (Count == 0)
+                return;
+
+            sb.Append("XAIAS ");
+            for (int n = 0; n < Count; n++)
+                this[n].AddKeyHash(sb);
+            sb.Append('|');
+        }
+    }
 }

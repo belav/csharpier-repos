@@ -19,9 +19,7 @@ public sealed partial class SignInHttpResult : IResult
     /// </summary>
     /// <param name="principal">The claims principal containing the user claims.</param>
     internal SignInHttpResult(ClaimsPrincipal principal)
-        : this(principal, authenticationScheme: null, properties: null)
-    {
-    }
+        : this(principal, authenticationScheme: null, properties: null) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignInHttpResult"/> with the
@@ -30,7 +28,11 @@ public sealed partial class SignInHttpResult : IResult
     /// <param name="principal">The claims principal containing the user claims.</param>
     /// <param name="authenticationScheme">The authentication schemes to use when signing in the user.</param>
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-in operation.</param>
-    internal SignInHttpResult(ClaimsPrincipal principal, string? authenticationScheme, AuthenticationProperties? properties)
+    internal SignInHttpResult(
+        ClaimsPrincipal principal,
+        string? authenticationScheme,
+        AuthenticationProperties? properties
+    )
     {
         Principal = principal;
         AuthenticationScheme = authenticationScheme;
@@ -68,9 +70,16 @@ public sealed partial class SignInHttpResult : IResult
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information,
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
             "Executing SignInResult with authentication scheme ({Scheme}) and the following principal: {Principal}.",
-            EventName = "SignInResultExecuting")]
-        public static partial void SignInResultExecuting(ILogger logger, string? scheme, ClaimsPrincipal principal);
+            EventName = "SignInResultExecuting"
+        )]
+        public static partial void SignInResultExecuting(
+            ILogger logger,
+            string? scheme,
+            ClaimsPrincipal principal
+        );
     }
 }

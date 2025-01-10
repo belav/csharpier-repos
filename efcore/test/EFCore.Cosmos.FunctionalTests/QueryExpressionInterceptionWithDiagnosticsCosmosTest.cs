@@ -8,24 +8,23 @@ public class QueryExpressionInterceptionWithDiagnosticsCosmosTest
         IClassFixture<QueryExpressionInterceptionWithDiagnosticsCosmosTest.InterceptionCosmosFixture>
 {
     public QueryExpressionInterceptionWithDiagnosticsCosmosTest(InterceptionCosmosFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class InterceptionCosmosFixture : InterceptionFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => CosmosTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => CosmosTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<IInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkCosmos(), injectedInterceptors);
+            IEnumerable<IInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkCosmos(),
+                injectedInterceptors
+            );
 
-        protected override string StoreName
-            => "QueryExpressionInterceptionWithDiagnostics";
+        protected override string StoreName => "QueryExpressionInterceptionWithDiagnostics";
 
-        protected override bool ShouldSubscribeToDiagnosticListener
-            => true;
+        protected override bool ShouldSubscribeToDiagnosticListener => true;
     }
 }

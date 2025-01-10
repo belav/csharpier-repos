@@ -10,7 +10,6 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using Microsoft.CodeAnalysis.Shared.Extensions;
-
 #if CODE_STYLE
 using Microsoft.CodeAnalysis.Internal.Editing;
 #else
@@ -21,7 +20,10 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal abstract class CodeGenerationSymbol : ISymbol
     {
-        protected static ConditionalWeakTable<CodeGenerationSymbol, SyntaxAnnotation[]> annotationsTable = new();
+        protected static ConditionalWeakTable<
+            CodeGenerationSymbol,
+            SyntaxAnnotation[]
+        > annotationsTable = new();
 
         private readonly ImmutableArray<AttributeData> _attributes;
         protected readonly string _documentationCommentXml;
@@ -38,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             Accessibility declaredAccessibility,
             DeclarationModifiers modifiers,
             string name,
-            string documentationCommentXml = null)
+            string documentationCommentXml = null
+        )
         {
             this.ContainingAssembly = containingAssembly;
             this.ContainingType = containingType;
@@ -57,7 +60,9 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             return annotations ?? Array.Empty<SyntaxAnnotation>();
         }
 
-        internal CodeGenerationSymbol WithAdditionalAnnotations(params SyntaxAnnotation[] annotations)
+        internal CodeGenerationSymbol WithAdditionalAnnotations(
+            params SyntaxAnnotation[] annotations
+        )
         {
             return annotations.IsNullOrEmpty()
                 ? this
@@ -65,11 +70,17 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         }
 
         private static CodeGenerationSymbol AddAnnotationsTo(
-            CodeGenerationSymbol originalDefinition, CodeGenerationSymbol newDefinition, SyntaxAnnotation[] annotations)
+            CodeGenerationSymbol originalDefinition,
+            CodeGenerationSymbol newDefinition,
+            SyntaxAnnotation[] annotations
+        )
         {
             annotationsTable.TryGetValue(originalDefinition, out var originalAnnotations);
 
-            annotations = SyntaxAnnotationExtensions.CombineAnnotations(originalAnnotations, annotations);
+            annotations = SyntaxAnnotationExtensions.CombineAnnotations(
+                originalAnnotations,
+                annotations
+            );
             annotationsTable.Add(newDefinition, annotations);
 
             return newDefinition;
@@ -93,42 +104,27 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public bool IsStatic
         {
-            get
-            {
-                return this.Modifiers.IsStatic;
-            }
+            get { return this.Modifiers.IsStatic; }
         }
 
         public bool IsVirtual
         {
-            get
-            {
-                return this.Modifiers.IsVirtual;
-            }
+            get { return this.Modifiers.IsVirtual; }
         }
 
         public bool IsOverride
         {
-            get
-            {
-                return this.Modifiers.IsOverride;
-            }
+            get { return this.Modifiers.IsOverride; }
         }
 
         public bool IsAbstract
         {
-            get
-            {
-                return this.Modifiers.IsAbstract;
-            }
+            get { return this.Modifiers.IsAbstract; }
         }
 
         public bool IsSealed
         {
-            get
-            {
-                return this.Modifiers.IsSealed;
-            }
+            get { return this.Modifiers.IsSealed; }
         }
 
         public bool IsExtern => false;
@@ -139,90 +135,83 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public ImmutableArray<Location> Locations
         {
-            get
-            {
-                return ImmutableArray.Create<Location>();
-            }
+            get { return ImmutableArray.Create<Location>(); }
         }
 
         public static ImmutableArray<SyntaxNode> DeclaringSyntaxNodes
         {
-            get
-            {
-                return ImmutableArray.Create<SyntaxNode>();
-            }
+            get { return ImmutableArray.Create<SyntaxNode>(); }
         }
 
         public ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray.Create<SyntaxReference>();
-            }
+            get { return ImmutableArray.Create<SyntaxReference>(); }
         }
 
-        public ImmutableArray<AttributeData> GetAttributes()
-            => _attributes;
+        public ImmutableArray<AttributeData> GetAttributes() => _attributes;
 
-        public ImmutableArray<AttributeData> GetAttributes(INamedTypeSymbol attributeType)
-            => GetAttributes().WhereAsArray(a => a.AttributeClass.Equals(attributeType));
+        public ImmutableArray<AttributeData> GetAttributes(INamedTypeSymbol attributeType) =>
+            GetAttributes().WhereAsArray(a => a.AttributeClass.Equals(attributeType));
 
-        public ImmutableArray<AttributeData> GetAttributes(IMethodSymbol attributeConstructor)
-            => GetAttributes().WhereAsArray(a => a.AttributeConstructor.Equals(attributeConstructor));
+        public ImmutableArray<AttributeData> GetAttributes(IMethodSymbol attributeConstructor) =>
+            GetAttributes().WhereAsArray(a => a.AttributeConstructor.Equals(attributeConstructor));
 
         public ISymbol OriginalDefinition
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         public abstract void Accept(SymbolVisitor visitor);
 
         public abstract TResult Accept<TResult>(SymbolVisitor<TResult> visitor);
 
-        public abstract TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument);
+        public abstract TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        );
 
-        public string GetDocumentationCommentId()
-            => null;
+        public string GetDocumentationCommentId() => null;
 
         public string GetDocumentationCommentXml(
             CultureInfo preferredCulture,
             bool expandIncludes,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return _documentationCommentXml ?? "";
         }
 
-        public string ToDisplayString(SymbolDisplayFormat format = null)
-            => throw new NotImplementedException();
+        public string ToDisplayString(SymbolDisplayFormat format = null) =>
+            throw new NotImplementedException();
 
-        public ImmutableArray<SymbolDisplayPart> ToDisplayParts(SymbolDisplayFormat format = null)
-            => throw new NotImplementedException();
+        public ImmutableArray<SymbolDisplayPart> ToDisplayParts(
+            SymbolDisplayFormat format = null
+        ) => throw new NotImplementedException();
 
-        public string ToMinimalDisplayString(SemanticModel semanticModel, int position, SymbolDisplayFormat format = null)
-            => throw new NotImplementedException();
+        public string ToMinimalDisplayString(
+            SemanticModel semanticModel,
+            int position,
+            SymbolDisplayFormat format = null
+        ) => throw new NotImplementedException();
 
-        public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, int position, SymbolDisplayFormat format = null)
-            => throw new NotImplementedException();
+        public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(
+            SemanticModel semanticModel,
+            int position,
+            SymbolDisplayFormat format = null
+        ) => throw new NotImplementedException();
 
         public virtual string MetadataName
         {
-            get
-            {
-                return this.Name;
-            }
+            get { return this.Name; }
         }
 
         public int MetadataToken => 0;
 
         public bool HasUnsupportedMetadata => false;
 
-        public bool Equals(ISymbol other)
-            => this.Equals((object)other);
+        public bool Equals(ISymbol other) => this.Equals((object)other);
 
-        public bool Equals(ISymbol other, SymbolEqualityComparer equalityComparer)
-            => this.Equals(other);
+        public bool Equals(ISymbol other, SymbolEqualityComparer equalityComparer) =>
+            this.Equals(other);
     }
 }

@@ -7,13 +7,13 @@ namespace System.Activities.Debugger
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Runtime;
-    using System.Diagnostics.CodeAnalysis;
     using System.Security;
     using System.Text;
-    using System.IO;
-    using System.Globalization;
 
     // Describes a "state" in the interpretter. A state is any source location that
     // a breakpoint could be set on or that could be stepped to.
@@ -21,10 +21,15 @@ namespace System.Activities.Debugger
     [Fx.Tag.XamlVisible(false)]
     public class State
     {
-        [Fx.Tag.SecurityNote(Critical = "This value is used in IL generation performed under an assert. It gets validated before setting in partial trust.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "This value is used in IL generation performed under an assert. It gets validated before setting in partial trust."
+        )]
         [SecurityCritical]
         SourceLocation location;
-        [Fx.Tag.SecurityNote(Critical = "This value is used in IL generation performed under an assert. It gets validated before setting in partial trust.")]
+
+        [Fx.Tag.SecurityNote(
+            Critical = "This value is used in IL generation performed under an assert. It gets validated before setting in partial trust."
+        )]
         [SecurityCritical]
         string name;
         IEnumerable<LocalsItemDescription> earlyLocals;
@@ -34,18 +39,30 @@ namespace System.Activities.Debugger
         // So we stash extra fields to be able to make the call lazily (as we Enter the state).
         // this.type.GetMethod
         Type type;
-        [Fx.Tag.SecurityNote(Critical = "This value is used in IL generation performed under an assert. It gets validated before setting in partial trust.")]
+
+        [Fx.Tag.SecurityNote(
+            Critical = "This value is used in IL generation performed under an assert. It gets validated before setting in partial trust."
+        )]
         [SecurityCritical]
         string methodName;
 
-        [Fx.Tag.SecurityNote(Critical = "This value is used in IL generation performed under an assert. Used to determine if we should invoke the generated code for this state.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "This value is used in IL generation performed under an assert. Used to determine if we should invoke the generated code for this state."
+        )]
         [SecurityCritical]
         bool debuggingEnabled = true;
 
-        [Fx.Tag.SecurityNote(Critical = "Sets SecurityCritical name member.",
-            Safe = "We validate the SourceLocation and name before storing it in the member when running in Partial Trust.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Sets SecurityCritical name member.",
+            Safe = "We validate the SourceLocation and name before storing it in the member when running in Partial Trust."
+        )]
         [SecuritySafeCritical]
-        internal State(SourceLocation location, string name, IEnumerable<LocalsItemDescription> earlyLocals, int numberOfEarlyLocals)
+        internal State(
+            SourceLocation location,
+            string name,
+            IEnumerable<LocalsItemDescription> earlyLocals,
+            int numberOfEarlyLocals
+        )
         {
             // If we are running in Partial Trust, validate the name string. We only do this in partial trust for backward compatability.
             // We are doing the validation because we want to prevent anything passed to us by non-critical code from affecting the generation
@@ -62,8 +79,10 @@ namespace System.Activities.Debugger
             }
 
             this.earlyLocals = earlyLocals;
-            Fx.Assert(earlyLocals != null || numberOfEarlyLocals == 0,
-                "If earlyLocals is null then numberOfEarlyLocals should be 0");
+            Fx.Assert(
+                earlyLocals != null || numberOfEarlyLocals == 0,
+                "If earlyLocals is null then numberOfEarlyLocals should be 0"
+            );
             // Ignore the passed numberOfEarlyLocals if earlyLocal is null.
             this.numberOfEarlyLocals = (earlyLocals == null) ? 0 : numberOfEarlyLocals;
         }
@@ -71,23 +90,25 @@ namespace System.Activities.Debugger
         // Location in source file associated with this state.
         internal SourceLocation Location
         {
-            [Fx.Tag.SecurityNote(Critical = "Accesses the SecurityCritical location member. We validated the location when this object was constructed.",
-                Safe = "SourceLocation is immutable and we validated it in the constructor.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Accesses the SecurityCritical location member. We validated the location when this object was constructed.",
+                Safe = "SourceLocation is immutable and we validated it in the constructor."
+            )]
             [SecuritySafeCritical]
             get { return this.location; }
         }
-
 
         // Friendly name of the state. May be null if state is not named.
         // States need unique names.
         internal string Name
         {
-            [Fx.Tag.SecurityNote(Critical = "Sets SecurityCritical name member.",
-                Safe = "We are only reading it, not setting it.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Sets SecurityCritical name member.",
+                Safe = "We are only reading it, not setting it."
+            )]
             [SecuritySafeCritical]
             get { return this.name; }
         }
-
 
         // Type definitions for early bound locals. This list is ordered.
         // Names should be unique.
@@ -103,20 +124,15 @@ namespace System.Activities.Debugger
 
         internal bool DebuggingEnabled
         {
-            [Fx.Tag.SecurityNote(Critical = "Accesses SecurityCritical debuggingEnabled member.",
-                Safe = "We don't change anyting. We only return the value.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Accesses SecurityCritical debuggingEnabled member.",
+                Safe = "We don't change anyting. We only return the value."
+            )]
             [SecuritySafeCritical]
-            get
-            {
-                return this.debuggingEnabled;
-            }
-
+            get { return this.debuggingEnabled; }
             [Fx.Tag.SecurityNote(Critical = "Sets SecurityCritical debuggingEnabled member.")]
             [SecuritySafeCritical]
-            set
-            {
-                this.debuggingEnabled = value;
-            }
+            set { this.debuggingEnabled = value; }
         }
 
         [Fx.Tag.SecurityNote(Critical = "Sets SecurityCritical methodName member.")]
@@ -128,11 +144,17 @@ namespace System.Activities.Debugger
         }
 
         // Helper to lazily get the MethodInfo. This is expensive, so caller should cache it.
-        [Fx.Tag.SecurityNote(Critical = "Generates and returns a MethodInfo that is used to generate the dynamic module and accesses Critical member methodName.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Generates and returns a MethodInfo that is used to generate the dynamic module and accesses Critical member methodName."
+        )]
         [SecurityCritical]
         internal MethodInfo GetMethodInfo(bool withPriming)
         {
-            MethodInfo methodInfo = this.type.GetMethod(withPriming ? StateManager.MethodWithPrimingPrefix + this.methodName : this.methodName);
+            MethodInfo methodInfo = this.type.GetMethod(
+                withPriming
+                    ? StateManager.MethodWithPrimingPrefix + this.methodName
+                    : this.methodName
+            );
             return methodInfo;
         }
 
@@ -152,22 +174,28 @@ namespace System.Activities.Debugger
             {
                 UnicodeCategory category = char.GetUnicodeCategory(chars[i]);
                 // Check for identifier_start
-                if ((category == UnicodeCategory.UppercaseLetter) ||
-                    (category == UnicodeCategory.LowercaseLetter) ||
-                    (category == UnicodeCategory.TitlecaseLetter) ||
-                    (category == UnicodeCategory.ModifierLetter) ||
-                    (category == UnicodeCategory.OtherLetter) ||
-                    (category == UnicodeCategory.LetterNumber))
+                if (
+                    (category == UnicodeCategory.UppercaseLetter)
+                    || (category == UnicodeCategory.LowercaseLetter)
+                    || (category == UnicodeCategory.TitlecaseLetter)
+                    || (category == UnicodeCategory.ModifierLetter)
+                    || (category == UnicodeCategory.OtherLetter)
+                    || (category == UnicodeCategory.LetterNumber)
+                )
                 {
                     continue;
                 }
                 // If it's not the first character, also check for identifier_extend
-                if ((i != 0) &&
-                    ((category == UnicodeCategory.NonSpacingMark) ||
-                     (category == UnicodeCategory.SpacingCombiningMark) || 
-                     (category == UnicodeCategory.DecimalDigitNumber) ||
-                     (category == UnicodeCategory.ConnectorPunctuation) ||
-                     (category == UnicodeCategory.Format)))
+                if (
+                    (i != 0)
+                    && (
+                        (category == UnicodeCategory.NonSpacingMark)
+                        || (category == UnicodeCategory.SpacingCombiningMark)
+                        || (category == UnicodeCategory.DecimalDigitNumber)
+                        || (category == UnicodeCategory.ConnectorPunctuation)
+                        || (category == UnicodeCategory.Format)
+                    )
+                )
                 {
                     continue;
                 }
@@ -181,7 +209,9 @@ namespace System.Activities.Debugger
             return result;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method StateManager.DisableCodeGeneration.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method StateManager.DisableCodeGeneration."
+        )]
         [SecurityCritical]
         SourceLocation ValidateSourceLocation(SourceLocation input)
         {
@@ -224,7 +254,12 @@ namespace System.Activities.Debugger
             }
 
             string fileNameOnly = Path.GetFileName(newFileName);
-            if (ReplaceInvalidCharactersWithUnderscore(ref fileNameOnly, Path.GetInvalidFileNameChars()))
+            if (
+                ReplaceInvalidCharactersWithUnderscore(
+                    ref fileNameOnly,
+                    Path.GetInvalidFileNameChars()
+                )
+            )
             {
                 // The filename portion has been munged. We need to make a new full name.
                 string path = Path.GetDirectoryName(newFileName);
@@ -234,7 +269,13 @@ namespace System.Activities.Debugger
 
             if (returnNewLocation)
             {
-                return new SourceLocation(newFileName, input.StartLine, input.StartColumn, input.EndLine, input.EndColumn);
+                return new SourceLocation(
+                    newFileName,
+                    input.StartLine,
+                    input.StartColumn,
+                    input.EndLine,
+                    input.EndColumn
+                );
             }
 
             return input;
@@ -250,7 +291,6 @@ namespace System.Activities.Debugger
                 charArray[invalidIndex] = '_';
                 input = new string(charArray);
                 modified = true;
-
             }
 
             return modified;

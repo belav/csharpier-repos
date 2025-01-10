@@ -16,7 +16,8 @@ internal sealed partial class CircuitDisconnectMiddleware
         ILogger<CircuitDisconnectMiddleware> logger,
         CircuitRegistry registry,
         CircuitIdFactory circuitIdFactory,
-        RequestDelegate next)
+        RequestDelegate next
+    )
     {
         Logger = logger;
         Registry = registry;
@@ -88,13 +89,31 @@ internal sealed partial class CircuitDisconnectMiddleware
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Circuit with id '{CircuitId}' terminating gracefully.", EventName = "CircuitTerminatingGracefully")]
-        public static partial void CircuitTerminatingGracefully(ILogger logger, CircuitId circuitId);
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Circuit with id '{CircuitId}' terminating gracefully.",
+            EventName = "CircuitTerminatingGracefully"
+        )]
+        public static partial void CircuitTerminatingGracefully(
+            ILogger logger,
+            CircuitId circuitId
+        );
 
-        [LoggerMessage(2, LogLevel.Debug, "Circuit with id '{CircuitId}' terminated gracefully.", EventName = "CircuitTerminatedGracefully")]
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Circuit with id '{CircuitId}' terminated gracefully.",
+            EventName = "CircuitTerminatedGracefully"
+        )]
         public static partial void CircuitTerminatedGracefully(ILogger logger, CircuitId circuitId);
 
-        [LoggerMessage(3, LogLevel.Debug, "CircuitDisconnectMiddleware received an invalid circuit id '{CircuitIdSecret}'.", EventName = "InvalidCircuitId")]
+        [LoggerMessage(
+            3,
+            LogLevel.Debug,
+            "CircuitDisconnectMiddleware received an invalid circuit id '{CircuitIdSecret}'.",
+            EventName = "InvalidCircuitId"
+        )]
         public static partial void InvalidCircuitId(ILogger logger, string circuitIdSecret);
     }
 }

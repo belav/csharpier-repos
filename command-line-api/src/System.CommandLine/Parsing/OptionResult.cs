@@ -18,8 +18,9 @@ namespace System.CommandLine.Parsing
             CliOption option,
             SymbolResultTree symbolResultTree,
             CliToken? token = null,
-            CommandResult? parent = null) :
-            base(symbolResultTree, parent)
+            CommandResult? parent = null
+        )
+            : base(symbolResultTree, parent)
         {
             Option = option ?? throw new ArgumentNullException(nameof(option));
             IdentifierToken = token;
@@ -48,22 +49,22 @@ namespace System.CommandLine.Parsing
         public int IdentifierTokenCount { get; internal set; }
 
         /// <inheritdoc/>
-        public override string ToString() => $"{nameof(OptionResult)}: {IdentifierToken?.Value ?? Option.Name} {string.Join(" ", Tokens.Select(t => t.Value))}";
+        public override string ToString() =>
+            $"{nameof(OptionResult)}: {IdentifierToken?.Value ?? Option.Name} {string.Join(" ", Tokens.Select(t => t.Value))}";
 
         /// <summary>
         /// Gets the parsed value or the default value for <see cref="Option"/>.
         /// </summary>
         /// <returns>The parsed value or the default value for <see cref="Option"/></returns>
         public T GetValueOrDefault<T>() =>
-            ArgumentConversionResult
-                .ConvertIfNeeded(typeof(T))
-                .GetValueOrDefault<T>();
+            ArgumentConversionResult.ConvertIfNeeded(typeof(T)).GetValueOrDefault<T>();
 
-        internal bool IsArgumentLimitReached
-            => Option.Argument.Arity.MaximumNumberOfValues == (Implicit ? Tokens.Count - 1 : Tokens.Count);
+        internal bool IsArgumentLimitReached =>
+            Option.Argument.Arity.MaximumNumberOfValues
+            == (Implicit ? Tokens.Count - 1 : Tokens.Count);
 
-        internal ArgumentConversionResult ArgumentConversionResult
-            => _argumentConversionResult ??= GetResult(Option.Argument)!.GetArgumentConversionResult();
+        internal ArgumentConversionResult ArgumentConversionResult =>
+            _argumentConversionResult ??= GetResult(Option.Argument)!.GetArgumentConversionResult();
 
         internal override bool UseDefaultValueFor(ArgumentResult argument) => Implicit;
     }

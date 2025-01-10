@@ -32,21 +32,21 @@ using System.Runtime.InteropServices;
 
 // General Information about the Mono.XBuild.Tasks assembly
 
-[assembly: AssemblyTitle ("Mono.XBuild.Tasks.dll")]
-[assembly: AssemblyDescription ("Mono.XBuild.Tasks.dll")]
-[assembly: AssemblyDefaultAlias ("Mono.XBuild.Tasks.dll")]
+[assembly: AssemblyTitle("Mono.XBuild.Tasks.dll")]
+[assembly: AssemblyDescription("Mono.XBuild.Tasks.dll")]
+[assembly: AssemblyDefaultAlias("Mono.XBuild.Tasks.dll")]
 
-[assembly: AssemblyCompany (Consts.MonoCompany)]
-[assembly: AssemblyProduct (Consts.MonoProduct)]
-[assembly: AssemblyCopyright (Consts.MonoCopyright)]
-[assembly: AssemblyVersion (XBuildConsts.AssemblyVersion)]
-[assembly: SatelliteContractVersion (XBuildConsts.AssemblyVersion)]
-[assembly: AssemblyInformationalVersion (XBuildConsts.FileVersion)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
+[assembly: AssemblyVersion(XBuildConsts.AssemblyVersion)]
+[assembly: SatelliteContractVersion(XBuildConsts.AssemblyVersion)]
+[assembly: AssemblyInformationalVersion(XBuildConsts.FileVersion)]
 
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: ComVisible (false)]
-[assembly: CLSCompliant (true)]
-[assembly: AssemblyDelaySign (true)]
+[assembly: ComVisible(false)]
+[assembly: CLSCompliant(true)]
+[assembly: AssemblyDelaySign(true)]
 
-[assembly: AssemblyFileVersion (XBuildConsts.FileVersion)]
+[assembly: AssemblyFileVersion(XBuildConsts.FileVersion)]

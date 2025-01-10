@@ -29,98 +29,128 @@
 //
 
 
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Mono.Tools.LocaleBuilder
 {
-	public class DateTimeFormatEntry : Entry
-	{
-		public string NativeCalendarName;
-		public string[] AbbreviatedDayNames = new string[Constants.NUM_DAYS];
-		// Input data are mostly missing for abbreviated month but datetime 'MMM' parse depends on them
-		// we pre-fill them the most common ones
-		public string[] AbbreviatedMonthGenitiveNames = new string[Constants.NUM_MONTHS] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", null };
-		public string[] AbbreviatedMonthNames = new string[Constants.NUM_MONTHS] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", null };
-		public string AMDesignator;
-		public int? CalendarWeekRule;
-		public string DateSeparator;
-		public string[] DayNames = new string[Constants.NUM_DAYS];
-		public int? FirstDayOfWeek;
-		public string RawFullDateTimePattern;
-		public string MonthDayPattern;
-		public string[] MonthGenitiveNames = new string[Constants.NUM_MONTHS];
-		public string[] MonthNames = new string[Constants.NUM_MONTHS];
-		public string PMDesignator;
-		public string TimeSeparator;
-		public string[] ShortDatePatterns = new string[Constants.NUM_SHORT_DATE_PATTERNS];
-		public string[] LongDatePatterns = new string[Constants.NUM_LONG_DATE_PATTERNS];
-		public string[] ShortTimePatterns = new string[Constants.NUM_SHORT_TIME_PATTERNS];
-		public string[] LongTimePatterns = new string[Constants.NUM_LONG_TIME_PATTERNS];
-		public string[] ShortestDayNames = new string[Constants.NUM_DAYS];
-		public string[] YearMonthPatterns = new string[Constants.NUM_YEAR_MONTH_PATTERNS];
+    public class DateTimeFormatEntry : Entry
+    {
+        public string NativeCalendarName;
+        public string[] AbbreviatedDayNames = new string[Constants.NUM_DAYS];
 
-		public int Row;
+        // Input data are mostly missing for abbreviated month but datetime 'MMM' parse depends on them
+        // we pre-fill them the most common ones
+        public string[] AbbreviatedMonthGenitiveNames = new string[Constants.NUM_MONTHS]
+        {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            null,
+        };
+        public string[] AbbreviatedMonthNames = new string[Constants.NUM_MONTHS]
+        {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            null,
+        };
+        public string AMDesignator;
+        public int? CalendarWeekRule;
+        public string DateSeparator;
+        public string[] DayNames = new string[Constants.NUM_DAYS];
+        public int? FirstDayOfWeek;
+        public string RawFullDateTimePattern;
+        public string MonthDayPattern;
+        public string[] MonthGenitiveNames = new string[Constants.NUM_MONTHS];
+        public string[] MonthNames = new string[Constants.NUM_MONTHS];
+        public string PMDesignator;
+        public string TimeSeparator;
+        public string[] ShortDatePatterns = new string[Constants.NUM_SHORT_DATE_PATTERNS];
+        public string[] LongDatePatterns = new string[Constants.NUM_LONG_DATE_PATTERNS];
+        public string[] ShortTimePatterns = new string[Constants.NUM_SHORT_TIME_PATTERNS];
+        public string[] LongTimePatterns = new string[Constants.NUM_LONG_TIME_PATTERNS];
+        public string[] ShortestDayNames = new string[Constants.NUM_DAYS];
+        public string[] YearMonthPatterns = new string[Constants.NUM_YEAR_MONTH_PATTERNS];
 
-		public void AppendTableRow (StringBuilder builder)
-		{
-			builder.Append ("\t{");
-			builder.Append (EncodePatternStringIdx (MonthDayPattern) + ", ");
+        public int Row;
 
-			builder.Append (EncodeStringIdx (AMDesignator) + ", ");
-			builder.Append (EncodeStringIdx (PMDesignator) + ", ");
+        public void AppendTableRow(StringBuilder builder)
+        {
+            builder.Append("\t{");
+            builder.Append(EncodePatternStringIdx(MonthDayPattern) + ", ");
 
-			AppendNames (builder, DayNames).Append (", ");
-			AppendNames (builder, AbbreviatedDayNames).Append (", ");
-			AppendNames (builder, ShortestDayNames).Append (", ");
+            builder.Append(EncodeStringIdx(AMDesignator) + ", ");
+            builder.Append(EncodeStringIdx(PMDesignator) + ", ");
 
-			AppendNames (builder, MonthNames).Append (", ");
-			AppendNames (builder, MonthGenitiveNames).Append (", ");
-			AppendNames (builder, AbbreviatedMonthNames).Append (", ");
-			AppendNames (builder, AbbreviatedMonthGenitiveNames).Append (", ");
+            AppendNames(builder, DayNames).Append(", ");
+            AppendNames(builder, AbbreviatedDayNames).Append(", ");
+            AppendNames(builder, ShortestDayNames).Append(", ");
 
-			// TODO:
-			builder.Append ((CalendarWeekRule ?? 0) + ", ");
-			builder.Append ((FirstDayOfWeek ?? 0) + ", ");
+            AppendNames(builder, MonthNames).Append(", ");
+            AppendNames(builder, MonthGenitiveNames).Append(", ");
+            AppendNames(builder, AbbreviatedMonthNames).Append(", ");
+            AppendNames(builder, AbbreviatedMonthGenitiveNames).Append(", ");
 
-			builder.Append (EncodeStringIdx (DateSeparator) + ", ");
-			builder.Append (EncodeStringIdx (TimeSeparator) + ", ");
+            // TODO:
+            builder.Append((CalendarWeekRule ?? 0) + ", ");
+            builder.Append((FirstDayOfWeek ?? 0) + ", ");
 
-			AppendPatterns (builder, ShortDatePatterns);
-			builder.Append (',');
-			AppendPatterns (builder, LongDatePatterns);
-			builder.Append (',');
-			AppendPatterns (builder, ShortTimePatterns);
-			builder.Append (',');
-			AppendPatterns (builder, LongTimePatterns);
-			builder.Append (',');
-			AppendPatterns (builder, YearMonthPatterns);
+            builder.Append(EncodeStringIdx(DateSeparator) + ", ");
+            builder.Append(EncodeStringIdx(TimeSeparator) + ", ");
 
-			builder.Append ('}');
-		}
+            AppendPatterns(builder, ShortDatePatterns);
+            builder.Append(',');
+            AppendPatterns(builder, LongDatePatterns);
+            builder.Append(',');
+            AppendPatterns(builder, ShortTimePatterns);
+            builder.Append(',');
+            AppendPatterns(builder, LongTimePatterns);
+            builder.Append(',');
+            AppendPatterns(builder, YearMonthPatterns);
 
-		private void AppendPatterns (StringBuilder builder, IList<string> patterns)
-		{
-			builder.Append ('{');
-			for (int i = 0; i < patterns.Count; i++) {
-				if (i > 0)
-					builder.Append (',');
+            builder.Append('}');
+        }
 
-				string s = EncodePatternStringIdx (patterns[i]);
-				builder.Append (s);
-			}
-			if (patterns.Count == 0)
-				builder.Append ('0');
-			builder.Append ('}');
-		}
+        private void AppendPatterns(StringBuilder builder, IList<string> patterns)
+        {
+            builder.Append('{');
+            for (int i = 0; i < patterns.Count; i++)
+            {
+                if (i > 0)
+                    builder.Append(',');
 
-		public override string ToString ()
-		{
-			StringBuilder builder = new StringBuilder ();
-			AppendTableRow (builder);
-			return builder.ToString ();
-		}
-	}
+                string s = EncodePatternStringIdx(patterns[i]);
+                builder.Append(s);
+            }
+            if (patterns.Count == 0)
+                builder.Append('0');
+            builder.Append('}');
+        }
+
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+            AppendTableRow(builder);
+            return builder.ToString();
+        }
+    }
 }
-
-

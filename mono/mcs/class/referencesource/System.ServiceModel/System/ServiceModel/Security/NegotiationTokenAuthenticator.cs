@@ -18,20 +18,35 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
 
-    abstract class NegotiationTokenAuthenticator<T> : CommunicationObjectSecurityTokenAuthenticator, IIssuanceSecurityTokenAuthenticator, ISecurityContextSecurityTokenCacheProvider
+    abstract class NegotiationTokenAuthenticator<T>
+        : CommunicationObjectSecurityTokenAuthenticator,
+            IIssuanceSecurityTokenAuthenticator,
+            ISecurityContextSecurityTokenCacheProvider
         where T : NegotiationTokenAuthenticatorState
     {
         internal const string defaultServerMaxNegotiationLifetimeString = "00:01:00";
         internal const string defaultServerIssuedTokenLifetimeString = "10:00:00";
         internal const string defaultServerIssuedTransitionTokenLifetimeString = "00:15:00";
         internal const int defaultServerMaxActiveNegotiations = 128;
-        internal static readonly TimeSpan defaultServerMaxNegotiationLifetime = TimeSpan.Parse(defaultServerMaxNegotiationLifetimeString, CultureInfo.InvariantCulture);
-        internal static readonly TimeSpan defaultServerIssuedTokenLifetime = TimeSpan.Parse(defaultServerIssuedTokenLifetimeString, CultureInfo.InvariantCulture);
-        internal static readonly TimeSpan defaultServerIssuedTransitionTokenLifetime = TimeSpan.Parse(defaultServerIssuedTransitionTokenLifetimeString, CultureInfo.InvariantCulture);
+        internal static readonly TimeSpan defaultServerMaxNegotiationLifetime = TimeSpan.Parse(
+            defaultServerMaxNegotiationLifetimeString,
+            CultureInfo.InvariantCulture
+        );
+        internal static readonly TimeSpan defaultServerIssuedTokenLifetime = TimeSpan.Parse(
+            defaultServerIssuedTokenLifetimeString,
+            CultureInfo.InvariantCulture
+        );
+        internal static readonly TimeSpan defaultServerIssuedTransitionTokenLifetime =
+            TimeSpan.Parse(
+                defaultServerIssuedTransitionTokenLifetimeString,
+                CultureInfo.InvariantCulture
+            );
         internal const int defaultServerMaxCachedTokens = 1000;
         internal const bool defaultServerMaintainState = true;
-        internal static readonly SecurityStandardsManager defaultStandardsManager = SecurityStandardsManager.DefaultInstance;
-        internal static readonly SecurityStateEncoder defaultSecurityStateEncoder = new DataProtectionSecurityStateEncoder();
+        internal static readonly SecurityStandardsManager defaultStandardsManager =
+            SecurityStandardsManager.DefaultInstance;
+        internal static readonly SecurityStateEncoder defaultSecurityStateEncoder =
+            new DataProtectionSecurityStateEncoder();
 
         NegotiationTokenAuthenticatorStateCache<T> stateCache;
         RenewedSecurityTokenHandler renewedSecurityTokenHandler;
@@ -63,43 +78,28 @@ namespace System.ServiceModel.Security
         IOThreadTimer idlingNegotiationSessionTimer;
         bool isTimerCancelled;
 
-        protected NegotiationTokenAuthenticator() : base()
+        protected NegotiationTokenAuthenticator()
+            : base()
         {
             InitializeDefaults();
         }
 
         public IssuedSecurityTokenHandler IssuedSecurityTokenHandler
         {
-            get
-            {
-                return this.issuedSecurityTokenHandler;
-            }
-            set
-            {
-                this.issuedSecurityTokenHandler = value;
-            }
-
+            get { return this.issuedSecurityTokenHandler; }
+            set { this.issuedSecurityTokenHandler = value; }
         }
 
         public RenewedSecurityTokenHandler RenewedSecurityTokenHandler
         {
-            get
-            {
-                return this.renewedSecurityTokenHandler;
-            }
-            set
-            {
-                this.renewedSecurityTokenHandler = value;
-            }
+            get { return this.renewedSecurityTokenHandler; }
+            set { this.renewedSecurityTokenHandler = value; }
         }
 
         // settings
         public bool EncryptStateInServiceToken
         {
-            get
-            {
-                return this.encryptStateInServiceToken;
-            }
+            get { return this.encryptStateInServiceToken; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -109,22 +109,29 @@ namespace System.ServiceModel.Security
 
         public TimeSpan ServiceTokenLifetime
         {
-            get
-            {
-                return this.serviceTokenLifetime;
-            }
+            get { return this.serviceTokenLifetime; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
                 this.serviceTokenLifetime = value;
             }
@@ -132,16 +139,18 @@ namespace System.ServiceModel.Security
 
         public int MaximumCachedNegotiationState
         {
-            get
-            {
-                return this.maximumCachedNegotiationState;
-            }
+            get { return this.maximumCachedNegotiationState; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
                 this.maximumCachedNegotiationState = value;
             }
@@ -149,16 +158,18 @@ namespace System.ServiceModel.Security
 
         public int MaximumConcurrentNegotiations
         {
-            get
-            {
-                return this.maximumConcurrentNegotiations;
-            }
+            get { return this.maximumConcurrentNegotiations; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
                 this.maximumConcurrentNegotiations = value;
             }
@@ -166,22 +177,29 @@ namespace System.ServiceModel.Security
 
         public TimeSpan NegotiationTimeout
         {
-            get
-            {
-                return this.negotiationTimeout;
-            }
+            get { return this.negotiationTimeout; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
                 this.negotiationTimeout = value;
             }
@@ -189,10 +207,7 @@ namespace System.ServiceModel.Security
 
         public bool IsClientAnonymous
         {
-            get
-            {
-                return this.isClientAnonymous;
-            }
+            get { return this.isClientAnonymous; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -202,10 +217,7 @@ namespace System.ServiceModel.Security
 
         public SecurityAlgorithmSuite SecurityAlgorithmSuite
         {
-            get
-            {
-                return this.securityAlgorithmSuite;
-            }
+            get { return this.securityAlgorithmSuite; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -215,10 +227,7 @@ namespace System.ServiceModel.Security
 
         public IMessageFilterTable<EndpointAddress> EndpointFilterTable
         {
-            get
-            {
-                return this.endpointFilterTable;
-            }
+            get { return this.endpointFilterTable; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -226,28 +235,19 @@ namespace System.ServiceModel.Security
             }
         }
 
-        ISecurityContextSecurityTokenCache ISecurityContextSecurityTokenCacheProvider.TokenCache 
+        ISecurityContextSecurityTokenCache ISecurityContextSecurityTokenCacheProvider.TokenCache
         {
-            get 
-            {
-                return this.IssuedTokenCache;
-            }
+            get { return this.IssuedTokenCache; }
         }
 
         public virtual XmlDictionaryString RequestSecurityTokenAction
         {
-            get
-            {
-                return this.StandardsManager.TrustDriver.RequestSecurityTokenAction;
-            }
+            get { return this.StandardsManager.TrustDriver.RequestSecurityTokenAction; }
         }
 
         public virtual XmlDictionaryString RequestSecurityTokenResponseAction
         {
-            get
-            {
-                return this.StandardsManager.TrustDriver.RequestSecurityTokenResponseAction;
-            }
+            get { return this.StandardsManager.TrustDriver.RequestSecurityTokenResponseAction; }
         }
 
         public virtual XmlDictionaryString RequestSecurityTokenResponseFinalAction
@@ -260,23 +260,19 @@ namespace System.ServiceModel.Security
 
         public SecurityStandardsManager StandardsManager
         {
-            get
-            {
-                return this.standardsManager;
-            }
+            get { return this.standardsManager; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
-                this.standardsManager = (value != null ? value : SecurityStandardsManager.DefaultInstance);
+                this.standardsManager = (
+                    value != null ? value : SecurityStandardsManager.DefaultInstance
+                );
             }
         }
 
         public SecurityTokenParameters IssuedSecurityTokenParameters
         {
-            get
-            {
-                return this.issuedSecurityTokenParameters;
-            }
+            get { return this.issuedSecurityTokenParameters; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -296,10 +292,7 @@ namespace System.ServiceModel.Security
 
         public AuditLogLocation AuditLogLocation
         {
-            get
-            {
-                return this.auditLogLocation;
-            }
+            get { return this.auditLogLocation; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -309,10 +302,7 @@ namespace System.ServiceModel.Security
 
         public bool SuppressAuditFailure
         {
-            get
-            {
-                return this.suppressAuditFailure;
-            }
+            get { return this.suppressAuditFailure; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -322,10 +312,7 @@ namespace System.ServiceModel.Security
 
         public AuditLevel MessageAuthenticationAuditLevel
         {
-            get
-            {
-                return this.messageAuthenticationAuditLevel;
-            }
+            get { return this.messageAuthenticationAuditLevel; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -360,7 +347,7 @@ namespace System.ServiceModel.Security
         public SecurityStateEncoder SecurityStateEncoder
         {
             get { return this.securityStateEncoder; }
-            set 
+            set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 this.securityStateEncoder = value;
@@ -405,35 +392,82 @@ namespace System.ServiceModel.Security
 
         Object ThisLock
         {
-            get
-            {
-                return this.CommunicationObject;
-            }
+            get { return this.CommunicationObject; }
         }
 
         // helpers
-        protected SecurityContextSecurityToken IssueSecurityContextToken(UniqueId contextId, string id, byte[] key,
-            DateTime tokenEffectiveTime, DateTime tokenExpirationTime,
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies, bool isCookieMode)
+        protected SecurityContextSecurityToken IssueSecurityContextToken(
+            UniqueId contextId,
+            string id,
+            byte[] key,
+            DateTime tokenEffectiveTime,
+            DateTime tokenExpirationTime,
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies,
+            bool isCookieMode
+        )
         {
-            return IssueSecurityContextToken(contextId, id, key, tokenEffectiveTime, tokenExpirationTime, null,
-                tokenEffectiveTime, tokenExpirationTime, authorizationPolicies, isCookieMode);
+            return IssueSecurityContextToken(
+                contextId,
+                id,
+                key,
+                tokenEffectiveTime,
+                tokenExpirationTime,
+                null,
+                tokenEffectiveTime,
+                tokenExpirationTime,
+                authorizationPolicies,
+                isCookieMode
+            );
         }
 
-        protected SecurityContextSecurityToken IssueSecurityContextToken(UniqueId contextId, string id, byte[] key,
-            DateTime tokenEffectiveTime, DateTime tokenExpirationTime, UniqueId keyGeneration, DateTime keyEffectiveTime,
-            DateTime keyExpirationTime, ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies, bool isCookieMode)
+        protected SecurityContextSecurityToken IssueSecurityContextToken(
+            UniqueId contextId,
+            string id,
+            byte[] key,
+            DateTime tokenEffectiveTime,
+            DateTime tokenExpirationTime,
+            UniqueId keyGeneration,
+            DateTime keyEffectiveTime,
+            DateTime keyExpirationTime,
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies,
+            bool isCookieMode
+        )
         {
             this.CommunicationObject.ThrowIfClosedOrNotOpen();
             if (this.securityStateEncoder == null && isCookieMode)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SctCookieNotSupported)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SctCookieNotSupported))
+                );
             }
-            byte[] cookieBlob = (isCookieMode) ? this.cookieSerializer.CreateCookieFromSecurityContext(contextId, id, key, tokenEffectiveTime, tokenExpirationTime, keyGeneration,
-                                keyEffectiveTime, keyExpirationTime, authorizationPolicies) : null;
+            byte[] cookieBlob =
+                (isCookieMode)
+                    ? this.cookieSerializer.CreateCookieFromSecurityContext(
+                        contextId,
+                        id,
+                        key,
+                        tokenEffectiveTime,
+                        tokenExpirationTime,
+                        keyGeneration,
+                        keyEffectiveTime,
+                        keyExpirationTime,
+                        authorizationPolicies
+                    )
+                    : null;
 
-            SecurityContextSecurityToken issuedToken = new SecurityContextSecurityToken(contextId, id, key, tokenEffectiveTime, tokenExpirationTime,
-                authorizationPolicies, isCookieMode, cookieBlob, keyGeneration, keyEffectiveTime, keyExpirationTime);
+            SecurityContextSecurityToken issuedToken = new SecurityContextSecurityToken(
+                contextId,
+                id,
+                key,
+                tokenEffectiveTime,
+                tokenExpirationTime,
+                authorizationPolicies,
+                isCookieMode,
+                cookieBlob,
+                keyGeneration,
+                keyEffectiveTime,
+                keyExpirationTime
+            );
             return issuedToken;
         }
 
@@ -447,7 +481,7 @@ namespace System.ServiceModel.Security
             this.standardsManager = defaultStandardsManager;
             this.securityStateEncoder = defaultSecurityStateEncoder;
             this.maximumConcurrentNegotiations = defaultServerMaxActiveNegotiations;
-            // we rely on the transport encoders to enforce the message size except in the 
+            // we rely on the transport encoders to enforce the message size except in the
             // mixed mode nego case, where the client is unauthenticated and the maxMessageSize is too
             // large to be a mitigation
             this.maxMessageSize = Int32.MaxValue;
@@ -461,7 +495,7 @@ namespace System.ServiceModel.Security
                 this.negotiationHost.Close(timeoutHelper.RemainingTime());
                 this.negotiationHost = null;
             }
-           
+
             lock (ThisLock)
             {
                 if (this.idlingNegotiationSessionTimer != null && !this.isTimerCancelled)
@@ -480,7 +514,7 @@ namespace System.ServiceModel.Security
                 this.negotiationHost.Abort();
                 this.negotiationHost = null;
             }
-            
+
             lock (ThisLock)
             {
                 if (this.idlingNegotiationSessionTimer != null && !this.isTimerCancelled)
@@ -496,29 +530,51 @@ namespace System.ServiceModel.Security
         {
             if (this.IssuerBindingContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.IssuerBuildContextNotSet, this.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.IssuerBuildContextNotSet, this.GetType())
+                    )
+                );
             }
             if (this.IssuedSecurityTokenParameters == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.IssuedSecurityTokenParametersNotSet, this.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.IssuedSecurityTokenParametersNotSet, this.GetType())
+                    )
+                );
             }
             if (this.SecurityAlgorithmSuite == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecurityAlgorithmSuiteNotSet, this.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SecurityAlgorithmSuiteNotSet, this.GetType())
+                    )
+                );
             }
             if (this.IssuedTokenCache == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.IssuedTokenCacheNotSet, this.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.IssuedTokenCacheNotSet, this.GetType())
+                    )
+                );
             }
 
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             this.SetupServiceHost();
             negotiationHost.Open(timeoutHelper.RemainingTime());
-            this.stateCache = new NegotiationTokenAuthenticatorStateCache<T>(this.NegotiationTimeout, this.MaximumCachedNegotiationState);
+            this.stateCache = new NegotiationTokenAuthenticatorStateCache<T>(
+                this.NegotiationTimeout,
+                this.MaximumCachedNegotiationState
+            );
             this.sctUri = this.StandardsManager.SecureConversationDriver.TokenTypeUri;
             if (this.SecurityStateEncoder != null)
             {
-                this.cookieSerializer = new SecurityContextCookieSerializer(this.SecurityStateEncoder, this.KnownTypes);
+                this.cookieSerializer = new SecurityContextCookieSerializer(
+                    this.SecurityStateEncoder,
+                    this.KnownTypes
+                );
             }
             if (this.negotiationTimeout < TimeSpan.MaxValue)
             {
@@ -526,7 +582,11 @@ namespace System.ServiceModel.Security
                 {
                     this.activeNegotiationChannels1 = new List<IChannel>();
                     this.activeNegotiationChannels2 = new List<IChannel>();
-                    this.idlingNegotiationSessionTimer = new IOThreadTimer(new Action<object>(this.OnIdlingNegotiationSessionTimer), this, false);
+                    this.idlingNegotiationSessionTimer = new IOThreadTimer(
+                        new Action<object>(this.OnIdlingNegotiationSessionTimer),
+                        this,
+                        false
+                    );
                     this.isTimerCancelled = false;
                     this.idlingNegotiationSessionTimer.Set(this.negotiationTimeout);
                 }
@@ -539,7 +599,9 @@ namespace System.ServiceModel.Security
             return (token is SecurityContextSecurityToken);
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(SecurityToken token)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             SecurityContextSecurityToken sct = (SecurityContextSecurityToken)token;
             return sct.AuthorizationPolicies;
@@ -551,19 +613,41 @@ namespace System.ServiceModel.Security
 
         void SetupServiceHost()
         {
-            ChannelBuilder channelBuilder = new ChannelBuilder(this.IssuerBindingContext.Clone(), true);
+            ChannelBuilder channelBuilder = new ChannelBuilder(
+                this.IssuerBindingContext.Clone(),
+                true
+            );
             channelBuilder.Binding.Elements.Insert(0, new ReplyAdapterBindingElement());
-            channelBuilder.Binding = new CustomBinding(this.GetNegotiationBinding(channelBuilder.Binding));
-            negotiationHost = new NegotiationHost(this, this.ListenUri, channelBuilder, this.GetListenerFilter());
+            channelBuilder.Binding = new CustomBinding(
+                this.GetNegotiationBinding(channelBuilder.Binding)
+            );
+            negotiationHost = new NegotiationHost(
+                this,
+                this.ListenUri,
+                channelBuilder,
+                this.GetListenerFilter()
+            );
         }
 
-
         // message processing abstract method
-        protected abstract BodyWriter ProcessRequestSecurityToken(Message request, RequestSecurityToken requestSecurityToken, out T negotiationState);
-        protected abstract BodyWriter ProcessRequestSecurityTokenResponse(T negotiationState, Message request, RequestSecurityTokenResponse requestSecurityTokenResponse);
+        protected abstract BodyWriter ProcessRequestSecurityToken(
+            Message request,
+            RequestSecurityToken requestSecurityToken,
+            out T negotiationState
+        );
+        protected abstract BodyWriter ProcessRequestSecurityTokenResponse(
+            T negotiationState,
+            Message request,
+            RequestSecurityTokenResponse requestSecurityTokenResponse
+        );
 
         // message handlers
-        protected virtual void ParseMessageBody(Message message, out string context, out RequestSecurityToken requestSecurityToken, out RequestSecurityTokenResponse requestSecurityTokenResponse)
+        protected virtual void ParseMessageBody(
+            Message message,
+            out string context,
+            out RequestSecurityToken requestSecurityToken,
+            out RequestSecurityTokenResponse requestSecurityTokenResponse
+        )
         {
             requestSecurityToken = null;
             requestSecurityTokenResponse = null;
@@ -572,7 +656,10 @@ namespace System.ServiceModel.Security
                 XmlDictionaryReader reader = message.GetReaderAtBodyContents();
                 using (reader)
                 {
-                    requestSecurityToken = RequestSecurityToken.CreateFrom(this.StandardsManager, reader);
+                    requestSecurityToken = RequestSecurityToken.CreateFrom(
+                        this.StandardsManager,
+                        reader
+                    );
                     message.ReadFromBodyContentsToEnd(reader);
                 }
                 context = requestSecurityToken.Context;
@@ -582,14 +669,22 @@ namespace System.ServiceModel.Security
                 XmlDictionaryReader reader = message.GetReaderAtBodyContents();
                 using (reader)
                 {
-                    requestSecurityTokenResponse = RequestSecurityTokenResponse.CreateFrom(this.StandardsManager, reader);
+                    requestSecurityTokenResponse = RequestSecurityTokenResponse.CreateFrom(
+                        this.StandardsManager,
+                        reader
+                    );
                     message.ReadFromBodyContentsToEnd(reader);
                 }
                 context = requestSecurityTokenResponse.Context;
             }
             else
             {
-                throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.InvalidActionForNegotiationMessage, message.Headers.Action)), message);
+                throw TraceUtility.ThrowHelperError(
+                    new SecurityNegotiationException(
+                        SR.GetString(SR.InvalidActionForNegotiationMessage, message.Headers.Action)
+                    ),
+                    message
+                );
             }
         }
 
@@ -597,14 +692,22 @@ namespace System.ServiceModel.Security
         {
             if (request.Headers.MessageId != null)
             {
-                Message reply = Message.CreateMessage(request.Version, ActionHeader.Create(action, request.Version.Addressing), body);
+                Message reply = Message.CreateMessage(
+                    request.Version,
+                    ActionHeader.Create(action, request.Version.Addressing),
+                    body
+                );
                 reply.InitializeReply(request);
                 return reply;
             }
             else
             {
                 // the message id may not be present if MapToHttp is true
-                return Message.CreateMessage(request.Version, ActionHeader.Create(action, request.Version.Addressing), body);
+                return Message.CreateMessage(
+                    request.Version,
+                    ActionHeader.Create(action, request.Version.Addressing),
+                    body
+                );
             }
         }
 
@@ -629,7 +732,10 @@ namespace System.ServiceModel.Security
                     return;
                 }
                 IChannel channel = OperationContext.Current.Channel;
-                if (!this.activeNegotiationChannels1.Contains(channel) && !this.activeNegotiationChannels2.Contains(channel))
+                if (
+                    !this.activeNegotiationChannels1.Contains(channel)
+                    && !this.activeNegotiationChannels2.Contains(channel)
+                )
                 {
                     this.activeNegotiationChannels1.Add(channel);
                 }
@@ -656,7 +762,10 @@ namespace System.ServiceModel.Security
                 IChannel channel = OperationContext.Current.Channel;
                 this.activeNegotiationChannels1.Remove(channel);
                 this.activeNegotiationChannels2.Remove(channel);
-                if (this.activeNegotiationChannels1.Count == 0 && this.activeNegotiationChannels2.Count == 0)
+                if (
+                    this.activeNegotiationChannels1.Count == 0
+                    && this.activeNegotiationChannels2.Count == 0
+                )
                 {
                     this.isTimerCancelled = true;
                     this.idlingNegotiationSessionTimer.Cancel();
@@ -668,7 +777,13 @@ namespace System.ServiceModel.Security
         {
             lock (ThisLock)
             {
-                if (this.isTimerCancelled || (this.CommunicationObject.State != CommunicationState.Opened && this.CommunicationObject.State != CommunicationState.Opening))
+                if (
+                    this.isTimerCancelled
+                    || (
+                        this.CommunicationObject.State != CommunicationState.Opened
+                        && this.CommunicationObject.State != CommunicationState.Opening
+                    )
+                )
                 {
                     return;
                 }
@@ -694,9 +809,15 @@ namespace System.ServiceModel.Security
                 }
                 finally
                 {
-                    if (this.CommunicationObject.State == CommunicationState.Opened || this.CommunicationObject.State == CommunicationState.Opening)
+                    if (
+                        this.CommunicationObject.State == CommunicationState.Opened
+                        || this.CommunicationObject.State == CommunicationState.Opening
+                    )
                     {
-                        if (this.activeNegotiationChannels1.Count == 0 && this.activeNegotiationChannels2.Count == 0)
+                        if (
+                            this.activeNegotiationChannels1.Count == 0
+                            && this.activeNegotiationChannels2.Count == 0
+                        )
                         {
                             this.isTimerCancelled = true;
                             this.idlingNegotiationSessionTimer.Cancel();
@@ -732,7 +853,9 @@ namespace System.ServiceModel.Security
                     string action = request.Headers.Action;
                     try
                     {
-                        using (MessageBuffer buffer = request.CreateBufferedCopy(this.maxMessageSize))
+                        using (
+                            MessageBuffer buffer = request.CreateBufferedCopy(this.maxMessageSize)
+                        )
                         {
                             request = buffer.CreateMessage();
                             disposeRequest = true;
@@ -740,7 +863,16 @@ namespace System.ServiceModel.Security
                     }
                     catch (QuotaExceededException e)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.SecurityNegotiationMessageTooLarge, action, this.maxMessageSize), e));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityNegotiationException(
+                                SR.GetString(
+                                    SR.SecurityNegotiationMessageTooLarge,
+                                    action,
+                                    this.maxMessageSize
+                                ),
+                                e
+                            )
+                        );
                     }
                 }
                 try
@@ -764,9 +896,17 @@ namespace System.ServiceModel.Security
                         {
                             if (negotiationState != null)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new SecurityNegotiationException(SR.GetString(SR.NegotiationStateAlreadyPresent, context)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                                    new SecurityNegotiationException(
+                                        SR.GetString(SR.NegotiationStateAlreadyPresent, context)
+                                    )
+                                );
                             }
-                            replyBody = this.ProcessRequestSecurityToken(request, rst, out negotiationState);
+                            replyBody = this.ProcessRequestSecurityToken(
+                                request,
+                                rst,
+                                out negotiationState
+                            );
                             lock (negotiationState.ThisLock)
                             {
                                 if (negotiationState.IsNegotiationCompleted)
@@ -774,10 +914,16 @@ namespace System.ServiceModel.Security
                                     // if session-sct add it to cache and add a redirect header
                                     if (!negotiationState.ServiceToken.IsCookieMode)
                                     {
-                                        this.IssuedTokenCache.AddContext(negotiationState.ServiceToken);
+                                        this.IssuedTokenCache.AddContext(
+                                            negotiationState.ServiceToken
+                                        );
                                     }
                                     this.OnTokenIssued(negotiationState.ServiceToken);
-                                    SecurityTraceRecordHelper.TraceServiceSecurityNegotiationCompleted(request, this, negotiationState.ServiceToken);
+                                    SecurityTraceRecordHelper.TraceServiceSecurityNegotiationCompleted(
+                                        request,
+                                        this,
+                                        negotiationState.ServiceToken
+                                    );
                                     disposeState = true;
                                 }
                                 else
@@ -792,20 +938,34 @@ namespace System.ServiceModel.Security
                         {
                             if (negotiationState == null)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new SecurityNegotiationException(SR.GetString(SR.CannotFindNegotiationState, context)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                                    new SecurityNegotiationException(
+                                        SR.GetString(SR.CannotFindNegotiationState, context)
+                                    )
+                                );
                             }
                             lock (negotiationState.ThisLock)
                             {
-                                replyBody = this.ProcessRequestSecurityTokenResponse(negotiationState, request, rstr);
+                                replyBody = this.ProcessRequestSecurityTokenResponse(
+                                    negotiationState,
+                                    request,
+                                    rstr
+                                );
                                 if (negotiationState.IsNegotiationCompleted)
                                 {
                                     // if session-sct add it to cache and add a redirect header
                                     if (!negotiationState.ServiceToken.IsCookieMode)
                                     {
-                                        this.IssuedTokenCache.AddContext(negotiationState.ServiceToken);
+                                        this.IssuedTokenCache.AddContext(
+                                            negotiationState.ServiceToken
+                                        );
                                     }
                                     this.OnTokenIssued(negotiationState.ServiceToken);
-                                    SecurityTraceRecordHelper.TraceServiceSecurityNegotiationCompleted(request, this, negotiationState.ServiceToken);
+                                    SecurityTraceRecordHelper.TraceServiceSecurityNegotiationCompleted(
+                                        request,
+                                        this,
+                                        negotiationState.ServiceToken
+                                    );
                                     disposeState = true;
                                 }
                                 else
@@ -817,12 +977,21 @@ namespace System.ServiceModel.Security
 
                         if (negotiationState.IsNegotiationCompleted && null != this.ListenUri)
                         {
-                            if (AuditLevel.Success == (this.messageAuthenticationAuditLevel & AuditLevel.Success))
+                            if (
+                                AuditLevel.Success
+                                == (this.messageAuthenticationAuditLevel & AuditLevel.Success)
+                            )
                             {
                                 string primaryIdentity = negotiationState.GetRemoteIdentityName();
-                                SecurityAuditHelper.WriteSecurityNegotiationSuccessEvent(this.auditLogLocation,
-                                    this.suppressAuditFailure, request, request.Headers.To, request.Headers.Action,
-                                    primaryIdentity, this.GetType().Name);
+                                SecurityAuditHelper.WriteSecurityNegotiationSuccessEvent(
+                                    this.auditLogLocation,
+                                    this.suppressAuditFailure,
+                                    request,
+                                    request.Headers.To,
+                                    request.Headers.Action,
+                                    primaryIdentity,
+                                    this.GetType().Name
+                                );
                             }
                         }
                         isNegotiationFailure = false;
@@ -832,18 +1001,34 @@ namespace System.ServiceModel.Security
                         if (Fx.IsFatal(exception))
                             throw;
 
-                        if (PerformanceCounters.PerformanceCountersEnabled && null != this.ListenUri)
+                        if (
+                            PerformanceCounters.PerformanceCountersEnabled
+                            && null != this.ListenUri
+                        )
                         {
                             PerformanceCounters.AuthenticationFailed(request, this.ListenUri);
                         }
-                        if (AuditLevel.Failure == (this.messageAuthenticationAuditLevel & AuditLevel.Failure))
+                        if (
+                            AuditLevel.Failure
+                            == (this.messageAuthenticationAuditLevel & AuditLevel.Failure)
+                        )
                         {
                             try
                             {
-                                string primaryIdentity = (negotiationState != null) ? negotiationState.GetRemoteIdentityName() : String.Empty;
-                                SecurityAuditHelper.WriteSecurityNegotiationFailureEvent(this.auditLogLocation,
-                                    this.suppressAuditFailure, request, request.Headers.To, request.Headers.Action,
-                                    primaryIdentity, this.GetType().Name, exception);
+                                string primaryIdentity =
+                                    (negotiationState != null)
+                                        ? negotiationState.GetRemoteIdentityName()
+                                        : String.Empty;
+                                SecurityAuditHelper.WriteSecurityNegotiationFailureEvent(
+                                    this.auditLogLocation,
+                                    this.suppressAuditFailure,
+                                    request,
+                                    request.Headers.To,
+                                    request.Headers.Action,
+                                    primaryIdentity,
+                                    this.GetType().Name,
+                                    exception
+                                );
                             }
 #pragma warning suppress 56500
                             catch (Exception auditException)
@@ -851,7 +1036,10 @@ namespace System.ServiceModel.Security
                                 if (Fx.IsFatal(auditException))
                                     throw;
 
-                                DiagnosticUtility.TraceHandledException(auditException, TraceEventType.Error);
+                                DiagnosticUtility.TraceHandledException(
+                                    auditException,
+                                    TraceEventType.Error
+                                );
                             }
                         }
 
@@ -873,7 +1061,13 @@ namespace System.ServiceModel.Security
                         }
                     }
 
-                    return CreateReply(request, (replyBody is RequestSecurityTokenResponseCollection) ? RequestSecurityTokenResponseFinalAction : RequestSecurityTokenResponseAction, replyBody);
+                    return CreateReply(
+                        request,
+                        (replyBody is RequestSecurityTokenResponseCollection)
+                            ? RequestSecurityTokenResponseFinalAction
+                            : RequestSecurityTokenResponseAction,
+                        replyBody
+                    );
                 }
                 finally
                 {
@@ -899,11 +1093,11 @@ namespace System.ServiceModel.Security
         // negotiation failure methods
         Message HandleNegotiationException(Message request, Exception e)
         {
-            
             SecurityTraceRecordHelper.TraceServiceSecurityNegotiationFailure<T>(
-                                    EventTraceActivityHelper.TryExtractActivity(request),
-                                    this, 
-                                    e);
+                EventTraceActivityHelper.TryExtractActivity(request),
+                this,
+                e
+            );
             return CreateFault(request, e);
         }
 
@@ -915,21 +1109,39 @@ namespace System.ServiceModel.Security
             bool isSenderFault;
             if (e is SecurityTokenValidationException || e is System.ComponentModel.Win32Exception)
             {
-                subCode = new FaultCode(TrustApr2004Strings.FailedAuthenticationFaultCode, TrustFeb2005Strings.Namespace);
-                reason = new FaultReason(SR.GetString(SR.FailedAuthenticationTrustFaultCode), CultureInfo.CurrentCulture);
+                subCode = new FaultCode(
+                    TrustApr2004Strings.FailedAuthenticationFaultCode,
+                    TrustFeb2005Strings.Namespace
+                );
+                reason = new FaultReason(
+                    SR.GetString(SR.FailedAuthenticationTrustFaultCode),
+                    CultureInfo.CurrentCulture
+                );
                 isSenderFault = true;
             }
             else if (e is QuotaExceededException)
             {
                 // send a receiver fault so that the sender can retry
-                subCode = new FaultCode(DotNetSecurityStrings.SecurityServerTooBusyFault, DotNetSecurityStrings.Namespace);
-                reason = new FaultReason(SR.GetString(SR.NegotiationQuotasExceededFaultReason), CultureInfo.CurrentCulture);
+                subCode = new FaultCode(
+                    DotNetSecurityStrings.SecurityServerTooBusyFault,
+                    DotNetSecurityStrings.Namespace
+                );
+                reason = new FaultReason(
+                    SR.GetString(SR.NegotiationQuotasExceededFaultReason),
+                    CultureInfo.CurrentCulture
+                );
                 isSenderFault = false;
             }
             else
             {
-                subCode = new FaultCode(TrustApr2004Strings.InvalidRequestFaultCode, TrustFeb2005Strings.Namespace);
-                reason = new FaultReason(SR.GetString(SR.InvalidRequestTrustFaultCode), CultureInfo.CurrentCulture);
+                subCode = new FaultCode(
+                    TrustApr2004Strings.InvalidRequestFaultCode,
+                    TrustFeb2005Strings.Namespace
+                );
+                reason = new FaultReason(
+                    SR.GetString(SR.InvalidRequestTrustFaultCode),
+                    CultureInfo.CurrentCulture
+                );
                 isSenderFault = true;
             }
             FaultCode faultCode;
@@ -942,7 +1154,11 @@ namespace System.ServiceModel.Security
                 faultCode = FaultCode.CreateReceiverFaultCode(subCode);
             }
             MessageFault fault = MessageFault.CreateFault(faultCode, reason);
-            Message faultReply = Message.CreateMessage(version, fault, version.Addressing.DefaultFaultAction);
+            Message faultReply = Message.CreateMessage(
+                version,
+                fault,
+                version.Addressing.DefaultFaultAction
+            );
             faultReply.Headers.RelatesTo = request.Headers.MessageId;
 
             return faultReply;
@@ -955,7 +1171,12 @@ namespace System.ServiceModel.Security
             ChannelBuilder channelBuilder;
             MessageFilter listenerFilter;
 
-            public NegotiationHost(NegotiationTokenAuthenticator<T> authenticator, Uri listenUri, ChannelBuilder channelBuilder, MessageFilter listenerFilter)
+            public NegotiationHost(
+                NegotiationTokenAuthenticator<T> authenticator,
+                Uri listenUri,
+                ChannelBuilder channelBuilder,
+                MessageFilter listenerFilter
+            )
             {
                 this.authenticator = authenticator;
                 this.listenUri = listenUri;
@@ -963,7 +1184,9 @@ namespace System.ServiceModel.Security
                 this.listenerFilter = listenerFilter;
             }
 
-            protected override ServiceDescription CreateDescription(out IDictionary<string, ContractDescription> implementedContracts)
+            protected override ServiceDescription CreateDescription(
+                out IDictionary<string, ContractDescription> implementedContracts
+            )
             {
                 implementedContracts = null;
                 return null;
@@ -973,39 +1196,79 @@ namespace System.ServiceModel.Security
             {
                 MessageFilter contractFilter = this.listenerFilter;
                 int filterPriority = 10;
-                Type[] endpointChannelTypes = new Type[] { typeof(IReplyChannel),
-                                                           typeof(IDuplexChannel),
-                                                           typeof(IReplySessionChannel),
-                                                           typeof(IDuplexSessionChannel) };
+                Type[] endpointChannelTypes = new Type[]
+                {
+                    typeof(IReplyChannel),
+                    typeof(IDuplexChannel),
+                    typeof(IReplySessionChannel),
+                    typeof(IDuplexSessionChannel),
+                };
                 IChannelListener listener = null;
-                BindingParameterCollection parameters = new BindingParameterCollection(this.channelBuilder.BindingParameters);
+                BindingParameterCollection parameters = new BindingParameterCollection(
+                    this.channelBuilder.BindingParameters
+                );
                 Binding binding = this.channelBuilder.Binding;
                 binding.ReceiveTimeout = this.authenticator.NegotiationTimeout;
                 parameters.Add(new ChannelDemuxerFilter(contractFilter, filterPriority));
-                DispatcherBuilder.MaybeCreateListener(true, endpointChannelTypes, binding, parameters,
-                                                      this.listenUri, "", ListenUriMode.Explicit, this.ServiceThrottle, out listener);
+                DispatcherBuilder.MaybeCreateListener(
+                    true,
+                    endpointChannelTypes,
+                    binding,
+                    parameters,
+                    this.listenUri,
+                    "",
+                    ListenUriMode.Explicit,
+                    this.ServiceThrottle,
+                    out listener
+                );
                 if (listener == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CannotCreateTwoWayListenerForNegotiation)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.CannotCreateTwoWayListenerForNegotiation)
+                        )
+                    );
                 }
-                ChannelDispatcher channelDispatcher = new ChannelDispatcher(listener, null, binding);
+                ChannelDispatcher channelDispatcher = new ChannelDispatcher(
+                    listener,
+                    null,
+                    binding
+                );
                 channelDispatcher.MessageVersion = binding.MessageVersion;
                 channelDispatcher.ManualAddressing = true;
                 channelDispatcher.ServiceThrottle = new ServiceThrottle(this);
-                channelDispatcher.ServiceThrottle.MaxConcurrentCalls = this.authenticator.MaximumConcurrentNegotiations;
-                channelDispatcher.ServiceThrottle.MaxConcurrentSessions = this.authenticator.MaximumConcurrentNegotiations;
+                channelDispatcher.ServiceThrottle.MaxConcurrentCalls =
+                    this.authenticator.MaximumConcurrentNegotiations;
+                channelDispatcher.ServiceThrottle.MaxConcurrentSessions =
+                    this.authenticator.MaximumConcurrentNegotiations;
 
-                EndpointDispatcher endpointDispatcher = new EndpointDispatcher(new EndpointAddress(this.listenUri), "SecurityNegotiationContract", NamingHelper.DefaultNamespace, true);
-                endpointDispatcher.DispatchRuntime.SingletonInstanceContext = new InstanceContext(null, this.authenticator, false);
+                EndpointDispatcher endpointDispatcher = new EndpointDispatcher(
+                    new EndpointAddress(this.listenUri),
+                    "SecurityNegotiationContract",
+                    NamingHelper.DefaultNamespace,
+                    true
+                );
+                endpointDispatcher.DispatchRuntime.SingletonInstanceContext = new InstanceContext(
+                    null,
+                    this.authenticator,
+                    false
+                );
                 endpointDispatcher.DispatchRuntime.ConcurrencyMode = ConcurrencyMode.Multiple;
                 endpointDispatcher.AddressFilter = new MatchAllMessageFilter();
                 endpointDispatcher.ContractFilter = contractFilter;
                 endpointDispatcher.FilterPriority = filterPriority;
-                endpointDispatcher.DispatchRuntime.PrincipalPermissionMode = PrincipalPermissionMode.None;
-                endpointDispatcher.DispatchRuntime.InstanceContextProvider = new SingletonInstanceContextProvider(endpointDispatcher.DispatchRuntime);
+                endpointDispatcher.DispatchRuntime.PrincipalPermissionMode =
+                    PrincipalPermissionMode.None;
+                endpointDispatcher.DispatchRuntime.InstanceContextProvider =
+                    new SingletonInstanceContextProvider(endpointDispatcher.DispatchRuntime);
                 endpointDispatcher.DispatchRuntime.SynchronizationContext = null;
-                
-                DispatchOperation operation = new DispatchOperation(endpointDispatcher.DispatchRuntime, "*", MessageHeaders.WildcardAction, MessageHeaders.WildcardAction);
+
+                DispatchOperation operation = new DispatchOperation(
+                    endpointDispatcher.DispatchRuntime,
+                    "*",
+                    MessageHeaders.WildcardAction,
+                    MessageHeaders.WildcardAction
+                );
                 operation.Formatter = new MessageOperationFormatter();
                 operation.Invoker = new NegotiationSyncInvoker(this.authenticator);
 
@@ -1013,7 +1276,7 @@ namespace System.ServiceModel.Security
                 channelDispatcher.Endpoints.Add(endpointDispatcher);
                 this.ChannelDispatchers.Add(channelDispatcher);
             }
-           
+
             class NegotiationSyncInvoker : IOperationInvoker
             {
                 NegotiationTokenAuthenticator<T> parent;
@@ -1023,7 +1286,10 @@ namespace System.ServiceModel.Security
                     this.parent = parent;
                 }
 
-                public bool IsSynchronous { get { return true; } }
+                public bool IsSynchronous
+                {
+                    get { return true; }
+                }
 
                 public object[] AllocateInputs()
                 {
@@ -1048,14 +1314,23 @@ namespace System.ServiceModel.Security
                     }
                 }
 
-                public IAsyncResult InvokeBegin(object instance, object[] inputs, AsyncCallback callback, object state)
+                public IAsyncResult InvokeBegin(
+                    object instance,
+                    object[] inputs,
+                    AsyncCallback callback,
+                    object state
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
                 }
 
                 public object InvokeEnd(object instance, out object[] outputs, IAsyncResult result)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
                 }
             }
         }

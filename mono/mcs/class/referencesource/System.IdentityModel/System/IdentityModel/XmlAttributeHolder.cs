@@ -62,7 +62,10 @@ namespace System.IdentityModel
             return ReadAttributes(reader, ref maxSizeOfHeaders);
         }
 
-        public static XmlAttributeHolder[] ReadAttributes(XmlDictionaryReader reader, ref int maxSizeOfHeaders)
+        public static XmlAttributeHolder[] ReadAttributes(
+            XmlDictionaryReader reader,
+            ref int maxSizeOfHeaders
+        )
         {
             if (reader.AttributeCount == 0)
                 return emptyArray;
@@ -97,12 +100,18 @@ namespace System.IdentityModel
             int byteCount = s.Length * sizeof(char);
             if (byteCount > maxSizeOfHeaders)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.XmlBufferQuotaExceeded)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.XmlBufferQuotaExceeded))
+                );
             }
             maxSizeOfHeaders -= byteCount;
         }
 
-        public static string GetAttribute(XmlAttributeHolder[] attributes, string localName, string ns)
+        public static string GetAttribute(
+            XmlAttributeHolder[] attributes,
+            string localName,
+            string ns
+        )
         {
             for (int i = 0; i < attributes.Length; i++)
                 if (attributes[i].LocalName == localName && attributes[i].NamespaceUri == ns)

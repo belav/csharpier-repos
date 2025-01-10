@@ -35,12 +35,13 @@ namespace System.Runtime.Serialization.Tests
             Assert.True(attribute.IsReferenceSetExplicitly);
         }
 
-        public static TheoryData<string> StringValue_TestData => new TheoryData<string>()
-        {
-            { null },
-            { "" },
-            { "value" }
-        };
+        public static TheoryData<string> StringValue_TestData =>
+            new TheoryData<string>()
+            {
+                { null },
+                { "" },
+                { "value" },
+            };
 
         [Theory]
         [MemberData(nameof(StringValue_TestData))]

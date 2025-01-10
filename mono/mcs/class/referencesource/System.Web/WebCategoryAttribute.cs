@@ -1,17 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="WebCategoryAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.Web {
-
+namespace System.Web
+{
     using System;
-    using System.ComponentModel;   
+    using System.ComponentModel;
     using System.Web.Util;
-
 
     /// <internalonly/>
     /// <devdoc>
@@ -20,23 +19,20 @@ namespace System.Web {
     ///    </para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.All)]
-    internal sealed class WebCategoryAttribute : CategoryAttribute {
-
-
+    internal sealed class WebCategoryAttribute : CategoryAttribute
+    {
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of the <see cref='System.ComponentModel.CategoryAttribute'/> class.
         ///    </para>
         /// </devdoc>
-        internal WebCategoryAttribute(string category) : base(category) {
-        }
+        internal WebCategoryAttribute(string category)
+            : base(category) { }
 
-        public override object TypeId {
-            get {
-                return typeof(CategoryAttribute);
-            }
+        public override object TypeId
+        {
+            get { return typeof(CategoryAttribute); }
         }
-
 
         /// <devdoc>
         ///     This method is called the first time the category property
@@ -46,14 +42,21 @@ namespace System.Web {
         ///     available for the given value, the method should return it.
         ///     Otherwise, it should return null.
         /// </devdoc>
-        protected override string GetLocalizedString(string value) {
+        protected override string GetLocalizedString(string value)
+        {
             string localizedValue = base.GetLocalizedString(value);
-            if (localizedValue == null) {
+            if (localizedValue == null)
+            {
                 localizedValue = (string)SR.GetString("Category_" + value);
             }
             // This attribute is internal, and we should never have a missing resource string.
             //
-            Debug.Assert(localizedValue != null, "All WebForms category attributes should have localized strings.  Category '" + value + "' not found.");
+            Debug.Assert(
+                localizedValue != null,
+                "All WebForms category attributes should have localized strings.  Category '"
+                    + value
+                    + "' not found."
+            );
             return localizedValue;
         }
     }

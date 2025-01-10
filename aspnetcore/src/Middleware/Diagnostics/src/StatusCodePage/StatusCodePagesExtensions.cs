@@ -22,7 +22,10 @@ public static class StatusCodePagesExtensions
     /// <param name="app"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseStatusCodePages(this IApplicationBuilder app, StatusCodePagesOptions options)
+    public static IApplicationBuilder UseStatusCodePages(
+        this IApplicationBuilder app,
+        StatusCodePagesOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(options);
@@ -50,15 +53,15 @@ public static class StatusCodePagesExtensions
     /// <param name="app"></param>
     /// <param name="handler"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseStatusCodePages(this IApplicationBuilder app, Func<StatusCodeContext, Task> handler)
+    public static IApplicationBuilder UseStatusCodePages(
+        this IApplicationBuilder app,
+        Func<StatusCodeContext, Task> handler
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(handler);
 
-        return app.UseStatusCodePages(new StatusCodePagesOptions
-        {
-            HandleAsync = handler
-        });
+        return app.UseStatusCodePages(new StatusCodePagesOptions { HandleAsync = handler });
     }
 
     /// <summary>
@@ -69,13 +72,21 @@ public static class StatusCodePagesExtensions
     /// <param name="contentType"></param>
     /// <param name="bodyFormat"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseStatusCodePages(this IApplicationBuilder app, string contentType, string bodyFormat)
+    public static IApplicationBuilder UseStatusCodePages(
+        this IApplicationBuilder app,
+        string contentType,
+        string bodyFormat
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
 
         return app.UseStatusCodePages(context =>
         {
-            var body = string.Format(CultureInfo.InvariantCulture, bodyFormat, context.HttpContext.Response.StatusCode);
+            var body = string.Format(
+                CultureInfo.InvariantCulture,
+                bodyFormat,
+                context.HttpContext.Response.StatusCode
+            );
             context.HttpContext.Response.ContentType = contentType;
             return context.HttpContext.Response.WriteAsync(body);
         });
@@ -89,7 +100,10 @@ public static class StatusCodePagesExtensions
     /// <param name="app"></param>
     /// <param name="locationFormat"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseStatusCodePagesWithRedirects(this IApplicationBuilder app, string locationFormat)
+    public static IApplicationBuilder UseStatusCodePagesWithRedirects(
+        this IApplicationBuilder app,
+        string locationFormat
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
 
@@ -98,8 +112,14 @@ public static class StatusCodePagesExtensions
             locationFormat = locationFormat.Substring(1);
             return app.UseStatusCodePages(context =>
             {
-                var location = string.Format(CultureInfo.InvariantCulture, locationFormat, context.HttpContext.Response.StatusCode);
-                context.HttpContext.Response.Redirect(context.HttpContext.Request.PathBase + location);
+                var location = string.Format(
+                    CultureInfo.InvariantCulture,
+                    locationFormat,
+                    context.HttpContext.Response.StatusCode
+                );
+                context.HttpContext.Response.Redirect(
+                    context.HttpContext.Request.PathBase + location
+                );
                 return Task.CompletedTask;
             });
         }
@@ -107,7 +127,11 @@ public static class StatusCodePagesExtensions
         {
             return app.UseStatusCodePages(context =>
             {
-                var location = string.Format(CultureInfo.InvariantCulture, locationFormat, context.HttpContext.Response.StatusCode);
+                var location = string.Format(
+                    CultureInfo.InvariantCulture,
+                    locationFormat,
+                    context.HttpContext.Response.StatusCode
+                );
                 context.HttpContext.Response.Redirect(location);
                 return Task.CompletedTask;
             });
@@ -121,7 +145,10 @@ public static class StatusCodePagesExtensions
     /// <param name="app"></param>
     /// <param name="configuration"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseStatusCodePages(this IApplicationBuilder app, Action<IApplicationBuilder> configuration)
+    public static IApplicationBuilder UseStatusCodePages(
+        this IApplicationBuilder app,
+        Action<IApplicationBuilder> configuration
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
 
@@ -142,35 +169,54 @@ public static class StatusCodePagesExtensions
     public static IApplicationBuilder UseStatusCodePagesWithReExecute(
         this IApplicationBuilder app,
         string pathFormat,
-        string? queryFormat = null)
+        string? queryFormat = null
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
 
         // Only use this path if there's a global router (in the 'WebApplication' case).
-        if (app.Properties.TryGetValue(RerouteHelper.GlobalRouteBuilderKey, out var routeBuilder) && routeBuilder is not null)
+        if (
+            app.Properties.TryGetValue(RerouteHelper.GlobalRouteBuilderKey, out var routeBuilder)
+            && routeBuilder is not null
+        )
         {
             return app.Use(next =>
             {
                 var newNext = RerouteHelper.Reroute(app, routeBuilder, next);
-                return new StatusCodePagesMiddleware(next,
-                    Options.Create(new StatusCodePagesOptions() { HandleAsync = CreateHandler(pathFormat, queryFormat, newNext) })).Invoke;
+                return new StatusCodePagesMiddleware(
+                    next,
+                    Options.Create(
+                        new StatusCodePagesOptions()
+                        {
+                            HandleAsync = CreateHandler(pathFormat, queryFormat, newNext),
+                        }
+                    )
+                ).Invoke;
             });
         }
 
         return app.UseStatusCodePages(CreateHandler(pathFormat, queryFormat));
     }
 
-    private static Func<StatusCodeContext, Task> CreateHandler(string pathFormat, string? queryFormat, RequestDelegate? next = null)
+    private static Func<StatusCodeContext, Task> CreateHandler(
+        string pathFormat,
+        string? queryFormat,
+        RequestDelegate? next = null
+    )
     {
         var handler = async (StatusCodeContext context) =>
         {
             var originalStatusCode = context.HttpContext.Response.StatusCode;
 
             var newPath = new PathString(
-                string.Format(CultureInfo.InvariantCulture, pathFormat, originalStatusCode));
-            var formatedQueryString = queryFormat == null ? null :
-                string.Format(CultureInfo.InvariantCulture, queryFormat, originalStatusCode);
-            var newQueryString = queryFormat == null ? QueryString.Empty : new QueryString(formatedQueryString);
+                string.Format(CultureInfo.InvariantCulture, pathFormat, originalStatusCode)
+            );
+            var formatedQueryString =
+                queryFormat == null
+                    ? null
+                    : string.Format(CultureInfo.InvariantCulture, queryFormat, originalStatusCode);
+            var newQueryString =
+                queryFormat == null ? QueryString.Empty : new QueryString(formatedQueryString);
 
             var originalPath = context.HttpContext.Request.Path;
             var originalQueryString = context.HttpContext.Request.QueryString;
@@ -178,15 +224,19 @@ public static class StatusCodePagesExtensions
             var routeValuesFeature = context.HttpContext.Features.Get<IRouteValuesFeature>();
 
             // Store the original paths so the app can check it.
-            context.HttpContext.Features.Set<IStatusCodeReExecuteFeature>(new StatusCodeReExecuteFeature()
-            {
-                OriginalPathBase = context.HttpContext.Request.PathBase.Value!,
-                OriginalPath = originalPath.Value!,
-                OriginalQueryString = originalQueryString.HasValue ? originalQueryString.Value : null,
-                OriginalStatusCode = originalStatusCode,
-                Endpoint = context.HttpContext.GetEndpoint(),
-                RouteValues = routeValuesFeature?.RouteValues
-            });
+            context.HttpContext.Features.Set<IStatusCodeReExecuteFeature>(
+                new StatusCodeReExecuteFeature()
+                {
+                    OriginalPathBase = context.HttpContext.Request.PathBase.Value!,
+                    OriginalPath = originalPath.Value!,
+                    OriginalQueryString = originalQueryString.HasValue
+                        ? originalQueryString.Value
+                        : null,
+                    OriginalStatusCode = originalStatusCode,
+                    Endpoint = context.HttpContext.GetEndpoint(),
+                    RouteValues = routeValuesFeature?.RouteValues,
+                }
+            );
 
             // An endpoint may have already been set. Since we're going to re-invoke the middleware pipeline we need to reset
             // the endpoint and route values to ensure things are re-calculated.

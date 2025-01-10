@@ -27,18 +27,31 @@ namespace System.Web.Mvc.Ajax.Test
 
             // Act & Assert
             Assert.ThrowsArgumentOutOfRange(
-                delegate { options.InsertionMode = (InsertionMode)4; },
+                delegate
+                {
+                    options.InsertionMode = (InsertionMode)4;
+                },
                 "value",
-                @"Specified argument was out of the range of valid values.");
+                @"Specified argument was out of the range of valid values."
+            );
         }
 
         [Fact]
         public void InsertionModeStringTests()
         {
             // Act & Assert
-            Assert.Equal("Sys.Mvc.InsertionMode.replace", new AjaxOptions { InsertionMode = InsertionMode.Replace }.InsertionModeString);
-            Assert.Equal("Sys.Mvc.InsertionMode.insertAfter", new AjaxOptions { InsertionMode = InsertionMode.InsertAfter }.InsertionModeString);
-            Assert.Equal("Sys.Mvc.InsertionMode.insertBefore", new AjaxOptions { InsertionMode = InsertionMode.InsertBefore }.InsertionModeString);
+            Assert.Equal(
+                "Sys.Mvc.InsertionMode.replace",
+                new AjaxOptions { InsertionMode = InsertionMode.Replace }.InsertionModeString
+            );
+            Assert.Equal(
+                "Sys.Mvc.InsertionMode.insertAfter",
+                new AjaxOptions { InsertionMode = InsertionMode.InsertAfter }.InsertionModeString
+            );
+            Assert.Equal(
+                "Sys.Mvc.InsertionMode.insertBefore",
+                new AjaxOptions { InsertionMode = InsertionMode.InsertBefore }.InsertionModeString
+            );
         }
 
         [Theory]
@@ -127,16 +140,19 @@ namespace System.Web.Mvc.Ajax.Test
             string s = options.ToJavascriptString();
 
             // Assert
-            Assert.Equal("{ insertionMode: Sys.Mvc.InsertionMode.insertBefore, " +
-                         "confirm: 'confirm', " +
-                         "httpMethod: 'POST', " +
-                         "loadingElementId: 'loadingElement', " +
-                         "updateTargetId: 'someId', " +
-                         "url: 'http://someurl.com', " +
-                         "onBegin: Function.createDelegate(this, some_begin_function), " +
-                         "onComplete: Function.createDelegate(this, some_complete_function), " +
-                         "onFailure: Function.createDelegate(this, some_failure_function), " +
-                         "onSuccess: Function.createDelegate(this, some_success_function) }", s);
+            Assert.Equal(
+                "{ insertionMode: Sys.Mvc.InsertionMode.insertBefore, "
+                    + "confirm: 'confirm', "
+                    + "httpMethod: 'POST', "
+                    + "loadingElementId: 'loadingElement', "
+                    + "updateTargetId: 'someId', "
+                    + "url: 'http://someurl.com', "
+                    + "onBegin: Function.createDelegate(this, some_begin_function), "
+                    + "onComplete: Function.createDelegate(this, some_complete_function), "
+                    + "onFailure: Function.createDelegate(this, some_failure_function), "
+                    + "onSuccess: Function.createDelegate(this, some_success_function) }",
+                s
+            );
         }
 
         [Fact]
@@ -161,16 +177,19 @@ namespace System.Web.Mvc.Ajax.Test
             string s = options.ToJavascriptString();
 
             // Assert
-            Assert.Equal("{ insertionMode: Sys.Mvc.InsertionMode.insertBefore, " +
-                         @"confirm: '""confirm""', " +
-                         "httpMethod: 'POST', " +
-                         @"loadingElementId: 'loading\'Element\'', " +
-                         "updateTargetId: 'someId', " +
-                         "url: 'http://someurl.com', " +
-                         "onBegin: Function.createDelegate(this, some_begin_function), " +
-                         "onComplete: Function.createDelegate(this, some_complete_function), " +
-                         "onFailure: Function.createDelegate(this, some_failure_function), " +
-                         "onSuccess: Function.createDelegate(this, some_success_function) }", s);
+            Assert.Equal(
+                "{ insertionMode: Sys.Mvc.InsertionMode.insertBefore, "
+                    + @"confirm: '""confirm""', "
+                    + "httpMethod: 'POST', "
+                    + @"loadingElementId: 'loading\'Element\'', "
+                    + "updateTargetId: 'someId', "
+                    + "url: 'http://someurl.com', "
+                    + "onBegin: Function.createDelegate(this, some_begin_function), "
+                    + "onComplete: Function.createDelegate(this, some_complete_function), "
+                    + "onFailure: Function.createDelegate(this, some_failure_function), "
+                    + "onSuccess: Function.createDelegate(this, some_success_function) }",
+                s
+            );
         }
 
         [Theory]
@@ -185,17 +204,20 @@ namespace System.Web.Mvc.Ajax.Test
                 UpdateTargetId = "someId",
                 Url = "http://someurl.com",
                 OnComplete = "some_complete_function",
-                AllowCache = allowCache
+                AllowCache = allowCache,
             };
 
             // Act
             string s = options.ToJavascriptString();
 
             // Assert
-            Assert.Equal("{ insertionMode: Sys.Mvc.InsertionMode.insertAfter, " +
-                         "updateTargetId: 'someId', " +
-                         "url: 'http://someurl.com', " +
-                         "onComplete: Function.createDelegate(this, some_complete_function) }", s);
+            Assert.Equal(
+                "{ insertionMode: Sys.Mvc.InsertionMode.insertAfter, "
+                    + "updateTargetId: 'someId', "
+                    + "url: 'http://someurl.com', "
+                    + "onComplete: Function.createDelegate(this, some_complete_function) }",
+                s
+            );
         }
 
         [Fact]
@@ -208,20 +230,30 @@ namespace System.Web.Mvc.Ajax.Test
             string s = options.ToJavascriptString();
 
             // Assert
-            Assert.Equal("{ insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: 'someId' }", s);
+            Assert.Equal(
+                "{ insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: 'someId' }",
+                s
+            );
         }
 
         [Fact]
         public void ToJavascriptStringWithUpdateTargetIdAndExplicitInsertionMode()
         {
             // Arrange
-            AjaxOptions options = new AjaxOptions { InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "someId" };
+            AjaxOptions options = new AjaxOptions
+            {
+                InsertionMode = InsertionMode.InsertAfter,
+                UpdateTargetId = "someId",
+            };
 
             // Act
             string s = options.ToJavascriptString();
 
             // Assert
-            Assert.Equal("{ insertionMode: Sys.Mvc.InsertionMode.insertAfter, updateTargetId: 'someId' }", s);
+            Assert.Equal(
+                "{ insertionMode: Sys.Mvc.InsertionMode.insertAfter, updateTargetId: 'someId' }",
+                s
+            );
         }
 
         [Fact]
@@ -286,7 +318,7 @@ namespace System.Web.Mvc.Ajax.Test
                 HttpMethod = "GET",
                 AllowCache = true,
                 Url = "http://someurl.com",
-                OnComplete = "some_complete_function"
+                OnComplete = "some_complete_function",
             };
 
             // Act
@@ -319,13 +351,15 @@ namespace System.Web.Mvc.Ajax.Test
             Assert.Equal("replace", attributes["data-ajax-mode"]); // Only added when UpdateTargetId is set
         }
 
-
         [Theory]
         [InlineData("foo.bar", "#foo\\.bar")]
         [InlineData("baz:bar", "#baz\\:bar")]
         [InlineData("qux[zot]", "#qux\\[zot\\]")]
         [InlineData("foo[:zot].", "#foo\\[\\:zot\\]\\.")]
-        public void ToUnobtrusiveHtmlAttributesEscapesClientSideIdentifiers(string id, string expected)
+        public void ToUnobtrusiveHtmlAttributesEscapesClientSideIdentifiers(
+            string id,
+            string expected
+        )
         {
             // Arrange
             AjaxOptions options = new AjaxOptions { UpdateTargetId = id, LoadingElementId = id };
@@ -341,13 +375,16 @@ namespace System.Web.Mvc.Ajax.Test
         [Theory]
         [InlineData(InsertionMode.InsertAfter, "after")]
         [InlineData(InsertionMode.ReplaceWith, "replace-with")]
-        public void ToUnobtrusiveHtmlAttributesWithUpdateTargetIdAndExplicitInsertionMode(InsertionMode mode, string expectedMode)
+        public void ToUnobtrusiveHtmlAttributesWithUpdateTargetIdAndExplicitInsertionMode(
+            InsertionMode mode,
+            string expectedMode
+        )
         {
             // Arrange
             AjaxOptions options = new AjaxOptions
             {
                 InsertionMode = mode,
-                UpdateTargetId = "someId"
+                UpdateTargetId = "someId",
             };
 
             // Act

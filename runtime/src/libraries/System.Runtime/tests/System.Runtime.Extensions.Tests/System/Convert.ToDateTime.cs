@@ -13,7 +13,13 @@ namespace System.Tests
         [Fact]
         public void FromString()
         {
-            DateTime[] expectedValues = { new DateTime(1999, 12, 31, 23, 59, 59), new DateTime(100, 1, 1, 0, 0, 0), new DateTime(2216, 2, 29, 0, 0, 0), new DateTime(1, 1, 1, 0, 0, 0) };
+            DateTime[] expectedValues =
+            {
+                new DateTime(1999, 12, 31, 23, 59, 59),
+                new DateTime(100, 1, 1, 0, 0, 0),
+                new DateTime(2216, 2, 29, 0, 0, 0),
+                new DateTime(1, 1, 1, 0, 0, 0),
+            };
 
             // Generate test values. Note that some calendars have very restricted date ranges.
             var dateTimeFormat = CultureInfo.CurrentCulture.DateTimeFormat;
@@ -36,19 +42,37 @@ namespace System.Tests
 
             string[] formatExceptionValues =
             {
-            "null",
-            // Regression test for case which was throwing IndexOutOfRangeException
-            "20-5-14T00:00:00"
-        };
+                "null",
+                // Regression test for case which was throwing IndexOutOfRangeException
+                "20-5-14T00:00:00",
+            };
 
-            VerifyFromStringThrows<FormatException>(Convert.ToDateTime, Convert.ToDateTime, formatExceptionValues);
+            VerifyFromStringThrows<FormatException>(
+                Convert.ToDateTime,
+                Convert.ToDateTime,
+                formatExceptionValues
+            );
         }
 
         [Fact]
         public void FromStringWithCustomFormatProvider()
         {
-            string[] testValues = { null, "12/31/1999 11:59:59 PM", "0100/01/01 12:00:00 AM", "1492/02/29 12:00:00 AM", "0001/01/01 12:00:00 AM" };
-            DateTime[] expectedValues = { DateTime.MinValue, new DateTime(1999, 12, 31, 23, 59, 59), new DateTime(100, 1, 1, 0, 0, 0), new DateTime(1492, 2, 29, 0, 0, 0), new DateTime(1, 1, 1, 0, 0, 0) };
+            string[] testValues =
+            {
+                null,
+                "12/31/1999 11:59:59 PM",
+                "0100/01/01 12:00:00 AM",
+                "1492/02/29 12:00:00 AM",
+                "0001/01/01 12:00:00 AM",
+            };
+            DateTime[] expectedValues =
+            {
+                DateTime.MinValue,
+                new DateTime(1999, 12, 31, 23, 59, 59),
+                new DateTime(100, 1, 1, 0, 0, 0),
+                new DateTime(1492, 2, 29, 0, 0, 0),
+                new DateTime(1, 1, 1, 0, 0, 0),
+            };
             Assert.Equal(testValues.Length, expectedValues.Length);
 
             for (int i = 0; i < testValues.Length; i++)
@@ -63,7 +87,13 @@ namespace System.Tests
         [Fact]
         public void FromDateTime()
         {
-            DateTime[] expectedValues = { new DateTime(1999, 12, 31, 23, 59, 59), new DateTime(100, 1, 1, 0, 0, 0), new DateTime(1492, 2, 29, 0, 0, 0), new DateTime(1, 1, 1, 0, 0, 0) };
+            DateTime[] expectedValues =
+            {
+                new DateTime(1999, 12, 31, 23, 59, 59),
+                new DateTime(100, 1, 1, 0, 0, 0),
+                new DateTime(1492, 2, 29, 0, 0, 0),
+                new DateTime(1, 1, 1, 0, 0, 0),
+            };
             for (int i = 0; i < expectedValues.Length; i++)
             {
                 DateTime result = Convert.ToDateTime(expectedValues[i]);
@@ -75,7 +105,9 @@ namespace System.Tests
         public void FromObject()
         {
             Assert.Throws<InvalidCastException>(() => Convert.ToDateTime(new object()));
-            Assert.Throws<InvalidCastException>(() => Convert.ToDateTime(new object(), s_dateTimeFormatInfo));
+            Assert.Throws<InvalidCastException>(
+                () => Convert.ToDateTime(new object(), s_dateTimeFormatInfo)
+            );
         }
 
         [Fact]

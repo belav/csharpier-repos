@@ -1,5 +1,5 @@
 //
-// ResourceExposureAttributeCas.cs - CAS unit tests for 
+// ResourceExposureAttributeCas.cs - CAS unit tests for
 //	System.Runtime.Versioning.ResourceExposureAttribute
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,41 +33,39 @@ using System.Reflection;
 using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Permissions;
-
-using NUnit.Framework;
 using MonoTests.System.Runtime.Versioning;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Runtime.Versioning {
+namespace MonoCasTests.System.Runtime.Versioning
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class ResourceExposureAttributeCas
+    {
+        [SetUp]
+        public virtual void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ResourceExposureAttributeCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTest()
+        {
+            ResourceExposureAttributeTest unit = new ResourceExposureAttributeTest();
+            unit.Constructor1();
+            unit.InvalidResourceScope1();
+        }
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTest ()
-		{
-			ResourceExposureAttributeTest unit = new ResourceExposureAttributeTest ();
-			unit.Constructor1 ();
-			unit.InvalidResourceScope1 ();
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[1] { typeof (ResourceScope) };
-			ConstructorInfo ci = typeof (ResourceExposureAttribute).GetConstructor (types);
-			Assert.IsNotNull (ci, ".ctor(ResourceScope)");
-			Assert.IsNotNull (ci.Invoke (new object[1] { ResourceScope.None }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            Type[] types = new Type[1] { typeof(ResourceScope) };
+            ConstructorInfo ci = typeof(ResourceExposureAttribute).GetConstructor(types);
+            Assert.IsNotNull(ci, ".ctor(ResourceScope)");
+            Assert.IsNotNull(ci.Invoke(new object[1] { ResourceScope.None }), "invoke");
+        }
+    }
 }
-

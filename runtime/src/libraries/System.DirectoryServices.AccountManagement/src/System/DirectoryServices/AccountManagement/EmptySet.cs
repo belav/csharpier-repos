@@ -21,6 +21,7 @@ namespace System.DirectoryServices.AccountManagement
                 return null;
             }
         }
+
         internal override bool MoveNext()
         {
             // Mimic an empty set
@@ -43,7 +44,5 @@ namespace System.DirectoryServices.AccountManagement
         }
     }
 
-    internal sealed class EmptySetBookmark : ResultSetBookmark
-    {
-    }
+    internal sealed class EmptySetBookmark : ResultSetBookmark { }
 }

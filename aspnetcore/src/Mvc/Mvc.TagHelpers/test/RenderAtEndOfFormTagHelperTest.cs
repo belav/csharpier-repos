@@ -15,24 +15,42 @@ public class RenderAtEndOfFormTagHelperTest
         {
             // tagBuilderList, expectedOutput
             return new TheoryData<List<TagBuilder>, string>
+            {
                 {
+                    new List<TagBuilder>
                     {
-                        new List<TagBuilder>
-                        {
-                            GetTagBuilder("input", "SomeName", "hidden", "false", TagRenderMode.SelfClosing)
-                        },
-                        @"<input name=""SomeName"" type=""hidden"" value=""false"" />"
+                        GetTagBuilder(
+                            "input",
+                            "SomeName",
+                            "hidden",
+                            "false",
+                            TagRenderMode.SelfClosing
+                        ),
                     },
+                    @"<input name=""SomeName"" type=""hidden"" value=""false"" />"
+                },
+                {
+                    new List<TagBuilder>
                     {
-                        new List<TagBuilder>
-                        {
-                            GetTagBuilder("input", "SomeName", "hidden", "false", TagRenderMode.SelfClosing),
-                            GetTagBuilder("input", "SomeOtherName", "hidden", "false", TagRenderMode.SelfClosing)
-                        },
-                        @"<input name=""SomeName"" type=""hidden"" value=""false"" />" +
-                        @"<input name=""SomeOtherName"" type=""hidden"" value=""false"" />"
-                    }
-                };
+                        GetTagBuilder(
+                            "input",
+                            "SomeName",
+                            "hidden",
+                            "false",
+                            TagRenderMode.SelfClosing
+                        ),
+                        GetTagBuilder(
+                            "input",
+                            "SomeOtherName",
+                            "hidden",
+                            "false",
+                            TagRenderMode.SelfClosing
+                        ),
+                    },
+                    @"<input name=""SomeName"" type=""hidden"" value=""false"" />"
+                        + @"<input name=""SomeOtherName"" type=""hidden"" value=""false"" />"
+                },
+            };
         }
     }
 
@@ -40,7 +58,8 @@ public class RenderAtEndOfFormTagHelperTest
     [MemberData(nameof(RenderAtEndOfFormTagHelperData))]
     public async Task Process_AddsHiddenInputTag_FromEndOfFormContent(
         List<TagBuilder> tagBuilderList,
-        string expectedOutput)
+        string expectedOutput
+    )
     {
         // Arrange
         var viewContext = new ViewContext();
@@ -56,18 +75,17 @@ public class RenderAtEndOfFormTagHelperTest
                 }
 
                 return Task.FromResult<TagHelperContent>(new DefaultTagHelperContent());
-            });
+            }
+        );
 
         var tagHelperContext = new TagHelperContext(
             "test",
             new TagHelperAttributeList(),
             new Dictionary<object, object>(),
-            "someId");
+            "someId"
+        );
 
-        var tagHelper = new RenderAtEndOfFormTagHelper
-        {
-            ViewContext = viewContext
-        };
+        var tagHelper = new RenderAtEndOfFormTagHelper { ViewContext = viewContext };
         tagHelper.Init(tagHelperContext);
 
         // Act
@@ -81,7 +99,8 @@ public class RenderAtEndOfFormTagHelperTest
     [MemberData(nameof(RenderAtEndOfFormTagHelperData))]
     public async Task Process_AddsHiddenInputTag_FromEndOfFormContent_WithCachedBody(
         List<TagBuilder> tagBuilderList,
-        string expectedOutput)
+        string expectedOutput
+    )
     {
         // Arrange
         var viewContext = new ViewContext();
@@ -101,14 +120,12 @@ public class RenderAtEndOfFormTagHelperTest
                 return Task.FromResult(true);
             },
             startTagHelperWritingScope: _ => { },
-            endTagHelperWritingScope: () => new DefaultTagHelperContent());
+            endTagHelperWritingScope: () => new DefaultTagHelperContent()
+        );
 
         // This TagHelper will pre-execute the child content forcing the body to be cached.
         tagHelperExecutionContext.Add(new ChildContentInvoker());
-        tagHelperExecutionContext.Add(new RenderAtEndOfFormTagHelper
-        {
-            ViewContext = viewContext
-        });
+        tagHelperExecutionContext.Add(new RenderAtEndOfFormTagHelper { ViewContext = viewContext });
 
         // Act
         await runner.RunAsync(tagHelperExecutionContext);
@@ -117,7 +134,13 @@ public class RenderAtEndOfFormTagHelperTest
         Assert.Equal(expectedOutput, tagHelperExecutionContext.Output.PostContent.GetContent());
     }
 
-    private static TagBuilder GetTagBuilder(string tag, string name, string type, string value, TagRenderMode mode)
+    private static TagBuilder GetTagBuilder(
+        string tag,
+        string name,
+        string type,
+        string value,
+        TagRenderMode mode
+    )
     {
         var tagBuilder = new TagBuilder(tag);
         tagBuilder.MergeAttribute("name", name);
@@ -132,10 +155,7 @@ public class RenderAtEndOfFormTagHelperTest
     {
         public override int Order
         {
-            get
-            {
-                return int.MinValue;
-            }
+            get { return int.MinValue; }
         }
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)

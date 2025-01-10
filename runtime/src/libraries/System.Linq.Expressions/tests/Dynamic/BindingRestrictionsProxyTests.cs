@@ -40,20 +40,23 @@ namespace System.Dynamic.Tests
 
             public Expression Test => (Expression)_test.GetValue(_proxy);
 
-            public BindingRestrictions[] Restrictions => (BindingRestrictions[])_restrictions.GetValue(_proxy);
+            public BindingRestrictions[] Restrictions =>
+                (BindingRestrictions[])_restrictions.GetValue(_proxy);
 
             public override string ToString() => (string)ToStringMeth.Invoke(_proxy, new object[0]);
         }
 
-        private static readonly Type BindingRestrictionsDebugViewType = GetDebugViewType(typeof(BindingRestrictions));
+        private static readonly Type BindingRestrictionsDebugViewType = GetDebugViewType(
+            typeof(BindingRestrictions)
+        );
         private static readonly ConstructorInfo BindingRestrictionsProxyCtor =
             BindingRestrictionsDebugViewType?.GetConstructors().Single();
 
         private static Type GetDebugViewType(Type type)
         {
-            var att =
-                (DebuggerTypeProxyAttribute)
-                    type.GetCustomAttributes().SingleOrDefault(at => at.TypeId.Equals(typeof(DebuggerTypeProxyAttribute)));
+            var att = (DebuggerTypeProxyAttribute)
+                type.GetCustomAttributes()
+                    .SingleOrDefault(at => at.TypeId.Equals(typeof(DebuggerTypeProxyAttribute)));
             if (att == null)
             {
                 return null;
@@ -63,15 +66,17 @@ namespace System.Dynamic.Tests
             return type.GetTypeInfo().Assembly.GetType(proxyName);
         }
 
-        private static BindingRestrictionsProxyProxy GetDebugViewObject(object obj)
-            => new BindingRestrictionsProxyProxy(BindingRestrictionsProxyCtor.Invoke(new[] {obj}));
+        private static BindingRestrictionsProxyProxy GetDebugViewObject(object obj) =>
+            new BindingRestrictionsProxyProxy(BindingRestrictionsProxyCtor.Invoke(new[] { obj }));
 
         [ConditionalFact]
         public void EmptyRestiction()
         {
             if (BindingRestrictionsDebugViewType == null)
             {
-                throw new SkipTestException("Didn't find DebuggerTypeProxyAttribute on BindingRestrictions.");
+                throw new SkipTestException(
+                    "Didn't find DebuggerTypeProxyAttribute on BindingRestrictions."
+                );
             }
             BindingRestrictions empty = BindingRestrictions.Empty;
             BindingRestrictionsProxyProxy view = GetDebugViewObject(empty);
@@ -88,7 +93,9 @@ namespace System.Dynamic.Tests
         {
             if (BindingRestrictionsDebugViewType == null)
             {
-                throw new SkipTestException("Didn't find DebuggerTypeProxyAttribute on BindingRestrictions.");
+                throw new SkipTestException(
+                    "Didn't find DebuggerTypeProxyAttribute on BindingRestrictions."
+                );
             }
             ConstantExpression exp = Expression.Constant(false);
             BindingRestrictions custom = BindingRestrictions.GetExpressionRestriction(exp);
@@ -107,8 +114,9 @@ namespace System.Dynamic.Tests
         {
             var exps = new Expression[]
             {
-                Expression.Constant(false), Expression.Constant(true),
-                Expression.Equal(Expression.Constant(2), Expression.Constant(3))
+                Expression.Constant(false),
+                Expression.Constant(true),
+                Expression.Equal(Expression.Constant(2), Expression.Constant(3)),
             };
 
             BindingRestrictions br = BindingRestrictions.Empty;
@@ -122,7 +130,9 @@ namespace System.Dynamic.Tests
 
             if (BindingRestrictionsDebugViewType == null)
             {
-                throw new SkipTestException("Didn't find DebuggerTypeProxyAttribute on BindingRestrictions.");
+                throw new SkipTestException(
+                    "Didn't find DebuggerTypeProxyAttribute on BindingRestrictions."
+                );
             }
 
             BindingRestrictionsProxyProxy view = GetDebugViewObject(br);
@@ -142,8 +152,9 @@ namespace System.Dynamic.Tests
         {
             var exps = new Expression[]
             {
-                Expression.Constant(false), Expression.Constant(true),
-                Expression.Equal(Expression.Constant(2), Expression.Constant(3))
+                Expression.Constant(false),
+                Expression.Constant(true),
+                Expression.Equal(Expression.Constant(2), Expression.Constant(3)),
             };
 
             BindingRestrictions br = BindingRestrictions.Empty;
@@ -154,7 +165,9 @@ namespace System.Dynamic.Tests
 
             if (BindingRestrictionsDebugViewType == null)
             {
-                throw new SkipTestException("Didn't find DebuggerTypeProxyAttribute on BindingRestrictions.");
+                throw new SkipTestException(
+                    "Didn't find DebuggerTypeProxyAttribute on BindingRestrictions."
+                );
             }
 
             BindingRestrictionsProxyProxy view = GetDebugViewObject(br);
@@ -199,9 +212,13 @@ namespace System.Dynamic.Tests
         {
             if (BindingRestrictionsDebugViewType == null)
             {
-                throw new SkipTestException("Didn't find DebuggerTypeProxyAttribute on BindingRestrictions.");
+                throw new SkipTestException(
+                    "Didn't find DebuggerTypeProxyAttribute on BindingRestrictions."
+                );
             }
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => BindingRestrictionsProxyCtor.Invoke(new object[] {null}));
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => BindingRestrictionsProxyCtor.Invoke(new object[] { null })
+            );
             ArgumentNullException ane = (ArgumentNullException)tie.InnerException;
             Assert.Equal("node", ane.ParamName);
         }

@@ -17,12 +17,24 @@ namespace System.UnitTesting
 
         public static void ThrowsPart(RetryMode retry, Action action)
         {
-            ThrowsPart(new CompositionErrorExpectation { Id = (ErrorId)CompositionErrorId.Unknown }, retry, action);
+            ThrowsPart(
+                new CompositionErrorExpectation { Id = (ErrorId)CompositionErrorId.Unknown },
+                retry,
+                action
+            );
         }
 
         public static void ThrowsPart(ICompositionElement element, RetryMode retry, Action action)
         {
-            ThrowsPart(new CompositionErrorExpectation { Id = (ErrorId)CompositionErrorId.Unknown, Element = element }, retry, action);
+            ThrowsPart(
+                new CompositionErrorExpectation
+                {
+                    Id = (ErrorId)CompositionErrorId.Unknown,
+                    Element = element,
+                },
+                retry,
+                action
+            );
         }
 
         public static void ThrowsPart<TInner>(Action action)
@@ -34,15 +46,31 @@ namespace System.UnitTesting
         public static void ThrowsPart<TInner>(RetryMode retry, Action action)
             where TInner : Exception
         {
-            ThrowsPart(new CompositionErrorExpectation { Id = (ErrorId)CompositionErrorId.Unknown, InnerExceptionType = typeof(TInner) }, retry, action);
+            ThrowsPart(
+                new CompositionErrorExpectation
+                {
+                    Id = (ErrorId)CompositionErrorId.Unknown,
+                    InnerExceptionType = typeof(TInner),
+                },
+                retry,
+                action
+            );
         }
 
-        private static void ThrowsPart(CompositionErrorExpectation expectation, RetryMode retry, Action action)
+        private static void ThrowsPart(
+            CompositionErrorExpectation expectation,
+            RetryMode retry,
+            Action action
+        )
         {
-            ExceptionAssert.Throws<ComposablePartException>(retry, action, (thrownException, retryCount) =>
-            {
-                AssertCore(retryCount, "ComposablePartException", thrownException, expectation);
-            });
+            ExceptionAssert.Throws<ComposablePartException>(
+                retry,
+                action,
+                (thrownException, retryCount) =>
+                {
+                    AssertCore(retryCount, "ComposablePartException", thrownException, expectation);
+                }
+            );
         }
 
         public static void ThrowsError(ErrorId id, Action action)
@@ -60,17 +88,27 @@ namespace System.UnitTesting
             ThrowsError(GetExpectation(id, innerId), retry, action);
         }
 
-        public static void ThrowsError(ErrorId id, ErrorId innerId, ErrorId innerInnerId, RetryMode retry, Action action)
+        public static void ThrowsError(
+            ErrorId id,
+            ErrorId innerId,
+            ErrorId innerInnerId,
+            RetryMode retry,
+            Action action
+        )
         {
             ThrowsError(GetExpectation(id, innerId, innerInnerId), retry, action);
         }
 
         public static void ThrowsError(ErrorId id, RetryMode retry, Action action)
         {
-            ThrowsError(new CompositionErrorExpectation { Id = id, }, retry, action);
+            ThrowsError(new CompositionErrorExpectation { Id = id }, retry, action);
         }
 
-        private static void ThrowsError(CompositionErrorExpectation expectation, RetryMode retry, Action action)
+        private static void ThrowsError(
+            CompositionErrorExpectation expectation,
+            RetryMode retry,
+            Action action
+        )
         {
             ThrowsErrors(new CompositionErrorExpectation[] { expectation }, retry, action);
         }
@@ -87,7 +125,9 @@ namespace System.UnitTesting
 
         public static void ThrowsErrors(ErrorId[] ids, RetryMode retry, Action action)
         {
-            CompositionErrorExpectation[] expectations = new CompositionErrorExpectation[ids.Length];
+            CompositionErrorExpectation[] expectations = new CompositionErrorExpectation[
+                ids.Length
+            ];
             for (int i = 0; i < expectations.Length; i++)
             {
                 expectations[i] = new CompositionErrorExpectation { Id = ids[i] };
@@ -98,51 +138,101 @@ namespace System.UnitTesting
 
         public static void ThrowsChangeRejectedError(ErrorId id, RetryMode retry, Action action)
         {
-            ThrowsChangeRejectedError(new CompositionErrorExpectation { Id = id, }, retry, action);
+            ThrowsChangeRejectedError(new CompositionErrorExpectation { Id = id }, retry, action);
         }
 
-        public static void ThrowsChangeRejectedError(ErrorId id, ErrorId innerId, RetryMode retry, Action action)
+        public static void ThrowsChangeRejectedError(
+            ErrorId id,
+            ErrorId innerId,
+            RetryMode retry,
+            Action action
+        )
         {
             ThrowsChangeRejectedError(GetExpectation(id, innerId), retry, action);
         }
 
-        public static void ThrowsChangeRejectedError(ErrorId id, ErrorId innerId, ErrorId innerInnerId, RetryMode retry, Action action)
+        public static void ThrowsChangeRejectedError(
+            ErrorId id,
+            ErrorId innerId,
+            ErrorId innerInnerId,
+            RetryMode retry,
+            Action action
+        )
         {
             ThrowsChangeRejectedError(GetExpectation(id, innerId, innerInnerId), retry, action);
         }
 
-        private static void ThrowsChangeRejectedError(CompositionErrorExpectation expectation, RetryMode retry, Action action)
+        private static void ThrowsChangeRejectedError(
+            CompositionErrorExpectation expectation,
+            RetryMode retry,
+            Action action
+        )
         {
-            ThrowsChangeRejectedErrors(new CompositionErrorExpectation[] { expectation }, retry, action);
+            ThrowsChangeRejectedErrors(
+                new CompositionErrorExpectation[] { expectation },
+                retry,
+                action
+            );
         }
 
-        private static void ThrowsChangeRejectedErrors(CompositionErrorExpectation[] expectations, RetryMode retry, Action action)
+        private static void ThrowsChangeRejectedErrors(
+            CompositionErrorExpectation[] expectations,
+            RetryMode retry,
+            Action action
+        )
         {
-            ExceptionAssert.Throws<ChangeRejectedException>(retry, action, (thrownException, retryCount) =>
-            {
-                AssertCore(retryCount, "CompositionException", thrownException, expectations);
-            });
+            ExceptionAssert.Throws<ChangeRejectedException>(
+                retry,
+                action,
+                (thrownException, retryCount) =>
+                {
+                    AssertCore(retryCount, "CompositionException", thrownException, expectations);
+                }
+            );
         }
 
-        private static void ThrowsErrors(CompositionErrorExpectation[] expectations, RetryMode retry, Action action)
+        private static void ThrowsErrors(
+            CompositionErrorExpectation[] expectations,
+            RetryMode retry,
+            Action action
+        )
         {
-            ExceptionAssert.Throws<CompositionException>(retry, action, (thrownException, retryCount) =>
-            {
-                AssertCore(retryCount, "CompositionException", thrownException, expectations);
-            });
+            ExceptionAssert.Throws<CompositionException>(
+                retry,
+                action,
+                (thrownException, retryCount) =>
+                {
+                    AssertCore(retryCount, "CompositionException", thrownException, expectations);
+                }
+            );
         }
 
-        private static void AssertCore(int retryCount, string prefix, CompositionException exception, CompositionErrorExpectation[] expectations)
+        private static void AssertCore(
+            int retryCount,
+            string prefix,
+            CompositionException exception,
+            CompositionErrorExpectation[] expectations
+        )
         {
             Assert.Equal(exception.Errors.Count, expectations.Length);
 
             for (int i = 0; i < exception.Errors.Count; i++)
             {
-                AssertCore(retryCount, prefix + ".Errors[" + i + "]", exception.Errors[i], expectations[i]);
+                AssertCore(
+                    retryCount,
+                    prefix + ".Errors[" + i + "]",
+                    exception.Errors[i],
+                    expectations[i]
+                );
             }
         }
 
-        private static void AssertCore(int retryCount, string prefix, ComposablePartException error, CompositionErrorExpectation expectation)
+        private static void AssertCore(
+            int retryCount,
+            string prefix,
+            ComposablePartException error,
+            CompositionErrorExpectation expectation
+        )
         {
             if (expectation.ElementSpecified)
             {
@@ -151,12 +241,24 @@ namespace System.UnitTesting
 
             if (expectation.InnerExceptionSpecified)
             {
-                AssertCore(retryCount, prefix, "InnerException", expectation.InnerException, error.InnerException);
+                AssertCore(
+                    retryCount,
+                    prefix,
+                    "InnerException",
+                    expectation.InnerException,
+                    error.InnerException
+                );
             }
 
             if (expectation.InnerExceptionTypeSpecified)
             {
-                AssertCore(retryCount, prefix, "InnerException.GetType()", expectation.InnerExceptionType, error.InnerException == null ? null : error.InnerException.GetType());
+                AssertCore(
+                    retryCount,
+                    prefix,
+                    "InnerException.GetType()",
+                    expectation.InnerExceptionType,
+                    error.InnerException == null ? null : error.InnerException.GetType()
+                );
             }
 
             if (expectation.InnerExpectationsSpecified)
@@ -165,16 +267,31 @@ namespace System.UnitTesting
                 if (innerError != null)
                 {
                     Assert.Equal(1, expectation.InnerExpectations.Length);
-                    AssertCore(retryCount, prefix + ".InnerException", innerError, expectation.InnerExpectations[0]);
+                    AssertCore(
+                        retryCount,
+                        prefix + ".InnerException",
+                        innerError,
+                        expectation.InnerExpectations[0]
+                    );
                 }
                 else
                 {
-                    AssertCore(retryCount, prefix + ".InnerException", (CompositionException)error.InnerException, expectation.InnerExpectations);
+                    AssertCore(
+                        retryCount,
+                        prefix + ".InnerException",
+                        (CompositionException)error.InnerException,
+                        expectation.InnerExpectations
+                    );
                 }
             }
         }
 
-        private static void AssertCore(int retryCount, string prefix, CompositionError error, CompositionErrorExpectation expectation)
+        private static void AssertCore(
+            int retryCount,
+            string prefix,
+            CompositionError error,
+            CompositionErrorExpectation expectation
+        )
         {
             if (expectation.IdSpecified)
             {
@@ -188,12 +305,24 @@ namespace System.UnitTesting
 
             if (expectation.InnerExceptionSpecified)
             {
-                AssertCore(retryCount, prefix, "InnerException", expectation.InnerException, error.InnerException);
+                AssertCore(
+                    retryCount,
+                    prefix,
+                    "InnerException",
+                    expectation.InnerException,
+                    error.InnerException
+                );
             }
 
             if (expectation.InnerExceptionTypeSpecified)
             {
-                AssertCore(retryCount, prefix, "InnerException.GetType()", expectation.InnerExceptionType, error.InnerException == null ? null : error.InnerException.GetType());
+                AssertCore(
+                    retryCount,
+                    prefix,
+                    "InnerException.GetType()",
+                    expectation.InnerExceptionType,
+                    error.InnerException == null ? null : error.InnerException.GetType()
+                );
             }
 
             if (expectation.InnerExpectationsSpecified)
@@ -202,16 +331,32 @@ namespace System.UnitTesting
                 if (innerError != null)
                 {
                     Assert.Equal(1, expectation.InnerExpectations.Length);
-                    AssertCore(retryCount, prefix + ".InnerException", innerError, expectation.InnerExpectations[0]);
+                    AssertCore(
+                        retryCount,
+                        prefix + ".InnerException",
+                        innerError,
+                        expectation.InnerExpectations[0]
+                    );
                 }
                 else
                 {
-                    AssertCore(retryCount, prefix + ".InnerException", (CompositionException)error.InnerException, expectation.InnerExpectations);
+                    AssertCore(
+                        retryCount,
+                        prefix + ".InnerException",
+                        (CompositionException)error.InnerException,
+                        expectation.InnerExpectations
+                    );
                 }
             }
         }
 
-        private static void AssertCore<T>(int retryCount, string prefix, string propertyName, T expected, T actual)
+        private static void AssertCore<T>(
+            int retryCount,
+            string prefix,
+            string propertyName,
+            T expected,
+            T actual
+        )
         {
             Assert.Equal(expected, actual);
         }
@@ -223,7 +368,10 @@ namespace System.UnitTesting
 
             for (int i = 1; i < ids.Length; i++)
             {
-                expectation.InnerExpectations = new CompositionErrorExpectation[] { new CompositionErrorExpectation() { Id = ids[i] } };
+                expectation.InnerExpectations = new CompositionErrorExpectation[]
+                {
+                    new CompositionErrorExpectation() { Id = ids[i] },
+                };
                 expectation = expectation.InnerExpectations[0];
             }
 
@@ -331,35 +479,15 @@ namespace System.UnitTesting
                 }
             }
 
-            public bool IdSpecified
-            {
-                get;
-                private set;
-            }
+            public bool IdSpecified { get; private set; }
 
-            public bool InnerExceptionSpecified
-            {
-                get;
-                private set;
-            }
+            public bool InnerExceptionSpecified { get; private set; }
 
-            public bool InnerExceptionTypeSpecified
-            {
-                get;
-                private set;
-            }
+            public bool InnerExceptionTypeSpecified { get; private set; }
 
-            public bool ElementSpecified
-            {
-                get;
-                private set;
-            }
+            public bool ElementSpecified { get; private set; }
 
-            public bool InnerExpectationsSpecified
-            {
-                get;
-                private set;
-            }
+            public bool InnerExpectationsSpecified { get; private set; }
         }
     }
 }

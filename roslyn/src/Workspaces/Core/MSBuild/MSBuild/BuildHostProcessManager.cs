@@ -30,9 +30,14 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
     private readonly SemaphoreSlim _gate = new(initialCount: 1);
     private readonly Dictionary<BuildHostProcessKind, BuildHostProcess> _processes = new();
 
-    public BuildHostProcessManager(ImmutableDictionary<string, string>? globalMSBuildProperties = null, string? binaryLogPath = null, ILoggerFactory? loggerFactory = null)
+    public BuildHostProcessManager(
+        ImmutableDictionary<string, string>? globalMSBuildProperties = null,
+        string? binaryLogPath = null,
+        ILoggerFactory? loggerFactory = null
+    )
     {
-        _globalMSBuildProperties = globalMSBuildProperties ?? ImmutableDictionary<string, string>.Empty;
+        _globalMSBuildProperties =
+            globalMSBuildProperties ?? ImmutableDictionary<string, string>.Empty;
         _binaryLogPath = binaryLogPath;
         _loggerFactory = loggerFactory;
         _logger = loggerFactory?.CreateLogger<BuildHostProcessManager>();
@@ -41,39 +46,63 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
     /// <summary>
     /// Returns the best <see cref="RemoteBuildHost"/> to use for this project; if it picked a fallback option because the preferred kind was unavailable, that's returned too, otherwise null.
     /// </summary>
-    public async Task<(RemoteBuildHost, BuildHostProcessKind? PreferredKind)> GetBuildHostAsync(string projectFilePath, CancellationToken cancellationToken)
+    public async Task<(RemoteBuildHost, BuildHostProcessKind? PreferredKind)> GetBuildHostAsync(
+        string projectFilePath,
+        CancellationToken cancellationToken
+    )
     {
         var neededBuildHostKind = GetKindForProject(projectFilePath);
         BuildHostProcessKind? preferredKind = null;
 
-        _logger?.LogTrace($"Choosing a build host of type {neededBuildHostKind} for {projectFilePath}.");
+        _logger?.LogTrace(
+            $"Choosing a build host of type {neededBuildHostKind} for {projectFilePath}."
+        );
 
-        if (neededBuildHostKind == BuildHostProcessKind.Mono && MonoMSBuildDiscovery.GetMonoMSBuildDirectory() == null)
+        if (
+            neededBuildHostKind == BuildHostProcessKind.Mono
+            && MonoMSBuildDiscovery.GetMonoMSBuildDirectory() == null
+        )
         {
-            _logger?.LogWarning($"An installation of Mono could not be found; {projectFilePath} will be loaded with the .NET Core SDK and may encounter errors.");
+            _logger?.LogWarning(
+                $"An installation of Mono could not be found; {projectFilePath} will be loaded with the .NET Core SDK and may encounter errors."
+            );
             neededBuildHostKind = BuildHostProcessKind.NetCore;
             preferredKind = BuildHostProcessKind.Mono;
         }
 
-        var buildHost = await GetBuildHostAsync(neededBuildHostKind, cancellationToken).ConfigureAwait(false);
+        var buildHost = await GetBuildHostAsync(neededBuildHostKind, cancellationToken)
+            .ConfigureAwait(false);
 
         // If this is a .NET Framework build host, we may not have have build tools installed and thus can't actually use it to build.
         // Check if this is the case. Unlike the mono case, we have to actually ask the other process since MSBuildLocator only allows
         // us to discover VS instances in .NET Framework hosts right now.
         if (neededBuildHostKind == BuildHostProcessKind.NetFramework)
         {
-            if (!await buildHost.HasUsableMSBuildAsync(projectFilePath, cancellationToken).ConfigureAwait(false))
+            if (
+                !await buildHost
+                    .HasUsableMSBuildAsync(projectFilePath, cancellationToken)
+                    .ConfigureAwait(false)
+            )
             {
                 // It's not usable, so we'll fall back to the .NET Core one.
-                _logger?.LogWarning($"An installation of Visual Studio or the Build Tools for Visual Studio could not be found; {projectFilePath} will be loaded with the .NET Core SDK and may encounter errors.");
-                return (await GetBuildHostAsync(BuildHostProcessKind.NetCore, cancellationToken).ConfigureAwait(false), PreferredKind: BuildHostProcessKind.NetFramework);
+                _logger?.LogWarning(
+                    $"An installation of Visual Studio or the Build Tools for Visual Studio could not be found; {projectFilePath} will be loaded with the .NET Core SDK and may encounter errors."
+                );
+                return (
+                    await GetBuildHostAsync(BuildHostProcessKind.NetCore, cancellationToken)
+                        .ConfigureAwait(false),
+                    PreferredKind: BuildHostProcessKind.NetFramework
+                );
             }
         }
 
         return (buildHost, preferredKind);
     }
 
-    public async Task<RemoteBuildHost> GetBuildHostAsync(BuildHostProcessKind buildHostKind, CancellationToken cancellationToken)
+    public async Task<RemoteBuildHost> GetBuildHostAsync(
+        BuildHostProcessKind buildHostKind,
+        CancellationToken cancellationToken
+    )
     {
         using (await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
         {
@@ -84,7 +113,7 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
                     BuildHostProcessKind.NetCore => CreateDotNetCoreBuildHostStartInfo(),
                     BuildHostProcessKind.NetFramework => CreateDotNetFrameworkBuildHostStartInfo(),
                     BuildHostProcessKind.Mono => CreateMonoBuildHostStartInfo(),
-                    _ => throw ExceptionUtilities.UnexpectedValue(buildHostKind)
+                    _ => throw ExceptionUtilities.UnexpectedValue(buildHostKind),
                 };
 
                 var process = Process.Start(processStartInfo);
@@ -96,7 +125,9 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
                 // We've subscribed to Disconnected, but if the process crashed before that point we might have not seen it
                 if (process.HasExited)
                 {
-                    throw new Exception($"BuildHost process exited immediately with {process.ExitCode}");
+                    throw new Exception(
+                        $"BuildHost process exited immediately with {process.ExitCode}"
+                    );
                 }
                 _processes.Add(buildHostKind, buildHostProcess);
             }
@@ -107,7 +138,10 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
 
     private void BuildHostProcess_Disconnected(object? sender, EventArgs e)
     {
-        Contract.ThrowIfNull(sender, $"{nameof(BuildHostProcess)}.{nameof(BuildHostProcess.Disconnected)} was raised with a null sender.");
+        Contract.ThrowIfNull(
+            sender,
+            $"{nameof(BuildHostProcess)}.{nameof(BuildHostProcess.Disconnected)} was raised with a null sender."
+        );
 
         Task.Run(async () =>
         {
@@ -153,7 +187,9 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
     {
         var processStartInfo = new ProcessStartInfo()
         {
-            FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "dotnet.exe" : "dotnet",
+            FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? "dotnet.exe"
+                : "dotnet",
         };
 
         // We need to roll forward to the latest runtime, since the project may be using an SDK (or an SDK required runtime) newer than we ourselves built with.
@@ -163,7 +199,11 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
         AddArgument(processStartInfo, "LatestMajor");
 
         // The .NET Core build host is deployed as a content folder next to the application into the BuildHost-netcore path
-        var netCoreBuildHostPath = Path.Combine(Path.GetDirectoryName(typeof(BuildHostProcessManager).Assembly.Location)!, "BuildHost-netcore", "Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll");
+        var netCoreBuildHostPath = Path.Combine(
+            Path.GetDirectoryName(typeof(BuildHostProcessManager).Assembly.Location)!,
+            "BuildHost-netcore",
+            "Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll"
+        );
 
         AddArgument(processStartInfo, netCoreBuildHostPath);
 
@@ -175,10 +215,7 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
     private ProcessStartInfo CreateDotNetFrameworkBuildHostStartInfo()
     {
         var netFrameworkBuildHost = GetPathToDotNetFrameworkBuildHost();
-        var processStartInfo = new ProcessStartInfo()
-        {
-            FileName = netFrameworkBuildHost,
-        };
+        var processStartInfo = new ProcessStartInfo() { FileName = netFrameworkBuildHost };
 
         AppendBuildHostCommandLineArgumentsConfigureProcess(processStartInfo);
 
@@ -187,10 +224,7 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
 
     private ProcessStartInfo CreateMonoBuildHostStartInfo()
     {
-        var processStartInfo = new ProcessStartInfo
-        {
-            FileName = "mono"
-        };
+        var processStartInfo = new ProcessStartInfo { FileName = "mono" };
 
         AddArgument(processStartInfo, GetPathToDotNetFrameworkBuildHost());
 
@@ -202,17 +236,29 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
     private static string GetPathToDotNetFrameworkBuildHost()
     {
         // The .NET Framework build host is deployed as a content folder next to the application into the BuildHost-net472 path
-        var netFrameworkBuildHost = Path.Combine(Path.GetDirectoryName(typeof(BuildHostProcessManager).Assembly.Location)!, "BuildHost-net472", "Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.exe");
-        Contract.ThrowIfFalse(File.Exists(netFrameworkBuildHost), $"Unable to locate the .NET Framework build host at {netFrameworkBuildHost}");
+        var netFrameworkBuildHost = Path.Combine(
+            Path.GetDirectoryName(typeof(BuildHostProcessManager).Assembly.Location)!,
+            "BuildHost-net472",
+            "Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.exe"
+        );
+        Contract.ThrowIfFalse(
+            File.Exists(netFrameworkBuildHost),
+            $"Unable to locate the .NET Framework build host at {netFrameworkBuildHost}"
+        );
         return netFrameworkBuildHost;
     }
 
-    private void AppendBuildHostCommandLineArgumentsConfigureProcess(ProcessStartInfo processStartInfo)
+    private void AppendBuildHostCommandLineArgumentsConfigureProcess(
+        ProcessStartInfo processStartInfo
+    )
     {
         foreach (var globalMSBuildProperty in _globalMSBuildProperties)
         {
             AddArgument(processStartInfo, "--property");
-            AddArgument(processStartInfo, globalMSBuildProperty.Key + '=' + globalMSBuildProperty.Value);
+            AddArgument(
+                processStartInfo,
+                globalMSBuildProperty.Key + '=' + globalMSBuildProperty.Value
+            );
         }
 
         if (_binaryLogPath is not null)
@@ -266,7 +312,9 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
         // we'll load the XML of the project directly, and inspect for certain elements.
         XDocument document;
 
-        var frameworkHostType = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? BuildHostProcessKind.NetFramework : BuildHostProcessKind.Mono;
+        var frameworkHostType = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            ? BuildHostProcessKind.NetFramework
+            : BuildHostProcessKind.Mono;
 
         try
         {
@@ -305,7 +353,10 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
 
         // Looking for PropertyGroups that contain TargetFramework or TargetFrameworks nodes
         var propertyGroups = document.Descendants("PropertyGroup");
-        if (propertyGroups.Elements("TargetFramework").Any() || propertyGroups.Elements("TargetFrameworks").Any())
+        if (
+            propertyGroups.Elements("TargetFramework").Any()
+            || propertyGroups.Elements("TargetFrameworks").Any()
+        )
             return BuildHostProcessKind.NetCore;
 
         // Nothing that indicates it's an SDK-style project, so use our .NET framework host
@@ -318,7 +369,7 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
     {
         NetCore,
         NetFramework,
-        Mono
+        Mono,
     }
 
     private sealed class BuildHostProcess : IAsyncDisposable
@@ -339,7 +390,10 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
 
             _process.ErrorDataReceived += Process_ErrorDataReceived;
 
-            _rpcClient = new RpcClient(sendingStream: _process.StandardInput.BaseStream, receivingStream: _process.StandardOutput.BaseStream);
+            _rpcClient = new RpcClient(
+                sendingStream: _process.StandardInput.BaseStream,
+                receivingStream: _process.StandardOutput.BaseStream
+            );
             _rpcClient.Start();
             _rpcClient.Disconnected += Process_Exited;
             BuildHost = new RemoteBuildHost(_rpcClient);
@@ -375,7 +429,9 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
             {
                 if (!_process.HasExited)
                 {
-                    LoggerForProcessMessages?.LogTrace("Sending a Shutdown request to the BuildHost.");
+                    LoggerForProcessMessages?.LogTrace(
+                        "Sending a Shutdown request to the BuildHost."
+                    );
 
                     await BuildHost.ShutdownAsync(CancellationToken.None).ConfigureAwait(false);
                 }
@@ -386,7 +442,10 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
             }
             catch (Exception e)
             {
-                LoggerForProcessMessages?.LogError(e, "Exception while shutting down the BuildHost process.");
+                LoggerForProcessMessages?.LogError(
+                    e,
+                    "Exception while shutting down the BuildHost process."
+                );
 
                 // OK, process may have gone bad.
                 _process.Kill();
@@ -394,4 +453,3 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
         }
     }
 }
-

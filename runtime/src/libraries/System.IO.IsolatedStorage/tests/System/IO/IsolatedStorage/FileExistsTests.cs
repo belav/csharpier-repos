@@ -20,9 +20,7 @@ namespace System.IO.IsolatedStorage
         public void FileExists_ThrowsObjectDisposed()
         {
             IsolatedStorageFile isf;
-            using (isf = IsolatedStorageFile.GetUserStoreForAssembly())
-            {
-            }
+            using (isf = IsolatedStorageFile.GetUserStoreForAssembly()) { }
 
             Assert.Throws<ObjectDisposedException>(() => isf.FileExists("foo"));
         }
@@ -66,10 +64,16 @@ namespace System.IO.IsolatedStorage
                 string file = scope.ToString() + "FileExists_Existence";
                 isf.CreateTestFile(file);
 
-                Assert.True(File.Exists(Path.Combine(root, file)), "exists per file.io where expected");
+                Assert.True(
+                    File.Exists(Path.Combine(root, file)),
+                    "exists per file.io where expected"
+                );
                 Assert.True(isf.FileExists(file), "exists per iso");
                 isf.DeleteFile(file);
-                Assert.False(File.Exists(Path.Combine(root, file)), "doesn't exist per file.io where expected");
+                Assert.False(
+                    File.Exists(Path.Combine(root, file)),
+                    "doesn't exist per file.io where expected"
+                );
                 Assert.False(isf.FileExists(file), "doesn't exist per iso");
 
                 // Now nested
@@ -77,10 +81,16 @@ namespace System.IO.IsolatedStorage
                 file = Path.Combine(file, file);
                 isf.CreateTestFile(file);
 
-                Assert.True(File.Exists(Path.Combine(root, file)), "exists nested per file.io where expected");
+                Assert.True(
+                    File.Exists(Path.Combine(root, file)),
+                    "exists nested per file.io where expected"
+                );
                 Assert.True(isf.FileExists(file), "exists nested per iso");
                 isf.DeleteFile(file);
-                Assert.False(File.Exists(Path.Combine(root, file)), "doesn't exist nested per file.io where expected");
+                Assert.False(
+                    File.Exists(Path.Combine(root, file)),
+                    "doesn't exist nested per file.io where expected"
+                );
                 Assert.False(isf.FileExists(file), "doesn't exist nested per iso");
             }
         }

@@ -4,16 +4,16 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Drawing;
-    using System.IO;
     using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
@@ -22,12 +22,12 @@ namespace System.Web.UI {
     using System.Text;
     using System.Web.Compilation;
     using System.Web.Configuration;
-    using System.Web.Util;
     using System.Web.Management;
-    using System.Web.UI.WebControls;
     using System.Web.Security.Cryptography;
+    using System.Web.UI.WebControls;
+    using System.Web.Util;
 
-    // 
+    //
 
 
 
@@ -42,8 +42,8 @@ namespace System.Web.UI {
     /// binary serialization as a fallback mechanism. The formatter is also able to compress
     /// IndexedStrings contained in the object graph.
     /// </devdoc>
-    public sealed class ObjectStateFormatter : IStateFormatter, IStateFormatter2, IFormatter {
-
+    public sealed class ObjectStateFormatter : IStateFormatter, IStateFormatter2, IFormatter
+    {
         // Optimized type tokens
         private const byte Token_Int16 = 1;
         private const byte Token_Int32 = 2;
@@ -65,6 +65,7 @@ namespace System.Web.UI {
         private const byte Token_Hashtable = 23;
         private const byte Token_HybridDictionary = 24;
         private const byte Token_Type = 25;
+
         // private const byte Token_Nullable = 26; Removed per DevDiv 165426
         // Background: Used to support nullables as a special case, CLR added support for this
         // but they forgot to remove the deserialization code when they removed the support
@@ -101,23 +102,23 @@ namespace System.Web.UI {
 
         // Known types for which we generate short type references
         // rather than assembly qualified names
-        // 
+        //
 
 
-        private static readonly Type[] KnownTypes =
-            new Type[] {
-                typeof(object),
-                typeof(int),
-                typeof(string),
-                typeof(bool)
-            };
+        private static readonly Type[] KnownTypes = new Type[]
+        {
+            typeof(object),
+            typeof(int),
+            typeof(string),
+            typeof(bool),
+        };
 
         // Format and Version
         private const byte Marker_Format = 0xFF;
         private const byte Marker_Version_1 = 0x01;
 
         // The size of the string table. At most it can be Byte.MaxValue.
-        // 
+        //
         private const int StringTableSize = Byte.MaxValue;
 
         // Used during serialization
@@ -150,19 +151,22 @@ namespace System.Web.UI {
         /// <devdoc>
         /// Initializes a new instance of the ObjectStateFormatter.
         /// </devdoc>
-        public ObjectStateFormatter() : this(null) {
-        }
+        public ObjectStateFormatter()
+            : this(null) { }
 
         /// <internalonly/>
         /// <devdoc>
         /// Initializes a new instance of the ObjectStateFormatter. A MAC encoding
         /// key can be specified to have the serialized data encoded for view state
-        /// purposes. 
+        /// purposes.
         /// NOTE: this constructor is mainly for LOSFormatter's consumption, not used internally
         /// </devdoc>
-        internal ObjectStateFormatter(byte[] macEncodingKey) : this(null, true) {
+        internal ObjectStateFormatter(byte[] macEncodingKey)
+            : this(null, true)
+        {
             _macKeyBytes = macEncodingKey;
-            if (macEncodingKey != null) {
+            if (macEncodingKey != null)
+            {
                 // If the developer explicitly asked for the data to be signed, we must honor that.
                 _forceLegacyCryptography = true;
             }
@@ -176,28 +180,34 @@ namespace System.Web.UI {
         /// for serialize and deserialize.
         /// </devdoc>
 
-        internal ObjectStateFormatter(Page page, bool throwOnErrorDeserializing) {
+        internal ObjectStateFormatter(Page page, bool throwOnErrorDeserializing)
+        {
             _page = page;
             _throwOnErrorDeserializing = throwOnErrorDeserializing;
         }
 
         // This will return a list of specific purposes (for cryptographic subkey generation).
-        internal List<string> GetSpecificPurposes() {
-            if (_specificPurposes == null) {
+        internal List<string> GetSpecificPurposes()
+        {
+            if (_specificPurposes == null)
+            {
                 // Only generate a specific purpose list if we have a Page
-                if (_page == null) {
+                if (_page == null)
+                {
                     return null;
                 }
 
                 // Note: duplicated (somewhat) in GetMacKeyModifier, keep in sync
                 // See that method for comments on why these modifiers are in place
 
-                List<string> specificPurposes = new List<string>() {
+                List<string> specificPurposes = new List<string>()
+                {
                     "TemplateSourceDirectory: " + _page.TemplateSourceDirectory.ToUpperInvariant(),
-                    "Type: " + _page.GetType().Name.ToUpperInvariant()
+                    "Type: " + _page.GetType().Name.ToUpperInvariant(),
                 };
 
-                if (_page.ViewStateUserKey != null) {
+                if (_page.ViewStateUserKey != null)
+                {
                     specificPurposes.Add("ViewStateUserKey: " + _page.ViewStateUserKey);
                 }
 
@@ -209,10 +219,13 @@ namespace System.Web.UI {
 
         // This will return the MacKeyModifier provided in the LOSFormatter constructor or
         // generate one from Page if EnableViewStateMac is true.
-        private byte[] GetMacKeyModifier() {
-            if (_macKeyBytes == null) {
+        private byte[] GetMacKeyModifier()
+        {
+            if (_macKeyBytes == null)
+            {
                 // Only generate a MacKeyModifier if we have a page
-                if (_page == null) {
+                if (_page == null)
+                {
                     return null;
                 }
 
@@ -222,14 +235,21 @@ namespace System.Web.UI {
                 uint pageHashCode = _page.GetClientStateIdentifier();
 
                 string viewStateUserKey = _page.ViewStateUserKey;
-                if (viewStateUserKey != null) {
+                if (viewStateUserKey != null)
+                {
                     // Modify the key with the ViewStateUserKey, if any (ASURT 126375)
                     int count = Encoding.Unicode.GetByteCount(viewStateUserKey);
                     _macKeyBytes = new byte[count + 4];
-                    Encoding.Unicode.GetBytes(viewStateUserKey, 0, viewStateUserKey.Length, _macKeyBytes, 4);
-
+                    Encoding.Unicode.GetBytes(
+                        viewStateUserKey,
+                        0,
+                        viewStateUserKey.Length,
+                        _macKeyBytes,
+                        4
+                    );
                 }
-                else {
+                else
+                {
                     _macKeyBytes = new byte[4];
                 }
 
@@ -247,10 +267,12 @@ namespace System.Web.UI {
         /// The string is added to the string list on the fly, so it is available
         /// for future reference by index.
         /// </devdoc>
-        private void AddDeserializationStringReference(string s) {
+        private void AddDeserializationStringReference(string s)
+        {
             Debug.Assert((s != null) && (s.Length != 0));
 
-            if (_stringTableCount == StringTableSize) {
+            if (_stringTableCount == StringTableSize)
+            {
                 // loop around to the start of the table
                 _stringTableCount = 0;
             }
@@ -263,7 +285,8 @@ namespace System.Web.UI {
         /// Adds a type reference during the deserialization process,
         /// so that it can be referred to later by its index.
         /// </devdoc>
-        private void AddDeserializationTypeReference(Type type) {
+        private void AddDeserializationTypeReference(Type type)
+        {
             // Type may be null, if there is no longer a Type on the system with the saved type name.
             // This is unlikely to happen with a Type stored in ViewState, but more likely with a Type
             // stored in Personalization.
@@ -276,16 +299,19 @@ namespace System.Web.UI {
         /// The string is added to the string list, as well as to a string table
         /// for quick lookup.
         /// </devdoc>
-        private void AddSerializationStringReference(string s) {
+        private void AddSerializationStringReference(string s)
+        {
             Debug.Assert((s != null) && (s.Length != 0));
 
-            if (_stringTableCount == StringTableSize) {
+            if (_stringTableCount == StringTableSize)
+            {
                 // loop around to the start of the table
                 _stringTableCount = 0;
             }
 
             string oldString = _stringList[_stringTableCount];
-            if (oldString != null) {
+            if (oldString != null)
+            {
                 // it means we're looping around, and the existing table entry
                 // needs to be removed, as a new one will replace it
                 Debug.Assert(_stringTable.Contains(oldString));
@@ -301,15 +327,20 @@ namespace System.Web.UI {
         /// Adds a type reference during the serialization process, so it
         /// can be later referred to by its index.
         /// </devdoc>
-        private void AddSerializationTypeReference(Type type) {
+        private void AddSerializationTypeReference(Type type)
+        {
             Debug.Assert(type != null);
 
             int typeID = _typeTable.Count;
             _typeTable[type] = typeID;
         }
 
-        [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.SerializationFormatter)]
-        internal object DeserializeWithAssert(Stream inputStream) {
+        [SecurityPermission(
+            SecurityAction.Assert,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
+        internal object DeserializeWithAssert(Stream inputStream)
+        {
             return Deserialize(inputStream);
         }
 
@@ -317,8 +348,10 @@ namespace System.Web.UI {
         /// Deserializes an object graph from its binary serialized form
         /// contained in the specified stream.
         /// </devdoc>
-        public object Deserialize(Stream inputStream) {
-            if (inputStream == null) {
+        public object Deserialize(Stream inputStream)
+        {
+            if (inputStream == null)
+            {
                 throw new ArgumentNullException("inputStream");
             }
 
@@ -327,19 +360,23 @@ namespace System.Web.UI {
             InitializeDeserializer();
 
             SerializerBinaryReader reader = new SerializerBinaryReader(inputStream);
-            try {
+            try
+            {
                 byte formatMarker = reader.ReadByte();
 
-                if (formatMarker == Marker_Format) {
+                if (formatMarker == Marker_Format)
+                {
                     byte versionMarker = reader.ReadByte();
 
                     Debug.Assert(versionMarker == Marker_Version_1);
-                    if (versionMarker == Marker_Version_1) {
+                    if (versionMarker == Marker_Version_1)
+                    {
                         return DeserializeValue(reader);
                     }
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 deserializationException = e;
             }
 
@@ -347,23 +384,28 @@ namespace System.Web.UI {
             // or if deserialization was skipped because of invalid format or
             // version data in the stream
 
-            throw new ArgumentException(SR.GetString(SR.InvalidSerializedData), deserializationException);
+            throw new ArgumentException(
+                SR.GetString(SR.InvalidSerializedData),
+                deserializationException
+            );
         }
-
 
         /// <devdoc>
         /// Deserializes an object graph from its textual serialized form
         /// contained in the specified string.
         /// </devdoc>
-        public object Deserialize(string inputString) {
+        public object Deserialize(string inputString)
+        {
             // If the developer called Deserialize() manually on an ObjectStateFormatter object that was configured
             // for cryptographic operations, he wouldn't have been able to specify a Purpose. We'll just provide
             // a default value for him.
             return Deserialize(inputString, Purpose.User_ObjectStateFormatter_Serialize);
         }
 
-        private object Deserialize(string inputString, Purpose purpose) {
-            if (String.IsNullOrEmpty(inputString)) {
+        private object Deserialize(string inputString, Purpose purpose)
+        {
+            if (String.IsNullOrEmpty(inputString))
+            {
                 throw new ArgumentNullException("inputString");
             }
 
@@ -371,33 +413,61 @@ namespace System.Web.UI {
             int length = inputBytes.Length;
 
 #if !FEATURE_PAL // FEATURE_PAL does not enable cryptography
-            try {
-                if (AspNetCryptoServiceProvider.Instance.IsDefaultProvider && !_forceLegacyCryptography) {
+            try
+            {
+                if (
+                    AspNetCryptoServiceProvider.Instance.IsDefaultProvider
+                    && !_forceLegacyCryptography
+                )
+                {
                     // If we're configured to use the new crypto providers, call into them if encryption or signing (or both) is requested.
 
-                    if (_page != null && (_page.ContainsEncryptedViewState || _page.EnableViewStateMac)) {
-                        Purpose derivedPurpose = purpose.AppendSpecificPurposes(GetSpecificPurposes());
-                        ICryptoService cryptoService = AspNetCryptoServiceProvider.Instance.GetCryptoService(derivedPurpose);
+                    if (
+                        _page != null
+                        && (_page.ContainsEncryptedViewState || _page.EnableViewStateMac)
+                    )
+                    {
+                        Purpose derivedPurpose = purpose.AppendSpecificPurposes(
+                            GetSpecificPurposes()
+                        );
+                        ICryptoService cryptoService =
+                            AspNetCryptoServiceProvider.Instance.GetCryptoService(derivedPurpose);
                         byte[] clearData = cryptoService.Unprotect(inputBytes);
                         inputBytes = clearData;
                         length = clearData.Length;
                     }
                 }
-                else {
+                else
+                {
                     // Otherwise go through legacy crypto mechanisms
 #pragma warning disable 618 // calling obsolete methods
-                    if (_page != null && _page.ContainsEncryptedViewState) {
-                        inputBytes = MachineKeySection.EncryptOrDecryptData(false, inputBytes, GetMacKeyModifier(), 0, length);
+                    if (_page != null && _page.ContainsEncryptedViewState)
+                    {
+                        inputBytes = MachineKeySection.EncryptOrDecryptData(
+                            false,
+                            inputBytes,
+                            GetMacKeyModifier(),
+                            0,
+                            length
+                        );
                         length = inputBytes.Length;
                     }
                     // We need to decode if the page has EnableViewStateMac or we got passed in some mac key string
-                    else if ((_page != null && _page.EnableViewStateMac) || _macKeyBytes != null) {
-                        inputBytes = MachineKeySection.GetDecodedData(inputBytes, GetMacKeyModifier(), 0, length, ref length);
+                    else if ((_page != null && _page.EnableViewStateMac) || _macKeyBytes != null)
+                    {
+                        inputBytes = MachineKeySection.GetDecodedData(
+                            inputBytes,
+                            GetMacKeyModifier(),
+                            0,
+                            length,
+                            ref length
+                        );
                     }
 #pragma warning restore 618 // calling obsolete methods
                 }
             }
-            catch {
+            catch
+            {
                 // MSRC 10405: Don't propagate inner exceptions, as they may contain sensitive cryptographic information.
                 PerfCounters.IncrementCounter(AppPerfCounter.VIEWSTATE_MAC_FAIL);
                 ViewStateException.ThrowMacValidationError(null, inputString);
@@ -405,12 +475,14 @@ namespace System.Web.UI {
 #endif // !FEATURE_PAL
             object result = null;
             MemoryStream objectStream = GetMemoryStream();
-            try {
+            try
+            {
                 objectStream.Write(inputBytes, 0, length);
                 objectStream.Position = 0;
                 result = Deserialize(objectStream);
             }
-            finally {
+            finally
+            {
                 ReleaseMemoryStream(objectStream);
             }
             return result;
@@ -420,17 +492,20 @@ namespace System.Web.UI {
         /// Deserializes an IndexedString. An IndexedString can either be the string itself (the
         /// first occurrence), or a reference to it by index into the string table.
         /// </devdoc>
-        private IndexedString DeserializeIndexedString(SerializerBinaryReader reader, byte token) {
+        private IndexedString DeserializeIndexedString(SerializerBinaryReader reader, byte token)
+        {
             Debug.Assert((token == Token_IndexedStringAdd) || (token == Token_IndexedString));
 
-            if (token == Token_IndexedString) {
+            if (token == Token_IndexedString)
+            {
                 // reference to string in the current string table
                 int tableIndex = (int)reader.ReadByte();
 
                 Debug.Assert(_stringList[tableIndex] != null);
                 return new IndexedString(_stringList[tableIndex]);
             }
-            else {
+            else
+            {
                 // first occurrence of this indexed string. Read in the string, and add
                 // a reference to it, so future references can be resolved.
                 string s = reader.ReadString();
@@ -446,43 +521,55 @@ namespace System.Web.UI {
         /// we throw an exception if _throwOnErrorDeserializing is true, and we return null if
         /// _throwOnErrorDeserializing is false.
         /// </devdoc>
-        private Type DeserializeType(SerializerBinaryReader reader) {
+        private Type DeserializeType(SerializerBinaryReader reader)
+        {
             byte token = reader.ReadByte();
-            Debug.Assert((token == Token_TypeRef) ||
-                         (token == Token_TypeRefAdd) ||
-                         (token == Token_TypeRefAddLocal));
+            Debug.Assert(
+                (token == Token_TypeRef)
+                    || (token == Token_TypeRefAdd)
+                    || (token == Token_TypeRefAddLocal)
+            );
 
-            if (token == Token_TypeRef) {
+            if (token == Token_TypeRef)
+            {
                 // reference by index into type table
                 int typeID = reader.ReadEncodedInt32();
                 return (Type)_typeList[typeID];
             }
-            else {
+            else
+            {
                 // first occurrence of this type. Read in the type, resolve it, and
                 // add it to the type table
                 string typeName = reader.ReadString();
 
                 Type resolvedType = null;
-                try {
-                    if (token == Token_TypeRefAddLocal) {
+                try
+                {
+                    if (token == Token_TypeRefAddLocal)
+                    {
                         resolvedType = HttpContext.SystemWebAssembly.GetType(typeName, true);
                     }
-                    else {
+                    else
+                    {
                         resolvedType = Type.GetType(typeName, true);
                     }
                 }
-                catch (Exception exception) {
-                    if (_throwOnErrorDeserializing) {
+                catch (Exception exception)
+                {
+                    if (_throwOnErrorDeserializing)
+                    {
                         throw;
                     }
-                    else {
+                    else
+                    {
                         // Log error message
                         WebBaseEvent.RaiseSystemEvent(
                             SR.GetString(SR.Webevent_msg_OSF_Deserialization_Type, typeName),
-                            this, 
-                            WebEventCodes.WebErrorObjectStateFormatterDeserializationError, 
-                            WebEventCodes.UndefinedEventDetailCode, 
-                            exception);
+                            this,
+                            WebEventCodes.WebErrorObjectStateFormatterDeserializationError,
+                            WebEventCodes.UndefinedEventDetailCode,
+                            exception
+                        );
                     }
                 }
 
@@ -496,13 +583,15 @@ namespace System.Web.UI {
         /// Essentially a token is read, followed by as much data needed to recreate
         /// the single value.
         /// </devdoc>
-        private object DeserializeValue(SerializerBinaryReader reader) {
+        private object DeserializeValue(SerializerBinaryReader reader)
+        {
             byte token = reader.ReadByte();
 
             // NOTE: Preserve the order here with the order of the logic in
             //       the SerializeValue method.
 
-            switch (token) {
+            switch (token)
+            {
                 case Token_Null:
                     return null;
                 case Token_EmptyString:
@@ -514,25 +603,27 @@ namespace System.Web.UI {
                 case Token_Int32:
                     return reader.ReadEncodedInt32();
                 case Token_Pair:
-                    return new Pair(DeserializeValue(reader),
-                                    DeserializeValue(reader));
+                    return new Pair(DeserializeValue(reader), DeserializeValue(reader));
                 case Token_Triplet:
-                    return new Triplet(DeserializeValue(reader),
-                                       DeserializeValue(reader),
-                                       DeserializeValue(reader));
+                    return new Triplet(
+                        DeserializeValue(reader),
+                        DeserializeValue(reader),
+                        DeserializeValue(reader)
+                    );
                 case Token_IndexedString:
                 case Token_IndexedStringAdd:
                     return DeserializeIndexedString(reader, token);
                 case Token_ArrayList:
+                {
+                    int count = reader.ReadEncodedInt32();
+                    ArrayList list = new ArrayList(count);
+                    for (int i = 0; i < count; i++)
                     {
-                        int count = reader.ReadEncodedInt32();
-                        ArrayList list = new ArrayList(count);
-                        for (int i = 0; i < count; i++) {
-                            list.Add(DeserializeValue(reader));
-                        }
-
-                        return list;
+                        list.Add(DeserializeValue(reader));
                     }
+
+                    return list;
+                }
                 case Token_True:
                     return true;
                 case Token_False:
@@ -551,55 +642,59 @@ namespace System.Web.UI {
                     return reader.ReadSingle();
                 case Token_Hashtable:
                 case Token_HybridDictionary:
+                {
+                    int count = reader.ReadEncodedInt32();
+
+                    IDictionary table;
+                    if (token == Token_Hashtable)
                     {
-                        int count = reader.ReadEncodedInt32();
-
-                        IDictionary table;
-                        if (token == Token_Hashtable) {
-                            table = new Hashtable(count);
-                        }
-                        else {
-                            table = new HybridDictionary(count);
-                        }
-                        for (int i = 0; i < count; i++) {
-                            table.Add(DeserializeValue(reader),
-                                      DeserializeValue(reader));
-                        }
-
-                        return table;
+                        table = new Hashtable(count);
                     }
+                    else
+                    {
+                        table = new HybridDictionary(count);
+                    }
+                    for (int i = 0; i < count; i++)
+                    {
+                        table.Add(DeserializeValue(reader), DeserializeValue(reader));
+                    }
+
+                    return table;
+                }
                 case Token_Type:
                     return DeserializeType(reader);
                 case Token_StringArray:
+                {
+                    int count = reader.ReadEncodedInt32();
+
+                    string[] array = new string[count];
+                    for (int i = 0; i < count; i++)
                     {
-                        int count = reader.ReadEncodedInt32();
-
-                        string[] array = new string[count];
-                        for (int i = 0; i < count; i++) {
-                            array[i] = reader.ReadString();
-                        }
-
-                        return array;
+                        array[i] = reader.ReadString();
                     }
+
+                    return array;
+                }
                 case Token_Array:
+                {
+                    Type elementType = DeserializeType(reader);
+                    int count = reader.ReadEncodedInt32();
+
+                    Array list = Array.CreateInstance(elementType, count);
+                    for (int i = 0; i < count; i++)
                     {
-                        Type elementType = DeserializeType(reader);
-                        int count = reader.ReadEncodedInt32();
-
-                        Array list = Array.CreateInstance(elementType, count);
-                        for (int i = 0; i < count; i++) {
-                            list.SetValue(DeserializeValue(reader), i);
-                        }
-
-                        return list;
+                        list.SetValue(DeserializeValue(reader), i);
                     }
+
+                    return list;
+                }
                 case Token_IntEnum:
-                    {
-                        Type enumType = DeserializeType(reader);
-                        int enumValue = reader.ReadEncodedInt32();
+                {
+                    Type enumType = DeserializeType(reader);
+                    int enumValue = reader.ReadEncodedInt32();
 
-                        return Enum.ToObject(enumType, enumValue);
-                    }
+                    return Enum.ToObject(enumType, enumValue);
+                }
                 case Token_Color:
                     return Color.FromArgb(reader.ReadInt32());
                 case Token_EmptyColor:
@@ -613,97 +708,118 @@ namespace System.Web.UI {
                 case Token_EventValidationStore:
                     return EventValidationStore.DeserializeFrom(reader.BaseStream);
                 case Token_SparseArray:
+                {
+                    Type elementType = DeserializeType(reader);
+                    int count = reader.ReadEncodedInt32();
+                    int itemCount = reader.ReadEncodedInt32();
+
+                    // Guard against bad data
+                    if (itemCount > count)
                     {
-                        Type elementType = DeserializeType(reader);
-                        int count = reader.ReadEncodedInt32();
-                        int itemCount = reader.ReadEncodedInt32();
-
-                        // Guard against bad data
-                        if (itemCount > count) {
-                            throw new InvalidOperationException(SR.GetString(SR.InvalidSerializedData));
-                        }
-
-                        Array list = Array.CreateInstance(elementType, count);
-                        for (int i = 0; i < itemCount; ++i) {
-                            // Data is encoded as <index, Item>
-                            int nextPos = reader.ReadEncodedInt32();
-
-                            // Guard against bad data (nextPos way too big, or nextPos not increasing)
-                            if (nextPos >= count || nextPos < 0) {
-                                throw new InvalidOperationException(SR.GetString(SR.InvalidSerializedData));
-                            }
-                            list.SetValue(DeserializeValue(reader), nextPos);
-                        }
-
-                        return list;
+                        throw new InvalidOperationException(SR.GetString(SR.InvalidSerializedData));
                     }
+
+                    Array list = Array.CreateInstance(elementType, count);
+                    for (int i = 0; i < itemCount; ++i)
+                    {
+                        // Data is encoded as <index, Item>
+                        int nextPos = reader.ReadEncodedInt32();
+
+                        // Guard against bad data (nextPos way too big, or nextPos not increasing)
+                        if (nextPos >= count || nextPos < 0)
+                        {
+                            throw new InvalidOperationException(
+                                SR.GetString(SR.InvalidSerializedData)
+                            );
+                        }
+                        list.SetValue(DeserializeValue(reader), nextPos);
+                    }
+
+                    return list;
+                }
                 case Token_StringFormatted:
+                {
+                    object result = null;
+
+                    Type valueType = DeserializeType(reader);
+                    string formattedValue = reader.ReadString();
+
+                    if (valueType != null)
                     {
-                        object result = null;
-
-                        Type valueType = DeserializeType(reader);
-                        string formattedValue = reader.ReadString();
-
-                        if (valueType != null) {
-                            TypeConverter converter = TypeDescriptor.GetConverter(valueType);
-                            // TypeDescriptor.GetConverter() will never return null.  The ref docs
-                            // for this method are incorrect.
-                            try {
-                                result = converter.ConvertFromInvariantString(formattedValue);
-                            }
-                            catch (Exception exception) {
-                                if (_throwOnErrorDeserializing) {
-                                    throw;
-                                }
-                                else {
-                                    WebBaseEvent.RaiseSystemEvent(
-                                        SR.GetString(SR.Webevent_msg_OSF_Deserialization_String, valueType.AssemblyQualifiedName),
-                                        this, 
-                                        WebEventCodes.WebErrorObjectStateFormatterDeserializationError, 
-                                        WebEventCodes.UndefinedEventDetailCode, 
-                                        exception);
-                                }
-                            }
+                        TypeConverter converter = TypeDescriptor.GetConverter(valueType);
+                        // TypeDescriptor.GetConverter() will never return null.  The ref docs
+                        // for this method are incorrect.
+                        try
+                        {
+                            result = converter.ConvertFromInvariantString(formattedValue);
                         }
-
-                        return result;
-                    }
-                case Token_BinarySerialized:
-                    {
-                        int length = reader.ReadEncodedInt32();
-
-                        byte[] buffer = new byte[length];
-                        if (length != 0) {
-                            reader.Read(buffer, 0, length);
-                        }
-
-                        object result = null;
-                        MemoryStream ms = GetMemoryStream();
-                        try {
-                            ms.Write(buffer, 0, length);
-                            ms.Position = 0;
-                            IFormatter formatter = new BinaryFormatter();
-
-                            result = formatter.Deserialize(ms);
-                        }
-                        catch (Exception exception) {
-                            if (_throwOnErrorDeserializing) {
+                        catch (Exception exception)
+                        {
+                            if (_throwOnErrorDeserializing)
+                            {
                                 throw;
                             }
-                            else {
+                            else
+                            {
                                 WebBaseEvent.RaiseSystemEvent(
-                                    SR.GetString(SR.Webevent_msg_OSF_Deserialization_Binary), 
-                                    this, 
-                                    WebEventCodes.WebErrorObjectStateFormatterDeserializationError, 
-                                    WebEventCodes.UndefinedEventDetailCode, 
-                                    exception);
+                                    SR.GetString(
+                                        SR.Webevent_msg_OSF_Deserialization_String,
+                                        valueType.AssemblyQualifiedName
+                                    ),
+                                    this,
+                                    WebEventCodes.WebErrorObjectStateFormatterDeserializationError,
+                                    WebEventCodes.UndefinedEventDetailCode,
+                                    exception
+                                );
                             }
                         }
-                        finally {
-                            ReleaseMemoryStream(ms);
-                        }
-                        return result;
                     }
+
+                    return result;
+                }
+                case Token_BinarySerialized:
+                {
+                    int length = reader.ReadEncodedInt32();
+
+                    byte[] buffer = new byte[length];
+                    if (length != 0)
+                    {
+                        reader.Read(buffer, 0, length);
+                    }
+
+                    object result = null;
+                    MemoryStream ms = GetMemoryStream();
+                    try
+                    {
+                        ms.Write(buffer, 0, length);
+                        ms.Position = 0;
+                        IFormatter formatter = new BinaryFormatter();
+
+                        result = formatter.Deserialize(ms);
+                    }
+                    catch (Exception exception)
+                    {
+                        if (_throwOnErrorDeserializing)
+                        {
+                            throw;
+                        }
+                        else
+                        {
+                            WebBaseEvent.RaiseSystemEvent(
+                                SR.GetString(SR.Webevent_msg_OSF_Deserialization_Binary),
+                                this,
+                                WebEventCodes.WebErrorObjectStateFormatterDeserializationError,
+                                WebEventCodes.UndefinedEventDetailCode,
+                                exception
+                            );
+                        }
+                    }
+                    finally
+                    {
+                        ReleaseMemoryStream(ms);
+                    }
+                    return result;
+                }
                 default:
                     throw new InvalidOperationException(SR.GetString(SR.InvalidSerializedData));
             }
@@ -712,18 +828,20 @@ namespace System.Web.UI {
         /// <devdoc>
         /// Retrieves a MemoryStream instance.
         /// </devdoc>
-        private static MemoryStream GetMemoryStream() {
+        private static MemoryStream GetMemoryStream()
+        {
             return new MemoryStream(2048);
         }
-
 
         /// <devdoc>
         /// Initializes this instance to perform deserialization.
         /// </devdoc>
-        private void InitializeDeserializer() {
+        private void InitializeDeserializer()
+        {
             _typeList = new ArrayList();
 
-            for (int i = 0; i < KnownTypes.Length; i++) {
+            for (int i = 0; i < KnownTypes.Length; i++)
+            {
                 AddDeserializationTypeReference(KnownTypes[i]);
             }
 
@@ -734,10 +852,12 @@ namespace System.Web.UI {
         /// <devdoc>
         /// Initializes this instance to perform serialization.
         /// </devdoc>
-        private void InitializeSerializer() {
+        private void InitializeSerializer()
+        {
             _typeTable = new HybridDictionary();
 
-            for (int i = 0; i < KnownTypes.Length; i++) {
+            for (int i = 0; i < KnownTypes.Length; i++)
+            {
                 AddSerializationTypeReference(KnownTypes[i]);
             }
 
@@ -749,25 +869,29 @@ namespace System.Web.UI {
         /// <devdoc>
         /// Releases a MemoryStream instance.
         /// </devdoc>
-        private static void ReleaseMemoryStream(MemoryStream stream) {
+        private static void ReleaseMemoryStream(MemoryStream stream)
+        {
             stream.Dispose();
         }
 
         /// <devdoc>
         /// Serializes an object graph into a textual serialized form.
         /// </devdoc>
-        public string Serialize(object stateGraph) {
+        public string Serialize(object stateGraph)
+        {
             // If the developer called Serialize() manually on an ObjectStateFormatter object that was configured
             // for cryptographic operations, he wouldn't have been able to specify a Purpose. We'll just provide
             // a default value for him.
             return Serialize(stateGraph, Purpose.User_ObjectStateFormatter_Serialize);
         }
 
-        private string Serialize(object stateGraph, Purpose purpose) {
+        private string Serialize(object stateGraph, Purpose purpose)
+        {
             string result = null;
 
             MemoryStream ms = GetMemoryStream();
-            try {
+            try
+            {
                 Serialize(ms, stateGraph);
                 ms.SetLength(ms.Position);
 
@@ -777,27 +901,52 @@ namespace System.Web.UI {
 #if !FEATURE_PAL // FEATURE_PAL does not enable cryptography
                 // We only support serialization of encrypted or encoded data through our internal Page constructors
 
-                if (AspNetCryptoServiceProvider.Instance.IsDefaultProvider && !_forceLegacyCryptography) {
+                if (
+                    AspNetCryptoServiceProvider.Instance.IsDefaultProvider
+                    && !_forceLegacyCryptography
+                )
+                {
                     // If we're configured to use the new crypto providers, call into them if encryption or signing (or both) is requested.
 
-                    if (_page != null && (_page.RequiresViewStateEncryptionInternal || _page.EnableViewStateMac)) {
-                        Purpose derivedPurpose = purpose.AppendSpecificPurposes(GetSpecificPurposes());
-                        ICryptoService cryptoService = AspNetCryptoServiceProvider.Instance.GetCryptoService(derivedPurpose);
+                    if (
+                        _page != null
+                        && (_page.RequiresViewStateEncryptionInternal || _page.EnableViewStateMac)
+                    )
+                    {
+                        Purpose derivedPurpose = purpose.AppendSpecificPurposes(
+                            GetSpecificPurposes()
+                        );
+                        ICryptoService cryptoService =
+                            AspNetCryptoServiceProvider.Instance.GetCryptoService(derivedPurpose);
                         byte[] protectedData = cryptoService.Protect(ms.ToArray());
                         buffer = protectedData;
                         length = protectedData.Length;
                     }
                 }
-                else {
+                else
+                {
                     // Otherwise go through legacy crypto mechanisms
 #pragma warning disable 618 // calling obsolete methods
-                    if (_page != null && _page.RequiresViewStateEncryptionInternal) {
-                        buffer = MachineKeySection.EncryptOrDecryptData(true, buffer, GetMacKeyModifier(), 0, length);
+                    if (_page != null && _page.RequiresViewStateEncryptionInternal)
+                    {
+                        buffer = MachineKeySection.EncryptOrDecryptData(
+                            true,
+                            buffer,
+                            GetMacKeyModifier(),
+                            0,
+                            length
+                        );
                         length = buffer.Length;
                     }
                     // We need to encode if the page has EnableViewStateMac or we got passed in some mac key string
-                    else if ((_page != null && _page.EnableViewStateMac) || _macKeyBytes != null) {
-                        buffer = MachineKeySection.GetEncodedData(buffer, GetMacKeyModifier(), 0, ref length);
+                    else if ((_page != null && _page.EnableViewStateMac) || _macKeyBytes != null)
+                    {
+                        buffer = MachineKeySection.GetEncodedData(
+                            buffer,
+                            GetMacKeyModifier(),
+                            0,
+                            ref length
+                        );
                     }
 #pragma warning restore 618 // calling obsolete methods
                 }
@@ -805,14 +954,19 @@ namespace System.Web.UI {
 #endif // !FEATURE_PAL
                 result = Convert.ToBase64String(buffer, 0, length);
             }
-            finally {
+            finally
+            {
                 ReleaseMemoryStream(ms);
             }
             return result;
         }
 
-        [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.SerializationFormatter)]
-        internal void SerializeWithAssert(Stream outputStream, object stateGraph) {
+        [SecurityPermission(
+            SecurityAction.Assert,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
+        internal void SerializeWithAssert(Stream outputStream, object stateGraph)
+        {
             Serialize(outputStream, stateGraph);
         }
 
@@ -820,8 +974,10 @@ namespace System.Web.UI {
         /// Serializes an object graph into a binary serialized form within
         /// the specified stream.
         /// </devdoc>
-        public void Serialize(Stream outputStream, object stateGraph) {
-            if (outputStream == null) {
+        public void Serialize(Stream outputStream, object stateGraph)
+        {
+            if (outputStream == null)
+            {
                 throw new ArgumentNullException("outputStream");
             }
 
@@ -838,9 +994,11 @@ namespace System.Web.UI {
         /// out to the underlying stream, and is added to the string table for future
         /// reference. Otherwise, a reference by index is written out.
         /// </devdoc>
-        private void SerializeIndexedString(SerializerBinaryWriter writer, string s) {
+        private void SerializeIndexedString(SerializerBinaryWriter writer, string s)
+        {
             object id = _stringTable[s];
-            if (id != null) {
+            if (id != null)
+            {
                 writer.Write(Token_IndexedString);
                 writer.Write((byte)(int)id);
                 return;
@@ -857,9 +1015,11 @@ namespace System.Web.UI {
         /// out to the underlying stream, and the type is added to the string table for future
         /// reference. Otherwise, a reference by index is written out.
         /// </devdoc>
-        private void SerializeType(SerializerBinaryWriter writer, Type type) {
+        private void SerializeType(SerializerBinaryWriter writer, Type type)
+        {
             object id = _typeTable[type];
-            if (id != null) {
+            if (id != null)
+            {
                 writer.Write(Token_TypeRef);
                 writer.WriteEncoded((int)id);
                 return;
@@ -867,11 +1027,13 @@ namespace System.Web.UI {
 
             AddSerializationTypeReference(type);
 
-            if (type.Assembly == HttpContext.SystemWebAssembly) {
+            if (type.Assembly == HttpContext.SystemWebAssembly)
+            {
                 writer.Write(Token_TypeRefAddLocal);
                 writer.Write(type.FullName);
             }
-            else {
+            else
+            {
                 writer.Write(Token_TypeRefAdd);
                 writer.Write(type.AssemblyQualifiedName);
             }
@@ -881,47 +1043,57 @@ namespace System.Web.UI {
         /// Serializes a single value using the specified writer.
         /// Handles exceptions to provide more information about the value being serialized.
         /// </devdoc>
-        private void SerializeValue(SerializerBinaryWriter writer, object value) {
-            try {
-
+        private void SerializeValue(SerializerBinaryWriter writer, object value)
+        {
+            try
+            {
                 Stack objectStack = new Stack();
                 objectStack.Push(value);
 
-                do {
+                do
+                {
                     value = objectStack.Pop();
 
-                    if (value == null) {
+                    if (value == null)
+                    {
                         writer.Write(Token_Null);
                         continue;
                     }
 
                     // NOTE: These are ordered roughly in the order of frequency.
 
-                    if (value is string) {
+                    if (value is string)
+                    {
                         string s = (string)value;
-                        if (s.Length == 0) {
+                        if (s.Length == 0)
+                        {
                             writer.Write(Token_EmptyString);
                         }
-                        else {
+                        else
+                        {
                             writer.Write(Token_String);
                             writer.Write(s);
                         }
                         continue;
                     }
 
-                    if (value is int) {
+                    if (value is int)
+                    {
                         int i = (int)value;
-                        if (i == 0) {
+                        if (i == 0)
+                        {
                             writer.Write(Token_ZeroInt32);
                         }
-                        else {
+                        else
+                        {
                             writer.Write(Token_Int32);
                             writer.WriteEncoded(i);
                         }
                         continue;
                     }
 
-                    if (value is Pair) {
+                    if (value is Pair)
+                    {
                         writer.Write(Token_Pair);
 
                         Pair p = (Pair)value;
@@ -930,7 +1102,8 @@ namespace System.Web.UI {
                         continue;
                     }
 
-                    if (value is Triplet) {
+                    if (value is Triplet)
+                    {
                         writer.Write(Token_Triplet);
 
                         Triplet t = (Triplet)value;
@@ -940,83 +1113,101 @@ namespace System.Web.UI {
                         continue;
                     }
 
-                    if (value is IndexedString) {
+                    if (value is IndexedString)
+                    {
                         Debug.Assert(((IndexedString)value).Value != null);
                         SerializeIndexedString(writer, ((IndexedString)value).Value);
                         continue;
                     }
 
-                    if (value.GetType() == typeof(ArrayList)) {
+                    if (value.GetType() == typeof(ArrayList))
+                    {
                         writer.Write(Token_ArrayList);
 
                         ArrayList list = (ArrayList)value;
 
                         writer.WriteEncoded(list.Count);
-                        for (int i = list.Count - 1; i >= 0; i--) {
+                        for (int i = list.Count - 1; i >= 0; i--)
+                        {
                             objectStack.Push(list[i]);
                         }
 
                         continue;
                     }
 
-                    if (value is bool) {
-                        if (((bool)value)) {
+                    if (value is bool)
+                    {
+                        if (((bool)value))
+                        {
                             writer.Write(Token_True);
                         }
-                        else {
+                        else
+                        {
                             writer.Write(Token_False);
                         }
                         continue;
                     }
-                    if (value is byte) {
+                    if (value is byte)
+                    {
                         writer.Write(Token_Byte);
                         writer.Write((byte)value);
                         continue;
                     }
-                    if (value is char) {
+                    if (value is char)
+                    {
                         writer.Write(Token_Char);
                         writer.Write((char)value);
                         continue;
                     }
-                    if (value is DateTime) {
+                    if (value is DateTime)
+                    {
                         writer.Write(Token_DateTime);
                         writer.Write(((DateTime)value).ToBinary());
                         continue;
                     }
-                    if (value is double) {
+                    if (value is double)
+                    {
                         writer.Write(Token_Double);
                         writer.Write((double)value);
                         continue;
                     }
-                    if (value is short) {
+                    if (value is short)
+                    {
                         writer.Write(Token_Int16);
                         writer.Write((short)value);
                         continue;
                     }
-                    if (value is float) {
+                    if (value is float)
+                    {
                         writer.Write(Token_Single);
                         writer.Write((float)value);
                         continue;
                     }
 
-                    if (value is IDictionary) {
+                    if (value is IDictionary)
+                    {
                         bool canSerializeDictionary = false;
 
-                        if (value.GetType() == typeof(Hashtable)) {
+                        if (value.GetType() == typeof(Hashtable))
+                        {
                             writer.Write(Token_Hashtable);
                             canSerializeDictionary = true;
                         }
-                        else if (value.GetType() == typeof(HybridDictionary)) {
+                        else if (value.GetType() == typeof(HybridDictionary))
+                        {
                             writer.Write(Token_HybridDictionary);
                             canSerializeDictionary = true;
                         }
 
-                        if (canSerializeDictionary) {
+                        if (canSerializeDictionary)
+                        {
                             IDictionary table = (IDictionary)value;
 
                             writer.WriteEncoded(table.Count);
-                            if (table.Count != 0) {
-                                foreach (DictionaryEntry entry in table) {
+                            if (table.Count != 0)
+                            {
+                                foreach (DictionaryEntry entry in table)
+                                {
                                     objectStack.Push(entry.Value);
                                     objectStack.Push(entry.Key);
                                 }
@@ -1026,13 +1217,15 @@ namespace System.Web.UI {
                         }
                     }
 
-                    if (value is EventValidationStore) {
+                    if (value is EventValidationStore)
+                    {
                         writer.Write(Token_EventValidationStore);
                         ((EventValidationStore)value).SerializeTo(writer.BaseStream);
                         continue;
                     }
 
-                    if (value is Type) {
+                    if (value is Type)
+                    {
                         writer.Write(Token_Type);
                         SerializeType(writer, (Type)value);
                         continue;
@@ -1040,19 +1233,24 @@ namespace System.Web.UI {
 
                     Type valueType = value.GetType();
 
-                    if (value is Array) {
+                    if (value is Array)
+                    {
                         // We only support Arrays with rank 1 (No multi dimensional arrays
-                        if (((Array)value).Rank > 1) {
+                        if (((Array)value).Rank > 1)
+                        {
                             continue;
                         }
 
                         Type underlyingType = valueType.GetElementType();
 
-                        if (underlyingType == typeof(string)) {
+                        if (underlyingType == typeof(string))
+                        {
                             string[] strings = (string[])value;
                             bool containsNulls = false;
-                            for (int i = 0; i < strings.Length; i++) {
-                                if (strings[i] == null) {
+                            for (int i = 0; i < strings.Length; i++)
+                            {
+                                if (strings[i] == null)
+                                {
                                     // Will have to treat these as generic arrays since we
                                     // can't represent nulls in the binary stream, without
                                     // writing out string token markers.
@@ -1062,10 +1260,12 @@ namespace System.Web.UI {
                                 }
                             }
 
-                            if (!containsNulls) {
+                            if (!containsNulls)
+                            {
                                 writer.Write(Token_StringArray);
                                 writer.WriteEncoded(strings.Length);
-                                for (int i = 0; i < strings.Length; i++) {
+                                for (int i = 0; i < strings.Length; i++)
+                                {
                                     writer.Write(strings[i]);
                                 }
                                 continue;
@@ -1075,14 +1275,18 @@ namespace System.Web.UI {
                         Array values = (Array)value;
 
                         // Optimize for sparse arrays, if the array is more than 3/4 nulls
-                        if (values.Length > 3) {
+                        if (values.Length > 3)
+                        {
                             int sparseThreshold = (values.Length / 4) + 1;
                             int numValues = 0;
                             List<int> items = new List<int>(sparseThreshold);
-                            for (int i = 0; i < values.Length; ++i) {
-                                if (values.GetValue(i) != null) {
+                            for (int i = 0; i < values.Length; ++i)
+                            {
+                                if (values.GetValue(i) != null)
+                                {
                                     ++numValues;
-                                    if (numValues >= sparseThreshold) {
+                                    if (numValues >= sparseThreshold)
+                                    {
                                         break;
                                     }
                                     items.Add(i);
@@ -1090,7 +1294,8 @@ namespace System.Web.UI {
                             }
 
                             // We have enough nulls to use sparse array format <index, value, index, value, ...>
-                            if (numValues < sparseThreshold) {
+                            if (numValues < sparseThreshold)
+                            {
                                 writer.Write(Token_SparseArray);
                                 SerializeType(writer, underlyingType);
 
@@ -1098,7 +1303,8 @@ namespace System.Web.UI {
                                 writer.WriteEncoded(numValues);
 
                                 // Now we need to just serialize pairs representing the index, and the item
-                                foreach (int index in items) {
+                                foreach (int index in items)
+                                {
                                     writer.WriteEncoded(index);
                                     SerializeValue(writer, values.GetValue(index));
                                 }
@@ -1111,16 +1317,19 @@ namespace System.Web.UI {
                         SerializeType(writer, underlyingType);
 
                         writer.WriteEncoded(values.Length);
-                        for (int i = values.Length - 1; i >= 0; i--) {
+                        for (int i = values.Length - 1; i >= 0; i--)
+                        {
                             objectStack.Push(values.GetValue(i));
                         }
 
                         continue;
                     }
 
-                    if (valueType.IsEnum) {
+                    if (valueType.IsEnum)
+                    {
                         Type underlyingType = Enum.GetUnderlyingType(valueType);
-                        if (underlyingType == typeof(int)) {
+                        if (underlyingType == typeof(int))
+                        {
                             writer.Write(Token_IntEnum);
                             SerializeType(writer, valueType);
                             writer.WriteEncoded((int)value);
@@ -1129,30 +1338,37 @@ namespace System.Web.UI {
                         }
                     }
 
-                    if (valueType == typeof(Color)) {
+                    if (valueType == typeof(Color))
+                    {
                         Color c = (Color)value;
-                        if (c.IsEmpty) {
+                        if (c.IsEmpty)
+                        {
                             writer.Write(Token_EmptyColor);
                             continue;
                         }
-                        if (!c.IsNamedColor) {
+                        if (!c.IsNamedColor)
+                        {
                             writer.Write(Token_Color);
                             writer.Write(c.ToArgb());
                             continue;
                         }
-                        else {
+                        else
+                        {
                             writer.Write(Token_KnownColor);
                             writer.WriteEncoded((int)c.ToKnownColor());
                             continue;
                         }
                     }
 
-                    if (value is Unit) {
+                    if (value is Unit)
+                    {
                         Unit uval = (Unit)value;
-                        if (uval.IsEmpty) {
+                        if (uval.IsEmpty)
+                        {
                             writer.Write(Token_EmptyUnit);
                         }
-                        else {
+                        else
+                        {
                             writer.Write(Token_Unit);
                             writer.Write(uval.Value);
                             writer.Write((int)uval.Type);
@@ -1165,14 +1381,19 @@ namespace System.Web.UI {
                     // binary serialization if all else fails
 
                     TypeConverter converter = TypeDescriptor.GetConverter(valueType);
-                    bool canConvert = System.Web.UI.Util.CanConvertToFrom(converter, typeof(string));
+                    bool canConvert = System.Web.UI.Util.CanConvertToFrom(
+                        converter,
+                        typeof(string)
+                    );
 
-                    if (canConvert) {
+                    if (canConvert)
+                    {
                         writer.Write(Token_StringFormatted);
                         SerializeType(writer, valueType);
                         writer.Write(converter.ConvertToInvariantString(null, value));
                     }
-                    else {
+                    else
+                    {
                         IFormatter formatter = new BinaryFormatter();
                         MemoryStream ms = new MemoryStream(256);
                         formatter.Serialize(ms, value);
@@ -1182,27 +1403,36 @@ namespace System.Web.UI {
 
                         writer.Write(Token_BinarySerialized);
                         writer.WriteEncoded(length);
-                        if (buffer.Length != 0) {
+                        if (buffer.Length != 0)
+                        {
                             writer.Write(buffer, 0, (int)length);
                         }
                     }
-                }
-                while (objectStack.Count > 0);
+                } while (objectStack.Count > 0);
             }
-            catch (Exception serializationException) {
+            catch (Exception serializationException)
+            {
                 if (value != null)
-                    throw new ArgumentException(SR.GetString(SR.ErrorSerializingValue, value.ToString(), value.GetType().FullName),
-                                            serializationException);
+                    throw new ArgumentException(
+                        SR.GetString(
+                            SR.ErrorSerializingValue,
+                            value.ToString(),
+                            value.GetType().FullName
+                        ),
+                        serializationException
+                    );
                 throw serializationException;
             }
         }
 
         #region Implementation of IStateFormatter
-        object IStateFormatter.Deserialize(string serializedState) {
+        object IStateFormatter.Deserialize(string serializedState)
+        {
             return Deserialize(serializedState);
         }
 
-        string IStateFormatter.Serialize(object state) {
+        string IStateFormatter.Serialize(object state)
+        {
             return Serialize(state);
         }
         #endregion
@@ -1210,53 +1440,47 @@ namespace System.Web.UI {
         #region Implementation of IFormatter
 
         /// <internalonly/>
-        SerializationBinder IFormatter.Binder {
-            get {
-                return null;
-            }
-            set {
-            }
+        SerializationBinder IFormatter.Binder
+        {
+            get { return null; }
+            set { }
         }
 
-
         /// <internalonly/>
-        StreamingContext IFormatter.Context {
-            get {
-                return new StreamingContext(StreamingContextStates.All);
-            }
-            set {
-            }
+        StreamingContext IFormatter.Context
+        {
+            get { return new StreamingContext(StreamingContextStates.All); }
+            set { }
         }
 
-
         /// <internalonly/>
-        ISurrogateSelector IFormatter.SurrogateSelector {
-            get {
-                return null;
-            }
-            set {
-            }
+        ISurrogateSelector IFormatter.SurrogateSelector
+        {
+            get { return null; }
+            set { }
         }
 
-
         /// <internalonly/>
-        object IFormatter.Deserialize(Stream serializationStream) {
+        object IFormatter.Deserialize(Stream serializationStream)
+        {
             return Deserialize(serializationStream);
         }
 
-
         /// <internalonly/>
-        void IFormatter.Serialize(Stream serializationStream, object stateGraph) {
+        void IFormatter.Serialize(Stream serializationStream, object stateGraph)
+        {
             Serialize(serializationStream, stateGraph);
         }
         #endregion
 
         #region IStateFormatter2 Members
-        object IStateFormatter2.Deserialize(string serializedState, Purpose purpose) {
+        object IStateFormatter2.Deserialize(string serializedState, Purpose purpose)
+        {
             return Deserialize(serializedState, purpose);
         }
 
-        string IStateFormatter2.Serialize(object state, Purpose purpose) {
+        string IStateFormatter2.Serialize(object state, Purpose purpose)
+        {
             return Serialize(state, purpose);
         }
         #endregion
@@ -1264,30 +1488,32 @@ namespace System.Web.UI {
         /// <devdoc>
         /// Custom BinaryReader used during the deserialization.
         /// </devdoc>
-        private sealed class SerializerBinaryReader : BinaryReader {
+        private sealed class SerializerBinaryReader : BinaryReader
+        {
+            public SerializerBinaryReader(Stream stream)
+                : base(stream) { }
 
-            public SerializerBinaryReader(Stream stream) : base(stream) {
-            }
-
-            public int ReadEncodedInt32() {
+            public int ReadEncodedInt32()
+            {
                 return Read7BitEncodedInt();
             }
         }
 
-
         /// <devdoc>
         /// Custom BinaryWriter used during the serialization.
         /// </devdoc>
-        private sealed class SerializerBinaryWriter : BinaryWriter {
+        private sealed class SerializerBinaryWriter : BinaryWriter
+        {
+            public SerializerBinaryWriter(Stream stream)
+                : base(stream) { }
 
-            public SerializerBinaryWriter(Stream stream) : base(stream) {
-            }
-
-            public void WriteEncoded(int value) {
-                // 
+            public void WriteEncoded(int value)
+            {
+                //
 
                 uint v = (uint)value;
-                while (v >= 0x80) {
+                while (v >= 0x80)
+                {
                     Write((byte)(v | 0x80));
                     v >>= 7;
                 }
@@ -1296,4 +1522,3 @@ namespace System.Web.UI {
         }
     }
 }
-

@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -20,15 +20,15 @@ namespace System.Linq.Parallel
     /// <summary>
     /// An inlined average aggregation operator and its enumerator, for Nullable decimals.
     /// </summary>
-    internal sealed class NullableDecimalAverageAggregationOperator : InlinedAggregationOperator<decimal?, Pair<decimal, long>, decimal?>
+    internal sealed class NullableDecimalAverageAggregationOperator
+        : InlinedAggregationOperator<decimal?, Pair<decimal, long>, decimal?>
     {
         //---------------------------------------------------------------------------------------
         // Constructs a new instance of an average associative operator.
         //
 
-        internal NullableDecimalAverageAggregationOperator(IEnumerable<decimal?> child) : base(child)
-        {
-        }
+        internal NullableDecimalAverageAggregationOperator(IEnumerable<decimal?> child)
+            : base(child) { }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the
@@ -40,11 +40,16 @@ namespace System.Linq.Parallel
 
         protected override decimal? InternalAggregate(ref Exception singularExceptionToThrow)
         {
-            // Because the final reduction is typically much cheaper than the intermediate 
+            // Because the final reduction is typically much cheaper than the intermediate
             // reductions over the individual partitions, and because each parallel partition
             // will do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<Pair<decimal, long>> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<Pair<decimal, long>> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // If the sequence was empty, return null right away.
                 if (!enumerator.MoveNext())
@@ -74,9 +79,18 @@ namespace System.Linq.Parallel
         //
 
         protected override QueryOperatorEnumerator<Pair<decimal, long>, int> CreateEnumerator<TKey>(
-            int index, int count, QueryOperatorEnumerator<decimal?, TKey> source, object sharedData, CancellationToken cancellationToken)
+            int index,
+            int count,
+            QueryOperatorEnumerator<decimal?, TKey> source,
+            object sharedData,
+            CancellationToken cancellationToken
+        )
         {
-            return new NullableDecimalAverageAggregationOperatorEnumerator<TKey>(source, index, cancellationToken);
+            return new NullableDecimalAverageAggregationOperatorEnumerator<TKey>(
+                source,
+                index,
+                cancellationToken
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -84,7 +98,8 @@ namespace System.Linq.Parallel
         // (possibly partitioned) data source.
         //
 
-        private class NullableDecimalAverageAggregationOperatorEnumerator<TKey> : InlinedAggregationOperatorEnumerator<Pair<decimal, long>>
+        private class NullableDecimalAverageAggregationOperatorEnumerator<TKey>
+            : InlinedAggregationOperatorEnumerator<Pair<decimal, long>>
         {
             private QueryOperatorEnumerator<decimal?, TKey> m_source; // The source data.
 
@@ -92,9 +107,12 @@ namespace System.Linq.Parallel
             // Instantiates a new aggregation operator.
             //
 
-            internal NullableDecimalAverageAggregationOperatorEnumerator(QueryOperatorEnumerator<decimal?, TKey> source, int partitionIndex,
-                CancellationToken cancellationToken) :
-                base(partitionIndex, cancellationToken)
+            internal NullableDecimalAverageAggregationOperatorEnumerator(
+                QueryOperatorEnumerator<decimal?, TKey> source,
+                int partitionIndex,
+                CancellationToken cancellationToken
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Contract.Assert(source != null);
                 m_source = source;

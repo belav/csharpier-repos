@@ -19,9 +19,9 @@ namespace System.Web.Mvc.Async
         private int _timeout = 45 * 1000;
 
         public AsyncManager()
-            : this(null /* syncContext */)
-        {
-        }
+            : this(
+                null /* syncContext */
+            ) { }
 
         public AsyncManager(SynchronizationContext syncContext)
         {

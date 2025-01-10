@@ -14,12 +14,23 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var blocks2 = new[]
             {
                 new BatchedJoinBlock<int, string>(1),
-                new BatchedJoinBlock<int, string>(2, new GroupingDataflowBlockOptions {
-                    MaxNumberOfGroups = 1 }),
-                new BatchedJoinBlock<int, string>(3, new GroupingDataflowBlockOptions {
-                    MaxMessagesPerTask = 1 }),
-                new BatchedJoinBlock<int, string>(4, new GroupingDataflowBlockOptions {
-                    MaxMessagesPerTask = 1, CancellationToken = new CancellationToken(true), MaxNumberOfGroups = 1 })
+                new BatchedJoinBlock<int, string>(
+                    2,
+                    new GroupingDataflowBlockOptions { MaxNumberOfGroups = 1 }
+                ),
+                new BatchedJoinBlock<int, string>(
+                    3,
+                    new GroupingDataflowBlockOptions { MaxMessagesPerTask = 1 }
+                ),
+                new BatchedJoinBlock<int, string>(
+                    4,
+                    new GroupingDataflowBlockOptions
+                    {
+                        MaxMessagesPerTask = 1,
+                        CancellationToken = new CancellationToken(true),
+                        MaxNumberOfGroups = 1,
+                    }
+                ),
             };
             for (int i = 0; i < blocks2.Length; i++)
             {
@@ -31,12 +42,23 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var blocks3 = new[]
             {
                 new BatchedJoinBlock<int, string, double>(1),
-                new BatchedJoinBlock<int, string, double>(2, new GroupingDataflowBlockOptions {
-                    MaxNumberOfGroups = 1 }),
-                new BatchedJoinBlock<int, string, double>(3, new GroupingDataflowBlockOptions {
-                    MaxMessagesPerTask = 1 }),
-                new BatchedJoinBlock<int, string, double>(4, new GroupingDataflowBlockOptions {
-                    MaxMessagesPerTask = 1, CancellationToken = new CancellationToken(true), MaxNumberOfGroups = 1 })
+                new BatchedJoinBlock<int, string, double>(
+                    2,
+                    new GroupingDataflowBlockOptions { MaxNumberOfGroups = 1 }
+                ),
+                new BatchedJoinBlock<int, string, double>(
+                    3,
+                    new GroupingDataflowBlockOptions { MaxMessagesPerTask = 1 }
+                ),
+                new BatchedJoinBlock<int, string, double>(
+                    4,
+                    new GroupingDataflowBlockOptions
+                    {
+                        MaxMessagesPerTask = 1,
+                        CancellationToken = new CancellationToken(true),
+                        MaxNumberOfGroups = 1,
+                    }
+                ),
             };
             for (int i = 0; i < blocks3.Length; i++)
             {
@@ -51,43 +73,99 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => new BatchedJoinBlock<int, string>(-1));
             Assert.Throws<ArgumentNullException>(() => new BatchedJoinBlock<int, string>(2, null));
-            AssertExtensions.Throws<ArgumentException>("dataflowBlockOptions", () => new BatchedJoinBlock<int, string>(2, new GroupingDataflowBlockOptions { Greedy = false }));
-            AssertExtensions.Throws<ArgumentException>("dataflowBlockOptions", () => new BatchedJoinBlock<int, string>(2, new GroupingDataflowBlockOptions { BoundedCapacity = 2 }));
-            Assert.Throws<ArgumentNullException>(() => ((IDataflowBlock)new BatchedJoinBlock<int, string>(2)).Fault(null));
-            Assert.Throws<ArgumentNullException>(() => new BatchedJoinBlock<int, string>(2).Target1.Fault(null));
+            AssertExtensions.Throws<ArgumentException>(
+                "dataflowBlockOptions",
+                () =>
+                    new BatchedJoinBlock<int, string>(
+                        2,
+                        new GroupingDataflowBlockOptions { Greedy = false }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "dataflowBlockOptions",
+                () =>
+                    new BatchedJoinBlock<int, string>(
+                        2,
+                        new GroupingDataflowBlockOptions { BoundedCapacity = 2 }
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => ((IDataflowBlock)new BatchedJoinBlock<int, string>(2)).Fault(null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => new BatchedJoinBlock<int, string>(2).Target1.Fault(null)
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new BatchedJoinBlock<int, string, double>(-1));
-            Assert.Throws<ArgumentNullException>(() => new BatchedJoinBlock<int, string, double>(2, null));
-            AssertExtensions.Throws<ArgumentException>("dataflowBlockOptions", () => new BatchedJoinBlock<int, string, double>(2, new GroupingDataflowBlockOptions { Greedy = false }));
-            AssertExtensions.Throws<ArgumentException>("dataflowBlockOptions", () => new BatchedJoinBlock<int, string, double>(2, new GroupingDataflowBlockOptions { BoundedCapacity = 2 }));
-            Assert.Throws<ArgumentNullException>(() => ((IDataflowBlock)new BatchedJoinBlock<int, string, double>(2)).Fault(null));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new BatchedJoinBlock<int, string, double>(-1)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => new BatchedJoinBlock<int, string, double>(2, null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "dataflowBlockOptions",
+                () =>
+                    new BatchedJoinBlock<int, string, double>(
+                        2,
+                        new GroupingDataflowBlockOptions { Greedy = false }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "dataflowBlockOptions",
+                () =>
+                    new BatchedJoinBlock<int, string, double>(
+                        2,
+                        new GroupingDataflowBlockOptions { BoundedCapacity = 2 }
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => ((IDataflowBlock)new BatchedJoinBlock<int, string, double>(2)).Fault(null)
+            );
 
             DataflowTestHelpers.TestArgumentsExceptions(new BatchedJoinBlock<int, string>(1));
-            DataflowTestHelpers.TestArgumentsExceptions(new BatchedJoinBlock<int, string, double>(1));
+            DataflowTestHelpers.TestArgumentsExceptions(
+                new BatchedJoinBlock<int, string, double>(1)
+            );
         }
 
         [Fact]
         public void TestToString()
         {
             DataflowTestHelpers.TestToString(nameFormat =>
-                nameFormat != null ?
-                    new BatchedJoinBlock<int, string>(2, new GroupingDataflowBlockOptions() { NameFormat = nameFormat }) :
-                    new BatchedJoinBlock<int, string>(2));
+                nameFormat != null
+                    ? new BatchedJoinBlock<int, string>(
+                        2,
+                        new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
+                    )
+                    : new BatchedJoinBlock<int, string>(2)
+            );
 
             DataflowTestHelpers.TestToString(nameFormat =>
-                nameFormat != null ?
-                    new BatchedJoinBlock<int, string, double>(3, new GroupingDataflowBlockOptions() { NameFormat = nameFormat }) :
-                    new BatchedJoinBlock<int, string, double>(3));
+                nameFormat != null
+                    ? new BatchedJoinBlock<int, string, double>(
+                        3,
+                        new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
+                    )
+                    : new BatchedJoinBlock<int, string, double>(3)
+            );
         }
 
         [Fact]
         public async Task TestCompletionTask()
         {
-            await DataflowTestHelpers.TestCompletionTask(() => new BatchedJoinBlock<int, string>(2));
-            await DataflowTestHelpers.TestCompletionTask(() => new BatchedJoinBlock<int, string, double>(2));
+            await DataflowTestHelpers.TestCompletionTask(
+                () => new BatchedJoinBlock<int, string>(2)
+            );
+            await DataflowTestHelpers.TestCompletionTask(
+                () => new BatchedJoinBlock<int, string, double>(2)
+            );
 
-            await Assert.ThrowsAsync<NotSupportedException>(() => new BatchedJoinBlock<int, string>(2).Target1.Completion);
-            await Assert.ThrowsAsync<NotSupportedException>(() => new BatchedJoinBlock<int, string, double>(2).Target1.Completion);
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => new BatchedJoinBlock<int, string>(2).Target1.Completion
+            );
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => new BatchedJoinBlock<int, string, double>(2).Target1.Completion
+            );
         }
 
         [Fact]
@@ -185,7 +263,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestUnbalanced2()
         {
-            const int Iters = 10, NumBatches = 2;
+            const int Iters = 10,
+                NumBatches = 2;
             int batchSize = Iters / NumBatches;
 
             var block = new BatchedJoinBlock<string, int>(batchSize);
@@ -216,7 +295,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestUnbalanced3()
         {
-            const int Iters = 10, NumBatches = 2;
+            const int Iters = 10,
+                NumBatches = 2;
             int batchSize = Iters / NumBatches;
             Tuple<IList<int>, IList<string>, IList<double>> item;
 
@@ -279,8 +359,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var cts = new CancellationTokenSource();
             cts.Cancel();
 
-            var b = new BatchedJoinBlock<int, int>(42,
-                new GroupingDataflowBlockOptions { CancellationToken = cts.Token, MaxNumberOfGroups = 1 });
+            var b = new BatchedJoinBlock<int, int>(
+                42,
+                new GroupingDataflowBlockOptions
+                {
+                    CancellationToken = cts.Token,
+                    MaxNumberOfGroups = 1,
+                }
+            );
 
             Tuple<IList<int>, IList<int>> ignoredValue;
             IList<Tuple<IList<int>, IList<int>>> ignoredValues;
@@ -312,13 +398,21 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var cts = new CancellationTokenSource();
             cts.Cancel();
 
-            var b = new BatchedJoinBlock<int, int, int>(42,
-                new GroupingDataflowBlockOptions { CancellationToken = cts.Token, MaxNumberOfGroups = 1 });
+            var b = new BatchedJoinBlock<int, int, int>(
+                42,
+                new GroupingDataflowBlockOptions
+                {
+                    CancellationToken = cts.Token,
+                    MaxNumberOfGroups = 1,
+                }
+            );
 
             Tuple<IList<int>, IList<int>, IList<int>> ignoredValue;
             IList<Tuple<IList<int>, IList<int>, IList<int>>> ignoredValues;
 
-            Assert.NotNull(b.LinkTo(new ActionBlock<Tuple<IList<int>, IList<int>, IList<int>>>(delegate { })));
+            Assert.NotNull(
+                b.LinkTo(new ActionBlock<Tuple<IList<int>, IList<int>, IList<int>>>(delegate { }))
+            );
             Assert.False(b.Target1.Post(42));
             Assert.False(b.Target2.Post(42));
 
@@ -452,7 +546,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestOfferMessage2()
         {
-            Func<ITargetBlock<int>> generator = () => {
+            Func<ITargetBlock<int>> generator = () =>
+            {
                 var b = new BatchedJoinBlock<int, int>(1);
                 return b.Target1;
             };
@@ -464,7 +559,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestOfferMessage3()
         {
-            Func<ITargetBlock<int>> generator = () => {
+            Func<ITargetBlock<int>> generator = () =>
+            {
                 var b = new BatchedJoinBlock<int, int, int>(1);
                 return b.Target1;
             };
@@ -478,7 +574,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             const int MaxGroups = 2;
 
-            var b2 = new BatchedJoinBlock<int, int>(1, new GroupingDataflowBlockOptions { MaxNumberOfGroups = MaxGroups });
+            var b2 = new BatchedJoinBlock<int, int>(
+                1,
+                new GroupingDataflowBlockOptions { MaxNumberOfGroups = MaxGroups }
+            );
             b2.Target1.PostRange(0, MaxGroups);
             Assert.False(b2.Target1.Post(42));
             Assert.False(b2.Target2.Post(42));
@@ -487,7 +586,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.Equal(expected: MaxGroups, actual: items2.Count);
             await b2.Completion;
 
-            var b3 = new BatchedJoinBlock<int, int, int>(1, new GroupingDataflowBlockOptions { MaxNumberOfGroups = MaxGroups });
+            var b3 = new BatchedJoinBlock<int, int, int>(
+                1,
+                new GroupingDataflowBlockOptions { MaxNumberOfGroups = MaxGroups }
+            );
             b3.Target1.PostRange(0, MaxGroups);
             Assert.False(b3.Target1.Post(42));
             Assert.False(b3.Target2.Post(42));
@@ -497,6 +599,5 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.Equal(expected: MaxGroups, actual: items3.Count);
             await b3.Completion;
         }
-
     }
 }

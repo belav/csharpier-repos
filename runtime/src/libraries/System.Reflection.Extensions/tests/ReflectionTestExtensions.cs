@@ -32,7 +32,8 @@ namespace System.Reflection.Tests
             int count = 0;
             foreach (T i in items)
             {
-                if (predicate(i)) count++;
+                if (predicate(i))
+                    count++;
             }
             return count;
         }

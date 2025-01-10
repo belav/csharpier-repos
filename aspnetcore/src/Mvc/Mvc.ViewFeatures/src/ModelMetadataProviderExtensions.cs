@@ -23,7 +23,8 @@ public static class ModelMetadataProviderExtensions
     public static ModelExplorer GetModelExplorerForType(
         this IModelMetadataProvider provider,
         Type modelType,
-        object model)
+        object model
+    )
     {
         ArgumentNullException.ThrowIfNull(provider);
         ArgumentNullException.ThrowIfNull(modelType);

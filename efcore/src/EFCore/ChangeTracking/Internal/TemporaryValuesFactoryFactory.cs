@@ -13,9 +13,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 /// </summary>
 public class TemporaryValuesFactoryFactory : SidecarValuesFactoryFactory
 {
-    private TemporaryValuesFactoryFactory()
-    {
-    }
+    private TemporaryValuesFactoryFactory() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -35,13 +33,16 @@ public class TemporaryValuesFactoryFactory : SidecarValuesFactoryFactory
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type? entityType,
         Expression? parameter,
         Type[] types,
-        IList<IPropertyBase?> propertyBases)
+        IList<IPropertyBase?> propertyBases
+    )
     {
         var constructorExpression = Expression.Convert(
             Expression.New(
                 Snapshot.CreateSnapshotType(types).GetDeclaredConstructor(types)!,
-                types.Select(Expression.Default).ToArray()),
-            typeof(ISnapshot));
+                types.Select(Expression.Default).ToArray()
+            ),
+            typeof(ISnapshot)
+        );
 
         return constructorExpression;
     }

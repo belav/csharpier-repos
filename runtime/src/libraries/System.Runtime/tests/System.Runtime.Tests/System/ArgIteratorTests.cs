@@ -10,14 +10,23 @@ namespace System.Tests
     public static class ArgIteratorTests
     {
         [ActiveIssue("https://github.com/dotnet/runtime/issues/39343", TestPlatforms.Browser)]
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsArgIteratorSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsArgIteratorSupported)
+        )]
         public static void ArgIterator_GetRemainingCount_GetNextArg()
         {
             object[] result = GetAllArgs("a", "r", "g", "s", __arglist(true, "hello", 0.42));
-            Assert.Equal(new object[] {"a", "r", "g", "s", true, "hello", 0.42}, result);
+            Assert.Equal(new object[] { "a", "r", "g", "s", true, "hello", 0.42 }, result);
         }
 
-        private static object[] GetAllArgs(Object arg0, Object arg1, Object arg2, Object arg3, __arglist)
+        private static object[] GetAllArgs(
+            Object arg0,
+            Object arg1,
+            Object arg2,
+            Object arg3,
+            __arglist
+        )
         {
             ArgIterator args = new ArgIterator(__arglist);
             int argCount = args.GetRemainingCount() + 4;
@@ -39,7 +48,10 @@ namespace System.Tests
             return objArgs;
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsArgIteratorSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsArgIteratorSupported)
+        )]
         public static void ArgIterator_GetNextArgType()
         {
             var types = new Type[]
@@ -52,23 +64,27 @@ namespace System.Tests
                 typeof(float),
                 typeof(double),
                 typeof(DummyClass),
-                typeof(DummyStruct)
+                typeof(DummyStruct),
             };
 
-            VerifyTypes(types, __arglist(
-                default(string),
-                default(byte),
-                default(short),
-                default(long),
-                default(int),
-                default(float),
-                default(double),
-                default(DummyClass),
-                default(DummyStruct)
-            ));
+            VerifyTypes(
+                types,
+                __arglist(
+                    default(string),
+                    default(byte),
+                    default(short),
+                    default(long),
+                    default(int),
+                    default(float),
+                    default(double),
+                    default(DummyClass),
+                    default(DummyStruct)
+                )
+            );
         }
 
         private class DummyClass { }
+
         private struct DummyStruct { }
 
         private static void VerifyTypes(Type[] types, __arglist)
@@ -87,23 +103,35 @@ namespace System.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsArgIteratorNotSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsArgIteratorNotSupported)
+        )]
         public static unsafe void ArgIterator_Throws_PlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => new ArgIterator(new RuntimeArgumentHandle()));
-            Assert.Throws<PlatformNotSupportedException>(() => {
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new ArgIterator(new RuntimeArgumentHandle())
+            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+            {
                 fixed (void* p = "test")
                 {
                     new ArgIterator(new RuntimeArgumentHandle(), p);
                 }
             });
             Assert.Throws<PlatformNotSupportedException>(() => new ArgIterator().End());
-            Assert.Throws<PlatformNotSupportedException>(() => new ArgIterator().Equals(new object()));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new ArgIterator().Equals(new object())
+            );
             Assert.Throws<PlatformNotSupportedException>(() => new ArgIterator().GetHashCode());
             Assert.Throws<PlatformNotSupportedException>(() => new ArgIterator().GetNextArg());
-            Assert.Throws<PlatformNotSupportedException>(() => new ArgIterator().GetNextArg(new RuntimeTypeHandle()));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new ArgIterator().GetNextArg(new RuntimeTypeHandle())
+            );
             Assert.Throws<PlatformNotSupportedException>(() => new ArgIterator().GetNextArgType());
-            Assert.Throws<PlatformNotSupportedException>(() => new ArgIterator().GetRemainingCount());
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new ArgIterator().GetRemainingCount()
+            );
         }
     }
 }

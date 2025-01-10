@@ -3,7 +3,6 @@
 
 using System;
 using System.Reflection.PortableExecutable;
-
 using Internal.Text;
 using Internal.TypeSystem.Ecma;
 
@@ -21,7 +20,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _module = module;
         }
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.TextSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.TextSection;
 
         public override bool IsShareable => false;
 
@@ -37,7 +37,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             sb.Append("__StrongNameSignature");
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public int Size => _module.PEReader.PEHeaders.CorHeader.StrongNameSignatureDirectory.Size;
 
@@ -49,15 +50,22 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     data: Array.Empty<byte>(),
                     relocs: Array.Empty<Relocation>(),
                     alignment: 1,
-                    definedSymbols: new ISymbolDefinitionNode[] { this });
+                    definedSymbols: new ISymbolDefinitionNode[] { this }
+                );
             }
 
             ObjectDataBuilder builder = new ObjectDataBuilder(factory, relocsOnly);
             builder.RequireInitialAlignment(4);
             builder.AddSymbol(this);
 
-            DirectoryEntry strongNameDirectory = _module.PEReader.PEHeaders.CorHeader.StrongNameSignatureDirectory;
-            PEMemoryBlock block = _module.PEReader.GetSectionData(strongNameDirectory.RelativeVirtualAddress);
+            DirectoryEntry strongNameDirectory = _module
+                .PEReader
+                .PEHeaders
+                .CorHeader
+                .StrongNameSignatureDirectory;
+            PEMemoryBlock block = _module.PEReader.GetSectionData(
+                strongNameDirectory.RelativeVirtualAddress
+            );
             builder.EmitBytes(block.GetReader().ReadBytes(strongNameDirectory.Size));
 
             return builder.ToObjectData();

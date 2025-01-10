@@ -18,6 +18,7 @@ namespace UnsafeTesting
 
             return Unsafe.As<Vector4, Quaternion>(ref result);
         }
+
         public static bool QuaternionAddTest()
         {
             Quaternion a = new Quaternion(1.0f, 2.0f, 3.0f, 4.0f);
@@ -34,6 +35,7 @@ namespace UnsafeTesting
             }
             return true;
         }
+
         [Fact]
         public static int TestEntryPoint()
         {
@@ -48,6 +50,5 @@ namespace UnsafeTesting
                 return -1;
             }
         }
-
     }
 }

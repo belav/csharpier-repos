@@ -1,10 +1,10 @@
-// Copyright (c) Microsoft Corporation. All rights reserved. 
-//  
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
-// WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED 
-// WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. 
-// THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE 
-// AND INFORMATION REMAINS WITH THE USER. 
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+// WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
+// WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE
+// AND INFORMATION REMAINS WITH THE USER.
 
 
 /*********************************************************************
@@ -15,8 +15,8 @@
 namespace System.Workflow.Interop
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.InteropServices;
 
     static class NativeMethods
     {
@@ -229,13 +229,21 @@ namespace System.Workflow.Interop
             return SendMessage(hWndLV, LVM_GETHEADER, IntPtr.Zero, IntPtr.Zero);
         }
 
-        internal static bool Header_GetItem(IntPtr hWndHeader, int index, [In, Out] NativeMethods.HDITEM hdi)
+        internal static bool Header_GetItem(
+            IntPtr hWndHeader,
+            int index,
+            [In, Out] NativeMethods.HDITEM hdi
+        )
         {
             IntPtr success = SendMessage(hWndHeader, HDM_GETITEM, new IntPtr(index), hdi);
             return (success != IntPtr.Zero) ? true : false;
         }
 
-        internal static bool Header_SetItem(IntPtr hWndHeader, int index, [In, Out] NativeMethods.HDITEM hdi)
+        internal static bool Header_SetItem(
+            IntPtr hWndHeader,
+            int index,
+            [In, Out] NativeMethods.HDITEM hdi
+        )
         {
             IntPtr success = SendMessage(hWndHeader, HDM_SETITEM, new IntPtr(index), hdi);
             return (success != IntPtr.Zero) ? true : false;
@@ -253,17 +261,26 @@ namespace System.Workflow.Interop
         [DllImport("gdi32", EntryPoint = "DeleteObject", CharSet = CharSet.Auto)]
         internal static extern bool DeleteObject(IntPtr hObject);
 
-        [System.Runtime.InteropServices.DllImport("gdi32.dll", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [System.Runtime.InteropServices.DllImport(
+            "gdi32.dll",
+            ExactSpelling = true,
+            CharSet = System.Runtime.InteropServices.CharSet.Auto
+        )]
         public static extern int GetDeviceCaps(IntPtr hDC, int nIndex);
 
         [DllImport("user32", CharSet = CharSet.Auto)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, [In, Out] NativeMethods.HDITEM lParam);
+        public static extern IntPtr SendMessage(
+            IntPtr hWnd,
+            int msg,
+            IntPtr wParam,
+            [In, Out] NativeMethods.HDITEM lParam
+        );
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public extern static bool IsWindowVisible(IntPtr hWnd);
+        public static extern bool IsWindowVisible(IntPtr hWnd);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public extern static IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport("gdi32.dll", SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern bool LineTo(HandleRef hdc, int x, int y);
@@ -274,31 +291,78 @@ namespace System.Workflow.Interop
         [DllImport("gdi32.dll", SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern IntPtr SelectObject(HandleRef hdc, HandleRef obj);
 
-        [DllImport("gdi32.dll", SetLastError = true, ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport(
+            "gdi32.dll",
+            SetLastError = true,
+            ExactSpelling = true,
+            CharSet = System.Runtime.InteropServices.CharSet.Auto
+        )]
         public static extern IntPtr GetCurrentObject(HandleRef hDC, uint uObjectType);
 
-        [DllImport("gdi32.dll", SetLastError = true, ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport(
+            "gdi32.dll",
+            SetLastError = true,
+            ExactSpelling = true,
+            CharSet = System.Runtime.InteropServices.CharSet.Auto
+        )]
         public static extern int DeleteObject(HandleRef hObject);
 
-        [DllImport("gdi32.dll", SetLastError = true, ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-        public static extern IntPtr ExtCreatePen(int style, int nWidth, LOGBRUSH logbrush, int styleArrayLength, int[] styleArray);
+        [DllImport(
+            "gdi32.dll",
+            SetLastError = true,
+            ExactSpelling = true,
+            CharSet = System.Runtime.InteropServices.CharSet.Auto
+        )]
+        public static extern IntPtr ExtCreatePen(
+            int style,
+            int nWidth,
+            LOGBRUSH logbrush,
+            int styleArrayLength,
+            int[] styleArray
+        );
 
-        [DllImport("gdi32.dll", SetLastError = true, ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport(
+            "gdi32.dll",
+            SetLastError = true,
+            ExactSpelling = true,
+            CharSet = System.Runtime.InteropServices.CharSet.Auto
+        )]
         public static extern int SetWorldTransform(HandleRef hdc, XFORM xform);
 
-        [DllImport("gdi32.dll", SetLastError = true, ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport(
+            "gdi32.dll",
+            SetLastError = true,
+            ExactSpelling = true,
+            CharSet = System.Runtime.InteropServices.CharSet.Auto
+        )]
         public static extern int SetGraphicsMode(HandleRef hdc, int iMode);
 
         [DllImport("user32.dll")]
-        internal static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, ref TOOLINFO ti);
+        internal static extern IntPtr SendMessage(
+            IntPtr hWnd,
+            int Msg,
+            IntPtr wParam,
+            ref TOOLINFO ti
+        );
 
         [DllImport("user32.dll")]
         internal static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, ref RECT rc);
 
         [DllImport("user32.dll")]
-        internal static extern int SetWindowPos(IntPtr hWnd, IntPtr hwndInsertAfter, int x, int y, int width, int height, int flags);
+        internal static extern int SetWindowPos(
+            IntPtr hWnd,
+            IntPtr hwndInsertAfter,
+            int x,
+            int y,
+            int width,
+            int height,
+            int flags
+        );
 
-        [System.Runtime.InteropServices.ComVisible(false), StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+        [
+            System.Runtime.InteropServices.ComVisible(false),
+            StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)
+        ]
         internal class HDITEM
         {
             public int mask = 0;
@@ -325,10 +389,7 @@ namespace System.Workflow.Interop
             public float eDx = 0.0f;
             public float eDy = 0.0f;
 
-            public XFORM()
-            {
-
-            }
+            public XFORM() { }
 
             public XFORM(System.Drawing.Drawing2D.Matrix transform)
             {
@@ -396,7 +457,12 @@ namespace System.Workflow.Interop
             public IntPtr id;
             public RECT rect;
             public IntPtr hinst;
-            [SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources", Justification = "Not a security threat since its used by designer scenarios only")]
+
+            [SuppressMessage(
+                "Microsoft.Reliability",
+                "CA2006:UseSafeHandleToEncapsulateNativeResources",
+                Justification = "Not a security threat since its used by designer scenarios only"
+            )]
             public IntPtr text;
             public IntPtr lParam;
         }

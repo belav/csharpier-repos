@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -23,34 +23,41 @@ namespace System.Data.Services.Client
     using System.Security;
     using System.Security.Permissions;
 
-    
-    
-    
-    
     internal static class ExpressionHelpers
     {
         private static MethodInfo lambdaFunc;
-        internal static LambdaExpression CreateLambda(Expression body, params ParameterExpression[] parameters)
+
+        internal static LambdaExpression CreateLambda(
+            Expression body,
+            params ParameterExpression[] parameters
+        )
         {
             return CreateLambda(InferDelegateType(body, parameters), body, parameters);
         }
 
-        
-        internal static LambdaExpression CreateLambda(Type delegateType, Expression body, params ParameterExpression[] parameters)
+        internal static LambdaExpression CreateLambda(
+            Type delegateType,
+            Expression body,
+            params ParameterExpression[] parameters
+        )
         {
-            
-            
+            var args = new[]
+            {
+                Expression.Parameter(typeof(Expression), "body"),
+                Expression.Parameter(typeof(ParameterExpression[]), "parameters"),
+            };
 
-            var args = new[] { Expression.Parameter(typeof(Expression), "body"), Expression.Parameter(typeof(ParameterExpression[]), "parameters") };
-
-            var lambdaFactory = Expression.Lambda<Func<Expression, ParameterExpression[], LambdaExpression>>(
-                Expression.Call(GetLambdaFactoryMethod(delegateType), args), args
-            );
+            var lambdaFactory = Expression.Lambda<
+                Func<Expression, ParameterExpression[], LambdaExpression>
+            >(Expression.Call(GetLambdaFactoryMethod(delegateType), args), args);
 
             return lambdaFactory.Compile().Invoke(body, parameters);
         }
 
-        private static Type InferDelegateType(Expression body, params ParameterExpression[] parameters)
+        private static Type InferDelegateType(
+            Expression body,
+            params ParameterExpression[] parameters
+        )
         {
             bool isVoid = body.Type == typeof(void);
             int length = (parameters == null) ? 0 : parameters.Length;
@@ -73,28 +80,20 @@ namespace System.Data.Services.Client
 
         private static MethodInfo GetLambdaFactoryMethod(Type delegateType)
         {
-            
             if (lambdaFunc == null)
             {
-                lambdaFunc = new Func<Expression, ParameterExpression[], Expression<Action>>(Expression.Lambda<Action>).Method.GetGenericMethodDefinition();
+                lambdaFunc = new Func<Expression, ParameterExpression[], Expression<Action>>(
+                    Expression.Lambda<Action>
+                ).Method.GetGenericMethodDefinition();
             }
 
-            
             return lambdaFunc.MakeGenericMethod(delegateType);
         }
     }
 #endif
 
-
-
-
     internal abstract class ExpressionVisitor
     {
-
-
-
-
-
         internal virtual Expression Visit(Expression exp)
         {
             if (exp == null)
@@ -165,10 +164,11 @@ namespace System.Data.Services.Client
                 case ExpressionType.ListInit:
                     return this.VisitListInit((ListInitExpression)exp);
                 default:
-                    throw new NotSupportedException(Strings.ALinq_UnsupportedExpression(exp.NodeType.ToString()));
+                    throw new NotSupportedException(
+                        Strings.ALinq_UnsupportedExpression(exp.NodeType.ToString())
+                    );
             }
         }
-
 
         internal virtual MemberBinding VisitBinding(MemberBinding binding)
         {
@@ -181,18 +181,17 @@ namespace System.Data.Services.Client
                 case MemberBindingType.ListBinding:
                     return this.VisitMemberListBinding((MemberListBinding)binding);
                 default:
-                    throw new NotSupportedException(Strings.ALinq_UnsupportedExpression(binding.BindingType.ToString()));
+                    throw new NotSupportedException(
+                        Strings.ALinq_UnsupportedExpression(binding.BindingType.ToString())
+                    );
             }
         }
 
-
-
-
-
-
         internal virtual ElementInit VisitElementInitializer(ElementInit initializer)
         {
-            ReadOnlyCollection<Expression> arguments = this.VisitExpressionList(initializer.Arguments);
+            ReadOnlyCollection<Expression> arguments = this.VisitExpressionList(
+                initializer.Arguments
+            );
             if (arguments != initializer.Arguments)
             {
                 return Expression.ElementInit(initializer.AddMethod, arguments);
@@ -200,11 +199,6 @@ namespace System.Data.Services.Client
 
             return initializer;
         }
-
-
-
-
-
 
         internal virtual Expression VisitUnary(UnaryExpression u)
         {
@@ -216,11 +210,6 @@ namespace System.Data.Services.Client
 
             return u;
         }
-
-
-
-
-
 
         internal virtual Expression VisitBinary(BinaryExpression b)
         {
@@ -235,17 +224,18 @@ namespace System.Data.Services.Client
                 }
                 else
                 {
-                    return Expression.MakeBinary(b.NodeType, left, right, b.IsLiftedToNull, b.Method);
+                    return Expression.MakeBinary(
+                        b.NodeType,
+                        left,
+                        right,
+                        b.IsLiftedToNull,
+                        b.Method
+                    );
                 }
             }
 
             return b;
         }
-
-
-
-
-
 
         internal virtual Expression VisitTypeIs(TypeBinaryExpression b)
         {
@@ -258,20 +248,10 @@ namespace System.Data.Services.Client
             return b;
         }
 
-
-
-
-
-
         internal virtual Expression VisitConstant(ConstantExpression c)
         {
             return c;
         }
-
-
-
-
-
 
         internal virtual Expression VisitConditional(ConditionalExpression c)
         {
@@ -286,20 +266,10 @@ namespace System.Data.Services.Client
             return c;
         }
 
-
-
-
-
-
         internal virtual Expression VisitParameter(ParameterExpression p)
         {
             return p;
         }
-
-
-
-
-
 
         internal virtual Expression VisitMemberAccess(MemberExpression m)
         {
@@ -311,11 +281,6 @@ namespace System.Data.Services.Client
 
             return m;
         }
-
-
-
-
-
 
         internal virtual Expression VisitMethodCall(MethodCallExpression m)
         {
@@ -329,12 +294,9 @@ namespace System.Data.Services.Client
             return m;
         }
 
-
-
-
-
-
-        internal virtual ReadOnlyCollection<Expression> VisitExpressionList(ReadOnlyCollection<Expression> original)
+        internal virtual ReadOnlyCollection<Expression> VisitExpressionList(
+            ReadOnlyCollection<Expression> original
+        )
         {
             List<Expression> list = null;
             for (int i = 0, n = original.Count; i < n; i++)
@@ -364,11 +326,6 @@ namespace System.Data.Services.Client
             return original;
         }
 
-
-
-
-
-
         internal virtual MemberAssignment VisitMemberAssignment(MemberAssignment assignment)
         {
             Expression e = this.Visit(assignment.Expression);
@@ -379,11 +336,6 @@ namespace System.Data.Services.Client
 
             return assignment;
         }
-
-
-
-
-
 
         internal virtual MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding binding)
         {
@@ -396,14 +348,11 @@ namespace System.Data.Services.Client
             return binding;
         }
 
-
-
-
-
-
         internal virtual MemberListBinding VisitMemberListBinding(MemberListBinding binding)
         {
-            IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(binding.Initializers);
+            IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(
+                binding.Initializers
+            );
             if (initializers != binding.Initializers)
             {
                 return Expression.ListBind(binding.Member, initializers);
@@ -412,12 +361,9 @@ namespace System.Data.Services.Client
             return binding;
         }
 
-
-
-
-
-
-        internal virtual IEnumerable<MemberBinding> VisitBindingList(ReadOnlyCollection<MemberBinding> original)
+        internal virtual IEnumerable<MemberBinding> VisitBindingList(
+            ReadOnlyCollection<MemberBinding> original
+        )
         {
             List<MemberBinding> list = null;
             for (int i = 0, n = original.Count; i < n; i++)
@@ -447,12 +393,9 @@ namespace System.Data.Services.Client
             return original;
         }
 
-
-
-
-
-
-        internal virtual IEnumerable<ElementInit> VisitElementInitializerList(ReadOnlyCollection<ElementInit> original)
+        internal virtual IEnumerable<ElementInit> VisitElementInitializerList(
+            ReadOnlyCollection<ElementInit> original
+        )
         {
             List<ElementInit> list = null;
             for (int i = 0, n = original.Count; i < n; i++)
@@ -482,11 +425,6 @@ namespace System.Data.Services.Client
             return original;
         }
 
-
-
-
-
-
         internal virtual Expression VisitLambda(LambdaExpression lambda)
         {
             Expression body = this.Visit(lambda.Body);
@@ -503,11 +441,6 @@ namespace System.Data.Services.Client
 
             return lambda;
         }
-
-
-
-
-
 
         internal virtual NewExpression VisitNew(NewExpression nex)
         {
@@ -527,11 +460,6 @@ namespace System.Data.Services.Client
             return nex;
         }
 
-
-
-
-
-
         internal virtual Expression VisitMemberInit(MemberInitExpression init)
         {
             NewExpression n = this.VisitNew(init.NewExpression);
@@ -544,15 +472,12 @@ namespace System.Data.Services.Client
             return init;
         }
 
-
-
-
-
-
         internal virtual Expression VisitListInit(ListInitExpression init)
         {
             NewExpression n = this.VisitNew(init.NewExpression);
-            IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(init.Initializers);
+            IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(
+                init.Initializers
+            );
             if (n != init.NewExpression || initializers != init.Initializers)
             {
                 return Expression.ListInit(n, initializers);
@@ -560,11 +485,6 @@ namespace System.Data.Services.Client
 
             return init;
         }
-
-
-
-
-
 
         internal virtual Expression VisitNewArray(NewArrayExpression na)
         {
@@ -583,11 +503,6 @@ namespace System.Data.Services.Client
 
             return na;
         }
-
-
-
-
-
 
         internal virtual Expression VisitInvocation(InvocationExpression iv)
         {

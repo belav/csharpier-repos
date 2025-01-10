@@ -3,12 +3,12 @@
 
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers.Testing;
-using Microsoft.AspNetCore.InternalTesting;
 using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
@@ -21,50 +21,38 @@ public class InputTagHelperTest
         {
             // outputAttributes, expectedAttributeString
             return new TheoryData<TagHelperAttributeList, string>
+            {
                 {
+                    new TagHelperAttributeList { { "hello", "world" }, { "hello", "world2" } },
+                    "hello=\"HtmlEncode[[world]]\" hello=\"HtmlEncode[[world2]]\""
+                },
+                {
+                    new TagHelperAttributeList
                     {
-                        new TagHelperAttributeList
-                        {
-                            { "hello", "world" },
-                            { "hello", "world2" }
-                        },
-                        "hello=\"HtmlEncode[[world]]\" hello=\"HtmlEncode[[world2]]\""
+                        { "hello", "world" },
+                        { "hello", "world2" },
+                        { "hello", "world3" },
                     },
+                    "hello=\"HtmlEncode[[world]]\" hello=\"HtmlEncode[[world2]]\" hello=\"HtmlEncode[[world3]]\""
+                },
+                {
+                    new TagHelperAttributeList { { "HelLO", "world" }, { "HELLO", "world2" } },
+                    "HelLO=\"HtmlEncode[[world]]\" HELLO=\"HtmlEncode[[world2]]\""
+                },
+                {
+                    new TagHelperAttributeList
                     {
-                        new TagHelperAttributeList
-                        {
-                            { "hello", "world" },
-                            { "hello", "world2" },
-                            { "hello", "world3" }
-                        },
-                        "hello=\"HtmlEncode[[world]]\" hello=\"HtmlEncode[[world2]]\" hello=\"HtmlEncode[[world3]]\""
+                        { "Hello", "world" },
+                        { "HELLO", "world2" },
+                        { "hello", "world3" },
                     },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            { "HelLO", "world" },
-                            { "HELLO", "world2" }
-                        },
-                        "HelLO=\"HtmlEncode[[world]]\" HELLO=\"HtmlEncode[[world2]]\""
-                    },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            { "Hello", "world" },
-                            { "HELLO", "world2" },
-                            { "hello", "world3" }
-                        },
-                        "Hello=\"HtmlEncode[[world]]\" HELLO=\"HtmlEncode[[world2]]\" hello=\"HtmlEncode[[world3]]\""
-                    },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            { "HeLlO", "world" },
-                            { "hello", "world2" }
-                        },
-                        "HeLlO=\"HtmlEncode[[world]]\" hello=\"HtmlEncode[[world2]]\""
-                    },
-                };
+                    "Hello=\"HtmlEncode[[world]]\" HELLO=\"HtmlEncode[[world2]]\" hello=\"HtmlEncode[[world3]]\""
+                },
+                {
+                    new TagHelperAttributeList { { "HeLlO", "world" }, { "hello", "world2" } },
+                    "HeLlO=\"HtmlEncode[[world]]\" hello=\"HtmlEncode[[world2]]\""
+                },
+            };
         }
     }
 
@@ -72,31 +60,39 @@ public class InputTagHelperTest
     [MemberData(nameof(MultiAttributeCheckBoxData))]
     public async Task CheckBoxHandlesMultipleAttributesSameNameArePreserved(
         TagHelperAttributeList outputAttributes,
-        string expectedAttributeString)
+        string expectedAttributeString
+    )
     {
         // Arrange
         var originalContent = "original content";
-        var expectedContent = $"<input {expectedAttributeString} type=\"HtmlEncode[[checkbox]]\" id=\"HtmlEncode[[IsACar]]\" " +
-            $"name=\"HtmlEncode[[IsACar]]\" value=\"HtmlEncode[[true]]\" />" +
-            "<input name=\"HtmlEncode[[IsACar]]\" type=\"HtmlEncode[[hidden]]\" value=\"HtmlEncode[[false]]\" />";
+        var expectedContent =
+            $"<input {expectedAttributeString} type=\"HtmlEncode[[checkbox]]\" id=\"HtmlEncode[[IsACar]]\" "
+            + $"name=\"HtmlEncode[[IsACar]]\" value=\"HtmlEncode[[true]]\" />"
+            + "<input name=\"HtmlEncode[[IsACar]]\" type=\"HtmlEncode[[hidden]]\" value=\"HtmlEncode[[false]]\" />";
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
         var output = new TagHelperOutput(
             "input",
             outputAttributes,
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
 
         output.Content.AppendHtml(originalContent);
         var htmlGenerator = new TestableHtmlGenerator(new EmptyModelMetadataProvider());
-        var tagHelper = GetTagHelper(htmlGenerator, model: false, propertyName: nameof(Model.IsACar));
+        var tagHelper = GetTagHelper(
+            htmlGenerator,
+            model: false,
+            propertyName: nameof(Model.IsACar)
+        );
 
         // Act
         await tagHelper.ProcessAsync(context, output);
@@ -110,8 +106,7 @@ public class InputTagHelperTest
     [Theory]
     [InlineData("bad")]
     [InlineData("notbool")]
-    public void CheckBoxHandlesNonParsableStringsAsBoolsCorrectly(
-        string possibleBool)
+    public void CheckBoxHandlesNonParsableStringsAsBoolsCorrectly(string possibleBool)
     {
         // Arrange
         const string content = "original content";
@@ -121,29 +116,33 @@ public class InputTagHelperTest
         var expected = Resources.FormatInputTagHelper_InvalidStringResult(
             forAttributeName,
             possibleBool,
-            typeof(bool).FullName);
+            typeof(bool).FullName
+        );
 
-        var attributes = new TagHelperAttributeList
-            {
-                { "class", "form-control" },
-            };
+        var attributes = new TagHelperAttributeList { { "class", "form-control" } };
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
         var output = new TagHelperOutput(
             tagName,
             attributes,
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
         output.Content.AppendHtml(content);
         var htmlGenerator = new TestableHtmlGenerator(new EmptyModelMetadataProvider());
-        var tagHelper = GetTagHelper(htmlGenerator, model: possibleBool, propertyName: nameof(Model.IsACar));
+        var tagHelper = GetTagHelper(
+            htmlGenerator,
+            model: possibleBool,
+            propertyName: nameof(Model.IsACar)
+        );
 
         // Act and Assert
         var ex = Assert.Throws<InvalidOperationException>(() => tagHelper.Process(context, output));
@@ -153,8 +152,7 @@ public class InputTagHelperTest
     [Theory]
     [InlineData(10)]
     [InlineData(1337)]
-    public void CheckBoxHandlesInvalidDataTypesCorrectly(
-        int possibleBool)
+    public void CheckBoxHandlesInvalidDataTypesCorrectly(int possibleBool)
     {
         // Arrange
         const string content = "original content";
@@ -168,29 +166,33 @@ public class InputTagHelperTest
             typeof(bool).FullName,
             typeof(string).FullName,
             "type",
-            "checkbox");
+            "checkbox"
+        );
 
-        var attributes = new TagHelperAttributeList
-            {
-                { "class", "form-control" },
-            };
+        var attributes = new TagHelperAttributeList { { "class", "form-control" } };
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
         var output = new TagHelperOutput(
             tagName,
             attributes,
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
         output.Content.AppendHtml(content);
         var htmlGenerator = new TestableHtmlGenerator(new EmptyModelMetadataProvider());
-        var tagHelper = GetTagHelper(htmlGenerator, model: possibleBool, propertyName: nameof(Model.IsACar));
+        var tagHelper = GetTagHelper(
+            htmlGenerator,
+            model: possibleBool,
+            propertyName: nameof(Model.IsACar)
+        );
 
         // Act and Assert
         var ex = Assert.Throws<InvalidOperationException>(() => tagHelper.Process(context, output));
@@ -200,41 +202,44 @@ public class InputTagHelperTest
     [Theory]
     [InlineData("trUE")]
     [InlineData("FAlse")]
-    public void CheckBoxHandlesParsableStringsAsBoolsCorrectly(
-        string possibleBool)
+    public void CheckBoxHandlesParsableStringsAsBoolsCorrectly(string possibleBool)
     {
         // Arrange
         const string content = "original content";
         const string tagName = "input";
         const string isCheckedAttr = "checked=\"HtmlEncode[[checked]]\" ";
         var isChecked = (bool.Parse(possibleBool) ? isCheckedAttr : string.Empty);
-        var expectedContent = $"<input class=\"HtmlEncode[[form-control]]\" type=\"HtmlEncode[[checkbox]]\" " +
-            $"{isChecked}id=\"HtmlEncode[[IsACar]]\" name=\"HtmlEncode[[IsACar]]\" " +
-            "value=\"HtmlEncode[[true]]\" /><input name=\"HtmlEncode[[IsACar]]\" type=\"HtmlEncode[[hidden]]\" " +
-            "value=\"HtmlEncode[[false]]\" />";
+        var expectedContent =
+            $"<input class=\"HtmlEncode[[form-control]]\" type=\"HtmlEncode[[checkbox]]\" "
+            + $"{isChecked}id=\"HtmlEncode[[IsACar]]\" name=\"HtmlEncode[[IsACar]]\" "
+            + "value=\"HtmlEncode[[true]]\" /><input name=\"HtmlEncode[[IsACar]]\" type=\"HtmlEncode[[hidden]]\" "
+            + "value=\"HtmlEncode[[false]]\" />";
         var expectedPostElement = "<input name=\"IsACar\" type=\"hidden\" value=\"false\" />";
 
-        var attributes = new TagHelperAttributeList
-            {
-                { "class", "form-control" },
-            };
+        var attributes = new TagHelperAttributeList { { "class", "form-control" } };
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
         var output = new TagHelperOutput(
             tagName,
             attributes,
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
         output.Content.AppendHtml(content);
         var htmlGenerator = new TestableHtmlGenerator(new EmptyModelMetadataProvider());
-        var tagHelper = GetTagHelper(htmlGenerator, model: possibleBool, propertyName: nameof(Model.IsACar));
+        var tagHelper = GetTagHelper(
+            htmlGenerator,
+            model: possibleBool,
+            propertyName: nameof(Model.IsACar)
+        );
 
         // Act
         tagHelper.Process(context, output);
@@ -254,16 +259,21 @@ public class InputTagHelperTest
     public void Process_WithEmptyForName_Throws(string inputTypeName)
     {
         // Arrange
-        var expectedMessage = "The name of an HTML field cannot be null or empty. Instead use methods " +
-            "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering." +
-            "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
+        var expectedMessage =
+            "The name of an HTML field cannot be null or empty. Instead use methods "
+            + "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering."
+            + "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
 
         var metadataProvider = new EmptyModelMetadataProvider();
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider);
         var model = false;
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(bool), model);
         var modelExpression = new ModelExpression(name: string.Empty, modelExplorer: modelExplorer);
-        var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider);
+        var viewContext = TestableHtmlGenerator.GetViewContext(
+            model,
+            htmlGenerator,
+            metadataProvider
+        );
         var tagHelper = new InputTagHelper(htmlGenerator)
         {
             For = modelExpression,
@@ -271,16 +281,15 @@ public class InputTagHelperTest
             ViewContext = viewContext,
         };
 
-        var attributes = new TagHelperAttributeList
-            {
-                { "type", inputTypeName },
-            };
+        var attributes = new TagHelperAttributeList { { "type", inputTypeName } };
 
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
         var output = new TagHelperOutput(
             "input",
             new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -289,16 +298,18 @@ public class InputTagHelperTest
         ExceptionAssert.ThrowsArgument(
             () => tagHelper.Process(context, output),
             paramName: "expression",
-            exceptionMessage: expectedMessage);
+            exceptionMessage: expectedMessage
+        );
     }
 
     [Fact]
     public void Process_Radio_WithEmptyForName_Throws()
     {
         // Arrange
-        var expectedMessage = "The name of an HTML field cannot be null or empty. Instead use methods " +
-            "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering." +
-            "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
+        var expectedMessage =
+            "The name of an HTML field cannot be null or empty. Instead use methods "
+            + "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering."
+            + "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
 
         var inputTypeName = "radio";
         var metadataProvider = new EmptyModelMetadataProvider();
@@ -306,7 +317,11 @@ public class InputTagHelperTest
         var model = 23;
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(int), model);
         var modelExpression = new ModelExpression(name: string.Empty, modelExplorer: modelExplorer);
-        var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider);
+        var viewContext = TestableHtmlGenerator.GetViewContext(
+            model,
+            htmlGenerator,
+            metadataProvider
+        );
         var tagHelper = new InputTagHelper(htmlGenerator)
         {
             For = modelExpression,
@@ -316,16 +331,18 @@ public class InputTagHelperTest
         };
 
         var attributes = new TagHelperAttributeList
-            {
-                { "type", inputTypeName },
-                { "value", "24" },
-            };
+        {
+            { "type", inputTypeName },
+            { "value", "24" },
+        };
 
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
         var output = new TagHelperOutput(
             "input",
             new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -334,7 +351,8 @@ public class InputTagHelperTest
         ExceptionAssert.ThrowsArgument(
             () => tagHelper.Process(context, output),
             paramName: "expression",
-            exceptionMessage: expectedMessage);
+            exceptionMessage: expectedMessage
+        );
     }
 
     [Theory]
@@ -347,18 +365,22 @@ public class InputTagHelperTest
         var expectedAttributeValue = "-expression-";
         var expectedTagName = "input";
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "name",  expectedAttributeValue },
-                { "type", inputTypeName },
-                { "value", "False" },
-            };
+        {
+            { "name", expectedAttributeValue },
+            { "type", inputTypeName },
+            { "value", "False" },
+        };
 
         var metadataProvider = new EmptyModelMetadataProvider();
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider);
         var model = false;
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(bool), model);
         var modelExpression = new ModelExpression(name: string.Empty, modelExplorer: modelExplorer);
-        var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider);
+        var viewContext = TestableHtmlGenerator.GetViewContext(
+            model,
+            htmlGenerator,
+            metadataProvider
+        );
         viewContext.ClientValidationEnabled = false;
 
         var tagHelper = new InputTagHelper(htmlGenerator)
@@ -370,16 +392,18 @@ public class InputTagHelperTest
         };
 
         var attributes = new TagHelperAttributeList
-            {
-                { "name", expectedAttributeValue },
-                { "type", inputTypeName },
-            };
+        {
+            { "name", expectedAttributeValue },
+            { "type", inputTypeName },
+        };
 
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
         var output = new TagHelperOutput(
             expectedTagName,
             new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -398,23 +422,28 @@ public class InputTagHelperTest
     {
         // Arrange
         var expectedAttributeValue = "-expression-";
-        var expectedPostElementContent = $"<input name=\"HtmlEncode[[{expectedAttributeValue}]]\" " +
-            "type=\"HtmlEncode[[hidden]]\" value=\"HtmlEncode[[false]]\" />";
+        var expectedPostElementContent =
+            $"<input name=\"HtmlEncode[[{expectedAttributeValue}]]\" "
+            + "type=\"HtmlEncode[[hidden]]\" value=\"HtmlEncode[[false]]\" />";
         var expectedTagName = "input";
         var inputTypeName = "checkbox";
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "name",  expectedAttributeValue },
-                { "type", inputTypeName },
-                { "value", "true" },
-            };
+        {
+            { "name", expectedAttributeValue },
+            { "type", inputTypeName },
+            { "value", "true" },
+        };
 
         var metadataProvider = new EmptyModelMetadataProvider();
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider);
         var model = false;
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(bool), model);
         var modelExpression = new ModelExpression(name: string.Empty, modelExplorer: modelExplorer);
-        var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider);
+        var viewContext = TestableHtmlGenerator.GetViewContext(
+            model,
+            htmlGenerator,
+            metadataProvider
+        );
         viewContext.ClientValidationEnabled = false;
 
         var tagHelper = new InputTagHelper(htmlGenerator)
@@ -426,16 +455,18 @@ public class InputTagHelperTest
         };
 
         var attributes = new TagHelperAttributeList
-            {
-                { "name", expectedAttributeValue },
-                { "type", inputTypeName },
-            };
+        {
+            { "name", expectedAttributeValue },
+            { "type", inputTypeName },
+        };
 
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
         var output = new TagHelperOutput(
             expectedTagName,
             new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -449,7 +480,10 @@ public class InputTagHelperTest
         Assert.Equal(expectedTagName, output.TagName);
 
         Assert.False(viewContext.FormContext.HasEndOfFormContent);
-        Assert.Equal(expectedPostElementContent, HtmlContentUtilities.HtmlContentToString(output.PostElement));
+        Assert.Equal(
+            expectedPostElementContent,
+            HtmlContentUtilities.HtmlContentToString(output.PostElement)
+        );
     }
 
     [Fact]
@@ -460,17 +494,21 @@ public class InputTagHelperTest
         var expectedTagName = "input";
         var inputTypeName = "password";
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "name",  expectedAttributeValue },
-                { "type", inputTypeName },
-            };
+        {
+            { "name", expectedAttributeValue },
+            { "type", inputTypeName },
+        };
 
         var metadataProvider = new EmptyModelMetadataProvider();
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider);
         var model = "password";
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(string), model);
         var modelExpression = new ModelExpression(name: string.Empty, modelExplorer: modelExplorer);
-        var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider);
+        var viewContext = TestableHtmlGenerator.GetViewContext(
+            model,
+            htmlGenerator,
+            metadataProvider
+        );
         viewContext.ClientValidationEnabled = false;
 
         var tagHelper = new InputTagHelper(htmlGenerator)
@@ -482,11 +520,17 @@ public class InputTagHelperTest
         };
 
         // Expect attributes to just pass through. Tag helper binds all input attributes and doesn't add any.
-        var context = new TagHelperContext(expectedAttributes, new Dictionary<object, object>(), "test");
+        var context = new TagHelperContext(
+            expectedAttributes,
+            new Dictionary<object, object>(),
+            "test"
+        );
         var output = new TagHelperOutput(
             expectedTagName,
             new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -508,18 +552,22 @@ public class InputTagHelperTest
         var expectedTagName = "input";
         var inputTypeName = "radio";
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "name",  expectedAttributeValue },
-                { "type", inputTypeName },
-                { "value", "24" },
-            };
+        {
+            { "name", expectedAttributeValue },
+            { "type", inputTypeName },
+            { "value", "24" },
+        };
 
         var metadataProvider = new EmptyModelMetadataProvider();
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider);
         var model = 23;
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(int), model);
         var modelExpression = new ModelExpression(name: string.Empty, modelExplorer: modelExplorer);
-        var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider);
+        var viewContext = TestableHtmlGenerator.GetViewContext(
+            model,
+            htmlGenerator,
+            metadataProvider
+        );
         viewContext.ClientValidationEnabled = false;
 
         var tagHelper = new InputTagHelper(htmlGenerator)
@@ -532,17 +580,19 @@ public class InputTagHelperTest
         };
 
         var attributes = new TagHelperAttributeList
-            {
-                { "name", expectedAttributeValue },
-                { "type", inputTypeName },
-                { "value", "24" },
-            };
+        {
+            { "name", expectedAttributeValue },
+            { "type", inputTypeName },
+            { "value", "24" },
+        };
 
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
         var output = new TagHelperOutput(
             expectedTagName,
             new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -564,51 +614,76 @@ public class InputTagHelperTest
         {
             var modelWithNull = new Model
             {
-                NestedModel = new NestedModel
-                {
-                    Text = null,
-                },
+                NestedModel = new NestedModel { Text = null },
                 Text = null,
             };
             var modelWithText = new Model
             {
-                NestedModel = new NestedModel
-                {
-                    Text = "inner text",
-                },
+                NestedModel = new NestedModel { Text = "inner text" },
                 Text = "outer text",
             };
-            var models = new List<Model>
-                {
-                    modelWithNull,
-                    modelWithText,
-                };
+            var models = new List<Model> { modelWithNull, modelWithText };
 
             return new TheoryData<object, Type, object, NameAndId, string>
+            {
+                { null, typeof(Model), null, new NameAndId("Text", "Text"), string.Empty },
                 {
-                    { null, typeof(Model), null, new NameAndId("Text", "Text"),
-                        string.Empty },
-
-                    { modelWithNull, typeof(Model), modelWithNull.Text, new NameAndId("Text", "Text"),
-                        string.Empty },
-                    { modelWithText, typeof(Model), modelWithText.Text, new NameAndId("Text", "Text"),
-                        "outer text" },
-
-                    { modelWithNull, typeof(NestedModel), modelWithNull.NestedModel.Text,
-                        new NameAndId("NestedModel.Text", "NestedModel_Text"), string.Empty },
-                    { modelWithText, typeof(NestedModel), modelWithText.NestedModel.Text,
-                        new NameAndId("NestedModel.Text", "NestedModel_Text"), "inner text" },
-
-                    { models, typeof(Model), models[0].Text,
-                        new NameAndId("[0].Text", "z0__Text"), string.Empty },
-                    { models, typeof(Model), models[1].Text,
-                        new NameAndId("[1].Text", "z1__Text"), "outer text" },
-
-                    { models, typeof(NestedModel), models[0].NestedModel.Text,
-                        new NameAndId("[0].NestedModel.Text", "z0__NestedModel_Text"), string.Empty },
-                    { models, typeof(NestedModel), models[1].NestedModel.Text,
-                        new NameAndId("[1].NestedModel.Text", "z1__NestedModel_Text"), "inner text" },
-                };
+                    modelWithNull,
+                    typeof(Model),
+                    modelWithNull.Text,
+                    new NameAndId("Text", "Text"),
+                    string.Empty
+                },
+                {
+                    modelWithText,
+                    typeof(Model),
+                    modelWithText.Text,
+                    new NameAndId("Text", "Text"),
+                    "outer text"
+                },
+                {
+                    modelWithNull,
+                    typeof(NestedModel),
+                    modelWithNull.NestedModel.Text,
+                    new NameAndId("NestedModel.Text", "NestedModel_Text"),
+                    string.Empty
+                },
+                {
+                    modelWithText,
+                    typeof(NestedModel),
+                    modelWithText.NestedModel.Text,
+                    new NameAndId("NestedModel.Text", "NestedModel_Text"),
+                    "inner text"
+                },
+                {
+                    models,
+                    typeof(Model),
+                    models[0].Text,
+                    new NameAndId("[0].Text", "z0__Text"),
+                    string.Empty
+                },
+                {
+                    models,
+                    typeof(Model),
+                    models[1].Text,
+                    new NameAndId("[1].Text", "z1__Text"),
+                    "outer text"
+                },
+                {
+                    models,
+                    typeof(NestedModel),
+                    models[0].NestedModel.Text,
+                    new NameAndId("[0].NestedModel.Text", "z0__NestedModel_Text"),
+                    string.Empty
+                },
+                {
+                    models,
+                    typeof(NestedModel),
+                    models[1].NestedModel.Text,
+                    new NameAndId("[1].NestedModel.Text", "z1__NestedModel_Text"),
+                    "inner text"
+                },
+            };
         }
     }
 
@@ -619,18 +694,19 @@ public class InputTagHelperTest
         Type containerType,
         object model,
         NameAndId nameAndId,
-        string expectedValue)
+        string expectedValue
+    )
     {
         // Arrange
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control" },
-                { "type", "text" },
-                { "id", nameAndId.Id },
-                { "name", nameAndId.Name },
-                { "valid", "from validation attributes" },
-                { "value", expectedValue },
-            };
+        {
+            { "class", "form-control" },
+            { "type", "text" },
+            { "id", nameAndId.Id },
+            { "name", nameAndId.Name },
+            { "valid", "from validation attributes" },
+            { "value", expectedValue },
+        };
         var expectedPreContent = "original pre-content";
         var expectedContent = "original content";
         var expectedPostContent = "original post-content";
@@ -638,14 +714,11 @@ public class InputTagHelperTest
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
-        var originalAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control" },
-            };
+            uniqueId: "test"
+        );
+        var originalAttributes = new TagHelperAttributeList { { "class", "form-control" } };
         var output = new TagHelperOutput(
             expectedTagName,
             originalAttributes,
@@ -654,7 +727,8 @@ public class InputTagHelperTest
                 var tagHelperContent = new DefaultTagHelperContent();
                 tagHelperContent.SetContent("Something");
                 return Task.FromResult<TagHelperContent>(tagHelperContent);
-            })
+            }
+        )
         {
             TagMode = TagMode.StartTagOnly,
         };
@@ -664,10 +738,7 @@ public class InputTagHelperTest
 
         var htmlGenerator = new TestableHtmlGenerator(new EmptyModelMetadataProvider())
         {
-            ValidationAttributes =
-                {
-                    {  "valid", "from validation attributes" },
-                }
+            ValidationAttributes = { { "valid", "from validation attributes" } },
         };
 
         // Property name is either nameof(Model.Text) or nameof(NestedModel.Text).
@@ -677,7 +748,8 @@ public class InputTagHelperTest
             containerType,
             model,
             propertyName: nameof(Model.Text),
-            expressionName: nameAndId.Name);
+            expressionName: nameAndId.Name
+        );
 
         // Act
         await tagHelper.ProcessAsync(context, output);
@@ -699,45 +771,49 @@ public class InputTagHelperTest
     {
         // Arrange
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "type", expectedType },
-                { "id", "DateTimeOffset" },
-                { "name", "DateTimeOffset" },
-                { "valid", "from validation attributes" },
-                { "value", "datetime: 2011-08-31T05:30:45.0000000+03:00" },
-            };
+        {
+            { "type", expectedType },
+            { "id", "DateTimeOffset" },
+            { "name", "DateTimeOffset" },
+            { "valid", "from validation attributes" },
+            { "value", "datetime: 2011-08-31T05:30:45.0000000+03:00" },
+        };
         var expectedTagName = "not-input";
         var container = new Model
         {
-            DateTimeOffset = new DateTimeOffset(2011, 8, 31, hour: 5, minute: 30, second: 45, offset: TimeSpan.FromHours(3))
+            DateTimeOffset = new DateTimeOffset(
+                2011,
+                8,
+                31,
+                hour: 5,
+                minute: 30,
+                second: 45,
+                offset: TimeSpan.FromHours(3)
+            ),
         };
 
-        var allAttributes = new TagHelperAttributeList
-            {
-                { "type", specifiedType },
-            };
+        var allAttributes = new TagHelperAttributeList { { "type", specifiedType } };
         var context = new TagHelperContext(
             tagName: "input",
             allAttributes: allAttributes,
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
         var output = new TagHelperOutput(
             expectedTagName,
             new TagHelperAttributeList(),
             getChildContentAsync: (useCachedResult, encoder) =>
             {
                 throw new Exception("getChildContentAsync should not be called.");
-            })
+            }
+        )
         {
             TagMode = TagMode.StartTagOnly,
         };
 
         var htmlGenerator = new TestableHtmlGenerator(new EmptyModelMetadataProvider())
         {
-            ValidationAttributes =
-                {
-                    {  "valid", "from validation attributes" },
-                }
+            ValidationAttributes = { { "valid", "from validation attributes" } },
         };
 
         var tagHelper = GetTagHelper(
@@ -746,7 +822,8 @@ public class InputTagHelperTest
             typeof(Model),
             model: container.DateTimeOffset,
             propertyName: nameof(Model.DateTimeOffset),
-            expressionName: nameof(Model.DateTimeOffset));
+            expressionName: nameof(Model.DateTimeOffset)
+        );
         tagHelper.Format = "datetime: {0:o}";
         tagHelper.InputTypeName = specifiedType;
 
@@ -766,49 +843,56 @@ public class InputTagHelperTest
     [InlineData("datetime", "datetime")]
     [InlineData(null, "datetime-local")]
     [InlineData("hidden", "hidden")]
-    public void Process_GeneratesFormattedOutput_ForDateTime(string specifiedType, string expectedType)
+    public void Process_GeneratesFormattedOutput_ForDateTime(
+        string specifiedType,
+        string expectedType
+    )
     {
         // Arrange
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "type", expectedType },
-                { "id", nameof(Model.DateTime) },
-                { "name", nameof(Model.DateTime) },
-                { "valid", "from validation attributes" },
-                { "value", "datetime: 2011-08-31T05:30:45.0000000Z" },
-            };
+        {
+            { "type", expectedType },
+            { "id", nameof(Model.DateTime) },
+            { "name", nameof(Model.DateTime) },
+            { "valid", "from validation attributes" },
+            { "value", "datetime: 2011-08-31T05:30:45.0000000Z" },
+        };
         var expectedTagName = "not-input";
         var container = new Model
         {
-            DateTime = new DateTime(2011, 8, 31, hour: 5, minute: 30, second: 45, kind: DateTimeKind.Utc),
+            DateTime = new DateTime(
+                2011,
+                8,
+                31,
+                hour: 5,
+                minute: 30,
+                second: 45,
+                kind: DateTimeKind.Utc
+            ),
         };
 
-        var allAttributes = new TagHelperAttributeList
-            {
-                { "type", specifiedType },
-            };
+        var allAttributes = new TagHelperAttributeList { { "type", specifiedType } };
         var context = new TagHelperContext(
             tagName: "input",
             allAttributes: allAttributes,
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
         var output = new TagHelperOutput(
             expectedTagName,
             new TagHelperAttributeList(),
             getChildContentAsync: (useCachedResult, encoder) =>
             {
                 throw new Exception("getChildContentAsync should not be called.");
-            })
+            }
+        )
         {
             TagMode = TagMode.StartTagOnly,
         };
 
         var htmlGenerator = new TestableHtmlGenerator(new EmptyModelMetadataProvider())
         {
-            ValidationAttributes =
-                {
-                    {  "valid", "from validation attributes" },
-                }
+            ValidationAttributes = { { "valid", "from validation attributes" } },
         };
 
         var tagHelper = GetTagHelper(
@@ -817,7 +901,8 @@ public class InputTagHelperTest
             typeof(Model),
             model: container.DateTime,
             propertyName: nameof(Model.DateTime),
-            expressionName: nameof(Model.DateTime));
+            expressionName: nameof(Model.DateTime)
+        );
         tagHelper.Format = "datetime: {0:o}";
         tagHelper.InputTypeName = specifiedType;
 
@@ -837,7 +922,11 @@ public class InputTagHelperTest
     [InlineData("SomeProperty", "SomeProperty", true)]
     [InlineData("SomeProperty", "[0].SomeProperty", true)]
     [InlineData("SomeProperty", "[0].SomeProperty", false)]
-    public void Process_GeneratesInvariantCultureMetadataInput_WhenValueUsesInvariantFormatting(string propertyName, string nameAttributeValue, bool usesInvariantFormatting)
+    public void Process_GeneratesInvariantCultureMetadataInput_WhenValueUsesInvariantFormatting(
+        string propertyName,
+        string nameAttributeValue,
+        bool usesInvariantFormatting
+    )
     {
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
@@ -845,7 +934,11 @@ public class InputTagHelperTest
         var model = false;
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(bool), model);
         var modelExpression = new ModelExpression(name: string.Empty, modelExplorer: modelExplorer);
-        var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator.Object, metadataProvider);
+        var viewContext = TestableHtmlGenerator.GetViewContext(
+            model,
+            htmlGenerator.Object,
+            metadataProvider
+        );
         var tagHelper = new InputTagHelper(htmlGenerator.Object)
         {
             For = modelExpression,
@@ -857,22 +950,28 @@ public class InputTagHelperTest
         var tagBuilder = new TagBuilder("input")
         {
             TagRenderMode = TagRenderMode.SelfClosing,
-            Attributes =
-            {
-                { "name", nameAttributeValue },
-            },
+            Attributes = { { "name", nameAttributeValue } },
         };
 
         htmlGenerator
-            .Setup(mock => mock.GenerateTextBox(
-                tagHelper.ViewContext,
-                tagHelper.For.ModelExplorer,
-                tagHelper.For.Name,
-                modelExplorer.Model,
-                null,                   // format
-                It.IsAny<object>()))    // htmlAttributes
+            .Setup(mock =>
+                mock.GenerateTextBox(
+                    tagHelper.ViewContext,
+                    tagHelper.For.ModelExplorer,
+                    tagHelper.For.Name,
+                    modelExplorer.Model,
+                    null, // format
+                    It.IsAny<object>()
+                )
+            ) // htmlAttributes
             .Returns(tagBuilder)
-            .Callback(() => viewContext.FormContext.InvariantField(tagBuilder.Attributes["name"], usesInvariantFormatting))
+            .Callback(
+                () =>
+                    viewContext.FormContext.InvariantField(
+                        tagBuilder.Attributes["name"],
+                        usesInvariantFormatting
+                    )
+            )
             .Verifiable();
 
         var expectedPostElement = usesInvariantFormatting
@@ -880,15 +979,17 @@ public class InputTagHelperTest
             : string.Empty;
 
         var attributes = new TagHelperAttributeList
-            {
-                { "name", propertyName },
-                { "type", "text" },
-            };
+        {
+            { "name", propertyName },
+            { "type", "text" },
+        };
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
         var output = new TagHelperOutput(
             "input",
             new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -909,18 +1010,22 @@ public class InputTagHelperTest
         var expectedTagName = "input";
         var inputTypeName = "checkbox";
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "name",  propertyName },
-                { "type", inputTypeName },
-                { "value", "true" },
-            };
+        {
+            { "name", propertyName },
+            { "type", inputTypeName },
+            { "value", "true" },
+        };
 
         var metadataProvider = new EmptyModelMetadataProvider();
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider);
         var model = false;
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(bool), model);
         var modelExpression = new ModelExpression(name: string.Empty, modelExplorer: modelExplorer);
-        var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider);
+        var viewContext = TestableHtmlGenerator.GetViewContext(
+            model,
+            htmlGenerator,
+            metadataProvider
+        );
 
         viewContext.CheckBoxHiddenInputRenderMode = CheckBoxHiddenInputRenderMode.None;
 
@@ -933,16 +1038,18 @@ public class InputTagHelperTest
         };
 
         var attributes = new TagHelperAttributeList
-            {
-                { "name", propertyName },
-                { "type", inputTypeName },
-            };
+        {
+            { "name", propertyName },
+            { "type", inputTypeName },
+        };
 
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
         var output = new TagHelperOutput(
             expectedTagName,
             new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -956,7 +1063,9 @@ public class InputTagHelperTest
         Assert.Equal(expectedTagName, output.TagName);
 
         Assert.False(viewContext.FormContext.HasEndOfFormContent);
-        Assert.True(string.IsNullOrEmpty(HtmlContentUtilities.HtmlContentToString(output.PostElement)));
+        Assert.True(
+            string.IsNullOrEmpty(HtmlContentUtilities.HtmlContentToString(output.PostElement))
+        );
     }
 
     [Fact]
@@ -964,22 +1073,27 @@ public class InputTagHelperTest
     {
         var propertyName = "-expression-";
         var expectedTagName = "input";
-        var expectedPostElementContent = $"<input name=\"HtmlEncode[[{propertyName}]]\" " +
-            "type=\"HtmlEncode[[hidden]]\" value=\"HtmlEncode[[false]]\" />";
+        var expectedPostElementContent =
+            $"<input name=\"HtmlEncode[[{propertyName}]]\" "
+            + "type=\"HtmlEncode[[hidden]]\" value=\"HtmlEncode[[false]]\" />";
         var inputTypeName = "checkbox";
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "name",  propertyName },
-                { "type", inputTypeName },
-                { "value", "true" },
-            };
+        {
+            { "name", propertyName },
+            { "type", inputTypeName },
+            { "value", "true" },
+        };
 
         var metadataProvider = new EmptyModelMetadataProvider();
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider);
         var model = false;
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(bool), model);
         var modelExpression = new ModelExpression(name: string.Empty, modelExplorer: modelExplorer);
-        var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider);
+        var viewContext = TestableHtmlGenerator.GetViewContext(
+            model,
+            htmlGenerator,
+            metadataProvider
+        );
 
         viewContext.FormContext.CanRenderAtEndOfForm = true;
         viewContext.CheckBoxHiddenInputRenderMode = CheckBoxHiddenInputRenderMode.Inline;
@@ -993,16 +1107,18 @@ public class InputTagHelperTest
         };
 
         var attributes = new TagHelperAttributeList
-            {
-                { "name", propertyName },
-                { "type", inputTypeName },
-            };
+        {
+            { "name", propertyName },
+            { "type", inputTypeName },
+        };
 
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
         var output = new TagHelperOutput(
             expectedTagName,
             new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -1016,7 +1132,10 @@ public class InputTagHelperTest
         Assert.Equal(expectedTagName, output.TagName);
 
         Assert.False(viewContext.FormContext.HasEndOfFormContent);
-        Assert.Equal(expectedPostElementContent, HtmlContentUtilities.HtmlContentToString(output.PostElement));
+        Assert.Equal(
+            expectedPostElementContent,
+            HtmlContentUtilities.HtmlContentToString(output.PostElement)
+        );
     }
 
     [Fact]
@@ -1024,22 +1143,27 @@ public class InputTagHelperTest
     {
         var propertyName = "-expression-";
         var expectedTagName = "input";
-        var expectedEndOfFormContent = $"<input name=\"HtmlEncode[[{propertyName}]]\" " +
-            "type=\"HtmlEncode[[hidden]]\" value=\"HtmlEncode[[false]]\" />";
+        var expectedEndOfFormContent =
+            $"<input name=\"HtmlEncode[[{propertyName}]]\" "
+            + "type=\"HtmlEncode[[hidden]]\" value=\"HtmlEncode[[false]]\" />";
         var inputTypeName = "checkbox";
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "name",  propertyName },
-                { "type", inputTypeName },
-                { "value", "true" },
-            };
+        {
+            { "name", propertyName },
+            { "type", inputTypeName },
+            { "value", "true" },
+        };
 
         var metadataProvider = new EmptyModelMetadataProvider();
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider);
         var model = false;
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(bool), model);
         var modelExpression = new ModelExpression(name: string.Empty, modelExplorer: modelExplorer);
-        var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider);
+        var viewContext = TestableHtmlGenerator.GetViewContext(
+            model,
+            htmlGenerator,
+            metadataProvider
+        );
 
         viewContext.FormContext.CanRenderAtEndOfForm = true;
         viewContext.CheckBoxHiddenInputRenderMode = CheckBoxHiddenInputRenderMode.EndOfForm;
@@ -1053,16 +1177,18 @@ public class InputTagHelperTest
         };
 
         var attributes = new TagHelperAttributeList
-            {
-                { "name", propertyName },
-                { "type", inputTypeName },
-            };
+        {
+            { "name", propertyName },
+            { "type", inputTypeName },
+        };
 
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
         var output = new TagHelperOutput(
             expectedTagName,
             new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -1075,8 +1201,18 @@ public class InputTagHelperTest
         Assert.False(output.IsContentModified);
         Assert.Equal(expectedTagName, output.TagName);
 
-        Assert.Equal(expectedEndOfFormContent, string.Join("", viewContext.FormContext.EndOfFormContent.Select(html => HtmlContentUtilities.HtmlContentToString(html))));
-        Assert.True(string.IsNullOrEmpty(HtmlContentUtilities.HtmlContentToString(output.PostElement)));
+        Assert.Equal(
+            expectedEndOfFormContent,
+            string.Join(
+                "",
+                viewContext.FormContext.EndOfFormContent.Select(html =>
+                    HtmlContentUtilities.HtmlContentToString(html)
+                )
+            )
+        );
+        Assert.True(
+            string.IsNullOrEmpty(HtmlContentUtilities.HtmlContentToString(output.PostElement))
+        );
     }
 
     [Fact]
@@ -1084,22 +1220,27 @@ public class InputTagHelperTest
     {
         var propertyName = "-expression-";
         var expectedTagName = "input";
-        var expectedPostElementContent = $"<input name=\"HtmlEncode[[{propertyName}]]\" " +
-            "type=\"HtmlEncode[[hidden]]\" value=\"HtmlEncode[[false]]\" />";
+        var expectedPostElementContent =
+            $"<input name=\"HtmlEncode[[{propertyName}]]\" "
+            + "type=\"HtmlEncode[[hidden]]\" value=\"HtmlEncode[[false]]\" />";
         var inputTypeName = "checkbox";
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "name",  propertyName },
-                { "type", inputTypeName },
-                { "value", "true" },
-            };
+        {
+            { "name", propertyName },
+            { "type", inputTypeName },
+            { "value", "true" },
+        };
 
         var metadataProvider = new EmptyModelMetadataProvider();
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider);
         var model = false;
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(bool), model);
         var modelExpression = new ModelExpression(name: string.Empty, modelExplorer: modelExplorer);
-        var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider);
+        var viewContext = TestableHtmlGenerator.GetViewContext(
+            model,
+            htmlGenerator,
+            metadataProvider
+        );
 
         viewContext.FormContext.CanRenderAtEndOfForm = false;
         viewContext.CheckBoxHiddenInputRenderMode = CheckBoxHiddenInputRenderMode.EndOfForm;
@@ -1113,16 +1254,18 @@ public class InputTagHelperTest
         };
 
         var attributes = new TagHelperAttributeList
-            {
-                { "name", propertyName },
-                { "type", inputTypeName },
-            };
+        {
+            { "name", propertyName },
+            { "type", inputTypeName },
+        };
 
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
         var output = new TagHelperOutput(
             expectedTagName,
             new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -1136,7 +1279,10 @@ public class InputTagHelperTest
         Assert.Equal(expectedTagName, output.TagName);
 
         Assert.False(viewContext.FormContext.HasEndOfFormContent);
-        Assert.Equal(expectedPostElementContent, HtmlContentUtilities.HtmlContentToString(output.PostElement));
+        Assert.Equal(
+            expectedPostElementContent,
+            HtmlContentUtilities.HtmlContentToString(output.PostElement)
+        );
     }
 
     [Fact]
@@ -1145,20 +1291,18 @@ public class InputTagHelperTest
         // Arrange
         var originalContent = "original content";
         var expectedPreContent = "original pre-content";
-        var expectedContent = "<input class=\"HtmlEncode[[form-control]]\" type=\"HtmlEncode[[checkbox]]\" /><hidden />";
+        var expectedContent =
+            "<input class=\"HtmlEncode[[form-control]]\" type=\"HtmlEncode[[checkbox]]\" /><hidden />";
         var expectedPostContent = "original post-content";
         var expectedPostElement = "<hidden />";
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
-        var originalAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control" },
-            };
+            uniqueId: "test"
+        );
+        var originalAttributes = new TagHelperAttributeList { { "class", "form-control" } };
         var output = new TagHelperOutput(
             "input",
             originalAttributes,
@@ -1167,7 +1311,8 @@ public class InputTagHelperTest
                 var tagHelperContent = new DefaultTagHelperContent();
                 tagHelperContent.SetContent("Something");
                 return Task.FromResult<TagHelperContent>(tagHelperContent);
-            })
+            }
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -1176,27 +1321,34 @@ public class InputTagHelperTest
         output.PostContent.AppendHtml(expectedPostContent);
 
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
-        var tagHelper = GetTagHelper(htmlGenerator.Object, model: false, propertyName: nameof(Model.IsACar));
+        var tagHelper = GetTagHelper(
+            htmlGenerator.Object,
+            model: false,
+            propertyName: nameof(Model.IsACar)
+        );
         tagHelper.Format = "somewhat-less-null"; // ignored
 
-        var tagBuilder = new TagBuilder("input")
-        {
-            TagRenderMode = TagRenderMode.SelfClosing
-        };
+        var tagBuilder = new TagBuilder("input") { TagRenderMode = TagRenderMode.SelfClosing };
         htmlGenerator
-            .Setup(mock => mock.GenerateCheckBox(
-                tagHelper.ViewContext,
-                tagHelper.For.ModelExplorer,
-                tagHelper.For.Name,
-                null,                   // isChecked
-                It.IsAny<object>()))    // htmlAttributes
+            .Setup(mock =>
+                mock.GenerateCheckBox(
+                    tagHelper.ViewContext,
+                    tagHelper.For.ModelExplorer,
+                    tagHelper.For.Name,
+                    null, // isChecked
+                    It.IsAny<object>()
+                )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
         htmlGenerator
-            .Setup(mock => mock.GenerateHiddenForCheckbox(
-                tagHelper.ViewContext,
-                tagHelper.For.ModelExplorer,
-                tagHelper.For.Name))
+            .Setup(mock =>
+                mock.GenerateHiddenForCheckbox(
+                    tagHelper.ViewContext,
+                    tagHelper.For.ModelExplorer,
+                    tagHelper.For.Name
+                )
+            )
             .Returns(new TagBuilder("hidden") { TagRenderMode = TagRenderMode.SelfClosing })
             .Verifiable();
 
@@ -1228,23 +1380,21 @@ public class InputTagHelperTest
         string dataTypeName,
         string inputTypeName,
         string model,
-        string format)
+        string format
+    )
     {
         // Arrange
-        var contextAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control" },
-            };
+        var contextAttributes = new TagHelperAttributeList { { "class", "form-control" } };
         if (!string.IsNullOrEmpty(inputTypeName))
         {
-            contextAttributes.SetAttribute("type", inputTypeName);  // Support restoration of type attribute, if any.
+            contextAttributes.SetAttribute("type", inputTypeName); // Support restoration of type attribute, if any.
         }
 
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control hidden-control" },
-                { "type", inputTypeName ?? "hidden" },      // Generator restores type attribute; adds "hidden" if none.
-            };
+        {
+            { "class", "form-control hidden-control" },
+            { "type", inputTypeName ?? "hidden" }, // Generator restores type attribute; adds "hidden" if none.
+        };
         var expectedPreContent = "original pre-content";
         var expectedContent = "original content";
         var expectedPostContent = "original post-content";
@@ -1254,11 +1404,9 @@ public class InputTagHelperTest
             tagName: "input",
             allAttributes: contextAttributes,
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
-        var originalAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control" },
-            };
+            uniqueId: "test"
+        );
+        var originalAttributes = new TagHelperAttributeList { { "class", "form-control" } };
         var output = new TagHelperOutput(
             expectedTagName,
             originalAttributes,
@@ -1267,7 +1415,8 @@ public class InputTagHelperTest
                 var tagHelperContent = new DefaultTagHelperContent();
                 tagHelperContent.SetContent("Something");
                 return Task.FromResult<TagHelperContent>(tagHelperContent);
-            })
+            }
+        )
         {
             TagMode = TagMode.StartTagOnly,
         };
@@ -1276,32 +1425,32 @@ public class InputTagHelperTest
         output.PostContent.SetContent(expectedPostContent);
 
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForProperty<Model>("Text").DisplayDetails(dd => dd.DataTypeName = dataTypeName);
+        metadataProvider
+            .ForProperty<Model>("Text")
+            .DisplayDetails(dd => dd.DataTypeName = dataTypeName);
 
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var tagHelper = GetTagHelper(
             htmlGenerator.Object,
             model,
             nameof(Model.Text),
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
         tagHelper.Format = format;
         tagHelper.InputTypeName = inputTypeName;
 
-        var tagBuilder = new TagBuilder("input")
-        {
-            Attributes =
-                {
-                    { "class", "hidden-control" },
-                },
-        };
+        var tagBuilder = new TagBuilder("input") { Attributes = { { "class", "hidden-control" } } };
         htmlGenerator
-            .Setup(mock => mock.GenerateTextBox(
-                tagHelper.ViewContext,
-                tagHelper.For.ModelExplorer,
-                tagHelper.For.Name,
-                model,  // value
-                format,
-                new Dictionary<string, object> { { "type", "hidden" } }))   // htmlAttributes
+            .Setup(mock =>
+                mock.GenerateTextBox(
+                    tagHelper.ViewContext,
+                    tagHelper.For.ModelExplorer,
+                    tagHelper.For.Name,
+                    model, // value
+                    format,
+                    new Dictionary<string, object> { { "type", "hidden" } }
+                )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -1312,7 +1461,11 @@ public class InputTagHelperTest
         htmlGenerator.Verify();
 
         Assert.Equal(TagMode.StartTagOnly, output.TagMode);
-        Assert.Equal(expectedAttributes, output.Attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+        Assert.Equal(
+            expectedAttributes,
+            output.Attributes,
+            CaseSensitiveTagHelperAttributeComparer.Default
+        );
         Assert.Equal(expectedPreContent, output.PreContent.GetContent());
         Assert.Equal(expectedContent, output.Content.GetContent());
         Assert.Equal(expectedPostContent, output.PostContent.GetContent());
@@ -1325,23 +1478,28 @@ public class InputTagHelperTest
         var propertyName = "-expression-";
         var expectedTagName = "input";
         var formName = "form-name";
-        var expectedEndOfFormContent = $"<input form=\"HtmlEncode[[{formName}]]\" name=\"HtmlEncode[[{propertyName}]]\" " +
-            "type=\"HtmlEncode[[hidden]]\" value=\"HtmlEncode[[false]]\" />";
+        var expectedEndOfFormContent =
+            $"<input form=\"HtmlEncode[[{formName}]]\" name=\"HtmlEncode[[{propertyName}]]\" "
+            + "type=\"HtmlEncode[[hidden]]\" value=\"HtmlEncode[[false]]\" />";
         var inputTypeName = "checkbox";
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "name",  propertyName },
-                { "type", inputTypeName },
-                { "form", formName },
-                { "value", "true" },
-            };
+        {
+            { "name", propertyName },
+            { "type", inputTypeName },
+            { "form", formName },
+            { "value", "true" },
+        };
 
         var metadataProvider = new EmptyModelMetadataProvider();
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider);
         var model = false;
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(bool), model);
         var modelExpression = new ModelExpression(name: string.Empty, modelExplorer: modelExplorer);
-        var viewContext = TestableHtmlGenerator.GetViewContext(model, htmlGenerator, metadataProvider);
+        var viewContext = TestableHtmlGenerator.GetViewContext(
+            model,
+            htmlGenerator,
+            metadataProvider
+        );
         viewContext.FormContext.CanRenderAtEndOfForm = true;
         viewContext.CheckBoxHiddenInputRenderMode = CheckBoxHiddenInputRenderMode.EndOfForm;
 
@@ -1355,17 +1513,19 @@ public class InputTagHelperTest
         };
 
         var attributes = new TagHelperAttributeList
-            {
-                { "name", propertyName },
-                { "type", inputTypeName },
-                { "form", formName}
-            };
+        {
+            { "name", propertyName },
+            { "type", inputTypeName },
+            { "form", formName },
+        };
 
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
         var output = new TagHelperOutput(
             expectedTagName,
             new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(result: null)
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -1378,8 +1538,18 @@ public class InputTagHelperTest
         Assert.False(output.IsContentModified);
         Assert.Equal(expectedTagName, output.TagName);
 
-        Assert.Equal(expectedEndOfFormContent, string.Join("", viewContext.FormContext.EndOfFormContent.Select(html => HtmlContentUtilities.HtmlContentToString(html))));
-        Assert.True(string.IsNullOrEmpty(HtmlContentUtilities.HtmlContentToString(output.PostElement)));
+        Assert.Equal(
+            expectedEndOfFormContent,
+            string.Join(
+                "",
+                viewContext.FormContext.EndOfFormContent.Select(html =>
+                    HtmlContentUtilities.HtmlContentToString(html)
+                )
+            )
+        );
+        Assert.True(
+            string.IsNullOrEmpty(HtmlContentUtilities.HtmlContentToString(output.PostElement))
+        );
     }
 
     [Theory]
@@ -1394,23 +1564,21 @@ public class InputTagHelperTest
     public async Task ProcessAsync_CallsGeneratePassword_WithExpectedParameters(
         string dataTypeName,
         string inputTypeName,
-        string model)
+        string model
+    )
     {
         // Arrange
-        var contextAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control" },
-            };
+        var contextAttributes = new TagHelperAttributeList { { "class", "form-control" } };
         if (!string.IsNullOrEmpty(inputTypeName))
         {
-            contextAttributes.SetAttribute("type", inputTypeName);  // Support restoration of type attribute, if any.
+            contextAttributes.SetAttribute("type", inputTypeName); // Support restoration of type attribute, if any.
         }
 
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control password-control" },
-                { "type", inputTypeName ?? "password" },    // Generator restores type attribute; adds "password" if none.
-            };
+        {
+            { "class", "form-control password-control" },
+            { "type", inputTypeName ?? "password" }, // Generator restores type attribute; adds "password" if none.
+        };
         var expectedPreContent = "original pre-content";
         var expectedContent = "original content";
         var expectedPostContent = "original post-content";
@@ -1420,11 +1588,9 @@ public class InputTagHelperTest
             tagName: "input",
             allAttributes: contextAttributes,
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
-        var originalAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control" },
-            };
+            uniqueId: "test"
+        );
+        var originalAttributes = new TagHelperAttributeList { { "class", "form-control" } };
         var output = new TagHelperOutput(
             expectedTagName,
             originalAttributes,
@@ -1433,7 +1599,8 @@ public class InputTagHelperTest
                 var tagHelperContent = new DefaultTagHelperContent();
                 tagHelperContent.SetContent("Something");
                 return Task.FromResult<TagHelperContent>(tagHelperContent);
-            })
+            }
+        )
         {
             TagMode = TagMode.StartTagOnly,
         };
@@ -1442,31 +1609,34 @@ public class InputTagHelperTest
         output.PostContent.SetContent(expectedPostContent);
 
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForProperty<Model>("Text").DisplayDetails(dd => dd.DataTypeName = dataTypeName);
+        metadataProvider
+            .ForProperty<Model>("Text")
+            .DisplayDetails(dd => dd.DataTypeName = dataTypeName);
 
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var tagHelper = GetTagHelper(
             htmlGenerator.Object,
             model,
             nameof(Model.Text),
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
         tagHelper.Format = "somewhat-less-null"; // ignored
         tagHelper.InputTypeName = inputTypeName;
 
         var tagBuilder = new TagBuilder("input")
         {
-            Attributes =
-                {
-                    { "class", "password-control" },
-                },
+            Attributes = { { "class", "password-control" } },
         };
         htmlGenerator
-            .Setup(mock => mock.GeneratePassword(
-                tagHelper.ViewContext,
-                tagHelper.For.ModelExplorer,
-                tagHelper.For.Name,
-                null,       // value
-                null))      // htmlAttributes
+            .Setup(mock =>
+                mock.GeneratePassword(
+                    tagHelper.ViewContext,
+                    tagHelper.For.ModelExplorer,
+                    tagHelper.For.Name,
+                    null, // value
+                    null
+                )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -1477,7 +1647,11 @@ public class InputTagHelperTest
         htmlGenerator.Verify();
 
         Assert.Equal(TagMode.StartTagOnly, output.TagMode);
-        Assert.Equal(expectedAttributes, output.Attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+        Assert.Equal(
+            expectedAttributes,
+            output.Attributes,
+            CaseSensitiveTagHelperAttributeComparer.Default
+        );
         Assert.Equal(expectedPreContent, output.PreContent.GetContent());
         Assert.Equal(expectedContent, output.Content.GetContent());
         Assert.Equal(expectedPostContent, output.PostContent.GetContent());
@@ -1491,26 +1665,27 @@ public class InputTagHelperTest
     [InlineData("RADIO", "not-null")]
     public async Task ProcessAsync_CallsGenerateRadioButton_WithExpectedParameters(
         string inputTypeName,
-        string model)
+        string model
+    )
     {
         // Arrange
-        var value = "match";            // Real generator would use this for comparison with For.Metadata.Model.
+        var value = "match"; // Real generator would use this for comparison with For.Metadata.Model.
         var contextAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control" },
-                { "value", value },
-            };
+        {
+            { "class", "form-control" },
+            { "value", value },
+        };
         if (!string.IsNullOrEmpty(inputTypeName))
         {
-            contextAttributes.SetAttribute("type", inputTypeName);  // Support restoration of type attribute, if any.
+            contextAttributes.SetAttribute("type", inputTypeName); // Support restoration of type attribute, if any.
         }
 
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control radio-control" },
-                { "value", value },
-                { "type", inputTypeName ?? "radio" },       // Generator restores type attribute; adds "radio" if none.
-            };
+        {
+            { "class", "form-control radio-control" },
+            { "value", value },
+            { "type", inputTypeName ?? "radio" }, // Generator restores type attribute; adds "radio" if none.
+        };
         var expectedPreContent = "original pre-content";
         var expectedContent = "original content";
         var expectedPostContent = "original post-content";
@@ -1520,11 +1695,9 @@ public class InputTagHelperTest
             tagName: "input",
             allAttributes: contextAttributes,
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
-        var originalAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control" },
-            };
+            uniqueId: "test"
+        );
+        var originalAttributes = new TagHelperAttributeList { { "class", "form-control" } };
         var output = new TagHelperOutput(
             expectedTagName,
             originalAttributes,
@@ -1533,7 +1706,8 @@ public class InputTagHelperTest
                 var tagHelperContent = new DefaultTagHelperContent();
                 tagHelperContent.SetContent("Something");
                 return Task.FromResult<TagHelperContent>(tagHelperContent);
-            })
+            }
+        )
         {
             TagMode = TagMode.StartTagOnly,
         };
@@ -1547,21 +1721,18 @@ public class InputTagHelperTest
         tagHelper.InputTypeName = inputTypeName;
         tagHelper.Value = value;
 
-        var tagBuilder = new TagBuilder("input")
-        {
-            Attributes =
-                {
-                    { "class", "radio-control" },
-                },
-        };
+        var tagBuilder = new TagBuilder("input") { Attributes = { { "class", "radio-control" } } };
         htmlGenerator
-            .Setup(mock => mock.GenerateRadioButton(
-                tagHelper.ViewContext,
-                tagHelper.For.ModelExplorer,
-                tagHelper.For.Name,
-                value,
-                null,       // isChecked
-                null))      // htmlAttributes
+            .Setup(mock =>
+                mock.GenerateRadioButton(
+                    tagHelper.ViewContext,
+                    tagHelper.For.ModelExplorer,
+                    tagHelper.For.Name,
+                    value,
+                    null, // isChecked
+                    null
+                )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -1572,7 +1743,11 @@ public class InputTagHelperTest
         htmlGenerator.Verify();
 
         Assert.Equal(TagMode.StartTagOnly, output.TagMode);
-        Assert.Equal(expectedAttributes, output.Attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+        Assert.Equal(
+            expectedAttributes,
+            output.Attributes,
+            CaseSensitiveTagHelperAttributeComparer.Default
+        );
         Assert.Equal(expectedPreContent, output.PreContent.GetContent());
         Assert.Equal(expectedContent, output.Content.GetContent());
         Assert.Equal(expectedPostContent, output.PostContent.GetContent());
@@ -1606,23 +1781,21 @@ public class InputTagHelperTest
         string dataTypeName,
         string inputTypeName,
         string model,
-        string format)
+        string format
+    )
     {
         // Arrange
-        var contextAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control" },
-            };
+        var contextAttributes = new TagHelperAttributeList { { "class", "form-control" } };
         if (!string.IsNullOrEmpty(inputTypeName))
         {
-            contextAttributes.SetAttribute("type", inputTypeName);  // Support restoration of type attribute, if any.
+            contextAttributes.SetAttribute("type", inputTypeName); // Support restoration of type attribute, if any.
         }
 
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control text-control" },
-                { "type", inputTypeName ?? "text" },        // Generator restores type attribute; adds "text" if none.
-            };
+        {
+            { "class", "form-control text-control" },
+            { "type", inputTypeName ?? "text" }, // Generator restores type attribute; adds "text" if none.
+        };
         var expectedPreContent = "original pre-content";
         var expectedContent = "original content";
         var expectedPostContent = "original post-content";
@@ -1632,11 +1805,9 @@ public class InputTagHelperTest
             tagName: "input",
             allAttributes: contextAttributes,
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
-        var originalAttributes = new TagHelperAttributeList
-            {
-                { "class", "form-control" },
-            };
+            uniqueId: "test"
+        );
+        var originalAttributes = new TagHelperAttributeList { { "class", "form-control" } };
         var output = new TagHelperOutput(
             expectedTagName,
             originalAttributes,
@@ -1645,7 +1816,8 @@ public class InputTagHelperTest
                 var tagHelperContent = new DefaultTagHelperContent();
                 tagHelperContent.SetContent("Something");
                 return Task.FromResult<TagHelperContent>(tagHelperContent);
-            })
+            }
+        )
         {
             TagMode = TagMode.StartTagOnly,
         };
@@ -1654,32 +1826,32 @@ public class InputTagHelperTest
         output.PostContent.SetContent(expectedPostContent);
 
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForProperty<Model>("Text").DisplayDetails(dd => dd.DataTypeName = dataTypeName);
+        metadataProvider
+            .ForProperty<Model>("Text")
+            .DisplayDetails(dd => dd.DataTypeName = dataTypeName);
 
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var tagHelper = GetTagHelper(
             htmlGenerator.Object,
             model,
             nameof(Model.Text),
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
         tagHelper.Format = format;
         tagHelper.InputTypeName = inputTypeName;
 
-        var tagBuilder = new TagBuilder("input")
-        {
-            Attributes =
-                {
-                    { "class", "text-control" },
-                },
-        };
+        var tagBuilder = new TagBuilder("input") { Attributes = { { "class", "text-control" } } };
         htmlGenerator
-            .Setup(mock => mock.GenerateTextBox(
-                tagHelper.ViewContext,
-                tagHelper.For.ModelExplorer,
-                tagHelper.For.Name,
-                model,  // value
-                format,
-                It.Is<Dictionary<string, object>>(m => m.ContainsKey("type"))))     // htmlAttributes
+            .Setup(mock =>
+                mock.GenerateTextBox(
+                    tagHelper.ViewContext,
+                    tagHelper.For.ModelExplorer,
+                    tagHelper.For.Name,
+                    model, // value
+                    format,
+                    It.Is<Dictionary<string, object>>(m => m.ContainsKey("type"))
+                )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -1690,7 +1862,11 @@ public class InputTagHelperTest
         htmlGenerator.Verify();
 
         Assert.Equal(TagMode.StartTagOnly, output.TagMode);
-        Assert.Equal(expectedAttributes, output.Attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+        Assert.Equal(
+            expectedAttributes,
+            output.Attributes,
+            CaseSensitiveTagHelperAttributeComparer.Default
+        );
         Assert.Equal(expectedPreContent, output.PreContent.GetContent());
         Assert.Equal(expectedContent, output.Content.GetContent());
         Assert.Equal(expectedPostContent, output.PostContent.GetContent());
@@ -1702,39 +1878,39 @@ public class InputTagHelperTest
         get
         {
             return new TheoryData<string, string, string>
-                {
-                    { null, null, "text" },
-                    { "Byte", null, "number" },
-                    { "custom-datatype", null, "text" },
-                    { "Custom-Datatype", null, "text" },
-                    { "date", null, "date" },                  // No date/time special cases since ModelType is string.
-                    { "datetime", null, "datetime-local" },
-                    { "datetime-local", null, "datetime-local" },
-                    { "DATETIME-local", null, "datetime-local" },
-                    { "datetimeOffset", null, "text" },
-                    { "Decimal", "{0:0.00}", "text" },
-                    { "Double", null, "text" },
-                    { "Int16", null, "number" },
-                    { "Int32", null, "number" },
-                    { "int32", null, "number" },
-                    { "Int64", null, "number" },
-                    { "SByte", null, "number" },
-                    { "Single", null, "text" },
-                    { "SINGLE", null, "text" },
-                    { "string", null, "text" },
-                    { "STRING", null, "text" },
-                    { "text", null, "text" },
-                    { "TEXT", null, "text" },
-                    { "time", null, "time" },
-                    { "month", "{0:yyyy-MM}", "month" },
-                    { "week", null, "week" },
-                    { "UInt16", null, "number" },
-                    { "uint16", null, "number" },
-                    { "UInt32", null, "number" },
-                    { "UInt64", null, "number" },
-                    { nameof(IFormFile), null, "file" },
-                    { TemplateRenderer.IEnumerableOfIFormFileName, null, "file" },
-                };
+            {
+                { null, null, "text" },
+                { "Byte", null, "number" },
+                { "custom-datatype", null, "text" },
+                { "Custom-Datatype", null, "text" },
+                { "date", null, "date" }, // No date/time special cases since ModelType is string.
+                { "datetime", null, "datetime-local" },
+                { "datetime-local", null, "datetime-local" },
+                { "DATETIME-local", null, "datetime-local" },
+                { "datetimeOffset", null, "text" },
+                { "Decimal", "{0:0.00}", "text" },
+                { "Double", null, "text" },
+                { "Int16", null, "number" },
+                { "Int32", null, "number" },
+                { "int32", null, "number" },
+                { "Int64", null, "number" },
+                { "SByte", null, "number" },
+                { "Single", null, "text" },
+                { "SINGLE", null, "text" },
+                { "string", null, "text" },
+                { "STRING", null, "text" },
+                { "text", null, "text" },
+                { "TEXT", null, "text" },
+                { "time", null, "time" },
+                { "month", "{0:yyyy-MM}", "month" },
+                { "week", null, "week" },
+                { "UInt16", null, "number" },
+                { "uint16", null, "number" },
+                { "UInt32", null, "number" },
+                { "UInt64", null, "number" },
+                { nameof(IFormFile), null, "file" },
+                { TemplateRenderer.IEnumerableOfIFormFileName, null, "file" },
+            };
         }
     }
 
@@ -1743,59 +1919,64 @@ public class InputTagHelperTest
     public async Task ProcessAsync_CallsGenerateTextBox_AddsExpectedAttributes(
         string dataTypeName,
         string expectedFormat,
-        string expectedType)
+        string expectedType
+    )
     {
         // Arrange
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "type", expectedType },                   // Calculated; not passed to HtmlGenerator.
-            };
+        {
+            { "type", expectedType }, // Calculated; not passed to HtmlGenerator.
+        };
         var expectedTagName = "not-input";
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         var output = new TagHelperOutput(
             expectedTagName,
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
 
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForProperty<Model>("Text").DisplayDetails(dd => dd.DataTypeName = dataTypeName);
+        metadataProvider
+            .ForProperty<Model>("Text")
+            .DisplayDetails(dd => dd.DataTypeName = dataTypeName);
 
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var tagHelper = GetTagHelper(
             htmlGenerator.Object,
             model: null,
             propertyName: nameof(Model.Text),
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
 
         var tagBuilder = new TagBuilder("input");
 
-        var htmlAttributes = new Dictionary<string, object>
-            {
-                { "type", expectedType }
-            };
+        var htmlAttributes = new Dictionary<string, object> { { "type", expectedType } };
         if (string.Equals(dataTypeName, TemplateRenderer.IEnumerableOfIFormFileName))
         {
             htmlAttributes["multiple"] = "multiple";
         }
         htmlGenerator
-            .Setup(mock => mock.GenerateTextBox(
-                tagHelper.ViewContext,
-                tagHelper.For.ModelExplorer,
-                tagHelper.For.Name,
-                null,                                   // value
-                expectedFormat,
-                htmlAttributes))                // htmlAttributes
+            .Setup(mock =>
+                mock.GenerateTextBox(
+                    tagHelper.ViewContext,
+                    tagHelper.For.ModelExplorer,
+                    tagHelper.For.Name,
+                    null, // value
+                    expectedFormat,
+                    htmlAttributes
+                )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -1818,33 +1999,29 @@ public class InputTagHelperTest
     {
         // Arrange
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "type", "datetime" },                   // Calculated; not passed to HtmlGenerator.
-            };
+        {
+            { "type", "datetime" }, // Calculated; not passed to HtmlGenerator.
+        };
         var expectedTagName = "not-input";
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList()
-            {
-                    {"type", "datetime" }
-            },
+            allAttributes: new TagHelperAttributeList() { { "type", "datetime" } },
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         var output = new TagHelperOutput(
             expectedTagName,
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
 
-        var htmlAttributes = new Dictionary<string, object>
-            {
-                { "type", "datetime" }
-            };
+        var htmlAttributes = new Dictionary<string, object> { { "type", "datetime" } };
 
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
 
@@ -1853,18 +2030,22 @@ public class InputTagHelperTest
             htmlGenerator.Object,
             model: null,
             propertyName: "DateTime",
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
         tagHelper.ViewContext.Html5DateRenderingMode = Html5DateRenderingMode.Rfc3339;
         tagHelper.InputTypeName = "datetime";
         var tagBuilder = new TagBuilder("input");
         htmlGenerator
-            .Setup(mock => mock.GenerateTextBox(
-                tagHelper.ViewContext,
-                tagHelper.For.ModelExplorer,
-                tagHelper.For.Name,
-                null,                                   // value
-                @"{0:yyyy-MM-ddTHH\:mm\:ss.fffK}",
-                htmlAttributes))                    // htmlAttributes
+            .Setup(mock =>
+                mock.GenerateTextBox(
+                    tagHelper.ViewContext,
+                    tagHelper.For.ModelExplorer,
+                    tagHelper.For.Name,
+                    null, // value
+                    @"{0:yyyy-MM-ddTHH\:mm\:ss.fffK}",
+                    htmlAttributes
+                )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -1887,33 +2068,29 @@ public class InputTagHelperTest
     {
         // Arrange
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "type", "date" },                   // Calculated; not passed to HtmlGenerator.
-            };
+        {
+            { "type", "date" }, // Calculated; not passed to HtmlGenerator.
+        };
         var expectedTagName = "not-input";
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList()
-            {
-                    {"type", "date" }
-            },
+            allAttributes: new TagHelperAttributeList() { { "type", "date" } },
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         var output = new TagHelperOutput(
             expectedTagName,
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
 
-        var htmlAttributes = new Dictionary<string, object>
-            {
-                { "type", "date" }
-            };
+        var htmlAttributes = new Dictionary<string, object> { { "type", "date" } };
 
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
 
@@ -1922,18 +2099,22 @@ public class InputTagHelperTest
             htmlGenerator.Object,
             model: null,
             propertyName: "DateOnly",
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
         tagHelper.ViewContext.Html5DateRenderingMode = Html5DateRenderingMode.Rfc3339;
         tagHelper.InputTypeName = "date";
         var tagBuilder = new TagBuilder("input");
         htmlGenerator
-            .Setup(mock => mock.GenerateTextBox(
-                tagHelper.ViewContext,
-                tagHelper.For.ModelExplorer,
-                tagHelper.For.Name,
-                null,                                   // value
-                @"{0:yyyy-MM-dd}",
-                htmlAttributes))                    // htmlAttributes
+            .Setup(mock =>
+                mock.GenerateTextBox(
+                    tagHelper.ViewContext,
+                    tagHelper.For.ModelExplorer,
+                    tagHelper.For.Name,
+                    null, // value
+                    @"{0:yyyy-MM-dd}",
+                    htmlAttributes
+                )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -1952,62 +2133,86 @@ public class InputTagHelperTest
     }
 
     [Theory]
-    [InlineData("Date", Html5DateRenderingMode.CurrentCulture, "{0:d}", "date")]    // Format from [DataType].
+    [InlineData("Date", Html5DateRenderingMode.CurrentCulture, "{0:d}", "date")] // Format from [DataType].
     [InlineData("Date", Html5DateRenderingMode.Rfc3339, "{0:yyyy-MM-dd}", "date")]
     [InlineData("DateTime", Html5DateRenderingMode.CurrentCulture, null, "datetime-local")]
-    [InlineData("DateTime", Html5DateRenderingMode.Rfc3339, @"{0:yyyy-MM-ddTHH\:mm\:ss.fff}", "datetime-local")]
-    [InlineData("DateOnlyDate", Html5DateRenderingMode.CurrentCulture, "{0:d}", "date")]    // Format from [DataType].
+    [InlineData(
+        "DateTime",
+        Html5DateRenderingMode.Rfc3339,
+        @"{0:yyyy-MM-ddTHH\:mm\:ss.fff}",
+        "datetime-local"
+    )]
+    [InlineData("DateOnlyDate", Html5DateRenderingMode.CurrentCulture, "{0:d}", "date")] // Format from [DataType].
     [InlineData("DateOnlyDate", Html5DateRenderingMode.Rfc3339, "{0:yyyy-MM-dd}", "date")]
-    [InlineData("DateOnly", Html5DateRenderingMode.CurrentCulture, null, "text")]    // Format from [DataType].
+    [InlineData("DateOnly", Html5DateRenderingMode.CurrentCulture, null, "text")] // Format from [DataType].
     [InlineData("DateOnly", Html5DateRenderingMode.Rfc3339, null, "text")]
     [InlineData("DateTimeOffset", Html5DateRenderingMode.CurrentCulture, null, "text")]
-    [InlineData("DateTimeOffset", Html5DateRenderingMode.Rfc3339, @"{0:yyyy-MM-ddTHH\:mm\:ss.fffK}", "text")]
+    [InlineData(
+        "DateTimeOffset",
+        Html5DateRenderingMode.Rfc3339,
+        @"{0:yyyy-MM-ddTHH\:mm\:ss.fffK}",
+        "text"
+    )]
     [InlineData("DateTimeLocal", Html5DateRenderingMode.CurrentCulture, null, "datetime-local")]
-    [InlineData("DateTimeLocal", Html5DateRenderingMode.Rfc3339, @"{0:yyyy-MM-ddTHH\:mm\:ss.fff}", "datetime-local")]
-    [InlineData("Time", Html5DateRenderingMode.CurrentCulture, "{0:t}", "time")]    // Format from [DataType].
+    [InlineData(
+        "DateTimeLocal",
+        Html5DateRenderingMode.Rfc3339,
+        @"{0:yyyy-MM-ddTHH\:mm\:ss.fff}",
+        "datetime-local"
+    )]
+    [InlineData("Time", Html5DateRenderingMode.CurrentCulture, "{0:t}", "time")] // Format from [DataType].
     [InlineData("Time", Html5DateRenderingMode.Rfc3339, @"{0:HH\:mm\:ss.fff}", "time")]
     [InlineData("Month", Html5DateRenderingMode.CurrentCulture, "{0:yyyy-MM}", "month")]
     [InlineData("Month", Html5DateRenderingMode.Rfc3339, "{0:yyyy-MM}", "month")]
     [InlineData("Week", Html5DateRenderingMode.CurrentCulture, null, "week")]
     [InlineData("Week", Html5DateRenderingMode.Rfc3339, null, "week")]
     [InlineData("NullableDate", Html5DateRenderingMode.Rfc3339, "{0:yyyy-MM-dd}", "date")]
-    [InlineData("NullableDateTime", Html5DateRenderingMode.Rfc3339, @"{0:yyyy-MM-ddTHH\:mm\:ss.fff}", "datetime-local")]
+    [InlineData(
+        "NullableDateTime",
+        Html5DateRenderingMode.Rfc3339,
+        @"{0:yyyy-MM-ddTHH\:mm\:ss.fff}",
+        "datetime-local"
+    )]
     [InlineData("NullableDateOnlyDate", Html5DateRenderingMode.Rfc3339, "{0:yyyy-MM-dd}", "date")]
     [InlineData("NullableDateOnly", Html5DateRenderingMode.Rfc3339, null, "text")]
-    [InlineData("NullableDateTimeOffset", Html5DateRenderingMode.Rfc3339, @"{0:yyyy-MM-ddTHH\:mm\:ss.fffK}", "text")]
+    [InlineData(
+        "NullableDateTimeOffset",
+        Html5DateRenderingMode.Rfc3339,
+        @"{0:yyyy-MM-ddTHH\:mm\:ss.fffK}",
+        "text"
+    )]
     public async Task ProcessAsync_CallsGenerateTextBox_AddsExpectedAttributesForRfc3339(
         string propertyName,
         Html5DateRenderingMode dateRenderingMode,
         string expectedFormat,
-        string expectedType)
+        string expectedType
+    )
     {
         // Arrange
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "type", expectedType },                   // Calculated; not passed to HtmlGenerator.
-            };
+        {
+            { "type", expectedType }, // Calculated; not passed to HtmlGenerator.
+        };
         var expectedTagName = "not-input";
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         var output = new TagHelperOutput(
             expectedTagName,
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
 
-        var htmlAttributes = new Dictionary<string, object>
-            {
-                { "type", expectedType }
-            };
+        var htmlAttributes = new Dictionary<string, object> { { "type", expectedType } };
 
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
 
@@ -2016,18 +2221,22 @@ public class InputTagHelperTest
             htmlGenerator.Object,
             model: null,
             propertyName: propertyName,
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
         tagHelper.ViewContext.Html5DateRenderingMode = dateRenderingMode;
 
         var tagBuilder = new TagBuilder("input");
         htmlGenerator
-            .Setup(mock => mock.GenerateTextBox(
-                tagHelper.ViewContext,
-                tagHelper.For.ModelExplorer,
-                tagHelper.For.Name,
-                null,                                   // value
-                expectedFormat,
-                htmlAttributes))                    // htmlAttributes
+            .Setup(mock =>
+                mock.GenerateTextBox(
+                    tagHelper.ViewContext,
+                    tagHelper.For.ModelExplorer,
+                    tagHelper.For.Name,
+                    null, // value
+                    expectedFormat,
+                    htmlAttributes
+                )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -2057,29 +2266,31 @@ public class InputTagHelperTest
     public async Task ProcessAsync_CallsGenerateTextBox_ProducesExpectedValue_ForDateTime(
         string propertyName,
         string expectedValue,
-        string expectedType)
+        string expectedType
+    )
     {
         // Arrange
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "type", expectedType },
-                { "id", propertyName },
-                { "name", propertyName },
-                { "value", expectedValue },
-            };
+        {
+            { "type", expectedType },
+            { "id", propertyName },
+            { "name", propertyName },
+            { "value", expectedValue },
+        };
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         var output = new TagHelperOutput(
             expectedType,
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -2093,14 +2304,16 @@ public class InputTagHelperTest
             minute: 4,
             second: 5,
             millisecond: 60,
-            kind: DateTimeKind.Utc);
+            kind: DateTimeKind.Utc
+        );
 
         var htmlGenerator = HtmlGeneratorUtilities.GetHtmlGenerator(metadataProvider);
         var tagHelper = GetTagHelper(
             htmlGenerator,
             model: model,
             propertyName: propertyName,
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
         tagHelper.ViewContext.Html5DateRenderingMode = Html5DateRenderingMode.Rfc3339;
 
         // Act
@@ -2119,45 +2332,45 @@ public class InputTagHelperTest
     public async Task ProcessAsync_CallsGenerateTextBox_ProducesExpectedValue_ForDateOnly(
         string propertyName,
         string expectedValue,
-        string expectedType)
+        string expectedType
+    )
     {
         // Arrange
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "type", expectedType },
-                { "id", propertyName },
-                { "name", propertyName },
-                { "value", expectedValue },
-            };
+        {
+            { "type", expectedType },
+            { "id", propertyName },
+            { "name", propertyName },
+            { "value", expectedValue },
+        };
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         var output = new TagHelperOutput(
             expectedType,
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
 
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-        var model = new DateOnly(
-            year: 2000,
-            month: 1,
-            day: 2);
+        var model = new DateOnly(year: 2000, month: 1, day: 2);
 
         var htmlGenerator = HtmlGeneratorUtilities.GetHtmlGenerator(metadataProvider);
         var tagHelper = GetTagHelper(
             htmlGenerator,
             model: model,
             propertyName: propertyName,
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
         tagHelper.ViewContext.Html5DateRenderingMode = Html5DateRenderingMode.Rfc3339;
 
         // Act
@@ -2187,29 +2400,31 @@ public class InputTagHelperTest
         string propertyName,
         string editFormatString,
         string expectedValue,
-        string expectedType)
+        string expectedType
+    )
     {
         // Arrange
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "type", expectedType },
-                { "id", propertyName },
-                { "name", propertyName },
-                { "value", expectedValue },
-            };
+        {
+            { "type", expectedType },
+            { "id", propertyName },
+            { "name", propertyName },
+            { "value", expectedValue },
+        };
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         var output = new TagHelperOutput(
             expectedType,
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -2224,14 +2439,16 @@ public class InputTagHelperTest
             minute: 4,
             second: 5,
             millisecond: 60,
-            kind: DateTimeKind.Utc);
+            kind: DateTimeKind.Utc
+        );
 
         var htmlGenerator = HtmlGeneratorUtilities.GetHtmlGenerator(metadataProvider);
         var tagHelper = GetTagHelper(
             htmlGenerator,
             model: model,
             propertyName: propertyName,
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
         tagHelper.ViewContext.Html5DateRenderingMode = Html5DateRenderingMode.CurrentCulture;
         tagHelper.Format = editFormatString;
 
@@ -2253,46 +2470,46 @@ public class InputTagHelperTest
         string propertyName,
         string editFormatString,
         string expectedValue,
-        string expectedType)
+        string expectedType
+    )
     {
         // Arrange
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "type", expectedType },
-                { "id", propertyName },
-                { "name", propertyName },
-                { "value", expectedValue },
-            };
+        {
+            { "type", expectedType },
+            { "id", propertyName },
+            { "name", propertyName },
+            { "value", expectedValue },
+        };
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         var output = new TagHelperOutput(
             expectedType,
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
 
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
 
-        var model = new DateOnly(
-            year: 2000,
-            month: 1,
-            day: 2);
+        var model = new DateOnly(year: 2000, month: 1, day: 2);
 
         var htmlGenerator = HtmlGeneratorUtilities.GetHtmlGenerator(metadataProvider);
         var tagHelper = GetTagHelper(
             htmlGenerator,
             model: model,
             propertyName: propertyName,
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
         tagHelper.ViewContext.Html5DateRenderingMode = Html5DateRenderingMode.CurrentCulture;
         tagHelper.Format = editFormatString;
 
@@ -2311,29 +2528,31 @@ public class InputTagHelperTest
     [ReplaceCulture]
     public async Task ProcessAsync_CallsGenerateTextBox_ProducesExpectedValue_OverridesDefaultFormat(
         string propertyName,
-        string expectedType)
+        string expectedType
+    )
     {
         // Arrange
         var expectedAttributes = new TagHelperAttributeList
-            {
-                { "type", expectedType },
-                { "id", propertyName },
-                { "name", propertyName },
-                { "value", "non-default format string" },
-            };
+        {
+            { "type", expectedType },
+            { "id", propertyName },
+            { "name", propertyName },
+            { "value", "non-default format string" },
+        };
 
         var context = new TagHelperContext(
             tagName: "input",
-            allAttributes: new TagHelperAttributeList(
-                Enumerable.Empty<TagHelperAttribute>()),
+            allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         var output = new TagHelperOutput(
             expectedType,
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()))
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        )
         {
             TagMode = TagMode.SelfClosing,
         };
@@ -2348,14 +2567,16 @@ public class InputTagHelperTest
             minute: 4,
             second: 5,
             millisecond: 60,
-            kind: DateTimeKind.Utc);
+            kind: DateTimeKind.Utc
+        );
 
         var htmlGenerator = HtmlGeneratorUtilities.GetHtmlGenerator(metadataProvider);
         var tagHelper = GetTagHelper(
             htmlGenerator,
             model: model,
             propertyName: propertyName,
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
         tagHelper.ViewContext.Html5DateRenderingMode = Html5DateRenderingMode.CurrentCulture;
         tagHelper.Format = "non-default format string";
 
@@ -2371,7 +2592,8 @@ public class InputTagHelperTest
         IHtmlGenerator htmlGenerator,
         object model,
         string propertyName,
-        IModelMetadataProvider metadataProvider = null)
+        IModelMetadataProvider metadataProvider = null
+    )
     {
         return GetTagHelper(
             htmlGenerator,
@@ -2380,7 +2602,8 @@ public class InputTagHelperTest
             model: model,
             propertyName: propertyName,
             expressionName: propertyName,
-            metadataProvider: metadataProvider);
+            metadataProvider: metadataProvider
+        );
     }
 
     private static InputTagHelper GetTagHelper(
@@ -2390,7 +2613,8 @@ public class InputTagHelperTest
         object model,
         string propertyName,
         string expressionName,
-        IModelMetadataProvider metadataProvider = null)
+        IModelMetadataProvider metadataProvider = null
+    )
     {
         if (metadataProvider == null)
         {
@@ -2404,7 +2628,11 @@ public class InputTagHelperTest
         var modelExplorer = containerExplorer.GetExplorerForExpression(propertyMetadata, model);
 
         var modelExpression = new ModelExpression(expressionName, modelExplorer);
-        var viewContext = TestableHtmlGenerator.GetViewContext(container, htmlGenerator, metadataProvider);
+        var viewContext = TestableHtmlGenerator.GetViewContext(
+            container,
+            htmlGenerator,
+            metadataProvider
+        );
         var inputTagHelper = new InputTagHelper(htmlGenerator)
         {
             For = modelExpression,

@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.SignalR.Internal;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.AspNetCore.SignalR.Specification.Tests;
 using Microsoft.AspNetCore.SignalR.Tests;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Testing;
@@ -27,19 +27,31 @@ public class RedisHubLifetimeManagerTests : ScaleoutHubLifetimeManagerTests<Test
         public string TestProperty { get; set; }
     }
 
-    private RedisHubLifetimeManager<Hub> CreateLifetimeManager(TestRedisServer server, MessagePackHubProtocolOptions messagePackOptions = null, NewtonsoftJsonHubProtocolOptions jsonOptions = null)
+    private RedisHubLifetimeManager<Hub> CreateLifetimeManager(
+        TestRedisServer server,
+        MessagePackHubProtocolOptions messagePackOptions = null,
+        NewtonsoftJsonHubProtocolOptions jsonOptions = null
+    )
     {
-        var options = new RedisOptions() { ConnectionFactory = async (t) => await Task.FromResult(new TestConnectionMultiplexer(server)) };
+        var options = new RedisOptions()
+        {
+            ConnectionFactory = async (t) =>
+                await Task.FromResult(new TestConnectionMultiplexer(server)),
+        };
         messagePackOptions = messagePackOptions ?? new MessagePackHubProtocolOptions();
         jsonOptions = jsonOptions ?? new NewtonsoftJsonHubProtocolOptions();
         return new RedisHubLifetimeManager<Hub>(
             NullLogger<RedisHubLifetimeManager<Hub>>.Instance,
             Options.Create(options),
-            new DefaultHubProtocolResolver(new IHubProtocol[]
-            {
+            new DefaultHubProtocolResolver(
+                new IHubProtocol[]
+                {
                     new NewtonsoftJsonHubProtocol(Options.Create(jsonOptions)),
                     new MessagePackHubProtocol(Options.Create(messagePackOptions)),
-            }, NullLogger<DefaultHubProtocolResolver>.Instance));
+                },
+                NullLogger<DefaultHubProtocolResolver>.Instance
+            )
+        );
     }
 
     [Fact]
@@ -50,7 +62,8 @@ public class RedisHubLifetimeManagerTests : ScaleoutHubLifetimeManagerTests<Test
         var messagePackOptions = new MessagePackHubProtocolOptions();
 
         var jsonOptions = new NewtonsoftJsonHubProtocolOptions();
-        jsonOptions.PayloadSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+        jsonOptions.PayloadSerializerSettings.ContractResolver =
+            new CamelCasePropertyNamesContractResolver();
 
         using (var client1 = new TestClient())
         using (var client2 = new TestClient())
@@ -67,22 +80,30 @@ public class RedisHubLifetimeManagerTests : ScaleoutHubLifetimeManagerTests<Test
             await manager1.OnConnectedAsync(connection1).DefaultTimeout();
             await manager2.OnConnectedAsync(connection2).DefaultTimeout();
 
-            await manager1.SendAllAsync("Hello", new object[] { new TestObject { TestProperty = "Foo" } });
+            await manager1.SendAllAsync(
+                "Hello",
+                new object[] { new TestObject { TestProperty = "Foo" } }
+            );
 
-            var message = Assert.IsType<InvocationMessage>(await client2.ReadAsync().DefaultTimeout());
+            var message = Assert.IsType<InvocationMessage>(
+                await client2.ReadAsync().DefaultTimeout()
+            );
             Assert.Equal("Hello", message.Target);
             Assert.Collection(
                 message.Arguments,
                 arg0 =>
                 {
                     var dict = Assert.IsType<JObject>(arg0);
-                    Assert.Collection(dict.Properties(),
+                    Assert.Collection(
+                        dict.Properties(),
                         prop =>
                         {
                             Assert.Equal("testProperty", prop.Name);
                             Assert.Equal("Foo", prop.Value.Value<string>());
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
     }
 
@@ -101,19 +122,25 @@ public class RedisHubLifetimeManagerTests : ScaleoutHubLifetimeManagerTests<Test
 
         var manager = new RedisHubLifetimeManager<Hub>(
             loggerT,
-            Options.Create(new RedisOptions()
-            {
-                ConnectionFactory = _ => throw new ApplicationException("throw from connect")
-            }),
-            new DefaultHubProtocolResolver(new IHubProtocol[]
-            {
-            }, NullLogger<DefaultHubProtocolResolver>.Instance));
+            Options.Create(
+                new RedisOptions()
+                {
+                    ConnectionFactory = _ => throw new ApplicationException("throw from connect"),
+                }
+            ),
+            new DefaultHubProtocolResolver(
+                new IHubProtocol[] { },
+                NullLogger<DefaultHubProtocolResolver>.Instance
+            )
+        );
 
         using (var client = new TestClient())
         {
             var connection = HubConnectionContextUtils.Create(client.Connection);
 
-            var ex = await Assert.ThrowsAsync<ApplicationException>(() => manager.OnConnectedAsync(connection)).DefaultTimeout();
+            var ex = await Assert
+                .ThrowsAsync<ApplicationException>(() => manager.OnConnectedAsync(connection))
+                .DefaultTimeout();
             Assert.Equal("throw from connect", ex.Message);
 
             await manager.OnDisconnectedAsync(connection).DefaultTimeout();

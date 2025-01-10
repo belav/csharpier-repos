@@ -12,28 +12,30 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class InterpolatedStringExpressionStructureTests : AbstractCSharpSyntaxNodeStructureTests<InterpolatedStringExpressionSyntax>
+public class InterpolatedStringExpressionStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<InterpolatedStringExpressionSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider()
-        => new InterpolatedStringExpressionStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new InterpolatedStringExpressionStructureProvider();
 
     [Fact]
     public async Task TestMultiLineStringLiteral()
     {
         await VerifyBlockSpansAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v =
-                {|hint:{|textspan:$$$@"
-                {123}
-                "|}|};
-                    }
+                    var v =
+            {|hint:{|textspan:$$$@"
+            {123}
+            "|}|};
                 }
-                """,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            }
+            """,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -41,13 +43,14 @@ public class InterpolatedStringExpressionStructureTests : AbstractCSharpSyntaxNo
     {
         await VerifyNoBlockSpansAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $$$";
-                    }
+                    var v = $$$";
                 }
-                """);
+            }
+            """
+        );
     }
 }

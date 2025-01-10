@@ -12,14 +12,20 @@ namespace Microsoft.Interop.Analyzers
 {
     internal static class FixAllContextExtensions
     {
-        public static async Task<ImmutableArray<Diagnostic>> GetDiagnosticsInScopeAsync(this FixAllContext context)
+        public static async Task<ImmutableArray<Diagnostic>> GetDiagnosticsInScopeAsync(
+            this FixAllContext context
+        )
         {
             switch (context.Scope)
             {
                 case FixAllScope.Document:
-                    return await context.GetDocumentDiagnosticsAsync(context.Document).ConfigureAwait(false);
+                    return await context
+                        .GetDocumentDiagnosticsAsync(context.Document)
+                        .ConfigureAwait(false);
                 case FixAllScope.Project:
-                    return await context.GetAllDiagnosticsAsync(context.Project).ConfigureAwait(false);
+                    return await context
+                        .GetAllDiagnosticsAsync(context.Project)
+                        .ConfigureAwait(false);
                 case FixAllScope.Solution:
                     Solution solution = context.Solution;
                     ProjectDependencyGraph dependencyGraph = solution.GetProjectDependencyGraph();
@@ -36,16 +42,24 @@ namespace Microsoft.Interop.Analyzers
                     // Note: we have to filter down to projects of the same language as the FixAllContext points at a
                     // CodeFixProvider, and we can't call into providers of different languages with diagnostics from a
                     // different language.
-                    IEnumerable<Project?> sortedProjects = dependencyGraph.GetTopologicallySortedProjects(context.CancellationToken)
-                                                        .Select(solution.GetProject)
-                                                        .Where(p => p.Language == context.Project.Language);
-                    return (await Task.WhenAll(sortedProjects.Select(context.GetAllDiagnosticsAsync)).ConfigureAwait(false)).SelectMany(diag => diag).ToImmutableArray();
+                    IEnumerable<Project?> sortedProjects = dependencyGraph
+                        .GetTopologicallySortedProjects(context.CancellationToken)
+                        .Select(solution.GetProject)
+                        .Where(p => p.Language == context.Project.Language);
+                    return (
+                        await Task.WhenAll(sortedProjects.Select(context.GetAllDiagnosticsAsync))
+                            .ConfigureAwait(false)
+                    )
+                        .SelectMany(diag => diag)
+                        .ToImmutableArray();
                 default:
                     return ImmutableArray<Diagnostic>.Empty;
             }
         }
 
-        public static async Task<ImmutableArray<Project>> GetProjectsWithDiagnosticsAsync(this FixAllContext context)
+        public static async Task<ImmutableArray<Project>> GetProjectsWithDiagnosticsAsync(
+            this FixAllContext context
+        )
         {
             switch (context.Scope)
             {
@@ -55,10 +69,13 @@ namespace Microsoft.Interop.Analyzers
                 case FixAllScope.Project:
                     return ImmutableArray.Create(context.Project);
                 case FixAllScope.Solution:
-                    ImmutableArray<Project>.Builder projectsWithDiagnostics = ImmutableArray.CreateBuilder<Project>();
+                    ImmutableArray<Project>.Builder projectsWithDiagnostics =
+                        ImmutableArray.CreateBuilder<Project>();
                     foreach (var project in context.Solution.Projects)
                     {
-                        ImmutableArray<Diagnostic> diagnostics = await context.GetAllDiagnosticsAsync(project).ConfigureAwait(false);
+                        ImmutableArray<Diagnostic> diagnostics = await context
+                            .GetAllDiagnosticsAsync(project)
+                            .ConfigureAwait(false);
                         if (diagnostics.Length != 0)
                         {
                             projectsWithDiagnostics.Add(project);

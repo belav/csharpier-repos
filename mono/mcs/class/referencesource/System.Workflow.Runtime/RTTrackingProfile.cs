@@ -1,30 +1,27 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Xml;
-using System.Xml.Schema;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
-using System.Globalization;
-
+using System.Text;
 //using System.Workflow.Activities;
 using System.Workflow.ComponentModel;
 using System.Workflow.Runtime;
 using System.Workflow.Runtime.Hosting;
-using Hosting = System.Workflow.Runtime.Hosting;
 using System.Workflow.Runtime.Tracking;
-
+using System.Xml;
+using System.Xml.Schema;
+using Hosting = System.Workflow.Runtime.Hosting;
 
 namespace System.Workflow.Runtime
 {
     /// <summary>
-    /// RTTrackingProfile contains functionality specific to the runtime such as 
+    /// RTTrackingProfile contains functionality specific to the runtime such as
     /// trackpoint and location matching and caching, cloning, handling dynamic updates...
     /// </summary>
     internal class RTTrackingProfile : ICloneable // ICloneable is deprecated
@@ -33,30 +30,38 @@ namespace System.Workflow.Runtime
         //
         // Client defined profile
         private TrackingProfile _profile = null;
+
         //
         // Type of the workflow that this profile is associated to
         private Type _workflowType = null;
         private Type _serviceType = null;
+
         //
         // List of qualified ids and the trackpoints that declared themselves as matches during static examination
-        private Dictionary<string, List<ActivityTrackPointCacheItem>> _activities = new Dictionary<string, List<ActivityTrackPointCacheItem>>();
+        private Dictionary<string, List<ActivityTrackPointCacheItem>> _activities =
+            new Dictionary<string, List<ActivityTrackPointCacheItem>>();
         private List<string> _activitiesIgnore = new List<string>();
 
-        private Dictionary<string, List<UserTrackPoint>> _user = new Dictionary<string, List<UserTrackPoint>>();
+        private Dictionary<string, List<UserTrackPoint>> _user =
+            new Dictionary<string, List<UserTrackPoint>>();
         private List<string> _userIgnore = new List<string>();
+
         //
         // Indicates that the RTTrackingProfile instance is private and is safe to modify for a specific instance
         private bool _isPrivate = false;
+
         //
         // Indicates if a dynamic update is in-flight
         private bool _pendingWorkflowChange = false;
+
         //
         // The changes for a dynamic update
         private IList<WorkflowChangeAction> _pendingChanges = null;
+
         //
         // Activities (including those that are being added) can start executing while a dynamic update is pending
         // These cannot be added to the main cache until the update succeeds because the update might roll back.
-        // However since we have to search for matching track points we might as well save that work. 
+        // However since we have to search for matching track points we might as well save that work.
         // This list will be copied into the main cache if the dynamic update completes successfully
         private Dictionary<string, List<ActivityTrackPointCacheItem>> _dynamicActivities = null;
         private List<string> _dynamicActivitiesIgnore = null;
@@ -70,9 +75,8 @@ namespace System.Workflow.Runtime
         /// <summary>
         /// Default constructor
         /// </summary>
-        protected RTTrackingProfile()
-        {
-        }
+        protected RTTrackingProfile() { }
+
         /// <summary>
         /// Primary constructor
         /// </summary>
@@ -91,11 +95,13 @@ namespace System.Workflow.Runtime
             _workflowType = root.GetType();
             _serviceType = serviceType;
             //
-            // "Clone" a private copy in case the tracking service holds a reference to 
+            // "Clone" a private copy in case the tracking service holds a reference to
             // the profile it gave us and attempts to modify it at a later point
             TrackingProfileSerializer tps = new TrackingProfileSerializer();
 
-            StringWriter writer = new StringWriter(System.Globalization.CultureInfo.InvariantCulture);
+            StringWriter writer = new StringWriter(
+                System.Globalization.CultureInfo.InvariantCulture
+            );
             StringReader reader = null;
 
             TrackingProfile privateProfile = null;
@@ -103,7 +109,7 @@ namespace System.Workflow.Runtime
             try
             {
                 //
-                // Let exceptions bubble back to the tracking service - 
+                // Let exceptions bubble back to the tracking service -
                 // the profile must be valid per the schema.
                 tps.Serialize(writer, profile);
                 reader = new StringReader(writer.ToString());
@@ -123,7 +129,7 @@ namespace System.Workflow.Runtime
         }
 
         /// <summary>
-        /// Constructor used for cloning.  
+        /// Constructor used for cloning.
         /// </summary>
         /// <param name="runtimeProfile">RTTrackingProfile to clone</param>
         /// <remarks>All members are shallow copied!  Use MakePrivate to deep copy after cloning.</remarks>
@@ -141,8 +147,15 @@ namespace System.Workflow.Runtime
             // be shared but the cache themselves cannot as they may be modified
             //
             // Activity match and ignore cache
-            _activities = new Dictionary<string, List<ActivityTrackPointCacheItem>>(runtimeProfile._activities.Count);
-            foreach (KeyValuePair<string, List<ActivityTrackPointCacheItem>> kvp in runtimeProfile._activities)
+            _activities = new Dictionary<string, List<ActivityTrackPointCacheItem>>(
+                runtimeProfile._activities.Count
+            );
+            foreach (
+                KeyValuePair<
+                    string,
+                    List<ActivityTrackPointCacheItem>
+                > kvp in runtimeProfile._activities
+            )
                 _activities.Add(kvp.Key, runtimeProfile._activities[kvp.Key]);
 
             _activitiesIgnore = new List<string>(runtimeProfile._activitiesIgnore);
@@ -150,13 +163,22 @@ namespace System.Workflow.Runtime
             // Pending dynamic update activity match and ignore cache
             if (null != runtimeProfile._dynamicActivities)
             {
-                _dynamicActivities = new Dictionary<string, List<ActivityTrackPointCacheItem>>(runtimeProfile._dynamicActivities.Count);
-                foreach (KeyValuePair<string, List<ActivityTrackPointCacheItem>> kvp in runtimeProfile._dynamicActivities)
+                _dynamicActivities = new Dictionary<string, List<ActivityTrackPointCacheItem>>(
+                    runtimeProfile._dynamicActivities.Count
+                );
+                foreach (
+                    KeyValuePair<
+                        string,
+                        List<ActivityTrackPointCacheItem>
+                    > kvp in runtimeProfile._dynamicActivities
+                )
                     _dynamicActivities.Add(kvp.Key, runtimeProfile._dynamicActivities[kvp.Key]);
             }
 
             if (null != runtimeProfile._dynamicActivitiesIgnore)
-                _dynamicActivitiesIgnore = new List<string>(runtimeProfile._dynamicActivitiesIgnore);
+                _dynamicActivitiesIgnore = new List<string>(
+                    runtimeProfile._dynamicActivitiesIgnore
+                );
             //
             // User event match and ignore cache
             _user = new Dictionary<string, List<UserTrackPoint>>(runtimeProfile._user.Count);
@@ -168,8 +190,12 @@ namespace System.Workflow.Runtime
             // Pending dynamic update activity match and ignore cache
             if (null != runtimeProfile._dynamicUser)
             {
-                _dynamicUser = new Dictionary<string, List<UserTrackPoint>>(runtimeProfile._dynamicUser.Count);
-                foreach (KeyValuePair<string, List<UserTrackPoint>> kvp in runtimeProfile._dynamicUser)
+                _dynamicUser = new Dictionary<string, List<UserTrackPoint>>(
+                    runtimeProfile._dynamicUser.Count
+                );
+                foreach (
+                    KeyValuePair<string, List<UserTrackPoint>> kvp in runtimeProfile._dynamicUser
+                )
                     _dynamicUser.Add(kvp.Key, kvp.Value);
             }
 
@@ -189,11 +215,14 @@ namespace System.Workflow.Runtime
             set
             {
                 if (!(value) && (_isPrivate))
-                    throw new InvalidOperationException(ExecutionStringManager.CannotResetIsPrivate);
+                    throw new InvalidOperationException(
+                        ExecutionStringManager.CannotResetIsPrivate
+                    );
 
                 _isPrivate = value;
             }
         }
+
         /// <summary>
         /// Type of workflow to which this profile is associated
         /// </summary>
@@ -214,7 +243,12 @@ namespace System.Workflow.Runtime
 
         #region Internal Methods for Listeners
 
-        internal bool TryTrackActivityEvent(Activity activity, ActivityExecutionStatus status, IServiceProvider provider, ActivityTrackingRecord record)
+        internal bool TryTrackActivityEvent(
+            Activity activity,
+            ActivityExecutionStatus status,
+            IServiceProvider provider,
+            ActivityTrackingRecord record
+        )
         {
             List<ActivityTrackPointCacheItem> points;
             //
@@ -242,7 +276,13 @@ namespace System.Workflow.Runtime
             return false;
         }
 
-        internal bool TryTrackUserEvent(Activity activity, string keyName, object argument, WorkflowExecutor exec, UserTrackingRecord record)
+        internal bool TryTrackUserEvent(
+            Activity activity,
+            string keyName,
+            object argument,
+            WorkflowExecutor exec,
+            UserTrackingRecord record
+        )
         {
             List<UserTrackPoint> points;
             if (TryGetCacheItems(activity, out points))
@@ -262,7 +302,10 @@ namespace System.Workflow.Runtime
             return false;
         }
 
-        internal bool TryTrackInstanceEvent(TrackingWorkflowEvent status, WorkflowTrackingRecord record)
+        internal bool TryTrackInstanceEvent(
+            TrackingWorkflowEvent status,
+            WorkflowTrackingRecord record
+        )
         {
             bool track = false;
             foreach (WorkflowTrackPoint point in _profile.WorkflowTrackPoints)
@@ -276,10 +319,9 @@ namespace System.Workflow.Runtime
             return track;
         }
 
-
         /// <summary>
         /// Called by TrackingListener to determine if a subscription is needed for an activity.
-        /// Also used as an entry point for dynamically building cache entries for dynamically added activities.  
+        /// Also used as an entry point for dynamically building cache entries for dynamically added activities.
         /// </summary>
         /// <param name="activity"></param>
         /// <param name="exec"></param>
@@ -287,14 +329,17 @@ namespace System.Workflow.Runtime
         internal bool ActivitySubscriptionNeeded(Activity activity)
         {
             List<ActivityTrackPointCacheItem> points = null;
-            if ((!_pendingWorkflowChange) || ((_pendingWorkflowChange) && (!IsPendingUpdateActivity(activity, true))))
+            if (
+                (!_pendingWorkflowChange)
+                || ((_pendingWorkflowChange) && (!IsPendingUpdateActivity(activity, true)))
+            )
             {
                 //
-                // A dynamic update is not in progress or 
+                // A dynamic update is not in progress or
                 // the activity is not part of the dynamic update.
                 // The main cache has all matching track points
                 //
-                // 
+                //
                 bool retry = true;
                 while (retry)
                 {
@@ -340,7 +385,9 @@ namespace System.Workflow.Runtime
         {
             Debug.Assert(!_pendingWorkflowChange, "_pendingWorkflowChange should be false.");
             if (_pendingWorkflowChange)
-                throw new InvalidOperationException(ExecutionStringManager.DynamicUpdateIsNotPending);
+                throw new InvalidOperationException(
+                    ExecutionStringManager.DynamicUpdateIsNotPending
+                );
 
             if (!_isPrivate)
                 throw new InvalidOperationException(ExecutionStringManager.ProfileIsNotPrivate);
@@ -359,7 +406,10 @@ namespace System.Workflow.Runtime
 
         public void WorkflowChangeCommit()
         {
-            Debug.Assert(_pendingWorkflowChange, "Workflow change is not pending - no change to commit");
+            Debug.Assert(
+                _pendingWorkflowChange,
+                "Workflow change is not pending - no change to commit"
+            );
 
             if (!_pendingWorkflowChange)
                 return;
@@ -368,7 +418,7 @@ namespace System.Workflow.Runtime
                 throw new InvalidOperationException(ExecutionStringManager.ProfileIsNotPrivate);
             //
             // Remove items that have been deleted by this update
-            // Must do all removes first as there may be a new action 
+            // Must do all removes first as there may be a new action
             // with the same qid as a previous action that is being removed
             if (null != _pendingChanges)
             {
@@ -378,7 +428,9 @@ namespace System.Workflow.Runtime
                     {
                         //
                         // Remove all references to this activity that might exist in our caches
-                        string qId = ((RemovedActivityAction)action).OriginalRemovedActivity.QualifiedName;
+                        string qId = ((RemovedActivityAction)action)
+                            .OriginalRemovedActivity
+                            .QualifiedName;
                         _activities.Remove(qId);
                         _activitiesIgnore.Remove(qId);
                         _user.Remove(qId);
@@ -389,7 +441,12 @@ namespace System.Workflow.Runtime
             //
             // Copy any pending cache items to the regular activity track point cache
             if ((null != _dynamicActivities) && (_dynamicActivities.Count > 0))
-                foreach (KeyValuePair<string, List<ActivityTrackPointCacheItem>> kvp in _dynamicActivities)
+                foreach (
+                    KeyValuePair<
+                        string,
+                        List<ActivityTrackPointCacheItem>
+                    > kvp in _dynamicActivities
+                )
                     _activities.Add(kvp.Key, kvp.Value);
 
             if ((null != _dynamicActivitiesIgnore) && (_dynamicActivitiesIgnore.Count > 0))
@@ -475,7 +532,10 @@ namespace System.Workflow.Runtime
         /// <param name="activity">Activity for which to determine subscription needs</param>
         /// <param name="includes">List to be populated with matching track points</param>
         /// <returns>true if a subscription is needed; false if not</returns>
-        private bool CreateCacheItems(Activity activity, out List<ActivityTrackPointCacheItem> includes)
+        private bool CreateCacheItems(
+            Activity activity,
+            out List<ActivityTrackPointCacheItem> includes
+        )
         {
             includes = new List<ActivityTrackPointCacheItem>();
             //
@@ -516,7 +576,10 @@ namespace System.Workflow.Runtime
             //
             // Check to make sure the item isn't in the dictionary
             // If not add all track points
-            Debug.Assert(!_activities.ContainsKey(qualifiedID), "QualifiedName is already in the activities cache");
+            Debug.Assert(
+                !_activities.ContainsKey(qualifiedID),
+                "QualifiedName is already in the activities cache"
+            );
             if (_activities.ContainsKey(qualifiedID))
                 throw new InvalidOperationException(ExecutionStringManager.RTProfileActCacheDupKey);
 
@@ -529,7 +592,10 @@ namespace System.Workflow.Runtime
             //
             // Check to make sure the item isn't in the dictionary
             // If not add all track points
-            Debug.Assert(!_user.ContainsKey(qualifiedID), "QualifiedName is already in the user cache");
+            Debug.Assert(
+                !_user.ContainsKey(qualifiedID),
+                "QualifiedName is already in the user cache"
+            );
             if (_user.ContainsKey(qualifiedID))
                 throw new InvalidOperationException(ExecutionStringManager.RTProfileActCacheDupKey);
 
@@ -561,17 +627,22 @@ namespace System.Workflow.Runtime
             points.Add(point);
         }
 
-        private void CacheInsertUpdatePending(string qualifiedID, List<ActivityTrackPointCacheItem> points)
+        private void CacheInsertUpdatePending(
+            string qualifiedID,
+            List<ActivityTrackPointCacheItem> points
+        )
         {
             //
             // The activity has been added during a pending dynamic change
-            // add it to a temporary lookup which will be copied to real cache 
+            // add it to a temporary lookup which will be copied to real cache
             // when the dynamic update commits.
             if ((!_isPrivate) || (!_pendingWorkflowChange))
                 throw new InvalidOperationException(ExecutionStringManager.ProfileIsNotPrivate);
 
             if (null == _dynamicActivities)
-                throw new InvalidOperationException(ExecutionStringManager.RTProfileDynamicActCacheIsNull);
+                throw new InvalidOperationException(
+                    ExecutionStringManager.RTProfileDynamicActCacheIsNull
+                );
 
             List<ActivityTrackPointCacheItem> tmp = null;
             if (!_dynamicActivities.TryGetValue(qualifiedID, out tmp))
@@ -584,13 +655,19 @@ namespace System.Workflow.Runtime
                 tmp.Add(point);
         }
 
-        private bool TryGetCacheItems(Activity activity, out List<ActivityTrackPointCacheItem> points)
+        private bool TryGetCacheItems(
+            Activity activity,
+            out List<ActivityTrackPointCacheItem> points
+        )
         {
             points = null;
-            if ((!_pendingWorkflowChange) || ((_pendingWorkflowChange) && (!IsPendingUpdateActivity(activity, true))))
+            if (
+                (!_pendingWorkflowChange)
+                || ((_pendingWorkflowChange) && (!IsPendingUpdateActivity(activity, true)))
+            )
             {
                 //
-                // A dynamic update is not in progress or this activity 
+                // A dynamic update is not in progress or this activity
                 // is not being added by the current dynamic update.
                 // The main cache holds all matching track points
                 return _activities.TryGetValue(activity.QualifiedName, out points);
@@ -607,13 +684,15 @@ namespace System.Workflow.Runtime
         {
             //
             // The activity has been added during a pending dynamic change
-            // add it to a temporary lookup which will be copied to real cache 
+            // add it to a temporary lookup which will be copied to real cache
             // when the dynamic update commits.
             if ((!_isPrivate) || (!_pendingWorkflowChange))
                 throw new InvalidOperationException(ExecutionStringManager.ProfileIsNotPrivate);
 
             if (null == _dynamicUser)
-                throw new InvalidOperationException(ExecutionStringManager.RTProfileDynamicActCacheIsNull);
+                throw new InvalidOperationException(
+                    ExecutionStringManager.RTProfileDynamicActCacheIsNull
+                );
 
             List<UserTrackPoint> tmp = null;
             if (!_dynamicUser.TryGetValue(qualifiedID, out tmp))
@@ -629,10 +708,13 @@ namespace System.Workflow.Runtime
         private bool TryGetCacheItems(Activity activity, out List<UserTrackPoint> points)
         {
             points = null;
-            if ((!_pendingWorkflowChange) || ((_pendingWorkflowChange) && (!IsPendingUpdateActivity(activity, true))))
+            if (
+                (!_pendingWorkflowChange)
+                || ((_pendingWorkflowChange) && (!IsPendingUpdateActivity(activity, true)))
+            )
             {
                 //
-                // A dynamic update is not in progress or this activity 
+                // A dynamic update is not in progress or this activity
                 // is not being added by the current dynamic update.
                 // The main cache holds all matching track points
                 return _user.TryGetValue(activity.QualifiedName, out points);
@@ -657,7 +739,11 @@ namespace System.Workflow.Runtime
 
             List<Activity> allActivities = new List<Activity>(compositeActivity.EnabledActivities);
 
-            foreach (Activity secondaryFlowActivity in ((ISupportAlternateFlow)compositeActivity).AlternateFlowActivities)
+            foreach (
+                Activity secondaryFlowActivity in (
+                    (ISupportAlternateFlow)compositeActivity
+                ).AlternateFlowActivities
+            )
             {
                 if (!allActivities.Contains(secondaryFlowActivity))
                     allActivities.Add(secondaryFlowActivity);
@@ -689,15 +775,26 @@ namespace System.Workflow.Runtime
                     else if (action is RemovedActivityAction)
                     {
                         if (!addedOnly)
-                            qualifiedId = ((RemovedActivityAction)action).OriginalRemovedActivity.QualifiedName;
+                            qualifiedId = ((RemovedActivityAction)action)
+                                .OriginalRemovedActivity
+                                .QualifiedName;
                     }
                     else
                     {
                         Debug.Assert(false, ExecutionStringManager.UnknownActivityActionType);
                     }
 
-                    if ((null != qualifiedId)
-                        && (0 == String.Compare(activity.QualifiedName, qualifiedId, StringComparison.Ordinal)))
+                    if (
+                        (null != qualifiedId)
+                        && (
+                            0
+                            == String.Compare(
+                                activity.QualifiedName,
+                                qualifiedId,
+                                StringComparison.Ordinal
+                            )
+                        )
+                    )
                     {
                         return true;
                     }
@@ -726,7 +823,11 @@ namespace System.Workflow.Runtime
 
         private struct ActivityTrackPointCacheItem
         {
-            internal ActivityTrackPointCacheItem(ActivityTrackPoint point, List<ActivityExecutionStatus> events, bool hasConditions)
+            internal ActivityTrackPointCacheItem(
+                ActivityTrackPoint point,
+                List<ActivityExecutionStatus> events,
+                bool hasConditions
+            )
             {
                 if (null == point)
                     throw new ArgumentNullException("point");

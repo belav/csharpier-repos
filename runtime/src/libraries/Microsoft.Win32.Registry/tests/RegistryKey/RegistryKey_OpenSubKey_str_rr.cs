@@ -13,16 +13,27 @@ namespace Microsoft.Win32.RegistryTests
         public void NegativeTests()
         {
             // Should throw if passed subkey name is null
-            Assert.Throws<ArgumentNullException>(() => TestRegistryKey.OpenSubKey(name: null, rights: RegistryRights.ReadKey));
+            Assert.Throws<ArgumentNullException>(
+                () => TestRegistryKey.OpenSubKey(name: null, rights: RegistryRights.ReadKey)
+            );
 
             // Should throw if subkey name greater than 255 chars
-            AssertExtensions.Throws<ArgumentException>("name", null, () => TestRegistryKey.OpenSubKey(new string('a', 256), RegistryRights.FullControl));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                null,
+                () => TestRegistryKey.OpenSubKey(new string('a', 256), RegistryRights.FullControl)
+            );
 
             // OpenSubKey should be read only
             const string name = "FooBar";
             TestRegistryKey.SetValue(name, 42);
             TestRegistryKey.CreateSubKey(name).Dispose();
-            using (var rk = Registry.CurrentUser.OpenSubKey(name: TestRegistryKeyName, rights: RegistryRights.ReadKey))
+            using (
+                var rk = Registry.CurrentUser.OpenSubKey(
+                    name: TestRegistryKeyName,
+                    rights: RegistryRights.ReadKey
+                )
+            )
             {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.SetValue(name, "String"));
@@ -45,7 +56,12 @@ namespace Microsoft.Win32.RegistryTests
             // [] Vanilla; open a subkey in read/write mode and write to it
             const string valueName = "FooBar";
             const string expectedValue = "BLAH";
-            using (var rk = TestRegistryKey.OpenSubKey("", RegistryRights.SetValue | RegistryRights.QueryValues))
+            using (
+                var rk = TestRegistryKey.OpenSubKey(
+                    "",
+                    RegistryRights.SetValue | RegistryRights.QueryValues
+                )
+            )
             {
                 rk.SetValue(valueName, expectedValue);
                 Assert.Equal(expectedValue, rk.GetValue(valueName));
@@ -64,22 +80,46 @@ namespace Microsoft.Win32.RegistryTests
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void OpenSubKey_Writable_KeyExists_OpensWithFixedUpName(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(expected, () => TestRegistryKey.OpenSubKey(subKeyName, Writable));
+        public void OpenSubKey_Writable_KeyExists_OpensWithFixedUpName(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName, Writable)
+            );
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void OpenSubKey_NonWritable_KeyExists_OpensWithFixedUpName(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(expected, () => TestRegistryKey.OpenSubKey(subKeyName, NonWritable));
+        public void OpenSubKey_NonWritable_KeyExists_OpensWithFixedUpName(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName, NonWritable)
+            );
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void OpenSubKey_Writable_KeyDoesNotExist_ReturnsNull(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(expected, () => TestRegistryKey.OpenSubKey(subKeyName, Writable));
+        public void OpenSubKey_Writable_KeyDoesNotExist_ReturnsNull(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName, Writable)
+            );
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void OpenSubKey_NonWritable_KeyDoesNotExist_ReturnsNull(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(expected, () => TestRegistryKey.OpenSubKey(subKeyName, NonWritable));
+        public void OpenSubKey_NonWritable_KeyDoesNotExist_ReturnsNull(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName, NonWritable)
+            );
     }
 }

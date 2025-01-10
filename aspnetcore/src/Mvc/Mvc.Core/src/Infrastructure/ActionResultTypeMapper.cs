@@ -13,8 +13,10 @@ internal sealed class ActionResultTypeMapper : IActionResultTypeMapper
     {
         ArgumentNullException.ThrowIfNull(returnType);
 
-        if (returnType.IsGenericType &&
-            returnType.GetGenericTypeDefinition() == typeof(ActionResult<>))
+        if (
+            returnType.IsGenericType
+            && returnType.GetGenericTypeDefinition() == typeof(ActionResult<>)
+        )
         {
             return returnType.GetGenericArguments()[0];
         }
@@ -36,9 +38,6 @@ internal sealed class ActionResultTypeMapper : IActionResultTypeMapper
             return new HttpActionResult(httpResult);
         }
 
-        return new ObjectResult(value)
-        {
-            DeclaredType = returnType,
-        };
+        return new ObjectResult(value) { DeclaredType = returnType };
     }
 }

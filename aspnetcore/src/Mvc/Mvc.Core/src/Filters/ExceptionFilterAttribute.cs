@@ -7,8 +7,16 @@ namespace Microsoft.AspNetCore.Mvc.Filters;
 /// An abstract filter that runs asynchronously after an action has thrown an <see cref="Exception"/>. Subclasses
 /// must override <see cref="OnException"/> or <see cref="OnExceptionAsync"/> but not both.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-public abstract class ExceptionFilterAttribute : Attribute, IAsyncExceptionFilter, IExceptionFilter, IOrderedFilter
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = true,
+    Inherited = true
+)]
+public abstract class ExceptionFilterAttribute
+    : Attribute,
+        IAsyncExceptionFilter,
+        IExceptionFilter,
+        IOrderedFilter
 {
     /// <inheritdoc />
     public int Order { get; set; }
@@ -23,7 +31,5 @@ public abstract class ExceptionFilterAttribute : Attribute, IAsyncExceptionFilte
     }
 
     /// <inheritdoc />
-    public virtual void OnException(ExceptionContext context)
-    {
-    }
+    public virtual void OnException(ExceptionContext context) { }
 }

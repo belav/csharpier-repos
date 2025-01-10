@@ -1,7 +1,7 @@
 //
 // System.ComponentModel.Design.DesignSurfaceCollection
 //
-// Authors:	 
+// Authors:
 //	  Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2006 Ivan N. Zlatev
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,111 +29,116 @@
 
 
 using System;
-using System.ComponentModel;
 using System.Collections;
+using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-	// A read-only collection of design surfaces.
-	// A wrapper around a DesignerCollection, which get's the DesignSurface for the IDesignerHost
-	// on the fly.
-	//
-	public sealed class DesignSurfaceCollection : ICollection, IEnumerable
-	{
-		
-		private class DesignSurfaceEnumerator : IEnumerator
-		{
-			IEnumerator _designerCollectionEnumerator;
-			
-			public DesignSurfaceEnumerator (IEnumerator designerCollectionEnumerator)
-			{
-				_designerCollectionEnumerator = designerCollectionEnumerator;
-			}
+    // A read-only collection of design surfaces.
+    // A wrapper around a DesignerCollection, which get's the DesignSurface for the IDesignerHost
+    // on the fly.
+    //
+    public sealed class DesignSurfaceCollection : ICollection, IEnumerable
+    {
+        private class DesignSurfaceEnumerator : IEnumerator
+        {
+            IEnumerator _designerCollectionEnumerator;
 
-			public bool MoveNext ()
-			{
-				return _designerCollectionEnumerator.MoveNext ();
-			}
+            public DesignSurfaceEnumerator(IEnumerator designerCollectionEnumerator)
+            {
+                _designerCollectionEnumerator = designerCollectionEnumerator;
+            }
 
-			public void Reset ()
-			{
-				_designerCollectionEnumerator.Reset ();
-			}
+            public bool MoveNext()
+            {
+                return _designerCollectionEnumerator.MoveNext();
+            }
 
-			public object Current {
-				get {
-					IDesignerHost designer = (IDesignerHost) _designerCollectionEnumerator.Current;
-					DesignSurface surface = designer.GetService (typeof (DesignSurface)) as DesignSurface;
-					if (surface == null)
-						throw new NotSupportedException ();
-					
-					return surface;
-				}
-			}
-			
-		} // DesignSurfaceEnumerator
+            public void Reset()
+            {
+                _designerCollectionEnumerator.Reset();
+            }
 
-		
-		private DesignerCollection _designers;
-		
-		internal DesignSurfaceCollection (DesignerCollection designers)
-		{
-			if (designers == null)
-				designers = new DesignerCollection (null);
+            public object Current
+            {
+                get
+                {
+                    IDesignerHost designer = (IDesignerHost)_designerCollectionEnumerator.Current;
+                    DesignSurface surface =
+                        designer.GetService(typeof(DesignSurface)) as DesignSurface;
+                    if (surface == null)
+                        throw new NotSupportedException();
 
-			_designers = designers;
-		}
+                    return surface;
+                }
+            }
+        } // DesignSurfaceEnumerator
 
-		public int Count {
-			get { return _designers.Count; }
-		}
+        private DesignerCollection _designers;
 
-		public DesignSurface this[int index] {
-			get {
-				IDesignerHost designer = _designers[index];
-				DesignSurface surface = designer.GetService (typeof (DesignSurface)) as DesignSurface;
-				if (surface == null)
-					throw new NotSupportedException ();
+        internal DesignSurfaceCollection(DesignerCollection designers)
+        {
+            if (designers == null)
+                designers = new DesignerCollection(null);
 
-				return surface;
-			}
-		}
+            _designers = designers;
+        }
 
-		public void CopyTo (DesignSurface[] array, int index)
-		{
-			((ICollection) this).CopyTo (array, index);
-		}
+        public int Count
+        {
+            get { return _designers.Count; }
+        }
 
-		void ICollection.CopyTo (Array array, int index)
-		{
-			foreach (DesignSurface surface in this) {
-				array.SetValue (surface, index);
-				index++;
-			}
-		}
-		
-		public IEnumerator GetEnumerator ()
-		{
-			return new DesignSurfaceEnumerator (_designers.GetEnumerator ());
-		}
+        public DesignSurface this[int index]
+        {
+            get
+            {
+                IDesignerHost designer = _designers[index];
+                DesignSurface surface = designer.GetService(typeof(DesignSurface)) as DesignSurface;
+                if (surface == null)
+                    throw new NotSupportedException();
 
-		IEnumerator IEnumerable.GetEnumerator ()
-		{
-			return GetEnumerator ();
-		}
+                return surface;
+            }
+        }
 
-		int ICollection.Count {
-			get { return this.Count; }
-		}
+        public void CopyTo(DesignSurface[] array, int index)
+        {
+            ((ICollection)this).CopyTo(array, index);
+        }
 
-		bool ICollection.IsSynchronized {
-			get { return false; }
-		}
+        void ICollection.CopyTo(Array array, int index)
+        {
+            foreach (DesignSurface surface in this)
+            {
+                array.SetValue(surface, index);
+                index++;
+            }
+        }
 
-		object ICollection.SyncRoot {
-			get { return null; }
-		}
-		
-	}
-	
+        public IEnumerator GetEnumerator()
+        {
+            return new DesignSurfaceEnumerator(_designers.GetEnumerator());
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        int ICollection.Count
+        {
+            get { return this.Count; }
+        }
+
+        bool ICollection.IsSynchronized
+        {
+            get { return false; }
+        }
+
+        object ICollection.SyncRoot
+        {
+            get { return null; }
+        }
+    }
 }

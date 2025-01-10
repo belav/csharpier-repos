@@ -23,7 +23,11 @@ public interface ICSharpHelper
     ///     <see langword="true" /> if the method call should be type-qualified, <see langword="false" /> for instance/extension syntax.
     /// </param>
     /// <returns>The fragment.</returns>
-    string Fragment(IMethodCallCodeFragment fragment, string? instanceIdentifier, bool typeQualified);
+    string Fragment(
+        IMethodCallCodeFragment fragment,
+        string? instanceIdentifier,
+        bool typeQualified
+    );
 
     /// <summary>
     ///     Generates a method call code fragment.
@@ -74,8 +78,8 @@ public interface ICSharpHelper
     /// <param name="properties">The properties.</param>
     /// <param name="lambdaIdentifier">The identifier to use for parameter in the lambda.</param>
     /// <returns>The lambda.</returns>
-    string Lambda(IEnumerable<IProperty> properties, string? lambdaIdentifier = null)
-        => Lambda(properties.Select(p => p.Name).ToList(), lambdaIdentifier);
+    string Lambda(IEnumerable<IProperty> properties, string? lambdaIdentifier = null) =>
+        Lambda(properties.Select(p => p.Name).ToList(), lambdaIdentifier);
 
     /// <summary>
     ///     Generates a multidimensional array literal.

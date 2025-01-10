@@ -13,8 +13,12 @@ public class ExplicitIndexCollectionValidationStrategyTest
         // Arrange
         var model = new List<int>() { 2, 3, 5 };
 
-        var metadata = TestModelMetadataProvider.CreateDefaultProvider().GetMetadataForType(typeof(List<int>));
-        var strategy = new ExplicitIndexCollectionValidationStrategy(new string[] { "zero", "one", "two" });
+        var metadata = TestModelMetadataProvider
+            .CreateDefaultProvider()
+            .GetMetadataForType(typeof(List<int>));
+        var strategy = new ExplicitIndexCollectionValidationStrategy(
+            new string[] { "zero", "one", "two" }
+        );
 
         // Act
         var enumerator = strategy.GetChildren(metadata, "prefix", model);
@@ -39,7 +43,8 @@ public class ExplicitIndexCollectionValidationStrategyTest
                 Assert.Equal("prefix[zero]", e.Key);
                 Assert.Equal(2, e.Model);
                 Assert.Same(metadata.ElementMetadata, e.Metadata);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -47,14 +52,18 @@ public class ExplicitIndexCollectionValidationStrategyTest
     {
         // Arrange
         var model = new Dictionary<int, string>()
-            {
-                { 2, "two" },
-                { 3, "three" },
-                { 5, "five" },
-            };
+        {
+            { 2, "two" },
+            { 3, "three" },
+            { 5, "five" },
+        };
 
-        var metadata = TestModelMetadataProvider.CreateDefaultProvider().GetMetadataForType(typeof(List<int>));
-        var strategy = new ExplicitIndexCollectionValidationStrategy(new string[] { "zero", "one", "two" });
+        var metadata = TestModelMetadataProvider
+            .CreateDefaultProvider()
+            .GetMetadataForType(typeof(List<int>));
+        var strategy = new ExplicitIndexCollectionValidationStrategy(
+            new string[] { "zero", "one", "two" }
+        );
 
         // Act
         var enumerator = strategy.GetChildren(metadata, "prefix", model);
@@ -79,7 +88,8 @@ public class ExplicitIndexCollectionValidationStrategyTest
                 Assert.Equal("prefix[zero]", e.Key);
                 Assert.Equal(new KeyValuePair<int, string>(2, "two"), e.Model);
                 Assert.Same(metadata.ElementMetadata, e.Metadata);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -88,8 +98,12 @@ public class ExplicitIndexCollectionValidationStrategyTest
         // Arrange
         var model = new TwiceEnumerable(new int[] { 2, 3, 5 });
 
-        var metadata = TestModelMetadataProvider.CreateDefaultProvider().GetMetadataForType(typeof(TwiceEnumerable));
-        var strategy = new ExplicitIndexCollectionValidationStrategy(new string[] { "zero", "one", "two" });
+        var metadata = TestModelMetadataProvider
+            .CreateDefaultProvider()
+            .GetMetadataForType(typeof(TwiceEnumerable));
+        var strategy = new ExplicitIndexCollectionValidationStrategy(
+            new string[] { "zero", "one", "two" }
+        );
 
         // Act
         var enumerator = strategy.GetChildren(metadata, "prefix", model);
@@ -114,7 +128,8 @@ public class ExplicitIndexCollectionValidationStrategyTest
                 Assert.Equal("prefix[zero]", e.Key);
                 Assert.Equal(2, e.Model);
                 Assert.Same(metadata.ElementMetadata, e.Metadata);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -123,9 +138,13 @@ public class ExplicitIndexCollectionValidationStrategyTest
         // Arrange
         var model = new List<int>() { 2, 3, 5 };
 
-        var metadata = TestModelMetadataProvider.CreateDefaultProvider().GetMetadataForType(typeof(List<int>));
+        var metadata = TestModelMetadataProvider
+            .CreateDefaultProvider()
+            .GetMetadataForType(typeof(List<int>));
 
-        var strategy = new ExplicitIndexCollectionValidationStrategy(new string[] { "zero", "one", });
+        var strategy = new ExplicitIndexCollectionValidationStrategy(
+            new string[] { "zero", "one" }
+        );
 
         // Act
         var enumerator = strategy.GetChildren(metadata, "prefix", model);
@@ -144,18 +163,23 @@ public class ExplicitIndexCollectionValidationStrategyTest
                 Assert.Equal("prefix[zero]", e.Key);
                 Assert.Equal(2, e.Model);
                 Assert.Same(metadata.ElementMetadata, e.Metadata);
-            });
+            }
+        );
     }
 
     [Fact]
     public void EnumerateElements_RunOutOfElements()
     {
         // Arrange
-        var model = new List<int>() { 2, 3, };
+        var model = new List<int>() { 2, 3 };
 
-        var metadata = TestModelMetadataProvider.CreateDefaultProvider().GetMetadataForType(typeof(List<int>));
+        var metadata = TestModelMetadataProvider
+            .CreateDefaultProvider()
+            .GetMetadataForType(typeof(List<int>));
 
-        var strategy = new ExplicitIndexCollectionValidationStrategy(new string[] { "zero", "one", "two" });
+        var strategy = new ExplicitIndexCollectionValidationStrategy(
+            new string[] { "zero", "one", "two" }
+        );
 
         // Act
         var enumerator = strategy.GetChildren(metadata, "prefix", model);
@@ -174,7 +198,8 @@ public class ExplicitIndexCollectionValidationStrategyTest
                 Assert.Equal("prefix[zero]", e.Key);
                 Assert.Equal(2, e.Model);
                 Assert.Same(metadata.ElementMetadata, e.Metadata);
-            });
+            }
+        );
     }
 
     // 'int' is chosen by validation because it's declared on the more derived type.

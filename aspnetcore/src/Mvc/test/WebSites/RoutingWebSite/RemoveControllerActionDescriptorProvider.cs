@@ -17,9 +17,7 @@ public class RemoveControllerActionDescriptorProvider : IActionDescriptorProvide
 
     public int Order => int.MaxValue;
 
-    public void OnProvidersExecuted(ActionDescriptorProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(ActionDescriptorProviderContext context) { }
 
     public void OnProvidersExecuting(ActionDescriptorProviderContext context)
     {
@@ -27,10 +25,17 @@ public class RemoveControllerActionDescriptorProvider : IActionDescriptorProvide
         {
             if (item is ControllerActionDescriptor controllerActionDescriptor)
             {
-                var controllerToRemove = _controllerTypes.SingleOrDefault(c => c.ControllerType == controllerActionDescriptor.ControllerTypeInfo);
+                var controllerToRemove = _controllerTypes.SingleOrDefault(c =>
+                    c.ControllerType == controllerActionDescriptor.ControllerTypeInfo
+                );
                 if (controllerToRemove != null)
                 {
-                    if (controllerToRemove.Actions == null || controllerToRemove.Actions.Contains(controllerActionDescriptor.ActionName))
+                    if (
+                        controllerToRemove.Actions == null
+                        || controllerToRemove.Actions.Contains(
+                            controllerActionDescriptor.ActionName
+                        )
+                    )
                     {
                         context.Results.Remove(item);
                     }

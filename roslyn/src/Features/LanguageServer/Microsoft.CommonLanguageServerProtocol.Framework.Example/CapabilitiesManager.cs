@@ -20,16 +20,10 @@ internal class CapabilitiesManager : IInitializeManager<InitializeParams, Initia
     {
         var serverCapabilities = new ServerCapabilities()
         {
-            SemanticTokensOptions = new SemanticTokensOptions
-            {
-                Range = true,
-            },
+            SemanticTokensOptions = new SemanticTokensOptions { Range = true },
         };
 
-        var initializeResult = new InitializeResult
-        {
-            Capabilities = serverCapabilities,
-        };
+        var initializeResult = new InitializeResult { Capabilities = serverCapabilities };
 
         return initializeResult;
     }

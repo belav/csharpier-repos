@@ -6,7 +6,10 @@ using Xunit;
 
 namespace System.DirectoryServices.ActiveDirectory.Tests
 {
-    [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+    [ConditionalClass(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+    )]
     public class DirectoryContextTests
     {
         [Theory]
@@ -23,7 +26,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [Theory]
         [InlineData(DirectoryContextType.Domain, null, null)]
         [InlineData(DirectoryContextType.Forest, "UserName", "Password")]
-        public void Ctor_ContextType_UserName_Password(DirectoryContextType contextType, string userName, string password)
+        public void Ctor_ContextType_UserName_Password(
+            DirectoryContextType contextType,
+            string userName,
+            string password
+        )
         {
             var context = new DirectoryContext(contextType, userName, password);
             Assert.Equal(contextType, context.ContextType);
@@ -35,10 +42,18 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [InlineData(DirectoryContextType.ApplicationPartition)]
         [InlineData(DirectoryContextType.ConfigurationSet)]
         [InlineData(DirectoryContextType.DirectoryServer)]
-        public void Ctor_NotSupportedContextType_ThrowsArgumentException(DirectoryContextType contextType)
+        public void Ctor_NotSupportedContextType_ThrowsArgumentException(
+            DirectoryContextType contextType
+        )
         {
-            AssertExtensions.Throws<ArgumentException>("contextType", () => new DirectoryContext(contextType));
-            AssertExtensions.Throws<ArgumentException>("contextType", () => new DirectoryContext(contextType, "username", "password"));
+            AssertExtensions.Throws<ArgumentException>(
+                "contextType",
+                () => new DirectoryContext(contextType)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "contextType",
+                () => new DirectoryContext(contextType, "username", "password")
+            );
         }
 
         [Theory]
@@ -61,7 +76,12 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [InlineData(DirectoryContextType.DirectoryServer, "Name", "UserName", "Password")]
         [InlineData(DirectoryContextType.Domain, "Name", "UserName", "Password")]
         [InlineData(DirectoryContextType.Forest, "Name", "UserName", "Password")]
-        public void Ctor_ContextType_Name_UserName_Password(DirectoryContextType contextType, string name, string userName, string password)
+        public void Ctor_ContextType_Name_UserName_Password(
+            DirectoryContextType contextType,
+            string name,
+            string userName,
+            string password
+        )
         {
             var context = new DirectoryContext(contextType, name, userName, password);
             Assert.Equal(contextType, context.ContextType);
@@ -72,24 +92,56 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [Theory]
         [InlineData(DirectoryContextType.Domain - 1)]
         [InlineData(DirectoryContextType.ApplicationPartition + 1)]
-        public void Ctor_InvalidContextType_ThrowsInvalidEnumArgumentException(DirectoryContextType contextType)
+        public void Ctor_InvalidContextType_ThrowsInvalidEnumArgumentException(
+            DirectoryContextType contextType
+        )
         {
-            AssertExtensions.Throws<InvalidEnumArgumentException>("contextType", () => new DirectoryContext(contextType, "name"));
-            AssertExtensions.Throws<InvalidEnumArgumentException>("contextType", () => new DirectoryContext(contextType, "name", "userName", "password"));
+            AssertExtensions.Throws<InvalidEnumArgumentException>(
+                "contextType",
+                () => new DirectoryContext(contextType, "name")
+            );
+            AssertExtensions.Throws<InvalidEnumArgumentException>(
+                "contextType",
+                () => new DirectoryContext(contextType, "name", "userName", "password")
+            );
         }
 
         [Fact]
         public void Ctor_NullName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("name", () => new DirectoryContext(DirectoryContextType.ConfigurationSet, null));
-            AssertExtensions.Throws<ArgumentNullException>("name", () => new DirectoryContext(DirectoryContextType.ConfigurationSet, null, "userName", "password"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => new DirectoryContext(DirectoryContextType.ConfigurationSet, null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () =>
+                    new DirectoryContext(
+                        DirectoryContextType.ConfigurationSet,
+                        null,
+                        "userName",
+                        "password"
+                    )
+            );
         }
 
         [Fact]
         public void Ctor_EmptyName_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("name", () => new DirectoryContext(DirectoryContextType.ConfigurationSet, string.Empty));
-            AssertExtensions.Throws<ArgumentException>("name", () => new DirectoryContext(DirectoryContextType.ConfigurationSet, string.Empty, "userName", "password"));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => new DirectoryContext(DirectoryContextType.ConfigurationSet, string.Empty)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () =>
+                    new DirectoryContext(
+                        DirectoryContextType.ConfigurationSet,
+                        string.Empty,
+                        "userName",
+                        "password"
+                    )
+            );
         }
     }
 }

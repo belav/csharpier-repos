@@ -65,7 +65,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.EmbeddedLanguages
 
             """;
 
-        public static readonly string StringSyntaxAttributeCodeCSharpXml = SecurityElement.Escape(StringSyntaxAttributeCodeCSharp);
-        public static readonly string StringSyntaxAttributeCodeVBXml = SecurityElement.Escape(StringSyntaxAttributeCodeVB);
+        public static readonly string StringSyntaxAttributeCodeCSharpXml = SecurityElement.Escape(
+            StringSyntaxAttributeCodeCSharp
+        );
+        public static readonly string StringSyntaxAttributeCodeVBXml = SecurityElement.Escape(
+            StringSyntaxAttributeCodeVB
+        );
     }
 }

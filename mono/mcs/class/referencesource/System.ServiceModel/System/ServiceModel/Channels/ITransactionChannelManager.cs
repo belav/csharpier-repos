@@ -3,12 +3,12 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
+    using System.Collections.Generic;
     using System.ServiceModel;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
-    using System.Transactions;
-    using System.ServiceModel.Transactions;
     using System.ServiceModel.Security;
+    using System.ServiceModel.Transactions;
+    using System.Transactions;
 
     internal interface ITransactionChannelManager
     {

@@ -2,8 +2,8 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 using System;
-using System.ServiceModel.Channels;
 using System.Runtime;
+using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Dispatcher
 {
@@ -35,14 +35,8 @@ namespace System.ServiceModel.Dispatcher
 
         public IDispatchFaultFormatter InnerFaultFormatter
         {
-            get
-            {
-                return this.faultFormatter;
-            }
-            set
-            {
-                this.faultFormatter = value;
-            }
+            get { return this.faultFormatter; }
+            set { this.faultFormatter = value; }
         }
     }
 }

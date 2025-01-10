@@ -6,32 +6,40 @@ namespace System.Runtime.Serialization.Configuration
 {
     using System;
     using System.Configuration;
-    using System.Security.Permissions;
     using System.Security;
+    using System.Security.Permissions;
 
     public sealed partial class DeclaredTypeElement : ConfigurationElement
     {
-        public DeclaredTypeElement()
-        {
-        }
+        public DeclaredTypeElement() { }
 
         public DeclaredTypeElement(string typeName)
             : this()
         {
             if (String.IsNullOrEmpty(typeName))
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("typeName");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "typeName"
+                );
             }
             this.Type = typeName;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.DefaultCollectionName, DefaultValue = null, Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DefaultCollectionName,
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.IsDefaultCollection
+        )]
         public TypeElementCollection KnownTypes
         {
             get { return (TypeElementCollection)base[ConfigurationStrings.DefaultCollectionName]; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Type, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Type,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [DeclaredTypeValidator()]
         public string Type
         {
@@ -39,8 +47,10 @@ namespace System.Runtime.Serialization.Configuration
             set { base[ConfigurationStrings.Type] = value; }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls the critical methods of PartialTrustHelpers",
-            Safe = "PartialTrustHelpers.IsInFullTrust demands for FullTrust")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls the critical methods of PartialTrustHelpers",
+            Safe = "PartialTrustHelpers.IsInFullTrust demands for FullTrust"
+        )]
         [SecuritySafeCritical]
         protected override void PostDeserialize()
         {
@@ -52,10 +62,12 @@ namespace System.Runtime.Serialization.Configuration
             }
             if (!PartialTrustHelpers.IsInFullTrust())
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigDataContractSerializerSectionLoadError)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(SR.ConfigDataContractSerializerSectionLoadError)
+                    )
+                );
             }
         }
     }
 }
-
-

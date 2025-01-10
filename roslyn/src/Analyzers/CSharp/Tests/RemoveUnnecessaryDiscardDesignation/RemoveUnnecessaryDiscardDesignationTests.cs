@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryDiscar
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpRemoveUnnecessaryDiscardDesignationDiagnosticAnalyzer,
-        CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider>;
+        CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)]
     public class RemoveUnnecessaryDiscardDesignationTests
@@ -312,11 +313,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryDiscar
                     """,
                 FixedCode = """
                     using System;
-                
+
                     class C
                     {
                         string String { get; }
-                
+
                         void M(object o)
                         {
                             if (o is String)
@@ -407,18 +408,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryDiscar
                     """,
                 FixedCode = """
                     using System;
-                    
+
                     class D
                     {
                         public class Length
                         {
                         }
                     }
-                    
+
                     class C
                     {
                         string D { get; }
-                    
+
                         void M(object o)
                         {
                             if (o is D.Length)
@@ -438,18 +439,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryDiscar
             {
                 TestCode = """
                     using System;
-                    
+
                     class D
                     {
                         public class Length
                         {
                         }
                     }
-                    
+
                     class C
                     {
                         string D { get; }
-                    
+
                         void M(object o)
                         {
                             if (o is not D.Length _)
@@ -516,7 +517,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryDiscar
                     class C
                     {
                         string global { get; }
-                    
+
                         void M(object o)
                         {
                             if (o is global::System.String)
@@ -551,7 +552,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryDiscar
                     class C
                     {
                         string global { get; }
-                    
+
                         void M(object o)
                         {
                             if (o is not global::System.String)
@@ -588,7 +589,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryDiscar
                     class C
                     {
                         string global { get; }
-                    
+
                         void M(object o)
                         {
                             var v = o switch

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,59 +27,61 @@
 //
 
 using System;
-using System.Threading;
 using System.Collections;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
+using System.Threading;
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Remoting.Channels
 {
-	
-	[TestFixture]
-	public class ChannelServicesTest
-	{
-		[Test]
-		[ExpectedException (typeof (RemotingException))]
-		public void ConstructorEnsureSecurity ()
-		{
-			IChannel ch = new NonSecureChannel ();
-			ChannelServices.RegisterChannel (ch, true);
-			// in case it happened to successfully register the channel...
-			ChannelServices.UnregisterChannel (ch);
-		}
+    [TestFixture]
+    public class ChannelServicesTest
+    {
+        [Test]
+        [ExpectedException(typeof(RemotingException))]
+        public void ConstructorEnsureSecurity()
+        {
+            IChannel ch = new NonSecureChannel();
+            ChannelServices.RegisterChannel(ch, true);
+            // in case it happened to successfully register the channel...
+            ChannelServices.UnregisterChannel(ch);
+        }
 
-		[Test]
-		public void ConstructorEnsureSecurity2 ()
-		{
-			IChannel ch = new SecureChannel ();
-			ChannelServices.RegisterChannel (ch, true);
-			ChannelServices.UnregisterChannel (ch);
-		}
+        [Test]
+        public void ConstructorEnsureSecurity2()
+        {
+            IChannel ch = new SecureChannel();
+            ChannelServices.RegisterChannel(ch, true);
+            ChannelServices.UnregisterChannel(ch);
+        }
 
-		class NonSecureChannel : IChannel
-		{
-			public string Parse (string url, out string objectURI)
-			{
-				objectURI = "my:foo";
-				return "foo";
-			}
+        class NonSecureChannel : IChannel
+        {
+            public string Parse(string url, out string objectURI)
+            {
+                objectURI = "my:foo";
+                return "foo";
+            }
 
-			public string ChannelName {
-				get { return "my"; }
-			}
+            public string ChannelName
+            {
+                get { return "my"; }
+            }
 
-			public int ChannelPriority {
-				get { return 0; }
-			}
-		}
+            public int ChannelPriority
+            {
+                get { return 0; }
+            }
+        }
 
-		class SecureChannel : NonSecureChannel, ISecurableChannel
-		{
-			public bool IsSecured {
-				get { return false; }
-				set { }
-			}
-		}
-	}
+        class SecureChannel : NonSecureChannel, ISecurableChannel
+        {
+            public bool IsSecured
+            {
+                get { return false; }
+                set { }
+            }
+        }
+    }
 }

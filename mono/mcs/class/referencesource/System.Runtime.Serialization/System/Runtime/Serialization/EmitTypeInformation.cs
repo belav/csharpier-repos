@@ -22,6 +22,6 @@ namespace System.Runtime.Serialization
         /// <summary>
         /// Dummy documentation
         /// </summary>
-        Never
+        Never,
     }
 }

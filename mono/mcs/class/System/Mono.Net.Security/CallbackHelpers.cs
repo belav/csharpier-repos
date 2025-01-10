@@ -30,97 +30,115 @@
 extern alias MonoSecurity;
 #endif
 
-#if MONO_SECURITY_ALIAS
-using MSI = MonoSecurity::Mono.Security.Interface;
 #else
 using MSI = Mono.Security.Interface;
 #endif
 
-using System;
-using System.IO;
+using System;using System.IO;
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+#if MONO_SECURITY_ALIAS
+using MSI = MonoSecurity::Mono.Security.Interface;
 
 namespace Mono.Net.Security.Private
 {
-	/*
-	 * Strictly private - do not use outside the Mono.Net.Security directory.
-	 */
-	static class CallbackHelpers
-	{
-		internal static MSI.MonoRemoteCertificateValidationCallback PublicToMono (RemoteCertificateValidationCallback callback)
-		{
-			if (callback == null)
-				return null;
+    /*
+     * Strictly private - do not use outside the Mono.Net.Security directory.
+     */
+    static class CallbackHelpers
+    {
+        internal static MSI.MonoRemoteCertificateValidationCallback PublicToMono(
+            RemoteCertificateValidationCallback callback
+        )
+        {
+            if (callback == null)
+                return null;
 
-			return (h, c, ch, e) => callback (h, c, ch, (SslPolicyErrors)e);
-		}
+            return (h, c, ch, e) => callback(h, c, ch, (SslPolicyErrors)e);
+        }
 
-		internal static MSI.MonoRemoteCertificateValidationCallback InternalToMono (RemoteCertValidationCallback callback)
-		{
-			if (callback == null)
-				return null;
+        internal static MSI.MonoRemoteCertificateValidationCallback InternalToMono(
+            RemoteCertValidationCallback callback
+        )
+        {
+            if (callback == null)
+                return null;
 
-			return (h, c, ch, e) => callback (h, c, ch, (SslPolicyErrors)e);
-		}
+            return (h, c, ch, e) => callback(h, c, ch, (SslPolicyErrors)e);
+        }
 
-		internal static RemoteCertificateValidationCallback InternalToPublic (string hostname, RemoteCertValidationCallback callback)
-		{
-			if (callback == null)
-				return null;
+        internal static RemoteCertificateValidationCallback InternalToPublic(
+            string hostname,
+            RemoteCertValidationCallback callback
+        )
+        {
+            if (callback == null)
+                return null;
 
-			return (s, c, ch, e) => callback (hostname, c, ch, e);
-		}
+            return (s, c, ch, e) => callback(hostname, c, ch, e);
+        }
 
-		internal static MSI.MonoLocalCertificateSelectionCallback InternalToMono (LocalCertSelectionCallback callback)
-		{
-			if (callback == null)
-				return null;
+        internal static MSI.MonoLocalCertificateSelectionCallback InternalToMono(
+            LocalCertSelectionCallback callback
+        )
+        {
+            if (callback == null)
+                return null;
 
-			return (t, lc, rc, ai) => callback (t, lc, rc, ai);
-		}
+            return (t, lc, rc, ai) => callback(t, lc, rc, ai);
+        }
 
-		internal static LocalCertificateSelectionCallback MonoToPublic (MSI.MonoLocalCertificateSelectionCallback callback)
-		{
-			if (callback == null)
-				return null;
+        internal static LocalCertificateSelectionCallback MonoToPublic(
+            MSI.MonoLocalCertificateSelectionCallback callback
+        )
+        {
+            if (callback == null)
+                return null;
 
-			return (s, t, lc, rc, ai) => callback (t, lc, rc, ai);
-		}
+            return (s, t, lc, rc, ai) => callback(t, lc, rc, ai);
+        }
 
-		internal static RemoteCertValidationCallback MonoToInternal (MSI.MonoRemoteCertificateValidationCallback callback)
-		{
-			if (callback == null)
-				return null;
+        internal static RemoteCertValidationCallback MonoToInternal(
+            MSI.MonoRemoteCertificateValidationCallback callback
+        )
+        {
+            if (callback == null)
+                return null;
 
-			return (h, c, ch, e) => callback (h, c, ch, (MSI.MonoSslPolicyErrors)e);
-		}
+            return (h, c, ch, e) => callback(h, c, ch, (MSI.MonoSslPolicyErrors)e);
+        }
 
-		internal static LocalCertSelectionCallback MonoToInternal (MSI.MonoLocalCertificateSelectionCallback callback)
-		{
-			if (callback == null)
-				return null;
+        internal static LocalCertSelectionCallback MonoToInternal(
+            MSI.MonoLocalCertificateSelectionCallback callback
+        )
+        {
+            if (callback == null)
+                return null;
 
-			return (t, lc, rc, ai) => callback (t, lc, rc, ai);
-		}
+            return (t, lc, rc, ai) => callback(t, lc, rc, ai);
+        }
 
-		internal static ServerCertificateSelectionCallback MonoToPublic (MSI.MonoServerCertificateSelectionCallback callback)
-		{
-			if (callback == null)
-				return null;
+        internal static ServerCertificateSelectionCallback MonoToPublic(
+            MSI.MonoServerCertificateSelectionCallback callback
+        )
+        {
+            if (callback == null)
+                return null;
 
-			return (s, h) => callback (s, h);
-		}
+            return (s, h) => callback(s, h);
+        }
 
-		internal static MSI.MonoServerCertificateSelectionCallback PublicToMono (ServerCertificateSelectionCallback callback)
-		{
-			if (callback == null)
-				return null;
+        internal static MSI.MonoServerCertificateSelectionCallback PublicToMono(
+            ServerCertificateSelectionCallback callback
+        )
+        {
+            if (callback == null)
+                return null;
 
-			return (s, h) => callback (s, h);
-		}
-	}
+            return (s, h) => callback(s, h);
+        }
+    }
 }
 
 #endif

@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // HMAC.cs
@@ -16,27 +16,26 @@
 
 using System.Diagnostics.Contracts;
 
-namespace System.Security.Cryptography {
+namespace System.Security.Cryptography
+{
     [System.Runtime.InteropServices.ComVisible(true)]
-    public abstract class HMAC : KeyedHashAlgorithm {
+    public abstract class HMAC : KeyedHashAlgorithm
+    {
         //
         // protected members
         //
 
-        // an HMAC uses a hash function where data is hashed by iterating a basic compression 
+        // an HMAC uses a hash function where data is hashed by iterating a basic compression
         // function on blocks of data. BlockSizeValue is the byte size of such a block
-        
+
         private int blockSizeValue = 64;
 
-        protected int BlockSizeValue {
-            get {
-                return blockSizeValue;
-            }
-            set {
-                blockSizeValue = value;
-            }        
-        }       
- 
+        protected int BlockSizeValue
+        {
+            get { return blockSizeValue; }
+            set { blockSizeValue = value; }
+        }
+
         internal string m_hashName;
 
         internal HashAlgorithm m_hash1;
@@ -53,35 +52,42 @@ namespace System.Security.Cryptography {
 
         private bool m_hashing = false;
 
-        private void UpdateIOPadBuffers () {
+        private void UpdateIOPadBuffers()
+        {
             if (m_inner == null)
                 m_inner = new byte[BlockSizeValue];
             if (m_outer == null)
                 m_outer = new byte[BlockSizeValue];
 
             int i;
-            for (i=0; i < BlockSizeValue; i++) {
+            for (i = 0; i < BlockSizeValue; i++)
+            {
                 m_inner[i] = 0x36;
                 m_outer[i] = 0x5C;
             }
-            for (i=0; i < KeyValue.Length; i++) {
+            for (i = 0; i < KeyValue.Length; i++)
+            {
                 m_inner[i] ^= KeyValue[i];
                 m_outer[i] ^= KeyValue[i];
             }
         }
 
-        internal void InitializeKey (byte[] key) {
+        internal void InitializeKey(byte[] key)
+        {
             // When we change the key value, we'll need to update the initial values of the inner and outter
             // computation buffers.  In the case of correct HMAC vs Whidbey HMAC, these buffers could get
             // generated to a different size than when we started.
             m_inner = null;
             m_outer = null;
 
-            if (key.Length > BlockSizeValue) {
+            if (key.Length > BlockSizeValue)
+            {
                 KeyValue = m_hash1.ComputeHash(key);
                 // No need to call Initialize, ComputeHash will do it for us
-            } else {
-                KeyValue = (byte[]) key.Clone();
+            }
+            else
+            {
+                KeyValue = (byte[])key.Clone();
             }
             UpdateIOPadBuffers();
         }
@@ -90,22 +96,30 @@ namespace System.Security.Cryptography {
         // public properties
         //
 
-        public override byte[] Key {
-            get { return (byte[]) KeyValue.Clone(); }
-            set {
+        public override byte[] Key
+        {
+            get { return (byte[])KeyValue.Clone(); }
+            set
+            {
                 if (m_hashing)
-                    throw new CryptographicException(Environment.GetResourceString("Cryptography_HashKeySet"));
+                    throw new CryptographicException(
+                        Environment.GetResourceString("Cryptography_HashKeySet")
+                    );
                 InitializeKey(value);
             }
         }
 
-        public string HashName {
+        public string HashName
+        {
             get { return m_hashName; }
 #if FEATURE_CRYPTO
-            set { 
+            set
+            {
                 if (m_hashing)
-                    throw new CryptographicException(Environment.GetResourceString("Cryptography_HashNameSet"));
-                m_hashName = value; 
+                    throw new CryptographicException(
+                        Environment.GetResourceString("Cryptography_HashNameSet")
+                    );
+                m_hashName = value;
                 // create the hash algorithms
                 m_hash1 = HashAlgorithm.Create(m_hashName);
                 m_hash2 = HashAlgorithm.Create(m_hashName);
@@ -117,34 +131,41 @@ namespace System.Security.Cryptography {
         // public methods
         //
 
-        new static public HMAC Create () {
+        new static public HMAC Create()
+        {
 #if FULL_AOT_RUNTIME
-            return new System.Security.Cryptography.HMACSHA1 ();
+            return new System.Security.Cryptography.HMACSHA1();
 #else
             return Create("System.Security.Cryptography.HMAC");
 #endif
         }
 
-        new static public HMAC Create (string algorithmName) {
-            return (HMAC) CryptoConfig.CreateFromName(algorithmName);
+        public static new HMAC Create(string algorithmName)
+        {
+            return (HMAC)CryptoConfig.CreateFromName(algorithmName);
         }
 
-        public override void Initialize () {
+        public override void Initialize()
+        {
             m_hash1.Initialize();
             m_hash2.Initialize();
             m_hashing = false;
         }
 
-        protected override void HashCore (byte[] rgb, int ib, int cb) {
-            if (m_hashing == false) {
+        protected override void HashCore(byte[] rgb, int ib, int cb)
+        {
+            if (m_hashing == false)
+            {
                 m_hash1.TransformBlock(m_inner, 0, m_inner.Length, m_inner, 0);
                 m_hashing = true;
             }
             m_hash1.TransformBlock(rgb, ib, cb, rgb, ib);
         }
 
-        protected override byte[] HashFinal () {
-            if (m_hashing == false) {
+        protected override byte[] HashFinal()
+        {
+            if (m_hashing == false)
+            {
                 m_hash1.TransformBlock(m_inner, 0, m_inner.Length, m_inner, 0);
                 m_hashing = true;
             }
@@ -164,8 +185,10 @@ namespace System.Security.Cryptography {
         // IDisposable methods
         //
 
-        protected override void Dispose (bool disposing) {
-            if (disposing) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
                 if (m_hash1 != null)
                     ((IDisposable)m_hash1).Dispose();
                 if (m_hash2 != null)
@@ -186,24 +209,31 @@ namespace System.Security.Cryptography {
         ///     certified if FIPS is enabled.
         /// </summary>
         /// <returns></returns>
-        internal static HashAlgorithm GetHashAlgorithmWithFipsFallback(Func<HashAlgorithm> createStandardHashAlgorithmCallback, 
-                                                                       Func<HashAlgorithm> createFipsHashAlgorithmCallback) {
+        internal static HashAlgorithm GetHashAlgorithmWithFipsFallback(
+            Func<HashAlgorithm> createStandardHashAlgorithmCallback,
+            Func<HashAlgorithm> createFipsHashAlgorithmCallback
+        )
+        {
             Contract.Requires(createStandardHashAlgorithmCallback != null);
             Contract.Requires(createFipsHashAlgorithmCallback != null);
 
             // Use the standard algorithm implementation by default - in FIPS mode try to fall back to the
             // FIPS implementation.
-            if (CryptoConfig.AllowOnlyFipsAlgorithms) {
-                try {
+            if (CryptoConfig.AllowOnlyFipsAlgorithms)
+            {
+                try
+                {
                     return createFipsHashAlgorithmCallback();
                 }
-                catch (PlatformNotSupportedException e) {
+                catch (PlatformNotSupportedException e)
+                {
                     // We need to wrap the PlatformNotSupportedException into an InvalidOperationException to
                     // remain compatible with the error that would be triggered in previous runtimes.
                     throw new InvalidOperationException(e.Message, e);
                 }
             }
-            else {
+            else
+            {
                 return createStandardHashAlgorithmCallback();
             }
         }

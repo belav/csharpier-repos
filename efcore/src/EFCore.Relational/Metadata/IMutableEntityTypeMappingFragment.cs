@@ -9,7 +9,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
 /// </remarks>
-public interface IMutableEntityTypeMappingFragment : IReadOnlyEntityTypeMappingFragment, IMutableAnnotatable
+public interface IMutableEntityTypeMappingFragment
+    : IReadOnlyEntityTypeMappingFragment,
+        IMutableAnnotatable
 {
     /// <summary>
     ///     Gets the entity type for which the fragment is defined.

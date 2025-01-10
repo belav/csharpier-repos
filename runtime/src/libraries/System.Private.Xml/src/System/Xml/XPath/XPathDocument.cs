@@ -16,8 +16,12 @@ namespace System.Xml.XPath
     /// </summary>
     public class XPathDocument : IXPathNavigable
     {
-        private XPathNode[]? _pageText, _pageRoot, _pageXmlNmsp;
-        private int _idxText, _idxRoot, _idxXmlNmsp;
+        private XPathNode[]? _pageText,
+            _pageRoot,
+            _pageXmlNmsp;
+        private int _idxText,
+            _idxRoot,
+            _idxXmlNmsp;
         private XmlNameTable _nameTable;
         private bool _hasLineInfo;
         private Dictionary<XPathNodeRef, XPathNodeRef>? _mapNmsp;
@@ -29,10 +33,9 @@ namespace System.Xml.XPath
         internal enum LoadFlags
         {
             None = 0,
-            AtomizeNames = 1,       // Do not assume that names passed to XPathDocumentBuilder have been pre-atomized, and atomize them
-            Fragment = 2,           // Create a document with no document node
+            AtomizeNames = 1, // Do not assume that names passed to XPathDocumentBuilder have been pre-atomized, and atomize them
+            Fragment = 2, // Create a document with no document node
         }
-
 
         //-----------------------------------------------
         // Creation Methods
@@ -59,9 +62,8 @@ namespace System.Xml.XPath
         /// <summary>
         /// Create a new document and load the content from the reader.
         /// </summary>
-        public XPathDocument(XmlReader reader) : this(reader, XmlSpace.Default)
-        {
-        }
+        public XPathDocument(XmlReader reader)
+            : this(reader, XmlSpace.Default) { }
 
         /// <summary>
         /// Create a new document from "reader", with whitespace handling controlled according to "space".
@@ -114,9 +116,8 @@ namespace System.Xml.XPath
         /// <summary>
         /// Create a new document and load the content from the Uri.
         /// </summary>
-        public XPathDocument([StringSyntax(StringSyntaxAttribute.Uri)] string uri) : this(uri, XmlSpace.Default)
-        {
-        }
+        public XPathDocument([StringSyntax(StringSyntaxAttribute.Uri)] string uri)
+            : this(uri, XmlSpace.Default) { }
 
         /// <summary>
         /// Create a new document and load the content from the Uri, with whitespace handling controlled according to "space".
@@ -175,7 +176,10 @@ namespace System.Xml.XPath
                 initialDepth = reader.Depth;
 
                 // Get atomized xmlns uri
-                Debug.Assert((object?)_nameTable.Get(string.Empty) == (object)string.Empty, "NameTable must contain atomized string.Empty");
+                Debug.Assert(
+                    (object?)_nameTable.Get(string.Empty) == (object)string.Empty,
+                    "NameTable must contain atomized string.Empty"
+                );
                 xmlnsUri = _nameTable.Get(XmlReservedNs.NsXmlNs);
 
                 // Read past Initial state; if there are no more events then load is complete
@@ -192,42 +196,57 @@ namespace System.Xml.XPath
                     switch (reader.NodeType)
                     {
                         case XmlNodeType.Element:
+                        {
+                            bool isEmptyElement = reader.IsEmptyElement;
+
+                            builder.WriteStartElement(
+                                reader.Prefix,
+                                reader.LocalName,
+                                reader.NamespaceURI,
+                                reader.BaseURI
+                            );
+
+                            // Add attribute and namespace nodes to element
+                            while (reader.MoveToNextAttribute())
                             {
-                                bool isEmptyElement = reader.IsEmptyElement;
+                                string namespaceUri = reader.NamespaceURI;
 
-                                builder.WriteStartElement(reader.Prefix, reader.LocalName, reader.NamespaceURI, reader.BaseURI);
-
-                                // Add attribute and namespace nodes to element
-                                while (reader.MoveToNextAttribute())
+                                if ((object)namespaceUri == (object?)xmlnsUri)
                                 {
-                                    string namespaceUri = reader.NamespaceURI;
-
-                                    if ((object)namespaceUri == (object?)xmlnsUri)
+                                    if (reader.Prefix.Length == 0)
                                     {
-                                        if (reader.Prefix.Length == 0)
-                                        {
-                                            // Default namespace declaration "xmlns"
-                                            Debug.Assert(reader.LocalName == "xmlns");
-                                            builder.WriteNamespaceDeclaration(string.Empty, reader.Value);
-                                        }
-                                        else
-                                        {
-                                            Debug.Assert(reader.Prefix == "xmlns");
-                                            builder.WriteNamespaceDeclaration(reader.LocalName, reader.Value);
-                                        }
+                                        // Default namespace declaration "xmlns"
+                                        Debug.Assert(reader.LocalName == "xmlns");
+                                        builder.WriteNamespaceDeclaration(
+                                            string.Empty,
+                                            reader.Value
+                                        );
                                     }
                                     else
                                     {
-                                        builder.WriteStartAttribute(reader.Prefix, reader.LocalName, namespaceUri);
-                                        builder.WriteString(reader.Value, TextBlockType.Text);
-                                        builder.WriteEndAttribute();
+                                        Debug.Assert(reader.Prefix == "xmlns");
+                                        builder.WriteNamespaceDeclaration(
+                                            reader.LocalName,
+                                            reader.Value
+                                        );
                                     }
                                 }
-
-                                if (isEmptyElement)
-                                    builder.WriteEndElement(true);
-                                break;
+                                else
+                                {
+                                    builder.WriteStartAttribute(
+                                        reader.Prefix,
+                                        reader.LocalName,
+                                        namespaceUri
+                                    );
+                                    builder.WriteString(reader.Value, TextBlockType.Text);
+                                    builder.WriteEndAttribute();
+                                }
                             }
+
+                            if (isEmptyElement)
+                                builder.WriteEndElement(true);
+                            break;
+                        }
 
                         case XmlNodeType.EndElement:
                             builder.WriteEndElement(false);
@@ -240,7 +259,10 @@ namespace System.Xml.XPath
 
                         case XmlNodeType.SignificantWhitespace:
                             if (reader.XmlSpace == XmlSpace.Preserve)
-                                builder.WriteString(reader.Value, TextBlockType.SignificantWhitespace);
+                                builder.WriteString(
+                                    reader.Value,
+                                    TextBlockType.SignificantWhitespace
+                                );
                             else
                                 // Significant whitespace without xml:space="preserve" is not significant in XPath/XQuery data model
                                 goto case XmlNodeType.Whitespace;
@@ -254,7 +276,10 @@ namespace System.Xml.XPath
                             //   we can't even assert here.
 
                             // Always filter top-level whitespace
-                            if (space == XmlSpace.Preserve && (!topLevelReader || reader.Depth != 0))
+                            if (
+                                space == XmlSpace.Preserve
+                                && (!topLevelReader || reader.Depth != 0)
+                            )
                                 builder.WriteString(reader.Value, TextBlockType.Whitespace);
                             break;
 
@@ -263,7 +288,11 @@ namespace System.Xml.XPath
                             break;
 
                         case XmlNodeType.ProcessingInstruction:
-                            builder.WriteProcessingInstruction(reader.LocalName, reader.Value, reader.BaseURI);
+                            builder.WriteProcessingInstruction(
+                                reader.LocalName,
+                                reader.Value,
+                                reader.BaseURI
+                            );
                             break;
 
                         case XmlNodeType.EntityReference:
@@ -282,8 +311,7 @@ namespace System.Xml.XPath
                         case XmlNodeType.XmlDeclaration:
                             break;
                     }
-                }
-                while (reader.Read());
+                } while (reader.Read());
             }
             finally
             {
@@ -298,7 +326,6 @@ namespace System.Xml.XPath
         {
             return new XPathDocumentNavigator(_pageRoot, _idxRoot, null, 0);
         }
-
 
         //-----------------------------------------------
         // Document Properties
@@ -380,9 +407,17 @@ namespace System.Xml.XPath
         /// <summary>
         /// Associate a namespace node with an element.
         /// </summary>
-        internal void AddNamespace(XPathNode[] pageElem, int idxElem, XPathNode[] pageNmsp, int idxNmsp)
+        internal void AddNamespace(
+            XPathNode[] pageElem,
+            int idxElem,
+            XPathNode[] pageNmsp,
+            int idxNmsp
+        )
         {
-            Debug.Assert(pageElem[idxElem].NodeType == XPathNodeType.Element && pageNmsp[idxNmsp].NodeType == XPathNodeType.Namespace);
+            Debug.Assert(
+                pageElem[idxElem].NodeType == XPathNodeType.Element
+                    && pageNmsp[idxNmsp].NodeType == XPathNodeType.Namespace
+            );
 
             _mapNmsp ??= new Dictionary<XPathNodeRef, XPathNodeRef>();
 
@@ -414,7 +449,7 @@ namespace System.Xml.XPath
         /// </summary>
         internal void AddIdElement(string id, XPathNode[] pageElem, int idxElem)
         {
-             _idValueMap ??= new Dictionary<string, XPathNodeRef>();
+            _idValueMap ??= new Dictionary<string, XPathNodeRef>();
 
             if (!_idValueMap.ContainsKey(id))
                 _idValueMap.Add(id, new XPathNodeRef(pageElem, idxElem));
@@ -437,7 +472,6 @@ namespace System.Xml.XPath
             pageElem = nodeRef.Page;
             return nodeRef.Index;
         }
-
 
         //-----------------------------------------------
         // Helper Methods

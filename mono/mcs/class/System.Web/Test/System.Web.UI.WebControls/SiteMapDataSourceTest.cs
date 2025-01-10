@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,272 +28,275 @@
 
 
 
-using NUnit.Framework;
 using System;
-using System.IO;
-using System.Globalization;
-using System.Configuration;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Configuration;
+using System.Globalization;
+using System.IO;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Security.Permissions;
-
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	class PokerSiteMapDataSource : SiteMapDataSource
-	{
-		public PokerSiteMapDataSource ()
-		{
-			TrackViewState ();
-		}
-		public object SaveState ()
-		{
-			return SaveViewState ();
-		}
-		public void LoadState (object o)
-		{
-			LoadViewState (o);
-		}
-		public StateBag StateBag
-		{
-			get { return base.ViewState; }
-		}
-		public HierarchicalDataSourceView DoHierarchicalDataSourceView (string str)
-		{
-			return GetHierarchicalView (str);
-		}
-	}
+    class PokerSiteMapDataSource : SiteMapDataSource
+    {
+        public PokerSiteMapDataSource()
+        {
+            TrackViewState();
+        }
 
-	[TestFixture]
-	public class SiteMapDataSourceTest
-	{
+        public object SaveState()
+        {
+            return SaveViewState();
+        }
 
-		[Test]
-		public void SiteMapDataSource_DefaultProperties ()
-		{
+        public void LoadState(object o)
+        {
+            LoadViewState(o);
+        }
 
-			PokerSiteMapDataSource p = new PokerSiteMapDataSource ();
-			Assert.AreEqual (true, p.ShowStartingNode, "ShowStartingNode");
-			Assert.AreEqual (string.Empty, p.SiteMapProvider, "SiteMapProvider");
-			Assert.AreEqual (false, p.StartFromCurrentNode, "StartFromCurrentNode");
-			Assert.AreEqual (0, p.StartingNodeOffset, "StartingNodeOffset");
-			Assert.AreEqual (string.Empty, p.StartingNodeUrl, "StartingNodeUrl");
-			
-		}
+        public StateBag StateBag
+        {
+            get { return base.ViewState; }
+        }
 
-		[Test]
-		public void SiteMapDataSource_ContainsListCollection ()
-		{	
-			PokerSiteMapDataSource p = new PokerSiteMapDataSource ();
-			Assert.AreEqual (true, p.ContainsListCollection, "ContainsListCollection");
-		}
-		
-		[Test]
-		public void SiteMapDataSource_ChangeProperties ()
-		{
-			PokerSiteMapDataSource p = new PokerSiteMapDataSource ();
-			p.ShowStartingNode = false;
-			Assert.AreEqual (false, p.ShowStartingNode, "ShowStartingNode");
-			Assert.AreEqual (1, p.StateBag.Count, "ShowStartingNode#1");
+        public HierarchicalDataSourceView DoHierarchicalDataSourceView(string str)
+        {
+            return GetHierarchicalView(str);
+        }
+    }
 
-			p.SiteMapProvider = "test";
-			Assert.AreEqual ("test", p.SiteMapProvider, "SiteMapProvider");
-			Assert.AreEqual (2, p.StateBag.Count, "SiteMapProvider#1");
-			// null properties doe's not affects on state bag count
-			p.SiteMapProvider = null;
-			Assert.AreEqual (2, p.StateBag.Count, "SiteMapProvider#2");
+    [TestFixture]
+    public class SiteMapDataSourceTest
+    {
+        [Test]
+        public void SiteMapDataSource_DefaultProperties()
+        {
+            PokerSiteMapDataSource p = new PokerSiteMapDataSource();
+            Assert.AreEqual(true, p.ShowStartingNode, "ShowStartingNode");
+            Assert.AreEqual(string.Empty, p.SiteMapProvider, "SiteMapProvider");
+            Assert.AreEqual(false, p.StartFromCurrentNode, "StartFromCurrentNode");
+            Assert.AreEqual(0, p.StartingNodeOffset, "StartingNodeOffset");
+            Assert.AreEqual(string.Empty, p.StartingNodeUrl, "StartingNodeUrl");
+        }
 
-			p.StartFromCurrentNode = true;
-			Assert.AreEqual (true, p.StartFromCurrentNode, "StartFromCurrentNode");
-			Assert.AreEqual (3, p.StateBag.Count, "StartFromCurrentNode#1");
+        [Test]
+        public void SiteMapDataSource_ContainsListCollection()
+        {
+            PokerSiteMapDataSource p = new PokerSiteMapDataSource();
+            Assert.AreEqual(true, p.ContainsListCollection, "ContainsListCollection");
+        }
 
-			p.StartingNodeOffset = 1;
-			Assert.AreEqual (1, p.StartingNodeOffset, "StartingNodeOffset");
-			Assert.AreEqual (4, p.StateBag.Count, "StartingNodeOffset#2");
+        [Test]
+        public void SiteMapDataSource_ChangeProperties()
+        {
+            PokerSiteMapDataSource p = new PokerSiteMapDataSource();
+            p.ShowStartingNode = false;
+            Assert.AreEqual(false, p.ShowStartingNode, "ShowStartingNode");
+            Assert.AreEqual(1, p.StateBag.Count, "ShowStartingNode#1");
 
-			p.StartingNodeUrl = "default.aspx";
-			Assert.AreEqual ("default.aspx", p.StartingNodeUrl, "StartingNodeUrl");
-			Assert.AreEqual (5, p.StateBag.Count, "StartingNodeUrl#1");
-			// null properties doe's not affects on state bag count
-			p.StartingNodeUrl = null;
-			Assert.AreEqual (5, p.StateBag.Count, "StartingNodeUrl#2");
-		}
+            p.SiteMapProvider = "test";
+            Assert.AreEqual("test", p.SiteMapProvider, "SiteMapProvider");
+            Assert.AreEqual(2, p.StateBag.Count, "SiteMapProvider#1");
+            // null properties doe's not affects on state bag count
+            p.SiteMapProvider = null;
+            Assert.AreEqual(2, p.StateBag.Count, "SiteMapProvider#2");
 
-		
-		[Test]
-		public void SiteMapDataSource_DataSourceChanged ()
-		{
-			PokerSiteMapDataSource p = new PokerSiteMapDataSource ();
-			((IDataSource) p).DataSourceChanged += new EventHandler (SiteMapDataSourceTest_DataSourceChanged);
-			
-			eventChecker = false;
-			p.ShowStartingNode = false;
-			Assert.IsTrue (eventChecker, "DataSourceChanged#1");
+            p.StartFromCurrentNode = true;
+            Assert.AreEqual(true, p.StartFromCurrentNode, "StartFromCurrentNode");
+            Assert.AreEqual(3, p.StateBag.Count, "StartFromCurrentNode#1");
 
-			eventChecker = false;
-			p.SiteMapProvider = "test";
-			Assert.IsTrue (eventChecker, "DataSourceChanged#2");
+            p.StartingNodeOffset = 1;
+            Assert.AreEqual(1, p.StartingNodeOffset, "StartingNodeOffset");
+            Assert.AreEqual(4, p.StateBag.Count, "StartingNodeOffset#2");
 
-			eventChecker = false;
-			p.StartFromCurrentNode = true;
-			Assert.IsTrue (eventChecker, "DataSourceChanged#3");
+            p.StartingNodeUrl = "default.aspx";
+            Assert.AreEqual("default.aspx", p.StartingNodeUrl, "StartingNodeUrl");
+            Assert.AreEqual(5, p.StateBag.Count, "StartingNodeUrl#1");
+            // null properties doe's not affects on state bag count
+            p.StartingNodeUrl = null;
+            Assert.AreEqual(5, p.StateBag.Count, "StartingNodeUrl#2");
+        }
 
-			eventChecker = false;
-			p.StartingNodeOffset = 1;
-			Assert.IsTrue (eventChecker, "DataSourceChanged#4");
+        [Test]
+        public void SiteMapDataSource_DataSourceChanged()
+        {
+            PokerSiteMapDataSource p = new PokerSiteMapDataSource();
+            ((IDataSource)p).DataSourceChanged += new EventHandler(
+                SiteMapDataSourceTest_DataSourceChanged
+            );
 
-			eventChecker = false;
-			p.StartingNodeUrl = "default.aspx";
-			Assert.IsTrue (eventChecker, "DataSourceChanged#5");
-		}
+            eventChecker = false;
+            p.ShowStartingNode = false;
+            Assert.IsTrue(eventChecker, "DataSourceChanged#1");
 
-		bool eventChecker;
-		void SiteMapDataSourceTest_DataSourceChanged (object sender, EventArgs e)
-		{
-			eventChecker = true;
-		}
+            eventChecker = false;
+            p.SiteMapProvider = "test";
+            Assert.IsTrue(eventChecker, "DataSourceChanged#2");
 
+            eventChecker = false;
+            p.StartFromCurrentNode = true;
+            Assert.IsTrue(eventChecker, "DataSourceChanged#3");
 
-		[Test]
-		public void SiteMapDataSource_GetList ()
-		{
-			PokerSiteMapDataSource p = new PokerSiteMapDataSource ();
-			Assert.IsNotNull (p.GetList (), "GetList");
-			Assert.IsTrue (p.ContainsListCollection, "ContainsListCollection");
-		}
+            eventChecker = false;
+            p.StartingNodeOffset = 1;
+            Assert.IsTrue(eventChecker, "DataSourceChanged#4");
 
-		[Test]
-		public void SiteMapDataSource_GetViewNames () {
-			PokerSiteMapDataSource p = new PokerSiteMapDataSource ();
-			Assert.AreEqual (1, p.GetViewNames ().Count, "GetViewNames().Count");
-			Assert.AreEqual ("DefaultView", ((string []) p.GetViewNames ()) [0], "GetViewNames () [0]");
-		}
-		
-		[Test]
-		public void SiteMapDataSource_GetView ()
-		{
-			PokerSiteMapDataSource p = new PokerSiteMapDataSource ();
-			p.Provider = new mySiteMapProvider ();
-			DataSourceView V  = p.GetView("");
-			Assert.IsNotNull (V, "GetView");
-		}
+            eventChecker = false;
+            p.StartingNodeUrl = "default.aspx";
+            Assert.IsTrue(eventChecker, "DataSourceChanged#5");
+        }
 
-		[Test]
-		public void SiteMapDataSource_ViewState ()
-		{
-			PokerSiteMapDataSource p = new PokerSiteMapDataSource ();
-			p.SiteMapProvider = "test";
+        bool eventChecker;
 
-			p.StartFromCurrentNode = false;
-			p.StartingNodeOffset = 1;
-			p.StartingNodeUrl = "default.aspx";
+        void SiteMapDataSourceTest_DataSourceChanged(object sender, EventArgs e)
+        {
+            eventChecker = true;
+        }
 
-			object state = p.SaveState ();
-			PokerSiteMapDataSource copy = new PokerSiteMapDataSource ();
-			copy.LoadState (state);
+        [Test]
+        public void SiteMapDataSource_GetList()
+        {
+            PokerSiteMapDataSource p = new PokerSiteMapDataSource();
+            Assert.IsNotNull(p.GetList(), "GetList");
+            Assert.IsTrue(p.ContainsListCollection, "ContainsListCollection");
+        }
 
-			Assert.AreEqual ("test", copy.SiteMapProvider, "SiteMapProvider");
-			Assert.AreEqual (false, copy.StartFromCurrentNode, "StartFromCurrentNode");
-			Assert.AreEqual (1, copy.StartingNodeOffset, "StartingNodeOffset");
-			Assert.AreEqual ("default.aspx", copy.StartingNodeUrl, "StartingNodeUrl");
-		}
+        [Test]
+        public void SiteMapDataSource_GetViewNames()
+        {
+            PokerSiteMapDataSource p = new PokerSiteMapDataSource();
+            Assert.AreEqual(1, p.GetViewNames().Count, "GetViewNames().Count");
+            Assert.AreEqual("DefaultView", ((string[])p.GetViewNames())[0], "GetViewNames () [0]");
+        }
 
-		[Test]
-		public void SiteMapDataSource_HierarchicalDataSourceView ()
-		{
-			PokerSiteMapDataSource p = new PokerSiteMapDataSource ();
-			p.Provider = new mySiteMapProvider ();
-			HierarchicalDataSourceView h = p.DoHierarchicalDataSourceView ("1");
-			Assert.IsNotNull (h, "HierarchicalDataSourceView");
-		}
+        [Test]
+        public void SiteMapDataSource_GetView()
+        {
+            PokerSiteMapDataSource p = new PokerSiteMapDataSource();
+            p.Provider = new mySiteMapProvider();
+            DataSourceView V = p.GetView("");
+            Assert.IsNotNull(V, "GetView");
+        }
 
-	}
+        [Test]
+        public void SiteMapDataSource_ViewState()
+        {
+            PokerSiteMapDataSource p = new PokerSiteMapDataSource();
+            p.SiteMapProvider = "test";
 
-   
-	// Helper Class
-	public class mySiteMapProvider : StaticSiteMapProvider
-	{
-		private SiteMapNode rootNode = null;
-		// Implement a default constructor.
-		public mySiteMapProvider ()
-		{
-		}
-		// Some basic state to help track the initialization state of the provider.
-		private bool initialized = false;
-		public virtual bool IsInitialized
-		{
-			get { return initialized; }
-		}
+            p.StartFromCurrentNode = false;
+            p.StartingNodeOffset = 1;
+            p.StartingNodeUrl = "default.aspx";
 
-		// Return the root node of the current site map.
-		public override SiteMapNode RootNode
-		{
-			get
-			{
-				SiteMapNode temp = null;
-				temp = BuildSiteMap ();
-				return temp;
-			}
-		}
-		protected internal override SiteMapNode GetRootNodeCore ()
-		{
-			return RootNode;
-		}
-		// Initialize is used to initialize the properties and any state that the
-		// AccessProvider holds, but is not used to build the site map.
-		// The site map is built when the BuildSiteMap method is called.
-		public override void Initialize (string name, NameValueCollection attributes)
-		{
-			if (IsInitialized)
-				return;
+            object state = p.SaveState();
+            PokerSiteMapDataSource copy = new PokerSiteMapDataSource();
+            copy.LoadState(state);
 
-			base.Initialize (name, attributes);
-			initialized = true;
-		}
+            Assert.AreEqual("test", copy.SiteMapProvider, "SiteMapProvider");
+            Assert.AreEqual(false, copy.StartFromCurrentNode, "StartFromCurrentNode");
+            Assert.AreEqual(1, copy.StartingNodeOffset, "StartingNodeOffset");
+            Assert.AreEqual("default.aspx", copy.StartingNodeUrl, "StartingNodeUrl");
+        }
 
-		///
-		/// SiteMapProvider and StaticSiteMapProvider methods that this derived class must override.
-		///
-		// Clean up any collections or other state that an instance of this may hold.
-		protected override void Clear ()
-		{
-			lock (this) {
-				rootNode = null;
-				base.Clear ();
-			}
-		}
+        [Test]
+        public void SiteMapDataSource_HierarchicalDataSourceView()
+        {
+            PokerSiteMapDataSource p = new PokerSiteMapDataSource();
+            p.Provider = new mySiteMapProvider();
+            HierarchicalDataSourceView h = p.DoHierarchicalDataSourceView("1");
+            Assert.IsNotNull(h, "HierarchicalDataSourceView");
+        }
+    }
 
-		// Build an in-memory representation from persistent
-		// storage, and return the root node of the site map.
-		public override SiteMapNode BuildSiteMap ()
-		{
-			// Since the SiteMap class is static, make sure that it is
-			// not modified while the site map is built.
-			lock (this) {
+    // Helper Class
+    public class mySiteMapProvider : StaticSiteMapProvider
+    {
+        private SiteMapNode rootNode = null;
 
-				// If there is no root node, then there is no site map.
-				if (null == rootNode) {
-					// Start with a clean slate
-					Clear ();
+        // Implement a default constructor.
+        public mySiteMapProvider() { }
 
-					// Select the root node of the site map .
-					rootNode = new SiteMapNode (this, "1", "default.aspx", "Default");
+        // Some basic state to help track the initialization state of the provider.
+        private bool initialized = false;
+        public virtual bool IsInitialized
+        {
+            get { return initialized; }
+        }
 
-				}
+        // Return the root node of the current site map.
+        public override SiteMapNode RootNode
+        {
+            get
+            {
+                SiteMapNode temp = null;
+                temp = BuildSiteMap();
+                return temp;
+            }
+        }
 
-				else return null;
+        protected internal override SiteMapNode GetRootNodeCore()
+        {
+            return RootNode;
+        }
 
-				SiteMapNode childNode = null;
-				childNode = new SiteMapNode (this, "2", "catalog.aspx", "catalog");
-				AddNode (childNode, rootNode);
-				childNode = new SiteMapNode (this, "3", "aboutus.aspx", "about us");
-				AddNode (childNode, rootNode);
+        // Initialize is used to initialize the properties and any state that the
+        // AccessProvider holds, but is not used to build the site map.
+        // The site map is built when the BuildSiteMap method is called.
+        public override void Initialize(string name, NameValueCollection attributes)
+        {
+            if (IsInitialized)
+                return;
 
-				return rootNode;
-			}
-		}
-	}
+            base.Initialize(name, attributes);
+            initialized = true;
+        }
+
+        ///
+        /// SiteMapProvider and StaticSiteMapProvider methods that this derived class must override.
+        ///
+        // Clean up any collections or other state that an instance of this may hold.
+        protected override void Clear()
+        {
+            lock (this)
+            {
+                rootNode = null;
+                base.Clear();
+            }
+        }
+
+        // Build an in-memory representation from persistent
+        // storage, and return the root node of the site map.
+        public override SiteMapNode BuildSiteMap()
+        {
+            // Since the SiteMap class is static, make sure that it is
+            // not modified while the site map is built.
+            lock (this)
+            {
+                // If there is no root node, then there is no site map.
+                if (null == rootNode)
+                {
+                    // Start with a clean slate
+                    Clear();
+
+                    // Select the root node of the site map .
+                    rootNode = new SiteMapNode(this, "1", "default.aspx", "Default");
+                }
+                else
+                    return null;
+
+                SiteMapNode childNode = null;
+                childNode = new SiteMapNode(this, "2", "catalog.aspx", "catalog");
+                AddNode(childNode, rootNode);
+                childNode = new SiteMapNode(this, "3", "aboutus.aspx", "about us");
+                AddNode(childNode, rootNode);
+
+                return rootNode;
+            }
+        }
+    }
 }

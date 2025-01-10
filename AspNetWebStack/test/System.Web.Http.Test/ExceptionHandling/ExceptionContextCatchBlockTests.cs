@@ -17,7 +17,10 @@ namespace System.Web.Http.ExceptionHandling
             bool callsHandler = false;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => CreateProductUnderTest(name, isTopLevel, callsHandler), "name");
+            Assert.ThrowsArgumentNull(
+                () => CreateProductUnderTest(name, isTopLevel, callsHandler),
+                "name"
+            );
         }
 
         [Fact]
@@ -27,7 +30,11 @@ namespace System.Web.Http.ExceptionHandling
             string expectedName = "TheName";
             bool isTopLevel = true;
             bool callsHandler = false;
-            ExceptionContextCatchBlock product = CreateProductUnderTest(expectedName, isTopLevel, callsHandler);
+            ExceptionContextCatchBlock product = CreateProductUnderTest(
+                expectedName,
+                isTopLevel,
+                callsHandler
+            );
 
             // Act
             string name = product.Name;
@@ -44,7 +51,11 @@ namespace System.Web.Http.ExceptionHandling
             // Arrange
             string name = "IgnoreName";
             bool callsHandler = false;
-            ExceptionContextCatchBlock product = CreateProductUnderTest(name, expectedIsTopLevel, callsHandler);
+            ExceptionContextCatchBlock product = CreateProductUnderTest(
+                name,
+                expectedIsTopLevel,
+                callsHandler
+            );
 
             // Act
             bool isTopLevel = product.IsTopLevel;
@@ -61,7 +72,11 @@ namespace System.Web.Http.ExceptionHandling
             // Arrange
             string name = "IgnoreName";
             bool isTopLevel = true;
-            ExceptionContextCatchBlock product = CreateProductUnderTest(name, isTopLevel, expectedCallsHandler);
+            ExceptionContextCatchBlock product = CreateProductUnderTest(
+                name,
+                isTopLevel,
+                expectedCallsHandler
+            );
 
             // Act
             bool callsHandler = product.CallsHandler;
@@ -76,7 +91,7 @@ namespace System.Web.Http.ExceptionHandling
             // Arrange
             string expectedName = "TheName";
             bool isTopLevel = false;
-            bool callsHandler= false;
+            bool callsHandler = false;
             object product = CreateProductUnderTest(expectedName, isTopLevel, callsHandler);
 
             // Act
@@ -90,8 +105,11 @@ namespace System.Web.Http.ExceptionHandling
         public void DebuggerDisplayAttribute_IsSpecifiedValue()
         {
             // Act
-            DebuggerDisplayAttribute attribute = (DebuggerDisplayAttribute)Attribute.GetCustomAttribute(
-                typeof(ExceptionContextCatchBlock), typeof(DebuggerDisplayAttribute));
+            DebuggerDisplayAttribute attribute = (DebuggerDisplayAttribute)
+                Attribute.GetCustomAttribute(
+                    typeof(ExceptionContextCatchBlock),
+                    typeof(DebuggerDisplayAttribute)
+                );
 
             // Assert
             Assert.NotNull(attribute);
@@ -99,7 +117,11 @@ namespace System.Web.Http.ExceptionHandling
             Assert.Equal("Name: {Name}, IsTopLevel: {IsTopLevel}", value);
         }
 
-        private static ExceptionContextCatchBlock CreateProductUnderTest(string name, bool isTopLevel, bool callsHandler)
+        private static ExceptionContextCatchBlock CreateProductUnderTest(
+            string name,
+            bool isTopLevel,
+            bool callsHandler
+        )
         {
             return new ExceptionContextCatchBlock(name, isTopLevel, callsHandler);
         }

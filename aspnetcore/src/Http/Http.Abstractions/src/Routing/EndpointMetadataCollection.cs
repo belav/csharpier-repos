@@ -24,7 +24,9 @@ public sealed class EndpointMetadataCollection : IReadOnlyList<object>
     /// <summary>
     /// An empty <see cref="EndpointMetadataCollection"/>.
     /// </summary>
-    public static readonly EndpointMetadataCollection Empty = new EndpointMetadataCollection(Array.Empty<object>());
+    public static readonly EndpointMetadataCollection Empty = new EndpointMetadataCollection(
+        Array.Empty<object>()
+    );
 
     private readonly object[] _items;
     private readonly ConcurrentDictionary<Type, object[]> _cache;
@@ -46,9 +48,7 @@ public sealed class EndpointMetadataCollection : IReadOnlyList<object>
     /// </summary>
     /// <param name="items">The metadata items.</param>
     public EndpointMetadataCollection(params object[] items)
-        : this((IEnumerable<object>)items)
-    {
-    }
+        : this((IEnumerable<object>)items) { }
 
     /// <summary>
     /// Gets the item at <paramref name="index"/>.
@@ -70,7 +70,8 @@ public sealed class EndpointMetadataCollection : IReadOnlyList<object>
     /// The most significant metadata of type <typeparamref name="T"/> or <c>null</c>.
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public T? GetMetadata<T>() where T : class
+    public T? GetMetadata<T>()
+        where T : class
     {
         if (_cache.TryGetValue(typeof(T), out var obj))
         {
@@ -82,7 +83,8 @@ public sealed class EndpointMetadataCollection : IReadOnlyList<object>
         return GetMetadataSlow<T>();
     }
 
-    private T? GetMetadataSlow<T>() where T : class
+    private T? GetMetadataSlow<T>()
+        where T : class
     {
         var result = GetOrderedMetadataSlow<T>();
         var length = result.Length;
@@ -96,7 +98,8 @@ public sealed class EndpointMetadataCollection : IReadOnlyList<object>
     /// <typeparam name="T">The type of metadata.</typeparam>
     /// <returns>A sequence of metadata items of <typeparamref name="T"/>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public IReadOnlyList<T> GetOrderedMetadata<T>() where T : class
+    public IReadOnlyList<T> GetOrderedMetadata<T>()
+        where T : class
     {
         if (_cache.TryGetValue(typeof(T), out var result))
         {
@@ -106,7 +109,8 @@ public sealed class EndpointMetadataCollection : IReadOnlyList<object>
         return GetOrderedMetadataSlow<T>();
     }
 
-    private T[] GetOrderedMetadataSlow<T>() where T : class
+    private T[] GetOrderedMetadataSlow<T>()
+        where T : class
     {
         // Perf: avoid allocations totally for the common case where there are no matching metadata.
         List<T>? matches = null;
@@ -135,10 +139,12 @@ public sealed class EndpointMetadataCollection : IReadOnlyList<object>
     /// The most significant metadata of type <typeparamref name="T"/>.
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public T GetRequiredMetadata<T>() where T : class
+    public T GetRequiredMetadata<T>()
+        where T : class
     {
         var metadata = GetMetadata<T>();
-        return metadata ?? throw new InvalidOperationException($"Metadata '{typeof(T)}' is not found.");
+        return metadata
+            ?? throw new InvalidOperationException($"Metadata '{typeof(T)}' is not found.");
     }
 
     /// <summary>
@@ -186,9 +192,7 @@ public sealed class EndpointMetadataCollection : IReadOnlyList<object>
         /// <summary>
         /// Releases all resources used by the <see cref="Enumerator"/>.
         /// </summary>
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         /// <summary>
         /// Advances the enumerator to the next element of the <see cref="Enumerator"/>.

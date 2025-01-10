@@ -24,15 +24,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Xml.Serialization.XmlMapping))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Xml.Serialization.XmlTypeMapping))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Xml.Serialization.XmlMappingAccess))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Xml.Serialization.XmlSerializer))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.ServiceModel.XmlSerializerFormatAttribute))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Xml.Serialization.XmlArrayItemAttributes))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Xml.Serialization.XmlAttributeOverrides))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Xml.Serialization.XmlAttributes))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Xml.Serialization.XmlElementAttributes))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Xml.Serialization.XmlAnyElementAttributes))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Xml.Serialization.XmlSerializerNamespaces))]
-
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Xml.Serialization.XmlMapping)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Xml.Serialization.XmlTypeMapping)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Xml.Serialization.XmlMappingAccess)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Xml.Serialization.XmlSerializer)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.ServiceModel.XmlSerializerFormatAttribute)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Xml.Serialization.XmlArrayItemAttributes)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Xml.Serialization.XmlAttributeOverrides)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Xml.Serialization.XmlAttributes)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Xml.Serialization.XmlElementAttributes)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Xml.Serialization.XmlAnyElementAttributes)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Xml.Serialization.XmlSerializerNamespaces)
+)]

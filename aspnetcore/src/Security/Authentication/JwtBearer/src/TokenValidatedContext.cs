@@ -18,7 +18,8 @@ public class TokenValidatedContext : ResultContext<JwtBearerOptions>
     public TokenValidatedContext(
         HttpContext context,
         AuthenticationScheme scheme,
-        JwtBearerOptions options)
+        JwtBearerOptions options
+    )
         : base(context, scheme, options) { }
 
     /// <summary>

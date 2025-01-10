@@ -20,7 +20,10 @@ namespace Grpc.Shared.TestAssets
 {
     public static class ExceptionAssert
     {
-        public static async Task<TException> ThrowsAsync<TException>(Func<Task> action, params string[] possibleMessages)
+        public static async Task<TException> ThrowsAsync<TException>(
+            Func<Task> action,
+            params string[] possibleMessages
+        )
             where TException : Exception
         {
             try
@@ -41,14 +44,30 @@ namespace Grpc.Shared.TestAssets
                     }
                 }
 
-                throw new Exception("Unexpected exception message." + Environment.NewLine + "Expected one of: " + string.Join(Environment.NewLine, possibleMessages) + Environment.NewLine + "Got: " + ex.Message + Environment.NewLine + Environment.NewLine + ex);
+                throw new Exception(
+                    "Unexpected exception message."
+                        + Environment.NewLine
+                        + "Expected one of: "
+                        + string.Join(Environment.NewLine, possibleMessages)
+                        + Environment.NewLine
+                        + "Got: "
+                        + ex.Message
+                        + Environment.NewLine
+                        + Environment.NewLine
+                        + ex
+                );
             }
             catch (Exception ex)
             {
-                throw new Exception($"Exception of type {typeof(TException).Name} expected; got exception of type {ex.GetType().Name}.", ex);
+                throw new Exception(
+                    $"Exception of type {typeof(TException).Name} expected; got exception of type {ex.GetType().Name}.",
+                    ex
+                );
             }
 
-            throw new Exception($"Exception of type {typeof(TException).Name} expected. No exception thrown.");
+            throw new Exception(
+                $"Exception of type {typeof(TException).Name} expected. No exception thrown."
+            );
         }
     }
 }

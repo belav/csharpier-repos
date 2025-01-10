@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="IDataBindingsAccessor.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
 
     /// <devdoc>
@@ -13,18 +13,10 @@ namespace System.Web.UI {
     ///     applicable at design-time only.
     ///   </para>
     /// </devdoc>
-    public interface IUserControlDesignerAccessor {
+    public interface IUserControlDesignerAccessor
+    {
+        string InnerText { get; set; }
 
-
-        string InnerText {
-            get;
-            set;
-        }
-
-
-        string TagName {
-            get;
-            set;
-        }
+        string TagName { get; set; }
     }
 }

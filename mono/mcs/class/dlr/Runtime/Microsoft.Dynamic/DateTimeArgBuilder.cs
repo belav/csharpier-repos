@@ -1,21 +1,19 @@
 /* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Microsoft Public License. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Microsoft Public License, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Microsoft Public License. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Microsoft Public License, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Microsoft Public License.
  *
  * You must not remove this notice, or any other, from this software.
  *
  *
  * ***************************************************************************/
-using System; using Microsoft;
-
-
-
+using System;
+using Microsoft;
 #if !SILVERLIGHT // ComObject
 
 using System.Collections.Generic;
@@ -38,31 +36,31 @@ using Microsoft.Scripting.Utils;
 #endif
 
 #if CODEPLEX_40
-namespace System.Dynamic {
+namespace System.Dynamic
+{
 #else
-namespace Microsoft.Scripting {
+namespace Microsoft.Scripting
+{
 #endif
-    internal sealed class DateTimeArgBuilder : SimpleArgBuilder {
+    internal sealed class DateTimeArgBuilder : SimpleArgBuilder
+    {
         internal DateTimeArgBuilder(Type parameterType)
-            : base(parameterType) {
+            : base(parameterType)
+        {
             Debug.Assert(parameterType == typeof(DateTime));
         }
 
-        internal override Expression MarshalToRef(Expression parameter) {
+        internal override Expression MarshalToRef(Expression parameter)
+        {
             // parameter.ToOADate()
-            return Expression.Call(
-                Marshal(parameter),
-                typeof(DateTime).GetMethod("ToOADate")
-            );
+            return Expression.Call(Marshal(parameter), typeof(DateTime).GetMethod("ToOADate"));
         }
 
-        internal override Expression UnmarshalFromRef(Expression value) {
+        internal override Expression UnmarshalFromRef(Expression value)
+        {
             // DateTime.FromOADate(value)
             return base.UnmarshalFromRef(
-                Expression.Call(
-                    typeof(DateTime).GetMethod("FromOADate"),
-                    value
-                )
+                Expression.Call(typeof(DateTime).GetMethod("FromOADate"), value)
             );
         }
     }

@@ -3,7 +3,11 @@
 
 namespace Microsoft.AspNetCore.Server;
 
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1802:Use literals where appropriate", Justification = "So referenceEquals works")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage(
+    "Performance",
+    "CA1802:Use literals where appropriate",
+    Justification = "So referenceEquals works"
+)]
 internal static class InternalHeaderNames
 {
     /// <summary>Gets the <c>:authority</c> HTTP header name.</summary>

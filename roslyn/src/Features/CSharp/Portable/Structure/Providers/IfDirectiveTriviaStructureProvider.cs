@@ -14,14 +14,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
     /// Adds structure guides for the portions of a #if directive that are active.  The inactive sections already have
     /// structure guides added through <see cref="DisabledTextTriviaStructureProvider"/>.
     /// </summary>
-    internal sealed class IfDirectiveTriviaStructureProvider : AbstractSyntaxNodeStructureProvider<IfDirectiveTriviaSyntax>
+    internal sealed class IfDirectiveTriviaStructureProvider
+        : AbstractSyntaxNodeStructureProvider<IfDirectiveTriviaSyntax>
     {
         protected override void CollectBlockSpans(
             SyntaxToken previousToken,
             IfDirectiveTriviaSyntax node,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var allRelatedDirectives = node.GetRelatedDirectives();
             SourceText? text = null;
@@ -39,8 +41,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 var nextDirective = allRelatedDirectives[i + 1];
                 text ??= node.SyntaxTree.GetText(cancellationToken);
 
-                var startLineNumber = text.Lines.GetLineFromPosition(directive.SpanStart).LineNumber + 1;
-                var endLineNumber = text.Lines.GetLineFromPosition(nextDirective.SpanStart).LineNumber - 1;
+                var startLineNumber =
+                    text.Lines.GetLineFromPosition(directive.SpanStart).LineNumber + 1;
+                var endLineNumber =
+                    text.Lines.GetLineFromPosition(nextDirective.SpanStart).LineNumber - 1;
                 if (startLineNumber >= endLineNumber)
                     continue;
 
@@ -51,12 +55,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 var endLine = text.Lines[endLineNumber];
 
                 var span = TextSpan.FromBounds(startLine.Start, endLine.End);
-                spans.Add(new BlockSpan(
-                    isCollapsible: true,
-                    textSpan: span,
-                    type: BlockTypes.PreprocessorRegion,
-                    bannerText: CSharpStructureHelpers.Ellipsis,
-                    autoCollapse: false));
+                spans.Add(
+                    new BlockSpan(
+                        isCollapsible: true,
+                        textSpan: span,
+                        type: BlockTypes.PreprocessorRegion,
+                        bannerText: CSharpStructureHelpers.Ellipsis,
+                        autoCollapse: false
+                    )
+                );
             }
         }
     }

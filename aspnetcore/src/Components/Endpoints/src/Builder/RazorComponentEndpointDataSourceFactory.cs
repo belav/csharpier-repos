@@ -19,18 +19,28 @@ internal class RazorComponentEndpointDataSourceFactory
     public RazorComponentEndpointDataSourceFactory(
         RazorComponentEndpointFactory factory,
         IEnumerable<RenderModeEndpointProvider> providers,
-        HotReloadService? hotReloadService = null)
+        HotReloadService? hotReloadService = null
+    )
     {
         _factory = factory;
         _providers = providers;
         _hotReloadService = hotReloadService;
     }
 
-    public RazorComponentEndpointDataSource<TRootComponent> CreateDataSource<[DynamicallyAccessedMembers(Component)] TRootComponent>(IEndpointRouteBuilder endpoints)
+    public RazorComponentEndpointDataSource<TRootComponent> CreateDataSource<
+        [DynamicallyAccessedMembers(Component)] TRootComponent
+    >(IEndpointRouteBuilder endpoints)
     {
-        var builder = ComponentApplicationBuilder.GetBuilder<TRootComponent>() ??
-            DefaultRazorComponentApplication<TRootComponent>.Instance.GetBuilder();
+        var builder =
+            ComponentApplicationBuilder.GetBuilder<TRootComponent>()
+            ?? DefaultRazorComponentApplication<TRootComponent>.Instance.GetBuilder();
 
-        return new RazorComponentEndpointDataSource<TRootComponent>(builder, _providers, endpoints.CreateApplicationBuilder(), _factory, _hotReloadService);
+        return new RazorComponentEndpointDataSource<TRootComponent>(
+            builder,
+            _providers,
+            endpoints.CreateApplicationBuilder(),
+            _factory,
+            _hotReloadService
+        );
     }
 }

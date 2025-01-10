@@ -24,10 +24,14 @@ internal class CompiledPageRouteModelProvider : IPageRouteModelProvider
     public CompiledPageRouteModelProvider(
         ApplicationPartManager applicationManager,
         IOptions<RazorPagesOptions> pagesOptionsAccessor,
-        ILogger<CompiledPageRouteModelProvider> logger)
+        ILogger<CompiledPageRouteModelProvider> logger
+    )
     {
-        _applicationManager = applicationManager ?? throw new ArgumentNullException(nameof(applicationManager));
-        _pagesOptions = pagesOptionsAccessor?.Value ?? throw new ArgumentNullException(nameof(pagesOptionsAccessor));
+        _applicationManager =
+            applicationManager ?? throw new ArgumentNullException(nameof(applicationManager));
+        _pagesOptions =
+            pagesOptionsAccessor?.Value
+            ?? throw new ArgumentNullException(nameof(pagesOptionsAccessor));
         _routeModelFactory = new PageRouteModelFactory(_pagesOptions, logger);
     }
 
@@ -45,7 +49,9 @@ internal class CompiledPageRouteModelProvider : IPageRouteModelProvider
         ArgumentNullException.ThrowIfNull(context);
     }
 
-    private IEnumerable<CompiledViewDescriptor> GetViewDescriptors(ApplicationPartManager applicationManager)
+    private IEnumerable<CompiledViewDescriptor> GetViewDescriptors(
+        ApplicationPartManager applicationManager
+    )
     {
         ArgumentNullException.ThrowIfNull(applicationManager);
 
@@ -121,8 +127,8 @@ internal class CompiledPageRouteModelProvider : IPageRouteModelProvider
     {
         if (viewDescriptor.Item != null)
         {
-            return viewDescriptor.Item.Metadata
-                .OfType<RazorCompiledItemMetadataAttribute>()
+            return viewDescriptor
+                .Item.Metadata.OfType<RazorCompiledItemMetadataAttribute>()
                 .FirstOrDefault(f => f.Key == RouteTemplateKey)
                 ?.Value;
         }

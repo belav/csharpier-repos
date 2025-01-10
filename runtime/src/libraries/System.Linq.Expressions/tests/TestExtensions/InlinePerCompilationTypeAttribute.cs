@@ -9,8 +9,10 @@ namespace System.Linq.Expressions.Tests
 {
     internal class InlinePerCompilationTypeAttribute : DataAttribute
     {
-        private static readonly object[] s_boxedBooleans = PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly ?
-            new object[] { false, true } : new object[] { false };
+        private static readonly object[] s_boxedBooleans =
+            PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly
+                ? new object[] { false, true }
+                : new object[] { false };
 
         private readonly object[] _data;
 

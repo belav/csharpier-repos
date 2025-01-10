@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
             bool isStatementContext,
             bool isTypeContext,
             bool isWithinAsyncMethod,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             this.Document = document;
             this.SemanticModel = semanticModel;
@@ -121,13 +122,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
             this.IsTypeContext = isTypeContext;
             this.IsWithinAsyncMethod = isWithinAsyncMethod;
 
-            this.InferredTypes = document.GetRequiredLanguageService<ITypeInferenceService>().InferTypes(semanticModel, position, cancellationToken);
+            this.InferredTypes = document
+                .GetRequiredLanguageService<ITypeInferenceService>()
+                .InferTypes(semanticModel, position, cancellationToken);
         }
 
-        public TService? GetLanguageService<TService>() where TService : class, ILanguageService
-            => Document.GetLanguageService<TService>();
+        public TService? GetLanguageService<TService>()
+            where TService : class, ILanguageService => Document.GetLanguageService<TService>();
 
-        public TService GetRequiredLanguageService<TService>() where TService : class, ILanguageService
-            => Document.GetRequiredLanguageService<TService>();
+        public TService GetRequiredLanguageService<TService>()
+            where TService : class, ILanguageService =>
+            Document.GetRequiredLanguageService<TService>();
     }
 }

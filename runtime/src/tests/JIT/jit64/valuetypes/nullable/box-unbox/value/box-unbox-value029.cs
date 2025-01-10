@@ -3,34 +3,42 @@
 
 // <Area> Nullable - Box-Unbox </Area>
 // <Title> Nullable type with unbox box expr  </Title>
-// <Description>  
+// <Description>
 // checking type of NotEmptyStructConstrainedGenA<int> using is operator
-// </Description> 
-// <RelatedBugs> </RelatedBugs>  
+// </Description>
+// <RelatedBugs> </RelatedBugs>
 //<Expects Status=success></Expects>
-// <Code> 
+// <Code>
 
 
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public class NullableTest
 {
     private static bool BoxUnboxToNQ(ValueType o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenA<int>)o, Helper.Create(default(NotEmptyStructConstrainedGenA<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenA<int>)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenA<int>))
+        );
     }
 
     private static bool BoxUnboxToQ(ValueType o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenA<int>?)o, Helper.Create(default(NotEmptyStructConstrainedGenA<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenA<int>?)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenA<int>))
+        );
     }
 
     [Fact]
     public static int TestEntryPoint()
     {
-        NotEmptyStructConstrainedGenA<int>? s = Helper.Create(default(NotEmptyStructConstrainedGenA<int>));
+        NotEmptyStructConstrainedGenA<int>? s = Helper.Create(
+            default(NotEmptyStructConstrainedGenA<int>)
+        );
 
         if (BoxUnboxToNQ(s) && BoxUnboxToQ(s))
             return ExitCode.Passed;
@@ -38,5 +46,3 @@ public class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

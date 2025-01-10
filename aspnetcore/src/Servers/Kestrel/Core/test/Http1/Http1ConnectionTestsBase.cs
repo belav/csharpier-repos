@@ -7,9 +7,9 @@ using System.Reflection;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
-using Microsoft.AspNetCore.InternalTesting;
 using Moq;
 using Xunit.Abstractions;
 
@@ -27,12 +27,22 @@ public class Http1ConnectionTestsBase : LoggedTest, IDisposable
     internal SequencePosition _examined;
     internal Mock<ITimeoutControl> _timeoutControl;
 
-    public override void Initialize(TestContext context, MethodInfo methodInfo, object[] testMethodArguments, ITestOutputHelper testOutputHelper)
+    public override void Initialize(
+        TestContext context,
+        MethodInfo methodInfo,
+        object[] testMethodArguments,
+        ITestOutputHelper testOutputHelper
+    )
     {
         base.Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
 
         _pipelineFactory = PinnedBlockMemoryPoolFactory.Create();
-        var options = new PipeOptions(_pipelineFactory, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        var options = new PipeOptions(
+            _pipelineFactory,
+            readerScheduler: PipeScheduler.Inline,
+            writerScheduler: PipeScheduler.Inline,
+            useSynchronizationContext: false
+        );
         var pair = DuplexPipe.CreateConnectionPair(options, options);
 
         _transport = pair.Transport;
@@ -43,7 +53,7 @@ public class Http1ConnectionTestsBase : LoggedTest, IDisposable
 
         _serviceContext = new TestServiceContext(LoggerFactory)
         {
-            Scheduler = PipeScheduler.Inline
+            Scheduler = PipeScheduler.Inline,
         };
 
         _timeoutControl = new Mock<ITimeoutControl>();
@@ -53,7 +63,8 @@ public class Http1ConnectionTestsBase : LoggedTest, IDisposable
             transport: pair.Transport,
             timeoutControl: _timeoutControl.Object,
             memoryPool: _pipelineFactory,
-            connectionFeatures: connectionFeatures);
+            connectionFeatures: connectionFeatures
+        );
 
         _http1Connection = new TestHttp1Connection(_http1ConnectionContext);
     }

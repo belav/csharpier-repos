@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,41 +33,42 @@
 using System;
 using System.CodeDom.Compiler;
 
-namespace System.Web.Compilation {
+namespace System.Web.Compilation
+{
+    public sealed class CompilerType
+    {
+        Type type;
+        CompilerParameters parameters;
 
-	public sealed class CompilerType {
-		Type type;
-		CompilerParameters parameters;
+        internal CompilerType(Type type, CompilerParameters parameters)
+        {
+            this.type = type;
+            this.parameters = parameters;
+        }
 
-		internal CompilerType (Type type, CompilerParameters parameters)
-		{
-			this.type = type;
-			this.parameters = parameters;
-		}
+        public override bool Equals(object o)
+        {
+            if (!(o is CompilerType))
+                return false;
 
-		public override bool Equals(object o)
-		{
-			if (!(o is CompilerType))
-				return false;
+            CompilerType other = (CompilerType)o;
+            //FIXME: parameters does NOT have an Equals override
+            return (other.type == type && other.parameters == parameters);
+        }
 
-			CompilerType other = (CompilerType) o;
-			//FIXME: parameters does NOT have an Equals override
-			return (other.type == type && other.parameters == parameters);
-		}
+        public override int GetHashCode()
+        {
+            return ((type.GetHashCode() << 6) ^ parameters.GetHashCode());
+        }
 
-		public override int GetHashCode()
-		{
-			return ((type.GetHashCode () << 6) ^ parameters.GetHashCode ());
-		}
+        public Type CodeDomProviderType
+        {
+            get { return type; }
+        }
 
-		public Type CodeDomProviderType {
-			get { return type; }
-		}
-
-		public CompilerParameters CompilerParameters {
-			get { return parameters; }
-		}
-	}
+        public CompilerParameters CompilerParameters
+        {
+            get { return parameters; }
+        }
+    }
 }
-
-

@@ -4,18 +4,20 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
-    using System.Net.NetworkInformation;
+namespace System.Net
+{
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using System.Net.NetworkInformation;
+    using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Text;
     using System.Text.RegularExpressions;
-    using System.Collections;
-    using System.Runtime.Serialization;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
 
-    class WebProxyData {
+    class WebProxyData
+    {
         internal bool bypassOnLocal;
         internal bool automaticallyDetectSettings;
         internal Uri proxyAddress;
@@ -36,9 +38,10 @@ namespace System.Net {
     // If the IE proxy settings contain invalid settings (e.g. "invalid;host" - note the semicolon), then
     // a FormatException will be thrown.
     [Serializable]
-    public class WebProxy : IAutoWebProxy, ISerializable {
+    public class WebProxy : IAutoWebProxy, ISerializable
+    {
         // these are settable by the user
-        private bool _UseRegistry;    // This is just around for serialization. Can we get rid of it?
+        private bool _UseRegistry; // This is just around for serialization. Can we get rid of it?
         private bool _BypassOnLocal;
         private bool m_EnableAutoproxy;
         private Uri _ProxyAddress;
@@ -53,37 +56,40 @@ namespace System.Net {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public WebProxy()
-            : this((Uri) null, false, null, null) {
-        }
+            : this((Uri)null, false, null, null) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public WebProxy(Uri Address)
-            : this(Address, false, null, null) {
-        }
+            : this(Address, false, null, null) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public WebProxy(Uri Address, bool BypassOnLocal)
-            : this(Address, BypassOnLocal, null, null) {
-        }
+            : this(Address, BypassOnLocal, null, null) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public WebProxy(Uri Address, bool BypassOnLocal, string[] BypassList)
-            : this(Address, BypassOnLocal, BypassList, null) {
-        }
+            : this(Address, BypassOnLocal, BypassList, null) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public WebProxy(Uri Address, bool BypassOnLocal, string[] BypassList, ICredentials Credentials) {
+        public WebProxy(
+            Uri Address,
+            bool BypassOnLocal,
+            string[] BypassList,
+            ICredentials Credentials
+        )
+        {
             _ProxyAddress = Address;
             _BypassOnLocal = BypassOnLocal;
-            if (BypassList != null) {
+            if (BypassList != null)
+            {
                 _BypassList = new ArrayList(BypassList);
                 UpdateRegExList(true);
             }
@@ -95,52 +101,60 @@ namespace System.Net {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public WebProxy(string Host, int Port)
-            : this(new Uri("http://" + Host + ":" + Port.ToString(CultureInfo.InvariantCulture)), false, null, null) {
-        }
+            : this(
+                new Uri("http://" + Host + ":" + Port.ToString(CultureInfo.InvariantCulture)),
+                false,
+                null,
+                null
+            ) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public WebProxy(string Address)
-            : this(CreateProxyUri(Address), false, null, null) {
-        }
+            : this(CreateProxyUri(Address), false, null, null) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public WebProxy(string Address, bool BypassOnLocal)
-            : this(CreateProxyUri(Address), BypassOnLocal, null, null) {
-        }
+            : this(CreateProxyUri(Address), BypassOnLocal, null, null) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public WebProxy(string Address, bool BypassOnLocal, string[] BypassList)
-            : this(CreateProxyUri(Address), BypassOnLocal, BypassList, null) {
-        }
+            : this(CreateProxyUri(Address), BypassOnLocal, BypassList, null) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public WebProxy(string Address, bool BypassOnLocal, string[] BypassList, ICredentials Credentials)
-            : this(CreateProxyUri(Address), BypassOnLocal, BypassList, Credentials) {
-        }
+        public WebProxy(
+            string Address,
+            bool BypassOnLocal,
+            string[] BypassList,
+            ICredentials Credentials
+        )
+            : this(CreateProxyUri(Address), BypassOnLocal, BypassList, Credentials) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Uri Address {
-            get {
+        public Uri Address
+        {
+            get
+            {
 #if !FEATURE_PAL
                 CheckForChanges();
 #endif // !FEATURE_PAL
-               return _ProxyAddress;
+                return _ProxyAddress;
             }
-            set {
+            set
+            {
                 _UseRegistry = false;
                 DeleteScriptEngine();
-               _ProxyHostAddresses = null;  // hash list of proxies
-               _ProxyAddress = value;
+                _ProxyHostAddresses = null; // hash list of proxies
+                _ProxyAddress = value;
             }
         }
 
@@ -149,9 +163,17 @@ namespace System.Net {
         /// </devdoc>
         internal bool AutoDetect
         {
-            set {
-                GlobalLog.Assert(_UseRegistry == false, "Cannot set AutoDetect if we are using registry for proxy settings");
-                GlobalLog.Assert(m_EnableAutoproxy, "WebProxy#{0}::.ctor()|Cannot set AutoDetect if usesystemdefault is set.", ValidationHelper.HashString(this));
+            set
+            {
+                GlobalLog.Assert(
+                    _UseRegistry == false,
+                    "Cannot set AutoDetect if we are using registry for proxy settings"
+                );
+                GlobalLog.Assert(
+                    m_EnableAutoproxy,
+                    "WebProxy#{0}::.ctor()|Cannot set AutoDetect if usesystemdefault is set.",
+                    ValidationHelper.HashString(this)
+                );
 
                 if (ScriptEngine == null)
                 {
@@ -164,11 +186,20 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        internal Uri ScriptLocation {
-            set {
+        internal Uri ScriptLocation
+        {
+            set
+            {
                 GlobalLog.Assert(value != null, "Cannot set ScriptLocation to null");
-                GlobalLog.Assert(_UseRegistry == false, "Cannot set AutoDetect if we are using registry for proxy settings");
-                GlobalLog.Assert(m_EnableAutoproxy, "WebProxy#{0}::.ctor()|Cannot set ScriptLocation if usesystemdefault is set.", ValidationHelper.HashString(this));
+                GlobalLog.Assert(
+                    _UseRegistry == false,
+                    "Cannot set AutoDetect if we are using registry for proxy settings"
+                );
+                GlobalLog.Assert(
+                    m_EnableAutoproxy,
+                    "WebProxy#{0}::.ctor()|Cannot set ScriptLocation if usesystemdefault is set.",
+                    ValidationHelper.HashString(this)
+                );
 
                 if (ScriptEngine == null)
                 {
@@ -181,14 +212,17 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool BypassProxyOnLocal {
-            get {
+        public bool BypassProxyOnLocal
+        {
+            get
+            {
 #if !FEATURE_PAL
                 CheckForChanges();
 #endif // !FEATURE_PAL
                 return _BypassOnLocal;
             }
-            set {
+            set
+            {
                 _UseRegistry = false;
                 DeleteScriptEngine();
                 _BypassOnLocal = value;
@@ -198,17 +232,21 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string[] BypassList {
-            get {
+        public string[] BypassList
+        {
+            get
+            {
 #if !FEATURE_PAL
                 CheckForChanges();
 #endif // !FEATURE_PAL
-                if (_BypassList == null) {
+                if (_BypassList == null)
+                {
                     _BypassList = new ArrayList();
                 }
                 return (string[])_BypassList.ToArray(typeof(string));
             }
-            set {
+            set
+            {
                 _UseRegistry = false;
                 DeleteScriptEngine();
                 _BypassList = new ArrayList(value);
@@ -219,43 +257,41 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ICredentials Credentials {
-            get {
-                return _Credentials;
-            }
-            set {
-                _Credentials = value;
-            }
+        public ICredentials Credentials
+        {
+            get { return _Credentials; }
+            set { _Credentials = value; }
         }
 
         /// <devdoc>
         ///    <para>Sets Credentials to CredentialCache.DefaultCredentials</para>
         /// </devdoc>
-        public bool UseDefaultCredentials  {
-            get {
-                return (Credentials is SystemNetworkCredential) ? true : false;
-            }
-            set {
-                _Credentials = value ? CredentialCache.DefaultCredentials : null;
-            }
+        public bool UseDefaultCredentials
+        {
+            get { return (Credentials is SystemNetworkCredential) ? true : false; }
+            set { _Credentials = value ? CredentialCache.DefaultCredentials : null; }
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ArrayList BypassArrayList {
-            get {
+        public ArrayList BypassArrayList
+        {
+            get
+            {
 #if !FEATURE_PAL
                 CheckForChanges();
 #endif // !FEATURE_PAL
-                if ( _BypassList == null ) {
+                if (_BypassList == null)
+                {
                     _BypassList = new ArrayList();
                 }
                 return _BypassList;
             }
         }
 
-        internal void CheckForChanges() {
+        internal void CheckForChanges()
+        {
             if (ScriptEngine != null)
             {
                 ScriptEngine.CheckForChanges();
@@ -265,34 +301,48 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Uri GetProxy(Uri destination) {
-            GlobalLog.Print("WebProxy#" + ValidationHelper.HashString(this) + "::GetProxy() destination:" + ValidationHelper.ToString(destination));
+        public Uri GetProxy(Uri destination)
+        {
+            GlobalLog.Print(
+                "WebProxy#"
+                    + ValidationHelper.HashString(this)
+                    + "::GetProxy() destination:"
+                    + ValidationHelper.ToString(destination)
+            );
             if (destination == null)
             {
                 throw new ArgumentNullException("destination");
             }
 
             Uri result;
-            if (GetProxyAuto(destination, out result)) {
+            if (GetProxyAuto(destination, out result))
+            {
                 return result;
             }
-            if (IsBypassedManual(destination)) {
+            if (IsBypassedManual(destination))
+            {
                 return destination;
             }
             Hashtable proxyHostAddresses = _ProxyHostAddresses;
-            Uri proxy = proxyHostAddresses!=null ? proxyHostAddresses[destination.Scheme] as Uri : _ProxyAddress;
-            return proxy!=null? proxy : destination;
+            Uri proxy =
+                proxyHostAddresses != null
+                    ? proxyHostAddresses[destination.Scheme] as Uri
+                    : _ProxyAddress;
+            return proxy != null ? proxy : destination;
         }
 
         //
         // CreateProxyUri - maps string to Uri
         //
 
-        private static Uri CreateProxyUri(string address) {
-            if (address == null) {
+        private static Uri CreateProxyUri(string address)
+        {
+            if (address == null)
+            {
                 return null;
             }
-            if (address.IndexOf("://") == -1) {
+            if (address.IndexOf("://") == -1)
+            {
                 address = "http://" + address;
             }
             return new Uri(address);
@@ -302,19 +352,28 @@ namespace System.Net {
         // UpdateRegExList - Update internal _RegExBypassList
         //  warning - can throw if the RegEx doesn't parse??
         //
-        private void UpdateRegExList(bool canThrow) {
+        private void UpdateRegExList(bool canThrow)
+        {
             Regex[] regExBypassList = null;
             ArrayList bypassList = _BypassList;
-            try {
-                if ( bypassList != null && bypassList.Count > 0 ) {
+            try
+            {
+                if (bypassList != null && bypassList.Count > 0)
+                {
                     regExBypassList = new Regex[bypassList.Count];
-                    for (int i = 0; i < bypassList.Count; i++ ) {
-                        regExBypassList[i] = new Regex((string)bypassList[i], RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+                    for (int i = 0; i < bypassList.Count; i++)
+                    {
+                        regExBypassList[i] = new Regex(
+                            (string)bypassList[i],
+                            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant
+                        );
                     }
                 }
             }
-            catch {
-                if (!canThrow) {
+            catch
+            {
+                if (!canThrow)
+                {
                     _RegExBypassList = null;
                     return;
                 }
@@ -327,14 +386,22 @@ namespace System.Net {
         //
         // IsMatchInBypassList - match input against _RegExBypassList
         //
-        private bool IsMatchInBypassList(Uri input) {
+        private bool IsMatchInBypassList(Uri input)
+        {
             UpdateRegExList(false);
-            if ( _RegExBypassList == null ) {
+            if (_RegExBypassList == null)
+            {
                 return false;
             }
-            string matchUriString = input.Scheme + "://" + input.Host + (!input.IsDefaultPort ? (":"+input.Port) : "" );
-            for (int i = 0; i < _BypassList.Count; i++ ) {
-                if (_RegExBypassList[i].IsMatch(matchUriString)) {
+            string matchUriString =
+                input.Scheme
+                + "://"
+                + input.Host
+                + (!input.IsDefaultPort ? (":" + input.Port) : "");
+            for (int i = 0; i < _BypassList.Count; i++)
+            {
+                if (_RegExBypassList[i].IsMatch(matchUriString))
+                {
                     return true;
                 }
             }
@@ -344,15 +411,18 @@ namespace System.Net {
         /// <devdoc>
         /// Determines if the host Uri should be routed locally or go through the proxy.
         /// </devdoc>
-        private bool IsLocal(Uri host) {
+        private bool IsLocal(Uri host)
+        {
             string hostString = host.Host;
 
             IPAddress hostAddress;
             if (IPAddress.TryParse(hostString, out hostAddress))
             {
-                return (IPAddress.IsLoopback(hostAddress) || NclUtilities.IsAddressLocal(hostAddress));
+                return (
+                    IPAddress.IsLoopback(hostAddress) || NclUtilities.IsAddressLocal(hostAddress)
+                );
             }
-            
+
             int dot = hostString.IndexOf('.');
 
             // No dot?  Local.
@@ -360,11 +430,22 @@ namespace System.Net {
             {
                 return true;
             }
-            
+
             // If it matches the primary domain, it's local.  (Whether or not the hostname matches.)
             string local = "." + IPGlobalProperties.InternalGetIPGlobalProperties().DomainName;
-            if (local !=  null && local.Length == (hostString.Length - dot) &&
-                string.Compare(local, 0, hostString, dot, local.Length, StringComparison.OrdinalIgnoreCase ) == 0) {
+            if (
+                local != null
+                && local.Length == (hostString.Length - dot)
+                && string.Compare(
+                    local,
+                    0,
+                    hostString,
+                    dot,
+                    local.Length,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            )
+            {
                 return true;
             }
             return false;
@@ -373,47 +454,64 @@ namespace System.Net {
         /// <devdoc>
         /// Determines if the host Uri should be routed locally or go through a proxy.
         /// </devdoc>
-        private bool IsLocalInProxyHash(Uri host) {
+        private bool IsLocalInProxyHash(Uri host)
+        {
             Hashtable proxyHostAddresses = _ProxyHostAddresses;
-            if (proxyHostAddresses != null) {
-                Uri proxy = (Uri) proxyHostAddresses[host.Scheme];
-                if (proxy == null) {
+            if (proxyHostAddresses != null)
+            {
+                Uri proxy = (Uri)proxyHostAddresses[host.Scheme];
+                if (proxy == null)
+                {
                     return true; // no proxy entry for this scheme, then bypass
                 }
             }
             return false;
         }
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsBypassed(Uri host) {
-            GlobalLog.Print("WebProxy#" + ValidationHelper.HashString(this) + "::IsBypassed() destination:" + ValidationHelper.ToString(host));
+        public bool IsBypassed(Uri host)
+        {
+            GlobalLog.Print(
+                "WebProxy#"
+                    + ValidationHelper.HashString(this)
+                    + "::IsBypassed() destination:"
+                    + ValidationHelper.ToString(host)
+            );
             if (host == null)
             {
                 throw new ArgumentNullException("host");
             }
 
-            bool result; 
-            if (IsBypassedAuto(host, out result)) {
+            bool result;
+            if (IsBypassedAuto(host, out result))
+            {
                 return result;
             }
             return IsBypassedManual(host);
         }
 
-        private bool IsBypassedManual(Uri host) {
-            if (host.IsLoopback) {
+        private bool IsBypassedManual(Uri host)
+        {
+            if (host.IsLoopback)
+            {
                 return true; // bypass localhost from using a proxy.
             }
-            return (_ProxyAddress==null && _ProxyHostAddresses==null) || (_BypassOnLocal && IsLocal(host)) || IsMatchInBypassList(host) || IsLocalInProxyHash(host);
+            return (_ProxyAddress == null && _ProxyHostAddresses == null)
+                || (_BypassOnLocal && IsLocal(host))
+                || IsMatchInBypassList(host)
+                || IsLocalInProxyHash(host);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [Obsolete("This method has been deprecated. Please use the proxy selected for you by default. http://go.microsoft.com/fwlink/?linkid=14202")]
-        public static WebProxy GetDefaultProxy() {
+        [Obsolete(
+            "This method has been deprecated. Please use the proxy selected for you by default. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        public static WebProxy GetDefaultProxy()
+        {
 #if MONO_FEATURE_CAS
             ExceptionHelper.WebPermissionUnrestricted.Demand();
 #endif
@@ -426,15 +524,17 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected WebProxy(SerializationInfo serializationInfo, StreamingContext streamingContext) {
+        protected WebProxy(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        {
             // first check for useRegistry on the serialized proxy
             bool useRegistry = false;
-            try {
+            try
+            {
                 useRegistry = serializationInfo.GetBoolean("_UseRegistry");
             }
-            catch {
-            }
-            if (useRegistry) {
+            catch { }
+            if (useRegistry)
+            {
                 // just make the proxy advanced, don't populate with any settings
                 // note - this will happen in the context of the user performing the deserialization (their proxy settings get read)
 #if MONO_FEATURE_CAS
@@ -444,14 +544,14 @@ namespace System.Net {
                 return;
             }
             // normal proxy
-            _ProxyAddress   = (Uri)serializationInfo.GetValue("_ProxyAddress", typeof(Uri));
-            _BypassOnLocal  = serializationInfo.GetBoolean("_BypassOnLocal");
-            _BypassList     = (ArrayList)serializationInfo.GetValue("_BypassList", typeof(ArrayList));
-            try {
+            _ProxyAddress = (Uri)serializationInfo.GetValue("_ProxyAddress", typeof(Uri));
+            _BypassOnLocal = serializationInfo.GetBoolean("_BypassOnLocal");
+            _BypassList = (ArrayList)serializationInfo.GetValue("_BypassList", typeof(ArrayList));
+            try
+            {
                 UseDefaultCredentials = serializationInfo.GetBoolean("_UseDefaultCredentials");
             }
-            catch {
-            }
+            catch { }
         }
 
         //
@@ -461,9 +561,20 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.dll is still using pre-v4 security model and needs this demand")]
-        [SecurityPermission(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter, SerializationFormatter=true)]
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "System.dll is still using pre-v4 security model and needs this demand"
+        )]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter,
+            SerializationFormatter = true
+        )]
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             GetObjectData(serializationInfo, streamingContext);
         }
@@ -471,18 +582,21 @@ namespace System.Net {
         //
         // FxCop: provide a way for derived classes to access this method even if they reimplement ISerializable.
         //
-        [SecurityPermission(SecurityAction.LinkDemand, SerializationFormatter=true)]
-        protected virtual void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        [SecurityPermission(SecurityAction.LinkDemand, SerializationFormatter = true)]
+        protected virtual void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             serializationInfo.AddValue("_BypassOnLocal", _BypassOnLocal);
             serializationInfo.AddValue("_ProxyAddress", _ProxyAddress);
             serializationInfo.AddValue("_BypassList", _BypassList);
             serializationInfo.AddValue("_UseDefaultCredentials", UseDefaultCredentials);
-            if (_UseRegistry) {
+            if (_UseRegistry)
+            {
                 serializationInfo.AddValue("_UseRegistry", true);
             }
         }
-
 
         /// <summary>
         ///     Handles proxy settings by using Internet Explorer based settings,
@@ -492,60 +606,66 @@ namespace System.Net {
 
         private AutoWebProxyScriptEngine m_ScriptEngine;
 
-        internal AutoWebProxyScriptEngine ScriptEngine {
-            get {
-                return m_ScriptEngine;
-            }
-            set {
-                m_ScriptEngine = value;
-            }
+        internal AutoWebProxyScriptEngine ScriptEngine
+        {
+            get { return m_ScriptEngine; }
+            set { m_ScriptEngine = value; }
         }
 
 #if MONO
-        public static IWebProxy CreateDefaultProxy ()
+        public static IWebProxy CreateDefaultProxy()
         {
 #if FEATURE_NO_BSD_SOCKETS
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
 #elif MONOTOUCH
-            return Mono.Net.CFNetwork.GetDefaultProxy ();
+            return Mono.Net.CFNetwork.GetDefaultProxy();
 #elif MONODROID && !MOBILE_DESKTOP_HOST
             // Return the system web proxy.  This only works for ICS+.
-            var data = AndroidPlatform.GetDefaultProxy ();
+            var data = AndroidPlatform.GetDefaultProxy();
             if (data != null)
                 return data;
 
-            return new WebProxy (true);
+            return new WebProxy(true);
 #elif ORBIS
-            return new WebProxy (true);
+            return new WebProxy(true);
 #else
-            if (Platform.IsMacOS) {
-                var data = Mono.Net.CFNetwork.GetDefaultProxy ();
+            if (Platform.IsMacOS)
+            {
+                var data = Mono.Net.CFNetwork.GetDefaultProxy();
                 if (data != null)
                     return data;
             }
 
-            return new WebProxy (true);
+            return new WebProxy(true);
 #endif
         }
 #endif
 
         // This constructor is used internally to make WebProxies that read their state from the registry.
-        // 
+        //
         internal WebProxy(bool enableAutoproxy)
         {
             m_EnableAutoproxy = enableAutoproxy;
             UnsafeUpdateFromRegistry();
         }
 
-        internal void DeleteScriptEngine() {
-            if (ScriptEngine != null) {
+        internal void DeleteScriptEngine()
+        {
+            if (ScriptEngine != null)
+            {
                 ScriptEngine.Close();
                 ScriptEngine = null;
             }
         }
 
-        internal void UnsafeUpdateFromRegistry() {
-            GlobalLog.Assert(!_UseRegistry, "WebProxy#{0}::UnsafeUpdateFromRegistry()|_UseRegistry ScriptEngine#{1}", ValidationHelper.HashString(this), ValidationHelper.HashString(m_ScriptEngine));
+        internal void UnsafeUpdateFromRegistry()
+        {
+            GlobalLog.Assert(
+                !_UseRegistry,
+                "WebProxy#{0}::UnsafeUpdateFromRegistry()|_UseRegistry ScriptEngine#{1}",
+                ValidationHelper.HashString(this),
+                ValidationHelper.HashString(m_ScriptEngine)
+            );
             _UseRegistry = true;
 #if !FEATURE_PAL || !MOBILE
             ScriptEngine = new AutoWebProxyScriptEngine(this, true);
@@ -555,22 +675,37 @@ namespace System.Net {
 #endif
         }
 
-        internal void Update(WebProxyData webProxyData) {
+        internal void Update(WebProxyData webProxyData)
+        {
 #if TRAVE
-            GlobalLog.Print("WebProxy#" + ValidationHelper.HashString(this) + "::Update() Before " + DumpIWebProxy(this));
+            GlobalLog.Print(
+                "WebProxy#"
+                    + ValidationHelper.HashString(this)
+                    + "::Update() Before "
+                    + DumpIWebProxy(this)
+            );
 #endif
             // update needs to happen atomically
-            lock (this) {
+            lock (this)
+            {
                 _BypassOnLocal = webProxyData.bypassOnLocal;
                 _ProxyAddress = webProxyData.proxyAddress;
                 _ProxyHostAddresses = webProxyData.proxyHostAddresses;
                 _BypassList = webProxyData.bypassList;
 
-                ScriptEngine.AutomaticallyDetectSettings = m_EnableAutoproxy && webProxyData.automaticallyDetectSettings;
-                ScriptEngine.AutomaticConfigurationScript = m_EnableAutoproxy ? webProxyData.scriptLocation : null;
+                ScriptEngine.AutomaticallyDetectSettings =
+                    m_EnableAutoproxy && webProxyData.automaticallyDetectSettings;
+                ScriptEngine.AutomaticConfigurationScript = m_EnableAutoproxy
+                    ? webProxyData.scriptLocation
+                    : null;
             }
 #if TRAVE
-            GlobalLog.Print("WebProxy#" + ValidationHelper.HashString(this) + "::Update() After " + DumpIWebProxy(this));
+            GlobalLog.Print(
+                "WebProxy#"
+                    + ValidationHelper.HashString(this)
+                    + "::Update() After "
+                    + DumpIWebProxy(this)
+            );
 #endif
         }
 
@@ -584,8 +719,14 @@ namespace System.Net {
         /// we want to try a direct access. Today we only attempt using the first entry.
         /// </para>
         /// </devdoc>
-        ProxyChain IAutoWebProxy.GetProxies(Uri destination) {
-            GlobalLog.Print("WebProxy#" + ValidationHelper.HashString(this) + "::GetProxies() destination:" + ValidationHelper.ToString(destination));
+        ProxyChain IAutoWebProxy.GetProxies(Uri destination)
+        {
+            GlobalLog.Print(
+                "WebProxy#"
+                    + ValidationHelper.HashString(this)
+                    + "::GetProxies() destination:"
+                    + ValidationHelper.ToString(destination)
+            );
             if (destination == null)
             {
                 throw new ArgumentNullException("destination");
@@ -594,13 +735,21 @@ namespace System.Net {
         }
 
 #if TRAVE
-        internal static string DumpIWebProxy(IWebProxy proxy) {
+        internal static string DumpIWebProxy(IWebProxy proxy)
+        {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(" Type: " + ValidationHelper.ToString(proxy.GetType()) + "\r\n");
             WebProxy webProxy = proxy as WebProxy;
-            if (webProxy!=null) {
-                stringBuilder.Append(" - Address: " + ValidationHelper.ToString(webProxy._ProxyAddress) + "\r\n");
-                stringBuilder.Append(" - BypassProxyOnLocal: " + ValidationHelper.ToString(webProxy._BypassOnLocal) + "\r\n");
+            if (webProxy != null)
+            {
+                stringBuilder.Append(
+                    " - Address: " + ValidationHelper.ToString(webProxy._ProxyAddress) + "\r\n"
+                );
+                stringBuilder.Append(
+                    " - BypassProxyOnLocal: "
+                        + ValidationHelper.ToString(webProxy._BypassOnLocal)
+                        + "\r\n"
+                );
             }
             stringBuilder.Append(" - -------------------------------------------------");
             return stringBuilder.ToString();
@@ -612,47 +761,68 @@ namespace System.Net {
         //
 
         // Get proxies can never return null in the case of ExecutionSuccess.
-        private bool GetProxyAuto(Uri destination, out Uri proxyUri) {
-            GlobalLog.Print("WebProxy#" + ValidationHelper.HashString(this) + "::GetProxyAuto() destination:" + ValidationHelper.ToString(destination));
-            
+        private bool GetProxyAuto(Uri destination, out Uri proxyUri)
+        {
+            GlobalLog.Print(
+                "WebProxy#"
+                    + ValidationHelper.HashString(this)
+                    + "::GetProxyAuto() destination:"
+                    + ValidationHelper.ToString(destination)
+            );
+
             proxyUri = null;
-            if (ScriptEngine == null) {
+            if (ScriptEngine == null)
+            {
                 return false;
             }
             IList<string> proxies = null;
-            if (!ScriptEngine.GetProxies(destination, out proxies)) {
+            if (!ScriptEngine.GetProxies(destination, out proxies))
+            {
                 return false;
             }
 
             // Returning null in case 'proxies.Count == 0' means, no proxy available (incl. DIRECT), the request is prohibited.
-            if (proxies.Count > 0) {
-                if (AreAllBypassed(proxies, true)) {
+            if (proxies.Count > 0)
+            {
+                if (AreAllBypassed(proxies, true))
+                {
                     // this is the broken behaviour of IWebProxy. Returning the same destination means bypass
                     proxyUri = destination;
                 }
-                else {
+                else
+                {
                     proxyUri = ProxyUri(proxies[0]);
                 }
             }
             return true;
         }
 
-        private bool IsBypassedAuto(Uri destination, out bool isBypassed) {
-            GlobalLog.Print("WebProxy#" + ValidationHelper.HashString(this) + "::IsBypassedAuto() destination:" + ValidationHelper.ToString(destination));
+        private bool IsBypassedAuto(Uri destination, out bool isBypassed)
+        {
+            GlobalLog.Print(
+                "WebProxy#"
+                    + ValidationHelper.HashString(this)
+                    + "::IsBypassedAuto() destination:"
+                    + ValidationHelper.ToString(destination)
+            );
 
             isBypassed = true;
 
-            if (ScriptEngine == null) {
+            if (ScriptEngine == null)
+            {
                 return false;
             }
-            IList<string> proxyList; 
-            if (!ScriptEngine.GetProxies(destination, out proxyList)) {
+            IList<string> proxyList;
+            if (!ScriptEngine.GetProxies(destination, out proxyList))
+            {
                 return false;
             }
-            if (proxyList.Count == 0) {
+            if (proxyList.Count == 0)
+            {
                 isBypassed = false;
             }
-            else {
+            else
+            {
                 isBypassed = AreAllBypassed(proxyList, true);
             }
             return true;
@@ -660,27 +830,38 @@ namespace System.Net {
 
         internal Uri[] GetProxiesAuto(Uri destination, ref int syncStatus)
         {
-            GlobalLog.Print("WebProxy#" + ValidationHelper.HashString(this) + "::GetProxiesAuto() destination:" + ValidationHelper.ToString(destination));
+            GlobalLog.Print(
+                "WebProxy#"
+                    + ValidationHelper.HashString(this)
+                    + "::GetProxiesAuto() destination:"
+                    + ValidationHelper.ToString(destination)
+            );
 
-            if (ScriptEngine == null) {
+            if (ScriptEngine == null)
+            {
                 return null;
             }
 
-            IList<string> proxyList = null;           
-            if (!ScriptEngine.GetProxies(destination, out proxyList, ref syncStatus)) {
+            IList<string> proxyList = null;
+            if (!ScriptEngine.GetProxies(destination, out proxyList, ref syncStatus))
+            {
                 return null;
             }
 
             Uri[] proxyUris = null;
-            if (proxyList.Count == 0) {
+            if (proxyList.Count == 0)
+            {
                 proxyUris = new Uri[] { };
             }
-            else if (AreAllBypassed(proxyList, false)) {
+            else if (AreAllBypassed(proxyList, false))
+            {
                 proxyUris = new Uri[] { null };
             }
-            else {
+            else
+            {
                 proxyUris = new Uri[proxyList.Count];
-                for (int i = 0; i < proxyList.Count; i++) {
+                for (int i = 0; i < proxyList.Count; i++)
+                {
                     proxyUris[i] = ProxyUri(proxyList[i]);
                 }
             }
@@ -711,13 +892,16 @@ namespace System.Net {
             return proxy;
         }
 
-        private static bool AreAllBypassed(IEnumerable<string> proxies, bool checkFirstOnly) {
+        private static bool AreAllBypassed(IEnumerable<string> proxies, bool checkFirstOnly)
+        {
             bool isBypassed = true;
 
-            foreach (string proxy in proxies) {
+            foreach (string proxy in proxies)
+            {
                 isBypassed = string.IsNullOrEmpty(proxy);
-                
-                if (checkFirstOnly || !isBypassed) {
+
+                if (checkFirstOnly || !isBypassed)
+                {
                     break;
                 }
             }
@@ -725,8 +909,11 @@ namespace System.Net {
             return isBypassed;
         }
 
-        private static Uri ProxyUri(string proxyName) {
-            return proxyName==null || proxyName.Length==0 ? null : new Uri("http://" + proxyName);
+        private static Uri ProxyUri(string proxyName)
+        {
+            return proxyName == null || proxyName.Length == 0
+                ? null
+                : new Uri("http://" + proxyName);
         }
     }
 }

@@ -14,12 +14,12 @@ interface I
 
 public class A
 {
-    public void meth(){}
+    public void meth() { }
 }
 
 public class B : A
 {
-    new private void meth(){}
+    private new void meth() { }
 }
 
 public class C : B, I

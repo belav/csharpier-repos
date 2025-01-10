@@ -7,31 +7,38 @@ namespace System.Net
     internal class ServerCertValidationCallback
     {
         readonly RemoteCertificateValidationCallback m_ValidationCallback;
-        readonly ExecutionContext                    m_Context;
+        readonly ExecutionContext m_Context;
 
-        internal ServerCertValidationCallback(RemoteCertificateValidationCallback validationCallback)
+        internal ServerCertValidationCallback(
+            RemoteCertificateValidationCallback validationCallback
+        )
         {
             m_ValidationCallback = validationCallback;
             m_Context = ExecutionContext.Capture();
         }
 
-        internal RemoteCertificateValidationCallback ValidationCallback {
-            get { return m_ValidationCallback;}
+        internal RemoteCertificateValidationCallback ValidationCallback
+        {
+            get { return m_ValidationCallback; }
         }
 
         internal void Callback(object state)
         {
-            CallbackContext context = (CallbackContext) state;
-            context.result = m_ValidationCallback(context.request,
-                                                  context.certificate,
-                                                  context.chain,
-                                                  context.sslPolicyErrors);
+            CallbackContext context = (CallbackContext)state;
+            context.result = m_ValidationCallback(
+                context.request,
+                context.certificate,
+                context.chain,
+                context.sslPolicyErrors
+            );
         }
 
-        internal bool Invoke(object request,
-                             X509Certificate certificate,
-                             X509Chain chain,
-                             SslPolicyErrors sslPolicyErrors)
+        internal bool Invoke(
+            object request,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             if (m_Context == null)
             {
@@ -40,10 +47,12 @@ namespace System.Net
             else
             {
                 ExecutionContext execContext = m_Context.CreateCopy();
-                CallbackContext callbackContext = new CallbackContext(request,
-                                                                      certificate,
-                                                                      chain,
-                                                                      sslPolicyErrors);
+                CallbackContext callbackContext = new CallbackContext(
+                    request,
+                    certificate,
+                    chain,
+                    sslPolicyErrors
+                );
                 ExecutionContext.Run(execContext, Callback, callbackContext);
                 return callbackContext.result;
             }
@@ -58,10 +67,12 @@ namespace System.Net
 
             internal bool result;
 
-            internal CallbackContext(Object request,
-                                     X509Certificate certificate,
-                                     X509Chain chain,
-                                     SslPolicyErrors sslPolicyErrors)
+            internal CallbackContext(
+                Object request,
+                X509Certificate certificate,
+                X509Chain chain,
+                SslPolicyErrors sslPolicyErrors
+            )
             {
                 this.request = request;
                 this.certificate = certificate;

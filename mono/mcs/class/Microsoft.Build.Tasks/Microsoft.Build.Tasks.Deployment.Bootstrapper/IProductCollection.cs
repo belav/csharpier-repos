@@ -30,20 +30,17 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
+namespace Microsoft.Build.Tasks.Deployment.Bootstrapper
+{
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    [Guid("63F63663-8503-4875-814C-09168E595367")]
+    [ComVisible(true)]
+    public interface IProductCollection
+    {
+        int Count { get; }
 
-	[InterfaceType (ComInterfaceType.InterfaceIsDual)]
-	[Guid ("63F63663-8503-4875-814C-09168E595367")]
-	[ComVisible (true)]
-	public interface IProductCollection {
-		
-		int Count {
-			get;
-		}
-		
-		Product Item (int index);
-		
-		Product Product (string productCode);
-	}
+        Product Item(int index);
+
+        Product Product(string productCode);
+    }
 }
-

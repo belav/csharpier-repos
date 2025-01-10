@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
     internal readonly record struct CodeGenerationSolutionContext(
         Solution Solution,
         CodeGenerationContext Context,
-        CodeAndImportGenerationOptionsProvider FallbackOptions);
+        CodeAndImportGenerationOptionsProvider FallbackOptions
+    );
 
     /// <summary>
     /// General options for controlling the code produced by the <see cref="CodeGenerator"/> that apply to all documents.
@@ -30,7 +31,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         /// it surrounds this context location. If no part surrounds this location then a part is
         /// preferred if it comes from the same SyntaxTree as this location.  If there is no
         /// such part, then any part may be used for generation.
-        /// 
+        ///
         /// This option is not necessary if <see cref="AfterThisLocation"/> or <see cref="BeforeThisLocation"/> are
         /// provided.
         /// </summary>
@@ -40,7 +41,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         /// A hint to the code generation service to specify where the generated code should be
         /// placed.  Code will be generated after this location if the location is valid in the type
         /// or symbol being generated into, and it is possible to generate the code after it.
-        /// 
+        ///
         /// If this option is provided, neither <see cref="ContextLocation"/> nor <see cref="BeforeThisLocation"/> are
         /// needed.
         /// </summary>
@@ -49,8 +50,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         /// <summary>
         /// A hint to the code generation service to specify where the generated code should be
         /// placed.  Code will be generated before this location if the location is valid in the type
-        /// or symbol being generated into, and it is possible to generate the code after it. 
-        /// 
+        /// or symbol being generated into, and it is possible to generate the code after it.
+        ///
         /// If this option is provided, neither <see cref="ContextLocation"/> nor <see cref="AfterThisLocation"/> are
         /// needed.
         /// </summary>
@@ -81,7 +82,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         /// into a single declaration with a dotted name.  False if the nesting should be preserved
         /// and each namespace declaration should be nested and should only have a single non-dotted
         /// name.
-        /// 
+        ///
         /// Merging can only occur if the namespace only contains a single member that is also a
         /// namespace.
         /// </summary>
@@ -148,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool generateDocumentationComments = false,
             bool autoInsertionLocation = true,
             bool sortMembers = true,
-            bool reuseSyntax = false)
+            bool reuseSyntax = false
+        )
         {
             CheckLocation(contextLocation, nameof(contextLocation));
             CheckLocation(afterThisLocation, nameof(afterThisLocation));
@@ -157,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             AfterThisLocation = afterThisLocation;
             BeforeThisLocation = beforeThisLocation;
             AddImports = addImports;
-            AdditionalImports = additionalImports ?? SpecializedCollections.EmptyEnumerable<INamespaceSymbol>();
+            AdditionalImports =
+                additionalImports ?? SpecializedCollections.EmptyEnumerable<INamespaceSymbol>();
             GenerateMembers = generateMembers;
             MergeNestedNamespaces = mergeNestedNamespaces;
             MergeAttributes = mergeAttributes;
@@ -173,12 +176,15 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         {
             if (location != null && !location.IsInSource)
             {
-                throw new ArgumentException(WorkspaceExtensionsResources.Location_must_be_null_or_from_source, name);
+                throw new ArgumentException(
+                    WorkspaceExtensionsResources.Location_must_be_null_or_from_source,
+                    name
+                );
             }
         }
 
-        internal Location? BestLocation
-            => this.AfterThisLocation ?? this.BeforeThisLocation ?? this.ContextLocation;
+        internal Location? BestLocation =>
+            this.AfterThisLocation ?? this.BeforeThisLocation ?? this.ContextLocation;
 
         public CodeGenerationContext With(
             Optional<Location> contextLocation = default,
@@ -194,20 +200,43 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             Optional<bool> generateDocumentationComments = default,
             Optional<bool> autoInsertionLocation = default,
             Optional<bool> sortMembers = default,
-            Optional<bool> reuseSyntax = default)
+            Optional<bool> reuseSyntax = default
+        )
         {
-            var newContextLocation = contextLocation.HasValue ? contextLocation.Value : this.ContextLocation;
-            var newAfterThisLocation = afterThisLocation.HasValue ? afterThisLocation.Value : this.AfterThisLocation;
-            var newBeforeThisLocation = beforeThisLocation.HasValue ? beforeThisLocation.Value : this.BeforeThisLocation;
+            var newContextLocation = contextLocation.HasValue
+                ? contextLocation.Value
+                : this.ContextLocation;
+            var newAfterThisLocation = afterThisLocation.HasValue
+                ? afterThisLocation.Value
+                : this.AfterThisLocation;
+            var newBeforeThisLocation = beforeThisLocation.HasValue
+                ? beforeThisLocation.Value
+                : this.BeforeThisLocation;
             var newAddImports = addImports.HasValue ? addImports.Value : this.AddImports;
-            var newAdditionalImports = additionalImports.HasValue ? additionalImports.Value : this.AdditionalImports;
-            var newGenerateMembers = generateMembers.HasValue ? generateMembers.Value : this.GenerateMembers;
-            var newMergeNestedNamespaces = mergeNestedNamespaces.HasValue ? mergeNestedNamespaces.Value : this.MergeNestedNamespaces;
-            var newMergeAttributes = mergeAttributes.HasValue ? mergeAttributes.Value : this.MergeAttributes;
-            var newGenerateDefaultAccessibility = generateDefaultAccessibility.HasValue ? generateDefaultAccessibility.Value : this.GenerateDefaultAccessibility;
-            var newGenerateMethodBodies = generateMethodBodies.HasValue ? generateMethodBodies.Value : this.GenerateMethodBodies;
-            var newGenerateDocumentationComments = generateDocumentationComments.HasValue ? generateDocumentationComments.Value : this.GenerateDocumentationComments;
-            var newAutoInsertionLocation = autoInsertionLocation.HasValue ? autoInsertionLocation.Value : this.AutoInsertionLocation;
+            var newAdditionalImports = additionalImports.HasValue
+                ? additionalImports.Value
+                : this.AdditionalImports;
+            var newGenerateMembers = generateMembers.HasValue
+                ? generateMembers.Value
+                : this.GenerateMembers;
+            var newMergeNestedNamespaces = mergeNestedNamespaces.HasValue
+                ? mergeNestedNamespaces.Value
+                : this.MergeNestedNamespaces;
+            var newMergeAttributes = mergeAttributes.HasValue
+                ? mergeAttributes.Value
+                : this.MergeAttributes;
+            var newGenerateDefaultAccessibility = generateDefaultAccessibility.HasValue
+                ? generateDefaultAccessibility.Value
+                : this.GenerateDefaultAccessibility;
+            var newGenerateMethodBodies = generateMethodBodies.HasValue
+                ? generateMethodBodies.Value
+                : this.GenerateMethodBodies;
+            var newGenerateDocumentationComments = generateDocumentationComments.HasValue
+                ? generateDocumentationComments.Value
+                : this.GenerateDocumentationComments;
+            var newAutoInsertionLocation = autoInsertionLocation.HasValue
+                ? autoInsertionLocation.Value
+                : this.AutoInsertionLocation;
             var newSortMembers = sortMembers.HasValue ? sortMembers.Value : this.SortMembers;
             var newReuseSyntax = reuseSyntax.HasValue ? reuseSyntax.Value : this.ReuseSyntax;
 
@@ -225,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 newGenerateDocumentationComments,
                 newAutoInsertionLocation,
                 newSortMembers,
-                newReuseSyntax);
+                newReuseSyntax
+            );
         }
     }
 }

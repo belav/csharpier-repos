@@ -27,14 +27,19 @@ public class MediaTypeTest
         get
         {
             return new List<string[]>
+            {
+                // See https://tools.ietf.org/html/rfc6838#section-4.2 for allowed names spec
+                new[] { "application/json", "json", null },
+                new[] { "application/json+", "json", "" },
+                new[] { "application/+json", "", "json" },
+                new[] { "application/entitytype+json", "entitytype", "json" },
+                new[]
                 {
-                    // See https://tools.ietf.org/html/rfc6838#section-4.2 for allowed names spec
-                    new[] { "application/json", "json", null },
-                    new[] { "application/json+", "json", "" },
-                    new[] { "application/+json", "", "json" },
-                    new[] { "application/entitytype+json", "entitytype", "json" },
-                    new[] { "  application /  vnd.com-pany.some+entity!.v2+js.#$&^_n  ; q=\"0.3+1\"", "vnd.com-pany.some+entity!.v2", "js.#$&^_n" },
-                };
+                    "  application /  vnd.com-pany.some+entity!.v2+js.#$&^_n  ; q=\"0.3+1\"",
+                    "vnd.com-pany.some+entity!.v2",
+                    "js.#$&^_n",
+                },
+            };
         }
     }
 
@@ -43,7 +48,8 @@ public class MediaTypeTest
     public void Constructor_CanParseSuffixedMediaTypes(
         string mediaType,
         string expectedSubTypeWithoutSuffix,
-        string expectedSubtypeSuffix)
+        string expectedSubtypeSuffix
+    )
     {
         // Arrange & Act
         var result = new MediaType(mediaType);
@@ -58,19 +64,19 @@ public class MediaTypeTest
         get
         {
             return new TheoryData<string>
-                {
-                    "application/json+bson;format=pretty;charset=utf-8;q=0.8",
-                    "application/json+bson;format=pretty;charset=\"utf-8\";q=0.8",
-                    "application/json+bson;format=pretty;charset=utf-8; q=0.8 ",
-                    "application/json+bson;format=pretty;charset=utf-8 ; q=0.8 ",
-                    "application/json+bson;format=pretty; charset=utf-8 ; q=0.8 ",
-                    "application/json+bson;format=pretty ; charset=utf-8 ; q=0.8 ",
-                    "application/json+bson; format=pretty ; charset=utf-8 ; q=0.8 ",
-                    "application/json+bson; format=pretty ; charset=utf-8 ; q=  0.8 ",
-                    "application/json+bson; format=pretty ; charset=utf-8 ; q  =  0.8 ",
-                    " application /  json+bson; format =  pretty ; charset = utf-8 ; q  =  0.8 ",
-                    " application /  json+bson; format =  \"pretty\" ; charset = \"utf-8\" ; q  =  \"0.8\" ",
-                };
+            {
+                "application/json+bson;format=pretty;charset=utf-8;q=0.8",
+                "application/json+bson;format=pretty;charset=\"utf-8\";q=0.8",
+                "application/json+bson;format=pretty;charset=utf-8; q=0.8 ",
+                "application/json+bson;format=pretty;charset=utf-8 ; q=0.8 ",
+                "application/json+bson;format=pretty; charset=utf-8 ; q=0.8 ",
+                "application/json+bson;format=pretty ; charset=utf-8 ; q=0.8 ",
+                "application/json+bson; format=pretty ; charset=utf-8 ; q=0.8 ",
+                "application/json+bson; format=pretty ; charset=utf-8 ; q=  0.8 ",
+                "application/json+bson; format=pretty ; charset=utf-8 ; q  =  0.8 ",
+                " application /  json+bson; format =  pretty ; charset = utf-8 ; q  =  0.8 ",
+                " application /  json+bson; format =  \"pretty\" ; charset = \"utf-8\" ; q  =  \"0.8\" ",
+            };
         }
     }
 
@@ -114,7 +120,10 @@ public class MediaTypeTest
     public void Constructor_NegativeOffset_Throws(int offset)
     {
         // Arrange, Act and Assert
-        Assert.Throws<ArgumentOutOfRangeException>("offset", () => new MediaType("media", offset, 5));
+        Assert.Throws<ArgumentOutOfRangeException>(
+            "offset",
+            () => new MediaType("media", offset, 5)
+        );
     }
 
     [Fact]
@@ -200,8 +209,14 @@ public class MediaTypeTest
     [InlineData("application/json;q=0.8", "application/json;q=0.9")]
     [InlineData("application/json;q=0.8;charset=utf-7", "application/json;charset=utf-8;q=0.9")]
     [InlineData("application/json", "application/json;format=indent;charset=utf-8")]
-    [InlineData("application/json;format=indent;charset=utf-8", "application/json;format=indent;charset=utf-8")]
-    [InlineData("application/json;charset=utf-8;format=indent", "application/json;format=indent;charset=utf-8")]
+    [InlineData(
+        "application/json;format=indent;charset=utf-8",
+        "application/json;format=indent;charset=utf-8"
+    )]
+    [InlineData(
+        "application/json;charset=utf-8;format=indent",
+        "application/json;format=indent;charset=utf-8"
+    )]
     [InlineData("application/*", "application/json")]
     [InlineData("application/*", "application/entitytype+json;v=2")]
     [InlineData("application/*;v=2", "application/entitytype+json;v=2")]
@@ -319,7 +334,10 @@ public class MediaTypeTest
     [InlineData("text/*+*", true)]
     [InlineData("text/json+suffix", false)]
     [InlineData("*/json+*", false)]
-    public void MatchesAllSubTypesWithoutSuffix_ReturnsExpectedResult(string value, bool expectedReturnValue)
+    public void MatchesAllSubTypesWithoutSuffix_ReturnsExpectedResult(
+        string value,
+        bool expectedReturnValue
+    )
     {
         // Arrange
         var mediaType = new MediaType(value);

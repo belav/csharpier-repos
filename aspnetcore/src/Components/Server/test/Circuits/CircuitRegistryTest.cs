@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
@@ -41,7 +41,12 @@ public class CircuitRegistryTest
         var newConnectionId = "new-id";
 
         // Act
-        var result = await registry.ConnectAsync(circuitHost.CircuitId, newClient, newConnectionId, default);
+        var result = await registry.ConnectAsync(
+            circuitHost.CircuitId,
+            newClient,
+            newConnectionId,
+            default
+        );
 
         // Assert
         Assert.Same(circuitHost, result);
@@ -66,7 +71,12 @@ public class CircuitRegistryTest
         var newConnectionId = "new-id";
 
         // Act
-        var result = await registry.ConnectAsync(circuitHost.CircuitId, newClient, newConnectionId, default);
+        var result = await registry.ConnectAsync(
+            circuitHost.CircuitId,
+            newClient,
+            newConnectionId,
+            default
+        );
 
         // Assert
         Assert.Same(circuitHost, result);
@@ -85,21 +95,41 @@ public class CircuitRegistryTest
         var circuitIdFactory = TestCircuitIdFactory.CreateTestFactory();
         var registry = CreateRegistry(circuitIdFactory);
         var handler = new Mock<CircuitHandler> { CallBase = true };
-        var circuitHost = TestCircuitHost.Create(circuitIdFactory.CreateCircuitId(), handlers: new[] { handler.Object });
+        var circuitHost = TestCircuitHost.Create(
+            circuitIdFactory.CreateCircuitId(),
+            handlers: new[] { handler.Object }
+        );
         registry.RegisterDisconnectedCircuit(circuitHost);
 
         var newClient = Mock.Of<IClientProxy>();
         var newConnectionId = "new-id";
 
         // Act
-        var result = await registry.ConnectAsync(circuitHost.CircuitId, newClient, newConnectionId, default);
+        var result = await registry.ConnectAsync(
+            circuitHost.CircuitId,
+            newClient,
+            newConnectionId,
+            default
+        );
 
         // Assert
         Assert.NotNull(result);
-        handler.Verify(v => v.OnCircuitOpenedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
-        handler.Verify(v => v.OnConnectionUpAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Once());
-        handler.Verify(v => v.OnConnectionDownAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
-        handler.Verify(v => v.OnCircuitClosedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
+        handler.Verify(
+            v => v.OnCircuitOpenedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
+        handler.Verify(
+            v => v.OnConnectionUpAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Once()
+        );
+        handler.Verify(
+            v => v.OnConnectionDownAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
+        handler.Verify(
+            v => v.OnCircuitClosedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
     }
 
     [Fact]
@@ -109,21 +139,41 @@ public class CircuitRegistryTest
         var circuitIdFactory = TestCircuitIdFactory.CreateTestFactory();
         var registry = CreateRegistry(circuitIdFactory);
         var handler = new Mock<CircuitHandler> { CallBase = true };
-        var circuitHost = TestCircuitHost.Create(circuitIdFactory.CreateCircuitId(), handlers: new[] { handler.Object });
+        var circuitHost = TestCircuitHost.Create(
+            circuitIdFactory.CreateCircuitId(),
+            handlers: new[] { handler.Object }
+        );
         registry.Register(circuitHost);
 
         var newClient = Mock.Of<IClientProxy>();
         var newConnectionId = "new-id";
 
         // Act
-        var result = await registry.ConnectAsync(circuitHost.CircuitId, newClient, newConnectionId, default);
+        var result = await registry.ConnectAsync(
+            circuitHost.CircuitId,
+            newClient,
+            newConnectionId,
+            default
+        );
 
         // Assert
         Assert.NotNull(result);
-        handler.Verify(v => v.OnCircuitOpenedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
-        handler.Verify(v => v.OnConnectionUpAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Once());
-        handler.Verify(v => v.OnConnectionDownAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Once());
-        handler.Verify(v => v.OnCircuitClosedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
+        handler.Verify(
+            v => v.OnCircuitOpenedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
+        handler.Verify(
+            v => v.OnConnectionUpAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Once()
+        );
+        handler.Verify(
+            v => v.OnConnectionDownAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Once()
+        );
+        handler.Verify(
+            v => v.OnCircuitClosedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
     }
 
     [Fact]
@@ -133,15 +183,25 @@ public class CircuitRegistryTest
         var circuitIdFactory = TestCircuitIdFactory.CreateTestFactory();
         var registry = CreateRegistry(circuitIdFactory);
         var handler = new Mock<CircuitHandler> { CallBase = true };
-        handler.Setup(h => h.OnConnectionUpAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>())).Throws(new InvalidTimeZoneException());
-        var circuitHost = TestCircuitHost.Create(circuitIdFactory.CreateCircuitId(), handlers: new[] { handler.Object });
+        handler
+            .Setup(h => h.OnConnectionUpAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()))
+            .Throws(new InvalidTimeZoneException());
+        var circuitHost = TestCircuitHost.Create(
+            circuitIdFactory.CreateCircuitId(),
+            handlers: new[] { handler.Object }
+        );
         registry.Register(circuitHost);
 
         var newClient = Mock.Of<IClientProxy>();
         var newConnectionId = "new-id";
 
         // Act
-        var result = await registry.ConnectAsync(circuitHost.CircuitId, newClient, newConnectionId, default);
+        var result = await registry.ConnectAsync(
+            circuitHost.CircuitId,
+            newClient,
+            newConnectionId,
+            default
+        );
 
         // Assert
         Assert.Null(result);
@@ -156,7 +216,11 @@ public class CircuitRegistryTest
         // Arrange
         var registry = CreateRegistry();
         var circuitHost = TestCircuitHost.Create();
-        registry.DisconnectedCircuits.Set(circuitHost.CircuitId.Secret, circuitHost, new MemoryCacheEntryOptions { Size = 1 });
+        registry.DisconnectedCircuits.Set(
+            circuitHost.CircuitId.Secret,
+            circuitHost,
+            new MemoryCacheEntryOptions { Size = 1 }
+        );
 
         // Act
         await registry.DisconnectAsync(circuitHost, circuitHost.Client.ConnectionId);
@@ -179,10 +243,22 @@ public class CircuitRegistryTest
         await registry.DisconnectAsync(circuitHost, circuitHost.Client.ConnectionId);
 
         // Assert
-        handler.Verify(v => v.OnCircuitOpenedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
-        handler.Verify(v => v.OnConnectionUpAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
-        handler.Verify(v => v.OnConnectionDownAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Once());
-        handler.Verify(v => v.OnCircuitClosedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
+        handler.Verify(
+            v => v.OnCircuitOpenedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
+        handler.Verify(
+            v => v.OnConnectionUpAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
+        handler.Verify(
+            v => v.OnConnectionDownAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Once()
+        );
+        handler.Verify(
+            v => v.OnCircuitClosedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
     }
 
     [Fact]
@@ -198,10 +274,22 @@ public class CircuitRegistryTest
         await registry.DisconnectAsync(circuitHost, "old-connection");
 
         // Assert
-        handler.Verify(v => v.OnCircuitOpenedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
-        handler.Verify(v => v.OnConnectionUpAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
-        handler.Verify(v => v.OnConnectionDownAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
-        handler.Verify(v => v.OnCircuitClosedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
+        handler.Verify(
+            v => v.OnCircuitOpenedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
+        handler.Verify(
+            v => v.OnConnectionUpAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
+        handler.Verify(
+            v => v.OnConnectionDownAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
+        handler.Verify(
+            v => v.OnCircuitClosedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
     }
 
     [Fact]
@@ -216,10 +304,22 @@ public class CircuitRegistryTest
         await registry.DisconnectAsync(circuitHost, "old-connection");
 
         // Assert
-        handler.Verify(v => v.OnCircuitOpenedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
-        handler.Verify(v => v.OnConnectionUpAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
-        handler.Verify(v => v.OnConnectionDownAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
-        handler.Verify(v => v.OnCircuitClosedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()), Times.Never());
+        handler.Verify(
+            v => v.OnCircuitOpenedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
+        handler.Verify(
+            v => v.OnConnectionUpAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
+        handler.Verify(
+            v => v.OnConnectionDownAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
+        handler.Verify(
+            v => v.OnCircuitClosedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()),
+            Times.Never()
+        );
     }
 
     [Fact]
@@ -260,7 +360,9 @@ public class CircuitRegistryTest
         Assert.Same(client, circuitHost.Client.Client);
         Assert.Equal(newId, circuitHost.Client.ConnectionId);
 
-        Assert.False(registry.DisconnectedCircuits.TryGetValue(circuitHost.CircuitId.Secret, out _));
+        Assert.False(
+            registry.DisconnectedCircuits.TryGetValue(circuitHost.CircuitId.Secret, out _)
+        );
     }
 
     [Fact]
@@ -278,7 +380,9 @@ public class CircuitRegistryTest
         var newId = "new-connection";
 
         // Act
-        var connect = Task.Run(() => registry.ConnectAsync(circuitHost.CircuitId, client, newId, default));
+        var connect = Task.Run(
+            () => registry.ConnectAsync(circuitHost.CircuitId, client, newId, default)
+        );
         var disconnect = Task.Run(() => registry.DisconnectAsync(circuitHost, oldId));
         registry.BeforeConnect.Set();
         await Task.WhenAll(connect, disconnect);
@@ -290,7 +394,9 @@ public class CircuitRegistryTest
         Assert.Same(client, circuitHost.Client.Client);
         Assert.Equal(newId, circuitHost.Client.ConnectionId);
 
-        Assert.False(registry.DisconnectedCircuits.TryGetValue(circuitHost.CircuitId.Secret, out _));
+        Assert.False(
+            registry.DisconnectedCircuits.TryGetValue(circuitHost.CircuitId.Secret, out _)
+        );
     }
 
     [Fact]
@@ -315,9 +421,13 @@ public class CircuitRegistryTest
 
         // Act
         // Verify it's present in the dictionary.
-        Assert.True(registry.DisconnectedCircuits.TryGetValue(circuitHost.CircuitId.Secret, out var _));
+        Assert.True(
+            registry.DisconnectedCircuits.TryGetValue(circuitHost.CircuitId.Secret, out var _)
+        );
         await Task.Run(() => tcs.Task.TimeoutAfter(TimeSpan.FromSeconds(10)));
-        Assert.False(registry.DisconnectedCircuits.TryGetValue(circuitHost.CircuitId.Secret, out var _));
+        Assert.False(
+            registry.DisconnectedCircuits.TryGetValue(circuitHost.CircuitId.Secret, out var _)
+        );
     }
 
     [Fact]
@@ -339,35 +449,53 @@ public class CircuitRegistryTest
         var circuitHost = TestCircuitHost.Create(circuitIdFactory.CreateCircuitId());
 
         registry.RegisterDisconnectedCircuit(circuitHost);
-        await registry.ConnectAsync(circuitHost.CircuitId, Mock.Of<IClientProxy>(), "new-connection", default);
+        await registry.ConnectAsync(
+            circuitHost.CircuitId,
+            Mock.Of<IClientProxy>(),
+            "new-connection",
+            default
+        );
 
         // Act
         await Task.Run(() => tcs.Task.TimeoutAfter(TimeSpan.FromSeconds(10)));
 
         // Verify it's still connected
-        Assert.True(registry.ConnectedCircuits.TryGetValue(circuitHost.CircuitId, out var cacheValue));
+        Assert.True(
+            registry.ConnectedCircuits.TryGetValue(circuitHost.CircuitId, out var cacheValue)
+        );
         Assert.Same(circuitHost, cacheValue);
         // Nothing should be disconnected.
-        Assert.False(registry.DisconnectedCircuits.TryGetValue(circuitHost.CircuitId.Secret, out var _));
+        Assert.False(
+            registry.DisconnectedCircuits.TryGetValue(circuitHost.CircuitId.Secret, out var _)
+        );
     }
 
     private class TestCircuitRegistry : CircuitRegistry
     {
         public TestCircuitRegistry(CircuitIdFactory factory, CircuitOptions circuitOptions = null)
-            : base(Options.Create(circuitOptions ?? new CircuitOptions()), NullLogger<CircuitRegistry>.Instance, factory)
-        {
-        }
+            : base(
+                Options.Create(circuitOptions ?? new CircuitOptions()),
+                NullLogger<CircuitRegistry>.Instance,
+                factory
+            ) { }
 
         public ManualResetEventSlim BeforeConnect { get; set; }
         public ManualResetEventSlim BeforeDisconnect { get; set; }
 
         public Action OnAfterEntryEvicted { get; set; }
 
-        protected override (CircuitHost, bool) ConnectCore(CircuitId circuitId, IClientProxy clientProxy, string connectionId)
+        protected override (CircuitHost, bool) ConnectCore(
+            CircuitId circuitId,
+            IClientProxy clientProxy,
+            string connectionId
+        )
         {
             if (BeforeConnect != null)
             {
-                Assert.True(BeforeConnect?.Wait(TimeSpan.FromSeconds(10)), "BeforeConnect failed to be set");
+                Assert.True(
+                    BeforeConnect?.Wait(TimeSpan.FromSeconds(10)),
+                    "BeforeConnect failed to be set"
+                );
             }
 
             return base.ConnectCore(circuitId, clientProxy, connectionId);
@@ -377,13 +505,21 @@ public class CircuitRegistryTest
         {
             if (BeforeDisconnect != null)
             {
-                Assert.True(BeforeDisconnect?.Wait(TimeSpan.FromSeconds(10)), "BeforeDisconnect failed to be set");
+                Assert.True(
+                    BeforeDisconnect?.Wait(TimeSpan.FromSeconds(10)),
+                    "BeforeDisconnect failed to be set"
+                );
             }
 
             return base.DisconnectCore(circuitHost, connectionId);
         }
 
-        protected override void OnEntryEvicted(object key, object value, EvictionReason reason, object state)
+        protected override void OnEntryEvicted(
+            object key,
+            object value,
+            EvictionReason reason,
+            object state
+        )
         {
             base.OnEntryEvicted(key, value, reason, state);
             OnAfterEntryEvicted?.Invoke();
@@ -395,6 +531,7 @@ public class CircuitRegistryTest
         return new CircuitRegistry(
             Options.Create(new CircuitOptions()),
             NullLogger<CircuitRegistry>.Instance,
-            factory ?? TestCircuitIdFactory.CreateTestFactory());
+            factory ?? TestCircuitIdFactory.CreateTestFactory()
+        );
     }
 }

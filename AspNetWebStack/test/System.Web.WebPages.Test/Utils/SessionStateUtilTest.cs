@@ -17,14 +17,24 @@ namespace System.Web.WebPages.Test
             // Arrange
             var page = new Mock<WebPage>(MockBehavior.Strict);
             var startPage = new Mock<StartPage>(MockBehavior.Strict);
-            var webPageHttpHandler = new WebPageHttpHandler(page.Object, startPage: new Lazy<WebPageRenderingBase>(() => startPage.Object));
+            var webPageHttpHandler = new WebPageHttpHandler(
+                page.Object,
+                startPage: new Lazy<WebPageRenderingBase>(() => startPage.Object)
+            );
             var context = new Mock<HttpContextBase>(MockBehavior.Strict);
 
             // Act
-            SessionStateUtil.SetUpSessionState(context.Object, webPageHttpHandler, new ConcurrentDictionary<Type, SessionStateBehavior?>());
+            SessionStateUtil.SetUpSessionState(
+                context.Object,
+                webPageHttpHandler,
+                new ConcurrentDictionary<Type, SessionStateBehavior?>()
+            );
 
             // Assert
-            context.Verify(c => c.SetSessionStateBehavior(It.IsAny<SessionStateBehavior>()), Times.Never());
+            context.Verify(
+                c => c.SetSessionStateBehavior(It.IsAny<SessionStateBehavior>()),
+                Times.Never()
+            );
         }
 
         [Fact]
@@ -34,10 +44,16 @@ namespace System.Web.WebPages.Test
             var page = new DisabledSessionWebPage();
             var webPageHttpHandler = new WebPageHttpHandler(page, startPage: null);
             var context = new Mock<HttpContextBase>(MockBehavior.Strict);
-            context.Setup(c => c.SetSessionStateBehavior(SessionStateBehavior.Disabled)).Verifiable();
+            context
+                .Setup(c => c.SetSessionStateBehavior(SessionStateBehavior.Disabled))
+                .Verifiable();
 
             // Act
-            SessionStateUtil.SetUpSessionState(context.Object, webPageHttpHandler, new ConcurrentDictionary<Type, SessionStateBehavior?>());
+            SessionStateUtil.SetUpSessionState(
+                context.Object,
+                webPageHttpHandler,
+                new ConcurrentDictionary<Type, SessionStateBehavior?>()
+            );
 
             // Assert
             context.Verify();
@@ -48,16 +64,22 @@ namespace System.Web.WebPages.Test
         {
             // Arrange
             var page = new Mock<WebPage>(MockBehavior.Strict);
-            var startPage = new DefaultSessionWebPage
-            {
-                ChildPage = new ReadOnlySessionWebPage()
-            };
-            var webPageHttpHandler = new WebPageHttpHandler(page.Object, startPage: new Lazy<WebPageRenderingBase>(() => startPage));
+            var startPage = new DefaultSessionWebPage { ChildPage = new ReadOnlySessionWebPage() };
+            var webPageHttpHandler = new WebPageHttpHandler(
+                page.Object,
+                startPage: new Lazy<WebPageRenderingBase>(() => startPage)
+            );
             var context = new Mock<HttpContextBase>(MockBehavior.Strict);
-            context.Setup(c => c.SetSessionStateBehavior(SessionStateBehavior.ReadOnly)).Verifiable();
+            context
+                .Setup(c => c.SetSessionStateBehavior(SessionStateBehavior.ReadOnly))
+                .Verifiable();
 
             // Act
-            SessionStateUtil.SetUpSessionState(context.Object, webPageHttpHandler, new ConcurrentDictionary<Type, SessionStateBehavior?>());
+            SessionStateUtil.SetUpSessionState(
+                context.Object,
+                webPageHttpHandler,
+                new ConcurrentDictionary<Type, SessionStateBehavior?>()
+            );
 
             // Assert
             context.Verify();
@@ -69,12 +91,22 @@ namespace System.Web.WebPages.Test
             // Arrange
             var page = new Mock<WebPage>(MockBehavior.Strict);
             var startPage = new InvalidSessionState();
-            var webPageHttpHandler = new WebPageHttpHandler(page.Object, startPage: new Lazy<WebPageRenderingBase>(() => startPage));
+            var webPageHttpHandler = new WebPageHttpHandler(
+                page.Object,
+                startPage: new Lazy<WebPageRenderingBase>(() => startPage)
+            );
             var context = new Mock<HttpContextBase>(MockBehavior.Strict);
 
             // Act
-            Assert.Throws<ArgumentException>(() => SessionStateUtil.SetUpSessionState(context.Object, webPageHttpHandler, new ConcurrentDictionary<Type, SessionStateBehavior?>()),
-                "Value \"jabberwocky\" specified in \"~/_Invalid.cshtml\" is an invalid value for the SessionState directive. Possible values are: \"Default, Required, ReadOnly, Disabled\".");
+            Assert.Throws<ArgumentException>(
+                () =>
+                    SessionStateUtil.SetUpSessionState(
+                        context.Object,
+                        webPageHttpHandler,
+                        new ConcurrentDictionary<Type, SessionStateBehavior?>()
+                    ),
+                "Value \"jabberwocky\" specified in \"~/_Invalid.cshtml\" is an invalid value for the SessionState directive. Possible values are: \"Default, Required, ReadOnly, Disabled\"."
+            );
         }
 
         [Fact]
@@ -86,8 +118,15 @@ namespace System.Web.WebPages.Test
             var context = new Mock<HttpContextBase>(MockBehavior.Strict);
 
             // Act
-            Assert.Throws<InvalidOperationException>(() => SessionStateUtil.SetUpSessionState(context.Object, webPageHttpHandler, new ConcurrentDictionary<Type, SessionStateBehavior?>()),
-                "At most one SessionState value can be declared per page.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    SessionStateUtil.SetUpSessionState(
+                        context.Object,
+                        webPageHttpHandler,
+                        new ConcurrentDictionary<Type, SessionStateBehavior?>()
+                    ),
+                "At most one SessionState value can be declared per page."
+            );
         }
 
         [Fact]
@@ -99,14 +138,19 @@ namespace System.Web.WebPages.Test
             var context = new Mock<HttpContextBase>(MockBehavior.Strict);
             var dictionary = new ConcurrentDictionary<Type, SessionStateBehavior?>();
             dictionary.TryAdd(webPageHttpHandler.GetType(), SessionStateBehavior.Default);
-            context.Setup(c => c.SetSessionStateBehavior(SessionStateBehavior.Default)).Verifiable();
+            context
+                .Setup(c => c.SetSessionStateBehavior(SessionStateBehavior.Default))
+                .Verifiable();
 
             // Act
             SessionStateUtil.SetUpSessionState(context.Object, webPageHttpHandler, dictionary);
 
             // Assert
             context.Verify();
-            Assert.Throws<Exception>(() => page.GetType().GetCustomAttributes(inherit: false), "Can't call me!");
+            Assert.Throws<Exception>(
+                () => page.GetType().GetCustomAttributes(inherit: false),
+                "Can't call me!"
+            );
         }
 
         [RazorDirective("sessionstate", "disabled")]
@@ -141,15 +185,10 @@ namespace System.Web.WebPages.Test
         {
             public override string VirtualPath
             {
-                get
-                {
-                    return "~/_Invalid.cshtml";
-                }
-                set
-                {
-                    VirtualPath = value;
-                }
+                get { return "~/_Invalid.cshtml"; }
+                set { VirtualPath = value; }
             }
+
             public override void Execute()
             {
                 throw new NotSupportedException();

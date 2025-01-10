@@ -9,5 +9,5 @@ public enum Month
 {
     [Display(Name = "January")]
     FirstOne,
-    LastOne
+    LastOne,
 }

@@ -10,14 +10,13 @@ using System.IdentityModel.Diagnostics;
 using System.IdentityModel.Policy;
 using System.Security.Claims;
 using System.Security.Principal;
-
 using SysClaimSet = System.IdentityModel.Claims.ClaimSet;
 
 namespace System.IdentityModel.Tokens
 {
     /// <summary>
-    /// Defines an AuthorizationPolicy that carries the IDFx Claims. When IDFx is enabled 
-    /// a new set of Security Token Authenticators are added to the system. These Authenticators 
+    /// Defines an AuthorizationPolicy that carries the IDFx Claims. When IDFx is enabled
+    /// a new set of Security Token Authenticators are added to the system. These Authenticators
     /// will generate the new Claims defined in System.Security.Claims.
     /// </summary>
     internal class AuthorizationPolicy : IAuthorizationPolicy
@@ -38,9 +37,7 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Initializes an instance of <see cref="AuthorizationPolicy"/>
         /// </summary>
-        public AuthorizationPolicy()
-        {
-        }
+        public AuthorizationPolicy() { }
 
         /// <summary>
         /// Initializes an instance of <see cref="AuthorizationPolicy"/>
@@ -65,7 +62,9 @@ namespace System.IdentityModel.Tokens
         {
             if (identityCollection == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("identityCollection");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "identityCollection"
+                );
             }
 
             List<ClaimsIdentity> collection = new List<ClaimsIdentity>();
@@ -82,10 +81,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public ReadOnlyCollection<ClaimsIdentity> IdentityCollection
         {
-            get
-            {
-                return _identityCollection.AsReadOnly();
-            }
+            get { return _identityCollection.AsReadOnly(); }
         }
 
         #region IAuthorizationPolicy Members
@@ -101,7 +97,9 @@ namespace System.IdentityModel.Tokens
         {
             if (null == evaluationContext || null == evaluationContext.Properties)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("evaluationContext");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "evaluationContext"
+                );
             }
 
             if (0 == _identityCollection.Count)
@@ -118,7 +116,9 @@ namespace System.IdentityModel.Tokens
             object principalObj = null;
             if (!evaluationContext.Properties.TryGetValue(ClaimsPrincipalKey, out principalObj))
             {
-                ClaimsPrincipal principalToAdd = CreateClaimsPrincipalFromIdentities(_identityCollection);
+                ClaimsPrincipal principalToAdd = CreateClaimsPrincipalFromIdentities(
+                    _identityCollection
+                );
 
                 evaluationContext.Properties.Add(ClaimsPrincipalKey, principalToAdd);
 
@@ -130,7 +130,8 @@ namespace System.IdentityModel.Tokens
                         SR.GetString(SR.TraceSetPrincipalOnEvaluationContext),
                         new ClaimsPrincipalTraceRecord(principalToAdd),
                         null,
-                        null);
+                        null
+                    );
                 }
             }
             else
@@ -150,8 +151,8 @@ namespace System.IdentityModel.Tokens
                     {
                         TraceUtility.TraceString(
                             TraceEventType.Error,
-                            SR.GetString(SR.ID8004,
-                            ClaimsPrincipalKey));
+                            SR.GetString(SR.ID8004, ClaimsPrincipalKey)
+                        );
                     }
                 }
             }
@@ -181,11 +182,12 @@ namespace System.IdentityModel.Tokens
                 }
             }
 
-
             return true;
         }
 
-        private static ClaimsPrincipal CreateClaimsPrincipalFromIdentities(IEnumerable<ClaimsIdentity> identities)
+        private static ClaimsPrincipal CreateClaimsPrincipalFromIdentities(
+            IEnumerable<ClaimsIdentity> identities
+        )
         {
             ClaimsIdentity selectedClaimsIdentity = SelectPrimaryIdentity(identities);
 
@@ -211,7 +213,7 @@ namespace System.IdentityModel.Tokens
 
         /// <summary>
         /// Creates the appropriate implementation of an IClaimsPrincipal base on the
-        /// type of the specified IIdentity (e.g. WindowsClaimsPrincipal for a WindowsIdentity). 
+        /// type of the specified IIdentity (e.g. WindowsClaimsPrincipal for a WindowsIdentity).
         /// Note the appropriate IClaimsIdentity is generated based on the specified IIdentity
         /// as well.
         /// </summary>
@@ -298,17 +300,13 @@ namespace System.IdentityModel.Tokens
             return selectedClaimsIdentity;
         }
 
-
         /// <summary>
-        /// Gets the Issuer Claimset. This will return a DefaultClaimSet with just one claim 
+        /// Gets the Issuer Claimset. This will return a DefaultClaimSet with just one claim
         /// whose ClaimType is http://schemas.microsoft.com/claims/identityclaim.
         /// </summary>
         public SysClaimSet Issuer
         {
-            get
-            {
-                return _issuer;
-            }
+            get { return _issuer; }
         }
 
         #endregion
@@ -320,13 +318,9 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public string Id
         {
-            get
-            {
-                return _id;
-            }
+            get { return _id; }
         }
 
         #endregion
     }
-
 }

@@ -13,11 +13,8 @@ internal partial class NavigateToHighlightReferenceCommandHandler
     {
         public static readonly StartComparer Instance = new();
 
-        private StartComparer()
-        {
-        }
+        private StartComparer() { }
 
-        public int Compare(SnapshotSpan x, SnapshotSpan y)
-            => x.Start.CompareTo(y.Start);
+        public int Compare(SnapshotSpan x, SnapshotSpan y) => x.Start.CompareTo(y.Start);
     }
 }

@@ -17,9 +17,8 @@ namespace System.CommandLine
         /// Initializes a new instance of the Argument class.
         /// </summary>
         /// <param name="name">The name of the argument. It's not used for parsing, only when displaying Help or creating parse errors.</param>>
-        public CliArgument(string name) : base(name)
-        {
-        }
+        public CliArgument(string name)
+            : base(name) { }
 
         /// <summary>
         /// The delegate to invoke to create the default value.
@@ -78,7 +77,9 @@ namespace System.CommandLine
         {
             if (DefaultValueFactory is null)
             {
-                throw new InvalidOperationException($"Argument \"{Name}\" does not have a default value");
+                throw new InvalidOperationException(
+                    $"Argument \"{Name}\" does not have a default value"
+                );
             }
 
             return DefaultValueFactory.Invoke(argumentResult);
@@ -108,7 +109,9 @@ namespace System.CommandLine
                     {
                         if (Array.IndexOf(values, token.Value) < 0)
                         {
-                            argumentResult.AddError(LocalizationResources.UnrecognizedArgument(token.Value, values));
+                            argumentResult.AddError(
+                                LocalizationResources.UnrecognizedArgument(token.Value, values)
+                            );
                         }
                     }
                 }
@@ -134,7 +137,11 @@ namespace System.CommandLine
 
                     if (invalidCharactersIndex >= 0)
                     {
-                        result.AddError(LocalizationResources.InvalidCharactersInPath(token.Value[invalidCharactersIndex]));
+                        result.AddError(
+                            LocalizationResources.InvalidCharactersInPath(
+                                token.Value[invalidCharactersIndex]
+                            )
+                        );
                     }
                 }
             });
@@ -157,14 +164,26 @@ namespace System.CommandLine
 
                     if (invalidCharactersIndex >= 0)
                     {
-                        result.AddError(LocalizationResources.InvalidCharactersInFileName(token.Value[invalidCharactersIndex]));
+                        result.AddError(
+                            LocalizationResources.InvalidCharactersInFileName(
+                                token.Value[invalidCharactersIndex]
+                            )
+                        );
                     }
                 }
             });
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL3050", Justification = "https://github.com/dotnet/command-line-api/issues/1638")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2091", Justification = "https://github.com/dotnet/command-line-api/issues/1638")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL3050",
+            Justification = "https://github.com/dotnet/command-line-api/issues/1638"
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2091",
+            Justification = "https://github.com/dotnet/command-line-api/issues/1638"
+        )]
         internal static T? CreateDefaultValue()
         {
             if (default(T) is null && typeof(T) != typeof(string))
@@ -181,11 +200,14 @@ namespace System.CommandLine
                 {
                     var genericTypeDefinition = typeof(T).GetGenericTypeDefinition();
 
-                    if (genericTypeDefinition == typeof(IEnumerable<>) ||
-                        genericTypeDefinition == typeof(IList<>) ||
-                        genericTypeDefinition == typeof(ICollection<>))
+                    if (
+                        genericTypeDefinition == typeof(IEnumerable<>)
+                        || genericTypeDefinition == typeof(IList<>)
+                        || genericTypeDefinition == typeof(ICollection<>)
+                    )
                     {
-                        return (T?)(object)Array.CreateInstance(typeof(T).GenericTypeArguments[0], 0);
+                        return (T?)
+                            (object)Array.CreateInstance(typeof(T).GenericTypeArguments[0], 0);
                     }
 
                     if (genericTypeDefinition == typeof(List<>))

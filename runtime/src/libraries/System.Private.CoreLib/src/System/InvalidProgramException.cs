@@ -11,7 +11,9 @@ namespace System
     /// This exception is also thrown when internal runtime implementation limits have been exceeded by the program.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class InvalidProgramException : SystemException
     {
         public InvalidProgramException()
@@ -32,7 +34,12 @@ namespace System
             HResult = HResults.COR_E_INVALIDPROGRAM;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        private InvalidProgramException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        private InvalidProgramException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

@@ -3,8 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
-using Point = System.Numerics.Vector4;
 using Xunit;
+using Point = System.Numerics.Vector4;
 
 namespace VectorMathTests
 {

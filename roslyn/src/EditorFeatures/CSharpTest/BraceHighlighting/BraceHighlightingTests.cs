@@ -17,71 +17,95 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
     [Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
     public class BraceHighlightingTests : AbstractBraceHighlightingTests
     {
-        protected override TestWorkspace CreateWorkspace(string markup, ParseOptions options)
-            => TestWorkspace.CreateCSharp(markup, parseOptions: options);
+        protected override TestWorkspace CreateWorkspace(string markup, ParseOptions options) =>
+            TestWorkspace.CreateCSharp(markup, parseOptions: options);
 
         [WpfTheory]
-        [InlineData("""
-            public class C$$ {
-            }
-            """)]
-        [InlineData("""
-            public class C $$[|{|]
-            [|}|]
-            """)]
-        [InlineData("""
-            public class C {$$
-            }
-            """)]
-        [InlineData("""
-            public class C {
-            $$}
-            """)]
-        [InlineData("""
-            public class C [|{|]
-            [|}|]$$
-            """)]
+        [InlineData(
+            """
+                public class C$$ {
+                }
+                """
+        )]
+        [InlineData(
+            """
+                public class C $$[|{|]
+                [|}|]
+                """
+        )]
+        [InlineData(
+            """
+                public class C {$$
+                }
+                """
+        )]
+        [InlineData(
+            """
+                public class C {
+                $$}
+                """
+        )]
+        [InlineData(
+            """
+                public class C [|{|]
+                [|}|]$$
+                """
+        )]
         public async Task TestCurlies(string testCase)
         {
             await TestBraceHighlightingAsync(testCase);
         }
 
         [WpfTheory]
-        [InlineData("""
-            public class C $$[|{|]
-              public void Goo(){}
-            [|}|]
-            """)]
-        [InlineData("""
-            public class C {$$
-              public void Goo(){}
-            }
-            """)]
-        [InlineData("""
-            public class C {
-              public void Goo$$[|(|][|)|]{}
-            }
-            """)]
-        [InlineData("""
-            public class C {
-              public void Goo($$){}
-            }
-            """)]
-        [InlineData("""
-            public class C {
-              public void Goo[|(|][|)|]$$[|{|][|}|]
-            }
-            """)]
-        [InlineData("""
-            public class C {
-              public void Goo(){$$}
-            }
-            """)]
-        [InlineData("""
-            public class C {
-              public void Goo()[|{|][|}|]$$
-            }
-            """)]
+        [InlineData(
+            """
+                public class C $$[|{|]
+                  public void Goo(){}
+                [|}|]
+                """
+        )]
+        [InlineData(
+            """
+                public class C {$$
+                  public void Goo(){}
+                }
+                """
+        )]
+        [InlineData(
+            """
+                public class C {
+                  public void Goo$$[|(|][|)|]{}
+                }
+                """
+        )]
+        [InlineData(
+            """
+                public class C {
+                  public void Goo($$){}
+                }
+                """
+        )]
+        [InlineData(
+            """
+                public class C {
+                  public void Goo[|(|][|)|]$$[|{|][|}|]
+                }
+                """
+        )]
+        [InlineData(
+            """
+                public class C {
+                  public void Goo(){$$}
+                }
+                """
+        )]
+        [InlineData(
+            """
+                public class C {
+                  public void Goo()[|{|][|}|]$$
+                }
+                """
+        )]
         public async Task TestTouchingItems(string testCase)
         {
             await TestBraceHighlightingAsync(testCase);
@@ -97,15 +121,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         [InlineData("/// <summary>Goo</$$summary>")]
         [InlineData("/// <summary>Goo</summary$$>")]
         [InlineData("/// <summary>Goo</summary>$$")]
-
         [InlineData("public class C$$[|<|]T[|>|] { }")]
         [InlineData("public class C<$$T> { }")]
         [InlineData("public class C<T$$> { }")]
         [InlineData("public class C[|<|]T[|>$$|] { }")]
-
         [InlineData("unsafe class C { delegate*$$[|<|] int, int[|>|] functionPointer; }")]
         [InlineData("unsafe class C { delegate*[|<|]int, int[|>$$|] functionPointer; }")]
-        [InlineData("unsafe class C { delegate*<int, delegate*[|<|]int, int[|>|]$$> functionPointer; }")]
+        [InlineData(
+            "unsafe class C { delegate*<int, delegate*[|<|]int, int[|>|]$$> functionPointer; }"
+        )]
         public async Task TestAngles(string testCase)
         {
             await TestBraceHighlightingAsync(testCase);
@@ -124,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                         bool d = e > f;
                     }
                 }
-                """);
+                """
+            );
             await TestBraceHighlightingAsync(
                 """
                 class C
@@ -135,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                         bool d = e > f;
                     }
                 }
-                """);
+                """
+            );
             await TestBraceHighlightingAsync(
                 """
                 class C
@@ -146,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                         bool d = e $$> f;
                     }
                 }
-                """);
+                """
+            );
             await TestBraceHighlightingAsync(
                 """
                 class C
@@ -157,7 +184,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                         bool d = e >$$ f;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -176,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
             await TestBraceHighlightingAsync(
                 """
                 class C
@@ -190,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
             await TestBraceHighlightingAsync(
                 """
                 class C
@@ -204,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
             await TestBraceHighlightingAsync(
                 """
                 class C
@@ -218,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
             await TestBraceHighlightingAsync(
                 """
                 class C
@@ -232,7 +264,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                         [|}|]
                     }
                 }
-                """);
+                """
+            );
             await TestBraceHighlightingAsync(
                 """
                 class C
@@ -246,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
             await TestBraceHighlightingAsync(
                 """
                 class C
@@ -260,7 +294,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                         $$}
                     }
                 }
-                """);
+                """
+            );
             await TestBraceHighlightingAsync(
                 """
                 class C
@@ -274,20 +309,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                         [|}$$|]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task TestEOF()
         {
-            await TestBraceHighlightingAsync("""
+            await TestBraceHighlightingAsync(
+                """
                 public class C [|{|]
                 [|}|]$$
-                """);
-            await TestBraceHighlightingAsync("""
+                """
+            );
+            await TestBraceHighlightingAsync(
+                """
                 public class C [|{|]
                  void Goo(){}[|}|]$$
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -299,14 +339,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 {
                     [|(|]int, int[|)$$|] x = (1, 2);
                 }
-                """, TestOptions.Regular);
+                """,
+                TestOptions.Regular
+            );
             await TestBraceHighlightingAsync(
                 """
                 class C
                 {
                     (int, int) x = [|(|]1, 2[|)$$|];
                 }
-                """, TestOptions.Regular);
+                """,
+                TestOptions.Regular
+            );
         }
 
         [WpfFact]
@@ -318,14 +362,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 {
                     ([|(|]int, int[|)$$|], string) x = ((1, 2), "hello";
                 }
-                """, TestOptions.Regular);
+                """,
+                TestOptions.Regular
+            );
             await TestBraceHighlightingAsync(
                 """
                 class C
                 {
                     ((int, int), string) x = ([|(|]1, 2[|)$$|], "hello";
                 }
-                """, TestOptions.Regular);
+                """,
+                TestOptions.Regular
+            );
         }
 
         [WpfFact]
@@ -337,14 +385,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 {
                     [|(|]Dictionary<int, string>, List<int>[|)$$|] x = (null, null);
                 }
-                """, TestOptions.Regular);
+                """,
+                TestOptions.Regular
+            );
             await TestBraceHighlightingAsync(
                 """
                 class C
                 {
                     var x = [|(|]new Dictionary<int, string>(), new List<int>()[|)$$|];
                 }
-                """, TestOptions.Regular);
+                """,
+                TestOptions.Regular
+            );
         }
 
         [WpfFact]

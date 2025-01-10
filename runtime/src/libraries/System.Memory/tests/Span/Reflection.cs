@@ -1,12 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Buffers;
 using System.Buffers.Binary;
+using System.MemoryTests;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.MemoryTests;
+using Xunit;
 
 namespace System.SpanTests
 {
@@ -21,11 +21,21 @@ namespace System.SpanTests
         {
             Type type = typeof(MemoryExtensions);
 
-            MethodInfo method = type.GetMethod(nameof(MemoryExtensions.AsSpan), new Type[] { typeof(string) });
-            Assert.Throws<NotSupportedException>(() => method.Invoke(null, new object[] { "Hello" }));
+            MethodInfo method = type.GetMethod(
+                nameof(MemoryExtensions.AsSpan),
+                new Type[] { typeof(string) }
+            );
+            Assert.Throws<NotSupportedException>(
+                () => method.Invoke(null, new object[] { "Hello" })
+            );
 
-            method = type.GetMethod(nameof(MemoryExtensions.AsSpan), new Type[] { typeof(string), typeof(int), typeof(int) });
-            Assert.Throws<NotSupportedException>(() => method.Invoke(null, new object[] { "Hello", 1, 1 }));
+            method = type.GetMethod(
+                nameof(MemoryExtensions.AsSpan),
+                new Type[] { typeof(string), typeof(int), typeof(int) }
+            );
+            Assert.Throws<NotSupportedException>(
+                () => method.Invoke(null, new object[] { "Hello", 1, 1 })
+            );
         }
 
         [Fact]
@@ -33,7 +43,10 @@ namespace System.SpanTests
         {
             Type type = typeof(MemoryExtensions);
             MethodInfo method = type.GetMethod(nameof(MemoryExtensions.CompareTo));
-            Assert.Throws<NotSupportedException>(() => method.Invoke(null, new object[] { default, default, StringComparison.Ordinal }));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    method.Invoke(null, new object[] { default, default, StringComparison.Ordinal })
+            );
         }
 
         [Fact]
@@ -42,23 +55,31 @@ namespace System.SpanTests
             Type type = typeof(BinaryPrimitives);
 
             MethodInfo method = type.GetMethod(nameof(BinaryPrimitives.ReadInt16LittleEndian));
-            Assert.Throws<NotSupportedException>(() => method.Invoke(null, new object[] { default }));
+            Assert.Throws<NotSupportedException>(
+                () => method.Invoke(null, new object[] { default })
+            );
 
             method = type.GetMethod(nameof(BinaryPrimitives.TryReadInt16LittleEndian));
-            Assert.Throws<NotSupportedException>(() => method.Invoke(null, new object[] { default, null }));
+            Assert.Throws<NotSupportedException>(
+                () => method.Invoke(null, new object[] { default, null })
+            );
         }
 
         [Fact]
         public static void MemoryMarshal_GenericStaticReturningSpan()
         {
-            MethodInfo createSpanMethod = typeof(MemoryMarshal).GetMethod(nameof(MemoryMarshal.CreateSpan));
+            MethodInfo createSpanMethod = typeof(MemoryMarshal).GetMethod(
+                nameof(MemoryMarshal.CreateSpan)
+            );
 
             int value = 0;
             ref int refInt = ref value;
             Type refIntType = refInt.GetType();
 
             MethodInfo method = createSpanMethod.MakeGenericMethod(refIntType);
-            Assert.Throws<NotSupportedException>(() => method.Invoke(null, new object[] { null, 0 }));
+            Assert.Throws<NotSupportedException>(
+                () => method.Invoke(null, new object[] { null, 0 })
+            );
         }
 
         [Fact]
@@ -91,10 +112,14 @@ namespace System.SpanTests
             Type type = typeof(Span<int>);
 
             MethodInfo method = type.GetMethod("op_Equality");
-            Assert.Throws<NotSupportedException>(() => method.Invoke(null, new object[] { default, default }));
+            Assert.Throws<NotSupportedException>(
+                () => method.Invoke(null, new object[] { default, default })
+            );
 
             method = type.GetMethod("op_Inequality");
-            Assert.Throws<NotSupportedException>(() => method.Invoke(null, new object[] { default, default }));
+            Assert.Throws<NotSupportedException>(
+                () => method.Invoke(null, new object[] { default, default })
+            );
         }
 
         [Fact]
@@ -102,8 +127,13 @@ namespace System.SpanTests
         {
             Type type = typeof(Span<int>);
 
-            MethodInfo method = type.GetMethod(nameof(Span<int>.CopyTo), new Type[] { typeof(Span<int>) });
-            Assert.Throws<NotSupportedException>(() => method.Invoke(default, new object[] { default }));
+            MethodInfo method = type.GetMethod(
+                nameof(Span<int>.CopyTo),
+                new Type[] { typeof(Span<int>) }
+            );
+            Assert.Throws<NotSupportedException>(
+                () => method.Invoke(default, new object[] { default })
+            );
         }
 
         [Fact]
@@ -136,10 +166,14 @@ namespace System.SpanTests
             Type type = typeof(ReadOnlySpan<int>);
 
             MethodInfo method = type.GetMethod("op_Equality");
-            Assert.Throws<NotSupportedException>(() => method.Invoke(null, new object[] { default, default }));
+            Assert.Throws<NotSupportedException>(
+                () => method.Invoke(null, new object[] { default, default })
+            );
 
             method = type.GetMethod("op_Inequality");
-            Assert.Throws<NotSupportedException>(() => method.Invoke(null, new object[] { default, default }));
+            Assert.Throws<NotSupportedException>(
+                () => method.Invoke(null, new object[] { default, default })
+            );
         }
 
         [Fact]
@@ -147,8 +181,13 @@ namespace System.SpanTests
         {
             Type type = typeof(ReadOnlySpan<int>);
 
-            MethodInfo method = type.GetMethod(nameof(ReadOnlySpan<int>.CopyTo), new Type[] { typeof(Span<int>) });
-            Assert.Throws<NotSupportedException>(() => method.Invoke(default, new object[] { default }));
+            MethodInfo method = type.GetMethod(
+                nameof(ReadOnlySpan<int>.CopyTo),
+                new Type[] { typeof(Span<int>) }
+            );
+            Assert.Throws<NotSupportedException>(
+                () => method.Invoke(default, new object[] { default })
+            );
         }
 
         [Fact]
@@ -175,7 +214,10 @@ namespace System.SpanTests
             Type type = typeof(MemoryManager<int>);
 
             MemoryManager<int> manager = new CustomMemoryForTest<int>(new int[10]);
-            MethodInfo method = type.GetMethod(nameof(MemoryManager<int>.GetSpan), BindingFlags.Public | BindingFlags.Instance);
+            MethodInfo method = type.GetMethod(
+                nameof(MemoryManager<int>.GetSpan),
+                BindingFlags.Public | BindingFlags.Instance
+            );
             Assert.Throws<NotSupportedException>(() => method.Invoke(manager, null));
         }
     }

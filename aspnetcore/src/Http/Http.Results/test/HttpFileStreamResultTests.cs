@@ -14,13 +14,14 @@ public class HttpFileStreamResultTests : FileStreamResultTestBase
         string contentType,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue entityTag = null,
-        bool enableRangeProcessing = false)
+        bool enableRangeProcessing = false
+    )
     {
         var fileStreamResult = new FileStreamHttpResult(stream, contentType)
         {
             LastModified = lastModified,
             EntityTag = entityTag,
-            EnableRangeProcessing = enableRangeProcessing
+            EnableRangeProcessing = enableRangeProcessing,
         };
 
         return fileStreamResult.ExecuteAsync(httpContext);
@@ -86,7 +87,10 @@ public class HttpFileStreamResultTests : FileStreamResultTestBase
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
@@ -97,7 +101,12 @@ public class HttpFileStreamResultTests : FileStreamResultTestBase
         var downloadName = "sample.zip";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IFileHttpResult>(new FileStreamHttpResult(new MemoryStream(), contentType) { FileDownloadName = downloadName });
+        var result = Assert.IsAssignableFrom<IFileHttpResult>(
+            new FileStreamHttpResult(new MemoryStream(), contentType)
+            {
+                FileDownloadName = downloadName,
+            }
+        );
         Assert.Equal(contentType, result.ContentType);
         Assert.Equal(downloadName, result.FileDownloadName);
     }
@@ -110,7 +119,12 @@ public class HttpFileStreamResultTests : FileStreamResultTestBase
         var downloadName = "sample.zip";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IContentTypeHttpResult>(new FileStreamHttpResult(new MemoryStream(), contentType) { FileDownloadName = downloadName });
+        var result = Assert.IsAssignableFrom<IContentTypeHttpResult>(
+            new FileStreamHttpResult(new MemoryStream(), contentType)
+            {
+                FileDownloadName = downloadName,
+            }
+        );
         Assert.Equal(contentType, result.ContentType);
     }
 }

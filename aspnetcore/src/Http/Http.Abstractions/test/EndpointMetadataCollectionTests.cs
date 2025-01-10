@@ -11,20 +11,17 @@ public class EndpointMetadataCollectionTests
     public void Constructor_Enumeration_ContainsValues()
     {
         // Arrange & Act
-        var metadata = new EndpointMetadataCollection(new List<object>
-            {
-                1,
-                2,
-                3,
-            });
+        var metadata = new EndpointMetadataCollection(new List<object> { 1, 2, 3 });
 
         // Assert
         Assert.Equal(3, metadata.Count);
 
-        Assert.Collection(metadata,
+        Assert.Collection(
+            metadata,
             value => Assert.Equal(1, value),
             value => Assert.Equal(2, value),
-            value => Assert.Equal(3, value));
+            value => Assert.Equal(3, value)
+        );
     }
 
     [Fact]
@@ -36,10 +33,12 @@ public class EndpointMetadataCollectionTests
         // Assert
         Assert.Equal(3, metadata.Count);
 
-        Assert.Collection(metadata,
+        Assert.Collection(
+            metadata,
             value => Assert.Equal(1, value),
             value => Assert.Equal(2, value),
-            value => Assert.Equal(3, value));
+            value => Assert.Equal(3, value)
+        );
     }
 
     [Fact]

@@ -20,8 +20,7 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Testing;
 using Roslyn.Test.Utilities;
 using Xunit;
-using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeRefactoringVerifier<
-    Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers.GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider>;
+using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeRefactoringVerifier<Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers.GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHashCodeFromMembers
 {
@@ -42,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 // If we're a dialog test, then mixin our mock and initialize its values to the ones the test asked for.
                 var workspace = new AdhocWorkspace(s_composition.GetHostServices());
 
-                var service = (TestPickMembersService)workspace.Services.GetService<IPickMembersService>();
+                var service = (TestPickMembersService)
+                    workspace.Services.GetService<IPickMembersService>();
                 service.MemberNames = MemberNames;
                 service.OptionsCallback = OptionsCallback;
 
@@ -50,20 +50,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
             }
         }
 
-        private static OptionsCollection PreferImplicitTypeWithInfo()
-            => new OptionsCollection(LanguageNames.CSharp)
+        private static OptionsCollection PreferImplicitTypeWithInfo() =>
+            new OptionsCollection(LanguageNames.CSharp)
             {
                 { CSharpCodeStyleOptions.VarElsewhere, true, NotificationOption2.Suggestion },
-                { CSharpCodeStyleOptions.VarWhenTypeIsApparent, true, NotificationOption2.Suggestion },
+                {
+                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                    true,
+                    NotificationOption2.Suggestion
+                },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, true, NotificationOption2.Suggestion },
             };
 
-        private static OptionsCollection PreferExplicitTypeWithInfo()
-            => new OptionsCollection(LanguageNames.CSharp)
+        private static OptionsCollection PreferExplicitTypeWithInfo() =>
+            new OptionsCollection(LanguageNames.CSharp)
             {
                 { CSharpCodeStyleOptions.VarElsewhere, false, NotificationOption2.Suggestion },
-                { CSharpCodeStyleOptions.VarWhenTypeIsApparent, false, NotificationOption2.Suggestion },
-                { CSharpCodeStyleOptions.VarForBuiltInTypes, false, NotificationOption2.Suggestion },
+                {
+                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                    false,
+                    NotificationOption2.Suggestion
+                },
+                {
+                    CSharpCodeStyleOptions.VarForBuiltInTypes,
+                    false,
+                    NotificationOption2.Suggestion
+                },
             };
 
         internal static void EnableOption(ImmutableArray<PickMembersOption> options, string id)
@@ -78,8 +90,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestEqualsSingleField()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -87,8 +98,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|int a;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -116,8 +126,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestEqualsSingleField_CSharp7()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -125,8 +134,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|int a;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -153,8 +161,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39916")]
         public async Task TestEqualsSingleField_PreferExplicitType()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -162,8 +169,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|int a;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -191,8 +197,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestReferenceIEquatable()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 using System.Collections.Generic;
 
@@ -203,8 +208,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|S a;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
                 using System.Collections.Generic;
 
@@ -235,8 +239,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestNullableReferenceIEquatable()
         {
-            var code =
-                """
+            var code = """
                 #nullable enable
 
                 using System;
@@ -249,8 +252,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|S? a;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 #nullable enable
 
                 using System;
@@ -287,8 +289,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestValueIEquatable()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 using System.Collections.Generic;
 
@@ -299,8 +300,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|S a;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
                 using System.Collections.Generic;
 
@@ -331,8 +331,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestEqualsLongName()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class ReallyLongName
@@ -340,8 +339,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|int a;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class ReallyLongName
@@ -369,8 +367,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestEqualsKeywordName()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class ReallyLongLong
@@ -378,8 +375,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|long a;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class ReallyLongLong
@@ -407,8 +403,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestEqualsProperty()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class ReallyLongName
@@ -418,8 +413,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     string B { get; }|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class ReallyLongName
@@ -450,8 +444,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestEqualsBaseTypeWithNoEquals()
         {
-            var code =
-                """
+            var code = """
                 class Base
                 {
                 }
@@ -461,8 +454,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|int i;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 class Base
                 {
                 }
@@ -492,8 +484,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestEqualsBaseWithOverriddenEquals()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Base
@@ -511,8 +502,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     string S { get; }|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Base
@@ -553,8 +543,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestEqualsOverriddenDeepBase()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Base
@@ -576,8 +565,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     string S { get; }|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Base
@@ -663,7 +651,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                         return !(left == right);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -711,7 +700,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                         return !(left == right);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -756,7 +746,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                         return !(left == right);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -801,7 +792,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     public static bool operator ==(ReallyLongName left, ReallyLongName right) => false;
                     public static bool operator !=(ReallyLongName left, ReallyLongName right) => false;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -842,7 +834,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     public static bool operator ==(ReallyLongName left, ReallyLongName right) => false;
                     public static bool operator !=(ReallyLongName left, ReallyLongName right) => false;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -905,14 +898,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                                a == program.a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestGetHashCodeSingleField1()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -920,8 +913,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|int i;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -955,8 +947,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGetHashCodeSingleField2()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -964,8 +955,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|int j;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -999,8 +989,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGetHashCodeWithBaseHashCode1()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Base {
@@ -1012,8 +1001,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|int j;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Base {
@@ -1054,8 +1042,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGetHashCodeWithBaseHashCode2()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Base {
@@ -1068,8 +1055,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Base {
@@ -1107,8 +1093,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGetHashCodeSingleField_CodeStyle1()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1116,8 +1101,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|int i;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1141,7 +1125,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 FixedCode = fixedCode,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                        CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                    },
                 },
                 CodeActionIndex = 1,
                 LanguageVersion = LanguageVersion.CSharp6,
@@ -1151,8 +1138,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGetHashCodeTypeParameter()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program<T>
@@ -1160,8 +1146,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|T i;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program<T>
@@ -1195,8 +1180,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGetHashCodeGenericType()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program<T>
@@ -1204,8 +1188,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|Program<T> i;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program<T>
@@ -1239,8 +1222,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGetHashCodeMultipleMembers()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1250,8 +1232,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     string S { get; }|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1291,8 +1272,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestSmartTagText1()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1306,8 +1286,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1335,15 +1314,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 FixedCode = fixedCode,
                 CodeActionIndex = 0,
                 CodeActionEquivalenceKey = FeaturesResources.Generate_Equals_object,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Generate_Equals_object, codeAction.Title),
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(FeaturesResources.Generate_Equals_object, codeAction.Title),
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestSmartTagText2()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1357,8 +1336,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1394,15 +1372,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 FixedCode = fixedCode,
                 CodeActionIndex = 1,
                 CodeActionEquivalenceKey = FeaturesResources.Generate_Equals_and_GetHashCode,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Generate_Equals_and_GetHashCode, codeAction.Title),
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        FeaturesResources.Generate_Equals_and_GetHashCode,
+                        codeAction.Title
+                    ),
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestSmartTagText3()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1416,8 +1397,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1453,15 +1433,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 FixedCode = fixedCode,
                 CodeActionIndex = 1,
                 CodeActionEquivalenceKey = FeaturesResources.Generate_Equals_and_GetHashCode,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(FeaturesResources.Generate_Equals_and_GetHashCode, codeAction.Title),
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        FeaturesResources.Generate_Equals_and_GetHashCode,
+                        codeAction.Title
+                    ),
             }.RunAsync();
         }
 
         [Fact]
         public async Task Tuple_Disabled()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class C
@@ -1469,8 +1452,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|{|CS8059:(int, string)|} a;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class C
@@ -1499,8 +1481,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task Tuples_Equals()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class C
@@ -1508,8 +1489,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|{|CS8059:(int, string)|} a;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class C
@@ -1537,8 +1517,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TupleWithNames_Equals()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class C
@@ -1546,8 +1525,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|{|CS8059:(int x, string y)|} a;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class C
@@ -1575,8 +1553,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task Tuple_HashCode()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1584,8 +1561,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|{|CS8059:(int, string)|} i;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1619,8 +1595,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TupleWithNames_HashCode()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1628,8 +1603,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|{|CS8059:(int x, string y)|} i;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -1663,8 +1637,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task StructWithoutGetHashCodeOverride_ShouldCallGetHashCodeDirectly()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Foo
@@ -1676,8 +1649,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 {
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Foo
@@ -1715,8 +1687,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task StructWithGetHashCodeOverride_ShouldCallGetHashCodeDirectly()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Foo
@@ -1729,8 +1700,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     public override int GetHashCode() => 0;
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Foo
@@ -1769,8 +1739,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task NullableStructWithoutGetHashCodeOverride_ShouldCallGetHashCodeDirectly()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Foo
@@ -1782,8 +1751,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 {
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Foo
@@ -1821,8 +1789,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task StructTypeParameter_ShouldCallGetHashCodeDirectly()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Foo<TBar> where TBar : struct
@@ -1830,8 +1797,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|TBar bar;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Foo<TBar> where TBar : struct
@@ -1865,8 +1831,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task NullableStructTypeParameter_ShouldCallGetHashCodeDirectly()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Foo<TBar> where TBar : struct
@@ -1874,8 +1839,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|TBar? bar;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Foo<TBar> where TBar : struct
@@ -1909,8 +1873,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task Enum_ShouldCallGetHashCodeDirectly()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Foo
@@ -1922,8 +1885,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 {
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Foo
@@ -1961,8 +1923,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task PrimitiveValueType_ShouldCallGetHashCodeDirectly()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Foo
@@ -1970,8 +1931,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|ulong bar;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Foo
@@ -2005,8 +1965,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestWithDialog1()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2016,8 +1975,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2048,8 +2006,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestWithDialog2()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2060,8 +2017,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2093,8 +2049,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestWithDialog3()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2105,8 +2060,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2136,16 +2090,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17643")]
         public async Task TestWithDialogNoBackingField()
         {
-            var code =
-                """
+            var code = """
                 class Program
                 {
                     public int F { get; set; }
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 class Program
                 {
                     public int F { get; set; }
@@ -2171,8 +2123,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25690")]
         public async Task TestWithDialogNoIndexer()
         {
-            var code =
-                """
+            var code = """
                 class Program
                 {
                     public int P => 0;
@@ -2180,8 +2131,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 class Program
                 {
                     public int P => 0;
@@ -2195,18 +2145,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 }
                 """;
 
-            await new TestWithDialog
-            {
-                TestCode = code,
-                FixedCode = fixedCode,
-            }.RunAsync();
+            await new TestWithDialog { TestCode = code, FixedCode = fixedCode }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25707")]
         public async Task TestWithDialogNoSetterOnlyProperty()
         {
-            var code =
-                """
+            var code = """
                 class Program
                 {
                     public int P => 0;
@@ -2214,8 +2159,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 class Program
                 {
                     public int P => 0;
@@ -2229,18 +2173,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 }
                 """;
 
-            await new TestWithDialog
-            {
-                TestCode = code,
-                FixedCode = fixedCode,
-            }.RunAsync();
+            await new TestWithDialog { TestCode = code, FixedCode = fixedCode }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41958")]
         public async Task TestWithDialogInheritedMembers()
         {
-            var code =
-                """
+            var code = """
                 class Base
                 {
                     public int C { get; set; }
@@ -2257,8 +2196,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 class Base
                 {
                     public int C { get; set; }
@@ -2283,18 +2221,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 }
                 """;
 
-            await new TestWithDialog
-            {
-                TestCode = code,
-                FixedCode = fixedCode,
-            }.RunAsync();
+            await new TestWithDialog { TestCode = code, FixedCode = fixedCode }.RunAsync();
         }
 
         [Fact]
         public async Task TestGenerateOperators1()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2303,8 +2236,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2335,7 +2267,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.GenerateOperatorsId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.GenerateOperatorsId
+                    ),
                 LanguageVersion = LanguageVersion.CSharp6,
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
@@ -2344,8 +2280,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGenerateOperators2()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2354,8 +2289,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2379,11 +2313,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.GenerateOperatorsId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.GenerateOperatorsId
+                    ),
                 LanguageVersion = LanguageVersion.CSharp6,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                        CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                    },
                 },
             }.RunAsync();
         }
@@ -2391,8 +2332,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGenerateOperators3()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2403,8 +2343,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     public static bool operator {|CS0216:==|}(Program left, Program right) => true;
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2427,7 +2366,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => Assert.Null(options.FirstOrDefault(i => i.Id == GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.GenerateOperatorsId)),
+                OptionsCallback = options =>
+                    Assert.Null(
+                        options.FirstOrDefault(i =>
+                            i.Id
+                            == GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.GenerateOperatorsId
+                        )
+                    ),
                 LanguageVersion = LanguageVersion.CSharp6,
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
@@ -2436,8 +2381,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGenerateOperators4()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 struct Program
@@ -2446,8 +2390,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 struct Program
@@ -2482,7 +2425,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.GenerateOperatorsId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.GenerateOperatorsId
+                    ),
                 LanguageVersion = LanguageVersion.CSharp6,
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
@@ -2491,8 +2438,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGenerateLiftedOperators()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 using System.Collections.Generic;
 
@@ -2508,8 +2454,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 {
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
                 using System.Collections.Generic;
 
@@ -2549,8 +2494,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task LiftedOperatorIsNotUsedWhenDirectOperatorWouldNotBeUsed()
         {
-            var code =
-                """
+            var code = """
                 using System;
                 using System.Collections.Generic;
 
@@ -2575,8 +2519,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     public static bool operator !=(Bar left, Bar right) => !(left == right);
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
                 using System.Collections.Generic;
 
@@ -2623,8 +2566,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestImplementIEquatableOnStruct()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 struct Program
@@ -2633,8 +2575,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
                 using System.Collections.Generic;
 
@@ -2659,7 +2600,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
+                    ),
                 LanguageVersion = LanguageVersion.CSharp6,
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
@@ -2668,16 +2613,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25708")]
         public async Task TestOverrideEqualsOnRefStructReturnsFalse()
         {
-            var code =
-                """
+            var code = """
                 ref struct Program
                 {
                     public string s;
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 ref struct Program
                 {
                     public string s;
@@ -2689,26 +2632,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 }
                 """;
 
-            await new TestWithDialog
-            {
-                TestCode = code,
-                FixedCode = fixedCode,
-            }.RunAsync();
+            await new TestWithDialog { TestCode = code, FixedCode = fixedCode }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25708")]
         public async Task TestImplementIEquatableOnRefStructSkipsIEquatable()
         {
-            var code =
-                """
+            var code = """
                 ref struct Program
                 {
                     public string s;
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 ref struct Program
                 {
                     public string s;
@@ -2728,15 +2665,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 // We are forcefully enabling the ImplementIEquatable option, as that is our way
                 // to test that the option does nothing. The VS mode will ensure if the option
                 // is not available it will not be shown.
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
+                    ),
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestImplementIEquatableOnStructInNullableContextWithUnannotatedMetadata()
         {
-            var code =
-                """
+            var code = """
                 #nullable enable
 
                 struct Foo
@@ -2745,8 +2685,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 #nullable enable
 
                 using System;
@@ -2772,7 +2711,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
+                    ),
                 LanguageVersion = LanguageVersion.CSharp8,
             }.RunAsync();
         }
@@ -2780,8 +2723,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestImplementIEquatableOnStructInNullableContextWithAnnotatedMetadata()
         {
-            var code =
-                """
+            var code = """
                 #nullable enable
 
                 using System;
@@ -2793,8 +2735,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 #nullable enable
 
                 using System;
@@ -2821,7 +2762,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
+                    ),
                 LanguageVersion = LanguageVersion.CSharp8,
             }.RunAsync();
         }
@@ -2829,8 +2774,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestImplementIEquatableOnClass_CSharp6()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2839,8 +2783,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
                 using System.Collections.Generic;
 
@@ -2866,7 +2809,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
+                    ),
                 LanguageVersion = LanguageVersion.CSharp6,
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
@@ -2875,8 +2822,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestImplementIEquatableOnClass_CSharp7()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2885,8 +2831,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
                 using System.Collections.Generic;
 
@@ -2912,7 +2857,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
+                    ),
                 LanguageVersion = LanguageVersion.CSharp7,
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
@@ -2921,8 +2870,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestImplementIEquatableOnClass_CSharp8()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2931,8 +2879,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
                 using System.Collections.Generic;
 
@@ -2958,7 +2905,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
+                    ),
                 LanguageVersion = LanguageVersion.CSharp8,
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
@@ -2967,8 +2918,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestImplementIEquatableOnClass_CSharp9()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -2977,8 +2927,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
                 using System.Collections.Generic;
 
@@ -3004,7 +2953,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
+                    ),
                 LanguageVersion = LanguageVersion.CSharp9,
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
@@ -3013,8 +2966,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestImplementIEquatableOnClassInNullableContextWithUnannotatedMetadata()
         {
-            var code =
-                """
+            var code = """
                 #nullable enable
 
                 class Foo
@@ -3023,8 +2975,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 #nullable enable
 
                 using System;
@@ -3051,7 +3002,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
+                    ),
                 LanguageVersion = LanguageVersion.CSharp8,
             }.RunAsync();
         }
@@ -3059,8 +3014,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestImplementIEquatableOnClassInNullableContextWithAnnotatedMetadata()
         {
-            var code =
-                """
+            var code = """
                 #nullable enable
 
                 using System;
@@ -3072,8 +3026,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 #nullable enable
 
                 using System;
@@ -3101,7 +3054,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
+                    ),
                 LanguageVersion = LanguageVersion.CSharp8,
             }.RunAsync();
         }
@@ -3109,8 +3066,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestDoNotOfferIEquatableIfTypeAlreadyImplementsIt()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program : {|CS0535:System.IEquatable<Program>|}
@@ -3119,8 +3075,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [||]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program : {|CS0535:System.IEquatable<Program>|}
@@ -3141,7 +3096,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => Assert.Null(options.FirstOrDefault(i => i.Id == GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId)),
+                OptionsCallback = options =>
+                    Assert.Null(
+                        options.FirstOrDefault(i =>
+                            i.Id
+                            == GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.ImplementIEquatableId
+                        )
+                    ),
                 LanguageVersion = LanguageVersion.CSharp6,
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
@@ -3159,107 +3120,197 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                        public class Class1
-                        {
-                            [|int i;|]
-
-                            public void F()
+                            public class Class1
                             {
+                                [|int i;|]
+
+                                public void F()
+                                {
+                                }
                             }
-                        }
-                        """,
+                            """,
                     },
                     ExpectedDiagnostics =
                     {
-    // /0/Test0.cs(1,14): error CS0518: Predefined type 'System.Object' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(1, 14, 1, 20).WithArguments("System.Object"),
-    // /0/Test0.cs(1,14): error CS1729: 'object' does not contain a constructor that takes 0 arguments
-    DiagnosticResult.CompilerError("CS1729").WithSpan(1, 14, 1, 20).WithArguments("object", "0"),
-    // /0/Test0.cs(3,5): error CS0518: Predefined type 'System.Int32' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(3, 5, 3, 8).WithArguments("System.Int32"),
-    // /0/Test0.cs(5,12): error CS0518: Predefined type 'System.Void' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(5, 12, 5, 16).WithArguments("System.Void"),
+                        // /0/Test0.cs(1,14): error CS0518: Predefined type 'System.Object' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(1, 14, 1, 20)
+                            .WithArguments("System.Object"),
+                        // /0/Test0.cs(1,14): error CS1729: 'object' does not contain a constructor that takes 0 arguments
+                        DiagnosticResult
+                            .CompilerError("CS1729")
+                            .WithSpan(1, 14, 1, 20)
+                            .WithArguments("object", "0"),
+                        // /0/Test0.cs(3,5): error CS0518: Predefined type 'System.Int32' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(3, 5, 3, 8)
+                            .WithArguments("System.Int32"),
+                        // /0/Test0.cs(5,12): error CS0518: Predefined type 'System.Void' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(5, 12, 5, 16)
+                            .WithArguments("System.Void"),
                     },
                 },
                 FixedState =
                 {
-                    Sources = {
+                    Sources =
+                    {
                         """
-                        public class Class1
-                        {
-                            int i;
-
-                            public override System.Boolean Equals(System.Object obj)
+                            public class Class1
                             {
-                                Class1 @class = obj as Class1;
-                                return !ReferenceEquals(@class, null) &&
-                                       i == @class.i;
-                            }
+                                int i;
 
-                            public void F()
-                            {
-                            }
+                                public override System.Boolean Equals(System.Object obj)
+                                {
+                                    Class1 @class = obj as Class1;
+                                    return !ReferenceEquals(@class, null) &&
+                                           i == @class.i;
+                                }
 
-                            public override System.Int32 GetHashCode()
-                            {
-                                return 165851236 + EqualityComparer<System.Int32>.Default.GetHashCode(i);
+                                public void F()
+                                {
+                                }
+
+                                public override System.Int32 GetHashCode()
+                                {
+                                    return 165851236 + EqualityComparer<System.Int32>.Default.GetHashCode(i);
+                                }
                             }
-                        }
-                        """,
+                            """,
                     },
                     ExpectedDiagnostics =
                     {
-    // /0/Test0.cs(1,14): error CS0518: Predefined type 'System.Object' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(1, 14, 1, 20).WithArguments("System.Object"),
-    // /0/Test0.cs(1,14): error CS1729: 'object' does not contain a constructor that takes 0 arguments
-    DiagnosticResult.CompilerError("CS1729").WithSpan(1, 14, 1, 20).WithArguments("object", "0"),
-    // /0/Test0.cs(3,5): error CS0518: Predefined type 'System.Int32' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(3, 5, 3, 8).WithArguments("System.Int32"),
-    // /0/Test0.cs(5,21): error CS0518: Predefined type 'System.Object' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(5, 21, 5, 27).WithArguments("System.Object"),
-    // /0/Test0.cs(5,28): error CS1069: The type name 'Boolean' could not be found in the namespace 'System'. This type has been forwarded to assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' Consider adding a reference to that assembly.
-    DiagnosticResult.CompilerError("CS1069").WithSpan(5, 28, 5, 35).WithArguments("Boolean", "System", "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
-    // /0/Test0.cs(5,43): error CS0518: Predefined type 'System.Object' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(5, 43, 5, 49).WithArguments("System.Object"),
-    // /0/Test0.cs(5,50): error CS1069: The type name 'Object' could not be found in the namespace 'System'. This type has been forwarded to assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' Consider adding a reference to that assembly.
-    DiagnosticResult.CompilerError("CS1069").WithSpan(5, 50, 5, 56).WithArguments("Object", "System", "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
-    // /0/Test0.cs(7,9): error CS0518: Predefined type 'System.Object' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(7, 9, 7, 15).WithArguments("System.Object"),
-    // /0/Test0.cs(7,32): error CS0518: Predefined type 'System.Object' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(7, 32, 7, 38).WithArguments("System.Object"),
-    // /0/Test0.cs(8,17): error CS0103: The name 'ReferenceEquals' does not exist in the current context
-    DiagnosticResult.CompilerError("CS0103").WithSpan(8, 17, 8, 32).WithArguments("ReferenceEquals"),
-    // /0/Test0.cs(8,17): error CS0518: Predefined type 'System.Object' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(8, 17, 8, 32).WithArguments("System.Object"),
-    // /0/Test0.cs(9,16): error CS0518: Predefined type 'System.Boolean' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(9, 16, 9, 29).WithArguments("System.Boolean"),
-    // /0/Test0.cs(12,12): error CS0518: Predefined type 'System.Void' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(12, 12, 12, 16).WithArguments("System.Void"),
-    // /0/Test0.cs(16,21): error CS0518: Predefined type 'System.Object' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(16, 21, 16, 27).WithArguments("System.Object"),
-    // /0/Test0.cs(16,28): error CS1069: The type name 'Int32' could not be found in the namespace 'System'. This type has been forwarded to assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' Consider adding a reference to that assembly.
-    DiagnosticResult.CompilerError("CS1069").WithSpan(16, 28, 16, 33).WithArguments("Int32", "System", "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
-    // /0/Test0.cs(18,16): error CS0518: Predefined type 'System.Int32' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(18, 16, 18, 25).WithArguments("System.Int32"),
-    // /0/Test0.cs(18,28): error CS0103: The name 'EqualityComparer' does not exist in the current context
-    DiagnosticResult.CompilerError("CS0103").WithSpan(18, 28, 18, 58).WithArguments("EqualityComparer"),
-    // /0/Test0.cs(18,28): error CS0518: Predefined type 'System.Object' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(18, 28, 18, 58).WithArguments("System.Object"),
-    // /0/Test0.cs(18,45): error CS0518: Predefined type 'System.Object' is not defined or imported
-    DiagnosticResult.CompilerError("CS0518").WithSpan(18, 45, 18, 51).WithArguments("System.Object"),
-    // /0/Test0.cs(18,52): error CS1069: The type name 'Int32' could not be found in the namespace 'System'. This type has been forwarded to assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' Consider adding a reference to that assembly.
-    DiagnosticResult.CompilerError("CS1069").WithSpan(18, 52, 18, 57).WithArguments("Int32", "System", "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
+                        // /0/Test0.cs(1,14): error CS0518: Predefined type 'System.Object' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(1, 14, 1, 20)
+                            .WithArguments("System.Object"),
+                        // /0/Test0.cs(1,14): error CS1729: 'object' does not contain a constructor that takes 0 arguments
+                        DiagnosticResult
+                            .CompilerError("CS1729")
+                            .WithSpan(1, 14, 1, 20)
+                            .WithArguments("object", "0"),
+                        // /0/Test0.cs(3,5): error CS0518: Predefined type 'System.Int32' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(3, 5, 3, 8)
+                            .WithArguments("System.Int32"),
+                        // /0/Test0.cs(5,21): error CS0518: Predefined type 'System.Object' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(5, 21, 5, 27)
+                            .WithArguments("System.Object"),
+                        // /0/Test0.cs(5,28): error CS1069: The type name 'Boolean' could not be found in the namespace 'System'. This type has been forwarded to assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' Consider adding a reference to that assembly.
+                        DiagnosticResult
+                            .CompilerError("CS1069")
+                            .WithSpan(5, 28, 5, 35)
+                            .WithArguments(
+                                "Boolean",
+                                "System",
+                                "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                            ),
+                        // /0/Test0.cs(5,43): error CS0518: Predefined type 'System.Object' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(5, 43, 5, 49)
+                            .WithArguments("System.Object"),
+                        // /0/Test0.cs(5,50): error CS1069: The type name 'Object' could not be found in the namespace 'System'. This type has been forwarded to assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' Consider adding a reference to that assembly.
+                        DiagnosticResult
+                            .CompilerError("CS1069")
+                            .WithSpan(5, 50, 5, 56)
+                            .WithArguments(
+                                "Object",
+                                "System",
+                                "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                            ),
+                        // /0/Test0.cs(7,9): error CS0518: Predefined type 'System.Object' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(7, 9, 7, 15)
+                            .WithArguments("System.Object"),
+                        // /0/Test0.cs(7,32): error CS0518: Predefined type 'System.Object' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(7, 32, 7, 38)
+                            .WithArguments("System.Object"),
+                        // /0/Test0.cs(8,17): error CS0103: The name 'ReferenceEquals' does not exist in the current context
+                        DiagnosticResult
+                            .CompilerError("CS0103")
+                            .WithSpan(8, 17, 8, 32)
+                            .WithArguments("ReferenceEquals"),
+                        // /0/Test0.cs(8,17): error CS0518: Predefined type 'System.Object' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(8, 17, 8, 32)
+                            .WithArguments("System.Object"),
+                        // /0/Test0.cs(9,16): error CS0518: Predefined type 'System.Boolean' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(9, 16, 9, 29)
+                            .WithArguments("System.Boolean"),
+                        // /0/Test0.cs(12,12): error CS0518: Predefined type 'System.Void' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(12, 12, 12, 16)
+                            .WithArguments("System.Void"),
+                        // /0/Test0.cs(16,21): error CS0518: Predefined type 'System.Object' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(16, 21, 16, 27)
+                            .WithArguments("System.Object"),
+                        // /0/Test0.cs(16,28): error CS1069: The type name 'Int32' could not be found in the namespace 'System'. This type has been forwarded to assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' Consider adding a reference to that assembly.
+                        DiagnosticResult
+                            .CompilerError("CS1069")
+                            .WithSpan(16, 28, 16, 33)
+                            .WithArguments(
+                                "Int32",
+                                "System",
+                                "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                            ),
+                        // /0/Test0.cs(18,16): error CS0518: Predefined type 'System.Int32' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(18, 16, 18, 25)
+                            .WithArguments("System.Int32"),
+                        // /0/Test0.cs(18,28): error CS0103: The name 'EqualityComparer' does not exist in the current context
+                        DiagnosticResult
+                            .CompilerError("CS0103")
+                            .WithSpan(18, 28, 18, 58)
+                            .WithArguments("EqualityComparer"),
+                        // /0/Test0.cs(18,28): error CS0518: Predefined type 'System.Object' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(18, 28, 18, 58)
+                            .WithArguments("System.Object"),
+                        // /0/Test0.cs(18,45): error CS0518: Predefined type 'System.Object' is not defined or imported
+                        DiagnosticResult
+                            .CompilerError("CS0518")
+                            .WithSpan(18, 45, 18, 51)
+                            .WithArguments("System.Object"),
+                        // /0/Test0.cs(18,52): error CS1069: The type name 'Int32' could not be found in the namespace 'System'. This type has been forwarded to assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' Consider adding a reference to that assembly.
+                        DiagnosticResult
+                            .CompilerError("CS1069")
+                            .WithSpan(18, 52, 18, 57)
+                            .WithArguments(
+                                "Int32",
+                                "System",
+                                "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                            ),
                     },
                 },
-                ReferenceAssemblies = ReferenceAssemblies.Default.WithAssemblies(ImmutableArray<string>.Empty),
+                ReferenceAssemblies = ReferenceAssemblies.Default.WithAssemblies(
+                    ImmutableArray<string>.Empty
+                ),
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestGetHashCodeInCheckedContext()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -3269,8 +3320,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     string S { get; }|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Program
@@ -3310,8 +3360,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 {
                     (solution, projectId) =>
                     {
-                        var compilationOptions = solution.GetRequiredProject(projectId).CompilationOptions;
-                        return solution.WithProjectCompilationOptions(projectId, compilationOptions.WithOverflowChecks(true));
+                        var compilationOptions = solution
+                            .GetRequiredProject(projectId)
+                            .CompilationOptions;
+                        return solution.WithProjectCompilationOptions(
+                            projectId,
+                            compilationOptions.WithOverflowChecks(true)
+                        );
                     },
                 },
             }.RunAsync();
@@ -3320,8 +3375,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGetHashCodeStruct()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 struct S
@@ -3329,8 +3383,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|int j;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
                 using System.Collections.Generic;
 
@@ -3378,8 +3431,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGetHashCodeSystemHashCodeOneMember()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
                 namespace System { public struct HashCode { } }
 
@@ -3388,8 +3440,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|int j;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
                 using System.Collections.Generic;
                 namespace System { public struct HashCode { } }
@@ -3434,7 +3485,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(21,25): error CS0117: 'HashCode' does not contain a definition for 'Combine'
-                        DiagnosticResult.CompilerError("CS0117").WithSpan(21, 25, 21, 32).WithArguments("System.HashCode", "Combine"),
+                        DiagnosticResult
+                            .CompilerError("CS0117")
+                            .WithSpan(21, 25, 21, 32)
+                            .WithArguments("System.HashCode", "Combine"),
                     },
                 },
                 CodeActionIndex = 1,
@@ -3446,20 +3500,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37297")]
         public async Task TestPublicSystemHashCodeOtherProject()
         {
-            var publicHashCode =
-                """
+            var publicHashCode = """
                 using System.Collections.Generic;
                 namespace System { public struct HashCode { } }
                 """;
-            var code =
-                """
+            var code = """
                 struct S
                 {
                     [|int j;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
 
                 struct S : IEquatable<S>
@@ -3499,10 +3550,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 {
                     AdditionalProjects =
                     {
-                        ["P1"] =
-                        {
-                            Sources = { ("HashCode.cs", publicHashCode) },
-                        },
+                        ["P1"] = { Sources = { ("HashCode.cs", publicHashCode) } },
                     },
                     Sources = { code },
                     AdditionalProjectReferences = { "P1" },
@@ -3513,7 +3561,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(19,25): error CS0117: 'HashCode' does not contain a definition for 'Combine'
-                        DiagnosticResult.CompilerError("CS0117").WithSpan(19, 25, 19, 32).WithArguments("System.HashCode", "Combine"),
+                        DiagnosticResult
+                            .CompilerError("CS0117")
+                            .WithSpan(19, 25, 19, 32)
+                            .WithArguments("System.HashCode", "Combine"),
                     },
                 },
                 CodeActionIndex = 1,
@@ -3525,20 +3576,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37297")]
         public async Task TestInternalSystemHashCode()
         {
-            var internalHashCode =
-                """
+            var internalHashCode = """
                 using System.Collections.Generic;
                 namespace System { internal struct HashCode { } }
                 """;
-            var code =
-                """
+            var code = """
                 struct S
                 {
                     [|int j;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
 
                 struct S : IEquatable<S>
@@ -3578,10 +3626,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 {
                     AdditionalProjects =
                     {
-                        ["P1"] =
-                        {
-                            Sources = { ("HashCode.cs", internalHashCode) },
-                        },
+                        ["P1"] = { Sources = { ("HashCode.cs", internalHashCode) } },
                     },
                     Sources = { code },
                     AdditionalProjectReferences = { "P1" },
@@ -3596,8 +3641,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGetHashCodeSystemHashCodeEightMembers()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
                 namespace System { public struct HashCode { } }
 
@@ -3606,8 +3650,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|int j, k, l, m, n, o, p, q;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
                 using System.Collections.Generic;
                 namespace System { public struct HashCode { } }
@@ -3659,7 +3702,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(28,25): error CS0117: 'HashCode' does not contain a definition for 'Combine'
-                        DiagnosticResult.CompilerError("CS0117").WithSpan(28, 25, 28, 32).WithArguments("System.HashCode", "Combine"),
+                        DiagnosticResult
+                            .CompilerError("CS0117")
+                            .WithSpan(28, 25, 28, 32)
+                            .WithArguments("System.HashCode", "Combine"),
                     },
                 },
                 CodeActionIndex = 1,
@@ -3671,8 +3717,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact]
         public async Task TestGetHashCodeSystemHashCodeNineMembers()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
                 namespace System { public struct HashCode { public void Add<T>(T value) { } public int ToHashCode() => 0; } }
 
@@ -3681,8 +3726,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|int j, k, l, m, n, o, p, q, r;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
                 using System.Collections.Generic;
                 namespace System { public struct HashCode { public void Add<T>(T value) { } public int ToHashCode() => 0; } }
@@ -3749,8 +3793,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39916")]
         public async Task TestGetHashCodeSystemHashCodeNineMembers_Explicit()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
                 namespace System { public struct HashCode { public void Add<T>(T value) { } public int ToHashCode() => 0; } }
 
@@ -3759,8 +3802,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|int j, k, l, m, n, o, p, q, r;|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System;
                 using System.Collections.Generic;
                 namespace System { public struct HashCode { public void Add<T>(T value) { } public int ToHashCode() => 0; } }
@@ -3849,7 +3891,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                                a == program.a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3892,14 +3935,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                         return !(left == right);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestEqualsBaseWithOverriddenEquals_Patterns()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Base
@@ -3917,8 +3960,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     string S { get; }|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 using System.Collections.Generic;
 
                 class Base
@@ -3956,8 +3998,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33601")]
         public async Task TestPartialSelection()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
 
                 class Program
@@ -3966,18 +4007,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40053")]
         public async Task TestEqualityOperatorsNullableAnnotationWithReferenceType()
         {
-            var code =
-                """
+            var code = """
                 #nullable enable
                 using System;
 
@@ -3989,8 +4025,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 #nullable enable
                 using System;
                 using System.Collections.Generic;
@@ -4029,13 +4064,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(20,55): error CS8604: Possible null reference argument for parameter 'x' in 'bool EqualityComparer<C>.Equals(C x, C y)'.
-                        DiagnosticResult.CompilerError("CS8604").WithSpan(19, 55, 19, 59).WithArguments("x", "bool EqualityComparer<C>.Equals(C x, C y)"),
+                        DiagnosticResult
+                            .CompilerError("CS8604")
+                            .WithSpan(19, 55, 19, 59)
+                            .WithArguments("x", "bool EqualityComparer<C>.Equals(C x, C y)"),
                         // /0/Test0.cs(20,61): error CS8604: Possible null reference argument for parameter 'y' in 'bool EqualityComparer<C>.Equals(C x, C y)'.
-                        DiagnosticResult.CompilerError("CS8604").WithSpan(19, 61, 19, 66).WithArguments("y", "bool EqualityComparer<C>.Equals(C x, C y)"),
+                        DiagnosticResult
+                            .CompilerError("CS8604")
+                            .WithSpan(19, 61, 19, 66)
+                            .WithArguments("y", "bool EqualityComparer<C>.Equals(C x, C y)"),
                     },
                 },
                 MemberNames = default,
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.GenerateOperatorsId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.GenerateOperatorsId
+                    ),
                 LanguageVersion = LanguageVersion.Default,
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
@@ -4044,8 +4089,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40053")]
         public async Task TestEqualityOperatorsNullableAnnotationWithValueType()
         {
-            var code =
-                """
+            var code = """
                 #nullable enable
                 using System;
 
@@ -4057,8 +4101,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     }
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 #nullable enable
                 using System;
 
@@ -4092,7 +4135,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 TestCode = code,
                 FixedCode = fixedCode,
                 MemberNames = default,
-                OptionsCallback = options => EnableOption(options, GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.GenerateOperatorsId),
+                OptionsCallback = options =>
+                    EnableOption(
+                        options,
+                        GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider.GenerateOperatorsId
+                    ),
                 LanguageVersion = LanguageVersion.Default,
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
@@ -4108,19 +4155,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                        partial class Goo
-                        {
-                            int bar;
-                            [||]
-                        }
-                        """,
+                            partial class Goo
+                            {
+                                int bar;
+                                [||]
+                            }
+                            """,
                         """
-                        partial class Goo
-                        {
+                            partial class Goo
+                            {
 
 
-                        }
-                        """,
+                            }
+                            """,
                     },
                 },
                 FixedState =
@@ -4128,29 +4175,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                        partial class Goo
-                        {
-                            int bar;
-
-                            public override bool Equals(object obj)
+                            partial class Goo
                             {
-                                return obj is Goo goo &&
-                                       bar == goo.bar;
-                            }
+                                int bar;
 
-                            public override int GetHashCode()
-                            {
-                                return 999205674 + bar.GetHashCode();
+                                public override bool Equals(object obj)
+                                {
+                                    return obj is Goo goo &&
+                                           bar == goo.bar;
+                                }
+
+                                public override int GetHashCode()
+                                {
+                                    return 999205674 + bar.GetHashCode();
+                                }
                             }
-                        }
-                        """,
+                            """,
                         """
-                        partial class Goo
-                        {
+                            partial class Goo
+                            {
 
 
-                        }
-                        """,
+                            }
+                            """,
                     },
                 },
                 MemberNames = ImmutableArray.Create("bar"),
@@ -4168,19 +4215,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                        partial class Goo
-                        {
-                            int bar;
+                            partial class Goo
+                            {
+                                int bar;
 
-                        }
-                        """,
+                            }
+                            """,
                         """
-                        partial class Goo
-                        {
+                            partial class Goo
+                            {
 
-                        [||]
-                        }
-                        """,
+                            [||]
+                            }
+                            """,
                     },
                 },
                 FixedState =
@@ -4188,27 +4235,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                        partial class Goo
-                        {
-                            int bar;
+                            partial class Goo
+                            {
+                                int bar;
 
-                        }
-                        """,
+                            }
+                            """,
                         """
-                        partial class Goo
-                        {
-                            public override bool Equals(object obj)
+                            partial class Goo
                             {
-                                return obj is Goo goo &&
-                                       bar == goo.bar;
-                            }
+                                public override bool Equals(object obj)
+                                {
+                                    return obj is Goo goo &&
+                                           bar == goo.bar;
+                                }
 
-                            public override int GetHashCode()
-                            {
-                                return 999205674 + bar.GetHashCode();
+                                public override int GetHashCode()
+                                {
+                                    return 999205674 + bar.GetHashCode();
+                                }
                             }
-                        }
-                        """,
+                            """,
                     },
                 },
                 MemberNames = ImmutableArray.Create("bar"),
@@ -4226,19 +4273,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                        partial class Goo
-                        {
+                            partial class Goo
+                            {
 
-                        [||]
-                        }
-                        """,
+                            [||]
+                            }
+                            """,
                         """
-                        partial class Goo
-                        {
-                            int bar;
+                            partial class Goo
+                            {
+                                int bar;
 
-                        }
-                        """,
+                            }
+                            """,
                     },
                 },
                 FixedState =
@@ -4246,27 +4293,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                        partial class Goo
-                        {
-                            public override bool Equals(object obj)
+                            partial class Goo
                             {
-                                return obj is Goo goo &&
-                                       bar == goo.bar;
-                            }
+                                public override bool Equals(object obj)
+                                {
+                                    return obj is Goo goo &&
+                                           bar == goo.bar;
+                                }
 
-                            public override int GetHashCode()
-                            {
-                                return 999205674 + bar.GetHashCode();
+                                public override int GetHashCode()
+                                {
+                                    return 999205674 + bar.GetHashCode();
+                                }
                             }
-                        }
-                        """,
+                            """,
                         """
-                        partial class Goo
-                        {
-                            int bar;
+                            partial class Goo
+                            {
+                                int bar;
 
-                        }
-                        """,
+                            }
+                            """,
                     },
                 },
                 MemberNames = ImmutableArray.Create("bar"),
@@ -4284,19 +4331,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                        partial class Goo
-                        {
+                            partial class Goo
+                            {
 
 
-                        }
-                        """,
+                            }
+                            """,
                         """
-                        partial class Goo
-                        {
-                            int bar;
-                        [||]
-                        }
-                        """,
+                            partial class Goo
+                            {
+                                int bar;
+                            [||]
+                            }
+                            """,
                     },
                 },
                 FixedState =
@@ -4304,29 +4351,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     Sources =
                     {
                         """
-                        partial class Goo
-                        {
+                            partial class Goo
+                            {
 
 
-                        }
-                        """,
+                            }
+                            """,
                         """
-                        partial class Goo
-                        {
-                            int bar;
-
-                            public override bool Equals(object obj)
+                            partial class Goo
                             {
-                                return obj is Goo goo &&
-                                       bar == goo.bar;
-                            }
+                                int bar;
 
-                            public override int GetHashCode()
-                            {
-                                return 999205674 + bar.GetHashCode();
+                                public override bool Equals(object obj)
+                                {
+                                    return obj is Goo goo &&
+                                           bar == goo.bar;
+                                }
+
+                                public override int GetHashCode()
+                                {
+                                    return 999205674 + bar.GetHashCode();
+                                }
                             }
-                        }
-                        """,
+                            """,
                     },
                 },
                 MemberNames = ImmutableArray.Create("bar"),
@@ -4337,8 +4384,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/43290")]
         public async Task TestAbstractBase()
         {
-            var code =
-                """
+            var code = """
                 #nullable enable
 
                 namespace System { public struct HashCode { } }
@@ -4354,8 +4400,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     [|public int P { get; }|]
                 }
                 """;
-            var fixedCode =
-                """
+            var fixedCode = """
                 #nullable enable
 
                 using System;
@@ -4394,7 +4439,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(23,25): error CS0117: 'HashCode' does not contain a definition for 'Combine'
-                        DiagnosticResult.CompilerError("CS0117").WithSpan(25, 25, 25, 32).WithArguments("System.HashCode", "Combine"),
+                        DiagnosticResult
+                            .CompilerError("CS0117")
+                            .WithSpan(25, 25, 25, 32)
+                            .WithArguments("System.HashCode", "Combine"),
                     },
                 },
                 CodeActionIndex = 1,

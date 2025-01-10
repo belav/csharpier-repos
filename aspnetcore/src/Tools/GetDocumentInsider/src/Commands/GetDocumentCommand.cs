@@ -5,11 +5,11 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.CommandLineUtils;
+using Microsoft.Extensions.Tools.Internal;
 #if NETCOREAPP
 using System.Runtime.Loader;
 #endif
-using Microsoft.Extensions.CommandLineUtils;
-using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 
@@ -18,9 +18,8 @@ internal sealed class GetDocumentCommand : ProjectCommandBase
     private CommandOption _fileListPath;
     private CommandOption _output;
 
-    public GetDocumentCommand(IConsole console) : base(console)
-    {
-    }
+    public GetDocumentCommand(IConsole console)
+        : base(console) { }
 
     public override void Configure(CommandLineApplication command)
     {
@@ -82,7 +81,8 @@ internal sealed class GetDocumentCommand : ProjectCommandBase
             if (!File.Exists(assemblyPath))
             {
                 throw new InvalidOperationException(
-                    $"Referenced assembly '{name}' was not found in '{toolsDirectory}'.");
+                    $"Referenced assembly '{name}' was not found in '{toolsDirectory}'."
+                );
             }
 
             return loadContext.LoadFromAssemblyPath(assemblyPath);
@@ -109,7 +109,8 @@ internal sealed class GetDocumentCommand : ProjectCommandBase
             if (!File.Exists(assemblyPath))
             {
                 throw new InvalidOperationException(
-                    $"Referenced assembly '{name}' was not found in '{toolsDirectory}'.");
+                    $"Referenced assembly '{name}' was not found in '{toolsDirectory}'."
+                );
             }
 
             return Assembly.LoadFile(assemblyPath);

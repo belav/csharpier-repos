@@ -1,4 +1,4 @@
-namespace System 
+namespace System
 {
     using System.Diagnostics;
     using System.Runtime.InteropServices;
@@ -11,18 +11,25 @@ namespace System
         //
         internal static bool CheckIriUnicodeRange(char unicode, bool isQuery)
         {
-            return ((unicode >= '\u00A0' && unicode <= '\uD7FF') ||
-               (unicode >= '\uF900' && unicode <= '\uFDCF') ||
-               (unicode >= '\uFDF0' && unicode <= '\uFFEF') ||
-               (isQuery && unicode >= '\uE000' && unicode <= '\uF8FF'));
+            return (
+                (unicode >= '\u00A0' && unicode <= '\uD7FF')
+                || (unicode >= '\uF900' && unicode <= '\uFDCF')
+                || (unicode >= '\uFDF0' && unicode <= '\uFFEF')
+                || (isQuery && unicode >= '\uE000' && unicode <= '\uF8FF')
+            );
         }
 
         //
-        // Check if highSurr and lowSurr are a surrogate pair then 
+        // Check if highSurr and lowSurr are a surrogate pair then
         // it checks if the combined char is in the range
         // Takes in isQuery because because iri restrictions for query are different
         //
-        internal static bool CheckIriUnicodeRange(char highSurr, char lowSurr, ref bool surrogatePair, bool isQuery)
+        internal static bool CheckIriUnicodeRange(
+            char highSurr,
+            char lowSurr,
+            ref bool surrogatePair,
+            bool isQuery
+        )
         {
             bool inRange = false;
             surrogatePair = false;
@@ -34,39 +41,77 @@ namespace System
                 surrogatePair = true;
                 char[] chars = new char[2] { highSurr, lowSurr };
                 string surrPair = new string(chars);
-                if (((string.CompareOrdinal(surrPair, "\U00010000") >= 0)
-                        && (string.CompareOrdinal(surrPair, "\U0001FFFD") <= 0)) ||
-                    ((string.CompareOrdinal(surrPair, "\U00020000") >= 0)
-                        && (string.CompareOrdinal(surrPair, "\U0002FFFD") <= 0)) ||
-                    ((string.CompareOrdinal(surrPair, "\U00030000") >= 0)
-                        && (string.CompareOrdinal(surrPair, "\U0003FFFD") <= 0)) ||
-                    ((string.CompareOrdinal(surrPair, "\U00040000") >= 0)
-                        && (string.CompareOrdinal(surrPair, "\U0004FFFD") <= 0)) ||
-                    ((string.CompareOrdinal(surrPair, "\U00050000") >= 0)
-                        && (string.CompareOrdinal(surrPair, "\U0005FFFD") <= 0)) ||
-                    ((string.CompareOrdinal(surrPair, "\U00060000") >= 0)
-                        && (string.CompareOrdinal(surrPair, "\U0006FFFD") <= 0)) ||
-                    ((string.CompareOrdinal(surrPair, "\U00070000") >= 0)
-                        && (string.CompareOrdinal(surrPair, "\U0007FFFD") <= 0)) ||
-                    ((string.CompareOrdinal(surrPair, "\U00080000") >= 0)
-                        && (string.CompareOrdinal(surrPair, "\U0008FFFD") <= 0)) ||
-                    ((string.CompareOrdinal(surrPair, "\U00090000") >= 0)
-                        && (string.CompareOrdinal(surrPair, "\U0009FFFD") <= 0)) ||
-                    ((string.CompareOrdinal(surrPair, "\U000A0000") >= 0)
-                        && (string.CompareOrdinal(surrPair, "\U000AFFFD") <= 0)) ||
-                    ((string.CompareOrdinal(surrPair, "\U000B0000") >= 0)
-                        && (string.CompareOrdinal(surrPair, "\U000BFFFD") <= 0)) ||
-                    ((string.CompareOrdinal(surrPair, "\U000C0000") >= 0)
-                        && (string.CompareOrdinal(surrPair, "\U000CFFFD") <= 0)) ||
-                    ((string.CompareOrdinal(surrPair, "\U000D0000") >= 0)
-                        && (string.CompareOrdinal(surrPair, "\U000DFFFD") <= 0)) ||
-                    ((string.CompareOrdinal(surrPair, "\U000E1000") >= 0)
-                        && (string.CompareOrdinal(surrPair, "\U000EFFFD") <= 0)) ||
-                    (isQuery &&
-                        (((string.CompareOrdinal(surrPair, "\U000F0000") >= 0)
-                            && (string.CompareOrdinal(surrPair, "\U000FFFFD") <= 0)) ||
-                            ((string.CompareOrdinal(surrPair, "\U00100000") >= 0)
-                            && (string.CompareOrdinal(surrPair, "\U0010FFFD") <= 0)))))
+                if (
+                    (
+                        (string.CompareOrdinal(surrPair, "\U00010000") >= 0)
+                        && (string.CompareOrdinal(surrPair, "\U0001FFFD") <= 0)
+                    )
+                    || (
+                        (string.CompareOrdinal(surrPair, "\U00020000") >= 0)
+                        && (string.CompareOrdinal(surrPair, "\U0002FFFD") <= 0)
+                    )
+                    || (
+                        (string.CompareOrdinal(surrPair, "\U00030000") >= 0)
+                        && (string.CompareOrdinal(surrPair, "\U0003FFFD") <= 0)
+                    )
+                    || (
+                        (string.CompareOrdinal(surrPair, "\U00040000") >= 0)
+                        && (string.CompareOrdinal(surrPair, "\U0004FFFD") <= 0)
+                    )
+                    || (
+                        (string.CompareOrdinal(surrPair, "\U00050000") >= 0)
+                        && (string.CompareOrdinal(surrPair, "\U0005FFFD") <= 0)
+                    )
+                    || (
+                        (string.CompareOrdinal(surrPair, "\U00060000") >= 0)
+                        && (string.CompareOrdinal(surrPair, "\U0006FFFD") <= 0)
+                    )
+                    || (
+                        (string.CompareOrdinal(surrPair, "\U00070000") >= 0)
+                        && (string.CompareOrdinal(surrPair, "\U0007FFFD") <= 0)
+                    )
+                    || (
+                        (string.CompareOrdinal(surrPair, "\U00080000") >= 0)
+                        && (string.CompareOrdinal(surrPair, "\U0008FFFD") <= 0)
+                    )
+                    || (
+                        (string.CompareOrdinal(surrPair, "\U00090000") >= 0)
+                        && (string.CompareOrdinal(surrPair, "\U0009FFFD") <= 0)
+                    )
+                    || (
+                        (string.CompareOrdinal(surrPair, "\U000A0000") >= 0)
+                        && (string.CompareOrdinal(surrPair, "\U000AFFFD") <= 0)
+                    )
+                    || (
+                        (string.CompareOrdinal(surrPair, "\U000B0000") >= 0)
+                        && (string.CompareOrdinal(surrPair, "\U000BFFFD") <= 0)
+                    )
+                    || (
+                        (string.CompareOrdinal(surrPair, "\U000C0000") >= 0)
+                        && (string.CompareOrdinal(surrPair, "\U000CFFFD") <= 0)
+                    )
+                    || (
+                        (string.CompareOrdinal(surrPair, "\U000D0000") >= 0)
+                        && (string.CompareOrdinal(surrPair, "\U000DFFFD") <= 0)
+                    )
+                    || (
+                        (string.CompareOrdinal(surrPair, "\U000E1000") >= 0)
+                        && (string.CompareOrdinal(surrPair, "\U000EFFFD") <= 0)
+                    )
+                    || (
+                        isQuery
+                        && (
+                            (
+                                (string.CompareOrdinal(surrPair, "\U000F0000") >= 0)
+                                && (string.CompareOrdinal(surrPair, "\U000FFFFD") <= 0)
+                            )
+                            || (
+                                (string.CompareOrdinal(surrPair, "\U00100000") >= 0)
+                                && (string.CompareOrdinal(surrPair, "\U0010FFFD") <= 0)
+                            )
+                        )
+                    )
+                )
                 {
                     inRange = true;
                 }
@@ -80,14 +125,15 @@ namespace System
         //
         internal static bool CheckIsReserved(char ch, UriComponents component)
         {
-            if ((component != UriComponents.Scheme) &&
-                    (component != UriComponents.UserInfo) &&
-                    (component != UriComponents.Host) &&
-                    (component != UriComponents.Port) &&
-                    (component != UriComponents.Path) &&
-                    (component != UriComponents.Query) &&
-                    (component != UriComponents.Fragment)
-                )
+            if (
+                (component != UriComponents.Scheme)
+                && (component != UriComponents.UserInfo)
+                && (component != UriComponents.Host)
+                && (component != UriComponents.Port)
+                && (component != UriComponents.Path)
+                && (component != UriComponents.Query)
+                && (component != UriComponents.Fragment)
+            )
             {
                 return (component == (UriComponents)0) ? Uri.IsGenDelim(ch) : false;
             }
@@ -97,11 +143,26 @@ namespace System
                 {
                     // Reserved chars according to rfc 3987
                     case UriComponents.UserInfo:
-                        if (ch == '/' || ch == '?' || ch == '#' || ch == '[' || ch == ']' || ch == '@')
+                        if (
+                            ch == '/'
+                            || ch == '?'
+                            || ch == '#'
+                            || ch == '['
+                            || ch == ']'
+                            || ch == '@'
+                        )
                             return true;
                         break;
                     case UriComponents.Host:
-                        if (ch == ':' || ch == '/' || ch == '?' || ch == '#' || ch == '[' || ch == ']' || ch == '@')
+                        if (
+                            ch == ':'
+                            || ch == '/'
+                            || ch == '?'
+                            || ch == '#'
+                            || ch == '['
+                            || ch == ']'
+                            || ch == '@'
+                        )
                             return true;
                         break;
                     case UriComponents.Path:
@@ -122,14 +183,18 @@ namespace System
                 return false;
             }
         }
-        
+
         //
-        // IRI normalization for strings containing characters that are not allowed or 
+        // IRI normalization for strings containing characters that are not allowed or
         // escaped characters that should be unescaped in the context of the specified Uri component.
         //
-        internal static unsafe string EscapeUnescapeIri(char* pInput, int start, int end, UriComponents component)
+        internal static unsafe string EscapeUnescapeIri(
+            char* pInput,
+            int start,
+            int end,
+            UriComponents component
+        )
         {
-
             char[] dest = new char[end - start];
             byte[] bytes = null;
 
@@ -138,7 +203,7 @@ namespace System
             char* pDest = (char*)destHandle.AddrOfPinnedObject();
 
             const int percentEncodingLen = 3; // Escaped UTF-8 will take 3 chars: %AB.
-            const int bufferCapacityIncrease = 30 * percentEncodingLen; 
+            const int bufferCapacityIncrease = 30 * percentEncodingLen;
             int bufferRemaining = 0;
 
             int next = start;
@@ -157,9 +222,14 @@ namespace System
                     if (next + 2 < end)
                     {
                         ch = UriHelper.EscapedAscii(pInput[next + 1], pInput[next + 2]);
-                                                
+
                         // Do not unescape a reserved char
-                        if (ch == Uri.c_DummyChar || ch == '%' || CheckIsReserved(ch, component) || UriHelper.IsNotSafeForUnescape(ch))
+                        if (
+                            ch == Uri.c_DummyChar
+                            || ch == '%'
+                            || CheckIsReserved(ch, component)
+                            || UriHelper.IsNotSafeForUnescape(ch)
+                        )
                         {
                             // keep as is
                             Debug.Assert(dest.Length > destOffset, "Buffer overrun detected");
@@ -221,37 +291,51 @@ namespace System
                             }
                             next--; // for loop will increment
 
-
                             // Using encoder with no replacement fall-back will skip all invalid UTF-8 sequences.
                             Encoding noFallbackCharUTF8 = (Encoding)Encoding.UTF8.Clone();
                             noFallbackCharUTF8.EncoderFallback = new EncoderReplacementFallback("");
                             noFallbackCharUTF8.DecoderFallback = new DecoderReplacementFallback("");
 
                             char[] unescapedChars = new char[bytes.Length];
-                            int charCount = noFallbackCharUTF8.GetChars(bytes, 0, byteCount, unescapedChars, 0);
-
+                            int charCount = noFallbackCharUTF8.GetChars(
+                                bytes,
+                                0,
+                                byteCount,
+                                unescapedChars,
+                                0
+                            );
 
                             if (charCount != 0)
                             {
-                                // If invalid sequences were present in the original escaped string, we need to 
+                                // If invalid sequences were present in the original escaped string, we need to
                                 // copy the escaped versions of those sequences.
                                 // Decoded Unicode values will be kept only when they are allowed by the URI/IRI RFC
                                 // rules.
-                                UriHelper.MatchUTF8Sequence(pDest, dest, ref destOffset, unescapedChars, charCount, bytes,
-                                    byteCount, component == UriComponents.Query, true);
+                                UriHelper.MatchUTF8Sequence(
+                                    pDest,
+                                    dest,
+                                    ref destOffset,
+                                    unescapedChars,
+                                    charCount,
+                                    bytes,
+                                    byteCount,
+                                    component == UriComponents.Query,
+                                    true
+                                );
                             }
                             else
                             {
                                 // copy escaped sequence as is
                                 for (int i = startSeq; i <= next; ++i)
                                 {
-                                    Debug.Assert(dest.Length > destOffset, "Buffer overrun detected");
+                                    Debug.Assert(
+                                        dest.Length > destOffset,
+                                        "Buffer overrun detected"
+                                    );
                                     pDest[destOffset++] = pInput[i];
                                 }
                             }
-
                         }
-
                     }
                     else
                     {
@@ -268,7 +352,12 @@ namespace System
                     if ((Char.IsHighSurrogate(ch)) && (next + 1 < end))
                     {
                         ch2 = pInput[next + 1];
-                        escape = !CheckIriUnicodeRange(ch, ch2, ref surrogatePair, component == UriComponents.Query);
+                        escape = !CheckIriUnicodeRange(
+                            ch,
+                            ch2,
+                            ref surrogatePair,
+                            component == UriComponents.Query
+                        );
                         if (!escape)
                         {
                             // copy the two chars
@@ -310,14 +399,13 @@ namespace System
                     if (bufferRemaining < maxNumberOfBytesEncoded * percentEncodingLen)
                     {
                         int newBufferLength = 0;
-
                         checked
                         {
                             // may need more memory since we didn't anticipate escaping
                             newBufferLength = dest.Length + bufferCapacityIncrease;
                             bufferRemaining += bufferCapacityIncrease;
                         }
-                        
+
                         char[] newDest = new char[newBufferLength];
 
                         fixed (char* pNewDest = newDest)
@@ -325,10 +413,10 @@ namespace System
 #if !UT_PUBLIC_DEPENDS
                             Buffer.Memcpy((byte*)pNewDest, (byte*)pDest, destOffset * sizeof(char));
 #else
-                            for (int idx=0; idx<destOffset; idx++)
+                            for (int idx = 0; idx < destOffset; idx++)
                             {
                                 pNewDest[idx] = pDest[idx];
-                            }                            
+                            }
 #endif
                         }
 
@@ -347,14 +435,26 @@ namespace System
                     byte[] encodedBytes = new byte[maxNumberOfBytesEncoded];
                     fixed (byte* pEncodedBytes = encodedBytes)
                     {
-                        int encodedBytesCount = Encoding.UTF8.GetBytes(pInput + next, surrogatePair ? 2 : 1, pEncodedBytes, maxNumberOfBytesEncoded);
-                        Debug.Assert(encodedBytesCount <= maxNumberOfBytesEncoded, "UTF8 encoder should not exceed specified byteCount");
+                        int encodedBytesCount = Encoding.UTF8.GetBytes(
+                            pInput + next,
+                            surrogatePair ? 2 : 1,
+                            pEncodedBytes,
+                            maxNumberOfBytesEncoded
+                        );
+                        Debug.Assert(
+                            encodedBytesCount <= maxNumberOfBytesEncoded,
+                            "UTF8 encoder should not exceed specified byteCount"
+                        );
 
                         bufferRemaining -= encodedBytesCount * percentEncodingLen;
 
                         for (int count = 0; count < encodedBytesCount; ++count)
                         {
-                            UriHelper.EscapeAsciiChar((char)encodedBytes[count], dest, ref destOffset);
+                            UriHelper.EscapeAsciiChar(
+                                (char)encodedBytes[count],
+                                dest,
+                                ref destOffset
+                            );
                         }
                     }
                 }

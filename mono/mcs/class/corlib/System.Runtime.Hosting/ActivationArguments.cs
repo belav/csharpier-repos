@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,67 +29,67 @@
 using System.Runtime.InteropServices;
 using System.Security.Policy;
 
-namespace System.Runtime.Hosting {
+namespace System.Runtime.Hosting
+{
+    [Serializable]
+    [ComVisible(true)]
+    public sealed class ActivationArguments : EvidenceBase
+    {
+        private ActivationContext _context;
+        private ApplicationIdentity _identity;
+        private string[] _data;
 
-	[Serializable]
-	[ComVisible (true)]
-	public sealed class ActivationArguments
-		: EvidenceBase
-	{
+        public ActivationArguments(ActivationContext activationData)
+        {
+            if (activationData == null)
+                throw new ArgumentNullException("activationData");
 
-		private ActivationContext _context;
-		private ApplicationIdentity _identity;
-		private string[] _data;
+            _context = activationData;
+            _identity = activationData.Identity;
+        }
 
-		public ActivationArguments (ActivationContext activationData)
-		{
-			if (activationData == null)
-				throw new ArgumentNullException ("activationData");
+        public ActivationArguments(ApplicationIdentity applicationIdentity)
+        {
+            if (applicationIdentity == null)
+                throw new ArgumentNullException("applicationIdentity");
 
-			_context = activationData;
-			_identity = activationData.Identity;
-		}
+            _identity = applicationIdentity;
+        }
 
-		public ActivationArguments (ApplicationIdentity applicationIdentity)
-		{
-			if (applicationIdentity == null)
-				throw new ArgumentNullException ("applicationIdentity");
+        public ActivationArguments(ActivationContext activationContext, string[] activationData)
+        {
+            if (activationContext == null)
+                throw new ArgumentNullException("activationContext");
 
-			_identity = applicationIdentity;
-		}
+            _context = activationContext;
+            _identity = activationContext.Identity;
+            _data = activationData;
+        }
 
-		public ActivationArguments (ActivationContext activationContext, string[] activationData)
-		{
-			if (activationContext == null)
-				throw new ArgumentNullException ("activationContext");
+        public ActivationArguments(ApplicationIdentity applicationIdentity, string[] activationData)
+        {
+            if (applicationIdentity == null)
+                throw new ArgumentNullException("applicationIdentity");
 
-			_context = activationContext;
-			_identity = activationContext.Identity;
-			_data = activationData;
-		}
+            _identity = applicationIdentity;
+            _data = activationData;
+        }
 
-		public ActivationArguments (ApplicationIdentity applicationIdentity, string[] activationData)
-		{
-			if (applicationIdentity == null)
-				throw new ArgumentNullException ("applicationIdentity");
+        // properties
 
-			_identity = applicationIdentity;
-			_data = activationData;
-		}
+        public ActivationContext ActivationContext
+        {
+            get { return _context; }
+        }
 
-		// properties
+        public string[] ActivationData
+        {
+            get { return _data; }
+        }
 
-		public ActivationContext ActivationContext {
-			get { return _context; }
-		}
-
-		public string[] ActivationData {
-			get { return _data; }
-		}
-
-		public ApplicationIdentity ApplicationIdentity {
-			get { return _identity; }
-		}
-	}
+        public ApplicationIdentity ApplicationIdentity
+        {
+            get { return _identity; }
+        }
+    }
 }
-

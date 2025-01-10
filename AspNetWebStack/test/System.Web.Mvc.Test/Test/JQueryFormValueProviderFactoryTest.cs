@@ -13,22 +13,25 @@ namespace System.Web.Mvc.Test
         private static readonly NameValueCollection _backingStore = new NameValueCollection()
         {
             { "foo", "fooValue" },
-            { "fooArray[0][bar1]", "fooArrayValue"}
+            { "fooArray[0][bar1]", "fooArrayValue" },
         };
 
-        private static readonly NameValueCollection _unvalidatedBackingStore = new NameValueCollection()
-        {
-            { "foo", "fooUnvalidated" },
-            { "fooArray[0][bar1][0][nested]", "fooNestedUnvalidatedValue" }
-        };
+        private static readonly NameValueCollection _unvalidatedBackingStore =
+            new NameValueCollection()
+            {
+                { "foo", "fooUnvalidated" },
+                { "fooArray[0][bar1][0][nested]", "fooNestedUnvalidatedValue" },
+            };
 
         [Fact]
         public void GetValueProvider()
         {
             // Arrange
-            Mock<MockableUnvalidatedRequestValues> mockUnvalidatedValues = new Mock<MockableUnvalidatedRequestValues>();
-            JQueryFormValueProviderFactory factory = 
-                        new JQueryFormValueProviderFactory(_ => mockUnvalidatedValues.Object);
+            Mock<MockableUnvalidatedRequestValues> mockUnvalidatedValues =
+                new Mock<MockableUnvalidatedRequestValues>();
+            JQueryFormValueProviderFactory factory = new JQueryFormValueProviderFactory(_ =>
+                mockUnvalidatedValues.Object
+            );
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.Setup(o => o.HttpContext.Request.Form).Returns(_backingStore);
@@ -49,21 +52,26 @@ namespace System.Web.Mvc.Test
         public void GetValueProvider_GetValue_SkipValidation()
         {
             // Arrange
-            Mock<MockableUnvalidatedRequestValues> mockUnvalidatedValues = new Mock<MockableUnvalidatedRequestValues>();
+            Mock<MockableUnvalidatedRequestValues> mockUnvalidatedValues =
+                new Mock<MockableUnvalidatedRequestValues>();
             mockUnvalidatedValues.Setup(o => o.Form).Returns(_unvalidatedBackingStore);
-            JQueryFormValueProviderFactory factory = 
-                        new JQueryFormValueProviderFactory(_ => mockUnvalidatedValues.Object);
+            JQueryFormValueProviderFactory factory = new JQueryFormValueProviderFactory(_ =>
+                mockUnvalidatedValues.Object
+            );
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.Setup(o => o.HttpContext.Request.Form).Returns(_backingStore);
 
             // Act
-            IUnvalidatedValueProvider valueProvider = 
-                        (IUnvalidatedValueProvider)factory.GetValueProvider(mockControllerContext.Object);
+            IUnvalidatedValueProvider valueProvider = (IUnvalidatedValueProvider)
+                factory.GetValueProvider(mockControllerContext.Object);
 
             // Assert
             Assert.Equal(typeof(JQueryFormValueProvider), valueProvider.GetType());
-            ValueProviderResult vpResult = valueProvider.GetValue("fooArray[0].bar1[0].nested", skipValidation: true);
+            ValueProviderResult vpResult = valueProvider.GetValue(
+                "fooArray[0].bar1[0].nested",
+                skipValidation: true
+            );
 
             Assert.NotNull(vpResult);
             Assert.Equal("fooNestedUnvalidatedValue", vpResult.AttemptedValue);
@@ -78,7 +86,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { factory.GetValueProvider(null); }, "controllerContext");
+                delegate
+                {
+                    factory.GetValueProvider(null);
+                },
+                "controllerContext"
+            );
         }
     }
 }

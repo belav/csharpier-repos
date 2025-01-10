@@ -47,10 +47,7 @@ public class BadRequestOfTResultTests
     {
         // Arrange
         var result = new BadRequest<string>("Hello");
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices() };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -68,10 +65,7 @@ public class BadRequestOfTResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream },
         };
 
         // Act
@@ -85,13 +79,10 @@ public class BadRequestOfTResultTests
     public async Task BadRequestObjectResult_ExecuteResultAsync_UsesStatusCodeFromResultTypeForProblemDetails()
     {
         // Arrange
-        var details = new ProblemDetails { Status = StatusCodes.Status422UnprocessableEntity, };
+        var details = new ProblemDetails { Status = StatusCodes.Status422UnprocessableEntity };
         var result = new BadRequest<ProblemDetails>(details);
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices() };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -106,15 +97,24 @@ public class BadRequestOfTResultTests
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        BadRequest<Todo> MyApi() { throw new NotImplementedException(); }
+        BadRequest<Todo> MyApi()
+        {
+            throw new NotImplementedException();
+        }
         var metadata = new List<object>();
-        var builder = new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0);
+        var builder = new RouteEndpointBuilder(
+            requestDelegate: null,
+            RoutePatternFactory.Parse("/"),
+            order: 0
+        );
 
         // Act
         PopulateMetadata<BadRequest<Todo>>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         // Assert
-        var producesResponseTypeMetadata = builder.Metadata.OfType<ProducesResponseTypeMetadata>().Last();
+        var producesResponseTypeMetadata = builder
+            .Metadata.OfType<ProducesResponseTypeMetadata>()
+            .Last();
         Assert.Equal(StatusCodes.Status400BadRequest, producesResponseTypeMetadata.StatusCode);
         Assert.Equal(typeof(Todo), producesResponseTypeMetadata.Type);
         Assert.Single(producesResponseTypeMetadata.ContentTypes, "application/json");
@@ -128,15 +128,38 @@ public class BadRequestOfTResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>("method", () => PopulateMetadata<BadRequest<object>>(null, new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0)));
-        Assert.Throws<ArgumentNullException>("builder", () => PopulateMetadata<BadRequest<object>>(((Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull).GetMethodInfo(), null));
+        Assert.Throws<ArgumentNullException>(
+            "method",
+            () =>
+                PopulateMetadata<BadRequest<object>>(
+                    null,
+                    new RouteEndpointBuilder(
+                        requestDelegate: null,
+                        RoutePatternFactory.Parse("/"),
+                        order: 0
+                    )
+                )
+        );
+        Assert.Throws<ArgumentNullException>(
+            "builder",
+            () =>
+                PopulateMetadata<BadRequest<object>>(
+                    (
+                        (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
+                    ).GetMethodInfo(),
+                    null
+                )
+        );
     }
 
     [Fact]
@@ -166,7 +189,9 @@ public class BadRequestOfTResultTests
         var value = "Foo";
 
         // Assert
-        var result = Assert.IsAssignableFrom<IValueHttpResult<string>>(new BadRequest<string>(value));
+        var result = Assert.IsAssignableFrom<IValueHttpResult<string>>(
+            new BadRequest<string>(value)
+        );
         Assert.IsType<string>(result.Value);
         Assert.Equal(value, result.Value);
     }

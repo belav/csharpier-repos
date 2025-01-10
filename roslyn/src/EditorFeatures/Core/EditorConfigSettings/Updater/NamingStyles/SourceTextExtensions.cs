@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
 {
     internal static class SourceTextExtensions
     {
-        public static SourceText WithNamingStyles(this SourceText sourceText, IGlobalOptionService globalOptions)
+        public static SourceText WithNamingStyles(
+            this SourceText sourceText,
+            IGlobalOptionService globalOptions
+        )
         {
             var (common, csharp, visualBasic) = GetPreferencesForAllLanguages(globalOptions);
 
@@ -29,7 +32,11 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             return WithNamingStyles(sourceText, common, Language.CSharp | Language.VisualBasic);
         }
 
-        private static SourceText WithNamingStyles(SourceText sourceText, IEnumerable<NamingRule> rules, Language language)
+        private static SourceText WithNamingStyles(
+            SourceText sourceText,
+            IEnumerable<NamingRule> rules,
+            Language language
+        )
         {
             if (rules.Any())
             {
@@ -38,7 +45,11 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                 if (parseResult.TryGetSectionForLanguage(language, out var existingSection))
                 {
                     var span = new TextSpan(existingSection.Span.End, 0);
-                    EditorConfigFileGenerator.AppendNamingStylePreferencesToEditorConfig(rules, newNamingStyleSection, GetLanguageString(language));
+                    EditorConfigFileGenerator.AppendNamingStylePreferencesToEditorConfig(
+                        rules,
+                        newNamingStyleSection,
+                        GetLanguageString(language)
+                    );
                     return WithChanges(sourceText, span, newNamingStyleSection.ToString());
                 }
                 else
@@ -46,7 +57,11 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                     var span = new TextSpan(sourceText.Length, 0);
                     newNamingStyleSection.Append("\r\n");
                     newNamingStyleSection.Append(Section.GetHeaderTextForLanguage(language));
-                    EditorConfigFileGenerator.AppendNamingStylePreferencesToEditorConfig(rules, newNamingStyleSection, GetLanguageString(language));
+                    EditorConfigFileGenerator.AppendNamingStylePreferencesToEditorConfig(
+                        rules,
+                        newNamingStyleSection,
+                        GetLanguageString(language)
+                    );
                     return WithChanges(sourceText, span, newNamingStyleSection.ToString());
                 }
             }
@@ -78,74 +93,127 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             }
         }
 
-        private static (IEnumerable<NamingRule> Common, IEnumerable<NamingRule> CSharp, IEnumerable<NamingRule> VisualBasic) GetPreferencesForAllLanguages(IGlobalOptionService globalOptions)
+        private static (
+            IEnumerable<NamingRule> Common,
+            IEnumerable<NamingRule> CSharp,
+            IEnumerable<NamingRule> VisualBasic
+        ) GetPreferencesForAllLanguages(IGlobalOptionService globalOptions)
         {
-            var csharpNamingStylePreferences = globalOptions.GetOption(NamingStyleOptions.NamingPreferences, LanguageNames.CSharp);
-            var vbNamingStylePreferences = globalOptions.GetOption(NamingStyleOptions.NamingPreferences, LanguageNames.VisualBasic);
+            var csharpNamingStylePreferences = globalOptions.GetOption(
+                NamingStyleOptions.NamingPreferences,
+                LanguageNames.CSharp
+            );
+            var vbNamingStylePreferences = globalOptions.GetOption(
+                NamingStyleOptions.NamingPreferences,
+                LanguageNames.VisualBasic
+            );
 
-            var commonOptions = GetCommonOptions(csharpNamingStylePreferences, vbNamingStylePreferences);
-            var csharpOnlyOptions = GetOptionsUniqueOptions(csharpNamingStylePreferences, commonOptions);
+            var commonOptions = GetCommonOptions(
+                csharpNamingStylePreferences,
+                vbNamingStylePreferences
+            );
+            var csharpOnlyOptions = GetOptionsUniqueOptions(
+                csharpNamingStylePreferences,
+                commonOptions
+            );
             var vbOnlyOptions = GetOptionsUniqueOptions(vbNamingStylePreferences, commonOptions);
             return (commonOptions, csharpOnlyOptions, vbOnlyOptions);
 
-            static IEnumerable<NamingRule> GetCommonOptions(NamingStylePreferences csharp, NamingStylePreferences visualBasic)
-                => csharp.Rules.NamingRules.Intersect(visualBasic.Rules.NamingRules, NamingRuleComparerIgnoreGUIDs.Instance);
+            static IEnumerable<NamingRule> GetCommonOptions(
+                NamingStylePreferences csharp,
+                NamingStylePreferences visualBasic
+            ) =>
+                csharp.Rules.NamingRules.Intersect(
+                    visualBasic.Rules.NamingRules,
+                    NamingRuleComparerIgnoreGUIDs.Instance
+                );
 
-            static IEnumerable<NamingRule> GetOptionsUniqueOptions(NamingStylePreferences csharp, IEnumerable<NamingRule> common)
-                => csharp.Rules.NamingRules.Except(common, NamingRuleComparerIgnoreGUIDs.Instance);
+            static IEnumerable<NamingRule> GetOptionsUniqueOptions(
+                NamingStylePreferences csharp,
+                IEnumerable<NamingRule> common
+            ) => csharp.Rules.NamingRules.Except(common, NamingRuleComparerIgnoreGUIDs.Instance);
         }
 
         private class NamingRuleComparerIgnoreGUIDs : IEqualityComparer<NamingRule>
         {
-            private static readonly Lazy<NamingRuleComparerIgnoreGUIDs> s_lazyInstance = new(() => new NamingRuleComparerIgnoreGUIDs());
+            private static readonly Lazy<NamingRuleComparerIgnoreGUIDs> s_lazyInstance = new(
+                () => new NamingRuleComparerIgnoreGUIDs()
+            );
 
             public static NamingRuleComparerIgnoreGUIDs Instance => s_lazyInstance.Value;
 
             public bool Equals(NamingRule left, NamingRule right)
             {
-                return left.EnforcementLevel == right.EnforcementLevel &&
-                       NamingStyleComparerIgnoreGUIDs.Instance.Equals(left.NamingStyle, right.NamingStyle) &&
-                       SymbolSpecificationComparerIgnoreGUIDs.Instance.Equals(left.SymbolSpecification, right.SymbolSpecification);
+                return left.EnforcementLevel == right.EnforcementLevel
+                    && NamingStyleComparerIgnoreGUIDs.Instance.Equals(
+                        left.NamingStyle,
+                        right.NamingStyle
+                    )
+                    && SymbolSpecificationComparerIgnoreGUIDs.Instance.Equals(
+                        left.SymbolSpecification,
+                        right.SymbolSpecification
+                    );
             }
 
             public int GetHashCode(NamingRule rule)
             {
                 var enforcementLevelHashCode = (int)rule.EnforcementLevel;
-                var namingStyleHashCode = NamingStyleComparerIgnoreGUIDs.Instance.GetHashCode(rule.NamingStyle);
-                var symbolSpecificationHashCode = SymbolSpecificationComparerIgnoreGUIDs.Instance.GetHashCode(rule.SymbolSpecification);
-                return Hash.Combine(enforcementLevelHashCode, Hash.Combine(namingStyleHashCode, symbolSpecificationHashCode));
+                var namingStyleHashCode = NamingStyleComparerIgnoreGUIDs.Instance.GetHashCode(
+                    rule.NamingStyle
+                );
+                var symbolSpecificationHashCode =
+                    SymbolSpecificationComparerIgnoreGUIDs.Instance.GetHashCode(
+                        rule.SymbolSpecification
+                    );
+                return Hash.Combine(
+                    enforcementLevelHashCode,
+                    Hash.Combine(namingStyleHashCode, symbolSpecificationHashCode)
+                );
             }
 
             private class NamingStyleComparerIgnoreGUIDs : IEqualityComparer<NamingStyle>
             {
-                private static readonly Lazy<NamingStyleComparerIgnoreGUIDs> s_lazyInstance = new(() => new NamingStyleComparerIgnoreGUIDs());
+                private static readonly Lazy<NamingStyleComparerIgnoreGUIDs> s_lazyInstance = new(
+                    () => new NamingStyleComparerIgnoreGUIDs()
+                );
 
                 public static NamingStyleComparerIgnoreGUIDs Instance => s_lazyInstance.Value;
 
                 public bool Equals(NamingStyle left, NamingStyle right)
                 {
-                    return StringComparer.OrdinalIgnoreCase.Equals(left.Name, right.Name) &&
-                           StringComparer.Ordinal.Equals(left.Prefix, right.Prefix) &&
-                           StringComparer.Ordinal.Equals(left.Suffix, right.Suffix) &&
-                           StringComparer.Ordinal.Equals(left.WordSeparator, right.WordSeparator) &&
-                           left.CapitalizationScheme == right.CapitalizationScheme;
+                    return StringComparer.OrdinalIgnoreCase.Equals(left.Name, right.Name)
+                        && StringComparer.Ordinal.Equals(left.Prefix, right.Prefix)
+                        && StringComparer.Ordinal.Equals(left.Suffix, right.Suffix)
+                        && StringComparer.Ordinal.Equals(left.WordSeparator, right.WordSeparator)
+                        && left.CapitalizationScheme == right.CapitalizationScheme;
                 }
 
                 public int GetHashCode(NamingStyle style)
                 {
-                    return Hash.Combine(StringComparer.OrdinalIgnoreCase.GetHashCode(style.Name),
-                        Hash.Combine(StringComparer.Ordinal.GetHashCode(style.Prefix),
-                            Hash.Combine(StringComparer.Ordinal.GetHashCode(style.Suffix),
-                                Hash.Combine(StringComparer.Ordinal.GetHashCode(style.WordSeparator),
-                                    (int)style.CapitalizationScheme))));
+                    return Hash.Combine(
+                        StringComparer.OrdinalIgnoreCase.GetHashCode(style.Name),
+                        Hash.Combine(
+                            StringComparer.Ordinal.GetHashCode(style.Prefix),
+                            Hash.Combine(
+                                StringComparer.Ordinal.GetHashCode(style.Suffix),
+                                Hash.Combine(
+                                    StringComparer.Ordinal.GetHashCode(style.WordSeparator),
+                                    (int)style.CapitalizationScheme
+                                )
+                            )
+                        )
+                    );
                 }
             }
 
-            private class SymbolSpecificationComparerIgnoreGUIDs : IEqualityComparer<SymbolSpecification>
+            private class SymbolSpecificationComparerIgnoreGUIDs
+                : IEqualityComparer<SymbolSpecification>
             {
-                private static readonly Lazy<SymbolSpecificationComparerIgnoreGUIDs> s_lazyInstance = new(() => new SymbolSpecificationComparerIgnoreGUIDs());
+                private static readonly Lazy<SymbolSpecificationComparerIgnoreGUIDs> s_lazyInstance =
+                    new(() => new SymbolSpecificationComparerIgnoreGUIDs());
 
-                public static SymbolSpecificationComparerIgnoreGUIDs Instance => s_lazyInstance.Value;
+                public static SymbolSpecificationComparerIgnoreGUIDs Instance =>
+                    s_lazyInstance.Value;
 
                 public bool Equals(SymbolSpecification? left, SymbolSpecification? right)
                 {
@@ -159,18 +227,28 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                         return false;
                     }
 
-                    return StringComparer.OrdinalIgnoreCase.Equals(left!.Name, right!.Name) &&
-                           left.RequiredModifierList.SequenceEqual(right.RequiredModifierList) &&
-                           left.ApplicableAccessibilityList.SequenceEqual(right.ApplicableAccessibilityList) &&
-                           left.ApplicableSymbolKindList.SequenceEqual(right.ApplicableSymbolKindList);
+                    return StringComparer.OrdinalIgnoreCase.Equals(left!.Name, right!.Name)
+                        && left.RequiredModifierList.SequenceEqual(right.RequiredModifierList)
+                        && left.ApplicableAccessibilityList.SequenceEqual(
+                            right.ApplicableAccessibilityList
+                        )
+                        && left.ApplicableSymbolKindList.SequenceEqual(
+                            right.ApplicableSymbolKindList
+                        );
                 }
 
                 public int GetHashCode(SymbolSpecification symbolSpecification)
                 {
-                    return Hash.Combine(StringComparer.OrdinalIgnoreCase.GetHashCode(symbolSpecification.Name),
-                        Hash.Combine(Hash.CombineValues(symbolSpecification.RequiredModifierList),
-                            Hash.Combine(Hash.CombineValues(symbolSpecification.ApplicableAccessibilityList),
-                                Hash.CombineValues(symbolSpecification.ApplicableSymbolKindList))));
+                    return Hash.Combine(
+                        StringComparer.OrdinalIgnoreCase.GetHashCode(symbolSpecification.Name),
+                        Hash.Combine(
+                            Hash.CombineValues(symbolSpecification.RequiredModifierList),
+                            Hash.Combine(
+                                Hash.CombineValues(symbolSpecification.ApplicableAccessibilityList),
+                                Hash.CombineValues(symbolSpecification.ApplicableSymbolKindList)
+                            )
+                        )
+                    );
                 }
             }
         }

@@ -5,12 +5,12 @@
 namespace System.IdentityModel
 {
     using System;
+    using System.IdentityModel.Configuration;
+    using System.IdentityModel.Protocols.WSTrust;
     using System.IdentityModel.Tokens;
     using System.Security.Claims;
     using RST = System.IdentityModel.Protocols.WSTrust.RequestSecurityToken;
     using RSTR = System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse;
-    using System.IdentityModel.Protocols.WSTrust;
-    using System.IdentityModel.Configuration;
 
     /// <summary>
     /// Abstract class for building WS-Security token services.
@@ -37,7 +37,9 @@ namespace System.IdentityModel
             {
                 if (null == federatedAsyncState)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("FederatedAsyncState");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "FederatedAsyncState"
+                    );
                 }
 
                 _request = federatedAsyncState.Request;
@@ -75,10 +77,7 @@ namespace System.IdentityModel
             /// </summary>
             public RST Request
             {
-                get
-                {
-                    return _request;
-                }
+                get { return _request; }
             }
 
             /// <summary>
@@ -86,10 +85,7 @@ namespace System.IdentityModel
             /// </summary>
             public ClaimsPrincipal ClaimsPrincipal
             {
-                get
-                {
-                    return _claimsPrincipal;
-                }
+                get { return _claimsPrincipal; }
             }
 
             /// <summary>
@@ -106,10 +102,7 @@ namespace System.IdentityModel
             /// </summary>
             public IAsyncResult Result
             {
-                get
-                {
-                    return _result;
-                }
+                get { return _result; }
             }
         }
 
@@ -126,11 +119,15 @@ namespace System.IdentityModel
         /// Use this constructor to initialize scope provider and token issuer certificate.
         /// </summary>
         /// <param name="securityTokenServiceConfiguration">The SecurityTokenServiceConfiguration that will have the related settings for the STS.</param>
-        protected SecurityTokenService(SecurityTokenServiceConfiguration securityTokenServiceConfiguration)
+        protected SecurityTokenService(
+            SecurityTokenServiceConfiguration securityTokenServiceConfiguration
+        )
         {
             if (securityTokenServiceConfiguration == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityTokenServiceConfiguration");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenServiceConfiguration"
+                );
             }
 
             _securityTokenServiceConfiguration = securityTokenServiceConfiguration;
@@ -140,14 +137,23 @@ namespace System.IdentityModel
         /// Async Cancel.
         /// </summary>
         /// <param name="principal">The identity of the token requestor.</param>
-        /// <param name="request">The security token request which includes request message as well as other client 
+        /// <param name="request">The security token request which includes request message as well as other client
         /// related information such as authorization context.</param>
         /// <param name="callback">The async call back.</param>
         /// <param name="state">The state object.</param>
         /// <returns>The async result.</returns>
-        public virtual IAsyncResult BeginCancel(ClaimsPrincipal principal, RST request, AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginCancel(
+            ClaimsPrincipal principal,
+            RST request,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3141, (request != null ? request.RequestType : "Cancel"))));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidRequestException(
+                    SR.GetString(SR.ID3141, (request != null ? request.RequestType : "Cancel"))
+                )
+            );
         }
 
         /// <summary>
@@ -158,23 +164,35 @@ namespace System.IdentityModel
         /// <param name="request">The request.</param>
         /// <param name="callback">The callback to be invoked when the user Asynchronous operation completed.</param>
         /// <param name="state">The state object.</param>
-        /// <returns>IAsyncResult. Represents the status of an asynchronous operation. This will be passed into 
+        /// <returns>IAsyncResult. Represents the status of an asynchronous operation. This will be passed into
         /// EndGetScope.</returns>
-        protected virtual IAsyncResult BeginGetScope(ClaimsPrincipal principal, RST request, AsyncCallback callback, object state)
+        protected virtual IAsyncResult BeginGetScope(
+            ClaimsPrincipal principal,
+            RST request,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException(SR.GetString(SR.ID2081)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(SR.GetString(SR.ID2081))
+            );
         }
 
         /// <summary>
         /// Begins the async call of the Issue request.
         /// </summary>
         /// <param name="principal">The <see cref="ClaimsPrincipal"/> to issue a token for.</param>
-        /// <param name="request">The security token request which includes request message as well as other client 
+        /// <param name="request">The security token request which includes request message as well as other client
         /// related information such as authorization context.</param>
         /// <param name="callback">The async call back.</param>
         /// <param name="state">The state object.</param>
         /// <returns>The async result.</returns>
-        public virtual IAsyncResult BeginIssue(ClaimsPrincipal principal, RST request, AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginIssue(
+            ClaimsPrincipal principal,
+            RST request,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (request == null)
             {
@@ -190,11 +208,15 @@ namespace System.IdentityModel
             ValidateRequest(request);
 
             //
-            // 
+            //
 
 
 
-            FederatedAsyncState asyncState = new FederatedAsyncState(request, principal, new TypedAsyncResult<RSTR>(callback, state));
+            FederatedAsyncState asyncState = new FederatedAsyncState(
+                request,
+                principal,
+                new TypedAsyncResult<RSTR>(callback, state)
+            );
 
             BeginGetScope(principal, request, OnGetScopeComplete, asyncState);
 
@@ -205,28 +227,60 @@ namespace System.IdentityModel
         /// Async Renew.
         /// </summary>
         /// <param name="principal">The <see cref="ClaimsPrincipal"/> to renew.</param>
-        /// <param name="request">The security token request which includes request message as well as other client 
+        /// <param name="request">The security token request which includes request message as well as other client
         /// related information such as authorization context.</param>
         /// <param name="callback">The async call back.</param>
         /// <param name="state">The state object.</param>
         /// <returns>The async result.</returns>
-        public virtual IAsyncResult BeginRenew(ClaimsPrincipal principal, RST request, AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginRenew(
+            ClaimsPrincipal principal,
+            RST request,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3141, (request != null && request.RequestType != null ? request.RequestType : "Renew"))));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidRequestException(
+                    SR.GetString(
+                        SR.ID3141,
+                        (
+                            request != null && request.RequestType != null
+                                ? request.RequestType
+                                : "Renew"
+                        )
+                    )
+                )
+            );
         }
 
         /// <summary>
         /// Async Validate.
         /// </summary>
         /// <param name="principal">The <see cref="ClaimsPrincipal"/> to validate.</param>
-        /// <param name="request">The security token request which includes request message as well as other client 
+        /// <param name="request">The security token request which includes request message as well as other client
         /// related information such as authorization context.</param>
         /// <param name="callback">The async call back.</param>
         /// <param name="state">The state object.</param>
         /// <returns>The async result.</returns>
-        public virtual IAsyncResult BeginValidate(ClaimsPrincipal principal, RST request, AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginValidate(
+            ClaimsPrincipal principal,
+            RST request,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3141, (request != null && request.RequestType != null ? request.RequestType : "Validate"))));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidRequestException(
+                    SR.GetString(
+                        SR.ID3141,
+                        (
+                            request != null && request.RequestType != null
+                                ? request.RequestType
+                                : "Validate"
+                        )
+                    )
+                )
+            );
         }
 
         /// <summary>
@@ -237,7 +291,18 @@ namespace System.IdentityModel
         /// <returns>The response.</returns>
         public virtual RSTR Cancel(ClaimsPrincipal principal, RST request)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3141, (request != null && request.RequestType != null ? request.RequestType : "Cancel"))));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidRequestException(
+                    SR.GetString(
+                        SR.ID3141,
+                        (
+                            request != null && request.RequestType != null
+                                ? request.RequestType
+                                : "Cancel"
+                        )
+                    )
+                )
+            );
         }
 
         /// <summary>
@@ -247,7 +312,10 @@ namespace System.IdentityModel
         /// <param name="scope">The <see cref="Scope"/> object returned from <see cref="SecurityTokenService.GetScope"/>.</param>
         /// <returns>The <see cref="SecurityTokenDescriptor"/>.</returns>
         /// <remarks>Invoked during token issuance after <see cref="SecurityTokenService.GetScope"/>.</remarks>
-        protected virtual SecurityTokenDescriptor CreateSecurityTokenDescriptor(RST request, Scope scope)
+        protected virtual SecurityTokenDescriptor CreateSecurityTokenDescriptor(
+            RST request,
+            Scope scope
+        )
         {
             if (request == null)
             {
@@ -268,24 +336,36 @@ namespace System.IdentityModel
                 d.SigningCredentials = this.SecurityTokenServiceConfiguration.SigningCredentials;
             }
 
-
-
             //
             // The encrypting credentials specified on the Scope object
-            // are invariant relative to a specific RP. Allowing the STS to 
+            // are invariant relative to a specific RP. Allowing the STS to
             // cache the Scope for each RP.
-            // Our default implementation will generate the symmetric bulk 
+            // Our default implementation will generate the symmetric bulk
             // encryption key on the fly.
             //
-            if (scope.EncryptingCredentials != null &&
-                 scope.EncryptingCredentials.SecurityKey is AsymmetricSecurityKey
-                 )
+            if (
+                scope.EncryptingCredentials != null
+                && scope.EncryptingCredentials.SecurityKey is AsymmetricSecurityKey
+            )
             {
-                if ((request.EncryptionAlgorithm == null || request.EncryptionAlgorithm == SecurityAlgorithms.Aes256Encryption) &&
-                    (request.SecondaryParameters == null || request.SecondaryParameters.EncryptionAlgorithm == null || request.SecondaryParameters.EncryptionAlgorithm == SecurityAlgorithms.Aes256Encryption)
+                if (
+                    (
+                        request.EncryptionAlgorithm == null
+                        || request.EncryptionAlgorithm == SecurityAlgorithms.Aes256Encryption
                     )
+                    && (
+                        request.SecondaryParameters == null
+                        || request.SecondaryParameters.EncryptionAlgorithm == null
+                        || request.SecondaryParameters.EncryptionAlgorithm
+                            == SecurityAlgorithms.Aes256Encryption
+                    )
+                )
                 {
-                    d.EncryptingCredentials = new EncryptedKeyEncryptingCredentials(scope.EncryptingCredentials, 256, SecurityAlgorithms.Aes256Encryption);
+                    d.EncryptingCredentials = new EncryptedKeyEncryptingCredentials(
+                        scope.EncryptingCredentials,
+                        256,
+                        SecurityAlgorithms.Aes256Encryption
+                    );
                 }
             }
 
@@ -334,13 +414,17 @@ namespace System.IdentityModel
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("scope");
             }
 
-            EncryptingCredentials requestorWrappingCredentials = GetRequestorProofEncryptingCredentials(request);
+            EncryptingCredentials requestorWrappingCredentials =
+                GetRequestorProofEncryptingCredentials(request);
 
-            if (scope.EncryptingCredentials != null &&
-                  !(scope.EncryptingCredentials.SecurityKey is AsymmetricSecurityKey))
+            if (
+                scope.EncryptingCredentials != null
+                && !(scope.EncryptingCredentials.SecurityKey is AsymmetricSecurityKey)
+            )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new SecurityTokenException(SR.GetString(SR.ID4179)));
+                    new SecurityTokenException(SR.GetString(SR.ID4179))
+                );
             }
 
             EncryptingCredentials targetWrappingCredentials = scope.EncryptingCredentials;
@@ -348,7 +432,8 @@ namespace System.IdentityModel
             //
             // Generate the proof key
             //
-            string keyType = (string.IsNullOrEmpty(request.KeyType)) ? KeyTypes.Symmetric : request.KeyType;
+            string keyType =
+                (string.IsNullOrEmpty(request.KeyType)) ? KeyTypes.Symmetric : request.KeyType;
             ProofDescriptor result = null;
 
             if (StringComparer.Ordinal.Equals(keyType, KeyTypes.Asymmetric))
@@ -358,7 +443,9 @@ namespace System.IdentityModel
                 //
                 if (request.UseKey == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3091)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidRequestException(SR.GetString(SR.ID3091))
+                    );
                 }
 
                 result = new AsymmetricProofDescriptor(request.UseKey.SecurityKeyIdentifier);
@@ -368,22 +455,34 @@ namespace System.IdentityModel
                 //
                 // Only support PSHA1. Overwrite STS to support custom key algorithm
                 //
-                if (request.ComputedKeyAlgorithm != null && !StringComparer.Ordinal.Equals(request.ComputedKeyAlgorithm, ComputedKeyAlgorithms.Psha1))
+                if (
+                    request.ComputedKeyAlgorithm != null
+                    && !StringComparer.Ordinal.Equals(
+                        request.ComputedKeyAlgorithm,
+                        ComputedKeyAlgorithms.Psha1
+                    )
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new RequestFailedException(SR.GetString(SR.ID2011, request.ComputedKeyAlgorithm)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new RequestFailedException(
+                            SR.GetString(SR.ID2011, request.ComputedKeyAlgorithm)
+                        )
+                    );
                 }
                 //
                 // We must wrap the symmetric key inside the security token
                 //
                 if (targetWrappingCredentials == null && scope.SymmetricKeyEncryptionRequired)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new RequestFailedException(SR.GetString(SR.ID4007)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new RequestFailedException(SR.GetString(SR.ID4007))
+                    );
                 }
 
                 //
                 // We are encrypting the proof token or the server entropy using client's encrypting credential if present,
                 // which will be used to encrypt the key during serialization.
-                // Otherwise, we can only send back the key in plain text. However, the current implementation of 
+                // Otherwise, we can only send back the key in plain text. However, the current implementation of
                 // WSTrustServiceContract sets the rst.ProofEncryption = null by default. Therefore, the server entropy
                 // or the proof token will be sent in plain text no matter the client's entropy is sent encrypted or unencrypted.
                 //
@@ -391,18 +490,29 @@ namespace System.IdentityModel
                 {
                     if (request.Entropy != null)
                     {
-                        result = new SymmetricProofDescriptor(request.KeySizeInBits.Value, targetWrappingCredentials, requestorWrappingCredentials,
-                                                               request.Entropy.GetKeyBytes(), request.EncryptWith);
+                        result = new SymmetricProofDescriptor(
+                            request.KeySizeInBits.Value,
+                            targetWrappingCredentials,
+                            requestorWrappingCredentials,
+                            request.Entropy.GetKeyBytes(),
+                            request.EncryptWith
+                        );
                     }
                     else
                     {
-                        result = new SymmetricProofDescriptor(request.KeySizeInBits.Value, targetWrappingCredentials,
-                                                               requestorWrappingCredentials, request.EncryptWith);
+                        result = new SymmetricProofDescriptor(
+                            request.KeySizeInBits.Value,
+                            targetWrappingCredentials,
+                            requestorWrappingCredentials,
+                            request.EncryptWith
+                        );
                     }
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new RequestFailedException(SR.GetString(SR.ID2059)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new RequestFailedException(SR.GetString(SR.ID2059))
+                    );
                 }
             }
             else if (StringComparer.Ordinal.Equals(keyType, KeyTypes.Bearer))
@@ -433,18 +543,23 @@ namespace System.IdentityModel
                 return null;
             }
 
-            X509SecurityToken x509SecurityToken = request.ProofEncryption.GetSecurityToken() as X509SecurityToken;
+            X509SecurityToken x509SecurityToken =
+                request.ProofEncryption.GetSecurityToken() as X509SecurityToken;
             if (x509SecurityToken != null)
             {
                 return new X509EncryptingCredentials(x509SecurityToken);
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new RequestFailedException(SR.GetString(SR.ID2084, request.ProofEncryption.GetSecurityToken())));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new RequestFailedException(
+                    SR.GetString(SR.ID2084, request.ProofEncryption.GetSecurityToken())
+                )
+            );
         }
 
         /// <summary>
         /// Gets the lifetime of the issued token.
-        /// Normally called with the lifetime that arrived in the RST.  
+        /// Normally called with the lifetime that arrived in the RST.
         /// The algorithm for calculating the token lifetime is:
         /// requestLifeTime (in)            LifeTime (returned)
         /// Created     Expires             Created             Expires
@@ -462,7 +577,10 @@ namespace System.IdentityModel
             if (requestLifetime == null)
             {
                 created = DateTime.UtcNow;
-                expires = DateTimeUtil.Add(created, _securityTokenServiceConfiguration.DefaultTokenLifetime);
+                expires = DateTimeUtil.Add(
+                    created,
+                    _securityTokenServiceConfiguration.DefaultTokenLifetime
+                );
             }
             else
             {
@@ -481,7 +599,10 @@ namespace System.IdentityModel
                 }
                 else
                 {
-                    expires = DateTimeUtil.Add(created, _securityTokenServiceConfiguration.DefaultTokenLifetime);
+                    expires = DateTimeUtil.Add(
+                        created,
+                        _securityTokenServiceConfiguration.DefaultTokenLifetime
+                    );
                 }
             }
 
@@ -492,38 +613,63 @@ namespace System.IdentityModel
 
         private void VerifyComputedLifetime(DateTime created, DateTime expires)
         {
-
             DateTime utcNow = DateTime.UtcNow;
 
             // if expires in past, throw
-            if (DateTimeUtil.Add(DateTimeUtil.ToUniversalTime(expires), _securityTokenServiceConfiguration.MaxClockSkew) < utcNow)
+            if (
+                DateTimeUtil.Add(
+                    DateTimeUtil.ToUniversalTime(expires),
+                    _securityTokenServiceConfiguration.MaxClockSkew
+                ) < utcNow
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID2075, created, expires, utcNow)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidRequestException(SR.GetString(SR.ID2075, created, expires, utcNow))
+                );
             }
 
             // if creation time specified is greater than one day in future, throw
-            if (DateTimeUtil.ToUniversalTime(created) > DateTimeUtil.Add(utcNow + TimeSpan.FromDays(1), _securityTokenServiceConfiguration.MaxClockSkew))
+            if (
+                DateTimeUtil.ToUniversalTime(created)
+                > DateTimeUtil.Add(
+                    utcNow + TimeSpan.FromDays(1),
+                    _securityTokenServiceConfiguration.MaxClockSkew
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID2076, created, expires, utcNow)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidRequestException(SR.GetString(SR.ID2076, created, expires, utcNow))
+                );
             }
 
             // if expiration time is equal to or before creation time, throw.  This would be hard to make happen as the Lifetime class checks this condition in the constructor
             if (expires <= created)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID2077, created, expires)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidRequestException(SR.GetString(SR.ID2077, created, expires))
+                );
             }
 
             // if timespan is greater than allowed, throw
             if ((expires - created) > _securityTokenServiceConfiguration.MaximumTokenLifetime)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID2078, created, expires, _securityTokenServiceConfiguration.MaximumTokenLifetime)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidRequestException(
+                        SR.GetString(
+                            SR.ID2078,
+                            created,
+                            expires,
+                            _securityTokenServiceConfiguration.MaximumTokenLifetime
+                        )
+                    )
+                );
             }
 
             return;
         }
 
         /// <summary>
-        /// Creates the RSTR and finally read the information from TokenDescriptor and apply 
+        /// Creates the RSTR and finally read the information from TokenDescriptor and apply
         /// those to the RSTR.
         /// </summary>
         /// <param name="request">The RST from the request.</param>
@@ -536,7 +682,7 @@ namespace System.IdentityModel
                 RSTR rstr = new RSTR(request);
                 tokenDescriptor.ApplyTo(rstr);
 
-                // Set the replyTo address of the relying party (if any) in the outgoing RSTR from the generated 
+                // Set the replyTo address of the relying party (if any) in the outgoing RSTR from the generated
                 // token descriptor (STD)  based on the table below:
                 //
                 // RST.ReplyTo       STD.ReplyToAddress            RSTR.ReplyTo
@@ -552,7 +698,7 @@ namespace System.IdentityModel
                 }
 
                 //
-                // Set the appliesTo address (if any) in the outgoing RSTR from the generated token descriptor. 
+                // Set the appliesTo address (if any) in the outgoing RSTR from the generated token descriptor.
                 //
                 if (!string.IsNullOrEmpty(tokenDescriptor.AppliesToAddress))
                 {
@@ -574,19 +720,23 @@ namespace System.IdentityModel
         /// <returns></returns>
         public virtual RSTR EndCancel(IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3141, "Cancel")));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidRequestException(SR.GetString(SR.ID3141, "Cancel"))
+            );
         }
 
         /// <summary>
         /// Ends the Async call to BeginGetScope. Default implementation will throw a NotImplementedException.
         /// Refer MSDN articles on Using an AsyncCallback Delegate to End an Asynchronous Operation.
         /// </summary>
-        /// <param name="result">Typed Async result which contains the result. This is the same instance of 
+        /// <param name="result">Typed Async result which contains the result. This is the same instance of
         /// IAsyncResult that was returned by the BeginGetScope method.</param>
         /// <returns>The scope.</returns>
         protected virtual Scope EndGetScope(IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException(SR.GetString(SR.ID2081)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(SR.GetString(SR.ID2081))
+            );
         }
 
         /// <summary>
@@ -603,7 +753,11 @@ namespace System.IdentityModel
 
             if (!(result is TypedAsyncResult<RSTR>))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID2012, typeof(TypedAsyncResult<RSTR>), result.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.ID2012, typeof(TypedAsyncResult<RSTR>), result.GetType())
+                    )
+                );
             }
 
             return TypedAsyncResult<RSTR>.End(result);
@@ -616,7 +770,9 @@ namespace System.IdentityModel
         /// <returns></returns>
         public virtual RSTR EndRenew(IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3141, "Renew")));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidRequestException(SR.GetString(SR.ID3141, "Renew"))
+            );
         }
 
         /// <summary>
@@ -626,7 +782,9 @@ namespace System.IdentityModel
         /// <returns></returns>
         public virtual RSTR EndValidate(IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3141, "Validate")));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidRequestException(SR.GetString(SR.ID3141, "Validate"))
+            );
         }
 
         /// <summary>
@@ -645,7 +803,11 @@ namespace System.IdentityModel
         /// <param name="request">The token request parameters that arrived in the call.</param>
         /// <param name="scope">The scope information about the Relying Party.</param>
         /// <returns>The ClaimsIdentity representing the collection of claims that will be placed in the issued security token.</returns>
-        protected abstract ClaimsIdentity GetOutputClaimsIdentity(ClaimsPrincipal principal, RequestSecurityToken request, Scope scope);
+        protected abstract ClaimsIdentity GetOutputClaimsIdentity(
+            ClaimsPrincipal principal,
+            RequestSecurityToken request,
+            Scope scope
+        );
 
         /// <summary>
         /// Begins async call for GetOutputSubjects routine. Default implementation will throw a NotImplementedExcetion.
@@ -656,11 +818,19 @@ namespace System.IdentityModel
         /// <param name="scope">The scope information about the Relying Party.</param>
         /// <param name="callback">The callback to be invoked when the user Asynchronous operation completed.</param>
         /// <param name="state">The state object.</param>
-        /// <returns>IAsyncResult. Represents the status of an asynchronous operation. This will be passed into 
+        /// <returns>IAsyncResult. Represents the status of an asynchronous operation. This will be passed into
         /// EndGetOutputClaimsIdentity.</returns>
-        protected virtual IAsyncResult BeginGetOutputClaimsIdentity(ClaimsPrincipal principal, RequestSecurityToken request, Scope scope, AsyncCallback callback, object state)
+        protected virtual IAsyncResult BeginGetOutputClaimsIdentity(
+            ClaimsPrincipal principal,
+            RequestSecurityToken request,
+            Scope scope,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException(SR.GetString(SR.ID2081)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(SR.GetString(SR.ID2081))
+            );
         }
 
         /// <summary>
@@ -672,7 +842,9 @@ namespace System.IdentityModel
         /// <returns>The claimsets collection that will be placed inside the issued token.</returns>
         protected virtual ClaimsIdentity EndGetOutputClaimsIdentity(IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException(SR.GetString(SR.ID2081)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(SR.GetString(SR.ID2081))
+            );
         }
 
         /// <summary>
@@ -702,7 +874,6 @@ namespace System.IdentityModel
             }
             this.Scope = scope;
 
-
             // Create the security token descriptor now that we have a scope.
             this.SecurityTokenDescriptor = CreateSecurityTokenDescriptor(request, scope);
             if (this.SecurityTokenDescriptor == null)
@@ -718,7 +889,10 @@ namespace System.IdentityModel
             //
             // If TokenEncryptionRequired is set to true, then we must encrypt the token.
             //
-            if (this.Scope.TokenEncryptionRequired && this.SecurityTokenDescriptor.EncryptingCredentials == null)
+            if (
+                this.Scope.TokenEncryptionRequired
+                && this.SecurityTokenDescriptor.EncryptingCredentials == null
+            )
             {
                 throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4184));
             }
@@ -727,9 +901,10 @@ namespace System.IdentityModel
             SecurityTokenHandler securityTokenHandler = GetSecurityTokenHandler(request.TokenType);
             if (securityTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ID4010, request.TokenType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.ID4010, request.TokenType))
+                );
             }
-
 
             // 4. Get the issuer name and populate into tokenDescriptor
             _tokenDescriptor.TokenIssuerName = GetValidIssuerName();
@@ -743,7 +918,7 @@ namespace System.IdentityModel
             // 7. Get the subjects and populate into tokenDescriptor
             _tokenDescriptor.Subject = GetOutputClaimsIdentity(principal, request, scope);
 
-            // use the securityTokenHandler from Step 3 to create and setup the issued token information on the tokenDescriptor 
+            // use the securityTokenHandler from Step 3 to create and setup the issued token information on the tokenDescriptor
             // (actual issued token, AttachedReference and UnattachedReference)
             // TokenType is preserved from the request if possible
             if (!string.IsNullOrEmpty(request.TokenType))
@@ -755,13 +930,19 @@ namespace System.IdentityModel
                 string[] identifiers = securityTokenHandler.GetTokenTypeIdentifiers();
                 if (identifiers == null || identifiers.Length == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4264, request.TokenType)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ID4264, request.TokenType))
+                    );
                 }
                 _tokenDescriptor.TokenType = identifiers[0];
             }
             _tokenDescriptor.Token = securityTokenHandler.CreateToken(_tokenDescriptor);
-            _tokenDescriptor.AttachedReference = securityTokenHandler.CreateSecurityTokenReference(_tokenDescriptor.Token, true);
-            _tokenDescriptor.UnattachedReference = securityTokenHandler.CreateSecurityTokenReference(_tokenDescriptor.Token, false);
+            _tokenDescriptor.AttachedReference = securityTokenHandler.CreateSecurityTokenReference(
+                _tokenDescriptor.Token,
+                true
+            );
+            _tokenDescriptor.UnattachedReference =
+                securityTokenHandler.CreateSecurityTokenReference(_tokenDescriptor.Token, false);
 
             // 9. Create the RSTR
             RSTR rstr = GetResponse(request, _tokenDescriptor);
@@ -776,9 +957,12 @@ namespace System.IdentityModel
         /// <returns>The SecurityTokenHandler to be used for creating the issued security token.</returns>
         protected virtual SecurityTokenHandler GetSecurityTokenHandler(string requestedTokenType)
         {
-            string tokenType = string.IsNullOrEmpty(requestedTokenType) ? _securityTokenServiceConfiguration.DefaultTokenType : requestedTokenType;
+            string tokenType = string.IsNullOrEmpty(requestedTokenType)
+                ? _securityTokenServiceConfiguration.DefaultTokenType
+                : requestedTokenType;
 
-            SecurityTokenHandler securityTokenHandler = _securityTokenServiceConfiguration.SecurityTokenHandlers[tokenType];
+            SecurityTokenHandler securityTokenHandler =
+                _securityTokenServiceConfiguration.SecurityTokenHandlers[tokenType];
             return securityTokenHandler;
         }
 
@@ -798,14 +982,24 @@ namespace System.IdentityModel
             FederatedAsyncState state = result.AsyncState as FederatedAsyncState;
             if (state == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID2001)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID2001))
+                );
             }
 
             Exception unhandledException = null;
             TypedAsyncResult<RSTR> typedResult = state.Result as TypedAsyncResult<RSTR>;
             if (typedResult == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID2004, typeof(TypedAsyncResult<RSTR>), state.Result.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ID2004,
+                            typeof(TypedAsyncResult<RSTR>),
+                            state.Result.GetType()
+                        )
+                    )
+                );
             }
 
             RST request = state.Request;
@@ -839,7 +1033,10 @@ namespace System.IdentityModel
                 //
                 // If TokenEncryptionRequired is set to true, then we must encrypt the token.
                 //
-                if (this.Scope.TokenEncryptionRequired && this.SecurityTokenDescriptor.EncryptingCredentials == null)
+                if (
+                    this.Scope.TokenEncryptionRequired
+                    && this.SecurityTokenDescriptor.EncryptingCredentials == null
+                )
                 {
                     throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4184));
                 }
@@ -847,10 +1044,19 @@ namespace System.IdentityModel
                 //
                 // Step 3: Retrieve the token handler to use for creating token and store it in the state
                 //
-                SecurityTokenHandler securityTokenHandler = GetSecurityTokenHandler(request == null ? null : request.TokenType);
+                SecurityTokenHandler securityTokenHandler = GetSecurityTokenHandler(
+                    request == null ? null : request.TokenType
+                );
                 if (securityTokenHandler == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ID4010, request == null ? String.Empty : request.TokenType)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.ID4010,
+                                request == null ? String.Empty : request.TokenType
+                            )
+                        )
+                    );
                 }
                 state.SecurityTokenHandler = securityTokenHandler;
 
@@ -862,7 +1068,9 @@ namespace System.IdentityModel
                 //
                 // Step 5: Establish token lifetime
                 //
-                _tokenDescriptor.Lifetime = GetTokenLifetime(request == null ? null : request.Lifetime);
+                _tokenDescriptor.Lifetime = GetTokenLifetime(
+                    request == null ? null : request.Lifetime
+                );
 
                 //
                 // Step 6: Compute the proof key
@@ -870,9 +1078,15 @@ namespace System.IdentityModel
                 _tokenDescriptor.Proof = GetProofToken(request, this.Scope);
 
                 //
-                // Start the async call for generating the output subjects. 
+                // Start the async call for generating the output subjects.
                 //
-                BeginGetOutputClaimsIdentity(state.ClaimsPrincipal, state.Request, scope, OnGetOutputClaimsIdentityComplete, state);
+                BeginGetOutputClaimsIdentity(
+                    state.ClaimsPrincipal,
+                    state.Request,
+                    scope,
+                    OnGetOutputClaimsIdentityComplete,
+                    state
+                );
             }
 #pragma warning suppress 56500
             catch (Exception e)
@@ -907,13 +1121,17 @@ namespace System.IdentityModel
             FederatedAsyncState state = result.AsyncState as FederatedAsyncState;
             if (state == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID2001)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID2001))
+                );
             }
 
             SecurityTokenHandler securityTokenHandler = state.SecurityTokenHandler;
             if (securityTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID2016)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID2016))
+                );
             }
 
             Exception unhandledException = null;
@@ -923,7 +1141,15 @@ namespace System.IdentityModel
             TypedAsyncResult<RSTR> typedResult = state.Result as TypedAsyncResult<RSTR>;
             if (typedResult == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID2004, typeof(TypedAsyncResult<RSTR>), state.Result.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ID2004,
+                            typeof(TypedAsyncResult<RSTR>),
+                            state.Result.GetType()
+                        )
+                    )
+                );
             }
 
             try
@@ -939,8 +1165,8 @@ namespace System.IdentityModel
                 _tokenDescriptor.Subject = EndGetOutputClaimsIdentity(result);
 
                 //
-                // Use the retrieved securityTokenHandler to create and setup the issued token information on the tokenDescriptor 
-                // (actual issued token, AttachedReference and UnattachedReference) 
+                // Use the retrieved securityTokenHandler to create and setup the issued token information on the tokenDescriptor
+                // (actual issued token, AttachedReference and UnattachedReference)
                 // TokenType is preserved from the request if possible
                 if (!string.IsNullOrEmpty(request.TokenType))
                 {
@@ -951,13 +1177,22 @@ namespace System.IdentityModel
                     string[] identifiers = securityTokenHandler.GetTokenTypeIdentifiers();
                     if (identifiers == null || identifiers.Length == 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4264, request.TokenType)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ID4264, request.TokenType)
+                            )
+                        );
                     }
                     _tokenDescriptor.TokenType = identifiers[0];
                 }
                 _tokenDescriptor.Token = securityTokenHandler.CreateToken(_tokenDescriptor);
-                _tokenDescriptor.AttachedReference = securityTokenHandler.CreateSecurityTokenReference(_tokenDescriptor.Token, true);
-                _tokenDescriptor.UnattachedReference = securityTokenHandler.CreateSecurityTokenReference(_tokenDescriptor.Token, false);
+                _tokenDescriptor.AttachedReference =
+                    securityTokenHandler.CreateSecurityTokenReference(_tokenDescriptor.Token, true);
+                _tokenDescriptor.UnattachedReference =
+                    securityTokenHandler.CreateSecurityTokenReference(
+                        _tokenDescriptor.Token,
+                        false
+                    );
 
                 // 9. Create the RSTR
                 response = GetResponse(request, _tokenDescriptor);
@@ -975,18 +1210,15 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Gets the Owner configuration instance. 
+        /// Gets the Owner configuration instance.
         /// </summary>
         public SecurityTokenServiceConfiguration SecurityTokenServiceConfiguration
         {
-            get
-            {
-                return _securityTokenServiceConfiguration;
-            }
+            get { return _securityTokenServiceConfiguration; }
         }
 
         /// <summary>
-        /// Gets or sets the ClaimsPrincipal associated with the current instance. 
+        /// Gets or sets the ClaimsPrincipal associated with the current instance.
         /// </summary>
         public ClaimsPrincipal Principal
         {
@@ -995,7 +1227,7 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Gets or sets the RequestSecurityToken associated with the current instance. 
+        /// Gets or sets the RequestSecurityToken associated with the current instance.
         /// </summary>
         public RequestSecurityToken Request
         {
@@ -1006,14 +1238,10 @@ namespace System.IdentityModel
         /// <summary>
         /// Gets or sets the Scope associated with the current instance.
         /// </summary>
-        public Scope Scope
-        {
-            get;
-            set;
-        }
+        public Scope Scope { get; set; }
 
         /// <summary>
-        /// Gets or sets the SecurityTokenDescriptor associated with the current instance. 
+        /// Gets or sets the SecurityTokenDescriptor associated with the current instance.
         /// </summary>
         protected SecurityTokenDescriptor SecurityTokenDescriptor
         {
@@ -1036,7 +1264,18 @@ namespace System.IdentityModel
         /// <returns>The response.</returns>
         public virtual RSTR Renew(ClaimsPrincipal principal, RST request)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3141, (request != null && request.RequestType != null ? request.RequestType : "Renew"))));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidRequestException(
+                    SR.GetString(
+                        SR.ID3141,
+                        (
+                            request != null && request.RequestType != null
+                                ? request.RequestType
+                                : "Renew"
+                        )
+                    )
+                )
+            );
         }
 
         /// <summary>
@@ -1047,7 +1286,18 @@ namespace System.IdentityModel
         /// <returns>The response.</returns>
         public virtual RSTR Validate(ClaimsPrincipal principal, RST request)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3141, (request != null && request.RequestType != null ? request.RequestType : "Validate"))));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidRequestException(
+                    SR.GetString(
+                        SR.ID3141,
+                        (
+                            request != null && request.RequestType != null
+                                ? request.RequestType
+                                : "Validate"
+                        )
+                    )
+                )
+            );
         }
 
         /// <summary>
@@ -1058,34 +1308,49 @@ namespace System.IdentityModel
             // currently we only support RST/RSTR pattern
             if (request == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID2051)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidRequestException(SR.GetString(SR.ID2051))
+                );
             }
 
             // STS only support Issue for now
             if (request.RequestType != null && request.RequestType != RequestTypes.Issue)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID2052)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidRequestException(SR.GetString(SR.ID2052))
+                );
             }
 
             // key type must be one of the known types
             if (request.KeyType != null && !IsKnownType(request.KeyType))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID2053)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidRequestException(SR.GetString(SR.ID2053))
+                );
             }
 
             // if key type is bearer key, we should fault if the KeySize element is present and its value is not equal to zero.
-            if (StringComparer.Ordinal.Equals(request.KeyType, KeyTypes.Bearer) && request.KeySizeInBits.HasValue && (request.KeySizeInBits.Value != 0))
+            if (
+                StringComparer.Ordinal.Equals(request.KeyType, KeyTypes.Bearer)
+                && request.KeySizeInBits.HasValue
+                && (request.KeySizeInBits.Value != 0)
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID2050)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidRequestException(SR.GetString(SR.ID2050))
+                );
             }
 
             // token type must be supported for this STS
             if (GetSecurityTokenHandler(request.TokenType) == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new UnsupportedTokenTypeBadRequestException(request.TokenType));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new UnsupportedTokenTypeBadRequestException(request.TokenType)
+                );
             }
 
-            request.KeyType = (string.IsNullOrEmpty(request.KeyType)) ? KeyTypes.Symmetric : request.KeyType;
+            request.KeyType =
+                (string.IsNullOrEmpty(request.KeyType)) ? KeyTypes.Symmetric : request.KeyType;
 
             if (StringComparer.Ordinal.Equals(request.KeyType, KeyTypes.Symmetric))
             {
@@ -1094,23 +1359,37 @@ namespace System.IdentityModel
                 //
                 if (request.KeySizeInBits.HasValue)
                 {
-                    if (request.KeySizeInBits.Value > _securityTokenServiceConfiguration.DefaultMaxSymmetricKeySizeInBits)
+                    if (
+                        request.KeySizeInBits.Value
+                        > _securityTokenServiceConfiguration.DefaultMaxSymmetricKeySizeInBits
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID2056, request.KeySizeInBits.Value, _securityTokenServiceConfiguration.DefaultMaxSymmetricKeySizeInBits)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidRequestException(
+                                SR.GetString(
+                                    SR.ID2056,
+                                    request.KeySizeInBits.Value,
+                                    _securityTokenServiceConfiguration.DefaultMaxSymmetricKeySizeInBits
+                                )
+                            )
+                        );
                     }
                 }
                 else
                 {
-                    request.KeySizeInBits = _securityTokenServiceConfiguration.DefaultSymmetricKeySizeInBits;
+                    request.KeySizeInBits =
+                        _securityTokenServiceConfiguration.DefaultSymmetricKeySizeInBits;
                 }
             }
         }
 
         static bool IsKnownType(string keyType)
         {
-            return (StringComparer.Ordinal.Equals(keyType, KeyTypes.Symmetric)
-                  || StringComparer.Ordinal.Equals(keyType, KeyTypes.Asymmetric)
-                  || StringComparer.Ordinal.Equals(keyType, KeyTypes.Bearer));
+            return (
+                StringComparer.Ordinal.Equals(keyType, KeyTypes.Symmetric)
+                || StringComparer.Ordinal.Equals(keyType, KeyTypes.Asymmetric)
+                || StringComparer.Ordinal.Equals(keyType, KeyTypes.Bearer)
+            );
         }
     }
 }

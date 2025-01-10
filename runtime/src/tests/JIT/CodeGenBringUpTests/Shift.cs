@@ -72,7 +72,11 @@ public class Test_Shift
 
         if (shr64_32_inplace(0x123456789abcdef, 0) != shr64(0x123456789abcdef, 32))
         {
-            Console.WriteLine("shr64_32 {0:X} {1:X}", shr64_32_inplace(0x123456789abcdef, 0), shr64(0x123456789abcdef, 32));
+            Console.WriteLine(
+                "shr64_32 {0:X} {1:X}",
+                shr64_32_inplace(0x123456789abcdef, 0),
+                shr64(0x123456789abcdef, 32)
+            );
             return Fail;
         }
 

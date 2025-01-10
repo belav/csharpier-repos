@@ -29,7 +29,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, expectedSuccess: false, expectedFailureReason: ChangeSignatureFailureKind.IncorrectKind);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                expectedSuccess: false,
+                expectedFailureReason: ChangeSignatureFailureKind.IncorrectKind
+            );
         }
 
         [Fact]
@@ -47,14 +52,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, expectedSuccess: false, expectedFailureReason: ChangeSignatureFailureKind.IncorrectKind);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                expectedSuccess: false,
+                expectedFailureReason: ChangeSignatureFailureKind.IncorrectKind
+            );
         }
 
         [Fact]
         public async Task ReorderMethodParameters_CanBeStartedEvenWithNoParameters()
         {
             var markup = @"class C { void $$M() { } }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, expectedSuccess: true);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                expectedSuccess: true
+            );
         }
 
         [Fact]
@@ -70,7 +84,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, expectedSuccess: false, expectedFailureReason: ChangeSignatureFailureKind.IncorrectKind);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                expectedSuccess: false,
+                expectedFailureReason: ChangeSignatureFailureKind.IncorrectKind
+            );
         }
     }
 }

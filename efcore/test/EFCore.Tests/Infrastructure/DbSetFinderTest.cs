@@ -16,15 +16,18 @@ public class DbSetFinderTest
 
         Assert.Equal(
             new[] { "Betters", "Brandies", "Drinkings", "Stops", "Yous" },
-            sets.Select(s => s.Name).ToArray());
+            sets.Select(s => s.Name).ToArray()
+        );
 
         Assert.Equal(
             new[] { typeof(Better), typeof(Brandy), typeof(Drinking), typeof(Stop), typeof(You) },
-            sets.Select(s => s.Type).ToArray());
+            sets.Select(s => s.Type).ToArray()
+        );
 
         Assert.Equal(
             new[] { true, true, true, false, true },
-            sets.Select(s => s.Setter != null).ToArray());
+            sets.Select(s => s.Setter != null).ToArray()
+        );
     }
 
     #region Fixture
@@ -34,8 +37,7 @@ public class DbSetFinderTest
         public DbSet<You> Yous { get; set; }
         protected DbSet<Better> Betters { get; set; }
 
-        internal DbSet<Stop> Stops
-            => null;
+        internal DbSet<Stop> Stops => null;
     }
 
     public class The : Streets
@@ -49,31 +51,20 @@ public class DbSetFinderTest
         public NotANormalSet<Random> NotMe4 { get; set; }
     }
 
-    public class You
-    {
-    }
+    public class You { }
 
-    public class Better
-    {
-    }
+    public class Better { }
 
-    public class Stop
-    {
-    }
+    public class Stop { }
 
-    public class Drinking
-    {
-    }
+    public class Drinking { }
 
-    internal class Brandy
-    {
-    }
+    internal class Brandy { }
 
     public class NotANormalSet<TEntity> : DbSet<TEntity>
         where TEntity : class
     {
-        public override IEntityType EntityType
-            => throw new NotImplementedException();
+        public override IEntityType EntityType => throw new NotImplementedException();
     }
 
     #endregion

@@ -3,12 +3,11 @@ using System;
 
 namespace Testing
 {
-	public class Test
-	{
-		public static void Main ()
-		{
-			/// here is an extraneous comment
-		}
-	}
+    public class Test
+    {
+        public static void Main()
+        {
+            /// here is an extraneous comment
+        }
+    }
 }
-

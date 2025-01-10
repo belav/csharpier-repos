@@ -5,17 +5,20 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
-    using System.Collections;
     using System.ServiceModel.Routing;
 
     [SuppressMessage(FxCop.Category.Xaml, FxCop.Rule.TypesMustHaveXamlCallableConstructors)]
-    [SuppressMessage(FxCop.Category.Xaml, FxCop.Rule.TypesShouldHavePublicParameterlessConstructors)]
+    [SuppressMessage(
+        FxCop.Category.Xaml,
+        FxCop.Rule.TypesShouldHavePublicParameterlessConstructors
+    )]
     public class StrictAndMessageFilter : MessageFilter
     {
         MessageFilter filter1;
@@ -44,7 +47,8 @@ namespace System.ServiceModel.Dispatcher
 
         protected internal override IMessageFilterTable<TFilterData> CreateFilterTable<TFilterData>()
         {
-            StrictAndMessageFilterTable<TFilterData> table = new StrictAndMessageFilterTable<TFilterData>();
+            StrictAndMessageFilterTable<TFilterData> table =
+                new StrictAndMessageFilterTable<TFilterData>();
             return table;
         }
 
@@ -81,14 +85,8 @@ namespace System.ServiceModel.Dispatcher
 
             public TFilterData this[MessageFilter key]
             {
-                get
-                {
-                    return this.andFilters[key];
-                }
-                set
-                {
-                    this.andFilters[key] = value;
-                }
+                get { return this.andFilters[key]; }
+                set { this.andFilters[key] = value; }
             }
 
             public bool GetMatchingFilter(MessageBuffer messageBuffer, out MessageFilter filter)
@@ -101,7 +99,10 @@ namespace System.ServiceModel.Dispatcher
                 throw FxTrace.Exception.AsError(new NotImplementedException());
             }
 
-            public bool GetMatchingFilters(MessageBuffer messageBuffer, ICollection<MessageFilter> results)
+            public bool GetMatchingFilters(
+                MessageBuffer messageBuffer,
+                ICollection<MessageFilter> results
+            )
             {
                 if (messageBuffer == null)
                 {
@@ -111,7 +112,9 @@ namespace System.ServiceModel.Dispatcher
                 List<MessageFilter> firstPassResults = new List<MessageFilter>();
                 if (this.filterTable.GetMatchingFilters(messageBuffer, firstPassResults))
                 {
-                    IList<StrictAndMessageFilter> matchingFilters = FindMatchingAndFilters(firstPassResults);
+                    IList<StrictAndMessageFilter> matchingFilters = FindMatchingAndFilters(
+                        firstPassResults
+                    );
                     foreach (StrictAndMessageFilter andFilter in matchingFilters)
                     {
                         results.Add(andFilter);
@@ -131,7 +134,9 @@ namespace System.ServiceModel.Dispatcher
                 List<MessageFilter> firstPassResults = new List<MessageFilter>();
                 if (this.filterTable.GetMatchingFilters(message, firstPassResults))
                 {
-                    IList<StrictAndMessageFilter> matchingFilters = FindMatchingAndFilters(firstPassResults);
+                    IList<StrictAndMessageFilter> matchingFilters = FindMatchingAndFilters(
+                        firstPassResults
+                    );
                     foreach (StrictAndMessageFilter andFilter in matchingFilters)
                     {
                         results.Add(andFilter);
@@ -173,7 +178,10 @@ namespace System.ServiceModel.Dispatcher
                 return result;
             }
 
-            public bool GetMatchingValues(MessageBuffer messageBuffer, ICollection<TFilterData> results)
+            public bool GetMatchingValues(
+                MessageBuffer messageBuffer,
+                ICollection<TFilterData> results
+            )
             {
                 if (messageBuffer == null)
                 {
@@ -183,7 +191,9 @@ namespace System.ServiceModel.Dispatcher
                 List<MessageFilter> firstPassResults = new List<MessageFilter>();
                 if (this.filterTable.GetMatchingFilters(messageBuffer, firstPassResults))
                 {
-                    IList<StrictAndMessageFilter> matchingFilters = FindMatchingAndFilters(firstPassResults);
+                    IList<StrictAndMessageFilter> matchingFilters = FindMatchingAndFilters(
+                        firstPassResults
+                    );
                     foreach (StrictAndMessageFilter andFilter in matchingFilters)
                     {
                         results.Add(this.andFilters[andFilter]);
@@ -203,7 +213,9 @@ namespace System.ServiceModel.Dispatcher
                 List<MessageFilter> firstPassResults = new List<MessageFilter>();
                 if (this.filterTable.GetMatchingFilters(message, firstPassResults))
                 {
-                    IList<StrictAndMessageFilter> matchingFilters = FindMatchingAndFilters(firstPassResults);
+                    IList<StrictAndMessageFilter> matchingFilters = FindMatchingAndFilters(
+                        firstPassResults
+                    );
                     foreach (StrictAndMessageFilter andFilter in matchingFilters)
                     {
                         results.Add(this.andFilters[andFilter]);
@@ -213,7 +225,9 @@ namespace System.ServiceModel.Dispatcher
                 return false;
             }
 
-            IList<StrictAndMessageFilter> FindMatchingAndFilters(List<MessageFilter> firstPassResults)
+            IList<StrictAndMessageFilter> FindMatchingAndFilters(
+                List<MessageFilter> firstPassResults
+            )
             {
                 IList<StrictAndMessageFilter> matchingFilters = new List<StrictAndMessageFilter>();
                 foreach (MessageFilter filter in firstPassResults)
@@ -222,7 +236,10 @@ namespace System.ServiceModel.Dispatcher
                     // Check if this StrictAndMessageFilter is already in our result set
                     if (!matchingFilters.Contains(andFilter))
                     {
-                        if (firstPassResults.Contains(andFilter.filter1) && firstPassResults.Contains(andFilter.filter2))
+                        if (
+                            firstPassResults.Contains(andFilter.filter1)
+                            && firstPassResults.Contains(andFilter.filter2)
+                        )
                         {
                             matchingFilters.Add(andFilter);
                         }

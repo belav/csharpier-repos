@@ -14,7 +14,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols.SymbolTree
     /// </summary>
     internal interface ISymbolTreeInfoCacheService : IWorkspaceService
     {
-        ValueTask<SymbolTreeInfo?> TryGetPotentiallyStaleSourceSymbolTreeInfoAsync(Project project, CancellationToken cancellationToken);
-        ValueTask<SymbolTreeInfo?> TryGetPotentiallyStaleMetadataSymbolTreeInfoAsync(Project project, PortableExecutableReference reference, CancellationToken cancellationToken);
+        ValueTask<SymbolTreeInfo?> TryGetPotentiallyStaleSourceSymbolTreeInfoAsync(
+            Project project,
+            CancellationToken cancellationToken
+        );
+        ValueTask<SymbolTreeInfo?> TryGetPotentiallyStaleMetadataSymbolTreeInfoAsync(
+            Project project,
+            PortableExecutableReference reference,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -13,20 +13,28 @@ internal static partial class Interop
         internal enum CryptAcquireContextFlags : uint
         {
             None = 0x00000000,
-            CRYPT_NEWKEYSET = 0x00000008,         // CRYPT_NEWKEYSET
-            CRYPT_DELETEKEYSET = 0x00000010,      // CRYPT_DELETEKEYSET
-            CRYPT_MACHINE_KEYSET = 0x00000020,    // CRYPT_MACHINE_KEYSET
-            CRYPT_SILENT = 0x00000040,            // CRYPT_SILENT
-            CRYPT_VERIFYCONTEXT = 0xF0000000      // CRYPT_VERIFYCONTEXT
+            CRYPT_NEWKEYSET = 0x00000008, // CRYPT_NEWKEYSET
+            CRYPT_DELETEKEYSET = 0x00000010, // CRYPT_DELETEKEYSET
+            CRYPT_MACHINE_KEYSET = 0x00000020, // CRYPT_MACHINE_KEYSET
+            CRYPT_SILENT = 0x00000040, // CRYPT_SILENT
+            CRYPT_VERIFYCONTEXT =
+                0xF0000000 // CRYPT_VERIFYCONTEXT
+            ,
         }
 
-        [LibraryImport(Libraries.Advapi32, EntryPoint = "CryptAcquireContextW",  SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Advapi32,
+            EntryPoint = "CryptAcquireContextW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static partial bool CryptAcquireContext(
             out SafeProvHandle phProv,
             string? szContainer,
             string? szProvider,
             int dwProvType,
-            uint dwFlags);
+            uint dwFlags
+        );
     }
 }
