@@ -38,7 +38,8 @@ namespace System.Text.RegularExpressions
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        Compiled = 0x0008, // "c"
+        Compiled = 0x0008
+        , // "c"
 #endif
 
         /// <devdoc>
@@ -60,7 +61,8 @@ namespace System.Text.RegularExpressions
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        Debug = 0x0080, // "d"
+        Debug = 0x0080
+        , // "d"
 #endif
 
         /// <devdoc>
